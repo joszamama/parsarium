@@ -12,13 +12,13 @@ def read(path: Path):
 
 
 def main() -> None:
-    for format_name in ("png", "zip", "mp4", "wav", "pdf", "svg", "http11", "mp3_id3v2"):
+    for format_name in ("png", "zip", "mp4", "wav", "pdf", "svg", "http11", "mp3_id3v2", "ascii_pnm"):
         directory = ROOT / "data" / "javascript" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["download_metric"]["packages"]
         ranked = sorted(parsers, key=lambda parser: -metrics[parser["name"]]["downloads"])
-        format_label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2"}.get(format_name, format_name.upper())
+        format_label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2", "ascii_pnm": "ASCII PNM"}.get(format_name, format_name.upper())
         lines = [
             f"# JavaScript × {format_label}: verified parser ranking",
             "",

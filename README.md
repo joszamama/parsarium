@@ -2,11 +2,11 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
-JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
+JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, and ASCII PNM,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
 Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, and an explicit 88-cell work
-matrix. There are 27 cells at the 20-parser target and 61
+matrix. There are 28 cells at the 20-parser target and 60
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -36,6 +36,8 @@ npm run svg:control
 npm run svg:verify
 npm run http11:control
 npm run http11:verify
+npm run ascii_pnm:control
+npm run ascii_pnm:verify
 python3 scripts/verify_go_zip.py
 python3 scripts/verify_go_png.py
 python3 scripts/verify_go_wav.py
@@ -358,8 +360,8 @@ The scoped CPython 3.13 standard-library inventory found no
 Matrix Market-aware input API.
 
 To refresh *discovery and popularity* data, run
-`node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
-Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
+`node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, or `ascii_pnm`.
+Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, or `ascii_pnm`
 to refresh popularity-sorted **leads**; triage never verifies a parser.
 This is a separate, network-dependent operation that changes the dated registry
 snapshot; verification itself uses only locked local dependencies. npm's
@@ -401,7 +403,7 @@ within Python. Unavailable metrics remain `null`.
 The working goal is 20 verified third-party parsers per cell, with 30 as the
 original ceiling. The JavaScript PNG and ZIP cells have **21 verified packages** each;
 the WAV, PDF, and SVG cells have **22** each, MP4 and HTTP/1.1 have **20** each,
-and MP3 with ID3v2 has **24**.
+MP3 with ID3v2 has **24**, and ASCII PNM has **22**.
 Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
@@ -452,6 +454,12 @@ or quality judgment.
   queries saved 400 hits, 388 unique names. Twelve named leads remain
   unresolved. The [runtime inventory](data/javascript/svg/standard.json)
   separately verifies browser SVG DOM parsing and image decoding.
+- [JavaScript × ASCII PNM ranking](data/javascript/ascii_pnm/ranking.md):
+  22 verified package paths on valid P3 or P2 controls, with pixel, dimension,
+  and format metadata scopes labeled. Eight bounded npm queries saved 658 hits and
+  458 distinct names; two explored leads remain unresolved. The
+  [runtime inventory](data/javascript/ascii_pnm/standard.json) records scoped
+  Node.js and Chromium findings. Shared `image-size` parser families are labeled.
 - [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
   readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries
   saved 333 hits, 271 unique package paths. Eight named leads remain

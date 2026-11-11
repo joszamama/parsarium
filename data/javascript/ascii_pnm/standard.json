@@ -1,0 +1,32 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "ASCII PNM",
+  "status": "none_verified_in_documented_runtimes",
+  "verified_apis": [],
+  "candidate_control_failures": [
+    {
+      "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
+      "api": "HTMLImageElement.src = URL.createObjectURL(Blob); decode()",
+      "documentation": "https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "observed": "The valid P3 control rejected with EncodingError; no decoded pixels or dimensions."
+    },
+    {
+      "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
+      "api": "createImageBitmap(Blob)",
+      "documentation": "https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#dom-createimagebitmap-dev",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "observed": "The valid P3 control rejected with InvalidStateError; no ImageBitmap."
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/"
+      ],
+      "finding": "The official built-in API index has no PNM image parser. Buffer, file system, and streams only supply bytes and are not format-aware PNM APIs."
+    }
+  ],
+  "limit": "The browser failures were observed only in the pinned Chromium build on this valid P3 control; they do not prove that every browser or future runtime rejects ASCII PNM."
+}

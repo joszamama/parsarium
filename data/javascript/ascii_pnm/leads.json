@@ -1,0 +1,44 @@
+[
+  {
+    "name": "sharp",
+    "status": "excluded",
+    "reason": "The pinned 0.35.5 build rejected the valid ASCII P3 control as an unsupported image format; no format-aware result was returned.",
+    "source": "https://sharp.pixelplumbing.com/api-input/"
+  },
+  {
+    "name": "ppm-parser",
+    "status": "excluded",
+    "reason": "Version 1.1.1 rejected the existing valid ASCII P3 control with a pixel-count error. Its implementation counted an empty token from the legal final newline; this release has no passing recorded control result.",
+    "source": "https://www.npmjs.com/package/ppm-parser"
+  },
+  {
+    "name": "@thi.ng/pixel-io-netpbm",
+    "status": "excluded",
+    "reason": "The current package README explicitly describes binary Netpbm input; ASCII P1/P2/P3 support is not documented, so it is outside this cell\u2019s ASCII scope.",
+    "source": "https://www.npmjs.com/package/@thi.ng/pixel-io-netpbm"
+  },
+  {
+    "name": "@fitbit/portable-pixmap",
+    "status": "unresolved",
+    "reason": "The release describes a PPM decoder but the reviewed README does not establish ASCII P3 support or a documented byte API and valid-control result.",
+    "source": "https://www.npmjs.com/package/@fitbit/portable-pixmap"
+  },
+  {
+    "name": "pnm",
+    "status": "unresolved",
+    "reason": "Version 0.0.0 is described as a Portable Anymap parser, but the reviewed release README gives no documented local byte/file/stream input API and no control result is established.",
+    "source": "https://www.npmjs.com/package/pnm"
+  },
+  {
+    "name": "imagescript",
+    "status": "excluded",
+    "reason": "The reviewed 3.20.2 project documentation lists PNG, JPEG, TIFF, GIF, and SVG decoding but no PNM/Netpbm input API; a package keyword alone does not qualify.",
+    "source": "https://github.com/imagescript/ImageScript"
+  },
+  {
+    "name": "image-size-cli",
+    "status": "excluded",
+    "reason": "The reviewed package describes a CLI image resizer; no documented local library input API for PNM was established.",
+    "source": "https://www.npmjs.com/package/image-size-cli"
+  }
+]

@@ -10,7 +10,8 @@ const querySets = {
   wav: ['wav', 'wav decoder', 'wav parser', 'wave audio reader'],
   pdf: ['pdf', 'pdf parser', 'pdf reader', 'pdf text extract'],
   svg: ['svg', 'svg parser', 'svg renderer', 'svg image reader'],
-  http11: ['http parser', 'http request parser', 'HTTP/1.1 parser', 'raw http parser', 'http message parser', 'raw http request']
+  http11: ['http parser', 'http request parser', 'HTTP/1.1 parser', 'raw http parser', 'http message parser', 'raw http request'],
+  ascii_pnm: ['pnm', 'netpbm', 'ppm', 'pgm', 'pbm', 'portable pixmap', 'ppm parser', 'pgm parser']
 };
 if (!(cell in querySets)) throw new Error(`unsupported cell: ${cell}`);
 const out = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);

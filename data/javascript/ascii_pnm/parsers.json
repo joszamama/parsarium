@@ -1,0 +1,413 @@
+[
+  {
+    "name": "image-size",
+    "version": "2.1.0",
+    "license": "MIT",
+    "input_api": "imageSize(localBuffer)",
+    "documentation": "https://github.com/image-size/image-size#usage",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-size PNM header reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "netpbm-parser",
+    "version": "1.1.7",
+    "license": "MIT",
+    "input_api": "parse(localAsciiString, 1)",
+    "documentation": "https://www.npmjs.com/package/netpbm-parser",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "netpbm-parser",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "P3",
+      "width": 2,
+      "height": 1,
+      "rgba": [
+        255,
+        0,
+        0,
+        255,
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "note": "The documented magnification default yields NaN dimensions in this release; the adapter passes 1 explicitly."
+  },
+  {
+    "name": "pgmjs",
+    "version": "1.1.6",
+    "license": "ISC",
+    "input_api": "readPgm(localFilePath)",
+    "documentation": "https://www.npmjs.com/package/pgmjs",
+    "scope": "P2 grayscale pixels and dimensions",
+    "family": "pgmjs",
+    "control": "controls/ascii_pnm/black-white.pgm",
+    "expected_output": {
+      "type": "P2",
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "pixels": [
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "@lp-labs/ppm-image-codec",
+    "version": "0.1.0",
+    "license": "MIT",
+    "input_api": "decodePpm(localUint8Array)",
+    "documentation": "https://www.npmjs.com/package/@lp-labs/ppm-image-codec",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "lp-labs PPM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "@jdmichaud/netpbm",
+    "version": "0.2.1",
+    "license": "MIT",
+    "input_api": "decode(localUint8Array)",
+    "documentation": "https://www.npmjs.com/package/@jdmichaud/netpbm",
+    "scope": "P3 RGBA pixels and dimensions",
+    "family": "jdmichaud Netpbm decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba": [
+        255,
+        0,
+        0,
+        255,
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "dependency_note": "Requires an ImageData constructor; the Node adapter supplies the pinned @napi-rs/canvas implementation."
+  },
+  {
+    "name": "ppm",
+    "version": "0.0.0",
+    "license": "BSD",
+    "input_api": "parse(createReadStream(localPath), callback)",
+    "documentation": "https://www.npmjs.com/package/ppm",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "ppm streaming parser",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    },
+    "license_note": "The pinned npm manifest says BSD and the release README credits the author under BSD."
+  },
+  {
+    "name": "@napi-rs/image",
+    "version": "1.16.0",
+    "license": "MIT",
+    "input_api": "new Transformer(localBuffer).metadata()",
+    "documentation": "https://github.com/Brooooooklyn/Image/blob/main/README.md",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "napi-rs/image Rust image crate PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "format": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "image-size-next",
+    "version": "2.1.1",
+    "license": "MIT",
+    "input_api": "imageSize(localBuffer)",
+    "documentation": "https://www.npmjs.com/package/image-size-next",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-size fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "image-size-safe",
+    "version": "2.0.3",
+    "license": "MIT",
+    "input_api": "imageSize(localBuffer)",
+    "documentation": "https://www.npmjs.com/package/image-size-safe",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-size fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "@nous-research/image-size",
+    "version": "2.0.3",
+    "license": "MIT",
+    "input_api": "imageSize(localBuffer)",
+    "documentation": "https://www.npmjs.com/package/@nous-research/image-size",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-size fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "tiny-image-size",
+    "version": "1.0.0",
+    "license": "MIT",
+    "input_api": "tinyImageSize(localUint8Array)",
+    "documentation": "https://www.npmjs.com/package/tiny-image-size",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "tiny-image-size PNM header reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "@localnerve/image-size",
+    "version": "2.1.5",
+    "license": "MIT",
+    "input_api": "imageSize(localBuffer)",
+    "documentation": "https://www.npmjs.com/package/@localnerve/image-size",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-size fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "@portable/image-size",
+    "version": "0.1.0",
+    "license": "MIT",
+    "input_api": "parse(localUint8Array)",
+    "documentation": "https://www.npmjs.com/package/@portable/image-size",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "portable/image-size PNM header reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "view-image-size",
+    "version": "2.1.1",
+    "license": "MIT",
+    "input_api": "imageSize(localDataView, toAscii)",
+    "documentation": "https://www.npmjs.com/package/view-image-size",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-size fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "fastimage",
+    "version": "7.0.1",
+    "license": "ISC",
+    "input_api": "info(localBuffer)",
+    "documentation": "https://www.npmjs.com/package/fastimage",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "fastimage wrapper over image-size",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "image-meta",
+    "version": "0.2.2",
+    "license": "MIT",
+    "input_api": "imageMeta(localBuffer)",
+    "documentation": "https://www.npmjs.com/package/image-meta",
+    "scope": "P3 header dimensions and PNM type",
+    "family": "image-meta reader based on image-size",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "type": "pnm",
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "@imgdrop/pnm",
+    "version": "1.0.2",
+    "license": "MIT",
+    "input_api": "new PNMDecoder(localByteReader).decode()",
+    "documentation": "https://unpkg.com/@imgdrop/pnm@1.0.2/bin/index.d.ts",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "imgdrop PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "tuple": "RGB",
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "pgmts",
+    "version": "1.0.1",
+    "license": "MIT",
+    "input_api": "parsePgm(localUint8Array)",
+    "documentation": "https://www.npmjs.com/package/pgmts",
+    "scope": "P2 grayscale pixels and dimensions",
+    "family": "pgmts PGM parser",
+    "control": "controls/ascii_pnm/black-white.pgm",
+    "expected_output": {
+      "type": "P2",
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "pixels": [
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "purejsimage",
+    "version": "0.17.0",
+    "license": "MIT",
+    "input_api": "createImageLibrary({codecs:[netpbmCodec]}).open(localPath).metadata()",
+    "documentation": "https://www.npmjs.com/package/purejsimage",
+    "scope": "P3 parsed format metadata and dimensions",
+    "family": "PureJsImage Netpbm codec",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "format": "netpbm",
+      "variant": "P3",
+      "width": 2,
+      "height": 1,
+      "channels": 3
+    }
+  },
+  {
+    "name": "image-in-browser",
+    "version": "3.7.0",
+    "license": "MIT",
+    "input_api": "decodePnm({data:localUint8Array})",
+    "documentation": "https://www.npmjs.com/package/image-in-browser",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "image-in-browser PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "@designliquido/delegua-imagens",
+    "version": "0.1.0",
+    "license": "MIT",
+    "input_api": "abrirPPM({}, localPath)",
+    "documentation": "https://www.npmjs.com/package/@designliquido/delegua-imagens",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "Delégua Imagens PPM reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    },
+    "note": "The release reads the second argument as a local path; passing only a filename with a directory context raised ENOENT on this host."
+  },
+  {
+    "name": "@catlabtech/webcvt-image-legacy",
+    "version": "0.3.0",
+    "license": "MIT",
+    "input_api": "parsePpm(localUint8Array)",
+    "documentation": "https://unpkg.com/@catlabtech/webcvt-image-legacy@0.3.0/dist/index.d.ts",
+    "scope": "P3 RGB pixels and dimensions",
+    "family": "webcvt-image-legacy PPM parser",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "variant": "ascii",
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    },
+    "note": "The pinned release has a typed exported parsePpm API but no README text on npm."
+  }
+]

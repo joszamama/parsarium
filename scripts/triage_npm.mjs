@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 const cell = process.argv[2];
-if (!['png', 'zip', 'mp4', 'mp3_id3v2', 'wav', 'pdf', 'svg', 'http11'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|mp4|mp3_id3v2|wav|pdf|svg|http11');
+if (!['png', 'zip', 'mp4', 'mp3_id3v2', 'wav', 'pdf', 'svg', 'http11', 'ascii_pnm'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|mp4|mp3_id3v2|wav|pdf|svg|http11|ascii_pnm');
 const path = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);
 const snapshot = JSON.parse(await readFile(path));
 const parsers = JSON.parse(await readFile(new URL(`../data/javascript/${cell}/parsers.json`, import.meta.url)));
@@ -22,7 +22,9 @@ const relevant = cell === 'png'
         ? /\bpdf\b|pdf[-.]|portable document/i
         : cell === 'svg'
           ? /\bsvg\b|svg[-.]|scalable vector/i
-          : /\bhttp\b|http[-.]|HTTP\/1\.1|request (parser|reader)|response (parser|reader)/i;
+          : cell === 'ascii_pnm'
+            ? /\bpnm\b|\bnetpbm\b|\bppm\b|\bpgm\b|\bpbm\b|portable (pixmap|graymap|bitmap)/i
+            : /\bhttp\b|http[-.]|HTTP\/1\.1|request (parser|reader)|response (parser|reader)/i;
 const parseLikely = /decod|pars|read|load|extract|unzip|dimension|size|image|archive|audio|riff|wav|text|page|render|document/i;
 for (const search of snapshot.search) {
   for (const hit of search.hits) {
@@ -44,7 +46,9 @@ const extra = cell === 'png'
         ? ['pdfjs-dist', 'pdf-parse', 'pdf-lib', 'pdf2json', 'pdfreader', 'pdf-extraction', 'pdf-to-text', 'pdf-text-extract', 'pdf-extract', 'pdf-parser', 'mupdf', 'pdfjs', 'pdf-parse-new', 'pdfnative']
         : cell === 'svg'
           ? ['svg-parser', 'canvg', 'sharp', '@resvg/resvg-js', '@resvg/resvg-wasm', '@cf-wasm/resvg', '@stacksjs/ts-svg', 'svgson', 'svgps', 'postsvg', 'streaming-svg-parser', 'svg2img', 'svg-to-img', '@svgdotjs/svg.js', 'svgdom', 'svgo', 'svg-size', 'get-svg-colors', 'probe-image-size', 'image-size', 'canvas', '@napi-rs/canvas', 'skia-canvas', 'svg-eslint-parser', 'vsvg-parser', '@yworks/canvg', 'svg-to-pdfkit', 'svgicons2svgfont', '@react-pdf/svg', 'react-inlinesvg']
-          : ['http-parser-js', 'http-string-parser', 'raw-http-parser', 'parse-http', 'http-parse', 'http-parser', 'llhttp', 'http-message-parser', 'parse-raw-http', '@caido-utils/parser', 'http-parser-wasm', 'http-z', '@ibiwan/http-message-parser', 'http-message-parser-ts', 'raw-request-parser', 'http-headers', 'http-request-parser', '@alikia/http-parser', '@browsercore/http1'];
+          : cell === 'ascii_pnm'
+            ? ['image-size', 'image-size-next', 'image-size-safe', '@nous-research/image-size', '@localnerve/image-size', 'tiny-image-size', '@portable/image-size', 'view-image-size', 'fastimage', 'image-meta', '@napi-rs/image', 'netpbm-parser', '@jdmichaud/netpbm', 'ppm', 'ppm-parser', 'pgmjs', 'pgmts', 'dumb-pgm', '@lp-labs/ppm-image-codec', '@fitbit/portable-pixmap', '@catlabtech/webcvt-image-legacy', 'pnm', '@imgdrop/pnm', 'pnm-convertor', '@thi.ng/pixel-io-netpbm', '@designliquido/delegua-imagens', 'image-in-browser', 'imagescript', 'purejsimage']
+            : ['http-parser-js', 'http-string-parser', 'raw-http-parser', 'parse-http', 'http-parse', 'http-parser', 'llhttp', 'http-message-parser', 'parse-raw-http', '@caido-utils/parser', 'http-parser-wasm', 'http-z', '@ibiwan/http-message-parser', 'http-message-parser-ts', 'raw-request-parser', 'http-headers', 'http-request-parser', '@alikia/http-parser', '@browsercore/http1'];
 for (const name of extra) if (!seen.has(name)) seen.set(name, { name, description: 'Documentation lead; description not captured in registry search window.', first_query: 'project documentation', first_rank: null });
 
 const names = [...seen.keys()];
