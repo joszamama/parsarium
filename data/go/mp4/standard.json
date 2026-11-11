@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Go",
+  "format": "MP4",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Go 1.27.1 standard library",
+      "official_documentation_scope": [
+        "https://pkg.go.dev/std@go1.27.1",
+        "https://pkg.go.dev/encoding/binary@go1.27.1",
+        "https://pkg.go.dev/os@go1.27.1"
+      ],
+      "finding": "The versioned standard-library package list has no MP4 or ISO BMFF parser. encoding/binary reads fixed-size numbers and os opens files; neither interprets MP4 boxes, tracks, or metadata."
+    }
+  ],
+  "limit": "This is a finding about the documented Go 1.27.1 standard library, not third-party modules or platform media frameworks."
+}

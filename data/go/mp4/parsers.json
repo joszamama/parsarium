@@ -1,0 +1,278 @@
+[
+  {
+    "name": "github.com/abema/go-mp4",
+    "module": "github.com/abema/go-mp4",
+    "version": "v1.7.4",
+    "license": "MIT",
+    "input_api": "ExtractBox(io.ReadSeeker, BoxPath{moov})",
+    "documentation": "https://pkg.go.dev/github.com/abema/go-mp4@v1.7.4",
+    "scope": "movie box",
+    "family": "go-mp4 box parser",
+    "expected_output": {
+      "moov_size": 1442
+    }
+  },
+  {
+    "name": "github.com/dhowden/tag",
+    "module": "github.com/dhowden/tag",
+    "version": "v0.0.0-20240417053706-3d75831295e8",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker)",
+    "documentation": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8",
+    "scope": "MP4 title",
+    "family": "dhowden/tag lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/Eyevinn/mp4ff/mp4",
+    "module": "github.com/Eyevinn/mp4ff",
+    "version": "v0.62.1",
+    "license": "MIT, MIT",
+    "input_api": "DecodeFile(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/Eyevinn/mp4ff/mp4@v0.62.1",
+    "scope": "brand and track count",
+    "family": "mp4ff lineage",
+    "expected_output": {
+      "brand": "isom",
+      "tracks": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/yapingcat/gomedia/go-mp4",
+    "module": "github.com/yapingcat/gomedia",
+    "version": "v0.0.0-20240906162731-17feea57090c",
+    "license": "MIT",
+    "input_api": "CreateMp4Demuxer(io.ReadSeeker).ReadHead()",
+    "documentation": "https://pkg.go.dev/github.com/yapingcat/gomedia/go-mp4@v0.0.0-20240906162731-17feea57090c",
+    "scope": "track count",
+    "family": "gomedia MP4 lineage",
+    "expected_output": {
+      "tracks": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/alfg/mp4",
+    "module": "github.com/alfg/mp4",
+    "version": "v0.0.0-20210728035756-55ea58c08aeb",
+    "license": "MIT",
+    "input_api": "OpenFromBytes([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/alfg/mp4@v0.0.0-20210728035756-55ea58c08aeb",
+    "scope": "major brand",
+    "family": "alfg MP4 reader",
+    "expected_output": {
+      "brand": "isom"
+    }
+  },
+  {
+    "name": "github.com/deepch/vdk/format/mp4",
+    "module": "github.com/deepch/vdk",
+    "version": "v0.0.27",
+    "license": "MIT",
+    "input_api": "NewDemuxer(io.ReadSeeker).Streams()",
+    "documentation": "https://pkg.go.dev/github.com/deepch/vdk/format/mp4@v0.0.27",
+    "scope": "stream count",
+    "family": "joy4 MP4 lineage",
+    "expected_output": {
+      "streams": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/jfbus/mp4",
+    "module": "github.com/jfbus/mp4",
+    "version": "v0.0.0-20150401112544-b5bc0819ce33",
+    "license": "MIT",
+    "input_api": "DecodeHeader(io.Reader); DecodeFtyp(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/jfbus/mp4@v0.0.0-20150401112544-b5bc0819ce33",
+    "scope": "ftyp brand only",
+    "family": "jfbus MP4 lineage",
+    "expected_output": {
+      "brand": "isom"
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/nareix/joy4/format/mp4",
+    "module": "github.com/nareix/joy4",
+    "version": "v0.0.0-20200507095837-05a4ffbb5369",
+    "license": "MIT",
+    "input_api": "NewDemuxer(io.ReadSeeker).Streams()",
+    "documentation": "https://pkg.go.dev/github.com/nareix/joy4/format/mp4@v0.0.0-20200507095837-05a4ffbb5369",
+    "scope": "stream count",
+    "family": "joy4 MP4 lineage",
+    "expected_output": {
+      "streams": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/MStoykov/mp4",
+    "module": "github.com/MStoykov/mp4",
+    "version": "v0.1.4",
+    "license": "MIT",
+    "input_api": "Decode(RangeReader)",
+    "documentation": "https://pkg.go.dev/github.com/MStoykov/mp4@v0.1.4",
+    "scope": "major brand",
+    "family": "jfbus MP4 lineage",
+    "expected_output": {
+      "brand": "isom"
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "go4.org/media/heif/bmff",
+    "module": "go4.org",
+    "version": "v0.0.0-20261028031214-ed6929a230fe",
+    "license": "Apache-2.0",
+    "input_api": "NewReader(io.Reader).ReadAndParseBox(TypeFtyp)",
+    "documentation": "https://pkg.go.dev/go4.org/media/heif/bmff@v0.0.0-20261028031214-ed6929a230fe",
+    "scope": "ftyp brand only",
+    "family": "go4 ISO BMFF reader",
+    "expected_output": {
+      "brand": "isom"
+    }
+  },
+  {
+    "name": "github.com/Sorrow446/go-mp4tag",
+    "module": "github.com/Sorrow446/go-mp4tag",
+    "version": "v0.0.0-20240130220823-68ce31d53e37",
+    "license": "MIT",
+    "input_api": "Open(local path).Read()",
+    "documentation": "https://pkg.go.dev/github.com/Sorrow446/go-mp4tag@v0.0.0-20240130220823-68ce31d53e37",
+    "scope": "MP4 title",
+    "family": "Sorrow446 MP4 tag reader",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "github.com/gcottom/mp4meta",
+    "module": "github.com/gcottom/mp4meta",
+    "version": "v0.0.5",
+    "license": "MIT",
+    "input_api": "ReadMP4(io.ReadSeeker)",
+    "documentation": "https://pkg.go.dev/github.com/gcottom/mp4meta@v0.0.5",
+    "scope": "MP4 title",
+    "family": "gcottom MP4 tag reader",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "github.com/guregu/tag",
+    "module": "github.com/guregu/tag",
+    "version": "v0.0.3",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker)",
+    "documentation": "https://pkg.go.dev/github.com/guregu/tag@v0.0.3",
+    "scope": "MP4 title",
+    "family": "dhowden/tag lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/frolovo22/tag",
+    "module": "github.com/frolovo22/tag",
+    "version": "v0.0.2",
+    "license": "GPL-3.0",
+    "input_api": "ReadMp4(io.ReadSeeker).GetTitle()",
+    "documentation": "https://pkg.go.dev/github.com/frolovo22/tag@v0.0.2",
+    "scope": "MP4 title",
+    "family": "frolovo22 MP4 tag reader",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "github.com/rcarmo/go-264/audio/mp4",
+    "module": "github.com/rcarmo/go-264",
+    "version": "v0.0.0-20261008100743-cecca3835cbd",
+    "license": "MIT",
+    "input_api": "Open(context.Context, io.ReaderAt, size, Limits)",
+    "documentation": "https://pkg.go.dev/github.com/rcarmo/go-264/audio/mp4@v0.0.0-20261008100743-cecca3835cbd",
+    "scope": "track count",
+    "family": "go-264 MP4 audio demuxer",
+    "expected_output": {
+      "tracks": 2
+    }
+  },
+  {
+    "name": "github.com/edgeware/mp4ff/mp4",
+    "module": "github.com/edgeware/mp4ff",
+    "version": "v0.31.0",
+    "license": "MIT, MIT",
+    "input_api": "DecodeFile(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/edgeware/mp4ff/mp4@v0.31.0",
+    "scope": "brand and track count",
+    "family": "mp4ff lineage",
+    "expected_output": {
+      "brand": "isom",
+      "tracks": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/eluv-io/mp4ff/mp4",
+    "module": "github.com/eluv-io/mp4ff",
+    "version": "v0.48.0",
+    "license": "MIT, MIT",
+    "input_api": "DecodeFile(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/eluv-io/mp4ff/mp4@v0.48.0",
+    "scope": "brand and track count",
+    "family": "mp4ff lineage",
+    "expected_output": {
+      "brand": "isom",
+      "tracks": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/montybay/mp4ff/mp4",
+    "module": "github.com/montybay/mp4ff",
+    "version": "v0.0.0-20261017003302-c9570d1e4b3c",
+    "license": "MIT, MIT",
+    "input_api": "DecodeFile(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/montybay/mp4ff/mp4@v0.0.0-20261017003302-c9570d1e4b3c",
+    "scope": "brand and track count",
+    "family": "mp4ff lineage",
+    "expected_output": {
+      "brand": "isom",
+      "tracks": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  },
+  {
+    "name": "github.com/tetsuo/mp4",
+    "module": "github.com/tetsuo/mp4",
+    "version": "v0.3.0",
+    "license": "MIT",
+    "input_api": "NewReader([]byte).Next(); ReadFtyp([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/tetsuo/mp4@v0.3.0",
+    "scope": "ftyp brand only",
+    "family": "tetsuo MP4 box reader",
+    "expected_output": {
+      "brand": "isom"
+    }
+  },
+  {
+    "name": "github.com/ntklink/gomediautils/go-mp4",
+    "module": "github.com/ntklink/gomediautils",
+    "version": "v0.0.0-20260924103313-787406a6c4b3",
+    "license": "MIT",
+    "input_api": "CreateMp4Demuxer(io.ReadSeeker).ReadHead()",
+    "documentation": "https://pkg.go.dev/github.com/ntklink/gomediautils/go-mp4@v0.0.0-20260924103313-787406a6c4b3",
+    "scope": "track count",
+    "family": "gomedia MP4 lineage",
+    "expected_output": {
+      "tracks": 2
+    },
+    "family_note": "Shared code lineage; package count does not imply independent parser engines."
+  }
+]
