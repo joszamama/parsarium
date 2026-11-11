@@ -420,15 +420,28 @@
     {
       "ecosystem": "go",
       "format": "svg",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 21,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "svg",
+        "svg parser",
+        "svg reader",
+        "svg render",
+        "svg image"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 322,
+      "unique_search_hits": 280,
+      "unresolved_documentation_leads": 10,
+      "uncertainty": "Five pkg.go.dev public package-search queries saved 322 hits and 280 unique package paths. Query windows returned 100, 13, 9, 100, 100 hits in order; three windows stopped at the 100-result limit. The HTML pages give no total result count, so none is inferred. Ten plausible leads remain unresolved, including a higher-adoption SVG reader whose adapter could not link because MoltenVK was unavailable. Search hits are leads, not parser proof. Several verified packages share oksvg or Goki/Cogent code lineages, so package count is not independent engine count. The one valid control establishes only the labeled structure, dimensions, path, render, or minification scopes. Importer counts are pkg.go.dev package-level signals, not downloads.",
+      "third_party_evidence": "data/go/svg/parsers.json",
+      "third_party_control_results": "data/go/svg/verification.json",
+      "runtime_evidence": "data/go/svg/standard.json",
+      "registry_snapshot": "data/go/svg/registry-snapshot.json",
+      "unresolved_leads": "data/go/svg/leads.json"
     },
     {
       "ecosystem": "go",

@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Go",
+  "format": "SVG",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Go 1.27.1 standard library",
+      "official_documentation_scope": [
+        "https://pkg.go.dev/std@go1.27.1",
+        "https://pkg.go.dev/encoding/xml@go1.27.1",
+        "https://pkg.go.dev/image@go1.27.1"
+      ],
+      "finding": "The versioned standard-library package list has no SVG-aware parser. encoding/xml parses generic XML tokens, while image.Decode uses registered image formats and the standard library has no SVG decoder registration. Neither interprets SVG elements, shapes, styles, or viewBox on its own."
+    }
+  ],
+  "limit": "This finding covers documented Go 1.27.1 standard-library APIs; third-party SVG packages and platform graphics frameworks are separate."
+}

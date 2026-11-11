@@ -18,6 +18,7 @@ QUERIES = {
     "mp4": ["mp4", "mp4 parser", "mp4 reader", "iso bmff", "mpeg4 container"],
     "mp3_id3v2": ["mp3", "id3v2", "mp3 decoder", "id3 tag", "mp3 reader"],
     "pdf": ["pdf", "pdf reader", "pdf parser", "pdf extract", "pdf document"],
+    "svg": ["svg", "svg parser", "svg reader", "svg render", "svg image"],
 }
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_go.py zip|png|wav|http11|mp4|mp3_id3v2|pdf")
+        raise SystemExit("usage: python3 scripts/snapshot_go.py zip|png|wav|http11|mp4|mp3_id3v2|pdf|svg")
     search = []
     for query in QUERIES[cell]:
         url = "https://pkg.go.dev/search?" + urlencode({"q": query, "limit": 100, "m": "package"})

@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, and PDF, and an explicit 88-cell work matrix. The other 73 cells
+Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, and SVG, and an explicit 88-cell work matrix. The other 72 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -40,6 +40,7 @@ python3 scripts/verify_go_http11.py
 python3 scripts/verify_go_mp4.py
 python3 scripts/verify_go_mp3_id3v2.py
 python3 scripts/verify_go_pdf.py
+python3 scripts/verify_go_svg.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -180,6 +181,14 @@ scope. Many packages share the rsc PDF reader lineage; the ranking records this.
 The separate Go 1.27.3 standard-library inventory documents no PDF document
 parser API. The go-fitz adapter uses MuPDF code bundled by its Go module.
 
+`verify_go_svg.py` uses Go 1.27.1 and the shared two-rectangle SVG control.
+`adapters/go/svg/go.mod` and `go.sum` pin its releases. The observed result is
+**21/21 third-party packages passing**. Adapters report parsed shapes, paths,
+viewBox size, rendered pixels, or SVG-aware minified markup according to their
+documented scope. Several readers share `oksvg` or Goki/Cogent code lineages.
+The separate Go 1.27.1 standard-library inventory finds no SVG-aware parser;
+generic XML parsing is outside the cell's parser criterion.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -192,10 +201,10 @@ supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
 
-For Go ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, or PDF discovery, install the pinned packages in
+For Go ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, or SVG discovery, install the pinned packages in
 `scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py FORMAT`
 and `python3 scripts/enrich_go.py FORMAT` with `FORMAT` set to `zip`, `png`,
-`wav`, `http11`, `mp4`, `mp3_id3v2`, or `pdf`. These refresh bounded pkg.go.dev
+`wav`, `http11`, `mp4`, `mp3_id3v2`, `pdf`, or `svg`. These refresh bounded pkg.go.dev
 package-search hits, pinned-release license evidence, and package-level
 “Imported by” counts. Go counts are compared only within their Go format cell.
 The public search pages supplied this snapshot after the
@@ -294,6 +303,12 @@ or quality judgment.
   a native PDFium binding and a reader that failed to compile with the pinned
   pdfcpu version. The [standard-library inventory](data/go/pdf/standard.json)
   records the scoped Go 1.27.3 finding.
+- [Go × SVG ranking](data/go/svg/ranking.md): 21 packages with labeled shape,
+  path, viewBox, raster, or SVG minification scope. Five pkg.go.dev queries saved
+  322 hits and 280 unique package paths; ten plausible leads remain unresolved.
+  One higher-adoption reader could not link because the host lacked MoltenVK.
+  The [standard-library inventory](data/go/svg/standard.json) records the scoped
+  Go 1.27.1 finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
