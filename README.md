@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP, and an explicit 88-cell work matrix. The other 79 cells
+Go × ZIP and PNG, and an explicit 88-cell work matrix. The other 78 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -34,6 +34,7 @@ npm run svg:verify
 npm run http11:control
 npm run http11:verify
 python3 scripts/verify_go_zip.py
+python3 scripts/verify_go_png.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -123,6 +124,18 @@ decompressed text. The observed result is **23/23 third-party packages and
 1/1 Go standard-library API passing**. Several packages wrap or fork
 `archive/zip`; the ranking records their parser families.
 
+`verify_go_png.py` uses Go 1.27.1 and the shared two-pixel PNG control.
+`adapters/go/png/go.mod` and `go.sum` pin all Go modules. The bimg and govips
+adapters require libvips, and the imagick adapter requires ImageMagick
+MagickWand, with their development headers and `pkg-config` files. The
+recorded run used libvips 8.18.7 and ImageMagick 7.1.2. Check the local
+installation with `pkg-config --modversion vips` and
+`pkg-config --modversion MagickWand`. The observed result is **20/20
+third-party packages and 3/3 Go standard-library API paths passing**.
+Pixel readers, chunk readers, converters, and dimension readers have distinct
+scopes in the ranking; several packages share Go's `image/png` decoder or
+libvips.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -146,7 +159,7 @@ The public search pages supplied this snapshot after the
 ## Verified rankings and search limits
 
 The working goal is 20 verified third-party parsers per cell, with 30 as the
-original ceiling. The PNG and ZIP cells have **21 verified packages** each;
+original ceiling. The JavaScript PNG and ZIP cells have **21 verified packages** each;
 the WAV, PDF, and SVG cells have **22** each, MP4 and HTTP/1.1 have **20** each,
 and MP3 with ID3v2 has **24**.
 Packages verified after the twentieth row are kept in
@@ -204,6 +217,11 @@ or quality judgment.
   saved 333 hits, 271 unique package paths. Eight named leads remain
   unresolved. The [standard-library inventory](data/go/zip/standard.json)
   separately verifies `archive/zip.OpenReader` on the same control.
+- [Go × PNG ranking](data/go/png/ranking.md): 20 packages spanning pixel,
+  chunk, and dimension readers. Five pkg.go.dev queries saved 321 hits and
+  228 unique package paths. Five named leads remain unresolved. The
+  [standard-library inventory](data/go/png/standard.json) separately verifies
+  `image/png.Decode`, `DecodeConfig`, and registered `image.Decode`.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -218,6 +236,8 @@ not parser evidence; only the pinned APIs and successful control runs enter the
 rankings.
 The [Go ZIP cell record](data/go/zip/cell.json) gives its separate count,
 search limits, and uncertainty.
+The [Go PNG cell record](data/go/png/cell.json) gives the corresponding
+PNG-specific limits and uncertainty.
 
 ## Data layout
 
@@ -226,6 +246,8 @@ search limits, and uncertainty.
 - `data/go/zip/`: bounded pkg.go.dev search hits, pinned module and license
   evidence, package importer counts, verified ranking, leads, standard API,
   and control results. `adapters/go/zip/go.mod` and `go.sum` pin dependencies.
+- `data/go/png/`: the same evidence layout for Go PNG; native libvips and
+  MagickWand dependencies are stated above.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

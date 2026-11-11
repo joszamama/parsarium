@@ -290,15 +290,28 @@
     {
       "ecosystem": "go",
       "format": "png",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
-      "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "verified_third_party_count": 20,
+      "verified_standard_or_runtime_count": 3,
+      "search_queries": [
+        "png",
+        "png decoder",
+        "png reader",
+        "image png",
+        "png parser"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 321,
+      "unique_search_hits": 228,
+      "unresolved_documentation_leads": 5,
+      "uncertainty": "Five pkg.go.dev public package-search queries yielded 321 hits and 228 unique package paths. The png, png decoder, and image png result windows each stopped at 100; png reader yielded 12 and png parser yielded 9. The HTML search pages do not provide an overall total, so none is inferred. Five named documentation leads remain unresolved and eligible parsers may lie outside these windows. Several packages wrap or fork Go image/png and two use libvips, so 20 package paths do not imply 20 independent engines. One pinned TinyGo PNG decoder panicked on the valid control and is excluded. The one 2\u00d71 pixel control only proves the observed parsing path. Package-level importer counts are adoption signals, not downloads, and absent values are not inferred.",
+      "third_party_evidence": "data/go/png/parsers.json",
+      "third_party_control_results": "data/go/png/verification.json",
+      "runtime_evidence": "data/go/png/standard.json",
+      "registry_snapshot": "data/go/png/registry-snapshot.json",
+      "unresolved_leads": "data/go/png/leads.json"
     },
     {
       "ecosystem": "go",

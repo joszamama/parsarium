@@ -1,0 +1,36 @@
+{
+  "ecosystem": "Go",
+  "format": "PNG",
+  "status": "standard_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "Go 1.27.1 darwin/arm64 standard library",
+      "api": "image/png.Decode(io.Reader)",
+      "documentation": "https://pkg.go.dev/image/png@go1.27.1",
+      "adapter": "adapters/go/png_std.go",
+      "control": "controls/png/red-green.png",
+      "observable_result": "2\u00d71 image; opaque red and green RGBA pixels",
+      "result": "data/go/png/verification.json"
+    },
+    {
+      "runtime": "Go 1.27.1 darwin/arm64 standard library",
+      "api": "image/png.DecodeConfig(io.Reader)",
+      "documentation": "https://pkg.go.dev/image/png@go1.27.1",
+      "adapter": "adapters/go/png_std.go",
+      "control": "controls/png/red-green.png",
+      "observable_result": "PNG configuration width 2, height 1",
+      "result": "data/go/png/verification.json"
+    },
+    {
+      "runtime": "Go 1.27.1 darwin/arm64 standard library",
+      "api": "image.Decode(io.Reader) with image/png registered",
+      "documentation": "https://pkg.go.dev/image@go1.27.1",
+      "adapter": "adapters/go/png_std.go",
+      "control": "controls/png/red-green.png",
+      "observable_result": "Format png, width 2, height 1",
+      "result": "data/go/png/verification.json"
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "The two-pixel 8-bit RGB control verifies these APIs for one valid PNG, not all PNG color types, metadata, animation, or interlacing."
+}

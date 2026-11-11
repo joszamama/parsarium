@@ -17,8 +17,6 @@ def main() -> None:
     assert len(matrix) == 88
     assert len({(c["ecosystem"], c["format"]) for c in matrix}) == 88
     lock = read("package-lock.json")["packages"][""]["dependencies"]
-    go_mod = (ROOT / "adapters" / "go" / "zip" / "go.mod").read_text()
-    go_versions = dict(re.findall(r"^\s*(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
     for cell in matrix:
         assert cell["working_target"] == 20 and cell["ceiling"] == 30
         if cell["status"] == "not_started":
@@ -42,6 +40,8 @@ def main() -> None:
         for parser in parsers:
             name = parser["name"]
             if cell["ecosystem"] == "go":
+                go_mod = (ROOT / "adapters" / "go" / cell["format"] / "go.mod").read_text()
+                go_versions = dict(re.findall(r"^\s*(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
                 assert parser["version"] == go_versions[parser["module"]]
                 count = snapshot["popularity_metric"]["packages"][name]["imported_by_packages"]
                 assert count is None or isinstance(count, int)
@@ -52,10 +52,11 @@ def main() -> None:
             assert parser["version"] == snapshot["releases"][name]["version"]
             assert parser["license"] and parser["documentation"] and parser["family"] and parser["input_api"]
         results = read(f"{key}/verification.json")
-        runs = results["results"] if cell["format"] == "png" else results["third_party"]
+        browser_png = cell["ecosystem"] == "javascript" and cell["format"] == "png"
+        runs = results["results"] if browser_png else results["third_party"]
         assert {r["package"] for r in runs} == {p["name"] for p in parsers}
         assert all(r["pass"] for r in runs)
-        if cell["format"] == "png":
+        if browser_png:
             assert read(f"{key}/browser-verification.json")["pass"]
         elif cell["verified_standard_or_runtime_count"]:
             assert results["runtime"]["pass"]

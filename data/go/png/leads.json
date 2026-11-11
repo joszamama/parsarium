@@ -1,0 +1,58 @@
+[
+  {
+    "name": "tinygo.org/x/drivers/image/png",
+    "status": "excluded",
+    "reason": "Pinned v0.37.0 Decode(io.Reader) panicked on the valid two-pixel PNG control; no successful format-aware result. The failed run is an observed compatibility limit, not a malformed-input experiment.",
+    "source": "https://pkg.go.dev/tinygo.org/x/drivers/image/png@v0.37.0",
+    "attempt": {
+      "module": "tinygo.org/x/drivers",
+      "version": "v0.37.0",
+      "command": "go run . tinygo.org/x/drivers/image/png ../../../controls/png/red-green.png",
+      "control": "controls/png/red-green.png",
+      "result": "panic: runtime error: index out of range [0] with length 0 at tinygo.org/x/drivers/image/png.(*decoder).readImagePass (reader.go:736)",
+      "environment": "Go 1.27.1 darwin/arm64"
+    }
+  },
+  {
+    "name": "github.com/jkawamoto/go-pngtext",
+    "status": "unresolved",
+    "reason": "Documented tEXt metadata parser; current PNG control has no tEXt chunk, so a suitable valid metadata control and result remain to be checked.",
+    "source": "https://pkg.go.dev/github.com/jkawamoto/go-pngtext"
+  },
+  {
+    "name": "github.com/chrisbward/go-png-chunks",
+    "status": "unresolved",
+    "reason": "Documents reading PNG tEXt chunks, but the shared PNG control has no tEXt; no control result established.",
+    "source": "https://pkg.go.dev/github.com/chrisbward/go-png-chunks"
+  },
+  {
+    "name": "github.com/sabhiram/png-embed",
+    "status": "unresolved",
+    "reason": "PNG embedded key-value reader candidate; local input API and a suitable tagged PNG control remain unchecked.",
+    "source": "https://pkg.go.dev/github.com/sabhiram/png-embed"
+  },
+  {
+    "name": "github.com/xyproto/png2svg",
+    "status": "unresolved",
+    "reason": "PNG-to-SVG converter candidate; a documented local read API and control output remain unchecked.",
+    "source": "https://pkg.go.dev/github.com/xyproto/png2svg"
+  },
+  {
+    "name": "github.com/xuzhuoxi/infra-go/imagex/formatx/pngx",
+    "status": "unresolved",
+    "reason": "PNG codec registration candidate; direct local input API and control result remain unchecked.",
+    "source": "https://pkg.go.dev/github.com/xuzhuoxi/infra-go/imagex/formatx/pngx"
+  },
+  {
+    "name": "github.com/tdewolff/canvas",
+    "status": "excluded",
+    "reason": "The independently counted parser API is in the image subpackage of the same canvas module; deduplicated at its importable package path for this cell.",
+    "source": "https://pkg.go.dev/github.com/tdewolff/canvas/image"
+  },
+  {
+    "name": "image/png",
+    "status": "excluded",
+    "reason": "Go standard-library parser inventoried separately from third-party ranking.",
+    "source": "https://pkg.go.dev/image/png@go1.27.1"
+  }
+]

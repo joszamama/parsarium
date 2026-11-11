@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 
 QUERIES = {
     "zip": ["zip", "zip reader", "archive zip", "unzip", "zip parser"],
+    "png": ["png", "png decoder", "png reader", "image png", "png parser"],
 }
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_go.py zip")
+        raise SystemExit("usage: python3 scripts/snapshot_go.py zip|png")
     search = []
     for query in QUERIES[cell]:
         url = "https://pkg.go.dev/search?" + urlencode({"q": query, "limit": 100, "m": "package"})
