@@ -1,0 +1,417 @@
+[
+  {
+    "name": "scipy",
+    "version": "1.18.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/scipy/1.18.1/json",
+    "input_api": "scipy.io.wavfile.read(local path)",
+    "documentation": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.wavfile.read.html",
+    "scope": "PCM samples",
+    "family": "SciPy WAV parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "soundfile",
+    "version": "0.14.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/soundfile/0.14.0/json",
+    "input_api": "soundfile.read(local path)",
+    "documentation": "https://python-soundfile.readthedocs.io/en/latest/",
+    "scope": "PCM samples",
+    "family": "libsndfile",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "librosa",
+    "version": "1.0.0",
+    "license": "ISC",
+    "license_evidence": "https://pypi.org/pypi/librosa/1.0.0/json",
+    "input_api": "librosa.load(local path, sr=None)",
+    "documentation": "https://librosa.org/doc/latest/generated/librosa.load.html",
+    "scope": "PCM samples",
+    "family": "librosa via soundfile/libsndfile",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "audioread",
+    "version": "3.1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/audioread/3.1.0/json",
+    "input_api": "audioread.audio_open(local path); iterate PCM chunks",
+    "documentation": "https://github.com/beetbox/audioread",
+    "scope": "PCM samples",
+    "family": "audioread rawread via CPython wave",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "pydub",
+    "version": "0.25.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pydub/0.25.1/json",
+    "input_api": "pydub.AudioSegment.from_wav(local path)",
+    "documentation": "https://github.com/jiaaro/pydub",
+    "scope": "PCM samples",
+    "family": "pydub native WAV header parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "miniaudio",
+    "version": "1.73",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/miniaudio/1.73/json",
+    "input_api": "miniaudio.wav_read_f32(local bytes)",
+    "documentation": "https://pypi.org/project/miniaudio/1.73/",
+    "scope": "PCM samples",
+    "family": "miniaudio native WAV decoder",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "wavio",
+    "version": "0.0.9",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/WarrenWeckesser/wavio/blob/main/wavio.py",
+    "input_api": "wavio.read(local path)",
+    "documentation": "https://github.com/WarrenWeckesser/wavio",
+    "scope": "PCM samples",
+    "family": "wavio via CPython wave",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "wavfile",
+    "version": "5.0.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/wavfile/5.0.0/json",
+    "input_api": "wavfile.read(local path)",
+    "documentation": "https://pywavfile.readthedocs.io/",
+    "scope": "PCM samples",
+    "family": "wavfile pure Python reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "license_note": "The pinned wheel contains MIT LICENSE.txt, though PyPI license metadata is empty."
+  },
+  {
+    "name": "tinytag",
+    "version": "2.3.2",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/tinytag/2.3.2/json",
+    "input_api": "tinytag.TinyTag.get(local path)",
+    "documentation": "https://pypi.org/project/tinytag/2.3.2/",
+    "scope": "WAV header/audio metadata",
+    "family": "tinytag RIFF/WAV metadata parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "duration_seconds": 0.0005
+    }
+  },
+  {
+    "name": "mutagen",
+    "version": "1.48.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://pypi.org/pypi/mutagen/1.48.1/json",
+    "input_api": "mutagen.wave.WAVE(local path).info",
+    "documentation": "https://mutagen.readthedocs.io/en/latest/api/wave.html",
+    "scope": "WAV header/audio metadata",
+    "family": "Mutagen WAVE parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    }
+  },
+  {
+    "name": "waveinfo",
+    "version": "0.5.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/waveinfo/0.5.0/json",
+    "input_api": "waveinfo.WavFile(local path).detail and raw_details",
+    "documentation": "https://pypi.org/project/waveinfo/0.5.0/",
+    "scope": "WAV header/audio metadata",
+    "family": "waveinfo RIFF/WAV parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "sample_frames": 4
+    }
+  },
+  {
+    "name": "audiomath",
+    "version": "1.23.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://pypi.org/pypi/audiomath/1.23.0/json",
+    "input_api": "audiomath.Sound(local path).y",
+    "documentation": "https://pypi.org/project/audiomath/1.23.0/",
+    "scope": "PCM samples",
+    "family": "audiomath WAV loader via CPython wave",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "riffy",
+    "version": "0.3.16",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/riffy/0.3.16/json",
+    "input_api": "riffy.WAVParser(local path).format_info and audio_data",
+    "documentation": "https://pypi.org/project/riffy/0.3.16/",
+    "scope": "PCM samples",
+    "family": "riffy RIFF/WAV parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "pygame",
+    "version": "2.6.1",
+    "license": "LGPL",
+    "license_evidence": "https://pypi.org/pypi/pygame/2.6.1/json",
+    "input_api": "pygame.mixer.Sound(local path).get_raw()",
+    "documentation": "https://www.pygame.org/docs/ref/mixer.html#pygame.mixer.Sound",
+    "scope": "PCM samples",
+    "family": "pygame SDL_mixer WAV loader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "environment": "SDL_AUDIODRIVER=dummy and mixer at 8000 Hz mono 16-bit"
+  },
+  {
+    "name": "av",
+    "version": "19.0.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/av/19.0.2/json",
+    "input_api": "av.open(local path).decode(audio=0)",
+    "documentation": "https://pyav.org/docs/stable/api/container.html",
+    "scope": "PCM samples",
+    "family": "FFmpeg libavformat/libavcodec via PyAV",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "audiofile",
+    "version": "1.6.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/audiofile/1.6.1/json",
+    "input_api": "audiofile.read(local path)",
+    "documentation": "https://pypi.org/project/audiofile/1.6.1/",
+    "scope": "PCM samples",
+    "family": "audiofile via soundfile/libsndfile",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "pymediainfo",
+    "version": "7.0.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pymediainfo/7.0.1/json",
+    "input_api": "pymediainfo.MediaInfo.parse(local path).tracks",
+    "documentation": "https://pypi.org/project/pymediainfo/7.0.1/",
+    "scope": "WAV header/audio metadata",
+    "family": "MediaInfo native WAV parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1
+    },
+    "system_dependency": "MediaInfo shared library"
+  },
+  {
+    "name": "hachoir",
+    "version": "3.4.0",
+    "license": "GPL-2.0-only",
+    "license_evidence": "https://pypi.org/pypi/hachoir/3.4.0/json",
+    "input_api": "hachoir.parser.createParser(local path)[\"format\"]",
+    "documentation": "https://hachoir.readthedocs.io/en/latest/",
+    "scope": "WAV header/audio metadata",
+    "family": "Hachoir RIFF/WAV parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    }
+  },
+  {
+    "name": "pytaglib",
+    "version": "3.2.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://pypi.org/pypi/pytaglib/3.2.0/json",
+    "input_api": "taglib.File(local path).sampleRate/channels/bitrate",
+    "documentation": "https://pypi.org/project/pytaglib/3.2.0/",
+    "scope": "WAV header/audio metadata",
+    "family": "TagLib native WAV parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bitrate": 128
+    }
+  },
+  {
+    "name": "audiolab",
+    "version": "0.5.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/audiolab/0.5.2/json",
+    "input_api": "audiolab.load_audio(local path)",
+    "documentation": "https://pypi.org/project/audiolab/0.5.2/",
+    "scope": "PCM samples",
+    "family": "audiolab via soundfile/libsndfile",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  },
+  {
+    "name": "simpleaudio",
+    "version": "1.0.4",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/simpleaudio/1.0.4/json",
+    "input_api": "simpleaudio.WaveObject.from_wave_file(local path)",
+    "documentation": "https://pypi.org/project/simpleaudio/1.0.4/",
+    "scope": "PCM samples",
+    "family": "simpleaudio via CPython wave",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
+  }
+]

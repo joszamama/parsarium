@@ -1,0 +1,20 @@
+{
+  "ecosystem": "Python",
+  "format": "WAV",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "runtime": "CPython 3.13.1 standard library",
+      "api": "wave.open(local path, 'rb'); getparams(); readframes()",
+      "documentation": "https://docs.python.org/3.13/library/wave.html",
+      "adapter": "adapters/python/wav/standard.py",
+      "control": "controls/wav/four-samples.wav",
+      "expected": {"sample_rate": 8000, "channels": 1, "bits_per_sample": 16, "samples": [0, 1000, -1000, 0]},
+      "result": "data/python/wav/verification.json"
+    }
+  ],
+  "no_api_findings": [
+    {"runtime":"CPython 3.13.1 generic I/O and binary helpers","official_documentation_scope":["https://docs.python.org/3.13/library/index.html","https://docs.python.org/3.13/library/io.html","https://docs.python.org/3.13/library/struct.html"],"finding":"File I/O and caller-directed struct unpacking provide bytes, but do not interpret RIFF/WAVE chunks or audio properties by themselves."}
+  ],
+  "limit": "The valid mono 8 kHz 16-bit PCM control proves only uncompressed PCM WAV reading on this CPython build; other codecs, channels, and bit depths remain outside this control."
+}

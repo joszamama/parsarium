@@ -4,7 +4,7 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, and an explicit 88-cell work matrix. The other 70 cells
+Python × PNG, ASCII PNM, ZIP, and WAV, and an explicit 88-cell work matrix. The other 67 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -55,6 +55,9 @@ uv pip sync adapters/python/zip/requirements.lock --python adapters/python/zip/.
 adapters/python/zip/.venv/bin/python controls/zip/make_zstd_control.py
 python3 controls/zip/make_module_control.py
 python3 scripts/verify_python_zip.py
+uv venv --python python3.13 adapters/python/wav/.venv
+uv pip sync adapters/python/wav/requirements.lock --python adapters/python/wav/.venv/bin/python --require-hashes
+python3 scripts/verify_python_wav.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -253,6 +256,14 @@ ranking lists those families. `libarchive-c` needs a libarchive shared library,
 `patool` needs a local `unzip` utility, and `fs` and `omni-archive` need the
 explicit compatibility pins in `requirements.in` for this Python version.
 
+`verify_python_wav.py` verifies **21/21 third-party package paths** and
+**1/1 CPython standard-library API** using the four-sample PCM16 WAV control.
+The pinned Python 3.13 environment has distribution hashes in
+`requirements.lock`. The ranking labels sample readers and WAV metadata
+readers, and identifies packages that share CPython `wave`, libsndfile,
+FFmpeg, or other backends. Pygame uses a dummy SDL audio driver for its
+control run. The standard-library result is `wave.open`.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -274,10 +285,11 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, or ZIP discovery, run
+For Python PNG, ASCII PNM, ZIP, or WAV discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
-`python3 scripts/snapshot_pypi_zip.py`. Each
+`python3 scripts/snapshot_pypi_zip.py`, or
+`python3 scripts/snapshot_pypi_wav.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -410,6 +422,12 @@ or quality judgment.
   The higher-download `zipfile-deflate64` lead failed to build on this host and
   was not counted. The [standard/runtime inventory](data/python/zip/standard.json)
   separately verifies four documented CPython API paths.
+- [Python × WAV ranking](data/python/wav/ranking.md): 21 package paths verified
+  on the PCM16 control, with sample and metadata scopes labeled. Nine bounded
+  PyPI name filters saved 782 hits and 688 distinct names; five plausible
+  leads remain unresolved, including torchaudio. The
+  [standard-library inventory](data/python/wav/standard.json) separately
+  verifies `wave.open`.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -453,6 +471,10 @@ uncertainty.
 - `data/python/zip/`: bounded PyPI leads, pinned release hashes, within-Python
   download counts, a verified ranking, control outputs, and four standard APIs.
   The adapters and dependency lock live under `adapters/python/zip/`.
+- `data/python/wav/`: bounded PyPI leads, pinned release hashes, within-Python
+  downloads, sample and metadata scopes, control outputs, and the separate
+  standard-library result. The adapters and lock live under
+  `adapters/python/wav/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

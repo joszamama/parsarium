@@ -1,0 +1,56 @@
+[
+  {
+    "name": "torchaudio",
+    "status": "unresolved",
+    "reason": "Its documented local audio loader is plausible, but a pinned torch/torchaudio environment and valid WAV control run were not established. The large native dependency is not inferred from registry membership.",
+    "source": "https://pypi.org/project/torchaudio/"
+  },
+  {
+    "name": "moviepy",
+    "status": "unresolved",
+    "reason": "AudioFileClip may decode local WAV via FFmpeg, but its pinned API, backend, open-source release, and control output remain unchecked.",
+    "source": "https://pypi.org/project/moviepy/"
+  },
+  {
+    "name": "ffmpeg-python",
+    "status": "unresolved",
+    "reason": "It builds FFmpeg command graphs; a pinned local WAV parse/read run through its API and the external tool has not been recorded.",
+    "source": "https://pypi.org/project/ffmpeg-python/"
+  },
+  {
+    "name": "wavefile",
+    "status": "unresolved",
+    "reason": "The 1.6.3 package installed but could not import because libsndfile.dylib was absent from the dynamic loader path; no WAV control result is counted.",
+    "source": "https://pypi.org/project/wavefile/1.6.3/"
+  },
+  {
+    "name": "pysndfile",
+    "status": "unresolved",
+    "reason": "The 1.5.3 source build failed because libsndfile development headers or library were unavailable; no pinned control result was established.",
+    "source": "https://pypi.org/project/pysndfile/1.5.3/"
+  },
+  {
+    "name": "PySoundFile",
+    "status": "excluded",
+    "reason": "This older distribution is the same upstream SoundFile project and exposes the same soundfile import path as the accepted soundfile release; counting both would duplicate one library.",
+    "source": "https://pypi.org/project/soundfile/"
+  },
+  {
+    "name": "pyaudio",
+    "status": "excluded",
+    "reason": "Its documented PortAudio interface records and plays through audio devices; no local WAV file parser API was established.",
+    "source": "https://pypi.org/project/PyAudio/"
+  },
+  {
+    "name": "sounddevice",
+    "status": "excluded",
+    "reason": "The package exposes device input/output streams; generic PCM movement is not a WAV container parser.",
+    "source": "https://python-sounddevice.readthedocs.io/"
+  },
+  {
+    "name": "eyed3",
+    "status": "excluded",
+    "reason": "Its documented file format focus is MP3/ID3; no WAV input API was established.",
+    "source": "https://pypi.org/project/eyeD3/"
+  }
+]
