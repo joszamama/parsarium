@@ -549,7 +549,7 @@ or quality judgment.
   recorded in the [cell record](data/python/svg/cell.json).
 - [Python × Matrix Market ranking](data/python/matrix_market/ranking.md):
   fourteen verified package paths so far. Thirteen bounded PyPI name filters
-  saved 379 hits and 378 distinct names; five explored leads remain
+  saved 379 hits and 378 distinct names; seven explored leads remain
   unresolved. The [cell record](data/python/matrix_market/cell.json) marks
   this batch below target and names the untested format variants.
 

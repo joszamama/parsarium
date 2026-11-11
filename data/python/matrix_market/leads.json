@@ -58,5 +58,29 @@
     "status": "excluded",
     "reason": "Version 0.1.15 documents a command-line MTX-to-h5ad converter, not a documented library input API; the current protocol selects libraries and runtime APIs.",
     "source": "https://pypi.org/project/pycyto/0.1.15/"
+  },
+  {
+    "name": "pysparse",
+    "status": "unresolved",
+    "reason": "The 1.0.2 official documentation names spmatrix.ll_mat_from_mtx(fileName), but the PyPI 1.3.dev0 source distribution failed to build on Python 3.10 because setup.py contains Python 2 print syntax. No valid-control result was established.",
+    "source": "https://pysparse.sourceforge.net/spmatrix.html"
+  },
+  {
+    "name": "sppy",
+    "status": "unresolved",
+    "reason": "Version 0.6.7 release notes say an io module reads Matrix Market. On Python 3.10, isolated build missed NumPy; retrying with NumPy, setuptools, and Cython 0.29 installed failed because the Eigen header eigen3/Eigen/Sparse was absent. A documented exact local API and valid-control result remain unestablished.",
+    "source": "https://github.com/charanpald/sppy"
+  },
+  {
+    "name": "ssdownload",
+    "status": "excluded",
+    "reason": "The reviewed package documents discovering and downloading Matrix Market files, not parsing a supplied local Matrix Market file into format-specific data.",
+    "source": "https://pypi.org/project/ssdownload/0.3.0/"
+  },
+  {
+    "name": "betterspy",
+    "status": "excluded",
+    "reason": "The reviewed package documents a CLI that takes an .mtx file and outputs a sparsity image; no library input API accepting the local Matrix Market file is documented.",
+    "source": "https://pypi.org/project/betterspy/"
   }
 ]
