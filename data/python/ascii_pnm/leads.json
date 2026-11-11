@@ -1,0 +1,15 @@
+[
+  {"name":"imread","status":"unresolved","reason":"Its pinned source build failed on this macOS host because jpeglib.h was missing; no ASCII PNM control run was established.","source":"https://pypi.org/project/imread/"},
+  {"name":"pgmagick","status":"unresolved","reason":"GraphicsMagick may decode PNM, but the source-only Python binding needs a native build and no pinned local API/control run was established.","source":"https://pypi.org/project/pgmagick/0.8/"},
+  {"name":"PyGObject","status":"unresolved","reason":"GdkPixbuf may provide a local PNM loader; an isolated Python binding, documented ASCII variant, and control result remain unchecked.","source":"https://pygobject.gnome.org/"},
+  {"name":"pyglet","status":"unresolved","reason":"The image loader could not import in the headless setup because EGL was unavailable; no P3 control result was counted.","source":"https://pyglet.readthedocs.io/en/latest/modules/image/"},
+  {"name":"bioio","status":"unresolved","reason":"Its generic image reader and plugin availability were not verified on the ASCII PNM control.","source":"https://pypi.org/project/bioio/"},
+  {"name":"napari","status":"unresolved","reason":"The application's own local-file plugin dispatch was not run; only the separately pinned napari-netpbmfile reader hook was verified.","source":"https://napari.org/stable/plugins/building_a_plugin/guides.html"},
+  {"name":"pillow-netpbm","status":"excluded","reason":"The plugin converts legacy input formats into Netpbm output; it does not supply an ASCII PNM input parser API.","source":"https://pypi.org/project/pillow-netpbm/"},
+  {"name":"pgmreader","status":"excluded","reason":"The 0.0.1 distribution installed without a pgmreader module or callable reader; the separately named pgm-reader package supplies the verified API.","source":"https://pypi.org/project/pgmreader/0.0.1/"},
+  {"name":"VTK","status":"excluded","reason":"Official vtkPNMReader documentation says it currently reads only binary PNM variants, outside this ASCII cell.","source":"https://vtk.org/doc/nightly/html/classvtkPNMReader.html"},
+  {"name":"rasterio","status":"excluded","reason":"rasterio.open rejected the valid P3 control in the pinned local probe; its PNG support does not establish ASCII PNM parsing.","source":"https://rasterio.readthedocs.io/en/stable/quickstart.html"},
+  {"name":"Willow","status":"excluded","reason":"The pinned local Image.open probe rejected the valid P3 control.","source":"https://pypi.org/project/Willow/1.12.0/"},
+  {"name":"imgio","status":"excluded","reason":"The pinned local imgio.imread probe rejected the valid P3 control despite a broad image-format description.","source":"https://pypi.org/project/imgio/1.7.4/"},
+  {"name":"simpleimageio","status":"excluded","reason":"The pinned local reader returned an empty image for the valid P3 control.","source":"https://pypi.org/project/simpleimageio/1.13.0/"}
+]

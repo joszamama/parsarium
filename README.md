@@ -47,6 +47,9 @@ python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
 uv pip sync adapters/python/png/requirements.lock --python adapters/python/png/.venv/bin/python --require-hashes
 python3 scripts/verify_python_png.py
+uv venv --python python3.13 adapters/python/ascii_pnm/.venv
+uv pip sync adapters/python/ascii_pnm/requirements.lock --python adapters/python/ascii_pnm/.venv/bin/python --require-hashes
+python3 scripts/verify_python_ascii_pnm.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -224,6 +227,18 @@ verifier sets `MAGICK_HOME` from `pkg-config` for Wand. The Python 3.13
 standard/runtime inventory separately verifies Tkinter `PhotoImage` with
 bundled Tk 8.6 on the same valid control; it requires a usable GUI session.
 
+`verify_python_ascii_pnm.py` uses the valid 2×1 ASCII P3 red/green PPM and
+P2 black/white PGM controls. The pinned, hash-locked Python 3.13 environment
+reproduces **20/20 package paths passing**. Eighteen expose P3 pixels, one
+exposes P2 grayscale pixels, and one parses P3 header dimensions only. They
+include wrappers over Pillow, Qt, and netpbmfile; those shared families are
+labeled in the ranking. The verifier also probes bundled Tk 8.6 `PhotoImage`
+on valid P1/P2/P3 files and records its three rejections separately from the
+package count. `pyvips` and Wand need libvips and ImageMagick shared libraries,
+and wxPython/Tk need a GUI session. `napari-netpbmfile` omits a declared
+`napari-plugin-engine` dependency; it is pinned explicitly in
+`requirements.in`.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -245,13 +260,14 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG discovery, run `python3 scripts/snapshot_pypi_png.py`. It
+For Python PNG or ASCII PNM discovery, run `python3 scripts/snapshot_pypi_png.py`
+or `python3 scripts/snapshot_pypi_ascii_pnm.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
 provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
-within Python. Its one unavailable metric remains `null`.
+within Python. Unavailable metrics remain `null`.
 
 ## Verified rankings and search limits
 
@@ -365,6 +381,13 @@ or quality judgment.
   One verified package lacks a PyPI Stats figure and is left unranked. The
   [standard/runtime inventory](data/python/png/standard.json) separately
   verifies Tkinter `PhotoImage` and records its platform limit.
+- [Python × ASCII PNM ranking](data/python/ascii_pnm/ranking.md): 20 package
+  paths verified on valid P3 or P2 controls, with pixel or header scopes
+  labeled. Twelve bounded PyPI name filters saved 675 hits and 669 distinct
+  project names; six plausible leads remain unresolved. One verified package
+  initially hit a PyPI Stats rate limit; a successful retry supplied its figure. The
+  [standard/runtime inventory](data/python/ascii_pnm/standard.json) records
+  Tkinter's failed ASCII controls and the scoped CPython finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -402,6 +425,9 @@ uncertainty.
   within-Python download signals, verified ranking, standard-library
   inventory, and control outputs. Python dependencies and the adapter live
   under `adapters/python/png/`.
+- `data/python/ascii_pnm/`: the same evidence layout for ASCII PNM, with
+  P3/P2 control output and the Tk runtime candidate result. Python adapters
+  and pinned dependencies live under `adapters/python/ascii_pnm/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

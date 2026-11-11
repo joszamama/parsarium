@@ -19,17 +19,17 @@ def read_json(url: str, accept: str = "application/json"):
         return json.load(response)
 
 
-def main() -> None:
+def main(cell: Path = CELL, terms: tuple[str, ...] = TERMS) -> None:
     index = read_json(INDEX_URL, "application/vnd.pypi.simple.v1+json")
     projects = [project["name"] for project in index["projects"]]
     search = []
-    for term in TERMS:
+    for term in terms:
         matches = sorted((name for name in projects if term in name.lower()), key=str.casefold)
         search.append({"query": f"project name contains {term!r}", "url": INDEX_URL,
                        "total": len(matches), "limit": LIMIT,
                        "ordering": "case-insensitive project-name order; not a popularity order",
                        "hits": [{"rank": i, "name": name} for i, name in enumerate(matches[:LIMIT], 1)]})
-    parsers = json.loads((CELL / "parsers.json").read_text())
+    parsers = json.loads((cell / "parsers.json").read_text())
     releases = {}
     downloads = {}
     for parser in parsers:
@@ -71,7 +71,7 @@ def main() -> None:
             "packages": downloads,
         },
     }
-    (CELL / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
+    (cell / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
     print(f"Saved {sum(len(row['hits']) for row in search)} name-index leads and {len(parsers)} pinned releases")
 
 

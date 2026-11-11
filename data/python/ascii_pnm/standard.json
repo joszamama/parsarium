@@ -1,0 +1,26 @@
+{
+  "ecosystem": "Python",
+  "format": "ASCII PNM",
+  "status": "unresolved_documented_candidate_failed_controls",
+  "verified_apis": [],
+  "candidate_failures": [
+    {
+      "runtime": "CPython 3.13.1 with bundled Tk 8.6",
+      "api": "tkinter.PhotoImage(file=local path)",
+      "documentation": "https://docs.python.org/3.13/library/tkinter.html#images",
+      "documentation_scope": "Official documentation says PhotoImage reads PPM and PGM but does not distinguish ASCII P3/P2 from binary P6/P5.",
+      "controls": ["controls/ascii_pnm/red-green.ppm", "controls/ascii_pnm/black-white.pgm", "controls/ascii_pnm/black-white.pbm"],
+      "adapter": "adapters/python/ascii_pnm/standard.py",
+      "result": "data/python/ascii_pnm/verification.json#runtime_candidate",
+      "result": "All three valid ASCII controls raised TclError: couldn't recognize data in image file. No verified ASCII PNM API is counted."
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "CPython 3.13.1 generic file, byte, and struct APIs",
+      "official_documentation_scope": ["https://docs.python.org/3.13/library/index.html", "https://docs.python.org/3.13/library/io.html", "https://docs.python.org/3.13/library/struct.html"],
+      "finding": "These APIs provide bytes or unpack caller-specified layouts; they do not interpret P1/P2/P3 magic numbers, dimensions, maxval, or pixels by themselves."
+    }
+  ],
+  "limit": "This is a scoped inventory of CPython 3.13.1/Tk 8.6 on macOS. Other bundled Tk versions or optional runtime components were not exhaustively tested."
+}
