@@ -21,6 +21,7 @@ npm run pilot:verify
 npm run zip:control
 npm run zip:verify
 python3 scripts/build_matrix.py
+python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
 ```
 
@@ -30,18 +31,20 @@ It has two opaque pixels: red and green. The verifier runs each package adapter
 against the path, checks parsed dimensions and either decoded pixels, parsed
 chunks, or the format-bearing header result, then writes dated JSON results.
 It also runs the browser-bundled `createImageBitmap(Blob)` adapter with the same
-control. The observed pilot result is **12/12 third-party packages and 1/1
+control. The observed pilot result is **21/21 third-party packages and 1/1
 runtime API passing**. A fresh run replaces the dated result files.
 
 `zip:control` creates a deterministic 128-byte ZIP with one DEFLATE-compressed
 `hello.txt` entry containing `parsarium\n` (SHA-256
 `c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b`).
 The ZIP adapter checks both the parsed entry name and decompressed content.
-The observed batch result is **8/8 third-party packages and 1/1 Node.js
+The observed batch result is **21/21 third-party packages and 1/1 Node.js
 built-in API passing**.
 
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png` or `node scripts/snapshot_npm.mjs zip`.
+Run `node scripts/triage_npm.mjs png` or `node scripts/triage_npm.mjs zip`
+to refresh popularity-sorted **leads**; triage never verifies a parser.
 This is a separate, network-dependent operation that changes the dated registry
 snapshot; verification itself uses only locked local dependencies. npm's
 [search API](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md)
@@ -50,62 +53,32 @@ supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
 
-## Pilot ranking: JavaScript × PNG
+## Verified rankings and search limits
 
-Only packages with a successful control run appear here. Header-only and
-chunk-only parsers are labeled because they do less than pixel decoders.
-Shared families are recorded so rows are not mistaken for independent parsers.
+The working goal is 20 verified third-party parsers per cell, with 30 as the
+original ceiling. Both started cells have **21 verified packages**, because
+higher-use leads were verified after the twentieth package. The extra rows are
+kept in the collection. Package downloads are an adoption proxy, not a security
+or quality judgment.
 
-| Rank | Package (pinned) | Downloads in window | Scope | Underlying family |
-| ---: | --- | ---: | --- | --- |
-| 1 | sharp 0.35.5 | 556,685,199 | pixels | libvips |
-| 2 | pngjs 7.0.0 | 349,449,466 | pixels | pngjs |
-| 3 | image-size 2.1.0 | 139,419,348 | header | image-size |
-| 4 | @pdf-lib/upng 1.0.1 | 105,408,220 | pixels | UPNG.js |
-| 5 | png-js 2.0.0 | 71,464,407 | pixels | png.js |
-| 6 | fast-png 8.0.0 | 68,006,004 | pixels | fast-png |
-| 7 | parse-png 2.1.0 | 52,308,135 | pixels | pngjs |
-| 8 | jimp 1.6.1 | 15,092,580 | pixels | pngjs |
-| 9 | @react-pdf/png-js 3.0.0 | 10,632,241 | pixels | png.js |
-| 10 | png-chunks-extract 1.0.0 | 4,817,936 | chunks | png-chunks-extract |
-| 11 | upng-js 2.1.0 | 1,894,825 | pixels | UPNG.js |
-| 12 | @jsquash/png 3.1.1 | 1,685,572 | pixels | Rust png crate via WASM |
+- [JavaScript × PNG ranking](data/javascript/png/ranking.md): 21 packages,
+  including header-only and chunk-only parsers labeled by scope. Four npm queries
+  saved the first 100 results each: 400 hits, 344 unique names. Ten named leads
+  remain unresolved. The [runtime inventory](data/javascript/png/standard.json)
+  separately verifies browser `createImageBitmap(Blob)` and records the scoped
+  Node.js 26.10.0 built-in API finding. The browser API is specified by the
+  [HTML Standard](https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#dom-createimagebitmap-dev).
+- [JavaScript × ZIP ranking](data/javascript/zip/ranking.md): 21 packages, each
+  returning the entry name and decompressed text. Four npm queries saved the
+  first 100 results each: 400 hits, 314 unique names. Four named leads remain
+  unresolved. The [Node.js `zlib.ZipBuffer` API](https://nodejs.org/docs/v26.10.0/api/zlib.html#class-zlibzipbuffer)
+  is experimental and verified separately from the npm ranking.
 
-The registry snapshot contains four queries (`png`, `png decoder`, `png reader`,
-`png image`), capped at the first 30 results each: 120 hits, 109 unique names.
-This is a **partial search**, not a claim that twelve exhaust the cell. Six
-relevant leads await a documented standalone API and/or a control run; other
-packages may lie beyond the saved result windows. See
-[`cell.json`](data/javascript/png/cell.json) and
-[`leads.json`](data/javascript/png/leads.json) for exact limits and dispositions.
-
-The [runtime inventory](data/javascript/png/standard.json) records one verified
-browser API and the scoped finding that Node.js 26.10.0 documents no built-in
-PNG parser. Browser `createImageBitmap` is specified by the
-[HTML Standard](https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#dom-createimagebitmap-dev).
-Other browser engines and JavaScript runtimes remain open.
-
-## Batch 1 ranking: JavaScript × ZIP
-
-These eight packages all returned the entry name and decompressed text from the
-same ZIP control. Counts use the same 2026-10-11 through 2026-11-09 npm window.
-
-| Rank | Package (pinned) | Downloads in window | Underlying family |
-| ---: | --- | ---: | --- |
-| 1 | fflate 0.8.3 | 510,564,404 | fflate |
-| 2 | yauzl 3.4.0 | 250,080,200 | yauzl |
-| 3 | jszip 3.10.2 | 240,876,211 | JSZip |
-| 4 | unzipper 0.12.5 | 132,565,324 | unzipper |
-| 5 | adm-zip 0.6.1 | 108,718,725 | ADM-ZIP |
-| 6 | extract-zip 2.0.1 | 102,046,075 | yauzl |
-| 7 | @zip.js/zip.js 2.24.0 | 29,998,288 | zip.js |
-| 8 | node-stream-zip 1.16.0 | 28,433,168 | node-stream-zip |
-
-The four ZIP searches saved 120 hits, 98 unique names, with a limit of 30 per
-query. Two named leads remain unresolved, and most registry hits were not
-reviewed. This is a partial ranking; see [`cell.json`](data/javascript/zip/cell.json)
-for the exact limits. The [Node.js ZIP API](https://nodejs.org/docs/v26.10.0/api/zlib.html#class-zlibzipbuffer)
-is built in and verified separately. It is experimental in Node.js 26.10.0.
+The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
+and [ZIP cell record](data/javascript/zip/cell.json) state the actual counts,
+search limits, and remaining uncertainty. Registry hits and download counts are
+not parser evidence; only the pinned APIs and successful control runs enter the
+rankings.
 
 ## Data layout
 
@@ -113,8 +86,12 @@ is built in and verified separately. It is experimental in Node.js 26.10.0.
   count, search limit, and uncertainty.
 - `data/javascript/{png,zip}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
+- `data/javascript/{png,zip}/triage.json`: popularity-sorted discovery leads,
+  including unresolved names; the status distinguishes verified packages.
 - `data/javascript/{png,zip}/parsers.json`: pinned packages, documented input APIs,
   parsing depth, licenses, and shared families.
+- `data/javascript/{png,zip}/ranking.md`: generated rankings using only verified
+  package rows and the recorded metric window.
 - `adapters/javascript/` and `controls/`: runnable local-input adapters and
   deterministic valid controls.
 - `data/javascript/{png,zip}/verification.json` and `png/browser-verification.json`:

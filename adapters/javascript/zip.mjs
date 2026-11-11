@@ -1,7 +1,8 @@
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, realpath, rm } from 'node:fs/promises';
 import { text as streamText } from 'node:stream/consumers';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { Readable } from 'node:stream';
 
 const [name, path] = process.argv.slice(2);
 if (!name || !path) {
@@ -10,6 +11,15 @@ if (!name || !path) {
 }
 const bytes = await readFile(path);
 let result;
+const fromFiles = (files) => ({ entries: files.map((file) => file.path), content: files[0].data.toString('utf8') });
+async function extractToTemp(callback) {
+  const directory = await mkdtemp(join(tmpdir(), 'parsarium-zip-'));
+  try {
+    await callback(directory);
+    const entries = await readdir(directory);
+    return { entries, content: await readFile(join(directory, entries[0]), 'utf8') };
+  } finally { await rm(directory, { recursive: true, force: true }); }
+}
 
 switch (name) {
   case 'jszip': {
@@ -80,6 +90,102 @@ switch (name) {
       await extract(join(process.cwd(), path), { dir: directory, onEntry: (entry) => entries.push(entry.fileName) });
       result = { entries, content: await readFile(join(directory, entries[0]), 'utf8') };
     } finally { await rm(directory, { recursive: true, force: true }); }
+    break;
+  }
+  case '@electron-internal/extract-zip': {
+    const extract = (await import('@electron-internal/extract-zip')).default;
+    result = await extractToTemp((directory) => extract(join(process.cwd(), path), { dir: directory }));
+    break;
+  }
+  case 'yauzl-promise': {
+    const { fromBuffer } = await import('yauzl-promise');
+    const zip = await fromBuffer(bytes);
+    const entries = [];
+    let content;
+    try {
+      for await (const entry of zip) {
+        if (entry.filename.endsWith('/')) continue;
+        entries.push(entry.filename);
+        content = await streamText(await entry.openReadStream());
+      }
+    } finally { await zip.close(); }
+    result = { entries, content };
+    break;
+  }
+  case 'decompress-unzip': {
+    const plugin = (await import('decompress-unzip')).default;
+    result = fromFiles(await plugin()(bytes));
+    break;
+  }
+  case '@xhmikosr/decompress-unzip': {
+    const plugin = (await import('@xhmikosr/decompress-unzip')).default;
+    result = fromFiles(await plugin()(bytes));
+    break;
+  }
+  case 'decompress': {
+    const decompress = (await import('decompress')).default;
+    result = fromFiles(await decompress(bytes));
+    break;
+  }
+  case '@xhmikosr/decompress': {
+    const decompress = (await import('@xhmikosr/decompress')).default;
+    result = fromFiles(await decompress(bytes));
+    break;
+  }
+  case 'unzipper-esm': {
+    const { Open } = await import('unzipper-esm');
+    const zip = await Open.buffer(bytes);
+    const entries = zip.files.filter((entry) => entry.type === 'File');
+    result = { entries: entries.map((entry) => entry.path), content: (await entries[0].buffer()).toString('utf8') };
+    break;
+  }
+  case 'pizzip': {
+    const PizZip = (await import('pizzip')).default;
+    const zip = new PizZip(bytes);
+    const names = Object.keys(zip.files).filter((name) => !zip.files[name].dir);
+    result = { entries: names, content: zip.file(names[0]).asText() };
+    break;
+  }
+  case 'node-zip': {
+    const NodeZip = (await import('node-zip')).default;
+    const zip = new NodeZip(bytes, { base64: false });
+    const names = Object.keys(zip.files).filter((name) => !zip.files[name].dir);
+    result = { entries: names, content: zip.file(names[0]).asText() };
+    break;
+  }
+  case 'unzip-stream': {
+    const unzip = (await import('unzip-stream')).default;
+    const entries = [];
+    let content;
+    for await (const entry of Readable.from([bytes]).pipe(unzip.Parse())) {
+      if (entry.type !== 'File') { entry.autodrain(); continue; }
+      entries.push(entry.path);
+      content = await streamText(entry);
+    }
+    result = { entries, content };
+    break;
+  }
+  case '@loaders.gl/zip': {
+    const { ZipLoader } = await import('@loaders.gl/zip');
+    const arrayBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+    const files = await ZipLoader.parse(arrayBuffer);
+    const names = Object.keys(files);
+    result = { entries: names, content: new TextDecoder().decode(files[names[0]]) };
+    break;
+  }
+  case 'decompress-zip': {
+    const DecompressZip = (await import('decompress-zip')).default;
+    result = await extractToTemp((directory) => new Promise((resolve, reject) => {
+      const zip = new DecompressZip(join(process.cwd(), path));
+      zip.on('extract', resolve);
+      zip.on('error', reject);
+      zip.extract({ path: directory });
+    }));
+    break;
+  }
+  case 'zip-lib': {
+    const { extract } = await import('zip-lib');
+    result = await extractToTemp(async (directory) => extract(bytes, await realpath(directory)));
     break;
   }
   default:

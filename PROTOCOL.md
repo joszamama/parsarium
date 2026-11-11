@@ -1,6 +1,7 @@
-# Parser selection protocol (v1, 2026-11-11)
+# Parser selection protocol (v2, 2026-11-11)
 
-This protocol is fixed before selecting packages. The unit of analysis is one
+Eligibility rules were written before the pilot. Version 2 records the user's
+20-per-cell working goal; it does not change eligibility. The unit of analysis is one
 ecosystem × format cell. The eleven formats and eight ecosystems are listed in
 `data/cells.json`.
 
@@ -34,13 +35,16 @@ For each cell, search its ecosystem registry using the format name and common
 parser/decoder/reader terms, then inspect the highest-ranked relevant results
 and project documentation. Save the exact queries, date, result limit, and
 lead dispositions. Search hits are discovery material, not parser evidence.
-Inspect at most the first 100 results per query and at most 30 distinct
-*verified* third-party packages per cell. Stop earlier only after the listed
-queries and relevant documentation leads have been reviewed, or when a stated
-environmental limit prevents further checks. Every summary gives the actual
+Inspect at most the first 100 results per query and aim for 20 distinct
+*verified* third-party packages per cell. Twenty is the working goal following
+the 2026-11-11 user revision; the original ceiling of 30 remains. Twenty is
+never a quota to fill with unrelated software. A batch may stop at the working
+goal after the listed query windows are saved and plausible higher-download
+leads have been checked or explicitly marked unresolved. Before the goal,
+stop only after the listed searches and relevant documentation leads have been
+reviewed, or when a stated environmental limit prevents further checks. Every summary gives the actual
 verified count, searched surface, number of leads still unresolved, and a
-plain-language account of what could have been missed. The 30 cap is never
-used as a quota.
+plain-language account of what could have been missed.
 
 ## Popularity
 

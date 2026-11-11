@@ -21,6 +21,8 @@ def main() -> None:
                     "ecosystem": ecosystem,
                     "format": format_name,
                     "status": "not_started",
+                    "working_target": 20,
+                    "ceiling": 30,
                     "verified_third_party_count": 0,
                     "verified_standard_or_runtime_count": 0,
                     "search_queries": [],

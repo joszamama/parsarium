@@ -1,6 +1,7 @@
 // Each branch calls the package's documented local-input API. The verifier
 // checks the returned fields; these functions do not invent expected values.
 import { readFile } from 'node:fs/promises';
+import { Readable } from 'node:stream';
 
 const [name, path] = process.argv.slice(2);
 if (!name || !path) {
@@ -16,6 +17,69 @@ switch (name) {
     const sharp = (await import('sharp')).default;
     const { data, info } = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     result = { width: info.width, height: info.height, rgba: rgba(data) };
+    break;
+  }
+  case 'canvas': {
+    const { createCanvas, loadImage } = await import('canvas');
+    const image = await loadImage(bytes);
+    const canvas = createCanvas(image.width, image.height);
+    const context = canvas.getContext('2d');
+    context.drawImage(image, 0, 0);
+    result = { width: image.width, height: image.height, rgba: rgba(context.getImageData(0, 0, image.width, image.height).data) };
+    break;
+  }
+  case '@napi-rs/canvas': {
+    const { createCanvas, loadImage } = await import('@napi-rs/canvas');
+    const image = await loadImage(bytes);
+    const canvas = createCanvas(image.width, image.height);
+    const context = canvas.getContext('2d');
+    context.drawImage(image, 0, 0);
+    result = { width: image.width, height: image.height, rgba: rgba(context.getImageData(0, 0, image.width, image.height).data) };
+    break;
+  }
+  case 'skia-canvas': {
+    const { Canvas, loadImage } = await import('skia-canvas');
+    const image = await loadImage(bytes);
+    const canvas = new Canvas(image.width, image.height);
+    const context = canvas.getContext('2d');
+    context.drawImage(image, 0, 0);
+    result = { width: image.width, height: image.height, rgba: rgba(context.getImageData(0, 0, image.width, image.height).data) };
+    break;
+  }
+  case 'probe-image-size': {
+    const probe = (await import('probe-image-size')).default;
+    const info = probe.sync(bytes);
+    result = { width: info.width, height: info.height, type: info.type };
+    break;
+  }
+  case '@loaders.gl/images': {
+    const { getBinaryImageMetadata } = await import('@loaders.gl/images');
+    const arrayBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+    const metadata = getBinaryImageMetadata(arrayBuffer);
+    result = { width: metadata.width, height: metadata.height, type: metadata.mimeType.split('/')[1] };
+    break;
+  }
+  case '@react-pdf/image': {
+    const resolveImage = (await import('@react-pdf/image')).default;
+    const info = await resolveImage(bytes);
+    result = { width: info.width, height: info.height, type: info.format };
+    break;
+  }
+  case 'pureimage': {
+    const image = await (await import('pureimage')).decodePNGFromStream(Readable.from([bytes]));
+    result = { width: image.width, height: image.height, rgba: rgba(image.data) };
+    break;
+  }
+  case 'pngjs-nozlib': {
+    const { PNG } = await import('pngjs-nozlib');
+    const image = PNG.sync.read(bytes);
+    result = { width: image.width, height: image.height, rgba: rgba(image.data) };
+    break;
+  }
+  case 'pngjs-image': {
+    const PNGImage = (await import('pngjs-image')).default;
+    const image = await new Promise((resolve, reject) => PNGImage.loadImage(bytes, (error, parsed) => error ? reject(error) : resolve(parsed)));
+    result = { width: image.getWidth(), height: image.getHeight(), rgba: rgba(image.getImage().data) };
     break;
   }
   case 'image-size': {

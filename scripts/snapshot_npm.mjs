@@ -20,7 +20,7 @@ async function json(url) {
 
 const search = [];
 for (const query of queries) {
-  const url = `https://registry.npmjs.org/-/v1/search?text=${encodeURIComponent(query)}&size=30&from=0`;
+  const url = `https://registry.npmjs.org/-/v1/search?text=${encodeURIComponent(query)}&size=100&from=0`;
   const response = await json(url);
   search.push({ query, url, total: response.total, hits: response.objects.map(({ package: p }, i) => ({ rank: i + 1, name: p.name, version: p.version, description: p.description ?? '', url: p.links?.npm ?? `https://www.npmjs.com/package/${p.name}` })) });
 }
@@ -41,7 +41,7 @@ const snapshot = {
   captured_at_utc: new Date().toISOString(),
   search_api_docs: 'https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md',
   downloads_api_docs: 'https://github.com/npm/registry/blob/main/docs/download-counts.md',
-  search_limit_per_query: 30,
+  search_limit_per_query: 100,
   search,
   releases,
   download_metric: { name: 'npm registry tarball downloads', window: metricWindow, packages: downloads }
