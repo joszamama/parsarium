@@ -19,6 +19,10 @@ def main() -> None:
     path = Path(__file__).with_name("red-green.png")
     path.write_bytes(png)
     print(f"{path}: {len(png)} bytes")
+    tagged = signature + chunk(b"IHDR", ihdr) + chunk(b"tEXt", b"Title\x00Parsarium") + chunk(b"IDAT", zlib.compress(scanline)) + chunk(b"IEND", b"")
+    tagged_path = Path(__file__).with_name("red-green-title.png")
+    tagged_path.write_bytes(tagged)
+    print(f"{tagged_path}: {len(tagged)} bytes")
 
 
 if __name__ == "__main__":

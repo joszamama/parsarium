@@ -3,7 +3,8 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM, and an explicit 88-cell work matrix. The other 71 cells
+Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
+Python × PNG, and an explicit 88-cell work matrix. The other 70 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -43,6 +44,9 @@ python3 scripts/verify_go_pdf.py
 python3 scripts/verify_go_svg.py
 python3 controls/ascii_pnm/make_control.py
 python3 scripts/verify_go_ascii_pnm.py
+uv venv --python python3.13 adapters/python/png/.venv
+uv pip sync adapters/python/png/requirements.lock --python adapters/python/png/.venv/bin/python --require-hashes
+python3 scripts/verify_python_png.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -56,6 +60,8 @@ chunks, or the format-bearing header result, then writes dated JSON results.
 It also runs the browser-bundled `createImageBitmap(Blob)` adapter with the same
 control. The observed pilot result is **21/21 third-party packages and 1/1
 runtime API passing**. A fresh run replaces the dated result files.
+It also generates `controls/png/red-green-title.png`, the same valid pixels
+with a `Title=Parsarium` text chunk for metadata readers.
 
 `zip:control` creates a deterministic 128-byte ZIP with one DEFLATE-compressed
 `hello.txt` entry containing `parsarium\n` (SHA-256
@@ -206,6 +212,18 @@ removed `davidbyttow/govips` package. Use `go mod tidy -e` if refreshing the
 module graph. The separate Go 1.27.1 standard-library inventory records no
 PNM-aware parser API.
 
+`verify_python_png.py` uses CPython 3.13.1 and the two valid local PNG
+controls. `requirements.in` pins 21 top-level releases; the generated
+`requirements.lock` pins transitive versions and distribution hashes. The
+recorded result is **21/21 third-party packages passing**. Pixel decoders,
+dimension readers, chunk readers, and a `tEXt` metadata reader have separate
+scopes in the ranking. Several packages call Pillow, ImageIO, libvips, or
+other native image engines. The run used uv 0.12.19, libvips 8.18.7, and
+ImageMagick 7.1.2; the latter two need installed shared libraries. The
+verifier sets `MAGICK_HOME` from `pkg-config` for Wand. The Python 3.13
+standard/runtime inventory separately verifies Tkinter `PhotoImage` with
+bundled Tk 8.6 on the same valid control; it requires a usable GUI session.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -226,6 +244,14 @@ package-search hits, pinned-release license evidence, and package-level
 “Imported by” counts. Go counts are compared only within their Go format cell.
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
+
+For Python PNG discovery, run `python3 scripts/snapshot_pypi_png.py`. It
+filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
+by recorded name terms, saves the first 100 alphabetic matches per term, and
+fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
+provides its `last_month` download signal, excluding known mirrors. The
+index is not relevance ranked, and the download signal is compared only
+within Python. Its one unavailable metric remains `null`.
 
 ## Verified rankings and search limits
 
@@ -333,6 +359,12 @@ or quality judgment.
   and several modules share Go PNM code. The
   [standard-library inventory](data/go/ascii_pnm/standard.json) records the
   scoped Go 1.27.1 finding.
+- [Python × PNG ranking](data/python/png/ranking.md): 21 packages verified
+  on local pixel or text-chunk controls. Seven bounded PyPI name filters
+  saved 379 distinct project names; eight plausible leads remain unresolved.
+  One verified package lacks a PyPI Stats figure and is left unranked. The
+  [standard/runtime inventory](data/python/png/standard.json) separately
+  verifies Tkinter `PhotoImage` and records its platform limit.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -366,6 +398,10 @@ uncertainty.
 - `data/go/ascii_pnm/`: bounded search hits, pinned releases, package-level
   importer counts, P3 control outputs, ranking, leads, and standard-library
   finding. Native adapters live under `adapters/go/ascii_pnm/`.
+- `data/python/png/`: PyPI name-index leads, pinned release hashes,
+  within-Python download signals, verified ranking, standard-library
+  inventory, and control outputs. Python dependencies and the adapter live
+  under `adapters/python/png/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

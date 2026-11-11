@@ -73,6 +73,34 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"go/{format_name}: {len(ranked)} verified packages ranked")
 
+    directory = ROOT / "data" / "python" / "png"
+    parsers = read(directory / "parsers.json")
+    snapshot = read(directory / "registry-snapshot.json")
+    metrics = snapshot["download_metric"]["packages"]
+    known = sorted((parser for parser in parsers if metrics[parser["name"]]["downloads"] is not None),
+                   key=lambda parser: -metrics[parser["name"]]["downloads"])
+    unknown = [parser for parser in parsers if metrics[parser["name"]]["downloads"] is None]
+    lines = [
+        "# Python × PNG: verified parser ranking", "",
+        f"{len(parsers)} verified third-party packages; working goal 20, original ceiling 30. "
+        "The metric is PyPI Stats `last_month` downloads excluding known mirrors, captured at "
+        f"{snapshot['download_metric']['captured_at_utc']}. It is compared only within Python. "
+        f"{len(unknown)} package(s) lack a metric and remain unranked; no value is inferred.", "",
+        "The PyPI Simple Index leads are alphabetically ordered names, not a popularity search. "
+        "Search hits, unresolved leads, and standard-library findings are separate from this ranking.", "",
+        "| Rank | Package | Pinned release | Last-month downloads | Scope | Underlying family |",
+        "| ---: | --- | --- | ---: | --- | --- |",
+    ]
+    for rank, parser in enumerate(known, 1):
+        lines.append(f"| {rank} | [{parser['name']}]({parser['documentation']}) | "
+                     f"{parser['version']} | {metrics[parser['name']]['downloads']:,} | "
+                     f"{parser['scope']} | {parser['family']} |")
+    for parser in unknown:
+        lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
+                     f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
+    (directory / "ranking.md").write_text("\n".join(lines) + "\n")
+    print(f"python/png: {len(parsers)} verified packages, {len(unknown)} unranked")
+
 
 if __name__ == "__main__":
     main()

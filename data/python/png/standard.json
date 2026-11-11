@@ -1,0 +1,34 @@
+{
+  "ecosystem": "Python",
+  "format": "PNG",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "runtime": "CPython 3.13.1 with bundled Tk 8.6",
+      "api": "tkinter.PhotoImage(file=local path); width(); height(); get(x, y)",
+      "documentation": "https://docs.python.org/3.13/library/tkinter.html#images",
+      "adapter": "adapters/python/png/standard.py",
+      "control": "controls/png/red-green.png",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "rgb0": [255, 0, 0],
+        "rgb1": [0, 255, 0]
+      },
+      "result": "data/python/png/verification.json"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "CPython 3.13.1 generic byte and compression APIs",
+      "official_documentation_scope": [
+        "https://docs.python.org/3.13/library/index.html",
+        "https://docs.python.org/3.13/library/zlib.html",
+        "https://docs.python.org/3.13/library/struct.html",
+        "https://docs.python.org/3.13/whatsnew/3.13.html#removed"
+      ],
+      "finding": "zlib decompresses generic streams, struct unpacks caller-specified layouts, and file APIs supply bytes. None interprets PNG chunks or pixels by itself. imghdr was removed in Python 3.13 and earlier identified file types only."
+    }
+  ],
+  "limit": "Tkinter PhotoImage requires a Tk installation and a usable GUI session. The positive result is for bundled Tk 8.6 on this macOS host; other Python distributions may omit Tk or have different Tk versions."
+}
