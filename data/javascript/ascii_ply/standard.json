@@ -1,0 +1,24 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "ASCII PLY",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/"
+      ],
+      "finding": "The documented built-in modules expose file, stream, and Buffer access but no PLY-aware mesh or point-cloud parser. Generic byte access is not counted."
+    },
+    {
+      "runtime": "Browser File API and WebGL platform APIs",
+      "official_documentation_scope": [
+        "https://www.w3.org/TR/FileAPI/",
+        "https://registry.khronos.org/webgl/specs/latest/2.0/"
+      ],
+      "finding": "File and Blob APIs provide bytes, while WebGL accepts supplied geometry; neither documented API interprets an ASCII PLY header, vertex properties, or faces."
+    }
+  ],
+  "limit": "This is an inventory of the documented Node.js 26.10.0 core modules and the cited browser platform APIs. It is not a proof about every host environment, native extension, or future runtime. No format-aware bundled PLY candidate was identified for a control probe."
+}

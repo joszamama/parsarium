@@ -38,6 +38,7 @@ npm run http11:control
 npm run http11:verify
 npm run ascii_pnm:control
 npm run ascii_pnm:verify
+npm run ascii_ply:verify
 python3 scripts/verify_go_zip.py
 python3 scripts/verify_go_png.py
 python3 scripts/verify_go_wav.py
@@ -373,8 +374,8 @@ The scoped CPython 3.13 standard-library inventory found no
 Matrix Market-aware input API.
 
 To refresh *discovery and popularity* data, run
-`node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, or `ascii_pnm`.
-Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, or `ascii_pnm`
+`node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, `ascii_pnm`, or `ascii_ply`.
+Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, `ascii_pnm`, or `ascii_ply`
 to refresh popularity-sorted **leads**; triage never verifies a parser.
 This is a separate, network-dependent operation that changes the dated registry
 snapshot; verification itself uses only locked local dependencies. npm's
@@ -474,6 +475,14 @@ or quality judgment.
   458 distinct names; two explored leads remain unresolved. The
   [runtime inventory](data/javascript/ascii_pnm/standard.json) records scoped
   Node.js and Chromium findings. Shared `image-size` parser families are labeled.
+- [JavaScript × ASCII PLY ranking](data/javascript/ascii_ply/ranking.md):
+  20 verified package paths on the valid three-vertex triangle control. Seventeen
+  return triangle faces; three return vertex or point-cloud records. Seven
+  Three.js-derived paths, two loaders.gl paths, and two voxelkloud paths are
+  marked as shared parser families, leaving 12 families in total. Ten bounded
+  npm queries saved 870 hits and 706 distinct names; six explored leads remain
+  unresolved. The [runtime inventory](data/javascript/ascii_ply/standard.json)
+  records the scoped absence of a PLY-aware Node.js or browser platform API.
 - [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
   readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries
   saved 333 hits, 271 unique package paths. Eight named leads remain

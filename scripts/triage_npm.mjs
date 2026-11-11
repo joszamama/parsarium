@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 const cell = process.argv[2];
-if (!['png', 'zip', 'mp4', 'mp3_id3v2', 'wav', 'pdf', 'svg', 'http11', 'ascii_pnm'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|mp4|mp3_id3v2|wav|pdf|svg|http11|ascii_pnm');
+if (!['png', 'zip', 'mp4', 'mp3_id3v2', 'wav', 'pdf', 'svg', 'http11', 'ascii_pnm', 'ascii_ply'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|mp4|mp3_id3v2|wav|pdf|svg|http11|ascii_pnm|ascii_ply');
 const path = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);
 const snapshot = JSON.parse(await readFile(path));
 const parsers = JSON.parse(await readFile(new URL(`../data/javascript/${cell}/parsers.json`, import.meta.url)));
@@ -22,6 +22,8 @@ const relevant = cell === 'png'
         ? /\bpdf\b|pdf[-.]|portable document/i
         : cell === 'svg'
           ? /\bsvg\b|svg[-.]|scalable vector/i
+          : cell === 'ascii_ply'
+            ? /\bply\b|PLYLoader|polygon file format|stanford triangle/i
           : cell === 'ascii_pnm'
             ? /\bpnm\b|\bnetpbm\b|\bppm\b|\bpgm\b|\bpbm\b|portable (pixmap|graymap|bitmap)/i
             : /\bhttp\b|http[-.]|HTTP\/1\.1|request (parser|reader)|response (parser|reader)/i;
@@ -46,6 +48,8 @@ const extra = cell === 'png'
         ? ['pdfjs-dist', 'pdf-parse', 'pdf-lib', 'pdf2json', 'pdfreader', 'pdf-extraction', 'pdf-to-text', 'pdf-text-extract', 'pdf-extract', 'pdf-parser', 'mupdf', 'pdfjs', 'pdf-parse-new', 'pdfnative']
         : cell === 'svg'
           ? ['svg-parser', 'canvg', 'sharp', '@resvg/resvg-js', '@resvg/resvg-wasm', '@cf-wasm/resvg', '@stacksjs/ts-svg', 'svgson', 'svgps', 'postsvg', 'streaming-svg-parser', 'svg2img', 'svg-to-img', '@svgdotjs/svg.js', 'svgdom', 'svgo', 'svg-size', 'get-svg-colors', 'probe-image-size', 'image-size', 'canvas', '@napi-rs/canvas', 'skia-canvas', 'svg-eslint-parser', 'vsvg-parser', '@yworks/canvg', 'svg-to-pdfkit', 'svgicons2svgfont', '@react-pdf/svg', 'react-inlinesvg']
+          : cell === 'ascii_ply'
+            ? ['three', 'three-stdlib', '@loaders.gl/core', '@loaders.gl/ply', '@loaders.gl/pointclouds', 'parse-ply', 'plyparser', 'ply-js', '@draco-rust/ply', 'three-ply-loader', 'threejs-ply-loader', 'three-ply-loader-ts', '@kibeo/loaders.gl-ply', '@isopodlabs/binary_meshes', '@meshioplusplus/wasm', '@dp-software/point-cloud-wasm', 'online-3d-viewer', '@playcanvas/engine', '@playcanvas/splat-transform', 'spz-js', '3dgs-ply-3dtiles-converter', '3dgs-loader', '@wangyoumo/gs3d-loader', '@sruim/mesh-flow', '@voxelkloud/format-single', '@voxelkloud/wasm-build', 'point-cloud-convert', 'sunzi-plyloader', 'modeltree', '@file-viewer/renderer-3d', 'threepipe', '@combos-fun/plugin-renderer-3d-model', 'meshlab-ts']
           : cell === 'ascii_pnm'
             ? ['image-size', 'image-size-next', 'image-size-safe', '@nous-research/image-size', '@localnerve/image-size', 'tiny-image-size', '@portable/image-size', 'view-image-size', 'fastimage', 'image-meta', '@napi-rs/image', 'netpbm-parser', '@jdmichaud/netpbm', 'ppm', 'ppm-parser', 'pgmjs', 'pgmts', 'dumb-pgm', '@lp-labs/ppm-image-codec', '@fitbit/portable-pixmap', '@catlabtech/webcvt-image-legacy', 'pnm', '@imgdrop/pnm', 'pnm-convertor', '@thi.ng/pixel-io-netpbm', '@designliquido/delegua-imagens', 'image-in-browser', 'imagescript', 'purejsimage']
             : ['http-parser-js', 'http-string-parser', 'raw-http-parser', 'parse-http', 'http-parse', 'http-parser', 'llhttp', 'http-message-parser', 'parse-raw-http', '@caido-utils/parser', 'http-parser-wasm', 'http-z', '@ibiwan/http-message-parser', 'http-message-parser-ts', 'raw-request-parser', 'http-headers', 'http-request-parser', '@alikia/http-parser', '@browsercore/http1'];

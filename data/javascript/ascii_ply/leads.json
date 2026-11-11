@@ -1,0 +1,80 @@
+[
+  {
+    "name": "@loaders.gl/core",
+    "status": "excluded",
+    "reason": "It dispatches to the separately counted @loaders.gl/ply loader; no independent PLY parser implementation is documented in the core package.",
+    "source": "https://loaders.gl/docs/modules/core/api-reference/parse"
+  },
+  {
+    "name": "spz-js",
+    "status": "excluded",
+    "reason": "The documented loadPly(stream) API rejected the valid ASCII PLY control with 'Only binary_little_endian supported'.",
+    "source": "https://www.npmjs.com/package/spz-js"
+  },
+  {
+    "name": "@playcanvas/splat-transform",
+    "status": "excluded",
+    "reason": "The readPly API documentation specifies standard uncompressed binary PLY; ASCII PLY parsing is not documented for this release.",
+    "source": "https://www.npmjs.com/package/@playcanvas/splat-transform"
+  },
+  {
+    "name": "@nickpaustian/stelligra",
+    "status": "excluded",
+    "reason": "parsePLYAsPointCloud(localArrayBuffer) rejected the valid ASCII control with 'ASCII PLY parsing not yet implemented'.",
+    "source": "https://www.npmjs.com/package/@nickpaustian/stelligra"
+  },
+  {
+    "name": "3dgs-loader",
+    "status": "excluded",
+    "reason": "PlyLoader.parseColumns(localArrayBuffer) rejected the valid ASCII PLY control with 'not a ply file'; no passing ASCII control result was established.",
+    "source": "https://www.npmjs.com/package/3dgs-loader"
+  },
+  {
+    "name": "openskp",
+    "status": "excluded",
+    "reason": "The reviewed package description identifies a SketchUp input parser and PLY conversion output, not a PLY input parser.",
+    "source": "https://www.npmjs.com/package/openskp"
+  },
+  {
+    "name": "rgbd2ply",
+    "status": "excluded",
+    "reason": "The package describes converting RGB-D image input to PLY output; no PLY input parser was documented.",
+    "source": "https://www.npmjs.com/package/rgbd2ply"
+  },
+  {
+    "name": "@loaders.gl/pointclouds",
+    "status": "unresolved",
+    "reason": "The 5.0.0 beta PLY module is plausible and has package documentation, but its peer dependency on loaders.gl core 5 conflicts with the pinned core 4 used by existing cells. No isolated valid-control adapter is recorded yet.",
+    "source": "https://www.npmjs.com/package/@loaders.gl/pointclouds"
+  },
+  {
+    "name": "@dp-software/point-cloud-wasm",
+    "status": "unresolved",
+    "reason": "The README documents ASCII PLY and a local File API, but the worker-based browser adapter has not been run against the control.",
+    "source": "https://www.npmjs.com/package/@dp-software/point-cloud-wasm"
+  },
+  {
+    "name": "gaussian-splat-lite",
+    "status": "unresolved",
+    "reason": "The README documents local PLY bytes, but the Node probe stopped at a browser window dependency; ASCII PLY support and observable parsing remain unverified.",
+    "source": "https://www.npmjs.com/package/gaussian-splat-lite"
+  },
+  {
+    "name": "@file-viewer/renderer-3d",
+    "status": "unresolved",
+    "reason": "A PLY viewer lead was found, but an independently documented local input API and valid-control result remain unestablished.",
+    "source": "https://www.npmjs.com/package/@file-viewer/renderer-3d"
+  },
+  {
+    "name": "threepipe",
+    "status": "unresolved",
+    "reason": "The documentation suggests PLY loading, but its modded Three.js dependency and local input API have not been isolated and tested in this cell.",
+    "source": "https://www.npmjs.com/package/threepipe"
+  },
+  {
+    "name": "@combos-fun/plugin-renderer-3d-model",
+    "status": "unresolved",
+    "reason": "A PLY model-loader lead was found, but no documented local input adapter and valid-control result are recorded.",
+    "source": "https://www.npmjs.com/package/@combos-fun/plugin-renderer-3d-model"
+  }
+]
