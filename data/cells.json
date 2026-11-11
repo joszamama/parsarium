@@ -1155,15 +1155,32 @@
     {
       "ecosystem": "python",
       "format": "mp3_id3v2",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "project name contains 'mp3'",
+        "project name contains 'id3'",
+        "project name contains 'audio'",
+        "project name contains 'music'",
+        "project name contains 'tag'",
+        "project name contains 'mpeg'",
+        "project name contains 'ffmpeg'",
+        "project name contains 'media'",
+        "project name contains 'sound'"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 840,
+      "unique_search_hits": 741,
+      "unresolved_documentation_leads": 6,
+      "uncertainty": "The PyPI Simple JSON project index was filtered by nine project-name substrings, retaining at most 100 case-insensitive alphabetical hits per term. The 840 saved hits contain 741 distinct names, but these windows are not popularity-ranked and can miss relevant names. Six plausible leads remain unresolved, including torchaudio; audio-metadata failed to build its native pendulum dependency. The 20 verified paths share several engines: Mutagen, libsndfile, FFmpeg, SDL_mixer, TagLib, MediaInfo, and others. Their rank and family labels should not be read as 20 independent MP3 engines. The valid ID3v2.3-tagged mono MP3 control proves only each recorded tag, header, duration, or audio decode scope. Duration readers differ in their treatment of MP3 padding, so exact values are used only for the API that produced them. The scoped CPython 3.13 standard-library index documents no MP3 or ID3v2 parser.",
+      "third_party_evidence": "data/python/mp3_id3v2/parsers.json",
+      "third_party_control_results": "data/python/mp3_id3v2/verification.json",
+      "runtime_evidence": "data/python/mp3_id3v2/standard.json",
+      "registry_snapshot": "data/python/mp3_id3v2/registry-snapshot.json",
+      "unresolved_leads": "data/python/mp3_id3v2/leads.json"
     },
     {
       "ecosystem": "rust",

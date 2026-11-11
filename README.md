@@ -4,7 +4,8 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, ASCII PNM, ZIP, WAV, and PDF, and an explicit 88-cell work matrix. The other 66 cells
+Python × PNG, ASCII PNM, ZIP, WAV, PDF, and MP3 with ID3v2, and an explicit
+88-cell work matrix. The other 65 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -65,6 +66,9 @@ uv pip sync adapters/python/pdf/requirements-pdfx.lock --python adapters/python/
 uv venv --python python3.13 adapters/python/pdf/.venv_slate
 uv pip sync adapters/python/pdf/requirements-slate3k.lock --python adapters/python/pdf/.venv_slate/bin/python --require-hashes
 python3 scripts/verify_python_pdf.py
+uv venv --python python3.13 adapters/python/mp3_id3v2/.venv
+uv pip sync adapters/python/mp3_id3v2/requirements.lock --python adapters/python/mp3_id3v2/.venv/bin/python --require-hashes
+python3 scripts/verify_python_mp3_id3v2.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -280,6 +284,15 @@ the recorded host used Poppler 26.09.0. The ranking distinguishes text,
 metadata, layout, and page-rendering results and names shared parser engines.
 The scoped CPython standard-library inventory found no PDF-aware input API.
 
+`verify_python_mp3_id3v2.py` verifies **20/20 third-party package paths** on
+the tagged one-second MP3 control. The hash-locked Python 3.13 environment
+includes ID3 tag readers and MP3 audio decoders; their exact scope and shared
+Mutagen, libsndfile, FFmpeg, SDL_mixer, TagLib, and MediaInfo families are
+labeled in the ranking. `ffmpeg-python` and `pydub` use local FFmpeg tools;
+MoviePy uses its pinned imageio-ffmpeg dependency. The verifier records the
+external FFprobe and libsndfile versions. CPython 3.13 documents no MP3 or
+ID3v2 input API in its standard library.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -301,12 +314,13 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, WAV, or PDF discovery, run
+For Python PNG, ASCII PNM, ZIP, WAV, PDF, or MP3 with ID3v2 discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
 `python3 scripts/snapshot_pypi_wav.py`, or
-`python3 scripts/snapshot_pypi_pdf.py`. Each
+`python3 scripts/snapshot_pypi_pdf.py`, or
+`python3 scripts/snapshot_pypi_mp3_id3v2.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -451,6 +465,12 @@ or quality judgment.
   PDF engines are labeled, and the
   [standard-library inventory](data/python/pdf/standard.json) records the
   scoped absence of a CPython PDF parser API.
+- [Python × MP3 with ID3v2 ranking](data/python/mp3_id3v2/ranking.md):
+  20 package paths verified on the tagged MP3 control. Nine bounded PyPI
+  name filters saved 840 hits and 741 distinct names; six plausible leads
+  remain unresolved. Tag readers and audio decoders have separate scope labels,
+  and the [standard-library inventory](data/python/mp3_id3v2/standard.json)
+  records the scoped CPython finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -501,6 +521,9 @@ uncertainty.
 - `data/python/pdf/`: bounded PyPI leads, three pinned Python environments,
   within-Python downloads, verified text/metadata/layout/rendering scopes,
   control outputs, and the separate standard-library finding.
+- `data/python/mp3_id3v2/`: bounded PyPI leads, a hash-locked Python
+  environment, within-Python downloads, tag and audio scopes, control outputs,
+  and the separate standard-library finding.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
