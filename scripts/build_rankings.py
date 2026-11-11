@@ -73,7 +73,8 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"go/{format_name}: {len(ranked)} verified packages ranked")
 
-    for format_name, label in (("png", "PNG"), ("ascii_pnm", "ASCII PNM"),
+    for format_name, label in (("png", "PNG"), ("ascii_ply", "ASCII PLY"),
+                               ("ascii_pnm", "ASCII PNM"),
                                ("zip", "ZIP"), ("wav", "WAV"), ("pdf", "PDF"),
                                ("mp3_id3v2", "MP3 with ID3v2"), ("mp4", "MP4"),
                                ("http11", "HTTP/1.1"), ("svg", "SVG"),

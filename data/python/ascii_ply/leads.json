@@ -1,0 +1,86 @@
+[
+  {
+    "name": "gsply",
+    "status": "unresolved",
+    "reason": "The pinned 0.4.6 plyread(path) API rejected the valid ordinary ASCII PLY triangle as an unsupported Gaussian Splatting PLY. A separate valid ASCII splat control was not established, so its narrower ASCII coverage is unknown.",
+    "source": "https://pypi.org/project/gsply/0.4.6/"
+  },
+  {
+    "name": "mdal",
+    "status": "unresolved",
+    "reason": "The 1.1.0 project documents a Stanford PLY ASCII Mesh driver, but its source build failed because native MDAL headers and library were absent. No runnable control result was established.",
+    "source": "https://pypi.org/project/mdal/1.1.0/"
+  },
+  {
+    "name": "pylmesh",
+    "status": "unresolved",
+    "reason": "The project documents ASCII PLY import through load_mesh(path), but version 0.1.3 has no macOS wheel and its source build was not attempted in this batch.",
+    "source": "https://pypi.org/project/pylmesh/0.1.3/"
+  },
+  {
+    "name": "fury",
+    "status": "unresolved",
+    "reason": "Older official documentation documents io.load_polydata(path) for PLY, while the reviewed 2.1.0 reference no longer lists that function. An exact current local API and valid-control result remain unestablished.",
+    "source": "https://fury.gl/latest/reference/fury.io.html"
+  },
+  {
+    "name": "spectra3D",
+    "status": "unresolved",
+    "reason": "The project documents read_ply(path) for a specialized spectral PLY, but release license evidence and a valid-control result were not established.",
+    "source": "https://pypi.org/project/spectra3D/"
+  },
+  {
+    "name": "ply3d",
+    "status": "unresolved",
+    "reason": "The summary says it handles PLY 3D geometries, but no documented exact local input API or valid-control result was established.",
+    "source": "https://pypi.org/project/ply3d/"
+  },
+  {
+    "name": "open3d-cpu",
+    "status": "unresolved",
+    "reason": "This Open3D distribution has no matching macOS ARM wheel in the reviewed release; it was not built or tested here. It would share the Open3D parser family if verified.",
+    "source": "https://pypi.org/project/open3d-cpu/"
+  },
+  {
+    "name": "pyply",
+    "status": "excluded",
+    "reason": "Its project description says it is functional data manipulation inspired by R, not a Polygon File Format input API.",
+    "source": "https://pypi.org/project/pyply/"
+  },
+  {
+    "name": "ply",
+    "status": "excluded",
+    "reason": "This distribution is Python Lex & Yacc; PLY is its name, not the 3D file format it parses.",
+    "source": "https://pypi.org/project/ply/"
+  },
+  {
+    "name": "plydata",
+    "status": "excluded",
+    "reason": "It implements dplyr-like DataFrame operations, not a Polygon File Format reader.",
+    "source": "https://pypi.org/project/plydata/"
+  },
+  {
+    "name": "mesh-reducer",
+    "status": "excluded",
+    "reason": "Pinned 2.0.2 load_mesh(path, clusters=1) raised a Rust PanicException on the valid ASCII triangle after reporting the standard vertex_indices face property as unexpected. It produced no correct parse result on this control.",
+    "source": "https://pypi.org/project/mesh-reducer/2.0.2/"
+  },
+  {
+    "name": "meshlib",
+    "status": "excluded",
+    "reason": "The publisher explicitly calls MeshLib source-available and restricts commercial use. It does not meet this collection's open-source release requirement.",
+    "source": "https://github.com/MeshInspector/MeshLib/blob/master/LICENSE"
+  },
+  {
+    "name": "pointcloudlib",
+    "status": "excluded",
+    "reason": "The reviewed package documents depth estimation and 3D modeling, but no exact PLY input API. Its import also failed because the published dependency list omitted transformers.",
+    "source": "https://pypi.org/project/pointcloudlib/"
+  },
+  {
+    "name": "ply-visualizer",
+    "status": "excluded",
+    "reason": "The reviewed Python package exposes viewer/session APIs that hand files to its browser engine; no Python library API returning observable PLY vertices or faces was established.",
+    "source": "https://pypi.org/project/ply-visualizer/0.4.1/"
+  }
+]

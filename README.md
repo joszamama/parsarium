@@ -4,16 +4,16 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, and ASCII PNM,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
+Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, and an explicit 88-cell work
-matrix. There are 28 cells at the 20-parser target and 60
+matrix. There are 29 cells at the 20-parser target and 59
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 ## Reproduce the verified cells
 
-The recorded run used macOS arm64, Python 3.14.7, Node.js 26.10.0, npm 11.19.1,
+The recorded runs used macOS arm64 and Python 3.10–3.14 by cell, plus Node.js 26.10.0, npm 11.19.1,
 and Chromium 153.0.8010.12 through Playwright 1.63.0. The npm lockfile pins
 all packages and integrity hashes. From the repository root:
 
@@ -51,6 +51,10 @@ python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
 uv pip sync adapters/python/png/requirements.lock --python adapters/python/png/.venv/bin/python --require-hashes
 python3 scripts/verify_python_png.py
+brew install assimp
+uv venv --python python3.12 adapters/python/ascii_ply/.venv
+CMAKE_POLICY_VERSION_MINIMUM=3.5 uv pip sync adapters/python/ascii_ply/requirements.lock --python adapters/python/ascii_ply/.venv/bin/python --require-hashes
+python3 scripts/verify_python_ascii_ply.py
 uv venv --python python3.13 adapters/python/ascii_pnm/.venv
 uv pip sync adapters/python/ascii_pnm/requirements.lock --python adapters/python/ascii_pnm/.venv/bin/python --require-hashes
 python3 scripts/verify_python_ascii_pnm.py
@@ -279,6 +283,15 @@ and wxPython/Tk need a GUI session. `napari-netpbmfile` omits a declared
 `napari-plugin-engine` dependency; it is pinned explicitly in
 `requirements.in`.
 
+`verify_python_ascii_ply.py` verifies **21/21 package paths** on a valid
+three-vertex, one-triangle ASCII PLY 1.0 control (SHA-256
+`d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378`).
+The Python 3.12.14 environment is hash locked. `openmesh` needs CMake and the
+stated policy setting when built from source; `pyassimp` loads Homebrew Assimp
+6.0.6 on the recorded macOS host. PyVista and vedo use VTK, two packages use
+miniply, and two use Assimp; the ranking labels these shared families. The
+scoped CPython 3.12 library reference documents no PLY parser API.
+
 `verify_python_zip.py` verifies **20/20 third-party package paths** and
 **4/4 CPython standard-library APIs** on valid local ZIP controls. The main
 control has a DEFLATE-compressed `hello.txt`; the pinned Zstandard wrapper
@@ -380,8 +393,9 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, SVG, or Matrix Market discovery, run
+For Python PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, SVG, or Matrix Market discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
+`python3 scripts/snapshot_pypi_ascii_ply.py`, or
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
 `python3 scripts/snapshot_pypi_wav.py`, or
@@ -516,6 +530,12 @@ or quality judgment.
   One verified package lacks a PyPI Stats figure and is left unranked. The
   [standard/runtime inventory](data/python/png/standard.json) separately
   verifies Tkinter `PhotoImage` and records its platform limit.
+- [Python × ASCII PLY ranking](data/python/ascii_ply/ranking.md): 21 package
+  paths parsed the triangle control. Twelve bounded PyPI name windows saved
+  668 hits and 666 distinct names; seven plausible leads remain unresolved.
+  VTK, miniply, and Assimp wrappers are grouped by parser family. The
+  [standard-library inventory](data/python/ascii_ply/standard.json) records
+  the scoped CPython finding.
 - [Python × ASCII PNM ranking](data/python/ascii_pnm/ranking.md): 20 package
   paths verified on valid P3 or P2 controls, with pixel or header scopes
   labeled. Twelve bounded PyPI name filters saved 675 hits and 669 distinct
@@ -601,6 +621,9 @@ uncertainty.
   within-Python download signals, verified ranking, standard-library
   inventory, and control outputs. Python dependencies and the adapter live
   under `adapters/python/png/`.
+- `data/python/ascii_ply/`: bounded PyPI leads, pinned releases, download
+  metrics, control results, ranking, and the scoped CPython inventory. The
+  adapter and hash-locked dependencies live under `adapters/python/ascii_ply/`.
 - `data/python/ascii_pnm/`: the same evidence layout for ASCII PNM, with
   P3/P2 control output and the Tk runtime candidate result. Python adapters
   and pinned dependencies live under `adapters/python/ascii_pnm/`.

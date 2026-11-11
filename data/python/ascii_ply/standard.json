@@ -1,0 +1,15 @@
+{
+  "ecosystem": "Python",
+  "format": "ASCII PLY",
+  "status": "none_documented_within_scoped_cpython_library_reference",
+  "verified_apis": [],
+  "official_documentation_scope": [
+    "https://docs.python.org/3.12/library/",
+    "https://docs.python.org/3.12/library/fileformats.html",
+    "https://docs.python.org/3.12/library/io.html",
+    "https://docs.python.org/3.12/library/struct.html",
+    "https://docs.python.org/3.12/library/tkinter.html#images"
+  ],
+  "finding": "The CPython 3.12.14 library reference documents no PLY mesh reader. io and struct expose generic bytes or caller-specified layouts, not PLY elements, vertices, or faces. Tk PhotoImage documents image formats, not PLY meshes. There was no documented format-aware standard/runtime candidate to verify on the ASCII triangle control.",
+  "limit": "Scoped to the CPython 3.12 library reference and the local 3.12.14 runtime; optional third-party system libraries and other Python distributions are outside this standard-library finding."
+}
