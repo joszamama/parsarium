@@ -1,0 +1,60 @@
+{
+  "ecosystem": "Python",
+  "format": "HTTP/1.1",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "name": "http.client.HTTPConnection.getresponse",
+      "runtime": "CPython 3.13.1 standard library",
+      "api": "http.client.HTTPConnection.request() and getresponse() over a local socket",
+      "documentation": "https://docs.python.org/3.13/library/http.client.html#http.client.HTTPConnection.getresponse",
+      "adapter": "adapters/python/http11/standard.py",
+      "control": "controls/http11/response.http",
+      "expected": {
+        "status": 200,
+        "content_type": "text/plain",
+        "body": "parsarium"
+      },
+      "result": "data/python/http11/verification.json"
+    },
+    {
+      "name": "http.server.BaseHTTPRequestHandler",
+      "runtime": "CPython 3.13.1 standard library",
+      "api": "http.server.BaseHTTPRequestHandler(local socket, client address, server) parses and dispatches request",
+      "documentation": "https://docs.python.org/3.13/library/http.server.html#http.server.BaseHTTPRequestHandler",
+      "adapter": "adapters/python/http11/standard.py",
+      "control": "controls/http11/request.http",
+      "expected": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "host": "example.test"
+      },
+      "result": "data/python/http11/verification.json"
+    },
+    {
+      "name": "http.client.parse_headers",
+      "runtime": "CPython 3.13.1 standard library",
+      "api": "http.client.parse_headers(local binary stream positioned after HTTP start-line)",
+      "documentation": "https://docs.python.org/3.13/library/http.client.html#http.client.parse_headers",
+      "adapter": "adapters/python/http11/standard.py",
+      "control": "controls/http11/response.http",
+      "expected": {
+        "content_type": "text/plain",
+        "content_length": 9
+      },
+      "result": "data/python/http11/verification.json"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "CPython 3.13.1 generic file and socket I/O",
+      "official_documentation_scope": [
+        "https://docs.python.org/3.13/library/index.html",
+        "https://docs.python.org/3.13/library/io.html",
+        "https://docs.python.org/3.13/library/socket.html"
+      ],
+      "finding": "Raw file and socket reads provide bytes but do not parse HTTP start-lines, fields, status, or body framing by themselves."
+    }
+  ],
+  "limit": "The request and response controls prove basic HTTP/1.1 message parsing only. parse_headers intentionally omits the start-line; the HTTPConnection and BaseHTTPRequestHandler results use local socket pairs, never external hosts."
+}

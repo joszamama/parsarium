@@ -4,8 +4,8 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, and MP4, and an explicit
-88-cell work matrix. The other 64 cells
+Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, and HTTP/1.1,
+and an explicit 88-cell work matrix. The other 63 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -72,6 +72,11 @@ python3 scripts/verify_python_mp3_id3v2.py
 uv venv --python python3.13 adapters/python/mp4/.venv
 uv pip sync adapters/python/mp4/requirements.lock --python adapters/python/mp4/.venv/bin/python --require-hashes
 python3 scripts/verify_python_mp4.py
+uv venv --python python3.13 adapters/python/http11/.venv
+uv pip sync adapters/python/http11/requirements.lock --python adapters/python/http11/.venv/bin/python --require-hashes
+uv venv --python python3.10 adapters/python/http11/.venv310
+uv pip sync adapters/python/http11/requirements-py310.lock --python adapters/python/http11/.venv310/bin/python --require-hashes
+python3 scripts/verify_python_http11.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -304,6 +309,16 @@ Several wrappers need local FFmpeg/FFprobe tools; the verifier records the
 external FFprobe version. The scoped CPython 3.13 standard-library inventory
 found no MP4-aware input API.
 
+`verify_python_http11.py` verifies **22/22 third-party package paths** and
+**3/3 CPython 3.13 standard-library APIs** on valid local HTTP/1.1 request
+and response controls. The main hash-locked environment uses Python 3.13;
+`http-parser` needs the separate Python 3.10 lock because its C extension
+does not build on newer versions here. The ranking identifies shared h11
+and picohttpparser families. Two packages parse header fields only, and
+`websockets` parses a handshake request head; their scope is explicit in
+the catalogue. The standard APIs are `http.client.HTTPConnection.getresponse`,
+`http.server.BaseHTTPRequestHandler`, and `http.client.parse_headers`.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -325,14 +340,15 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, or MP4 discovery, run
+For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, or HTTP/1.1 discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
 `python3 scripts/snapshot_pypi_wav.py`, or
 `python3 scripts/snapshot_pypi_pdf.py`, or
 `python3 scripts/snapshot_pypi_mp3_id3v2.py`, or
-`python3 scripts/snapshot_pypi_mp4.py`. Each
+`python3 scripts/snapshot_pypi_mp4.py`, or
+`python3 scripts/snapshot_pypi_http11.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)

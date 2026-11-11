@@ -1,0 +1,62 @@
+[
+  {
+    "name": "rawhttpy",
+    "status": "unresolved",
+    "reason": "Version 0.1 accepts a raw request string, but raised ValueError on the valid CRLF request control. Converting the wire control to LF-only input would change the tested format, so it is not counted.",
+    "source": "https://pypi.org/project/rawhttpy/0.1/"
+  },
+  {
+    "name": "fw-http-parser",
+    "status": "unresolved",
+    "reason": "Version 0.3.2 exposes HttpParser(data), but its PyPI description gives no documented local input API and the project homepage is unavailable; a local passing probe alone is insufficient.",
+    "source": "https://pypi.org/project/fw-http-parser/0.3.2/"
+  },
+  {
+    "name": "httpparser",
+    "status": "unresolved",
+    "reason": "Version 0.3.12 C extension failed to build on Python 3.13, 3.11, and 3.10 on this ARM host; no local control result was established.",
+    "source": "https://pypi.org/project/httpparser/0.3.12/"
+  },
+  {
+    "name": "aiohttp",
+    "status": "unresolved",
+    "reason": "Official docs confirm an HTTP request parser but the low-level local feed_data parser API was not established as a documented public API and was not run on the control.",
+    "source": "https://docs.aiohttp.org/en/stable/changes.html"
+  },
+  {
+    "name": "mitmproxy",
+    "status": "unresolved",
+    "reason": "The project parses HTTP traffic, but a pinned documented local wire-byte API and control result were not established in this batch.",
+    "source": "https://docs.mitmproxy.org/stable/"
+  },
+  {
+    "name": "http-content-parser",
+    "status": "excluded",
+    "reason": "Project description covers HTTP content payloads and OpenAPI/Postman data, not HTTP/1.1 wire message parsing.",
+    "source": "https://pypi.org/project/http-content-parser/0.0.29/"
+  },
+  {
+    "name": "http-raw",
+    "status": "excluded",
+    "reason": "Documented request(raw=...) API sends a request to a remote URL and returns a response; it does not expose a local parsed-message result.",
+    "source": "https://pypi.org/project/http-raw/"
+  },
+  {
+    "name": "requests-raw",
+    "status": "excluded",
+    "reason": "Documented raw(url, data) API sends a raw request over a socket; no local parse output is documented.",
+    "source": "https://pypi.org/project/requests-raw/"
+  },
+  {
+    "name": "h1client",
+    "status": "excluded",
+    "reason": "The package wraps HTTP client transport and h1parser but documents no independent local raw-message input API; h1parser is already counted.",
+    "source": "https://pypi.org/project/h1client/"
+  },
+  {
+    "name": "http11",
+    "status": "unresolved",
+    "reason": "The project name appears in the PyPI name index but has no installable release in the current registry; no release can be pinned or tested.",
+    "source": "https://pypi.org/project/http11/"
+  }
+]
