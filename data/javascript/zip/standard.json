@@ -1,0 +1,24 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "ZIP",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "runtime": "Node.js 26.10.0",
+      "api": "new zlib.ZipBuffer(Buffer); zip.keys(); zip.get(name).content()",
+      "documentation": "https://nodejs.org/docs/v26.10.0/api/zlib.html#class-zlibzipbuffer",
+      "adapter": "adapters/javascript/zip_node.mjs",
+      "control": "controls/zip/hello.zip",
+      "result": "data/javascript/zip/verification.json",
+      "stability": "Experimental in Node.js 26.10.0"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "Browser Compression Streams API",
+      "official_documentation_scope": ["https://compression.spec.whatwg.org/"],
+      "finding": "The standard API supports deflate, deflate-raw, and gzip streams, not the ZIP archive container or its central directory."
+    }
+  ],
+  "limit": "Other JavaScript runtimes and browser APIs have not been exhaustively inventoried."
+}

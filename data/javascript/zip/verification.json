@@ -1,0 +1,132 @@
+{
+  "checked_at_utc": "2026-11-11T15:34:05.560Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v26.10.0",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected": {
+    "entries": [
+      "hello.txt"
+    ],
+    "content": "parsarium\n"
+  },
+  "third_party": [
+    {
+      "package": "jszip",
+      "version": "3.10.2",
+      "command": "node adapters/javascript/zip.mjs jszip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "adm-zip",
+      "version": "0.6.1",
+      "command": "node adapters/javascript/zip.mjs adm-zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "yauzl",
+      "version": "3.4.0",
+      "command": "node adapters/javascript/zip.mjs yauzl controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "unzipper",
+      "version": "0.12.5",
+      "command": "node adapters/javascript/zip.mjs unzipper controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "fflate",
+      "version": "0.8.3",
+      "command": "node adapters/javascript/zip.mjs fflate controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "@zip.js/zip.js",
+      "version": "2.24.0",
+      "command": "node adapters/javascript/zip.mjs @zip.js/zip.js controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "node-stream-zip",
+      "version": "1.16.0",
+      "command": "node adapters/javascript/zip.mjs node-stream-zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    },
+    {
+      "package": "extract-zip",
+      "version": "2.0.1",
+      "command": "node adapters/javascript/zip.mjs extract-zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entries": [
+          "hello.txt"
+        ],
+        "content": "parsarium\n"
+      },
+      "error": null
+    }
+  ],
+  "runtime": {
+    "runtime": "Node.js v26.10.0",
+    "command": "node adapters/javascript/zip_node.mjs controls/zip/hello.zip",
+    "pass": true,
+    "output": {
+      "entries": [
+        "hello.txt"
+      ],
+      "content": "parsarium\n"
+    },
+    "error": null
+  }
+}
