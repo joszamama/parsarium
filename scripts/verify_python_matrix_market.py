@@ -54,7 +54,7 @@ def main():
                                         text=True, check=True).stdout.strip(),
         "controls": {path: control_digest(ROOT / path)
                      for path in controls},
-        "control_meaning": "Valid NIST Matrix Market coordinate controls: a 2×3 real matrix, a 3×3 graph adjacency matrix, and a 10x directory with a compressed 2×3 integer matrix plus feature and barcode annotations",
+        "control_meaning": "Valid NIST Matrix Market coordinate controls: a 2×3 real matrix, a 3×3 graph adjacency matrix, a 3×3 real symmetric diagonal matrix, and a 10x directory with a compressed 2×3 integer matrix plus feature and barcode annotations",
         "third_party": third_party,
         "runtime": [],
     }

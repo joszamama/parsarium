@@ -548,8 +548,8 @@ or quality judgment.
   Shared parser families and the conditional Tk 9.0 runtime finding are
   recorded in the [cell record](data/python/svg/cell.json).
 - [Python × Matrix Market ranking](data/python/matrix_market/ranking.md):
-  twelve verified package paths so far. Thirteen bounded PyPI name filters
-  saved 379 hits and 378 distinct names; three explored leads remain
+  fourteen verified package paths so far. Thirteen bounded PyPI name filters
+  saved 379 hits and 378 distinct names; five explored leads remain
   unresolved. The [cell record](data/python/matrix_market/cell.json) marks
   this batch below target and names the untested format variants.
 

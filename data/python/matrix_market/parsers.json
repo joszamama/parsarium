@@ -364,5 +364,64 @@
         ]
       ]
     }
+  },
+  {
+    "name": "dyng",
+    "version": "0.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/project/dyng/0.3.0/",
+    "input_api": "dyng.io.read_matrix_market(local_mtx_path, weights=\"none\")",
+    "documentation": "https://dyng-dev.github.io/dyng/api/cli.html",
+    "scope": "Matrix Market coordinate graph topology",
+    "family": "dynG C++ Matrix Market graph reader",
+    "control": "controls/matrix_market/graph-general.mtx",
+    "expected_output": {
+      "vertices": 3,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "name": "sdos",
+    "version": "0.1.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/project/sdos/0.1.0/",
+    "input_api": "sdos.io.read_matrix(local_mtx_path, verbose=False)",
+    "documentation": "https://pypi.org/project/sdos/0.1.0/",
+    "api_documentation": "The pinned sdos 0.1.0 wheel supplies a read_matrix docstring documenting a local file and fmt=mm; the PyPI release description documents Matrix Market input via sdos.dos(path).",
+    "scope": "Matrix Market coordinate real symmetric matrix values",
+    "family": "sdos Matrix Market dispatch over scipy.io.mmread",
+    "control": "controls/matrix_market/real-symmetric.mtx",
+    "expected_output": {
+      "shape": [
+        3,
+        3
+      ],
+      "values": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          3
+        ]
+      ]
+    }
   }
 ]

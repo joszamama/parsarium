@@ -74,6 +74,18 @@ def parse(name, path):
         import pipette
         return dense_result(pipette.read(str(path)).toarray())
 
+    if name == "dyng":
+        import dyng
+        graph = dyng.io.read_matrix_market(str(path), weights="none")
+        sources, targets, _ = graph.edges()
+        return {"vertices": graph.num_vertices,
+                "edges": sorted([[int(source), int(target)]
+                                 for source, target in zip(sources, targets)])}
+
+    if name == "sdos":
+        from sdos.io import read_matrix
+        return dense_result(read_matrix(str(path), verbose=False).toarray())
+
     raise ValueError(f"unknown parser: {name}")
 
 

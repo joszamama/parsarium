@@ -1,4 +1,4 @@
-"""Generate two small valid NIST Matrix Market coordinate matrices."""
+"""Generate small valid NIST Matrix Market coordinate controls."""
 
 from pathlib import Path
 import gzip
@@ -20,6 +20,14 @@ CONTROLS = {
         "3 3 2\n"
         "1 2 7.0\n"
         "2 3 5.0\n"
+    ),
+    "real-symmetric.mtx": (
+        "%%MatrixMarket matrix coordinate real symmetric\n"
+        "% Parsarium: three diagonal entries in a symmetric matrix\n"
+        "3 3 3\n"
+        "1 1 1\n"
+        "2 2 2\n"
+        "3 3 3\n"
     ),
 }
 
