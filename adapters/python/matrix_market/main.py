@@ -102,6 +102,30 @@ def parse(name, path):
         from dotools_py.io import read_mtx
         return dense_result(read_mtx(str(path)).X.toarray())
 
+    if name == "ambidose":
+        from ambidose.io import read_10x_mtx
+        data = read_10x_mtx(str(path))
+        return {"shape": list(data.shape),
+                "values": data.X.toarray().tolist(),
+                "cells": list(data.obs_names),
+                "genes": list(data.var_names)}
+
+    if name == "piaso-tools":
+        import piaso
+        data = piaso.pp.read_10x_mtx(str(path))
+        return {"shape": list(data.shape),
+                "values": data.X.toarray().tolist(),
+                "cells": list(data.obs_names),
+                "genes": list(data.var_names)}
+
+    if name == "scinterop":
+        import scinterop
+        data = scinterop.mtx.read_mtx(str(path))
+        return {"shape": list(data.X.shape),
+                "values": data.X.toarray().tolist(),
+                "cells": list(data.obs.index),
+                "genes": list(data.var.index)}
+
     raise ValueError(f"unknown parser: {name}")
 
 

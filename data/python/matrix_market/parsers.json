@@ -521,5 +521,128 @@
         ]
       ]
     }
+  },
+  {
+    "name": "ambidose",
+    "version": "0.5.13",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/project/ambidose/0.5.13/",
+    "input_api": "ambidose.io.read_10x_mtx(local_10x_directory)",
+    "documentation": "https://ambidose.readthedocs.io/en/latest/api/index.html",
+    "scope": "10x Matrix Market count matrix plus feature and barcode annotations",
+    "family": "AmbiDose 10x reader over Scanpy/AnnData/SciPy",
+    "control": "controls/matrix_market/tenx_v3",
+    "expected_output": {
+      "shape": [
+        3,
+        2
+      ],
+      "values": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cells": [
+        "CELL-A",
+        "CELL-B",
+        "CELL-C"
+      ],
+      "genes": [
+        "GeneA",
+        "GeneB"
+      ]
+    },
+    "discovery_query": "site:readthedocs.io \"read_10x_mtx\" python package"
+  },
+  {
+    "name": "piaso-tools",
+    "version": "1.2.6",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/project/piaso-tools/1.2.6/",
+    "input_api": "piaso.pp.read_10x_mtx(local_10x_directory)",
+    "documentation": "https://piaso.org/api/preprocessing/",
+    "scope": "10x Matrix Market count matrix plus feature and barcode annotations",
+    "family": "PIASO 10x reader over scipy.io.mmread",
+    "control": "controls/matrix_market/tenx_v3",
+    "expected_output": {
+      "shape": [
+        3,
+        2
+      ],
+      "values": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cells": [
+        "CELL-A",
+        "CELL-B",
+        "CELL-C"
+      ],
+      "genes": [
+        "GeneA",
+        "GeneB"
+      ]
+    },
+    "discovery_query": "\"read_10x_mtx\" \"pip install\" -scanpy -scab -muon -ambidose -DOTools"
+  },
+  {
+    "name": "scinterop",
+    "version": "0.2.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/project/scinterop/0.2.0/",
+    "input_api": "scinterop.mtx.read_mtx(local_10x_directory)",
+    "documentation": "https://pypi.org/project/scinterop/0.2.0/",
+    "scope": "10x Matrix Market count matrix plus feature and barcode annotations",
+    "family": "scinterop 10x adapter over scipy.io.mmread",
+    "control": "controls/matrix_market/tenx_v3",
+    "expected_output": {
+      "shape": [
+        3,
+        2
+      ],
+      "values": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cells": [
+        "CELL-A",
+        "CELL-B",
+        "CELL-C"
+      ],
+      "genes": [
+        "GENE-1",
+        "GENE-2"
+      ]
+    },
+    "discovery_query": "site:pypi.org/project \"Matrix Market\" \"read_mtx\""
   }
 ]

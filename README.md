@@ -5,8 +5,8 @@ specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
 Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
-plus an in-progress Python × Matrix Market cell and an explicit 88-cell work
-matrix. There are 26 cells at the 20-parser target, one below target, and 61
+Python × Matrix Market, and an explicit 88-cell work
+matrix. There are 27 cells at the 20-parser target and 61
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -341,18 +341,20 @@ standard-library inventory counts no verified SVG API. Official `tkinter`
 documentation describes conditional SVG reading with Tk 9.0, while the
 recorded runtime has Tk 8.6, so that path remains unresolved.
 
-`verify_python_matrix_market.py` currently verifies **17/17 recorded third-party
-package paths**, leaving **3 to reach the working goal**. The controls are
+`verify_python_matrix_market.py` currently verifies **20/20 recorded third-party
+package paths**, meeting the working goal. The controls are
 valid NIST coordinate matrices: a 2×3 sparse real matrix, a 3×3 graph
 adjacency matrix, and a 10x count matrix with feature and barcode files.
 The ranking records shared SciPy/fast_matrix_market implementations and leaves
-an unavailable download metric unranked. `scprep` runs in a separate Python
+unavailable download metrics unranked. `scprep` runs in a separate Python
 3.10 environment because its pinned pandas dependency lacks a compatible
 Python 3.13 wheel. `mtl5` also uses Python 3.10 because its Python 3.13
 source build lacks a required header. `scab` and `DOTools-py` pass in the
 Python 3.13 environment after building `annoy` with `CXXFLAGS='-include functional'`.
-Three documented or plausible leads remain unresolved. This cell remains in
-progress; the scoped CPython 3.13 standard-library inventory found no
+`piaso-tools` 1.2.6 builds its Rust extension from source on this macOS arm64
+host, so reproducing that environment requires Cargo.
+Three documented or plausible leads remain unresolved; discovery remains partial.
+The scoped CPython 3.13 standard-library inventory found no
 Matrix Market-aware input API.
 
 To refresh *discovery and popularity* data, run
@@ -549,10 +551,11 @@ or quality judgment.
   Shared parser families and the conditional Tk 9.0 runtime finding are
   recorded in the [cell record](data/python/svg/cell.json).
 - [Python × Matrix Market ranking](data/python/matrix_market/ranking.md):
-  seventeen verified package paths so far. Thirteen bounded PyPI name filters
+  twenty verified package paths. Thirteen bounded PyPI name filters
   saved 379 hits and 378 distinct names; three explored leads remain
-  unresolved. The [cell record](data/python/matrix_market/cell.json) marks
-  this batch below target and names the untested format variants.
+  unresolved. Targeted documentation searches found three additional readers.
+  The [cell record](data/python/matrix_market/cell.json) names the untested
+  format variants.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the

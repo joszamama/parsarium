@@ -1201,10 +1201,10 @@
     {
       "ecosystem": "python",
       "format": "matrix_market",
-      "status": "verified_below_target_in_progress",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 17,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "project name contains 'matrix-market'",
@@ -1225,12 +1225,20 @@
       "search_hits_recorded": 379,
       "unique_search_hits": 378,
       "unresolved_documentation_leads": 3,
-      "uncertainty": "Only 17 distinct package paths have passed valid Matrix Market controls; 3 more are needed for the working goal of 20. Thirteen case-insensitive PyPI Simple index name filters retained the first 100 alphabetical matches per term, saving 379 hits and 378 distinct names. These windows are not popularity-ranked and miss documented projects without matching names. Three explored leads remain unresolved: pysparse and sppy builds, and vectorphile lacking a documented input API. fast_mtx_reader was excluded after a valid control produced an incorrect matrix. Verified rows include wrappers over SciPy/fast_matrix_market, labeled by family rather than claimed as independent parser cores. The controls cover coordinate real general and symmetric matrices, basic graph topology, and one 10x integer count matrix; array, pattern, and complex variants remain untested. The subgraphsearch last-month download metric is unavailable. scprep uses Python 3.10 because its pinned pandas dependency lacks a Python 3.13 wheel; mtl5 uses a Python 3.10 macOS wheel because its Python 3.13 source build failed on a missing hwy/highway.h header; scprep's pinned source LICENSE is MIT despite conflicting PyPI metadata. Discovery is still in progress; this cell has not met the user target.",
+      "uncertainty": "Twenty distinct package paths have passed valid Matrix Market controls, meeting the working goal of 20; the original ceiling remains 30. Thirteen case-insensitive PyPI Simple index name filters retained the first 100 alphabetical matches per term, saving 379 hits and 378 distinct names. These windows are not popularity-ranked and miss documented projects without matching names; targeted documentation searches found AmbiDose, PIASO, and scinterop outside the name windows. Three explored leads remain unresolved: pysparse and sppy builds, and vectorphile lacking a documented input API. fast_mtx_reader was excluded after a valid control produced an incorrect matrix. Verified rows include wrappers over SciPy/fast_matrix_market, labeled by family rather than claimed as independent parser cores. The controls cover coordinate real general and symmetric matrices, basic graph topology, and one 10x integer count matrix; array, pattern, and complex variants remain untested. Six last-month download metrics remain unranked: subgraphsearch and sdos returned HTTP 404; mtl5, scab, DOTools-py, and piaso-tools returned HTTP 429. No values were inferred. scprep uses Python 3.10 because its pinned pandas dependency lacks a Python 3.13 wheel; mtl5 uses a Python 3.10 macOS wheel because its Python 3.13 source build failed on a missing hwy/highway.h header; scprep's pinned source LICENSE is MIT despite conflicting PyPI metadata. The working target is met, but discovery remains partial and three plausible leads are unresolved.",
       "third_party_evidence": "data/python/matrix_market/parsers.json",
       "third_party_control_results": "data/python/matrix_market/verification.json",
       "runtime_evidence": "data/python/matrix_market/standard.json",
       "registry_snapshot": "data/python/matrix_market/registry-snapshot.json",
-      "unresolved_leads": "data/python/matrix_market/leads.json"
+      "unresolved_leads": "data/python/matrix_market/leads.json",
+      "documentation_search_queries": [
+        "site:readthedocs.io \"read_10x_mtx\" python package",
+        "\"read_10x_mtx\" \"pip install\" -scanpy -scab -muon -ambidose -DOTools",
+        "\"read_10x_mtx\" \"API reference\" \"Read\" -scanpy -muon -scab -ambidose -piaso -dotools",
+        "site:pypi.org/project \"Matrix Market\" \"read_mtx\""
+      ],
+      "documentation_search_date": "2026-11-11",
+      "documentation_search_limit": "Visible first-page web results; result count per query not guaranteed by the search tool."
     },
     {
       "ecosystem": "python",
