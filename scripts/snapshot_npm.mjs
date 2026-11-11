@@ -5,7 +5,8 @@ const cell = process.argv[2] ?? 'png';
 const querySets = {
   png: ['png', 'png decoder', 'png reader', 'png image'],
   zip: ['zip', 'zip archive', 'zip parser', 'zip reader'],
-  wav: ['wav', 'wav decoder', 'wav parser', 'wave audio reader']
+  wav: ['wav', 'wav decoder', 'wav parser', 'wave audio reader'],
+  pdf: ['pdf', 'pdf parser', 'pdf reader', 'pdf text extract']
 };
 if (!(cell in querySets)) throw new Error(`unsupported cell: ${cell}`);
 const out = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);

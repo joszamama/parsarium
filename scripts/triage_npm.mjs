@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 const cell = process.argv[2];
-if (!['png', 'zip', 'wav'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|wav');
+if (!['png', 'zip', 'wav', 'pdf'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|wav|pdf');
 const path = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);
 const snapshot = JSON.parse(await readFile(path));
 const parsers = JSON.parse(await readFile(new URL(`../data/javascript/${cell}/parsers.json`, import.meta.url)));
@@ -12,8 +12,10 @@ const relevant = cell === 'png'
   ? /\bpng\b|png[-.]|image (decoder|reader|parser|size)|image dimensions/i
   : cell === 'zip'
     ? /\bzip\b|zip[-.]|unzip|archive (reader|extractor|parser)/i
-    : /\bwav\b|wavefile|wave audio|audio (decoder|reader|parser|metadata)/i;
-const parseLikely = /decod|pars|read|load|extract|unzip|dimension|size|image|archive|audio|riff|wav/i;
+    : cell === 'wav'
+      ? /\bwav\b|wavefile|wave audio|audio (decoder|reader|parser|metadata)/i
+      : /\bpdf\b|pdf[-.]|portable document/i;
+const parseLikely = /decod|pars|read|load|extract|unzip|dimension|size|image|archive|audio|riff|wav|text|page|render|document/i;
 for (const search of snapshot.search) {
   for (const hit of search.hits) {
     if (!relevant.test(`${hit.name} ${hit.description}`) || !parseLikely.test(hit.description)) continue;
@@ -24,7 +26,9 @@ const extra = cell === 'png'
   ? ['canvas', '@napi-rs/canvas', 'skia-canvas', 'probe-image-size', '@loaders.gl/images', 'image-js']
   : cell === 'zip'
     ? ['decompress', 'decompress-unzip', 'pizzip', 'yauzl-promise', 'node-zip', 'unzip-stream', 'unzip', '@endo/zip', '@electron-internal/extract-zip', 'zip-lib', 'zipread', '7zip-min']
-    : ['wavefile', 'wav-decoder', 'node-wav', 'wav', 'music-metadata', 'music-metadata-browser', 'audio-decode', '@audio/decode', '@audio/decode-wav', 'get-audio-duration', 'mediainfo.js', '@uttori/audio-wave', 'riff-reader'];
+    : cell === 'wav'
+      ? ['wavefile', 'wav-decoder', 'node-wav', 'wav', 'music-metadata', 'music-metadata-browser', 'audio-decode', '@audio/decode', '@audio/decode-wav', 'get-audio-duration', 'mediainfo.js', '@uttori/audio-wave', 'riff-reader']
+      : ['pdfjs-dist', 'pdf-parse', 'pdf-lib', 'pdf2json', 'pdfreader', 'pdf-extraction', 'pdf-to-text', 'pdf-text-extract', 'pdf-extract', 'pdf-parser', 'mupdf', 'pdfjs', 'pdf-parse-new', 'pdfnative'];
 for (const name of extra) if (!seen.has(name)) seen.set(name, { name, description: 'Documentation lead; description not captured in registry search window.', first_query: 'project documentation', first_rank: null });
 
 const names = [...seen.keys()];

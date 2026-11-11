@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
-JavaScript × ZIP and WAV batches, and an explicit 88-cell work matrix. The other 85 cells
+JavaScript × ZIP, WAV, and PDF batches, and an explicit 88-cell work matrix. The other 84 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -22,6 +22,8 @@ npm run zip:control
 npm run zip:verify
 npm run wav:control
 npm run wav:verify
+npm run pdf:control
+npm run pdf:verify
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -54,9 +56,18 @@ readers are labeled in the ranking. Three header-reader packages report a
 duration inconsistent with the control's four samples, so their duration is
 not used as verification evidence.
 
+`pdf:control` creates a deterministic 696-byte PDF 1.4 file with one letter-size
+page, the title `Parsarium PDF control`, and searchable text `Parsarium`
+(SHA-256 `9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a`).
+The PDF adapter checks extracted text or documented page/title fields. The
+observed batch result is **22/22 third-party packages passing**. No PDF parser
+was found in the scoped Node.js core or browser JavaScript API documentation;
+the separate runtime record states those search limits. Browser PDF display
+alone does not expose a parsed PDF result to JavaScript.
+
 To refresh *discovery and popularity* data, run
-`node scripts/snapshot_npm.mjs png`, `zip`, or `wav`.
-Run `node scripts/triage_npm.mjs png`, `zip`, or `wav`
+`node scripts/snapshot_npm.mjs png`, `zip`, `wav`, or `pdf`.
+Run `node scripts/triage_npm.mjs png`, `zip`, `wav`, or `pdf`
 to refresh popularity-sorted **leads**; triage never verifies a parser.
 This is a separate, network-dependent operation that changes the dated registry
 snapshot; verification itself uses only locked local dependencies. npm's
@@ -70,7 +81,7 @@ name. It is an adoption proxy and can include automated downloads.
 
 The working goal is 20 verified third-party parsers per cell, with 30 as the
 original ceiling. The PNG and ZIP cells have **21 verified packages** each;
-the WAV cell has **22**. Packages verified after the twentieth row are kept in
+the WAV and PDF cells have **22** each. Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
@@ -92,10 +103,17 @@ or quality judgment.
   remain unresolved. The separate [runtime inventory](data/javascript/wav/standard.json)
   verifies Chromium's `OfflineAudioContext.decodeAudioData(ArrayBuffer)` on the
   same control, using the [Web Audio specification](https://www.w3.org/TR/webaudio-1.1/#dom-baseaudiocontext-decodeaudiodata).
+- [JavaScript × PDF ranking](data/javascript/pdf/ranking.md): 22 packages,
+  including text extraction, page metadata, and page count APIs. Four npm queries
+  saved the first 100 results each: 400 hits, 347 unique names. Twelve relevant
+  leads remain unresolved. Shared PDF.js wrappers are grouped by family. The
+  [runtime inventory](data/javascript/pdf/standard.json) documents the scoped
+  absence of a public PDF parsing API in Node.js core and browser standards.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
-[WAV cell record](data/javascript/wav/cell.json), state the actual counts,
+[WAV cell record](data/javascript/wav/cell.json) and
+[PDF cell record](data/javascript/pdf/cell.json), state the actual counts,
 search limits, and remaining uncertainty. Registry hits and download counts are
 not parser evidence; only the pinned APIs and successful control runs enter the
 rankings.
@@ -104,17 +122,17 @@ rankings.
 
 - `data/cells.json`: every ecosystem × format cell, with status, actual verified
   count, search limit, and uncertainty.
-- `data/javascript/{png,zip,wav}/registry-snapshot.json`: dated registry hits, pinned
+- `data/javascript/{png,zip,wav,pdf}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
-- `data/javascript/{png,zip,wav}/triage.json`: popularity-sorted discovery leads,
+- `data/javascript/{png,zip,wav,pdf}/triage.json`: popularity-sorted discovery leads,
   including unresolved names; the status distinguishes verified packages.
-- `data/javascript/{png,zip,wav}/parsers.json`: pinned packages, documented input APIs,
+- `data/javascript/{png,zip,wav,pdf}/parsers.json`: pinned packages, documented input APIs,
   parsing depth, licenses, and shared families.
-- `data/javascript/{png,zip,wav}/ranking.md`: generated rankings using only verified
+- `data/javascript/{png,zip,wav,pdf}/ranking.md`: generated rankings using only verified
   package rows and the recorded metric window.
 - `adapters/javascript/` and `controls/`: runnable local-input adapters and
   deterministic valid controls.
-- `data/javascript/{png,zip,wav}/verification.json` and `png/browser-verification.json`:
+- `data/javascript/{png,zip,wav,pdf}/verification.json` and `png/browser-verification.json`:
   observed outputs, environment, and pass/fail result.
 
 This collection does not contain malformed-input, security, or resource-use

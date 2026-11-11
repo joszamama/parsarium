@@ -47,7 +47,7 @@ def main() -> None:
         assert all(r["pass"] for r in runs)
         if cell["format"] == "png":
             assert read(f"{key}/browser-verification.json")["pass"]
-        else:
+        elif cell["verified_standard_or_runtime_count"]:
             assert results["runtime"]["pass"]
         assert cell["verified_standard_or_runtime_count"] == len(read(f"{key}/standard.json")["verified_apis"])
     print(f"Validated {len(matrix)} cells, {sum(c['status'] != 'not_started' for c in matrix)} with recorded evidence")

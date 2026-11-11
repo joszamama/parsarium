@@ -1,0 +1,19 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "PDF",
+  "status": "none_documented_in_scoped_runtime_inventories",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": ["https://nodejs.org/download/release/v26.10.0/docs/api/"],
+      "finding": "The versioned core-module index lists no PDF reader or parser. File system, Buffer, and streams provide generic bytes/I/O, which do not qualify."
+    },
+    {
+      "runtime": "Browser standardized JavaScript APIs",
+      "official_documentation_scope": ["https://html.spec.whatwg.org/multipage/iframe-embed-object.html", "https://html.spec.whatwg.org/multipage/system-state.html"],
+      "finding": "The HTML Standard provides embed/object integration and pdfViewerEnabled state, but no JavaScript API that accepts local PDF bytes and returns page, text, or other parsed PDF fields. A browser PDF viewer itself is outside this JavaScript API inventory."
+    }
+  ],
+  "limit": "This is a scoped documentation finding, not proof that every JavaScript host or browser bundle lacks a private PDF parser."
+}
