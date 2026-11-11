@@ -90,6 +90,18 @@ def parse(name, path):
         import mtl5
         return dense_result(mtl5.io.mm_read_dense(str(path)).to_numpy())
 
+    if name == "scab":
+        import scab
+        data = scab.read_10x_mtx(str(path), gex_only=True, verbose=False)
+        return {"shape": list(data.shape),
+                "values": data.X.toarray().tolist(),
+                "cells": list(data.obs_names),
+                "genes": list(data.var_names)}
+
+    if name == "DOTools-py":
+        from dotools_py.io import read_mtx
+        return dense_result(read_mtx(str(path)).X.toarray())
+
     raise ValueError(f"unknown parser: {name}")
 
 

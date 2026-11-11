@@ -1,6 +1,6 @@
 # Python × Matrix Market: verified parser ranking
 
-15 verified third-party packages; working goal 20, original ceiling 30. The metric is PyPI Stats `last_month` downloads excluding known mirrors, captured at 2026-11-11T22:29:07.667142+00:00. It is compared only within Python. 2 package(s) lack a metric and remain unranked; no value is inferred.
+17 verified third-party packages; working goal 20, original ceiling 30. The metric is PyPI Stats `last_month` downloads excluding known mirrors, captured at 2026-11-11T22:35:35.578044+00:00. It is compared only within Python. 2 package(s) lack a metric and remain unranked; no value is inferred.
 
 The PyPI Simple Index leads are alphabetically ordered names, not a popularity search. Search hits, unresolved leads, and standard-library findings are separate from this ranking.
 
@@ -18,6 +18,8 @@ The PyPI Simple Index leads are alphabetically ordered names, not a popularity s
 | 10 | [crest-sc](https://crest-sc.readthedocs.io/en/latest/api.html) | 0.4.0 | 1,009 | 10x Matrix Market count matrix plus feature and barcode annotations | CREST Rust/Polars 10x Matrix Market reader |
 | 11 | [mtl5](https://pypi.org/project/mtl5/5.22.0/) | 5.22.0 | 885 | Matrix Market coordinate real matrix values | MTL5 C++ Matrix Market reader |
 | 12 | [dyng](https://dyng-dev.github.io/dyng/api/cli.html) | 0.3.0 | 233 | Matrix Market coordinate graph topology | dynG C++ Matrix Market graph reader |
-| 13 | [acidgenomics-pipette](https://pypi.org/project/acidgenomics-pipette/0.2.1/) | 0.2.1 | 47 | Matrix Market coordinate real matrix values | Pipette MTX dispatcher over scipy.io.mmread |
+| 13 | [scab](https://scab.readthedocs.io/en/latest/modules/io.html) | 0.2.4 | 51 | 10x Matrix Market count matrix plus feature and barcode annotations | scab 10x reader over Scanpy/AnnData/SciPy |
+| 14 | [acidgenomics-pipette](https://pypi.org/project/acidgenomics-pipette/0.2.1/) | 0.2.1 | 47 | Matrix Market coordinate real matrix values | Pipette MTX dispatcher over scipy.io.mmread |
+| 15 | [DOTools-py](https://dotools-py.readthedocs.io/en/latest/api/generated/dotools_py.io.read_mtx.html) | 0.0.4 | 37 | Matrix Market coordinate real matrix values | DOTools-py wrapper over AnnData/scipy.io.mmread |
 | unranked | [subgraphsearch](https://pypi.org/project/subgraphsearch/2.0.1/) | 2.0.1 | unknown | Matrix Market coordinate graph topology | subgraphsearch Rust graph reader |
 | unranked | [sdos](https://pypi.org/project/sdos/0.1.0/) | 0.1.0 | unknown | Matrix Market coordinate real symmetric matrix values | sdos Matrix Market dispatch over scipy.io.mmread |

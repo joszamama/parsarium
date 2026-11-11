@@ -452,5 +452,74 @@
         ]
       ]
     }
+  },
+  {
+    "name": "scab",
+    "version": "0.2.4",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/project/scab/0.2.4/",
+    "input_api": "scab.read_10x_mtx(local_10x_directory, gex_only=True, verbose=False)",
+    "documentation": "https://scab.readthedocs.io/en/latest/modules/io.html",
+    "scope": "10x Matrix Market count matrix plus feature and barcode annotations",
+    "family": "scab 10x reader over Scanpy/AnnData/SciPy",
+    "control": "controls/matrix_market/tenx_v3",
+    "expected_output": {
+      "shape": [
+        3,
+        2
+      ],
+      "values": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cells": [
+        "CELL-A",
+        "CELL-B",
+        "CELL-C"
+      ],
+      "genes": [
+        "GeneA",
+        "GeneB"
+      ]
+    }
+  },
+  {
+    "name": "DOTools-py",
+    "version": "0.0.4",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/project/DOTools-py/0.0.4/",
+    "input_api": "dotools_py.io.read_mtx(local_path)",
+    "documentation": "https://dotools-py.readthedocs.io/en/latest/api/generated/dotools_py.io.read_mtx.html",
+    "scope": "Matrix Market coordinate real matrix values",
+    "family": "DOTools-py wrapper over AnnData/scipy.io.mmread",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "shape": [
+        2,
+        3
+      ],
+      "values": [
+        [
+          1.5,
+          0,
+          -2
+        ],
+        [
+          0,
+          4,
+          0
+        ]
+      ]
+    }
   }
 ]

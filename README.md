@@ -83,7 +83,7 @@ uv pip sync adapters/python/svg/requirements.lock --python adapters/python/svg/.
 python3 controls/svg/make_control.py
 python3 scripts/verify_python_svg.py
 uv venv --python python3.13 adapters/python/matrix_market/.venv
-uv pip sync adapters/python/matrix_market/requirements.lock --python adapters/python/matrix_market/.venv/bin/python --require-hashes
+CXXFLAGS='-include functional' uv pip sync adapters/python/matrix_market/requirements.lock --python adapters/python/matrix_market/.venv/bin/python --require-hashes
 uv venv --python python3.10 adapters/python/matrix_market/.venv310
 uv pip sync adapters/python/matrix_market/requirements-py310.lock --python adapters/python/matrix_market/.venv310/bin/python --require-hashes
 python3 controls/matrix_market/make_control.py
@@ -341,16 +341,17 @@ standard-library inventory counts no verified SVG API. Official `tkinter`
 documentation describes conditional SVG reading with Tk 9.0, while the
 recorded runtime has Tk 8.6, so that path remains unresolved.
 
-`verify_python_matrix_market.py` currently verifies **11/11 recorded third-party
-package paths**, leaving **9 to reach the working goal**. The controls are
+`verify_python_matrix_market.py` currently verifies **17/17 recorded third-party
+package paths**, leaving **3 to reach the working goal**. The controls are
 valid NIST coordinate matrices: a 2×3 sparse real matrix, a 3×3 graph
 adjacency matrix, and a 10x count matrix with feature and barcode files.
 The ranking records shared SciPy/fast_matrix_market implementations and leaves
 an unavailable download metric unranked. `scprep` runs in a separate Python
 3.10 environment because its pinned pandas dependency lacks a compatible
-Python 3.13 wheel. `mtl5` and `scab` failed to build on this host; one
-additional 10x-directory reader still needs license evidence and a
-compatible control. This cell remains in
+Python 3.13 wheel. `mtl5` also uses Python 3.10 because its Python 3.13
+source build lacks a required header. `scab` and `DOTools-py` pass in the
+Python 3.13 environment after building `annoy` with `CXXFLAGS='-include functional'`.
+Three documented or plausible leads remain unresolved. This cell remains in
 progress; the scoped CPython 3.13 standard-library inventory found no
 Matrix Market-aware input API.
 
@@ -548,8 +549,8 @@ or quality judgment.
   Shared parser families and the conditional Tk 9.0 runtime finding are
   recorded in the [cell record](data/python/svg/cell.json).
 - [Python × Matrix Market ranking](data/python/matrix_market/ranking.md):
-  fifteen verified package paths so far. Thirteen bounded PyPI name filters
-  saved 379 hits and 378 distinct names; six explored leads remain
+  seventeen verified package paths so far. Thirteen bounded PyPI name filters
+  saved 379 hits and 378 distinct names; three explored leads remain
   unresolved. The [cell record](data/python/matrix_market/cell.json) marks
   this batch below target and names the untested format variants.
 

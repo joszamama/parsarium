@@ -1,15 +1,30 @@
 [
   {
     "name": "fast_mtx_reader",
-    "status": "unresolved",
-    "reason": "Version 0.5.0 documents batch_read(path) for 10x-style directories. A compatible directory control, open-source license evidence, and a valid-control result remain to be established.",
-    "source": "https://pypi.org/project/fast_mtx_reader/0.5.0/"
-  },
-  {
-    "name": "scab",
-    "status": "unresolved",
-    "reason": "Version 0.2.4 documents scab.io.read_10x_mtx(path), but installation on the recorded macOS arm64 Python 3.10 host failed because the transitive parasail 1.3.4 build produced a wheel tagged for macOS 26 that uv judged incompatible. No valid-control result was established.",
-    "source": "https://scab.readthedocs.io/en/latest/modules/io.html"
+    "status": "excluded",
+    "reason": "Version 0.5.0 contains a GPLv3 LICENSE in its pinned source distribution, but read_sample_dir(Path) on a valid Matrix Market coordinate integer general 2-by-3 10x v2 sample treated the required 2 3 3 dimensions line as a (2,3)=3 data entry. The observed cell-by-gene matrix was [[2,0],[0,5],[4,3]] instead of [[2,0],[0,5],[4,0]]. The 10x v3 control also raised a Polars SchemaError on its valid three-column features file. batch_read delegates to read_sample_dir, so the documented batch API is not accepted without a correct valid-control result.",
+    "source": "https://pypi.org/project/fast_mtx_reader/0.5.0/",
+    "license_evidence": "https://pypi.org/project/fast_mtx_reader/0.5.0/ (sdist contains GPLv3 LICENSE; PKG-INFO lists License-File: LICENSE)",
+    "valid_control_observed": {
+      "shape": [
+        3,
+        2
+      ],
+      "values": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          4,
+          3
+        ]
+      ]
+    }
   },
   {
     "name": "mtxman",
@@ -34,12 +49,6 @@
     "status": "excluded",
     "reason": "Older documentation mentions magic.io.load_10X, but the pinned 3.0.0 package import exposes no io module. No documented current local Matrix Market parse API was established.",
     "source": "https://pypi.org/project/magic-impute/3.0.0/"
-  },
-  {
-    "name": "DOTools-py",
-    "status": "unresolved",
-    "reason": "Version 0.0.4 documents dotools_py.io.read_mtx(path), but the full macOS arm64 Python 3.13 dependency installation failed while building transitive annoy 1.17.3. Installing the wheel without dependencies leaves package import failing on appdirs; no valid-control result was established.",
-    "source": "https://dotools-py.readthedocs.io/en/latest/api/generated/dotools_py.io.read_mtx.html"
   },
   {
     "name": "vectorphile",
