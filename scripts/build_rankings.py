@@ -41,13 +41,13 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"{format_name}: {len(ranked)} verified packages ranked")
 
-    for format_name in ("zip", "png", "wav", "http11", "mp4", "mp3_id3v2", "pdf", "svg"):
+    for format_name in ("zip", "png", "wav", "http11", "mp4", "mp3_id3v2", "pdf", "svg", "ascii_pnm"):
         directory = ROOT / "data" / "go" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["popularity_metric"]["packages"]
         ranked = sorted(parsers, key=lambda parser: -(metrics[parser["name"]]["imported_by_packages"] or 0))
-        label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2"}.get(format_name, format_name.upper())
+        label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2", "ascii_pnm": "ASCII PNM"}.get(format_name, format_name.upper())
         lines = [
             f"# Go × {label}: verified parser ranking",
             "",

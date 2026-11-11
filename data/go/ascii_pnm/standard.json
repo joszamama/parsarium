@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Go",
+  "format": "ASCII PNM",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Go 1.27.1 standard library",
+      "official_documentation_scope": [
+        "https://pkg.go.dev/std@go1.27.1",
+        "https://pkg.go.dev/image@go1.27.1",
+        "https://pkg.go.dev/image/png@go1.27.1"
+      ],
+      "finding": "The versioned standard-library package list contains no Netpbm/PNM decoder. image.Decode dispatches only to registered image decoders; the standard library has no P1, P2, or P3 registration. image/png parses PNG, not PNM. Generic file and binary readers do not interpret PNM headers or pixels."
+    }
+  ],
+  "limit": "This finding covers documented Go 1.27.1 standard-library APIs. Third-party image format registrations and system graphics libraries are separate."
+}

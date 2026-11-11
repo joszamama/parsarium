@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, and SVG, and an explicit 88-cell work matrix. The other 72 cells
+Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM, and an explicit 88-cell work matrix. The other 71 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -41,6 +41,8 @@ python3 scripts/verify_go_mp4.py
 python3 scripts/verify_go_mp3_id3v2.py
 python3 scripts/verify_go_pdf.py
 python3 scripts/verify_go_svg.py
+python3 controls/ascii_pnm/make_control.py
+python3 scripts/verify_go_ascii_pnm.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -189,6 +191,21 @@ documented scope. Several readers share `oksvg` or Goki/Cogent code lineages.
 The separate Go 1.27.1 standard-library inventory finds no SVG-aware parser;
 generic XML parsing is outside the cell's parser criterion.
 
+`verify_go_ascii_pnm.py` uses Go 1.27.1 and a valid 2×1 ASCII P3 PPM control
+with red and green pixels (SHA-256
+`f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1`).
+`make_control.py` also creates valid P1 PBM and P2 PGM files for future
+variant-specific checks. The observed result is **20/20 third-party packages
+passing on P3**. The ranking labels a header-only reader and dimension-only
+native bindings; it does not claim that every package handles all PNM variants.
+Five accepted bindings use libvips 8.18.7, and one uses ImageMagick 7.1.2.
+Install their development headers and `pkg-config` files before rerunning.
+`adapters/go/ascii_pnm/go.mod` and `go.sum` pin dependencies. `go mod verify`
+passes; plain `go mod tidy` fails because an upstream `bu/govips` test imports a
+removed `davidbyttow/govips` package. Use `go mod tidy -e` if refreshing the
+module graph. The separate Go 1.27.1 standard-library inventory records no
+PNM-aware parser API.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -201,10 +218,10 @@ supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
 
-For Go ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, or SVG discovery, install the pinned packages in
+For Go ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, or ASCII PNM discovery, install the pinned packages in
 `scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py FORMAT`
 and `python3 scripts/enrich_go.py FORMAT` with `FORMAT` set to `zip`, `png`,
-`wav`, `http11`, `mp4`, `mp3_id3v2`, `pdf`, or `svg`. These refresh bounded pkg.go.dev
+`wav`, `http11`, `mp4`, `mp3_id3v2`, `pdf`, `svg`, or `ascii_pnm`. These refresh bounded pkg.go.dev
 package-search hits, pinned-release license evidence, and package-level
 “Imported by” counts. Go counts are compared only within their Go format cell.
 The public search pages supplied this snapshot after the
@@ -309,6 +326,13 @@ or quality judgment.
   One higher-adoption reader could not link because the host lacked MoltenVK.
   The [standard-library inventory](data/go/svg/standard.json) records the scoped
   Go 1.27.1 finding.
+- [Go × ASCII PNM ranking](data/go/ascii_pnm/ranking.md): 20 packages verified
+  on the valid P3 control, with pixels, dimensions, or header fields as labeled.
+  Five pkg.go.dev queries saved 156 hits and 141 unique package paths; ten
+  plausible leads remain unresolved. Five accepted bindings share libvips,
+  and several modules share Go PNM code. The
+  [standard-library inventory](data/go/ascii_pnm/standard.json) records the
+  scoped Go 1.27.1 finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -339,6 +363,9 @@ uncertainty.
   MagickWand dependencies are stated above.
 - `data/go/wav/`: bounded registry search, pinned releases, per-package WAV
   control outputs, ranking, leads, and the separate standard-library finding.
+- `data/go/ascii_pnm/`: bounded search hits, pinned releases, package-level
+  importer counts, P3 control outputs, ranking, leads, and standard-library
+  finding. Native adapters live under `adapters/go/ascii_pnm/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
