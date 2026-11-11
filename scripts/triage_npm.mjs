@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 const cell = process.argv[2];
-if (!['png', 'zip', 'wav', 'pdf', 'svg', 'http11'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|wav|pdf|svg|http11');
+if (!['png', 'zip', 'mp4', 'wav', 'pdf', 'svg', 'http11'].includes(cell)) throw new Error('usage: node scripts/triage_npm.mjs png|zip|mp4|wav|pdf|svg|http11');
 const path = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);
 const snapshot = JSON.parse(await readFile(path));
 const parsers = JSON.parse(await readFile(new URL(`../data/javascript/${cell}/parsers.json`, import.meta.url)));
@@ -12,6 +12,8 @@ const relevant = cell === 'png'
   ? /\bpng\b|png[-.]|image (decoder|reader|parser|size)|image dimensions/i
   : cell === 'zip'
     ? /\bzip\b|zip[-.]|unzip|archive (reader|extractor|parser)/i
+    : cell === 'mp4'
+      ? /\bmp4\b|mp4[-.]|isobmff|iso.?bmff|mpeg[- ]?4|quicktime|video metadata/i
     : cell === 'wav'
       ? /\bwav\b|wavefile|wave audio|audio (decoder|reader|parser|metadata)/i
       : cell === 'pdf'
@@ -30,6 +32,8 @@ const extra = cell === 'png'
   ? ['canvas', '@napi-rs/canvas', 'skia-canvas', 'probe-image-size', '@loaders.gl/images', 'image-js']
   : cell === 'zip'
     ? ['decompress', 'decompress-unzip', 'pizzip', 'yauzl-promise', 'node-zip', 'unzip-stream', 'unzip', '@endo/zip', '@electron-internal/extract-zip', 'zip-lib', 'zipread', '7zip-min']
+    : cell === 'mp4'
+      ? ['mp4box', 'codem-isoboxer', 'isobmff-inspector', 'fmp4.js', 'mp4', 'mp4.js', 'mp4-parser', 'mp4-parser-js', 'mp4-info', 'mp4-stream', 'mp4frag', 'mediainfo.js', 'music-metadata', 'mediabunny', '@remotion/media-parser', 'get-video-duration', 'get-video-dimensions', 'mux.js', '@videojs/mp4', 'mp4box.js', 'metaprobe']
     : cell === 'wav'
       ? ['wavefile', 'wav-decoder', 'node-wav', 'wav', 'music-metadata', 'music-metadata-browser', 'audio-decode', '@audio/decode', '@audio/decode-wav', 'get-audio-duration', 'mediainfo.js', '@uttori/audio-wave', 'riff-reader']
       : cell === 'pdf'

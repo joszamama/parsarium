@@ -627,15 +627,28 @@
     {
       "ecosystem": "javascript",
       "format": "mp4",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
-      "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "verified_third_party_count": 20,
+      "verified_standard_or_runtime_count": 1,
+      "search_queries": [
+        "mp4",
+        "mp4 parser",
+        "isobmff parser",
+        "mp4 metadata",
+        "video metadata reader"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 500,
+      "unique_search_hits": 372,
+      "unresolved_documentation_leads": 15,
+      "uncertainty": "Five npm queries each saved only the first 100 results from much larger result sets; 372 unique hits are discovery material, not all investigated. 15 named plausible leads remain unresolved. More qualified parsers may exist outside these search windows. The 20 verified package names include narrow ftyp/header parsers and metadata readers and need not represent 20 independent full-media decoders. The control checks one small H.264/AAC file with fixed tags, and the browser result applies to one pinned Chromium build. mp4-metadata requires a FileReader compatibility shim in Node; its parser itself reads the supplied Blob.",
+      "third_party_evidence": "data/javascript/mp4/parsers.json",
+      "third_party_control_results": "data/javascript/mp4/verification.json",
+      "runtime_evidence": "data/javascript/mp4/standard.json",
+      "registry_snapshot": "data/javascript/mp4/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/mp4/leads.json"
     },
     {
       "ecosystem": "javascript",

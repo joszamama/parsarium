@@ -5,6 +5,7 @@ const cell = process.argv[2] ?? 'png';
 const querySets = {
   png: ['png', 'png decoder', 'png reader', 'png image'],
   zip: ['zip', 'zip archive', 'zip parser', 'zip reader'],
+  mp4: ['mp4', 'mp4 parser', 'isobmff parser', 'mp4 metadata', 'video metadata reader'],
   wav: ['wav', 'wav decoder', 'wav parser', 'wave audio reader'],
   pdf: ['pdf', 'pdf parser', 'pdf reader', 'pdf text extract'],
   svg: ['svg', 'svg parser', 'svg renderer', 'svg image reader'],

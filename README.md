@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
-JavaScript × ZIP, WAV, PDF, SVG, and HTTP/1.1 batches, and an explicit 88-cell work matrix. The other 82 cells
+JavaScript × ZIP, MP4, WAV, PDF, SVG, and HTTP/1.1 batches, and an explicit 88-cell work matrix. The other 81 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -20,6 +20,8 @@ npm run pilot:control
 npm run pilot:verify
 npm run zip:control
 npm run zip:verify
+npm run mp4:control
+npm run mp4:verify
 npm run wav:control
 npm run wav:verify
 npm run pdf:control
@@ -48,6 +50,17 @@ runtime API passing**. A fresh run replaces the dated result files.
 The ZIP adapter checks both the parsed entry name and decompressed content.
 The observed batch result is **21/21 third-party packages and 1/1 Node.js
 built-in API passing**.
+
+`mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
+one second of silent 8 kHz AAC audio, title `Parsarium`, and creation time
+`2020-01-02T03:04:05Z` (SHA-256
+`10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643`).
+The source bytes are committed as base64, so FFmpeg is not needed to reproduce
+the control. Package adapters check parsed boxes, tracks, audio samples, title,
+or creation time according to their documented scope. The observed result is
+**20/20 third-party packages and 1/1 browser runtime API passing**. Some
+packages parse only a header or metadata field; `mp4-metadata` needs a
+`FileReader` compatibility adapter in Node. The ranking labels each scope.
 
 `wav:control` creates a deterministic 52-byte mono PCM RIFF/WAVE file with four
 16-bit samples at 8000 Hz (SHA-256
@@ -88,8 +101,8 @@ elements and `HTMLImageElement` decoding from a local SVG Blob. A direct
 it is recorded as a candidate failure, not a verified API.
 
 To refresh *discovery and popularity* data, run
-`node scripts/snapshot_npm.mjs png`, `zip`, `wav`, `pdf`, `svg`, or `http11`.
-Run `node scripts/triage_npm.mjs png`, `zip`, `wav`, `pdf`, `svg`, or `http11`
+`node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, or `http11`.
+Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, or `http11`
 to refresh popularity-sorted **leads**; triage never verifies a parser.
 This is a separate, network-dependent operation that changes the dated registry
 snapshot; verification itself uses only locked local dependencies. npm's
@@ -103,7 +116,7 @@ name. It is an adoption proxy and can include automated downloads.
 
 The working goal is 20 verified third-party parsers per cell, with 30 as the
 original ceiling. The PNG and ZIP cells have **21 verified packages** each;
-the WAV, PDF, and SVG cells have **22** each, and the HTTP/1.1 cell has **20**.
+the WAV, PDF, and SVG cells have **22** each, and MP4 and HTTP/1.1 have **20** each.
 Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
@@ -120,6 +133,12 @@ or quality judgment.
   first 100 results each: 400 hits, 314 unique names. Four named leads remain
   unresolved. The [Node.js `zlib.ZipBuffer` API](https://nodejs.org/docs/v26.10.0/api/zlib.html#class-zlibzipbuffer)
   is experimental and verified separately from the npm ranking.
+- [JavaScript × MP4 ranking](data/javascript/mp4/ranking.md): 20 packages with
+  labeled box, metadata, track, or audio decode scope. Five npm queries saved
+  the first 100 hits each: 500 hits, 372 unique names. Fifteen named leads
+  remain unresolved. The browser `HTMLVideoElement` metadata API is verified
+  separately with a local MP4 Blob; see the
+  [runtime inventory](data/javascript/mp4/standard.json).
 - [JavaScript × WAV ranking](data/javascript/wav/ranking.md): 22 packages with
   explicitly labeled sample, header, or duration scope. Four npm queries saved
   the first 100 results each: 400 hits, 351 unique names. Five relevant leads
@@ -148,7 +167,8 @@ and [ZIP cell record](data/javascript/zip/cell.json), along with the
 [WAV cell record](data/javascript/wav/cell.json) and
 [PDF cell record](data/javascript/pdf/cell.json), and
 [HTTP/1.1 cell record](data/javascript/http11/cell.json), and
-[SVG cell record](data/javascript/svg/cell.json) state the actual counts,
+[SVG cell record](data/javascript/svg/cell.json), and
+[MP4 cell record](data/javascript/mp4/cell.json) state the actual counts,
 search limits, and remaining uncertainty. Registry hits and download counts are
 not parser evidence; only the pinned APIs and successful control runs enter the
 rankings.
@@ -157,17 +177,17 @@ rankings.
 
 - `data/cells.json`: every ecosystem × format cell, with status, actual verified
   count, search limit, and uncertainty.
-- `data/javascript/{png,zip,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
+- `data/javascript/{png,zip,mp4,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
-- `data/javascript/{png,zip,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
+- `data/javascript/{png,zip,mp4,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
   including unresolved names; the status distinguishes verified packages.
-- `data/javascript/{png,zip,wav,pdf,svg,http11}/parsers.json`: pinned packages, documented input APIs,
+- `data/javascript/{png,zip,mp4,wav,pdf,svg,http11}/parsers.json`: pinned packages, documented input APIs,
   parsing depth, licenses, and shared families.
-- `data/javascript/{png,zip,wav,pdf,svg,http11}/ranking.md`: generated rankings using only verified
+- `data/javascript/{png,zip,mp4,wav,pdf,svg,http11}/ranking.md`: generated rankings using only verified
   package rows and the recorded metric window.
 - `adapters/javascript/` and `controls/`: runnable local-input adapters and
   deterministic valid controls.
-- `data/javascript/{png,zip,wav,pdf,svg,http11}/verification.json` and `png/browser-verification.json`:
+- `data/javascript/{png,zip,mp4,wav,pdf,svg,http11}/verification.json` and `png/browser-verification.json`:
   observed outputs, environment, and pass/fail result.
 
 This collection does not contain malformed-input, security, or resource-use

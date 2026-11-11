@@ -1,0 +1,26 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "MP4",
+  "status": "runtime_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
+      "api": "HTMLVideoElement.src = URL.createObjectURL(Blob({type:video/mp4})); loadedmetadata; videoWidth/videoHeight/duration",
+      "documentation": "https://html.spec.whatwg.org/multipage/media.html#the-video-element",
+      "adapter": "adapters/javascript/mp4_browser.mjs",
+      "control": "controls/mp4/red-av.mp4",
+      "observable_result": "Loaded local MP4 control reports 2\u00d72 video dimensions and 1-second duration",
+      "result": "data/javascript/mp4/verification.json"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/"
+      ],
+      "finding": "Scoped API index review found no built-in MP4 container parser. Buffer and fs read bytes only and do not interpret MP4 boxes or tracks."
+    }
+  ],
+  "limit": "Chromium result covers one pinned browser build and the simple H.264/AAC MP4 control. It does not establish every MP4 feature or codec."
+}
