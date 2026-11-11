@@ -70,6 +70,10 @@ def parse(name, path):
         matrix = scprep.io.load_mtx(str(path), sparse=False)
         return dense_result(matrix)
 
+    if name == "acidgenomics-pipette":
+        import pipette
+        return dense_result(pipette.read(str(path)).toarray())
+
     raise ValueError(f"unknown parser: {name}")
 
 
