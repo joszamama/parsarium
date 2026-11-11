@@ -50,6 +50,11 @@ python3 scripts/verify_python_png.py
 uv venv --python python3.13 adapters/python/ascii_pnm/.venv
 uv pip sync adapters/python/ascii_pnm/requirements.lock --python adapters/python/ascii_pnm/.venv/bin/python --require-hashes
 python3 scripts/verify_python_ascii_pnm.py
+uv venv --python python3.13 adapters/python/zip/.venv
+uv pip sync adapters/python/zip/requirements.lock --python adapters/python/zip/.venv/bin/python --require-hashes
+adapters/python/zip/.venv/bin/python controls/zip/make_zstd_control.py
+python3 controls/zip/make_module_control.py
+python3 scripts/verify_python_zip.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -239,6 +244,15 @@ and wxPython/Tk need a GUI session. `napari-netpbmfile` omits a declared
 `napari-plugin-engine` dependency; it is pinned explicitly in
 `requirements.in`.
 
+`verify_python_zip.py` verifies **20/20 third-party package paths** and
+**4/4 CPython standard-library APIs** on valid local ZIP controls. The main
+control has a DEFLATE-compressed `hello.txt`; the pinned Zstandard wrapper
+generates and reads a method-93 ZIP, and a separate Python-module ZIP tests
+`zipimport`. Many packages share CPython's `zipfile` parser family; the
+ranking lists those families. `libarchive-c` needs a libarchive shared library,
+`patool` needs a local `unzip` utility, and `fs` and `omni-archive` need the
+explicit compatibility pins in `requirements.in` for this Python version.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -260,8 +274,10 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG or ASCII PNM discovery, run `python3 scripts/snapshot_pypi_png.py`
-or `python3 scripts/snapshot_pypi_ascii_pnm.py`. Each
+For Python PNG, ASCII PNM, or ZIP discovery, run
+`python3 scripts/snapshot_pypi_png.py`,
+`python3 scripts/snapshot_pypi_ascii_pnm.py`, or
+`python3 scripts/snapshot_pypi_zip.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -388,6 +404,12 @@ or quality judgment.
   initially hit a PyPI Stats rate limit; a successful retry supplied its figure. The
   [standard/runtime inventory](data/python/ascii_pnm/standard.json) records
   Tkinter's failed ASCII controls and the scoped CPython finding.
+- [Python × ZIP ranking](data/python/zip/ranking.md): 20 package paths verified
+  on valid DEFLATE or Zstandard ZIP controls. Nine bounded PyPI name filters
+  saved 418 hits and 407 distinct names; six plausible leads remain unresolved.
+  The higher-download `zipfile-deflate64` lead failed to build on this host and
+  was not counted. The [standard/runtime inventory](data/python/zip/standard.json)
+  separately verifies four documented CPython API paths.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -428,6 +450,9 @@ uncertainty.
 - `data/python/ascii_pnm/`: the same evidence layout for ASCII PNM, with
   P3/P2 control output and the Tk runtime candidate result. Python adapters
   and pinned dependencies live under `adapters/python/ascii_pnm/`.
+- `data/python/zip/`: bounded PyPI leads, pinned release hashes, within-Python
+  download counts, a verified ranking, control outputs, and four standard APIs.
+  The adapters and dependency lock live under `adapters/python/zip/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

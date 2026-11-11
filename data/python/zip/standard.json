@@ -1,0 +1,15 @@
+{
+  "ecosystem": "Python",
+  "format": "ZIP",
+  "status": "verified",
+  "verified_apis": [
+    {"runtime":"CPython 3.13.1 standard library","api":"zipfile.ZipFile","documentation":"https://docs.python.org/3.13/library/zipfile.html#zipfile.ZipFile","adapter":"adapters/python/zip/standard.py","control":"controls/zip/hello.zip","expected":{"names":["hello.txt"],"hello":"parsarium\n"},"family":"CPython zipfile","result":"data/python/zip/verification.json"},
+    {"runtime":"CPython 3.13.1 standard library","api":"zipfile.Path","documentation":"https://docs.python.org/3.13/library/zipfile.html#zipfile.Path","adapter":"adapters/python/zip/standard.py","control":"controls/zip/hello.zip","expected":{"names":["hello.txt"],"hello":"parsarium\n"},"family":"CPython zipfile","result":"data/python/zip/verification.json"},
+    {"runtime":"CPython 3.13.1 standard library","api":"shutil.unpack_archive","documentation":"https://docs.python.org/3.13/library/shutil.html#shutil.unpack_archive","adapter":"adapters/python/zip/standard.py","control":"controls/zip/hello.zip","expected":{"names":["hello.txt"],"hello":"parsarium\n"},"family":"CPython zipfile via shutil","result":"data/python/zip/verification.json"},
+    {"runtime":"CPython 3.13.1 standard library","api":"zipimport.zipimporter","documentation":"https://docs.python.org/3.13/library/zipimport.html#zipimport.zipimporter","adapter":"adapters/python/zip/standard.py","control":"controls/zip/hello-module.zip","expected":{"source":"message = 'parsarium'\n"},"family":"CPython zipimport ZIP reader","result":"data/python/zip/verification.json"}
+  ],
+  "no_api_findings": [
+    {"runtime":"CPython 3.13.1 generic byte and compression APIs","official_documentation_scope":["https://docs.python.org/3.13/library/index.html","https://docs.python.org/3.13/library/io.html","https://docs.python.org/3.13/library/zlib.html"],"finding":"File I/O and zlib alone do not interpret ZIP central-directory entries or member names; they are not separate ZIP parser APIs."}
+  ],
+  "limit": "The DEFLATE control proves one ordinary ZIP entry; the zipimport control proves a ZIP containing a Python source module. Shared stdlib families are identified and these four API paths are not independent engines."
+}

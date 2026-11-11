@@ -73,7 +73,8 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"go/{format_name}: {len(ranked)} verified packages ranked")
 
-    for format_name, label in (("png", "PNG"), ("ascii_pnm", "ASCII PNM")):
+    for format_name, label in (("png", "PNG"), ("ascii_pnm", "ASCII PNM"),
+                               ("zip", "ZIP")):
         directory = ROOT / "data" / "python" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")

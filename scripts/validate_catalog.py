@@ -66,7 +66,12 @@ def main() -> None:
         if browser_png:
             assert read(f"{key}/browser-verification.json")["pass"]
         elif cell["verified_standard_or_runtime_count"]:
-            assert results["runtime"]["pass"]
+            runtime_results = results["runtime"]
+            if isinstance(runtime_results, list):
+                assert len(runtime_results) == cell["verified_standard_or_runtime_count"]
+                assert all(row["pass"] for row in runtime_results)
+            else:
+                assert runtime_results["pass"]
         assert cell["verified_standard_or_runtime_count"] == len(read(f"{key}/standard.json")["verified_apis"])
     print(f"Validated {len(matrix)} cells, {sum(c['status'] != 'not_started' for c in matrix)} with recorded evidence")
 
