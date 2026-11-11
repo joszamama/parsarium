@@ -303,15 +303,28 @@
     {
       "ecosystem": "go",
       "format": "zip",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
-      "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "verified_third_party_count": 23,
+      "verified_standard_or_runtime_count": 1,
+      "search_queries": [
+        "zip",
+        "zip reader",
+        "archive zip",
+        "unzip",
+        "zip parser"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 333,
+      "unique_search_hits": 271,
+      "unresolved_documentation_leads": 8,
+      "uncertainty": "Five pkg.go.dev public package-search queries saved 333 hits and 271 unique package paths. The zip, archive zip, and unzip result pages were truncated at 100 each; zip reader returned 23 and zip parser returned 10. The HTML pages did not expose a total result count, so none is inferred. 8 named plausible leads remain unresolved. Search hits are discovery material, not parser evidence, and eligible packages may exist outside these windows. Many verified packages wrap or fork Go archive/zip, so 23 package paths do not imply 23 independent engines. One pinned itchio/arkive ZIP reader passed the control but lacked open-source license evidence and was excluded. The shared one-entry DEFLATE control does not cover other ZIP features. Importer counts are package-level adoption signals from pkg.go.dev at one snapshot date; missing values are not invented.",
+      "third_party_evidence": "data/go/zip/parsers.json",
+      "third_party_control_results": "data/go/zip/verification.json",
+      "runtime_evidence": "data/go/zip/standard.json",
+      "registry_snapshot": "data/go/zip/registry-snapshot.json",
+      "unresolved_leads": "data/go/zip/leads.json"
     },
     {
       "ecosystem": "go",

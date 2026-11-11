@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-and an explicit 88-cell work matrix. The other 80 cells
+Go × ZIP, and an explicit 88-cell work matrix. The other 79 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -33,6 +33,7 @@ npm run svg:control
 npm run svg:verify
 npm run http11:control
 npm run http11:verify
+python3 scripts/verify_go_zip.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -115,6 +116,13 @@ elements and `HTMLImageElement` decoding from a local SVG Blob. A direct
 `createImageBitmap(Blob)` attempt failed on the control in this Chromium build;
 it is recorded as a candidate failure, not a verified API.
 
+`verify_go_zip.py` uses Go 1.27.1 and the shared deterministic ZIP control.
+The Go module at `adapters/go/zip` pins third-party releases in `go.mod` and
+checksums in `go.sum`. The adapters check the parsed entry name and
+decompressed text. The observed result is **23/23 third-party packages and
+1/1 Go standard-library API passing**. Several packages wrap or fork
+`archive/zip`; the ranking records their parser families.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -126,6 +134,14 @@ supplies discovery hits. Its [downloads API](https://github.com/npm/registry/blo
 supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
+
+For Go ZIP discovery, install the pinned packages in
+`scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py zip`
+and `python3 scripts/enrich_go.py zip`. These refresh bounded pkg.go.dev
+package-search hits, pinned-release license evidence, and package-level
+“Imported by” counts. Go counts are compared only with other Go ZIP packages.
+The public search pages supplied this snapshot after the
+[pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
 ## Verified rankings and search limits
 
@@ -183,6 +199,11 @@ or quality judgment.
   queries saved 400 hits, 388 unique names. Twelve named leads remain
   unresolved. The [runtime inventory](data/javascript/svg/standard.json)
   separately verifies browser SVG DOM parsing and image decoding.
+- [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
+  readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries
+  saved 333 hits, 271 unique package paths. Eight named leads remain
+  unresolved. The [standard-library inventory](data/go/zip/standard.json)
+  separately verifies `archive/zip.OpenReader` on the same control.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -195,11 +216,16 @@ and [ZIP cell record](data/javascript/zip/cell.json), along with the
 search limits, and remaining uncertainty. Registry hits and download counts are
 not parser evidence; only the pinned APIs and successful control runs enter the
 rankings.
+The [Go ZIP cell record](data/go/zip/cell.json) gives its separate count,
+search limits, and uncertainty.
 
 ## Data layout
 
 - `data/cells.json`: every ecosystem × format cell, with status, actual verified
   count, search limit, and uncertainty.
+- `data/go/zip/`: bounded pkg.go.dev search hits, pinned module and license
+  evidence, package importer counts, verified ranking, leads, standard API,
+  and control results. `adapters/go/zip/go.mod` and `go.sum` pin dependencies.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

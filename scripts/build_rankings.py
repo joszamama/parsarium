@@ -41,6 +41,36 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"{format_name}: {len(ranked)} verified packages ranked")
 
+    directory = ROOT / "data" / "go" / "zip"
+    parsers = read(directory / "parsers.json")
+    snapshot = read(directory / "registry-snapshot.json")
+    metrics = snapshot["popularity_metric"]["packages"]
+    ranked = sorted(parsers, key=lambda parser: -(metrics[parser["name"]]["imported_by_packages"] or 0))
+    lines = [
+        "# Go × ZIP: verified parser ranking",
+        "",
+        f"{len(ranked)} verified third-party packages; working goal 20, original ceiling 30. "
+        "The metric is pkg.go.dev's package-level ‘Imported by’ count captured at "
+        f"{snapshot['popularity_metric']['captured_at_utc']}. It measures visible direct importers "
+        "rather than downloads, and is used only within Go.",
+        "",
+        "Search hits and unresolved leads are separate from this ranking. See `cell.json`, "
+        "`registry-snapshot.json`, and `verification.json` in this directory.",
+        "",
+        "| Rank | Package | Pinned module release | Imported by packages | Scope | Underlying family |",
+        "| ---: | --- | --- | ---: | --- | --- |",
+    ]
+    for rank, parser in enumerate(ranked, 1):
+        value = metrics[parser["name"]]["imported_by_packages"]
+        count = f"{value:,}" if value is not None else "unknown"
+        lines.append(
+            f"| {rank} | [{parser['name']}]({parser['documentation']}) | "
+            f"{parser['module']}@{parser['version']} | {count} | "
+            f"{parser['scope']} | {parser['family']} |"
+        )
+    (directory / "ranking.md").write_text("\n".join(lines) + "\n")
+    print(f"go/zip: {len(ranked)} verified packages ranked")
+
 
 if __name__ == "__main__":
     main()

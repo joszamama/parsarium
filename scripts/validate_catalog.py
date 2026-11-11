@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import json
+import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +17,8 @@ def main() -> None:
     assert len(matrix) == 88
     assert len({(c["ecosystem"], c["format"]) for c in matrix}) == 88
     lock = read("package-lock.json")["packages"][""]["dependencies"]
+    go_mod = (ROOT / "adapters" / "go" / "zip" / "go.mod").read_text()
+    go_versions = dict(re.findall(r"^\s*(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
     for cell in matrix:
         assert cell["working_target"] == 20 and cell["ceiling"] == 30
         if cell["status"] == "not_started":
@@ -30,16 +33,23 @@ def main() -> None:
         assert len({p["name"] for p in parsers}) == len(parsers)
         assert sum(len(s["hits"]) for s in snapshot["search"]) == cell["search_hits_recorded"]
         assert snapshot["search_limit_per_query"] == cell["search_limit_per_query"]
-        assert len({hit["name"] for search in snapshot["search"] for hit in search["hits"]}) == cell["unique_search_hits"]
+        hit_key = "packagePath" if cell["ecosystem"] == "go" else "name"
+        assert len({hit[hit_key] for search in snapshot["search"] for hit in search["hits"]}) == cell["unique_search_hits"]
         assert len(snapshot["search"]) == len(cell["search_queries"])
         leads = read(f"{key}/leads.json")
         assert sum(lead["status"] == "unresolved" for lead in leads) == cell["unresolved_documentation_leads"]
         assert not ({lead["name"] for lead in leads} & {p["name"] for p in parsers})
         for parser in parsers:
             name = parser["name"]
-            assert parser["version"] == lock[name]
+            if cell["ecosystem"] == "go":
+                assert parser["version"] == go_versions[parser["module"]]
+                count = snapshot["popularity_metric"]["packages"][name]["imported_by_packages"]
+                assert count is None or isinstance(count, int)
+                assert parser["license"] == snapshot["releases"][name]["license"]
+            else:
+                assert parser["version"] == lock[name]
+                assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
             assert parser["version"] == snapshot["releases"][name]["version"]
-            assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
             assert parser["license"] and parser["documentation"] and parser["family"] and parser["input_api"]
         results = read(f"{key}/verification.json")
         runs = results["results"] if cell["format"] == "png" else results["third_party"]
