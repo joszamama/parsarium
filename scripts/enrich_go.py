@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
-    if cell not in {"zip", "png", "wav", "http11", "mp4", "mp3_id3v2"}:
-        raise SystemExit("usage: python3 scripts/enrich_go.py zip|png|wav|http11|mp4|mp3_id3v2")
+    if cell not in {"zip", "png", "wav", "http11", "mp4", "mp3_id3v2", "pdf"}:
+        raise SystemExit("usage: python3 scripts/enrich_go.py zip|png|wav|http11|mp4|mp3_id3v2|pdf")
     directory = ROOT / "data" / "go" / cell
     parser_path = directory / "parsers.json"
     parsers = json.loads(parser_path.read_text())
@@ -42,8 +42,11 @@ def main() -> None:
         license_element = page.select_one('[data-test-id="UnitHeader-license"]')
         imported_element = page.select_one('a[href*="tab=importedby"]')
         if license_element is None:
-            raise RuntimeError(f"No license evidence: {url}")
-        license_text = license_element.get_text(" ", strip=True)
+            if not parser.get("license_evidence") or not parser.get("license"):
+                raise RuntimeError(f"No license evidence: {url}")
+            license_text = parser["license"]
+        else:
+            license_text = license_element.get_text(" ", strip=True)
         count_match = re.search(r"Imported by:\s*([\d,]+)", imported_element.get_text(" ", strip=True)) if imported_element else None
         count = int(count_match.group(1).replace(",", "")) if count_match else None
         parser["license"] = license_text

@@ -1,0 +1,19 @@
+{
+  "ecosystem": "Go",
+  "format": "PDF",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Go 1.27.3 standard library",
+      "official_documentation_scope": [
+        "https://pkg.go.dev/std@go1.27.3",
+        "https://pkg.go.dev/encoding/ascii85@go1.27.3",
+        "https://pkg.go.dev/encoding/binary@go1.27.3",
+        "https://pkg.go.dev/os@go1.27.3"
+      ],
+      "finding": "The versioned standard-library package list has no PDF document parser. encoding/ascii85 decodes one encoding used inside some PDFs; encoding/binary reads numbers and os opens files. None interprets PDF objects, pages, or document metadata."
+    }
+  ],
+  "limit": "This is a finding about the documented Go 1.27.3 standard library, not third-party modules or platform PDF frameworks."
+}
