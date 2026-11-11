@@ -1,0 +1,379 @@
+{
+  "checked_at_utc": "2026-11-11T17:02:00.760Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v26.10.0",
+  "playwright_version": "1.63.0",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected": {
+    "samples": {
+      "sampleRate": 8000,
+      "channels": 1,
+      "sampleCount": 4,
+      "sampleSigns": [
+        0,
+        1,
+        -1,
+        0
+      ]
+    },
+    "header": {
+      "sampleRate": 8000,
+      "channels": 1,
+      "bitsPerSample": 16
+    },
+    "duration": {
+      "durationSeconds": 0.0005
+    }
+  },
+  "third_party": [
+    {
+      "package": "music-metadata",
+      "version": "12.4.0",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs music-metadata controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "audio-decode",
+      "version": "3.12.0",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs audio-decode controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "wavefile",
+      "version": "11.0.0",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs wavefile controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "node-wav",
+      "version": "0.0.2",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs node-wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@audio/decode-wav",
+      "version": "2.0.0",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs @audio/decode-wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "mediainfo.js",
+      "version": "0.3.8",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs mediainfo.js controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "@audio/decode",
+      "version": "4.3.0",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs @audio/decode controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "wav",
+      "version": "1.0.2",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wav-decoder",
+      "version": "1.3.0",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs wav-decoder controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "wav-file-info",
+      "version": "0.0.10",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs wav-file-info controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wavefile-reader",
+      "version": "1.1.1",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs wavefile-reader controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wav-file-decoder",
+      "version": "1.0.3",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs wav-file-decoder controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "prx-wavefile",
+      "version": "11.0.0-prx.6",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs prx-wavefile controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wav-info",
+      "version": "0.0.1",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs wav-info controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "@ra2web/wavefile",
+      "version": "1.0.2",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs @ra2web/wavefile controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wavefile-parser",
+      "version": "1.0.1",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs wavefile-parser controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wav-audio-length",
+      "version": "0.1.1",
+      "scope": "duration",
+      "command": "node adapters/javascript/wav.mjs wav-audio-length controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "durationSeconds": 0.0005
+      },
+      "error": null
+    },
+    {
+      "package": "wav-reader-ts",
+      "version": "1.0.6",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs wav-reader-ts controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "node-bwf-wav-file-reader",
+      "version": "1.0.4",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs node-bwf-wav-file-reader controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    },
+    {
+      "package": "wav-decoder-ts",
+      "version": "1.0.3",
+      "scope": "samples",
+      "command": "node adapters/javascript/wav.mjs wav-decoder-ts controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "get-audio-duration",
+      "version": "4.0.1",
+      "scope": "duration",
+      "command": "node adapters/javascript/wav.mjs get-audio-duration controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "durationSeconds": 0.0005
+      },
+      "error": null
+    },
+    {
+      "package": "@uttori/audio-wave",
+      "version": "2.1.0",
+      "scope": "header",
+      "command": "node adapters/javascript/wav.mjs @uttori/audio-wave controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      "error": null
+    }
+  ],
+  "runtime": {
+    "command": "node adapters/javascript/wav_browser.mjs controls/wav/four-samples.wav",
+    "pass": true,
+    "output": {
+      "browser": "153.0.8010.12",
+      "sampleRate": 8000,
+      "channels": 1,
+      "sampleCount": 4,
+      "sampleSigns": [
+        0,
+        1,
+        -1,
+        0
+      ]
+    },
+    "error": null
+  }
+}

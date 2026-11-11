@@ -640,15 +640,28 @@
     {
       "ecosystem": "javascript",
       "format": "wav",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
-      "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "verified_third_party_count": 22,
+      "verified_standard_or_runtime_count": 1,
+      "search_queries": [
+        "wav",
+        "wav decoder",
+        "wav parser",
+        "wave audio reader"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 400,
+      "unique_search_hits": 351,
+      "unresolved_documentation_leads": 5,
+      "uncertainty": "The four npm search queries each returned thousands of matches; only the first 100 per query were saved, yielding 351 unique names. Those hits were not all investigated. Five named relevant leads remain unresolved, including releases with higher downloads than some verified packages. Further qualified parsers may exist outside these windows. Browser verification covers one Chromium release, and other JavaScript runtimes remain open. A passing PCM control does not establish full WAV variant coverage.",
+      "third_party_evidence": "data/javascript/wav/parsers.json",
+      "third_party_control_results": "data/javascript/wav/verification.json",
+      "runtime_evidence": "data/javascript/wav/standard.json",
+      "runtime_control_results": "data/javascript/wav/verification.json",
+      "registry_snapshot": "data/javascript/wav/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/wav/leads.json"
     },
     {
       "ecosystem": "javascript",

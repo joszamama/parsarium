@@ -1,0 +1,24 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "WAV",
+  "status": "verified_browser_api_and_scoped_node_inventory",
+  "verified_apis": [
+    {
+      "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
+      "api": "OfflineAudioContext.decodeAudioData(ArrayBuffer)",
+      "documentation": "https://www.w3.org/TR/webaudio-1.1/#dom-baseaudiocontext-decodeaudiodata",
+      "adapter": "adapters/javascript/wav_browser.mjs",
+      "control": "controls/wav/four-samples.wav",
+      "result": "data/javascript/wav/verification.json",
+      "scope": "Browser-bundled Web Audio decoding; the resulting AudioBuffer reports sample rate, channels, sample count, and PCM signs."
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": ["https://nodejs.org/download/release/v26.10.0/docs/api/"],
+      "finding": "The versioned core-module index lists no WAV-specific reader or decoder. Buffer, fs, and streams offer generic bytes/I/O and do not meet parser eligibility. This finding is limited to the documented Node.js core API index."
+    }
+  ],
+  "limit": "Other browsers and JavaScript runtimes have not been control-checked."
+}
