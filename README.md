@@ -4,8 +4,8 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, ASCII PNM, ZIP, WAV, PDF, and MP3 with ID3v2, and an explicit
-88-cell work matrix. The other 65 cells
+Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, and MP4, and an explicit
+88-cell work matrix. The other 64 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -69,6 +69,9 @@ python3 scripts/verify_python_pdf.py
 uv venv --python python3.13 adapters/python/mp3_id3v2/.venv
 uv pip sync adapters/python/mp3_id3v2/requirements.lock --python adapters/python/mp3_id3v2/.venv/bin/python --require-hashes
 python3 scripts/verify_python_mp3_id3v2.py
+uv venv --python python3.13 adapters/python/mp4/.venv
+uv pip sync adapters/python/mp4/requirements.lock --python adapters/python/mp4/.venv/bin/python --require-hashes
+python3 scripts/verify_python_mp4.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -293,6 +296,14 @@ MoviePy uses its pinned imageio-ffmpeg dependency. The verifier records the
 external FFprobe and libsndfile versions. CPython 3.13 documents no MP3 or
 ID3v2 input API in its standard library.
 
+`verify_python_mp4.py` verifies **20/20 third-party package paths** on the
+one-frame H.264/AAC control. The hash-locked Python 3.13 environment includes
+box readers, metadata readers, audio readers, and video frame decoders. The
+ranking labels each scope and shared FFmpeg, OpenCV, and other parser families.
+Several wrappers need local FFmpeg/FFprobe tools; the verifier records the
+external FFprobe version. The scoped CPython 3.13 standard-library inventory
+found no MP4-aware input API.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -314,13 +325,14 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, WAV, PDF, or MP3 with ID3v2 discovery, run
+For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, or MP4 discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
 `python3 scripts/snapshot_pypi_wav.py`, or
 `python3 scripts/snapshot_pypi_pdf.py`, or
-`python3 scripts/snapshot_pypi_mp3_id3v2.py`. Each
+`python3 scripts/snapshot_pypi_mp3_id3v2.py`, or
+`python3 scripts/snapshot_pypi_mp4.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -471,6 +483,12 @@ or quality judgment.
   remain unresolved. Tag readers and audio decoders have separate scope labels,
   and the [standard-library inventory](data/python/mp3_id3v2/standard.json)
   records the scoped CPython finding.
+- [Python × MP4 ranking](data/python/mp4/ranking.md): 20 package paths
+  verified on the one-frame audiovisual control. Nine bounded PyPI name
+  filters saved 672 hits and 667 distinct names; eight plausible leads remain
+  unresolved. Box, metadata, audio, and frame scopes are labeled, and the
+  [standard-library inventory](data/python/mp4/standard.json) records the
+  scoped CPython finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -524,6 +542,9 @@ uncertainty.
 - `data/python/mp3_id3v2/`: bounded PyPI leads, a hash-locked Python
   environment, within-Python downloads, tag and audio scopes, control outputs,
   and the separate standard-library finding.
+- `data/python/mp4/`: bounded PyPI leads, a hash-locked Python environment,
+  within-Python downloads, MP4 box/metadata/audio/video scopes, control
+  outputs, and the separate standard-library finding.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

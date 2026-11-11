@@ -997,15 +997,32 @@
     {
       "ecosystem": "python",
       "format": "mp4",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "project name contains 'mp4'",
+        "project name contains 'mpeg4'",
+        "project name contains 'video'",
+        "project name contains 'media'",
+        "project name contains 'ffmpeg'",
+        "project name contains 'isobmff'",
+        "project name contains 'movie'",
+        "project name contains 'codec'",
+        "project name contains 'box'"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 672,
+      "unique_search_hits": 667,
+      "unresolved_documentation_leads": 8,
+      "uncertainty": "The PyPI Simple JSON project index was filtered by nine project-name substrings, retaining at most 100 case-insensitive alphabetical hits per term. The 672 saved hits contain 667 distinct names, but these alphabetic windows are not popularity-ranked and may miss relevant projects. Eight plausible leads remain unresolved, including decord without a compatible host wheel and mediapy failing against the local FFmpeg version. The 20 verified paths include several wrappers over FFmpeg, OpenCV, TagLib, MediaInfo, and other shared engines; family labels distinguish package paths from independent MP4 implementations. The valid one-frame 2x2 H.264/AAC control proves only the recorded box, metadata, audio, or video scope. No CPython 3.13 standard-library MP4 reader is documented in the scoped official index.",
+      "third_party_evidence": "data/python/mp4/parsers.json",
+      "third_party_control_results": "data/python/mp4/verification.json",
+      "runtime_evidence": "data/python/mp4/standard.json",
+      "registry_snapshot": "data/python/mp4/registry-snapshot.json",
+      "unresolved_leads": "data/python/mp4/leads.json"
     },
     {
       "ecosystem": "python",

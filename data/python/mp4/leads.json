@@ -1,0 +1,74 @@
+[
+  {
+    "name": "decord",
+    "status": "unresolved",
+    "reason": "Version 0.6.0 has no macOS ARM wheel compatible with the pinned Python 3.13 host, so no local MP4 control run was established.",
+    "source": "https://pypi.org/project/decord/0.6.0/"
+  },
+  {
+    "name": "mediapy",
+    "status": "unresolved",
+    "reason": "Version 1.2.7 installed but read_video could not parse the local FFmpeg 9.0.2 header; no MP4 frame result was counted.",
+    "source": "https://pypi.org/project/mediapy/1.2.7/"
+  },
+  {
+    "name": "pymp4parse",
+    "status": "unresolved",
+    "reason": "Version 0.3.0 required undeclared six and an older bitstring API. With compatibility pins it returned incorrect box type names for ftyp and moov on the valid control, so the result was not accepted.",
+    "source": "https://pypi.org/project/pymp4parse/0.3.0/"
+  },
+  {
+    "name": "scikit-video",
+    "status": "unresolved",
+    "reason": "Version 1.1.11 failed on NumPy 2.5 because it still references removed np.float; no pinned MP4 control result was established.",
+    "source": "https://pypi.org/project/scikit-video/1.1.11/"
+  },
+  {
+    "name": "mp4file",
+    "status": "unresolved",
+    "reason": "Version 0.2 failed to import because it uses an unqualified Python 2-style import of atom; no unmodified package API control result was established.",
+    "source": "https://pypi.org/project/mp4file/0.2/"
+  },
+  {
+    "name": "python-ffmpeg",
+    "status": "unresolved",
+    "reason": "Its ffmpeg import namespace conflicts with the accepted ffmpeg-python release. It needs a separate pinned environment and a local MP4 result before counting.",
+    "source": "https://pypi.org/project/python-ffmpeg/"
+  },
+  {
+    "name": "audiofile",
+    "status": "unresolved",
+    "reason": "Its MP4 audio read path failed on this host because the mediainfo executable was unavailable, despite the Python MediaInfo binding being installed.",
+    "source": "https://pypi.org/project/audiofile/"
+  },
+  {
+    "name": "torchvision",
+    "status": "unresolved",
+    "reason": "The video reader API is plausible, but a pinned torch/torchvision native environment and MP4 control run were not established.",
+    "source": "https://pypi.org/project/torchvision/"
+  },
+  {
+    "name": "opencv-python",
+    "status": "excluded",
+    "reason": "It is another distribution variant of the same OpenCV Python binding project as the accepted opencv-python-headless path; counting both would duplicate one library.",
+    "source": "https://pypi.org/project/opencv-python/"
+  },
+  {
+    "name": "soundfile",
+    "status": "excluded",
+    "reason": "The pinned libsndfile path rejected the valid MP4 container as unrecognized.",
+    "source": "https://pypi.org/project/soundfile/"
+  },
+  {
+    "name": "librosa",
+    "status": "excluded",
+    "reason": "The pinned librosa.load path rejected the valid MP4 control through its soundfile backend.",
+    "source": "https://pypi.org/project/librosa/"
+  },
+  {
+    "name": "isoparser",
+    "status": "excluded",
+    "reason": "The package parses ISO 9660 disk images; the ISO name is not MP4/ISO BMFF parser evidence.",
+    "source": "https://pypi.org/project/isoparser/"
+  }
+]

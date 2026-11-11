@@ -1,0 +1,282 @@
+{
+  "checked_at_utc": "2026-11-11T21:23:24.535650+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "python": "Python 3.13.1",
+  "external_ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers",
+  "controls": {
+    "controls/mp4/red-av.mp4": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643"
+  },
+  "control_meaning": "valid one-second MP4 with one 2x2 red H.264 frame, 8 kHz AAC audio, title Parsarium, and creation timestamp",
+  "third_party": [
+    {
+      "package": "mutagen",
+      "version": "1.48.1",
+      "scope": "MP4 title metadata",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py mutagen /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "tinytag",
+      "version": "2.3.2",
+      "scope": "MP4 title and duration",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py tinytag /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "duration_seconds": 1.0,
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "pytaglib",
+      "version": "3.2.0",
+      "scope": "MP4 title metadata",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pytaglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "pymediainfo",
+      "version": "7.0.1",
+      "scope": "video/audio track metadata",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pymediainfo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "audio_format": "AAC",
+        "height": 2,
+        "video_format": "AVC",
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "hachoir",
+      "version": "3.4.0",
+      "scope": "video dimensions and duration",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py hachoir /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "duration_seconds": 1,
+        "height": 2,
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "pydub",
+      "version": "0.25.1",
+      "scope": "AAC audio decode",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pydub /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "audio_channels": 1,
+        "audio_rate": 8000,
+        "duration_ms": 1000
+      },
+      "error": null
+    },
+    {
+      "package": "audioread",
+      "version": "3.1.0",
+      "scope": "AAC audio properties",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py audioread /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "audio_channels": 1,
+        "audio_rate": 8000,
+        "duration_seconds": 1.0
+      },
+      "error": null
+    },
+    {
+      "package": "av",
+      "version": "19.0.2",
+      "scope": "video/audio tracks and title",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py av /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "audio_codec": "aac",
+        "height": 2,
+        "title": "Parsarium",
+        "video_codec": "h264",
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "audiomath",
+      "version": "1.23.0",
+      "scope": "AAC audio decode",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py audiomath /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "audio_rate": 8000,
+        "audio_samples": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "ffmpeg-python",
+      "version": "0.2.0",
+      "scope": "video dimensions, codec, title",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py ffmpeg-python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "height": 2,
+        "title": "Parsarium",
+        "video_codec": "h264",
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "moviepy",
+      "version": "2.2.1",
+      "scope": "decoded video frame and duration",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py moviepy /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "duration_seconds": 1.0,
+        "height": 2,
+        "red_frame": true,
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "imageio",
+      "version": "2.38.1",
+      "scope": "decoded video frame and codec",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py imageio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "height": 2,
+        "red_frame": true,
+        "video_codec": "h264",
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "imageio-ffmpeg",
+      "version": "0.8.1",
+      "scope": "decoded video frame and codec",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py imageio-ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "height": 2,
+        "red_frame": true,
+        "video_codec": "h264",
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "opencv-python-headless",
+      "version": "5.0.0.93",
+      "scope": "decoded video frame",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py opencv-python-headless /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "height": 2,
+        "red_frame": true,
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "pymp4",
+      "version": "1.4.0",
+      "scope": "ftyp and moov boxes",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pymp4 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "first_box": "ftyp",
+        "major_brand": "isom",
+        "second_box": "moov"
+      },
+      "error": null
+    },
+    {
+      "package": "metabeam",
+      "version": "0.1.0",
+      "scope": "MP4 brands, timescale, box list",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py metabeam /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ],
+        "major_brand": "isom",
+        "timescale": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "ffmpegio",
+      "version": "0.12.0",
+      "scope": "video dimensions, codec, title",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py ffmpegio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "height": 2,
+        "title": "Parsarium",
+        "video_codec": "h264",
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "pymp4v2",
+      "version": "0.1.13",
+      "scope": "tracks, title, duration",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pymp4v2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "duration_seconds": 1.0,
+        "title": "Parsarium",
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "pycord",
+      "version": "0.1.1",
+      "scope": "decoded video frame",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pycord /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "frames": 1,
+        "height": 2,
+        "red_frame": true,
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "pyvideoreader",
+      "version": "0.5.7",
+      "scope": "video dimensions and first-frame channel count",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp4/main.py pyvideoreader /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "channels": 3,
+        "frames": 1,
+        "height": 2,
+        "width": 2
+      },
+      "error": null
+    }
+  ],
+  "runtime": []
+}
