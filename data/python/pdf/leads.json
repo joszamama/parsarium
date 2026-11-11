@@ -1,0 +1,80 @@
+[
+  {
+    "name": "unstructured",
+    "status": "unresolved",
+    "reason": "Its PDF partition API is plausible and adoption is high, but a pinned optional PDF dependency set and valid local-control output have not been recorded.",
+    "source": "https://docs.unstructured.io/open-source/core-functionality/partitioning"
+  },
+  {
+    "name": "docling",
+    "status": "unresolved",
+    "reason": "The local PDF conversion pipeline is plausible; model and native dependencies, release license, and a pinned control run remain unchecked.",
+    "source": "https://docling-project.github.io/docling/"
+  },
+  {
+    "name": "marker-pdf",
+    "status": "unresolved",
+    "reason": "PDF-to-markdown parsing may use local model weights; no pinned offline control run was established.",
+    "source": "https://pypi.org/project/marker-pdf/"
+  },
+  {
+    "name": "pdfreader",
+    "status": "unresolved",
+    "reason": "Version 0.1.15 failed on the valid 696-byte control because its reader seeks back 1024 bytes. It did parse a separately generated 1343-byte valid PDF, but that control and a locked adapter were not recorded.",
+    "source": "https://pypi.org/project/pdfreader/0.1.15/"
+  },
+  {
+    "name": "borb",
+    "status": "unresolved",
+    "reason": "Version 3.0.9's wheel could not be extracted by uv because it contains duplicate entries with differing content; no local-control result was established.",
+    "source": "https://pypi.org/project/borb/3.0.9/"
+  },
+  {
+    "name": "python-poppler",
+    "status": "unresolved",
+    "reason": "Version 0.4.1's source build failed while Meson fetched pybind11 because TLS certificate verification failed; no pinned adapter run was established.",
+    "source": "https://pypi.org/project/python-poppler/0.4.1/"
+  },
+  {
+    "name": "camelot-py",
+    "status": "unresolved",
+    "reason": "Its documented API extracts PDF tables. The one-page control contains text but no table, so a meaningful valid table control and adapter are still needed.",
+    "source": "https://pypi.org/project/camelot-py/"
+  },
+  {
+    "name": "tabula-py",
+    "status": "unresolved",
+    "reason": "Its Java-backed table extraction needs a valid table control and a pinned local Java toolchain run; the text-only PDF control is insufficient.",
+    "source": "https://pypi.org/project/tabula-py/"
+  },
+  {
+    "name": "pdftextract",
+    "status": "unresolved",
+    "reason": "Version 0.0.5 installed, but its bundled pdfinfo.exe could not execute on macOS ARM; no local-control result was counted.",
+    "source": "https://pypi.org/project/pdftextract/0.0.5/"
+  },
+  {
+    "name": "pdf2txt",
+    "status": "excluded",
+    "reason": "Version 0.7.14 parsed the control, but its PyPI release metadata and installed wheel supplied no open-source license evidence.",
+    "source": "https://pypi.org/project/pdf2txt/0.7.14/"
+  },
+  {
+    "name": "markitdown-pdf",
+    "status": "excluded",
+    "reason": "Version 1.0.0's package description documents a command-line input but did not establish a documented public local-input library API.",
+    "source": "https://pypi.org/project/markitdown-pdf/1.0.0/"
+  },
+  {
+    "name": "PyPDF2",
+    "status": "excluded",
+    "reason": "This is an earlier release line of the same upstream project as accepted pypdf; counting both would duplicate one library.",
+    "source": "https://pypdf.readthedocs.io/en/latest/meta/history.html"
+  },
+  {
+    "name": "reportlab",
+    "status": "excluded",
+    "reason": "Its documented PDF API generates documents; no PDF-aware local input parser API was established.",
+    "source": "https://docs.reportlab.com/"
+  }
+]

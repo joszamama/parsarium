@@ -4,7 +4,7 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, ASCII PNM, ZIP, and WAV, and an explicit 88-cell work matrix. The other 67 cells
+Python × PNG, ASCII PNM, ZIP, WAV, and PDF, and an explicit 88-cell work matrix. The other 66 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -58,6 +58,13 @@ python3 scripts/verify_python_zip.py
 uv venv --python python3.13 adapters/python/wav/.venv
 uv pip sync adapters/python/wav/requirements.lock --python adapters/python/wav/.venv/bin/python --require-hashes
 python3 scripts/verify_python_wav.py
+uv venv --python python3.13 adapters/python/pdf/.venv
+uv pip sync adapters/python/pdf/requirements.lock --python adapters/python/pdf/.venv/bin/python --require-hashes
+uv venv --python python3.13 adapters/python/pdf/.venv_pdfx
+uv pip sync adapters/python/pdf/requirements-pdfx.lock --python adapters/python/pdf/.venv_pdfx/bin/python --require-hashes
+uv venv --python python3.13 adapters/python/pdf/.venv_slate
+uv pip sync adapters/python/pdf/requirements-slate3k.lock --python adapters/python/pdf/.venv_slate/bin/python --require-hashes
+python3 scripts/verify_python_pdf.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -264,6 +271,15 @@ readers, and identifies packages that share CPython `wave`, libsndfile,
 FFmpeg, or other backends. Pygame uses a dummy SDL audio driver for its
 control run. The standard-library result is `wave.open`.
 
+`verify_python_pdf.py` verifies **20/20 third-party package paths** on the
+one-page PDF control. Eighteen packages share the main hash-locked Python 3.13
+environment; PDFx and Slate3k use isolated locks because their older
+`pdfminer` dependencies conflict with current `pdfminer.six`. The
+`pdf2image` and `pdftotext` paths require a local Poppler installation;
+the recorded host used Poppler 26.09.0. The ranking distinguishes text,
+metadata, layout, and page-rendering results and names shared parser engines.
+The scoped CPython standard-library inventory found no PDF-aware input API.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -285,11 +301,12 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, or WAV discovery, run
+For Python PNG, ASCII PNM, ZIP, WAV, or PDF discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
-`python3 scripts/snapshot_pypi_wav.py`. Each
+`python3 scripts/snapshot_pypi_wav.py`, or
+`python3 scripts/snapshot_pypi_pdf.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -428,6 +445,12 @@ or quality judgment.
   leads remain unresolved, including torchaudio. The
   [standard-library inventory](data/python/wav/standard.json) separately
   verifies `wave.open`.
+- [Python × PDF ranking](data/python/pdf/ranking.md): 20 package paths verified
+  on the valid one-page control. Nine bounded PyPI name filters saved 677
+  hits and 672 distinct names; nine plausible leads remain unresolved. Shared
+  PDF engines are labeled, and the
+  [standard-library inventory](data/python/pdf/standard.json) records the
+  scoped absence of a CPython PDF parser API.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -475,6 +498,9 @@ uncertainty.
   downloads, sample and metadata scopes, control outputs, and the separate
   standard-library result. The adapters and lock live under
   `adapters/python/wav/`.
+- `data/python/pdf/`: bounded PyPI leads, three pinned Python environments,
+  within-Python downloads, verified text/metadata/layout/rendering scopes,
+  control outputs, and the separate standard-library finding.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

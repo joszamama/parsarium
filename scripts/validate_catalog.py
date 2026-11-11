@@ -47,8 +47,10 @@ def main() -> None:
                 assert count is None or isinstance(count, int)
                 assert parser["license"] == snapshot["releases"][name]["license"]
             elif cell["ecosystem"] == "python":
-                requirements = (ROOT / "adapters" / "python" / cell["format"] / "requirements.in").read_text()
-                python_versions = dict(re.findall(r"^([A-Za-z0-9_.-]+)==([^\s]+)$", requirements, re.MULTILINE))
+                requirements_dir = ROOT / "adapters" / "python" / cell["format"]
+                requirements = "\n".join(path.read_text() for path in requirements_dir.glob("requirements*.in"))
+                python_versions = dict(re.findall(r"^([A-Za-z0-9_.-]+)(?:\[[^]]+\])?==([^\s]+)$",
+                                                  requirements, re.MULTILINE))
                 assert parser["version"] == python_versions[name]
                 count = snapshot["download_metric"]["packages"][name]["downloads"]
                 assert count is None or isinstance(count, int)

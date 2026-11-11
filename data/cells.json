@@ -1040,15 +1040,32 @@
     {
       "ecosystem": "python",
       "format": "pdf",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "project name contains 'pdf'",
+        "project name contains 'pypdf'",
+        "project name contains 'pdfminer'",
+        "project name contains 'poppler'",
+        "project name contains 'document'",
+        "project name contains 'page'",
+        "project name contains 'extract'",
+        "project name contains 'reader'",
+        "project name contains 'markdown'"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 677,
+      "unique_search_hits": 672,
+      "unresolved_documentation_leads": 9,
+      "uncertainty": "The PyPI Simple JSON project index was filtered by nine project-name substrings, retaining at most 100 case-insensitive alphabetical hits per term. The 677 saved hits contain 672 distinct names; these are not popularity-ranked discovery results, and relevant packages outside the windows may be missed. Nine plausible leads remain unresolved, including higher-adoption unstructured and docling. The 20 verified paths include wrappers over pdfminer.six, MuPDF, PDFium, and Poppler; family labels prevent reading the count as 20 independent PDF engines. PDFx and Slate3k use isolated hash-locked environments because their older pdfminer dependencies conflict with the main environment. The valid one-page control proves only the recorded text, title, layout, or rendering scope. CPython has no documented PDF-aware standard-library input API in the scoped official index.",
+      "third_party_evidence": "data/python/pdf/parsers.json",
+      "third_party_control_results": "data/python/pdf/verification.json",
+      "runtime_evidence": "data/python/pdf/standard.json",
+      "registry_snapshot": "data/python/pdf/registry-snapshot.json",
+      "unresolved_leads": "data/python/pdf/leads.json"
     },
     {
       "ecosystem": "python",
