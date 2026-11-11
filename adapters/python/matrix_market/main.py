@@ -86,6 +86,10 @@ def parse(name, path):
         from sdos.io import read_matrix
         return dense_result(read_matrix(str(path), verbose=False).toarray())
 
+    if name == "mtl5":
+        import mtl5
+        return dense_result(mtl5.io.mm_read_dense(str(path)).to_numpy())
+
     raise ValueError(f"unknown parser: {name}")
 
 

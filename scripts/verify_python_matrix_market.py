@@ -26,7 +26,7 @@ def main():
     parsers = json.loads((CELL / "parsers.json").read_text())
     third_party = []
     for parser in parsers:
-        python = PYTHON_310 if parser["name"] == "scprep" else PYTHON
+        python = PYTHON_310 if parser["name"] in {"scprep", "mtl5"} else PYTHON
         command = [str(python), str(ADAPTER / "main.py"), parser["name"],
                    str(ROOT / parser["control"])]
         try:

@@ -1,6 +1,6 @@
 # Python × Matrix Market: verified parser ranking
 
-14 verified third-party packages; working goal 20, original ceiling 30. The metric is PyPI Stats `last_month` downloads excluding known mirrors, captured at 2026-11-11T22:24:24.533805+00:00. It is compared only within Python. 2 package(s) lack a metric and remain unranked; no value is inferred.
+15 verified third-party packages; working goal 20, original ceiling 30. The metric is PyPI Stats `last_month` downloads excluding known mirrors, captured at 2026-11-11T22:29:07.667142+00:00. It is compared only within Python. 2 package(s) lack a metric and remain unranked; no value is inferred.
 
 The PyPI Simple Index leads are alphabetically ordered names, not a popularity search. Search hits, unresolved leads, and standard-library findings are separate from this ranking.
 
@@ -16,7 +16,8 @@ The PyPI Simple Index leads are alphabetically ordered names, not a popularity s
 | 8 | [scprep](https://scprep.readthedocs.io/en/stable/reference.html) | 1.2.3 | 10,470 | Matrix Market coordinate real matrix values | scprep wrapper over scipy.io.mmread |
 | 9 | [fast-matrix-market](https://pypi.org/project/fast-matrix-market/1.7.6/) | 1.7.6 | 1,029 | Matrix Market coordinate real matrix values | fast_matrix_market C++ core (also used by SciPy) |
 | 10 | [crest-sc](https://crest-sc.readthedocs.io/en/latest/api.html) | 0.4.0 | 1,009 | 10x Matrix Market count matrix plus feature and barcode annotations | CREST Rust/Polars 10x Matrix Market reader |
-| 11 | [dyng](https://dyng-dev.github.io/dyng/api/cli.html) | 0.3.0 | 233 | Matrix Market coordinate graph topology | dynG C++ Matrix Market graph reader |
-| 12 | [acidgenomics-pipette](https://pypi.org/project/acidgenomics-pipette/0.2.1/) | 0.2.1 | 47 | Matrix Market coordinate real matrix values | Pipette MTX dispatcher over scipy.io.mmread |
+| 11 | [mtl5](https://pypi.org/project/mtl5/5.22.0/) | 5.22.0 | 885 | Matrix Market coordinate real matrix values | MTL5 C++ Matrix Market reader |
+| 12 | [dyng](https://dyng-dev.github.io/dyng/api/cli.html) | 0.3.0 | 233 | Matrix Market coordinate graph topology | dynG C++ Matrix Market graph reader |
+| 13 | [acidgenomics-pipette](https://pypi.org/project/acidgenomics-pipette/0.2.1/) | 0.2.1 | 47 | Matrix Market coordinate real matrix values | Pipette MTX dispatcher over scipy.io.mmread |
 | unranked | [subgraphsearch](https://pypi.org/project/subgraphsearch/2.0.1/) | 2.0.1 | unknown | Matrix Market coordinate graph topology | subgraphsearch Rust graph reader |
 | unranked | [sdos](https://pypi.org/project/sdos/0.1.0/) | 0.1.0 | unknown | Matrix Market coordinate real symmetric matrix values | sdos Matrix Market dispatch over scipy.io.mmread |
