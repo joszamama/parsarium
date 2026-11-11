@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP, PNG, WAV, HTTP/1.1, and MP4, and an explicit 88-cell work matrix. The other 75 cells
+Go × ZIP, PNG, WAV, HTTP/1.1, MP4, and MP3 with ID3v2, and an explicit 88-cell work matrix. The other 74 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -38,6 +38,7 @@ python3 scripts/verify_go_png.py
 python3 scripts/verify_go_wav.py
 python3 scripts/verify_go_http11.py
 python3 scripts/verify_go_mp4.py
+python3 scripts/verify_go_mp3_id3v2.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -161,6 +162,15 @@ API. The ranking labels narrow `ftyp` and metadata scopes and shared parser
 families. The separate standard-library inventory records no MP4-aware API
 in the scoped Go 1.27.1 docs.
 
+`verify_go_mp3_id3v2.py` uses Go 1.27.1 and the committed 44.1 kHz MPEG-1
+Layer III control with ID3v2.3 title `Parsarium`. Its source bytes are restored
+by `python3 controls/mp3_id3v2/make_control.py`, alongside the earlier 8 kHz
+control. The observed result is **20/20 third-party packages passing**. Audio
+decoders, MPEG frame readers, duration readers, and ID3v2 title readers have
+separate scopes in the ranking. Two duration readers include encoder padding in
+their reported 1071 ms; one tag reader preserves a trailing NUL in the title.
+The Go 1.27.1 standard-library inventory records no MP3 or ID3v2 parser API.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -173,10 +183,10 @@ supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
 
-For Go ZIP, PNG, WAV, HTTP/1.1, or MP4 discovery, install the pinned packages in
+For Go ZIP, PNG, WAV, HTTP/1.1, MP4, or MP3 with ID3v2 discovery, install the pinned packages in
 `scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py FORMAT`
 and `python3 scripts/enrich_go.py FORMAT` with `FORMAT` set to `zip`, `png`,
-`wav`, `http11`, or `mp4`. These refresh bounded pkg.go.dev
+`wav`, `http11`, `mp4`, or `mp3_id3v2`. These refresh bounded pkg.go.dev
 package-search hits, pinned-release license evidence, and package-level
 “Imported by” counts. Go counts are compared only within their Go format cell.
 The public search pages supplied this snapshot after the
@@ -264,6 +274,11 @@ or quality judgment.
   fragmented-MP4 readers requiring a separate valid control. The
   [standard-library inventory](data/go/mp4/standard.json) records the scoped
   Go 1.27.1 finding.
+- [Go × MP3 with ID3v2 ranking](data/go/mp3_id3v2/ranking.md): 20 packages with
+  labeled audio, MPEG frame, duration, and ID3 title scopes. Five pkg.go.dev
+  queries saved 311 hits and 252 unique package paths; ten plausible leads
+  remain unresolved. The [standard-library inventory](data/go/mp3_id3v2/standard.json)
+  records the scoped Go 1.27.1 finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the

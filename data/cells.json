@@ -486,15 +486,28 @@
     {
       "ecosystem": "go",
       "format": "mp3_id3v2",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "mp3",
+        "id3v2",
+        "mp3 decoder",
+        "id3 tag",
+        "mp3 reader"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 311,
+      "unique_search_hits": 252,
+      "unresolved_documentation_leads": 10,
+      "uncertainty": "Five pkg.go.dev public package-search queries saved 311 hits and 252 unique package paths. Query windows returned 100, 46, 97, 67, 1 hits in order; the broad mp3 result window stopped at 100. The HTML pages expose no total result count, so none is inferred. Ten plausible leads remain unresolved; one documented reader panicked on the valid control. The accepted packages share hajime/go-mp3, beep, tcolgate, dhowden/tag, and ascherkus/go-id3 lineages, so 20 packages do not imply 20 independent engines. A one-second 44.1 kHz MPEG-1 Layer III file with ID3v2.3 title, artist, and album verifies only the labeled paths. Two duration readers count encoder padding and report 1071 ms; one title reader includes a trailing NUL. Direct-importer counts are package-level adoption signals, not downloads; missing metrics are not invented.",
+      "third_party_evidence": "data/go/mp3_id3v2/parsers.json",
+      "third_party_control_results": "data/go/mp3_id3v2/verification.json",
+      "runtime_evidence": "data/go/mp3_id3v2/standard.json",
+      "registry_snapshot": "data/go/mp3_id3v2/registry-snapshot.json",
+      "unresolved_leads": "data/go/mp3_id3v2/leads.json"
     },
     {
       "ecosystem": "java",

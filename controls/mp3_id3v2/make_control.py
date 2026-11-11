@@ -17,3 +17,14 @@ assert data[:4] == b"ID3\x03"
 out = root / "tone-tags.mp3"
 out.write_bytes(data)
 print(f"Wrote {len(data)} MP3 bytes with SHA-256 {expected_sha256}")
+
+# A second valid tagged control uses MPEG-1 Layer III at 44.1 kHz. It was
+# generated once with FFmpeg 9.0.2 from a one-second 440 Hz sine wave, 64 kbit/s
+# mono libmp3lame audio, and the same ID3v2.3 title/artist/album fields.
+data_44k = b64decode((root / "source-44k.b64").read_text())
+expected_44k_sha256 = "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307"
+assert sha256(data_44k).hexdigest() == expected_44k_sha256
+assert data_44k[:4] == b"ID3\x03"
+out_44k = root / "tone-tags-44k.mp3"
+out_44k.write_bytes(data_44k)
+print(f"Wrote {len(data_44k)} MP3 bytes with SHA-256 {expected_44k_sha256}")
