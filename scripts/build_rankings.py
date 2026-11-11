@@ -41,14 +41,14 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"{format_name}: {len(ranked)} verified packages ranked")
 
-    for format_name in ("zip", "png", "wav"):
+    for format_name in ("zip", "png", "wav", "http11"):
         directory = ROOT / "data" / "go" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["popularity_metric"]["packages"]
         ranked = sorted(parsers, key=lambda parser: -(metrics[parser["name"]]["imported_by_packages"] or 0))
         lines = [
-            f"# Go × {format_name.upper()}: verified parser ranking",
+            f"# Go × {'HTTP/1.1' if format_name == 'http11' else format_name.upper()}: verified parser ranking",
             "",
             f"{len(ranked)} verified third-party packages; working goal 20, original ceiling 30. "
             "The metric is pkg.go.dev's package-level ‘Imported by’ count captured at "

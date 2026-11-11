@@ -1,0 +1,327 @@
+{
+  "checked_at_utc": "2026-11-11T19:03:41.832944+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.27.1 darwin/arm64",
+  "controls": {
+    "request": "controls/http11/request.http",
+    "response": "controls/http11/response.http"
+  },
+  "control_sha256": {
+    "request": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+    "response": "89095a71f21f4047f3d86e05d4fdf37bdfffcbf746a3aa85bc32fd7b7ea3a2c4"
+  },
+  "control_meaning": "GET /parsarium?x=1 with Host example.test; HTTP/1.1 200 OK with parsarium body",
+  "third_party": [
+    {
+      "package": "github.com/valyala/fasthttp",
+      "module": "github.com/valyala/fasthttp",
+      "version": "v1.78.0",
+      "scope": "request message",
+      "command": "go run . github.com/valyala/fasthttp ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/evanphx/wildcat",
+      "module": "github.com/evanphx/wildcat",
+      "version": "v0.0.0-20141114174135-e7012f664567",
+      "scope": "request head",
+      "command": "go run . github.com/evanphx/wildcat ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/sebishogun/simdhttp/http1",
+      "module": "github.com/sebishogun/simdhttp",
+      "version": "v0.0.0-20261007210108-01268e016029",
+      "scope": "request head",
+      "command": "go run . github.com/sebishogun/simdhttp/http1 ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/FastTLS/oohttp",
+      "module": "github.com/FastTLS/oohttp",
+      "version": "v0.0.0-20261026180050-43186effd7f4",
+      "scope": "request message",
+      "command": "go run . github.com/FastTLS/oohttp ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/hellpuffyt/spindrift/http1",
+      "module": "github.com/hellpuffyt/spindrift",
+      "version": "v0.0.0-20261022160824-5a92c9177f42",
+      "scope": "request message",
+      "command": "go run . github.com/hellpuffyt/spindrift/http1 ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/justIliane/blazehttp/pkg/header",
+      "module": "github.com/justIliane/blazehttp",
+      "version": "v1.0.0",
+      "scope": "request header",
+      "command": "go run . github.com/justIliane/blazehttp/pkg/header ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/cloudwego/hertz/pkg/protocol/http1/req",
+      "module": "github.com/cloudwego/hertz",
+      "version": "v0.10.6",
+      "scope": "request message",
+      "command": "go run . github.com/cloudwego/hertz/pkg/protocol/http1/req ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw",
+      "module": "github.com/projectdiscovery/nuclei/v3",
+      "version": "v3.11.1",
+      "scope": "raw request message",
+      "command": "go run . github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/gobwas/httphead",
+      "module": "github.com/gobwas/httphead",
+      "version": "v0.1.0",
+      "scope": "request line only",
+      "command": "go run . github.com/gobwas/httphead ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "major": 1,
+        "method": "GET",
+        "minor": 1,
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/lesismal/nbio/nbhttp",
+      "module": "github.com/lesismal/nbio",
+      "version": "v1.7.1",
+      "scope": "request message",
+      "command": "go run . github.com/lesismal/nbio/nbhttp ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/lesismal/fib/http",
+      "module": "github.com/lesismal/fib",
+      "version": "v1.5.6",
+      "scope": "request message",
+      "command": "go run . github.com/lesismal/fib/http ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/antlabs/fio/http",
+      "module": "github.com/antlabs/fio",
+      "version": "v0.2.8",
+      "scope": "request message",
+      "command": "go run . github.com/antlabs/fio/http ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/meta-apex/metarpc/codec/http",
+      "module": "github.com/meta-apex/metarpc",
+      "version": "v0.0.0-20250816075809-78e603aff299",
+      "scope": "request message",
+      "command": "go run . github.com/meta-apex/metarpc/codec/http ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/go-fasthttp/fasthttp",
+      "module": "github.com/go-fasthttp/fasthttp",
+      "version": "v0.0.0-20161128095036-1c39678a4dd0",
+      "scope": "request message",
+      "command": "go run . github.com/go-fasthttp/fasthttp ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/zhaofenghao/clash/listener/http",
+      "module": "github.com/zhaofenghao/clash",
+      "version": "v1.0.14",
+      "scope": "request message",
+      "command": "go run . github.com/zhaofenghao/clash/listener/http ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/lemon4ksan/mach/server/h1",
+      "module": "github.com/lemon4ksan/mach",
+      "version": "v0.2.0",
+      "scope": "request message",
+      "command": "go run . github.com/lemon4ksan/mach/server/h1 ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/antlabs/httparser",
+      "module": "github.com/antlabs/httparser",
+      "version": "v0.0.11",
+      "scope": "request message",
+      "command": "go run . github.com/antlabs/httparser ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "major": 1,
+        "method": "GET",
+        "minor": 1,
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/hsiafan/httpdump/httpport",
+      "module": "github.com/hsiafan/httpdump",
+      "version": "v0.0.0-20231019014708-4fd809447b59",
+      "scope": "request message",
+      "command": "go run . github.com/hsiafan/httpdump/httpport ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/openctemio/openctem/api/pkg/domain/evidence",
+      "module": "github.com/openctemio/openctem/api",
+      "version": "v0.0.0-20261107202920-27e7faec6f5d",
+      "scope": "raw request message",
+      "command": "go run . github.com/openctemio/openctem/api/pkg/domain/evidence ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "url": "http://example.test/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/nelthaarion/breeze",
+      "module": "github.com/nelthaarion/breeze",
+      "version": "v1.6.2",
+      "scope": "request message",
+      "command": "go run . github.com/nelthaarion/breeze ../../../controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    }
+  ],
+  "runtime": {
+    "apis": [
+      "net/http.ReadRequest",
+      "net/http.ReadResponse"
+    ],
+    "command": "go run adapters/go/http11_std.go controls/http11/request.http controls/http11/response.http",
+    "pass": true,
+    "output": {
+      "request": {
+        "host": "example.test",
+        "method": "GET",
+        "proto": "HTTP/1.1",
+        "target": "/parsarium?x=1"
+      },
+      "response": {
+        "body": "parsarium",
+        "proto": "HTTP/1.1",
+        "status": 200
+      }
+    },
+    "error": null
+  }
+}

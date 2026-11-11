@@ -1,0 +1,27 @@
+{
+  "ecosystem": "Go",
+  "format": "HTTP/1.1",
+  "status": "standard_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "Go 1.27.1 darwin/arm64 standard library",
+      "api": "net/http.ReadRequest(*bufio.Reader)",
+      "documentation": "https://pkg.go.dev/net/http@go1.27.1",
+      "adapter": "adapters/go/http11_std.go",
+      "control": "controls/http11/request.http",
+      "observable_result": "GET /parsarium?x=1, Host example.test, HTTP/1.1",
+      "result": "data/go/http11/verification.json"
+    },
+    {
+      "runtime": "Go 1.27.1 darwin/arm64 standard library",
+      "api": "net/http.ReadResponse(*bufio.Reader, *Request)",
+      "documentation": "https://pkg.go.dev/net/http@go1.27.1",
+      "adapter": "adapters/go/http11_std.go",
+      "control": "controls/http11/response.http",
+      "observable_result": "HTTP/1.1 200 OK, body parsarium",
+      "result": "data/go/http11/verification.json"
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "The valid request and response controls verify these Go 1.27.1 APIs for one HTTP/1.1 message each, not every transfer coding or message feature."
+}

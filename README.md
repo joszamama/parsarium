@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP, PNG, and WAV, and an explicit 88-cell work matrix. The other 77 cells
+Go × ZIP, PNG, WAV, and HTTP/1.1, and an explicit 88-cell work matrix. The other 76 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -36,6 +36,7 @@ npm run http11:verify
 python3 scripts/verify_go_zip.py
 python3 scripts/verify_go_png.py
 python3 scripts/verify_go_wav.py
+python3 scripts/verify_go_http11.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -144,6 +145,13 @@ inventory documents no WAV-aware parser API; generic file and binary readers
 do not qualify. The `cryptix/wav` adapter verifies its parsed header and sample
 count, since a sample value disagreed with the control's signed PCM.
 
+`verify_go_http11.py` uses Go 1.27.1 and the shared valid request and response
+wire controls. `adapters/go/http11/go.mod` and `go.sum` pin the releases. The
+observed result is **20/20 third-party packages and 2/2 Go standard-library
+API paths passing**. Request-line and request-header-only readers are labeled
+by scope. Several packages share `net/http` or `fasthttp` parser lineages;
+the package count does not imply 20 independent parser engines.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -156,10 +164,10 @@ supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
 
-For Go ZIP, PNG, or WAV discovery, install the pinned packages in
+For Go ZIP, PNG, WAV, or HTTP/1.1 discovery, install the pinned packages in
 `scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py FORMAT`
-and `python3 scripts/enrich_go.py FORMAT` with `FORMAT` set to `zip`, `png`, or
-`wav`. These refresh bounded pkg.go.dev
+and `python3 scripts/enrich_go.py FORMAT` with `FORMAT` set to `zip`, `png`,
+`wav`, or `http11`. These refresh bounded pkg.go.dev
 package-search hits, pinned-release license evidence, and package-level
 “Imported by” counts. Go counts are compared only within their Go format cell.
 The public search pages supplied this snapshot after the
@@ -236,6 +244,11 @@ or quality judgment.
   271 unique package paths; eight named leads remain unresolved. The
   [standard-library inventory](data/go/wav/standard.json) records the scoped
   Go 1.27.1 finding.
+- [Go × HTTP/1.1 ranking](data/go/http11/ranking.md): 20 packages with labeled
+  request-message, header, and request-line scopes. Six pkg.go.dev queries saved
+  404 hits and 364 unique package paths; ten named leads remain unresolved.
+  The [standard-library inventory](data/go/http11/standard.json) separately
+  verifies `net/http.ReadRequest` and `ReadResponse`.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
