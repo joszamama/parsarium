@@ -1,0 +1,348 @@
+{
+  "checked_at_utc": "2026-11-11T18:45:19.742810+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.27.1 darwin/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "control_meaning": "RIFF/WAVE PCM16, mono, 8000 Hz, four samples [0, 1000, -1000, 0]",
+  "third_party": [
+    {
+      "package": "github.com/go-audio/wav",
+      "module": "github.com/go-audio/wav",
+      "version": "v1.1.0",
+      "scope": "signs",
+      "command": "go run . github.com/go-audio/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/faiface/beep/wav",
+      "module": "github.com/faiface/beep",
+      "version": "v1.1.0",
+      "scope": "signs",
+      "command": "go run . github.com/faiface/beep/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/hajimehoshi/ebiten/v2/audio/wav",
+      "module": "github.com/hajimehoshi/ebiten/v2",
+      "version": "v2.10.6",
+      "scope": "decoded_stereo_bytes",
+      "command": "go run . github.com/hajimehoshi/ebiten/v2/audio/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "decoded_stereo_bytes": 16,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/cryptix/wav",
+      "module": "github.com/cryptix/wav",
+      "version": "v0.0.0-20180415113528-8bdace674401",
+      "scope": "sample_count",
+      "command": "go run . github.com/cryptix/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "sample_count": 4,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/youpy/go-wav",
+      "module": "github.com/youpy/go-wav",
+      "version": "v0.3.2",
+      "scope": "signs",
+      "command": "go run . github.com/youpy/go-wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/moutend/go-wav",
+      "module": "github.com/moutend/go-wav",
+      "version": "v0.0.0-20170820031854-56127fbbb7ba",
+      "scope": "signs",
+      "command": "go run . github.com/moutend/go-wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/gopxl/beep/v2/wav",
+      "module": "github.com/gopxl/beep/v2",
+      "version": "v2.1.1",
+      "scope": "signs",
+      "command": "go run . github.com/gopxl/beep/v2/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/mattetti/audio/wav",
+      "module": "github.com/mattetti/audio",
+      "version": "v0.0.0-20240411020228-c5379f9b5b61",
+      "scope": "signs",
+      "command": "go run . github.com/mattetti/audio/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/200sc/klangsynthese/wav",
+      "module": "github.com/200sc/klangsynthese",
+      "version": "v0.2.1",
+      "scope": "data_bytes",
+      "command": "go run . github.com/200sc/klangsynthese/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "data_bytes": 8,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/iFaceless/godub/wav",
+      "module": "github.com/iFaceless/godub",
+      "version": "v0.0.0-20200728093528-a30bb4d1a0f1",
+      "scope": "data_bytes",
+      "command": "go run . github.com/iFaceless/godub/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "data_bytes": 8,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/cwbudde/wav",
+      "module": "github.com/cwbudde/wav",
+      "version": "v0.1.4",
+      "scope": "sample_count",
+      "command": "go run . github.com/cwbudde/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "sample_count": 4,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/qiniu/audio/wav",
+      "module": "github.com/qiniu/audio",
+      "version": "v0.2.1",
+      "scope": "decoded_bytes",
+      "command": "go run . github.com/qiniu/audio/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "decoded_bytes": 8,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/xigh/go-wavreader",
+      "module": "github.com/xigh/go-wavreader",
+      "version": "v0.0.0-20210516212152-f49019aa7352",
+      "scope": "frames",
+      "command": "go run . github.com/xigh/go-wavreader ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "frames": 4,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/gonutz/mixer/wav",
+      "module": "github.com/gonutz/mixer",
+      "version": "v1.0.0",
+      "scope": "data_bytes",
+      "command": "go run . github.com/gonutz/mixer/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "data_bytes": 8,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/yut-kt/gowave",
+      "module": "github.com/yut-kt/gowave",
+      "version": "v0.1.4",
+      "scope": "header",
+      "command": "go run . github.com/yut-kt/gowave ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/unixpickle/wav",
+      "module": "github.com/unixpickle/wav",
+      "version": "v0.0.0-20190525173943-42cf4c455f64",
+      "scope": "signs",
+      "command": "go run . github.com/unixpickle/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/tphakala/go-wav/pcm",
+      "module": "github.com/tphakala/go-wav",
+      "version": "v1.1.1",
+      "scope": "data_bytes",
+      "command": "go run . github.com/tphakala/go-wav/pcm ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "bits": 16,
+        "channels": 1,
+        "data_bytes": 8,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "azul3d.org/engine/audio/wav",
+      "module": "azul3d.org/engine",
+      "version": "v0.0.0-20211024043305-793ea6c2839d",
+      "scope": "format",
+      "command": "go run . azul3d.org/engine/audio/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "format": "wav",
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/inkyblackness/res/audio/wav",
+      "module": "github.com/inkyblackness/res",
+      "version": "v0.0.0-20180728072643-e78e2ff1969d",
+      "scope": "sample_count",
+      "command": "go run . github.com/inkyblackness/res/audio/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sample_count": 4,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/weakpixel/voice/wav",
+      "module": "github.com/weakpixel/voice",
+      "version": "v0.0.1",
+      "scope": "signs",
+      "command": "go run . github.com/weakpixel/voice/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "sample_rate": 8000,
+        "signs": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/ngyewch/go-pcm/wav",
+      "module": "github.com/ngyewch/go-pcm",
+      "version": "v0.3.0",
+      "scope": "data_bytes",
+      "command": "go run . github.com/ngyewch/go-pcm/wav ../../../controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "data_bytes": 8,
+        "sample_rate": 8000
+      },
+      "error": null
+    }
+  ]
+}

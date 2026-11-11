@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
-Go × ZIP and PNG, and an explicit 88-cell work matrix. The other 78 cells
+Go × ZIP, PNG, and WAV, and an explicit 88-cell work matrix. The other 77 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -35,6 +35,7 @@ npm run http11:control
 npm run http11:verify
 python3 scripts/verify_go_zip.py
 python3 scripts/verify_go_png.py
+python3 scripts/verify_go_wav.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -136,6 +137,13 @@ Pixel readers, chunk readers, converters, and dimension readers have distinct
 scopes in the ranking; several packages share Go's `image/png` decoder or
 libvips.
 
+`verify_go_wav.py` uses Go 1.27.1 and the shared four-sample PCM16 WAV control.
+`adapters/go/wav/go.mod` and `go.sum` pin the releases. The observed result is
+**21/21 third-party packages passing**. The separate Go 1.27.1 standard-library
+inventory documents no WAV-aware parser API; generic file and binary readers
+do not qualify. The `cryptix/wav` adapter verifies its parsed header and sample
+count, since a sample value disagreed with the control's signed PCM.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -148,11 +156,12 @@ supplies the single ranking metric. The metric is the number of registry
 downloads during **2026-10-11 through 2026-11-09**, inclusive, for each package
 name. It is an adoption proxy and can include automated downloads.
 
-For Go ZIP discovery, install the pinned packages in
-`scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py zip`
-and `python3 scripts/enrich_go.py zip`. These refresh bounded pkg.go.dev
+For Go ZIP, PNG, or WAV discovery, install the pinned packages in
+`scripts/requirements-go-discovery.txt`, then run `python3 scripts/snapshot_go.py FORMAT`
+and `python3 scripts/enrich_go.py FORMAT` with `FORMAT` set to `zip`, `png`, or
+`wav`. These refresh bounded pkg.go.dev
 package-search hits, pinned-release license evidence, and package-level
-“Imported by” counts. Go counts are compared only with other Go ZIP packages.
+“Imported by” counts. Go counts are compared only within their Go format cell.
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
@@ -222,6 +231,11 @@ or quality judgment.
   228 unique package paths. Five named leads remain unresolved. The
   [standard-library inventory](data/go/png/standard.json) separately verifies
   `image/png.Decode`, `DecodeConfig`, and registered `image.Decode`.
+- [Go × WAV ranking](data/go/wav/ranking.md): 21 packages with labeled sample,
+  header, and data-size scopes. Five pkg.go.dev queries saved 373 hits and
+  271 unique package paths; eight named leads remain unresolved. The
+  [standard-library inventory](data/go/wav/standard.json) records the scoped
+  Go 1.27.1 finding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
@@ -238,6 +252,8 @@ The [Go ZIP cell record](data/go/zip/cell.json) gives its separate count,
 search limits, and uncertainty.
 The [Go PNG cell record](data/go/png/cell.json) gives the corresponding
 PNG-specific limits and uncertainty.
+The [Go WAV cell record](data/go/wav/cell.json) gives the WAV search limits and
+uncertainty.
 
 ## Data layout
 
@@ -248,6 +264,8 @@ PNG-specific limits and uncertainty.
   and control results. `adapters/go/zip/go.mod` and `go.sum` pin dependencies.
 - `data/go/png/`: the same evidence layout for Go PNG; native libvips and
   MagickWand dependencies are stated above.
+- `data/go/wav/`: bounded registry search, pinned releases, per-package WAV
+  control outputs, ranking, leads, and the separate standard-library finding.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

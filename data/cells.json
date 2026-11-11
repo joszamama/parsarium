@@ -355,15 +355,28 @@
     {
       "ecosystem": "go",
       "format": "wav",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 21,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "wav",
+        "wav decoder",
+        "wave audio",
+        "riff wav",
+        "wav reader"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 373,
+      "unique_search_hits": 271,
+      "unresolved_documentation_leads": 8,
+      "uncertainty": "Five pkg.go.dev public package-search queries saved 373 hits and 271 unique paths. The wav and wav decoder result windows each stopped at 100; wave audio, riff wav, and wav reader returned 72, 73, and 28. The HTML pages give no total result count, so none is inferred. Eight named plausible leads remain unresolved; other eligible packages may fall outside these windows. Several included packages share beep or mattetti/go-audio WAV lineage. One valid four-sample PCM16 control establishes only the listed parse path, and cryptix/wav is counted on its header and sample-count output because its sample sign disagreed with the control. pkg.go.dev direct-importer counts are package-level adoption signals rather than downloads; no missing metrics are invented.",
+      "third_party_evidence": "data/go/wav/parsers.json",
+      "third_party_control_results": "data/go/wav/verification.json",
+      "runtime_evidence": "data/go/wav/standard.json",
+      "registry_snapshot": "data/go/wav/registry-snapshot.json",
+      "unresolved_leads": "data/go/wav/leads.json"
     },
     {
       "ecosystem": "go",
