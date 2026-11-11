@@ -12,7 +12,7 @@ def read(path: Path):
 
 
 def main() -> None:
-    for format_name in ("png", "zip", "wav", "pdf", "http11"):
+    for format_name in ("png", "zip", "wav", "pdf", "svg", "http11"):
         directory = ROOT / "data" / "javascript" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")

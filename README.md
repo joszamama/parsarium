@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
-JavaScript × ZIP, WAV, PDF, and HTTP/1.1 batches, and an explicit 88-cell work matrix. The other 83 cells
+JavaScript × ZIP, WAV, PDF, SVG, and HTTP/1.1 batches, and an explicit 88-cell work matrix. The other 82 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -24,6 +24,8 @@ npm run wav:control
 npm run wav:verify
 npm run pdf:control
 npm run pdf:verify
+npm run svg:control
+npm run svg:verify
 npm run http11:control
 npm run http11:verify
 python3 scripts/build_matrix.py
@@ -76,9 +78,18 @@ runtime API passing**. Several packages are forks or distributions of the
 same underlying parser; the family column records this relationship. The
 simple controls establish only these specific parsing paths.
 
+`svg:control` creates a deterministic 196-byte SVG with a red and a green
+rectangle in a 2×1 viewport. The adapters check element structure, dimensions,
+colors, converted paths, or exact rendered pixels according to each package's
+documented scope. The observed batch result is **22/22 third-party packages
+passing**. The separate browser run verifies both `DOMParser` with typed SVG
+elements and `HTMLImageElement` decoding from a local SVG Blob. A direct
+`createImageBitmap(Blob)` attempt failed on the control in this Chromium build;
+it is recorded as a candidate failure, not a verified API.
+
 To refresh *discovery and popularity* data, run
-`node scripts/snapshot_npm.mjs png`, `zip`, `wav`, `pdf`, or `http11`.
-Run `node scripts/triage_npm.mjs png`, `zip`, `wav`, `pdf`, or `http11`
+`node scripts/snapshot_npm.mjs png`, `zip`, `wav`, `pdf`, `svg`, or `http11`.
+Run `node scripts/triage_npm.mjs png`, `zip`, `wav`, `pdf`, `svg`, or `http11`
 to refresh popularity-sorted **leads**; triage never verifies a parser.
 This is a separate, network-dependent operation that changes the dated registry
 snapshot; verification itself uses only locked local dependencies. npm's
@@ -92,7 +103,7 @@ name. It is an adoption proxy and can include automated downloads.
 
 The working goal is 20 verified third-party parsers per cell, with 30 as the
 original ceiling. The PNG and ZIP cells have **21 verified packages** each;
-the WAV and PDF cells have **22** each, and the HTTP/1.1 cell has **20**.
+the WAV, PDF, and SVG cells have **22** each, and the HTTP/1.1 cell has **20**.
 Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
@@ -126,12 +137,18 @@ or quality judgment.
   results each: 600 hits, 268 unique names. Eight named leads remain unresolved.
   The [runtime inventory](data/javascript/http11/standard.json) separately
   verifies Node.js `node:http.createServer` using the local request bytes.
+- [JavaScript × SVG ranking](data/javascript/svg/ranking.md): 22 packages
+  spanning structure, dimensions, colors, paths, and rendered pixels. Four npm
+  queries saved 400 hits, 388 unique names. Twelve named leads remain
+  unresolved. The [runtime inventory](data/javascript/svg/standard.json)
+  separately verifies browser SVG DOM parsing and image decoding.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
 [WAV cell record](data/javascript/wav/cell.json) and
 [PDF cell record](data/javascript/pdf/cell.json), and
-[HTTP/1.1 cell record](data/javascript/http11/cell.json) state the actual counts,
+[HTTP/1.1 cell record](data/javascript/http11/cell.json), and
+[SVG cell record](data/javascript/svg/cell.json) state the actual counts,
 search limits, and remaining uncertainty. Registry hits and download counts are
 not parser evidence; only the pinned APIs and successful control runs enter the
 rankings.
@@ -140,17 +157,17 @@ rankings.
 
 - `data/cells.json`: every ecosystem × format cell, with status, actual verified
   count, search limit, and uncertainty.
-- `data/javascript/{png,zip,wav,pdf,http11}/registry-snapshot.json`: dated registry hits, pinned
+- `data/javascript/{png,zip,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
-- `data/javascript/{png,zip,wav,pdf,http11}/triage.json`: popularity-sorted discovery leads,
+- `data/javascript/{png,zip,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
   including unresolved names; the status distinguishes verified packages.
-- `data/javascript/{png,zip,wav,pdf,http11}/parsers.json`: pinned packages, documented input APIs,
+- `data/javascript/{png,zip,wav,pdf,svg,http11}/parsers.json`: pinned packages, documented input APIs,
   parsing depth, licenses, and shared families.
-- `data/javascript/{png,zip,wav,pdf,http11}/ranking.md`: generated rankings using only verified
+- `data/javascript/{png,zip,wav,pdf,svg,http11}/ranking.md`: generated rankings using only verified
   package rows and the recorded metric window.
 - `adapters/javascript/` and `controls/`: runnable local-input adapters and
   deterministic valid controls.
-- `data/javascript/{png,zip,wav,pdf,http11}/verification.json` and `png/browser-verification.json`:
+- `data/javascript/{png,zip,wav,pdf,svg,http11}/verification.json` and `png/browser-verification.json`:
   observed outputs, environment, and pass/fail result.
 
 This collection does not contain malformed-input, security, or resource-use

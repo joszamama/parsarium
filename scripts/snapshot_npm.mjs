@@ -7,6 +7,7 @@ const querySets = {
   zip: ['zip', 'zip archive', 'zip parser', 'zip reader'],
   wav: ['wav', 'wav decoder', 'wav parser', 'wave audio reader'],
   pdf: ['pdf', 'pdf parser', 'pdf reader', 'pdf text extract'],
+  svg: ['svg', 'svg parser', 'svg renderer', 'svg image reader'],
   http11: ['http parser', 'http request parser', 'HTTP/1.1 parser', 'raw http parser', 'http message parser', 'raw http request']
 };
 if (!(cell in querySets)) throw new Error(`unsupported cell: ${cell}`);
