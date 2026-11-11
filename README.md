@@ -4,8 +4,8 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
-Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, and HTTP/1.1,
-and an explicit 88-cell work matrix. The other 63 cells
+Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
+and an explicit 88-cell work matrix. The other 62 cells
 are marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -77,6 +77,10 @@ uv pip sync adapters/python/http11/requirements.lock --python adapters/python/ht
 uv venv --python python3.10 adapters/python/http11/.venv310
 uv pip sync adapters/python/http11/requirements-py310.lock --python adapters/python/http11/.venv310/bin/python --require-hashes
 python3 scripts/verify_python_http11.py
+uv venv --python python3.13 adapters/python/svg/.venv
+uv pip sync adapters/python/svg/requirements.lock --python adapters/python/svg/.venv/bin/python --require-hashes
+python3 controls/svg/make_control.py
+python3 scripts/verify_python_svg.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -319,6 +323,17 @@ and picohttpparser families. Two packages parse header fields only, and
 the catalogue. The standard APIs are `http.client.HTTPConnection.getresponse`,
 `http.server.BaseHTTPRequestHandler`, and `http.client.parse_headers`.
 
+`verify_python_svg.py` verifies **20/20 third-party package paths** on two
+valid SVG controls: red and green rectangles in a 2×1 viewport, and a red
+rectangle with a blue path in a 4×2 viewport. The ranking distinguishes
+rendered pixels, element trees, paths, and dimensions, and records shared
+resvg/usvg, picosvg, and QtSvg families. CairoSVG, pyvips, and Wand need
+installed native Cairo, libvips, and ImageMagick libraries; the verifier sets
+their Homebrew library paths on the recorded macOS host. The CPython 3.13.1
+standard-library inventory counts no verified SVG API. Official `tkinter`
+documentation describes conditional SVG reading with Tk 9.0, while the
+recorded runtime has Tk 8.6, so that path remains unresolved.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -340,7 +355,7 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, or HTTP/1.1 discovery, run
+For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, or SVG discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
@@ -348,7 +363,8 @@ For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, or HTTP/1.1 disco
 `python3 scripts/snapshot_pypi_pdf.py`, or
 `python3 scripts/snapshot_pypi_mp3_id3v2.py`, or
 `python3 scripts/snapshot_pypi_mp4.py`, or
-`python3 scripts/snapshot_pypi_http11.py`. Each
+`python3 scripts/snapshot_pypi_http11.py`, or
+`python3 scripts/snapshot_pypi_svg.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -505,6 +521,11 @@ or quality judgment.
   unresolved. Box, metadata, audio, and frame scopes are labeled, and the
   [standard-library inventory](data/python/mp4/standard.json) records the
   scoped CPython finding.
+- [Python × SVG ranking](data/python/svg/ranking.md): 20 package paths
+  verified on the two valid SVG controls. Sixteen bounded PyPI name filters
+  saved 710 hits and 676 distinct names; four explored leads remain unresolved.
+  Shared parser families and the conditional Tk 9.0 runtime finding are
+  recorded in the [cell record](data/python/svg/cell.json).
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the

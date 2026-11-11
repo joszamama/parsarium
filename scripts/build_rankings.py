@@ -76,7 +76,7 @@ def main() -> None:
     for format_name, label in (("png", "PNG"), ("ascii_pnm", "ASCII PNM"),
                                ("zip", "ZIP"), ("wav", "WAV"), ("pdf", "PDF"),
                                ("mp3_id3v2", "MP3 with ID3v2"), ("mp4", "MP4"),
-                               ("http11", "HTTP/1.1")):
+                               ("http11", "HTTP/1.1"), ("svg", "SVG")):
         directory = ROOT / "data" / "python" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")

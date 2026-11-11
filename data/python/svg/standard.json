@@ -1,0 +1,24 @@
+{
+  "ecosystem": "Python",
+  "format": "SVG",
+  "status": "no_verified_api_in_scoped_runtime",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "CPython 3.13.1 xml.etree.ElementTree and xml.dom",
+      "official_documentation_scope": [
+        "https://docs.python.org/3.13/library/xml.html",
+        "https://docs.python.org/3.13/library/xml.etree.elementtree.html"
+      ],
+      "finding": "These APIs parse generic XML tags and attributes. They do not interpret SVG viewport, shape geometry, paint, or rendering semantics on their own, so they are excluded."
+    },
+    {
+      "runtime": "CPython 3.13.1 tkinter.PhotoImage with bundled Tcl/Tk 8.6",
+      "official_documentation_scope": [
+        "https://docs.python.org/3.13/library/tkinter.html#tkinter.PhotoImage"
+      ],
+      "finding": "Python documentation describes SVG file reading for PhotoImage when Tk 9.0 or later is present. This run reports TkVersion 8.6 and cannot load the Tk package, so the conditional SVG API is unresolved here and is not counted."
+    }
+  ],
+  "limit": "This inventory covers the documented CPython 3.13.1 standard library and the Tcl/Tk runtime available in the recorded environment. A separate Tk 9.0 installation could provide an SVG parser path; that path needs a valid-control adapter before inclusion."
+}
