@@ -1,0 +1,35 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "MP3 with ID3v2",
+  "status": "runtime_apis_verified",
+  "verified_apis": [
+    {
+      "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
+      "api": "OfflineAudioContext.decodeAudioData(ArrayBuffer)",
+      "documentation": "https://www.w3.org/TR/webaudio-1.1/#dom-baseaudiocontext-decodeaudiodata",
+      "adapter": "adapters/javascript/mp3_id3v2_browser.mjs",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "observable_result": "Decoded 8000 samples of 8000 Hz mono PCM from the tagged MP3",
+      "result": "data/javascript/mp3_id3v2/verification.json"
+    },
+    {
+      "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
+      "api": "HTMLAudioElement.src = URL.createObjectURL(Blob({type:audio/mpeg})); loadedmetadata; duration",
+      "documentation": "https://html.spec.whatwg.org/multipage/media.html#the-audio-element",
+      "adapter": "adapters/javascript/mp3_id3v2_browser.mjs",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "observable_result": "Loaded local tagged MP3 and reported one-second duration",
+      "result": "data/javascript/mp3_id3v2/verification.json"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/"
+      ],
+      "finding": "Scoped API index review found no built-in MP3 decoder or ID3v2 tag parser. Buffer and fs expose only bytes and generic I/O."
+    }
+  ],
+  "limit": "The browser APIs verify acceptance and audio decoding of an MP3 with an ID3v2.3 header, but do not expose ID3 tag fields. Result applies to one pinned Chromium build and this control."
+}

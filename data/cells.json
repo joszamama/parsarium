@@ -795,15 +795,28 @@
     {
       "ecosystem": "javascript",
       "format": "mp3_id3v2",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
-      "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "verified_third_party_count": 24,
+      "verified_standard_or_runtime_count": 2,
+      "search_queries": [
+        "id3v2",
+        "id3 parser",
+        "mp3 metadata",
+        "mp3 decoder",
+        "mp3 tag reader"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 495,
+      "unique_search_hits": 447,
+      "unresolved_documentation_leads": 10,
+      "uncertainty": "Five npm queries saved 495 hits (the id3v2 query returned only 95), covering 447 unique names. Four query result sets were truncated at 100; hits are not all investigated and qualified packages may exist beyond these windows. 10 named plausible leads remain unresolved. Verified packages include tag-only parsers, duration readers, MP3 decoders, and wrappers over shared music-metadata, node-id3, or mpg123 implementations. Duration APIs report different values because of encoder delay/padding, so the expected result is package-specific and recorded. The single control covers ID3v2.3 with three text fields and a one-second tone, not all ID3 or MP3 variants. Browser APIs do not expose tags.",
+      "third_party_evidence": "data/javascript/mp3_id3v2/parsers.json",
+      "third_party_control_results": "data/javascript/mp3_id3v2/verification.json",
+      "runtime_evidence": "data/javascript/mp3_id3v2/standard.json",
+      "registry_snapshot": "data/javascript/mp3_id3v2/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/mp3_id3v2/leads.json"
     },
     {
       "ecosystem": "python",
