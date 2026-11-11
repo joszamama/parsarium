@@ -5,8 +5,9 @@ specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, and MP3 with ID3v2 batches,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
 Python × PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
-and an explicit 88-cell work matrix. The other 62 cells
-are marked `not_started`;
+plus an in-progress Python × Matrix Market cell and an explicit 88-cell work
+matrix. There are 26 cells at the 20-parser target, one below target, and 61
+marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -81,6 +82,12 @@ uv venv --python python3.13 adapters/python/svg/.venv
 uv pip sync adapters/python/svg/requirements.lock --python adapters/python/svg/.venv/bin/python --require-hashes
 python3 controls/svg/make_control.py
 python3 scripts/verify_python_svg.py
+uv venv --python python3.13 adapters/python/matrix_market/.venv
+uv pip sync adapters/python/matrix_market/requirements.lock --python adapters/python/matrix_market/.venv/bin/python --require-hashes
+uv venv --python python3.10 adapters/python/matrix_market/.venv310
+uv pip sync adapters/python/matrix_market/requirements-py310.lock --python adapters/python/matrix_market/.venv310/bin/python --require-hashes
+python3 controls/matrix_market/make_control.py
+python3 scripts/verify_python_matrix_market.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -334,6 +341,19 @@ standard-library inventory counts no verified SVG API. Official `tkinter`
 documentation describes conditional SVG reading with Tk 9.0, while the
 recorded runtime has Tk 8.6, so that path remains unresolved.
 
+`verify_python_matrix_market.py` currently verifies **11/11 recorded third-party
+package paths**, leaving **9 to reach the working goal**. The controls are
+valid NIST coordinate matrices: a 2×3 sparse real matrix, a 3×3 graph
+adjacency matrix, and a 10x count matrix with feature and barcode files.
+The ranking records shared SciPy/fast_matrix_market implementations and leaves
+an unavailable download metric unranked. `scprep` runs in a separate Python
+3.10 environment because its pinned pandas dependency lacks a compatible
+Python 3.13 wheel. `mtl5` and `scab` failed to build on this host; one
+additional 10x-directory reader still needs license evidence and a
+compatible control. This cell remains in
+progress; the scoped CPython 3.13 standard-library inventory found no
+Matrix Market-aware input API.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, or `http11`
@@ -355,7 +375,7 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, or SVG discovery, run
+For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, SVG, or Matrix Market discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
 `python3 scripts/snapshot_pypi_zip.py`, or
@@ -364,7 +384,8 @@ For Python PNG, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, or SVG 
 `python3 scripts/snapshot_pypi_mp3_id3v2.py`, or
 `python3 scripts/snapshot_pypi_mp4.py`, or
 `python3 scripts/snapshot_pypi_http11.py`, or
-`python3 scripts/snapshot_pypi_svg.py`. Each
+`python3 scripts/snapshot_pypi_svg.py`, or
+`python3 scripts/snapshot_pypi_matrix_market.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -526,6 +547,11 @@ or quality judgment.
   saved 710 hits and 676 distinct names; four explored leads remain unresolved.
   Shared parser families and the conditional Tk 9.0 runtime finding are
   recorded in the [cell record](data/python/svg/cell.json).
+- [Python × Matrix Market ranking](data/python/matrix_market/ranking.md):
+  eleven verified package paths so far. Thirteen bounded PyPI name filters
+  saved 379 hits and 378 distinct names; three explored leads remain
+  unresolved. The [cell record](data/python/matrix_market/cell.json) marks
+  this batch below target and names the untested format variants.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
