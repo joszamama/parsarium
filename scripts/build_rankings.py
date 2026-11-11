@@ -12,14 +12,14 @@ def read(path: Path):
 
 
 def main() -> None:
-    for format_name in ("png", "zip", "wav", "pdf"):
+    for format_name in ("png", "zip", "wav", "pdf", "http11"):
         directory = ROOT / "data" / "javascript" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["download_metric"]["packages"]
         ranked = sorted(parsers, key=lambda parser: -metrics[parser["name"]]["downloads"])
         lines = [
-            f"# JavaScript × {format_name.upper()}: verified parser ranking",
+            f"# JavaScript × {format_name.upper() if format_name != 'http11' else 'HTTP/1.1'}: verified parser ranking",
             "",
             f"{len(ranked)} verified third-party packages; working goal 20, original ceiling 30. "
             f"npm downloads cover {snapshot['download_metric']['window'].replace(':', ' through ')} inclusive, "

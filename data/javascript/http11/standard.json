@@ -1,0 +1,25 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "HTTP/1.1",
+  "status": "runtime_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "Node.js 26.10.0",
+      "api": "node:http.createServer request listener; IncomingMessage.method/url/httpVersion/headers",
+      "input": "The local request control is sent over a loopback TCP byte stream to the Node HTTP server.",
+      "documentation": "https://nodejs.org/download/release/v26.10.0/docs/api/http.html",
+      "adapter": "adapters/javascript/http11_node.mjs",
+      "control": "controls/http11/request.http",
+      "result": {"method":"GET","target":"/parsarium?x=1"},
+      "family": "Node.js bundled HTTP parser"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "runtime": "Browser standardized Fetch API",
+      "official_documentation_scope": ["https://fetch.spec.whatwg.org/#request-class", "https://fetch.spec.whatwg.org/#response-class"],
+      "finding": "The Request and Response constructors create API objects from structured inputs; they do not expose a JavaScript API that parses a supplied raw HTTP/1.1 wire message. Browser network stacks parse HTTP internally, but no local byte-input parser is in this scoped API inventory."
+    }
+  ],
+  "limit": "The browser finding covers the standardized Fetch API, not every private browser or JavaScript host API."
+}

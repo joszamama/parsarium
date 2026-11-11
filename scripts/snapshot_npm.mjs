@@ -6,7 +6,8 @@ const querySets = {
   png: ['png', 'png decoder', 'png reader', 'png image'],
   zip: ['zip', 'zip archive', 'zip parser', 'zip reader'],
   wav: ['wav', 'wav decoder', 'wav parser', 'wave audio reader'],
-  pdf: ['pdf', 'pdf parser', 'pdf reader', 'pdf text extract']
+  pdf: ['pdf', 'pdf parser', 'pdf reader', 'pdf text extract'],
+  http11: ['http parser', 'http request parser', 'HTTP/1.1 parser', 'raw http parser', 'http message parser', 'raw http request']
 };
 if (!(cell in querySets)) throw new Error(`unsupported cell: ${cell}`);
 const out = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);
