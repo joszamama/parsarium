@@ -13,6 +13,8 @@ $vendor = match ($package) {
     'debach/zend-mp3' => '/zend_mp3/vendor/autoload.php',
     'mhor/php-mediainfo' => '/mediainfo/vendor/autoload.php',
     'buggedcom/phpvideotoolkit' => '/phptoolkit/vendor/autoload.php',
+    'vollbehr/php-reader' => '/vollbehr/vendor/autoload.php',
+    'pyrex-fwi/id3' => '/pyrex/vendor/autoload.php',
     default => '/vendor/autoload.php',
 };
 require __DIR__ . $vendor;
@@ -107,6 +109,27 @@ switch ($package) {
             'album' => $parsed['metadata']['album'] ?? null,
             'sample_rate' => $parsed['audio']['sample']['rate'] ?? null,
             'codec' => $parsed['audio']['codec']['name'] ?? null,
+        ];
+        break;
+    case 'vollbehr/php-reader':
+        $parsed = new \Vollbehr\Media\Id3v2(new \Vollbehr\Io\FileReader($path));
+        $output = [];
+        foreach (['title' => 'TIT2', 'artist' => 'TPE1', 'album' => 'TALB'] as $field => $frameId) {
+            $frames = $parsed->getFramesByIdentifier($frameId);
+            $output[$field] = $frames[0]->getText();
+        }
+        break;
+    case 'pyrex-fwi/id3':
+        $parsed = new \Cpyree\Id3\Metadata\Id3Metadata($path);
+        $reader = new \Cpyree\Id3\Wrapper\BinWrapper\MediainfoWrapper();
+        $reader->setBinPath(__DIR__ . '/pyrex/mediainfo_oldxml.sh');
+        if (!$reader->read($parsed)) {
+            throw new RuntimeException('Pyrex MediaInfo wrapper did not parse the tagged MP3');
+        }
+        $output = [
+            'title' => $parsed->getTitle(),
+            'artist' => $parsed->getArtist(),
+            'album' => $parsed->getAlbum(),
         ];
         break;
     default:

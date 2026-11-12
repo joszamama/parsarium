@@ -152,8 +152,8 @@
       "album": "Pilot"
     },
     "scope": "ID3v2.3 title, artist, and album",
-    "family": "Zend Media native ID3 parser",
-    "family_note": "Composer fork of Sven Vollbehr PHP Reader; local Zend_Media_Id3v2 parses ID3 frames without delegating to getID3."
+    "family": "Sven Vollbehr PHP Reader ID3 family",
+    "family_note": "Composer fork of Sven Vollbehr PHP Reader; its ID3 parser shares source lineage with vollbehr/php-reader. A distinct package path, not an independent parser family."
   },
   {
     "name": "mhor/php-mediainfo",
@@ -196,5 +196,45 @@
     "family": "FFmpeg native MP3 and ID3 parser",
     "family_note": "Composer package delegates to the local FFmpeg/FFprobe backend; separate PHP wrapper package path, not an independent parser family. Pinned source LICENSE.md offers MIT, while composer.json also lists GPL-3.0+.",
     "external_backend": "FFmpeg/FFprobe 9.0.2 (installed CLI)"
+  },
+  {
+    "name": "vollbehr/php-reader",
+    "version": "v2.0-rc1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/vollbehr/php-reader/blob/e1147f8b471d937077ed7bbbba31a87586ad24a5/LICENSE",
+    "documentation": "https://github.com/vollbehr/php-reader/blob/e1147f8b471d937077ed7bbbba31a87586ad24a5/README.md",
+    "input_api": "FileReader(local tagged MP3 path) passed to Vollbehr\\Media\\Id3v2; getFramesByIdentifier(TIT2/TPE1/TALB) and frame getText()",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/vollbehr/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, artist, and album",
+    "family": "Sven Vollbehr PHP Reader ID3 family",
+    "family_note": "Modern framework-agnostic PHP Reader release; same original author and code lineage as debach/zend-mp3, but distinct Composer package path."
+  },
+  {
+    "name": "pyrex-fwi/id3",
+    "version": "v0.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Pyrex-FWI/id3/blob/3e51c7b10db82d6f3a7d18c7ea58cc481314ed8a/composer.json",
+    "documentation": "https://github.com/Pyrex-FWI/id3/blob/3e51c7b10db82d6f3a7d18c7ea58cc481314ed8a/README.md",
+    "input_api": "Id3Metadata(local tagged MP3 path) passed to MediainfoWrapper::read; getTitle/getArtist/getAlbum",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/pyrex/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags-long.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, artist, and album on an 18-second MP3",
+    "family": "MediaInfoLib native MP3 and ID3 parser",
+    "family_note": "Composer wrapper invokes MediaInfo 26.10. The committed executable shim changes its requested --Output=XML to --Output=OLDXML, matching the schema this pinned package expects; no parser output is fabricated.",
+    "external_backend": "MediaInfo command-line 26.10 (Homebrew media-info formula)",
+    "backend_compatibility_shim": "adapters/php/mp3_id3v2/pyrex/mediainfo_oldxml.sh"
   }
 ]
