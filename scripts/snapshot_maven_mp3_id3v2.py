@@ -35,6 +35,8 @@ COORDS = {
     "codecmedia": ("me.tamkungz.codecmedia", "codecmedia", "1.2.2"),
     "jid3lib": ("net.sf.javamusictag", "jid3lib", "0.5.4"),
     "taglib-java": ("cz.skyba", "taglib", "1.0.0"),
+    "javamp3": ("fr.delthas", "javamp3", "1.0.1"),
+    "tianscar-mp3spi": ("com.tianscar.javasound", "javasound-mp3", "1.9.8"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
@@ -50,6 +52,8 @@ LICENSES = {
     "codecmedia": ("Apache-2.0", "https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2.pom"),
     "jid3lib": ("LGPL-2.1", "https://github.com/ericfarng/jid3lib/blob/master/LGPL.html"),
     "taglib-java": ("LGPL-2.1 OR MPL-2.0", "https://repo.maven.apache.org/maven2/cz/skyba/taglib/1.0.0/taglib-1.0.0.pom"),
+    "javamp3": ("MIT", "https://repo.maven.apache.org/maven2/fr/delthas/javamp3/1.0.1/javamp3-1.0.1.pom"),
+    "tianscar-mp3spi": ("LGPL-2.0-only", "https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-mp3/1.9.8/javasound-mp3-1.9.8.pom"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 
@@ -128,7 +132,8 @@ def main() -> None:
             {"name": "jid3lib", "url": "https://central.sonatype.com/artifact/net.sf.javamusictag/jid3lib/0.5.4"},
             {"name": "taglib-java", "url": "https://central.sonatype.com/artifact/cz.skyba/taglib/1.0.0"},
             {"name": "javasound-mp3", "url": "https://central.sonatype.com/artifact/com.tianscar.javasound/javasound-mp3/1.9.8"},
-            {"name": "groupdocs-metadata", "url": "https://central.sonatype.com/artifact/com.groupdocs/groupdocs-metadata/18.4"}
+            {"name": "groupdocs-metadata", "url": "https://central.sonatype.com/artifact/com.groupdocs/groupdocs-metadata/18.4"},
+            {"name": "javamp3", "url": "https://central.sonatype.com/artifact/fr.delthas/javamp3/1.0.1"}
         ],
         "targeted_registry_lead_rule": "A package page supplied only a lead; eligibility came from the pinned local control adapter and license evidence.",
         "targeted_documentation_leads": [

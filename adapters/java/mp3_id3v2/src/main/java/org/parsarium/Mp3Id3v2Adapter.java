@@ -87,6 +87,14 @@ public final class Mp3Id3v2Adapter {
                 System.out.printf("{\"title\":\"%s\",\"artist\":\"%s\",\"album\":\"%s\",\"frequency\":%d}%n",
                         tag.title(), tag.artist(), tag.album(), props.sampleRate());
             }
+        } else if (args[0].equals("javamp3")) {
+            try (var input = new java.io.BufferedInputStream(java.nio.file.Files.newInputStream(path));
+                 var sound = new fr.delthas.javamp3.Sound(input)) {
+                byte[] samples = new byte[32];
+                int bytes = sound.read(samples);
+                System.out.printf("{\"frequency\":%d,\"stereo\":%s,\"sample_bytes\":%d}%n",
+                        sound.getSamplingFrequency(), sound.isStereo(), bytes);
+            }
         } else System.exit(2);
     }
 }

@@ -208,5 +208,38 @@
     "adapter_label": "taglib",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot", "frequency": 8000}
+  },
+  {
+    "name": "javamp3",
+    "group": "fr.delthas",
+    "artifact": "javamp3",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "Release Maven POM and project LICENSE",
+    "input_api": "new Sound(BufferedInputStream localMp3), getSamplingFrequency(), isStereo(), read(byte[])",
+    "documentation": "https://github.com/delthas/JavaMP3",
+    "family": "JavaMP3 native MPEG audio decoder",
+    "scope": "44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes",
+    "adapter_label": "javamp3",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+    "expected_output": {"frequency": 44100, "stereo": false, "sample_bytes": 32}
+  },
+  {
+    "name": "tianscar-mp3spi",
+    "group": "com.tianscar.javasound",
+    "artifact": "javasound-mp3",
+    "version": "1.9.8",
+    "license": "LGPL-2.0-only",
+    "license_evidence": "Release Maven POM GNU Library or Lesser General Public License v2.0 declaration",
+    "input_api": "new MpegAudioFileReader().getAudioFileFormat(File).properties()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-mp3/1.9.8/javasound-mp3-1.9.8-sources.jar",
+    "documentation_archive_entry": "javazoom/spi/mpeg/sampled/file/MpegAudioFileReader.java",
+    "family": "Tianscar fork of JavaZOOM MP3SPI over JLayer and Tritonus",
+    "family_note": "Its source MpegAudioFileReader differs from the soundlibs MP3SPI release but preserves the same JavaZOOM parser lineage and public API.",
+    "scope": "local tagged MP3 type, ID3v2 title, artist, album and tag version",
+    "adapter_module": "tianscar",
+    "adapter_label": "tianscar",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"type": "MP3", "title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3"}
   }
 ]

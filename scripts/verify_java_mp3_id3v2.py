@@ -19,6 +19,8 @@ ADAPTER = ROOT / "adapters/java/mp3_id3v2"
 DATA = ROOT / "data/java/mp3_id3v2"
 CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
 CONTROL_SHA256 = "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad"
+CONTROL_44K = ROOT / "controls/mp3_id3v2/tone-tags-44k.mp3"
+CONTROL_44K_SHA256 = "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307"
 
 
 def read(path: Path):
@@ -34,13 +36,15 @@ def version(command: list[str]) -> str:
 def main() -> None:
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
     assert CONTROL.read_bytes().startswith(b"ID3\x03\x00")
+    assert sha256(CONTROL_44K.read_bytes()).hexdigest() == CONTROL_44K_SHA256
+    assert CONTROL_44K.read_bytes().startswith(b"ID3\x03\x00")
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
     repository = Path.home() / ".m2/repository"
     classpaths: dict[str, str] = {}
     jar_counts: dict[str, int] = {}
     by_path: dict[str, str] = {}
-    for module in ("main", "mp3spi", "bytedeco"):
+    for module in ("main", "mp3spi", "bytedeco", "tianscar"):
         adapter = ADAPTER if module == "main" else ADAPTER / module
         lock = read(adapter / "dependencies.lock.json")["classpath"]
         build = subprocess.run([
@@ -78,12 +82,15 @@ def main() -> None:
         module = parser.get("adapter_module", "main")
         class_name = {"main": "org.parsarium.Mp3Id3v2Adapter",
                       "mp3spi": "org.parsarium.Mp3SpiAdapter",
-                      "bytedeco": "org.parsarium.BytedecoMp3Adapter"}[module]
-        assert parser["control"] == "controls/mp3_id3v2/tone-tags.mp3"
-        arguments = [] if module == "mp3spi" else [label]
+                      "bytedeco": "org.parsarium.BytedecoMp3Adapter",
+                      "tianscar": "org.parsarium.Mp3SpiAdapter"}[module]
+        assert parser["control"] in ("controls/mp3_id3v2/tone-tags.mp3",
+                                     "controls/mp3_id3v2/tone-tags-44k.mp3")
+        parser_control = ROOT / parser["control"]
+        arguments = [] if module in ("mp3spi", "tianscar") else [label]
         java_binary = java25 if parser["name"] == "taglib-java" else "java"
         command = [java_binary, "-cp", classpaths[module], class_name,
-                   *arguments, str(CONTROL)]
+                   *arguments, str(parser_control)]
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=30)
         try:
             output = json.loads(result.stdout.strip())
@@ -121,7 +128,8 @@ def main() -> None:
                         "maven_compiler_release": 21,
                         "locked_classpath_jars": jar_counts},
         "control_sha256": CONTROL_SHA256,
-        "control_meaning": "Valid mono MP3 with an ID3v2.3 tag carrying title Parsarium, artist Control and album Pilot",
+        "additional_control_sha256": {"controls/mp3_id3v2/tone-tags-44k.mp3": CONTROL_44K_SHA256},
+        "control_meaning": "Valid mono 8 kHz and 44.1 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
         "third_party": results,
         "runtime": [],
         "runtime_probe": {"api": "AudioSystem.getAudioFileFormat(File)",
