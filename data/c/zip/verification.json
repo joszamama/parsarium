@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T08:51:05.787842+00:00",
+  "checked_at_utc": "2026-11-12T09:00:14.892127+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -53,6 +53,14 @@
       "source_sha256": "eba65db354a887c40b39e9f341553977bebc7a293f96c5e1d888064f8d9dd443",
       "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unarr -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr-build -DBUILD_SHARED_LIBS=OFF -DENABLE_7Z=OFF -DUSE_SYSTEM_BZ2=OFF -DUSE_SYSTEM_LZMA=OFF -DUSE_SYSTEM_ZLIB=ON -DBUILD_INTEGRATION_TESTS=OFF -DBUILD_UNIT_TESTS=OFF -DCMAKE_BUILD_TYPE=Release",
       "zlib_pkg_config_version": "1.2.12"
+    },
+    "lowzip": {
+      "source_sha256": "a8b41c63cacc508291421a973c59f0d58fc3c455da206c654c445df5621f4392",
+      "build": "compiled pinned lowzip.c and adapter"
+    },
+    "unziplib": {
+      "source_sha256": "4f41f6ac95054eb720c994c75cfe8d2436568e24a5f2d273e3cd49d66bb19d12",
+      "build": "compiled pinned unzipLIB MiniZip fork and bundled zlib C sources"
     }
   },
   "control": "controls/zip/hello.zip",
@@ -186,6 +194,32 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/physfs.c -I/opt/homebrew/Cellar/physfs/3.2.0/include -L/opt/homebrew/Cellar/physfs/3.2.0/lib -lphysfs -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/physfs",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/physfs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "lowzip",
+      "version": "1.0.1",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/lowzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/lowzip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/lowzip/lowzip.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/lowzip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/lowzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "unziplib",
+      "version": "1.0.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -Wno-deprecated-non-prototype -Wno-macro-redefined -include stdio.h -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/unziplib.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/unzip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/adler32.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/crc32.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/infback.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/inffast.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/inflate.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/inftrees.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/zutil.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unziplib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unziplib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

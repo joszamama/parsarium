@@ -31,7 +31,7 @@ def main() -> None:
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 10 and {p["name"] for p in parsers} == set(lock)
+    assert len(parsers) == 12 and {p["name"] for p in parsers} == set(lock)
     prepare_c_zip.main()
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
@@ -79,6 +79,24 @@ def main() -> None:
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "configure_command": shlex.join(configure),
                                    "zlib_pkg_config_version": run(["pkg-config", "--modversion", "zlib"])}
+        elif name == "lowzip":
+            source = SOURCE / name
+            command = ["cc", "-std=c11", "-O2", "-I" + str(source),
+                       str(ROOT / parser["adapter"]), str(source / "lowzip.c"),
+                       "-o", str(TARGET / name)]
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "build": "compiled pinned lowzip.c and adapter"}
+        elif name == "unziplib":
+            source = SOURCE / name / "src"
+            sources = [source / (stem + ".c") for stem in
+                       ("unzip", "adler32", "crc32", "infback", "inffast",
+                        "inflate", "inftrees", "zutil")]
+            command = ["cc", "-std=c11", "-O2", "-Wno-deprecated-non-prototype",
+                       "-Wno-macro-redefined", "-include", "stdio.h",
+                       "-I" + str(source), str(ROOT / parser["adapter"]),
+                       *map(str, sources), "-o", str(TARGET / name)]
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "build": "compiled pinned unzipLIB MiniZip fork and bundled zlib C sources"}
         else:
             library = Path(item["local_library"])
             digest = sha256(library.read_bytes()).hexdigest()

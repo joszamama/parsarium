@@ -300,13 +300,28 @@
       "tagged_source_internal_version": "1.0.2",
       "underlying_library_source_url": "https://github.com/Lecrapouille/minizip/archive/7619140097aaba8bd49659cb9c4878c4b1dcac30.tar.gz",
       "underlying_library_source_sha256": "d0a1dc12d6819b544e2e3f4249e178a9531704aef7c5f2fad943b926aaf374fc"
+    },
+    "lowzip": {
+      "version": "1.0.1",
+      "license": "MIT",
+      "source_url": "https://github.com/svaarala/lowzip/archive/refs/tags/v1.0.1.tar.gz",
+      "source_sha256": "a8b41c63cacc508291421a973c59f0d58fc3c455da206c654c445df5621f4392",
+      "license_evidence": "https://github.com/svaarala/lowzip/blob/v1.0.1/LICENSE"
+    },
+    "unziplib": {
+      "version": "1.0.0",
+      "license": "Apache-2.0 AND Zlib",
+      "source_url": "https://github.com/bitbank2/unzipLIB/archive/refs/tags/1.0.0.tar.gz",
+      "source_sha256": "4f41f6ac95054eb720c994c75cfe8d2436568e24a5f2d273e3cd49d66bb19d12",
+      "license_evidence": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/LICENSE",
+      "license_evidence_additional": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where package-specific and available",
     "captured_at_utc": "2026-11-12T07:50:21.979330+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z wraps SevenZip. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set. QuaZip shares classic MiniZip lineage; QArchive wraps libarchive; KArchive primary hosting is KDE GitLab and its GitHub mirror stars are not used. Sebastian Zipper is a separate package from Lecrapouille Zipper, but both share MiniZip parser lineage.",
+    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z wraps SevenZip. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set. QuaZip shares classic MiniZip lineage; QArchive wraps libarchive; KArchive primary hosting is KDE GitLab and its GitHub mirror stars are not used. Sebastian Zipper is a separate package from Lecrapouille Zipper, but both share MiniZip parser lineage. lowzip and unzipLIB C++ paths reuse their verified C releases; unzipLIB shares classic MiniZip lineage.",
     "packages": {
       "libarchive": {
         "stars": 3672,
@@ -411,11 +426,21 @@
         "stars": 534,
         "repository": "https://github.com/sebastiandev/zipper",
         "source": "https://api.github.com/repos/sebastiandev/zipper"
+      },
+      "lowzip": {
+        "stars": 46,
+        "repository": "https://github.com/svaarala/lowzip",
+        "source": "https://api.github.com/repos/svaarala/lowzip"
+      },
+      "unziplib": {
+        "stars": 69,
+        "repository": "https://github.com/bitbank2/unzipLIB",
+        "source": "https://api.github.com/repos/bitbank2/unzipLIB"
       }
     },
     "captured_between_utc": [
       "2026-11-12T07:50:21.979330+00:00",
-      "2026-11-12T08:29:12.999248+00:00"
+      "2026-11-12T08:59:49.976060+00:00"
     ]
   },
   "documentation_lead_sources": [
@@ -423,6 +448,8 @@
     "https://github.com/mackron/fs",
     "https://icculus.org/physfs/docs/html/physfs_8h.html",
     "https://api.kde.org/kzip.html",
-    "https://github.com/sebastiandev/zipper/blob/v1.0.3/README.md"
+    "https://github.com/sebastiandev/zipper/blob/v1.0.3/README.md",
+    "https://github.com/svaarala/lowzip/blob/v1.0.1/README.md",
+    "https://github.com/bitbank2/unzipLIB/blob/1.0.0/README.md"
   ]
 }

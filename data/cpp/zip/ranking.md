@@ -1,6 +1,6 @@
 # C++ × ZIP: verified parser ranking
 
-20 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T08:29:12.999248+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 3 path(s) lack a metric and remain unranked.
+22 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T08:59:49.976060+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 3 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C++ standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -21,8 +21,10 @@ Search hits, unresolved leads, and the C++ standard-library inventory are separa
 | 13 | [qarchive](https://github.com/antony-jr/QArchive/blob/v2.2.8/include/qarchivememoryextractor.hpp) | 2.2.8 | 97 | entry name and decompressed entry bytes | QArchive wrapper over libarchive |
 | 14 | [unarr](https://github.com/selmf/unarr/blob/v1.2.0/unarr.h.in) | 1.2.0 | 92 | entry name and decompressed entry bytes | unarr ZIP reader |
 | 15 | [zziplib](https://github.com/gdraheim/zziplib/blob/v0.13.80/zzip/zzip.h) | 0.13.80 | 70 | entry name and decompressed entry bytes | ZZIPlib ZIP reader |
-| 16 | [zipios](https://github.com/Zipios/Zipios/blob/2.3.4/zipios/zipfile.hpp) | 2.3.4 | 54 | entry name and decompressed entry bytes | Zipios ZIP reader |
-| 17 | [troldal-zippy](https://github.com/troldal/KZip/blob/a838de8522f9051df0d1b202473bb6befe648702/library/Zippy/ZipArchive.hpp) | cci.20200622 | 32 | entry name and decompressed entry bytes | Troldal Zippy wrapper over bundled miniz |
+| 16 | [unziplib](https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h) | 1.0.0 | 69 | entry name and decompressed entry bytes | unzipLIB modified classic MiniZip |
+| 17 | [zipios](https://github.com/Zipios/Zipios/blob/2.3.4/zipios/zipfile.hpp) | 2.3.4 | 54 | entry name and decompressed entry bytes | Zipios ZIP reader |
+| 18 | [lowzip](https://github.com/svaarala/lowzip/blob/v1.0.1/README.md) | 1.0.1 | 46 | entry name and decompressed entry bytes | lowzip ZIP reader |
+| 19 | [troldal-zippy](https://github.com/troldal/KZip/blob/a838de8522f9051df0d1b202473bb6befe648702/library/Zippy/ZipArchive.hpp) | cci.20200622 | 32 | entry name and decompressed entry bytes | Troldal Zippy wrapper over bundled miniz |
 | unranked | [karchive](https://api.kde.org/kzip.html) | 6.31.0 | unknown | entry name and decompressed entry bytes | KArchive KZip reader |
 | unranked | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | unknown | entry name and decompressed entry bytes | libgsf ZIP reader |
 | unranked | [minizip](https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h) | 1.4 | unknown | entry name and decompressed entry bytes | classic MiniZip |

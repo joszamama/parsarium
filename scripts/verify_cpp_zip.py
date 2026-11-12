@@ -33,7 +33,7 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/zip/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 20
+    assert len(parsers) == 22
     assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -43,6 +43,7 @@ def main() -> None:
         name = parser["name"]
         configure = None
         library_build = None
+        prerequisite_build_commands = []
         if name == "libzippp":
             source = ADAPTER / "cache/libzippp/src"
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "libzip"]))
@@ -164,12 +165,35 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-I" + str(source),
                        str(ROOT / parser["adapter"]), str(build / "libZipper.a"),
                        "-lz", "-o", str(TARGET / name)]
+        elif name == "unziplib":
+            source = ROOT / "adapters/c/zip/cache/source/unziplib/src"
+            build = TARGET / "unziplib-build"
+            build.mkdir(parents=True, exist_ok=True)
+            objects = []
+            for stem in ("unzip", "adler32", "crc32", "infback", "inffast",
+                         "inflate", "inftrees", "zutil"):
+                obj = build / (stem + ".o")
+                step = ["cc", "-std=c11", "-O2", "-Wno-deprecated-non-prototype",
+                        "-Wno-macro-redefined", "-include", "stdio.h",
+                        "-I" + str(source), "-c", str(source / (stem + ".c")),
+                        "-o", str(obj)]
+                run(step)
+                prerequisite_build_commands.append(shlex.join(step))
+                objects.append(obj)
+            library = build / "libunziplib.a"
+            library_build = ["ar", "rcs", str(library), *map(str, objects)]
+            run(library_build)
+            command = ["c++", "-std=c++17", "-O2", "-I" + str(source),
+                       str(ROOT / parser["adapter"]), str(library),
+                       "-o", str(TARGET / name)]
         else:
             assert parser["version"] == c_parsers[name]["version"]
             assert parser["expected_output"] == c_parsers[name]["expected_output"]
             command = shlex.split(c_runs[name]["build_command"])
             assert command[0:2] == ["cc", "-std=c11"]
             command[0:2] = ["c++", "-std=c++17"]
+            if name == "lowzip":
+                command[2:2] = ["-x", "c++"]
             c_adapter = str(ROOT / c_parsers[name]["adapter"])
             command[command.index(c_adapter)] = str(ROOT / parser["adapter"])
             assert command[-2] == "-o"
@@ -182,6 +206,7 @@ def main() -> None:
                      "control": parser["control"], "build_command": shlex.join(command),
                      "configure_command": shlex.join(configure) if configure else None,
                      "library_build_command": shlex.join(library_build) if library_build else None,
+                     "prerequisite_build_commands": prerequisite_build_commands,
                      "command": shlex.join(execute), "output": output, "pass": True})
         print(f"{name}@{parser['version']}: C++ passed")
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

@@ -1,6 +1,6 @@
 # C × ZIP: verified parser ranking
 
-10 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured at 2026-11-12T07:50:21.979330+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 2 path(s) lack a metric and remain unranked.
+12 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T08:59:49.976060+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 2 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -14,5 +14,7 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | 6 | [physfs](https://github.com/icculus/physfs/blob/release-3.2.0/src/physfs.h) | 3.2.0 | 844 | mounted ZIP entry name and decompressed entry bytes | PhysicsFS ZIP archiver |
 | 7 | [unarr](https://github.com/selmf/unarr/blob/v1.2.0/unarr.h.in) | 1.2.0 | 92 | entry name and decompressed entry bytes | unarr ZIP reader |
 | 8 | [zziplib](https://github.com/gdraheim/zziplib/blob/v0.13.80/zzip/zzip.h) | 0.13.80 | 70 | entry name and decompressed entry bytes | ZZIPlib ZIP reader |
+| 9 | [unziplib](https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h) | 1.0.0 | 69 | entry name and decompressed entry bytes | unzipLIB modified classic MiniZip |
+| 10 | [lowzip](https://github.com/svaarala/lowzip/blob/v1.0.1/README.md) | 1.0.1 | 46 | entry name and decompressed entry bytes | lowzip ZIP reader |
 | unranked | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | unknown | entry name and decompressed entry bytes | libgsf ZIP reader |
 | unranked | [minizip](https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h) | 1.4 | unknown | entry name and decompressed entry bytes | classic MiniZip |

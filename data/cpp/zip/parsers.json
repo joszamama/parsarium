@@ -368,5 +368,44 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "Sebastian Zipper wrapper over classic MiniZip fork",
     "family_note": "Distinct tagged C++ package API from Lecrapouille/zipper, despite the shared name. Both use classic MiniZip lineage; this package pins its own Lecrapouille/minizip submodule at commit 7619140. Tag v1.0.3 contains VERSION.txt 1.0.2, recorded in source lock."
+  },
+  {
+    "name": "lowzip",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/svaarala/lowzip/blob/v1.0.1/LICENSE",
+    "documentation": "https://github.com/svaarala/lowzip/blob/v1.0.1/README.md",
+    "input_api": "lowzip_init_archive with read_callback over local ZIP bytes; lowzip_locate_file; lowzip_get_data",
+    "adapter": "adapters/cpp/zip/lowzip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "lowzip ZIP reader",
+    "family_note": "Independent footprint-optimized ZIP reader with built-in DEFLATE; the C++ path compiles the same source and C API. The C++ path reuses the exact C-cell source release and parser family.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "unziplib",
+    "version": "1.0.0",
+    "license": "Apache-2.0 AND Zlib",
+    "license_evidence": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/LICENSE",
+    "documentation": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h",
+    "input_api": "unzOpen(local ZIP bytes, ZIPFILE); unzGetGlobalInfo; unzGetCurrentFileInfo; unzReadCurrentFile",
+    "adapter": "adapters/cpp/zip/unziplib.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "unzipLIB modified classic MiniZip",
+    "family_note": "Distinct 1.0.0 package with C callback/memory API and bundled zlib; its unzip.h credits Gilles Vollant and shares classic MiniZip lineage. Package license is Apache-2.0 with zlib-licensed bundled code. The C++ path reuses the exact C-cell source release and parser family.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit",
+    "license_evidence_additional": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h"
   }
 ]

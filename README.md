@@ -142,26 +142,27 @@ does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
 The C × ZIP verifier uses `cc`, CMake, and `pkg-config` with seven locally installed
-libraries pinned by exact release and binary SHA-256, plus three source-built
+libraries pinned by exact release and binary SHA-256, plus five source-built
 libraries pinned by archive SHA-256 in
-[`source-lock.json`](data/c/zip/source-lock.json). All **10/10 third-party
+[`source-lock.json`](data/c/zip/source-lock.json). All **12/12 third-party
 package paths passed** on the same one-entry DEFLATE ZIP control used in the
 other ecosystems, returning the parsed entry name and decompressed bytes.
-This remains below the working goal of 20. Eight paths have primary GitHub
+This remains below the working goal of 20. Ten paths have primary GitHub
 repository star metrics; two remain unranked. MiniZip and minizip-ng share
-parser lineage, kuba-zip bundles miniz, and PhysicsFS has its own ZIP archive
-handler. The 21 distinct Conan recipe-name
-hits are alphabetic discovery results, not a most-used ranking; two leads remain unresolved.
+parser lineage, kuba-zip bundles miniz, unzipLIB includes a modified MiniZip,
+and lowzip has its own ZIP reader. The 21 distinct Conan recipe-name hits and
+92 GitHub repository search hits are discovery results, not a most-used ranking;
+four leads remain unresolved.
 The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
-C++ call sites for the same ten packages and ten pinned C++ libraries. All
-**20/20 package paths passed** the valid archive control, returning the entry
+C++ call sites for the same twelve packages and ten pinned C++ libraries. All
+**22/22 package paths passed** the valid archive control, returning the entry
 name and decompressed contents. libzippp wraps the verified libzip release,
 Troldal Zippy bundles miniz, Zipper and QuaZip wrap classic MiniZip, bit7z
 uses a pinned SevenZip shared library, QArchive wraps libarchive, and the separate
-Sebastian Zipper package also wraps classic MiniZip. These paths are not twenty
+Sebastian Zipper package and unzipLIB also share classic MiniZip lineage. These paths are not twenty-two
 independent ZIP engines. Six plausible C++ leads remain
 unresolved, so the [C++ ZIP cell](data/cpp/zip/cell.json)
 unresolved; the numerical goal is met, while search remains incomplete and the
