@@ -1,0 +1,39 @@
+{
+  "ecosystem": "C",
+  "format": "PDF",
+  "runtime": "ISO/IEC 9899:2024 C standard library and macOS Core Graphics platform runtime",
+  "status": "runtime_verified_standard_none_documented",
+  "verified_apis": [
+    {
+      "name": "macOS Core Graphics CGPDFDocument",
+      "version": "macOS platform runtime as observed in verification.json",
+      "documentation": "https://developer.apple.com/documentation/coregraphics/cgpdfdocument/init%28_%3A%29-2gtsd?language=objc",
+      "input_api": "CFURLCreateFromFileSystemRepresentation(local path); CGPDFDocumentCreateWithURL(CFURLRef); CGPDFDocumentGetNumberOfPages",
+      "adapter": "adapters/c/pdf/coregraphics.c",
+      "control": "controls/pdf/one-page.pdf",
+      "expected_output": {
+        "pages": 1
+      },
+      "scope": "PDF page count",
+      "family": "Apple Core Graphics PDF parser"
+    }
+  ],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The ISO C standard library has no PDF document reader or page API."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "FILE, fopen, and fread provide generic bytes without PDF interpretation."
+    },
+    {
+      "api": "macOS Core Graphics PDF document creation and page count",
+      "url": "https://developer.apple.com/documentation/coregraphics/cgpdfdocument/numberofpages?language=objc",
+      "finding": "Core Graphics documents a PDF-aware C API and its local-URL adapter returned one page from the control."
+    }
+  ],
+  "limit": "ISO C has no PDF-aware standard API; Core Graphics is a macOS platform runtime API, recorded separately from third-party rankings and unavailable on other operating systems."
+}

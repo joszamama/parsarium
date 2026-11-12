@@ -175,6 +175,14 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
+The C × PDF batch verifies **6/20 third-party package paths** from C call sites:
+Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, and PDFium. All return
+one parsed page from the valid local control. qpdf requires a C++ linker for
+its C interface; PDFio builds from pinned source, and PDFium uses a pinned
+binary distribution. Apple Core Graphics is independently verified as a
+macOS platform runtime API and is kept outside the third-party ranking. See
+the [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
+
 The C++ × PDF batch currently verifies **8/20 package paths**:
 Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium, and
 PDF-Writer. MuPDF, Ghostscript, PDFio, and PDFium use C APIs called directly
