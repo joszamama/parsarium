@@ -141,5 +141,15 @@
     "family": "JAVE2 wrapper over bundled FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
     "adapter_module": "jave", "control": "controls/wav/256-samples.wav",
     "expected_output": {"format": "wav", "codec": "pcm_s16le ([1][0][0][0] / 0x0001)", "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "bramp-ffmpeg", "group": "net.bramp.ffmpeg", "artifact": "ffmpeg", "version": "0.9.2",
+    "license": "BSD-2-Clause", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new FFprobe(String localExecutable).probe(String localWav).getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar",
+    "documentation_archive_entry": "net/bramp/ffmpeg/FFprobe.html",
+    "family": "bramp FFprobe CLI wrapper over FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
+    "adapter_module": "bramp", "control": "controls/wav/256-samples.wav",
+    "expected_output": {"format": "wav", "codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
   }
 ]

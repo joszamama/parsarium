@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T05:29:04.551236+00:00",
+  "captured_at_utc": "2026-11-12T05:31:52.278645+00:00",
   "search_surface": "Maven Central Solr bounded artifact queries; targeted official Maven Central releases and project docs",
   "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
   "search_limit_per_query": 100,
@@ -26,24 +26,26 @@
           "name": "com.b3dgs.lionengine:lionengine-audio-wav",
           "latest_version": "9.0.5"
         }
-      ]
+      ],
+      "latest_refresh_result": "TimeoutError: The read operation timed out",
+      "latest_refresh_at_utc": "2026-11-12T05:31:44.231822+00:00"
     },
     {
       "query": "wav parser",
       "url": "https://search.maven.org/solrsearch/select?q=wav+parser&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:28:56.488667+00:00",
-      "total": null,
-      "hits": [],
-      "error": "TimeoutError: The read operation timed out"
+      "captured_at_utc": "2026-11-12T05:31:44.232032+00:00",
+      "total": 0,
+      "hits": []
     },
     {
       "query": "wav reader",
       "url": "https://search.maven.org/solrsearch/select?q=wav+reader&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:28:56.488862+00:00",
-      "total": 0,
-      "hits": []
+      "captured_at_utc": "2026-11-12T05:31:44.232221+00:00",
+      "total": null,
+      "hits": [],
+      "error": "TimeoutError: The read operation timed out"
     },
     {
       "query": "Java WAV",
@@ -59,13 +61,13 @@
         }
       ],
       "latest_refresh_result": "TimeoutError: The read operation timed out",
-      "latest_refresh_at_utc": "2026-11-12T05:28:56.489022+00:00"
+      "latest_refresh_at_utc": "2026-11-12T05:31:44.232386+00:00"
     },
     {
       "query": "audio wav",
       "url": "https://search.maven.org/solrsearch/select?q=audio+wav&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:25:51.239456+00:00",
+      "captured_at_utc": "2026-11-12T05:31:44.232534+00:00",
       "total": 1,
       "hits": [
         {
@@ -73,9 +75,7 @@
           "name": "com.b3dgs.lionengine:lionengine-audio-wav",
           "latest_version": "9.0.5"
         }
-      ],
-      "latest_refresh_result": "TimeoutError: The read operation timed out",
-      "latest_refresh_at_utc": "2026-11-12T05:28:56.489190+00:00"
+      ]
     }
   ],
   "releases": {
@@ -246,6 +246,18 @@
       "pom_sha256": "ac1da0f9f2818353abce0999711023314101829f0af57de5d89f0c0b7a61ab64",
       "license": "GPL-3.0-only",
       "license_evidence": "Maven POM licenses and project LICENSE"
+    },
+    "bramp-ffmpeg": {
+      "group": "net.bramp.ffmpeg",
+      "artifact": "ffmpeg",
+      "version": "0.9.2",
+      "repository_url": "https://repo.maven.apache.org/maven2",
+      "jar_url": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2.jar",
+      "jar_sha256": "23912a91fc755df4a172c283269890580b3b8cf7ee257003789949c4b029ca9f",
+      "pom_url": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2.pom",
+      "pom_sha256": "8f37e07cf682bb7c161bc5e2bf39360d242b57051b9868d9d5a2d422d3355e01",
+      "license": "BSD-2-Clause",
+      "license_evidence": "Maven POM licenses and project LICENSE"
     }
   },
   "auxiliary_releases": {
@@ -295,7 +307,7 @@
     "name": "deps.dev exact-version directDependentCount",
     "documentation": "https://docs.deps.dev/api/v3alpha/",
     "scope": "Known public direct dependents of pinned Maven releases; incomplete coverage and release-age bias",
-    "captured_at_utc": "2026-11-12T05:29:04.551915+00:00",
+    "captured_at_utc": "2026-11-12T05:31:52.279660+00:00",
     "packages": {
       "wavfile": {
         "direct_dependent_count": 1,
@@ -353,6 +365,10 @@
       "jave-core": {
         "direct_dependent_count": 2,
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/ws.schild%3Ajave-core/versions/4.2.0:dependents"
+      },
+      "bramp-ffmpeg": {
+        "direct_dependent_count": 0,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.bramp.ffmpeg%3Affmpeg/versions/0.9.2:dependents"
       }
     }
   }

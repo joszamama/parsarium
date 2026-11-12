@@ -87,7 +87,7 @@ def main() -> None:
     env = java_environment()
     java = str(JAVA_HOME / "bin/java")
     classpaths, jar_counts = {}, {}
-    for module in ("main", "bytedeco", "ffprobe", "jave"):
+    for module in ("main", "bytedeco", "ffprobe", "jave", "bramp"):
         classpaths[module], jar_counts[module] = build_third_party(env, module)
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
@@ -105,9 +105,10 @@ def main() -> None:
                 "jhove-modules": "jhove", "tarsosdsp-jvm": "tarsos"}.get(parser["name"], parser["name"])
         cls = {"main": "org.parsarium.WavAdapter", "bytedeco": "org.parsarium.BytedecoWavAdapter",
                "ffprobe": "org.parsarium.JaffreeWavAdapter",
-               "jave": "org.parsarium.JaveWavAdapter"}[module]
+               "jave": "org.parsarium.JaveWavAdapter",
+               "bramp": "org.parsarium.BrampWavAdapter"}[module]
         native_flag = ["--enable-native-access=ALL-UNNAMED"] if module == "bytedeco" else []
-        arguments = [] if module in ("ffprobe", "jave") else [mode]
+        arguments = [] if module in ("ffprobe", "jave", "bramp") else [mode]
         output = run([java, *native_flag, "-cp", classpaths[module], cls,
                       *arguments, str(ROOT / parser["control"])], parser["expected_output"])
         third_party.append({"package": parser["name"], "version": parser["version"],
