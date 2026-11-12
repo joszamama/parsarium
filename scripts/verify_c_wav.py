@@ -20,6 +20,7 @@ CONTROL = ROOT / "controls/wav/four-samples.wav"
 CONTROL_SHA256 = "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce"
 EXPECTED = {"sample_rate": 8000, "channels": 1, "frames": 4,
             "samples": [0, 1000, -1000, 0]}
+EXPECTED_METADATA = {"sample_rate": 8000, "channels": 1, "frames": 4}
 
 
 def run(command: list[str]) -> str:
@@ -72,8 +73,9 @@ def main() -> None:
         run(command)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))
-        assert parser["expected_output"] == EXPECTED
-        assert output == EXPECTED, (name, output)
+        expected = EXPECTED_METADATA if name == "sdl3_mixer" else EXPECTED
+        assert parser["expected_output"] == expected
+        assert output == expected, (name, output)
         rows.append({"package": name, "version": parser["version"],
                      "control": parser["control"], "build_command": shlex.join(command),
                      "command": shlex.join(execute), "output": output, "pass": True})
@@ -83,7 +85,8 @@ def main() -> None:
               "compiler": run(["cc", "--version"]).splitlines()[0],
               "installed_libraries": installed, "source_builds": sources,
               "control": "controls/wav/four-samples.wav", "control_sha256": CONTROL_SHA256,
-              "expected": EXPECTED, "third_party": rows, "runtime": []}
+              "expected": EXPECTED, "expected_metadata": EXPECTED_METADATA,
+              "third_party": rows, "runtime": []}
     (DATA / "verification.json").write_text(json.dumps(result, indent=2) + "\n")
 
 

@@ -154,13 +154,20 @@
       "source_url": "https://github.com/libsdl-org/SDL/releases/download/release-3.4.20/SDL3-3.4.20.tar.gz",
       "source_sha256": "f3bb06f55bed9557227a700af2ea62e49497ebdf58037732a731a5fb3ef8581f",
       "license_evidence": "https://formulae.brew.sh/api/formula/sdl3.json"
+    },
+    "sdl3_mixer": {
+      "version": "3.2.4",
+      "license": "Zlib",
+      "source_url": "https://github.com/libsdl-org/SDL_mixer/releases/download/release-3.2.4/SDL3_mixer-3.2.4.tar.gz",
+      "source_sha256": "182a07c745375e113dc740d43964ff21b0be29f29f59876c4dbc4db3d32f6901",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sdl3_mixer.json"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -197,11 +204,16 @@
         "stars": 16973,
         "repository": "https://github.com/libsdl-org/SDL",
         "source": "https://api.github.com/repos/libsdl-org/SDL"
+      },
+      "sdl3_mixer": {
+        "stars": 765,
+        "repository": "https://github.com/libsdl-org/SDL_mixer",
+        "source": "https://api.github.com/repos/libsdl-org/SDL_mixer"
       }
     },
     "captured_between_utc": [
       "2026-11-12T10:25:21.715408+00:00",
-      "2026-11-12T10:30:14.556432+00:00"
+      "2026-11-12T10:32:56.897543+00:00"
     ]
   },
   "targeted_documentation": [
@@ -209,6 +221,8 @@
     "https://github.com/raysan5/raylib/blob/6.2/src/raylib.h",
     "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
     "https://github.com/chirlu/sox/blob/master/libsox.3",
-    "https://wiki.libsdl.org/SDL3/SDL_LoadWAV"
+    "https://wiki.libsdl.org/SDL3/SDL_LoadWAV",
+    "https://wiki.libsdl.org/SDL3_mixer/MIX_LoadAudio",
+    "https://github.com/libsdl-org/SDL_mixer/blob/release-3.2.4/src/decoder_wav.c"
   ]
 }
