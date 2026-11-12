@@ -76,5 +76,18 @@
     "adapter": "adapters/c/http11/HTTPParserC.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+  },
+  {
+    "name": "libmicrohttpd",
+    "version": "1.0.10",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Pinned GNU source COPYING and src/microhttpd/daemon.c license header",
+    "documentation": "https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.pdf",
+    "input_api": "MHD_start_daemon(MHD_USE_NO_LISTEN_SOCKET | MHD_USE_INTERNAL_POLLING_THREAD, ...); MHD_add_connection(daemon, local socketpair stream, ...); access handler receives parsed method, URL, version and MHD_lookup_connection_value returns parsed query",
+    "family": "GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser",
+    "scope": "HTTP/1.1 GET request method, path, query argument and version from local socket stream",
+    "adapter": "adapters/c/http11/libmicrohttpd.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
   }
 ]

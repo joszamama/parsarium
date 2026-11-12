@@ -44,17 +44,19 @@ def main() -> None:
         assert parser["version"] == lock[name]["release"] == snapshot["releases"][name]["version"]
         assert parser["license"] == snapshot["releases"][name]["license"]
         archive(name, lock[name])
-    llhttp = lock["llhttp"]
-    assert run(["pkg-config", "--modversion", "libllhttp"]).stdout.strip() == llhttp["release"]
-    for path_key, hash_key in (("system_library", "system_library_sha256"),
-                               ("system_header", "system_header_sha256")):
-        assert sha256(Path(llhttp[path_key]).read_bytes()).hexdigest() == llhttp[hash_key]
+    for name, pkgconfig in (("llhttp", "libllhttp"), ("libmicrohttpd", "libmicrohttpd")):
+        installed = lock[name]
+        assert run(["pkg-config", "--modversion", pkgconfig]).stdout.strip() == installed["release"]
+        for path_key, hash_key in (("system_library", "system_library_sha256"),
+                                   ("system_header", "system_header_sha256")):
+            assert sha256(Path(installed[path_key]).read_bytes()).hexdigest() == installed[hash_key]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
         for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
+        mhdflags = run(["pkg-config", "--cflags", "--libs", "libmicrohttpd"]).stdout.split()
         commands = {
             "llhttp": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(ADAPTER), str(ADAPTER / "llhttp.c"), *llflags,
@@ -81,7 +83,10 @@ def main() -> None:
                             str(ADAPTER / "HTTPParserC.c"),
                             *[str(build / f"HTTPParserC-9.2.0/Sources/{file}")
                               for file in ("llhttp.c", "http.c", "api.c")],
-                            "-o", str(build / "HTTPParserC-adapter")]}
+                            "-o", str(build / "HTTPParserC-adapter")],
+            "libmicrohttpd": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                              "-I" + str(ADAPTER), str(ADAPTER / "libmicrohttpd.c"),
+                              *mhdflags, "-o", str(build / "libmicrohttpd-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]
@@ -95,8 +100,10 @@ def main() -> None:
     report = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "environment": {"platform": platform.platform(),
                               "compiler": run(["cc", "--version"]).stdout.splitlines()[0],
-                              "llhttp_version": llhttp["release"],
-                              "llhttp_library_sha256": llhttp["system_library_sha256"]},
+                              "llhttp_version": lock["llhttp"]["release"],
+                              "llhttp_library_sha256": lock["llhttp"]["system_library_sha256"],
+                              "libmicrohttpd_version": lock["libmicrohttpd"]["release"],
+                              "libmicrohttpd_library_sha256": lock["libmicrohttpd"]["system_library_sha256"]},
               "control": "controls/http11/request.http", "control_sha256": control_hash,
               "control_meaning": "Valid HTTP/1.1 GET request with Host, custom, and Connection headers",
               "third_party": rows, "runtime": []}
