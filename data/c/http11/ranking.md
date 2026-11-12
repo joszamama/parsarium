@@ -1,6 +1,6 @@
 # C × HTTP/1.1: verified parser ranking
 
-11 verified package paths; working goal 20, original ceiling 30. GitHub stars are project-level interest signals captured at 2026-11-12T21:06:06.160603+00:00 for the first eight, 2026-11-12T21:09:27+00:00 for libhtp, 2026-11-12T21:16:04+00:00 for libwebsockets, and 2026-11-12T21:21:50.187809+00:00 for libonion; they are compared only within C. The last three counts came from their primary repository HTML when the GitHub API was rate limited. Stars are not downloads or a measure of actual parser use. Packages without a primary GitHub repository remain unranked.
+12 verified package paths; working goal 20, original ceiling 30. GitHub stars are project-level interest signals captured at 2026-11-12T21:06:06.160603+00:00 for the first eight, 2026-11-12T21:09:27+00:00 for libhtp, 2026-11-12T21:16:04+00:00 for libwebsockets, and 2026-11-12T21:21:50.187809+00:00 for libonion; they are compared only within C. The last three counts came from their primary repository HTML when the GitHub API was rate limited. Stars are not downloads or a measure of actual parser use. Packages without a primary GitHub repository remain unranked.
 
 Search hits, unresolved leads, and C standard APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -17,3 +17,4 @@ Search hits, unresolved leads, and C standard APIs are separate from this rankin
 | 9 | [HTTPParserC](https://github.com/Building42/HTTPParserC#documentation) | 9.2.0 | 31 | HTTP/1.1 GET request method, target and version after complete header parse | Building42 packaged llhttp 9.2.0 generated C source; shares the llhttp engine and is a separate versioned distribution |
 | 10 | [httpp](https://github.com/cebem1nt/httpp#api) | 2.0.0 | 10 | HTTP/1.1 GET request method, target and version | httpp C single-header request parser |
 | unranked | [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.pdf) | 1.0.10 | n/a | HTTP/1.1 GET request method, path, query argument and version from local socket stream | GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser |
+| unranked | [libsoup](https://libsoup.gnome.org/libsoup-3.0/func.headers_parse_request.html) | 3.8.1 | n/a | HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer | GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser |

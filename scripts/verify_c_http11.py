@@ -24,7 +24,8 @@ def run(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess[str
 
 def archive(name: str, source: dict) -> Path:
     CACHE.mkdir(parents=True, exist_ok=True)
-    target = CACHE / f"{name}-{source['release']}.tar.gz"
+    suffix = ".tar.xz" if source["source_url"].endswith(".tar.xz") else ".tar.gz"
+    target = CACHE / f"{name}-{source['release']}{suffix}"
     if not target.exists() or sha256(target.read_bytes()).hexdigest() != source["source_sha256"]:
         with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium C HTTP verifier"}), timeout=30) as response:
             target.write_bytes(response.read())
@@ -44,7 +45,8 @@ def main() -> None:
         assert parser["version"] == lock[name]["release"] == snapshot["releases"][name]["version"]
         assert parser["license"] == snapshot["releases"][name]["license"]
         archive(name, lock[name])
-    for name, pkgconfig in (("llhttp", "libllhttp"), ("libmicrohttpd", "libmicrohttpd")):
+    for name, pkgconfig in (("llhttp", "libllhttp"), ("libmicrohttpd", "libmicrohttpd"),
+                            ("libsoup", "libsoup-3.0")):
         installed = lock[name]
         assert run(["pkg-config", "--modversion", pkgconfig]).stdout.strip() == installed["release"]
         for path_key, hash_key in (("system_library", "system_library_sha256"),
@@ -90,6 +92,7 @@ def main() -> None:
         run(["cmake", "--build", str(libonion_build), "--target", "onion_static", "-j4"])
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
         mhdflags = run(["pkg-config", "--cflags", "--libs", "libmicrohttpd"]).stdout.split()
+        soupflags = run(["pkg-config", "--cflags", "--libs", "libsoup-3.0"]).stdout.split()
         lws_cflags = run(["pkg-config", "--cflags", "openssl", "libwebsockets"]).stdout.split()
         lws_libs = run(["pkg-config", "--libs", "libwebsockets"]).stdout.split()
         commands = {
@@ -142,7 +145,10 @@ def main() -> None:
                          "-I" + str(libonion_build / "src"), str(ADAPTER / "libonion.c"),
                          str(libonion_build / "src/onion/libonion_static.a"),
                          "-L" + str(libev_prefix / "lib"), "-lev",
-                         "-o", str(build / "libonion-adapter")]}
+                         "-o", str(build / "libonion-adapter")],
+            "libsoup": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                        "-I" + str(ADAPTER), str(ADAPTER / "libsoup.c"),
+                        *soupflags, "-o", str(build / "libsoup-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]
@@ -163,7 +169,9 @@ def main() -> None:
                               "libwebsockets_version": websockets["release"],
                               "libwebsockets_library_sha256": websockets["system_library_sha256"],
                               "libonion_build_dependency": "libev " + libev["release"],
-                              "libonion_compatibility": "macOS preinclude plus poller parameter type correction in temporary source"},
+                              "libonion_compatibility": "macOS preinclude plus poller parameter type correction in temporary source",
+                              "libsoup_version": lock["libsoup"]["release"],
+                              "libsoup_library_sha256": lock["libsoup"]["system_library_sha256"]},
               "control": "controls/http11/request.http", "control_sha256": control_hash,
               "control_meaning": "Valid HTTP/1.1 GET request with Host, custom, and Connection headers",
               "third_party": rows, "runtime": []}

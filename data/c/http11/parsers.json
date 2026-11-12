@@ -141,5 +141,18 @@
     "adapter": "adapters/c/http11/libonion.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium", "version": "1.1", "host": "example.test", "query_x": "1"}
+  },
+  {
+    "name": "libsoup",
+    "version": "3.8.1",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "Pinned release meson.build license declaration and COPYING",
+    "documentation": "https://libsoup.gnome.org/libsoup-3.0/func.headers_parse_request.html",
+    "input_api": "soup_headers_parse_request(local request-head bytes excluding trailing blank line, length, SoupMessageHeaders, method, path, version)",
+    "family": "GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser",
+    "scope": "HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer",
+    "adapter": "adapters/c/http11/libsoup.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1", "host": "example.test"}
   }
 ]

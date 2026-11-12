@@ -13,7 +13,12 @@ REPOS = {"llhttp": "nodejs/llhttp", "http-parser": "nodejs/http-parser",
          "picohttpparser": "h2o/picohttpparser", "mongoose": "cesanta/mongoose",
          "httpp": "cebem1nt/httpp", "HTTPParserC": "Building42/HTTPParserC",
          "libmicrohttpd": None, "libevhtp": "ellzey/libevhtp", "libhtp": "OISF/libhtp",
-         "libwebsockets": "warmcat/libwebsockets", "libonion": "davidmoreno/onion"}
+         "libwebsockets": "warmcat/libwebsockets", "libonion": "davidmoreno/onion",
+         "libsoup": None}
+NO_GITHUB_REASON = {
+    "libmicrohttpd": "Official upstream is git.gnunet.org, not a primary GitHub repository",
+    "libsoup": "Primary upstream is GNOME GitLab; no comparable primary GitHub star count",
+}
 
 
 def get(url: str) -> dict:
@@ -41,7 +46,7 @@ def main() -> None:
     for name, repo in REPOS.items():
         if repo is None:
             metrics[name] = {"stars": None, "url": None,
-                             "reason": "Official upstream is git.gnunet.org, not a primary GitHub repository"}
+                             "reason": NO_GITHUB_REASON[name]}
         else:
             url = f"https://api.github.com/repos/{repo}"
             metrics[name] = {"stars": get(url)["stargazers_count"], "url": url}
