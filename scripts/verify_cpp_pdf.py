@@ -70,6 +70,16 @@ def main() -> None:
                        "-Wno-unnecessary-virtual-specifier",
                        "-I" + str(header.parents[2]), str(ROOT / parser["adapter"]),
                        str(library), "-o", str(TARGET / name)]
+        elif name == "qpdf":
+            assert run(["brew", "list", "--versions", "qpdf"]) == "qpdf " + source["installed_revision"]
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parents[1]), str(ROOT / parser["adapter"]),
+                       str(library), "-o", str(TARGET / name)]
+        elif name == "mupdf":
+            assert run(["brew", "list", "--versions", "mupdf"]) == "mupdf " + source["release"]
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parents[1]), str(ROOT / parser["adapter"]),
+                       str(library), "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T22:31:45.689785+00:00",
+  "checked_at_utc": "2026-11-12T22:36:53.850823+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -13,6 +13,16 @@
       "source_sha256": "d6ffe6fc173ac6d6e5b00f5cb9db01990cab1bdf7cc03bdeffce3013bc9ec63a",
       "local_library_sha256": "3a653c9a8e7b014ca016022ab0dd14d6bef6398d5f11961f15114aa703d6df16",
       "local_header_sha256": "b71f66934ef8460279d84d03dcdd6f3d52f5925a951f4e8ca4b242d900709d4c"
+    },
+    "qpdf": {
+      "source_sha256": "8a58af5b6141319287c1883bec8bd1bd545b7567b7fc5e6ce5d25a1c85f36397",
+      "local_library_sha256": "5f3cac784b92a9c39c4f9b23239d9739cf5b48b6701497b69e12c4f4cbefc993",
+      "local_header_sha256": "91823bbfed23e610523e12cab92153c673f0b2b93462cab7bc746f01cfcdc690"
+    },
+    "mupdf": {
+      "source_sha256": "dc85000640a45d90ca9b77b061f6ca67cce0c4d4fbecf8819647baf573eef101",
+      "local_library_sha256": "085b2f375bdf1f933067fff886727d263cc79e74d6acf7114e5fbb415f55ef5b",
+      "local_header_sha256": "3c851e3727717bd651128371da8e5e4276334159cfa59aa4f7a633467bedeb7b"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -35,6 +45,28 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -Wno-unnecessary-virtual-specifier -I/opt/homebrew/Cellar/podofo/1.1.2/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/podofo.cpp /opt/homebrew/Cellar/podofo/1.1.2/lib/libpodofo.1.1.2.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/podofo",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/podofo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "qpdf",
+      "version": "12.4.2",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/qpdf/12.4.2_1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/qpdf.cpp /opt/homebrew/Cellar/qpdf/12.4.2_1/lib/libqpdf.30.4.2.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/qpdf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/qpdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "mupdf",
+      "version": "1.28.6",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/mupdf/1.28.6/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/mupdf.cpp /opt/homebrew/Cellar/mupdf/1.28.6/lib/libmupdf.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/mupdf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/mupdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },

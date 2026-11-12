@@ -30,5 +30,38 @@
     "scope": "PDF document page count",
     "family": "PoDoFo PDF parser",
     "family_note": "Native C++17 PoDoFo PDF document reader; distinct from Poppler."
+  },
+  {
+    "name": "qpdf",
+    "version": "12.4.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/qpdf/qpdf/blob/v12.4.2/LICENSE.txt",
+    "documentation": "https://github.com/qpdf/qpdf/blob/v12.4.2/examples/pdf-parse-content.cc",
+    "input_api": "QPDF::processFile(const char* local filename); QPDFPageDocumentHelper::getAllPages()",
+    "adapter": "adapters/cpp/pdf/qpdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "qpdf C++ PDF parser",
+    "family_note": "Native qpdf C++ parser; distinct from Poppler and PoDoFo."
+  },
+  {
+    "name": "mupdf",
+    "version": "1.28.6",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://mupdf.readthedocs.io/en/1.28.6/license.html",
+    "documentation": "https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html",
+    "input_api": "fz_open_document(fz_context*, const char* local filename); fz_count_pages(...) called from C++17",
+    "adapter": "adapters/cpp/pdf/mupdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "MuPDF C document parser",
+    "family_note": "Direct MuPDF C API call from a C++17 translation unit; distinct from Poppler, PoDoFo, and qpdf. The official GitHub repository is a mirror of the canonical Ghostscript Git repository.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
   }
 ]

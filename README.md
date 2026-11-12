@@ -175,10 +175,11 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **2/20 native C++ package paths**:
-Poppler's C++ frontend and PoDoFo. Both return one parsed page from the valid
-PDF control, and their release archives, installed headers, and libraries are
-SHA-256 checked. Eight leads remain unresolved. See the
+The C++ × PDF batch currently verifies **4/20 package paths**:
+Poppler's C++ frontend, PoDoFo, qpdf, and MuPDF called through its C API from
+C++17. All return one parsed page from the valid PDF control; their release
+archives, installed headers, and libraries are SHA-256 checked. Six leads
+remain unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.
