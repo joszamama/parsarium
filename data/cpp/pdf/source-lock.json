@@ -84,5 +84,15 @@
     "local_header_sha256": "21fb11834607c74cbc1e3a9ac14a85a5dba95d7669ec86c21c05a4890a38648d",
     "local_library_sha256": "93df07adf9d1427ebaf192db5bc7f1c6438c5d1180f469acb8d297cf725e359d",
     "repository": "https://pdfium.googlesource.com/pdfium"
+  },
+  "pdfwriter": {
+    "release": "4.6.2",
+    "license": "Apache-2.0",
+    "source_url": "https://codeload.github.com/galkahana/PDF-Writer/tar.gz/refs/tags/v4.6.2",
+    "source_sha256": "0a36815ccc9d207028567f90039785c824b211169ba5da68de84d0c15455ab62",
+    "source_header_member": "PDF-Writer-4.6.2/PDFWriter/PDFParser.h",
+    "local_header_sha256": "c38647b43669a50c688b624bb5154b2fa9ba03c3041c0ab0cc29b509ff91101d",
+    "build": "cmake -S <source> -B <cache>/pdfwriter-build -DCMAKE_BUILD_TYPE=Release -DPDFHUMMUS_NO_DCT=TRUE -DPDFHUMMUS_NO_TIFF=TRUE -DPDFHUMMUS_NO_PNG=TRUE -DUSE_BUNDLED=FALSE -DUSE_UNBUNDLED_FALLBACK_BUNDLED=TRUE; cmake --build <cache>/pdfwriter-build --target PDFWriter -j4",
+    "repository": "https://github.com/galkahana/PDF-Writer"
   }
 }

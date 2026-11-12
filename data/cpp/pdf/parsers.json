@@ -115,5 +115,21 @@
     "family": "PDFium PDF parser",
     "family_note": "Direct PDFium C API call from C++17. Prebuilt macOS arm64 artifact from bblanchon/pdfium-binaries chromium/8152 release is SHA-256 pinned; its original API header matches an independently pinned canonical PDFium source revision. Distribution is third-party; core engine is canonical PDFium. Binary provenance is limited to the distributor release claim and original header match.",
     "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "pdfwriter",
+    "version": "4.6.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/galkahana/PDF-Writer/blob/v4.6.2/LICENSE",
+    "documentation": "https://github.com/galkahana/PDF-Writer/wiki/PDF-Parsing",
+    "input_api": "InputFile::OpenFile(local path), PDFParser::StartPDFParsing(file.GetInputStream()), PDFParser::GetPagesCount()",
+    "adapter": "adapters/cpp/pdf/pdfwriter.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PDF-Writer (PDFHummus) PDF parser",
+    "family_note": "Native C++ PDFParser in the PDF-Writer package; source-built from pinned v4.6.2 release with bundled Aesgm and system Zlib/FreeType. DCT, TIFF, and PNG integrations are disabled for this simple PDF control."
   }
 ]

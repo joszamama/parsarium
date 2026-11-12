@@ -175,12 +175,14 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **7/20 package paths**:
-Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, and PDFium.
-The latter four use C APIs called directly from C++17. All return one parsed
-page from the valid PDF control. Five installed release archives, headers, and
-libraries are SHA-256 checked; PDFio is source-built, and PDFium uses a pinned
-binary distribution with an original header matched to upstream. Four leads
+The C++ × PDF batch currently verifies **8/20 package paths**:
+Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium, and
+PDF-Writer. MuPDF, Ghostscript, PDFio, and PDFium use C APIs called directly
+from C++17; PDF-Writer uses its native C++ parser. All return one parsed page
+from the valid PDF control. Five installed release archives, headers, and
+libraries are SHA-256 checked; PDFio and PDF-Writer are source-built, and
+PDFium uses a pinned binary distribution with an original header matched to
+upstream. Four leads
 remain unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 

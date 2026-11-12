@@ -80,11 +80,23 @@ def main() -> None:
                          timeout=90) as response:
                 upstream_header = base64.b64decode(response.read())
             assert sha256(upstream_header).hexdigest() == source["source_header_sha256"]
+        elif name == "pdfwriter":
+            source_dir = CACHE / f"PDF-Writer-{source['release']}"
+            if not source_dir.exists():
+                run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "PDFWriter/PDFParser.h"
+            build_dir = CACHE / "pdfwriter-build"
+            run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DPDFHUMMUS_NO_DCT=TRUE",
+                 "-DPDFHUMMUS_NO_TIFF=TRUE", "-DPDFHUMMUS_NO_PNG=TRUE",
+                 "-DUSE_BUNDLED=FALSE", "-DUSE_UNBUNDLED_FALLBACK_BUNDLED=TRUE"])
+            run(["cmake", "--build", str(build_dir), "--target", "PDFWriter", "-j4"])
+            library = build_dir / "PDFWriter/libPDFWriter.a"
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name != "pdfio":
+        if name not in ("pdfio", "pdfwriter"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -122,6 +134,12 @@ def main() -> None:
                        "-I" + str(header.parent), str(ROOT / parser["adapter"]),
                        str(library), "-Wl,-rpath," + str(library.parent),
                        "-o", str(TARGET / name)]
+        elif name == "pdfwriter":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), str(ROOT / parser["adapter"]),
+                       str(library), str(build_dir / "LibAesgm/libLibAesgm.a"),
+                       *shlex.split(run(["pkg-config", "--libs", "freetype2"])),
+                       "-lz", "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)
