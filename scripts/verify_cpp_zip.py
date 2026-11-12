@@ -33,11 +33,12 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/zip/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 14
+    assert len(parsers) == 15
     assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
+    local_libraries = {}
     for parser in parsers:
         name = parser["name"]
         configure = None
@@ -95,6 +96,28 @@ def main() -> None:
                        str(build / "external/minizip/libminizip.a"),
                        str(build / "external/zlib-ng/libz.a"),
                        "-o", str(TARGET / name)]
+        elif name == "bit7z":
+            item = extra_lock[name]
+            assert run(["brew", "list", "--versions", "sevenzip"]) == "sevenzip 26.04"
+            library = Path(item["local_library"])
+            digest = sha256(library.read_bytes()).hexdigest()
+            assert digest == item["local_library_sha256"]
+            local_libraries["sevenzip"] = {"release": "26.04", "library": str(library),
+                                            "library_sha256": digest}
+            source = ADAPTER / "cache/bit7z"
+            build = TARGET / "bit7z-build"
+            sevenzip_source = ADAPTER / "cache/sevenzip"
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DBIT7Z_CUSTOM_7ZIP_PATH=" + str(sevenzip_source),
+                         "-DBIT7Z_BUILD_TESTS=OFF", "-DBIT7Z_BUILD_DOCS=OFF",
+                         "-DBIT7Z_USE_PCH=OFF", "-DBIT7Z_7ZIP_VERSION=26.04",
+                         "-DCMAKE_BUILD_TYPE=Release"]
+            library_build = ["cmake", "--build", str(build), "--target", "bit7z", "-j", "8"]
+            run(configure)
+            run(library_build)
+            command = ["c++", "-std=c++17", "-O2", "-I" + str(source / "include"),
+                       str(ROOT / parser["adapter"]), str(source / "lib/arm64/libbit7z64.a"),
+                       "-o", str(TARGET / name)]
         else:
             assert parser["version"] == c_parsers[name]["version"]
             assert parser["expected_output"] == c_parsers[name]["expected_output"]
@@ -120,6 +143,7 @@ def main() -> None:
               "compiler": run(["c++", "--version"]).splitlines()[0],
               "source_lock": "data/c/zip/source-lock.json",
               "extra_source_lock": "data/cpp/zip/extra-source-lock.json",
+              "local_libraries": local_libraries,
               "prerequisite_verifier": "scripts/verify_c_zip.py",
               "control": "controls/zip/hello.zip",
               "control_sha256": verify_c_zip.CONTROL_SHA256,

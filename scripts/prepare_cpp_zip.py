@@ -48,6 +48,8 @@ def main() -> None:
         prepare(name, item, CACHE / name)
         for subname, subitem in item.get("submodules", {}).items():
             prepare(name + "-" + subname, subitem, CACHE / name / "external" / subname)
+        if name == "bit7z":
+            prepare("sevenzip-26.04", item["sevenzip_source"], CACHE / "sevenzip")
         print(f"{name}: pinned {item['release']} source verified")
 
 

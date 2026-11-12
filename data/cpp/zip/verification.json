@@ -1,9 +1,16 @@
 {
-  "checked_at_utc": "2026-11-12T08:24:44.574023+00:00",
+  "checked_at_utc": "2026-11-12T08:29:59.287685+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/zip/source-lock.json",
   "extra_source_lock": "data/cpp/zip/extra-source-lock.json",
+  "local_libraries": {
+    "sevenzip": {
+      "release": "26.04",
+      "library": "/opt/homebrew/Cellar/sevenzip/26.04/lib/7z.so",
+      "library_sha256": "12cc633a8f3f1b84eeb19c1f11054e661a016c1f501edec0b45f2adb22c8bba0"
+    }
+  },
   "prerequisite_verifier": "scripts/verify_c_zip.py",
   "control": "controls/zip/hello.zip",
   "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
@@ -211,6 +218,21 @@
       "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/zipper -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipper-build -DZIPPER_BUILD_DEMOS=OFF -DZIPPER_BUILD_TESTS=OFF -DUSE_AES=OFF -DCMAKE_SKIP_INSTALL_RULES=ON -DCMAKE_BUILD_TYPE=Release",
       "library_build_command": "cmake --build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipper-build --target zipper -j 8",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipper /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "bit7z",
+      "version": "4.1.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/bit7z/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/bit7z.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/bit7z/lib/arm64/libbit7z64.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z",
+      "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/bit7z -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z-build -DBIT7Z_CUSTOM_7ZIP_PATH=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/sevenzip -DBIT7Z_BUILD_TESTS=OFF -DBIT7Z_BUILD_DOCS=OFF -DBIT7Z_USE_PCH=OFF -DBIT7Z_7ZIP_VERSION=26.04 -DCMAKE_BUILD_TYPE=Release",
+      "library_build_command": "cmake --build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z-build --target bit7z -j 8",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

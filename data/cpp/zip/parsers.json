@@ -259,5 +259,23 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "Zipper wrapper over classic MiniZip fork",
     "family_note": "Distinct C++ package API; v4.0.0 includes a pinned MiniZip fork and zlib-ng submodule. Shares classic MiniZip lineage with minizip."
+  },
+  {
+    "name": "bit7z",
+    "version": "4.1.0",
+    "license": "MPL-2.0",
+    "license_evidence": "https://github.com/rikyoz/bit7z/blob/v4.1.0/LICENSE",
+    "documentation": "https://github.com/rikyoz/bit7z/blob/v4.1.0/include/bit7z/bitarchivereader.hpp",
+    "input_api": "bit7z::BitArchiveReader(Bit7zLibrary, local path, BitFormat::Zip); itemsCount; itemAt; extractTo(buffer, index)",
+    "adapter": "adapters/cpp/zip/bit7z.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "bit7z wrapper over SevenZip ZIP reader",
+    "family_note": "Distinct C++ wrapper API; ZIP parsing and decompression use an exact-release, binary-hashed SevenZip 26.04 shared library. Not an independent decoder from SevenZip."
   }
 ]

@@ -155,11 +155,12 @@ The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
-C++ call sites for the same nine packages and five pinned C++ libraries. All
-**14/14 package paths passed** the valid archive control, returning the entry
+C++ call sites for the same nine packages and six pinned C++ libraries. All
+**15/15 package paths passed** the valid archive control, returning the entry
 name and decompressed contents. libzippp wraps the verified libzip release,
-Troldal Zippy bundles miniz, and Zipper wraps a classic MiniZip fork; these
-paths are not fourteen independent ZIP engines. Nine plausible C++ leads remain
+Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z
+uses a pinned SevenZip shared library; these paths are not fifteen independent
+ZIP engines. Eight plausible C++ leads remain
 unresolved, so the [C++ ZIP cell](data/cpp/zip/cell.json)
 is below the working goal and does not claim a most-used top 20. The ISO C++
 standard library has no documented ZIP parser.
