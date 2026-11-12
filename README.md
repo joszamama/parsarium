@@ -7,9 +7,9 @@ plus a below-target JavaScript × Matrix Market search,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
-Python × Matrix Market, and an explicit 88-cell work
-matrix. There are 31 cells at the 20-parser target, two started below target,
-and 55 marked `not_started`;
+Python × Matrix Market, Rust × PNG, and an explicit 88-cell work
+matrix. There are 32 cells at the 20-parser target, two started below target,
+and 54 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -100,6 +100,7 @@ uv venv --python python3.10 adapters/python/matrix_market/.venv310
 uv pip sync adapters/python/matrix_market/requirements-py310.lock --python adapters/python/matrix_market/.venv310/bin/python --require-hashes
 python3 controls/matrix_market/make_control.py
 python3 scripts/verify_python_matrix_market.py
+python3 scripts/verify_rust_png.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -399,6 +400,16 @@ Three documented or plausible leads remain unresolved; discovery remains partial
 The scoped CPython 3.13 standard-library inventory found no
 Matrix Market-aware input API.
 
+`verify_rust_png.py` uses Rust 1.99.1 and Cargo's locked dependency graph at
+`adapters/rust/png/Cargo.lock`. It builds the Rust adapter with
+`cargo build --locked` and runs 21 pinned crate paths against the valid two-pixel PNG or
+its `Title=Parsarium` tEXt variant. All **21/21** passed, returning decoded
+pixels, dimensions, chunks, or metadata according to each documented API.
+They represent 17 recorded parser families or lineages; wrappers and a fork
+are identified in the ranking. The scoped Rust standard library has no
+documented PNG parser. Ten plausible leads remain unresolved, including
+some with higher adoption counts, and the registry search is partial.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, `ascii_pnm`, or `ascii_ply`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, `ascii_pnm`, or `ascii_ply`
@@ -438,6 +449,13 @@ fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
 provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
 within Python. Unavailable metrics remain `null`.
+
+For Rust PNG discovery, run `python3 scripts/snapshot_crates.py png` and
+`python3 scripts/enrich_rust.py png` to refresh seven bounded
+[crates.io API](https://crates.io/api/) searches, pinned release metadata,
+and crate-level recent downloads over about 90 days. The downloads are
+compared only within Rust PNG. These commands require network access and
+replace the dated snapshot; the locked control verification does not.
 
 ## Verified rankings and search limits
 
@@ -635,6 +653,11 @@ or quality judgment.
   unresolved. Targeted documentation searches found three additional readers.
   The [cell record](data/python/matrix_market/cell.json) names the untested
   format variants.
+- [Rust × PNG ranking](data/rust/png/ranking.md): 21 verified crate paths,
+  representing 17 families or lineages. Seven bounded crates.io searches
+  saved 650 hits and 459 distinct names; ten explored leads remain
+  unresolved. The [cell record](data/rust/png/cell.json) records the search
+  limits and the separate standard-library inventory.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the

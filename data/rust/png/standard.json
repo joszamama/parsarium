@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Rust",
+  "format": "PNG",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Rust 1.99.1 standard library",
+      "official_documentation_scope": [
+        "https://doc.rust-lang.org/std/",
+        "https://doc.rust-lang.org/std/fs/fn.read.html",
+        "https://doc.rust-lang.org/std/io/trait.Read.html"
+      ],
+      "finding": "The documented std library has no PNG image or chunk decoder. std::fs::read returns raw bytes and std::io::Read is a byte-source trait; neither interprets PNG dimensions, chunks, or pixels. No documented format-aware bundled API was available to run against the valid PNG control."
+    }
+  ],
+  "limit": "This covers the documented Rust 1.99.1 standard library; crates and native system libraries are separate."
+}

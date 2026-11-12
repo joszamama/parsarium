@@ -1,0 +1,302 @@
+{
+  "checked_at_utc": "2026-11-12T00:36:59.629922+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
+  "build_command": "cargo build --locked (from adapters/rust/png)",
+  "control_sha256": {
+    "controls/png/red-green.png": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+    "controls/png/red-green-title.png": "d643731d4a91c228d705b9cf54c0d6af2c9f53ae4a2d9b2fe5035d649fad1450"
+  },
+  "control_meaning": "Valid 2-by-1 RGBA PNG with opaque red and green pixels; tagged variant has Title tEXt chunk",
+  "third_party": [
+    {
+      "package": "png",
+      "version": "0.18.1",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png png controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "image",
+      "version": "0.25.10",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png image controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "img-parts",
+      "version": "0.4.2",
+      "scope": "PNG chunk structure and IHDR dimensions",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png img-parts controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "chunks": 3
+      },
+      "error": null
+    },
+    {
+      "package": "png_pong",
+      "version": "0.12.0",
+      "scope": "Decoded PNG frame dimensions",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png png_pong controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "lodepng",
+      "version": "3.12.2",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png lodepng controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "zune-png",
+      "version": "0.5.2",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png zune-png controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "load_image",
+      "version": "3.5.0",
+      "scope": "Decoded PNG dimensions via LodePNG",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png load_image controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "gufo-png",
+      "version": "0.5.0",
+      "scope": "PNG tEXt Title metadata",
+      "control": "controls/png/red-green-title.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png gufo-png controls/png/red-green-title.png",
+      "pass": true,
+      "output": {
+        "key": "Title",
+        "value": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "minipng",
+      "version": "1.0.0",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png minipng controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "png-decoder",
+      "version": "0.2.0",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png png-decoder controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "oxideav-png",
+      "version": "0.1.14",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png oxideav-png controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "rusty_png",
+      "version": "0.3.2",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png rusty_png controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "imagefmt",
+      "version": "4.0.0",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png imagefmt controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "zenpng",
+      "version": "0.1.4",
+      "scope": "Decoded PNG dimensions",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png zenpng controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "spng",
+      "version": "0.2.0-alpha.3",
+      "scope": "libspng decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png spng controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "wml2",
+      "version": "0.0.45",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png wml2 controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "nopng",
+      "version": "0.3.0",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png nopng controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "pb-imgsize",
+      "version": "0.2.5",
+      "scope": "PNG IHDR dimensions",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png pb-imgsize controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "png-spark",
+      "version": "0.2.0",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png png-spark controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    },
+    {
+      "package": "makepad-zune-png",
+      "version": "0.4.10",
+      "scope": "Decoded PNG first pixel and byte count",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png makepad-zune-png controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "red_0_0": 255,
+        "pixel_bytes": 8
+      },
+      "error": null
+    },
+    {
+      "package": "format-png",
+      "version": "0.3.0",
+      "scope": "Decoded PNG dimensions and first pixel",
+      "control": "controls/png/red-green.png",
+      "command": "adapters/rust/png/target/debug/parsarium-rust-png format-png controls/png/red-green.png",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red_0_0": 255
+      },
+      "error": null
+    }
+  ]
+}

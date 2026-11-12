@@ -1,0 +1,62 @@
+[
+  {
+    "name": "blazediff-shared",
+    "status": "unresolved",
+    "reason": "The crate documentation exposes decode_png and says its PNG path uses vendored libspng. A pinned local adapter and control result have not yet been recorded; its registry hit and download count are not verification.",
+    "source": "https://docs.rs/blazediff-shared/latest/blazediff_shared/"
+  },
+  {
+    "name": "omniparse",
+    "status": "unresolved",
+    "reason": "The documented multimodal parser depends on the image crate, but a PNG-specific local input call and control result remain unverified. It may share the image-rs family.",
+    "source": "https://docs.rs/omniparse/latest/omniparse/"
+  },
+  {
+    "name": "libpng-sys",
+    "status": "unresolved",
+    "reason": "This is a low-level libpng binding. Its crate documentation points to libpng's C API; a safe local input adapter and PNG control result have not been recorded.",
+    "source": "https://docs.rs/libpng-sys/latest/libpng_sys/"
+  },
+  {
+    "name": "glycin",
+    "status": "unresolved",
+    "reason": "The documented local gio::File loader relies on separately installed sandboxed format loader binaries and GLib/GTK-related system dependencies. No PNG loader or control result was verified in this environment.",
+    "source": "https://docs.rs/glycin/latest/glycin/"
+  },
+  {
+    "name": "preflate-rs",
+    "status": "unresolved",
+    "reason": "The search description mentions PNG streams, but the exposed top-level functions document DEFLATE processing. A PNG-aware public input path and control result remain unverified.",
+    "source": "https://docs.rs/preflate-rs/latest/preflate_rs/"
+  },
+  {
+    "name": "rawshift-image",
+    "status": "unresolved",
+    "reason": "Documentation lists direct PNG RGB decode through a feature-selected backend. A pinned PNG input adapter and control result remain unverified; underlying backend family also needs confirmation.",
+    "source": "https://docs.rs/rawshift-image/latest/rawshift_image/"
+  },
+  {
+    "name": "stb_image",
+    "status": "unresolved",
+    "reason": "The registry describes stb image decode bindings, but the current crate documentation does not explain its local PNG input path. No pinned control run was recorded.",
+    "source": "https://docs.rs/stb_image/latest/stb_image/"
+  },
+  {
+    "name": "paperpaw-image",
+    "status": "unresolved",
+    "reason": "The registry hit describes streaming PNG decode; the current docs.rs page describes a reserved 0.0.0 package and points to quireink-image. Release and input API must be reconciled before eligibility can be established.",
+    "source": "https://docs.rs/paperpaw-image/latest/paperpaw_image/"
+  },
+  {
+    "name": "kornia-io",
+    "status": "unresolved",
+    "reason": "Crate documentation says PNG-specific Rust functions exist and uses the png crate. The latest docs.rs build failed, and no pinned control result or family evidence was recorded.",
+    "source": "https://docs.rs/crate/kornia-io/latest"
+  },
+  {
+    "name": "revelo-parsers-image",
+    "status": "unresolved",
+    "reason": "Documentation exposes parse_png but recommends using the revelo facade rather than calling parser functions directly. A documented public local-input route and control result remain to be verified.",
+    "source": "https://docs.rs/revelo-parsers-image/latest/revelo_parsers_image/"
+  }
+]

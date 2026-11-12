@@ -3,6 +3,7 @@
 from pathlib import Path
 import json
 import re
+import tomllib
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,6 +56,21 @@ def main() -> None:
                 count = snapshot["download_metric"]["packages"][name]["downloads"]
                 assert count is None or isinstance(count, int)
                 assert (ROOT / parser["control"]).exists()
+            elif cell["ecosystem"] == "rust":
+                adapter = ROOT / "adapters" / "rust" / cell["format"]
+                manifest = tomllib.loads((adapter / "Cargo.toml").read_text())
+                dependency = manifest["dependencies"][name]
+                requirement = dependency if isinstance(dependency, str) else dependency["version"]
+                assert requirement == "=" + parser["version"]
+                locked = tomllib.loads((adapter / "Cargo.lock").read_text())
+                match = [package for package in locked["package"]
+                         if package["name"] == name and package["version"] == parser["version"]]
+                assert len(match) == 1
+                assert match[0]["checksum"] == snapshot["releases"][name]["checksum"]
+                assert parser["license"] == snapshot["releases"][name]["license"]
+                count = snapshot["popularity_metric"]["packages"][name]["recent_downloads"]
+                assert count is None or isinstance(count, int)
+                assert (ROOT / parser["control"]).exists()
             else:
                 assert parser["version"] == lock[name]
                 assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
@@ -65,6 +81,12 @@ def main() -> None:
         runs = results["results"] if browser_png else results["third_party"]
         assert {r["package"] for r in runs} == {p["name"] for p in parsers}
         assert all(r["pass"] for r in runs)
+        if cell["ecosystem"] == "rust":
+            expected = {parser["name"]: parser for parser in parsers}
+            assert all(row["version"] == expected[row["package"]]["version"]
+                       and row["control"] == expected[row["package"]]["control"]
+                       and row["output"] == expected[row["package"]]["expected_output"]
+                       for row in runs)
         if browser_png:
             assert read(f"{key}/browser-verification.json")["pass"]
         elif cell["verified_standard_or_runtime_count"]:
