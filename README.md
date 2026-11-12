@@ -12,9 +12,10 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, and HTTP/1.1, plus an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 56 cells at the 20-parser target, four started
-below target, and 28 marked `not_started`;
+WAV, MP4, and HTTP/1.1, plus a below-target Java × MP3 with ID3v2 batch and
+an explicit 88-cell work matrix.
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 56 cells at the 20-parser target, five started
+below target, and 27 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -130,6 +131,7 @@ python3 scripts/verify_java_zip.py
 python3 scripts/verify_java_png.py
 python3 scripts/verify_java_pdf.py
 python3 scripts/verify_java_http11.py
+python3 scripts/verify_java_mp3_id3v2.py
 python3 controls/wav/make_control.py
 python3 scripts/verify_java_wav.py
 python3 scripts/build_matrix.py
@@ -416,6 +418,16 @@ the raw HTTP request without a WARC container. This cell meets the **20-path wor
 [cell summary](data/java/http11/cell.json), and
 [JDK inventory](data/java/http11/standard.json). Run
 `python3 scripts/snapshot_maven_http11.py` to refresh Maven and deps.dev evidence.
+
+The Java × MP3 with ID3v2 batch currently verifies **2/20 pinned Maven package
+paths**. jaudiotagger and mp3agic read the committed valid ID3v2.3 tagged MP3
+and report its title, artist, and album. A JDK-only Java Sound probe rejects
+the same control; it is recorded separately from the package ranking. Run
+`python3 scripts/verify_java_mp3_id3v2.py` from the repository root to rebuild
+and check the SHA-256 locked JARs. All five bounded Maven Central search
+queries timed out and six plausible leads remain unresolved; the search is
+incomplete. See the [Java MP3 ranking](data/java/mp3_id3v2/ranking.md) and
+[cell summary](data/java/mp3_id3v2/cell.json).
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
 one second of silent 8 kHz AAC audio, title `Parsarium`, and creation time
@@ -1151,6 +1163,11 @@ uncertainty.
 - `data/java/png/`: the equivalent pinned Maven release, ranking, control,
   and JDK 21 PNG API evidence. The macOS arm64 adapter and JAR lock live under
   `adapters/java/png/`.
+- `data/java/mp3_id3v2/`: two pinned Maven release paths, their tagged MP3
+  control results, exact-release direct-dependent ranking, six unresolved
+  leads, and a separate JDK-only probe. The adapter and resolved-JAR hash lock
+  live under `adapters/java/mp3_id3v2/`. All five bounded Maven search queries
+  timed out, so the cell remains 18 paths below the working target.
 - `data/php/zip/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and separate PHP runtime APIs. The
   adapters and six Composer locks live under `adapters/php/zip/`.

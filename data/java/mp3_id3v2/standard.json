@@ -1,0 +1,23 @@
+{
+  "ecosystem": "Java",
+  "format": "MP3 with ID3v2",
+  "runtime": "OpenJDK 21.0.2, Java SE 21 API inventory",
+  "status": "none_verified",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "AudioSystem.getAudioFileFormat(File)",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
+      "finding": "Provider-based local audio file inspection API; the JDK-only control probe threw UnsupportedAudioFileException for this tagged MP3."
+    },
+    {
+      "api": "AudioFileFormat.Type standard fields",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioFileFormat.Type.html",
+      "finding": "No MP3 or ID3 file type is among the documented standard file types."
+    }
+  ],
+  "probe": "adapters/java/mp3_id3v2/runtime/JdkMp3Probe.java",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "result": "data/java/mp3_id3v2/verification.json",
+  "limit": "This is an inventory and a negative control result for the tested JDK-only runtime. An externally installed Java Sound SPI could add MP3 support, but it would be third-party and is not counted here."
+}

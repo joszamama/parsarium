@@ -1,0 +1,32 @@
+[
+  {
+    "name": "jaudiotagger",
+    "group": "net.jthink",
+    "artifact": "jaudiotagger",
+    "version": "3.0.1",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Release Maven POM and project LICENSE",
+    "input_api": "AudioFileIO.read(File), MP3File.getID3v2Tag(), Tag.getFirst(FieldKey)",
+    "documentation": "https://www.jthink.net/jaudiotagger/examples_id3.jsp",
+    "family": "jaudiotagger native MP3 and ID3v2 reader",
+    "scope": "local MP3 identification and ID3v2 title, artist and album",
+    "adapter_label": "jaudiotagger",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot"}
+  },
+  {
+    "name": "mp3agic",
+    "group": "com.mpatric",
+    "artifact": "mp3agic",
+    "version": "0.9.1",
+    "license": "MIT",
+    "license_evidence": "Release Maven POM and project LICENSE",
+    "input_api": "new Mp3File(Path), hasId3v2Tag(), getId3v2Tag()",
+    "documentation": "https://github.com/mpatric/mp3agic/blob/master/readme.md",
+    "family": "mp3agic native MP3 frame and ID3v2 reader",
+    "scope": "local MP3 frames and ID3v2 title, artist, album and API tag version",
+    "adapter_label": "mp3agic",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3.0"}
+  }
+]
