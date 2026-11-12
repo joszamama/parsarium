@@ -217,13 +217,27 @@
       "source_url": "https://www.libsdl.org/release/SDL2-2.32.10.tar.gz",
       "source_sha256": "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165",
       "license_evidence": "https://github.com/libsdl-org/SDL/blob/release-2.32.10/LICENSE.txt"
+    },
+    "sdl2_sound": {
+      "version": "2.0.6",
+      "license": "Zlib AND (Artistic-1.0-Perl OR LGPL-2.1-or-later)",
+      "source_url": "https://github.com/icculus/SDL_sound/releases/download/v2.0.6/SDL2_sound-2.0.6.tar.gz",
+      "source_sha256": "63be57cc80bcd29aeed6c29700759871c44c90251a7508b8d0eacd8d9cece30c",
+      "license_evidence": "https://github.com/icculus/SDL_sound/blob/v2.0.6/LICENSE.txt"
+    },
+    "sdl3_sound": {
+      "version": "3.2.0",
+      "license": "Zlib AND (LGPL-2.1-or-later OR Artistic-1.0-Perl)",
+      "source_url": "https://github.com/icculus/SDL_sound/releases/download/v3.2.0/SDL3_sound-3.2.0.tar.gz",
+      "source_sha256": "3348f3ecc653e21f2b7ed8e409f07c67b179fbbfba3b99c85698e6e5d7b5924c",
+      "license_evidence": "https://github.com/icculus/SDL_sound/blob/v3.2.0/LICENSE.txt"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context. SDL2-compat exposes SDL2 WAV loading via SDL3 implementation; its repository stars measure the compatibility package, not a separate engine. SDL2 and SDL3 are releases from one upstream repository and share one star count; this is not release-specific popularity.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context. SDL2-compat exposes SDL2 WAV loading via SDL3 implementation; its repository stars measure the compatibility package, not a separate engine. SDL2 and SDL3 are releases from one upstream repository and share one star count; this is not release-specific popularity. SDL2_sound and SDL3_sound are separate major-version package APIs from one upstream repository and share its star count and decoder lineage; each adapter identified the built-in Microsoft WAVE decoder.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -305,11 +319,21 @@
         "stars": 16973,
         "repository": "https://github.com/libsdl-org/SDL",
         "source": "https://api.github.com/repos/libsdl-org/SDL"
+      },
+      "sdl2_sound": {
+        "stars": 182,
+        "repository": "https://github.com/icculus/SDL_sound",
+        "source": "https://api.github.com/repos/icculus/SDL_sound"
+      },
+      "sdl3_sound": {
+        "stars": 182,
+        "repository": "https://github.com/icculus/SDL_sound",
+        "source": "https://api.github.com/repos/icculus/SDL_sound"
       }
     },
     "captured_between_utc": [
       "2026-11-12T10:25:21.715408+00:00",
-      "2026-11-12T10:58:11.331430+00:00"
+      "2026-11-12T11:04:34.990294+00:00"
     ]
   },
   "targeted_documentation": [
@@ -332,6 +356,8 @@
     "https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h",
     "https://wiki.libsdl.org/SDL2/SDL_LoadWAV",
     "https://www.libsdl.org/release/SDL2-2.32.10.tar.gz",
-    "https://github.com/libsdl-org/SDL/blob/release-2.32.10/src/audio/SDL_wave.c"
+    "https://github.com/libsdl-org/SDL/blob/release-2.32.10/src/audio/SDL_wave.c",
+    "https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html",
+    "https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile"
   ]
 }

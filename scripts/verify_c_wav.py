@@ -114,12 +114,17 @@ def main() -> None:
             else:
                 version = run(["pkg-config", "--modversion", item["pkg_config"]])
                 assert version == item["pkg_config_version"], (name, version)
+                if name == "sdl3_sound":
+                    brew_version = run(["brew", "list", "--versions", item["brew_formula"]])
+                    assert brew_version == item["brew_formula"] + " " + item["release"]
                 flags = shlex.split(run(["pkg-config", "--cflags", "--libs", *item["pkg_configs"]]))
                 command = ["cc", "-std=c11", "-O2", str(ROOT / parser["adapter"]),
                            *flags, *item.get("extra_link_flags", []), "-o", str(TARGET / name)]
                 installed[name] = {"pkg_config_version": version, "library": str(library),
                                    "library_sha256": digest,
                                    "additional_libraries": item.get("additional_libraries", [])}
+                if name == "sdl3_sound":
+                    installed[name]["brew_version"] = brew_version
         run(command)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))

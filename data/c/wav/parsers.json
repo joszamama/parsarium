@@ -377,5 +377,53 @@
     "scope": "WAV sample rate, channel and frame counts, plus four decoded PCM samples",
     "family": "native SDL2 WAV reader",
     "family_note": "Official SDL2 2.32.10 source-built library, separate from sdl2-compat and SDL3 package paths; SDL WAV code lineage is shared across major versions. Same adapter C API is linked against this isolated native SDL2 binary."
+  },
+  {
+    "name": "sdl2_sound",
+    "version": "2.0.6",
+    "license": "Zlib AND (Artistic-1.0-Perl OR LGPL-2.1-or-later)",
+    "license_evidence": "https://github.com/icculus/SDL_sound/blob/v2.0.6/LICENSE.txt",
+    "documentation": "https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html",
+    "input_api": "Sound_NewSampleFromFile(local WAV path, NULL, 4096); Sound_DecodeAll; Sound_FreeSample",
+    "adapter": "adapters/c/wav/sdl2_sound.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples",
+    "family": "SDL2_sound WAVE decoder",
+    "family_note": "SDL2_sound ships an internal WAVE decoder in the SDL_sound upstream family. SDL2_sound and SDL3_sound are separate major-version packages/APIs but share decoder lineage and upstream star count. This Homebrew binary links sdl2-compat and macOS AudioToolbox; the adapter observed its Microsoft WAVE decoder."
+  },
+  {
+    "name": "sdl3_sound",
+    "version": "3.2.0",
+    "license": "Zlib AND (LGPL-2.1-or-later OR Artistic-1.0-Perl)",
+    "license_evidence": "https://github.com/icculus/SDL_sound/blob/v3.2.0/LICENSE.txt",
+    "documentation": "https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile",
+    "input_api": "Sound_NewSampleFromFile(local WAV path, NULL, 4096); Sound_DecodeAll; Sound_FreeSample",
+    "adapter": "adapters/c/wav/sdl3_sound.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples",
+    "family": "SDL3_sound WAVE decoder",
+    "family_note": "sdl3-sound ships an internal WAVE decoder in the SDL_sound upstream family. SDL2_sound and SDL3_sound are separate major-version packages/APIs but share decoder lineage and upstream star count. This Homebrew binary links SDL3 and macOS AudioToolbox; the adapter observed its Microsoft WAVE decoder."
   }
 ]

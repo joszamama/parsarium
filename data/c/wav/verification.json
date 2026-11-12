@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T11:00:31.145358+00:00",
+  "checked_at_utc": "2026-11-12T11:05:57.893651+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "installed_libraries": {
@@ -98,6 +98,29 @@
       "library": "/opt/homebrew/Cellar/sdl2-compat/2.32.74/lib/libSDL2-2.0.0.dylib",
       "library_sha256": "2e0b8bd67ab49579fac23e48c6e727afe1e1bff002d883c7220bb0643ff28347",
       "additional_libraries": []
+    },
+    "sdl2_sound": {
+      "pkg_config_version": "2.0.6",
+      "library": "/opt/homebrew/Cellar/sdl2_sound/2.0.6/lib/libSDL2_sound.2.0.6.dylib",
+      "library_sha256": "57bf6ca8a74d3e733597bc1b08815f8a63d362400f50434e79be91137aa12bb8",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/sdl2-compat/2.32.74/lib/libSDL2-2.0.0.dylib",
+          "sha256": "2e0b8bd67ab49579fac23e48c6e727afe1e1bff002d883c7220bb0643ff28347"
+        }
+      ]
+    },
+    "sdl3_sound": {
+      "pkg_config_version": "",
+      "library": "/opt/homebrew/Cellar/sdl3_sound/3.2.0/lib/libSDL3_sound.0.2.0.dylib",
+      "library_sha256": "e7c70c534d7ca68b5b02d3df6995a5822c1541946b04cdf2ca94c54f4221ef12",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/sdl3/3.4.20/lib/libSDL3.dylib",
+          "sha256": "10e099afe070ee62ff19cf990712b0df92e3e28a84116cc96756257d9dcdb892"
+        }
+      ],
+      "brew_version": "sdl3_sound 3.2.0"
     }
   },
   "source_builds": {
@@ -118,7 +141,7 @@
       "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
       "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
       "configure_command": "./configure --prefix=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install --disable-static",
-      "library_sha256": "1da0cfa4f43cb83356246a06d404886077bce70a2f9c22504d8bcfdf9707a3c4"
+      "library_sha256": "15ddb84a2c000e5e20e71e9770cbb10220831b0c801483ae34dcb4b7acb5a3b0"
     },
     "sdl2": {
       "source_sha256": "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165",
@@ -430,6 +453,44 @@
       "control": "controls/wav/four-samples.wav",
       "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/sdl2/include -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2-build/include-config-release/SDL2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/sdl2_compat.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2-build/libSDL2-2.0.0.dylib -Wl,-rpath,/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2-build -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2_sound",
+      "version": "2.0.6",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/sdl2_sound.c -I/opt/homebrew/Cellar/sdl2_sound/2.0.6/include/SDL2 -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -D_THREAD_SAFE -L/opt/homebrew/Cellar/sdl2_sound/2.0.6/lib -lSDL2_sound -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2_sound",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2_sound /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3_sound",
+      "version": "3.2.0",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/sdl3_sound.c -I/opt/homebrew/Cellar/sdl3_sound/3.2.0/include -I/opt/homebrew/include -L/opt/homebrew/Cellar/sdl3_sound/3.2.0/lib -lSDL3_sound -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl3_sound",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl3_sound /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
       "output": {
         "sample_rate": 8000,
         "channels": 1,
