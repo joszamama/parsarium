@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T22:31:04.605406+00:00",
+  "captured_at_utc": "2026-11-12T22:45:47.709810+00:00",
   "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage.",
   "search_limit_per_query": 100,
   "search": [
@@ -316,11 +316,18 @@
       "source_url": "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10080/ghostpdl-10.08.0.tar.xz",
       "source_sha256": "94943e3c4adb7115d132b3c28b913672f2e62e6a9d802f7e754e716b1634174a",
       "license_evidence": "https://formulae.brew.sh/formula/ghostscript"
+    },
+    "pdfio": {
+      "version": "1.6.5",
+      "license": "Apache-2.0",
+      "source_url": "https://codeload.github.com/michaelrsweet/pdfio/tar.gz/refs/tags/v1.6.5",
+      "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
+      "license_evidence": "https://github.com/michaelrsweet/pdfio/blob/v1.6.5/LICENSE"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
-    "captured_at_utc": "2026-11-12T22:31:04.605406+00:00",
+    "captured_at_utc": "2026-11-12T22:45:47.709810+00:00",
     "source": "https://github.com/{owner}/{repo}",
     "limitations": "Primary GitHub stars proxy broad project interest, not PDF-specific adoption. Compared only within C++. Poppler, MuPDF, and Ghostscript have canonical non-GitHub repositories; their GitHub mirrors are omitted and all three remain unranked. Homebrew search names are fuzzy and not popularity ranked.",
     "packages": {
@@ -347,6 +354,11 @@
         "stars": null,
         "repository": "https://git.ghostscript.com/ghostpdl.git",
         "note": "Canonical upstream is Ghostscript Git; GitHub repositories are mirrors."
+      },
+      "pdfio": {
+        "stars": 361,
+        "repository": "https://github.com/michaelrsweet/pdfio",
+        "evidence_note": "Exact stargazerCount 361 from the primary GitHub repository HTML during this batch; GitHub API was rate limited."
       }
     }
   },
@@ -362,6 +374,11 @@
     {
       "name": "pdfium",
       "url": "https://conan.io/center/recipes/pdfium"
+    },
+    {
+      "name": "pdfio",
+      "url": "https://github.com/michaelrsweet/pdfio",
+      "surface": "Official PDFio documentation and primary GitHub release; absent from Homebrew formula-name hits"
     }
   ]
 }

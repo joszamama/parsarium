@@ -20,8 +20,8 @@ TARGET = ROOT / "adapters/cpp/pdf/target"
 CONTROL_SHA256 = "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a"
 
 
-def run(command: list[str]) -> str:
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=180)
+def run(command: list[str], cwd: Path = ROOT) -> str:
+    result = subprocess.run(command, cwd=cwd, text=True, capture_output=True, timeout=180)
     if result.returncode:
         raise RuntimeError(f"{shlex.join(command)}\n{result.stderr}")
     return result.stdout.strip()
@@ -55,10 +55,23 @@ def main() -> None:
             member = tar.extractfile(source["source_header_member"])
             assert member is not None
             assert sha256(member.read()).hexdigest() == source["local_header_sha256"]
-        header = Path(source["local_header"])
-        library = Path(source["local_library"])
+        if name == "pdfio":
+            source_dir = CACHE / f"pdfio-{source['release']}"
+            if not source_dir.exists():
+                run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "pdfio.h"
+            library = source_dir / "libpdfio.a"
+            assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
+            run(["./configure", "--prefix=" + str(CACHE / "pdfio-install")], cwd=source_dir)
+            run(["make", "clean"], cwd=source_dir)
+            optim = "-O2 -arch " + platform.machine() if platform.system() == "Darwin" else "-O2"
+            run(["make", "-j4", "OPTIM=" + optim], cwd=source_dir)
+        else:
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
+        if name != "pdfio":
+            assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
@@ -85,6 +98,11 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(header.parents[1]), str(ROOT / parser["adapter"]),
                        str(library), "-o", str(TARGET / name)]
+        elif name == "pdfio":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), str(ROOT / parser["adapter"]),
+                       str(library), *shlex.split(run(["pkg-config", "--libs", "libpng"])),
+                       "-lz", "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)
@@ -95,7 +113,7 @@ def main() -> None:
                      "control": parser["control"], "build_command": shlex.join(command),
                      "command": shlex.join(execute), "output": output, "pass": True})
         libraries[name] = {"source_sha256": source["source_sha256"],
-                           "local_library_sha256": source["local_library_sha256"],
+                           "local_library_sha256": sha256(library.read_bytes()).hexdigest(),
                            "local_header_sha256": source["local_header_sha256"]}
         print(f"{name}@{parser['version']}: C++ PDF passed")
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

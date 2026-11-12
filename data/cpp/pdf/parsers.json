@@ -81,5 +81,22 @@
     "family": "Ghostscript PDF interpreter",
     "family_note": "Direct Ghostscript C API call from C++17; PDF interpreter is a distinct engine from Poppler, PoDoFo, qpdf, and MuPDF. Source archive is GhostPDL, which contains Ghostscript. Canonical upstream is Ghostscript Git; GitHub mirrors are not used for popularity.",
     "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "pdfio",
+    "version": "1.6.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/michaelrsweet/pdfio/blob/v1.6.5/LICENSE",
+    "documentation": "https://www.msweet.org/pdfio/pdfio.html",
+    "input_api": "pdfioFileOpen(const char* local filename, ...); pdfioFileGetNumPages and pdfioFileGetPage, called from C++17",
+    "adapter": "adapters/cpp/pdf/pdfio.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "PDFio PDF parser",
+    "family_note": "Direct PDFio C API call from C++17; independent PDFio engine, built from its pinned source archive.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
   }
 ]

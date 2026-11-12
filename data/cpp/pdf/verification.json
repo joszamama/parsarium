@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T22:41:20.103957+00:00",
+  "checked_at_utc": "2026-11-12T22:45:38.030254+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -28,6 +28,11 @@
       "source_sha256": "94943e3c4adb7115d132b3c28b913672f2e62e6a9d802f7e754e716b1634174a",
       "local_library_sha256": "626534e6a65dcae70c863b6e0170efed64a5b664101bd5c657d5ab771293fb76",
       "local_header_sha256": "cb749c77250b1ded7ca9223ce2ee0ee75c4ddde6b29966d0df0a66a3efbc9299"
+    },
+    "pdfio": {
+      "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
+      "local_library_sha256": "9a72bd00d37cf855fe8975092921e46a587564fd0da0fa8de30ec5200da27afa",
+      "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -83,6 +88,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/ghostscript/10.08.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/ghostscript.cpp /opt/homebrew/Cellar/ghostscript/10.08.0/lib/libgs.10.08.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/ghostscript",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/ghostscript /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "pdfio",
+      "version": "1.6.5",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfio-1.6.5 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdfio.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfio-1.6.5/libpdfio.a -L/opt/homebrew/opt/libpng/lib -lpng16 -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },

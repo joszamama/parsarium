@@ -60,5 +60,15 @@
     "local_library": "/opt/homebrew/Cellar/ghostscript/10.08.0/lib/libgs.10.08.dylib",
     "local_library_sha256": "626534e6a65dcae70c863b6e0170efed64a5b664101bd5c657d5ab771293fb76",
     "repository": "https://git.ghostscript.com/ghostpdl.git"
+  },
+  "pdfio": {
+    "release": "1.6.5",
+    "license": "Apache-2.0",
+    "source_url": "https://codeload.github.com/michaelrsweet/pdfio/tar.gz/refs/tags/v1.6.5",
+    "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
+    "source_header_member": "pdfio-1.6.5/pdfio.h",
+    "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37",
+    "build": "./configure --prefix=<cache>/pdfio-install; make clean; make -j4 OPTIM=\"-O2 -arch <machine>\" on macOS; source built in verifier",
+    "repository": "https://github.com/michaelrsweet/pdfio"
   }
 }
