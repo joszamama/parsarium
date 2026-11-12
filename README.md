@@ -16,8 +16,8 @@ WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
-has a verified 20-path batch, while PHP × SVG has five verified paths so far.
-There are 65 cells at the 20-parser target, three started below target, and 20
+and PHP × SVG each have a verified 20-path batch.
+There are 66 cells at the 20-parser target, two started below target, and 20
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -370,16 +370,19 @@ replaying packages pinned to those runtimes. The verifier uses their
 `/opt/homebrew/opt` paths by default; override them with `PARSARIUM_PHP84`,
 `PARSARIUM_PHP82`, and `PARSARIUM_PHP74`.
 
-The [PHP × SVG ranking](data/php/svg/ranking.md) currently has five pinned,
-distinct source releases that parsed the valid two-rectangle SVG control through
-document, dimension, sanitizer, or optimizer APIs. Eight bounded Packagist
-searches saved 391 hits and 241 distinct names; five named leads remain
+The [PHP × SVG ranking](data/php/svg/ranking.md) has 20 pinned, distinct source
+releases that parsed the valid two-rectangle SVG control through typed document,
+dimension, validator, sanitizer, optimizer, or rasterizer APIs. Eight bounded
+Packagist searches saved 391 hits and 241 distinct names; six named leads remain
 unresolved. Two registry aliases of identical source releases were excluded.
 The [runtime inventory](data/php/svg/standard.json) separately verifies
 `getimagesize()` and `getimagesizefromstring()` SVG dimensions in PHP 8.5 with
-ext-libxml. The working goal of 20 package paths is not yet met. Run
-`python3 scripts/verify_php_svg.py` from the repository root with PHP 8.5,
-Composer 2, and the extensions declared in the pinned Composer locks.
+ext-libxml. The 20-path working goal is met; shared sanitizer, PHP-SVG, dompdf,
+and librsvg families are recorded in the [parser rows](data/php/svg/parsers.json).
+Run `python3 scripts/verify_php_svg.py` from the repository root with PHP 8.5,
+PHP 7.4, Composer 2, Node/npm for sharp, rsvg-convert 2.63.4, and the pinned
+PECL Imagick build script's ImageMagick toolchain. The verifier installs sharp
+from the root npm lock when needed and builds Imagick from its source lock.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1308,9 +1311,9 @@ uncertainty.
 - `data/php/pdf/`: Packagist PDF discovery hits, twenty pinned parser paths,
   control results, unresolved leads, lifetime download ranking, and a separate
   PHP runtime inventory. Its Composer lock and adapter live in `adapters/php/pdf/`.
-- `data/php/svg/`: bounded Packagist SVG discovery hits, five pinned parser
+- `data/php/svg/`: bounded Packagist SVG discovery hits, twenty pinned parser
   paths, lifetime download ranking, replay results, unresolved leads, and two
-  separate PHP 8.5 runtime APIs. Five Composer locks and the adapter live under
+  separate PHP 8.5 runtime APIs. Twenty Composer locks and the adapters live under
   `adapters/php/svg/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.

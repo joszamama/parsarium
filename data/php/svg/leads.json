@@ -12,18 +12,6 @@
     "source": "https://packagist.org/packages/jangobrick/php-svg"
   },
   {
-    "name": "darylldoyle/safe-svg",
-    "status": "unresolved",
-    "reason": "WordPress integration wraps enshrined/svg-sanitize; documented standalone local SVG input API and pinned replay still need review.",
-    "source": "https://packagist.org/packages/darylldoyle/safe-svg"
-  },
-  {
-    "name": "choowx/rasterize-svg",
-    "status": "unresolved",
-    "reason": "Potential local SVG rasterization wrapper; external renderer requirements and pinned replay not yet established.",
-    "source": "https://packagist.org/packages/choowx/rasterize-svg"
-  },
-  {
     "name": "t3g/svg-sanitizer",
     "status": "unresolved",
     "reason": "TYPO3 sanitizer lead; local document input API and independent package replay still need review.",
@@ -36,9 +24,39 @@
     "source": "https://packagist.org/packages/symfony/ux-icons"
   },
   {
-    "name": "itools/svgsecuritycheck",
+    "name": "livemap/svg-parser",
     "status": "unresolved",
-    "reason": "SVG security checker lead; documented local input and control output still need verification.",
-    "source": "https://packagist.org/packages/itools/svgsecuritycheck"
+    "reason": "Pinned 1.2.2 accepted the valid layered SVG syntax, but geometry extraction on PHP 8.5 raised TypeError: round() received SimpleXMLElement. No format-aware output was counted.",
+    "source": "https://packagist.org/packages/livemap/svg-parser"
+  },
+  {
+    "name": "msztorc/svg-convert",
+    "status": "unresolved",
+    "reason": "Pinned 1.0.0 wrapper sent incompatible simultaneous --x-zoom and --zoom arguments to local rsvg-convert 2.63.4; output was empty for the valid control.",
+    "source": "https://packagist.org/packages/msztorc/svg-convert"
+  },
+  {
+    "name": "timahfouz/svg-sanitizer",
+    "status": "unresolved",
+    "reason": "Pinned v1.0.0 declares an old enshrined/svg-sanitize range that Composer blocked on security advisories; the control could not be replayed without overriding that policy.",
+    "source": "https://packagist.org/packages/timahfouz/svg-sanitizer"
+  },
+  {
+    "name": "fractorr/svg",
+    "status": "unresolved",
+    "reason": "Craft CMS plugin lead; no documented standalone local SVG parse API or isolated control result established.",
+    "source": "https://packagist.org/packages/fractorr/svg"
+  },
+  {
+    "name": "gymmed/svg-parser",
+    "status": "excluded",
+    "reason": "Pinned v0.1 reads SVG as text and inserts CSS using regular expressions; it does not parse SVG elements or geometry.",
+    "source": "https://packagist.org/packages/gymmed/svg-parser"
+  },
+  {
+    "name": "fawno/simplesvg",
+    "status": "excluded",
+    "reason": "Pinned 1.0.7 documentation only establishes SVG generation; no local SVG input parse API was found.",
+    "source": "https://packagist.org/packages/fawno/simplesvg"
   }
 ]

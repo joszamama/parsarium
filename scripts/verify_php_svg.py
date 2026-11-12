@@ -7,12 +7,14 @@ import json
 import os
 import platform
 import subprocess
+from build_php_imagick import build as build_imagick
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/php/svg"
 CONTROL = ROOT / "controls/svg/red-green.svg"
 PHP = os.environ.get("PARSARIUM_PHP85", "php")
+PHP74 = os.environ.get("PARSARIUM_PHP74", "/opt/homebrew/opt/php@7.4/bin/php")
 
 
 def run(command: list[str], cwd: Path = ROOT) -> str:
@@ -38,6 +40,13 @@ def main() -> None:
     parsers = json.loads((DATA / "parsers.json").read_text())
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
     standard = json.loads((DATA / "standard.json").read_text())
+    if any(p["name"] == "choowx/rasterize-svg" for p in parsers):
+        expected_sharp = json.loads((ROOT / "package-lock.json").read_text())["packages"]["node_modules/sharp"]["version"]
+        sharp_file = ROOT / "node_modules/sharp/package.json"
+        if not sharp_file.is_file() or json.loads(sharp_file.read_text())["version"] != expected_sharp:
+            run(["npm", "ci"])
+    imagick_extension = build_imagick() if any(
+        p["name"] == "bitandblack/image-information" for p in parsers) else None
     locks = {}
     for name in sorted({parser["composer_lock"] for parser in parsers}):
         path = ROOT / name
@@ -54,8 +63,14 @@ def main() -> None:
         package = lock["packages"][name]
         assert package["version"] == parser["version"] == snapshot["releases"][name]["version"]
         assert package["source"]["reference"] == snapshot["releases"][name]["source_reference"]
-        command = [PHP, "-d", "display_errors=0", "-d", "log_errors=0",
-                   str(ROOT / parser["adapter"]), name, str(ROOT / parser["control"])]
+        executable = PHP74 if name == "t3g/svg-sanitize-elts7" else PHP
+        command = [executable, "-d", "display_errors=0", "-d", "log_errors=0"]
+        if name == "bitandblack/image-information":
+            command += ["-d", f"extension={imagick_extension}"]
+        command += [str(ROOT / parser["adapter"])]
+        if name != "t3g/svg-sanitize-elts7":
+            command += [name]
+        command += [str(ROOT / parser["control"])]
         output = json.loads(run(command))
         assert output == parser["expected_output"], (name, output)
         rows.append({"package": name, "version": parser["version"],
@@ -79,7 +94,12 @@ def main() -> None:
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "platform": platform.platform(),
         "php_version": run([PHP, "-r", "echo PHP_VERSION;"]),
+        "legacy_php_version": run([PHP74, "-r", "echo PHP_VERSION;"]),
         "composer_version": run(["composer", "--version"]),
+        "rsvg_convert_version": run(["rsvg-convert", "--version"]).splitlines()[0],
+        "sharp_version": json.loads((ROOT / "node_modules/sharp/package.json").read_text())["version"],
+        "imagick_extension_source_lock": "data/php/ascii_pnm/pecl-imagick-lock.json",
+        "imagick_extension_sha256": sha256(imagick_extension.read_bytes()).hexdigest() if imagick_extension else None,
         "control": str(CONTROL.relative_to(ROOT)),
         "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
         "composer_locks": [{"path": name, "sha256": lock["sha256"]} for name, lock in locks.items()],
