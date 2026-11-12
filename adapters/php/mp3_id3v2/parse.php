@@ -10,6 +10,7 @@ $vendor = match ($package) {
     'wapmorgan/media-file' => '/legacy/vendor/autoload.php',
     'kiwilan/php-audio' => '/kiwilan/vendor/autoload.php',
     'duncan3dc/meta-audio' => '/meta_audio/vendor/autoload.php',
+    'debach/zend-mp3' => '/zend_mp3/vendor/autoload.php',
     default => '/vendor/autoload.php',
 };
 require __DIR__ . $vendor;
@@ -79,6 +80,14 @@ switch ($package) {
             'artist' => $parsed->getArtist(),
             'album' => $parsed->getAlbum(),
         ];
+        break;
+    case 'debach/zend-mp3':
+        $parsed = new \Zend_Media_Id3v2($path);
+        $output = [];
+        foreach (['title' => 'TIT2', 'artist' => 'TPE1', 'album' => 'TALB'] as $field => $frameId) {
+            $frames = $parsed->getFramesByIdentifier($frameId);
+            $output[$field] = $frames[0]->getText();
+        }
         break;
     default:
         throw new InvalidArgumentException('unknown MP3/ID3v2 package: ' . $package);

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T17:02:55.125791+00:00",
+  "checked_at_utc": "2026-11-12T17:06:28.419873+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php_version": "8.5.12",
   "composer_version": "Composer version 2.11.2 2026-11-10 10:09:37",
@@ -31,6 +31,10 @@
     {
       "path": "adapters/php/mp3_id3v2/meta_audio/composer.lock",
       "sha256": "8dbcbfa4baf46c497bf3e6dc09ab134987960527a8c4064cd65036ed5e023ebe"
+    },
+    {
+      "path": "adapters/php/mp3_id3v2/zend_mp3/composer.lock",
+      "sha256": "073cbbfede48f0638c4cf5f4827728fd82e5a73c3667e43abb0914aa9407ba4b"
     }
   ],
   "third_party": [
@@ -143,6 +147,22 @@
       "control": "controls/mp3_id3v2/tone-tags-v24.mp3",
       "control_sha256": "a5337540e40f66d89398dbc29e366034d21ec5ba5f0cd539392cddb07530616d",
       "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/mp3_id3v2/parse.php duncan3dc/meta-audio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags-v24.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot"
+      },
+      "pass": true
+    },
+    {
+      "package": "debach/zend-mp3",
+      "version": "1.8.1",
+      "composer_lock": "adapters/php/mp3_id3v2/zend_mp3/composer.lock",
+      "composer_lock_sha256": "073cbbfede48f0638c4cf5f4827728fd82e5a73c3667e43abb0914aa9407ba4b",
+      "source_reference": "17b523ad57f283ddf3a116bc0eff22cb9d1b4b27",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/mp3_id3v2/parse.php debach/zend-mp3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
       "output": {
         "title": "Parsarium",
         "artist": "Control",

@@ -135,5 +135,24 @@
     "scope": "ID3v2.4 title, artist, and album",
     "family": "duncan3dc MetaAudio native ID3 parser",
     "family_note": "Own PHP ID3v2 module; the documented default-module setup is required. The ID3v2.4 control uses synchsafe frame sizes."
+  },
+  {
+    "name": "debach/zend-mp3",
+    "version": "1.8.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/debach/zend-mp3/blob/17b523ad57f283ddf3a116bc0eff22cb9d1b4b27/composer.json",
+    "documentation": "https://github.com/debach/zend-mp3/blob/17b523ad57f283ddf3a116bc0eff22cb9d1b4b27/README.md",
+    "input_api": "Zend_Media_Id3v2(local tagged MP3 path); getFramesByIdentifier(TIT2/TPE1/TALB) and frame getText()",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/zend_mp3/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, artist, and album",
+    "family": "Zend Media native ID3 parser",
+    "family_note": "Composer fork of Sven Vollbehr PHP Reader; local Zend_Media_Id3v2 parses ID3 frames without delegating to getID3."
   }
 ]
