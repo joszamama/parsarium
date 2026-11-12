@@ -36,7 +36,8 @@ def main() -> None:
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
     cell = json.loads((DATA / "cell.json").read_text())
     assert len(parsers) == cell["verified_third_party_count"]
-    assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
+    assert {p["name"] for p in parsers} <= set(c_parsers) | set(extra_lock)
+    assert set(extra_lock) <= {p["name"] for p in parsers}
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "adapters/c/zip/target/7z.so", TARGET / "7z.so")

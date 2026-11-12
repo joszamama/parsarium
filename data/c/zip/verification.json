@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T11:50:45.530599+00:00",
+  "checked_at_utc": "2026-11-12T15:14:01.758935+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -42,6 +42,16 @@
       "pkg_config_version": "3.54.1",
       "library": "/opt/homebrew/Cellar/sqlite/3.54.1/lib/libsqlite3.dylib",
       "library_sha256": "71fe46b392955c6149b0b35d8d5008989dc41457c8c7d0091201d11d9a2a0d6b"
+    },
+    "libtfs": {
+      "openssl_release": "openssl@3 3.5.9",
+      "openssl_library": "/opt/homebrew/opt/openssl@3/lib/libcrypto.a",
+      "openssl_library_sha256": "3f0bc09f0292a8c2486eecd68e6a849176c27bf949f2b4de901b6a6a2fd2050f"
+    },
+    "tcl-zipfs": {
+      "pkg_config_version": "9.1.0",
+      "library": "/opt/homebrew/Cellar/tcl-tk/9.1.0/lib/libtcl9.1.dylib",
+      "library_sha256": "4840dd124c42d4aaed8ff10668c4de346d13a5695f8323dc3fce629ef84e438b"
     }
   },
   "source_builds": {
@@ -78,7 +88,7 @@
     "infozip-unzip": {
       "source_sha256": "036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37",
       "build_command": "make -C /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/infozip-unzip -f unix/Makefile objsdll CC=cc 'CFLAGS=-O2 -fPIC -DDLL -DUNIX -Wno-deprecated-non-prototype -Wno-implicit-function-declaration' -j4",
-      "library_sha256": "dcee46a63bfe4663b9ac9070d74bae1e685fce91cedf24f438dc7885b74a3711"
+      "library_sha256": "4fca3572b7a90172f84ca4cb813e513b2ddf40892534b4f0e77426d2a7950811"
     },
     "junzip": {
       "source_sha256": "b02799ece6a8e3ac28c2719699a919786d30bef6160108e06edcad4611f5c10d",
@@ -91,6 +101,27 @@
     "zipc": {
       "source_sha256": "8e3055c149faa5eaca0a1e84e2500d764557a39c9c2ce046a033de308ad4454c",
       "build": "compiled pinned zipc.c read-only with zlib"
+    },
+    "libtfs": {
+      "source_sha256": "c7227e5461d094b0126ff0b92c15bb8760541d7c92b0ca569578f7021c0ed4b9",
+      "release_assets": {
+        "libtfs-0.13.0-macos-arm64.tar.gz": "2287edadb32b2a43d5c12b24878073a24f49d2472604f430e11cd0621e9ed758",
+        "libtfs-deps-0.13.0-macos-arm64.tar.gz": "44f32ccac0056c4e308b175a8f65ccb8053d85d14a9b00e36fa01399454f4b0a"
+      },
+      "compile_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/pkg/include -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libtfs.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libtfs-adapter.o",
+      "dependency_archive_count": 18,
+      "libtfs_library_sha256": "8d801d1df2ce2702b2263028299c8b9875070c7f7d06cb0a66b79719069366e9"
+    },
+    "aosp-libzipfile": {
+      "release_commit": "efbf36f2dad8f083de6f48dbb682461d7cfa9781",
+      "file_sha256": {
+        "zipfile.c": "a6cf9e532c55a600c69fa269dbf09e3306c0a525f35266c1b6a20efed1647fe0",
+        "centraldir.c": "4aa59359a9c7123c81b95fab781062c89f972de1923998548af4ca7572e3560e",
+        "private.h": "aac3682274f3a90711a188295864248cf934d9a2d34191332a9587fafc9d7a8d",
+        "NOTICE": "38751245389e1e23f73e6f5384b5cbe7fa972cc4410c5adc9c04b082a0b9561a",
+        "include/zipfile/zipfile.h": "a2c68cb2e5a8740b31fde53dd259faad2ae02597ad35764ea3e4bdd6a45d3ec6"
+      },
+      "build": "compiled pinned AOSP libzipfile ZIP reader with system zlib"
     }
   },
   "control": "controls/zip/hello.zip",
@@ -316,6 +347,45 @@
       "build_command": "cc -std=c11 -O2 -DZIPC_ONLY_READ -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zipc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/zipc.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zipc/zipc.c -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zipc",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zipc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "libtfs",
+      "version": "v0.13.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libtfs-adapter.o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/pkg/lib/libtfs.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libboost_chrono.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libboost_filesystem.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libbrotlicommon.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libbrotlidec.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libbrotlienc.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libbz2.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libdwarfs_common.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libdwarfs_decompressor.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libdwarfs_metadata_legacy.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libdwarfs_reader.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libflatbuffers.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libfmt.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/liblz4.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/liblzma.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libxxhash.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libz.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libzip.a /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/libtfs/deps/lib/libzstd.a /opt/homebrew/opt/openssl@3/lib/libcrypto.a -framework CoreFoundation -framework Security -framework Foundation -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libtfs",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libtfs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "tcl-zipfs",
+      "version": "9.1.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/tcl_zipfs.c -I/opt/homebrew/Cellar/tcl-tk/9.1.0/include/tcl-tk -DTCL_WITH_EXTERNAL_TOMMATH -I/opt/homebrew/Cellar/libtommath/1.3.0/include -L/opt/homebrew/Cellar/tcl-tk/9.1.0/lib -ltcl9.1 -ltclstub -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/tcl-zipfs",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/tcl-zipfs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "aosp-libzipfile",
+      "version": "android-4.4.4_r2",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/aosp-libzipfile/include -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/aosp-libzipfile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/aosp_libzipfile.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/aosp-libzipfile/zipfile.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/aosp-libzipfile/centraldir.c -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/aosp-libzipfile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/aosp-libzipfile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
         "content": "parsarium\n"
       },
       "pass": true

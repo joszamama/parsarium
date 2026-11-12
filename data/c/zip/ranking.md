@@ -1,6 +1,6 @@
 # C × ZIP: verified parser ranking
 
-17 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T11:50:06.305574+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 3 path(s) lack a metric and remain unranked.
+20 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T15:07:17.386662+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 5 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -20,6 +20,9 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | 12 | [lowzip](https://github.com/svaarala/lowzip/blob/v1.0.1/README.md) | 1.0.1 | 46 | entry name and decompressed entry bytes | lowzip ZIP reader |
 | 13 | [libc7zip](https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h) | v1.10.0 | 18 | entry name and decompressed entry bytes | libc7zip → lib7zip → 7-Zip ZIP engine |
 | 14 | [zipc](https://www.msweet.org/zipc/zipc.html) | v1.3 | 13 | decompressed bytes for a known named ZIP entry; no entry enumeration API verified | zipc ZIP container reader with zlib DEFLATE |
+| 15 | [libtfs](https://github.com/tamatebako/libtfs/blob/v0.13.0/include/tebako/fs/c_api.h) | v0.13.0 | 8 | mounted ZIP entry name and decompressed entry bytes | libtfs C facade over libzip ZIP backend |
+| unranked | [aosp-libzipfile](https://android.googlesource.com/platform/system/core/+/refs/tags/android-4.4.4_r2/include/zipfile/zipfile.h) | android-4.4.4_r2 | unknown | entry name and decompressed entry bytes from local ZIP bytes | AOSP libzipfile ZIP reader |
 | unranked | [infozip-unzip](https://github.com/madler/unzip/blob/master/unzip.h) | 6.0 | unknown | entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API | Info-ZIP UnZip 6.0 engine |
 | unranked | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | unknown | entry name and decompressed entry bytes | libgsf ZIP reader |
 | unranked | [minizip](https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h) | 1.4 | unknown | entry name and decompressed entry bytes | classic MiniZip |
+| unranked | [tcl-zipfs](https://www.tcl-lang.org/man/tcl9.1/TclLib/zipfs.html) | 9.1.0 | unknown | mounted ZIP entry name and decompressed entry bytes | Tcl Zipfs ZIP reader |

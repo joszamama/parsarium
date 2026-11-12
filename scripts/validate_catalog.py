@@ -62,6 +62,11 @@ def main() -> None:
                     assert source["svn_revision"] == release["svn_revision"]
                     assert source["version_file_sha256"] == release["version_file_sha256"]
                     assert len(source["version_file_sha256"]) == 64
+                elif source.get("source_kind") == "gitiles_blobs":
+                    assert release["source_kind"] == "gitiles_blobs"
+                    assert source["release_commit"] == release["release_commit"]
+                    assert source["files"] == release["files"]
+                    assert len(source["release_commit"]) == 40
                 else:
                     assert source["source_sha256"] == release["source_sha256"]
                     assert len(source["source_sha256"]) == 64

@@ -304,5 +304,59 @@
     "family": "zipc ZIP container reader with zlib DEFLATE",
     "family_note": "zipc parses ZIP container records itself and uses zlib for DEFLATE. Its public reading API opens a named entry; this path does not claim enumeration or an observed entry count.",
     "adapter": "adapters/c/zip/zipc.c"
+  },
+  {
+    "name": "libtfs",
+    "version": "v0.13.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/tamatebako/libtfs/blob/v0.13.0/include/tebako/fs/c_api.h",
+    "documentation": "https://github.com/tamatebako/libtfs/blob/v0.13.0/include/tebako/fs/c_api.h",
+    "input_api": "tebako_fs_init_from_file(const char* archive_path, const char* mount_point); tebako_fs_opendir/readdir; tebako_fs_open/read",
+    "adapter": "adapters/c/zip/libtfs.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "mounted ZIP entry name and decompressed entry bytes",
+    "family": "libtfs C facade over libzip ZIP backend",
+    "family_note": "The documented C facade uses a C++ ZIP backend linked against libzip. This is a distinct package path but shares the libzip parser engine."
+  },
+  {
+    "name": "tcl-zipfs",
+    "version": "9.1.0",
+    "license": "TCL",
+    "license_evidence": "https://www.tcl-lang.org/software/tcltk/license.html",
+    "documentation": "https://www.tcl-lang.org/man/tcl9.1/TclLib/zipfs.html",
+    "input_api": "TclZipfs_Mount(interp, local_zip_path, mountpoint, NULL); Tcl_OpenFileChannel and Tcl_Read",
+    "adapter": "adapters/c/zip/tcl_zipfs.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "mounted ZIP entry name and decompressed entry bytes",
+    "family": "Tcl Zipfs ZIP reader",
+    "family_note": "Tcl core Zipfs parses ZIP records and uses zlib for DEFLATE. The C API is third-party to ISO C, despite being bundled with the Tcl runtime."
+  },
+  {
+    "name": "aosp-libzipfile",
+    "version": "android-4.4.4_r2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://android.googlesource.com/platform/system/core/+/refs/tags/android-4.4.4_r2/libzipfile/NOTICE",
+    "documentation": "https://android.googlesource.com/platform/system/core/+/refs/tags/android-4.4.4_r2/include/zipfile/zipfile.h",
+    "input_api": "init_zipfile(const void* data, size_t size); iterate_zipfile; get_zipentry_name; decompress_zipentry",
+    "adapter": "adapters/c/zip/aosp_libzipfile.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes from local ZIP bytes",
+    "family": "AOSP libzipfile ZIP reader",
+    "family_note": "Standalone source build of the Android Open Source Project libzipfile C module; own central-directory parser, using zlib for DEFLATE. It is used here as a third-party package outside the Android runtime."
   }
 ]

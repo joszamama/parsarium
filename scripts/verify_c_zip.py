@@ -114,6 +114,16 @@ def main() -> None:
                        str(source / "zipc.c"), "-lz", "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "build": "compiled pinned zipc.c read-only with zlib"}
+        elif name == "aosp-libzipfile":
+            source = SOURCE / name
+            command = ["cc", "-std=c11", "-O2", "-I" + str(source / "include"),
+                       "-I" + str(source), str(ROOT / parser["adapter"]),
+                       str(source / "zipfile.c"), str(source / "centraldir.c"),
+                       "-lz", "-o", str(TARGET / name)]
+            source_builds[name] = {"release_commit": item["release_commit"],
+                                   "file_sha256": {file["name"]: file["sha256"]
+                                                   for file in item["files"]},
+                                   "build": "compiled pinned AOSP libzipfile ZIP reader with system zlib"}
         elif name == "sqlite":
             library = Path(item["local_library"])
             digest = sha256(library.read_bytes()).hexdigest()
@@ -170,10 +180,40 @@ def main() -> None:
                 "configure_command": shlex.join(configure),
                 "engine_build_command": shlex.join(engine_command),
             }
+        elif name == "libtfs":
+            assert platform.system() == "Darwin" and platform.machine() == "arm64"
+            archive = ADAPTER / "cache/libtfs"
+            libtfs_library = archive / "pkg/lib/libtfs.a"
+            dependencies = sorted((archive / "deps/lib").glob("*.a"))
+            assert len(dependencies) == item["dependency_archive_count"]
+            crypto = Path(item["local_crypto_library"])
+            crypto_digest = sha256(crypto.read_bytes()).hexdigest()
+            assert crypto_digest == item["local_crypto_sha256"]
+            assert run(["brew", "list", "--versions", "openssl@3"]) == item["local_crypto_release"]
+            object_file = TARGET / "libtfs-adapter.o"
+            compile_command = ["cc", "-std=c11", "-O2",
+                               "-I" + str(archive / "pkg/include"), "-c",
+                               str(ROOT / parser["adapter"]), "-o", str(object_file)]
+            run(compile_command)
+            command = ["c++", str(object_file), str(libtfs_library),
+                       *map(str, dependencies), str(crypto),
+                       "-framework", "CoreFoundation", "-framework", "Security",
+                       "-framework", "Foundation", "-o", str(TARGET / name)]
+            local_libraries[name] = {"openssl_release": item["local_crypto_release"],
+                                     "openssl_library": str(crypto),
+                                     "openssl_library_sha256": crypto_digest}
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "release_assets": {asset["name"]: asset["sha256"]
+                                                      for asset in item["binary_assets"]},
+                                   "compile_command": shlex.join(compile_command),
+                                   "dependency_archive_count": len(dependencies),
+                                   "libtfs_library_sha256": sha256(libtfs_library.read_bytes()).hexdigest()}
         else:
             library = Path(item["local_library"])
             digest = sha256(library.read_bytes()).hexdigest()
             assert digest == item["local_library_sha256"], name
+            for dependency in item.get("transitive_local_libraries", []):
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
             if name == "libarchive":
                 directory = str(library.parent / "pkgconfig")
                 env["PKG_CONFIG_PATH"] = directory + os.pathsep + env.get("PKG_CONFIG_PATH", "")

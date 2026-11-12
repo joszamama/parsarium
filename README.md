@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG and WAV batches,
-below-target C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
+verified C × ZIP and below-target ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and a verified C++ × ASCII PNM batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
@@ -14,7 +14,7 @@ Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII P
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 57 cells at the 20-parser target, four started
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 58 cells at the 20-parser target, three started
 below target, and 27 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -176,25 +176,32 @@ comparable metric and remain unranked. The control establishes ASCII P3
 handling; it does not establish every PNM variant. Neither scoped standard
 library documents a PNM-aware parser.
 
-The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with seven locally installed
-libraries pinned by exact release and binary SHA-256, plus ten source-built
-libraries pinned by archive SHA-256 in
+The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed
+libraries pinned by exact release and binary SHA-256, plus eleven source-built
+or source-integrated libraries pinned by archive or file SHA-256 in
 [`source-lock.json`](data/c/zip/source-lock.json). SQLite Zipfile also links an
 exact-release, binary-hashed SQLite library. The libc7zip build also pins
 its official 7-Zip engine source by SHA-256 and currently uses the macOS arm64
-build path. All **17/17 third-party
+build path. libtfs uses SHA-locked macOS arm64 release archives and a pinned
+local OpenSSL archive; Tcl Zipfs uses binary-hashed Tcl 9.1.0 and libtommath
+libraries (`brew install openssl@3 tcl-tk` on the recorded host; the verifier
+rejects version or hash mismatches). AOSP libzipfile uses individually SHA-locked files from the Android
+4.4.4_r2 release commit because the Gitiles tarball bytes vary across downloads.
+All **20/20 third-party
 package paths passed** on the same one-entry DEFLATE ZIP control used in the
-other ecosystems. Sixteen returned entry name and decompressed bytes; zipc
-returned decompressed bytes for a known named entry. This remains below the
-working goal of 20. Fourteen paths have primary GitHub
-repository star metrics; three remain unranked. MiniZip and minizip-ng share
+other ecosystems. Nineteen returned entry name and decompressed bytes; zipc
+returned decompressed bytes for a known named entry. The working goal of 20 is
+met, while the most-used search remains incomplete. Fifteen paths have primary GitHub
+repository star metrics; five remain unranked. MiniZip and minizip-ng share
 parser lineage, kuba-zip bundles miniz, unzipLIB includes a modified MiniZip,
 libc7zip wraps lib7zip and the 7-Zip engine, lowzip has its own ZIP reader,
 Info-ZIP UnZip exposes a separate C API, JUnzip parses ZIP records with
 zlib for DEFLATE, SQLite Zipfile parses ZIP records through a virtual table,
-and zipc reads known entries using zlib.
-The 21 distinct Conan recipe-name hits and 116 GitHub repository search hits
-are discovery results, not a most-used ranking; six leads remain unresolved.
+zipc reads known entries using zlib, libtfs exposes a C facade over libzip,
+Tcl Zipfs parses ZIP in the Tcl runtime through its documented C API, and
+AOSP libzipfile is a separate ZIP record reader built outside the Android runtime.
+The 23 Conan recipe-name and 159 GitHub search hits (151 unique names in all)
+are discovery results, not a most-used ranking; eleven leads remain unresolved.
 The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
 
@@ -215,7 +222,7 @@ library has no WAV parser. The Audio File Library source build applies a
 documented compatibility patch for a signed-shift constant expression.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
-C++ call sites for the same seventeen packages and ten pinned C++ libraries. All
+C++ call sites for a selected seventeen C packages and ten pinned C++ libraries. All
 **27/27 package paths passed** the valid archive control. Twenty-six returned
 entry name and decompressed contents; zipc returned known-entry content.
 libzippp wraps the verified libzip release,
