@@ -1,6 +1,6 @@
 # PHP × ZIP: verified parser ranking
 
-13 verified third-party package paths; working goal 20, ceiling 30. The metric is Packagist package-level lifetime downloads, captured between 2026-11-12T09:14:24.797211+00:00 and 2026-11-12T09:20:49.731986+00:00. It counts all releases and all package uses, not just the ZIP reading API. It is compared only within PHP. 0 path(s) lack a metric and remain unranked; equal counts share a rank.
+16 verified third-party package paths; working goal 20, ceiling 30. The metric is Packagist package-level lifetime downloads, captured between 2026-11-12T09:14:24.797211+00:00 and 2026-11-12T09:20:49.731986+00:00. It counts all releases and all package uses, not just the ZIP reading API. It is compared only within PHP. 0 path(s) lack a metric and remain unranked; equal counts share a rank.
 
 Search hits and unresolved leads are separate from this ranking. PHP bundled APIs are listed in `standard.json` and do not enter the third-party ranking. Several package paths delegate to PHP ZipArchive/libzip; see `family` and `family_note` in `parsers.json`.
 
@@ -18,4 +18,7 @@ Search hits and unresolved leads are separate from this ranking. PHP bundled API
 | 10 | [zetacomponents/archive](https://zetacomponents.org/documentation/trunk/Archive/tutorial.html) | 1.5.1 | 509,571 | entry name and decompressed entry bytes | Zeta Components custom PHP ZIP reader |
 | 11 | [comodojo/zip](https://github.com/comodojo/zip/blob/22e11bda2ab8e1057cf4d1a50a98ab22f9e38e34/src/Comodojo/Zip/Zip.php) | 3.1.1 | 479,706 | entry name and decompressed entry bytes | Comodojo wrapper over PHP ZipArchive |
 | 12 | [joomla/archive](https://github.com/joomla-framework/archive/blob/7a8d0eda637bd37bc3de744aa3e4ce516d4356b0/README.md) | 4.0.0 | 450,574 | entry name and decompressed entry bytes | Joomla ZIP adapter over PHP ZipArchive |
-| 13 | [smuuf/zip-reader](https://github.com/smuuf/php-zip-reader/blob/363eaa22a52be72a2dc3fc6c3bef78835da4f259/README.md) | 1.0 | 49 | entry name and decompressed entry bytes | Smuuf ZIP reader over PHP ZipArchive |
+| 13 | [macellan/laravel-zip](https://github.com/macellan/laravel-zip/blob/0c40d22de710acb5e4da8620663fb336741cdc5d/README.md) | 1.0.5 | 270,070 | entry name and decompressed entry bytes | Macellan fork of ZanySoft over PHP ZipArchive |
+| 14 | [kiwilan/php-archive](https://github.com/kiwilan/php-archive/blob/2e202603396a620720aad676c4037eebc0443090/README.md) | 2.3.02 | 45,598 | entry name and decompressed entry bytes | Kiwilan archive wrapper over PHP ZipArchive |
+| 15 | [seblucas/tbszip](https://github.com/seblucas/tbszip/blob/2c50bf309bb4431a24e206f164fdb4a2e6b10b7f/README.md) | 2.16.1 | 22,409 | entry name and decompressed entry bytes | TbsZip custom PHP ZIP reader |
+| 16 | [smuuf/zip-reader](https://github.com/smuuf/php-zip-reader/blob/363eaa22a52be72a2dc3fc6c3bef78835da4f259/README.md) | 1.0 | 49 | entry name and decompressed entry bytes | Smuuf ZIP reader over PHP ZipArchive |

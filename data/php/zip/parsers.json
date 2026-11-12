@@ -245,5 +245,62 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "Madnest Madzipper over PHP ZipArchive",
     "family_note": "A fork of Chumper Zipper with its own Composer package API; delegates archive parsing to PHP ZipArchive."
+  },
+  {
+    "name": "macellan/laravel-zip",
+    "version": "1.0.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/macellan/laravel-zip/blob/0c40d22de710acb5e4da8620663fb336741cdc5d/composer.json",
+    "documentation": "https://github.com/macellan/laravel-zip/blob/0c40d22de710acb5e4da8620663fb336741cdc5d/README.md",
+    "input_api": "Macellan\\Zip\\Zip::open(local path); listFiles; extract",
+    "adapter": "adapters/php/zip/macellan_laravel_zip.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Macellan fork of ZanySoft over PHP ZipArchive",
+    "family_note": "A separate Composer package path with code lineage from ZanySoft Laravel ZIP; delegates parsing to PHP ZipArchive."
+  },
+  {
+    "name": "kiwilan/php-archive",
+    "version": "2.3.02",
+    "license": "MIT",
+    "license_evidence": "https://github.com/kiwilan/php-archive/blob/2e202603396a620720aad676c4037eebc0443090/LICENSE.md",
+    "documentation": "https://github.com/kiwilan/php-archive/blob/2e202603396a620720aad676c4037eebc0443090/README.md",
+    "input_api": "Archive::read(local ZIP path); getFirst; getContents",
+    "adapter": "adapters/php/zip/kiwilan_php_archive.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Kiwilan archive wrapper over PHP ZipArchive",
+    "family_note": "Its ZIP reader delegates to PHP ZipArchive; the package also supports other archive formats."
+  },
+  {
+    "name": "seblucas/tbszip",
+    "version": "2.16.1",
+    "license": "LGPL-2.1+",
+    "license_evidence": "https://github.com/seblucas/tbszip/blob/2c50bf309bb4431a24e206f164fdb4a2e6b10b7f/composer.json",
+    "documentation": "https://github.com/seblucas/tbszip/blob/2c50bf309bb4431a24e206f164fdb4a2e6b10b7f/README.md",
+    "input_api": "clsTbsZip::Open(local path); CdFileLst; FileRead",
+    "adapter": "adapters/php/zip/seblucas_tbszip.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "TbsZip custom PHP ZIP reader",
+    "family_note": "Parses central-directory records in PHP and uses zlib to decompress DEFLATE entries."
   }
 ]

@@ -170,14 +170,14 @@ records that the numerical goal is met, while search remains incomplete and the
 cell does not claim a definitive most-used top 20. The ISO C++
 standard library has no documented ZIP parser.
 
-The PHP × ZIP verifier installs thirteen exact Composer package releases from three
+The PHP × ZIP verifier installs sixteen exact Composer package releases from three
 lockfiles and runs local-file readers on the same one-entry DEFLATE control.
-All **13/13 third-party paths and 2/2 bundled PHP APIs passed**. Nine package
+All **16/16 third-party paths and 2/2 bundled PHP APIs passed**. Eleven package
 paths use PHP ZipArchive/libzip; the [PHP ZIP ranking](data/php/zip/ranking.md)
 labels shared families and uses Packagist lifetime downloads only to order the
 verified third-party paths. PclZip uses a separate lock because UnifiedArchive
 declares it as a Composer replacement; Madnest also needs a separate Laravel
-dependency set. Four adapters emitted nonfatal PHP 8.5
+dependency set. Six adapters emitted nonfatal PHP 8.5
 warnings, captured in [verification.json](data/php/zip/verification.json).
 Three bounded Packagist searches recorded 300 hits, and three plausible leads
 remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
