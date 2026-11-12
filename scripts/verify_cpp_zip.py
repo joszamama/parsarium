@@ -195,6 +195,16 @@ def main() -> None:
             command = shlex.split(c_runs[name]["build_command"])
             assert command[0:2] == ["cc", "-std=c11"]
             command[0:2] = ["c++", "-std=c++17"]
+            if name == "sqlite":
+                item = json.loads((ROOT / "data/c/zip/source-lock.json").read_text())[name]
+                source = ROOT / "adapters/c/zip/cache/source/sqlite/ext/misc/zipfile.c"
+                obj = TARGET / "sqlite_zipfile.o"
+                step = ["cc", "-std=c11", "-O2", "-DSQLITE_CORE",
+                        "-I" + item["local_include"], "-c", str(source),
+                        "-o", str(obj)]
+                run(step)
+                prerequisite_build_commands.append(shlex.join(step))
+                command[command.index(str(source))] = str(obj)
             if name in ("lowzip", "junzip"):
                 command[2:2] = ["-x", "c++"]
             c_adapter = str(ROOT / c_parsers[name]["adapter"])

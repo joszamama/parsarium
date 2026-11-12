@@ -146,19 +146,20 @@ does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with seven locally installed
-libraries pinned by exact release and binary SHA-256, plus eight source-built
+libraries pinned by exact release and binary SHA-256, plus nine source-built
 libraries pinned by archive SHA-256 in
-[`source-lock.json`](data/c/zip/source-lock.json). The libc7zip build also pins
+[`source-lock.json`](data/c/zip/source-lock.json). SQLite Zipfile also links an
+exact-release, binary-hashed SQLite library. The libc7zip build also pins
 its official 7-Zip engine source by SHA-256 and currently uses the macOS arm64
-build path. All **15/15 third-party
+build path. All **16/16 third-party
 package paths passed** on the same one-entry DEFLATE ZIP control used in the
 other ecosystems, returning the parsed entry name and decompressed bytes.
-This remains below the working goal of 20. Twelve paths have primary GitHub
+This remains below the working goal of 20. Thirteen paths have primary GitHub
 repository star metrics; three remain unranked. MiniZip and minizip-ng share
 parser lineage, kuba-zip bundles miniz, unzipLIB includes a modified MiniZip,
 libc7zip wraps lib7zip and the 7-Zip engine, lowzip has its own ZIP reader,
-Info-ZIP UnZip exposes a separate C API, and JUnzip parses ZIP records with
-zlib for DEFLATE.
+Info-ZIP UnZip exposes a separate C API, JUnzip parses ZIP records with
+zlib for DEFLATE, and SQLite Zipfile parses ZIP records through a virtual table.
 The 21 distinct Conan recipe-name hits and 116 GitHub repository search hits
 are discovery results, not a most-used ranking; six leads remain unresolved.
 The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
@@ -181,15 +182,15 @@ library has no WAV parser. The Audio File Library source build applies a
 documented compatibility patch for a signed-shift constant expression.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
-C++ call sites for the same fifteen packages and ten pinned C++ libraries. All
-**25/25 package paths passed** the valid archive control, returning the entry
+C++ call sites for the same sixteen packages and ten pinned C++ libraries. All
+**26/26 package paths passed** the valid archive control, returning the entry
 name and decompressed contents. libzippp wraps the verified libzip release,
 Troldal Zippy bundles miniz, Zipper and QuaZip wrap classic MiniZip, bit7z
 and libc7zip use pinned 7-Zip engines through separate APIs, QArchive wraps
 libarchive, and the separate
 Sebastian Zipper package and unzipLIB also share classic MiniZip lineage;
-Info-ZIP UnZip uses its separate engine, and JUnzip reuses the pinned C release.
-These paths are not twenty-five
+Info-ZIP UnZip uses its separate engine; JUnzip and SQLite Zipfile reuse their
+pinned C releases. These paths are not twenty-six
 independent ZIP engines. Six plausible C++ leads remain
 unresolved, so the [C++ ZIP cell](data/cpp/zip/cell.json)
 records that the numerical goal is met, while search remains incomplete and the

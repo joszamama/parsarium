@@ -33,6 +33,9 @@ def prepare(name: str) -> None:
         for member in members:
             parts = PurePosixPath(member.name).parts
             assert parts and parts[0] == prefix and ".." not in parts
+            if name == "sqlite" and "/".join(parts[1:]) not in (
+                    "ext/misc/zipfile.c", "LICENSE.md"):
+                continue
             assert member.isfile() or member.isdir(), member.name
             if not member.isfile():
                 continue
@@ -45,7 +48,7 @@ def prepare(name: str) -> None:
 
 
 def main() -> None:
-    for name in ("kuba-zip", "zziplib", "unarr", "lowzip", "unziplib", "infozip-unzip", "junzip"):
+    for name in ("kuba-zip", "zziplib", "unarr", "lowzip", "unziplib", "infozip-unzip", "junzip", "sqlite"):
         prepare(name)
         print(f"{name}: pinned {LOCK[name]['release']} source verified")
     name = "libc7zip"

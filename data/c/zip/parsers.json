@@ -270,5 +270,23 @@
     "family": "JUnzip ZIP record reader with zlib DEFLATE",
     "family_note": "JUnzip parses ZIP end, central and local records itself, then delegates DEFLATE decompression to zlib; separate package from Info-ZIP UnZip.",
     "adapter": "adapters/c/zip/junzip.c"
+  },
+  {
+    "name": "sqlite",
+    "version": "3.54.1",
+    "license": "Public-Domain",
+    "license_evidence": "https://www.sqlite.org/copyright.html",
+    "documentation": "https://www.sqlite.org/zipfile.html",
+    "input_api": "sqlite3_zipfile_init(db,0,0); sqlite3_prepare_v2 SELECT name,data FROM zipfile(?1); bind local ZIP path; sqlite3_step",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "SQLite Zipfile virtual table with zlib DEFLATE",
+    "family_note": "Official SQLite ext/misc/zipfile.c extension parses ZIP archive records and delegates DEFLATE to zlib; its repository stars measure all SQLite usage, not Zipfile adoption.",
+    "adapter": "adapters/c/zip/sqlite.c"
   }
 ]

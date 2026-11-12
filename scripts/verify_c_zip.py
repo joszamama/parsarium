@@ -107,6 +107,21 @@ def main() -> None:
                        "-lz", "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "build": "compiled pinned junzip.c with zlib for DEFLATE"}
+        elif name == "sqlite":
+            library = Path(item["local_library"])
+            digest = sha256(library.read_bytes()).hexdigest()
+            assert digest == item["local_library_sha256"]
+            env["PKG_CONFIG_PATH"] = str(library.parent / "pkgconfig") + os.pathsep + env.get("PKG_CONFIG_PATH", "")
+            observed = run(["pkg-config", "--modversion", "sqlite3"], env)
+            assert observed == item["release"]
+            source = SOURCE / name / "ext/misc/zipfile.c"
+            command = ["cc", "-std=c11", "-O2", "-DSQLITE_CORE",
+                       "-I" + item["local_include"], str(ROOT / parser["adapter"]),
+                       str(source), str(library), "-lz", "-o", str(TARGET / name)]
+            local_libraries[name] = {"pkg_config_version": observed,
+                                     "library": str(library), "library_sha256": digest}
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "build": "compiled SQLite ext/misc/zipfile.c into application"}
         elif name == "infozip-unzip":
             source = SOURCE / name
             build = ["make", "-C", str(source), "-f", "unix/Makefile", "objsdll",
