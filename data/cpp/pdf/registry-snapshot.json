@@ -1,6 +1,6 @@
 {
   "captured_at_utc": "2026-11-12T22:52:56.732932+00:00",
-  "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage. PDFio official docs and the PDFium binary distributor release plus canonical PDFium source docs were also checked as targeted leads. PDF4QT primary project documentation and release were checked as a targeted lead.",
+  "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage. PDFio official docs and the PDFium binary distributor release plus canonical PDFium source docs were also checked as targeted leads. PDF4QT primary project documentation and release were checked as a targeted lead. Qt PDF QPdfDocument official documentation, QtWebEngine pinned source tag and Homebrew formula were checked as a targeted lead.",
   "search_limit_per_query": 100,
   "search": [
     {
@@ -345,13 +345,21 @@
       "source_url": "https://codeload.github.com/JakubMelka/PDF4QT/tar.gz/refs/tags/v1.6.0.0",
       "source_sha256": "a5f9952723acbb8a2431207cf76e53a17941292fbd003a2ed1b79503677ab2ec",
       "license_evidence": "https://github.com/JakubMelka/PDF4QT/blob/v1.6.0.0/LICENSE"
+    },
+    "qtpdf": {
+      "version": "6.11.2",
+      "installed_revision": "6.11.2_1",
+      "license": "LGPL-3.0-only OR GPL-2.0-only",
+      "source_url": "https://code.qt.io/cgit/qt/qtwebengine.git/plain/src/pdf/qpdfdocument.h?h=v6.11.2",
+      "source_sha256": "616a003a8440840d321526981c26abf83d8b5f22d518e36babda1276b4fe4844",
+      "license_evidence": "https://doc.qt.io/qt-6/qtpdf-licensing.html"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T22:45:47.709810+00:00",
     "source": "https://github.com/{owner}/{repo}",
-    "limitations": "Primary GitHub stars proxy broad project interest, not PDF-specific adoption. Compared only within C++. Poppler, MuPDF, Ghostscript, and PDFium have canonical non-GitHub repositories; their GitHub mirrors are omitted and all four remain unranked. Homebrew search names are fuzzy and not popularity ranked.",
+    "limitations": "Primary GitHub stars proxy broad project interest, not PDF-specific adoption. Compared only within C++. Poppler, MuPDF, Ghostscript, PDFium, and Qt PDF have canonical non-GitHub repositories; their GitHub mirrors are omitted and all five remain unranked. Homebrew search names are fuzzy and not popularity ranked.",
     "packages": {
       "poppler": {
         "stars": null,
@@ -396,6 +404,11 @@
         "stars": 1515,
         "repository": "https://github.com/JakubMelka/PDF4QT",
         "evidence_note": "Exact stargazerCount from primary GitHub repository HTML during this batch."
+      },
+      "qtpdf": {
+        "stars": null,
+        "repository": "https://code.qt.io/cgit/qt/qtwebengine.git/",
+        "note": "Canonical QtWebEngine source is code.qt.io, with no comparable primary GitHub stars. Homebrew install analytics are not mixed into this metric."
       }
     }
   },
@@ -426,6 +439,11 @@
       "name": "pdf4qt",
       "url": "https://github.com/JakubMelka/PDF4QT",
       "surface": "Primary project documentation and v1.6.0.0 release; absent from Homebrew formula-name hits"
+    },
+    {
+      "name": "qtpdf",
+      "url": "https://doc.qt.io/qt-6/qpdfdocument.html",
+      "surface": "Official Qt PDF local load API and Homebrew qtwebengine distribution; distinct Qt module over PDFium"
     }
   ]
 }

@@ -54,11 +54,17 @@ def main() -> None:
     for parser in parsers:
         name = parser["name"]
         source = lock[name]
-        source_archive = archive(name, source)
-        with tarfile.open(source_archive) as tar:
-            member = tar.extractfile(source["source_header_member"])
-            assert member is not None
-            assert sha256(member.read()).hexdigest() == source.get("source_header_sha256", source["local_header_sha256"])
+        if name == "qtpdf":
+            with urlopen(Request(source["source_header_url"],
+                                 headers={"User-Agent": "Parsarium C++ PDF verifier"}), timeout=90) as response:
+                upstream_header = response.read()
+            assert sha256(upstream_header).hexdigest() == source["source_sha256"]
+        else:
+            source_archive = archive(name, source)
+            with tarfile.open(source_archive) as tar:
+                member = tar.extractfile(source["source_header_member"])
+                assert member is not None
+                assert sha256(member.read()).hexdigest() == source.get("source_header_sha256", source["local_header_sha256"])
         if name == "pdfio":
             source_dir = CACHE / f"pdfio-{source['release']}"
             if not source_dir.exists():
@@ -126,6 +132,12 @@ def main() -> None:
                      "/opt/homebrew/opt/openssl@3", "/opt/homebrew"])])
             run(["cmake", "--build", str(build_dir), "--target", "Pdf4QtLibCore", "-j4"])
             library = build_dir / "bin/libPdf4QtLibCore.1.6.0.0.dylib"
+        elif name == "qtpdf":
+            assert run(["brew", "list", "--versions", "qtwebengine"]) == "qtwebengine " + source["installed_revision"]
+            assert run(["pkg-config", "--modversion", "Qt6Pdf"]) == source["pkg_config_version"]
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            assert header.read_bytes() == upstream_header
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
@@ -180,6 +192,10 @@ def main() -> None:
                        "-I" + str(header.parent), "-I" + str(build_dir),
                        str(ROOT / parser["adapter"]), str(library), *flags,
                        "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
+        elif name == "qtpdf":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "Qt6Pdf"]))
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)

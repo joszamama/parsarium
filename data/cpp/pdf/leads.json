@@ -7,14 +7,14 @@
   },
   {
     "name": "poppler-qt6",
-    "status": "unresolved",
-    "reason": "Separate Homebrew formula for a Poppler frontend; same upstream parser family, and whether it is a distinct package distribution remains to be resolved before counting.",
+    "status": "excluded",
+    "reason": "The Qt6 frontend comes from the same Poppler 26.11.0 upstream release as the already-counted Poppler C++ frontend. It exposes another API but would duplicate one package in this cell; the shared Poppler parser family is already recorded.",
     "source": "https://formulae.brew.sh/formula/poppler-qt6"
   },
   {
     "name": "Qt PDF",
-    "status": "unresolved",
-    "reason": "Qt PDF documents a local QPdfDocument loader, but a pinned installed release and control run are pending.",
+    "status": "verified",
+    "reason": "Qt PDF QPdfDocument from pinned QtWebEngine 6.11.2_1 passed the local one-page control; see qtpdf in parsers.json and verification.json. It shares PDFium as the underlying engine.",
     "source": "https://doc.qt.io/qt-6/qpdfdocument.html"
   },
   {
