@@ -1,0 +1,40 @@
+[
+  {
+    "name": "boost_beast",
+    "version": "1.92.0",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/boostorg/beast/blob/boost-1.92.0/LICENSE_1_0.txt",
+    "documentation": "https://www.boost.org/latest/libs/beast/doc/html/beast/ref/boost__beast__http__basic_parser/put.html",
+    "input_api": "boost::beast::http::request_parser<empty_body>::put(boost::asio::buffer(local_bytes), error_code&)",
+    "adapter": "adapters/cpp/http11/boost_beast.cpp",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test"
+    },
+    "scope": "HTTP/1.1 request method, target, version, and Host header",
+    "family": "Boost.Beast native HTTP parser",
+    "family_note": "Native C++ parser; uses Boost.Asio buffers but does not delegate to a C HTTP parser."
+  },
+  {
+    "name": "poco",
+    "version": "1.15.4",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/pocoproject/poco/blob/poco-1.15.4-release/LICENSE",
+    "documentation": "https://docs.pocoproject.org/current/Poco.Net.HTTPRequest.html",
+    "input_api": "Poco::Net::HTTPRequest::read(std::istream&) on a local std::ifstream",
+    "adapter": "adapters/cpp/http11/poco.cpp",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test"
+    },
+    "scope": "HTTP/1.1 request method, URI, version, and Host header",
+    "family": "Poco.Net HTTPRequest parser",
+    "family_note": "Native C++ HTTP request reader in Poco.Net; distinct from Boost.Beast."
+  }
+]

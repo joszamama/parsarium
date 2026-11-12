@@ -1,0 +1,51 @@
+{
+  "checked_at_utc": "2026-11-12T22:11:06.607711+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/cpp/http11/source-lock.json",
+  "local_sources": {
+    "boost_beast": {
+      "source_sha256": "de6f1308125438d238d7d53d2b9be8eddc11db17977baf87e2a2e7fc1dd9ea29",
+      "local_header": "/opt/homebrew/Cellar/boost/1.92.0/include/boost/beast/http/basic_parser.hpp",
+      "local_header_sha256": "c74f69f2b30ebbee261eb82f308bb75905ac8bc2385733bdd711af24802a57c5"
+    },
+    "poco": {
+      "source_sha256": "4635007f593646b3db8754bbb31ded34cd533487519d4d4a45c788dbff3fe07f",
+      "configure_command": "cmake -S /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-poco-1.15.4-release -B /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-build -DPOCO_MINIMAL_BUILD=ON -DENABLE_NET=ON -DBUILD_SHARED_LIBS=OFF -DENABLE_FASTLOGGER=OFF -DENABLE_TESTS=OFF -DENABLE_SAMPLES=OFF -DCMAKE_BUILD_TYPE=Release",
+      "build_command": "cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-build --target Net -j4"
+    }
+  },
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "third_party": [
+    {
+      "package": "boost_beast",
+      "version": "1.92.0",
+      "control": "controls/http11/request.http",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/boost/1.92.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/http11/boost_beast.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/http11/target/boost_beast",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/http11/target/boost_beast /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test"
+      },
+      "pass": true
+    },
+    {
+      "package": "poco",
+      "version": "1.15.4",
+      "control": "controls/http11/request.http",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-poco-1.15.4-release/Net/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-poco-1.15.4-release/Foundation/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/http11/poco.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-build/lib/libPocoNet.a /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-http11/poco-build/lib/libPocoFoundation.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/http11/target/poco",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/http11/target/poco /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test"
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}
