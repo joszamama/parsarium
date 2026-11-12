@@ -15,8 +15,8 @@ ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
-20-parser batches. There are 61 cells at the 20-parser target, two started
-below target, and 25 marked `not_started`;
+20-parser batches; PHP × WAV has a five-path pilot batch. There are 61 cells
+at the 20-parser target, three started below target, and 24 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -39,6 +39,7 @@ python3 scripts/verify_php_zip.py
 python3 scripts/verify_php_png.py
 python3 scripts/verify_php_ascii_pnm.py
 python3 scripts/verify_php_mp3_id3v2.py
+python3 scripts/verify_php_wav.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -306,6 +307,15 @@ The MediaInfo path requires the `media-info` 26.10 Homebrew formula (or an
 equivalent `mediainfo` CLI on `PATH`) and uses the committed 18-second control.
 The Pyrex adapter switches MediaInfo 26.10 to its older XML output mode so the
 pinned package can read it.
+
+The [PHP × WAV ranking](data/php/wav/ranking.md) starts with five pinned
+package paths passing the valid mono PCM16 controls. The adapters reuse
+Composer locks from the PHP MP3 cell for the same exact releases. Five bounded
+Packagist searches saved 339 hits and 227 distinct names; four relevant leads
+remain unresolved, including a high-download WAV reader with no tagged release.
+The [PHP WAV runtime inventory](data/php/wav/standard.json) records that
+Fileinfo returns only a MIME type, while generic FFI and file I/O are not WAV
+parsers. Run `python3 scripts/verify_php_wav.py` from the repository root.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1226,6 +1236,10 @@ uncertainty.
 - `data/php/mp3_id3v2/`: Packagist discovery hits, twenty pinned third-party
   paths, lifetime download ranking, valid tag results, unresolved leads, and a
   separate PHP runtime inventory. Seventeen Composer locks and the adapter live under
+  `adapters/php/mp3_id3v2/`.
+- `data/php/wav/`: Packagist WAV discovery hits, five pinned parser paths,
+  control results, unresolved leads, lifetime download ranking, and a separate
+  PHP runtime inventory. Its adapter reuses the exact Composer locks listed in
   `adapters/php/mp3_id3v2/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.

@@ -1,0 +1,34 @@
+{
+  "ecosystem": "PHP",
+  "format": "WAV",
+  "runtime": "PHP 8.5.12 CLI with bundled Fileinfo and FFI extensions",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "candidate": "Fileinfo finfo::file and finfo_file",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.fileinfo.php",
+        "https://www.php.net/manual/en/function.finfo-file.php"
+      ],
+      "finding": "PHP documents content-type guessing from magic bytes. The valid PCM/WAVE control returned audio/x-wav only, with no sample rate, channel count, bit depth, chunks, or samples; MIME identification is not format-aware parsing under the protocol."
+    },
+    {
+      "candidate": "generic file_get_contents and stream functions",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.file-get-contents.php",
+        "https://www.php.net/manual/en/book.stream.php"
+      ],
+      "finding": "These return raw bytes or a stream without bundled RIFF/WAVE interpretation."
+    },
+    {
+      "candidate": "bundled FFI extension",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.ffi.php"
+      ],
+      "finding": "FFI calls external native libraries and has no bundled WAV decoder of its own. phpmlkit/soundfile and its libsndfile backend are ranked separately as third-party software."
+    }
+  ],
+  "runtime_probe": "adapters/php/wav/runtime_probe.php",
+  "limit": "Scoped to PHP 8.5.12 core, bundled Fileinfo and FFI, and installed extensions on this host. The negative Fileinfo probe is recorded in verification.json. This is not a claim about separately installed PHP extensions or libraries."
+}

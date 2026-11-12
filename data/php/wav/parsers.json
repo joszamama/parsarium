@@ -1,0 +1,104 @@
+[
+  {
+    "name": "james-heinrich/getid3",
+    "version": "v1.9.28",
+    "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
+    "documentation": "https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md",
+    "input_api": "getID3::analyze(local PCM WAV path); fileformat, audio sample_rate/channels/bits_per_sample",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "fileformat": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Own getID3 RIFF/WAVE reader; same package release and Composer lock are shared with the PHP MP3 cell.",
+    "license_evidence": "https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/license.txt",
+    "adapter": "adapters/php/wav/parse.php"
+  },
+  {
+    "name": "mhor/php-mediainfo",
+    "version": "5.8.0",
+    "license": "MIT",
+    "documentation": "https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/README.md",
+    "input_api": "MediaInfo::getInfo(local PCM WAV path); first audio track format, sampling_rate, channel_s, bit_depth",
+    "composer_lock": "adapters/php/mp3_id3v2/mediainfo/composer.lock",
+    "control": "controls/wav/32768-samples.wav",
+    "expected_output": {
+      "format": "PCM",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bit_depth": 16
+    },
+    "scope": "PCM format, 8 kHz sample rate, mono channel count, 16-bit depth",
+    "family": "MediaInfoLib native RIFF/WAVE parser",
+    "family_note": "Composer wrapper delegates to external MediaInfo 26.10 CLI; same release lock as the PHP MP3 cell. The 65,580-byte control satisfies the CLI read buffer.",
+    "external_backend": "MediaInfo command-line 26.10",
+    "license_evidence": "https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/LICENSE",
+    "adapter": "adapters/php/wav/parse.php"
+  },
+  {
+    "name": "buggedcom/phpvideotoolkit",
+    "version": "2.2.5",
+    "license": "MIT",
+    "documentation": "https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/README.md",
+    "input_api": "PHPVideoToolkit\\MediaParser::getFileInformation(local PCM WAV path); audio sample rate, channel count, codec",
+    "composer_lock": "adapters/php/mp3_id3v2/phptoolkit/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "codec": "pcm_s16le"
+    },
+    "scope": "8 kHz mono PCM signed 16-bit WAV audio",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "Composer wrapper delegates to local FFmpeg 9.0.2; same release lock as the PHP MP3 cell.",
+    "external_backend": "FFmpeg 9.0.2 CLI",
+    "license_evidence": "https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/LICENSE.md",
+    "adapter": "adapters/php/wav/parse.php"
+  },
+  {
+    "name": "phpmlkit/soundfile",
+    "version": "1.2.0",
+    "license": "MIT",
+    "documentation": "https://github.com/phpmlkit/soundfile/blob/acf88e283d9175c1eeca3670a74807fb345a9198/README.md",
+    "input_api": "sf_info(local PCM WAV path); sampleRate, channels, AudioFormat::Wav and SampleFormat::Pcm16",
+    "composer_lock": "adapters/php/mp3_id3v2/soundfile/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "format": "Wav",
+      "subtype": "Pcm16"
+    },
+    "scope": "WAV container, PCM16 subtype, 8 kHz mono signal",
+    "family": "libsndfile native RIFF/WAVE parser",
+    "family_note": "PHP FFI binding to package-distributed libsndfile 1.2.2. Same release lock as the PHP MP3 cell.",
+    "external_backend": "package-distributed libsndfile 1.2.2 via PHP FFI",
+    "license_evidence": "https://github.com/phpmlkit/soundfile/blob/acf88e283d9175c1eeca3670a74807fb345a9198/LICENSE",
+    "adapter": "adapters/php/wav/parse.php"
+  },
+  {
+    "name": "owen-oj/laravel-getid3",
+    "version": "v2.6.0",
+    "license": "MIT",
+    "documentation": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/readme.md",
+    "input_api": "GetId3(local PCM WAV path)::extractInfo(); fileformat and audio sample_rate/channels/bits_per_sample",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "fileformat": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Laravel wrapper delegates to the same pinned james-heinrich/getid3 package in its shared lock; separate package path, same parser family.",
+    "license_evidence": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/LICENSE",
+    "adapter": "adapters/php/wav/parse.php"
+  }
+]
