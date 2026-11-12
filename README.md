@@ -15,8 +15,8 @@ ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
-20-parser batches, including PHP × WAV. PHP × PDF has eleven verified paths.
-There are 62 cells at the 20-parser target, three started below target, and
+20-parser batches, including PHP × WAV and PHP × PDF.
+There are 63 cells at the 20-parser target, two started below target, and
 23 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -324,15 +324,20 @@ parsers. The WAV replay requires the PHP 8.5 extensions and MediaInfo/FFmpeg
 CLI tools used by the PHP MP3 batch, plus SoX on `PATH`. Run
 `python3 scripts/verify_php_wav.py` from the repository root.
 
-The [PHP × PDF ranking](data/php/pdf/ranking.md) has eleven pinned package
+The [PHP × PDF ranking](data/php/pdf/ranking.md) has twenty pinned package
 paths passing the valid one-page PDF control. The six-query Packagist snapshot
-saved 546 hits and 412 distinct names; four named leads remain unresolved.
-FPDI and iio/libmergepdf share the FPDI reader. Spatie and ottosmops use
-Poppler `pdftotext` 26.11.0; mikehaertl/php-pdftk uses `pdftk-java` 3.3.3.
+saved 546 hits and 412 distinct names; two named leads remain unresolved.
+Several wrappers share the FPDI or TCPDI parser family. Spatie and ottosmops
+use Poppler `pdftotext` 26.11.0; Gufy uses Poppler `pdfinfo` and `pdftohtml`
+26.11.0; mikehaertl/php-pdftk uses `pdftk-java` 3.3.3.
 The [PHP PDF runtime inventory](data/php/pdf/standard.json) records MIME-only
 Fileinfo and GD's failed PDF image reads. Run `python3 scripts/verify_php_pdf.py`
 from the repository root. Set `PARSARIUM_PDFTK` to a working `pdftk-java`
-executable if it is not at `/opt/homebrew/bin/pdftk`.
+executable if it is not at `/opt/homebrew/bin/pdftk`. Set
+`PARSARIUM_PDFINFO` and `PARSARIUM_PDFTOHTML` if the Poppler executables
+are not at their `/opt/homebrew/bin` paths. The pinned Jurosh release's
+source LICENSE says Apache-2.0 while its Composer metadata says MIT; the
+source license is recorded.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.

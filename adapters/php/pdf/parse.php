@@ -11,6 +11,15 @@ $vendor = match ($package) {
     'popphp/pop-pdf' => 'pop_pdf',
     'iio/libmergepdf' => 'libmergepdf',
     'ottosmops/pdftotext' => 'ottosmops',
+    'magento/zend-pdf' => 'zend_pdf',
+    'webklex/laravel-pdfmerger' => 'webklex',
+    'jurosh/pdf-merge' => 'jurosh',
+    'karriere/pdf-merge' => 'karriere',
+    'howtomakeaturn/pdfinfo' => 'pdfinfo',
+    'rafikhaceb/tcpdi' => 'rafikhaceb',
+    'andreaventuri/tcpdi' => 'andreaventuri',
+    'tomsgu/pdf-merger' => 'tomsgu',
+    'gufy/pdftohtml-php' => 'gufy',
     default => '',
 };
 require __DIR__ . '/' . ($vendor === '' ? '' : $vendor . '/') . 'vendor/autoload.php';
@@ -78,7 +87,55 @@ switch ($package) {
         $merger = new \iio\libmergepdf\Merger();
         $merger->addFile($path);
         $merged = $merger->merge();
-        $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => substr_count($merged, '/Type /Page ')];
+        $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];
+        break;
+    case 'magento/zend-pdf':
+        $document = \Zend_Pdf::load($path);
+        $output = ['pages' => count($document->pages), 'title' => $document->properties['Title'] ?? null];
+        break;
+    case 'webklex/laravel-pdfmerger':
+        $merger = new \Webklex\PDFMerger\PDFMerger(new \Illuminate\Filesystem\Filesystem());
+        $merger->addPDF($path, [1]);
+        $merger->merge();
+        $merged = $merger->output();
+        $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];
+        break;
+    case 'jurosh/pdf-merge':
+        $merged = (new \Jurosh\PDFMerge\PDFMerger())->addPDF($path)->merge('string');
+        $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];
+        break;
+    case 'karriere/pdf-merge':
+        $merger = new \Karriere\PdfMerge\PdfMerge();
+        $merger->add($path);
+        $merged = $merger->merge('parsarium.pdf', 'S');
+        $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];
+        break;
+    case 'howtomakeaturn/pdfinfo':
+        $document = new \Howtomakeaturn\PDFInfo\PDFInfo($path);
+        $output = ['pages' => (int) $document->pages, 'title' => $document->title];
+        break;
+    case 'rafikhaceb/tcpdi':
+    case 'andreaventuri/tcpdi':
+        $document = new \TCPDI();
+        $pages = $document->setSourceFile($path);
+        $template = $document->importPage(1);
+        $size = $document->getTemplateSize($template);
+        $output = ['pages' => $pages, 'width' => round($size['w']), 'height' => round($size['h'])];
+        break;
+    case 'tomsgu/pdf-merger':
+        $collection = new \Tomsgu\PdfMerger\PdfCollection();
+        $collection->addPdf($path);
+        $merger = new \Tomsgu\PdfMerger\PdfMerger(new \setasign\Fpdi\Fpdi());
+        $merged = $merger->merge($collection, 'parsarium.pdf', \Tomsgu\PdfMerger\PdfMerger::MODE_STRING);
+        $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];
+        break;
+    case 'gufy/pdftohtml-php':
+        \Gufy\PdfToHtml\Config::set('pdfinfo.bin', getenv('PARSARIUM_PDFINFO') ?: '/opt/homebrew/bin/pdfinfo');
+        \Gufy\PdfToHtml\Config::set('pdftohtml.bin', getenv('PARSARIUM_PDFTOHTML') ?: '/opt/homebrew/bin/pdftohtml');
+        $document = new \Gufy\PdfToHtml\Pdf($path);
+        $html = $document->html();
+        $text = trim(preg_replace('/\s+/u', ' ', html_entity_decode(strip_tags($html))));
+        $output = ['pages' => (int) $document->getPages(), 'text' => $text];
         break;
     default:
         throw new InvalidArgumentException('unknown PDF package: ' . $package);

@@ -79,6 +79,8 @@ def main() -> None:
         "php_version": execute(["php", "-r", "echo PHP_VERSION;"]).stdout,
         "composer_version": execute(["composer", "--version"]).stdout.strip(),
         "pdftotext_cli_version": execute(["pdftotext", "-v"]).stderr.splitlines()[0],
+        "pdfinfo_cli_version": execute(["pdfinfo", "-v"]).stderr.splitlines()[0],
+        "pdftohtml_cli_version": execute([os.environ.get("PARSARIUM_PDFTOHTML", "/opt/homebrew/bin/pdftohtml"), "-v"]).stderr.splitlines()[0],
         "pdftk_command": pdftk_command,
         "pdftk_cli_version": execute([pdftk_command, "--version"]).stdout.splitlines()[0],
         "controls": [{"path": str(CONTROL.relative_to(ROOT)), "sha256": sha256(CONTROL.read_bytes()).hexdigest()}],
