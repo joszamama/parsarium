@@ -41,6 +41,7 @@ public final class Http11Adapter {
         else if (args[0].equals("grizzly")) runGrizzly(bytes);
         else if (args[0].equals("jglobus")) runJglobus(bytes);
         else if (args[0].equals("javawarc")) runJavaWarc(bytes);
+        else if (args[0].equals("commonshttpclient")) runCommonsHttpClient(bytes);
         else System.exit(2);
     }
 
@@ -322,5 +323,21 @@ public final class Http11Adapter {
                 .newResponseContentBlock(new ByteArrayInputStream(bytes));
         System.out.printf("{\"status\":%d,\"content_type\":\"%s\",\"body\":\"%s\"}%n",
                 block.getStatusCode(), block.getMimeType(), block.getPayloadAsString());
+    }
+
+    private static void runCommonsHttpClient(byte[] bytes) throws Exception {
+        var input = new ByteArrayInputStream(bytes);
+        var status = new org.apache.commons.httpclient.StatusLine(
+                org.apache.commons.httpclient.HttpParser.readLine(input, "US-ASCII"));
+        var headers = org.apache.commons.httpclient.HttpParser.parseHeaders(input, "US-ASCII");
+        String contentType = null, contentLength = null;
+        for (var header : headers) {
+            if (header.getName().equalsIgnoreCase("Content-Type")) contentType = header.getValue();
+            if (header.getName().equalsIgnoreCase("Content-Length")) contentLength = header.getValue();
+        }
+        if (contentType == null || contentLength == null) System.exit(1);
+        System.out.printf("{\"version\":\"%s\",\"status\":%d,\"reason\":\"%s\",\"content_type\":\"%s\",\"content_length\":%s}%n",
+                status.getHttpVersion(), status.getStatusCode(), status.getReasonPhrase(),
+                contentType, contentLength);
     }
 }

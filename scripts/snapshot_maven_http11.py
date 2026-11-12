@@ -39,6 +39,7 @@ COORDS = {
     "grizzly-http": ("org.glassfish.grizzly", "grizzly-http", "5.0.3"),
     "ssl-proxies": ("org.jglobus", "ssl-proxies", "2.1.0"),
     "java-warc": ("com.github.bottomless-archive-project", "java-warc", "1.2.1"),
+    "commons-httpclient": ("commons-httpclient", "commons-httpclient", "3.1"),
 }
 LICENSES = {
     "netty": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-3.10.6.Final/LICENSE.txt"),
@@ -60,6 +61,7 @@ LICENSES = {
     "grizzly-http": ("EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0", "https://repo.maven.apache.org/maven2/org/glassfish/grizzly/grizzly-http/5.0.3/grizzly-http-5.0.3.pom"),
     "ssl-proxies": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/jglobus/ssl-proxies/2.1.0/ssl-proxies-2.1.0-sources.jar"),
     "java-warc": ("Apache-2.0", "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1.pom"),
+    "commons-httpclient": ("Apache-2.0", "https://repo.maven.apache.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.pom"),
 }
 QUERIES = ["http parser", "http request parser", "http1", "http codec", "HTTP/1.1"]
 
@@ -153,7 +155,9 @@ def main() -> None:
                                          "https://nightlies.apache.org/mina/mina/2.2.10/apidocs/org/apache/mina/http/HttpServerDecoder.html",
                                          "https://github.com/eclipse-ee4j/glassfish-grizzly/blob/5.0.3/modules/http/src/main/java/org/glassfish/grizzly/http/HttpServerFilter.java",
                                          "https://javadoc.io/static/org.jglobus/ssl-proxies/2.1.0/org/globus/util/http/HTTPResponseParser.html",
-                                         "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1-sources.jar"],
+                                         "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1-sources.jar",
+                                         "https://hc.apache.org/httpclient-legacy/apidocs/org/apache/commons/httpclient/HttpParser.html",
+                                         "https://hc.apache.org/httpclient-legacy/apidocs/org/apache/commons/httpclient/StatusLine.html"],
         "releases": releases,
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",

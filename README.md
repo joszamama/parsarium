@@ -12,8 +12,8 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, and MP4, plus a below-target Java × HTTP/1.1 batch, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 55 cells at the 20-parser target, five started
+WAV, MP4, and HTTP/1.1, plus an explicit 88-cell work matrix.
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 56 cells at the 20-parser target, four started
 below target, and 28 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -400,18 +400,17 @@ repository and has no comparable deps.dev count. The collection meets the
 and [unresolved leads](data/java/wav/leads.json). Run
 `python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
 
-The Java × HTTP/1.1 batch verifies **19/19 pinned Maven package paths** on
+The Java × HTTP/1.1 batch verifies **20/20 pinned Maven package paths** on
 committed valid GET request and 200 response controls.
 `python3 scripts/verify_java_http11.py` rebuilds the adapter and checks SHA-256
-hashes for all 76 resolved JARs. Sixteen paths report request method, target,
-and two headers; fifteen also expose the request version. The Sentinel response parser reports status line, status code, Content-Type, and body. JGlobus reports response status, reason, Content-Type, and Content-Length; java-warc reports status, Content-Type and body via an Apache HttpCore-based wrapper.
+hashes for all 77 resolved JARs. Sixteen paths report request method, target,
+and two headers; fifteen also expose the request version. The Sentinel response parser reports status line, status code, Content-Type, and body. JGlobus reports response status, reason, Content-Type, and Content-Length; java-warc reports status, Content-Type and body via an Apache HttpCore-based wrapper. Apache Commons HttpClient 3.1 reports version, status, reason, and headers from its own response-head parser.
 Apache MINA and Grizzly supply separate native HTTP decoders. Apache HttpCore 4, its NIO artifact, and HttpCore 5 share an upstream family,
 as do the Netty 3, 4, and 5 release lines; the
 Netty 5 release is alpha. Jodd HTTP and RawHTTP parse the saved local stream
 directly. NanoHTTPD's local stream session exposes parsed request fields through
 a callback. jwarc, webarchive-commons, and JWAT expose direct parsers that read
-the raw HTTP request without a WARC container. This cell remains **1 short of
-the 20-path working goal**. The bounded search saved two identical 100-hit broad windows out of
+the raw HTTP request without a WARC container. This cell meets the **20-path working goal**; the incomplete search does not prove a definitive most-used top 20. The bounded search saved two identical 100-hit broad windows out of
 7,858 results, while three other queries timed out. One plausible lead, ActiveJ HTTP, remains unresolved; the historical WebPieces artifact is excluded as a duplicate parser line. See the
 [Java HTTP/1.1 ranking](data/java/http11/ranking.md),
 [cell summary](data/java/http11/cell.json), and
