@@ -16,8 +16,9 @@ WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
-has a verified 20-path batch. There are 65 cells at the 20-parser target, two
-started below target, and 21 marked `not_started`;
+has a verified 20-path batch, while PHP × SVG has five verified paths so far.
+There are 65 cells at the 20-parser target, three started below target, and 20
+marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -44,6 +45,7 @@ python3 scripts/verify_php_wav.py
 python3 scripts/verify_php_pdf.py
 python3 scripts/verify_php_mp4.py
 python3 scripts/verify_php_http11.py
+python3 scripts/verify_php_svg.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -367,6 +369,17 @@ meets the 20-path target but is not a definitive most-used top 20. Run
 replaying packages pinned to those runtimes. The verifier uses their
 `/opt/homebrew/opt` paths by default; override them with `PARSARIUM_PHP84`,
 `PARSARIUM_PHP82`, and `PARSARIUM_PHP74`.
+
+The [PHP × SVG ranking](data/php/svg/ranking.md) currently has five pinned,
+distinct source releases that parsed the valid two-rectangle SVG control through
+document, dimension, sanitizer, or optimizer APIs. Eight bounded Packagist
+searches saved 391 hits and 241 distinct names; five named leads remain
+unresolved. Two registry aliases of identical source releases were excluded.
+The [runtime inventory](data/php/svg/standard.json) separately verifies
+`getimagesize()` and `getimagesizefromstring()` SVG dimensions in PHP 8.5 with
+ext-libxml. The working goal of 20 package paths is not yet met. Run
+`python3 scripts/verify_php_svg.py` from the repository root with PHP 8.5,
+Composer 2, and the extensions declared in the pinned Composer locks.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1292,9 +1305,13 @@ uncertainty.
   control results, unresolved leads, lifetime download ranking, and a separate
   PHP runtime inventory. Its adapter reuses the exact Composer locks listed in
   `adapters/php/mp3_id3v2/`.
-- `data/php/pdf/`: Packagist PDF discovery hits, six pinned parser paths,
+- `data/php/pdf/`: Packagist PDF discovery hits, twenty pinned parser paths,
   control results, unresolved leads, lifetime download ranking, and a separate
   PHP runtime inventory. Its Composer lock and adapter live in `adapters/php/pdf/`.
+- `data/php/svg/`: bounded Packagist SVG discovery hits, five pinned parser
+  paths, lifetime download ranking, replay results, unresolved leads, and two
+  separate PHP 8.5 runtime APIs. Five Composer locks and the adapter live under
+  `adapters/php/svg/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

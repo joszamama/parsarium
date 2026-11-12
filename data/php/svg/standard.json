@@ -1,0 +1,46 @@
+{
+  "ecosystem": "PHP",
+  "format": "SVG",
+  "runtime": "PHP 8.5.12 CLI with ext-libxml",
+  "status": "runtime_apis_verified",
+  "verified_apis": [
+    {
+      "name": "getimagesize",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.getimagesize.php",
+        "https://www.php.net/manual/en/migration85.new-features.php"
+      ],
+      "input_api": "getimagesize(local SVG file path); PHP 8.5 added SVG dimension parsing with ext-libxml",
+      "control": "controls/svg/red-green.svg",
+      "adapter": "adapters/php/svg/runtime_probe.php",
+      "expected_output": {"width": 2, "height": 1, "mime": "image/svg+xml", "width_unit": "px", "height_unit": "px"},
+      "scope": "Root SVG width and height only; no element or raster decoding claim."
+    },
+    {
+      "name": "getimagesizefromstring",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.getimagesizefromstring.php",
+        "https://www.php.net/manual/en/migration85.new-features.php"
+      ],
+      "input_api": "getimagesizefromstring(local SVG bytes); PHP 8.5 SVG dimensions via ext-libxml",
+      "control": "controls/svg/red-green.svg",
+      "adapter": "adapters/php/svg/runtime_probe.php",
+      "expected_output": {"width": 2, "height": 1, "mime": "image/svg+xml", "width_unit": "px", "height_unit": "px"},
+      "scope": "Same bundled SVG size parser as getimagesize, exposed through a byte-string API."
+    }
+  ],
+  "no_api_findings": [
+    {
+      "candidate": "DOMDocument::load",
+      "official_documentation": ["https://www.php.net/manual/en/domdocument.load.php"],
+      "finding": "Loads generic XML and returns generic DOMElement nodes. The control loaded, but no SVG-specific PHP DOM object or rendering behavior was exposed; not counted separately."
+    },
+    {
+      "candidate": "imagecreatefromstring",
+      "official_documentation": ["https://www.php.net/manual/en/function.imagecreatefromstring.php"],
+      "finding": "Documented image formats exclude SVG; the valid local SVG control returned false."
+    }
+  ],
+  "runtime_probe": "adapters/php/svg/runtime_probe.php",
+  "limit": "Scoped to PHP 8.5.12 on this host with ext-libxml. Earlier PHP releases do not have the documented SVG getimagesize feature."
+}
