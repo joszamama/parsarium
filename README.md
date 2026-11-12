@@ -12,9 +12,9 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 54 cells at the 20-parser target, five started
-below target, and 29 marked `not_started`;
+WAV, and MP4, plus a below-target Java × HTTP/1.1 batch, and an explicit 88-cell work matrix.
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 54 cells at the 20-parser target, six started
+below target, and 28 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -129,6 +129,7 @@ python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/verify_java_zip.py
 python3 scripts/verify_java_png.py
 python3 scripts/verify_java_pdf.py
+python3 scripts/verify_java_http11.py
 python3 controls/wav/make_control.py
 python3 scripts/verify_java_wav.py
 python3 scripts/build_matrix.py
@@ -389,6 +390,18 @@ repository and has no comparable deps.dev count. The collection meets the
 [Java WAV ranking](data/java/wav/ranking.md), [cell summary](data/java/wav/cell.json),
 and [unresolved leads](data/java/wav/leads.json). Run
 `python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
+
+The Java × HTTP/1.1 batch verifies **5/5 pinned Maven package paths** on the
+committed valid GET request control. `python3 scripts/verify_java_http11.py`
+rebuilds the adapter, checks SHA-256 hashes for all 27 resolved JARs, and checks
+parsed method, target, version, and two headers. Apache HttpCore 4 and 5 share
+an upstream parser family. This cell remains **15 short of the 20-path working
+goal**. The bounded search saved 100 of 7,858 broad `http1` hits, while three
+other queries timed out; four plausible leads remain unresolved. See the
+[Java HTTP/1.1 ranking](data/java/http11/ranking.md),
+[cell summary](data/java/http11/cell.json), and
+[JDK inventory](data/java/http11/standard.json). Run
+`python3 scripts/snapshot_maven_http11.py` to refresh Maven and deps.dev evidence.
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
 one second of silent 8 kHz AAC audio, title `Parsarium`, and creation time

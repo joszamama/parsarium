@@ -842,15 +842,28 @@
     {
       "ecosystem": "java",
       "format": "http11",
-      "status": "not_started",
+      "status": "verified_below_goal_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 5,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "http parser",
+        "http request parser",
+        "http1",
+        "http codec",
+        "HTTP/1.1"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "unresolved_documentation_leads": 4,
+      "uncertainty": "Five distinct pinned Java Maven package paths passed one valid local HTTP/1.1 GET request control and exposed the request method, target, version, Host, and X-Parsarium headers. This is five verified package paths, not five independent engines: httpcore and httpcore5 are two Apache HttpComponents Core major branches. The working goal of 20 has not been met. Five Maven Central queries were bounded at 100 hits each. The broad http1 query returned 7,858 total and only the first 100 were saved, mostly unrelated HTTP packages; http request parser returned zero; http parser, http codec, and HTTP/1.1 timed out, so they provide no absence evidence. Targeted Maven releases and official API documentation supplied the five verified paths. Four plausible leads remain unresolved: Grizzly, Netty 5, Snice, and a historical WebPieces artifact. Other search hits have not all been reviewed, and the most-used top 20 is unknown. The single ordinary request only establishes the observed format-aware behavior for that control. Java SE 25 public APIs reviewed expose network HTTP clients or servers, not a documented local raw message parser. No vulnerability, malformed-input, or resource-use experiments were run.",
+      "third_party_evidence": "data/java/http11/parsers.json",
+      "third_party_control_results": "data/java/http11/verification.json",
+      "runtime_evidence": "data/java/http11/standard.json",
+      "registry_snapshot": "data/java/http11/registry-snapshot.json",
+      "unresolved_leads": "data/java/http11/leads.json"
     },
     {
       "ecosystem": "java",

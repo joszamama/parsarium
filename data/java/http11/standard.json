@@ -1,0 +1,30 @@
+{
+  "ecosystem": "Java",
+  "format": "HTTP/1.1",
+  "runtime": "OpenJDK 25, Java SE 25 API inventory",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "java.net.http.HttpClient",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.net.http/java/net/http/HttpClient.html",
+      "finding": "Documents sending HTTP requests and receiving responses over a connection, but no public API to parse locally supplied raw HTTP/1.1 message bytes."
+    },
+    {
+      "api": "java.net.HttpURLConnection",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/HttpURLConnection.html",
+      "finding": "Documents a URL connection and its response metadata, not a local raw request or response parser input API."
+    },
+    {
+      "api": "jdk.httpserver module",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/jdk.httpserver/module-summary.html",
+      "finding": "Documents an HTTP server listening for network requests; no public local byte or stream message parser is exposed."
+    },
+    {
+      "api": "java.nio.file.Files",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Files.html",
+      "finding": "Reads bytes but does not parse HTTP request lines or headers."
+    }
+  ],
+  "limit": "Scoped to documented public Java SE 25 and bundled OpenJDK APIs. No qualifying local raw HTTP/1.1 parser API was found, so there is no standard-library control run. Internal network parsers do not qualify without a public local input API."
+}
