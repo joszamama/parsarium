@@ -38,6 +38,7 @@ public final class Http11Adapter {
         else if (args[0].equals("sentinel")) runSentinel(bytes);
         else if (args[0].equals("httpcore4nio")) runHttpCore4Nio(bytes);
         else if (args[0].equals("mina")) runMina(bytes);
+        else if (args[0].equals("grizzly")) runGrizzly(bytes);
         else System.exit(2);
     }
 
@@ -284,5 +285,24 @@ public final class Http11Adapter {
         System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
                 request.getMethod(), target, request.getProtocolVersion(),
                 request.getHeader("host"), request.getHeader("x-parsarium"));
+    }
+
+    private static void runGrizzly(byte[] bytes) throws Exception {
+        var transport = org.glassfish.grizzly.nio.transport.TCPNIOTransportBuilder
+                .newInstance().build();
+        var connection = new org.glassfish.grizzly.nio.transport.TCPNIOConnection(
+                transport, null);
+        var context = org.glassfish.grizzly.filterchain.FilterChainContext.create(connection);
+        context.setMessage(org.glassfish.grizzly.memory.Buffers.wrap(
+                org.glassfish.grizzly.memory.MemoryManager.DEFAULT_MEMORY_MANAGER, bytes));
+        new org.glassfish.grizzly.http.HttpServerFilter().handleRead(context);
+        var content = (org.glassfish.grizzly.http.HttpContent) context.getMessage();
+        var request = (org.glassfish.grizzly.http.HttpRequestPacket) content.getHttpHeader();
+        String target = request.getRequestURI()
+                + (request.getQueryString() == null ? "" : "?" + request.getQueryString());
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.getMethod(), target, request.getProtocolString(),
+                request.getHeader("Host"), request.getHeader("X-Parsarium"));
+        context.completeAndRecycle();
     }
 }
