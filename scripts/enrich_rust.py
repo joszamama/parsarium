@@ -19,8 +19,8 @@ def fetch(url: str) -> dict:
 
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
-    if cell not in {"png", "zip", "mp4", "wav", "pdf", "svg", "http11", "ascii_ply", "mp3_id3v2"}:
-        raise SystemExit("usage: python3 scripts/enrich_rust.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|mp3_id3v2")
+    if cell not in {"png", "zip", "mp4", "wav", "pdf", "svg", "http11", "ascii_ply", "ascii_pnm", "mp3_id3v2"}:
+        raise SystemExit("usage: python3 scripts/enrich_rust.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|mp3_id3v2")
     directory = ROOT / "data" / "rust" / cell
     parser_path = directory / "parsers.json"
     parsers = json.loads(parser_path.read_text())
@@ -39,11 +39,19 @@ def main() -> None:
         checksum = release.get("checksum")
         if not license_text or not checksum:
             raise RuntimeError(f"Missing license or checksum: {name}@{version}")
+        license_evidence = None
+        if name == "include-pnm" and version == "1.0.0" and license_text == "non-standard":
+            license_evidence = "https://docs.rs/crate/include-pnm/1.0.0/source/LICENSE.md"
+            license_text = "CC0-1.0"
         parser["license"] = license_text
         releases[name] = {
             "version": version, "license": license_text, "checksum": checksum,
             "url": url, "crate_download": "https://static.crates.io/crates/" + name + "/" + name + "-" + version + ".crate",
         }
+        if license_evidence:
+            parser["license_evidence"] = license_evidence
+            releases[name]["license_evidence"] = license_evidence
+            releases[name]["registry_license"] = release["license"]
         metrics[name] = {"recent_downloads": data["crate"].get("recent_downloads"), "url": url}
         time.sleep(0.1)
     parser_path.write_text(json.dumps(parsers, indent=2) + "\n")

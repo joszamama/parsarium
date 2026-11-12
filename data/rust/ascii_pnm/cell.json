@@ -1,0 +1,28 @@
+{
+  "ecosystem": "rust",
+  "format": "ascii_pnm",
+  "status": "verified_goal_met_partial_search",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 21,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "pnm",
+    "ppm",
+    "pgm",
+    "pbm",
+    "netpbm",
+    "portable pixmap",
+    "pnm image parser"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 425,
+  "unique_search_hits": 306,
+  "unresolved_documentation_leads": 3,
+  "uncertainty": "Seven first-page crates.io searches saved 425 hits and 306 distinct names. The pnm, ppm, and pgm searches exceed the 100-hit limit, so their tails remain unreviewed. Twenty-one pinned open-source crate paths passed valid ASCII PNM controls: P3 red/green PPM, P2 black/white PGM, and P1 QR PBM. The count is package paths, not independent engines: ai-image and imageun fork image-rs; bevy_image wraps image-rs and bevy re-exports bevy_image; oxideav-image and oxideav-io route through oxideav-pbm; unicraft re-exports photocraft. imagesize parses PNM dimensions only, not raster samples. rusty-ppm passed a valid P3 variant with single spaces and no terminal newline but crashed on the shared P3 control; its path helper also required passing the complete file path as the directory argument. include-pnm parses at compile time through a supplied-path build adapter, and pnm 0.1.1 requires the documented RUSTC_BOOTSTRAP=1 build setting for its nightly feature. fltk uses a bundled native FLTK PNM loader. Three plausible leads remain unresolved. crates.io recent downloads count all releases over about 90 days and are compared only within Rust. Small valid controls do not establish every PNM variant or full specification coverage; discovery remains partial.",
+  "third_party_evidence": "data/rust/ascii_pnm/parsers.json",
+  "third_party_control_results": "data/rust/ascii_pnm/verification.json",
+  "runtime_evidence": "data/rust/ascii_pnm/standard.json",
+  "registry_snapshot": "data/rust/ascii_pnm/registry-snapshot.json",
+  "unresolved_leads": "data/rust/ascii_pnm/leads.json"
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "glycin",
+    "status": "unresolved",
+    "reason": "Its documented local image Loader can use bundled image-rs for PNM, but no pinned local setup and passing P1/P2/P3 adapter were established.",
+    "source": "https://docs.rs/glycin/latest/glycin/struct.Loader.html"
+  },
+  {
+    "name": "glycin-image-rs",
+    "status": "unresolved",
+    "reason": "Source maps PBM, PGM, and PPM MIME types to image-rs PnmDecoder, but a documented direct local-input adapter and passing control were not established.",
+    "source": "https://docs.rs/glycin-image-rs/latest/glycin_image_rs/"
+  },
+  {
+    "name": "opencv",
+    "status": "unresolved",
+    "reason": "OpenCV imgcodecs may decode PNM, but the required native OpenCV installation was unavailable in this environment and no pinned Rust binding adapter passed.",
+    "source": "https://docs.rs/opencv/latest/opencv/imgcodecs/"
+  },
+  {
+    "name": "zune-ppm",
+    "status": "excluded",
+    "reason": "Its published support table explicitly excludes ASCII P1, P2, and P3; it handles binary P5/P6/P7/PFM.",
+    "source": "https://docs.rs/zune-ppm/0.5.1/zune_ppm/"
+  },
+  {
+    "name": "zune-image",
+    "status": "excluded",
+    "reason": "Its PNM route uses zune-ppm, whose P1/P2/P3 support is absent in this release.",
+    "source": "https://docs.rs/zune-image/0.5.0/zune_image/"
+  },
+  {
+    "name": "zenpnm",
+    "status": "excluded",
+    "reason": "The published supported-format list starts at binary P5/P6/P7 and PFM, with no ASCII P1/P2/P3.",
+    "source": "https://docs.rs/zenpnm/latest/zenpnm/"
+  },
+  {
+    "name": "tinyppm",
+    "status": "excluded",
+    "reason": "Published loader accepts binary P6 PPM only.",
+    "source": "https://docs.rs/tinyppm/0.2.0/tinyppm/"
+  },
+  {
+    "name": "aci_ppm",
+    "status": "excluded",
+    "reason": "Its PNM decoder dispatch accepts P6 only; the other decode API concerns Flipnote animation data.",
+    "source": "https://docs.rs/aci_ppm/0.7.0/aci_ppm/"
+  },
+  {
+    "name": "micropnm",
+    "status": "excluded",
+    "reason": "Package description specifies binary PPM only.",
+    "source": "https://crates.io/crates/micropnm"
+  },
+  {
+    "name": "rust-ppm",
+    "status": "excluded",
+    "reason": "Its documented PPM decoder is binary P6 only.",
+    "source": "https://docs.rs/rust-ppm/latest/rust_ppm/ppm/"
+  },
+  {
+    "name": "rustvision",
+    "status": "excluded",
+    "reason": "Its documentation says image input supports P6 only; the P3 API is output only.",
+    "source": "https://docs.rs/rustvision/latest/rustvision/"
+  },
+  {
+    "name": "pxm",
+    "status": "excluded",
+    "reason": "Published loader handles Portable FloatMap (PFM), not verified P1/P2/P3.",
+    "source": "https://docs.rs/pxm/0.1.0/pxm/"
+  },
+  {
+    "name": "imageformat",
+    "status": "excluded",
+    "reason": "Format probing does not establish parsed PNM dimensions or samples.",
+    "source": "https://crates.io/crates/imageformat"
+  },
+  {
+    "name": "file-format",
+    "status": "excluded",
+    "reason": "Its PNM classification identifies signatures and does not parse image dimensions or samples.",
+    "source": "https://docs.rs/file-format/0.29.0/file_format/"
+  },
+  {
+    "name": "tina",
+    "status": "excluded",
+    "reason": "A generic platform umbrella re-exports an image crate but adds no documented PNM input API or independent PNM path; including it would pad with unrelated software.",
+    "source": "https://docs.rs/tina/0.0.2/tina/"
+  },
+  {
+    "name": "oxiarc-image",
+    "status": "excluded",
+    "reason": "Its ImageFormat::Pnm enum is documented as not implemented, despite PNM magic recognition.",
+    "source": "https://docs.rs/oxiarc-image/latest/oxiarc_image/format/enum.ImageFormat.html"
+  },
+  {
+    "name": "pnm-cli",
+    "status": "excluded",
+    "reason": "The registry hit is a personal Verifiable Trust Agent, unrelated to Portable Anymap.",
+    "source": "https://crates.io/crates/pnm-cli"
+  },
+  {
+    "name": "rs-pnm-shrink",
+    "status": "excluded",
+    "reason": "Published package is a CLI tool without a documented reusable local PNM parsing library API for this collection.",
+    "source": "https://crates.io/crates/rs-pnm-shrink"
+  }
+]

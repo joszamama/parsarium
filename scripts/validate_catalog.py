@@ -61,7 +61,7 @@ def main() -> None:
                 assert count is None or isinstance(count, int)
                 assert (ROOT / parser["control"]).exists()
             elif cell["ecosystem"] == "rust":
-                adapter = ROOT / "adapters" / "rust" / cell["format"]
+                adapter = ROOT / parser.get("adapter_manifest_dir", f"adapters/rust/{cell['format']}")
                 manifest = tomllib.loads((adapter / "Cargo.toml").read_text())
                 dependency = manifest["dependencies"][parser.get("manifest_dependency", name)]
                 requirement = dependency if isinstance(dependency, str) else dependency["version"]

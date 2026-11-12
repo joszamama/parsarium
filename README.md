@@ -8,8 +8,8 @@ Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASC
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
-and MP3 with ID3v2, and an explicit 88-cell work matrix. There are 40 cells at
-the 20-parser target, two started below target, and 46 marked `not_started`;
+ASCII PNM, and MP3 with ID3v2, and an explicit 88-cell work matrix. There are 41 cells at
+the 20-parser target, two started below target, and 45 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -108,6 +108,7 @@ python3 scripts/verify_rust_pdf.py
 python3 scripts/verify_rust_svg.py
 python3 scripts/verify_rust_http11.py
 python3 scripts/verify_rust_ascii_ply.py
+python3 scripts/verify_rust_ascii_pnm.py
 python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
@@ -479,6 +480,17 @@ threecrate-io. The ranking records these families and vertex-only scopes.
 The scoped Rust standard library has no documented ASCII PLY parser. Four
 plausible leads remain unresolved, and the bounded registry search is partial.
 
+`verify_rust_ascii_pnm.py` builds pinned Rust ASCII PNM adapters and runs
+**21/21** crate paths against valid P1, P2, and P3 controls. It records RGB,
+grayscale, QR payload, or header-dimension results according to each API's
+scope. The `include-pnm` path compiles the supplied control at build time;
+`pnm` 0.1.1 requires `RUSTC_BOOTSTRAP=1`; and `fltk` builds its native FLTK
+loader through the pinned `fltk-sys` crate. To regenerate the P1 QR control,
+run `cargo build --locked --manifest-path adapters/rust/ascii_pnm/Cargo.toml`
+and `adapters/rust/ascii_pnm/target/debug/make_qr_control controls/ascii_pnm/qr-p1.pbm`.
+The scoped Rust standard library has no documented ASCII PNM parser. Three
+plausible leads remain unresolved, and the bounded registry search is partial.
+
 `verify_rust_mp3_id3v2.py` builds the pinned Rust MP3 graph with
 `cargo build --locked` and runs **20/20** crate paths against a valid tagged
 MPEG Layer III control. Each row labels its tag, frame, duration, or decoded
@@ -526,8 +538,8 @@ provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
 within Python. Unavailable metrics remain `null`.
 
-For Rust PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
-`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, or `mp3_id3v2`, to refresh seven bounded
+For Rust PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
+`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, or `mp3_id3v2`, to refresh seven bounded
 [crates.io API](https://crates.io/api/) searches, pinned release metadata,
 and crate-level recent downloads over about 90 days. The downloads are
 compared only within each Rust format cell. These commands require network access and
@@ -766,6 +778,11 @@ or quality judgment.
   names; four plausible leads remain unresolved. The
   [cell record](data/rust/ascii_ply/cell.json) records family relationships,
   scope, search limits, and the separate standard-library inventory.
+- [Rust × ASCII PNM ranking](data/rust/ascii_pnm/ranking.md): 21 verified crate
+  paths. Seven bounded crates.io searches saved 425 hits and 306 distinct
+  names; three plausible leads remain unresolved. The
+  [cell record](data/rust/ascii_pnm/cell.json) identifies header-only scope,
+  shared families, search limits, and the separate standard-library inventory.
 - [Rust × MP3 with ID3v2 ranking](data/rust/mp3_id3v2/ranking.md): 20 verified
   crate paths. Seven bounded crates.io searches saved 676 hits and 430
   distinct names; 12 plausible leads remain unresolved. The
