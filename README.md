@@ -7,9 +7,9 @@ plus a below-target JavaScript × Matrix Market search,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
-Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, and MP3 with ID3v2, and an explicit
-88-cell work matrix. There are 37 cells at the 20-parser target, two started
-below target, and 49 marked `not_started`;
+Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, and MP3 with ID3v2, and an explicit
+88-cell work matrix. There are 38 cells at the 20-parser target, two started
+below target, and 48 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -105,6 +105,7 @@ python3 scripts/verify_rust_zip.py
 python3 scripts/verify_rust_mp4.py
 python3 scripts/verify_rust_wav.py
 python3 scripts/verify_rust_pdf.py
+python3 scripts/verify_rust_svg.py
 python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
@@ -446,6 +447,17 @@ and a text extractor; their shared lopdf, pdfrum, and zpdf families are
 recorded in `data/rust/pdf/parsers.json`. The scoped Rust standard library
 has no documented PDF parser. Ten plausible leads remain unresolved.
 
+`verify_rust_svg.py` builds the pinned Rust SVG graph with `cargo build --locked`
+and runs **25/25** crate paths against valid SVG rectangle and path controls.
+The `librsvg` crate requires Cairo, PangoCairo, and GLib development libraries;
+the recorded macOS run resolved them through `pkg-config`.
+Twenty accept a complete SVG document; five accept only extracted SVG path data.
+The paths cover document trees, rendered pixels and scene commands, metadata,
+and explicitly scoped path data. Several packages share usvg, svgtypes,
+or svgdom lineages, as recorded in `data/rust/svg/parsers.json`. The scoped Rust
+standard library has no documented SVG parser. Two plausible leads remain
+unresolved, and the seven bounded registry searches are partial.
+
 `verify_rust_mp3_id3v2.py` builds the pinned Rust MP3 graph with
 `cargo build --locked` and runs **20/20** crate paths against a valid tagged
 MPEG Layer III control. Each row labels its tag, frame, duration, or decoded
@@ -493,8 +505,8 @@ provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
 within Python. Unavailable metrics remain `null`.
 
-For Rust PNG, ZIP, MP4, WAV, PDF, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
-`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, `pdf`, or `mp3_id3v2`, to refresh seven bounded
+For Rust PNG, ZIP, MP4, WAV, PDF, SVG, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
+`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, or `mp3_id3v2`, to refresh seven bounded
 [crates.io API](https://crates.io/api/) searches, pinned release metadata,
 and crate-level recent downloads over about 90 days. The downloads are
 compared only within each Rust format cell. These commands require network access and
@@ -718,6 +730,11 @@ or quality judgment.
   Seven bounded crates.io searches saved 700 hits and 443 distinct names;
   ten plausible leads remain unresolved. The [cell record](data/rust/pdf/cell.json)
   records the search limits and separate standard-library inventory.
+- [Rust × SVG ranking](data/rust/svg/ranking.md): 25 verified crate paths, 20 of
+  which accept complete SVG documents and five only SVG path data.
+  Seven bounded crates.io searches saved 700 hits and 524 distinct names;
+  two plausible leads remain unresolved. The [cell record](data/rust/svg/cell.json)
+  records path-data scope, search limits, and the separate standard-library inventory.
 - [Rust × MP3 with ID3v2 ranking](data/rust/mp3_id3v2/ranking.md): 20 verified
   crate paths. Seven bounded crates.io searches saved 676 hits and 430
   distinct names; 12 plausible leads remain unresolved. The

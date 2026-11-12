@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Rust",
+  "format": "SVG",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Rust 1.99.1 standard library",
+      "official_documentation_scope": [
+        "https://doc.rust-lang.org/std/",
+        "https://doc.rust-lang.org/std/fs/fn.read.html",
+        "https://doc.rust-lang.org/std/io/trait.Read.html"
+      ],
+      "finding": "The documented standard library has no SVG parser. std::fs::read and std::io::Read return bytes without interpreting SVG elements, dimensions, path data, or rendering. No format-aware bundled API was available to run against the valid controls."
+    }
+  ],
+  "limit": "This covers the documented Rust 1.99.1 standard library; external crates and native system libraries are separate."
+}

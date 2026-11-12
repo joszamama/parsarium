@@ -15,6 +15,7 @@ QUERIES = {
     "mp3_id3v2": ["mp3", "id3v2", "id3", "mp3 decoder", "mpeg audio", "mp3 parser", "audio metadata"],
     "mp4": ["mp4", "mp4 parser", "isobmff", "mp4 reader", "mpeg4 container", "quicktime mov", "mp4 metadata"],
     "pdf": ["pdf", "pdf parser", "pdf reader", "pdf extract", "pdf render", "pdf document", "pdf text"],
+    "svg": ["svg", "svg parser", "svg reader", "svg render", "svg image", "svg path", "svg xml"],
 }
 
 
@@ -27,7 +28,7 @@ def fetch(url: str) -> dict:
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip|mp4|wav|pdf|mp3_id3v2")
+        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip|mp4|wav|pdf|svg|mp3_id3v2")
     search = []
     for query in QUERIES[cell]:
         url = "https://crates.io/api/v1/crates?" + urlencode({"q": query, "per_page": 100, "page": 1})

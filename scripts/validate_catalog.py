@@ -30,6 +30,10 @@ def main() -> None:
         assert len(parsers) == cell["verified_third_party_count"]
         assert len(parsers) <= cell["ceiling"]
         assert len({p["name"] for p in parsers}) == len(parsers)
+        if "verified_document_input_count" in cell:
+            assert sum(p["input_variant"] == "svg_document" for p in parsers) == cell["verified_document_input_count"]
+            assert sum(p["input_variant"] == "svg_path_data" for p in parsers) == cell["verified_path_data_only_count"]
+            assert cell["verified_document_input_count"] + cell["verified_path_data_only_count"] == len(parsers)
         assert sum(len(s["hits"]) for s in snapshot["search"]) == cell["search_hits_recorded"]
         assert snapshot["search_limit_per_query"] == cell["search_limit_per_query"]
         hit_key = "packagePath" if cell["ecosystem"] == "go" else "name"
