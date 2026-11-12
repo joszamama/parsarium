@@ -69,15 +69,29 @@
     {
       "ecosystem": "c",
       "format": "wav",
-      "status": "not_started",
+      "status": "verified_below_goal_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 5,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "wav",
+        "audio",
+        "sndfile",
+        "raylib",
+        "ffmpeg"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 11,
+      "unique_search_hits": 10,
+      "unresolved_documentation_leads": 4,
+      "uncertainty": "Five distinct pinned open-source C package paths passed the valid four-sample mono 16-bit PCM RIFF/WAVE control, returning sample rate, channel and frame counts, and four decoded PCM values. Two are built from SHA-256-pinned source headers; three use exact-release, binary-hashed installed libraries. The Conan Center recipe-name search recorded 11 hits (10 unique) across five bounded alphabetic substring queries, each capped at 100; these names are discovery leads, not parser proof or a usage ranking. Targeted project documentation supplied some candidates. Four plausible leads remain unresolved. This is 5 of the 20-path working goal, with 15 still unverified; the search does not establish a definitive most-used set. GitHub primary repository stars are only a C-within-ecosystem adoption proxy, and FFmpeg/raylib are multi-format projects. Miniaudio and raylib share dr_wav decoder lineage, so five package paths are not five independent engines. Installed-library checks depend on the recorded Homebrew releases and binary hashes. The control covers only ordinary RIFF PCM16. The ISO C standard library documents no WAV parser; generic stdio reads do not qualify. No malformed-input, vulnerability, or resource-use experiments were run.",
+      "third_party_evidence": "data/c/wav/parsers.json",
+      "third_party_control_results": "data/c/wav/verification.json",
+      "runtime_evidence": "data/c/wav/standard.json",
+      "registry_snapshot": "data/c/wav/registry-snapshot.json",
+      "unresolved_leads": "data/c/wav/leads.json",
+      "source_lock": "data/c/wav/source-lock.json"
     },
     {
       "ecosystem": "c",

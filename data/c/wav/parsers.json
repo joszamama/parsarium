@@ -1,0 +1,122 @@
+[
+  {
+    "name": "dr_wav",
+    "version": "wav-0.14.6",
+    "license": "MIT-0",
+    "license_evidence": "https://github.com/mackron/dr_libs/blob/wav-0.14.6/dr_wav.h",
+    "documentation": "https://github.com/mackron/dr_libs/blob/wav-0.14.6/dr_wav.h",
+    "input_api": "drwav_init_file; drwav_read_pcm_frames_s16; totalPCMFrameCount",
+    "adapter": "adapters/c/wav/dr_wav.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "dr_wav C WAV decoder",
+    "family_note": "Standalone dr_wav release in dr_libs; miniaudio embeds dr_wav lineage."
+  },
+  {
+    "name": "miniaudio",
+    "version": "0.11.26",
+    "license": "MIT-0",
+    "license_evidence": "https://github.com/mackron/miniaudio/blob/0.11.26/miniaudio.h",
+    "documentation": "https://github.com/mackron/miniaudio/blob/0.11.26/miniaudio.h",
+    "input_api": "ma_decoder_init_file; ma_decoder_get_data_format; ma_decoder_get_length_in_pcm_frames; ma_decoder_read_pcm_frames",
+    "adapter": "adapters/c/wav/miniaudio.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "miniaudio bundled dr_wav decoder",
+    "family_note": "Distinct miniaudio package and public C decoder API; WAV decoder derives from dr_wav."
+  },
+  {
+    "name": "libsndfile",
+    "version": "1.2.2",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/libsndfile.json",
+    "documentation": "https://libsndfile.github.io/libsndfile/api.html",
+    "input_api": "sf_open(path, SFM_READ, SF_INFO); SF_FORMAT_WAV; sf_readf_short",
+    "adapter": "adapters/c/wav/libsndfile.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "libsndfile WAV decoder",
+    "family_note": "Own audio file parser and PCM reader."
+  },
+  {
+    "name": "raylib",
+    "version": "6.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/raylib.json",
+    "documentation": "https://github.com/raysan5/raylib/blob/6.2/src/raylib.h",
+    "input_api": "LoadWave(local WAV path); Wave.sampleRate, channels, frameCount, data; UnloadWave",
+    "adapter": "adapters/c/wav/raylib.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "raylib bundled dr_wav decoder",
+    "family_note": "Distinct raylib package C loading API; WAV implementation shares dr_wav family."
+  },
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/ffmpeg.json",
+    "documentation": "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local WAV path); avformat_find_stream_info; av_read_frame; avcodec_send_packet and avcodec_receive_frame",
+    "adapter": "adapters/c/wav/ffmpeg.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "FFmpeg WAV demuxer and PCM decoder",
+    "family_note": "FFmpeg libavformat/libavcodec pair; installed Homebrew build is GPL-enabled."
+  }
+]

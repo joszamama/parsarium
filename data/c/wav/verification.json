@@ -1,0 +1,156 @@
+{
+  "checked_at_utc": "2026-11-12T10:25:31.567399+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "installed_libraries": {
+    "libsndfile": {
+      "pkg_config_version": "1.2.2",
+      "library": "/opt/homebrew/Cellar/libsndfile/1.2.2_1/lib/libsndfile.1.dylib",
+      "library_sha256": "6f2dcfbe421649ef61af16ba02bf815dc215b51f34970debb2333bffc36f6cc3",
+      "additional_libraries": []
+    },
+    "raylib": {
+      "pkg_config_version": "6.2.0",
+      "library": "/opt/homebrew/Cellar/raylib/6.2/lib/libraylib.dylib",
+      "library_sha256": "fc355c9bd1833a015432720717945100257411217376c9b42296dc94b86b1beb",
+      "additional_libraries": []
+    },
+    "ffmpeg": {
+      "pkg_config_version": "63.1.102",
+      "library": "/opt/homebrew/Cellar/ffmpeg/9.0.2/lib/libavformat.63.dylib",
+      "library_sha256": "282e63f30f3fd0c8bf5dd41493d0764f67a5140683cc74134912816fa51efbae",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2/lib/libavcodec.63.dylib",
+          "sha256": "9ce2e6d93ef08a6674ff50a9ab329694c398e8280779c43e7eaffc6fe067db9a"
+        }
+      ]
+    }
+  },
+  "source_builds": {
+    "dr_wav": {
+      "source_sha256": "2b1277b82ce97020dd2266ce4783b4bfc5c0b212da1388c6af7a1c7b81678d81",
+      "files": {
+        "dr_wav.h": "fad60f1e360d6de726efc1b9a7985610c89c551719e3f110e8b992f0e1f308cd"
+      }
+    },
+    "miniaudio": {
+      "source_sha256": "9a9d6d250f10faadd3e8279c527ba13734fb3888f346b7ace1eb4131c0c1ab9c",
+      "files": {
+        "miniaudio.h": "6b376c7fbb1352ba1e0e432ab66069b335ea9405e45cb6c30b97ef0f3c9c3e0e",
+        "miniaudio.c": "ab1984bb9804ffd7b0303813595d0b345a8a86c34da1daffc353a14b34102a65"
+      }
+    }
+  },
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "frames": 4,
+    "samples": [
+      0,
+      1000,
+      -1000,
+      0
+    ]
+  },
+  "third_party": [
+    {
+      "package": "dr_wav",
+      "version": "wav-0.14.6",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/dr_wav /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/dr_wav.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/dr_wav",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/dr_wav /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "miniaudio",
+      "version": "0.11.26",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/miniaudio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/miniaudio.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/miniaudio/miniaudio.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/miniaudio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/miniaudio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libsndfile",
+      "version": "1.2.2",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/libsndfile.c -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/mpg123/1.33.7/include -L/opt/homebrew/Cellar/libsndfile/1.2.2_1/lib -lsndfile -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/libsndfile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/libsndfile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "raylib",
+      "version": "6.2",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/raylib.c -I/opt/homebrew/Cellar/raylib/6.2/include -L/opt/homebrew/Cellar/raylib/6.2/lib -lraylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/raylib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/raylib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "ffmpeg",
+      "version": "9.0.2",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2/lib -lavformat -lavcodec -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

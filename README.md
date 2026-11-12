@@ -1,8 +1,8 @@
 # Parsarium
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
-specific formats. It currently contains a verified C × PNG batch and a
-below-target C × ZIP batch, and verified C++ × PNG and ZIP batches,
+specific formats. It currently contains a verified C × PNG batch, below-target
+C × ZIP and WAV batches, and verified C++ × PNG and ZIP batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -12,8 +12,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 52 cells at the 20-parser target, three started
-below target, and 33 marked `not_started`;
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 52 cells at the 20-parser target, four started
+below target, and 32 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -27,6 +27,7 @@ all packages and integrity hashes. From the repository root:
 python3 scripts/verify_c_png.py
 python3 scripts/verify_cpp_png.py
 python3 scripts/verify_c_zip.py
+python3 scripts/verify_c_wav.py
 python3 scripts/verify_cpp_zip.py
 python3 scripts/verify_php_zip.py
 python3 scripts/verify_php_png.py
@@ -160,6 +161,15 @@ The 21 distinct Conan recipe-name hits and
 four leads remain unresolved.
 The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
+
+The C × WAV verifier builds the pinned `dr_wav` and miniaudio sources and checks
+exact-release, binary-hashed libsndfile, raylib, and FFmpeg libraries. All
+**5/5 third-party package paths passed** the shared valid four-sample PCM WAV
+control, returning parsed sample rate, channels, frame count, and four samples.
+This remains 15 below the working goal. The [C WAV cell](data/c/wav/cell.json)
+records the bounded Conan Center recipe search, four unresolved leads, and
+shared `dr_wav` lineage. Its [ranking](data/c/wav/ranking.md) uses only primary
+GitHub repository stars within C. The ISO C standard library has no WAV parser.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
 C++ call sites for the same twelve packages and ten pinned C++ libraries. All

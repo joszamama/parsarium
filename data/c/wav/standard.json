@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C",
+  "format": "WAV",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220 working draft)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The standard headers list no WAV or RIFF audio parser."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "FILE, fopen and fread provide generic bytes, not parsed WAV chunks, sample rate or PCM frames."
+    }
+  ],
+  "limit": "Scoped to ISO C; platform and third-party audio packages are listed separately. No format-aware standard API exists to run on the control."
+}
