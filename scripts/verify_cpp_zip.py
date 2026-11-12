@@ -33,7 +33,7 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/zip/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 15
+    assert len(parsers) == 19
     assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -118,6 +118,39 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-I" + str(source / "include"),
                        str(ROOT / parser["adapter"]), str(source / "lib/arm64/libbit7z64.a"),
                        "-o", str(TARGET / name)]
+        elif name in ("quazip", "karchive"):
+            item = extra_lock[name]
+            library = Path(item["local_library"])
+            digest = sha256(library.read_bytes()).hexdigest()
+            assert digest == item["local_library_sha256"], name
+            package = item["pkg_config"]
+            observed = run(["pkg-config", "--modversion", package])
+            assert observed == item["release"], (name, observed)
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", package]))
+            command = ["c++", "-std=c++17", "-O2", str(ROOT / parser["adapter"]),
+                       *flags, "-o", str(TARGET / name)]
+            local_libraries[name] = {"pkg_config_version": observed,
+                                     "library": str(library), "library_sha256": digest}
+        elif name == "qarchive":
+            source = ADAPTER / "cache/qarchive"
+            build = TARGET / "qarchive-build"
+            archive_library = Path(verify_c_zip.DATA / "source-lock.json")
+            archive_lock = json.loads(archive_library.read_text())["libarchive"]
+            archive_binary = Path(archive_lock["local_library"])
+            assert sha256(archive_binary.read_bytes()).hexdigest() == archive_lock["local_library_sha256"]
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DQARCHIVE_QT_VERSION_MAJOR=6",
+                         "-DLIBARCHIVE_PKG_CONFIG=" + str(archive_binary.parent / "pkgconfig"),
+                         "-DBUILD_TESTS=OFF", "-DBUILD_EXAMPLES=OFF",
+                         "-DBUILD_SHARED_LIBS=OFF", "-DCMAKE_BUILD_TYPE=Release"]
+            library_build = ["cmake", "--build", str(build), "--target", "QArchive", "-j", "8"]
+            run(configure)
+            run(library_build)
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "Qt6Core"]))
+            command = ["c++", "-std=c++17", "-O2", "-I" + str(source / "include"),
+                       "-I" + str(build), str(ROOT / parser["adapter"]),
+                       str(build / "libQArchive.a"), str(archive_binary),
+                       *flags, "-o", str(TARGET / name)]
         else:
             assert parser["version"] == c_parsers[name]["version"]
             assert parser["expected_output"] == c_parsers[name]["expected_output"]

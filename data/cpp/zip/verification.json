@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T08:29:59.287685+00:00",
+  "checked_at_utc": "2026-11-12T08:46:34.718019+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/zip/source-lock.json",
@@ -9,6 +9,16 @@
       "release": "26.04",
       "library": "/opt/homebrew/Cellar/sevenzip/26.04/lib/7z.so",
       "library_sha256": "12cc633a8f3f1b84eeb19c1f11054e661a016c1f501edec0b45f2adb22c8bba0"
+    },
+    "quazip": {
+      "pkg_config_version": "1.7.2",
+      "library": "/opt/homebrew/Cellar/quazip/1.7.2/lib/libquazip1-qt6.1.7.2.dylib",
+      "library_sha256": "4725e9587d3736cc93d107c10d0688fbbbdbae9655eb9b4312b97cbfa6710ad2"
+    },
+    "karchive": {
+      "pkg_config_version": "6.31.0",
+      "library": "/opt/homebrew/Cellar/karchive/6.31.0/lib/libKF6Archive.6.31.0.dylib",
+      "library_sha256": "03a5de610b3700e0f4c8df8d70878ce287a0834d959253641583252136390b53"
     }
   },
   "prerequisite_verifier": "scripts/verify_c_zip.py",
@@ -233,6 +243,66 @@
       "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/bit7z -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z-build -DBIT7Z_CUSTOM_7ZIP_PATH=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/sevenzip -DBIT7Z_BUILD_TESTS=OFF -DBIT7Z_BUILD_DOCS=OFF -DBIT7Z_USE_PCH=OFF -DBIT7Z_7ZIP_VERSION=26.04 -DCMAKE_BUILD_TYPE=Release",
       "library_build_command": "cmake --build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z-build --target bit7z -j 8",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/bit7z /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "physfs",
+      "version": "3.2.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/physfs.cpp -I/opt/homebrew/Cellar/physfs/3.2.0/include -L/opt/homebrew/Cellar/physfs/3.2.0/lib -lphysfs -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/physfs",
+      "configure_command": null,
+      "library_build_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/physfs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "quazip",
+      "version": "1.7.2",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/quazip.cpp -I/opt/homebrew/Cellar/quazip/1.7.2/include/QuaZip-Qt6-1.7.2 -I/opt/homebrew/Cellar/quazip/1.7.2/include/QuaZip-Qt6-1.7.2/quazip -F/opt/homebrew/lib -I/opt/homebrew/include/QtCore5Compat -I/opt/homebrew/lib/QtCore5Compat.framework -DQT_CORE5COMPAT_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -L/opt/homebrew/Cellar/quazip/1.7.2/lib -lquazip1-qt6 -lz -F/opt/homebrew/lib -framework QtCore5Compat -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/quazip",
+      "configure_command": null,
+      "library_build_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/quazip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "qarchive",
+      "version": "2.2.8",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/qarchive/include -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/qarchive-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/qarchive.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/qarchive-build/libQArchive.a /opt/homebrew/Cellar/libarchive/3.8.11/lib/libarchive.dylib -F/opt/homebrew/lib -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/qarchive",
+      "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/qarchive -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/qarchive-build -DQARCHIVE_QT_VERSION_MAJOR=6 -DLIBARCHIVE_PKG_CONFIG=/opt/homebrew/Cellar/libarchive/3.8.11/lib/pkgconfig -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release",
+      "library_build_command": "cmake --build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/qarchive-build --target QArchive -j 8",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/qarchive /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "karchive",
+      "version": "6.31.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/karchive.cpp -I/opt/homebrew/Cellar/karchive/6.31.0/include/KF6/KArchive -F/opt/homebrew/lib -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -L/opt/homebrew/Cellar/karchive/6.31.0/lib -lKF6Archive -F/opt/homebrew/lib -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/karchive",
+      "configure_command": null,
+      "library_build_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/karchive /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

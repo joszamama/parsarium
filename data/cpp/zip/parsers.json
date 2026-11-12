@@ -277,5 +277,78 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "bit7z wrapper over SevenZip ZIP reader",
     "family_note": "Distinct C++ wrapper API; ZIP parsing and decompression use an exact-release, binary-hashed SevenZip 26.04 shared library. Not an independent decoder from SevenZip."
+  },
+  {
+    "name": "physfs",
+    "version": "3.2.0",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/physfs",
+    "documentation": "https://github.com/icculus/physfs/blob/release-3.2.0/src/physfs.h",
+    "input_api": "PHYSFS_mount(local ZIP path); PHYSFS_enumerateFiles; PHYSFS_openRead; PHYSFS_readBytes",
+    "adapter": "adapters/cpp/zip/physfs.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "mounted ZIP entry name and decompressed entry bytes",
+    "family": "PhysicsFS ZIP archiver",
+    "family_note": "Same PhysicsFS release and ZIP handler as the C cell; the C API is compiled and invoked from a C++17 translation unit.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "quazip",
+    "version": "1.7.2",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://formulae.brew.sh/formula/quazip",
+    "documentation": "https://github.com/stachenov/quazip/blob/v1.7.2/quazip/quazip.h",
+    "input_api": "QuaZip(local filename); open(mdUnzip); getFileNameList; setCurrentFile; QuaZipFile::readAll",
+    "adapter": "adapters/cpp/zip/quazip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "QuaZip wrapper over classic MiniZip",
+    "family_note": "Distinct Qt/C++ package API backed by classic MiniZip, sharing decoder lineage with minizip."
+  },
+  {
+    "name": "qarchive",
+    "version": "2.2.8",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/qarchive/all/conanfile.py",
+    "documentation": "https://github.com/antony-jr/QArchive/blob/v2.2.8/include/qarchivememoryextractor.hpp",
+    "input_api": "QArchive::MemoryExtractor(local path); finished output getFiles; fileInformation and MemoryFile::buffer",
+    "adapter": "adapters/cpp/zip/qarchive.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "QArchive wrapper over libarchive",
+    "family_note": "Distinct Qt/C++ package API; ZIP parsing and decompression are provided by the pinned libarchive release."
+  },
+  {
+    "name": "karchive",
+    "version": "6.31.0",
+    "license": "BSD-2-Clause AND LGPL-2.0-only AND LGPL-2.0-or-later AND (LGPL-2.0-only OR LGPL-3.0-only)",
+    "license_evidence": "https://formulae.brew.sh/formula/karchive",
+    "documentation": "https://api.kde.org/kzip.html",
+    "input_api": "KZip(local filename); open(QIODevice::ReadOnly); directory()->entries; KArchiveDirectory::file; KArchiveFile::data",
+    "adapter": "adapters/cpp/zip/karchive.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "KArchive KZip reader",
+    "family_note": "KDE Frameworks KArchive exposes its own ZIP reader through KZip and Qt; the same package is counted only once."
   }
 ]

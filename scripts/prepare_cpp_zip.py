@@ -45,12 +45,14 @@ def prepare(name: str, item: dict, destination_root: Path) -> None:
 
 def main() -> None:
     for name, item in LOCK.items():
-        prepare(name, item, CACHE / name)
+        if item.get("source_build"):
+            prepare(name, item, CACHE / name)
         for subname, subitem in item.get("submodules", {}).items():
             prepare(name + "-" + subname, subitem, CACHE / name / "external" / subname)
         if name == "bit7z":
             prepare("sevenzip-26.04", item["sevenzip_source"], CACHE / "sevenzip")
-        print(f"{name}: pinned {item['release']} source verified")
+        print(f"{name}: pinned {item['release']} " +
+              ("source verified" if item.get("source_build") else "source pin recorded; binary checked by verifier"))
 
 
 if __name__ == "__main__":

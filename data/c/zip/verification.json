@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T08:29:35.912522+00:00",
+  "checked_at_utc": "2026-11-12T08:46:07.381904+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -32,6 +32,11 @@
       "pkg_config_version": "1.14.60",
       "library": "/opt/homebrew/Cellar/libgsf/1.14.60/lib/libgsf-1.dylib",
       "library_sha256": "a0edd447ee04306912f46ce3e4181b6780e13e90f302607401537af5281ccdda"
+    },
+    "physfs": {
+      "pkg_config_version": "3.2.0",
+      "library": "/opt/homebrew/Cellar/physfs/3.2.0/lib/libphysfs.3.2.0.dylib",
+      "library_sha256": "3d20b04d1bde55adf81fc8d25333521175f0c624aa6dd3dff26e37de14c53b49"
     }
   },
   "source_builds": {
@@ -168,6 +173,19 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/unarr.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr-build/libunarr.a -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "physfs",
+      "version": "3.2.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/physfs.c -I/opt/homebrew/Cellar/physfs/3.2.0/include -L/opt/homebrew/Cellar/physfs/3.2.0/lib -lphysfs -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/physfs",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/physfs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

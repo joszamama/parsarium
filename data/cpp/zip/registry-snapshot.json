@@ -262,13 +262,41 @@
       "license_evidence": "https://github.com/rikyoz/bit7z/blob/v4.1.0/LICENSE",
       "underlying_library_source_url": "https://github.com/ip7z/7zip/archive/refs/tags/26.04.tar.gz",
       "underlying_library_source_sha256": "48fdc6dfe879ee2db867bb07f19c4a9406bfea01d51f48785b6c7a137881e25c"
+    },
+    "physfs": {
+      "version": "3.2.0",
+      "license": "Zlib",
+      "source_url": "https://github.com/icculus/physfs/archive/refs/tags/release-3.2.0.tar.gz",
+      "source_sha256": "1991500eaeb8d5325e3a8361847ff3bf8e03ec89252b7915e1f25b3f8ab5d560",
+      "license_evidence": "https://formulae.brew.sh/formula/physfs"
+    },
+    "quazip": {
+      "version": "1.7.2",
+      "license": "LGPL-2.1-only",
+      "source_url": "https://github.com/stachenov/quazip/archive/refs/tags/v1.7.2.tar.gz",
+      "source_sha256": "5240f4a3475648773ba10af8b0ebe549cbfc5d6de00470a517330a80068a4f78",
+      "license_evidence": "https://formulae.brew.sh/formula/quazip"
+    },
+    "qarchive": {
+      "version": "2.2.8",
+      "license": "BSD-3-Clause",
+      "source_url": "https://github.com/antony-jr/QArchive/archive/v2.2.8.tar.gz",
+      "source_sha256": "2f231b48b51de5d730f98bffbff34d7791b61ea766429230d81bce82c7ce1bf9",
+      "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/qarchive/all/conanfile.py"
+    },
+    "karchive": {
+      "version": "6.31.0",
+      "license": "BSD-2-Clause AND LGPL-2.0-only AND LGPL-2.0-or-later AND (LGPL-2.0-only OR LGPL-3.0-only)",
+      "source_url": "https://download.kde.org/stable/frameworks/6.31/karchive-6.31.0.tar.xz",
+      "source_sha256": "95acaf5a459593184104e1c157cef415ec59a33e71674186169e0df33cdacaac",
+      "license_evidence": "https://formulae.brew.sh/formula/karchive"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where package-specific and available",
     "captured_at_utc": "2026-11-12T07:50:21.979330+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z wraps SevenZip. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set.",
+    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z wraps SevenZip. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set. QuaZip shares classic MiniZip lineage; QArchive wraps libarchive; KArchive primary hosting is KDE GitLab and its GitHub mirror stars are not used.",
     "packages": {
       "libarchive": {
         "stars": 3672,
@@ -347,6 +375,27 @@
         "stars": 858,
         "repository": "https://github.com/rikyoz/bit7z",
         "source": "https://api.github.com/repos/rikyoz/bit7z"
+      },
+      "physfs": {
+        "stars": 844,
+        "repository": "https://github.com/icculus/physfs",
+        "source": "https://api.github.com/repos/icculus/physfs"
+      },
+      "quazip": {
+        "stars": 699,
+        "repository": "https://github.com/stachenov/quazip",
+        "source": "https://api.github.com/repos/stachenov/quazip"
+      },
+      "qarchive": {
+        "stars": 97,
+        "repository": "https://github.com/antony-jr/QArchive",
+        "source": "https://api.github.com/repos/antony-jr/QArchive"
+      },
+      "karchive": {
+        "stars": null,
+        "repository": null,
+        "source": null,
+        "reason": "The primary KDE repository is on invent.kde.org; a GitHub mirror star count is not a comparable primary-upstream metric."
       }
     },
     "captured_between_utc": [
@@ -356,6 +405,8 @@
   },
   "documentation_lead_sources": [
     "https://github.com/selmf/unarr/releases/tag/v1.2.0",
-    "https://github.com/mackron/fs"
+    "https://github.com/mackron/fs",
+    "https://icculus.org/physfs/docs/html/physfs_8h.html",
+    "https://api.kde.org/kzip.html"
   ]
 }

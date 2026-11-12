@@ -160,5 +160,23 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "unarr ZIP reader",
     "family_note": "selmf/unarr fork of zeniko/unarr; its ZIP parser and decompression API are part of the pinned source package."
+  },
+  {
+    "name": "physfs",
+    "version": "3.2.0",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/physfs",
+    "documentation": "https://github.com/icculus/physfs/blob/release-3.2.0/src/physfs.h",
+    "input_api": "PHYSFS_mount(local ZIP path); PHYSFS_enumerateFiles; PHYSFS_openRead; PHYSFS_readBytes",
+    "adapter": "adapters/c/zip/physfs.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "mounted ZIP entry name and decompressed entry bytes",
+    "family": "PhysicsFS ZIP archiver",
+    "family_note": "PhysicsFS provides a distinct virtual filesystem package API with an internal ZIP archive handler; its C++ call site reuses this C library."
   }
 ]

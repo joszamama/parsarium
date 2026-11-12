@@ -31,7 +31,7 @@ def main() -> None:
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 9 and {p["name"] for p in parsers} == set(lock)
+    assert len(parsers) == 10 and {p["name"] for p in parsers} == set(lock)
     prepare_c_zip.main()
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
