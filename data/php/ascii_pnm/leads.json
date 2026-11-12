@@ -1,11 +1,5 @@
 [
   {
-    "name": "php-ffmpeg/php-ffmpeg",
-    "status": "unresolved",
-    "reason": "The package documents local media input through FFmpeg, which may accept PNM, but a pinned release and observable P3 control have not been tested.",
-    "source": "https://packagist.org/packages/php-ffmpeg/php-ffmpeg"
-  },
-  {
     "name": "carbon/vips",
     "status": "unresolved",
     "reason": "This Neos CMS plugin depends on rokka/imagine-vips, but a documented direct local-input API for its own package and control run have not been established.",
@@ -52,5 +46,17 @@
     "status": "excluded",
     "reason": "The release README marks image-file parsing as unimplemented; no local PNM input API exists in this release.",
     "source": "https://packagist.org/packages/talesoft/phim"
+  },
+  {
+    "name": "daniel-km/zoomify",
+    "status": "excluded",
+    "reason": "The documented process(local P3) returned true but wrote ImageProperties.xml with empty WIDTH and HEIGHT and zero tiles because the wrapper uses PHP getimagesize, which rejects this PNM control. No observable successful PNM parsing.",
+    "source": "https://packagist.org/packages/daniel-km/zoomify"
+  },
+  {
+    "name": "daniel-km/deepzoom",
+    "status": "excluded",
+    "reason": "The documented process(local P3) failed with Invalid image geometry; its metadata path uses PHP getimagesize, which rejects this PNM control.",
+    "source": "https://packagist.org/packages/daniel-km/deepzoom"
   }
 ]

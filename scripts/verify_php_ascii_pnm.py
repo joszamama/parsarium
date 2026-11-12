@@ -76,6 +76,9 @@ def main() -> None:
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "imagick_version": execute(["php", "-d", f"extension={imagick_extension}",
                                            "-r", "echo phpversion('imagick');"]).stdout if imagick_extension else None,
+              "imagemagick_version": execute(["magick", "-version"]).stdout.splitlines()[0],
+              "ffprobe_version": execute(["ffprobe", "-version"]).stdout.splitlines()[0]
+                  if any(parser["name"] == "php-ffmpeg/php-ffmpeg" for parser in parsers) else None,
               "control": "controls/ascii_pnm/red-green.ppm",
               "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
               "composer_locks": [{"path": name, "sha256": sha256((ROOT / name).read_bytes()).hexdigest()}

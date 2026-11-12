@@ -14,6 +14,8 @@ if ($package === 'pecl/imagick') {
     require __DIR__ . '/imagick_wrappers/vendor/autoload.php';
 } elseif (in_array($package, ['league/glide', 'phpixie/image', 'francodacosta/phmagick'], true)) {
     require __DIR__ . '/image_pipeline/vendor/autoload.php';
+} elseif (in_array($package, ['php-ffmpeg/php-ffmpeg', 'phphleb/imageresizer'], true)) {
+    require __DIR__ . '/media_pipeline/vendor/autoload.php';
 } else {
     require __DIR__ . '/vendor/autoload.php';
 }
@@ -132,6 +134,24 @@ switch ($package) {
         } finally {
             @unlink($destination);
         }
+        break;
+    case 'php-ffmpeg/php-ffmpeg':
+        $stream = \FFMpeg\FFProbe::create()->streams($path)->videos()->first();
+        if ($stream === null) {
+            throw new RuntimeException('FFprobe did not find a PNM video stream');
+        }
+        $output = [
+            'codec' => $stream->get('codec_name'),
+            'width' => $stream->get('width'),
+            'height' => $stream->get('height'),
+        ];
+        break;
+    case 'phphleb/imageresizer':
+        $image = new \Phphleb\Imageresizer\SimpleImage();
+        if (!$image->load($path) || !($image->getImagick() instanceof \Imagick)) {
+            throw new RuntimeException('Imagick processor did not decode the PNM control');
+        }
+        $output = ['width' => $image->getWidth(), 'height' => $image->getHeight()];
         break;
     default:
         throw new InvalidArgumentException('unknown ASCII PNM package: ' . $package);
