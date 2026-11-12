@@ -10,6 +10,8 @@ if ($package === 'pecl/imagick') {
     // This extension is built separately from its pinned PECL source archive.
 } elseif ($package === 'osiemsiedem/intervention-image-vips-driver') {
     require __DIR__ . '/legacy/vendor/autoload.php';
+} elseif (in_array($package, ['calcinai/php-imagick', 'orbitale/imagemagick-php', 'phpthumb/phpthumb'], true)) {
+    require __DIR__ . '/imagick_wrappers/vendor/autoload.php';
 } else {
     require __DIR__ . '/vendor/autoload.php';
 }
@@ -62,6 +64,33 @@ switch ($package) {
             'height' => $image->getImageHeight(),
             'left_rgb' => [$left['r'], $left['g'], $left['b']],
             'right_rgb' => [$right['r'], $right['g'], $right['b']],
+        ];
+        break;
+    case 'phpthumb/phpthumb':
+        $image = new \PHPThumb\Imagick($path);
+        $size = $image->getCurrentDimensions();
+        $output = ['width' => $size['width'], 'height' => $size['height']];
+        break;
+    case 'orbitale/imagemagick-php':
+        $response = (new \Orbitale\Component\ImageMagick\Command())->identify($path)->run();
+        if ($response->hasFailed() || !preg_match('/\s(PPM)\s(\d+)x(\d+)\s/', $response->getOutput(), $matches)) {
+            throw new RuntimeException('ImageMagick did not identify the control as PPM');
+        }
+        $output = ['width' => (int) $matches[2], 'height' => (int) $matches[3], 'format' => $matches[1]];
+        break;
+    case 'calcinai/php-imagick':
+        $image = new \Imagick($path);
+        $blob = $image->getImageBlob();
+        if (!preg_match('/\AP6\s+(\d+)\s+(\d+)\s+(\d+)\s/s', $blob, $matches, PREG_OFFSET_CAPTURE)) {
+            throw new RuntimeException('ImageMagick did not decode the P3 control to P6');
+        }
+        $pixels = substr($blob, $matches[0][1] + strlen($matches[0][0]));
+        $output = [
+            'width' => (int) $matches[1][0],
+            'height' => (int) $matches[2][0],
+            'maxval' => (int) $matches[3][0],
+            'left_rgb' => array_values(unpack('C3', substr($pixels, 0, 3))),
+            'right_rgb' => array_values(unpack('C3', substr($pixels, 3, 3))),
         ];
         break;
     default:

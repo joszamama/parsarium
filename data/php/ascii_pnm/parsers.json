@@ -188,5 +188,72 @@
     "scope": "decoded dimensions and RGB pixels",
     "family": "ImageMagick PNM decoder",
     "family_note": "PECL Imagick is an open-source extension built from a SHA-256-pinned release; it delegates ASCII P3 decoding to installed ImageMagick, not to bundled PHP GD."
+  },
+  {
+    "name": "calcinai/php-imagick",
+    "version": "v0.1.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/calcinai/php-imagick/blob/001530b19560b9862ffe78c3ae29ad5dc2549e6d/LICENSE",
+    "documentation": "https://github.com/calcinai/php-imagick/blob/001530b19560b9862ffe78c3ae29ad5dc2549e6d/README.md",
+    "input_api": "Imagick(local P3 file)->getImageBlob(); observe decoded P6 dimensions and RGB pixels",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/imagick_wrappers/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "left_rgb": [
+        255,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "decoded P6 dimensions and RGB pixels",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "This Composer polyfill invokes the installed ImageMagick CLI to decode ASCII P3 and emits P6 pixel bytes; it is not an independent decoder engine."
+  },
+  {
+    "name": "orbitale/imagemagick-php",
+    "version": "v3.3.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Orbitale/ImageMagickPHP/blob/dd484b6c6e2741132a6f1bbe70ba940f0834d202/composer.json",
+    "documentation": "https://github.com/Orbitale/ImageMagickPHP/blob/dd484b6c6e2741132a6f1bbe70ba940f0834d202/README.md",
+    "input_api": "Command::identify(local P3 file)->run()->getOutput(); observe PPM type and dimensions",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/imagick_wrappers/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "format": "PPM"
+    },
+    "scope": "identified PPM type and dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "This Composer command wrapper invokes the installed ImageMagick CLI to identify ASCII P3; it is not an independent decoder engine."
+  },
+  {
+    "name": "phpthumb/phpthumb",
+    "version": "2.5.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/PHPThumb/PHPThumb/blob/b76d5bd7b53a69ac0c9572802b06c7071479cf04/LICENSE",
+    "documentation": "https://github.com/PHPThumb/PHPThumb/blob/b76d5bd7b53a69ac0c9572802b06c7071479cf04/README.md",
+    "input_api": "PHPThumb\\Imagick(local P3 file)->getCurrentDimensions()",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/imagick_wrappers/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "This Composer wrapper delegates ASCII P3 decoding to PECL Imagick and installed ImageMagick; it is not an independent decoder engine.",
+    "requires_imagick": true
   }
 ]

@@ -34,5 +34,23 @@
     "status": "excluded",
     "reason": "Packagist release metadata declares a proprietary license, so it fails the open-source requirement.",
     "source": "https://packagist.org/packages/fdmind/statamic-libvips"
+  },
+  {
+    "name": "imanee/imanee",
+    "status": "excluded",
+    "reason": "The documented local-path constructor loads the P3 into Imagick but the wrapper relies on PHP getimagesize for metadata; dimensions are null and output() throws EmptyImageException on the valid control. No observable public parse result was obtained.",
+    "source": "https://packagist.org/packages/imanee/imanee"
+  },
+  {
+    "name": "zenstruck/image",
+    "status": "excluded",
+    "reason": "Its documented ImageFileInfo::wrap(path)->dimensions() rejects the valid P3 control with Unable to parse image metadata; no successful local PNM input API was established.",
+    "source": "https://packagist.org/packages/zenstruck/image"
+  },
+  {
+    "name": "talesoft/phim",
+    "status": "excluded",
+    "reason": "The release README marks image-file parsing as unimplemented; no local PNM input API exists in this release.",
+    "source": "https://packagist.org/packages/talesoft/phim"
   }
 ]
