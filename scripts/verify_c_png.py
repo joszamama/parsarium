@@ -30,7 +30,7 @@ def main() -> None:
     prepare_c_png.main()
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 8
+    assert len(parsers) == 12
     zlib_version = run(["pkg-config", "--modversion", "zlib"])
     assert zlib_version == "1.2.12"
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -51,7 +51,9 @@ def main() -> None:
     }
     local_libraries = {}
     for name, adapter_name in (("imagemagick", "imagemagick"),
-                               ("gdk-pixbuf", "gdk_pixbuf"), ("vips", "vips")):
+                               ("gdk-pixbuf", "gdk_pixbuf"), ("vips", "vips"),
+                               ("sdl3", "sdl3"), ("sdl3_image", "sdl3_image"),
+                               ("sdl2_image", "sdl2_image")):
         item = lock[name]
         observed = run(["pkg-config", "--modversion", item["pkg_config"]])
         if name == "imagemagick":
@@ -67,6 +69,16 @@ def main() -> None:
         flags = shlex.split(run(["pkg-config", "--cflags", "--libs", item["pkg_config"]]))
         commands[name] = ["cc", "-std=c11", "-O2", str(ADAPTER / (adapter_name + ".c")),
                           *flags, "-o", str(TARGET / name)]
+    freeimage = lock["freeimage"]
+    library = Path(freeimage["local_library"])
+    digest = sha256(library.read_bytes()).hexdigest()
+    assert digest == freeimage["local_library_sha256"]
+    local_libraries["freeimage"] = {"release": freeimage["release"],
+                                    "library": str(library), "library_sha256": digest}
+    prefix = library.parents[1]
+    commands["freeimage"] = ["cc", "-std=c11", "-O2", "-I" + str(prefix / "include"),
+                              str(ADAPTER / "freeimage.c"), "-L" + str(prefix / "lib"),
+                              "-lfreeimage", "-o", str(TARGET / "freeimage")]
     rows = []
     for parser in parsers:
         name = parser["name"]

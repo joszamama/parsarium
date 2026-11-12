@@ -128,12 +128,12 @@ python3 scripts/validate_catalog.py
 The C × PNG verifier uses `cc`, CMake, `pkg-config`, and zlib development headers.
 It downloads five source archives pinned by SHA-256, builds libpng 1.6.59 as
 a static library, builds four more adapters from pinned source files, and
-checks three locally installed C libraries pinned by release and binary SHA-256.
-Those installed releases are ImageMagick 7.1.2-31, GdkPixbuf 2.44.8, and libvips
-8.18.7. It checks the 2×1 valid PNG's dimensions and both RGBA pixels. The
-recorded result is **8/8 third-party package paths passing**, below the working
+checks seven locally installed C libraries pinned by release and binary SHA-256.
+Those installed releases are ImageMagick 7.1.2-31, GdkPixbuf 2.44.8, libvips
+8.18.7, SDL3 3.4.20, SDL3_image 3.4.8, SDL2_image 2.8.12, and FreeImage 3.18.0. It checks the 2×1 valid PNG's dimensions and both RGBA pixels. The
+recorded result is **12/12 third-party package paths passing**, below the working
 goal of 20. The C standard library has no documented PNG parser; generic
-`stdio.h` input does not count. Four plausible leads remain unresolved. See
+`stdio.h` input does not count. Two plausible leads remain unresolved. See
 [`data/c/png/cell.json`](data/c/png/cell.json) for search limits and uncertainty.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with

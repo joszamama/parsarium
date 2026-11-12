@@ -232,5 +232,125 @@
     "family": "pngle with bundled miniz",
     "family_note": "Independent PNG parser with a bundled miniz DEFLATE implementation.",
     "family_evidence": "https://github.com/kikuchan/pngle/blob/v1.1.0/src/pngle.c"
+  },
+  {
+    "name": "sdl3",
+    "version": "3.4.20",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3.json",
+    "documentation": "https://wiki.libsdl.org/SDL3/SDL_LoadPNG",
+    "input_api": "SDL_LoadPNG(const char* file); SDL_ConvertSurface(...) to RGBA pixels",
+    "adapter": "adapters/c/png/sdl3.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "SDL3 bundled stb_image PNG decoder",
+    "family_note": "SDL3 core package path; implementation in SDL_stb.c uses stb_image, shared with the stb package.",
+    "family_evidence": "https://github.com/libsdl-org/SDL/blob/release-3.4.20/src/video/SDL_stb.c"
+  },
+  {
+    "name": "sdl3_image",
+    "version": "3.4.8",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3_image.json",
+    "documentation": "https://wiki.libsdl.org/SDL3_image/IMG_Load",
+    "input_api": "IMG_Load(const char* file); SDL_ConvertSurface(...) to RGBA pixels",
+    "adapter": "adapters/c/png/sdl3_image.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "SDL_image 3 PNG loader (libpng in recorded build)",
+    "family_note": "Separate SDL3_image distribution path from SDL2_image; recorded binary links libpng. Source can fall back to SDL3 PNG loader in other builds.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-3.4.8/src/IMG_png.c"
+  },
+  {
+    "name": "sdl2_image",
+    "version": "2.8.12",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_image.json",
+    "documentation": "https://wiki.libsdl.org/SDL2_image/IMG_Load",
+    "input_api": "IMG_Load(const char* file); SDL_ConvertSurfaceFormat(...) to RGBA pixels",
+    "adapter": "adapters/c/png/sdl2_image.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "SDL_image 2 PNG loader (libpng-backed)",
+    "family_note": "Separate SDL2_image distribution path from SDL3_image; recorded binary links libpng. Both share the SDL_image project family.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-2.8.12/src/IMG_png.c"
+  },
+  {
+    "name": "freeimage",
+    "version": "3.18.0",
+    "license": "FreeImage",
+    "license_evidence": "https://formulae.brew.sh/api/formula/freeimage.json",
+    "documentation": "https://freeimage.sourceforge.io/faq.html",
+    "input_api": "FreeImage_Load(FIF_PNG, const char*, PNG_DEFAULT); FreeImage_GetPixelColor(...)",
+    "adapter": "adapters/c/png/freeimage.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "FreeImage PNG plugin (bundled libpng lineage)",
+    "family_note": "SourceForge package with bundled image codecs. Project adoption metric is unavailable from the uniform GitHub primary-repository star source; left unranked.",
+    "family_evidence": "https://sourceforge.net/projects/freeimage/files/Source%20Distribution/3.18.0/"
   }
 ]

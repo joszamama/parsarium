@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T07:01:37.352418+00:00",
+  "checked_at_utc": "2026-11-12T07:10:17.422956+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "libpng_source_sha256": "d80dd2a38a37f803cb9b6ac7b14bd6e74ddc3b654780a8380bdf93523fdb4389",
@@ -20,6 +20,26 @@
       "pkg_config_version": "8.18.7",
       "library": "/opt/homebrew/Cellar/vips/8.18.7/lib/libvips.dylib",
       "library_sha256": "0944abf92f0de7308064b91aee436459aa4d23c2e90dd15d41f3d843b22572e7"
+    },
+    "sdl3": {
+      "pkg_config_version": "3.4.20",
+      "library": "/opt/homebrew/Cellar/sdl3/3.4.20/lib/libSDL3.dylib",
+      "library_sha256": "10e099afe070ee62ff19cf990712b0df92e3e28a84116cc96756257d9dcdb892"
+    },
+    "sdl3_image": {
+      "pkg_config_version": "3.4.8",
+      "library": "/opt/homebrew/Cellar/sdl3_image/3.4.8_1/lib/libSDL3_image.dylib",
+      "library_sha256": "96970dcb1ee231ae5489d8b0f9d79c63a28f5a6306f77a7b81f5f13e86ea1f1c"
+    },
+    "sdl2_image": {
+      "pkg_config_version": "2.8.12",
+      "library": "/opt/homebrew/Cellar/sdl2_image/2.8.12_2/lib/libSDL2_image.dylib",
+      "library_sha256": "e349b733eecbb7739649ff45bd14f3fc50dff30eb997341268e75c71a8f8f95a"
+    },
+    "freeimage": {
+      "release": "3.18.0",
+      "library": "/opt/homebrew/Cellar/freeimage/3.18.0/lib/libfreeimage.dylib",
+      "library_sha256": "95c6b24c78de66996b066f7d51fddf10e374864504f9c46992f9551f91eacdcc"
     }
   },
   "control": "controls/png/red-green.png",
@@ -189,7 +209,7 @@
       "package": "vips",
       "version": "8.18.7",
       "control": "controls/png/red-green.png",
-      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/vips.c -I/opt/homebrew/Cellar/vips/8.18.7/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/fftw/3.3.11/include -I/opt/homebrew/Cellar/cfitsio/4.7.0/include -I/opt/homebrew/Cellar/libimagequant/4.4.1/include -I/opt/homebrew/Cellar/cgif/0.5.4/include -I/opt/homebrew/Cellar/libexif/0.6.26/include -I/opt/homebrew/Cellar/libultrahdr/2.0.2/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/Cellar/librsvg/2.63.2/include/librsvg-2.0 -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/cairo/1.18.6/include -I/opt/homebrew/Cellar/pango/1.58.2/include/pango-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/fribidi/1.0.17/include/fribidi -I/opt/homebrew/Cellar/libthai/0.1.30/include -I/opt/homebrew/Cellar/libdatrie/0.2.14/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/graphite2/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -I/opt/homebrew/Cellar/libmatio/1.5.30_1/include -I/opt/homebrew/opt/hdf5/include -I/opt/homebrew/Cellar/openexr/3.5.1/include -I/opt/homebrew/Cellar/openexr/3.5.1/include/OpenEXR -pthread -I/opt/homebrew/Cellar/imath/3.2.3/include -I/opt/homebrew/Cellar/imath/3.2.3/include/Imath -I/opt/homebrew/Cellar/libdeflate/1.26/include -I/opt/homebrew/Cellar/openjph/0.32.0/include -D_FILE_OFFSET_BITS=64 -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/libraw/0.22.2/include/libraw -I/opt/homebrew/Cellar/libraw/0.22.2/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/Cellar/openjpeg/2.5.4/include/openjpeg-2.5 -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -L/opt/homebrew/Cellar/vips/8.18.7/lib -lvips -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/vips",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/vips.c -I/opt/homebrew/Cellar/vips/8.18.7/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/fftw/3.3.11/include -I/opt/homebrew/Cellar/cfitsio/4.7.0/include -I/opt/homebrew/Cellar/libimagequant/4.4.1/include -I/opt/homebrew/Cellar/cgif/0.5.4/include -I/opt/homebrew/Cellar/libexif/0.6.26/include -I/opt/homebrew/Cellar/libultrahdr/2.0.2/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/Cellar/librsvg/2.63.2/include/librsvg-2.0 -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/cairo/1.18.6/include -I/opt/homebrew/Cellar/pango/1.58.2/include/pango-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/fribidi/1.0.17/include/fribidi -I/opt/homebrew/Cellar/libthai/0.1.30/include -I/opt/homebrew/Cellar/libdatrie/0.2.14/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/graphite2/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -I/opt/homebrew/Cellar/libmatio/1.5.30_1/include -I/opt/homebrew/opt/hdf5/include -I/opt/homebrew/Cellar/openexr/3.5.3_1/include -I/opt/homebrew/Cellar/openexr/3.5.3_1/include/OpenEXR -pthread -I/opt/homebrew/Cellar/imath/3.2.3/include -I/opt/homebrew/Cellar/imath/3.2.3/include/Imath -I/opt/homebrew/Cellar/libdeflate/1.26/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/libraw/0.22.2/include/libraw -I/opt/homebrew/Cellar/libraw/0.22.2/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/Cellar/openjpeg/2.5.4/include/openjpeg-2.5 -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -L/opt/homebrew/Cellar/vips/8.18.7/lib -lvips -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/vips",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/vips /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
       "output": {
         "width": 2,
@@ -215,6 +235,102 @@
       "control": "controls/png/red-green.png",
       "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/pngle /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/pngle.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/pngle/pngle.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/pngle/miniz.c -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/pngle",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/pngle /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3",
+      "version": "3.4.20",
+      "control": "controls/png/red-green.png",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/sdl3.c -I/opt/homebrew/include -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/sdl3",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/sdl3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3_image",
+      "version": "3.4.8",
+      "control": "controls/png/red-green.png",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/sdl3_image.c -I/opt/homebrew/Cellar/sdl3_image/3.4.8_1/include -I/opt/homebrew/include -I/opt/homebrew/Cellar/libavif/1.4.2/include -DAVIF_DLL -I/opt/homebrew/Cellar/dav1d/1.5.4/include -I/opt/homebrew/Cellar/aom/3.15.3/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include/libvmaf -I/opt/homebrew/opt/jpeg-xl/include -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -L/opt/homebrew/Cellar/sdl3_image/3.4.8_1/lib -lSDL3_image -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/sdl3_image",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/sdl3_image /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2_image",
+      "version": "2.8.12",
+      "control": "controls/png/red-green.png",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/sdl2_image.c -I/opt/homebrew/include/SDL2 -I/opt/homebrew/include -D_THREAD_SAFE -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/jpeg-xl/include -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/libavif/1.4.2/include -DAVIF_DLL -I/opt/homebrew/Cellar/dav1d/1.5.4/include -I/opt/homebrew/Cellar/aom/3.15.3/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include/libvmaf -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -L/opt/homebrew/Cellar/sdl2_image/2.8.12_2/lib -lSDL2_image -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/sdl2_image",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/sdl2_image /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "freeimage",
+      "version": "3.18.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "cc -std=c11 -O2 -I/opt/homebrew/Cellar/freeimage/3.18.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/freeimage.c -L/opt/homebrew/Cellar/freeimage/3.18.0/lib -lfreeimage -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/freeimage",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/freeimage /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
       "output": {
         "width": 2,
         "height": 1,

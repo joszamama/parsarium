@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T07:01:25.075362+00:00",
+  "captured_at_utc": "2026-11-12T07:10:12.952923+00:00",
   "search_surface": "Conan Center Index recipes tree, exact GitHub API response; project documentation used for targeted leads beyond recipe-name search",
   "search_index_api": "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1",
   "search_limit_per_query": 100,
@@ -143,13 +143,41 @@
       "source_url": "https://github.com/kikuchan/pngle/archive/refs/tags/v1.1.0.tar.gz",
       "source_sha256": "ebdd8254445b07d59ca8cceafe49d2dfd71f5f57f2440d351f3006e134a5d5b6",
       "license_evidence": "https://github.com/kikuchan/pngle/blob/v1.1.0/LICENSE"
+    },
+    "sdl3": {
+      "version": "3.4.20",
+      "license": "Zlib",
+      "source_url": "https://github.com/libsdl-org/SDL/releases/download/release-3.4.20/SDL3-3.4.20.tar.gz",
+      "source_sha256": "f3bb06f55bed9557227a700af2ea62e49497ebdf58037732a731a5fb3ef8581f",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sdl3.json"
+    },
+    "sdl3_image": {
+      "version": "3.4.8",
+      "license": "Zlib",
+      "source_url": "https://github.com/libsdl-org/SDL_image/releases/download/release-3.4.8/SDL3_image-3.4.8.tar.gz",
+      "source_sha256": "e8223b424bc7541cf84ffff5cf7e4f24ec3711c60462cb1bd6dc1d7bd7f25477",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sdl3_image.json"
+    },
+    "sdl2_image": {
+      "version": "2.8.12",
+      "license": "Zlib",
+      "source_url": "https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.12/SDL2_image-2.8.12.tar.gz",
+      "source_sha256": "393f5efb50536ec13ca4f4affb69cc9966d3c3f969e6c5e701faddf9f9785381",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_image.json"
+    },
+    "freeimage": {
+      "version": "3.18.0",
+      "license": "FreeImage",
+      "source_url": "https://downloads.sourceforge.net/project/freeimage/Source%20Distribution/3.18.0/FreeImage3180.zip",
+      "source_sha256": "f41379682f9ada94ea7b34fe86bf9ee00935a3147be41b6569c9605a53e438fd",
+      "license_evidence": "https://formulae.brew.sh/api/formula/freeimage.json"
     }
   },
   "popularity_metric": {
     "name": "GitHub repository stargazers_count",
     "source": "GitHub REST repository API",
-    "captured_at_utc": "2026-11-12T07:01:25.075362+00:00",
-    "limitation": "Repository stars are an adoption proxy, not package downloads. Values are compared only within C. GNOME gdk-pixbuf is unranked because its primary upstream is GitLab; GitHub mirror stars would be a different signal. Recipe-name hits are discovery, not this ranking.",
+    "captured_at_utc": "2026-11-12T07:07:39.094687+00:00",
+    "limitation": "Repository stars are an adoption proxy, not package downloads. Values are compared only within C. GNOME gdk-pixbuf and SourceForge FreeImage are unranked because their primary upstreams are not GitHub; mirror stars would be a different signal. SDL2_image and SDL3_image share a project and its star count. Recipe-name hits are discovery, not this ranking.",
     "packages": {
       "libpng": {
         "repository": "pnggroup/libpng",
@@ -191,6 +219,27 @@
         "repository": "kikuchan/pngle",
         "stars": 141,
         "url": "https://api.github.com/repos/kikuchan/pngle"
+      },
+      "sdl3": {
+        "repository": "libsdl-org/SDL",
+        "stars": 16974,
+        "url": "https://api.github.com/repos/libsdl-org/SDL"
+      },
+      "sdl3_image": {
+        "repository": "libsdl-org/SDL_image",
+        "stars": 997,
+        "url": "https://api.github.com/repos/libsdl-org/SDL_image"
+      },
+      "sdl2_image": {
+        "repository": "libsdl-org/SDL_image",
+        "stars": 997,
+        "url": "https://api.github.com/repos/libsdl-org/SDL_image"
+      },
+      "freeimage": {
+        "repository": null,
+        "stars": null,
+        "url": "https://sourceforge.net/projects/freeimage/",
+        "reason": "Primary project is SourceForge; no comparable GitHub primary-repository stars."
       }
     }
   },
@@ -218,6 +267,30 @@
       "url": "https://github.com/kikuchan/pngle/blob/v1.1.0/src/pngle.h",
       "candidate": "pngle",
       "finding": "Tagged header documents byte feed, dimensions and draw callback."
+    },
+    {
+      "query": "SDL3 SDL_LoadPNG file",
+      "url": "https://wiki.libsdl.org/SDL3/SDL_LoadPNG",
+      "candidate": "sdl3",
+      "finding": "Official SDL3 C API accepts a PNG filename and returns a surface."
+    },
+    {
+      "query": "SDL3_image IMG_Load PNG",
+      "url": "https://wiki.libsdl.org/SDL3_image/IMG_Load",
+      "candidate": "sdl3_image",
+      "finding": "Official SDL_image 3 C API accepts a local filename; PNG support is documented."
+    },
+    {
+      "query": "SDL2_image IMG_Load PNG",
+      "url": "https://wiki.libsdl.org/SDL2_image/IMG_Load",
+      "candidate": "sdl2_image",
+      "finding": "Official SDL_image 2 C API accepts a local filename; PNG support is documented."
+    },
+    {
+      "query": "FreeImage C PNG FreeImage_Load",
+      "url": "https://freeimage.sourceforge.io/faq.html",
+      "candidate": "freeimage",
+      "finding": "Official FAQ shows FreeImage_Load(FIF_PNG, local filename) and dimensions from the returned image."
     }
   ]
 }
