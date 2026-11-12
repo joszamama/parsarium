@@ -118,5 +118,53 @@
     "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
     "family": "FFmpeg WAV demuxer and PCM decoder",
     "family_note": "FFmpeg libavformat/libavcodec pair; installed Homebrew build is GPL-enabled."
+  },
+  {
+    "name": "sox",
+    "version": "14.4.2",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sox.json",
+    "documentation": "https://github.com/chirlu/sox/blob/master/libsox.3",
+    "input_api": "sox_init; sox_open_read(local WAV path); sox_read decoded samples; sox_sample_t conversion; sox_close",
+    "adapter": "adapters/c/wav/sox.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "SoX libsox WAV reader",
+    "family_note": "SoX public libsox audio file API reads RIFF/WAVE and decoded samples; pinned source release is the primary SourceForge package."
+  },
+  {
+    "name": "sdl3",
+    "version": "3.4.20",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3.json",
+    "documentation": "https://wiki.libsdl.org/SDL3/SDL_LoadWAV",
+    "input_api": "SDL_LoadWAV(local WAV path, SDL_AudioSpec*, Uint8**, Uint32*); SDL_free decoded PCM buffer",
+    "adapter": "adapters/c/wav/sdl3.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "SDL3 WAV loader",
+    "family_note": "SDL3 core WAV-specific loading API; separate package and parser path from SDL_mixer, which remains unresolved."
   }
 ]

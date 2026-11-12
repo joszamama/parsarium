@@ -140,13 +140,27 @@
       "source_url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
       "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
       "license_evidence": "https://formulae.brew.sh/api/formula/ffmpeg.json"
+    },
+    "sox": {
+      "version": "14.4.2",
+      "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+      "source_url": "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz",
+      "source_sha256": "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sox.json"
+    },
+    "sdl3": {
+      "version": "3.4.20",
+      "license": "Zlib",
+      "source_url": "https://github.com/libsdl-org/SDL/releases/download/release-3.4.20/SDL3-3.4.20.tar.gz",
+      "source_sha256": "f3bb06f55bed9557227a700af2ea62e49497ebdf58037732a731a5fb3ef8581f",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sdl3.json"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -172,12 +186,29 @@
         "stars": 67107,
         "repository": "https://github.com/FFmpeg/FFmpeg",
         "source": "https://api.github.com/repos/FFmpeg/FFmpeg"
+      },
+      "sox": {
+        "stars": null,
+        "repository": null,
+        "source": null,
+        "reason": "Primary SourceForge project has no directly comparable primary GitHub repository star count; mirror stars are not borrowed."
+      },
+      "sdl3": {
+        "stars": 16973,
+        "repository": "https://github.com/libsdl-org/SDL",
+        "source": "https://api.github.com/repos/libsdl-org/SDL"
       }
-    }
+    },
+    "captured_between_utc": [
+      "2026-11-12T10:25:21.715408+00:00",
+      "2026-11-12T10:30:14.556432+00:00"
+    ]
   },
   "targeted_documentation": [
     "https://libsndfile.github.io/libsndfile/api.html",
     "https://github.com/raysan5/raylib/blob/6.2/src/raylib.h",
-    "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html"
+    "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
+    "https://github.com/chirlu/sox/blob/master/libsox.3",
+    "https://wiki.libsdl.org/SDL3/SDL_LoadWAV"
   ]
 }

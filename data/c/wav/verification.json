@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T10:25:31.567399+00:00",
+  "checked_at_utc": "2026-11-12T10:30:29.878417+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "installed_libraries": {
@@ -25,6 +25,18 @@
           "sha256": "9ce2e6d93ef08a6674ff50a9ab329694c398e8280779c43e7eaffc6fe067db9a"
         }
       ]
+    },
+    "sox": {
+      "pkg_config_version": "14.4.2",
+      "library": "/opt/homebrew/Cellar/sox/14.4.2_6/lib/libsox.3.dylib",
+      "library_sha256": "53d270cce1b5f1f0b751ecb8e8672a9ec9c5e595437487778e3afbf60a6493d4",
+      "additional_libraries": []
+    },
+    "sdl3": {
+      "pkg_config_version": "3.4.20",
+      "library": "/opt/homebrew/Cellar/sdl3/3.4.20/lib/libSDL3.dylib",
+      "library_sha256": "10e099afe070ee62ff19cf990712b0df92e3e28a84116cc96756257d9dcdb892",
+      "additional_libraries": []
     }
   },
   "source_builds": {
@@ -138,6 +150,44 @@
       "control": "controls/wav/four-samples.wav",
       "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2/lib -lavformat -lavcodec -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sox",
+      "version": "14.4.2",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/sox.c -I/opt/homebrew/Cellar/sox/14.4.2_6/include -L/opt/homebrew/Cellar/sox/14.4.2_6/lib -lsox -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sox",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sox /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3",
+      "version": "3.4.20",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/sdl3.c -I/opt/homebrew/include -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl3",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
       "output": {
         "sample_rate": 8000,
         "channels": 1,

@@ -163,13 +163,14 @@ The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
 
 The C × WAV verifier builds the pinned `dr_wav` and miniaudio sources and checks
-exact-release, binary-hashed libsndfile, raylib, and FFmpeg libraries. All
-**5/5 third-party package paths passed** the shared valid four-sample PCM WAV
+exact-release, binary-hashed libsndfile, raylib, FFmpeg, SoX, and SDL3 libraries. All
+**7/7 third-party package paths passed** the shared valid four-sample PCM WAV
 control, returning parsed sample rate, channels, frame count, and four samples.
-This remains 15 below the working goal. The [C WAV cell](data/c/wav/cell.json)
-records the bounded Conan Center recipe search, four unresolved leads, and
+This remains 13 below the working goal. The [C WAV cell](data/c/wav/cell.json)
+records the bounded Conan Center recipe search, three unresolved leads, and
 shared `dr_wav` lineage. Its [ranking](data/c/wav/ranking.md) uses only primary
-GitHub repository stars within C. The ISO C standard library has no WAV parser.
+GitHub repository stars within C; SoX remains unranked. The ISO C standard
+library has no WAV parser.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
 C++ call sites for the same twelve packages and ten pinned C++ libraries. All
