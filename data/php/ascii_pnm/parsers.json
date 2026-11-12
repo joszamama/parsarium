@@ -351,5 +351,62 @@
     "family": "ImageMagick PNM decoder",
     "family_note": "The package uses PECL Imagick and installed ImageMagick to decode P3. The README lists common formats but not PNM; this pinned release accepts the valid P3 control through its documented local-path API.",
     "requires_imagick": true
+  },
+  {
+    "name": "tpmanc/yii2-imagick",
+    "version": "1.3.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/tpmanc/yii2-imagick/blob/be5f3c1dc1b1f18acde1f4672bf6d4dc77f2fd1a/composer.json",
+    "documentation": "https://github.com/tpmanc/yii2-imagick/blob/be5f3c1dc1b1f18acde1f4672bf6d4dc77f2fd1a/README.md",
+    "input_api": "tpmanc\\imagick\\Imagick::open(local P3 file); getWidth/getHeight",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/extension_wrappers/composer.lock",
+    "requires_imagick": true,
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "The package delegates ASCII P3 decoding to PECL Imagick and ImageMagick."
+  },
+  {
+    "name": "horde/image",
+    "version": "v3.0.0",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://github.com/horde/Image/blob/a7686307adba2f25f32be6b219d51742fb338ba6/LICENSE",
+    "documentation": "https://github.com/horde/Image/blob/a7686307adba2f25f32be6b219d51742fb338ba6/doc/USAGE.md",
+    "input_api": "Horde\\Image\\Driver\\ImagickDriver::loadFile(local P3 file); size()",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/extension_wrappers/composer.lock",
+    "requires_imagick": true,
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "The package delegates ASCII P3 decoding to PECL Imagick and ImageMagick."
+  },
+  {
+    "name": "intervention/image-laravel",
+    "version": "4.1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Intervention/image-laravel/blob/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2/LICENSE",
+    "documentation": "https://github.com/Intervention/image-laravel/blob/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2/src/Facades/Image.php",
+    "input_api": "Laravel Image facade::decodePath(local P3 file) using the package service provider and Imagick driver; width/height",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/laravel_wrapper/composer.lock",
+    "requires_imagick": true,
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "The Laravel integration package registers a facade that delegates ASCII P3 decoding to Intervention Image and PECL Imagick/ImageMagick. The adapter supplies a minimal pinned Illuminate container, config repository, and config helper."
   }
 ]

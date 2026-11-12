@@ -16,6 +16,10 @@ if ($package === 'pecl/imagick') {
     require __DIR__ . '/image_pipeline/vendor/autoload.php';
 } elseif (in_array($package, ['php-ffmpeg/php-ffmpeg', 'phphleb/imageresizer'], true)) {
     require __DIR__ . '/media_pipeline/vendor/autoload.php';
+} elseif (in_array($package, ['tpmanc/yii2-imagick', 'horde/image'], true)) {
+    require __DIR__ . '/extension_wrappers/vendor/autoload.php';
+} elseif ($package === 'intervention/image-laravel') {
+    require __DIR__ . '/laravel_wrapper/vendor/autoload.php';
 } else {
     require __DIR__ . '/vendor/autoload.php';
 }
@@ -152,6 +156,31 @@ switch ($package) {
             throw new RuntimeException('Imagick processor did not decode the PNM control');
         }
         $output = ['width' => $image->getWidth(), 'height' => $image->getHeight()];
+        break;
+    case 'tpmanc/yii2-imagick':
+        $image = \tpmanc\imagick\Imagick::open($path);
+        $output = ['width' => $image->getWidth(), 'height' => $image->getHeight()];
+        break;
+    case 'horde/image':
+        $image = (new \Horde\Image\Driver\ImagickDriver())->loadFile($path);
+        $size = $image->size();
+        $output = ['width' => (int) $size->width, 'height' => (int) $size->height];
+        break;
+    case 'intervention/image-laravel':
+        // The provider expects Laravel's global config() helper; this adapter supplies
+        // the same lookup through the pinned Illuminate Config repository.
+        function config($key, $default = null) {
+            return \Illuminate\Container\Container::getInstance()->make('config')->get($key, $default);
+        }
+        $app = new \Illuminate\Container\Container();
+        \Illuminate\Container\Container::setInstance($app);
+        \Illuminate\Support\Facades\Facade::setFacadeApplication($app);
+        $app->instance('config', new \Illuminate\Config\Repository([
+            'intervention-image' => ['driver' => \Intervention\Image\Drivers\Imagick\Driver::class],
+        ]));
+        (new \Intervention\Image\Laravel\ServiceProvider($app))->register();
+        $image = \Intervention\Image\Laravel\Facades\Image::decodePath($path);
+        $output = ['width' => $image->width(), 'height' => $image->height()];
         break;
     default:
         throw new InvalidArgumentException('unknown ASCII PNM package: ' . $package);
