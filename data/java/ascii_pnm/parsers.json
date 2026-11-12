@@ -192,5 +192,89 @@
       "height": 1
     },
     "adapter_label": "imagic-ffmpeg-java"
+  },
+  {
+    "name": "jave-core",
+    "group": "ws.schild",
+    "artifact": "jave-core",
+    "version": "4.2.0",
+    "license": "GPL-3.0-only",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new MultimediaObject(File localPpm).getInfo().getVideo().getSize()",
+    "documentation": "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar",
+    "documentation_archive_entry": "ws/schild/jave/MultimediaObject.html",
+    "family": "JAVE2 wrapper over bundled FFmpeg PPM decoder",
+    "scope": "ASCII P3 PPM demuxer format and dimensions",
+    "adapter_module": "jave",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "format": "ppm_pipe",
+      "width": 2,
+      "height": 1
+    },
+    "adapter_label": "jave-core"
+  },
+  {
+    "name": "lafa-imageio-pnm",
+    "group": "com.github.lafa.twelvemonkeyspurejava.imageio",
+    "artifact": "imageio-pnm",
+    "version": "1.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven parent com.github.lafa.twelvemonkeyspurejava:twelvemonkeys:1.0 POM license",
+    "input_api": "ImageIO.getImageReaders(ImageInputStream local file); PNMImageReader.read(0)",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/lafa/twelvemonkeyspurejava/imageio/imageio-pnm/1.0/imageio-pnm-1.0.pom",
+    "input_api_documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/ImageReader.html",
+    "family": "Lafa fork of TwelveMonkeys PNM ImageIO plugin",
+    "scope": "ASCII P3 PPM dimensions and red/green pixels; isolated fork classpath",
+    "adapter_module": "lafa",
+    "adapter_label": "lafa-imageio-pnm",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "reader": "com.twelvemonkeys.imageio.plugins.pnm.PNMImageReader",
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
+  },
+  {
+    "name": "ijp-imageio",
+    "group": "net.sf.ij-plugins",
+    "artifact": "ijp_imageio",
+    "version": "2.3.1",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Maven POM license and project License.txt",
+    "input_api": "IJImageIO.read(File localPpm) with installed JAI ImageIO PNM provider",
+    "documentation": "https://github.com/ij-plugins/ijp-imageio/blob/master/src/main/java/ij_plugins/imageio/IJImageIO.java",
+    "format_documentation": "https://github.com/ij-plugins/ijp-imageio#overview",
+    "family": "IJ Plugins ImageIO wrapper over JAI PNM ImageIO provider",
+    "scope": "ASCII P3 PPM dimensions and red/green pixels",
+    "adapter_module": "ijp",
+    "adapter_label": "ijp-imageio",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
+  },
+  {
+    "name": "im4java",
+    "group": "org.im4java",
+    "artifact": "im4java",
+    "version": "1.4.0",
+    "license": "LGPL-2.1",
+    "license_evidence": "Maven POM license",
+    "input_api": "new Info(String localPpmPath,true).getImageFormat()/getImageWidth()/getImageHeight()",
+    "documentation": "https://im4java.sourceforge.net/docs/dev-guide.html",
+    "family": "im4java wrapper over host ImageMagick Netpbm decoder",
+    "scope": "ASCII P3 PPM format and dimensions",
+    "adapter_module": "im4java",
+    "adapter_label": "im4java",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "format": "PPM",
+      "width": 2,
+      "height": 1
+    }
   }
 ]

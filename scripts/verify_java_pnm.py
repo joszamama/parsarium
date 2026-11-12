@@ -30,6 +30,12 @@ def main() -> None:
         tool = snapshot["external_tools"]["ffprobe"]
         assert sha256(ffprobe.read_bytes()).hexdigest() == tool["sha256"]
         assert run([str(ffprobe), "-version"]).stdout.splitlines()[0] == tool["version"]
+    identify = Path(os.environ.get("PARSARIUM_IMAGEMAGICK_DIR", "/opt/homebrew/bin")) / "identify"
+    if any(parser.get("adapter_module") == "im4java" for parser in parsers):
+        tool = snapshot["external_tools"]["imagemagick_identify"]
+        assert sha256(identify.read_bytes()).hexdigest() == tool["sha256"]
+        assert run([str(identify), "-version"]).stdout.splitlines()[0] == tool["version"]
+        os.environ["PATH"] = str(identify.parent) + os.pathsep + os.environ.get("PATH", "")
 
     module_jars = {}
     for module in sorted({parser.get("adapter_module", "main") for parser in parsers}):
@@ -73,9 +79,11 @@ def main() -> None:
             command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
                        "org.parsarium.FfmpegPnmAdapter", label, str(CONTROL)]
             display = f"java -Djava.awt.headless=true -cp <locked {module} classpath> org.parsarium.FfmpegPnmAdapter {label} {parser['control']}"
-        elif module in {"jaffree", "bramp", "v47", "imagic"}:
+        elif module in {"jaffree", "bramp", "v47", "imagic", "jave", "lafa", "ijp", "im4java"}:
             classes = {"jaffree": "JaffreePnmAdapter", "bramp": "BrampPnmAdapter",
-                       "v47": "V47PnmAdapter", "imagic": "ImagicPnmAdapter"}
+                       "v47": "V47PnmAdapter", "imagic": "ImagicPnmAdapter",
+                       "jave": "JavePnmAdapter", "lafa": "LafaPnmAdapter",
+                       "ijp": "IjpPnmAdapter", "im4java": "Im4javaPnmAdapter"}
             classpath = str(ADAPTER / module / "target/classes") + ":" + ":".join(str(jar) for jar in module_jars[module])
             command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
                        f"org.parsarium.{classes[module]}", str(CONTROL)]
@@ -106,7 +114,8 @@ def main() -> None:
                               "classpath_jars": {module: len(jars) for module, jars in module_jars.items()},
                               "libvips": run(["vips", "--version"]).stdout.strip(),
                               "imagemagick": run(["magick", "-version"]).stdout.splitlines()[0],
-                              "ffprobe": run([str(ffprobe), "-version"]).stdout.splitlines()[0]},
+                              "ffprobe": run([str(ffprobe), "-version"]).stdout.splitlines()[0],
+                              "imagemagick_identify": run([str(identify), "-version"]).stdout.splitlines()[0]},
               "control": "controls/ascii_pnm/red-green.ppm", "control_sha256": control_hash,
               "control_meaning": "Valid ASCII P3 PPM with two red/green pixels",
               "third_party": rows, "runtime": [],

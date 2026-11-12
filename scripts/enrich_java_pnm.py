@@ -74,6 +74,12 @@ def main() -> None:
         "version": subprocess.run([str(ffprobe), "-version"], text=True,
                                   capture_output=True, check=True).stdout.splitlines()[0],
         "sha256": sha256(ffprobe.read_bytes()).hexdigest()}}
+    identify = Path(os.environ.get("PARSARIUM_IMAGEMAGICK_DIR", "/opt/homebrew/bin")) / "identify"
+    snapshot["external_tools"]["imagemagick_identify"] = {
+        "path": str(identify),
+        "version": subprocess.run([str(identify), "-version"], text=True,
+                                  capture_output=True, check=True).stdout.splitlines()[0],
+        "sha256": sha256(identify.read_bytes()).hexdigest()}
     (DATA / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
     total_jars = 0
     for module in sorted({parser.get("adapter_module", "main") for parser in parsers}):

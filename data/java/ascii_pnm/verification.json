@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T20:30:12.696406+00:00",
+  "checked_at_utc": "2026-11-12T20:37:21.675834+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
@@ -7,8 +7,12 @@
     "classpath_jars": {
       "bramp": 12,
       "ffmpeg": 5,
+      "ijp": 3,
+      "im4java": 1,
       "imagic": 3,
       "jaffree": 3,
+      "jave": 3,
+      "lafa": 5,
       "magick": 2,
       "main": 44,
       "v47": 7,
@@ -16,7 +20,8 @@
     },
     "libvips": "vips-8.18.7",
     "imagemagick": "Version: ImageMagick 7.1.2-35 Q16-HDRI aarch64 acaf7e418:20261031 https://imagemagick.org",
-    "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers"
+    "ffprobe": "ffprobe version 9.0.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "imagemagick_identify": "Version: ImageMagick 7.1.2-35 Q16-HDRI aarch64 acaf7e418:20261031 https://imagemagick.org"
   },
   "control": "controls/ascii_pnm/red-green.ppm",
   "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
@@ -213,6 +218,55 @@
       },
       "pass": true,
       "command": "java -Djava.awt.headless=true -cp <locked imagic classpath> org.parsarium.ImagicPnmAdapter controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "jave-core",
+      "version": "4.2.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "format": "ppm_pipe",
+        "width": 2,
+        "height": 1
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked jave classpath> org.parsarium.JavePnmAdapter controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "lafa-imageio-pnm",
+      "version": "1.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "reader": "com.twelvemonkeys.imageio.plugins.pnm.PNMImageReader",
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked lafa classpath> org.parsarium.LafaPnmAdapter controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "ijp-imageio",
+      "version": "2.3.1",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked ijp classpath> org.parsarium.IjpPnmAdapter controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "im4java",
+      "version": "1.4.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "format": "PPM",
+        "width": 2,
+        "height": 1
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked im4java classpath> org.parsarium.Im4javaPnmAdapter controls/ascii_pnm/red-green.ppm"
     }
   ],
   "runtime": [],
