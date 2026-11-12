@@ -1,11 +1,12 @@
 {
-  "checked_at_utc": "2026-11-12T09:44:31.226725+00:00",
+  "checked_at_utc": "2026-11-12T09:50:17.022791+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php_version": "8.5.12",
   "gd_version": "2.3.3",
+  "libvips_version": "8.18.7",
   "composer_version": "Composer version 2.11.2 2026-11-10 10:09:37",
   "composer_lock": "adapters/php/png/composer.lock",
-  "composer_lock_sha256": "1f7a6aea09c69754b2361d6153ccf6ca455c0abbefd52595c511e5025142d4f1",
+  "composer_lock_sha256": "6eaa2e3d834dc64973622429e6f450742802f6d8da4109883aac7e9bd4c2a94a",
   "control": "controls/png/red-green.png",
   "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
   "third_party": [
@@ -114,6 +115,65 @@
       "output": {
         "width": 2,
         "height": 1
+      },
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "package": "jcupitt/vips",
+      "version": "v2.6.1",
+      "composer_lock": "adapters/php/png/composer.lock",
+      "source_reference": "6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee",
+      "control": "controls/png/red-green.png",
+      "command": "php -d display_errors=0 -d ffi.enable=1 -d zend.max_allowed_stack_size=-1 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/png/jcupitt_vips.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "package": "league/color-extractor",
+      "version": "0.4.0",
+      "composer_lock": "adapters/php/png/composer.lock",
+      "source_reference": "21fcac6249c5ef7d00eb83e128743ee6678fe505",
+      "control": "controls/png/red-green.png",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/png/league_color_extractor.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "colors": {
+          "#00ff00": 1,
+          "#ff0000": 1
+        }
+      },
+      "stderr": "PHP Deprecated:  Function imagedestroy() is deprecated since 8.5, as it has no effect since PHP 8.0 in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/png/vendor/league/color-extractor/src/Palette.php on line 110",
+      "pass": true
+    },
+    {
+      "package": "league/glide",
+      "version": "4.1.0",
+      "composer_lock": "adapters/php/png/composer.lock",
+      "source_reference": "54643c4c55ce6dc7f8a11d9c643340051d54c4d9",
+      "control": "controls/png/red-green.png",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/png/league_glide.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "package": "rosell-dk/webp-convert",
+      "version": "2.9.5",
+      "composer_lock": "adapters/php/png/composer.lock",
+      "source_reference": "bce87de61cff098e899a91960f9fdb08e8867194",
+      "control": "controls/png/red-green.png",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/png/rosell_webp_convert.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "output_type": 18
       },
       "stderr": "",
       "pass": true

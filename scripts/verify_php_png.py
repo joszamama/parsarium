@@ -40,11 +40,13 @@ def main() -> None:
         installed = locked[name]
         assert parser["version"] == release["version"] == installed["version"]
         assert release["source_reference"] == installed["source"]["reference"]
-        command = ["php", "-d", "display_errors=0", str(ROOT / parser["adapter"]), str(CONTROL)]
+        command = ["php", "-d", "display_errors=0"]
+        for setting in parser.get("php_ini", []):
+            command += ["-d", setting]
+        command += [str(ROOT / parser["adapter"]), str(CONTROL)]
         run = execute(command)
         output = json.loads(run.stdout)
         assert output == parser["expected_output"], name
-        assert output["width"] == 2 and output["height"] == 1, name
         rows.append({"package": name, "version": parser["version"],
                      "composer_lock": parser["composer_lock"],
                      "source_reference": installed["source"]["reference"],
@@ -64,9 +66,13 @@ def main() -> None:
         print(f"{api['name']}: runtime passed")
 
     versions = json.loads(execute(["php", "-r", "echo json_encode([PHP_VERSION, gd_info()['GD Version']]);"]).stdout)
+    libvips_version = execute([
+        "php", "-d", "ffi.enable=1", "-d", "zend.max_allowed_stack_size=-1",
+        "-r", "require 'adapters/php/png/vendor/autoload.php'; echo \\Jcupitt\\Vips\\Config::version();",
+    ]).stdout
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "php_version": versions[0],
-              "gd_version": versions[1],
+              "gd_version": versions[1], "libvips_version": libvips_version,
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "composer_lock": "adapters/php/png/composer.lock",
               "composer_lock_sha256": sha256(lock_path.read_bytes()).hexdigest(),

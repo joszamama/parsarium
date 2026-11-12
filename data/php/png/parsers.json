@@ -79,7 +79,7 @@
     },
     "scope": "decoded image dimensions",
     "family": "PHP GD PNG decoder",
-    "family_note": "The adapter selects Spatie’s GD driver, which delegates PNG decoding to PHP GD."
+    "family_note": "The adapter selects Spatie\u2019s GD driver, which delegates PNG decoding to PHP GD."
   },
   {
     "name": "marc1706/fast-image-size",
@@ -134,6 +134,85 @@
     },
     "scope": "decoded image dimensions",
     "family": "PHP GD PNG decoder",
-    "family_note": "The adapter uses Gregwar’s GD backend to decode the PNG."
+    "family_note": "The adapter uses Gregwar\u2019s GD backend to decode the PNG."
+  },
+  {
+    "name": "jcupitt/vips",
+    "version": "v2.6.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/libvips/php-vips/blob/6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee/LICENSE.txt",
+    "documentation": "https://github.com/libvips/php-vips/blob/6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee/README.md",
+    "input_api": "Image::newFromFile(local PNG path); width/height fields",
+    "adapter": "adapters/php/png/jcupitt_vips.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PNG decoder",
+    "family_note": "PHP FFI binding delegates PNG decoding to installed libvips 8.18.7, a separate family from PHP GD.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "league/color-extractor",
+    "version": "0.4.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thephpleague/color-extractor/blob/21fcac6249c5ef7d00eb83e128743ee6678fe505/LICENSE",
+    "documentation": "https://github.com/thephpleague/color-extractor/blob/21fcac6249c5ef7d00eb83e128743ee6678fe505/README.md",
+    "input_api": "Palette::fromFilename(local PNG path); getMostUsedColors",
+    "adapter": "adapters/php/png/league_color_extractor.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "colors": {
+        "#00ff00": 1,
+        "#ff0000": 1
+      }
+    },
+    "scope": "decoded pixel color histogram",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Uses PHP GD imagecreatefromstring; verifies both control colors and counts."
+  },
+  {
+    "name": "league/glide",
+    "version": "4.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thephpleague/glide/blob/54643c4c55ce6dc7f8a11d9c643340051d54c4d9/LICENSE",
+    "documentation": "https://github.com/thephpleague/glide/blob/54643c4c55ce6dc7f8a11d9c643340051d54c4d9/src/ServerFactory.php",
+    "input_api": "ServerFactory::create with local source; Server::makeImage(PNG filename, parameters)",
+    "adapter": "adapters/php/png/league_glide.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded and re-encoded PNG dimensions",
+    "family": "Intervention Image / PHP GD PNG decoder",
+    "family_note": "Glide delegates to Intervention Image, configured to use PHP GD. This is a package path sharing both the Intervention Image package and GD decoder family."
+  },
+  {
+    "name": "rosell-dk/webp-convert",
+    "version": "2.9.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/rosell-dk/webp-convert/blob/bce87de61cff098e899a91960f9fdb08e8867194/LICENSE",
+    "documentation": "https://github.com/rosell-dk/webp-convert/blob/bce87de61cff098e899a91960f9fdb08e8867194/README.md",
+    "input_api": "WebPConvert::convert(local PNG path, local WebP path, gd converter)",
+    "adapter": "adapters/php/png/rosell_webp_convert.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "output_type": 18
+    },
+    "scope": "PNG decoded to WebP with dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Explicit GD converter decodes local PNG through bundled PHP GD before WebP encoding."
   }
 ]

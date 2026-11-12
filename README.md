@@ -188,14 +188,16 @@ remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
 exact search limits and uncertainty. Reproduction requires PHP 8.5 with zip
 and Phar extensions, plus Composer 2; the verifier installs locked packages.
 
-The PHP × PNG verifier installs seven exact Composer releases from one lockfile.
-All **7/7 third-party paths and 4/4 bundled PHP APIs passed** the valid 2×1
-red/green PNG control. Six packages use PHP GD for decoding; FastImageSize reads
-PNG dimensions from headers in PHP. The bundled API inventory keeps
-header dimension readers separate from pixel decoders. Three Packagist searches
-saved 300 discovery hits; five documentation leads remain unresolved. The
+The PHP × PNG verifier installs eleven exact Composer releases from one lockfile.
+All **11/11 third-party paths and 4/4 bundled PHP APIs passed** the valid 2×1
+red/green PNG control. Nine paths use PHP GD for decoding, including Glide
+through Intervention Image. FastImageSize reads PNG dimensions from headers in
+PHP; php-vips uses installed libvips 8.18.7 through PHP FFI. The bundled API
+inventory keeps header dimension readers separate from pixel decoders. Three
+Packagist searches saved 300 discovery hits; three documentation leads remain unresolved. The
 [PHP PNG cell summary](data/php/png/cell.json) records the search limits and
-uncertainty. Reproduction requires PHP 8.5 with GD and Composer 2.
+uncertainty. Reproduction requires PHP 8.5 with GD and FFI, libvips 8.18.7,
+and Composer 2.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
