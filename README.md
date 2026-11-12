@@ -163,12 +163,12 @@ The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
 
 The C × WAV verifier builds pinned `dr_wav`, miniaudio, and Audio File Library
-sources and checks
-exact-release, binary-hashed libsndfile, raylib, FFmpeg, SoX, SDL3,
-SDL3_mixer, and aubio libraries. All **10/10 third-party package paths passed**
-the shared valid four-sample PCM WAV control. Nine returned parsed format values
-and four decoded samples; SDL3_mixer returned format values and duration. This
-remains 10 below the working goal. The [C WAV cell](data/c/wav/cell.json) records the
+sources and checks exact-release, binary-hashed libsndfile, raylib, FFmpeg, SoX,
+SDL3, SDL3_mixer, aubio, CSFML, and Allegro libraries. All **12/12 third-party package
+paths passed** the shared valid
+four-sample PCM WAV control. Eleven returned parsed format values and four decoded
+samples; SDL3_mixer returned format values and duration. This remains 8 below
+the working goal. The [C WAV cell](data/c/wav/cell.json) records the
 bounded Conan Center recipe search, one unresolved lead, and shared `dr_wav`
 and SDL lineage. Its [ranking](data/c/wav/ranking.md) uses only primary
 GitHub repository stars within C; SoX remains unranked. The ISO C standard

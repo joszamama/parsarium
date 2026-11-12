@@ -78,14 +78,25 @@ def main() -> None:
             assert digest == item["local_library_sha256"], name
             for extra in item.get("additional_libraries", []):
                 assert sha256(Path(extra["path"]).read_bytes()).hexdigest() == extra["sha256"]
-            version = run(["pkg-config", "--modversion", item["pkg_config"]])
-            assert version == item["pkg_config_version"], (name, version)
-            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", *item["pkg_configs"]]))
-            command = ["cc", "-std=c11", "-O2", str(ROOT / parser["adapter"]),
-                       *flags, *item.get("extra_link_flags", []), "-o", str(TARGET / name)]
-            installed[name] = {"pkg_config_version": version, "library": str(library),
-                               "library_sha256": digest,
-                               "additional_libraries": item.get("additional_libraries", [])}
+            if name == "csfml":
+                version = run(["brew", "list", "--versions", "csfml"])
+                assert version == "csfml " + item["release"]
+                command = ["cc", "-std=c11", "-O2",
+                           "-I" + str(library.parents[1] / "include"),
+                           str(ROOT / parser["adapter"]), str(library),
+                           "-o", str(TARGET / name)]
+                installed[name] = {"brew_version": version, "library": str(library),
+                                   "library_sha256": digest,
+                                   "additional_libraries": item.get("additional_libraries", [])}
+            else:
+                version = run(["pkg-config", "--modversion", item["pkg_config"]])
+                assert version == item["pkg_config_version"], (name, version)
+                flags = shlex.split(run(["pkg-config", "--cflags", "--libs", *item["pkg_configs"]]))
+                command = ["cc", "-std=c11", "-O2", str(ROOT / parser["adapter"]),
+                           *flags, *item.get("extra_link_flags", []), "-o", str(TARGET / name)]
+                installed[name] = {"pkg_config_version": version, "library": str(library),
+                                   "library_sha256": digest,
+                                   "additional_libraries": item.get("additional_libraries", [])}
         run(command)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))

@@ -233,5 +233,53 @@
     "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
     "family": "aubio source abstraction",
     "family_note": "Distinct C package source API; installed build links Apple AudioToolbox and libsndfile. The exact backend chosen for this control was not isolated, so parser-engine independence is not claimed."
+  },
+  {
+    "name": "csfml",
+    "version": "3.0.0",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/csfml.json",
+    "documentation": "https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h",
+    "input_api": "sfSoundBuffer_createFromFile(local WAV path); sfSoundBuffer_getSamples, getSampleCount, getSampleRate, getChannelCount",
+    "adapter": "adapters/c/wav/csfml.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "CSFML C facade over SFML audio",
+    "family_note": "Official C binding around SFML SoundBuffer. The installed CSFML and SFML audio binaries are both SHA-256-checked; this shares SFML parser implementation rather than adding a new engine."
+  },
+  {
+    "name": "allegro",
+    "version": "5.2.11.3",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/allegro.json",
+    "documentation": "https://liballeg.org/a5docs/5.2.11.3/acodec.html",
+    "input_api": "al_init; al_install_audio; al_init_acodec_addon; al_load_sample(local WAV path); al_get_sample_frequency, channels, length, data",
+    "adapter": "adapters/c/wav/allegro.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "Allegro audio codec WAV loader",
+    "family_note": "Allegro audio codec add-on registers its own WAV loader; official versioned docs list little-endian PCM WAV support. Core, audio and codec add-on binaries are SHA-256-checked."
   }
 ]

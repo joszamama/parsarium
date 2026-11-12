@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T10:42:36.097517+00:00",
+  "checked_at_utc": "2026-11-12T10:48:56.200758+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "installed_libraries": {
@@ -49,6 +49,32 @@
       "library": "/opt/homebrew/Cellar/aubio/0.4.9_4/lib/libaubio.5.4.8.dylib",
       "library_sha256": "148d6cbaff1024b63f6d765c8da935c066abe8a178e0120d4852411bab2209e1",
       "additional_libraries": []
+    },
+    "csfml": {
+      "brew_version": "csfml 3.0.0",
+      "library": "/opt/homebrew/Cellar/csfml/3.0.0/lib/libcsfml-audio.3.0.0.dylib",
+      "library_sha256": "347a3b68bf1a880c2d62c60ee139b3b82aadd9769d03197e9300e91d1cb546d8",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-audio.3.0.2.dylib",
+          "sha256": "5096a0a4672fb4999b433e651107d242df834c6b22a15309e1afc16e8afae4e1"
+        }
+      ]
+    },
+    "allegro": {
+      "pkg_config_version": "5.2.11",
+      "library": "/opt/homebrew/Cellar/allegro/5.2.11.3/lib/liballegro_acodec.5.2.11.dylib",
+      "library_sha256": "454fb1ed61389847d27f5b8f8249e98976c4979f595596dd7ed9199aa984736e",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/allegro/5.2.11.3/lib/liballegro_audio.5.2.11.dylib",
+          "sha256": "8a97a8f55756a58507aac8d479f3a2ebbf8260fd20b6b59905d1248c8a80526a"
+        },
+        {
+          "path": "/opt/homebrew/Cellar/allegro/5.2.11.3/lib/liballegro.5.2.11.dylib",
+          "sha256": "997919aaf00a9f3db186e6495512fe4a337ff582abc0dc39363ee7c89e70fab6"
+        }
+      ]
     }
   },
   "source_builds": {
@@ -69,7 +95,7 @@
       "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
       "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
       "configure_command": "./configure --prefix=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install --disable-static",
-      "library_sha256": "0cd01ca0020c5ae3ab83399f83c60d28e660f5177571cf6972c40cdea1c2bd10"
+      "library_sha256": "8645c37c7e2f892cd83376d8f7da7437d4dcdd6cd6feaa2aac97b65cbe7256c0"
     }
   },
   "control": "controls/wav/four-samples.wav",
@@ -262,6 +288,44 @@
       "control": "controls/wav/four-samples.wav",
       "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/aubio.c -I/opt/homebrew/Cellar/aubio/0.4.9_4/include -L/opt/homebrew/Cellar/aubio/0.4.9_4/lib -laubio -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/aubio",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/aubio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "csfml",
+      "version": "3.0.0",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 -I/opt/homebrew/Cellar/csfml/3.0.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/csfml.c /opt/homebrew/Cellar/csfml/3.0.0/lib/libcsfml-audio.3.0.0.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/csfml",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/csfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "allegro",
+      "version": "5.2.11.3",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/allegro.c -I/opt/homebrew/Cellar/allegro/5.2.11.3/include -L/opt/homebrew/Cellar/allegro/5.2.11.3/lib -lallegro_acodec -lallegro_audio -lallegro -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/allegro",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/allegro /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
       "output": {
         "sample_rate": 8000,
         "channels": 1,
