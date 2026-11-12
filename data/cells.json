@@ -253,15 +253,32 @@
     {
       "ecosystem": "cpp",
       "format": "wav",
-      "status": "not_started",
+      "status": "verified_target_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 22,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "wav",
+        "audio",
+        "sndfile",
+        "raylib",
+        "ffmpeg",
+        "sfml",
+        "juce"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 13,
+      "unique_search_hits": 12,
+      "unresolved_documentation_leads": 3,
+      "uncertainty": "Twenty-two distinct pinned open-source package paths passed the valid four-sample mono PCM16 RIFF/WAVE control from C++17 call sites. Twenty reuse exact C-cell releases and C APIs; SFML and adamstark AudioFile add native C++ APIs. Eighteen shared C paths plus the two native C++ paths returned decoded samples; SDL3_mixer returned parsed format values and frame duration; TagLib returned sample rate, channel count and bitrate. SFML and CSFML share an underlying engine; AudioFile C++ is unrelated to the C Audio File Library. Other shared families include dr_wav lineage, SDL releases, SDL_mixer releases, and SDL_sound releases. Twenty-two package paths are not twenty-two independent engines. Seven bounded alphabetic Conan Center recipe-name substring queries yielded thirteen hits (twelve unique); recipe hits are discovery leads, not parser evidence or popularity rankings. Three plausible leads remain unresolved, including JUCE and Qt Multimedia; this does not establish the definitive most-used top twenty. Twenty paths have primary GitHub star metrics and SoX and GStreamer remain unranked because primary SourceForge and GitLab projects lack comparable stars. One ordinary PCM16 control does not establish broader WAV variant support. The ISO C++ standard library documents no WAV-aware parser; generic file streams do not qualify. No malformed-input, vulnerability, or resource-use experiments were run.",
+      "third_party_evidence": "data/cpp/wav/parsers.json",
+      "third_party_control_results": "data/cpp/wav/verification.json",
+      "runtime_evidence": "data/cpp/wav/standard.json",
+      "registry_snapshot": "data/cpp/wav/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/wav/leads.json",
+      "source_lock": "data/c/wav/source-lock.json",
+      "extra_source_lock": "data/cpp/wav/extra-source-lock.json"
     },
     {
       "ecosystem": "cpp",

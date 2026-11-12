@@ -1,0 +1,464 @@
+{
+  "checked_at_utc": "2026-11-12T11:33:32.644886+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "shared_c_release_lock": "data/c/wav/source-lock.json",
+  "shared_c_verification": "data/c/wav/verification.json",
+  "local_libraries": {
+    "sfml": {
+      "pkg_config_version": "3.0.2",
+      "library": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-audio.3.0.2.dylib",
+      "library_sha256": "5096a0a4672fb4999b433e651107d242df834c6b22a15309e1afc16e8afae4e1"
+    }
+  },
+  "source_builds": {
+    "audiofile": {
+      "source_sha256": "e3749f90a9356b5206ef8928fa0a9c039e7db49e46bb7f32c3963d6c44c5bea8",
+      "files": [
+        {
+          "name": "AudioFile.h",
+          "sha256": "0ab722ac9c57197685619ecfcc3eae63e4e0d8b066e49ecc82c6eba0b97b4599"
+        },
+        {
+          "name": "LICENSE",
+          "sha256": "376c2004dd45be0505ee5404683ace39ee1eeb07774cbe555bf6692918d566b4"
+        }
+      ]
+    }
+  },
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "third_party": [
+    {
+      "package": "dr_wav",
+      "version": "wav-0.14.6",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/dr_wav /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/dr_wav.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/dr_wav",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/dr_wav /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "miniaudio",
+      "version": "0.11.26",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [
+        "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/miniaudio -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/miniaudio/miniaudio.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/miniaudio_c.o"
+      ],
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/miniaudio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/miniaudio.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/miniaudio_c.o -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/miniaudio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/miniaudio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libsndfile",
+      "version": "1.2.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/libsndfile.cpp -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/mpg123/1.33.7/include -L/opt/homebrew/Cellar/libsndfile/1.2.2_1/lib -lsndfile -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/libsndfile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/libsndfile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "raylib",
+      "version": "6.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/raylib.cpp -I/opt/homebrew/Cellar/raylib/6.2/include -L/opt/homebrew/Cellar/raylib/6.2/lib -lraylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/raylib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/raylib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "ffmpeg",
+      "version": "9.0.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/ffmpeg.cpp -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -lavcodec -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/ffmpeg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sox",
+      "version": "14.4.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sox.cpp -I/opt/homebrew/Cellar/sox/14.4.2_6/include -L/opt/homebrew/Cellar/sox/14.4.2_6/lib -lsox -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sox",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sox /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3",
+      "version": "3.4.20",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl3.cpp -I/opt/homebrew/include -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl3",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3_mixer",
+      "version": "3.2.4",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl3_mixer.cpp -I/opt/homebrew/Cellar/sdl3_mixer/3.2.4_1/include -I/opt/homebrew/include -I/opt/homebrew/Cellar/opusfile/0.12_3/include/opus -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/game-music-emu/0.6.5/include -I/opt/homebrew/Cellar/libxmp/4.7.4/include -I/opt/homebrew/Cellar/fluid-synth/2.6.2/include -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/mpg123/1.33.7/include -I/opt/homebrew/Cellar/portaudio/19.7.0/include -I/opt/homebrew/Cellar/readline/8.3.6/include -D_DARWIN_C_SOURCE -I/opt/homebrew/Cellar/wavpack/5.9.0/include -L/opt/homebrew/Cellar/sdl3_mixer/3.2.4_1/lib -lSDL3_mixer -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl3_mixer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl3_mixer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4
+      },
+      "pass": true
+    },
+    {
+      "package": "libaudiofile",
+      "version": "0.3.6",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/libaudiofile.cpp -L/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install/lib -laudiofile -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/libaudiofile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/libaudiofile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "aubio",
+      "version": "0.4.9",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/aubio.cpp -I/opt/homebrew/Cellar/aubio/0.4.9_4/include -L/opt/homebrew/Cellar/aubio/0.4.9_4/lib -laubio -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/aubio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/aubio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "csfml",
+      "version": "3.0.0",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 -I/opt/homebrew/Cellar/csfml/3.0.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/csfml.cpp /opt/homebrew/Cellar/csfml/3.0.0/lib/libcsfml-audio.3.0.0.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/csfml",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/csfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "allegro",
+      "version": "5.2.11.3",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/allegro.cpp -I/opt/homebrew/Cellar/allegro/5.2.11.3/include -L/opt/homebrew/Cellar/allegro/5.2.11.3/lib -lallegro_acodec -lallegro_audio -lallegro -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/allegro",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/allegro /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2_mixer",
+      "version": "2.8.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl2_mixer.cpp -I/opt/homebrew/include/SDL2 -I/opt/homebrew/include -D_THREAD_SAFE -I/opt/homebrew/Cellar/libxmp/4.7.4/include -I/opt/homebrew/Cellar/fluid-synth/2.6.2/include -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/portaudio/19.7.0/include -I/opt/homebrew/Cellar/readline/8.3.6/include -D_DARWIN_C_SOURCE -I/opt/homebrew/Cellar/game-music-emu/0.6.5/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/mpg123/1.33.7/include -I/opt/homebrew/Cellar/opusfile/0.12_3/include/opus -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/wavpack/5.9.0/include -L/opt/homebrew/Cellar/sdl2_mixer/2.8.2/lib -lSDL2_mixer -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2_mixer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2_mixer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "freealut",
+      "version": "1.1.0",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 -I/opt/homebrew/Cellar/freealut/1.1.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/freealut.cpp /opt/homebrew/Cellar/freealut/1.1.0/lib/libalut.0.dylib -framework OpenAL -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/freealut",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/freealut /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2-compat",
+      "version": "2.32.74",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl2_compat.cpp -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -D_THREAD_SAFE -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2-compat",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2-compat /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2",
+      "version": "2.32.10",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/cache/source/sdl2/include -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2-build/include-config-release/SDL2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl2.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2-build/libSDL2-2.0.0.dylib -Wl,-rpath,/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/sdl2-build -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2_sound",
+      "version": "2.0.6",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl2_sound.cpp -I/opt/homebrew/Cellar/sdl2_sound/2.0.6/include/SDL2 -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -D_THREAD_SAFE -L/opt/homebrew/Cellar/sdl2_sound/2.0.6/lib -lSDL2_sound -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2_sound",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl2_sound /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3_sound",
+      "version": "3.2.0",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sdl3_sound.cpp -I/opt/homebrew/Cellar/sdl3_sound/3.2.0/include -I/opt/homebrew/include -L/opt/homebrew/Cellar/sdl3_sound/3.2.0/lib -lSDL3_sound -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl3_sound",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sdl3_sound /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "taglib",
+      "version": "2.3.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/taglib.cpp -I/opt/homebrew/Cellar/taglib/2.3.2/include/taglib -I/opt/homebrew/Cellar/taglib/2.3.2/include -L/opt/homebrew/Cellar/taglib/2.3.2/lib -ltag_c -ltag -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/taglib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/taglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "bitrate_kbps": 128
+      },
+      "pass": true
+    },
+    {
+      "package": "gstreamer",
+      "version": "1.28.9",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/gstreamer.cpp -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstapp-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/gstreamer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sfml",
+      "version": "3.0.2",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/sfml.cpp -I/opt/homebrew/Cellar/sfml/3.0.2/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/libogg/1.3.6/include -L/opt/homebrew/Cellar/sfml/3.0.2/lib -lsfml-audio -lsfml-system -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sfml",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/sfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "audiofile",
+      "version": "1.1.4",
+      "control": "controls/wav/four-samples.wav",
+      "prerequisite_build_commands": [],
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/cache/source/audiofile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/audiofile.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/audiofile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/wav/target/audiofile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

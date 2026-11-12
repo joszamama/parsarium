@@ -1,0 +1,541 @@
+[
+  {
+    "name": "dr_wav",
+    "version": "wav-0.14.6",
+    "license": "MIT-0",
+    "license_evidence": "https://github.com/mackron/dr_libs/blob/wav-0.14.6/dr_wav.h",
+    "documentation": "https://github.com/mackron/dr_libs/blob/wav-0.14.6/dr_wav.h",
+    "input_api": "drwav_init_file; drwav_read_pcm_frames_s16; totalPCMFrameCount",
+    "adapter": "adapters/cpp/wav/dr_wav.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "dr_wav C WAV decoder",
+    "family_note": "Standalone dr_wav release in dr_libs; miniaudio embeds dr_wav lineage. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "miniaudio",
+    "version": "0.11.26",
+    "license": "MIT-0",
+    "license_evidence": "https://github.com/mackron/miniaudio/blob/0.11.26/miniaudio.h",
+    "documentation": "https://github.com/mackron/miniaudio/blob/0.11.26/miniaudio.h",
+    "input_api": "ma_decoder_init_file; ma_decoder_get_data_format; ma_decoder_get_length_in_pcm_frames; ma_decoder_read_pcm_frames",
+    "adapter": "adapters/cpp/wav/miniaudio.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "miniaudio bundled dr_wav decoder",
+    "family_note": "Distinct miniaudio package and public C decoder API; WAV decoder derives from dr_wav. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "libsndfile",
+    "version": "1.2.2",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/libsndfile.json",
+    "documentation": "https://libsndfile.github.io/libsndfile/api.html",
+    "input_api": "sf_open(path, SFM_READ, SF_INFO); SF_FORMAT_WAV; sf_readf_short",
+    "adapter": "adapters/cpp/wav/libsndfile.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "libsndfile WAV decoder",
+    "family_note": "Own audio file parser and PCM reader. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "raylib",
+    "version": "6.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/raylib.json",
+    "documentation": "https://github.com/raysan5/raylib/blob/6.2/src/raylib.h",
+    "input_api": "LoadWave(local WAV path); Wave.sampleRate, channels, frameCount, data; UnloadWave",
+    "adapter": "adapters/cpp/wav/raylib.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "raylib bundled dr_wav decoder",
+    "family_note": "Distinct raylib package C loading API; WAV implementation shares dr_wav family. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/ffmpeg.json",
+    "documentation": "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local WAV path); avformat_find_stream_info; av_read_frame; avcodec_send_packet and avcodec_receive_frame",
+    "adapter": "adapters/cpp/wav/ffmpeg.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "FFmpeg WAV demuxer and PCM decoder",
+    "family_note": "FFmpeg libavformat/libavcodec pair; installed Homebrew build is GPL-enabled. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sox",
+    "version": "14.4.2",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sox.json",
+    "documentation": "https://github.com/chirlu/sox/blob/master/libsox.3",
+    "input_api": "sox_init; sox_open_read(local WAV path); sox_read decoded samples; sox_sample_t conversion; sox_close",
+    "adapter": "adapters/cpp/wav/sox.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "SoX libsox WAV reader",
+    "family_note": "SoX public libsox audio file API reads RIFF/WAVE and decoded samples; pinned source release is the primary SourceForge package. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl3",
+    "version": "3.4.20",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3.json",
+    "documentation": "https://wiki.libsdl.org/SDL3/SDL_LoadWAV",
+    "input_api": "SDL_LoadWAV(local WAV path, SDL_AudioSpec*, Uint8**, Uint32*); SDL_free decoded PCM buffer",
+    "adapter": "adapters/cpp/wav/sdl3.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "SDL3 WAV loader",
+    "family_note": "SDL3 core WAV-specific loading API; separate package and parser path from SDL_mixer, which remains unresolved. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl3_mixer",
+    "version": "3.2.4",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3_mixer.json",
+    "documentation": "https://wiki.libsdl.org/SDL3_mixer/MIX_LoadAudio",
+    "input_api": "MIX_Init; MIX_LoadAudio(NULL, local WAV path, true); MIX_GetAudioFormat; MIX_GetAudioDuration; MIX_DestroyAudio",
+    "adapter": "adapters/cpp/wav/sdl3_mixer.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4
+    },
+    "scope": "parsed audio sample rate, channel count and duration in frames",
+    "family": "SDL3_mixer WAV decoder",
+    "family_note": "Dedicated src/decoder_wav.c in the pinned release derives from SDL2_mixer music_wav.c and earlier SDL_wave.c; related SDL lineage but separate from SDL3 core LoadWAV implementation. The C++ path uses the exact C-cell release and underlying decoder.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_mixer/blob/release-3.2.4/src/decoder_wav.c",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "libaudiofile",
+    "version": "0.3.6",
+    "license": "LGPL-2.1",
+    "license_evidence": "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/COPYING",
+    "documentation": "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h",
+    "input_api": "afOpenFile(local WAV path, \"r\"); afGetFileFormat(AF_FILE_WAVE); afSetVirtualSampleFormat; afReadFrames; afGetRate, afGetChannels, afGetFrameCount",
+    "adapter": "adapters/cpp/wav/libaudiofile.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "Audio File Library WAV parser",
+    "family_note": "Tagged 0.3.6 C API from mpruett/audiofile, unrelated to the Conan audiofile recipe for a C++ header-only package. One build-only signed-shift compatibility patch is documented. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "aubio",
+    "version": "0.4.9",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/aubio.json",
+    "documentation": "https://github.com/aubio/aubio/blob/0.4.9/src/io/source.h",
+    "input_api": "new_aubio_source(local WAV path, original sample rate, hop size); aubio_source_do; aubio_source_get_samplerate, channels, duration",
+    "adapter": "adapters/cpp/wav/aubio.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "aubio source abstraction",
+    "family_note": "Distinct C package source API; installed build links Apple AudioToolbox and libsndfile. The exact backend chosen for this control was not isolated, so parser-engine independence is not claimed. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "csfml",
+    "version": "3.0.0",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/csfml.json",
+    "documentation": "https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h",
+    "input_api": "sfSoundBuffer_createFromFile(local WAV path); sfSoundBuffer_getSamples, getSampleCount, getSampleRate, getChannelCount",
+    "adapter": "adapters/cpp/wav/csfml.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "CSFML C facade over SFML audio",
+    "family_note": "Official C binding around SFML SoundBuffer. The installed CSFML and SFML audio binaries are both SHA-256-checked; this shares SFML parser implementation rather than adding a new engine. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "allegro",
+    "version": "5.2.11.3",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/allegro.json",
+    "documentation": "https://liballeg.org/a5docs/5.2.11.3/acodec.html",
+    "input_api": "al_init; al_install_audio; al_init_acodec_addon; al_load_sample(local WAV path); al_get_sample_frequency, channels, length, data",
+    "adapter": "adapters/cpp/wav/allegro.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "Allegro audio codec WAV loader",
+    "family_note": "Allegro audio codec add-on registers its own WAV loader; official versioned docs list little-endian PCM WAV support. Core, audio and codec add-on binaries are SHA-256-checked. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl2_mixer",
+    "version": "2.8.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_mixer.json",
+    "documentation": "https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV",
+    "input_api": "SDL_Init audio; Mix_OpenAudio; Mix_LoadWAV(local WAV path); Mix_QuerySpec; Mix_Chunk.abuf and alen",
+    "adapter": "adapters/cpp/wav/sdl2_mixer.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus four decoded PCM samples at configured mixer format",
+    "family": "SDL2_mixer through SDL2 compatibility and SDL WAV loader",
+    "family_note": "Same SDL_mixer upstream project as SDL3_mixer but distinct 2.x package/API. On this macOS build it links sdl2-compat, which uses SDL3 underneath; no independent WAV engine is claimed. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "freealut",
+    "version": "1.1.0",
+    "license": "LGPL-2.0-only",
+    "license_evidence": "https://formulae.brew.sh/api/formula/freealut.json",
+    "documentation": "https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h",
+    "input_api": "alutInit; alutLoadMemoryFromFile(local WAV path, format, size, frequency); alutExit",
+    "adapter": "adapters/cpp/wav/freealut.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV format, sample rate, frame count and four decoded PCM samples",
+    "family": "FreeALUT WAV memory loader",
+    "family_note": "Own tagged C WAV loader package; this API requires an OpenAL context, created by alutInit on macOS. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl2-compat",
+    "version": "2.32.74",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl2-compat.json",
+    "documentation": "https://wiki.libsdl.org/SDL2/SDL_LoadWAV",
+    "input_api": "SDL_LoadWAV(local WAV path, SDL_AudioSpec*, Uint8**, Uint32*); SDL_FreeWAV",
+    "adapter": "adapters/cpp/wav/sdl2_compat.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus four decoded PCM samples",
+    "family": "SDL2 compatibility layer over SDL3 WAV loader",
+    "family_note": "Separate SDL2-compat release/package offering SDL2 C API while using SDL3 internally; same underlying WAV parser family as SDL3 core, counted as a package path only. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl2",
+    "version": "2.32.10",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/libsdl-org/SDL/blob/release-2.32.10/LICENSE.txt",
+    "documentation": "https://wiki.libsdl.org/SDL2/SDL_LoadWAV",
+    "input_api": "SDL_LoadWAV(local WAV path, SDL_AudioSpec*, Uint8**, Uint32*); SDL_FreeWAV, linked to source-built native SDL2",
+    "adapter": "adapters/cpp/wav/sdl2.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus four decoded PCM samples",
+    "family": "native SDL2 WAV reader",
+    "family_note": "Official SDL2 2.32.10 source-built library, separate from sdl2-compat and SDL3 package paths; SDL WAV code lineage is shared across major versions. Same adapter C API is linked against this isolated native SDL2 binary. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl2_sound",
+    "version": "2.0.6",
+    "license": "Zlib AND (Artistic-1.0-Perl OR LGPL-2.1-or-later)",
+    "license_evidence": "https://github.com/icculus/SDL_sound/blob/v2.0.6/LICENSE.txt",
+    "documentation": "https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html",
+    "input_api": "Sound_NewSampleFromFile(local WAV path, NULL, 4096); Sound_DecodeAll; Sound_FreeSample",
+    "adapter": "adapters/cpp/wav/sdl2_sound.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples",
+    "family": "SDL2_sound WAVE decoder",
+    "family_note": "SDL2_sound ships an internal WAVE decoder in the SDL_sound upstream family. SDL2_sound and SDL3_sound are separate major-version packages/APIs but share decoder lineage and upstream star count. This Homebrew binary links sdl2-compat and macOS AudioToolbox; the adapter observed its Microsoft WAVE decoder. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl3_sound",
+    "version": "3.2.0",
+    "license": "Zlib AND (LGPL-2.1-or-later OR Artistic-1.0-Perl)",
+    "license_evidence": "https://github.com/icculus/SDL_sound/blob/v3.2.0/LICENSE.txt",
+    "documentation": "https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile",
+    "input_api": "Sound_NewSampleFromFile(local WAV path, NULL, 4096); Sound_DecodeAll; Sound_FreeSample",
+    "adapter": "adapters/cpp/wav/sdl3_sound.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples",
+    "family": "SDL3_sound WAVE decoder",
+    "family_note": "sdl3-sound ships an internal WAVE decoder in the SDL_sound upstream family. SDL2_sound and SDL3_sound are separate major-version packages/APIs but share decoder lineage and upstream star count. This Homebrew binary links SDL3 and macOS AudioToolbox; the adapter observed its Microsoft WAVE decoder. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "taglib",
+    "version": "2.3.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://github.com/taglib/taglib/blob/v2.3.2/COPYING.LGPL",
+    "documentation": "https://github.com/taglib/taglib/blob/v2.3.2/bindings/c/tag_c.h",
+    "input_api": "taglib_file_new_type(local WAV path, TagLib_File_WAV); taglib_file_audioproperties; sample rate, channels and bitrate accessors",
+    "adapter": "adapters/cpp/wav/taglib.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bitrate_kbps": 128
+    },
+    "scope": "WAV-aware structural/audio-property parsing; does not decode PCM samples",
+    "family": "TagLib C bindings over TagLib C++ RIFF/WAV parser",
+    "family_note": "The C binding wraps TagLib C++ and uses its RIFF/WAV properties implementation; one package path, not a separate C parser engine. It reports WAV sample rate, channel count and bitrate, not decoded samples. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/wavparse/index.html",
+    "input_api": "gst_parse_launch(filesrc local path ! wavparse ! appsink); gst_app_sink_try_pull_sample",
+    "adapter": "adapters/cpp/wav/gstreamer.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "explicit wavparse element interprets WAV and emits caps plus four PCM sample values",
+    "family": "GStreamer wavparse plugin",
+    "family_note": "GStreamer Good Plug-ins wavparse handles WAV; the adapter explicitly uses the named plugin and reads parsed caps and PCM from appsink. It is a separate package path, with plugin binary and release checked. Its primary upstream is GitLab, so no GitHub-star score is borrowed from a mirror. The C++ path uses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sfml",
+    "version": "3.0.2",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/SFML/SFML/blob/3.0.2/license.md",
+    "documentation": "https://github.com/SFML/SFML/blob/3.0.2/include/SFML/Audio/SoundBuffer.hpp",
+    "input_api": "sf::SoundBuffer::loadFromFile; getSampleRate; getChannelCount; getSampleCount; getSamples",
+    "adapter": "adapters/cpp/wav/sfml.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channels, frame count and four decoded PCM samples",
+    "family": "SFML audio sound-file decoder",
+    "family_note": "Native C++ sound buffer API; CSFML is its C facade and shares the SFML underlying parser family.",
+    "language_bridge": "Native C++17 API"
+  },
+  {
+    "name": "audiofile",
+    "version": "1.1.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/adamstark/AudioFile/blob/1.1.4/LICENSE",
+    "documentation": "https://github.com/adamstark/AudioFile/blob/1.1.4/README.md",
+    "input_api": "AudioFile<int16_t>::load(const std::string&); getSampleRate; getNumChannels; getNumSamplesPerChannel; samples",
+    "adapter": "adapters/cpp/wav/audiofile.cpp",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channels, frame count and four decoded PCM samples",
+    "family": "adamstark AudioFile WAV parser",
+    "family_note": "Header-only C++ WAV parser; unrelated to the C Audio File Library package called libaudiofile.",
+    "language_bridge": "Native C++17 API"
+  }
+]

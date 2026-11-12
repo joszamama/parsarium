@@ -1,8 +1,8 @@
 # Parsarium
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
-specific formats. It currently contains a verified C × PNG batch, below-target
-C × ZIP and WAV batches, and verified C++ × PNG and ZIP batches,
+specific formats. It currently contains verified C × PNG and WAV batches,
+a below-target C × ZIP batch, and verified C++ × PNG, ZIP, and WAV batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -12,8 +12,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 53 cells at the 20-parser target, three started
-below target, and 32 marked `not_started`;
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 54 cells at the 20-parser target, three started
+below target, and 31 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -29,6 +29,7 @@ python3 scripts/verify_cpp_png.py
 python3 scripts/verify_c_zip.py
 python3 scripts/verify_c_wav.py
 python3 scripts/verify_cpp_zip.py
+python3 scripts/verify_cpp_wav.py
 python3 scripts/verify_php_zip.py
 python3 scripts/verify_php_png.py
 npm ci
@@ -193,6 +194,18 @@ unresolved, so the [C++ ZIP cell](data/cpp/zip/cell.json)
 records that the numerical goal is met, while search remains incomplete and the
 cell does not claim a definitive most-used top 20. The ISO C++
 standard library has no documented ZIP parser.
+
+The C++ × WAV verifier reruns the C WAV release and control checks, builds
+twenty C++17 call sites for those exact packages, and checks pinned SFML 3.0.2
+and header-only AudioFile 1.1.4 through native C++ APIs. All **22/22 package
+paths passed** the valid four-sample PCM WAV control. SFML shares an underlying
+engine with the separate CSFML package; the C++ AudioFile package is unrelated
+to the C Audio File Library. The [C++ WAV cell](data/cpp/wav/cell.json) records
+seven bounded Conan Center recipe-name searches, three unresolved leads,
+and the exact release and binary hashes. Its [ranking](data/cpp/wav/ranking.md)
+uses primary GitHub stars within C++; SoX and GStreamer remain unranked. The
+numerical goal is met, while a definitive most-used top 20 remains unproven.
+The ISO C++ standard library has no documented WAV parser.
 
 The PHP × ZIP verifier installs twenty exact Composer package releases from six
 lockfiles and runs local-file readers on the same one-entry DEFLATE control.

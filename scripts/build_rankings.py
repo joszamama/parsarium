@@ -204,7 +204,7 @@ def main() -> None:
         print(f"java/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
     for ecosystem, format_name in (("c", "png"), ("c", "zip"), ("c", "wav"),
-                                   ("cpp", "png"), ("cpp", "zip")):
+                                   ("cpp", "png"), ("cpp", "zip"), ("cpp", "wav")):
         directory = ROOT / "data" / ecosystem / format_name
         ecosystem_label = "C++" if ecosystem == "cpp" else "C"
         parsers = read(directory / "parsers.json")

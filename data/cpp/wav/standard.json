@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C++",
+  "format": "WAV",
+  "runtime": "ISO C++ standard library (WG21 working draft source, checked 2026-11-12)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C++ standard library headers, library introduction",
+      "url": "https://github.com/cplusplus/draft/blob/main/source/lib-intro.tex",
+      "finding": "The listed standard library components do not define a RIFF/WAVE chunk or PCM reader."
+    },
+    {
+      "api": "File streams <fstream>, input/output library",
+      "url": "https://github.com/cplusplus/draft/blob/main/source/iostreams.tex",
+      "finding": "std::ifstream reads generic file bytes; it does not interpret WAV chunks, sample rates or PCM frames."
+    }
+  ],
+  "limit": "Scoped to the ISO C++ standard library. Platform audio frameworks and third-party C libraries usable from C++ are inventoried separately. No standard WAV-aware API was documented to run."
+}
