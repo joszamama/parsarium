@@ -30,7 +30,7 @@ def main() -> None:
     prepare_c_png.main()
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 12
+    assert len(parsers) == 14
     zlib_version = run(["pkg-config", "--modversion", "zlib"])
     assert zlib_version == "1.2.12"
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -53,7 +53,8 @@ def main() -> None:
     for name, adapter_name in (("imagemagick", "imagemagick"),
                                ("gdk-pixbuf", "gdk_pixbuf"), ("vips", "vips"),
                                ("sdl3", "sdl3"), ("sdl3_image", "sdl3_image"),
-                               ("sdl2_image", "sdl2_image")):
+                               ("sdl2_image", "sdl2_image"),
+                               ("cairo", "cairo"), ("gd", "gd")):
         item = lock[name]
         observed = run(["pkg-config", "--modversion", item["pkg_config"]])
         if name == "imagemagick":

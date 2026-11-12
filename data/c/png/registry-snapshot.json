@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T07:10:12.952923+00:00",
+  "captured_at_utc": "2026-11-12T07:12:51.056143+00:00",
   "search_surface": "Conan Center Index recipes tree, exact GitHub API response; project documentation used for targeted leads beyond recipe-name search",
   "search_index_api": "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1",
   "search_limit_per_query": 100,
@@ -171,13 +171,27 @@
       "source_url": "https://downloads.sourceforge.net/project/freeimage/Source%20Distribution/3.18.0/FreeImage3180.zip",
       "source_sha256": "f41379682f9ada94ea7b34fe86bf9ee00935a3147be41b6569c9605a53e438fd",
       "license_evidence": "https://formulae.brew.sh/api/formula/freeimage.json"
+    },
+    "cairo": {
+      "version": "1.18.6",
+      "license": "LGPL-2.1-only OR MPL-1.1",
+      "source_url": "https://cairographics.org/releases/cairo-1.18.6.tar.xz",
+      "source_sha256": "1c767308174337a74694da0f3ec069c271452163a1ef4540964c50c301f157d4",
+      "license_evidence": "https://formulae.brew.sh/api/formula/cairo.json"
+    },
+    "gd": {
+      "version": "2.3.3",
+      "license": "GD",
+      "source_url": "https://github.com/libgd/libgd/releases/download/gd-2.3.3/libgd-2.3.3.tar.xz",
+      "source_sha256": "3fe822ece20796060af63b7c60acb151e5844204d289da0ce08f8fdf131e5a61",
+      "license_evidence": "https://formulae.brew.sh/api/formula/gd.json"
     }
   },
   "popularity_metric": {
     "name": "GitHub repository stargazers_count",
     "source": "GitHub REST repository API",
-    "captured_at_utc": "2026-11-12T07:07:39.094687+00:00",
-    "limitation": "Repository stars are an adoption proxy, not package downloads. Values are compared only within C. GNOME gdk-pixbuf and SourceForge FreeImage are unranked because their primary upstreams are not GitHub; mirror stars would be a different signal. SDL2_image and SDL3_image share a project and its star count. Recipe-name hits are discovery, not this ranking.",
+    "captured_at_utc": "2026-11-12T07:12:51.056143+00:00",
+    "limitation": "Repository stars are an adoption proxy, not package downloads. Values are compared only within C. GdkPixbuf, FreeImage and Cairo are unranked because their primary upstreams are not GitHub; mirror stars would be a different signal. SDL2_image and SDL3_image share a project and its star count. Recipe-name hits are discovery, not this ranking.",
     "packages": {
       "libpng": {
         "repository": "pnggroup/libpng",
@@ -240,6 +254,17 @@
         "stars": null,
         "url": "https://sourceforge.net/projects/freeimage/",
         "reason": "Primary project is SourceForge; no comparable GitHub primary-repository stars."
+      },
+      "cairo": {
+        "repository": null,
+        "stars": null,
+        "url": "https://gitlab.freedesktop.org/cairo/cairo",
+        "reason": "Primary upstream is GitLab; no comparable GitHub primary-repository stars."
+      },
+      "gd": {
+        "repository": "libgd/libgd",
+        "stars": 989,
+        "url": "https://api.github.com/repos/libgd/libgd"
       }
     }
   },
@@ -291,6 +316,18 @@
       "url": "https://freeimage.sourceforge.io/faq.html",
       "candidate": "freeimage",
       "finding": "Official FAQ shows FreeImage_Load(FIF_PNG, local filename) and dimensions from the returned image."
+    },
+    {
+      "query": "Cairo PNG C API create from filename",
+      "url": "https://www.cairographics.org/manual/cairo-PNG-Support.html",
+      "candidate": "cairo",
+      "finding": "Official manual documents PNG image surface creation from a local filename."
+    },
+    {
+      "query": "GD PNG C API load FILE",
+      "url": "https://github.com/libgd/libgd/blob/gd-2.3.3/src/gd.h",
+      "candidate": "gd",
+      "finding": "Pinned header documents gdImageCreateFromPng(FILE*) and pixel access."
     }
   ]
 }

@@ -352,5 +352,65 @@
     "family": "FreeImage PNG plugin (bundled libpng lineage)",
     "family_note": "SourceForge package with bundled image codecs. Project adoption metric is unavailable from the uniform GitHub primary-repository star source; left unranked.",
     "family_evidence": "https://sourceforge.net/projects/freeimage/files/Source%20Distribution/3.18.0/"
+  },
+  {
+    "name": "cairo",
+    "version": "1.18.6",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://formulae.brew.sh/api/formula/cairo.json",
+    "documentation": "https://www.cairographics.org/manual/cairo-PNG-Support.html",
+    "input_api": "cairo_image_surface_create_from_png(const char* filename); cairo_image_surface_get_data(...)",
+    "adapter": "adapters/c/png/cairo.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "Cairo PNG surface loader (libpng-backed)",
+    "family_note": "Cairo PNG loader uses libpng; primary repository is freedesktop GitLab, so GitHub stars are unavailable for this ranking.",
+    "family_evidence": "https://gitlab.freedesktop.org/cairo/cairo/-/blob/1.18.6/src/cairo-png.c"
+  },
+  {
+    "name": "gd",
+    "version": "2.3.3",
+    "license": "GD",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gd.json",
+    "documentation": "https://github.com/libgd/libgd/blob/gd-2.3.3/src/gd.h",
+    "input_api": "gdImageCreateFromPng(FILE*); gdImageGetPixel(...)",
+    "adapter": "adapters/c/png/gd.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "GD PNG codec (libpng-backed)",
+    "family_note": "GD PNG codec calls libpng; this is a distinct C package API over a shared decoder family.",
+    "family_evidence": "https://github.com/libgd/libgd/blob/gd-2.3.3/src/gd_png.c"
   }
 ]
