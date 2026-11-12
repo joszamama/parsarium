@@ -122,7 +122,7 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"python/{format_name}: {len(parsers)} verified packages, {len(unknown)} unranked")
 
-    for format_name, label in (("png", "PNG"), ("zip", "ZIP"), ("wav", "WAV"),
+    for format_name, label in (("png", "PNG"), ("zip", "ZIP"), ("mp4", "MP4"), ("wav", "WAV"),
                                ("mp3_id3v2", "MP3 with ID3v2")):
         directory = ROOT / "data" / "rust" / format_name
         parsers = read(directory / "parsers.json")

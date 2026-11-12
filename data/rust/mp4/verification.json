@@ -1,0 +1,274 @@
+{
+  "checked_at_utc": "2026-11-12T01:27:09.886673+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
+  "build_command": "cargo build --locked (from adapters/rust/mp4)",
+  "control_sha256": {
+    "controls/mp4/red-av.mp4": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643"
+  },
+  "control_meaning": "Valid one-second MP4 with 2x2 H.264 video, 8 kHz mono AAC audio, and title Parsarium",
+  "third_party": [
+    {
+      "package": "mp4",
+      "version": "0.14.0",
+      "scope": "MP4 movie track table",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "mp4parse",
+      "version": "0.17.0",
+      "scope": "ISO-BMFF movie track table",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4parse controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "re_mp4",
+      "version": "0.5.1",
+      "scope": "MP4 movie track table",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 re_mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "lofty",
+      "version": "0.25.5",
+      "scope": "MP4 title metadata",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 lofty controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-atom",
+      "version": "0.17.1",
+      "scope": "Typed MP4 file-type atom",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4-atom controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "compatible_brands": 4,
+        "major_brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "mp4ameta",
+      "version": "0.13.0",
+      "scope": "MP4 title metadata",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4ameta controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia",
+      "version": "0.6.1",
+      "scope": "MP4 AAC track and first packet",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 symphonia controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "packet_bytes": 1129,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia-format-isomp4",
+      "version": "0.6.1",
+      "scope": "MP4 AAC track and first packet",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 symphonia-format-isomp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "packet_bytes": 1129,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "mp4box",
+      "version": "0.14.0",
+      "scope": "Decoded MP4 top-level box tree",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4box controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "has_moov": true,
+        "top_boxes": 4
+      },
+      "error": null
+    },
+    {
+      "package": "mp4io",
+      "version": "0.1.2",
+      "scope": "MP4 movie track table",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4io controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-core",
+      "version": "0.3.2",
+      "scope": "MP4 file type, movie header, and tracks",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4-core controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-track",
+      "version": "0.1.0",
+      "scope": "MP4 movie track table",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4-track controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "mp4parse-patched",
+      "version": "0.17.2",
+      "scope": "ISO-BMFF movie track table",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4parse-patched controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "audio-file",
+      "version": "0.5.1",
+      "scope": "MP4 AAC decoded audio",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 audio-file controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 9216
+      },
+      "error": null
+    },
+    {
+      "package": "rockbox-metadata",
+      "version": "0.1.1",
+      "scope": "MP4 audio title and sample rate",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 rockbox-metadata controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "sample_rate": 8000,
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "mp4san",
+      "version": "0.5.4",
+      "scope": "MP4 presentation metadata and media-data span",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 mp4san controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "media_data_bytes": 1188
+      },
+      "error": null
+    },
+    {
+      "package": "rff-format-mp4",
+      "version": "0.4.6",
+      "scope": "MP4 audio and video streams",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 rff-format-mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "streams": 2
+      },
+      "error": null
+    },
+    {
+      "package": "oxideav-mp4",
+      "version": "0.0.11",
+      "scope": "MP4 audio and video streams",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 oxideav-mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "streams": 2
+      },
+      "error": null
+    },
+    {
+      "package": "vsd-mp4",
+      "version": "0.2.1",
+      "scope": "MP4 movie header timescale",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 vsd-mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "movie_timescale": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "revelo-parsers-container",
+      "version": "0.5.6",
+      "scope": "MP4 audio and video stream graph",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 revelo-parsers-container controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "audio_streams": 1,
+        "video_streams": 1
+      },
+      "error": null
+    },
+    {
+      "package": "shiguredo_mp4",
+      "version": "2026.6.0-canary.2",
+      "scope": "Typed MP4 top-level boxes",
+      "control": "controls/mp4/red-av.mp4",
+      "command": "adapters/rust/mp4/target/debug/parsarium-rust-mp4 shiguredo_mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "consumed_bytes": 2670,
+        "top_boxes": 4
+      },
+      "error": null
+    }
+  ]
+}

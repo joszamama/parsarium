@@ -19,8 +19,8 @@ def fetch(url: str) -> dict:
 
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
-    if cell not in {"png", "zip", "wav", "mp3_id3v2"}:
-        raise SystemExit("usage: python3 scripts/enrich_rust.py png|zip|wav|mp3_id3v2")
+    if cell not in {"png", "zip", "mp4", "wav", "mp3_id3v2"}:
+        raise SystemExit("usage: python3 scripts/enrich_rust.py png|zip|mp4|wav|mp3_id3v2")
     directory = ROOT / "data" / "rust" / cell
     parser_path = directory / "parsers.json"
     parsers = json.loads(parser_path.read_text())

@@ -7,9 +7,9 @@ plus a below-target JavaScript × Matrix Market search,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
-Python × Matrix Market, Rust × PNG and ZIP, and an explicit 88-cell work
-matrix. There are 33 cells at the 20-parser target, two started below target,
-and 53 marked `not_started`;
+Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, and MP3 with ID3v2, and an explicit
+88-cell work matrix. There are 36 cells at the 20-parser target, two started
+below target, and 50 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -102,6 +102,9 @@ python3 controls/matrix_market/make_control.py
 python3 scripts/verify_python_matrix_market.py
 python3 scripts/verify_rust_png.py
 python3 scripts/verify_rust_zip.py
+python3 scripts/verify_rust_mp4.py
+python3 scripts/verify_rust_wav.py
+python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -421,6 +424,13 @@ The 20 package paths represent 12 recorded parser families or lineages.
 a C compiler, CMake, and libclang. The scoped Rust standard library has no
 documented ZIP parser. Ten plausible leads remain unresolved.
 
+`verify_rust_mp4.py` builds the pinned Rust MP4 graph with `cargo build --locked`
+and runs **21/21** crate paths against a valid MP4 with H.264 video, AAC audio,
+and a title tag. Each row names its track, box, audio, or metadata scope and
+records shared mp4-rs, mp4parse, and Symphonia lineages. The scoped Rust
+standard library has no documented MP4 parser. Ten plausible leads remain
+unresolved; the seven bounded registry searches are partial.
+
 `verify_rust_wav.py` builds the pinned Rust WAV graph with `cargo build --locked`
 and runs **20/20** crate paths against a valid 8 kHz mono, four-sample PCM WAV.
 The paths include sample decoders, WAV header and chunk readers, and demuxers;
@@ -475,11 +485,11 @@ provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
 within Python. Unavailable metrics remain `null`.
 
-For Rust PNG, ZIP, WAV, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
-`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `wav`, or `mp3_id3v2`, to refresh seven bounded
+For Rust PNG, ZIP, MP4, WAV, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
+`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, or `mp3_id3v2`, to refresh seven bounded
 [crates.io API](https://crates.io/api/) searches, pinned release metadata,
 and crate-level recent downloads over about 90 days. The downloads are
-compared only within Rust PNG. These commands require network access and
+compared only within each Rust format cell. These commands require network access and
 replace the dated snapshot; the locked control verification does not.
 
 ## Verified rankings and search limits
@@ -688,6 +698,10 @@ or quality judgment.
   saved 526 hits and 384 distinct names; ten plausible leads remain
   unresolved. The [cell record](data/rust/zip/cell.json) records the search
   limits and the separate standard-library inventory.
+- [Rust × MP4 ranking](data/rust/mp4/ranking.md): 21 verified crate paths.
+  Seven bounded crates.io searches saved 552 hits and 340 distinct names;
+  ten plausible leads remain unresolved. The [cell record](data/rust/mp4/cell.json)
+  records the search limits and separate standard-library inventory.
 - [Rust × WAV ranking](data/rust/wav/ranking.md): 20 verified crate paths.
   Seven bounded crates.io searches saved 653 hits and 469 distinct names;
   13 plausible leads remain unresolved. The [cell record](data/rust/wav/cell.json)
