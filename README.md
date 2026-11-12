@@ -9,8 +9,9 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-and WAV, and an explicit 88-cell work matrix. There are 46 cells at
-the 20-parser target, two started below target, and 40 marked `not_started`;
+and WAV, a below-target Java × MP4 batch, and an explicit 88-cell work matrix.
+There are 46 cells at the 20-parser target, three started below target,
+and 39 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -190,6 +191,21 @@ API was documented in the separate runtime inventory. See the
 `python3 scripts/snapshot_maven_pdf.py` only to refresh registry and deps.dev
 evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
+
+The Java × MP4 starter batch uses Maven 3.9+ and JDK 25. The pinned Maven
+classpath has six SHA-256-locked JARs. Run
+`python3 controls/mp4/make_control.py` to restore the valid 2×2 H.264/AAC
+control, then `python3 scripts/verify_java_mp4.py` from the repository root.
+Set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere. The recorded result is
+**3/3 third-party package paths passing**: MP4Parser, metadata-extractor, and
+JCodec. A JDK-only probe found no ImageIO or Java Sound reader for the control;
+the separate official API inventory records no documented Java SE 25 MP4
+parser. Four of five bounded Maven search attempts timed out; the surviving
+query returned 18 unrelated-looking search hits that remain unreviewed, and
+six targeted documentation leads remain unresolved. This batch is below the
+20-path working goal. See the [Java MP4 ranking](data/java/mp4/ranking.md),
+[cell summary](data/java/mp4/cell.json), and [leads](data/java/mp4/leads.json).
+`python3 scripts/snapshot_maven_mp4.py` refreshes Maven and deps.dev evidence.
 
 The Java × WAV batch uses Maven 3.9+, JDK 25, and macOS arm64. Nine module
 classpaths lock 57 regular, 5 Bytedeco, 3 Jaffree, 3 JAVE2, 12 Bramp,

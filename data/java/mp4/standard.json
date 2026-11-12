@@ -1,0 +1,30 @@
+{
+  "ecosystem": "Java",
+  "format": "MP4",
+  "runtime": "OpenJDK 25, Java SE 25 API inventory",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "Java SE 25 module and package overview",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/index.html",
+      "finding": "No bundled MP4 or ISO BMFF movie parser API is documented in the Java SE module inventory."
+    },
+    {
+      "api": "javax.imageio Image I/O built-in formats",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/imageio/package-summary.html",
+      "finding": "The documented built-in image formats are still images; no MP4 video reader is listed."
+    },
+    {
+      "api": "AudioFileFormat.Type",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioFileFormat.Type.html",
+      "finding": "The documented Java Sound built-in types are WAVE, AU, AIFF, AIFF-C and SND, not MP4."
+    },
+    {
+      "api": "java.nio.file.Files",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Files.html",
+      "finding": "Reading MP4 bytes or a stream is generic I/O and does not return parsed boxes or tracks."
+    }
+  ],
+  "limit": "Scoped to Java SE 25 and bundled OpenJDK APIs; third-party JavaFX media or ImageIO/Java Sound providers are not JDK parser entries. No standard API with documented local MP4 parsing and an observable box, track or media result was found to run on the control."
+}

@@ -630,15 +630,28 @@
     {
       "ecosystem": "java",
       "format": "mp4",
-      "status": "not_started",
+      "status": "verified_below_target_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 3,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "mp4",
+        "mp4 parser",
+        "isoparser",
+        "Java MP4",
+        "ISO base media"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 18,
+      "unique_search_hits": 18,
+      "unresolved_documentation_leads": 6,
+      "uncertainty": "The first Java MP4 batch verified three distinct Maven package paths on one valid 2x2 H.264/AAC MP4 control. Five bounded Maven Solr queries were attempted with 100-result limits; four timed out and the Java MP4 query returned 18 hits that appear to use mp for unrelated APIs. Those 18 remain unreviewed search hits, not verified parsers. Six targeted documentation leads remain unresolved, including other MP4Parser distributions and FFmpeg/MediaInfo wrappers already used for WAV. This is a starter batch below the 20-path working goal and cannot establish the most-used top 20. The controls prove only movie box, track and video-dimension parsing for this MP4 variant. Java SE 25 official API documentation yielded no bundled MP4 parser; a JDK-only run found no ImageIO or Java Sound reader for the control. Third-party providers may add support. No vulnerability, malformed-input or resource-use experiments were run.",
+      "third_party_evidence": "data/java/mp4/parsers.json",
+      "third_party_control_results": "data/java/mp4/verification.json",
+      "runtime_evidence": "data/java/mp4/standard.json",
+      "registry_snapshot": "data/java/mp4/registry-snapshot.json",
+      "unresolved_leads": "data/java/mp4/leads.json"
     },
     {
       "ecosystem": "java",

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "isoparser", "group": "org.mp4parser", "artifact": "isoparser", "version": "1.9.56",
+    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new IsoFile(File localMp4), getMovieBox().getTrackCount() and getMovieHeaderBox().getTimescale()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/mp4parser/isoparser/1.9.56/isoparser-1.9.56-javadoc.jar",
+    "documentation_archive_entry": "org/mp4parser/IsoFile.html",
+    "family": "sannies MP4Parser ISO BMFF box parser", "scope": "movie track count and timescale",
+    "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "timescale": 8000}
+  },
+  {
+    "name": "metadata-extractor", "group": "com.drewnoakes", "artifact": "metadata-extractor", "version": "2.22.0",
+    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "Mp4MetadataReader.readMetadata(File localMp4), Mp4VideoDirectory TAG_WIDTH and TAG_HEIGHT",
+    "documentation": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.22.0/metadata-extractor-2.22.0-javadoc.jar",
+    "documentation_archive_entry": "com/drew/imaging/mp4/Mp4MetadataReader.html",
+    "family": "metadata-extractor MP4 box reader", "scope": "parsed video width and height",
+    "control": "controls/mp4/red-av.mp4", "expected_output": {"width": 2, "height": 2}
+  },
+  {
+    "name": "jcodec", "group": "org.jcodec", "artifact": "jcodec", "version": "0.2.5",
+    "license": "BSD-2-Clause", "license_evidence": "Maven POM FreeBSD license and project LICENSE",
+    "input_api": "MP4Util.parseMovie(File localMp4), MovieBox.getTracks() and TrakBox.getCodedSize()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar",
+    "documentation_archive_entry": "org/jcodec/containers/mp4/MP4Util.html",
+    "family": "JCodec MP4 box parser", "scope": "track count and video dimensions",
+    "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "video_width": 2, "video_height": 2}
+  }
+]
