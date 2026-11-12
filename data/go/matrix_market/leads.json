@@ -70,5 +70,11 @@
     "status": "excluded",
     "reason": "Source inspection found no Matrix Market parsing API. The mtx name alone is not evidence.",
     "source": "https://pkg.go.dev/github.com/emicklei/mtx"
+  },
+  {
+    "name": "github.com/Konstantin8105/golis",
+    "status": "excluded",
+    "reason": "ParseSparseMatrix is documented as Matrix Market input, but the pinned source reads a vector-specific integer size on line two and cannot parse the valid matrix-coordinate control. It also fails to compile with the current Gonum release because SparseMatrixSymmetric lacks SymmetricDim. No valid Matrix Market matrix result was verified.",
+    "source": "https://pkg.go.dev/github.com/Konstantin8105/golis@v0.0.0-20181001205901-ade3df6e312e"
   }
 ]
