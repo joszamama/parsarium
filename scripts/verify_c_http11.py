@@ -74,7 +74,7 @@ def main() -> None:
         assert run(["brew", "list", "--versions", formula]).stdout.strip() == f"{formula} {version}"
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf", "facil-cstl", "facil-legacy"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         libhtp_source = build / "libhtp-0.5.53"
@@ -181,7 +181,15 @@ def main() -> None:
                      *apr_includes, *apu_includes, str(ADAPTER / "serf.c"),
                      str(serf_source / "libserf-1.a"), *apr_link, *apu_link,
                      "-L" + str(openssl_prefix / "lib"), "-lssl", "-lcrypto", "-lz",
-                     "-o", str(build / "serf-adapter")]}
+                     "-o", str(build / "serf-adapter")],
+            "facil-cstl": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                           "-I" + str(ADAPTER), "-I" + str(build / "cstl-0.8.5"),
+                           str(ADAPTER / "facil_cstl.c"),
+                           "-o", str(build / "facil-cstl-adapter")],
+            "facil-legacy": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                             "-I" + str(ADAPTER), "-I" + str(build / "facil.io-0.7.6"),
+                             str(ADAPTER / "facil_legacy.c"),
+                             "-o", str(build / "facil-legacy-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]

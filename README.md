@@ -187,14 +187,14 @@ paths and eight C++ paths lack comparable primary GitHub stars and remain
 unranked. Only ASCII P3 is established for every path. Neither scoped
 standard library documents a PNM-aware parser.
 
-The [C × HTTP/1.1 cell](data/c/http11/cell.json) contains **13/20 verified
+The [C × HTTP/1.1 cell](data/c/http11/cell.json) contains **15/20 verified
 package paths**: llhttp, Node http-parser, PicoHTTPParser, Mongoose, httpp,
-HTTPParserC, GNU libmicrohttpd, libevhtp, LibHTP, libwebsockets, libonion, and
-libsoup, plus Apache Serf. Eleven parsed
+HTTPParserC, GNU libmicrohttpd, libevhtp, LibHTP, libwebsockets, libonion,
+libsoup, Apache Serf, facil.io C STL 0.8, and facil.io 0.7. Thirteen parsed
 the method, target, and version of a valid local GET request after complete
 header parsing. `python3 scripts/verify_c_http11.py` checks SHA-256 source
 archives, the exact local llhttp 9.4.3 and libmicrohttpd 1.0.10 libraries and
-headers, plus the libwebsockets 5.0.0_2 and libsoup 3.8.1 libraries and headers, rebuilds all thirteen
+headers, plus the libwebsockets 5.0.0_2 and libsoup 3.8.1 libraries and headers, rebuilds all fifteen
 adapters, and replays the controls. libwebsockets yielded the parsed method,
 target and Host header from an adopted local read buffer. LibHTP 0.5.53
 is rebuilt from its pinned source with Autotools and zlib. libonion 0.8 is
@@ -207,12 +207,13 @@ an unrelated SSL bucket object that fails with the local OpenSSL headers. The li
 adapter supplies the request through a local socket stream. Four bounded Conan recipe-name queries saved
 24 hits and 22 distinct names; project documentation supplied PicoHTTPParser,
 Mongoose, httpp, HTTPParserC, libevhtp, LibHTP, libwebsockets, libonion, libsoup,
-and Apache Serf
+Apache Serf, and both facil.io distributions
 outside those windows. HTTPParserC distributes llhttp C source and shares its
-parser engine. libevhtp ships its own htparse scanner. GitHub project stars
-rank ten paths only within C;
+parser engine. The two facil.io packages have distinct tagged distributions and
+input APIs but share parser lineage. libevhtp ships its own htparse scanner.
+GitHub project stars rank twelve paths only within C;
 libmicrohttpd, libsoup and Apache Serf have no primary GitHub repositories and remain unranked.
-Seven working paths remain unverified. The ISO C standard library provides
+Five working paths remain unverified. The ISO C standard library provides
 no documented HTTP/1.1 request parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed

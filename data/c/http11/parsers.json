@@ -167,5 +167,31 @@
     "adapter": "adapters/c/http11/serf.c",
     "control": "controls/http11/response_serf.http",
     "expected_output": {"version": "1.1", "status": 200, "reason": "OK", "content_type": "text/plain", "body": "OK"}
+  },
+  {
+    "name": "facil-cstl",
+    "version": "0.8.5",
+    "license": "MIT",
+    "license_evidence": "Pinned release root LICENSE",
+    "documentation": "https://github.com/facil-io/cstl/blob/0.8.5/fio-stl/004%20http1%20parser.md",
+    "input_api": "fio_http1_parse(fio_http1_parser_s *, local writable request bytes as fio_buf_info_s, callback state); method, URL, version, header and completion callbacks",
+    "family": "facil.io C STL 0.8 HTTP/1.x parser in 004 http1 parser.h; successor family to the separate facil.io 0.7 distribution and API, independent from llhttp and PicoHTTPParser",
+    "scope": "HTTP/1.1 GET request method, target, version and Host header after complete local-byte parse",
+    "adapter": "adapters/c/http11/facil_cstl.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "HTTP/1.1", "host": "example.test"}
+  },
+  {
+    "name": "facil-legacy",
+    "version": "0.7.6",
+    "license": "MIT",
+    "license_evidence": "Pinned release root LICENSE and http1_parser.h header",
+    "documentation": "https://github.com/boazsegev/facil.io/blob/0.7.6/lib/facil/http/parsers/http1_parser.h",
+    "input_api": "http1_parse(http1_parser_s *, local writable request bytes, length); method, path, query, version, header and request-complete callbacks",
+    "family": "facil.io 0.7 HTTP/1 parser, earlier distinct distribution and API of the facil.io family later developed as C STL 0.8; these two package paths share lineage",
+    "scope": "HTTP/1.1 GET request method, path, query, version and Host header after complete local-byte parse",
+    "adapter": "adapters/c/http11/facil_legacy.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium", "query": "x=1", "version": "HTTP/1.1", "host": "example.test"}
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T21:34:46.887114+00:00",
+  "checked_at_utc": "2026-11-12T21:40:30.134109+00:00",
   "environment": {
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
@@ -187,6 +187,33 @@
       },
       "pass": true,
       "command": "build pinned serf; serf-adapter controls/http11/response_serf.http"
+    },
+    {
+      "package": "facil-cstl",
+      "version": "0.8.5",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "HTTP/1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned facil-cstl; facil-cstl-adapter controls/http11/request.http"
+    },
+    {
+      "package": "facil-legacy",
+      "version": "0.7.6",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium",
+        "query": "x=1",
+        "version": "HTTP/1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned facil-legacy; facil-legacy-adapter controls/http11/request.http"
     }
   ],
   "runtime": []
