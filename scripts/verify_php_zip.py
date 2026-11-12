@@ -26,7 +26,9 @@ def main() -> None:
     parsers = json.loads((DATA / "parsers.json").read_text())
     standard = json.loads((DATA / "standard.json").read_text())
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
-    assert len(parsers) == 8 and len(standard["verified_apis"]) == 2
+    cell = json.loads((DATA / "cell.json").read_text())
+    assert len(parsers) == cell["verified_third_party_count"]
+    assert len(standard["verified_apis"]) == cell["verified_standard_or_runtime_count"]
 
     lock_paths = sorted({parser["composer_lock"] for parser in parsers})
     locks = {}

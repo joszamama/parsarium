@@ -150,5 +150,43 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "UnifiedArchive ZIP driver over PHP ZipArchive",
     "family_note": "Observed driver is wapmorgan\\UnifiedArchive\\Drivers\\Zip, which uses bundled ZipArchive/libzip; package also bundles PclZip as an alternative backend."
+  },
+  {
+    "name": "smuuf/zip-reader",
+    "version": "1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/smuuf/php-zip-reader/blob/363eaa22a52be72a2dc3fc6c3bef78835da4f259/LICENSE",
+    "documentation": "https://github.com/smuuf/php-zip-reader/blob/363eaa22a52be72a2dc3fc6c3bef78835da4f259/README.md",
+    "input_api": "ZipReader(local path); browse root; getEntries; ZippedFile::read",
+    "adapter": "adapters/php/zip/smuuf_zip_reader.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Smuuf ZIP reader over PHP ZipArchive",
+    "family_note": "Opens the local ZIP with PHP ZipArchive and exposes a navigable entry tree."
+  },
+  {
+    "name": "zanysoft/laravel-zip",
+    "version": "3.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/zanysoft/laravel-zip/blob/ee2a4f44a0236bab8e223c0eb8c4c8b6c739cb9b/LICENSE",
+    "documentation": "https://github.com/zanysoft/laravel-zip/blob/ee2a4f44a0236bab8e223c0eb8c4c8b6c739cb9b/README.md",
+    "input_api": "ZanySoft\\Zip\\Zip::open(local path); listFiles; extract",
+    "adapter": "adapters/php/zip/zanysoft_laravel_zip.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "ZanySoft ZIP wrapper over PHP ZipArchive",
+    "family_note": "Opens the local ZIP with PHP ZipArchive and extracts the selected entry."
   }
 ]

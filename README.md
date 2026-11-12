@@ -170,15 +170,15 @@ records that the numerical goal is met, while search remains incomplete and the
 cell does not claim a definitive most-used top 20. The ISO C++
 standard library has no documented ZIP parser.
 
-The PHP × ZIP verifier installs eight exact Composer package releases from two
+The PHP × ZIP verifier installs ten exact Composer package releases from two
 lockfiles and runs local-file readers on the same one-entry DEFLATE control.
-All **8/8 third-party paths and 2/2 bundled PHP APIs passed**. Five package
+All **10/10 third-party paths and 2/2 bundled PHP APIs passed**. Seven package
 paths use PHP ZipArchive/libzip; the [PHP ZIP ranking](data/php/zip/ranking.md)
 labels shared families and uses Packagist lifetime downloads only to order the
 verified third-party paths. PclZip uses a separate lock because UnifiedArchive
-declares it as a Composer replacement. Two adapters emitted nonfatal PHP 8.5
+declares it as a Composer replacement. Three adapters emitted nonfatal PHP 8.5
 warnings, captured in [verification.json](data/php/zip/verification.json).
-Three bounded Packagist searches recorded 300 hits, and five plausible leads
+Three bounded Packagist searches recorded 300 hits, and three plausible leads
 remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
 exact search limits and uncertainty. Reproduction requires PHP 8.5 with zip
 and Phar extensions, plus Composer 2; the verifier installs locked packages.

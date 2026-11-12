@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T09:18:32.933707+00:00",
+  "checked_at_utc": "2026-11-12T09:21:07.837886+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php_version": "8.5.12",
   "zip_extension_version": "1.22.8",
@@ -7,7 +7,7 @@
   "phar_extension_version": "8.5.12",
   "composer_version": "Composer version 2.11.2 2026-11-10 10:09:37",
   "composer_locks": {
-    "adapters/php/zip/composer.lock": "7e4fbc278f2216c7d083ae4686bdcd5eed4290a3d67d1f92a3c9e17d7fe9275d",
+    "adapters/php/zip/composer.lock": "479b83e23bd23eb7fe9cc3482fc221a825bb5d517b17b0052c4a756ee8af6db0",
     "adapters/php/zip/pclzip/composer.lock": "39b3b18ac2db2337f0093f5e1ec0793f706003b57353f2c1c365803207f80bce"
   },
   "control": "controls/zip/hello.zip",
@@ -131,6 +131,36 @@
         "content": "parsarium\n"
       },
       "stderr": "",
+      "pass": true
+    },
+    {
+      "package": "smuuf/zip-reader",
+      "version": "1.0",
+      "composer_lock": "adapters/php/zip/composer.lock",
+      "source_reference": "363eaa22a52be72a2dc3fc6c3bef78835da4f259",
+      "control": "controls/zip/hello.zip",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/smuuf_zip_reader.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "package": "zanysoft/laravel-zip",
+      "version": "3.1.0",
+      "composer_lock": "adapters/php/zip/composer.lock",
+      "source_reference": "ee2a4f44a0236bab8e223c0eb8c4c8b6c739cb9b",
+      "control": "controls/zip/hello.zip",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/zanysoft_laravel_zip.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "stderr": "PHP Deprecated:  ZanySoft\\Zip\\Zip::addItem(): Implicitly marking parameter $base as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zanysoft/laravel-zip/src/Zip.php on line 563",
       "pass": true
     }
   ],
