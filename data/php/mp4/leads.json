@@ -2,55 +2,67 @@
   {
     "name": "pulse00/ffmpeg-bundle",
     "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
+    "reason": "Higher-download FFmpeg bundle requires PHP ^5.3.9 or ^7.0; no PHP 8.5 control replay.",
     "source": "https://packagist.org/packages/pulse00/ffmpeg-bundle"
-  },
-  {
-    "name": "aminyazdanpanah/php-ffmpeg-video-streaming",
-    "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
-    "source": "https://packagist.org/packages/aminyazdanpanah/php-ffmpeg-video-streaming"
-  },
-  {
-    "name": "fmonts/ffmpeg-bundle",
-    "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
-    "source": "https://packagist.org/packages/fmonts/ffmpeg-bundle"
-  },
-  {
-    "name": "wapmorgan/media-file",
-    "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
-    "source": "https://packagist.org/packages/wapmorgan/media-file"
   },
   {
     "name": "pbmedia/php-ffmpeg",
     "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
+    "reason": "Higher-download FFmpeg fork requires PHP ^5.6 or ^7.0; no PHP 8.5 control replay.",
     "source": "https://packagist.org/packages/pbmedia/php-ffmpeg"
   },
   {
     "name": "php-mp4box/php-mp4box",
     "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
+    "reason": "MP4Box wrapper requires PHP ~7.0 and an MP4Box backend; local control replay not established.",
     "source": "https://packagist.org/packages/php-mp4box/php-mp4box"
   },
   {
-    "name": "clwu/php-read-mp4info",
+    "name": "media-alchemyst/media-alchemyst",
     "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
-    "source": "https://packagist.org/packages/clwu/php-read-mp4info"
+    "reason": "Higher-download multimedia wrapper has older dependency constraints; local MP4 parse result not replayed.",
+    "source": "https://packagist.org/packages/media-alchemyst/media-alchemyst"
   },
   {
-    "name": "soluble/mediatools",
+    "name": "plutuss/getid3-laravel",
     "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
-    "source": "https://packagist.org/packages/soluble/mediatools"
+    "reason": "Pinned release installed with a beta getID3 companion, but documented local-file API requires Laravel storage and container setup not yet replayed.",
+    "source": "https://packagist.org/packages/plutuss/getid3-laravel"
   },
   {
-    "name": "char0n/ffmpeg-php",
+    "name": "foxws/laravel-media",
     "status": "unresolved",
-    "reason": "Discovered via bounded Packagist search or related media documentation; pinned local MP4 API and control replay not yet completed.",
-    "source": "https://packagist.org/packages/char0n/ffmpeg-php"
+    "reason": "Pinned release installed; documented local-disk probe requires a Laravel application context not yet replayed.",
+    "source": "https://packagist.org/packages/foxws/laravel-media"
+  },
+  {
+    "name": "phansys/getid3",
+    "status": "unresolved",
+    "reason": "Pinned release fails PHP 8.5 with a syntax error in GetId3Core.php; a compatible runtime and MP4 replay were not established.",
+    "source": "https://packagist.org/packages/phansys/getid3"
+  },
+  {
+    "name": "relbraun/mp4info",
+    "status": "unresolved",
+    "reason": "MP4 info release requires PHP ^5.3.3 or ^7.0; no compatible-runtime control replay.",
+    "source": "https://packagist.org/packages/relbraun/mp4info"
+  },
+  {
+    "name": "nass600/get-id3",
+    "status": "unresolved",
+    "reason": "Registry license is listed only as GNU and a pinned MP4 control replay is not established.",
+    "source": "https://packagist.org/packages/nass600/get-id3"
+  },
+  {
+    "name": "cecil/php-read-mp4info",
+    "status": "excluded",
+    "reason": "Pinned 3.0.0 release returned width=0 and height=0 on the valid 2×2 MP4 control after manually loading its class; it also has a Composer autoload path mismatch.",
+    "source": "https://packagist.org/packages/cecil/php-read-mp4info"
+  },
+  {
+    "name": "wapmorgan/media-file",
+    "status": "excluded",
+    "reason": "Pinned release detects MP4 but misreads the valid control movie-header timescale and duration; no trustworthy format-aware result was established.",
+    "source": "https://packagist.org/packages/wapmorgan/media-file"
   }
 ]

@@ -15,9 +15,9 @@ ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
-20-parser batches, including PHP × WAV and PHP × PDF. PHP × MP4 has a five-path
-pilot batch. There are 63 cells at the 20-parser target, three started below
-target, and 22 marked `not_started`;
+20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4.
+There are 64 cells at the 20-parser target, two started below target, and
+22 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -340,13 +340,15 @@ are not at their `/opt/homebrew/bin` paths. The pinned Jurosh release's
 source LICENSE says Apache-2.0 while its Composer metadata says MIT; the
 source license is recorded.
 
-The [PHP × MP4 ranking](data/php/mp4/ranking.md) begins with five pinned
-package paths passing the valid 2 × 2 H.264/AAC MP4 control. Eight bounded
-Packagist searches saved 322 hits and 283 distinct package names. The paths
-share getID3, MediaInfoLib, and FFmpeg parser families; nine relevant leads
-remain unresolved. The [PHP MP4 runtime inventory](data/php/mp4/standard.json)
-records MIME-only Fileinfo and GD's failed reads. Run
-`python3 scripts/verify_php_mp4.py` from the repository root.
+The [PHP × MP4 ranking](data/php/mp4/ranking.md) records 20 pinned package
+paths passing the valid 2 × 2 H.264/AAC MP4 control. Twelve bounded
+Packagist searches saved 495 hits and 387 distinct package names. These paths
+share getID3, MediaInfoLib, and FFmpeg parser families, alongside a native PHP
+MP4 atom reader; nine relevant leads remain unresolved. This is a verified
+20-path collection, not a definitive most-used top 20. The
+[PHP MP4 runtime inventory](data/php/mp4/standard.json) records MIME-only
+Fileinfo and GD's failed reads. Run `python3 scripts/verify_php_mp4.py`
+from the repository root.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
