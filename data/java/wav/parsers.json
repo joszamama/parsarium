@@ -161,5 +161,15 @@
     "family": "metadata-extractor RIFF/WAV metadata reader", "scope": "WAV sample rate, channels and bit depth",
     "control": "controls/wav/256-samples.wav",
     "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16}
+  },
+  {
+    "name": "imagic-ffmpeg-java", "group": "ch.imagic", "artifact": "ffmpeg-java", "version": "0.1.2",
+    "license": "BSD-2-Clause", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new FFprobe(Executor,File localExecutable).probe(File localWav).get()",
+    "documentation": "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar",
+    "documentation_archive_entry": "ch/imagic/ffmpeg/FFprobe.html",
+    "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
+    "adapter_module": "imagic", "control": "controls/wav/256-samples.wav",
+    "expected_output": {"format": "wav", "codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
   }
 ]

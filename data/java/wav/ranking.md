@@ -1,6 +1,6 @@
 # Java × WAV: verified parser ranking
 
-16 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T05:36:50.612011+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 1 package(s) lack a metric and remain unranked.
+17 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T05:40:19.373367+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 1 package(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -19,6 +19,7 @@ Search hits, unresolved leads, and JDK APIs are separate from this ranking. See 
 | 11 | [beads](https://repo.maven.apache.org/maven2/net/beadsproject/beads/3.2/beads-3.2-javadoc.jar) | net.beadsproject:beads:3.2 | 0 | sample rate, channels and decoded frame count | Beads WAV reader |
 | 11 | [bramp-ffmpeg](https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar) | net.bramp.ffmpeg:ffmpeg:0.9.2 | 0 | WAV format, PCM codec, sample rate and channels | bramp FFprobe CLI wrapper over FFmpeg |
 | 11 | [codecmedia](https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar) | me.tamkungz.codecmedia:codecmedia:1.2.2 | 0 | parsed PCM codec, sample rate and channels | CodecMedia RIFF/WAV parser |
+| 11 | [imagic-ffmpeg-java](https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar) | ch.imagic:ffmpeg-java:0.1.2 | 0 | WAV format, PCM codec, sample rate and channels | Imagic fork of bramp FFprobe CLI wrapper over FFmpeg |
 | 11 | [jdsp](https://repo.maven.apache.org/maven2/com/github/psambit9791/jdsp/3.1.1/jdsp-3.1.1-javadoc.jar) | com.github.psambit9791:jdsp:3.1.1 | 0 | sample rate, channels and frame count | JDSP WAV API over wavfile |
 | 11 | [musicg](https://repo.maven.apache.org/maven2/com/github/fracpete/musicg/1.4.2.2/musicg-1.4.2.2-javadoc.jar) | com.github.fracpete:musicg:1.4.2.2 | 0 | WAVE format, sample rate, channels, bit depth and sample count | musicg PCM WAVE reader |
 | unranked | [tarsosdsp-jvm](https://mvn.0110.be/releases/be/tarsos/dsp/jvm/2.5/jvm-2.5-javadoc.jar) | be.tarsos.dsp:jvm:2.5 | unknown | sample rate, channels, bit depth and decoded frame count | TarsosDSP JVM wrapper over Java Sound |
