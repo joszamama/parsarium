@@ -209,5 +209,29 @@
     "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
     "family": "Audio File Library WAV parser",
     "family_note": "Tagged 0.3.6 C API from mpruett/audiofile, unrelated to the Conan audiofile recipe for a C++ header-only package. One build-only signed-shift compatibility patch is documented."
+  },
+  {
+    "name": "aubio",
+    "version": "0.4.9",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/aubio.json",
+    "documentation": "https://github.com/aubio/aubio/blob/0.4.9/src/io/source.h",
+    "input_api": "new_aubio_source(local WAV path, original sample rate, hop size); aubio_source_do; aubio_source_get_samplerate, channels, duration",
+    "adapter": "adapters/c/wav/aubio.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "aubio source abstraction",
+    "family_note": "Distinct C package source API; installed build links Apple AudioToolbox and libsndfile. The exact backend chosen for this control was not isolated, so parser-engine independence is not claimed."
   }
 ]

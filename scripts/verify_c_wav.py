@@ -82,7 +82,7 @@ def main() -> None:
             assert version == item["pkg_config_version"], (name, version)
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", *item["pkg_configs"]]))
             command = ["cc", "-std=c11", "-O2", str(ROOT / parser["adapter"]),
-                       *flags, "-o", str(TARGET / name)]
+                       *flags, *item.get("extra_link_flags", []), "-o", str(TARGET / name)]
             installed[name] = {"pkg_config_version": version, "library": str(library),
                                "library_sha256": digest,
                                "additional_libraries": item.get("additional_libraries", [])}

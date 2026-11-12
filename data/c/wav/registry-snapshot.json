@@ -168,13 +168,20 @@
       "source_url": "https://download.gnome.org/sources/audiofile/0.3/audiofile-0.3.6.tar.xz",
       "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
       "license_evidence": "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/COPYING"
+    },
+    "aubio": {
+      "version": "0.4.9",
+      "license": "GPL-3.0-or-later",
+      "source_url": "https://aubio.org/pub/aubio-0.4.9.tar.bz2",
+      "source_sha256": "d48282ae4dab83b3dc94c16cf011bcb63835c1c02b515490e1883049c3d1f3da",
+      "license_evidence": "https://formulae.brew.sh/api/formula/aubio.json"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -221,11 +228,16 @@
         "stars": 167,
         "repository": "https://github.com/mpruett/audiofile",
         "source": "https://api.github.com/repos/mpruett/audiofile"
+      },
+      "aubio": {
+        "stars": 3787,
+        "repository": "https://github.com/aubio/aubio",
+        "source": "https://api.github.com/repos/aubio/aubio"
       }
     },
     "captured_between_utc": [
       "2026-11-12T10:25:21.715408+00:00",
-      "2026-11-12T10:37:16.230019+00:00"
+      "2026-11-12T10:42:04.676488+00:00"
     ]
   },
   "targeted_documentation": [
@@ -237,6 +249,8 @@
     "https://wiki.libsdl.org/SDL3_mixer/MIX_LoadAudio",
     "https://github.com/libsdl-org/SDL_mixer/blob/release-3.2.4/src/decoder_wav.c",
     "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/README",
-    "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h"
+    "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h",
+    "https://github.com/aubio/aubio/blob/0.4.9/src/io/source.h",
+    "https://aubio.org/pub/aubio-0.4.9.tar.bz2"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T10:37:53.406897+00:00",
+  "checked_at_utc": "2026-11-12T10:42:36.097517+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "installed_libraries": {
@@ -43,6 +43,12 @@
       "library": "/opt/homebrew/Cellar/sdl3_mixer/3.2.4_1/lib/libSDL3_mixer.0.2.4.dylib",
       "library_sha256": "a165b55e2363722f659896369f6b245d3628884ef694559e2d57762716f7a856",
       "additional_libraries": []
+    },
+    "aubio": {
+      "pkg_config_version": "0.4.9",
+      "library": "/opt/homebrew/Cellar/aubio/0.4.9_4/lib/libaubio.5.4.8.dylib",
+      "library_sha256": "148d6cbaff1024b63f6d765c8da935c066abe8a178e0120d4852411bab2209e1",
+      "additional_libraries": []
     }
   },
   "source_builds": {
@@ -63,7 +69,7 @@
       "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
       "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
       "configure_command": "./configure --prefix=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install --disable-static",
-      "library_sha256": "d979445845a2cb19c46435129a2ce12f6472e0db4ac99096b7ef71d1b2c33516"
+      "library_sha256": "0cd01ca0020c5ae3ab83399f83c60d28e660f5177571cf6972c40cdea1c2bd10"
     }
   },
   "control": "controls/wav/four-samples.wav",
@@ -237,6 +243,25 @@
       "control": "controls/wav/four-samples.wav",
       "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/libaudiofile.c -L/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install/lib -laudiofile -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/libaudiofile",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/libaudiofile /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "aubio",
+      "version": "0.4.9",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/aubio.c -I/opt/homebrew/Cellar/aubio/0.4.9_4/include -L/opt/homebrew/Cellar/aubio/0.4.9_4/lib -laubio -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/aubio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/aubio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
       "output": {
         "sample_rate": 8000,
         "channels": 1,
