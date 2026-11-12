@@ -377,5 +377,35 @@
     "family": "GStreamer gst-plugins-bad pnmdec",
     "family_note": "PNM decoder plugin from the pinned GStreamer 1.28.9 monorepo source release; local pnm plugin dylib separately checked by SHA-256.",
     "family_evidence": "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html"
+  },
+  {
+    "name": "libpnmrw",
+    "version": "14Aug2014",
+    "license": "BSD-2-Clause",
+    "license_evidence": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz",
+    "documentation": "https://acme.com/software/libpnmrw/",
+    "input_api": "pnm_readpnm(FILE*, int*, int*, xelval*, int*); PPM_GETR/G/B(...)",
+    "adapter": "adapters/c/ascii_pnm/libpnmrw.c",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions, maxval, and two decoded RGB pixels",
+    "family": "libpnmrw PBMPLUS-derived parser",
+    "family_note": "A compact PBMPLUS-derived reader with a local FILE* API; it shares historical lineage with Netpbm but is a separately distributed parser implementation. The date-named archive is 14Aug2014; its README labels the code version 03jul2014.",
+    "family_evidence": "https://acme.com/software/libpnmrw/",
+    "api_evidence": "libpnmrw.h in the pinned official ACME Labs archive"
   }
 ]

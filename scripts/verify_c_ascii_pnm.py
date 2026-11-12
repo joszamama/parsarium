@@ -7,6 +7,7 @@ import json
 import platform
 import shlex
 import subprocess
+import tarfile
 import urllib.request
 
 
@@ -35,6 +36,40 @@ def main() -> None:
         name = parser["name"]
         item = lock[name]
         assert parser["version"] == item["release"]
+        if name == "libpnmrw":
+            cache = ROOT / "adapters/c/ascii_pnm/cache"
+            cache.mkdir(parents=True, exist_ok=True)
+            archive = cache / "libpnmrw_14Aug2014.tar.gz"
+            if not archive.exists():
+                run(["curl", "-L", "--fail", "--silent", "--show-error",
+                     item["source_url"], "-o", str(archive)])
+            assert sha256(archive.read_bytes()).hexdigest() == item["source_sha256"]
+            source = cache / "libpnmrw"
+            source.mkdir(exist_ok=True)
+            with tarfile.open(archive) as tar:
+                for filename in ("libpnmrw.c", "libpnmrw.h"):
+                    member = tar.extractfile(f"libpnmrw/{filename}")
+                    assert member is not None
+                    (source / filename).write_bytes(member.read())
+            object_file = TARGET / "libpnmrw-lib.o"
+            source_build = ["cc", "-std=c11", "-O2", "-I" + str(source),
+                            "-c", str(source / "libpnmrw.c"), "-o", str(object_file)]
+            run(source_build)
+            command = ["cc", "-std=c11", "-O2", "-I" + str(source),
+                       str(ROOT / parser["adapter"]), str(object_file),
+                       "-o", str(TARGET / name)]
+            run(command)
+            execute = [str(TARGET / name), str(CONTROL)]
+            output = json.loads(run(execute))
+            assert output == parser["expected_output"], (name, output)
+            local_libraries[name] = {"source_archive": str(archive),
+                                     "source_sha256": item["source_sha256"],
+                                     "source_build_command": shlex.join(source_build)}
+            rows.append({"package": name, "version": parser["version"],
+                         "control": parser["control"], "build_command": shlex.join(command),
+                         "command": shlex.join(execute), "output": output, "pass": True})
+            print(f"{name}@{parser['version']}: P3 passed")
+            continue
         if name == "netpbm":
             version_bytes = urllib.request.urlopen(item["version_file_url"], timeout=20).read()
             assert sha256(version_bytes).hexdigest() == item["version_file_sha256"]

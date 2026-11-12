@@ -19,8 +19,17 @@
   },
   {
     "name": "allegro",
+    "status": "excluded",
+    "reason": "The installed Allegro 5.2.11 image addon al_load_bitmap(local P3 .ppm path) returned NULL on the valid 2x1 red/green control; P3 parsing is not verified for this package build.",
+    "source": "https://allegro5.org/docs/html/refman/image.html",
+    "probe": "C call site: al_init(); al_init_image_addon(); al_load_bitmap(\"controls/ascii_pnm/red-green.ppm\") -> NULL"
+  },
+  {
+    "name": "libpnmio",
     "status": "unresolved",
-    "reason": "Potential image addon; ASCII P3 support and adapter remain unverified.",
-    "source": "https://liballeg.org/a5docs/trunk/image.html"
+    "reason": "The upstream README identifies version 1.2.7, while its VERSION file says 1.2.6 and no release tag is published; the exact release identity remains ambiguous. A local P3 adapter has not been verified.",
+    "source": "https://github.com/nkkav/libpnmio",
+    "candidate_commit": "bd860723211ffdb3a0b0a7067afd7e94d583af7c",
+    "candidate_source_sha256": "d5073c1b3a81b8299527d30c53bd919734466d375c5b45ba83b4349ced89f43d"
   }
 ]

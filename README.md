@@ -150,14 +150,16 @@ documented PNG parser.
 
 The C and C++ × ASCII PNM verifiers use the valid 2×1 P3 red/green control,
 exact-release source pins, and binary SHA-256 checks for thirteen installed
-libraries and relevant plugins. Netpbm is pinned to official Subversion revision
-5358, whose `version.mk` identifies release 11.02.30. All **13/13 C and 13/13
+libraries and relevant plugins, plus the SHA-256-pinned libpnmrw source archive.
+Netpbm is pinned to official Subversion revision
+5358, whose `version.mk` identifies release 11.02.30. All **14/14 C and 14/14
 C++ package paths passed**, returning parsed dimensions and two decoded pixels.
 The C++ adapters use the same underlying C packages and reader implementations.
-SDL2_image and SDL3_image share an upstream family. Each cell remains seven paths below the working target, with unresolved
+SDL2_image and SDL3_image share an upstream family; libpnmrw and Netpbm share
+PBMPLUS ancestry. Each cell remains six paths below the working target, with unresolved
 leads recorded in its [C cell](data/c/ascii_pnm/cell.json) and
 [C++ cell](data/cpp/ascii_pnm/cell.json). Their rankings use primary GitHub
-repository stars within each ecosystem; seven paths in each cell lack a
+repository stars within each ecosystem; eight paths in each cell lack a
 comparable metric and remain unranked. The control establishes ASCII P3
 handling; it does not establish every PNM variant. Neither scoped standard
 library documents a PNM-aware parser.

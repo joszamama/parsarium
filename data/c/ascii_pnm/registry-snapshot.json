@@ -102,7 +102,8 @@
     "https://sourceforge.net/p/netpbm/code/5358/tree/stable/version.mk?format=raw",
     "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
     "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavcodec/pnmdec.c",
-    "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html"
+    "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html",
+    "https://acme.com/software/libpnmrw/"
   ],
   "releases": {
     "imagemagick": {
@@ -198,13 +199,20 @@
       "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
       "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
       "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json"
+    },
+    "libpnmrw": {
+      "version": "14Aug2014",
+      "license": "BSD-2-Clause",
+      "source_url": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz",
+      "source_sha256": "c4a18cc85066bcd14835c4dce09c0541b3940a1033e89346373d235a6b5a303f",
+      "license_evidence": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where available",
     "captured_at_utc": "2026-11-12T07:20:18.790315+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Primary upstream GitHub star observations are copied from the same-day C PNG snapshot for the exact same release paths. Stars reflect broad project adoption, not ASCII PNM use. SDL2_image and SDL3_image share one upstream count. GdkPixbuf, FreeImage, GraphicsMagick, DevIL and Imlib2 lack comparable primary GitHub metrics and remain unranked. Conan recipe names are alphabetic discovery leads, not usage rankings. Netpbm is also unranked because its primary upstream is SourceForge Subversion. GStreamer is also unranked because its primary upstream is GitLab.",
+    "limitations": "Primary upstream GitHub star observations are copied from the same-day C PNG snapshot for the exact same release paths. Stars reflect broad project adoption, not ASCII PNM use. SDL2_image and SDL3_image share one upstream count. GdkPixbuf, FreeImage, GraphicsMagick, DevIL and Imlib2 lack comparable primary GitHub metrics and remain unranked. Conan recipe names are alphabetic discovery leads, not usage rankings. Netpbm is also unranked because its primary upstream is SourceForge Subversion. GStreamer is also unranked because its primary upstream is GitLab. libpnmrw is unranked because its primary upstream is ACME Labs.",
     "packages": {
       "imagemagick": {
         "repository": "ImageMagick/ImageMagick",
@@ -277,6 +285,12 @@
         "repository": null,
         "source": null,
         "reason": "Primary upstream is GitLab; no comparable GitHub repository star count. GitHub mirror stars are not borrowed."
+      },
+      "libpnmrw": {
+        "repository": null,
+        "stars": null,
+        "url": "https://acme.com/software/libpnmrw/",
+        "reason": "Primary upstream is ACME Labs, not a GitHub repository; no comparable primary GitHub stars."
       }
     }
   }

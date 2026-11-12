@@ -1,6 +1,6 @@
 # C++ × ASCII_PNM: verified parser ranking
 
-13 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured at 2026-11-12T07:20:18.790315+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 7 path(s) lack a metric and remain unranked.
+14 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured at 2026-11-12T07:20:18.790315+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 8 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C++ standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -18,4 +18,5 @@ Search hits, unresolved leads, and the C++ standard-library inventory are separa
 | unranked | [graphicsmagick](https://graphicsmagick.sourceforge.io/wand/magick_wand.html) | 1.3.49 | unknown | P3 dimensions and two decoded RGBA pixels | GraphicsMagick PNM coder |
 | unranked | [gstreamer](https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html) | 1.28.9 | unknown | P3 dimensions, RGB caps, and two decoded pixels | GStreamer gst-plugins-bad pnmdec |
 | unranked | [imlib2](https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/) | 1.12.7 | unknown | P3 dimensions and two decoded RGBA pixels | Imlib2 PNM loader |
+| unranked | [libpnmrw](https://acme.com/software/libpnmrw/) | 14Aug2014 | unknown | P3 dimensions, maxval, and two decoded RGB pixels | libpnmrw PBMPLUS-derived parser |
 | unranked | [netpbm](https://netpbm.sourceforge.net/doc/libppm.html) | 11.02.30 | unknown | P3 dimensions, maxval, and two decoded RGB pixels | Netpbm libppm parser |
