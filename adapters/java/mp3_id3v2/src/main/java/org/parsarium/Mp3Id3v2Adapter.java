@@ -68,6 +68,25 @@ public final class Mp3Id3v2Adapter {
                 System.out.printf("{\"codec\":\"%s\",\"frame_bytes\":%d,\"timescale\":%d}%n",
                         track.getMeta().getCodec(), frame.getData().remaining(), frame.getTimescale());
             }
+        } else if (args[0].equals("codecmedia")) {
+            var result = me.tamkungz.codecmedia.CodecMedia.createDefault().probe(path);
+            var audio = result.streams().get(0);
+            System.out.printf("{\"codec\":\"%s\",\"frequency\":%d,\"channels\":%d}%n",
+                    audio.codec(), audio.sampleRate(), audio.channels());
+        } else if (args[0].equals("jid3lib")) {
+            var mp3 = new org.farng.mp3.MP3File(path.toFile());
+            if (!mp3.hasID3v2Tag()) System.exit(1);
+            var tag = mp3.getID3v2Tag();
+            System.out.printf("{\"title\":\"%s\",\"artist\":\"%s\",\"album\":\"%s\"}%n",
+                    tag.getSongTitle(), tag.getLeadArtist(), tag.getAlbumTitle());
+        } else if (args[0].equals("taglib")) {
+            try (var mp3 = new cz.skyba.taglib.mpeg.MpegFile(path)) {
+                if (!mp3.hasId3v2Tag()) System.exit(1);
+                var tag = mp3.id3v2Tag();
+                var props = mp3.detailedProperties();
+                System.out.printf("{\"title\":\"%s\",\"artist\":\"%s\",\"album\":\"%s\",\"frequency\":%d}%n",
+                        tag.title(), tag.artist(), tag.album(), props.sampleRate());
+            }
         } else System.exit(2);
     }
 }

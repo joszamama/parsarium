@@ -32,6 +32,9 @@ COORDS = {
     "javacv": ("org.bytedeco", "javacv", "1.5.14"),
     "bytedeco-ffmpeg": ("org.bytedeco", "ffmpeg", "8.1.2-1.5.14"),
     "jcodec": ("org.jcodec", "jcodec", "0.2.5"),
+    "codecmedia": ("me.tamkungz.codecmedia", "codecmedia", "1.2.2"),
+    "jid3lib": ("net.sf.javamusictag", "jid3lib", "0.5.4"),
+    "taglib-java": ("cz.skyba", "taglib", "1.0.0"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
@@ -44,6 +47,9 @@ LICENSES = {
     "javacv": ("Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14.pom"),
     "bytedeco-ffmpeg": ("Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14.pom"),
     "jcodec": ("BSD-2-Clause", "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5.pom"),
+    "codecmedia": ("Apache-2.0", "https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2.pom"),
+    "jid3lib": ("LGPL-2.1", "https://github.com/ericfarng/jid3lib/blob/master/LGPL.html"),
+    "taglib-java": ("LGPL-2.1 OR MPL-2.0", "https://repo.maven.apache.org/maven2/cz/skyba/taglib/1.0.0/taglib-1.0.0.pom"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 
@@ -113,16 +119,27 @@ def main() -> None:
                                      capture_output=True, check=True).stdout.splitlines()[0]
     snapshot = {
         "captured_at_utc": now,
-        "search_surface": "Maven Central Solr bounded artifact queries plus targeted official Maven releases",
+        "search_surface": "Maven Central Solr bounded artifact queries plus targeted Sonatype/Maven release and project documentation leads",
         "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
         "search_limit_per_query": 100,
         "search": searches,
+        "targeted_registry_leads": [
+            {"name": "codecmedia", "url": "https://central.sonatype.com/artifact/me.tamkungz.codecmedia/codecmedia/1.2.2"},
+            {"name": "jid3lib", "url": "https://central.sonatype.com/artifact/net.sf.javamusictag/jid3lib/0.5.4"},
+            {"name": "taglib-java", "url": "https://central.sonatype.com/artifact/cz.skyba/taglib/1.0.0"},
+            {"name": "javasound-mp3", "url": "https://central.sonatype.com/artifact/com.tianscar.javasound/javasound-mp3/1.9.8"},
+            {"name": "groupdocs-metadata", "url": "https://central.sonatype.com/artifact/com.groupdocs/groupdocs-metadata/18.4"}
+        ],
+        "targeted_registry_lead_rule": "A package page supplied only a lead; eligibility came from the pinned local control adapter and license evidence.",
         "targeted_documentation_leads": [
             "https://www.jthink.net/jaudiotagger/examples_id3.jsp",
             "https://github.com/mpatric/mp3agic/blob/master/readme.md",
             "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-sources.jar",
             "https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1-javadoc.jar",
             "https://github.com/pdudits/soundlibs/blob/master/README.adoc",
+            "https://central.sonatype.com/artifact/me.tamkungz.codecmedia/codecmedia/1.2.2",
+            "https://central.sonatype.com/artifact/net.sf.javamusictag/jid3lib/0.5.4",
+            "https://central.sonatype.com/artifact/cz.skyba/taglib/1.0.0",
         ],
         "releases": releases,
         "external_tools": {

@@ -1,7 +1,7 @@
 """Build pinned Java MP3/ID3v2 readers and test a valid local control.
 
 Run from the repo root: python3 scripts/verify_java_mp3_id3v2.py
-Requires JDK 21+ and Maven 3.9+. This verifies only the recorded ordinary file.
+Requires JDK 21, JDK 25+ for taglib, and Maven 3.9+. This verifies only the recorded ordinary file.
 """
 
 from __future__ import annotations
@@ -72,6 +72,7 @@ def main() -> None:
                           check=True).stdout.splitlines()[0] == ffprobe_record["version"]
 
     results = []
+    java25 = str(Path(os.environ.get("PARSARIUM_JAVA25_HOME", "/opt/homebrew/opt/openjdk@25")) / "bin/java")
     for parser in parsers:
         label = parser["adapter_label"]
         module = parser.get("adapter_module", "main")
@@ -80,7 +81,8 @@ def main() -> None:
                       "bytedeco": "org.parsarium.BytedecoMp3Adapter"}[module]
         assert parser["control"] == "controls/mp3_id3v2/tone-tags.mp3"
         arguments = [] if module == "mp3spi" else [label]
-        command = ["java", "-cp", classpaths[module], class_name,
+        java_binary = java25 if parser["name"] == "taglib-java" else "java"
+        command = [java_binary, "-cp", classpaths[module], class_name,
                    *arguments, str(CONTROL)]
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=30)
         try:
@@ -92,7 +94,7 @@ def main() -> None:
         row = {"package": parser["name"], "adapter_label": label,
                "control": parser["control"], "output": output, "pass": passed,
                "exit_code": result.returncode,
-               "command": f"java -cp <{module} locked classpath> {class_name} "
+               "command": f"{'java25' if parser['name'] == 'taglib-java' else 'java'} -cp <{module} locked classpath> {class_name} "
                           f"{' '.join(arguments)} {parser['control']}",
                "version": parser["version"]}
         if result.stderr and not passed:
@@ -114,6 +116,7 @@ def main() -> None:
     report = {
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "environment": {"java": version(["java", "-version"]),
+                        "java25": version([java25, "-version"]),
                         "maven": version(["mvn", "-version"]),
                         "maven_compiler_release": 21,
                         "locked_classpath_jars": jar_counts},

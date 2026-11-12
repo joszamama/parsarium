@@ -1,6 +1,6 @@
 # Java × MP3 with ID3v2: verified parser ranking
 
-10 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T14:28:02.091327+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
+13 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T14:33:38.293222+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -16,3 +16,6 @@ Search hits, unresolved leads, and JDK APIs are separate from this ranking. See 
 | 8 | [jaffree](https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-sources.jar) | com.github.kokorin.jaffree:jaffree:2024.08.29 | 2 | local tagged MP3 codec, sample rate, title and artist | Jaffree wrapper over local FFprobe/FFmpeg |
 | 8 | [jave-core](https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-sources.jar) | ws.schild:jave-core:4.2.0 | 2 | local tagged MP3 format, codec, sample rate and channels | JAVE2 wrapper over bundled FFmpeg MP3 demuxer |
 | 10 | [tika-audiovideo](https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-sources.jar) | org.apache.tika:tika-parser-audiovideo-module:4.2.0 | 1 | local tagged MP3 title, artist and album metadata | Apache Tika native MP3 and ID3v2 parser |
+| 11 | [codecmedia](https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar) | me.tamkungz.codecmedia:codecmedia:1.2.2 | 0 | local tagged MP3 codec, sample rate and channels | CodecMedia native MP3 frame parser |
+| 11 | [jid3lib](https://github.com/ericfarng/jid3lib) | net.sf.javamusictag:jid3lib:0.5.4 | 0 | local tagged MP3 title, artist and album | jid3lib native ID3v2 tag parser; historical ancestry shared with jaudiotagger and mp3agic |
+| 11 | [taglib-java](https://repo.maven.apache.org/maven2/cz/skyba/taglib/1.0.0/taglib-1.0.0-sources.jar) | cz.skyba:taglib:1.0.0 | 0 | local tagged MP3 title, artist, album and sample rate | TagLib Java adaptation with native Java MPEG and ID3v2 implementation |
