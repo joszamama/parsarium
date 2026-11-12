@@ -195,5 +195,21 @@
     "scope": "PDF document page count",
     "family": "pdfmm, fork of PoDoFo",
     "family_note": "Pdfmm 0.10.0 is a distinct C++17 library forked from PoDoFo and later moved back to the PoDoFo community. Its parser lineage is shared with PoDoFo, and its separate pinned source release is built as a shared library with direct dependency hashes recorded."
+  },
+  {
+    "name": "docling_parse",
+    "version": "7.25.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/docling-project/docling-parse/blob/v7.25.0/LICENSE",
+    "documentation": "https://github.com/docling-project/docling-parse/blob/v7.25.0/src/parse/pdf_decoders/document.h",
+    "input_api": "pdflib::pdf_decoder<pdflib::DOCUMENT>::process_document_from_file(std::string& local filename, std::optional<std::string>& password); get_number_of_pages()",
+    "adapter": "adapters/cpp/pdf/docling_parse.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "qpdf engine via Docling Parse",
+    "family_note": "Docling Parse 7.25.0 exposes a C++20 local-file decoder over bundled qpdf. It is a distinct source package and API but shares qpdf as the PDF syntax engine. A pinned-source CMake target builds the adapter with pinned LLVM and bundled dependency tags; the recorded patch only adds the adapter target and propagates LLVM into the qpdf subbuild. The source does not publish a separately installed stable C++ ABI."
   }
 ]

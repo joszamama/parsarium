@@ -196,5 +196,27 @@
     "build": "cmake -S <source> -B <cache>/pdfmm-build -DCMAKE_BUILD_TYPE=Release -DPDFMM_BUILD_LIB_ONLY=ON -DPDFMM_SHARED=ON -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOPENSSL_ROOT_DIR=/opt/homebrew/Cellar/openssl@4/4.1.0; cmake --build <cache>/pdfmm-build --target pdfmm_shared -j4",
     "repository": "https://github.com/pdfmm/pdfmm",
     "build_note": "Native C++17 library from pinned v0.10.0 source. Direct dylib dependencies are pinned by SHA-256; Apple SDK libxml2 and zlib come from the recorded macOS toolchain. Pdfmm is a fork of PoDoFo and is now upstream-inactive, but remains a distinct release and API; its engine lineage is recorded."
+  },
+  "docling_parse": {
+    "release": "7.25.0",
+    "license": "MIT",
+    "source_url": "https://codeload.github.com/docling-project/docling-parse/tar.gz/refs/tags/v7.25.0",
+    "source_sha256": "6a5a63e94752b10f88405300575d83ff244fc5cd6b3d9f3d6ea5b41cd283ee18",
+    "source_header_member": "docling-parse-7.25.0/src/parse/pdf_decoders/document.h",
+    "local_header_sha256": "a63311fd6273fe9fd608f61329b4c9159daf945fe0ba2c9410700f92e31cd582",
+    "patch": "scripts/patch_docling_parse.py",
+    "patch_sha256": "6c4f7883a6461920036141e0e8460fd5f5957404ff65d103029447869b86441e",
+    "adapter_sha256": "e7fd9749b32a168ac879dc5ba67712c67c3163b446c10abe71b615d981c4a731",
+    "installed_dependencies": {
+      "llvm": "23.1.4",
+      "pybind11": "3.1.0_1"
+    },
+    "compiler": "/opt/homebrew/opt/llvm/bin/clang++",
+    "compiler_sha256": "a3f510aa37c9a3082649435e39e3f7c808b6696bb62f077b141c271b5aa783a2",
+    "pybind11_header": "/opt/homebrew/Cellar/pybind11/3.1.0_1/include/pybind11/pybind11.h",
+    "pybind11_header_sha256": "ba323b835ef91eb85342057db2353cbac3da9040eac9f0b83891a3ce66911a75",
+    "build": "Fresh extraction; apply scripts/patch_docling_parse.py to add the control target and propagate the selected C/C++ compiler into bundled qpdf ExternalProject; cmake -S <source> -B <cache>/docling-parse-build -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_DEPS=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_C_COMPILER=/opt/homebrew/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++; cmake --build <cache>/docling-parse-build --target parsarium_control -j4",
+    "repository": "https://github.com/docling-project/docling-parse",
+    "build_note": "Bundled CMake dependency scripts in the pinned source use fixed tags or commits. Homebrew LLVM 23.1.4 is required because Apple libc++ in the recorded environment lacks C++20 three-way concepts and ranges algorithms used by bundled PDFium JBIG2 and qpdf sources. The upstream C++ API processes local file bytes through its bundled qpdf engine; this is a separate package/API but not an independent PDF syntax engine. The source includes a stock MIT license text with placeholder copyright fields."
   }
 }

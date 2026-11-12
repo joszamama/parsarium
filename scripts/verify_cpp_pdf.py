@@ -14,6 +14,7 @@ import tarfile
 import tempfile
 
 from patch_pdf4qt_core import patch_pdf4qt_core
+from patch_docling_parse import patch_docling_parse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,8 +25,8 @@ TARGET = ROOT / "adapters/cpp/pdf/target"
 CONTROL_SHA256 = "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a"
 
 
-def run(command: list[str], cwd: Path = ROOT) -> str:
-    result = subprocess.run(command, cwd=cwd, text=True, capture_output=True, timeout=180)
+def run(command: list[str], cwd: Path = ROOT, timeout: int = 180) -> str:
+    result = subprocess.run(command, cwd=cwd, text=True, capture_output=True, timeout=timeout)
     if result.returncode:
         raise RuntimeError(f"{shlex.join(command)}\n{result.stderr}")
     return result.stdout.strip()
@@ -170,11 +171,35 @@ def main() -> None:
                  "-DOPENSSL_ROOT_DIR=/opt/homebrew/Cellar/openssl@4/4.1.0"])
             run(["cmake", "--build", str(build_dir), "--target", "pdfmm_shared", "-j4"])
             library = build_dir / "src/pdfmm/libpdfmm.0.10.0.dylib"
+        elif name == "docling_parse":
+            patch = ROOT / source["patch"]
+            adapter = ROOT / parser["adapter"]
+            assert sha256(patch.read_bytes()).hexdigest() == source["patch_sha256"]
+            assert sha256(adapter.read_bytes()).hexdigest() == source["adapter_sha256"]
+            for program, release in source["installed_dependencies"].items():
+                assert run(["brew", "list", "--versions", program]) == f"{program} {release}"
+            assert sha256(Path(source["compiler"]).read_bytes()).hexdigest() == source["compiler_sha256"]
+            assert sha256(Path(source["pybind11_header"]).read_bytes()).hexdigest() == source["pybind11_header_sha256"]
+            source_dir = CACHE / f"docling-parse-{source['release']}"
+            build_dir = CACHE / "docling-parse-build"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            if build_dir.exists():
+                shutil.rmtree(build_dir)
+            run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            patch_docling_parse(source_dir, adapter)
+            header = source_dir / "src/parse/pdf_decoders/document.h"
+            run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DUSE_SYSTEM_DEPS=OFF",
+                 "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+                 "-DCMAKE_C_COMPILER=/opt/homebrew/opt/llvm/bin/clang",
+                 "-DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++"], timeout=600)
+            library = build_dir / "parsarium_control"
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm"):
+        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm", "docling_parse"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -241,9 +266,13 @@ def main() -> None:
                        "-I" + str(source_dir / "src"), "-I" + str(build_dir / "src/pdfmm"),
                        str(ROOT / parser["adapter"]), str(library),
                        "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
+        elif name == "docling_parse":
+            command = ["cmake", "--build", str(build_dir), "--target", "parsarium_control", "-j4"]
         else:
             raise AssertionError(name)
-        run(command)
+        run(command, timeout=1200 if name == "docling_parse" else 180)
+        if name == "docling_parse":
+            shutil.copy2(library, TARGET / name)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))
         assert output == parser["expected_output"], (name, output)

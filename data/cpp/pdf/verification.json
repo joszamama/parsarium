@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T23:30:08.126730+00:00",
+  "checked_at_utc": "2026-11-12T23:42:54.008279+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,7 +31,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "d52dccd07b3eb4dbc0c65b38c026f8344fa8ba77fc59c3a430b32969ec95b7d3",
+      "local_library_sha256": "64a1f402c84d38676077628ecf95db51cc4c8b652c58ccccaccc545840d65e41",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -56,13 +56,18 @@
     },
     "xpdf": {
       "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
-      "local_library_sha256": "c247eb6b1188111de18093600480b13f02835212b523fcc7d850f601a9b1a464",
+      "local_library_sha256": "30dcebffd75069392584339dc1e3654cce08068806c7397c78ba92271a35b856",
       "local_header_sha256": "d9db2a755da945a0c80fbf30f07d4714625bde1bc832759971514f41842bb064"
     },
     "pdfmm": {
       "source_sha256": "6b583ec41d3b1660f016073896dc39868853a7f28f3e757a78d8951525d8ba39",
       "local_library_sha256": "08a49bb5cf7df7a86fe3fdcd0f9348d06eaecfcc032fc42c37186e50fbdc50c4",
       "local_header_sha256": "c315f8af4d25726278b1a20e4981e4262542b525bc08f178c2a63ee7a4f69326"
+    },
+    "docling_parse": {
+      "source_sha256": "6a5a63e94752b10f88405300575d83ff244fc5cd6b3d9f3d6ea5b41cd283ee18",
+      "local_library_sha256": "3820d3e565cea5b708f7b28a7302640a74d4c5f8f058e85d6a5b78a3732aa9d9",
+      "local_header_sha256": "a63311fd6273fe9fd608f61329b4c9159daf945fe0ba2c9410700f92e31cd582"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -195,6 +200,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -Wno-unnecessary-virtual-specifier -DPDFMM_SHARED=1 -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfmm-0.10.0/src -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfmm-build/src/pdfmm /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdfmm.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfmm-build/src/pdfmm/libpdfmm.0.10.0.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfmm-build/src/pdfmm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfmm",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfmm /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "docling_parse",
+      "version": "7.25.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/docling-parse-build --target parsarium_control -j4",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/docling_parse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },
