@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T21:55:24.415211+00:00",
+  "checked_at_utc": "2026-11-12T22:02:17.543188+00:00",
   "environment": {
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
@@ -252,6 +252,32 @@
       },
       "pass": true,
       "command": "build pinned h2o; h2o-adapter controls/http11/request.http"
+    },
+    {
+      "package": "finwo-http-parser",
+      "version": "stable@3d78ef3ad068",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium",
+        "query": "x=1",
+        "version": "1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned finwo-http-parser; finwo-http-parser-adapter controls/http11/request.http"
+    },
+    {
+      "package": "samsung-http-parser",
+      "version": "2.5.0",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned samsung-http-parser; samsung-http-parser-adapter controls/http11/request.http"
     }
   ],
   "runtime": []

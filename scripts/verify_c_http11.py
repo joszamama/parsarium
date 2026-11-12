@@ -6,6 +6,7 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 import json
 import platform
+import shutil
 import subprocess
 import tarfile
 import tempfile
@@ -74,13 +75,32 @@ def main() -> None:
         assert run(["brew", "list", "--versions", formula]).stdout.strip() == f"{formula} {version}"
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf", "facil-cstl", "facil-legacy", "libhv", "libparsehttp"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf", "facil-cstl", "facil-legacy", "libhv", "libparsehttp", "samsung-http-parser"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         with tarfile.open(archive("h2o", lock["h2o"])) as tar:
             for member in tar.getmembers():
                 if member.name.startswith("h2o-2.2.6/deps/picohttpparser/"):
                     tar.extract(member, build, filter="data")
+        finwo_lock = lock["finwo-http-parser"]
+        with tarfile.open(archive("finwo-http-parser", finwo_lock)) as tar:
+            tar.extractall(build, filter="data")
+        finwo_deps = finwo_lock["build_dependencies"]
+        for dep_name, dep in finwo_deps.items():
+            with tarfile.open(archive(dep_name, dep)) as tar:
+                tar.extractall(build, filter="data")
+        finwo_main = build / finwo_lock["root"]
+        finwo_include = build / "finwo-include"
+        (finwo_include / "finwo").mkdir(parents=True)
+        (finwo_include / "tidwall").mkdir()
+        for dep_name, source_header, target_header in (
+            ("finwo-asprintf", "src/asprintf.h", "finwo/asprintf.h"),
+            ("finwo-mindex", "src/mindex.h", "finwo/mindex.h"),
+            ("finwo-strextra", "src/strnstr.h", "finwo/strnstr.h"),
+            ("tidwall-buf", "buf.h", "tidwall/buf.h"),
+        ):
+            shutil.copyfile(build / finwo_deps[dep_name]["root"] / source_header,
+                            finwo_include / target_header)
         libhtp_source = build / "libhtp-0.5.53"
         run(["./autogen.sh"], cwd=libhtp_source)
         run(["./configure", "--disable-shared", "--enable-static"], cwd=libhtp_source)
@@ -135,6 +155,12 @@ def main() -> None:
                             str(ADAPTER / "http_parser.c"),
                             str(build / "http-parser-2.9.4/http_parser.c"),
                             "-o", str(build / "http-parser-adapter")],
+            "samsung-http-parser": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                                    "-I" + str(ADAPTER),
+                                    "-I" + str(build / "http-parser-2.5.0"),
+                                    str(ADAPTER / "samsung_http_parser.c"),
+                                    str(build / "http-parser-2.5.0/http_parser.c"),
+                                    "-o", str(build / "samsung-http-parser-adapter")],
             "libhv": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                       "-I" + str(ADAPTER), "-I" + str(build / "libhv-1.3.1"),
                       "-I" + str(build / "libhv-1.3.1/http"),
@@ -159,6 +185,17 @@ def main() -> None:
                     str(ADAPTER / "h2o_picohttpparser.c"),
                     str(build / "h2o-2.2.6/deps/picohttpparser/picohttpparser.c"),
                     "-o", str(build / "h2o-adapter")],
+            "finwo-http-parser": ["cc", "-std=c11", "-Wall", "-Wextra",
+                                  "-Wno-unused-parameter", "-Wno-sign-compare", "-Werror",
+                                  "-I" + str(ADAPTER), "-I" + str(finwo_include),
+                                  "-I" + str(finwo_main / "src"),
+                                  str(ADAPTER / "finwo_http_parser.c"),
+                                  str(finwo_main / "src/http-parser.c"),
+                                  str(build / finwo_deps["finwo-asprintf"]["root"] / "src/asprintf.c"),
+                                  str(build / finwo_deps["finwo-mindex"]["root"] / "src/mindex.c"),
+                                  str(build / finwo_deps["finwo-strextra"]["root"] / "src/strnstr.c"),
+                                  str(build / finwo_deps["tidwall-buf"]["root"] / "buf.c"),
+                                  "-o", str(build / "finwo-http-parser-adapter")],
             "mongoose": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                          "-I" + str(ADAPTER), "-I" + str(build / "mongoose-7.23"),
                          str(ADAPTER / "mongoose.c"), str(build / "mongoose-7.23/mongoose.c"),

@@ -17,7 +17,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 68 cells at the 20-parser target, three started below target, and 17
+There are 69 cells at the 20-parser target, two started below target, and 17
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -187,15 +187,15 @@ paths and eight C++ paths lack comparable primary GitHub stars and remain
 unranked. Only ASCII P3 is established for every path. Neither scoped
 standard library documents a PNM-aware parser.
 
-The [C × HTTP/1.1 cell](data/c/http11/cell.json) contains **18/20 verified
+The [C × HTTP/1.1 cell](data/c/http11/cell.json) contains **20/20 verified
 package paths**: llhttp, Node http-parser, PicoHTTPParser, Mongoose, httpp,
 HTTPParserC, GNU libmicrohttpd, libevhtp, LibHTP, libwebsockets, libonion,
 libsoup, Apache Serf, facil.io C STL 0.8, facil.io 0.7, libhv, libparsehttp,
-and H2O. Sixteen parsed
+H2O, finwo/http-parser.c, and Samsung http-parser. Eighteen parsed
 the method, request path or target, and version of a valid local GET request after complete
 header parsing. `python3 scripts/verify_c_http11.py` checks SHA-256 source
 archives, the exact local llhttp 9.4.3 and libmicrohttpd 1.0.10 libraries and
-headers, plus the libwebsockets 5.0.0_2 and libsoup 3.8.1 libraries and headers, rebuilds all eighteen
+headers, plus the libwebsockets 5.0.0_2 and libsoup 3.8.1 libraries and headers, rebuilds all twenty
 adapters, and replays the controls. libwebsockets yielded the parsed method,
 target and Host header from an adopted local read buffer. LibHTP 0.5.53
 is rebuilt from its pinned source with Autotools and zlib. libonion 0.8 is
@@ -208,17 +208,22 @@ an unrelated SSL bucket object that fails with the local OpenSSL headers. The li
 adapter supplies the request through a local socket stream. Four bounded Conan recipe-name queries saved
 24 hits and 22 distinct names; project documentation supplied PicoHTTPParser,
 Mongoose, httpp, HTTPParserC, libevhtp, LibHTP, libwebsockets, libonion, libsoup,
-Apache Serf, both facil.io distributions, libhv, libparsehttp, and H2O
+Apache Serf, both facil.io distributions, libhv, libparsehttp, H2O,
+finwo/http-parser.c, and Samsung http-parser
 outside those windows. HTTPParserC distributes llhttp C source and shares its
 parser engine. libhv bundles a modified Node http-parser 2.9.1 engine; its
 separate tagged library distribution is counted once and the shared family is
 recorded. H2O bundles PicoHTTPParser as its HTTP/1 parser; its tagged H2O
-distribution shares that parser family. The two facil.io packages have distinct tagged distributions and
+distribution shares that parser family. Samsung's tagged fork shares the Node
+http-parser family. The two facil.io packages have distinct tagged distributions and
 input APIs but share parser lineage. libevhtp ships its own htparse scanner;
-libparsehttp uses its own local-byte scanner.
-GitHub project stars rank fifteen paths only within C;
+libparsehttp and finwo/http-parser.c use separate local-byte scanners. The
+finwo stable tag is pinned by its exact commit and SHA-256, as are its four
+build dependencies.
+GitHub project stars rank seventeen paths only within C;
 libmicrohttpd, libsoup and Apache Serf have no primary GitHub repositories and remain unranked.
-Two working paths remain unverified. The ISO C standard library provides
+The working count is met, while eight leads and searches outside the saved
+Conan windows remain uncertain. The ISO C standard library provides
 no documented HTTP/1.1 request parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed

@@ -232,5 +232,31 @@
     "adapter": "adapters/c/http11/h2o_picohttpparser.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+  },
+  {
+    "name": "finwo-http-parser",
+    "version": "stable@3d78ef3ad068",
+    "license": "MIT",
+    "license_evidence": "Stable-tag commit source root LICENSE",
+    "documentation": "https://github.com/finwo/http-parser.c/blob/3d78ef3ad068696b0d3f5b9bc672771a89805a5f/README.md",
+    "input_api": "http_parser_request_init; http_parser_request_data(request, local struct buf of saved bytes); request ready flag, method/path/query/version fields and http_parser_header_get",
+    "family": "finwo/http-parser.c independent C request/header/body parser; not the Node http-parser family despite similar name",
+    "scope": "HTTP/1.1 GET request method, path, query, version and Host from local byte buffer",
+    "adapter": "adapters/c/http11/finwo_http_parser.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium", "query": "x=1", "version": "1.1", "host": "example.test"}
+  },
+  {
+    "name": "samsung-http-parser",
+    "version": "2.5.0",
+    "license": "MIT",
+    "license_evidence": "Pinned tagged fork LICENSE-MIT",
+    "documentation": "https://github.com/Samsung/http-parser/blob/v2.5.0/README.md",
+    "input_api": "http_parser_init(HTTP_REQUEST); http_parser_execute(parser, callbacks, local request bytes, length); on_url and on_headers_complete callbacks",
+    "family": "Samsung tagged fork of the Node/Joyent http-parser C engine; separate 2.5.0 source distribution, shared parser family with nodejs/http-parser 2.9.4 and libhv-bundled 2.9.1, not an independent decoder",
+    "scope": "HTTP/1.1 GET request method, target and version after complete header parse from local bytes",
+    "adapter": "adapters/c/http11/samsung_http_parser.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
   }
 ]
