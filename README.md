@@ -8,8 +8,9 @@ Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASC
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
-ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, and PDF and an explicit 88-cell work matrix. There are 45 cells at
-the 20-parser target, two started below target, and 41 marked `not_started`;
+ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
+and a below-target Java × WAV batch and an explicit 88-cell work matrix. There are 45 cells at
+the 20-parser target, three started below target, and 40 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -114,6 +115,8 @@ python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/verify_java_zip.py
 python3 scripts/verify_java_png.py
 python3 scripts/verify_java_pdf.py
+python3 controls/wav/make_control.py
+python3 scripts/verify_java_wav.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -187,6 +190,23 @@ API was documented in the separate runtime inventory. See the
 `python3 scripts/snapshot_maven_pdf.py` only to refresh registry and deps.dev
 evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
+
+The Java × WAV batch uses Maven 3.9+, JDK 25 and a SHA-256 lock of 52 resolved
+JARs. `python3 controls/wav/make_control.py` generates a valid 556-byte mono
+PCM control with 256 frames (SHA-256
+`d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7`).
+The longer control accommodates readers that reject a 52-byte WAV or expect
+at least 128 bytes in the header buffer. Run `python3 scripts/verify_java_wav.py`
+from the repository root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
+The recorded result is **7/7 third-party package paths and 2/2 JDK APIs passing**.
+The JDK adapter compiles and runs without any third-party classpath. JDSP uses
+wavfile, and Tika delegates WAV parsing to Java Sound. Four of five latest
+bounded Maven query attempts timed out; two hits were saved across refreshes,
+and 12 plausible leads remain unresolved. The cell is
+below the 20-path working goal. See the [Java WAV ranking](data/java/wav/ranking.md),
+[cell summary](data/java/wav/cell.json), and
+[unresolved leads](data/java/wav/leads.json). Run
+`python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
 one second of silent 8 kHz AAC audio, title `Parsarium`, and creation time

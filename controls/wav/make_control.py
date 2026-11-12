@@ -13,3 +13,13 @@ chunks += b"data" + struct.pack("<I", len(payload)) + payload
 output = b"RIFF" + struct.pack("<I", len(chunks) + 4) + b"WAVE" + chunks
 (ROOT / "four-samples.wav").write_bytes(output)
 print(f"Wrote {len(output)} bytes")
+
+# Some readers require enough bytes to fill a fixed header buffer or reject
+# extremely short recordings. This remains a small, valid PCM/WAVE control.
+extended_samples = samples + (0,) * 252
+extended_payload = struct.pack("<256h", *extended_samples)
+extended_chunks = b"fmt " + struct.pack("<I", len(format_chunk)) + format_chunk
+extended_chunks += b"data" + struct.pack("<I", len(extended_payload)) + extended_payload
+extended = b"RIFF" + struct.pack("<I", len(extended_chunks) + 4) + b"WAVE" + extended_chunks
+(ROOT / "256-samples.wav").write_bytes(extended)
+print(f"Wrote {len(extended)} bytes")

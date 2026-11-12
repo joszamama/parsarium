@@ -1,0 +1,117 @@
+{
+  "verified_at_utc": "2026-11-12T05:06:22.843898+00:00",
+  "control_sha256": "d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7",
+  "java": "openjdk version \"25.0.5.0.3\" 2026-10-24",
+  "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
+  "platform": "Darwin arm64",
+  "locked_classpath_jars": 52,
+  "third_party": [
+    {
+      "package": "wavfile",
+      "version": "1.0.0",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "jaudiotagger",
+      "version": "3.0.1",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": "1",
+        "bits": 16
+      },
+      "pass": true
+    },
+    {
+      "package": "jcodec",
+      "version": "0.2.5",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "bits": 16
+      },
+      "pass": true
+    },
+    {
+      "package": "beads",
+      "version": "3.2",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256
+      },
+      "pass": true
+    },
+    {
+      "package": "codecmedia",
+      "version": "1.2.2",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "codec": "pcm",
+        "sample_rate": 8000,
+        "channels": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "jdsp",
+      "version": "3.1.1",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256
+      },
+      "pass": true
+    },
+    {
+      "package": "tika-audiovideo",
+      "version": "4.2.0",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1
+      },
+      "pass": true
+    }
+  ],
+  "runtime": [
+    {
+      "api": "AudioSystem.getAudioFileFormat(File)",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "type": "WAVE",
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256
+      },
+      "pass": true
+    },
+    {
+      "api": "AudioSystem.getAudioInputStream(File)",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256,
+        "sample_bytes": 8
+      },
+      "pass": true
+    }
+  ],
+  "scope": "Valid 256-frame PCM RIFF/WAVE control only; no malformed-input or resource-use experiment"
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "wavfile", "group": "com.github.psambit9791", "artifact": "wavfile", "version": "1.0.0",
+    "license": "MIT", "license_evidence": "Maven POM licenses",
+    "input_api": "WavFile.openWavFile(File), readFrames(int[],int)",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/psambit9791/wavfile/1.0.0/wavfile-1.0.0-javadoc.jar",
+    "documentation_archive_entry": "com/github/psambit9791/wavfile/WavFile.html",
+    "family": "wavfile Java WAV reader", "scope": "sample rate, channels, frame count and four PCM samples",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256, "samples": [0, 1000, -1000, 0]}
+  },
+  {
+    "name": "jaudiotagger", "group": "net.jthink", "artifact": "jaudiotagger", "version": "3.0.1",
+    "license": "LGPL-2.1-or-later", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "AudioFileIO.read(File).getAudioHeader()",
+    "documentation": "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1-javadoc.jar",
+    "documentation_archive_entry": "org/jaudiotagger/audio/AudioFileIO.html",
+    "family": "jaudiotagger WAV reader", "scope": "WAV header sample rate, channels and bit depth",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": "1", "bits": 16}
+  },
+  {
+    "name": "jcodec", "group": "org.jcodec", "artifact": "jcodec", "version": "0.2.5",
+    "license": "BSD-2-Clause", "license_evidence": "JCodec project LICENSE and Maven POM FreeBSD license",
+    "input_api": "new WavInput.WavFile(File).getFormat()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar",
+    "documentation_archive_entry": "org/jcodec/codecs/wav/WavInput.WavFile.html",
+    "family": "JCodec WAV demuxer", "scope": "WAV sample rate, channels and bit depth",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16}
+  },
+  {
+    "name": "beads", "group": "net.beadsproject", "artifact": "beads", "version": "3.2",
+    "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses",
+    "input_api": "new WavFileReaderWriter().readAudioFile(String localPath), getSampleAudioFormat()",
+    "documentation": "https://repo.maven.apache.org/maven2/net/beadsproject/beads/3.2/beads-3.2-javadoc.jar",
+    "documentation_archive_entry": "net/beadsproject/beads/data/audiofile/WavFileReaderWriter.html",
+    "family": "Beads WAV reader", "scope": "sample rate, channels and decoded frame count",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256}
+  },
+  {
+    "name": "codecmedia", "group": "me.tamkungz.codecmedia", "artifact": "codecmedia", "version": "1.2.2",
+    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "CodecMedia.createDefault().probe(Path).streams()",
+    "documentation": "https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar",
+    "documentation_archive_entry": "me/tamkungz/codecmedia/CodecMediaEngine.html",
+    "family": "CodecMedia RIFF/WAV parser", "scope": "parsed PCM codec, sample rate and channels",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"codec": "pcm", "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "jdsp", "group": "com.github.psambit9791", "artifact": "jdsp", "version": "3.1.1",
+    "license": "MIT", "license_evidence": "Maven POM licenses",
+    "input_api": "new WAV().readWAV(String localPath), getProperties()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/psambit9791/jdsp/3.1.1/jdsp-3.1.1-javadoc.jar",
+    "documentation_archive_entry": "com.github.psambit9791.jdsp/com/github/psambit9791/jdsp/io/WAV.html",
+    "family": "JDSP WAV API over wavfile", "scope": "sample rate, channels and frame count",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256}
+  },
+  {
+    "name": "tika-audiovideo", "group": "org.apache.tika", "artifact": "tika-parser-audiovideo-module", "version": "4.2.0",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "AudioParser.parse(TikaInputStream, ContentHandler, Metadata, ParseContext)",
+    "documentation": "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-javadoc.jar",
+    "documentation_archive_entry": "org/apache/tika/parser/audio/AudioParser.html",
+    "family": "Apache Tika AudioParser over Java Sound SPI", "scope": "WAV sample rate and channels in parsed metadata",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1}
+  }
+]
