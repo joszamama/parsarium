@@ -88,5 +88,50 @@
     "family": "JairoSVG Java2D SVG renderer", "scope": "Rendered SVG pixels",
     "control": "controls/svg/red-green.svg", "adapter_label": "jairosvg", "adapter_module": "jairo",
     "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "imageio-native-vips", "group": "io.github.ghosthack", "artifact": "imageio-native-vips", "version": "2.0.0",
+    "license": "MIT", "license_evidence": "Maven parent io.github.ghosthack:imageio-native-parent:2.0.0 POM license",
+    "input_api": "ImageIO.getImageReaders(ImageInputStream) selects ghosthack routing reader; ImageReader.read(0) delegates to libvips",
+    "documentation": "https://github.com/ghosthack/imageio-native#optional-backends",
+    "family": "imageio-native-vips wrapper over libvips SVG decoder", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "imageio-native-vips", "adapter_module": "vips",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "echosvg-anim", "group": "io.sf.carte", "artifact": "echosvg-anim", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "SAXSVGDocumentFactory.createDocument(String URI, InputStream)",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-anim/src/main/java/io/sf/carte/echosvg/anim/dom/SAXSVGDocumentFactory.java",
+    "family": "EchoSVG SVG DOM (Apache Batik fork)", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-anim", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "echosvg-transcoder-svg", "group": "io.sf.carte", "artifact": "echosvg-transcoder-svg", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "PNGTranscoder.transcode(TranscoderInput(InputStream), TranscoderOutput(OutputStream))",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-transcoder-svg/src/main/java/io/sf/carte/echosvg/transcoder/image/PNGTranscoder.java",
+    "family": "EchoSVG SVG renderer (Apache Batik fork)", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-transcoder-svg", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "echosvg-swing", "group": "io.sf.carte", "artifact": "echosvg-swing", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "JSVGCanvas.setURI(local file URI); SVGDocumentLoaderListener; getSVGDocument()",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-swing/src/main/java/io/sf/carte/echosvg/swing/JSVGCanvas.java",
+    "family": "EchoSVG SVG DOM and renderer via Swing (Apache Batik fork)", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-swing", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "echosvg-svgrasterizer", "group": "io.sf.carte", "artifact": "echosvg-svgrasterizer", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "SVGConverter.setSources(String[] local paths).setDst(File); execute()",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-svgrasterizer/src/main/java/io/sf/carte/echosvg/apps/rasterizer/SVGConverter.java",
+    "family": "EchoSVG SVG renderer via rasterizer (Apache Batik fork)", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-svgrasterizer", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
   }
 ]

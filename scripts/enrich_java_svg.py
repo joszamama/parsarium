@@ -23,7 +23,9 @@ def get(url: str) -> bytes:
 
 def release(parser: dict) -> tuple[str, dict]:
     name, group, artifact, version = (parser[k] for k in ("name", "group", "artifact", "version"))
-    base = f"https://repo.maven.apache.org/maven2/{group.replace('.', '/')}/{artifact}/{version}/"
+    repository_url = ("https://css4j.github.io/maven" if group == "io.sf.carte"
+                      else "https://repo.maven.apache.org/maven2")
+    base = f"{repository_url}/{group.replace('.', '/')}/{artifact}/{version}/"
     local = Path.home() / ".m2/repository" / group.replace(".", "/") / artifact / version
     fields = {}
     for kind in ("jar", "pom"):
@@ -61,6 +63,7 @@ def main() -> None:
         releases = dict(pool.map(release, parsers))
         metrics = dict(pool.map(metric, parsers))
     snapshot["releases"] = releases
+    snapshot["release_surfaces"] = ["Maven Central", "CSS4J project Maven repository"]
     snapshot["popularity_metric"] = {
         "name": "deps.dev version-level directDependentCount",
         "documentation": "https://docs.deps.dev/api/v3alpha/",
@@ -70,7 +73,7 @@ def main() -> None:
 
     repository = Path.home() / ".m2/repository"
     total_jars = 0
-    for module in ("main", "jairo"):
+    for module in ("main", "jairo", "vips", "echosvg"):
         directory = ADAPTER if module == "main" else ADAPTER / module
         if not (directory / "target/classpath.txt").exists():
             continue

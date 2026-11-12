@@ -66,6 +66,16 @@ def main() -> None:
             command = [str(java25), "-Djava.awt.headless=true", "-cp", classpath,
                        "org.parsarium.JairoSvgAdapter", str(CONTROL)]
             display = f"{java25} -Djava.awt.headless=true -cp <locked jairo classpath> org.parsarium.JairoSvgAdapter {parser['control']}"
+        elif module == "vips":
+            java27 = Path(os.environ.get("PARSARIUM_JAVA27_HOME", "/opt/homebrew/opt/openjdk")) / "bin/java"
+            command = [str(java27), "--enable-native-access=ALL-UNNAMED",
+                       "-Djava.awt.headless=true", "-cp", classpath,
+                       "org.parsarium.VipsSvgAdapter", str(CONTROL)]
+            display = f"{java27} --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked vips classpath> org.parsarium.VipsSvgAdapter {parser['control']}"
+        elif module == "echosvg":
+            command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
+                       "org.parsarium.EchoSvgAdapter", label, str(CONTROL)]
+            display = f"java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter {label} {parser['control']}"
         else:
             command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
                        "org.parsarium.SvgAdapter", label, str(CONTROL)]

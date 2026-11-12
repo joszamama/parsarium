@@ -1,12 +1,14 @@
 {
-  "checked_at_utc": "2026-11-12T19:40:36.809296+00:00",
+  "checked_at_utc": "2026-11-12T19:47:41.952091+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "classpath_jars": {
+      "echosvg": 32,
       "jairo": 2,
-      "main": 44
+      "main": 44,
+      "vips": 2
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -131,6 +133,66 @@
       },
       "pass": true,
       "command": "/opt/homebrew/opt/openjdk@25/bin/java -Djava.awt.headless=true -cp <locked jairo classpath> org.parsarium.JairoSvgAdapter controls/svg/red-green.svg"
+    },
+    {
+      "package": "imageio-native-vips",
+      "version": "2.0.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "/opt/homebrew/opt/openjdk/bin/java --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked vips classpath> org.parsarium.VipsSvgAdapter controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-anim",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-anim controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-transcoder-svg",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-transcoder-svg controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-swing",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-swing controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-svgrasterizer",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-svgrasterizer controls/svg/red-green.svg"
     }
   ],
   "runtime": [],

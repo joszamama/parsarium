@@ -435,15 +435,21 @@ See the [Java PNG ranking](data/java/png/ranking.md),
 `python3 scripts/snapshot_maven_png.py` only when refreshing registry and
 deps.dev evidence.
 
-The [Java × SVG ranking](data/java/svg/ranking.md) currently contains **10/20**
-verified Maven package paths: four Batik artifacts, JSVG, SVG Salamander,
-iText SVG, TwelveMonkeys ImageIO Batik, BWeng20 jSVGIcon, and JairoSVG. All ten passed the valid 2×1 red/green SVG control in
+The [Java × SVG ranking](data/java/svg/ranking.md) currently contains **15/20**
+verified package paths: four Apache Batik artifacts, four EchoSVG artifacts,
+JSVG, SVG Salamander, iText SVG, TwelveMonkeys ImageIO Batik, BWeng20
+jSVGIcon, JairoSVG, and imageio-native-vips. All fifteen passed the valid
+2×1 red/green SVG control in
 `python3 scripts/verify_java_svg.py`, which rebuilds the adapter and checks
-the SHA-256 classpath locks for 44 main JARs and two JairoSVG JARs. Batik's four
-artifacts and TwelveMonkeys share one parser family. JairoSVG uses JDK 25;
+the SHA-256 classpath locks for 44 main JARs, two JairoSVG JARs, two native
+libvips wrapper JARs, and 32 EchoSVG JARs. The Batik and EchoSVG artifact
+paths share families; four EchoSVG paths have no comparable deps.dev metric
+and remain unranked. JairoSVG uses JDK 25; imageio-native-vips uses JDK 27
+and host libvips 8.18.7. Set `PARSARIUM_JAVA27_HOME` if JDK 27 is not at
+`/opt/homebrew/opt/openjdk`, and
 set `PARSARIUM_JAVA25_HOME` if it is not at `/opt/homebrew/opt/openjdk@25`.
 The [cell summary](data/java/svg/cell.json) records 112 bounded Maven
-search hits, a broad-query timeout, and nine unresolved leads. The scoped
+search hits, a broad-query timeout, and seven unresolved leads. The scoped
 [JDK 21 inventory](data/java/svg/standard.json) found no bundled SVG reader;
 a bare-JDK ImageIO probe returned no SVG reader on the control. Run
 `python3 scripts/snapshot_maven_svg.py` and `python3 scripts/enrich_java_svg.py`
