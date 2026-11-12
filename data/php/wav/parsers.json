@@ -100,5 +100,126 @@
     "family_note": "Laravel wrapper delegates to the same pinned james-heinrich/getid3 package in its shared lock; separate package path, same parser family.",
     "license_evidence": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/LICENSE",
     "adapter": "adapters/php/wav/parse.php"
+  },
+  {
+    "name": "sempia/getid3",
+    "version": "2.0.0.0-p1.9.25",
+    "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
+    "license_evidence": "https://gitlab.com/Sempia/getID3/-/blob/46405ae39a503ac72d1ce5b31f6f11f938f034ed/LICENSE.md",
+    "documentation": "https://gitlab.com/Sempia/getID3/-/blob/46405ae39a503ac72d1ce5b31f6f11f938f034ed/README.md",
+    "composer_lock": "adapters/php/mp3_id3v2/sempia/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "adapter": "adapters/php/wav/parse.php",
+    "input_api": "JamesHeinrich\\GetID3\\GetID3::analyze(local PCM WAV path); fileformat and audio sample rate/channels/bit depth",
+    "expected_output": {
+      "fileformat": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Namespaced getID3 fork; distinct Composer package path and shared parser family."
+  },
+  {
+    "name": "wikimedia/getid3",
+    "version": "v2.0.0-beta5",
+    "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
+    "license_evidence": "https://github.com/wikimedia/getID3/blob/4e7aca96e7f4cf5ce6e08bca998334f567259965/LICENSE.md",
+    "documentation": "https://github.com/wikimedia/getID3/blob/4e7aca96e7f4cf5ce6e08bca998334f567259965/README.md",
+    "composer_lock": "adapters/php/mp3_id3v2/wikimedia/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "adapter": "adapters/php/wav/parse.php",
+    "input_api": "JamesHeinrich\\GetID3\\GetID3::analyze(local PCM WAV path); fileformat and audio sample rate/channels/bit depth",
+    "expected_output": {
+      "fileformat": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Wikimedia fork of namespaced getID3; distinct Composer package path and shared parser lineage."
+  },
+  {
+    "name": "indiehd/audio-manipulator",
+    "version": "v4.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/LICENSE",
+    "documentation": "https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/src/MediaParsing/MediaParserInterface.php",
+    "composer_lock": "adapters/php/mp3_id3v2/indiehd/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "adapter": "adapters/php/wav/parse.php",
+    "input_api": "MediaParser::analyze(local PCM WAV path); fileformat and audio sample rate/channels/bit depth",
+    "expected_output": {
+      "fileformat": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Public MediaParserInterface accepts a local file path; implementation delegates to pinned getID3."
+  },
+  {
+    "name": "audiostreamify/hvap",
+    "version": "0.1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/audiostreamify/hvap/blob/e9c0c63e9d7ed13f03b152c01452008b2076fc96/LICENSE",
+    "documentation": "https://github.com/audiostreamify/hvap/blob/e9c0c63e9d7ed13f03b152c01452008b2076fc96/src/Mocks/ID3Tags.php",
+    "composer_lock": "adapters/php/mp3_id3v2/hvap/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "adapter": "adapters/php/wav/parse.php",
+    "input_api": "Processor::audio(local PCM WAV path)->analyze(); fileformat and audio sample rate/channels/bit depth",
+    "expected_output": {
+      "fileformat": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Audio path delegates to pinned getID3; separate Composer package path, same parser family.",
+    "input_api_evidence": "https://github.com/audiostreamify/hvap/blob/e9c0c63e9d7ed13f03b152c01452008b2076fc96/src/Processor.php"
+  },
+  {
+    "name": "kiwilan/php-audio",
+    "version": "4.0.02",
+    "license": "MIT",
+    "license_evidence": "https://github.com/kiwilan/php-audio/blob/684002b34e5db3fa2935d6b9ba8cba0ebd81b1a7/LICENSE.md",
+    "documentation": "https://github.com/kiwilan/php-audio/blob/684002b34e5db3fa2935d6b9ba8cba0ebd81b1a7/README.md",
+    "composer_lock": "adapters/php/mp3_id3v2/kiwilan/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "adapter": "adapters/php/wav/parse.php",
+    "input_api": "Audio::read(local PCM WAV path)->getMetadata(); data format, sample rate, channels, codec",
+    "expected_output": {
+      "format": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "codec": "Pulse Code Modulation (PCM)"
+    },
+    "scope": "RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count and PCM codec",
+    "family": "getID3 native RIFF/WAVE parser",
+    "family_note": "Metadata comes from pinned getID3. Audio::isValid() is false because the control has no selected tags; header metadata still parses."
+  },
+  {
+    "name": "nicoverbruggen/mediaprobe",
+    "version": "v1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nicoverbruggen/mediaprobe/blob/aa824d0691598dc9d66301f78da2687bc656884c/LICENSE",
+    "documentation": "https://github.com/nicoverbruggen/mediaprobe/blob/aa824d0691598dc9d66301f78da2687bc656884c/README.md",
+    "composer_lock": "adapters/php/mp3_id3v2/mediaprobe/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "adapter": "adapters/php/wav/parse.php",
+    "input_api": "MediaProbe(local PCM WAV path)::getMediaInfo(); format_name, parsed duration, bit rate",
+    "expected_output": {
+      "format": "wav",
+      "duration_seconds": "0.032000",
+      "bit_rate": "139000"
+    },
+    "scope": "WAV container name, 32 ms duration, 139 kb/s container bit rate",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "Composer wrapper delegates to local FFprobe 9.0.2; package path over the FFmpeg parser family.",
+    "external_backend": "FFprobe 9.0.2 CLI"
   }
 ]
