@@ -10,6 +10,7 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 QUERIES = {
     "png": ["png", "png decoder", "png reader", "png image", "png metadata", "libpng", "png chunk"],
+    "zip": ["zip", "zip archive", "zip reader", "zip extract", "unzip", "libzip", "pkzip"],
 }
 
 
@@ -22,7 +23,7 @@ def fetch(url: str) -> dict:
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_crates.py png")
+        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip")
     search = []
     for query in QUERIES[cell]:
         url = "https://crates.io/api/v1/crates?" + urlencode({"q": query, "per_page": 100, "page": 1})

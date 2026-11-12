@@ -122,40 +122,41 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"python/{format_name}: {len(parsers)} verified packages, {len(unknown)} unranked")
 
-    directory = ROOT / "data" / "rust" / "png"
-    parsers = read(directory / "parsers.json")
-    snapshot = read(directory / "registry-snapshot.json")
-    metrics = snapshot["popularity_metric"]["packages"]
-    known = sorted((parser for parser in parsers if metrics[parser["name"]]["recent_downloads"] is not None),
-                   key=lambda parser: (-metrics[parser["name"]]["recent_downloads"], parser["name"]))
-    unknown = sorted((parser for parser in parsers if metrics[parser["name"]]["recent_downloads"] is None),
-                     key=lambda parser: parser["name"])
-    lines = [
-        "# Rust × PNG: verified parser ranking", "",
-        f"{len(parsers)} verified third-party crate paths; working goal 20, original ceiling 30. "
-        "The metric is crates.io crate-level recent downloads over 90 days, captured at "
-        f"{snapshot['popularity_metric']['captured_at_utc']}. It includes all releases of each "
-        f"crate name and is compared only within Rust. {len(unknown)} crate(s) lack a metric "
-        "and remain unranked; equal counts share a rank.", "",
-        "Search hits, unresolved leads, and the standard-library inventory are separate from this ranking. "
-        "See `cell.json`, `leads.json`, and `verification.json` in this directory.", "",
-        "| Rank | Crate | Pinned release | 90-day downloads | Scope | Underlying family |",
-        "| ---: | --- | --- | ---: | --- | --- |",
-    ]
-    previous_count = None
-    displayed_rank = 0
-    for position, parser in enumerate(known, 1):
-        value = metrics[parser["name"]]["recent_downloads"]
-        if value != previous_count:
-            displayed_rank = position
-            previous_count = value
-        lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
-                     f"{parser['version']} | {value:,} | {parser['scope']} | {parser['family']} |")
-    for parser in unknown:
-        lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
-                     f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
-    (directory / "ranking.md").write_text("\n".join(lines) + "\n")
-    print(f"rust/png: {len(known)} verified packages ranked, {len(unknown)} unranked")
+    for format_name, label in (("png", "PNG"), ("zip", "ZIP")):
+        directory = ROOT / "data" / "rust" / format_name
+        parsers = read(directory / "parsers.json")
+        snapshot = read(directory / "registry-snapshot.json")
+        metrics = snapshot["popularity_metric"]["packages"]
+        known = sorted((parser for parser in parsers if metrics[parser["name"]]["recent_downloads"] is not None),
+                       key=lambda parser: (-metrics[parser["name"]]["recent_downloads"], parser["name"]))
+        unknown = sorted((parser for parser in parsers if metrics[parser["name"]]["recent_downloads"] is None),
+                         key=lambda parser: parser["name"])
+        lines = [
+            f"# Rust × {label}: verified parser ranking", "",
+            f"{len(parsers)} verified third-party crate paths; working goal 20, original ceiling 30. "
+            "The metric is crates.io crate-level recent downloads over 90 days, captured at "
+            f"{snapshot['popularity_metric']['captured_at_utc']}. It includes all releases of each "
+            f"crate name and is compared only within Rust. {len(unknown)} crate(s) lack a metric "
+            "and remain unranked; equal counts share a rank.", "",
+            "Search hits, unresolved leads, and the standard-library inventory are separate from this ranking. "
+            "See `cell.json`, `leads.json`, and `verification.json` in this directory.", "",
+            "| Rank | Crate | Pinned release | 90-day downloads | Scope | Underlying family |",
+            "| ---: | --- | --- | ---: | --- | --- |",
+        ]
+        previous_count = None
+        displayed_rank = 0
+        for position, parser in enumerate(known, 1):
+            value = metrics[parser["name"]]["recent_downloads"]
+            if value != previous_count:
+                displayed_rank = position
+                previous_count = value
+            lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['version']} | {value:,} | {parser['scope']} | {parser['family']} |")
+        for parser in unknown:
+            lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
+        (directory / "ranking.md").write_text("\n".join(lines) + "\n")
+        print(f"rust/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
 
 if __name__ == "__main__":

@@ -59,8 +59,10 @@ def main() -> None:
             elif cell["ecosystem"] == "rust":
                 adapter = ROOT / "adapters" / "rust" / cell["format"]
                 manifest = tomllib.loads((adapter / "Cargo.toml").read_text())
-                dependency = manifest["dependencies"][name]
+                dependency = manifest["dependencies"][parser.get("manifest_dependency", name)]
                 requirement = dependency if isinstance(dependency, str) else dependency["version"]
+                if isinstance(dependency, dict) and "package" in dependency:
+                    assert dependency["package"] == name
                 assert requirement == "=" + parser["version"]
                 locked = tomllib.loads((adapter / "Cargo.lock").read_text())
                 match = [package for package in locked["package"]

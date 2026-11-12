@@ -1,0 +1,52 @@
+[
+  {
+    "name": "rc-zip", "status": "unresolved",
+    "reason": "The crate documents low-level ZIP parsers and state machines. A direct public byte-input adapter independent of rc-zip-sync has not yet been run; the verified rc-zip-sync path already records this underlying family.",
+    "source": "https://docs.rs/rc-zip/latest/rc_zip/"
+  },
+  {
+    "name": "rc-zip-tokio", "status": "unresolved",
+    "reason": "The Tokio wrapper over rc-zip has a plausible local stream reader, but a pinned control run has not yet been recorded.",
+    "source": "https://docs.rs/rc-zip-tokio/latest/rc_zip_tokio/"
+  },
+  {
+    "name": "zipcore", "status": "unresolved",
+    "reason": "The documented Archive::open(path).by_name API appears eligible. Version 0.10.2 requires crc32fast at least 1.5.2, while the pinned openpack 0.2.7 in this adapter locks crc32fast to 1.5.0; Cargo cannot combine them in one graph. An isolated adapter has not yet been run.",
+    "source": "https://docs.rs/crate/zipcore/0.10.2/source/src/lib.rs"
+  },
+  {
+    "name": "libarchive_oxide", "status": "unresolved",
+    "reason": "Documentation lists a pure-Rust ZIP-capable archive reader, but its local input and entry API have not yet been adapted to the valid control.",
+    "source": "https://docs.rs/libarchive_oxide/latest/libarchive_oxide/"
+  },
+  {
+    "name": "libarchive", "status": "unresolved",
+    "reason": "This separate Rust binding to native libarchive has not had a pinned release, documented input call, and valid-control result recorded. It may share the libarchive family with libarchive2.",
+    "source": "https://docs.rs/libarchive/latest/libarchive/"
+  },
+  {
+    "name": "zipsign-api", "status": "unresolved",
+    "reason": "Registry description says it signs and verifies ZIP files. Whether a public API interprets ZIP entries from local bytes or merely handles whole-file signatures remains unverified.",
+    "source": "https://crates.io/crates/zipsign-api"
+  },
+  {
+    "name": "self_update", "status": "unresolved",
+    "reason": "The registry search returned this updater, which may unpack ZIP releases. A documented public local ZIP input API and control result have not been identified.",
+    "source": "https://crates.io/crates/self_update"
+  },
+  {
+    "name": "ripunzip", "status": "unresolved",
+    "reason": "The registry describes a parallel unzip tool. A version-pinned local-input CLI adapter with observable entry output has not been run.",
+    "source": "https://crates.io/crates/ripunzip"
+  },
+  {
+    "name": "decompress", "status": "unresolved",
+    "reason": "The registry describes archive extraction, but a documented ZIP-specific local input API and control result remain unverified.",
+    "source": "https://crates.io/crates/decompress"
+  },
+  {
+    "name": "betteroffice-opc", "status": "unresolved",
+    "reason": "The crate describes an OOXML OPC ZIP container reader. Its ability to parse the generic ZIP control through a documented public API has not been checked.",
+    "source": "https://crates.io/crates/betteroffice-opc"
+  }
+]
