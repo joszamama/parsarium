@@ -290,5 +290,47 @@
       "height": 2,
       "sample_rate": 8000
     }
+  },
+  {
+    "name": "jaad",
+    "group": "de.sfuhrm",
+    "artifact": "jaad",
+    "version": "0.8.7",
+    "license": "Public Domain",
+    "license_evidence": "Maven POM licenses and JAAD project distribution",
+    "input_api": "new MP4Container(RandomAccessFile localMp4).getMovie().getTracks(), AudioTrack.getSampleRate() and getChannelCount()",
+    "documentation": "https://repo.maven.apache.org/maven2/de/sfuhrm/jaad/0.8.7/jaad-0.8.7-javadoc.jar",
+    "documentation_archive_entry": "net/sourceforge/jaad/mp4/MP4Container.html",
+    "family": "JAAD pure Java MP4 demultiplexer",
+    "scope": "MP4 track count, AAC codec, sample rate and channels",
+    "adapter_module": "jaad",
+    "control": "controls/mp4/red-av-no-udta.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "audio_codec": "AAC",
+      "sample_rate": 8000,
+      "channels": 1
+    }
+  },
+  {
+    "name": "javasound-aac",
+    "group": "com.tianscar.javasound",
+    "artifact": "javasound-aac",
+    "version": "0.9.8",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "MP4InputStream.open(FileInputStream localMp4), new MP4Container(MP4InputStream).getMovie().getTracks()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-aac/0.9.8/javasound-aac-0.9.8-javadoc.jar",
+    "documentation_archive_entry": "net/sourceforge/jaad/mp4/MP4Container.html",
+    "family": "Tianscar fork of JAAD pure Java MP4 demultiplexer",
+    "scope": "MP4 track count, AAC codec, sample rate and channels",
+    "adapter_module": "javasound_aac",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "audio_codec": "AAC",
+      "sample_rate": 8000,
+      "channels": 1
+    }
   }
 ]

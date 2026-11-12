@@ -16,6 +16,8 @@ CONTROL = ROOT / "controls/mp4/red-av.mp4"
 CONTROL_SHA256 = "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643"
 PADDED_CONTROL = ROOT / "controls/mp4/red-av-padded.mp4"
 PADDED_SHA256 = "bb0b6f47495dab84af1baa2ff4270f476fe7ce8752d0a391135c49f6184d3ae1"
+NO_UDTA_CONTROL = ROOT / "controls/mp4/red-av-no-udta.mp4"
+NO_UDTA_SHA256 = "6c181e06c4a1ccdce7b55b39580bbf80286bd5949660bce1aebbb00dd4baebc7"
 JAVA_HOME = Path(os.environ.get("PARSARIUM_JAVA25_HOME", "/opt/homebrew/opt/openjdk@25"))
 
 
@@ -38,6 +40,15 @@ def check_control() -> None:
     assert padded[:len(data)] == data and len(padded) == len(data) + 65536
     assert padded[len(data):len(data) + 8] == struct.pack(">I4s", 65536, b"free")
     assert padded[len(data) + 8:] == bytes(65528)
+    no_udta = NO_UDTA_CONTROL.read_bytes()
+    assert sha256(no_udta).hexdigest() == NO_UDTA_SHA256
+    offset, no_udta_boxes = 0, []
+    while offset < len(no_udta):
+        size = struct.unpack_from(">I", no_udta, offset)[0]
+        assert size >= 8 and offset + size <= len(no_udta)
+        no_udta_boxes.append((no_udta[offset + 4:offset + 8].decode("ascii"), size))
+        offset += size
+    assert no_udta_boxes == [("ftyp", 32), ("free", 8), ("mdat", 774), ("moov", 1314)]
 
 
 def build(env: dict[str, str], module: str) -> tuple[str, int]:
@@ -86,7 +97,7 @@ def main() -> None:
     env = {**os.environ, "JAVA_HOME": str(JAVA_HOME),
            "PATH": str(JAVA_HOME / "bin") + os.pathsep + os.environ["PATH"]}
     java = str(JAVA_HOME / "bin/java")
-    modules = ("main", "ffprobe", "bramp", "jave", "imagic", "v47", "vlcj_info", "amilesend")
+    modules = ("main", "ffprobe", "bramp", "jave", "imagic", "v47", "vlcj_info", "amilesend", "jaad", "javasound_aac")
     classpaths, jar_counts = {}, {}
     for module in modules:
         classpaths[module], jar_counts[module] = build(env, module)
@@ -113,7 +124,8 @@ def main() -> None:
         cls = {"main": "org.parsarium.Mp4Adapter", "ffprobe": "org.parsarium.JaffreeMp4Adapter",
                "bramp": "org.parsarium.BrampMp4Adapter", "jave": "org.parsarium.JaveMp4Adapter",
                "imagic": "org.parsarium.ImagicMp4Adapter", "v47": "org.parsarium.V47Mp4Adapter",
-               "vlcj_info": "org.parsarium.VlcjInfoMp4Adapter", "amilesend": "org.parsarium.AmilesendMp4Adapter"}[module]
+               "vlcj_info": "org.parsarium.VlcjInfoMp4Adapter", "amilesend": "org.parsarium.AmilesendMp4Adapter",
+               "jaad": "org.parsarium.JaadMp4Adapter", "javasound_aac": "org.parsarium.JavasoundAacMp4Adapter"}[module]
         args = [parser["name"]] if module == "main" else []
         native_path = [f"-Djna.library.path={native_dir}"] if module in ("vlcj_info", "amilesend") else []
         output = run([java, "--enable-native-access=ALL-UNNAMED", *native_path, "-cp", classpaths[module], cls,
@@ -130,6 +142,7 @@ def main() -> None:
         "verified_at_utc": datetime.now(timezone.utc).isoformat(),
         "control_sha256": CONTROL_SHA256,
         "padded_control_sha256": PADDED_SHA256,
+        "no_udta_control_sha256": NO_UDTA_SHA256,
         "java": subprocess.run([java, "-version"], text=True, capture_output=True, check=True).stderr.splitlines()[0],
         "maven": subprocess.run(["mvn", "-version"], env=env, text=True, capture_output=True, check=True).stdout.splitlines()[0],
         "locked_classpath_jars_by_module": jar_counts,

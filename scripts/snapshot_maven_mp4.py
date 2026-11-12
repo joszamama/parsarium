@@ -19,7 +19,8 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/java/mp4"
 PARSERS = json.loads((DATA / "parsers.json").read_text())
-QUERIES = ["mp4", "mp4 parser", "isoparser", "Java MP4", "ISO base media"]
+QUERIES = ["mp4", "mp4 parser", "isoparser", "Java MP4", "ISO base media",
+           "JAAD MP4", "JavaSound AAC MP4", "MP4 demuxer"]
 NATIVE_ARTIFACTS = [("ffmpeg-macosx-arm64", "ffmpeg", "8.1.2-1.5.14"),
                     ("javacpp-macosx-arm64", "javacpp", "1.5.14")]
 AUXILIARY_ARTIFACTS = [
