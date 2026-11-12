@@ -96,5 +96,21 @@
       "edges": 2,
       "edge_1_2": true
     }
+  },
+  {
+    "name": "@msagl/parser",
+    "version": "1.1.24",
+    "license": "MIT",
+    "input_api": "parseTXT(localText) after bundling the published ESM entry with esbuild 0.25.12",
+    "documentation": "https://unpkg.com/@msagl/parser@1.1.24/src/dotparser.ts",
+    "scope": "Graph edges from coordinate real general input; weights ignored",
+    "family": "MSAGL parseTXT graph reader",
+    "family_note": "The published ESM entry uses extensionless imports; the adapter bundles the pinned package without source changes. parseTXT explicitly handles Matrix Market percent comments and the size header, but ignores entry weights.",
+    "control": "controls/matrix_market/graph-general.mtx",
+    "expected_output": {
+      "nodes": 3,
+      "edges": 2,
+      "edge_1_2": true
+    }
   }
 ]

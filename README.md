@@ -931,8 +931,8 @@ or quality judgment.
   unresolved. The [runtime inventory](data/javascript/ascii_ply/standard.json)
   records the scoped absence of a PLY-aware Node.js or browser platform API.
 - [JavaScript × Matrix Market ranking](data/javascript/matrix_market/ranking.md):
-  six pinned packages verified on valid local coordinate real general,
-  symmetric, or 10x Matrix Market controls, 14 below the working goal. Six
+  seven pinned packages verified on valid local coordinate real general,
+  symmetric, or 10x Matrix Market controls, 13 below the working goal. Six
   bounded npm queries saved 406 hits and 353 distinct names; three plausible
   leads remain unresolved. `scran.js` and `bakana` share the same underlying
   WASM reader; `@orbifold/graphs` was verified only on a no-comment control. The

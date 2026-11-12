@@ -33,6 +33,18 @@ switch (name) {
       edge_1_2: graph.edges.some((edge) => edge.sourceId === '1' && edge.targetId === '2') };
     break;
   }
+  case '@msagl/parser': {
+    // The published ESM entry uses extensionless imports; bundle that release for Node.
+    const { build } = await import('esbuild');
+    const built = await build({ entryPoints: [require.resolve('@msagl/parser')],
+      bundle: true, platform: 'node', format: 'esm', write: false, logLevel: 'silent' });
+    const url = `data:text/javascript;base64,${Buffer.from(built.outputFiles[0].contents).toString('base64')}`;
+    const { parseTXT } = await import(url);
+    const graph = parseTXT(text);
+    result = { nodes: graph.shallowNodeCount, edges: graph.edgeCount,
+      edge_1_2: Array.from(graph.shallowEdges).some((edge) => edge.source.id === '1' && edge.target.id === '2') };
+    break;
+  }
   case 'scran.js': {
     const scran = await import('scran.js');
     await scran.initialize({ numberOfThreads: 1 });
