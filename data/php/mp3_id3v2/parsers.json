@@ -174,5 +174,27 @@
     "family": "MediaInfoLib native MP3 and ID3 parser",
     "family_note": "Composer wrapper invokes the external MediaInfo 26.10 CLI; this is a package path over the MediaInfoLib parser family. The longer valid control is needed for the backend to read sufficient audio bytes.",
     "external_backend": "MediaInfo command-line 26.10 (Homebrew media-info formula)"
+  },
+  {
+    "name": "buggedcom/phpvideotoolkit",
+    "version": "2.2.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/LICENSE.md",
+    "documentation": "https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/README.md",
+    "input_api": "PHPVideoToolkit\\MediaParser::getFileInformation(local tagged MP3 path); metadata title/artist/album and audio sample rate/codec",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/phptoolkit/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "sample_rate": 8000,
+      "codec": "mp3"
+    },
+    "scope": "ID3v2.3 text fields and MP3 audio codec/sample rate",
+    "family": "FFmpeg native MP3 and ID3 parser",
+    "family_note": "Composer package delegates to the local FFmpeg/FFprobe backend; separate PHP wrapper package path, not an independent parser family. Pinned source LICENSE.md offers MIT, while composer.json also lists GPL-3.0+.",
+    "external_backend": "FFmpeg/FFprobe 9.0.2 (installed CLI)"
   }
 ]

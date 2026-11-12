@@ -17,16 +17,33 @@ def execute(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess
     return subprocess.run(command, cwd=cwd, text=True, capture_output=True, check=True)
 
 
+def lock_is_installed(path: Path, packages: list[dict]) -> bool:
+    installed_path = path.parent / "vendor/composer/installed.json"
+    autoload_path = path.parent / "vendor/autoload.php"
+    if not installed_path.is_file() or not autoload_path.is_file():
+        return False
+    installed = {item["name"]: item for item in json.loads(installed_path.read_text())["packages"]}
+    return all(
+        (item := installed.get(package["name"])) is not None
+        and item["version"] == package["version"]
+        and item["source"]["reference"] == package["source"]["reference"]
+        and (path.parent / "vendor" / package["name"]).is_dir()
+        for package in packages
+    )
+
+
 def main() -> None:
     parsers = json.loads((DATA / "parsers.json").read_text())
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
     locks = {}
     for name in sorted({parser["composer_lock"] for parser in parsers}):
         path = ROOT / name
-        execute(["composer", "install", "--no-interaction", "--no-progress", "--prefer-dist",
-                 "--no-plugins", "--no-scripts", "--no-dev"], path.parent)
+        packages = json.loads(path.read_text())["packages"]
+        if not lock_is_installed(path, packages):
+            execute(["composer", "install", "--no-interaction", "--no-progress", "--prefer-dist",
+                     "--no-plugins", "--no-scripts", "--no-dev"], path.parent)
         locks[name] = {
-            "packages": {package["name"]: package for package in json.loads(path.read_text())["packages"]},
+            "packages": {package["name"]: package for package in packages},
             "sha256": sha256(path.read_bytes()).hexdigest(),
         }
     rows = []

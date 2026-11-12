@@ -12,6 +12,7 @@ $vendor = match ($package) {
     'duncan3dc/meta-audio' => '/meta_audio/vendor/autoload.php',
     'debach/zend-mp3' => '/zend_mp3/vendor/autoload.php',
     'mhor/php-mediainfo' => '/mediainfo/vendor/autoload.php',
+    'buggedcom/phpvideotoolkit' => '/phptoolkit/vendor/autoload.php',
     default => '/vendor/autoload.php',
 };
 require __DIR__ . $vendor;
@@ -96,6 +97,16 @@ switch ($package) {
             'title' => $general->get('title'),
             'artist' => $general->get('performer'),
             'album' => $general->get('album'),
+        ];
+        break;
+    case 'buggedcom/phpvideotoolkit':
+        $parsed = (new \PHPVideoToolkit\MediaParser())->getFileInformation($path);
+        $output = [
+            'title' => $parsed['metadata']['title'] ?? null,
+            'artist' => $parsed['metadata']['artist'] ?? null,
+            'album' => $parsed['metadata']['album'] ?? null,
+            'sample_rate' => $parsed['audio']['sample']['rate'] ?? null,
+            'codec' => $parsed['audio']['codec']['name'] ?? null,
         ];
         break;
     default:
