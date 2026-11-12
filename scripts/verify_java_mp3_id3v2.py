@@ -1,7 +1,9 @@
 """Build pinned Java MP3/ID3v2 readers and test a valid local control.
 
 Run from the repo root: python3 scripts/verify_java_mp3_id3v2.py
-Requires JDK 21, JDK 25+ for taglib, and Maven 3.9+. This verifies only the recorded ordinary file.
+Requires JDK 21, JDK 25+ for taglib, Maven 3.9+, FFprobe, and macOS arm64
+libmediainfo/libzen. External binary checksums are in the dated snapshot.
+This verifies only the recorded valid controls.
 """
 
 from __future__ import annotations
@@ -21,6 +23,8 @@ CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
 CONTROL_SHA256 = "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad"
 CONTROL_44K = ROOT / "controls/mp3_id3v2/tone-tags-44k.mp3"
 CONTROL_44K_SHA256 = "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307"
+CONTROL_LONG = ROOT / "controls/mp3_id3v2/tone-tags-long.mp3"
+CONTROL_LONG_SHA256 = "2b085bb9e5bef6bb4254233a9d6bf0652ced4589373600cff3b8ddab07909dac"
 
 
 def read(path: Path):
@@ -38,13 +42,16 @@ def main() -> None:
     assert CONTROL.read_bytes().startswith(b"ID3\x03\x00")
     assert sha256(CONTROL_44K.read_bytes()).hexdigest() == CONTROL_44K_SHA256
     assert CONTROL_44K.read_bytes().startswith(b"ID3\x03\x00")
+    assert sha256(CONTROL_LONG.read_bytes()).hexdigest() == CONTROL_LONG_SHA256
+    assert CONTROL_LONG.read_bytes().startswith(b"ID3\x03\x00") and CONTROL_LONG.stat().st_size == 72941
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
     repository = Path.home() / ".m2/repository"
     classpaths: dict[str, str] = {}
     jar_counts: dict[str, int] = {}
     by_path: dict[str, str] = {}
-    for module in ("main", "mp3spi", "bytedeco", "tianscar"):
+    for module in ("main", "mp3spi", "bytedeco", "tianscar", "bramp", "imagic",
+                   "v47", "vlcj_info", "amilesend"):
         adapter = ADAPTER if module == "main" else ADAPTER / module
         lock = read(adapter / "dependencies.lock.json")["classpath"]
         build = subprocess.run([
@@ -74,6 +81,13 @@ def main() -> None:
     assert sha256(ffprobe.read_bytes()).hexdigest() == ffprobe_record["sha256"]
     assert subprocess.run([str(ffprobe), "-version"], text=True, capture_output=True,
                           check=True).stdout.splitlines()[0] == ffprobe_record["version"]
+    native_dir = Path(os.environ.get("PARSARIUM_LIBMEDIAINFO_DIR", "/opt/homebrew/lib"))
+    for name in ("libmediainfo", "libzen"):
+        entry = snapshot["external_tools"][name]
+        assert sha256((native_dir / entry["filename"]).read_bytes()).hexdigest() == entry["sha256"]
+        installed = subprocess.run(["brew", "list", "--versions", name], text=True,
+                                   capture_output=True, check=True).stdout.strip()
+        assert installed == f"{name} {entry['version']}"
 
     results = []
     java25 = str(Path(os.environ.get("PARSARIUM_JAVA25_HOME", "/opt/homebrew/opt/openjdk@25")) / "bin/java")
@@ -83,13 +97,20 @@ def main() -> None:
         class_name = {"main": "org.parsarium.Mp3Id3v2Adapter",
                       "mp3spi": "org.parsarium.Mp3SpiAdapter",
                       "bytedeco": "org.parsarium.BytedecoMp3Adapter",
-                      "tianscar": "org.parsarium.Mp3SpiAdapter"}[module]
+                      "tianscar": "org.parsarium.Mp3SpiAdapter",
+                      "bramp": "org.parsarium.BrampMp3Adapter",
+                      "imagic": "org.parsarium.ImagicMp3Adapter",
+                      "v47": "org.parsarium.V47Mp3Adapter",
+                      "vlcj_info": "org.parsarium.VlcjInfoMp3Adapter",
+                      "amilesend": "org.parsarium.AmilesendMp3Adapter"}[module]
         assert parser["control"] in ("controls/mp3_id3v2/tone-tags.mp3",
-                                     "controls/mp3_id3v2/tone-tags-44k.mp3")
+                                     "controls/mp3_id3v2/tone-tags-44k.mp3",
+                                     "controls/mp3_id3v2/tone-tags-long.mp3")
         parser_control = ROOT / parser["control"]
-        arguments = [] if module in ("mp3spi", "tianscar") else [label]
+        arguments = [label] if module in ("main", "bytedeco") else []
         java_binary = java25 if parser["name"] == "taglib-java" else "java"
-        command = [java_binary, "-cp", classpaths[module], class_name,
+        native_args = [f"-Djna.library.path={native_dir}"] if module == "vlcj_info" else []
+        command = [java_binary, *native_args, "-cp", classpaths[module], class_name,
                    *arguments, str(parser_control)]
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=30)
         try:
@@ -129,7 +150,8 @@ def main() -> None:
                         "locked_classpath_jars": jar_counts},
         "control_sha256": CONTROL_SHA256,
         "additional_control_sha256": {"controls/mp3_id3v2/tone-tags-44k.mp3": CONTROL_44K_SHA256},
-        "control_meaning": "Valid mono 8 kHz and 44.1 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
+        "long_control_sha256": {"controls/mp3_id3v2/tone-tags-long.mp3": CONTROL_LONG_SHA256},
+        "control_meaning": "Valid mono 8 kHz, 44.1 kHz, and 18-second 8 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
         "third_party": results,
         "runtime": [],
         "runtime_probe": {"api": "AudioSystem.getAudioFileFormat(File)",

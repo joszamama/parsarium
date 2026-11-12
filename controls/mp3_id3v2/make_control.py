@@ -28,3 +28,15 @@ assert data_44k[:4] == b"ID3\x03"
 out_44k = root / "tone-tags-44k.mp3"
 out_44k.write_bytes(data_44k)
 print(f"Wrote {len(data_44k)} MP3 bytes with SHA-256 {expected_44k_sha256}")
+
+# A third valid ID3v2.3 control has 18 seconds of 8 kHz mono 32 kbit/s MP3.
+# Its larger file supports MediaInfo wrappers that require at least 65,536
+# input bytes. The source was generated once with FFmpeg 9.0.2 from an 18-second
+# 440 Hz sine wave and the same title/artist/album, then committed as base64.
+data_long = b64decode((root / "source-long.b64").read_text())
+expected_long_sha256 = "2b085bb9e5bef6bb4254233a9d6bf0652ced4589373600cff3b8ddab07909dac"
+assert sha256(data_long).hexdigest() == expected_long_sha256
+assert data_long[:4] == b"ID3\x03" and len(data_long) == 72941
+out_long = root / "tone-tags-long.mp3"
+out_long.write_bytes(data_long)
+print(f"Wrote {len(data_long)} MP3 bytes with SHA-256 {expected_long_sha256}")

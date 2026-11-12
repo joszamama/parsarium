@@ -12,9 +12,9 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, and HTTP/1.1, plus a below-target Java × MP3 with ID3v2 batch and
+WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 56 cells at the 20-parser target, five started
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 57 cells at the 20-parser target, four started
 below target, and 27 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -419,21 +419,19 @@ the raw HTTP request without a WARC container. This cell meets the **20-path wor
 [JDK inventory](data/java/http11/standard.json). Run
 `python3 scripts/snapshot_maven_http11.py` to refresh Maven and deps.dev evidence.
 
-The Java × MP3 with ID3v2 batch currently verifies **15/20 pinned Maven package
-paths**. jaudiotagger, mp3agic, and Tika report ID3v2 title, artist, and album;
-JLayer reads MP3 frame fields and detects the raw ID3v2 block. CodecMedia
-and JCodec parse MP3 audio fields. jid3lib and the Java TagLib adaptation
-report ID3v2 text fields; TagLib needs JDK 25. MP3SPI reports ID3v2 fields
-through its Java Sound provider; a Tianscar fork exposes the same fields.
-JavaMP3 decodes samples from the second valid 44.1 kHz tagged control. JAVE2,
-Jaffree, JavaCV, and Bytedeco FFmpeg parse the tagged MP3 through FFmpeg;
-Jaffree also reports title and artist.
-A JDK-only Java Sound probe rejects the 8 kHz control and is recorded
-separately. Run `python3 scripts/verify_java_mp3_id3v2.py` from the repository
-root to rebuild and check 35 SHA-256 locked JARs across four modules and the
-local FFprobe binary. All five bounded Maven Central search queries timed out
-and two plausible leads remain unresolved; the search is incomplete. See
-the [Java MP3 ranking](data/java/mp3_id3v2/ranking.md) and
+The Java × MP3 with ID3v2 batch verifies **20/20 pinned Maven package paths**.
+Readers report ID3v2 text fields, MP3 frames or decoded samples, or both,
+according to their documented APIs. The adapters use three valid tagged MP3
+controls: a 1-second 8 kHz file, a 1-second 44.1 kHz file for JavaMP3, and a
+72,941-byte 18-second file for the amilesend MediaInfo wrapper. JDK 25 is
+required for the Java TagLib adaptation. Run
+`python3 scripts/verify_java_mp3_id3v2.py` from the repository root to rebuild
+the nine modules and check 67 SHA-256 locked JARs, the local FFprobe binary,
+and libmediainfo/libzen. A JDK-only Java Sound probe rejects the 8 kHz control
+and is recorded separately. Several paths share JLayer, FFmpeg, or MediaInfo
+families. All five bounded Maven Central search queries timed out, and one
+plausible lead remains unresolved, so these 20 paths are not a proven most-used
+top 20. See the [Java MP3 ranking](data/java/mp3_id3v2/ranking.md) and
 [cell summary](data/java/mp3_id3v2/cell.json).
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
@@ -1170,12 +1168,11 @@ uncertainty.
 - `data/java/png/`: the equivalent pinned Maven release, ranking, control,
   and JDK 21 PNG API evidence. The macOS arm64 adapter and JAR lock live under
   `adapters/java/png/`.
-- `data/java/mp3_id3v2/`: fifteen pinned Maven release paths, their tagged MP3
-  control results, exact-release direct-dependent ranking, two unresolved
-  leads, and a separate JDK-only probe. The adapter and resolved-JAR hash lock
-  live under `adapters/java/mp3_id3v2/`, with MP3SPI in an isolated Maven
-  module. All five bounded Maven search queries timed out, so the cell remains
-  5 paths below the working target.
+- `data/java/mp3_id3v2/`: twenty pinned Maven release paths, three valid tagged
+  MP3 controls, exact-release direct-dependent ranking, one unresolved lead,
+  and a separate JDK-only probe. Nine adapters and their resolved-JAR hash
+  locks live under `adapters/java/mp3_id3v2/`. All five bounded Maven search
+  queries timed out, so the most-used top 20 remains uncertain.
 - `data/php/zip/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and separate PHP runtime APIs. The
   adapters and six Composer locks live under `adapters/php/zip/`.

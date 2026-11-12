@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T14:40:51.082043+00:00",
+  "captured_at_utc": "2026-11-12T14:48:03.988603+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "java25": "openjdk version \"25.0.5.0.3\" 2026-10-24\nOpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)\nOpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode, sharing)",
@@ -9,14 +9,22 @@
       "main": 24,
       "mp3spi": 4,
       "bytedeco": 5,
-      "tianscar": 2
+      "tianscar": 2,
+      "bramp": 13,
+      "imagic": 3,
+      "v47": 8,
+      "vlcj_info": 2,
+      "amilesend": 6
     }
   },
   "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
   "additional_control_sha256": {
     "controls/mp3_id3v2/tone-tags-44k.mp3": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307"
   },
-  "control_meaning": "Valid mono 8 kHz and 44.1 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
+  "long_control_sha256": {
+    "controls/mp3_id3v2/tone-tags-long.mp3": "2b085bb9e5bef6bb4254233a9d6bf0652ced4589373600cff3b8ddab07909dac"
+  },
+  "control_meaning": "Valid mono 8 kHz, 44.1 kHz, and 18-second 8 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
   "third_party": [
     {
       "package": "jaudiotagger",
@@ -236,6 +244,83 @@
       "exit_code": 0,
       "command": "java -cp <tianscar locked classpath> org.parsarium.Mp3SpiAdapter  controls/mp3_id3v2/tone-tags.mp3",
       "version": "1.9.8"
+    },
+    {
+      "package": "bramp-ffmpeg",
+      "adapter_label": "bramp",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "codec": "mp3",
+        "frequency": 8000,
+        "channels": 1,
+        "title": "Parsarium"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <bramp locked classpath> org.parsarium.BrampMp3Adapter  controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.9.2"
+    },
+    {
+      "package": "imagic-ffmpeg-java",
+      "adapter_label": "imagic",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "codec": "mp3",
+        "frequency": 8000,
+        "channels": 1,
+        "title": "Parsarium"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <imagic locked classpath> org.parsarium.ImagicMp3Adapter  controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.1.2"
+    },
+    {
+      "package": "v47-jaffree",
+      "adapter_label": "v47",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "codec": "mp3",
+        "frequency": 8000,
+        "channels": 1,
+        "title": "Parsarium"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <v47 locked classpath> org.parsarium.V47Mp3Adapter  controls/mp3_id3v2/tone-tags.mp3",
+      "version": "2.1.0"
+    },
+    {
+      "package": "vlcj-info",
+      "adapter_label": "vlcj_info",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "MPEG Audio",
+        "frequency": 8000,
+        "channels": 1,
+        "title": "Parsarium"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <vlcj_info locked classpath> org.parsarium.VlcjInfoMp3Adapter  controls/mp3_id3v2/tone-tags.mp3",
+      "version": "2.0.3"
+    },
+    {
+      "package": "mediainfo-jna-wrapper",
+      "adapter_label": "amilesend",
+      "control": "controls/mp3_id3v2/tone-tags-long.mp3",
+      "output": {
+        "format": "MPEG Audio",
+        "frequency": 8000,
+        "channels": 1,
+        "title": "Parsarium"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <amilesend locked classpath> org.parsarium.AmilesendMp3Adapter  controls/mp3_id3v2/tone-tags-long.mp3",
+      "version": "2.1.9"
     }
   ],
   "runtime": [],

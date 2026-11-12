@@ -37,6 +37,11 @@ COORDS = {
     "taglib-java": ("cz.skyba", "taglib", "1.0.0"),
     "javamp3": ("fr.delthas", "javamp3", "1.0.1"),
     "tianscar-mp3spi": ("com.tianscar.javasound", "javasound-mp3", "1.9.8"),
+    "bramp-ffmpeg": ("net.bramp.ffmpeg", "ffmpeg", "0.9.2"),
+    "imagic-ffmpeg-java": ("ch.imagic", "ffmpeg-java", "0.1.2"),
+    "v47-jaffree": ("io.v47.jaffree", "jaffree", "2.1.0"),
+    "vlcj-info": ("uk.co.caprica", "vlcj-info", "2.0.3"),
+    "mediainfo-jna-wrapper": ("com.amilesend", "mediainfo-jna-wrapper", "2.1.9"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
@@ -54,6 +59,11 @@ LICENSES = {
     "taglib-java": ("LGPL-2.1 OR MPL-2.0", "https://repo.maven.apache.org/maven2/cz/skyba/taglib/1.0.0/taglib-1.0.0.pom"),
     "javamp3": ("MIT", "https://repo.maven.apache.org/maven2/fr/delthas/javamp3/1.0.1/javamp3-1.0.1.pom"),
     "tianscar-mp3spi": ("LGPL-2.0-only", "https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-mp3/1.9.8/javasound-mp3-1.9.8.pom"),
+    "bramp-ffmpeg": ("BSD-2-Clause", "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2.pom"),
+    "imagic-ffmpeg-java": ("BSD-2-Clause", "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2.pom"),
+    "v47-jaffree": ("GPL-3.0-only", "https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0.pom"),
+    "vlcj-info": ("GPL-3.0-or-later", "https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3.pom"),
+    "mediainfo-jna-wrapper": ("MIT + MediaInfoLib Binary License", "https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9.pom"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 
@@ -121,6 +131,15 @@ def main() -> None:
     ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
     ffprobe_version = subprocess.run([str(ffprobe), "-version"], text=True,
                                      capture_output=True, check=True).stdout.splitlines()[0]
+    native_dir = Path(os.environ.get("PARSARIUM_LIBMEDIAINFO_DIR", "/opt/homebrew/lib"))
+    native_tools = {}
+    for name in ("libmediainfo", "libzen"):
+        path = native_dir / f"{name}.dylib"
+        installed = subprocess.run(["brew", "list", "--versions", name], text=True,
+                                   capture_output=True, check=True).stdout.strip()
+        native_tools[name] = {"path": str(path), "filename": path.name,
+                              "version": installed.removeprefix(f"{name} "),
+                              "sha256": sha256(path.read_bytes()).hexdigest()}
     snapshot = {
         "captured_at_utc": now,
         "search_surface": "Maven Central Solr bounded artifact queries plus targeted Sonatype/Maven release and project documentation leads",
@@ -149,7 +168,8 @@ def main() -> None:
         "releases": releases,
         "external_tools": {
             "ffprobe": {"path": str(ffprobe), "version": ffprobe_version,
-                        "sha256": sha256(ffprobe.read_bytes()).hexdigest()}
+                        "sha256": sha256(ffprobe.read_bytes()).hexdigest()},
+            **native_tools,
         },
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",
