@@ -2,7 +2,8 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG and WAV batches,
-a below-target C × ZIP batch, and verified C++ × PNG, ZIP, and WAV batches,
+below-target C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
+and a below-target C++ × ASCII PNM batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -12,8 +13,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 54 cells at the 20-parser target, three started
-below target, and 31 marked `not_started`;
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 54 cells at the 20-parser target, five started
+below target, and 29 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -26,6 +27,8 @@ all packages and integrity hashes. From the repository root:
 ```sh
 python3 scripts/verify_c_png.py
 python3 scripts/verify_cpp_png.py
+python3 scripts/verify_c_ascii_pnm.py
+python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py
 python3 scripts/verify_c_wav.py
 python3 scripts/verify_cpp_zip.py
@@ -144,6 +147,19 @@ bundles stb_image. Six plausible C++ leads, including OpenCV, OpenImageIO, and
 Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
 does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
+
+The C and C++ × ASCII PNM verifiers use the valid 2×1 P3 red/green control,
+exact-release source pins, and binary SHA-256 checks for ten installed image
+libraries. All **10/10 C and 10/10 C++ package paths passed**, returning parsed
+dimensions and two decoded pixels. The C++ adapters use the same underlying C
+packages and reader implementations. SDL2_image and SDL3_image share an upstream
+family. Each cell remains ten paths below the working target, with unresolved
+leads recorded in its [C cell](data/c/ascii_pnm/cell.json) and
+[C++ cell](data/cpp/ascii_pnm/cell.json). Their rankings use primary GitHub
+repository stars within each ecosystem; five paths in each cell lack a
+comparable metric and remain unranked. The control establishes ASCII P3
+handling; it does not establish every PNM variant. Neither scoped standard
+library documents a PNM-aware parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with seven locally installed
 libraries pinned by exact release and binary SHA-256, plus ten source-built

@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C",
+  "format": "ASCII PNM",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220 working draft)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The listed ISO C headers do not define a PNM image reader."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "FILE, fopen and fread provide generic bytes but do not parse P1/P2/P3 headers or pixels."
+    }
+  ],
+  "limit": "Scoped to ISO C; platform and third-party image packages are separate. No format-aware standard API exists to run on the control."
+}

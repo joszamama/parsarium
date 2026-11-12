@@ -1,0 +1,80 @@
+"""Verify pinned C image readers on a valid ASCII P3 PNM control."""
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+import platform
+import shlex
+import subprocess
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data/c/ascii_pnm"
+TARGET = ROOT / "adapters/c/ascii_pnm/target"
+CONTROL = ROOT / "controls/ascii_pnm/red-green.ppm"
+CONTROL_SHA256 = "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1"
+
+
+def run(command: list[str]) -> str:
+    return subprocess.run(command, cwd=ROOT, check=True, text=True,
+                          capture_output=True).stdout.strip()
+
+
+def main() -> None:
+    assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
+    parsers = json.loads((DATA / "parsers.json").read_text())
+    cell = json.loads((DATA / "cell.json").read_text())
+    lock = json.loads((ROOT / "data/c/png/source-lock.json").read_text())
+    assert len(parsers) == cell["verified_third_party_count"]
+    TARGET.mkdir(parents=True, exist_ok=True)
+    rows, local_libraries = [], {}
+    for parser in parsers:
+        name = parser["name"]
+        item = lock[name]
+        assert parser["version"] == item["release"]
+        library = Path(item["local_library"])
+        digest = sha256(library.read_bytes()).hexdigest()
+        assert digest == item["local_library_sha256"], name
+        if name == "freeimage":
+            observed = item["release"]
+            prefix = library.parents[1]
+            command = ["cc", "-std=c11", "-O2", "-I" + str(prefix / "include"),
+                       str(ROOT / parser["adapter"]), "-L" + str(prefix / "lib"),
+                       "-lfreeimage", "-o", str(TARGET / name)]
+        else:
+            observed = run(["pkg-config", "--modversion", item["pkg_config"]])
+            if name == "imagemagick":
+                assert observed == item["release"].rsplit("-", 1)[0]
+                assert item["release"] in run(["magick", "-version"])
+            elif name == "devil":
+                assert observed == ""  # Installed IL.pc leaves Version blank.
+            else:
+                assert observed == item["release"], (name, observed)
+            packages = [item["pkg_config"], "x11"] if name == "imlib2" else [item["pkg_config"]]
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", *packages]))
+            command = ["cc", "-std=c11", "-O2", str(ROOT / parser["adapter"]),
+                       *flags, "-o", str(TARGET / name)]
+        run(command)
+        execute = [str(TARGET / name), str(CONTROL)]
+        output = json.loads(run(execute))
+        assert output == parser["expected_output"], (name, output)
+        local_libraries[name] = {"pkg_config_version": observed,
+                                 "library": str(library), "library_sha256": digest}
+        rows.append({"package": name, "version": parser["version"],
+                     "control": parser["control"], "build_command": shlex.join(command),
+                     "command": shlex.join(execute), "output": output, "pass": True})
+        print(f"{name}@{parser['version']}: P3 passed")
+    result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
+              "platform": platform.platform(),
+              "compiler": run(["cc", "--version"]).splitlines()[0],
+              "source_lock": "data/c/png/source-lock.json",
+              "local_libraries": local_libraries,
+              "control": "controls/ascii_pnm/red-green.ppm",
+              "control_sha256": CONTROL_SHA256,
+              "third_party": rows, "runtime": []}
+    (DATA / "verification.json").write_text(json.dumps(result, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    main()

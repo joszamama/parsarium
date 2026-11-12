@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C++",
+  "format": "ASCII PNM",
+  "runtime": "ISO C++ standard library (WG21 working draft source, checked 2026-11-12)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C++ standard library headers, library introduction",
+      "url": "https://github.com/cplusplus/draft/blob/main/source/lib-intro.tex",
+      "finding": "The listed ISO C++ library components do not define a PNM image reader."
+    },
+    {
+      "api": "File streams <fstream>, input/output library",
+      "url": "https://github.com/cplusplus/draft/blob/main/source/iostreams.tex",
+      "finding": "std::ifstream reads generic bytes but does not parse P1/P2/P3 headers or pixels."
+    }
+  ],
+  "limit": "Scoped to the ISO C++ standard library. Third-party C image libraries callable from C++ are listed separately. No format-aware standard API was documented to run on the control."
+}

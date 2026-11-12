@@ -1,0 +1,304 @@
+[
+  {
+    "name": "imagemagick",
+    "version": "7.1.2-35",
+    "license": "ImageMagick",
+    "license_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-35/LICENSE",
+    "documentation": "https://imagemagick.org/magick-wand/",
+    "input_api": "MagickReadImage(MagickWand*, const char*); MagickExportImagePixels(...)",
+    "adapter": "adapters/cpp/ascii_pnm/imagemagick.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "ImageMagick PNM coder",
+    "family_note": "ImageMagick MagickWand parses ASCII P3 as a PNM image; repository stars reflect many formats.",
+    "family_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-35/coders/pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl3_image",
+    "version": "3.4.8",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3_image.json",
+    "documentation": "https://wiki.libsdl.org/SDL3_image/IMG_Load",
+    "input_api": "IMG_Load(const char* file); SDL_ConvertSurface(...) to RGBA pixels",
+    "adapter": "adapters/cpp/ascii_pnm/sdl3_image.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "SDL_image PNM decoder lineage",
+    "family_note": "SDL3_image IMG_Load parsed the P3 control; SDL2_image is a separate major-version package from the same upstream project and shares parser lineage.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-3.4.8/src/IMG_pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl2_image",
+    "version": "2.8.12",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_image.json",
+    "documentation": "https://wiki.libsdl.org/SDL2_image/IMG_Load",
+    "input_api": "IMG_Load(const char* file); SDL_ConvertSurfaceFormat(...) to RGBA pixels",
+    "adapter": "adapters/cpp/ascii_pnm/sdl2_image.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "SDL_image PNM decoder lineage",
+    "family_note": "SDL2_image IMG_Load parsed the P3 control; SDL3_image is a separate major-version package from the same upstream project and shares parser lineage.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-2.8.12/src/IMG_pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "leptonica",
+    "version": "1.87.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://formulae.brew.sh/api/formula/leptonica.json",
+    "documentation": "https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/allheaders.h",
+    "input_api": "pixRead(const char* filename); pixGetRGBPixel(PIX*, x, y, ...)",
+    "adapter": "adapters/cpp/ascii_pnm/leptonica.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first_rgb": [
+        255,
+        0,
+        0
+      ],
+      "second_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "Leptonica PNM reader",
+    "family_note": "Leptonica pixRead parsed P3 and returned RGB pixels.",
+    "family_evidence": "https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/pnmio.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "graphicsmagick",
+    "version": "1.3.49",
+    "license": "MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/graphicsmagick.json",
+    "documentation": "https://graphicsmagick.sourceforge.io/wand/magick_wand.html",
+    "input_api": "MagickReadImage(MagickWand*, const char*); MagickGetImagePixels(...)",
+    "adapter": "adapters/cpp/ascii_pnm/graphicsmagick.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "GraphicsMagick PNM coder",
+    "family_note": "GraphicsMagick MagickWand parsed P3; primary SourceForge project lacks a comparable GitHub star metric.",
+    "family_evidence": "https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/1.3.49/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "devil",
+    "version": "1.8.0",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://formulae.brew.sh/api/formula/devil.json",
+    "documentation": "https://openil.sourceforge.net/docs/DevIL%20Reference%20Guide.pdf",
+    "input_api": "ilLoadImage(const ILstring path); ilGetInteger(IL_IMAGE_WIDTH/HEIGHT); ilGetData()",
+    "adapter": "adapters/cpp/ascii_pnm/devil.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "DevIL PNM reader",
+    "family_note": "DevIL ilLoadImage parsed P3; primary SourceForge project lacks a comparable GitHub star metric.",
+    "family_evidence": "https://sourceforge.net/projects/openil/files/DevIL/1.8.0/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "imlib2",
+    "version": "1.12.7",
+    "license": "Imlib2",
+    "license_evidence": "https://formulae.brew.sh/api/formula/imlib2.json",
+    "documentation": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+    "input_api": "imlib_load_image_immediately(const char* file); imlib_image_get_data_for_reading_only()",
+    "adapter": "adapters/cpp/ascii_pnm/imlib2.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "Imlib2 PNM loader",
+    "family_note": "Imlib2 loader parsed P3; its primary upstream is not GitHub, so a comparable primary repository star count is unavailable.",
+    "family_evidence": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "gdk-pixbuf",
+    "version": "2.44.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gdk-pixbuf.json",
+    "documentation": "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
+    "input_api": "gdk_pixbuf_new_from_file(const char*, GError**); gdk_pixbuf_read_pixels(...)",
+    "adapter": "adapters/cpp/ascii_pnm/gdk-pixbuf.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "GdkPixbuf PNM loader",
+    "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
+    "family_evidence": "https://gitlab.gnome.org/GNOME/gdk-pixbuf/-/blob/2.44.8/gdk-pixbuf/io-pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "vips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/vips.json",
+    "documentation": "https://www.libvips.org/API/current/VipsImage.html",
+    "input_api": "vips_image_new_from_file(const char*, ...); vips_image_write_to_memory(...)",
+    "adapter": "adapters/cpp/ascii_pnm/vips.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "libvips PPM loader",
+    "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
+    "family_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/libvips/foreign/ppmload.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "freeimage",
+    "version": "3.18.0",
+    "license": "FreeImage",
+    "license_evidence": "https://formulae.brew.sh/api/formula/freeimage.json",
+    "documentation": "https://freeimage.sourceforge.io/fnet/html/99F7C60B.htm",
+    "input_api": "FreeImage_Load(FIF_PPM, const char*, PNM_DEFAULT); FreeImage_GetPixelColor(...)",
+    "adapter": "adapters/cpp/ascii_pnm/freeimage.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "FreeImage PPM plugin",
+    "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
+    "family_evidence": "https://sourceforge.net/projects/freeimage/files/Source%20Distribution/3.18.0/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  }
+]
