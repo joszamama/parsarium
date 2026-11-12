@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 import base64
 import json
 import platform
+import shutil
 import shlex
 import subprocess
 import tarfile
@@ -104,11 +105,19 @@ def main() -> None:
                 package.extractall(source_dir)
             header = source_dir / headers_package["header_member"]
             library = source_dir / runtime_package["library_member"]
+        elif name == "tspdf":
+            source_dir = CACHE / f"tspdf-{source['release']}"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "src/reader/tspr.h"
+            run(["make", "lib", "-j4"], cwd=source_dir)
+            library = source_dir / "build/libtspdf.a"
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio",):
+        if name not in ("pdfio", "tspdf"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         adapter = str(ROOT / parser["adapter"])
         base = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror"]
@@ -132,6 +141,9 @@ def main() -> None:
         elif name == "vanillapdf":
             command = [*base, "-I" + str(header.parents[2]), adapter, str(library),
                        "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
+        elif name == "tspdf":
+            command = [*base, "-I" + str(source_dir / "include"), adapter,
+                       str(library), "-o", str(TARGET / name)]
         elif name in ("mupdf", "ghostscript"):
             assert run(["brew", "list", "--versions", name]) == name + " " + source["release"]
             command = [*base, "-I" + str(header.parents[1]), adapter, str(library),

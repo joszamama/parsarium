@@ -196,6 +196,14 @@ def main() -> None:
                 package.extractall(source_dir)
             header = source_dir / headers_package["header_member"]
             library = source_dir / runtime_package["library_member"]
+        elif name == "tspdf":
+            source_dir = CACHE / f"tspdf-{source['release']}"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "src/reader/tspr.h"
+            run(["make", "lib", "-j4"], cwd=source_dir)
+            library = source_dir / "build/libtspdf.a"
         elif name == "docling_parse":
             patch = ROOT / source["patch"]
             adapter = ROOT / parser["adapter"]
@@ -224,7 +232,7 @@ def main() -> None:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm", "docling_parse"):
+        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm", "docling_parse", "tspdf"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -296,6 +304,10 @@ def main() -> None:
                        "-I" + str(header.parents[2]), str(ROOT / parser["adapter"]),
                        str(library), "-Wl,-rpath," + str(library.parent),
                        "-o", str(TARGET / name)]
+        elif name == "tspdf":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(source_dir / "include"), str(ROOT / parser["adapter"]),
+                       str(library), "-o", str(TARGET / name)]
         elif name == "docling_parse":
             command = ["cmake", "--build", str(build_dir), "--target", "parsarium_control", "-j4"]
         else:

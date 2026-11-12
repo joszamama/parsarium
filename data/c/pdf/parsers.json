@@ -110,5 +110,21 @@
     "scope": "PDF document page count and first page object",
     "family": "Vanilla.PDF C API over C++ PDF parser",
     "family_note": "Official publisher C ABI backed by its native C++ parser. C and C++ call sites share the same v2.3.0 engine and are one package path per ecosystem; the C++ call site uses the documented C API, not a separate C++ API."
+  },
+  {
+    "name": "tspdf",
+    "version": "0.5.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/be-lang/tspdf/blob/v0.5.1/LICENSE",
+    "documentation": "https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md",
+    "input_api": "tspdf_reader_open_file(local filename, error); tspdf_reader_page_count(); tspdf_reader_get_page(0)",
+    "adapter": "adapters/c/pdf/tspdf.c",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first parsed page",
+    "family": "tspdf pure C11 PDF parser",
+    "family_note": "The same source library and parser engine is used by the C and C++17 adapters; counted once per ecosystem, not as separate syntax engines. Its zero-star GitHub metric is recorded without claiming broad adoption."
   }
 ]
