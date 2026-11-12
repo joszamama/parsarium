@@ -40,6 +40,7 @@ public final class Http11Adapter {
         else if (args[0].equals("mina")) runMina(bytes);
         else if (args[0].equals("grizzly")) runGrizzly(bytes);
         else if (args[0].equals("jglobus")) runJglobus(bytes);
+        else if (args[0].equals("javawarc")) runJavaWarc(bytes);
         else System.exit(2);
     }
 
@@ -313,5 +314,13 @@ public final class Http11Adapter {
         System.out.printf("{\"status\":%d,\"message\":\"%s\",\"content_type\":\"%s\",\"content_length\":%d}%n",
                 response.getStatusCode(), response.getMessage(),
                 response.getContentType(), response.getContentLength());
+    }
+
+    private static void runJavaWarc(byte[] bytes) throws Exception {
+        var block = new com.github.bottomlessarchive.warc.service.content.response.ResponseContentBlockFactory(
+                new com.github.bottomlessarchive.warc.service.header.HeaderParser())
+                .newResponseContentBlock(new ByteArrayInputStream(bytes));
+        System.out.printf("{\"status\":%d,\"content_type\":\"%s\",\"body\":\"%s\"}%n",
+                block.getStatusCode(), block.getMimeType(), block.getPayloadAsString());
     }
 }

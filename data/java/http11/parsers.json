@@ -382,5 +382,25 @@
       "content_type": "text/plain",
       "content_length": 9
     }
+  },
+  {
+    "name": "java-warc",
+    "group": "com.github.bottomless-archive-project",
+    "artifact": "java-warc",
+    "version": "1.2.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1.pom",
+    "input_api": "new ResponseContentBlockFactory(new HeaderParser()).newResponseContentBlock(local InputStream); getStatusCode(), getMimeType(), getPayloadAsString()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1-sources.jar",
+    "scope": "HTTP/1.1 response status, Content-Type and body from local stream",
+    "family": "java-warc response wrapper over Apache HttpComponents Core 4.x parser",
+    "family_note": "Public ResponseContentBlockFactory accepts a raw local HTTP response InputStream without a WARC container and returns a structured response block. Its POM depends on httpcore 4.4.14; the combined adapter classpath resolves httpcore 4.4.16. Counted as a separate Maven package path, not an independent parser engine.",
+    "adapter_label": "javawarc",
+    "control": "controls/http11/response.http",
+    "expected_output": {
+      "status": 200,
+      "content_type": "text/plain",
+      "body": "parsarium"
+    }
   }
 ]

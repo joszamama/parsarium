@@ -400,17 +400,17 @@ repository and has no comparable deps.dev count. The collection meets the
 and [unresolved leads](data/java/wav/leads.json). Run
 `python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
 
-The Java × HTTP/1.1 batch verifies **18/18 pinned Maven package paths** on
+The Java × HTTP/1.1 batch verifies **19/19 pinned Maven package paths** on
 committed valid GET request and 200 response controls.
 `python3 scripts/verify_java_http11.py` rebuilds the adapter and checks SHA-256
-hashes for all 74 resolved JARs. Sixteen paths report request method, target,
-and two headers; fifteen also expose the request version. The Sentinel response parser reports status line, status code, Content-Type, and body. JGlobus reports response status, reason, Content-Type, and Content-Length.
+hashes for all 76 resolved JARs. Sixteen paths report request method, target,
+and two headers; fifteen also expose the request version. The Sentinel response parser reports status line, status code, Content-Type, and body. JGlobus reports response status, reason, Content-Type, and Content-Length; java-warc reports status, Content-Type and body via an Apache HttpCore-based wrapper.
 Apache MINA and Grizzly supply separate native HTTP decoders. Apache HttpCore 4, its NIO artifact, and HttpCore 5 share an upstream family,
 as do the Netty 3, 4, and 5 release lines; the
 Netty 5 release is alpha. Jodd HTTP and RawHTTP parse the saved local stream
 directly. NanoHTTPD's local stream session exposes parsed request fields through
 a callback. jwarc, webarchive-commons, and JWAT expose direct parsers that read
-the raw HTTP request without a WARC container. This cell remains **2 short of
+the raw HTTP request without a WARC container. This cell remains **1 short of
 the 20-path working goal**. The bounded search saved two identical 100-hit broad windows out of
 7,858 results, while three other queries timed out. One plausible lead
 remains unresolved. See the
