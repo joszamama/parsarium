@@ -18,6 +18,8 @@ ADAPTER = ROOT / "adapters/java/wav"
 DATA = ROOT / "data/java/wav"
 CONTROL = ROOT / "controls/wav/256-samples.wav"
 CONTROL_SHA256 = "d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7"
+MEDIAINFO_CONTROL = ROOT / "controls/wav/32768-samples.wav"
+MEDIAINFO_CONTROL_SHA256 = "959abada7c20a6fe4a3e45e444b393953acc3f13b89d270323d1e04fa9028d32"
 JAVA_HOME = Path(os.environ.get("PARSARIUM_JAVA25_HOME", "/opt/homebrew/opt/openjdk@25"))
 
 
@@ -39,6 +41,15 @@ def check_control() -> None:
     assert struct.unpack_from("<HHIIHH", data, 20) == (1, 1, 8000, 16000, 2, 16)
     assert data[36:40] == b"data" and struct.unpack_from("<I", data, 40)[0] == 512
     assert struct.unpack_from("<256h", data, 44) == (0, 1000, -1000, 0) + (0,) * 252
+    media = MEDIAINFO_CONTROL.read_bytes()
+    assert sha256(media).hexdigest() == MEDIAINFO_CONTROL_SHA256
+    assert len(media) == 65580 and media[:4] == b"RIFF" and media[8:12] == b"WAVE"
+    assert struct.unpack_from("<I", media, 4)[0] + 8 == len(media)
+    assert media[12:16] == b"fmt " and struct.unpack_from("<I", media, 16)[0] == 16
+    assert struct.unpack_from("<HHIIHH", media, 20) == (1, 1, 8000, 16000, 2, 16)
+    assert media[36:40] == b"data" and struct.unpack_from("<I", media, 40)[0] == 65536
+    assert struct.unpack_from("<4h", media, 44) == (0, 1000, -1000, 0)
+    assert media[52:] == bytes(len(media) - 52)
 
 
 def build_third_party(env: dict[str, str], module: str) -> tuple[str, int]:
@@ -87,7 +98,7 @@ def main() -> None:
     env = java_environment()
     java = str(JAVA_HOME / "bin/java")
     classpaths, jar_counts = {}, {}
-    for module in ("main", "bytedeco", "ffprobe", "jave", "bramp", "imagic"):
+    for module in ("main", "bytedeco", "ffprobe", "jave", "bramp", "imagic", "v47", "vlcj_info", "amilesend"):
         classpaths[module], jar_counts[module] = build_third_party(env, module)
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
@@ -98,6 +109,13 @@ def main() -> None:
     assert sha256(ffprobe.read_bytes()).hexdigest() == tool["sha256"], "FFprobe executable differs from pinned checksum"
     assert subprocess.run([str(ffprobe), "-version"], text=True, capture_output=True,
                           check=True).stdout.splitlines()[0] == tool["version"]
+    native_dir = Path(os.environ.get("PARSARIUM_LIBMEDIAINFO_DIR", "/opt/homebrew/lib"))
+    for name in ("libmediainfo", "libzen"):
+        library = snapshot["external_tools"][name]
+        assert sha256((native_dir / library["filename"]).read_bytes()).hexdigest() == library["sha256"], name
+        installed = subprocess.run(["brew", "list", "--versions", name], text=True,
+                                   capture_output=True, check=True).stdout.strip()
+        assert installed == f"{name} {library['version']}", name
     third_party = []
     for parser in parsers:
         module = parser.get("adapter_module", "main")
@@ -107,10 +125,14 @@ def main() -> None:
                "ffprobe": "org.parsarium.JaffreeWavAdapter",
                "jave": "org.parsarium.JaveWavAdapter",
                "bramp": "org.parsarium.BrampWavAdapter",
-               "imagic": "org.parsarium.ImagicWavAdapter"}[module]
-        native_flag = ["--enable-native-access=ALL-UNNAMED"] if module == "bytedeco" else []
-        arguments = [] if module in ("ffprobe", "jave", "bramp", "imagic") else [mode]
-        output = run([java, *native_flag, "-cp", classpaths[module], cls,
+               "imagic": "org.parsarium.ImagicWavAdapter",
+               "v47": "org.parsarium.V47WavAdapter",
+               "vlcj_info": "org.parsarium.VlcjInfoWavAdapter",
+               "amilesend": "org.parsarium.AmilesendWavAdapter"}[module]
+        native_flag = ["--enable-native-access=ALL-UNNAMED"] if module in ("bytedeco", "vlcj_info", "amilesend") else []
+        native_path = [f"-Djna.library.path={native_dir}"] if module == "vlcj_info" else []
+        arguments = [] if module in ("ffprobe", "jave", "bramp", "imagic", "v47", "vlcj_info", "amilesend") else [mode]
+        output = run([java, *native_flag, *native_path, "-cp", classpaths[module], cls,
                       *arguments, str(ROOT / parser["control"])], parser["expected_output"])
         third_party.append({"package": parser["name"], "version": parser["version"],
                             "control": parser["control"], "output": output, "pass": True})

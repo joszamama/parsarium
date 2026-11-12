@@ -9,8 +9,8 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-and a below-target Java × WAV batch and an explicit 88-cell work matrix. There are 45 cells at
-the 20-parser target, three started below target, and 40 marked `not_started`;
+and WAV, and an explicit 88-cell work matrix. There are 46 cells at
+the 20-parser target, two started below target, and 40 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -191,29 +191,29 @@ API was documented in the separate runtime inventory. See the
 evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
 
-The Java × WAV batch uses Maven 3.9+, JDK 25, macOS arm64 for the Bytedeco
-bindings, and SHA-256 locks of 57 regular, 5 native-module, 3 Jaffree,
-3 JAVE2, 12 Bramp and 3 Imagic classpath JARs. The FFprobe wrappers use a local FFprobe 9.0.2 executable whose SHA-256
-is recorded in the registry snapshot; set `PARSARIUM_FFPROBE_DIR` when it is not
-in `/opt/homebrew/bin`.
-`python3 controls/wav/make_control.py` generates a valid 556-byte mono
-PCM control with 256 frames (SHA-256
-`d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7`).
-The longer control accommodates readers that reject a 52-byte WAV or expect
-at least 128 bytes in the header buffer. Run `python3 scripts/verify_java_wav.py`
-from the repository root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
-The recorded result is **17/17 third-party package paths and 2/2 JDK APIs passing**.
-The JDK adapter compiles and runs without any third-party classpath. JDSP uses
-wavfile, Tika and TarsosDSP delegate WAV parsing to Java Sound, and the two
-Bytedeco, Jaffree, JAVE2, Bramp and Imagic paths share FFmpeg. JAVE2's macOS arm64 FFmpeg
-executable is supplied by a checksum-locked Maven artifact. All five latest bounded Maven query attempts
-timed out; five hits (three unique) were saved across refreshes, and seven
-plausible leads remain unresolved. TarsosDSP 2.5 is pinned from its official
-non-Central repository; deps.dev does not provide a comparable count for it.
-The cell is
-below the 20-path working goal. See the [Java WAV ranking](data/java/wav/ranking.md),
-[cell summary](data/java/wav/cell.json), and
-[unresolved leads](data/java/wav/leads.json). Run
+The Java × WAV batch uses Maven 3.9+, JDK 25, and macOS arm64. Nine module
+classpaths lock 57 regular, 5 Bytedeco, 3 Jaffree, 3 JAVE2, 12 Bramp,
+3 Imagic, 7 v47 Jaffree, 2 vlcj-info, and 5 amilesend JARs by SHA-256.
+FFprobe wrappers use a checksummed local FFprobe 9.0.2 executable; set
+`PARSARIUM_FFPROBE_DIR` when it is outside `/opt/homebrew/bin`.
+vlcj-info uses checksummed Homebrew libmediainfo 26.10 and libzen 0.4.41_1;
+set `PARSARIUM_LIBMEDIAINFO_DIR` when they are outside `/opt/homebrew/lib`.
+The amilesend binding uses its pinned macOS arm64 native JAR.
+`python3 controls/wav/make_control.py` regenerates the valid 556-byte
+256-frame mono PCM control (SHA-256
+`d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7`)
+and a valid 65,580-byte control for the amilesend file API, which requires at
+least 65,536 bytes. Run `python3 scripts/verify_java_wav.py` from the repository
+root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
+The recorded result is **20/20 third-party package paths and 2/2 JDK APIs passing**.
+The JDK adapter runs without a third-party classpath. Shared wavfile, Java Sound,
+FFmpeg and libmediainfo families are labeled in the ranking. Five bounded Maven
+queries saved five hits (three unique) across refreshes, and seven plausible
+leads remain unresolved. TarsosDSP 2.5 is pinned from its official non-Central
+repository and has no comparable deps.dev count. The collection meets the
+20-path working goal but is not a proven exhaustive most-used top 20. See the
+[Java WAV ranking](data/java/wav/ranking.md), [cell summary](data/java/wav/cell.json),
+and [unresolved leads](data/java/wav/leads.json). Run
 `python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,

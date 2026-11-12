@@ -23,3 +23,13 @@ extended_chunks += b"data" + struct.pack("<I", len(extended_payload)) + extended
 extended = b"RIFF" + struct.pack("<I", len(extended_chunks) + 4) + b"WAVE" + extended_chunks
 (ROOT / "256-samples.wav").write_bytes(extended)
 print(f"Wrote {len(extended)} bytes")
+
+# MediaInfo JNA's file API requires at least 65,536 bytes. This valid PCM/WAVE
+# control has the same first samples and format with silence for the remainder.
+media_info_samples = samples + (0,) * (32768 - len(samples))
+media_info_payload = struct.pack("<32768h", *media_info_samples)
+media_info_chunks = b"fmt " + struct.pack("<I", len(format_chunk)) + format_chunk
+media_info_chunks += b"data" + struct.pack("<I", len(media_info_payload)) + media_info_payload
+media_info_control = b"RIFF" + struct.pack("<I", len(media_info_chunks) + 4) + b"WAVE" + media_info_chunks
+(ROOT / "32768-samples.wav").write_bytes(media_info_control)
+print(f"Wrote {len(media_info_control)} bytes")

@@ -643,10 +643,10 @@
     {
       "ecosystem": "java",
       "format": "wav",
-      "status": "verified_below_target_search_incomplete",
+      "status": "verified_target_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 17,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 2,
       "search_queries": [
         "wav",
@@ -659,7 +659,7 @@
       "search_hits_recorded": 5,
       "unique_search_hits": 3,
       "unresolved_documentation_leads": 7,
-      "uncertainty": "Five bounded Maven Central Solr queries yielded five saved hits (three unique) across refreshes; the latest refresh of each query timed out. The broad wav query found a converter, a Tencent Cloud API client and Lionengine's WAV playback artifact. Lionengine exposes no documented format-specific parsed result; the cloud client is remote-service software. Targeted official Maven releases, Javadocs and project docs supplied seventeen distinct package paths that parse the valid 256-frame PCM/WAVE control. Seven plausible leads remain unresolved. This is below the working goal of 20 and cannot establish the most-used top 20. The TarsosDSP 2.5 release is pinned from its official non-Central Maven repository and has no comparable deps.dev count, so it remains unranked. JHOVE's 1.20.1 Maven Central module is older than the release described by the current project README. JDSP uses wavfile, Tika and TarsosDSP delegate WAV parsing to Java Sound, and the Bytedeco, Jaffree, JAVE2, Bramp and Imagic paths share FFmpeg, so seventeen package paths are not seventeen independent engines. The Bytedeco runs require macOS arm64 native artifacts; Jaffree, Bramp and Imagic require the separately checksummed local FFprobe 9.0.2 executable; JAVE2 uses a checksummed macOS arm64 FFmpeg executable JAR. Two verified JDK API paths share one Java Sound WAVE reader family and are not ranked with packages. The control covers one mono 16-bit PCM WAV variant only.",
+      "uncertainty": "Five bounded Maven Central Solr queries saved five hits (three unique) across refreshes; the latest wav, Java WAV and audio wav refreshes timed out, while wav parser and wav reader returned zero. Targeted official Maven releases, Javadocs and project documentation supplied twenty distinct package paths that parse valid PCM/WAVE controls. Seven plausible documentation leads remain unresolved, so this is a verified 20-path collection, not a proven exhaustive most-used top 20. The exact-release deps.dev metric is unavailable for TarsosDSP 2.5 from its official non-Central Maven repository, leaving that row unranked. JHOVE 1.20.1 from Maven Central is older than the project README release. JDSP uses wavfile; Tika and TarsosDSP delegate to Java Sound; Bytedeco, Jaffree, v47 Jaffree, JAVE2, Bramp and Imagic share FFmpeg; vlcj-info and mediainfo-jna-wrapper share libmediainfo. These twenty package paths are fewer than twenty independent parsing engines. Bytedeco needs pinned macOS arm64 native artifacts; FFprobe wrappers need the separately checksummed local FFprobe 9.0.2 executable; JAVE2 uses a checksummed macOS arm64 FFmpeg executable JAR; vlcj-info uses checksummed Homebrew libmediainfo 26.10 and libzen 0.4.41_1; mediainfo-jna-wrapper uses its pinned macOS arm64 native JAR. The two JDK API paths share one Java Sound WAVE reader family and are excluded from package ranking. Nineteen package paths used the 556-byte mono PCM16 control; mediainfo-jna-wrapper required a valid 65,580-byte PCM16 control because its file API rejects shorter files. These controls cover one PCM/WAVE variant only.",
       "third_party_evidence": "data/java/wav/parsers.json",
       "third_party_control_results": "data/java/wav/verification.json",
       "runtime_evidence": "data/java/wav/standard.json",

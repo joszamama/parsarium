@@ -23,10 +23,13 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/java/wav"
 PARSERS = json.loads((DATA / "parsers.json").read_text())
 QUERIES = ["wav", "wav parser", "wav reader", "Java WAV", "audio wav"]
-AUXILIARY = [{
-    "name": "jave-nativebin-osxm1", "group": "ws.schild", "artifact": "jave-nativebin-osxm1",
-    "version": "4.2.0", "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses",
-}]
+AUXILIARY = [
+    {"name": "jave-nativebin-osxm1", "group": "ws.schild", "artifact": "jave-nativebin-osxm1",
+     "version": "4.2.0", "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses"},
+    {"name": "mediainfo-jna-lib-mac-aarch64", "group": "com.amilesend",
+     "artifact": "mediainfo-jna-lib-mac-aarch64", "version": "2.1.9",
+     "license": "MIT + MediaInfoLib Binary License", "license_evidence": "Maven parent POM licenses"},
+]
 
 
 def get(url: str, timeout: int = 12) -> bytes:
@@ -116,6 +119,15 @@ def main() -> None:
     ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
     ffprobe_version = subprocess.run([str(ffprobe), "-version"], text=True,
                                      capture_output=True, check=True).stdout.splitlines()[0]
+    native_dir = Path(os.environ.get("PARSARIUM_LIBMEDIAINFO_DIR", "/opt/homebrew/lib"))
+    native_libraries = {}
+    for name in ("libmediainfo", "libzen"):
+        filename = f"{name}.dylib"
+        version = subprocess.run(["brew", "list", "--versions", name], text=True,
+                                 capture_output=True, check=True).stdout.strip().split(maxsplit=1)[1]
+        native_libraries[name] = {"path": str(native_dir / filename), "filename": filename,
+                                  "version": version,
+                                  "sha256": sha256((native_dir / filename).read_bytes()).hexdigest()}
     with ThreadPoolExecutor(max_workers=7) as pool:
         releases = dict(pool.map(release, PARSERS))
         metrics = dict(pool.map(metric, PARSERS))
@@ -144,7 +156,8 @@ def main() -> None:
         "auxiliary_releases": auxiliaries,
         "native_releases": natives,
         "external_tools": {"ffprobe": {"path": str(ffprobe), "version": ffprobe_version,
-                                       "sha256": sha256(ffprobe.read_bytes()).hexdigest()}},
+                                       "sha256": sha256(ffprobe.read_bytes()).hexdigest()},
+                           **native_libraries},
         "popularity_metric": {
             "name": "deps.dev exact-version directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",
@@ -156,7 +169,7 @@ def main() -> None:
     dest.write_text(json.dumps(result, indent=2) + "\n")
     print(f"Java WAV snapshot: {sum(len(s['hits']) for s in searches)} search hits; "
           f"{len(releases)} pinned releases; {len(natives)} native artifacts; "
-          f"{len(auxiliaries)} bundled executable artifact")
+          f"{len(auxiliaries)} auxiliary artifacts")
 
 
 if __name__ == "__main__":

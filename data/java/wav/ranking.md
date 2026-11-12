@@ -1,6 +1,6 @@
 # Java × WAV: verified parser ranking
 
-17 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T05:40:19.373367+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 1 package(s) lack a metric and remain unranked.
+20 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T05:49:36.635742+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 1 package(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -21,5 +21,8 @@ Search hits, unresolved leads, and JDK APIs are separate from this ranking. See 
 | 11 | [codecmedia](https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar) | me.tamkungz.codecmedia:codecmedia:1.2.2 | 0 | parsed PCM codec, sample rate and channels | CodecMedia RIFF/WAV parser |
 | 11 | [imagic-ffmpeg-java](https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar) | ch.imagic:ffmpeg-java:0.1.2 | 0 | WAV format, PCM codec, sample rate and channels | Imagic fork of bramp FFprobe CLI wrapper over FFmpeg |
 | 11 | [jdsp](https://repo.maven.apache.org/maven2/com/github/psambit9791/jdsp/3.1.1/jdsp-3.1.1-javadoc.jar) | com.github.psambit9791:jdsp:3.1.1 | 0 | sample rate, channels and frame count | JDSP WAV API over wavfile |
+| 11 | [mediainfo-jna-wrapper](https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar) | com.amilesend:mediainfo-jna-wrapper:2.1.9 | 0 | WAV format, sample rate and channels | amilesend JNA binding to libmediainfo |
 | 11 | [musicg](https://repo.maven.apache.org/maven2/com/github/fracpete/musicg/1.4.2.2/musicg-1.4.2.2-javadoc.jar) | com.github.fracpete:musicg:1.4.2.2 | 0 | WAVE format, sample rate, channels, bit depth and sample count | musicg PCM WAVE reader |
+| 11 | [v47-jaffree](https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar) | io.v47.jaffree:jaffree:2.1.0 | 0 | PCM codec, sample rate and channels | v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg |
+| 11 | [vlcj-info](https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar) | uk.co.caprica:vlcj-info:2.0.3 | 0 | WAV format, sample rate and channels | vlcj-info JNA binding to libmediainfo |
 | unranked | [tarsosdsp-jvm](https://mvn.0110.be/releases/be/tarsos/dsp/jvm/2.5/jvm-2.5-javadoc.jar) | be.tarsos.dsp:jvm:2.5 | unknown | sample rate, channels, bit depth and decoded frame count | TarsosDSP JVM wrapper over Java Sound |
