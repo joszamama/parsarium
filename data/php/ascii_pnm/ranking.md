@@ -1,8 +1,8 @@
 # PHP × ASCII PNM: verified parser ranking
 
-19 verified third-party package paths; working goal 20, original ceiling 30. Packagist lifetime package downloads were captured at 2026-11-12T16:43:01.143540+00:00 for the 18 Composer paths. Counts cover all releases and formats, and rank adoption signals only within PHP. PECL Imagick has no comparable metric and remains unranked.
+20 verified third-party package paths; working goal 20, original ceiling 30. Packagist lifetime package downloads were captured at 2026-11-12T16:44:48.821611+00:00 for the 19 Composer paths. Counts cover all releases and formats, and rank adoption signals only within PHP. PECL Imagick has no comparable metric and remains unranked.
 
-Six paths use libvips, twelve use ImageMagick, and one uses FFmpeg. The control is one valid ASCII P3 image; passing it does not establish support for every PNM variant. Search hits and unresolved leads are in `registry-snapshot.json` and `leads.json`.
+Six paths use libvips, thirteen use ImageMagick, and one uses FFmpeg. The control is one valid ASCII P3 image; passing it does not establish support for every PNM variant. Search hits and unresolved leads are in `registry-snapshot.json` and `leads.json`.
 
 | Rank | Package | Pinned release | Lifetime Composer downloads | Observable scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -21,7 +21,8 @@ Six paths use libvips, twelve use ImageMagick, and one uses FFmpeg. The control 
 | 13 | [francodacosta/phmagick](https://packagist.org/packages/francodacosta/phmagick#v5.0.2) | v5.0.2 | 74,152 | converted PNG dimensions and MIME | ImageMagick PNM decoder |
 | 14 | [osiemsiedem/intervention-image-vips-driver](https://packagist.org/packages/osiemsiedem/intervention-image-vips-driver#v0.11.0) | v0.11.0 | 64,537 | decoded image dimensions | libvips PPM/PNM decoder |
 | 15 | [phpixie/image](https://packagist.org/packages/phpixie/image#3.3) | 3.3 | 58,216 | decoded image dimensions | ImageMagick PNM decoder |
-| 16 | [phpthumb/phpthumb](https://packagist.org/packages/phpthumb/phpthumb#2.5.1) | 2.5.1 | 18,743 | decoded image dimensions | ImageMagick PNM decoder |
-| 17 | [horde/image](https://packagist.org/packages/horde/image#v3.0.0) | v3.0.0 | 3,986 | decoded image dimensions | ImageMagick PNM decoder |
-| 18 | [phphleb/imageresizer](https://packagist.org/packages/phphleb/imageresizer#v2.0.8) | v2.0.8 | 1,061 | decoded image dimensions | ImageMagick PNM decoder |
+| 16 | [locomotivemtl/charcoal-image](https://packagist.org/packages/locomotivemtl/charcoal-image#v0.4.3.4) | v0.4.3.4 | 21,590 | decoded image dimensions | ImageMagick PNM decoder |
+| 17 | [phpthumb/phpthumb](https://packagist.org/packages/phpthumb/phpthumb#2.5.1) | 2.5.1 | 18,743 | decoded image dimensions | ImageMagick PNM decoder |
+| 18 | [horde/image](https://packagist.org/packages/horde/image#v3.0.0) | v3.0.0 | 3,986 | decoded image dimensions | ImageMagick PNM decoder |
+| 19 | [phphleb/imageresizer](https://packagist.org/packages/phphleb/imageresizer#v2.0.8) | v2.0.8 | 1,061 | decoded image dimensions | ImageMagick PNM decoder |
 | — | [pecl/imagick](https://pecl.php.net/package/imagick/3.8.1) | 3.8.1 | unavailable | decoded dimensions and RGB pixels | ImageMagick PNM decoder |

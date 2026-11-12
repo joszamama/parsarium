@@ -14,9 +14,8 @@ Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII P
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches, and PHP × ASCII PNM
-has a below-target batch. There are 59 cells at the 20-parser target, three started
-below target, and 26 marked `not_started`;
+PHP × ZIP, PHP × PNG, and PHP × ASCII PNM have verified 20-parser batches.
+There are 60 cells at the 20-parser target, two started below target, and 26 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -280,15 +279,16 @@ leads remain unresolved, and two aliases were rejected as duplicate source. The
 uncertainty. Reproduction requires PHP 8.5 with GD and FFI, libvips 8.18.7,
 and Composer 2.
 
-The [PHP × ASCII PNM ranking](data/php/ascii_pnm/ranking.md) has eight pinned
-third-party paths passing the valid two-pixel P3 control. Six Composer paths
-delegate to libvips; Imagine and a SHA-256-pinned PECL Imagick release delegate
-to ImageMagick. The direct Vips binding and Imagick return both RGB pixels.
-Eight bounded Packagist searches saved 242 hits and 239 distinct names. Three
-leads remain unresolved, and 12 paths are still needed for the working goal.
+The [PHP × ASCII PNM ranking](data/php/ascii_pnm/ranking.md) has twenty pinned
+third-party paths passing the valid two-pixel P3 control. Six use libvips,
+thirteen use ImageMagick (including a SHA-256-pinned PECL Imagick release),
+and one uses FFmpeg. These are package paths across three decoder families.
+Eight bounded Packagist searches saved 242 hits and 239 distinct names. Two
+leads remain unresolved; the numerical working goal is met, while the bounded
+search does not establish a definitive most-used top twenty.
 The [runtime inventory](data/php/ascii_pnm/standard.json) records that the
 tested PHP core and GD APIs did not parse the control. Reproduction requires
-PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, phpize, and Composer 2. The
+PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, FFprobe, phpize, and Composer 2. The
 verifier builds Imagick into ignored cache from the pinned PECL source archive.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
@@ -1203,9 +1203,9 @@ uncertainty.
 - `data/php/png/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and four separate PHP runtime APIs.
   The adapters and Composer lock live under `adapters/php/png/`.
-- `data/php/ascii_pnm/`: Packagist discovery hits, eight pinned third-party
+- `data/php/ascii_pnm/`: Packagist discovery hits, twenty pinned third-party
   paths, lifetime download ranking, control results, leads, and a separate PHP
-  runtime inventory. Two Composer locks live under `adapters/php/ascii_pnm/`,
+  runtime inventory. Eight Composer locks live under `adapters/php/ascii_pnm/`,
   and a pinned PECL Imagick source lock lives with the cell data.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.

@@ -20,6 +20,8 @@ if ($package === 'pecl/imagick') {
     require __DIR__ . '/extension_wrappers/vendor/autoload.php';
 } elseif ($package === 'intervention/image-laravel') {
     require __DIR__ . '/laravel_wrapper/vendor/autoload.php';
+} elseif ($package === 'locomotivemtl/charcoal-image') {
+    require __DIR__ . '/palette_wrappers/vendor/autoload.php';
 } else {
     require __DIR__ . '/vendor/autoload.php';
 }
@@ -180,6 +182,10 @@ switch ($package) {
         ]));
         (new \Intervention\Image\Laravel\ServiceProvider($app))->register();
         $image = \Intervention\Image\Laravel\Facades\Image::decodePath($path);
+        $output = ['width' => $image->width(), 'height' => $image->height()];
+        break;
+    case 'locomotivemtl/charcoal-image':
+        $image = (new \Charcoal\Image\Imagick\ImagickImage())->open($path);
         $output = ['width' => $image->width(), 'height' => $image->height()];
         break;
     default:
