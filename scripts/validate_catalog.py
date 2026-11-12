@@ -52,8 +52,14 @@ def main() -> None:
                 release = snapshot["releases"][name]
                 assert parser["version"] == source["release"] == release["version"]
                 assert parser["license"] == release["license"]
-                assert source["source_sha256"] == release["source_sha256"]
-                assert len(source["source_sha256"]) == 64
+                if source.get("source_kind") == "subversion":
+                    assert release["source_kind"] == "subversion"
+                    assert source["svn_revision"] == release["svn_revision"]
+                    assert source["version_file_sha256"] == release["version_file_sha256"]
+                    assert len(source["version_file_sha256"]) == 64
+                else:
+                    assert source["source_sha256"] == release["source_sha256"]
+                    assert len(source["source_sha256"]) == 64
                 assert all(len(file["sha256"]) == 64 for file in source.get("files", []))
                 assert (ROOT / parser["adapter"]).exists()
                 assert (ROOT / parser["control"]).exists()

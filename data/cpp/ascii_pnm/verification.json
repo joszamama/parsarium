@@ -1,8 +1,9 @@
 {
-  "checked_at_utc": "2026-11-12T12:08:31.124277+00:00",
+  "checked_at_utc": "2026-11-12T12:17:03.160256+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/png/source-lock.json",
+  "extra_source_lock": "data/c/ascii_pnm/source-lock.json",
   "prerequisite_verifier": "scripts/verify_c_ascii_pnm.py",
   "control": "controls/ascii_pnm/red-green.ppm",
   "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
@@ -226,6 +227,75 @@
       "output": {
         "width": 2,
         "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "netpbm",
+      "version": "11.02.30",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/netpbm.cpp -I/opt/homebrew/Cellar/netpbm/11.02.30/include -L/opt/homebrew/Cellar/netpbm/11.02.30/lib -lnetpbm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/netpbm",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/netpbm /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "maxval": 255,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "ffmpeg",
+      "version": "9.0.2",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/ffmpeg.cpp -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -lavcodec -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/ffmpeg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "codec": "ppm",
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "gstreamer",
+      "version": "1.28.9",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/gstreamer.cpp -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstapp-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/gstreamer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "format": "RGB",
         "first": [
           255,
           0,

@@ -96,7 +96,13 @@
     "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
     "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
     "https://www.libvips.org/API/current/VipsImage.html",
-    "https://freeimage.sourceforge.io/fnet/html/99F7C60B.htm"
+    "https://freeimage.sourceforge.io/fnet/html/99F7C60B.htm",
+    "https://netpbm.sourceforge.net/doc/libppm.html",
+    "https://netpbm.sourceforge.net/release.html",
+    "https://sourceforge.net/p/netpbm/code/5358/tree/stable/version.mk?format=raw",
+    "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
+    "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavcodec/pnmdec.c",
+    "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html"
   ],
   "releases": {
     "imagemagick": {
@@ -168,13 +174,37 @@
       "source_url": "https://downloads.sourceforge.net/project/freeimage/Source%20Distribution/3.18.0/FreeImage3180.zip",
       "source_sha256": "f41379682f9ada94ea7b34fe86bf9ee00935a3147be41b6569c9605a53e438fd",
       "license_evidence": "https://formulae.brew.sh/api/formula/freeimage.json"
+    },
+    "netpbm": {
+      "license": "Netpbm mixed open-source",
+      "source_kind": "subversion",
+      "source_url": "https://svn.code.sf.net/p/netpbm/code/stable",
+      "svn_revision": 5358,
+      "version_file_url": "https://sourceforge.net/p/netpbm/code/5358/tree/stable/version.mk?format=raw",
+      "version_file_sha256": "6137ebc9d3ab5cc1a7b6c24b9b64723a6818bb43d5037d0963114f20a367dea9",
+      "license_evidence": "https://netpbm.sourceforge.net/",
+      "version": "11.02.30"
+    },
+    "ffmpeg": {
+      "version": "9.0.2",
+      "license": "GPL-3.0-or-later",
+      "source_url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+      "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+      "license_evidence": "https://formulae.brew.sh/api/formula/ffmpeg.json"
+    },
+    "gstreamer": {
+      "version": "1.28.9",
+      "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+      "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+      "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+      "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where available",
     "captured_at_utc": "2026-11-12T07:20:18.790315+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Primary upstream GitHub star observations are copied from the same-day C PNG snapshot for the exact same release paths. Stars reflect broad project adoption, not ASCII PNM use. SDL2_image and SDL3_image share one upstream count. GdkPixbuf, FreeImage, GraphicsMagick, DevIL and Imlib2 lack comparable primary GitHub metrics and remain unranked. Conan recipe names are alphabetic discovery leads, not usage rankings.",
+    "limitations": "Primary upstream GitHub star observations are copied from the same-day C PNG snapshot for the exact same release paths. Stars reflect broad project adoption, not ASCII PNM use. SDL2_image and SDL3_image share one upstream count. GdkPixbuf, FreeImage, GraphicsMagick, DevIL and Imlib2 lack comparable primary GitHub metrics and remain unranked. Conan recipe names are alphabetic discovery leads, not usage rankings. Netpbm is also unranked because its primary upstream is SourceForge Subversion. GStreamer is also unranked because its primary upstream is GitLab.",
     "packages": {
       "imagemagick": {
         "repository": "ImageMagick/ImageMagick",
@@ -230,6 +260,23 @@
         "stars": null,
         "url": "https://sourceforge.net/projects/freeimage/",
         "reason": "Primary project is SourceForge; no comparable GitHub primary-repository stars."
+      },
+      "netpbm": {
+        "repository": null,
+        "stars": null,
+        "url": "https://sourceforge.net/projects/netpbm/",
+        "reason": "Primary upstream is SourceForge Subversion; no comparable primary GitHub repository stars."
+      },
+      "ffmpeg": {
+        "stars": 67107,
+        "repository": "https://github.com/FFmpeg/FFmpeg",
+        "source": "https://api.github.com/repos/FFmpeg/FFmpeg"
+      },
+      "gstreamer": {
+        "stars": null,
+        "repository": null,
+        "source": null,
+        "reason": "Primary upstream is GitLab; no comparable GitHub repository star count. GitHub mirror stars are not borrowed."
       }
     }
   }

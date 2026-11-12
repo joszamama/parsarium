@@ -55,6 +55,7 @@ def main() -> None:
               "platform": platform.platform(),
               "compiler": run(["c++", "--version"]).splitlines()[0],
               "source_lock": "data/c/png/source-lock.json",
+              "extra_source_lock": "data/c/ascii_pnm/source-lock.json",
               "prerequisite_verifier": "scripts/verify_c_ascii_pnm.py",
               "control": "controls/ascii_pnm/red-green.ppm",
               "control_sha256": verify_c_ascii_pnm.CONTROL_SHA256,

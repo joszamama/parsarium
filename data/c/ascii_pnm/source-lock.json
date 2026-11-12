@@ -1,0 +1,65 @@
+{
+  "netpbm": {
+    "release": "11.02.30",
+    "license": "Netpbm mixed open-source",
+    "source_kind": "subversion",
+    "source_url": "https://svn.code.sf.net/p/netpbm/code/stable",
+    "svn_revision": 5358,
+    "version_file_url": "https://sourceforge.net/p/netpbm/code/5358/tree/stable/version.mk?format=raw",
+    "version_file_sha256": "6137ebc9d3ab5cc1a7b6c24b9b64723a6818bb43d5037d0963114f20a367dea9",
+    "license_evidence": "https://netpbm.sourceforge.net/",
+    "pkg_config": "netpbm",
+    "local_library": "/opt/homebrew/Cellar/netpbm/11.02.30/lib/libnetpbm.11.102.dylib",
+    "local_library_sha256": "28c53379fcbee88d1a19ad02523e568cc295e585377b1f626d8ec536d265f653"
+  },
+  "ffmpeg": {
+    "release": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "registry": "https://conan.io/center/recipes/ffmpeg",
+    "repository": "FFmpeg/FFmpeg",
+    "source_url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+    "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+    "local_library": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+    "local_library_sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+    "additional_libraries": [
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a"
+      }
+    ],
+    "pkg_config": "libavformat",
+    "pkg_configs": [
+      "libavformat",
+      "libavcodec",
+      "libavutil"
+    ],
+    "pkg_config_version": "63.1.102",
+    "homebrew_formula_revision": "9.0.2_1"
+  },
+  "gstreamer": {
+    "release": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "registry": "https://formulae.brew.sh/formula/gstreamer",
+    "repository": "https://gitlab.freedesktop.org/gstreamer/gstreamer",
+    "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+    "local_library": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstreamer-1.0.0.dylib",
+    "local_library_sha256": "e8abf7ae7199282b292ef16c85a544230c889efe5a7b881b73f9bbcab557362f",
+    "additional_libraries": [
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstapp-1.0.0.dylib",
+        "sha256": "6591dcde0b7f993c31270eec77331ef8de708a65ddb9b87775ebecb16a35f650"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstpnm.dylib",
+        "sha256": "7e24d9f1999f787e97ce36e83ff9daa8a0ab6fb894e291dba4d0b08509ca3abf"
+      }
+    ],
+    "pkg_config": "gstreamer-app-1.0",
+    "pkg_configs": [
+      "gstreamer-app-1.0"
+    ],
+    "pkg_config_version": "1.28.9",
+    "pnmdec_plugin": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstpnm.dylib"
+  }
+}

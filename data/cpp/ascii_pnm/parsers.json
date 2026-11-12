@@ -300,5 +300,95 @@
     "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
     "family_evidence": "https://sourceforge.net/projects/freeimage/files/Source%20Distribution/3.18.0/",
     "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "netpbm",
+    "version": "11.02.30",
+    "license": "Netpbm mixed open-source",
+    "license_evidence": "https://netpbm.sourceforge.net/",
+    "documentation": "https://netpbm.sourceforge.net/doc/libppm.html",
+    "input_api": "ppm_readppm(FILE*, int*, int*, pixval*); PPM_GETR/G/B(...)",
+    "adapter": "adapters/cpp/ascii_pnm/netpbm.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions, maxval, and two decoded RGB pixels",
+    "family": "Netpbm libppm parser",
+    "family_note": "Direct libnetpbm library API; PPM reader also accepts PBM/PGM with on-the-fly conversion per official manual. Only P3 is verified here.",
+    "family_evidence": "https://netpbm.sourceforge.net/doc/libppm.html",
+    "language_bridge": "C libnetpbm API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/ffmpeg.json",
+    "documentation": "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local PPM path); av_find_best_stream; av_read_frame; avcodec_send_packet and avcodec_receive_frame",
+    "adapter": "adapters/cpp/ascii_pnm/ffmpeg.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "codec": "ppm",
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 codec identification, dimensions, and two decoded RGB pixels",
+    "family": "FFmpeg native PNM decoder",
+    "family_note": "FFmpeg image2 demuxer passes PPM packets to the native PNM decoder; the C++ path uses the same FFmpeg C implementation.",
+    "family_evidence": "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavcodec/pnmdec.c",
+    "language_bridge": "FFmpeg C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html",
+    "input_api": "gst_parse_launch(filesrc ! pnmdec ! appsink); gst_app_sink_try_pull_sample(...)",
+    "adapter": "adapters/cpp/ascii_pnm/gstreamer.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "format": "RGB",
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions, RGB caps, and two decoded pixels",
+    "family": "GStreamer gst-plugins-bad pnmdec",
+    "family_note": "PNM decoder plugin from the pinned GStreamer 1.28.9 monorepo source release; local pnm plugin dylib separately checked by SHA-256.",
+    "family_evidence": "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html",
+    "language_bridge": "GStreamer C API compiled and invoked from a C++17 translation unit"
   }
 ]
