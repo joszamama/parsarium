@@ -170,13 +170,14 @@ records that the numerical goal is met, while search remains incomplete and the
 cell does not claim a definitive most-used top 20. The ISO C++
 standard library has no documented ZIP parser.
 
-The PHP × ZIP verifier installs ten exact Composer package releases from two
+The PHP × ZIP verifier installs thirteen exact Composer package releases from three
 lockfiles and runs local-file readers on the same one-entry DEFLATE control.
-All **10/10 third-party paths and 2/2 bundled PHP APIs passed**. Seven package
+All **13/13 third-party paths and 2/2 bundled PHP APIs passed**. Nine package
 paths use PHP ZipArchive/libzip; the [PHP ZIP ranking](data/php/zip/ranking.md)
 labels shared families and uses Packagist lifetime downloads only to order the
 verified third-party paths. PclZip uses a separate lock because UnifiedArchive
-declares it as a Composer replacement. Three adapters emitted nonfatal PHP 8.5
+declares it as a Composer replacement; Madnest also needs a separate Laravel
+dependency set. Four adapters emitted nonfatal PHP 8.5
 warnings, captured in [verification.json](data/php/zip/verification.json).
 Three bounded Packagist searches recorded 300 hits, and three plausible leads
 remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
@@ -1049,7 +1050,7 @@ uncertainty.
   `adapters/java/png/`.
 - `data/php/zip/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and separate PHP runtime APIs. The
-  adapters and two Composer locks live under `adapters/php/zip/`.
+  adapters and three Composer locks live under `adapters/php/zip/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

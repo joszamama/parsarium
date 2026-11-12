@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T09:21:07.837886+00:00",
+  "checked_at_utc": "2026-11-12T09:26:12.827390+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php_version": "8.5.12",
   "zip_extension_version": "1.22.8",
@@ -7,7 +7,8 @@
   "phar_extension_version": "8.5.12",
   "composer_version": "Composer version 2.11.2 2026-11-10 10:09:37",
   "composer_locks": {
-    "adapters/php/zip/composer.lock": "479b83e23bd23eb7fe9cc3482fc221a825bb5d517b17b0052c4a756ee8af6db0",
+    "adapters/php/zip/composer.lock": "26ac6888c7227924cf87c30cc04aac75176adc275f4ee08c82bcbb94bf32d75e",
+    "adapters/php/zip/madnest/composer.lock": "d44ffcdbc0a8f6f9039e5dd6d2d7f29392770fd2c45c4f301656feedbdf7730d",
     "adapters/php/zip/pclzip/composer.lock": "39b3b18ac2db2337f0093f5e1ec0793f706003b57353f2c1c365803207f80bce"
   },
   "control": "controls/zip/hello.zip",
@@ -161,6 +162,51 @@
         "content": "parsarium\n"
       },
       "stderr": "PHP Deprecated:  ZanySoft\\Zip\\Zip::addItem(): Implicitly marking parameter $base as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zanysoft/laravel-zip/src/Zip.php on line 563",
+      "pass": true
+    },
+    {
+      "package": "joomla/archive",
+      "version": "4.0.0",
+      "composer_lock": "adapters/php/zip/composer.lock",
+      "source_reference": "7a8d0eda637bd37bc3de744aa3e4ce516d4356b0",
+      "control": "controls/zip/hello.zip",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/joomla_archive.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "stderr": "",
+      "pass": true
+    },
+    {
+      "package": "zetacomponents/archive",
+      "version": "1.5.1",
+      "composer_lock": "adapters/php/zip/composer.lock",
+      "source_reference": "16643ce8e66cfafcdac5727546f290669522ce6a",
+      "control": "controls/zip/hello.zip",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/zetacomponents_archive.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "stderr": "PHP Deprecated:  ezcArchive::open(): Implicitly marking parameter $options as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 197\nPHP Deprecated:  ezcArchive::createInstance(): Implicitly marking parameter $options as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 302\nPHP Deprecated:  Return type of ezcArchive::current() should either be compatible with Iterator::current(): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 423\nPHP Deprecated:  Return type of ezcArchive::next() should either be compatible with Iterator::next(): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 448\nPHP Deprecated:  Return type of ezcArchive::key() should either be compatible with Iterator::key(): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 433\nPHP Deprecated:  Return type of ezcArchive::valid() should either be compatible with Iterator::valid(): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 403\nPHP Deprecated:  Return type of ezcArchive::rewind() should either be compatible with Iterator::rewind(): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/archive.php on line 413\nPHP Deprecated:  Return type of ezcArchiveFile::rewind() should either be compatible with Iterator::rewind(): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/file/file.php on line 381\nPHP Deprecated:  Return type of ezcArchiveCharacterFile::current() should either be compatible with Iterator::current(): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/file/character_file.php on line 142\nPHP Deprecated:  Return type of ezcArchiveCharacterFile::next() should either be compatible with Iterator::next(): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/file/character_file.php on line 154\nPHP Deprecated:  Return type of ezcArchiveCharacterFile::key() should either be compatible with Iterator::key(): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/file/character_file.php on line 180\nPHP Deprecated:  Return type of ezcArchiveCharacterFile::valid() should either be compatible with Iterator::valid(): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/file/character_file.php on line 202\nPHP Deprecated:  ezcArchiveCentralDirectoryEndHeader::__construct(): Implicitly marking parameter $file as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/zip/headers/central_directory_end.php on line 96\nPHP Deprecated:  ezcArchiveCentralDirectoryHeader::__construct(): Implicitly marking parameter $file as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/zip/headers/central_directory.php on line 111\nPHP Deprecated:  ezcArchiveLocalFileHeader::__construct(): Implicitly marking parameter $file as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/zip/headers/local_file.php on line 321\nPHP Deprecated:  ezcArchiveLocalFileHeader::__construct(): Implicitly marking parameter $centralHeader as nullable is deprecated, the explicit nullable type must be used instead in /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/vendor/zetacomponents/archive/src/zip/headers/local_file.php on line 321",
+      "pass": true
+    },
+    {
+      "package": "madnest/madzipper",
+      "version": "1.6.0",
+      "composer_lock": "adapters/php/zip/madnest/composer.lock",
+      "source_reference": "527c35105820a0b4c8cfdadd3f475b26d62d9ac2",
+      "control": "controls/zip/hello.zip",
+      "command": "php -d display_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/zip/madnest_madzipper.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "stderr": "",
       "pass": true
     }
   ],

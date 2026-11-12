@@ -251,11 +251,15 @@ def main() -> None:
                    key=lambda p: (-metrics[p["name"]]["downloads"], p["name"]))
     unknown = sorted((p for p in parsers if metrics[p["name"]]["downloads"] is None),
                      key=lambda p: p["name"])
+    metric_time = snapshot["download_metric"]
+    window = metric_time.get("captured_between_utc")
+    captured = (f"between {window[0]} and {window[1]}" if window else
+                f"at {metric_time['captured_at_utc']}")
     lines = [
         "# PHP × ZIP: verified parser ranking", "",
         f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
-        "The metric is Packagist package-level lifetime downloads, captured at "
-        f"{snapshot['download_metric']['captured_at_utc']}. It counts all releases and "
+        "The metric is Packagist package-level lifetime downloads, captured "
+        f"{captured}. It counts all releases and "
         "all package uses, not just the ZIP reading API. It is compared only within PHP. "
         f"{len(unknown)} path(s) lack a metric and remain unranked; equal counts share a rank.", "",
         "Search hits and unresolved leads are separate from this ranking. PHP bundled APIs "

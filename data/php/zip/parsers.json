@@ -188,5 +188,62 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "ZanySoft ZIP wrapper over PHP ZipArchive",
     "family_note": "Opens the local ZIP with PHP ZipArchive and extracts the selected entry."
+  },
+  {
+    "name": "joomla/archive",
+    "version": "4.0.0",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://github.com/joomla-framework/archive/blob/7a8d0eda637bd37bc3de744aa3e4ce516d4356b0/LICENSE",
+    "documentation": "https://github.com/joomla-framework/archive/blob/7a8d0eda637bd37bc3de744aa3e4ce516d4356b0/README.md",
+    "input_api": "Joomla\\Archive\\Archive::extract(local ZIP path, destination)",
+    "adapter": "adapters/php/zip/joomla_archive.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Joomla ZIP adapter over PHP ZipArchive",
+    "family_note": "The installed PHP zip extension selects Joomla’s native ZipArchive branch; its source also has a custom ZIP reader fallback."
+  },
+  {
+    "name": "zetacomponents/archive",
+    "version": "1.5.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/zetacomponents/Archive/blob/16643ce8e66cfafcdac5727546f290669522ce6a/LICENSE.txt",
+    "documentation": "https://zetacomponents.org/documentation/trunk/Archive/tutorial.html",
+    "input_api": "ezcArchive::open(local ZIP path, ZIP, readOnly options); iterate entries; extractCurrent",
+    "adapter": "adapters/php/zip/zetacomponents_archive.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Zeta Components custom PHP ZIP reader",
+    "family_note": "Parses ZIP headers through its own PHP archive classes and uses zlib for DEFLATE; this adapter does not use ZipArchive."
+  },
+  {
+    "name": "madnest/madzipper",
+    "version": "1.6.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/madnest/madzipper/blob/527c35105820a0b4c8cfdadd3f475b26d62d9ac2/LICENSE",
+    "documentation": "https://github.com/madnest/madzipper/blob/527c35105820a0b4c8cfdadd3f475b26d62d9ac2/README.md",
+    "input_api": "Madzipper::make(local ZIP path); listFiles; getFileContent",
+    "adapter": "adapters/php/zip/madnest_madzipper.php",
+    "composer_lock": "adapters/php/zip/madnest/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Madnest Madzipper over PHP ZipArchive",
+    "family_note": "A fork of Chumper Zipper with its own Composer package API; delegates archive parsing to PHP ZipArchive."
   }
 ]
