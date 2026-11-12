@@ -8,6 +8,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 import json
+import os
+import subprocess
 import xml.etree.ElementTree as ET
 
 
@@ -66,9 +68,15 @@ def main() -> None:
         "documentation": "https://docs.deps.dev/api/v3alpha/",
         "scope": "Known public direct dependents of the exact Maven release; incomplete coverage and version-age bias",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(), "packages": metrics}
+    ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
+    snapshot["external_tools"] = {"ffprobe": {
+        "path": str(ffprobe),
+        "version": subprocess.run([str(ffprobe), "-version"], text=True,
+                                  capture_output=True, check=True).stdout.splitlines()[0],
+        "sha256": sha256(ffprobe.read_bytes()).hexdigest()}}
     (DATA / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
     total_jars = 0
-    for module in ("main", "vips", "magick", "ffmpeg"):
+    for module in sorted({parser.get("adapter_module", "main") for parser in parsers}):
         directory = ADAPTER if module == "main" else ADAPTER / module
         jars = [Path(item) for item in (directory / "target/classpath.txt").read_text().strip().split(":")]
         lock = {"classpath": [{"repository_path": str(jar.relative_to(REPOSITORY)),

@@ -108,5 +108,89 @@
     "family": "Bytedeco binding to native FFmpeg PPM decoder", "scope": "ASCII P3 PPM codec and dimensions parsed from stream",
     "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "bytedeco-ffmpeg", "adapter_module": "ffmpeg",
     "expected_output": {"codec": "ppm", "width": 2, "height": 1}
+  },
+  {
+    "name": "jaffree",
+    "group": "com.github.kokorin.jaffree",
+    "artifact": "jaffree",
+    "version": "2024.08.29",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "FFprobe.atPath(Path localExecutableDir).setShowStreams(true).setInput(Path localPpm).execute().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-javadoc.jar",
+    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
+    "family": "Jaffree wrapper over local FFprobe/FFmpeg",
+    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
+    "adapter_module": "jaffree",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "codec": "ppm",
+      "width": 2,
+      "height": 1
+    },
+    "adapter_label": "jaffree"
+  },
+  {
+    "name": "bramp-ffmpeg",
+    "group": "net.bramp.ffmpeg",
+    "artifact": "ffmpeg",
+    "version": "0.9.2",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new FFprobe(String localExecutable).probe(String localPpm).getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar",
+    "documentation_archive_entry": "net/bramp/ffmpeg/FFprobe.html",
+    "family": "bramp FFprobe CLI wrapper over FFmpeg",
+    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
+    "adapter_module": "bramp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "codec": "ppm",
+      "width": 2,
+      "height": 1
+    },
+    "adapter_label": "bramp-ffmpeg"
+  },
+  {
+    "name": "v47-jaffree",
+    "group": "io.v47.jaffree",
+    "artifact": "jaffree",
+    "version": "2.1.0",
+    "license": "GPL-3.0-only",
+    "license_evidence": "Maven POM licenses and fork project LICENSE",
+    "input_api": "FFprobe.atPath(Path localBin).setShowStreams(true).setInput(Path localPpm).execute().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar",
+    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
+    "family": "v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg",
+    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
+    "adapter_module": "v47",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "codec": "ppm",
+      "width": 2,
+      "height": 1
+    },
+    "adapter_label": "v47-jaffree"
+  },
+  {
+    "name": "imagic-ffmpeg-java",
+    "group": "ch.imagic",
+    "artifact": "ffmpeg-java",
+    "version": "0.1.2",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new FFprobe(Executor,File localExecutable).probe(File localPpm).get().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar",
+    "documentation_archive_entry": "ch/imagic/ffmpeg/FFprobe.html",
+    "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg",
+    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
+    "adapter_module": "imagic",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "codec": "ppm",
+      "width": 2,
+      "height": 1
+    },
+    "adapter_label": "imagic-ffmpeg-java"
   }
 ]

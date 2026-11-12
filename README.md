@@ -457,14 +457,16 @@ a bare-JDK ImageIO probe returned no SVG reader on the control. Run
 only to refresh discovery and release/metric snapshots.
 
 The [Java × ASCII PNM ranking](data/java/ascii_pnm/ranking.md) currently has
-**12/20 verified package paths**: Apache Commons Imaging, TwelveMonkeys ImageIO,
+**16/20 verified package paths**: Apache Commons Imaging, TwelveMonkeys ImageIO,
 JAI ImageIO, ImageJ, the OpenPnP OpenCV binding, Thumbnailator, BoofCV, and
 Apache Tika, imageio-native-vips, imageio-native-magick, JavaCV, and Bytedeco
-FFmpeg. Nine paths decoded both pixels of the valid ASCII P3 PPM control;
-Tika reported dimensions, JavaCV decoded a frame, and the direct Bytedeco
-binding parsed the PPM codec and dimensions. The last two share FFmpeg.
-`python3 scripts/verify_java_pnm.py` rebuilds the adapters, checks twelve Maven
-releases and 53 locked classpath JARs, and replays all twelve paths plus a
+FFmpeg, Jaffree, bramp FFmpeg, the v47 Jaffree fork, and Imagic FFmpeg Java.
+Nine paths decoded both pixels of the valid ASCII P3 PPM control; Tika
+reported dimensions, JavaCV decoded a frame, and six FFmpeg or FFprobe paths
+parsed the PPM codec and dimensions. These six share FFmpeg's decoder.
+`python3 scripts/verify_java_pnm.py` rebuilds the adapters, checks sixteen Maven
+releases, 78 locked classpath JARs, and the host FFprobe executable hash,
+then replays all sixteen paths plus a
 bare-JDK probe. The native paths require JDK 27 and the recorded host libvips
 or ImageMagick release. The JDK 21 probe found no
 bundled PNM reader. The [cell summary](data/java/ascii_pnm/cell.json) records

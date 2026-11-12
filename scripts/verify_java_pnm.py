@@ -25,6 +25,11 @@ def main() -> None:
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
     assert CONTROL.read_text() == "P3\n2 1\n255\n255 0 0  0 255 0\n"
     control_hash = sha256(CONTROL.read_bytes()).hexdigest()
+    ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
+    if any(parser.get("adapter_module") in {"jaffree", "bramp", "v47", "imagic"} for parser in parsers):
+        tool = snapshot["external_tools"]["ffprobe"]
+        assert sha256(ffprobe.read_bytes()).hexdigest() == tool["sha256"]
+        assert run([str(ffprobe), "-version"]).stdout.splitlines()[0] == tool["version"]
 
     module_jars = {}
     for module in sorted({parser.get("adapter_module", "main") for parser in parsers}):
@@ -68,6 +73,13 @@ def main() -> None:
             command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
                        "org.parsarium.FfmpegPnmAdapter", label, str(CONTROL)]
             display = f"java -Djava.awt.headless=true -cp <locked {module} classpath> org.parsarium.FfmpegPnmAdapter {label} {parser['control']}"
+        elif module in {"jaffree", "bramp", "v47", "imagic"}:
+            classes = {"jaffree": "JaffreePnmAdapter", "bramp": "BrampPnmAdapter",
+                       "v47": "V47PnmAdapter", "imagic": "ImagicPnmAdapter"}
+            classpath = str(ADAPTER / module / "target/classes") + ":" + ":".join(str(jar) for jar in module_jars[module])
+            command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
+                       f"org.parsarium.{classes[module]}", str(CONTROL)]
+            display = f"java -Djava.awt.headless=true -cp <locked {module} classpath> org.parsarium.{classes[module]} {parser['control']}"
         else:
             classpath = str(native_classes) + ":" + ":".join(str(jar) for jar in module_jars[module])
             command = [str(java27 / "java"), "--enable-native-access=ALL-UNNAMED",
@@ -93,7 +105,8 @@ def main() -> None:
                               "platform": platform.platform(),
                               "classpath_jars": {module: len(jars) for module, jars in module_jars.items()},
                               "libvips": run(["vips", "--version"]).stdout.strip(),
-                              "imagemagick": run(["magick", "-version"]).stdout.splitlines()[0]},
+                              "imagemagick": run(["magick", "-version"]).stdout.splitlines()[0],
+                              "ffprobe": run([str(ffprobe), "-version"]).stdout.splitlines()[0]},
               "control": "controls/ascii_pnm/red-green.ppm", "control_sha256": control_hash,
               "control_meaning": "Valid ASCII P3 PPM with two red/green pixels",
               "third_party": rows, "runtime": [],
