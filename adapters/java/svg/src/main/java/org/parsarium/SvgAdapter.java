@@ -95,6 +95,72 @@ public final class SvgAdapter {
                         Math.round(object.getWidth()), Math.round(object.getHeight()));
                 }
             }
+            case "fop-core" -> {
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                try (InputStream input = Files.newInputStream(path)) {
+                    var parser = new org.apache.fop.svg.PDFTranscoder();
+                    parser.transcode(new TranscoderInput(input), new TranscoderOutput(bytes));
+                }
+                try (var pdf = new com.itextpdf.kernel.pdf.PdfDocument(
+                         new com.itextpdf.kernel.pdf.PdfReader(new java.io.ByteArrayInputStream(bytes.toByteArray())))) {
+                    var page = pdf.getFirstPage();
+                    var size = page.getPageSize();
+                    String content = new String(page.getContentBytes(), java.nio.charset.StandardCharsets.ISO_8859_1);
+                    System.out.printf("{\"width\":%d,\"height\":%d,\"red\":%s,\"green\":%s}%n",
+                        Math.round(size.getWidth()), Math.round(size.getHeight()),
+                        content.contains("1 0 0 rg"), content.contains("0 1 0 rg"));
+                }
+            }
+            case "radiance-svg-transcoder" -> {
+                var generated = new java.io.StringWriter();
+                String template = "TOKEN_ORIG_WIDTH,TOKEN_ORIG_HEIGHT\nTOKEN_PAINTING_CODE\n";
+                try (InputStream input = Files.newInputStream(path);
+                     InputStream pattern = new java.io.ByteArrayInputStream(template.getBytes(java.nio.charset.StandardCharsets.UTF_8))) {
+                    var parser = new org.pushingpixels.radiance.tools.svgtranscoder.api.SvgStreamTranscoder(
+                        input, "ParsariumSvg", new org.pushingpixels.radiance.tools.svgtranscoder.api.java.JavaLanguageRenderer());
+                    parser.setPrintWriter(new java.io.PrintWriter(generated));
+                    parser.transcode(pattern);
+                }
+                String result = generated.toString();
+                System.out.printf("{\"dimensions\":%s,\"red\":%s,\"green\":%s}%n",
+                    result.contains("2.0,1.0"), result.contains("255, 0, 0"), result.contains("0, 255, 0"));
+            }
+            case "aurora-svg-transcoder" -> {
+                var writer = new java.io.StringWriter();
+                var parser = new org.pushingpixels.aurora.tools.svgtranscoder.SvgTranscoder(
+                    path.toUri().toString(), "ParsariumSvg");
+                parser.setListener(new org.pushingpixels.aurora.tools.svgtranscoder.TranscoderListener() {
+                    @Override public java.io.Writer getWriter() { return writer; }
+                    @Override public void finished() {}
+                });
+                try (InputStream template = new java.io.ByteArrayInputStream("TOKEN_ORIG_WIDTH,TOKEN_ORIG_HEIGHT\n"
+                         .getBytes(java.nio.charset.StandardCharsets.UTF_8))) {
+                    Document svg = parser.transcode(template);
+                    if (svg == null) throw new IllegalStateException("Aurora did not parse SVG");
+                    System.out.printf("{\"width\":%s,\"height\":%s,\"rects\":%d}%n",
+                        svg.getDocumentElement().getAttribute("width"),
+                        svg.getDocumentElement().getAttribute("height"),
+                        svg.getDocumentElement().getElementsByTagNameNS("http://www.w3.org/2000/svg", "rect").getLength());
+                }
+            }
+            case "gsvg" -> {
+                var svg = se.alipsa.groovy.svg.io.SvgReader.parse(path.toFile());
+                var rects = svg.findAll(se.alipsa.groovy.svg.Rect.class);
+                System.out.printf("{\"width\":%s,\"height\":%s,\"rects\":%d,\"fills\":\"%s,%s\"}%n",
+                    svg.getWidth(), svg.getHeight(), rects.size(),
+                    rects.get(0).getFill(), rects.get(1).getFill());
+            }
+            case "furutuki-transcoder" -> {
+                var generated = new java.io.StringWriter();
+                var parser = new com.github.furutuki.androidsvgtranscoder.SvgTranscoder(
+                    path.toUri().toURL(), "ParsariumSvg");
+                parser.setExternalPrintWriter(new java.io.PrintWriter(generated));
+                parser.transcode();
+                String result = generated.toString();
+                System.out.printf("{\"dimensions\":%s,\"red\":%s,\"green\":%s}%n",
+                    result.contains("2.0") && result.contains("1.0"),
+                    result.contains("255, 0, 0"), result.contains("0, 255, 0"));
+            }
             case "twelvemonkeys-batik" -> {
                 javax.imageio.ImageReader reader = null;
                 var providers = ImageIO.getImageReadersByFormatName("SVG");

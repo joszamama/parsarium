@@ -133,5 +133,50 @@
     "family": "EchoSVG SVG renderer via rasterizer (Apache Batik fork)", "scope": "Rendered SVG pixels",
     "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-svgrasterizer", "adapter_module": "echosvg",
     "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "fop-core", "group": "org.apache.xmlgraphics", "artifact": "fop-core", "version": "2.12",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "PDFTranscoder.transcode(TranscoderInput(InputStream), TranscoderOutput(OutputStream))",
+    "documentation": "https://xmlgraphics.apache.org/fop/dev/svg.html",
+    "family": "Apache FOP SVG-to-PDF transcoder using Apache Batik", "scope": "PDF page dimensions and SVG-derived red/green drawing operations",
+    "control": "controls/svg/red-green.svg", "adapter_label": "fop-core",
+    "expected_output": {"width": 2, "height": 1, "red": true, "green": true}
+  },
+  {
+    "name": "radiance-svg-transcoder", "group": "org.pushing-pixels", "artifact": "radiance-svg-transcoder", "version": "7.5.0",
+    "license": "BSD-3-Clause", "license_evidence": "Maven POM license and source header",
+    "input_api": "SvgStreamTranscoder(InputStream, String, LanguageRenderer).setPrintWriter(PrintWriter).transcode(InputStream template)",
+    "documentation": "https://github.com/kirill-grouchnikov/radiance/tree/master/tools/svg-transcoder",
+    "family": "Radiance SVG-to-Java2D transcoder using Apache Batik", "scope": "Generated Java2D drawing code with SVG dimensions and colors",
+    "control": "controls/svg/red-green.svg", "adapter_label": "radiance-svg-transcoder",
+    "expected_output": {"dimensions": true, "red": true, "green": true}
+  },
+  {
+    "name": "gsvg", "group": "se.alipsa.groovy", "artifact": "gsvg", "version": "1.2.0",
+    "license": "MIT", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "SvgReader.parse(File).findAll(Rect.class)",
+    "documentation": "https://github.com/Alipsa/gsvg#readparse-an-existing-svg-file-and-change-it",
+    "family": "gsvg typed SVG model (Groovy library callable from Java)", "scope": "Typed SVG dimensions, rectangle elements, and fill attributes",
+    "control": "controls/svg/red-green.svg", "adapter_label": "gsvg",
+    "expected_output": {"width": 2, "height": 1, "rects": 2, "fills": "#ff0000,#00ff00"}
+  },
+  {
+    "name": "aurora-tools-svg-transcoder-desktop", "group": "org.pushing-pixels", "artifact": "aurora-tools-svg-transcoder-desktop", "version": "1.3.0",
+    "license": "Apache-2.0", "license_evidence": "Maven POM license and source header",
+    "input_api": "SvgTranscoder(local file URI, String).setListener(...).transcode(InputStream template)",
+    "documentation": "https://github.com/kirill-grouchnikov/aurora/blob/icicle/tools/svg-transcoder/src/desktopMain/kotlin/org/pushingpixels/aurora/tools/svgtranscoder/SvgTranscoder.kt",
+    "family": "Aurora SVG-to-Compose transcoder using Apache Batik", "scope": "SVG DOM dimensions and rectangle elements after rendering tree construction",
+    "control": "controls/svg/red-green.svg", "adapter_label": "aurora-svg-transcoder",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "transcoder-core", "group": "io.github.furutuki", "artifact": "transcoder-core", "version": "0.1.1",
+    "license": "Apache-2.0", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "SvgTranscoder(local file URL, String).setExternalPrintWriter(PrintWriter).transcode()",
+    "documentation": "https://github.com/furutuki/AndroidSvgTranscoder#project-structure",
+    "family": "AndroidSvgTranscoder SVG-to-Java source using Apache Batik", "scope": "Generated Java drawing code with SVG dimensions and colors",
+    "control": "controls/svg/red-green.svg", "adapter_label": "furutuki-transcoder",
+    "expected_output": {"dimensions": true, "red": true, "green": true}
   }
 ]

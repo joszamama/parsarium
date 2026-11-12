@@ -832,10 +832,10 @@
     {
       "ecosystem": "java",
       "format": "svg",
-      "status": "verified_partial_search_incomplete",
+      "status": "verified_target_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 15,
+      "verified_third_party_count": 20,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "svg",
@@ -850,8 +850,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 112,
       "unique_search_hits": 112,
-      "unresolved_documentation_leads": 7,
-      "uncertainty": "Fifteen pinned open-source package paths passed a valid 2x1 red/green SVG control through documented local input APIs. Four Apache Batik artifacts and the TwelveMonkeys ImageIO wrapper share Batik; four EchoSVG artifacts share a Batik-fork family. JSVG, SVG Salamander, iText SVG, BWeng20 jSVGIcon, JairoSVG, and a libvips ImageIO wrapper are other paths, not necessarily independent engines. Eight bounded Maven Central queries saved 112 hits: the broad svg query timed out, batik stopped at the first 100 of 143, and several phrase queries returned zero. Targeted project documentation supplied accepted leads; EchoSVG releases came from its project Maven repository. Seven named candidates remain unresolved, including AndroidSVG and FOP. The batik-rasterizer artifact was excluded because its pinned JAR contains no SVGConverter class; that class is in batik-svgrasterizer. deps.dev exact-release direct-dependent counts are a partial public adoption proxy; four EchoSVG paths lack that metric and remain unranked. The JDK 21 standard ImageIO formats exclude SVG; a bare-JDK control probe found no SVG reader. Generic JAXP XML parsing is not counted. JairoSVG uses JDK 25 and imageio-native-vips uses JDK 27 plus host libvips. The current collection is below the 20-path goal; discovery and verification must continue.",
+      "unresolved_documentation_leads": 5,
+      "uncertainty": "Twenty pinned open-source package paths passed a valid 2x1 red/green SVG control through local input APIs. Several are distinct public paths over the same underlying Apache Batik engine: four Batik artifacts, FOP, TwelveMonkeys, Radiance, Aurora, and AndroidSvgTranscoder. Four EchoSVG artifacts share an Apache Batik fork. The gsvg package is written in Groovy but its typed SVG parser is directly callable from a Java adapter. JSVG, SVG Salamander, iText SVG, BWeng20 jSVGIcon, JairoSVG, and a libvips ImageIO wrapper provide other paths; 20 paths do not imply 20 independent parser engines. Eight bounded Maven Central queries saved 112 hits: the broad svg query timed out, batik stopped at the first 100 of 143, and several phrase queries returned zero. Targeted project documentation supplied additional leads; EchoSVG releases came from its project Maven repository. Five named candidates remain unresolved, including AndroidSVG and fxsvgimage, whose JavaFX toolkit startup aborted in this headless environment. EchoSVG svg2svg was excluded because its implementation only pretty-prints generic XML. deps.dev exact-release direct-dependent counts are a partial public adoption proxy; EchoSVG paths lack that metric and remain unranked. The JDK 21 standard ImageIO formats exclude SVG; a bare-JDK control probe found no SVG reader. Generic JAXP XML parsing is not counted. JairoSVG uses JDK 25 and imageio-native-vips uses JDK 27 plus host libvips. Discovery and ranking of the most-used paths remain incomplete despite reaching the working count.",
       "third_party_evidence": "data/java/svg/parsers.json",
       "third_party_control_results": "data/java/svg/verification.json",
       "runtime_evidence": "data/java/svg/standard.json",

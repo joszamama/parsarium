@@ -12,12 +12,12 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus a below-target Java × SVG batch and
+WAV, MP4, HTTP/1.1, MP3 with ID3v2, and SVG, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 66 cells at the 20-parser target, three started below target, and 19
+There are 67 cells at the 20-parser target, two started below target, and 19
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -435,13 +435,14 @@ See the [Java PNG ranking](data/java/png/ranking.md),
 `python3 scripts/snapshot_maven_png.py` only when refreshing registry and
 deps.dev evidence.
 
-The [Java × SVG ranking](data/java/svg/ranking.md) currently contains **15/20**
+The [Java × SVG ranking](data/java/svg/ranking.md) contains **20/20**
 verified package paths: four Apache Batik artifacts, four EchoSVG artifacts,
 JSVG, SVG Salamander, iText SVG, TwelveMonkeys ImageIO Batik, BWeng20
-jSVGIcon, JairoSVG, and imageio-native-vips. All fifteen passed the valid
+jSVGIcon, JairoSVG, imageio-native-vips, Apache FOP, Radiance, Aurora,
+gsvg, and AndroidSvgTranscoder. All twenty passed the valid
 2×1 red/green SVG control in
 `python3 scripts/verify_java_svg.py`, which rebuilds the adapter and checks
-the SHA-256 classpath locks for 44 main JARs, two JairoSVG JARs, two native
+the SHA-256 classpath locks for 97 main JARs, two JairoSVG JARs, two native
 libvips wrapper JARs, and 32 EchoSVG JARs. The Batik and EchoSVG artifact
 paths share families; four EchoSVG paths have no comparable deps.dev metric
 and remain unranked. JairoSVG uses JDK 25; imageio-native-vips uses JDK 27
@@ -449,7 +450,7 @@ and host libvips 8.18.7. Set `PARSARIUM_JAVA27_HOME` if JDK 27 is not at
 `/opt/homebrew/opt/openjdk`, and
 set `PARSARIUM_JAVA25_HOME` if it is not at `/opt/homebrew/opt/openjdk@25`.
 The [cell summary](data/java/svg/cell.json) records 112 bounded Maven
-search hits, a broad-query timeout, and seven unresolved leads. The scoped
+search hits, a broad-query timeout, and five unresolved leads. The scoped
 [JDK 21 inventory](data/java/svg/standard.json) found no bundled SVG reader;
 a bare-JDK ImageIO probe returned no SVG reader on the control. Run
 `python3 scripts/snapshot_maven_svg.py` and `python3 scripts/enrich_java_svg.py`
