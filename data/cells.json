@@ -835,7 +835,7 @@
       "status": "verified_partial_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 4,
+      "verified_third_party_count": 10,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "svg",
@@ -851,7 +851,7 @@
       "search_hits_recorded": 112,
       "unique_search_hits": 112,
       "unresolved_documentation_leads": 9,
-      "uncertainty": "Four pinned Maven package paths passed a valid 2x1 red/green SVG control through documented local input APIs. Batik anim and transcoder are two artifact paths in the same Batik parser family, not independent SVG engines. JSVG and SVG Salamander are separate families. Eight bounded Maven Central queries saved 112 hits: the broad svg query timed out, batik stopped at the first 100 of 143, and several phrase queries returned zero. Targeted project documentation supplied the four accepted leads. Nine named candidates remain unresolved, including potentially popular Batik wrappers and SVG converters. deps.dev exact-release direct-dependent counts are a partial public adoption proxy, not proof of a most-used top four. The JDK 21 standard ImageIO formats exclude SVG; a bare-JDK control probe found no SVG reader. Generic JAXP XML parsing is not counted. The current collection is below the 20-path goal; discovery and verification must continue.",
+      "uncertainty": "Ten pinned Maven package paths passed a valid 2x1 red/green SVG control through documented local input APIs. Four Batik artifact paths and the TwelveMonkeys ImageIO Batik wrapper share the Batik parser family; JSVG, SVG Salamander, iText SVG, BWeng20 jSVGIcon, and JairoSVG add other paths. Eight bounded Maven Central queries saved 112 hits: the broad svg query timed out, batik stopped at the first 100 of 143, and several phrase queries returned zero. Targeted project documentation supplied the accepted leads. Nine named candidates remain unresolved, including AndroidSVG and EchoSVG. The batik-rasterizer artifact was excluded because the pinned JAR contains no SVGConverter class; that class is in the separately verified batik-svgrasterizer artifact. deps.dev exact-release direct-dependent counts are a partial public adoption proxy, not proof of a most-used top ten. The JDK 21 standard ImageIO formats exclude SVG; a bare-JDK control probe found no SVG reader. Generic JAXP XML parsing is not counted. JairoSVG is isolated in a JDK 25 module. The current collection is below the 20-path goal; discovery and verification must continue.",
       "third_party_evidence": "data/java/svg/parsers.json",
       "third_party_control_results": "data/java/svg/verification.json",
       "runtime_evidence": "data/java/svg/standard.json",

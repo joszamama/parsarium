@@ -69,11 +69,17 @@ def main() -> None:
     (DATA / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
 
     repository = Path.home() / ".m2/repository"
-    jars = [Path(item) for item in (ADAPTER / "target/classpath.txt").read_text().strip().split(":")]
-    lock = {"classpath": [{"repository_path": str(jar.relative_to(repository)),
-                            "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]}
-    (ADAPTER / "dependencies.lock.json").write_text(json.dumps(lock, indent=2) + "\n")
-    print(f"Pinned {len(releases)} Java SVG releases and {len(jars)} classpath JARs")
+    total_jars = 0
+    for module in ("main", "jairo"):
+        directory = ADAPTER if module == "main" else ADAPTER / module
+        if not (directory / "target/classpath.txt").exists():
+            continue
+        jars = [Path(item) for item in (directory / "target/classpath.txt").read_text().strip().split(":")]
+        lock = {"classpath": [{"repository_path": str(jar.relative_to(repository)),
+                                "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]}
+        (directory / "dependencies.lock.json").write_text(json.dumps(lock, indent=2) + "\n")
+        total_jars += len(jars)
+    print(f"Pinned {len(releases)} Java SVG releases and {total_jars} classpath JARs")
 
 
 if __name__ == "__main__":

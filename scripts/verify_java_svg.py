@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
+import os
 import json
 import platform
 import subprocess
@@ -22,44 +23,59 @@ def run(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess[str
 def main() -> None:
     parsers = json.loads((DATA / "parsers.json").read_text())
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
-    lock = json.loads((ADAPTER / "dependencies.lock.json").read_text())["classpath"]
     root = ET.parse(CONTROL).getroot()
     ns = "{http://www.w3.org/2000/svg}"
     assert root.tag == ns + "svg" and root.attrib["width"] == "2" and root.attrib["height"] == "1"
     assert [r.attrib["fill"] for r in root.findall(ns + "rect")] == ["#ff0000", "#00ff00"]
     control_sha256 = sha256(CONTROL.read_bytes()).hexdigest()
 
-    run(["mvn", "-q", "-DskipTests", "package",
-         "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
-         "-Dmdep.outputFile=target/classpath.txt"], ADAPTER)
     repository = Path.home() / ".m2/repository"
-    jars = [Path(item) for item in (ADAPTER / "target/classpath.txt").read_text().strip().split(":")]
-    actual = [{"repository_path": str(jar.relative_to(repository)),
-               "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
-    assert actual == lock, "Resolved Maven classpath differs from dependencies.lock.json"
-    by_path = {item["repository_path"]: item["sha256"] for item in actual}
+    module_jars = {}
+    module_paths = {parser.get("adapter_module", "main") for parser in parsers}
+    for module in sorted(module_paths):
+        directory = ADAPTER if module == "main" else ADAPTER / module
+        run(["mvn", "-q", "-DskipTests", "package",
+             "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
+             "-Dmdep.outputFile=target/classpath.txt"], directory)
+        lock = json.loads((directory / "dependencies.lock.json").read_text())["classpath"]
+        jars = [Path(item) for item in (directory / "target/classpath.txt").read_text().strip().split(":")]
+        actual = [{"repository_path": str(jar.relative_to(repository)),
+                   "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
+        assert actual == lock, f"Resolved Maven {module} classpath differs from lock"
+        module_jars[module] = jars
     for parser in parsers:
         release = snapshot["releases"][parser["name"]]
         assert (parser["group"], parser["artifact"], parser["version"]) == (
             release["group"], release["artifact"], release["version"])
         stem = f"{parser['artifact']}-{parser['version']}"
         path = f"{parser['group'].replace('.', '/')}/{parser['artifact']}/{parser['version']}/{stem}.jar"
+        jars = module_jars[parser.get("adapter_module", "main")]
+        by_path = {str(jar.relative_to(repository)): sha256(jar.read_bytes()).hexdigest() for jar in jars}
         assert by_path[path] == release["jar_sha256"]
         pom = repository / path.replace(".jar", ".pom")
         assert sha256(pom.read_bytes()).hexdigest() == release["pom_sha256"]
 
-    classpath = str(ADAPTER / "target/classes") + ":" + ":".join(str(jar) for jar in jars)
     rows = []
     for parser in parsers:
         label = parser["adapter_label"]
-        command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
-                   "org.parsarium.SvgAdapter", label, str(CONTROL)]
+        module = parser.get("adapter_module", "main")
+        directory = ADAPTER if module == "main" else ADAPTER / module
+        classpath = str(directory / "target/classes") + ":" + ":".join(str(jar) for jar in module_jars[module])
+        if module == "jairo":
+            java25 = Path(os.environ.get("PARSARIUM_JAVA25_HOME", "/opt/homebrew/opt/openjdk@25")) / "bin/java"
+            command = [str(java25), "-Djava.awt.headless=true", "-cp", classpath,
+                       "org.parsarium.JairoSvgAdapter", str(CONTROL)]
+            display = f"{java25} -Djava.awt.headless=true -cp <locked jairo classpath> org.parsarium.JairoSvgAdapter {parser['control']}"
+        else:
+            command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
+                       "org.parsarium.SvgAdapter", label, str(CONTROL)]
+            display = f"java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter {label} {parser['control']}"
         result = run(command)
         output = json.loads(result.stdout.strip())
         assert output == parser["expected_output"], (label, output)
         rows.append({"package": parser["name"], "version": parser["version"],
                      "control": parser["control"], "output": output, "pass": True,
-                     "command": f"java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter {label} {parser['control']}"})
+                     "command": display})
         print(f"{label}: passed")
 
     target = ADAPTER / "target/runtime"
@@ -73,7 +89,8 @@ def main() -> None:
     report = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "environment": {"java": run(["java", "-version"]).stderr.strip(),
                               "maven": run(["mvn", "-version"]).stdout.splitlines()[0],
-                              "platform": platform.platform(), "classpath_jars": len(jars)},
+                              "platform": platform.platform(),
+                              "classpath_jars": {module: len(jars) for module, jars in module_jars.items()}},
               "control": "controls/svg/red-green.svg", "control_sha256": control_sha256,
               "control_meaning": "Valid 2x1 SVG with red and green unit rectangles",
               "third_party": rows, "runtime": [],
