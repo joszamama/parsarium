@@ -1,4 +1,4 @@
-"""Rebuild and replay three pinned C HTTP/1.1 request parsers on a valid control."""
+"""Rebuild and replay pinned C HTTP/1.1 request parsers on a valid control."""
 
 from datetime import datetime, timezone
 from hashlib import sha256
@@ -51,7 +51,7 @@ def main() -> None:
         assert sha256(Path(llhttp[path_key]).read_bytes()).hexdigest() == llhttp[hash_key]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser"):
+        for name in ("http-parser", "picohttpparser", "mongoose"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
@@ -68,7 +68,11 @@ def main() -> None:
                                "-I" + str(ADAPTER), "-I" + str(build / "picohttpparser-1.5"),
                                str(ADAPTER / "picohttpparser.c"),
                                str(build / "picohttpparser-1.5/picohttpparser.c"),
-                               "-o", str(build / "picohttpparser-adapter")]}
+                               "-o", str(build / "picohttpparser-adapter")],
+            "mongoose": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                         "-I" + str(ADAPTER), "-I" + str(build / "mongoose-7.23"),
+                         str(ADAPTER / "mongoose.c"), str(build / "mongoose-7.23/mongoose.c"),
+                         "-o", str(build / "mongoose-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]

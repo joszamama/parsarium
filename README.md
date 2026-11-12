@@ -187,15 +187,15 @@ paths and eight C++ paths lack comparable primary GitHub stars and remain
 unranked. Only ASCII P3 is established for every path. Neither scoped
 standard library documents a PNM-aware parser.
 
-The [C × HTTP/1.1 cell](data/c/http11/cell.json) starts with **3/20 verified
-package paths**: llhttp, Node http-parser, and PicoHTTPParser. All three parsed
+The [C × HTTP/1.1 cell](data/c/http11/cell.json) starts with **4/20 verified
+package paths**: llhttp, Node http-parser, PicoHTTPParser, and Mongoose. All four parsed
 the method, target, and version of a valid local GET request after complete
 header parsing. `python3 scripts/verify_c_http11.py` checks SHA-256 source
 archives, the exact local llhttp 9.4.3 library and header, rebuilds all three
 adapters, and replays the control. Four bounded Conan recipe-name queries saved
-24 hits and 22 distinct names; project documentation supplied PicoHTTPParser
+24 hits and 22 distinct names; project documentation supplied PicoHTTPParser and Mongoose
 outside those windows. GitHub project stars rank these three only within C.
-Seventeen working paths remain unverified. The ISO C standard library provides
+Sixteen working paths remain unverified. The ISO C standard library provides
 no documented HTTP/1.1 request parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed

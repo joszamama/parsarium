@@ -37,5 +37,18 @@
     "adapter": "adapters/c/http11/picohttpparser.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+  },
+  {
+    "name": "mongoose",
+    "version": "7.23",
+    "license": "GPL-2.0-only",
+    "license_evidence": "Pinned release LICENSE dual-license text; GPL-2.0 open-source option",
+    "documentation": "https://mongoose.ws/docs/api/http/#mg_http_parse",
+    "input_api": "mg_http_parse(const char *local request bytes, size_t len, struct mg_http_message *out)",
+    "family": "Mongoose C HTTP request parser; related to CivetWeb and LibHTTP ancestry",
+    "scope": "HTTP/1.1 GET request method, target, query and version",
+    "adapter": "adapters/c/http11/mongoose.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
   }
 ]

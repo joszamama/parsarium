@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T20:43:52.908287+00:00",
+  "checked_at_utc": "2026-11-12T20:47:18.323770+00:00",
   "environment": {
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
@@ -45,6 +45,18 @@
       },
       "pass": true,
       "command": "build pinned picohttpparser; picohttpparser-adapter controls/http11/request.http"
+    },
+    {
+      "package": "mongoose",
+      "version": "7.23",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned mongoose; mongoose-adapter controls/http11/request.http"
     }
   ],
   "runtime": []

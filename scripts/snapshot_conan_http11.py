@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/c/http11"
 INDEX = "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1"
 REPOS = {"llhttp": "nodejs/llhttp", "http-parser": "nodejs/http-parser",
-         "picohttpparser": "h2o/picohttpparser"}
+         "picohttpparser": "h2o/picohttpparser", "mongoose": "cesanta/mongoose"}
 
 
 def get(url: str) -> dict:
