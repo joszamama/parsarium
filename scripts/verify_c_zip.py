@@ -31,7 +31,7 @@ def main() -> None:
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 8 and {p["name"] for p in parsers} == set(lock)
+    assert len(parsers) == 9 and {p["name"] for p in parsers} == set(lock)
     prepare_c_zip.main()
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
@@ -61,6 +61,21 @@ def main() -> None:
             command = ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / name),
                        "-I" + str(build), str(ROOT / parser["adapter"]),
                        str(build / "zzip/libzzip.a"), "-lz", "-o", str(TARGET / name)]
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "configure_command": shlex.join(configure),
+                                   "zlib_pkg_config_version": run(["pkg-config", "--modversion", "zlib"])}
+        elif name == "unarr":
+            build = TARGET / "unarr-build"
+            configure = ["cmake", "-S", str(SOURCE / name), "-B", str(build),
+                         "-DBUILD_SHARED_LIBS=OFF", "-DENABLE_7Z=OFF",
+                         "-DUSE_SYSTEM_BZ2=OFF", "-DUSE_SYSTEM_LZMA=OFF",
+                         "-DUSE_SYSTEM_ZLIB=ON", "-DBUILD_INTEGRATION_TESTS=OFF",
+                         "-DBUILD_UNIT_TESTS=OFF", "-DCMAKE_BUILD_TYPE=Release"]
+            run(configure)
+            run(["cmake", "--build", str(build), "-j", "4"])
+            command = ["cc", "-std=c11", "-O2", "-I" + str(build),
+                       str(ROOT / parser["adapter"]), str(build / "libunarr.a"),
+                       "-lz", "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "configure_command": shlex.join(configure),
                                    "zlib_pkg_config_version": run(["pkg-config", "--modversion", "zlib"])}

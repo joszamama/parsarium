@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T07:45:13.839976+00:00",
+  "checked_at_utc": "2026-11-12T07:50:51.441891+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -42,6 +42,11 @@
     "zziplib": {
       "source_sha256": "21f40d111c0f7a398cfee3b0a30b20c5d92124b08ea4290055fbfe7bdd53a22c",
       "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zziplib -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib-build -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTS=OFF -DZZIPMMAPPED=OFF -DZZIPFSEEKO=OFF -DZZIPWRAP=OFF -DZZIPSDL=OFF -DZZIPBINS=OFF -DZZIPTEST=OFF -DZZIPDOCS=OFF -DCMAKE_BUILD_TYPE=Release",
+      "zlib_pkg_config_version": "1.2.12"
+    },
+    "unarr": {
+      "source_sha256": "eba65db354a887c40b39e9f341553977bebc7a293f96c5e1d888064f8d9dd443",
+      "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unarr -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr-build -DBUILD_SHARED_LIBS=OFF -DENABLE_7Z=OFF -DUSE_SYSTEM_BZ2=OFF -DUSE_SYSTEM_LZMA=OFF -DUSE_SYSTEM_ZLIB=ON -DBUILD_INTEGRATION_TESTS=OFF -DBUILD_UNIT_TESTS=OFF -DCMAKE_BUILD_TYPE=Release",
       "zlib_pkg_config_version": "1.2.12"
     }
   },
@@ -150,6 +155,19 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zziplib -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/zziplib.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib-build/zzip/libzzip.a -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "unarr",
+      "version": "1.2.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/unarr.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr-build/libunarr.a -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unarr /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

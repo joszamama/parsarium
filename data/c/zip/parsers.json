@@ -142,5 +142,23 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "ZZIPlib ZIP reader",
     "family_note": "Own ZIP archive reader; uses zlib for DEFLATE."
+  },
+  {
+    "name": "unarr",
+    "version": "1.2.0",
+    "license": "LGPL-3.0-only",
+    "license_evidence": "https://github.com/selmf/unarr/blob/v1.2.0/COPYING",
+    "documentation": "https://github.com/selmf/unarr/blob/v1.2.0/unarr.h.in",
+    "input_api": "ar_open_file(const char*); ar_open_zip_archive; ar_parse_entry; ar_entry_get_name; ar_entry_uncompress",
+    "adapter": "adapters/c/zip/unarr.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "unarr ZIP reader",
+    "family_note": "selmf/unarr fork of zeniko/unarr; its ZIP parser and decompression API are part of the pinned source package."
   }
 ]
