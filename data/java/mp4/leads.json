@@ -1,23 +1,5 @@
 [
   {
-    "name": "com.googlecode.mp4parser:isoparser",
-    "status": "unresolved",
-    "source": "https://github.com/sannies/mp4parser",
-    "reason": "Older Maven coordinate of the MP4Parser family; verify a distinct pinned distribution path and control result before inclusion."
-  },
-  {
-    "name": "com.liferay:org.mp4parser",
-    "status": "unresolved",
-    "source": "https://search.maven.org/artifact/com.liferay/org.mp4parser",
-    "reason": "Maven search identifies a Liferay-patched MP4Parser distribution. Confirm its documented local input API, pinned release, valid control result, and shared underlying family before inclusion."
-  },
-  {
-    "name": "org.tallison:isoparser",
-    "status": "unresolved",
-    "source": "https://search.maven.org/artifact/org.tallison/isoparser",
-    "reason": "A bounded isoparser registry query found this distribution. Its pinned local input API, MP4 control result, license, and shared family have not been checked."
-  },
-  {
     "name": "com.gitee.ts_ohos:isoparser",
     "status": "unresolved",
     "source": "https://search.maven.org/artifact/com.gitee.ts_ohos/isoparser",
@@ -34,6 +16,12 @@
     "status": "rejected",
     "source": "https://github.com/wrandelshofer/MonteMedia",
     "reason": "The project's supported-format table lists MP4 as Write only; no MP4 local input parser is documented."
+  },
+  {
+    "name": "org.jcodec:jcodec-javase",
+    "status": "rejected",
+    "source": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec-javase/0.2.5/jcodec-javase-0.2.5-javadoc.jar",
+    "reason": "Pinned 0.2.5 AWTFrameGrab.getFrame(File,0.0) threw ClassCastException in PCMMP4DemuxerTrack on the original, padded, and no-udta MP4 controls and on a separately generated valid video-only MP4. No successful format-aware result was observed."
   },
   {
     "name": "jaudiotagger",

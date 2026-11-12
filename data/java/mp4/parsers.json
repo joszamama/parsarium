@@ -332,5 +332,83 @@
       "sample_rate": 8000,
       "channels": 1
     }
+  },
+  {
+    "name": "red5-io",
+    "group": "org.red5",
+    "artifact": "red5-io",
+    "version": "2.0.40",
+    "license": "Apache-2.0",
+    "license_evidence": "Red5 parent Maven POM licenses and project LICENSE",
+    "input_api": "new MP4Reader(File localMp4), hasVideo(), analyzeKeyFrames().positions, getVideoCodecId() and getAudioCodecId()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/red5/red5-io/2.0.40/red5-io-2.0.40-javadoc.jar",
+    "documentation_archive_entry": "org/red5/io/mp4/impl/MP4Reader.html",
+    "family": "Red5 MP4Reader over JCodec MP4 demuxer",
+    "scope": "MP4 video presence, parsed keyframe count and H.264/AAC codec identifiers",
+    "adapter_module": "red5_io",
+    "control": "controls/mp4/red-av-3s.mp4",
+    "expected_output": {
+      "video": true,
+      "keyframes": 1,
+      "video_codec": "avc1",
+      "audio_codec": "mp4a"
+    }
+  },
+  {
+    "scope": "movie track count and timescale",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "timescale": 8000
+    },
+    "name": "old-isoparser",
+    "group": "com.googlecode.mp4parser",
+    "artifact": "isoparser",
+    "version": "1.1.22",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new com.coremedia.iso.IsoFile(String localMp4Path), getMovieBox().getTrackCount() and getMovieHeaderBox().getTimescale()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/googlecode/mp4parser/isoparser/1.1.22/isoparser-1.1.22-javadoc.jar",
+    "documentation_archive_entry": "com/coremedia/iso/IsoFile.html",
+    "family": "older CoreMedia/sannies MP4Parser ISO BMFF parser",
+    "adapter_module": "old_isoparser"
+  },
+  {
+    "scope": "movie track count and timescale",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "timescale": 8000
+    },
+    "name": "tallison-isoparser",
+    "group": "org.tallison",
+    "artifact": "isoparser",
+    "version": "1.9.41.7",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project source",
+    "input_api": "new org.mp4parser.IsoFile(File localMp4), getMovieBox().getTrackCount() and getMovieHeaderBox().getTimescale()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/tallison/isoparser/1.9.41.7/isoparser-1.9.41.7-javadoc.jar",
+    "documentation_archive_entry": "org/mp4parser/IsoFile.html",
+    "family": "Tallison distribution of sannies MP4Parser ISO BMFF parser",
+    "adapter_module": "tallison"
+  },
+  {
+    "scope": "movie track count and timescale",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "timescale": 8000
+    },
+    "name": "liferay-mp4parser",
+    "group": "com.liferay",
+    "artifact": "org.mp4parser",
+    "version": "1.9.41.2.LIFERAY-PATCHED-2",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "Maven POM licenses; included IsoFile source carries Apache-2.0 notice",
+    "input_api": "new org.mp4parser.IsoFile(File localMp4), getMovieBox().getTrackCount() and getMovieHeaderBox().getTimescale()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/liferay/org.mp4parser/1.9.41.2.LIFERAY-PATCHED-2/org.mp4parser-1.9.41.2.LIFERAY-PATCHED-2-sources.jar",
+    "documentation_archive_entry": "org/mp4parser/IsoFile.java",
+    "family": "Liferay-patched distribution of sannies MP4Parser ISO BMFF parser",
+    "adapter_module": "liferay"
   }
 ]

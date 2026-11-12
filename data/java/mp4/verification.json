@@ -1,8 +1,9 @@
 {
-  "verified_at_utc": "2026-11-12T06:25:46.845788+00:00",
+  "verified_at_utc": "2026-11-12T06:38:10.886254+00:00",
   "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
   "padded_control_sha256": "bb0b6f47495dab84af1baa2ff4270f476fe7ce8752d0a391135c49f6184d3ae1",
   "no_udta_control_sha256": "6c181e06c4a1ccdce7b55b39580bbf80286bd5949660bce1aebbb00dd4baebc7",
+  "three_second_control_sha256": "a153daff81e38744da7a653d44a4f381b7f4768d6f4148a00391b440af5ef308",
   "java": "openjdk version \"25.0.5.0.3\" 2026-10-24",
   "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
   "locked_classpath_jars_by_module": {
@@ -15,7 +16,11 @@
     "vlcj_info": 2,
     "amilesend": 5,
     "jaad": 1,
-    "javasound_aac": 2
+    "javasound_aac": 2,
+    "red5_io": 11,
+    "old_isoparser": 1,
+    "tallison": 2,
+    "liferay": 3
   },
   "third_party": [
     {
@@ -212,6 +217,48 @@
         "audio_codec": "AAC",
         "sample_rate": 8000,
         "channels": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "red5-io",
+      "version": "2.0.40",
+      "control": "controls/mp4/red-av-3s.mp4",
+      "output": {
+        "video": true,
+        "keyframes": 1,
+        "video_codec": "avc1",
+        "audio_codec": "mp4a"
+      },
+      "pass": true
+    },
+    {
+      "package": "old-isoparser",
+      "version": "1.1.22",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "timescale": 8000
+      },
+      "pass": true
+    },
+    {
+      "package": "tallison-isoparser",
+      "version": "1.9.41.7",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "timescale": 8000
+      },
+      "pass": true
+    },
+    {
+      "package": "liferay-mp4parser",
+      "version": "1.9.41.2.LIFERAY-PATCHED-2",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "timescale": 8000
       },
       "pass": true
     }
