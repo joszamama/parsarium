@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib"
+	tensor "github.com/fumin/tensor"
 	gosparse "github.com/go-sparse/sparse/mtx"
 	market "github.com/wamuir/matrix-market"
 	utils "gitlab.com/Grouumf/ATACdemultiplex/ATACdemultiplexUtils"
@@ -39,6 +40,13 @@ func main() {
 		}
 		rows, cols := matrix.ToCOO().Dims()
 		output = map[string]any{"rows": rows, "cols": cols, "value_0_2": matrix.ToCOO().At(0, 2)}
+	case "github.com/fumin/tensor":
+		matrix, err := tensor.ReadMatrixMarket(bytes.NewReader(data))
+		if err != nil {
+			panic(err)
+		}
+		shape := matrix.Shape()
+		output = map[string]any{"rows": shape[0], "cols": shape[1], "value_0_2": real(matrix.At(0, 2))}
 	case "github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib":
 		graph, err := graphlib.ReadGraphAdjListAs(path, graphlib.FormatMatrixMarket, true)
 		if err != nil {

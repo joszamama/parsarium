@@ -4,6 +4,7 @@ go 1.27.2
 
 require (
 	github.com/HerrMotz/Algorithmic-Network-Analysis-Library v0.0.0-20261026153007-6675dc5932aa
+	github.com/fumin/tensor v0.0.0-20260209024632-93bd67122165
 	github.com/go-sparse/sparse v0.3.2
 	github.com/wamuir/matrix-market v0.0.0-20250303121451-60c3dedeb95a
 	gitlab.com/Grouumf/ATACdemultiplex/ATACdemultiplexUtils v0.0.0-20231204194046-760c57794d91
@@ -20,6 +21,7 @@ require (
 	github.com/klauspost/compress v1.4.1 // indirect
 	github.com/klauspost/cpuid v1.2.0 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/valyala/fastrand v1.1.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect

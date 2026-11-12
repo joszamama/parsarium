@@ -595,12 +595,12 @@ development library through `pkg-config`. The recorded native Assimp version is
 no PLY-aware parser API.
 
 `verify_go_matrix_market.py` uses Go 1.27.2 and valid coordinate real general
-Matrix Market controls. The observed result is **4/4 eligible package paths
+Matrix Market controls. The observed result is **5/5 eligible package paths
 passing**, below the 20-path goal. One reader interprets the matrix as a graph;
 another requires local companion row and column index files. The Go module
 files pin releases and transitive dependencies, and `go mod verify` passes.
 The separate Go 1.27.2 standard-library inventory finds no Matrix Market API.
-Five plausible leads remain unresolved, including one with a successful parse
+Seven plausible leads remain unresolved, including one with a successful parse
 but no open-source license evidence. See the cell record for exact limits.
 
 `verify_python_png.py` uses CPython 3.13.1 and the two valid local PNG
@@ -991,10 +991,10 @@ or quality judgment.
   plausible leads remain unresolved. The
   [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
-- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): four eligible
-  package paths verified on local coordinate real general controls, 16 below
+- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): five eligible
+  package paths verified on local coordinate real general controls, 15 below
   the working goal. Six bounded pkg.go.dev queries saved 80 hits and 77 unique
-  paths; five plausible leads remain unresolved. The
+  paths; seven plausible leads remain unresolved. The
   [cell record](data/go/matrix_market/cell.json) states search and input limits.
 - [Python × PNG ranking](data/python/png/ranking.md): 21 packages verified
   on local pixel or text-chunk controls. Seven bounded PyPI name filters
