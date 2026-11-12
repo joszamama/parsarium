@@ -1,0 +1,16 @@
+[
+  {"name":"pdfium-render","status":"unresolved","reason":"High-adoption PDFium binding has documented local file/byte loaders, but the required PDFium native library was not present and no pinned control run was recorded.","source":"https://docs.rs/pdfium-render/0.9.5/pdfium_render/"},
+  {"name":"anydoc","status":"unresolved","reason":"Document converter advertises PDF support; its PDF-specific local input API and control result have not been recorded.","source":"https://crates.io/crates/anydoc"},
+  {"name":"omniparse","status":"unresolved","reason":"Multi-format extraction library; the PDF path and an observable control result have not been verified.","source":"https://crates.io/crates/omniparse"},
+  {"name":"kreuzberg","status":"unresolved","reason":"Document extraction facade advertises PDF parsing, but its PDF backend and local control result have not been pinned and run.","source":"https://crates.io/crates/kreuzberg"},
+  {"name":"kreuzberg-pdfium-render","status":"unresolved","reason":"PDFium binding fork; a native PDFium library and control run have not been established.","source":"https://crates.io/crates/kreuzberg-pdfium-render"},
+  {"name":"xberg","status":"unresolved","reason":"Document extraction facade; PDF-specific local API and control result remain unverified.","source":"https://crates.io/crates/xberg"},
+  {"name":"pdfplumber-parse","status":"unresolved","reason":"Low-level parser backend for the verified pdfplumber facade; a direct public byte-input adapter and control result remain unverified.","source":"https://docs.rs/pdfplumber-parse/0.4.1/pdfplumber_parse/"},
+  {"name":"xberg-native-pdf","status":"unresolved","reason":"Native PDF engine; its standalone file/byte API and control result have not been verified.","source":"https://crates.io/crates/xberg-native-pdf"},
+  {"name":"docling-pdf","status":"unresolved","reason":"PDF backend for document converter; standalone local input and control result remain unverified.","source":"https://crates.io/crates/docling-pdf"},
+  {"name":"acroform","status":"unresolved","reason":"PDF form parser has a local byte API, but the current one-page control has no form field; an appropriate valid form control and observable field result remain to be recorded.","source":"https://crates.io/crates/acroform"},
+  {"name":"pdf-writer","status":"excluded","reason":"Step-by-step PDF writer; no documented PDF input parser API.","source":"https://crates.io/crates/pdf-writer"},
+  {"name":"genpdf","status":"excluded","reason":"PDF generator; no documented PDF input parser API.","source":"https://crates.io/crates/genpdf"},
+  {"name":"file-format","status":"excluded","reason":"Identifies a file format from signatures; it does not expose parsed PDF objects, pages, or text.","source":"https://crates.io/crates/file-format"},
+  {"name":"pdfium-auto","status":"excluded","reason":"Downloads and caches PDFium binaries; it is not itself a PDF parser API.","source":"https://crates.io/crates/pdfium-auto"}
+]

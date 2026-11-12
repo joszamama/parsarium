@@ -1,0 +1,276 @@
+[
+  {
+    "name": "lopdf",
+    "version": "0.47.0",
+    "license": "MIT",
+    "input_api": "Document::load(path).get_pages()",
+    "documentation": "https://docs.rs/lopdf/0.47.0/lopdf/",
+    "scope": "PDF page tree",
+    "family": "lopdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdf-extract",
+    "version": "0.12.1",
+    "license": "MIT",
+    "input_api": "extract_text(path)",
+    "documentation": "https://docs.rs/pdf-extract/0.12.1/pdf_extract/",
+    "scope": "PDF text extraction",
+    "family": "lopdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "has_parsarium": true
+    }
+  },
+  {
+    "name": "printpdf",
+    "version": "0.12.9",
+    "license": "MIT",
+    "input_api": "PdfDocument::parse(&bytes, options, warnings).pages",
+    "documentation": "https://docs.rs/printpdf/0.12.9/printpdf/",
+    "scope": "PDF page model",
+    "family": "lopdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdf-inspector",
+    "version": "1.25.2",
+    "license": "MIT",
+    "input_api": "process_pdf(path).page_count/title",
+    "documentation": "https://docs.rs/pdf-inspector/1.25.2/pdf_inspector/",
+    "scope": "PDF page count and Info title",
+    "family": "lopdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    }
+  },
+  {
+    "name": "pdf_oxide",
+    "version": "0.3.78",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "PdfDocument::open(path).page_count()",
+    "documentation": "https://docs.rs/pdf_oxide/0.3.78/pdf_oxide/",
+    "scope": "PDF page tree",
+    "family": "PDF Oxide parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "oxidize-pdf",
+    "version": "5.5.7",
+    "license": "MIT",
+    "input_api": "PdfDocument::open(path).page_count()",
+    "documentation": "https://docs.rs/oxidize-pdf/5.5.7/oxidize_pdf/",
+    "scope": "PDF page tree",
+    "family": "oxidize-pdf parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdf",
+    "version": "0.10.0",
+    "license": "MIT",
+    "input_api": "FileOptions::cached().open(path).num_pages()",
+    "documentation": "https://docs.rs/pdf/0.10.0/pdf/",
+    "scope": "PDF page tree",
+    "family": "pdf-rs parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdf-text-extract",
+    "version": "0.2.0",
+    "license": "MIT",
+    "input_api": "Document::parse(&bytes).page_count()",
+    "documentation": "https://docs.rs/pdf-text-extract/0.2.0/pdf_text_extract/",
+    "scope": "PDF xref, catalog, and page count",
+    "family": "pdf-text-extract parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfsink-rs",
+    "version": "0.2.20",
+    "license": "MIT",
+    "input_api": "PdfDocument::open(path).len()",
+    "documentation": "https://docs.rs/pdfsink-rs/0.2.20/pdfsink_rs/",
+    "scope": "PDF page model",
+    "family": "lopdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfpurr",
+    "version": "0.4.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Document::open(path).page_count()",
+    "documentation": "https://docs.rs/pdfpurr/0.4.0/pdfpurr/",
+    "scope": "PDF page tree",
+    "family": "pdfpurr parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdf-cos",
+    "version": "0.39.0",
+    "license": "MIT",
+    "input_api": "Document::load(path).get_pages()",
+    "documentation": "https://docs.rs/pdf-cos/0.39.0/pdf_cos/",
+    "scope": "PDF page tree",
+    "family": "lopdf fork",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfrum",
+    "version": "0.5.3",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Document::open(path).page_count()",
+    "documentation": "https://docs.rs/pdfrum/0.5.3/pdfrum/",
+    "scope": "PDF page tree",
+    "family": "pdfrum",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfrum-parser",
+    "version": "0.5.3",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "load(Arc::from(bytes), LoadOptions).page_count()",
+    "documentation": "https://docs.rs/pdfrum-parser/0.5.3/pdfrum_parser/",
+    "scope": "PDF xref and page tree",
+    "family": "pdfrum",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "zpdf",
+    "version": "0.18.0",
+    "license": "MIT",
+    "input_api": "PdfDocument::open(bytes).page_count()",
+    "documentation": "https://docs.rs/zpdf/0.18.0/zpdf/",
+    "scope": "PDF page tree",
+    "family": "zpdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "zpdf-document",
+    "version": "0.18.0",
+    "license": "MIT",
+    "input_api": "PdfDocument::open(bytes).page_count()",
+    "documentation": "https://docs.rs/zpdf-document/0.18.0/zpdf_document/",
+    "scope": "PDF page tree",
+    "family": "zpdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfboss-core",
+    "version": "2.16.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Document::open(path).page_count()",
+    "documentation": "https://docs.rs/pdfboss-core/2.16.1/pdfboss_core/",
+    "scope": "PDF page tree",
+    "family": "pdfboss parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "unpdf",
+    "version": "0.54.0",
+    "license": "MIT",
+    "input_api": "parse_file(path).page_count()",
+    "documentation": "https://docs.rs/unpdf/0.54.0/unpdf/",
+    "scope": "PDF page tree",
+    "family": "unpdf parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfer_forms",
+    "version": "0.3.4",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "PdfReaderCompat::load(path).pages()",
+    "documentation": "https://docs.rs/pdfer_forms/0.3.4/pdfer_forms/",
+    "scope": "PDF page handles",
+    "family": "lopdf",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdfplumber",
+    "version": "0.4.1",
+    "license": "Apache-2.0",
+    "input_api": "Pdf::open_path(path, None).page_count()",
+    "documentation": "https://docs.rs/pdfplumber/0.4.1/pdfplumber/",
+    "scope": "PDF page model",
+    "family": "lopdf + pdfplumber-parse",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "pdf-syntax",
+    "version": "0.6.2",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "Pdf::new(Arc::new(bytes)).pages()",
+    "documentation": "https://docs.rs/pdf-syntax/0.6.2/pdf_syntax/",
+    "scope": "PDF page tree",
+    "family": "hayro-syntax-derived parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  },
+  {
+    "name": "flpdf",
+    "version": "0.10.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Pdf::open(File); PageDocumentHelper::get_all_pages()",
+    "documentation": "https://docs.rs/flpdf/0.10.0/flpdf/",
+    "scope": "PDF page tree",
+    "family": "flpdf qpdf-style parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    }
+  }
+]
