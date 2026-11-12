@@ -832,15 +832,31 @@
     {
       "ecosystem": "java",
       "format": "svg",
-      "status": "not_started",
+      "status": "verified_partial_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 4,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "svg",
+        "svg parser",
+        "svg renderer",
+        "svg transcoder",
+        "batik",
+        "svg salamander",
+        "jsvg",
+        "svg imageio"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 112,
+      "unique_search_hits": 112,
+      "unresolved_documentation_leads": 9,
+      "uncertainty": "Four pinned Maven package paths passed a valid 2x1 red/green SVG control through documented local input APIs. Batik anim and transcoder are two artifact paths in the same Batik parser family, not independent SVG engines. JSVG and SVG Salamander are separate families. Eight bounded Maven Central queries saved 112 hits: the broad svg query timed out, batik stopped at the first 100 of 143, and several phrase queries returned zero. Targeted project documentation supplied the four accepted leads. Nine named candidates remain unresolved, including potentially popular Batik wrappers and SVG converters. deps.dev exact-release direct-dependent counts are a partial public adoption proxy, not proof of a most-used top four. The JDK 21 standard ImageIO formats exclude SVG; a bare-JDK control probe found no SVG reader. Generic JAXP XML parsing is not counted. The current collection is below the 20-path goal; discovery and verification must continue.",
+      "third_party_evidence": "data/java/svg/parsers.json",
+      "third_party_control_results": "data/java/svg/verification.json",
+      "runtime_evidence": "data/java/svg/standard.json",
+      "registry_snapshot": "data/java/svg/registry-snapshot.json",
+      "unresolved_leads": "data/java/svg/leads.json"
     },
     {
       "ecosystem": "java",

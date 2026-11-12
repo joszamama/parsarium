@@ -12,12 +12,12 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
+WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus a below-target Java × SVG batch and
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 66 cells at the 20-parser target, two started below target, and 20
+There are 66 cells at the 20-parser target, three started below target, and 19
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -139,6 +139,7 @@ python3 scripts/verify_rust_matrix_market.py
 python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/verify_java_zip.py
 python3 scripts/verify_java_png.py
+python3 scripts/verify_java_svg.py
 python3 scripts/verify_java_pdf.py
 python3 scripts/verify_java_http11.py
 python3 scripts/verify_java_mp3_id3v2.py
@@ -433,6 +434,18 @@ See the [Java PNG ranking](data/java/png/ranking.md),
 [unresolved leads](data/java/png/leads.json). Run
 `python3 scripts/snapshot_maven_png.py` only when refreshing registry and
 deps.dev evidence.
+
+The [Java × SVG ranking](data/java/svg/ranking.md) currently contains **4/20**
+verified Maven package paths: Batik's SVG DOM and transcoder artifacts, JSVG,
+and SVG Salamander. All four passed the valid 2×1 red/green SVG control in
+`python3 scripts/verify_java_svg.py`, which rebuilds the adapter and checks
+the 24-JAR SHA-256 classpath lock. Batik's two artifacts share one parser
+family. The [cell summary](data/java/svg/cell.json) records 112 bounded Maven
+search hits, a broad-query timeout, and nine unresolved leads. The scoped
+[JDK 21 inventory](data/java/svg/standard.json) found no bundled SVG reader;
+a bare-JDK ImageIO probe returned no SVG reader on the control. Run
+`python3 scripts/snapshot_maven_svg.py` and `python3 scripts/enrich_java_svg.py`
+only to refresh discovery and release/metric snapshots.
 
 The Java × PDF batch requires Maven 3.9+, JDK 25, and macOS arm64 for two
 PDFium native bindings. Set `PARSARIUM_JAVA25_HOME` if JDK 25 is not at

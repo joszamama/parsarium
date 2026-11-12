@@ -1,0 +1,38 @@
+[
+  {
+    "name": "batik-anim", "group": "org.apache.xmlgraphics", "artifact": "batik-anim", "version": "1.20",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "SAXSVGDocumentFactory.createDocument(String URI, InputStream)",
+    "documentation": "https://xmlgraphics.apache.org/batik/using/dom-api.html",
+    "family": "Apache Batik SVG DOM", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "batik-anim",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "batik-transcoder", "group": "org.apache.xmlgraphics", "artifact": "batik-transcoder", "version": "1.20",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "PNGTranscoder.transcode(TranscoderInput(InputStream), TranscoderOutput(OutputStream))",
+    "documentation": "https://xmlgraphics.apache.org/batik/using/transcoder.html",
+    "family": "Apache Batik SVG renderer, using batik-codec for PNG output", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "batik-transcoder",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "jsvg", "group": "com.github.weisj", "artifact": "jsvg", "version": "2.0.0",
+    "license": "MIT", "license_evidence": "Maven POM license",
+    "input_api": "SVGLoader.load(InputStream, URI, LoaderContext).render(Component, Graphics2D, ViewBox)",
+    "documentation": "https://github.com/weisJ/jsvg",
+    "family": "JSVG", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "jsvg",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "svg-salamander", "group": "io.github.blackears", "artifact": "svg-salamander", "version": "1.1.5.5",
+    "license": "BSD-2-Clause", "license_evidence": "Maven POM license and project README",
+    "input_api": "SVGUniverse.loadSVG(InputStream, String).getDiagram(URI).render(Graphics2D)",
+    "documentation": "https://github.com/blackears/svgSalamander/blob/master/svg-core/src/main/java/com/kitfox/svg/SVGUniverse.java",
+    "family": "SVG Salamander", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "svg-salamander",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  }
+]
