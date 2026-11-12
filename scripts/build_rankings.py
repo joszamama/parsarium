@@ -203,7 +203,7 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"java/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
-    for ecosystem, format_name in (("c", "png"), ("c", "zip"), ("cpp", "png")):
+    for ecosystem, format_name in (("c", "png"), ("c", "zip"), ("cpp", "png"), ("cpp", "zip")):
         directory = ROOT / "data" / ecosystem / format_name
         ecosystem_label = "C++" if ecosystem == "cpp" else "C"
         parsers = read(directory / "parsers.json")

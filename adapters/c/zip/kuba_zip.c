@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     if (n < 0 || !contents || (size_t) n != size || zip_entry_close(archive) != 0) {
         free(contents); zip_close(archive); return 1;
     }
-    zip_report((size_t) entries, name, contents, size);
+    zip_report((size_t) entries, name, (const unsigned char *) contents, size);
     free(contents);
     zip_close(archive);
     return 0;

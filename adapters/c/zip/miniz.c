@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     size_t size = 0;
     void *contents = mz_zip_reader_extract_to_heap(&archive, 0, &size, 0);
     if (!contents) { mz_zip_reader_end(&archive); return 1; }
-    zip_report(entries, info.m_filename, contents, size);
+    zip_report(entries, info.m_filename, (const unsigned char *) contents, size);
     mz_free(contents);
     mz_zip_reader_end(&archive);
     return 0;

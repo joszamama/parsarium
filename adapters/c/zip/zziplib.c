@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
     if (argc != 2) return 2;
-    zzip_error_t error = 0;
+    zzip_error_t error = (zzip_error_t) 0;
     ZZIP_DIR *archive = zzip_dir_open(argv[1], &error);
     if (!archive) return 1;
     ZZIP_DIRENT *entry = zzip_readdir(archive);

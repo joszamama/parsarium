@@ -1,0 +1,209 @@
+[
+  {
+    "name": "libarchive",
+    "version": "3.8.11",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://formulae.brew.sh/formula/libarchive",
+    "documentation": "https://github.com/libarchive/libarchive/blob/v3.8.11/libarchive/archive.h",
+    "input_api": "archive_read_open_filename; archive_read_support_format_zip; archive_read_next_header and archive_read_data",
+    "adapter": "adapters/cpp/zip/libarchive.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libarchive ZIP reader",
+    "family_note": "Own ZIP reader and entry data API; DEFLATE uses compression support. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "libzip",
+    "version": "1.12.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://formulae.brew.sh/formula/libzip",
+    "documentation": "https://libzip.org/documentation/zip_open/",
+    "input_api": "zip_open(const char*); zip_get_num_entries; zip_stat_index; zip_fopen_index and zip_fread",
+    "adapter": "adapters/cpp/zip/libzip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libzip ZIP reader",
+    "family_note": "Own ZIP archive reader and entry API. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "minizip",
+    "version": "1.4",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/minizip",
+    "documentation": "https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h",
+    "input_api": "unzOpen64(const char*); unzGetGlobalInfo64; unzGetCurrentFileInfo64; unzReadCurrentFile",
+    "adapter": "adapters/cpp/zip/minizip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "classic MiniZip",
+    "family_note": "Classic MiniZip from the zlib contrib/minizip source subtree; separate from minizip-ng but related lineage. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "minizip-ng",
+    "version": "4.2.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/minizip-ng",
+    "documentation": "https://github.com/zlib-ng/minizip-ng/blob/4.2.2/mz_zip_rw.h",
+    "input_api": "mz_zip_reader_open_file; mz_zip_reader_entry_get_info; mz_zip_reader_entry_read",
+    "adapter": "adapters/cpp/zip/minizip_ng.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "MiniZip lineage",
+    "family_note": "Separate maintained package descended from classic MiniZip; not an independent family claim. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "miniz",
+    "version": "3.1.2",
+    "license": "MIT",
+    "license_evidence": "https://formulae.brew.sh/formula/miniz",
+    "documentation": "https://github.com/richgel999/miniz/blob/3.1.2/miniz_zip.h",
+    "input_api": "mz_zip_reader_init_file; mz_zip_reader_file_stat; mz_zip_reader_extract_to_heap",
+    "adapter": "adapters/cpp/zip/miniz.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "miniz ZIP reader",
+    "family_note": "miniz archive reader; its DEFLATE implementation is integrated. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "libgsf",
+    "version": "1.14.60",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://formulae.brew.sh/formula/libgsf",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html",
+    "input_api": "gsf_input_stdio_new; gsf_infile_zip_new; gsf_infile_child_by_index; gsf_input_read",
+    "adapter": "adapters/cpp/zip/libgsf.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libgsf ZIP reader",
+    "family_note": "Own ZIP directory and entry API; uses compression dependencies for DEFLATE. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "kuba-zip",
+    "version": "0.3.2",
+    "license": "Unlicense",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/kuba-zip/all/conanfile.py",
+    "documentation": "https://github.com/kuba--/zip/blob/v0.3.2/src/zip.h",
+    "input_api": "zip_open(const char*, int, char); zip_entries_total; zip_entry_openbyindex; zip_entry_name; zip_entry_read",
+    "adapter": "adapters/cpp/zip/kuba_zip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "kuba-zip wrapper over bundled miniz",
+    "family_note": "Distinct package API that embeds miniz for ZIP parsing and DEFLATE; shares underlying parser lineage with miniz. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "zziplib",
+    "version": "0.13.80",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/zziplib/all/conanfile.py",
+    "documentation": "https://github.com/gdraheim/zziplib/blob/v0.13.80/zzip/zzip.h",
+    "input_api": "zzip_dir_open; zzip_readdir; zzip_file_open; zzip_file_read",
+    "adapter": "adapters/cpp/zip/zziplib.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "ZZIPlib ZIP reader",
+    "family_note": "Own ZIP archive reader; uses zlib for DEFLATE. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "unarr",
+    "version": "1.2.0",
+    "license": "LGPL-3.0-only",
+    "license_evidence": "https://github.com/selmf/unarr/blob/v1.2.0/COPYING",
+    "documentation": "https://github.com/selmf/unarr/blob/v1.2.0/unarr.h.in",
+    "input_api": "ar_open_file(const char*); ar_open_zip_archive; ar_parse_entry; ar_entry_get_name; ar_entry_uncompress",
+    "adapter": "adapters/cpp/zip/unarr.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "unarr ZIP reader",
+    "family_note": "selmf/unarr fork of zeniko/unarr; its ZIP parser and decompression API are part of the pinned source package. The C++ path reuses the exact C-cell release and underlying decoder.",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "libzippp",
+    "version": "7.1-1.10.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/ctabin/libzippp/blob/libzippp-v7.1-1.10.1/LICENCE",
+    "documentation": "https://github.com/ctabin/libzippp/blob/libzippp-v7.1-1.10.1/src/libzippp.h",
+    "input_api": "libzippp::ZipArchive(const std::string&); open(ReadOnly); getEntries; ZipEntry::readAsText",
+    "adapter": "adapters/cpp/zip/libzippp.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libzippp wrapper over libzip",
+    "family_note": "Distinct C++ package API built from pinned source; shares the libzip ZIP reader and installed libzip 1.12.1 with the libzip path."
+  },
+  {
+    "name": "troldal-zippy",
+    "version": "cci.20200622",
+    "license": "MIT",
+    "license_evidence": "https://github.com/troldal/KZip/blob/a838de8522f9051df0d1b202473bb6befe648702/LICENSE",
+    "documentation": "https://github.com/troldal/KZip/blob/a838de8522f9051df0d1b202473bb6befe648702/library/Zippy/ZipArchive.hpp",
+    "input_api": "Zippy::ZipArchive::Open(const std::string&); GetEntryNames; GetEntry; ZipEntry::GetDataAsString",
+    "adapter": "adapters/cpp/zip/troldal_zippy.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Troldal Zippy wrapper over bundled miniz",
+    "family_note": "Distinct C++ package API with bundled miniz; shares underlying parser lineage with miniz and kuba-zip."
+  }
+]

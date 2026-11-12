@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified C × PNG batch and a
-below-target C × ZIP batch, a verified C++ × PNG batch,
+below-target C × ZIP batch, a verified C++ × PNG batch and a below-target C++ × ZIP batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -12,8 +12,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-There are 49 cells at the 20-parser target, three started below target,
-and 36 marked `not_started`;
+There are 49 cells at the 20-parser target, four started below target,
+and 35 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -27,6 +27,7 @@ all packages and integrity hashes. From the repository root:
 python3 scripts/verify_c_png.py
 python3 scripts/verify_cpp_png.py
 python3 scripts/verify_c_zip.py
+python3 scripts/verify_cpp_zip.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -152,6 +153,15 @@ parser lineage, and kuba-zip bundles miniz. The 21 distinct Conan recipe-name
 hits are alphabetic discovery results, not a most-used ranking; two leads remain unresolved.
 The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
+
+The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds C++17
+call sites for the same nine packages and two pinned C++ wrappers. All **11/11
+package paths passed** the valid archive control, returning the entry name and
+decompressed contents. libzippp wraps the verified libzip release, and Troldal
+Zippy bundles miniz; these paths are not eleven independent ZIP engines. Seven
+plausible C++ leads remain unresolved, so the [C++ ZIP cell](data/cpp/zip/cell.json)
+is below the working goal and does not claim a most-used top 20. The ISO C++
+standard library has no documented ZIP parser.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
