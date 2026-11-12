@@ -15,6 +15,8 @@ $vendor = match ($package) {
     'buggedcom/phpvideotoolkit' => '/phptoolkit/vendor/autoload.php',
     'vollbehr/php-reader' => '/vollbehr/vendor/autoload.php',
     'pyrex-fwi/id3' => '/pyrex/vendor/autoload.php',
+    'sempia/getid3' => '/sempia/vendor/autoload.php',
+    'indiehd/audio-manipulator' => '/indiehd/vendor/autoload.php',
     default => '/vendor/autoload.php',
 };
 require __DIR__ . $vendor;
@@ -130,6 +132,26 @@ switch ($package) {
             'title' => $parsed->getTitle(),
             'artist' => $parsed->getArtist(),
             'album' => $parsed->getAlbum(),
+        ];
+        break;
+    case 'sempia/getid3':
+        $parsed = (new \JamesHeinrich\GetID3\GetID3())->analyze($path);
+        $tags = $parsed['tags']['id3v2'] ?? [];
+        $output = [
+            'title' => $tags['title'][0] ?? null,
+            'artist' => $tags['artist'][0] ?? null,
+            'album' => $tags['album'][0] ?? null,
+            'id3v2_major' => $parsed['id3v2']['majorversion'] ?? null,
+        ];
+        break;
+    case 'indiehd/audio-manipulator':
+        $parsed = (new \IndieHD\AudioManipulator\MediaParsing\MediaParser())->analyze($path);
+        $tags = $parsed['tags']['id3v2'] ?? [];
+        $output = [
+            'title' => $tags['title'][0] ?? null,
+            'artist' => $tags['artist'][0] ?? null,
+            'album' => $tags['album'][0] ?? null,
+            'id3v2_major' => $parsed['id3v2']['majorversion'] ?? null,
         ];
         break;
     default:

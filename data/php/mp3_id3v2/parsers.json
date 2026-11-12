@@ -236,5 +236,45 @@
     "family_note": "Composer wrapper invokes MediaInfo 26.10. The committed executable shim changes its requested --Output=XML to --Output=OLDXML, matching the schema this pinned package expects; no parser output is fabricated.",
     "external_backend": "MediaInfo command-line 26.10 (Homebrew media-info formula)",
     "backend_compatibility_shim": "adapters/php/mp3_id3v2/pyrex/mediainfo_oldxml.sh"
+  },
+  {
+    "name": "sempia/getid3",
+    "version": "2.0.0.0-p1.9.25",
+    "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
+    "license_evidence": "https://gitlab.com/Sempia/getID3/-/blob/46405ae39a503ac72d1ce5b31f6f11f938f034ed/LICENSE.md",
+    "documentation": "https://gitlab.com/Sempia/getID3/-/blob/46405ae39a503ac72d1ce5b31f6f11f938f034ed/README.md",
+    "input_api": "JamesHeinrich\\GetID3\\GetID3::analyze(local tagged MP3 path); tags.id3v2 title/artist/album and ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/sempia/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Namespaced PSR-4 fork periodically merged from upstream getID3; distinct Composer release path, same underlying getID3 parser family."
+  },
+  {
+    "name": "indiehd/audio-manipulator",
+    "version": "v4.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/LICENSE",
+    "documentation": "https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/src/MediaParsing/MediaParserInterface.php",
+    "input_api": "IndieHD\\AudioManipulator\\MediaParsing\\MediaParser::analyze(local tagged MP3 path); tags.id3v2 title/artist/album and ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/indiehd/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Public MediaParserInterface specifies analyze(string $file), and implementation delegates to pinned james-heinrich/getid3 v1.9.23. Separate package path, same underlying getID3 parser family."
   }
 ]

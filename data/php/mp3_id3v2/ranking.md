@@ -1,6 +1,6 @@
 # PHP × MP3 with ID3v2: verified parser ranking
 
-12 verified third-party package paths; working goal 20, original ceiling 30. Packagist lifetime downloads captured at 2026-11-12T17:15:32.857838+00:00. This metric covers all releases and formats, and only ranks adoption within PHP. Unresolved leads and bounded search prevent a definitive top-twelve claim.
+14 verified third-party package paths; working goal 20, original ceiling 30. Packagist lifetime downloads captured at 2026-11-12T17:18:28.938540+00:00. This metric covers all releases and formats, and only ranks adoption within PHP. Unresolved leads and bounded search prevent a definitive top-fourteen claim.
 
 | Rank | Package | Pinned release | Lifetime Composer downloads | Observable scope | Family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -13,6 +13,8 @@
 | 7 | [buggedcom/phpvideotoolkit](https://packagist.org/packages/buggedcom/phpvideotoolkit#2.2.5) | 2.2.5 | 89,242 | ID3v2.3 text fields and MP3 audio codec/sample rate | FFmpeg native MP3 and ID3 parser |
 | 8 | [debach/zend-mp3](https://packagist.org/packages/debach/zend-mp3#1.8.1) | 1.8.1 | 45,193 | ID3v2.3 title, artist, and album | Sven Vollbehr PHP Reader ID3 family |
 | 9 | [kiwilan/php-audio](https://packagist.org/packages/kiwilan/php-audio#4.0.02) | 4.0.02 | 20,408 | ID3v2.3 title, artist, and album | getID3 native MP3 and ID3v2 parser |
-| 10 | [duncan3dc/meta-audio](https://packagist.org/packages/duncan3dc/meta-audio#0.6.0) | 0.6.0 | 3,672 | ID3v2.4 title, artist, and album | duncan3dc MetaAudio native ID3 parser |
-| 11 | [pyrex-fwi/id3](https://packagist.org/packages/pyrex-fwi/id3#v0.2.0) | v0.2.0 | 624 | ID3v2.3 title, artist, and album on an 18-second MP3 | MediaInfoLib native MP3 and ID3 parser |
-| 12 | [vollbehr/php-reader](https://packagist.org/packages/vollbehr/php-reader#v2.0-rc1) | v2.0-rc1 | 0 | ID3v2.3 title, artist, and album | Sven Vollbehr PHP Reader ID3 family |
+| 10 | [indiehd/audio-manipulator](https://packagist.org/packages/indiehd/audio-manipulator#v4.1.0) | v4.1.0 | 8,191 | ID3v2.3 title, artist, album, and major version | getID3 native MP3 and ID3v2 parser |
+| 11 | [duncan3dc/meta-audio](https://packagist.org/packages/duncan3dc/meta-audio#0.6.0) | 0.6.0 | 3,672 | ID3v2.4 title, artist, and album | duncan3dc MetaAudio native ID3 parser |
+| 12 | [pyrex-fwi/id3](https://packagist.org/packages/pyrex-fwi/id3#v0.2.0) | v0.2.0 | 624 | ID3v2.3 title, artist, and album on an 18-second MP3 | MediaInfoLib native MP3 and ID3 parser |
+| 13 | [sempia/getid3](https://packagist.org/packages/sempia/getid3#2.0.0.0-p1.9.25) | 2.0.0.0-p1.9.25 | 110 | ID3v2.3 title, artist, album, and major version | getID3 native MP3 and ID3v2 parser |
+| 14 | [vollbehr/php-reader](https://packagist.org/packages/vollbehr/php-reader#v2.0-rc1) | v2.0-rc1 | 0 | ID3v2.3 title, artist, and album | Sven Vollbehr PHP Reader ID3 family |

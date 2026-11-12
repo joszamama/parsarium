@@ -293,14 +293,14 @@ tested PHP core and GD APIs did not parse the control. Reproduction requires
 PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, FFprobe, phpize, and Composer 2. The
 verifier builds Imagick into ignored cache from the pinned PECL source archive.
 
-The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has twelve
+The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has fourteen
 pinned package paths passing one-second ID3v2.3 or ID3v2.4 tagged MP3
-controls. The Laravel and Kiwilan wrappers share getID3, MediaFile shares
+controls. The Laravel, Kiwilan, IndieHD, and Sempia paths share getID3; MediaFile shares
 Mp3Info, and ID3Parser derives from getID3; Zend Media and Vollbehr share PHP
 Reader lineage. MetaAudio has its own ID3 module, the mhor and Pyrex wrappers
 use MediaInfoLib 26.10, and PHPVideoToolkit uses FFmpeg. Five bounded Packagist
 searches saved 164 hits and 128 distinct names. Eight plausible leads remain
-unresolved, and eight paths are still needed. The
+unresolved, and six paths are still needed. The
 [runtime inventory](data/php/mp3_id3v2/standard.json) records that PHP Fileinfo
 returns only a MIME type; the separate PECL id3 extension was absent.
 The MediaInfo path requires the `media-info` 26.10 Homebrew formula (or an
@@ -1224,9 +1224,9 @@ uncertainty.
   paths, lifetime download ranking, control results, leads, and a separate PHP
   runtime inventory. Eight Composer locks live under `adapters/php/ascii_pnm/`,
   and a pinned PECL Imagick source lock lives with the cell data.
-- `data/php/mp3_id3v2/`: Packagist discovery hits, twelve pinned third-party
+- `data/php/mp3_id3v2/`: Packagist discovery hits, fourteen pinned third-party
   paths, lifetime download ranking, valid tag results, unresolved leads, and a
-  separate PHP runtime inventory. Nine Composer locks and the adapter live under
+  separate PHP runtime inventory. Eleven Composer locks and the adapter live under
   `adapters/php/mp3_id3v2/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
