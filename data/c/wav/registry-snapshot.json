@@ -189,13 +189,27 @@
       "source_url": "https://github.com/liballeg/allegro5/releases/download/5.2.11.3/allegro-5.2.11.3.tar.gz",
       "source_sha256": "aba4679a5b1f2bf62482eba6e8814a94de7ffc86de5f8587ba199fcc61b4a04f",
       "license_evidence": "https://formulae.brew.sh/api/formula/allegro.json"
+    },
+    "sdl2_mixer": {
+      "version": "2.8.2",
+      "license": "Zlib",
+      "source_url": "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.2/SDL2_mixer-2.8.2.tar.gz",
+      "source_sha256": "938dff531d00ace2296557a6599abe6f34599e2f34f0a4a08a397e2ccac8b8f7",
+      "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_mixer.json"
+    },
+    "freealut": {
+      "version": "1.1.0",
+      "license": "LGPL-2.0-only",
+      "source_url": "https://api.github.com/repos/vancegroup/freealut/tarball/freealut_1_1_0",
+      "source_sha256": "1c1716d4b28a1b6cac8d17b6191a9529899fd47620ed13f34ceb0a526a56a8df",
+      "license_evidence": "https://formulae.brew.sh/api/formula/freealut.json"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -257,11 +271,21 @@
         "stars": 2133,
         "repository": "https://github.com/liballeg/allegro5",
         "source": "https://api.github.com/repos/liballeg/allegro5"
+      },
+      "sdl2_mixer": {
+        "stars": 765,
+        "repository": "https://github.com/libsdl-org/SDL_mixer",
+        "source": "https://api.github.com/repos/libsdl-org/SDL_mixer"
+      },
+      "freealut": {
+        "stars": 74,
+        "repository": "https://github.com/vancegroup/freealut",
+        "source": "https://api.github.com/repos/vancegroup/freealut"
       }
     },
     "captured_between_utc": [
       "2026-11-12T10:25:21.715408+00:00",
-      "2026-11-12T10:48:28.840102+00:00"
+      "2026-11-12T10:52:52.681242+00:00"
     ]
   },
   "targeted_documentation": [
@@ -279,6 +303,8 @@
     "https://www.sfml-dev.org/download/csfml/",
     "https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h",
     "https://liballeg.org/a5docs/5.2.11.3/acodec.html",
-    "https://liballeg.org/a5docs/5.2.11.3/audio.html"
+    "https://liballeg.org/a5docs/5.2.11.3/audio.html",
+    "https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV",
+    "https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h"
   ]
 }

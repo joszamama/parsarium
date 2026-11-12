@@ -281,5 +281,53 @@
     "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
     "family": "Allegro audio codec WAV loader",
     "family_note": "Allegro audio codec add-on registers its own WAV loader; official versioned docs list little-endian PCM WAV support. Core, audio and codec add-on binaries are SHA-256-checked."
+  },
+  {
+    "name": "sdl2_mixer",
+    "version": "2.8.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_mixer.json",
+    "documentation": "https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV",
+    "input_api": "SDL_Init audio; Mix_OpenAudio; Mix_LoadWAV(local WAV path); Mix_QuerySpec; Mix_Chunk.abuf and alen",
+    "adapter": "adapters/c/wav/sdl2_mixer.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus four decoded PCM samples at configured mixer format",
+    "family": "SDL2_mixer through SDL2 compatibility and SDL WAV loader",
+    "family_note": "Same SDL_mixer upstream project as SDL3_mixer but distinct 2.x package/API. On this macOS build it links sdl2-compat, which uses SDL3 underneath; no independent WAV engine is claimed."
+  },
+  {
+    "name": "freealut",
+    "version": "1.1.0",
+    "license": "LGPL-2.0-only",
+    "license_evidence": "https://formulae.brew.sh/api/formula/freealut.json",
+    "documentation": "https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h",
+    "input_api": "alutInit; alutLoadMemoryFromFile(local WAV path, format, size, frequency); alutExit",
+    "adapter": "adapters/c/wav/freealut.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV format, sample rate, frame count and four decoded PCM samples",
+    "family": "FreeALUT WAV memory loader",
+    "family_note": "Own tagged C WAV loader package; this API requires an OpenAL context, created by alutInit on macOS."
   }
 ]

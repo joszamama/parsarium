@@ -78,13 +78,19 @@ def main() -> None:
             assert digest == item["local_library_sha256"], name
             for extra in item.get("additional_libraries", []):
                 assert sha256(Path(extra["path"]).read_bytes()).hexdigest() == extra["sha256"]
-            if name == "csfml":
-                version = run(["brew", "list", "--versions", "csfml"])
-                assert version == "csfml " + item["release"]
-                command = ["cc", "-std=c11", "-O2",
-                           "-I" + str(library.parents[1] / "include"),
-                           str(ROOT / parser["adapter"]), str(library),
-                           "-o", str(TARGET / name)]
+            if name in ("csfml", "freealut"):
+                version = run(["brew", "list", "--versions", item["brew_formula"]])
+                assert version == item["brew_formula"] + " " + item["release"]
+                if name == "csfml":
+                    command = ["cc", "-std=c11", "-O2",
+                               "-I" + str(library.parents[1] / "include"),
+                               str(ROOT / parser["adapter"]), str(library),
+                               "-o", str(TARGET / name)]
+                else:
+                    command = ["cc", "-std=c11", "-O2",
+                               "-I" + str(library.parents[1] / "include"),
+                               str(ROOT / parser["adapter"]), str(library),
+                               "-framework", "OpenAL", "-o", str(TARGET / name)]
                 installed[name] = {"brew_version": version, "library": str(library),
                                    "library_sha256": digest,
                                    "additional_libraries": item.get("additional_libraries", [])}
