@@ -255,5 +255,63 @@
     "family": "ImageMagick PNM decoder",
     "family_note": "This Composer wrapper delegates ASCII P3 decoding to PECL Imagick and installed ImageMagick; it is not an independent decoder engine.",
     "requires_imagick": true
+  },
+  {
+    "name": "league/glide",
+    "version": "4.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thephpleague/glide/blob/704e51e1bf4af99a9efd6d3083d7fab41718e8f1/LICENSE",
+    "documentation": "https://github.com/thephpleague/glide/blob/704e51e1bf4af99a9efd6d3083d7fab41718e8f1/README.md",
+    "input_api": "ServerFactory::create(local source directory, Imagick driver)->makeImage(P3 filename, PNG output); inspect converted image dimensions",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "mime": "image/png"
+    },
+    "scope": "converted PNG dimensions and MIME",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "Glide reads local P3 bytes and delegates decoding to Intervention Image with the separately built PECL Imagick extension and ImageMagick; it is not an independent decoder.",
+    "requires_imagick": true
+  },
+  {
+    "name": "phpixie/image",
+    "version": "3.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/PHPixie/Image/blob/a75f6cb484c8b8a5f26c4e2772d81fdff71b3265/composer.json",
+    "documentation": "https://github.com/PHPixie/Image/blob/a75f6cb484c8b8a5f26c4e2772d81fdff71b3265/README.md",
+    "input_api": "PHPixie\\Image::read(local P3 file, imagick driver); width/height",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "PHPixie Image delegates ASCII P3 decoding to the separately built PECL Imagick extension and ImageMagick; it is not an independent decoder.",
+    "requires_imagick": true
+  },
+  {
+    "name": "francodacosta/phmagick",
+    "version": "v5.0.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/francodacosta/phmagick/blob/8871ec58ca5d12cc458d08ce1b9801d66ef35f16/composer.json",
+    "documentation": "https://github.com/francodacosta/phmagick/blob/8871ec58ca5d12cc458d08ce1b9801d66ef35f16/docs/Convert.html",
+    "input_api": "phMagick\\Core\\Runner::run(Convert(local P3 file, local PNG output)); inspect converted image dimensions",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "mime": "image/png"
+    },
+    "scope": "converted PNG dimensions and MIME",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "phMagick invokes the installed ImageMagick CLI to decode ASCII P3 and output PNG; it is not an independent decoder."
   }
 ]

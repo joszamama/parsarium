@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T16:29:08.616053+00:00",
+  "checked_at_utc": "2026-11-12T16:32:39.013284+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php_version": "8.5.12",
   "libvips_version": "8.18.7",
@@ -11,6 +11,10 @@
     {
       "path": "adapters/php/ascii_pnm/composer.lock",
       "sha256": "ea5db66e01802abc42533047e8e0208f32763d4c29294d7ea310fc123af9ee5c"
+    },
+    {
+      "path": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+      "sha256": "12f3516c407fbbb0c592ab1b7f1920134230d66bcd771763c7b9e454b8b952fd"
     },
     {
       "path": "adapters/php/ascii_pnm/imagick_wrappers/composer.lock",
@@ -205,6 +209,50 @@
       "output": {
         "width": 2,
         "height": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "league/glide",
+      "version": "4.2.0",
+      "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+      "composer_lock_sha256": "12f3516c407fbbb0c592ab1b7f1920134230d66bcd771763c7b9e454b8b952fd",
+      "source_reference": "704e51e1bf4af99a9efd6d3083d7fab41718e8f1",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "command": "php -d extension=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/cache/pecl-imagick/imagick-3.8.1/modules/imagick.so -d ffi.enable=1 -d zend.max_allowed_stack_size=-1 -d display_errors=0 -d log_errors=0 -d error_reporting=8191 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_pnm/parse.php league/glide /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "mime": "image/png"
+      },
+      "pass": true
+    },
+    {
+      "package": "phpixie/image",
+      "version": "3.3",
+      "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+      "composer_lock_sha256": "12f3516c407fbbb0c592ab1b7f1920134230d66bcd771763c7b9e454b8b952fd",
+      "source_reference": "a75f6cb484c8b8a5f26c4e2772d81fdff71b3265",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "command": "php -d extension=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/cache/pecl-imagick/imagick-3.8.1/modules/imagick.so -d ffi.enable=1 -d zend.max_allowed_stack_size=-1 -d display_errors=0 -d log_errors=0 -d error_reporting=8191 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_pnm/parse.php phpixie/image /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "francodacosta/phmagick",
+      "version": "v5.0.2",
+      "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
+      "composer_lock_sha256": "12f3516c407fbbb0c592ab1b7f1920134230d66bcd771763c7b9e454b8b952fd",
+      "source_reference": "8871ec58ca5d12cc458d08ce1b9801d66ef35f16",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "command": "php -d ffi.enable=1 -d zend.max_allowed_stack_size=-1 -d display_errors=0 -d log_errors=0 -d error_reporting=8191 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_pnm/parse.php francodacosta/phmagick /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "mime": "image/png"
       },
       "pass": true
     }

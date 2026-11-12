@@ -12,6 +12,8 @@ if ($package === 'pecl/imagick') {
     require __DIR__ . '/legacy/vendor/autoload.php';
 } elseif (in_array($package, ['calcinai/php-imagick', 'orbitale/imagemagick-php', 'phpthumb/phpthumb'], true)) {
     require __DIR__ . '/imagick_wrappers/vendor/autoload.php';
+} elseif (in_array($package, ['league/glide', 'phpixie/image', 'francodacosta/phmagick'], true)) {
+    require __DIR__ . '/image_pipeline/vendor/autoload.php';
 } else {
     require __DIR__ . '/vendor/autoload.php';
 }
@@ -92,6 +94,44 @@ switch ($package) {
             'left_rgb' => array_values(unpack('C3', substr($pixels, 0, 3))),
             'right_rgb' => array_values(unpack('C3', substr($pixels, 3, 3))),
         ];
+        break;
+    case 'phpixie/image':
+        $image = (new \PHPixie\Image())->read($path, 'imagick');
+        $output = ['width' => $image->width(), 'height' => $image->height()];
+        break;
+    case 'league/glide':
+        $cache = __DIR__ . '/image_pipeline/cache';
+        if (!is_dir($cache) && !mkdir($cache, 0777, true) && !is_dir($cache)) {
+            throw new RuntimeException('Unable to create Glide cache');
+        }
+        $server = \League\Glide\ServerFactory::create([
+            'source' => dirname($path), 'cache' => $cache, 'driver' => 'imagick',
+        ]);
+        $server->deleteCache(basename($path));
+        $cached = $server->makeImage(basename($path), ['fm' => 'png']);
+        $info = getimagesize($cache . '/' . $cached);
+        if ($info === false || $info['mime'] !== 'image/png') {
+            throw new RuntimeException('Glide did not convert the PNM control to PNG');
+        }
+        $output = ['width' => $info[0], 'height' => $info[1], 'mime' => $info['mime']];
+        break;
+    case 'francodacosta/phmagick':
+        $base = tempnam(sys_get_temp_dir(), 'parsarium-pnm-');
+        if ($base === false) {
+            throw new RuntimeException('Unable to create temporary output path');
+        }
+        unlink($base);
+        $destination = $base . '.png';
+        try {
+            (new \phMagick\Core\Runner())->run(new \phMagick\Action\Convert($path, $destination));
+            $info = getimagesize($destination);
+            if ($info === false || $info['mime'] !== 'image/png') {
+                throw new RuntimeException('phMagick did not convert the PNM control to PNG');
+            }
+            $output = ['width' => $info[0], 'height' => $info[1], 'mime' => $info['mime']];
+        } finally {
+            @unlink($destination);
+        }
         break;
     default:
         throw new InvalidArgumentException('unknown ASCII PNM package: ' . $package);
