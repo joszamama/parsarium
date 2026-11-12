@@ -18,8 +18,8 @@ CONTROL = ROOT / "controls/http11/request.http"
 CACHE = Path(tempfile.gettempdir()) / "parsarium-c-http11"
 
 
-def run(command: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=True, timeout=120)
+def run(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(command, cwd=cwd, text=True, capture_output=True, check=True, timeout=120)
 
 
 def archive(name: str, source: dict) -> Path:
@@ -52,9 +52,13 @@ def main() -> None:
             assert sha256(Path(installed[path_key]).read_bytes()).hexdigest() == installed[hash_key]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
+        libhtp_source = build / "libhtp-0.5.53"
+        run(["./autogen.sh"], cwd=libhtp_source)
+        run(["./configure", "--disable-shared", "--enable-static"], cwd=libhtp_source)
+        run(["make", "-j4"], cwd=libhtp_source)
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
         mhdflags = run(["pkg-config", "--cflags", "--libs", "libmicrohttpd"]).stdout.split()
         commands = {
@@ -92,7 +96,12 @@ def main() -> None:
                          "-I" + str(build / "libevhtp-1.2.9/htparse"),
                          str(ADAPTER / "libevhtp.c"),
                          str(build / "libevhtp-1.2.9/htparse/htparse.c"),
-                         "-o", str(build / "libevhtp-adapter")]}
+                         "-o", str(build / "libevhtp-adapter")],
+            "libhtp": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(ADAPTER), "-I" + str(libhtp_source),
+                       str(ADAPTER / "libhtp.c"),
+                       str(libhtp_source / "htp/.libs/libhtp.a"), "-lz",
+                       "-o", str(build / "libhtp-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]

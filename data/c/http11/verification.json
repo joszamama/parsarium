@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T21:06:10.790087+00:00",
+  "checked_at_utc": "2026-11-12T21:10:18.338485+00:00",
   "environment": {
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
@@ -107,6 +107,18 @@
       },
       "pass": true,
       "command": "build pinned libevhtp; libevhtp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libhtp",
+      "version": "0.5.53",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned libhtp; libhtp-adapter controls/http11/request.http"
     }
   ],
   "runtime": []
