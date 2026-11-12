@@ -36,6 +36,7 @@ public final class Http11Adapter {
         else if (args[0].equals("webarchive")) runWebarchive(bytes);
         else if (args[0].equals("jwat")) runJwat(bytes);
         else if (args[0].equals("sentinel")) runSentinel(bytes);
+        else if (args[0].equals("httpcore4nio")) runHttpCore4Nio(bytes);
         else System.exit(2);
     }
 
@@ -247,5 +248,19 @@ public final class Http11Adapter {
         System.out.printf("{\"status_line\":\"%s\",\"status\":%d,\"content_type\":\"%s\",\"body\":\"%s\"}%n",
                 response.getStatusLine(), response.getStatusCode(),
                 response.getHeader("Content-Type"), response.getBodyAsString());
+    }
+
+    private static void runHttpCore4Nio(byte[] bytes) throws Exception {
+        var buffer = new org.apache.http.impl.nio.reactor.SessionInputBufferImpl(1024);
+        var parser = new org.apache.http.impl.nio.codecs.DefaultHttpRequestParser(buffer);
+        var channel = java.nio.channels.Channels.newChannel(new ByteArrayInputStream(bytes));
+        parser.fillBuffer(channel);
+        var request = parser.parse();
+        if (request == null) System.exit(1);
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.getRequestLine().getMethod(), request.getRequestLine().getUri(),
+                request.getRequestLine().getProtocolVersion(),
+                request.getFirstHeader("Host").getValue(),
+                request.getFirstHeader("X-Parsarium").getValue());
     }
 }

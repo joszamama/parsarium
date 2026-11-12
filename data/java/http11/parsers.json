@@ -295,5 +295,27 @@
       "content_type": "text/plain",
       "body": "parsarium"
     }
+  },
+  {
+    "name": "httpcore-nio",
+    "group": "org.apache.httpcomponents",
+    "artifact": "httpcore-nio",
+    "version": "4.4.16",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore-nio/4.4.16/httpcore-nio-4.4.16.pom",
+    "input_api": "new DefaultHttpRequestParser(SessionInputBufferImpl); fillBuffer(local ReadableByteChannel); parse() as HttpRequest",
+    "documentation": "https://hc.apache.org/httpcomponents-core-4.4.x/current/httpcore-nio/apidocs/org/apache/http/nio/NHttpMessageParser.html",
+    "scope": "HTTP/1.1 request line and headers from local channel",
+    "family": "Apache HttpComponents Core 4.x NIO request parser",
+    "family_note": "Separate Maven artifact and NIO parser class from blocking httpcore 4.4.16, but same Apache HttpComponents project and shared line parser ancestry. The documented NIO API parses the message head, not an entity body.",
+    "adapter_label": "httpcore4nio",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   }
 ]
