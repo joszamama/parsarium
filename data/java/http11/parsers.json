@@ -12,7 +12,13 @@
     "family": "Netty 3 HTTP request decoder; prior major branch of netty-codec-http",
     "adapter_label": "netty3",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   },
   {
     "name": "netty5-codec-http",
@@ -27,7 +33,13 @@
     "family": "Netty 5 HTTP request decoder, alpha branch; shares project ancestry with Netty 3 and 4",
     "adapter_label": "netty5",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   },
   {
     "name": "netty-codec-http",
@@ -42,7 +54,13 @@
     "family": "Netty 4 HTTP request decoder",
     "adapter_label": "netty",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   },
   {
     "name": "http1_1-parser",
@@ -57,7 +75,13 @@
     "family": "WebPieces HTTP/1.1 parser",
     "adapter_label": "webpieces",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   },
   {
     "name": "httpcore5",
@@ -72,7 +96,13 @@
     "family": "Apache HttpComponents Core HTTP/1.1 parser, 5.x branch",
     "adapter_label": "httpcore5",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   },
   {
     "name": "httpcore",
@@ -87,7 +117,13 @@
     "family": "Apache HttpComponents Core HTTP/1.1 parser, 4.x branch; shared upstream with httpcore5",
     "adapter_label": "httpcore4",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   },
   {
     "name": "jetty-http",
@@ -102,6 +138,54 @@
     "family": "Jetty HTTP/1.1 HttpParser",
     "adapter_label": "jetty",
     "control": "controls/http11/request.http",
-    "expected_output": {"method":"GET","target":"/parsarium?x=1","version":"HTTP/1.1","host":"example.test","x_parsarium":"yes"}
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
+  },
+  {
+    "name": "jodd-http",
+    "group": "org.jodd",
+    "artifact": "jodd-http",
+    "version": "6.3.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://central.sonatype.com/artifact/org.jodd/jodd-http/6.3.0",
+    "input_api": "jodd.http.HttpRequest.readFrom(local InputStream); method(), path(), queryString(), httpVersion(), header(name)",
+    "documentation": "https://http.jodd.org/connection",
+    "scope": "HTTP/1.1 request line and headers from local stream",
+    "family": "Jodd HTTP native request parser",
+    "adapter_label": "jodd",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
+  },
+  {
+    "name": "rawhttp-core",
+    "group": "com.athaydes.rawhttp",
+    "artifact": "rawhttp-core",
+    "version": "2.6.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/com/athaydes/rawhttp/rawhttp-core/2.6.0/rawhttp-core-2.6.0.pom",
+    "input_api": "new rawhttp.core.RawHttp().parseRequest(local InputStream); getMethod(), getUri(), getStartLine().getHttpVersion(), getHeaders()",
+    "documentation": "https://github.com/renatoathaydes/rawhttp",
+    "scope": "HTTP/1.1 request line and headers from local stream",
+    "family": "RawHTTP native HTTP/1.1 parser",
+    "adapter_label": "rawhttp",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   }
 ]

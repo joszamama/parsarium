@@ -29,6 +29,8 @@ public final class Http11Adapter {
         else if (args[0].equals("jetty")) runJetty(bytes);
         else if (args[0].equals("netty3")) runNetty3(bytes);
         else if (args[0].equals("netty5")) runNetty5(bytes);
+        else if (args[0].equals("jodd")) runJodd(bytes);
+        else if (args[0].equals("rawhttp")) runRawHttp(bytes);
         else System.exit(2);
     }
 
@@ -142,5 +144,23 @@ public final class Http11Adapter {
                     request.headers().get("Host"), request.headers().get("X-Parsarium"));
             channel.finishAndReleaseAll();
         }
+    }
+
+    private static void runJodd(byte[] bytes) {
+        var request = jodd.http.HttpRequest.readFrom(new ByteArrayInputStream(bytes));
+        String target = request.path() + (request.queryString() == null ? "" : "?" + request.queryString());
+        String version = request.httpVersion();
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.method(), target, version, request.header("Host"), request.header("X-Parsarium"));
+    }
+
+    private static void runRawHttp(byte[] bytes) throws Exception {
+        var request = new rawhttp.core.RawHttp().parseRequest(new ByteArrayInputStream(bytes));
+        var uri = request.getUri();
+        String target = uri.getRawPath() + (uri.getRawQuery() == null ? "" : "?" + uri.getRawQuery());
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.getMethod(), target, request.getStartLine().getHttpVersion(),
+                request.getHeaders().getFirst("Host").orElseThrow(),
+                request.getHeaders().getFirst("X-Parsarium").orElseThrow());
     }
 }
