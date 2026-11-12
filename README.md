@@ -192,8 +192,8 @@ evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
 
 The Java × WAV batch uses Maven 3.9+, JDK 25, macOS arm64 for the Bytedeco
-bindings, and SHA-256 locks of 57 regular, 5 native-module and 3 FFprobe-wrapper
-classpath JARs. Jaffree also uses a local FFprobe 9.0.2 executable whose SHA-256
+bindings, and SHA-256 locks of 57 regular, 5 native-module, 3 FFprobe-wrapper
+and 3 JAVE2 classpath JARs. Jaffree also uses a local FFprobe 9.0.2 executable whose SHA-256
 is recorded in the registry snapshot; set `PARSARIUM_FFPROBE_DIR` when it is not
 in `/opt/homebrew/bin`.
 `python3 controls/wav/make_control.py` generates a valid 556-byte mono
@@ -202,10 +202,11 @@ PCM control with 256 frames (SHA-256
 The longer control accommodates readers that reject a 52-byte WAV or expect
 at least 128 bytes in the header buffer. Run `python3 scripts/verify_java_wav.py`
 from the repository root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
-The recorded result is **13/13 third-party package paths and 2/2 JDK APIs passing**.
+The recorded result is **14/14 third-party package paths and 2/2 JDK APIs passing**.
 The JDK adapter compiles and runs without any third-party classpath. JDSP uses
 wavfile, Tika and TarsosDSP delegate WAV parsing to Java Sound, and the two
-Bytedeco and Jaffree paths share FFmpeg. Three of five latest bounded Maven query attempts
+Bytedeco, Jaffree and JAVE2 paths share FFmpeg. JAVE2's macOS arm64 FFmpeg
+executable is supplied by a checksum-locked Maven artifact. Three of five latest bounded Maven query attempts
 timed out; five hits (three unique) were saved across refreshes, and seven
 plausible leads remain unresolved. TarsosDSP 2.5 is pinned from its official
 non-Central repository; deps.dev does not provide a comparable count for it.

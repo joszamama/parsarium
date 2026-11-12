@@ -23,6 +23,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/java/wav"
 PARSERS = json.loads((DATA / "parsers.json").read_text())
 QUERIES = ["wav", "wav parser", "wav reader", "Java WAV", "audio wav"]
+AUXILIARY = [{
+    "name": "jave-nativebin-osxm1", "group": "ws.schild", "artifact": "jave-nativebin-osxm1",
+    "version": "4.2.0", "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses",
+}]
 
 
 def get(url: str, timeout: int = 12) -> bytes:
@@ -115,6 +119,7 @@ def main() -> None:
     with ThreadPoolExecutor(max_workers=7) as pool:
         releases = dict(pool.map(release, PARSERS))
         metrics = dict(pool.map(metric, PARSERS))
+        auxiliaries = dict(pool.map(release, AUXILIARY))
         natives = dict(pool.map(lambda spec: native_release(*spec), [
             ("ffmpeg-macosx-arm64", "org.bytedeco", "ffmpeg", "8.1.2-1.5.14", "macosx-arm64"),
             ("javacpp-macosx-arm64", "org.bytedeco", "javacpp", "1.5.14", "macosx-arm64"),
@@ -136,6 +141,7 @@ def main() -> None:
         "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
         "search_limit_per_query": 100,
         "search": searches, "releases": releases,
+        "auxiliary_releases": auxiliaries,
         "native_releases": natives,
         "external_tools": {"ffprobe": {"path": str(ffprobe), "version": ffprobe_version,
                                        "sha256": sha256(ffprobe.read_bytes()).hexdigest()}},
@@ -149,7 +155,8 @@ def main() -> None:
     }
     dest.write_text(json.dumps(result, indent=2) + "\n")
     print(f"Java WAV snapshot: {sum(len(s['hits']) for s in searches)} search hits; "
-          f"{len(releases)} pinned releases; {len(natives)} native artifacts")
+          f"{len(releases)} pinned releases; {len(natives)} native artifacts; "
+          f"{len(auxiliaries)} bundled executable artifact")
 
 
 if __name__ == "__main__":

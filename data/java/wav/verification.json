@@ -1,5 +1,5 @@
 {
-  "verified_at_utc": "2026-11-12T05:26:07.105313+00:00",
+  "verified_at_utc": "2026-11-12T05:29:17.416421+00:00",
   "control_sha256": "d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7",
   "java": "openjdk version \"25.0.5.0.3\" 2026-10-24",
   "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
@@ -7,7 +7,8 @@
   "locked_classpath_jars": {
     "main": 57,
     "bytedeco": 5,
-    "ffprobe": 3
+    "ffprobe": 3,
+    "jave": 3
   },
   "third_party": [
     {
@@ -157,6 +158,18 @@
       "control": "controls/wav/256-samples.wav",
       "output": {
         "codec": "pcm_s16le",
+        "sample_rate": 8000,
+        "channels": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "jave-core",
+      "version": "4.2.0",
+      "control": "controls/wav/256-samples.wav",
+      "output": {
+        "format": "wav",
+        "codec": "pcm_s16le ([1][0][0][0] / 0x0001)",
         "sample_rate": 8000,
         "channels": 1
       },

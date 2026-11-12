@@ -131,5 +131,15 @@
     "family": "Jaffree wrapper over local FFprobe/FFmpeg", "scope": "PCM codec, sample rate and channels",
     "adapter_module": "ffprobe", "control": "controls/wav/256-samples.wav",
     "expected_output": {"codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "jave-core", "group": "ws.schild", "artifact": "jave-core", "version": "4.2.0",
+    "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new MultimediaObject(File localWav).getInfo().getAudio()",
+    "documentation": "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar",
+    "documentation_archive_entry": "ws/schild/jave/MultimediaObject.html",
+    "family": "JAVE2 wrapper over bundled FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
+    "adapter_module": "jave", "control": "controls/wav/256-samples.wav",
+    "expected_output": {"format": "wav", "codec": "pcm_s16le ([1][0][0][0] / 0x0001)", "sample_rate": 8000, "channels": 1}
   }
 ]
