@@ -51,7 +51,7 @@ def main() -> None:
         assert sha256(Path(llhttp[path_key]).read_bytes()).hexdigest() == llhttp[hash_key]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
@@ -75,7 +75,13 @@ def main() -> None:
                          "-o", str(build / "mongoose-adapter")],
             "httpp": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                       "-I" + str(ADAPTER), "-I" + str(build / "httpp-2.0.0"),
-                      str(ADAPTER / "httpp.c"), "-o", str(build / "httpp-adapter")]}
+                      str(ADAPTER / "httpp.c"), "-o", str(build / "httpp-adapter")],
+            "HTTPParserC": ["cc", "-std=c11", "-Wall", "-Wextra", "-Wno-unused-parameter", "-Werror",
+                            "-I" + str(ADAPTER), "-I" + str(build / "HTTPParserC-9.2.0/Sources"),
+                            str(ADAPTER / "HTTPParserC.c"),
+                            *[str(build / f"HTTPParserC-9.2.0/Sources/{file}")
+                              for file in ("llhttp.c", "http.c", "api.c")],
+                            "-o", str(build / "HTTPParserC-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]

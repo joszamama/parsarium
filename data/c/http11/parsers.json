@@ -63,5 +63,18 @@
     "adapter": "adapters/c/http11/httpp.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+  },
+  {
+    "name": "HTTPParserC",
+    "version": "9.2.0",
+    "license": "MIT",
+    "license_evidence": "Pinned release LICENSE",
+    "documentation": "https://github.com/Building42/HTTPParserC#documentation",
+    "input_api": "Bundled llhttp_init(..., LLHTTP_REQUEST, ...); llhttp_execute(llhttp_t *, local request bytes, length); on_url and on_headers_complete callbacks",
+    "family": "Building42 packaged llhttp 9.2.0 generated C source; shares the llhttp engine and is a separate versioned distribution",
+    "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
+    "adapter": "adapters/c/http11/HTTPParserC.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
   }
 ]

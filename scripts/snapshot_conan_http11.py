@@ -11,7 +11,7 @@ DATA = ROOT / "data/c/http11"
 INDEX = "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1"
 REPOS = {"llhttp": "nodejs/llhttp", "http-parser": "nodejs/http-parser",
          "picohttpparser": "h2o/picohttpparser", "mongoose": "cesanta/mongoose",
-         "httpp": "cebem1nt/httpp"}
+         "httpp": "cebem1nt/httpp", "HTTPParserC": "Building42/HTTPParserC"}
 
 
 def get(url: str) -> dict:
