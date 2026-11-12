@@ -160,7 +160,7 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"rust/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
-    for format_name, label in (("zip", "ZIP"),):
+    for format_name, label in (("zip", "ZIP"), ("png", "PNG")):
         directory = ROOT / "data" / "java" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")

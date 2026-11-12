@@ -1,0 +1,62 @@
+{
+  "ecosystem": "Java",
+  "format": "PNG",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "name": "jdk-imageio",
+      "input_api": "ImageIO.read(File)",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/ImageIO.html",
+      "family": "JDK Image I/O PNG plugin",
+      "control": "controls/png/red-green.png",
+      "expected_output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+    },
+    {
+      "name": "jdk-imagereader",
+      "input_api": "ImageIO.getImageReadersByFormatName(\"PNG\"); ImageReader.setInput(ImageInputStream); read(0)",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/ImageReader.html",
+      "family": "JDK Image I/O PNG plugin",
+      "control": "controls/png/red-green.png",
+      "expected_output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+    },
+    {
+      "name": "jdk-imageicon",
+      "input_api": "new ImageIcon(byte[]).getImage()",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/swing/ImageIcon.html",
+      "family": "AWT Toolkit PNG reader via Swing ImageIcon",
+      "control": "controls/png/red-green.png",
+      "expected_output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+    },
+    {
+      "name": "jdk-toolkit",
+      "input_api": "Toolkit.getDefaultToolkit().createImage(byte[])",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/java/awt/Toolkit.html",
+      "family": "AWT Toolkit PNG reader",
+      "control": "controls/png/red-green.png",
+      "expected_output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+    }
+  ],
+  "limit": "ImageIO and ImageReader share the same JDK PNG plugin. ImageIcon and Toolkit use the AWT image loading path. All four are runtime APIs, not third-party packages; Files.readAllBytes only supplies bytes. This is a documented Java 21 PNG API inventory, not a claim that every possible wrapper API was enumerated.",
+  "png_support_documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/package-summary.html"
+}

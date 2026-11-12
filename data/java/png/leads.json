@@ -1,0 +1,80 @@
+[
+  {
+    "name": "org.openimaj:core-image",
+    "status": "unresolved",
+    "source": "https://openimaj.org/apidocs/org/openimaj/image/ImageUtilities.html",
+    "reason": "Official readMBF(File/InputStream) API is documented, but pinned 1.3.10 release could not resolve legacy HTTP-only transitive artifacts for a runnable control adapter."
+  },
+  {
+    "name": "nayuki/PNG-library",
+    "status": "unresolved",
+    "source": "https://github.com/nayuki/PNG-library",
+    "reason": "Project documents PngImage.read(File) and ImageDecoder.decode; no pinned release, reproducible source build, or within-Java adoption metric has been recorded here."
+  },
+  {
+    "name": "java-tools/javapng",
+    "status": "unresolved",
+    "source": "https://github.com/java-tools/javapng",
+    "reason": "Sixlegs PNG decoder source is format-specific; package release, local adapter, and adoption metric have not been verified."
+  },
+  {
+    "name": "Mike-C/lwjPNG",
+    "status": "unresolved",
+    "source": "https://github.com/Mike-C/lwjPNG",
+    "reason": "Project documents LwjPNG(InputStream) and PNG dimensions; pinned release and local control adapter remain unverified."
+  },
+  {
+    "name": "org.bytedeco:opencv-platform",
+    "status": "unresolved",
+    "source": "https://github.com/bytedeco/javacpp-presets",
+    "reason": "OpenCV JavaCPP binding can expose the same native OpenCV PNG decoder family as openpnp-opencv, but its pinned release, local control adapter, and metric have not been verified."
+  },
+  {
+    "name": "com.github.jai-imageio:jai-imageio-core",
+    "status": "unresolved",
+    "source": "https://github.com/jai-imageio/jai-imageio-core",
+    "reason": "ImageIO package may include a PNG reader; no release-specific documented local PNG path and runnable adapter have been established."
+  },
+  {
+    "name": "TwelveMonkeys:imageio-bmp",
+    "status": "excluded",
+    "source": "https://github.com/haraldk/TwelveMonkeys",
+    "reason": "Its BMP reader can delegate embedded PNG content to another ImageIO plugin. That does not establish parsing of a standalone PNG file by this package."
+  },
+  {
+    "name": "org.xbib.graphics:png",
+    "status": "unresolved",
+    "source": "https://search.maven.org/solrsearch/select?q=png&rows=100&wt=json",
+    "reason": "First saved Maven PNG search hit; no release-specific documented local PNG input API or control adapter has been established."
+  },
+  {
+    "name": "com.sksamuel.scrimage:scrimage-format-png",
+    "status": "unresolved",
+    "source": "https://sksamuel.github.io/scrimage/io/",
+    "reason": "Saved Maven PNG search hit; project documents image loading, but this Scala-oriented format module has not been checked for a distinct Java-callable PNG reader and valid control output."
+  },
+  {
+    "name": "com.facebook.spectrum:spectrum-png",
+    "status": "unresolved",
+    "source": "https://github.com/facebookincubator/spectrum/blob/main/docs/getting_started_android.md",
+    "reason": "Saved Maven PNG search hit with documented Android JNI image source API; compatible runtime and valid local control adapter have not been established."
+  },
+  {
+    "name": "org.glavo:simple-png",
+    "status": "excluded",
+    "source": "https://github.com/Glavo/SimplePNG",
+    "reason": "Saved Maven PNG hit is documented as a PNG creator/encoder; no input parser API is documented."
+  },
+  {
+    "name": "com.keypoint:png-encoder",
+    "status": "excluded",
+    "source": "https://search.maven.org/solrsearch/select?q=png&rows=100&wt=json",
+    "reason": "Saved Maven PNG hit names an encoder; no documented local PNG input parser has been established."
+  },
+  {
+    "name": "org.sterl.svg2png:svg2png",
+    "status": "excluded",
+    "source": "https://search.maven.org/solrsearch/select?q=png&rows=100&wt=json",
+    "reason": "Saved Maven PNG hit converts SVG into PNG output; that does not show standalone PNG parsing."
+  }
+]

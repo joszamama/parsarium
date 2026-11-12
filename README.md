@@ -8,8 +8,8 @@ Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASC
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
-ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP and an explicit 88-cell work matrix. There are 43 cells at
-the 20-parser target, two started below target, and 43 marked `not_started`;
+ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP and PNG and an explicit 88-cell work matrix. There are 44 cells at
+the 20-parser target, two started below target, and 42 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -112,6 +112,7 @@ python3 scripts/verify_rust_ascii_pnm.py
 python3 scripts/verify_rust_matrix_market.py
 python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/verify_java_zip.py
+python3 scripts/verify_java_png.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -148,6 +149,24 @@ underlying parser families; see the
 and [unresolved leads](data/java/zip/leads.json). `snapshot_maven_zip.py`
 refreshes registry and deps.dev evidence when needed; it is not part of the
 offline reproduction command.
+
+The Java × PNG batch uses Maven 3.9.16 and JDK 21 on macOS arm64. Its
+SHA-256 lock covers 86 resolved JARs, including the native JavaFX and OpenCV
+artifacts. `python3 scripts/verify_java_png.py` validates the PNG signature,
+chunk CRCs, IHDR fields, and two decoded RGBA pixels independently, rebuilds
+the adapter, checks all locked JAR and pinned release hashes, then runs the
+20 third-party package paths and four separate JDK APIs. The recorded result
+is **20/20 third-party paths and 4/4 JDK APIs passing**. Eight third-party
+paths report both pixels; twelve report format-aware PNG dimensions. Five
+bounded Maven Central searches saved 55 broad `png` hits; three timed out and
+one returned zero. Targeted release lookups and documented APIs supplied the
+verified candidates; broader discovery and higher-adoption lead review remain
+uncertain. Several paths share underlying Java ImageIO, JCodec, or iText code.
+See the [Java PNG ranking](data/java/png/ranking.md),
+[cell summary](data/java/png/cell.json), and
+[unresolved leads](data/java/png/leads.json). Run
+`python3 scripts/snapshot_maven_png.py` only when refreshing registry and
+deps.dev evidence.
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
 one second of silent 8 kHz AAC audio, title `Parsarium`, and creation time
@@ -880,6 +899,9 @@ uncertainty.
   release lookups, version-level direct-dependent counts, verified ZIP control
   outputs, ranking, and separate JDK 21 API results. The Java adapter and
   resolved-JAR hash lock live under `adapters/java/zip/`.
+- `data/java/png/`: the equivalent pinned Maven release, ranking, control,
+  and JDK 21 PNG API evidence. The macOS arm64 adapter and JAR lock live under
+  `adapters/java/png/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
