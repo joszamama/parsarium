@@ -41,6 +41,7 @@ def main() -> None:
                 destination.write_bytes(contents)
         print(f"{name}@{item['release']}: pinned source and files verified")
     prepare_libaudiofile()
+    prepare_sdl2()
 
 
 def prepare_libaudiofile() -> None:
@@ -76,6 +77,39 @@ def prepare_libaudiofile() -> None:
     assert contents.count(original) == 1
     source.write_text(contents.replace(original, patched))
     print(f"libaudiofile@{item['release']}: pinned source verified; signed-shift build patch applied")
+
+
+def prepare_sdl2() -> None:
+    item = LOCK["sdl2"]
+    archive_path = CACHE / "sdl2.tar.gz"
+    if archive_path.exists() and sha256(archive_path.read_bytes()).hexdigest() == item["source_sha256"]:
+        data = archive_path.read_bytes()
+    else:
+        request = Request(item["source_url"], headers={"User-Agent": "Parsarium-Research"})
+        with urlopen(request, timeout=60) as response:
+            data = response.read()
+        assert sha256(data).hexdigest() == item["source_sha256"]
+        archive_path.parent.mkdir(parents=True, exist_ok=True)
+        archive_path.write_bytes(data)
+    destination_root = CACHE / "source/sdl2"
+    skipped = []
+    with taropen(fileobj=BytesIO(data), mode="r:gz") as archive:
+        for member in archive:
+            parts = Path(member.name).parts
+            assert parts and parts[0] == "SDL2-2.32.10" and ".." not in parts
+            if member.issym():
+                skipped.append("/".join(parts[1:]))
+                continue
+            assert member.isfile(), member.name
+            stream = archive.extractfile(member)
+            assert stream is not None
+            destination = destination_root.joinpath(*parts[1:])
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(stream.read())
+            destination.chmod(member.mode)
+    assert sorted(skipped) == ["android-project-ant/AndroidManifest.xml",
+                               "android-project-ant/src"]
+    print(f"sdl2@{item['release']}: pinned source verified; two Android-only symlinks skipped")
 
 
 if __name__ == "__main__":

@@ -67,9 +67,26 @@ def main() -> None:
                                  "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
                                  "configure_command": shlex.join(configure),
                                  "library_sha256": sha256(library.read_bytes()).hexdigest()}
+            elif name == "sdl2":
+                source = SOURCE / "sdl2"
+                build = TARGET / "sdl2-build"
+                configure = ["cmake", "-S", str(source), "-B", str(build),
+                             "-DSDL_SHARED=ON", "-DSDL_STATIC=OFF", "-DSDL_TEST=OFF",
+                             "-DCMAKE_BUILD_TYPE=Release"]
+                run(configure)
+                run(["cmake", "--build", str(build), "-j", "4"])
+                library = build / "libSDL2-2.0.0.dylib"
+                command = ["cc", "-std=c11", "-O2",
+                           "-I" + str(source / "include"),
+                           "-I" + str(build / "include-config-release/SDL2"),
+                           str(ROOT / parser["adapter"]), str(library),
+                           "-Wl,-rpath," + str(build), "-o", str(TARGET / name)]
+                sources[name] = {"source_sha256": item["source_sha256"],
+                                 "configure_command": shlex.join(configure),
+                                 "library_sha256": sha256(library.read_bytes()).hexdigest()}
             else:
                 raise AssertionError(name)
-            if name != "libaudiofile":
+            if name in ("dr_wav", "miniaudio"):
                 sources[name] = {"source_sha256": item["source_sha256"],
                                  "files": {f["name"]: f["sha256"] for f in item["files"]}}
         else:

@@ -210,13 +210,20 @@
       "source_url": "https://github.com/libsdl-org/sdl2-compat/releases/download/release-2.32.74/sdl2-compat-2.32.74.tar.gz",
       "source_sha256": "ec68abde77e2e459c8abc4f9587b8976b5d2a657b2bfda2fb3a079b0f8924588",
       "license_evidence": "https://formulae.brew.sh/api/formula/sdl2-compat.json"
+    },
+    "sdl2": {
+      "version": "2.32.10",
+      "license": "Zlib",
+      "source_url": "https://www.libsdl.org/release/SDL2-2.32.10.tar.gz",
+      "source_sha256": "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165",
+      "license_evidence": "https://github.com/libsdl-org/SDL/blob/release-2.32.10/LICENSE.txt"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context. SDL2-compat exposes SDL2 WAV loading via SDL3 implementation; its repository stars measure the compatibility package, not a separate engine.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context. SDL2-compat exposes SDL2 WAV loading via SDL3 implementation; its repository stars measure the compatibility package, not a separate engine. SDL2 and SDL3 are releases from one upstream repository and share one star count; this is not release-specific popularity.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -293,11 +300,16 @@
         "stars": 221,
         "repository": "https://github.com/libsdl-org/sdl2-compat",
         "source": "https://api.github.com/repos/libsdl-org/sdl2-compat"
+      },
+      "sdl2": {
+        "stars": 16973,
+        "repository": "https://github.com/libsdl-org/SDL",
+        "source": "https://api.github.com/repos/libsdl-org/SDL"
       }
     },
     "captured_between_utc": [
       "2026-11-12T10:25:21.715408+00:00",
-      "2026-11-12T10:54:48.332982+00:00"
+      "2026-11-12T10:58:11.331430+00:00"
     ]
   },
   "targeted_documentation": [
@@ -318,6 +330,8 @@
     "https://liballeg.org/a5docs/5.2.11.3/audio.html",
     "https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV",
     "https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h",
-    "https://wiki.libsdl.org/SDL2/SDL_LoadWAV"
+    "https://wiki.libsdl.org/SDL2/SDL_LoadWAV",
+    "https://www.libsdl.org/release/SDL2-2.32.10.tar.gz",
+    "https://github.com/libsdl-org/SDL/blob/release-2.32.10/src/audio/SDL_wave.c"
   ]
 }
