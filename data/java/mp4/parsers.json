@@ -1,70 +1,252 @@
 [
   {
-    "name": "isoparser", "group": "org.mp4parser", "artifact": "isoparser", "version": "1.9.56",
-    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "name": "isoparser",
+    "group": "org.mp4parser",
+    "artifact": "isoparser",
+    "version": "1.9.56",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
     "input_api": "new IsoFile(File localMp4), getMovieBox().getTrackCount() and getMovieHeaderBox().getTimescale()",
     "documentation": "https://repo.maven.apache.org/maven2/org/mp4parser/isoparser/1.9.56/isoparser-1.9.56-javadoc.jar",
     "documentation_archive_entry": "org/mp4parser/IsoFile.html",
-    "family": "sannies MP4Parser ISO BMFF box parser", "scope": "movie track count and timescale",
-    "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "timescale": 8000}
+    "family": "sannies MP4Parser ISO BMFF box parser",
+    "scope": "movie track count and timescale",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "timescale": 8000
+    }
   },
   {
-    "name": "metadata-extractor", "group": "com.drewnoakes", "artifact": "metadata-extractor", "version": "2.22.0",
-    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "name": "metadata-extractor",
+    "group": "com.drewnoakes",
+    "artifact": "metadata-extractor",
+    "version": "2.22.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
     "input_api": "Mp4MetadataReader.readMetadata(File localMp4), Mp4VideoDirectory TAG_WIDTH and TAG_HEIGHT",
     "documentation": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.22.0/metadata-extractor-2.22.0-javadoc.jar",
     "documentation_archive_entry": "com/drew/imaging/mp4/Mp4MetadataReader.html",
-    "family": "metadata-extractor MP4 box reader", "scope": "parsed video width and height",
-    "control": "controls/mp4/red-av.mp4", "expected_output": {"width": 2, "height": 2}
+    "family": "metadata-extractor MP4 box reader",
+    "scope": "parsed video width and height",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "width": 2,
+      "height": 2
+    }
   },
   {
-    "name": "jcodec", "group": "org.jcodec", "artifact": "jcodec", "version": "0.2.5",
-    "license": "BSD-2-Clause", "license_evidence": "Maven POM FreeBSD license and project LICENSE",
+    "name": "jcodec",
+    "group": "org.jcodec",
+    "artifact": "jcodec",
+    "version": "0.2.5",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Maven POM FreeBSD license and project LICENSE",
     "input_api": "MP4Util.parseMovie(File localMp4), MovieBox.getTracks() and TrakBox.getCodedSize()",
     "documentation": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar",
     "documentation_archive_entry": "org/jcodec/containers/mp4/MP4Util.html",
-    "family": "JCodec MP4 box parser", "scope": "track count and video dimensions",
-    "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "video_width": 2, "video_height": 2}
+    "family": "JCodec MP4 box parser",
+    "scope": "track count and video dimensions",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "video_width": 2,
+      "video_height": 2
+    }
   },
   {
-    "name": "muxer", "group": "org.mp4parser", "artifact": "muxer", "version": "1.9.56",
-    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "name": "muxer",
+    "group": "org.mp4parser",
+    "artifact": "muxer",
+    "version": "1.9.56",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
     "input_api": "MovieCreator.build(String localMp4Path), Movie.getTracks() and Track.getHandler()",
     "documentation": "https://repo.maven.apache.org/maven2/org/mp4parser/muxer/1.9.56/muxer-1.9.56-javadoc.jar",
     "documentation_archive_entry": "org/mp4parser/muxer/container/mp4/MovieCreator.html",
-    "family": "sannies MP4Parser movie builder over isoparser", "scope": "video and audio track handlers",
-    "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "handlers": ["vide", "soun"]}
+    "family": "sannies MP4Parser movie builder over isoparser",
+    "scope": "video and audio track handlers",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "handlers": [
+        "vide",
+        "soun"
+      ]
+    }
   },
   {
-    "name": "tika-mp4", "group": "org.apache.tika", "artifact": "tika-parser-audiovideo-module", "version": "4.2.0",
-    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "name": "tika-mp4",
+    "group": "org.apache.tika",
+    "artifact": "tika-parser-audiovideo-module",
+    "version": "4.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven JAR META-INF/LICENSE",
     "input_api": "MP4Parser.parse(TikaInputStream localMp4,ContentHandler,Metadata,ParseContext)",
     "documentation": "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-javadoc.jar",
     "documentation_archive_entry": "org/apache/tika/parser/mp4/MP4Parser.html",
-    "family": "Apache Tika MP4Parser over metadata-extractor", "scope": "parsed video dimensions, audio properties and title",
+    "family": "Apache Tika MP4Parser over metadata-extractor",
+    "scope": "parsed video dimensions, audio properties and title",
     "control": "controls/mp4/red-av.mp4",
-    "expected_output": {"width": 2, "height": 2, "sample_rate": 8000, "channels": 1, "title": "Parsarium"}
+    "expected_output": {
+      "width": 2,
+      "height": 2,
+      "sample_rate": 8000,
+      "channels": 1,
+      "title": "Parsarium"
+    }
   },
   {
-    "name": "javacv", "group": "org.bytedeco", "artifact": "javacv", "version": "1.5.14",
+    "name": "javacv",
+    "group": "org.bytedeco",
+    "artifact": "javacv",
+    "version": "1.5.14",
     "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
     "license_evidence": "Maven POM licenses; native FFmpeg notices apply separately",
     "input_api": "new FFmpegFrameGrabber(File localMp4).start(), getFormat(), getImageWidth(), getImageHeight(), getSampleRate(), getAudioChannels()",
     "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar",
     "documentation_archive_entry": "org/bytedeco/javacv/FFmpegFrameGrabber.html",
-    "family": "JavaCV wrapper over FFmpeg demuxer", "scope": "MP4 demuxer format, video dimensions, AAC sample rate and channels",
+    "family": "JavaCV wrapper over FFmpeg demuxer",
+    "scope": "MP4 demuxer format, video dimensions, AAC sample rate and channels",
     "control": "controls/mp4/red-av.mp4",
-    "expected_output": {"format": "mov,mp4,m4a,3gp,3g2,mj2", "width": 2, "height": 2, "sample_rate": 8000, "channels": 1}
+    "expected_output": {
+      "format": "mov,mp4,m4a,3gp,3g2,mj2",
+      "width": 2,
+      "height": 2,
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "bytedeco-ffmpeg", "group": "org.bytedeco", "artifact": "ffmpeg", "version": "8.1.2-1.5.14",
+    "name": "bytedeco-ffmpeg",
+    "group": "org.bytedeco",
+    "artifact": "ffmpeg",
+    "version": "8.1.2-1.5.14",
     "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
     "license_evidence": "Parent javacpp-presets Maven POM licenses; native FFmpeg notices apply separately",
     "input_api": "avformat_open_input(AVFormatContext,String localMp4Path,...), avformat_find_stream_info(...) and AVStream.codecpar()",
     "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar",
     "documentation_archive_entry": "org/bytedeco/ffmpeg/global/avformat.html",
-    "family": "Bytedeco binding to FFmpeg demuxer", "scope": "MP4 demuxer format, two streams and video dimensions",
+    "family": "Bytedeco binding to FFmpeg demuxer",
+    "scope": "MP4 demuxer format, two streams and video dimensions",
     "control": "controls/mp4/red-av.mp4",
-    "expected_output": {"format": "mov,mp4,m4a,3gp,3g2,mj2", "streams": 2, "width": 2, "height": 2}
+    "expected_output": {
+      "format": "mov,mp4,m4a,3gp,3g2,mj2",
+      "streams": 2,
+      "width": 2,
+      "height": 2
+    }
+  },
+  {
+    "name": "jaffree",
+    "group": "com.github.kokorin.jaffree",
+    "artifact": "jaffree",
+    "version": "2024.08.29",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "FFprobe.atPath(Path localExecutableDir).setShowStreams(true).setInput(Path localMp4).execute().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-javadoc.jar",
+    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
+    "family": "Jaffree wrapper over local FFprobe/FFmpeg",
+    "scope": "MP4 H.264/AAC stream codecs, video dimensions and audio rate",
+    "adapter_module": "ffprobe",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "video_codec": "h264",
+      "width": 2,
+      "height": 2,
+      "audio_codec": "aac",
+      "sample_rate": 8000
+    }
+  },
+  {
+    "name": "bramp-ffmpeg",
+    "group": "net.bramp.ffmpeg",
+    "artifact": "ffmpeg",
+    "version": "0.9.2",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new FFprobe(String localExecutable).probe(String localMp4).getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar",
+    "documentation_archive_entry": "net/bramp/ffmpeg/FFprobe.html",
+    "family": "bramp FFprobe CLI wrapper over FFmpeg",
+    "scope": "MP4 demuxer format, H.264/AAC stream codecs, video dimensions and audio rate",
+    "adapter_module": "bramp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "format": "mov,mp4,m4a,3gp,3g2,mj2",
+      "video_codec": "h264",
+      "width": 2,
+      "height": 2,
+      "audio_codec": "aac",
+      "sample_rate": 8000
+    }
+  },
+  {
+    "name": "jave-core",
+    "group": "ws.schild",
+    "artifact": "jave-core",
+    "version": "4.2.0",
+    "license": "GPL-3.0-only",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new MultimediaObject(File localMp4).getInfo().getVideo() and getAudio()",
+    "documentation": "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar",
+    "documentation_archive_entry": "ws/schild/jave/MultimediaObject.html",
+    "family": "JAVE2 wrapper over bundled FFmpeg",
+    "scope": "MP4 format, video dimensions, audio rate and channels",
+    "adapter_module": "jave",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "format": "mov",
+      "width": 2,
+      "height": 2,
+      "sample_rate": 8000,
+      "channels": 1
+    }
+  },
+  {
+    "name": "imagic-ffmpeg-java",
+    "group": "ch.imagic",
+    "artifact": "ffmpeg-java",
+    "version": "0.1.2",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new FFprobe(Executor,File localExecutable).probe(File localMp4).get().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar",
+    "documentation_archive_entry": "ch/imagic/ffmpeg/FFprobe.html",
+    "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg",
+    "scope": "MP4 demuxer format, H.264/AAC stream codecs, video dimensions and audio rate",
+    "adapter_module": "imagic",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "format": "mov,mp4,m4a,3gp,3g2,mj2",
+      "video_codec": "h264",
+      "width": 2,
+      "height": 2,
+      "audio_codec": "aac",
+      "sample_rate": 8000
+    }
+  },
+  {
+    "name": "v47-jaffree",
+    "group": "io.v47.jaffree",
+    "artifact": "jaffree",
+    "version": "2.1.0",
+    "license": "GPL-3.0-only",
+    "license_evidence": "Maven POM licenses and fork project LICENSE",
+    "input_api": "FFprobe.atPath(Path localBin).setShowStreams(true).setInput(Path localMp4).execute().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar",
+    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
+    "family": "v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg",
+    "scope": "MP4 H.264/AAC stream codecs, video dimensions and audio rate",
+    "adapter_module": "v47",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "video_codec": "h264",
+      "width": 2,
+      "height": 2,
+      "audio_codec": "aac",
+      "sample_rate": 8000
+    }
   }
 ]

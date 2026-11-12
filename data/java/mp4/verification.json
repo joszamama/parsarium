@@ -1,9 +1,16 @@
 {
-  "verified_at_utc": "2026-11-12T06:10:57.643478+00:00",
+  "verified_at_utc": "2026-11-12T06:16:11.844875+00:00",
   "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
   "java": "openjdk version \"25.0.5.0.3\" 2026-10-24",
   "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
-  "locked_classpath_jars": 22,
+  "locked_classpath_jars_by_module": {
+    "main": 22,
+    "ffprobe": 3,
+    "bramp": 12,
+    "jave": 3,
+    "imagic": 3,
+    "v47": 7
+  },
   "third_party": [
     {
       "package": "isoparser",
@@ -84,6 +91,73 @@
         "streams": 2,
         "width": 2,
         "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "jaffree",
+      "version": "2024.08.29",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "video_codec": "h264",
+        "width": 2,
+        "height": 2,
+        "audio_codec": "aac",
+        "sample_rate": 8000
+      },
+      "pass": true
+    },
+    {
+      "package": "bramp-ffmpeg",
+      "version": "0.9.2",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "video_codec": "h264",
+        "width": 2,
+        "height": 2,
+        "audio_codec": "aac",
+        "sample_rate": 8000
+      },
+      "pass": true
+    },
+    {
+      "package": "jave-core",
+      "version": "4.2.0",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "format": "mov",
+        "width": 2,
+        "height": 2,
+        "sample_rate": 8000,
+        "channels": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "imagic-ffmpeg-java",
+      "version": "0.1.2",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "video_codec": "h264",
+        "width": 2,
+        "height": 2,
+        "audio_codec": "aac",
+        "sample_rate": 8000
+      },
+      "pass": true
+    },
+    {
+      "package": "v47-jaffree",
+      "version": "2.1.0",
+      "control": "controls/mp4/red-av.mp4",
+      "output": {
+        "video_codec": "h264",
+        "width": 2,
+        "height": 2,
+        "audio_codec": "aac",
+        "sample_rate": 8000
       },
       "pass": true
     }

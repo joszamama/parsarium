@@ -22,6 +22,7 @@ PARSERS = json.loads((DATA / "parsers.json").read_text())
 QUERIES = ["mp4", "mp4 parser", "isoparser", "Java MP4", "ISO base media"]
 NATIVE_ARTIFACTS = [("ffmpeg-macosx-arm64", "ffmpeg", "8.1.2-1.5.14"),
                     ("javacpp-macosx-arm64", "javacpp", "1.5.14")]
+AUXILIARY_ARTIFACTS = [("jave-nativebin-osxm1", "ws.schild", "jave-nativebin-osxm1", "4.2.0")]
 
 
 def get(url: str, timeout: int = 12) -> bytes:
@@ -64,6 +65,21 @@ def native_release(item: tuple[str, str, str]) -> tuple[str, dict]:
                   "pom_sha256": sha256(pom).hexdigest()}
 
 
+def auxiliary_release(item: tuple[str, str, str, str]) -> tuple[str, dict]:
+    name, group, artifact, version = item
+    base = f"https://repo.maven.apache.org/maven2/{group.replace('.', '/')}/{artifact}/{version}/"
+    stem = f"{artifact}-{version}"
+    local = Path.home() / ".m2/repository" / group.replace(".", "/") / artifact / version
+    jar, pom = (local / f"{stem}.jar").read_bytes(), (local / f"{stem}.pom").read_bytes()
+    assert sha1(jar).hexdigest() == get(base + stem + ".jar.sha1").decode().split()[0]
+    assert sha1(pom).hexdigest() == get(base + stem + ".pom.sha1").decode().split()[0]
+    ET.fromstring(pom)
+    return name, {"group": group, "artifact": artifact, "version": version,
+                  "jar_url": base + stem + ".jar", "jar_sha256": sha256(jar).hexdigest(),
+                  "pom_url": base + stem + ".pom", "pom_sha256": sha256(pom).hexdigest(),
+                  "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses"}
+
+
 def metric(parser: dict) -> tuple[str, dict]:
     name, group, artifact, version = (parser[k] for k in ("name", "group", "artifact", "version"))
     url = ("https://api.deps.dev/v3alpha/systems/MAVEN/packages/"
@@ -100,6 +116,7 @@ def main() -> None:
     with ThreadPoolExecutor(max_workers=6) as pool:
         releases = dict(pool.map(release, PARSERS))
         native_releases = dict(pool.map(native_release, NATIVE_ARTIFACTS))
+        auxiliary_releases = dict(pool.map(auxiliary_release, AUXILIARY_ARTIFACTS))
         metrics = dict(pool.map(metric, PARSERS))
         searches = list(pool.map(search, QUERIES))
     dest = DATA / "registry-snapshot.json"
@@ -118,6 +135,8 @@ def main() -> None:
         "search_limit_per_query": 100,
         "search": searches, "releases": releases,
         "native_releases": native_releases,
+        "auxiliary_releases": auxiliary_releases,
+        "external_tools": {"ffprobe": json.loads((ROOT / "data/java/wav/registry-snapshot.json").read_text())["external_tools"]["ffprobe"]},
         "popularity_metric": {
             "name": "deps.dev exact-version directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",

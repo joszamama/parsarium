@@ -193,14 +193,18 @@ evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
 
 The Java × MP4 starter batch uses Maven 3.9+, JDK 25, and macOS arm64 for
-the pinned native FFmpeg bindings. Its classpath has 22 SHA-256-locked JARs. Run
+the pinned native FFmpeg bindings. Its six module classpaths have 22, 3, 12,
+3, 3, and 7 SHA-256-locked JARs. Run
 `python3 controls/mp4/make_control.py` to restore the valid 2×2 H.264/AAC
 control, then `python3 scripts/verify_java_mp4.py` from the repository root.
 Set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere. The recorded result is
-**7/7 third-party package paths passing**: MP4Parser's isoparser and muxer
-artifacts, metadata-extractor, JCodec, Apache Tika's MP4 parser, JavaCV, and
-the Bytedeco FFmpeg binding. The two MP4Parser paths share one underlying
-family; Tika uses metadata-extractor; JavaCV and Bytedeco share FFmpeg.
+**12/12 third-party package paths passing**: MP4Parser's isoparser and muxer
+artifacts, metadata-extractor, JCodec, Apache Tika's MP4 parser, JavaCV,
+the Bytedeco FFmpeg binding, Jaffree, bramp FFmpeg, JAVE2, Imagic FFmpeg Java,
+and the v47 Jaffree fork. The two MP4Parser paths share one underlying family;
+Tika uses metadata-extractor; seven paths rely on FFmpeg or FFprobe. Set
+`PARSARIUM_FFPROBE_DIR` if the pinned FFprobe 9.0.2 binary is outside
+`/opt/homebrew/bin`.
 A JDK-only probe found no ImageIO or Java Sound reader for the control;
 the separate official API inventory records no documented Java SE 25 MP4
 parser. Five bounded Maven searches saved 124 hits, 120 unique;
