@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 import json
 import os
+import platform
 import struct
 import subprocess
 
@@ -55,6 +56,11 @@ def check_releases(snapshot: dict) -> None:
         stem = f"{artifact}-{version}"
         assert sha256((base / f"{stem}.jar").read_bytes()).hexdigest() == release["jar_sha256"], name
         assert sha256((base / f"{stem}.pom").read_bytes()).hexdigest() == release["pom_sha256"], name
+    for name, release in snapshot.get("native_releases", {}).items():
+        group, artifact, version, classifier = (release[k] for k in ("group", "artifact", "version", "classifier"))
+        base = repository / group.replace(".", "/") / artifact / version
+        assert sha256((base / f"{artifact}-{version}-{classifier}.jar").read_bytes()).hexdigest() == release["jar_sha256"], name
+        assert sha256((base / f"{artifact}-{version}.pom").read_bytes()).hexdigest() == release["pom_sha256"], name
 
 
 def run(command: list[str], expected: dict) -> dict:
@@ -67,7 +73,7 @@ def run(command: list[str], expected: dict) -> dict:
 
 
 def main() -> None:
-    assert JAVA_HOME.exists()
+    assert JAVA_HOME.exists() and platform.system() == "Darwin" and platform.machine() == "arm64"
     check_control()
     env = {**os.environ, "JAVA_HOME": str(JAVA_HOME),
            "PATH": str(JAVA_HOME / "bin") + os.pathsep + os.environ["PATH"]}
@@ -80,7 +86,7 @@ def main() -> None:
     check_releases(snapshot)
     third_party = []
     for parser in parsers:
-        output = run([java, "-cp", classpath, "org.parsarium.Mp4Adapter",
+        output = run([java, "--enable-native-access=ALL-UNNAMED", "-cp", classpath, "org.parsarium.Mp4Adapter",
                       parser["name"], str(ROOT / parser["control"])], parser["expected_output"])
         third_party.append({"package": parser["name"], "version": parser["version"],
                             "control": parser["control"], "output": output, "pass": True})

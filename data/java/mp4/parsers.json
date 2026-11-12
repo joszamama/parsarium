@@ -44,5 +44,27 @@
     "family": "Apache Tika MP4Parser over metadata-extractor", "scope": "parsed video dimensions, audio properties and title",
     "control": "controls/mp4/red-av.mp4",
     "expected_output": {"width": 2, "height": 2, "sample_rate": 8000, "channels": 1, "title": "Parsarium"}
+  },
+  {
+    "name": "javacv", "group": "org.bytedeco", "artifact": "javacv", "version": "1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+    "license_evidence": "Maven POM licenses; native FFmpeg notices apply separately",
+    "input_api": "new FFmpegFrameGrabber(File localMp4).start(), getFormat(), getImageWidth(), getImageHeight(), getSampleRate(), getAudioChannels()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar",
+    "documentation_archive_entry": "org/bytedeco/javacv/FFmpegFrameGrabber.html",
+    "family": "JavaCV wrapper over FFmpeg demuxer", "scope": "MP4 demuxer format, video dimensions, AAC sample rate and channels",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {"format": "mov,mp4,m4a,3gp,3g2,mj2", "width": 2, "height": 2, "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "bytedeco-ffmpeg", "group": "org.bytedeco", "artifact": "ffmpeg", "version": "8.1.2-1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+    "license_evidence": "Parent javacpp-presets Maven POM licenses; native FFmpeg notices apply separately",
+    "input_api": "avformat_open_input(AVFormatContext,String localMp4Path,...), avformat_find_stream_info(...) and AVStream.codecpar()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar",
+    "documentation_archive_entry": "org/bytedeco/ffmpeg/global/avformat.html",
+    "family": "Bytedeco binding to FFmpeg demuxer", "scope": "MP4 demuxer format, two streams and video dimensions",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {"format": "mov,mp4,m4a,3gp,3g2,mj2", "streams": 2, "width": 2, "height": 2}
   }
 ]

@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/java/mp4"
 PARSERS = json.loads((DATA / "parsers.json").read_text())
 QUERIES = ["mp4", "mp4 parser", "isoparser", "Java MP4", "ISO base media"]
+NATIVE_ARTIFACTS = [("ffmpeg-macosx-arm64", "ffmpeg", "8.1.2-1.5.14"),
+                    ("javacpp-macosx-arm64", "javacpp", "1.5.14")]
 
 
 def get(url: str, timeout: int = 12) -> bytes:
@@ -44,6 +46,22 @@ def release(parser: dict) -> tuple[str, dict]:
         "pom_url": base + stem + ".pom", "pom_sha256": sha256(pom).hexdigest(),
         "license": parser["license"], "license_evidence": parser["license_evidence"],
     }
+
+
+def native_release(item: tuple[str, str, str]) -> tuple[str, dict]:
+    name, artifact, version = item
+    group, classifier = "org.bytedeco", "macosx-arm64"
+    base = f"https://repo.maven.apache.org/maven2/org/bytedeco/{artifact}/{version}/"
+    stem = f"{artifact}-{version}"
+    local = Path.home() / ".m2/repository/org/bytedeco" / artifact / version
+    jar = (local / f"{stem}-{classifier}.jar").read_bytes()
+    pom = (local / f"{stem}.pom").read_bytes()
+    assert sha1(jar).hexdigest() == get(base + f"{stem}-{classifier}.jar.sha1").decode().split()[0]
+    assert sha1(pom).hexdigest() == get(base + stem + ".pom.sha1").decode().split()[0]
+    return name, {"group": group, "artifact": artifact, "version": version,
+                  "classifier": classifier, "jar_url": base + f"{stem}-{classifier}.jar",
+                  "jar_sha256": sha256(jar).hexdigest(), "pom_url": base + stem + ".pom",
+                  "pom_sha256": sha256(pom).hexdigest()}
 
 
 def metric(parser: dict) -> tuple[str, dict]:
@@ -81,6 +99,7 @@ def search(query: str) -> dict:
 def main() -> None:
     with ThreadPoolExecutor(max_workers=6) as pool:
         releases = dict(pool.map(release, PARSERS))
+        native_releases = dict(pool.map(native_release, NATIVE_ARTIFACTS))
         metrics = dict(pool.map(metric, PARSERS))
         searches = list(pool.map(search, QUERIES))
     dest = DATA / "registry-snapshot.json"
@@ -98,6 +117,7 @@ def main() -> None:
         "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
         "search_limit_per_query": 100,
         "search": searches, "releases": releases,
+        "native_releases": native_releases,
         "popularity_metric": {
             "name": "deps.dev exact-version directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",

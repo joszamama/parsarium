@@ -51,6 +51,29 @@ public final class Mp4Adapter {
                     Integer.parseInt(metadata.get("xmpDM:audioSampleRate")),
                     Integer.parseInt(metadata.get("audio:channels")), metadata.get("dc:title"));
             }
+            case "javacv" -> {
+                try (var grabber = new org.bytedeco.javacv.FFmpegFrameGrabber(file)) {
+                    grabber.start();
+                    System.out.printf("{\"format\":\"%s\",\"width\":%d,\"height\":%d,\"sample_rate\":%d,\"channels\":%d}%n",
+                        grabber.getFormat(), grabber.getImageWidth(), grabber.getImageHeight(),
+                        grabber.getSampleRate(), grabber.getAudioChannels());
+                }
+            }
+            case "bytedeco-ffmpeg" -> {
+                var context = org.bytedeco.ffmpeg.global.avformat.avformat_alloc_context();
+                if (org.bytedeco.ffmpeg.global.avformat.avformat_open_input(context, file.getAbsolutePath(), null, null) < 0)
+                    throw new IllegalStateException("FFmpeg could not open MP4 file");
+                try {
+                    if (org.bytedeco.ffmpeg.global.avformat.avformat_find_stream_info(context,
+                        (org.bytedeco.ffmpeg.avutil.AVDictionary) null) < 0)
+                        throw new IllegalStateException("FFmpeg could not read stream info");
+                    var video = context.streams(0).codecpar();
+                    System.out.printf("{\"format\":\"%s\",\"streams\":%d,\"width\":%d,\"height\":%d}%n",
+                        context.iformat().name().getString(), context.nb_streams(), video.width(), video.height());
+                } finally {
+                    org.bytedeco.ffmpeg.global.avformat.avformat_close_input(context);
+                }
+            }
             default -> throw new IllegalArgumentException("unknown mode: " + args[0]);
         }
     }
