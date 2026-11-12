@@ -12,8 +12,7 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP has a verified 20-parser batch, and PHP × PNG has a verified
-below-target batch. There are 51 cells at the 20-parser target, four started
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 52 cells at the 20-parser target, three started
 below target, and 33 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -188,13 +187,15 @@ remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
 exact search limits and uncertainty. Reproduction requires PHP 8.5 with zip
 and Phar extensions, plus Composer 2; the verifier installs locked packages.
 
-The PHP × PNG verifier installs fifteen exact Composer releases from one lockfile.
-All **15/15 third-party paths and 4/4 bundled PHP APIs passed** the valid 2×1
-red/green PNG control. Thirteen paths use PHP GD for decoding, including Glide
-through Intervention Image and Yii Image through Imagine. FastImageSize reads PNG
-dimensions from headers in PHP; php-vips uses installed libvips 8.18.7 through PHP FFI. The bundled API
-inventory keeps header dimension readers separate from pixel decoders. Three
-Packagist searches saved 300 discovery hits; one high-adoption Laravel lead remains unresolved. The
+The PHP × PNG verifier installs twenty exact Composer releases from two lockfiles.
+All **20/20 third-party paths and 4/4 bundled PHP APIs passed** the valid 2×1
+red/green PNG control. Eighteen paths share PHP GD decoding directly or through
+Intervention Image and Imagine; FastImageSize reads PNG dimensions from headers
+in PHP; php-vips uses installed libvips 8.18.7 through PHP FFI. The second lock
+isolates ImageHash's Intervention Image 3 dependency from version 4 in the main
+lock. The bundled API inventory keeps header dimension readers separate from
+pixel decoders. Three Packagist searches saved 300 discovery hits. Six plausible
+leads remain unresolved, and two aliases were rejected as duplicate source. The
 [PHP PNG cell summary](data/php/png/cell.json) records the search limits and
 uncertainty. Reproduction requires PHP 8.5 with GD and FFI, libvips 8.18.7,
 and Composer 2.

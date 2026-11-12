@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "png",
-  "status": "verified_below_goal_partial_search",
+  "status": "verified_goal_met_partial_search",
   "working_target": 20,
   "ceiling": 30,
-  "verified_third_party_count": 15,
+  "verified_third_party_count": 20,
   "verified_standard_or_runtime_count": 4,
   "search_queries": [
     "png",
@@ -14,8 +14,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 300,
   "unique_search_hits": 273,
-  "unresolved_documentation_leads": 1,
-  "uncertainty": "Fifteen pinned Composer package paths with documented local PNG input APIs passed the valid 2\u00d71 red/green PNG control. Thirteen paths use PHP GD to decode PNG, including Glide through Intervention Image and Yii Image through Imagine; FastImageSize parses PNG dimensions and type from headers in PHP; php-vips delegates to installed libvips 8.18.7 via PHP FFI. ColorExtractor and ColorThief returned both control colors; WebPConvert decoded PNG and encoded WebP. Four bundled PHP APIs passed separately. Three Packagist searches saved the first 100 results each, 300 hits and 273 distinct names; relevance ranking, query tails, and names omitting search words can hide parsers. One high-adoption Laravel wrapper remains unresolved. Lifetime package downloads rank only verified PHP paths and do not measure PNG API use. This batch is 15 of the 20-path working goal and does not establish a most-used top fifteen or exhaustive PNG coverage. The control exercises one small truecolor PNG; no malformed-input, vulnerability, or resource-use experiments were run.",
+  "unresolved_documentation_leads": 6,
+  "uncertainty": "Twenty pinned Composer package paths with documented local PNG input APIs passed the valid 2\u00d71 red/green PNG control; four bundled PHP APIs passed separately. Eighteen package paths share PHP GD decoding directly or through Intervention Image or Imagine, FastImageSize parses PNG dimensions from headers in PHP, and php-vips uses libvips 8.18.7 through FFI. This is 20 distinct counted package paths, not 20 independent decoder engines. A separate lock pins ImageHash with Intervention Image 3; the main lock uses Intervention Image 4. Three Packagist searches saved the first 100 results each, 300 hits and 273 distinct names. Four higher-download plausible leads and two environment-limited leads remain unresolved; two package-name aliases were rejected as duplicates. Thus the 20-path working goal is met, but the most-used top twenty and exhaustive PNG coverage are not established. Lifetime package downloads rank only verified PHP paths and do not measure PNG API use; Nette Utils downloads include unrelated APIs. The control exercises one small truecolor PNG; no malformed-input, vulnerability, or resource-use experiments were run.",
   "third_party_evidence": "data/php/png/parsers.json",
   "third_party_control_results": "data/php/png/verification.json",
   "runtime_evidence": "data/php/png/standard.json",

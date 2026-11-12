@@ -28,16 +28,21 @@ def main() -> None:
     assert len(parsers) == cell["verified_third_party_count"]
     assert len(standard["verified_apis"]) == cell["verified_standard_or_runtime_count"]
 
-    lock_path = ROOT / "adapters/php/png/composer.lock"
-    execute(["composer", "install", "--no-interaction", "--no-progress",
-             "--prefer-dist", "--no-plugins", "--no-scripts", "--no-dev"], lock_path.parent)
-    locked = {item["name"]: item for item in json.loads(lock_path.read_text())["packages"]}
+    lock_paths = sorted({parser["composer_lock"] for parser in parsers})
+    locked_by_path = {}
+    for path in lock_paths:
+        lock_path = ROOT / path
+        execute(["composer", "install", "--no-interaction", "--no-progress",
+                 "--prefer-dist", "--no-plugins", "--no-scripts", "--no-dev"], lock_path.parent)
+        locked_by_path[path] = {
+            item["name"]: item for item in json.loads(lock_path.read_text())["packages"]
+        }
 
     rows = []
     for parser in parsers:
         name = parser["name"]
         release = snapshot["releases"][name]
-        installed = locked[name]
+        installed = locked_by_path[parser["composer_lock"]][name]
         assert parser["version"] == release["version"] == installed["version"]
         assert release["source_reference"] == installed["source"]["reference"]
         command = ["php", "-d", "display_errors=0"]
@@ -49,6 +54,7 @@ def main() -> None:
         assert output == parser["expected_output"], name
         rows.append({"package": name, "version": parser["version"],
                      "composer_lock": parser["composer_lock"],
+                     "composer_lock_sha256": sha256((ROOT / parser["composer_lock"]).read_bytes()).hexdigest(),
                      "source_reference": installed["source"]["reference"],
                      "control": parser["control"], "command": shlex.join(command),
                      "output": output, "stderr": run.stderr.strip(), "pass": True})
@@ -74,8 +80,8 @@ def main() -> None:
               "platform": platform.platform(), "php_version": versions[0],
               "gd_version": versions[1], "libvips_version": libvips_version,
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
-              "composer_lock": "adapters/php/png/composer.lock",
-              "composer_lock_sha256": sha256(lock_path.read_bytes()).hexdigest(),
+              "composer_locks": [{"path": path, "sha256": sha256((ROOT / path).read_bytes()).hexdigest()}
+                                 for path in lock_paths],
               "control": "controls/png/red-green.png", "control_sha256": CONTROL_SHA256,
               "third_party": rows, "runtime": runtime_rows}
     (DATA / "verification.json").write_text(json.dumps(result, indent=2) + "\n")

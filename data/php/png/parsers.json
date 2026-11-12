@@ -288,5 +288,97 @@
     "scope": "decoded image dimensions",
     "family": "PHP GD PNG decoder",
     "family_note": "WideImage uses its PNG mapper backed by PHP GD; Composer lists GPL-2.0 and LGPL-2.1, while the pinned LICENSE text states LGPL 2.1 or later."
+  },
+  {
+    "name": "contao/image",
+    "version": "1.2.4",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/contao/image/blob/06cafbcf787276b0a1639b44c89439dde14ca151/src/Image.php",
+    "documentation": "https://github.com/contao/image/blob/06cafbcf787276b0a1639b44c89439dde14ca151/README.md",
+    "input_api": "Contao\\Image\\Image(local PNG path, Imagine GD); Resizer::resize",
+    "adapter": "adapters/php/png/contao_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 1,
+      "height": 1,
+      "type": 3
+    },
+    "scope": "PNG decoded and resized to 1\u00d71",
+    "family": "Imagine / PHP GD PNG decoder",
+    "family_note": "Contao uses Imagine GD to decode and resize the PNG; its dimension path also calls bundled getimagesize."
+  },
+  {
+    "name": "sybio/image-workshop",
+    "version": "3.0.0-beta1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Sybio/ImageWorkshop/blob/ae252ab16c8f1f8b797c7ecd3a60c3cde0e8b569/src/ImageWorkshop.php",
+    "documentation": "https://github.com/Sybio/ImageWorkshop/blob/ae252ab16c8f1f8b797c7ecd3a60c3cde0e8b569/src/ImageWorkshop.php",
+    "input_api": "ImageWorkshop::initFromPath(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/sybio_image_workshop.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "ImageWorkshop initializes an image layer from local PNG through PHP GD."
+  },
+  {
+    "name": "nette/utils",
+    "version": "v4.1.6",
+    "license": "BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://github.com/nette/utils/blob/6bf24518accf32cf845bca305e0b92078700fd01/license.md",
+    "documentation": "https://github.com/nette/utils/blob/6bf24518accf32cf845bca305e0b92078700fd01/src/Utils/Image.php",
+    "input_api": "Nette\\Utils\\Image::fromFile(local PNG path, detected type); getWidth/getHeight",
+    "adapter": "adapters/php/png/nette_utils.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "type": 3
+    },
+    "scope": "decoded dimensions and PNG type",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Nette Utils Image delegates PNG decoding to bundled PHP GD; package-level downloads cover many unrelated utility APIs.",
+    "api_documentation": "https://doc.nette.org/en/utils/images"
+  },
+  {
+    "name": "intervention/image-laravel",
+    "version": "4.1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Intervention/image-laravel/blob/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2/LICENSE",
+    "documentation": "https://github.com/Intervention/image-laravel/blob/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2/src/Facades/Image.php",
+    "input_api": "Laravel Image facade::decodePath(local PNG path); width/height",
+    "adapter": "adapters/php/png/intervention_image_laravel.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "Intervention Image 4 / PHP GD PNG decoder",
+    "family_note": "Laravel facade forwards to Intervention Image 4 configured with PHP GD; the core Intervention package is separately listed."
+  },
+  {
+    "name": "jenssegers/imagehash",
+    "version": "v0.11.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/jenssegers/imagehash/blob/87ba7051d2fca2edc718091f052424474dedfeae/LICENSE",
+    "documentation": "https://github.com/jenssegers/imagehash/blob/87ba7051d2fca2edc718091f052424474dedfeae/README.md",
+    "input_api": "ImageHash(AverageHash, GD manager)::hash(local PNG path); toBits",
+    "adapter": "adapters/php/png/imagehash/jenssegers_imagehash.php",
+    "composer_lock": "adapters/php/png/imagehash/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "average_hash_bits": "0000111100001111000011110000111100001111000011110000111100001111"
+    },
+    "scope": "decoded pixel-derived average hash",
+    "family": "Intervention Image 3 / PHP GD PNG decoder",
+    "family_note": "ImageHash uses Intervention Image 3 with GD to decode PNG; separate Composer lock resolves the incompatible core major version."
   }
 ]
