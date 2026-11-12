@@ -1,0 +1,55 @@
+{
+  "checked_at_utc": "2026-11-12T00:20:22.923Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v26.10.0",
+  "controls": {
+    "controls/matrix_market/graph-general.mtx": "d8b4cf661746a15c983ef2d94e4d916e981310629a00cbcacf3f1babc60d8441",
+    "controls/matrix_market/real-general.mtx": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c"
+  },
+  "third_party": [
+    {
+      "package": "ngraph.serialization",
+      "version": "0.0.8",
+      "scope": "Matrix Market graph vertices, edges, and edge weight",
+      "control": "controls/matrix_market/graph-general.mtx",
+      "command": "node adapters/javascript/matrix_market.mjs ngraph.serialization controls/matrix_market/graph-general.mtx",
+      "pass": true,
+      "output": {
+        "nodes": 3,
+        "edges": 2,
+        "edge_1_2": 7
+      },
+      "error": null
+    },
+    {
+      "package": "@statelyai/graph",
+      "version": "2.6.0",
+      "scope": "Matrix Market graph vertices, edges, and edge weight",
+      "control": "controls/matrix_market/graph-general.mtx",
+      "command": "node adapters/javascript/matrix_market.mjs @statelyai/graph controls/matrix_market/graph-general.mtx",
+      "pass": true,
+      "output": {
+        "nodes": 3,
+        "edges": 2,
+        "edge_weight_0_1": 7
+      },
+      "error": null
+    },
+    {
+      "package": "@jtgtools/xsparse",
+      "version": "0.0.1",
+      "scope": "Coordinate real matrix dimensions and value",
+      "control": "controls/matrix_market/real-general.mtx",
+      "command": "node adapters/javascript/matrix_market.mjs @jtgtools/xsparse controls/matrix_market/real-general.mtx",
+      "pass": true,
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "value_0_2": -2
+      },
+      "error": null
+    }
+  ],
+  "runtime": []
+}

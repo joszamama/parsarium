@@ -3,12 +3,13 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
+plus a below-target JavaScript × Matrix Market search,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, and an explicit 88-cell work
-matrix. There are 31 cells at the 20-parser target, one started below target,
-and 56 marked `not_started`;
+matrix. There are 31 cells at the 20-parser target, two started below target,
+and 55 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -40,6 +41,7 @@ npm run http11:verify
 npm run ascii_pnm:control
 npm run ascii_pnm:verify
 npm run ascii_ply:verify
+npm run matrix_market:verify
 python3 scripts/verify_go_zip.py
 python3 scripts/verify_go_png.py
 python3 scripts/verify_go_wav.py
@@ -507,6 +509,11 @@ or quality judgment.
   npm queries saved 870 hits and 706 distinct names; six explored leads remain
   unresolved. The [runtime inventory](data/javascript/ascii_ply/standard.json)
   records the scoped absence of a PLY-aware Node.js or browser platform API.
+- [JavaScript × Matrix Market ranking](data/javascript/matrix_market/ranking.md):
+  three pinned packages verified on valid local coordinate real general
+  controls, 17 below the working goal. Six bounded npm queries saved 406 hits
+  and 353 distinct names; two plausible leads remain unresolved. The
+  [cell record](data/javascript/matrix_market/cell.json) gives the exact scope.
 - [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
   readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries
   saved 333 hits, 271 unique package paths. Eight named leads remain

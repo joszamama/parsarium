@@ -12,7 +12,8 @@ const querySets = {
   svg: ['svg', 'svg parser', 'svg renderer', 'svg image reader'],
   http11: ['http parser', 'http request parser', 'HTTP/1.1 parser', 'raw http parser', 'http message parser', 'raw http request'],
   ascii_pnm: ['pnm', 'netpbm', 'ppm', 'pgm', 'pbm', 'portable pixmap', 'ppm parser', 'pgm parser'],
-  ascii_ply: ['ply', 'keywords:ply', 'ply parser', 'ply loader', 'ply file', 'polygon file format', 'ply mesh', 'ply point cloud', 'PLYLoader', 'ascii ply']
+  ascii_ply: ['ply', 'keywords:ply', 'ply parser', 'ply loader', 'ply file', 'polygon file format', 'ply mesh', 'ply point cloud', 'PLYLoader', 'ascii ply'],
+  matrix_market: ['matrix market', 'matrixmarket', 'mtx parser', 'mmread', 'mtx file', 'sparse matrix reader']
 };
 if (!(cell in querySets)) throw new Error(`unsupported cell: ${cell}`);
 const out = new URL(`../data/javascript/${cell}/registry-snapshot.json`, import.meta.url);

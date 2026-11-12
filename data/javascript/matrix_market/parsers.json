@@ -1,0 +1,35 @@
+[
+  {
+    "name": "ngraph.serialization",
+    "version": "0.0.8",
+    "license": "BSD-3-Clause",
+    "input_api": "require('ngraph.serialization/mtx').load(localText)",
+    "documentation": "https://www.npmjs.com/package/ngraph.serialization/v/0.0.8",
+    "scope": "Matrix Market graph vertices, edges, and edge weight",
+    "family": "ngraph.serialization MTX reader",
+    "control": "controls/matrix_market/graph-general.mtx",
+    "expected_output": {"nodes": 3, "edges": 2, "edge_1_2": 7}
+  },
+  {
+    "name": "@statelyai/graph",
+    "version": "2.6.0",
+    "license": "MIT",
+    "input_api": "fromMatrixMarket(localText)",
+    "documentation": "https://www.npmjs.com/package/@statelyai/graph/v/2.6.0",
+    "scope": "Matrix Market graph vertices, edges, and edge weight",
+    "family": "statelyai graph Matrix Market converter",
+    "control": "controls/matrix_market/graph-general.mtx",
+    "expected_output": {"nodes": 3, "edges": 2, "edge_weight_0_1": 7}
+  },
+  {
+    "name": "@jtgtools/xsparse",
+    "version": "0.0.1",
+    "license": "MIT",
+    "input_api": "parseMatrixMarket(localText)",
+    "documentation": "https://www.npmjs.com/package/@jtgtools/xsparse/v/0.0.1",
+    "scope": "Coordinate real matrix dimensions and value",
+    "family": "xsparse Matrix Market reader",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {"rows": 2, "cols": 3, "value_0_2": -2}
+  }
+]
