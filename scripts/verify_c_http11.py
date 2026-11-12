@@ -74,7 +74,7 @@ def main() -> None:
         assert run(["brew", "list", "--versions", formula]).stdout.strip() == f"{formula} {version}"
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf", "facil-cstl", "facil-legacy"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf", "facil-cstl", "facil-legacy", "libhv", "libparsehttp"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         libhtp_source = build / "libhtp-0.5.53"
@@ -131,6 +131,19 @@ def main() -> None:
                             str(ADAPTER / "http_parser.c"),
                             str(build / "http-parser-2.9.4/http_parser.c"),
                             "-o", str(build / "http-parser-adapter")],
+            "libhv": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                      "-I" + str(ADAPTER), "-I" + str(build / "libhv-1.3.1"),
+                      "-I" + str(build / "libhv-1.3.1/http"),
+                      str(ADAPTER / "libhv.c"),
+                      str(build / "libhv-1.3.1/http/http_parser.c"),
+                      str(build / "libhv-1.3.1/http/httpdef.c"),
+                      "-o", str(build / "libhv-adapter")],
+            "libparsehttp": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                             "-I" + str(ADAPTER),
+                             "-I" + str(build / "libparsehttp-0.06/src/libparsehttp"),
+                             str(ADAPTER / "libparsehttp.c"),
+                             str(build / "libparsehttp-0.06/src/libparsehttp/libparsehttp.c"),
+                             "-o", str(build / "libparsehttp-adapter")],
             "picohttpparser": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                                "-I" + str(ADAPTER), "-I" + str(build / "picohttpparser-1.5"),
                                str(ADAPTER / "picohttpparser.c"),

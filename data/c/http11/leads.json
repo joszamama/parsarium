@@ -34,5 +34,23 @@
     "source": "https://github.com/dstufft/http11",
     "status": "rejected",
     "reason": "Repository is a Python extension package, not a documented C library input API. The name alone is insufficient for this C cell."
+  },
+  {
+    "name": "libevent",
+    "source": "https://libevent.org/doc/http_8h.html",
+    "status": "unresolved",
+    "reason": "Official evhttp client documentation and bufferevent pair API were inspected for libevent 2.1.13. A local pair fed through evhttp_connection_base_bufferevent_new failed during connection reset with a setfd assertion; the 2.1.13 public API lacks the later connection reuse helper. No passing saved-input adapter is established."
+  },
+  {
+    "name": "lammertb/libhttp",
+    "source": "https://github.com/lammertb/libhttp/blob/v1.8/doc/APIReference.md",
+    "status": "unresolved",
+    "reason": "Tagged C HTTP client/server library with documented request/response APIs, but a public API that accepts a caller-supplied local byte buffer, file or stream for HTTP parsing has not been established. Its network connect/listen APIs alone do not satisfy the recorded local-input check."
+  },
+  {
+    "name": "jeremycw/httpserver.h",
+    "source": "https://github.com/jeremycw/httpserver.h",
+    "status": "unresolved",
+    "reason": "High-interest C HTTP server package, but the primary repository returned no tags or releases on 2026-11-12 and a pinned release plus documented caller-supplied local input route remain unestablished."
   }
 ]
