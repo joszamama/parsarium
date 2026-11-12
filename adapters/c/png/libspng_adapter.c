@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     size_t size = 0;
     if (!error) error = spng_get_ihdr(ctx, &header);
     if (!error) error = spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size);
-    unsigned char *pixels = error ? NULL : malloc(size);
+    unsigned char *pixels = error ? NULL : (unsigned char *) malloc(size);
     if (!error && !pixels) error = 1;
     if (!error) error = spng_decode_image(ctx, pixels, size, SPNG_FMT_RGBA8, 0);
     if (error) {

@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     if (fseek(file, 0, SEEK_END) != 0) { fclose(file); return 1; }
     long size = ftell(file);
     if (size <= 0 || fseek(file, 0, SEEK_SET) != 0) { fclose(file); return 1; }
-    uint8_t *bytes = malloc((size_t) size);
+    uint8_t *bytes = (uint8_t *) malloc((size_t) size);
     if (!bytes || fread(bytes, 1, (size_t) size, file) != (size_t) size) {
         free(bytes); fclose(file); return 1;
     }

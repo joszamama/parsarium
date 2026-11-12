@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified C × PNG batch and a
-below-target C × ZIP batch,
+below-target C × ZIP batch, a verified C++ × PNG batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -12,8 +12,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-There are 48 cells at the 20-parser target, three started below target,
-and 37 marked `not_started`;
+There are 49 cells at the 20-parser target, three started below target,
+and 36 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -25,6 +25,7 @@ all packages and integrity hashes. From the repository root:
 
 ```sh
 python3 scripts/verify_c_png.py
+python3 scripts/verify_cpp_png.py
 python3 scripts/verify_c_zip.py
 npm ci
 npx playwright install chromium
@@ -128,6 +129,15 @@ python3 scripts/validate_catalog.py
 ```
 
 The C × PNG verifier uses `cc`, CMake, `pkg-config`, and zlib development headers. It downloads six source archives pinned by SHA-256 and checks fourteen locally installed C libraries pinned by exact release and binary SHA-256. The recorded result is **20/20 third-party package paths passing** on the valid 2×1 PNG control, with six paths unranked for lack of a comparable primary GitHub repository metric. The count does not imply twenty independent decoder engines or a complete most-used top twenty. Two plausible leads remain unresolved. Install the exact recorded library releases in [`source-lock.json`](data/c/png/source-lock.json) before rerunning; a later Homebrew revision will fail the binary check. See [`cell.json`](data/c/png/cell.json) for search limits and uncertainty. The ISO C standard library has no documented PNG parser; generic `stdio.h` input does not count.
+
+The C++ × PNG verifier recompiles format-aware call sites as C++17 against the
+same 20 pinned library releases, after rerunning the C source and binary checks.
+The observed result is **20/20 package paths passing** the valid PNG control.
+These are libraries usable from C++; their parser implementations and release
+pins are shared with the C cell. Seven plausible C++ leads, including OpenCV,
+OpenImageIO, and Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
+does not claim a complete most-used top 20. The ISO C++ standard library has no
+documented PNG parser.
 
 The C × ZIP verifier uses `cc`, CMake, and `pkg-config` with six locally installed
 libraries pinned by exact release and binary SHA-256, plus three source-built

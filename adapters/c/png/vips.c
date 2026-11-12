@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
         vips_shutdown();
         return 1;
     }
-    const unsigned char *pixels = memory;
+    const unsigned char *pixels = (const unsigned char *) memory;
     printf("{\"width\":%d,\"height\":%d,\"first\":[%u,%u,%u,%u],\"second\":[%u,%u,%u,%u]}\n",
            width, height, pixels[0], pixels[1], pixels[2], pixels[3],
            pixels[4], pixels[5], pixels[6], pixels[7]);

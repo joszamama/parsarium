@@ -203,8 +203,9 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"java/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
-    for format_name in ("png", "zip"):
-        directory = ROOT / "data/c" / format_name
+    for ecosystem, format_name in (("c", "png"), ("c", "zip"), ("cpp", "png")):
+        directory = ROOT / "data" / ecosystem / format_name
+        ecosystem_label = "C++" if ecosystem == "cpp" else "C"
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["popularity_metric"]["packages"]
@@ -216,14 +217,14 @@ def main() -> None:
         window = metric_time.get("captured_between_utc")
         captured = (f"between {window[0]} and {window[1]}" if window else
                     f"at {metric_time['captured_at_utc']}")
-        lines = [f"# C × {format_name.upper()}: verified parser ranking", "",
+        lines = [f"# {ecosystem_label} × {format_name.upper()}: verified parser ranking", "",
                  f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
                  "The metric is GitHub repository stars captured "
                  f"{captured}. The captured Conan Center recipe-name "
                  "surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, "
-                 "compared only within C, and do not establish a complete most-used set. "
+                 f"compared only within {ecosystem_label}, and do not establish a complete most-used set. "
                  f"{len(unknown)} path(s) lack a metric and remain unranked.", "",
-                 "Search hits, unresolved leads, and the C standard-library inventory are separate. "
+                 f"Search hits, unresolved leads, and the {ecosystem_label} standard-library inventory are separate. "
                  "See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.", "",
                  "| Rank | Package | Pinned release | Repository stars | Scope | Underlying family |",
                  "| ---: | --- | --- | ---: | --- | --- |"]
@@ -240,7 +241,7 @@ def main() -> None:
             lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
                          f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
-        print(f"c/{format_name}: {len(ranked)} verified packages ranked, {len(unknown)} unranked")
+        print(f"{ecosystem}/{format_name}: {len(ranked)} verified packages ranked, {len(unknown)} unranked")
 
 
 if __name__ == "__main__":

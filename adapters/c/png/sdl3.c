@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     if (rgba->w != 2 || rgba->h != 1 || rgba->pitch < 8) {
         SDL_DestroySurface(rgba); SDL_Quit(); return 1;
     }
-    const unsigned char *pixels = rgba->pixels;
+    const unsigned char *pixels = (const unsigned char *) rgba->pixels;
     printf("{\"width\":%d,\"height\":%d,\"first\":[%u,%u,%u,%u],\"second\":[%u,%u,%u,%u]}\n",
            rgba->w, rgba->h, pixels[0], pixels[1], pixels[2], pixels[3],
            pixels[4], pixels[5], pixels[6], pixels[7]);

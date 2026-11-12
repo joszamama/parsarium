@@ -45,8 +45,8 @@ def main() -> None:
         assert not ({lead["name"] for lead in leads} & {p["name"] for p in parsers})
         for parser in parsers:
             name = parser["name"]
-            if cell["ecosystem"] == "c":
-                source = read(f"{key}/source-lock.json")[name]
+            if cell["ecosystem"] in ("c", "cpp"):
+                source = read(cell.get("source_lock", f"{key}/source-lock.json"))[name]
                 release = snapshot["releases"][name]
                 assert parser["version"] == source["release"] == release["version"]
                 assert parser["license"] == release["license"]
@@ -130,7 +130,7 @@ def main() -> None:
         runs = results["results"] if browser_png else results["third_party"]
         assert {r["package"] for r in runs} == {p["name"] for p in parsers}
         assert all(r["pass"] for r in runs)
-        if cell["ecosystem"] == "c":
+        if cell["ecosystem"] in ("c", "cpp"):
             expected = {parser["name"]: parser for parser in parsers}
             assert all(row["version"] == expected[row["package"]]["version"]
                        and row["control"] == expected[row["package"]]["control"]

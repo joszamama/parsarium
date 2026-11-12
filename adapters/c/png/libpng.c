@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     }
     image.format = PNG_FORMAT_RGBA;
     size_t size = PNG_IMAGE_SIZE(image);
-    unsigned char *pixels = malloc(size);
+    unsigned char *pixels = (unsigned char *) malloc(size);
     if (!pixels) return 1;
     if (!png_image_finish_read(&image, NULL, pixels, 0, NULL)) {
         fprintf(stderr, "libpng: %s\n", image.message);

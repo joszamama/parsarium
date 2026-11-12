@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C++",
+  "format": "PNG",
+  "runtime": "ISO C++ standard library (WG21 working draft source, checked 2026-11-12)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C++ standard library headers, library introduction",
+      "url": "https://github.com/cplusplus/draft/blob/main/source/lib-intro.tex",
+      "finding": "The listed standard library components do not define a PNG decoder or image parser."
+    },
+    {
+      "api": "File streams <fstream>, input/output library",
+      "url": "https://github.com/cplusplus/draft/blob/main/source/iostreams.tex",
+      "finding": "std::ifstream reads bytes from files; it does not interpret PNG dimensions, chunks, or pixels."
+    }
+  ],
+  "limit": "Scoped to the ISO C++ standard library. Platform image frameworks and third-party C libraries usable from C++ are inventoried separately. No standard PNG-aware API was documented to run."
+}
