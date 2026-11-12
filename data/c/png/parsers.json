@@ -412,5 +412,171 @@
     "family": "GD PNG codec (libpng-backed)",
     "family_note": "GD PNG codec calls libpng; this is a distinct C package API over a shared decoder family.",
     "family_evidence": "https://github.com/libgd/libgd/blob/gd-2.3.3/src/gd_png.c"
+  },
+  {
+    "name": "leptonica",
+    "version": "1.87.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://formulae.brew.sh/api/formula/leptonica.json",
+    "documentation": "https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/allheaders.h",
+    "input_api": "pixRead(const char* filename); pixGetRGBPixel(PIX*, x, y, ...)",
+    "adapter": "adapters/c/png/leptonica.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first_rgb": [
+        255,
+        0,
+        0
+      ],
+      "second_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "RGB pixels",
+    "family": "Leptonica PNG loader (libpng-backed)",
+    "family_note": "Recorded Leptonica dylib links libpng; output checks RGB pixels because the standard pixRead path strips alpha.",
+    "family_evidence": "https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/pngio.c"
+  },
+  {
+    "name": "graphicsmagick",
+    "version": "1.3.49",
+    "license": "MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/graphicsmagick.json",
+    "documentation": "https://graphicsmagick.sourceforge.io/wand/magick_wand.html",
+    "input_api": "MagickReadImage(MagickWand*, const char*); MagickGetImagePixels(...)",
+    "adapter": "adapters/c/png/graphicsmagick.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "GraphicsMagick PNG coder (libpng-backed)",
+    "family_note": "GraphicsMagick Wand C package path, distinct from ImageMagick but using libpng for PNG. SourceForge upstream has no comparable GitHub primary-repository stars.",
+    "family_evidence": "https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/1.3.49/"
+  },
+  {
+    "name": "raylib",
+    "version": "6.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/raylib.json",
+    "documentation": "https://github.com/raysan5/raylib/blob/6.2/src/raylib.h",
+    "input_api": "LoadImage(const char* fileName); LoadImageColors(Image) to RGBA pixels",
+    "adapter": "adapters/c/png/raylib.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "raylib bundled stb_image PNG decoder",
+    "family_note": "Raylib package exposes local C image loading over its bundled stb_image; shares parser lineage with stb and SDL3 core.",
+    "family_evidence": "https://github.com/raysan5/raylib/blob/6.2/src/rtextures.c"
+  },
+  {
+    "name": "devil",
+    "version": "1.8.0",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://formulae.brew.sh/api/formula/devil.json",
+    "documentation": "https://openil.sourceforge.net/docs/DevIL%20Reference%20Guide.pdf",
+    "input_api": "ilLoadImage(const ILstring path); ilGetInteger(IL_IMAGE_WIDTH/HEIGHT); ilGetData()",
+    "adapter": "adapters/c/png/devil.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "DevIL PNG loader (libpng-backed)",
+    "family_note": "Recorded libIL links libpng; primary SourceForge project has no comparable GitHub repository star metric.",
+    "family_evidence": "https://sourceforge.net/projects/openil/files/DevIL/1.8.0/"
+  },
+  {
+    "name": "imlib2",
+    "version": "1.12.7",
+    "license": "Imlib2",
+    "license_evidence": "https://formulae.brew.sh/api/formula/imlib2.json",
+    "documentation": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+    "input_api": "imlib_load_image_immediately(const char* file); imlib_image_get_data_for_reading_only()",
+    "adapter": "adapters/c/png/imlib2.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "Imlib2 PNG loader (libpng-backed)",
+    "family_note": "The pinned source release includes the documented Imlib2.h.in C API and a PNG loader module. Primary Enlightenment repository is not GitHub.",
+    "family_evidence": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/"
+  },
+  {
+    "name": "wuffs",
+    "version": "0.3.6",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/google/wuffs/blob/v0.3.6/LICENSE",
+    "documentation": "https://github.com/google/wuffs/blob/v0.3.6/doc/std/image-decoders.md",
+    "input_api": "wuffs_png__decoder__decode_image_config(decoder, image_config*, io_buffer*) over local bytes",
+    "adapter": "adapters/c/png/wuffs.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "PNG image configuration",
+    "family": "Wuffs PNG decoder",
+    "family_note": "Independent generated-C PNG decoder. Control result covers parsed PNG image configuration (dimensions), not decoded pixels.",
+    "family_evidence": "https://github.com/google/wuffs/blob/v0.3.6/release/c/wuffs-v0.3.c"
   }
 ]

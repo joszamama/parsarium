@@ -30,7 +30,7 @@ def main() -> None:
     prepare_c_png.main()
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 14
+    assert len(parsers) == 20
     zlib_version = run(["pkg-config", "--modversion", "zlib"])
     assert zlib_version == "1.2.12"
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -48,18 +48,28 @@ def main() -> None:
         "pngle": ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / "pngle"),
                   str(ADAPTER / "pngle.c"), str(SOURCE / "pngle/pngle.c"),
                   str(SOURCE / "pngle/miniz.c"), "-lm", "-o", str(TARGET / "pngle")],
+        "wuffs": ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / "wuffs"),
+                  str(ADAPTER / "wuffs.c"), "-o", str(TARGET / "wuffs")],
     }
     local_libraries = {}
     for name, adapter_name in (("imagemagick", "imagemagick"),
                                ("gdk-pixbuf", "gdk_pixbuf"), ("vips", "vips"),
                                ("sdl3", "sdl3"), ("sdl3_image", "sdl3_image"),
                                ("sdl2_image", "sdl2_image"),
-                               ("cairo", "cairo"), ("gd", "gd")):
+                               ("cairo", "cairo"), ("gd", "gd"),
+                               ("leptonica", "leptonica"),
+                               ("graphicsmagick", "graphicsmagick"),
+                               ("raylib", "raylib"), ("devil", "devil"),
+                               ("imlib2", "imlib2")):
         item = lock[name]
         observed = run(["pkg-config", "--modversion", item["pkg_config"]])
         if name == "imagemagick":
             assert observed == item["release"].rsplit("-", 1)[0]
             assert item["release"] in run(["magick", "-version"])
+        elif name == "raylib":
+            assert observed == item["release"] + ".0"
+        elif name == "devil":
+            assert observed == ""  # The installed IL.pc leaves Version blank.
         else:
             assert observed == item["release"]
         library = Path(item["local_library"])
@@ -67,7 +77,8 @@ def main() -> None:
         assert digest == item["local_library_sha256"]
         local_libraries[name] = {"pkg_config_version": observed, "library": str(library),
                                  "library_sha256": digest}
-        flags = shlex.split(run(["pkg-config", "--cflags", "--libs", item["pkg_config"]]))
+        package_names = [item["pkg_config"], "x11"] if name == "imlib2" else [item["pkg_config"]]
+        flags = shlex.split(run(["pkg-config", "--cflags", "--libs", *package_names]))
         commands[name] = ["cc", "-std=c11", "-O2", str(ADAPTER / (adapter_name + ".c")),
                           *flags, "-o", str(TARGET / name)]
     freeimage = lock["freeimage"]
@@ -87,7 +98,9 @@ def main() -> None:
         run(commands[name])
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))
-        assert output == EXPECTED == parser["expected_output"], (name, output)
+        if name not in ("leptonica", "wuffs"):
+            assert parser["expected_output"] == EXPECTED
+        assert output == parser["expected_output"], (name, output)
         rows.append({"package": name, "version": parser["version"],
                      "control": parser["control"], "build_command": shlex.join(commands[name]),
                      "command": shlex.join(execute), "output": output, "pass": True})
@@ -99,7 +112,8 @@ def main() -> None:
               "zlib_pkg_config_version": zlib_version,
               "local_libraries": local_libraries,
               "control": "controls/png/red-green.png", "control_sha256": CONTROL_SHA256,
-              "expected": EXPECTED, "third_party": rows, "runtime": []}
+              "expected_by_package": {parser["name"]: parser["expected_output"] for parser in parsers},
+              "third_party": rows, "runtime": []}
     (DATA / "verification.json").write_text(json.dumps(result, indent=2) + "\n")
 
 
