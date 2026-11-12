@@ -215,5 +215,24 @@
     "family": "unzipLIB modified classic MiniZip",
     "family_note": "Distinct 1.0.0 package with C callback/memory API and bundled zlib; its unzip.h credits Gilles Vollant and shares classic MiniZip lineage. Package license is Apache-2.0 with zlib-licensed bundled code.",
     "license_evidence_additional": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h"
+  },
+  {
+    "name": "libc7zip",
+    "version": "v1.10.0",
+    "license": "MIT AND MPL-2.0 AND LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/itchio/libc7zip/blob/v1.10.0/README.md",
+    "license_note": "Wrapper MIT; vendored lib7zip MPL-2.0; bundled 7-Zip engine LGPL 2.1 with project-noted additional terms dependent on build.",
+    "documentation": "https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h",
+    "input_api": "in_stream_new with local FILE read/seek callbacks; archive_open; archive_get_item_count; item_get_string_property(kpidPath); archive_extract_item to output callback",
+    "adapter": "adapters/c/zip/libc7zip.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libc7zip → lib7zip → 7-Zip ZIP engine",
+    "family_note": "Tagged MIT C facade vendors an MPL-2.0 lib7zip fork and loads a 7-Zip 26.03 engine; a distinct package path sharing the 7-Zip parser family with bit7z in C++."
   }
 ]

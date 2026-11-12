@@ -48,6 +48,21 @@ def main() -> None:
     for name in ("kuba-zip", "zziplib", "unarr", "lowzip", "unziplib"):
         prepare(name)
         print(f"{name}: pinned {LOCK[name]['release']} source verified")
+    name = "libc7zip"
+    prepare(name)
+    item = LOCK[name]
+    engine_archive = CACHE / "7z2603-src.tar.xz"
+    if not (engine_archive.exists() and
+            sha256(engine_archive.read_bytes()).hexdigest() == item["engine_source_sha256"]):
+        request = Request(item["engine_source_url"], headers={"User-Agent": "Parsarium-Research"})
+        with urlopen(request, timeout=45) as response:
+            engine = response.read()
+        assert sha256(engine).hexdigest() == item["engine_source_sha256"]
+        engine_archive.write_bytes(engine)
+    cmake = CACHE / "source/libc7zip/vendor/lib7zip/CMakeLists.txt"
+    cmake.write_text(cmake.read_text().replace(
+        "https://7-zip.org/a/7z2603-src.tar.xz", engine_archive.resolve().as_uri()))
+    print(f"{name}: pinned {item['release']} source and 7-Zip {item['engine_release']} source verified")
 
 
 if __name__ == "__main__":

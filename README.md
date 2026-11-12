@@ -144,15 +144,18 @@ does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
 The C × ZIP verifier uses `cc`, CMake, and `pkg-config` with seven locally installed
-libraries pinned by exact release and binary SHA-256, plus five source-built
+libraries pinned by exact release and binary SHA-256, plus six source-built
 libraries pinned by archive SHA-256 in
-[`source-lock.json`](data/c/zip/source-lock.json). All **12/12 third-party
+[`source-lock.json`](data/c/zip/source-lock.json). The libc7zip build also pins
+its official 7-Zip engine source by SHA-256 and currently uses the macOS arm64
+build path. All **13/13 third-party
 package paths passed** on the same one-entry DEFLATE ZIP control used in the
 other ecosystems, returning the parsed entry name and decompressed bytes.
-This remains below the working goal of 20. Ten paths have primary GitHub
+This remains below the working goal of 20. Eleven paths have primary GitHub
 repository star metrics; two remain unranked. MiniZip and minizip-ng share
 parser lineage, kuba-zip bundles miniz, unzipLIB includes a modified MiniZip,
-and lowzip has its own ZIP reader. The 21 distinct Conan recipe-name hits and
+libc7zip wraps lib7zip and the 7-Zip engine, and lowzip has its own ZIP reader.
+The 21 distinct Conan recipe-name hits and
 92 GitHub repository search hits are discovery results, not a most-used ranking;
 four leads remain unresolved.
 The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and

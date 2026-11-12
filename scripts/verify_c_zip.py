@@ -7,6 +7,7 @@ import json
 import os
 import platform
 import shlex
+import shutil
 import subprocess
 
 import prepare_c_zip
@@ -31,7 +32,9 @@ def main() -> None:
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 12 and {p["name"] for p in parsers} == set(lock)
+    cell = json.loads((DATA / "cell.json").read_text())
+    assert len(parsers) == cell["verified_third_party_count"]
+    assert {p["name"] for p in parsers} == set(lock)
     prepare_c_zip.main()
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
@@ -97,6 +100,32 @@ def main() -> None:
                        *map(str, sources), "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "build": "compiled pinned unzipLIB MiniZip fork and bundled zlib C sources"}
+        elif name == "libc7zip":
+            assert platform.system() == "Darwin" and platform.machine() == "arm64"
+            source = SOURCE / name
+            build = TARGET / "libc7zip-build"
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DCMAKE_BUILD_TYPE=Release", "-DBUILD_TESTS=OFF"]
+            run(configure)
+            run(["cmake", "--build", str(build), "-j", "4"])
+            engine_dir = build / "upstream-7zip-src/CPP/7zip/Bundles/Format7zF"
+            engine_command = ["make", "-C", str(engine_dir), "-j4", "-f",
+                              "../../cmpl_mac_arm64.mak"]
+            run(engine_command)
+            engine = engine_dir / "b/m_arm64/7z.so"
+            shutil.copy2(engine, TARGET / "7z.so")
+            library = build / "libc7zip.dylib"
+            command = ["cc", "-std=c11", "-O2", "-I" + str(source / "include"),
+                       str(ROOT / parser["adapter"]), str(library),
+                       "-Wl,-rpath," + str(build), "-o", str(TARGET / name)]
+            source_builds[name] = {
+                "source_sha256": item["source_sha256"],
+                "engine_source_sha256": item["engine_source_sha256"],
+                "engine_sha256": sha256(engine.read_bytes()).hexdigest(),
+                "library_sha256": sha256(library.read_bytes()).hexdigest(),
+                "configure_command": shlex.join(configure),
+                "engine_build_command": shlex.join(engine_command),
+            }
         else:
             library = Path(item["local_library"])
             digest = sha256(library.read_bytes()).hexdigest()

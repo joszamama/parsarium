@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T09:00:14.892127+00:00",
+  "checked_at_utc": "2026-11-12T10:16:12.830414+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -61,6 +61,14 @@
     "unziplib": {
       "source_sha256": "4f41f6ac95054eb720c994c75cfe8d2436568e24a5f2d273e3cd49d66bb19d12",
       "build": "compiled pinned unzipLIB MiniZip fork and bundled zlib C sources"
+    },
+    "libc7zip": {
+      "source_sha256": "5c5bd45e420800d6420064c8b788e5adfc9dfb4d428fe67161a55137d586b8c7",
+      "engine_source_sha256": "9cbde5099c6deb73691b0579063da5827522ccbbcba3f0020fd04e8c8c16c0d4",
+      "engine_sha256": "3b2e2be293f23dc1652cbfbd807a00aee5ad43103cba15039b60b68bf1b3ff39",
+      "library_sha256": "b702e802a9f94a29e2e795fe50cc0bc3fa3e2d197a4932f07be03e644baec36d",
+      "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/libc7zip -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF",
+      "engine_build_command": "make -C /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build/upstream-7zip-src/CPP/7zip/Bundles/Format7zF -j4 -f ../../cmpl_mac_arm64.mak"
     }
   },
   "control": "controls/zip/hello.zip",
@@ -220,6 +228,19 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 -Wno-deprecated-non-prototype -Wno-macro-redefined -include stdio.h -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/unziplib.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/unzip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/adler32.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/crc32.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/infback.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/inffast.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/inflate.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/inftrees.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/zutil.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unziplib",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/unziplib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "libc7zip",
+      "version": "v1.10.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/libc7zip/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libc7zip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build/libc7zip.dylib -Wl,-rpath,/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",
