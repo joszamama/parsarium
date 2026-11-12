@@ -1,14 +1,15 @@
 {
-  "checked_at_utc": "2026-11-12T15:42:46.380822+00:00",
+  "checked_at_utc": "2026-11-12T16:02:25.732788+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "go": "go version go1.27.2 darwin/arm64",
   "control_sha256": {
     "controls/matrix_market/real-general.mtx": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
     "controls/matrix_market/graph-general.mtx": "d8b4cf661746a15c983ef2d94e4d916e981310629a00cbcacf3f1babc60d8441",
     "controls/matrix_market/go-cols.tsv": "23a2b13277496386b6418052740cedee221b6ecff78ba5442692b98ba4e9dc50",
-    "controls/matrix_market/go-rows.tsv": "041f633e79199d3227c2e5cc0c4bba82f907c5a1f7fd2841d2add5e893d0e2f2"
+    "controls/matrix_market/go-rows.tsv": "041f633e79199d3227c2e5cc0c4bba82f907c5a1f7fd2841d2add5e893d0e2f2",
+    "controls/matrix_market/graph-pattern-symmetric.mtx": "2ae46be7e01f2035ea0dffaf89f5bd1f06a3f7599f50c8283900ec1fd3b577de"
   },
-  "control_meaning": "Valid Matrix Market coordinate real general matrices; the graph control has three vertices and two edges",
+  "control_meaning": "Valid Matrix Market coordinate real general matrices and a pattern symmetric graph control; the graph controls have three vertices and two edges",
   "third_party": [
     {
       "package": "github.com/go-sparse/sparse/mtx",
@@ -80,6 +81,37 @@
       "pass": true,
       "output": {
         "cols": 3,
+        "rows": 2,
+        "value_0_2": -2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/senniraf/route-planning/graphio",
+      "module": "route-planning",
+      "version": "v0.0.0-20230822092327-643341884449",
+      "scope": "Pattern symmetric Matrix Market graph vertices and directed edges",
+      "control": "controls/matrix_market/graph-pattern-symmetric.mtx",
+      "command": "go run . github.com/senniraf/route-planning/graphio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/graph-pattern-symmetric.mtx",
+      "pass": true,
+      "output": {
+        "edge_0_1": true,
+        "edges": 4,
+        "vertices": 3
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/hpcde/spmv-acc/tools/suitesparse-dl/conv",
+      "module": "suitesparse-dl",
+      "version": "v0.0.0-20250517165138-b4e622a047a0",
+      "scope": "Coordinate real matrix converted to CSR dimensions, entries, and value",
+      "control": "controls/matrix_market/real-general.mtx",
+      "command": "go run . github.com/hpcde/spmv-acc/tools/suitesparse-dl/conv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "pass": true,
+      "output": {
+        "cols": 3,
+        "entries": 3,
         "rows": 2,
         "value_0_2": -2
       },

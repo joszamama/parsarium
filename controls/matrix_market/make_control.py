@@ -27,6 +27,13 @@ CONTROLS = {
         "1 2 7.0\n"
         "2 3 5.0\n"
     ),
+    "graph-pattern-symmetric.mtx": (
+        "%%MatrixMarket matrix coordinate pattern symmetric\n"
+        "% Three vertices and two undirected graph edges\n"
+        "3 3 2\n"
+        "1 2\n"
+        "2 3\n"
+    ),
     "real-symmetric.mtx": (
         "%%MatrixMarket matrix coordinate real symmetric\n"
         "% Parsarium: three diagonal entries in a symmetric matrix\n"

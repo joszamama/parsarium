@@ -1,6 +1,6 @@
 # Go × Matrix Market: verified parser ranking
 
-5 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev package-level Imported by count captured at 2026-11-12T15:40:15.044543+00:00. It measures visible direct importers rather than downloads and is used only within Go. 0 package(s) lack a metric and remain unranked; equal counts share a rank.
+7 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev package-level Imported by count captured at 2026-11-12T15:40:15.044543+00:00 for the five ranked paths. It measures visible direct importers rather than downloads and is used only within Go. Two paths lack a metric and remain unranked; equal counts share a rank.
 
 Search hits and unresolved leads are separate from this ranking. See `cell.json`, `registry-snapshot.json`, and `verification.json` in this directory.
 
@@ -11,3 +11,7 @@ Search hits and unresolved leads are separate from this ranking. See `cell.json`
 | 3 | [github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib](https://pkg.go.dev/github.com/HerrMotz/Algorithmic-Network-Analysis-Library@v0.0.0-20261026153007-6675dc5932aa/graphlib) | github.com/HerrMotz/Algorithmic-Network-Analysis-Library@v0.0.0-20261026153007-6675dc5932aa | 0 | Coordinate Matrix Market graph vertex and edge topology | graphlib Matrix Market graph reader |
 | 3 | [github.com/go-sparse/sparse/mtx](https://pkg.go.dev/github.com/go-sparse/sparse@v0.3.2/mtx) | github.com/go-sparse/sparse@v0.3.2 | 0 | Coordinate real matrix dimensions, stored entries, and value | go-sparse Matrix Market |
 | 3 | [github.com/wamuir/matrix-market](https://pkg.go.dev/github.com/wamuir/matrix-market@v0.0.0-20250303121451-60c3dedeb95a) | github.com/wamuir/matrix-market@v0.0.0-20250303121451-60c3dedeb95a | 0 | Coordinate real matrix dimensions and value | wamuir Matrix Market |
+| — | [github.com/senniraf/route-planning/graphio](https://github.com/senniraf/route-planning/blob/643341884449ef5ad5d1d6a05b7d95879ee7eef5/graphio/mtx.go) | route-planning@v0.0.0-20230822092327-643341884449 | unavailable | Pattern symmetric Matrix Market graph vertices and directed edges | route-planning graphio MTX reader |
+| — | [github.com/hpcde/spmv-acc/tools/suitesparse-dl/conv](https://github.com/hpcde/spmv-acc/blob/b4e622a047a09db30bc4a8c1db8e0afb612c3bcf/tools/suitesparse-dl/conv/conv.go) | suitesparse-dl@v0.0.0-20250517165138-b4e622a047a0 | unavailable | Coordinate real matrix converted to CSR dimensions, entries, and value | suitesparse-dl Matrix Market converter |
+
+The two unranked packages declare short Go module paths that differ from their GitHub repository paths. `go.mod` pins explicit replacements and `go.sum` records the canonical module hashes. pkg.go.dev returns 404 for those repository paths, so no comparable Imported by value is recorded.

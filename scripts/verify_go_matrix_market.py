@@ -46,7 +46,7 @@ def main() -> None:
         "platform": platform.platform(),
         "go": subprocess.check_output(["go", "version"], cwd=MODULE, text=True).strip(),
         "control_sha256": controls,
-        "control_meaning": "Valid Matrix Market coordinate real general matrices; the graph control has three vertices and two edges",
+        "control_meaning": "Valid Matrix Market coordinate real general matrices and a pattern symmetric graph control; the graph controls have three vertices and two edges",
         "third_party": results,
     }
     (CELL / "verification.json").write_text(json.dumps(report, indent=2) + "\n")

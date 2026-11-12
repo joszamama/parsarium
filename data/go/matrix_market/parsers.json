@@ -83,5 +83,42 @@
       "cols": 3,
       "value_0_2": -2
     }
+  },
+  {
+    "name": "github.com/senniraf/route-planning/graphio",
+    "module": "route-planning",
+    "canonical_module": "github.com/senniraf/route-planning",
+    "version": "v0.0.0-20230822092327-643341884449",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/senniraf/route-planning/blob/643341884449ef5ad5d1d6a05b7d95879ee7eef5/LICENSE",
+    "input_api": "NewMTXInput(localPath).LoadGraph()",
+    "documentation": "https://github.com/senniraf/route-planning/blob/643341884449ef5ad5d1d6a05b7d95879ee7eef5/graphio/mtx.go",
+    "scope": "Pattern symmetric Matrix Market graph vertices and directed edges",
+    "family": "route-planning graphio MTX reader",
+    "control": "controls/matrix_market/graph-pattern-symmetric.mtx",
+    "expected_output": {
+      "vertices": 3,
+      "edges": 4,
+      "edge_0_1": true
+    }
+  },
+  {
+    "name": "github.com/hpcde/spmv-acc/tools/suitesparse-dl/conv",
+    "module": "suitesparse-dl",
+    "canonical_module": "github.com/hpcde/spmv-acc/tools/suitesparse-dl",
+    "version": "v0.0.0-20250517165138-b4e622a047a0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/hpcde/spmv-acc/blob/b4e622a047a09db30bc4a8c1db8e0afb612c3bcf/LICENSE",
+    "input_api": "ConvertOneMtx(localInputPath, localOutputPath, littleEndian) writing decoded CSR values",
+    "documentation": "https://github.com/hpcde/spmv-acc/blob/b4e622a047a09db30bc4a8c1db8e0afb612c3bcf/tools/suitesparse-dl/conv/conv.go",
+    "scope": "Coordinate real matrix converted to CSR dimensions, entries, and value",
+    "family": "suitesparse-dl Matrix Market converter",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entries": 3,
+      "value_0_2": -2
+    }
   }
 ]

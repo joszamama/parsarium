@@ -993,10 +993,13 @@ or quality judgment.
   plausible leads remain unresolved. The
   [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
-- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): five eligible
-  package paths verified on local coordinate real general controls, 15 below
+- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): seven eligible
+  package paths verified on local coordinate real general or pattern symmetric
+  controls, 13 below
   the working goal. Six bounded pkg.go.dev queries saved 80 hits and 77 unique
-  paths; seven plausible leads remain unresolved. The
+  paths; five plausible leads remain unresolved. Two pinned packages use Go
+  module replacements because their published module names differ from their
+  repository paths; their adoption metric is unavailable. The
   [cell record](data/go/matrix_market/cell.json) states search and input limits.
 - [Python × PNG ranking](data/python/png/ranking.md): 21 packages verified
   on local pixel or text-chunk controls. Seven bounded PyPI name filters

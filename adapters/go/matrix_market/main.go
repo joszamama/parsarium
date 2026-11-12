@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -13,6 +14,8 @@ import (
 	market "github.com/wamuir/matrix-market"
 	utils "gitlab.com/Grouumf/ATACdemultiplex/ATACdemultiplexUtils"
 	grouumf "gitlab.com/Grouumf/enhlinktools/matrix"
+	"route-planning/graphio"
+	"suitesparse-dl/conv"
 )
 
 func main() {
@@ -47,6 +50,20 @@ func main() {
 		}
 		shape := matrix.Shape()
 		output = map[string]any{"rows": shape[0], "cols": shape[1], "value_0_2": real(matrix.At(0, 2))}
+	case "github.com/senniraf/route-planning/graphio":
+		edges, vertices, err := graphio.NewMTXInput(path).LoadGraph()
+		if err != nil {
+			panic(err)
+		}
+		edge01 := false
+		for _, edge := range edges {
+			if edge.From == 0 && edge.To == 1 {
+				edge01 = true
+			}
+		}
+		output = map[string]any{"vertices": vertices, "edges": len(edges), "edge_0_1": edge01}
+	case "github.com/hpcde/spmv-acc/tools/suitesparse-dl/conv":
+		output = convertMatrixMarket(path)
 	case "github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib":
 		graph, err := graphlib.ReadGraphAdjListAs(path, graphlib.FormatMatrixMarket, true)
 		if err != nil {
@@ -71,4 +88,50 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(string(encoded))
+}
+
+func convertMatrixMarket(path string) map[string]any {
+	file, err := os.CreateTemp("", "parsarium-mtx-*.bin")
+	if err != nil {
+		panic(err)
+	}
+	outputPath := file.Name()
+	file.Close()
+	defer os.Remove(outputPath)
+	if err := conv.ConvertOneMtx(path, outputPath, true); err != nil {
+		panic(err)
+	}
+	converted, err := os.Open(outputPath)
+	if err != nil {
+		panic(err)
+	}
+	defer converted.Close()
+	var magic, version, valueType, rows, cols, entries int32
+	for _, field := range []*int32{&magic, &version, &valueType, &rows, &cols, &entries} {
+		if err := binary.Read(converted, binary.LittleEndian, field); err != nil {
+			panic(err)
+		}
+	}
+	if magic != 0x20211015 || version != 2 || valueType != 3 {
+		panic("unexpected converted matrix header")
+	}
+	rowPointers := make([]int32, rows+1)
+	columnIndices := make([]int32, entries)
+	values := make([]float64, entries)
+	for _, field := range []any{rowPointers, columnIndices, values} {
+		if err := binary.Read(converted, binary.LittleEndian, field); err != nil {
+			panic(err)
+		}
+	}
+	var value02 float64
+	found := false
+	for i := rowPointers[0]; i < rowPointers[1]; i++ {
+		if columnIndices[i] == 2 {
+			value02, found = values[i], true
+		}
+	}
+	if !found {
+		panic("expected control entry absent from converted matrix")
+	}
+	return map[string]any{"rows": rows, "cols": cols, "entries": entries, "value_0_2": value02}
 }
