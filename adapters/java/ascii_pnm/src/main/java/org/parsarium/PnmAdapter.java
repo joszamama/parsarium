@@ -18,6 +18,25 @@ public final class PnmAdapter {
             var opened = new ij.io.Opener().openImage(path.toString());
             if (opened == null) throw new IllegalStateException("ImageJ did not open PNM");
             image = opened.getBufferedImage();
+        } else if (args[0].equals("thumbnailator")) {
+            requirePnmReader(path);
+            image = net.coobird.thumbnailator.Thumbnails.of(path.toFile()).scale(1.0).asBufferedImage();
+        } else if (args[0].equals("boofcv-io")) {
+            requirePnmReader(path);
+            image = boofcv.io.image.UtilImageIO.loadImage(path.toString());
+        } else if (args[0].equals("tika-image")) {
+            requirePnmReader(path);
+            var metadata = new org.apache.tika.metadata.Metadata();
+            metadata.set(org.apache.tika.metadata.HttpHeaders.CONTENT_TYPE, "image/x-portable-pixmap");
+            try (var input = org.apache.tika.io.TikaInputStream.get(path)) {
+                new org.apache.tika.parser.image.ImageParser().parse(input,
+                    new org.xml.sax.helpers.DefaultHandler(), metadata,
+                    new org.apache.tika.parser.ParseContext());
+            }
+            System.out.printf("{\"width\":%s,\"height\":%s}%n",
+                metadata.get(org.apache.tika.metadata.TIFF.IMAGE_WIDTH),
+                metadata.get(org.apache.tika.metadata.TIFF.IMAGE_LENGTH));
+            return;
         } else if (args[0].equals("openpnp-opencv")) {
             nu.pattern.OpenCV.loadLocally();
             var decoded = org.opencv.imgcodecs.Imgcodecs.imread(path.toString());
@@ -59,5 +78,13 @@ public final class PnmAdapter {
         if (image == null) throw new IllegalStateException("No image decoded");
         System.out.printf("{\"width\":%d,\"height\":%d,\"pixels\":\"%08x,%08x\"}%n",
             image.getWidth(), image.getHeight(), image.getRGB(0, 0), image.getRGB(1, 0));
+    }
+
+    private static void requirePnmReader(Path path) throws Exception {
+        try (var input = ImageIO.createImageInputStream(path.toFile())) {
+            var readers = ImageIO.getImageReaders(input);
+            if (!readers.hasNext()) throw new IllegalStateException("No ImageIO reader for PNM");
+            readers.next().dispose();
+        }
     }
 }

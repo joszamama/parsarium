@@ -457,13 +457,14 @@ a bare-JDK ImageIO probe returned no SVG reader on the control. Run
 only to refresh discovery and release/metric snapshots.
 
 The [Java × ASCII PNM ranking](data/java/ascii_pnm/ranking.md) currently has
-**5/20 verified package paths**: Apache Commons Imaging, TwelveMonkeys ImageIO,
-JAI ImageIO, ImageJ, and the OpenPnP OpenCV binding. Each decoded both pixels
-of the valid ASCII P3 PPM control. `python3 scripts/verify_java_pnm.py` rebuilds
-the adapter, checks five Maven releases and 11 locked classpath JARs, and
-replays all five adapters plus a bare-JDK probe. The JDK 21 probe found no
+**8/20 verified package paths**: Apache Commons Imaging, TwelveMonkeys ImageIO,
+JAI ImageIO, ImageJ, the OpenPnP OpenCV binding, Thumbnailator, BoofCV, and
+Apache Tika. The first seven decoded both pixels of the valid ASCII P3 PPM
+control; Tika reported its dimensions. `python3 scripts/verify_java_pnm.py` rebuilds
+the adapter, checks eight Maven releases and 44 locked classpath JARs, and
+replays all eight adapters plus a bare-JDK probe. The JDK 21 probe found no
 bundled PNM reader. The [cell summary](data/java/ascii_pnm/cell.json) records
-12 bounded registry hits, three timed-out queries, four unresolved leads, and
+12 bounded registry hits, three timed-out queries, two unresolved leads, and
 the remaining selection uncertainty. Refresh the discovery and release
 snapshots only with `python3 scripts/snapshot_maven_pnm.py` and
 `python3 scripts/enrich_java_pnm.py`.

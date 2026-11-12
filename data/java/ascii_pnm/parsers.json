@@ -43,5 +43,32 @@
     "family": "OpenPnP Java binding over native OpenCV PNM decoder", "scope": "ASCII PPM dimensions and red/green pixels",
     "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "openpnp-opencv",
     "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "thumbnailator", "group": "net.coobird", "artifact": "thumbnailator", "version": "0.4.21",
+    "license": "MIT", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "Thumbnails.of(File).scale(1.0).asBufferedImage() with installed PNM ImageIO provider",
+    "documentation": "https://github.com/coobird/thumbnailator/wiki/Examples",
+    "family": "Thumbnailator wrapper over ImageIO PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "thumbnailator",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "boofcv-io", "group": "org.boofcv", "artifact": "boofcv-io", "version": "1.6.0",
+    "license": "Apache-2.0", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "UtilImageIO.loadImage(String local path) with installed PNM ImageIO provider",
+    "documentation": "https://boofcv.org/javadoc/boofcv/io/image/UtilImageIO.html",
+    "family": "BoofCV ImageIO wrapper over PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "boofcv-io",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "tika-image", "group": "org.apache.tika", "artifact": "tika-parser-image-module", "version": "4.2.0",
+    "license": "Apache-2.0", "license_evidence": "Maven parent POM license and project LICENSE",
+    "input_api": "ImageParser.parse(TikaInputStream local path, ContentHandler, Metadata, ParseContext) with PNM ImageIO provider",
+    "documentation": "https://tika.apache.org/docs/4.0.x/formats.html",
+    "family": "Apache Tika ImageParser over ImageIO PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM image width and height",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "tika-image",
+    "expected_output": {"width": 2, "height": 1}
   }
 ]
