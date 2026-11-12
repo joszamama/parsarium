@@ -96,7 +96,8 @@ def main() -> None:
     third_party = []
     for parser in parsers:
         module = parser.get("adapter_module", "main")
-        mode = {"tika-audiovideo": "tika", "bytedeco-ffmpeg": "ffmpeg"}.get(parser["name"], parser["name"])
+        mode = {"tika-audiovideo": "tika", "bytedeco-ffmpeg": "ffmpeg",
+                "jhove-modules": "jhove", "tarsosdsp-jvm": "tarsos"}.get(parser["name"], parser["name"])
         cls = "org.parsarium.BytedecoWavAdapter" if module == "bytedeco" else "org.parsarium.WavAdapter"
         native_flag = ["--enable-native-access=ALL-UNNAMED"] if module == "bytedeco" else []
         output = run([java, *native_flag, "-cp", classpaths[module], cls,

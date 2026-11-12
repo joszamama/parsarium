@@ -90,5 +90,26 @@
     "family": "Bytedeco binding to FFmpeg demuxer", "scope": "WAV format, sample rate and channels",
     "adapter_module": "bytedeco", "control": "controls/wav/256-samples.wav",
     "expected_output": {"format": "wav", "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "jhove-modules", "group": "org.openpreservation.jhove", "artifact": "jhove-modules", "version": "1.20.1",
+    "license": "LGPL-2.1", "license_evidence": "Maven parent jhove POM licenses",
+    "input_api": "WaveModule.setBase(JhoveBase), parse(InputStream,RepInfo,int), getAESMetadata()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-modules/1.20.1/jhove-modules-1.20.1-javadoc.jar",
+    "documentation_archive_entry": "edu/harvard/hul/ois/jhove/module/WaveModule.html",
+    "family": "JHOVE WAVE-hul module", "scope": "WAVE identification, sample rate and channels",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"format": "WAVE", "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "tarsosdsp-jvm", "group": "be.tarsos.dsp", "artifact": "jvm", "version": "2.5",
+    "repository_url": "https://mvn.0110.be/releases",
+    "license": "GPL-3.0-only", "license_evidence": "Release Maven POM licenses and project README",
+    "input_api": "AudioDispatcherFactory.fromFile(File,int,int), AudioDispatcher.getFormat() and run()",
+    "documentation": "https://mvn.0110.be/releases/be/tarsos/dsp/jvm/2.5/jvm-2.5-javadoc.jar",
+    "documentation_archive_entry": "TarsosDSP.jvm/be/tarsos/dsp/io/jvm/AudioDispatcherFactory.html",
+    "family": "TarsosDSP JVM wrapper over Java Sound", "scope": "sample rate, channels, bit depth and decoded frame count",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16, "frames": 256}
   }
 ]

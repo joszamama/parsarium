@@ -63,6 +63,32 @@ public final class WavAdapter {
                     Integer.parseInt(metadata.get("xmpDM:audioSampleRate")),
                     Integer.parseInt(metadata.get("audio:channels")));
             }
+            case "jhove" -> {
+                var module = new edu.harvard.hul.ois.jhove.module.WaveModule();
+                module.setBase(new edu.harvard.hul.ois.jhove.JhoveBase());
+                var info = new edu.harvard.hul.ois.jhove.RepInfo(file.toURI().toString());
+                try (var stream = new java.io.FileInputStream(file)) {
+                    module.parse(stream, info, 0);
+                }
+                var audio = module.getAESMetadata();
+                System.out.printf("{\"format\":\"%s\",\"sample_rate\":%d,\"channels\":%d}%n",
+                    info.getFormat(), (int) audio.getSampleRate(), audio.getNumChannels());
+            }
+            case "tarsos" -> {
+                var dispatcher = be.tarsos.dsp.io.jvm.AudioDispatcherFactory.fromFile(file, 256, 0);
+                var format = dispatcher.getFormat();
+                final int[] frames = {0};
+                dispatcher.addAudioProcessor(new be.tarsos.dsp.AudioProcessor() {
+                    public boolean process(be.tarsos.dsp.AudioEvent event) {
+                        frames[0] += event.getFloatBuffer().length;
+                        return true;
+                    }
+                    public void processingFinished() { }
+                });
+                dispatcher.run();
+                System.out.printf("{\"sample_rate\":%d,\"channels\":%d,\"bits\":%d,\"frames\":%d}%n",
+                    (int) format.getSampleRate(), format.getChannels(), format.getSampleSizeInBits(), frames[0]);
+            }
             default -> throw new IllegalArgumentException("unknown mode: " + mode);
         }
     }

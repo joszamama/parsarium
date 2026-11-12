@@ -30,7 +30,8 @@ def get(url: str, timeout: int = 12) -> bytes:
 
 def release(parser: dict) -> tuple[str, dict]:
     name, group, artifact, version = (parser[k] for k in ("name", "group", "artifact", "version"))
-    base = f"https://repo.maven.apache.org/maven2/{group.replace('.', '/')}/{artifact}/{version}/"
+    repository_url = parser.get("repository_url", "https://repo.maven.apache.org/maven2")
+    base = f"{repository_url}/{group.replace('.', '/')}/{artifact}/{version}/"
     stem = f"{artifact}-{version}"
     local = Path.home() / ".m2/repository" / group.replace(".", "/") / artifact / version
     jar = (local / f"{stem}.jar").read_bytes()
@@ -46,6 +47,7 @@ def release(parser: dict) -> tuple[str, dict]:
                 raise ValueError(f"Documented API missing from pinned Javadoc: {name}")
     return name, {
         "group": group, "artifact": artifact, "version": version,
+        "repository_url": repository_url,
         "jar_url": base + stem + ".jar", "jar_sha256": sha256(jar).hexdigest(),
         "pom_url": base + stem + ".pom", "pom_sha256": sha256(pom).hexdigest(),
         "license": parser["license"], "license_evidence": parser["license_evidence"],
