@@ -37,8 +37,8 @@
       "custom": "yes"
     },
     "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
-    "family": "Laminas HTTP message parser",
-    "family_note": "Native parser in the pinned Laminas HTTP release.",
+    "family": "Zend/Laminas HTTP message parser lineage",
+    "family_note": "Laminas continuation of Zend HTTP; shared request parser lineage with zendframework/zend-http.",
     "adapter": "adapters/php/http11/parse.php"
   },
   {
@@ -229,5 +229,201 @@
     "family": "Guzzle 3 HTTP message parser",
     "family_note": "Monolithic Guzzle 3 release bundles the same parser lineage as guzzle/parser and guzzle/http.",
     "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "innmind/http-parser",
+    "version": "4.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Innmind/http-parser/blob/d937a6173daa7bfce121452f35ccafc723859b73/LICENSE",
+    "documentation": "https://github.com/Innmind/http-parser/blob/d937a6173daa7bfce121452f35ccafc723859b73/README.md",
+    "input_api": "Request\\Parse::default(Clock::live())(local request byte stream); method, target, version, and headers",
+    "composer_lock": "adapters/php/http11/innmind/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Innmind HTTP stream parser",
+    "family_note": "Native request frame parser over Innmind IO; pinned version 4.0.0 requires PHP 8.4, replayed with Homebrew PHP 8.4.27.",
+    "adapter": "adapters/php/http11/parse.php",
+    "php_runtime": "php84"
+  },
+  {
+    "name": "zendframework/zend-http",
+    "version": "2.11.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/zendframework/zend-http/blob/e15e0ce45a2a4f642cd0b7b4f4d4d0366b729a1a/LICENSE.md",
+    "documentation": "https://github.com/zendframework/zend-http/blob/e15e0ce45a2a4f642cd0b7b4f4d4d0366b729a1a/src/Request.php",
+    "input_api": "Request::fromString(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/zend_http/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Zend/Laminas HTTP message parser lineage",
+    "family_note": "Zend predecessor of laminas/laminas-http; shared request parser lineage.",
+    "adapter": "adapters/php/http11/parse_legacy.php",
+    "php_runtime": "php74"
+  },
+  {
+    "name": "zendframework/zend-diactoros",
+    "version": "2.2.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/zendframework/zend-diactoros/blob/de5847b068362a88684a55b0dbb40d85986cfa52/LICENSE.md",
+    "documentation": "https://github.com/zendframework/zend-diactoros/blob/de5847b068362a88684a55b0dbb40d85986cfa52/src/Request/Serializer.php",
+    "input_api": "Request\\Serializer::fromString(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/zend_diactoros/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Diactoros HTTP message parser lineage",
+    "family_note": "Zend predecessor of Laminas Diactoros; shared serializer lineage with phly/http and laminas/laminas-diactoros.",
+    "adapter": "adapters/php/http11/parse_legacy.php",
+    "php_runtime": "php74"
+  },
+  {
+    "name": "vircom/http-parser",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/vircom/http-parser/blob/9f3e1e9e375c4446510541be281e7f92f5013df2/LICENSE",
+    "documentation": "https://github.com/vircom/http-parser/blob/9f3e1e9e375c4446510541be281e7f92f5013df2/README.md",
+    "input_api": "HttpParserFactory::createRequestParser()->parse(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/vircom/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "VirCom native HTTP message parser",
+    "family_note": "Native request and header parser; pinned 1.0.1 requires PHP 7.4.",
+    "adapter": "adapters/php/http11/parse_legacy.php",
+    "php_runtime": "php74"
+  },
+  {
+    "name": "phpstandard/raw-request-factory",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/phpstandard/raw-request-factory/blob/828a7a896376c7451317bb53dd2774446dd8ed63/LICENSE",
+    "documentation": "https://github.com/phpstandard/raw-request-factory/blob/828a7a896376c7451317bb53dd2774446dd8ed63/README.md",
+    "input_api": "RawRequestFactory::createServerRequest(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/phpstandard/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "PHPStandard raw HTTP request parser",
+    "family_note": "Native raw-message parser creates a PSR-7 server request using pinned Guzzle PSR-7 2.13.1 factories.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "angus/laminas-http",
+    "version": "v1.0.4",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/angusaust/angus-laminas-http/blob/a5367dd33bc1321765d95d33b95faffb6c92f068/LICENSE.md",
+    "documentation": "https://github.com/angusaust/angus-laminas-http/blob/a5367dd33bc1321765d95d33b95faffb6c92f068/src/Request.php",
+    "input_api": "Request::fromString(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/angus/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Zend/Laminas HTTP message parser lineage",
+    "family_note": "Fork of Laminas HTTP request parser; same underlying lineage as laminas/laminas-http and zendframework/zend-http.",
+    "adapter": "adapters/php/http11/parse.php",
+    "php_runtime": "php82"
+  },
+  {
+    "name": "workerman/workerman",
+    "version": "v5.2.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/walkor/workerman/blob/8fd5c148ff7dcd7bbc88621e1712eeb1f66b7f56/MIT-LICENSE.txt",
+    "documentation": "https://github.com/walkor/workerman/blob/8fd5c148ff7dcd7bbc88621e1712eeb1f66b7f56/src/Protocols/Http/Request.php",
+    "input_api": "Protocols\\Http\\Request(local raw HTTP/1.1 bytes); method, target, version, headers",
+    "composer_lock": "adapters/php/http11/workerman_server/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Workerman native HTTP request parser",
+    "family_note": "Direct public request constructor and accessors in the pinned Workerman server package; separate from workerman/psr7.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "react/http",
+    "version": "v1.12.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/reactphp/http/blob/37f13159cdcaf2b1387020751aa1ae1882477f78/LICENSE",
+    "documentation": "https://github.com/reactphp/http/blob/37f13159cdcaf2b1387020751aa1ae1882477f78/README.md",
+    "input_api": "HttpServer::listen(local loopback socket); request handler receives parsed HTTP/1.1 method, target, version, headers",
+    "composer_lock": "adapters/php/http11/react/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "ReactPHP native HTTP server parser",
+    "family_note": "Pinned ReactPHP HTTP server parses the saved raw request over a local TCP byte stream.",
+    "adapter": "adapters/php/http11/react_server.php",
+    "adapter_kind": "server"
+  },
+  {
+    "name": "amphp/http-server",
+    "version": "v3.4.8",
+    "license": "MIT",
+    "license_evidence": "https://github.com/amphp/http-server/blob/31b004bf1cfd3feed3f0bdf20ddb9bfef935efb8/LICENSE",
+    "documentation": "https://github.com/amphp/http-server/blob/31b004bf1cfd3feed3f0bdf20ddb9bfef935efb8/README.md",
+    "input_api": "SocketHttpServer::expose(local loopback socket); RequestHandler receives parsed HTTP/1.1 method, target, version, headers",
+    "composer_lock": "adapters/php/http11/amphp/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Amp native HTTP server parser",
+    "family_note": "Pinned Amp HTTP server parses the saved raw request over a local TCP byte stream.",
+    "adapter": "adapters/php/http11/amphp_server.php",
+    "adapter_kind": "server"
   }
 ]

@@ -18,6 +18,10 @@ $project = match ($package) {
     'laminas/laminas-diactoros' => 'laminas_diactoros',
     'guzzle/http' => 'guzzle_http',
     'guzzle/guzzle' => 'guzzle_full',
+    'innmind/http-parser' => 'innmind',
+    'phpstandard/raw-request-factory' => 'phpstandard',
+    'angus/laminas-http' => 'angus',
+    'workerman/workerman' => 'workerman_server',
     default => throw new InvalidArgumentException('unknown HTTP parser: ' . $package),
 };
 require __DIR__ . '/' . $project . '/vendor/autoload.php';
@@ -129,6 +133,63 @@ switch ($package) {
             'version' => $request->getProtocolVersion(),
             'host' => (string) $request->getHeader('Host'),
             'custom' => (string) $request->getHeader('X-Parsarium'),
+        ];
+        break;
+    case 'innmind/http-parser':
+        $stream = fopen('php://temp', 'w+');
+        fwrite($stream, $raw);
+        rewind($stream);
+        $read = \Innmind\IO\IO::fromAmbientAuthority()->streams()->acquire($stream)->read();
+        $request = \Innmind\HttpParser\Request\Parse::default(\Innmind\Time\Clock::live())($read)
+            ->match(
+                static fn($parsed) => $parsed,
+                static fn() => throw new RuntimeException('Innmind rejected valid HTTP request'),
+            );
+        $headerValue = static fn(string $name) => $request->headers()->get($name)->match(
+            static fn($header) => $header->values()->first()->match(
+                static fn($value) => $value->toString(),
+                static fn() => null,
+            ),
+            static fn() => null,
+        );
+        $result = [
+            'method' => $request->method()->toString(),
+            'target' => $request->url()->path()->toString() . '?' . $request->url()->query()->toString(),
+            'version' => $request->protocolVersion()->toString(),
+            'host' => $headerValue('Host'),
+            'custom' => $headerValue('X-Parsarium'),
+        ];
+        break;
+    case 'phpstandard/raw-request-factory':
+        $psrFactory = new \GuzzleHttp\Psr7\HttpFactory();
+        $request = (new \Framework\Http\RawRequestFactory($psrFactory, $psrFactory))
+            ->createServerRequest($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getRequestTarget(),
+            'version' => $request->getProtocolVersion(),
+            'host' => $request->getHeaderLine('Host'),
+            'custom' => $request->getHeaderLine('X-Parsarium'),
+        ];
+        break;
+    case 'angus/laminas-http':
+        $request = \Laminas\Http\Request::fromString($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getUriString(),
+            'version' => $request->getVersion(),
+            'host' => $request->getHeaders()->get('Host')->getFieldValue(),
+            'custom' => $request->getHeaders()->get('X-Parsarium')->getFieldValue(),
+        ];
+        break;
+    case 'workerman/workerman':
+        $request = new \Workerman\Protocols\Http\Request($raw);
+        $result = [
+            'method' => $request->method(),
+            'target' => $request->uri(),
+            'version' => $request->protocolVersion(),
+            'host' => $request->header('host'),
+            'custom' => $request->header('x-parsarium'),
         ];
         break;
 }

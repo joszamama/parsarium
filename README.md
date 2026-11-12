@@ -16,7 +16,7 @@ WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
-has an 11-path partial batch. There are 64 cells at the 20-parser target, three
+has a verified 20-path batch. There are 65 cells at the 20-parser target, two
 started below target, and 21 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -351,15 +351,22 @@ MP4 atom reader; nine relevant leads remain unresolved. This is a verified
 Fileinfo and GD's failed reads. Run `python3 scripts/verify_php_mp4.py`
 from the repository root.
 
-The [PHP × HTTP/1.1 ranking](data/php/http11/ranking.md) records eleven
-pinned package paths parsing the valid saved GET request, including its target,
+The [PHP × HTTP/1.1 ranking](data/php/http11/ranking.md) records 20 pinned
+package paths parsing the valid saved GET request, including its target,
 protocol version, and headers. Eight bounded Packagist searches saved 441 hits
-and 389 distinct names. Ten named leads remain unresolved, so this cell is
-below the 20-path target. The [runtime inventory](data/php/http11/standard.json)
-separately verifies the PHP CLI built-in server on the same raw request bytes.
-The Guzzle PSR-7 forks, Guzzle 3 package paths, and Diactoros descendants
-share parser lineage, as recorded in the [parser rows](data/php/http11/parsers.json).
-Run `python3 scripts/verify_php_http11.py` from the repository root.
+and 389 distinct names; four named leads remain unresolved. The
+[runtime inventory](data/php/http11/standard.json) separately verifies the PHP
+CLI built-in server on the same raw request bytes. ReactPHP and Amp were
+verified through their documented local server APIs; other packages accepted
+the saved bytes or a local stream directly. Guzzle PSR-7 forks, Guzzle 3 package
+paths, Zend/Laminas HTTP, and Diactoros descendants share parser lineage, as
+recorded in the [parser rows](data/php/http11/parsers.json). The collection
+meets the 20-path target but is not a definitive most-used top 20. Run
+`python3 scripts/verify_php_http11.py` from the repository root. Install
+`php@8.4` and `php@8.2` from Homebrew plus `shivammathur/php/php@7.4` for
+replaying packages pinned to those runtimes. The verifier uses their
+`/opt/homebrew/opt` paths by default; override them with `PARSARIUM_PHP84`,
+`PARSARIUM_PHP82`, and `PARSARIUM_PHP74`.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
