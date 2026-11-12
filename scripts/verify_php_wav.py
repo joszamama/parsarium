@@ -76,6 +76,7 @@ def main() -> None:
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "mediainfo_cli_version": execute(["mediainfo", "--Version"]).stdout.strip(),
               "ffmpeg_cli_version": execute(["ffmpeg", "-version"]).stdout.splitlines()[0],
+              "sox_cli_version": execute(["sox", "--version"]).stdout.strip(),
               "controls": [{"path": name, "sha256": sha256((ROOT / name).read_bytes()).hexdigest()}
                            for name in sorted({parser["control"] for parser in parsers})],
               "composer_locks": [{"path": name, "sha256": lock["sha256"]}

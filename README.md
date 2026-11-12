@@ -15,8 +15,8 @@ ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
-20-parser batches; PHP × WAV has an eleven-path verified batch. There are 61 cells
-at the 20-parser target, three started below target, and 24 marked `not_started`;
+20-parser batches, including PHP × WAV. There are 62 cells
+at the 20-parser target, two started below target, and 24 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -308,16 +308,19 @@ equivalent `mediainfo` CLI on `PATH`) and uses the committed 18-second control.
 The Pyrex adapter switches MediaInfo 26.10 to its older XML output mode so the
 pinned package can read it.
 
-The [PHP × WAV ranking](data/php/wav/ranking.md) records eleven pinned
-package paths passing the valid mono PCM16 controls. The adapters reuse
-Composer locks from the PHP MP3 cell for the same exact releases. Five bounded
-Packagist searches saved 339 hits and 227 distinct names; four relevant leads
-remain unresolved, including a high-download WAV reader with no tagged release.
-Several paths share the getID3 parser family, and two use FFmpeg. Nine more
-verified package paths are needed for the working target.
+The [PHP × WAV ranking](data/php/wav/ranking.md) records twenty pinned
+package paths passing valid mono PCM16 controls. Eleven adapters reuse the
+exact Composer releases from the PHP MP3 cell; nine have isolated WAV locks.
+Twelve bounded Packagist searches saved 595 hits and 437 distinct names.
+Twelve relevant leads remain unresolved, so this is not a definitive most-used
+top twenty. The family field distinguishes getID3, FFmpeg, MediaInfoLib,
+libsndfile, SoX, and native PHP WAV readers. The four-second rhythmic control
+supports the pinned BPM reader; its generator is `controls/wav/make_control.py`.
 The [PHP WAV runtime inventory](data/php/wav/standard.json) records that
 Fileinfo returns only a MIME type, while generic FFI and file I/O are not WAV
-parsers. Run `python3 scripts/verify_php_wav.py` from the repository root.
+parsers. The WAV replay requires the PHP 8.5 extensions and MediaInfo/FFmpeg
+CLI tools used by the PHP MP3 batch, plus SoX on `PATH`. Run
+`python3 scripts/verify_php_wav.py` from the repository root.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1239,7 +1242,7 @@ uncertainty.
   paths, lifetime download ranking, valid tag results, unresolved leads, and a
   separate PHP runtime inventory. Seventeen Composer locks and the adapter live under
   `adapters/php/mp3_id3v2/`.
-- `data/php/wav/`: Packagist WAV discovery hits, eleven pinned parser paths,
+- `data/php/wav/`: Packagist WAV discovery hits, twenty pinned parser paths,
   control results, unresolved leads, lifetime download ranking, and a separate
   PHP runtime inventory. Its adapter reuses the exact Composer locks listed in
   `adapters/php/mp3_id3v2/`.

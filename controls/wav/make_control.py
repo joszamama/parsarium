@@ -33,3 +33,16 @@ media_info_chunks += b"data" + struct.pack("<I", len(media_info_payload)) + medi
 media_info_control = b"RIFF" + struct.pack("<I", len(media_info_chunks) + 4) + b"WAVE" + media_info_chunks
 (ROOT / "32768-samples.wav").write_bytes(media_info_control)
 print(f"Wrote {len(media_info_control)} bytes")
+
+# A 120 BPM pulse train gives the BPM reader enough valid PCM audio to return
+# its format fields alongside a measured tempo. Eight clicks span four seconds.
+rhythmic_samples = [0] * 32000
+for beat_start in range(0, len(rhythmic_samples), 4000):
+    for offset in range(80):
+        rhythmic_samples[beat_start + offset] = 16000 if offset % 2 == 0 else -16000
+rhythmic_payload = struct.pack("<32000h", *rhythmic_samples)
+rhythmic_chunks = b"fmt " + struct.pack("<I", len(format_chunk)) + format_chunk
+rhythmic_chunks += b"data" + struct.pack("<I", len(rhythmic_payload)) + rhythmic_payload
+rhythmic_control = b"RIFF" + struct.pack("<I", len(rhythmic_chunks) + 4) + b"WAVE" + rhythmic_chunks
+(ROOT / "120-bpm-clicks.wav").write_bytes(rhythmic_control)
+print(f"Wrote {len(rhythmic_control)} bytes")

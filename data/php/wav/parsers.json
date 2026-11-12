@@ -221,5 +221,192 @@
     "family": "FFmpeg native RIFF/WAVE parser",
     "family_note": "Composer wrapper delegates to local FFprobe 9.0.2; package path over the FFmpeg parser family.",
     "external_backend": "FFprobe 9.0.2 CLI"
+  },
+  {
+    "name": "php-ffmpeg/php-ffmpeg",
+    "version": "v1.4.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/PHP-FFMpeg/PHP-FFMpeg/blob/41fa00949ea2758cd34f076a8030df7198d57759/LICENSE",
+    "documentation": "https://github.com/PHP-FFMpeg/PHP-FFMpeg/blob/41fa00949ea2758cd34f076a8030df7198d57759/README.md",
+    "input_api": "FFProbe::create()->streams(local PCM WAV path)->audios()->first(); codec, sample rate, channels, bit depth",
+    "composer_lock": "adapters/php/wav/php_ffmpeg/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "codec": "pcm_s16le",
+      "sample_rate": "8000",
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "PCM16 codec, 8 kHz sample rate, mono channel count, 16-bit depth",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "Official PHP-FFMpeg wrapper invokes local FFprobe 9.0.2; not an independent decoder.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "FFprobe 9.0.2 CLI"
+  },
+  {
+    "name": "gemorroj/file-wav",
+    "version": "2.3.2",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/Gemorroj/FileWav/blob/9b3bfcb82d85d01681026d73575982a9d24fb484/LICENSE",
+    "documentation": "https://github.com/Gemorroj/FileWav/blob/9b3bfcb82d85d01681026d73575982a9d24fb484/README.md",
+    "input_api": "FileWav\\Wav(local PCM WAV path)->getInfo(); compression, frame rate, channels, bits, length",
+    "composer_lock": "adapters/php/wav/file_wav/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "compression": 1,
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "duration_seconds": 0.032
+    },
+    "scope": "PCM16 compression, 8 kHz sample rate, mono channel count, 32 ms duration",
+    "family": "Gemorroj FileWav native PHP WAV parser",
+    "family_note": "Dedicated WAV reader with its own header decoder; based on classAudioFile. No shared parser package in this cell.",
+    "adapter": "adapters/php/wav/parse.php"
+  },
+  {
+    "name": "soluble/mediatools",
+    "version": "2.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/soluble-io/soluble-mediatools/blob/3c7b0cec78ee97f9a74443cb0eecf10504c1eec5/LICENSE.md",
+    "documentation": "https://github.com/soluble-io/soluble-mediatools/blob/3c7b0cec78ee97f9a74443cb0eecf10504c1eec5/README.md",
+    "input_api": "VideoInfoReader(FFProbeConfig)->getInfo(local PCM WAV path); format, duration and audio stream codec",
+    "composer_lock": "adapters/php/wav/soluble/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "format": "wav",
+      "duration_seconds": 0.032,
+      "audio_codec": "pcm_s16le"
+    },
+    "scope": "WAV container, 32 ms duration, PCM16 audio stream",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "VideoInfoReader handles the valid WAV control and delegates to local FFprobe 9.0.2.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "FFprobe 9.0.2 CLI"
+  },
+  {
+    "name": "rasuvaeff/media-converter",
+    "version": "v1.2.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/rasuvaeff/media-converter/blob/68ad862a4c6583ed5555a5815ee9bc0bd0568da4/LICENSE.md",
+    "documentation": "https://github.com/rasuvaeff/media-converter/blob/68ad862a4c6583ed5555a5815ee9bc0bd0568da4/src/FfprobeMediaInfo.php",
+    "input_api": "FfprobeMediaInfo::probe(local PCM WAV path); audio codec, duration, bit rate",
+    "composer_lock": "adapters/php/wav/rasuvaeff/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "audio_codec": "pcm_s16le",
+      "duration_seconds": 0.032,
+      "bit_rate": 139000
+    },
+    "scope": "PCM16 audio codec, 32 ms duration, container bit rate",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "Typed wrapper invokes local FFprobe 9.0.2; distinct package path over shared FFmpeg family.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "FFprobe 9.0.2 CLI"
+  },
+  {
+    "name": "protonemedia/php-ffmpeg",
+    "version": "v1.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/protonemedia/PHP-FFMpeg/blob/4c52b1ce23b9980795dedc95a7958d972b47ada5/LICENSE",
+    "documentation": "https://github.com/protonemedia/PHP-FFMpeg/blob/4c52b1ce23b9980795dedc95a7958d972b47ada5/README.md",
+    "input_api": "FFProbe::create()->streams(local PCM WAV path)->audios()->first(); codec, sample rate, channels, bit depth",
+    "composer_lock": "adapters/php/wav/protonemedia/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "codec": "pcm_s16le",
+      "sample_rate": "8000",
+      "channels": 1,
+      "bits_per_sample": 16
+    },
+    "scope": "PCM16 codec, 8 kHz sample rate, mono channel count, 16-bit depth",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "Protonemedia fork of PHP-FFMpeg, distinct source ref; local FFprobe 9.0.2 is the shared underlying parser.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "FFprobe 9.0.2 CLI"
+  },
+  {
+    "name": "maximal/audio-waveform",
+    "version": "1.2.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/maximal/audio-waveform-php/blob/6f513425b83f2d2a0d39b34118f0a1d99ab8d275/license.md",
+    "documentation": "https://github.com/maximal/audio-waveform-php/blob/6f513425b83f2d2a0d39b34118f0a1d99ab8d275/readme.md",
+    "input_api": "Waveform(local PCM WAV path)->getWaveformData(8); decoded mono amplitude values",
+    "composer_lock": "adapters/php/wav/maximal/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "first_channel_samples": 128,
+      "second_channel_samples": 0,
+      "has_positive_amplitude": true,
+      "has_negative_amplitude": true
+    },
+    "scope": "Mono WAV sample amplitudes decoded into positive and negative waveform values",
+    "family": "SoX native RIFF/WAVE parser",
+    "family_note": "Package invokes local SoX to decode PCM samples before constructing waveform data; not an independent WAV decoder.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "SoX CLI"
+  },
+  {
+    "name": "char0n/ffmpeg-php",
+    "version": "3.2.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/char0n/ffmpeg-php/blob/9a38fdc2a3b2bf2d5df9d28a571f05a1e71c0cf8/LICENSE.md",
+    "documentation": "https://github.com/char0n/ffmpeg-php/blob/9a38fdc2a3b2bf2d5df9d28a571f05a1e71c0cf8/README.md",
+    "input_api": "Movie(local PCM WAV path); audio codec, sample rate, channels, duration",
+    "composer_lock": "adapters/php/wav/char0n/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "audio_codec": "pcm_s16le",
+      "sample_rate": 8000,
+      "channels": 1,
+      "duration_seconds": 0.03
+    },
+    "scope": "PCM16 audio codec, 8 kHz mono audio, rounded 30 ms duration",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "FFmpegPHP wrapper parses local WAV via FFprobe 9.0.2; duration rounds to hundredths.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "FFprobe 9.0.2 CLI"
+  },
+  {
+    "name": "uberchel/mediainfo4php",
+    "version": "v1.0.8",
+    "license": "MIT",
+    "license_evidence": "https://github.com/uberchel/MediaInfo4PHP/blob/f0a168902117e0094a90b94501f006965c9aabc2/LICENSE.txt",
+    "documentation": "https://github.com/uberchel/MediaInfo4PHP/blob/f0a168902117e0094a90b94501f006965c9aabc2/ReadMe.md",
+    "input_api": "MediaInfo::Get(local PCM WAV path, false); audio codec, sample rate, channels, bit rate",
+    "composer_lock": "adapters/php/wav/uberchel/composer.lock",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "audio_codec": "pcm_s16le",
+      "sample_rate": "8000 Hz",
+      "channels": "mono",
+      "bit_rate": "128 kb/s"
+    },
+    "scope": "PCM16 audio codec, 8 kHz mono sample stream, 128 kb/s audio bit rate",
+    "family": "FFmpeg native RIFF/WAVE parser",
+    "family_note": "MediaInfo4PHP wrapper invokes local FFmpeg 9.0.2; not the MediaInfoLib backend despite its name.",
+    "adapter": "adapters/php/wav/parse.php",
+    "external_backend": "FFmpeg 9.0.2 CLI"
+  },
+  {
+    "name": "bpmfinder/bpm-finder",
+    "version": "v0.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/wsgtcyx/bpm-finder-Packagist/blob/42a2792408844170f6f14920c945bfa1eaabfa11/LICENSE",
+    "documentation": "https://github.com/wsgtcyx/bpm-finder-Packagist/blob/42a2792408844170f6f14920c945bfa1eaabfa11/README.md",
+    "input_api": "AudioFileBpmAnalyzer::analyzeFile(local rhythmic PCM WAV path); format, sample rate, channels, duration and BPM",
+    "composer_lock": "adapters/php/wav/bpmfinder/composer.lock",
+    "control": "controls/wav/120-bpm-clicks.wav",
+    "expected_output": {
+      "format": "wav",
+      "sample_rate": 8000,
+      "channels": 1,
+      "duration_seconds": 4,
+      "bpm": 120
+    },
+    "scope": "PCM16 WAV header and 120 BPM pulse train, 8 kHz mono, 4 seconds",
+    "family": "BpmFinder native PHP PCM WAV decoder",
+    "family_note": "Package WavAudioDecoder reads RIFF chunks and PCM samples directly; BPM analysis uses the decoded samples.",
+    "adapter": "adapters/php/wav/parse.php"
   }
 ]
