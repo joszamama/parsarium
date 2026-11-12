@@ -58,6 +58,7 @@ def main() -> None:
               "platform": platform.platform(),
               "php_version": execute(["php", "-r", "echo PHP_VERSION;"]).stdout,
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
+              "mediainfo_cli_version": execute(["mediainfo", "--Version"]).stdout.strip(),
               "control": "controls/mp3_id3v2/tone-tags.mp3",
               "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
               "controls": [{"path": name, "sha256": sha256((ROOT / name).read_bytes()).hexdigest()}

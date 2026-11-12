@@ -154,5 +154,25 @@
     "scope": "ID3v2.3 title, artist, and album",
     "family": "Zend Media native ID3 parser",
     "family_note": "Composer fork of Sven Vollbehr PHP Reader; local Zend_Media_Id3v2 parses ID3 frames without delegating to getID3."
+  },
+  {
+    "name": "mhor/php-mediainfo",
+    "version": "5.8.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/LICENSE",
+    "documentation": "https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/README.md",
+    "input_api": "MediaInfo::getInfo(local tagged MP3 path); getGeneral() title/performer/album",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/mediainfo/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags-long.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, performer, and album on an 18-second MP3",
+    "family": "MediaInfoLib native MP3 and ID3 parser",
+    "family_note": "Composer wrapper invokes the external MediaInfo 26.10 CLI; this is a package path over the MediaInfoLib parser family. The longer valid control is needed for the backend to read sufficient audio bytes.",
+    "external_backend": "MediaInfo command-line 26.10 (Homebrew media-info formula)"
   }
 ]

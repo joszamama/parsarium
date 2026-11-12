@@ -11,6 +11,7 @@ $vendor = match ($package) {
     'kiwilan/php-audio' => '/kiwilan/vendor/autoload.php',
     'duncan3dc/meta-audio' => '/meta_audio/vendor/autoload.php',
     'debach/zend-mp3' => '/zend_mp3/vendor/autoload.php',
+    'mhor/php-mediainfo' => '/mediainfo/vendor/autoload.php',
     default => '/vendor/autoload.php',
 };
 require __DIR__ . $vendor;
@@ -88,6 +89,14 @@ switch ($package) {
             $frames = $parsed->getFramesByIdentifier($frameId);
             $output[$field] = $frames[0]->getText();
         }
+        break;
+    case 'mhor/php-mediainfo':
+        $general = (new \Mhor\MediaInfo\MediaInfo())->getInfo($path)->getGeneral();
+        $output = [
+            'title' => $general->get('title'),
+            'artist' => $general->get('performer'),
+            'album' => $general->get('album'),
+        ];
         break;
     default:
         throw new InvalidArgumentException('unknown MP3/ID3v2 package: ' . $package);
