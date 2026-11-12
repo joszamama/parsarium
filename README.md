@@ -197,7 +197,9 @@ classpaths lock 57 regular, 5 Bytedeco, 3 Jaffree, 3 JAVE2, 12 Bramp,
 FFprobe wrappers use a checksummed local FFprobe 9.0.2 executable; set
 `PARSARIUM_FFPROBE_DIR` when it is outside `/opt/homebrew/bin`.
 vlcj-info uses checksummed Homebrew libmediainfo 26.10 and libzen 0.4.41_1;
-set `PARSARIUM_LIBMEDIAINFO_DIR` when they are outside `/opt/homebrew/lib`.
+install them with `brew install libmediainfo` and verify that Homebrew resolves
+the recorded versions before running the adapter.
+Set `PARSARIUM_LIBMEDIAINFO_DIR` when they are outside `/opt/homebrew/lib`.
 The amilesend binding uses its pinned macOS arm64 native JAR.
 `python3 controls/wav/make_control.py` regenerates the valid 556-byte
 256-frame mono PCM control (SHA-256
