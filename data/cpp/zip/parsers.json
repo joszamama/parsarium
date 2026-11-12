@@ -205,5 +205,59 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "Troldal Zippy wrapper over bundled miniz",
     "family_note": "Distinct C++ package API with bundled miniz; shares underlying parser lineage with miniz and kuba-zip."
+  },
+  {
+    "name": "poco",
+    "version": "1.15.4",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/pocoproject/poco/blob/poco-1.15.4-release/LICENSE",
+    "documentation": "https://github.com/pocoproject/poco/blob/poco-1.15.4-release/Zip/include/Poco/Zip/ZipArchive.h",
+    "input_api": "Poco::Zip::ZipArchive(std::istream&); headerBegin; Poco::Zip::ZipInputStream(std::istream&, ZipLocalFileHeader)",
+    "adapter": "adapters/cpp/zip/poco.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "POCO Zip reader",
+    "family_note": "POCO parses ZIP archive headers in its Zip library and decompresses entries with its bundled zlib; independent package API from the C-cell libraries."
+  },
+  {
+    "name": "zipios",
+    "version": "2.3.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/Zipios/Zipios/blob/2.3.4/zipios/zipfile.hpp",
+    "documentation": "https://github.com/Zipios/Zipios/blob/2.3.4/zipios/zipfile.hpp",
+    "input_api": "zipios::ZipFile(const std::string&); entries; getInputStream(const std::string&)",
+    "adapter": "adapters/cpp/zip/zipios.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Zipios ZIP reader",
+    "family_note": "Zipios parses ZIP archives with its own C++ reader and uses zlib for decompression."
+  },
+  {
+    "name": "zipper",
+    "version": "4.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Lecrapouille/zipper/blob/v4.0.0/LICENSE",
+    "documentation": "https://github.com/Lecrapouille/zipper/blob/v4.0.0/include/Zipper/Unzipper.hpp",
+    "input_api": "zipper::Unzipper(const std::string&); entries; extract(const std::string&, std::ostream&)",
+    "adapter": "adapters/cpp/zip/zipper.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Zipper wrapper over classic MiniZip fork",
+    "family_note": "Distinct C++ package API; v4.0.0 includes a pinned MiniZip fork and zlib-ng submodule. Shares classic MiniZip lineage with minizip."
   }
 ]

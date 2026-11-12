@@ -1,6 +1,6 @@
 {
   "captured_at_utc": "2026-11-12T07:37:59.874221+00:00",
-  "search_surface": "Conan Center Index shared C/C++ recipe tree; exact bounded recipe-name hits reused from the dated C ZIP source response, with C++ project documentation checked separately",
+  "search_surface": "Conan Center Index shared C/C++ recipe tree; exact bounded recipe-name hits reused from the dated C ZIP source response, with targeted C++ project documentation checked separately for POCO, Zipios, Zipper, and other leads",
   "search_index_api": "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1",
   "search_limit_per_query": 100,
   "search": [
@@ -232,13 +232,34 @@
       "source_url": "https://github.com/troldal/Zippy/archive/a838de8522f9051df0d1b202473bb6befe648702.tar.gz",
       "source_sha256": "0233303a49bae9f705cb25c44e7f8c9917c49a90c8e314ca79f48dd23dd1a836",
       "license_evidence": "https://github.com/troldal/KZip/blob/a838de8522f9051df0d1b202473bb6befe648702/LICENSE"
+    },
+    "poco": {
+      "version": "1.15.4",
+      "license": "BSL-1.0",
+      "source_url": "https://github.com/pocoproject/poco/archive/refs/tags/poco-1.15.4-release.tar.gz",
+      "source_sha256": "4635007f593646b3db8754bbb31ded34cd533487519d4d4a45c788dbff3fe07f",
+      "license_evidence": "https://github.com/pocoproject/poco/blob/poco-1.15.4-release/LICENSE"
+    },
+    "zipios": {
+      "version": "2.3.4",
+      "license": "LGPL-2.1-or-later",
+      "source_url": "https://github.com/Zipios/Zipios/archive/refs/tags/2.3.4.tar.gz",
+      "source_sha256": "c3ad6be0f6fbd035f7d4942caab77da9bca027ba0c1c8ba0f0cd8621803abb8e",
+      "license_evidence": "https://github.com/Zipios/Zipios/blob/2.3.4/zipios/zipfile.hpp"
+    },
+    "zipper": {
+      "version": "4.0.0",
+      "license": "MIT",
+      "source_url": "https://github.com/Lecrapouille/zipper/archive/refs/tags/v4.0.0.tar.gz",
+      "source_sha256": "879b34b4d5b37154fd7e3dd6ed4631dd537b678a7ee40b8469c0c15e6b4f133b",
+      "license_evidence": "https://github.com/Lecrapouille/zipper/blob/v4.0.0/LICENSE"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where package-specific and available",
     "captured_at_utc": "2026-11-12T07:50:21.979330+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. libzippp wraps libzip; Troldal Zippy bundles miniz. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set.",
+    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, and Zipper wraps a classic MiniZip fork. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set.",
     "packages": {
       "libarchive": {
         "stars": 3672,
@@ -297,11 +318,26 @@
         "repository": "https://github.com/troldal/KZip",
         "source": "https://api.github.com/repos/troldal/Zippy",
         "note": "The Zippy repository redirects to KZip; source revision is pinned."
+      },
+      "poco": {
+        "stars": 9499,
+        "repository": "https://github.com/pocoproject/poco",
+        "source": "https://api.github.com/repos/pocoproject/poco"
+      },
+      "zipios": {
+        "stars": 54,
+        "repository": "https://github.com/Zipios/Zipios",
+        "source": "https://api.github.com/repos/Zipios/Zipios"
+      },
+      "zipper": {
+        "stars": 99,
+        "repository": "https://github.com/Lecrapouille/zipper",
+        "source": "https://api.github.com/repos/Lecrapouille/zipper"
       }
     },
     "captured_between_utc": [
       "2026-11-12T07:50:21.979330+00:00",
-      "2026-11-12T08:14:18.104655+00:00"
+      "2026-11-12T08:24:16.324954+00:00"
     ]
   },
   "documentation_lead_sources": [

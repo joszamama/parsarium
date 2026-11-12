@@ -13,8 +13,7 @@ CACHE = ROOT / "adapters/cpp/zip/cache"
 LOCK = json.loads((ROOT / "data/cpp/zip/extra-source-lock.json").read_text())
 
 
-def prepare(name: str) -> None:
-    item = LOCK[name]
+def prepare(name: str, item: dict, destination_root: Path) -> None:
     archive_path = CACHE / (name + ".tar.gz")
     if archive_path.exists() and sha256(archive_path.read_bytes()).hexdigest() == item["source_sha256"]:
         data = archive_path.read_bytes()
@@ -36,7 +35,7 @@ def prepare(name: str) -> None:
             assert member.isfile() or member.isdir(), member.name
             if not member.isfile():
                 continue
-            destination = CACHE / name / Path(*parts[1:])
+            destination = destination_root / Path(*parts[1:])
             destination.parent.mkdir(parents=True, exist_ok=True)
             file = archive.extractfile(member)
             assert file is not None
@@ -45,9 +44,11 @@ def prepare(name: str) -> None:
 
 
 def main() -> None:
-    for name in LOCK:
-        prepare(name)
-        print(f"{name}: pinned {LOCK[name]['release']} source verified")
+    for name, item in LOCK.items():
+        prepare(name, item, CACHE / name)
+        for subname, subitem in item.get("submodules", {}).items():
+            prepare(name + "-" + subname, subitem, CACHE / name / "external" / subname)
+        print(f"{name}: pinned {item['release']} source verified")
 
 
 if __name__ == "__main__":

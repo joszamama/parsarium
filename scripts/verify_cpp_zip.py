@@ -33,13 +33,15 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/zip/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 11
+    assert len(parsers) == 14
     assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
     for parser in parsers:
         name = parser["name"]
+        configure = None
+        library_build = None
         if name == "libzippp":
             source = ADAPTER / "cache/libzippp/src"
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "libzip"]))
@@ -50,6 +52,49 @@ def main() -> None:
             source = ADAPTER / "cache/troldal-zippy/library"
             command = ["c++", "-std=c++17", "-O2", "-I" + str(source),
                        str(ROOT / parser["adapter"]), "-o", str(TARGET / name)]
+        elif name == "poco":
+            source = ADAPTER / "cache/poco"
+            build = TARGET / "poco-build"
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DPOCO_MINIMAL_BUILD=ON", "-DENABLE_ZIP=ON",
+                         "-DBUILD_SHARED_LIBS=OFF", "-DENABLE_FASTLOGGER=OFF",
+                         "-DENABLE_TESTS=OFF", "-DENABLE_SAMPLES=OFF",
+                         "-DCMAKE_BUILD_TYPE=Release"]
+            library_build = ["cmake", "--build", str(build), "--target", "Zip", "-j", "8"]
+            run(configure)
+            run(library_build)
+            command = ["c++", "-std=c++20", "-O2", "-I" + str(source / "Zip/include"),
+                       "-I" + str(source / "Foundation/include"),
+                       str(ROOT / parser["adapter"]),
+                       str(build / "lib/libPocoZip.a"), str(build / "lib/libPocoFoundation.a"),
+                       "-o", str(TARGET / name)]
+        elif name == "zipios":
+            source = ADAPTER / "cache/zipios"
+            build = TARGET / "zipios-build"
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DBUILD_SHARED_LIBS=OFF", "-DBUILD_DOCUMENTATION=OFF",
+                         "-DBUILD_ZIPIOS_TESTS=OFF", "-DCMAKE_BUILD_TYPE=Release"]
+            library_build = ["cmake", "--build", str(build), "--target", "zipios", "-j", "8"]
+            run(configure)
+            run(library_build)
+            command = ["c++", "-std=c++17", "-O2", "-I" + str(source), "-I" + str(build),
+                       str(ROOT / parser["adapter"]), str(build / "src/libzipios.a"),
+                       "-lz", "-o", str(TARGET / name)]
+        elif name == "zipper":
+            source = ADAPTER / "cache/zipper"
+            build = TARGET / "zipper-build"
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DZIPPER_BUILD_DEMOS=OFF", "-DZIPPER_BUILD_TESTS=OFF",
+                         "-DUSE_AES=OFF", "-DCMAKE_SKIP_INSTALL_RULES=ON",
+                         "-DCMAKE_BUILD_TYPE=Release"]
+            library_build = ["cmake", "--build", str(build), "--target", "zipper", "-j", "8"]
+            run(configure)
+            run(library_build)
+            command = ["c++", "-std=c++17", "-O2", "-I" + str(source / "include"),
+                       str(ROOT / parser["adapter"]), str(build / "libzipper.a"),
+                       str(build / "external/minizip/libminizip.a"),
+                       str(build / "external/zlib-ng/libz.a"),
+                       "-o", str(TARGET / name)]
         else:
             assert parser["version"] == c_parsers[name]["version"]
             assert parser["expected_output"] == c_parsers[name]["expected_output"]
@@ -66,6 +111,8 @@ def main() -> None:
         assert output == parser["expected_output"], (name, output)
         rows.append({"package": name, "version": parser["version"],
                      "control": parser["control"], "build_command": shlex.join(command),
+                     "configure_command": shlex.join(configure) if configure else None,
+                     "library_build_command": shlex.join(library_build) if library_build else None,
                      "command": shlex.join(execute), "output": output, "pass": True})
         print(f"{name}@{parser['version']}: C++ passed")
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
