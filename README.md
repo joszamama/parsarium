@@ -15,8 +15,9 @@ ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
-20-parser batches, including PHP × WAV. There are 62 cells
-at the 20-parser target, two started below target, and 24 marked `not_started`;
+20-parser batches, including PHP × WAV. PHP × PDF has a six-path pilot batch.
+There are 62 cells at the 20-parser target, three started below target, and
+23 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -40,6 +41,7 @@ python3 scripts/verify_php_png.py
 python3 scripts/verify_php_ascii_pnm.py
 python3 scripts/verify_php_mp3_id3v2.py
 python3 scripts/verify_php_wav.py
+python3 scripts/verify_php_pdf.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -321,6 +323,15 @@ Fileinfo returns only a MIME type, while generic FFI and file I/O are not WAV
 parsers. The WAV replay requires the PHP 8.5 extensions and MediaInfo/FFmpeg
 CLI tools used by the PHP MP3 batch, plus SoX on `PATH`. Run
 `python3 scripts/verify_php_wav.py` from the repository root.
+
+The [PHP × PDF ranking](data/php/pdf/ranking.md) starts with six pinned
+package paths passing the valid one-page PDF control. The six-query Packagist
+snapshot saved 546 hits and 412 distinct names; nine higher-adoption leads
+remain unresolved. FPDI reads the page through its native reader and requires
+the pinned FPDF companion. Spatie delegates text extraction to Poppler
+`pdftotext` 26.11.0. The [PHP PDF runtime inventory](data/php/pdf/standard.json)
+records MIME-only Fileinfo and GD's failed PDF image reads. Run
+`python3 scripts/verify_php_pdf.py` from the repository root.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1246,6 +1257,9 @@ uncertainty.
   control results, unresolved leads, lifetime download ranking, and a separate
   PHP runtime inventory. Its adapter reuses the exact Composer locks listed in
   `adapters/php/mp3_id3v2/`.
+- `data/php/pdf/`: Packagist PDF discovery hits, six pinned parser paths,
+  control results, unresolved leads, lifetime download ranking, and a separate
+  PHP runtime inventory. Its Composer lock and adapter live in `adapters/php/pdf/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

@@ -1,0 +1,42 @@
+{
+  "ecosystem": "PHP",
+  "format": "PDF",
+  "runtime": "PHP 8.5.12 CLI with bundled Fileinfo, GD, and FFI extensions",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "candidate": "Fileinfo finfo::file and finfo_file",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.fileinfo.php",
+        "https://www.php.net/manual/en/function.finfo-file.php"
+      ],
+      "finding": "The valid control returned application/pdf only. PHP documents content-type identification, not PDF pages, objects, or text extraction; MIME detection alone does not qualify."
+    },
+    {
+      "candidate": "GD getimagesize and imagecreatefromstring",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.getimagesize.php",
+        "https://www.php.net/manual/en/function.imagecreatefromstring.php"
+      ],
+      "finding": "The documented imagecreatefromstring formats do not include PDF. Both APIs returned false on the valid PDF control, with no page or raster result."
+    },
+    {
+      "candidate": "file_get_contents and stream functions",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.file-get-contents.php",
+        "https://www.php.net/manual/en/book.stream.php"
+      ],
+      "finding": "These expose raw bytes or streams without bundled PDF interpretation."
+    },
+    {
+      "candidate": "bundled FFI extension",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.ffi.php"
+      ],
+      "finding": "FFI only calls external native libraries; it supplies no PDF parser by itself."
+    }
+  ],
+  "runtime_probe": "adapters/php/pdf/runtime_probe.php",
+  "limit": "Scoped to PHP 8.5.12 core and loaded Fileinfo, GD, and FFI extensions on this host. Imagick is absent; separately installed PHP extensions are third-party candidates, not bundled standard APIs."
+}

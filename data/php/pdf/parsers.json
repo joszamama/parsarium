@@ -1,0 +1,109 @@
+[
+  {
+    "name": "setasign/fpdi",
+    "version": "v2.6.10",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Setasign/FPDI/blob/be29a9d43c64f06569c1075f181e43d829a3d5bb/LICENSE.txt",
+    "documentation": "https://github.com/Setasign/FPDI/blob/be29a9d43c64f06569c1075f181e43d829a3d5bb/README.md",
+    "input_api": "Fpdi::setSourceFile(local PDF path), importPage(1), getTemplateSize(); page count and dimensions",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 216,
+      "height": 279
+    },
+    "scope": "One PDF page, 216 \u00d7 279 mm rounded imported MediaBox",
+    "family": "FPDI native PHP PDF object reader",
+    "family_note": "FPDI reads and imports the PDF page using its own parser; setasign/fpdf 1.9.0 is a required rendering companion, not a separate PDF reader.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "smalot/pdfparser",
+    "version": "v2.13.1",
+    "license": "LGPL-3.0",
+    "license_evidence": "https://github.com/smalot/pdfparser/blob/a71c6dd38e60a995fdb4d36e4433b8b3557c65dc/LICENSE.txt",
+    "documentation": "https://github.com/smalot/pdfparser/blob/a71c6dd38e60a995fdb4d36e4433b8b3557c65dc/README.md",
+    "input_api": "Parser::parseFile(local PDF path); page count and extracted text",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    },
+    "scope": "One PDF page and embedded Parsarium text",
+    "family": "Smalot native PHP PDF parser",
+    "family_note": "Own PHP PDF object and content stream parser.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "tecnickcom/tc-lib-pdf-parser",
+    "version": "3.16.7",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/tecnickcom/tc-lib-pdf-parser/blob/f83cadbc3b347732ed928cd7b654589688812c5f/LICENSE",
+    "documentation": "https://github.com/tecnickcom/tc-lib-pdf-parser/blob/f83cadbc3b347732ed928cd7b654589688812c5f/README.md",
+    "input_api": "Parser::parse(local PDF bytes); cross-reference array and decoded object count",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "objects": 6,
+      "xref_type": "array"
+    },
+    "scope": "Six indirect PDF objects and parsed cross-reference structure",
+    "family": "TCPDF parser native PHP PDF object reader",
+    "family_note": "Standalone PDF parser package; tc-lib-pdf-filter 2.11.9 is its pinned stream filter dependency.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "spatie/pdf-to-text",
+    "version": "1.55.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/spatie/pdf-to-text/blob/c5c6c7fa8aaa34de7eb6cde42b45aec480c8afb6/LICENSE.md",
+    "documentation": "https://github.com/spatie/pdf-to-text/blob/c5c6c7fa8aaa34de7eb6cde42b45aec480c8afb6/README.md",
+    "input_api": "Pdf::getText(local PDF path); extracted text",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "Poppler pdftotext PDF parser",
+    "family_note": "PHP wrapper invokes local pdftotext 26.11.0; shared native backend is recorded.",
+    "adapter": "adapters/php/pdf/parse.php",
+    "external_backend": "Poppler pdftotext 26.11.0 CLI"
+  },
+  {
+    "name": "prinsfrank/pdfparser",
+    "version": "v4.3.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/PrinsFrank/pdfparser/blob/441e0669b61e4028ba34c030d6625770c8f7e1ad/LICENSE",
+    "documentation": "https://github.com/PrinsFrank/pdfparser/blob/441e0669b61e4028ba34c030d6625770c8f7e1ad/README.md",
+    "input_api": "PdfParser::parseFile(local PDF path)->getText()",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "PrinsFrank native PHP PDF parser",
+    "family_note": "Own PHP PDF object and content stream parser.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "asika/pdf2text",
+    "version": "1.0.6",
+    "license": "MIT",
+    "license_evidence": "https://github.com/asika32764/php-pdf-2-text/blob/7e328221418ee237b60aee291f416633469162f7/composer.json",
+    "documentation": "https://github.com/asika32764/php-pdf-2-text/blob/7e328221418ee237b60aee291f416633469162f7/README.md",
+    "input_api": "Pdf2text::decode(local PDF path); extracted text",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "SilverStripe-derived native PHP PDF text parser",
+    "family_note": "Composer adaptation of Darren Inwood/SilverStripe PDF-to-text reader; separate package source and shared lineage noted.",
+    "adapter": "adapters/php/pdf/parse.php"
+  }
+]
