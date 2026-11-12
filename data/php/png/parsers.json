@@ -214,5 +214,79 @@
     "scope": "PNG decoded to WebP with dimensions",
     "family": "PHP GD PNG decoder",
     "family_note": "Explicit GD converter decodes local PNG through bundled PHP GD before WebP encoding."
+  },
+  {
+    "name": "ksubileau/color-thief-php",
+    "version": "v3.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ksubileau/color-thief-php/blob/2ca3d3a05c947f71c8cf22d2b0a85603b3f2df94/LICENSE",
+    "documentation": "https://github.com/ksubileau/color-thief-php/blob/2ca3d3a05c947f71c8cf22d2b0a85603b3f2df94/src/ColorThief/ColorThief.php",
+    "input_api": "ColorThief(quality:1, preferredAdapter:Gd)::getPalette(local PNG path, 2); toHex",
+    "adapter": "adapters/php/png/ksubileau_color_thief.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "palette": [
+        "#00ff00",
+        "#ff0000"
+      ]
+    },
+    "scope": "decoded two-color palette",
+    "family": "PHP GD PNG decoder",
+    "family_note": "ColorThief delegates PNG input to its GD adapter, then quantizes decoded pixels."
+  },
+  {
+    "name": "yiisoft/yii2-imagine",
+    "version": "2.3.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/yiisoft/yii2-imagine/blob/7ec4332dc25893aec5a7cf084722b162b3a4d55d/LICENSE.md",
+    "documentation": "https://github.com/yiisoft/yii2-imagine/blob/7ec4332dc25893aec5a7cf084722b162b3a4d55d/src/BaseImage.php",
+    "input_api": "Image::thumbnail(local PNG path, 2, 1); ImageInterface::getSize",
+    "adapter": "adapters/php/png/yiisoft_yii2_imagine.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded PNG dimensions after thumbnail",
+    "family": "Imagine / PHP GD PNG decoder",
+    "family_note": "Yii wrapper calls Imagine with its GD driver; the underlying Imagine and PHP GD families are shared with other paths."
+  },
+  {
+    "name": "aplus/image",
+    "version": "v3.0.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/aplus-framework/image/blob/02a8145dc166b4e850b0e58bc11f41d4192bc4a7/LICENSE",
+    "documentation": "https://github.com/aplus-framework/image/blob/02a8145dc166b4e850b0e58bc11f41d4192bc4a7/src/Image.php",
+    "input_api": "Framework\\Image\\Image(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/aplus_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Aplus Image calls getimagesize then imagecreatefrompng in the bundled PHP GD extension."
+  },
+  {
+    "name": "smottt/wideimage",
+    "version": "1.1.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/smottt/WideImage/blob/755d1b2b474ce9c32092aa6ac0357ebf857545f5/LICENSE",
+    "documentation": "https://github.com/smottt/WideImage/blob/755d1b2b474ce9c32092aa6ac0357ebf857545f5/lib/WideImage/WideImage.php",
+    "input_api": "WideImage::load(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/smottt_wideimage.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "WideImage uses its PNG mapper backed by PHP GD; Composer lists GPL-2.0 and LGPL-2.1, while the pinned LICENSE text states LGPL 2.1 or later."
   }
 ]

@@ -188,13 +188,13 @@ remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
 exact search limits and uncertainty. Reproduction requires PHP 8.5 with zip
 and Phar extensions, plus Composer 2; the verifier installs locked packages.
 
-The PHP × PNG verifier installs eleven exact Composer releases from one lockfile.
-All **11/11 third-party paths and 4/4 bundled PHP APIs passed** the valid 2×1
-red/green PNG control. Nine paths use PHP GD for decoding, including Glide
-through Intervention Image. FastImageSize reads PNG dimensions from headers in
-PHP; php-vips uses installed libvips 8.18.7 through PHP FFI. The bundled API
+The PHP × PNG verifier installs fifteen exact Composer releases from one lockfile.
+All **15/15 third-party paths and 4/4 bundled PHP APIs passed** the valid 2×1
+red/green PNG control. Thirteen paths use PHP GD for decoding, including Glide
+through Intervention Image and Yii Image through Imagine. FastImageSize reads PNG
+dimensions from headers in PHP; php-vips uses installed libvips 8.18.7 through PHP FFI. The bundled API
 inventory keeps header dimension readers separate from pixel decoders. Three
-Packagist searches saved 300 discovery hits; three documentation leads remain unresolved. The
+Packagist searches saved 300 discovery hits; one high-adoption Laravel lead remains unresolved. The
 [PHP PNG cell summary](data/php/png/cell.json) records the search limits and
 uncertainty. Reproduction requires PHP 8.5 with GD and FFI, libvips 8.18.7,
 and Composer 2.
