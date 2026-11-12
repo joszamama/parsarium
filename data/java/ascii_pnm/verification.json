@@ -1,10 +1,16 @@
 {
-  "checked_at_utc": "2026-11-12T20:15:34.111493+00:00",
+  "checked_at_utc": "2026-11-12T20:19:19.900965+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
-    "classpath_jars": 44
+    "classpath_jars": {
+      "magick": 2,
+      "main": 44,
+      "vips": 2
+    },
+    "libvips": "vips-8.18.7",
+    "imagemagick": "Version: ImageMagick 7.1.2-35 Q16-HDRI aarch64 acaf7e418:20261031 https://imagemagick.org"
   },
   "control": "controls/ascii_pnm/red-green.ppm",
   "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
@@ -20,7 +26,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter commons-imaging controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter commons-imaging controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "imageio-pnm",
@@ -32,7 +38,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter twelvemonkeys-pnm controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter twelvemonkeys-pnm controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "jai-imageio-core",
@@ -44,7 +50,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter jai-imageio-core controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter jai-imageio-core controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "ij",
@@ -56,7 +62,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter imagej controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter imagej controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "openpnp-opencv",
@@ -68,7 +74,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter openpnp-opencv controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter openpnp-opencv controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "thumbnailator",
@@ -80,7 +86,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter thumbnailator controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter thumbnailator controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "boofcv-io",
@@ -92,7 +98,7 @@
         "pixels": "ffff0000,ff00ff00"
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter boofcv-io controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter boofcv-io controls/ascii_pnm/red-green.ppm"
     },
     {
       "package": "tika-image",
@@ -103,7 +109,31 @@
         "height": 1
       },
       "pass": true,
-      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter tika-image controls/ascii_pnm/red-green.ppm"
+      "command": "java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter tika-image controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "imageio-native-vips",
+      "version": "2.0.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "/opt/homebrew/opt/openjdk/bin/java --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked vips classpath> PnmNativeAdapter controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "imageio-native-magick",
+      "version": "2.0.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "/opt/homebrew/opt/openjdk/bin/java --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked magick classpath> PnmNativeAdapter controls/ascii_pnm/red-green.ppm"
     }
   ],
   "runtime": [],

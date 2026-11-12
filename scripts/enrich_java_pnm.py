@@ -67,11 +67,15 @@ def main() -> None:
         "scope": "Known public direct dependents of the exact Maven release; incomplete coverage and version-age bias",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(), "packages": metrics}
     (DATA / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
-    jars = [Path(item) for item in (ADAPTER / "target/classpath.txt").read_text().strip().split(":")]
-    lock = {"classpath": [{"repository_path": str(jar.relative_to(REPOSITORY)),
-                            "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]}
-    (ADAPTER / "dependencies.lock.json").write_text(json.dumps(lock, indent=2) + "\n")
-    print(f"Pinned {len(releases)} releases and {len(jars)} classpath JARs")
+    total_jars = 0
+    for module in ("main", "vips", "magick"):
+        directory = ADAPTER if module == "main" else ADAPTER / module
+        jars = [Path(item) for item in (directory / "target/classpath.txt").read_text().strip().split(":")]
+        lock = {"classpath": [{"repository_path": str(jar.relative_to(REPOSITORY)),
+                                "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]}
+        (directory / "dependencies.lock.json").write_text(json.dumps(lock, indent=2) + "\n")
+        total_jars += len(jars)
+    print(f"Pinned {len(releases)} releases and {total_jars} classpath JARs")
 
 
 if __name__ == "__main__":

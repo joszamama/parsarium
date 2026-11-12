@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 import json
+import os
 import platform
 import subprocess
 
@@ -25,35 +26,54 @@ def main() -> None:
     assert CONTROL.read_text() == "P3\n2 1\n255\n255 0 0  0 255 0\n"
     control_hash = sha256(CONTROL.read_bytes()).hexdigest()
 
-    run(["mvn", "-q", "-DskipTests", "package",
-         "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
-         "-Dmdep.outputFile=target/classpath.txt"], ADAPTER)
-    jars = [Path(item) for item in (ADAPTER / "target/classpath.txt").read_text().strip().split(":")]
-    actual = [{"repository_path": str(jar.relative_to(REPOSITORY)),
-               "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
-    assert actual == json.loads((ADAPTER / "dependencies.lock.json").read_text())["classpath"]
-    by_path = {item["repository_path"]: item["sha256"] for item in actual}
+    module_jars = {}
+    for module in sorted({parser.get("adapter_module", "main") for parser in parsers}):
+        directory = ADAPTER if module == "main" else ADAPTER / module
+        run(["mvn", "-q", "-DskipTests", "package",
+             "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
+             "-Dmdep.outputFile=target/classpath.txt"], directory)
+        jars = [Path(item) for item in (directory / "target/classpath.txt").read_text().strip().split(":")]
+        actual = [{"repository_path": str(jar.relative_to(REPOSITORY)),
+                   "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
+        assert actual == json.loads((directory / "dependencies.lock.json").read_text())["classpath"]
+        module_jars[module] = jars
+    java27 = Path(os.environ.get("PARSARIUM_JAVA27_HOME", "/opt/homebrew/opt/openjdk")) / "bin"
+    native_classes = ADAPTER / "native/target"
+    native_classes.mkdir(parents=True, exist_ok=True)
+    run([str(java27 / "javac"), "--release", "26", "-d", str(native_classes),
+         str(ADAPTER / "native/PnmNativeAdapter.java")])
     for parser in parsers:
         release = snapshot["releases"][parser["name"]]
         assert (release["group"], release["artifact"], release["version"]) == (
             parser["group"], parser["artifact"], parser["version"])
         stem = f"{parser['artifact']}-{parser['version']}"
         path = f"{parser['group'].replace('.', '/')}/{parser['artifact']}/{parser['version']}/{stem}.jar"
+        jars = module_jars[parser.get("adapter_module", "main")]
+        by_path = {str(jar.relative_to(REPOSITORY)): sha256(jar.read_bytes()).hexdigest() for jar in jars}
         assert by_path[path] == release["jar_sha256"]
         pom = REPOSITORY / path.replace(".jar", ".pom")
         assert sha256(pom.read_bytes()).hexdigest() == release["pom_sha256"]
 
-    classpath = str(ADAPTER / "target/classes") + ":" + ":".join(str(jar) for jar in jars)
     rows = []
     for parser in parsers:
         label = parser["adapter_label"]
-        command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
-                   "org.parsarium.PnmAdapter", label, str(CONTROL)]
+        module = parser.get("adapter_module", "main")
+        if module == "main":
+            classpath = str(ADAPTER / "target/classes") + ":" + ":".join(str(jar) for jar in module_jars[module])
+            command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
+                       "org.parsarium.PnmAdapter", label, str(CONTROL)]
+            display = f"java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter {label} {parser['control']}"
+        else:
+            classpath = str(native_classes) + ":" + ":".join(str(jar) for jar in module_jars[module])
+            command = [str(java27 / "java"), "--enable-native-access=ALL-UNNAMED",
+                       "-Djava.awt.headless=true", "-cp", classpath,
+                       "PnmNativeAdapter", str(CONTROL)]
+            display = f"{java27 / 'java'} --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked {module} classpath> PnmNativeAdapter {parser['control']}"
         output = json.loads(run(command).stdout.strip())
         assert output == parser["expected_output"], (label, output)
         rows.append({"package": parser["name"], "version": parser["version"],
                      "control": parser["control"], "output": output, "pass": True,
-                     "command": f"java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.PnmAdapter {label} {parser['control']}"})
+                     "command": display})
         print(f"{label}: passed")
 
     runtime = ADAPTER / "target/runtime"
@@ -65,7 +85,10 @@ def main() -> None:
     report = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "environment": {"java": run(["java", "-version"]).stderr.strip(),
                               "maven": run(["mvn", "-version"]).stdout.splitlines()[0],
-                              "platform": platform.platform(), "classpath_jars": len(jars)},
+                              "platform": platform.platform(),
+                              "classpath_jars": {module: len(jars) for module, jars in module_jars.items()},
+                              "libvips": run(["vips", "--version"]).stdout.strip(),
+                              "imagemagick": run(["magick", "-version"]).stdout.splitlines()[0]},
               "control": "controls/ascii_pnm/red-green.ppm", "control_sha256": control_hash,
               "control_meaning": "Valid ASCII P3 PPM with two red/green pixels",
               "third_party": rows, "runtime": [],

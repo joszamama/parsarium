@@ -70,5 +70,23 @@
     "family": "Apache Tika ImageParser over ImageIO PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM image width and height",
     "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "tika-image",
     "expected_output": {"width": 2, "height": 1}
+  },
+  {
+    "name": "imageio-native-vips", "group": "io.github.ghosthack", "artifact": "imageio-native-vips", "version": "2.0.0",
+    "license": "MIT", "license_evidence": "Maven parent io.github.ghosthack:imageio-native-parent:2.0.0 POM license",
+    "input_api": "ImageIO.getImageReaders(ImageInputStream local file) selects ghosthack routing reader; read(0) delegates to libvips",
+    "documentation": "https://github.com/ghosthack/imageio-native#optional-backends",
+    "family": "imageio-native-vips wrapper over libvips Netpbm decoder", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imageio-native-vips", "adapter_module": "vips",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "imageio-native-magick", "group": "io.github.ghosthack", "artifact": "imageio-native-magick", "version": "2.0.0",
+    "license": "MIT", "license_evidence": "Maven parent io.github.ghosthack:imageio-native-parent:2.0.0 POM license",
+    "input_api": "ImageIO.getImageReaders(ImageInputStream local file) selects ghosthack routing reader; read(0) delegates to ImageMagick",
+    "documentation": "https://github.com/ghosthack/imageio-native#imagemagick",
+    "family": "imageio-native-magick wrapper over ImageMagick Netpbm decoder", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imageio-native-magick", "adapter_module": "magick",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
   }
 ]
