@@ -40,3 +40,24 @@ assert data_long[:4] == b"ID3\x03" and len(data_long) == 72941
 out_long = root / "tone-tags-long.mp3"
 out_long.write_bytes(data_long)
 print(f"Wrote {len(data_long)} MP3 bytes with SHA-256 {expected_long_sha256}")
+
+# Derive an ID3v2.4 control from the same valid MPEG audio frames. ID3v2.4
+# uses synchsafe frame lengths, unlike the ID3v2.3 source above.
+def synchsafe(value: int) -> bytes:
+    assert 0 <= value < 1 << 28
+    return bytes((value >> shift) & 0x7f for shift in (21, 14, 7, 0))
+
+
+original_tag_size = sum((byte & 0x7f) << shift for byte, shift in zip(data[6:10], (21, 14, 7, 0)))
+audio_frames = data[10 + original_tag_size:]
+assert audio_frames[:2] == b"\xff\xe3"
+frames = b""
+for frame_id, value in ((b"TIT2", "Parsarium"), (b"TPE1", "Control"), (b"TALB", "Pilot")):
+    payload = b"\x03" + value.encode("utf-8")
+    frames += frame_id + synchsafe(len(payload)) + b"\x00\x00" + payload
+data_v24 = b"ID3\x04\x00\x00" + synchsafe(len(frames)) + frames + audio_frames
+expected_v24_sha256 = "a5337540e40f66d89398dbc29e366034d21ec5ba5f0cd539392cddb07530616d"
+assert sha256(data_v24).hexdigest() == expected_v24_sha256
+out_v24 = root / "tone-tags-v24.mp3"
+out_v24.write_bytes(data_v24)
+print(f"Wrote {len(data_v24)} ID3v2.4 MP3 bytes with SHA-256 {expected_v24_sha256}")

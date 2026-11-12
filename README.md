@@ -293,11 +293,12 @@ tested PHP core and GD APIs did not parse the control. Reproduction requires
 PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, FFprobe, phpize, and Composer 2. The
 verifier builds Imagick into ignored cache from the pinned PECL source archive.
 
-The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has five
-pinned package paths passing a one-second ID3v2.3-tagged MP3 control. The
-Laravel wrapper shares getID3, MediaFile shares Mp3Info, and ID3Parser derives
-from getID3. Five bounded Packagist searches saved 164 hits and 128 distinct
-names. Five plausible leads remain unresolved, and 15 paths are still needed. The
+The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has seven
+pinned package paths passing one-second ID3v2.3 or ID3v2.4 tagged MP3
+controls. The Laravel and Kiwilan wrappers share getID3, MediaFile shares
+Mp3Info, and ID3Parser derives from getID3; MetaAudio has its own ID3 module.
+Five bounded Packagist searches saved 164 hits and 128 distinct names. Five
+plausible leads remain unresolved, and 13 paths are still needed. The
 [runtime inventory](data/php/mp3_id3v2/standard.json) records that PHP Fileinfo
 returns only a MIME type; the separate PECL id3 extension was absent.
 
@@ -1217,9 +1218,9 @@ uncertainty.
   paths, lifetime download ranking, control results, leads, and a separate PHP
   runtime inventory. Eight Composer locks live under `adapters/php/ascii_pnm/`,
   and a pinned PECL Imagick source lock lives with the cell data.
-- `data/php/mp3_id3v2/`: Packagist discovery hits, five pinned third-party
+- `data/php/mp3_id3v2/`: Packagist discovery hits, seven pinned third-party
   paths, lifetime download ranking, valid tag results, unresolved leads, and a
-  separate PHP runtime inventory. Two Composer locks and the adapter live under
+  separate PHP runtime inventory. Four Composer locks and the adapter live under
   `adapters/php/mp3_id3v2/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.

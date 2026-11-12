@@ -44,7 +44,9 @@ def main() -> None:
         rows.append({"package": name, "version": parser["version"],
                      "composer_lock": parser["composer_lock"], "composer_lock_sha256": lock["sha256"],
                      "source_reference": release["source_reference"],
-                     "control": parser["control"], "command": " ".join(command),
+                     "control": parser["control"],
+                     "control_sha256": sha256((ROOT / parser["control"]).read_bytes()).hexdigest(),
+                     "command": " ".join(command),
                      "output": output, "pass": True})
         print(f"{name}@{parser['version']}: passed")
 
@@ -58,6 +60,8 @@ def main() -> None:
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "control": "controls/mp3_id3v2/tone-tags.mp3",
               "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
+              "controls": [{"path": name, "sha256": sha256((ROOT / name).read_bytes()).hexdigest()}
+                           for name in sorted({parser["control"] for parser in parsers})],
               "composer_locks": [{"path": name, "sha256": lock["sha256"]}
                                  for name, lock in locks.items()],
               "third_party": rows, "runtime": [],

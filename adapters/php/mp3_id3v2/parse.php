@@ -6,7 +6,13 @@ if ($package === null || $path === null) {
     throw new InvalidArgumentException('usage: php parse.php PACKAGE CONTROL');
 }
 
-require __DIR__ . ($package === 'wapmorgan/media-file' ? '/legacy/vendor/autoload.php' : '/vendor/autoload.php');
+$vendor = match ($package) {
+    'wapmorgan/media-file' => '/legacy/vendor/autoload.php',
+    'kiwilan/php-audio' => '/kiwilan/vendor/autoload.php',
+    'duncan3dc/meta-audio' => '/meta_audio/vendor/autoload.php',
+    default => '/vendor/autoload.php',
+};
+require __DIR__ . $vendor;
 
 switch ($package) {
     case 'james-heinrich/getid3':
@@ -54,6 +60,24 @@ switch ($package) {
             'is_audio' => $parsed->isAudio(),
             'sample_rate' => $parsed->getAudio()->getSampleRate(),
             'bit_rate' => $parsed->getAudio()->getBitRate(),
+        ];
+        break;
+    case 'kiwilan/php-audio':
+        $parsed = \Kiwilan\Audio\Audio::read($path);
+        $output = [
+            'title' => $parsed->getTitle(),
+            'artist' => $parsed->getArtist(),
+            'album' => $parsed->getAlbum(),
+        ];
+        break;
+    case 'duncan3dc/meta-audio':
+        $tagger = new \duncan3dc\MetaAudio\Tagger();
+        $tagger->addDefaultModules();
+        $parsed = $tagger->open($path);
+        $output = [
+            'title' => $parsed->getTitle(),
+            'artist' => $parsed->getArtist(),
+            'album' => $parsed->getAlbum(),
         ];
         break;
     default:
