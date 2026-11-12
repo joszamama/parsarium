@@ -52,7 +52,7 @@ def main() -> None:
             assert sha256(Path(installed[path_key]).read_bytes()).hexdigest() == installed[hash_key]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
@@ -86,7 +86,13 @@ def main() -> None:
                             "-o", str(build / "HTTPParserC-adapter")],
             "libmicrohttpd": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                               "-I" + str(ADAPTER), str(ADAPTER / "libmicrohttpd.c"),
-                              *mhdflags, "-o", str(build / "libmicrohttpd-adapter")]}
+                              *mhdflags, "-o", str(build / "libmicrohttpd-adapter")],
+            "libevhtp": ["cc", "-std=c11", "-Wall", "-Wextra", "-Wno-sign-compare",
+                         "-Wno-unused-function", "-Werror", "-I" + str(ADAPTER),
+                         "-I" + str(build / "libevhtp-1.2.9/htparse"),
+                         str(ADAPTER / "libevhtp.c"),
+                         str(build / "libevhtp-1.2.9/htparse/htparse.c"),
+                         "-o", str(build / "libevhtp-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]

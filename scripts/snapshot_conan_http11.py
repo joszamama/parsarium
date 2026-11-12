@@ -12,7 +12,7 @@ INDEX = "https://api.github.com/repos/conan-io/conan-center-index/git/trees/mast
 REPOS = {"llhttp": "nodejs/llhttp", "http-parser": "nodejs/http-parser",
          "picohttpparser": "h2o/picohttpparser", "mongoose": "cesanta/mongoose",
          "httpp": "cebem1nt/httpp", "HTTPParserC": "Building42/HTTPParserC",
-         "libmicrohttpd": None}
+         "libmicrohttpd": None, "libevhtp": "ellzey/libevhtp"}
 
 
 def get(url: str) -> dict:

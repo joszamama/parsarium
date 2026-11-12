@@ -89,5 +89,18 @@
     "adapter": "adapters/c/http11/libmicrohttpd.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+  },
+  {
+    "name": "libevhtp",
+    "version": "1.2.9",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned release LICENSE",
+    "documentation": "https://github.com/ellzey/libevhtp/blob/1.2.9/htparse/htparse.h",
+    "input_api": "htparser_new; htparser_init(..., htp_type_request); htparser_run(parser, hooks, local request bytes, length); path and args callbacks plus method/version accessors",
+    "family": "libevhtp bundled htparse C HTTP/1 request scanner; source distributed and header installed by libevhtp",
+    "scope": "HTTP/1.1 GET request method, path, query and version after complete headers",
+    "adapter": "adapters/c/http11/libevhtp.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
   }
 ]
