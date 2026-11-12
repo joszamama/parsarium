@@ -1,0 +1,44 @@
+[
+  {
+    "name": "netune-http1",
+    "status": "unresolved",
+    "reason": "Async HTTP/1.1 codec documents stream parsing; local stream adapter and control result remain unverified.",
+    "source": "https://docs.rs/netune-http1/0.0.1/netune_http1/"
+  },
+  {
+    "name": "min_http11_parser",
+    "status": "unresolved",
+    "reason": "Async BufRead parser is plausible, but a pinned local-stream adapter and control result remain unverified.",
+    "source": "https://docs.rs/min_http11_parser/0.4.8/min_http11_parser/"
+  },
+  {
+    "name": "http-codec",
+    "status": "unresolved",
+    "reason": "Older Tokio codec exposes request decoding; a pinned valid-control result remains unverified.",
+    "source": "https://docs.rs/http-codec/0.1.1/http_codec/"
+  },
+  {
+    "name": "kawa",
+    "status": "unresolved",
+    "reason": "HTTP parser primitives are exposed, but a direct complete-message adapter and control result remain unverified.",
+    "source": "https://docs.rs/kawa/0.7.2/kawa/"
+  },
+  {
+    "name": "http_request_parser",
+    "status": "excluded",
+    "reason": "Public request constructor reads a TcpStream; no documented local file, byte, or generic stream input API was found.",
+    "source": "https://docs.rs/http_request_parser/0.2.0/http_request_parser/"
+  },
+  {
+    "name": "http-range-header",
+    "status": "excluded_from_full_message_count",
+    "reason": "Parses a Range header value, not a complete HTTP/1.1 request or response.",
+    "source": "https://docs.rs/http-range-header/latest/http_range_header/"
+  },
+  {
+    "name": "http-auth",
+    "status": "excluded_from_full_message_count",
+    "reason": "Authentication header handling does not by itself demonstrate HTTP/1.1 message parsing.",
+    "source": "https://crates.io/crates/http-auth"
+  }
+]

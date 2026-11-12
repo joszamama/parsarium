@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Rust",
+  "format": "HTTP/1.1",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Rust 1.99.1 standard library",
+      "official_documentation_scope": [
+        "https://doc.rust-lang.org/std/",
+        "https://doc.rust-lang.org/std/net/struct.TcpStream.html",
+        "https://doc.rust-lang.org/std/io/trait.BufRead.html"
+      ],
+      "finding": "The documented standard library has no HTTP/1.1 message parser. TcpStream transports bytes and BufRead splits input into lines or byte-delimited chunks without interpreting request lines, status lines, headers, or HTTP framing. No format-aware bundled API was available to run against the valid wire controls."
+    }
+  ],
+  "limit": "This covers the documented Rust 1.99.1 standard library; external crates and native system libraries are separate."
+}
