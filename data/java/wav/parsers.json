@@ -121,5 +121,15 @@
     "family": "musicg PCM WAVE reader", "scope": "WAVE format, sample rate, channels, bit depth and sample count",
     "control": "controls/wav/256-samples.wav",
     "expected_output": {"format": "WAVE", "sample_rate": 8000, "channels": 1, "bits": 16, "samples": 256}
+  },
+  {
+    "name": "jaffree", "group": "com.github.kokorin.jaffree", "artifact": "jaffree", "version": "2024.08.29",
+    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "FFprobe.atPath(Path localExecutableDir).setShowStreams(true).setInput(Path localWav).execute().getStreams()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-javadoc.jar",
+    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
+    "family": "Jaffree wrapper over local FFprobe/FFmpeg", "scope": "PCM codec, sample rate and channels",
+    "adapter_module": "ffprobe", "control": "controls/wav/256-samples.wav",
+    "expected_output": {"codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
   }
 ]

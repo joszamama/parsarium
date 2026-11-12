@@ -87,21 +87,28 @@ def main() -> None:
     env = java_environment()
     java = str(JAVA_HOME / "bin/java")
     classpaths, jar_counts = {}, {}
-    for module in ("main", "bytedeco"):
+    for module in ("main", "bytedeco", "ffprobe"):
         classpaths[module], jar_counts[module] = build_third_party(env, module)
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
     assert len({(p["group"], p["artifact"]) for p in parsers}) == len(parsers)
     check_releases(snapshot)
+    ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
+    tool = snapshot["external_tools"]["ffprobe"]
+    assert sha256(ffprobe.read_bytes()).hexdigest() == tool["sha256"], "FFprobe executable differs from pinned checksum"
+    assert subprocess.run([str(ffprobe), "-version"], text=True, capture_output=True,
+                          check=True).stdout.splitlines()[0] == tool["version"]
     third_party = []
     for parser in parsers:
         module = parser.get("adapter_module", "main")
         mode = {"tika-audiovideo": "tika", "bytedeco-ffmpeg": "ffmpeg",
                 "jhove-modules": "jhove", "tarsosdsp-jvm": "tarsos"}.get(parser["name"], parser["name"])
-        cls = "org.parsarium.BytedecoWavAdapter" if module == "bytedeco" else "org.parsarium.WavAdapter"
+        cls = {"main": "org.parsarium.WavAdapter", "bytedeco": "org.parsarium.BytedecoWavAdapter",
+               "ffprobe": "org.parsarium.JaffreeWavAdapter"}[module]
         native_flag = ["--enable-native-access=ALL-UNNAMED"] if module == "bytedeco" else []
+        arguments = [] if module == "ffprobe" else [mode]
         output = run([java, *native_flag, "-cp", classpaths[module], cls,
-                      mode, str(ROOT / parser["control"])], parser["expected_output"])
+                      *arguments, str(ROOT / parser["control"])], parser["expected_output"])
         third_party.append({"package": parser["name"], "version": parser["version"],
                             "control": parser["control"], "output": output, "pass": True})
     runtime_source = ADAPTER / "runtime/JdkWavAdapter.java"

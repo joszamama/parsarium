@@ -15,6 +15,8 @@ from urllib.parse import quote, urlencode
 from urllib.request import urlopen
 from zipfile import ZipFile
 import json
+import os
+import subprocess
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -107,6 +109,9 @@ def search(query: str) -> dict:
 
 
 def main() -> None:
+    ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
+    ffprobe_version = subprocess.run([str(ffprobe), "-version"], text=True,
+                                     capture_output=True, check=True).stdout.splitlines()[0]
     with ThreadPoolExecutor(max_workers=7) as pool:
         releases = dict(pool.map(release, PARSERS))
         metrics = dict(pool.map(metric, PARSERS))
@@ -132,6 +137,8 @@ def main() -> None:
         "search_limit_per_query": 100,
         "search": searches, "releases": releases,
         "native_releases": natives,
+        "external_tools": {"ffprobe": {"path": str(ffprobe), "version": ffprobe_version,
+                                       "sha256": sha256(ffprobe.read_bytes()).hexdigest()}},
         "popularity_metric": {
             "name": "deps.dev exact-version directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",
