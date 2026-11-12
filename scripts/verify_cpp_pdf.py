@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 from urllib.request import Request, urlopen
+import base64
 import json
 import platform
 import shlex
@@ -29,7 +30,7 @@ def run(command: list[str], cwd: Path = ROOT) -> str:
 
 def archive(name: str, source: dict) -> Path:
     CACHE.mkdir(parents=True, exist_ok=True)
-    suffix = ".tar.xz" if source["source_url"].endswith(".tar.xz") else ".tar.gz"
+    suffix = ".tar.xz" if source["source_url"].endswith(".tar.xz") else ".tgz" if source["source_url"].endswith(".tgz") else ".tar.gz"
     target = CACHE / f"{name}-{source['release']}{suffix}"
     if not target.exists() or sha256(target.read_bytes()).hexdigest() != source["source_sha256"]:
         with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium C++ PDF verifier"}),
@@ -54,7 +55,7 @@ def main() -> None:
         with tarfile.open(source_archive) as tar:
             member = tar.extractfile(source["source_header_member"])
             assert member is not None
-            assert sha256(member.read()).hexdigest() == source["local_header_sha256"]
+            assert sha256(member.read()).hexdigest() == source.get("source_header_sha256", source["local_header_sha256"])
         if name == "pdfio":
             source_dir = CACHE / f"pdfio-{source['release']}"
             if not source_dir.exists():
@@ -66,6 +67,19 @@ def main() -> None:
             run(["make", "clean"], cwd=source_dir)
             optim = "-O2 -arch " + platform.machine() if platform.system() == "Darwin" else "-O2"
             run(["make", "-j4", "OPTIM=" + optim], cwd=source_dir)
+        elif name == "pdfium":
+            source_dir = CACHE / f"pdfium-{source['release']}"
+            if not (source_dir / "VERSION").exists():
+                source_dir.mkdir(parents=True, exist_ok=True)
+                run(["tar", "-xzf", str(source_archive), "-C", str(source_dir)])
+            header = source_dir / "include/fpdfview.h"
+            library = source_dir / "lib/libpdfium.dylib"
+            assert (source_dir / "VERSION").read_text().strip().splitlines() == [
+                "MAJOR=159", "MINOR=0", "BUILD=8152", "PATCH=0"]
+            with urlopen(Request(source["upstream_header_url"], headers={"User-Agent": "Parsarium C++ PDF verifier"}),
+                         timeout=90) as response:
+                upstream_header = base64.b64decode(response.read())
+            assert sha256(upstream_header).hexdigest() == source["source_header_sha256"]
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
@@ -103,6 +117,11 @@ def main() -> None:
                        "-I" + str(header.parent), str(ROOT / parser["adapter"]),
                        str(library), *shlex.split(run(["pkg-config", "--libs", "libpng"])),
                        "-lz", "-o", str(TARGET / name)]
+        elif name == "pdfium":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), str(ROOT / parser["adapter"]),
+                       str(library), "-Wl,-rpath," + str(library.parent),
+                       "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)

@@ -98,5 +98,22 @@
     "family": "PDFio PDF parser",
     "family_note": "Direct PDFio C API call from C++17; independent PDFio engine, built from its pinned source archive.",
     "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "pdfium",
+    "version": "159.0.8152.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/LICENSE",
+    "documentation": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md",
+    "input_api": "FPDF_LoadDocument(const char* local filename, nullptr); FPDF_GetPageCount and FPDF_LoadPage, called from C++17",
+    "adapter": "adapters/cpp/pdf/pdfium.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "PDFium PDF parser",
+    "family_note": "Direct PDFium C API call from C++17. Prebuilt macOS arm64 artifact from bblanchon/pdfium-binaries chromium/8152 release is SHA-256 pinned; its original API header matches an independently pinned canonical PDFium source revision. Distribution is third-party; core engine is canonical PDFium. Binary provenance is limited to the distributor release claim and original header match.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
   }
 ]

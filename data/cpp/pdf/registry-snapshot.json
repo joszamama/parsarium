@@ -1,6 +1,6 @@
 {
-  "captured_at_utc": "2026-11-12T22:45:47.709810+00:00",
-  "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage.",
+  "captured_at_utc": "2026-11-12T22:50:12.062494+00:00",
+  "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage. PDFio official docs and the PDFium binary distributor release plus canonical PDFium source docs were also checked as targeted leads.",
   "search_limit_per_query": 100,
   "search": [
     {
@@ -323,13 +323,21 @@
       "source_url": "https://codeload.github.com/michaelrsweet/pdfio/tar.gz/refs/tags/v1.6.5",
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
       "license_evidence": "https://github.com/michaelrsweet/pdfio/blob/v1.6.5/LICENSE"
+    },
+    "pdfium": {
+      "version": "159.0.8152.0",
+      "license": "BSD-3-Clause",
+      "source_url": "https://github.com/bblanchon/pdfium-binaries/releases/download/chromium%2F8152/pdfium-mac-arm64.tgz",
+      "source_sha256": "30b0c3f55448840f0947b54bedbe35185bbaccbadd35b8cd960270d6fa6caf80",
+      "license_evidence": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/LICENSE",
+      "artifact_kind": "prebuilt macOS arm64 binary from immutable chromium/8152 distribution release; original header matched canonical source revision 6688c576fd851f4159c6fae39396da50939de110"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T22:45:47.709810+00:00",
     "source": "https://github.com/{owner}/{repo}",
-    "limitations": "Primary GitHub stars proxy broad project interest, not PDF-specific adoption. Compared only within C++. Poppler, MuPDF, and Ghostscript have canonical non-GitHub repositories; their GitHub mirrors are omitted and all three remain unranked. Homebrew search names are fuzzy and not popularity ranked.",
+    "limitations": "Primary GitHub stars proxy broad project interest, not PDF-specific adoption. Compared only within C++. Poppler, MuPDF, Ghostscript, and PDFium have canonical non-GitHub repositories; their GitHub mirrors are omitted and all three remain unranked. Homebrew search names are fuzzy and not popularity ranked.",
     "packages": {
       "poppler": {
         "stars": null,
@@ -359,6 +367,11 @@
         "stars": 361,
         "repository": "https://github.com/michaelrsweet/pdfio",
         "evidence_note": "Exact stargazerCount 361 from the primary GitHub repository HTML during this batch; GitHub API was rate limited."
+      },
+      "pdfium": {
+        "stars": null,
+        "repository": "https://pdfium.googlesource.com/pdfium",
+        "note": "Canonical GoogleSource repository has no comparable GitHub stars; GitHub mirror stars excluded."
       }
     }
   },

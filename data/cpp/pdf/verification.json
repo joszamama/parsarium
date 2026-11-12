@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T22:45:38.030254+00:00",
+  "checked_at_utc": "2026-11-12T22:49:46.428085+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,8 +31,13 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "9a72bd00d37cf855fe8975092921e46a587564fd0da0fa8de30ec5200da27afa",
+      "local_library_sha256": "550cab6c8ffa0a2f73654fecffe0b74cf12331299c69855ae7dc3b67cdbfe5fb",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
+    },
+    "pdfium": {
+      "source_sha256": "30b0c3f55448840f0947b54bedbe35185bbaccbadd35b8cd960270d6fa6caf80",
+      "local_library_sha256": "93df07adf9d1427ebaf192db5bc7f1c6438c5d1180f469acb8d297cf725e359d",
+      "local_header_sha256": "21fb11834607c74cbc1e3a9ac14a85a5dba95d7669ec86c21c05a4890a38648d"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -99,6 +104,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfio-1.6.5 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdfio.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfio-1.6.5/libpdfio.a -L/opt/homebrew/opt/libpng/lib -lpng16 -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfio",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "pdfium",
+      "version": "159.0.8152.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfium-159.0.8152.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdfium.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfium-159.0.8152.0/lib/libpdfium.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfium-159.0.8152.0/lib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfium",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfium /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },
