@@ -1,15 +1,9 @@
 [
   {
-    "name": "org.apache.tika:tika-parser-audiovideo-module",
-    "status": "unresolved",
-    "source": "https://tika.apache.org/4.2.0/formats.html",
-    "reason": "Audio metadata support is documented, but this cell has no pinned MP3/ID3v2 control adapter for its audio parser yet."
-  },
-  {
-    "name": "javazoom:jlayer",
-    "status": "unresolved",
-    "source": "https://www.javazoom.net/javalayer/javalayer.html",
-    "reason": "MP3 decode capability is a lead; whether the exposed local API reports ID3v2 fields on the control remains unverified."
+    "name": "metadata-extractor",
+    "status": "excluded",
+    "source": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.19.0/metadata-extractor-2.19.0.jar",
+    "reason": "Mp3MetadataReader.readMetadata(File) was run on the valid ID3v2.3 MP3 control. It returned an MP3 directory containing only the error 'MPEG-2.5 not supported' and no frame fields, so this release did not demonstrate the required format-aware result on this control."
   },
   {
     "name": "com.googlecode.soundlibs:mp3spi",
@@ -30,9 +24,9 @@
     "reason": "FFmpeg binding is a lead; MP3/ID3v2 control behavior has not been tested for this package path."
   },
   {
-    "name": "ws.schild:jave-core",
+    "name": "com.googlecode.soundlibs:mp3spi",
     "status": "unresolved",
-    "source": "https://github.com/a-schild/jave2",
-    "reason": "FFmpeg wrapper is a lead; MP3/ID3v2 control behavior has not been tested for this package path."
+    "source": "https://github.com/pdudits/soundlibs",
+    "reason": "Java Sound MP3 SPI implementation and release are available, but the pinned local control adapter and license evidence have not been completed."
   }
 ]

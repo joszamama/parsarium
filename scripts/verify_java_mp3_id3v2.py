@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 import json
+import os
 import subprocess
 
 
@@ -55,6 +56,14 @@ def main() -> None:
         path = (f"{release['group'].replace('.', '/')}/{release['artifact']}/"
                 f"{release['version']}/{release['artifact']}-{release['version']}.jar")
         assert by_path[path] == release["jar_sha256"], name
+        pom = repository / (path.removesuffix(".jar") + ".pom")
+        assert sha256(pom.read_bytes()).hexdigest() == release["pom_sha256"], name
+
+    ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
+    ffprobe_record = snapshot["external_tools"]["ffprobe"]
+    assert sha256(ffprobe.read_bytes()).hexdigest() == ffprobe_record["sha256"]
+    assert subprocess.run([str(ffprobe), "-version"], text=True, capture_output=True,
+                          check=True).stdout.splitlines()[0] == ffprobe_record["version"]
 
     classpath = str(ADAPTER / "target/classes") + ":" + ":".join(str(jar) for jar in jars)
     results = []

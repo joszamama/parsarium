@@ -419,14 +419,15 @@ the raw HTTP request without a WARC container. This cell meets the **20-path wor
 [JDK inventory](data/java/http11/standard.json). Run
 `python3 scripts/snapshot_maven_http11.py` to refresh Maven and deps.dev evidence.
 
-The Java × MP3 with ID3v2 batch currently verifies **2/20 pinned Maven package
-paths**. jaudiotagger and mp3agic read the committed valid ID3v2.3 tagged MP3
-and report its title, artist, and album. A JDK-only Java Sound probe rejects
-the same control; it is recorded separately from the package ranking. Run
-`python3 scripts/verify_java_mp3_id3v2.py` from the repository root to rebuild
-and check the SHA-256 locked JARs. All five bounded Maven Central search
-queries timed out and six plausible leads remain unresolved; the search is
-incomplete. See the [Java MP3 ranking](data/java/mp3_id3v2/ranking.md) and
+The Java × MP3 with ID3v2 batch currently verifies **6/20 pinned Maven package
+paths**. jaudiotagger, mp3agic, and Tika report ID3v2 title, artist, and album;
+JLayer reads MP3 frame fields and detects the raw ID3v2 block. JAVE2 and
+Jaffree parse the tagged MP3 through FFmpeg; Jaffree also reports title and
+artist. A JDK-only Java Sound probe rejects the same control and is recorded
+separately. Run `python3 scripts/verify_java_mp3_id3v2.py` from the repository
+root to rebuild and check 19 SHA-256 locked JARs and the local FFprobe binary.
+All five bounded Maven Central search queries timed out and four plausible
+leads remain unresolved; the search is incomplete. See the [Java MP3 ranking](data/java/mp3_id3v2/ranking.md) and
 [cell summary](data/java/mp3_id3v2/cell.json).
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,

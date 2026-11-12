@@ -10,6 +10,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
+import os
+import subprocess
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode
 from urllib.request import urlopen
@@ -22,10 +24,18 @@ DEST = ROOT / "data/java/mp3_id3v2/registry-snapshot.json"
 COORDS = {
     "jaudiotagger": ("net.jthink", "jaudiotagger", "3.0.1"),
     "mp3agic": ("com.mpatric", "mp3agic", "0.9.1"),
+    "tika-audiovideo": ("org.apache.tika", "tika-parser-audiovideo-module", "4.2.0"),
+    "jlayer": ("javazoom", "jlayer", "1.0.1"),
+    "jave-core": ("ws.schild", "jave-core", "4.2.0"),
+    "jaffree": ("com.github.kokorin.jaffree", "jaffree", "2024.08.29"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
     "mp3agic": ("MIT", "https://repo.maven.apache.org/maven2/com/mpatric/mp3agic/0.9.1/mp3agic-0.9.1.pom"),
+    "tika-audiovideo": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0.pom"),
+    "jlayer": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1.pom"),
+    "jave-core": ("GPL-3.0-only", "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0.pom"),
+    "jaffree": ("Apache-2.0", "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29.pom"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 
@@ -90,6 +100,9 @@ def main() -> None:
         metrics = dict(pool.map(metric, COORDS.items()))
         searches = list(pool.map(search, QUERIES))
     now = datetime.now(timezone.utc).isoformat()
+    ffprobe = Path(os.environ.get("PARSARIUM_FFPROBE_DIR", "/opt/homebrew/bin")) / "ffprobe"
+    ffprobe_version = subprocess.run([str(ffprobe), "-version"], text=True,
+                                     capture_output=True, check=True).stdout.splitlines()[0]
     snapshot = {
         "captured_at_utc": now,
         "search_surface": "Maven Central Solr bounded artifact queries plus targeted official Maven releases",
@@ -99,8 +112,14 @@ def main() -> None:
         "targeted_documentation_leads": [
             "https://www.jthink.net/jaudiotagger/examples_id3.jsp",
             "https://github.com/mpatric/mp3agic/blob/master/readme.md",
+            "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-sources.jar",
+            "https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1-javadoc.jar",
         ],
         "releases": releases,
+        "external_tools": {
+            "ffprobe": {"path": str(ffprobe), "version": ffprobe_version,
+                        "sha256": sha256(ffprobe.read_bytes()).hexdigest()}
+        },
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",
