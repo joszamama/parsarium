@@ -25,11 +25,45 @@
     "probe": "C call site: al_init(); al_init_image_addon(); al_load_bitmap(\"controls/ascii_pnm/red-green.ppm\") -> NULL"
   },
   {
-    "name": "libpnmio",
+    "name": "stb_image",
+    "status": "excluded",
+    "reason": "Its PNM decoder accepts P5/P6 binary data, not the ASCII P3 control.",
+    "source": "https://github.com/nothings/stb/blob/master/stb_image.h"
+  },
+  {
+    "name": "gdal",
+    "status": "excluded",
+    "reason": "The official PNM driver documents raw/binary PNM only, excluding ASCII P3.",
+    "source": "https://gdal.org/en/stable/drivers/raster/pnm.html"
+  },
+  {
+    "name": "yimage",
+    "status": "excluded",
+    "reason": "The public y_load_ppm reader accepts binary P6 only.",
+    "source": "https://github.com/thaddeus/yImage"
+  },
+  {
+    "name": "libpixmap",
     "status": "unresolved",
-    "reason": "The upstream README identifies version 1.2.7, while its VERSION file says 1.2.6 and no release tag is published; the exact release identity remains ambiguous. A local P3 adapter has not been verified.",
-    "source": "https://github.com/nkkav/libpnmio",
-    "candidate_commit": "bd860723211ffdb3a0b0a7067afd7e94d583af7c",
-    "candidate_source_sha256": "d5073c1b3a81b8299527d30c53bd919734466d375c5b45ba83b4349ced89f43d"
+    "reason": "A C P3 reader was found, but no open-source license statement was found in its public release; eligibility cannot be established.",
+    "source": "https://github.com/Noah11012/libpixmap"
+  },
+  {
+    "name": "dali",
+    "status": "excluded",
+    "reason": "The legacy C API documents PNM headers, but the data parsing API is for binary PNM; no verified P3 pixel decoding path.",
+    "source": "https://www.cs.cornell.edu/dali/api/pnm-c.html"
+  },
+  {
+    "name": "ppma_io",
+    "status": "unresolved",
+    "reason": "The official page documents an LGPL C P3 reader, but no named release or version was established for pinning.",
+    "source": "https://people.math.sc.edu/burkardt/c_src/ppma_io/ppma_io.html"
+  },
+  {
+    "name": "foxviewppm",
+    "status": "excluded",
+    "reason": "The published package is a viewer application; a reusable documented C input library API was not established.",
+    "source": "https://github.com/digitsensitive/FoxViewPPM"
   }
 ]

@@ -18,9 +18,94 @@ CONTROL = ROOT / "controls/ascii_pnm/red-green.ppm"
 CONTROL_SHA256 = "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1"
 
 
-def run(command: list[str]) -> str:
-    return subprocess.run(command, cwd=ROOT, check=True, text=True,
+def run(command: list[str], cwd: Path = ROOT) -> str:
+    return subprocess.run(command, cwd=cwd, check=True, text=True,
                           capture_output=True).stdout.strip()
+
+
+def pinned_source(name: str, item: dict) -> tuple[Path, Path]:
+    cache = ROOT / "adapters/c/ascii_pnm/cache" / name
+    cache.mkdir(parents=True, exist_ok=True)
+    archive = cache / "source.tar.gz"
+    if not archive.exists():
+        urllib.request.urlretrieve(item["source_url"], archive)
+    assert sha256(archive.read_bytes()).hexdigest() == item["source_sha256"], name
+    source = cache / item["archive_root"]
+    marker = cache / ".extracted"
+    if not marker.exists():
+        with tarfile.open(archive, "r:gz") as tar:
+            for member in tar:
+                if not member.isfile() or not member.name.startswith(item["archive_root"] + "/"):
+                    continue
+                destination = (cache / member.name).resolve()
+                assert destination.is_relative_to(cache.resolve()), member.name
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                stream = tar.extractfile(member)
+                assert stream is not None
+                destination.write_bytes(stream.read())
+                destination.chmod(member.mode & 0o777)
+        marker.write_text(item["source_sha256"] + "\n")
+    assert marker.read_text().strip() == item["source_sha256"]
+    assert source.is_dir(), name
+    return archive, source
+
+
+def build_source_parser(name: str, item: dict, adapter: Path) -> tuple[list[str], dict]:
+    archive, source = pinned_source(name, item)
+    base = ["cc", "-std=c11", "-O2"]
+    extra: dict = {"source_archive": str(archive), "source_sha256": item["source_sha256"]}
+    if name == "libimago":
+        configure = [str(source / "configure"), "--disable-png", "--disable-jpeg"]
+        make = ["make", "-j4"]
+        run(configure, cwd=source)
+        run(make, cwd=source)
+        extra["setup_commands"] = [shlex.join(configure), shlex.join(make)]
+        command = [*base, "-I" + str(source / "src"), str(adapter),
+                   str(source / "libimago.a"), "-o", str(TARGET / name)]
+    elif name == "sail":
+        build = source.parent / "build"
+        configure = ["cmake", "-S", str(source), "-B", str(build), "-DCMAKE_BUILD_TYPE=Release",
+                     "-DBUILD_SHARED_LIBS=OFF", "-DSAIL_ONLY_CODECS=pnm", "-DSAIL_BUILD_APPS=OFF",
+                     "-DSAIL_BUILD_BINDINGS=OFF", "-DSAIL_BUILD_EXAMPLES=OFF", "-DBUILD_TESTING=OFF",
+                     "-DSAIL_ENABLE_OPENMP=OFF", "-DSAIL_MANIP_USE_SWSCALE=OFF"]
+        make = ["cmake", "--build", str(build), "-j4"]
+        run(configure)
+        run(make)
+        extra["setup_commands"] = [shlex.join(configure), shlex.join(make)]
+        command = [*base, "-I" + str(source / "src"), "-I" + str(build / "include"),
+                   str(adapter), *[str(build / "src" / part / lib) for part, lib in
+                   (("sail", "libsail.a"), ("sail-manip", "libsail-manip.a"),
+                    ("sail-codecs-archive", "libsail-codecs.a"),
+                    ("sail-common", "libsail-common.a"))], "-o", str(TARGET / name)]
+    elif name == "libpnmio":
+        command = [*base, "-I" + str(source / "src"), str(adapter),
+                   str(source / "src/pnmio.c"), "-o", str(TARGET / name)]
+    elif name == "imtoolkit":
+        assert run(["pkg-config", "--modversion", "libpng"]) == item["libpng_version"]
+        png = Path(item["libpng_library"])
+        assert sha256(png.read_bytes()).hexdigest() == item["libpng_library_sha256"]
+        for relative in ("src/lz4/version", "src/libtiff/version"):
+            path = source / relative
+            if path.exists():
+                path.rename(path.with_name("version.metadata"))
+        make = ["make", "-C", str(source / "src"), "im", "EXTRAINCS=-I/opt/homebrew/include"]
+        run(make)
+        libraries = list((source / "lib").glob("*/libim.a"))
+        assert len(libraries) == 1
+        object_file = TARGET / "imtoolkit-adapter.o"
+        compile_command = [*base, "-I" + str(source / "include"), "-c", str(adapter),
+                           "-o", str(object_file)]
+        run(compile_command)
+        command = ["c++", str(object_file), str(libraries[0]), "-L/opt/homebrew/lib",
+                   "-lpng", "-lz", "-o", str(TARGET / name)]
+        extra["adapter_compile_command"] = shlex.join(compile_command)
+        extra["libpng_library_sha256"] = item["libpng_library_sha256"]
+        extra["setup_commands"] = [shlex.join(make)]
+    else:
+        raise AssertionError(name)
+    run(command)
+    extra["source_build_command"] = shlex.join(command)
+    return command, extra
 
 
 def main() -> None:
@@ -65,6 +150,17 @@ def main() -> None:
             local_libraries[name] = {"source_archive": str(archive),
                                      "source_sha256": item["source_sha256"],
                                      "source_build_command": shlex.join(source_build)}
+            rows.append({"package": name, "version": parser["version"],
+                         "control": parser["control"], "build_command": shlex.join(command),
+                         "command": shlex.join(execute), "output": output, "pass": True})
+            print(f"{name}@{parser['version']}: P3 passed")
+            continue
+        if name in {"libimago", "sail", "libpnmio", "imtoolkit"}:
+            command, source_evidence = build_source_parser(name, item, ROOT / parser["adapter"])
+            execute = [str(TARGET / name), str(CONTROL)]
+            output = json.loads(run(execute))
+            assert output == parser["expected_output"], (name, output)
+            local_libraries[name] = source_evidence
             rows.append({"package": name, "version": parser["version"],
                          "control": parser["control"], "build_command": shlex.join(command),
                          "command": shlex.join(execute), "output": output, "pass": True})

@@ -31,7 +31,9 @@ def main() -> None:
     parsers = json.loads((DATA / "parsers.json").read_text())
     cell = json.loads((DATA / "cell.json").read_text())
     assert len(parsers) == cell["verified_third_party_count"]
-    assert {p["name"] for p in parsers} == set(c_parsers) | {"cimg", "boost-gil", "wxwidgets", "qtbase", "pnmpp", "openimageio"}
+    native = {"cimg", "boost-gil", "wxwidgets", "qtbase", "pnmpp", "openimageio"}
+    assert {p["name"] for p in parsers} - native <= set(c_parsers)
+    assert {p["name"] for p in parsers} & native == native
     assert set(c_parsers) == set(c_runs)
     extra_control = ROOT / "controls/ascii_pnm/red-green-inline.ppm"
     extra_control_sha256 = "782c0fd8551ce383728488dbfa0f26d2e27a6107a5a3c1793e678f2b9d87ced6"

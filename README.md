@@ -14,7 +14,7 @@ Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII P
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 58 cells at the 20-parser target, three started
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 59 cells at the 20-parser target, two started
 below target, and 27 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -151,30 +151,29 @@ Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
 does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
-The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls,
-exact-release source pins, and binary SHA-256 checks for thirteen installed
-libraries and relevant plugins, plus the SHA-256-pinned libpnmrw source archive.
-Netpbm is pinned to official Subversion revision
-5358, whose `version.mk` identifies release 11.02.30. All **14/14 C and 20/20
-C++ package paths passed**, returning parsed dimensions and two decoded pixels.
-Fourteen C++ adapters use the same underlying C packages; CImg 4.0.5,
-Boost.GIL 1.92.0, wxWidgets 3.3.4, QtBase 6.12.0, pnm++ 1.0.1, and
-OpenImageIO 3.2.2.0 are native C++ readers.
-CImg and Boost.GIL use source archive SHA-256 pins; wxWidgets and QtBase check
-exact installed releases and binary hashes. pnm++ uses a pinned compatibility
-patch outside its decoder; OpenImageIO checks its installed PNM-capable library hash.
-Boost.GIL passes the original control. CImg's passing control
-puts maxval on the dimensions line. CImg misreads the other valid P3 control,
-whose maxval is on a separate line; the verifier records that limitation.
-SDL2_image and SDL3_image share an upstream family; libpnmrw and Netpbm share
-PBMPLUS ancestry. The C cell remains six paths short; the C++ cell reaches the
-20-path working target, with unresolved
-leads recorded in its [C cell](data/c/ascii_pnm/cell.json) and
-[C++ cell](data/cpp/ascii_pnm/cell.json). Their rankings use primary GitHub
-repository stars within each ecosystem; eight paths in each cell lack a
-comparable metric and remain unranked. The control establishes ASCII P3
-handling; it does not establish every PNM variant. Neither scoped standard
-library documents a PNM-aware parser.
+The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.
+The C batch now has **20/20 verified package paths**: fourteen prior readers plus
+JasPer 4.2.9, libimago 2.4.2, GEGL 0.4.72, SAIL 1.3.1, libpnmio, and IM
+Toolkit 3.15. The verifier checks exact release source hashes or installed
+library and plugin hashes, builds four additions from pinned source, then
+checks dimensions and both decoded pixels. IM Toolkit exposes a C API backed
+by C++ implementation code. libpnmio's README calls its tested source 1.2.7
+while its VERSION file remains 1.2.6; the exact commit and source hash fix
+what was tested, and the release-label conflict is recorded. Netpbm uses
+official Subversion revision 5358 identifying release 11.02.30.
+
+The C++ batch remains **20/20**, with fourteen call sites over C libraries and
+six native C++ readers: CImg, Boost.GIL, wxWidgets, QtBase, pnm++, and
+OpenImageIO. Its verifier reruns the full C batch before its own adapters.
+CImg needs maxval on the dimensions line for the passing control; the other
+valid P3 layout is recorded as a limitation. SDL2_image and SDL3_image share
+one decoder lineage, and libpnmrw and Netpbm share PBMPLUS ancestry. The C
+search recorded six bounded Conan recipe-name hits and targeted documentation
+leads; licensing for libpixmap and a named PPMA_IO release remain unresolved.
+Twenty verified paths do not establish a definitive most-used top 20. Ten C
+paths and eight C++ paths lack comparable primary GitHub stars and remain
+unranked. Only ASCII P3 is established for every path. Neither scoped
+standard library documents a PNM-aware parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed
 libraries pinned by exact release and binary SHA-256, plus eleven source-built

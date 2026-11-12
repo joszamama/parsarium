@@ -70,5 +70,67 @@
     "license_evidence": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz",
     "source_family": "PBMPLUS subset",
     "upstream_code_version": "03jul2014"
+  },
+  "jasper": {
+    "release": "4.2.9",
+    "license": "JasPer-2.0",
+    "repository": "jasper-software/jasper",
+    "source_url": "https://github.com/jasper-software/jasper/releases/download/version-4.2.9/jasper-4.2.9.tar.gz",
+    "source_sha256": "f71cf643937a5fcaedcfeb30a22ba406912948ad4413148214df280afc425454",
+    "pkg_config": "jasper",
+    "local_library": "/opt/homebrew/Cellar/jasper/4.2.9/lib/libjasper.7.dylib",
+    "local_library_sha256": "7eabcb51904821655ca72681ab2b1a24c74727ac4e49f87cce512b79acbea636"
+  },
+  "libimago": {
+    "release": "2.4.2",
+    "license": "LGPL-3.0-or-later",
+    "repository": "jtsiomb/libimago",
+    "source_url": "https://github.com/jtsiomb/libimago/archive/refs/tags/v2.4.2.tar.gz",
+    "source_sha256": "168110395b5e29979731a060332b3d3a724d46c83da42d16ac6cc786d12b15e0",
+    "archive_root": "libimago-2.4.2"
+  },
+  "gegl": {
+    "release": "0.4.72",
+    "license": "LGPL-3.0-or-later AND GPL-3.0-or-later AND BSD-3-Clause AND MIT",
+    "source_url": "https://download.gimp.org/pub/gegl/0.4/gegl-0.4.72.tar.xz",
+    "source_sha256": "ccbb8cdd1db56ecd4ece5dbabae0118ab2c46b5b3439c94f3cec467798ce956d",
+    "pkg_config": "gegl-0.4",
+    "local_library": "/opt/homebrew/Cellar/gegl/0.4.72/lib/libgegl-0.4.0.dylib",
+    "local_library_sha256": "dbdb7f95411cc08fac562d9c58b9ad283bdb82e95726e9c0793100818e9d577f",
+    "additional_libraries": [
+      {
+        "path": "/opt/homebrew/Cellar/gegl/0.4.72/lib/gegl-0.4/ppm-load.dylib",
+        "sha256": "f2c639757225a85de47d85080afbbc8374e6ba450144056b9e2aac009866b20f"
+      }
+    ]
+  },
+  "sail": {
+    "release": "1.3.1",
+    "license": "MIT",
+    "repository": "HappySeaFox/sail",
+    "source_url": "https://github.com/HappySeaFox/sail/archive/refs/tags/v1.3.1.tar.gz",
+    "source_sha256": "bf2905717c06b4ff4269dec010339a85994be9cc524fa3dcde3734b4df376089",
+    "archive_root": "sail-1.3.1"
+  },
+  "libpnmio": {
+    "release": "1.2.7 (README; commit pinned)",
+    "license": "BSD-3-Clause",
+    "repository": "nkkav/libpnmio",
+    "source_url": "https://github.com/nkkav/libpnmio/archive/bd860723211ffdb3a0b0a7067afd7e94d583af7c.tar.gz",
+    "source_sha256": "d5073c1b3a81b8299527d30c53bd919734466d375c5b45ba83b4349ced89f43d",
+    "source_commit": "bd860723211ffdb3a0b0a7067afd7e94d583af7c",
+    "archive_root": "libpnmio-bd860723211ffdb3a0b0a7067afd7e94d583af7c",
+    "version_conflict": "README says 1.2.7, VERSION says 1.2.6; exact commit identifies the code."
+  },
+  "imtoolkit": {
+    "release": "3.15",
+    "license": "MIT",
+    "source_url": "https://sourceforge.net/projects/imtoolkit/files/3.15/Docs%20and%20Sources/im-3.15_Sources.tar.gz/download",
+    "source_sha256": "36cc4257f8f5f81128b854bb3be29c5cbdd091476528f315af666d0930b9b57e",
+    "archive_root": "im",
+    "libpng_version": "1.6.59",
+    "libpng_library": "/opt/homebrew/Cellar/libpng/1.6.59/lib/libpng16.16.dylib",
+    "libpng_library_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73",
+    "build_note": "The archived lz4/version and libtiff/version metadata names shadow C++ standard <version> on modern Clang; verifier renames these metadata files inside its ignored source cache only."
   }
 }
