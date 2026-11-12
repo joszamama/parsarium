@@ -68,7 +68,7 @@ def main() -> None:
         "captured_at_utc": datetime.now(timezone.utc).isoformat(), "packages": metrics}
     (DATA / "registry-snapshot.json").write_text(json.dumps(snapshot, indent=2) + "\n")
     total_jars = 0
-    for module in ("main", "vips", "magick"):
+    for module in ("main", "vips", "magick", "ffmpeg"):
         directory = ADAPTER if module == "main" else ADAPTER / module
         jars = [Path(item) for item in (directory / "target/classpath.txt").read_text().strip().split(":")]
         lock = {"classpath": [{"repository_path": str(jar.relative_to(REPOSITORY)),

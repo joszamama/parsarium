@@ -1,10 +1,11 @@
 {
-  "checked_at_utc": "2026-11-12T20:19:19.900965+00:00",
+  "checked_at_utc": "2026-11-12T20:25:18.649295+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "classpath_jars": {
+      "ffmpeg": 5,
       "magick": 2,
       "main": 44,
       "vips": 2
@@ -134,6 +135,31 @@
       },
       "pass": true,
       "command": "/opt/homebrew/opt/openjdk/bin/java --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked magick classpath> PnmNativeAdapter controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "javacv",
+      "version": "1.5.14",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "codec": "ppm",
+        "width": 2,
+        "height": 1,
+        "frame": true
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked ffmpeg classpath> org.parsarium.FfmpegPnmAdapter javacv controls/ascii_pnm/red-green.ppm"
+    },
+    {
+      "package": "bytedeco-ffmpeg",
+      "version": "8.1.2-1.5.14",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "codec": "ppm",
+        "width": 2,
+        "height": 1
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked ffmpeg classpath> org.parsarium.FfmpegPnmAdapter bytedeco-ffmpeg controls/ascii_pnm/red-green.ppm"
     }
   ],
   "runtime": [],

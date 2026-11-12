@@ -63,6 +63,11 @@ def main() -> None:
             command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
                        "org.parsarium.PnmAdapter", label, str(CONTROL)]
             display = f"java -Djava.awt.headless=true -cp <locked main classpath> org.parsarium.PnmAdapter {label} {parser['control']}"
+        elif module == "ffmpeg":
+            classpath = str(ADAPTER / module / "target/classes") + ":" + ":".join(str(jar) for jar in module_jars[module])
+            command = ["java", "-Djava.awt.headless=true", "-cp", classpath,
+                       "org.parsarium.FfmpegPnmAdapter", label, str(CONTROL)]
+            display = f"java -Djava.awt.headless=true -cp <locked {module} classpath> org.parsarium.FfmpegPnmAdapter {label} {parser['control']}"
         else:
             classpath = str(native_classes) + ":" + ":".join(str(jar) for jar in module_jars[module])
             command = [str(java27 / "java"), "--enable-native-access=ALL-UNNAMED",

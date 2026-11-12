@@ -88,5 +88,25 @@
     "family": "imageio-native-magick wrapper over ImageMagick Netpbm decoder", "scope": "ASCII PPM dimensions and red/green pixels",
     "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imageio-native-magick", "adapter_module": "magick",
     "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "javacv", "group": "org.bytedeco", "artifact": "javacv", "version": "1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "license_evidence": "Maven POM licenses; bundled native FFmpeg has its own notices",
+    "input_api": "new FFmpegFrameGrabber(File localPpm).start(); grabImage(); getVideoCodec(); getImageWidth(); getImageHeight()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar",
+    "documentation_archive_entry": "org/bytedeco/javacv/FFmpegFrameGrabber.html",
+    "family": "JavaCV wrapper over native FFmpeg PPM decoder", "scope": "ASCII P3 PPM decoded frame, codec and dimensions; pixel values not inspected",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "javacv", "adapter_module": "ffmpeg",
+    "expected_output": {"codec": "ppm", "width": 2, "height": 1, "frame": true}
+  },
+  {
+    "name": "bytedeco-ffmpeg", "group": "org.bytedeco", "artifact": "ffmpeg", "version": "8.1.2-1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "license_evidence": "Parent javacpp-presets Maven POM licenses; bundled native FFmpeg has its own notices",
+    "input_api": "avformat_open_input(AVFormatContext, String localPpmPath, ...); avformat_find_stream_info(...); AVStream.codecpar()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar",
+    "documentation_archive_entry": "org/bytedeco/ffmpeg/global/avformat.html",
+    "family": "Bytedeco binding to native FFmpeg PPM decoder", "scope": "ASCII P3 PPM codec and dimensions parsed from stream",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "bytedeco-ffmpeg", "adapter_module": "ffmpeg",
+    "expected_output": {"codec": "ppm", "width": 2, "height": 1}
   }
 ]
