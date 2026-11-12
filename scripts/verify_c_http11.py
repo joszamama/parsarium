@@ -77,6 +77,10 @@ def main() -> None:
         for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion", "serf", "facil-cstl", "facil-legacy", "libhv", "libparsehttp"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
+        with tarfile.open(archive("h2o", lock["h2o"])) as tar:
+            for member in tar.getmembers():
+                if member.name.startswith("h2o-2.2.6/deps/picohttpparser/"):
+                    tar.extract(member, build, filter="data")
         libhtp_source = build / "libhtp-0.5.53"
         run(["./autogen.sh"], cwd=libhtp_source)
         run(["./configure", "--disable-shared", "--enable-static"], cwd=libhtp_source)
@@ -149,6 +153,12 @@ def main() -> None:
                                str(ADAPTER / "picohttpparser.c"),
                                str(build / "picohttpparser-1.5/picohttpparser.c"),
                                "-o", str(build / "picohttpparser-adapter")],
+            "h2o": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                    "-I" + str(ADAPTER),
+                    "-I" + str(build / "h2o-2.2.6/deps/picohttpparser"),
+                    str(ADAPTER / "h2o_picohttpparser.c"),
+                    str(build / "h2o-2.2.6/deps/picohttpparser/picohttpparser.c"),
+                    "-o", str(build / "h2o-adapter")],
             "mongoose": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                          "-I" + str(ADAPTER), "-I" + str(build / "mongoose-7.23"),
                          str(ADAPTER / "mongoose.c"), str(build / "mongoose-7.23/mongoose.c"),
