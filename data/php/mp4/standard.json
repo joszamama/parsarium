@@ -1,0 +1,36 @@
+{
+  "ecosystem": "PHP",
+  "format": "MP4",
+  "runtime": "PHP 8.5.12 CLI with bundled Fileinfo, GD, and FFI extensions",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "candidate": "Fileinfo finfo::file",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.fileinfo.php",
+        "https://www.php.net/manual/en/function.finfo-file.php"
+      ],
+      "finding": "Official PHP documentation describes MIME/content-type guessing from magic bytes. On the valid MP4 control it returned video/mp4 only, with no MP4 atoms, streams, codecs, or dimensions; this is identification rather than format-aware parsing."
+    },
+    {
+      "candidate": "GD imagecreatefromstring and getimagesize",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.image.php",
+        "https://www.php.net/manual/en/function.getimagesize.php"
+      ],
+      "finding": "Official PHP documentation limits these APIs to supported image formats. Both returned false on the valid MP4 control."
+    },
+    {
+      "candidate": "generic file_get_contents, streams, and FFI",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.file-get-contents.php",
+        "https://www.php.net/manual/en/book.stream.php",
+        "https://www.php.net/manual/en/book.ffi.php"
+      ],
+      "finding": "These return raw bytes/streams or call external libraries; they contain no bundled MP4 atom or codec parser. The FFI extension alone is not a parser."
+    }
+  ],
+  "runtime_probe": "adapters/php/mp4/runtime_probe.php",
+  "limit": "Scoped to PHP 8.5.12 core and bundled/installed Fileinfo, GD, and FFI APIs on this host. The negative probes are recorded in verification.json; this does not rule out separately installed PHP extensions."
+}
