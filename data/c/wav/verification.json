@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T11:05:57.893651+00:00",
+  "checked_at_utc": "2026-11-12T11:09:10.872883+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "installed_libraries": {
@@ -121,6 +121,17 @@
         }
       ],
       "brew_version": "sdl3_sound 3.2.0"
+    },
+    "taglib": {
+      "pkg_config_version": "2.3.2",
+      "library": "/opt/homebrew/Cellar/taglib/2.3.2/lib/libtag_c.2.3.2.dylib",
+      "library_sha256": "6fc69b707e44d97760e7812099900753db8c18c3bcc14ead588aef2c782d791b",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/taglib/2.3.2/lib/libtag.2.3.2.dylib",
+          "sha256": "7d8dd12770632e396eb05000f0f631475654f605d2af5442ff558f33703a3217"
+        }
+      ]
     }
   },
   "source_builds": {
@@ -141,7 +152,7 @@
       "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
       "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
       "configure_command": "./configure --prefix=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install --disable-static",
-      "library_sha256": "15ddb84a2c000e5e20e71e9770cbb10220831b0c801483ae34dcb4b7acb5a3b0"
+      "library_sha256": "6c43b55d3c728f76c2605423343b6d20eb6d3130a30fd692355d1cd9ed22af93"
     },
     "sdl2": {
       "source_sha256": "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165",
@@ -166,6 +177,11 @@
     "sample_rate": 8000,
     "channels": 1,
     "frames": 4
+  },
+  "expected_taglib": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "bitrate_kbps": 128
   },
   "third_party": [
     {
@@ -501,6 +517,19 @@
           -1000,
           0
         ]
+      },
+      "pass": true
+    },
+    {
+      "package": "taglib",
+      "version": "2.3.2",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/taglib.c -I/opt/homebrew/Cellar/taglib/2.3.2/include/taglib -I/opt/homebrew/Cellar/taglib/2.3.2/include -L/opt/homebrew/Cellar/taglib/2.3.2/lib -ltag_c -ltag -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/taglib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/taglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "bitrate_kbps": 128
       },
       "pass": true
     }

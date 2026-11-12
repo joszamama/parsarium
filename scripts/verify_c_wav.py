@@ -21,6 +21,7 @@ CONTROL_SHA256 = "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966
 EXPECTED = {"sample_rate": 8000, "channels": 1, "frames": 4,
             "samples": [0, 1000, -1000, 0]}
 EXPECTED_METADATA = {"sample_rate": 8000, "channels": 1, "frames": 4}
+EXPECTED_TAGLIB = {"sample_rate": 8000, "channels": 1, "bitrate_kbps": 128}
 
 
 def run(command: list[str], cwd: Path = ROOT) -> str:
@@ -128,7 +129,8 @@ def main() -> None:
         run(command)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))
-        expected = EXPECTED_METADATA if name == "sdl3_mixer" else EXPECTED
+        expected = (EXPECTED_METADATA if name == "sdl3_mixer" else
+                    EXPECTED_TAGLIB if name == "taglib" else EXPECTED)
         assert parser["expected_output"] == expected
         assert output == expected, (name, output)
         rows.append({"package": name, "version": parser["version"],
@@ -141,6 +143,7 @@ def main() -> None:
               "installed_libraries": installed, "source_builds": sources,
               "control": "controls/wav/four-samples.wav", "control_sha256": CONTROL_SHA256,
               "expected": EXPECTED, "expected_metadata": EXPECTED_METADATA,
+              "expected_taglib": EXPECTED_TAGLIB,
               "third_party": rows, "runtime": []}
     (DATA / "verification.json").write_text(json.dumps(result, indent=2) + "\n")
 

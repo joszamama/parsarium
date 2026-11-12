@@ -166,10 +166,11 @@ The C × WAV verifier builds pinned `dr_wav`, miniaudio, Audio File Library, and
 native SDL2
 sources and checks exact-release, binary-hashed libsndfile, raylib, FFmpeg, SoX,
 SDL3, SDL3_mixer, aubio, CSFML, Allegro, SDL2_mixer, FreeALUT,
-SDL2-compat, SDL2_sound, and SDL3_sound libraries. All **18/18 third-party package
+SDL2-compat, SDL2_sound, SDL3_sound, and TagLib C bindings. All **19/19 third-party package
 paths passed** the shared valid
 four-sample PCM WAV control. Seventeen returned parsed format values and four decoded
-samples; SDL3_mixer returned format values and duration. This remains 2 below
+samples; SDL3_mixer returned format values and duration, while TagLib returned
+sample rate, channels, and bitrate. This remains 1 below
 the working goal. The [C WAV cell](data/c/wav/cell.json) records the
 bounded Conan Center recipe search, one unresolved lead, and shared `dr_wav`
 and SDL lineage, including the shared SDL_sound upstream for both major-version

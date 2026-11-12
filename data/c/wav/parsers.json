@@ -425,5 +425,23 @@
     "scope": "WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples",
     "family": "SDL3_sound WAVE decoder",
     "family_note": "sdl3-sound ships an internal WAVE decoder in the SDL_sound upstream family. SDL2_sound and SDL3_sound are separate major-version packages/APIs but share decoder lineage and upstream star count. This Homebrew binary links SDL3 and macOS AudioToolbox; the adapter observed its Microsoft WAVE decoder."
+  },
+  {
+    "name": "taglib",
+    "version": "2.3.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://github.com/taglib/taglib/blob/v2.3.2/COPYING.LGPL",
+    "documentation": "https://github.com/taglib/taglib/blob/v2.3.2/bindings/c/tag_c.h",
+    "input_api": "taglib_file_new_type(local WAV path, TagLib_File_WAV); taglib_file_audioproperties; sample rate, channels and bitrate accessors",
+    "adapter": "adapters/c/wav/taglib.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bitrate_kbps": 128
+    },
+    "scope": "WAV-aware structural/audio-property parsing; does not decode PCM samples",
+    "family": "TagLib C bindings over TagLib C++ RIFF/WAV parser",
+    "family_note": "The C binding wraps TagLib C++ and uses its RIFF/WAV properties implementation; one package path, not a separate C parser engine. It reports WAV sample rate, channel count and bitrate, not decoded samples."
   }
 ]

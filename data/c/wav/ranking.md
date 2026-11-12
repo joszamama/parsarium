@@ -1,6 +1,6 @@
 # C × WAV: verified parser ranking
 
-18 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T10:25:21.715408+00:00 and 2026-11-12T11:04:34.990294+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 1 path(s) lack a metric and remain unranked.
+19 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T10:25:21.715408+00:00 and 2026-11-12T11:08:34.777823+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 1 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -15,12 +15,13 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | 7 | [allegro](https://liballeg.org/a5docs/5.2.11.3/acodec.html) | 5.2.11.3 | 2,133 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | Allegro audio codec WAV loader |
 | 8 | [dr_wav](https://github.com/mackron/dr_libs/blob/wav-0.14.6/dr_wav.h) | wav-0.14.6 | 1,891 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | dr_wav C WAV decoder |
 | 9 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 1,732 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | libsndfile WAV decoder |
-| 10 | [sdl2_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV) | 2.8.2 | 765 | WAV sample rate, channel and frame counts, plus four decoded PCM samples at configured mixer format | SDL2_mixer through SDL2 compatibility and SDL WAV loader |
-| 10 | [sdl3_mixer](https://wiki.libsdl.org/SDL3_mixer/MIX_LoadAudio) | 3.2.4 | 765 | parsed audio sample rate, channel count and duration in frames | SDL3_mixer WAV decoder |
-| 12 | [csfml](https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h) | 3.0.0 | 382 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | CSFML C facade over SFML audio |
-| 13 | [sdl2-compat](https://wiki.libsdl.org/SDL2/SDL_LoadWAV) | 2.32.74 | 221 | WAV sample rate, channel and frame counts, plus four decoded PCM samples | SDL2 compatibility layer over SDL3 WAV loader |
-| 14 | [sdl2_sound](https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html) | 2.0.6 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL2_sound WAVE decoder |
-| 14 | [sdl3_sound](https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile) | 3.2.0 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL3_sound WAVE decoder |
-| 16 | [libaudiofile](https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h) | 0.3.6 | 167 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | Audio File Library WAV parser |
-| 17 | [freealut](https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h) | 1.1.0 | 74 | WAV format, sample rate, frame count and four decoded PCM samples | FreeALUT WAV memory loader |
+| 10 | [taglib](https://github.com/taglib/taglib/blob/v2.3.2/bindings/c/tag_c.h) | 2.3.2 | 1,470 | WAV-aware structural/audio-property parsing; does not decode PCM samples | TagLib C bindings over TagLib C++ RIFF/WAV parser |
+| 11 | [sdl2_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV) | 2.8.2 | 765 | WAV sample rate, channel and frame counts, plus four decoded PCM samples at configured mixer format | SDL2_mixer through SDL2 compatibility and SDL WAV loader |
+| 11 | [sdl3_mixer](https://wiki.libsdl.org/SDL3_mixer/MIX_LoadAudio) | 3.2.4 | 765 | parsed audio sample rate, channel count and duration in frames | SDL3_mixer WAV decoder |
+| 13 | [csfml](https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h) | 3.0.0 | 382 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | CSFML C facade over SFML audio |
+| 14 | [sdl2-compat](https://wiki.libsdl.org/SDL2/SDL_LoadWAV) | 2.32.74 | 221 | WAV sample rate, channel and frame counts, plus four decoded PCM samples | SDL2 compatibility layer over SDL3 WAV loader |
+| 15 | [sdl2_sound](https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html) | 2.0.6 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL2_sound WAVE decoder |
+| 15 | [sdl3_sound](https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile) | 3.2.0 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL3_sound WAVE decoder |
+| 17 | [libaudiofile](https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h) | 0.3.6 | 167 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | Audio File Library WAV parser |
+| 18 | [freealut](https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h) | 1.1.0 | 74 | WAV format, sample rate, frame count and four decoded PCM samples | FreeALUT WAV memory loader |
 | unranked | [sox](https://github.com/chirlu/sox/blob/master/libsox.3) | 14.4.2 | unknown | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | SoX libsox WAV reader |
