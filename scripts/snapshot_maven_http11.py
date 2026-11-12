@@ -20,6 +20,8 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "data/java/http11/registry-snapshot.json"
 COORDS = {
+    "netty": ("io.netty", "netty", "3.10.6.Final"),
+    "netty5-codec-http": ("io.netty", "netty5-codec-http", "5.0.0.Alpha5"),
     "netty-codec-http": ("io.netty", "netty-codec-http", "4.2.20.Final"),
     "http1_1-parser": ("org.webpieces.http", "http1_1-parser", "2.1.109"),
     "httpcore5": ("org.apache.httpcomponents.core5", "httpcore5", "5.4.4"),
@@ -27,6 +29,8 @@ COORDS = {
     "jetty-http": ("org.eclipse.jetty", "jetty-http", "12.1.15"),
 }
 LICENSES = {
+    "netty": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-3.10.6.Final/LICENSE.txt"),
+    "netty5-codec-http": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-5.0.0.Alpha5/LICENSE.txt"),
     "netty-codec-http": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-4.2.20.Final/LICENSE.txt"),
     "http1_1-parser": ("Apache-2.0", "Maven release POM licenses"),
     "httpcore5": ("Apache-2.0", "Maven release JAR META-INF/LICENSE"),

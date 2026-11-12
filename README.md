@@ -391,13 +391,15 @@ repository and has no comparable deps.dev count. The collection meets the
 and [unresolved leads](data/java/wav/leads.json). Run
 `python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
 
-The Java × HTTP/1.1 batch verifies **5/5 pinned Maven package paths** on the
+The Java × HTTP/1.1 batch verifies **7/7 pinned Maven package paths** on the
 committed valid GET request control. `python3 scripts/verify_java_http11.py`
-rebuilds the adapter, checks SHA-256 hashes for all 27 resolved JARs, and checks
+rebuilds the adapter, checks SHA-256 hashes for all 36 resolved JARs, and checks
 parsed method, target, version, and two headers. Apache HttpCore 4 and 5 share
-an upstream parser family. This cell remains **15 short of the 20-path working
-goal**. The bounded search saved 100 of 7,858 broad `http1` hits, while three
-other queries timed out; four plausible leads remain unresolved. See the
+an upstream parser family, as do the Netty 3, 4, and 5 release lines; the
+Netty 5 release is alpha. This cell remains **13 short of the 20-path working
+goal**. The bounded search saved two identical 100-hit broad windows out of
+7,858 results, while three other queries timed out. Three plausible leads
+remain unresolved. See the
 [Java HTTP/1.1 ranking](data/java/http11/ranking.md),
 [cell summary](data/java/http11/cell.json), and
 [JDK inventory](data/java/http11/standard.json). Run

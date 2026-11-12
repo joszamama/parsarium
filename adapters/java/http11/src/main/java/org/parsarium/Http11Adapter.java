@@ -27,6 +27,8 @@ public final class Http11Adapter {
         else if (args[0].equals("httpcore5")) runHttpCore5(bytes);
         else if (args[0].equals("httpcore4")) runHttpCore4(bytes);
         else if (args[0].equals("jetty")) runJetty(bytes);
+        else if (args[0].equals("netty3")) runNetty3(bytes);
+        else if (args[0].equals("netty5")) runNetty5(bytes);
         else System.exit(2);
     }
 
@@ -109,5 +111,36 @@ public final class Http11Adapter {
         System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
                 request.getMethod(), request.getURI(), request.getVersion(),
                 request.getLast(org.eclipse.jetty.http.HttpHeader.HOST), request.get("X-Parsarium"));
+    }
+
+    private static void runNetty3(byte[] bytes) {
+        var embedder = new org.jboss.netty.handler.codec.embedder.DecoderEmbedder<Object>(
+                new org.jboss.netty.handler.codec.http.HttpRequestDecoder());
+        embedder.offer(org.jboss.netty.buffer.ChannelBuffers.wrappedBuffer(bytes));
+        Object value = embedder.poll();
+        if (!(value instanceof org.jboss.netty.handler.codec.http.HttpRequest)) System.exit(1);
+        var request = (org.jboss.netty.handler.codec.http.HttpRequest) value;
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.getMethod(), request.getUri(), request.getProtocolVersion(),
+                request.headers().get("Host"), request.headers().get("X-Parsarium"));
+        embedder.finish();
+    }
+
+    private static void runNetty5(byte[] bytes) {
+        try (var allocator = io.netty5.buffer.BufferAllocator.onHeapUnpooled()) {
+            var channel = new io.netty5.channel.embedded.EmbeddedChannel(
+                    new io.netty5.handler.codec.http.HttpRequestDecoder());
+            channel.writeInbound(allocator.copyOf(bytes));
+            Object value = channel.readInbound();
+            if (!(value instanceof io.netty5.handler.codec.http.HttpRequest)) {
+                channel.finishAndReleaseAll();
+                System.exit(1);
+            }
+            var request = (io.netty5.handler.codec.http.HttpRequest) value;
+            System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                    request.method(), request.uri(), request.protocolVersion(),
+                    request.headers().get("Host"), request.headers().get("X-Parsarium"));
+            channel.finishAndReleaseAll();
+        }
     }
 }
