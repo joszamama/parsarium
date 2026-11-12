@@ -6,7 +6,7 @@ if ($package === null || $path === null) {
     throw new InvalidArgumentException('usage: php parse.php PACKAGE CONTROL');
 }
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . ($package === 'wapmorgan/media-file' ? '/legacy/vendor/autoload.php' : '/vendor/autoload.php');
 
 switch ($package) {
     case 'james-heinrich/getid3':
@@ -36,6 +36,24 @@ switch ($package) {
             'artist' => $tags['artist'][0] ?? null,
             'album' => $tags['album'][0] ?? null,
             'id3v2_major' => $parsed['id3v2']['majorversion'] ?? null,
+        ];
+        break;
+    case 'owen-oj/laravel-getid3':
+        $parsed = new \Owenoj\LaravelGetId3\GetId3($path);
+        $info = $parsed->extractInfo();
+        $output = [
+            'title' => $parsed->getTitle(),
+            'artist' => $parsed->getArtist(),
+            'album' => $parsed->getAlbum(),
+            'id3v2_major' => $info['id3v2']['majorversion'] ?? null,
+        ];
+        break;
+    case 'wapmorgan/media-file':
+        $parsed = \wapmorgan\MediaFile\MediaFile::open($path);
+        $output = [
+            'is_audio' => $parsed->isAudio(),
+            'sample_rate' => $parsed->getAudio()->getSampleRate(),
+            'bit_rate' => $parsed->getAudio()->getBitRate(),
         ];
         break;
     default:

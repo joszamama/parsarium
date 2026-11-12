@@ -58,5 +58,44 @@
     "scope": "ID3v2.3 title, artist, album, and major version",
     "family": "getID3-derived ID3 tag parser",
     "family_note": "This package vendors a stripped-down getID3 ID3 implementation; it is a separate package path, not an independent parser family. Packagist marks it abandoned in favor of nextcloud/id3parser."
+  },
+  {
+    "name": "owen-oj/laravel-getid3",
+    "version": "v2.6.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/LICENSE",
+    "documentation": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/readme.md",
+    "input_api": "GetId3(local tagged MP3 path); getTitle/getArtist/getAlbum and extractInfo ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Laravel wrapper delegates to the same pinned james-heinrich/getid3 package in this lock; a separate package path, not an independent parser family."
+  },
+  {
+    "name": "wapmorgan/media-file",
+    "version": "0.1.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/wapmorgan/MediaFile/blob/263f773696e02d173fb9636c9a8111ac84032292/LICENSE",
+    "documentation": "https://github.com/wapmorgan/MediaFile/blob/263f773696e02d173fb9636c9a8111ac84032292/README.md",
+    "input_api": "MediaFile::open(local tagged MP3 path); isAudio and getAudio sample rate/bit rate",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/legacy/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "is_audio": true,
+      "sample_rate": 8000,
+      "bit_rate": 32000
+    },
+    "scope": "MP3 audio type, 8 kHz sample rate, and 32 kb/s bit rate on an ID3v2.3-tagged control",
+    "family": "Mp3Info native MP3 and ID3v2 parser",
+    "family_note": "MediaFile wraps the pinned wapmorgan/mp3info parser in its isolated lock. This adapter exposes audio properties, not the tag text; it is a separate package path, not an independent parser family."
   }
 ]

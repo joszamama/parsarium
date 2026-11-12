@@ -11,7 +11,6 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/php/mp3_id3v2"
 CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
-LOCK = ROOT / "adapters/php/mp3_id3v2/composer.lock"
 
 
 def execute(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
@@ -21,15 +20,21 @@ def execute(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess
 def main() -> None:
     parsers = json.loads((DATA / "parsers.json").read_text())
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
-    execute(["composer", "install", "--no-interaction", "--no-progress", "--prefer-dist",
-             "--no-plugins", "--no-scripts", "--no-dev"], LOCK.parent)
-    locked = {package["name"]: package for package in json.loads(LOCK.read_text())["packages"]}
-    lock_sha = sha256(LOCK.read_bytes()).hexdigest()
+    locks = {}
+    for name in sorted({parser["composer_lock"] for parser in parsers}):
+        path = ROOT / name
+        execute(["composer", "install", "--no-interaction", "--no-progress", "--prefer-dist",
+                 "--no-plugins", "--no-scripts", "--no-dev"], path.parent)
+        locks[name] = {
+            "packages": {package["name"]: package for package in json.loads(path.read_text())["packages"]},
+            "sha256": sha256(path.read_bytes()).hexdigest(),
+        }
     rows = []
     for parser in parsers:
         name = parser["name"]
         release = snapshot["releases"][name]
-        package = locked[name]
+        lock = locks[parser["composer_lock"]]
+        package = lock["packages"][name]
         assert parser["version"] == release["version"] == package["version"]
         assert package["source"]["reference"] == release["source_reference"]
         command = ["php", "-d", "display_errors=0", "-d", "log_errors=0",
@@ -37,7 +42,7 @@ def main() -> None:
         output = json.loads(execute(command).stdout.strip())
         assert output == parser["expected_output"], (name, output)
         rows.append({"package": name, "version": parser["version"],
-                     "composer_lock": parser["composer_lock"], "composer_lock_sha256": lock_sha,
+                     "composer_lock": parser["composer_lock"], "composer_lock_sha256": lock["sha256"],
                      "source_reference": release["source_reference"],
                      "control": parser["control"], "command": " ".join(command),
                      "output": output, "pass": True})
@@ -53,8 +58,8 @@ def main() -> None:
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "control": "controls/mp3_id3v2/tone-tags.mp3",
               "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
-              "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
-              "composer_lock_sha256": lock_sha,
+              "composer_locks": [{"path": name, "sha256": lock["sha256"]}
+                                 for name, lock in locks.items()],
               "third_party": rows, "runtime": [],
               "runtime_probe": {"command": " ".join(probe_command),
                                 "output": probe, "pass": True}}
