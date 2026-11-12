@@ -7,9 +7,9 @@
   },
   {
     "name": "org.webpieces:http-parser1_1",
-    "status": "unresolved",
-    "source": "https://central.sonatype.com/artifact/org.webpieces/http-parser1_1",
-    "reason": "Historical WebPieces artifact may be a prior distribution of the included parser; package identity and a separate pinned control remain unchecked."
+    "status": "excluded",
+    "source": "https://repo.maven.apache.org/maven2/org/webpieces/http-parser1_1/1.9.35/http-parser1_1-1.9.35.pom",
+    "reason": "Pinned Maven release 1.9.35 comes from the same WebPieces project as the included org.webpieces.http:http1_1-parser and exposes the same org.webpieces.httpparser.api.HttpParser/HttpParserFactory package path and parser implementation lineage. The historical coordinate is treated as a repackaging/earlier release of one parser, not a distinct program."
   },
   {
     "name": "io.undertow:undertow-core",
@@ -34,5 +34,17 @@
     "status": "excluded",
     "source": "https://central.sonatype.com/artifact/org.eclipse.jetty.http3/jetty-http3",
     "reason": "HTTP/3 module, not an HTTP/1.1 message parser."
+  },
+  {
+    "name": "net.tokensmith:parser",
+    "status": "excluded",
+    "source": "https://github.com/tokensmith/parser",
+    "reason": "The project documentation says it maps already-parsed HTTP URL parameter maps to POJOs; it does not parse a raw HTTP/1.1 request or response message from local bytes or stream."
+  },
+  {
+    "name": "io.activej:activej-http",
+    "status": "unresolved",
+    "source": "https://activej.io/http",
+    "reason": "ActiveJ 5.5 contains a native HTTP codec, but the inspected public HttpRequest API creates messages and no documented standalone local raw-message parsing entry point was established. Its socket parser may be internal; no control run is recorded."
   }
 ]

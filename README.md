@@ -412,8 +412,7 @@ directly. NanoHTTPD's local stream session exposes parsed request fields through
 a callback. jwarc, webarchive-commons, and JWAT expose direct parsers that read
 the raw HTTP request without a WARC container. This cell remains **1 short of
 the 20-path working goal**. The bounded search saved two identical 100-hit broad windows out of
-7,858 results, while three other queries timed out. One plausible lead
-remains unresolved. See the
+7,858 results, while three other queries timed out. One plausible lead, ActiveJ HTTP, remains unresolved; the historical WebPieces artifact is excluded as a duplicate parser line. See the
 [Java HTTP/1.1 ranking](data/java/http11/ranking.md),
 [cell summary](data/java/http11/cell.json), and
 [JDK inventory](data/java/http11/standard.json). Run
