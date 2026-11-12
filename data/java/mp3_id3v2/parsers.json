@@ -143,5 +143,21 @@
     "adapter_label": "ffmpeg",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {"format": "mp3", "frequency": 8000, "channels": 1}
+  },
+  {
+    "name": "jcodec",
+    "group": "org.jcodec",
+    "artifact": "jcodec",
+    "version": "0.2.5",
+    "license": "BSD-2-Clause",
+    "license_evidence": "JCodec project LICENSE and release Maven POM FreeBSD license",
+    "input_api": "new MPEGAudioDemuxer(NIOUtils.readableChannel(File)).getAudioTracks().get(0).nextFrame()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar",
+    "documentation_archive_entry": "org/jcodec/containers/mp3/MPEGAudioDemuxer.html",
+    "family": "JCodec native MPEG audio demuxer",
+    "scope": "first MP3 audio frame codec, byte length and timescale from local tagged MP3",
+    "adapter_label": "jcodec",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"codec": "MP3", "frame_bytes": 288, "timescale": 8000}
   }
 ]

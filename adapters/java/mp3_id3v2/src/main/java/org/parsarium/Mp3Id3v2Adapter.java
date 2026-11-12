@@ -58,6 +58,16 @@ public final class Mp3Id3v2Adapter {
             var format = result.getFormat();
             System.out.printf("{\"codec\":\"%s\",\"frequency\":%d,\"title\":\"%s\",\"artist\":\"%s\"}%n",
                     audio.getCodecName(), audio.getSampleRate(), format.getTag("title"), format.getTag("artist"));
+        } else if (args[0].equals("jcodec")) {
+            org.jcodec.common.logging.Logger.setLevel(org.jcodec.common.logging.LogLevel.ERROR);
+            try (var channel = org.jcodec.common.io.NIOUtils.readableChannel(path.toFile());
+                 var demuxer = new org.jcodec.containers.mp3.MPEGAudioDemuxer(channel)) {
+                var track = demuxer.getAudioTracks().get(0);
+                var frame = track.nextFrame();
+                if (frame == null) System.exit(1);
+                System.out.printf("{\"codec\":\"%s\",\"frame_bytes\":%d,\"timescale\":%d}%n",
+                        track.getMeta().getCodec(), frame.getData().remaining(), frame.getTimescale());
+            }
         } else System.exit(2);
     }
 }

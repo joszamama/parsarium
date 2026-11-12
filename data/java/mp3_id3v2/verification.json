@@ -1,11 +1,11 @@
 {
-  "captured_at_utc": "2026-11-12T14:25:45.325878+00:00",
+  "captured_at_utc": "2026-11-12T14:28:14.364900+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: /opt/homebrew/Cellar/maven/3.9.16/libexec\nJava version: 27, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home\nDefault locale: en_US, platform encoding: UTF-8\nOS name: \"mac os x\", version: \"27.2\", arch: \"aarch64\", family: \"mac\"",
     "maven_compiler_release": 21,
     "locked_classpath_jars": {
-      "main": 19,
+      "main": 20,
       "mp3spi": 4,
       "bytedeco": 5
     }
@@ -144,6 +144,20 @@
       "exit_code": 0,
       "command": "java -cp <bytedeco locked classpath> org.parsarium.BytedecoMp3Adapter ffmpeg controls/mp3_id3v2/tone-tags.mp3",
       "version": "8.1.2-1.5.14"
+    },
+    {
+      "package": "jcodec",
+      "adapter_label": "jcodec",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "codec": "MP3",
+        "frame_bytes": 288,
+        "timescale": 8000
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jcodec controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.2.5"
     }
   ],
   "runtime": [],

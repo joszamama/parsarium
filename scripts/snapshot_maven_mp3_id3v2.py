@@ -31,6 +31,7 @@ COORDS = {
     "mp3spi": ("com.googlecode.soundlibs", "mp3spi", "1.9.5.4"),
     "javacv": ("org.bytedeco", "javacv", "1.5.14"),
     "bytedeco-ffmpeg": ("org.bytedeco", "ffmpeg", "8.1.2-1.5.14"),
+    "jcodec": ("org.jcodec", "jcodec", "0.2.5"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
@@ -42,6 +43,7 @@ LICENSES = {
     "mp3spi": ("LGPL-2.0-or-later", "https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar"),
     "javacv": ("Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14.pom"),
     "bytedeco-ffmpeg": ("Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14.pom"),
+    "jcodec": ("BSD-2-Clause", "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5.pom"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 
