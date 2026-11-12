@@ -28,6 +28,7 @@ COORDS = {
     "jlayer": ("javazoom", "jlayer", "1.0.1"),
     "jave-core": ("ws.schild", "jave-core", "4.2.0"),
     "jaffree": ("com.github.kokorin.jaffree", "jaffree", "2024.08.29"),
+    "mp3spi": ("com.googlecode.soundlibs", "mp3spi", "1.9.5.4"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
@@ -36,6 +37,7 @@ LICENSES = {
     "jlayer": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1.pom"),
     "jave-core": ("GPL-3.0-only", "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0.pom"),
     "jaffree": ("Apache-2.0", "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29.pom"),
+    "mp3spi": ("LGPL-2.0-or-later", "https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 
@@ -114,6 +116,7 @@ def main() -> None:
             "https://github.com/mpatric/mp3agic/blob/master/readme.md",
             "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-sources.jar",
             "https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1-javadoc.jar",
+            "https://github.com/pdudits/soundlibs/blob/master/README.adoc",
         ],
         "releases": releases,
         "external_tools": {

@@ -1,10 +1,13 @@
 {
-  "captured_at_utc": "2026-11-12T14:19:29.123818+00:00",
+  "captured_at_utc": "2026-11-12T14:22:52.313942+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: /opt/homebrew/Cellar/maven/3.9.16/libexec\nJava version: 27, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home\nDefault locale: en_US, platform encoding: UTF-8\nOS name: \"mac os x\", version: \"27.2\", arch: \"aarch64\", family: \"mac\"",
     "maven_compiler_release": 21,
-    "locked_classpath_jars": 19
+    "locked_classpath_jars": {
+      "main": 19,
+      "mp3spi": 4
+    }
   },
   "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
   "control_meaning": "Valid mono MP3 with an ID3v2.3 tag carrying title Parsarium, artist Control and album Pilot",
@@ -20,7 +23,7 @@
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter jaudiotagger controls/mp3_id3v2/tone-tags.mp3",
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaudiotagger controls/mp3_id3v2/tone-tags.mp3",
       "version": "3.0.1"
     },
     {
@@ -35,7 +38,7 @@
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter mp3agic controls/mp3_id3v2/tone-tags.mp3",
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter mp3agic controls/mp3_id3v2/tone-tags.mp3",
       "version": "0.9.1"
     },
     {
@@ -49,7 +52,7 @@
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter tika controls/mp3_id3v2/tone-tags.mp3",
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter tika controls/mp3_id3v2/tone-tags.mp3",
       "version": "4.2.0"
     },
     {
@@ -63,7 +66,7 @@
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter jlayer controls/mp3_id3v2/tone-tags.mp3",
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jlayer controls/mp3_id3v2/tone-tags.mp3",
       "version": "1.0.1"
     },
     {
@@ -78,7 +81,7 @@
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter jave controls/mp3_id3v2/tone-tags.mp3",
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jave controls/mp3_id3v2/tone-tags.mp3",
       "version": "4.2.0"
     },
     {
@@ -93,8 +96,24 @@
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter jaffree controls/mp3_id3v2/tone-tags.mp3",
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaffree controls/mp3_id3v2/tone-tags.mp3",
       "version": "2024.08.29"
+    },
+    {
+      "package": "mp3spi",
+      "adapter_label": "mp3spi",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "type": "MP3",
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot",
+        "tag_version": "3"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <mp3spi locked classpath> org.parsarium.Mp3SpiAdapter  controls/mp3_id3v2/tone-tags.mp3",
+      "version": "1.9.5.4"
     }
   ],
   "runtime": [],

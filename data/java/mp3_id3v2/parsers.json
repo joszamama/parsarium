@@ -92,5 +92,22 @@
     "adapter_label": "jaffree",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {"codec": "mp3", "frequency": 8000, "title": "Parsarium", "artist": "Control"}
+  },
+  {
+    "name": "mp3spi",
+    "group": "com.googlecode.soundlibs",
+    "artifact": "mp3spi",
+    "version": "1.9.5.4",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "Pinned source JAR MpegAudioFileReader.java header declares GNU Library GPL version 2 or later",
+    "input_api": "new MpegAudioFileReader().getAudioFileFormat(File).properties()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar",
+    "documentation_archive_entry": "javazoom/spi/mpeg/sampled/file/MpegAudioFileReader.java",
+    "family": "soundlibs MP3SPI Java Sound provider over its JLayer fork",
+    "scope": "local tagged MP3 type, ID3v2 title, artist, album and tag version",
+    "adapter_module": "mp3spi",
+    "adapter_label": "mp3spi",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"type": "MP3", "title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3"}
   }
 ]

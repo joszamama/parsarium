@@ -36,22 +36,28 @@ def main() -> None:
     assert CONTROL.read_bytes().startswith(b"ID3\x03\x00")
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
-    lock = read(ADAPTER / "dependencies.lock.json")["classpath"]
-    build = subprocess.run([
-        "mvn", "-q", "-DskipTests", "package",
-        "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
-        "-Dmdep.outputFile=target/classpath.txt",
-    ], cwd=ADAPTER, text=True, capture_output=True)
-    if build.returncode:
-        raise RuntimeError(f"Maven build failed:\n{build.stdout}\n{build.stderr}")
-
     repository = Path.home() / ".m2/repository"
-    jars = [Path(item) for item in (ADAPTER / "target/classpath.txt").read_text().strip().split(":")]
-    actual = [{"repository_path": str(jar.relative_to(repository)),
-               "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
-    if actual != lock:
-        raise AssertionError("Maven classpath or resolved artifact hashes differ from dependencies.lock.json")
-    by_path = {row["repository_path"]: row["sha256"] for row in actual}
+    classpaths: dict[str, str] = {}
+    jar_counts: dict[str, int] = {}
+    by_path: dict[str, str] = {}
+    for module in ("main", "mp3spi"):
+        adapter = ADAPTER if module == "main" else ADAPTER / module
+        lock = read(adapter / "dependencies.lock.json")["classpath"]
+        build = subprocess.run([
+            "mvn", "-q", "-DskipTests", "package",
+            "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
+            "-Dmdep.outputFile=target/classpath.txt",
+        ], cwd=adapter, text=True, capture_output=True)
+        if build.returncode:
+            raise RuntimeError(f"Maven build failed ({module}):\n{build.stdout}\n{build.stderr}")
+        jars = [Path(item) for item in (adapter / "target/classpath.txt").read_text().strip().split(":")]
+        actual = [{"repository_path": str(jar.relative_to(repository)),
+                   "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
+        if actual != lock:
+            raise AssertionError(f"Maven classpath or resolved artifact hashes differ for {module}")
+        by_path.update({row["repository_path"]: row["sha256"] for row in actual})
+        classpaths[module] = str(adapter / "target/classes") + ":" + ":".join(str(jar) for jar in jars)
+        jar_counts[module] = len(jars)
     for name, release in snapshot["releases"].items():
         path = (f"{release['group'].replace('.', '/')}/{release['artifact']}/"
                 f"{release['version']}/{release['artifact']}-{release['version']}.jar")
@@ -65,13 +71,16 @@ def main() -> None:
     assert subprocess.run([str(ffprobe), "-version"], text=True, capture_output=True,
                           check=True).stdout.splitlines()[0] == ffprobe_record["version"]
 
-    classpath = str(ADAPTER / "target/classes") + ":" + ":".join(str(jar) for jar in jars)
     results = []
     for parser in parsers:
         label = parser["adapter_label"]
+        module = parser.get("adapter_module", "main")
+        class_name = ("org.parsarium.Mp3SpiAdapter" if module == "mp3spi"
+                      else "org.parsarium.Mp3Id3v2Adapter")
         assert parser["control"] == "controls/mp3_id3v2/tone-tags.mp3"
-        command = ["java", "-cp", classpath, "org.parsarium.Mp3Id3v2Adapter",
-                   label, str(CONTROL)]
+        arguments = [] if module == "mp3spi" else [label]
+        command = ["java", "-cp", classpaths[module], class_name,
+                   *arguments, str(CONTROL)]
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=30)
         try:
             output = json.loads(result.stdout.strip())
@@ -82,8 +91,8 @@ def main() -> None:
         row = {"package": parser["name"], "adapter_label": label,
                "control": parser["control"], "output": output, "pass": passed,
                "exit_code": result.returncode,
-               "command": "java -cp <locked classpath> org.parsarium.Mp3Id3v2Adapter "
-                          f"{label} {parser['control']}",
+               "command": f"java -cp <{module} locked classpath> {class_name} "
+                          f"{' '.join(arguments)} {parser['control']}",
                "version": parser["version"]}
         if result.stderr and not passed:
             row["stderr"] = result.stderr[-2000:]
@@ -106,7 +115,7 @@ def main() -> None:
         "environment": {"java": version(["java", "-version"]),
                         "maven": version(["mvn", "-version"]),
                         "maven_compiler_release": 21,
-                        "locked_classpath_jars": len(lock)},
+                        "locked_classpath_jars": jar_counts},
         "control_sha256": CONTROL_SHA256,
         "control_meaning": "Valid mono MP3 with an ID3v2.3 tag carrying title Parsarium, artist Control and album Pilot",
         "third_party": results,
