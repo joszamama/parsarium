@@ -8,8 +8,8 @@ Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASC
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
-ASCII PNM, Matrix Market, and MP3 with ID3v2, and an explicit 88-cell work matrix. There are 42 cells at
-the 20-parser target, three started below target (including Java × ZIP), and 43 marked `not_started`;
+ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP and an explicit 88-cell work matrix. There are 43 cells at
+the 20-parser target, two started below target, and 43 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -136,13 +136,14 @@ The observed batch result is **21/21 third-party packages and 1/1 Node.js
 built-in API passing**.
 
 The Java × ZIP batch uses Maven 3.9.16 to compile for Java 21 and a SHA-256
-lock for all 41 resolved JARs. `python3 scripts/verify_java_zip.py` rebuilds the
+lock for all 67 resolved JARs. `python3 scripts/verify_java_zip.py` rebuilds the
 adapter, checks the locked classpath, and runs the same ZIP control through
-14 documented Maven package paths plus five separate JDK 21 APIs. The recorded
-result is **14/14 third-party paths and 5/5 JDK APIs passing**. This is below
-the 20-path working goal. Three of four bounded Maven Central search queries
-timed out; the successful query saved 100 mostly unrelated hits of 178, so
-discovery and higher-adoption lead review remain incomplete. See the
+20 documented Maven package paths plus five separate JDK 21 APIs. The recorded
+result is **20/20 third-party paths and 5/5 JDK APIs passing**. Two of four
+bounded Maven Central search queries timed out; the other two saved 115 hits,
+including 100 of 178 mostly unrelated Java ZIP hits. Discovery and
+higher-adoption lead review remain incomplete. Several package paths wrap shared
+underlying parser families; see the
 [Java ZIP ranking](data/java/zip/ranking.md), [cell summary](data/java/zip/cell.json),
 and [unresolved leads](data/java/zip/leads.json). `snapshot_maven_zip.py`
 refreshes registry and deps.dev evidence when needed; it is not part of the

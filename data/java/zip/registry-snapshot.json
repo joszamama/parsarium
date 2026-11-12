@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T03:36:53.855927+00:00",
+  "captured_at_utc": "2026-11-12T03:51:06.661130+00:00",
   "search_surface": "Maven Central Solr artifact search; targeted Maven Central release lookups when search is unavailable",
   "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
   "search_limit_per_query": 100,
@@ -8,6 +8,7 @@
       "query": "zip parser",
       "url": "https://search.maven.org/solrsearch/select?q=zip+parser&rows=100&wt=json",
       "limit": 100,
+      "captured_at_utc": "2026-11-12T03:51:06.658291+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -16,14 +17,91 @@
       "query": "zip archive",
       "url": "https://search.maven.org/solrsearch/select?q=zip+archive&rows=100&wt=json",
       "limit": 100,
-      "total": null,
-      "hits": [],
-      "error": "TimeoutError: The read operation timed out"
+      "captured_at_utc": "2026-11-12T03:50:58.876836+00:00",
+      "total": 15,
+      "hits": [
+        {
+          "rank": 1,
+          "name": "org.ow2.util.archive:archive",
+          "latest_version": "2.0.1"
+        },
+        {
+          "rank": 2,
+          "name": "org.sonatype.runtime:archive-template",
+          "latest_version": "0.1.4"
+        },
+        {
+          "rank": 3,
+          "name": "de.gerdi-project:GeRDI-harvester-utilities-archive",
+          "latest_version": "1.5.3"
+        },
+        {
+          "rank": 4,
+          "name": "de.gerdi-project:GeRDI-harvester-setup-archive",
+          "latest_version": "2.1.3"
+        },
+        {
+          "rank": 5,
+          "name": "org.sakaiproject.common:archive-assembly",
+          "latest_version": "1.2.3"
+        },
+        {
+          "rank": 6,
+          "name": "org.jetbrains.kotlinx:ki-spark-2.4.5_2.12",
+          "latest_version": "0.1"
+        },
+        {
+          "rank": 7,
+          "name": "org.jetbrains.kotlinx:ki-spark-3.0.1_2.12",
+          "latest_version": "0.1"
+        },
+        {
+          "rank": 8,
+          "name": "org.archive.heritrix:heritrix",
+          "latest_version": "3.9.0"
+        },
+        {
+          "rank": 9,
+          "name": "com.wavesenterprise:we-protobuf-archive",
+          "latest_version": "1.12-1.16.0"
+        },
+        {
+          "rank": 10,
+          "name": "org.jetbrains.kotlinx:ki-shell",
+          "latest_version": "0.5.2"
+        },
+        {
+          "rank": 11,
+          "name": "com.sun.jersey:jersey-archive",
+          "latest_version": "1.19.4"
+        },
+        {
+          "rank": 12,
+          "name": "org.ow2.jasmine.monitoring:jasmine-monitoring-integration-tests-archive-modules-and-dependencies",
+          "latest_version": "1.2.1-M8"
+        },
+        {
+          "rank": 13,
+          "name": "org.glassfish.tyrus.bundles:websocket-ri-archive",
+          "latest_version": "2.2.0"
+        },
+        {
+          "rank": 14,
+          "name": "org.jbpm.contrib:archive-workitem",
+          "latest_version": "7.74.1.Final"
+        },
+        {
+          "rank": 15,
+          "name": "org.xbib:io-archive-zip",
+          "latest_version": "1.1.0"
+        }
+      ]
     },
     {
       "query": "zip reader",
       "url": "https://search.maven.org/solrsearch/select?q=zip+reader&rows=100&wt=json",
       "limit": 100,
+      "captured_at_utc": "2026-11-12T03:51:06.658961+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -534,7 +612,10 @@
           "name": "org.kite9:kite9-java-hello-world",
           "latest_version": "1.9"
         }
-      ]
+      ],
+      "captured_at_utc": "2026-11-12T03:36:53.855927+00:00",
+      "latest_refresh_error": "TimeoutError: The read operation timed out",
+      "latest_refresh_at_utc": "2026-11-12T03:51:06.658749+00:00"
     }
   ],
   "releases": {
@@ -691,13 +772,79 @@
       "pom_sha256": "f940647e7875c9e9bb3d4319e1e2256b164f46e1a53bb601a04c7e969ecdd361",
       "license": "EPL-1.0",
       "license_evidence": "https://christian-schlichtherle.bitbucket.io/truezip/"
+    },
+    "commons-archive": {
+      "group": "io.github.deepakdaneva.commons",
+      "artifact": "commons-archive",
+      "version": "1.1.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/github/deepakdaneva/commons/commons-archive/1.1.0/commons-archive-1.1.0.jar",
+      "jar_sha256": "00edc9f7d2eb80366421d9b26cbdb680b033d4fbbaa05541132acd109e6faf49",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/github/deepakdaneva/commons/commons-archive/1.1.0/commons-archive-1.1.0.pom",
+      "pom_sha256": "70cff634228e524a4889edf3c4addfa4e7043a38af87caae116e888cf8165500",
+      "license": "Apache-2.0",
+      "license_evidence": "Maven release JAR META-INF/LICENSE"
+    },
+    "truezip-utils": {
+      "group": "org.codehaus.mojo",
+      "artifact": "truezip-utils",
+      "version": "1.2",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/codehaus/mojo/truezip-utils/1.2/truezip-utils-1.2.jar",
+      "jar_sha256": "756c0b679aabb3bbeb6375b9bb365bdc6f46f33aae3408b06793ffae4e120721",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/codehaus/mojo/truezip-utils/1.2/truezip-utils-1.2.pom",
+      "pom_sha256": "924e02fa4a15feb1de5adc8795b21f83c24d2850384f5d1c7f6c04d42e76c777",
+      "license": "Apache-2.0",
+      "license_evidence": "https://www.mojohaus.org/truezip/truezip-maven-plugin/dependencies.html"
+    },
+    "simplezip": {
+      "group": "com.j256.simplezip",
+      "artifact": "simplezip",
+      "version": "2.2",
+      "jar_url": "https://repo.maven.apache.org/maven2/com/j256/simplezip/simplezip/2.2/simplezip-2.2.jar",
+      "jar_sha256": "ef0ba61b9318fecb7629a0bd2aa270cddbdcb400c737a3a8cf4733f9456d42d7",
+      "pom_url": "https://repo.maven.apache.org/maven2/com/j256/simplezip/simplezip/2.2/simplezip-2.2.pom",
+      "pom_sha256": "99c947f5130854b3fde238ddd0023a3ea4103240b26c960614115d4e565e2a1f",
+      "license": "ISC",
+      "license_evidence": "Maven release POM licenses"
+    },
+    "tinyzip-core": {
+      "group": "io.github.bitstorm",
+      "artifact": "tinyzip-core",
+      "version": "1.0.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/github/bitstorm/tinyzip-core/1.0.0/tinyzip-core-1.0.0.jar",
+      "jar_sha256": "7dd20146944eba589ca0902bf327c458486cfc9dd86b21d4eb8eb1effc70e4d1",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/github/bitstorm/tinyzip-core/1.0.0/tinyzip-core-1.0.0.pom",
+      "pom_sha256": "d15347554fb5aefa6a602a2370c6076e0c93f6e3e81ebf3a3d3bdad9ba7238db",
+      "license": "Apache-2.0",
+      "license_evidence": "Maven release POM licenses"
+    },
+    "sevenzipjbinding": {
+      "group": "net.sf.sevenzipjbinding",
+      "artifact": "sevenzipjbinding",
+      "version": "23.01-2.2",
+      "jar_url": "https://repo.maven.apache.org/maven2/net/sf/sevenzipjbinding/sevenzipjbinding/23.01-2.2/sevenzipjbinding-23.01-2.2.jar",
+      "jar_sha256": "2cb5368ef44372df91b6def8722f6e68357453160872a918f931762954a78d60",
+      "pom_url": "https://repo.maven.apache.org/maven2/net/sf/sevenzipjbinding/sevenzipjbinding/23.01-2.2/sevenzipjbinding-23.01-2.2.pom",
+      "pom_sha256": "e10ba4fa643e7e9d0f2883aed4a218ad0061bf90eca8714716d76ad6d27ed111",
+      "license": "LGPL-2.1",
+      "license_evidence": "Maven release POM licenses; unRAR restriction also declared"
+    },
+    "truevfs-driver-zip": {
+      "group": "net.java.truevfs",
+      "artifact": "truevfs-driver-zip",
+      "version": "0.14.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/net/java/truevfs/truevfs-driver-zip/0.14.0/truevfs-driver-zip-0.14.0.jar",
+      "jar_sha256": "b60bc5e489aa775b18f320132bae86c1eca00ed764aee388870c3485fdd32c28",
+      "pom_url": "https://repo.maven.apache.org/maven2/net/java/truevfs/truevfs-driver-zip/0.14.0/truevfs-driver-zip-0.14.0.pom",
+      "pom_sha256": "c51eaf2b73fecf8e54580289276cde847b829e7e24399986e276d38212f25432",
+      "license": "Apache-2.0",
+      "license_evidence": "Maven release POM licenses"
     }
   },
   "popularity_metric": {
     "name": "deps.dev version-level directDependentCount",
     "documentation": "https://docs.deps.dev/api/v3alpha/",
     "scope": "Known public direct dependents of the exact Maven release; incomplete coverage and version-level bias",
-    "captured_at_utc": "2026-11-12T03:36:53.855961+00:00",
+    "captured_at_utc": "2026-11-12T03:51:06.661140+00:00",
     "packages": {
       "commons-compress": {
         "direct_dependent_count": 1402,
@@ -754,6 +901,30 @@
       "truezip-driver-zip": {
         "direct_dependent_count": 18,
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/de.schlichtherle.truezip%3Atruezip-driver-zip/versions/7.7.10:dependents"
+      },
+      "commons-archive": {
+        "direct_dependent_count": 1,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.github.deepakdaneva.commons%3Acommons-archive/versions/1.1.0:dependents"
+      },
+      "truezip-utils": {
+        "direct_dependent_count": 5,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.codehaus.mojo%3Atruezip-utils/versions/1.2:dependents"
+      },
+      "simplezip": {
+        "direct_dependent_count": 0,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.j256.simplezip%3Asimplezip/versions/2.2:dependents"
+      },
+      "tinyzip-core": {
+        "direct_dependent_count": 2,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.github.bitstorm%3Atinyzip-core/versions/1.0.0:dependents"
+      },
+      "sevenzipjbinding": {
+        "direct_dependent_count": 0,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.sf.sevenzipjbinding%3Asevenzipjbinding/versions/23.01-2.2:dependents"
+      },
+      "truevfs-driver-zip": {
+        "direct_dependent_count": 2,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.java.truevfs%3Atruevfs-driver-zip/versions/0.14.0:dependents"
       }
     }
   }

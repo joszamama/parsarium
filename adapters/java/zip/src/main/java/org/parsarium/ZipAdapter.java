@@ -177,6 +177,70 @@ public final class ZipAdapter {
                     yield new Parsed(entry.getName(), input.readAllBytes());
                 }
             }
+            case "commons-archive" -> {
+                try (InputStream source = Files.newInputStream(path);
+                     var archive = io.github.deepakdaneva.commons.archive.ArchiveUtil
+                             .getArchiveInputStream(source, "application/zip")) {
+                    var entry = archive.getNextEntry();
+                    try (InputStream input = io.github.deepakdaneva.commons.archive.ArchiveUtil
+                            .getEntryInputStream(archive)) {
+                        yield new Parsed(entry.getName(), input.readAllBytes());
+                    }
+                }
+            }
+            case "truezip-utils" -> {
+                var set = new org.codehaus.mojo.truezip.TrueZipFileSet();
+                set.setDirectory(path.toAbsolutePath().toString());
+                var files = new org.codehaus.mojo.truezip.internal.DefaultTrueZip().list(set);
+                var entry = files.stream().filter(file -> file.getName().equals("hello.txt"))
+                        .findFirst().orElseThrow();
+                try (InputStream input = new de.schlichtherle.truezip.file.TFileInputStream(entry)) {
+                    yield new Parsed(entry.getName(), input.readAllBytes());
+                }
+            }
+            case "simplezip" -> {
+                try (var zip = new com.j256.simplezip.ZipFileInput(path.toFile());
+                     var output = new java.io.ByteArrayOutputStream()) {
+                    var entry = zip.readFileHeader();
+                    zip.readFileData(output);
+                    yield new Parsed(entry.getFileName(), output.toByteArray());
+                }
+            }
+            case "tinyzip-core" -> {
+                Path destination = Files.createTempDirectory("parsarium-tinyzip-");
+                try {
+                    org.tinyzip.TinyZip.unzip(path, destination);
+                    yield new Parsed("hello.txt", Files.readAllBytes(destination.resolve("hello.txt")));
+                } finally {
+                    Files.deleteIfExists(destination.resolve("hello.txt"));
+                    Files.deleteIfExists(destination);
+                }
+            }
+            case "sevenzipjbinding" -> {
+                try (var file = new java.io.RandomAccessFile(path.toFile(), "r");
+                     var archive = net.sf.sevenzipjbinding.SevenZip.openInArchive(
+                             net.sf.sevenzipjbinding.ArchiveFormat.ZIP,
+                             new net.sf.sevenzipjbinding.impl.RandomAccessFileInStream(file));
+                     var output = new java.io.ByteArrayOutputStream()) {
+                    var item = archive.getSimpleInterface().getArchiveItems()[0];
+                    var result = item.extractSlow(data -> {
+                        output.write(data, 0, data.length);
+                        return data.length;
+                    });
+                    if (result != net.sf.sevenzipjbinding.ExtractOperationResult.OK) {
+                        throw new IllegalStateException("7-Zip extraction failed: " + result);
+                    }
+                    yield new Parsed(item.getPath(), output.toByteArray());
+                }
+            }
+            case "truevfs-driver-zip" -> {
+                var entry = new net.java.truevfs.access.TFile(path.toFile(), "hello.txt");
+                try (InputStream input = new net.java.truevfs.access.TFileInputStream(entry)) {
+                    yield new Parsed(entry.getName(), input.readAllBytes());
+                } finally {
+                    net.java.truevfs.access.TVFS.umount();
+                }
+            }
             case "plexus-archiver" -> {
                 Path destination = Files.createTempDirectory("parsarium-plexus-zip-");
                 try {

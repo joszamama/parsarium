@@ -36,6 +36,12 @@ COORDS = {
     "arcana": ("io.github.realburst", "arcana", "1.1.0"),
     "tika-parser-pkg-module": ("org.apache.tika", "tika-parser-pkg-module", "4.2.0"),
     "truezip-driver-zip": ("de.schlichtherle.truezip", "truezip-driver-zip", "7.7.10"),
+    "commons-archive": ("io.github.deepakdaneva.commons", "commons-archive", "1.1.0"),
+    "truezip-utils": ("org.codehaus.mojo", "truezip-utils", "1.2"),
+    "simplezip": ("com.j256.simplezip", "simplezip", "2.2"),
+    "tinyzip-core": ("io.github.bitstorm", "tinyzip-core", "1.0.0"),
+    "sevenzipjbinding": ("net.sf.sevenzipjbinding", "sevenzipjbinding", "23.01-2.2"),
+    "truevfs-driver-zip": ("net.java.truevfs", "truevfs-driver-zip", "0.14.0"),
 }
 LICENSES = {
     "commons-compress": ("Apache-2.0", "Maven release JAR META-INF/LICENSE.txt"),
@@ -52,6 +58,12 @@ LICENSES = {
     "arcana": ("Apache-2.0", "Maven release POM licenses"),
     "tika-parser-pkg-module": ("Apache-2.0", "Maven release JAR META-INF/LICENSE"),
     "truezip-driver-zip": ("EPL-1.0", "https://christian-schlichtherle.bitbucket.io/truezip/"),
+    "commons-archive": ("Apache-2.0", "Maven release JAR META-INF/LICENSE"),
+    "truezip-utils": ("Apache-2.0", "https://www.mojohaus.org/truezip/truezip-maven-plugin/dependencies.html"),
+    "simplezip": ("ISC", "Maven release POM licenses"),
+    "tinyzip-core": ("Apache-2.0", "Maven release POM licenses"),
+    "sevenzipjbinding": ("LGPL-2.1", "Maven release POM licenses; unRAR restriction also declared"),
+    "truevfs-driver-zip": ("Apache-2.0", "Maven release POM licenses"),
 }
 QUERIES = ["zip parser", "zip archive", "zip reader", "Java ZIP"]
 
@@ -109,9 +121,11 @@ def search(query: str) -> dict:
                  "latest_version": item.get("latestVersion")}
                 for index, item in enumerate(payload["docs"], 1)]
         return {"query": query, "url": url, "limit": 100,
+                "captured_at_utc": datetime.now(timezone.utc).isoformat(),
                 "total": payload["numFound"], "hits": hits}
     except (HTTPError, URLError, TimeoutError, ValueError, KeyError) as exc:
-        return {"query": query, "url": url, "limit": 100, "total": None,
+        return {"query": query, "url": url, "limit": 100,
+                "captured_at_utc": datetime.now(timezone.utc).isoformat(), "total": None,
                 "hits": [], "error": f"{type(exc).__name__}: {exc}"}
 
 
@@ -120,6 +134,18 @@ def main() -> None:
         releases = dict(pool.map(release, COORDS.items()))
         metrics = dict(pool.map(metric, COORDS.items()))
         searches = list(pool.map(search, QUERIES))
+    if DEST.exists():
+        previous = json.loads(DEST.read_text())
+        prior_searches = {item["query"]: item for item in previous["search"]}
+        for index, item in enumerate(searches):
+            prior = prior_searches.get(item["query"])
+            if item.get("error") and prior and prior["hits"]:
+                searches[index] = {
+                    **prior,
+                    "captured_at_utc": prior.get("captured_at_utc", previous["captured_at_utc"]),
+                    "latest_refresh_error": item["error"],
+                    "latest_refresh_at_utc": item["captured_at_utc"],
+                }
     result = {
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "search_surface": "Maven Central Solr artifact search; targeted Maven Central release lookups when search is unavailable",
