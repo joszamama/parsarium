@@ -183,16 +183,17 @@ binary distribution. Apple Core Graphics is independently verified as a
 macOS platform runtime API and is kept outside the third-party ranking. See
 the [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **10/20 package paths**:
+The C++ × PDF batch currently verifies **11/20 package paths**:
 Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium,
-PDF-Writer, PDF4QT, and Qt PDF. MuPDF, Ghostscript, PDFio, and PDFium use C APIs called
+PDF-Writer, PDF4QT, Qt PDF, and Xpdf. MuPDF, Ghostscript, PDFio, and PDFium use C APIs called
 directly from C++17; PDF-Writer and PDF4QT use native C++ parsers. All return one parsed page
 from the valid PDF control. Five installed release archives, headers, and
 libraries are SHA-256 checked; PDFio, PDF-Writer, and PDF4QT are source-built, and
 PDFium uses a pinned binary distribution with an original header matched to
 upstream. PDF4QT uses a pinned Blend2D dependency and a recorded macOS core-only
-source patch. Qt PDF's native QPdfDocument API shares the PDFium engine. Two leads
-remain unresolved. See the
+source patch. Qt PDF's native QPdfDocument API shares the PDFium engine. Xpdf
+links source-built object libraries and has no installed public library ABI.
+One lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.

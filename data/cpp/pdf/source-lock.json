@@ -137,5 +137,19 @@
     "local_library_sha256": "1ca95abd52298741648b673b8805816f15e11b419438ee982526d037942bceb6",
     "repository": "https://code.qt.io/cgit/qt/qtwebengine.git/",
     "build_note": "Homebrew qtwebengine 6.11.2_1 installs QtPdf framework with a Qt6Pdf.pc Version field of 6.12.0. The exact installed qpdfdocument.h matches the official v6.11.2 source tag; the library binary is SHA-256 pinned. Full source archive checksum is from Homebrew formula metadata and is not downloaded by this verifier."
+  },
+  "xpdf": {
+    "release": "4.06",
+    "license": "GPL-2.0-only OR GPL-3.0-only",
+    "source_url": "https://dl.xpdfreader.com/xpdf-4.06.tar.gz",
+    "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
+    "source_header_member": "xpdf-4.06/xpdf/PDFDoc.h",
+    "local_header_sha256": "d9db2a755da945a0c80fbf30f07d4714625bde1bc832759971514f41842bb064",
+    "fontconfig_revision": "2.18.3",
+    "fontconfig_library": "/opt/homebrew/Cellar/fontconfig/2.18.3/lib/libfontconfig.dylib",
+    "fontconfig_sha256": "e1f5e06e8339b42f0e1af11cc77979ef6a8f48ffa7588e4dc243e4bd69ea656d",
+    "build": "cmake -S <source> -B <cache>/xpdf-build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5; cmake --build <cache>/xpdf-build --target xpdf_objs goo fofi -j4; ar rcs <cache>/xpdf-build/libxpdf_parsarium.a <cache>/xpdf-build/xpdf/CMakeFiles/xpdf_objs.dir/*.o",
+    "repository": "https://www.xpdfreader.com/",
+    "build_note": "Xpdf 4.06 publishes source and CMake object-library target xpdf_objs, not a separately installed libxpdf. The verifier archives that object target for a direct PDFDoc C++ API adapter and links source-built goo and fofi. Upstream README inside the source archive identifies GPL v2 or v3 only. This verifies a source library API but does not claim a stable installed ABI."
   }
 }

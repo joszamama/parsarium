@@ -138,11 +138,28 @@ def main() -> None:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
             assert header.read_bytes() == upstream_header
+        elif name == "xpdf":
+            source_dir = CACHE / f"xpdf-{source['release']}"
+            if not source_dir.exists():
+                run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "xpdf/PDFDoc.h"
+            build_dir = CACHE / "xpdf-build"
+            assert run(["brew", "list", "--versions", "fontconfig"]) == "fontconfig " + source["fontconfig_revision"]
+            fontconfig = Path(source["fontconfig_library"])
+            assert sha256(fontconfig.read_bytes()).hexdigest() == source["fontconfig_sha256"]
+            run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"])
+            run(["cmake", "--build", str(build_dir), "--target", "xpdf_objs", "goo", "fofi", "-j4"])
+            library = build_dir / "libxpdf_parsarium.a"
+            library.unlink(missing_ok=True)
+            objects = sorted((build_dir / "xpdf/CMakeFiles/xpdf_objs.dir").glob("*.o"))
+            assert objects
+            run(["ar", "rcs", str(library), *(str(obj) for obj in objects)])
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio", "pdfwriter", "pdf4qt"):
+        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -196,6 +213,13 @@ def main() -> None:
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "Qt6Pdf"]))
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(TARGET / name)]
+        elif name == "xpdf":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-Wno-unused-parameter", "-I" + str(source_dir / "xpdf"),
+                       "-I" + str(source_dir / "goo"), "-I" + str(build_dir),
+                       str(ROOT / parser["adapter"]), str(library),
+                       str(build_dir / "goo/libgoo.a"), str(build_dir / "fofi/libfofi.a"),
+                       str(fontconfig), "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)

@@ -1,6 +1,6 @@
 # C++ × PDF: verified parser ranking
 
-10 verified third-party package paths; working goal 20, ceiling 30. Exact GitHub stars of each primary upstream repository are compared only within C++. Stars proxy broad project interest, not PDF-specific adoption. Homebrew formula search names are discovery leads, not a popularity ranking. Poppler, MuPDF, Ghostscript, and PDFium have canonical non-GitHub upstreams and remain unranked.
+11 verified third-party package paths; working goal 20, ceiling 30. Exact GitHub stars of each primary upstream repository are compared only within C++. Stars proxy broad project interest, not PDF-specific adoption. Homebrew formula search names are discovery leads, not a popularity ranking. Poppler, MuPDF, Ghostscript, and PDFium have canonical non-GitHub upstreams and remain unranked.
 
 | Rank | Package | Pinned release | Primary GitHub stars | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -13,6 +13,7 @@
 | unranked | [MuPDF](https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html) | 1.28.6 | unknown | parsed PDF page count | MuPDF C document parser |
 | unranked | [Ghostscript](https://ghostscript.readthedocs.io/en/master/Language.html) | 10.08.0 | unknown | PDF interpreter NumPages metadata | Ghostscript PDF interpreter |
 | unranked | [Qt PDF](https://doc.qt.io/qt-6/qpdfdocument.html) | 6.11.2 | unknown | parsed PDF page count | PDFium engine via Qt PDF |
+| unranked | [Xpdf](https://dl.xpdfreader.com/xpdf-4.06.tar.gz) | 4.06 | unknown | parsed PDF page count | Xpdf PDF parser |
 | unranked | [PDFium](https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md) | 159.0.8152.0 | unknown | parsed PDF page count and first page object | PDFium PDF parser |
 
-Two leads remain unresolved; poppler-qt6 was excluded as a duplicate Poppler package frontend. See `cell.json`, `registry-snapshot.json`, `parsers.json`, and `verification.json` for limits and evidence.
+One lead, cpdf, remains unresolved; poppler-qt6 was excluded as a duplicate Poppler package frontend. See `cell.json`, `registry-snapshot.json`, `parsers.json`, and `verification.json` for limits and evidence.

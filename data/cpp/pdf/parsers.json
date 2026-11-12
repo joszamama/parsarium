@@ -163,5 +163,21 @@
     "scope": "PDF document page count",
     "family": "PDFium engine via Qt PDF",
     "family_note": "Qt PDF module from the separate QtWebEngine distribution exposes the QPdfDocument C++17 API and bundles PDFium internally. It shares the PDFium engine with the direct PDFium path but is a distinct third-party package/API. The installed 6.11.2_1 framework and official v6.11.2 header are hash checked; Qt6Pdf.pc reports 6.12.0 despite the Homebrew formula version, so both values are recorded."
+  },
+  {
+    "name": "xpdf",
+    "version": "4.06",
+    "license": "GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://formulae.brew.sh/formula/xpdf",
+    "documentation": "https://dl.xpdfreader.com/xpdf-4.06.tar.gz",
+    "input_api": "PDFDoc(char* local UTF-8 filename) after GlobalParams initialization; isOk(); getNumPages(), defined in xpdf/PDFDoc.h and used by xpdf/pdfinfo.cc in the pinned source archive",
+    "adapter": "adapters/cpp/pdf/xpdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "Xpdf PDF parser",
+    "family_note": "Xpdf 4.06 source publishes a CMake xpdf_objs object library containing PDFDoc; the verifier archives it and links its goo and fofi libraries for a direct C++17 adapter. There is no installed public libxpdf artifact or stable ABI claim. Poppler descends from older Xpdf code, but this is the independently maintained Xpdf 4.06 parser family."
   }
 ]
