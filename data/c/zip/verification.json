@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T07:39:24.617008+00:00",
+  "checked_at_utc": "2026-11-12T07:45:13.839976+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -32,6 +32,17 @@
       "pkg_config_version": "1.14.60",
       "library": "/opt/homebrew/Cellar/libgsf/1.14.60/lib/libgsf-1.dylib",
       "library_sha256": "a0edd447ee04306912f46ce3e4181b6780e13e90f302607401537af5281ccdda"
+    }
+  },
+  "source_builds": {
+    "kuba-zip": {
+      "source_sha256": "0c33740aec7a3913bca07df360420c19cac5e794e0f602f14f798cb2e6f710e5",
+      "build": "compiled pinned src/zip.c with bundled miniz.h"
+    },
+    "zziplib": {
+      "source_sha256": "21f40d111c0f7a398cfee3b0a30b20c5d92124b08ea4290055fbfe7bdd53a22c",
+      "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zziplib -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib-build -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTS=OFF -DZZIPMMAPPED=OFF -DZZIPFSEEKO=OFF -DZZIPWRAP=OFF -DZZIPSDL=OFF -DZZIPBINS=OFF -DZZIPTEST=OFF -DZZIPDOCS=OFF -DCMAKE_BUILD_TYPE=Release",
+      "zlib_pkg_config_version": "1.2.12"
     }
   },
   "control": "controls/zip/hello.zip",
@@ -113,6 +124,32 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libgsf.c -I/opt/homebrew/Cellar/libgsf/1.14.60/include/libgsf-1 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -L/opt/homebrew/Cellar/libgsf/1.14.60/lib -lgsf-1 -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -lxml2 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libgsf",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libgsf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "kuba-zip",
+      "version": "0.3.2",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/kuba-zip/src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/kuba_zip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/kuba-zip/src/zip.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/kuba-zip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/kuba-zip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "zziplib",
+      "version": "0.13.80",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zziplib -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/zziplib.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib-build/zzip/libzzip.a -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/zziplib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

@@ -212,10 +212,14 @@ def main() -> None:
                         key=lambda p: (-metrics[p["name"]]["stars"], p["name"]))
         unknown = sorted((p for p in parsers if metrics[p["name"]]["stars"] is None),
                          key=lambda p: p["name"])
+        metric_time = snapshot["popularity_metric"]
+        window = metric_time.get("captured_between_utc")
+        captured = (f"between {window[0]} and {window[1]}" if window else
+                    f"at {metric_time['captured_at_utc']}")
         lines = [f"# C × {format_name.upper()}: verified parser ranking", "",
                  f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
-                 "The metric is GitHub repository stars captured at "
-                 f"{snapshot['popularity_metric']['captured_at_utc']}. The captured Conan Center recipe-name "
+                 "The metric is GitHub repository stars captured "
+                 f"{captured}. The captured Conan Center recipe-name "
                  "surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, "
                  "compared only within C, and do not establish a complete most-used set. "
                  f"{len(unknown)} path(s) lack a metric and remain unranked.", "",

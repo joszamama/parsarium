@@ -197,13 +197,27 @@
       "source_url": "https://download.gnome.org/sources/libgsf/1.14/libgsf-1.14.60.tar.xz",
       "source_sha256": "83e12c36a099a8a7019bf425e2c24af66eeb2ef5874251e694431a07d9805dae",
       "license_evidence": "https://formulae.brew.sh/formula/libgsf"
+    },
+    "kuba-zip": {
+      "version": "0.3.2",
+      "license": "Unlicense",
+      "source_url": "https://github.com/kuba--/zip/archive/v0.3.2.tar.gz",
+      "source_sha256": "0c33740aec7a3913bca07df360420c19cac5e794e0f602f14f798cb2e6f710e5",
+      "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/kuba-zip/all/conanfile.py"
+    },
+    "zziplib": {
+      "version": "0.13.80",
+      "license": "GPL-2.0-or-later",
+      "source_url": "https://github.com/gdraheim/zziplib/archive/refs/tags/v0.13.80.tar.gz",
+      "source_sha256": "21f40d111c0f7a398cfee3b0a30b20c5d92124b08ea4290055fbfe7bdd53a22c",
+      "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/zziplib/all/conanfile.py"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where package-specific and available",
     "captured_at_utc": "2026-11-12T07:37:59.874221+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository-level adoption proxy, not parser usage. libarchive covers multiple formats. Missing metrics are null, and classic MiniZip does not inherit all zlib stars. The search itself is alphabetic and does not establish the most-used set.",
+    "limitations": "Repository-level adoption proxy, not parser usage. libarchive covers multiple formats. Missing metrics are null; classic MiniZip does not inherit all zlib stars. kuba-zip bundles miniz, so their repository counts describe related paths. The search itself is alphabetic and does not establish the most-used set.",
     "packages": {
       "libarchive": {
         "stars": 3672,
@@ -236,7 +250,21 @@
         "repository": null,
         "source": null,
         "reason": "No comparable package-specific primary GitHub repository metric; classic MiniZip is a zlib subtree, and libgsf uses GNOME GitLab."
+      },
+      "kuba-zip": {
+        "stars": 1615,
+        "repository": "https://github.com/kuba--/zip",
+        "source": "https://api.github.com/repos/kuba--/zip"
+      },
+      "zziplib": {
+        "stars": 70,
+        "repository": "https://github.com/gdraheim/zziplib",
+        "source": "https://api.github.com/repos/gdraheim/zziplib"
       }
-    }
+    },
+    "captured_between_utc": [
+      "2026-11-12T07:37:59.874221+00:00",
+      "2026-11-12T07:44:53.407586+00:00"
+    ]
   }
 }
