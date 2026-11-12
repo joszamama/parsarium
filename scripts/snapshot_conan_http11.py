@@ -14,10 +14,11 @@ REPOS = {"llhttp": "nodejs/llhttp", "http-parser": "nodejs/http-parser",
          "httpp": "cebem1nt/httpp", "HTTPParserC": "Building42/HTTPParserC",
          "libmicrohttpd": None, "libevhtp": "ellzey/libevhtp", "libhtp": "OISF/libhtp",
          "libwebsockets": "warmcat/libwebsockets", "libonion": "davidmoreno/onion",
-         "libsoup": None}
+         "libsoup": None, "serf": None}
 NO_GITHUB_REASON = {
     "libmicrohttpd": "Official upstream is git.gnunet.org, not a primary GitHub repository",
     "libsoup": "Primary upstream is GNOME GitLab; no comparable primary GitHub star count",
+    "serf": "Primary upstream is Apache Subversion; no comparable primary GitHub star count",
 }
 
 
