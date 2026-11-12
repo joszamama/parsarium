@@ -187,22 +187,24 @@ paths and eight C++ paths lack comparable primary GitHub stars and remain
 unranked. Only ASCII P3 is established for every path. Neither scoped
 standard library documents a PNM-aware parser.
 
-The [C × HTTP/1.1 cell](data/c/http11/cell.json) contains **9/20 verified
+The [C × HTTP/1.1 cell](data/c/http11/cell.json) contains **10/20 verified
 package paths**: llhttp, Node http-parser, PicoHTTPParser, Mongoose, httpp,
-HTTPParserC, GNU libmicrohttpd, libevhtp, and LibHTP. All nine parsed
+HTTPParserC, GNU libmicrohttpd, libevhtp, LibHTP, and libwebsockets. Nine parsed
 the method, target, and version of a valid local GET request after complete
 header parsing. `python3 scripts/verify_c_http11.py` checks SHA-256 source
 archives, the exact local llhttp 9.4.3 and libmicrohttpd 1.0.10 libraries and
-headers, rebuilds all nine adapters, and replays the control. LibHTP 0.5.53
+headers, plus the libwebsockets 5.0.0_2 library and header, rebuilds all ten
+adapters, and replays the control. libwebsockets yielded the parsed method,
+target and Host header from an adopted local read buffer. LibHTP 0.5.53
 is rebuilt from its pinned source with Autotools and zlib. The libmicrohttpd
 adapter supplies the request through a local socket stream. Four bounded Conan recipe-name queries saved
 24 hits and 22 distinct names; project documentation supplied PicoHTTPParser,
-Mongoose, httpp, HTTPParserC, libevhtp, and LibHTP
+Mongoose, httpp, HTTPParserC, libevhtp, LibHTP, and libwebsockets
 outside those windows. HTTPParserC distributes llhttp C source and shares its
 parser engine. libevhtp ships its own htparse scanner. GitHub project stars
-rank eight paths only within C;
+rank nine paths only within C;
 libmicrohttpd has no primary GitHub repository and remains unranked.
-Eleven working paths remain unverified. The ISO C standard library provides
+Ten working paths remain unverified. The ISO C standard library provides
 no documented HTTP/1.1 request parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed

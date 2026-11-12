@@ -50,6 +50,11 @@ def main() -> None:
         for path_key, hash_key in (("system_library", "system_library_sha256"),
                                    ("system_header", "system_header_sha256")):
             assert sha256(Path(installed[path_key]).read_bytes()).hexdigest() == installed[hash_key]
+    websockets = lock["libwebsockets"]
+    assert run(["pkg-config", "--modversion", "libwebsockets"]).stdout.strip() == websockets["pkg_config_version"]
+    for path_key, hash_key in (("system_library", "system_library_sha256"),
+                               ("system_header", "system_header_sha256")):
+        assert sha256(Path(websockets[path_key]).read_bytes()).hexdigest() == websockets[hash_key]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
         for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp"):
@@ -61,6 +66,8 @@ def main() -> None:
         run(["make", "-j4"], cwd=libhtp_source)
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
         mhdflags = run(["pkg-config", "--cflags", "--libs", "libmicrohttpd"]).stdout.split()
+        lws_cflags = run(["pkg-config", "--cflags", "openssl", "libwebsockets"]).stdout.split()
+        lws_libs = run(["pkg-config", "--libs", "libwebsockets"]).stdout.split()
         commands = {
             "llhttp": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(ADAPTER), str(ADAPTER / "llhttp.c"), *llflags,
@@ -101,7 +108,11 @@ def main() -> None:
                        "-I" + str(ADAPTER), "-I" + str(libhtp_source),
                        str(ADAPTER / "libhtp.c"),
                        str(libhtp_source / "htp/.libs/libhtp.a"), "-lz",
-                       "-o", str(build / "libhtp-adapter")]}
+                       "-o", str(build / "libhtp-adapter")],
+            "libwebsockets": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                              "-I" + str(ADAPTER), str(ADAPTER / "libwebsockets.c"),
+                              *lws_cflags, *lws_libs,
+                              "-o", str(build / "libwebsockets-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]
@@ -118,7 +129,9 @@ def main() -> None:
                               "llhttp_version": lock["llhttp"]["release"],
                               "llhttp_library_sha256": lock["llhttp"]["system_library_sha256"],
                               "libmicrohttpd_version": lock["libmicrohttpd"]["release"],
-                              "libmicrohttpd_library_sha256": lock["libmicrohttpd"]["system_library_sha256"]},
+                              "libmicrohttpd_library_sha256": lock["libmicrohttpd"]["system_library_sha256"],
+                              "libwebsockets_version": websockets["release"],
+                              "libwebsockets_library_sha256": websockets["system_library_sha256"]},
               "control": "controls/http11/request.http", "control_sha256": control_hash,
               "control_meaning": "Valid HTTP/1.1 GET request with Host, custom, and Connection headers",
               "third_party": rows, "runtime": []}

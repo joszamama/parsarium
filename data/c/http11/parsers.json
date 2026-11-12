@@ -115,5 +115,18 @@
     "adapter": "adapters/c/http11/libhtp.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+  },
+  {
+    "name": "libwebsockets",
+    "version": "5.0.0",
+    "license": "MIT",
+    "license_evidence": "Pinned release root LICENSE",
+    "documentation": "https://github.com/warmcat/libwebsockets/blob/v5.0.0/include/libwebsockets/lws-adopt.h",
+    "input_api": "lws_create_context in no-listen server mode; lws_adopt_socket_vhost_readbuf(vhost, local socketpair fd, local HTTP request bytes, length); LWS_CALLBACK_HTTP and parsed header/query accessors",
+    "family": "libwebsockets C HTTP/1 parser in the server adoption path; independent from llhttp and LibHTP",
+    "scope": "HTTP/1.1 GET request method, path, query argument and Host header from local read buffer",
+    "adapter": "adapters/c/http11/libwebsockets.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "host": "example.test"}
   }
 ]
