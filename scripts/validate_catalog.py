@@ -45,7 +45,20 @@ def main() -> None:
         assert not ({lead["name"] for lead in leads} & {p["name"] for p in parsers})
         for parser in parsers:
             name = parser["name"]
-            if cell["ecosystem"] == "go":
+            if cell["ecosystem"] == "c":
+                assert cell["format"] == "png"
+                source = read("data/c/png/source-lock.json")[name]
+                release = snapshot["releases"][name]
+                assert parser["version"] == source["release"] == release["version"]
+                assert parser["license"] == release["license"]
+                assert source["source_sha256"] == release["source_sha256"]
+                assert len(source["source_sha256"]) == 64
+                assert all(len(file["sha256"]) == 64 for file in source.get("files", []))
+                assert (ROOT / parser["adapter"]).exists()
+                assert (ROOT / parser["control"]).exists()
+                count = snapshot["popularity_metric"]["packages"][name]["stars"]
+                assert count is None or isinstance(count, int)
+            elif cell["ecosystem"] == "go":
                 go_mod = (ROOT / "adapters" / "go" / cell["format"] / "go.mod").read_text()
                 go_versions = dict(re.findall(r"^\s*(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
                 assert parser["version"] == go_versions[parser["module"]]
@@ -118,7 +131,13 @@ def main() -> None:
         runs = results["results"] if browser_png else results["third_party"]
         assert {r["package"] for r in runs} == {p["name"] for p in parsers}
         assert all(r["pass"] for r in runs)
-        if cell["ecosystem"] == "rust":
+        if cell["ecosystem"] == "c":
+            expected = {parser["name"]: parser for parser in parsers}
+            assert all(row["version"] == expected[row["package"]]["version"]
+                       and row["control"] == expected[row["package"]]["control"]
+                       and row["output"] == expected[row["package"]]["expected_output"]
+                       for row in runs)
+        elif cell["ecosystem"] == "rust":
             expected = {parser["name"]: parser for parser in parsers}
             assert all(row["version"] == expected[row["package"]]["version"]
                        and row["control"] == expected[row["package"]]["control"]

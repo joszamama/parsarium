@@ -1,7 +1,8 @@
 # Parsarium
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
-specific formats. It currently contains a verified JavaScript × PNG pilot,
+specific formats. It currently contains a below-target C × PNG batch,
+a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
@@ -10,8 +11,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-There are 47 cells at the 20-parser target, two started below target,
-and 39 marked `not_started`;
+There are 47 cells at the 20-parser target, three started below target,
+and 38 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -22,6 +23,7 @@ and Chromium 153.0.8010.12 through Playwright 1.63.0. The npm lockfile pins
 all packages and integrity hashes. From the repository root:
 
 ```sh
+python3 scripts/verify_c_png.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -122,6 +124,15 @@ python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
 ```
+
+The C × PNG verifier uses `cc`, CMake, `pkg-config`, and zlib development headers.
+It downloads four source archives pinned by SHA-256, builds libpng 1.6.59 as
+a static library, builds the other three adapters from pinned source files, and
+checks the 2×1 valid PNG's dimensions and both RGBA pixels. The recorded result
+is **4/4 third-party package paths passing**, below the working goal of 20.
+The C standard library has no documented PNG parser; generic `stdio.h` input
+does not count. Six plausible leads remain unresolved. See
+[`data/c/png/cell.json`](data/c/png/cell.json) for search limits and uncertainty.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.

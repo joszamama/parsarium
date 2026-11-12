@@ -1,0 +1,56 @@
+[
+  {
+    "name": "libpng",
+    "version": "1.6.59",
+    "license": "libpng-2.0",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/libpng/all/conanfile.py",
+    "documentation": "https://github.com/pnggroup/libpng/blob/v1.6.59/example.c",
+    "input_api": "png_image_begin_read_from_file(png_image*, const char*); png_image_finish_read(...) to RGBA pixels",
+    "adapter": "adapters/c/png/libpng.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "scope": "pixels",
+    "family": "libpng",
+    "family_note": "Direct libpng decoder; static library is built from the pinned source archive."
+  },
+  {
+    "name": "stb",
+    "version": "cci.20261021",
+    "license": "MIT OR Unlicense",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/stb/all/conanfile.py",
+    "documentation": "https://github.com/nothings/stb/blob/a7d4c2175630e1ea5b6f8dd00ab96fed0b97b96d/stb_image.h",
+    "input_api": "stbi_load(const char* filename, int*, int*, int*, int) from stb_image.h",
+    "adapter": "adapters/c/png/stb.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "scope": "pixels",
+    "family": "stb_image"
+  },
+  {
+    "name": "lodepng",
+    "version": "cci.20260102",
+    "license": "Zlib",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/lodepng/all/conanfile.py",
+    "documentation": "https://github.com/lvandeve/lodepng/blob/865adac2b8149774401626101ec618e3de45e1d8/lodepng.h",
+    "input_api": "lodepng_decode32_file(unsigned char**, unsigned*, unsigned*, const char*)",
+    "adapter": "adapters/c/png/lodepng_adapter.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "scope": "pixels",
+    "family": "LodePNG"
+  },
+  {
+    "name": "libspng",
+    "version": "0.7.4",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/libspng/all/conanfile.py",
+    "documentation": "https://github.com/randy408/libspng/blob/v0.7.4/spng/spng.h",
+    "input_api": "spng_set_png_file(spng_ctx*, FILE*); spng_get_ihdr(...); spng_decode_image(...) to RGBA8",
+    "adapter": "adapters/c/png/libspng_adapter.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "scope": "pixels",
+    "family": "libspng",
+    "family_note": "Independent PNG parser using zlib for DEFLATE."
+  }
+]

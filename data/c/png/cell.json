@@ -1,0 +1,21 @@
+{
+  "ecosystem": "c",
+  "format": "png",
+  "status": "verified_below_goal_partial_search",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 4,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": ["png", "image", "stb"],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 11,
+  "unique_search_hits": 11,
+  "unresolved_documentation_leads": 6,
+  "uncertainty": "Four distinct pinned C package paths passed the valid 2x1 RGBA PNG control, each returning dimensions and both decoded pixels. This is a first batch, not the 20-parser goal or a most-used ranking of all C PNG parsers. The Conan Center Index recipe-name search saved all 11 alphabetically matched hits from the three listed substrings (100-result ceiling per query); it is not a usage-ranked registry search and can miss parsers whose recipe names omit these terms or are outside Conan Center. Six named leads remain unresolved: FreeImage, ImageMagick, OpenImageIO, SDL_image, upng and pngle. Repository stars rank only the four verified rows and are an imperfect adoption proxy. The four paths represent libpng, stb_image, LodePNG and libspng parser families; libspng uses zlib for compression but its own PNG parsing. The control covers one non-interlaced 8-bit RGBA PNG only. WG14's C standard library documents no PNG-specific parser; generic stdio reads do not qualify. No malformed-input, vulnerability or resource-use experiments were run.",
+  "third_party_evidence": "data/c/png/parsers.json",
+  "third_party_control_results": "data/c/png/verification.json",
+  "runtime_evidence": "data/c/png/standard.json",
+  "registry_snapshot": "data/c/png/registry-snapshot.json",
+  "unresolved_leads": "data/c/png/leads.json",
+  "source_lock": "data/c/png/source-lock.json"
+}

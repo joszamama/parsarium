@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C",
+  "format": "PNG",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220 working draft)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The listed standard headers provide no PNG-specific image decoding interface."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "FILE, fopen and fread are general stream I/O; they do not return PNG dimensions, chunks or pixels."
+    }
+  ],
+  "limit": "Scoped to the ISO C standard library. System or platform image frameworks are separate third-party or runtime candidates and require their own control checks. No standard format-aware PNG API was documented to run."
+}
