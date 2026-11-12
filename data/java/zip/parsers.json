@@ -1,0 +1,240 @@
+[
+  {
+    "name": "commons-compress",
+    "group": "org.apache.commons",
+    "artifact": "commons-compress",
+    "version": "1.28.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release JAR META-INF/LICENSE.txt",
+    "input_api": "org.apache.commons.compress.archivers.zip.ZipFile.builder().setPath(path).get(); getEntry/getInputStream",
+    "documentation": "https://commons.apache.org/proper/commons-compress/apidocs/org/apache/commons/compress/archivers/zip/ZipFile.html",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Apache Commons Compress ZIP parser",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "zip4j",
+    "group": "net.lingala.zip4j",
+    "artifact": "zip4j",
+    "version": "2.11.6",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "new net.lingala.zip4j.ZipFile(file).getFileHeader(name); getInputStream(header)",
+    "documentation": "https://github.com/srikanth-lingala/zip4j",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "zip4j ZIP parser",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "zt-zip",
+    "group": "org.zeroturnaround",
+    "artifact": "zt-zip",
+    "version": "1.18.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "org.zeroturnaround.zip.ZipUtil.iterate(file, ZipEntryCallback)",
+    "documentation": "https://github.com/zeroturnaround/zt-zip",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "zt-zip wrapper over JDK ZipFile",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "lljzip",
+    "group": "software.coley",
+    "artifact": "lljzip",
+    "version": "2.1.0",
+    "license": "MIT",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "software.coley.lljzip.ZipIO.readJvm(path); archive.getLocalFileByName(name)",
+    "documentation": "https://github.com/Col-E/LL-Java-Zip/blob/2.1.0/README.md",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "LLJZip own ZIP reader",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "ant",
+    "group": "org.apache.ant",
+    "artifact": "ant",
+    "version": "1.10.18",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release JAR META-INF/LICENSE.txt",
+    "input_api": "new org.apache.tools.zip.ZipFile(file).getEntry(name); getInputStream(entry)",
+    "documentation": "https://ant.apache.org/manual/api/org/apache/tools/zip/ZipFile.html",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Apache Ant ZIP reader; historically related to Commons Compress",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "commons-vfs2",
+    "group": "org.apache.commons",
+    "artifact": "commons-vfs2",
+    "version": "2.10.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release JAR META-INF/LICENSE.txt",
+    "input_api": "VFS.getManager().resolveFile(\"zip:\" + fileUri + \"!/hello.txt\"); getContent().getInputStream()",
+    "documentation": "https://commons.apache.org/proper/commons-vfs/filesystems.html",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Commons VFS ZIP provider over JDK ZipFile",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "zip4jvm",
+    "group": "ru.oleg-cherednik.zip4jvm",
+    "artifact": "zip4jvm",
+    "version": "1.13",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "UnzipIt.zip(path).stream(name)",
+    "documentation": "https://github.com/oleg-cherednik/zip4jvm",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "zip4jvm own ZIP parser",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "quarkus-fs-util",
+    "group": "io.quarkus",
+    "artifact": "quarkus-fs-util",
+    "version": "1.4.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "ZipUtils.openReadOnly(path); Files.readAllBytes(zipFs.getPath(name))",
+    "documentation": "https://github.com/quarkusio/quarkus-fs-util",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Quarkus read-only ZIP filesystem parser",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "plexus-archiver",
+    "group": "org.codehaus.plexus",
+    "artifact": "plexus-archiver",
+    "version": "4.15.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/codehaus-plexus/plexus-archiver",
+    "input_api": "new ZipUnArchiver(file).setDestDirectory(dir); extract()",
+    "documentation": "https://codehaus-plexus.github.io/plexus-archiver/apidocs/org/codehaus/plexus/archiver/zip/ZipUnArchiver.html",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Plexus Archiver wrapper over Commons Compress",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "jarchivelib",
+    "group": "org.rauschig",
+    "artifact": "jarchivelib",
+    "version": "1.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/thrau/jarchivelib/blob/master/LICENSE",
+    "input_api": "ArchiverFactory.createArchiver(ArchiveFormat.ZIP).stream(file); getNextEntry()",
+    "documentation": "https://github.com/thrau/jarchivelib",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "JArchiveLib wrapper over Commons Compress",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "compress4j",
+    "group": "com.hominux",
+    "artifact": "compress4j",
+    "version": "5.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "ZipArchiveExtractor.builder(path).build().stream(); ArchiveItem.content()",
+    "documentation": "https://github.com/hominux/compress4j",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Compress4J wrapper over Commons Compress",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "arcana",
+    "group": "io.github.realburst",
+    "artifact": "arcana",
+    "version": "1.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "Arcana.read(file); ArchiveReader iteration and ArchiveItem.openStream()",
+    "documentation": "https://realburst.github.io/arcana/",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Arcana own ZIP parser",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "tika-parser-pkg-module",
+    "group": "org.apache.tika",
+    "artifact": "tika-parser-pkg-module",
+    "version": "4.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release JAR META-INF/LICENSE",
+    "input_api": "new ZipParser().parse(TikaInputStream.get(path), handler, metadata, context)",
+    "documentation": "https://tika.apache.org/4.2.0/api/org/apache/tika/parser/pkg/ZipParser.html",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "Apache Tika ZipParser over Commons Compress",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  },
+  {
+    "name": "truezip-driver-zip",
+    "group": "de.schlichtherle.truezip",
+    "artifact": "truezip-driver-zip",
+    "version": "7.7.10",
+    "license": "EPL-1.0",
+    "license_evidence": "https://christian-schlichtherle.bitbucket.io/truezip/",
+    "input_api": "new TFileInputStream(new TFile(zipFile, entryName))",
+    "documentation": "https://christian-schlichtherle.bitbucket.io/truezip/apidocs/de/schlichtherle/truezip/file/TFileInputStream.html",
+    "scope": "ZIP entry name and decompressed content from a local archive",
+    "family": "TrueZIP ZIP driver",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "name": "hello.txt",
+      "content_base64": "cGFyc2FyaXVtCg=="
+    }
+  }
+]

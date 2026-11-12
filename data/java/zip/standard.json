@@ -1,0 +1,69 @@
+{
+  "ecosystem": "Java",
+  "format": "ZIP",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "name": "jdk-zipfile",
+      "input_api": "java.util.zip.ZipFile(File); getEntry/getInputStream",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/zip/ZipFile.html",
+      "family": "JDK ZIP random-access reader",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      },
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+    },
+    {
+      "name": "jdk-zipinputstream",
+      "input_api": "java.util.zip.ZipInputStream(InputStream); getNextEntry/readAllBytes",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/zip/ZipInputStream.html",
+      "family": "JDK ZIP stream reader",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      },
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+    },
+    {
+      "name": "jdk-jarfile",
+      "input_api": "java.util.jar.JarFile(File); getJarEntry/getInputStream",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/jar/JarFile.html",
+      "family": "JDK ZipFile-derived JAR reader",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      },
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+    },
+    {
+      "name": "jdk-jarinputstream",
+      "input_api": "java.util.jar.JarInputStream(InputStream); getNextJarEntry/readAllBytes",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/jar/JarInputStream.html",
+      "family": "JDK ZipInputStream-derived JAR reader",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      },
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+    },
+    {
+      "name": "jdk-zipfs",
+      "input_api": "FileSystems.newFileSystem(Path, Map); Files.readAllBytes(archivePath)",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/jdk.zipfs/module-summary.html",
+      "family": "JDK ZIP filesystem provider",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      },
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+    }
+  ],
+  "limit": "JarFile and JarInputStream are JAR-oriented subclasses that also parse this valid ordinary ZIP control. They share JDK ZIP parser families and are not separate third-party packages. Generic Files.readAllBytes is only the byte source for an actual ZIP parser."
+}

@@ -1,0 +1,25 @@
+{
+  "ecosystem": "java",
+  "format": "zip",
+  "status": "verified_below_target_search_incomplete",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 14,
+  "verified_standard_or_runtime_count": 5,
+  "search_queries": [
+    "zip parser",
+    "zip archive",
+    "zip reader",
+    "Java ZIP"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 100,
+  "unique_search_hits": 100,
+  "unresolved_documentation_leads": 6,
+  "uncertainty": "Four bounded Maven Central Solr searches saved 100 hits and 100 distinct artifact coordinates. Three queries timed out; the successful Java ZIP query returned 100 of 178 hits, mostly unrelated to ZIP parsing, leaving 78 in that query tail. Targeted Maven Central artifact lookups and official project documentation found 14 distinct pinned, open-source Java package paths with local ZIP input APIs; all passed the valid one-entry ZIP control. Six plausible leads remain unresolved, including TrueVFS 0.14.0, which read the entry but raised a shutdown hook ServiceConfigurationError. This is 14 of the 20-path working goal, with six still unverified. Search is incomplete and higher-adoption packages may remain undiscovered. Several paths wrap JDK ZIP or Apache Commons Compress, as labeled in their family field; the package count is not a count of independent parser engines. The valid control checks one ordinary DEFLATE entry only. deps.dev direct dependent counts cover known public dependents of exact releases and may undercount or bias older versions; rankings compare only Java paths. Five Java 21 runtime APIs passed separately and do not enter the third-party ranking.",
+  "third_party_evidence": "data/java/zip/parsers.json",
+  "third_party_control_results": "data/java/zip/verification.json",
+  "runtime_evidence": "data/java/zip/standard.json",
+  "registry_snapshot": "data/java/zip/registry-snapshot.json",
+  "unresolved_leads": "data/java/zip/leads.json"
+}

@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import re
 import tomllib
+import xml.etree.ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -77,6 +78,24 @@ def main() -> None:
                 count = snapshot["popularity_metric"]["packages"][name]["recent_downloads"]
                 assert count is None or isinstance(count, int)
                 assert (ROOT / parser["control"]).exists()
+            elif cell["ecosystem"] == "java":
+                pom = ET.parse(ROOT / "adapters" / "java" / cell["format"] / "pom.xml").getroot()
+                ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+                dependencies = {
+                    (entry.findtext("m:groupId", namespaces=ns),
+                     entry.findtext("m:artifactId", namespaces=ns)):
+                    entry.findtext("m:version", namespaces=ns)
+                    for entry in pom.findall("m:dependencies/m:dependency", ns)
+                }
+                assert dependencies[(parser["group"], parser["artifact"])] == parser["version"]
+                release = snapshot["releases"][name]
+                assert (release["group"], release["artifact"], release["version"]) == (
+                    parser["group"], parser["artifact"], parser["version"])
+                assert parser["license"] == release["license"]
+                count = snapshot["popularity_metric"]["packages"][name]["direct_dependent_count"]
+                assert count is None or isinstance(count, int)
+                assert len(release["jar_sha256"]) == 64 and len(release["pom_sha256"]) == 64
+                assert (ROOT / parser["control"]).exists()
             else:
                 assert parser["version"] == lock[name]
                 assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
@@ -88,6 +107,12 @@ def main() -> None:
         assert {r["package"] for r in runs} == {p["name"] for p in parsers}
         assert all(r["pass"] for r in runs)
         if cell["ecosystem"] == "rust":
+            expected = {parser["name"]: parser for parser in parsers}
+            assert all(row["version"] == expected[row["package"]]["version"]
+                       and row["control"] == expected[row["package"]]["control"]
+                       and row["output"] == expected[row["package"]]["expected_output"]
+                       for row in runs)
+        elif cell["ecosystem"] == "java":
             expected = {parser["name"]: parser for parser in parsers}
             assert all(row["version"] == expected[row["package"]]["version"]
                        and row["control"] == expected[row["package"]]["control"]

@@ -160,6 +160,47 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"rust/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
+    for format_name, label in (("zip", "ZIP"),):
+        directory = ROOT / "data" / "java" / format_name
+        parsers = read(directory / "parsers.json")
+        snapshot = read(directory / "registry-snapshot.json")
+        metrics = snapshot["popularity_metric"]["packages"]
+        known = sorted((parser for parser in parsers
+                        if metrics[parser["name"]]["direct_dependent_count"] is not None),
+                       key=lambda parser: (-metrics[parser["name"]]["direct_dependent_count"],
+                                           parser["name"]))
+        unknown = sorted((parser for parser in parsers
+                          if metrics[parser["name"]]["direct_dependent_count"] is None),
+                         key=lambda parser: parser["name"])
+        lines = [
+            f"# Java × {label}: verified parser ranking", "",
+            f"{len(parsers)} verified third-party Maven package paths; working goal 20, original ceiling 30. "
+            "The metric is deps.dev's version-level public direct dependent count, captured at "
+            f"{snapshot['popularity_metric']['captured_at_utc']}. This is a known-public-dependents proxy "
+            "for adoption of each exact release, not downloads; coverage and version age may bias it. "
+            f"It is compared only within Java. {len(unknown)} package(s) lack a metric and remain unranked.", "",
+            "Search hits, unresolved leads, and JDK APIs are separate from this ranking. "
+            "See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.", "",
+            "| Rank | Package | Pinned release | Direct dependents | Scope | Underlying family |",
+            "| ---: | --- | --- | ---: | --- | --- |",
+        ]
+        previous_count = None
+        displayed_rank = 0
+        for position, parser in enumerate(known, 1):
+            value = metrics[parser["name"]]["direct_dependent_count"]
+            if value != previous_count:
+                displayed_rank = position
+                previous_count = value
+            lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['group']}:{parser['artifact']}:{parser['version']} | {value:,} | "
+                         f"{parser['scope']} | {parser['family']} |")
+        for parser in unknown:
+            lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['group']}:{parser['artifact']}:{parser['version']} | unknown | "
+                         f"{parser['scope']} | {parser['family']} |")
+        (directory / "ranking.md").write_text("\n".join(lines) + "\n")
+        print(f"java/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
+
 
 if __name__ == "__main__":
     main()

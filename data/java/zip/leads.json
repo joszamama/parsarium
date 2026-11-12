@@ -1,0 +1,56 @@
+[
+  {
+    "name": "truevfs-driver-zip",
+    "status": "unresolved",
+    "source": "https://truevfs.namespace.global/truevfs-driver/truevfs-driver-zip/index.html",
+    "reason": "The 0.14.0 driver and TrueVFS Access read the valid ZIP entry, but a shutdown hook raised ServiceConfigurationError for a missing AES key manager. No clean complete run was recorded."
+  },
+  {
+    "name": "commons-archive",
+    "status": "unresolved",
+    "source": "https://central.sonatype.com/artifact/io.github.deepakdaneva.commons/commons-archive",
+    "reason": "Maven Central describes ZIP reading over Commons Compress; a pinned adapter and control have not yet been run."
+  },
+  {
+    "name": "truezip-utils",
+    "status": "unresolved",
+    "source": "https://www.mojohaus.org/truezip/truezip-maven-plugin/",
+    "reason": "MojoHaus describes Java library use and ZIP listing, but a public local-input method and passing control still need verification."
+  },
+  {
+    "name": "zip-manager",
+    "status": "unresolved",
+    "source": "https://github.com/openefsa/zip-manager",
+    "reason": "Project documentation describes ZIP file/stream decoding, but a pinned Maven release and runnable adapter are not yet verified."
+  },
+  {
+    "name": "SimpleZip",
+    "status": "unresolved",
+    "source": "https://256stuff.com/sources/simplezip/docs/simplezip.pdf",
+    "reason": "Documentation describes local file/stream ZIP input; Maven coordinates, release license and adapter remain unverified."
+  },
+  {
+    "name": "org.qsardb.storage:zipfile",
+    "status": "unresolved",
+    "source": "https://central.sonatype.com/artifact/org.qsardb.storage/zipfile",
+    "reason": "Registry artifact name is a lead only; no documented public local ZIP parsing API has been established."
+  },
+  {
+    "name": "tika-parser-zip-commons",
+    "status": "excluded",
+    "source": "https://central.sonatype.com/artifact/org.apache.tika/tika-parser-zip-commons",
+    "reason": "The package supplies ZIP container detection to Tika; the format-aware entry parser tested here is in tika-parser-pkg-module, so the detector module is not counted as a separate parser."
+  },
+  {
+    "name": "io.github.compress4j:compress4j",
+    "status": "excluded",
+    "source": "https://github.com/hominux/compress4j",
+    "reason": "Historical group coordinate of the same Compress4J project. The com.hominux release is counted once; group migration is not a distinct parser package."
+  },
+  {
+    "name": "kmp-zip",
+    "status": "excluded",
+    "source": "https://github.com/henrik242/kmp-zip",
+    "reason": "Kotlin Multiplatform library with a JVM target; excluded from the Java-language package ranking pending a documented Java API and ecosystem classification."
+  }
+]
