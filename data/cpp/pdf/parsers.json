@@ -179,5 +179,21 @@
     "scope": "PDF document page count",
     "family": "Xpdf PDF parser",
     "family_note": "Xpdf 4.06 source publishes a CMake xpdf_objs object library containing PDFDoc; the verifier archives it and links its goo and fofi libraries for a direct C++17 adapter. There is no installed public libxpdf artifact or stable ABI claim. Poppler descends from older Xpdf code, but this is the independently maintained Xpdf 4.06 parser family."
+  },
+  {
+    "name": "pdfmm",
+    "version": "0.10.0",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://github.com/pdfmm/pdfmm/blob/v0.10.0/README.md",
+    "documentation": "https://github.com/pdfmm/pdfmm/blob/v0.10.0/src/pdfmm/base/PdfMemDocument.h",
+    "input_api": "mm::PdfMemDocument::Load(std::string_view local filename); GetPages().GetCount()",
+    "adapter": "adapters/cpp/pdf/pdfmm.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "pdfmm, fork of PoDoFo",
+    "family_note": "Pdfmm 0.10.0 is a distinct C++17 library forked from PoDoFo and later moved back to the PoDoFo community. Its parser lineage is shared with PoDoFo, and its separate pinned source release is built as a shared library with direct dependency hashes recorded."
   }
 ]

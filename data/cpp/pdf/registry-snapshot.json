@@ -1,6 +1,6 @@
 {
   "captured_at_utc": "2026-11-12T22:52:56.732932+00:00",
-  "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage. PDFio official docs and the PDFium binary distributor release plus canonical PDFium source docs were also checked as targeted leads. PDF4QT primary project documentation and release were checked as a targeted lead. Qt PDF QPdfDocument official documentation, QtWebEngine pinned source tag and Homebrew formula were checked as a targeted lead.",
+  "search_surface": "Homebrew formula-name index for native C++ library discovery; targeted Conan Center recipe pages for poppler and podofo were checked separately. GitHub Conan Center Index tree API returned HTTP 403 rate limit, so no claim of exhaustive Conan recipe coverage. PDFio official docs and the PDFium binary distributor release plus canonical PDFium source docs were also checked as targeted leads. PDF4QT primary project documentation and release were checked as a targeted lead. Qt PDF QPdfDocument official documentation, QtWebEngine pinned source tag and Homebrew formula were checked as a targeted lead. Pdfmm v0.10.0 primary project release and C++ input API were checked as a targeted lead; cpdflib tagged binary licensing was checked separately.",
   "search_limit_per_query": 100,
   "search": [
     {
@@ -361,6 +361,13 @@
       "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
       "license_evidence": "https://formulae.brew.sh/formula/xpdf",
       "source_note": "Xpdf README inside pinned source archive states GPL v2 or v3 only; PDFDoc.h and pdfinfo.cc document direct local file API."
+    },
+    "pdfmm": {
+      "version": "0.10.0",
+      "license": "LGPL-2.1-only",
+      "source_url": "https://codeload.github.com/pdfmm/pdfmm/tar.gz/refs/tags/v0.10.0",
+      "source_sha256": "6b583ec41d3b1660f016073896dc39868853a7f28f3e757a78d8951525d8ba39",
+      "license_evidence": "https://github.com/pdfmm/pdfmm/blob/v0.10.0/README.md"
     }
   },
   "popularity_metric": {
@@ -422,6 +429,12 @@
         "stars": null,
         "repository": "https://www.xpdfreader.com/",
         "note": "Official Xpdf source is distributed from xpdfreader.com, with no comparable primary GitHub stars. Homebrew install analytics are not mixed into this metric."
+      },
+      "pdfmm": {
+        "stars": 62,
+        "repository": "https://github.com/pdfmm/pdfmm",
+        "observed_at_utc": "2026-11-12T23:28:55+00:00",
+        "evidence_note": "Exact stargazerCount from primary GitHub repository HTML during this batch."
       }
     }
   },
@@ -457,6 +470,11 @@
       "name": "qtpdf",
       "url": "https://doc.qt.io/qt-6/qpdfdocument.html",
       "surface": "Official Qt PDF local load API and Homebrew qtwebengine distribution; distinct Qt module over PDFium"
+    },
+    {
+      "name": "pdfmm",
+      "url": "https://github.com/pdfmm/pdfmm",
+      "surface": "Primary project README and v0.10.0 source release; distinct PoDoFo fork with shared lineage"
     }
   ]
 }

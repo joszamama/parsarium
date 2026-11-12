@@ -155,11 +155,26 @@ def main() -> None:
             objects = sorted((build_dir / "xpdf/CMakeFiles/xpdf_objs.dir").glob("*.o"))
             assert objects
             run(["ar", "rcs", str(library), *(str(obj) for obj in objects)])
+        elif name == "pdfmm":
+            source_dir = CACHE / f"pdfmm-{source['release']}"
+            if not source_dir.exists():
+                run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "src/pdfmm/base/PdfMemDocument.h"
+            for dep in source["installed_dependencies"]:
+                path = Path(dep["path"])
+                assert sha256(path.read_bytes()).hexdigest() == dep["sha256"]
+            build_dir = CACHE / "pdfmm-build"
+            run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DPDFMM_BUILD_LIB_ONLY=ON",
+                 "-DPDFMM_SHARED=ON", "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+                 "-DOPENSSL_ROOT_DIR=/opt/homebrew/Cellar/openssl@4/4.1.0"])
+            run(["cmake", "--build", str(build_dir), "--target", "pdfmm_shared", "-j4"])
+            library = build_dir / "src/pdfmm/libpdfmm.0.10.0.dylib"
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf"):
+        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -220,6 +235,12 @@ def main() -> None:
                        str(ROOT / parser["adapter"]), str(library),
                        str(build_dir / "goo/libgoo.a"), str(build_dir / "fofi/libfofi.a"),
                        str(fontconfig), "-o", str(TARGET / name)]
+        elif name == "pdfmm":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-Wno-unnecessary-virtual-specifier", "-DPDFMM_SHARED=1",
+                       "-I" + str(source_dir / "src"), "-I" + str(build_dir / "src/pdfmm"),
+                       str(ROOT / parser["adapter"]), str(library),
+                       "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)
