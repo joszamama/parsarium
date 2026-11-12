@@ -232,7 +232,25 @@
       "content": "parsarium\n"
     },
     "scope": "entry name and decompressed entry bytes",
-    "family": "libc7zip → lib7zip → 7-Zip ZIP engine",
+    "family": "libc7zip \u2192 lib7zip \u2192 7-Zip ZIP engine",
     "family_note": "Tagged MIT C facade vendors an MPL-2.0 lib7zip fork and loads a 7-Zip 26.03 engine; a distinct package path sharing the 7-Zip parser family with bit7z in C++."
+  },
+  {
+    "name": "infozip-unzip",
+    "version": "6.0",
+    "license": "Info-ZIP",
+    "license_evidence": "https://downloads.sourceforge.net/project/infozip/UnZip%206.x%20%28latest%29/UnZip%206.0/unzip60.tar.gz",
+    "documentation": "https://github.com/madler/unzip/blob/master/unzip.h",
+    "input_api": "UzpAltMain on a local ZIP path with listing callback; UzpUnzipToMemory(local ZIP path, parsed entry name); UzpFreeMemBuffer",
+    "adapter": "adapters/c/zip/infozip_unzip.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API",
+    "family": "Info-ZIP UnZip 6.0 engine",
+    "family_note": "Official Info-ZIP UnZip 6.0 source exposes a C DLL API. This path compiles its library objects and calls the API directly; it is separate from MiniZip, unzipLIB, and other ZIP engines."
   }
 ]

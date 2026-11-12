@@ -815,13 +815,20 @@
       "engine_version": "26.03",
       "engine_source_url": "https://github.com/ip7z/7zip/releases/download/26.03/7z2603-src.tar.xz",
       "engine_source_sha256": "9cbde5099c6deb73691b0579063da5827522ccbbcba3f0020fd04e8c8c16c0d4"
+    },
+    "infozip-unzip": {
+      "version": "6.0",
+      "license": "Info-ZIP",
+      "source_url": "https://downloads.sourceforge.net/project/infozip/UnZip%206.x%20%28latest%29/UnZip%206.0/unzip60.tar.gz",
+      "source_sha256": "036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37",
+      "license_evidence": "https://downloads.sourceforge.net/project/infozip/UnZip%206.x%20%28latest%29/UnZip%206.0/unzip60.tar.gz"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where package-specific and available",
     "captured_at_utc": "2026-11-12T07:50:21.979330+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository-level adoption proxy, not parser usage. libarchive and unarr cover multiple formats. Missing metrics are null; classic MiniZip does not inherit all zlib stars. kuba-zip bundles miniz, so their repository counts describe related paths. The Conan recipe-name search is alphabetic and does not establish the most-used set. lowzip has its own ZIP reader; unzipLIB is a modified classic MiniZip package with bundled zlib. libc7zip is a C facade over lib7zip and the 7-Zip engine; its stars measure the facade repository, not combined 7-Zip adoption.",
+    "limitations": "Repository-level adoption proxy, not parser usage. libarchive and unarr cover multiple formats. Missing metrics are null; classic MiniZip does not inherit all zlib stars. kuba-zip bundles miniz, so their repository counts describe related paths. The Conan recipe-name search is alphabetic and does not establish the most-used set. lowzip has its own ZIP reader; unzipLIB is a modified classic MiniZip package with bundled zlib. libc7zip is a C facade over lib7zip and the 7-Zip engine; its stars measure the facade repository, not combined 7-Zip adoption. Info-ZIP UnZip 6.0 has a direct C ZIP API, but its official SourceForge project has no comparable primary GitHub star count; the GitHub copy is not borrowed.",
     "packages": {
       "libarchive": {
         "stars": 3672,
@@ -889,11 +896,17 @@
         "stars": 18,
         "repository": "https://github.com/itchio/libc7zip",
         "source": "https://api.github.com/repos/itchio/libc7zip"
+      },
+      "infozip-unzip": {
+        "stars": null,
+        "repository": null,
+        "source": null,
+        "reason": "Official Info-ZIP project is hosted on SourceForge; the madler/unzip GitHub copy is not borrowed as a primary package star metric."
       }
     },
     "captured_between_utc": [
       "2026-11-12T07:50:21.979330+00:00",
-      "2026-11-12T10:16:03.004303+00:00"
+      "2026-11-12T11:19:46.690280+00:00"
     ]
   },
   "documentation_lead_sources": [
@@ -901,6 +914,8 @@
     "https://github.com/mackron/fs",
     "https://icculus.org/physfs/docs/html/physfs_8h.html",
     "https://github.com/svaarala/lowzip/blob/v1.0.1/README.md",
-    "https://github.com/bitbank2/unzipLIB/blob/1.0.0/README.md"
+    "https://github.com/bitbank2/unzipLIB/blob/1.0.0/README.md",
+    "https://infozip.sourceforge.net/UnZip.html",
+    "https://github.com/madler/unzip/blob/master/unzip.h"
   ]
 }

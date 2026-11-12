@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T10:16:12.830414+00:00",
+  "checked_at_utc": "2026-11-12T11:19:58.969487+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -69,6 +69,11 @@
       "library_sha256": "b702e802a9f94a29e2e795fe50cc0bc3fa3e2d197a4932f07be03e644baec36d",
       "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/libc7zip -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF",
       "engine_build_command": "make -C /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build/upstream-7zip-src/CPP/7zip/Bundles/Format7zF -j4 -f ../../cmpl_mac_arm64.mak"
+    },
+    "infozip-unzip": {
+      "source_sha256": "036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37",
+      "build_command": "make -C /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/infozip-unzip -f unix/Makefile objsdll CC=cc 'CFLAGS=-O2 -fPIC -DDLL -DUNIX -Wno-deprecated-non-prototype -Wno-implicit-function-declaration' -j4",
+      "library_sha256": "4272534e085655f0ec3088ec3dc54a4c4666cdaef44993bd0fe6fb7045677eba"
     }
   },
   "control": "controls/zip/hello.zip",
@@ -241,6 +246,19 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/libc7zip/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libc7zip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build/libc7zip.dylib -Wl,-rpath,/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "infozip-unzip",
+      "version": "6.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -DDLL -DUNIX -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/infozip-unzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/infozip_unzip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libinfozip_unzip.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/infozip-unzip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/infozip-unzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

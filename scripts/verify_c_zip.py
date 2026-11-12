@@ -100,6 +100,21 @@ def main() -> None:
                        *map(str, sources), "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "build": "compiled pinned unzipLIB MiniZip fork and bundled zlib C sources"}
+        elif name == "infozip-unzip":
+            source = SOURCE / name
+            build = ["make", "-C", str(source), "-f", "unix/Makefile", "objsdll",
+                     "CC=cc", "CFLAGS=-O2 -fPIC -DDLL -DUNIX -Wno-deprecated-non-prototype -Wno-implicit-function-declaration", "-j4"]
+            run(build)
+            library = TARGET / "libinfozip_unzip.a"
+            objects = sorted(source.glob("*.pic.o"))
+            assert len(objects) == 19, len(objects)
+            run(["ar", "rcs", str(library), *map(str, objects)])
+            command = ["cc", "-std=c11", "-O2", "-DDLL", "-DUNIX",
+                       "-I" + str(source), str(ROOT / parser["adapter"]),
+                       str(library), "-o", str(TARGET / name)]
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "build_command": shlex.join(build),
+                                   "library_sha256": sha256(library.read_bytes()).hexdigest()}
         elif name == "libc7zip":
             assert platform.system() == "Darwin" and platform.machine() == "arm64"
             source = SOURCE / name
