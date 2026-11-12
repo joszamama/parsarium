@@ -12,6 +12,12 @@ $project = match ($package) {
     'guzzle/parser' => 'guzzle_parser',
     'alexpts/http-message-parser' => 'alexpts',
     'sekjun9878/request-parser' => 'sekjun',
+    'ringcentral/psr7' => 'ringcentral',
+    'workerman/psr7' => 'workerman',
+    'phly/http' => 'phly',
+    'laminas/laminas-diactoros' => 'laminas_diactoros',
+    'guzzle/http' => 'guzzle_http',
+    'guzzle/guzzle' => 'guzzle_full',
     default => throw new InvalidArgumentException('unknown HTTP parser: ' . $package),
 };
 require __DIR__ . '/' . $project . '/vendor/autoload.php';
@@ -72,6 +78,57 @@ switch ($package) {
             'version' => preg_replace('~^HTTP/~', '', $request->getProtocolVersion()),
             'host' => $headers['Host'] ?? $headers['host'] ?? null,
             'custom' => $headers['X-Parsarium'] ?? $headers['x-parsarium'] ?? null,
+        ];
+        break;
+    case 'ringcentral/psr7':
+        $request = \RingCentral\Psr7\parse_request($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getRequestTarget(),
+            'version' => $request->getProtocolVersion(),
+            'host' => $request->getHeaderLine('Host'),
+            'custom' => $request->getHeaderLine('X-Parsarium'),
+        ];
+        break;
+    case 'workerman/psr7':
+        $request = \Workerman\Psr7\parse_request($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getRequestTarget(),
+            'version' => $request->getProtocolVersion(),
+            'host' => $request->getHeaderLine('Host'),
+            'custom' => $request->getHeaderLine('X-Parsarium'),
+        ];
+        break;
+    case 'phly/http':
+        $request = \Phly\Http\Request\Serializer::fromString($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getRequestTarget(),
+            'version' => $request->getProtocolVersion(),
+            'host' => $request->getHeaderLine('Host'),
+            'custom' => $request->getHeaderLine('X-Parsarium'),
+        ];
+        break;
+    case 'laminas/laminas-diactoros':
+        $request = \Laminas\Diactoros\Request\Serializer::fromString($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getRequestTarget(),
+            'version' => $request->getProtocolVersion(),
+            'host' => $request->getHeaderLine('Host'),
+            'custom' => $request->getHeaderLine('X-Parsarium'),
+        ];
+        break;
+    case 'guzzle/http':
+    case 'guzzle/guzzle':
+        $request = \Guzzle\Http\Message\RequestFactory::getInstance()->fromMessage($raw);
+        $result = [
+            'method' => $request->getMethod(),
+            'target' => $request->getResource(),
+            'version' => $request->getProtocolVersion(),
+            'host' => (string) $request->getHeader('Host'),
+            'custom' => (string) $request->getHeader('X-Parsarium'),
         ];
         break;
 }

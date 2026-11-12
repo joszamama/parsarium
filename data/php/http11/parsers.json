@@ -17,7 +17,7 @@
     },
     "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
     "family": "Guzzle PSR-7 HTTP message parser",
-    "family_note": "Native parser in the pinned guzzlehttp/psr7 release.",
+    "family_note": "Modern Guzzle PSR-7 parser; RingCentral and Workerman fork an older Guzzle PSR-7 implementation, so the lineage is shared.",
     "adapter": "adapters/php/http11/parse.php"
   },
   {
@@ -102,6 +102,132 @@
     "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
     "family": "Sekjun HTTP request parser",
     "family_note": "Native incremental parser; PHP 8.5 emits deprecation notices when logging is enabled.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "ringcentral/psr7",
+    "version": "1.3.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ringcentral/psr7/blob/360faaec4b563958b673fb52bbe94e37f14bc686/LICENSE",
+    "documentation": "https://github.com/ringcentral/psr7/blob/360faaec4b563958b673fb52bbe94e37f14bc686/README.md",
+    "input_api": "RingCentral\\Psr7\\parse_request(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/ringcentral/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Guzzle PSR-7 HTTP message parser",
+    "family_note": "Fork of older Guzzle PSR-7 code; shared parser lineage with workerman/psr7 and guzzlehttp/psr7.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "workerman/psr7",
+    "version": "v2.0.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/walkor/psr7/blob/5f5b65e2462cd408f738cc967a80d8c15f9b57f3/LICENSE",
+    "documentation": "https://github.com/walkor/psr7/blob/5f5b65e2462cd408f738cc967a80d8c15f9b57f3/README.md",
+    "input_api": "Workerman\\Psr7\\parse_request(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/workerman/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Guzzle PSR-7 HTTP message parser",
+    "family_note": "Fork of older Guzzle PSR-7 code; shared parser lineage with ringcentral/psr7 and guzzlehttp/psr7.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "phly/http",
+    "version": "0.14.1",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/phly/http/blob/0d02d98106caf418a6b4031f2bf5fce3293faddc/LICENSE.md",
+    "documentation": "https://github.com/phly/http/blob/0d02d98106caf418a6b4031f2bf5fce3293faddc/README.md",
+    "input_api": "Request\\Serializer::fromString(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/phly/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Diactoros HTTP message parser lineage",
+    "family_note": "Older Phly serializer; same project lineage later continued through Zend and Laminas Diactoros.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "laminas/laminas-diactoros",
+    "version": "3.10.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/laminas/laminas-diactoros/blob/5939fbc03e9043e5d27050ed584de263b869c57f/LICENSE.md",
+    "documentation": "https://github.com/laminas/laminas-diactoros/blob/5939fbc03e9043e5d27050ed584de263b869c57f/src/Request/Serializer.php",
+    "input_api": "Request\\Serializer::fromString(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/laminas_diactoros/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Diactoros HTTP message parser lineage",
+    "family_note": "Laminas descendant of Phly/Zend Diactoros request serializer; shared family lineage with phly/http.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "guzzle/http",
+    "version": "v3.9.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Guzzle3/http/blob/1e8dd1e2ba9dc42332396f39fbfab950b2301dc5/composer.json",
+    "documentation": "https://github.com/Guzzle3/http/blob/1e8dd1e2ba9dc42332396f39fbfab950b2301dc5/Guzzle/Http/Message/RequestFactory.php",
+    "input_api": "RequestFactory::fromMessage(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/guzzle_http/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Guzzle 3 HTTP message parser",
+    "family_note": "Package factory delegates to pinned guzzle/parser dependency; shared underlying parser implementation.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "guzzle/guzzle",
+    "version": "v3.9.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/guzzle/guzzle3/blob/0645b70d953bc1c067bbc8d5bc53194706b628d9/LICENSE",
+    "documentation": "https://github.com/guzzle/guzzle3/blob/0645b70d953bc1c067bbc8d5bc53194706b628d9/src/Guzzle/Http/Message/RequestFactory.php",
+    "input_api": "RequestFactory::fromMessage(local raw HTTP/1.1 bytes); request line, target, version, headers",
+    "composer_lock": "adapters/php/http11/guzzle_full/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Guzzle 3 HTTP message parser",
+    "family_note": "Monolithic Guzzle 3 release bundles the same parser lineage as guzzle/parser and guzzle/http.",
     "adapter": "adapters/php/http11/parse.php"
   }
 ]

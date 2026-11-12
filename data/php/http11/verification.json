@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T18:35:58.232276+00:00",
+  "checked_at_utc": "2026-11-12T18:42:02.485284+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php_version": "8.5.12",
   "composer_version": "Composer version 2.11.2 2026-11-10 10:09:37",
@@ -15,6 +15,14 @@
       "sha256": "00f84d99ab72328e9ccba7fe6958f96c44340878aba7d952aaaff48794478c1f"
     },
     {
+      "path": "adapters/php/http11/guzzle_full/composer.lock",
+      "sha256": "6a9f3f55a2cf17b3fd6ae7cbe4861447f3ce09592129f0bb2d9d2bbbb14ed1c9"
+    },
+    {
+      "path": "adapters/php/http11/guzzle_http/composer.lock",
+      "sha256": "94cd1ab965f41320309032560e13ca989f59f6fc72712d40f750379b1053b7db"
+    },
+    {
       "path": "adapters/php/http11/guzzle_parser/composer.lock",
       "sha256": "b1f535868fb66116313f846980f0363827a7b333d56a6fdc89e650c93475e10b"
     },
@@ -23,12 +31,28 @@
       "sha256": "875f3dfe757e59c4327c1a9e52d9e9a311355ae8389dd17f277aac0e8e39cfa6"
     },
     {
+      "path": "adapters/php/http11/laminas_diactoros/composer.lock",
+      "sha256": "ef2aee67aa8a7b27fe82a9cbd8e82d5ddf0d80d8b4e3a404e0fd8f85ff31d8bb"
+    },
+    {
       "path": "adapters/php/http11/laminas_http/composer.lock",
       "sha256": "17ed6c5ef7296df6b4e5d33fec733bab2a293b18a61fe0c3377460e595b13a8e"
     },
     {
+      "path": "adapters/php/http11/phly/composer.lock",
+      "sha256": "bc23c51f40a716e393acc5f329057cf5b5e251dda2c2c5e2c6bf0758ea50fff0"
+    },
+    {
+      "path": "adapters/php/http11/ringcentral/composer.lock",
+      "sha256": "ba27b6c38a90f888c00173453f8bb8f2b448965adb24af8f430ed7c2429bbea4"
+    },
+    {
       "path": "adapters/php/http11/sekjun/composer.lock",
       "sha256": "f20ed53f3e0d40fc0b065a04f13cf93252e6e920c74241fd3f93e26214e9d67a"
+    },
+    {
+      "path": "adapters/php/http11/workerman/composer.lock",
+      "sha256": "5c75865f9622b1eaa533681a88feef6bffea62244c138657b94d2aafd94190a4"
     }
   ],
   "third_party": [
@@ -113,6 +137,114 @@
       "control": "controls/http11/request.http",
       "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
       "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php sekjun9878/request-parser /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test",
+        "custom": "yes"
+      },
+      "pass": true
+    },
+    {
+      "package": "ringcentral/psr7",
+      "version": "1.3.0",
+      "composer_lock": "adapters/php/http11/ringcentral/composer.lock",
+      "composer_lock_sha256": "ba27b6c38a90f888c00173453f8bb8f2b448965adb24af8f430ed7c2429bbea4",
+      "source_reference": "360faaec4b563958b673fb52bbe94e37f14bc686",
+      "control": "controls/http11/request.http",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php ringcentral/psr7 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test",
+        "custom": "yes"
+      },
+      "pass": true
+    },
+    {
+      "package": "workerman/psr7",
+      "version": "v2.0.2",
+      "composer_lock": "adapters/php/http11/workerman/composer.lock",
+      "composer_lock_sha256": "5c75865f9622b1eaa533681a88feef6bffea62244c138657b94d2aafd94190a4",
+      "source_reference": "5f5b65e2462cd408f738cc967a80d8c15f9b57f3",
+      "control": "controls/http11/request.http",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php workerman/psr7 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test",
+        "custom": "yes"
+      },
+      "pass": true
+    },
+    {
+      "package": "phly/http",
+      "version": "0.14.1",
+      "composer_lock": "adapters/php/http11/phly/composer.lock",
+      "composer_lock_sha256": "bc23c51f40a716e393acc5f329057cf5b5e251dda2c2c5e2c6bf0758ea50fff0",
+      "source_reference": "0d02d98106caf418a6b4031f2bf5fce3293faddc",
+      "control": "controls/http11/request.http",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php phly/http /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test",
+        "custom": "yes"
+      },
+      "pass": true
+    },
+    {
+      "package": "laminas/laminas-diactoros",
+      "version": "3.10.0",
+      "composer_lock": "adapters/php/http11/laminas_diactoros/composer.lock",
+      "composer_lock_sha256": "ef2aee67aa8a7b27fe82a9cbd8e82d5ddf0d80d8b4e3a404e0fd8f85ff31d8bb",
+      "source_reference": "5939fbc03e9043e5d27050ed584de263b869c57f",
+      "control": "controls/http11/request.http",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php laminas/laminas-diactoros /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test",
+        "custom": "yes"
+      },
+      "pass": true
+    },
+    {
+      "package": "guzzle/http",
+      "version": "v3.9.2",
+      "composer_lock": "adapters/php/http11/guzzle_http/composer.lock",
+      "composer_lock_sha256": "94cd1ab965f41320309032560e13ca989f59f6fc72712d40f750379b1053b7db",
+      "source_reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+      "control": "controls/http11/request.http",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php guzzle/http /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "target": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test",
+        "custom": "yes"
+      },
+      "pass": true
+    },
+    {
+      "package": "guzzle/guzzle",
+      "version": "v3.9.3",
+      "composer_lock": "adapters/php/http11/guzzle_full/composer.lock",
+      "composer_lock_sha256": "6a9f3f55a2cf17b3fd6ae7cbe4861447f3ce09592129f0bb2d9d2bbbb14ed1c9",
+      "source_reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+      "control": "controls/http11/request.http",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "command": "php -d display_errors=0 -d log_errors=0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/http11/parse.php guzzle/guzzle /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
       "output": {
         "method": "GET",
         "target": "/parsarium?x=1",

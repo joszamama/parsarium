@@ -16,7 +16,7 @@ WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
-has a five-path pilot batch. There are 64 cells at the 20-parser target, three
+has an 11-path partial batch. There are 64 cells at the 20-parser target, three
 started below target, and 21 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -351,12 +351,14 @@ MP4 atom reader; nine relevant leads remain unresolved. This is a verified
 Fileinfo and GD's failed reads. Run `python3 scripts/verify_php_mp4.py`
 from the repository root.
 
-The [PHP × HTTP/1.1 ranking](data/php/http11/ranking.md) starts with five
+The [PHP × HTTP/1.1 ranking](data/php/http11/ranking.md) records eleven
 pinned package paths parsing the valid saved GET request, including its target,
 protocol version, and headers. Eight bounded Packagist searches saved 441 hits
-and 389 distinct names. Seven named leads remain unresolved, so this cell is
+and 389 distinct names. Ten named leads remain unresolved, so this cell is
 below the 20-path target. The [runtime inventory](data/php/http11/standard.json)
 separately verifies the PHP CLI built-in server on the same raw request bytes.
+The Guzzle PSR-7 forks, Guzzle 3 package paths, and Diactoros descendants
+share parser lineage, as recorded in the [parser rows](data/php/http11/parsers.json).
 Run `python3 scripts/verify_php_http11.py` from the repository root.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
