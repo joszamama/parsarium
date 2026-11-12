@@ -123,7 +123,8 @@ def main() -> None:
         print(f"python/{format_name}: {len(parsers)} verified packages, {len(unknown)} unranked")
 
     for format_name, label in (("png", "PNG"), ("zip", "ZIP"), ("mp4", "MP4"), ("wav", "WAV"), ("pdf", "PDF"), ("svg", "SVG"), ("http11", "HTTP/1.1"), ("ascii_ply", "ASCII PLY"), ("ascii_pnm", "ASCII PNM"),
-                               ("mp3_id3v2", "MP3 with ID3v2")):
+                               ("mp3_id3v2", "MP3 with ID3v2"),
+                               ("matrix_market", "Matrix Market")):
         directory = ROOT / "data" / "rust" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
