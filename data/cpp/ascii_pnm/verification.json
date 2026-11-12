@@ -1,12 +1,14 @@
 {
-  "checked_at_utc": "2026-11-12T12:25:32.975279+00:00",
+  "checked_at_utc": "2026-11-12T13:16:29.349544+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/png/source-lock.json",
   "extra_source_lock": "data/c/ascii_pnm/source-lock.json",
+  "additional_source_lock": "data/cpp/ascii_pnm/extra-source-lock.json",
   "prerequisite_verifier": "scripts/verify_c_ascii_pnm.py",
   "control": "controls/ascii_pnm/red-green.ppm",
   "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "additional_control_sha256": "782c0fd8551ce383728488dbfa0f26d2e27a6107a5a3c1793e678f2b9d87ced6",
   "third_party": [
     {
       "package": "imagemagick",
@@ -319,6 +321,171 @@
         "width": 2,
         "height": 1,
         "maxval": 255,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "pnmpp",
+      "version": "1.0.1",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 -Wno-deprecated-literal-operator -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/cache/pnmpp-v1.0.1-patched /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/pnmpp.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/pnmpp",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/pnmpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "qtbase",
+      "version": "6.12.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 -F/opt/homebrew/lib -I/opt/homebrew/include/QtGui -I/opt/homebrew/lib/QtGui.framework -DQT_GUI_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/qtbase.cpp -F/opt/homebrew/lib -framework QtGui -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/qtbase",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/qtbase /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "wxwidgets",
+      "version": "3.3.4",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 -I/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.3 -I/opt/homebrew/include/wx-3.3 -D_FILE_OFFSET_BITS=64 -DwxDEBUG_LEVEL=0 -DWXUSINGDLL -D__WXMAC__ -D__WXOSX__ -D__WXOSX_COCOA__ /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/wxwidgets.cpp -L/opt/homebrew/lib -framework IOKit -framework Carbon -framework Cocoa -framework QuartzCore -framework AudioToolbox -framework System -framework OpenGL -lwx_osx_cocoau_xrc-3.3 -lwx_osx_cocoau_html-3.3 -lwx_osx_cocoau_qa-3.3 -lwx_osx_cocoau_core-3.3 -lwx_baseu_xml-3.3 -lwx_baseu_net-3.3 -lwx_baseu-3.3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/wxwidgets",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/wxwidgets /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "boost-gil",
+      "version": "1.92.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/cache/gil-boost-1.92.0/include -I/opt/homebrew/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/boost_gil.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/boost-gil",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/boost-gil /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "cimg",
+      "version": "4.0.5",
+      "control": "controls/ascii_pnm/red-green-inline.ppm",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/cache/CImg-v.4.0.5 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/cimg.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/cimg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/cimg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green-inline.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true,
+      "other_valid_control_result": {
+        "control": "controls/ascii_pnm/red-green.ppm",
+        "output": {
+          "width": 2,
+          "height": 1,
+          "first": [
+            255,
+            255,
+            0,
+            255
+          ],
+          "second": [
+            0,
+            0,
+            255,
+            255
+          ]
+        },
+        "matches_expected": false,
+        "meaning": "Valid P3 layout with maxval on its own line was misread by CImg 4.0.5; this control is not counted as a passing format-aware result."
+      }
+    },
+    {
+      "package": "openimageio",
+      "version": "3.2.2.0",
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "build_command": "c++ -std=c++17 -O2 -I/opt/homebrew/Cellar/openimageio/3.2.2.0_1/include -I/opt/homebrew/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/openimageio.cpp -L/opt/homebrew/Cellar/openimageio/3.2.2.0_1/lib -lOpenImageIO -lOpenImageIO_Util -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/openimageio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_pnm/target/openimageio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "format": "pnm",
+        "binary": 0,
         "first": [
           255,
           0,

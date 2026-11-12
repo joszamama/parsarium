@@ -1,6 +1,6 @@
 # C++ × ASCII_PNM: verified parser ranking
 
-14 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured at 2026-11-12T07:20:18.790315+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 8 path(s) lack a metric and remain unranked.
+20 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:20:18.790315+00:00 and 2026-11-12T13:15:47.818054+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 8 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C++ standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -9,9 +9,15 @@ Search hits, unresolved leads, and the C++ standard-library inventory are separa
 | 1 | [ffmpeg](https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html) | 9.0.2 | 67,107 | P3 codec identification, dimensions, and two decoded RGB pixels | FFmpeg native PNM decoder |
 | 2 | [imagemagick](https://imagemagick.org/magick-wand/) | 7.1.2-35 | 17,848 | P3 dimensions and two decoded RGBA pixels | ImageMagick PNM coder |
 | 3 | [vips](https://www.libvips.org/API/current/VipsImage.html) | 8.18.7 | 11,801 | P3 dimensions and two decoded RGB pixels | libvips PPM loader |
-| 4 | [leptonica](https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/allheaders.h) | 1.87.0 | 2,107 | P3 dimensions and two decoded RGB pixels | Leptonica PNM reader |
-| 5 | [sdl2_image](https://wiki.libsdl.org/SDL2_image/IMG_Load) | 2.8.12 | 997 | P3 dimensions and two decoded RGBA pixels | SDL_image PNM decoder lineage |
-| 5 | [sdl3_image](https://wiki.libsdl.org/SDL3_image/IMG_Load) | 3.4.8 | 997 | P3 dimensions and two decoded RGBA pixels | SDL_image PNM decoder lineage |
+| 4 | [wxwidgets](https://wxwidgets.org/docs/book/Cross-Platform%20GUI%20Programming%20with%20wxWidgets.pdf) | 3.3.4 | 7,299 | P3 dimensions and two decoded RGBA pixels | wxWidgets native PNM handler |
+| 5 | [qtbase](https://doc.qt.io/qt-6/qimagereader.html) | 6.12.0 | 3,122 | P3 dimensions and two decoded RGBA pixels | QtBase native QPPMHandler |
+| 6 | [openimageio](https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html) | 3.2.2.0 | 2,403 | P3 format identification, ASCII encoding flag, dimensions, and two decoded RGB pixels | OpenImageIO native PNM plugin |
+| 7 | [leptonica](https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/allheaders.h) | 1.87.0 | 2,107 | P3 dimensions and two decoded RGB pixels | Leptonica PNM reader |
+| 8 | [cimg](https://cimg.eu/reference/structcimg__library_1_1CImg.html) | 4.0.5 | 1,696 | P3 dimensions and two decoded RGBA pixels when maxval shares the dimensions line | CImg native PNM reader |
+| 9 | [sdl2_image](https://wiki.libsdl.org/SDL2_image/IMG_Load) | 2.8.12 | 997 | P3 dimensions and two decoded RGBA pixels | SDL_image PNM decoder lineage |
+| 9 | [sdl3_image](https://wiki.libsdl.org/SDL3_image/IMG_Load) | 3.4.8 | 997 | P3 dimensions and two decoded RGBA pixels | SDL_image PNM decoder lineage |
+| 11 | [boost-gil](https://www.boost.org/latest/libs/gil/doc/html/io.html) | 1.92.0 | 201 | P3 dimensions and two decoded RGBA pixels | Boost.GIL native PNM reader |
+| 12 | [pnmpp](https://github.com/ToruNiina/pnm/blob/v1.0.1/README.md) | 1.0.1 | 27 | P3 dimensions and two decoded RGBA pixels | pnm++ native ASCII PNM reader |
 | unranked | [devil](https://openil.sourceforge.net/docs/DevIL%20Reference%20Guide.pdf) | 1.8.0 | unknown | P3 dimensions and two decoded RGBA pixels | DevIL PNM reader |
 | unranked | [freeimage](https://freeimage.sourceforge.io/fnet/html/99F7C60B.htm) | 3.18.0 | unknown | P3 dimensions and two decoded RGB pixels | FreeImage PPM plugin |
 | unranked | [gdk-pixbuf](https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html) | 2.44.8 | unknown | P3 dimensions and two decoded RGB pixels | GdkPixbuf PNM loader |

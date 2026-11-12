@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG and WAV batches,
 below-target C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
-and a below-target C++ × ASCII PNM batch,
+and a verified C++ × ASCII PNM batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -13,7 +13,7 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, plus a below-target Java × HTTP/1.1 batch, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 54 cells at the 20-parser target, six started
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 55 cells at the 20-parser target, five started
 below target, and 28 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -149,15 +149,24 @@ Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
 does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
-The C and C++ × ASCII PNM verifiers use the valid 2×1 P3 red/green control,
+The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls,
 exact-release source pins, and binary SHA-256 checks for thirteen installed
 libraries and relevant plugins, plus the SHA-256-pinned libpnmrw source archive.
 Netpbm is pinned to official Subversion revision
-5358, whose `version.mk` identifies release 11.02.30. All **14/14 C and 14/14
+5358, whose `version.mk` identifies release 11.02.30. All **14/14 C and 20/20
 C++ package paths passed**, returning parsed dimensions and two decoded pixels.
-The C++ adapters use the same underlying C packages and reader implementations.
+Fourteen C++ adapters use the same underlying C packages; CImg 4.0.5,
+Boost.GIL 1.92.0, wxWidgets 3.3.4, QtBase 6.12.0, pnm++ 1.0.1, and
+OpenImageIO 3.2.2.0 are native C++ readers.
+CImg and Boost.GIL use source archive SHA-256 pins; wxWidgets and QtBase check
+exact installed releases and binary hashes. pnm++ uses a pinned compatibility
+patch outside its decoder; OpenImageIO checks its installed PNM-capable library hash.
+Boost.GIL passes the original control. CImg's passing control
+puts maxval on the dimensions line. CImg misreads the other valid P3 control,
+whose maxval is on a separate line; the verifier records that limitation.
 SDL2_image and SDL3_image share an upstream family; libpnmrw and Netpbm share
-PBMPLUS ancestry. Each cell remains six paths below the working target, with unresolved
+PBMPLUS ancestry. The C cell remains six paths short; the C++ cell reaches the
+20-path working target, with unresolved
 leads recorded in its [C cell](data/c/ascii_pnm/cell.json) and
 [C++ cell](data/cpp/ascii_pnm/cell.json). Their rankings use primary GitHub
 repository stars within each ecosystem; eight paths in each cell lack a

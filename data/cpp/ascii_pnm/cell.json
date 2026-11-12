@@ -1,10 +1,10 @@
 {
   "ecosystem": "cpp",
   "format": "ascii_pnm",
-  "status": "verified_below_goal_partial_search",
+  "status": "verified_target_search_incomplete",
   "working_target": 20,
   "ceiling": 30,
-  "verified_third_party_count": 14,
+  "verified_third_party_count": 20,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "pnm",
@@ -17,13 +17,14 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 6,
   "unique_search_hits": 6,
-  "unresolved_documentation_leads": 4,
-  "uncertainty": "Fourteen pinned open-source package paths passed the valid ASCII P3 2x1 red/green control from C++17 call sites, returning parsed dimensions and two decoded pixels; Netpbm and libpnmrw also return maxval, FFmpeg identifies the PPM codec, and GStreamer returns RGB caps from its PNM decoder plugin. C++ uses the same underlying C packages and readers. SDL2_image and SDL3_image share one upstream family and star count; libpnmrw and Netpbm share PBMPLUS ancestry. Package paths are not independent engines. The libpnmrw archive is dated 14Aug2014 and its README labels its code version 03jul2014; the exact archive hash fixes the source. Six bounded alphabetic Conan recipe-name hits were recorded; names are leads, not parser proof or adoption rankings. 4 plausible documentation leads remain unresolved, including libpnmio with inconsistent upstream version metadata. The cell is six short of the 20-path target and does not establish a definitive most-used set. Six packages have primary GitHub star metrics; eight remain unranked. The Netpbm source is pinned to official Subversion stable revision 5358, whose version.mk identifies 11.02.30; its installed library is checked by SHA-256. One P3 control does not prove P1, P2 or binary PNM support for all paths. The ISO C++ standard library documents no PNM-aware parser; generic file streams are excluded. No malformed-input, vulnerability, or resource-use experiments were run.",
+  "unresolved_documentation_leads": 2,
+  "uncertainty": "Twenty pinned open-source package paths passed valid ASCII P3 controls from C++17 call sites, returning parsed dimensions and two decoded pixels; Netpbm and libpnmrw also return maxval, FFmpeg identifies the PPM codec, and GStreamer returns RGB caps from its PNM decoder plugin. Fourteen paths invoke underlying C packages from C++17, while CImg, Boost.GIL, wxWidgets, QtBase, pnm++, and OpenImageIO are native C++ PNM readers. CImg 4.0.5 misreads the original valid P3 control when maxval occupies a separate line, so its adapter uses a second valid P3 control with dimensions and maxval on the same line; the verifier records both outcomes and makes no full P3 conformance claim. Boost.GIL parses the original control directly. SDL2_image and SDL3_image share one upstream family and star count; libpnmrw and Netpbm share PBMPLUS ancestry. Package paths are not independent engines. The libpnmrw archive is dated 14Aug2014 and its README labels its code version 03jul2014; the exact archive hash fixes the source. Six bounded alphabetic Conan recipe-name hits were recorded; names are leads, not parser proof or adoption rankings. Two plausible documentation leads remain unresolved, including libpnmio with inconsistent upstream version metadata. The 20-path working target is met, but the bounded search does not establish a definitive most-used set. Twelve packages have primary GitHub star metrics; eight remain unranked. The Netpbm source is pinned to official Subversion stable revision 5358, whose version.mk identifies 11.02.30; its installed library is checked by SHA-256. Three native C++ source archives are SHA-256 pinned; the Boost.GIL adapter also checks its installed Boost 1.92.0 base header hash, wxWidgets 3.3.4 checks two local library SHA-256 pins, and QtBase 6.12.0 checks two installed framework hashes. OpenImageIO 3.2.2.0 uses its native PNM plugin and reports the control as ASCII PNM; its release source and installed library are SHA-256 pinned. The pnm++ 1.0.1 reader passes after a pinned eight-reference compatibility patch to unrelated iterator comparisons; the PNM decoding code is unchanged. Neither P3 control proves P1, P2 or binary PNM support for all paths. The ISO C++ standard library documents no PNM-aware parser; generic file streams are excluded. No malformed-input, vulnerability, or resource-use experiments were run.",
   "third_party_evidence": "data/cpp/ascii_pnm/parsers.json",
   "third_party_control_results": "data/cpp/ascii_pnm/verification.json",
   "runtime_evidence": "data/cpp/ascii_pnm/standard.json",
   "registry_snapshot": "data/cpp/ascii_pnm/registry-snapshot.json",
   "unresolved_leads": "data/cpp/ascii_pnm/leads.json",
   "source_lock": "data/c/png/source-lock.json",
-  "extra_source_lock": "data/c/ascii_pnm/source-lock.json"
+  "extra_source_lock": "data/c/ascii_pnm/source-lock.json",
+  "additional_source_lock": "data/cpp/ascii_pnm/extra-source-lock.json"
 }

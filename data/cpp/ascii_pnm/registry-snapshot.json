@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T12:02:15.301900+00:00",
+  "captured_at_utc": "2026-11-12T13:15:47.818054+00:00",
   "search_surface": "Conan Center Index shared C/C++ recipe names; targeted primary project documentation supplied PNM-capable image readers",
   "search_index_api": "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1",
   "search_limit_per_query": 100,
@@ -103,7 +103,14 @@
     "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
     "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavcodec/pnmdec.c",
     "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html",
-    "https://acme.com/software/libpnmrw/"
+    "https://acme.com/software/libpnmrw/",
+    "https://cimg.eu/reference/structcimg__library_1_1CImg.html",
+    "https://www.boost.org/latest/libs/gil/doc/html/io.html",
+    "https://wxwidgets.org/docs/book/Cross-Platform%20GUI%20Programming%20with%20wxWidgets.pdf",
+    "https://doc.qt.io/qt-6/qimagereader.html",
+    "https://github.com/ToruNiina/pnm/blob/v1.0.1/README.md",
+    "https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html",
+    "https://openimageio.readthedocs.io/en/v3.2.2.0/builtinplugins.html"
   ],
   "releases": {
     "imagemagick": {
@@ -206,13 +213,83 @@
       "source_url": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz",
       "source_sha256": "c4a18cc85066bcd14835c4dce09c0541b3940a1033e89346373d235a6b5a303f",
       "license_evidence": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz"
+    },
+    "cimg": {
+      "version": "4.0.5",
+      "license": "CeCILL-C-1.0 OR CeCILL-2.1",
+      "source_url": "https://github.com/GreycLab/CImg/archive/refs/tags/v.4.0.5.tar.gz",
+      "source_sha256": "691b4be0b19af85569bc01169e8e6a63dffe48e9cb3ca97c0ec10a8da580b74b",
+      "header_sha256": "e377d97bd9322f13d4c6c8b3827030a81e3b37450408d82739b3657d8503ec26",
+      "license_evidence": "https://github.com/GreycLab/CImg/blob/v.4.0.5/CImg.h"
+    },
+    "boost-gil": {
+      "version": "1.92.0",
+      "license": "BSL-1.0",
+      "source_url": "https://github.com/boostorg/gil/archive/refs/tags/boost-1.92.0.tar.gz",
+      "source_sha256": "6d20dbc568efeb0336c1cf4e988a50ad028eb0837b6b7dc85356d46a32955f66",
+      "license_evidence": "https://github.com/boostorg/gil/blob/boost-1.92.0/LICENSE.txt",
+      "base_boost_release": "1.92.0",
+      "base_source_url": "https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-b2-nodocs.tar.xz",
+      "base_source_sha256": "ea7b982002cc9dfbe59b0b217b206f470dc75f3de0bb2973d844118934d82411"
+    },
+    "wxwidgets": {
+      "version": "3.3.4",
+      "license": "LGPL-2.0-or-later WITH WxWindows-exception-3.1",
+      "source_url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2",
+      "source_sha256": "815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98",
+      "license_evidence": "https://formulae.brew.sh/api/formula/wxwidgets.json",
+      "local_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/wxwidgets/3.3.4/lib/libwx_osx_cocoau_core-3.3.4.0.0.dylib",
+          "sha256": "2e03524f551ff307dc8047c8d511f5018d93862f97a34811cd5432b5020e72db"
+        },
+        {
+          "path": "/opt/homebrew/Cellar/wxwidgets/3.3.4/lib/libwx_baseu-3.3.4.0.0.dylib",
+          "sha256": "7cc3639987fd1d3940e23b5207063040e8feeb86007c9eebb4f5db8134760aa5"
+        }
+      ]
+    },
+    "qtbase": {
+      "version": "6.12.0",
+      "homebrew_formula_revision": "6.12.0_2",
+      "license": "LGPL-3.0-only",
+      "source_url": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtbase-everywhere-src-6.12.0.tar.xz",
+      "source_sha256": "a951bd163c7b80fc6b8c88d7668fb56abf91c152373e13c10666763238131307",
+      "license_evidence": "https://github.com/qt/qtbase/blob/v6.12.0/src/gui/image/qppmhandler.cpp",
+      "local_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/qtbase/6.12.0_2/lib/QtGui.framework/Versions/A/QtGui",
+          "sha256": "0eb2e155c4c4ac02231e4a2adf0dfaa0dff39f8a49f86d0c097b1509735729a2"
+        },
+        {
+          "path": "/opt/homebrew/Cellar/qtbase/6.12.0_2/lib/QtCore.framework/Versions/A/QtCore",
+          "sha256": "5ef20b686ee05ec97105b0b7ec09e9c2e5a796e1243dbb5c6fdeb3d99033a4c8"
+        }
+      ]
+    },
+    "pnmpp": {
+      "version": "1.0.1",
+      "license": "MIT",
+      "source_url": "https://github.com/ToruNiina/pnm/archive/refs/tags/v1.0.1.tar.gz",
+      "source_sha256": "50ec55e28e3223950bf69470cf7d6dcdc4240858595d2bf0418734d6ba0a2fe6",
+      "original_header_sha256": "9eb9e77e919d3ec4e2c383e6d8003fb531f880a987c78e99c07c99c609cdd5b3",
+      "patched_header_sha256": "69c6384e78a74c457f7be9f6c1b5fba6276ed08e3a5a5bba8b1906a8df1610c5",
+      "patch": "Replace eight line_proxy comparison references to nonexistent rhs.ny_ with rhs.iy_; no PNM decoding code changed",
+      "license_evidence": "https://github.com/ToruNiina/pnm/blob/v1.0.1/LICENSE"
+    },
+    "openimageio": {
+      "version": "3.2.2.0",
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/AcademySoftwareFoundation/OpenImageIO/archive/refs/tags/v3.2.2.0.tar.gz",
+      "source_sha256": "fa94876cfbd4c817deaba81ced8bad4af2956689faf4085f277b20197cd70b4e",
+      "license_evidence": "https://github.com/AcademySoftwareFoundation/OpenImageIO/blob/v3.2.2.0/LICENSE.md"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where available",
     "captured_at_utc": "2026-11-12T07:20:18.790315+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Primary upstream GitHub star observations are copied from the same-day C PNG snapshot for the exact same release paths. Stars reflect broad project adoption, not ASCII PNM use. SDL2_image and SDL3_image share one upstream count. GdkPixbuf, FreeImage, GraphicsMagick, DevIL and Imlib2 lack comparable primary GitHub metrics and remain unranked. Conan recipe names are alphabetic discovery leads, not usage rankings. Netpbm is also unranked because its primary upstream is SourceForge Subversion. GStreamer is also unranked because its primary upstream is GitLab. libpnmrw is unranked because its primary upstream is ACME Labs.",
+    "limitations": "Primary upstream GitHub star observations are copied from the same-day C PNG snapshot for the exact same release paths. Stars reflect broad project adoption, not ASCII PNM use. SDL2_image and SDL3_image share one upstream count. GdkPixbuf, FreeImage, GraphicsMagick, DevIL and Imlib2 lack comparable primary GitHub metrics and remain unranked. Conan recipe names are alphabetic discovery leads, not usage rankings. Netpbm is also unranked because its primary upstream is SourceForge Subversion. GStreamer is also unranked because its primary upstream is GitLab. libpnmrw is unranked because its primary upstream is ACME Labs. CImg 4.0.5 is a native C++ PNM reader; its primary GitHub star count was refreshed separately and is within the recorded capture range. Boost.GIL has its own primary repository star count; its PNM support is documented, but stars measure whole-project interest. wxWidgets stars reflect the whole GUI toolkit; its pinned local PNM handler and supporting binary hashes are recorded separately. QtBase stars measure the whole GUI framework, while the pinned qppmhandler source and local QtGui/QtCore hashes establish this P3 path. pnm++ has a project-level star count and an explicitly documented C++17 build compatibility patch that does not alter parsing code. OpenImageIO stars measure the whole multi-format library; the pinned PNM plugin, installed binary and ASCII P3 control establish this parser path.",
     "packages": {
       "imagemagick": {
         "repository": "ImageMagick/ImageMagick",
@@ -291,7 +368,47 @@
         "stars": null,
         "url": "https://acme.com/software/libpnmrw/",
         "reason": "Primary upstream is ACME Labs, not a GitHub repository; no comparable primary GitHub stars."
+      },
+      "cimg": {
+        "repository": "GreycLab/CImg",
+        "stars": 1696,
+        "url": "https://api.github.com/repos/GreycLab/CImg",
+        "captured_at_utc": "2026-11-12T12:52:55.168340+00:00"
+      },
+      "boost-gil": {
+        "repository": "boostorg/gil",
+        "stars": 201,
+        "url": "https://api.github.com/repos/boostorg/gil",
+        "captured_at_utc": "2026-11-12T12:57:37.674688+00:00"
+      },
+      "wxwidgets": {
+        "repository": "wxWidgets/wxWidgets",
+        "stars": 7299,
+        "url": "https://api.github.com/repos/wxWidgets/wxWidgets",
+        "captured_at_utc": "2026-11-12T13:00:49.089534+00:00"
+      },
+      "qtbase": {
+        "repository": "qt/qtbase",
+        "stars": 3122,
+        "url": "https://api.github.com/repos/qt/qtbase",
+        "captured_at_utc": "2026-11-12T13:05:56.089264+00:00"
+      },
+      "pnmpp": {
+        "repository": "ToruNiina/pnm",
+        "stars": 27,
+        "url": "https://api.github.com/repos/ToruNiina/pnm",
+        "captured_at_utc": "2026-11-12T13:10:22.176200+00:00"
+      },
+      "openimageio": {
+        "repository": "AcademySoftwareFoundation/OpenImageIO",
+        "stars": 2403,
+        "url": "https://api.github.com/repos/AcademySoftwareFoundation/OpenImageIO",
+        "captured_at_utc": "2026-11-12T13:15:47.818054+00:00"
       }
-    }
+    },
+    "captured_between_utc": [
+      "2026-11-12T07:20:18.790315+00:00",
+      "2026-11-12T13:15:47.818054+00:00"
+    ]
   }
 }

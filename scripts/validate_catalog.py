@@ -47,8 +47,13 @@ def main() -> None:
             name = parser["name"]
             if cell["ecosystem"] in ("c", "cpp"):
                 primary_sources = read(cell.get("source_lock", f"{key}/source-lock.json"))
-                source = (primary_sources[name] if name in primary_sources else
-                          read(cell["extra_source_lock"])[name])
+                if name in primary_sources:
+                    source = primary_sources[name]
+                else:
+                    extra_sources = read(cell["extra_source_lock"])
+                    if cell.get("additional_source_lock"):
+                        extra_sources.update(read(cell["additional_source_lock"]))
+                    source = extra_sources[name]
                 release = snapshot["releases"][name]
                 assert parser["version"] == source["release"] == release["version"]
                 assert parser["license"] == release["license"]
