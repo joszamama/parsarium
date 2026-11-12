@@ -1,0 +1,302 @@
+[
+  {
+    "name": "hound",
+    "version": "3.5.1",
+    "license": "Apache-2.0",
+    "input_api": "WavReader::open(path).samples::<i16>()",
+    "documentation": "https://docs.rs/hound/3.5.1/hound/",
+    "scope": "Decoded PCM sample values and WAV metadata",
+    "family": "Hound WAV reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "wav",
+    "version": "1.0.1",
+    "license": "LGPL-3.0",
+    "input_api": "read(&mut File)",
+    "documentation": "https://docs.rs/wav/1.0.1/wav/",
+    "scope": "Decoded PCM sample values and WAV metadata",
+    "family": "wav legacy reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "wav_io",
+    "version": "0.1.17",
+    "license": "MIT",
+    "input_api": "read_from_file(File)",
+    "documentation": "https://docs.rs/wav_io/0.1.17/wav_io/",
+    "scope": "PCM sample count and WAV metadata",
+    "family": "wav_io reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "riff-wave",
+    "version": "0.1.3",
+    "license": "Apache-2.0",
+    "input_api": "WaveReader::new(File).read_sample_i16()",
+    "documentation": "https://docs.rs/riff-wave/0.1.3/riff_wave/",
+    "scope": "Decoded PCM sample values and WAV metadata",
+    "family": "riff-wave reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "wavers",
+    "version": "1.5.1",
+    "license": "MIT",
+    "input_api": "read::<i16,_>(path); Wav::from_path(path)",
+    "documentation": "https://docs.rs/wavers/1.5.1/wavers/",
+    "scope": "Decoded PCM sample values and WAV metadata",
+    "family": "wavers reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "bwavfile",
+    "version": "2.0.1",
+    "license": "MIT",
+    "input_api": "WaveReader::open(path).format().frame_length()",
+    "documentation": "https://docs.rs/bwavfile/2.0.1/bwavfile/",
+    "scope": "WAV format and declared frame length",
+    "family": "bwavfile reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "symphonia",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "default::get_probe().probe(Hint, MediaSourceStream).next_packet()",
+    "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
+    "scope": "WAV track metadata and audio packet",
+    "family": "Symphonia WAV demuxer",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "symphonia-format-riff",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "WavReader::try_new(MediaSourceStream, FormatOptions).next_packet()",
+    "documentation": "https://docs.rs/symphonia-format-riff/0.6.1/symphonia_format_riff/",
+    "scope": "WAV track metadata and audio packet",
+    "family": "Symphonia WAV demuxer",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "symphonium",
+    "version": "0.13.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "probe_from_file(path, None).format_reader()",
+    "documentation": "https://docs.rs/symphonium/0.13.0/symphonium/",
+    "scope": "WAV track metadata and declared frames",
+    "family": "Symphonia WAV demuxer",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "audio-file",
+    "version": "0.5.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "read::<f32>(path, ReadConfig::default())",
+    "documentation": "https://docs.rs/audio-file/0.5.1/audio_file/",
+    "scope": "Decoded PCM sample count and WAV metadata",
+    "family": "audio-file native WAV reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "waveadapter",
+    "version": "0.3.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "WavReader::new(File).sample_rate().frames()",
+    "documentation": "https://docs.rs/waveadapter/0.3.1/waveadapter/",
+    "scope": "WAV metadata and declared frame length",
+    "family": "waveadapter reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "ryf",
+    "version": "0.7.4",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "read(path)",
+    "documentation": "https://docs.rs/ryf/0.7.4/ryf/",
+    "scope": "Decoded PCM frame count and WAV metadata",
+    "family": "ryf WAVE demuxer",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "wav-codec",
+    "version": "0.1.0",
+    "license": "MIT",
+    "input_api": "WavReader::open(path).samples::<i16>()",
+    "documentation": "https://docs.rs/wav-codec/0.1.0/wav_codec/",
+    "scope": "Decoded PCM sample values and WAV metadata",
+    "family": "wav-codec reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "wave_stream",
+    "version": "0.6.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "read_wav_from_file_path(path).get_random_access_f32_reader().read_sample(0)",
+    "documentation": "https://docs.rs/wave_stream/0.6.0/wave_stream/",
+    "scope": "WAV metadata and first decoded sample",
+    "family": "wave_stream reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "creak",
+    "version": "0.3.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Decoder::open(path).into_samples()",
+    "documentation": "https://docs.rs/creak/0.3.0/creak/",
+    "scope": "Decoded PCM sample count and WAV metadata",
+    "family": "Hound WAV reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "pure_wav",
+    "version": "2.0.0",
+    "license": "AGPL-3.0-or-later",
+    "input_api": "Parser::default().read_instruction().process_data(&[u8])",
+    "documentation": "https://docs.rs/pure_wav/2.0.0/pure_wav/",
+    "scope": "WAV fmt/data chunks and declared sample count",
+    "family": "pure_wav parser",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "symphonia-format-wav",
+    "version": "0.5.5",
+    "license": "MPL-2.0",
+    "input_api": "WavReader::try_new(MediaSourceStream, &FormatOptions).next_packet()",
+    "documentation": "https://docs.rs/symphonia-format-wav/0.5.5/symphonia_format_wav/",
+    "scope": "WAV track metadata and audio packet",
+    "family": "Symphonia WAV demuxer (0.5 lineage)",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "nwav",
+    "version": "0.1.2",
+    "license": "MIT",
+    "input_api": "WAV::from_data(&[u8]).read_chunk_by_name(\"fmt \")",
+    "documentation": "https://docs.rs/nwav/0.1.2/nwav/",
+    "scope": "WAV fmt/data chunks and declared sample count",
+    "family": "nwav chunk reader",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "surge-hound",
+    "version": "0.2.11-alpha.0",
+    "license": "Apache-2.0",
+    "input_api": "WavReader::open(path).samples::<i16>()",
+    "documentation": "https://docs.rs/surge-hound/0.2.11-alpha.0/surge_hound/",
+    "scope": "Decoded PCM sample values and WAV metadata",
+    "family": "Hound fork (surge-hound)",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  },
+  {
+    "name": "rff-format-wav",
+    "version": "0.4.6",
+    "license": "Apache-2.0",
+    "input_api": "register(&mut FormatRegistry); open_demuxer(\"wav\", File).read_header().read_packet()",
+    "documentation": "https://docs.rs/rff-format-wav/0.4.6/rff_format_wav/",
+    "scope": "WAV track metadata and audio packet",
+    "family": "Remade FFmpeg WAV demuxer",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "samples": 4
+    }
+  }
+]

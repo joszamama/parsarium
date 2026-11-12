@@ -1,0 +1,293 @@
+{
+  "checked_at_utc": "2026-11-12T01:07:31.761208+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
+  "build_command": "cargo build --locked (from adapters/rust/wav)",
+  "control_sha256": {
+    "controls/wav/four-samples.wav": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce"
+  },
+  "control_meaning": "Valid 8 kHz mono 16-bit PCM RIFF/WAVE with samples 0, 1000, -1000, 0",
+  "third_party": [
+    {
+      "package": "hound",
+      "version": "3.5.1",
+      "scope": "Decoded PCM sample values and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav hound controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "wav",
+      "version": "1.0.1",
+      "scope": "Decoded PCM sample values and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "wav_io",
+      "version": "0.1.17",
+      "scope": "PCM sample count and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav wav_io controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "riff-wave",
+      "version": "0.1.3",
+      "scope": "Decoded PCM sample values and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav riff-wave controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "wavers",
+      "version": "1.5.1",
+      "scope": "Decoded PCM sample values and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav wavers controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "bwavfile",
+      "version": "2.0.1",
+      "scope": "WAV format and declared frame length",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav bwavfile controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia",
+      "version": "0.6.1",
+      "scope": "WAV track metadata and audio packet",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav symphonia controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia-format-riff",
+      "version": "0.6.1",
+      "scope": "WAV track metadata and audio packet",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav symphonia-format-riff controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "symphonium",
+      "version": "0.13.0",
+      "scope": "WAV track metadata and declared frames",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav symphonium controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "audio-file",
+      "version": "0.5.1",
+      "scope": "Decoded PCM sample count and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav audio-file controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "waveadapter",
+      "version": "0.3.1",
+      "scope": "WAV metadata and declared frame length",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav waveadapter controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "ryf",
+      "version": "0.7.4",
+      "scope": "Decoded PCM frame count and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav ryf controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "wav-codec",
+      "version": "0.1.0",
+      "scope": "Decoded PCM sample values and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav wav-codec controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "wave_stream",
+      "version": "0.6.0",
+      "scope": "WAV metadata and first decoded sample",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav wave_stream controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "creak",
+      "version": "0.3.0",
+      "scope": "Decoded PCM sample count and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav creak controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "pure_wav",
+      "version": "2.0.0",
+      "scope": "WAV fmt/data chunks and declared sample count",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav pure_wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia-format-wav",
+      "version": "0.5.5",
+      "scope": "WAV track metadata and audio packet",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav symphonia-format-wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "nwav",
+      "version": "0.1.2",
+      "scope": "WAV fmt/data chunks and declared sample count",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav nwav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "surge-hound",
+      "version": "0.2.11-alpha.0",
+      "scope": "Decoded PCM sample values and WAV metadata",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav surge-hound controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    },
+    {
+      "package": "rff-format-wav",
+      "version": "0.4.6",
+      "scope": "WAV track metadata and audio packet",
+      "control": "controls/wav/four-samples.wav",
+      "command": "adapters/rust/wav/target/debug/parsarium-rust-wav rff-format-wav controls/wav/four-samples.wav",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 4
+      },
+      "error": null
+    }
+  ]
+}
