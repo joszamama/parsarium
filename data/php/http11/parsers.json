@@ -1,0 +1,107 @@
+[
+  {
+    "name": "guzzlehttp/psr7",
+    "version": "3.3.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/guzzle/psr7/blob/8b0a7e7db965a687eebe18333a128edac95db246/LICENSE",
+    "documentation": "https://github.com/guzzle/psr7/blob/8b0a7e7db965a687eebe18333a128edac95db246/src/Message.php",
+    "input_api": "Message::parseRequest(local raw HTTP/1.1 request bytes); method, target, version, and headers",
+    "composer_lock": "adapters/php/http11/guzzle_psr7/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Guzzle PSR-7 HTTP message parser",
+    "family_note": "Native parser in the pinned guzzlehttp/psr7 release.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "laminas/laminas-http",
+    "version": "2.23.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/laminas/laminas-http/blob/9462fc84330d25b23383823831380abb33907fdd/LICENSE.md",
+    "documentation": "https://github.com/laminas/laminas-http/blob/9462fc84330d25b23383823831380abb33907fdd/src/Request.php",
+    "input_api": "Request::fromString(local raw HTTP/1.1 request bytes); method, URI, version, and headers",
+    "composer_lock": "adapters/php/http11/laminas_http/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Laminas HTTP message parser",
+    "family_note": "Native parser in the pinned Laminas HTTP release.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "guzzle/parser",
+    "version": "v3.9.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Guzzle3/parser/blob/6874d171318a8e93eb6d224cf85e4678490b625c/composer.json",
+    "documentation": "https://github.com/Guzzle3/parser/blob/6874d171318a8e93eb6d224cf85e4678490b625c/Guzzle/Parser/Message/MessageParser.php",
+    "input_api": "MessageParser::parseRequest(local raw HTTP/1.1 request bytes); request line, URI, version, and headers",
+    "composer_lock": "adapters/php/http11/guzzle_parser/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Guzzle 3 HTTP message parser",
+    "family_note": "Older Guzzle 3 parser implementation; Composer package is abandoned, but its pinned release passed.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "alexpts/http-message-parser",
+    "version": "0.0.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/alexpts/php-http-message-parser/blob/8eddf828b2e22e28b83d58658bee58d42834eef6/composer.json",
+    "documentation": "https://github.com/alexpts/php-http-message-parser/blob/8eddf828b2e22e28b83d58658bee58d42834eef6/src/Factory/Psr7Factory.php",
+    "input_api": "Psr7Factory::toPsr7Request(local raw HTTP/1.1 request bytes); method, URI, version, and headers",
+    "composer_lock": "adapters/php/http11/alexpts/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "AlexPTS HTTP message parser",
+    "family_note": "Native parser creating a PSR-7 request. PHP 8.5 emits deprecation notices when logging is enabled.",
+    "adapter": "adapters/php/http11/parse.php"
+  },
+  {
+    "name": "sekjun9878/request-parser",
+    "version": "v1.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/sekjun9878/request-parser/blob/8c32cf4c6b79fb0c5c59cbb589d59abb11a10dfc/LICENSE",
+    "documentation": "https://github.com/sekjun9878/request-parser/blob/8c32cf4c6b79fb0c5c59cbb589d59abb11a10dfc/README.md",
+    "input_api": "RequestParser::addData(local raw HTTP/1.1 request bytes), Request::create; method, URI, version, and headers",
+    "composer_lock": "adapters/php/http11/sekjun/composer.lock",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test",
+      "custom": "yes"
+    },
+    "scope": "single valid GET request line and Host, X-Parsarium, Connection headers",
+    "family": "Sekjun HTTP request parser",
+    "family_note": "Native incremental parser; PHP 8.5 emits deprecation notices when logging is enabled.",
+    "adapter": "adapters/php/http11/parse.php"
+  }
+]
