@@ -70,12 +70,12 @@
     "repository": "FFmpeg/FFmpeg",
     "source_url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
     "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
-    "local_library": "/opt/homebrew/Cellar/ffmpeg/9.0.2/lib/libavformat.63.dylib",
-    "local_library_sha256": "282e63f30f3fd0c8bf5dd41493d0764f67a5140683cc74134912816fa51efbae",
+    "local_library": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+    "local_library_sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
     "additional_libraries": [
       {
-        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2/lib/libavcodec.63.dylib",
-        "sha256": "9ce2e6d93ef08a6674ff50a9ab329694c398e8280779c43e7eaffc6fe067db9a"
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a"
       }
     ],
     "pkg_config": "libavformat",
@@ -84,7 +84,8 @@
       "libavcodec",
       "libavutil"
     ],
-    "pkg_config_version": "63.1.102"
+    "pkg_config_version": "63.1.102",
+    "homebrew_formula_revision": "9.0.2_1"
   },
   "sox": {
     "release": "14.4.2",
@@ -324,5 +325,31 @@
       "taglib_c"
     ],
     "pkg_config_version": "2.3.2"
+  },
+  "gstreamer": {
+    "release": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "registry": "https://formulae.brew.sh/formula/gstreamer",
+    "repository": "https://gitlab.freedesktop.org/gstreamer/gstreamer",
+    "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+    "local_library": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstreamer-1.0.0.dylib",
+    "local_library_sha256": "e8abf7ae7199282b292ef16c85a544230c889efe5a7b881b73f9bbcab557362f",
+    "wavparse_plugin": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstwavparse.dylib",
+    "additional_libraries": [
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstapp-1.0.0.dylib",
+        "sha256": "6591dcde0b7f993c31270eec77331ef8de708a65ddb9b87775ebecb16a35f650"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstwavparse.dylib",
+        "sha256": "5a9f08fd6850ca228fb262b567299d6e725dda6024f8dbd6a81e0ded8fb479a2"
+      }
+    ],
+    "pkg_config": "gstreamer-app-1.0",
+    "pkg_configs": [
+      "gstreamer-app-1.0"
+    ],
+    "pkg_config_version": "1.28.9"
   }
 }

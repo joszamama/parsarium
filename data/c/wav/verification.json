@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T11:09:10.872883+00:00",
+  "checked_at_utc": "2026-11-12T11:13:58.621289+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "installed_libraries": {
@@ -17,12 +17,12 @@
     },
     "ffmpeg": {
       "pkg_config_version": "63.1.102",
-      "library": "/opt/homebrew/Cellar/ffmpeg/9.0.2/lib/libavformat.63.dylib",
-      "library_sha256": "282e63f30f3fd0c8bf5dd41493d0764f67a5140683cc74134912816fa51efbae",
+      "library": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+      "library_sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
       "additional_libraries": [
         {
-          "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2/lib/libavcodec.63.dylib",
-          "sha256": "9ce2e6d93ef08a6674ff50a9ab329694c398e8280779c43e7eaffc6fe067db9a"
+          "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+          "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a"
         }
       ]
     },
@@ -132,6 +132,22 @@
           "sha256": "7d8dd12770632e396eb05000f0f631475654f605d2af5442ff558f33703a3217"
         }
       ]
+    },
+    "gstreamer": {
+      "pkg_config_version": "1.28.9",
+      "library": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstreamer-1.0.0.dylib",
+      "library_sha256": "e8abf7ae7199282b292ef16c85a544230c889efe5a7b881b73f9bbcab557362f",
+      "additional_libraries": [
+        {
+          "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstapp-1.0.0.dylib",
+          "sha256": "6591dcde0b7f993c31270eec77331ef8de708a65ddb9b87775ebecb16a35f650"
+        },
+        {
+          "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstwavparse.dylib",
+          "sha256": "5a9f08fd6850ca228fb262b567299d6e725dda6024f8dbd6a81e0ded8fb479a2"
+        }
+      ],
+      "wavparse_plugin": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstwavparse.dylib"
     }
   },
   "source_builds": {
@@ -152,7 +168,7 @@
       "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
       "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
       "configure_command": "./configure --prefix=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/audiofile-install --disable-static",
-      "library_sha256": "6c43b55d3c728f76c2605423343b6d20eb6d3130a30fd692355d1cd9ed22af93"
+      "library_sha256": "cf4c2da3e261656f06c821a6c70a4166039880486ed6fafad4a30a7ae949b289"
     },
     "sdl2": {
       "source_sha256": "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165",
@@ -264,7 +280,7 @@
       "package": "ffmpeg",
       "version": "9.0.2",
       "control": "controls/wav/four-samples.wav",
-      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2/lib -lavformat -lavcodec -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -lavcodec -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
       "output": {
         "sample_rate": 8000,
@@ -530,6 +546,25 @@
         "sample_rate": 8000,
         "channels": 1,
         "bitrate_kbps": 128
+      },
+      "pass": true
+    },
+    {
+      "package": "gstreamer",
+      "version": "1.28.9",
+      "control": "controls/wav/four-samples.wav",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/gstreamer.c -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstapp-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/gstreamer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/wav/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/wav/four-samples.wav",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 4,
+        "samples": [
+          0,
+          1000,
+          -1000,
+          0
+        ]
       },
       "pass": true
     }

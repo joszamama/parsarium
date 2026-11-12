@@ -12,7 +12,7 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 52 cells at the 20-parser target, four started
+PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 53 cells at the 20-parser target, three started
 below target, and 32 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -163,19 +163,18 @@ The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
 uncertainty. The ISO C standard library has no documented ZIP parser.
 
 The C × WAV verifier builds pinned `dr_wav`, miniaudio, Audio File Library, and
-native SDL2
-sources and checks exact-release, binary-hashed libsndfile, raylib, FFmpeg, SoX,
-SDL3, SDL3_mixer, aubio, CSFML, Allegro, SDL2_mixer, FreeALUT,
-SDL2-compat, SDL2_sound, SDL3_sound, and TagLib C bindings. All **19/19 third-party package
-paths passed** the shared valid
-four-sample PCM WAV control. Seventeen returned parsed format values and four decoded
-samples; SDL3_mixer returned format values and duration, while TagLib returned
-sample rate, channels, and bitrate. This remains 1 below
-the working goal. The [C WAV cell](data/c/wav/cell.json) records the
+native SDL2 sources. It also checks exact-release, binary-hashed libsndfile,
+raylib, FFmpeg, SoX, SDL3, SDL3_mixer, aubio, CSFML, Allegro, SDL2_mixer,
+FreeALUT, SDL2-compat, SDL2_sound, SDL3_sound, TagLib C bindings, and GStreamer.
+All **20/20 third-party package paths passed** the valid four-sample PCM WAV
+control. Eighteen returned parsed format values and four decoded samples;
+SDL3_mixer returned format values and duration, while TagLib returned sample
+rate, channels, and bitrate. The working count is reached, while the most-used
+search remains incomplete. The [C WAV cell](data/c/wav/cell.json) records the
 bounded Conan Center recipe search, one unresolved lead, and shared `dr_wav`
 and SDL lineage, including the shared SDL_sound upstream for both major-version
 packages. Its [ranking](data/c/wav/ranking.md) uses only primary
-GitHub repository stars within C; SoX remains unranked. The ISO C standard
+GitHub repository stars within C; SoX and GStreamer remain unranked. The ISO C standard
 library has no WAV parser. The Audio File Library source build applies a
 documented compatibility patch for a signed-shift constant expression.
 

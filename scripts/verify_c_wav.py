@@ -126,6 +126,13 @@ def main() -> None:
                                    "additional_libraries": item.get("additional_libraries", [])}
                 if name == "sdl3_sound":
                     installed[name]["brew_version"] = brew_version
+                if name == "gstreamer":
+                    info = run(["gst-inspect-1.0", "wavparse"])
+                    fields = {line.split(None, 1)[0]: line.split(None, 1)[1]
+                              for line in info.splitlines() if line.strip().startswith(("Filename", "Version"))}
+                    assert fields["Filename"] == item["wavparse_plugin"]
+                    assert fields["Version"] == item["release"]
+                    installed[name]["wavparse_plugin"] = fields["Filename"]
         run(command)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))

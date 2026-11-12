@@ -1,6 +1,6 @@
 # C × WAV: verified parser ranking
 
-19 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T10:25:21.715408+00:00 and 2026-11-12T11:08:34.777823+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 1 path(s) lack a metric and remain unranked.
+20 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T10:25:21.715408+00:00 and 2026-11-12T11:12:59.452468+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 2 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -24,4 +24,5 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | 15 | [sdl3_sound](https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile) | 3.2.0 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL3_sound WAVE decoder |
 | 17 | [libaudiofile](https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h) | 0.3.6 | 167 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | Audio File Library WAV parser |
 | 18 | [freealut](https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h) | 1.1.0 | 74 | WAV format, sample rate, frame count and four decoded PCM samples | FreeALUT WAV memory loader |
+| unranked | [gstreamer](https://gstreamer.freedesktop.org/documentation/wavparse/index.html) | 1.28.9 | unknown | explicit wavparse element interprets WAV and emits caps plus four PCM sample values | GStreamer wavparse plugin |
 | unranked | [sox](https://github.com/chirlu/sox/blob/master/libsox.3) | 14.4.2 | unknown | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | SoX libsox WAV reader |

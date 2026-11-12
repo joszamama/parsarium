@@ -238,13 +238,20 @@
       "source_url": "https://taglib.org/releases/taglib-2.3.2.tar.gz",
       "source_sha256": "3ca2d8afaa7f1cf7f6ed10e511ebc368bfacd6dcaa3dbfa690b89e502e8963dc",
       "license_evidence": "https://github.com/taglib/taglib/blob/v2.3.2/COPYING.LGPL"
+    },
+    "gstreamer": {
+      "version": "1.28.9",
+      "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+      "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+      "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+      "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository",
     "captured_at_utc": "2026-11-12T10:25:21.715408+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context. SDL2-compat exposes SDL2 WAV loading via SDL3 implementation; its repository stars measure the compatibility package, not a separate engine. SDL2 and SDL3 are releases from one upstream repository and share one star count; this is not release-specific popularity. SDL2_sound and SDL3_sound are separate major-version package APIs from one upstream repository and share its star count and decoder lineage; each adapter identified the built-in Microsoft WAVE decoder. TagLib C bindings wrap its C++ RIFF/WAV parser and report WAV properties only; stars measure the multi-format TagLib repository.",
+    "limitations": "Repository stars proxy project adoption, not WAV parser usage. FFmpeg and raylib serve many formats; dr_wav, miniaudio and raylib share decoder lineage. Counts are compared only within C, never across ecosystems. SoX is unranked because its primary SourceForge project lacks a directly comparable GitHub metric. SDL3_mixer has an SDL-derived WAV decoder and reports metadata from the valid control; seven other paths returned PCM samples. The aubio bottle links Apple AudioToolbox and libsndfile; the actual backend for this control was not isolated. CSFML is a C wrapper over SFML audio, so its stars measure the C package path, not a new WAV engine. SDL2_mixer and SDL3_mixer share the SDL_mixer upstream project count; the former uses sdl2-compat on this host. FreeALUT requires an OpenAL context. SDL2-compat exposes SDL2 WAV loading via SDL3 implementation; its repository stars measure the compatibility package, not a separate engine. SDL2 and SDL3 are releases from one upstream repository and share one star count; this is not release-specific popularity. SDL2_sound and SDL3_sound are separate major-version package APIs from one upstream repository and share its star count and decoder lineage; each adapter identified the built-in Microsoft WAVE decoder. TagLib C bindings wrap its C++ RIFF/WAV parser and report WAV properties only; stars measure the multi-format TagLib repository. GStreamer wavparse is a separately verified plugin in the GStreamer distribution; its primary GitLab project lacks a comparable primary GitHub star count, so it remains unranked. The local FFmpeg Homebrew bottle changed from 9.0.2 to 9.0.2_1 during GStreamer installation and its binary hashes were refreshed; the upstream FFmpeg source release is still 9.0.2.",
     "packages": {
       "dr_wav": {
         "stars": 1891,
@@ -341,11 +348,17 @@
         "stars": 1470,
         "repository": "https://github.com/taglib/taglib",
         "source": "https://api.github.com/repos/taglib/taglib"
+      },
+      "gstreamer": {
+        "stars": null,
+        "repository": null,
+        "source": null,
+        "reason": "Primary upstream is GitLab; no comparable GitHub repository star count. GitHub mirror stars are not borrowed."
       }
     },
     "captured_between_utc": [
       "2026-11-12T10:25:21.715408+00:00",
-      "2026-11-12T11:08:34.777823+00:00"
+      "2026-11-12T11:12:59.452468+00:00"
     ]
   },
   "targeted_documentation": [
@@ -372,6 +385,9 @@
     "https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html",
     "https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile",
     "https://github.com/taglib/taglib/blob/v2.3.2/bindings/c/tag_c.h",
-    "https://taglib.org/api/"
+    "https://taglib.org/api/",
+    "https://gstreamer.freedesktop.org/documentation/wavparse/index.html",
+    "https://gstreamer.freedesktop.org/documentation/gstreamer/gstparse.html",
+    "https://gstreamer.freedesktop.org/documentation/applib/gstappsink.html?gi-language=c"
   ]
 }

@@ -443,5 +443,29 @@
     "scope": "WAV-aware structural/audio-property parsing; does not decode PCM samples",
     "family": "TagLib C bindings over TagLib C++ RIFF/WAV parser",
     "family_note": "The C binding wraps TagLib C++ and uses its RIFF/WAV properties implementation; one package path, not a separate C parser engine. It reports WAV sample rate, channel count and bitrate, not decoded samples."
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/wavparse/index.html",
+    "input_api": "gst_parse_launch(filesrc local path ! wavparse ! appsink); gst_app_sink_try_pull_sample",
+    "adapter": "adapters/c/wav/gstreamer.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "explicit wavparse element interprets WAV and emits caps plus four PCM sample values",
+    "family": "GStreamer wavparse plugin",
+    "family_note": "GStreamer Good Plug-ins wavparse handles WAV; the adapter explicitly uses the named plugin and reads parsed caps and PCM from appsink. It is a separate package path, with plugin binary and release checked. Its primary upstream is GitLab, so no GitHub-star score is borrowed from a mirror."
   }
 ]
