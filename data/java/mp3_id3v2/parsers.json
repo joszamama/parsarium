@@ -109,5 +109,39 @@
     "adapter_label": "mp3spi",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {"type": "MP3", "title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3"}
+  },
+  {
+    "name": "javacv",
+    "group": "org.bytedeco",
+    "artifact": "javacv",
+    "version": "1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+    "license_evidence": "Release Maven POM; native FFmpeg notices apply separately",
+    "input_api": "new FFmpegFrameGrabber(File).start(), getFormat(), getAudioCodecName(), getSampleRate(), getAudioChannels()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar",
+    "documentation_archive_entry": "org/bytedeco/javacv/FFmpegFrameGrabber.html",
+    "family": "JavaCV wrapper over FFmpeg MP3 demuxer",
+    "scope": "local tagged MP3 format, codec, sample rate and channels",
+    "adapter_module": "bytedeco",
+    "adapter_label": "javacv",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"format": "mp3", "codec": "mp3float", "frequency": 8000, "channels": 1}
+  },
+  {
+    "name": "bytedeco-ffmpeg",
+    "group": "org.bytedeco",
+    "artifact": "ffmpeg",
+    "version": "8.1.2-1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+    "license_evidence": "Parent javacpp-presets Maven POM; native FFmpeg notices apply separately",
+    "input_api": "avformat_open_input(AVFormatContext,String,...), avformat_find_stream_info(...), AVStream.codecpar()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar",
+    "documentation_archive_entry": "org/bytedeco/ffmpeg/global/avformat.html",
+    "family": "Bytedeco binding to the same FFmpeg MP3 demuxer used by JavaCV",
+    "scope": "local tagged MP3 format, sample rate and channels",
+    "adapter_module": "bytedeco",
+    "adapter_label": "ffmpeg",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {"format": "mp3", "frequency": 8000, "channels": 1}
   }
 ]

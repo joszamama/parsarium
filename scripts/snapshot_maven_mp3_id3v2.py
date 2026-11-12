@@ -29,6 +29,8 @@ COORDS = {
     "jave-core": ("ws.schild", "jave-core", "4.2.0"),
     "jaffree": ("com.github.kokorin.jaffree", "jaffree", "2024.08.29"),
     "mp3spi": ("com.googlecode.soundlibs", "mp3spi", "1.9.5.4"),
+    "javacv": ("org.bytedeco", "javacv", "1.5.14"),
+    "bytedeco-ffmpeg": ("org.bytedeco", "ffmpeg", "8.1.2-1.5.14"),
 }
 LICENSES = {
     "jaudiotagger": ("LGPL-2.1-or-later", "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1.pom"),
@@ -38,6 +40,8 @@ LICENSES = {
     "jave-core": ("GPL-3.0-only", "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0.pom"),
     "jaffree": ("Apache-2.0", "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29.pom"),
     "mp3spi": ("LGPL-2.0-or-later", "https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar"),
+    "javacv": ("Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14.pom"),
+    "bytedeco-ffmpeg": ("Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14.pom"),
 }
 QUERIES = ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"]
 

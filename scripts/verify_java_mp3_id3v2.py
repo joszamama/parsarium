@@ -40,7 +40,7 @@ def main() -> None:
     classpaths: dict[str, str] = {}
     jar_counts: dict[str, int] = {}
     by_path: dict[str, str] = {}
-    for module in ("main", "mp3spi"):
+    for module in ("main", "mp3spi", "bytedeco"):
         adapter = ADAPTER if module == "main" else ADAPTER / module
         lock = read(adapter / "dependencies.lock.json")["classpath"]
         build = subprocess.run([
@@ -75,8 +75,9 @@ def main() -> None:
     for parser in parsers:
         label = parser["adapter_label"]
         module = parser.get("adapter_module", "main")
-        class_name = ("org.parsarium.Mp3SpiAdapter" if module == "mp3spi"
-                      else "org.parsarium.Mp3Id3v2Adapter")
+        class_name = {"main": "org.parsarium.Mp3Id3v2Adapter",
+                      "mp3spi": "org.parsarium.Mp3SpiAdapter",
+                      "bytedeco": "org.parsarium.BytedecoMp3Adapter"}[module]
         assert parser["control"] == "controls/mp3_id3v2/tone-tags.mp3"
         arguments = [] if module == "mp3spi" else [label]
         command = ["java", "-cp", classpaths[module], class_name,
