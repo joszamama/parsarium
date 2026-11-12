@@ -1,0 +1,70 @@
+[
+  {
+    "name": "github.com/go-sparse/sparse/mtx",
+    "module": "github.com/go-sparse/sparse",
+    "version": "v0.3.2",
+    "license": "BSD-3-Clause",
+    "input_api": "Read(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/go-sparse/sparse@v0.3.2/mtx",
+    "scope": "Coordinate real matrix dimensions, stored entries, and value",
+    "family": "go-sparse Matrix Market",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entries": 3,
+      "value_0_2": -2
+    }
+  },
+  {
+    "name": "github.com/wamuir/matrix-market",
+    "module": "github.com/wamuir/matrix-market",
+    "version": "v0.0.0-20250303121451-60c3dedeb95a",
+    "license": "MIT",
+    "input_api": "(*COO).UnmarshalTextFrom(io.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/wamuir/matrix-market@v0.0.0-20250303121451-60c3dedeb95a",
+    "scope": "Coordinate real matrix dimensions and value",
+    "family": "wamuir Matrix Market",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "value_0_2": -2
+    }
+  },
+  {
+    "name": "github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib",
+    "module": "github.com/HerrMotz/Algorithmic-Network-Analysis-Library",
+    "version": "v0.0.0-20261026153007-6675dc5932aa",
+    "license": "MIT",
+    "input_api": "ReadGraphAdjListAs(string, FormatMatrixMarket, bool)",
+    "documentation": "https://pkg.go.dev/github.com/HerrMotz/Algorithmic-Network-Analysis-Library@v0.0.0-20261026153007-6675dc5932aa/graphlib",
+    "scope": "Coordinate Matrix Market graph vertex and edge topology",
+    "family": "graphlib Matrix Market graph reader",
+    "control": "controls/matrix_market/graph-general.mtx",
+    "expected_output": {
+      "vertices": 3,
+      "edges_from_0": 1
+    }
+  },
+  {
+    "name": "gitlab.com/Grouumf/enhlinktools/matrix",
+    "module": "gitlab.com/Grouumf/enhlinktools/matrix",
+    "version": "v0.0.0-20260605220655-71e7fc6c181b",
+    "license": "GPL-3.0",
+    "input_api": "(*SparseFloatMatrix).Init(Attributes); LoadMatrix(map[string]uint, map[string]uint)",
+    "documentation": "https://pkg.go.dev/gitlab.com/Grouumf/enhlinktools/matrix@v0.0.0-20260605220655-71e7fc6c181b",
+    "scope": "Coordinate real matrix values with companion index files",
+    "family": "enhlinktools Matrix Market reader",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "value_0_0": 1.5,
+      "value_0_2": -2,
+      "value_1_1": 4
+    },
+    "control_companions": [
+      "controls/matrix_market/go-cols.tsv",
+      "controls/matrix_market/go-rows.tsv"
+    ]
+  }
+]

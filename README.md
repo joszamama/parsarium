@@ -4,10 +4,11 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
+plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, and an explicit 88-cell work
-matrix. There are 31 cells at the 20-parser target and 57
-marked `not_started`;
+matrix. There are 31 cells at the 20-parser target, one started below target,
+and 56 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -49,6 +50,7 @@ python3 scripts/verify_go_pdf.py
 python3 scripts/verify_go_svg.py
 brew install assimp
 python3 scripts/verify_go_ascii_ply.py
+python3 scripts/verify_go_matrix_market.py
 python3 controls/ascii_pnm/make_control.py
 python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
@@ -272,6 +274,15 @@ archive from its pinned module and configures the locally installed Assimp
 development library through `pkg-config`. The recorded native Assimp version is
 6.0.6 on macOS arm64. The separate Go 1.27.1 standard-library inventory finds
 no PLY-aware parser API.
+
+`verify_go_matrix_market.py` uses Go 1.27.2 and valid coordinate real general
+Matrix Market controls. The observed result is **4/4 eligible package paths
+passing**, below the 20-path goal. One reader interprets the matrix as a graph;
+another requires local companion row and column index files. The Go module
+files pin releases and transitive dependencies, and `go mod verify` passes.
+The separate Go 1.27.2 standard-library inventory finds no Matrix Market API.
+Five plausible leads remain unresolved, including one with a successful parse
+but no open-source license evidence. See the cell record for exact limits.
 
 `verify_python_png.py` uses CPython 3.13.1 and the two valid local PNG
 controls. `requirements.in` pins 21 top-level releases; the generated
@@ -552,6 +563,11 @@ or quality judgment.
   plausible leads remain unresolved. The
   [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
+- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): four eligible
+  package paths verified on local coordinate real general controls, 16 below
+  the working goal. Six bounded pkg.go.dev queries saved 80 hits and 77 unique
+  paths; five plausible leads remain unresolved. The
+  [cell record](data/go/matrix_market/cell.json) states search and input limits.
 - [Python × PNG ranking](data/python/png/ranking.md): 21 packages verified
   on local pixel or text-chunk controls. Seven bounded PyPI name filters
   saved 379 distinct project names; eight plausible leads remain unresolved.

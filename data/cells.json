@@ -526,15 +526,29 @@
     {
       "ecosystem": "go",
       "format": "matrix_market",
-      "status": "not_started",
+      "status": "verified_below_goal_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 4,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "matrixmarket",
+        "matrix market",
+        "mmread",
+        "mmio",
+        "mtx",
+        "sparse matrix"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 80,
+      "unique_search_hits": 77,
+      "unresolved_documentation_leads": 5,
+      "uncertainty": "Six pkg.go.dev public package-search queries saved 80 hits and 77 unique paths; their windows returned 2, 3, 0, 14, 20, and 41 hits. The pages give no total result counts. Most mmio/mtx/sparse-matrix hits refer to other meanings; registry names were not treated as parser proof. Documentation searches found additional Matrix Market readers outside those windows. Four open-source package paths passed valid local controls. Five plausible leads remain unresolved: one parsed the control but has no open-source license evidence, one cannot compile against the installed GraphBLAS version, and three need unavailable MUMPS headers. This is 4 of the 20-path working goal, with 16 still unverified; the search is incomplete, and other readers or input variants may remain undiscovered. The tested controls cover coordinate real general matrices and a graph interpretation only. The Grouumf path requires companion row and column index files and its matrix shape was not used as an acceptance result. pkg.go.dev Imported by counts are package-level adoption signals, not downloads.",
+      "third_party_evidence": "data/go/matrix_market/parsers.json",
+      "third_party_control_results": "data/go/matrix_market/verification.json",
+      "runtime_evidence": "data/go/matrix_market/standard.json",
+      "registry_snapshot": "data/go/matrix_market/registry-snapshot.json",
+      "unresolved_leads": "data/go/matrix_market/leads.json"
     },
     {
       "ecosystem": "go",

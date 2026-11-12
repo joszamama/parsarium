@@ -1,0 +1,74 @@
+{
+  "checked_at_utc": "2026-11-12T00:13:31.998127+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.27.2 darwin/arm64",
+  "control_sha256": {
+    "controls/matrix_market/real-general.mtx": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
+    "controls/matrix_market/graph-general.mtx": "d8b4cf661746a15c983ef2d94e4d916e981310629a00cbcacf3f1babc60d8441",
+    "controls/matrix_market/go-cols.tsv": "23a2b13277496386b6418052740cedee221b6ecff78ba5442692b98ba4e9dc50",
+    "controls/matrix_market/go-rows.tsv": "041f633e79199d3227c2e5cc0c4bba82f907c5a1f7fd2841d2add5e893d0e2f2"
+  },
+  "control_meaning": "Valid Matrix Market coordinate real general matrices; the graph control has three vertices and two edges",
+  "third_party": [
+    {
+      "package": "github.com/go-sparse/sparse/mtx",
+      "module": "github.com/go-sparse/sparse",
+      "version": "v0.3.2",
+      "scope": "Coordinate real matrix dimensions, stored entries, and value",
+      "control": "controls/matrix_market/real-general.mtx",
+      "command": "go run . github.com/go-sparse/sparse/mtx /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "pass": true,
+      "output": {
+        "cols": 3,
+        "entries": 3,
+        "rows": 2,
+        "value_0_2": -2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/wamuir/matrix-market",
+      "module": "github.com/wamuir/matrix-market",
+      "version": "v0.0.0-20250303121451-60c3dedeb95a",
+      "scope": "Coordinate real matrix dimensions and value",
+      "control": "controls/matrix_market/real-general.mtx",
+      "command": "go run . github.com/wamuir/matrix-market /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "pass": true,
+      "output": {
+        "cols": 3,
+        "rows": 2,
+        "value_0_2": -2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib",
+      "module": "github.com/HerrMotz/Algorithmic-Network-Analysis-Library",
+      "version": "v0.0.0-20261026153007-6675dc5932aa",
+      "scope": "Coordinate Matrix Market graph vertex and edge topology",
+      "control": "controls/matrix_market/graph-general.mtx",
+      "command": "go run . github.com/HerrMotz/Algorithmic-Network-Analysis-Library/graphlib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/graph-general.mtx",
+      "pass": true,
+      "output": {
+        "edges_from_0": 1,
+        "vertices": 3
+      },
+      "error": null
+    },
+    {
+      "package": "gitlab.com/Grouumf/enhlinktools/matrix",
+      "module": "gitlab.com/Grouumf/enhlinktools/matrix",
+      "version": "v0.0.0-20260605220655-71e7fc6c181b",
+      "scope": "Coordinate real matrix values with companion index files",
+      "control": "controls/matrix_market/real-general.mtx",
+      "command": "go run . gitlab.com/Grouumf/enhlinktools/matrix /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "pass": true,
+      "output": {
+        "value_0_0": 1.5,
+        "value_0_2": -2,
+        "value_1_1": 4
+      },
+      "error": null
+    }
+  ]
+}
