@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T09:00:44.147622+00:00",
+  "checked_at_utc": "2026-11-12T11:24:36.432232+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/zip/source-lock.json",
@@ -379,6 +379,38 @@
         "cc -std=c11 -O2 -Wno-deprecated-non-prototype -Wno-macro-redefined -include stdio.h -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/unziplib/src/zutil.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/unziplib-build/zutil.o"
       ],
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/unziplib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "infozip-unzip",
+      "version": "6.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 -DDLL -DUNIX -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/infozip-unzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/infozip_unzip.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libinfozip_unzip.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/infozip-unzip",
+      "configure_command": null,
+      "library_build_command": null,
+      "prerequisite_build_commands": [],
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/infozip-unzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "libc7zip",
+      "version": "v1.10.0",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/libc7zip/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/libc7zip.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build/libc7zip.dylib -Wl,-rpath,/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libc7zip-build -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/libc7zip",
+      "configure_command": null,
+      "library_build_command": null,
+      "prerequisite_build_commands": [],
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/libc7zip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

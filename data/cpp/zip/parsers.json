@@ -407,5 +407,42 @@
     "family_note": "Distinct 1.0.0 package with C callback/memory API and bundled zlib; its unzip.h credits Gilles Vollant and shares classic MiniZip lineage. Package license is Apache-2.0 with zlib-licensed bundled code. The C++ path reuses the exact C-cell source release and parser family.",
     "language_bridge": "C API compiled and invoked from a C++17 translation unit",
     "license_evidence_additional": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h"
+  },
+  {
+    "name": "infozip-unzip",
+    "version": "6.0",
+    "license": "Info-ZIP",
+    "license_evidence": "https://downloads.sourceforge.net/project/infozip/UnZip%206.x%20%28latest%29/UnZip%206.0/unzip60.tar.gz",
+    "documentation": "https://github.com/madler/unzip/blob/master/unzip.h",
+    "input_api": "UzpAltMain on a local ZIP path with listing callback; UzpUnzipToMemory(local ZIP path, parsed entry name); UzpFreeMemBuffer",
+    "adapter": "adapters/cpp/zip/infozip_unzip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API",
+    "family": "Info-ZIP UnZip 6.0 engine",
+    "family_note": "Official Info-ZIP UnZip 6.0 source exposes a C DLL API. This path compiles its library objects and calls the API directly; it is separate from MiniZip, unzipLIB, and other ZIP engines. The C++17 call site includes the C adapter and links the same pinned C library."
+  },
+  {
+    "name": "libc7zip",
+    "version": "v1.10.0",
+    "license": "MIT AND MPL-2.0 AND LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/itchio/libc7zip/blob/v1.10.0/README.md",
+    "license_note": "Wrapper MIT; vendored lib7zip MPL-2.0; bundled 7-Zip engine LGPL 2.1 with project-noted additional terms dependent on build.",
+    "documentation": "https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h",
+    "input_api": "in_stream_new with local FILE read/seek callbacks; archive_open; archive_get_item_count; item_get_string_property(kpidPath); archive_extract_item to output callback",
+    "adapter": "adapters/cpp/zip/libc7zip.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libc7zip \u2192 lib7zip \u2192 7-Zip ZIP engine",
+    "family_note": "Tagged MIT C facade vendors an MPL-2.0 lib7zip fork and loads a 7-Zip 26.03 engine; a distinct package path sharing the 7-Zip parser family with bit7z in C++. The C++17 call site links the same SHA-pinned C facade and 7-Zip engine as the C cell."
   }
 ]

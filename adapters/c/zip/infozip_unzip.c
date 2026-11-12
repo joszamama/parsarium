@@ -28,7 +28,10 @@ int main(int argc, char **argv) {
     UzpInit init = {0};
     init.structlen = sizeof(init);
     init.msgfn = capture;
-    char *arguments[] = {"unzip", "-Z", "-1", argv[1]};
+    char program[] = "unzip";
+    char zipinfo[] = "-Z";
+    char names_only[] = "-1";
+    char *arguments[] = {program, zipinfo, names_only, argv[1]};
     if (UzpAltMain(4, arguments, &init) != 0) return 3;
     if (!listing_length || listing[listing_length - 1] != '\n') return 4;
     size_t entries = 0;

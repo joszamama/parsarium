@@ -6,6 +6,7 @@ from pathlib import Path
 import json
 import platform
 import shlex
+import shutil
 import subprocess
 
 import prepare_cpp_zip
@@ -33,10 +34,12 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/zip/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 22
+    cell = json.loads((DATA / "cell.json").read_text())
+    assert len(parsers) == cell["verified_third_party_count"]
     assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "adapters/c/zip/target/7z.so", TARGET / "7z.so")
     rows = []
     local_libraries = {}
     for parser in parsers:

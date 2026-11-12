@@ -1,6 +1,6 @@
 # C++ × ZIP: verified parser ranking
 
-22 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T08:59:49.976060+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 3 path(s) lack a metric and remain unranked.
+24 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T11:23:43.500488+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 4 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C++ standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -25,6 +25,8 @@ Search hits, unresolved leads, and the C++ standard-library inventory are separa
 | 17 | [zipios](https://github.com/Zipios/Zipios/blob/2.3.4/zipios/zipfile.hpp) | 2.3.4 | 54 | entry name and decompressed entry bytes | Zipios ZIP reader |
 | 18 | [lowzip](https://github.com/svaarala/lowzip/blob/v1.0.1/README.md) | 1.0.1 | 46 | entry name and decompressed entry bytes | lowzip ZIP reader |
 | 19 | [troldal-zippy](https://github.com/troldal/KZip/blob/a838de8522f9051df0d1b202473bb6befe648702/library/Zippy/ZipArchive.hpp) | cci.20200622 | 32 | entry name and decompressed entry bytes | Troldal Zippy wrapper over bundled miniz |
+| 20 | [libc7zip](https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h) | v1.10.0 | 18 | entry name and decompressed entry bytes | libc7zip → lib7zip → 7-Zip ZIP engine |
+| unranked | [infozip-unzip](https://github.com/madler/unzip/blob/master/unzip.h) | 6.0 | unknown | entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API | Info-ZIP UnZip 6.0 engine |
 | unranked | [karchive](https://api.kde.org/kzip.html) | 6.31.0 | unknown | entry name and decompressed entry bytes | KArchive KZip reader |
 | unranked | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | unknown | entry name and decompressed entry bytes | libgsf ZIP reader |
 | unranked | [minizip](https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h) | 1.4 | unknown | entry name and decompressed entry bytes | classic MiniZip |

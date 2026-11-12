@@ -180,12 +180,14 @@ library has no WAV parser. The Audio File Library source build applies a
 documented compatibility patch for a signed-shift constant expression.
 
 The C++ × ZIP verifier runs the C ZIP pin and control checks, then builds
-C++ call sites for the same twelve packages and ten pinned C++ libraries. All
-**22/22 package paths passed** the valid archive control, returning the entry
+C++ call sites for the same fourteen packages and ten pinned C++ libraries. All
+**24/24 package paths passed** the valid archive control, returning the entry
 name and decompressed contents. libzippp wraps the verified libzip release,
 Troldal Zippy bundles miniz, Zipper and QuaZip wrap classic MiniZip, bit7z
-uses a pinned SevenZip shared library, QArchive wraps libarchive, and the separate
-Sebastian Zipper package and unzipLIB also share classic MiniZip lineage. These paths are not twenty-two
+and libc7zip use pinned 7-Zip engines through separate APIs, QArchive wraps
+libarchive, and the separate
+Sebastian Zipper package and unzipLIB also share classic MiniZip lineage;
+Info-ZIP UnZip uses its separate engine. These paths are not twenty-four
 independent ZIP engines. Six plausible C++ leads remain
 unresolved, so the [C++ ZIP cell](data/cpp/zip/cell.json)
 records that the numerical goal is met, while search remains incomplete and the
