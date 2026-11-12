@@ -12,12 +12,12 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, HTTP/1.1, MP3 with ID3v2, and SVG, plus
+WAV, MP4, HTTP/1.1, MP3 with ID3v2, and SVG, plus a below-target Java × ASCII PNM batch and
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 67 cells at the 20-parser target, two started below target, and 19
+There are 67 cells at the 20-parser target, three started below target, and 18
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -455,6 +455,18 @@ search hits, a broad-query timeout, and five unresolved leads. The scoped
 a bare-JDK ImageIO probe returned no SVG reader on the control. Run
 `python3 scripts/snapshot_maven_svg.py` and `python3 scripts/enrich_java_svg.py`
 only to refresh discovery and release/metric snapshots.
+
+The [Java × ASCII PNM ranking](data/java/ascii_pnm/ranking.md) currently has
+**5/20 verified package paths**: Apache Commons Imaging, TwelveMonkeys ImageIO,
+JAI ImageIO, ImageJ, and the OpenPnP OpenCV binding. Each decoded both pixels
+of the valid ASCII P3 PPM control. `python3 scripts/verify_java_pnm.py` rebuilds
+the adapter, checks five Maven releases and 11 locked classpath JARs, and
+replays all five adapters plus a bare-JDK probe. The JDK 21 probe found no
+bundled PNM reader. The [cell summary](data/java/ascii_pnm/cell.json) records
+12 bounded registry hits, three timed-out queries, four unresolved leads, and
+the remaining selection uncertainty. Refresh the discovery and release
+snapshots only with `python3 scripts/snapshot_maven_pnm.py` and
+`python3 scripts/enrich_java_pnm.py`.
 
 The Java × PDF batch requires Maven 3.9+, JDK 25, and macOS arm64 for two
 PDFium native bindings. Set `PARSARIUM_JAVA25_HOME` if JDK 25 is not at

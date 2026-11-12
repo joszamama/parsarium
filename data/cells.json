@@ -900,15 +900,29 @@
     {
       "ecosystem": "java",
       "format": "ascii_pnm",
-      "status": "not_started",
+      "status": "verified_partial_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 5,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "pnm",
+        "ppm",
+        "pgm",
+        "imageio-pnm",
+        "portable anymap",
+        "netpbm"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 12,
+      "unique_search_hits": 12,
+      "unresolved_documentation_leads": 4,
+      "uncertainty": "Five pinned open-source Maven package paths passed the valid ASCII P3 2x1 red/green PPM control through documented local input APIs. Three are pure Java PNM decoders: Apache Commons Imaging, TwelveMonkeys ImageIO, and JAI ImageIO. ImageJ has its own PGM/PPM reader; the OpenPnP binding uses native OpenCV. Six bounded Maven Central queries saved 12 hits and 12 unique names. Broad pnm, ppm, and portable anymap queries timed out; the other three returned 9, 2, and 1 hits. Targeted official project documentation supplied format-specific leads outside those registry windows. Four additional names remain unresolved, including a TwelveMonkeys fork and ImageIO-based wrappers. The JDK 21 official ImageIO reader list omits PNM; a bare-JDK control probe found no PNM reader. Only the ASCII P3 PPM subset has been demonstrated; PBM, PGM, PAM, and binary PNM behavior is not implied. Fifteen of the 20 working paths remain unverified, and the timed-out registry searches leave the most-used selection incomplete. deps.dev exact-release direct dependents are only a partial within-Java adoption proxy.",
+      "third_party_evidence": "data/java/ascii_pnm/parsers.json",
+      "third_party_control_results": "data/java/ascii_pnm/verification.json",
+      "runtime_evidence": "data/java/ascii_pnm/standard.json",
+      "registry_snapshot": "data/java/ascii_pnm/registry-snapshot.json",
+      "unresolved_leads": "data/java/ascii_pnm/leads.json"
     },
     {
       "ecosystem": "java",

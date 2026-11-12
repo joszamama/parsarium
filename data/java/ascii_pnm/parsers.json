@@ -1,0 +1,47 @@
+[
+  {
+    "name": "commons-imaging", "group": "org.apache.commons", "artifact": "commons-imaging", "version": "1.0.0-alpha6",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE.txt",
+    "input_api": "Imaging.getBufferedImage(File)",
+    "documentation": "https://commons.apache.org/proper/commons-imaging/formatsupport.html",
+    "family": "Apache Commons Imaging PNM decoder", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "commons-imaging",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "imageio-pnm", "group": "com.twelvemonkeys.imageio", "artifact": "imageio-pnm", "version": "3.15.3",
+    "license": "BSD-3-Clause", "license_evidence": "Maven parent POM and project LICENSE.txt",
+    "input_api": "TwelveMonkeys PNM ImageReader.setInput(ImageInputStream).read(0)",
+    "documentation": "https://github.com/haraldk/TwelveMonkeys#file-formats-supported",
+    "family": "TwelveMonkeys PNM ImageIO plugin", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "twelvemonkeys-pnm",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "jai-imageio-core", "group": "com.github.jai-imageio", "artifact": "jai-imageio-core", "version": "1.4.0",
+    "license": "BSD-3-Clause", "license_evidence": "Maven POM license and project LICENSE.txt",
+    "input_api": "JAI PNM ImageReader.setInput(ImageInputStream).read(0)",
+    "documentation": "https://github.com/jai-imageio/jai-imageio-core#jai-imageio-core-standalone",
+    "family": "JAI ImageIO PNM plugin", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "jai-imageio-core",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "ij", "group": "net.imagej", "artifact": "ij", "version": "1.54p",
+    "license": "Public domain", "license_evidence": "Maven POM public-domain declaration and ImageJ disclaimer",
+    "input_api": "ij.io.Opener.openImage(String local path).getBufferedImage()",
+    "documentation": "https://imagej.net/ij/developer/api/ij/ij/plugin/PGM_Reader.html",
+    "family": "ImageJ PGM/PPM reader", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imagej",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "openpnp-opencv", "group": "org.openpnp", "artifact": "opencv", "version": "4.9.0-0",
+    "license": "BSD-3-Clause", "license_evidence": "Maven POM license and OpenCV project license",
+    "input_api": "OpenCV.loadLocally(); Imgcodecs.imread(String local path)",
+    "documentation": "https://docs.opencv.org/4.9.0/d4/da8/group__imgcodecs.html",
+    "family": "OpenPnP Java binding over native OpenCV PNM decoder", "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "openpnp-opencv",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  }
+]
