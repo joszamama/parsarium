@@ -1,8 +1,16 @@
 {
-  "checked_at_utc": "2026-11-12T08:00:05.085015+00:00",
+  "checked_at_utc": "2026-11-12T08:04:53.033557+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/png/source-lock.json",
+  "extra_source_lock": "data/cpp/png/extra-source-lock.json",
+  "local_libraries": {
+    "sfml": {
+      "pkg_config_version": "3.0.2",
+      "library": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-graphics.3.0.2.dylib",
+      "library_sha256": "cd85f8c400a933362a4fb134aad7a0fbe352b2762e9253a3227c17b23172480d"
+    }
+  },
   "prerequisite_verifier": "scripts/verify_c_png.py",
   "control": "controls/png/red-green.png",
   "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
@@ -490,6 +498,31 @@
       "output": {
         "width": 2,
         "height": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sfml",
+      "version": "3.0.2",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/sfml.cpp -I/opt/homebrew/Cellar/sfml/3.0.2/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -L/opt/homebrew/Cellar/sfml/3.0.2/lib -lsfml-graphics -lsfml-window -lsfml-system -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sfml",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
       },
       "pass": true
     }

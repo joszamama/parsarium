@@ -600,5 +600,34 @@
     "family_note": "Independent generated-C PNG decoder. Control result covers parsed PNG image configuration (dimensions), not decoded pixels. Same underlying package and decoder as the C \u00d7 PNG cell; this C++ path is not an independent engine.",
     "family_evidence": "https://github.com/google/wuffs/blob/v0.3.6/release/c/wuffs-v0.3.c",
     "language_bridge": "Pinned C API compiled and called from a C++17 translation unit"
+  },
+  {
+    "name": "sfml",
+    "version": "3.0.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/sfml",
+    "documentation": "https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Image.html",
+    "input_api": "sf::Image::loadFromFile(const std::filesystem::path&); getSize(); getPixel(sf::Vector2u)",
+    "adapter": "adapters/cpp/png/sfml.cpp",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "RGBA pixels",
+    "family": "SFML bundled stb_image PNG decoder",
+    "family_note": "The pinned Image.cpp embeds stb_image and calls stbi_load_from_callbacks; this shares decoder lineage with the verified stb and raylib paths."
   }
 ]

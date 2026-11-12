@@ -30,28 +30,44 @@ def main() -> None:
     c_parsers = {p["name"]: p for p in json.loads((ROOT / "data/c/png/parsers.json").read_text())}
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/png/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 20 and {p["name"] for p in parsers} == set(c_parsers) == set(c_runs)
+    extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
+    assert len(parsers) == 21 and {p["name"] for p in parsers} == set(c_parsers) | {"sfml"}
+    assert set(c_parsers) == set(c_runs) and set(extra_lock) == {"sfml"}
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
+    local_libraries = {}
     for parser in parsers:
         name = parser["name"]
-        assert parser["version"] == c_parsers[name]["version"]
-        assert parser["expected_output"] == c_parsers[name]["expected_output"]
-        command = shlex.split(c_runs[name]["build_command"])
-        assert command[0] == "cc" and command[1] == "-std=c11"
-        command[0:2] = ["c++", "-std=c++17"]
-        c_adapter = str(ROOT / c_parsers[name]["adapter"])
-        command[command.index(c_adapter)] = str(ROOT / parser["adapter"])
-        assert command[-2] == "-o"
-        command[-1] = str(TARGET / name)
         prebuild_command = None
-        if name == "libspng":
-            source = ROOT / "adapters/c/png/cache/source/libspng/spng.c"
-            object_file = TARGET / "spng.o"
-            prebuild_command = ["cc", "-std=c11", "-O2", "-I" + str(source.parent),
-                                "-c", str(source), "-o", str(object_file)]
-            run(prebuild_command)
-            command[command.index(str(source))] = str(object_file)
+        if name == "sfml":
+            item = extra_lock[name]
+            assert parser["version"] == item["release"]
+            assert run(["pkg-config", "--modversion", item["pkg_config"]]) == item["release"]
+            library = Path(item["local_library"])
+            digest = sha256(library.read_bytes()).hexdigest()
+            assert digest == item["local_library_sha256"]
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", item["pkg_config"]]))
+            command = ["c++", "-std=c++17", "-O2", str(ROOT / parser["adapter"]),
+                       *flags, "-o", str(TARGET / name)]
+            local_libraries[name] = {"pkg_config_version": item["release"],
+                                     "library": str(library), "library_sha256": digest}
+        else:
+            assert parser["version"] == c_parsers[name]["version"]
+            assert parser["expected_output"] == c_parsers[name]["expected_output"]
+            command = shlex.split(c_runs[name]["build_command"])
+            assert command[0] == "cc" and command[1] == "-std=c11"
+            command[0:2] = ["c++", "-std=c++17"]
+            c_adapter = str(ROOT / c_parsers[name]["adapter"])
+            command[command.index(c_adapter)] = str(ROOT / parser["adapter"])
+            assert command[-2] == "-o"
+            command[-1] = str(TARGET / name)
+            if name == "libspng":
+                source = ROOT / "adapters/c/png/cache/source/libspng/spng.c"
+                object_file = TARGET / "spng.o"
+                prebuild_command = ["cc", "-std=c11", "-O2", "-I" + str(source.parent),
+                                    "-c", str(source), "-o", str(object_file)]
+                run(prebuild_command)
+                command[command.index(str(source))] = str(object_file)
         run(command)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute))
@@ -65,6 +81,8 @@ def main() -> None:
               "platform": platform.platform(),
               "compiler": run(["c++", "--version"]).splitlines()[0],
               "source_lock": "data/c/png/source-lock.json",
+              "extra_source_lock": "data/cpp/png/extra-source-lock.json",
+              "local_libraries": local_libraries,
               "prerequisite_verifier": "scripts/verify_c_png.py",
               "control": "controls/png/red-green.png",
               "control_sha256": verify_c_png.CONTROL_SHA256,

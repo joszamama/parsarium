@@ -132,10 +132,11 @@ The C × PNG verifier uses `cc`, CMake, `pkg-config`, and zlib development heade
 
 The C++ × PNG verifier recompiles format-aware call sites as C++17 against the
 same 20 pinned library releases, after rerunning the C source and binary checks.
-The observed result is **20/20 package paths passing** the valid PNG control.
-These are libraries usable from C++; their parser implementations and release
-pins are shared with the C cell. Seven plausible C++ leads, including OpenCV,
-OpenImageIO, and Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
+It also checks an exact-release, binary-hashed SFML library. The observed result
+is **21/21 package paths passing** the valid PNG control. Twenty paths share
+releases and parser implementations with C; SFML provides a native C++ API but
+bundles stb_image. Six plausible C++ leads, including OpenCV, OpenImageIO, and
+Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
 does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
