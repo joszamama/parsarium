@@ -107,6 +107,13 @@ def main() -> None:
                        "-lz", "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "build": "compiled pinned junzip.c with zlib for DEFLATE"}
+        elif name == "zipc":
+            source = SOURCE / name
+            command = ["cc", "-std=c11", "-O2", "-DZIPC_ONLY_READ",
+                       "-I" + str(source), str(ROOT / parser["adapter"]),
+                       str(source / "zipc.c"), "-lz", "-o", str(TARGET / name)]
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "build": "compiled pinned zipc.c read-only with zlib"}
         elif name == "sqlite":
             library = Path(item["local_library"])
             digest = sha256(library.read_bytes()).hexdigest()
@@ -180,8 +187,11 @@ def main() -> None:
         run(command, env)
         execute = [str(TARGET / name), str(CONTROL)]
         output = json.loads(run(execute, env))
-        assert parser["expected_output"] == EXPECTED
-        assert output == EXPECTED, (name, output)
+        if name == "zipc":
+            assert parser["expected_output"] == {"content": EXPECTED["content"]}
+        else:
+            assert parser["expected_output"] == EXPECTED
+        assert output == parser["expected_output"], (name, output)
         rows.append({"package": name, "version": parser["version"],
                      "control": parser["control"], "build_command": shlex.join(command),
                      "command": shlex.join(execute), "output": output, "pass": True})

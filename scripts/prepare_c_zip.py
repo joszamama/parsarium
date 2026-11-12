@@ -48,7 +48,7 @@ def prepare(name: str) -> None:
 
 
 def main() -> None:
-    for name in ("kuba-zip", "zziplib", "unarr", "lowzip", "unziplib", "infozip-unzip", "junzip", "sqlite"):
+    for name in ("kuba-zip", "zziplib", "unarr", "lowzip", "unziplib", "infozip-unzip", "junzip", "sqlite", "zipc"):
         prepare(name)
         print(f"{name}: pinned {LOCK[name]['release']} source verified")
     name = "libc7zip"

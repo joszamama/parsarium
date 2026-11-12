@@ -1,6 +1,6 @@
 # C × ZIP: verified parser ranking
 
-16 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T11:45:39.757179+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 3 path(s) lack a metric and remain unranked.
+17 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T11:50:06.305574+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 3 path(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -19,6 +19,7 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | 11 | [junzip](https://github.com/jokkebk/JUnzip/blob/v0.1.1/junzip.h) | v0.1.1 | 63 | entry name and decompressed entry bytes | JUnzip ZIP record reader with zlib DEFLATE |
 | 12 | [lowzip](https://github.com/svaarala/lowzip/blob/v1.0.1/README.md) | 1.0.1 | 46 | entry name and decompressed entry bytes | lowzip ZIP reader |
 | 13 | [libc7zip](https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h) | v1.10.0 | 18 | entry name and decompressed entry bytes | libc7zip → lib7zip → 7-Zip ZIP engine |
+| 14 | [zipc](https://www.msweet.org/zipc/zipc.html) | v1.3 | 13 | decompressed bytes for a known named ZIP entry; no entry enumeration API verified | zipc ZIP container reader with zlib DEFLATE |
 | unranked | [infozip-unzip](https://github.com/madler/unzip/blob/master/unzip.h) | 6.0 | unknown | entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API | Info-ZIP UnZip 6.0 engine |
 | unranked | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | unknown | entry name and decompressed entry bytes | libgsf ZIP reader |
 | unranked | [minizip](https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h) | 1.4 | unknown | entry name and decompressed entry bytes | classic MiniZip |

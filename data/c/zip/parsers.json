@@ -288,5 +288,21 @@
     "family": "SQLite Zipfile virtual table with zlib DEFLATE",
     "family_note": "Official SQLite ext/misc/zipfile.c extension parses ZIP archive records and delegates DEFLATE to zlib; its repository stars measure all SQLite usage, not Zipfile adoption.",
     "adapter": "adapters/c/zip/sqlite.c"
+  },
+  {
+    "name": "zipc",
+    "version": "v1.3",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/michaelrsweet/zipc/blob/v1.3/LICENSE",
+    "documentation": "https://www.msweet.org/zipc/zipc.html",
+    "input_api": "zipcOpen(local_path,\"r\"); zipcOpenFile(archive,\"hello.txt\"); zipcFileRead; zipcFileFinish",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "content": "parsarium\n"
+    },
+    "scope": "decompressed bytes for a known named ZIP entry; no entry enumeration API verified",
+    "family": "zipc ZIP container reader with zlib DEFLATE",
+    "family_note": "zipc parses ZIP container records itself and uses zlib for DEFLATE. Its public reading API opens a named entry; this path does not claim enumeration or an observed entry count.",
+    "adapter": "adapters/c/zip/zipc.c"
   }
 ]

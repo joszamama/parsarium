@@ -205,6 +205,15 @@ def main() -> None:
                 run(step)
                 prerequisite_build_commands.append(shlex.join(step))
                 command[command.index(str(source))] = str(obj)
+            if name == "zipc":
+                source = ROOT / "adapters/c/zip/cache/source/zipc/zipc.c"
+                obj = TARGET / "zipc_lib.o"
+                step = ["cc", "-std=c11", "-O2", "-DZIPC_ONLY_READ",
+                        "-I" + str(source.parent), "-c", str(source),
+                        "-o", str(obj)]
+                run(step)
+                prerequisite_build_commands.append(shlex.join(step))
+                command[command.index(str(source))] = str(obj)
             if name in ("lowzip", "junzip"):
                 command[2:2] = ["-x", "c++"]
             c_adapter = str(ROOT / c_parsers[name]["adapter"])

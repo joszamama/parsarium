@@ -482,5 +482,22 @@
     "family_note": "Official SQLite ext/misc/zipfile.c extension parses ZIP archive records and delegates DEFLATE to zlib; its repository stars measure all SQLite usage, not Zipfile adoption. The C++ path reuses the exact C-cell release and implementation.",
     "adapter": "adapters/cpp/zip/sqlite.cpp",
     "language_bridge": "C ZIP extension linked with a C++17 call site using the SQLite C API"
+  },
+  {
+    "name": "zipc",
+    "version": "v1.3",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/michaelrsweet/zipc/blob/v1.3/LICENSE",
+    "documentation": "https://www.msweet.org/zipc/zipc.html",
+    "input_api": "zipcOpen(local_path,\"r\"); zipcOpenFile(archive,\"hello.txt\"); zipcFileRead; zipcFileFinish",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "content": "parsarium\n"
+    },
+    "scope": "decompressed bytes for a known named ZIP entry; no entry enumeration API verified",
+    "family": "zipc ZIP container reader with zlib DEFLATE",
+    "family_note": "zipc parses ZIP container records itself and uses zlib for DEFLATE. Its public reading API opens a named entry; this path does not claim enumeration or an observed entry count. The C++ path reuses the exact C-cell release and parser implementation.",
+    "adapter": "adapters/cpp/zip/zipc.cpp",
+    "language_bridge": "C zipc parser linked with a C++17 call site using the documented C API"
   }
 ]

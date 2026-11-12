@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T11:46:25.906136+00:00",
+  "checked_at_utc": "2026-11-12T11:51:13.705758+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/zip/source-lock.json",
@@ -448,6 +448,22 @@
       "output": {
         "entries": 1,
         "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "zipc",
+      "version": "v1.3",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 -DZIPC_ONLY_READ -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zipc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/zipc.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipc_lib.o -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipc",
+      "configure_command": null,
+      "library_build_command": null,
+      "prerequisite_build_commands": [
+        "cc -std=c11 -O2 -DZIPC_ONLY_READ -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zipc -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/zipc/zipc.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipc_lib.o"
+      ],
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/zipc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
         "content": "parsarium\n"
       },
       "pass": true
