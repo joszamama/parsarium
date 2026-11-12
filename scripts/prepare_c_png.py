@@ -68,7 +68,7 @@ def write_files(name: str, item: dict, names: list[str], read_file) -> None:
 
 
 def main() -> None:
-    for name in ("libpng", "stb", "lodepng", "libspng"):
+    for name in ("libpng", "stb", "lodepng", "libspng", "pngle"):
         prepare(name)
         print(f"{name}: pinned {LOCK[name]['release']} source verified")
 

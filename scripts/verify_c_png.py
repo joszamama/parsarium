@@ -1,4 +1,4 @@
-"""Rebuild four pinned C PNG adapters and record valid-control observations."""
+"""Rebuild pinned C PNG adapters and record valid-control observations."""
 
 from datetime import datetime, timezone
 from hashlib import sha256
@@ -30,7 +30,7 @@ def main() -> None:
     prepare_c_png.main()
     lock = json.loads((DATA / "source-lock.json").read_text())
     parsers = json.loads((DATA / "parsers.json").read_text())
-    assert len(parsers) == 4
+    assert len(parsers) == 8
     zlib_version = run(["pkg-config", "--modversion", "zlib"])
     assert zlib_version == "1.2.12"
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -45,7 +45,28 @@ def main() -> None:
         "stb": ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / "stb"), str(ADAPTER / "stb.c"), "-lm", "-o", str(TARGET / "stb")],
         "lodepng": ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / "lodepng"), str(ADAPTER / "lodepng_adapter.c"), str(SOURCE / "lodepng/lodepng.c"), "-o", str(TARGET / "lodepng")],
         "libspng": ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / "libspng"), str(ADAPTER / "libspng_adapter.c"), str(SOURCE / "libspng/spng.c"), "-lz", "-o", str(TARGET / "libspng")],
+        "pngle": ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / "pngle"),
+                  str(ADAPTER / "pngle.c"), str(SOURCE / "pngle/pngle.c"),
+                  str(SOURCE / "pngle/miniz.c"), "-lm", "-o", str(TARGET / "pngle")],
     }
+    local_libraries = {}
+    for name, adapter_name in (("imagemagick", "imagemagick"),
+                               ("gdk-pixbuf", "gdk_pixbuf"), ("vips", "vips")):
+        item = lock[name]
+        observed = run(["pkg-config", "--modversion", item["pkg_config"]])
+        if name == "imagemagick":
+            assert observed == item["release"].rsplit("-", 1)[0]
+            assert item["release"] in run(["magick", "-version"])
+        else:
+            assert observed == item["release"]
+        library = Path(item["local_library"])
+        digest = sha256(library.read_bytes()).hexdigest()
+        assert digest == item["local_library_sha256"]
+        local_libraries[name] = {"pkg_config_version": observed, "library": str(library),
+                                 "library_sha256": digest}
+        flags = shlex.split(run(["pkg-config", "--cflags", "--libs", item["pkg_config"]]))
+        commands[name] = ["cc", "-std=c11", "-O2", str(ADAPTER / (adapter_name + ".c")),
+                          *flags, "-o", str(TARGET / name)]
     rows = []
     for parser in parsers:
         name = parser["name"]
@@ -63,6 +84,7 @@ def main() -> None:
               "libpng_source_sha256": lock["libpng"]["source_sha256"],
               "libpng_build": "CMake static png_static from pinned libpng 1.6.59 archive",
               "zlib_pkg_config_version": zlib_version,
+              "local_libraries": local_libraries,
               "control": "controls/png/red-green.png", "control_sha256": CONTROL_SHA256,
               "expected": EXPECTED, "third_party": rows, "runtime": []}
     (DATA / "verification.json").write_text(json.dumps(result, indent=2) + "\n")

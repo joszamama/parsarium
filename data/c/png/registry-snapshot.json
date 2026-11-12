@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T06:52:03.278049+00:00",
+  "captured_at_utc": "2026-11-12T07:01:25.075362+00:00",
   "search_surface": "Conan Center Index recipes tree, exact GitHub API response; project documentation used for targeted leads beyond recipe-name search",
   "search_index_api": "https://api.github.com/repos/conan-io/conan-center-index/git/trees/master?recursive=1",
   "search_limit_per_query": 100,
@@ -115,13 +115,41 @@
       "source_url": "https://github.com/randy408/libspng/archive/refs/tags/v0.7.4.tar.gz",
       "source_sha256": "47ec02be6c0a6323044600a9221b049f63e1953faf816903e7383d4dc4234487",
       "license_evidence": "https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/libspng/all/conanfile.py"
+    },
+    "imagemagick": {
+      "version": "7.1.2-31",
+      "license": "ImageMagick",
+      "source_url": "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-31.tar.gz",
+      "source_sha256": "34d9cc3acddc3e3c429d23af60eda5ceaac477a8b296ddb9469f773f44a80a5f",
+      "license_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-31/LICENSE"
+    },
+    "gdk-pixbuf": {
+      "version": "2.44.8",
+      "license": "LGPL-2.1-or-later",
+      "source_url": "https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-2.44.8.tar.xz",
+      "source_sha256": "919f529512961a12e81cd4b4b466a48c3933469e7f9a310c6513cd4fb252ba3c",
+      "license_evidence": "https://formulae.brew.sh/api/formula/gdk-pixbuf.json"
+    },
+    "vips": {
+      "version": "8.18.7",
+      "license": "LGPL-2.1-or-later",
+      "source_url": "https://github.com/libvips/libvips/releases/download/v8.18.7/vips-8.18.7.tar.xz",
+      "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
+      "license_evidence": "https://formulae.brew.sh/api/formula/vips.json"
+    },
+    "pngle": {
+      "version": "1.1.0",
+      "license": "MIT",
+      "source_url": "https://github.com/kikuchan/pngle/archive/refs/tags/v1.1.0.tar.gz",
+      "source_sha256": "ebdd8254445b07d59ca8cceafe49d2dfd71f5f57f2440d351f3006e134a5d5b6",
+      "license_evidence": "https://github.com/kikuchan/pngle/blob/v1.1.0/LICENSE"
     }
   },
   "popularity_metric": {
     "name": "GitHub repository stargazers_count",
     "source": "GitHub REST repository API",
-    "captured_at_utc": "2026-11-12T06:52:03.278093+00:00",
-    "limitation": "Repository stars are an adoption proxy, not package downloads. A repository can contain several APIs; values are compared only within this C cell. Recipe-name hits are alphabetic discovery, not this ranking.",
+    "captured_at_utc": "2026-11-12T07:01:25.075362+00:00",
+    "limitation": "Repository stars are an adoption proxy, not package downloads. Values are compared only within C. GNOME gdk-pixbuf is unranked because its primary upstream is GitLab; GitHub mirror stars would be a different signal. Recipe-name hits are discovery, not this ranking.",
     "packages": {
       "libpng": {
         "repository": "pnggroup/libpng",
@@ -130,7 +158,7 @@
       },
       "stb": {
         "repository": "nothings/stb",
-        "stars": 35005,
+        "stars": 35006,
         "url": "https://api.github.com/repos/nothings/stb"
       },
       "lodepng": {
@@ -142,7 +170,54 @@
         "repository": "randy408/libspng",
         "stars": 851,
         "url": "https://api.github.com/repos/randy408/libspng"
+      },
+      "imagemagick": {
+        "repository": "ImageMagick/ImageMagick",
+        "stars": 17848,
+        "url": "https://api.github.com/repos/ImageMagick/ImageMagick"
+      },
+      "gdk-pixbuf": {
+        "repository": "GNOME/gdk-pixbuf",
+        "stars": null,
+        "url": "https://gitlab.gnome.org/GNOME/gdk-pixbuf",
+        "reason": "GitHub mirror count is not comparable to primary upstream GitHub repositories."
+      },
+      "vips": {
+        "repository": "libvips/libvips",
+        "stars": 11801,
+        "url": "https://api.github.com/repos/libvips/libvips"
+      },
+      "pngle": {
+        "repository": "kikuchan/pngle",
+        "stars": 141,
+        "url": "https://api.github.com/repos/kikuchan/pngle"
       }
     }
-  }
+  },
+  "targeted_documentation": [
+    {
+      "query": "ImageMagick PNG C API",
+      "url": "https://imagemagick.org/magick-wand/",
+      "candidate": "imagemagick",
+      "finding": "Official MagickWand C API documents local image file input."
+    },
+    {
+      "query": "GdkPixbuf file image loader PNG",
+      "url": "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
+      "candidate": "gdk-pixbuf",
+      "finding": "Official C API accepts a local filename and detects image format."
+    },
+    {
+      "query": "libvips C image file loader PNG",
+      "url": "https://www.libvips.org/API/current/VipsImage.html",
+      "candidate": "vips",
+      "finding": "Official C API documents local image file loading; tagged PNG loader source identifies the PNG backend."
+    },
+    {
+      "query": "pngle C PNG stream decoder",
+      "url": "https://github.com/kikuchan/pngle/blob/v1.1.0/src/pngle.h",
+      "candidate": "pngle",
+      "finding": "Tagged header documents byte feed, dimensions and draw callback."
+    }
+  ]
 }

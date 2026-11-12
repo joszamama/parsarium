@@ -8,7 +8,22 @@
     "input_api": "png_image_begin_read_from_file(png_image*, const char*); png_image_finish_read(...) to RGBA pixels",
     "adapter": "adapters/c/png/libpng.c",
     "control": "controls/png/red-green.png",
-    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
     "scope": "pixels",
     "family": "libpng",
     "family_note": "Direct libpng decoder; static library is built from the pinned source archive."
@@ -22,7 +37,22 @@
     "input_api": "stbi_load(const char* filename, int*, int*, int*, int) from stb_image.h",
     "adapter": "adapters/c/png/stb.c",
     "control": "controls/png/red-green.png",
-    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
     "scope": "pixels",
     "family": "stb_image"
   },
@@ -35,7 +65,22 @@
     "input_api": "lodepng_decode32_file(unsigned char**, unsigned*, unsigned*, const char*)",
     "adapter": "adapters/c/png/lodepng_adapter.c",
     "control": "controls/png/red-green.png",
-    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
     "scope": "pixels",
     "family": "LodePNG"
   },
@@ -48,9 +93,144 @@
     "input_api": "spng_set_png_file(spng_ctx*, FILE*); spng_get_ihdr(...); spng_decode_image(...) to RGBA8",
     "adapter": "adapters/c/png/libspng_adapter.c",
     "control": "controls/png/red-green.png",
-    "expected_output": {"width": 2, "height": 1, "first": [255, 0, 0, 255], "second": [0, 255, 0, 255]},
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
     "scope": "pixels",
     "family": "libspng",
     "family_note": "Independent PNG parser using zlib for DEFLATE."
+  },
+  {
+    "name": "imagemagick",
+    "version": "7.1.2-31",
+    "license": "ImageMagick",
+    "license_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-31/LICENSE",
+    "documentation": "https://imagemagick.org/magick-wand/",
+    "input_api": "MagickReadImage(MagickWand*, const char*); MagickExportImagePixels(...)",
+    "adapter": "adapters/c/png/imagemagick.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "ImageMagick PNG coder (libpng-backed)",
+    "family_note": "MagickWand is the C API; the PNG coder delegates to libpng.",
+    "family_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-31/coders/png.c"
+  },
+  {
+    "name": "gdk-pixbuf",
+    "version": "2.44.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gdk-pixbuf.json",
+    "documentation": "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
+    "input_api": "gdk_pixbuf_new_from_file(const char*, GError**); gdk_pixbuf_read_pixels(...)",
+    "adapter": "adapters/c/png/gdk_pixbuf.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "GdkPixbuf PNG loader (libpng-backed)",
+    "family_note": "Image loader package path; PNG loader shares libpng lineage. Official upstream is GNOME GitLab, so GitHub mirror stars are omitted.",
+    "family_evidence": "https://gitlab.gnome.org/GNOME/gdk-pixbuf/-/blob/2.44.8/gdk-pixbuf/io-png.c"
+  },
+  {
+    "name": "vips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/vips.json",
+    "documentation": "https://www.libvips.org/API/current/VipsImage.html",
+    "input_api": "vips_image_new_from_file(const char*, ...); vips_image_write_to_memory(...)",
+    "adapter": "adapters/c/png/vips.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "libvips PNG loader (libpng-backed)",
+    "family_note": "Image loader package path; PNG loader shares libpng lineage.",
+    "family_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/libvips/foreign/vipspng.c"
+  },
+  {
+    "name": "pngle",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/kikuchan/pngle/blob/v1.1.0/LICENSE",
+    "documentation": "https://github.com/kikuchan/pngle/blob/v1.1.0/src/pngle.h",
+    "input_api": "pngle_feed(pngle_t*, const void*, size_t) with draw callback and pngle_get_width/height",
+    "adapter": "adapters/c/png/pngle.c",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "pixels",
+    "family": "pngle with bundled miniz",
+    "family_note": "Independent PNG parser with a bundled miniz DEFLATE implementation.",
+    "family_evidence": "https://github.com/kikuchan/pngle/blob/v1.1.0/src/pngle.c"
   }
 ]
