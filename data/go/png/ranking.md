@@ -1,6 +1,6 @@
 # Go × PNG: verified parser ranking
 
-20 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev's package-level ‘Imported by’ count captured at 2026-11-11T18:34:56.475538+00:00. It measures visible direct importers rather than downloads, and is used only within Go.
+20 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev's package-level ‘Imported by’ count captured at 2026-11-11T18:34:56.475538+00:00. It measures visible direct importers rather than downloads, and is used only within Go. 0 package(s) lack a metric and remain unranked; equal counts share a rank.
 
 Search hits and unresolved leads are separate from this ranking. See `cell.json`, `registry-snapshot.json`, and `verification.json` in this directory.
 
@@ -16,13 +16,13 @@ Search hits and unresolved leads are separate from this ranking. See `cell.json`
 | 8 | [github.com/dsoprea/go-png-image-structure/v2](https://pkg.go.dev/github.com/dsoprea/go-png-image-structure/v2@v2.0.0-20210512210324-29b889a6093d) | github.com/dsoprea/go-png-image-structure/v2@v2.0.0-20210512210324-29b889a6093d | 24 | chunks+dimensions | PNG chunk structure parser |
 | 9 | [github.com/gameparrot/fastpng](https://pkg.go.dev/github.com/gameparrot/fastpng@v0.0.0-20250305185850-d72e123a2123) | github.com/gameparrot/fastpng@v0.0.0-20250305185850-d72e123a2123 | 8 | pixels | Go image/png-derived decoder |
 | 10 | [github.com/go-images/png](https://pkg.go.dev/github.com/go-images/png@v0.2.0) | github.com/go-images/png@v0.2.0 | 1 | pixels | Go image/png fork |
-| 11 | [github.com/m8rge/go-scaled-png](https://pkg.go.dev/github.com/m8rge/go-scaled-png@v1.0.0) | github.com/m8rge/go-scaled-png@v1.0.0 | 1 | pixels | Go image/png fork with scaling |
+| 10 | [github.com/m8rge/go-scaled-png](https://pkg.go.dev/github.com/m8rge/go-scaled-png@v1.0.0) | github.com/m8rge/go-scaled-png@v1.0.0 | 1 | pixels | Go image/png fork with scaling |
+| 12 | [github.com/fumin/png](https://pkg.go.dev/github.com/fumin/png@v0.0.0-20220417120418-2266efc3c1a5) | github.com/fumin/png@v0.0.0-20220417120418-2266efc3c1a5 | 0 | pixels | Go image/png fork |
 | 12 | [github.com/gen2brain/pngn](https://pkg.go.dev/github.com/gen2brain/pngn@v0.1.3) | github.com/gen2brain/pngn@v0.1.3 | 0 | pixels | pngn decoder |
-| 13 | [github.com/tdewolff/canvas/image](https://pkg.go.dev/github.com/tdewolff/canvas/image@v0.0.0-20260923214215-09804640d00c) | github.com/tdewolff/canvas@v0.0.0-20260923214215-09804640d00c | 0 | pixels | canvas PNG image loader |
-| 14 | [github.com/woozymasta/png](https://pkg.go.dev/github.com/woozymasta/png@v1.2.0) | github.com/woozymasta/png@v1.2.0 | 0 | pixels | Go image/png fork |
-| 15 | [github.com/fumin/png](https://pkg.go.dev/github.com/fumin/png@v0.0.0-20220417120418-2266efc3c1a5) | github.com/fumin/png@v0.0.0-20220417120418-2266efc3c1a5 | 0 | pixels | Go image/png fork |
-| 16 | [github.com/knoweather/simple-png](https://pkg.go.dev/github.com/knoweather/simple-png@v1.5.0) | github.com/knoweather/simple-png@v1.5.0 | 0 | pixels | simple-png decoder |
-| 17 | [github.com/shogo82148/go-imaging/png](https://pkg.go.dev/github.com/shogo82148/go-imaging/png@v0.2.0) | github.com/shogo82148/go-imaging@v0.2.0 | 0 | pixels | Go image/png fork |
-| 18 | [github.com/magical/png](https://pkg.go.dev/github.com/magical/png@v0.0.0-20131112000825-bf2aaca8f4d6) | github.com/magical/png@v0.0.0-20131112000825-bf2aaca8f4d6 | 0 | pixels | Go image/png fork |
-| 19 | [github.com/mduvall/go-image-png/png](https://pkg.go.dev/github.com/mduvall/go-image-png/png@v0.0.0-20150701034220-46bfaa3c2537) | github.com/mduvall/go-image-png@v0.0.0-20150701034220-46bfaa3c2537 | 0 | pixels | Go image/png fork |
-| 20 | [github.com/oyamo/pngx](https://pkg.go.dev/github.com/oyamo/pngx@v0.0.0-20230307064515-ec4b3bce8a92) | github.com/oyamo/pngx@v0.0.0-20230307064515-ec4b3bce8a92 | 0 | pixels | Go image/png fork |
+| 12 | [github.com/knoweather/simple-png](https://pkg.go.dev/github.com/knoweather/simple-png@v1.5.0) | github.com/knoweather/simple-png@v1.5.0 | 0 | pixels | simple-png decoder |
+| 12 | [github.com/magical/png](https://pkg.go.dev/github.com/magical/png@v0.0.0-20131112000825-bf2aaca8f4d6) | github.com/magical/png@v0.0.0-20131112000825-bf2aaca8f4d6 | 0 | pixels | Go image/png fork |
+| 12 | [github.com/mduvall/go-image-png/png](https://pkg.go.dev/github.com/mduvall/go-image-png/png@v0.0.0-20150701034220-46bfaa3c2537) | github.com/mduvall/go-image-png@v0.0.0-20150701034220-46bfaa3c2537 | 0 | pixels | Go image/png fork |
+| 12 | [github.com/oyamo/pngx](https://pkg.go.dev/github.com/oyamo/pngx@v0.0.0-20230307064515-ec4b3bce8a92) | github.com/oyamo/pngx@v0.0.0-20230307064515-ec4b3bce8a92 | 0 | pixels | Go image/png fork |
+| 12 | [github.com/shogo82148/go-imaging/png](https://pkg.go.dev/github.com/shogo82148/go-imaging/png@v0.2.0) | github.com/shogo82148/go-imaging@v0.2.0 | 0 | pixels | Go image/png fork |
+| 12 | [github.com/tdewolff/canvas/image](https://pkg.go.dev/github.com/tdewolff/canvas/image@v0.0.0-20260923214215-09804640d00c) | github.com/tdewolff/canvas@v0.0.0-20260923214215-09804640d00c | 0 | pixels | canvas PNG image loader |
+| 12 | [github.com/woozymasta/png](https://pkg.go.dev/github.com/woozymasta/png@v1.2.0) | github.com/woozymasta/png@v1.2.0 | 0 | pixels | Go image/png fork |

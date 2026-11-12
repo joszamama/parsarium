@@ -1,0 +1,116 @@
+[
+  {
+    "name": "github.com/DeKugelschieber/go-game",
+    "status": "unresolved",
+    "reason": "PlyLoader.Load parses a local file but creates OpenGL buffers, so a headless control run without a graphics context has not been demonstrated.",
+    "source": "https://pkg.go.dev/github.com/DeKugelschieber/go-game"
+  },
+  {
+    "name": "github.com/hultan/ply-viewer/internal/ply",
+    "status": "unresolved",
+    "reason": "The ASCII PLY loader is in a Go internal package and cannot be imported by this external adapter; no documented public API has been verified.",
+    "source": "https://pkg.go.dev/github.com/hultan/ply-viewer/internal/ply"
+  },
+  {
+    "name": "github.com/df07/go-progressive-raytracer/pkg/loaders",
+    "status": "excluded",
+    "reason": "LoadPLY panicked on the valid ASCII control with 'ASCII PLY format not yet supported'; its documented header type alone is insufficient.",
+    "source": "https://pkg.go.dev/github.com/df07/go-progressive-raytracer/pkg/loaders"
+  },
+  {
+    "name": "github.com/black40x/plyfile",
+    "status": "excluded",
+    "reason": "The documented reader supports binary little-endian PLY, not the ASCII variant in this cell.",
+    "source": "https://pkg.go.dev/github.com/black40x/plyfile"
+  },
+  {
+    "name": "github.com/matt0792/ply",
+    "status": "excluded",
+    "reason": "Parse(io.Reader) rejected the valid control with 'unsupported format encoding: ascii'.",
+    "source": "https://pkg.go.dev/github.com/matt0792/ply"
+  },
+  {
+    "name": "github.com/alexbaden/go-plyfile",
+    "status": "excluded",
+    "reason": "The pinned Go wrapper fails to compile with Go 1.27.1 because its CPlyProperty argument types do not match the C function parameters; no runnable control result.",
+    "source": "https://pkg.go.dev/github.com/alexbaden/go-plyfile"
+  },
+  {
+    "name": "github.com/gorustyt/go-assimp",
+    "status": "excluded",
+    "reason": "Its importer registry includes AC, BLEND, ASSETBIN, and protoBin, but no PLY loader at the pinned release.",
+    "source": "https://pkg.go.dev/github.com/gorustyt/go-assimp"
+  },
+  {
+    "name": "github.com/dabasan/assimp-go/assimp",
+    "status": "excluded",
+    "reason": "The pinned package cannot build locally: its bundled Assimp headers omit Compiler/pushpack1.h.",
+    "source": "https://pkg.go.dev/github.com/dabasan/assimp-go/assimp"
+  },
+  {
+    "name": "github.com/nvisioner/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally: C.MAXLEN is unavailable in its headers.",
+    "source": "https://pkg.go.dev/github.com/nvisioner/assimp"
+  },
+  {
+    "name": "github.com/Adi146/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally: C.MAXLEN is unavailable in its headers.",
+    "source": "https://pkg.go.dev/github.com/Adi146/assimp"
+  },
+  {
+    "name": "github.com/raedatoui/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally: C.MAXLEN is unavailable in its headers.",
+    "source": "https://pkg.go.dev/github.com/raedatoui/assimp"
+  },
+  {
+    "name": "github.com/huoshan017/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally: C.MAXLEN is unavailable in its headers.",
+    "source": "https://pkg.go.dev/github.com/huoshan017/assimp"
+  },
+  {
+    "name": "github.com/drewwoods/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally: C.MAXLEN is unavailable in its headers.",
+    "source": "https://pkg.go.dev/github.com/drewwoods/assimp"
+  },
+  {
+    "name": "github.com/chwevans/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally: C.MAXLEN is unavailable in its headers.",
+    "source": "https://pkg.go.dev/github.com/chwevans/assimp"
+  },
+  {
+    "name": "github.com/funny2x/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally against the installed Assimp headers.",
+    "source": "https://pkg.go.dev/github.com/funny2x/assimp"
+  },
+  {
+    "name": "github.com/krux02/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally against the installed Assimp headers.",
+    "source": "https://pkg.go.dev/github.com/krux02/assimp"
+  },
+  {
+    "name": "github.com/malanak2/assimp",
+    "status": "excluded",
+    "reason": "The pinned binding cannot build locally against the installed Assimp headers.",
+    "source": "https://pkg.go.dev/github.com/malanak2/assimp"
+  },
+  {
+    "name": "github.com/davsk/ply",
+    "status": "excluded",
+    "reason": "The module is an STL-rendering program rather than a documented PLY input library.",
+    "source": "https://pkg.go.dev/github.com/davsk/ply"
+  },
+  {
+    "name": "github.com/btmura/ponzi2/internal/ply",
+    "status": "excluded",
+    "reason": "Decode(io.Reader) is in an internal package inaccessible to external Go modules; no public importable API is available.",
+    "source": "https://pkg.go.dev/github.com/btmura/ponzi2/internal/ply"
+  }
+]

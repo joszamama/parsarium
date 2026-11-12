@@ -1,0 +1,332 @@
+{
+  "checked_at_utc": "2026-11-12T00:00:01.312594+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.27.1 darwin/arm64",
+  "assimp": "6.0.6",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "control_meaning": "Valid ASCII PLY with three vertices and one triangle face",
+  "native_setup": "bash scripts/prepare_go_ascii_ply_native.sh",
+  "third_party": [
+    {
+      "package": "github.com/EliCDavis/polyform/formats/ply",
+      "module": "github.com/EliCDavis/polyform",
+      "version": "v0.44.0",
+      "scope": "ASCII PLY vertex and face counts",
+      "command": "go run . github.com/EliCDavis/polyform/formats/ply ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/rm4n0s/glutter/model/ply",
+      "module": "github.com/rm4n0s/glutter",
+      "version": "v1.17.0",
+      "scope": "ASCII PLY mesh and face counts",
+      "command": "go run . github.com/rm4n0s/glutter/model/ply ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/chenzhekl/goply",
+      "module": "github.com/chenzhekl/goply",
+      "version": "v0.0.0-20190930133256-258c2381defd",
+      "scope": "ASCII PLY vertex and face counts",
+      "command": "go run . github.com/chenzhekl/goply ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/thebanri/limoni/graphics",
+      "module": "github.com/thebanri/limoni",
+      "version": "v0.16.0",
+      "scope": "ASCII PLY vertex and face counts",
+      "command": "go run . github.com/thebanri/limoni/graphics ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "nimbleterminal.dev/nt3d/mesh",
+      "module": "nimbleterminal.dev/nt3d",
+      "version": "v0.8.1",
+      "scope": "ASCII PLY object and triangle counts",
+      "command": "go run . nimbleterminal.dev/nt3d/mesh ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "objects": 1
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/malcolmston/opencv/surface_matching",
+      "module": "github.com/malcolmston/opencv",
+      "version": "v0.8.0",
+      "scope": "ASCII PLY vertex count and coordinate",
+      "command": "go run . github.com/malcolmston/opencv/surface_matching ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "first": [
+          0,
+          0,
+          0
+        ],
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/borud/pointcloud",
+      "module": "github.com/borud/pointcloud",
+      "version": "v0.6.1",
+      "scope": "ASCII PLY vertex count and coordinate bounds",
+      "command": "go run . github.com/borud/pointcloud ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "bounds": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/cobaltgray/go-plyfile",
+      "module": "github.com/cobaltgray/go-plyfile",
+      "version": "v0.0.0-20210513130740-b21b0efca069",
+      "scope": "ASCII PLY vertex count and coordinate",
+      "command": "go run . github.com/cobaltgray/go-plyfile ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "last": {
+          "X": 0,
+          "Y": 1,
+          "Z": 0
+        },
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/ecopia-map/go-plyfile",
+      "module": "github.com/ecopia-map/go-plyfile",
+      "version": "v1.0.0",
+      "scope": "ASCII PLY vertex count and coordinate",
+      "command": "go run . github.com/ecopia-map/go-plyfile ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "last": {
+          "X": 0,
+          "Y": 1,
+          "Z": 0
+        },
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/rishabh-bector/assimp-golang",
+      "module": "github.com/rishabh-bector/assimp-golang",
+      "version": "v0.0.0-20190130041627-cbac4dcfdaf3",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run . github.com/rishabh-bector/assimp-golang ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/bloeys/assimp-go/asig",
+      "module": "github.com/bloeys/assimp-go",
+      "version": "v0.6.0",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run . github.com/bloeys/assimp-go/asig ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/ajermaky/assimp-go/v2/asig",
+      "module": "github.com/ajermaky/assimp-go/v2",
+      "version": "v2.0.0-20240713211439-0860f3b5f93c",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run . github.com/ajermaky/assimp-go/v2/asig ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/unixpickle/model3d/fileformats",
+      "module": "github.com/unixpickle/model3d",
+      "version": "v0.4.23",
+      "scope": "ASCII PLY vertex and face counts",
+      "command": "go run . github.com/unixpickle/model3d/fileformats ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/ARF-DEV/assimp-go/asig",
+      "module": "github.com/ARF-DEV/assimp-go",
+      "version": "v0.0.3",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run . github.com/ARF-DEV/assimp-go/asig ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/BhaumikTalwar/assimp-go/asig",
+      "module": "github.com/BhaumikTalwar/assimp-go",
+      "version": "v0.2.0",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run . github.com/BhaumikTalwar/assimp-go/asig ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/pydpll/dedalo/obj",
+      "module": "github.com/pydpll/dedalo",
+      "version": "v0.0.0-20260811120505-e095fa690fcf",
+      "scope": "ASCII PLY vertex and face counts",
+      "command": "go run . github.com/pydpll/dedalo/obj ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/barnex/bruteray/tracer/objects/ply",
+      "module": "github.com/barnex/bruteray",
+      "version": "v0.0.0-20200208170526-405cb2525501",
+      "scope": "ASCII PLY vertex and face counts",
+      "command": "go run . github.com/barnex/bruteray/tracer/objects/ply ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/NOT-REAL-GAMES/assimpgo",
+      "module": "github.com/NOT-REAL-GAMES/assimpgo",
+      "version": "v0.0.0-20260306134222-05660fb62c9d",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run ./native_notreal ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp cflags and libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/tbogdala/assimp-go",
+      "module": "github.com/tbogdala/assimp-go",
+      "version": "v0.0.0-20160907223021-d10e2135f9fe",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run ./native_tbogdala ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp cflags and libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/sg3des/assimp-go",
+      "module": "github.com/sg3des/assimp-go",
+      "version": "v0.0.0-20160907223021-d10e2135f9fe",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run ./native_sg3des ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp cflags and libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    },
+    {
+      "package": "github.com/PetrusJPrinsloo/assimp-go",
+      "module": "github.com/PetrusJPrinsloo/assimp-go",
+      "version": "v0.0.0-20160907223021-d10e2135f9fe",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "go run ./native_petrus ../../../controls/ascii_ply/triangle.ply",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "assimp cflags and libs from pkg-config; local Greg Turk plyfile archive and bundled Assimp 5 runtime"
+    }
+  ]
+}

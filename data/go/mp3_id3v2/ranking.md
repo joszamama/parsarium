@@ -1,6 +1,6 @@
 # Go × MP3 with ID3v2: verified parser ranking
 
-20 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev's package-level ‘Imported by’ count captured at 2026-11-11T19:19:51.493289+00:00. It measures visible direct importers rather than downloads, and is used only within Go.
+20 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev's package-level ‘Imported by’ count captured at 2026-11-11T19:19:51.493289+00:00. It measures visible direct importers rather than downloads, and is used only within Go. 0 package(s) lack a metric and remain unranked; equal counts share a rank.
 
 Search hits and unresolved leads are separate from this ranking. See `cell.json`, `registry-snapshot.json`, and `verification.json` in this directory.
 
@@ -19,10 +19,10 @@ Search hits and unresolved leads are separate from this ranking. See `cell.json`
 | 11 | [github.com/icanhazbroccoli/tag](https://pkg.go.dev/github.com/icanhazbroccoli/tag@v0.0.0-20210306220707-0c387c570328) | github.com/icanhazbroccoli/tag@v0.0.0-20210306220707-0c387c570328 | 4 | ID3v2.3 title | dhowden/tag lineage |
 | 12 | [honnef.co/go/id3](https://pkg.go.dev/honnef.co/go/id3@v0.0.0-20250113165337-e36fa5d059c5) | honnef.co/go/id3@v0.0.0-20250113165337-e36fa5d059c5 | 3 | ID3v2.3 title | honnef ID3 parser |
 | 13 | [github.com/dece2183/go-stream-mp3](https://pkg.go.dev/github.com/dece2183/go-stream-mp3@v1.0.2) | github.com/dece2183/go-stream-mp3@v1.0.2 | 2 | decoded PCM bytes and sample rate | hajime/go-mp3 lineage |
-| 14 | [github.com/fgergo/mp3](https://pkg.go.dev/github.com/fgergo/mp3@v1.0.0) | github.com/fgergo/mp3@v1.0.0 | 2 | MPEG frame size and samples | tcolgate MP3 frame lineage |
-| 15 | [github.com/mattetti/audio/mp3](https://pkg.go.dev/github.com/mattetti/audio/mp3@v0.0.0-20240411020228-c5379f9b5b61) | github.com/mattetti/audio@v0.0.0-20240411020228-c5379f9b5b61 | 2 | reported duration and frame count | tcolgate MP3 frame lineage |
-| 16 | [github.com/qiniu/audio/mp3](https://pkg.go.dev/github.com/qiniu/audio/mp3@v0.2.1) | github.com/qiniu/audio@v0.2.1 | 2 | decoded PCM bytes and audio format | hajime/go-mp3 wrapper |
-| 17 | [github.com/sa6mwa/mp3duration](https://pkg.go.dev/github.com/sa6mwa/mp3duration@v0.0.0-20221104103912-0716b1a5de6e) | github.com/sa6mwa/mp3duration@v0.0.0-20221104103912-0716b1a5de6e | 2 | reported duration and frame count | sa6mwa MP3 duration reader |
-| 18 | [github.com/gcottom/mp3meta](https://pkg.go.dev/github.com/gcottom/mp3meta@v0.0.4) | github.com/gcottom/mp3meta@v0.0.4 | 2 | ID3v2.3 title | gcottom MP3 tag reader |
-| 19 | [github.com/guregu/tag](https://pkg.go.dev/github.com/guregu/tag@v0.0.3) | github.com/guregu/tag@v0.0.3 | 2 | ID3v2.3 title | dhowden/tag lineage |
-| 20 | [github.com/frolovo22/tag](https://pkg.go.dev/github.com/frolovo22/tag@v0.0.2) | github.com/frolovo22/tag@v0.0.2 | 2 | ID3v2.3 title with trailing NUL | frolovo22 ID3 parser |
+| 13 | [github.com/fgergo/mp3](https://pkg.go.dev/github.com/fgergo/mp3@v1.0.0) | github.com/fgergo/mp3@v1.0.0 | 2 | MPEG frame size and samples | tcolgate MP3 frame lineage |
+| 13 | [github.com/frolovo22/tag](https://pkg.go.dev/github.com/frolovo22/tag@v0.0.2) | github.com/frolovo22/tag@v0.0.2 | 2 | ID3v2.3 title with trailing NUL | frolovo22 ID3 parser |
+| 13 | [github.com/gcottom/mp3meta](https://pkg.go.dev/github.com/gcottom/mp3meta@v0.0.4) | github.com/gcottom/mp3meta@v0.0.4 | 2 | ID3v2.3 title | gcottom MP3 tag reader |
+| 13 | [github.com/guregu/tag](https://pkg.go.dev/github.com/guregu/tag@v0.0.3) | github.com/guregu/tag@v0.0.3 | 2 | ID3v2.3 title | dhowden/tag lineage |
+| 13 | [github.com/mattetti/audio/mp3](https://pkg.go.dev/github.com/mattetti/audio/mp3@v0.0.0-20240411020228-c5379f9b5b61) | github.com/mattetti/audio@v0.0.0-20240411020228-c5379f9b5b61 | 2 | reported duration and frame count | tcolgate MP3 frame lineage |
+| 13 | [github.com/qiniu/audio/mp3](https://pkg.go.dev/github.com/qiniu/audio/mp3@v0.2.1) | github.com/qiniu/audio@v0.2.1 | 2 | decoded PCM bytes and audio format | hajime/go-mp3 wrapper |
+| 13 | [github.com/sa6mwa/mp3duration](https://pkg.go.dev/github.com/sa6mwa/mp3duration@v0.0.0-20221104103912-0716b1a5de6e) | github.com/sa6mwa/mp3duration@v0.0.0-20221104103912-0716b1a5de6e | 2 | reported duration and frame count | sa6mwa MP3 duration reader |

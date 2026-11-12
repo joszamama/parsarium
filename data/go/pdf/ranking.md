@@ -1,6 +1,6 @@
 # Go × PDF: verified parser ranking
 
-20 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev's package-level ‘Imported by’ count captured at 2026-11-11T19:30:14.841653+00:00. It measures visible direct importers rather than downloads, and is used only within Go.
+20 verified third-party packages; working goal 20, original ceiling 30. The metric is pkg.go.dev's package-level ‘Imported by’ count captured at 2026-11-11T19:30:14.841653+00:00. It measures visible direct importers rather than downloads, and is used only within Go. 0 package(s) lack a metric and remain unranked; equal counts share a rank.
 
 Search hits and unresolved leads are separate from this ranking. See `cell.json`, `registry-snapshot.json`, and `verification.json` in this directory.
 
@@ -16,13 +16,13 @@ Search hits and unresolved leads are separate from this ranking. See `cell.json`
 | 8 | [github.com/dslipak/pdf](https://pkg.go.dev/github.com/dslipak/pdf@v0.0.2) | github.com/dslipak/pdf@v0.0.2 | 28 | page count | rsc PDF reader lineage |
 | 9 | [github.com/aspose-pdf-foss/aspose-pdf-foss-for-go](https://pkg.go.dev/github.com/aspose-pdf-foss/aspose-pdf-foss-for-go@v0.16.0) | github.com/aspose-pdf-foss/aspose-pdf-foss-for-go@v0.16.0 | 22 | page count | Aspose PDF FOSS |
 | 10 | [github.com/go-pdfkit/reader](https://pkg.go.dev/github.com/go-pdfkit/reader@v0.10.0) | github.com/go-pdfkit/reader@v0.10.0 | 17 | page count | go-pdfkit reader family |
+| 11 | [github.com/dcu/pdf](https://pkg.go.dev/github.com/dcu/pdf@v0.0.0-20190612170416-c8b299d05f89) | github.com/dcu/pdf@v0.0.0-20190612170416-c8b299d05f89 | 4 | page count | rsc PDF reader lineage |
 | 11 | [github.com/giraffesyo/pdf](https://pkg.go.dev/github.com/giraffesyo/pdf@v0.9.0) | github.com/giraffesyo/pdf@v0.9.0 | 4 | page count | giraffesyo PDF extractor |
-| 12 | [github.com/go-pdfkit/extract](https://pkg.go.dev/github.com/go-pdfkit/extract@v0.11.0) | github.com/go-pdfkit/extract@v0.11.0 | 4 | page text | go-pdfkit reader family |
-| 13 | [seehuhn.de/go/pdf](https://pkg.go.dev/seehuhn.de/go/pdf@v0.8.0) | seehuhn.de/go/pdf@v0.8.0 | 4 | PDF version | seehuhn PDF reader |
-| 14 | [github.com/dcu/pdf](https://pkg.go.dev/github.com/dcu/pdf@v0.0.0-20190612170416-c8b299d05f89) | github.com/dcu/pdf@v0.0.0-20190612170416-c8b299d05f89 | 4 | page count | rsc PDF reader lineage |
+| 11 | [github.com/go-pdfkit/extract](https://pkg.go.dev/github.com/go-pdfkit/extract@v0.11.0) | github.com/go-pdfkit/extract@v0.11.0 | 4 | page text | go-pdfkit reader family |
+| 11 | [seehuhn.de/go/pdf](https://pkg.go.dev/seehuhn.de/go/pdf@v0.8.0) | seehuhn.de/go/pdf@v0.8.0 | 4 | PDF version | seehuhn PDF reader |
 | 15 | [github.com/ajroetker/pdf](https://pkg.go.dev/github.com/ajroetker/pdf@v0.0.1-antfly001) | github.com/ajroetker/pdf@v0.0.1-antfly001 | 3 | page count | rsc PDF reader lineage |
+| 16 | [gitee.com/leijacob/pdf](https://pkg.go.dev/gitee.com/leijacob/pdf@v1.1.7) | gitee.com/leijacob/pdf@v1.1.7 | 2 | page count | rsc PDF reader lineage |
 | 16 | [github.com/oneplus1000/pdf](https://pkg.go.dev/github.com/oneplus1000/pdf@v0.1.2) | github.com/oneplus1000/pdf@v0.1.2 | 2 | page count | rsc PDF reader lineage |
-| 17 | [gitee.com/leijacob/pdf](https://pkg.go.dev/gitee.com/leijacob/pdf@v1.1.7) | gitee.com/leijacob/pdf@v1.1.7 | 2 | page count | rsc PDF reader lineage |
-| 18 | [github.com/registrobr/pdf](https://pkg.go.dev/github.com/registrobr/pdf@v0.2.9) | github.com/registrobr/pdf@v0.2.9 | 2 | page count | rsc PDF reader lineage |
+| 16 | [github.com/registrobr/pdf](https://pkg.go.dev/github.com/registrobr/pdf@v0.2.9) | github.com/registrobr/pdf@v0.2.9 | 2 | page count | rsc PDF reader lineage |
 | 19 | [github.com/benoitkugler/pdf/reader](https://pkg.go.dev/github.com/benoitkugler/pdf/reader@v0.0.15) | github.com/benoitkugler/pdf@v0.0.15 | 1 | page count | benoitkugler PDF model |
-| 20 | [github.com/casibase/pdf](https://pkg.go.dev/github.com/casibase/pdf@v1.2.0) | github.com/casibase/pdf@v1.2.0 | 1 | page count | rsc PDF reader lineage |
+| 19 | [github.com/casibase/pdf](https://pkg.go.dev/github.com/casibase/pdf@v1.2.0) | github.com/casibase/pdf@v1.2.0 | 1 | page count | rsc PDF reader lineage |

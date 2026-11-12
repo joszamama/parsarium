@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Go",
+  "format": "ASCII PLY",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Go 1.27.1 standard library",
+      "official_documentation_scope": [
+        "https://pkg.go.dev/std@go1.27.1",
+        "https://pkg.go.dev/io@go1.27.1",
+        "https://pkg.go.dev/image@go1.27.1"
+      ],
+      "finding": "The versioned standard-library package inventory has no PLY/Stanford mesh decoder. io.Reader and os.Open provide bytes but do not interpret PLY headers or vertices. image.Decode dispatches to registered image decoders, not a bundled PLY parser. No documented format-aware standard API was available to run against the control."
+    }
+  ],
+  "limit": "This covers documented Go 1.27.1 standard-library APIs; third-party bindings and installed native libraries are separate."
+}

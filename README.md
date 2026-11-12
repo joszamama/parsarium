@@ -2,11 +2,11 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains a verified JavaScript × PNG pilot,
-JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, and ASCII PNM,
-Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, and ASCII PNM,
+JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
+Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, and an explicit 88-cell work
-matrix. There are 29 cells at the 20-parser target and 59
+matrix. There are 31 cells at the 20-parser target and 57
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -47,12 +47,13 @@ python3 scripts/verify_go_mp4.py
 python3 scripts/verify_go_mp3_id3v2.py
 python3 scripts/verify_go_pdf.py
 python3 scripts/verify_go_svg.py
+brew install assimp
+python3 scripts/verify_go_ascii_ply.py
 python3 controls/ascii_pnm/make_control.py
 python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
 uv pip sync adapters/python/png/requirements.lock --python adapters/python/png/.venv/bin/python --require-hashes
 python3 scripts/verify_python_png.py
-brew install assimp
 uv venv --python python3.12 adapters/python/ascii_ply/.venv
 CMAKE_POLICY_VERSION_MINIMUM=3.5 uv pip sync adapters/python/ascii_ply/requirements.lock --python adapters/python/ascii_ply/.venv/bin/python --require-hashes
 python3 scripts/verify_python_ascii_ply.py
@@ -259,6 +260,18 @@ passes; plain `go mod tidy` fails because an upstream `bu/govips` test imports a
 removed `davidbyttow/govips` package. Use `go mod tidy -e` if refreshing the
 module graph. The separate Go 1.27.1 standard-library inventory records no
 PNM-aware parser API.
+
+`verify_go_ascii_ply.py` uses Go 1.27.1 and the valid three-vertex,
+one-triangle ASCII PLY control (SHA-256
+`d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378`).
+The observed result is **21/21 third-party package paths passing**. Nine are
+bindings to the Assimp importer and two share the Greg Turk C PLY parser, so
+the ranking records 12 parser families. Some readers expose only vertices.
+`go.mod` and `go.sum` pin the Go packages; the verifier builds the C PLY
+archive from its pinned module and configures the locally installed Assimp
+development library through `pkg-config`. The recorded native Assimp version is
+6.0.6 on macOS arm64. The separate Go 1.27.1 standard-library inventory finds
+no PLY-aware parser API.
 
 `verify_python_png.py` uses CPython 3.13.1 and the two valid local PNG
 controls. `requirements.in` pins 21 top-level releases; the generated
@@ -532,6 +545,12 @@ or quality judgment.
   plausible leads remain unresolved. Five accepted bindings share libvips,
   and several modules share Go PNM code. The
   [standard-library inventory](data/go/ascii_pnm/standard.json) records the
+  scoped Go 1.27.1 finding.
+- [Go × ASCII PLY ranking](data/go/ascii_ply/ranking.md): 21 package paths
+  verified on the valid triangle control, representing 12 recorded parser
+  families. Six pkg.go.dev queries saved 83 hits and 81 unique paths; two
+  plausible leads remain unresolved. The
+  [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
 - [Python × PNG ranking](data/python/png/ranking.md): 21 packages verified
   on local pixel or text-chunk controls. Seven bounded PyPI name filters

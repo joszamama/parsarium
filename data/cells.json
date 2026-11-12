@@ -473,15 +473,29 @@
     {
       "ecosystem": "go",
       "format": "ascii_ply",
-      "status": "not_started",
+      "status": "verified_goal_met_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 21,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "ply",
+        "ply reader",
+        "ply parser",
+        "polygon file format",
+        "point cloud ply",
+        "ply mesh"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 83,
+      "unique_search_hits": 81,
+      "unresolved_documentation_leads": 2,
+      "uncertainty": "Six pkg.go.dev public package-search queries saved 83 hits and 81 unique package paths; windows returned 78, 0, 0, 2, 2, and 1 hits. The broad 'ply' window contains many unrelated packages, and the HTML pages give no total result count. Documentation searches added candidate bindings not exposed in these result windows. Two plausible leads remain unresolved: a graphics-context-bound loader and an internal-only viewer loader. Other documented leads were excluded after ASCII rejection, compile failure, or absent public PLY API. The valid triangle control proves only the labeled vertex/face scope. Twenty-one Go package paths passed, but nine share Assimp and two share Greg Turk's C PLY parser; the 21 paths represent 12 recorded parser families, not 21 independent engines. pkg.go.dev Imported by counts are package-level adoption signals, not downloads.",
+      "third_party_evidence": "data/go/ascii_ply/parsers.json",
+      "third_party_control_results": "data/go/ascii_ply/verification.json",
+      "runtime_evidence": "data/go/ascii_ply/standard.json",
+      "registry_snapshot": "data/go/ascii_ply/registry-snapshot.json",
+      "unresolved_leads": "data/go/ascii_ply/leads.json"
     },
     {
       "ecosystem": "go",
