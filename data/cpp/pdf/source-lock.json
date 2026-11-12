@@ -94,5 +94,31 @@
     "local_header_sha256": "c38647b43669a50c688b624bb5154b2fa9ba03c3041c0ab0cc29b509ff91101d",
     "build": "cmake -S <source> -B <cache>/pdfwriter-build -DCMAKE_BUILD_TYPE=Release -DPDFHUMMUS_NO_DCT=TRUE -DPDFHUMMUS_NO_TIFF=TRUE -DPDFHUMMUS_NO_PNG=TRUE -DUSE_BUNDLED=FALSE -DUSE_UNBUNDLED_FALLBACK_BUNDLED=TRUE; cmake --build <cache>/pdfwriter-build --target PDFWriter -j4",
     "repository": "https://github.com/galkahana/PDF-Writer"
+  },
+  "pdf4qt": {
+    "release": "1.6.0.0",
+    "license": "MIT",
+    "source_url": "https://codeload.github.com/JakubMelka/PDF4QT/tar.gz/refs/tags/v1.6.0.0",
+    "source_sha256": "a5f9952723acbb8a2431207cf76e53a17941292fbd003a2ed1b79503677ab2ec",
+    "source_header_member": "PDF4QT-1.6.0.0/Pdf4QtLibCore/sources/pdfdocumentreader.h",
+    "local_header_sha256": "1c93d8712125e9c2d8b0f10e8bcc684ce40a9a57004621801fcceb4e9f454100",
+    "patch": "scripts/patch_pdf4qt_core.py",
+    "patch_sha256": "7faf6e65c246c26d67dc62dc4ce3a1593ab25c545c3a1d6c020879061bfe3c36",
+    "installed_dependencies": {
+      "qtbase": "6.12.0_2",
+      "qtsvg": "6.12.0_1",
+      "qttools": "6.12.0_1",
+      "openssl@3": "3.5.9",
+      "fontconfig": "2.18.3"
+    },
+    "build_dependencies": {
+      "blend2d": {
+        "release": "6dbc2cefbc996379e07104e34519a440b49b15d7",
+        "source_url": "https://codeload.github.com/blend2d/blend2d/tar.gz/6dbc2cefbc996379e07104e34519a440b49b15d7",
+        "source_sha256": "212a77ceebf8c37ad5ca7e7eac1757ce7aa911b88085b076a9ed24f6de6e36fa",
+        "source_reference": "PDF4QT-1.6.0.0/vcpkg/overlays/general/blend2d/portfile.cmake"
+      }
+    },
+    "repository": "https://github.com/JakubMelka/PDF4QT"
   }
 }

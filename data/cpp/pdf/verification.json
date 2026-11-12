@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T22:53:37.034839+00:00",
+  "checked_at_utc": "2026-11-12T23:13:29.547284+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,7 +31,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "7c48e75b8555deb05756ffbab4f1f867ee6ee512ed371871f0f553f159542a8c",
+      "local_library_sha256": "c62b39bb5d118b3ce0f775b77587c4ac8d220f1837b94690ddcaa8e95e2ac021",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -43,6 +43,11 @@
       "source_sha256": "0a36815ccc9d207028567f90039785c824b211169ba5da68de84d0c15455ab62",
       "local_library_sha256": "93dbf8bb5101c0325e921845f74f345a47a2ee81ff0c52cd83640a2cc4f7e098",
       "local_header_sha256": "c38647b43669a50c688b624bb5154b2fa9ba03c3041c0ab0cc29b509ff91101d"
+    },
+    "pdf4qt": {
+      "source_sha256": "a5f9952723acbb8a2431207cf76e53a17941292fbd003a2ed1b79503677ab2ec",
+      "local_library_sha256": "652f5b992304af7c6edf12c4f6037aa66b4772317714dfa7ed110c45b2917110",
+      "local_header_sha256": "1c93d8712125e9c2d8b0f10e8bcc684ce40a9a57004621801fcceb4e9f454100"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -131,6 +136,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/PDF-Writer-4.6.2/PDFWriter /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdfwriter.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfwriter-build/PDFWriter/libPDFWriter.a /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdfwriter-build/LibAesgm/libLibAesgm.a -L/opt/homebrew/opt/freetype/lib -lfreetype -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfwriter",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdfwriter /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "pdf4qt",
+      "version": "1.6.0.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++20 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/PDF4QT-1.6.0.0/Pdf4QtLibCore/sources -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdf4qt-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdf4qt.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdf4qt-build/bin/libPdf4QtLibCore.1.6.0.0.dylib -F/opt/homebrew/lib -I/opt/homebrew/include/QtXml -I/opt/homebrew/lib/QtXml.framework -DQT_XML_LIB -I/opt/homebrew/include/QtSvg -I/opt/homebrew/lib/QtSvg.framework -DQT_SVG_LIB -I/opt/homebrew/include/QtGui -I/opt/homebrew/lib/QtGui.framework -DQT_GUI_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib -framework QtXml -framework QtSvg -framework QtGui -framework QtCore -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdf4qt-build/bin -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdf4qt",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdf4qt /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },

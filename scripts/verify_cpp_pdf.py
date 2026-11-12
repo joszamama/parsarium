@@ -7,10 +7,13 @@ from urllib.request import Request, urlopen
 import base64
 import json
 import platform
+import shutil
 import shlex
 import subprocess
 import tarfile
 import tempfile
+
+from patch_pdf4qt_core import patch_pdf4qt_core
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -92,11 +95,42 @@ def main() -> None:
                  "-DUSE_BUNDLED=FALSE", "-DUSE_UNBUNDLED_FALLBACK_BUNDLED=TRUE"])
             run(["cmake", "--build", str(build_dir), "--target", "PDFWriter", "-j4"])
             library = build_dir / "PDFWriter/libPDFWriter.a"
+        elif name == "pdf4qt":
+            patch = ROOT / source["patch"]
+            assert sha256(patch.read_bytes()).hexdigest() == source["patch_sha256"]
+            for formula, revision in source["installed_dependencies"].items():
+                assert run(["brew", "list", "--versions", formula]) == f"{formula} {revision}"
+            blend = source["build_dependencies"]["blend2d"]
+            blend_archive = archive("blend2d", blend)
+            blend_source = CACHE / f"blend2d-{blend['release']}"
+            if not blend_source.exists():
+                run(["tar", "-xzf", str(blend_archive), "-C", str(CACHE)])
+            blend_build = CACHE / "blend2d-build"
+            blend_install = CACHE / "blend2d-install"
+            run(["cmake", "-S", str(blend_source), "-B", str(blend_build),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX=" + str(blend_install),
+                 "-DBLEND2D_NO_JIT=ON", "-DBLEND2D_STATIC=ON"])
+            run(["cmake", "--build", str(blend_build), "-j4"])
+            run(["cmake", "--install", str(blend_build)])
+            source_dir = CACHE / f"PDF4QT-{source['release']}"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            patch_pdf4qt_core(source_dir)
+            header = source_dir / "Pdf4QtLibCore/sources/pdfdocumentreader.h"
+            build_dir = CACHE / "pdf4qt-build"
+            run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DPDF4QT_BUILD_ONLY_CORE_LIBRARY=ON",
+                 "-DPDF4QT_BUILD_TESTS=OFF", "-DOPENSSL_ROOT_DIR=/opt/homebrew/opt/openssl@3",
+                 "-DCMAKE_PREFIX_PATH=" + ";".join([str(blend_install),
+                     "/opt/homebrew/opt/openssl@3", "/opt/homebrew"])])
+            run(["cmake", "--build", str(build_dir), "--target", "Pdf4QtLibCore", "-j4"])
+            library = build_dir / "bin/libPdf4QtLibCore.1.6.0.0.dylib"
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio", "pdfwriter"):
+        if name not in ("pdfio", "pdfwriter", "pdf4qt"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -140,6 +174,12 @@ def main() -> None:
                        str(library), str(build_dir / "LibAesgm/libLibAesgm.a"),
                        *shlex.split(run(["pkg-config", "--libs", "freetype2"])),
                        "-lz", "-o", str(TARGET / name)]
+        elif name == "pdf4qt":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "Qt6Core", "Qt6Gui", "Qt6Xml", "Qt6Svg"]))
+            command = ["c++", "-std=c++20", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), "-I" + str(build_dir),
+                       str(ROOT / parser["adapter"]), str(library), *flags,
+                       "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)

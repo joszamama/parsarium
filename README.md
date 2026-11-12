@@ -17,7 +17,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 70 cells at the 20-parser target, three started below target, and 15
+There are 70 cells at the 20-parser target, four started below target, and 14
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -183,15 +183,15 @@ binary distribution. Apple Core Graphics is independently verified as a
 macOS platform runtime API and is kept outside the third-party ranking. See
 the [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **8/20 package paths**:
-Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium, and
-PDF-Writer. MuPDF, Ghostscript, PDFio, and PDFium use C APIs called directly
-from C++17; PDF-Writer uses its native C++ parser. All return one parsed page
+The C++ × PDF batch currently verifies **9/20 package paths**:
+Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium,
+PDF-Writer, and PDF4QT. MuPDF, Ghostscript, PDFio, and PDFium use C APIs called
+directly from C++17; PDF-Writer and PDF4QT use native C++ parsers. All return one parsed page
 from the valid PDF control. Five installed release archives, headers, and
-libraries are SHA-256 checked; PDFio and PDF-Writer are source-built, and
+libraries are SHA-256 checked; PDFio, PDF-Writer, and PDF4QT are source-built, and
 PDFium uses a pinned binary distribution with an original header matched to
-upstream. Four leads
-remain unresolved. See the
+upstream. PDF4QT uses a pinned Blend2D dependency and a recorded macOS core-only
+source patch. Four leads remain unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.

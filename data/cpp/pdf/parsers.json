@@ -131,5 +131,21 @@
     "scope": "PDF document page count",
     "family": "PDF-Writer (PDFHummus) PDF parser",
     "family_note": "Native C++ PDFParser in the PDF-Writer package; source-built from pinned v4.6.2 release with bundled Aesgm and system Zlib/FreeType. DCT, TIFF, and PNG integrations are disabled for this simple PDF control."
+  },
+  {
+    "name": "pdf4qt",
+    "version": "1.6.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/JakubMelka/PDF4QT/blob/v1.6.0.0/LICENSE",
+    "documentation": "https://github.com/JakubMelka/PDF4QT/blob/v1.6.0.0/Pdf4QtLibCore/sources/pdfdocumentreader.h",
+    "input_api": "pdf::PDFDocumentReader::readFromFile(const QString& local filename); getReadingResult(); PDFDocument::getCatalog()->getPageCount()",
+    "adapter": "adapters/cpp/pdf/pdf4qt.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PDF4QT PDF engine",
+    "family_note": "Native PDF4QT C++ document reader built from pinned v1.6.0.0 source. Its pinned Blend2D dependency uses NO_JIT. A recorded patch enables core-only building with Qt 6.12 on macOS and replaces parallel-policy calls with sequential algorithms for Apple libc++; the adapter uses C++20."
   }
 ]
