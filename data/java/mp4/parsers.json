@@ -25,5 +25,14 @@
     "documentation_archive_entry": "org/jcodec/containers/mp4/MP4Util.html",
     "family": "JCodec MP4 box parser", "scope": "track count and video dimensions",
     "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "video_width": 2, "video_height": 2}
+  },
+  {
+    "name": "muxer", "group": "org.mp4parser", "artifact": "muxer", "version": "1.9.56",
+    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "MovieCreator.build(String localMp4Path), Movie.getTracks() and Track.getHandler()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/mp4parser/muxer/1.9.56/muxer-1.9.56-javadoc.jar",
+    "documentation_archive_entry": "org/mp4parser/muxer/container/mp4/MovieCreator.html",
+    "family": "sannies MP4Parser movie builder over isoparser", "scope": "video and audio track handlers",
+    "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "handlers": ["vide", "soun"]}
   }
 ]

@@ -16,6 +16,13 @@ public final class Mp4Adapter {
                         movie.getTrackCount(), movie.getMovieHeaderBox().getTimescale());
                 }
             }
+            case "muxer" -> {
+                var movie = org.mp4parser.muxer.container.mp4.MovieCreator.build(file.getAbsolutePath());
+                var tracks = movie.getTracks();
+                if (tracks.size() != 2) throw new IllegalStateException("expected two tracks in control");
+                System.out.printf("{\"tracks\":%d,\"handlers\":[\"%s\",\"%s\"]}%n",
+                    tracks.size(), tracks.get(0).getHandler(), tracks.get(1).getHandler());
+            }
             case "metadata-extractor" -> {
                 var metadata = com.drew.imaging.mp4.Mp4MetadataReader.readMetadata(file);
                 var video = metadata.getFirstDirectoryOfType(com.drew.metadata.mp4.media.Mp4VideoDirectory.class);

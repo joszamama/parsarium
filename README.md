@@ -193,16 +193,17 @@ evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
 
 The Java × MP4 starter batch uses Maven 3.9+ and JDK 25. The pinned Maven
-classpath has six SHA-256-locked JARs. Run
+classpath has nine SHA-256-locked JARs. Run
 `python3 controls/mp4/make_control.py` to restore the valid 2×2 H.264/AAC
 control, then `python3 scripts/verify_java_mp4.py` from the repository root.
 Set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere. The recorded result is
-**3/3 third-party package paths passing**: MP4Parser, metadata-extractor, and
-JCodec. A JDK-only probe found no ImageIO or Java Sound reader for the control;
+**4/4 third-party package paths passing**: MP4Parser's isoparser and muxer
+artifacts, metadata-extractor, and JCodec. The two MP4Parser paths share one
+underlying parser family. A JDK-only probe found no ImageIO or Java Sound reader for the control;
 the separate official API inventory records no documented Java SE 25 MP4
-parser. Four of five bounded Maven search attempts timed out; the surviving
-query returned 18 unrelated-looking search hits that remain unreviewed, and
-six targeted documentation leads remain unresolved. This batch is below the
+parser. Five bounded Maven searches saved 118 unique hits across refreshes;
+the broad mp4 query returned 100 of 350 hits and most appear unrelated to MP4
+media. Six targeted documentation leads remain unresolved. This batch is below the
 20-path working goal. See the [Java MP4 ranking](data/java/mp4/ranking.md),
 [cell summary](data/java/mp4/cell.json), and [leads](data/java/mp4/leads.json).
 `python3 scripts/snapshot_maven_mp4.py` refreshes Maven and deps.dev evidence.
