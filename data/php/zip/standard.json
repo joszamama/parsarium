@@ -1,0 +1,37 @@
+{
+  "ecosystem": "PHP",
+  "format": "ZIP",
+  "runtime": "PHP 8.5.12 CLI with zip extension 1.22.8 (libzip 1.12.1) and Phar extension",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "name": "php-ziparchive",
+      "input_api": "ZipArchive::open(local path, RDONLY); numFiles; getNameIndex; getFromIndex",
+      "documentation": "https://www.php.net/manual/en/ziparchive.open.php",
+      "adapter": "adapters/php/zip/runtime_ziparchive.php",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "family": "PHP Zip extension over libzip"
+    },
+    {
+      "name": "php-phardata",
+      "input_api": "PharData(local ZIP path); Countable; iteration over PharFileInfo; getContent",
+      "documentation": "https://www.php.net/manual/en/class.phardata.php",
+      "additional_documentation": "https://www.php.net/manual/en/pharfileinfo.getcontent.php",
+      "adapter": "adapters/php/zip/runtime_phardata.php",
+      "control": "controls/zip/hello.zip",
+      "expected_output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "family": "PHP Phar ZIP archive reader"
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "These are bundled APIs and do not enter third-party popularity rankings. The control establishes a single ordinary DEFLATE ZIP entry, not all ZIP methods or archive variants."
+}

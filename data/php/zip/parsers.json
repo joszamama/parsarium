@@ -1,0 +1,154 @@
+[
+  {
+    "name": "nelexa/zip",
+    "version": "4.0.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Ne-Lexa/php-zip/blob/88a1b6549be813278ff2dd3b6b2ac188827634a7/LICENSE",
+    "documentation": "https://github.com/Ne-Lexa/php-zip/blob/88a1b6549be813278ff2dd3b6b2ac188827634a7/README.md",
+    "input_api": "ZipFile::openFile(local path); getListFiles; getEntryContents",
+    "adapter": "adapters/php/zip/nelexa_zip.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Ne-Lexa pure PHP ZIP reader",
+    "family_note": "Parses ZIP records in PHP and uses compression primitives; no ZipArchive dependency observed."
+  },
+  {
+    "name": "pclzip/pclzip",
+    "version": "2.8.2",
+    "license": "LGPL-2.1",
+    "license_evidence": "https://github.com/ivanlanin/pclzip/blob/19dd1de9d3f5fc4d7d70175b4c344dee329f45fd/gnu-lgpl.txt",
+    "documentation": "https://github.com/ivanlanin/pclzip/blob/19dd1de9d3f5fc4d7d70175b4c344dee329f45fd/pclzip.lib.php",
+    "input_api": "PclZip(local path); extract(PCLZIP_OPT_EXTRACT_AS_STRING)",
+    "adapter": "adapters/php/zip/pclzip.php",
+    "composer_lock": "adapters/php/zip/pclzip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "PclZip PHP ZIP reader",
+    "family_note": "Pure PHP ZIP archive parser with zlib decompression; isolated Composer install because UnifiedArchive declares it replaces pclzip/pclzip."
+  },
+  {
+    "name": "splitbrain/php-archive",
+    "version": "1.5.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/splitbrain/php-archive/blob/0d8801eaac5342b26ff1776089d4a124117b652c/LICENSE",
+    "documentation": "https://github.com/splitbrain/php-archive/blob/0d8801eaac5342b26ff1776089d4a124117b652c/README.md",
+    "input_api": "splitbrain\\PHPArchive\\Zip::open(local path); contents; extract",
+    "adapter": "adapters/php/zip/splitbrain_php_archive.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "splitbrain PHP ZIP reader",
+    "family_note": "Pure PHP ZIP reader with central-directory parsing and zlib decompression."
+  },
+  {
+    "name": "vipsoft/unzip",
+    "version": "1.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/vipsoft/Unzip/blob/090712dc65d0d77842f077d0a768fc7c852d4624/LICENSE",
+    "documentation": "https://github.com/vipsoft/Unzip/blob/090712dc65d0d77842f077d0a768fc7c852d4624/README.md",
+    "input_api": "VIPSoft\\Unzip\\Unzip::extract(local path, destination)",
+    "adapter": "adapters/php/zip/vipsoft_unzip.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "VIPSoft wrapper over PHP ZipArchive",
+    "family_note": "Distinct package API that delegates ZIP parsing to bundled ZipArchive/libzip."
+  },
+  {
+    "name": "alchemy/zippy",
+    "version": "2.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/alchemy-fr/Zippy/blob/3546ecd8ad5a1a1efb13315a5ea8ff1c7a1d5ef8/LICENSE",
+    "documentation": "https://github.com/alchemy-fr/Zippy/blob/3546ecd8ad5a1a1efb13315a5ea8ff1c7a1d5ef8/src/Zippy.php",
+    "input_api": "ZipExtensionAdapter::newInstance()->open(local path); getMembers; extract",
+    "adapter": "adapters/php/zip/alchemy_zippy.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Alchemy Zippy wrapper over PHP ZipArchive",
+    "family_note": "The adapter selects Zippy’s ZipExtensionAdapter explicitly; ZIP parsing uses bundled ZipArchive/libzip, not an external command."
+  },
+  {
+    "name": "league/flysystem-ziparchive",
+    "version": "3.31.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thephpleague/flysystem-ziparchive/blob/ab6f9041b61ef517bc3e81891a4969181a39c17a/LICENSE",
+    "documentation": "https://github.com/thephpleague/flysystem-ziparchive/blob/ab6f9041b61ef517bc3e81891a4969181a39c17a/ZipArchiveAdapter.php",
+    "input_api": "FilesystemZipArchiveProvider(local path); ZipArchiveAdapter::listContents/read",
+    "adapter": "adapters/php/zip/league_flysystem_ziparchive.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Flysystem ZIP adapter over PHP ZipArchive",
+    "family_note": "Distinct Flysystem adapter package API; ZIP parsing uses bundled ZipArchive/libzip."
+  },
+  {
+    "name": "comodojo/zip",
+    "version": "3.1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/comodojo/zip/blob/22e11bda2ab8e1057cf4d1a50a98ab22f9e38e34/LICENSE",
+    "documentation": "https://github.com/comodojo/zip/blob/22e11bda2ab8e1057cf4d1a50a98ab22f9e38e34/src/Comodojo/Zip/Zip.php",
+    "input_api": "Comodojo\\Zip\\Zip::open(local path); listFiles; extract",
+    "adapter": "adapters/php/zip/comodojo_zip.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Comodojo wrapper over PHP ZipArchive",
+    "family_note": "Distinct package API backed by bundled ZipArchive/libzip; emits PHP 8.5 deprecation notices during the valid control."
+  },
+  {
+    "name": "wapmorgan/unified-archive",
+    "version": "1.3.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/wapmorgan/UnifiedArchive/blob/2097cdf0995f4a576773d66803af4245ed55636e/LICENSE",
+    "documentation": "https://github.com/wapmorgan/UnifiedArchive/blob/2097cdf0995f4a576773d66803af4245ed55636e/docs/API.md",
+    "input_api": "UnifiedArchive::open(local path); getFiles; getFileContent",
+    "adapter": "adapters/php/zip/wapmorgan_unified_archive.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "UnifiedArchive ZIP driver over PHP ZipArchive",
+    "family_note": "Observed driver is wapmorgan\\UnifiedArchive\\Drivers\\Zip, which uses bundled ZipArchive/libzip; package also bundles PclZip as an alternative backend."
+  }
+]

@@ -121,6 +121,20 @@ def main() -> None:
                     assert count is None or isinstance(count, int)
                     assert len(release["jar_sha256"]) == 64 and len(release["pom_sha256"]) == 64
                 assert (ROOT / parser["control"]).exists()
+            elif cell["ecosystem"] == "php":
+                lock_path = ROOT / parser["composer_lock"]
+                locked = {package["name"]: package
+                          for package in json.loads(lock_path.read_text())["packages"]}
+                release = snapshot["releases"][name]
+                assert name in locked
+                assert parser["version"] == release["version"] == locked[name]["version"]
+                assert locked[name]["source"]["reference"] == release["source_reference"]
+                assert parser["license"] == release["license"]
+                assert parser["license_evidence"] == release["license_evidence"]
+                assert (ROOT / parser["adapter"]).exists()
+                assert (ROOT / parser["control"]).exists()
+                count = snapshot["download_metric"]["packages"][name]["downloads"]
+                assert count is None or isinstance(count, int)
             else:
                 assert parser["version"] == lock[name]
                 assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
@@ -144,7 +158,7 @@ def main() -> None:
                        and row["control"] == expected[row["package"]]["control"]
                        and row["output"] == expected[row["package"]]["expected_output"]
                        for row in runs)
-        elif cell["ecosystem"] == "java":
+        elif cell["ecosystem"] in ("java", "php"):
             expected = {parser["name"]: parser for parser in parsers}
             assert all(row["version"] == expected[row["package"]]["version"]
                        and row["control"] == expected[row["package"]]["control"]
@@ -157,6 +171,13 @@ def main() -> None:
             if isinstance(runtime_results, list):
                 assert len(runtime_results) == cell["verified_standard_or_runtime_count"]
                 assert all(row["pass"] for row in runtime_results)
+                if cell["ecosystem"] == "php":
+                    standard = read(f"{key}/standard.json")
+                    expected_runtime = {api["name"]: api for api in standard["verified_apis"]}
+                    assert {row["name"] for row in runtime_results} == set(expected_runtime)
+                    assert all(row["control"] == expected_runtime[row["name"]]["control"]
+                               and row["output"] == expected_runtime[row["name"]]["expected_output"]
+                               for row in runtime_results)
             else:
                 assert runtime_results["pass"]
         assert cell["verified_standard_or_runtime_count"] == len(read(f"{key}/standard.json")["verified_apis"])

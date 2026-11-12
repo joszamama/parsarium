@@ -1,0 +1,24 @@
+{
+  "ecosystem": "php",
+  "format": "zip",
+  "status": "verified_below_goal_partial_search",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 8,
+  "verified_standard_or_runtime_count": 2,
+  "search_queries": [
+    "zip",
+    "unzip",
+    "archive"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 300,
+  "unique_search_hits": 258,
+  "unresolved_documentation_leads": 5,
+  "uncertainty": "Eight pinned Composer package paths have documented local ZIP input APIs and passed the one-entry DEFLATE ZIP control, returning the entry name and decompressed bytes. Two bundled PHP 8.5 APIs, ZipArchive and PharData, passed separately. Five of eight third-party paths wrap PHP ZipArchive/libzip; UnifiedArchive also bundles PclZip as an alternative backend. These are package paths, not eight independent engines. PclZip and Comodojo emitted nonfatal warnings under PHP 8.5, recorded in verification results. PclZip uses its own locked Composer install because UnifiedArchive declares a Composer replacement for the package. Three Packagist name searches saved 100 results each; query tails and keyword mismatch can hide relevant parsers. Five documentation leads remain unresolved, including high-download Laravel wrappers. Lifetime Packagist downloads rank only these verified PHP packages and do not measure ZIP API use. The batch is below the working goal of 20 and does not establish the most-used eight or exhaust PHP ZIP packages. The control covers one ordinary DEFLATE entry. No malformed-input, vulnerability, or resource-use experiments were run.",
+  "third_party_evidence": "data/php/zip/parsers.json",
+  "third_party_control_results": "data/php/zip/verification.json",
+  "runtime_evidence": "data/php/zip/standard.json",
+  "registry_snapshot": "data/php/zip/registry-snapshot.json",
+  "unresolved_leads": "data/php/zip/leads.json"
+}
