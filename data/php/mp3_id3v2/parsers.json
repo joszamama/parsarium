@@ -1,0 +1,62 @@
+[
+  {
+    "name": "james-heinrich/getid3",
+    "version": "v1.9.28",
+    "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
+    "license_evidence": "https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/license.txt",
+    "documentation": "https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md",
+    "input_api": "getID3::analyze(local tagged MP3 path); ID3v2 title/artist/album and major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Multi-format getID3 package; this adapter uses its own ID3v2 and MPEG audio parsers."
+  },
+  {
+    "name": "wapmorgan/mp3info",
+    "version": "0.1.1",
+    "license": "LGPL-3.0",
+    "license_evidence": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/LICENSE",
+    "documentation": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/README.md",
+    "input_api": "Mp3Info(local tagged MP3 path, parseTags=true); tags2 TIT2/TPE1/TALB and ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "Mp3Info native MP3 and ID3v2 parser",
+    "family_note": "Own ID3v2.3 and MPEG audio parser; the pinned release README states that ID3v2.2 and v2.4 are unsupported."
+  },
+  {
+    "name": "christophwurst/id3parser",
+    "version": "v0.1.4",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/ChristophWurst/ID3Parser/blob/050c9d81ea89b0cf53e23a27efc4e1840f9ab260/LICENSE",
+    "documentation": "https://github.com/ChristophWurst/ID3Parser/blob/050c9d81ea89b0cf53e23a27efc4e1840f9ab260/README.md",
+    "input_api": "ID3Parser::analyze(local tagged MP3 path); ID3v2 comments title/artist/album and major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3-derived ID3 tag parser",
+    "family_note": "This package vendors a stripped-down getID3 ID3 implementation; it is a separate package path, not an independent parser family. Packagist marks it abandoned in favor of nextcloud/id3parser."
+  }
+]

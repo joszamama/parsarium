@@ -14,8 +14,9 @@ Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII P
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP, PHP × PNG, and PHP × ASCII PNM have verified 20-parser batches.
-There are 60 cells at the 20-parser target, two started below target, and 26 marked `not_started`;
+PHP × ZIP, PHP × PNG, and PHP × ASCII PNM have verified 20-parser batches;
+PHP × MP3 with ID3v2 has a below-target batch. There are 60 cells at the
+20-parser target, three started below target, and 25 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -37,6 +38,7 @@ python3 scripts/verify_cpp_wav.py
 python3 scripts/verify_php_zip.py
 python3 scripts/verify_php_png.py
 python3 scripts/verify_php_ascii_pnm.py
+python3 scripts/verify_php_mp3_id3v2.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -290,6 +292,14 @@ The [runtime inventory](data/php/ascii_pnm/standard.json) records that the
 tested PHP core and GD APIs did not parse the control. Reproduction requires
 PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, FFprobe, phpize, and Composer 2. The
 verifier builds Imagick into ignored cache from the pinned PECL source archive.
+
+The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has three
+pinned package paths passing a one-second ID3v2.3-tagged MP3 control. The
+getID3 and ID3Parser paths share code lineage; Mp3Info is a separate parser.
+Five bounded Packagist searches saved 164 hits and 128 distinct names. Seven
+plausible leads remain unresolved, and 17 paths are still needed. The
+[runtime inventory](data/php/mp3_id3v2/standard.json) records that PHP Fileinfo
+returns only a MIME type; the separate PECL id3 extension was absent.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1207,6 +1217,10 @@ uncertainty.
   paths, lifetime download ranking, control results, leads, and a separate PHP
   runtime inventory. Eight Composer locks live under `adapters/php/ascii_pnm/`,
   and a pinned PECL Imagick source lock lives with the cell data.
+- `data/php/mp3_id3v2/`: Packagist discovery hits, three pinned third-party
+  paths, lifetime download ranking, valid tag results, unresolved leads, and a
+  separate PHP runtime inventory. The Composer lock and adapter live under
+  `adapters/php/mp3_id3v2/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
