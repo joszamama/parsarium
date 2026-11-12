@@ -41,19 +41,20 @@ def check_control() -> None:
     assert struct.unpack_from("<256h", data, 44) == (0, 1000, -1000, 0) + (0,) * 252
 
 
-def build_third_party(env: dict[str, str]) -> tuple[str, int]:
+def build_third_party(env: dict[str, str], module: str) -> tuple[str, int]:
+    adapter = ADAPTER / module if module != "main" else ADAPTER
     command = ["mvn", "-q", "-DskipTests", "package",
                "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath",
                "-Dmdep.outputFile=target/classpath.txt"]
-    result = subprocess.run(command, cwd=ADAPTER, env=env, text=True, capture_output=True)
+    result = subprocess.run(command, cwd=adapter, env=env, text=True, capture_output=True)
     if result.returncode:
         raise RuntimeError(f"Maven build failed:\n{result.stdout}\n{result.stderr}")
     repository = Path.home() / ".m2/repository"
-    jars = [Path(item) for item in (ADAPTER / "target/classpath.txt").read_text().strip().split(":")]
+    jars = [Path(item) for item in (adapter / "target/classpath.txt").read_text().strip().split(":")]
     actual = [{"repository_path": str(jar.relative_to(repository)),
                "sha256": sha256(jar.read_bytes()).hexdigest()} for jar in jars]
-    assert actual == read(ADAPTER / "dependencies.lock.json")["classpath"], "Maven classpath differs from SHA lock"
-    return str(ADAPTER / "target/classes") + ":" + ":".join(str(jar) for jar in jars), len(jars)
+    assert actual == read(adapter / "dependencies.lock.json")["classpath"], f"Maven classpath differs from SHA lock: {module}"
+    return str(adapter / "target/classes") + ":" + ":".join(str(jar) for jar in jars), len(jars)
 
 
 def check_releases(snapshot: dict) -> None:
@@ -64,6 +65,11 @@ def check_releases(snapshot: dict) -> None:
         stem = f"{artifact}-{version}"
         assert sha256((base / f"{stem}.jar").read_bytes()).hexdigest() == release["jar_sha256"], name
         assert sha256((base / f"{stem}.pom").read_bytes()).hexdigest() == release["pom_sha256"], name
+    for name, release in snapshot["native_releases"].items():
+        group, artifact, version, classifier = (release[k] for k in ("group", "artifact", "version", "classifier"))
+        base = repository / group.replace(".", "/") / artifact / version
+        assert sha256((base / f"{artifact}-{version}-{classifier}.jar").read_bytes()).hexdigest() == release["jar_sha256"], name
+        assert sha256((base / f"{artifact}-{version}.pom").read_bytes()).hexdigest() == release["pom_sha256"], name
 
 
 def run(command: list[str], expected: dict) -> dict:
@@ -76,19 +82,24 @@ def run(command: list[str], expected: dict) -> dict:
 
 
 def main() -> None:
-    assert JAVA_HOME.exists() and platform.system() == "Darwin"
+    assert JAVA_HOME.exists() and platform.system() == "Darwin" and platform.machine() == "arm64"
     check_control()
     env = java_environment()
     java = str(JAVA_HOME / "bin/java")
-    classpath, jar_count = build_third_party(env)
+    classpaths, jar_counts = {}, {}
+    for module in ("main", "bytedeco"):
+        classpaths[module], jar_counts[module] = build_third_party(env, module)
     parsers = read(DATA / "parsers.json")
     snapshot = read(DATA / "registry-snapshot.json")
     assert len({(p["group"], p["artifact"]) for p in parsers}) == len(parsers)
     check_releases(snapshot)
     third_party = []
     for parser in parsers:
-        mode = parser["name"] if parser["name"] != "tika-audiovideo" else "tika"
-        output = run([java, "-cp", classpath, "org.parsarium.WavAdapter",
+        module = parser.get("adapter_module", "main")
+        mode = {"tika-audiovideo": "tika", "bytedeco-ffmpeg": "ffmpeg"}.get(parser["name"], parser["name"])
+        cls = "org.parsarium.BytedecoWavAdapter" if module == "bytedeco" else "org.parsarium.WavAdapter"
+        native_flag = ["--enable-native-access=ALL-UNNAMED"] if module == "bytedeco" else []
+        output = run([java, *native_flag, "-cp", classpaths[module], cls,
                       mode, str(ROOT / parser["control"])], parser["expected_output"])
         third_party.append({"package": parser["name"], "version": parser["version"],
                             "control": parser["control"], "output": output, "pass": True})
@@ -109,7 +120,7 @@ def main() -> None:
         "java": subprocess.run([java, "-version"], text=True, capture_output=True, check=True).stderr.splitlines()[0],
         "maven": subprocess.run(["mvn", "-version"], env=env, text=True, capture_output=True, check=True).stdout.splitlines()[0],
         "platform": f"{platform.system()} {platform.machine()}",
-        "locked_classpath_jars": jar_count,
+        "locked_classpath_jars": jar_counts,
         "third_party": third_party,
         "runtime": runtime,
         "scope": "Valid 256-frame PCM RIFF/WAVE control only; no malformed-input or resource-use experiment",

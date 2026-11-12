@@ -191,18 +191,20 @@ API was documented in the separate runtime inventory. See the
 evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
 
-The Java × WAV batch uses Maven 3.9+, JDK 25 and a SHA-256 lock of 52 resolved
-JARs. `python3 controls/wav/make_control.py` generates a valid 556-byte mono
+The Java × WAV batch uses Maven 3.9+, JDK 25, macOS arm64 for the Bytedeco
+bindings, and SHA-256 locks of 52 regular and 5 native-module classpath JARs.
+`python3 controls/wav/make_control.py` generates a valid 556-byte mono
 PCM control with 256 frames (SHA-256
 `d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7`).
 The longer control accommodates readers that reject a 52-byte WAV or expect
 at least 128 bytes in the header buffer. Run `python3 scripts/verify_java_wav.py`
 from the repository root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
-The recorded result is **7/7 third-party package paths and 2/2 JDK APIs passing**.
+The recorded result is **9/9 third-party package paths and 2/2 JDK APIs passing**.
 The JDK adapter compiles and runs without any third-party classpath. JDSP uses
-wavfile, and Tika delegates WAV parsing to Java Sound. Four of five latest
+wavfile, Tika delegates WAV parsing to Java Sound, and the two Bytedeco paths
+share FFmpeg. Four of five latest
 bounded Maven query attempts timed out; two hits were saved across refreshes,
-and 12 plausible leads remain unresolved. The cell is
+and 9 plausible leads remain unresolved. The cell is
 below the 20-path working goal. See the [Java WAV ranking](data/java/wav/ranking.md),
 [cell summary](data/java/wav/cell.json), and
 [unresolved leads](data/java/wav/leads.json). Run

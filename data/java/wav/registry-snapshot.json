@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T05:05:42.025756+00:00",
+  "captured_at_utc": "2026-11-12T05:11:29.289180+00:00",
   "search_surface": "Maven Central Solr bounded artifact queries; targeted official Maven Central releases and project docs",
   "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
   "search_limit_per_query": 100,
@@ -8,7 +8,7 @@
       "query": "wav",
       "url": "https://search.maven.org/solrsearch/select?q=wav&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:05:33.968333+00:00",
+      "captured_at_utc": "2026-11-12T05:11:21.231784+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -17,16 +17,15 @@
       "query": "wav parser",
       "url": "https://search.maven.org/solrsearch/select?q=wav+parser&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:05:33.968461+00:00",
-      "total": null,
-      "hits": [],
-      "error": "TimeoutError: The read operation timed out"
+      "captured_at_utc": "2026-11-12T05:11:21.232075+00:00",
+      "total": 0,
+      "hits": []
     },
     {
       "query": "wav reader",
       "url": "https://search.maven.org/solrsearch/select?q=wav+reader&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:05:33.968579+00:00",
+      "captured_at_utc": "2026-11-12T05:11:21.232339+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -43,7 +42,9 @@
           "name": "com.tencentcloudapi:tencentcloud-sdk-java-wav",
           "latest_version": "3.1.906"
         }
-      ]
+      ],
+      "latest_refresh_result": "TimeoutError: The read operation timed out",
+      "latest_refresh_at_utc": "2026-11-12T05:11:21.232607+00:00"
     },
     {
       "query": "audio wav",
@@ -59,7 +60,7 @@
         }
       ],
       "latest_refresh_result": "TimeoutError: The read operation timed out",
-      "latest_refresh_at_utc": "2026-11-12T05:05:33.968784+00:00"
+      "latest_refresh_at_utc": "2026-11-12T05:11:21.232817+00:00"
     }
   ],
   "releases": {
@@ -139,13 +140,57 @@
       "pom_sha256": "c8fe5a031d3259eb6573dd518983f0594abfcdfca81e7d6134019e2a69b703ca",
       "license": "Apache-2.0",
       "license_evidence": "Maven JAR META-INF/LICENSE"
+    },
+    "javacv": {
+      "group": "org.bytedeco",
+      "artifact": "javacv",
+      "version": "1.5.14",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14.jar",
+      "jar_sha256": "bb421c3d3476843e78f62768a3a3b3e1bdc373efd019dc02987035d0ea036810",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14.pom",
+      "pom_sha256": "1042958bd9806ed539d7bcccd4214f1e2da986436e811ebcbde9880bde0010fb",
+      "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+      "license_evidence": "Maven POM licenses; native FFmpeg notices apply separately"
+    },
+    "bytedeco-ffmpeg": {
+      "group": "org.bytedeco",
+      "artifact": "ffmpeg",
+      "version": "8.1.2-1.5.14",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14.jar",
+      "jar_sha256": "1bc7d6db5ef4d8fee1b3be8cd6b2e3ef8409cb7be630f290c4d5d82d2a2fa079",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14.pom",
+      "pom_sha256": "2c2904101e9f1544dcfb2bc042ecdddea70d20015a0eff885da11d4ddf8602e3",
+      "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+      "license_evidence": "Parent javacpp-presets Maven POM licenses; native FFmpeg notices apply separately"
+    }
+  },
+  "native_releases": {
+    "ffmpeg-macosx-arm64": {
+      "group": "org.bytedeco",
+      "artifact": "ffmpeg",
+      "version": "8.1.2-1.5.14",
+      "classifier": "macosx-arm64",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-macosx-arm64.jar",
+      "jar_sha256": "af57468c0bb7b2e9c8c93547e6d599e2b4faa4117118555be92675850972420c",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14.pom",
+      "pom_sha256": "2c2904101e9f1544dcfb2bc042ecdddea70d20015a0eff885da11d4ddf8602e3"
+    },
+    "javacpp-macosx-arm64": {
+      "group": "org.bytedeco",
+      "artifact": "javacpp",
+      "version": "1.5.14",
+      "classifier": "macosx-arm64",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/bytedeco/javacpp/1.5.14/javacpp-1.5.14-macosx-arm64.jar",
+      "jar_sha256": "75d755656d3ddafaa51c5d2d8d340c731a0bf2d742b033a37641a905aa2a7332",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/bytedeco/javacpp/1.5.14/javacpp-1.5.14.pom",
+      "pom_sha256": "a5e3a97e0ceace7bc7b8d3537d355d4fc309c639ee1d3f02976531e934271b12"
     }
   },
   "popularity_metric": {
     "name": "deps.dev exact-version directDependentCount",
     "documentation": "https://docs.deps.dev/api/v3alpha/",
     "scope": "Known public direct dependents of pinned Maven releases; incomplete coverage and release-age bias",
-    "captured_at_utc": "2026-11-12T05:05:42.025796+00:00",
+    "captured_at_utc": "2026-11-12T05:11:29.289209+00:00",
     "packages": {
       "wavfile": {
         "direct_dependent_count": 1,
@@ -174,6 +219,14 @@
       "tika-audiovideo": {
         "direct_dependent_count": 1,
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.tika%3Atika-parser-audiovideo-module/versions/4.2.0:dependents"
+      },
+      "javacv": {
+        "direct_dependent_count": 4,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.bytedeco%3Ajavacv/versions/1.5.14:dependents"
+      },
+      "bytedeco-ffmpeg": {
+        "direct_dependent_count": 9,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.bytedeco%3Affmpeg/versions/8.1.2-1.5.14:dependents"
       }
     }
   }

@@ -52,6 +52,26 @@ def release(parser: dict) -> tuple[str, dict]:
     }
 
 
+def native_release(name: str, group: str, artifact: str, version: str,
+                   classifier: str) -> tuple[str, dict]:
+    base = f"https://repo.maven.apache.org/maven2/{group.replace('.', '/')}/{artifact}/{version}/"
+    stem = f"{artifact}-{version}-{classifier}"
+    local = Path.home() / ".m2/repository" / group.replace(".", "/") / artifact / version
+    jar = (local / f"{stem}.jar").read_bytes()
+    pom = (local / f"{artifact}-{version}.pom").read_bytes()
+    if sha1(jar).hexdigest() != get(base + stem + ".jar.sha1").decode().split()[0]:
+        raise ValueError(f"Maven Central native JAR SHA-1 mismatch: {name}")
+    if sha1(pom).hexdigest() != get(base + f"{artifact}-{version}.pom.sha1").decode().split()[0]:
+        raise ValueError(f"Maven Central native POM SHA-1 mismatch: {name}")
+    return name, {
+        "group": group, "artifact": artifact, "version": version,
+        "classifier": classifier, "jar_url": base + stem + ".jar",
+        "jar_sha256": sha256(jar).hexdigest(),
+        "pom_url": base + f"{artifact}-{version}.pom",
+        "pom_sha256": sha256(pom).hexdigest(),
+    }
+
+
 def metric(parser: dict) -> tuple[str, dict]:
     name, group, artifact, version = (parser[k] for k in ("name", "group", "artifact", "version"))
     package = quote(f"{group}:{artifact}", safe="")
@@ -88,6 +108,10 @@ def main() -> None:
     with ThreadPoolExecutor(max_workers=7) as pool:
         releases = dict(pool.map(release, PARSERS))
         metrics = dict(pool.map(metric, PARSERS))
+        natives = dict(pool.map(lambda spec: native_release(*spec), [
+            ("ffmpeg-macosx-arm64", "org.bytedeco", "ffmpeg", "8.1.2-1.5.14", "macosx-arm64"),
+            ("javacpp-macosx-arm64", "org.bytedeco", "javacpp", "1.5.14", "macosx-arm64"),
+        ]))
     with ThreadPoolExecutor(max_workers=5) as pool:
         searches = list(pool.map(search, QUERIES))
     dest = DATA / "registry-snapshot.json"
@@ -105,6 +129,7 @@ def main() -> None:
         "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
         "search_limit_per_query": 100,
         "search": searches, "releases": releases,
+        "native_releases": natives,
         "popularity_metric": {
             "name": "deps.dev exact-version directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",
@@ -115,7 +140,7 @@ def main() -> None:
     }
     dest.write_text(json.dumps(result, indent=2) + "\n")
     print(f"Java WAV snapshot: {sum(len(s['hits']) for s in searches)} search hits; "
-          f"{len(releases)} pinned releases")
+          f"{len(releases)} pinned releases; {len(natives)} native artifacts")
 
 
 if __name__ == "__main__":
