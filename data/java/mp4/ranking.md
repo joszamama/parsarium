@@ -1,6 +1,6 @@
 # Java × MP4: verified parser ranking
 
-12 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T06:15:58.295059+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
+14 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T06:19:50.772398+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -17,4 +17,6 @@ Search hits, unresolved leads, and JDK APIs are separate from this ranking. See 
 | 8 | [tika-mp4](https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-javadoc.jar) | org.apache.tika:tika-parser-audiovideo-module:4.2.0 | 1 | parsed video dimensions, audio properties and title | Apache Tika MP4Parser over metadata-extractor |
 | 10 | [bramp-ffmpeg](https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar) | net.bramp.ffmpeg:ffmpeg:0.9.2 | 0 | MP4 demuxer format, H.264/AAC stream codecs, video dimensions and audio rate | bramp FFprobe CLI wrapper over FFmpeg |
 | 10 | [imagic-ffmpeg-java](https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar) | ch.imagic:ffmpeg-java:0.1.2 | 0 | MP4 demuxer format, H.264/AAC stream codecs, video dimensions and audio rate | Imagic fork of bramp FFprobe CLI wrapper over FFmpeg |
+| 10 | [mediainfo-jna-wrapper](https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar) | com.amilesend:mediainfo-jna-wrapper:2.1.9 | 0 | MP4 format, video dimensions and audio sample rate | amilesend JNA binding to libmediainfo |
 | 10 | [v47-jaffree](https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar) | io.v47.jaffree:jaffree:2.1.0 | 0 | MP4 H.264/AAC stream codecs, video dimensions and audio rate | v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg |
+| 10 | [vlcj-info](https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar) | uk.co.caprica:vlcj-info:2.0.3 | 0 | MP4 format, video dimensions and audio sample rate | vlcj-info JNA binding to libmediainfo |

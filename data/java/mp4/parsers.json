@@ -248,5 +248,47 @@
       "audio_codec": "aac",
       "sample_rate": 8000
     }
+  },
+  {
+    "name": "vlcj-info",
+    "group": "uk.co.caprica",
+    "artifact": "vlcj-info",
+    "version": "2.0.3",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "Project LICENSE and Maven POM licenses",
+    "input_api": "new MediaInfoFile(String localMp4).open(), info(String MediaInfo template)",
+    "documentation": "https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar",
+    "documentation_archive_entry": "uk/co/caprica/vlcjinfo/MediaInfoFile.html",
+    "family": "vlcj-info JNA binding to libmediainfo",
+    "scope": "MP4 format, video dimensions and audio sample rate",
+    "adapter_module": "vlcj_info",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "format": "MPEG-4",
+      "width": 2,
+      "height": 2,
+      "sample_rate": 8000
+    }
+  },
+  {
+    "name": "mediainfo-jna-wrapper",
+    "group": "com.amilesend",
+    "artifact": "mediainfo-jna-wrapper",
+    "version": "2.1.9",
+    "license": "MIT + MediaInfoLib Binary License",
+    "license_evidence": "Maven parent POM licenses and project LICENSE",
+    "input_api": "new MediaInfo(new MediaInfoAccessor(MediaInfoLibrary.newInstance())).open(File localMp4).get(StreamType.Video,0,String)",
+    "documentation": "https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar",
+    "documentation_archive_entry": "com/amilesend/mediainfo/MediaInfo.html",
+    "family": "amilesend JNA binding to libmediainfo",
+    "scope": "MP4 format, video dimensions and audio sample rate",
+    "adapter_module": "amilesend",
+    "control": "controls/mp4/red-av-padded.mp4",
+    "expected_output": {
+      "format": "MPEG-4",
+      "width": 2,
+      "height": 2,
+      "sample_rate": 8000
+    }
   }
 ]

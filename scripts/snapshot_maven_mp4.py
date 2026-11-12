@@ -22,7 +22,10 @@ PARSERS = json.loads((DATA / "parsers.json").read_text())
 QUERIES = ["mp4", "mp4 parser", "isoparser", "Java MP4", "ISO base media"]
 NATIVE_ARTIFACTS = [("ffmpeg-macosx-arm64", "ffmpeg", "8.1.2-1.5.14"),
                     ("javacpp-macosx-arm64", "javacpp", "1.5.14")]
-AUXILIARY_ARTIFACTS = [("jave-nativebin-osxm1", "ws.schild", "jave-nativebin-osxm1", "4.2.0")]
+AUXILIARY_ARTIFACTS = [
+    ("jave-nativebin-osxm1", "ws.schild", "jave-nativebin-osxm1", "4.2.0"),
+    ("mediainfo-jna-lib-mac-aarch64", "com.amilesend", "mediainfo-jna-lib-mac-aarch64", "2.1.9"),
+]
 
 
 def get(url: str, timeout: int = 12) -> bytes:
@@ -74,10 +77,12 @@ def auxiliary_release(item: tuple[str, str, str, str]) -> tuple[str, dict]:
     assert sha1(jar).hexdigest() == get(base + stem + ".jar.sha1").decode().split()[0]
     assert sha1(pom).hexdigest() == get(base + stem + ".pom.sha1").decode().split()[0]
     ET.fromstring(pom)
+    license_name = "GPL-3.0-only" if group == "ws.schild" else "MIT + MediaInfoLib Binary License"
+    license_evidence = "Maven POM licenses" if group == "ws.schild" else "Maven parent POM licenses"
     return name, {"group": group, "artifact": artifact, "version": version,
                   "jar_url": base + stem + ".jar", "jar_sha256": sha256(jar).hexdigest(),
                   "pom_url": base + stem + ".pom", "pom_sha256": sha256(pom).hexdigest(),
-                  "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses"}
+                  "license": license_name, "license_evidence": license_evidence}
 
 
 def metric(parser: dict) -> tuple[str, dict]:
@@ -136,7 +141,8 @@ def main() -> None:
         "search": searches, "releases": releases,
         "native_releases": native_releases,
         "auxiliary_releases": auxiliary_releases,
-        "external_tools": {"ffprobe": json.loads((ROOT / "data/java/wav/registry-snapshot.json").read_text())["external_tools"]["ffprobe"]},
+        "external_tools": {key: json.loads((ROOT / "data/java/wav/registry-snapshot.json").read_text())["external_tools"][key]
+                           for key in ("ffprobe", "libmediainfo", "libzen")},
         "popularity_metric": {
             "name": "deps.dev exact-version directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",
