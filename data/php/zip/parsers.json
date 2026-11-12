@@ -302,5 +302,79 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "TbsZip custom PHP ZIP reader",
     "family_note": "Parses central-directory records in PHP and uses zlib to decompress DEFLATE entries."
+  },
+  {
+    "name": "chumper/zipper",
+    "version": "v1.0.3",
+    "license": "Apache2",
+    "license_evidence": "https://github.com/Chumper/Zipper/blob/d15207e010f8fe1bdd341376bd86d599c4166423/LICENSE",
+    "documentation": "https://github.com/Chumper/Zipper/blob/d15207e010f8fe1bdd341376bd86d599c4166423/README.md",
+    "input_api": "Zipper::make(local ZIP path); getFileContent(known control entry name)",
+    "adapter": "adapters/php/zip/chumper_zipper.php",
+    "composer_lock": "adapters/php/zip/chumper/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "content": "parsarium\n"
+    },
+    "scope": "decompressed bytes of a named entry",
+    "family": "Chumper Zipper over PHP ZipArchive",
+    "family_note": "The pinned release reads the requested entry through PHP ZipArchive. Its listFiles method fails on PHP 8.5 because an associative callback array is interpreted as named arguments; this adapter verifies decompressed bytes only. Madnest is a fork of this package."
+  },
+  {
+    "name": "matomo/decompress",
+    "version": "3.0.0",
+    "license": "LGPL-3.0",
+    "license_evidence": "https://github.com/matomo-org/component-decompress/blob/3e96938cd11f90e5e4bcc38c78264c86a63f41bb/LICENSE",
+    "documentation": "https://github.com/matomo-org/component-decompress/blob/3e96938cd11f90e5e4bcc38c78264c86a63f41bb/README.md",
+    "input_api": "Matomo\\Decompress\\ZipArchive(local ZIP path); extract(destination)",
+    "adapter": "adapters/php/zip/matomo_decompress.php",
+    "composer_lock": "adapters/php/zip/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Matomo extractor over PHP ZipArchive",
+    "family_note": "The explicit ZipArchive backend parses the local archive and returns per-entry metadata; the package also offers a bundled PclZip backend."
+  },
+  {
+    "name": "chamilo/pclzip",
+    "version": "v2.8.5",
+    "license": "LGPL-2.1",
+    "license_evidence": "https://github.com/chamilo/pclzip/blob/af10d07a39922b0789bf761524a22ecefc01d405/gnu-lgpl.txt",
+    "documentation": "https://github.com/chamilo/pclzip/blob/af10d07a39922b0789bf761524a22ecefc01d405/readme.txt",
+    "input_api": "PclZip(local path); extract(PCLZIP_OPT_EXTRACT_AS_STRING)",
+    "adapter": "adapters/php/zip/chamilo_pclzip.php",
+    "composer_lock": "adapters/php/zip/chamilo/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Chamilo PclZip fork",
+    "family_note": "A separately released Composer package of the PclZip PHP reader; same underlying parser lineage as pclzip/pclzip."
+  },
+  {
+    "name": "mmoreram/extractor",
+    "version": "1.2.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/mmoreram/extractor/blob/0ca76992fab2573e2fe512d0ee2a4d45e936fee4/LICENSE",
+    "documentation": "https://github.com/mmoreram/extractor/blob/0ca76992fab2573e2fe512d0ee2a4d45e936fee4/README.md",
+    "input_api": "Extractor::extractFromFile(local ZIP path); iterate returned Finder",
+    "adapter": "adapters/php/zip/mmoreram_extractor.php",
+    "composer_lock": "adapters/php/zip/mmoreram/composer.lock",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Mmoreram extractor over PHP ZipArchive",
+    "family_note": "The ZIP adapter delegates archive parsing and extraction to PHP ZipArchive."
   }
 ]

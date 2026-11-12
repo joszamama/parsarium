@@ -12,8 +12,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-PHP × ZIP has a verified below-target batch. There are 50 cells at the
-20-parser target, four started below target, and 34 marked `not_started`;
+PHP × ZIP has a verified 20-parser batch. There are 51 cells at the
+20-parser target, three started below target, and 34 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -170,15 +170,17 @@ records that the numerical goal is met, while search remains incomplete and the
 cell does not claim a definitive most-used top 20. The ISO C++
 standard library has no documented ZIP parser.
 
-The PHP × ZIP verifier installs sixteen exact Composer package releases from three
+The PHP × ZIP verifier installs twenty exact Composer package releases from six
 lockfiles and runs local-file readers on the same one-entry DEFLATE control.
-All **16/16 third-party paths and 2/2 bundled PHP APIs passed**. Eleven package
+All **20/20 third-party paths and 2/2 bundled PHP APIs passed**. Fourteen package
 paths use PHP ZipArchive/libzip; the [PHP ZIP ranking](data/php/zip/ranking.md)
 labels shared families and uses Packagist lifetime downloads only to order the
 verified third-party paths. PclZip uses a separate lock because UnifiedArchive
-declares it as a Composer replacement; Madnest also needs a separate Laravel
-dependency set. Six adapters emitted nonfatal PHP 8.5
-warnings, captured in [verification.json](data/php/zip/verification.json).
+declares it as a Composer replacement; older Laravel and Symfony packages also
+need separate dependency sets. Chumper’s documented entry-listing method fails
+on PHP 8.5, but its named-entry read API passed and is ranked at that narrower
+scope. Nonfatal PHP 8.5 warnings are captured in
+[verification.json](data/php/zip/verification.json).
 Three bounded Packagist searches recorded 300 hits, and three plausible leads
 remain unresolved. See the [cell summary](data/php/zip/cell.json) for the
 exact search limits and uncertainty. Reproduction requires PHP 8.5 with zip
@@ -1050,7 +1052,7 @@ uncertainty.
   `adapters/java/png/`.
 - `data/php/zip/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and separate PHP runtime APIs. The
-  adapters and three Composer locks live under `adapters/php/zip/`.
+  adapters and six Composer locks live under `adapters/php/zip/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

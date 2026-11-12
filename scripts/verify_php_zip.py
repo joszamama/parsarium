@@ -48,7 +48,8 @@ def main() -> None:
         command = ["php", "-d", "display_errors=0", str(ROOT / parser["adapter"]), str(CONTROL)]
         run = execute(command)
         output = json.loads(run.stdout)
-        assert output == parser["expected_output"] == EXPECTED, name
+        assert output == parser["expected_output"], name
+        assert output.get("content") == EXPECTED["content"], name
         rows.append({"package": name, "version": parser["version"],
                      "composer_lock": parser["composer_lock"],
                      "source_reference": installed["source"]["reference"],
