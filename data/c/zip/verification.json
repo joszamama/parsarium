@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T11:24:04.242170+00:00",
+  "checked_at_utc": "2026-11-12T11:38:53.543001+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "local_libraries": {
@@ -73,7 +73,11 @@
     "infozip-unzip": {
       "source_sha256": "036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37",
       "build_command": "make -C /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/infozip-unzip -f unix/Makefile objsdll CC=cc 'CFLAGS=-O2 -fPIC -DDLL -DUNIX -Wno-deprecated-non-prototype -Wno-implicit-function-declaration' -j4",
-      "library_sha256": "ccbe0fd84be01e5a20cd48914a5742fdc1d84defa6fa0d7afbfe8b5ef1cd9041"
+      "library_sha256": "f49de356851bafbeac23bf47ddfa80d2af916084aa9ca6b3d6a10e30f2c53341"
+    },
+    "junzip": {
+      "source_sha256": "b02799ece6a8e3ac28c2719699a919786d30bef6160108e06edcad4611f5c10d",
+      "build": "compiled pinned junzip.c with zlib for DEFLATE"
     }
   },
   "control": "controls/zip/hello.zip",
@@ -259,6 +263,19 @@
       "control": "controls/zip/hello.zip",
       "build_command": "cc -std=c11 -O2 -DDLL -DUNIX -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/infozip-unzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/infozip_unzip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libinfozip_unzip.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/infozip-unzip",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/infozip-unzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "junzip",
+      "version": "v0.1.1",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/junzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/junzip.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/cache/source/junzip/junzip.c -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/junzip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/junzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

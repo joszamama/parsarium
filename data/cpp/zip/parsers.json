@@ -444,5 +444,24 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "libc7zip \u2192 lib7zip \u2192 7-Zip ZIP engine",
     "family_note": "Tagged MIT C facade vendors an MPL-2.0 lib7zip fork and loads a 7-Zip 26.03 engine; a distinct package path sharing the 7-Zip parser family with bit7z in C++. The C++17 call site links the same SHA-pinned C facade and 7-Zip engine as the C cell."
+  },
+  {
+    "name": "junzip",
+    "version": "v0.1.1",
+    "license": "Unlicense",
+    "license_evidence": "https://github.com/jokkebk/JUnzip/blob/v0.1.1/LICENSE",
+    "documentation": "https://github.com/jokkebk/JUnzip/blob/v0.1.1/junzip.h",
+    "input_api": "jzReadEndRecord(FILE*); jzReadCentralDirectory(FILE*, callback); jzReadLocalFileHeader; jzReadData",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "JUnzip ZIP record reader with zlib DEFLATE",
+    "family_note": "JUnzip parses ZIP end, central and local records itself, then delegates DEFLATE decompression to zlib; separate package from Info-ZIP UnZip. The C++ path uses the exact C-cell release and parser implementation.",
+    "adapter": "adapters/cpp/zip/junzip.cpp",
+    "language_bridge": "C API compiled and invoked from a C++17 translation unit"
   }
 ]

@@ -252,5 +252,23 @@
     "scope": "entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API",
     "family": "Info-ZIP UnZip 6.0 engine",
     "family_note": "Official Info-ZIP UnZip 6.0 source exposes a C DLL API. This path compiles its library objects and calls the API directly; it is separate from MiniZip, unzipLIB, and other ZIP engines."
+  },
+  {
+    "name": "junzip",
+    "version": "v0.1.1",
+    "license": "Unlicense",
+    "license_evidence": "https://github.com/jokkebk/JUnzip/blob/v0.1.1/LICENSE",
+    "documentation": "https://github.com/jokkebk/JUnzip/blob/v0.1.1/junzip.h",
+    "input_api": "jzReadEndRecord(FILE*); jzReadCentralDirectory(FILE*, callback); jzReadLocalFileHeader; jzReadData",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "JUnzip ZIP record reader with zlib DEFLATE",
+    "family_note": "JUnzip parses ZIP end, central and local records itself, then delegates DEFLATE decompression to zlib; separate package from Info-ZIP UnZip.",
+    "adapter": "adapters/c/zip/junzip.c"
   }
 ]

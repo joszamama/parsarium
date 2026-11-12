@@ -195,7 +195,7 @@ def main() -> None:
             command = shlex.split(c_runs[name]["build_command"])
             assert command[0:2] == ["cc", "-std=c11"]
             command[0:2] = ["c++", "-std=c++17"]
-            if name == "lowzip":
+            if name in ("lowzip", "junzip"):
                 command[2:2] = ["-x", "c++"]
             c_adapter = str(ROOT / c_parsers[name]["adapter"])
             command[command.index(c_adapter)] = str(ROOT / parser["adapter"])

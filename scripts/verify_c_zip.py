@@ -100,6 +100,13 @@ def main() -> None:
                        *map(str, sources), "-o", str(TARGET / name)]
             source_builds[name] = {"source_sha256": item["source_sha256"],
                                    "build": "compiled pinned unzipLIB MiniZip fork and bundled zlib C sources"}
+        elif name == "junzip":
+            source = SOURCE / name
+            command = ["cc", "-std=c11", "-O2", "-I" + str(source),
+                       str(ROOT / parser["adapter"]), str(source / "junzip.c"),
+                       "-lz", "-o", str(TARGET / name)]
+            source_builds[name] = {"source_sha256": item["source_sha256"],
+                                   "build": "compiled pinned junzip.c with zlib for DEFLATE"}
         elif name == "infozip-unzip":
             source = SOURCE / name
             build = ["make", "-C", str(source), "-f", "unix/Makefile", "objsdll",
