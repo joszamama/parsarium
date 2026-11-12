@@ -80,6 +80,11 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(header.parents[1]), str(ROOT / parser["adapter"]),
                        str(library), "-o", str(TARGET / name)]
+        elif name == "ghostscript":
+            assert run(["brew", "list", "--versions", "ghostscript"]) == "ghostscript " + source["release"]
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parents[1]), str(ROOT / parser["adapter"]),
+                       str(library), "-o", str(TARGET / name)]
         else:
             raise AssertionError(name)
         run(command)

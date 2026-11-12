@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T22:36:53.850823+00:00",
+  "checked_at_utc": "2026-11-12T22:41:20.103957+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -23,6 +23,11 @@
       "source_sha256": "dc85000640a45d90ca9b77b061f6ca67cce0c4d4fbecf8819647baf573eef101",
       "local_library_sha256": "085b2f375bdf1f933067fff886727d263cc79e74d6acf7114e5fbb415f55ef5b",
       "local_header_sha256": "3c851e3727717bd651128371da8e5e4276334159cfa59aa4f7a633467bedeb7b"
+    },
+    "ghostscript": {
+      "source_sha256": "94943e3c4adb7115d132b3c28b913672f2e62e6a9d802f7e754e716b1634174a",
+      "local_library_sha256": "626534e6a65dcae70c863b6e0170efed64a5b664101bd5c657d5ab771293fb76",
+      "local_header_sha256": "cb749c77250b1ded7ca9223ce2ee0ee75c4ddde6b29966d0df0a66a3efbc9299"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -67,6 +72,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/mupdf/1.28.6/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/mupdf.cpp /opt/homebrew/Cellar/mupdf/1.28.6/lib/libmupdf.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/mupdf",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/mupdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "ghostscript",
+      "version": "10.08.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/ghostscript/10.08.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/ghostscript.cpp /opt/homebrew/Cellar/ghostscript/10.08.0/lib/libgs.10.08.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/ghostscript",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/ghostscript /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },

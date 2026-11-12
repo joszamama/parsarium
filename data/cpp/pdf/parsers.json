@@ -63,5 +63,23 @@
     "family": "MuPDF C document parser",
     "family_note": "Direct MuPDF C API call from a C++17 translation unit; distinct from Poppler, PoDoFo, and qpdf. The official GitHub repository is a mirror of the canonical Ghostscript Git repository.",
     "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "ghostscript",
+    "version": "10.08.0",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/formula/ghostscript",
+    "documentation": "https://ghostscript.readthedocs.io/en/master/Language.html",
+    "api_documentation": "https://ghostscript.readthedocs.io/en/master/LanguageBindings.html",
+    "input_api": "gsapi_run_string on a local file path using Ghostscript PDF interpreter .PDFInit, .PDFFile, .PDFInfo /NumPages; C API called from C++17",
+    "adapter": "adapters/cpp/pdf/ghostscript.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF interpreter NumPages metadata",
+    "family": "Ghostscript PDF interpreter",
+    "family_note": "Direct Ghostscript C API call from C++17; PDF interpreter is a distinct engine from Poppler, PoDoFo, qpdf, and MuPDF. Source archive is GhostPDL, which contains Ghostscript. Canonical upstream is Ghostscript Git; GitHub mirrors are not used for popularity.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
   }
 ]
