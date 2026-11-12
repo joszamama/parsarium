@@ -89,6 +89,13 @@ public final class WavAdapter {
                 System.out.printf("{\"sample_rate\":%d,\"channels\":%d,\"bits\":%d,\"frames\":%d}%n",
                     (int) format.getSampleRate(), format.getChannels(), format.getSampleSizeInBits(), frames[0]);
             }
+            case "musicg" -> {
+                var wave = new com.musicg.wave.Wave(file.getAbsolutePath());
+                var header = wave.getWaveHeader();
+                System.out.printf("{\"format\":\"%s\",\"sample_rate\":%d,\"channels\":%d,\"bits\":%d,\"samples\":%d}%n",
+                    header.getFormat(), header.getSampleRate(), header.getChannels(),
+                    header.getBitsPerSample(), wave.getSampleAmplitudes().length);
+            }
             default -> throw new IllegalArgumentException("unknown mode: " + mode);
         }
     }

@@ -192,14 +192,14 @@ evidence; it is not part of offline reproduction after the PDF Clown archive
 has been cached.
 
 The Java × WAV batch uses Maven 3.9+, JDK 25, macOS arm64 for the Bytedeco
-bindings, and SHA-256 locks of 56 regular and 5 native-module classpath JARs.
+bindings, and SHA-256 locks of 57 regular and 5 native-module classpath JARs.
 `python3 controls/wav/make_control.py` generates a valid 556-byte mono
 PCM control with 256 frames (SHA-256
 `d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7`).
 The longer control accommodates readers that reject a 52-byte WAV or expect
 at least 128 bytes in the header buffer. Run `python3 scripts/verify_java_wav.py`
 from the repository root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
-The recorded result is **11/11 third-party package paths and 2/2 JDK APIs passing**.
+The recorded result is **12/12 third-party package paths and 2/2 JDK APIs passing**.
 The JDK adapter compiles and runs without any third-party classpath. JDSP uses
 wavfile, Tika and TarsosDSP delegate WAV parsing to Java Sound, and the two
 Bytedeco paths share FFmpeg. Three of five latest bounded Maven query attempts

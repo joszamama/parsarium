@@ -111,5 +111,15 @@
     "family": "TarsosDSP JVM wrapper over Java Sound", "scope": "sample rate, channels, bit depth and decoded frame count",
     "control": "controls/wav/256-samples.wav",
     "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16, "frames": 256}
+  },
+  {
+    "name": "musicg", "group": "com.github.fracpete", "artifact": "musicg", "version": "1.4.2.2",
+    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "input_api": "new Wave(String localPath).getWaveHeader(), getSampleAmplitudes()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/fracpete/musicg/1.4.2.2/musicg-1.4.2.2-javadoc.jar",
+    "documentation_archive_entry": "com/musicg/wave/Wave.html",
+    "family": "musicg PCM WAVE reader", "scope": "WAVE format, sample rate, channels, bit depth and sample count",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"format": "WAVE", "sample_rate": 8000, "channels": 1, "bits": 16, "samples": 256}
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-12T05:17:56.385961+00:00",
+  "captured_at_utc": "2026-11-12T05:22:10.430609+00:00",
   "search_surface": "Maven Central Solr bounded artifact queries; targeted official Maven Central releases and project docs",
   "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
   "search_limit_per_query": 100,
@@ -8,7 +8,7 @@
       "query": "wav",
       "url": "https://search.maven.org/solrsearch/select?q=wav&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:17:48.334294+00:00",
+      "captured_at_utc": "2026-11-12T05:22:02.396783+00:00",
       "total": 3,
       "hits": [
         {
@@ -32,15 +32,16 @@
       "query": "wav parser",
       "url": "https://search.maven.org/solrsearch/select?q=wav+parser&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:17:48.334561+00:00",
-      "total": 0,
-      "hits": []
+      "captured_at_utc": "2026-11-12T05:22:02.396972+00:00",
+      "total": null,
+      "hits": [],
+      "error": "TimeoutError: The read operation timed out"
     },
     {
       "query": "wav reader",
       "url": "https://search.maven.org/solrsearch/select?q=wav+reader&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:17:48.334751+00:00",
+      "captured_at_utc": "2026-11-12T05:22:02.397130+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -59,13 +60,13 @@
         }
       ],
       "latest_refresh_result": "TimeoutError: The read operation timed out",
-      "latest_refresh_at_utc": "2026-11-12T05:17:48.334939+00:00"
+      "latest_refresh_at_utc": "2026-11-12T05:22:02.397317+00:00"
     },
     {
       "query": "audio wav",
       "url": "https://search.maven.org/solrsearch/select?q=audio+wav&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-12T05:15:37.630361+00:00",
+      "captured_at_utc": "2026-11-12T05:22:02.397463+00:00",
       "total": 1,
       "hits": [
         {
@@ -73,9 +74,7 @@
           "name": "com.b3dgs.lionengine:lionengine-audio-wav",
           "latest_version": "9.0.5"
         }
-      ],
-      "latest_refresh_result": "TimeoutError: The read operation timed out",
-      "latest_refresh_at_utc": "2026-11-12T05:17:48.335150+00:00"
+      ]
     }
   ],
   "releases": {
@@ -210,6 +209,18 @@
       "pom_sha256": "fff71dd731a6afa97a0722f16bd048c691fdd3378124d604190db36023ad2a9f",
       "license": "GPL-3.0-only",
       "license_evidence": "Release Maven POM licenses and project README"
+    },
+    "musicg": {
+      "group": "com.github.fracpete",
+      "artifact": "musicg",
+      "version": "1.4.2.2",
+      "repository_url": "https://repo.maven.apache.org/maven2",
+      "jar_url": "https://repo.maven.apache.org/maven2/com/github/fracpete/musicg/1.4.2.2/musicg-1.4.2.2.jar",
+      "jar_sha256": "aed1ba04957299d7c9fbdbca8bb38123f9680136bdf4f5890d7b6acd2e744795",
+      "pom_url": "https://repo.maven.apache.org/maven2/com/github/fracpete/musicg/1.4.2.2/musicg-1.4.2.2.pom",
+      "pom_sha256": "eb28af5cea3cccc438975f473a965f5ef72591497f4bc21352b6d22173e6bd07",
+      "license": "Apache-2.0",
+      "license_evidence": "Maven POM licenses and project LICENSE"
     }
   },
   "native_releases": {
@@ -238,7 +249,7 @@
     "name": "deps.dev exact-version directDependentCount",
     "documentation": "https://docs.deps.dev/api/v3alpha/",
     "scope": "Known public direct dependents of pinned Maven releases; incomplete coverage and release-age bias",
-    "captured_at_utc": "2026-11-12T05:17:56.385992+00:00",
+    "captured_at_utc": "2026-11-12T05:22:10.430656+00:00",
     "packages": {
       "wavfile": {
         "direct_dependent_count": 1,
@@ -284,6 +295,10 @@
         "direct_dependent_count": null,
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/be.tarsos.dsp%3Ajvm/versions/2.5:dependents",
         "error": "HTTPError: HTTP Error 404: Not Found"
+      },
+      "musicg": {
+        "direct_dependent_count": 0,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.github.fracpete%3Amusicg/versions/1.4.2.2:dependents"
       }
     }
   }
