@@ -151,5 +151,15 @@
     "family": "bramp FFprobe CLI wrapper over FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
     "adapter_module": "bramp", "control": "controls/wav/256-samples.wav",
     "expected_output": {"format": "wav", "codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
+  },
+  {
+    "name": "metadata-extractor", "group": "com.drewnoakes", "artifact": "metadata-extractor", "version": "2.19.0",
+    "license": "Apache-2.0", "license_evidence": "Project LICENSE and Maven POM licenses",
+    "input_api": "WavMetadataReader.readMetadata(File), Metadata.getFirstDirectoryOfType(WavDirectory.class)",
+    "documentation": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.19.0/metadata-extractor-2.19.0-javadoc.jar",
+    "documentation_archive_entry": "com/drew/imaging/wav/WavMetadataReader.html",
+    "family": "metadata-extractor RIFF/WAV metadata reader", "scope": "WAV sample rate, channels and bit depth",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16}
   }
 ]

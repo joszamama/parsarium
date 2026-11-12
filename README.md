@@ -202,11 +202,11 @@ PCM control with 256 frames (SHA-256
 The longer control accommodates readers that reject a 52-byte WAV or expect
 at least 128 bytes in the header buffer. Run `python3 scripts/verify_java_wav.py`
 from the repository root; set `PARSARIUM_JAVA25_HOME` if JDK 25 is elsewhere.
-The recorded result is **15/15 third-party package paths and 2/2 JDK APIs passing**.
+The recorded result is **16/16 third-party package paths and 2/2 JDK APIs passing**.
 The JDK adapter compiles and runs without any third-party classpath. JDSP uses
 wavfile, Tika and TarsosDSP delegate WAV parsing to Java Sound, and the two
 Bytedeco, Jaffree, JAVE2 and Bramp paths share FFmpeg. JAVE2's macOS arm64 FFmpeg
-executable is supplied by a checksum-locked Maven artifact. Three of five latest bounded Maven query attempts
+executable is supplied by a checksum-locked Maven artifact. Four of five latest bounded Maven query attempts
 timed out; five hits (three unique) were saved across refreshes, and seven
 plausible leads remain unresolved. TarsosDSP 2.5 is pinned from its official
 non-Central repository; deps.dev does not provide a comparable count for it.

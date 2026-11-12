@@ -96,6 +96,15 @@ public final class WavAdapter {
                     header.getFormat(), header.getSampleRate(), header.getChannels(),
                     header.getBitsPerSample(), wave.getSampleAmplitudes().length);
             }
+            case "metadata-extractor" -> {
+                var metadata = com.drew.imaging.wav.WavMetadataReader.readMetadata(file);
+                var wav = metadata.getFirstDirectoryOfType(com.drew.metadata.wav.WavDirectory.class);
+                if (wav == null) throw new IllegalStateException("no WAV directory");
+                System.out.printf("{\"sample_rate\":%d,\"channels\":%d,\"bits\":%d}%n",
+                    wav.getInt(com.drew.metadata.wav.WavDirectory.TAG_SAMPLES_PER_SEC),
+                    wav.getInt(com.drew.metadata.wav.WavDirectory.TAG_CHANNELS),
+                    wav.getInt(com.drew.metadata.wav.WavDirectory.TAG_BITS_PER_SAMPLE));
+            }
             default -> throw new IllegalArgumentException("unknown mode: " + mode);
         }
     }
