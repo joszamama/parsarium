@@ -14,8 +14,9 @@ Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII P
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP and PHP × PNG have verified 20-parser batches. There are 59 cells at the 20-parser target, two started
-below target, and 27 marked `not_started`;
+PHP × ZIP and PHP × PNG have verified 20-parser batches, and PHP × ASCII PNM
+has a below-target batch. There are 59 cells at the 20-parser target, three started
+below target, and 26 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -36,6 +37,7 @@ python3 scripts/verify_cpp_zip.py
 python3 scripts/verify_cpp_wav.py
 python3 scripts/verify_php_zip.py
 python3 scripts/verify_php_png.py
+python3 scripts/verify_php_ascii_pnm.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -277,6 +279,15 @@ leads remain unresolved, and two aliases were rejected as duplicate source. The
 [PHP PNG cell summary](data/php/png/cell.json) records the search limits and
 uncertainty. Reproduction requires PHP 8.5 with GD and FFI, libvips 8.18.7,
 and Composer 2.
+
+The [PHP × ASCII PNM ranking](data/php/ascii_pnm/ranking.md) has six pinned
+Composer package paths passing the valid two-pixel P3 control. All six delegate
+to the same libvips decoder; the direct binding also returns both RGB pixels.
+Eight bounded Packagist searches saved 242 hits and 239 distinct names. Four
+leads remain unresolved, and 14 paths are still needed for the working goal.
+The [runtime inventory](data/php/ascii_pnm/standard.json) records that the
+tested PHP core and GD APIs did not parse the control. Reproduction requires
+PHP 8.5 with FFI, libvips 8.18.7, and Composer 2.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1190,6 +1201,9 @@ uncertainty.
 - `data/php/png/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and four separate PHP runtime APIs.
   The adapters and Composer lock live under `adapters/php/png/`.
+- `data/php/ascii_pnm/`: Packagist discovery hits, six pinned Composer package
+  paths, lifetime download ranking, control results, leads, and a separate PHP
+  runtime inventory. Two Composer locks live under `adapters/php/ascii_pnm/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,

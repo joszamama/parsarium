@@ -1,0 +1,35 @@
+{
+  "ecosystem": "PHP",
+  "format": "ASCII PNM",
+  "runtime": "PHP 8.5.12 CLI with GD 2.3.3",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "candidate": "getimagesize and getimagesizefromstring",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.getimagesize.php",
+        "https://www.php.net/manual/en/function.getimagesizefromstring.php"
+      ],
+      "finding": "The documented header readers returned false on the valid ASCII P3 control; no PNM dimensions or pixels were parsed."
+    },
+    {
+      "candidate": "GD imagecreatefromstring and imagecreatefrom* functions",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.imagecreatefromstring.php",
+        "https://www.php.net/manual/en/ref.image.php"
+      ],
+      "finding": "PHP documents auto-detection for JPEG, PNG, GIF, BMP, WBMP, GD2, WEBP, and AVIF, not PNM; imagecreatefromstring returned false on the valid P3 control. No dedicated PNM loader is listed."
+    },
+    {
+      "candidate": "generic file_get_contents, streams, and FFI",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.file-get-contents.php",
+        "https://www.php.net/manual/en/book.ffi.php"
+      ],
+      "finding": "These expose bytes or foreign-library calls but contain no bundled PNM grammar. The verified libvips paths are third-party Composer packages and a separately installed native library."
+    }
+  ],
+  "runtime_probe": "adapters/php/ascii_pnm/runtime_probe.php",
+  "limit": "Scoped to PHP 8.5.12 core and bundled GD; optional Imagick is not installed. A negative probe of three candidate APIs is recorded in verification.json."
+}

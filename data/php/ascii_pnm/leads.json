@@ -1,0 +1,44 @@
+[
+  {
+    "name": "imagine/imagine",
+    "status": "unresolved",
+    "reason": "Its Imagick driver may open PNM, but the installed PHP runtime has no Imagick extension; the GD backend failed the P3 control. The Vips backend belongs to rokka/imagine-vips, counted separately.",
+    "source": "https://packagist.org/packages/imagine/imagine"
+  },
+  {
+    "name": "php-ffmpeg/php-ffmpeg",
+    "status": "unresolved",
+    "reason": "The package documents local media input through FFmpeg, which may accept PNM, but a pinned release and observable P3 control have not been tested.",
+    "source": "https://packagist.org/packages/php-ffmpeg/php-ffmpeg"
+  },
+  {
+    "name": "carbon/vips",
+    "status": "unresolved",
+    "reason": "This Neos CMS plugin depends on rokka/imagine-vips, but a documented direct local-input API for its own package and control run have not been established.",
+    "source": "https://packagist.org/packages/carbon/vips"
+  },
+  {
+    "name": "mako/pixel-vips",
+    "status": "unresolved",
+    "reason": "The source describes a libvips image adapter, but Packagist lists only development versions; a pinned open-source release and public local-input control remain unverified.",
+    "source": "https://packagist.org/packages/mako/pixel-vips"
+  },
+  {
+    "name": "pnm1231/nic-parser",
+    "status": "excluded",
+    "reason": "PNM is part of an author handle; this validates Sri Lankan identity card numbers, not portable anymap images.",
+    "source": "https://packagist.org/packages/pnm1231/nic-parser"
+  },
+  {
+    "name": "lukasss93/pdf-to-ppm",
+    "status": "excluded",
+    "reason": "Converts PDF input to PPM output; the documented direction does not parse a PNM file.",
+    "source": "https://packagist.org/packages/lukasss93/pdf-to-ppm"
+  },
+  {
+    "name": "fdmind/statamic-libvips",
+    "status": "excluded",
+    "reason": "Packagist release metadata declares a proprietary license, so it fails the open-source requirement.",
+    "source": "https://packagist.org/packages/fdmind/statamic-libvips"
+  }
+]

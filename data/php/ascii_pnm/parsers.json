@@ -1,0 +1,144 @@
+[
+  {
+    "name": "jcupitt/vips",
+    "version": "v2.6.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/libvips/php-vips/blob/6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee/LICENSE.txt",
+    "documentation": "https://github.com/libvips/php-vips/blob/6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee/README.md",
+    "input_api": "Image::newFromFile(local P3 file); width/height and getpoint pixels",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "left_rgb": [
+        255,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "decoded dimensions and RGB pixels",
+    "family": "libvips PPM/PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "spatie/image",
+    "version": "3.9.10",
+    "license": "MIT",
+    "license_evidence": "https://github.com/spatie/image/blob/de071f9aceaeed977401d6983a8bbe0c21b411dd/LICENSE.md",
+    "documentation": "https://github.com/spatie/image/blob/de071f9aceaeed977401d6983a8bbe0c21b411dd/src/Image.php",
+    "input_api": "Image::useImageDriver(Vips)->loadFile(local P3 file); getWidth/getHeight",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PPM/PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "rokka/imagine-vips",
+    "version": "0.42.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/rokka-io/imagine-vips/blob/b6382de7104d96f2f7df277e403927fab85a4b41/LICENSE",
+    "documentation": "https://github.com/rokka-io/imagine-vips/blob/b6382de7104d96f2f7df277e403927fab85a4b41/README.md",
+    "input_api": "Imagine\\Vips\\Imagine::open(local P3 file); getSize",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PPM/PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "intervention/image",
+    "version": "4.4.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Intervention/image/blob/3a47838f2e0f4ec6c8c9b43a5d73ac985b975830/LICENSE",
+    "documentation": "https://github.com/Intervention/image/blob/3a47838f2e0f4ec6c8c9b43a5d73ac985b975830/src/ImageManager.php",
+    "input_api": "ImageManager(VipsDriver)->decodePath(local P3 file); width/height",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PPM/PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "intervention/image-driver-vips",
+    "version": "4.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Intervention/image-driver-vips/blob/2aca734a68c447aed1304d8b2121b223d2790e00/LICENSE",
+    "documentation": "https://github.com/Intervention/image-driver-vips/blob/2aca734a68c447aed1304d8b2121b223d2790e00/src/Driver.php",
+    "input_api": "Vips\\Driver::decodeImage(local P3 file); width/height",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PPM/PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "osiemsiedem/intervention-image-vips-driver",
+    "version": "v0.11.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/osiemsiedem/intervention-image-vips-driver/blob/3068585d60277674f9ebfc73e5577db86ab28e4a/LICENSE.md",
+    "documentation": "https://github.com/osiemsiedem/intervention-image-vips-driver/blob/3068585d60277674f9ebfc73e5577db86ab28e4a/src/Decoder.php",
+    "input_api": "Vips\\Decoder::initFromPath(local P3 file); width/height",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/legacy/composer.lock",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PPM/PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine. This older package is marked abandoned by Packagist.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  }
+]
