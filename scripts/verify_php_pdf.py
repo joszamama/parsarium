@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 import json
+import os
 import platform
 import subprocess
 
@@ -71,12 +72,15 @@ def main() -> None:
     expected_probe = {"fileinfo_loaded": True, "fileinfo_mime": "application/pdf", "gd_loaded": True,
                       "getimagesize": False, "imagecreatefromstring": False}
     assert probe == expected_probe, probe
+    pdftk_command = os.environ.get("PARSARIUM_PDFTK", "/opt/homebrew/bin/pdftk")
     report = {
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "platform": platform.platform(),
         "php_version": execute(["php", "-r", "echo PHP_VERSION;"]).stdout,
         "composer_version": execute(["composer", "--version"]).stdout.strip(),
         "pdftotext_cli_version": execute(["pdftotext", "-v"]).stderr.splitlines()[0],
+        "pdftk_command": pdftk_command,
+        "pdftk_cli_version": execute([pdftk_command, "--version"]).stdout.splitlines()[0],
         "controls": [{"path": str(CONTROL.relative_to(ROOT)), "sha256": sha256(CONTROL.read_bytes()).hexdigest()}],
         "composer_locks": [{"path": name, "sha256": lock["sha256"]} for name, lock in locks.items()],
         "third_party": rows,
