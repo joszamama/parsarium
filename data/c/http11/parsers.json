@@ -128,5 +128,18 @@
     "adapter": "adapters/c/http11/libwebsockets.c",
     "control": "controls/http11/request.http",
     "expected_output": {"method": "GET", "path": "/parsarium?x=1", "host": "example.test"}
+  },
+  {
+    "name": "libonion",
+    "version": "0.8",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned release LICENSE.txt and APACHE2.txt dual-license notice for src library",
+    "documentation": "https://github.com/davidmoreno/onion/blob/v0.8/src/onion/request.h",
+    "input_api": "onion_request_new(NULL); onion_request_write(request, local request bytes, length); onion_request_get_fullpath/get_query/get_header/get_flags access parsed fields",
+    "family": "libonion C HTTP/1 request state machine in request_parser.c, independent from llhttp and PicoHTTPParser",
+    "scope": "HTTP/1.1 GET request method, path, query value, version and Host header from local byte buffer",
+    "adapter": "adapters/c/http11/libonion.c",
+    "control": "controls/http11/request.http",
+    "expected_output": {"method": "GET", "path": "/parsarium", "version": "1.1", "host": "example.test", "query_x": "1"}
   }
 ]

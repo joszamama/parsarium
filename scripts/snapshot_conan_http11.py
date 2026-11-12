@@ -13,7 +13,7 @@ REPOS = {"llhttp": "nodejs/llhttp", "http-parser": "nodejs/http-parser",
          "picohttpparser": "h2o/picohttpparser", "mongoose": "cesanta/mongoose",
          "httpp": "cebem1nt/httpp", "HTTPParserC": "Building42/HTTPParserC",
          "libmicrohttpd": None, "libevhtp": "ellzey/libevhtp", "libhtp": "OISF/libhtp",
-         "libwebsockets": "warmcat/libwebsockets"}
+         "libwebsockets": "warmcat/libwebsockets", "libonion": "davidmoreno/onion"}
 
 
 def get(url: str) -> dict:

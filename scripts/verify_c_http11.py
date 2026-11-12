@@ -55,15 +55,39 @@ def main() -> None:
     for path_key, hash_key in (("system_library", "system_library_sha256"),
                                ("system_header", "system_header_sha256")):
         assert sha256(Path(websockets[path_key]).read_bytes()).hexdigest() == websockets[hash_key]
+    libev = lock["libonion"]["build_dependency"]
+    libev_prefix = Path(run(["brew", "--prefix", "libev"]).stdout.strip()).resolve()
+    assert libev_prefix.name == libev["release"]
+    libev_library = libev_prefix / "lib/libev.dylib"
+    libev_header = libev_prefix / "include/ev.h"
+    assert sha256(libev_library.read_bytes()).hexdigest() == libev["library_sha256"]
+    assert sha256(libev_header.read_bytes()).hexdigest() == libev["header_sha256"]
     with tempfile.TemporaryDirectory(prefix="parsarium-c-http11-build-") as temporary:
         build = Path(temporary)
-        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp"):
+        for name in ("http-parser", "picohttpparser", "mongoose", "httpp", "HTTPParserC", "libevhtp", "libhtp", "libonion"):
             with tarfile.open(archive(name, lock[name])) as tar:
                 tar.extractall(build, filter="data")
         libhtp_source = build / "libhtp-0.5.53"
         run(["./autogen.sh"], cwd=libhtp_source)
         run(["./configure", "--disable-shared", "--enable-static"], cwd=libhtp_source)
         run(["make", "-j4"], cwd=libhtp_source)
+        libonion_source = build / "onion-0.8"
+        poller = libonion_source / "src/onion/poller_libev.c"
+        original = "void onion_poller_slot_set_type(onion_poller_slot *el, int type){"
+        updated = "void onion_poller_slot_set_type(onion_poller_slot *el, onion_poller_slot_type_e type){"
+        poller_text = poller.read_text()
+        assert poller_text.count(original) == 1
+        poller.write_text(poller_text.replace(original, updated))
+        libonion_build = build / "libonion-build"
+        run(["cmake", "-S", str(libonion_source), "-B", str(libonion_build),
+             "-DONION_USE_PAM=OFF", "-DONION_USE_JPEG=OFF", "-DONION_USE_SSL=OFF",
+             "-DONION_USE_PNG=OFF", "-DONION_USE_XML2=OFF", "-DONION_USE_SQLITE3=OFF",
+             "-DONION_USE_REDIS=OFF", "-DONION_USE_SYSTEMD=OFF", "-DONION_EXAMPLES=OFF",
+             "-DONION_USE_BINDINGS_CPP=OFF", "-DCMAKE_BUILD_TYPE=Release",
+             "-DCMAKE_POLICY_VERSION_MINIMUM=3.5", "-DLIBEV_LIB=" + str(libev_library),
+             "-DLIBEV_HEADER=" + str(libev_prefix / "include"),
+             "-DCMAKE_C_FLAGS=-include " + str(ADAPTER / "libonion_macos_compat.h")])
+        run(["cmake", "--build", str(libonion_build), "--target", "onion_static", "-j4"])
         llflags = run(["pkg-config", "--cflags", "--libs", "libllhttp"]).stdout.split()
         mhdflags = run(["pkg-config", "--cflags", "--libs", "libmicrohttpd"]).stdout.split()
         lws_cflags = run(["pkg-config", "--cflags", "openssl", "libwebsockets"]).stdout.split()
@@ -112,7 +136,13 @@ def main() -> None:
             "libwebsockets": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
                               "-I" + str(ADAPTER), str(ADAPTER / "libwebsockets.c"),
                               *lws_cflags, *lws_libs,
-                              "-o", str(build / "libwebsockets-adapter")]}
+                              "-o", str(build / "libwebsockets-adapter")],
+            "libonion": ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror",
+                         "-I" + str(ADAPTER), "-I" + str(libonion_source / "src"),
+                         "-I" + str(libonion_build / "src"), str(ADAPTER / "libonion.c"),
+                         str(libonion_build / "src/onion/libonion_static.a"),
+                         "-L" + str(libev_prefix / "lib"), "-lev",
+                         "-o", str(build / "libonion-adapter")]}
         rows = []
         for parser in parsers:
             name = parser["name"]
@@ -131,7 +161,9 @@ def main() -> None:
                               "libmicrohttpd_version": lock["libmicrohttpd"]["release"],
                               "libmicrohttpd_library_sha256": lock["libmicrohttpd"]["system_library_sha256"],
                               "libwebsockets_version": websockets["release"],
-                              "libwebsockets_library_sha256": websockets["system_library_sha256"]},
+                              "libwebsockets_library_sha256": websockets["system_library_sha256"],
+                              "libonion_build_dependency": "libev " + libev["release"],
+                              "libonion_compatibility": "macOS preinclude plus poller parameter type correction in temporary source"},
               "control": "controls/http11/request.http", "control_sha256": control_hash,
               "control_meaning": "Valid HTTP/1.1 GET request with Host, custom, and Connection headers",
               "third_party": rows, "runtime": []}
