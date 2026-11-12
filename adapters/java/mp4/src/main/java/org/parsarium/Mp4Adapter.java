@@ -38,6 +38,19 @@ public final class Mp4Adapter {
                 System.out.printf("{\"tracks\":%d,\"video_width\":%d,\"video_height\":%d}%n",
                     movie.getTracks().length, video.getCodedSize().getWidth(), video.getCodedSize().getHeight());
             }
+            case "tika-mp4" -> {
+                var parser = new org.apache.tika.parser.mp4.MP4Parser();
+                var metadata = new org.apache.tika.metadata.Metadata();
+                try (var stream = org.apache.tika.io.TikaInputStream.get(file.toPath())) {
+                    parser.parse(stream, new org.xml.sax.helpers.DefaultHandler(), metadata,
+                        new org.apache.tika.parser.ParseContext());
+                }
+                System.out.printf("{\"width\":%d,\"height\":%d,\"sample_rate\":%d,\"channels\":%d,\"title\":\"%s\"}%n",
+                    Integer.parseInt(metadata.get("tiff:ImageWidth")),
+                    Integer.parseInt(metadata.get("tiff:ImageLength")),
+                    Integer.parseInt(metadata.get("xmpDM:audioSampleRate")),
+                    Integer.parseInt(metadata.get("audio:channels")), metadata.get("dc:title"));
+            }
             default -> throw new IllegalArgumentException("unknown mode: " + args[0]);
         }
     }

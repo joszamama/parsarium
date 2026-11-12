@@ -34,5 +34,15 @@
     "documentation_archive_entry": "org/mp4parser/muxer/container/mp4/MovieCreator.html",
     "family": "sannies MP4Parser movie builder over isoparser", "scope": "video and audio track handlers",
     "control": "controls/mp4/red-av.mp4", "expected_output": {"tracks": 2, "handlers": ["vide", "soun"]}
+  },
+  {
+    "name": "tika-mp4", "group": "org.apache.tika", "artifact": "tika-parser-audiovideo-module", "version": "4.2.0",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "MP4Parser.parse(TikaInputStream localMp4,ContentHandler,Metadata,ParseContext)",
+    "documentation": "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-javadoc.jar",
+    "documentation_archive_entry": "org/apache/tika/parser/mp4/MP4Parser.html",
+    "family": "Apache Tika MP4Parser over metadata-extractor", "scope": "parsed video dimensions, audio properties and title",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {"width": 2, "height": 2, "sample_rate": 8000, "channels": 1, "title": "Parsarium"}
   }
 ]

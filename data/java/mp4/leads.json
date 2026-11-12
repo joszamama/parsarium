@@ -6,6 +6,12 @@
     "reason": "Older Maven coordinate of the MP4Parser family; verify a distinct pinned distribution path and control result before inclusion."
   },
   {
+    "name": "com.liferay:org.mp4parser",
+    "status": "unresolved",
+    "source": "https://search.maven.org/artifact/com.liferay/org.mp4parser",
+    "reason": "Maven search identifies a Liferay-patched MP4Parser distribution. Confirm its documented local input API, pinned release, valid control result, and shared underlying family before inclusion."
+  },
+  {
     "name": "javacv",
     "status": "unresolved",
     "source": "https://github.com/bytedeco/javacv",
@@ -13,15 +19,9 @@
   },
   {
     "name": "jaudiotagger",
-    "status": "unresolved",
+    "status": "rejected",
     "source": "https://github.com/ijabz/jaudiotagger",
-    "reason": "Project documents MP4 audio metadata but this control includes video; verify the exact local API and parsed result before inclusion."
-  },
-  {
-    "name": "Apache Tika video parser",
-    "status": "unresolved",
-    "source": "https://tika.apache.org/",
-    "reason": "Inspect the pinned parser module and confirm box- or stream-derived MP4 metadata rather than a filename or MIME result."
+    "reason": "Pinned net.jthink:jaudiotagger:3.0.1 AudioFileIO.read(File) threw CannotReadVideoException on the valid MP4 control, explicitly stating that MP4 video files are not supported. Its M4A audio support does not verify this cell control."
   },
   {
     "name": "FFprobe and MediaInfo Java wrappers",
@@ -154,5 +154,11 @@
     "status": "unresolved",
     "source": "Maven Central mp4 query, rank 48; https://github.com/sannies/mp4parser/tree/master/streaming",
     "reason": "MP4 streaming writer code is documented; a local MP4 input API with parsed result is not yet established."
+  },
+  {
+    "name": "me.tamkungz.codecmedia:codecmedia",
+    "status": "rejected",
+    "source": "https://github.com/CodecMediaLib/codecmedia-java; pinned 1.2.2 Maven source JAR",
+    "reason": "The local probe(Path) run on the valid MP4 returned only the ftyp major brand and no parsed tracks or dimensions. Its parser scans only top-level boxes for this control; the result is too close to format identification to meet this cell verification threshold."
   }
 ]
