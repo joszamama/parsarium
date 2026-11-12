@@ -11,6 +11,7 @@ import shlex
 import subprocess
 import tarfile
 import tempfile
+import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,6 +38,15 @@ def archive(name: str, source: dict) -> Path:
         with urlopen(Request(url, headers={"User-Agent": "Parsarium C PDF verifier"}), timeout=90) as response:
             target.write_bytes(response.read())
     assert sha256(target.read_bytes()).hexdigest() == source["source_sha256"]
+    return target
+
+
+def nuget_archive(name: str, version: str, url: str, expected_sha256: str) -> Path:
+    target = CACHE / f"{name}-{version}.nupkg"
+    if not target.exists() or sha256(target.read_bytes()).hexdigest() != expected_sha256:
+        with urlopen(Request(url, headers={"User-Agent": "Parsarium C PDF verifier"}), timeout=120) as response:
+            target.write_bytes(response.read())
+    assert sha256(target.read_bytes()).hexdigest() == expected_sha256
     return target
 
 
@@ -79,6 +89,21 @@ def main() -> None:
                          timeout=90) as response:
                 upstream_header = base64.b64decode(response.read())
             assert sha256(upstream_header).hexdigest() == source["source_header_sha256"]
+        elif name == "vanillapdf":
+            headers_package = source["nuget_headers"]
+            runtime_package = source["nuget_runtime"]
+            headers_archive = nuget_archive("vanillapdf-headers", source["release"],
+                                            headers_package["url"], headers_package["sha256"])
+            runtime_archive = nuget_archive("vanillapdf-runtime", source["release"],
+                                            runtime_package["url"], runtime_package["sha256"])
+            source_dir = CACHE / "vanillapdf-2.3.0"
+            source_dir.mkdir(exist_ok=True)
+            with zipfile.ZipFile(headers_archive) as package:
+                package.extractall(source_dir)
+            with zipfile.ZipFile(runtime_archive) as package:
+                package.extractall(source_dir)
+            header = source_dir / headers_package["header_member"]
+            library = source_dir / runtime_package["library_member"]
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
@@ -103,6 +128,9 @@ def main() -> None:
                        "-lz", "-o", str(TARGET / name)]
         elif name == "pdfium":
             command = [*base, "-I" + str(header.parent), adapter, str(library),
+                       "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
+        elif name == "vanillapdf":
+            command = [*base, "-I" + str(header.parents[2]), adapter, str(library),
                        "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
         elif name in ("mupdf", "ghostscript"):
             assert run(["brew", "list", "--versions", name]) == name + " " + source["release"]

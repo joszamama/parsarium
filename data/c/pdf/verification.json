@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T23:01:11.121621+00:00",
+  "checked_at_utc": "2026-11-12T23:47:24.638635+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,13 +26,18 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "9a56cf6ce4113fe7d7092c1adc072ddcf7774262a94fb89cc35d77997dadfe6f",
+      "local_library_sha256": "8d3b28a07fbe4972c84a9bf19c8dd28170d4a17cd58a69e1cb0ba9c14d482fbf",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
       "source_sha256": "30b0c3f55448840f0947b54bedbe35185bbaccbadd35b8cd960270d6fa6caf80",
       "local_library_sha256": "93df07adf9d1427ebaf192db5bc7f1c6438c5d1180f469acb8d297cf725e359d",
       "local_header_sha256": "21fb11834607c74cbc1e3a9ac14a85a5dba95d7669ec86c21c05a4890a38648d"
+    },
+    "vanillapdf": {
+      "source_sha256": "2f1bf4108a60dd54f3c9d7ca9a83903cc1984cde3a54df502664426e1e255741",
+      "local_library_sha256": "c113c8628700ca164876abf1bc401849f6c660856585557b66b7e6eb51c74464",
+      "local_header_sha256": "0cf0fe0ae3a70b447a2614f4a9aff5e47ebefe73b94c405f7aad802715d74b3b"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -100,6 +105,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/pdfium-159.0.8152.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/pdfium.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/pdfium-159.0.8152.0/lib/libpdfium.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/pdfium-159.0.8152.0/lib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/pdfium",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/pdfium /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "vanillapdf",
+      "version": "2.3.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/vanillapdf-2.3.0/build/native/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/vanillapdf.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/vanillapdf-2.3.0/runtimes/osx-arm64/native/libvanillapdf.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/vanillapdf-2.3.0/runtimes/osx-arm64/native -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/vanillapdf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/vanillapdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },

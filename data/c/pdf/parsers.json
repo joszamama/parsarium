@@ -94,5 +94,21 @@
     "scope": "PDF document page count and first page object",
     "family": "PDFium PDF parser",
     "family_note": "Direct C API. SHA-256-pinned distributor binary release and original header matched to canonical source revision; binary provenance remains limited to distributor release claim and header match. Same release and engine as C++ PDF cell."
+  },
+  {
+    "name": "vanillapdf",
+    "version": "2.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/vanillapdf/vanillapdf/blob/v2.3.0/LICENSE.txt",
+    "documentation": "https://vanillapdf.readthedocs.io/en/stable/c_api.html",
+    "input_api": "Document_Open(local filename); Document_GetCatalog(); Catalog_GetPages(); PageTree_GetPageCount() and PageTree_GetPage(1)",
+    "adapter": "adapters/c/pdf/vanillapdf.c",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "Vanilla.PDF C API over C++ PDF parser",
+    "family_note": "Official publisher C ABI backed by its native C++ parser. C and C++ call sites share the same v2.3.0 engine and are one package path per ecosystem; the C++ call site uses the documented C API, not a separate C++ API."
   }
 ]

@@ -12,6 +12,7 @@ import shlex
 import subprocess
 import tarfile
 import tempfile
+import zipfile
 
 from patch_pdf4qt_core import patch_pdf4qt_core
 from patch_docling_parse import patch_docling_parse
@@ -41,6 +42,15 @@ def archive(name: str, source: dict) -> Path:
                      timeout=90) as response:
             target.write_bytes(response.read())
     assert sha256(target.read_bytes()).hexdigest() == source["source_sha256"]
+    return target
+
+
+def nuget_archive(name: str, version: str, url: str, expected_sha256: str) -> Path:
+    target = CACHE / f"{name}-{version}.nupkg"
+    if not target.exists() or sha256(target.read_bytes()).hexdigest() != expected_sha256:
+        with urlopen(Request(url, headers={"User-Agent": "Parsarium C++ PDF verifier"}), timeout=120) as response:
+            target.write_bytes(response.read())
+    assert sha256(target.read_bytes()).hexdigest() == expected_sha256
     return target
 
 
@@ -171,6 +181,21 @@ def main() -> None:
                  "-DOPENSSL_ROOT_DIR=/opt/homebrew/Cellar/openssl@4/4.1.0"])
             run(["cmake", "--build", str(build_dir), "--target", "pdfmm_shared", "-j4"])
             library = build_dir / "src/pdfmm/libpdfmm.0.10.0.dylib"
+        elif name == "vanillapdf":
+            headers_package = source["nuget_headers"]
+            runtime_package = source["nuget_runtime"]
+            headers_archive = nuget_archive("vanillapdf-headers", source["release"],
+                                            headers_package["url"], headers_package["sha256"])
+            runtime_archive = nuget_archive("vanillapdf-runtime", source["release"],
+                                            runtime_package["url"], runtime_package["sha256"])
+            source_dir = CACHE / "vanillapdf-2.3.0"
+            source_dir.mkdir(exist_ok=True)
+            with zipfile.ZipFile(headers_archive) as package:
+                package.extractall(source_dir)
+            with zipfile.ZipFile(runtime_archive) as package:
+                package.extractall(source_dir)
+            header = source_dir / headers_package["header_member"]
+            library = source_dir / runtime_package["library_member"]
         elif name == "docling_parse":
             patch = ROOT / source["patch"]
             adapter = ROOT / parser["adapter"]
@@ -266,6 +291,11 @@ def main() -> None:
                        "-I" + str(source_dir / "src"), "-I" + str(build_dir / "src/pdfmm"),
                        str(ROOT / parser["adapter"]), str(library),
                        "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
+        elif name == "vanillapdf":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parents[2]), str(ROOT / parser["adapter"]),
+                       str(library), "-Wl,-rpath," + str(library.parent),
+                       "-o", str(TARGET / name)]
         elif name == "docling_parse":
             command = ["cmake", "--build", str(build_dir), "--target", "parsarium_control", "-j4"]
         else:

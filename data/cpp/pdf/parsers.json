@@ -211,5 +211,21 @@
     "scope": "PDF document page count",
     "family": "qpdf engine via Docling Parse",
     "family_note": "Docling Parse 7.25.0 exposes a C++20 local-file decoder over bundled qpdf. It is a distinct source package and API but shares qpdf as the PDF syntax engine. A pinned-source CMake target builds the adapter with pinned LLVM and bundled dependency tags; the recorded patch only adds the adapter target and propagates LLVM into the qpdf subbuild. The source does not publish a separately installed stable C++ ABI."
+  },
+  {
+    "name": "vanillapdf",
+    "version": "2.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/vanillapdf/vanillapdf/blob/v2.3.0/LICENSE.txt",
+    "documentation": "https://vanillapdf.readthedocs.io/en/stable/c_api.html",
+    "input_api": "Document_Open(local filename); Document_GetCatalog(); Catalog_GetPages(); PageTree_GetPageCount() and PageTree_GetPage(1)",
+    "adapter": "adapters/cpp/pdf/vanillapdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "Vanilla.PDF C API over C++ PDF parser",
+    "family_note": "Official publisher C ABI backed by its native C++ parser. C and C++ call sites share the same v2.3.0 engine and are one package path per ecosystem; the C++ call site uses the documented C API, not a separate C++ API."
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T23:42:54.008279+00:00",
+  "checked_at_utc": "2026-11-12T23:49:48.745858+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,7 +31,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "64a1f402c84d38676077628ecf95db51cc4c8b652c58ccccaccc545840d65e41",
+      "local_library_sha256": "0178add559621aa9d95c82b042520b66e26fb78fdaeecee8dc8440a2637a4ce6",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -56,7 +56,7 @@
     },
     "xpdf": {
       "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
-      "local_library_sha256": "30dcebffd75069392584339dc1e3654cce08068806c7397c78ba92271a35b856",
+      "local_library_sha256": "6aee4a209737b701ad65eb2d4b53fa2ac74867fb86a89e2075392ee417efa14f",
       "local_header_sha256": "d9db2a755da945a0c80fbf30f07d4714625bde1bc832759971514f41842bb064"
     },
     "pdfmm": {
@@ -68,6 +68,11 @@
       "source_sha256": "6a5a63e94752b10f88405300575d83ff244fc5cd6b3d9f3d6ea5b41cd283ee18",
       "local_library_sha256": "3820d3e565cea5b708f7b28a7302640a74d4c5f8f058e85d6a5b78a3732aa9d9",
       "local_header_sha256": "a63311fd6273fe9fd608f61329b4c9159daf945fe0ba2c9410700f92e31cd582"
+    },
+    "vanillapdf": {
+      "source_sha256": "2f1bf4108a60dd54f3c9d7ca9a83903cc1984cde3a54df502664426e1e255741",
+      "local_library_sha256": "c113c8628700ca164876abf1bc401849f6c660856585557b66b7e6eb51c74464",
+      "local_header_sha256": "0cf0fe0ae3a70b447a2614f4a9aff5e47ebefe73b94c405f7aad802715d74b3b"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -211,6 +216,17 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/docling-parse-build --target parsarium_control -j4",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/docling_parse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "vanillapdf",
+      "version": "2.3.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/vanillapdf-2.3.0/build/native/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/vanillapdf.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/vanillapdf-2.3.0/runtimes/osx-arm64/native/libvanillapdf.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/vanillapdf-2.3.0/runtimes/osx-arm64/native -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/vanillapdf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/vanillapdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
       },

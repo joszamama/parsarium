@@ -175,23 +175,24 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C × PDF batch verifies **6/20 third-party package paths** from C call sites:
-Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, and PDFium. All return
+The C × PDF batch verifies **7/20 third-party package paths** from C call sites:
+Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, PDFium, and Vanilla.PDF. All return
 one parsed page from the valid local control. qpdf requires a C++ linker for
-its C interface; PDFio builds from pinned source, and PDFium uses a pinned
-binary distribution. Apple Core Graphics is independently verified as a
+its C interface; PDFio builds from pinned source. PDFium and Vanilla.PDF use
+hash-pinned binary distributions with source-matched public headers. Apple Core
+Graphics is independently verified as a
 macOS platform runtime API and is kept outside the third-party ranking. See
 the [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **13/20 package paths**:
+The C++ × PDF batch currently verifies **14/20 package paths**:
 Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium,
-PDF-Writer, PDF4QT, Qt PDF, Xpdf, pdfmm, and Docling Parse. MuPDF,
-Ghostscript, PDFio, and PDFium use C APIs called
+PDF-Writer, PDF4QT, Qt PDF, Xpdf, pdfmm, Docling Parse, and Vanilla.PDF. MuPDF,
+Ghostscript, PDFio, PDFium, and Vanilla.PDF use C APIs called
 directly from C++17; PDF-Writer and PDF4QT use native C++ parsers. All return one parsed page
-from the valid PDF control. Five installed release archives, headers, and
-libraries are SHA-256 checked; PDFio, PDF-Writer, and PDF4QT are source-built, and
-PDFium uses a pinned binary distribution with an original header matched to
-upstream. PDF4QT uses a pinned Blend2D dependency and a recorded macOS core-only
+from the valid PDF control. Release sources, installed headers, and libraries are
+SHA-256 checked; PDFio, PDF-Writer, and PDF4QT are source-built. PDFium and
+Vanilla.PDF use pinned binary distributions with public headers matched to
+their source releases. PDF4QT uses a pinned Blend2D dependency and a recorded macOS core-only
 source patch. Qt PDF's native QPdfDocument API shares the PDFium engine. Xpdf
 links source-built object libraries and has no installed public library ABI.
 Pdfmm is a source-built fork of PoDoFo. Docling Parse uses a bundled qpdf

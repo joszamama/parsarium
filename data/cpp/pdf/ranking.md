@@ -1,6 +1,6 @@
 # C++ × PDF: verified parser ranking
 
-13 verified third-party package paths; working goal 20, ceiling 30. Exact GitHub stars of each primary upstream repository are compared only within C++. Stars proxy broad project interest, not PDF-specific adoption. Homebrew formula search names are discovery leads, not a popularity ranking. Poppler, MuPDF, Ghostscript, PDFium, Qt PDF, and Xpdf have canonical non-GitHub upstreams and remain unranked.
+14 verified third-party package paths; working goal 20, ceiling 30. Exact GitHub stars of each primary upstream repository are compared only within C++. Stars proxy broad project interest, not PDF-specific adoption. Homebrew formula search names are discovery leads, not a popularity ranking. Poppler, MuPDF, Ghostscript, PDFium, Qt PDF, and Xpdf have canonical non-GitHub upstreams and remain unranked.
 
 | Rank | Package | Pinned release | Primary GitHub stars | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -11,6 +11,7 @@
 | 5 | [PDFio](https://www.msweet.org/pdfio/pdfio.html) | 1.6.5 | 361 | parsed PDF page count and first page object | PDFio PDF parser |
 | 6 | [Docling Parse](https://github.com/docling-project/docling-parse/blob/v7.25.0/src/parse/pdf_decoders/document.h) | 7.25.0 | 347 | parsed PDF page count | qpdf engine via Docling Parse |
 | 7 | [pdfmm](https://github.com/pdfmm/pdfmm/blob/v0.10.0/src/pdfmm/base/PdfMemDocument.h) | 0.10.0 | 62 | parsed PDF page count | pdfmm, fork of PoDoFo |
+| 8 | [Vanilla.PDF](https://vanillapdf.readthedocs.io/en/stable/c_api.html) | 2.3.0 | 13 | parsed PDF page count and first page object | Vanilla.PDF C API over C++ PDF parser |
 | unranked | [Poppler C++](https://poppler.freedesktop.org/api/cpp/classpoppler_1_1document.html) | 26.11.0 | unknown | parsed PDF page count | Poppler PDF parser, C++ frontend |
 | unranked | [MuPDF](https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html) | 1.28.6 | unknown | parsed PDF page count | MuPDF C document parser |
 | unranked | [Ghostscript](https://ghostscript.readthedocs.io/en/master/Language.html) | 10.08.0 | unknown | PDF interpreter NumPages metadata | Ghostscript PDF interpreter |
