@@ -1,0 +1,58 @@
+{
+  "ecosystem": "PHP",
+  "format": "PNG",
+  "runtime": "PHP 8.5.12 CLI with GD 2.3.3",
+  "status": "verified",
+  "verified_apis": [
+    {
+      "name": "php-getimagesize",
+      "input_api": "getimagesize(local PNG path)",
+      "documentation": "https://www.php.net/manual/en/function.getimagesize.php",
+      "adapter": "adapters/php/png/runtime_getimagesize.php",
+      "control": "controls/png/red-green.png",
+      "expected_output": {"width": 2, "height": 1, "type": 3},
+      "family": "PHP image header reader",
+      "scope": "PNG dimensions and format type; does not decode pixels"
+    },
+    {
+      "name": "php-getimagesizefromstring",
+      "input_api": "getimagesizefromstring(local PNG bytes)",
+      "documentation": "https://www.php.net/manual/en/function.getimagesizefromstring.php",
+      "adapter": "adapters/php/png/runtime_getimagesizefromstring.php",
+      "control": "controls/png/red-green.png",
+      "expected_output": {"width": 2, "height": 1, "type": 3},
+      "family": "PHP image header reader",
+      "scope": "PNG dimensions and format type; same underlying reader as getimagesize"
+    },
+    {
+      "name": "php-imagecreatefrompng",
+      "input_api": "imagecreatefrompng(local PNG path); imagesx/imagesy; imagecolorat",
+      "documentation": "https://www.php.net/manual/en/function.imagecreatefrompng.php",
+      "additional_documentation": "https://www.php.net/manual/en/function.imagecolorat.php",
+      "adapter": "adapters/php/png/runtime_imagecreatefrompng.php",
+      "control": "controls/png/red-green.png",
+      "expected_output": {"width": 2, "height": 1, "left_rgb": [255, 0, 0], "right_rgb": [0, 255, 0]},
+      "family": "PHP GD PNG decoder",
+      "scope": "decoded dimensions and two RGB pixels"
+    },
+    {
+      "name": "php-imagecreatefromstring",
+      "input_api": "imagecreatefromstring(local PNG bytes); imagesx/imagesy; imagecolorat",
+      "documentation": "https://www.php.net/manual/en/function.imagecreatefromstring.php",
+      "additional_documentation": "https://www.php.net/manual/en/function.imagecolorat.php",
+      "adapter": "adapters/php/png/runtime_imagecreatefromstring.php",
+      "control": "controls/png/red-green.png",
+      "expected_output": {"width": 2, "height": 1, "left_rgb": [255, 0, 0], "right_rgb": [0, 255, 0]},
+      "family": "PHP GD PNG decoder",
+      "scope": "decoded dimensions and two RGB pixels; auto-detected from bytes"
+    }
+  ],
+  "no_api_findings": [
+    {
+      "candidate": "exif_imagetype and Fileinfo",
+      "status": "excluded",
+      "reason": "Their documented result is an image type or MIME classification based on signatures. This does not meet the protocol's format-aware parse threshold."
+    }
+  ],
+  "limit": "The four APIs are bundled with PHP or GD and stay outside third-party rankings. Header readers do not prove pixel decoding; the control covers one small truecolor PNG."
+}

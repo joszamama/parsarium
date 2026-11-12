@@ -243,46 +243,46 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"{ecosystem}/{format_name}: {len(ranked)} verified packages ranked, {len(unknown)} unranked")
 
-    directory = ROOT / "data" / "php" / "zip"
-    parsers = read(directory / "parsers.json")
-    snapshot = read(directory / "registry-snapshot.json")
-    metrics = snapshot["download_metric"]["packages"]
-    known = sorted((p for p in parsers if metrics[p["name"]]["downloads"] is not None),
-                   key=lambda p: (-metrics[p["name"]]["downloads"], p["name"]))
-    unknown = sorted((p for p in parsers if metrics[p["name"]]["downloads"] is None),
-                     key=lambda p: p["name"])
-    metric_time = snapshot["download_metric"]
-    window = metric_time.get("captured_between_utc")
-    captured = (f"between {window[0]} and {window[1]}" if window else
-                f"at {metric_time['captured_at_utc']}")
-    lines = [
-        "# PHP × ZIP: verified parser ranking", "",
-        f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
-        "The metric is Packagist package-level lifetime downloads, captured "
-        f"{captured}. It counts all releases and "
-        "all package uses, not just the ZIP reading API. It is compared only within PHP. "
-        f"{len(unknown)} path(s) lack a metric and remain unranked; equal counts share a rank.", "",
-        "Search hits and unresolved leads are separate from this ranking. PHP bundled APIs "
-        "are listed in `standard.json` and do not enter the third-party ranking. "
-        "Several package paths delegate to PHP ZipArchive/libzip; see `family` and `family_note` "
-        "in `parsers.json`.", "",
-        "| Rank | Package | Pinned release | Lifetime downloads | Scope | Underlying family |",
-        "| ---: | --- | --- | ---: | --- | --- |",
-    ]
-    previous = None
-    displayed_rank = 0
-    for position, parser in enumerate(known, 1):
-        value = metrics[parser["name"]]["downloads"]
-        if value != previous:
-            displayed_rank = position
-            previous = value
-        lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
-                     f"{parser['version']} | {value:,} | {parser['scope']} | {parser['family']} |")
-    for parser in unknown:
-        lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
-                     f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
-    (directory / "ranking.md").write_text("\n".join(lines) + "\n")
-    print(f"php/zip: {len(known)} verified packages ranked, {len(unknown)} unranked")
+    for format_name, label in (("zip", "ZIP"), ("png", "PNG")):
+        directory = ROOT / "data" / "php" / format_name
+        parsers = read(directory / "parsers.json")
+        snapshot = read(directory / "registry-snapshot.json")
+        metrics = snapshot["download_metric"]["packages"]
+        known = sorted((p for p in parsers if metrics[p["name"]]["downloads"] is not None),
+                       key=lambda p: (-metrics[p["name"]]["downloads"], p["name"]))
+        unknown = sorted((p for p in parsers if metrics[p["name"]]["downloads"] is None),
+                         key=lambda p: p["name"])
+        metric_time = snapshot["download_metric"]
+        window = metric_time.get("captured_between_utc")
+        captured = (f"between {window[0]} and {window[1]}" if window else
+                    f"at {metric_time['captured_at_utc']}")
+        lines = [
+            f"# PHP × {label}: verified parser ranking", "",
+            f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
+            "The metric is Packagist package-level lifetime downloads, captured "
+            f"{captured}. It counts all releases and all package uses, not just the "
+            f"{label} reading API. It is compared only within PHP. "
+            f"{len(unknown)} path(s) lack a metric and remain unranked; equal counts share a rank.", "",
+            "Search hits and unresolved leads are separate from this ranking. PHP bundled APIs "
+            "are listed in `standard.json` and do not enter the third-party ranking. "
+            "Shared underlying parser families are recorded in `parsers.json`.", "",
+            "| Rank | Package | Pinned release | Lifetime downloads | Scope | Underlying family |",
+            "| ---: | --- | --- | ---: | --- | --- |",
+        ]
+        previous = None
+        displayed_rank = 0
+        for position, parser in enumerate(known, 1):
+            value = metrics[parser["name"]]["downloads"]
+            if value != previous:
+                displayed_rank = position
+                previous = value
+            lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['version']} | {value:,} | {parser['scope']} | {parser['family']} |")
+        for parser in unknown:
+            lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
+        (directory / "ranking.md").write_text("\n".join(lines) + "\n")
+        print(f"php/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 20 verified third-party package paths; working goal 20, ceiling 30. The metric is Packagist package-level lifetime downloads, captured between 2026-11-12T09:14:24.797211+00:00 and 2026-11-12T09:34:57.143943+00:00. It counts all releases and all package uses, not just the ZIP reading API. It is compared only within PHP. 0 path(s) lack a metric and remain unranked; equal counts share a rank.
 
-Search hits and unresolved leads are separate from this ranking. PHP bundled APIs are listed in `standard.json` and do not enter the third-party ranking. Several package paths delegate to PHP ZipArchive/libzip; see `family` and `family_note` in `parsers.json`.
+Search hits and unresolved leads are separate from this ranking. PHP bundled APIs are listed in `standard.json` and do not enter the third-party ranking. Shared underlying parser families are recorded in `parsers.json`.
 
 | Rank | Package | Pinned release | Lifetime downloads | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
