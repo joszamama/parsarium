@@ -32,6 +32,9 @@ public final class Http11Adapter {
         else if (args[0].equals("jodd")) runJodd(bytes);
         else if (args[0].equals("rawhttp")) runRawHttp(bytes);
         else if (args[0].equals("nanohttpd")) runNanoHttpd(bytes);
+        else if (args[0].equals("jwarc")) runJwarc(bytes);
+        else if (args[0].equals("webarchive")) runWebarchive(bytes);
+        else if (args[0].equals("jwat")) runJwat(bytes);
         else System.exit(2);
     }
 
@@ -191,5 +194,39 @@ public final class Http11Adapter {
         server.parse(bytes);
         if (parsed[0] == null) System.exit(1);
         System.out.println(parsed[0]);
+    }
+
+    private static void runJwarc(byte[] bytes) throws Exception {
+        var channel = java.nio.channels.Channels.newChannel(new ByteArrayInputStream(bytes));
+        var request = org.netpreserve.jwarc.HttpRequest.parse(channel);
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.method(), request.target(), request.version(),
+                request.headers().first("Host").orElseThrow(),
+                request.headers().first("X-Parsarium").orElseThrow());
+    }
+
+    private static void runWebarchive(byte[] bytes) throws Exception {
+        var request = new org.archive.format.http.HttpRequestParser()
+                .parse(new ByteArrayInputStream(bytes));
+        if (request.getMessage().isCorrupt() || request.getHeaders().isCorrupt()) System.exit(1);
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.getMessage().getMethodString(), request.getMessage().getPath(),
+                request.getMessage().getVersionString(),
+                request.getHeaders().getValueCaseInsensitive("Host"),
+                request.getHeaders().getValueCaseInsensitive("X-Parsarium"));
+    }
+
+    private static void runJwat(byte[] bytes) throws Exception {
+        var input = new org.jwat.common.ByteCountingPushBackInputStream(
+                new ByteArrayInputStream(bytes), 8192);
+        var request = org.jwat.common.HttpHeader.processPayload(
+                org.jwat.common.HttpHeader.HT_REQUEST, input, bytes.length, null);
+        if (!request.isValid()) System.exit(1);
+        var host = request.getHeader("Host");
+        var marker = request.getHeader("X-Parsarium");
+        if (host == null || marker == null) System.exit(1);
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.method, request.requestUri, request.httpVersion,
+                host.value, marker.value);
     }
 }

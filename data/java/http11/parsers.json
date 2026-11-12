@@ -208,5 +208,71 @@
       "host": "example.test",
       "x_parsarium": "yes"
     }
+  },
+  {
+    "name": "jwarc",
+    "group": "org.netpreserve",
+    "artifact": "jwarc",
+    "version": "0.37.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/org/netpreserve/jwarc/0.37.0/jwarc-0.37.0.pom",
+    "input_api": "org.netpreserve.jwarc.HttpRequest.parse(local ReadableByteChannel); method(), target(), version(), headers().first(name)",
+    "documentation": "https://github.com/iipc/jwarc/blob/v0.37.0/src/org/netpreserve/jwarc/HttpRequest.java",
+    "scope": "HTTP/1.1 request line and headers from local channel",
+    "family": "jwarc native HTTP parser",
+    "family_note": "WARC library exposes its own direct HttpRequest.parse(ReadableByteChannel) API; no WARC container is needed for this control.",
+    "adapter_label": "jwarc",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
+  },
+  {
+    "name": "webarchive-commons",
+    "group": "org.netpreserve.commons",
+    "artifact": "webarchive-commons",
+    "version": "3.0.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/LICENSE",
+    "input_api": "new org.archive.format.http.HttpRequestParser().parse(local InputStream); getMessage(), getHeaders()",
+    "documentation": "https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/src/main/java/org/archive/format/http/HttpRequestParser.java",
+    "scope": "HTTP/1.1 request line and headers from local stream",
+    "family": "webarchive-commons native HTTP message parser",
+    "family_note": "WARC utility library exposes a direct HttpRequestParser that composes its own request-line and header parsers. No WARC container is needed for this control.",
+    "adapter_label": "webarchive",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
+  },
+  {
+    "name": "jwat-common",
+    "group": "org.jwat",
+    "artifact": "jwat-common",
+    "version": "1.2.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.2.1/jwat-1.2.1.pom",
+    "input_api": "org.jwat.common.HttpHeader.processPayload(HT_REQUEST, local ByteCountingPushBackInputStream, length, null); method, requestUri, httpVersion, getHeader(name)",
+    "documentation": "https://github.com/netarchivesuite/jwat/blob/jwat-1.2.1/jwat-common/src/main/java/org/jwat/common/HttpHeader.java",
+    "scope": "HTTP/1.1 request line and headers from local stream",
+    "family": "JWAT native HTTP header parser",
+    "family_note": "WARC toolkit jwat-common exposes HttpHeader.processPayload for both request and response messages; the adapter feeds a local stream and checks isValid(). No WARC container is needed.",
+    "adapter_label": "jwat",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   }
 ]

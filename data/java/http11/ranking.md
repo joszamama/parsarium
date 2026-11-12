@@ -1,6 +1,6 @@
 # Java × HTTP/1.1: verified parser ranking
 
-10 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T13:27:19.506278+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
+13 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T13:36:45.688117+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -13,6 +13,9 @@ Search hits, unresolved leads, and JDK APIs are separate from this ranking. See 
 | 5 | [jodd-http](https://http.jodd.org/connection) | org.jodd:jodd-http:6.3.0 | 39 | HTTP/1.1 request line and headers from local stream | Jodd HTTP native request parser |
 | 6 | [netty-codec-http](https://netty.io/4.2/api/io/netty/handler/codec/http/HttpRequestDecoder.html) | io.netty:netty-codec-http:4.2.20.Final | 23 | HTTP/1.1 request line and headers from local bytes | Netty 4 HTTP request decoder |
 | 7 | [netty5-codec-http](https://github.com/netty/netty/blob/netty-5.0.0.Alpha5/codec-http/src/main/java/io/netty5/handler/codec/http/HttpRequestDecoder.java) | io.netty:netty5-codec-http:5.0.0.Alpha5 | 15 | HTTP/1.1 request line and headers from local bytes | Netty 5 HTTP request decoder, alpha branch; shares project ancestry with Netty 3 and 4 |
-| 8 | [rawhttp-core](https://github.com/renatoathaydes/rawhttp) | com.athaydes.rawhttp:rawhttp-core:2.6.0 | 6 | HTTP/1.1 request line and headers from local stream | RawHTTP native HTTP/1.1 parser |
-| 9 | [jetty-http](https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/http/HttpTester.html) | org.eclipse.jetty:jetty-http:12.1.15 | 4 | HTTP/1.1 request line and headers from local bytes | Jetty HTTP/1.1 HttpParser |
-| 10 | [http1_1-parser](https://github.com/deanhiller/webpieces/blob/master/http/http1_1-parser/src/main/java/org/webpieces/httpparser/api/HttpParser.java) | org.webpieces.http:http1_1-parser:2.1.109 | 3 | HTTP/1.1 request line and headers from local bytes | WebPieces HTTP/1.1 parser |
+| 8 | [jwat-common](https://github.com/netarchivesuite/jwat/blob/jwat-1.2.1/jwat-common/src/main/java/org/jwat/common/HttpHeader.java) | org.jwat:jwat-common:1.2.1 | 7 | HTTP/1.1 request line and headers from local stream | JWAT native HTTP header parser |
+| 9 | [rawhttp-core](https://github.com/renatoathaydes/rawhttp) | com.athaydes.rawhttp:rawhttp-core:2.6.0 | 6 | HTTP/1.1 request line and headers from local stream | RawHTTP native HTTP/1.1 parser |
+| 10 | [jetty-http](https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/http/HttpTester.html) | org.eclipse.jetty:jetty-http:12.1.15 | 4 | HTTP/1.1 request line and headers from local bytes | Jetty HTTP/1.1 HttpParser |
+| 11 | [http1_1-parser](https://github.com/deanhiller/webpieces/blob/master/http/http1_1-parser/src/main/java/org/webpieces/httpparser/api/HttpParser.java) | org.webpieces.http:http1_1-parser:2.1.109 | 3 | HTTP/1.1 request line and headers from local bytes | WebPieces HTTP/1.1 parser |
+| 11 | [webarchive-commons](https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/src/main/java/org/archive/format/http/HttpRequestParser.java) | org.netpreserve.commons:webarchive-commons:3.0.5 | 3 | HTTP/1.1 request line and headers from local stream | webarchive-commons native HTTP message parser |
+| 13 | [jwarc](https://github.com/iipc/jwarc/blob/v0.37.0/src/org/netpreserve/jwarc/HttpRequest.java) | org.netpreserve:jwarc:0.37.0 | 1 | HTTP/1.1 request line and headers from local channel | jwarc native HTTP parser |
