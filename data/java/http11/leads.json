@@ -3,7 +3,7 @@
     "name": "org.glassfish.grizzly:grizzly-http",
     "status": "unresolved",
     "source": "https://javaee.github.io/grizzly/httpframework.html",
-    "reason": "Grizzly documents HTTP codec components; an exact release, documented local buffer API, and control adapter have not yet been checked."
+    "reason": "Grizzly 5.0.3 contains HttpCodecFilter and HTTP packet types. The inspected filter requires a FilterChainContext; a standalone local-buffer control adapter is still unverified."
   },
   {
     "name": "io.snice.codecs:codec-http",
@@ -16,6 +16,12 @@
     "status": "unresolved",
     "source": "https://central.sonatype.com/artifact/org.webpieces/http-parser1_1",
     "reason": "Historical WebPieces artifact may be a prior distribution of the included parser; package identity and a separate pinned control remain unchecked."
+  },
+  {
+    "name": "io.undertow:undertow-core",
+    "status": "excluded",
+    "source": "https://repo.maven.apache.org/maven2/io/undertow/undertow-core/2.4.4.Final/undertow-core-2.4.4.Final.jar",
+    "reason": "The pinned 2.4.4.Final JAR contains native HTTP/1.1 RequestParser and ResponseParser classes, but both are package-private with package-private handle methods. No documented public local message parsing API was established for this release."
   },
   {
     "name": "com.authlete.http:http-field-parser",

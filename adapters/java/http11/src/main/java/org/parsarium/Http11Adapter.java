@@ -31,6 +31,7 @@ public final class Http11Adapter {
         else if (args[0].equals("netty5")) runNetty5(bytes);
         else if (args[0].equals("jodd")) runJodd(bytes);
         else if (args[0].equals("rawhttp")) runRawHttp(bytes);
+        else if (args[0].equals("nanohttpd")) runNanoHttpd(bytes);
         else System.exit(2);
     }
 
@@ -162,5 +163,33 @@ public final class Http11Adapter {
                 request.getMethod(), target, request.getStartLine().getHttpVersion(),
                 request.getHeaders().getFirst("Host").orElseThrow(),
                 request.getHeaders().getFirst("X-Parsarium").orElseThrow());
+    }
+
+    private static void runNanoHttpd(byte[] bytes) throws Exception {
+        final String[] parsed = new String[1];
+        var server = new fi.iki.elonen.NanoHTTPD(0) {
+            void parse(byte[] input) throws Exception {
+                var session = new HTTPSession(new DefaultTempFileManager(),
+                        new ByteArrayInputStream(input), new java.io.ByteArrayOutputStream());
+                try {
+                    session.execute();
+                } catch (java.net.SocketException shutdown) {
+                    if (parsed[0] == null) throw shutdown;
+                }
+            }
+
+            @Override
+            public fi.iki.elonen.NanoHTTPD.Response serve(fi.iki.elonen.NanoHTTPD.IHTTPSession request) {
+                String query = request.getQueryParameterString();
+                String target = request.getUri() + (query == null ? "" : "?" + query);
+                parsed[0] = String.format("{\"method\":\"%s\",\"target\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}",
+                        request.getMethod(), target, request.getHeaders().get("host"),
+                        request.getHeaders().get("x-parsarium"));
+                return fi.iki.elonen.NanoHTTPD.newFixedLengthResponse("");
+            }
+        };
+        server.parse(bytes);
+        if (parsed[0] == null) System.exit(1);
+        System.out.println(parsed[0]);
     }
 }

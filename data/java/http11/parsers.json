@@ -187,5 +187,26 @@
       "host": "example.test",
       "x_parsarium": "yes"
     }
+  },
+  {
+    "name": "nanohttpd",
+    "group": "org.nanohttpd",
+    "artifact": "nanohttpd",
+    "version": "2.3.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/NanoHttpd/nanohttpd/blob/nanohttpd-project-2.3.1/LICENSE.md",
+    "input_api": "NanoHTTPD.HTTPSession(TempFileManager, local InputStream, OutputStream).execute(); override serve(IHTTPSession) to inspect parsed method, URI, query and headers",
+    "documentation": "https://javadoc.io/static/org.nanohttpd/nanohttpd/2.3.1/fi/iki/elonen/NanoHTTPD.HTTPSession.html",
+    "scope": "HTTP/1.1 request method, target, Host and X-Parsarium headers from local stream; protocol version is internal and not reported",
+    "family": "NanoHTTPD native HTTP request parser",
+    "family_note": "A protected HTTPSession is instantiated inside a NanoHTTPD subclass using local byte streams; execute() invokes serve() with parsed request fields. The control includes Connection: close, so the normal session shutdown SocketException is caught after a parsed callback. No listening socket is opened.",
+    "adapter_label": "nanohttpd",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
   }
 ]

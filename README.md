@@ -400,13 +400,15 @@ repository and has no comparable deps.dev count. The collection meets the
 and [unresolved leads](data/java/wav/leads.json). Run
 `python3 scripts/snapshot_maven_wav.py` to refresh Maven and deps.dev evidence.
 
-The Java × HTTP/1.1 batch verifies **9/9 pinned Maven package paths** on the
+The Java × HTTP/1.1 batch verifies **10/10 pinned Maven package paths** on the
 committed valid GET request control. `python3 scripts/verify_java_http11.py`
-rebuilds the adapter, checks SHA-256 hashes for all 39 resolved JARs, and checks
-parsed method, target, version, and two headers. Apache HttpCore 4 and 5 share
+rebuilds the adapter, checks SHA-256 hashes for all 40 resolved JARs, and checks
+parsed method, target, and two headers; nine paths also expose the version.
+Apache HttpCore 4 and 5 share
 an upstream parser family, as do the Netty 3, 4, and 5 release lines; the
 Netty 5 release is alpha. Jodd HTTP and RawHTTP parse the saved local stream
-directly. This cell remains **11 short of the 20-path working
+directly. NanoHTTPD's local stream session exposes parsed request fields through
+a callback. This cell remains **10 short of the 20-path working
 goal**. The bounded search saved two identical 100-hit broad windows out of
 7,858 results, while three other queries timed out. Three plausible leads
 remain unresolved. See the

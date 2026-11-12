@@ -29,6 +29,7 @@ COORDS = {
     "jetty-http": ("org.eclipse.jetty", "jetty-http", "12.1.15"),
     "jodd-http": ("org.jodd", "jodd-http", "6.3.0"),
     "rawhttp-core": ("com.athaydes.rawhttp", "rawhttp-core", "2.6.0"),
+    "nanohttpd": ("org.nanohttpd", "nanohttpd", "2.3.1"),
 }
 LICENSES = {
     "netty": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-3.10.6.Final/LICENSE.txt"),
@@ -40,6 +41,7 @@ LICENSES = {
     "jetty-http": ("EPL-2.0 OR Apache-2.0", "https://github.com/jetty/jetty.project/blob/jetty-12.1.15/LICENSE"),
     "jodd-http": ("BSD-2-Clause", "https://central.sonatype.com/artifact/org.jodd/jodd-http/6.3.0"),
     "rawhttp-core": ("Apache-2.0", "https://repo.maven.apache.org/maven2/com/athaydes/rawhttp/rawhttp-core/2.6.0/rawhttp-core-2.6.0.pom"),
+    "nanohttpd": ("BSD-3-Clause", "https://github.com/NanoHttpd/nanohttpd/blob/nanohttpd-project-2.3.1/LICENSE.md"),
 }
 QUERIES = ["http parser", "http request parser", "http1", "http codec", "HTTP/1.1"]
 
@@ -123,7 +125,8 @@ def main() -> None:
         "search_limit_per_query": 100,
         "search": searches,
         "targeted_documentation_leads": ["https://http.jodd.org/connection",
-                                         "https://github.com/renatoathaydes/rawhttp"],
+                                         "https://github.com/renatoathaydes/rawhttp",
+                                         "https://javadoc.io/static/org.nanohttpd/nanohttpd/2.3.1/fi/iki/elonen/NanoHTTPD.HTTPSession.html"],
         "releases": releases,
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",

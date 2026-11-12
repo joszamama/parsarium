@@ -19,12 +19,6 @@ ADAPTER = ROOT / "adapters/java/http11"
 DATA = ROOT / "data/java/http11"
 CONTROL = ROOT / "controls/http11/request.http"
 CONTROL_SHA256 = "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe"
-EXPECTED = {
-    "method": "GET", "target": "/parsarium?x=1", "version": "HTTP/1.1",
-    "host": "example.test", "x_parsarium": "yes",
-}
-
-
 def read(path: Path):
     return json.loads(path.read_text())
 
@@ -76,7 +70,8 @@ def main() -> None:
             output = json.loads(result.stdout.strip())
         except json.JSONDecodeError:
             output = None
-        passed = result.returncode == 0 and output == EXPECTED and not result.stderr.strip()
+        passed = (result.returncode == 0 and output == parser["expected_output"]
+                  and not result.stderr.strip())
         row = {
             "package": parser["name"], "adapter_label": label,
             "control": "controls/http11/request.http", "output": output,
