@@ -138,13 +138,19 @@ def main() -> None:
                     assert len(release["jar_sha256"]) == 64 and len(release["pom_sha256"]) == 64
                 assert (ROOT / parser["control"]).exists()
             elif cell["ecosystem"] == "php":
-                lock_path = ROOT / parser["composer_lock"]
-                locked = {package["name"]: package
-                          for package in json.loads(lock_path.read_text())["packages"]}
                 release = snapshot["releases"][name]
-                assert name in locked
-                assert parser["version"] == release["version"] == locked[name]["version"]
-                assert locked[name]["source"]["reference"] == release["source_reference"]
+                if parser.get("source_kind") == "pecl":
+                    source = read(parser["source_lock"])
+                    assert parser["version"] == release["version"] == source["release"]
+                    assert source["source_sha256"] == release["source_sha256"]
+                    assert len(source["source_sha256"]) == 64
+                else:
+                    lock_path = ROOT / parser["composer_lock"]
+                    locked = {package["name"]: package
+                              for package in json.loads(lock_path.read_text())["packages"]}
+                    assert name in locked
+                    assert parser["version"] == release["version"] == locked[name]["version"]
+                    assert locked[name]["source"]["reference"] == release["source_reference"]
                 assert parser["license"] == release["license"]
                 assert parser["license_evidence"] == release["license_evidence"]
                 assert (ROOT / parser["adapter"]).exists()

@@ -6,7 +6,9 @@ if ($package === null || $path === null) {
     throw new InvalidArgumentException('usage: php parse.php PACKAGE CONTROL');
 }
 
-if ($package === 'osiemsiedem/intervention-image-vips-driver') {
+if ($package === 'pecl/imagick') {
+    // This extension is built separately from its pinned PECL source archive.
+} elseif ($package === 'osiemsiedem/intervention-image-vips-driver') {
     require __DIR__ . '/legacy/vendor/autoload.php';
 } else {
     require __DIR__ . '/vendor/autoload.php';
@@ -44,6 +46,23 @@ switch ($package) {
     case 'osiemsiedem/intervention-image-vips-driver':
         $image = (new \Intervention\Image\Vips\Decoder())->initFromPath($path);
         $output = ['width' => $image->width(), 'height' => $image->height()];
+        break;
+    case 'imagine/imagine':
+        $image = (new \Imagine\Imagick\Imagine())->open($path);
+        $size = $image->getSize();
+        $output = ['width' => $size->getWidth(), 'height' => $size->getHeight()];
+        break;
+    case 'pecl/imagick':
+        $image = new \Imagick();
+        $image->readImage($path);
+        $left = $image->getImagePixelColor(0, 0)->getColor();
+        $right = $image->getImagePixelColor(1, 0)->getColor();
+        $output = [
+            'width' => $image->getImageWidth(),
+            'height' => $image->getImageHeight(),
+            'left_rgb' => [$left['r'], $left['g'], $left['b']],
+            'right_rgb' => [$right['r'], $right['g'], $right['b']],
+        ];
         break;
     default:
         throw new InvalidArgumentException('unknown ASCII PNM package: ' . $package);

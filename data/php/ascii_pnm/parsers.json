@@ -140,5 +140,53 @@
       "ffi.enable=1",
       "zend.max_allowed_stack_size=-1"
     ]
+  },
+  {
+    "name": "imagine/imagine",
+    "version": "1.5.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/php-imagine/Imagine/blob/dd57a4c290ff4d223d17bcd219dac9ac8bf1cc16/LICENSE",
+    "documentation": "https://github.com/php-imagine/Imagine/blob/dd57a4c290ff4d223d17bcd219dac9ac8bf1cc16/src/Imagick/Imagine.php",
+    "input_api": "Imagine\\Imagick\\Imagine::open(local P3 file); getSize",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
+    "requires_imagick": true,
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "This package path delegates ASCII P3 decoding to the separately built PECL Imagick extension and ImageMagick; it is not an independent engine."
+  },
+  {
+    "name": "pecl/imagick",
+    "version": "3.8.1",
+    "license": "PHP-3.01",
+    "license_evidence": "https://github.com/Imagick/imagick/blob/3.8.1/LICENSE",
+    "documentation": "https://www.php.net/manual/en/imagick.readimage.php",
+    "input_api": "Imagick::readImage(local P3 path); getImageWidth/getImageHeight/getImagePixelColor",
+    "adapter": "adapters/php/ascii_pnm/parse.php",
+    "source_kind": "pecl",
+    "source_lock": "data/php/ascii_pnm/pecl-imagick-lock.json",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "left_rgb": [
+        255,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "decoded dimensions and RGB pixels",
+    "family": "ImageMagick PNM decoder",
+    "family_note": "PECL Imagick is an open-source extension built from a SHA-256-pinned release; it delegates ASCII P3 decoding to installed ImageMagick, not to bundled PHP GD."
   }
 ]

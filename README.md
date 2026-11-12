@@ -280,14 +280,16 @@ leads remain unresolved, and two aliases were rejected as duplicate source. The
 uncertainty. Reproduction requires PHP 8.5 with GD and FFI, libvips 8.18.7,
 and Composer 2.
 
-The [PHP × ASCII PNM ranking](data/php/ascii_pnm/ranking.md) has six pinned
-Composer package paths passing the valid two-pixel P3 control. All six delegate
-to the same libvips decoder; the direct binding also returns both RGB pixels.
-Eight bounded Packagist searches saved 242 hits and 239 distinct names. Four
-leads remain unresolved, and 14 paths are still needed for the working goal.
+The [PHP × ASCII PNM ranking](data/php/ascii_pnm/ranking.md) has eight pinned
+third-party paths passing the valid two-pixel P3 control. Six Composer paths
+delegate to libvips; Imagine and a SHA-256-pinned PECL Imagick release delegate
+to ImageMagick. The direct Vips binding and Imagick return both RGB pixels.
+Eight bounded Packagist searches saved 242 hits and 239 distinct names. Three
+leads remain unresolved, and 12 paths are still needed for the working goal.
 The [runtime inventory](data/php/ascii_pnm/standard.json) records that the
 tested PHP core and GD APIs did not parse the control. Reproduction requires
-PHP 8.5 with FFI, libvips 8.18.7, and Composer 2.
+PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, phpize, and Composer 2. The
+verifier builds Imagick into ignored cache from the pinned PECL source archive.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.
@@ -1201,9 +1203,10 @@ uncertainty.
 - `data/php/png/`: Packagist discovery hits, pinned Composer releases, lifetime
   download ranking, control results, leads, and four separate PHP runtime APIs.
   The adapters and Composer lock live under `adapters/php/png/`.
-- `data/php/ascii_pnm/`: Packagist discovery hits, six pinned Composer package
+- `data/php/ascii_pnm/`: Packagist discovery hits, eight pinned third-party
   paths, lifetime download ranking, control results, leads, and a separate PHP
-  runtime inventory. Two Composer locks live under `adapters/php/ascii_pnm/`.
+  runtime inventory. Two Composer locks live under `adapters/php/ascii_pnm/`,
+  and a pinned PECL Imagick source lock lives with the cell data.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/triage.json`: popularity-sorted discovery leads,
