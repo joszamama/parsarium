@@ -274,5 +274,26 @@
       "host": "example.test",
       "x_parsarium": "yes"
     }
+  },
+  {
+    "name": "sentinel-transport-simple-http",
+    "group": "com.alibaba.csp",
+    "artifact": "sentinel-transport-simple-http",
+    "version": "1.8.10",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/alibaba/Sentinel/blob/1.8.10/LICENSE",
+    "input_api": "new SimpleHttpResponseParser().parse(local InputStream); getStatusLine(), getStatusCode(), getHeader(name), getBodyAsString()",
+    "documentation": "https://github.com/alibaba/Sentinel/blob/1.8.10/sentinel-transport/sentinel-transport-simple-http/src/main/java/com/alibaba/csp/sentinel/transport/heartbeat/client/SimpleHttpResponseParser.java",
+    "scope": "HTTP/1.1 response status line, status code, Content-Type header, and nine-byte body from local stream",
+    "family": "Sentinel native simple HTTP response parser",
+    "family_note": "Sentinel transport parses raw HTTP responses with Content-Length. Its documented parser does not support chunked responses; only the valid fixed-length control is verified. The adapter suppresses package startup log chatter while reporting parsed fields.",
+    "adapter_label": "sentinel",
+    "control": "controls/http11/response.http",
+    "expected_output": {
+      "status_line": "HTTP/1.1 200 OK",
+      "status": 200,
+      "content_type": "text/plain",
+      "body": "parsarium"
+    }
   }
 ]

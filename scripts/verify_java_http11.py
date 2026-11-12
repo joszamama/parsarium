@@ -19,6 +19,8 @@ ADAPTER = ROOT / "adapters/java/http11"
 DATA = ROOT / "data/java/http11"
 CONTROL = ROOT / "controls/http11/request.http"
 CONTROL_SHA256 = "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe"
+RESPONSE_CONTROL = ROOT / "controls/http11/response.http"
+RESPONSE_CONTROL_SHA256 = "89095a71f21f4047f3d86e05d4fdf37bdfffcbf746a3aa85bc32fd7b7ea3a2c4"
 def read(path: Path):
     return json.loads(path.read_text())
 
@@ -37,6 +39,11 @@ def main() -> None:
     assert CONTROL.read_bytes() == (
         b"GET /parsarium?x=1 HTTP/1.1\r\nHost: example.test\r\n"
         b"X-Parsarium: yes\r\nConnection: close\r\n\r\n"
+    )
+    assert sha256(RESPONSE_CONTROL.read_bytes()).hexdigest() == RESPONSE_CONTROL_SHA256
+    assert RESPONSE_CONTROL.read_bytes() == (
+        b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n"
+        b"Content-Length: 9\r\n\r\nparsarium"
     )
 
     build = subprocess.run([
@@ -63,8 +70,10 @@ def main() -> None:
     results = []
     for parser in parsers:
         label = parser["adapter_label"]
+        control = ROOT / parser["control"]
+        assert control in (CONTROL, RESPONSE_CONTROL)
         command = ["java", "-cp", classpath, "org.parsarium.Http11Adapter",
-                   label, str(CONTROL)]
+                   label, str(control)]
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=30)
         try:
             output = json.loads(result.stdout.strip())
@@ -74,10 +83,10 @@ def main() -> None:
                   and not result.stderr.strip())
         row = {
             "package": parser["name"], "adapter_label": label,
-            "control": "controls/http11/request.http", "output": output,
+            "control": parser["control"], "output": output,
             "pass": passed, "exit_code": result.returncode,
             "command": "java -cp <locked classpath> org.parsarium.Http11Adapter "
-                       f"{label} controls/http11/request.http",
+                       f"{label} {parser['control']}",
             "version": parser["version"],
         }
         if result.stderr and not passed:
@@ -93,7 +102,9 @@ def main() -> None:
             "locked_classpath_jars": len(lock),
         },
         "control_sha256": CONTROL_SHA256,
+        "response_control_sha256": RESPONSE_CONTROL_SHA256,
         "control_meaning": "Ordinary valid HTTP/1.1 GET request with a query target and two observable headers",
+        "response_control_meaning": "Ordinary valid HTTP/1.1 200 response with Content-Length and a nine-byte body",
         "third_party": results,
         "runtime": [],
     }

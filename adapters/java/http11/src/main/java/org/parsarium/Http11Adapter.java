@@ -35,6 +35,7 @@ public final class Http11Adapter {
         else if (args[0].equals("jwarc")) runJwarc(bytes);
         else if (args[0].equals("webarchive")) runWebarchive(bytes);
         else if (args[0].equals("jwat")) runJwat(bytes);
+        else if (args[0].equals("sentinel")) runSentinel(bytes);
         else System.exit(2);
     }
 
@@ -228,5 +229,23 @@ public final class Http11Adapter {
         System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
                 request.method, request.requestUri, request.httpVersion,
                 host.value, marker.value);
+    }
+
+    private static void runSentinel(byte[] bytes) throws Exception {
+        System.setProperty("csp.sentinel.log.output.type", "console");
+        var output = System.out;
+        com.alibaba.csp.sentinel.transport.heartbeat.client.SimpleHttpResponse response;
+        try (var startupMessages = new java.io.PrintStream(new java.io.ByteArrayOutputStream())) {
+            System.setOut(startupMessages);
+            try {
+                response = new com.alibaba.csp.sentinel.transport.heartbeat.client.SimpleHttpResponseParser()
+                        .parse(new ByteArrayInputStream(bytes));
+            } finally {
+                System.setOut(output);
+            }
+        }
+        System.out.printf("{\"status_line\":\"%s\",\"status\":%d,\"content_type\":\"%s\",\"body\":\"%s\"}%n",
+                response.getStatusLine(), response.getStatusCode(),
+                response.getHeader("Content-Type"), response.getBodyAsString());
     }
 }

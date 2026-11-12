@@ -33,6 +33,7 @@ COORDS = {
     "jwarc": ("org.netpreserve", "jwarc", "0.37.0"),
     "webarchive-commons": ("org.netpreserve.commons", "webarchive-commons", "3.0.5"),
     "jwat-common": ("org.jwat", "jwat-common", "1.2.1"),
+    "sentinel-transport-simple-http": ("com.alibaba.csp", "sentinel-transport-simple-http", "1.8.10"),
 }
 LICENSES = {
     "netty": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-3.10.6.Final/LICENSE.txt"),
@@ -48,6 +49,7 @@ LICENSES = {
     "jwarc": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/netpreserve/jwarc/0.37.0/jwarc-0.37.0.pom"),
     "webarchive-commons": ("Apache-2.0", "https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/LICENSE"),
     "jwat-common": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.2.1/jwat-1.2.1.pom"),
+    "sentinel-transport-simple-http": ("Apache-2.0", "https://github.com/alibaba/Sentinel/blob/1.8.10/LICENSE"),
 }
 QUERIES = ["http parser", "http request parser", "http1", "http codec", "HTTP/1.1"]
 
@@ -135,7 +137,8 @@ def main() -> None:
                                          "https://javadoc.io/static/org.nanohttpd/nanohttpd/2.3.1/fi/iki/elonen/NanoHTTPD.HTTPSession.html",
                                          "https://github.com/iipc/jwarc/blob/v0.37.0/src/org/netpreserve/jwarc/HttpRequest.java",
                                          "https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/src/main/java/org/archive/format/http/HttpRequestParser.java",
-                                         "https://github.com/netarchivesuite/jwat/blob/jwat-1.2.1/jwat-common/src/main/java/org/jwat/common/HttpHeader.java"],
+                                         "https://github.com/netarchivesuite/jwat/blob/jwat-1.2.1/jwat-common/src/main/java/org/jwat/common/HttpHeader.java",
+                                         "https://github.com/alibaba/Sentinel/blob/1.8.10/sentinel-transport/sentinel-transport-simple-http/src/main/java/com/alibaba/csp/sentinel/transport/heartbeat/client/SimpleHttpResponseParser.java"],
         "releases": releases,
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",
