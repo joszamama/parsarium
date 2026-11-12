@@ -1,0 +1,291 @@
+{
+  "checked_at_utc": "2026-11-12T01:15:48.548289+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
+  "build_command": "cargo build --locked (from adapters/rust/mp3_id3v2)",
+  "control_sha256": {
+    "controls/mp3_id3v2/tone-tags.mp3": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad"
+  },
+  "control_meaning": "Valid ID3v2.3 tagged mono MPEG Layer III audio with title Parsarium, artist Control, album Pilot, and 8 kHz sample rate",
+  "third_party": [
+    {
+      "package": "id3",
+      "version": "1.17.3",
+      "scope": "ID3v2 title, artist, album",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 id3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "album": "Pilot",
+        "artist": "Control",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "lofty",
+      "version": "0.25.5",
+      "scope": "ID3v2 title, artist, album",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 lofty controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "album": "Pilot",
+        "artist": "Control",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "minimp3",
+      "version": "0.6.1",
+      "scope": "Decoded first MPEG Layer III frame",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 minimp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "decoded_samples": 576,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "mp3-duration",
+      "version": "0.1.10",
+      "scope": "MP3 frame-derived duration",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 mp3-duration controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "duration_ms": 1152
+      },
+      "error": null
+    },
+    {
+      "package": "mp3-metadata",
+      "version": "0.4.0",
+      "scope": "MPEG frame count and sample rate",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 mp3-metadata controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "frames": 17,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia",
+      "version": "0.6.1",
+      "scope": "MP3 track header and audio packet",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 symphonia controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "packet_bytes": 288,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "audiotags",
+      "version": "0.5.0",
+      "scope": "ID3v2 title, artist, album",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 audiotags controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "album": "Pilot",
+        "artist": "Control",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "puremp3",
+      "version": "0.1.0",
+      "scope": "Decoded MP3 sample and frame header",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 puremp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "symphonium",
+      "version": "0.13.0",
+      "scope": "MP3 track header",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 symphonium controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "audio-file",
+      "version": "0.5.1",
+      "scope": "Decoded MP3 audio samples",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 audio-file controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "minimp3_fixed",
+      "version": "0.5.4",
+      "scope": "Decoded first MPEG Layer III frame",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 minimp3_fixed controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "decoded_samples": 576,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "nanomp3",
+      "version": "0.2.0",
+      "scope": "Decoded MP3 samples and layer",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 nanomp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "layer": 3,
+        "sample_rate": 8000,
+        "samples": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "creak",
+      "version": "0.3.0",
+      "scope": "MP3 audio header and first decoded sample",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 creak controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "first_sample": 0.0,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "moosicbox_audiotags",
+      "version": "0.1.0",
+      "scope": "ID3v2 title and artist",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 moosicbox_audiotags controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "artist": "Control",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia-metadata",
+      "version": "0.6.1",
+      "scope": "ID3v2 frame keys",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 symphonia-metadata controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "keys": [
+          "TIT2",
+          "TPE1",
+          "TALB",
+          "TSSE"
+        ],
+        "tag_count": 4
+      },
+      "error": null
+    },
+    {
+      "package": "symphonia-bundle-mp3",
+      "version": "0.6.1",
+      "scope": "MP3 track header and audio packet",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 symphonia-bundle-mp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "packet_bytes": 288,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "rmp3",
+      "version": "0.3.1",
+      "scope": "Decoded first MPEG Layer III frame",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 rmp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "sample_rate": 8000,
+        "samples_per_channel": 576
+      },
+      "error": null
+    },
+    {
+      "package": "rusty_mp3",
+      "version": "1.0.5",
+      "scope": "Decoded first MPEG Layer III frame",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 rusty_mp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "decoded_samples": 576,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "oxideav-id3",
+      "version": "0.0.7",
+      "scope": "ID3v2 version, frame count, consumed bytes",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 oxideav-id3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "frame_count": 4,
+        "tag_bytes": 101,
+        "version": "V2_3"
+      },
+      "error": null
+    },
+    {
+      "package": "id3-core",
+      "version": "0.3.1",
+      "scope": "ID3v2 version, title, artist",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "command": "adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 id3-core controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "artist": "Control",
+        "title": "Parsarium",
+        "version": 3
+      },
+      "error": null
+    }
+  ]
+}

@@ -428,6 +428,13 @@ their precise scopes and shared Hound and Symphonia families are recorded in
 `data/rust/wav/parsers.json`. The scoped Rust standard library has no
 documented WAV parser. Thirteen plausible leads remain unresolved.
 
+`verify_rust_mp3_id3v2.py` builds the pinned Rust MP3 graph with
+`cargo build --locked` and runs **20/20** crate paths against a valid tagged
+MPEG Layer III control. Each row labels its tag, frame, duration, or decoded
+audio scope, and shared Symphonia, minimp3, and id3 paths. The scoped Rust
+standard library has no documented MP3 or ID3v2 parser. Twelve plausible
+leads remain unresolved.
+
 To refresh *discovery and popularity* data, run
 `node scripts/snapshot_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, `ascii_pnm`, or `ascii_ply`.
 Run `node scripts/triage_npm.mjs png`, `zip`, `mp4`, `mp3_id3v2`, `wav`, `pdf`, `svg`, `http11`, `ascii_pnm`, or `ascii_ply`
@@ -468,8 +475,8 @@ provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
 within Python. Unavailable metrics remain `null`.
 
-For Rust PNG, ZIP, or WAV discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
-`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, or `wav`, to refresh seven bounded
+For Rust PNG, ZIP, WAV, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
+`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `wav`, or `mp3_id3v2`, to refresh seven bounded
 [crates.io API](https://crates.io/api/) searches, pinned release metadata,
 and crate-level recent downloads over about 90 days. The downloads are
 compared only within Rust PNG. These commands require network access and
@@ -685,6 +692,11 @@ or quality judgment.
   Seven bounded crates.io searches saved 653 hits and 469 distinct names;
   13 plausible leads remain unresolved. The [cell record](data/rust/wav/cell.json)
   records the search limits and separate standard-library inventory.
+- [Rust × MP3 with ID3v2 ranking](data/rust/mp3_id3v2/ranking.md): 20 verified
+  crate paths. Seven bounded crates.io searches saved 676 hits and 430
+  distinct names; 12 plausible leads remain unresolved. The
+  [cell record](data/rust/mp3_id3v2/cell.json) records search limits and the
+  separate standard-library inventory.
 
 The full discovery surfaces have not been exhausted. The [PNG cell record](data/javascript/png/cell.json)
 and [ZIP cell record](data/javascript/zip/cell.json), along with the
