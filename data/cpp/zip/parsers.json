@@ -350,5 +350,23 @@
     "scope": "entry name and decompressed entry bytes",
     "family": "KArchive KZip reader",
     "family_note": "KDE Frameworks KArchive exposes its own ZIP reader through KZip and Qt; the same package is counted only once."
+  },
+  {
+    "name": "sebastiandev-zipper",
+    "version": "1.0.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/sebastiandev/zipper/blob/v1.0.3/LICENSE.md",
+    "documentation": "https://github.com/sebastiandev/zipper/blob/v1.0.3/README.md",
+    "input_api": "zipper::Unzipper(local filename); entries(); extractEntryToMemory(entry name, vector)",
+    "adapter": "adapters/cpp/zip/sebastiandev_zipper.cpp",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "Sebastian Zipper wrapper over classic MiniZip fork",
+    "family_note": "Distinct tagged C++ package API from Lecrapouille/zipper, despite the shared name. Both use classic MiniZip lineage; this package pins its own Lecrapouille/minizip submodule at commit 7619140. Tag v1.0.3 contains VERSION.txt 1.0.2, recorded in source lock."
   }
 ]

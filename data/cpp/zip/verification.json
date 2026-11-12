@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T08:46:34.718019+00:00",
+  "checked_at_utc": "2026-11-12T08:51:31.857752+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/zip/source-lock.json",
@@ -303,6 +303,21 @@
       "configure_command": null,
       "library_build_command": null,
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/karchive /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "sebastiandev-zipper",
+      "version": "1.0.3",
+      "control": "controls/zip/hello.zip",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/sebastiandev-zipper /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/sebastiandev_zipper.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/sebastiandev-zipper-build/libZipper.a -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/sebastiandev-zipper",
+      "configure_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/cache/sebastiandev-zipper -B /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/sebastiandev-zipper-build -DBUILD_SHARED_VERSION=OFF -DBUILD_STATIC_VERSION=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+      "library_build_command": "cmake --build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/sebastiandev-zipper-build --target staticZipper -j 8",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/zip/target/sebastiandev-zipper /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
       "output": {
         "entries": 1,
         "name": "hello.txt",

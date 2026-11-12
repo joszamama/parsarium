@@ -33,7 +33,7 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/zip/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 19
+    assert len(parsers) == 20
     assert {p["name"] for p in parsers} == set(c_parsers) | set(extra_lock)
     assert set(c_parsers) == set(c_runs)
     TARGET.mkdir(parents=True, exist_ok=True)
@@ -151,6 +151,19 @@ def main() -> None:
                        "-I" + str(build), str(ROOT / parser["adapter"]),
                        str(build / "libQArchive.a"), str(archive_binary),
                        *flags, "-o", str(TARGET / name)]
+        elif name == "sebastiandev-zipper":
+            source = ADAPTER / "cache/sebastiandev-zipper"
+            build = TARGET / "sebastiandev-zipper-build"
+            configure = ["cmake", "-S", str(source), "-B", str(build),
+                         "-DBUILD_SHARED_VERSION=OFF", "-DBUILD_STATIC_VERSION=ON",
+                         "-DBUILD_TEST=OFF", "-DCMAKE_BUILD_TYPE=Release",
+                         "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"]
+            library_build = ["cmake", "--build", str(build), "--target", "staticZipper", "-j", "8"]
+            run(configure)
+            run(library_build)
+            command = ["c++", "-std=c++17", "-O2", "-I" + str(source),
+                       str(ROOT / parser["adapter"]), str(build / "libZipper.a"),
+                       "-lz", "-o", str(TARGET / name)]
         else:
             assert parser["version"] == c_parsers[name]["version"]
             assert parser["expected_output"] == c_parsers[name]["expected_output"]

@@ -290,13 +290,23 @@
       "source_url": "https://download.kde.org/stable/frameworks/6.31/karchive-6.31.0.tar.xz",
       "source_sha256": "95acaf5a459593184104e1c157cef415ec59a33e71674186169e0df33cdacaac",
       "license_evidence": "https://formulae.brew.sh/formula/karchive"
+    },
+    "sebastiandev-zipper": {
+      "version": "1.0.3",
+      "license": "MIT",
+      "source_url": "https://github.com/sebastiandev/zipper/archive/refs/tags/v1.0.3.tar.gz",
+      "source_sha256": "89b0cdc340a866f1cf2626aec11d11656425e9022b1f1eefd0edf3c37f070b0d",
+      "license_evidence": "https://github.com/sebastiandev/zipper/blob/v1.0.3/LICENSE.md",
+      "tagged_source_internal_version": "1.0.2",
+      "underlying_library_source_url": "https://github.com/Lecrapouille/minizip/archive/7619140097aaba8bd49659cb9c4878c4b1dcac30.tar.gz",
+      "underlying_library_source_sha256": "d0a1dc12d6819b544e2e3f4249e178a9531704aef7c5f2fad943b926aaf374fc"
     }
   },
   "popularity_metric": {
     "metric": "GitHub stars of primary upstream repository, where package-specific and available",
     "captured_at_utc": "2026-11-12T07:50:21.979330+00:00",
     "source": "https://api.github.com/repos/{owner}/{repo}",
-    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z wraps SevenZip. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set. QuaZip shares classic MiniZip lineage; QArchive wraps libarchive; KArchive primary hosting is KDE GitLab and its GitHub mirror stars are not used.",
+    "limitations": "Repository-level adoption proxy, not ZIP usage. Shared C and C++ paths use the same repository metric. POCO covers many modules; libzippp wraps libzip, Troldal Zippy bundles miniz, Zipper wraps a classic MiniZip fork, and bit7z wraps SevenZip. Missing metrics are null; classic MiniZip does not inherit zlib stars. The alphabetic Conan search does not establish the most-used set. QuaZip shares classic MiniZip lineage; QArchive wraps libarchive; KArchive primary hosting is KDE GitLab and its GitHub mirror stars are not used. Sebastian Zipper is a separate package from Lecrapouille Zipper, but both share MiniZip parser lineage.",
     "packages": {
       "libarchive": {
         "stars": 3672,
@@ -396,6 +406,11 @@
         "repository": null,
         "source": null,
         "reason": "The primary KDE repository is on invent.kde.org; a GitHub mirror star count is not a comparable primary-upstream metric."
+      },
+      "sebastiandev-zipper": {
+        "stars": 534,
+        "repository": "https://github.com/sebastiandev/zipper",
+        "source": "https://api.github.com/repos/sebastiandev/zipper"
       }
     },
     "captured_between_utc": [
@@ -407,6 +422,7 @@
     "https://github.com/selmf/unarr/releases/tag/v1.2.0",
     "https://github.com/mackron/fs",
     "https://icculus.org/physfs/docs/html/physfs_8h.html",
-    "https://api.kde.org/kzip.html"
+    "https://api.kde.org/kzip.html",
+    "https://github.com/sebastiandev/zipper/blob/v1.0.3/README.md"
   ]
 }
