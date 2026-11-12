@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
-and a verified C++ × ASCII PNM batch, plus a below-target native C++ × HTTP/1.1 batch,
+and verified C++ × ASCII PNM and HTTP/1.1 batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -17,7 +17,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 69 cells at the 20-parser target, three started below target, and 16
+There are 70 cells at the 20-parser target, two started below target, and 16
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -164,11 +164,14 @@ Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
 does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 
-The native C++ × HTTP/1.1 batch verifies Boost.Beast 1.92.0 and Poco.Net
-1.15.4 against a saved valid request. Each adapter returns method, target,
-version, and Host; the verifier checks SHA-256-pinned source archives and
-builds Poco.Net from source. This cell is **2/20**, with eight unresolved leads
-and no standard-library HTTP parser. See its
+The C++ × HTTP/1.1 batch verifies **20/20 package paths** against saved valid
+request or response controls. Boost.Beast 1.92.0 and Poco.Net 1.15.4 are native
+C++ APIs; eighteen C parser packages are called directly from C++17 and share
+their releases and underlying engines with the C HTTP/1.1 cell. The verifier
+checks SHA-256-pinned source archives, exact local library and header hashes,
+and builds source releases where needed. Eight leads remain unresolved, so the
+20-path count does not establish a complete most-used top 20. The ISO C++
+standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.
