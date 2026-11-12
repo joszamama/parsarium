@@ -315,15 +315,28 @@
     {
       "ecosystem": "cpp",
       "format": "pdf",
-      "status": "not_started",
+      "status": "verified_below_target",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 2,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "pdf",
+        "poppler",
+        "mupdf",
+        "podofo"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 48,
+      "unique_search_hits": 45,
+      "unresolved_documentation_leads": 8,
+      "uncertainty": "Two pinned open-source native C++ PDF readers, Poppler C++ and PoDoFo, passed the valid one-page local PDF control and returned a parsed page count. Eighteen more verified package paths are needed for the 20-path working goal. Four Homebrew formula-name searches captured exact fuzzy result windows of 38, 4, 4, 2 hits; they are discovery leads, not proof or usage rankings. The Conan Center Index tree API was rate limited, so its complete recipe-name surface is not claimed; three targeted Conan pages were checked. Eight plausible leads remain unresolved. PoDoFo has a primary GitHub star count; Poppler is developed on GitLab and is unranked under this metric. Both local installed binaries and headers are SHA-256 pinned and matched to SHA-256-pinned release source archives. The ISO C++ standard library has no documented PDF parser. The control covers a simple unencrypted one-page PDF only. No malformed-input, vulnerability, or resource-use experiments were run.",
+      "third_party_evidence": "data/cpp/pdf/parsers.json",
+      "third_party_control_results": "data/cpp/pdf/verification.json",
+      "runtime_evidence": "data/cpp/pdf/standard.json",
+      "registry_snapshot": "data/cpp/pdf/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/pdf/leads.json",
+      "source_lock": "data/cpp/pdf/source-lock.json"
     },
     {
       "ecosystem": "cpp",

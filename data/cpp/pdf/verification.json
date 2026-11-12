@@ -1,0 +1,45 @@
+{
+  "checked_at_utc": "2026-11-12T22:31:45.689785+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/cpp/pdf/source-lock.json",
+  "local_libraries": {
+    "poppler": {
+      "source_sha256": "41c32680160addf5a8dd7a830e4869c01e9f6bee1abb91e44fabd1ba9d7828fb",
+      "local_library_sha256": "1f9108d76f07f9d136030635dd269fa4befd69375eb62414916502469120eaeb",
+      "local_header_sha256": "db55bed4921ca6d254c6e75bc5fd33506cc171d77ef4a7c8bc1558cc544ccf99"
+    },
+    "podofo": {
+      "source_sha256": "d6ffe6fc173ac6d6e5b00f5cb9db01990cab1bdf7cc03bdeffce3013bc9ec63a",
+      "local_library_sha256": "3a653c9a8e7b014ca016022ab0dd14d6bef6398d5f11961f15114aa703d6df16",
+      "local_header_sha256": "b71f66934ef8460279d84d03dcdd6f3d52f5925a951f4e8ca4b242d900709d4c"
+    }
+  },
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "third_party": [
+    {
+      "package": "poppler",
+      "version": "26.11.0",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/poppler.cpp -I/opt/homebrew/Cellar/poppler/26.11.0/include/poppler/cpp -I/opt/homebrew/Cellar/poppler/26.11.0/include/poppler -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/Cellar/nss/3.133/include/nss -I/opt/homebrew/Cellar/nspr/4.40/include/nspr -I/opt/homebrew/Cellar/gpgmepp/2.2.0/include -I/opt/homebrew/Cellar/gpgme/2.2.0/include -I/opt/homebrew/Cellar/libassuan/3.0.2/include -I/opt/homebrew/opt/libgpg-error/include -I/opt/homebrew/Cellar/openjpeg/2.5.4_1/include/openjpeg-2.5 -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/opt/graphite2/include -L/opt/homebrew/Cellar/poppler/26.11.0/lib -lpoppler-cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/poppler",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/poppler /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "podofo",
+      "version": "1.1.2",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -Wno-unnecessary-virtual-specifier -I/opt/homebrew/Cellar/podofo/1.1.2/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/podofo.cpp /opt/homebrew/Cellar/podofo/1.1.2/lib/libpodofo.1.1.2.dylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/podofo",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/podofo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

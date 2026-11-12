@@ -1,0 +1,34 @@
+[
+  {
+    "name": "poppler",
+    "version": "26.11.0",
+    "license": "GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://formulae.brew.sh/formula/poppler",
+    "documentation": "https://poppler.freedesktop.org/api/cpp/classpoppler_1_1document.html",
+    "input_api": "poppler::document::load_from_file(const std::string&) on a local PDF path; pages()",
+    "adapter": "adapters/cpp/pdf/poppler.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "Poppler PDF parser, C++ frontend",
+    "family_note": "Native Poppler C++ frontend over Poppler core; its other frontends share the same parser engine."
+  },
+  {
+    "name": "podofo",
+    "version": "1.1.2",
+    "license": "LGPL-2.0-or-later OR MPL-2.0",
+    "license_evidence": "https://github.com/podofo/podofo/blob/1.1.2/README.md",
+    "documentation": "https://github.com/podofo/podofo/blob/1.1.2/src/podofo/main/PdfMemDocument.h",
+    "input_api": "PoDoFo::PdfMemDocument::Load(std::string_view local filename); GetPages().GetCount()",
+    "adapter": "adapters/cpp/pdf/podofo.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PoDoFo PDF parser",
+    "family_note": "Native C++17 PoDoFo PDF document reader; distinct from Poppler."
+  }
+]

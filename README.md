@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
-and verified C++ × ASCII PNM and HTTP/1.1 batches,
+and verified C++ × ASCII PNM and HTTP/1.1 batches, plus a below-target C++ × PDF batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -17,7 +17,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 70 cells at the 20-parser target, two started below target, and 16
+There are 70 cells at the 20-parser target, three started below target, and 15
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -33,6 +33,7 @@ python3 scripts/verify_c_png.py
 python3 scripts/verify_c_http11.py
 python3 scripts/verify_cpp_png.py
 python3 scripts/verify_cpp_http11.py
+python3 scripts/verify_cpp_pdf.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py
@@ -173,6 +174,12 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 20-path count does not establish a complete most-used top 20. The ISO C++
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
+
+The C++ × PDF batch currently verifies **2/20 native C++ package paths**:
+Poppler's C++ frontend and PoDoFo. Both return one parsed page from the valid
+PDF control, and their release archives, installed headers, and libraries are
+SHA-256 checked. Eight leads remain unresolved. See the
+[PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.
 The C batch now has **20/20 verified package paths**: fourteen prior readers plus
