@@ -1,6 +1,6 @@
 # Java × HTTP/1.1: verified parser ranking
 
-15 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T13:43:18.072044+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
+16 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T13:43:18.072044+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
 
 Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
 
@@ -21,3 +21,4 @@ Search hits, unresolved leads, and JDK APIs are separate from this ranking. See 
 | 13 | [http1_1-parser](https://github.com/deanhiller/webpieces/blob/master/http/http1_1-parser/src/main/java/org/webpieces/httpparser/api/HttpParser.java) | org.webpieces.http:http1_1-parser:2.1.109 | 3 | HTTP/1.1 request line and headers from local bytes | WebPieces HTTP/1.1 parser |
 | 13 | [webarchive-commons](https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/src/main/java/org/archive/format/http/HttpRequestParser.java) | org.netpreserve.commons:webarchive-commons:3.0.5 | 3 | HTTP/1.1 request line and headers from local stream | webarchive-commons native HTTP message parser |
 | 15 | [jwarc](https://github.com/iipc/jwarc/blob/v0.37.0/src/org/netpreserve/jwarc/HttpRequest.java) | org.netpreserve:jwarc:0.37.0 | 1 | HTTP/1.1 request line and headers from local channel | jwarc native HTTP parser |
+| 16 | [mina-http](https://nightlies.apache.org/mina/mina/2.2.10/apidocs/org/apache/mina/http/HttpServerDecoder.html) | org.apache.mina:mina-http:2.2.10 | 0 | HTTP/1.1 request line and headers from local bytes | Apache MINA native HTTP server decoder |

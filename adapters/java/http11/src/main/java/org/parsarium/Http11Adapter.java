@@ -37,6 +37,7 @@ public final class Http11Adapter {
         else if (args[0].equals("jwat")) runJwat(bytes);
         else if (args[0].equals("sentinel")) runSentinel(bytes);
         else if (args[0].equals("httpcore4nio")) runHttpCore4Nio(bytes);
+        else if (args[0].equals("mina")) runMina(bytes);
         else System.exit(2);
     }
 
@@ -262,5 +263,26 @@ public final class Http11Adapter {
                 request.getRequestLine().getProtocolVersion(),
                 request.getFirstHeader("Host").getValue(),
                 request.getFirstHeader("X-Parsarium").getValue());
+    }
+
+    private static void runMina(byte[] bytes) {
+        var decoded = new java.util.ArrayList<Object>();
+        org.apache.mina.filter.codec.ProtocolDecoderOutput output = new org.apache.mina.filter.codec.ProtocolDecoderOutput() {
+            @Override public void write(Object value) { decoded.add(value); }
+            @Override public void flush(org.apache.mina.core.filterchain.IoFilter.NextFilter next,
+                                        org.apache.mina.core.session.IoSession session) { }
+        };
+        new org.apache.mina.http.HttpServerDecoder().decode(
+                new org.apache.mina.core.session.DummySession(),
+                org.apache.mina.core.buffer.IoBuffer.wrap(bytes), output);
+        var request = decoded.stream()
+                .filter(value -> value instanceof org.apache.mina.http.api.HttpRequest)
+                .map(value -> (org.apache.mina.http.api.HttpRequest) value)
+                .findFirst().orElseThrow();
+        String target = request.getRequestPath()
+                + (request.getQueryString() == null ? "" : "?" + request.getQueryString());
+        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
+                request.getMethod(), target, request.getProtocolVersion(),
+                request.getHeader("host"), request.getHeader("x-parsarium"));
     }
 }
