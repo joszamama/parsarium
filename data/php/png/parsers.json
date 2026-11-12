@@ -62,5 +62,78 @@
     "scope": "decoded dimensions and two RGB pixels",
     "family": "PHP GD PNG decoder",
     "family_note": "This package path delegates PNG decoding to the bundled PHP GD extension."
+  },
+  {
+    "name": "spatie/image",
+    "version": "3.9.10",
+    "license": "MIT",
+    "license_evidence": "https://github.com/spatie/image/blob/de071f9aceaeed977401d6983a8bbe0c21b411dd/LICENSE.md",
+    "documentation": "https://spatie.be/docs/image/v3/usage/basic-usage",
+    "input_api": "Image::useImageDriver(Gd)->loadFile(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/spatie_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "The adapter selects Spatie’s GD driver, which delegates PNG decoding to PHP GD."
+  },
+  {
+    "name": "marc1706/fast-image-size",
+    "version": "v1.3.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/marc1706/fast-image-size/blob/35c193f56d3a3abaf441918ea4eda7cd5d89d443/LICENSE",
+    "documentation": "https://packagist.org/packages/marc1706/fast-image-size",
+    "input_api": "FastImageSize::getImageSize(local PNG path)",
+    "adapter": "adapters/php/png/marc1706_fast_image_size.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "type": 3
+    },
+    "scope": "PNG dimensions and format type",
+    "family": "FastImageSize PNG header reader",
+    "family_note": "Parses PNG dimensions and type from headers in PHP; it does not decode pixels."
+  },
+  {
+    "name": "gumlet/php-image-resize",
+    "version": "3.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/gumlet/php-image-resize/blob/cd01c9e8aa2382211d760c825799c8102987a8c2/Licence.md",
+    "documentation": "https://github.com/gumlet/php-image-resize/blob/cd01c9e8aa2382211d760c825799c8102987a8c2/README.md",
+    "input_api": "ImageResize(local PNG path); getSourceWidth/getSourceHeight",
+    "adapter": "adapters/php/png/gumlet_php_image_resize.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "The package loads the local PNG through PHP GD."
+  },
+  {
+    "name": "gregwar/image",
+    "version": "v2.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Gregwar/Image/blob/1cf64c34cbb22933b36727c16b15ed4d925b6fc6/Gregwar/Image/LICENSE",
+    "documentation": "https://github.com/Gregwar/Image/blob/1cf64c34cbb22933b36727c16b15ed4d925b6fc6/Gregwar/Image/README.md",
+    "input_api": "Gregwar\\Image\\Image::open(local PNG path); width/height",
+    "adapter": "adapters/php/png/gregwar_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "The adapter uses Gregwar’s GD backend to decode the PNG."
   }
 ]
