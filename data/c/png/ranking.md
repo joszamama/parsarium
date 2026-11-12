@@ -8,7 +8,7 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [raylib](https://github.com/raysan5/raylib/blob/6.2/src/raylib.h) | 6.2 | 35,637 | pixels | raylib bundled stb_image PNG decoder |
 | 2 | [stb](https://github.com/nothings/stb/blob/a7d4c2175630e1ea5b6f8dd00ab96fed0b97b96d/stb_image.h) | cci.20261021 | 35,006 | pixels | stb_image |
-| 3 | [imagemagick](https://imagemagick.org/magick-wand/) | 7.1.2-31 | 17,848 | pixels | ImageMagick PNG coder (libpng-backed) |
+| 3 | [imagemagick](https://imagemagick.org/magick-wand/) | 7.1.2-35 | 17,848 | pixels | ImageMagick PNG coder (libpng-backed) |
 | 4 | [sdl3](https://wiki.libsdl.org/SDL3/SDL_LoadPNG) | 3.4.20 | 16,974 | pixels | SDL3 bundled stb_image PNG decoder |
 | 5 | [vips](https://www.libvips.org/API/current/VipsImage.html) | 8.18.7 | 11,801 | pixels | libvips PNG loader (libpng-backed) |
 | 6 | [wuffs](https://github.com/google/wuffs/blob/v0.3.6/doc/std/image-decoders.md) | 0.3.6 | 4,881 | PNG image configuration | Wuffs PNG decoder |

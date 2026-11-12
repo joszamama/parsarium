@@ -1,0 +1,125 @@
+{
+  "checked_at_utc": "2026-11-12T07:39:24.617008+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "local_libraries": {
+    "libarchive": {
+      "pkg_config_version": "3.8.11",
+      "library": "/opt/homebrew/Cellar/libarchive/3.8.11/lib/libarchive.dylib",
+      "library_sha256": "7014b16ab60470ea7d512dde170002045343002923169d07a281ad12df787a46"
+    },
+    "libzip": {
+      "pkg_config_version": "1.12.1",
+      "library": "/opt/homebrew/Cellar/libzip/1.12.1/lib/libzip.dylib",
+      "library_sha256": "2b03bb540cb117643bbe9a027148c83d9ef2efd01d6ef5b56101bc309a4e650b"
+    },
+    "minizip": {
+      "pkg_config_version": "1.4",
+      "library": "/opt/homebrew/Cellar/minizip/1.4/lib/libminizip.dylib",
+      "library_sha256": "17664124140c81f3028d78a1c79b8af08e891026ee0e08c678eca9ea5ba042a3"
+    },
+    "minizip-ng": {
+      "pkg_config_version": "4.2.2",
+      "library": "/opt/homebrew/Cellar/minizip-ng/4.2.2/lib/libminizip-ng.dylib",
+      "library_sha256": "f8c6ba1a05d29fb182ed968bcf3caae331e7cb48bcbe1e0fc21e38b22ae4cf27"
+    },
+    "miniz": {
+      "pkg_config_version": "3.1.2",
+      "library": "/opt/homebrew/Cellar/miniz/3.1.2/lib/libminiz.dylib",
+      "library_sha256": "ff9dba80bb9ca094c1ba873c79e9a22f6aa0605fac103692b19d0166c0d44702"
+    },
+    "libgsf": {
+      "pkg_config_version": "1.14.60",
+      "library": "/opt/homebrew/Cellar/libgsf/1.14.60/lib/libgsf-1.dylib",
+      "library_sha256": "a0edd447ee04306912f46ce3e4181b6780e13e90f302607401537af5281ccdda"
+    }
+  },
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected": {
+    "entries": 1,
+    "name": "hello.txt",
+    "content": "parsarium\n"
+  },
+  "third_party": [
+    {
+      "package": "libarchive",
+      "version": "3.8.11",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libarchive.c -I/opt/homebrew/opt/libarchive/include -L/opt/homebrew/opt/libarchive/lib -larchive -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libarchive",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libarchive /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "libzip",
+      "version": "1.12.1",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libzip.c -I/opt/homebrew/Cellar/libzip/1.12.1/include -L/opt/homebrew/Cellar/libzip/1.12.1/lib -lzip -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libzip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libzip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "minizip",
+      "version": "1.4",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/minizip.c -I/opt/homebrew/Cellar/minizip/1.4/include -L/opt/homebrew/Cellar/minizip/1.4/lib -lminizip -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/minizip",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/minizip /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "minizip-ng",
+      "version": "4.2.2",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/minizip_ng.c -I/opt/homebrew/Cellar/minizip-ng/4.2.2/include/minizip-ng -L/opt/homebrew/Cellar/minizip-ng/4.2.2/lib -lminizip-ng -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/minizip-ng",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/minizip-ng /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "miniz",
+      "version": "3.1.2",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/miniz.c -I/opt/homebrew/Cellar/miniz/3.1.2/include/miniz -L/opt/homebrew/Cellar/miniz/3.1.2/lib -lminiz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/miniz",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/miniz /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    },
+    {
+      "package": "libgsf",
+      "version": "1.14.60",
+      "control": "controls/zip/hello.zip",
+      "build_command": "cc -std=c11 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/libgsf.c -I/opt/homebrew/Cellar/libgsf/1.14.60/include/libgsf-1 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -L/opt/homebrew/Cellar/libgsf/1.14.60/lib -lgsf-1 -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -lxml2 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libgsf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/zip/target/libgsf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/zip/hello.zip",
+      "output": {
+        "entries": 1,
+        "name": "hello.txt",
+        "content": "parsarium\n"
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

@@ -29,15 +29,28 @@
     {
       "ecosystem": "c",
       "format": "zip",
-      "status": "not_started",
+      "status": "verified_below_goal_partial_search",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 6,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "zip",
+        "archive",
+        "miniz",
+        "unzip"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 23,
+      "unique_search_hits": 21,
+      "unresolved_documentation_leads": 3,
+      "uncertainty": "Six distinct pinned C package paths passed the valid one-entry DEFLATE ZIP control, returning the parsed entry name and decompressed bytes. Four have primary GitHub repository star metrics; classic MiniZip is a zlib source subtree and libgsf uses GNOME GitLab, so their package-specific GitHub metric is unknown. MiniZip and minizip-ng share lineage; six paths are not six independent archive engines. The Conan Center Index recipe-name search saved 23 alphabetic hits across four substrings (21 unique), but is not usage-ranked and misses packages without matching names or outside Conan Center. Three leads remain unresolved: 7zip, kuba-zip, and zziplib. libgsf was added from project documentation outside this registry name search. This is a partial batch below the 20 working goal and does not establish the most-used six or exhaust C ZIP parsers. The binary-pinned libraries must be installed at their recorded releases to rerun; the control covers only one ordinary DEFLATE ZIP entry. The ISO C standard library documents no ZIP-specific parser; generic stdio input does not qualify. No malformed-input, vulnerability, or resource-use experiments were run.",
+      "third_party_evidence": "data/c/zip/parsers.json",
+      "third_party_control_results": "data/c/zip/verification.json",
+      "runtime_evidence": "data/c/zip/standard.json",
+      "registry_snapshot": "data/c/zip/registry-snapshot.json",
+      "unresolved_leads": "data/c/zip/leads.json",
+      "source_lock": "data/c/zip/source-lock.json"
     },
     {
       "ecosystem": "c",

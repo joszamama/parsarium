@@ -1,0 +1,110 @@
+[
+  {
+    "name": "libarchive",
+    "version": "3.8.11",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://formulae.brew.sh/formula/libarchive",
+    "documentation": "https://github.com/libarchive/libarchive/blob/v3.8.11/libarchive/archive.h",
+    "input_api": "archive_read_open_filename; archive_read_support_format_zip; archive_read_next_header and archive_read_data",
+    "adapter": "adapters/c/zip/libarchive.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libarchive ZIP reader",
+    "family_note": "Own ZIP reader and entry data API; DEFLATE uses compression support."
+  },
+  {
+    "name": "libzip",
+    "version": "1.12.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://formulae.brew.sh/formula/libzip",
+    "documentation": "https://libzip.org/documentation/zip_open/",
+    "input_api": "zip_open(const char*); zip_get_num_entries; zip_stat_index; zip_fopen_index and zip_fread",
+    "adapter": "adapters/c/zip/libzip.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libzip ZIP reader",
+    "family_note": "Own ZIP archive reader and entry API."
+  },
+  {
+    "name": "minizip",
+    "version": "1.4",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/minizip",
+    "documentation": "https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h",
+    "input_api": "unzOpen64(const char*); unzGetGlobalInfo64; unzGetCurrentFileInfo64; unzReadCurrentFile",
+    "adapter": "adapters/c/zip/minizip.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "classic MiniZip",
+    "family_note": "Classic MiniZip from the zlib contrib/minizip source subtree; separate from minizip-ng but related lineage."
+  },
+  {
+    "name": "minizip-ng",
+    "version": "4.2.2",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/formula/minizip-ng",
+    "documentation": "https://github.com/zlib-ng/minizip-ng/blob/4.2.2/mz_zip_rw.h",
+    "input_api": "mz_zip_reader_open_file; mz_zip_reader_entry_get_info; mz_zip_reader_entry_read",
+    "adapter": "adapters/c/zip/minizip_ng.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "MiniZip lineage",
+    "family_note": "Separate maintained package descended from classic MiniZip; not an independent family claim."
+  },
+  {
+    "name": "miniz",
+    "version": "3.1.2",
+    "license": "MIT",
+    "license_evidence": "https://formulae.brew.sh/formula/miniz",
+    "documentation": "https://github.com/richgel999/miniz/blob/3.1.2/miniz_zip.h",
+    "input_api": "mz_zip_reader_init_file; mz_zip_reader_file_stat; mz_zip_reader_extract_to_heap",
+    "adapter": "adapters/c/zip/miniz.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "miniz ZIP reader",
+    "family_note": "miniz archive reader; its DEFLATE implementation is integrated."
+  },
+  {
+    "name": "libgsf",
+    "version": "1.14.60",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://formulae.brew.sh/formula/libgsf",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html",
+    "input_api": "gsf_input_stdio_new; gsf_infile_zip_new; gsf_infile_child_by_index; gsf_input_read",
+    "adapter": "adapters/c/zip/libgsf.c",
+    "control": "controls/zip/hello.zip",
+    "expected_output": {
+      "entries": 1,
+      "name": "hello.txt",
+      "content": "parsarium\n"
+    },
+    "scope": "entry name and decompressed entry bytes",
+    "family": "libgsf ZIP reader",
+    "family_note": "Own ZIP directory and entry API; uses compression dependencies for DEFLATE."
+  }
+]

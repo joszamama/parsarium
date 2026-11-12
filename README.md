@@ -1,7 +1,8 @@
 # Parsarium
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
-specific formats. It currently contains a verified C × PNG batch,
+specific formats. It currently contains a verified C × PNG batch and a
+below-target C × ZIP batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -11,8 +12,8 @@ Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, and MP4, and an explicit 88-cell work matrix.
-There are 48 cells at the 20-parser target, two started below target,
-and 38 marked `not_started`;
+There are 48 cells at the 20-parser target, three started below target,
+and 37 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -24,6 +25,7 @@ all packages and integrity hashes. From the repository root:
 
 ```sh
 python3 scripts/verify_c_png.py
+python3 scripts/verify_c_zip.py
 npm ci
 npx playwright install chromium
 npm run pilot:control
@@ -126,6 +128,18 @@ python3 scripts/validate_catalog.py
 ```
 
 The C × PNG verifier uses `cc`, CMake, `pkg-config`, and zlib development headers. It downloads six source archives pinned by SHA-256 and checks fourteen locally installed C libraries pinned by exact release and binary SHA-256. The recorded result is **20/20 third-party package paths passing** on the valid 2×1 PNG control, with six paths unranked for lack of a comparable primary GitHub repository metric. The count does not imply twenty independent decoder engines or a complete most-used top twenty. Two plausible leads remain unresolved. Install the exact recorded library releases in [`source-lock.json`](data/c/png/source-lock.json) before rerunning; a later Homebrew revision will fail the binary check. See [`cell.json`](data/c/png/cell.json) for search limits and uncertainty. The ISO C standard library has no documented PNG parser; generic `stdio.h` input does not count.
+
+The C × ZIP verifier uses `cc` and `pkg-config` with six locally installed
+libraries pinned by exact release and binary SHA-256 in
+[`source-lock.json`](data/c/zip/source-lock.json). All **6/6 third-party
+package paths passed** on the same one-entry DEFLATE ZIP control used in the
+other ecosystems, returning the parsed entry name and decompressed bytes.
+This remains below the working goal of 20. Four paths have primary GitHub
+repository star metrics; two remain unranked. MiniZip and minizip-ng share
+parser lineage. The 21 distinct Conan recipe-name hits are alphabetic
+discovery results, not a most-used ranking; three leads remain unresolved.
+The [C ZIP cell summary](data/c/zip/cell.json) records the search limits and
+uncertainty. The ISO C standard library has no documented ZIP parser.
 
 `pilot:control` generates the 71-byte PNG in `controls/png/red-green.png` with
 SHA-256 `5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6`.

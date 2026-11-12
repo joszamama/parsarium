@@ -203,39 +203,40 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"java/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
-    directory = ROOT / "data/c/png"
-    parsers = read(directory / "parsers.json")
-    snapshot = read(directory / "registry-snapshot.json")
-    metrics = snapshot["popularity_metric"]["packages"]
-    ranked = sorted((p for p in parsers if metrics[p["name"]]["stars"] is not None),
-                    key=lambda p: (-metrics[p["name"]]["stars"], p["name"]))
-    unknown = sorted((p for p in parsers if metrics[p["name"]]["stars"] is None),
-                     key=lambda p: p["name"])
-    lines = ["# C × PNG: verified parser ranking", "",
-             f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
-             "The metric is GitHub repository stars captured at "
-             f"{snapshot['popularity_metric']['captured_at_utc']}. The captured Conan Center recipe-name "
-             "surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, "
-             "compared only within C, and do not establish a complete most-used set. "
-             f"{len(unknown)} path(s) lack a metric and remain unranked.", "",
-             "Search hits, unresolved leads, and the C standard-library inventory are separate. "
-             "See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.", "",
-             "| Rank | Package | Pinned release | Repository stars | Scope | Underlying family |",
-             "| ---: | --- | --- | ---: | --- | --- |"]
-    previous = None
-    displayed_rank = 0
-    for position, parser in enumerate(ranked, 1):
-        value = metrics[parser["name"]]["stars"]
-        if value != previous:
-            displayed_rank = position
-            previous = value
-        lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
-                     f"{parser['version']} | {value:,} | {parser['scope']} | {parser['family']} |")
-    for parser in unknown:
-        lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
-                     f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
-    (directory / "ranking.md").write_text("\n".join(lines) + "\n")
-    print(f"c/png: {len(ranked)} verified packages ranked, {len(unknown)} unranked")
+    for format_name in ("png", "zip"):
+        directory = ROOT / "data/c" / format_name
+        parsers = read(directory / "parsers.json")
+        snapshot = read(directory / "registry-snapshot.json")
+        metrics = snapshot["popularity_metric"]["packages"]
+        ranked = sorted((p for p in parsers if metrics[p["name"]]["stars"] is not None),
+                        key=lambda p: (-metrics[p["name"]]["stars"], p["name"]))
+        unknown = sorted((p for p in parsers if metrics[p["name"]]["stars"] is None),
+                         key=lambda p: p["name"])
+        lines = [f"# C × {format_name.upper()}: verified parser ranking", "",
+                 f"{len(parsers)} verified third-party package paths; working goal 20, ceiling 30. "
+                 "The metric is GitHub repository stars captured at "
+                 f"{snapshot['popularity_metric']['captured_at_utc']}. The captured Conan Center recipe-name "
+                 "surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, "
+                 "compared only within C, and do not establish a complete most-used set. "
+                 f"{len(unknown)} path(s) lack a metric and remain unranked.", "",
+                 "Search hits, unresolved leads, and the C standard-library inventory are separate. "
+                 "See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.", "",
+                 "| Rank | Package | Pinned release | Repository stars | Scope | Underlying family |",
+                 "| ---: | --- | --- | ---: | --- | --- |"]
+        previous = None
+        displayed_rank = 0
+        for position, parser in enumerate(ranked, 1):
+            value = metrics[parser["name"]]["stars"]
+            if value != previous:
+                displayed_rank = position
+                previous = value
+            lines.append(f"| {displayed_rank} | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['version']} | {value:,} | {parser['scope']} | {parser['family']} |")
+        for parser in unknown:
+            lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
+                         f"{parser['version']} | unknown | {parser['scope']} | {parser['family']} |")
+        (directory / "ranking.md").write_text("\n".join(lines) + "\n")
+        print(f"c/{format_name}: {len(ranked)} verified packages ranked, {len(unknown)} unranked")
 
 
 if __name__ == "__main__":

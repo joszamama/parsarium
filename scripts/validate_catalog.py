@@ -46,8 +46,7 @@ def main() -> None:
         for parser in parsers:
             name = parser["name"]
             if cell["ecosystem"] == "c":
-                assert cell["format"] == "png"
-                source = read("data/c/png/source-lock.json")[name]
+                source = read(f"{key}/source-lock.json")[name]
                 release = snapshot["releases"][name]
                 assert parser["version"] == source["release"] == release["version"]
                 assert parser["license"] == release["license"]
