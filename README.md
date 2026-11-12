@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG and WAV batches,
-verified C × ZIP and below-target ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
+verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and a verified C++ × ASCII PNM batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
@@ -931,9 +931,11 @@ or quality judgment.
   unresolved. The [runtime inventory](data/javascript/ascii_ply/standard.json)
   records the scoped absence of a PLY-aware Node.js or browser platform API.
 - [JavaScript × Matrix Market ranking](data/javascript/matrix_market/ranking.md):
-  three pinned packages verified on valid local coordinate real general
-  controls, 17 below the working goal. Six bounded npm queries saved 406 hits
-  and 353 distinct names; two plausible leads remain unresolved. The
+  six pinned packages verified on valid local coordinate real general,
+  symmetric, or 10x Matrix Market controls, 14 below the working goal. Six
+  bounded npm queries saved 406 hits and 353 distinct names; three plausible
+  leads remain unresolved. `scran.js` and `bakana` share the same underlying
+  WASM reader; `@orbifold/graphs` was verified only on a no-comment control. The
   [cell record](data/javascript/matrix_market/cell.json) gives the exact scope.
 - [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
   readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries

@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
 import { createRequire } from 'node:module';
 import { parseMatrixMarket, get } from '@jtgtools/xsparse';
 import { fromMatrixMarket } from '@statelyai/graph/matrix-market';
@@ -23,6 +24,39 @@ switch (name) {
   case '@jtgtools/xsparse': {
     const matrix = parseMatrixMarket(text);
     result = { rows: matrix.rows, cols: matrix.cols, value_0_2: get(matrix, 0, 2) };
+    break;
+  }
+  case '@orbifold/graphs': {
+    const { MatrixMarket } = await import('@orbifold/graphs');
+    const graph = MatrixMarket.parse(text);
+    result = { nodes: graph.nodes.length, edges: graph.edges.length,
+      edge_1_2: graph.edges.some((edge) => edge.sourceId === '1' && edge.targetId === '2') };
+    break;
+  }
+  case 'scran.js': {
+    const scran = await import('scran.js');
+    await scran.initialize({ numberOfThreads: 1 });
+    const data = await readFile(path);
+    const dimensions = scran.extractMatrixMarketDimensions(data);
+    const matrix = scran.initializeSparseMatrixFromMatrixMarket(data);
+    result = { rows: matrix.numberOfRows(), cols: matrix.numberOfColumns(),
+      lines: dimensions.lines, value_2_2: matrix.column(2)[2] };
+    matrix.free();
+    scran.terminate();
+    break;
+  }
+  case 'bakana': {
+    const bakana = await import('bakana');
+    await bakana.initialize({ numberOfThreads: 1 });
+    const directory = dirname(path);
+    const dataset = new bakana.TenxMatrixMarketDataset(
+      path, join(directory, 'features.tsv.gz'), join(directory, 'barcodes.tsv.gz'));
+    const loaded = await dataset.load();
+    const matrix = loaded.matrix.get('RNA');
+    result = { rows: matrix.numberOfRows(), cols: matrix.numberOfColumns(),
+      value_0_2: matrix.column(2)[0] };
+    loaded.matrix.free();
+    await bakana.terminate();
     break;
   }
   default:

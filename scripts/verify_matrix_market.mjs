@@ -17,6 +17,12 @@ for (const parser of parsers) {
     controls[parser.control] = createHash('sha256')
       .update(await readFile(new URL(parser.control, root))).digest('hex');
   }
+  for (const companion of parser.control_companions ?? []) {
+    if (!(companion in controls)) {
+      controls[companion] = createHash('sha256')
+        .update(await readFile(new URL(companion, root))).digest('hex');
+    }
+  }
   const command = ['adapters/javascript/matrix_market.mjs', parser.name, parser.control];
   const run = spawnSync(process.execPath, command, {
     cwd: root.pathname, encoding: 'utf8', timeout: 30000
