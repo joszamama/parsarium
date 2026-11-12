@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C",
+  "format": "HTTP/1.1",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220 working draft)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The listed standard headers provide no HTTP request parser."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "FILE, fopen and fread provide bytes only; they do not return HTTP method, target, version or headers."
+    }
+  ],
+  "limit": "Scoped to the ISO C standard library. No standard format-aware HTTP/1.1 API was documented to run."
+}

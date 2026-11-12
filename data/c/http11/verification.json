@@ -1,0 +1,51 @@
+{
+  "checked_at_utc": "2026-11-12T20:43:52.908287+00:00",
+  "environment": {
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+    "llhttp_version": "9.4.3",
+    "llhttp_library_sha256": "78cd1d7e5016246878a00dbaf76300628e5f48aa2174bf2e83fe1b31dc3e5691"
+  },
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "control_meaning": "Valid HTTP/1.1 GET request with Host, custom, and Connection headers",
+  "third_party": [
+    {
+      "package": "llhttp",
+      "version": "9.4.3",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned llhttp; llhttp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "http-parser",
+      "version": "2.9.4",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned http-parser; http-parser-adapter controls/http11/request.http"
+    },
+    {
+      "package": "picohttpparser",
+      "version": "1.5",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned picohttpparser; picohttpparser-adapter controls/http11/request.http"
+    }
+  ],
+  "runtime": []
+}

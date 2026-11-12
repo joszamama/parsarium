@@ -1,7 +1,7 @@
 # Parsarium
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
-specific formats. It currently contains verified C × PNG and WAV batches,
+specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and a verified C++ × ASCII PNM batch,
 a verified JavaScript × PNG pilot,
@@ -12,12 +12,12 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, HTTP/1.1, MP3 with ID3v2, and SVG, plus a below-target Java × ASCII PNM batch and
+WAV, MP4, HTTP/1.1, MP3 with ID3v2, SVG, and ASCII PNM, plus
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 67 cells at the 20-parser target, three started below target, and 18
+There are 68 cells at the 20-parser target, three started below target, and 17
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -30,6 +30,7 @@ all packages and integrity hashes. From the repository root:
 
 ```sh
 python3 scripts/verify_c_png.py
+python3 scripts/verify_c_http11.py
 python3 scripts/verify_cpp_png.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
@@ -185,6 +186,17 @@ Twenty verified paths do not establish a definitive most-used top 20. Ten C
 paths and eight C++ paths lack comparable primary GitHub stars and remain
 unranked. Only ASCII P3 is established for every path. Neither scoped
 standard library documents a PNM-aware parser.
+
+The [C × HTTP/1.1 cell](data/c/http11/cell.json) starts with **3/20 verified
+package paths**: llhttp, Node http-parser, and PicoHTTPParser. All three parsed
+the method, target, and version of a valid local GET request after complete
+header parsing. `python3 scripts/verify_c_http11.py` checks SHA-256 source
+archives, the exact local llhttp 9.4.3 library and header, rebuilds all three
+adapters, and replays the control. Four bounded Conan recipe-name queries saved
+24 hits and 22 distinct names; project documentation supplied PicoHTTPParser
+outside those windows. GitHub project stars rank these three only within C.
+Seventeen working paths remain unverified. The ISO C standard library provides
+no documented HTTP/1.1 request parser.
 
 The C × ZIP verifier uses `cc`, CMake, `make`, and `pkg-config` with eight locally installed
 libraries pinned by exact release and binary SHA-256, plus eleven source-built
