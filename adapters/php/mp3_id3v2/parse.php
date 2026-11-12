@@ -17,6 +17,12 @@ $vendor = match ($package) {
     'pyrex-fwi/id3' => '/pyrex/vendor/autoload.php',
     'sempia/getid3' => '/sempia/vendor/autoload.php',
     'indiehd/audio-manipulator' => '/indiehd/vendor/autoload.php',
+    'wikimedia/getid3' => '/wikimedia/vendor/autoload.php',
+    'nicoverbruggen/mediaprobe' => '/mediaprobe/vendor/autoload.php',
+    'dgoriaev/mp3info' => '/dgoriaev/vendor/autoload.php',
+    'codememory/media-file-fork' => '/codememory/vendor/autoload.php',
+    'phpmlkit/soundfile' => '/soundfile/vendor/autoload.php',
+    'audiostreamify/hvap' => '/hvap/vendor/autoload.php',
     default => '/vendor/autoload.php',
 };
 require __DIR__ . $vendor;
@@ -146,6 +152,63 @@ switch ($package) {
         break;
     case 'indiehd/audio-manipulator':
         $parsed = (new \IndieHD\AudioManipulator\MediaParsing\MediaParser())->analyze($path);
+        $tags = $parsed['tags']['id3v2'] ?? [];
+        $output = [
+            'title' => $tags['title'][0] ?? null,
+            'artist' => $tags['artist'][0] ?? null,
+            'album' => $tags['album'][0] ?? null,
+            'id3v2_major' => $parsed['id3v2']['majorversion'] ?? null,
+        ];
+        break;
+    case 'wikimedia/getid3':
+        $parsed = (new \JamesHeinrich\GetID3\GetID3())->analyze($path);
+        $tags = $parsed['tags']['id3v2'] ?? [];
+        $output = [
+            'title' => $tags['title'][0] ?? null,
+            'artist' => $tags['artist'][0] ?? null,
+            'album' => $tags['album'][0] ?? null,
+            'id3v2_major' => $parsed['id3v2']['majorversion'] ?? null,
+        ];
+        break;
+    case 'nicoverbruggen/mediaprobe':
+        $parsed = (new \NicoVerbruggen\MediaProbe\MediaProbe($path))->getMediaInfo();
+        $output = [
+            'title' => $parsed->format->tags->title ?? null,
+            'artist' => $parsed->format->tags->artist ?? null,
+            'album' => $parsed->format->tags->album ?? null,
+        ];
+        break;
+    case 'dgoriaev/mp3info':
+        $parsed = new \dgoriaev\Mp3Info\Mp3Info($path, true);
+        $output = [
+            'title' => $parsed->tags2['TIT2'] ?? null,
+            'artist' => $parsed->tags2['TPE1'] ?? null,
+            'album' => $parsed->tags2['TALB'] ?? null,
+            'id3v2_major' => $parsed->id3v2MajorVersion ?? null,
+        ];
+        break;
+    case 'codememory/media-file-fork':
+        $parsed = \wapmorgan\MediaFile\MediaFile::open($path);
+        $output = [
+            'is_audio' => $parsed->isAudio(),
+            'sample_rate' => $parsed->getAudio()->getSampleRate(),
+            'bit_rate' => $parsed->getAudio()->getBitRate(),
+        ];
+        break;
+    case 'phpmlkit/soundfile':
+        $info = \PhpMlKit\SoundFile\sf_info($path);
+        $tags = \PhpMlKit\SoundFile\sf_metadata($path);
+        $output = [
+            'title' => $tags->title,
+            'artist' => $tags->artist,
+            'album' => $tags->album,
+            'sample_rate' => $info->sampleRate,
+            'format' => $info->format->name,
+            'subtype' => $info->sampleFormat->name,
+        ];
+        break;
+    case 'audiostreamify/hvap':
+        $parsed = \Audiostreamify\Hvap\Processor::audio($path)->analyze();
         $tags = $parsed['tags']['id3v2'] ?? [];
         $output = [
             'title' => $tags['title'][0] ?? null,

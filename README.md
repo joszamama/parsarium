@@ -14,9 +14,9 @@ Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII P
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
 WAV, MP4, HTTP/1.1, and MP3 with ID3v2, plus
 an explicit 88-cell work matrix.
-PHP × ZIP, PHP × PNG, and PHP × ASCII PNM have verified 20-parser batches;
-PHP × MP3 with ID3v2 has a below-target batch. There are 60 cells at the
-20-parser target, three started below target, and 25 marked `not_started`;
+PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
+20-parser batches. There are 61 cells at the 20-parser target, two started
+below target, and 25 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -293,14 +293,13 @@ tested PHP core and GD APIs did not parse the control. Reproduction requires
 PHP 8.5 with FFI, libvips 8.18.7, ImageMagick 7, FFprobe, phpize, and Composer 2. The
 verifier builds Imagick into ignored cache from the pinned PECL source archive.
 
-The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has fourteen
-pinned package paths passing one-second ID3v2.3 or ID3v2.4 tagged MP3
-controls. The Laravel, Kiwilan, IndieHD, and Sempia paths share getID3; MediaFile shares
-Mp3Info, and ID3Parser derives from getID3; Zend Media and Vollbehr share PHP
-Reader lineage. MetaAudio has its own ID3 module, the mhor and Pyrex wrappers
-use MediaInfoLib 26.10, and PHPVideoToolkit uses FFmpeg. Five bounded Packagist
-searches saved 164 hits and 128 distinct names. Eight plausible leads remain
-unresolved, and six paths are still needed. The
+The [PHP × MP3 with ID3v2 ranking](data/php/mp3_id3v2/ranking.md) has twenty
+pinned package paths passing valid ID3v2.3 or ID3v2.4 tagged MP3 controls.
+Wrappers and forks share getID3, Mp3Info, PHP Reader, MediaInfoLib, FFmpeg,
+MetaAudio, or libsndfile parser families, as recorded per package. Nine bounded
+Packagist searches saved 205 hits and 151 distinct names. Thirteen plausible
+leads remain unresolved, so the verified ranking is not a definitive most-used
+top twenty. The
 [runtime inventory](data/php/mp3_id3v2/standard.json) records that PHP Fileinfo
 returns only a MIME type; the separate PECL id3 extension was absent.
 The MediaInfo path requires the `media-info` 26.10 Homebrew formula (or an
@@ -1224,9 +1223,9 @@ uncertainty.
   paths, lifetime download ranking, control results, leads, and a separate PHP
   runtime inventory. Eight Composer locks live under `adapters/php/ascii_pnm/`,
   and a pinned PECL Imagick source lock lives with the cell data.
-- `data/php/mp3_id3v2/`: Packagist discovery hits, fourteen pinned third-party
+- `data/php/mp3_id3v2/`: Packagist discovery hits, twenty pinned third-party
   paths, lifetime download ranking, valid tag results, unresolved leads, and a
-  separate PHP runtime inventory. Eleven Composer locks and the adapter live under
+  separate PHP runtime inventory. Seventeen Composer locks and the adapter live under
   `adapters/php/mp3_id3v2/`.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/registry-snapshot.json`: dated registry hits, pinned
   release metadata, and comparable download counts. A hit is not verification.

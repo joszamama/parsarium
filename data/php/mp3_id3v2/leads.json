@@ -70,5 +70,47 @@
     "status": "excluded",
     "reason": "Packagist marks its tagged releases as proprietary, so it does not meet the open-source release rule.",
     "source": "https://packagist.org/packages/xylphid/php-id3"
+  },
+  {
+    "name": "causal/extractor",
+    "status": "unresolved",
+    "reason": "High-download TYPO3 metadata extension depends on TYPO3 CMS core and filemetadata. Its format-specific local parser API has not been isolated or replayed on the control; a registry category and getID3 dependency are not sufficient.",
+    "source": "https://packagist.org/packages/causal/extractor"
+  },
+  {
+    "name": "afsardo/getid3",
+    "status": "unresolved",
+    "reason": "Pinned 3.0.1 Composer release metadata exists, but its GitHub source archive returned HTTP 404 during install; no control run.",
+    "source": "https://packagist.org/packages/afsardo/getid3"
+  },
+  {
+    "name": "navarr/mp3data",
+    "status": "unresolved",
+    "reason": "Pinned 0.1 requires an older exact getID3 release blocked by Composer package policy; no local control result.",
+    "source": "https://packagist.org/packages/navarr/mp3data"
+  },
+  {
+    "name": "rhorber/id3rw",
+    "status": "unresolved",
+    "reason": "Pinned v0.5-alpha documents Reader(local MP3 path)->getFrames(), but PHP 8.5 raised a ParseError in Reader.php line 207 before the control could run.",
+    "source": "https://packagist.org/packages/rhorber/id3rw"
+  },
+  {
+    "name": "holine/mp3",
+    "status": "unresolved",
+    "reason": "Pinned 0.0.1 documents MpegAudio::fromFile and getTotalDuration, but its control probe exceeded four seconds on PHP 8.5, matching the upstream Falahati behavior; no observable result.",
+    "source": "https://packagist.org/packages/holine/mp3"
+  },
+  {
+    "name": "nextcloud/id3parser",
+    "status": "excluded",
+    "reason": "Its v0.1.4 Composer release points to the exact same source reference as already included christophwurst/id3parser; deduplicated as a package alias, not another path.",
+    "source": "https://packagist.org/packages/nextcloud/id3parser"
+  },
+  {
+    "name": "indietorrent/audio-manipulator",
+    "status": "excluded",
+    "reason": "Its v4.1.0 release points to the exact same source reference as included indiehd/audio-manipulator; deduplicated as a package alias.",
+    "source": "https://packagist.org/packages/indietorrent/audio-manipulator"
   }
 ]

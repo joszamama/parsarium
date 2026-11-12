@@ -54,7 +54,7 @@ def main() -> None:
         package = lock["packages"][name]
         assert parser["version"] == release["version"] == package["version"]
         assert package["source"]["reference"] == release["source_reference"]
-        command = ["php", "-d", "display_errors=0", "-d", "log_errors=0",
+        command = ["php", "-d", "ffi.enable=1", "-d", "display_errors=0", "-d", "log_errors=0",
                    str(ROOT / parser["adapter"]), name, str(ROOT / parser["control"])]
         output = json.loads(execute(command).stdout.strip())
         assert output == parser["expected_output"], (name, output)
@@ -76,6 +76,7 @@ def main() -> None:
               "php_version": execute(["php", "-r", "echo PHP_VERSION;"]).stdout,
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "mediainfo_cli_version": execute(["mediainfo", "--Version"]).stdout.strip(),
+              "ffprobe_cli_version": execute(["ffprobe", "-version"]).stdout.splitlines()[0],
               "control": "controls/mp3_id3v2/tone-tags.mp3",
               "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
               "controls": [{"path": name, "sha256": sha256((ROOT / name).read_bytes()).hexdigest()}
@@ -85,6 +86,11 @@ def main() -> None:
               "third_party": rows, "runtime": [],
               "runtime_probe": {"command": " ".join(probe_command),
                                 "output": probe, "pass": True}}
+    if platform.system() == "Darwin" and platform.machine() == "arm64":
+        native = ROOT / "adapters/php/mp3_id3v2/soundfile/vendor/phpmlkit/soundfile/lib/darwin-arm64/libsndfile.1.2.2.dylib"
+        assert native.is_file()
+        report["soundfile_native_library"] = {"path": str(native.relative_to(ROOT)),
+                                               "sha256": sha256(native.read_bytes()).hexdigest()}
     (DATA / "verification.json").write_text(json.dumps(report, indent=2) + "\n")
     print(f"{len(rows)}/{len(parsers)} PHP MP3/ID3v2 paths passed")
 
