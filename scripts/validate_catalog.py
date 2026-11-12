@@ -79,27 +79,39 @@ def main() -> None:
                 assert count is None or isinstance(count, int)
                 assert (ROOT / parser["control"]).exists()
             elif cell["ecosystem"] == "java":
-                pom = ET.parse(ROOT / "adapters" / "java" / cell["format"] / "pom.xml").getroot()
-                ns = {"m": "http://maven.apache.org/POM/4.0.0"}
-                dependencies = {
-                    (entry.findtext("m:groupId", namespaces=ns),
-                     entry.findtext("m:artifactId", namespaces=ns)):
-                    entry.findtext("m:version", namespaces=ns)
-                    for entry in pom.findall("m:dependencies/m:dependency", ns)
-                }
-                assert dependencies[(parser["group"], parser["artifact"])] == parser["version"]
-                release = snapshot["releases"][name]
-                assert (release["group"], release["artifact"], release["version"]) == (
-                    parser["group"], parser["artifact"], parser["version"])
-                assert parser["license"] == release["license"]
-                count = snapshot["popularity_metric"]["packages"][name]["direct_dependent_count"]
-                assert count is None or isinstance(count, int)
-                assert len(release["jar_sha256"]) == 64 and len(release["pom_sha256"]) == 64
+                if parser.get("group") is None:
+                    assert cell["format"] == "pdf" and name == "pdfclown"
+                    release = snapshot["non_maven_release"][name]
+                    assert release["version"] == parser["version"]
+                    assert release["license"] == parser["license"]
+                    assert len(release["archive_sha256"]) == 64 and len(release["jar_sha256"]) == 64
+                    assert release["popularity_metric"] is None
+                else:
+                    adapter_module = parser.get("adapter_module", "main")
+                    adapter_dir = ROOT / "adapters" / "java" / cell["format"]
+                    pom_path = adapter_dir / (adapter_module if adapter_module != "main" else "") / "pom.xml"
+                    pom = ET.parse(pom_path).getroot()
+                    ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+                    dependencies = {
+                        (entry.findtext("m:groupId", namespaces=ns),
+                         entry.findtext("m:artifactId", namespaces=ns)):
+                        entry.findtext("m:version", namespaces=ns)
+                        for entry in pom.findall("m:dependencies/m:dependency", ns)
+                    }
+                    assert dependencies[(parser["group"], parser["artifact"])] == parser["version"]
+                    release = snapshot["releases"][name]
+                    assert (release["group"], release["artifact"], release["version"]) == (
+                        parser["group"], parser["artifact"], parser["version"])
+                    assert parser["license"] == release["license"]
+                    count = snapshot["popularity_metric"]["packages"][name]["direct_dependent_count"]
+                    assert count is None or isinstance(count, int)
+                    assert len(release["jar_sha256"]) == 64 and len(release["pom_sha256"]) == 64
                 assert (ROOT / parser["control"]).exists()
             else:
                 assert parser["version"] == lock[name]
                 assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
-            assert parser["version"] == snapshot["releases"][name]["version"]
+            if not (cell["ecosystem"] == "java" and parser.get("group", "present") is None):
+                assert parser["version"] == snapshot["releases"][name]["version"]
             assert parser["license"] and parser["documentation"] and parser["family"] and parser["input_api"]
         results = read(f"{key}/verification.json")
         browser_png = cell["ecosystem"] == "javascript" and cell["format"] == "png"

@@ -8,8 +8,8 @@ Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASC
 plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
-ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP and PNG and an explicit 88-cell work matrix. There are 44 cells at
-the 20-parser target, two started below target, and 42 marked `not_started`;
+ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, and PDF and an explicit 88-cell work matrix. There are 45 cells at
+the 20-parser target, two started below target, and 41 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
@@ -113,6 +113,7 @@ python3 scripts/verify_rust_matrix_market.py
 python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/verify_java_zip.py
 python3 scripts/verify_java_png.py
+python3 scripts/verify_java_pdf.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -167,6 +168,25 @@ See the [Java PNG ranking](data/java/png/ranking.md),
 [unresolved leads](data/java/png/leads.json). Run
 `python3 scripts/snapshot_maven_png.py` only when refreshing registry and
 deps.dev evidence.
+
+The Java × PDF batch requires Maven 3.9+, JDK 25, and macOS arm64 for two
+PDFium native bindings. Set `PARSARIUM_JAVA25_HOME` if JDK 25 is not at
+`/opt/homebrew/opt/openjdk@25`. Its SHA-256 locks cover five isolated Maven
+classpaths; the PDF Clown 0.1.2 Beta adapter downloads the official release
+archive on first run and checks the archive and bundled JAR hashes. Run
+`python3 scripts/verify_java_pdf.py` from the repository root. The recorded
+result is **20/20 third-party package paths passing** on the valid one-page
+control. Nineteen Maven paths have comparable deps.dev exact-version direct
+dependent counts; the non-Maven PDF Clown release remains unranked. Two of five
+bounded Maven searches timed out and 11 plausible leads remain unresolved, so
+the current 20 are not a proven exhaustive top 20. No Java SE 25 PDF parser
+API was documented in the separate runtime inventory. See the
+[Java PDF ranking](data/java/pdf/ranking.md),
+[cell summary](data/java/pdf/cell.json), and
+[unresolved leads](data/java/pdf/leads.json). Run
+`python3 scripts/snapshot_maven_pdf.py` only to refresh registry and deps.dev
+evidence; it is not part of offline reproduction after the PDF Clown archive
+has been cached.
 
 `mp4:control` restores a fixed 2670-byte MP4 with one 2×2 H.264 video frame,
 one second of silent 8 kHz AAC audio, title `Parsarium`, and creation time

@@ -1,0 +1,348 @@
+[
+  {
+    "name": "pdfbox",
+    "group": "org.apache.pdfbox",
+    "artifact": "pdfbox",
+    "version": "3.0.8",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "Loader.loadPDF(File).getNumberOfPages()",
+    "documentation": "https://javadoc.io/static/org.apache.pdfbox/pdfbox/3.0.8/org/apache/pdfbox/Loader.html",
+    "family": "Apache PDFBox",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "itextpdf",
+    "group": "com.itextpdf",
+    "artifact": "itextpdf",
+    "version": "5.5.13",
+    "license": "AGPL-3.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "new PdfReader(String localPath).getNumberOfPages()",
+    "documentation": "https://javadoc.io/static/com.itextpdf/itextpdf/5.5.13/com/itextpdf/text/pdf/PdfReader.html",
+    "family": "iText 5 PDF reader",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "openpdf",
+    "group": "com.github.librepdf",
+    "artifact": "openpdf",
+    "version": "3.0.5",
+    "license": "LGPL-2.1-or-later OR MPL-2.0",
+    "license_evidence": "Project README and Maven JAR META-INF/LICENSES.md",
+    "input_api": "new org.openpdf.text.pdf.PdfReader(String localPath).getNumberOfPages()",
+    "documentation": "https://javadoc.io/static/com.github.librepdf/openpdf/3.0.5/com.github.librepdf.openpdf/org/openpdf/text/pdf/PdfReader.html",
+    "family": "OpenPDF PDF reader (iText lineage)",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "itext-kernel",
+    "group": "com.itextpdf",
+    "artifact": "kernel",
+    "version": "9.8.0",
+    "license": "AGPL-3.0",
+    "license_evidence": "iText project LICENSE.md",
+    "input_api": "new PdfDocument(new PdfReader(File)).getNumberOfPages()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/itextpdf/kernel/9.8.0/kernel-9.8.0-javadoc.jar",
+    "family": "iText 7/9 kernel PDF reader",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "documentation_archive_entry": "com/itextpdf/kernel/pdf/PdfReader.html",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "tika-pdf",
+    "group": "org.apache.tika",
+    "artifact": "tika-parser-pdf-module",
+    "version": "4.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "PDFParser.parse(TikaInputStream,ContentHandler,Metadata,ParseContext)",
+    "documentation": "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-pdf-module/4.2.0/tika-parser-pdf-module-4.2.0-javadoc.jar",
+    "family": "Apache Tika PDF module over PDFBox",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "documentation_archive_entry": "org/apache/tika/parser/pdf/PDFParser.html",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "pdfjet",
+    "group": "com.pdfjet",
+    "artifact": "pdfjet",
+    "version": "9.1.7",
+    "license": "MIT AND OFL-1.1",
+    "license_evidence": "Maven POM licenses (library MIT; bundled font assets OFL-1.1)",
+    "input_api": "new PDF().read(InputStream) and PDFobj /Pages /Count",
+    "documentation": "https://github.com/edragoev1/pdfjet",
+    "family": "PDFjet reader",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "icepdf-core",
+    "group": "org.icepdf.os",
+    "artifact": "icepdf-core",
+    "version": "6.2.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "Document.setFile(String localPath).getNumberOfPages()",
+    "documentation": "https://javadoc.io/static/org.icepdf.os/icepdf-core/6.2.2/org/icepdf/core/pobjects/Document.html",
+    "family": "ICEpdf 6 core",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "pdfbox-preflight",
+    "group": "org.apache.pdfbox",
+    "artifact": "preflight",
+    "version": "3.0.8",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "new PreflightParser(File).parse().getNumberOfPages()",
+    "documentation": "https://javadoc.io/static/org.apache.pdfbox/preflight/3.0.8/org/apache/pdfbox/preflight/parser/PreflightParser.html",
+    "family": "Apache PDFBox Preflight wrapper",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "openpdf-renderer",
+    "group": "com.github.librepdf",
+    "artifact": "openpdf-renderer",
+    "version": "3.0.5",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Maven POM licenses and release source PDFFile.java LGPL-2.1-or-later header",
+    "input_api": "new PDFFile(ByteBuffer).getNumPages()",
+    "documentation": "https://github.com/LibrePDF/OpenPDF/blob/master/openpdf-renderer/src/main/java/org/openpdf/renderer/PDFFile.java",
+    "family": "OpenPDF renderer (Sun PDF Renderer lineage)",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "verapdf-parser",
+    "group": "org.verapdf",
+    "artifact": "parser",
+    "version": "1.30.4",
+    "license": "MPL-2.0 OR GPL-3.0-or-later",
+    "license_evidence": "Maven release POM license header",
+    "input_api": "new PDDocument(String localPath).getNumberOfPages()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/verapdf/parser/1.30.4/parser-1.30.4-javadoc.jar",
+    "family": "veraPDF parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "documentation_archive_entry": "org.verapdf.parser/org/verapdf/pd/PDDocument.html",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "pdfviewfx",
+    "group": "com.dlsc.pdfviewfx",
+    "artifact": "pdfviewfx",
+    "version": "3.6.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "new PDFBoxDocument(File).getNumberOfPages()",
+    "documentation": "https://github.com/dlsc-software-consulting-gmbh/PDFViewFX/blob/master/pdfviewfx/src/main/java/com/dlsc/pdfviewfx/PDFBoxDocument.java",
+    "family": "PDFViewFX over PDFBox",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "pdfium4j",
+    "group": "org.grimmory",
+    "artifact": "pdfium4j",
+    "version": "1.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "PdfDocument.open(Path).pageCount()",
+    "documentation": "https://github.com/grimmory-tools/PDFium4j",
+    "family": "PDFium native engine via PDFium4j FFM",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "ffm",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "jpdfium",
+    "group": "com.stirling",
+    "artifact": "jpdfium",
+    "version": "1.3.1",
+    "license": "MIT",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "PdfDocument.open(Path).pageCount()",
+    "documentation": "https://github.com/Stirling-Tools/JPDFium",
+    "family": "PDFium native engine via JPDFium FFM",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "jpdfium",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "sambox",
+    "group": "org.sejda",
+    "artifact": "sambox",
+    "version": "4.0.0.M8",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "PDFParser.parse(SeekableSources.seekableSourceFrom(File)).getNumberOfPages()",
+    "documentation": "https://github.com/torakiki/sambox",
+    "family": "SAMBox (PDFBox fork)",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "icepdf8",
+    "group": "com.github.pcorless.icepdf",
+    "artifact": "icepdf-core",
+    "version": "8.0.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "Document.setFile(String localPath).getNumberOfPages()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/github/pcorless/icepdf/icepdf-core/8.0.0/icepdf-core-8.0.0-javadoc.jar",
+    "family": "ICEpdf 8 community fork",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "icepdf8",
+    "documentation_archive_entry": "org.icepdf.core/org/icepdf/core/pobjects/Document.html",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "swinglabs-pdf-renderer",
+    "group": "org.swinglabs",
+    "artifact": "pdf-renderer",
+    "version": "1.0.5",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Maven POM licenses and release source PDFFile.java LGPL-2.1-or-later header",
+    "input_api": "new PDFFile(ByteBuffer).getNumPages()",
+    "documentation": "https://javadoc.io/static/org.swinglabs/pdf-renderer/1.0.5/com/sun/pdfview/PDFFile.html",
+    "family": "Sun PDF Renderer",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "scireum-jpod",
+    "group": "com.scireum",
+    "artifact": "jpod",
+    "version": "2.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "PDDocument.createFromLocator(new FileLocator(File)).getPageTree().getCount()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/scireum/jpod/2.0/jpod-2.0-javadoc.jar",
+    "family": "jPod PDF parser (Scireum fork)",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "documentation_archive_entry": "de/intarsys/pdf/pd/PDDocument.html",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "jpod-original",
+    "group": "de.intarsys.opensource",
+    "artifact": "jPod",
+    "version": "5.6",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "PDDocument.createFromLocator(new FileLocator(File)).getPageTree().getCount()",
+    "documentation": "https://repo.maven.apache.org/maven2/de/intarsys/opensource/jPod/5.6/jPod-5.6-javadoc.jar",
+    "family": "jPod PDF parser (original)",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "jpod_original",
+    "documentation_archive_entry": "de/intarsys/pdf/pd/PDDocument.html",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "pdfclown",
+    "group": null,
+    "artifact": "pdfclown",
+    "version": "0.1.2-Beta",
+    "license": "LGPL-3.0",
+    "license_evidence": "Official PDF Clown downloads page and release archive licenses",
+    "input_api": "new org.pdfclown.files.File(String localPath).getDocument().getPages().size()",
+    "documentation": "https://pdfclown.org/overview/features/",
+    "family": "PDF Clown parser",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "pdfclown",
+    "scope": "PDF page count"
+  },
+  {
+    "name": "tess4j-pdfbox",
+    "group": "net.sourceforge.tess4j",
+    "artifact": "tess4j",
+    "version": "5.20.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses",
+    "input_api": "PdfBoxUtilities.getPdfPageCount(File)",
+    "documentation": "https://github.com/nguyenq/tess4j/blob/master/src/main/java/net/sourceforge/tess4j/util/PdfBoxUtilities.java",
+    "family": "Tess4J PDF utility over PDFBox",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "adapter_module": "main",
+    "scope": "PDF page count"
+  }
+]

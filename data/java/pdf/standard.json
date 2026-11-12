@@ -1,0 +1,30 @@
+{
+  "ecosystem": "Java",
+  "format": "PDF",
+  "runtime": "OpenJDK 25, Java SE 25 API inventory",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "Java SE 25 module and package overview",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/index.html",
+      "finding": "No standard PDF document parser API is documented in the Java SE module inventory."
+    },
+    {
+      "api": "java.nio.file.Files.readAllBytes(Path) and newInputStream(Path)",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Files.html",
+      "finding": "Supplies file bytes or a stream; does not interpret PDF objects or pages."
+    },
+    {
+      "api": "javax.print.DocFlavor",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/print/DocFlavor.html",
+      "finding": "Lists application/pdf as possible preformatted print data, with no mandatory DocFlavor support or PDF page parsing result."
+    },
+    {
+      "api": "javax.imageio.ImageIO",
+      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/imageio/ImageIO.html",
+      "finding": "Plugin based image reader API; Java SE does not document a bundled PDF reader plugin."
+    }
+  ],
+  "limit": "This is an official Java SE 25 API inventory, scoped to bundled standard APIs. A third-party ImageIO plugin or platform print service can add PDF support; neither becomes a JDK parser. No standard API had a documented PDF-aware local input and observable page result to run on the control."
+}

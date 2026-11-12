@@ -160,21 +160,21 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"rust/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
 
-    for format_name, label in (("zip", "ZIP"), ("png", "PNG")):
+    for format_name, label in (("zip", "ZIP"), ("png", "PNG"), ("pdf", "PDF")):
         directory = ROOT / "data" / "java" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["popularity_metric"]["packages"]
         known = sorted((parser for parser in parsers
-                        if metrics[parser["name"]]["direct_dependent_count"] is not None),
+                        if metrics.get(parser["name"], {}).get("direct_dependent_count") is not None),
                        key=lambda parser: (-metrics[parser["name"]]["direct_dependent_count"],
                                            parser["name"]))
         unknown = sorted((parser for parser in parsers
-                          if metrics[parser["name"]]["direct_dependent_count"] is None),
+                          if metrics.get(parser["name"], {}).get("direct_dependent_count") is None),
                          key=lambda parser: parser["name"])
         lines = [
             f"# Java × {label}: verified parser ranking", "",
-            f"{len(parsers)} verified third-party Maven package paths; working goal 20, original ceiling 30. "
+            f"{len(parsers)} verified third-party {'package paths' if format_name == 'pdf' else 'Maven package paths'}; working goal 20, original ceiling 30. "
             "The metric is deps.dev's version-level public direct dependent count, captured at "
             f"{snapshot['popularity_metric']['captured_at_utc']}. This is a known-public-dependents proxy "
             "for adoption of each exact release, not downloads; coverage and version age may bias it. "
@@ -195,8 +195,10 @@ def main() -> None:
                          f"{parser['group']}:{parser['artifact']}:{parser['version']} | {value:,} | "
                          f"{parser['scope']} | {parser['family']} |")
         for parser in unknown:
+            coordinate = (f"{parser['group']}:{parser['artifact']}:{parser['version']}"
+                          if parser['group'] else f"official SourceForge release {parser['version']}")
             lines.append(f"| unranked | [{parser['name']}]({parser['documentation']}) | "
-                         f"{parser['group']}:{parser['artifact']}:{parser['version']} | unknown | "
+                         f"{coordinate} | unknown | "
                          f"{parser['scope']} | {parser['family']} |")
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"java/{format_name}: {len(known)} verified packages ranked, {len(unknown)} unranked")
