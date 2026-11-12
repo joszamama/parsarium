@@ -37,6 +37,7 @@ COORDS = {
     "httpcore-nio": ("org.apache.httpcomponents", "httpcore-nio", "4.4.16"),
     "mina-http": ("org.apache.mina", "mina-http", "2.2.10"),
     "grizzly-http": ("org.glassfish.grizzly", "grizzly-http", "5.0.3"),
+    "ssl-proxies": ("org.jglobus", "ssl-proxies", "2.1.0"),
 }
 LICENSES = {
     "netty": ("Apache-2.0", "https://github.com/netty/netty/blob/netty-3.10.6.Final/LICENSE.txt"),
@@ -56,6 +57,7 @@ LICENSES = {
     "httpcore-nio": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore-nio/4.4.16/httpcore-nio-4.4.16.pom"),
     "mina-http": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/apache/mina/mina-http/2.2.10/mina-http-2.2.10.pom"),
     "grizzly-http": ("EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0", "https://repo.maven.apache.org/maven2/org/glassfish/grizzly/grizzly-http/5.0.3/grizzly-http-5.0.3.pom"),
+    "ssl-proxies": ("Apache-2.0", "https://repo.maven.apache.org/maven2/org/jglobus/ssl-proxies/2.1.0/ssl-proxies-2.1.0-sources.jar"),
 }
 QUERIES = ["http parser", "http request parser", "http1", "http codec", "HTTP/1.1"]
 
@@ -147,7 +149,8 @@ def main() -> None:
                                          "https://github.com/alibaba/Sentinel/blob/1.8.10/sentinel-transport/sentinel-transport-simple-http/src/main/java/com/alibaba/csp/sentinel/transport/heartbeat/client/SimpleHttpResponseParser.java",
                                          "https://hc.apache.org/httpcomponents-core-4.4.x/current/httpcore-nio/apidocs/org/apache/http/nio/NHttpMessageParser.html",
                                          "https://nightlies.apache.org/mina/mina/2.2.10/apidocs/org/apache/mina/http/HttpServerDecoder.html",
-                                         "https://github.com/eclipse-ee4j/glassfish-grizzly/blob/5.0.3/modules/http/src/main/java/org/glassfish/grizzly/http/HttpServerFilter.java"],
+                                         "https://github.com/eclipse-ee4j/glassfish-grizzly/blob/5.0.3/modules/http/src/main/java/org/glassfish/grizzly/http/HttpServerFilter.java",
+                                         "https://javadoc.io/static/org.jglobus/ssl-proxies/2.1.0/org/globus/util/http/HTTPResponseParser.html"],
         "releases": releases,
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",

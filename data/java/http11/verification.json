@@ -1,10 +1,10 @@
 {
-  "captured_at_utc": "2026-11-12T13:52:37.047691+00:00",
+  "captured_at_utc": "2026-11-12T13:55:47.495274+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
     "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: /opt/homebrew/Cellar/maven/3.9.16/libexec\nJava version: 27, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home\nDefault locale: en_US, platform encoding: UTF-8\nOS name: \"mac os x\", version: \"27.2\", arch: \"aarch64\", family: \"mac\"",
     "maven_compiler_release": 21,
-    "locked_classpath_jars": 70
+    "locked_classpath_jars": 74
   },
   "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
   "response_control_sha256": "89095a71f21f4047f3d86e05d4fdf37bdfffcbf746a3aa85bc32fd7b7ea3a2c4",
@@ -280,6 +280,21 @@
       "exit_code": 0,
       "command": "java -cp <locked classpath> org.parsarium.Http11Adapter grizzly controls/http11/request.http",
       "version": "5.0.3"
+    },
+    {
+      "package": "ssl-proxies",
+      "adapter_label": "jglobus",
+      "control": "controls/http11/response.http",
+      "output": {
+        "status": 200,
+        "message": "OK",
+        "content_type": "text/plain",
+        "content_length": 9
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter jglobus controls/http11/response.http",
+      "version": "2.1.0"
     }
   ],
   "runtime": []

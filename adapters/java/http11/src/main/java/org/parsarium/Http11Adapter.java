@@ -39,6 +39,7 @@ public final class Http11Adapter {
         else if (args[0].equals("httpcore4nio")) runHttpCore4Nio(bytes);
         else if (args[0].equals("mina")) runMina(bytes);
         else if (args[0].equals("grizzly")) runGrizzly(bytes);
+        else if (args[0].equals("jglobus")) runJglobus(bytes);
         else System.exit(2);
     }
 
@@ -304,5 +305,13 @@ public final class Http11Adapter {
                 request.getMethod(), target, request.getProtocolString(),
                 request.getHeader("Host"), request.getHeader("X-Parsarium"));
         context.completeAndRecycle();
+    }
+
+    private static void runJglobus(byte[] bytes) throws Exception {
+        var response = new org.globus.util.http.HTTPResponseParser(
+                new ByteArrayInputStream(bytes));
+        System.out.printf("{\"status\":%d,\"message\":\"%s\",\"content_type\":\"%s\",\"content_length\":%d}%n",
+                response.getStatusCode(), response.getMessage(),
+                response.getContentType(), response.getContentLength());
     }
 }

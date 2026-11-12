@@ -361,5 +361,26 @@
       "host": "example.test",
       "x_parsarium": "yes"
     }
+  },
+  {
+    "name": "ssl-proxies",
+    "group": "org.jglobus",
+    "artifact": "ssl-proxies",
+    "version": "2.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/org/jglobus/ssl-proxies/2.1.0/ssl-proxies-2.1.0-sources.jar",
+    "input_api": "new org.globus.util.http.HTTPResponseParser(local InputStream); getStatusCode(), getMessage(), getContentType(), getContentLength()",
+    "documentation": "https://javadoc.io/static/org.jglobus/ssl-proxies/2.1.0/org/globus/util/http/HTTPResponseParser.html",
+    "scope": "HTTP/1.1 response status and headers from local stream",
+    "family": "JGlobus native HTTP response parser",
+    "family_note": "The ssl-proxies artifact includes its own HTTPParser and HTTPResponseParser classes. The response parser reads the local InputStream directly and reports status, reason and headers; the valid control verifies those fields, not response body handling. Apache-2.0 header is in the pinned source JAR.",
+    "adapter_label": "jglobus",
+    "control": "controls/http11/response.http",
+    "expected_output": {
+      "status": 200,
+      "message": "OK",
+      "content_type": "text/plain",
+      "content_length": 9
+    }
   }
 ]
