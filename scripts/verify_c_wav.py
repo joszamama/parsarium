@@ -23,8 +23,8 @@ EXPECTED = {"sample_rate": 8000, "channels": 1, "frames": 4,
 EXPECTED_METADATA = {"sample_rate": 8000, "channels": 1, "frames": 4}
 
 
-def run(command: list[str]) -> str:
-    return subprocess.run(command, cwd=ROOT, check=True, text=True,
+def run(command: list[str], cwd: Path = ROOT) -> str:
+    return subprocess.run(command, cwd=cwd, check=True, text=True,
                           capture_output=True).stdout.strip()
 
 
@@ -52,10 +52,26 @@ def main() -> None:
                 command = ["cc", "-std=c11", "-O2", "-I" + str(SOURCE / name),
                            str(ROOT / parser["adapter"]), str(SOURCE / name / "miniaudio.c"),
                            "-o", str(TARGET / name)]
+            elif name == "libaudiofile":
+                source = SOURCE / "audiofile"
+                install = TARGET / "audiofile-install"
+                configure = ["./configure", "--prefix=" + str(install), "--disable-static"]
+                run(configure, cwd=source)
+                run(["make", "-C", str(source), "-j4"])
+                run(["make", "-C", str(source), "install"])
+                library = install / "lib/libaudiofile.1.dylib"
+                command = ["cc", "-std=c11", "-O2", "-I" + str(install / "include"),
+                           str(ROOT / parser["adapter"]), "-L" + str(install / "lib"),
+                           "-laudiofile", "-o", str(TARGET / name)]
+                sources[name] = {"source_sha256": item["source_sha256"],
+                                 "build_patch": "replace signed left shift of -1 in SimpleModule.h with equivalent unsigned mask expression",
+                                 "configure_command": shlex.join(configure),
+                                 "library_sha256": sha256(library.read_bytes()).hexdigest()}
             else:
                 raise AssertionError(name)
-            sources[name] = {"source_sha256": item["source_sha256"],
-                             "files": {f["name"]: f["sha256"] for f in item["files"]}}
+            if name != "libaudiofile":
+                sources[name] = {"source_sha256": item["source_sha256"],
+                                 "files": {f["name"]: f["sha256"] for f in item["files"]}}
         else:
             library = Path(item["local_library"])
             digest = sha256(library.read_bytes()).hexdigest()

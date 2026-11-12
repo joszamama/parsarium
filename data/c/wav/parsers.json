@@ -185,5 +185,29 @@
     "family": "SDL3_mixer WAV decoder",
     "family_note": "Dedicated src/decoder_wav.c in the pinned release derives from SDL2_mixer music_wav.c and earlier SDL_wave.c; related SDL lineage but separate from SDL3 core LoadWAV implementation.",
     "family_evidence": "https://github.com/libsdl-org/SDL_mixer/blob/release-3.2.4/src/decoder_wav.c"
+  },
+  {
+    "name": "libaudiofile",
+    "version": "0.3.6",
+    "license": "LGPL-2.1",
+    "license_evidence": "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/COPYING",
+    "documentation": "https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h",
+    "input_api": "afOpenFile(local WAV path, \"r\"); afGetFileFormat(AF_FILE_WAVE); afSetVirtualSampleFormat; afReadFrames; afGetRate, afGetChannels, afGetFrameCount",
+    "adapter": "adapters/c/wav/libaudiofile.c",
+    "control": "controls/wav/four-samples.wav",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 4,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    },
+    "scope": "WAV sample rate, channel and frame counts, plus first four decoded PCM samples",
+    "family": "Audio File Library WAV parser",
+    "family_note": "Tagged 0.3.6 C API from mpruett/audiofile, unrelated to the Conan audiofile recipe for a C++ header-only package. One build-only signed-shift compatibility patch is documented."
   }
 ]

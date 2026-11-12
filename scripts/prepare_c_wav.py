@@ -40,6 +40,42 @@ def main() -> None:
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 destination.write_bytes(contents)
         print(f"{name}@{item['release']}: pinned source and files verified")
+    prepare_libaudiofile()
+
+
+def prepare_libaudiofile() -> None:
+    item = LOCK["libaudiofile"]
+    archive_path = CACHE / "libaudiofile.tar.xz"
+    if archive_path.exists() and sha256(archive_path.read_bytes()).hexdigest() == item["source_sha256"]:
+        data = archive_path.read_bytes()
+    else:
+        request = Request(item["source_url"], headers={"User-Agent": "Parsarium-Research"})
+        with urlopen(request, timeout=60) as response:
+            data = response.read()
+        assert sha256(data).hexdigest() == item["source_sha256"]
+        archive_path.parent.mkdir(parents=True, exist_ok=True)
+        archive_path.write_bytes(data)
+    destination_root = CACHE / "source/audiofile"
+    with taropen(fileobj=BytesIO(data), mode="r:xz") as archive:
+        for member in archive:
+            parts = Path(member.name).parts
+            assert parts and parts[0] == "audiofile-0.3.6" and ".." not in parts
+            assert member.isfile() or member.isdir(), member.name
+            if not member.isfile():
+                continue
+            stream = archive.extractfile(member)
+            assert stream is not None
+            destination = destination_root.joinpath(*parts[1:])
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(stream.read())
+            destination.chmod(member.mode)
+    source = destination_root / "libaudiofile/modules/SimpleModule.h"
+    original = "static const int kMinSignedValue = -1 << kScaleBits;"
+    patched = "static const int kMinSignedValue = static_cast<int>(~((1U << kScaleBits) - 1U));"
+    contents = source.read_text()
+    assert contents.count(original) == 1
+    source.write_text(contents.replace(original, patched))
+    print(f"libaudiofile@{item['release']}: pinned source verified; signed-shift build patch applied")
 
 
 if __name__ == "__main__":
