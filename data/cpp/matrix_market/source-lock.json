@@ -35,5 +35,65 @@
       "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libcholmod.5.3.5.dylib": "d3ea8afc4f84e16759b79da33861fbe587ed2e303e1269aa6f7d5b0d526c46ca"
     },
     "build_note": "Official SuiteSparse 7.14.1 release and installed Homebrew CHOLMOD header/dylib hash-pinned. The read routine is LGPL-2.1-or-later; the combined CHOLMOD library also contains GPL modules. pkg-config supplies C/C++ link flags."
+  },
+  "fast-matrix-market": {
+    "release": "1.7.6",
+    "tag": "v1.7.6",
+    "source_build": "header_only",
+    "archive_root": "fast_matrix_market-1.7.6",
+    "license": "BSD-2-Clause",
+    "source_url": "https://github.com/alugowski/fast_matrix_market/archive/refs/tags/v1.7.6.tar.gz",
+    "source_sha256": "90cdeb8488e2bace7964afed24feaa2e83fa7239e818b1937df2146fa4d9f5f3",
+    "source_members": {
+      "fast_matrix_market-1.7.6/include/fast_matrix_market/fast_matrix_market.hpp": "b4a34d04754d34cd230bdac65eee7710b77ceab1ed61419e346cee0e485c0ed6",
+      "fast_matrix_market-1.7.6/include/fast_matrix_market/app/triplet.hpp": "8dd7a8fd461172f5bbea84d965424207cb2c3df08b52bd287f66933ee3406a3b",
+      "fast_matrix_market-1.7.6/LICENSE.txt": "4421977664ada9a02087ab1b031b50335f02b500e2cb58a1757074f31b4a89f5",
+      "fast_matrix_market-1.7.6/README.md": "6e0fe6af6573ec00b1bea9dd7823c248ec14522cea4ff6d4ddb6c6bdab8980e3"
+    },
+    "build_note": "Official tagged source archive, hash-pinned. Header-only C++17 triplet API compiled from the extracted release."
+  },
+  "eminem": {
+    "release": "1.2.3",
+    "tag": "v1.2.3",
+    "source_build": "header_only",
+    "archive_root": "eminem-1.2.3",
+    "license": "MIT",
+    "source_url": "https://github.com/tatami-inc/eminem/archive/refs/tags/v1.2.3.tar.gz",
+    "source_sha256": "63a4a44e3f9ca3b2edb2207fa19fa286522967106e895abe8765b47cf8e9225d",
+    "source_members": {
+      "eminem-1.2.3/include/eminem/eminem.hpp": "c037fc4edd6f90d22fb6d9fb518dfa9c7682be5c71fc6a832507c4776095d8cb",
+      "eminem-1.2.3/include/eminem/Parser.hpp": "a08a40a40582b333ba87748d827386ec73d1eecc4d0e39722d78be90bcc7f876",
+      "eminem-1.2.3/include/eminem/from_text.hpp": "1bbdfca11cda5f2fe9dfa8aac62421c0cdd4dcf22451fb078e30ff6d3aec555a",
+      "eminem-1.2.3/extern/CMakeLists.txt": "73383b8fd822c40b6fa6482a332fb655f21828b896fbae6c20a64b8887c793e8",
+      "eminem-1.2.3/LICENSE": "db82346ac0bc73d0f1b3e354d31663c67f219046a836f88394dce1bda287236d",
+      "eminem-1.2.3/README.md": "5325cd23f1469ffb82a970e3fd08b8ed57d2a2a96f95108129301e1649998cbd"
+    },
+    "dependencies": [
+      {
+        "name": "byteme",
+        "release": "2.1.4",
+        "tag": "v2.1.4",
+        "archive_root": "byteme-2.1.4",
+        "source_url": "https://github.com/LTLA/byteme/archive/refs/tags/v2.1.4.tar.gz",
+        "source_sha256": "8367f259ddfde99bba8554bab112c73b03f2bd0a06f26f247a1965acf70a4ca9",
+        "source_members": {
+          "byteme-2.1.4/include/byteme/byteme.hpp": "555fb866abfd7adf0479c83dcb5aa3cf7cf8f5a7375ec13154b1fb6a3cd54bcb",
+          "byteme-2.1.4/LICENSE": "60668e625fc5fed6fd5db32bcc1d4972db19f15fef90691af203eb1141477279"
+        }
+      },
+      {
+        "name": "sanisizer",
+        "release": "0.2.2",
+        "tag": "v0.2.2",
+        "archive_root": "sanisizer-0.2.2",
+        "source_url": "https://github.com/LTLA/sanisizer/archive/refs/tags/v0.2.2.tar.gz",
+        "source_sha256": "8599a301172a39af96348d5e26e8a0d078be1f711a0ecd941d4fab9df159e712",
+        "source_members": {
+          "sanisizer-0.2.2/include/sanisizer/sanisizer.hpp": "0438b8f2bf0ca8b4a302aafe18459beb823f0e82b67ff274ed3705a17a798276",
+          "sanisizer-0.2.2/LICENSE": "893f6e9793b93b455d493d44e2429ad959658e0c059da88c520caa9348551c69"
+        }
+      }
+    ],
+    "build_note": "Official eminem v1.2.3 tagged header-only source with compatible byteme v2.1.4 and sanisizer v0.2.2 tagged dependencies, all hash-pinned. The text-only header avoids optional zlib."
   }
 }

@@ -53,9 +53,36 @@ def main() -> None:
             for member, expected in source["source_members"].items():
                 file = tar.extractfile(member)
                 assert file is not None and sha256(file.read()).hexdigest() == expected, member
-        for path, expected in source["installed_files"].items():
+            if source.get("source_build") == "header_only":
+                root = source["archive_root"]
+                for member in tar.getmembers():
+                    member_path = Path(member.name)
+                    assert not member_path.is_absolute() and ".." not in member_path.parts
+                    assert member.name == root or member.name.startswith(root + "/")
+                if not (cache / root / "include").exists():
+                    tar.extractall(cache, filter="data")
+        for dependency in source.get("dependencies", []):
+            dep_archive = cache / f"{dependency['name']}-{dependency['release']}.tar.gz"
+            if not dep_archive.exists() or digest(dep_archive) != dependency["source_sha256"]:
+                with urlopen(Request(dependency["source_url"], headers={"User-Agent": "Parsarium Matrix Market verifier"}), timeout=120) as response, dep_archive.open("wb") as output:
+                    while chunk := response.read(1024 * 1024):
+                        output.write(chunk)
+            assert digest(dep_archive) == dependency["source_sha256"]
+            with tarfile.open(dep_archive) as dep_tar:
+                for member, expected in dependency["source_members"].items():
+                    file = dep_tar.extractfile(member)
+                    assert file is not None and sha256(file.read()).hexdigest() == expected, member
+                root = dependency["archive_root"]
+                for member in dep_tar.getmembers():
+                    member_path = Path(member.name)
+                    assert not member_path.is_absolute() and ".." not in member_path.parts
+                    assert member.name == root or member.name.startswith(root + "/")
+                if not (cache / root / "include").exists():
+                    dep_tar.extractall(cache, filter="data")
+        for path, expected in source.get("installed_files", {}).items():
             assert digest(Path(path)) == expected, path
-        assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
+        if source.get("formula"):
+            assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
         if name == "eigen":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", source["include_dir"], str(ROOT / parser["adapter"]),
@@ -65,6 +92,16 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags,
                        "-o", str(target / name)]
+        elif name == "fast-matrix-market":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(cache / source["archive_root"] / "include"),
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "eminem":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(cache / source["archive_root"] / "include"),
+                       *[flag for dep in source["dependencies"]
+                         for flag in ("-isystem", str(cache / dep["archive_root"] / "include"))],
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
@@ -75,7 +112,10 @@ def main() -> None:
                      "build_command": shlex.join(command), "command": shlex.join(execute),
                      "output": output, "pass": True})
         local_libraries[name] = {"source_sha256": source["source_sha256"],
-                                 "installed_files": source["installed_files"]}
+                                 "installed_files": source.get("installed_files", {})}
+        if source.get("dependencies"):
+            local_libraries[name]["dependency_source_sha256"] = {
+                dep["name"]: dep["source_sha256"] for dep in source["dependencies"]}
         print(f"{name}@{parser['version']}: C++ Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++", "--version"]).splitlines()[0],

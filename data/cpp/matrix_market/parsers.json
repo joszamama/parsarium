@@ -35,5 +35,43 @@
     "scope": "sparse matrix dimensions and nonzero count from a real coordinate Matrix Market file",
     "family": "SuiteSparse CHOLMOD Check reader",
     "family_note": "C and C++ call sites share the same SuiteSparse CHOLMOD Check parser and installed library."
+  },
+  {
+    "name": "fast-matrix-market",
+    "version": "1.7.6",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/alugowski/fast_matrix_market/blob/v1.7.6/LICENSE.txt",
+    "documentation": "https://github.com/alugowski/fast_matrix_market/blob/v1.7.6/README.md",
+    "input_api": "fast_matrix_market::read_matrix_market_triplet(std::ifstream local_stream, rows, cols, row_indices, col_indices, values)",
+    "adapter": "adapters/cpp/matrix_market/fast_matrix_market.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "triplet dimensions, indices and value from real coordinate Matrix Market",
+    "family": "fast_matrix_market native parser",
+    "family_note": "This standalone C++ parser is also used downstream by some bindings; no downstream wrapper is counted here."
+  },
+  {
+    "name": "eminem",
+    "version": "1.2.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/tatami-inc/eminem/blob/v1.2.3/LICENSE",
+    "documentation": "https://github.com/tatami-inc/eminem/blob/v1.2.3/README.md",
+    "input_api": "eminem::parse_text_file(local filename, options); Parser::scan_preamble/scan_real(callback)",
+    "adapter": "adapters/cpp/matrix_market/eminem.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "Matrix Market banner, dimensions, three real coordinate entries, and value at (1,3)",
+    "family": "eminem native parser over byteme input",
+    "family_note": "The pinned byteme and sanisizer dependencies provide byte input and sizing, while eminem parses Matrix Market syntax."
   }
 ]

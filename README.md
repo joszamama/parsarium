@@ -1165,12 +1165,15 @@ or quality judgment.
   CHOLMOD package path verified on a valid real coordinate matrix, 19 below the
   working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
   19 unique names; 18 remain unverified.
-- [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen and
-  SuiteSparse verified on the same control, 18 below the working goal. Their
-  source releases, installed headers and libraries, adapters, and results are
+- [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
+  SuiteSparse, fast_matrix_market, and eminem verified on the same control,
+  16 below the working goal. Their source releases, relevant installed headers
+  and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
-  unverified. The C and C++ standard libraries have no documented Matrix
-  Market parser; the SuiteSparse call sites share one CHOLMOD parser family.
+  unverified. The two header-only packages have no comparable Homebrew install
+  metric and remain unranked. The C and C++ standard libraries have no
+  documented Matrix Market parser; the SuiteSparse call sites share one CHOLMOD
+  parser family.
 
 - [JavaScript × PNG ranking](data/javascript/png/ranking.md): 21 packages,
   including header-only and chunk-only parsers labeled by scope. Four npm queries

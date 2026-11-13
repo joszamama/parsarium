@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T04:04:31.342458+00:00",
+  "checked_at_utc": "2026-11-13T04:09:48.293942+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -16,6 +16,18 @@
       "installed_files": {
         "/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse/cholmod.h": "e15d65c8bb8d9de2b3d21941418f7779d6076a8b57541a32c4332f04b2e5b6c5",
         "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libcholmod.5.3.5.dylib": "d3ea8afc4f84e16759b79da33861fbe587ed2e303e1269aa6f7d5b0d526c46ca"
+      }
+    },
+    "fast-matrix-market": {
+      "source_sha256": "90cdeb8488e2bace7964afed24feaa2e83fa7239e818b1937df2146fa4d9f5f3",
+      "installed_files": {}
+    },
+    "eminem": {
+      "source_sha256": "63a4a44e3f9ca3b2edb2207fa19fa286522967106e895abe8765b47cf8e9225d",
+      "installed_files": {},
+      "dependency_source_sha256": {
+        "byteme": "8367f259ddfde99bba8554bab112c73b03f2bd0a06f26f247a1965acf70a4ca9",
+        "sanisizer": "8599a301172a39af96348d5e26e8a0d078be1f711a0ecd941d4fab9df159e712"
       }
     }
   },
@@ -46,6 +58,34 @@
         "rows": 2,
         "cols": 3,
         "nnz": 3
+      },
+      "pass": true
+    },
+    {
+      "package": "fast-matrix-market",
+      "version": "1.7.6",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/fast_matrix_market-1.7.6/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/fast_matrix_market.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/fast-matrix-market",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/fast-matrix-market /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2.0
+      },
+      "pass": true
+    },
+    {
+      "package": "eminem",
+      "version": "1.2.3",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/eminem-1.2.3/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/byteme-2.1.4/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/sanisizer-0.2.2/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/eminem.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/eminem",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/eminem /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2.0
       },
       "pass": true
     }
