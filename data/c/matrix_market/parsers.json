@@ -204,5 +204,24 @@
     "scope": "Matrix Market real general coordinate banner, dimensions, three entries and value at (1,3)",
     "family": "NIST Matrix Market ANSI C mmio reference reader",
     "family_note": "The NIST mmio routines are independently published source files and the reference lineage copied into several later packages; those package paths are recorded separately where verified."
+  },
+  {
+    "name": "spm",
+    "version": "1.2.4",
+    "license": "CeCILL-2.0",
+    "license_evidence": "https://gitlab.inria.fr/solverstack/spm/-/blob/v1.2.4/LICENSE",
+    "documentation": "https://solverstack.gitlabpages.inria.fr/spm/group__spm.html",
+    "input_api": "spmReadDriver(SpmDriverMM, local filename, spmatrix_t *)",
+    "adapter": "adapters/c/matrix_market/spm.c",
+    "control": "controls/matrix_market/real-symmetric.mtx",
+    "expected_output": {
+      "rows": 3,
+      "cols": 3,
+      "nnz": 3,
+      "entry_3_3": 3.0
+    },
+    "scope": "3x3 real symmetric coordinate matrix, three diagonal nonzeros and entry (3,3) = 3; rectangular dimensions are not faithfully represented by this reader",
+    "family": "SPM readMM with bundled Matrix Market mmio banner/size reader",
+    "family_note": "Separate SolverStack SPM release, also used by PaStiX. Its native entry reader calls a bundled mmio implementation related to NIST mmio; the SPM package path is counted once."
   }
 ]

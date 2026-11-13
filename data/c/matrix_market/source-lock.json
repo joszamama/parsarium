@@ -227,5 +227,31 @@
     },
     "source_build": "nist_mmio",
     "build_note": "NIST publishes the two source files directly, without a semantic tag. The dated December 2007 implementation and older header are content-pinned by SHA-256 and built locally. The official NIST software disclaimer permits use, copy, modification and distribution; the two source files have no individual license header."
+  },
+  "spm": {
+    "release": "1.2.4",
+    "source_build": "spm",
+    "archive_root": "spm-v1.2.4",
+    "license": "CeCILL-2.0",
+    "source_url": "https://gitlab.inria.fr/solverstack/spm/-/archive/v1.2.4/spm-v1.2.4.tar.gz",
+    "source_sha256": "a36a1f803baa34947a1cfc1f764f67f91d2a28389022abf706da06dd0fc0ecd5",
+    "release_commit": "0ee3a2ad19934dd8d2d7d8376d3d2fe8b38d63d1",
+    "source_members": {
+      "spm-v1.2.4/LICENSE": "2dcf0966f7eaae3af05f3e640215ac537c76d938d50ad02ad9d4260f1ca4bda5",
+      "spm-v1.2.4/include/spm.h": "8d9871531d0200350cc25b7e0ff509d34359e952a5d6faa44296ed01f034de12",
+      "spm-v1.2.4/src/drivers/readmm.c": "69bfbd73a35bd9b4fd78221bb0a4bb324d775214cf22ed99cdeaee7f4f660055",
+      "spm-v1.2.4/src/spm_read_driver.c": "2710b79957e32e877058acad206622d1f4d70c73351fdb185fe7b8eed99a47fd"
+    },
+    "cmake_submodule": {
+      "revision": "c47785f30d214220e3f8bcf1591a762c02892c33",
+      "source_url": "https://gitlab.inria.fr/solverstack/morse_cmake/-/archive/c47785f30d214220e3f8bcf1591a762c02892c33/morse_cmake-c47785f30d214220e3f8bcf1591a762c02892c33.tar.gz",
+      "source_sha256": "430206e533bae1964860c1dd5dbecc81a24886770619c73db9906d4b1c205f6f",
+      "morse_init_sha256": "cdd73bd41ece29b2d3b0407d242a492628728931ca4789708c9ec87c83dc6b1a"
+    },
+    "openblas_prefix": "/opt/homebrew/Cellar/openblas/0.3.34",
+    "installed_files": {
+      "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
+    },
+    "build_note": "Official v1.2.4 GitLab tag archive and its CMake submodule archive are SHA-256 pinned; selected license, header and reader source files are pinned. Build C static library without Fortran, MPI or Scotch against pinned OpenBLAS. The adapter parses the valid square symmetric control; the native reader records only column count as matrix order and must not be used as evidence of rectangular dimensions."
   }
 }

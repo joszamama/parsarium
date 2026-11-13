@@ -1203,11 +1203,12 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): eleven packages
-  verified on valid real coordinate or symmetric controls, 9 below the working
+- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): twelve packages
+  verified on valid real coordinate or symmetric controls, 8 below the working
   goal. Three bounded Homebrew formula-name searches recorded 20 hits, 19 unique
-  names; 18 remain unverified. Seven verified packages lack comparable Homebrew
-  requested-install counts and remain unranked. The Libmtx source build uses
+  names; 18 remain unverified. Eight verified packages lack comparable Homebrew
+  requested-install counts and remain unranked. SPM 1.2.4 is source-built; its
+  reader is verified only on a square control. The Libmtx source build uses
   Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS. NIST's dated, hash-pinned
   `mmio.c` and `mmio.h` source files provide the reference C reader.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
