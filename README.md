@@ -30,7 +30,7 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,528 of 1,686 verified package paths have a recorded comparable cell metric;
+1,529 of 1,687 verified package paths have a recorded comparable cell metric;
 158 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -1316,11 +1316,13 @@ or quality judgment.
   unresolved. The [runtime inventory](data/javascript/ascii_ply/standard.json)
   records the scoped absence of a PLY-aware Node.js or browser platform API.
 - [JavaScript × Matrix Market ranking](data/javascript/matrix_market/ranking.md):
-  seven pinned packages verified on valid local coordinate real general,
-  symmetric, or 10x Matrix Market controls, 11 below the working goal. Six
-  bounded npm queries saved 406 hits and 353 distinct names; three plausible
+  eight pinned packages verified on valid local coordinate real general,
+  symmetric, or 10x Matrix Market controls, 12 below the working goal. Six
+  bounded npm queries saved 406 hits and 353 distinct names; two plausible
   leads remain unresolved. `scran.js` and `bakana` share the same underlying
-  WASM reader; `@orbifold/graphs` was verified only on a no-comment control. The
+  WASM reader; `keepset` ranks third by same-window npm downloads and was
+  verified with local bytes through its public fetch port. `@orbifold/graphs`
+  was verified only on a no-comment control. The
   [cell record](data/javascript/matrix_market/cell.json) gives the exact scope.
 - [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
   readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries

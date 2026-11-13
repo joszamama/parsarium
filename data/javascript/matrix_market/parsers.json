@@ -112,5 +112,23 @@
       "edges": 2,
       "edge_1_2": true
     }
+  },
+  {
+    "name": "keepset",
+    "version": "0.138.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Mearman/keepset/blob/v0.138.0/LICENSE",
+    "input_api": "fetchEntry(dataset, { fetch: documented FetchPort returning a Response over local file bytes }); graph/v1 result",
+    "documentation": "https://github.com/Mearman/keepset/blob/v0.138.0/src/node/fetch-dataset.ts",
+    "format_evidence": "https://github.com/Mearman/keepset/blob/v0.138.0/src/parsers/matrix-market.ts",
+    "scope": "Coordinate real general matrix interpreted as a bipartite graph; three entries become edges and numeric values are not returned",
+    "family": "keepset native Matrix Market graph parser",
+    "family_note": "The package internally dispatches its matrix-market recipe to its own parser. The adapter supplies local bytes through the documented injectable FetchPort; no remote service is used.",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "nodes": 5,
+      "edges": 3,
+      "edge_r1_c3": true
+    }
   }
 ]

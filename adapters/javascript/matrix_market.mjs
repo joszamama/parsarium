@@ -45,6 +45,32 @@ switch (name) {
       edge_1_2: Array.from(graph.shallowEdges).some((edge) => edge.source.id === '1' && edge.target.id === '2') };
     break;
   }
+  case 'keepset': {
+    const { getDataset } = await import('keepset');
+    const { fetchEntry } = await import('keepset/node');
+    const sourceUrl = 'https://parsarium.invalid/local-control.mtx';
+    const dataset = structuredClone(getDataset('pajek-california'));
+    dataset.entry.id = 'parsarium-control';
+    dataset.entry.name = 'Parsarium Matrix Market control';
+    dataset.entry.description = 'Local valid coordinate matrix';
+    dataset.entry.properties = {};
+    dataset.entry.expectedCounts = {};
+    dataset.entry.sources = [{ url: sourceUrl, status: 'live', retrieved: '2026-11-13' }];
+    dataset.entry.recipe = { status: 'fetchable', source: 0,
+      archive: { kind: 'none' }, parser: { format: 'matrix-market', encoding: 'utf-8' } };
+    const bytes = await readFile(path);
+    const fetched = await fetchEntry(dataset, { fetch: async (url) => {
+      if (url === sourceUrl) return new Response(bytes, { status: 200 });
+      if (url.startsWith('https://archive.org/wayback/available?')) {
+        return new Response('{}', { status: 200 });
+      }
+      throw new Error(`unexpected network request: ${url}`);
+    } });
+    const graph = fetched.data;
+    result = { nodes: graph.nodes.length, edges: graph.edges.length,
+      edge_r1_c3: graph.edges.some((edge) => edge.source === 'r1' && edge.target === 'c3') };
+    break;
+  }
   case 'scran.js': {
     const scran = await import('scran.js');
     await scran.initialize({ numberOfThreads: 1 });
