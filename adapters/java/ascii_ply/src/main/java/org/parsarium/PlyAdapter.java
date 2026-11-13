@@ -82,6 +82,15 @@ public final class PlyAdapter {
                 faces = triangles.size();
                 indices = triangles.get(0).getIntListProperty("vertex_indices");
             }
+        } else if (args[0].equals("sceneview-core")) {
+            byte[] bytes = Files.readAllBytes(Path.of(args[1]));
+            io.github.sceneview.core.ply.PlyModel model =
+                    io.github.sceneview.core.ply.PlyLoader.INSTANCE.parse(
+                            bytes, io.github.sceneview.core.threemf.ThreeMfUnit.MILLIMETER,
+                            1_000_000, 1_000_000, 32 * 1024 * 1024);
+            vertices = model.getVertexCount();
+            faces = model.getTriangleCount();
+            indices = model.getIndices();
         } else if (args[0].equals("lwjgl-assimp")) {
             org.lwjgl.assimp.AIScene scene = org.lwjgl.assimp.Assimp.aiImportFile(args[1], 0);
             if (scene == null) throw new IllegalStateException(org.lwjgl.assimp.Assimp.aiGetErrorString());

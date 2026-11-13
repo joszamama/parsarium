@@ -183,5 +183,29 @@
     "source_kind": "source_build",
     "source_lock": "data/java/ascii_ply/source-lock.json",
     "adapter_module": "f3d"
+  },
+  {
+    "name": "sceneview-core",
+    "group": "io.github.sceneview",
+    "artifact": "sceneview-core-android",
+    "version": "4.69.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/sceneview/sceneview/blob/v4.69.5/LICENSE",
+    "documentation": "https://github.com/sceneview/sceneview/blob/v4.69.5/sceneview-core/src/commonMain/kotlin/io/github/sceneview/core/ply/PlyLoader.kt",
+    "input_api": "Files.readAllBytes(local path) passed to PlyLoader.parse(byte[], ThreeMfUnit, limits), returning PlyModel vertex count, triangle count and indices",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "ASCII PLY triangle vertices, triangulated face and parsed indices",
+    "family": "SceneView Core pure Kotlin PLY parser",
+    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core\u2019s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
   }
 ]

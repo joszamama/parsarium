@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,531 of 1,691 verified package paths have a recorded comparable cell metric;
-160 are unranked. A recorded zero is still a measured value, not evidence of
+1,531 of 1,692 verified package paths have a recorded comparable cell metric;
+161 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1247,11 +1247,12 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): eight verified
-  paths, 12 below the working goal. Seven are ranked by exact-release Maven
-  direct dependents. F3D's source-built Java binding is unranked because no
-  comparable metric exists; it shares the native VTK reader with the C and C++
-  F3D bindings.
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): nine verified
+  paths, 11 below the working goal. Seven have exact-release Maven direct
+  dependent counts. F3D's source-built Java binding shares the native VTK
+  reader with its C and C++ bindings; SceneView Core parses through a separate
+  pure Kotlin reader. Both lack comparable direct-dependent counts and remain
+  unranked.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

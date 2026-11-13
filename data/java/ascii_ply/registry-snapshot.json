@@ -1,6 +1,6 @@
 {
   "captured_at_utc": "2026-11-13T07:16:44.759720+00:00",
-  "search_surface": "Maven Central Solr artifact search",
+  "search_surface": "Maven Central Solr artifact search Targeted official SceneView Core PLY parser source and Maven JVM artifact were reviewed outside the bounded name searches.",
   "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
   "search_limit_per_query": 100,
   "search": [
@@ -172,6 +172,30 @@
           "sha256": "46b231f82a459d4a97f13c398ab587f7751758bedd53394bb4558d83625df2b9"
         }
       }
+    },
+    "sceneview-core": {
+      "group": "io.github.sceneview",
+      "artifact": "sceneview-core-android",
+      "version": "4.69.5",
+      "license": "Apache-2.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/github/sceneview/sceneview-core-android/4.69.5/sceneview-core-android-4.69.5.jar",
+      "jar_sha256": "7fe48b137e92e0fdb1c49875c8109542e0532188f1674586b38418a2a1fca4b7",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/github/sceneview/sceneview-core-android/4.69.5/sceneview-core-android-4.69.5.pom",
+      "pom_sha256": "2b0498059ac07335e94d20c0d47f8907b7759921cf35a0508d96dae2a3921249",
+      "evidence_files": {
+        "tagged_ply_loader": {
+          "url": "https://raw.githubusercontent.com/sceneview/sceneview/v4.69.5/sceneview-core/src/commonMain/kotlin/io/github/sceneview/core/ply/PlyLoader.kt",
+          "sha256": "a7a10fa9bee9c508299582ef8dca0bb841a03f5588e6b4db642ea2084fdb8f60"
+        },
+        "tagged_ply_model": {
+          "url": "https://raw.githubusercontent.com/sceneview/sceneview/v4.69.5/sceneview-core/src/commonMain/kotlin/io/github/sceneview/core/ply/PlyModel.kt",
+          "sha256": "1b8f1c9cc049da91301876b600bf6c60addc44aee4910e4b949935534740bdf7"
+        },
+        "tagged_license": {
+          "url": "https://raw.githubusercontent.com/sceneview/sceneview/v4.69.5/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      }
     }
   },
   "dependencies": [
@@ -201,6 +225,24 @@
       "jar_sha256": "46eeca5471833c3cf5da3c1da015b41e3bb3eb16dd3da03f366886da10096751",
       "pom_url": "https://repo.maven.apache.org/maven2/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3.pom",
       "pom_sha256": "d75f72e77bd2069c7e84d3e521998d3fd7e5f72c2d31a1a896cbe322852757bc"
+    },
+    {
+      "artifact": "kotlin-stdlib",
+      "version": "2.4.21",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.4.21/kotlin-stdlib-2.4.21.jar",
+      "jar_sha256": "bd8250210584cb659847dce9cda660f8e9906e5def7fbebcea93dc6dcb6a88a3",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.4.21/kotlin-stdlib-2.4.21.pom",
+      "pom_sha256": "b92b23ec9c444b2578b9852447565efc72c24b3ea77b4c3bf4e644f685eeef07",
+      "reason": "Pinned runtime dependency of sceneview-core-android 4.69.5"
+    },
+    {
+      "artifact": "kotlin-math-jvm",
+      "version": "1.8.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/dev/romainguy/kotlin-math-jvm/1.8.0/kotlin-math-jvm-1.8.0.jar",
+      "jar_sha256": "b11028c56d4b506d6bf73f937fc9ce7d5eb162da3c1d7307345cddd4ddfc0fbd",
+      "pom_url": "https://repo.maven.apache.org/maven2/dev/romainguy/kotlin-math-jvm/1.8.0/kotlin-math-jvm-1.8.0.pom",
+      "pom_sha256": "f98dec49e04bed56097a5c25870d468f5309f60ae9f9cbcf8ece43d6de3747e0",
+      "reason": "Pinned runtime dependency of sceneview-core-android 4.69.5"
     }
   ],
   "native_artifacts": [
@@ -259,6 +301,12 @@
       "f3d": {
         "direct_dependent_count": null,
         "note": "No Maven artifact for F3D Java binding; deps.dev exact-release direct-dependent metric is unavailable. Homebrew formula installs are an auxiliary C/C++ ecosystem signal and not used for Java ranking."
+      },
+      "sceneview-core": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.github.sceneview%3Asceneview-core-android/versions/4.69.5:dependents",
+        "direct_dependent_count": null,
+        "observed_at_utc": "2026-11-13T16:46:12.597025+00:00",
+        "note": "deps.dev knows the artifact but returned HTTP 404 for this exact-release dependents endpoint; no value is inferred."
       }
     }
   },
@@ -289,6 +337,13 @@
       "input_api_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/java/Scene.java",
       "disposition": "Verified pinned F3D 4.0.1 source build against the valid ASCII PLY triangle.",
       "discovery_note": "Project API and native PLY plugin documentation, outside the bounded registry name windows."
+    },
+    {
+      "name": "io.github.sceneview:sceneview-core-android",
+      "url": "https://github.com/sceneview/sceneview/blob/v4.69.5/sceneview-core/src/commonMain/kotlin/io/github/sceneview/core/ply/PlyLoader.kt",
+      "release_evidence": "https://repo.maven.apache.org/maven2/io/github/sceneview/sceneview-core-android/4.69.5/sceneview-core-android-4.69.5.pom",
+      "disposition": "Verified tagged 4.69.5 JVM artifact on the valid ASCII triangle through its Java-callable byte-array API.",
+      "discovery_note": "Official SceneView parser source and Maven artifact found through targeted PLY parser documentation, outside bounded generic Maven name queries. Primary repository had 1,365 GitHub stars at observation time; project-wide interest is auxiliary, not PLY-specific."
     }
   ],
   "non_maven_release": {
@@ -299,6 +354,17 @@
       "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
       "source_lock": "data/java/ascii_ply/source-lock.json",
       "distribution": "Official tagged source built with the documented optional Java binding; no Maven release."
+    }
+  },
+  "auxiliary_project_interest_metric": {
+    "name": "Primary upstream GitHub stars",
+    "source": "https://api.github.com/repos/sceneview/sceneview",
+    "observed_at_utc": "2026-11-13T16:46:12.597184+00:00",
+    "packages": {
+      "sceneview-core": {
+        "stars": 1365,
+        "note": "Whole SceneView project interest; not a comparable Java release direct-dependent count or PLY-specific adoption."
+      }
     }
   }
 }
