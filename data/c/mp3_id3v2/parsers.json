@@ -67,5 +67,22 @@
     "scope": "ID3v2 title and normalized tag version/frame count",
     "family": "libid3tag ID3v2 metadata parser",
     "family_note": "The same C ID3v2 parser serves C and C++ call sites. Its API normalizes the input 2.3 tag to internal major version 4; it does not decode MPEG audio frames."
+  },
+  {
+    "name": "id3lib",
+    "version": "3.8.3",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "https://downloads.sourceforge.net/project/id3lib/id3lib/3.8.3/id3lib-3.8.3.tar.gz",
+    "documentation": "https://id3lib.sourceforge.net/api/index.html",
+    "input_api": "ID3Tag_LinkWithFlags(local filename, ID3TT_ID3V2); ID3Tag_FindFrameWithID(TIT2); ID3Field_GetASCII",
+    "adapter": "adapters/c/mp3_id3v2/id3lib.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "frames": 4
+    },
+    "scope": "ID3v2 title and frame count in a valid tagged MP3",
+    "family": "id3lib ID3v2 parser",
+    "family_note": "The C API wraps the same C++ id3lib engine used by the native C++ adapter. Both are one package path per ecosystem, not independent tag parsers."
   }
 ]

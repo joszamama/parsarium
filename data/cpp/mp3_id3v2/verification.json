@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:10:08.297863+00:00",
+  "checked_at_utc": "2026-11-13T01:13:50.888739+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -23,6 +23,11 @@
       "source_sha256": "8b6bc96016f6ab3a52b753349ed442e15181de9db1df01884f829e3d4f3d1e78",
       "local_header_sha256": "6de6da5573832e715c021142dca6b673900706f550e15e1929bb4667875ee0a8",
       "local_library_sha256": "9425153596412ef2bfeb524e15efec5f6446ec4ac2cf365dd5a19fc6bf3eeecd"
+    },
+    "id3lib": {
+      "source_sha256": "2749cc3c0cd7280b299518b1ddf5a5bcfe2d1100614519b68702230e26c7d079",
+      "local_header_sha256": "3c803249b55176c663986aeff40a7d98af17509105f446d4990e358f19c46ac6",
+      "local_library_sha256": "080ba4892c9ac8cae6dd707fa774fbba95e2815baeb8b119f775e0ae96242f80"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -73,6 +78,18 @@
       "output": {
         "title": "Parsarium",
         "normalized_id3_major": 4,
+        "frames": 4
+      },
+      "pass": true
+    },
+    {
+      "package": "id3lib",
+      "version": "3.8.3",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/id3lib.cpp -isystem /opt/homebrew/Cellar/id3lib/3.8.3_1/include -L/opt/homebrew/Cellar/id3lib/3.8.3_1/lib -lid3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/id3lib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/id3lib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
         "frames": 4
       },
       "pass": true

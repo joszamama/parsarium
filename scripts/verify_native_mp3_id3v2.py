@@ -54,7 +54,8 @@ def verify(ecosystem: str) -> None:
             assert member is not None
             assert sha256(member.read()).hexdigest() == source["license_sha256"]
         assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
-        assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
+        if source.get("pkg_config"):
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
         header = Path(source["local_header"])
         library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
@@ -63,7 +64,10 @@ def verify(ecosystem: str) -> None:
             assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
         standard = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
-        flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+        if source.get("pkg_config"):
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+        else:
+            flags = ["-isystem", source["include_dir"], "-L" + str(library.parent), "-l" + source["link_name"]]
         command = [compiler, standard, "-O2", "-Wall", "-Wextra", "-Werror",
                    str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         run(command)
