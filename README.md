@@ -1255,8 +1255,8 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): thirteen verified
-  paths, seven below the working goal. Ten have exact-release Maven direct
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): fourteen verified
+  paths, six below the working goal. Ten have exact-release Maven direct
   dependent counts. F3D's source-built Java binding shares the native VTK
   reader with its C and C++ bindings; SceneView Core parses through a separate
   pure Kotlin reader. Both lack comparable direct-dependent counts and remain
@@ -1268,6 +1268,9 @@ or quality judgment.
   JAssimp 1.0.0 also parsed the triangle through its released Java API and a
   locally built JNI binding over Assimp 6.0.6. It has zero known direct
   dependents for this exact Maven release and shares Assimp's PLY engine.
+  Vofxel v0.0.2 separately parsed eight colored ASCII PLY voxel vertices through
+  its released Java API. Its adoption rank is unresolved because deps.dev does
+  not report an exact-release dependent count; it does not parse faces here.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

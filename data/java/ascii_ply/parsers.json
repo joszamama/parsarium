@@ -306,5 +306,28 @@
       "vertices": 3,
       "faces": 1
     }
+  },
+  {
+    "name": "vofxel",
+    "group": "com.github.iAmGio",
+    "artifact": "vofxel",
+    "version": "v0.0.2",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/iAmGio/vofxel/blob/v0.0.2/LICENSE",
+    "input_api": "new PlyParser(InputStream).parse() returns VertexList with coordinate and RGB fields",
+    "documentation": "https://github.com/iAmGio/vofxel/blob/v0.0.2/src/main/java/eu/iamgio/vofxel/PlyParser.java",
+    "family": "Vofxel native Java colored ASCII PLY vertex reader",
+    "family_note": "Separate Java vertex reader. Its released parser reads six-column coordinate/RGB rows after end_header; it does not expose faces or validate other PLY header fields. No shared underlying parser family was found.",
+    "scope": "Eight colored ASCII PLY voxel vertices; first X and red value, last Z coordinate; no faces",
+    "control": "controls/ascii_ply/voxel-rgb.ply",
+    "adapter": "adapters/java/ascii_ply/vofxel/VofxelPlyAdapter.java",
+    "adapter_module": "vofxel",
+    "expected_output": {
+      "vertices": 8,
+      "first_x": 0.0,
+      "first_red": 255,
+      "last_z": 1.0
+    },
+    "source_lock": "data/java/ascii_ply/vofxel-lock.json"
   }
 ]

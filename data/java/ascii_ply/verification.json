@@ -1,11 +1,12 @@
 {
-  "checked_at_utc": "2026-11-13T17:55:58.166777+00:00",
+  "checked_at_utc": "2026-11-13T19:54:44Z",
   "environment": {
     "java": "Eclipse Temurin OpenJDK 21.0.2",
     "platform": "macOS 27.2 arm64",
     "native": "LWJGL 3.4.3 macOS arm64 classifier jars, SHA-256 pinned in registry snapshot",
     "f3d": "F3D 4.0.1 source built with LLVM 23.1.4, VTK 9.7.2, JDK 21.0.2 on macOS 27.2 arm64",
-    "kotlin-assimp": "Official v4.0 assimp-all.jar release asset and tagged source, SHA-256 pinned; Java 21 on macOS 27.2 arm64"
+    "kotlin-assimp": "Official v4.0 assimp-all.jar release asset and tagged source, SHA-256 pinned; Java 21 on macOS 27.2 arm64",
+    "vofxel": "JitPack v0.0.2 JAR, GPL-3.0 tagged source, OpenJDK on macOS arm64; direct public PlyParser API avoids JavaFX UI classes"
   },
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
@@ -234,7 +235,31 @@
       "environment": "macOS arm64; Java 21 bytecode; Homebrew Assimp 6.0.6; tagged JAssimp JNI source built locally",
       "source_lock": "data/java/ascii_ply/jassimp-lock.json",
       "underlying_family": "JAssimp JNI binding over native Assimp PLY importer"
+    },
+    {
+      "package": "vofxel",
+      "version": "v0.0.2",
+      "control": "controls/ascii_ply/voxel-rgb.ply",
+      "output": {
+        "vertices": 8,
+        "first_x": 0.0,
+        "first_red": 255,
+        "last_z": 1.0
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_vofxel.py",
+      "checked_at_utc": "2026-11-13T19:54:44Z",
+      "environment": "OpenJDK on macOS arm64; JitPack v0.0.2 artifact and tagged GPL-3.0 source are hash pinned",
+      "source_lock": "data/java/ascii_ply/vofxel-lock.json",
+      "underlying_family": "Vofxel native Java colored ASCII PLY vertex reader",
+      "note": "Public parser returns vertex coordinates and RGB from an eight-vertex valid ASCII PLY control. Face parsing and general PLY validation are not demonstrated."
     }
   ],
-  "runtime": []
+  "runtime": [],
+  "additional_controls": {
+    "controls/ascii_ply/voxel-rgb.ply": {
+      "sha256": "10928f56b5dd0b8fdad80c37b72f33bc3323111dce87e4ca183d5d271f7f71c8",
+      "meaning": "Valid ASCII PLY point cloud with eight XYZ/RGB voxel vertices and no face element"
+    }
+  }
 }
