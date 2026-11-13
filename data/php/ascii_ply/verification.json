@@ -4,5 +4,17 @@
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
   "third_party": [],
   "runtime": [],
-  "note": "No qualifying parser API was established, so this control has not been run in PHP."
+  "failed_lead_probes": [
+    {
+      "name": "magdev/php-assimp",
+      "release": "0.6.0",
+      "checked_at_utc": "2026-11-13T16:57:29Z",
+      "environment": "PHP 8.5.12, Composer 2.11.2, Assimp CLI 6.0.6 on macOS",
+      "input": "controls/ascii_ply/triangle.ply",
+      "api": "Assimp\\Command\\Command::execute(new Assimp\\Command\\Verbs\\InfoVerb(local_path), true)",
+      "result": "failed_before_parser_execution",
+      "observed_error": "Declaration of Assimp\\Command\\Result\\AbstractResult::isExecuted() must be compatible with Assimp\\Command\\Result\\Interfaces\\ResultInterface::isExecuted(): bool"
+    }
+  ],
+  "note": "The separately inspected PHP wrapper failed before it returned a format-aware result. No qualifying parser API was verified in PHP."
 }

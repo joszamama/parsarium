@@ -10,5 +10,31 @@
     "status": "excluded",
     "source": "https://packagist.org/packages/ypio/php-microsoft-graph-file-converter",
     "reason": "Description concerns Microsoft Graph document conversion, with no PLY mesh parser documented."
+  },
+  {
+    "name": "magdev/php-assimp",
+    "status": "excluded_control_failed",
+    "source": "https://packagist.org/packages/magdev/php-assimp",
+    "release": "0.6.0",
+    "source_commit": "206e9c341f8be271a80fbeea7c32ec33b0f2fc90",
+    "license": "MIT",
+    "underlying_parser_family": "Assimp command-line importer",
+    "api_evidence": "https://github.com/magdev/php-assimp/blob/206e9c341f8be271a80fbeea7c32ec33b0f2fc90/src/Command/Verbs/InfoVerb.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adoption_signal": {
+      "metric": "Packagist total installs",
+      "value": 92,
+      "observed_at_utc": "2026-11-13T16:57:29Z",
+      "source": "https://packagist.org/packages/magdev/php-assimp.json",
+      "ranking_status": "excluded; this metric does not enter the verified-parser ranking"
+    },
+    "probe": {
+      "environment": "PHP 8.5.12, Composer 2.11.2, Assimp CLI 6.0.6 on macOS",
+      "setup": "In a temporary directory, run composer require magdev/php-assimp:0.6.0 --update-no-dev --prefer-dist",
+      "invocation": "require vendor/autoload.php; construct Assimp\\Command\\Verbs\\InfoVerb with the absolute control path; execute through Assimp\\Command\\Command('/opt/homebrew/bin/assimp')",
+      "observed_result": "Fatal error before Assimp CLI execution: Declaration of Assimp\\Command\\Result\\AbstractResult::isExecuted() must be compatible with Assimp\\Command\\Result\\Interfaces\\ResultInterface::isExecuted(): bool",
+      "separate_underlying_cli_check": "assimp info controls/ascii_ply/triangle.ply succeeded and reported 3 vertices and 1 face; this does not verify the PHP wrapper"
+    },
+    "reason": "The pinned PHP release cannot instantiate its InfoResult on the available runtime because its implementation lacks the interface return type. No observable format-aware result was obtained through the PHP package."
   }
 ]
