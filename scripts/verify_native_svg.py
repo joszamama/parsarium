@@ -41,7 +41,8 @@ def verify(ecosystem: str) -> None:
     for parser in parsers:
         name = parser["name"]
         source = lock[name]
-        suffix = ".tar.xz" if source["source_url"].endswith(".tar.xz") else ".tar.gz"
+        suffix = ".tar.xz" if source["source_url"].endswith(".tar.xz") else (
+            ".tar.bz2" if source["source_url"].endswith(".tar.bz2") else ".tar.gz")
         archive = cache / f"{name}-{source['release']}{suffix}"
         if not archive.exists() or sha256(archive.read_bytes()).hexdigest() != source["source_sha256"]:
             with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium SVG verifier"}), timeout=120) as response:
@@ -59,6 +60,10 @@ def verify(ecosystem: str) -> None:
                 engine_member = tar.extractfile(source["source_engine_member"])
                 assert engine_member is not None
                 assert sha256(engine_member.read()).hexdigest() == source["source_engine_sha256"]
+            for engine in source.get("source_engine_members", []):
+                engine_member = tar.extractfile(engine["member"])
+                assert engine_member is not None
+                assert sha256(engine_member.read()).hexdigest() == engine["sha256"]
         formula = "vips" if name == "libvips" else name
         source_build = None
         juce_binary = None
@@ -100,7 +105,10 @@ def verify(ecosystem: str) -> None:
             library = source_dir / "target/release/libresvg.dylib"
         else:
             assert source["installed_revision"] in run(["brew", "list", "--versions", formula]).split()
-            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
+            if name == "wxwidgets":
+                assert run(["wx-config", "--version"]) == source["release"]
+            else:
+                assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
             header = Path(source["local_header"])
             library = Path(source["local_library"])
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
@@ -113,6 +121,10 @@ def verify(ecosystem: str) -> None:
         std = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
         if name == "juce":
             command = source_build
+        elif name == "wxwidgets":
+            flags = shlex.split(run(["wx-config", "--cxxflags", "--libs", "core,base"]))
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         elif name == "novasvg":
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(header.parent.parent), str(ROOT / parser["adapter"]),

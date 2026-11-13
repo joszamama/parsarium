@@ -414,5 +414,41 @@
     "source_engine_member": "JUCE-9.0.5/modules/juce_graphics/drawables/juce_SVGParser.cpp",
     "source_engine_sha256": "7e06439ea0391140a150a8d1e014f6b09315a00c48ba49e4e24847bdf2fbba27",
     "build_note": "Tagged upstream JUCE source, AGPL option, CMake console adapter linking juce_graphics. Its SVG frontend uses bundled LunaSVG."
+  },
+  "wxwidgets": {
+    "release": "3.3.4",
+    "installed_revision": "3.3.4",
+    "license": "LGPL-2.0-or-later WITH WxWindows-exception-3.1",
+    "source_url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2",
+    "source_sha256": "815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98",
+    "repository": "https://github.com/wxWidgets/wxWidgets",
+    "source_header_member": "wxWidgets-3.3.4/include/wx/bmpbndl.h",
+    "local_header": "/opt/homebrew/Cellar/wxwidgets/3.3.4/include/wx-3.3/wx/bmpbndl.h",
+    "local_header_sha256": "62c649769fa09bcde2453ee180c6d32e1ed10c260e242d1727bf4778c46e88c5",
+    "local_library": "/opt/homebrew/Cellar/wxwidgets/3.3.4/lib/libwx_osx_cocoau_core-3.3.4.0.0.dylib",
+    "local_library_sha256": "2e03524f551ff307dc8047c8d511f5018d93862f97a34811cd5432b5020e72db",
+    "license_member": "wxWidgets-3.3.4/docs/licence.txt",
+    "license_sha256": "7132837c2af55bd7ce8bfc72ef837e0caafee6b1e5eefb9cecdee713c29f57cc",
+    "source_engine_member": "wxWidgets-3.3.4/src/common/bmpbndl.cpp",
+    "source_engine_sha256": "030e98b94b59644a8e7374b6f00e98d854b9d95e4b4399f02288acce4d7ea9d6",
+    "source_engine_members": [
+      {
+        "member": "wxWidgets-3.3.4/3rdparty/nanosvg/src/nanosvg.h",
+        "sha256": "4b142e0c43203224616dd633c71c922f2064610e7177ff151eb71025546e407b"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/wxwidgets/3.3.4/lib/libwx_baseu-3.3.4.0.0.dylib",
+        "sha256": "7cc3639987fd1d3940e23b5207063040e8feeb86007c9eebb4f5db8134760aa5",
+        "role": "wxWidgets base library"
+      },
+      {
+        "path": "/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.3/wx/setup.h",
+        "sha256": "0b6057bae676683ba37e258dd1f73417ed336ec6fed12941e57f656d57d62c0d",
+        "role": "Installed configuration proves bundled NanoSVG backend"
+      }
+    ],
+    "build_note": "Pinned upstream release and matching installed public header/core dylib, base dylib and setup.h. Bundle parses local SVG using embedded NanoSVG."
   }
 }

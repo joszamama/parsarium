@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:46:27.401228+00:00",
+  "checked_at_utc": "2026-11-13T02:50:42.154649+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -87,6 +87,11 @@
       "source_sha256": "d92207f51ba728d3d195b6d5e93ecd049717a915fc250ff6844c32ea7272315a",
       "local_header_sha256": "e9b30f46a6fe9f60a68f3686c1548c3a825fd14b176a30954c0e95de01a8faff",
       "built_executable_sha256": "061922885359af34a2fccbf43a6ff16499e6cdee1164cd56f65e7534fb05a2c1"
+    },
+    "wxwidgets": {
+      "source_sha256": "815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98",
+      "local_header_sha256": "62c649769fa09bcde2453ee180c6d32e1ed10c260e242d1727bf4778c46e88c5",
+      "local_library_sha256": "2e03524f551ff307dc8047c8d511f5018d93862f97a34811cd5432b5020e72db"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -434,6 +439,28 @@
       },
       "pass": true,
       "source_build_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/juce -B /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build -DJUCE_SOURCE_DIR=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/JUCE-9.0.5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64 && cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build --target parsarium_juce_svg -j8"
+    },
+    {
+      "package": "wxwidgets",
+      "version": "3.3.4",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/wxwidgets.cpp -I/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.3 -I/opt/homebrew/include/wx-3.3 -D_FILE_OFFSET_BITS=64 -DwxDEBUG_LEVEL=0 -DWXUSINGDLL -D__WXMAC__ -D__WXOSX__ -D__WXOSX_COCOA__ -L/opt/homebrew/lib -framework IOKit -framework Carbon -framework Cocoa -framework QuartzCore -framework AudioToolbox -framework System -framework OpenGL -lwx_osx_cocoau_core-3.3 -lwx_baseu-3.3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/wxwidgets",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/wxwidgets /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "left_rgb": [
+          255,
+          0,
+          0
+        ],
+        "right_rgb": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
     }
   ],
   "runtime": []

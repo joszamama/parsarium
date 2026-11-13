@@ -233,7 +233,9 @@ NanoSVG parser; GdkPixbuf reads it through the pinned librsvg loader plugin.
 QtBase QImageReader reads it through the same QtSvg plugin used by QtSvg.
 The C++ SVG batch also verifies NovaSVG 0.11.5, whose header-only parser
 returns the root dimensions and two rectangle elements from the control,
-and JUCE 9.0.5, whose Drawable API reads the local SVG through bundled LunaSVG.
+JUCE 9.0.5, whose Drawable API reads the local SVG through bundled LunaSVG,
+and wxWidgets 3.3.4, whose bitmap API renders the two control pixels through
+bundled NanoSVG.
 All recorded SVG leads in these cells are resolved, while additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.

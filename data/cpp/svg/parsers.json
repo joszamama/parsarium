@@ -423,5 +423,32 @@
     "scope": "parsed SVG drawable bounds from local file",
     "family": "JUCE juce_graphics over bundled LunaSVG",
     "family_note": "JUCE SVGParser.cpp calls bundled LunaSVG and converts its document to a JUCE Drawable tree; this shares the LunaSVG parser family with the direct LunaSVG row."
+  },
+  {
+    "name": "wxwidgets",
+    "version": "3.3.4",
+    "license": "LGPL-2.0-or-later WITH WxWindows-exception-3.1",
+    "license_evidence": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2",
+    "documentation": "https://github.com/wxWidgets/wxWidgets/blob/v3.3.4/include/wx/bmpbndl.h",
+    "input_api": "wxBitmapBundle::FromSVGFile(local filename, wxSize); GetBitmap; ConvertToImage",
+    "adapter": "adapters/cpp/svg/wxwidgets.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "left_rgb": [
+        255,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "SVG dimensions and two rendered RGB pixels",
+    "family": "wxWidgets wxBitmapBundle over bundled NanoSVG",
+    "family_note": "This Homebrew wxWidgets build defines wxUSE_NANOSVG=1, wxUSE_NANOSVG_EXTERNAL=0 and wxUSE_LUNASVG=0. It embeds NanoSVG, sharing that syntax parser family with SDL3_image."
   }
 ]
