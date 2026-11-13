@@ -272,5 +272,24 @@
     "scope": "ID3v2 title, MP3 audio track codec and duration from local tagged file",
     "family": "libmpv local media frontend over FFmpeg libavformat and libavcodec",
     "family_note": "libmpv links the same FFmpeg libraries used by the separately counted FFmpeg row; C and C++ use the same libmpv C API. The local loadfile command returns parsed metadata and MP3 track fields without playing sound."
+  },
+  {
+    "name": "lame",
+    "version": "4.0",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "https://downloads.sourceforge.net/project/lame/lame/4.0/lame-4.0.tar.gz",
+    "documentation": "https://github.com/lameproject/lame/blob/master/include/lame.h",
+    "input_api": "hip_decode_init; hip_decode1_headers(local tagged MP3 bytes); inspect mp3data_struct; hip_decode_exit",
+    "adapter": "adapters/cpp/mp3_id3v2/lame.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bitrate_kbps": 32,
+      "decoded_samples": 576
+    },
+    "scope": "MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed",
+    "family": "LAME HIP decoder interface over libmpg123",
+    "family_note": "The pinned LAME HIP interface accepts the full tagged control and returns MP3 frame fields; the installed libmp3lame links the separately verified libmpg123 decoder. C and C++ use one C library."
   }
 ]

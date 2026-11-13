@@ -426,5 +426,32 @@
       }
     ],
     "build_note": "Pinned mpv 0.42.0 source and exact installed libmpv client header/library. pkg-config reports client API version 2.6.0, distinct from package version. Linked FFmpeg libraries are pinned, and the adapter disables audio/video output and waits for FILE_LOADED."
+  },
+  "lame": {
+    "release": "4.0",
+    "installed_revision": "4.0",
+    "formula": "lame",
+    "license": "LGPL-2.0-or-later",
+    "source_url": "https://downloads.sourceforge.net/project/lame/lame/4.0/lame-4.0.tar.gz",
+    "source_sha256": "3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb",
+    "repository": "https://github.com/lameproject/lame",
+    "source_header_member": "lame-4.0/include/lame.h",
+    "local_header": "/opt/homebrew/Cellar/lame/4.0/include/lame/lame.h",
+    "local_header_sha256": "46eb6a9f0ec2186bfbf1c2455c9a667343b57e5ea53f87add97153568210b4dc",
+    "local_library": "/opt/homebrew/Cellar/lame/4.0/lib/libmp3lame.0.dylib",
+    "local_library_sha256": "5150d16a2b09a8f6f3475dcc837fdf5435d4f97e817ca12306fec8da5614647c",
+    "pkg_config": "lame",
+    "license_member": "lame-4.0/LICENSE",
+    "license_sha256": "5c1f8d44f1eacbea3e1c31ff6ee11a4e1690ccbed4ee4af16de3b6eb61dc69a8",
+    "source_engine_member": "lame-4.0/libmp3lame/mpglib_interface.c",
+    "source_engine_sha256": "651f6afe5b09507edd78a322401865e33120b369510055239c0a9d7f91ba9287",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/mpg123/1.33.7/lib/libmpg123.0.dylib",
+        "sha256": "25751ddb9880cd94b3aedd668b24305edfdcd88454d5a06077f72d93fab82b20",
+        "role": "shared MP3 decoder in installed HIP implementation"
+      }
+    ],
+    "build_note": "Pinned LAME 4.0 release source, matching public HIP header, installed libmp3lame and linked libmpg123. The adapter feeds full tagged MP3 bytes to hip_decode1_headers without separately stripping the ID3v2 tag."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:49:15.319799+00:00",
+  "checked_at_utc": "2026-11-13T01:52:17.171302+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -78,6 +78,11 @@
       "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
       "local_header_sha256": "3da9b8c61c3fb4e2d76bd248cebf72f3ee830331411b71a76adbd5e05660cc50",
       "local_library_sha256": "0ec0235c7fedf76234d2bc355c6db62db12a41cb985322817b75607a2f0c0898"
+    },
+    "lame": {
+      "source_sha256": "3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb",
+      "local_header_sha256": "46eb6a9f0ec2186bfbf1c2455c9a667343b57e5ea53f87add97153568210b4dc",
+      "local_library_sha256": "5150d16a2b09a8f6f3475dcc837fdf5435d4f97e817ca12306fec8da5614647c"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -279,6 +284,20 @@
         "title": "Parsarium",
         "codec": "mp3",
         "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "lame",
+      "version": "4.0",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/lame.cpp -I/opt/homebrew/Cellar/lame/4.0/include/lame -L/opt/homebrew/Cellar/lame/4.0/lib -lmp3lame -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/lame",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/lame /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "bitrate_kbps": 32,
+        "decoded_samples": 576
       },
       "pass": true
     }
