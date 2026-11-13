@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T09:17:09.015527+00:00",
+  "checked_at_utc": "2026-11-13T09:21:08.995679+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "8ebbb42d2ed1b655baa549bb8db5d72e9230f21d64e95e81e07e696b8286e551"
+      "built_lib_sha256": "881d157b439527cdc3d73199b8a23b5ec8be8c649f3dbad28dbc0914fd23abfc"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -72,7 +72,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "a970ede42d0bf6a7002f9a0060262688381930efe83b4937810ab04a910ff2ba"
+      "built_lib_sha256": "9f33d7e2f8315b643b370b4d0d6ebca5855d9f34a69b1f7cb2751187d8acdbc7"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -105,6 +105,10 @@
     },
     "seldon": {
       "source_sha256": "a8d6032293f6a68e41c9fe70ab6e594d0cb2701cead26e7fbd16586e56e5479a",
+      "installed_files": {}
+    },
+    "hifir": {
+      "source_sha256": "7bb64645d753b0c69b59ec4fa3c03d662a93f67318041f0a1c509d83e92ff3c1",
       "installed_files": {}
     }
   },
@@ -332,6 +336,20 @@
         "entry_1_1": 1.5,
         "entry_1_3": -2,
         "entry_2_2": 4
+      },
+      "pass": true
+    },
+    {
+      "package": "hifir",
+      "version": "0.2.0",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/hifir-0.2.0/src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/hifir.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/hifir",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/hifir /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
       },
       "pass": true
     }

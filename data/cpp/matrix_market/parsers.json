@@ -299,5 +299,24 @@
     "scope": "2x3 real general coordinate matrix and all three nonzero values",
     "family": "Seldon native Matrix Market reader",
     "family_note": "Seldon defines its own Matrix Market reader in matrix_sparse/IOMatrixMarket.cxx; the verified release snapshot is bundled because its official latest-release URL can change."
+  },
+  {
+    "name": "hifir",
+    "version": "0.2.0",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://github.com/hifirworks/hifir/blob/v0.2.0/LICENSE",
+    "documentation": "https://hifirworks.github.io/hifir/group__io.html",
+    "input_api": "hif::read_mm_sparse(local filename, rows, cols, row_indices, col_indices, values)",
+    "adapter": "adapters/cpp/matrix_market/hifir.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real general coordinate matrix, three nonzeros, entry (1,3) = -2",
+    "family": "HIFIR native Matrix Market reader",
+    "family_note": "HIFIR v0.2.0 defines its own Matrix Market parser in hif/utils/io.hpp."
   }
 ]

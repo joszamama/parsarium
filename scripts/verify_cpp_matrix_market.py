@@ -136,6 +136,10 @@ def main() -> None:
                        "-Wno-unused-parameter", "-Wno-unused-but-set-variable",
                        "-iquote", str(cache / source["archive_root"]),
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "hifir":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(cache / source["archive_root"] / "src"),
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
         elif name == "eminem":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),
