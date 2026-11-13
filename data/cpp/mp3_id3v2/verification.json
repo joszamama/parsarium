@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:44:09.716371+00:00",
+  "checked_at_utc": "2026-11-13T01:49:15.319799+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -73,6 +73,11 @@
       "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
       "local_header_sha256": "5cb61da50fed37d2f457c9541cdf8980b999106b730ee0f6ec1e4485ebbabf48",
       "local_library_sha256": "4d199d3c60840ee35f4150f94c88a133efdc8a149b623be6ffdd0b0e7e5343ff"
+    },
+    "mpv": {
+      "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+      "local_header_sha256": "3da9b8c61c3fb4e2d76bd248cebf72f3ee830331411b71a76adbd5e05660cc50",
+      "local_library_sha256": "0ec0235c7fedf76234d2bc355c6db62db12a41cb985322817b75607a2f0c0898"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -261,6 +266,19 @@
         "sample_rate": 8000,
         "channels": 1,
         "audio_streams": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "mpv",
+      "version": "0.42.0",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/mpv.cpp -I/opt/homebrew/Cellar/mpv/0.42.0/include -I/opt/homebrew/Cellar/libass/0.17.5_1/include -I/opt/homebrew/Cellar/libunibreak/8.0/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/opt/graphite2/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libplacebo/7.387.0/include -I/opt/homebrew/Cellar/shaderc/2026.4/include -I/opt/homebrew/Cellar/mujs/1.3.11/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -I/opt/homebrew/Cellar/libbluray/1.5.0/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libudfread/1.2.0/include -I/opt/homebrew/Cellar/luajit/2.1.1794386141/include/luajit-2.1 -I/opt/homebrew/Cellar/rubberband/4.0.0/include -I/opt/homebrew/Cellar/libsamplerate/0.2.2/include -I/opt/homebrew/Cellar/uchardet/0.0.8/include/uchardet -I/opt/homebrew/lib/pkgconfig/../../Cellar/vapoursynth/82/lib/pkgconfig/../../libexec/lib/python3.15/site-packages/vapoursynth/pkgconfig/../include -I/opt/homebrew/Cellar/zimg/3.0.6/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/vulkan-loader/1.4.363.0/../../../opt/vulkan-headers/include -L/opt/homebrew/Cellar/mpv/0.42.0/lib -lmpv -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/mpv",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/mpv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "codec": "mp3",
+        "duration_ms": 1000
       },
       "pass": true
     }

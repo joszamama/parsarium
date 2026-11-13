@@ -393,5 +393,38 @@
       }
     ],
     "build_note": "Pinned 1.28.9 monorepo source, matching GstDiscoverer public header, pbutils library and installed id3demux/mpegaudioparse plugin binaries. The adapter reads a local file URI and returns tag plus audio stream fields."
+  },
+  "mpv": {
+    "release": "0.42.0",
+    "installed_revision": "0.42.0",
+    "formula": "mpv",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "source_url": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.42.0.tar.gz",
+    "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+    "repository": "https://github.com/mpv-player/mpv",
+    "source_header_member": "mpv-0.42.0/include/mpv/client.h",
+    "local_header": "/opt/homebrew/Cellar/mpv/0.42.0/include/mpv/client.h",
+    "local_header_sha256": "3da9b8c61c3fb4e2d76bd248cebf72f3ee830331411b71a76adbd5e05660cc50",
+    "local_library": "/opt/homebrew/Cellar/mpv/0.42.0/lib/libmpv.2.dylib",
+    "local_library_sha256": "0ec0235c7fedf76234d2bc355c6db62db12a41cb985322817b75607a2f0c0898",
+    "pkg_config": "mpv",
+    "pkg_config_version": "2.6.0",
+    "license_member": "mpv-0.42.0/Copyright",
+    "license_sha256": "bfe9ee4cceabcb8ecbfadf208d04156f73d801e6a57369a5606bb8341e204a23",
+    "source_engine_member": "mpv-0.42.0/player/loadfile.c",
+    "source_engine_sha256": "11a228fa8e3d7fec72be89d3a606829f071676b041fdce3c12719c056600dce6",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+        "sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+        "role": "shared MP3 demuxer and ID3v2 metadata reader"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a",
+        "role": "linked audio codec library"
+      }
+    ],
+    "build_note": "Pinned mpv 0.42.0 source and exact installed libmpv client header/library. pkg-config reports client API version 2.6.0, distinct from package version. Linked FFmpeg libraries are pinned, and the adapter disables audio/video output and waits for FILE_LOADED."
   }
 }
