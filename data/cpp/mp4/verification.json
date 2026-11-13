@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T12:03:59.222909+00:00",
+  "checked_at_utc": "2026-11-13T12:09:19.105443+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "309055c45964b8d97f8d115127db79e1abe009ab86dd224dbdb7e74f062090a0",
-      "c_binding_library_sha256": "e8683d3e83665097b9f35cc2f28aa5b73763e2b27f77b8be02e32914eb50de3d"
+      "c_binding_library_sha256": "d2fe013f1ae0c9c6be2d213e96b1d52019ac7e51d3903b4003bc7156fdeaeb31"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -82,7 +82,12 @@
     },
     "ireader-media-server": {
       "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
-      "local_library_sha256": "c1711ce27bd5a4ce101e5c11a1fd3b515c893f9ead65a1e5de977b0c2e232d60"
+      "local_library_sha256": "246a9a44099ff35c10fcb77a16c136c1df2cfbdec54a3ac921c59f70a1a2ad8d"
+    },
+    "shiguredo-mp4-rs": {
+      "source_sha256": "5af3b3b054d5558e43455232492d9697e0b9055923b835a314d25ec370a5d012",
+      "cargo_lock_sha256": "04f97302bf281df8dbfbc4059b44a8d41713c5fae0389d9d661fd4a276f40486",
+      "local_library_sha256": "0b07973a09a21f90e608dc9c6f53320d7bab90b9bfc9f7ce4896f9debe63a400"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -314,6 +319,20 @@
         "width": 2,
         "height": 2,
         "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "shiguredo-mp4-rs",
+      "version": "2026.3.0",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/mp4-rs-2026.3.0/crates/c-api/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/shiguredo_mp4.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/mp4-rs-2026.3.0/target/release/libmp4.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/shiguredo-mp4-rs",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/shiguredo-mp4-rs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "video_duration_ms": 1000
       },
       "pass": true
     }

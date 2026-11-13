@@ -475,5 +475,35 @@
     ],
     "source_build": "ireader_media_server",
     "build_note": "Tagged MIT v1.0.0 archive and parser/header/license/callback implementation are SHA-256-pinned. Compile libmov C sources and upstream FILE callback adapter to a static library; C and C++ adapters share the parser."
+  },
+  "shiguredo-mp4-rs": {
+    "release": "2026.3.0",
+    "license": "Apache-2.0",
+    "source_url": "https://github.com/shiguredo/mp4-rs/archive/refs/tags/2026.3.0.tar.gz",
+    "source_sha256": "5af3b3b054d5558e43455232492d9697e0b9055923b835a314d25ec370a5d012",
+    "repository": "https://github.com/shiguredo/mp4-rs",
+    "source_header_member": "mp4-rs-2026.3.0/crates/c-api/include/mp4.h",
+    "source_header_sha256": "0fa4f762854fa8ea831d5c55ce777dc7e4442204ce0b7dc742238c7a527437e3",
+    "license_member": "mp4-rs-2026.3.0/LICENSE",
+    "license_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "source_engine_member": "mp4-rs-2026.3.0/src/demux_mp4_file.rs",
+    "source_engine_sha256": "80376605405ba9f50c0cf70ac56397418d11932b16dc5c638fff30bceef9c7c3",
+    "source_engine_members": [
+      {
+        "member": "mp4-rs-2026.3.0/crates/c-api/src/demux.rs",
+        "sha256": "4e82689a0e5173bff4b96676f369b30cc9040d91c6948ed5baf2ca0008246553"
+      },
+      {
+        "member": "mp4-rs-2026.3.0/crates/c-api/examples/demux.c",
+        "sha256": "86a31cdca5eac5a6dc2d72e44848d9f929ed342eca240cbf79512e863bcd7e6e"
+      },
+      {
+        "member": "mp4-rs-2026.3.0/Cargo.lock",
+        "sha256": "04f97302bf281df8dbfbc4059b44a8d41713c5fae0389d9d661fd4a276f40486"
+      }
+    ],
+    "cargo_lock_sha256": "04f97302bf281df8dbfbc4059b44a8d41713c5fae0389d9d661fd4a276f40486",
+    "source_build": "shiguredo_mp4",
+    "build_note": "Tagged Apache-2.0 2026.3.0 source archive, C header, Rust demuxer, C binding, example, license and Cargo.lock are hash-pinned. cargo build --release --locked -p c-api builds static libmp4.a for both C and C++ adapters."
   }
 }

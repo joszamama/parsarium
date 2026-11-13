@@ -251,5 +251,24 @@
     "scope": "One video and one audio track, 2x2 video dimensions and 1000 ms duration from valid MP4",
     "family": "ireader libmov native ISO BMFF/MOV reader",
     "family_note": "C and C++ adapters call the same tagged libmov C parser and upstream FILE callback adapter; counted as one underlying parser family."
+  },
+  {
+    "name": "shiguredo-mp4-rs",
+    "version": "2026.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/shiguredo/mp4-rs/blob/2026.3.0/LICENSE",
+    "documentation": "https://github.com/shiguredo/mp4-rs/blob/2026.3.0/crates/c-api/README.md",
+    "input_api": "mp4_file_demuxer_get_required_input; mp4_file_demuxer_handle_input(local FILE bytes); mp4_file_demuxer_get_tracks",
+    "adapter": "adapters/c/mp4/shiguredo_mp4.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "video_duration_ms": 1000
+    },
+    "scope": "Two parsed MP4 tracks (one video, one audio) and one-second video duration",
+    "family": "shiguredo/mp4-rs Rust ISO BMFF demuxer through its published C API",
+    "family_note": "The C and C++ adapters link the same tagged Rust static library and call its published C API; one underlying parser family."
   }
 ]

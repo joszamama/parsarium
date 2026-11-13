@@ -138,6 +138,28 @@ def build_ireader_media_server(archive: Path, cache: Path) -> tuple[list[str], l
             {"local_library_sha256": sha256(library.read_bytes()).hexdigest()})
 
 
+def build_shiguredo_mp4(archive: Path, cache: Path, expected_lock_sha256: str) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build the pinned Rust MP4 demuxer and published C API from Cargo.lock."""
+    source_dir = cache / "mp4-rs-2026.3.0"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "mp4-rs-2026.3.0" or member.name.startswith("mp4-rs-2026.3.0/")
+                ):
+                    raise ValueError(f"unsafe shiguredo/mp4-rs archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    lockfile = source_dir / "Cargo.lock"
+    assert sha256(lockfile.read_bytes()).hexdigest() == expected_lock_sha256
+    run(["cargo", "build", "--release", "--locked", "-p", "c-api",
+         "--manifest-path", str(source_dir / "Cargo.toml")], timeout=600)
+    library = source_dir / "target/release/libmp4.a"
+    return (["-I" + str(source_dir / "crates/c-api/include")], [str(library)],
+            {"cargo_lock_sha256": sha256(lockfile.read_bytes()).hexdigest(),
+             "local_library_sha256": sha256(library.read_bytes()).hexdigest()})
+
+
 def verify(ecosystem: str) -> None:
     assert ecosystem in ("c", "cpp")
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
@@ -187,6 +209,9 @@ def verify(ecosystem: str) -> None:
             flags, built_libraries, built_hashes = build_avcpp(archive, cache, source["compiler"])
         elif source.get("source_build") == "ireader_media_server":
             flags, built_libraries, built_hashes = build_ireader_media_server(archive, cache)
+        elif source.get("source_build") == "shiguredo_mp4":
+            flags, built_libraries, built_hashes = build_shiguredo_mp4(
+                archive, cache, source["cargo_lock_sha256"])
         elif source.get("header_only"):
             include_dir = cache / f"{name}-{source['release']}-include"
             include_dir.mkdir(exist_ok=True)
