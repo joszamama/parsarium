@@ -27,5 +27,25 @@
     "source": "https://github.com/m0glan/pcljava",
     "api_evidence": "https://github.com/m0glan/pcljava#examples",
     "reason": "The README documents PointCloud3dReaderPly.read(local filename) over native PCL, but gives only 0.0.1-SNAPSHOT as a version and lists external PCL 1.11.1 native dependencies. The repository has no release tag or GitHub release, so a pinned released package, exact native graph, and ASCII control run are unestablished."
+  },
+  {
+    "name": "org.jorigin:jeometry-api 2.0.0 PLYReader",
+    "status": "excluded_control_failed",
+    "source": "https://github.com/jorigin/jeometry/blob/jeometry-2.0.0/jeometry-api/src/main/java/org/jeometry/io/ply/PLYReader.java",
+    "release": "2.0.0",
+    "adoption_signal": "deps.dev reported four known public direct dependents for exact Maven release 2.0.0 on 2026-11-13; excluded because the valid control did not parse.",
+    "reason": "The tagged public PLYReader.read(File) called JeometryFactory.createPoint3DContainer, but the documented jeometry-simple implementation returns null from both container factory methods. On the valid ASCII triangle the reader threw IOException for the first vertex, caused by a null point container. The 1.0.5 tagged simple implementation has the same null methods. No format-aware control result was returned."
+  },
+  {
+    "name": "DirkToewe/sjmply",
+    "status": "unresolved",
+    "source": "https://github.com/DirkToewe/sjmply",
+    "reason": "GPL-3.0 repository documents PLY.load(Path) and property access, but GitHub exposes no tag or release; no pinned released library artifact or control run was established. This is a separate underlying parser lead."
+  },
+  {
+    "name": "cansik/pointcloud-processing PLYReader",
+    "status": "unresolved",
+    "source": "https://github.com/cansik/pointcloud-processing/blob/v0.2.0/src/main/java/ch/bildspur/pointcloud/io/reader/PLYReader.java",
+    "reason": "Tagged v0.2.0 reader wraps DirkToewe sjmply and has a local-file method, but the tagged tree has no license file and GitHub identifies no open-source license. No qualifying open-source package release or control result was established."
   }
 ]

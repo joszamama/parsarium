@@ -398,5 +398,26 @@
       "vertices": 3,
       "faces": 1
     }
+  },
+  {
+    "name": "imaging-mesh",
+    "group": "science.aist.imaging",
+    "artifact": "mesh",
+    "version": "2.0.0",
+    "license": "MPL-2.0",
+    "license_evidence": "Pinned tagged imaging-2.0.0 LICENSE and MPL-2.0 source header",
+    "input_api": "new PlyReader().read(BufferedReader from local ASCII PLY file), returning Optional<JavaModel3D>",
+    "documentation": "https://github.com/FHOOEAIST/imaging/blob/imaging-2.0.0/mesh/src/main/java/science/aist/imaging/mesh/storage/ply/PlyReader.java",
+    "family": "AIST Imaging native ASCII PLY mesh reader",
+    "family_note": "Tagged Java source implements its own ASCII PLY header, vertex and face reader; no shared syntax parser with the other included Java paths was found.",
+    "scope": "ASCII triangle, three points and one polygon face",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/imaging/src/main/java/org/parsarium/ImagingPlyAdapter.java",
+    "adapter_module": "imaging",
+    "source_lock": "data/java/ascii_ply/imaging-lock.json",
+    "expected_output": {
+      "points": 3,
+      "faces": 1
+    }
   }
 ]

@@ -289,6 +289,20 @@
       "tag_commit": "9b722185c69636682a34229cfe9f04981b875b7f",
       "source_lock": "data/java/ascii_ply/imglib2-lock.json",
       "repository": "https://maven.scijava.org/content/groups/public"
+    },
+    "imaging-mesh": {
+      "group": "science.aist.imaging",
+      "artifact": "mesh",
+      "version": "2.0.0",
+      "license": "MPL-2.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/science/aist/imaging/mesh/2.0.0/mesh-2.0.0.jar",
+      "jar_sha256": "18fb599334785e1bde07be1bd0436ea70476426a950e8569e64419ea65deb3c2",
+      "pom_url": "https://repo.maven.apache.org/maven2/science/aist/imaging/mesh/2.0.0/mesh-2.0.0.pom",
+      "pom_sha256": "218b2c4f224768f2a0ac92021e2ccc55710d67ecfcd0cab2dc266ed889e706fa",
+      "sources_jar_url": "https://repo.maven.apache.org/maven2/science/aist/imaging/mesh/2.0.0/mesh-2.0.0-sources.jar",
+      "sources_jar_sha256": "0ec084663d0bf598d439ea31aafd08cb31ecca3acd9793668fcf482e301221bd",
+      "tag_commit": "1b6bf5c81123bfd67b6cb719d7575e9d9c6c383c",
+      "source_lock": "data/java/ascii_ply/imaging-lock.json"
     }
   },
   "dependencies": [
@@ -461,6 +475,15 @@
         "auxiliary_github_stars": 4,
         "auxiliary_source": "https://api.github.com/repos/imglib/imglib2-mesh",
         "auxiliary_observed_at_utc": "2026-11-13T20:32:00Z"
+      },
+      "imaging-mesh": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/science.aist.imaging%3Amesh/versions/2.0.0:dependents",
+        "direct_dependent_count": 0,
+        "observed_at_utc": "2026-11-13T20:38:00Z",
+        "note": "Zero known public direct dependents for this exact Maven release; not evidence of broad adoption.",
+        "auxiliary_github_stars": 3,
+        "auxiliary_source": "https://api.github.com/repos/FHOOEAIST/imaging",
+        "auxiliary_observed_at_utc": "2026-11-13T20:38:00Z"
       }
     }
   },
@@ -547,6 +570,13 @@
       "format_evidence": "https://github.com/imglib/imglib2-mesh/blob/imglib2-mesh-1.3.0/src/main/java/net/imglib2/mesh/io/ply/PLYMeshIO.java",
       "release_evidence": "https://maven.scijava.org/content/groups/public/net/imglib2/imglib2-mesh/1.3.0/imglib2-mesh-1.3.0.pom",
       "disposition": "Verified ASCII PLY triangle vertices and face via PLYMeshIO.open(local path); shares jPLY 0.2.1 reader family and lacks comparable deps.dev metric."
+    },
+    {
+      "name": "science.aist.imaging:mesh",
+      "url": "https://github.com/FHOOEAIST/imaging/tree/imaging-2.0.0",
+      "format_evidence": "https://github.com/FHOOEAIST/imaging/blob/imaging-2.0.0/mesh/src/main/java/science/aist/imaging/mesh/storage/ply/PlyReader.java",
+      "release_evidence": "https://repo.maven.apache.org/maven2/science/aist/imaging/mesh/2.0.0/mesh-2.0.0.pom",
+      "disposition": "Verified valid ASCII triangle vertices and face via documented local BufferedReader API; zero known exact-release public direct dependents."
     }
   ],
   "non_maven_release": {
