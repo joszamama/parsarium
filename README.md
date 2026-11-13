@@ -233,17 +233,17 @@ All recorded SVG leads in these cells are resolved, while additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
-The C × MP3 with ID3v2 batch verifies **16/20 package paths** and the C++ batch verifies **17/20** on
+The C × MP3 with ID3v2 batch verifies **17/20 package paths** and the C++ batch verifies **18/20** on
 the valid tagged MP3 control: TagLib, mpg123, FFmpeg libavformat, libid3tag,
-id3lib, libsndfile, MediaInfoLib, SDL_mixer, SoX, libmad, miniaudio, CSFML, GStreamer, libmpv, LAME HIP, and aubio. C++ also verifies native SFML.
+id3lib, libsndfile, MediaInfoLib, SDL_mixer, SoX, libmad, miniaudio, CSFML, GStreamer, libmpv, LAME HIP, aubio, and standalone dr_libs. C++ also verifies native SFML.
 The adapters return a parsed title, audio stream, or ID3v2 frame data. C and
 C++ call sites share each package's engine; TagLib and id3lib C bindings use
-their C++ cores. libsndfile shares mpg123 for audio and ID3v2 parsing. MediaInfoLib uses its native MPEG audio and ID3v2 parsers. SDL_mixer uses its own ID3v2 tag reader with an mpg123 audio backend. Its SDL3 major release was checked and excluded as the same upstream package. SoX parses audio from the tagged MP3 through libmad but does not expose its ID3v2 title. The direct libmad adapter skips the valid tag and decodes a frame, sharing the same audio engine as SoX. miniaudio decodes the tagged MP3 with bundled dr_mp3 code but does not expose tag text. CSFML and SFML use a shared minimp3 based decoder; both decode the tagged control but do not expose its title. GStreamer returns the ID3v2 title and MPEG audio stream fields using pinned demux and parser plugins. libmpv returns the tag title and MP3 track codec through its linked FFmpeg backend. LAME HIP decodes a frame from the tagged input through its linked mpg123 backend. Aubio decodes samples from the tagged file; its installed macOS build links both AudioToolbox and libsndfile, and the tested backend is not identified. The
+their C++ cores. libsndfile shares mpg123 for audio and ID3v2 parsing. MediaInfoLib uses its native MPEG audio and ID3v2 parsers. SDL_mixer uses its own ID3v2 tag reader with an mpg123 audio backend. Its SDL3 major release was checked and excluded as the same upstream package. SoX parses audio from the tagged MP3 through libmad but does not expose its ID3v2 title. The direct libmad adapter skips the valid tag and decodes a frame, sharing the same audio engine as SoX. miniaudio decodes the tagged MP3 with bundled dr_mp3 code but does not expose tag text. The standalone dr_libs release shares that decoder family, and its callback recognizes the raw ID3v2 tag without decoding text frames. CSFML and SFML use a shared minimp3 based decoder; both decode the tagged control but do not expose its title. GStreamer returns the ID3v2 title and MPEG audio stream fields using pinned demux and parser plugins. libmpv returns the tag title and MP3 track codec through its linked FFmpeg backend. LAME HIP decodes a frame from the tagged input through its linked mpg123 backend. Aubio decodes samples from the tagged file; its installed macOS build links both AudioToolbox and libsndfile, and the tested backend is not identified. The
 source archives, native libraries, and
-relevant dependencies are SHA-256 pinned; libid3tag's generated public header
+relevant dependencies are SHA-256 pinned; the header-only dr_libs archive and header are SHA-256 pinned; libid3tag's generated public header
 is recorded separately from its source template. Homebrew's
 install-on-request 365-day count ranks these packages within each cell, while
-two leads remain unresolved. The separate C and C++ standard-library
+two leads remain unresolved. dr_libs has no Homebrew install count, so its popularity rank is unresolved. The separate C and C++ standard-library
 inventories found no documented MP3 or ID3v2 parser. See the
 [C](data/c/mp3_id3v2/cell.json) and [C++](data/cpp/mp3_id3v2/cell.json) records.
 

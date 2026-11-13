@@ -290,5 +290,24 @@
     "scope": "MP3 audio stream fields and 256 decoded samples from tagged local file; tag text is not exposed",
     "family": "aubio source frontend over Apple AudioToolbox or libsndfile",
     "family_note": "Pinned source.c tries Apple AudioToolbox before libsndfile on this macOS build, and installed libaubio links both. The adapter does not reveal which backend succeeded; exact underlying decoder family remains unresolved. C and C++ share one aubio C implementation."
+  },
+  {
+    "name": "dr_libs",
+    "version": "mp3-0.7.4",
+    "license": "Unlicense OR MIT-0",
+    "license_evidence": "https://github.com/mackron/dr_libs/archive/refs/tags/mp3-0.7.4.tar.gz",
+    "documentation": "https://github.com/mackron/dr_libs/blob/mp3-0.7.4/dr_mp3.h",
+    "input_api": "drmp3_init_file_with_metadata(local filename, callback); drmp3_read_pcm_frames_s16",
+    "adapter": "adapters/c/mp3_id3v2/dr_libs.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_frames": 1,
+      "id3v2_bytes": 101
+    },
+    "scope": "Tagged MP3 audio decode and raw ID3v2 tag recognition; does not decode ID3v2 text frames",
+    "family": "dr_mp3 over minimp3",
+    "family_note": "Standalone dr_libs release is a separate package path from miniaudio, but miniaudio embeds dr_mp3 and both derive MP3 decoding from minimp3. C and C++ adapters share this header."
   }
 ]

@@ -49,7 +49,8 @@ def verify(ecosystem: str) -> None:
         with tarfile.open(archive) as tar:
             member = tar.extractfile(source["source_header_member"])
             assert member is not None
-            assert sha256(member.read()).hexdigest() == source.get("source_header_sha256", source["local_header_sha256"])
+            header_bytes = member.read()
+            assert sha256(header_bytes).hexdigest() == source.get("source_header_sha256", source.get("local_header_sha256"))
             member = tar.extractfile(source["license_member"])
             assert member is not None
             assert sha256(member.read()).hexdigest() == source["license_sha256"]
@@ -61,21 +62,27 @@ def verify(ecosystem: str) -> None:
                 member = tar.extractfile(engine["member"])
                 assert member is not None
                 assert sha256(member.read()).hexdigest() == engine["sha256"]
-        assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
-        if source.get("pkg_config"):
-            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
-        header = Path(source["local_header"])
-        library = Path(source["local_library"])
-        assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
+        if source.get("header_only"):
+            include_dir = cache / f"{name}-{source['release']}-include"
+            include_dir.mkdir(exist_ok=True)
+            (include_dir / "dr_mp3.h").write_bytes(header_bytes)
+            flags = ["-I" + str(include_dir), "-lm"]
+        else:
+            assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
+            if source.get("pkg_config"):
+                assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
+            assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
+            if source.get("pkg_config"):
+                flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+            else:
+                flags = ["-isystem", source["include_dir"], "-L" + str(library.parent), "-l" + source["link_name"]]
         for dependency in source.get("installed_dependencies", []):
             assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
         standard = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
-        if source.get("pkg_config"):
-            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
-        else:
-            flags = ["-isystem", source["include_dir"], "-L" + str(library.parent), "-l" + source["link_name"]]
         command = [compiler, standard, "-O2", "-Wall", "-Wextra", "-Werror",
                    str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         run(command)
@@ -85,9 +92,12 @@ def verify(ecosystem: str) -> None:
         rows.append({"package": name, "version": parser["version"], "control": parser["control"],
                      "build_command": shlex.join(command), "command": shlex.join(execute),
                      "output": output, "pass": True})
-        libraries[name] = {"source_sha256": source["source_sha256"],
-                           "local_header_sha256": source["local_header_sha256"],
-                           "local_library_sha256": source["local_library_sha256"]}
+        libraries[name] = {"source_sha256": source["source_sha256"]}
+        if source.get("header_only"):
+            libraries[name]["source_header_sha256"] = source["source_header_sha256"]
+        else:
+            libraries[name]["local_header_sha256"] = source["local_header_sha256"]
+            libraries[name]["local_library_sha256"] = source["local_library_sha256"]
         print(f"{name}@{parser['version']}: {ecosystem} MP3 with ID3v2 passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++" if ecosystem == "cpp" else "cc", "--version"]).splitlines()[0],

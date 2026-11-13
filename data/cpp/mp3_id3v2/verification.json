@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:55:12.539987+00:00",
+  "checked_at_utc": "2026-11-13T01:59:57.572723+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -88,6 +88,10 @@
       "source_sha256": "d48282ae4dab83b3dc94c16cf011bcb63835c1c02b515490e1883049c3d1f3da",
       "local_header_sha256": "960f5d44a40df3a5adc9aa41a557c32b795d1c5d7aadeb4482230d04cffd425e",
       "local_library_sha256": "148d6cbaff1024b63f6d765c8da935c066abe8a178e0120d4852411bab2209e1"
+    },
+    "dr_libs": {
+      "source_sha256": "6ac1dfce1fefd67eac604b685d2a3ab70d807a0b686a4b450284464f1ddba8fe",
+      "source_header_sha256": "f5c8020eeebb79877184432efdd2651f24869f5bb8f379d45450fd0aed1ee915"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -316,6 +320,20 @@
         "sample_rate": 8000,
         "channels": 1,
         "decoded_samples": 256
+      },
+      "pass": true
+    },
+    {
+      "package": "dr_libs",
+      "version": "mp3-0.7.4",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/dr_libs.cpp -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp3-id3v2/dr_libs-mp3-0.7.4-include -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/dr_libs",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/dr_libs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "decoded_frames": 1,
+        "id3v2_bytes": 101
       },
       "pass": true
     }
