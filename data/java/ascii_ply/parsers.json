@@ -73,5 +73,21 @@
     "control": "controls/ascii_ply/triangle.ply",
     "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
     "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+  },
+  {
+    "name": "MonkeyWrench",
+    "group": "com.github.stephengold",
+    "artifact": "MonkeyWrench",
+    "version": "1.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned Maven POM New BSD (3-clause) license and upstream LICENSE",
+    "input_api": "JMonkeyEngine AssetManager.registerLoader(LwjglAssetLoader.class, 'ply'); loadModel(LwjglAssetKey for local FileLocator path)",
+    "documentation": "https://github.com/stephengold/MonkeyWrench#how-to-add-monkeywrench-to-an-existing-project",
+    "family": "MonkeyWrench wrapper over LWJGL Assimp native PLY importer; same Assimp parser family as LWJGL and C++ paths",
+    "scope": "ASCII PLY triangle mesh vertex and triangle counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter_module": "monkeywrench",
+    "adapter": "adapters/java/ascii_ply/monkeywrench/src/main/java/org/parsarium/MonkeyWrenchPlyAdapter.java",
+    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
   }
 ]

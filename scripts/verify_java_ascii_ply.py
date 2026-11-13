@@ -17,7 +17,8 @@ def run(*args: str) -> str:
 
 def main() -> None:
     snapshot = json.loads((DATA / "registry-snapshot.json").read_text())
-    parsers = json.loads((DATA / "parsers.json").read_text())
+    parsers = [parser for parser in json.loads((DATA / "parsers.json").read_text())
+               if parser.get("adapter_module", "main") == "main"]
     control = ROOT / "controls/ascii_ply/triangle.ply"
     assert sha256(control.read_bytes()).hexdigest() == "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378"
     with tempfile.TemporaryDirectory(prefix="parsarium-java-ply-") as directory:

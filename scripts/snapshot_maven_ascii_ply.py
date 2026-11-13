@@ -14,7 +14,8 @@ RELEASES = [("jply", "org.smurn", "jply", "0.2.0", "Apache-2.0"),
             ("meshio", "com.ripplargames", "meshio", "2.1.2", "MIT"),
             ("mesh-ply", "hu.kazocsaba.geom3d", "mesh-ply", "1.1.0", "MIT"),
             ("pcutil", "cn.jimmiez", "pcutil", "0.3.0", "MIT"),
-            ("lwjgl-assimp", "org.lwjgl", "lwjgl-assimp", "3.4.3", "BSD-3-Clause")]
+            ("lwjgl-assimp", "org.lwjgl", "lwjgl-assimp", "3.4.3", "BSD-3-Clause"),
+            ("MonkeyWrench", "com.github.stephengold", "MonkeyWrench", "1.0.1", "BSD-3-Clause")]
 DEPENDENCIES = [("hu.kazocsaba.geom3d", "mesh", "1.0.1"),
                 ("hu.kazocsaba.math", "matrix", "1.1.0"),
                 ("org.lwjgl", "lwjgl", "3.4.3")]

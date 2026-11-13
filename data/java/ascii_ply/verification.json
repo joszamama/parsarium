@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T07:12:18+00:00",
+  "checked_at_utc": "2026-11-13T07:18:42+00:00",
   "environment": {
     "java": "Eclipse Temurin OpenJDK 21.0.2",
     "platform": "macOS 27.2 arm64",
@@ -88,6 +88,23 @@
       },
       "pass": true,
       "command": "python3 scripts/verify_java_ascii_ply.py"
+    },
+    {
+      "package": "MonkeyWrench",
+      "version": "1.0.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_monkeywrench.py",
+      "classpath_jars": 65
     }
   ],
   "runtime": []

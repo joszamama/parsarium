@@ -168,6 +168,7 @@ python3 controls/wav/make_control.py
 python3 scripts/verify_java_wav.py
 python3 scripts/verify_java_matrix_market.py
 python3 scripts/verify_java_ascii_ply.py
+python3 scripts/verify_java_ascii_ply_monkeywrench.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
