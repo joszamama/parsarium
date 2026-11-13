@@ -216,5 +216,24 @@
     "scope": "Fully decoded MP3 audio samples and stream fields from an ID3v2-tagged file; ID3v2 text is not exposed",
     "family": "CSFML wrapper over SFML SoundFileReaderMp3/minimp3",
     "family_note": "The CSFML C API delegates to the SFML C++ audio core, using its SoundFileReaderMp3 and bundled minimp3. C and C++ CSFML calls share the same library, and SFML is also counted separately in C++ as a distinct upstream package/API wrapper relation."
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html",
+    "input_api": "gst_filename_to_uri(local filename); gst_discoverer_discover_uri; gst_discoverer_info_get_tags/audio_streams",
+    "adapter": "adapters/c/mp3_id3v2/gstreamer.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "sample_rate": 8000,
+      "channels": 1,
+      "audio_streams": 1
+    },
+    "scope": "ID3v2 title plus one parsed MPEG audio stream with sample rate and channels",
+    "family": "GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer",
+    "family_note": "The C and C++ call sites use the same GStreamer C API. GstDiscoverer invokes the pinned id3demux and MPEG audio parser plugins; the monorepo and installed plugin binaries are pinned."
   }
 ]

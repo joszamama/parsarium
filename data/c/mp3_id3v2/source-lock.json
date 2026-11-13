@@ -324,5 +324,49 @@
       }
     ],
     "build_note": "Pinned CSFML release source, matching public SoundBuffer header, C binding library, and linked SFML audio library. CSFML is a distinct package with a C API wrapper over SFML."
+  },
+  "gstreamer": {
+    "release": "1.28.9",
+    "installed_revision": "1.28.9",
+    "formula": "gstreamer",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+    "repository": "https://gitlab.freedesktop.org/gstreamer/gstreamer",
+    "source_header_member": "gstreamer-1.28.9/subprojects/gst-plugins-base/gst-libs/gst/pbutils/gstdiscoverer.h",
+    "local_header": "/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0/gst/pbutils/gstdiscoverer.h",
+    "local_header_sha256": "5cb61da50fed37d2f457c9541cdf8980b999106b730ee0f6ec1e4485ebbabf48",
+    "local_library": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstpbutils-1.0.0.dylib",
+    "local_library_sha256": "4d199d3c60840ee35f4150f94c88a133efdc8a149b623be6ffdd0b0e7e5343ff",
+    "pkg_config": "gstreamer-pbutils-1.0",
+    "license_member": "gstreamer-1.28.9/LICENSE",
+    "license_sha256": "ad2eec519ebd4b5df86ea84dff24ae3bfa2edea846a703b58902dd221ae375db",
+    "source_engine_members": [
+      {
+        "member": "gstreamer-1.28.9/subprojects/gst-plugins-base/gst-libs/gst/pbutils/gstdiscoverer.c",
+        "sha256": "1549750b813479850579c5a72c8ac22a381ba82377f7eed3086b2294fec2bd53"
+      },
+      {
+        "member": "gstreamer-1.28.9/subprojects/gst-plugins-good/gst/id3demux/gstid3demux.c",
+        "sha256": "6ec138ca81644fc3db1d51c1c716c5e2c4b0b498a733eb06063f45fd697c4f34"
+      },
+      {
+        "member": "gstreamer-1.28.9/subprojects/gst-plugins-good/gst/audioparsers/gstmpegaudioparse.c",
+        "sha256": "513a888455d41cbf09d892dd94a2ad90b159aa2d726ba5cf0cac1c4254f977ed"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstid3demux.dylib",
+        "sha256": "1935aaf4bd457dce7bc18b8ba17f8e23ee371c03e6ca912955ee4ebe51028724",
+        "role": "ID3v2 metadata demuxer plugin"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstaudioparsers.dylib",
+        "sha256": "ad346e5b9bca5a851ceed1852c9d171f5c1dfdb549d63a33472ab99b044b68a9",
+        "role": "MPEG audio frame parser plugin"
+      }
+    ],
+    "build_note": "Pinned 1.28.9 monorepo source, matching GstDiscoverer public header, pbutils library and installed id3demux/mpegaudioparse plugin binaries. The adapter reads a local file URI and returns tag plus audio stream fields."
   }
 }

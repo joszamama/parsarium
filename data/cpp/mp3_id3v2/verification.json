@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:39:17.331566+00:00",
+  "checked_at_utc": "2026-11-13T01:44:09.716371+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -68,6 +68,11 @@
       "source_sha256": "0034e05f95509e5d3fb81b1625713e06da7b068f210288ce3fd67106f8f46995",
       "local_header_sha256": "1979594912e86ff2da374102cd6b66a7d848bc5f1c7a4ba1531c1934263ca1f5",
       "local_library_sha256": "5096a0a4672fb4999b433e651107d242df834c6b22a15309e1afc16e8afae4e1"
+    },
+    "gstreamer": {
+      "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+      "local_header_sha256": "5cb61da50fed37d2f457c9541cdf8980b999106b730ee0f6ec1e4485ebbabf48",
+      "local_library_sha256": "4d199d3c60840ee35f4150f94c88a133efdc8a149b623be6ffdd0b0e7e5343ff"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -242,6 +247,20 @@
         "sample_rate": 8000,
         "channels": 1,
         "decoded_samples": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "gstreamer",
+      "version": "1.28.9",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/gstreamer.cpp -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/orc/0.4.44/include/orc-0.4 -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstpbutils-1.0 -lgstvideo-1.0 -lgstaudio-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/gstreamer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "sample_rate": 8000,
+        "channels": 1,
+        "audio_streams": 1
       },
       "pass": true
     }
