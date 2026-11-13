@@ -545,5 +545,33 @@
     "source_engine_sha256": "26ee3abc9777e22e511ba4805dbaa5bcc4d0cd1d34689c4492ef440b7ea93527",
     "source_build": "libav",
     "build_note": "Tagged Libav 12.3 archive, C header, MOV demuxer and LGPL text are SHA-256 pinned. Minimal static build enables only MOV demuxer and local file protocol, disables GPL features, codecs, asm and programs. Modern Clang requires -Wno-incompatible-function-pointer-types for historical source signatures."
+  },
+  "xine-lib": {
+    "release": "1.2.13",
+    "license": "GPL-2.0-or-later",
+    "source_url": "https://downloads.sourceforge.net/project/xine/xine-lib/1.2.13/xine-lib-1.2.13.tar.xz",
+    "source_sha256": "5f10d6d718a4a51c17ed1b32b031d4f9b80b061e8276535b2be31e5ac4b75e6f",
+    "repository": "https://sourceforge.net/projects/xine/",
+    "source_header_member": "xine-lib-1.2.13/include/xine.h",
+    "source_header_sha256": "3ff8a1c1482ad2ca8119e7f597bdc9fa9428d1354126aeb36627f35518de1c44",
+    "license_member": "xine-lib-1.2.13/COPYING",
+    "license_sha256": "ab15fd526bd8dd18a9e77ebc139656bf4d33e97fc7238cd11bf60e2b9b8666c6",
+    "source_engine_member": "xine-lib-1.2.13/src/demuxers/demux_qt.c",
+    "source_engine_sha256": "3ed3cafbf58e3c24d6c587114867b853c9afe2c0231522a89064ed40a65cf122",
+    "source_engine_members": [
+      {
+        "member": "xine-lib-1.2.13/src/demuxers/group_video.c",
+        "sha256": "a3756379c4b285e6423ca5ad1607c71c2f8e5a58fa3e4ae193d09a972904c78b"
+      }
+    ],
+    "source_build": "xine_lib",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libtool/2.6.2/lib/libltdl.7.dylib",
+        "sha256": "f67fb4e10755173fccd7c84d92cdcc77d1709e98de748ad6d844f4f752f898cf",
+        "role": "libtool dynamic loader used by source build"
+      }
+    ],
+    "build_note": "Official SourceForge release tarball and C API, QuickTime demuxer, demux plugin grouping and GPL text are SHA-256 pinned. Source configure disables FFmpeg and avformat plugins; make uses Homebrew libtool 2.6.2 and installs a native xineplug_dmx_video plugin for local xine_open parsing."
   }
 }

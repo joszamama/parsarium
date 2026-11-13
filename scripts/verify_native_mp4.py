@@ -185,6 +185,38 @@ def build_libav(archive: Path, cache: Path) -> tuple[list[str], list[str], dict[
              for path in libraries})
 
 
+def build_xine_lib(archive: Path, cache: Path) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build Xine's native QuickTime demuxer without FFmpeg or avformat plugins."""
+    source_dir = cache / "xine-lib-1.2.13"
+    install_dir = cache / "xine-lib-install"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "xine-lib-1.2.13" or member.name.startswith("xine-lib-1.2.13/")
+                ):
+                    raise ValueError(f"unsafe Xine archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    assert "2.6.2" in run(["brew", "list", "--versions", "libtool"]).split()
+    run(["./configure", "--prefix=" + str(install_dir), "--without-x",
+         "--disable-ffmpeg", "--disable-avformat", "--disable-opengl",
+         "--disable-dvd", "--disable-libpng", "--disable-libjpeg",
+         "--disable-a52dec", "--disable-mad", "--disable-dts",
+         "--disable-vdr", "--disable-coreaudio", "--disable-macosx-video"],
+        timeout=300, cwd=source_dir)
+    linker_flag = "LDFLAGS=-L/opt/homebrew/lib"
+    run(["make", "-j6", linker_flag], timeout=900, cwd=source_dir)
+    run(["make", "install", linker_flag], timeout=300, cwd=source_dir)
+    plugin = install_dir / "lib/xine/plugins/2.11/xineplug_dmx_video.so"
+    library = install_dir / "lib/libxine.2.dylib"
+    assert plugin.exists() and library.exists()
+    return (["-I" + str(install_dir / "include"), "-L" + str(install_dir / "lib"),
+             "-Wl,-rpath," + str(install_dir / "lib")], ["-lxine"],
+            {"local_library_sha256": sha256(library.read_bytes()).hexdigest(),
+             "native_mp4_plugin_sha256": sha256(plugin.read_bytes()).hexdigest()})
+
+
 def build_shiguredo_mp4(archive: Path, cache: Path, expected_lock_sha256: str) -> tuple[list[str], list[str], dict[str, str]]:
     """Build the pinned Rust MP4 demuxer and published C API from Cargo.lock."""
     source_dir = cache / "mp4-rs-2026.3.0"
@@ -354,6 +386,8 @@ def verify(ecosystem: str) -> None:
             flags, built_libraries, built_hashes = build_l_smash(archive, cache)
         elif source.get("source_build") == "libav":
             flags, built_libraries, built_hashes = build_libav(archive, cache)
+        elif source.get("source_build") == "xine_lib":
+            flags, built_libraries, built_hashes = build_xine_lib(archive, cache)
         elif source.get("source_build") == "shiguredo_mp4":
             flags, built_libraries, built_hashes = build_shiguredo_mp4(
                 archive, cache, source["cargo_lock_sha256"])

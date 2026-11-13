@@ -149,6 +149,14 @@
       "source_sha256": "68c9e91be8456d1a7cec3af497312b4ffb1a68352849c2f68a0ad596b7409089",
       "license_evidence": "https://github.com/libav/libav/blob/v12.3/COPYING.LGPLv2.1",
       "distribution": "tagged upstream source; minimal LGPL-only build with MOV demuxer"
+    },
+    "xine-lib": {
+      "version": "1.2.13",
+      "license": "GPL-2.0-or-later",
+      "source_url": "https://downloads.sourceforge.net/project/xine/xine-lib/1.2.13/xine-lib-1.2.13.tar.xz",
+      "source_sha256": "5f10d6d718a4a51c17ed1b32b031d4f9b80b061e8276535b2be31e5ac4b75e6f",
+      "license_evidence": "https://sourceforge.net/projects/xine/files/xine-lib/1.2.13/",
+      "distribution": "official SourceForge source release; built locally with native QuickTime/MP4 demuxer"
     }
   },
   "popularity_metric": {
@@ -285,6 +293,14 @@
         "auxiliary_github_stars": 1156,
         "auxiliary_source": "https://api.github.com/repos/libav/libav",
         "auxiliary_observed_at_utc": "2026-11-13"
+      },
+      "xine-lib": {
+        "install_on_request_365d": null,
+        "formula": null,
+        "evidence_note": "brew info xine-lib returned no formula on 2026-11-13; no comparable Homebrew 365-day requested-install count. The SourceForge release page showed 39 downloads/week, a separate dynamic signal not inserted into the ranking.",
+        "auxiliary_source": "https://sourceforge.net/projects/xine/files/xine-lib/1.2.13/",
+        "auxiliary_sourceforge_downloads_week": 39,
+        "auxiliary_observed_at_utc": "2026-11-13"
       }
     }
   },
@@ -394,6 +410,12 @@
       "url": "https://github.com/libav/libav/blob/v12.3/libavformat/avformat.h",
       "format_evidence": "Tagged C header documents avformat_open_input on a local file; tagged libavformat/mov.c implements MOV/MP4 demuxing.",
       "disposition": "Verified with pinned 12.3 source build and valid local MP4 control."
+    },
+    {
+      "name": "xine-lib",
+      "url": "https://xine.sourceforge.net/releases.html",
+      "format_evidence": "Official 1.2.13 release notes mention MP4 audio fixes; public include/xine.h documents local xine_open and stream info; native demux_qt.c parses QuickTime/MP4.",
+      "disposition": "Verified from pinned official source with FFmpeg and avformat plugins disabled."
     }
   ],
   "search": [

@@ -371,5 +371,24 @@
     "scope": "MP4 major brand, two track types and 2x2 video dimensions",
     "family": "Libav MOV/MP4 demuxer, forked from FFmpeg",
     "family_note": "Libav is a distinct release and package API implementation from FFmpeg 9.0.2 but descends from the same FFmpeg codebase; the adapter builds its own static Libav 12.3 libraries, with no linked FFmpeg binary. This is one path, not independent parser-family diversity."
+  },
+  {
+    "name": "xine-lib",
+    "version": "1.2.13",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "Pinned COPYING and GPL-2.0-or-later header in src/demuxers/demux_qt.c",
+    "documentation": "https://xine.sourceforge.net/releases.html",
+    "input_api": "xine_new; xine_init; xine_stream_new with dummy audio/video ports; xine_open(local MP4 path); xine_get_stream_info for video/audio and dimensions",
+    "adapter": "adapters/c/mp4/xine_lib.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "has_video": 1,
+      "has_audio": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "native QuickTime/MP4 demuxer reports video/audio tracks and 2x2 video dimensions",
+    "family": "Xine native QuickTime/MP4 demux_qt parser",
+    "family_note": "The source-built xineplug_dmx_video plugin includes demux_qt.c. FFmpeg decoding and avformat plugins are disabled for this control, so this is a separate MP4 parser family from FFmpeg and Libav."
   }
 ]
