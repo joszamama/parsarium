@@ -1,5 +1,5 @@
 {
-  "captured_at_utc": "2026-11-13T04:28:50.755615+00:00",
+  "captured_at_utc": "2026-11-13T04:35:26.236731+00:00",
   "search_surface": "Maven Central Solr artifact search",
   "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
   "search_limit_per_query": 100,
@@ -8,7 +8,7 @@
       "query": "ply",
       "url": "https://search.maven.org/solrsearch/select?q=ply&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-13T04:28:20.095912+00:00",
+      "captured_at_utc": "2026-11-13T04:34:55.181623+00:00",
       "total": 5,
       "hits": [
         {
@@ -47,7 +47,7 @@
       "query": "ascii ply",
       "url": "https://search.maven.org/solrsearch/select?q=ascii%20ply&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-13T04:28:20.269348+00:00",
+      "captured_at_utc": "2026-11-13T04:34:55.357186+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -56,7 +56,7 @@
       "query": "jply",
       "url": "https://search.maven.org/solrsearch/select?q=jply&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-13T04:28:35.294462+00:00",
+      "captured_at_utc": "2026-11-13T04:35:10.383423+00:00",
       "total": 1,
       "hits": [
         {
@@ -71,7 +71,7 @@
       "query": "meshio",
       "url": "https://search.maven.org/solrsearch/select?q=meshio&rows=100&wt=json",
       "limit": 100,
-      "captured_at_utc": "2026-11-13T04:28:35.434917+00:00",
+      "captured_at_utc": "2026-11-13T04:35:10.562291+00:00",
       "total": null,
       "hits": [],
       "error": "TimeoutError: The read operation timed out"
@@ -97,13 +97,43 @@
       "jar_sha256": "bf4d483ddcf573755421393bc524b445b5a6560950b7fbe9e886f4d89e62d531",
       "pom_url": "https://repo.maven.apache.org/maven2/com/ripplargames/meshio/2.1.2/meshio-2.1.2.pom",
       "pom_sha256": "4699b9885670bfc881de1274c3b8a24f50046b3af3801905a8f34f121191d081"
+    },
+    "mesh-ply": {
+      "group": "hu.kazocsaba.geom3d",
+      "artifact": "mesh-ply",
+      "version": "1.1.0",
+      "license": "MIT",
+      "jar_url": "https://repo.maven.apache.org/maven2/hu/kazocsaba/geom3d/mesh-ply/1.1.0/mesh-ply-1.1.0.jar",
+      "jar_sha256": "6d7bf0740f87e824e69b86bf4b492c78bb010f06befd6d381e980c69d25cb131",
+      "pom_url": "https://repo.maven.apache.org/maven2/hu/kazocsaba/geom3d/mesh-ply/1.1.0/mesh-ply-1.1.0.pom",
+      "pom_sha256": "d38dbf082dbe887dba4f649c49eb9bcdb07e42ecad10d9fe6f746b0298af529c"
     }
   },
+  "dependencies": [
+    {
+      "group": "hu.kazocsaba.geom3d",
+      "artifact": "mesh",
+      "version": "1.0.1",
+      "jar_url": "https://repo.maven.apache.org/maven2/hu/kazocsaba/geom3d/mesh/1.0.1/mesh-1.0.1.jar",
+      "jar_sha256": "bb143eedbcf99f5a214e6c42b0d39112c4c1c89b2761bad662e73997a02d14df",
+      "pom_url": "https://repo.maven.apache.org/maven2/hu/kazocsaba/geom3d/mesh/1.0.1/mesh-1.0.1.pom",
+      "pom_sha256": "b1067fb50938ab43f8c52942d9c99a4b2bc0e61527deceb0b5cd093049525098"
+    },
+    {
+      "group": "hu.kazocsaba.math",
+      "artifact": "matrix",
+      "version": "1.1.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/hu/kazocsaba/math/matrix/1.1.0/matrix-1.1.0.jar",
+      "jar_sha256": "37f833a59000c33eabc944fd26547a98a41c6308a557721e0b0dfba418705537",
+      "pom_url": "https://repo.maven.apache.org/maven2/hu/kazocsaba/math/matrix/1.1.0/matrix-1.1.0.pom",
+      "pom_sha256": "fe818f5efbbec342484217074852ca1e8b16d8747dc58f5de24f0d1f445ec56d"
+    }
+  ],
   "popularity_metric": {
     "name": "deps.dev version-level directDependentCount",
     "documentation": "https://docs.deps.dev/api/v3alpha/",
     "scope": "Known public exact-release direct dependents; incomplete coverage and version-age bias",
-    "captured_at_utc": "2026-11-13T04:28:50.755626+00:00",
+    "captured_at_utc": "2026-11-13T04:35:26.236738+00:00",
     "packages": {
       "jply": {
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.smurn%3Ajply/versions/0.2.0:dependents",
@@ -111,6 +141,10 @@
       },
       "meshio": {
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.ripplargames%3Ameshio/versions/2.1.2:dependents",
+        "direct_dependent_count": 0
+      },
+      "mesh-ply": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/hu.kazocsaba.geom3d%3Amesh-ply/versions/1.1.0:dependents",
         "direct_dependent_count": 0
       }
     }

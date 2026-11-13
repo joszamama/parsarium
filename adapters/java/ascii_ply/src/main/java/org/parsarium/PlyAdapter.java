@@ -46,6 +46,14 @@ public final class PlyAdapter {
                 Face face = mesh.faces().get(0);
                 indices = new int[]{face.getV0(), face.getV1(), face.getV2()};
             }
+        } else if (args[0].equals("mesh-ply")) {
+            hu.kazocsaba.v3d.mesh.IndexedTriangleMesh mesh =
+                    hu.kazocsaba.v3d.mesh.format.ply.PlyReader.readMesh(new File(args[1]));
+            vertices = mesh.getPointCount();
+            faces = mesh.getTriangleCount();
+            indices = new int[]{mesh.getTrianglePointIndex(0, 0),
+                                mesh.getTrianglePointIndex(0, 1),
+                                mesh.getTrianglePointIndex(0, 2)};
         } else throw new IllegalArgumentException("Unknown parser: " + args[0]);
         System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%d,%d,%d]}%n",
                 vertices, faces, indices[0], indices[1], indices[2]);

@@ -33,6 +33,15 @@ def main() -> None:
                 assert sha256(path.read_bytes()).hexdigest() == release[f"{kind}_sha256"]
                 if kind == "jar":
                     jars[name] = path
+        for dependency in snapshot["dependencies"]:
+            key = dependency["artifact"]
+            for kind in ("jar", "pom"):
+                path = temp / f"{key}.{kind}"
+                with urlopen(dependency[f"{kind}_url"], timeout=45) as response:
+                    path.write_bytes(response.read())
+                assert sha256(path.read_bytes()).hexdigest() == dependency[f"{kind}_sha256"]
+                if kind == "jar":
+                    jars[key] = path
         classes = temp / "classes"
         classes.mkdir()
         classpath = ":".join(str(path) for path in jars.values())
