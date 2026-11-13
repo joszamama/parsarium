@@ -174,6 +174,10 @@ def main() -> None:
                  "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=" + str(target),
                  "-DCMAKE_BUILD_TYPE=Release"])
             command = ["cmake", "--build", str(adapter_build), "--target", "parsarium_trilinos", "-j4"]
+        elif name == "gsl":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "gsl"]))
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         elif name == "eminem":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),

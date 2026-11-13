@@ -357,5 +357,24 @@
     "scope": "2x3 real general coordinate matrix, three CSR entries, entry (1,3) = -2",
     "family": "Trilinos Teuchos Matrix Market Raw reader",
     "family_note": "The Teuchos Raw::Reader parses Matrix Market and populates CSR arrays. This is a distinct Trilinos package path; Tpetra readers in the same distribution are not counted separately."
+  },
+  {
+    "name": "gsl",
+    "version": "2.8",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://www.gnu.org/software/gsl/doc/html/intro.html",
+    "documentation": "https://www.gnu.org/software/gsl/doc/html/spmatrix.html",
+    "input_api": "gsl_spmatrix_fscanf(local FILE *) -> gsl_spmatrix *",
+    "adapter": "adapters/cpp/matrix_market/gsl.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real general coordinate matrix, three nonzeros, entry (1,3) = -2; the reader skips rather than validates the banner",
+    "family": "GNU GSL sparse Matrix Market reader",
+    "family_note": "C and C++ adapters call the same GSL 2.8 gsl_spmatrix_fscanf implementation. It handles one-based coordinate entries and comments; the 2.8 implementation does not validate the Matrix Market banner."
   }
 ]

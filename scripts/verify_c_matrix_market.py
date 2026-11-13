@@ -110,6 +110,10 @@ def main() -> None:
                        "-I" + str(include), str(ROOT / parser["adapter"]),
                        "-L" + str(libdir), "-Wl,-rpath," + str(libdir),
                        "-lsuperlu_dist", "-o", str(target / name)]
+        elif name == "gsl":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "gsl"]))
+            command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)

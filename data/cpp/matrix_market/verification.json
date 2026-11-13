@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T09:34:27.873180+00:00",
+  "checked_at_utc": "2026-11-13T09:41:23.177036+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "e700ad90f78b1a6deb7fc12fa04567eae0b041dbceea21b1c72edd098a43582f"
+      "built_lib_sha256": "78cf3028a14f5cef7075ab6743ffec3e851d6fe93acbaea6eb77feea4e1b4a42"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -72,7 +72,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "7d9b933fe3e0380fe3e097777237474721858a8906449bb0e01e5e3546a6e729"
+      "built_lib_sha256": "60564cd0e7c8145e56affd989ab3d9284ae5589bce19727f4e6ef48253bef6ef"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -120,6 +120,13 @@
       "source_sha256": "8094740da60bf75b675ad556ed00e337c8547be0dc9603893c4894f4abf0396b",
       "installed_files": {},
       "built_lib_sha256": "39072dabca7cc39d529622997a9b1360422fb68b5213f4c3c338a4596e657e75"
+    },
+    "gsl": {
+      "source_sha256": "6a99eeed15632c6354895b1dd542ed5a855c0f15d9ad1326c6fe2b2c9e423190",
+      "installed_files": {
+        "/opt/homebrew/Cellar/gsl/2.8/include/gsl/gsl_spmatrix_double.h": "d1e2b6bcab32b484fe81861d1a21562fd9e179565c8188d45660d31b0f732913",
+        "/opt/homebrew/Cellar/gsl/2.8/lib/libgsl.28.dylib": "46fd5d683ac00b745c8b33edc52dec5843966d2e7e3ef50d428e0e2191471bff"
+      }
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -385,6 +392,20 @@
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/trilinos /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
       "output": {
         "parsed": true,
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "gsl",
+      "version": "2.8",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/gsl.cpp -I/opt/homebrew/Cellar/gsl/2.8/include -L/opt/homebrew/Cellar/gsl/2.8/lib -lgsl -lgslcblas -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/gsl",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/gsl /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
         "rows": 2,
         "cols": 3,
         "nnz": 3,

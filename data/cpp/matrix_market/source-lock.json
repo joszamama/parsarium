@@ -430,5 +430,24 @@
       "Trilinos-trilinos-release-17-3-0/CMakeLists.txt": "6c343628e5fa95c56fe853ad40dc6fda3d8f39f19610bb97c0fd048b6f4f0514"
     },
     "build_note": "Official Trilinos 17.3.0 tagged release, SHA-256 pinned. Configure only Teuchos with tests/examples and shared libraries disabled; build the teuchosnumerics target, which pulls required Kokkos and Teuchos dependencies. A separate CMake adapter links TeuchosNumerics::all_libs from the local build tree. The 172 MiB archive extracts to about 889 MiB; this is a C++20 build."
+  },
+  "gsl": {
+    "release": "2.8",
+    "formula": "gsl",
+    "installed_revision": "2.8",
+    "license": "GPL-3.0-or-later",
+    "source_url": "https://ftpmirror.gnu.org/gsl/gsl-2.8.tar.gz",
+    "source_sha256": "6a99eeed15632c6354895b1dd542ed5a855c0f15d9ad1326c6fe2b2c9e423190",
+    "source_members": {
+      "gsl-2.8/spmatrix/gsl_spmatrix.h": "2a59a273ad1abe528948046f52f0a853a554d482f1cd6a50eb338c05f6495deb",
+      "gsl-2.8/spmatrix/gsl_spmatrix_double.h": "d1e2b6bcab32b484fe81861d1a21562fd9e179565c8188d45660d31b0f732913",
+      "gsl-2.8/spmatrix/file_source.c": "6662d09a73eb5fab2287fa3f3d0800c1562fb593f301313ac3c0d8dd5bba024f",
+      "gsl-2.8/COPYING": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    "installed_files": {
+      "/opt/homebrew/Cellar/gsl/2.8/include/gsl/gsl_spmatrix_double.h": "d1e2b6bcab32b484fe81861d1a21562fd9e179565c8188d45660d31b0f732913",
+      "/opt/homebrew/Cellar/gsl/2.8/lib/libgsl.28.dylib": "46fd5d683ac00b745c8b33edc52dec5843966d2e7e3ef50d428e0e2191471bff"
+    },
+    "build_note": "Official GNU GSL 2.8 release and installed Homebrew 2.8 header/dylib are hash-pinned. pkg-config supplies C/C++ compile and link flags. The documented gsl_spmatrix_fscanf(FILE *) reads 1-based real coordinate entries into a COO matrix; it skips the Matrix Market banner rather than validating it, so verification is limited to the valid control and this subset."
   }
 }
