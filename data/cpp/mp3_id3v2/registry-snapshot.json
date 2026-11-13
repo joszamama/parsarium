@@ -81,6 +81,14 @@
       "source_sha256": "f401b2ccf49c26ad0c3a6ef0179b1cbbff2406338b0603bb2033e6dcaf706114",
       "license_evidence": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
       "installed_revision": "0.16.5"
+    },
+    "miniaudio": {
+      "version": "0.11.26",
+      "license": "LicenseRef-Homebrew-public-domain OR MIT-0",
+      "source_url": "https://github.com/mackron/miniaudio/archive/refs/tags/0.11.26.tar.gz",
+      "source_sha256": "838ba55a21c9142adf7b76bdc4351e5cd8b7ae128f46b25ec25f94ae9969c600",
+      "license_evidence": "https://github.com/mackron/miniaudio/archive/refs/tags/0.11.26.tar.gz",
+      "installed_revision": "0.11.26"
     }
   },
   "popularity_metric": {
@@ -150,6 +158,12 @@
         "formula": "https://formulae.brew.sh/formula/mad",
         "observed_at_utc": "2026-11-13T01:32:10+00:00",
         "evidence_note": "Homebrew mad formula installs requested by users in the same 365-day window; broad MPEG audio use, not ID3v2-specific."
+      },
+      "miniaudio": {
+        "install_on_request_365d": 125,
+        "formula": "https://formulae.brew.sh/formula/miniaudio",
+        "observed_at_utc": "2026-11-13T01:34:42+00:00",
+        "evidence_note": "Homebrew miniaudio formula installs requested by users in the same 365-day window; broad audio use, not MP3-specific."
       }
     }
   },
@@ -203,6 +217,11 @@
       "name": "libmad",
       "url": "https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in",
       "surface": "Primary pinned public API header; found through SoX linked libmad dependency and verified on tagged MP3 control."
+    },
+    {
+      "name": "miniaudio",
+      "url": "https://github.com/mackron/miniaudio",
+      "surface": "Primary README documents ma_decoder_init_file and built-in MP3 support; pinned source embeds dr_mp3."
     }
   ],
   "search": [

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:33:02.828060+00:00",
+  "checked_at_utc": "2026-11-13T01:35:30.470889+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp3_id3v2/source-lock.json",
@@ -53,6 +53,11 @@
       "source_sha256": "f401b2ccf49c26ad0c3a6ef0179b1cbbff2406338b0603bb2033e6dcaf706114",
       "local_header_sha256": "a0ac7f93a5253dd2d54da83db27dda6fcd185de8e5ae55148cead079e393df4f",
       "local_library_sha256": "3bb643fd96527e716ee1cb4a193211f578f1efbdc912ddb0f2716bd09495dd14"
+    },
+    "miniaudio": {
+      "source_sha256": "838ba55a21c9142adf7b76bdc4351e5cd8b7ae128f46b25ec25f94ae9969c600",
+      "local_header_sha256": "6b376c7fbb1352ba1e0e432ab66069b335ea9405e45cb6c30b97ef0f3c9c3e0e",
+      "local_library_sha256": "183c8e10052aa06ea4103b9e55e7d2055accfd65b6bd9b1a197a4aac5efee3d7"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -186,6 +191,20 @@
         "bit_rate": 32000,
         "channels": 1,
         "decoded_samples": 576
+      },
+      "pass": true
+    },
+    {
+      "package": "miniaudio",
+      "version": "0.11.26",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/miniaudio.c -I/opt/homebrew/Cellar/miniaudio/0.11.26/include -L/opt/homebrew/Cellar/miniaudio/0.11.26/lib -lminiaudio -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/miniaudio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/miniaudio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 8000,
+        "decoded_frames": 1
       },
       "pass": true
     }
