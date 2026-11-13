@@ -200,11 +200,91 @@
     "expected_output": {
       "width": 2,
       "height": 1,
-      "first": [255, 0, 0],
-      "second": [0, 255, 0]
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
     },
     "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
     "family": "QtSvg QSvgRenderer document parser and Qt painter",
     "family_note": "QtSvg provides its own C++ SVG document reader. QtCore and QtGui supply the paint device and pixels; this row does not re-count a second QtSvg API as an independent parser."
+  },
+  {
+    "name": "libsvgtiny",
+    "version": "0.1.8",
+    "license": "MIT",
+    "license_evidence": "https://download.netsurf-browser.org/libs/releases/libsvgtiny-0.1.8-src.tar.gz",
+    "documentation": "https://www.netsurf-browser.org/projects/libsvgtiny/",
+    "input_api": "svgtiny_parse(local SVG file bytes, size, URL, viewport); diagram width, height, shape count and fill colors",
+    "adapter": "adapters/cpp/svg/libsvgtiny.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "shapes": 2,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions, two shapes, and red/green fill colors",
+    "family": "NetSurf libsvgtiny SVG Tiny parser over libdom",
+    "family_note": "The same C source library serves C and C++ call sites. libsvgtiny uses the NetSurf libdom XML parser and returns parsed shapes; it does not rasterize."
+  },
+  {
+    "name": "libsvg",
+    "version": "0.1.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz",
+    "documentation": "https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz",
+    "input_api": "svg_create; svg_parse(local filename); svg_get_size parsed SVG width and height",
+    "adapter": "adapters/cpp/svg/libsvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "parsed SVG root dimensions",
+    "family": "libsvg parser with system libxml2",
+    "family_note": "libsvg parses SVG without drawing. Its README says it was based on old librsvg code; the installed library is separate from current librsvg. libsvg-cairo uses this same underlying parser."
+  },
+  {
+    "name": "libsvg-cairo",
+    "version": "0.1.6",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz",
+    "documentation": "https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz",
+    "input_api": "svg_cairo_create; svg_cairo_parse(local filename); svg_cairo_get_size; svg_cairo_render to Cairo image surface",
+    "adapter": "adapters/cpp/svg/libsvg-cairo.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "libsvg-cairo adapter over libsvg parser and Cairo renderer",
+    "family_note": "A distinct package input API, but SVG syntax parsing is delegated to the separately counted libsvg 0.1.4 package. Cairo supplies rasterization."
   }
 ]

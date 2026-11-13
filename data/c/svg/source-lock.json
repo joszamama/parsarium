@@ -131,5 +131,103 @@
       }
     ],
     "build_note": "Tagged MIT upstream source and pinned Homebrew native install; public header matches tagged source. PlutoVG 1.3.3 is a hash-pinned shared rasterizer dependency. The two libraries have separate SVG document parsers."
+  },
+  "libsvgtiny": {
+    "release": "0.1.8",
+    "installed_revision": "0.1.8",
+    "license": "MIT",
+    "source_url": "https://download.netsurf-browser.org/libs/releases/libsvgtiny-0.1.8-src.tar.gz",
+    "source_sha256": "c357227f02e83fb2a76b12b901191a082229db1f007362e8f31c754510c2a01c",
+    "repository": "https://source.netsurf-browser.org/libsvgtiny.git/",
+    "source_header_member": "libsvgtiny-0.1.8/include/svgtiny.h",
+    "local_header": "/opt/homebrew/Cellar/libsvgtiny/0.1.8/include/svgtiny.h",
+    "local_header_sha256": "afce468717af3aa432c0a18cf4d66d4c3f1b7300e261f95d5b152eefc82c2ef8",
+    "local_library": "/opt/homebrew/Cellar/libsvgtiny/0.1.8/lib/libsvgtiny.0.1.8.dylib",
+    "local_library_sha256": "ab3b324ec85dde162a35a42117a5016403da3d6141d0a0cef926384c186318dd",
+    "pkg_config": "libsvgtiny",
+    "license_member": "libsvgtiny-0.1.8/COPYING",
+    "license_sha256": "cccfbac7a4da3ba080d29ce2b4f9719aa78bf1d1cb956d989bad801fa9316181",
+    "installed_dependencies": [
+      {
+        "formula": "libdom",
+        "revision": "0.4.2",
+        "path": "/opt/homebrew/Cellar/libdom/0.4.2/lib/libdom.0.dylib",
+        "sha256": "87ac3e343c10c22e662d9e8ab659f9df48971533c4485f162e388c694da6de11",
+        "role": "XML DOM parser"
+      },
+      {
+        "formula": "libhubbub",
+        "revision": "0.3.8",
+        "path": "/opt/homebrew/Cellar/libhubbub/0.3.8/lib/libhubbub.0.dylib",
+        "sha256": "1d75bf2740ded069e153d38183df9240ee6b02ca6e4a9989122eb5c4c5302e42",
+        "role": "HTML/XML dependency"
+      },
+      {
+        "formula": "libparserutils",
+        "revision": "0.2.5",
+        "path": "/opt/homebrew/Cellar/libparserutils/0.2.5/lib/libparserutils.0.dylib",
+        "sha256": "a0c44c35c97a0c12379175da3b5b51630cef2a93abd7c047c816c26bac5ee700",
+        "role": "parser utility dependency"
+      },
+      {
+        "formula": "libwapcaplet",
+        "revision": "0.4.3",
+        "path": "/opt/homebrew/Cellar/libwapcaplet/0.4.3/lib/libwapcaplet.0.dylib",
+        "sha256": "420b6aad6a4917f1a60441ab6e088d2082e904cc715b76121677a5015b2d8a6c",
+        "role": "interned string dependency"
+      }
+    ],
+    "build_note": "Pinned NetSurf release archive and Homebrew native install; public header matches release source. Native library and NetSurf parser dependencies are SHA-256 checked."
+  },
+  "libsvg": {
+    "release": "0.1.4",
+    "installed_revision": "0.1.4_3",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz",
+    "source_sha256": "4c3bf9292e676a72b12338691be64d0f38cd7f2ea5e8b67fbbf45f1ed404bc8f",
+    "repository": "https://cairographics.org/",
+    "source_header_member": "libsvg-0.1.4/src/svg.h",
+    "local_header": "/opt/homebrew/Cellar/libsvg/0.1.4_3/include/svg.h",
+    "local_header_sha256": "c593c6e5d7f0808fa1612aa4e109826e1ad04e6a31ba063716568ee55e527e6b",
+    "local_library": "/opt/homebrew/Cellar/libsvg/0.1.4_3/lib/libsvg.1.dylib",
+    "local_library_sha256": "9de5ca086969c60b311c9eafcca090bad1fed11a6fd8565d6905c10d096d664e",
+    "pkg_config": "libsvg",
+    "license_member": "libsvg-0.1.4/COPYING",
+    "license_sha256": "d245807f90032872d1438d741ed21e2490e1175dc8aa3afa5ddb6c8e529b58e5",
+    "installed_dependencies": [],
+    "build_note": "Pinned official release archive and Homebrew native install; public header matches release source. Native library and recorded parser/render dependencies are SHA-256 checked. The old libsvg pkg-config files emit unresolvable legacy image link flags; adapters link the pinned SVG and Cairo dylibs directly while taking include flags from pkg-config."
+  },
+  "libsvg-cairo": {
+    "release": "0.1.6",
+    "installed_revision": "0.1.6_3",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz",
+    "source_sha256": "a380be6a78ec2938100ce904363815a94068fca372c666b8cc82aa8711a0215c",
+    "repository": "https://cairographics.org/",
+    "source_header_member": "libsvg-cairo-0.1.6/src/svg-cairo.h",
+    "local_header": "/opt/homebrew/Cellar/libsvg-cairo/0.1.6_3/include/svg-cairo.h",
+    "local_header_sha256": "8b7b5c5787ae2a59f92c4fe478a3e29b3e57d1ba2c57b6b0613f89be09f6a82d",
+    "local_library": "/opt/homebrew/Cellar/libsvg-cairo/0.1.6_3/lib/libsvg-cairo.1.dylib",
+    "local_library_sha256": "4e792cce5f8351968123d38935e9d71e1e6cea91387dd08c274fef873ecfd366",
+    "pkg_config": "libsvg-cairo",
+    "license_member": "libsvg-cairo-0.1.6/COPYING",
+    "license_sha256": "d80c9d084ebfb50ea1ed91bfbc2410d6ce542097a32c43b00781b83adcb8c77f",
+    "installed_dependencies": [
+      {
+        "formula": "libsvg",
+        "revision": "0.1.4_3",
+        "path": "/opt/homebrew/Cellar/libsvg/0.1.4_3/lib/libsvg.1.dylib",
+        "sha256": "9de5ca086969c60b311c9eafcca090bad1fed11a6fd8565d6905c10d096d664e",
+        "role": "shared SVG syntax parser"
+      },
+      {
+        "formula": "cairo",
+        "revision": "1.18.6",
+        "path": "/opt/homebrew/Cellar/cairo/1.18.6/lib/libcairo.2.dylib",
+        "sha256": "87561194d8de54530595948745abdf44718cbed45b8be7335eb9d05159ff34f6",
+        "role": "rasterization dependency"
+      }
+    ],
+    "build_note": "Pinned official release archive and Homebrew native install; public header matches release source. Native library and recorded parser/render dependencies are SHA-256 checked. The old libsvg pkg-config files emit unresolvable legacy image link flags; adapters link the pinned SVG and Cairo dylibs directly while taking include flags from pkg-config."
   }
 }

@@ -85,7 +85,18 @@ def verify(ecosystem: str) -> None:
                        "-I" + str(header.parent), str(ROOT / parser["adapter"]),
                        str(library), "-Wl,-rpath," + str(library.parent), "-o", str(target / name)]
         else:
-            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"], *(["cairo"] if name == "librsvg" else [])]))
+            if name in ("libsvg", "libsvg-cairo"):
+                # These old .pc files require -lpng/-ljpeg without their Homebrew
+                # library paths. Their dylibs already link those dependencies.
+                flags = shlex.split(run(["pkg-config", "--cflags", source["pkg_config"]]))
+                flags += ["-L" + str(library.parent), "-l" + name.removeprefix("lib")]
+                if name == "libsvg-cairo":
+                    svg_library = next(Path(item["path"]) for item in source["installed_dependencies"]
+                                       if item.get("formula") == "libsvg")
+                    flags += ["-L" + str(svg_library.parent), "-lsvg"]
+                    flags += shlex.split(run(["pkg-config", "--libs", "cairo"]))
+            else:
+                flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"], *(["cairo"] if name == "librsvg" else [])]))
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         run(command)

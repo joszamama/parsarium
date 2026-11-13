@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:46:57.644436+00:00",
+  "checked_at_utc": "2026-11-13T00:51:50.883435+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -43,6 +43,21 @@
       "source_sha256": "e4ab39534ec97987b1b9b60ef7f4d3253d5912a69f8c713a01753174a4029331",
       "local_header_sha256": "282715c52738a91732f86ce3c9ad90700ede2a32c55c1962600aec3ef87b88a4",
       "local_library_sha256": "303b0e86d60603bf5c8d53413715bd4c0b85cb32f0ae81361274cf15931bfc57"
+    },
+    "libsvgtiny": {
+      "source_sha256": "c357227f02e83fb2a76b12b901191a082229db1f007362e8f31c754510c2a01c",
+      "local_header_sha256": "afce468717af3aa432c0a18cf4d66d4c3f1b7300e261f95d5b152eefc82c2ef8",
+      "local_library_sha256": "ab3b324ec85dde162a35a42117a5016403da3d6141d0a0cef926384c186318dd"
+    },
+    "libsvg": {
+      "source_sha256": "4c3bf9292e676a72b12338691be64d0f38cd7f2ea5e8b67fbbf45f1ed404bc8f",
+      "local_header_sha256": "c593c6e5d7f0808fa1612aa4e109826e1ad04e6a31ba063716568ee55e527e6b",
+      "local_library_sha256": "9de5ca086969c60b311c9eafcca090bad1fed11a6fd8565d6905c10d096d664e"
+    },
+    "libsvg-cairo": {
+      "source_sha256": "a380be6a78ec2938100ce904363815a94068fca372c666b8cc82aa8711a0215c",
+      "local_header_sha256": "8b7b5c5787ae2a59f92c4fe478a3e29b3e57d1ba2c57b6b0613f89be09f6a82d",
+      "local_library_sha256": "4e792cce5f8351968123d38935e9d71e1e6cea91387dd08c274fef873ecfd366"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -209,6 +224,63 @@
       "control": "controls/svg/red-green.svg",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/qtsvg.cpp -F/opt/homebrew/lib -I/opt/homebrew/include/QtSvg -I/opt/homebrew/lib/QtSvg.framework -DQT_SVG_LIB -I/opt/homebrew/include/QtGui -I/opt/homebrew/lib/QtGui.framework -DQT_GUI_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib -framework QtSvg -framework QtGui -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/qtsvg",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/qtsvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libsvgtiny",
+      "version": "0.1.8",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/libsvgtiny.cpp -I/opt/homebrew/Cellar/libsvgtiny/0.1.8/include -I/opt/homebrew/Cellar/libdom/0.4.2/include -I/opt/homebrew/Cellar/libwapcaplet/0.4.3/include -I/opt/homebrew/Cellar/libhubbub/0.3.8/include -I/opt/homebrew/Cellar/libparserutils/0.2.5/include -L/opt/homebrew/Cellar/libsvgtiny/0.1.8/lib -lsvgtiny -L/opt/homebrew/Cellar/libdom/0.4.2/lib -ldom -lexpat -L/opt/homebrew/Cellar/libwapcaplet/0.4.3/lib -lwapcaplet -L/opt/homebrew/Cellar/libhubbub/0.3.8/lib -lhubbub -L/opt/homebrew/Cellar/libparserutils/0.2.5/lib -lparserutils -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/libsvgtiny",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/libsvgtiny /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "shapes": 2,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libsvg",
+      "version": "0.1.4",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/libsvg.cpp -I/opt/homebrew/Cellar/libsvg/0.1.4_3/include -L/opt/homebrew/Cellar/libsvg/0.1.4_3/lib -lsvg -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/libsvg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/libsvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "libsvg-cairo",
+      "version": "0.1.6",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/libsvg-cairo.cpp -I/opt/homebrew/Cellar/libsvg-cairo/0.1.6_3/include -I/opt/homebrew/Cellar/libsvg/0.1.4_3/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -L/opt/homebrew/Cellar/libsvg-cairo/0.1.6_3/lib -lsvg-cairo -L/opt/homebrew/Cellar/libsvg/0.1.4_3/lib -lsvg -L/opt/homebrew/Cellar/cairo/1.18.6/lib -lcairo -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/libsvg-cairo",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/libsvg-cairo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
       "output": {
         "width": 2,
         "height": 1,
