@@ -54,8 +54,9 @@ def verify(ecosystem: str) -> None:
                 license_member = tar.extractfile(source["license_member"])
                 assert license_member is not None
                 assert sha256(license_member.read()).hexdigest() == source["license_sha256"]
-        assert source["installed_revision"] in run(["brew", "list", "--versions", "librsvg" if name == "librsvg" else "vips"]).split()
-        assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
+        formula = "vips" if name == "libvips" else name
+        assert source["installed_revision"] in run(["brew", "list", "--versions", formula]).split()
+        assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
         header = Path(source["local_header"])
         library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]

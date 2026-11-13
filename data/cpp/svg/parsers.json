@@ -52,5 +52,59 @@
     "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
     "family": "libvips SVG loader over librsvg",
     "family_note": "Installed libvips core directly links librsvg 2.63.4. libvips is a distinct package input API but shares SVG syntax interpretation with the librsvg row."
+  },
+  {
+    "name": "imagemagick",
+    "version": "7.1.2-35",
+    "license": "ImageMagick",
+    "license_evidence": "https://imagemagick.org/license/",
+    "documentation": "https://imagemagick.org/formats/",
+    "input_api": "Magick::Image(std::string(\"MSVG:\") + local filename); pixelColor(0,0), pixelColor(1,0)",
+    "adapter": "adapters/cpp/svg/imagemagick.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "ImageMagick internal MSVG renderer with libxml2",
+    "family_note": "The adapter forces ImageMagick's documented MSVG format, selecting its internal SVG renderer. The pinned SVG coder module links system libxml2; this path does not use librsvg or the external Inkscape delegate."
+  },
+  {
+    "name": "graphicsmagick",
+    "version": "1.3.49",
+    "license": "MIT",
+    "license_evidence": "https://graphicsmagick.sourceforge.io/Copyright.html",
+    "documentation": "https://graphicsmagick.sourceforge.io/formats.html",
+    "input_api": "Magick::Image(local filename); pixelColor(0,0), pixelColor(1,0)",
+    "adapter": "adapters/cpp/svg/graphicsmagick.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "GraphicsMagick SVG-to-MVG coder with libxml2",
+    "family_note": "The pinned GraphicsMagick SVG coder links system libxml2 and translates SVG to MVG. It is a separate package and SVG implementation; system libxml2 is a shared XML dependency."
   }
 ]
