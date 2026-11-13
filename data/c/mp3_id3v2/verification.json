@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:27:59.545469+00:00",
+  "checked_at_utc": "2026-11-13T01:30:19.673535+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp3_id3v2/source-lock.json",
@@ -43,6 +43,11 @@
       "source_sha256": "938dff531d00ace2296557a6599abe6f34599e2f34f0a4a08a397e2ccac8b8f7",
       "local_header_sha256": "d7284c74e5abe94049b5b483084edd0980faa0050144631931a7359c14f35851",
       "local_library_sha256": "8b261b968b3ca95ecfaf912a0e5baefc64183ca3f2fb0a69e77fcf76b16c5418"
+    },
+    "sox": {
+      "source_sha256": "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c",
+      "local_header_sha256": "c9530e7a0886facbe995def973cbf5ed139008a9962a01a73ebbf741aab51127",
+      "local_library_sha256": "53d270cce1b5f1f0b751ecb8e8672a9ec9c5e595437487778e3afbf60a6493d4"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -147,6 +152,20 @@
         "title": "Parsarium",
         "artist": "Control",
         "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "sox",
+      "version": "14.4.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sox.c -I/opt/homebrew/Cellar/sox/14.4.2_6/include -L/opt/homebrew/Cellar/sox/14.4.2_6/lib -lsox -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sox",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sox /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "filetype": "mp3",
+        "sample_rate": 8000,
+        "channels": 1,
+        "decoded_samples": 1
       },
       "pass": true
     }

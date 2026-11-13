@@ -208,5 +208,32 @@
       }
     ],
     "build_note": "Pinned SDL2_mixer 2.8.2 release source, exact installed header/library and linked mpg123/SDL2 runtime. Adapter uses SDL dummy audio driver so no sound hardware is needed; mp3utils.c supplies tag parsing."
+  },
+  "sox": {
+    "release": "14.4.2",
+    "installed_revision": "14.4.2_6",
+    "formula": "sox",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "source_url": "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz",
+    "source_sha256": "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c",
+    "repository": "https://sourceforge.net/p/sox/code/ci/master/tree/",
+    "source_header_member": "sox-14.4.2/src/sox.h",
+    "local_header": "/opt/homebrew/Cellar/sox/14.4.2_6/include/sox.h",
+    "local_header_sha256": "c9530e7a0886facbe995def973cbf5ed139008a9962a01a73ebbf741aab51127",
+    "local_library": "/opt/homebrew/Cellar/sox/14.4.2_6/lib/libsox.3.dylib",
+    "local_library_sha256": "53d270cce1b5f1f0b751ecb8e8672a9ec9c5e595437487778e3afbf60a6493d4",
+    "pkg_config": "sox",
+    "license_member": "sox-14.4.2/COPYING",
+    "license_sha256": "7d03a542ce0b414c27b248b553bc49d45a7a4dcbcc8c08aeb5ebdca204bf1226",
+    "source_engine_member": "sox-14.4.2/src/mp3.c",
+    "source_engine_sha256": "43f7bf4b5e0ea0ff102d00184a56c251dc9fd4f442445f120a7b420dbbbdbb15",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/opt/mad/lib/libmad.0.dylib",
+        "sha256": "3bb643fd96527e716ee1cb4a193211f578f1efbdc912ddb0f2716bd09495dd14",
+        "role": "MP3 audio frame decoder"
+      }
+    ],
+    "build_note": "Pinned SourceForge 14.4.2 archive, matching public header, installed libsox and linked libmad. COPYING states application GPL and libsox LGPL licensing; the Homebrew formula records their combined package expression."
   }
 }

@@ -140,5 +140,24 @@
     "scope": "ID3v2 title and artist plus a 1-second MP3 music duration",
     "family": "SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder",
     "family_note": "The pinned music_mpg123.c calls mp3_read_tags from mp3utils.c and links libmpg123 for audio. C and C++ adapters use the same SDL2_mixer C API. SDL3_mixer is another major release of the same upstream package and is not separately counted."
+  },
+  {
+    "name": "sox",
+    "version": "14.4.2",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz",
+    "documentation": "https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c",
+    "input_api": "sox_init; sox_open_read(local filename, NULL, NULL, NULL); sox_read decoded sample; filetype and signal fields",
+    "adapter": "adapters/c/mp3_id3v2/sox.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "filetype": "mp3",
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_samples": 1
+    },
+    "scope": "MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed",
+    "family": "libsox MP3 handler over libmad decoder",
+    "family_note": "The pinned src/mp3.c is the MP3 format handler and the installed libsox links libmad. C and C++ call sites use the same C library. The valid ID3v2-tagged control is accepted, but libsox does not return its title."
   }
 ]
