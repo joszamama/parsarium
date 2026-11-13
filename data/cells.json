@@ -1106,15 +1106,27 @@
     {
       "ecosystem": "java",
       "format": "matrix_market",
-      "status": "not_started",
+      "status": "verified_partial_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 1,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "matrix market",
+        "matrix-market",
+        "MatrixMarket",
+        "ejml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 28,
+      "unique_search_hits": 28,
+      "unresolved_documentation_leads": 1,
+      "uncertainty": "One pinned open-source Maven package path, EJML core 0.46.1, parsed the valid 2x3 real general coordinate Matrix Market control, including three nonzero entries and value -2 at row 1, column 3. Nineteen more verified paths are needed for the 20-path working target. Four bounded Maven Central searches saved 28 hits, all from the broad 'ejml' query; the three Matrix Market string queries returned zero. The 28 names are discovery hits, not verified parsers. Targeted official EJML documentation established the actual input API. The javagl MatrixMarketReader lead describes parsing but lacks a checked stable release and is unresolved. Other Java parser libraries may lie outside these search terms and surfaces. deps.dev's exact-release direct dependent count is a partial within-Java adoption proxy, not format-specific use. Only real general coordinate input was demonstrated; array, symmetric, pattern, integer, and complex variants remain untested. No malformed-input, resource-use, or vulnerability experiments were run.",
+      "third_party_evidence": "data/java/matrix_market/parsers.json",
+      "third_party_control_results": "data/java/matrix_market/verification.json",
+      "runtime_evidence": "data/java/matrix_market/standard.json",
+      "registry_snapshot": "data/java/matrix_market/registry-snapshot.json",
+      "unresolved_leads": "data/java/matrix_market/leads.json"
     },
     {
       "ecosystem": "java",

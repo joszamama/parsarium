@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-11-13T04:24:57+00:00",
+  "environment": {
+    "java": "Eclipse Temurin OpenJDK 21.0.2",
+    "platform": "macOS 27.2 arm64"
+  },
+  "control": "controls/matrix_market/real-general.mtx",
+  "control_sha256": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
+  "control_meaning": "Valid 2x3 real general coordinate matrix with three nonzero entries",
+  "third_party": [
+    {
+      "package": "ejml-core",
+      "version": "0.46.1",
+      "control": "controls/matrix_market/real-general.mtx",
+      "output": {"rows": 2, "cols": 3, "nnz": 3, "entry_1_3": -2.0},
+      "pass": true,
+      "command": "python3 scripts/verify_java_matrix_market.py"
+    }
+  ],
+  "runtime": []
+}
