@@ -148,5 +148,42 @@
       "/opt/homebrew/Cellar/gsl/2.8/lib/libgsl.28.dylib": "46fd5d683ac00b745c8b33edc52dec5843966d2e7e3ef50d428e0e2191471bff"
     },
     "build_note": "Official GNU GSL 2.8 release and installed Homebrew 2.8 header/dylib are hash-pinned. pkg-config supplies C/C++ compile and link flags. The documented gsl_spmatrix_fscanf(FILE *) reads 1-based real coordinate entries into a COO matrix; it skips the Matrix Market banner rather than validating it, so verification is limited to the valid control and this subset."
+  },
+  "bebop-smc": {
+    "release": "2009-12-11",
+    "source_build": "bebop_smc",
+    "license": "BSD-3-Clause",
+    "source_url": "https://bebop.cs.berkeley.edu/smc/tarballs/sparse_matrix_converter.tar.gz",
+    "source_sha256": "93681831c4e6ae4796d3e1410656c1349a2baed92846bf1f02fa690126d5959b",
+    "source_members": {
+      "sparse_matrix_converter/include/bebop/smc/read_mm.h": "c0787f690e94cc2dd7e95ada9d1b5354791dd41cb074e1e13e4bf8b1548c5098",
+      "sparse_matrix_converter/src/read_mm.c": "f30771e7a4030051b370b3ddcc95d40c153e8cb7cf1933907a8f57f360d954c5",
+      "sparse_matrix_converter/COPYING": "b7698872016b7b38f496cd6f3be4fa8aef9c48a7bd52b63bb8b77d8ca616d0f3",
+      "sparse_matrix_converter/README": "039b475a53b229b56f6fcb0515721f5d41544fa30d3e585420119f3b22225b5d"
+    },
+    "dependencies": {
+      "util": {
+        "release": "2009-12-11",
+        "archive_root": "bebop_util",
+        "source_url": "https://bebop.cs.berkeley.edu/smc/tarballs/bebop_util.tar.gz",
+        "source_sha256": "9aa0748750fbb1c9497511cd846cf76f091315f1a19d55e289d3fa9efd61fc77",
+        "source_members": {
+          "bebop_util/include/bebop/util/init.h": "668325eabc42847646473ef048c9e7510d25ccd099b264fe78997818a083788b",
+          "bebop_util/COPYING": "8e99a97fbe39fc1c0759f16db6de68026d320e8f9155b35c89c55e1f5571283d"
+        }
+      },
+      "make": {
+        "release": "2009-12-11",
+        "archive_root": "bebop_make",
+        "source_url": "https://bebop.cs.berkeley.edu/smc/tarballs/bebop_make.tar.gz",
+        "source_sha256": "1433a8622610f0c1980a770df91bb4ed8d6cd04a0881b64ba7f21acc8ed061d7",
+        "source_members": {
+          "bebop_make/options": "0dea0051b385c801afc5a74c3a3e9bbf14d4d5d40061f1f6c05b0aa2b14758f0",
+          "bebop_make/Makefile.include": "b1f8a0278667cf0afb8bb837012a537e97c84e7bae5d2df01d0de6505ff48427",
+          "bebop_make/README": "a4e0d1424fc08e9f90c274038d18445f076c079eb34af4cd4c0e8d6ac8a2797b"
+        }
+      }
+    },
+    "build_note": "Official Berkeley page dates all three BSD source packages to 2009-12-11. Archive SHA-256 and selected public headers, implementation and license files are pinned. GNU Make builds both static libraries locally; the adapter links them and parses the valid control."
   }
 }

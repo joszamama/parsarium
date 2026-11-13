@@ -15,6 +15,7 @@ from prepare_lis import prepare_lis
 from prepare_lagraph import prepare_lagraph
 from prepare_librsb import prepare_librsb
 from prepare_superlu_dist import prepare_superlu_dist
+from prepare_bebop_smc import download_pinned, prepare_bebop_smc
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,7 +53,9 @@ def main() -> None:
         name = parser["name"]
         source = sources[name]
         archive = cache / f"{name}-{source['release']}{'.zip' if source.get('source_build') == 'lis' else '.tar.gz'}"
-        if not archive.exists() or digest(archive) != source["source_sha256"]:
+        if source.get("source_build") == "bebop_smc":
+            download_pinned(source["source_url"], archive, source["source_sha256"])
+        elif not archive.exists() or digest(archive) != source["source_sha256"]:
             with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium Matrix Market verifier"}), timeout=120) as response, archive.open("wb") as output:
                 while chunk := response.read(1024 * 1024):
                     output.write(chunk)
@@ -65,6 +68,8 @@ def main() -> None:
             install, built_lib_sha256 = prepare_librsb(source, archive, cache)
         elif source.get("source_build") == "superlu_dist":
             include, libdir, built_lib_sha256 = prepare_superlu_dist(source, archive, cache)
+        elif source.get("source_build") == "bebop_smc":
+            smc_include, util_include, smc_library, util_library, built_lib_sha256 = prepare_bebop_smc(source, archive, cache)
         else:
             with tarfile.open(archive) as tar:
                 for member, expected in source["source_members"].items():
@@ -114,6 +119,11 @@ def main() -> None:
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "gsl"]))
             command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
+        elif name == "bebop-smc":
+            command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(smc_include), "-I" + str(util_include),
+                       str(ROOT / parser["adapter"]), str(smc_library),
+                       str(util_library), "-lm", "-lpthread", "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
@@ -125,7 +135,7 @@ def main() -> None:
                      "output": output, "pass": True})
         local_libraries[name] = {"source_sha256": source["source_sha256"],
                                  "installed_files": source.get("installed_files", {})}
-        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist"):
+        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist", "bebop_smc"):
             local_libraries[name]["built_lib_sha256"] = built_lib_sha256
         print(f"{name}@{parser['version']}: C Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

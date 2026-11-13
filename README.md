@@ -23,7 +23,7 @@ PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verifie
 and PHP × SVG each have a verified 20-path batch.
 PHP × ASCII PLY and PHP × Matrix Market have bounded searches and runtime
 inventories, but zero verified parser paths so far.
-There are 74 cells at the 20-parser target and fourteen below target; all 88
+There are 76 cells at the 20-parser target and twelve below target; all 88
 cells now have recorded search or verification work. A zero does **not** mean
 no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -1167,13 +1167,17 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): SuiteSparse
-  CHOLMOD, Lis, HYPRE, LAGraph, librsb, SuperLU, and SuperLU_DIST verified on valid real coordinate and symmetric controls,
-  13 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
-  19 unique names; 18 remain unverified.
+- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): nine packages
+  verified on valid real coordinate or symmetric controls, 11 below the working
+  goal. Three bounded Homebrew formula-name searches recorded 20 hits, 19 unique
+  names; 18 remain unverified. Five verified packages lack comparable Homebrew
+  requested-install counts and remain unranked.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE, LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, and tatami_mtx verified on valid
-  Matrix Market controls, 5 below the working goal. PIGO's raw API reports dimensions one greater than the valid file header. Their source releases, relevant installed headers
+  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
+  LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,
+  TACO, Trilinos, and GSL verified on valid Matrix Market controls, reaching 20
+  package paths. This is not a proven most-used top 20. PIGO's raw API reports
+  dimensions one greater than the valid file header. Their source releases, relevant installed headers
   and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
   unverified. The header-only packages, LAGraph, librsb, PIGO, and SuperLU_DIST have no comparable Homebrew install

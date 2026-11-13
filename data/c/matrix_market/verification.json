@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T09:39:13.726221+00:00",
+  "checked_at_utc": "2026-11-13T11:13:48.929666+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/matrix_market/source-lock.json",
@@ -14,7 +14,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "9037df943d10342e33bbed8feab00ca6593a6c17ae7feb708b51bd10a28c1fed"
+      "built_lib_sha256": "6745c7b6904bf647842db45bd135b18e227fe6f445189520028dfcdbe27124eb"
     },
     "hypre": {
       "source_sha256": "3083cf943e1dab54517acae36afad72a4ada2c72c9567e525fc9c6efedb14e0c",
@@ -35,7 +35,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "df0cc048412bb1692c1f3d23079ec76d5d7a7a6269f82a6123321605061def60"
+      "built_lib_sha256": "636b5603a8c9835b5e2d0fbccb3f0cfbf2ddaf0ff595d8a5bc0b43574d1ded70"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -56,6 +56,14 @@
       "installed_files": {
         "/opt/homebrew/Cellar/gsl/2.8/include/gsl/gsl_spmatrix_double.h": "d1e2b6bcab32b484fe81861d1a21562fd9e179565c8188d45660d31b0f732913",
         "/opt/homebrew/Cellar/gsl/2.8/lib/libgsl.28.dylib": "46fd5d683ac00b745c8b33edc52dec5843966d2e7e3ef50d428e0e2191471bff"
+      }
+    },
+    "bebop-smc": {
+      "source_sha256": "93681831c4e6ae4796d3e1410656c1349a2baed92846bf1f02fa690126d5959b",
+      "installed_files": {},
+      "built_lib_sha256": {
+        "smc": "6d6e4b0ca8fcdfdb97072a02ce4ebb00e0a1d8ccdb02ea4f3e0cee32d08f19e6",
+        "util": "e8ba21e35fc77454a984330872ffc4f4f1bb69b827253de051d7cf5b18beddf1"
       }
     }
   },
@@ -171,6 +179,20 @@
         "cols": 3,
         "nnz": 3,
         "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "bebop-smc",
+      "version": "2009-12-11",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/sparse_matrix_converter/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/bebop_util/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/bebop_smc.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/sparse_matrix_converter/libsparse_matrix_converter.a /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/bebop_util/libbebop_util.a -lm -lpthread -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/bebop-smc",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/bebop-smc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2.0
       },
       "pass": true
     }
