@@ -133,5 +133,32 @@
     "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
     "family": "resvg/usvg Rust SVG parser and tiny-skia renderer through C API",
     "family_note": "The C and C++ adapters use the same tagged resvg-capi source library. This is a distinct engine from librsvg, ImageMagick MSVG, and GraphicsMagick SVG-to-MVG; the two ecosystem paths are not independent from one another."
+  },
+  {
+    "name": "plutosvg",
+    "version": "0.0.8",
+    "license": "MIT",
+    "license_evidence": "https://github.com/sammycage/plutosvg/blob/v0.0.8/LICENSE",
+    "documentation": "https://github.com/sammycage/plutosvg/blob/v0.0.8/source/plutosvg.h",
+    "adapter": "adapters/c/svg/plutosvg.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "PlutoSVG document parser with PlutoVG rasterizer",
+    "family_note": "PlutoSVG has a C document parser used from C and C++; both ecosystem paths share that engine. LunaSVG shares the PlutoVG rasterizer but has separate SVG document parsing code.",
+    "input_api": "plutosvg_document_load_from_file(local filename, -1, -1); plutosvg_document_render_to_surface; plutovg_convert_argb_to_rgba"
   }
 ]

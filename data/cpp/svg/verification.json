@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:36:59.991743+00:00",
+  "checked_at_utc": "2026-11-13T00:42:05.074972+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -28,6 +28,16 @@
       "source_sha256": "ea6629ecaf8ae523aaa42b23217db7fdbed5d4bb070a2574af0d01040195beb1",
       "local_header_sha256": "884bec3fcee36c3c68eb763b9468a0584427b5235de8b7280870bb01f265efed",
       "local_library_sha256": "a6896b19582388cb17c021b04b4b9641325f004caae529e899bb101d0e43e3bd"
+    },
+    "plutosvg": {
+      "source_sha256": "49d5cfe772d3aa10cd4879f2f6e189f5083c08e4c8ea01bf3d5b87c97dfca7d2",
+      "local_header_sha256": "8e9946fe61cc227a6343e0a389f3bd9674333a0b2aaa1e734dbb5bb904401c2f",
+      "local_library_sha256": "f753fde91033d8d76602dc72dd786005f95cb5f1503bef89f0c7227370da430d"
+    },
+    "lunasvg": {
+      "source_sha256": "1abf1472ee6c4d19797916e8cc3c2e4b628e0d81178ffac60bdb0d457e32c690",
+      "local_header_sha256": "336af79e64ae2744736e1ca01b8b7ad967c931d240f571cb13d615aa0e01d7c6",
+      "local_library_sha256": "1e908a2f3fff8a17e707e21cbb976f8b493c820e366ada12112c0a09fba69829"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -143,6 +153,50 @@
       },
       "pass": true,
       "source_build_command": "cargo build --release --locked -p resvg-capi"
+    },
+    {
+      "package": "plutosvg",
+      "version": "0.0.8",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/plutosvg.cpp -I/opt/homebrew/lib/pkgconfig/../../Cellar/plutosvg/0.0.8/lib/pkgconfig/../..//include/plutosvg -DPLUTOSVG_HAS_FREETYPE -I/opt/homebrew/lib/pkgconfig/../../Cellar/plutovg/1.3.3/lib/pkgconfig/../..//include/plutovg -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -L/opt/homebrew/lib/pkgconfig/../../Cellar/plutosvg/0.0.8/lib/pkgconfig/../..//lib -lplutosvg -L/opt/homebrew/lib/pkgconfig/../../Cellar/plutovg/1.3.3/lib/pkgconfig/../..//lib -lplutovg -L/opt/homebrew/opt/freetype/lib -lfreetype -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/plutosvg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/plutosvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "lunasvg",
+      "version": "3.5.0",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/lunasvg.cpp -I/opt/homebrew/lib/pkgconfig/../../Cellar/lunasvg/3.5.0/lib/pkgconfig/../..//include/lunasvg -I/opt/homebrew/lib/pkgconfig/../../Cellar/plutovg/1.3.3/lib/pkgconfig/../..//include/plutovg -L/opt/homebrew/lib/pkgconfig/../../Cellar/lunasvg/3.5.0/lib/pkgconfig/../..//lib -llunasvg -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/lunasvg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/lunasvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
     }
   ],
   "runtime": []

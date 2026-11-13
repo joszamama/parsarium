@@ -74,6 +74,8 @@ def verify(ecosystem: str) -> None:
             library = Path(source["local_library"])
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
             for dependency in source.get("installed_dependencies", []):
+                if "formula" in dependency:
+                    assert dependency["revision"] in run(["brew", "list", "--versions", dependency["formula"]]).split()
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"

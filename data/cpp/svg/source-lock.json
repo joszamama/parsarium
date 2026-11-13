@@ -112,5 +112,53 @@
     "local_header_sha256": "884bec3fcee36c3c68eb763b9468a0584427b5235de8b7280870bb01f265efed",
     "cargo_lock_sha256": "fb6a08e06cdd89f59e52065154bac9c8fd3054ddf5a5bca122152f5ae3772a37",
     "build_note": "Clean source build from tagged v0.50.0 archive using cargo build --release --locked -p resvg-capi. Cargo.lock is SHA-256 pinned; the verifier records the built macOS arm64 dylib hash. No prebuilt publisher binary is used."
+  },
+  "plutosvg": {
+    "release": "0.0.8",
+    "installed_revision": "0.0.8",
+    "license": "MIT",
+    "source_url": "https://github.com/sammycage/plutosvg/archive/refs/tags/v0.0.8.tar.gz",
+    "source_sha256": "49d5cfe772d3aa10cd4879f2f6e189f5083c08e4c8ea01bf3d5b87c97dfca7d2",
+    "repository": "https://github.com/sammycage/plutosvg",
+    "source_header_member": "plutosvg-0.0.8/source/plutosvg.h",
+    "local_header": "/opt/homebrew/Cellar/plutosvg/0.0.8/include/plutosvg/plutosvg.h",
+    "local_header_sha256": "8e9946fe61cc227a6343e0a389f3bd9674333a0b2aaa1e734dbb5bb904401c2f",
+    "local_library": "/opt/homebrew/Cellar/plutosvg/0.0.8/lib/libplutosvg.0.dylib",
+    "local_library_sha256": "f753fde91033d8d76602dc72dd786005f95cb5f1503bef89f0c7227370da430d",
+    "pkg_config": "plutosvg",
+    "installed_dependencies": [
+      {
+        "formula": "plutovg",
+        "revision": "1.3.3",
+        "path": "/opt/homebrew/Cellar/plutovg/1.3.3/lib/libplutovg.1.dylib",
+        "sha256": "69f6c21dfcd07f2591e8ade7c6af95ebcb29be54386bae9fd55912dbd9ab7c5c",
+        "role": "shared PlutoVG vector rasterizer"
+      }
+    ],
+    "build_note": "Tagged MIT upstream source and pinned Homebrew native install; public header matches tagged source. PlutoVG 1.3.3 is a hash-pinned shared rasterizer dependency. The two libraries have separate SVG document parsers."
+  },
+  "lunasvg": {
+    "release": "3.5.0",
+    "installed_revision": "3.5.0",
+    "license": "MIT",
+    "source_url": "https://github.com/sammycage/lunasvg/archive/refs/tags/v3.5.0.tar.gz",
+    "source_sha256": "1abf1472ee6c4d19797916e8cc3c2e4b628e0d81178ffac60bdb0d457e32c690",
+    "repository": "https://github.com/sammycage/lunasvg",
+    "source_header_member": "lunasvg-3.5.0/include/lunasvg.h",
+    "local_header": "/opt/homebrew/Cellar/lunasvg/3.5.0/include/lunasvg/lunasvg.h",
+    "local_header_sha256": "336af79e64ae2744736e1ca01b8b7ad967c931d240f571cb13d615aa0e01d7c6",
+    "local_library": "/opt/homebrew/Cellar/lunasvg/3.5.0/lib/liblunasvg.3.dylib",
+    "local_library_sha256": "1e908a2f3fff8a17e707e21cbb976f8b493c820e366ada12112c0a09fba69829",
+    "pkg_config": "lunasvg",
+    "installed_dependencies": [
+      {
+        "formula": "plutovg",
+        "revision": "1.3.3",
+        "path": "/opt/homebrew/Cellar/plutovg/1.3.3/lib/libplutovg.1.dylib",
+        "sha256": "69f6c21dfcd07f2591e8ade7c6af95ebcb29be54386bae9fd55912dbd9ab7c5c",
+        "role": "shared PlutoVG vector rasterizer"
+      }
+    ],
+    "build_note": "Tagged MIT upstream source and pinned Homebrew native install; public header matches tagged source. PlutoVG 1.3.3 is a hash-pinned shared rasterizer dependency. The two libraries have separate SVG document parsers."
   }
 }
