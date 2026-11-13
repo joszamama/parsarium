@@ -399,5 +399,32 @@
     "scope": "SVG root dimensions parsed by GtkSvg from local file bytes",
     "family": "GTK 4 native GtkSvg parser",
     "family_note": "GtkSvg is the GTK 4.22+ built-in parser under gtk/svg, separate from the librsvg-backed GdkPixbuf loader. This API reports parsed document dimensions; pixel rendering is not exercised."
+  },
+  {
+    "name": "gtk3",
+    "version": "3.24.52",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz (COPYING)",
+    "documentation": "https://docs.gtk.org/gtk3/ctor.Image.new_from_file.html",
+    "input_api": "gtk_image_new_from_file(local SVG filename); gtk_image_get_pixbuf and GdkPixbuf pixel access",
+    "adapter": "adapters/c/svg/gtk3.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "SVG dimensions and red/green pixels through GTK 3 image loader",
+    "family": "GTK 3 image loader over GdkPixbuf and librsvg",
+    "family_note": "GTK 3 is a separate released toolkit API. It delegates SVG interpretation to the installed GdkPixbuf SVG loader from librsvg, already recorded as its own package path. No independent SVG syntax engine is claimed."
   }
 ]

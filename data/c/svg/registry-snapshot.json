@@ -274,6 +274,14 @@
       "source_sha256": "e98abe720e16129c8c0f50761dee0a2e9ae2478055e31018f6cf977fcf6513e9",
       "license_evidence": "https://download.gnome.org/sources/gtk/4.24/gtk-4.24.1.tar.xz",
       "installed_revision": "4.24.1"
+    },
+    "gtk3": {
+      "version": "3.24.52",
+      "license": "LGPL-2.0-or-later",
+      "source_url": "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
+      "source_sha256": "80931fa472a77b9a164f6740e3c0b444fac6770054632d35a7ff9d679e5e7b9f",
+      "license_evidence": "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
+      "installed_revision": "3.24.52_1"
     }
   },
   "popularity_metric": {
@@ -379,6 +387,16 @@
         "auxiliary_window_end": "2026-11-13",
         "auxiliary_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
         "auxiliary_note": "Broad GTK 4 formula requests, not SVG-specific, and not mixed into GitHub star ranking."
+      },
+      "gtk3": {
+        "stars": null,
+        "repository": "https://gitlab.gnome.org/GNOME/gtk",
+        "note": "Canonical GNOME GitLab upstream has no comparable primary GitHub star metric.",
+        "auxiliary_homebrew_install_on_request_365d": 25794,
+        "auxiliary_window_start": "2025-11-13",
+        "auxiliary_window_end": "2026-11-13",
+        "auxiliary_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+        "auxiliary_note": "Broad GTK 3 formula requests; not SVG-specific or mixed into the primary GitHub-star ranking."
       }
     }
   },
@@ -461,6 +479,11 @@
       "name": "gtk4",
       "url": "https://docs.gtk.org/gtk4/class.Svg.html",
       "surface": "Official GTK 4.22+ GtkSvg local byte API; tagged GTK 4.24.1 source has its own SVG parser under gtk/svg."
+    },
+    {
+      "name": "gtk3",
+      "url": "https://docs.gtk.org/gtk3/ctor.Image.new_from_file.html",
+      "surface": "Official GTK 3 local file image API; the installed GdkPixbuf SVG loader and librsvg dependency are explicitly pinned."
     }
   ]
 }

@@ -401,5 +401,40 @@
       }
     ],
     "build_note": "Official GTK 4.24.1 source archive, local GtkSvg header, native library, parser sources, and GPL-compatible LGPL license are SHA-256 checked. GTK 4 has its own SVG parser; this does not delegate to librsvg."
+  },
+  "gtk3": {
+    "release": "3.24.52",
+    "installed_revision": "3.24.52_1",
+    "license": "LGPL-2.0-or-later",
+    "source_url": "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
+    "source_sha256": "80931fa472a77b9a164f6740e3c0b444fac6770054632d35a7ff9d679e5e7b9f",
+    "repository": "https://gitlab.gnome.org/GNOME/gtk",
+    "source_header_member": "gtk-3.24.52/gtk/gtkimage.h",
+    "local_header": "/opt/homebrew/Cellar/gtk+3/3.24.52_1/include/gtk-3.0/gtk/gtkimage.h",
+    "local_header_sha256": "b4e206761879e179b131740165a0691604e19d6b589f79932828ede22e786860",
+    "local_library": "/opt/homebrew/Cellar/gtk+3/3.24.52_1/lib/libgtk-3.0.dylib",
+    "local_library_sha256": "d02f5f059f862fdb802fd69070221ea358b990afde42f66aee024f06e11b9397",
+    "pkg_config": "gtk+-3.0",
+    "license_member": "gtk-3.24.52/COPYING",
+    "license_sha256": "b7993225104d90ddd8024fd838faf300bea5e83d91203eab98e29512acebd69c",
+    "source_engine_member": "gtk-3.24.52/gtk/gtkimage.c",
+    "source_engine_sha256": "71a90fb4d733a09689a52d4e24acdcb01924d11b33586e30ca57c38a48ff4d66",
+    "installed_dependencies": [
+      {
+        "formula": "librsvg",
+        "revision": "2.63.4",
+        "path": "/opt/homebrew/Cellar/librsvg/2.63.4/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader_svg.so",
+        "sha256": "ee5b4a75eed5d377324a224bec1a4e888834aa4bb504e9ac963100d9b3cfd35a",
+        "role": "shared SVG loader plugin"
+      },
+      {
+        "formula": "librsvg",
+        "revision": "2.63.4",
+        "path": "/opt/homebrew/Cellar/librsvg/2.63.4/lib/librsvg-2.2.dylib",
+        "sha256": "2c6cf6300889e3ae00e4468d736475310398335a9e4fbaa7a9a47538bc9fcb6c",
+        "role": "shared SVG syntax parser"
+      }
+    ],
+    "build_note": "Official GTK 3.24.52 source, local API header, toolkit binary, license, and GdkPixbuf/librsvg loader dependencies are hash-pinned. The GTK 3 file-input API delegates SVG parsing to the already counted librsvg family."
   }
 }

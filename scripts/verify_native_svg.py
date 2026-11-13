@@ -75,7 +75,7 @@ def verify(ecosystem: str) -> None:
                 engine_member = tar.extractfile(engine["member"])
                 assert engine_member is not None
                 assert sha256(engine_member.read()).hexdigest() == engine["sha256"]
-        formula = "vips" if name == "libvips" else name
+        formula = "vips" if name == "libvips" else ("gtk+3" if name == "gtk3" else name)
         source_build = None
         juce_binary = None
         juce_build_command = None
