@@ -70,6 +70,16 @@ def verify(ecosystem: str) -> None:
                     assert file is not None
                     (include_dir / member).write_bytes(file.read())
                     assert digest(include_dir / member) == source["source_members"][f"rply-1.1.4/{member}"]
+            if source.get("source_build") == "libigl":
+                for member in tar.getmembers():
+                    member_path = Path(member.name)
+                    assert not member_path.is_absolute() and ".." not in member_path.parts
+                    assert member.name == "libigl-2.6.4" or member.name.startswith("libigl-2.6.4/")
+                if not (cache / "libigl-2.6.4/include/igl/readPLY.h").exists():
+                    tar.extractall(cache, filter="data")
+                include_dir = cache / "libigl-2.6.4/include"
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -103,6 +113,11 @@ def verify(ecosystem: str) -> None:
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(include_dir), str(ROOT / parser["adapter"]),
                        str(object_path), "-o", str(target / name)]
+        elif source.get("source_build") == "libigl":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir),
+                       "-isystem", "/opt/homebrew/opt/eigen/include/eigen3",
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),

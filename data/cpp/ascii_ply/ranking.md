@@ -1,6 +1,6 @@
 # C++ × ASCII PLY: verified parser ranking
 
-6 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; header-only releases without a Homebrew metric remain unranked.
+7 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; header-only releases without a Homebrew metric remain unranked.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -8,7 +8,8 @@
 | 2 | [CGAL](https://doc.cgal.org/latest/Surface_mesh/group__PkgSurfaceMeshIOFuncPLY.html) | 6.2.1 | 5,504 | three vertices, one face | CGAL Surface_mesh PLY reader |
 | 3 | [OpenMesh](https://www.graphics.rwth-aachen.de/media/openmesh_static/Documentations/OpenMesh-6.0-Documentation/a00740.html) | 11.0.0 | 66 | three vertices, one face | OpenMesh PLYReader |
 | unranked | [RPly](https://w3.impa.br/~diego/software/rply/) | 1.1.4 | unknown | vertex and face-index callbacks | RPly ANSI C parser |
+| unranked | [libigl](https://libigl.github.io/dox/readPLY_8h.html) | 2.6.4 | unknown | vertex and face Eigen matrices | bundled tinyply 2.3.2 |
 | unranked | [hapPLY](https://github.com/nmwsharp/happly/blob/v1.1.0/README.md) | 1.1.0 | unknown | vertices and face indices | hapPLY header-only parser |
 | unranked | [tinyply](https://github.com/ddiakopoulos/tinyply/blob/3.0/README.md) | 3.0 | unknown | three vertices, one face | tinyply header-only parser |
 
-Assimp C and C++ APIs share one PLY loader; CGAL, OpenMesh, hapPLY, tinyply and RPly have distinct parsers. Formula-name hits are leads rather than parser proof. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
+Assimp C and C++ APIs share one PLY loader; CGAL, OpenMesh, hapPLY, standalone tinyply and RPly have distinct parsers. libigl has its own matrix API but bundles tinyply 2.3.2, so it shares that parser family. Formula-name hits are leads rather than parser proof. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.

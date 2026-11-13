@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:28:09.521131+00:00",
+  "checked_at_utc": "2026-11-13T03:30:58.979536+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -46,6 +46,11 @@
       "installed_files": {},
       "source_header_sha256": "35fd68934927b9422f7c82be00c3c17eb4f52d33a0b4f4dba362617ac588749f",
       "built_object_sha256": "42e812456cda3da33da8ead14d3bc092b402e6421e7112883c4e8b165c78bcdf"
+    },
+    "libigl": {
+      "source_sha256": "09fa1b9b44e0ecbd8fbaa17ec8d9ac0cb4efcedcb2427970f8a4e90bc96e0970",
+      "installed_files": {},
+      "source_header_sha256": "030ec1ed9d63adf7fc6ff434049da119dc74c5e3d8d40d4b24cc998cab534285"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -128,6 +133,23 @@
       "control": "controls/ascii_ply/triangle.ply",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/rply-1.1.4-src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/rply.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/rply-1.1.4-src/rply.o -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/rply",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/rply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libigl",
+      "version": "2.6.4",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/libigl-2.6.4/include -isystem /opt/homebrew/opt/eigen/include/eigen3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/libigl.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/libigl",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/libigl /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "faces": 1,

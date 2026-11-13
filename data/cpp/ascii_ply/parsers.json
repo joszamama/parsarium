@@ -116,5 +116,27 @@
     "scope": "three vertex callbacks and three face-index callbacks from ASCII PLY",
     "family": "RPly 1.1.4 ANSI C parser",
     "family_note": "C and C++ adapters link the same pinned RPly C core; the C++ adapter calls its documented extern C API."
+  },
+  {
+    "name": "libigl",
+    "version": "2.6.4",
+    "license": "MPL-2.0",
+    "license_evidence": "https://github.com/libigl/libigl/blob/v2.6.4/LICENSE.MPL2",
+    "documentation": "https://libigl.github.io/dox/readPLY_8h.html",
+    "input_api": "igl::readPLY(local filename, Eigen vertex matrix, Eigen face matrix)",
+    "adapter": "adapters/cpp/ascii_ply/libigl.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex positions and one triangle face matrix",
+    "family": "libigl readPLY over bundled tinyply 2.3.2",
+    "family_note": "libigl has a distinct documented Eigen-matrix API but shares the tinyply parser family with the separately verified tinyply standalone package (which is pinned at 3.0)."
   }
 ]

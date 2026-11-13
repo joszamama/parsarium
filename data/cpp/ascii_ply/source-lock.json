@@ -100,5 +100,22 @@
     },
     "build_note": "Compile pinned official ANSI C source to rply.o, then link the C or C++ local-input callback adapter. No prebuilt binary used.",
     "header_member": "rply-1.1.4/rply.h"
+  },
+  "libigl": {
+    "release": "2.6.4",
+    "tag": "v2.6.4",
+    "source_build": "libigl",
+    "license": "MPL-2.0",
+    "source_url": "https://github.com/libigl/libigl/archive/refs/tags/v2.6.4.tar.gz",
+    "source_sha256": "09fa1b9b44e0ecbd8fbaa17ec8d9ac0cb4efcedcb2427970f8a4e90bc96e0970",
+    "header_member": "libigl-2.6.4/include/igl/readPLY.h",
+    "source_members": {
+      "libigl-2.6.4/include/igl/readPLY.h": "030ec1ed9d63adf7fc6ff434049da119dc74c5e3d8d40d4b24cc998cab534285",
+      "libigl-2.6.4/include/igl/readPLY.cpp": "a58ab5f189ed6d4e01295dd1cf0a8e7cb8d31be677fa66565e8bb7c7a442d43b",
+      "libigl-2.6.4/include/igl/tinyply.h": "6fad0b6dca13fb8e13bd5d85b7bc5d137e84a3a5e7e27502839084440adc679c",
+      "libigl-2.6.4/include/igl/tinyply.cpp": "5830b66ee2fd2ce4fcc77892c0ecc00d5e6189e00793145f7cd0ce990615f2f3",
+      "libigl-2.6.4/LICENSE.MPL2": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    },
+    "build_note": "Official tagged libigl source and bundled tinyply 2.3.2 are hash pinned; header-only igl::readPLY adapts bundled tinyply to Eigen matrices. Homebrew Eigen 5.0.1 headers used in compilation."
   }
 }
