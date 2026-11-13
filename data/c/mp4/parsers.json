@@ -270,5 +270,24 @@
     "scope": "Two parsed MP4 tracks (one video, one audio) and one-second video duration",
     "family": "shiguredo/mp4-rs Rust ISO BMFF demuxer through its published C API",
     "family_note": "The C and C++ adapters link the same tagged Rust static library and call its published C API; one underlying parser family."
+  },
+  {
+    "name": "libheif",
+    "version": "1.23.7",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/strukturag/libheif/blob/v1.23.7/COPYING",
+    "documentation": "https://github.com/strukturag/libheif/wiki/Reading-and-Writing-Sequences",
+    "input_api": "heif_context_read_from_file(local MP4 path); heif_context_number_of_sequence_tracks; heif_context_get_track; heif_track_get_image_resolution",
+    "adapter": "adapters/c/mp4/libheif.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "sequence_tracks": 1,
+      "video_tracks": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 video sequence track and 2x2 image resolution; the library does not expose the audio track through this sequence API",
+    "family": "libheif native ISO BMFF image-sequence and MP4 parser",
+    "family_note": "C and C++ adapters call the same libheif 1.23.7 C API and parser. This separate parser reads the MP4 video sequence and ignores audio."
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T12:09:49.598779+00:00",
+  "checked_at_utc": "2026-11-13T12:12:40.394675+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "8c0bd973372da2106ef6ec5dbdd8f58bc46e7ce401b646aa1847ee0c5de38789",
-      "c_binding_library_sha256": "75ad86d1a9143c014720a26831b392a53be37f33ec330a2fa26f2eeb05edb307"
+      "c_binding_library_sha256": "c9d5b571ba2bc9ba3339a4d0891bdf1c7c7b6080d3ddba252880f5141daa918b"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -67,12 +67,17 @@
     },
     "ireader-media-server": {
       "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
-      "local_library_sha256": "e87b35cce691170d3cb28bda0b5070fe291455efa000de65471651183f784327"
+      "local_library_sha256": "f628f7bb85426c78d122ee9c54c69ffd6d25c8e43dc0ec18d40b2d35e705c6df"
     },
     "shiguredo-mp4-rs": {
       "source_sha256": "5af3b3b054d5558e43455232492d9697e0b9055923b835a314d25ec370a5d012",
       "cargo_lock_sha256": "04f97302bf281df8dbfbc4059b44a8d41713c5fae0389d9d661fd4a276f40486",
       "local_library_sha256": "0b07973a09a21f90e608dc9c6f53320d7bab90b9bfc9f7ce4896f9debe63a400"
+    },
+    "libheif": {
+      "source_sha256": "f7483e818503ea6224c8863e4a56ac02c7089021a98472c811c12aa19faf2475",
+      "local_header_sha256": "6a80fc88c9a43054231d84e7c247c0c043a1bfbf103e77e816ebfcc37d2bedce",
+      "local_library_sha256": "72cf019f0643e695001646016a4890b30e13b9291d9c682f0529b3bd707bbbe1"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -277,6 +282,20 @@
         "video_tracks": 1,
         "audio_tracks": 1,
         "video_duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "libheif",
+      "version": "1.23.7",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/opt/homebrew/opt/libheif/include -I/opt/homebrew/Cellar/libde265/1.1.3/include -I/opt/homebrew/Cellar/x265/4.3/include -I/opt/homebrew/Cellar/aom/3.15.3/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include/libvmaf -I/opt/homebrew/opt/webp/include/webp -L/opt/homebrew/opt/libheif/lib -lheif /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/libheif.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/libheif",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/libheif /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "sequence_tracks": 1,
+        "video_tracks": 1,
+        "width": 2,
+        "height": 2
       },
       "pass": true
     }

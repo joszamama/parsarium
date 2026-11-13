@@ -505,5 +505,44 @@
     "cargo_lock_sha256": "04f97302bf281df8dbfbc4059b44a8d41713c5fae0389d9d661fd4a276f40486",
     "source_build": "shiguredo_mp4",
     "build_note": "Tagged Apache-2.0 2026.3.0 source archive, C header, Rust demuxer, C binding, example, license and Cargo.lock are hash-pinned. cargo build --release --locked -p c-api builds static libmp4.a for both C and C++ adapters."
+  },
+  "libheif": {
+    "release": "1.23.7",
+    "installed_revision": "1.23.7",
+    "formula": "libheif",
+    "license": "LGPL-3.0-or-later",
+    "source_url": "https://github.com/strukturag/libheif/releases/download/v1.23.7/libheif-1.23.7.tar.gz",
+    "source_sha256": "f7483e818503ea6224c8863e4a56ac02c7089021a98472c811c12aa19faf2475",
+    "repository": "https://github.com/strukturag/libheif",
+    "source_header_member": "libheif-1.23.7/libheif/api/libheif/heif_sequences.h",
+    "source_header_sha256": "6a80fc88c9a43054231d84e7c247c0c043a1bfbf103e77e816ebfcc37d2bedce",
+    "local_header": "/opt/homebrew/Cellar/libheif/1.23.7/include/libheif/heif_sequences.h",
+    "local_header_sha256": "6a80fc88c9a43054231d84e7c247c0c043a1bfbf103e77e816ebfcc37d2bedce",
+    "local_library": "/opt/homebrew/Cellar/libheif/1.23.7/lib/libheif.1.23.7.dylib",
+    "local_library_sha256": "72cf019f0643e695001646016a4890b30e13b9291d9c682f0529b3bd707bbbe1",
+    "pkg_config": "libheif",
+    "pkg_config_version": "1.23.7",
+    "license_member": "libheif-1.23.7/COPYING",
+    "license_sha256": "fa81ce652315b013359d6e8e4744335f31a50c7c192907176d3632f78a3b4596",
+    "source_engine_member": "libheif-1.23.7/libheif/file.cc",
+    "source_engine_sha256": "5fc534dc6ad18ab563981b631eb248808da5c2ea80601e7d7028f84295bfb564",
+    "source_engine_members": [
+      {
+        "member": "libheif-1.23.7/libheif/sequences/seq_boxes.cc",
+        "sha256": "eadcd69475a12b854e3c63561f3d1e5f5156ab42b51172594fa7e316c4da6d59"
+      },
+      {
+        "member": "libheif-1.23.7/libheif/api/libheif/heif_sequences.cc",
+        "sha256": "603a5ff57ddef3f01126b173c82076b2eb6e6260b5d3f3ffffdc9a01dee0e195"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libheif/1.23.7/include/libheif/heif.h",
+        "sha256": "cb0bb43ff20199d1d6347af7c342ef8795dcf6cc517bd498c114b59f359af8fd",
+        "role": "public C context header"
+      }
+    ],
+    "build_note": "Official v1.23.7 release archive, sequence header, ISO BMFF implementation, license, installed Homebrew headers and dylib are pinned by SHA-256. pkg-config supplies flags; both ecosystem adapters share the native parser."
   }
 }
