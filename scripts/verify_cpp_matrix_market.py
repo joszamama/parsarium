@@ -120,6 +120,10 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", source["include_dir"], str(ROOT / parser["adapter"]),
                        "-o", str(target / name)]
+        elif name == "mtl5":
+            command = ["c++", "-std=c++20", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(cache / source["archive_root"] / "include"),
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
         elif name == "lis":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),

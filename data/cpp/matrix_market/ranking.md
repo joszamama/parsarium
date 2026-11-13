@@ -1,6 +1,6 @@
 # C++ × Matrix Market: verified parser ranking
 
-7 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+8 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -11,7 +11,10 @@
 | unranked | [fast-matrix-market](https://github.com/alugowski/fast_matrix_market/blob/v1.7.6/README.md) | 1.7.6 | unknown | triplet dimensions, indices and entry (1,3) = −2 | fast_matrix_market native parser |
 | unranked | [eminem](https://github.com/tatami-inc/eminem/blob/v1.2.3/README.md) | 1.2.3 | unknown | banner, dimensions and three real coordinate values | eminem native parser over byteme input |
 | unranked | [lis](https://www.ssisc.org/lis/) | 2.1.23 | unknown | 3×3 symmetric matrix and three nonzeros | Lis native Matrix Market reader |
+| unranked | [MTL5](https://github.com/stillwater-sc/mtl5/blob/v5.23.0/include/mtl/io/matrix_market.hpp) | 5.23.0 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | MTL5 native Matrix Market reader |
 
 Formula-name hits are leads rather than parser proof. The SuiteSparse and Lis paths each share an underlying parser with their C call sites. Lis accepts the square symmetric control and rejects the rectangular general control. The C++ standard library has no documented Matrix Market parser. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
 ViennaCL 1.7.1 uses its documented local-file reader with a host sparse matrix adapter. The release and installed headers are hash-pinned; the 62 requested installs use the same Homebrew 365-day window as the ranked packages.
+
+MTL5 5.23.0 is a tagged MIT header-only C++20 reader. Its valid local-file control passed; it has no comparable Homebrew requested-install metric and remains unranked.

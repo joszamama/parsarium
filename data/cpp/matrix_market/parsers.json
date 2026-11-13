@@ -128,5 +128,24 @@
     "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
     "family": "ViennaCL native Matrix Market text reader",
     "family_note": "Header-only Matrix Market parser, using a std::vector of sparse row maps without a GPU runtime."
+  },
+  {
+    "name": "mtl5",
+    "version": "5.23.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/stillwater-sc/mtl5/blob/v5.23.0/LICENSE",
+    "documentation": "https://github.com/stillwater-sc/mtl5/blob/v5.23.0/include/mtl/io/matrix_market.hpp",
+    "input_api": "mtl::io::mm_read<double>(local filename)",
+    "adapter": "adapters/cpp/matrix_market/mtl5.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
+    "family": "MTL5 native Matrix Market reader",
+    "family_note": "Standalone header-only parser; no shared backend with the other C++ Matrix Market paths."
   }
 ]
