@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:17:45.728465+00:00",
+  "checked_at_utc": "2026-11-13T01:23:24.449880+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp3_id3v2/source-lock.json",
@@ -33,6 +33,11 @@
       "source_sha256": "3799ca9924d3125038880367bf1468e53a1b7e3686a934f098b7e1d286cdb80e",
       "local_header_sha256": "911098ea4b66f0c5ad59785b176f2b19f6e657042c15c93791edb53467efd6c0",
       "local_library_sha256": "6f2dcfbe421649ef61af16ba02bf815dc215b51f34970debb2333bffc36f6cc3"
+    },
+    "libmediainfo": {
+      "source_sha256": "a806fd36592549a03e810486f415a6858d4d8f14066bfbe97b32a447cd5eb590",
+      "local_header_sha256": "a9ce341769da60d1bd97cf7f490c75004c4a5049cd0e4e0060170ab04feeceb1",
+      "local_library_sha256": "425415cb513f651333cd68dfa6c0b26170f451be985882b4b7857c55f76ab050"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -111,6 +116,19 @@
         "channels": 1,
         "frames": 8000,
         "decoded_frames": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "libmediainfo",
+      "version": "26.10",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/libmediainfo.c -I/opt/homebrew/Cellar/libmediainfo/26.10/include -I/opt/homebrew/Cellar/libzen/0.4.41_1/include -DUNICODE -L/opt/homebrew/Cellar/libmediainfo/26.10/lib -lmediainfo -lz -L/opt/homebrew/Cellar/libzen/0.4.41_1/lib -lzen -lpthread -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/libmediainfo",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/libmediainfo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "format": "MPEG Audio",
+        "sample_rate": 8000
       },
       "pass": true
     }

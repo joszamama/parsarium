@@ -104,5 +104,23 @@
     "scope": "ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame",
     "family": "libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader",
     "family_note": "The pinned libsndfile mpeg_decode.c uses mpg123_id3 and mpg123 audio decoding. This is a distinct package input API sharing the separately counted libmpg123 syntax engine. C and C++ call sites use the same C implementation."
+  },
+  {
+    "name": "libmediainfo",
+    "version": "26.10",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz",
+    "documentation": "https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start",
+    "input_api": "MediaInfoLib::MediaInfo::Open(local filename); Get general Title and audio Format/SamplingRate",
+    "adapter": "adapters/cpp/mp3_id3v2/libmediainfo.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "format": "MPEG Audio",
+      "sample_rate": 8000
+    },
+    "scope": "ID3v2 title, MPEG Audio format and 8 kHz sample rate from the tagged MP3",
+    "family": "MediaInfoLib MPEG audio and ID3v2 parsers",
+    "family_note": "Native MediaInfoLib parsers are used from both C and C++ APIs; these call sites share one parser engine across ecosystems. The source has File_Mpega.cpp and File_Id3v2.cpp; its libzen dependency is a base utility library."
   }
 ]

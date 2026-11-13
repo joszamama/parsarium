@@ -4,7 +4,7 @@
   "status": "verified_below_target",
   "working_target": 20,
   "ceiling": 30,
-  "verified_third_party_count": 6,
+  "verified_third_party_count": 7,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "mp3",
@@ -16,7 +16,7 @@
   "search_hits_recorded": 38,
   "unique_search_hits": 38,
   "unresolved_documentation_leads": 2,
-  "uncertainty": "Six pinned open-source package paths passed the valid local MP3 with ID3v2.3 control in cpp: TagLib, mpg123, FFmpeg, libid3tag, id3lib, and libsndfile. Fourteen more verified paths are needed for the 20-path working goal. Four bounded Homebrew formula-name queries saved 38 hits and 38 unique names (first 100 per query); names are leads, not parser proof. Additional libraries outside Homebrew and two plausible recorded leads remain uncertain. TagLib C binding shares its C++ core, and the C and C++ mpg123, FFmpeg, and libid3tag calls use the same underlying engines. libid3tag parses ID3v2 metadata only and internally normalizes the 2.3 control to version 4; it does not decode MP3 audio. Homebrew install-on-request counts share one 365-day window within this cell but are not MP3-specific adoption. The control covers one small tagged MP3 only. No malformed-input, resource-use, or vulnerability experiments were run. id3lib adds C and C++ package APIs over one C++ tag parser engine. libsndfile reports the ID3v2 title and decodes one MP3 audio frame through its linked mpg123 backend; this shares an underlying engine with the mpg123 row.",
+  "uncertainty": "Seven pinned open-source package paths passed the valid local MP3 with ID3v2.3 control in cpp: TagLib, mpg123, FFmpeg, libid3tag, id3lib, libsndfile, and libmediainfo. Thirteen more verified paths are needed for the 20-path working goal. Four bounded Homebrew formula-name queries saved 38 hits and 38 unique names (first 100 per query); names are leads, not parser proof. Additional libraries outside Homebrew and two plausible recorded leads remain uncertain. C and C++ call sites for each package share their underlying engine; the TagLib and id3lib C APIs wrap C++ cores, and libsndfile shares mpg123 for MP3 and ID3v2 parsing. MediaInfoLib has its own MPEG audio and ID3v2 parser source members and links ZenLib as a utility dependency. libid3tag and id3lib parse ID3v2 tags without decoding MPEG audio. Homebrew install-on-request counts share one 365-day window within this cell but are not MP3-specific adoption. The control covers one small tagged MP3 only. No malformed-input, resource-use, or vulnerability experiments were run.",
   "third_party_evidence": "data/cpp/mp3_id3v2/parsers.json",
   "third_party_control_results": "data/cpp/mp3_id3v2/verification.json",
   "runtime_evidence": "data/cpp/mp3_id3v2/standard.json",

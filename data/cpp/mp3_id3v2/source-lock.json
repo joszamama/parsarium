@@ -133,5 +133,40 @@
       }
     ],
     "build_note": "Pinned release source, matching public header, Homebrew native library, and linked mpg123 dependency are SHA-256 checked. The source mpeg_decode.c explicitly calls mpg123_id3 and mpg123 audio decode."
+  },
+  "libmediainfo": {
+    "release": "26.10",
+    "installed_revision": "26.10",
+    "formula": "libmediainfo",
+    "license": "BSD-2-Clause",
+    "source_url": "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz",
+    "source_sha256": "a806fd36592549a03e810486f415a6858d4d8f14066bfbe97b32a447cd5eb590",
+    "repository": "https://github.com/MediaArea/MediaInfoLib",
+    "source_header_member": "MediaInfoLib/Source/MediaInfo/MediaInfo.h",
+    "local_header": "/opt/homebrew/Cellar/libmediainfo/26.10/include/MediaInfo/MediaInfo.h",
+    "local_header_sha256": "14962e87b4e4857be9b4f2688aef9806fe731531ff657c86ea7588dfd74d74a6",
+    "local_library": "/opt/homebrew/Cellar/libmediainfo/26.10/lib/libmediainfo.0.26.10.dylib",
+    "local_library_sha256": "425415cb513f651333cd68dfa6c0b26170f451be985882b4b7857c55f76ab050",
+    "pkg_config": "libmediainfo",
+    "license_member": "MediaInfoLib/LICENSE",
+    "license_sha256": "a8f0db97f62dbcff8e30edd5cac0f48a4b702bfa55f52b71214f9639133358af",
+    "source_engine_members": [
+      {
+        "member": "MediaInfoLib/Source/MediaInfo/Audio/File_Mpega.cpp",
+        "sha256": "36b6a17e50e27b2121dca9d42bd89cffb345646d05c923291da2fec2178b799d"
+      },
+      {
+        "member": "MediaInfoLib/Source/MediaInfo/Tag/File_Id3v2.cpp",
+        "sha256": "00509f78cc8aa6427f4888993f703a73f9dd893003bbdd66ec04c6aeea00d264"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libzen/0.4.41_1/lib/libzen.0.4.41.dylib",
+        "sha256": "8993e204b1fa04f367692706d3b886095bd2642a0d4617e5a004b775eb697ce5",
+        "role": "ZenLib base utility dependency"
+      }
+    ],
+    "build_note": "Pinned MediaArea 26.10 source and Homebrew native install. Public header exactly matches source and library is SHA-256 checked. Both MPEG audio and ID3v2 parser source members are pinned; linked ZenLib is pinned."
   }
 }
