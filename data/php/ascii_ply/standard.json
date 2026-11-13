@@ -1,0 +1,18 @@
+{
+  "ecosystem": "PHP",
+  "format": "ASCII PLY",
+  "runtime": "PHP built-in and bundled APIs",
+  "status": "none_documented_in_scoped_runtime",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "official_documentation_scope": [
+        "https://www.php.net/manual/en/function.fopen.php",
+        "https://www.php.net/manual/en/class.splfileobject.php",
+        "https://www.php.net/manual/en/book.ffi.php"
+      ],
+      "finding": "fopen and SplFileObject expose generic file or stream contents; FFI can call external C libraries. None is itself an ASCII PLY header, vertex, or face parser."
+    }
+  ],
+  "limit": "A wrapper over an external native parser would require its own qualifying released package and control run."
+}

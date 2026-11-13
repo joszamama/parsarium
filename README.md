@@ -21,9 +21,11 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 74 cells at the 20-parser target, twelve started below target, and 2
-marked `not_started`;
-a zero in those cells does **not** mean no parser exists. See the
+PHP × ASCII PLY and PHP × Matrix Market have bounded searches and runtime
+inventories, but zero verified parser paths so far.
+There are 74 cells at the 20-parser target and fourteen below target; all 88
+cells now have recorded search or verification work. A zero does **not** mean
+no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 ## Reproduce the verified cells
