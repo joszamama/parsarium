@@ -12,6 +12,7 @@ import tarfile
 import tempfile
 
 from prepare_lis import prepare_lis
+from prepare_lagraph import prepare_lagraph
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,6 +57,8 @@ def main() -> None:
         assert digest(archive) == source["source_sha256"]
         if source.get("source_build") == "lis":
             install, built_lib_sha256 = prepare_lis(source, archive, cache)
+        elif source.get("source_build") == "lagraph":
+            include, libdir, built_lib_sha256 = prepare_lagraph(source, archive, cache)
         else:
             with tarfile.open(archive) as tar:
                 for member, expected in source["source_members"].items():
@@ -130,6 +133,13 @@ def main() -> None:
                        "-I" + str(prefix / "include"), str(ROOT / parser["adapter"]),
                        "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
                        "-lHYPRE", "-o", str(target / name)]
+        elif name == "lagraph":
+            graphblas = Path(source["graphblas_prefix"])
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(include), "-I" + str(graphblas / "include/suitesparse"),
+                       str(ROOT / parser["adapter"]), "-L" + str(libdir),
+                       "-Wl,-rpath," + str(libdir), "-llagraph",
+                       "-L" + str(graphblas / "lib"), "-lgraphblas", "-o", str(target / name)]
         elif name == "lis":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),
@@ -148,7 +158,7 @@ def main() -> None:
         if source.get("dependencies"):
             local_libraries[name]["dependency_source_sha256"] = {
                 dep["name"]: dep["source_sha256"] for dep in source["dependencies"]}
-        if source.get("source_build") == "lis":
+        if source.get("source_build") in ("lis", "lagraph"):
             local_libraries[name]["built_lib_sha256"] = built_lib_sha256
         print(f"{name}@{parser['version']}: C++ Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

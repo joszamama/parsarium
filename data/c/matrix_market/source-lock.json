@@ -53,5 +53,27 @@
       "/opt/homebrew/Cellar/hypre/3.2.1/lib/libHYPRE.3.2.1.dylib": "01934d949c190db8d1d2b51a5876b1189bbbaee595628665b80a7b7c1464ade2"
     },
     "build_note": "Official v3.2.1 source release; Homebrew header and dylib pinned. mpicc/mpic++ Open MPI 5.0.11 builds serial MPI_COMM_SELF adapters calling HYPRE_IJMatrixReadMM."
+  },
+  "lagraph": {
+    "release": "1.2.2",
+    "source_build": "lagraph",
+    "archive_root": "LAGraph-1.2.2",
+    "license": "BSD-2-Clause",
+    "source_url": "https://github.com/GraphBLAS/LAGraph/archive/refs/tags/v1.2.2.tar.gz",
+    "source_sha256": "91122a47d330fee5e4f46f320be0a35b65786fc7209639bf2b1ffcd1c417a362",
+    "source_members": {
+      "LAGraph-1.2.2/LICENSE": "d92d9b022d4b8ee7baa11e750f396ab333f257b08d389d5615997e13eec70c79",
+      "LAGraph-1.2.2/CMakeLists.txt": "ba5dceb13d2bf45cada63782a5cd53ab3356cb553d9797d82d21fc6fd0ce4fbd",
+      "LAGraph-1.2.2/Config/LAGraph.h.in": "461b9e040bb8abcb1bc59573366138f5d413510dd81a22f0f3857de4cd97c392",
+      "LAGraph-1.2.2/src/utility/LAGraph_MMRead.c": "4cc271b2179ec3fa3e14fca48f7431bd3b17a719259311920e8b7dda2bf1bd78"
+    },
+    "graphblas_prefix": "/opt/homebrew/Cellar/suite-sparse/7.14.1",
+    "libomp_prefix": "/opt/homebrew/Cellar/libomp/23.1.5",
+    "installed_files": {
+      "/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse/GraphBLAS.h": "a85270bb8fe6fd74bb845605f024f8c09ef1b7948d541ef36d041e36e4030040",
+      "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libgraphblas.10.5.1.dylib": "5a1e5ac5498332ef2d21890c24222ca71c2c5189b06889b4f3846a98225025e0",
+      "/opt/homebrew/Cellar/libomp/23.1.5/lib/libomp.dylib": "7285a6bbafef71b0275912ad005f04179e971abe79a1093aa9a8cf674e21d3cd"
+    },
+    "build_note": "Official v1.2.2 source, archived and member-hash-pinned. Build the LAGraph shared library with CMake against pinned SuiteSparse GraphBLAS 10.5.1 and libomp 23.1.5; LAGraph OpenMP is disabled, but the installed GraphBLAS CMake config requires discovery of OpenMP. C and C++ call sites share this LAGraph reader and GraphBLAS backend."
   }
 }

@@ -4,7 +4,7 @@
   "status": "verified_below_target",
   "working_target": 20,
   "ceiling": 30,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "matrix",
@@ -15,7 +15,7 @@
   "search_hits_recorded": 20,
   "unique_search_hits": 19,
   "unresolved_documentation_leads": 18,
-  "uncertainty": "Three pinned C package paths, SuiteSparse 7.14.1 CHOLMOD Check, Lis 2.1.23, and HYPRE 3.2.1, parsed valid Matrix Market controls; 17 more are needed for the working target. SuiteSparse and HYPRE accepted the 2x3 real general control; Lis accepted the square symmetric control. Three Homebrew formula-name searches recorded 20 hits and 19 unique names, first 100 per query; 18 fuzzy hits remain unverified. Targeted SuiteSparse documentation establishes the Matrix Market reader. Projects outside these search surfaces may be missing. The control covers one real general coordinate matrix; other Matrix Market variants remain untested. No malformed-input, resource-use or vulnerability experiments were run. SuiteSparse shares the CHOLMOD parser family with the C++ call site. Lis parses a square symmetric control, rejects the rectangular general control, has no comparable Homebrew requested-install count, and remains unranked. HYPRE 3.2.1 was verified through its documented HYPRE_IJMatrixReadMM local-file API on the 2x3 real coordinate control; it returned rows=2, cols=3, nnz=3 and entry (1,3)=-2. The C and C++ call sites share one native parser family. Official tagged source, installed header and dylib hashes, Open MPI 5.0.11 adapter commands, and the 365-day Homebrew requested-install count of 324 are recorded. The cell now has 3 verified third-party package paths and needs 17 more for the working target.",
+  "uncertainty": "4 tagged or released third-party C package paths parsed valid Matrix Market controls; 16 more are needed for the working target. Three bounded Homebrew formula-name searches saved 20 hits and 19 unique names, taking at most the first 100 per query; 18 name hits remain unverified. Targeted project documentation found additional leads outside those searches. Lis used a square symmetric matrix; SuiteSparse, HYPRE, and LAGraph used the 2x3 real general coordinate control. Other Matrix Market variants and parser projects outside the search surfaces remain uncertain. No malformed-input, resource-use, or vulnerability experiments were run. SuiteSparse CHOLMOD, Lis, HYPRE, and LAGraph each have one shared underlying parser across the C and C++ call sites. LAGraph uses SuiteSparse GraphBLAS for matrix storage but has its own Matrix Market reader. Homebrew requested-install counts are comparable only among formulae in this ecosystem; packages without a formula, including LAGraph, remain unranked.",
   "third_party_evidence": "data/c/matrix_market/parsers.json",
   "third_party_control_results": "data/c/matrix_market/verification.json",
   "runtime_evidence": "data/c/matrix_market/standard.json",

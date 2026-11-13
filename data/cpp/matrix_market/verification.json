@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T07:43:16.829061+00:00",
+  "checked_at_utc": "2026-11-13T07:49:50.905608+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "f43a6c390de7f0733d324cc7371fca4869352439068b5739a4bc22067b014da0"
+      "built_lib_sha256": "7be503bd0f4f8824eb0d6bdb322f32914d3704bd56541e2be4c579d93992f550"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -59,6 +59,15 @@
         "/opt/homebrew/Cellar/hypre/3.2.1/include/HYPRE_IJ_mv.h": "f48e402b5ae062f21ae017a6c6682f133ca3db4d03431bf99fbe7132737058ca",
         "/opt/homebrew/Cellar/hypre/3.2.1/lib/libHYPRE.3.2.1.dylib": "01934d949c190db8d1d2b51a5876b1189bbbaee595628665b80a7b7c1464ade2"
       }
+    },
+    "lagraph": {
+      "source_sha256": "91122a47d330fee5e4f46f320be0a35b65786fc7209639bf2b1ffcd1c417a362",
+      "installed_files": {
+        "/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse/GraphBLAS.h": "a85270bb8fe6fd74bb845605f024f8c09ef1b7948d541ef36d041e36e4030040",
+        "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libgraphblas.10.5.1.dylib": "5a1e5ac5498332ef2d21890c24222ca71c2c5189b06889b4f3846a98225025e0",
+        "/opt/homebrew/Cellar/libomp/23.1.5/lib/libomp.dylib": "7285a6bbafef71b0275912ad005f04179e971abe79a1093aa9a8cf674e21d3cd"
+      },
+      "built_lib_sha256": "25007b80f0545d5a859ed04de332868676f340119d5abd4d1faaa6adcda757e2"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -182,6 +191,20 @@
       "control": "controls/matrix_market/real-general.mtx",
       "build_command": "mpic++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/hypre/3.2.1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/hypre.cpp -L/opt/homebrew/Cellar/hypre/3.2.1/lib -Wl,-rpath,/opt/homebrew/Cellar/hypre/3.2.1/lib -lHYPRE -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/hypre",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/hypre /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "lagraph",
+      "version": "1.2.2",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/LAGraph-1.2.2/include -I/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/lagraph.cpp -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/lagraph-build/src -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/lagraph-build/src -llagraph -L/opt/homebrew/Cellar/suite-sparse/7.14.1/lib -lgraphblas -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/lagraph",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/lagraph /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
       "output": {
         "rows": 2,
         "cols": 3,
