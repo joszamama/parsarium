@@ -207,5 +207,31 @@
     "scope": "ASCII PLY triangle vertices, triangulated face and parsed indices",
     "family": "SceneView Core pure Kotlin PLY parser",
     "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core\u2019s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
+  },
+  {
+    "name": "irurueta-geometry-io",
+    "group": "com.irurueta",
+    "artifact": "irurueta-geometry-io",
+    "version": "1.6.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/albertoirurueta/irurueta-geometry-io/blob/1.6.0/LICENSE.txt",
+    "input_api": "new LoaderPLY(File local path).load(); iterate DataChunk vertices and face indices",
+    "documentation": "https://www.irurueta.com/irurueta-geometry-io/1.6.0/format-ply.html",
+    "family": "Irurueta Geometry I/O native Java PLY reader",
+    "scope": "ASCII PLY triangle vertices, face and parsed indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/irurueta/src/main/java/org/parsarium/IruruetaPlyAdapter.java",
+    "adapter_module": "irurueta",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "source_lock": "data/java/ascii_ply/irurueta-lock.json",
+    "family_note": "Separate Java implementation; exact-release deps.dev public direct dependents are zero, which does not establish wide adoption."
   }
 ]
