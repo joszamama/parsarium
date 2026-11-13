@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T07:49:50.905608+00:00",
+  "checked_at_utc": "2026-11-13T07:59:07.566138+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "7be503bd0f4f8824eb0d6bdb322f32914d3704bd56541e2be4c579d93992f550"
+      "built_lib_sha256": "fa16361620f1ada1eb5f0926a81dc142f3af52be612f42ac50ee72923fec0149"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -68,6 +68,11 @@
         "/opt/homebrew/Cellar/libomp/23.1.5/lib/libomp.dylib": "7285a6bbafef71b0275912ad005f04179e971abe79a1093aa9a8cf674e21d3cd"
       },
       "built_lib_sha256": "25007b80f0545d5a859ed04de332868676f340119d5abd4d1faaa6adcda757e2"
+    },
+    "librsb": {
+      "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
+      "installed_files": {},
+      "built_lib_sha256": "6f7db87edcfa8eebf44d7b7e86ae7182ae73cbd8b1e1e0fab8bc51861dbd022a"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -205,6 +210,20 @@
       "control": "controls/matrix_market/real-general.mtx",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/LAGraph-1.2.2/include -I/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/lagraph.cpp -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/lagraph-build/src -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/lagraph-build/src -llagraph -L/opt/homebrew/Cellar/suite-sparse/7.14.1/lib -lgraphblas -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/lagraph",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/lagraph /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "librsb",
+      "version": "1.3.0.3",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/librsb-build/install/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/librsb.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/librsb-build/install/lib/librsb.a -lm -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/librsb",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/librsb /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
       "output": {
         "rows": 2,
         "cols": 3,

@@ -1,6 +1,6 @@
 # C++ × Matrix Market: verified parser ranking
 
-10 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+11 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -14,6 +14,7 @@
 | unranked | [lis](https://www.ssisc.org/lis/) | 2.1.23 | unknown | 3×3 symmetric matrix and three nonzeros | Lis native Matrix Market reader |
 | unranked | [MTL5](https://github.com/stillwater-sc/mtl5/blob/v5.23.0/include/mtl/io/matrix_market.hpp) | 5.23.0 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | MTL5 native Matrix Market reader |
 | unranked | [LAGraph](https://lagraph.readthedocs.io/en/latest/utils.html) | 1.2.2 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | LAGraph native Matrix Market reader |
+| unranked | [librsb](https://librsb.sourceforge.net/doc/1.3.0.0/group__rsb__doc__rsb.html) | 1.3.0.3 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | librsb native Matrix Market loader |
 
 Formula-name hits are leads rather than parser proof. The SuiteSparse and Lis paths each share an underlying parser with their C call sites. Lis accepts the square symmetric control and rejects the rectangular general control. The C++ standard library has no documented Matrix Market parser. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -24,3 +25,5 @@ MTL5 5.23.0 is a tagged MIT header-only C++20 reader. Its valid local-file contr
 HYPRE 3.2.1 parsed the valid local Matrix Market control through `HYPRE_IJMatrixReadMM`. Its C and C++ call sites share one native parser family; 324 requested installs use the same Homebrew 365-day window as the other ranked packages.
 
 LAGraph 1.2.2 parsed the local Matrix Market control through `LAGraph_MMRead(FILE *)`. Its C and C++ adapters share the LAGraph reader, backed by SuiteSparse GraphBLAS for matrix storage. The reader is distinct from CHOLMOD Check. LAGraph has no comparable Homebrew requested-install count and remains unranked.
+
+librsb 1.3.0.3 parsed the control through `rsb_file_mtx_load(local filename)`. Its C and C++ adapters share one native reader. The official LGPL-3.0-or-later release is source-pinned and built locally; no comparable Homebrew requested-install count was available.

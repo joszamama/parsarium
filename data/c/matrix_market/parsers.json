@@ -71,5 +71,24 @@
     "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
     "family": "LAGraph native Matrix Market reader",
     "family_note": "C and C++ adapters call the same LAGraph_MMRead implementation, backed by SuiteSparse GraphBLAS for matrix storage. Distinct parser from CHOLMOD Check."
+  },
+  {
+    "name": "librsb",
+    "version": "1.3.0.3",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://librsb.sourceforge.net/#license",
+    "documentation": "https://librsb.sourceforge.net/doc/1.3.0.0/group__rsb__doc__rsb.html",
+    "input_api": "rsb_file_mtx_load(local filename, RSB_FLAG_NOFLAGS, RSB_NUMERICAL_TYPE_DOUBLE, &error)",
+    "adapter": "adapters/c/matrix_market/librsb.c",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
+    "family": "librsb native Matrix Market loader",
+    "family_note": "C and C++ adapters call the same native rsb_file_mtx_load implementation in librsb 1.3.0.3."
   }
 ]
