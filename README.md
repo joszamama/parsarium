@@ -213,10 +213,10 @@ separately, and source-to-binary equivalence is unestablished. One
 lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
-The C × SVG batch verifies **6/20 paths** and C++ × SVG verifies **7/20**.
+The C × SVG batch verifies **6/20 paths** and C++ × SVG verifies **8/20**.
 librsvg, libvips, ImageMagick, GraphicsMagick, resvg, and PlutoSVG read the
 local 2×1 SVG and render the expected red and green pixels in both ecosystems;
-LunaSVG does so through its C++ document API. The pinned libvips build links librsvg;
+LunaSVG and QtSvg do so through their C++ document APIs. The pinned libvips build links librsvg;
 ImageMagick uses its internal MSVG coder and GraphicsMagick uses its separate
 SVG coder, both over system libxml2. resvg is source-built from a pinned
 Cargo lock and supplies a separate Rust SVG engine. PlutoSVG and LunaSVG
