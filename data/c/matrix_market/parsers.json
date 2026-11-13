@@ -107,7 +107,26 @@
       "entry_3_3": 3.0
     },
     "scope": "3x3 real symmetric coordinate matrix, three diagonal nonzeros, entry (3,3) = 3",
-    "family": "SuperLU native dreadMM reader",
-    "family_note": "C and C++ adapters call the same installed SuperLU dreadMM implementation; it requires a square input matrix."
+    "family": "SuperLU dreadMM reader lineage",
+    "family_note": "C and C++ adapters call the same installed SuperLU dreadMM implementation; it requires a square input matrix. SuperLU_DIST has a closely related reader in a separate package and build."
+  },
+  {
+    "name": "superlu-dist",
+    "version": "9.3.0",
+    "license": "BSD-3-Clause-LBNL",
+    "license_evidence": "https://github.com/xiaoyeli/superlu_dist/blob/v9.3.0/License.txt",
+    "documentation": "https://github.com/xiaoyeli/superlu_dist/blob/v9.3.0/README.md",
+    "input_api": "dreadMM_dist(local FILE *, &rows, &cols, &nonzeros, &values, &row_ids, &col_ptrs)",
+    "adapter": "adapters/c/matrix_market/superlu_dist.c",
+    "control": "controls/matrix_market/real-symmetric.mtx",
+    "expected_output": {
+      "rows": 3,
+      "cols": 3,
+      "nnz": 3,
+      "entry_3_3": 3.0
+    },
+    "scope": "3x3 real symmetric coordinate matrix, three diagonal nonzeros, entry (3,3) = 3",
+    "family": "SuperLU dreadMM reader lineage",
+    "family_note": "Separate SuperLU_DIST package and build; its dreadMM_dist implementation is closely related to SuperLU dreadMM. C and C++ adapters call the same SuperLU_DIST parser."
   }
 ]

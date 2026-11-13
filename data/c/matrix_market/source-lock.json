@@ -109,5 +109,25 @@
       "/opt/homebrew/Cellar/superlu/7.0.1/lib/libsuperlu.7.0.1.dylib": "dae8ed3a37757238d5fd9abfe9c3e4e144fcdae861b2b4d95723ba87009e4b23"
     },
     "build_note": "Official SuperLU v7.0.1 source, installed Homebrew header and dylib hash-pinned. pkg-config supplies link flags. The documented dreadMM FILE* API only accepts square coordinate real matrices; this control is a valid square symmetric matrix."
+  },
+  "superlu-dist": {
+    "release": "9.3.0",
+    "source_build": "superlu_dist",
+    "archive_root": "superlu_dist-9.3.0",
+    "license": "BSD-3-Clause-LBNL",
+    "source_url": "https://github.com/xiaoyeli/superlu_dist/archive/refs/tags/v9.3.0.tar.gz",
+    "source_sha256": "fea235f3d04e60797dc36528b54c2e240c6ff84fa0f1fde637baa1ad1be450ee",
+    "source_members": {
+      "superlu_dist-9.3.0/License.txt": "f0cedf52503b2d42b83411a0a16e6fefac346dfad8fddc66f50050150123470c",
+      "superlu_dist-9.3.0/README.md": "6295d438a5f58903147702f5ae51f8f91c7efc0c61c6f8b9d2bb5ffb59f5c900",
+      "superlu_dist-9.3.0/SRC/double/dreadMM.c": "b2f9acaeb6d8f88d54b1439319773f80b240bcd9fc84b6c69aa01143b6718c2f",
+      "superlu_dist-9.3.0/SRC/include/superlu_ddefs.h": "082ca34884babf07bd1047e032c6286f27b8e8dbaa75a222f2a2b48826fc784d",
+      "superlu_dist-9.3.0/CMakeLists.txt": "bfe0d38361dd77dee05b8350ddadf4002e604fb7423b3a97ccd093e34fbd0c42"
+    },
+    "openblas_prefix": "/opt/homebrew/Cellar/openblas/0.3.34",
+    "installed_files": {
+      "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
+    },
+    "build_note": "Official v9.3.0 source and key members hash-pinned. Build the CPU double-precision shared library with CMake, Open MPI wrappers and pinned OpenBLAS 0.3.34; disable examples, tests, Python, Fortran, and ParMETIS. The built dylib hash is recorded in verification. The dreadMM_dist FILE* reader requires square coordinate real input and belongs to the SuperLU dreadMM reader lineage."
   }
 }

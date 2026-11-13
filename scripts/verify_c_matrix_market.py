@@ -14,6 +14,7 @@ import tempfile
 from prepare_lis import prepare_lis
 from prepare_lagraph import prepare_lagraph
 from prepare_librsb import prepare_librsb
+from prepare_superlu_dist import prepare_superlu_dist
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,6 +63,8 @@ def main() -> None:
             include, libdir, built_lib_sha256 = prepare_lagraph(source, archive, cache)
         elif source.get("source_build") == "librsb":
             install, built_lib_sha256 = prepare_librsb(source, archive, cache)
+        elif source.get("source_build") == "superlu_dist":
+            include, libdir, built_lib_sha256 = prepare_superlu_dist(source, archive, cache)
         else:
             with tarfile.open(archive) as tar:
                 for member, expected in source["source_members"].items():
@@ -102,6 +105,11 @@ def main() -> None:
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "superlu"]))
             command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
+        elif name == "superlu-dist":
+            command = ["mpicc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(include), str(ROOT / parser["adapter"]),
+                       "-L" + str(libdir), "-Wl,-rpath," + str(libdir),
+                       "-lsuperlu_dist", "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
@@ -113,7 +121,7 @@ def main() -> None:
                      "output": output, "pass": True})
         local_libraries[name] = {"source_sha256": source["source_sha256"],
                                  "installed_files": source.get("installed_files", {})}
-        if source.get("source_build") in ("lis", "lagraph", "librsb"):
+        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist"):
             local_libraries[name]["built_lib_sha256"] = built_lib_sha256
         print(f"{name}@{parser['version']}: C Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T08:11:46.070147+00:00",
+  "checked_at_utc": "2026-11-13T08:19:35.835773+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "ff779fb391f20d98b3f080b4e263e76cf8a5dc44320a1a208c6c9cba5182c70f"
+      "built_lib_sha256": "9483275118eef3cae4ae56932bec8f96a15a9230cd74b983a5e7ba14a5adb682"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -72,7 +72,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "c8e6928e0c2438c18821e1e26481408e6deb19c6d6ce154a0ace32dd9240a2b6"
+      "built_lib_sha256": "1badbd810a5cb66a3b41b0aefd102d128bdb66f1fb0840e4dc367371ca02a2e0"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -84,6 +84,13 @@
     "pigo": {
       "source_sha256": "6c3a496463ed59d6da01eca680920e9cbf1ff430390adbf788544058431351bf",
       "installed_files": {}
+    },
+    "superlu-dist": {
+      "source_sha256": "fea235f3d04e60797dc36528b54c2e240c6ff84fa0f1fde637baa1ad1be450ee",
+      "installed_files": {
+        "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
+      },
+      "built_lib_sha256": "3a00cb30690869f6f07be482550698e54c41cdc27736240b3152faa8e26904e0"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -268,6 +275,20 @@
         "reported_cols": 4,
         "nnz": 3,
         "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "superlu-dist",
+      "version": "9.3.0",
+      "control": "controls/matrix_market/real-symmetric.mtx",
+      "build_command": "mpic++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/superlu_dist-9.3.0/SRC/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/superlu_dist.cpp -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/superlu-dist-build/SRC -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/superlu-dist-build/SRC -lsuperlu_dist -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/superlu-dist",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/superlu-dist /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-symmetric.mtx",
+      "output": {
+        "rows": 3,
+        "cols": 3,
+        "nnz": 3,
+        "entry_3_3": 3
       },
       "pass": true
     }

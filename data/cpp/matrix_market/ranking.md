@@ -1,12 +1,12 @@
 # C++ × Matrix Market: verified parser ranking
 
-13 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+14 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [eigen](https://libeigen.gitlab.io/eigen/docs-nightly/unsupported/group__SparseExtra__Module.html) | 5.0.1 | 16,505 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Eigen SparseExtra MarketIO |
 | 2 | [suite-sparse](https://github.com/DrTimothyAldenDavis/SuiteSparse/blob/v7.14.1/CHOLMOD/Check/cholmod_read.c) | 7.14.1 | 10,821 | 2×3 real coordinate matrix and three nonzeros | SuiteSparse CHOLMOD Check reader |
-| 3 | [SuperLU](https://github.com/xiaoyeli/superlu/blob/v7.0.1/SRC/dreadMM.c) | 7.0.1 | 333 | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU native dreadMM reader |
+| 3 | [SuperLU](https://github.com/xiaoyeli/superlu/blob/v7.0.1/SRC/dreadMM.c) | 7.0.1 | 333 | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU dreadMM reader lineage |
 | 4 | [HYPRE](https://hypre.readthedocs.io/en/latest/api-int-ij.html) | 3.2.1 | 324 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | HYPRE native IJ Matrix Market reader |
 | 5 | [ginkgo](https://gko-project.org/user-guide/how-to/using/read-write-matrices.html) | 1.11.0 | 166 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Ginkgo native Matrix Market reader |
 | 6 | [ViennaCL](https://viennacl.sourceforge.net/doc/iterative_8cpp-example.html) | 1.7.1 | 62 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | ViennaCL native Matrix Market reader |
@@ -17,6 +17,7 @@
 | unranked | [LAGraph](https://lagraph.readthedocs.io/en/latest/utils.html) | 1.2.2 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | LAGraph native Matrix Market reader |
 | unranked | [librsb](https://librsb.sourceforge.net/doc/1.3.0.0/group__rsb__doc__rsb.html) | 1.3.0.3 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | librsb native Matrix Market loader |
 | unranked | [PIGO](https://github.com/GT-TDAlab/PIGO/blob/v0.6/tests/coo/test_weight_mtx.cpp) | 0.6 | unknown | three 1-based entries and value −2 at (1,3); reports dimensions 3×4 for a 2×3 file | PIGO native COO reader |
+| unranked | [SuperLU_DIST](https://github.com/xiaoyeli/superlu_dist/blob/v9.3.0/README.md) | 9.3.0 | unknown | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU dreadMM reader lineage |
 
 Formula-name hits are leads rather than parser proof. The SuiteSparse and Lis paths each share an underlying parser with their C call sites. Lis accepts the square symmetric control and rejects the rectangular general control. The C++ standard library has no documented Matrix Market parser. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -33,3 +34,5 @@ librsb 1.3.0.3 parsed the control through `rsb_file_mtx_load(local filename)`. I
 SuperLU 7.0.1 parsed the valid square symmetric control through `dreadMM(FILE *)`. Its source rejects rectangular matrices. The C and C++ adapters share one native reader; 333 Homebrew requested installs are recorded in the same 365-day window.
 
 PIGO v0.6 parsed the three weighted coordinate entries in the valid 2×3 real general control. Its API reported `nrows=3` and `ncols=4`, one greater than the header in both cases; the adapter reports those raw values. No comparable Homebrew requested-install count is available, so PIGO remains unranked.
+
+SuperLU_DIST 9.3.0 parsed the valid square control through `dreadMM_dist(FILE *)`. It is a separate released package and build whose reader shares the SuperLU dreadMM lineage. Its C and C++ adapters share one native implementation. No comparable Homebrew requested-install count is available, so it remains unranked.
