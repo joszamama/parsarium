@@ -206,7 +206,7 @@
     },
     "scope": "ASCII PLY triangle vertices, triangulated face and parsed indices",
     "family": "SceneView Core pure Kotlin PLY parser",
-    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core’s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
+    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core\u2019s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
   },
   {
     "name": "irurueta-geometry-io",
@@ -258,7 +258,7 @@
       ]
     },
     "source_lock": "data/java/ascii_ply/materia-lock.json",
-    "family_note": "Tagged JVM artifact exposes a Java-callable coroutine API over Materia’s Kotlin PLY parser. Project stars are auxiliary, not exact-release dependent counts or PLY-specific use."
+    "family_note": "Tagged JVM artifact exposes a Java-callable coroutine API over Materia\u2019s Kotlin PLY parser. Project stars are auxiliary, not exact-release dependent counts or PLY-specific use."
   },
   {
     "name": "kotlin-assimp",
@@ -447,5 +447,29 @@
       ]
     },
     "release_note": "The full Maven transitive dependency graph references an unavailable JNLP system JAR; this reader control needs only the pinned jmist-core and eandb-util JARs."
+  },
+  {
+    "name": "bteterrarenderer-draco",
+    "group": null,
+    "artifact": "draco source module",
+    "version": "v1.03.4",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned v1.03.4 LICENSE and Apache-2.0 header in the PLY reader source",
+    "input_api": "new PlyReader().read(DecoderBuffer initialized from local InputStream); getElementByName and PlyPropertyReader inspect parsed elements and coordinates",
+    "documentation": "https://github.com/tf2mandeokyi/BTETerraRenderer/blob/v1.03.4/draco/src/test/java/com/mndk/bteterrarenderer/draco/io/PlyReaderTest.java",
+    "family": "BTETerraRenderer Java translation of Draco PLY reader",
+    "family_note": "The draco module translates Draco C++ code into Java; it contains its own PlyReader and is a source-built library module, not a separately observed Maven artifact. Its origin is the Draco parser family; no other Java cell path here uses this Java translation.",
+    "scope": "ASCII PLY triangle, three parsed vertices, one face and second vertex X coordinate",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/bte_draco/BteDracoPlyAdapter.java",
+    "adapter_module": "bte_draco",
+    "source_lock": "data/java/ascii_ply/bte-draco-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1.0
+    },
+    "release_note": "Pinned official v1.03.4 source release; isolated javac builds the draco library module and three common utilities because the root Gradle project configures unrelated game-mod builds.",
+    "source_kind": "source_build"
   }
 ]
