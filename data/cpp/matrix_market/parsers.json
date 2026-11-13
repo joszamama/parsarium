@@ -71,8 +71,8 @@
       "entry_1_3": -2.0
     },
     "scope": "Matrix Market banner, dimensions, three real coordinate entries, and value at (1,3)",
-    "family": "eminem native parser over byteme input",
-    "family_note": "The pinned byteme and sanisizer dependencies provide byte input and sizing, while eminem parses Matrix Market syntax."
+    "family": "eminem Matrix Market parser",
+    "family_note": "eminem provides the parser also used by tatami_mtx, which adds a tatami matrix wrapper."
   },
   {
     "name": "ginkgo",
@@ -261,5 +261,23 @@
     "scope": "3x3 real symmetric coordinate matrix, three diagonal nonzeros, entry (3,3) = 3",
     "family": "SuperLU dreadMM reader lineage",
     "family_note": "Separate SuperLU_DIST package and build; its dreadMM_dist implementation is closely related to SuperLU dreadMM. C and C++ adapters call the same SuperLU_DIST parser."
+  },
+  {
+    "name": "tatami-mtx",
+    "version": "2.1.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/tatami-inc/tatami_mtx/blob/v2.1.2/LICENSE",
+    "documentation": "https://github.com/tatami-inc/tatami_mtx/blob/v2.1.2/README.md",
+    "input_api": "tatami_mtx::load_matrix_from_text_file<double,int>(local filename, options)",
+    "adapter": "adapters/cpp/matrix_market/tatami_mtx.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real coordinate matrix and entry (1,3) = -2",
+    "family": "eminem Matrix Market parser",
+    "family_note": "tatami_mtx adds a tatami matrix wrapper around the eminem parser; it is a distinct package path sharing that parser family."
   }
 ]

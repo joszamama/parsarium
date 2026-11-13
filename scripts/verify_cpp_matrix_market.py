@@ -117,6 +117,12 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "tatami-mtx":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(cache / source["archive_root"] / "include"),
+                       *[flag for dep in source["dependencies"]
+                         for flag in ("-isystem", str(cache / dep["archive_root"] / "include"))],
+                       str(ROOT / parser["adapter"]), "-lz", "-o", str(target / name)]
         elif name == "eminem":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),

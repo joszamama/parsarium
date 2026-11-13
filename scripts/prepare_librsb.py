@@ -31,7 +31,7 @@ def prepare_librsb(source: dict, archive: Path, cache: Path) -> tuple[Path, str]
     install = work / "install"
     for command in (
         ["sh", "./configure", "--prefix=" + str(install), "--disable-openmp",
-         "--disable-shared", "--enable-static"],
+         "--disable-shared", "--enable-static", "FC="],
         ["gmake", "-j8"],
         ["gmake", "install"],
     ):

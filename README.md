@@ -1172,8 +1172,8 @@ or quality judgment.
   13 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
   19 unique names; 18 remain unverified.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE, LAGraph, librsb, SuperLU, PIGO, and SuperLU_DIST verified on valid
-  Matrix Market controls, 6 below the working goal. PIGO's raw API reports dimensions one greater than the valid file header. Their source releases, relevant installed headers
+  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE, LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, and tatami_mtx verified on valid
+  Matrix Market controls, 5 below the working goal. PIGO's raw API reports dimensions one greater than the valid file header. Their source releases, relevant installed headers
   and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
   unverified. The header-only packages, LAGraph, librsb, PIGO, and SuperLU_DIST have no comparable Homebrew install

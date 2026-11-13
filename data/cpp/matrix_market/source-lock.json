@@ -223,7 +223,7 @@
       "librsb-1.3.0.3/rsb_rsb.c": "0e0ebaaf570391857c510edee71a7e9551ad32ba58a1cff58568e5ba906c4694",
       "librsb-1.3.0.3/configure": "d51e4d4ebc3cac35b84ae2397e4521a6d6b667209faf6bce29ef0b5070a24d11"
     },
-    "build_note": "Official SourceForge 1.3.0.3 release with source archive and key members hash-pinned. Configure a serial, static build with OpenMP disabled, build with gmake, and install under a temporary directory. The installed rsb.h must match the pinned source member. The static library hash is recorded at verification time. The C adapter links libc++ because the official archive includes C++ objects; both call sites use the same rsb_file_mtx_load C implementation."
+    "build_note": "Official SourceForge 1.3.0.3 release with source archive and key members hash-pinned. Configure a serial, static build with OpenMP and Fortran disabled, build with gmake, and install under a temporary directory. The installed rsb.h must match the pinned source member. The static library hash is recorded at verification time. The C adapter links libc++ because the official archive includes C++ objects; both call sites use the same rsb_file_mtx_load C implementation."
   },
   "superlu": {
     "release": "7.0.1",
@@ -279,5 +279,83 @@
       "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
     },
     "build_note": "Official v9.3.0 source and key members hash-pinned. Build the CPU double-precision shared library with CMake, Open MPI wrappers and pinned OpenBLAS 0.3.34; disable examples, tests, Python, Fortran, and ParMETIS. The built dylib hash is recorded in verification. The dreadMM_dist FILE* reader requires square coordinate real input and belongs to the SuperLU dreadMM reader lineage."
+  },
+  "tatami-mtx": {
+    "release": "2.1.2",
+    "source_build": "header_only",
+    "archive_root": "tatami_mtx-2.1.2",
+    "license": "MIT",
+    "source_url": "https://github.com/tatami-inc/tatami_mtx/archive/refs/tags/v2.1.2.tar.gz",
+    "source_sha256": "0fd9702cbeb289469b0999712ed81dc102a8dd51f0d793cd9a3c2b97e5459f4f",
+    "source_members": {
+      "tatami_mtx-2.1.2/LICENSE": "60668e625fc5fed6fd5db32bcc1d4972db19f15fef90691af203eb1141477279",
+      "tatami_mtx-2.1.2/README.md": "5a5d2716ae5f3d31dadc5f01ad4aa3da21f88b7d314171b888c1cfee12fbf748",
+      "tatami_mtx-2.1.2/include/tatami_mtx/load_matrix.hpp": "551fabe6012953206b11e024babe891f76b5b01491e6914d8e7f1ad74678ce36",
+      "tatami_mtx-2.1.2/include/tatami_mtx/tatami_mtx.hpp": "e65a757988386bc67844a2984e06e4a80c43bb89c57ab224f707a202b01a5e76"
+    },
+    "dependencies": [
+      {
+        "name": "tatami",
+        "release": "4.0.3",
+        "archive_root": "tatami-4.0.3",
+        "source_url": "https://github.com/tatami-inc/tatami/archive/refs/tags/v4.0.3.tar.gz",
+        "source_sha256": "3ab6939ad875d356f9ae523d648c5b6d591ba0e1fc72c3f579dd6b1fdd4ba98e",
+        "source_members": {
+          "tatami-4.0.3/LICENSE": "da794808d66c51fe69f7d546f3df69b0f2d1377db9ee89cf2d65e5c6a4c1265f",
+          "tatami-4.0.3/include/tatami/tatami.hpp": "e3891057b1958ae940056f3539f75c78b2481f1f231ac2d575ac47e5b7b73d38"
+        }
+      },
+      {
+        "name": "subpar",
+        "release": "0.4.0",
+        "archive_root": "subpar-0.4.0",
+        "source_url": "https://github.com/LTLA/subpar/archive/refs/tags/v0.4.0.tar.gz",
+        "source_sha256": "558ead424489b5d3b4c38405881df34e3aabaef9927421e15ffb1ccb0479f648",
+        "source_members": {
+          "subpar-0.4.0/LICENSE": "da794808d66c51fe69f7d546f3df69b0f2d1377db9ee89cf2d65e5c6a4c1265f",
+          "subpar-0.4.0/include/subpar/subpar.hpp": "7274111d76443dd9aff372537ac5ec955660549c9ef6a5605774f20fc9efd319"
+        }
+      },
+      {
+        "name": "eminem",
+        "release": "1.2.3",
+        "archive_root": "eminem-1.2.3",
+        "source_url": "https://github.com/tatami-inc/eminem/archive/refs/tags/v1.2.3.tar.gz",
+        "source_sha256": "63a4a44e3f9ca3b2edb2207fa19fa286522967106e895abe8765b47cf8e9225d",
+        "source_members": {
+          "eminem-1.2.3/include/eminem/eminem.hpp": "c037fc4edd6f90d22fb6d9fb518dfa9c7682be5c71fc6a832507c4776095d8cb",
+          "eminem-1.2.3/include/eminem/Parser.hpp": "a08a40a40582b333ba87748d827386ec73d1eecc4d0e39722d78be90bcc7f876",
+          "eminem-1.2.3/include/eminem/from_text.hpp": "1bbdfca11cda5f2fe9dfa8aac62421c0cdd4dcf22451fb078e30ff6d3aec555a",
+          "eminem-1.2.3/extern/CMakeLists.txt": "73383b8fd822c40b6fa6482a332fb655f21828b896fbae6c20a64b8887c793e8",
+          "eminem-1.2.3/LICENSE": "db82346ac0bc73d0f1b3e354d31663c67f219046a836f88394dce1bda287236d",
+          "eminem-1.2.3/README.md": "5325cd23f1469ffb82a970e3fd08b8ed57d2a2a96f95108129301e1649998cbd"
+        }
+      },
+      {
+        "name": "byteme",
+        "release": "2.1.4",
+        "tag": "v2.1.4",
+        "archive_root": "byteme-2.1.4",
+        "source_url": "https://github.com/LTLA/byteme/archive/refs/tags/v2.1.4.tar.gz",
+        "source_sha256": "8367f259ddfde99bba8554bab112c73b03f2bd0a06f26f247a1965acf70a4ca9",
+        "source_members": {
+          "byteme-2.1.4/include/byteme/byteme.hpp": "555fb866abfd7adf0479c83dcb5aa3cf7cf8f5a7375ec13154b1fb6a3cd54bcb",
+          "byteme-2.1.4/LICENSE": "60668e625fc5fed6fd5db32bcc1d4972db19f15fef90691af203eb1141477279"
+        }
+      },
+      {
+        "name": "sanisizer",
+        "release": "0.2.2",
+        "tag": "v0.2.2",
+        "archive_root": "sanisizer-0.2.2",
+        "source_url": "https://github.com/LTLA/sanisizer/archive/refs/tags/v0.2.2.tar.gz",
+        "source_sha256": "8599a301172a39af96348d5e26e8a0d078be1f711a0ecd941d4fab9df159e712",
+        "source_members": {
+          "sanisizer-0.2.2/include/sanisizer/sanisizer.hpp": "0438b8f2bf0ca8b4a302aafe18459beb823f0e82b67ff274ed3705a17a798276",
+          "sanisizer-0.2.2/LICENSE": "893f6e9793b93b455d493d44e2429ad959658e0c059da88c520caa9348551c69"
+        }
+      }
+    ],
+    "build_note": "Official v2.1.2 header-only release and exact tagged dependencies tatami 4.0.3, subpar 0.4.0, eminem 1.2.3, byteme 2.1.4, and sanisizer 0.2.2 are hash-pinned. Compile a C++17 local-file adapter with zlib. tatami_mtx wraps the eminem parser and shares its underlying parser family."
   }
 }

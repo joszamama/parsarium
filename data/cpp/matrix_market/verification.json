@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T08:19:35.835773+00:00",
+  "checked_at_utc": "2026-11-13T08:29:04.309557+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "9483275118eef3cae4ae56932bec8f96a15a9230cd74b983a5e7ba14a5adb682"
+      "built_lib_sha256": "dad0c0d523de147c6d329087f28642c04ed14de54868ec3f817c3512c2bdd9f7"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -72,7 +72,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "1badbd810a5cb66a3b41b0aefd102d128bdb66f1fb0840e4dc367371ca02a2e0"
+      "built_lib_sha256": "ff7907437c1d03da5e4a25ce8453f7912cdeae63fca5dcdb2716c6aaca33cf37"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -91,6 +91,17 @@
         "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
       },
       "built_lib_sha256": "3a00cb30690869f6f07be482550698e54c41cdc27736240b3152faa8e26904e0"
+    },
+    "tatami-mtx": {
+      "source_sha256": "0fd9702cbeb289469b0999712ed81dc102a8dd51f0d793cd9a3c2b97e5459f4f",
+      "installed_files": {},
+      "dependency_source_sha256": {
+        "tatami": "3ab6939ad875d356f9ae523d648c5b6d591ba0e1fc72c3f579dd6b1fdd4ba98e",
+        "subpar": "558ead424489b5d3b4c38405881df34e3aabaef9927421e15ffb1ccb0479f648",
+        "eminem": "63a4a44e3f9ca3b2edb2207fa19fa286522967106e895abe8765b47cf8e9225d",
+        "byteme": "8367f259ddfde99bba8554bab112c73b03f2bd0a06f26f247a1965acf70a4ca9",
+        "sanisizer": "8599a301172a39af96348d5e26e8a0d078be1f711a0ecd941d4fab9df159e712"
+      }
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -289,6 +300,19 @@
         "cols": 3,
         "nnz": 3,
         "entry_3_3": 3
+      },
+      "pass": true
+    },
+    {
+      "package": "tatami-mtx",
+      "version": "2.1.2",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/tatami_mtx-2.1.2/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/tatami-4.0.3/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/subpar-0.4.0/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/eminem-1.2.3/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/byteme-2.1.4/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/sanisizer-0.2.2/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/tatami_mtx.cpp -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/tatami-mtx",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/tatami-mtx /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "entry_1_3": -2
       },
       "pass": true
     }
