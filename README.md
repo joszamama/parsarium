@@ -213,11 +213,12 @@ separately, and source-to-binary equivalence is unestablished. One
 lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
-The C and C++ × SVG batches each verify **4/20 package paths**. librsvg,
-libvips, ImageMagick, and GraphicsMagick read the local 2×1 SVG and render
+The C and C++ × SVG batches each verify **5/20 package paths**. librsvg,
+libvips, ImageMagick, GraphicsMagick, and resvg read the local 2×1 SVG and render
 the expected red and green pixels. The pinned libvips build links librsvg;
 ImageMagick uses its internal MSVG coder and GraphicsMagick uses its separate
-SVG coder, both over system libxml2. Six leads per
+SVG coder, both over system libxml2. resvg is source-built from a pinned
+Cargo lock and supplies a separate Rust SVG engine. Five leads per
 cell remain unresolved; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 

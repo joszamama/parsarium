@@ -106,5 +106,32 @@
     "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
     "family": "GraphicsMagick SVG-to-MVG coder with libxml2",
     "family_note": "The pinned GraphicsMagick SVG coder links system libxml2 and translates SVG to MVG. It is a separate package and SVG implementation; system libxml2 is a shared XML dependency."
+  },
+  {
+    "name": "resvg",
+    "version": "0.50.0",
+    "license": "Apache-2.0 OR MIT",
+    "license_evidence": "https://github.com/linebender/resvg/blob/v0.50.0/crates/c-api/README.md",
+    "documentation": "https://github.com/linebender/resvg/blob/v0.50.0/crates/c-api/resvg.h",
+    "input_api": "resvg_parse_tree_from_file(local filename, options, &tree); resvg_get_image_size; resvg_render to RGBA pixmap",
+    "adapter": "adapters/c/svg/resvg.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "resvg/usvg Rust SVG parser and tiny-skia renderer through C API",
+    "family_note": "The C and C++ adapters use the same tagged resvg-capi source library. This is a distinct engine from librsvg, ImageMagick MSVG, and GraphicsMagick SVG-to-MVG; the two ecosystem paths are not independent from one another."
   }
 ]

@@ -100,5 +100,17 @@
       }
     ],
     "build_note": "Pinned Homebrew release and upstream source; SVG coder module is SHA-256 checked. The installed SVG-to-MVG coder links system libxml2 and is a distinct SVG implementation from librsvg and ImageMagick MSVG."
+  },
+  "resvg": {
+    "release": "0.50.0",
+    "tag": "v0.50.0",
+    "license": "Apache-2.0 OR MIT",
+    "source_url": "https://github.com/linebender/resvg/archive/refs/tags/v0.50.0.tar.gz",
+    "source_sha256": "ea6629ecaf8ae523aaa42b23217db7fdbed5d4bb070a2574af0d01040195beb1",
+    "repository": "https://github.com/linebender/resvg",
+    "source_header_member": "resvg-0.50.0/crates/c-api/resvg.h",
+    "local_header_sha256": "884bec3fcee36c3c68eb763b9468a0584427b5235de8b7280870bb01f265efed",
+    "cargo_lock_sha256": "fb6a08e06cdd89f59e52065154bac9c8fd3054ddf5a5bca122152f5ae3772a37",
+    "build_note": "Clean source build from tagged v0.50.0 archive using cargo build --release --locked -p resvg-capi. Cargo.lock is SHA-256 pinned; the verifier records the built macOS arm64 dylib hash. No prebuilt publisher binary is used."
   }
 }

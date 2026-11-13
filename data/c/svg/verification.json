@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:32:35.849471+00:00",
+  "checked_at_utc": "2026-11-13T00:36:59.738708+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/svg/source-lock.json",
@@ -23,6 +23,11 @@
       "source_sha256": "7efa070dc31116b4315061b39f84bc7181e8b060bf61214ec9af851131af9c81",
       "local_header_sha256": "30dae7f7870695f1f779982eeaa4d5c3614069dd03e73317b5f7bc2ac6848dae",
       "local_library_sha256": "b30aef9fc9ccfafaa4305c680be40ada5cdac86c8ba2df75dacd6fb4598956d4"
+    },
+    "resvg": {
+      "source_sha256": "ea6629ecaf8ae523aaa42b23217db7fdbed5d4bb070a2574af0d01040195beb1",
+      "local_header_sha256": "884bec3fcee36c3c68eb763b9468a0584427b5235de8b7280870bb01f265efed",
+      "local_library_sha256": "ceb3fc9d4a0b8310b5ea031b31fc3f4b6b32de097fefd080b593a1eef4a2cda7"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -115,6 +120,29 @@
         ]
       },
       "pass": true
+    },
+    {
+      "package": "resvg",
+      "version": "0.50.0",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/resvg-0.50.0/crates/c-api /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/resvg.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/resvg-0.50.0/target/release/libresvg.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/resvg-0.50.0/target/release -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/resvg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/resvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true,
+      "source_build_command": "cargo build --release --locked -p resvg-capi"
     }
   ],
   "runtime": []

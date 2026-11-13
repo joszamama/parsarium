@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 import json
 import platform
 import shlex
+import shutil
 import subprocess
 import tarfile
 import tempfile
@@ -17,8 +18,8 @@ CONTROL = ROOT / "controls/svg/red-green.svg"
 CONTROL_SHA256 = "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2"
 
 
-def run(command: list[str]) -> str:
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=180)
+def run(command: list[str], cwd: Path = ROOT, timeout: int = 180) -> str:
+    result = subprocess.run(command, cwd=cwd, text=True, capture_output=True, timeout=timeout)
     if result.returncode:
         raise RuntimeError(f"{shlex.join(command)}\n{result.stderr}")
     return result.stdout.strip()
@@ -55,29 +56,49 @@ def verify(ecosystem: str) -> None:
                 assert license_member is not None
                 assert sha256(license_member.read()).hexdigest() == source["license_sha256"]
         formula = "vips" if name == "libvips" else name
-        assert source["installed_revision"] in run(["brew", "list", "--versions", formula]).split()
-        assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
-        header = Path(source["local_header"])
-        library = Path(source["local_library"])
+        source_build = None
+        if name == "resvg":
+            source_dir = cache / f"resvg-{source['release']}"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            run(["tar", "-xzf", str(archive), "-C", str(cache)])
+            header = source_dir / "crates/c-api/resvg.h"
+            assert sha256((source_dir / "Cargo.lock").read_bytes()).hexdigest() == source["cargo_lock_sha256"]
+            source_build = ["cargo", "build", "--release", "--locked", "-p", "resvg-capi"]
+            run(source_build, cwd=source_dir, timeout=900)
+            library = source_dir / "target/release/libresvg.dylib"
+        else:
+            assert source["installed_revision"] in run(["brew", "list", "--versions", formula]).split()
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
+            for dependency in source.get("installed_dependencies", []):
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
-        for dependency in source.get("installed_dependencies", []):
-            assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
-        flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"], *(["cairo"] if name == "librsvg" else [])]))
         compiler = "c++" if ecosystem == "cpp" else "cc"
         std = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
-        command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
-                   str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
+        if name == "resvg":
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), str(ROOT / parser["adapter"]),
+                       str(library), "-Wl,-rpath," + str(library.parent), "-o", str(target / name)]
+        else:
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"], *(["cairo"] if name == "librsvg" else [])]))
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         run(command)
         execute = [str(target / name), str(CONTROL)]
         output = json.loads(run(execute))
         assert output == parser["expected_output"], (name, output)
-        rows.append({"package": name, "version": parser["version"], "control": parser["control"],
+        row = {"package": name, "version": parser["version"], "control": parser["control"],
                      "build_command": shlex.join(command), "command": shlex.join(execute),
-                     "output": output, "pass": True})
+                     "output": output, "pass": True}
+        if source_build is not None:
+            row["source_build_command"] = shlex.join(source_build)
+        rows.append(row)
         libraries[name] = {"source_sha256": source["source_sha256"],
                            "local_header_sha256": source["local_header_sha256"],
-                           "local_library_sha256": source["local_library_sha256"]}
+                           "local_library_sha256": sha256(library.read_bytes()).hexdigest()}
         print(f"{name}@{parser['version']}: {ecosystem} SVG passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++" if ecosystem == "cpp" else "cc", "--version"]).splitlines()[0],
