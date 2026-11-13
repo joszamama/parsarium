@@ -250,5 +250,19 @@
     "build": "Fresh tagged source extraction; make lib -j4; static build/libtspdf.a is linked to the adapter",
     "repository": "https://github.com/be-lang/tspdf",
     "build_note": "Pure C11 parser library, also callable from C++17 via extern-C public umbrella header. The v0.5.1 source and tagged reader API are pinned; no separate third-party engine. Its observed primary GitHub stars were zero, so adoption is unestablished even though it satisfies parser eligibility."
+  },
+  "aspose_pdf_foss": {
+    "release": "1.0.1",
+    "license": "MIT",
+    "source_url": "https://codeload.github.com/aspose-pdf-foss/Aspose.PDF-FOSS-for-Cpp/tar.gz/refs/tags/v1.0.1",
+    "source_sha256": "72d715b8589af8746a6df7f8d2d9def3a2e9a7757f9b414a8a393028c9822738",
+    "source_header_member": "Aspose.PDF-FOSS-for-Cpp-1.0.1/include/aspose/pdf/document.hpp",
+    "local_header_sha256": "53b1317f68e461e7bc3be66d4c22b6eca2fb87797a1d464e5d8a339b029094d3",
+    "patch": "scripts/patch_aspose_pdf_foss.py",
+    "patch_sha256": "fe2d2dea65045f62cd6a56e1b4a092eec0d6a31de4073efe140d9d84d81f3a20",
+    "adapter_sha256": "07e1348437f78335781fcd5bf5377a2b500a8b32b32ba3b5bd471c48c46ddb53",
+    "build": "Fresh tagged source extraction; add missing standard-library includes in src/internal/asciihex.cpp with pinned patch; cmake -S <source> -B <cache>/aspose-pdf-foss-build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5; cmake --build <cache>/aspose-pdf-foss-build --target aspose_pdf_foss -j4",
+    "repository": "https://github.com/aspose-pdf-foss/Aspose.PDF-FOSS-for-Cpp",
+    "build_note": "Native C++20 MIT parser. Upstream v1.0.1 asciihex.cpp uses std::string and std::runtime_error without including their standard headers; the exact two-include patch enables the recorded Apple clang build. Its CMake FetchContent pins test-only GoogleTest v1.14.0 by SHA-256 even when building only the library target. Primary repository had two observed stars; broad adoption is unestablished."
   }
 }

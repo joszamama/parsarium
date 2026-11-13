@@ -184,9 +184,9 @@ Graphics is independently verified as a macOS platform runtime API and is kept
 outside the third-party ranking. See
 the [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **15/20 package paths**:
+The C++ × PDF batch currently verifies **16/20 package paths**:
 Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium,
-PDF-Writer, PDF4QT, Qt PDF, Xpdf, pdfmm, Docling Parse, Vanilla.PDF, and tspdf.
+PDF-Writer, PDF4QT, Qt PDF, Xpdf, pdfmm, Docling Parse, Vanilla.PDF, tspdf, and Aspose.PDF FOSS.
 MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF, and tspdf use C APIs called
 directly from C++17; PDF-Writer and PDF4QT use native C++ parsers. All return one parsed page
 from the valid PDF control. Release sources, installed headers, and libraries are
@@ -198,7 +198,7 @@ links source-built object libraries and has no installed public library ABI.
 Pdfmm is a source-built fork of PoDoFo. Docling Parse uses a bundled qpdf
 engine; both shared lineages are recorded. tspdf is a source-built C11 reader
 used from both ecosystems; its observed GitHub stars were zero, so external
-adoption is unestablished. One lead remains unresolved. See the
+adoption is unestablished. Aspose.PDF FOSS is source-built with a recorded standard-header compatibility patch and had two observed stars. One lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.

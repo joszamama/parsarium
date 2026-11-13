@@ -16,6 +16,7 @@ import zipfile
 
 from patch_pdf4qt_core import patch_pdf4qt_core
 from patch_docling_parse import patch_docling_parse
+from patch_aspose_pdf_foss import patch_aspose_pdf_foss
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -204,6 +205,24 @@ def main() -> None:
             header = source_dir / "src/reader/tspr.h"
             run(["make", "lib", "-j4"], cwd=source_dir)
             library = source_dir / "build/libtspdf.a"
+        elif name == "aspose_pdf_foss":
+            patch = ROOT / source["patch"]
+            adapter = ROOT / parser["adapter"]
+            assert sha256(patch.read_bytes()).hexdigest() == source["patch_sha256"]
+            assert sha256(adapter.read_bytes()).hexdigest() == source["adapter_sha256"]
+            source_dir = CACHE / f"Aspose.PDF-FOSS-for-Cpp-{source['release']}"
+            build_dir = CACHE / "aspose-pdf-foss-build"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            if build_dir.exists():
+                shutil.rmtree(build_dir)
+            run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            patch_aspose_pdf_foss(source_dir)
+            header = source_dir / "include/aspose/pdf/document.hpp"
+            run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"], timeout=600)
+            run(["cmake", "--build", str(build_dir), "--target", "aspose_pdf_foss", "-j4"], timeout=600)
+            library = build_dir / "libaspose_pdf_foss.a"
         elif name == "docling_parse":
             patch = ROOT / source["patch"]
             adapter = ROOT / parser["adapter"]
@@ -232,7 +251,7 @@ def main() -> None:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
-        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm", "docling_parse", "tspdf"):
+        if name not in ("pdfio", "pdfwriter", "pdf4qt", "xpdf", "pdfmm", "docling_parse", "tspdf", "aspose_pdf_foss"):
             assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
         if name == "poppler":
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
@@ -306,6 +325,10 @@ def main() -> None:
                        "-o", str(TARGET / name)]
         elif name == "tspdf":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(source_dir / "include"), str(ROOT / parser["adapter"]),
+                       str(library), "-o", str(TARGET / name)]
+        elif name == "aspose_pdf_foss":
+            command = ["c++", "-std=c++20", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(source_dir / "include"), str(ROOT / parser["adapter"]),
                        str(library), "-o", str(TARGET / name)]
         elif name == "docling_parse":
