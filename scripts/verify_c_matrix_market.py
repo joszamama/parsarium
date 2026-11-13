@@ -74,6 +74,12 @@ def main() -> None:
             command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),
                        str(install / "lib/liblis.a"), "-lm", "-o", str(target / name)]
+        elif name == "hypre":
+            prefix = Path(source["prefix"])
+            command = ["mpicc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(prefix / "include"), str(ROOT / parser["adapter"]),
+                       "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
+                       "-lHYPRE", "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)

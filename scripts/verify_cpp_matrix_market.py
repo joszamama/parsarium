@@ -124,6 +124,12 @@ def main() -> None:
             command = ["c++", "-std=c++20", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "hypre":
+            prefix = Path(source["prefix"])
+            command = ["mpic++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(prefix / "include"), str(ROOT / parser["adapter"]),
+                       "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
+                       "-lHYPRE", "-o", str(target / name)]
         elif name == "lis":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),

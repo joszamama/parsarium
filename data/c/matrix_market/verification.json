@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T04:18:01.771803+00:00",
+  "checked_at_utc": "2026-11-13T07:42:41.731942+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/matrix_market/source-lock.json",
@@ -14,7 +14,14 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "40ead01b0f14dabc3886dc4aaff4a3b1b65d19c4b972a4dad30c271f8518d7e2"
+      "built_lib_sha256": "e02af254768c1e83b1025e0492e8f9193594390b73ee0c8ea374f03be05b323b"
+    },
+    "hypre": {
+      "source_sha256": "3083cf943e1dab54517acae36afad72a4ada2c72c9567e525fc9c6efedb14e0c",
+      "installed_files": {
+        "/opt/homebrew/Cellar/hypre/3.2.1/include/HYPRE_IJ_mv.h": "f48e402b5ae062f21ae017a6c6682f133ca3db4d03431bf99fbe7132737058ca",
+        "/opt/homebrew/Cellar/hypre/3.2.1/lib/libHYPRE.3.2.1.dylib": "01934d949c190db8d1d2b51a5876b1189bbbaee595628665b80a7b7c1464ade2"
+      }
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -45,6 +52,20 @@
       "output": {
         "rows": 3,
         "nnz": 3
+      },
+      "pass": true
+    },
+    {
+      "package": "hypre",
+      "version": "3.2.1",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "mpicc -std=c11 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/hypre/3.2.1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/hypre.c -L/opt/homebrew/Cellar/hypre/3.2.1/lib -Wl,-rpath,/opt/homebrew/Cellar/hypre/3.2.1/lib -lHYPRE -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/hypre",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/hypre /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
       },
       "pass": true
     }

@@ -1168,12 +1168,12 @@ the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
 - [C × Matrix Market ranking](data/c/matrix_market/ranking.md): SuiteSparse
-  CHOLMOD and Lis verified on valid real coordinate and symmetric controls,
-  18 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
+  CHOLMOD, Lis, and HYPRE verified on valid real coordinate and symmetric controls,
+  17 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
   19 unique names; 18 remain unverified.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, and MTL5 verified on valid
-  Matrix Market controls, 12 below the working goal. Their source releases, relevant installed headers
+  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, and HYPRE verified on valid
+  Matrix Market controls, 11 below the working goal. Their source releases, relevant installed headers
   and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
   unverified. The two header-only packages have no comparable Homebrew install
@@ -1243,7 +1243,7 @@ or quality judgment.
   records the scoped absence of a PLY-aware Node.js or browser platform API.
 - [JavaScript × Matrix Market ranking](data/javascript/matrix_market/ranking.md):
   seven pinned packages verified on valid local coordinate real general,
-  symmetric, or 10x Matrix Market controls, 12 below the working goal. Six
+  symmetric, or 10x Matrix Market controls, 11 below the working goal. Six
   bounded npm queries saved 406 hits and 353 distinct names; three plausible
   leads remain unresolved. `scran.js` and `bakana` share the same underlying
   WASM reader; `@orbifold/graphs` was verified only on a no-comment control. The

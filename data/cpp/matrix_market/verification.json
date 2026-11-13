@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T07:37:15.247100+00:00",
+  "checked_at_utc": "2026-11-13T07:43:16.829061+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "631974e5338f8c1c23dbe80cd5e0faf1cf6a7b391333bf583c49ff6969b055e0"
+      "built_lib_sha256": "f43a6c390de7f0733d324cc7371fca4869352439068b5739a4bc22067b014da0"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -52,6 +52,13 @@
     "mtl5": {
       "source_sha256": "cfb4bca4e8424fe589e3e820cf9b91bfd0224bf50bfd94ff94e9667e6ea79309",
       "installed_files": {}
+    },
+    "hypre": {
+      "source_sha256": "3083cf943e1dab54517acae36afad72a4ada2c72c9567e525fc9c6efedb14e0c",
+      "installed_files": {
+        "/opt/homebrew/Cellar/hypre/3.2.1/include/HYPRE_IJ_mv.h": "f48e402b5ae062f21ae017a6c6682f133ca3db4d03431bf99fbe7132737058ca",
+        "/opt/homebrew/Cellar/hypre/3.2.1/lib/libHYPRE.3.2.1.dylib": "01934d949c190db8d1d2b51a5876b1189bbbaee595628665b80a7b7c1464ade2"
+      }
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -161,6 +168,20 @@
       "control": "controls/matrix_market/real-general.mtx",
       "build_command": "c++ -std=c++20 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/mtl5-5.23.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/mtl5.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/mtl5",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/mtl5 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "hypre",
+      "version": "3.2.1",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "mpic++ -std=c++17 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/hypre/3.2.1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/hypre.cpp -L/opt/homebrew/Cellar/hypre/3.2.1/lib -Wl,-rpath,/opt/homebrew/Cellar/hypre/3.2.1/lib -lHYPRE -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/hypre",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/hypre /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
       "output": {
         "rows": 2,
         "cols": 3,

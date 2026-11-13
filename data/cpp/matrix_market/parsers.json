@@ -147,5 +147,24 @@
     "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
     "family": "MTL5 native Matrix Market reader",
     "family_note": "Standalone header-only parser; no shared backend with the other C++ Matrix Market paths."
+  },
+  {
+    "name": "hypre",
+    "version": "3.2.1",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "https://github.com/hypre-space/hypre/tree/v3.2.1",
+    "documentation": "https://hypre.readthedocs.io/en/latest/api-int-ij.html",
+    "input_api": "HYPRE_IJMatrixReadMM(local filename, MPI_COMM_SELF, HYPRE_PARCSR, &matrix)",
+    "adapter": "adapters/cpp/matrix_market/hypre.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
+    "family": "HYPRE native IJ Matrix Market reader",
+    "family_note": "C and C++ adapters call the same HYPRE_IJMatrixReadMM native implementation."
   }
 ]
