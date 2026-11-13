@@ -35,6 +35,11 @@
       "observed_result": "Fatal error before Assimp CLI execution: Declaration of Assimp\\Command\\Result\\AbstractResult::isExecuted() must be compatible with Assimp\\Command\\Result\\Interfaces\\ResultInterface::isExecuted(): bool",
       "separate_underlying_cli_check": "assimp info controls/ascii_ply/triangle.ply succeeded and reported 3 vertices and 1 face; this does not verify the PHP wrapper"
     },
-    "reason": "The pinned PHP release cannot instantiate its InfoResult on the available runtime because its implementation lacks the interface return type. No observable format-aware result was obtained through the PHP package."
+    "reason": "Pinned PHP release fails before it can return parsed fields under both PHP 8.5 and PHP 7.4. On PHP 7.4, default caching hits a nonnullable-return TypeError; bypassing cache hits the incompatible isExecuted signature. InfoVerb also does not append its local file path to the command string. No format-aware result was obtained through the PHP package.",
+    "probe_php74": {
+      "environment": "PHP 7.4.33 CLI, Composer 2.11.2, Assimp CLI 6.0.6 on macOS arm64",
+      "command": "Instantiate Assimp\\Command\\Verbs\\InfoVerb(local control path), execute with Assimp\\Command\\Command and noCache=true",
+      "observed_result": "Fatal error: AbstractResult::isExecuted() declaration must be compatible with ResultInterface::isExecuted(): bool. With default caching, execution stops earlier because getCached() declares a nonnullable ResultInterface return but returns null. InfoVerb::getCommand() emits only info without the input path."
+    }
   }
 ]
