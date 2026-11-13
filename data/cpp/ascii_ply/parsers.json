@@ -77,5 +77,22 @@
     "scope": "three parsed vertices and one triangular face from ASCII PLY",
     "family": "tinyply header-only PLY parser",
     "family_note": "Independent header-only C++ PLY parser, not an alias of Assimp or OpenMesh."
+  },
+  {
+    "name": "cgal",
+    "version": "6.2.1",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/CGAL/cgal/releases/download/v6.2.1/CGAL-6.2.1.tar.xz",
+    "documentation": "https://doc.cgal.org/latest/Surface_mesh/group__PkgSurfaceMeshIOFuncPLY.html",
+    "input_api": "std::ifstream(local filename); CGAL::IO::read_PLY(stream, Surface_mesh, comments)",
+    "adapter": "adapters/cpp/ascii_ply/cgal.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "three vertices and one face in a parsed Surface_mesh",
+    "family": "CGAL Surface_mesh PLY reader",
+    "family_note": "CGAL owns its Surface_mesh PLY import implementation, distinct from Assimp, OpenMesh, hapPLY and tinyply."
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:22:25.171129+00:00",
+  "checked_at_utc": "2026-11-13T03:24:48.022236+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -31,6 +31,15 @@
       "source_sha256": "928f95f36c9dfcadffe6c1c349be8e7382e16c5faab9ae72f2e4f368a11a8bd4",
       "installed_files": {},
       "source_header_sha256": "69b5e52bce3cc2985530b775e15292aad0824ea3987cb3d419b09339bc06e9d0"
+    },
+    "cgal": {
+      "source_sha256": "b6be77c60765a8456335de991eeaf6ffec55256984e4a9ecc6a97c37bbfe85bf",
+      "installed_files": {
+        "/opt/homebrew/Cellar/cgal/6.2.1/include/CGAL/Surface_mesh/IO/PLY.h": "d57cc9116467df6e68bd942392767d335b69ee2392534b549ac0ffcb63e25b9b",
+        "/opt/homebrew/opt/gmp/lib/libgmp.10.dylib": "1bb9184824b82f40bd50279634290d6cbdf9c1a371c045c7b10815e7955cd696",
+        "/opt/homebrew/opt/mpfr/lib/libmpfr.6.dylib": "1b151049a88e86e245c300f129ebd13e2915ebc66658e59540b0223a31ddcd8e"
+      },
+      "source_header_sha256": null
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -89,6 +98,18 @@
       "control": "controls/ascii_ply/triangle.ply",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/tinyply-3.0-include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/tinyply.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/tinyply",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/tinyply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "cgal",
+      "version": "6.2.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/cgal/6.2.1/include -isystem /opt/homebrew/opt/boost/include -isystem /opt/homebrew/opt/eigen/include/eigen3 -isystem /opt/homebrew/opt/gmp/include -isystem /opt/homebrew/opt/mpfr/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/cgal.cpp -L/opt/homebrew/opt/gmp/lib -L/opt/homebrew/opt/mpfr/lib -lgmp -lmpfr -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/cgal",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/cgal /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "faces": 1

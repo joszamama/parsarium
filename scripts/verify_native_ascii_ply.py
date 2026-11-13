@@ -44,7 +44,7 @@ def verify(ecosystem: str) -> None:
     for parser in parsers:
         name = parser["name"]
         source = sources[name]
-        suffix = ".tar.gz" if source["source_url"].endswith(".tar.gz") else ".tar.bz2"
+        suffix = next(s for s in (".tar.gz", ".tar.bz2", ".tar.xz") if source["source_url"].endswith(s))
         archive = cache / f"{name}-{source['release']}{suffix}"
         if not archive.exists() or digest(archive) != source["source_sha256"]:
             with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium ASCII PLY verifier"}), timeout=120) as response, archive.open("wb") as output:
@@ -78,6 +78,16 @@ def verify(ecosystem: str) -> None:
                        "-isystem", str(prefix / "include"), str(ROOT / parser["adapter"]),
                        "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
                        "-lOpenMeshCore", "-lOpenMeshTools", "-o", str(target / name)]
+        elif name == "cgal":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", "/opt/homebrew/Cellar/cgal/6.2.1/include",
+                       "-isystem", "/opt/homebrew/opt/boost/include",
+                       "-isystem", "/opt/homebrew/opt/eigen/include/eigen3",
+                       "-isystem", "/opt/homebrew/opt/gmp/include",
+                       "-isystem", "/opt/homebrew/opt/mpfr/include",
+                       str(ROOT / parser["adapter"]),
+                       "-L/opt/homebrew/opt/gmp/lib", "-L/opt/homebrew/opt/mpfr/lib",
+                       "-lgmp", "-lmpfr", "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
