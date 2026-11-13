@@ -230,5 +230,21 @@
     "scope": "PDF page count through Evince libdocument C API",
     "family": "Evince PDF backend over Poppler GLib",
     "family_note": "Evince's public C libdocument factory loads the local PDF; the installed libpdfdocument backend directly links the Poppler GLib library already counted in this cell. This is a package path, not an independent PDF syntax engine."
+  },
+  {
+    "name": "unpdf",
+    "version": "0.54.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/iyulab/unpdf/blob/v0.54.0/LICENSE",
+    "documentation": "https://github.com/iyulab/unpdf/blob/v0.54.0/src/ffi.rs",
+    "input_api": "unpdf_parse_file(local path) returns document handle; unpdf_page_count(document) returns PDF page-tree count; unpdf_free_document(handle)",
+    "adapter": "adapters/c/pdf/unpdf.c",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "parsed PDF page-tree count through C ABI",
+    "family": "unpdf Rust PDF parser via C ABI",
+    "family_note": "The pinned Rust crate publishes a C ABI with local-file parsing and page-count calls. This is the same underlying parser as the verified Rust unpdf path; C adoption is not inferred from Rust crate downloads."
   }
 ]

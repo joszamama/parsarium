@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T16:31:32.984933+00:00",
+  "checked_at_utc": "2026-11-13T16:38:55.430453+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,7 +26,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "382e479adccfa0d7214551c93bd3d3df4e76593927971cf657bd77ffadede94e",
+      "local_library_sha256": "45b70df4f79edd02e344a38f3e8bd76265de9bb5f805538ba0bf457e0e16054e",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -41,7 +41,7 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "1cde69913b93f78df9f7b5515054c5aa195a8eaeefa9e58770f5ba7d5dafa7eb",
+      "local_library_sha256": "bbf88dc3f488cc8e2dd40f9960858a1b3d87b766bb19546f77f9d25e2c7d71b9",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "imagemagick": {
@@ -81,6 +81,12 @@
       "source_sha256": "f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668",
       "local_library_sha256": "89f95473dd58ca147f75c69ece28b965f109b1c55744eefcde3022cc4afcf81d",
       "local_header_sha256": "03b862635ec448d92d48facb86389994b4c436c77e8a94da6c7e9cb822bf0ae4"
+    },
+    "unpdf": {
+      "source_sha256": "bcef494a3957fe9f297e942f9953ae76665ba0408be89545a6baa54f4a3490e3",
+      "ffi_source_sha256": "b39390b02ee1c165fce1fa1f0209efe53484e79bd83a24a3e48b3b641d09654c",
+      "cargo_lock_sha256": "922833507bca286faf18e724f042569fc8be05d69e40e5bffae78042f8d6f225",
+      "local_library_sha256": "a59f6620a5e9983bc42afa628e8df5bb09b38a049dc8219b3e7fea42cd65a989"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -230,7 +236,7 @@
       "version": "26.8.3.1",
       "control": "controls/pdf/two-page.pdf",
       "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/libreofficekit-26.8.3.1-include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/libreofficekit.c -ldl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-ax62a7s_/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-ax62a7s_/profile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-c7y9ngbd/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-c7y9ngbd/profile",
       "output": {
         "type": "drawing",
         "pages": 2
@@ -245,6 +251,19 @@
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/evince /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf",
       "output": {
         "pages": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "unpdf",
+      "version": "0.54.0",
+      "control": "controls/pdf/one-page.pdf",
+      "cargo_build_command": "cargo build --release --locked --no-default-features --features ffi",
+      "cargo_build_cwd": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/unpdf-0.54.0",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/unpdf.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/unpdf-0.54.0/target/release -lunpdf -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/unpdf-0.54.0/target/release -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/unpdf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/unpdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
       },
       "pass": true
     }

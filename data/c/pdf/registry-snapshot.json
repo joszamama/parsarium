@@ -1,6 +1,6 @@
 {
   "captured_at_utc": "2026-11-13T00:19:07.258324+00:00",
-  "search_surface": "Homebrew formula-name index for C PDF library discovery; targeted official PDFio, PDFium, Poppler GLib, qpdf C API, MuPDF and Ghostscript documentation. Formula-name search is not a complete C registry.",
+  "search_surface": "Homebrew formula-name index for C PDF library discovery; targeted official PDFio, PDFium, Poppler GLib, qpdf C API, MuPDF and Ghostscript documentation. Formula-name search is not a complete C registry. Targeted unpdf official C ABI documentation and crates.io release were inspected outside the bounded Homebrew name hits.",
   "search_limit_per_query": 100,
   "search": [
     {
@@ -373,6 +373,14 @@
       "source_url": "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
       "source_sha256": "f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668",
       "license_evidence": "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz"
+    },
+    "unpdf": {
+      "version": "0.54.0",
+      "license": "MIT",
+      "source_url": "https://static.crates.io/crates/unpdf/unpdf-0.54.0.crate",
+      "source_sha256": "bcef494a3957fe9f297e942f9953ae76665ba0408be89545a6baa54f4a3490e3",
+      "license_evidence": "https://github.com/iyulab/unpdf/blob/v0.54.0/LICENSE",
+      "crate_api": "https://crates.io/api/v1/crates/unpdf/0.54.0"
     }
   },
   "targeted_documentation_leads": [
@@ -445,6 +453,12 @@
       "input_api_evidence": "https://gitlab.gnome.org/GNOME/evince/-/blob/gnome-48-4/libdocument/ev-document-factory.h",
       "surface": "GNOME public libdocument C API and Homebrew formula outside bounded PDF formula-name query; official GNOME release source",
       "disposition": "Verified Evince 48.4 local GFile C API on valid two-page PDF, sharing Poppler backend."
+    },
+    {
+      "name": "unpdf",
+      "url": "https://github.com/iyulab/unpdf/blob/v0.54.0/src/ffi.rs",
+      "surface": "Official tagged Rust crate C ABI source with local-file and page-count calls, verified from SHA-256-pinned crates.io 0.54.0 source and bundled Cargo.lock; discovered in targeted PDF reader search outside bounded Homebrew name hits.",
+      "disposition": "Verified source-built C ABI on valid one-page local PDF; no comparable Homebrew formula metric."
     }
   ],
   "auxiliary_project_interest_metric": {
@@ -534,6 +548,12 @@
         "auxiliary_end_date": "2026-11-13",
         "auxiliary_observed_at_utc": "2026-11-13T16:25:28+00:00",
         "auxiliary_note": "Formula requested-install events for Evince broadly, not PDF-specific use or comparable with GitHub stars."
+      },
+      "unpdf": {
+        "stars": 65,
+        "repository": "https://github.com/iyulab/unpdf",
+        "observed_at_utc": "2026-11-13T16:37:45.385904+00:00",
+        "evidence_note": "Primary upstream GitHub API stargazers_count; whole Rust project interest, not C ABI or PDF-specific adoption."
       }
     }
   },
@@ -618,6 +638,10 @@
         "formula": "evince",
         "source": "https://formulae.brew.sh/formula/evince",
         "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "unpdf": {
+        "install_on_request_365d": null,
+        "note": "No Homebrew formula for the unpdf C ABI package; cross-ecosystem Rust crate downloads are not substituted."
       }
     }
   }

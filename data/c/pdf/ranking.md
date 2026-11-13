@@ -1,6 +1,6 @@
 # C × PDF: verified parser ranking
 
-14 verified third-party package paths; working goal 20, ceiling 30. The primary adoption metric is Homebrew install-on-request events for 2025-11-13 through 2026-11-13, compared only within this cell. It measures whole formulae, not PDF-specific use or independent parser engines. Five verified paths have no comparable formula metric and remain unranked. The previous primary GitHub-star snapshot is preserved separately as an auxiliary project-interest signal in `registry-snapshot.json`.
+15 verified third-party package paths; working goal 20, ceiling 30. The primary adoption metric is Homebrew install-on-request events for 2025-11-13 through 2026-11-13, compared only within this cell. It measures whole formulae, not PDF-specific use or independent parser engines. Six verified paths have no comparable formula metric and remain unranked. The previous primary GitHub-star snapshot is preserved separately as an auxiliary project-interest signal in `registry-snapshot.json`.
 
 | Rank | Package | Pinned release | Requested installs (365d) | Verified scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -18,9 +18,12 @@
 | unranked | [tspdf](https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md) | 0.5.1 | unknown | parsed PDF page count and first page | tspdf C11 parser |
 | unranked | [pdf_oxide](https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h) | 0.3.78 | unknown | parsed PDF page count | Rust pdf_oxide engine via C ABI |
 | unranked | [LibreOfficeKit](https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKit.h) | 26.8.3.1 | unknown | two-page PDF imported as Draw document | LibreOffice PDF import through C ABI |
+| unranked | [unpdf C ABI](https://github.com/iyulab/unpdf/blob/v0.54.0/src/ffi.rs) | 0.54.0 | unknown | parsed PDF page-tree count | unpdf Rust PDF parser via C ABI |
 
-The formula metric is from the [Homebrew 365-day requested-install snapshot](https://formulae.brew.sh/api/analytics/install-on-request/365d.json). `poppler-glib` maps to the `poppler` formula, and `libvips` maps to `vips`. PDFio was verified from tagged source, while its formula-wide requested-install count is used only as an adoption proxy. The ordering does not establish a definitive most-used top 20 because five paths lack this metric, the search is bounded, and six more verified paths are needed.
+The formula metric is from the [Homebrew 365-day requested-install snapshot](https://formulae.brew.sh/api/analytics/install-on-request/365d.json). `poppler-glib` maps to the `poppler` formula, and `libvips` maps to `vips`. PDFio was verified from tagged source, while its formula-wide requested-install count is used only as an adoption proxy. The ordering does not establish a definitive most-used top 20 because six paths lack this metric, the search is bounded, and five more verified paths are needed.
 
 ImageMagick and GraphicsMagick use Ghostscript for PDF interpretation in this installation. libvips and Evince use Poppler; Evince's installed PDF backend directly links the same pinned Poppler GLib library as the separately verified C API. LibreOfficeKit's bundled `xpdfimport` has Poppler markers, but its exact import call path was not traced. These are distinct package input APIs, not independent syntax engines. Apple Core Graphics is a verified macOS runtime API and is outside this third-party ranking.
 
 LibreOffice's 416,680 Homebrew **cask** install events in the same year are an auxiliary whole-application signal; cask events are not mixed with formula requested installs. The tagged LibreOfficeKit C API and Evince C API both passed the valid two-page local PDF control. One other C wrapper lead remains unresolved. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json` for limits and control evidence.
+
+The unpdf 0.54.0 C ABI was built from its pinned crates.io source and bundled Cargo.lock, then parsed the one-page PDF through its local-file API. It shares the verified Rust unpdf parser family. The upstream project's 65 observed GitHub stars are recorded only as auxiliary interest; they do not establish C API adoption.

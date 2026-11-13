@@ -294,5 +294,18 @@
       }
     ],
     "build_note": "Official GNOME 48.4 GPL-2.0-or-later source archive and the installed Homebrew release are pinned. The public factory and page-count headers match tagged source byte for byte. The installed Evince PDF backend links the pinned Poppler GLib engine; this is a distinct C package input API sharing Poppler PDF interpretation."
+  },
+  "unpdf": {
+    "release": "0.54.0",
+    "license": "MIT",
+    "source_url": "https://static.crates.io/crates/unpdf/unpdf-0.54.0.crate",
+    "source_sha256": "bcef494a3957fe9f297e942f9953ae76665ba0408be89545a6baa54f4a3490e3",
+    "source_members": {
+      "src/ffi.rs": "b39390b02ee1c165fce1fa1f0209efe53484e79bd83a24a3e48b3b641d09654c",
+      "Cargo.lock": "922833507bca286faf18e724f042569fc8be05d69e40e5bffae78042f8d6f225",
+      "LICENSE": "16d5280c46463f25ada2a292bf61eff7e53bb6d140501d4bb5a8af51fbc07e03"
+    },
+    "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+    "build_note": "Build tagged crates.io source as a cdylib with cargo build --release --locked --no-default-features --features ffi. The crate includes Cargo.lock. The C declarations mirror exported symbols in the pinned src/ffi.rs; the adapter reads the supplied PDF path."
   }
 }

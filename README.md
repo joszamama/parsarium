@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,531 of 1,690 verified package paths have a recorded comparable cell metric;
-159 are unranked. A recorded zero is still a measured value, not evidence of
+1,531 of 1,691 verified package paths have a recorded comparable cell metric;
+160 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -205,18 +205,20 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C × PDF batch verifies **14/20 third-party package paths** from C call sites:
+The C × PDF batch verifies **15/20 third-party package paths** from C call sites:
 Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF,
-tspdf, ImageMagick, GraphicsMagick, libvips, pdf_oxide, LibreOfficeKit, and Evince.
-The first twelve return one parsed page from the valid local control;
+tspdf, ImageMagick, GraphicsMagick, libvips, pdf_oxide, LibreOfficeKit, Evince,
+and unpdf's C ABI. The first twelve and unpdf return one parsed page from the valid local control;
 LibreOfficeKit and Evince import a separate valid two-page PDF and return two parts
-or pages, respectively. Evince shares Poppler's PDF engine.
+or pages, respectively. Evince shares Poppler's PDF engine; unpdf shares its
+Rust parser family.
 qpdf requires a C++ linker for its C interface; PDFio
 builds from pinned source. PDFium and Vanilla.PDF use
 hash-pinned binary distributions with source-matched public headers. Apple Core
 Graphics is independently verified as a macOS platform runtime API and is kept
 outside the third-party ranking. LibreOfficeKit's official distribution and C
-headers are hash pinned. Nine of the fourteen paths have comparable Homebrew
+headers are hash pinned. unpdf's C ABI builds from a pinned crates.io release
+with its bundled Cargo.lock. Nine of the fifteen paths have comparable Homebrew
 formula requested-install counts in the fixed 365-day window. LibreOffice's
 416,680 Homebrew cask install events are an auxiliary application-wide signal
 and do not enter the formula ranking. See the
