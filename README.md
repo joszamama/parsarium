@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,535 of 1,699 verified package paths have a recorded comparable cell metric;
-164 are unranked. A recorded zero is still a measured value, not evidence of
+1,536 of 1,703 verified package paths have a recorded comparable cell metric;
+167 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1285,12 +1285,13 @@ or quality judgment.
   use the same underlying readers; SuperLU and SuperLU_DIST have closely related
   Matrix Market reader implementations.
 
-- [Java × Matrix Market ranking](data/java/matrix_market/ranking.md): seven
-  verified package paths, thirteen below the working goal. MeteoInfo
+- [Java × Matrix Market ranking](data/java/matrix_market/ranking.md): eight
+  verified package paths, twelve below the working goal. MeteoInfo
   Math 4.3.0 adds a published `DMatrix.market(Path)` reader over a Smile-derived
   implementation; it has four known exact-release direct dependents. The
   tagged Drop-seq 3.0.2 Java library independently parsed three coordinate
-  entries; its comparable Maven adoption metric is unavailable. The ranking
+  entries. The GraphTea v1.0.0 source-built framework reader also parsed the
+  valid control. Both lack a comparable Maven adoption metric. The ranking
   records shared lineages and does not equate project adoption with Matrix
   Market use.
 

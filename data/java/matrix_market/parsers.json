@@ -146,5 +146,26 @@
       "value_0_2": -2.0
     },
     "release_note": "Official tagged v3.0.2 distribution ZIP contains dropseq.jar and htsjdk-4.0.2.jar; both inner JARs and the outer archive are SHA-256 pinned."
+  },
+  {
+    "name": "graphtea",
+    "group": null,
+    "version": "v1.0.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "Pinned tagged GraphTea LICENSE and official v1.0.0 release",
+    "input_api": "MM.loadMatrixFromSPARSE(File local path), returning Jama.Matrix",
+    "documentation": "https://github.com/rostam/GraphTea/blob/v1.0.0/src/graphtea/extensions/io/MM.java",
+    "family": "GraphTea native Java coordinate reader",
+    "scope": "2x3 real general coordinate matrix dimensions and value at (1,3)",
+    "control": "controls/matrix_market/real-general.mtx",
+    "adapter": "adapters/java/matrix_market/graphtea/GraphTeaMatrixMarketAdapter.java",
+    "source_kind": "source_build",
+    "source_lock": "data/java/matrix_market/graphtea-lock.json",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "value_0_2": -2.0
+    },
+    "release_note": "Official v1.0.0 source release of the GraphTea graph framework, with a public local-file Matrix Market reader. Build the tagged reader source against its bundled JAMA JAR; no compiled library asset or comparable Maven adoption metric was established."
   }
 ]

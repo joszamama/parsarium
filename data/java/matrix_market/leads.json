@@ -40,5 +40,23 @@
     "status": "unresolved",
     "source": "https://github.com/flag4j/Flag4j",
     "reason": "The official README documents Matrix Market file input for real/complex dense and coordinate matrices, and the repository has an MIT license. However, the repository API returned no tags on 2026-11-13 and Maven Central search for flag4j returned zero artifacts. The README states the project is before its initial beta release. No pinned released library, local adapter, valid-control result, or exact-release adoption metric is established."
+  },
+  {
+    "name": "artisynth/artisynth_core Maspack MatrixBase.scan",
+    "status": "unresolved",
+    "source": "https://github.com/artisynth/artisynth_core/blob/master/src/maspack/matrix/MatrixBase.java",
+    "reason": "Source inspection found scanMatrixMarket behind public scan(ReaderTokenizer), but the upstream repository has no Git tag or GitHub release and no Maven Central Maspack artifact was established. This is a code-search lead, not a pinned released library path."
+  },
+  {
+    "name": "GraphChi graphchi-java Matrix Market banner hits",
+    "status": "excluded_writer_only",
+    "source": "https://github.com/GraphChi/graphchi-java/blob/master/src/main/java/edu/cmu/graphchi/apps/ALSMatrixFactorization.java",
+    "reason": "Inspected banner occurrences write Matrix Market output from ALSMatrixFactorization; no input parser API is established by these hits."
+  },
+  {
+    "name": "GeneMANIA genemania Matrix Market banner hit",
+    "status": "excluded_writer_only",
+    "source": "https://github.com/GeneMANIA/genemania/blob/master/engine/src/main/java/org/genemania/engine/matricks/custom/AbstractMatrix.java",
+    "reason": "The matching AbstractMatrix.mmwrite method writes Matrix Market output; the banner hit does not demonstrate an input reader."
   }
 ]
