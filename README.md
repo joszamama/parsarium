@@ -30,7 +30,7 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,525 of 1,681 verified package paths have a recorded comparable cell metric;
+1,526 of 1,682 verified package paths have a recorded comparable cell metric;
 156 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.

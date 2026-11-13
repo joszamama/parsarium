@@ -34,6 +34,11 @@ def main() -> None:
                 assert sha256(path.read_bytes()).hexdigest() == release[f"{kind}_sha256"]
                 if kind == "jar":
                     jars[name] = path
+            for kind, evidence in release.get("evidence_files", {}).items():
+                path = temp / f"{name}-{kind}"
+                with urlopen(evidence["url"], timeout=45) as response:
+                    path.write_bytes(response.read())
+                assert sha256(path.read_bytes()).hexdigest() == evidence["sha256"]
         for dependency in snapshot["dependencies"]:
             key = dependency["artifact"]
             for kind in ("jar", "pom"):

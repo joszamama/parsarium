@@ -73,6 +73,15 @@ public final class PlyAdapter {
             vertices = cloud.getPoints().size();
             faces = cloud.getTriangles().size();
             indices = cloud.getTriangles().get(0);
+        } else if (args[0].equals("javagl-ply")) {
+            try (InputStream in = Files.newInputStream(Path.of(args[1]))) {
+                de.javagl.ply.PlySource source = de.javagl.ply.PlyReaders.create().read(in);
+                List<de.javagl.ply.Element> points = source.getElementList("vertex");
+                List<de.javagl.ply.Element> triangles = source.getElementList("face");
+                vertices = points.size();
+                faces = triangles.size();
+                indices = triangles.get(0).getIntListProperty("vertex_indices");
+            }
         } else if (args[0].equals("lwjgl-assimp")) {
             org.lwjgl.assimp.AIScene scene = org.lwjgl.assimp.Assimp.aiImportFile(args[1], 0);
             if (scene == null) throw new IllegalStateException(org.lwjgl.assimp.Assimp.aiGetErrorString());

@@ -12,7 +12,15 @@
     "scope": "ASCII PLY vertex and face counts, parsed face indices",
     "control": "controls/ascii_ply/triangle.ply",
     "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
-    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   },
   {
     "name": "meshio",
@@ -27,7 +35,15 @@
     "scope": "ASCII PLY vertex and face counts, parsed face indices",
     "control": "controls/ascii_ply/triangle.ply",
     "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
-    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   },
   {
     "name": "mesh-ply",
@@ -42,7 +58,15 @@
     "scope": "ASCII PLY triangle vertex and face counts, parsed face indices",
     "control": "controls/ascii_ply/triangle.ply",
     "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
-    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   },
   {
     "name": "pcutil",
@@ -57,7 +81,15 @@
     "scope": "ASCII PLY triangle vertex and face lists, parsed face indices",
     "control": "controls/ascii_ply/triangle.ply",
     "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
-    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   },
   {
     "name": "lwjgl-assimp",
@@ -72,7 +104,15 @@
     "scope": "ASCII PLY triangle vertex and face counts, parsed face indices",
     "control": "controls/ascii_ply/triangle.ply",
     "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
-    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   },
   {
     "name": "MonkeyWrench",
@@ -88,6 +128,37 @@
     "control": "controls/ascii_ply/triangle.ply",
     "adapter_module": "monkeywrench",
     "adapter": "adapters/java/ascii_ply/monkeywrench/src/main/java/org/parsarium/MonkeyWrenchPlyAdapter.java",
-    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "javagl-ply",
+    "group": "de.javagl",
+    "artifact": "ply",
+    "version": "0.0.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/javagl/Ply/blob/ply-parent-0.0.4/LICENSE",
+    "input_api": "PlyReaders.create().read(InputStream from local path), PlySource.getElementList(), Element.getIntListProperty()",
+    "documentation": "https://github.com/javagl/Ply/tree/ply-parent-0.0.4",
+    "family": "JavaGL Ply native Java ASCII PLY reader",
+    "scope": "ASCII PLY triangle vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   }
 ]
