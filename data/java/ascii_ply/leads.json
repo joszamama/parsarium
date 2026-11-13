@@ -3,7 +3,7 @@
     "name": "Ardor3D PlyImporter",
     "status": "unresolved",
     "source": "https://jogamp.org/deployment/ardor3d/javadoc/com/ardor3d/extension/model/ply/PlyImporter.BinaryPlyReader.html",
-    "reason": "Javadoc documents a PLY reader; a pinned published open-source artifact and ASCII control run remain unchecked."
+    "reason": "JogAmp Javadoc documents a PlyImporter, but the tagged upstream Ardor3D 1.6.0 tree lacks that class; the documented JogAmp build is a 1.0-SNAPSHOT continuation. A pinned released artifact containing the importer and an ASCII control run remain unestablished."
   },
   {
     "name": "ArtiSynth Maspack PlyReader",
@@ -13,5 +13,19 @@
     "release": "artisynth_core_3.9.zip",
     "archive_sha256": "d7550d5890eb3d66c7605aa31f6c23610708fc1133da6d089623e7cc1834a65f",
     "reason": "The official 3.9 ZIP includes PlyReader source and compiled classes and a local-file API; a temporary control run parsed the ASCII triangle. However, its distribution LICENSE documents bundled TetGen restricted to noncommercial use. A separately released BSD-only Maspack PLY reader package has not been established, so the mixed-license distribution is not counted as an open-source package path."
+  },
+  {
+    "name": "JSplat jsplat-io-ply",
+    "status": "unresolved",
+    "source": "https://github.com/javagl/JSplat",
+    "api_evidence": "https://github.com/javagl/JSplat#examples",
+    "reason": "The publisher documents PlySplatReader.readList(InputStream) and the module depends on de.javagl:ply:0.0.4, sharing that underlying PLY reader family. The module POM is 0.0.1-SNAPSHOT, GitHub has no release tag, and no Maven Central release was found; a pinned open-source release and suitable ASCII Gaussian-splat control run are unestablished."
+  },
+  {
+    "name": "pcljava",
+    "status": "unresolved",
+    "source": "https://github.com/m0glan/pcljava",
+    "api_evidence": "https://github.com/m0glan/pcljava#examples",
+    "reason": "The README documents PointCloud3dReaderPly.read(local filename) over native PCL, but gives only 0.0.1-SNAPSHOT as a version and lists external PCL 1.11.1 native dependencies. The repository has no release tag or GitHub release, so a pinned released package, exact native graph, and ASCII control run are unestablished."
   }
 ]
