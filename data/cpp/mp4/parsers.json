@@ -159,5 +159,24 @@
     "scope": "MP4 major brand, two audio/video tracks and one-second duration",
     "family": "Bento4 AP4 ISO BMFF core",
     "family_note": "C and C++ call sites share Bento4 AP4 core and C binding; C++ adapter compiles the C binding call site as C++."
+  },
+  {
+    "name": "libquicktime",
+    "version": "1.2.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://libquicktime.sourceforge.net/ and pinned source COPYING",
+    "documentation": "https://libquicktime.sourceforge.net/introduction.html",
+    "input_api": "quicktime_open(local MP4 filename, 1, 0); quicktime_video_tracks; quicktime_audio_tracks; quicktime_video_width/height",
+    "adapter": "adapters/cpp/mp4/libquicktime.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 video/audio track counts and 2x2 video dimensions from parsed atoms",
+    "family": "libquicktime native QuickTime/MP4 atom reader",
+    "family_note": "C and C++ adapters call the same pinned libquicktime C API. Codec decode plugins are not required for the container result."
   }
 ]

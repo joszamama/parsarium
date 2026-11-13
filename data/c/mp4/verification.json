@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:37:22.574540+00:00",
+  "checked_at_utc": "2026-11-13T10:01:43.343447+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,7 +43,12 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "dbadc26847ef2b6f77b0f358751233ed3bd791a646820afa8d4cd32ce5594d62",
-      "c_binding_library_sha256": "7e666234f242a8a57b324be3a79a9eee53a12317e745140a1477494fb32c058c"
+      "c_binding_library_sha256": "2347f3723fbe38aa2cd37a27d9f92b5fdd80fbf72240f1794a1329f2753eb0b7"
+    },
+    "libquicktime": {
+      "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
+      "local_header_sha256": "0265437560e0a2e4302d5c0aea4c55aff42dc08c7a4563b6c495c7a78f223f28",
+      "local_library_sha256": "ca313261754ac238aa92dc24aff6c417c6b8e678394db0b7474eaaf61a542b88"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -167,6 +172,20 @@
         "video_tracks": 1,
         "audio_tracks": 1,
         "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "libquicktime",
+      "version": "1.2.4",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/libquicktime/1.2.4_5/include/lqt -L/opt/homebrew/Cellar/libquicktime/1.2.4_5/lib -lquicktime -lm -lz -ldl /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/libquicktime.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/libquicktime",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/libquicktime /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2
       },
       "pass": true
     }
