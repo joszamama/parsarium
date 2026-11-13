@@ -84,5 +84,25 @@
     "scope": "ID3v2 title and frame count in a valid tagged MP3",
     "family": "id3lib ID3v2 parser",
     "family_note": "The C API wraps the same C++ id3lib engine used by the native C++ adapter. Both are one package path per ecosystem, not independent tag parsers."
+  },
+  {
+    "name": "libsndfile",
+    "version": "1.2.2",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+    "documentation": "https://libsndfile.github.io/libsndfile/api.html",
+    "input_api": "sf_open(local tagged MP3 filename, SFM_READ, SF_INFO); sf_get_string(SF_STR_TITLE); sf_readf_float decoded audio frame",
+    "adapter": "adapters/c/mp3_id3v2/libsndfile.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 8000,
+      "decoded_frames": 1
+    },
+    "scope": "ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame",
+    "family": "libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader",
+    "family_note": "The pinned libsndfile mpeg_decode.c uses mpg123_id3 and mpg123 audio decoding. This is a distinct package input API sharing the separately counted libmpg123 syntax engine. C and C++ call sites use the same C implementation."
   }
 ]

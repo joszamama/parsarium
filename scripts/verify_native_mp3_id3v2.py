@@ -53,6 +53,10 @@ def verify(ecosystem: str) -> None:
             member = tar.extractfile(source["license_member"])
             assert member is not None
             assert sha256(member.read()).hexdigest() == source["license_sha256"]
+            if "source_engine_member" in source:
+                member = tar.extractfile(source["source_engine_member"])
+                assert member is not None
+                assert sha256(member.read()).hexdigest() == source["source_engine_sha256"]
         assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
         if source.get("pkg_config"):
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
