@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:26:39.450189+00:00",
+  "checked_at_utc": "2026-11-13T02:31:28.045684+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp4/source-lock.json",
@@ -28,6 +28,16 @@
       "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
       "local_header_sha256": "4d9527778caa18bc1b1fd5b4ea4daaff42f9f6a9f1133645b7b8eed593190ec2",
       "local_library_sha256": "8108065eff0fea4130e7353a39c0f62cd6adb4a1b41a63b5f8f16c51d4ac9e2b"
+    },
+    "mp4v2": {
+      "source_sha256": "033185c17bf3c5fdd94020c95f8325be2e5356558e3913c3d6547a85dd61f7f1",
+      "local_header_sha256": "c3697986784b0c8c4dc6b4f424be8c197904136d2011db8760131581b719e240",
+      "local_library_sha256": "9b2a408edcb07458be9a87a9c08075ad4940ed078ccc7ede8e9ad60a25618fe6"
+    },
+    "gpac": {
+      "source_sha256": "57822c1a74dcb83d76ff1f671e1b4fae2e7614e8194a5adb9f20661e0e9421dd",
+      "local_header_sha256": "6457640702582edecd231dd9e69cab6302dae796b7e954fcdb5bacce148d0639",
+      "local_library_sha256": "63cf5bc033f7783d8f270aef0f17d5b5c97f24aa164a216e2e45ce932c200677"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -104,6 +114,37 @@
         "title": "Parsarium",
         "video_tracks": 1,
         "audio_tracks": 1,
+        "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "mp4v2",
+      "version": "2.1.3",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/mp4v2.cpp -I/opt/homebrew/Cellar/mp4v2/2.1.3/include -L/opt/homebrew/Cellar/mp4v2/2.1.3/lib -lmp4v2 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/mp4v2",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/mp4v2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "gpac",
+      "version": "26.07.0",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/gpac.cpp -I/opt/homebrew/Cellar/gpac/26.07.0_2/include -L/opt/homebrew/Cellar/gpac/26.07.0_2/lib -lgpac -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/gpac",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/gpac /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2,
         "duration_ms": 1000
       },
       "pass": true

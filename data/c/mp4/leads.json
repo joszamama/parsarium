@@ -1,26 +1,14 @@
 [
   {
-    "name": "mp4v2",
-    "status": "unresolved",
-    "reason": "Homebrew MP4 formula lead; local library API and control result not yet verified.",
-    "source": "https://formulae.brew.sh/formula/mp4v2"
-  },
-  {
     "name": "mp4ff",
-    "status": "unresolved",
-    "reason": "Homebrew MP4 formula lead; identify its C/C++ input API and test the control.",
+    "status": "excluded_no_native_library_api",
+    "reason": "The upstream mp4ff 0.62.1 is a Go module with Go command-line tools, and its Homebrew formula installs those tools. No C or C++ library API is documented; the Go package is evaluated in the Go MP4 cell.",
     "source": "https://formulae.brew.sh/formula/mp4ff"
   },
   {
-    "name": "gpac",
-    "status": "unresolved",
-    "reason": "Homebrew GPAC formula lead; identify the libgpac ISO media API and test the control.",
-    "source": "https://formulae.brew.sh/formula/gpac"
-  },
-  {
     "name": "mp4box",
-    "status": "unresolved",
-    "reason": "Homebrew MP4 formula lead; determine whether this is a separate reusable library path or the GPAC MP4Box CLI before counting.",
+    "status": "excluded_duplicate_alias",
+    "reason": "Homebrew mp4box resolves to the gpac formula and MP4Box is its CLI; the GPAC library package is counted once.",
     "source": "https://formulae.brew.sh/formula/mp4box"
   },
   {
