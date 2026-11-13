@@ -80,10 +80,22 @@ def verify(ecosystem: str) -> None:
                 include_dir = cache / "libigl-2.6.4/include"
                 for member, expected in source["source_members"].items():
                     assert digest(cache / member) == expected
+            if source.get("source_build") == "plywoot":
+                for member in tar.getmembers():
+                    member_path = Path(member.name)
+                    assert not member_path.is_absolute() and ".." not in member_path.parts
+                    assert member.name == "PLYwoot-0.3.0" or member.name.startswith("PLYwoot-0.3.0/")
+                if not (cache / "PLYwoot-0.3.0/include/plywoot/plywoot.hpp").exists():
+                    tar.extractall(cache, filter="data")
+                include_dir = cache / "PLYwoot-0.3.0/include"
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
                 assert digest(Path(path)) == expected, path
+        for path, expected in source.get("toolchain_files", {}).items():
+            assert digest(Path(path)) == expected, path
         compiler = "cc" if ecosystem == "c" else "c++"
         language = "-std=c11" if ecosystem == "c" else "-std=c++17"
         if name == "assimp":
@@ -132,6 +144,13 @@ def verify(ecosystem: str) -> None:
                        "-isystem", str(include_dir),
                        "-isystem", "/opt/homebrew/opt/eigen/include/eigen3",
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif source.get("source_build") == "plywoot":
+            assert run(["/opt/homebrew/opt/llvm/bin/clang++", "--version"]).splitlines()[0] == "Homebrew clang version 23.1.4"
+            command = ["/opt/homebrew/opt/llvm/bin/clang++", language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-nostdinc++", "-isystem", "/opt/homebrew/opt/llvm/include/c++/v1",
+                       "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
+                       "-L/opt/homebrew/opt/llvm/lib/c++", "-Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++",
+                       "-stdlib=libc++", "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),

@@ -160,5 +160,25 @@
       "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtksys-9.7.9.7.dylib": "97ad2d58b3bb62780d623437bc255f9bee99ffee4478dec089ebaeb3f3059e1b"
     },
     "build_note": "Pinned VTK 9.7.2 source and Homebrew binary. Reader and vtkPLY parser source, installed public header and native linked libraries are SHA-256 checked."
+  },
+  "plywoot": {
+    "release": "0.3.0",
+    "tag": "v0.3.0",
+    "source_build": "plywoot",
+    "license": "GPL-3.0-or-later",
+    "source_url": "https://github.com/ton/PLYwoot/archive/refs/tags/v0.3.0.tar.gz",
+    "source_sha256": "18d2606eafb8bfc700d1eb57d665f335e4601877a11132a7873d0491ae496701",
+    "header_member": "PLYwoot-0.3.0/include/plywoot/plywoot.hpp",
+    "source_members": {
+      "PLYwoot-0.3.0/include/plywoot/plywoot.hpp": "91a20485e3e5e8d991d3a884d63850abd8fdb460c6fdc927464e8692ea379d64",
+      "PLYwoot-0.3.0/include/plywoot/plywoot/ascii_parser_policy.hpp": "c08188e120280fff4f10859a513305d49613950e127a79c2a5779fe9290d415d",
+      "PLYwoot-0.3.0/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "PLYwoot-0.3.0/README.md": "dd34a70db3b0092a8b34d5caae3a7b380be05b8ac01a754c4169abb51d94442f"
+    },
+    "toolchain_files": {
+      "/opt/homebrew/opt/llvm/include/c++/v1/charconv": "526d60e3d442718b2f0b84fddf10618d99183d6fee99ff0cd3d631e6bafb2ec3",
+      "/opt/homebrew/opt/llvm/lib/c++/libc++.dylib": "bc23a043c10c64d9662234ea1768d5c3ecc0989f69dde155d37725132c2cc561"
+    },
+    "build_note": "Header-only official tagged release. Homebrew Clang/LLVM libc++ 23.1.4 is used because the installed Apple libc++ lacks floating-point std::to_chars instantiated by PLYwoot writer headers. The relevant toolchain header and dylib hashes are pinned."
   }
 }

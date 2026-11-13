@@ -1,6 +1,6 @@
 # C++ × ASCII PLY: verified parser ranking
 
-9 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
+10 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -13,5 +13,6 @@
 | unranked | [tinyply](https://github.com/ddiakopoulos/tinyply/blob/3.0/README.md) | 3.0 | unknown | three parsed vertices and one triangular face from ASCII PLY | tinyply header-only PLY parser |
 | unranked | [rply](https://w3.impa.br/~diego/software/rply/) | 1.1.4 | unknown | three vertex callbacks and three face-index callbacks from ASCII PLY | RPly 1.1.4 ANSI C parser |
 | unranked | [libigl](https://libigl.github.io/dox/readPLY_8h.html) | 2.6.4 | unknown | three vertex positions and one triangle face matrix | libigl readPLY over bundled tinyply 2.3.2 |
+| unranked | [plywoot](https://github.com/ton/PLYwoot/blob/v0.3.0/README.md) | 0.3.0 | unknown | vertices and face indices | PLYwoot native ASCII parser |
 
 Assimp C and C++ APIs share one native loader. libigl exposes its own matrix API but bundles tinyply 2.3.2, while standalone tinyply is pinned at 3.0. PCL and VTK use separate PLY readers; VTK bundles vtkPLY. Formula-name hits are leads rather than parser proof. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.

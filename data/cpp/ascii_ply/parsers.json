@@ -182,5 +182,27 @@
     "scope": "three vertices, one polygon and its three indices",
     "family": "VTK vtkPLYReader over bundled vtkPLY syntax parser",
     "family_note": "VTK bundles vtkPLY; distinct from RPly and the other listed PLY engines."
+  },
+  {
+    "name": "plywoot",
+    "version": "0.3.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/ton/PLYwoot/blob/v0.3.0/LICENSE",
+    "documentation": "https://github.com/ton/PLYwoot/blob/v0.3.0/README.md",
+    "input_api": "std::ifstream(local filename); plywoot::IStream(stream); readElement<Vertex, Layout>(); readElement<Triangle, Layout>()",
+    "adapter": "adapters/cpp/ascii_ply/plywoot.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one triangle with three indices",
+    "family": "PLYwoot native ASCII parser",
+    "family_note": "Independent header-only C++ PLY parser with direct stream input."
   }
 ]

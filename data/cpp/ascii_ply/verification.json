@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:35:16.088390+00:00",
+  "checked_at_utc": "2026-11-13T03:38:08.874928+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -69,6 +69,11 @@
         "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtksys-9.7.9.7.dylib": "97ad2d58b3bb62780d623437bc255f9bee99ffee4478dec089ebaeb3f3059e1b"
       },
       "source_header_sha256": "3d07d5aaf2c4fe9114a8910644eb3c1491306b52ebb8bd92e4bc452459c87bfe"
+    },
+    "plywoot": {
+      "source_sha256": "18d2606eafb8bfc700d1eb57d665f335e4601877a11132a7873d0491ae496701",
+      "installed_files": {},
+      "source_header_sha256": "91a20485e3e5e8d991d3a884d63850abd8fdb460c6fdc927464e8692ea379d64"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -202,6 +207,23 @@
       "control": "controls/ascii_ply/triangle.ply",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/vtk/9.7.2/include/vtk-9.7 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/vtk.cpp -L/opt/homebrew/Cellar/vtk/9.7.2/lib -Wl,-rpath,/opt/homebrew/Cellar/vtk/9.7.2/lib -lvtkIOPLY-9.7 -lvtkCommonDataModel-9.7 -lvtkCommonCore-9.7 -lvtkCommonExecutionModel-9.7 -lvtksys-9.7 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/vtk",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/vtk /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "plywoot",
+      "version": "0.3.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "/opt/homebrew/opt/llvm/bin/clang++ -std=c++17 -O2 -Wall -Wextra -Werror -nostdinc++ -isystem /opt/homebrew/opt/llvm/include/c++/v1 -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/PLYwoot-0.3.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/plywoot.cpp -L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++ -stdlib=libc++ -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/plywoot",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/plywoot /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "faces": 1,
