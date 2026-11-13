@@ -388,5 +388,23 @@
     "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
     "family": "QtBase QImageReader with QtSvg image plugin",
     "family_note": "QtBase provides the generic image input API; the hash-pinned QtSvg plugin and framework perform SVG syntax parsing. This shares the QtSvg engine with the separately verified QSvgRenderer package path."
+  },
+  {
+    "name": "novasvg",
+    "version": "0.11.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/MohammadRaziei/novasvg/blob/v0.11.5/LICENSE.txt",
+    "documentation": "https://mohammadraziei.github.io/novasvg/index.html",
+    "input_api": "novasvg::Document::loadFromFile(local filename); width(); height(); querySelectorAll(\"rect\")",
+    "adapter": "adapters/cpp/svg/novasvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rectangles": 2
+    },
+    "scope": "SVG root dimensions and two parsed rectangle elements",
+    "family": "NovaSVG native C++ SVG parser",
+    "family_note": "Header-only C++17 library with its own SVG document parser and rasterizer."
   }
 ]

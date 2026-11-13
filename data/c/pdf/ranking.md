@@ -8,10 +8,9 @@
 | 2 | [libvips](https://www.libvips.org/API/current/ctor.Image.pdfload.html) | 8.18.7 | 11,801 | PDF page count and first page dimensions | vips-poppler module over Poppler |
 | 3 | [qpdf C API](https://github.com/qpdf/qpdf/blob/v12.4.2/include/qpdf/qpdf-c.h) | 12.4.2 | 5,582 | parsed PDF page count | qpdf C API over C++ PDF parser |
 | 4 | [pdf_oxide](https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h) | 0.3.78 | 1,186 | parsed PDF page count | pdf_oxide Rust PDF parser via C ABI |
-| 5 | [pdf_oxide](https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h) | 0.3.78 | 1,186 | parsed PDF page count | pdf_oxide Rust PDF parser via C ABI |
-| 6 | [PDFio](https://www.msweet.org/pdfio/pdfio.html) | 1.6.5 | 361 | parsed PDF page count and first page object | PDFio PDF parser |
-| 7 | [Vanilla.PDF](https://vanillapdf.readthedocs.io/en/stable/c_api.html) | 2.3.0 | 13 | parsed PDF page count and first page object | Vanilla.PDF C API over C++ PDF parser |
-| 8 | [tspdf](https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md) | 0.5.1 | 0 | parsed PDF page count and first page | tspdf pure C11 PDF parser |
+| 5 | [PDFio](https://www.msweet.org/pdfio/pdfio.html) | 1.6.5 | 361 | parsed PDF page count and first page object | PDFio PDF parser |
+| 6 | [Vanilla.PDF](https://vanillapdf.readthedocs.io/en/stable/c_api.html) | 2.3.0 | 13 | parsed PDF page count and first page object | Vanilla.PDF C API over C++ PDF parser |
+| 7 | [tspdf](https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md) | 0.5.1 | 0 | parsed PDF page count and first page | tspdf pure C11 PDF parser |
 | unranked | [GraphicsMagick](https://graphicsmagick.sourceforge.io/formats.html) | 1.3.49 | unknown | rendered PDF page and dimensions | GraphicsMagick PDF coder + Ghostscript |
 | unranked | [Poppler GLib](https://poppler.freedesktop.org/api/glib/PopplerDocument.html) | 26.11.0 | unknown | parsed PDF page count | Poppler PDF parser, GLib C frontend |
 | unranked | [MuPDF](https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html) | 1.28.6 | unknown | parsed PDF page count | MuPDF C document parser |
@@ -26,6 +25,5 @@ Both Magick paths use Ghostscript for PDF interpretation in the recorded build a
 
 libvips loads PDF through its Poppler module in this pinned installation and shares that underlying parser with the Poppler path.
 
-pdf_oxide uses a tagged C++17/C API over one Rust PDF engine. Its publisher binary is hash pinned, but source-to-binary equivalence and PDF-specific adoption are unestablished.
 
 pdf_oxide uses a tagged C++17/C API over one Rust PDF engine. Its publisher binary is hash pinned, but source-to-binary equivalence and PDF-specific adoption are unestablished.

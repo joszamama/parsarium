@@ -61,7 +61,15 @@ def verify(ecosystem: str) -> None:
                 assert sha256(engine_member.read()).hexdigest() == source["source_engine_sha256"]
         formula = "vips" if name == "libvips" else name
         source_build = None
-        if name == "resvg":
+        if name == "novasvg":
+            source_dir = cache / f"novasvg-{source['release']}"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            run(["tar", "-xzf", str(archive), "-C", str(cache)])
+            header = source_dir / "include/novasvg/novasvg.h"
+            library = None
+            source_build = ["tar", "-xzf", str(archive), "-C", str(cache)]
+        elif name == "resvg":
             source_dir = cache / f"resvg-{source['release']}"
             if source_dir.exists():
                 shutil.rmtree(source_dir)
@@ -84,7 +92,11 @@ def verify(ecosystem: str) -> None:
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
         std = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
-        if name == "resvg":
+        if name == "novasvg":
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(header.parent.parent), str(ROOT / parser["adapter"]),
+                       "-o", str(target / name)]
+        elif name == "resvg":
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(header.parent), str(ROOT / parser["adapter"]),
                        str(library), "-Wl,-rpath," + str(library.parent), "-o", str(target / name)]
@@ -114,8 +126,9 @@ def verify(ecosystem: str) -> None:
             row["source_build_command"] = shlex.join(source_build)
         rows.append(row)
         libraries[name] = {"source_sha256": source["source_sha256"],
-                           "local_header_sha256": source["local_header_sha256"],
-                           "local_library_sha256": sha256(library.read_bytes()).hexdigest()}
+                           "local_header_sha256": source["local_header_sha256"]}
+        if library is not None:
+            libraries[name]["local_library_sha256"] = sha256(library.read_bytes()).hexdigest()
         print(f"{name}@{parser['version']}: {ecosystem} SVG passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++" if ecosystem == "cpp" else "cc", "--version"]).splitlines()[0],

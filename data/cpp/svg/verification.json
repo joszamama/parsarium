@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:01:48.533491+00:00",
+  "checked_at_utc": "2026-11-13T02:41:40.641107+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -78,6 +78,10 @@
       "source_sha256": "a951bd163c7b80fc6b8c88d7668fb56abf91c152373e13c10666763238131307",
       "local_header_sha256": "b64f01268c70613aacdd4f3115fe75154028843ddd0a3dfc807873de794ffa2d",
       "local_library_sha256": "0eb2e155c4c4ac02231e4a2adf0dfaa0dff39f8a49f86d0c097b1509735729a2"
+    },
+    "novasvg": {
+      "source_sha256": "7b42d471071ade8d0e3a7db63b64a4a631f832c0f3c33ec8f18f85924f5c1e9b",
+      "local_header_sha256": "671da3abd9e8e941930064e8d2dd9987daa0c5110565f3c0ea862002908ec321"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -398,6 +402,20 @@
         ]
       },
       "pass": true
+    },
+    {
+      "package": "novasvg",
+      "version": "0.11.5",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/novasvg-0.11.5/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/novasvg.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/novasvg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/novasvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rectangles": 2
+      },
+      "pass": true,
+      "source_build_command": "tar -xzf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/novasvg-0.11.5.tar.gz -C /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg"
     }
   ],
   "runtime": []
