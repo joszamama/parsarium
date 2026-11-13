@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T07:27:51.680701+00:00",
+  "checked_at_utc": "2026-11-13T08:40:34.015271+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -110,6 +110,20 @@
         "libdeflate": "b122c8be1d78b19f6d0a6efc5bb79bfcbb30dd51",
         "xml": "4289c02cda9a73a8e11137279a6dc6e9347adee3"
       }
+    },
+    "rplycpp": {
+      "source_sha256": "771adf95bef5b667e3811a0b8087d8f836e38471a57d30d55a2a290ab74cbb5b",
+      "installed_files": {},
+      "source_header_sha256": "3e69adf65de256e8fc6261fe9392d4858c84122b75f8bafa9e2a076835f7aee4"
+    },
+    "geogram": {
+      "source_sha256": "30033340a0dfd86f9e15a8ffdd7c1e6d49b967d3f26fb96cf3dfd1a502d8eba2",
+      "installed_files": {
+        "/opt/homebrew/Cellar/geogram/1.10.1/include/geogram1/geogram/mesh/mesh_io.h": "b4287b65eaa0cd44ecafe752c09e4eba117a25c4141ba676a9ce3baf098524ce",
+        "/opt/homebrew/Cellar/geogram/1.10.1/include/geogram1/geogram/basic/common.h": "688376c9ec6989c6722c983838a1c3dd12cd097bc8e994d65f7ec8c3a812c1cb",
+        "/opt/homebrew/Cellar/geogram/1.10.1/lib/libgeogram.1.10.1.dylib": "3b8b6079532fc38d142a1d1cb3b48e02b0b6bf559ebe59b77e02a701ef93678b"
+      },
+      "source_header_sha256": "b4287b65eaa0cd44ecafe752c09e4eba117a25c4141ba676a9ce3baf098524ce"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -347,6 +361,40 @@
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/assetkit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "meshes": 1,
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "rplycpp",
+      "version": "1.1.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/rplycpp-1.1.0/src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/rplycpp.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/rplycpp-1.1.0-build/librplycpp.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/rplycpp",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/rplycpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "geogram",
+      "version": "1.10.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/geogram/1.10.1/include/geogram1 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/geogram.cpp -L/opt/homebrew/Cellar/geogram/1.10.1/lib -Wl,-rpath,/opt/homebrew/Cellar/geogram/1.10.1/lib -lgeogram -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/geogram",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/geogram /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
         "vertices": 3,
         "faces": 1,
         "face": [

@@ -170,6 +170,21 @@ def verify(ecosystem: str) -> None:
                      "-DAK_BUILD_DECODER_SHIMS=OFF", "-DAK_FETCH_DEPS=OFF",
                      "-DAK_BUILD_CLI=OFF", "-DAK_BUILD_SAMPLES=OFF"], timeout=240)
                 run(["cmake", "--build", str(build_dir), "--parallel", "8"], timeout=300)
+            if source.get("source_build") == "rplycpp":
+                include_dir = cache / f"rplycpp-{source['release']}"
+                if not (include_dir / "src/rplycpp.hpp").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"rplycpp-{source['release']}" or member.name.startswith(f"rplycpp-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+                build_dir = cache / f"rplycpp-{source['release']}-build"
+                run(["cmake", "-S", str(include_dir), "-B", str(build_dir),
+                     "-DCMAKE_BUILD_TYPE=Release", "-DRPLYCPP_BUILD_TESTS=OFF",
+                     "-DRPLYCPP_BUILD_SAMPLES=OFF"])
+                run(["cmake", "--build", str(build_dir), "--parallel", "4"])
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -211,6 +226,13 @@ def verify(ecosystem: str) -> None:
                        "-Wl,-rpath," + str(prefix / "lib"),
                        "-lvtkIOPLY-9.7", "-lvtkCommonDataModel-9.7", "-lvtkCommonCore-9.7",
                        "-lvtkCommonExecutionModel-9.7", "-lvtksys-9.7",
+                       "-o", str(target / name)]
+        elif name == "geogram":
+            prefix = Path(source["prefix"])
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(prefix / "include/geogram1"),
+                       str(ROOT / parser["adapter"]), "-L" + str(prefix / "lib"),
+                       "-Wl,-rpath," + str(prefix / "lib"), "-lgeogram",
                        "-o", str(target / name)]
         elif source.get("source_build") == "rply":
             object_path = include_dir / "rply.o"
@@ -272,6 +294,10 @@ def verify(ecosystem: str) -> None:
                        "-Wl,-rpath," + str(build_dir),
                        "-Wl,-rpath," + str(build_dir / "deps/ds"),
                        "-lassetkit", "-lds", "-o", str(target / name)]
+        elif source.get("source_build") == "rplycpp":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir / "src"), str(ROOT / parser["adapter"]),
+                       str(build_dir / "librplycpp.a"), "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),

@@ -315,5 +315,49 @@
     "scope": "three vertices and one triangular face with parsed indices from ASCII PLY",
     "family": "AssetKit native ASCII PLY importer",
     "family_note": "C and C++ adapters call the same AssetKit C API and native PLY importer."
+  },
+  {
+    "name": "rplycpp",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/manlito/rplycpp/blob/v1.1.0/LICENSE",
+    "documentation": "https://github.com/manlito/rplycpp/blob/v1.1.0/README.md",
+    "input_api": "rplycpp::PLYReader::Open(local filename); GetElements; Read(handlers)",
+    "adapter": "adapters/cpp/ascii_ply/rplycpp.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one triangle face with indices from ASCII PLY",
+    "family": "rplycpp wrapper over bundled RPly",
+    "family_note": "Tagged rplycpp v1.1.0 exposes a distinct C++ callback API but bundles RPly; it shares the RPly parser family with the standalone rply C and C++ paths."
+  },
+  {
+    "name": "geogram",
+    "version": "1.10.1",
+    "license": "BSD-3-Clause AND MIT",
+    "license_evidence": "https://github.com/BrunoLevy/geogram/blob/v1.10.1/LICENSE",
+    "documentation": "https://github.com/BrunoLevy/geogram/wiki/Mesh",
+    "input_api": "GEO::initialize(); GEO::mesh_load(local filename, GEO::Mesh&, MeshIOFlags)",
+    "adapter": "adapters/cpp/ascii_ply/geogram.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed mesh vertices and one triangle facet with indices",
+    "family": "Geogram PLYIOHandler over bundled RPly 1.1.4",
+    "family_note": "Geogram v1.10.1 registers PLYIOHandler in mesh_io.cpp and calls bundled RPly 1.1.4. This shares the RPly underlying syntax parser family with standalone RPly and rplycpp, but Geogram exposes its distinct mesh_load API and mesh representation."
   }
 ]
