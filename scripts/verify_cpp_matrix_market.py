@@ -110,6 +110,10 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "pigo":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(cache / source["archive_root"] / "include"),
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
         elif name == "eminem":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),

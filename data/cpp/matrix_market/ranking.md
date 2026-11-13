@@ -1,6 +1,6 @@
 # C++ × Matrix Market: verified parser ranking
 
-12 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+13 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -16,6 +16,7 @@
 | unranked | [MTL5](https://github.com/stillwater-sc/mtl5/blob/v5.23.0/include/mtl/io/matrix_market.hpp) | 5.23.0 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | MTL5 native Matrix Market reader |
 | unranked | [LAGraph](https://lagraph.readthedocs.io/en/latest/utils.html) | 1.2.2 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | LAGraph native Matrix Market reader |
 | unranked | [librsb](https://librsb.sourceforge.net/doc/1.3.0.0/group__rsb__doc__rsb.html) | 1.3.0.3 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | librsb native Matrix Market loader |
+| unranked | [PIGO](https://github.com/GT-TDAlab/PIGO/blob/v0.6/tests/coo/test_weight_mtx.cpp) | 0.6 | unknown | three 1-based entries and value −2 at (1,3); reports dimensions 3×4 for a 2×3 file | PIGO native COO reader |
 
 Formula-name hits are leads rather than parser proof. The SuiteSparse and Lis paths each share an underlying parser with their C call sites. Lis accepts the square symmetric control and rejects the rectangular general control. The C++ standard library has no documented Matrix Market parser. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -30,3 +31,5 @@ LAGraph 1.2.2 parsed the local Matrix Market control through `LAGraph_MMRead(FIL
 librsb 1.3.0.3 parsed the control through `rsb_file_mtx_load(local filename)`. Its C and C++ adapters share one native reader. The official LGPL-3.0-or-later release is source-pinned and built locally; no comparable Homebrew requested-install count was available.
 
 SuperLU 7.0.1 parsed the valid square symmetric control through `dreadMM(FILE *)`. Its source rejects rectangular matrices. The C and C++ adapters share one native reader; 333 Homebrew requested installs are recorded in the same 365-day window.
+
+PIGO v0.6 parsed the three weighted coordinate entries in the valid 2×3 real general control. Its API reported `nrows=3` and `ncols=4`, one greater than the header in both cases; the adapter reports those raw values. No comparable Homebrew requested-install count is available, so PIGO remains unranked.

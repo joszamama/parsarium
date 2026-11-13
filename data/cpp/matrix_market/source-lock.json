@@ -243,5 +243,21 @@
       "/opt/homebrew/Cellar/superlu/7.0.1/lib/libsuperlu.7.0.1.dylib": "dae8ed3a37757238d5fd9abfe9c3e4e144fcdae861b2b4d95723ba87009e4b23"
     },
     "build_note": "Official SuperLU v7.0.1 source, installed Homebrew header and dylib hash-pinned. pkg-config supplies link flags. The documented dreadMM FILE* API only accepts square coordinate real matrices; this control is a valid square symmetric matrix."
+  },
+  "pigo": {
+    "release": "0.6",
+    "source_build": "header_only",
+    "archive_root": "PIGO-0.6",
+    "license": "BSD-3-Clause",
+    "source_url": "https://github.com/GT-TDAlab/PIGO/archive/refs/tags/v0.6.tar.gz",
+    "source_sha256": "6c3a496463ed59d6da01eca680920e9cbf1ff430390adbf788544058431351bf",
+    "source_members": {
+      "PIGO-0.6/LICENSE.md": "7e5ce715d1e2ea8b92ad6f2d29942b39eb7c790b9113e76c14de4211c223c168",
+      "PIGO-0.6/include/pigo.hpp": "55250b2e9f293c706c00ebc7252b0c68aede09eccbb73157c9f0b7e35f970a78",
+      "PIGO-0.6/include/pigo/coo.hpp": "0efc9bd729b172680dfd39da79213c94a470a9f9ff44223f3ce8160a7ce44795",
+      "PIGO-0.6/include/pigo/impl/coo.impl.hpp": "1c8fe2663bb056d69979300ded07f89d540d21319184d3dbbeef773205e3a1f0",
+      "PIGO-0.6/tests/coo/test_weight_mtx.cpp": "f3878e18a7442ef9ec52d5bead338c3c0a8a1217f2619eda5d56c9ae03b0268b"
+    },
+    "build_note": "Official v0.6 header-only source and relevant members are hash-pinned. Compile the local-file COO reader without OpenMP. The reader preserves the three 1-based coordinate entries and their weights. Its reported nrows and ncols are one greater than the Matrix Market header dimensions for the valid 2x3 control; verification records the raw 3x4 result."
   }
 }
