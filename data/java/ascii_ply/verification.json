@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T20:38:00Z",
+  "checked_at_utc": "2026-11-13T20:42:00Z",
   "environment": {
     "java": "Eclipse Temurin OpenJDK 21.0.2",
     "platform": "macOS 27.2 arm64",
@@ -10,7 +10,8 @@
     "boofcv": "BoofCV IO 1.6.0 and five minimal Maven runtime JARs, all SHA-256 pinned, OpenJDK 21 on macOS arm64",
     "jzy3d": "Jzy3d Core 2.2.1 and jPLY 0.2.1 from official Jzy3d Maven repository, Log4j 2.17.1, all SHA-256 pinned, OpenJDK 21 on macOS arm64",
     "imglib2": "ImgLib2 Mesh 1.3.0 from official SciJava Maven repository and four minimal runtime JARs, SHA-256 pinned, OpenJDK 21 on macOS arm64",
-    "imaging": "AIST Imaging Mesh 2.0.0 plus Imaging API 2.0.0 and Seshat API 1.1.0, SHA-256 pinned Maven JARs and POMs, OpenJDK 21 on macOS arm64"
+    "imaging": "AIST Imaging Mesh 2.0.0 plus Imaging API 2.0.0 and Seshat API 1.1.0, SHA-256 pinned Maven JARs and POMs, OpenJDK 21 on macOS arm64",
+    "jmist": "JMIST Core 0.1.3 and eandb-util 0.2.2 pinned Maven JARs, OpenJDK 21 on macOS arm64; full POM graph includes unavailable JNLP system JAR, not used by this API"
   },
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
@@ -319,6 +320,26 @@
       "checked_at_utc": "2026-11-13T20:38:00Z",
       "source_lock": "data/java/ascii_ply/imaging-lock.json",
       "underlying_family": "AIST Imaging native ASCII PLY mesh reader"
+    },
+    {
+      "package": "jmist-core",
+      "version": "0.1.3",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "second_x": 1.0,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_jmist.py",
+      "checked_at_utc": "2026-11-13T20:42:00Z",
+      "source_lock": "data/java/ascii_ply/jmist-lock.json",
+      "underlying_family": "JMIST native Java PLY event reader"
     }
   ],
   "runtime": [],

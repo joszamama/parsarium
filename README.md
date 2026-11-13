@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,538 of 1,707 verified package paths have a recorded comparable cell metric;
-169 are unranked; 126 measured values are zero. A recorded zero is not evidence of
+1,539 of 1,708 verified package paths have a recorded comparable cell metric;
+169 are unranked; 127 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1255,8 +1255,8 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): eighteen verified
-  paths, two below the working goal. Twelve have exact-release Maven direct
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): nineteen verified
+  paths, one below the working goal. Thirteen have exact-release Maven direct
   dependent counts. F3D's source-built Java binding shares the native VTK
   reader with its C and C++ bindings; SceneView Core parses through a separate
   pure Kotlin reader. Both lack comparable direct-dependent counts and remain
@@ -1279,6 +1279,8 @@ or quality judgment.
   API and remains unranked under the same metric.
   AIST Imaging Mesh 2.0.0 parsed three points and one face through its own
   ASCII reader; its exact-release direct-dependent count is zero.
+  JMIST Core 0.1.3 parsed vertices and faces through a separate event reader;
+  its exact-release direct-dependent count is zero.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

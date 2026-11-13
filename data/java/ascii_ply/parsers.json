@@ -419,5 +419,33 @@
       "points": 3,
       "faces": 1
     }
+  },
+  {
+    "name": "jmist-core",
+    "group": "ca.eandb.jmist",
+    "artifact": "jmist-core",
+    "version": "0.1.3",
+    "license": "MIT",
+    "license_evidence": "Pinned v0.1.3 LICENSE, source header and Maven parent POM MIT license",
+    "input_api": "new PlyReader().read(File local path, PlyTarget); ElementListener receives parsed vertex and face properties",
+    "documentation": "https://github.com/bwkimmel/jmist/blob/v0.1.3/jmist-core/src/main/java/ca/eandb/jmist/framework/loader/ply/PlyReader.java",
+    "family": "JMIST native Java PLY event reader",
+    "family_note": "Tagged Java source implements its own PLY header and property reader with callbacks; no shared syntax parser with the other included Java paths was found.",
+    "scope": "ASCII triangle, three vertices, one face, vertex X value and face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jmist/src/main/java/org/parsarium/JmistPlyAdapter.java",
+    "adapter_module": "jmist",
+    "source_lock": "data/java/ascii_ply/jmist-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1.0,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "release_note": "The full Maven transitive dependency graph references an unavailable JNLP system JAR; this reader control needs only the pinned jmist-core and eandb-util JARs."
   }
 ]
