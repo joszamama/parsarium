@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T20:23:12Z",
+  "checked_at_utc": "2026-11-13T20:28:02Z",
   "environment": {
     "java": "Eclipse Temurin OpenJDK 21.0.2",
     "platform": "macOS 27.2 arm64",
@@ -7,7 +7,8 @@
     "f3d": "F3D 4.0.1 source built with LLVM 23.1.4, VTK 9.7.2, JDK 21.0.2 on macOS 27.2 arm64",
     "kotlin-assimp": "Official v4.0 assimp-all.jar release asset and tagged source, SHA-256 pinned; Java 21 on macOS 27.2 arm64",
     "vofxel": "JitPack v0.0.2 JAR, GPL-3.0 tagged source, OpenJDK on macOS arm64; direct public PlyParser API avoids JavaFX UI classes",
-    "boofcv": "BoofCV IO 1.6.0 and five minimal Maven runtime JARs, all SHA-256 pinned, OpenJDK 21 on macOS arm64"
+    "boofcv": "BoofCV IO 1.6.0 and five minimal Maven runtime JARs, all SHA-256 pinned, OpenJDK 21 on macOS arm64",
+    "jzy3d": "Jzy3d Core 2.2.1 and jPLY 0.2.1 from official Jzy3d Maven repository, Log4j 2.17.1, all SHA-256 pinned, OpenJDK 21 on macOS arm64"
   },
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
@@ -273,6 +274,21 @@
       "checked_at_utc": "2026-11-13T20:23:12Z",
       "source_lock": "data/java/ascii_ply/boofcv-lock.json",
       "underlying_family": "BoofCV native Java PLY mesh reader"
+    },
+    {
+      "package": "jzy3d-core",
+      "version": "2.2.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "second_x": 1.0,
+        "third_y": 1.0
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_jzy3d.py",
+      "checked_at_utc": "2026-11-13T20:28:02Z",
+      "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
+      "underlying_family": "Jzy3d public PLY vertex API over jPLY 0.2.1"
     }
   ],
   "runtime": [],

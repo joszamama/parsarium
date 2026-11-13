@@ -259,6 +259,21 @@
       "sources_jar_sha256": "dcc4376ad41b0e8a44f9a9931ed30b87cbd193976f6536efd5df0d2d56159777",
       "tag_commit": "c6401d374de710a3a6904480717970573ad05b82",
       "source_lock": "data/java/ascii_ply/boofcv-lock.json"
+    },
+    "jzy3d-core": {
+      "group": "org.jzy3d",
+      "artifact": "jzy3d-core",
+      "version": "2.2.1",
+      "license": "BSD-3-Clause",
+      "jar_url": "https://maven.jzy3d.org/releases/org/jzy3d/jzy3d-core/2.2.1/jzy3d-core-2.2.1.jar",
+      "jar_sha256": "1b0e31bce5745693d4c35872f6bf35f953c90d9eadcb6bee2383cd52f06bcf0e",
+      "pom_url": "https://maven.jzy3d.org/releases/org/jzy3d/jzy3d-core/2.2.1/jzy3d-core-2.2.1.pom",
+      "pom_sha256": "ecc0ef0a992c084c94aacdb828c0ec7473005d0c28b4d47b9b83e87ba8efb1fd",
+      "sources_jar_url": "https://maven.jzy3d.org/releases/org/jzy3d/jzy3d-core/2.2.1/jzy3d-core-2.2.1-sources.jar",
+      "sources_jar_sha256": "e2b0929dc3efb13c0d5b8f318b7b0a503d26d0435d00502441bd5d0935196840",
+      "tag_commit": "4d7661a3598783bd6664ca676cac1123b512052d",
+      "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
+      "repository": "https://maven.jzy3d.org/releases/"
     }
   },
   "dependencies": [
@@ -413,6 +428,15 @@
         "auxiliary_github_stars": 1207,
         "auxiliary_source": "https://api.github.com/repos/lessthanoptimal/BoofCV",
         "auxiliary_observed_at_utc": "2026-11-13T20:23:12Z"
+      },
+      "jzy3d-core": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.jzy3d%3Ajzy3d-core/versions/2.2.1:dependents",
+        "direct_dependent_count": null,
+        "observed_at_utc": "2026-11-13T20:28:02Z",
+        "note": "Exact-release deps.dev dependents endpoint returned HTTP 404; the artifact is published in the official Jzy3d Maven repository outside Maven Central, so comparable rank is unresolved.",
+        "auxiliary_github_stars": 310,
+        "auxiliary_source": "https://api.github.com/repos/jzy3d/jzy3d-api",
+        "auxiliary_observed_at_utc": "2026-11-13T20:28:02Z"
       }
     }
   },
@@ -485,6 +509,13 @@
       "input_api_evidence": "https://github.com/lessthanoptimal/BoofCV/blob/v1.6.0/main/boofcv-io/src/main/java/boofcv/io/points/PointCloudIO.java",
       "release_evidence": "https://repo.maven.apache.org/maven2/org/boofcv/boofcv-io/1.6.0/boofcv-io-1.6.0.pom",
       "disposition": "Verified ASCII triangle mesh through released PointCloudIO.load(Ply, InputStream, VertexMesh); 11 exact-release known public direct dependents."
+    },
+    {
+      "name": "org.jzy3d:jzy3d-core",
+      "url": "https://github.com/jzy3d/jzy3d-api/tree/jzy3d-all-2.2.1",
+      "format_evidence": "https://doc.jzy3d.org/javadoc/2.2.1/org/jzy3d/io/ply/Ply.html",
+      "release_evidence": "https://maven.jzy3d.org/releases/org/jzy3d/jzy3d-core/2.2.1/jzy3d-core-2.2.1.pom",
+      "disposition": "Verified three ASCII PLY vertex positions via Ply.read(InputStream); delegates to published jPLY 0.2.1 family and has no comparable deps.dev direct-dependent value."
     }
   ],
   "non_maven_release": {

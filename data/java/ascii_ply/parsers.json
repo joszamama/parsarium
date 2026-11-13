@@ -355,5 +355,27 @@
         2
       ]
     }
+  },
+  {
+    "name": "jzy3d-core",
+    "group": "org.jzy3d",
+    "artifact": "jzy3d-core",
+    "version": "2.2.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned official jzy3d-all 2.2.1 parent POM licenses section (The New BSD License)",
+    "input_api": "Ply.read(InputStream from local ASCII PLY file), returning List<Coord3d>",
+    "documentation": "https://doc.jzy3d.org/javadoc/2.2.1/org/jzy3d/io/ply/Ply.html",
+    "family": "Jzy3d public PLY vertex API over jPLY",
+    "family_note": "Published Jzy3d Core library depends on its published org.smurn:jply:0.2.1; the jPLY 0.2.0 package path is already counted in this cell. This is a separate package API but not an independent PLY syntax engine.",
+    "scope": "ASCII triangle vertex positions (three vertices, second X and third Y); faces not exposed by this API",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jzy3d/src/main/java/org/parsarium/Jzy3dPlyAdapter.java",
+    "adapter_module": "jzy3d",
+    "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0,
+      "third_y": 1.0
+    }
   }
 ]

@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,537 of 1,704 verified package paths have a recorded comparable cell metric;
-167 are unranked; 125 measured values are zero. A recorded zero is not evidence of
+1,537 of 1,705 verified package paths have a recorded comparable cell metric;
+168 are unranked; 125 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1255,8 +1255,8 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): fifteen verified
-  paths, five below the working goal. Eleven have exact-release Maven direct
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): sixteen verified
+  paths, four below the working goal. Eleven have exact-release Maven direct
   dependent counts. F3D's source-built Java binding shares the native VTK
   reader with its C and C++ bindings; SceneView Core parses through a separate
   pure Kotlin reader. Both lack comparable direct-dependent counts and remain
@@ -1273,6 +1273,8 @@ or quality judgment.
   not report an exact-release dependent count; it does not parse faces here.
   BoofCV IO 1.6.0 parsed the valid triangle mesh through its documented local
   stream API and has 11 known direct dependents for that exact Maven release.
+  Jzy3d Core 2.2.1 independently exposes a PLY vertex API but uses the jPLY
+  parser family; its comparable Maven dependent count is unavailable.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,
