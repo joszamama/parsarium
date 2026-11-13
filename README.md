@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,533 of 1,695 verified package paths have a recorded comparable cell metric;
-162 are unranked. A recorded zero is still a measured value, not evidence of
+1,533 of 1,696 verified package paths have a recorded comparable cell metric;
+163 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1223,14 +1223,17 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): twelve packages
-  verified on valid real coordinate or symmetric controls, 8 below the working
+- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): thirteen packages
+  verified on valid real coordinate or symmetric controls, 7 below the working
   goal. Three bounded Homebrew formula-name searches recorded 20 hits, 19 unique
-  names; 18 remain unverified. Eight verified packages lack comparable Homebrew
+  names; 18 remain unverified. Nine verified packages lack comparable Homebrew
   requested-install counts and remain unranked. SPM 1.2.4 is source-built; its
   reader is verified only on a square control. The Libmtx source build uses
   Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS. NIST's dated, hash-pinned
   `mmio.c` and `mmio.h` source files provide the reference C reader.
+  clSPARSE 0.10.2.0 parsed the full real-general control through its documented
+  C API into OpenCL COO buffers; its 177 GitHub stars are an auxiliary project
+  signal and cannot be ranked against Homebrew requested installs.
   pOSKI 1.0.0 is an unresolved additional lead: its official documentation
   names a Matrix Market reader, but the released source download currently
   returns HTTP 403, so no pinned adapter or control result exists.

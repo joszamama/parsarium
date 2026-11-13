@@ -223,5 +223,38 @@
     "scope": "3x3 real symmetric coordinate matrix, three diagonal nonzeros and entry (3,3) = 3; rectangular dimensions are not faithfully represented by this reader",
     "family": "SPM readMM with bundled Matrix Market mmio banner/size reader",
     "family_note": "Separate SolverStack SPM release, also used by PaStiX. Its native entry reader calls a bundled mmio implementation related to NIST mmio; the SPM package path is counted once."
+  },
+  {
+    "name": "clsparse",
+    "version": "0.10.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/clMathLibraries/clSPARSE/blob/v0.10.2.0/LICENSE",
+    "documentation": "https://github.com/clMathLibraries/clSPARSE/blob/v0.10.2.0/src/include/clSPARSE.h",
+    "input_api": "clsparseHeaderfromFile(..., local path); clsparseSCooMatrixfromFile(clsparseCooMatrix*, local path, clsparseControl, CL_TRUE)",
+    "adapter": "adapters/c/matrix_market/clsparse.c",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "row": [
+        0,
+        0,
+        1
+      ],
+      "col": [
+        0,
+        2,
+        1
+      ],
+      "value": [
+        1.5,
+        -2,
+        4
+      ]
+    },
+    "scope": "2x3 real general coordinate matrix, three sorted zero-based coordinates and their values, read into OpenCL COO buffers",
+    "family": "clSPARSE MatrixMarketReader with bundled NIST mmio banner definitions",
+    "family_note": "Separate Apache-2.0 OpenCL library with a documented C file API and its own coordinate-entry reader; the banner/type macros come from the NIST mmio lineage. One package path, not an independent reference parser."
   }
 ]

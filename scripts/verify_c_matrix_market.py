@@ -18,6 +18,7 @@ from prepare_superlu_dist import prepare_superlu_dist
 from prepare_bebop_smc import download_pinned, prepare_bebop_smc
 from prepare_libmtx import prepare_libmtx
 from prepare_spm import prepare_spm
+from prepare_clsparse import prepare_clsparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -105,6 +106,8 @@ def main() -> None:
             libmtx_tree, libmtx_build, libmtx_install, built_lib_sha256 = prepare_libmtx(source, archive, cache)
         elif source.get("source_build") == "spm":
             spm_tree, spm_build, built_lib_sha256 = prepare_spm(source, archive, cache)
+        elif source.get("source_build") == "clsparse":
+            clsparse_tree, clsparse_build, built_lib_sha256 = prepare_clsparse(source, archive, cache)
         else:
             with tarfile.open(archive) as tar:
                 for member, expected in source["source_members"].items():
@@ -174,6 +177,15 @@ def main() -> None:
                        str(ROOT / parser["adapter"]), str(spm_build / "src/libspm.a"),
                        "-L" + str(openblas / "lib"), "-lopenblas", "-lm",
                        "-o", str(target / name)]
+        elif name == "clsparse":
+            libdir = clsparse_build / "library"
+            command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-Wno-deprecated-declarations", "-DBUILD_CLVERSION=120",
+                       "-DCLSPARSE_INDEX_SIZEOF=4",
+                       "-I" + str(clsparse_tree / "src/include"),
+                       "-I" + str(libdir), str(ROOT / parser["adapter"]),
+                       "-L" + str(libdir), "-Wl,-rpath," + str(libdir),
+                       "-lclSPARSE", "-framework", "OpenCL", "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
@@ -185,7 +197,7 @@ def main() -> None:
                      "output": output, "pass": True})
         local_libraries[name] = {"source_sha256": source["source_sha256"],
                                  "installed_files": source.get("installed_files", {})}
-        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist", "bebop_smc", "libmtx", "spm"):
+        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist", "bebop_smc", "libmtx", "spm", "clsparse"):
             local_libraries[name]["built_lib_sha256"] = built_lib_sha256
         print(f"{name}@{parser['version']}: C Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

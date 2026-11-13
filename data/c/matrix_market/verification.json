@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T14:44:54.157881+00:00",
+  "checked_at_utc": "2026-11-13T17:48:22.966222+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/matrix_market/source-lock.json",
@@ -14,7 +14,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "063bd0a60977cc51f44e189d1db234b181863715f197ce00788542c52c817e17"
+      "built_lib_sha256": "4ebaed73e3cb6d8ca0f6062cfe02dc1a4d4511c7d340732247a7c1a1dc1f0618"
     },
     "hypre": {
       "source_sha256": "3083cf943e1dab54517acae36afad72a4ada2c72c9567e525fc9c6efedb14e0c",
@@ -35,7 +35,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "2272e9a7eb56d36f7bcd7384f3e1612c3097ba54679a9201a24dd30c32dd2bf1"
+      "built_lib_sha256": "aeb8df6e7647072ced83b22830d4884a985a259bb09cfa76f57cb81c8d051713"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -71,7 +71,7 @@
       "installed_files": {
         "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
       },
-      "built_lib_sha256": "75a39303a8cdf2bbed17dd65ccef8da6035c8319752739094f0f9dc713723dc7"
+      "built_lib_sha256": "955091e11badca91d811083e6a93749e183a1c77c44c76394ef67b2b91420218"
     },
     "nist-mmio": {
       "source_sha256": "645cf3d0152e7323d2ffdbc552fbad7c87d82d3c021cb015337a10be0632a588",
@@ -84,6 +84,11 @@
         "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
       },
       "built_lib_sha256": "d37ba32ab1a5f8099e83fe9bca6652426ad3874b53caed1d967cf29c65b9005f"
+    },
+    "clsparse": {
+      "source_sha256": "952b26670625646c5386299a4d360aaa9cd2139555376b48aaed163a6ea60325",
+      "installed_files": {},
+      "built_lib_sha256": "c0479b6c35b4e145ee02cac05dbefd5d123cc4cb916262edaea5df98d67aa99b"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -254,6 +259,34 @@
         "cols": 3,
         "nnz": 3,
         "entry_3_3": 3.0
+      },
+      "pass": true
+    },
+    {
+      "package": "clsparse",
+      "version": "0.10.2.0",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -Wno-deprecated-declarations -DBUILD_CLVERSION=120 -DCLSPARSE_INDEX_SIZEOF=4 -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/clSPARSE-0.10.2.0/src/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/clSPARSE-0.10.2.0-build/library /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/clsparse.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/clSPARSE-0.10.2.0-build/library -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/clSPARSE-0.10.2.0-build/library -lclSPARSE -framework OpenCL -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/clsparse",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/clsparse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "row": [
+          0,
+          0,
+          1
+        ],
+        "col": [
+          0,
+          2,
+          1
+        ],
+        "value": [
+          1.5,
+          -2,
+          4
+        ]
       },
       "pass": true
     }

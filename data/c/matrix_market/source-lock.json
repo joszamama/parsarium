@@ -253,5 +253,29 @@
       "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
     },
     "build_note": "Official v1.2.4 GitLab tag archive and its CMake submodule archive are SHA-256 pinned; selected license, header and reader source files are pinned. Build C static library without Fortran, MPI or Scotch against pinned OpenBLAS. The adapter parses the valid square symmetric control; the native reader records only column count as matrix order and must not be used as evidence of rectangular dimensions."
+  },
+  "clsparse": {
+    "release": "0.10.2.0",
+    "release_commit": "62c93e6f0e05b84caefb1709c6118e0879b9f083",
+    "source_build": "clsparse",
+    "archive_root": "clSPARSE-0.10.2.0",
+    "license": "Apache-2.0",
+    "source_url": "https://github.com/clMathLibraries/clSPARSE/archive/refs/tags/v0.10.2.0.tar.gz",
+    "source_sha256": "952b26670625646c5386299a4d360aaa9cd2139555376b48aaed163a6ea60325",
+    "source_members": {
+      "clSPARSE-0.10.2.0/LICENSE": "6cf63d87586c7c25c3ab8e62eef5c75bbaa982b0a6f9c00c59e2720255aac9ec",
+      "clSPARSE-0.10.2.0/src/include/clSPARSE.h": "60bdf2891196f5ca3f4d4da8653a8f88522e712717754eab4638e30ec42504c9",
+      "clSPARSE-0.10.2.0/src/include/clSPARSE-1x.h": "f6fb80808fbb89ab503ca18587900fd283f79152e26550954c60820d4b8618ba",
+      "clSPARSE-0.10.2.0/src/library/io/mm-reader.cpp": "819b556be5ec29f96eab6f843a159ea41c7e23a89fbb8ca3985eff89af00683f",
+      "clSPARSE-0.10.2.0/src/library/include/external/mmio.h": "39ce91ca3aaed75943c5cf05959bf7d8b62897c1eaab6f5a351723fbb0750f65"
+    },
+    "clhpp": {
+      "release_commit": "75bb7d0d8b2ffc6aac0a3dcaa22f6622cab81f7c",
+      "source_url": "https://github.com/KhronosGroup/OpenCL-CLHPP/archive/75bb7d0d8b2ffc6aac0a3dcaa22f6622cab81f7c.tar.gz",
+      "source_sha256": "d9242d0e378c15d78fbee26990effcd54ebb0617c1fe18f37fef55b81e8cee2e",
+      "archive_member": "OpenCL-CLHPP-75bb7d0d8b2ffc6aac0a3dcaa22f6622cab81f7c/input_cl2.hpp",
+      "header_sha256": "e1d4116a9a250e9ac33c5697306c47b09f430ff3b65830ddec2c210b2284b79e"
+    },
+    "build_note": "Build the exact tagged source with CMake, OpenCL 1.2, tests/benchmarks off, and the pinned Khronos cl2.hpp header. The documented C API reads the valid local control into OpenCL COO buffers. CMake 4 needs CMAKE_POLICY_VERSION_MINIMUM=3.5. The generated dylib hash is recorded in verification; an OpenCL 1.2-capable local device is required."
   }
 }
