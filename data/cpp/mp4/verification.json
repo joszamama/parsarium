@@ -1,0 +1,113 @@
+{
+  "checked_at_utc": "2026-11-13T02:26:39.450189+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/cpp/mp4/source-lock.json",
+  "local_libraries": {
+    "ffmpeg": {
+      "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+      "local_header_sha256": "694da025f30497481f4703e06de106bd417a5718f8fdcdf5e09e34f4b5f21114",
+      "local_library_sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779"
+    },
+    "libmediainfo": {
+      "source_sha256": "a806fd36592549a03e810486f415a6858d4d8f14066bfbe97b32a447cd5eb590",
+      "local_header_sha256": "14962e87b4e4857be9b4f2688aef9806fe731531ff657c86ea7588dfd74d74a6",
+      "local_library_sha256": "425415cb513f651333cd68dfa6c0b26170f451be985882b4b7857c55f76ab050"
+    },
+    "gstreamer": {
+      "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+      "local_header_sha256": "5cb61da50fed37d2f457c9541cdf8980b999106b730ee0f6ec1e4485ebbabf48",
+      "local_library_sha256": "4d199d3c60840ee35f4150f94c88a133efdc8a149b623be6ffdd0b0e7e5343ff"
+    },
+    "mpv": {
+      "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+      "local_header_sha256": "3da9b8c61c3fb4e2d76bd248cebf72f3ee830331411b71a76adbd5e05660cc50",
+      "local_library_sha256": "0ec0235c7fedf76234d2bc355c6db62db12a41cb985322817b75607a2f0c0898"
+    },
+    "vlc": {
+      "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
+      "local_header_sha256": "4d9527778caa18bc1b1fd5b4ea4daaff42f9f6a9f1133645b7b8eed593190ec2",
+      "local_library_sha256": "8108065eff0fea4130e7353a39c0f62cd6adb4a1b41a63b5f8f16c51d4ac9e2b"
+    }
+  },
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "third_party": [
+    {
+      "package": "ffmpeg",
+      "version": "9.0.2",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/ffmpeg.cpp -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/ffmpeg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "brand": "isom",
+        "title": "Parsarium",
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "libmediainfo",
+      "version": "26.10",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/libmediainfo.cpp -I/opt/homebrew/Cellar/libmediainfo/26.10/include -I/opt/homebrew/Cellar/libzen/0.4.41_1/include -DUNICODE -L/opt/homebrew/Cellar/libmediainfo/26.10/lib -lmediainfo -lz -L/opt/homebrew/Cellar/libzen/0.4.41_1/lib -lzen -lpthread -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/libmediainfo",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/libmediainfo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "container": "MPEG-4",
+        "title": "Parsarium",
+        "video": "AVC",
+        "audio": "AAC",
+        "width": 2,
+        "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "gstreamer",
+      "version": "1.28.9",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/gstreamer.cpp -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/orc/0.4.44/include/orc-0.4 -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstpbutils-1.0 -lgstvideo-1.0 -lgstaudio-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/gstreamer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "title": "Parsarium",
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "mpv",
+      "version": "0.42.0",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/mpv.cpp -I/opt/homebrew/Cellar/mpv/0.42.0/include -I/opt/homebrew/Cellar/libass/0.17.5_1/include -I/opt/homebrew/Cellar/libunibreak/8.0/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/opt/graphite2/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libplacebo/7.387.0/include -I/opt/homebrew/Cellar/shaderc/2026.4/include -I/opt/homebrew/Cellar/mujs/1.3.11/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -I/opt/homebrew/Cellar/libbluray/1.5.0/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libudfread/1.2.0/include -I/opt/homebrew/Cellar/luajit/2.1.1794386141/include/luajit-2.1 -I/opt/homebrew/Cellar/rubberband/4.0.0/include -I/opt/homebrew/Cellar/libsamplerate/0.2.2/include -I/opt/homebrew/Cellar/uchardet/0.0.8/include/uchardet -I/opt/homebrew/lib/pkgconfig/../../Cellar/vapoursynth/82/lib/pkgconfig/../../libexec/lib/python3.15/site-packages/vapoursynth/pkgconfig/../include -I/opt/homebrew/Cellar/zimg/3.0.6/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/vulkan-loader/1.4.363.0/../../../opt/vulkan-headers/include -L/opt/homebrew/Cellar/mpv/0.42.0/lib -lmpv -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/mpv",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/mpv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "container": "mov,mp4,m4a,3gp,3g2,mj2",
+        "title": "Parsarium",
+        "video_codec": "h264",
+        "audio_codec": "aac"
+      },
+      "pass": true
+    },
+    {
+      "package": "vlc",
+      "version": "3.0.24",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/vlc.cpp -isystem /Applications/VLC.app/Contents/MacOS/include -L/Applications/VLC.app/Contents/MacOS/lib -lvlc -Wl,-rpath,/Applications/VLC.app/Contents/MacOS/lib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/vlc",
+      "command": "env VLC_PLUGIN_PATH=/Applications/VLC.app/Contents/MacOS/plugins /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/vlc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "title": "Parsarium",
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "duration_ms": 1000
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

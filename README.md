@@ -4,7 +4,7 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
-C and C++ × SVG and MP3 with ID3v2 batches,
+C and C++ × SVG and MP4 batches, plus completed MP3 with ID3v2 batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -18,7 +18,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 71 cells at the 20-parser target, seven started below target, and 10
+There are 73 cells at the 20-parser target, seven started below target, and 8
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -40,6 +40,8 @@ python3 scripts/verify_c_svg.py
 python3 scripts/verify_cpp_svg.py
 python3 scripts/verify_c_mp3_id3v2.py
 python3 scripts/verify_cpp_mp3_id3v2.py
+python3 scripts/verify_c_mp4.py
+python3 scripts/verify_cpp_mp4.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py
@@ -232,6 +234,8 @@ QtBase QImageReader reads it through the same QtSvg plugin used by QtSvg.
 All recorded SVG leads in these cells are resolved, while additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
+
+The C and C++ × MP4 batches each verify **5/20 pinned package paths** on the valid local two-track H.264/AAC control: FFmpeg, MediaInfoLib, GStreamer, libmpv, and libVLC. Their adapters return the MP4 brand or container, title, track types and codecs, video dimensions, or duration. The source archives, installed native libraries, MP4 plugins, and relevant dependencies are hash-pinned. libmpv shares FFmpeg; the other four use their own MP4 parsing paths. Four bounded Homebrew formula-name searches saved 15 hits and 15 unique names; five plausible leads remain unresolved. The formula install-on-request metric ranks four packages within each ecosystem, while libVLC remains unranked because it is a cask. The separate C and C++ standard-library inventories found no documented MP4 parser. See the [C](data/c/mp4/cell.json) and [C++](data/cpp/mp4/cell.json) cell records.
 
 The C × MP3 with ID3v2 batch verifies **20/20 package paths** and the C++ batch verifies **21 package paths** (20 working goal) on
 the valid tagged MP3 control: TagLib, mpg123, FFmpeg libavformat, libid3tag,

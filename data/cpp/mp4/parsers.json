@@ -1,0 +1,102 @@
+[
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+    "documentation": "https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local filename); avformat_find_stream_info; av_dict_get; AVStream.codecpar",
+    "adapter": "adapters/cpp/mp4/ffmpeg.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "brand": "isom",
+      "title": "Parsarium",
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 major brand, title, two tracks, 2x2 video dimensions",
+    "family": "FFmpeg libavformat MOV/MP4 demuxer",
+    "family_note": "C and C++ call sites share libavformat; the MP4 box parser is in the MOV demuxer."
+  },
+  {
+    "name": "libmediainfo",
+    "version": "26.10",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz",
+    "documentation": "https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start",
+    "input_api": "MediaInfo::Open(local filename); MediaInfo::Get for container, tracks, title and dimensions",
+    "adapter": "adapters/cpp/mp4/libmediainfo.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "container": "MPEG-4",
+      "title": "Parsarium",
+      "video": "AVC",
+      "audio": "AAC",
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MPEG-4 container, title, AVC video and AAC audio, 2x2 video dimensions",
+    "family": "MediaInfoLib native MPEG-4 parser",
+    "family_note": "C and native C++ call sites share MediaInfoLib MPEG-4 parser and ZenLib utility library."
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html",
+    "input_api": "gst_filename_to_uri(local filename); gst_discoverer_discover_uri; gst_discoverer_info_get_video_streams/audio_streams",
+    "adapter": "adapters/cpp/mp4/gstreamer.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "title": "Parsarium",
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 title, video/audio streams and 2x2 video dimensions",
+    "family": "GStreamer isomp4/qtdemux plugin",
+    "family_note": "C and C++ call sites share the pinned isomp4/qtdemux plugin."
+  },
+  {
+    "name": "mpv",
+    "version": "0.42.0",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.42.0.tar.gz",
+    "documentation": "https://mpv.io/manual/stable/",
+    "input_api": "mpv_command(loadfile, local filename); mpv_wait_event(FILE_LOADED); mpv_get_property_string",
+    "adapter": "adapters/cpp/mp4/mpv.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "title": "Parsarium",
+      "video_codec": "h264",
+      "audio_codec": "aac"
+    },
+    "scope": "MP4 demuxer, title and H.264/AAC track codecs",
+    "family": "libmpv over FFmpeg MOV/MP4 demuxer",
+    "family_note": "C and C++ call sites share libmpv, which links the FFmpeg package already listed directly."
+  },
+  {
+    "name": "vlc",
+    "version": "3.0.24",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://get.videolan.org/vlc/3.0.24/vlc-3.0.24.tar.xz",
+    "documentation": "https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html",
+    "input_api": "libvlc_media_new_path(local filename); libvlc_media_parse_with_options; libvlc_media_get_meta/tracks_get",
+    "adapter": "adapters/cpp/mp4/vlc.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "title": "Parsarium",
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "duration_ms": 1000
+    },
+    "scope": "MP4 title, video/audio tracks and one-second duration",
+    "family": "VLC native MP4 demuxer plugin",
+    "family_note": "C and C++ call sites share libVLC and its bundled MP4 demuxer; exact plugin selection during this run was not independently traced."
+  }
+]

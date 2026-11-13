@@ -1,0 +1,183 @@
+{
+  "ffmpeg": {
+    "release": "9.0.2",
+    "installed_revision": "9.0.2_1",
+    "formula": "ffmpeg",
+    "license": "GPL-3.0-or-later",
+    "source_url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+    "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+    "repository": "https://git.ffmpeg.org/ffmpeg.git",
+    "source_header_member": "ffmpeg-9.0.2/libavformat/avformat.h",
+    "local_header": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include/libavformat/avformat.h",
+    "local_header_sha256": "694da025f30497481f4703e06de106bd417a5718f8fdcdf5e09e34f4b5f21114",
+    "local_library": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+    "local_library_sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+    "pkg_config": "libavformat",
+    "license_member": "ffmpeg-9.0.2/COPYING.GPLv3",
+    "license_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a",
+        "role": "linked video/audio codec dependency"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavutil.61.dylib",
+        "sha256": "0377aea088208e69d29c03caeb960ca395fdbcd646335dc0a87748bfe81f8525",
+        "role": "FFmpeg utility dependency"
+      }
+    ],
+    "build_note": "Pinned FFmpeg release, matching public header/library, linked codec/utility libraries and MOV/MP4 demuxer source.",
+    "pkg_config_version": "63.1.102",
+    "source_engine_member": "ffmpeg-9.0.2/libavformat/mov.c",
+    "source_engine_sha256": "533674687505d25db7176cf876036f600e6d8cb25079ffa6b28b4a8e8266eae1"
+  },
+  "libmediainfo": {
+    "release": "26.10",
+    "installed_revision": "26.10",
+    "formula": "libmediainfo",
+    "license": "BSD-2-Clause",
+    "source_url": "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz",
+    "source_sha256": "a806fd36592549a03e810486f415a6858d4d8f14066bfbe97b32a447cd5eb590",
+    "repository": "https://github.com/MediaArea/MediaInfoLib",
+    "source_header_member": "MediaInfoLib/Source/MediaInfoDLL/MediaInfoDLL_Static.h",
+    "local_header": "/opt/homebrew/Cellar/libmediainfo/26.10/include/MediaInfoDLL/MediaInfoDLL_Static.h",
+    "local_header_sha256": "a9ce341769da60d1bd97cf7f490c75004c4a5049cd0e4e0060170ab04feeceb1",
+    "local_library": "/opt/homebrew/Cellar/libmediainfo/26.10/lib/libmediainfo.0.26.10.dylib",
+    "local_library_sha256": "425415cb513f651333cd68dfa6c0b26170f451be985882b4b7857c55f76ab050",
+    "pkg_config": "libmediainfo",
+    "license_member": "MediaInfoLib/LICENSE",
+    "license_sha256": "a8f0db97f62dbcff8e30edd5cac0f48a4b702bfa55f52b71214f9639133358af",
+    "source_engine_members": [
+      {
+        "member": "MediaInfoLib/Source/MediaInfo/Multiple/File_Mpeg4.cpp",
+        "sha256": "d48a2339a6aede7452343ecf69dca2f6e611a8ebc8e2139bfc8c6d842324dfaf"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libzen/0.4.41_1/lib/libzen.0.4.41.dylib",
+        "sha256": "8993e204b1fa04f367692706d3b886095bd2642a0d4617e5a004b775eb697ce5",
+        "role": "ZenLib base utility dependency"
+      }
+    ],
+    "build_note": "Pinned MediaInfoLib release, exact installed public header/library, MPEG-4 parser source and ZenLib dependency."
+  },
+  "gstreamer": {
+    "release": "1.28.9",
+    "installed_revision": "1.28.9",
+    "formula": "gstreamer",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "source_url": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "source_sha256": "6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7",
+    "repository": "https://gitlab.freedesktop.org/gstreamer/gstreamer",
+    "source_header_member": "gstreamer-1.28.9/subprojects/gst-plugins-base/gst-libs/gst/pbutils/gstdiscoverer.h",
+    "local_header": "/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0/gst/pbutils/gstdiscoverer.h",
+    "local_header_sha256": "5cb61da50fed37d2f457c9541cdf8980b999106b730ee0f6ec1e4485ebbabf48",
+    "local_library": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/libgstpbutils-1.0.0.dylib",
+    "local_library_sha256": "4d199d3c60840ee35f4150f94c88a133efdc8a149b623be6ffdd0b0e7e5343ff",
+    "pkg_config": "gstreamer-pbutils-1.0",
+    "license_member": "gstreamer-1.28.9/LICENSE",
+    "license_sha256": "ad2eec519ebd4b5df86ea84dff24ae3bfa2edea846a703b58902dd221ae375db",
+    "source_engine_members": [
+      {
+        "member": "gstreamer-1.28.9/subprojects/gst-plugins-base/gst-libs/gst/pbutils/gstdiscoverer.c",
+        "sha256": "1549750b813479850579c5a72c8ac22a381ba82377f7eed3086b2294fec2bd53"
+      },
+      {
+        "member": "gstreamer-1.28.9/subprojects/gst-plugins-good/gst/isomp4/qtdemux.c",
+        "sha256": "ffec2090b79d6bd2edb7d259117ff7102dd6aa44bed700be707b59920a8475c1"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/gstreamer/1.28.9/lib/gstreamer-1.0/libgstisomp4.dylib",
+        "sha256": "571b67009d4b24755d0c246db618c8bf470e1824d9c7d3bba32788e8e1e56d73",
+        "role": "ISO BMFF/MP4 demuxer plugin"
+      }
+    ],
+    "build_note": "Pinned monorepo source, matching GstDiscoverer API header/library and installed isomp4 demuxer plugin."
+  },
+  "mpv": {
+    "release": "0.42.0",
+    "installed_revision": "0.42.0",
+    "formula": "mpv",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "source_url": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.42.0.tar.gz",
+    "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+    "repository": "https://github.com/mpv-player/mpv",
+    "source_header_member": "mpv-0.42.0/include/mpv/client.h",
+    "local_header": "/opt/homebrew/Cellar/mpv/0.42.0/include/mpv/client.h",
+    "local_header_sha256": "3da9b8c61c3fb4e2d76bd248cebf72f3ee830331411b71a76adbd5e05660cc50",
+    "local_library": "/opt/homebrew/Cellar/mpv/0.42.0/lib/libmpv.2.dylib",
+    "local_library_sha256": "0ec0235c7fedf76234d2bc355c6db62db12a41cb985322817b75607a2f0c0898",
+    "pkg_config": "mpv",
+    "pkg_config_version": "2.6.0",
+    "license_member": "mpv-0.42.0/Copyright",
+    "license_sha256": "bfe9ee4cceabcb8ecbfadf208d04156f73d801e6a57369a5606bb8341e204a23",
+    "source_engine_member": "mpv-0.42.0/player/loadfile.c",
+    "source_engine_sha256": "11a228fa8e3d7fec72be89d3a606829f071676b041fdce3c12719c056600dce6",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+        "sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+        "role": "shared FFmpeg MOV/MP4 demuxer"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a",
+        "role": "linked video/audio codec library"
+      }
+    ],
+    "build_note": "Pinned mpv 0.42.0 release, exact installed libmpv client header/library and linked FFmpeg demuxer/codec libraries. Adapter disables audio/video output and reads local MP4 metadata."
+  },
+  "vlc": {
+    "release": "3.0.24",
+    "installed_revision": "3.0.24",
+    "cask": "vlc",
+    "cask_url": "https://get.videolan.org/vlc/3.0.24/macosx/vlc-3.0.24-arm64.dmg",
+    "cask_sha256": "64a89d93cdd30b0e97131743e246373db82d6826ea882d265d46d74b136da2b7",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "source_url": "https://get.videolan.org/vlc/3.0.24/vlc-3.0.24.tar.xz",
+    "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
+    "repository": "https://code.videolan.org/videolan/vlc",
+    "source_header_member": "vlc-3.0.24/include/vlc/libvlc_media.h",
+    "local_header": "/Applications/VLC.app/Contents/MacOS/include/vlc/libvlc_media.h",
+    "local_header_sha256": "4d9527778caa18bc1b1fd5b4ea4daaff42f9f6a9f1133645b7b8eed593190ec2",
+    "local_library": "/Applications/VLC.app/Contents/MacOS/lib/libvlc.5.dylib",
+    "local_library_sha256": "8108065eff0fea4130e7353a39c0f62cd6adb4a1b41a63b5f8f16c51d4ac9e2b",
+    "include_dir": "/Applications/VLC.app/Contents/MacOS/include",
+    "link_name": "vlc",
+    "extra_linker_flags": [
+      "-Wl,-rpath,/Applications/VLC.app/Contents/MacOS/lib"
+    ],
+    "runtime_env": {
+      "VLC_PLUGIN_PATH": "/Applications/VLC.app/Contents/MacOS/plugins"
+    },
+    "license_member": "vlc-3.0.24/COPYING.LIB",
+    "license_sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+    "source_engine_members": [
+      {
+        "member": "vlc-3.0.24/modules/demux/mp4/mp4.c",
+        "sha256": "e9df988be9e2a1b59ee7298c1b97bf97e432a217ee1768d917cedd6619cd9335"
+      },
+      {
+        "member": "vlc-3.0.24/modules/demux/mp4/libmp4.c",
+        "sha256": "f04a808010bdca936743d4375fd0ccedbcf99e00011747d77c1db18f7d5cc89c"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/Applications/VLC.app/Contents/MacOS/lib/libvlccore.9.dylib",
+        "sha256": "720eaa8b2664314f6d027a3934c76020affaecbdfda7e0d335d25658c730241c",
+        "role": "VLC core"
+      },
+      {
+        "path": "/Applications/VLC.app/Contents/MacOS/plugins/libmp4_plugin.dylib",
+        "sha256": "007d135c7e1f82a3f69238890ee6b8acb2fc1c146588aedf11d237c12ceb8b24",
+        "role": "bundled MP4 demuxer plugin"
+      }
+    ],
+    "build_note": "Pinned official source archive, matching public header, Homebrew cask DMG, libVLC core and MP4 demuxer plugin. VLC_PLUGIN_PATH points to installed local plugins."
+  }
+}
