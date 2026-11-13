@@ -218,6 +218,20 @@
       "pom_url": "https://repo.maven.apache.org/maven2/codes/yousef/materia-jvm/0.4.2.2/materia-jvm-0.4.2.2.pom",
       "pom_sha256": "9f0297bc3e315cec445ec7a61dd529a7976657e2f782cf4592d03cfb1f5a5e75",
       "source_lock": "data/java/ascii_ply/materia-lock.json"
+    },
+    "jassimp": {
+      "group": "com.github.dabasan",
+      "artifact": "jassimp",
+      "version": "1.0.0",
+      "license": "BSD-3-Clause",
+      "jar_url": "https://repo.maven.apache.org/maven2/com/github/dabasan/jassimp/1.0.0/jassimp-1.0.0.jar",
+      "jar_sha256": "e91cf2c567561e33787dbb9882f62415bbf67adde0ef6b4107221c10e0ad6d12",
+      "pom_url": "https://repo.maven.apache.org/maven2/com/github/dabasan/jassimp/1.0.0/jassimp-1.0.0.pom",
+      "pom_sha256": "cdad7c38fbafc324142c7bf0a982905d98113c89e4f59972387352c75ea1d44c",
+      "sources_jar_url": "https://repo.maven.apache.org/maven2/com/github/dabasan/jassimp/1.0.0/jassimp-1.0.0-sources.jar",
+      "sources_jar_sha256": "27813c095d1f7d61fd22f722fb1225e6b9beaa91dbd7f0a6216d4fdaa4571f7c",
+      "source_url": "https://github.com/maeda6uiui/JAssimp/archive/refs/tags/v1.0.0.tar.gz",
+      "source_sha256": "34bb88bc9f40769e970fbf8ac7ffe5b1c7811d503ef264c43735cc140a86b9de"
     }
   },
   "dependencies": [
@@ -348,6 +362,12 @@
         "auxiliary_github_stars": 105,
         "auxiliary_source": "https://api.github.com/repos/kotlin-graphics/assimp",
         "auxiliary_observed_at_utc": "2026-11-13"
+      },
+      "jassimp": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.github.dabasan%3Ajassimp/versions/1.0.0:dependents",
+        "direct_dependent_count": 0,
+        "observed_at_utc": "2026-11-13T19:45:09.108893+00:00",
+        "note": "deps.dev returned zero known public direct dependents for the exact Maven release; this does not prove no users or PLY-specific use."
       }
     }
   },
@@ -406,6 +426,12 @@
       "format_evidence": "https://github.com/kotlin-graphics/assimp/blob/v4.0/src/main/kotlin/assimp/format/ply/PlyLoader.kt",
       "release_evidence": "https://github.com/kotlin-graphics/assimp/releases/tag/v4.0",
       "observation": "Official tagged JVM Assimp port includes a PLY importer and an assimp-all.jar asset; Java URI input API parsed the valid control."
+    },
+    {
+      "name": "jassimp",
+      "url": "https://github.com/maeda6uiui/JAssimp/blob/v1.0.0/src/main/java/com/github/dabasan/jassimp/Jassimp.java",
+      "surface": "Official tagged Java Assimp binding documentation and Maven Central release outside four bounded PLY name searches",
+      "disposition": "Verified Maven JAR with JNI built from the tagged source on the valid ASCII PLY control; underlying native parser is Assimp 6.0.6."
     }
   ],
   "non_maven_release": {

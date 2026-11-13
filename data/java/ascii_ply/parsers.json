@@ -285,5 +285,26 @@
       ]
     },
     "group": null
+  },
+  {
+    "name": "jassimp",
+    "group": "com.github.dabasan",
+    "artifact": "jassimp",
+    "version": "1.0.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/maeda6uiui/JAssimp/blob/v1.0.0/LICENSE",
+    "input_api": "Jassimp.importFile(String local filename); AiScene.getMeshes(); AiMesh.getNumVertices() and getNumFaces()",
+    "documentation": "https://github.com/maeda6uiui/JAssimp/blob/v1.0.0/src/main/java/com/github/dabasan/jassimp/Jassimp.java",
+    "family": "JAssimp JNI binding over native Assimp PLY importer",
+    "family_note": "Separately published Maven Java binding; JNI built from tagged source against pinned Assimp 6.0.6. Shares native Assimp PLY parser family with LWJGL Assimp, MonkeyWrench, and C/C++ Assimp call sites.",
+    "scope": "ASCII PLY triangle mesh, vertex count and face count",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jassimp/JassimpPlyAdapter.java",
+    "adapter_module": "jassimp",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1
+    }
   }
 ]
