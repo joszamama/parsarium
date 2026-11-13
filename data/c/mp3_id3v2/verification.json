@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:05:22.161257+00:00",
+  "checked_at_utc": "2026-11-13T02:09:01.057972+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp3_id3v2/source-lock.json",
@@ -92,6 +92,11 @@
       "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
       "local_header_sha256": "4d9527778caa18bc1b1fd5b4ea4daaff42f9f6a9f1133645b7b8eed593190ec2",
       "local_library_sha256": "8108065eff0fea4130e7353a39c0f62cd6adb4a1b41a63b5f8f16c51d4ac9e2b"
+    },
+    "sdl2_sound": {
+      "source_sha256": "63be57cc80bcd29aeed6c29700759871c44c90251a7508b8d0eacd8d9cece30c",
+      "local_header_sha256": "c0a6979f03e9b54ab104694eb21681283ee531703a178cc10ad0dd2c09db6f60",
+      "local_library_sha256": "57bf6ca8a74d3e733597bc1b08815f8a63d362400f50434e79be91137aa12bb8"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -333,6 +338,20 @@
         "title": "Parsarium",
         "audio_tracks": 1,
         "mp3_tracks": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2_sound",
+      "version": "2.0.6",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sdl2_sound.c -I/opt/homebrew/Cellar/sdl2_sound/2.0.6/include/SDL2 -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -D_THREAD_SAFE -L/opt/homebrew/Cellar/sdl2_sound/2.0.6/lib -lSDL2_sound -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl2_sound",
+      "command": "env SDL_AUDIODRIVER=dummy /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl2_sound /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "decoded_bytes": 4096,
+        "duration_ms": 1000
       },
       "pass": true
     }

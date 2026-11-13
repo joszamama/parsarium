@@ -559,5 +559,43 @@
       }
     ],
     "build_note": "Pinned official source archive and matching public header, Homebrew cask DMG SHA-256, libVLC and relevant bundled libraries/plugins. VLC_PLUGIN_PATH points only to installed local plugins. The control returned ID3v2 title and MP3 track."
+  },
+  "sdl2_sound": {
+    "release": "2.0.6",
+    "installed_revision": "2.0.6",
+    "formula": "sdl2_sound",
+    "license": "Zlib AND (Artistic-1.0-Perl OR LGPL-2.1-or-later)",
+    "source_url": "https://github.com/icculus/SDL_sound/releases/download/v2.0.6/SDL2_sound-2.0.6.tar.gz",
+    "source_sha256": "63be57cc80bcd29aeed6c29700759871c44c90251a7508b8d0eacd8d9cece30c",
+    "repository": "https://github.com/icculus/SDL_sound",
+    "source_header_member": "SDL_sound-2.0.6/src/SDL_sound.h",
+    "local_header": "/opt/homebrew/Cellar/sdl2_sound/2.0.6/include/SDL2/SDL_sound.h",
+    "local_header_sha256": "c0a6979f03e9b54ab104694eb21681283ee531703a178cc10ad0dd2c09db6f60",
+    "local_library": "/opt/homebrew/Cellar/sdl2_sound/2.0.6/lib/libSDL2_sound.2.0.6.dylib",
+    "local_library_sha256": "57bf6ca8a74d3e733597bc1b08815f8a63d362400f50434e79be91137aa12bb8",
+    "pkg_config": "SDL2_sound",
+    "license_member": "SDL_sound-2.0.6/LICENSE.txt",
+    "license_sha256": "6808a283313b6c98beb029b8625a976f20b1554b2adff3b8b320a9954bd87c65",
+    "source_engine_members": [
+      {
+        "member": "SDL_sound-2.0.6/src/SDL_sound_mp3.c",
+        "sha256": "473b44c8b42a5652df819b6e464858fc0dbfa5c688ee002e52c36facf8c3b4bd"
+      },
+      {
+        "member": "SDL_sound-2.0.6/src/dr_mp3.h",
+        "sha256": "f0919e1652ffd9469e3440b5c759d26e862a50e6dc93cb4b51cb7e7e90b00f77"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/sdl2-compat/2.32.74/lib/libSDL2-2.0.0.dylib",
+        "sha256": "2e0b8bd67ab49579fac23e48c6e727afe1e1bff002d883c7220bb0643ff28347",
+        "role": "SDL2 compatibility runtime"
+      }
+    ],
+    "runtime_env": {
+      "SDL_AUDIODRIVER": "dummy"
+    },
+    "build_note": "Pinned upstream release source, matching header, native library, bundled dr_mp3 source, and installed SDL2 dependency. Sound_NewSampleFromFile decoded the valid tagged MP3; no ID3v2 text is exposed."
   }
 }

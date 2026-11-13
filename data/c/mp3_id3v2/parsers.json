@@ -327,5 +327,24 @@
     "scope": "ID3v2 title and recognized MP3 audio track from valid local tagged MP3",
     "family": "VLC media parser with bundled TagLib and MPEG audio plugins",
     "family_note": "VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC."
+  },
+  {
+    "name": "sdl2_sound",
+    "version": "2.0.6",
+    "license": "Zlib AND (Artistic-1.0-Perl OR LGPL-2.1-or-later)",
+    "license_evidence": "https://github.com/icculus/SDL_sound/releases/download/v2.0.6/SDL2_sound-2.0.6.tar.gz",
+    "documentation": "https://github.com/icculus/SDL_sound/blob/v2.0.6/src/SDL_sound.h",
+    "input_api": "Sound_NewSampleFromFile(local filename, desired, buffer size); Sound_Decode; Sound_GetDuration",
+    "adapter": "adapters/c/mp3_id3v2/sdl2_sound.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_bytes": 4096,
+      "duration_ms": 1000
+    },
+    "scope": "Decoded MP3 PCM, stream fields and duration from tagged local MP3; no ID3v2 text",
+    "family": "SDL_sound over bundled dr_mp3/minimp3",
+    "family_note": "SDL_sound is a separate upstream package from SDL_mixer. Its MP3 decoder embeds dr_mp3, also used by miniaudio and represented directly by dr_libs. C and C++ adapters share the same engine."
   }
 ]
