@@ -1,6 +1,6 @@
 # C × PDF: verified parser ranking
 
-12 verified third-party package paths; working goal 20, ceiling 30. Exact GitHub stars from primary upstream repositories are compared only within C × PDF. Stars proxy broad project interest, not PDF-specific adoption. Homebrew formula-name hits are discovery leads, not a popularity ranking. Poppler, MuPDF, Ghostscript, PDFium, and GraphicsMagick have canonical non-GitHub upstreams and remain unranked.
+13 verified third-party package paths; working goal 20, ceiling 30. Exact GitHub stars from primary upstream repositories are compared only within C × PDF. Stars proxy broad project interest, not PDF-specific adoption. Homebrew formula-name hits are discovery leads, not a popularity ranking. Poppler, MuPDF, Ghostscript, PDFium, GraphicsMagick, and LibreOffice have canonical non-GitHub upstreams and remain unranked.
 
 | Rank | Package | Pinned release | Primary GitHub stars | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -16,6 +16,7 @@
 | unranked | [MuPDF](https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html) | 1.28.6 | unknown | parsed PDF page count | MuPDF C document parser |
 | unranked | [Ghostscript](https://ghostscript.readthedocs.io/en/master/Language.html) | 10.08.0 | unknown | PDF interpreter NumPages metadata | Ghostscript PDF interpreter |
 | unranked | [PDFium](https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md) | 159.0.8152.0 | unknown | parsed PDF page count and first page object | PDFium PDF parser |
+| unranked | [LibreOfficeKit](https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKit.h) | 26.8.3.1 | unknown | two-page PDF imported as a Draw document | LibreOffice PDF import through C ABI |
 
 Apple Core Graphics is a verified macOS runtime API and is excluded from the third-party ranking. One lead remains unresolved. See `cell.json`, `registry-snapshot.json`, `parsers.json`, `standard.json`, and `verification.json` for limits and evidence.
 
@@ -27,3 +28,5 @@ libvips loads PDF through its Poppler module in this pinned installation and sha
 
 
 pdf_oxide uses a tagged C++17/C API over one Rust PDF engine. Its publisher binary is hash pinned, but source-to-binary equivalence and PDF-specific adoption are unestablished.
+
+LibreOfficeKit loaded the valid two-page PDF through its documented C `documentLoad` API and reported a Draw document with two parts. The official 26.8.3 macOS arm64 DMG is hash pinned; its binary identifies source release 26.8.3.1 and the exact tagged commit. The package contains `xpdfimport` with Poppler markers, so this package path is not counted as an independent PDF syntax engine. Homebrew recorded 416,680 LibreOffice cask install events from 2025-11-13 to 2026-11-13, a strong auxiliary signal for the whole application. Those events do not measure PDF parsing or compare numerically with this table's GitHub stars, leaving its rank unresolved. Seven paths remain below the working goal.

@@ -14,6 +14,8 @@ import tarfile
 import tempfile
 import zipfile
 
+from verify_lok_pdf import verify as verify_lok_pdf
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/c/pdf"
@@ -62,6 +64,12 @@ def main() -> None:
     for parser in parsers:
         name = parser["name"]
         source = lock[name]
+        if name == "libreofficekit":
+            row, library_record = verify_lok_pdf(parser, source, ROOT, CACHE, TARGET)
+            rows.append(row)
+            libraries[name] = library_record
+            print(f"{name}@{parser['version']}: C PDF passed", flush=True)
+            continue
         source_archive = archive(name, source)
         with tarfile.open(source_archive) as tar:
             member = tar.extractfile(source["source_header_member"])

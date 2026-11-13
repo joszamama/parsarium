@@ -223,5 +223,27 @@
     "binary_member_sha256": "b354d3e14147e8dd6088a0ce6f15a823f824f306e44cd2000ab2886bea701644",
     "local_library_sha256": "533495647bb98016337725e0ff6aa647dd6ef2ad17b56249e7d4fb97f636295e",
     "build_note": "Tagged MIT/Apache-2.0 source plus publisher macOS arm64 release binary are separately SHA-256 pinned. The binary's CI-absolute Mach-O install name is changed to @rpath/libpdf_oxide.dylib before linking; the patched binary hash is checked. Byte-for-byte source-to-binary provenance is not established."
+  },
+  "libreofficekit": {
+    "release": "26.8.3.1",
+    "source_kind": "official_binary_distribution",
+    "license": "MPL-2.0",
+    "license_evidence": "https://www.libreoffice.org/licenses/",
+    "source_tag": "libreoffice-26.8.3.1",
+    "source_commit": "861effc5289d539f15c4c18d1ba8579ffd78728b",
+    "distribution_url": "https://download.documentfoundation.org/libreoffice/stable/26.8.3/mac/aarch64/LibreOffice_26.8.3_MacOS_aarch64.dmg",
+    "distribution_sha256": "de943203795e5057785f65515063e2db5eb60b0bb6d8e2534fec59e5cc5fb988",
+    "binary_version_string": "LibreOffice 26.8.3.1 861effc5289d539f15c4c18d1ba8579ffd78728b",
+    "library_sha256": "d8b1868ba18a8c54dce05de46dc48952cd27b852a77bff2ac81d54966477fa06",
+    "xpdfimport_sha256": "99901a62cf1b950198aed1a4be8a8aad5668c50bc15296fdbefc8cf880e25a8f",
+    "header_base_url": "https://raw.githubusercontent.com/LibreOffice/core/libreoffice-26.8.3.1/include/LibreOfficeKit/",
+    "headers": {
+      "LibreOfficeKitInit.h": "8c31a6d734081d7e55ce9b7de25bf65474b6e348c1f378331c68cde6c90067a2",
+      "LibreOfficeKit.h": "b64561b8b1a19c7d06d91d52c821c68cf2fcbf0206d1cf0b742b4b0889c8cae4",
+      "LibreOfficeKitTypes.h": "62534a5f692c327b0be1b6c0331ca160347e815f6f702cf3faf6a5cea44d6464",
+      "LibreOfficeKitEnums.h": "a3847b35aa4c10fa40324f7e941200868854418b039cef4a81b53c457a5f0a52"
+    },
+    "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "build_note": "Official 26.8.3 macOS arm64 DMG SHA-256 pinned; bundled binary prints tagged 26.8.3.1 source commit. Pinned source headers are fetched individually and SHA-256 checked. The C adapter links via documented LibreOfficeKitInit.h dynamic-loading shim, using the app's Contents/Frameworks directory as the load path. LibreOfficeKitEnums.h contains a C++-only inline helper in this release, so the C adapter mirrors its documented DRAWING enum value 3. The two-page local PDF is imported into Draw and getParts returns 2. Binary-to-source equivalence beyond publisher version claim and hashes is unestablished."
   }
 }

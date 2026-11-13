@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,529 of 1,688 verified package paths have a recorded comparable cell metric;
-159 are unranked. A recorded zero is still a measured value, not evidence of
+1,529 of 1,689 verified package paths have a recorded comparable cell metric;
+160 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -205,14 +205,18 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C × PDF batch verifies **12/20 third-party package paths** from C call sites:
+The C × PDF batch verifies **13/20 third-party package paths** from C call sites:
 Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF,
-tspdf, ImageMagick, GraphicsMagick, libvips, and pdf_oxide. All return one parsed page from the
-valid local control. qpdf requires a C++ linker for its C interface; PDFio
+tspdf, ImageMagick, GraphicsMagick, libvips, pdf_oxide, and LibreOfficeKit.
+The first twelve return one parsed page from the valid local control;
+LibreOfficeKit imports a separate valid two-page PDF into Draw and returns two parts.
+qpdf requires a C++ linker for its C interface; PDFio
 builds from pinned source. PDFium and Vanilla.PDF use
 hash-pinned binary distributions with source-matched public headers. Apple Core
 Graphics is independently verified as a macOS platform runtime API and is kept
-outside the third-party ranking. See the
+outside the third-party ranking. LibreOfficeKit's official distribution and C
+headers are hash pinned. Its 416,680 Homebrew cask install events are an auxiliary
+application-wide adoption signal and do not enter the GitHub-star ranking. See the
 [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
 
 The C++ × PDF batch currently verifies **20/20 package paths**:

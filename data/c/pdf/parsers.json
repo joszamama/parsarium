@@ -196,5 +196,23 @@
     "scope": "parsed PDF page count",
     "family": "pdf_oxide Rust PDF parser via C ABI",
     "family_note": "The C ABI calls the Rust pdf_oxide engine. The C++ adapter uses the same source release and engine through its RAII header; paths in different ecosystems are not independent syntax engines."
+  },
+  {
+    "name": "libreofficekit",
+    "version": "26.8.3.1",
+    "license": "MPL-2.0",
+    "license_evidence": "https://www.libreoffice.org/licenses/",
+    "documentation": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKitInit.h",
+    "format_documentation": "https://help.libreoffice.org/latest/en-US/text/shared/guide/convertfilters.html",
+    "input_api": "lok_init_2(pinned local app Frameworks, local profile URI); documentLoad(file:// local PDF path); getDocumentType(); getParts()",
+    "adapter": "adapters/c/pdf/libreofficekit.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "type": "drawing",
+      "pages": 2
+    },
+    "scope": "PDF imported as a two-page Draw document through C LibreOfficeKit",
+    "family": "LibreOffice PDF import through LibreOfficeKit C ABI",
+    "family_note": "The installed package bundles xpdfimport with Poppler markers; the exact PDF import execution path was not traced. It is a distinct open-source package API but independence from Poppler/PDFium syntax engines is unestablished."
   }
 ]

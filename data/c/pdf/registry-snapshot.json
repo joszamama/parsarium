@@ -356,6 +356,16 @@
       "license_evidence": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/LICENSE-MIT",
       "binary_url": "https://github.com/yfedoseev/pdf_oxide/releases/download/v0.3.78/libpdf_oxide-v0.3.78-darwin-arm64.tar.gz",
       "binary_sha256": "89faeb3c4a5bffab26b6c70662e06f6c25ed05b43cf3f36d606ecab9b1e71c79"
+    },
+    "libreofficekit": {
+      "version": "26.8.3.1",
+      "license": "MPL-2.0",
+      "source_kind": "official_binary_distribution",
+      "distribution_url": "https://download.documentfoundation.org/libreoffice/stable/26.8.3/mac/aarch64/LibreOffice_26.8.3_MacOS_aarch64.dmg",
+      "distribution_sha256": "de943203795e5057785f65515063e2db5eb60b0bb6d8e2534fec59e5cc5fb988",
+      "source_tag": "libreoffice-26.8.3.1",
+      "source_commit": "861effc5289d539f15c4c18d1ba8579ffd78728b",
+      "license_evidence": "https://www.libreoffice.org/licenses/"
     }
   },
   "popularity_metric": {
@@ -424,6 +434,16 @@
         "repository": "https://github.com/yfedoseev/pdf_oxide",
         "observed_at_utc": "2026-11-13T00:18:26.320967+00:00",
         "evidence_note": "Exact stargazers_count from primary GitHub repository API; project-wide interest, not PDF-specific use."
+      },
+      "libreofficekit": {
+        "stars": null,
+        "repository": "https://git.libreoffice.org/core",
+        "note": "The canonical source is the LibreOffice Git repository; GitHub mirror stars are not used as the primary ranking metric. Homebrew cask installs are a different, auxiliary signal.",
+        "auxiliary_homebrew_cask_install_365d": 416680,
+        "auxiliary_source": "https://formulae.brew.sh/api/analytics/cask-install/365d.json",
+        "auxiliary_start_date": "2025-11-13",
+        "auxiliary_end_date": "2026-11-13",
+        "auxiliary_note": "Cask install events for LibreOffice broadly, not PDF or LibreOfficeKit use; not comparable to GitHub stars."
       }
     }
   },
@@ -481,6 +501,14 @@
       "name": "pdf_oxide",
       "url": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h",
       "surface": "Tagged upstream C ABI and C++17 header plus publisher macOS arm64 binary release; found through targeted PDF reader documentation search outside Homebrew name hits"
+    },
+    {
+      "name": "libreofficekit",
+      "url": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKitInit.h",
+      "format_evidence": "https://help.libreoffice.org/latest/en-US/text/shared/guide/convertfilters.html",
+      "input_api_evidence": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKit.h",
+      "surface": "Official LibreOfficeKit C API and Draw PDF import documentation; official macOS cask distribution outside bounded Homebrew formula-name hits",
+      "disposition": "Verified pinned 26.8.3.1 LibreOfficeKit C ABI on a two-page local PDF."
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:20:10.901485+00:00",
+  "checked_at_utc": "2026-11-13T16:17:23.301478+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,7 +26,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "d0bf3deaefa8fc6e6e27e56c1cfee4587e5622547823bb96e3f5b5d78b20660f",
+      "local_library_sha256": "b1db0f8b34c7197aca222a40fba947cb7e95fcb16ce5ede9c2acc0548af2bde9",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -41,7 +41,7 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "727d7c3942df21d23349864c96e06b8d34b7450c864bcff105fdd9315fc0762f",
+      "local_library_sha256": "fe1b1e42d61453c2a778028dd8306bf5fe26ae34e005f659b39ab186cbc9d6f5",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "imagemagick": {
@@ -63,6 +63,19 @@
       "source_sha256": "c1f9e4f4737389e3374a058042ebac0b49186604f32663fa7ad3bd016fb764e3",
       "local_library_sha256": "533495647bb98016337725e0ff6aa647dd6ef2ad17b56249e7d4fb97f636295e",
       "local_header_sha256": "95d83bb4acce1461cae72bdaf4ce149fecc9653d029b8861bfb61d2eb3a502ef"
+    },
+    "libreofficekit": {
+      "distribution_sha256": "de943203795e5057785f65515063e2db5eb60b0bb6d8e2534fec59e5cc5fb988",
+      "source_commit": "861effc5289d539f15c4c18d1ba8579ffd78728b",
+      "library_sha256": "d8b1868ba18a8c54dce05de46dc48952cd27b852a77bff2ac81d54966477fa06",
+      "xpdfimport_sha256": "99901a62cf1b950198aed1a4be8a8aad5668c50bc15296fdbefc8cf880e25a8f",
+      "header_sha256": {
+        "LibreOfficeKitInit.h": "8c31a6d734081d7e55ce9b7de25bf65474b6e348c1f378331c68cde6c90067a2",
+        "LibreOfficeKit.h": "b64561b8b1a19c7d06d91d52c821c68cf2fcbf0206d1cf0b742b4b0889c8cae4",
+        "LibreOfficeKitTypes.h": "62534a5f692c327b0be1b6c0331ca160347e815f6f702cf3faf6a5cea44d6464",
+        "LibreOfficeKitEnums.h": "a3847b35aa4c10fa40324f7e941200868854418b039cef4a81b53c457a5f0a52"
+      },
+      "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -204,6 +217,18 @@
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/pdf_oxide /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "libreofficekit",
+      "version": "26.8.3.1",
+      "control": "controls/pdf/two-page.pdf",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/libreofficekit-26.8.3.1-include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/libreofficekit.c -ldl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-gx2n4nfr/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-gx2n4nfr/profile",
+      "output": {
+        "type": "drawing",
+        "pages": 2
       },
       "pass": true
     }
