@@ -329,5 +329,26 @@
     "scope": "MP4 track count, video/audio track types and video display dimensions",
     "family": "Mozilla mp4parse Rust ISO BMFF parser through published C API",
     "family_note": "The published mp4parse_capi crate uses Mozilla mp4parse 0.17.0 for syntax interpretation; no other accepted C MP4 package path in this cell shares this parser."
+  },
+  {
+    "name": "l-smash",
+    "version": "2.14.5",
+    "license": "ISC",
+    "license_evidence": "https://github.com/l-smash/l-smash/blob/v2.14.5/LICENSE",
+    "documentation": "https://github.com/l-smash/l-smash/blob/v2.14.5/lsmash.h",
+    "input_api": "lsmash_open_file(local path, input mode 1); lsmash_set_file; lsmash_read_file; lsmash_get_movie_parameters, lsmash_get_media_parameters and lsmash_get_track_parameters",
+    "adapter": "adapters/c/mp4/l_smash.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "video": 1,
+      "audio": 1,
+      "width": 2,
+      "height": 2,
+      "duration_ms": 1000
+    },
+    "scope": "two MP4 tracks, one video and one audio, 2x2 video display dimensions and 1000 ms movie duration",
+    "family": "L-SMASH native ISO BMFF/MP4 box parser",
+    "family_note": "Separate C library parser; no other accepted C MP4 package in this cell uses L-SMASH."
   }
 ]

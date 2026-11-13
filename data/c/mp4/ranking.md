@@ -1,6 +1,6 @@
 # C × MP4: verified parser ranking
 
-17 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
+18 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
 
 | Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -21,8 +21,11 @@
 | — | [ireader/media-server](https://github.com/ireader/media-server/blob/v1.0.0/libmov/include/mov-reader.h) | 1.0.0 | unavailable | one video and one audio track, 2x2 dimensions and 1000 ms duration | ireader libmov native ISO BMFF/MOV reader |
 | — | [libmp4tag](https://libmp4tag.sourceforge.io/) | 2.0.4 | unavailable | MP4 title and 1128 ms duration | libmp4tag native MP4 atom and tag parser |
 | — | [Mozilla mp4parse_capi](https://docs.rs/mp4parse_capi/0.17.0/mp4parse_capi/) | 0.17.0 | unavailable | two tracks, video/audio types and 2×2 video dimensions | Mozilla mp4parse Rust ISO BMFF parser through C API |
+| — | [L-SMASH](https://github.com/l-smash/l-smash/blob/v2.14.5/lsmash.h) | 2.14.5 | unavailable | two tracks, video/audio types, 2×2 video display and 1000 ms duration | L-SMASH native ISO BMFF/MP4 box parser |
 
-MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, libmp4tag, Mozilla mp4parse_capi, ireader libmov and VLC expose distinct package APIs and MP4 parsers. libmpv shares FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4, libmp4tag, Mozilla mp4parse_capi and ireader/media-server have no Homebrew formula in the bounded name search; none has a comparable formula install-on-request count. libquicktime, libextractor, TagLib, libmp4tag and Mozilla mp4parse_capi came from targeted project documentation and passed the control without codec decode plugins. One high-interest minimp4 lead remains unresolved for lack of a pinned release; 3 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, libmp4tag, Mozilla mp4parse_capi, ireader libmov, L-SMASH and VLC expose distinct package APIs and MP4 parsers. libmpv shares FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4, libmp4tag, Mozilla mp4parse_capi, ireader/media-server and L-SMASH have no comparable Homebrew formula install-on-request count. libquicktime, libextractor, TagLib, libmp4tag, Mozilla mp4parse_capi and L-SMASH came from targeted project documentation and passed the control without codec decode plugins. One high-interest minimp4 lead remains unresolved for lack of a pinned release; 2 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+
+L-SMASH 2.14.5 was built from its tagged ISC source. Its local C input API returned two tracks, video and audio handler types, 2×2 display dimensions and 1000 ms movie duration. The upstream repository had 251 GitHub stars on 2026-11-13, an auxiliary project-interest signal; no comparable Homebrew requested-install metric was available, so L-SMASH is unranked.
 
 Mozilla documents the Rust MP4 parser and its published C API as the family used for Firefox track metadata parsing. The pinned 0.17.0 crates.io release passed this control; the current Firefox revision may differ. Its 30,929 lifetime crates.io downloads are a separate auxiliary signal and cannot be inserted into the Homebrew 365-day ranking.
 

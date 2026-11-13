@@ -140,6 +140,25 @@ def build_ireader_media_server(archive: Path, cache: Path) -> tuple[list[str], l
             {"local_library_sha256": sha256(library.read_bytes()).hexdigest()})
 
 
+def build_l_smash(archive: Path, cache: Path) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build tagged L-SMASH C ISO BMFF parser as a static library."""
+    source_dir = cache / "l-smash-2.14.5"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "l-smash-2.14.5" or member.name.startswith("l-smash-2.14.5/")
+                ):
+                    raise ValueError(f"unsafe L-SMASH archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    run(["./configure", "--cc=clang", "--target-os=darwin"], cwd=source_dir)
+    run(["make", "-j4", "lib"], timeout=300, cwd=source_dir)
+    library = source_dir / "liblsmash.a"
+    return (["-I" + str(source_dir)], [str(library), "-lm"],
+            {"local_library_sha256": sha256(library.read_bytes()).hexdigest()})
+
+
 def build_shiguredo_mp4(archive: Path, cache: Path, expected_lock_sha256: str) -> tuple[list[str], list[str], dict[str, str]]:
     """Build the pinned Rust MP4 demuxer and published C API from Cargo.lock."""
     source_dir = cache / "mp4-rs-2026.3.0"
@@ -305,6 +324,8 @@ def verify(ecosystem: str) -> None:
             flags, built_libraries, built_hashes = build_avcpp(archive, cache, source["compiler"])
         elif source.get("source_build") == "ireader_media_server":
             flags, built_libraries, built_hashes = build_ireader_media_server(archive, cache)
+        elif source.get("source_build") == "l_smash":
+            flags, built_libraries, built_hashes = build_l_smash(archive, cache)
         elif source.get("source_build") == "shiguredo_mp4":
             flags, built_libraries, built_hashes = build_shiguredo_mp4(
                 archive, cache, source["cargo_lock_sha256"])

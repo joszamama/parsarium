@@ -262,7 +262,7 @@ projects outside the bounded Homebrew search remain uncertain, and non-GitHub pa
 comparable primary popularity metric. The 20-path counts do not prove a most-used top 20; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
-The C × MP4 cell verifies **17/20 package paths** and C++ × MP4 verifies
+The C × MP4 cell verifies **18/20 package paths** and C++ × MP4 verifies
 **20/20** on the valid local two-track H.264/AAC control. The adapters report
 container identity, title, tracks, dimensions, or duration through documented
 local APIs. Source releases and relevant libraries are pinned. The C++ OpenCV
@@ -279,9 +279,11 @@ Mozilla `mp4parse_capi` 0.17.0 adds a published Rust parser with a C read-callba
 API; its adapter reports both track types and 2×2 video dimensions. Replaying
 `python3 scripts/verify_c_mp4.py` requires `cbindgen 0.29.4` to generate the
 header from the pinned crate source (`brew install cbindgen`).
+L-SMASH 2.14.5 adds a source-built ISC C parser; its local MP4 API reports two
+tracks, video/audio types, 2×2 video display dimensions and 1000 ms duration.
 Four bounded Homebrew formula-name searches saved 15 hits and 15 unique names.
 Homebrew requested-install counts rank only packages with a comparable count;
-`ireader/media-server`, Mozilla mp4parse_capi, and OpenShot have no such count and remain unranked, with GitHub
+`ireader/media-server`, Mozilla mp4parse_capi, L-SMASH, and OpenShot have no such count and remain unranked, with GitHub
 stars recorded only as auxiliary interest. The `lieff/minimp4` lead
 remains unresolved because upstream has no tagged release to pin. C++ also has
 an unresolved QtMultimedia control result. The separate C and C++ standard

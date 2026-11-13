@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T13:58:31.945988+00:00",
+  "checked_at_utc": "2026-11-13T14:18:41.770823+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "8c0bd973372da2106ef6ec5dbdd8f58bc46e7ce401b646aa1847ee0c5de38789",
-      "c_binding_library_sha256": "2738cd0aa37b0530aa7bc07244a29b622083f576894725544c21c9bd252e4900"
+      "c_binding_library_sha256": "6c5a14a0aaf7131266040684b9fa7eafff2a7ffc69ec75fc8272fce919bc87a2"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -67,7 +67,7 @@
     },
     "ireader-media-server": {
       "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
-      "local_library_sha256": "39edecf35cbd23a6ceb5bd36dd9a9fdd424a2af84a12cc8defaa3c54a1d5a87b"
+      "local_library_sha256": "06e317f257fa5b7d26300ccbf7d6d2e5ac9f63d996ebd20652393538313b7038"
     },
     "shiguredo-mp4-rs": {
       "source_sha256": "5af3b3b054d5558e43455232492d9697e0b9055923b835a314d25ec370a5d012",
@@ -89,6 +89,10 @@
       "cargo_lock_sha256": "2f43caffa91eaad71acd0d671d90f8bb2617fce069c1d4d3236811940bafcd8c",
       "generated_header_sha256": "212e746b96342c6ef3f8d9cf310056feec7681db378ed4486f59fb998a4aefbb",
       "local_library_sha256": "8a9623c52b3500dfb46b6189b168755bbca1dd4228b7c55440e642a787a97733"
+    },
+    "l-smash": {
+      "source_sha256": "e6f7c31de684f4b89ee27e5cd6262bf96f2a5b117ba938d2d606cf6220f05935",
+      "local_library_sha256": "1ffd39a98556254eb5ae3486792a9ce2a44d20c45c5e6b0f29a9af69d44c8ea2"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -337,6 +341,22 @@
         "audio": 1,
         "width": 2,
         "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "l-smash",
+      "version": "2.14.5",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-mp4/l-smash-2.14.5 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/l_smash.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-mp4/l-smash-2.14.5/liblsmash.a -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/l-smash",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/l-smash /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "tracks": 2,
+        "video": 1,
+        "audio": 1,
+        "width": 2,
+        "height": 2,
+        "duration_ms": 1000
       },
       "pass": true
     }

@@ -133,6 +133,14 @@
       "source_sha256": "e8be950f2da4a58e35de80883fdca7470d36e4bc5a373a240b22763da72dc9c4",
       "license_evidence": "https://crates.io/crates/mp4parse_capi/0.17.0",
       "distribution": "published crates.io release; built locally with generated C header"
+    },
+    "l-smash": {
+      "version": "2.14.5",
+      "license": "ISC",
+      "source_url": "https://github.com/l-smash/l-smash/archive/refs/tags/v2.14.5.tar.gz",
+      "source_sha256": "e6f7c31de684f4b89ee27e5cd6262bf96f2a5b117ba938d2d606cf6220f05935",
+      "license_evidence": "https://github.com/l-smash/l-smash/blob/v2.14.5/LICENSE",
+      "distribution": "tagged upstream C source; built locally"
     }
   },
   "popularity_metric": {
@@ -252,6 +260,14 @@
         "auxiliary_crates_io_lifetime_downloads": 30929,
         "auxiliary_source": "https://crates.io/api/v1/crates/mp4parse_capi",
         "auxiliary_observed_at_utc": "2026-11-13"
+      },
+      "l-smash": {
+        "install_on_request_365d": null,
+        "formula": null,
+        "evidence_note": "brew info l-smash returned no formula on 2026-11-13; no comparable Homebrew 365-day requested-install count. GitHub stars are auxiliary project interest only.",
+        "auxiliary_github_stars": 251,
+        "auxiliary_source": "https://api.github.com/repos/l-smash/l-smash",
+        "auxiliary_observed_at_utc": "2026-11-13"
       }
     }
   },
@@ -344,6 +360,12 @@
       "name": "mozilla-mp4parse-capi",
       "url": "https://github.com/mozilla/mp4parse-rust",
       "surface": "Upstream README explicitly describes ISO BMFF/MP4 parsing through a C API used by Firefox. The crates.io 0.17.0 release has a local read-callback API; the valid control passed through a generated C header and source-built library."
+    },
+    {
+      "name": "l-smash",
+      "url": "https://l-smash.github.io/l-smash/",
+      "format_evidence": "Tagged lsmash.h documents local input mode and read_file; tagged cli/boxdumper.c uses the API for MP4 track inspection.",
+      "disposition": "Verified with pinned 2.14.5 source build and valid local MP4 control."
     }
   ],
   "search": [

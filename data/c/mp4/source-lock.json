@@ -509,5 +509,26 @@
     "generated_header_sha256": "212e746b96342c6ef3f8d9cf310056feec7681db378ed4486f59fb998a4aefbb",
     "source_build": "mozilla_mp4parse_capi",
     "build_note": "Published crates.io release is source-built with Cargo.lock. The temporary manifest sets cdylib crate type; cbindgen 0.29.4 generates the C header from the published FFI source. The adapter opens the local MP4 and supplies a FILE read callback."
+  },
+  "l-smash": {
+    "release": "2.14.5",
+    "license": "ISC",
+    "source_url": "https://github.com/l-smash/l-smash/archive/refs/tags/v2.14.5.tar.gz",
+    "source_sha256": "e6f7c31de684f4b89ee27e5cd6262bf96f2a5b117ba938d2d606cf6220f05935",
+    "repository": "https://github.com/l-smash/l-smash",
+    "source_header_member": "l-smash-2.14.5/lsmash.h",
+    "source_header_sha256": "5462ef973fbdfe875f755c64c15878c887cc5f9acc4b4a0d5a1cc10bdf1cd6ec",
+    "license_member": "l-smash-2.14.5/LICENSE",
+    "license_sha256": "f778761540555e63528418e75784c0ed7bf2b89ab11f5ddbfd4bec7aa540e79d",
+    "source_engine_member": "l-smash-2.14.5/core/read.c",
+    "source_engine_sha256": "79459e8226955574f0d080197d2cea5d0155595e40fcb966b404f23eb411fb8e",
+    "source_engine_members": [
+      {
+        "member": "l-smash-2.14.5/core/file.c",
+        "sha256": "ff66735041a7aea5c5d86b85d549dec6cb7db52c041fdb9f7eeaf4dfb6e56ba8"
+      }
+    ],
+    "source_build": "l_smash",
+    "build_note": "Tagged ISC source archive and public API, box parser, file layer and license are SHA-256 pinned; configure and make build a static C library. The adapter reads a local MP4 path."
   }
 }
