@@ -406,5 +406,22 @@
     "scope": "SVG root dimensions and two parsed rectangle elements",
     "family": "NovaSVG native C++ SVG parser",
     "family_note": "Header-only C++17 library with its own SVG document parser and rasterizer."
+  },
+  {
+    "name": "juce",
+    "version": "9.0.5",
+    "license": "AGPL-3.0-only",
+    "license_evidence": "https://github.com/juce-framework/JUCE/blob/9.0.5/LICENSE.md",
+    "documentation": "https://docs.juce.com/develop/classjuce_1_1Drawable.html",
+    "input_api": "juce::Drawable::createFromSVGFile(juce::File(local filename)); getDrawableBounds()",
+    "adapter": "adapters/cpp/svg/juce.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "parsed SVG drawable bounds from local file",
+    "family": "JUCE juce_graphics over bundled LunaSVG",
+    "family_note": "JUCE SVGParser.cpp calls bundled LunaSVG and converts its document to a JUCE Drawable tree; this shares the LunaSVG parser family with the direct LunaSVG row."
   }
 ]

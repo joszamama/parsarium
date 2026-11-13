@@ -61,6 +61,8 @@ def verify(ecosystem: str) -> None:
                 assert sha256(engine_member.read()).hexdigest() == source["source_engine_sha256"]
         formula = "vips" if name == "libvips" else name
         source_build = None
+        juce_binary = None
+        juce_build_command = None
         if name == "novasvg":
             source_dir = cache / f"novasvg-{source['release']}"
             if source_dir.exists():
@@ -69,6 +71,23 @@ def verify(ecosystem: str) -> None:
             header = source_dir / "include/novasvg/novasvg.h"
             library = None
             source_build = ["tar", "-xzf", str(archive), "-C", str(cache)]
+        elif name == "juce":
+            source_dir = cache / f"JUCE-{source['release']}"
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            run(["tar", "-xzf", str(archive), "-C", str(cache)])
+            header = source_dir / "modules/juce_graphics/drawables/juce_Drawable.h"
+            library = None
+            build_dir = cache / "juce-svg-build"
+            configure = ["cmake", "-S", str(ROOT / "adapters/cpp/svg/juce"), "-B", str(build_dir),
+                         "-DJUCE_SOURCE_DIR=" + str(source_dir), "-DCMAKE_BUILD_TYPE=Release",
+                         "-DCMAKE_OSX_ARCHITECTURES=arm64"]
+            build = ["cmake", "--build", str(build_dir), "--target", "parsarium_juce_svg", "-j8"]
+            run(configure, timeout=600)
+            run(build, timeout=900)
+            juce_binary = build_dir / "parsarium_juce_svg_artefacts/Release/parsarium_juce_svg"
+            source_build = configure
+            juce_build_command = shlex.join(configure) + " && " + shlex.join(build)
         elif name == "resvg":
             source_dir = cache / f"resvg-{source['release']}"
             if source_dir.exists():
@@ -92,7 +111,9 @@ def verify(ecosystem: str) -> None:
         assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
         std = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
-        if name == "novasvg":
+        if name == "juce":
+            command = source_build
+        elif name == "novasvg":
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(header.parent.parent), str(ROOT / parser["adapter"]),
                        "-o", str(target / name)]
@@ -115,20 +136,23 @@ def verify(ecosystem: str) -> None:
                 flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"], *(["cairo"] if name == "librsvg" else [])]))
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
-        run(command)
-        execute = [str(target / name), str(CONTROL)]
+        if name != "juce":
+            run(command)
+        execute = [str(juce_binary if juce_binary is not None else target / name), str(CONTROL)]
         output = json.loads(run(execute))
         assert output == parser["expected_output"], (name, output)
         row = {"package": name, "version": parser["version"], "control": parser["control"],
-                     "build_command": shlex.join(command), "command": shlex.join(execute),
+                     "build_command": juce_build_command or shlex.join(command), "command": shlex.join(execute),
                      "output": output, "pass": True}
         if source_build is not None:
-            row["source_build_command"] = shlex.join(source_build)
+            row["source_build_command"] = juce_build_command or shlex.join(source_build)
         rows.append(row)
         libraries[name] = {"source_sha256": source["source_sha256"],
                            "local_header_sha256": source["local_header_sha256"]}
         if library is not None:
             libraries[name]["local_library_sha256"] = sha256(library.read_bytes()).hexdigest()
+        if juce_binary is not None:
+            libraries[name]["built_executable_sha256"] = sha256(juce_binary.read_bytes()).hexdigest()
         print(f"{name}@{parser['version']}: {ecosystem} SVG passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++" if ecosystem == "cpp" else "cc", "--version"]).splitlines()[0],

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:41:40.641107+00:00",
+  "checked_at_utc": "2026-11-13T02:46:27.401228+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -82,6 +82,11 @@
     "novasvg": {
       "source_sha256": "7b42d471071ade8d0e3a7db63b64a4a631f832c0f3c33ec8f18f85924f5c1e9b",
       "local_header_sha256": "671da3abd9e8e941930064e8d2dd9987daa0c5110565f3c0ea862002908ec321"
+    },
+    "juce": {
+      "source_sha256": "d92207f51ba728d3d195b6d5e93ecd049717a915fc250ff6844c32ea7272315a",
+      "local_header_sha256": "e9b30f46a6fe9f60a68f3686c1548c3a825fd14b176a30954c0e95de01a8faff",
+      "built_executable_sha256": "061922885359af34a2fccbf43a6ff16499e6cdee1164cd56f65e7534fb05a2c1"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -416,6 +421,19 @@
       },
       "pass": true,
       "source_build_command": "tar -xzf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/novasvg-0.11.5.tar.gz -C /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg"
+    },
+    {
+      "package": "juce",
+      "version": "9.0.5",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/juce -B /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build -DJUCE_SOURCE_DIR=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/JUCE-9.0.5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64 && cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build --target parsarium_juce_svg -j8",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build/parsarium_juce_svg_artefacts/Release/parsarium_juce_svg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "pass": true,
+      "source_build_command": "cmake -S /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/juce -B /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build -DJUCE_SOURCE_DIR=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/JUCE-9.0.5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64 && cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-svg/juce-svg-build --target parsarium_juce_svg -j8"
     }
   ],
   "runtime": []
