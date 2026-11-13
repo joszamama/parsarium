@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T23:59:40.091052+00:00",
+  "checked_at_utc": "2026-11-13T00:07:51.105379+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,7 +31,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "1eb52b455e52a709f997098a51e351840239cf8bd15905a412f2f34257749b26",
+      "local_library_sha256": "b8426450cf97c230a7c47505b93371f8f9078e379e08676fdc65119831590f12",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -56,7 +56,7 @@
     },
     "xpdf": {
       "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
-      "local_library_sha256": "9792c85271d0c68a5ac01e8c9df618e9ce2aad2386352eb380ebf5c1029076ee",
+      "local_library_sha256": "4a7e109d58f05392030f53534e240c4c2515327cab1b6f8ec086cee7a0491121",
       "local_header_sha256": "d9db2a755da945a0c80fbf30f07d4714625bde1bc832759971514f41842bb064"
     },
     "pdfmm": {
@@ -76,13 +76,23 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "0b176d44f3815c09f397b64bc98cd1c1fa5a353c6ee67bbee651c161d133c7a7",
+      "local_library_sha256": "8c7ac209016ca2045fb810a62bba7ee434a49392f331048bbcb85e0248281856",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "aspose_pdf_foss": {
       "source_sha256": "72d715b8589af8746a6df7f8d2d9def3a2e9a7757f9b414a8a393028c9822738",
-      "local_library_sha256": "19c8ef87c883d3852628c140d95037103597723ae3ac3965be004efe6bf2fa91",
+      "local_library_sha256": "bb8efe9428eb7635634535d0b2e7d420a9940d2bc3d6411d5e53f6d411c79b02",
       "local_header_sha256": "53b1317f68e461e7bc3be66d4c22b6eca2fb87797a1d464e5d8a339b029094d3"
+    },
+    "imagemagick": {
+      "source_sha256": "40b6fefa88fe16ca5a4b3d3db5133eaebfb0157f21f98530bde8aec5dd5b0776",
+      "local_library_sha256": "64f0e4e1690d49fba030b516344e791ce1853f755eddf9ae977443777c954e08",
+      "local_header_sha256": "19467e93c1910749ac8a4465dff99e9194b492e16f86d9fc90fb36b230d9d707"
+    },
+    "graphicsmagick": {
+      "source_sha256": "7efa070dc31116b4315061b39f84bc7181e8b060bf61214ec9af851131af9c81",
+      "local_library_sha256": "3e4c438d63026285d5bc5d980876b58d8b5c2cfec6d4395255492ab258263f55",
+      "local_header_sha256": "a840297eae9825b5eccddff5fc02c4497470852db72c930b949a15c94beb36f7"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -261,6 +271,32 @@
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/aspose_pdf_foss /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "imagemagick",
+      "version": "7.1.2-35",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/imagemagick.cpp -I/opt/homebrew/Cellar/imagemagick/7.1.2-35/include/ImageMagick-7 -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_CHANNEL_MASK_DEPTH=32 -L/opt/homebrew/Cellar/imagemagick/7.1.2-35/lib -lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/imagemagick",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/imagemagick /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1,
+        "width": 612,
+        "height": 792
+      },
+      "pass": true
+    },
+    {
+      "package": "graphicsmagick",
+      "version": "1.3.49",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/graphicsmagick.cpp -I/opt/homebrew/opt/graphicsmagick/include/GraphicsMagick -lGraphicsMagick++ -L/opt/homebrew/opt/graphicsmagick/lib -lGraphicsMagick -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/graphicsmagick",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/graphicsmagick /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1,
+        "width": 612,
+        "height": 792
       },
       "pass": true
     }

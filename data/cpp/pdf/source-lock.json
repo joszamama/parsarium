@@ -264,5 +264,81 @@
     "build": "Fresh tagged source extraction; add missing standard-library includes in src/internal/asciihex.cpp with pinned patch; cmake -S <source> -B <cache>/aspose-pdf-foss-build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5; cmake --build <cache>/aspose-pdf-foss-build --target aspose_pdf_foss -j4",
     "repository": "https://github.com/aspose-pdf-foss/Aspose.PDF-FOSS-for-Cpp",
     "build_note": "Native C++20 MIT parser. Upstream v1.0.1 asciihex.cpp uses std::string and std::runtime_error without including their standard headers; the exact two-include patch enables the recorded Apple clang build. Its CMake FetchContent pins test-only GoogleTest v1.14.0 by SHA-256 even when building only the library target. Primary repository had two observed stars; broad adoption is unestablished."
+  },
+  "imagemagick": {
+    "release": "7.1.2-35",
+    "installed_revision": "7.1.2-35",
+    "license": "ImageMagick",
+    "source_url": "https://codeload.github.com/ImageMagick/ImageMagick/tar.gz/refs/tags/7.1.2-35",
+    "source_sha256": "40b6fefa88fe16ca5a4b3d3db5133eaebfb0157f21f98530bde8aec5dd5b0776",
+    "repository": "https://github.com/ImageMagick/ImageMagick",
+    "pkg_config_version": "7.1.2",
+    "source_header_member": "ImageMagick-7.1.2-35/Magick++/lib/Magick++.h",
+    "local_header": "/opt/homebrew/Cellar/imagemagick/7.1.2-35/include/ImageMagick-7/Magick++.h",
+    "local_header_sha256": "19467e93c1910749ac8a4465dff99e9194b492e16f86d9fc90fb36b230d9d707",
+    "local_library": "/opt/homebrew/Cellar/imagemagick/7.1.2-35/lib/libMagick++-7.Q16HDRI.5.dylib",
+    "local_library_sha256": "64f0e4e1690d49fba030b516344e791ce1853f755eddf9ae977443777c954e08",
+    "pkg_config": "Magick++",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-35/lib/libMagickCore-7.Q16HDRI.10.dylib",
+        "sha256": "64a119feb27c9e08f7322e1f237e442b39d0e96600995c16e436efee3739145c",
+        "role": "Magick core"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-35/lib/ImageMagick/modules-Q16HDRI/coders/pdf.so",
+        "sha256": "20f9a6559c8d7ca0af889d86095c1c53d901183a17f6def3616d3834f9ff0cde",
+        "role": "PDF coder"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-35/etc/ImageMagick-7/delegates.xml",
+        "sha256": "42b858c2e3f867f51e0b379af3cc692c01af50659f6f92d11d3a68cec76ae12f",
+        "role": "delegate configuration"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-35/etc/ImageMagick-7/policy.xml",
+        "sha256": "1574b6bd610de75488339911112c54fc2c31ffb7fbca92836898bbcf403c71d1",
+        "role": "coder policy"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ghostscript/10.08.0/bin/gs",
+        "sha256": "d57bb373324bf7e72c5b3fb1a6cc8a9f876eb6f8d2eec23a5a3809a8a108bf9e",
+        "role": "PDF interpreter delegate"
+      }
+    ],
+    "build_note": "Local PDF coder and Ghostscript delegate are required and hash-pinned; this is a format-aware package input API with a shared Ghostscript PDF interpreter, not an independent PDF syntax engine. The source header matches the installed header byte for byte."
+  },
+  "graphicsmagick": {
+    "release": "1.3.49",
+    "installed_revision": "1.3.49_1",
+    "license": "MIT",
+    "source_url": "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick/1.3.49/GraphicsMagick-1.3.49.tar.xz",
+    "source_sha256": "7efa070dc31116b4315061b39f84bc7181e8b060bf61214ec9af851131af9c81",
+    "repository": "https://foss.heptapod.net/graphicsmagick/graphicsmagick",
+    "pkg_config_version": "1.3.49",
+    "source_header_member": "GraphicsMagick-1.3.49/Magick++/lib/Magick++.h",
+    "local_header": "/opt/homebrew/Cellar/graphicsmagick/1.3.49_1/include/GraphicsMagick/Magick++.h",
+    "local_header_sha256": "a840297eae9825b5eccddff5fc02c4497470852db72c930b949a15c94beb36f7",
+    "local_library": "/opt/homebrew/Cellar/graphicsmagick/1.3.49_1/lib/libGraphicsMagick++.12.dylib",
+    "local_library_sha256": "3e4c438d63026285d5bc5d980876b58d8b5c2cfec6d4395255492ab258263f55",
+    "pkg_config": "GraphicsMagick++",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/graphicsmagick/1.3.49_1/lib/libGraphicsMagick.3.dylib",
+        "sha256": "869d964255aaca151477a01d802f745bb9204328cc815d3d32ddb4a95b5f5005",
+        "role": "GraphicsMagick core"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/graphicsmagick/1.3.49_1/lib/GraphicsMagick/modules-Q16/coders/pdf.so",
+        "sha256": "235e9eac5e756546df39c2cf611b80858abd88ba37b9b0de1a32b82cba168387",
+        "role": "PDF coder"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ghostscript/10.08.0/bin/gs",
+        "sha256": "d57bb373324bf7e72c5b3fb1a6cc8a9f876eb6f8d2eec23a5a3809a8a108bf9e",
+        "role": "PDF interpreter delegate"
+      }
+    ],
+    "build_note": "Local PDF coder and Ghostscript delegate are required and hash-pinned; this is a format-aware package input API with a shared Ghostscript PDF interpreter, not an independent PDF syntax engine. The source header matches the installed header byte for byte."
   }
 }

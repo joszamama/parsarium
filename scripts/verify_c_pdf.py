@@ -113,6 +113,13 @@ def main() -> None:
             header = source_dir / "src/reader/tspr.h"
             run(["make", "lib", "-j4"], cwd=source_dir)
             library = source_dir / "build/libtspdf.a"
+        elif name in ("imagemagick", "graphicsmagick"):
+            assert source["installed_revision"] in run(["brew", "list", "--versions", name]).split()
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["pkg_config_version"]
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            for dependency in source["installed_dependencies"]:
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
@@ -144,6 +151,9 @@ def main() -> None:
         elif name == "tspdf":
             command = [*base, "-I" + str(source_dir / "include"), adapter,
                        str(library), "-o", str(TARGET / name)]
+        elif name in ("imagemagick", "graphicsmagick"):
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+            command = [*base, adapter, *flags, "-o", str(TARGET / name)]
         elif name in ("mupdf", "ghostscript"):
             assert run(["brew", "list", "--versions", name]) == name + " " + source["release"]
             command = [*base, "-I" + str(header.parents[1]), adapter, str(library),

@@ -223,6 +223,13 @@ def main() -> None:
                  "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"], timeout=600)
             run(["cmake", "--build", str(build_dir), "--target", "aspose_pdf_foss", "-j4"], timeout=600)
             library = build_dir / "libaspose_pdf_foss.a"
+        elif name in ("imagemagick", "graphicsmagick"):
+            assert source["installed_revision"] in run(["brew", "list", "--versions", name]).split()
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["pkg_config_version"]
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            for dependency in source["installed_dependencies"]:
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         elif name == "docling_parse":
             patch = ROOT / source["patch"]
             adapter = ROOT / parser["adapter"]
@@ -331,6 +338,10 @@ def main() -> None:
             command = ["c++", "-std=c++20", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(source_dir / "include"), str(ROOT / parser["adapter"]),
                        str(library), "-o", str(TARGET / name)]
+        elif name in ("imagemagick", "graphicsmagick"):
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(TARGET / name)]
         elif name == "docling_parse":
             command = ["cmake", "--build", str(build_dir), "--target", "parsarium_control", "-j4"]
         else:
