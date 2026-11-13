@@ -377,5 +377,26 @@
       "second_x": 1.0,
       "third_y": 1.0
     }
+  },
+  {
+    "name": "imglib2-mesh",
+    "group": "net.imglib2",
+    "artifact": "imglib2-mesh",
+    "version": "1.3.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Pinned tagged LICENSE.txt and SciJava Maven POM Simplified BSD license section",
+    "input_api": "PLYMeshIO.open(String local ASCII PLY file path), returning BufferMesh",
+    "documentation": "https://github.com/imglib/imglib2-mesh/blob/imglib2-mesh-1.3.0/src/main/java/net/imglib2/mesh/io/ply/PLYMeshIO.java",
+    "family": "ImgLib2 Mesh public PLY API over jPLY",
+    "family_note": "Published SciJava mesh library delegates PLY syntax parsing to org.smurn:jply:0.2.1; the jPLY 0.2.0 package path and Jzy3d Core wrapper are separately recorded. This is another package input API, not an independent parser engine.",
+    "scope": "ASCII triangle, three vertices and one face",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/imglib2/src/main/java/org/parsarium/ImgLib2MeshPlyAdapter.java",
+    "adapter_module": "imglib2",
+    "source_lock": "data/java/ascii_ply/imglib2-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    }
   }
 ]

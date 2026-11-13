@@ -274,6 +274,21 @@
       "tag_commit": "4d7661a3598783bd6664ca676cac1123b512052d",
       "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
       "repository": "https://maven.jzy3d.org/releases/"
+    },
+    "imglib2-mesh": {
+      "group": "net.imglib2",
+      "artifact": "imglib2-mesh",
+      "version": "1.3.0",
+      "license": "BSD-2-Clause",
+      "jar_url": "https://maven.scijava.org/content/groups/public/net/imglib2/imglib2-mesh/1.3.0/imglib2-mesh-1.3.0.jar",
+      "jar_sha256": "da0603d0847cc5b6d67b806a1f33946151c9ec3d405aad6a4f09e91e3d80256e",
+      "pom_url": "https://maven.scijava.org/content/groups/public/net/imglib2/imglib2-mesh/1.3.0/imglib2-mesh-1.3.0.pom",
+      "pom_sha256": "21f8a73d822c26f93666c635fcce69a434f801af2e8f7e1549f52eb9e1bd46cf",
+      "sources_jar_url": "https://maven.scijava.org/content/groups/public/net/imglib2/imglib2-mesh/1.3.0/imglib2-mesh-1.3.0-sources.jar",
+      "sources_jar_sha256": "daf8e3b2124154fad0f0cf8ed4bd8fd3f45e3f7681c46f9483b65d00afe75181",
+      "tag_commit": "9b722185c69636682a34229cfe9f04981b875b7f",
+      "source_lock": "data/java/ascii_ply/imglib2-lock.json",
+      "repository": "https://maven.scijava.org/content/groups/public"
     }
   },
   "dependencies": [
@@ -437,6 +452,15 @@
         "auxiliary_github_stars": 310,
         "auxiliary_source": "https://api.github.com/repos/jzy3d/jzy3d-api",
         "auxiliary_observed_at_utc": "2026-11-13T20:28:02Z"
+      },
+      "imglib2-mesh": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.imglib2%3Aimglib2-mesh/versions/1.3.0:dependents",
+        "direct_dependent_count": null,
+        "observed_at_utc": "2026-11-13T20:32:00Z",
+        "note": "Exact-release deps.dev dependents endpoint returned HTTP 404; the artifact is published in the SciJava Maven repository outside Maven Central, so comparable rank is unresolved.",
+        "auxiliary_github_stars": 4,
+        "auxiliary_source": "https://api.github.com/repos/imglib/imglib2-mesh",
+        "auxiliary_observed_at_utc": "2026-11-13T20:32:00Z"
       }
     }
   },
@@ -516,6 +540,13 @@
       "format_evidence": "https://doc.jzy3d.org/javadoc/2.2.1/org/jzy3d/io/ply/Ply.html",
       "release_evidence": "https://maven.jzy3d.org/releases/org/jzy3d/jzy3d-core/2.2.1/jzy3d-core-2.2.1.pom",
       "disposition": "Verified three ASCII PLY vertex positions via Ply.read(InputStream); delegates to published jPLY 0.2.1 family and has no comparable deps.dev direct-dependent value."
+    },
+    {
+      "name": "net.imglib2:imglib2-mesh",
+      "url": "https://github.com/imglib/imglib2-mesh/tree/imglib2-mesh-1.3.0",
+      "format_evidence": "https://github.com/imglib/imglib2-mesh/blob/imglib2-mesh-1.3.0/src/main/java/net/imglib2/mesh/io/ply/PLYMeshIO.java",
+      "release_evidence": "https://maven.scijava.org/content/groups/public/net/imglib2/imglib2-mesh/1.3.0/imglib2-mesh-1.3.0.pom",
+      "disposition": "Verified ASCII PLY triangle vertices and face via PLYMeshIO.open(local path); shares jPLY 0.2.1 reader family and lacks comparable deps.dev metric."
     }
   ],
   "non_maven_release": {
