@@ -249,6 +249,33 @@ def verify(ecosystem: str) -> None:
                      "-DBUILD_TESTS=OFF", "-DBUILD_PYTHON_MODULE=OFF"])
                 run(["cmake", "--build", str(build_dir), "--target", "pointmatcher",
                      "--parallel", "8"], timeout=900)
+            if source.get("source_build") == "meshioplusplus":
+                include_dir = cache / f"meshioplusplus-{source['release']}"
+                if not (include_dir / "src/cpp/include/meshioplusplus/formats/ply.hpp").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"meshioplusplus-{source['release']}" or member.name.startswith(f"meshioplusplus-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+                build_dir = cache / f"meshioplusplus-{source['release']}-llvm-build"
+                run(["cmake", "-S", str(include_dir), "-B", str(build_dir),
+                     "-DCMAKE_BUILD_TYPE=Release",
+                     "-DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++",
+                     "-DCMAKE_CXX_FLAGS=-nostdinc++ -isystem /opt/homebrew/opt/llvm/include/c++/v1 -include bit -include cstdlib",
+                     "-DCMAKE_EXE_LINKER_FLAGS=-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++ -stdlib=libc++",
+                     "-DCMAKE_SHARED_LINKER_FLAGS=-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++ -stdlib=libc++",
+                     "-DMESHIOPLUSPLUS_PARALLEL_BACKEND=SEQ",
+                     "-DMESHIOPLUSPLUS_BUILD_PYTHON=OFF", "-DMESHIOPLUSPLUS_INSTALL_CPP=ON",
+                     "-DMESHIOPLUSPLUS_INSTALL_CPP_BACKENDS=MESHIO",
+                     "-DMESHIOPLUSPLUS_WITH_ZLIB=OFF", "-DMESHIOPLUSPLUS_WITH_HDF5=OFF",
+                     "-DMESHIOPLUSPLUS_WITH_NETCDF=OFF", "-DMESHIOPLUSPLUS_WITH_OCCT=OFF",
+                     "-DMESHIOPLUSPLUS_WITH_EIGEN=OFF", "-DMESHIOPLUSPLUS_WITH_JSON=OFF",
+                     "-DMESHIOPLUSPLUS_BUILD_TESTS=OFF", "-DMESHIOPLUSPLUS_BUILD_CLI=OFF",
+                     "-DMESHIOPLUSPLUS_BUILD_C_API=OFF"])
+                run(["cmake", "--build", str(build_dir), "--target",
+                     "meshioplusplus_core_meshio", "--parallel", "8"], timeout=1200)
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -380,6 +407,18 @@ def verify(ecosystem: str) -> None:
                        "-L/opt/homebrew/opt/yaml-cpp/lib", "-L/opt/homebrew/opt/boost/lib",
                        "-lyaml-cpp", "-lboost_thread", "-lboost_program_options",
                        "-lboost_date_time", "-lboost_chrono", "-o", str(target / name)]
+        elif source.get("source_build") == "meshioplusplus":
+            command = ["/opt/homebrew/opt/llvm/bin/clang++", "-std=c++20", "-O2",
+                       "-Wall", "-Wextra", "-Werror", "-nostdinc++",
+                       "-isystem", "/opt/homebrew/opt/llvm/include/c++/v1",
+                       "-isystem", str(include_dir / "src/cpp/include"),
+                       "-include", "bit", "-include", "cstdlib",
+                       "-DMESHIOPLUSPLUS_MESH_BACKEND_MESHIO",
+                       str(ROOT / parser["adapter"]),
+                       str(build_dir / "libmeshioplusplus_core_meshio.a"),
+                       "-L/opt/homebrew/opt/llvm/lib/c++",
+                       "-Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++", "-stdlib=libc++",
+                       "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),

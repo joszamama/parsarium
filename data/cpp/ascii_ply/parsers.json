@@ -400,5 +400,27 @@
     "scope": "three parsed point-cloud vertices with x/y/z coordinate sums from ASCII PLY",
     "family": "libpointmatcher native PLY point-cloud parser",
     "family_note": "Its pointmatcher/IO.cpp implements ASCII PLY parsing directly and does not delegate to RPly; it ignores the mesh face because the API returns point-cloud DataPoints."
+  },
+  {
+    "name": "meshioplusplus",
+    "version": "20.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/loumalouomega/meshioplusplus/blob/v20.0.0/LICENSE",
+    "documentation": "https://github.com/loumalouomega/meshioplusplus/blob/v20.0.0/src/cpp/include/meshioplusplus/formats/ply.hpp",
+    "input_api": "meshioplusplus::read_ply(local filename); Mesh::NumPoints; Mesh::CellRange/CellView::Conn",
+    "adapter": "adapters/cpp/ascii_ply/meshioplusplus.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three mesh vertices and one triangle face with parsed indices from ASCII PLY",
+    "family": "meshio++ native C++ PLY parser",
+    "family_note": "The tagged src/cpp/src/formats/ply.cpp implements PLY parsing directly. It is a separate package and underlying parser family from RPly, tinyply, hapPLY, and the other listed readers."
   }
 ]

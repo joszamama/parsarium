@@ -408,5 +408,30 @@
       "/opt/homebrew/opt/boost/lib/libboost_thread.dylib": "79869db0e8634cba7d3b18a5f275ae199c2a9df39781dc080c3d321eda545c0d"
     },
     "build_note": "Official libpointmatcher 1.4.4 BSD-3 tagged source and native PLY reader are SHA-256 pinned. Build against tagged libnabo 1.1.2, Eigen 3.4.0 (needed for the release C++11 build), and checked Homebrew Boost 1.92.0 and yaml-cpp 0.9.0. Disable examples/evaluations/tests/Python; link static core and dependencies. The adapter calls the documented local-file PLY API and reports point coordinate sums."
+  },
+  "meshioplusplus": {
+    "release": "20.0.0",
+    "tag": "v20.0.0",
+    "source_build": "meshioplusplus",
+    "license": "MIT",
+    "source_url": "https://github.com/loumalouomega/meshioplusplus/archive/refs/tags/v20.0.0.tar.gz",
+    "source_sha256": "5964cbf01c8abd93b9fb3ba613c35b554be92faf74c768ac2129043bcd7b61f1",
+    "header_member": "meshioplusplus-20.0.0/src/cpp/include/meshioplusplus/formats/ply.hpp",
+    "source_members": {
+      "meshioplusplus-20.0.0/CMakeLists.txt": "58915473a3305f5b8668e7fa505225a89aeecb08702504cd41e95c09880bb616",
+      "meshioplusplus-20.0.0/LICENSE": "58f25d6a0154028a238dc49ce52cca6d246c1238f8e53da221deef43f584eb91",
+      "meshioplusplus-20.0.0/src/cpp/include/meshioplusplus/formats/ply.hpp": "95457a80761d170b152b4caf8d9d5e44ff7307c0d1be93441d3d6b08446bcb11",
+      "meshioplusplus-20.0.0/src/cpp/src/formats/ply.cpp": "54aaef4951dba66b510cad022fed67df0662d3b46f08cabf4d672d853b0235b3",
+      "meshioplusplus-20.0.0/src/cpp/include/meshioplusplus/mesh.hpp": "0edaf4bae135518e06530211b907f3ce60096deb89fb2612ef2bc808ddc0bdb6",
+      "meshioplusplus-20.0.0/src/cpp/include/meshioplusplus/backends/meshio_mesh.hpp": "047f2cd118559153dd164616962dd94db499058eda705b2022e03246567003b2",
+      "meshioplusplus-20.0.0/tests/cpp/test_ply.cpp": "3510e7575eeed09441a098b761ac2043faf0825da72501d17cab170ef0f13187"
+    },
+    "toolchain_files": {
+      "/opt/homebrew/opt/llvm/bin/clang++": "a3f510aa37c9a3082649435e39e3f7c808b6696bb62f077b141c271b5aa783a2",
+      "/opt/homebrew/opt/llvm/include/c++/v1/bit": "97faaaf7146ec65899e5a5347a465634d043edbc8a1fd53ebe73f0a376815c0a",
+      "/opt/homebrew/opt/llvm/include/c++/v1/cstdlib": "f2f5a516b5353f1e55272c092a628f03911c386d1bd9acbc4fda1c69593f9ca5",
+      "/opt/homebrew/opt/llvm/lib/c++/libc++.dylib": "bc23a043c10c64d9662234ea1768d5c3ecc0989f69dde155d37725132c2cc561"
+    },
+    "build_note": "Official MIT-tagged v20.0.0 archive and selected public API, native PLY implementation, mesh ABI, test, license and CMake members SHA-256 pinned. Build only the MESHIO C++ core with optional features disabled on Homebrew LLVM 23.1.4. Supply <bit> and <cstdlib> through -include to accommodate missing transitive standard-header includes in this release; no project source is changed. The adapter calls read_ply on a local filename and reports parsed geometry."
   }
 }

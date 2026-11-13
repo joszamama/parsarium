@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T08:51:24.165907+00:00",
+  "checked_at_utc": "2026-11-13T09:09:38.224373+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -134,6 +134,11 @@
       "source_sha256": "87258fce8638979f4a6568895045f363ceb754ae63686f757d4d922b155b2e70",
       "installed_files": {},
       "source_header_sha256": "614c89eaec6a8facd263e7c0c4df8a8f42fc9ac8acb457cfe907165d5b672626"
+    },
+    "meshioplusplus": {
+      "source_sha256": "5964cbf01c8abd93b9fb3ba613c35b554be92faf74c768ac2129043bcd7b61f1",
+      "installed_files": {},
+      "source_header_sha256": "95457a80761d170b152b4caf8d9d5e44ff7307c0d1be93441d3d6b08446bcb11"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -443,6 +448,23 @@
         "x_sum": 1,
         "y_sum": 1,
         "z_sum": 0
+      },
+      "pass": true
+    },
+    {
+      "package": "meshioplusplus",
+      "version": "20.0.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "/opt/homebrew/opt/llvm/bin/clang++ -std=c++20 -O2 -Wall -Wextra -Werror -nostdinc++ -isystem /opt/homebrew/opt/llvm/include/c++/v1 -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/meshioplusplus-20.0.0/src/cpp/include -include bit -include cstdlib -DMESHIOPLUSPLUS_MESH_BACKEND_MESHIO /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/meshioplusplus.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/meshioplusplus-20.0.0-llvm-build/libmeshioplusplus_core_meshio.a -L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++ -stdlib=libc++ -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/meshioplusplus",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/meshioplusplus /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
       },
       "pass": true
     }
