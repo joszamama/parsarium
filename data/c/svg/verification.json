@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T13:14:58.203370+00:00",
+  "checked_at_utc": "2026-11-13T13:29:24.461531+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/svg/source-lock.json",
@@ -91,8 +91,13 @@
     "imlib2": {
       "source_sha256": "d71ee5351cc1914fb01968123d0dcf276740e5af5662943ac47ae60cafa4d13b",
       "local_header_sha256": "785f4241ffdd2c89c2d64c42769b7f9f53f37ee65fb0995b870382158c0ceaf1",
-      "local_library_sha256": "c5b1f7a531077a74fd0c4574a3c66c90753518863562617f88f900ab2512435f",
-      "svg_loader_sha256": "e81d27ec7cb959b725bd5f2544a7d5da4af8af965dc2dee4b8730cac20212541"
+      "local_library_sha256": "840db84d05071b45bba6b4c85c2237ff6006805c36748c0fb0eae46b4ab68aec",
+      "svg_loader_sha256": "3065fbbbfe715627ba0b83751966617cc36112d8166256e15a61d6e94f746f50"
+    },
+    "efl": {
+      "source_sha256": "248bc76141f2b8b006ccba9e0bb2cb46cbcb1be4181a1cf2728187f778853654",
+      "local_header_sha256": "b180231f49fe30a97df03cc46c25b22c9217114b1aafb1d28f779fbf8a7e45ae",
+      "local_library_sha256": "94395f76bfaf3632ab0cad8400401b67d4111671b7bc15758c5d455c4456636b"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -465,6 +470,28 @@
       },
       "pass": true,
       "source_build_command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-1.12.7/configure --prefix=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-svg-install --with-svg --without-x --without-raw && make -j8 && make install"
+    },
+    {
+      "package": "efl",
+      "version": "1.29.0",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/efl.c -I/opt/homebrew/Cellar/efl/1.29.0/include/evas-1 -I/opt/homebrew/Cellar/efl/1.29.0/include/evas-1/canvas -I/opt/homebrew/Cellar/efl/1.29.0/include/evas-1/gesture -I/opt/homebrew/Cellar/efl/1.29.0/include/ecore-1 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/efl/1.29.0/include/ector-1 -I/opt/homebrew/Cellar/efl/1.29.0/include/eet-1 -I/opt/homebrew/Cellar/efl/1.29.0/include/emile-1 -I/opt/homebrew/opt/lz4/include -I/opt/homebrew/Cellar/efl/1.29.0/include/efl-1 -I/opt/homebrew/Cellar/efl/1.29.0/include/efl-1/interfaces -I/opt/homebrew/Cellar/efl/1.29.0/include/eo-1 -I/opt/homebrew/Cellar/efl/1.29.0/include/eina-1 -I/opt/homebrew/Cellar/efl/1.29.0/include/eina-1/eina -I/opt/homebrew/Cellar/openssl@4/4.1.0/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/opt/graphite2/include -L/opt/homebrew/Cellar/efl/1.29.0/lib -levas -lecore -lector -lemile -lefl -leo -leina -lm -ldl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/efl",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/efl /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
     }
   ],
   "runtime": []

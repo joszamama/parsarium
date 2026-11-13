@@ -460,5 +460,40 @@
       }
     ],
     "build_note": "Build pinned official Imlib2 1.12.7 source with --with-svg --without-x --without-raw, make, and make install in a fixed temporary prefix. The SVG plugin, built native library, and public header are checked by the verifier. The Homebrew Imlib2 formula is not used for this parser run."
+  },
+  "efl": {
+    "release": "1.29.0",
+    "installed_revision": "1.29.0",
+    "license": "GPL-2.0-only AND LGPL-2.1-only AND BSD-2-Clause AND FTL AND zlib-acknowledgement",
+    "source_url": "https://download.enlightenment.org/rel/libs/efl/efl-1.29.0.tar.xz",
+    "source_sha256": "248bc76141f2b8b006ccba9e0bb2cb46cbcb1be4181a1cf2728187f778853654",
+    "repository": "https://git.enlightenment.org/enlightenment/efl",
+    "source_header_member": "efl-1.29.0/src/lib/evas/Evas_Legacy.h",
+    "local_header": "/opt/homebrew/Cellar/efl/1.29.0/include/evas-1/Evas_Legacy.h",
+    "local_header_sha256": "b180231f49fe30a97df03cc46c25b22c9217114b1aafb1d28f779fbf8a7e45ae",
+    "local_library": "/opt/homebrew/Cellar/efl/1.29.0/lib/libevas.1.dylib",
+    "local_library_sha256": "94395f76bfaf3632ab0cad8400401b67d4111671b7bc15758c5d455c4456636b",
+    "pkg_config": "evas",
+    "license_member": "efl-1.29.0/COPYING",
+    "license_sha256": "5bceb52d65debe420bc520f2992807740dc928b7fdc3c2e9a74b5889177ddf4c",
+    "source_engine_member": "efl-1.29.0/src/generic/evas/rsvg/main.c",
+    "source_engine_sha256": "6ce5a9cd838d436e9caa74f7d4190b24aa32c509a68039b91ae3d3ab87de3807",
+    "installed_dependencies": [
+      {
+        "formula": "efl",
+        "revision": "1.29.0",
+        "path": "/opt/homebrew/Cellar/efl/1.29.0/lib/evas/utils/evas_image_loader.rsvg",
+        "sha256": "b1f565d5938945d3324b1f4e95a3ccbc92bb5037bc5bb342e15abe75f325dad3",
+        "role": "Evas SVG image loader executable"
+      },
+      {
+        "formula": "librsvg",
+        "revision": "2.63.4",
+        "path": "/opt/homebrew/Cellar/librsvg/2.63.4/lib/librsvg-2.2.dylib",
+        "sha256": "2c6cf6300889e3ae00e4468d736475310398335a9e4fbaa7a9a47538bc9fcb6c",
+        "role": "shared SVG syntax parser"
+      }
+    ],
+    "build_note": "Official EFL 1.29.0 source and installed Homebrew Evas library, header, rsvg loader executable and librsvg engine are hash-pinned. The Evas image API parses a local SVG through its plugin and reports pixels."
   }
 }

@@ -453,5 +453,32 @@
     "scope": "SVG dimensions and red/green pixels through source-built Imlib2 SVG loader",
     "family": "Imlib2 SVG loader over librsvg",
     "family_note": "The official Imlib2 1.12.7 source contains an optional SVG plugin that delegates to librsvg. The installed Homebrew Imlib2 package lacks this plugin; the verifier enables and builds it from the pinned source. This is a distinct Imlib2 file-input API but shares the separately recorded librsvg syntax engine."
+  },
+  {
+    "name": "efl",
+    "version": "1.29.0",
+    "license": "GPL-2.0-only AND LGPL-2.1-only AND BSD-2-Clause AND FTL AND zlib-acknowledgement",
+    "license_evidence": "https://download.enlightenment.org/rel/libs/efl/efl-1.29.0.tar.xz (COPYING and Homebrew formula)",
+    "documentation": "https://download.enlightenment.org/rel/libs/efl/efl-1.29.0.tar.xz (src/lib/evas/Evas_Legacy.h)",
+    "input_api": "evas_object_image_file_set(Evas_Object*, local SVG filename, NULL); evas_object_image_size_get; evas_object_image_data_get",
+    "adapter": "adapters/c/svg/efl.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "SVG dimensions and red/green pixels through Evas rsvg image loader",
+    "family": "EFL Evas image API over its rsvg loader and librsvg",
+    "family_note": "The pinned Evas rsvg loader executable invokes librsvg. EFL is a distinct released C image API, but shares the separately recorded librsvg SVG syntax engine."
   }
 ]
