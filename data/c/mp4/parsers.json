@@ -309,5 +309,25 @@
     "scope": "AVFormat producer parsed MP4 video/audio codecs and 2x2 video dimensions",
     "family": "MLT avformat producer over FFmpeg MOV/MP4 demuxer",
     "family_note": "MLT C and C++ package APIs use the same MLT avformat plugin; the plugin links FFmpeg 9.0.2 libavformat, sharing the existing FFmpeg parser family."
+  },
+  {
+    "name": "mozilla-mp4parse-capi",
+    "version": "0.17.0",
+    "license": "MPL-2.0",
+    "license_evidence": "https://static.crates.io/crates/mp4parse_capi/mp4parse_capi-0.17.0.crate (LICENSE)",
+    "documentation": "https://docs.rs/mp4parse_capi/0.17.0/mp4parse_capi/",
+    "input_api": "Mp4parseIo read callback over local FILE*; mp4parse_new; mp4parse_get_track_count; mp4parse_get_track_info; mp4parse_get_track_video_info",
+    "adapter": "adapters/c/mp4/mozilla_mp4parse_capi.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "tracks": 2,
+      "video": 1,
+      "audio": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 track count, video/audio track types and video display dimensions",
+    "family": "Mozilla mp4parse Rust ISO BMFF parser through published C API",
+    "family_note": "The published mp4parse_capi crate uses Mozilla mp4parse 0.17.0 for syntax interpretation; no other accepted C MP4 package path in this cell shares this parser."
   }
 ]

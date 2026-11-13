@@ -8,6 +8,7 @@ import json
 import os
 import platform
 import shlex
+import shutil
 import subprocess
 import tarfile
 import tempfile
@@ -18,8 +19,9 @@ CONTROL = ROOT / "controls/mp4/red-av.mp4"
 CONTROL_SHA256 = "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643"
 
 
-def run(command: list[str], timeout: int = 180, env: dict[str, str] | None = None) -> str:
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=timeout,
+def run(command: list[str], timeout: int = 180, env: dict[str, str] | None = None,
+        cwd: Path = ROOT) -> str:
+    result = subprocess.run(command, cwd=cwd, text=True, capture_output=True, timeout=timeout,
                             env={**os.environ, **(env or {})})
     if result.returncode:
         raise RuntimeError(f"{shlex.join(command)}\n{result.stderr}")
@@ -160,6 +162,37 @@ def build_shiguredo_mp4(archive: Path, cache: Path, expected_lock_sha256: str) -
              "local_library_sha256": sha256(library.read_bytes()).hexdigest()})
 
 
+def build_mozilla_mp4parse_capi(archive: Path, cache: Path, source: dict) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build the published Mozilla C API crate and generate its C header."""
+    source_dir = cache / "mp4parse_capi-0.17.0"
+    if source_dir.exists():
+        shutil.rmtree(source_dir)
+    with tarfile.open(archive) as tar:
+        for member in tar.getmembers():
+            path = Path(member.name)
+            if path.is_absolute() or ".." in path.parts or not (
+                member.name == "mp4parse_capi-0.17.0" or member.name.startswith("mp4parse_capi-0.17.0/")
+            ):
+                raise ValueError(f"unsafe Mozilla mp4parse archive path: {member.name}")
+        tar.extractall(cache, filter="data")
+    lockfile = source_dir / "Cargo.lock"
+    assert sha256(lockfile.read_bytes()).hexdigest() == source["cargo_lock_sha256"]
+    assert run(["cbindgen", "--version"]) == source["cbindgen_version"]
+    manifest = source_dir / "Cargo.toml"
+    with manifest.open("a") as output:
+        output.write('\n[lib]\ncrate-type = ["cdylib"]\n')
+    run(["cargo", "build", "--lib", "--release", "--locked", "--manifest-path", str(manifest)], timeout=600)
+    header = source_dir / "mp4parse_capi.h"
+    run(["cbindgen", "--lang", "c", "--config", str(source_dir / "cbindgen.toml"),
+         "--crate", "mp4parse_capi", "--output", str(header)], cwd=source_dir)
+    assert sha256(header.read_bytes()).hexdigest() == source["generated_header_sha256"]
+    library = source_dir / "target/release/libmp4parse_capi.dylib"
+    return (["-I" + str(source_dir), "-Wl,-rpath," + str(library.parent)], [str(library)],
+            {"cargo_lock_sha256": source["cargo_lock_sha256"],
+             "generated_header_sha256": source["generated_header_sha256"],
+             "local_library_sha256": sha256(library.read_bytes()).hexdigest()})
+
+
 def build_libopenshot(archive: Path, cache: Path, source: dict) -> tuple[list[str], list[str], dict[str, str]]:
     """Build tagged OpenShot C++ reader with its tagged OpenShotAudio dependency."""
     audio = source["audio_dependency"]
@@ -239,7 +272,7 @@ def verify(ecosystem: str) -> None:
     for parser in parsers:
         name = parser["name"]
         source = lock[name]
-        suffix = next(s for s in (".tar.gz", ".tar.xz", ".tar.bz2") if source["source_url"].endswith(s))
+        suffix = next(s for s in (".tar.gz", ".tar.xz", ".tar.bz2", ".crate") if source["source_url"].endswith(s))
         archive = cache / f"{name}-{source['release']}{suffix}"
         if not archive.exists() or sha256(archive.read_bytes()).hexdigest() != source["source_sha256"]:
             with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium MP4 verifier"}), timeout=120) as response:
@@ -275,6 +308,8 @@ def verify(ecosystem: str) -> None:
         elif source.get("source_build") == "shiguredo_mp4":
             flags, built_libraries, built_hashes = build_shiguredo_mp4(
                 archive, cache, source["cargo_lock_sha256"])
+        elif source.get("source_build") == "mozilla_mp4parse_capi":
+            flags, built_libraries, built_hashes = build_mozilla_mp4parse_capi(archive, cache, source)
         elif source.get("source_build") == "libopenshot":
             flags, built_libraries, built_hashes = build_libopenshot(archive, cache, source)
         elif source.get("header_only"):

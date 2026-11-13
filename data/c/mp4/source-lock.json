@@ -483,5 +483,31 @@
       }
     ],
     "build_note": "Official v7.42.0 release, installed Homebrew 7.42.0_1 headers and MLT library, avformat plugin, and linked FFmpeg libavformat are hash-pinned. The plugin uses the existing FFmpeg MOV/MP4 demuxer."
+  },
+  "mozilla-mp4parse-capi": {
+    "release": "0.17.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/mp4parse_capi/mp4parse_capi-0.17.0.crate",
+    "source_sha256": "e8be950f2da4a58e35de80883fdca7470d36e4bc5a373a240b22763da72dc9c4",
+    "repository": "https://github.com/mozilla/mp4parse-rust",
+    "source_header_member": "mp4parse_capi-0.17.0/src/lib.rs",
+    "source_header_sha256": "4761968b061a78ea849ce3e9fdf3009dbddd4c6b0026a765f0e959b30233017a",
+    "license_member": "mp4parse_capi-0.17.0/LICENSE",
+    "license_sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+    "source_engine_members": [
+      {
+        "member": "mp4parse_capi-0.17.0/Cargo.lock",
+        "sha256": "2f43caffa91eaad71acd0d671d90f8bb2617fce069c1d4d3236811940bafcd8c"
+      },
+      {
+        "member": "mp4parse_capi-0.17.0/cbindgen.toml",
+        "sha256": "62066cd34285ab9e7f1cc5db8950a51e9e080f5a85bd55ad43d7022e4eae2758"
+      }
+    ],
+    "cargo_lock_sha256": "2f43caffa91eaad71acd0d671d90f8bb2617fce069c1d4d3236811940bafcd8c",
+    "cbindgen_version": "cbindgen 0.29.4",
+    "generated_header_sha256": "212e746b96342c6ef3f8d9cf310056feec7681db378ed4486f59fb998a4aefbb",
+    "source_build": "mozilla_mp4parse_capi",
+    "build_note": "Published crates.io release is source-built with Cargo.lock. The temporary manifest sets cdylib crate type; cbindgen 0.29.4 generates the C header from the published FFI source. The adapter opens the local MP4 and supplies a FILE read callback."
   }
 }

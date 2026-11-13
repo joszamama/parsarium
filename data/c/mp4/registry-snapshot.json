@@ -125,6 +125,14 @@
       "source_sha256": "8800e343f43aaa885bd5d9d23553030fa220aa3e2f0c94d9fd6a936d41638cdd",
       "license_evidence": "https://github.com/mltframework/mlt/blob/v7.42.0/COPYING",
       "installed_revision": "7.42.0_1"
+    },
+    "mozilla-mp4parse-capi": {
+      "version": "0.17.0",
+      "license": "MPL-2.0",
+      "source_url": "https://static.crates.io/crates/mp4parse_capi/mp4parse_capi-0.17.0.crate",
+      "source_sha256": "e8be950f2da4a58e35de80883fdca7470d36e4bc5a373a240b22763da72dc9c4",
+      "license_evidence": "https://crates.io/crates/mp4parse_capi/0.17.0",
+      "distribution": "published crates.io release; built locally with generated C header"
     }
   },
   "popularity_metric": {
@@ -236,6 +244,14 @@
         "observed_at_utc": "2026-11-13T12:11:19+00:00",
         "source": "https://formulae.brew.sh/api/formula/mlt.json",
         "evidence_note": "Same Homebrew 365-day requested-install metric and window as other ranked packages; broad MLT use rather than MP4-specific use."
+      },
+      "mozilla-mp4parse-capi": {
+        "install_on_request_365d": null,
+        "formula": null,
+        "evidence_note": "brew search --formula mp4parse returned no formula on 2026-11-13; no comparable Homebrew requested-install count. Mozilla documents the C API as supporting Firefox media parsing, but that is qualitative project adoption, not a primary rank.",
+        "auxiliary_crates_io_lifetime_downloads": 30929,
+        "auxiliary_source": "https://crates.io/api/v1/crates/mp4parse_capi",
+        "auxiliary_observed_at_utc": "2026-11-13"
       }
     }
   },
@@ -323,6 +339,11 @@
       "url": "https://mltframework.org/docs/framework/",
       "format_evidence": "https://mltframework.org/plugins/ProducerAvformat/",
       "release_evidence": "https://github.com/mltframework/mlt/releases/tag/v7.42.0"
+    },
+    {
+      "name": "mozilla-mp4parse-capi",
+      "url": "https://github.com/mozilla/mp4parse-rust",
+      "surface": "Upstream README explicitly describes ISO BMFF/MP4 parsing through a C API used by Firefox. The crates.io 0.17.0 release has a local read-callback API; the valid control passed through a generated C header and source-built library."
     }
   ],
   "search": [
