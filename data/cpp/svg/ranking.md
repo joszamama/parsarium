@@ -1,14 +1,15 @@
 # C++ × SVG: verified parser ranking
 
-11 verified third-party package paths; working goal 20, ceiling 30. Exact primary GitHub stars are compared only within this ecosystem. Stars measure broad project interest, not SVG-specific adoption. Homebrew name hits are discovery leads.
+12 verified third-party package paths; working goal 20, ceiling 30. Exact primary GitHub stars are compared only within this ecosystem. Stars measure broad project interest, not SVG-specific adoption. Homebrew name hits are discovery leads.
 
 | Rank | Package | Pinned release | Primary GitHub stars | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [ImageMagick](https://imagemagick.org/formats/) | 7.1.2-35 | 17,852 | SVG dimensions and two rendered pixels | internal MSVG renderer |
 | 2 | [libvips](https://www.libvips.org/API/current/ctor.Image.svgload.html) | 8.18.7 | 11,801 | SVG dimensions and two rendered pixels | libvips loader over librsvg |
 | 3 | [resvg](https://github.com/linebender/resvg/blob/v0.50.0/crates/c-api/resvg.h) | 0.50.0 | 4,185 | SVG dimensions and two rendered pixels | resvg/usvg Rust SVG engine |
-| 4 | [LunaSVG](https://github.com/sammycage/lunasvg/blob/v3.5.0/include/lunasvg.h) | 3.5.0 | 1,229 | SVG dimensions and two rendered pixels | LunaSVG parser with PlutoVG rasterizer |
-| 5 | [PlutoSVG](https://github.com/sammycage/plutosvg/blob/v0.0.8/source/plutosvg.h) | 0.0.8 | 464 | SVG dimensions and two rendered pixels | PlutoSVG parser with PlutoVG rasterizer |
+| 4 | [ThorVG](https://github.com/thorvg/thorvg/blob/v1.1.3/README.md) | 1.1.3 | 1,919 | SVG root dimensions | ThorVG SVG loader |
+| 5 | [LunaSVG](https://github.com/sammycage/lunasvg/blob/v3.5.0/include/lunasvg.h) | 3.5.0 | 1,229 | SVG dimensions and two rendered pixels | LunaSVG parser with PlutoVG rasterizer |
+| 6 | [PlutoSVG](https://github.com/sammycage/plutosvg/blob/v0.0.8/source/plutosvg.h) | 0.0.8 | 464 | SVG dimensions and two rendered pixels | PlutoSVG parser with PlutoVG rasterizer |
 | unranked | [librsvg](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/class.Handle.html) | 2.63.4 | unknown | SVG dimensions and two rendered pixels | librsvg Rust SVG engine |
 | unranked | [GraphicsMagick](https://graphicsmagick.sourceforge.io/formats.html) | 1.3.49 | unknown | SVG dimensions and two rendered pixels | SVG-to-MVG coder with libxml2 |
 | unranked | [QtSvg](https://doc.qt.io/qt-6/qsvgrenderer.html) | 6.12.0 | unknown | SVG dimensions and two rendered pixels | QtSvg QSvgRenderer and Qt painter |
@@ -16,4 +17,4 @@
 | unranked | [libsvg](https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz) | 0.1.4 | unknown | SVG root dimensions | libsvg over libxml2 |
 | unranked | [libsvg-cairo](https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz) | 0.1.6 | unknown | SVG dimensions and two rendered pixels | libsvg parser with Cairo |
 
-libvips shares librsvg; libsvg-cairo shares libsvg. PlutoSVG and LunaSVG share PlutoVG rasterization but retain separate SVG document parsers. QtSvg is a separate Qt module with its own document reader. No recorded leads remain unresolved; 9 additional verified paths are needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.
+libvips shares librsvg; libsvg-cairo shares libsvg. PlutoSVG and LunaSVG share PlutoVG rasterization but retain separate SVG document parsers. QtSvg is a separate Qt module with its own document reader. No recorded leads remain unresolved; 8 additional verified paths are needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.

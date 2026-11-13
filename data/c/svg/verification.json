@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:51:49.181798+00:00",
+  "checked_at_utc": "2026-11-13T00:55:06.707267+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/svg/source-lock.json",
@@ -48,6 +48,11 @@
       "source_sha256": "a380be6a78ec2938100ce904363815a94068fca372c666b8cc82aa8711a0215c",
       "local_header_sha256": "8b7b5c5787ae2a59f92c4fe478a3e29b3e57d1ba2c57b6b0613f89be09f6a82d",
       "local_library_sha256": "4e792cce5f8351968123d38935e9d71e1e6cea91387dd08c274fef873ecfd366"
+    },
+    "thorvg": {
+      "source_sha256": "ba9957aeeadb4151d4486f11c638ae118c00210fa4906daa7b30143aa341e690",
+      "local_header_sha256": "ab08d97880306222d388cc107d5172ba6a5927cede25baad2ceefbdc132c0084",
+      "local_library_sha256": "13329042374f93e7306928901a7e45b45be83667a624b5227754599d3883e97d"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -240,6 +245,18 @@
           255,
           0
         ]
+      },
+      "pass": true
+    },
+    {
+      "package": "thorvg",
+      "version": "1.1.3",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/thorvg.c -I/opt/homebrew/Cellar/thorvg/1.1.3/include/thorvg-1 -L/opt/homebrew/Cellar/thorvg/1.1.3/lib -lthorvg-1 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/thorvg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/thorvg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1
       },
       "pass": true
     }
