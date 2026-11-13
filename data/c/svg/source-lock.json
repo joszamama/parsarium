@@ -1,0 +1,53 @@
+{
+  "librsvg": {
+    "release": "2.63.4",
+    "installed_revision": "2.63.4",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://download.gnome.org/sources/librsvg/2.63/librsvg-2.63.4.tar.xz",
+    "source_sha256": "31f07d9350dad3f8964fd613c31309ac160fdef13dfac59df6fd082de78d6e8f",
+    "repository": "https://gitlab.gnome.org/GNOME/librsvg",
+    "source_header_member": "librsvg-2.63.4/include/librsvg/rsvg.h",
+    "local_header": "/opt/homebrew/Cellar/librsvg/2.63.4/include/librsvg-2.0/librsvg/rsvg.h",
+    "local_header_sha256": "7993191141ac98a94cb2094fc99abde61a8b0b57802955c3c45049ea8b42746c",
+    "local_library": "/opt/homebrew/Cellar/librsvg/2.63.4/lib/librsvg-2.2.dylib",
+    "local_library_sha256": "2c6cf6300889e3ae00e4468d736475310398335a9e4fbaa7a9a47538bc9fcb6c",
+    "pkg_config": "librsvg-2.0",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/cairo/1.18.6/lib/libcairo.2.dylib",
+        "sha256": "87561194d8de54530595948745abdf44718cbed45b8be7335eb9d05159ff34f6",
+        "role": "Cairo SVG render target"
+      }
+    ],
+    "build_note": "Pinned GNOME source archive and Homebrew librsvg 2.63.4 native install. Installed public header matches upstream source; native library and Cairo render target are SHA-256 checked.",
+    "license_member": "librsvg-2.63.4/COPYING.LIB",
+    "license_sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+  },
+  "libvips": {
+    "release": "8.18.7",
+    "installed_revision": "8.18.7_1",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://github.com/libvips/libvips/releases/download/v8.18.7/vips-8.18.7.tar.xz",
+    "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
+    "repository": "https://github.com/libvips/libvips",
+    "source_header_member": "vips-8.18.7/libvips/include/vips/foreign.h",
+    "local_header": "/opt/homebrew/Cellar/vips/8.18.7_1/include/vips/foreign.h",
+    "local_header_sha256": "0fb2e4772a9484b4f3095f8f31c2500e2f392cc68a9931913e06be8f1510e5c8",
+    "local_library": "/opt/homebrew/Cellar/vips/8.18.7_1/lib/libvips.42.dylib",
+    "local_library_sha256": "a86edfe688ad79b7cb9f7fa73ca6d7e5efd7a54cee5a7de4822c14483c9346a3",
+    "pkg_config": "vips",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/librsvg/2.63.4/lib/librsvg-2.2.dylib",
+        "sha256": "2c6cf6300889e3ae00e4468d736475310398335a9e4fbaa7a9a47538bc9fcb6c",
+        "role": "librsvg SVG parser and renderer"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/cairo/1.18.6/lib/libcairo.2.dylib",
+        "sha256": "87561194d8de54530595948745abdf44718cbed45b8be7335eb9d05159ff34f6",
+        "role": "rendering dependency"
+      }
+    ],
+    "build_note": "Pinned Homebrew vips 8.18.7_1 install over upstream 8.18.7 source; header matches source. The installed libvips core links librsvg 2.63.4, whose native library hash is checked. The SVG syntax engine is shared with the separately verified librsvg path."
+  }
+}

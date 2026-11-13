@@ -1,0 +1,56 @@
+[
+  {
+    "name": "librsvg",
+    "version": "2.63.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/class.Handle.html",
+    "input_api": "rsvg_handle_new_from_file(local filename), rsvg_handle_get_intrinsic_size_in_pixels, rsvg_handle_render_document",
+    "adapter": "adapters/c/svg/librsvg.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "librsvg Rust SVG engine through C API",
+    "family_note": "The same librsvg source package and engine serve C and C++ call sites; this is one package path per ecosystem, not two independent parsers."
+  },
+  {
+    "name": "libvips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/LICENSE",
+    "documentation": "https://www.libvips.org/API/current/ctor.Image.svgload.html",
+    "input_api": "vips_svgload(local filename, &image, NULL); vips_getpoint(image, ...)",
+    "adapter": "adapters/c/svg/libvips.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "libvips SVG loader over librsvg",
+    "family_note": "Installed libvips core directly links librsvg 2.63.4. libvips is a distinct package input API but shares SVG syntax interpretation with the librsvg row."
+  }
+]

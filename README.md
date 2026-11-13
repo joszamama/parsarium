@@ -3,7 +3,8 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
-and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches,
+and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
+C and C++ × SVG batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -17,7 +18,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 71 cells at the 20-parser target, three started below target, and 14
+There are 71 cells at the 20-parser target, five started below target, and 12
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -33,7 +34,10 @@ python3 scripts/verify_c_png.py
 python3 scripts/verify_c_http11.py
 python3 scripts/verify_cpp_png.py
 python3 scripts/verify_cpp_http11.py
+python3 scripts/verify_c_pdf.py
 python3 scripts/verify_cpp_pdf.py
+python3 scripts/verify_c_svg.py
+python3 scripts/verify_cpp_svg.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py
@@ -208,6 +212,13 @@ RAII header over one Rust PDF engine; its publisher binary and source are pinned
 separately, and source-to-binary equivalence is unestablished. One
 lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
+
+The C and C++ × SVG batches each verify **2/20 package paths**. librsvg's
+document API and libvips's SVG loader both read the local 2×1 SVG and render
+the expected red and green pixels. The pinned libvips build links librsvg,
+so these are distinct package APIs sharing one SVG engine. Eight leads per
+cell remain unresolved; see the [C](data/c/svg/cell.json) and
+[C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.
 The C batch now has **20/20 verified package paths**: fourteen prior readers plus
