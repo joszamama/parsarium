@@ -274,5 +274,35 @@
       }
     ],
     "build_note": "Pinned 1.2.4 upstream source and Homebrew 1.2.4_5 installed header and native library. Homebrew bottle carries vendor patches; the exact installed library SHA is recorded."
+  },
+  "libextractor": {
+    "release": "1.20",
+    "installed_revision": "1.20",
+    "formula": "libextractor",
+    "license": "GPL-3.0-or-later",
+    "source_url": "https://ftpmirror.gnu.org/libextractor/libextractor-1.20.tar.gz",
+    "source_sha256": "f4fd6c67076e04e907a3032e42bbaa7c0b35aa3a503393c5d74e303ec3eb84b4",
+    "repository": "https://git.gnunet.org/gnunet/libextractor",
+    "source_header_member": "libextractor-1.20/src/include/extractor.h",
+    "local_header": "/opt/homebrew/Cellar/libextractor/1.20/include/extractor.h",
+    "local_header_sha256": "4b1b2c667db7010782c4214178f1f8e394f02f0eb984ed66bc351bb238401158",
+    "local_library": "/opt/homebrew/Cellar/libextractor/1.20/lib/libextractor.3.dylib",
+    "local_library_sha256": "bd5dad568f7b5ac6ae58bf6a8b70120abb69f8f936503ad205120b9c7466db73",
+    "pkg_config": "libextractor",
+    "license_member": "libextractor-1.20/COPYING",
+    "license_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "source_engine_member": "libextractor-1.20/src/plugins/qt_extractor.c",
+    "source_engine_sha256": "f5be07bbd72057dd171d92fc23a673f0f7d814516110fb69af80794340c04bf5",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libextractor/1.20/lib/libextractor/libextractor_qt.so",
+        "sha256": "72fa6fb4a8f0d7a6a63836de94abceceb0e1024885719072c926d1d633c8739b",
+        "role": "native QT/MP4 metadata parser plugin"
+      }
+    ],
+    "runtime_env": {
+      "LIBEXTRACTOR_PREFIX": "/opt/homebrew/Cellar/libextractor/1.20/lib/libextractor"
+    },
+    "build_note": "Pinned GNU 1.20 source, installed Homebrew core header/library, and qt plugin by SHA-256. Adapter selects the qt plugin explicitly and uses a fixed plugin path."
   }
 }

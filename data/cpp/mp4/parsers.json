@@ -178,5 +178,24 @@
     "scope": "MP4 video/audio track counts and 2x2 video dimensions from parsed atoms",
     "family": "libquicktime native QuickTime/MP4 atom reader",
     "family_note": "C and C++ adapters call the same pinned libquicktime C API. Codec decode plugins are not required for the container result."
+  },
+  {
+    "name": "libextractor",
+    "version": "1.20",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://www.gnu.org/software/libextractor/ and pinned source COPYING",
+    "documentation": "https://www.gnu.org/software/libextractor/manual/extractor.html",
+    "input_api": "EXTRACTOR_plugin_add(\"qt\"); EXTRACTOR_extract(local MP4 filename, callback) returns format-specific metadata",
+    "adapter": "adapters/cpp/mp4/libextractor.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "title": "Parsarium",
+      "duration_seconds": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "QT/MP4 plugin parsed MIME type, title, duration and 2x2 video dimensions",
+    "family": "GNU libextractor native QT/MP4 metadata parser",
+    "family_note": "C and C++ adapters call the same libextractor qt plugin; its exact installed native plugin hash is pinned."
   }
 ]

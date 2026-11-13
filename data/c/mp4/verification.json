@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T10:01:43.343447+00:00",
+  "checked_at_utc": "2026-11-13T10:07:02.267657+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,12 +43,17 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "dbadc26847ef2b6f77b0f358751233ed3bd791a646820afa8d4cd32ce5594d62",
-      "c_binding_library_sha256": "2347f3723fbe38aa2cd37a27d9f92b5fdd80fbf72240f1794a1329f2753eb0b7"
+      "c_binding_library_sha256": "54989cc7e50ad32ca2dad0c7eee6c70b1a3738b8624446431bd401bb7f5a5c3d"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
       "local_header_sha256": "0265437560e0a2e4302d5c0aea4c55aff42dc08c7a4563b6c495c7a78f223f28",
       "local_library_sha256": "ca313261754ac238aa92dc24aff6c417c6b8e678394db0b7474eaaf61a542b88"
+    },
+    "libextractor": {
+      "source_sha256": "f4fd6c67076e04e907a3032e42bbaa7c0b35aa3a503393c5d74e303ec3eb84b4",
+      "local_header_sha256": "4b1b2c667db7010782c4214178f1f8e394f02f0eb984ed66bc351bb238401158",
+      "local_library_sha256": "bd5dad568f7b5ac6ae58bf6a8b70120abb69f8f936503ad205120b9c7466db73"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -184,6 +189,20 @@
       "output": {
         "video_tracks": 1,
         "audio_tracks": 1,
+        "width": 2,
+        "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "libextractor",
+      "version": "1.20",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/libextractor/1.20/include -L/opt/homebrew/Cellar/libextractor/1.20/lib -lextractor /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/libextractor.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/libextractor",
+      "command": "env LIBEXTRACTOR_PREFIX=/opt/homebrew/Cellar/libextractor/1.20/lib/libextractor /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/libextractor /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "title": "Parsarium",
+        "duration_seconds": 1,
         "width": 2,
         "height": 2
       },
