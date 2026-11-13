@@ -77,7 +77,7 @@ def main() -> None:
                 for member, expected in source["source_members"].items():
                     file = tar.extractfile(member)
                     assert file is not None and sha256(file.read()).hexdigest() == expected, member
-                if source.get("source_build") == "header_only":
+                if source.get("source_build") in ("header_only", "taco"):
                     root = source["archive_root"]
                     for member in tar.getmembers():
                         member_path = Path(member.name)
@@ -140,6 +140,20 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "src"),
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "taco":
+            taco_root = cache / source["archive_root"]
+            taco_build = cache / "taco-build-v0.1"
+            taco_library = taco_build / "lib/libtaco.a"
+            if not taco_library.exists():
+                run(["cmake", "-S", str(taco_root), "-B", str(taco_build),
+                     "-DCMAKE_POLICY_VERSION_MINIMUM=3.5", "-DCMAKE_BUILD_TYPE=Release",
+                     "-DTACO_SHARED_LIBRARY=OFF"])
+                run(["cmake", "--build", str(taco_build), "--target", "taco", "-j4"])
+            built_lib_sha256 = digest(taco_library)
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(taco_root / "include"),
+                       str(ROOT / parser["adapter"]), str(taco_library),
+                       "-o", str(target / name)]
         elif name == "eminem":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),
@@ -205,7 +219,7 @@ def main() -> None:
         if source.get("dependencies"):
             local_libraries[name]["dependency_source_sha256"] = {
                 dep["name"]: dep["source_sha256"] for dep in source["dependencies"]}
-        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist"):
+        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist", "taco"):
             local_libraries[name]["built_lib_sha256"] = built_lib_sha256
         print(f"{name}@{parser['version']}: C++ Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

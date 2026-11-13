@@ -394,5 +394,22 @@
       "hifir-0.2.0/README.md": "cd638a5af8d486e2ca96584e501ee503374be6b12241d45593f6ca0ae560a9f0"
     },
     "build_note": "Official tagged HIFIR C++ release, hash-pinned. Header-only hif::read_mm_sparse compiled from extracted src with C++17; no solver or external numerical library is needed for this reader."
+  },
+  "taco": {
+    "release": "0.1",
+    "tag": "v0.1",
+    "source_build": "taco",
+    "archive_root": "taco-0.1",
+    "license": "MIT",
+    "source_url": "https://github.com/tensor-compiler/taco/archive/refs/tags/v0.1.tar.gz",
+    "source_sha256": "a3e78287a9b2357e84844b2126090aa6eb126f41e36815a808b01ca299ed536c",
+    "source_members": {
+      "taco-0.1/include/taco/tensor.h": "d370dadbe77427ea0329858c1465e2d0813e651f340aef0fb575f3805fc0415a",
+      "taco-0.1/include/taco/storage/file_io_mtx.h": "e0e2877928cd8940001f5b306a06345971d6412732e1c88d4f44f66effea5eda",
+      "taco-0.1/src/storage/file_io_mtx.cpp": "d046a823f45e9d515c8e1c79bdf1706e480b4ff6e4d44d9c95e758b127b04d38",
+      "taco-0.1/CMakeLists.txt": "1b2b82c68c7efce8aedc1785cc9649e1f13fe27a2d9381f60299fa647e2b6d7d",
+      "taco-0.1/LICENSE": "92a4a24941fc377508c9fe58ff1b444dd05e8aeea91075302fe3bc3ce0806faf"
+    },
+    "build_note": "Official tagged TACO v0.1 source, SHA-256 pinned. CMake 4 requires CMAKE_POLICY_VERSION_MINIMUM=3.5 for its old minimum declaration; build only the taco static target. C++17 adapter links the locally built library and reads the valid control with taco::read(local .mtx filename, Sparse)."
   }
 }

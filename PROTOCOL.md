@@ -1,9 +1,16 @@
-# Parser selection protocol (v2, 2026-11-11)
+# Parser selection protocol (v3, 2026-11-13)
 
 Eligibility rules were written before the pilot. Version 2 records the user's
 20-per-cell working goal; it does not change eligibility. The unit of analysis is one
 ecosystem × format cell. The eleven formats and eight ecosystems are listed in
 `data/cells.json`.
+
+Version 3 clarifies selection after the user pointed out that verified parsing
+alone does not establish popularity. For each cell, inspect plausible candidates
+with stronger adoption evidence before adding obscure or unranked candidates.
+The working goal is subject to this selection rule. A count of 20 does not
+establish that the included set is the 20 most used packages when the search
+surface is bounded or adoption metrics are missing.
 
 ## Eligibility and verification
 
@@ -56,6 +63,10 @@ limits. Do not extrapolate absent values, combine unlike metrics, compare
 scores across ecosystems, or rank standard-library/runtime APIs against
 packages. An unavailable metric is `null` and leaves its order unresolved.
 Popularity is an adoption proxy, not a quality or security judgment.
+Additional adoption signals can be recorded separately, with their source and
+date, but must not be mixed into the primary ranking or used to infer a missing
+primary value. Label packages without a comparable primary metric as unranked,
+and state when this prevents a defensible top-N claim.
 
 ## Standard libraries and runtime bundles
 
