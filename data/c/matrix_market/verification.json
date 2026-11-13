@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T04:04:29.569118+00:00",
+  "checked_at_utc": "2026-11-13T04:18:01.771803+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/matrix_market/source-lock.json",
@@ -10,10 +10,18 @@
         "/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse/cholmod.h": "e15d65c8bb8d9de2b3d21941418f7779d6076a8b57541a32c4332f04b2e5b6c5",
         "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libcholmod.5.3.5.dylib": "d3ea8afc4f84e16759b79da33861fbe587ed2e303e1269aa6f7d5b0d526c46ca"
       }
+    },
+    "lis": {
+      "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
+      "installed_files": {},
+      "built_lib_sha256": "40ead01b0f14dabc3886dc4aaff4a3b1b65d19c4b972a4dad30c271f8518d7e2"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
   "control_sha256": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
+  "additional_controls": {
+    "controls/matrix_market/real-symmetric.mtx": "53a869970ef0ddf0707dc5ff9a46f4a1daa380e7ff6055e79fa5314103d61cbd"
+  },
   "third_party": [
     {
       "package": "suite-sparse",
@@ -24,6 +32,18 @@
       "output": {
         "rows": 2,
         "cols": 3,
+        "nnz": 3
+      },
+      "pass": true
+    },
+    {
+      "package": "lis",
+      "version": "2.1.23",
+      "control": "controls/matrix_market/real-symmetric.mtx",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/lis-build/install/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/lis.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/lis-build/install/lib/liblis.a -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/lis",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/lis /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-symmetric.mtx",
+      "output": {
+        "rows": 3,
         "nnz": 3
       },
       "pass": true

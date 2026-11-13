@@ -92,5 +92,22 @@
     "scope": "Matrix Market dimensions, three nonzeros and parsed value at (1,3)",
     "family": "Ginkgo native Matrix Market reader",
     "family_note": "Ginkgo read_raw uses its own core/base/mtx_io implementation."
+  },
+  {
+    "name": "lis",
+    "version": "2.1.23",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://www.ssisc.org/lis/dl/lis-2.1.23.zip",
+    "documentation": "https://www.ssisc.org/lis/lis-ug-en.pdf",
+    "input_api": "lis_input_matrix(LIS_MATRIX, local filename)",
+    "adapter": "adapters/cpp/matrix_market/lis.cpp",
+    "control": "controls/matrix_market/real-symmetric.mtx",
+    "expected_output": {
+      "rows": 3,
+      "nnz": 3
+    },
+    "scope": "3×3 symmetric Matrix Market matrix dimensions and three nonzeros",
+    "family": "Lis native Matrix Market reader",
+    "family_note": "Lis C and C++ call sites share one native lis_input_mm parser. Its matrix API requires a square matrix for this control."
   }
 ]

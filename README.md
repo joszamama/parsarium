@@ -1161,19 +1161,19 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): one SuiteSparse
-  CHOLMOD package path verified on a valid real coordinate matrix, 19 below the
-  working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
+- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): SuiteSparse
+  CHOLMOD and Lis verified on valid real coordinate and symmetric controls,
+  18 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
   19 unique names; 18 remain unverified.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, eminem, and Ginkgo verified on the same
-  control, 15 below the working goal. Their source releases, relevant installed headers
+  SuiteSparse, fast_matrix_market, eminem, Ginkgo, and Lis verified on valid
+  Matrix Market controls, 14 below the working goal. Their source releases, relevant installed headers
   and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
   unverified. The two header-only packages have no comparable Homebrew install
   metric and remain unranked. The C and C++ standard libraries have no
-  documented Matrix Market parser; the SuiteSparse call sites share one CHOLMOD
-  parser family.
+  documented Matrix Market parser; the SuiteSparse and Lis call sites each
+  share their C and C++ parser family.
 
 - [JavaScript × PNG ranking](data/javascript/png/ranking.md): 21 packages,
   including header-only and chunk-only parsers labeled by scope. Four npm queries

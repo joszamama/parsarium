@@ -16,5 +16,22 @@
     "scope": "sparse matrix dimensions and nonzero count from a real coordinate Matrix Market file",
     "family": "SuiteSparse CHOLMOD Check reader",
     "family_note": "C and C++ call sites share the same SuiteSparse CHOLMOD Check parser and installed library."
+  },
+  {
+    "name": "lis",
+    "version": "2.1.23",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://www.ssisc.org/lis/dl/lis-2.1.23.zip",
+    "documentation": "https://www.ssisc.org/lis/lis-ug-en.pdf",
+    "input_api": "lis_input_matrix(LIS_MATRIX, local filename)",
+    "adapter": "adapters/c/matrix_market/lis.c",
+    "control": "controls/matrix_market/real-symmetric.mtx",
+    "expected_output": {
+      "rows": 3,
+      "nnz": 3
+    },
+    "scope": "3×3 symmetric Matrix Market matrix dimensions and three nonzeros",
+    "family": "Lis native Matrix Market reader",
+    "family_note": "Lis C and C++ call sites share one native lis_input_mm parser. Its matrix API requires a square matrix for this control."
   }
 ]
