@@ -185,6 +185,23 @@ def verify(ecosystem: str) -> None:
                      "-DCMAKE_BUILD_TYPE=Release", "-DRPLYCPP_BUILD_TESTS=OFF",
                      "-DRPLYCPP_BUILD_SAMPLES=OFF"])
                 run(["cmake", "--build", str(build_dir), "--parallel", "4"])
+            if source.get("source_build") == "easy3d":
+                include_dir = cache / f"Easy3D-{source['release']}"
+                if not (include_dir / "easy3d/fileio/surface_mesh_io.h").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"Easy3D-{source['release']}" or member.name.startswith(f"Easy3D-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+                build_dir = cache / f"Easy3D-{source['release']}-build"
+                run(["cmake", "-S", str(include_dir), "-B", str(build_dir),
+                     "-DCMAKE_BUILD_TYPE=Release", "-DEasy3D_BUILD_TUTORIALS=OFF",
+                     "-DEasy3D_BUILD_TESTS=OFF", "-DEasy3D_ENABLE_QT=OFF",
+                     "-DEasy3D_ENABLE_CGAL=OFF", "-DEasy3D_BUILD_PYTHON_BINDINGS=OFF"])
+                run(["cmake", "--build", str(build_dir), "--target", "easy3d_fileio",
+                     "--parallel", "8"], timeout=600)
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -298,6 +315,13 @@ def verify(ecosystem: str) -> None:
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir / "src"), str(ROOT / parser["adapter"]),
                        str(build_dir / "librplycpp.a"), "-o", str(target / name)]
+        elif source.get("source_build") == "easy3d":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
+                       "-L" + str(build_dir / "lib"),
+                       "-Wl,-rpath," + str(build_dir / "lib"),
+                       "-leasy3d_fileio", "-leasy3d_core", "-leasy3d_util",
+                       "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),

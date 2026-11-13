@@ -359,5 +359,27 @@
     "scope": "three parsed mesh vertices and one triangle facet with indices",
     "family": "Geogram PLYIOHandler over bundled RPly 1.1.4",
     "family_note": "Geogram v1.10.1 registers PLYIOHandler in mesh_io.cpp and calls bundled RPly 1.1.4. This shares the RPly underlying syntax parser family with standalone RPly and rplycpp, but Geogram exposes its distinct mesh_load API and mesh representation."
+  },
+  {
+    "name": "easy3d",
+    "version": "2.6.1",
+    "license": "GPL-3.0-only AND MIT",
+    "license_evidence": "https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/LICENSE",
+    "documentation": "https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/easy3d/fileio/surface_mesh_io.h",
+    "input_api": "easy3d::SurfaceMeshIO::load(local filename); SurfaceMesh::n_vertices/n_faces/vertices(face)",
+    "adapter": "adapters/cpp/ascii_ply/easy3d.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three mesh vertices and one triangle face with indices from ASCII PLY",
+    "family": "Easy3D PLY reader over bundled RPly 1.1.4",
+    "family_note": "Easy3D SurfaceMeshIO and PlyReaderWriter use bundled RPly 1.1.4. It exposes a distinct SurfaceMesh API but shares the underlying RPly parser family with RPly, rplycpp, and Geogram."
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T08:40:34.015271+00:00",
+  "checked_at_utc": "2026-11-13T08:45:00.217197+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -124,6 +124,11 @@
         "/opt/homebrew/Cellar/geogram/1.10.1/lib/libgeogram.1.10.1.dylib": "3b8b6079532fc38d142a1d1cb3b48e02b0b6bf559ebe59b77e02a701ef93678b"
       },
       "source_header_sha256": "b4287b65eaa0cd44ecafe752c09e4eba117a25c4141ba676a9ce3baf098524ce"
+    },
+    "easy3d": {
+      "source_sha256": "e5b5355d042d997d65958c44b80073d37b8c3972bacbb97913e824a8597d9671",
+      "installed_files": {},
+      "source_header_sha256": "4adca31e9a698acea15beaf59b4bb10adee564f2f4737fb9207ca96f71babf47"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -394,6 +399,23 @@
       "control": "controls/ascii_ply/triangle.ply",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/geogram/1.10.1/include/geogram1 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/geogram.cpp -L/opt/homebrew/Cellar/geogram/1.10.1/lib -Wl,-rpath,/opt/homebrew/Cellar/geogram/1.10.1/lib -lgeogram -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/geogram",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/geogram /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "easy3d",
+      "version": "2.6.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/Easy3D-2.6.1 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/easy3d.cpp -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/Easy3D-2.6.1-build/lib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/Easy3D-2.6.1-build/lib -leasy3d_fileio -leasy3d_core -leasy3d_util -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/easy3d",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/easy3d /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "faces": 1,
