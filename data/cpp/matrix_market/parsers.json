@@ -73,5 +73,24 @@
     "scope": "Matrix Market banner, dimensions, three real coordinate entries, and value at (1,3)",
     "family": "eminem native parser over byteme input",
     "family_note": "The pinned byteme and sanisizer dependencies provide byte input and sizing, while eminem parses Matrix Market syntax."
+  },
+  {
+    "name": "ginkgo",
+    "version": "1.11.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/ginkgo-project/ginkgo/blob/v1.11.0/LICENSE",
+    "documentation": "https://gko-project.org/user-guide/how-to/using/read-write-matrices.html",
+    "input_api": "gko::read_raw<double,int>(std::ifstream local_stream)",
+    "adapter": "adapters/cpp/matrix_market/ginkgo.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "Matrix Market dimensions, three nonzeros and parsed value at (1,3)",
+    "family": "Ginkgo native Matrix Market reader",
+    "family_note": "Ginkgo read_raw uses its own core/base/mtx_io implementation."
   }
 ]

@@ -1166,8 +1166,8 @@ or quality judgment.
   working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
   19 unique names; 18 remain unverified.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, and eminem verified on the same control,
-  16 below the working goal. Their source releases, relevant installed headers
+  SuiteSparse, fast_matrix_market, eminem, and Ginkgo verified on the same
+  control, 15 below the working goal. Their source releases, relevant installed headers
   and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
   unverified. The two header-only packages have no comparable Homebrew install

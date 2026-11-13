@@ -102,6 +102,12 @@ def main() -> None:
                        *[flag for dep in source["dependencies"]
                          for flag in ("-isystem", str(cache / dep["archive_root"] / "include"))],
                        str(ROOT / parser["adapter"]), "-o", str(target / name)]
+        elif name == "ginkgo":
+            prefix = Path(source["prefix"])
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(prefix / "include"), str(ROOT / parser["adapter"]),
+                       "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
+                       "-lginkgo", "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
