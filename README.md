@@ -1168,12 +1168,12 @@ the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
 - [C × Matrix Market ranking](data/c/matrix_market/ranking.md): SuiteSparse
-  CHOLMOD, Lis, HYPRE, LAGraph, and librsb verified on valid real coordinate and symmetric controls,
-  15 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
+  CHOLMOD, Lis, HYPRE, LAGraph, librsb, and SuperLU verified on valid real coordinate and symmetric controls,
+  14 below the working goal. Three bounded Homebrew formula-name searches recorded 20 hits,
   19 unique names; 18 remain unverified.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE, LAGraph, and librsb verified on valid
-  Matrix Market controls, 9 below the working goal. Their source releases, relevant installed headers
+  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE, LAGraph, librsb, and SuperLU verified on valid
+  Matrix Market controls, 8 below the working goal. Their source releases, relevant installed headers
   and libraries, adapters, and results are
   pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
   unverified. The header-only packages, LAGraph, and librsb have no comparable Homebrew install

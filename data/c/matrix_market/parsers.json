@@ -90,5 +90,24 @@
     "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
     "family": "librsb native Matrix Market loader",
     "family_note": "C and C++ adapters call the same native rsb_file_mtx_load implementation in librsb 1.3.0.3."
+  },
+  {
+    "name": "superlu",
+    "version": "7.0.1",
+    "license": "BSD-3-Clause-LBNL",
+    "license_evidence": "https://github.com/xiaoyeli/superlu/blob/v7.0.1/License.txt",
+    "documentation": "https://github.com/xiaoyeli/superlu/blob/v7.0.1/SRC/slu_ddefs.h",
+    "input_api": "dreadMM(local FILE *, &rows, &cols, &nonzeros, &values, &row_ids, &col_ptrs)",
+    "adapter": "adapters/c/matrix_market/superlu.c",
+    "control": "controls/matrix_market/real-symmetric.mtx",
+    "expected_output": {
+      "rows": 3,
+      "cols": 3,
+      "nnz": 3,
+      "entry_3_3": 3.0
+    },
+    "scope": "3x3 real symmetric coordinate matrix, three diagonal nonzeros, entry (3,3) = 3",
+    "family": "SuperLU native dreadMM reader",
+    "family_note": "C and C++ adapters call the same installed SuperLU dreadMM implementation; it requires a square input matrix."
   }
 ]

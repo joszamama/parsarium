@@ -148,6 +148,10 @@ def main() -> None:
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),
                        str(install / "lib/librsb.a"), "-lm", "-lz",
                        "-o", str(target / name)]
+        elif name == "superlu":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "superlu"]))
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         elif name == "lis":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),

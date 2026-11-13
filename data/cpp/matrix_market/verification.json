@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T07:59:07.566138+00:00",
+  "checked_at_utc": "2026-11-13T08:06:58.022666+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "fa16361620f1ada1eb5f0926a81dc142f3af52be612f42ac50ee72923fec0149"
+      "built_lib_sha256": "5b321f8be9ff5d035eda3efa240449bd10245e05872fbf0476131038c3d72f22"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -72,7 +72,14 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "6f7db87edcfa8eebf44d7b7e86ae7182ae73cbd8b1e1e0fab8bc51861dbd022a"
+      "built_lib_sha256": "a0e5d81c11bed76f97b3d8c23e6b7426377a82722e0b19d01d9de233357a0cbc"
+    },
+    "superlu": {
+      "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
+      "installed_files": {
+        "/opt/homebrew/Cellar/superlu/7.0.1/include/slu_ddefs.h": "3cfc2d3deeb2159bd56d570e24d23f8df8e4010c7f9e3e46fa99ef5da2bba51e",
+        "/opt/homebrew/Cellar/superlu/7.0.1/lib/libsuperlu.7.0.1.dylib": "dae8ed3a37757238d5fd9abfe9c3e4e144fcdae861b2b4d95723ba87009e4b23"
+      }
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -229,6 +236,20 @@
         "cols": 3,
         "nnz": 3,
         "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "superlu",
+      "version": "7.0.1",
+      "control": "controls/matrix_market/real-symmetric.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/superlu.cpp -I/opt/homebrew/Cellar/superlu/7.0.1/include -L/opt/homebrew/Cellar/superlu/7.0.1/lib -lsuperlu -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/superlu",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/superlu /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-symmetric.mtx",
+      "output": {
+        "rows": 3,
+        "cols": 3,
+        "nnz": 3,
+        "entry_3_3": 3
       },
       "pass": true
     }

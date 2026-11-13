@@ -1,14 +1,15 @@
 # C++ × Matrix Market: verified parser ranking
 
-11 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+12 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [eigen](https://libeigen.gitlab.io/eigen/docs-nightly/unsupported/group__SparseExtra__Module.html) | 5.0.1 | 16,505 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Eigen SparseExtra MarketIO |
 | 2 | [suite-sparse](https://github.com/DrTimothyAldenDavis/SuiteSparse/blob/v7.14.1/CHOLMOD/Check/cholmod_read.c) | 7.14.1 | 10,821 | 2×3 real coordinate matrix and three nonzeros | SuiteSparse CHOLMOD Check reader |
-| 3 | [HYPRE](https://hypre.readthedocs.io/en/latest/api-int-ij.html) | 3.2.1 | 324 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | HYPRE native IJ Matrix Market reader |
-| 4 | [ginkgo](https://gko-project.org/user-guide/how-to/using/read-write-matrices.html) | 1.11.0 | 166 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Ginkgo native Matrix Market reader |
-| 5 | [ViennaCL](https://viennacl.sourceforge.net/doc/iterative_8cpp-example.html) | 1.7.1 | 62 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | ViennaCL native Matrix Market reader |
+| 3 | [SuperLU](https://github.com/xiaoyeli/superlu/blob/v7.0.1/SRC/dreadMM.c) | 7.0.1 | 333 | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU native dreadMM reader |
+| 4 | [HYPRE](https://hypre.readthedocs.io/en/latest/api-int-ij.html) | 3.2.1 | 324 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | HYPRE native IJ Matrix Market reader |
+| 5 | [ginkgo](https://gko-project.org/user-guide/how-to/using/read-write-matrices.html) | 1.11.0 | 166 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Ginkgo native Matrix Market reader |
+| 6 | [ViennaCL](https://viennacl.sourceforge.net/doc/iterative_8cpp-example.html) | 1.7.1 | 62 | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | ViennaCL native Matrix Market reader |
 | unranked | [fast-matrix-market](https://github.com/alugowski/fast_matrix_market/blob/v1.7.6/README.md) | 1.7.6 | unknown | triplet dimensions, indices and entry (1,3) = −2 | fast_matrix_market native parser |
 | unranked | [eminem](https://github.com/tatami-inc/eminem/blob/v1.2.3/README.md) | 1.2.3 | unknown | banner, dimensions and three real coordinate values | eminem native parser over byteme input |
 | unranked | [lis](https://www.ssisc.org/lis/) | 2.1.23 | unknown | 3×3 symmetric matrix and three nonzeros | Lis native Matrix Market reader |
@@ -27,3 +28,5 @@ HYPRE 3.2.1 parsed the valid local Matrix Market control through `HYPRE_IJMatrix
 LAGraph 1.2.2 parsed the local Matrix Market control through `LAGraph_MMRead(FILE *)`. Its C and C++ adapters share the LAGraph reader, backed by SuiteSparse GraphBLAS for matrix storage. The reader is distinct from CHOLMOD Check. LAGraph has no comparable Homebrew requested-install count and remains unranked.
 
 librsb 1.3.0.3 parsed the control through `rsb_file_mtx_load(local filename)`. Its C and C++ adapters share one native reader. The official LGPL-3.0-or-later release is source-pinned and built locally; no comparable Homebrew requested-install count was available.
+
+SuperLU 7.0.1 parsed the valid square symmetric control through `dreadMM(FILE *)`. Its source rejects rectangular matrices. The C and C++ adapters share one native reader; 333 Homebrew requested installs are recorded in the same 365-day window.

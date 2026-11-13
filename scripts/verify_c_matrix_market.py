@@ -98,6 +98,10 @@ def main() -> None:
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),
                        str(install / "lib/librsb.a"), "-lc++", "-lm", "-lz",
                        "-o", str(target / name)]
+        elif name == "superlu":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "superlu"]))
+            command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
