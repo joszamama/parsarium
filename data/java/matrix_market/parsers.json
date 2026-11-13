@@ -38,5 +38,25 @@
       "nnz": 3,
       "entry_1_3": -2.0
     }
+  },
+  {
+    "name": "mtj",
+    "group": "com.googlecode.matrix-toolkits-java",
+    "artifact": "mtj",
+    "version": "1.0.4",
+    "license": "LGPL-3.0",
+    "license_evidence": "Pinned upstream mtj-1.0.4 tag LICENSE and Maven POM licenses section",
+    "input_api": "MatrixVectorReader(Reader from local file); readMatrixInfo; readMatrixSize; readCoordinate(int[], int[], double[])",
+    "documentation": "https://github.com/fommil/matrix-toolkits-java/blob/mtj-1.0.4/src/main/java/no/uib/cipr/matrix/io/MatrixVectorReader.java",
+    "family": "MTJ native Matrix Market coordinate reader",
+    "scope": "2x3 real general coordinate matrix, three stored entries, value at (1,3)",
+    "control": "controls/matrix_market/real-general.mtx",
+    "adapter": "adapters/java/matrix_market/src/main/java/org/parsarium/MtjMatrixMarketAdapter.java",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    }
   }
 ]

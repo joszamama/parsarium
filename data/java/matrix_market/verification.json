@@ -1,9 +1,9 @@
 {
-  "checked_at_utc": "2026-11-13T09:50:15+00:00",
+  "checked_at_utc": "2026-11-13T09:54:59+00:00",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
-    "maven_dependency_artifacts": 272
+    "maven_dependency_artifacts": 290
   },
   "control": "controls/matrix_market/real-general.mtx",
   "control_sha256": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
@@ -25,6 +25,19 @@
     {
       "package": "systemds",
       "version": "3.4.0",
+      "control": "controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2.0
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_matrix_market.py"
+    },
+    {
+      "package": "mtj",
+      "version": "1.0.4",
       "control": "controls/matrix_market/real-general.mtx",
       "output": {
         "rows": 2,
