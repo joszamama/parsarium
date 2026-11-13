@@ -66,5 +66,27 @@
     "scope": "three vertices and one triangular face with parsed indices from ASCII PLY",
     "family": "AssetKit native ASCII PLY importer",
     "family_note": "C and C++ adapters call the same AssetKit C API and native PLY importer."
+  },
+  {
+    "name": "sply",
+    "version": "1.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Anteru/sply/blob/1.2.0/LICENSE",
+    "documentation": "https://github.com/Anteru/sply/blob/1.2.0/Readme.md",
+    "input_api": "ply_open(local ASCII PLY filename); ply_read_header; ply_set_read_cb; ply_read",
+    "adapter": "adapters/c/ascii_ply/sply.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex callbacks and one parsed triangle face with indices",
+    "family": "SPly fork of RPly ANSI C parser",
+    "family_note": "SPly 1.2.0 is a separately tagged MIT library package with custom-I/O and locale changes, fully compatible with RPly; shares the RPly parser lineage and C callback API."
   }
 ]

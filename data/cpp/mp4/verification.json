@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T10:53:26.108435+00:00",
+  "checked_at_utc": "2026-11-13T11:00:19.270690+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "a1b30328365c2cfcd3a09c6ebc91fd634514055a0e1e82dbdf136b0b9c7a042e",
-      "c_binding_library_sha256": "5011cd463e7f15415649091627ae9867171b71cbbdbd058f9080a605aa1a74c7"
+      "c_binding_library_sha256": "817352b124758ebcdcdeef1842bff692e10d92f9b4f3aeed40ca176033b9ba93"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -74,6 +74,11 @@
       "source_sha256": "700b76b97695b2fab4ef8c79619c68ae57d09e0c130724791cafbd39e0eb4aef",
       "local_header_sha256": "5ee5c94376ef8ff0fb0396fe43f642c4b1945ea001ec6dd3e9f6dcb7f508764a",
       "local_library_sha256": "34938ffcbf2a637f6a5b087d2ef4908d479918a5c92df78ec5748e2ecb70c454"
+    },
+    "avcpp": {
+      "source_sha256": "27636d3f4a37b982b6a9f779b1a1e72710c60a7c0004949deb578d28306bfb9d",
+      "generated_header_sha256": "cd67357e2e5cd2da0068b7c5bbe88efd9612b1e370bc62e13adc0069394b554a",
+      "local_library_sha256": "89ba3d1b02089d1a24071bd4eceb375c6b3e28b5f3e465469efc5730029b474d"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -276,6 +281,20 @@
         "brand": "MP4 Base Media",
         "width": 2,
         "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "avcpp",
+      "version": "3.0.1",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "/opt/homebrew/opt/gcc/bin/g++-16 -std=c++20 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/avcpp-3.0.1/src -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/avcpp-build/src -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/avcpp.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/avcpp-build/src/libavcpp.a -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -lavcodec -lswscale -lswresample -lavutil -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/avcpp",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/avcpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "format": "mp4",
+        "streams": 2,
+        "video": 1,
+        "audio": 1
       },
       "pass": true
     }

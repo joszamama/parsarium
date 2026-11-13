@@ -268,5 +268,24 @@
     "scope": "MP4 major brand and video dimensions from parsed QuickTime XMP metadata",
     "family": "Exiv2 native QuickTime/MP4 metadata parser",
     "family_note": "Exiv2 has a native QuickTimeVideo reader in src/quicktimevideo.cpp; this is not the FFmpeg or TagLib parser family."
+  },
+  {
+    "name": "avcpp",
+    "version": "3.0.1",
+    "license": "BSD-3-Clause OR LGPL-2.1-only",
+    "license_evidence": "https://github.com/h4tr3d/avcpp/blob/v3.0.1/LICENSE.md and pinned license files",
+    "documentation": "https://h4tr3d.github.io/avcpp/formatcontext_8h_source.html",
+    "input_api": "av::FormatContext::openInput(local MP4 filename); findStreamInfo; inputFormat; stream(index)",
+    "adapter": "adapters/cpp/mp4/avcpp.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "format": "mp4",
+      "streams": 2,
+      "video": 1,
+      "audio": 1
+    },
+    "scope": "MP4 demuxer and one video plus one audio stream",
+    "family": "AvCpp API over FFmpeg MOV/MP4 demuxer",
+    "family_note": "Distinct published C++ package/API built against the pinned FFmpeg 9.0.2 libraries; shares the already recorded FFmpeg parser engine."
   }
 ]

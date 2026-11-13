@@ -409,5 +409,50 @@
     "source_engine_member": "exiv2-0.28.9/src/quicktimevideo.cpp",
     "source_engine_sha256": "0694c5ce823c53929a09758f570f592362ccde4e6af27fd1691794c309a281c6",
     "build_note": "Pinned upstream v0.28.9 source, public header, QuickTime parser implementation and installed native library SHA-256; pkg-config exiv2 links local C++ API."
+  },
+  "avcpp": {
+    "release": "3.0.1",
+    "license": "BSD-3-Clause OR LGPL-2.1-only",
+    "source_url": "https://github.com/h4tr3d/avcpp/archive/refs/tags/v3.0.1.tar.gz",
+    "source_sha256": "27636d3f4a37b982b6a9f779b1a1e72710c60a7c0004949deb578d28306bfb9d",
+    "repository": "https://github.com/h4tr3d/avcpp",
+    "source_header_member": "avcpp-3.0.1/src/avcpp/formatcontext.h",
+    "source_header_sha256": "fbc1acfd182865cce1482d4faff5722053882eb14f2db7bff3702d985492b6ef",
+    "license_member": "avcpp-3.0.1/LICENSE.md",
+    "license_sha256": "d2ffcf755c489ca53b1ae02b9e7624b1ca64dd63b94337bd2b3644258d79b669",
+    "source_engine_member": "avcpp-3.0.1/src/avcpp/formatcontext.cpp",
+    "source_engine_sha256": "7d94b4008dcaa5dc17f16aca05c2af860c05c2d60ccee51eedc55f5ad84dfbaf",
+    "source_build": "avcpp",
+    "compiler": "/opt/homebrew/opt/gcc/bin/g++-16",
+    "compiler_revision": "16.2.0",
+    "language_standard": "-std=c++20",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.dylib",
+        "sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+        "role": "Pinned FFmpeg dependency of AvCpp source build"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a",
+        "role": "Pinned FFmpeg dependency of AvCpp source build"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavutil.dylib",
+        "sha256": "0377aea088208e69d29c03caeb960ca395fdbcd646335dc0a87748bfe81f8525",
+        "role": "Pinned FFmpeg dependency of AvCpp source build"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libswscale.dylib",
+        "sha256": "518909dce64a42971a838278cf43ba2bd77bd172ba0eccb3c6ba273e25be7cda",
+        "role": "Pinned FFmpeg dependency of AvCpp source build"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libswresample.dylib",
+        "sha256": "8d35eb7639343a837ac4e97cfe1742a293b9bc514a790e5db822927628122d2f",
+        "role": "Pinned FFmpeg dependency of AvCpp source build"
+      }
+    ],
+    "build_note": "Tagged AvCpp 3.0.1 source built locally with CMake, GCC 16 C++20, static avcpp target and pinned FFmpeg 9.0.2 libraries. Apple system libc++ lacks std::views::transform, so GCC libstdc++ is required for this release. The verifier records generated header and static library hashes."
   }
 }

@@ -76,6 +76,37 @@ def build_libmp4tag(archive: Path, cache: Path) -> tuple[list[str], list[str], d
              "local_library_sha256": sha256(library.read_bytes()).hexdigest()})
 
 
+def build_avcpp(archive: Path, cache: Path, compiler: str) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build the pinned C++ FFmpeg wrapper with a C++20 ranges-capable toolchain."""
+    source_dir = cache / "avcpp-3.0.1"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "avcpp-3.0.1" or member.name.startswith("avcpp-3.0.1/")
+                ):
+                    raise ValueError(f"unsafe AvCpp archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    build_dir = cache / "avcpp-build"
+    run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+         "-DCMAKE_CXX_COMPILER=" + compiler, "-DCMAKE_CXX_STANDARD=20",
+         "-DCMAKE_BUILD_TYPE=Release", "-DAV_BUILD_EXAMPLES=OFF",
+         "-DAV_BUILD_TESTS=OFF", "-DAV_ENABLE_SHARED=OFF",
+         "-DAV_ENABLE_STATIC=ON", "-DAV_DISABLE_AVFILTER=ON"], timeout=300)
+    run(["cmake", "--build", str(build_dir), "--target", "avcpp", "-j6"], timeout=600)
+    components = ["libavformat", "libavcodec", "libavutil", "libswscale", "libswresample"]
+    library = build_dir / "src/libavcpp.a"
+    generated_header = build_dir / "src/avcpp/avconfig.h"
+    flags = ["-I" + str(source_dir / "src"), "-I" + str(build_dir / "src")]
+    flags.extend(shlex.split(run(["pkg-config", "--cflags", *components])))
+    libraries = [str(library), *shlex.split(run(["pkg-config", "--libs", *components]))]
+    return flags, libraries, {
+        "generated_header_sha256": sha256(generated_header.read_bytes()).hexdigest(),
+        "local_library_sha256": sha256(library.read_bytes()).hexdigest(),
+    }
+
+
 def verify(ecosystem: str) -> None:
     assert ecosystem in ("c", "cpp")
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
@@ -120,6 +151,9 @@ def verify(ecosystem: str) -> None:
             flags, built_libraries, built_hashes = build_bento4(archive, cache, ecosystem)
         elif source.get("source_build") == "libmp4tag":
             flags, built_libraries, built_hashes = build_libmp4tag(archive, cache)
+        elif source.get("source_build") == "avcpp":
+            assert source["compiler_revision"] in run(["brew", "list", "--versions", "gcc"]).split()
+            flags, built_libraries, built_hashes = build_avcpp(archive, cache, source["compiler"])
         elif source.get("header_only"):
             include_dir = cache / f"{name}-{source['release']}-include"
             include_dir.mkdir(exist_ok=True)
@@ -145,8 +179,8 @@ def verify(ecosystem: str) -> None:
             flags.extend(source.get("extra_linker_flags", []))
         for dependency in source.get("installed_dependencies", []):
             assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
-        compiler = "c++" if ecosystem == "cpp" else "cc"
-        standard = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
+        compiler = source.get("compiler", "c++" if ecosystem == "cpp" else "cc")
+        standard = source.get("language_standard", "-std=c++17" if ecosystem == "cpp" else "-std=c11")
         if source.get("source_build") == "bento4" and ecosystem == "c":
             object_path = target / "bento4.o"
             compile_command = ["cc", standard, "-O2", "-Wall", "-Wextra", "-Werror",

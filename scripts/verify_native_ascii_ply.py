@@ -70,6 +70,14 @@ def verify(ecosystem: str) -> None:
                     assert file is not None
                     (include_dir / member).write_bytes(file.read())
                     assert digest(include_dir / member) == source["source_members"][f"rply-1.1.4/{member}"]
+            if source.get("source_build") == "sply":
+                include_dir = cache / "sply-1.2.0-src"
+                include_dir.mkdir(exist_ok=True)
+                for member in ("sply.h", "sply.c"):
+                    file = tar.extractfile(f"sply-1.2.0/{member}")
+                    assert file is not None
+                    (include_dir / member).write_bytes(file.read())
+                    assert digest(include_dir / member) == source["source_members"][f"sply-1.2.0/{member}"]
             if source.get("source_build") == "libigl":
                 for member in tar.getmembers():
                     member_path = Path(member.name)
@@ -329,6 +337,13 @@ def verify(ecosystem: str) -> None:
             object_path = include_dir / "rply.o"
             run(["cc", "-std=c11", "-O2", "-I" + str(include_dir),
                  "-c", str(include_dir / "rply.c"), "-o", str(object_path)])
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(include_dir), str(ROOT / parser["adapter"]),
+                       str(object_path), "-o", str(target / name)]
+        elif source.get("source_build") == "sply":
+            object_path = include_dir / "sply.o"
+            run(["cc", "-std=c11", "-O2", "-I" + str(include_dir),
+                 "-c", str(include_dir / "sply.c"), "-o", str(object_path)])
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(include_dir), str(ROOT / parser["adapter"]),
                        str(object_path), "-o", str(target / name)]
