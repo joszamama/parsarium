@@ -19,6 +19,20 @@
     "control_result": "The tagged cern.colt.matrix.io.MatrixVectorReader API parsed the valid 2x3 real general control and returned three entries with -2 at (1,3), using adapters/java/matrix_market/src/main/java/org/parsarium/ParallelColtMatrixMarketAdapter.java.",
     "popularity_evidence": "deps.dev reported six known public direct dependents for exact Maven release 0.10.1 on 2026-11-13; excluded from ranking because the package fails eligibility.",
     "license_evidence": "https://github.com/rwl/ParallelColt/blob/parallelcolt-0.10.1/license.txt",
-    "reason": "The tagged package license.txt forbids hep.aida.* use for military applications. The published jar bundles hep/aida classes, so the full library has a field-of-use restriction and does not meet the open-source eligibility rule. The MatrixVectorReader source file itself carries LGPL-2.1-or-later terms, but that does not remove the restriction on the distributed package."
+    "reason": "The tagged package license.txt forbids hep.aida.* use for military applications. The published jar bundles hep/aida classes, so the full library has a field-of-use restriction and does not meet the open-source eligibility rule. The MatrixVectorReader source file itself carries LGPL-2.1-or-later terms, but that does not remove the restriction on the distributed package.",
+    "additional_license_review": {
+      "tag_0_10_0": "https://github.com/rwl/ParallelColt/blob/parallelcolt-0.10.0/license.txt",
+      "tag_0_11_4": "https://github.com/rwl/ParallelColt/blob/parallelcolt-0.11.4/license.txt",
+      "both_license_sha256": "ff3268e53d0da92e47e2c4b42634692726bf2f4e1ed99713c051b3062382c424",
+      "result": "The field-of-use restriction remains in both inspected tags; switching to these releases would not resolve eligibility."
+    }
+  },
+  {
+    "name": "colt:colt",
+    "status": "excluded_no_format_parser",
+    "source": "https://repo.maven.apache.org/maven2/colt/colt/1.2.0/colt-1.2.0.jar",
+    "release": "1.2.0",
+    "jar_sha256": "e1fcbfbdd0d0caedadfb59febace5a62812db3b9425f3a03ef4c4cbba3ed0ee3",
+    "reason": "The released original Colt 1.2.0 jar has no cern.colt.matrix.io package or MatrixVectorReader class. The Matrix Market reader was added later in ParallelColt from MTJ, so the original Colt package is not a Matrix Market parser."
   }
 ]
