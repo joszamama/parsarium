@@ -250,5 +250,23 @@
     "scope": "MP4 title metadata and 1128 ms duration",
     "family": "libmp4tag native MP4 atom and tag parser",
     "family_note": "C and C++ adapters call the same published C API and native parser."
+  },
+  {
+    "name": "exiv2",
+    "version": "0.28.9",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "Pinned upstream COPYING in v0.28.9 source and Homebrew license field",
+    "documentation": "https://exiv2.org/doc/classExiv2_1_1QuickTimeVideo.html",
+    "input_api": "Exiv2::ImageFactory::open(local MP4 filename); Image::readMetadata(); XmpData::findKey for QuickTime/MP4 fields",
+    "adapter": "adapters/cpp/mp4/exiv2.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "brand": "MP4 Base Media",
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 major brand and video dimensions from parsed QuickTime XMP metadata",
+    "family": "Exiv2 native QuickTime/MP4 metadata parser",
+    "family_note": "Exiv2 has a native QuickTimeVideo reader in src/quicktimevideo.cpp; this is not the FFmpeg or TagLib parser family."
   }
 ]
