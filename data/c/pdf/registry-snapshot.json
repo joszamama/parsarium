@@ -388,6 +388,22 @@
       "source_url": "https://download.gnome.org/sources/papers/51/papers-51.1.tar.xz",
       "source_sha256": "ac0db229883b3d2aacbbda1700dc12aa69716664df201120926096f066e4796b",
       "license_evidence": "https://formulae.brew.sh/formula/gnome-papers"
+    },
+    "atril": {
+      "version": "1.28.2",
+      "license": "GPL-2.0-or-later",
+      "source_url": "https://codeload.github.com/mate-desktop/atril/tar.gz/refs/tags/v1.28.2",
+      "source_sha256": "48c0d7ac45781a9c3384b00ed22ab6eca49c6ee6d772c3d0724be3954a0d8efc",
+      "source_commit": "6e116cd028790a0123db5b9e6be7ae9bc03c33c3",
+      "license_evidence": "https://github.com/mate-desktop/atril/blob/v1.28.2/COPYING",
+      "ubuntu_package_version": "1.28.2-1",
+      "ubuntu_package_sha256": {
+        "atril": "08b55b574e5083a94919c121bb710932397ba5e60f5715eb09553fc0d4563fec",
+        "atril-common": "cab9ea83470698b4bf24a22d28fa0610077db179ae4fa92ef075df68bf22fe9d",
+        "libatrildocument3t64": "9ca5f5b27c739fd4fdfd9b4874e4b249d21c1c2d9c014c31aaf649851b9e02a5",
+        "libatrildocument-dev": "f31a874f3cb3b3b5a40fba7b7447002724051c7dd775091c4b1f9fb456aa2b75",
+        "gir1.2-atrildocument-1.5.0": "bde97ad013185df69930e417717abcc7ca396e50636dbb4a542613d7e30769cc"
+      }
     }
   },
   "targeted_documentation_leads": [
@@ -474,6 +490,14 @@
       "input_api_evidence": "https://gnome.pages.gitlab.gnome.org/papers/document/class.Document.html",
       "surface": "GNOME documented C document library and Homebrew formula outside the bounded PDF formula-name query; official GNOME 51.1 source archive",
       "disposition": "Verified GNOME Papers 51.1 local PDF URI API on a valid two-page PDF; shares the Poppler backend with Evince and Poppler GLib."
+    },
+    {
+      "name": "atril",
+      "url": "https://github.com/mate-desktop/atril/releases/tag/v1.28.2",
+      "format_evidence": "https://github.com/mate-desktop/atril/blob/v1.28.2/README.md",
+      "input_api_evidence": "https://github.com/mate-desktop/atril/blob/v1.28.2/libdocument/ev-document-factory.h",
+      "surface": "Official Atril release/document library and Ubuntu 26.04 versioned packages, outside bounded Homebrew formula-name hits",
+      "disposition": "Verified 2-page local PDF through public Atril C document factory in pinned Ubuntu container; shares Poppler parser family; no comparable Homebrew formula metric."
     }
   ],
   "auxiliary_project_interest_metric": {
@@ -569,6 +593,12 @@
         "repository": "https://github.com/iyulab/unpdf",
         "observed_at_utc": "2026-11-13T16:37:45.385904+00:00",
         "evidence_note": "Primary upstream GitHub API stargazers_count; whole Rust project interest, not C ABI or PDF-specific adoption."
+      },
+      "atril": {
+        "stars": 250,
+        "repository": "https://github.com/mate-desktop/atril",
+        "observed_at_utc": "2026-11-13T21:05:27Z",
+        "evidence_note": "Whole-project GitHub stars, auxiliary only; not PDF-specific usage or comparable with Homebrew formula requested installs."
       }
     }
   },
@@ -663,6 +693,10 @@
         "formula": "gnome-papers",
         "source": "https://formulae.brew.sh/formula/gnome-papers",
         "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use. Same Homebrew 365-day analytics window as the other C PDF formulae."
+      },
+      "atril": {
+        "install_on_request_365d": null,
+        "note": "No matching Homebrew formula requested-install count for this Atril package path. Ubuntu package availability and whole-project stars are not mixed into the primary Homebrew metric."
       }
     }
   }

@@ -262,5 +262,22 @@
     "scope": "PDF document page count",
     "family": "GNOME Papers PDF backend over Poppler GLib",
     "family_note": "Distinct documented C document-library input API, sharing the Poppler GLib PDF engine with poppler-glib, Evince, and libvips. The public umbrella header requires a macro claiming author contact; the adapter mirrors signatures from hash-pinned headers rather than defining that macro. The API is explicitly unstable."
+  },
+  {
+    "name": "atril",
+    "version": "1.28.2",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "Pinned v1.28.2 COPYING and GPL-2-or-later tagged source header",
+    "documentation": "https://github.com/mate-desktop/atril/blob/v1.28.2/libdocument/ev-document-factory.h",
+    "format_documentation": "https://github.com/mate-desktop/atril/blob/v1.28.2/README.md",
+    "input_api": "ev_init(); g_filename_to_uri(local path); ev_document_factory_get_document(uri, error); ev_document_get_n_pages(document)",
+    "adapter": "adapters/c/pdf/atril.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "pages": 2
+    },
+    "scope": "PDF page count through Atril libdocument C API",
+    "family": "Atril PDF backend over Poppler GLib",
+    "family_note": "Atril is an Evince-derived package with its own public libdocument C API and PDF backend. The pinned backend links Poppler GLib; it adds a package input path, not an independent PDF syntax engine. Ubuntu arm64 binaries and official tagged source are pinned; no comparable Homebrew formula requested-install count is available."
   }
 ]

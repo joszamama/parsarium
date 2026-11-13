@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T18:04:35.634811+00:00",
+  "checked_at_utc": "2026-11-13T21:05:27Z",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -92,6 +92,13 @@
       "source_sha256": "ac0db229883b3d2aacbbda1700dc12aa69716664df201120926096f066e4796b",
       "local_library_sha256": "5418230aff54859facac619e27af92752b8a0cf390554a6df35874f652f6004a",
       "local_header_sha256": "cc68a805f3cb31e2248903c082dad236a1401913a5d34bd134052458eae3d5bc"
+    },
+    "atril": {
+      "source_sha256": "48c0d7ac45781a9c3384b00ed22ab6eca49c6ee6d772c3d0724be3954a0d8efc",
+      "local_library_sha256": "678141e90043be028aeff61bd4c1e4f673f3d5786374cdfd83078f82de7ad0c2",
+      "local_header_sha256": "413329c397d8513f296cdb0df26a6733f6945cd6b96ff49b3f0e388c4dc66aee",
+      "pdf_backend_sha256": "0dfb2b4ba727a63f3868f4363858d9360a2b4ee03634da08fd27fcdc8e6a8cce",
+      "container_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -282,6 +289,20 @@
         "pages": 2
       },
       "pass": true
+    },
+    {
+      "package": "atril",
+      "version": "1.28.2",
+      "control": "controls/pdf/two-page.pdf",
+      "output": {
+        "pages": 2
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_atril_c_pdf.py",
+      "build_command": "gcc -std=c11 -O2 -Wall -Wextra -Werror /src/adapters/c/pdf/atril.c -o /tmp/atril-pdf $(pkg-config --cflags --libs atril-document-1.5.0)",
+      "checked_at_utc": "2026-11-13T21:05:27Z",
+      "environment": "Ubuntu 26.04 linux/arm64 container at pinned image digest; Atril 1.28.2-1 and exact developer/runtime package versions; public header, libatrildocument and PDF backend SHA-256 pinned",
+      "underlying_family": "Atril PDF backend over Poppler GLib"
     }
   ],
   "runtime": [

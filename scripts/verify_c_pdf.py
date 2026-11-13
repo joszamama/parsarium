@@ -16,6 +16,7 @@ import zipfile
 
 from verify_lok_pdf import verify as verify_lok_pdf
 from verify_unpdf_c_pdf import verify as verify_unpdf_c_pdf
+from verify_atril_c_pdf import verify as verify_atril_c_pdf
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -73,6 +74,12 @@ def main() -> None:
             continue
         if name == "unpdf":
             row, library_record = verify_unpdf_c_pdf(parser, source, ROOT, CACHE, TARGET)
+            rows.append(row)
+            libraries[name] = library_record
+            print(f"{name}@{parser['version']}: C PDF passed", flush=True)
+            continue
+        if name == "atril":
+            row, library_record = verify_atril_c_pdf(parser, source, ROOT, CACHE, TARGET)
             rows.append(row)
             libraries[name] = library_record
             print(f"{name}@{parser['version']}: C PDF passed", flush=True)
