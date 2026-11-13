@@ -1,0 +1,21 @@
+[
+  {
+    "name": "eigen",
+    "version": "5.0.1",
+    "license": "MPL-2.0",
+    "license_evidence": "https://gitlab.com/libeigen/eigen/-/blob/5.0.1/unsupported/Eigen/src/SparseExtra/MarketIO.h",
+    "documentation": "https://libeigen.gitlab.io/eigen/docs-nightly/unsupported/group__SparseExtra__Module.html",
+    "input_api": "Eigen::loadMarket(SparseMatrix<double>&, local filename)",
+    "adapter": "adapters/cpp/matrix_market/eigen.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "sparse matrix dimensions, nonzero count, and parsed entry value from a real coordinate Matrix Market file",
+    "family": "Eigen SparseExtra MarketIO",
+    "family_note": "Eigen provides a native Matrix Market loader in unsupported/SparseExtra."
+  }
+]
