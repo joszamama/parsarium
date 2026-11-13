@@ -5,6 +5,8 @@ import com.ripplargames.meshio.Face;
 import com.ripplargames.meshio.meshformats.ply.PlyFormatAscii_1_0;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.smurn.jply.Element;
@@ -13,6 +15,17 @@ import org.smurn.jply.PlyReaderFile;
 
 public final class PlyAdapter {
     private PlyAdapter() {}
+
+    public static final class PointCloud {
+        private final List<float[]> points = new ArrayList<>();
+        private final List<int[]> triangles = new ArrayList<>();
+
+        @cn.jimmiez.pcu.io.ply.ReadFromPly(element = "vertex", properties = {"x", "y", "z"})
+        public List<float[]> getPoints() { return points; }
+
+        @cn.jimmiez.pcu.io.ply.ReadFromPly(element = "face", properties = {"vertex_indices"})
+        public List<int[]> getTriangles() { return triangles; }
+    }
 
     public static void main(String[] args) throws Exception {
         if (args.length != 2) throw new IllegalArgumentException("Expected parser and local PLY path");
@@ -54,6 +67,12 @@ public final class PlyAdapter {
             indices = new int[]{mesh.getTrianglePointIndex(0, 0),
                                 mesh.getTrianglePointIndex(0, 1),
                                 mesh.getTrianglePointIndex(0, 2)};
+        } else if (args[0].equals("pcutil")) {
+            PointCloud cloud = new cn.jimmiez.pcu.io.ply.PlyReader().read(
+                    new File(args[1]), PointCloud.class);
+            vertices = cloud.getPoints().size();
+            faces = cloud.getTriangles().size();
+            indices = cloud.getTriangles().get(0);
         } else throw new IllegalArgumentException("Unknown parser: " + args[0]);
         System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%d,%d,%d]}%n",
                 vertices, faces, indices[0], indices[1], indices[2]);

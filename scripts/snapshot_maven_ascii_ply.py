@@ -12,7 +12,8 @@ OUT = ROOT / "data/java/ascii_ply/registry-snapshot.json"
 QUERIES = ["ply", "ascii ply", "jply", "meshio"]
 RELEASES = [("jply", "org.smurn", "jply", "0.2.0", "Apache-2.0"),
             ("meshio", "com.ripplargames", "meshio", "2.1.2", "MIT"),
-            ("mesh-ply", "hu.kazocsaba.geom3d", "mesh-ply", "1.1.0", "MIT")]
+            ("mesh-ply", "hu.kazocsaba.geom3d", "mesh-ply", "1.1.0", "MIT"),
+            ("pcutil", "cn.jimmiez", "pcutil", "0.3.0", "MIT")]
 DEPENDENCIES = [("hu.kazocsaba.geom3d", "mesh", "1.0.1"),
                 ("hu.kazocsaba.math", "matrix", "1.1.0")]
 
@@ -27,6 +28,9 @@ def get(url: str) -> bytes:
 
 
 def main() -> None:
+    previous_search = {}
+    if OUT.exists():
+        previous_search = {item["query"]: item for item in json.loads(OUT.read_text())["search"]}
     search = []
     for query in QUERIES:
         url = "https://search.maven.org/solrsearch/select?q=" + quote(query) + "&rows=100&wt=json"
@@ -38,7 +42,12 @@ def main() -> None:
                  "artifact": doc['a'], "latestVersion": doc.get("latestVersion")}
                 for doc in response["docs"]])
         except Exception as error:
-            item.update(total=None, hits=[], error=f"{type(error).__name__}: {error}")
+            if query in previous_search and previous_search[query].get("total") is not None:
+                item = previous_search[query].copy()
+                item["retained_after_failed_refresh_at_utc"] = now()
+                item["refresh_error"] = f"{type(error).__name__}: {error}"
+            else:
+                item.update(total=None, hits=[], error=f"{type(error).__name__}: {error}")
         search.append(item)
 
     releases = {}
