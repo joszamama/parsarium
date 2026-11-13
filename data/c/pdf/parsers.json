@@ -180,5 +180,21 @@
     "scope": "PDF page count and first page dimensions from PDF loader header",
     "family": "libvips vips-poppler module over Poppler PDF parser",
     "family_note": "The installed vips-poppler module links Poppler GLib 26.11.0; C and C++ libvips APIs share the same package and Poppler syntax engine. The adapter reads format-aware PDF metadata; libvips renders pixels lazily."
+  },
+  {
+    "name": "pdf_oxide",
+    "version": "0.3.78",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/LICENSE-MIT",
+    "documentation": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h",
+    "input_api": "pdf_document_open(local file path, &error); pdf_document_get_page_count(handle, &error)",
+    "adapter": "adapters/c/pdf/pdf_oxide.c",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "parsed PDF page count",
+    "family": "pdf_oxide Rust PDF parser via C ABI",
+    "family_note": "The C ABI calls the Rust pdf_oxide engine. The C++ adapter uses the same source release and engine through its RAII header; paths in different ecosystems are not independent syntax engines."
   }
 ]

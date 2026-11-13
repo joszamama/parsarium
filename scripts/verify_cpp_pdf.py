@@ -237,6 +237,26 @@ def main() -> None:
             library = Path(source["local_library"])
             for dependency in source["installed_dependencies"]:
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
+        elif name == "pdf_oxide":
+            source_dir = CACHE / f"pdf_oxide-{source['release']}"
+            if not source_dir.exists():
+                run(["tar", "-xzf", str(source_archive), "-C", str(CACHE)])
+            header = source_dir / "cpp/include/pdf_oxide/pdf_oxide.hpp"
+            c_header = source_dir / "include/pdf_oxide_c/pdf_oxide.h"
+            assert sha256(c_header.read_bytes()).hexdigest() == source["c_header_sha256"]
+            binary = CACHE / f"pdf_oxide-{source['release']}-darwin-arm64.tar.gz"
+            if not binary.exists() or sha256(binary.read_bytes()).hexdigest() != source["binary_archive_sha256"]:
+                with urlopen(Request(source["binary_archive_url"], headers={"User-Agent": "Parsarium C++ PDF verifier"}), timeout=120) as response:
+                    binary.write_bytes(response.read())
+            assert sha256(binary.read_bytes()).hexdigest() == source["binary_archive_sha256"]
+            library = CACHE / "libpdf_oxide.dylib"
+            with tarfile.open(binary) as tar:
+                member = tar.extractfile("libpdf_oxide.dylib")
+                assert member is not None
+                original = member.read()
+            assert sha256(original).hexdigest() == source["binary_member_sha256"]
+            library.write_bytes(original)
+            run(["install_name_tool", "-id", "@rpath/libpdf_oxide.dylib", str(library)])
         elif name == "docling_parse":
             patch = ROOT / source["patch"]
             adapter = ROOT / parser["adapter"]
@@ -353,6 +373,12 @@ def main() -> None:
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(TARGET / name)]
+        elif name == "pdf_oxide":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(source_dir / "include"),
+                       "-I" + str(source_dir / "cpp/include"),
+                       str(ROOT / parser["adapter"]), str(library),
+                       "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
         elif name == "docling_parse":
             command = ["cmake", "--build", str(build_dir), "--target", "parsarium_control", "-j4"]
         else:

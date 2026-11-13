@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:10:25.850929+00:00",
+  "checked_at_utc": "2026-11-13T00:20:10.901485+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,7 +26,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "c4be835f2cce9094e7eb2f23f2b6f383f41d5943b9620e28fb146f0f5de705dd",
+      "local_library_sha256": "d0bf3deaefa8fc6e6e27e56c1cfee4587e5622547823bb96e3f5b5d78b20660f",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -41,7 +41,7 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "ace9ad256a2ba379dbbfda2fe84de289ea6095cdd41268b7806dd92f545bff30",
+      "local_library_sha256": "727d7c3942df21d23349864c96e06b8d34b7450c864bcff105fdd9315fc0762f",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "imagemagick": {
@@ -58,6 +58,11 @@
       "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
       "local_library_sha256": "a86edfe688ad79b7cb9f7fa73ca6d7e5efd7a54cee5a7de4822c14483c9346a3",
       "local_header_sha256": "0fb2e4772a9484b4f3095f8f31c2500e2f392cc68a9931913e06be8f1510e5c8"
+    },
+    "pdf_oxide": {
+      "source_sha256": "c1f9e4f4737389e3374a058042ebac0b49186604f32663fa7ad3bd016fb764e3",
+      "local_library_sha256": "533495647bb98016337725e0ff6aa647dd6ef2ad17b56249e7d4fb97f636295e",
+      "local_header_sha256": "95d83bb4acce1461cae72bdaf4ce149fecc9653d029b8861bfb61d2eb3a502ef"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -188,6 +193,17 @@
         "pages": 1,
         "width": 612,
         "height": 792
+      },
+      "pass": true
+    },
+    {
+      "package": "pdf_oxide",
+      "version": "0.3.78",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/pdf_oxide-0.3.78/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/pdf_oxide.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/libpdf_oxide.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/pdf_oxide",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/pdf_oxide /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
       },
       "pass": true
     }

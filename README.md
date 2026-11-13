@@ -3,7 +3,7 @@
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
-and verified C++ × ASCII PNM and HTTP/1.1 batches, plus a below-target C++ × PDF batch,
+and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -17,7 +17,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 70 cells at the 20-parser target, four started below target, and 14
+There are 71 cells at the 20-parser target, three started below target, and 14
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -175,9 +175,9 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C × PDF batch verifies **11/20 third-party package paths** from C call sites:
+The C × PDF batch verifies **12/20 third-party package paths** from C call sites:
 Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF,
-tspdf, ImageMagick, GraphicsMagick, and libvips. All return one parsed page from the
+tspdf, ImageMagick, GraphicsMagick, libvips, and pdf_oxide. All return one parsed page from the
 valid local control. qpdf requires a C++ linker for its C interface; PDFio
 builds from pinned source. PDFium and Vanilla.PDF use
 hash-pinned binary distributions with source-matched public headers. Apple Core
@@ -185,10 +185,10 @@ Graphics is independently verified as a macOS platform runtime API and is kept
 outside the third-party ranking. See the
 [C PDF cell record](data/c/pdf/cell.json) for search limits and uncertainty.
 
-The C++ × PDF batch currently verifies **19/20 package paths**:
+The C++ × PDF batch currently verifies **20/20 package paths**:
 Poppler's C++ frontend, PoDoFo, qpdf, MuPDF, Ghostscript, PDFio, PDFium,
 PDF-Writer, PDF4QT, Qt PDF, Xpdf, pdfmm, Docling Parse, Vanilla.PDF, tspdf,
-Aspose.PDF FOSS, ImageMagick, GraphicsMagick, and libvips.
+Aspose.PDF FOSS, ImageMagick, GraphicsMagick, libvips, and pdf_oxide.
 MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF, and tspdf use C APIs called
 directly from C++17; PDF-Writer and PDF4QT use native C++ parsers. All return one parsed page
 from the valid PDF control. Release sources, installed headers, and libraries are
@@ -203,7 +203,9 @@ used from both ecosystems; its observed GitHub stars were zero, so external
 adoption is unestablished. Aspose.PDF FOSS is source-built with a recorded
 standard-header compatibility patch and had two observed stars. ImageMagick
 and GraphicsMagick render PDF through their pinned Ghostscript delegate. libvips
-loads PDF through its pinned Poppler module. One
+loads PDF through its pinned Poppler module. pdf_oxide supplies a C ABI and a C++
+RAII header over one Rust PDF engine; its publisher binary and source are pinned
+separately, and source-to-binary equivalence is unestablished. One
 lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 

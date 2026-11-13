@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:13:21.001799+00:00",
+  "checked_at_utc": "2026-11-13T00:22:48.977395+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,7 +31,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "7f85efa48359025443fa426917ed256ad358ccc9d07642012eafcadb7af74c30",
+      "local_library_sha256": "16d8c93f89ea3a54d291c22017011181318021e9662d5e652a60cdd6ef97a86a",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -56,7 +56,7 @@
     },
     "xpdf": {
       "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
-      "local_library_sha256": "7233d0c96bcd535c50065a5e2bf37432a2459ae059e529ee8b2d7598f6d76206",
+      "local_library_sha256": "1dbe83d0a971cf23b54d5132b7119d0f6dd347a276b512441a2f46be9d405761",
       "local_header_sha256": "d9db2a755da945a0c80fbf30f07d4714625bde1bc832759971514f41842bb064"
     },
     "pdfmm": {
@@ -76,12 +76,12 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "06e9cf0c2ed3fc77ec3b915aca835862b57dfbc06305f63b8ee1e0d298c6abfd",
+      "local_library_sha256": "475ac640f4cffbdfc3d8a4b5f720c96d1514a8553e220b743bb0fbb4e4064647",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "aspose_pdf_foss": {
       "source_sha256": "72d715b8589af8746a6df7f8d2d9def3a2e9a7757f9b414a8a393028c9822738",
-      "local_library_sha256": "003124993e5be5ef29e9b9742bc912bafd7eea62f7b3e4f092e07b2026938160",
+      "local_library_sha256": "d7bde0179e03dc986f63b64e785f1e5f4409f8d883adcecb92c237d071d90f35",
       "local_header_sha256": "53b1317f68e461e7bc3be66d4c22b6eca2fb87797a1d464e5d8a339b029094d3"
     },
     "imagemagick": {
@@ -98,6 +98,11 @@
       "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
       "local_library_sha256": "63510cf05dcb6a8cc8c06f1a435fe2eb91d414f2601dbb7c5df0c9008e6f6e44",
       "local_header_sha256": "44f087dd8eda8b29cbb74a1c5af0e5064e302fe2e0dfed293a05b32116ebc822"
+    },
+    "pdf_oxide": {
+      "source_sha256": "c1f9e4f4737389e3374a058042ebac0b49186604f32663fa7ad3bd016fb764e3",
+      "local_library_sha256": "533495647bb98016337725e0ff6aa647dd6ef2ad17b56249e7d4fb97f636295e",
+      "local_header_sha256": "f823b331c085a696089afa30bbb81ee2b7c2ac7418311dd195d2eef4f2a87420"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -315,6 +320,17 @@
         "pages": 1,
         "width": 612,
         "height": 792
+      },
+      "pass": true
+    },
+    {
+      "package": "pdf_oxide",
+      "version": "0.3.78",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdf_oxide-0.3.78/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/pdf_oxide-0.3.78/cpp/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/pdf_oxide.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf/libpdf_oxide.dylib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-pdf -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdf_oxide",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/pdf_oxide /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1
       },
       "pass": true
     }
