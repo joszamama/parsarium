@@ -203,5 +203,33 @@
       "/opt/homebrew/opt/boost/include/boost/interprocess/file_mapping.hpp": "cdb88734ab5626ec1900d9832aea4ce6e62a92bc16a623e2d9d0168414be7c92"
     },
     "build_note": "Pinned v1.0.6 source compiled with Homebrew GCC 16.2.0. The exact reproducible compatibility patch moves FormatHandler::visitScalar before its first use without changing its body; four missing standard headers are supplied through -include. Original and patched source hashes are recorded. Boost 1.92.0_1 file mapping header and GCC libstdc++ dylib are SHA-256 pinned."
+  },
+  "geometry-central": {
+    "release": "1.1.0",
+    "tag": "v1.1.0",
+    "source_build": "geometry_central",
+    "license": "MIT",
+    "source_url": "https://github.com/nmwsharp/geometry-central/archive/refs/tags/v1.1.0.tar.gz",
+    "source_sha256": "c2418cc567144628ac833007cc64e0fcd3376eca6ecdd88a1b94e471300a9b64",
+    "header_member": "geometry-central-1.1.0/include/geometrycentral/surface/simple_polygon_mesh.h",
+    "source_members": {
+      "geometry-central-1.1.0/include/geometrycentral/surface/simple_polygon_mesh.h": "e79c24fc8b6a54fbb4f3bedf8baf8ed695cd0e688bb931fc309488b2d9654f5c",
+      "geometry-central-1.1.0/src/surface/simple_polygon_mesh.cpp": "031b691f22fb5cc5a530ff8f0748cfd358b5ac165b848e5b53b4034452da930d",
+      "geometry-central-1.1.0/LICENSE": "e931ec5b3d7773b274a3a1122d486538c8da76d182cebeb852efaa051272df7d",
+      "geometry-central-1.1.0/.gitmodules": "1dfcff68b840d64e3cbf17d58e9a6c7c6b38901229a6ac002a60c14833678197"
+    },
+    "submodule": {
+      "name": "happly",
+      "commit": "88f79725d32d78e0e637ebf42d8432d519e1c7d0",
+      "commit_evidence": "https://api.github.com/repos/nmwsharp/geometry-central/git/trees/037a288f8d133bf1b56c50b43c7091693dc7b6f3",
+      "source_url": "https://github.com/nmwsharp/happly/archive/88f79725d32d78e0e637ebf42d8432d519e1c7d0.tar.gz",
+      "source_sha256": "61c6d112ac011408eab2154f145a9b71e188fa4b60cf3903b95e08f3a0d1fb17",
+      "header_member": "happly-88f79725d32d78e0e637ebf42d8432d519e1c7d0/happly.h",
+      "header_sha256": "b6b63315d90745e465b758df2e716aa14d7078030e26bcb0532e15b3e5de2b3f"
+    },
+    "toolchain_files": {
+      "/opt/homebrew/opt/eigen/include/eigen3/Eigen/Core": "267988e70f30e9a4e27b41541e162c4d0610480f63649994156c135d8a1e658f"
+    },
+    "build_note": "Official tagged v1.1.0 source plus the exact hapPLY submodule commit from its Git tree, both archive-hash pinned. Compile the tagged SimplePolygonMesh source with pinned hapPLY header and Eigen 5.0.1; link only the mesh I/O call path with dead-strip. Geometry Central wraps hapPLY for PLY parsing."
   }
 }

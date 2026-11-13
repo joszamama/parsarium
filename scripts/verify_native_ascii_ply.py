@@ -108,6 +108,30 @@ def verify(ecosystem: str) -> None:
                 text = text[:start] + text[start:].replace("class FormatHandler {", "class FormatHandler {\n" + block + "\npublic:", 1)
                 stream.write_text(text)
                 assert digest(stream) == source["patched_plystream_sha256"]
+            if source.get("source_build") == "geometry_central":
+                for member in tar.getmembers():
+                    member_path = Path(member.name)
+                    assert not member_path.is_absolute() and ".." not in member_path.parts
+                    assert member.name == "geometry-central-1.1.0" or member.name.startswith("geometry-central-1.1.0/")
+                if not (cache / "geometry-central-1.1.0/include/geometrycentral/surface/simple_polygon_mesh.h").exists():
+                    tar.extractall(cache, filter="data")
+                include_dir = cache / "geometry-central-1.1.0"
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+                sub = source["submodule"]
+                sub_archive = cache / "geometry-central-happly.tar.gz"
+                if not sub_archive.exists() or digest(sub_archive) != sub["source_sha256"]:
+                    with urlopen(Request(sub["source_url"], headers={"User-Agent": "Parsarium ASCII PLY verifier"}), timeout=120) as response, sub_archive.open("wb") as output:
+                        while chunk := response.read(1024 * 1024):
+                            output.write(chunk)
+                assert digest(sub_archive) == sub["source_sha256"]
+                with tarfile.open(sub_archive) as sub_tar:
+                    header = sub_tar.extractfile(sub["header_member"])
+                    assert header is not None
+                    header_bytes = header.read()
+                    assert sha256(header_bytes).hexdigest() == sub["header_sha256"]
+                (include_dir / "deps/happly/happly.h").write_bytes(header_bytes)
+                assert digest(include_dir / "deps/happly/happly.h") == sub["header_sha256"]
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -177,6 +201,16 @@ def verify(ecosystem: str) -> None:
                        "-I" + str(include_dir), "-I/opt/homebrew/opt/boost/include",
                        str(ROOT / parser["adapter"]), str(include_dir / "plyfile.cpp"),
                        str(include_dir / "plystream.cpp"), "-o", str(target / name)]
+        elif source.get("source_build") == "geometry_central":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-Wno-unused-parameter", "-Wno-unused-function",
+                       "-ffunction-sections", "-fdata-sections",
+                       "-isystem", str(include_dir / "include"),
+                       "-isystem", str(include_dir / "deps/happly"),
+                       "-isystem", "/opt/homebrew/opt/eigen/include/eigen3",
+                       str(ROOT / parser["adapter"]),
+                       str(include_dir / "src/surface/simple_polygon_mesh.cpp"),
+                       "-Wl,-dead_strip", "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
@@ -197,6 +231,9 @@ def verify(ecosystem: str) -> None:
             local_libraries[name]["built_object_sha256"] = digest(object_path)
         if source.get("source_build") == "turboply":
             local_libraries[name]["patched_plystream_sha256"] = source["patched_plystream_sha256"]
+        if source.get("source_build") == "geometry_central":
+            local_libraries[name]["submodule_source_sha256"] = source["submodule"]["source_sha256"]
+            local_libraries[name]["submodule_header_sha256"] = source["submodule"]["header_sha256"]
         print(f"{name}@{parser['version']}: {ecosystem} ASCII PLY passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["cc" if ecosystem == "c" else "c++", "--version"]).splitlines()[0],

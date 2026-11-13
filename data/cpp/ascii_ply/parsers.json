@@ -226,5 +226,27 @@
     "scope": "three parsed vertices and one face with three indices",
     "family": "TurboPLY native reader",
     "family_note": "Independent C++20 PLY parser; compatibility build patch changes declaration order only."
+  },
+  {
+    "name": "geometry-central",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nmwsharp/geometry-central/blob/v1.1.0/LICENSE",
+    "documentation": "https://geometry-central.net/surface/utilities/simple_polygon_mesh/",
+    "input_api": "geometrycentral::surface::SimplePolygonMesh(local filename, \"ply\")",
+    "adapter": "adapters/cpp/ascii_ply/geometry_central.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three mesh vertices and one polygon with three indices",
+    "family": "Geometry Central SimplePolygonMesh over hapPLY",
+    "family_note": "Tagged Geometry Central v1.1.0 uses pinned hapPLY submodule commit 88f79725; this shares the hapPLY parser family with the standalone happly 1.1.0 path."
   }
 ]
