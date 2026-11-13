@@ -204,5 +204,27 @@
     "scope": "three parsed vertices and one triangle with three indices",
     "family": "PLYwoot native ASCII parser",
     "family_note": "Independent header-only C++ PLY parser with direct stream input."
+  },
+  {
+    "name": "turboply",
+    "version": "1.0.6",
+    "license": "MIT",
+    "license_evidence": "https://github.com/guangxi-research/turboply/blob/v1.0.6/LICENSE",
+    "documentation": "https://github.com/guangxi-research/turboply/blob/v1.0.6/README.md",
+    "input_api": "PlyFileReader(local filename); parseHeader; bind_reader(VertexSpec, FaceSpec)",
+    "adapter": "adapters/cpp/ascii_ply/turboply.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one face with three indices",
+    "family": "TurboPLY native reader",
+    "family_note": "Independent C++20 PLY parser; compatibility build patch changes declaration order only."
   }
 ]

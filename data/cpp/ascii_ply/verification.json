@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:38:08.874928+00:00",
+  "checked_at_utc": "2026-11-13T03:42:39.196630+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -74,6 +74,12 @@
       "source_sha256": "18d2606eafb8bfc700d1eb57d665f335e4601877a11132a7873d0491ae496701",
       "installed_files": {},
       "source_header_sha256": "91a20485e3e5e8d991d3a884d63850abd8fdb460c6fdc927464e8692ea379d64"
+    },
+    "turboply": {
+      "source_sha256": "970771ce13c0df3d3c0e9101504accc1208bb29d44e65d302e892328f1bb51c7",
+      "installed_files": {},
+      "source_header_sha256": "42bf36ad5634fb51d96a60beadecb7776e7bd7eadae47ebef50e97ba82eaa723",
+      "patched_plystream_sha256": "c25ab410e16cc99fbc0e83fce2ca117a736e185c9d80e79e5123e1b86052d944"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -224,6 +230,23 @@
       "control": "controls/ascii_ply/triangle.ply",
       "build_command": "/opt/homebrew/opt/llvm/bin/clang++ -std=c++17 -O2 -Wall -Wextra -Werror -nostdinc++ -isystem /opt/homebrew/opt/llvm/include/c++/v1 -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/PLYwoot-0.3.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/plywoot.cpp -L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++ -stdlib=libc++ -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/plywoot",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/plywoot /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "turboply",
+      "version": "1.0.6",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "/opt/homebrew/opt/gcc/bin/g++-16 -std=c++20 -O2 -include algorithm -include format -include charconv -include cstring -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/turboply-1.0.6-src -I/opt/homebrew/opt/boost/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/turboply.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/turboply-1.0.6-src/plyfile.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/turboply-1.0.6-src/plystream.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/turboply",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/turboply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "faces": 1,

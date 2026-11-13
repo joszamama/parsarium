@@ -90,6 +90,24 @@ def verify(ecosystem: str) -> None:
                 include_dir = cache / "PLYwoot-0.3.0/include"
                 for member, expected in source["source_members"].items():
                     assert digest(cache / member) == expected
+            if source.get("source_build") == "turboply":
+                include_dir = cache / "turboply-1.0.6-src"
+                include_dir.mkdir(exist_ok=True)
+                for member in ("turboply.hpp", "turboply_util.hpp", "plyfile.cpp", "plystream.cpp"):
+                    file = tar.extractfile(f"turboply-1.0.6/{member}")
+                    assert file is not None
+                    (include_dir / member).write_bytes(file.read())
+                    assert digest(include_dir / member) == source["source_members"][f"turboply-1.0.6/{member}"]
+                stream = include_dir / "plystream.cpp"
+                text = stream.read_text()
+                start = text.index("class FormatHandler {")
+                block_start = text.index("protected:\n    template <typename F, typename StreamT>", start)
+                block_end = text.index("\n};", block_start)
+                block = text[block_start:block_end]
+                text = text[:block_start] + text[block_end:]
+                text = text[:start] + text[start:].replace("class FormatHandler {", "class FormatHandler {\n" + block + "\npublic:", 1)
+                stream.write_text(text)
+                assert digest(stream) == source["patched_plystream_sha256"]
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -151,6 +169,14 @@ def verify(ecosystem: str) -> None:
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
                        "-L/opt/homebrew/opt/llvm/lib/c++", "-Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++",
                        "-stdlib=libc++", "-o", str(target / name)]
+        elif source.get("source_build") == "turboply":
+            assert run(["/opt/homebrew/opt/gcc/bin/g++-16", "-dumpfullversion"]) == "16.2.0"
+            command = ["/opt/homebrew/opt/gcc/bin/g++-16", "-std=c++20", "-O2",
+                       "-include", "algorithm", "-include", "format",
+                       "-include", "charconv", "-include", "cstring",
+                       "-I" + str(include_dir), "-I/opt/homebrew/opt/boost/include",
+                       str(ROOT / parser["adapter"]), str(include_dir / "plyfile.cpp"),
+                       str(include_dir / "plystream.cpp"), "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
@@ -169,6 +195,8 @@ def verify(ecosystem: str) -> None:
                                  "source_header_sha256": source["source_members"].get(source.get("header_member"))}
         if source.get("source_build") == "rply":
             local_libraries[name]["built_object_sha256"] = digest(object_path)
+        if source.get("source_build") == "turboply":
+            local_libraries[name]["patched_plystream_sha256"] = source["patched_plystream_sha256"]
         print(f"{name}@{parser['version']}: {ecosystem} ASCII PLY passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["cc" if ecosystem == "c" else "c++", "--version"]).splitlines()[0],

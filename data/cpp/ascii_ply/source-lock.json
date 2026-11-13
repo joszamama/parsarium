@@ -180,5 +180,28 @@
       "/opt/homebrew/opt/llvm/lib/c++/libc++.dylib": "bc23a043c10c64d9662234ea1768d5c3ecc0989f69dde155d37725132c2cc561"
     },
     "build_note": "Header-only official tagged release. Homebrew Clang/LLVM libc++ 23.1.4 is used because the installed Apple libc++ lacks floating-point std::to_chars instantiated by PLYwoot writer headers. The relevant toolchain header and dylib hashes are pinned."
+  },
+  "turboply": {
+    "release": "1.0.6",
+    "tag": "v1.0.6",
+    "source_build": "turboply",
+    "license": "MIT",
+    "source_url": "https://github.com/guangxi-research/turboply/archive/refs/tags/v1.0.6.tar.gz",
+    "source_sha256": "970771ce13c0df3d3c0e9101504accc1208bb29d44e65d302e892328f1bb51c7",
+    "header_member": "turboply-1.0.6/turboply.hpp",
+    "source_members": {
+      "turboply-1.0.6/turboply.hpp": "42bf36ad5634fb51d96a60beadecb7776e7bd7eadae47ebef50e97ba82eaa723",
+      "turboply-1.0.6/turboply_util.hpp": "b7d5991f2087b58694e82995934cd0dcbdc919891d8daa7a101486041ccc5a43",
+      "turboply-1.0.6/plyfile.cpp": "c01aeff5b85f8b2e7268aaf8a492a82f5505d32a77f2545dfc23a10202b92205",
+      "turboply-1.0.6/plystream.cpp": "941241d93d5ac320283cdc4a585f1f1fe2b2a265276fd965ba68e3da4ee59a87",
+      "turboply-1.0.6/LICENSE": "18a3511e6651f30798637b60d4e7a3e94882673a94189d341b24c061f7776cc0",
+      "turboply-1.0.6/README.md": "39c070bf147b7b72fc78a092c4c92250259d423c9c5ef39eecb2123b71766bd7"
+    },
+    "patched_plystream_sha256": "c25ab410e16cc99fbc0e83fce2ca117a736e185c9d80e79e5123e1b86052d944",
+    "toolchain_files": {
+      "/opt/homebrew/lib/gcc/current/libstdc++.dylib": "6b6012c574ec8d680aaadeaed32a488449b7b75fafcd7bc45348bafdc1d8400c",
+      "/opt/homebrew/opt/boost/include/boost/interprocess/file_mapping.hpp": "cdb88734ab5626ec1900d9832aea4ce6e62a92bc16a623e2d9d0168414be7c92"
+    },
+    "build_note": "Pinned v1.0.6 source compiled with Homebrew GCC 16.2.0. The exact reproducible compatibility patch moves FormatHandler::visitScalar before its first use without changing its body; four missing standard headers are supplied through -include. Original and patched source hashes are recorded. Boost 1.92.0_1 file mapping header and GCC libstdc++ dylib are SHA-256 pinned."
   }
 }
