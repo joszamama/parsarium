@@ -148,5 +148,24 @@
     "scope": "Three parsed vertices, one face and face indices",
     "family": "MDAL PLY driver over bundled libplyxx",
     "family_note": "MDAL uses its native PLY driver over a fork of libplyxx; distinct package path from the other C PLY readers. The public C ABI is called through pinned C declarations because upstream mdal.h itself is not C11-compatible."
+  },
+  {
+    "name": "cybermesh",
+    "version": "0.5.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/CyberdyneCorp/CyberMeshGenerator/blob/v0.5.0/LICENSE",
+    "documentation": "https://github.com/CyberdyneCorp/CyberMeshGenerator/blob/v0.5.0/bindings/c/include/cmg_c/cmg_c.h",
+    "input_api": "cmg_read_plc(local .ply path); cmg_plc_num_points; cmg_plc_num_triangles; cmg_plc_points; cmg_plc_triangles",
+    "adapter": "adapters/c/ascii_ply/cybermesh.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "vertex_1_x": 1.0,
+      "face": [0, 1, 2]
+    },
+    "scope": "ASCII PLY three parsed vertices, one triangle, coordinate and face indices",
+    "family": "CyberMeshGenerator native ASCII PLY reader through its C ABI",
+    "family_note": "The C ABI wraps the project's C++ ASCII PLY parser. This is a released package path but has no comparable Homebrew metric; GitHub stars at review time were zero and are only auxiliary project-interest evidence."
   }
 ]

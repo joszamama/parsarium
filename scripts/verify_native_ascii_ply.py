@@ -194,6 +194,22 @@ def verify(ecosystem: str) -> None:
                      "-DAK_BUILD_DECODER_SHIMS=OFF", "-DAK_FETCH_DEPS=OFF",
                      "-DAK_BUILD_CLI=OFF", "-DAK_BUILD_SAMPLES=OFF"], timeout=240)
                 run(["cmake", "--build", str(build_dir), "--parallel", "8"], timeout=300)
+            if source.get("source_build") == "cybermesh":
+                include_dir = cache / f"CyberMeshGenerator-{source['release']}"
+                if not (include_dir / "bindings/c/include/cmg_c/cmg_c.h").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"CyberMeshGenerator-{source['release']}" or member.name.startswith(f"CyberMeshGenerator-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+                build_dir = cache / f"CyberMeshGenerator-{source['release']}-build"
+                run(["cmake", "-S", str(include_dir), "-B", str(build_dir),
+                     "-DCMAKE_BUILD_TYPE=Release", "-DCMG_BUILD_C_ABI=ON",
+                     "-DCMG_BUILD_SHARED=ON", "-DCMG_BUILD_TESTS=OFF",
+                     "-DCMG_BUILD_CLI=OFF"])
+                run(["cmake", "--build", str(build_dir), "--parallel", "8"], timeout=300)
             if source.get("source_build") == "rplycpp":
                 include_dir = cache / f"rplycpp-{source['release']}"
                 if not (include_dir / "src/rplycpp.hpp").exists():
@@ -416,6 +432,15 @@ def verify(ecosystem: str) -> None:
                        "-Wl,-rpath," + str(build_dir),
                        "-Wl,-rpath," + str(build_dir / "deps/ds"),
                        "-lassetkit", "-lds", "-o", str(target / name)]
+        elif source.get("source_build") == "cybermesh":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(include_dir / "bindings/c/include"),
+                       str(ROOT / parser["adapter"]),
+                       "-L" + str(build_dir / "bindings/c"),
+                       "-L" + str(build_dir),
+                       "-Wl,-rpath," + str(build_dir / "bindings/c"),
+                       "-Wl,-rpath," + str(build_dir),
+                       "-lcmg_c", "-o", str(target / name)]
         elif source.get("source_build") == "rplycpp":
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir / "src"), str(ROOT / parser["adapter"]),

@@ -147,5 +147,24 @@
     },
     "compat_header_sha256": "c4d2afb3bf7f1f8f23d45a47a3aa861b809fd6052680a6af67a5da776458ef48",
     "build_note": "Build the tagged MDAL shared library with PLY driver ON and optional drivers OFF. Its C ABI is exported, but the published mdal.h fails in C11 because it uses C++ enum names and bool without C typedefs; the pinned local compatibility declarations mirror only the called ABI functions. The PLY driver delegates to bundled MIT libplyxx."
+  },
+  "cybermesh": {
+    "release": "0.5.0",
+    "license": "MIT",
+    "source_build": "cybermesh",
+    "header_member": "CyberMeshGenerator-0.5.0/bindings/c/include/cmg_c/cmg_c.h",
+    "source_url": "https://github.com/CyberdyneCorp/CyberMeshGenerator/archive/refs/tags/v0.5.0.tar.gz",
+    "source_sha256": "4d4ae94ed9a56a538f3c0a5fa1dd65a25619ed4d405077d4af10b0d9d49f2bd4",
+    "release_commit": "39badae19973f0cd5bdb5cb610e62dfe46cca922",
+    "source_members": {
+      "CyberMeshGenerator-0.5.0/LICENSE": "72b4d7be9f807f618d88d6df0d1f9fe51b9c9bce3844b19d9d63da7120ff1747",
+      "CyberMeshGenerator-0.5.0/README.md": "28828971b8ab0b2da36f77bc09825d53f312bbea5db3e3ddc3b24e5af90a8151",
+      "CyberMeshGenerator-0.5.0/CMakeLists.txt": "98be44b59a7a914f9dfecee670e38fb82582b626f852ae1170375674308f40bd",
+      "CyberMeshGenerator-0.5.0/bindings/c/include/cmg_c/cmg_c.h": "e719d1a93ecacc1b73879278a12cff673da5538d8511732da061e64f5dc81b6e",
+      "CyberMeshGenerator-0.5.0/bindings/c/src/cmg_c.cpp": "8bcecf8c894b13bb0d1611e5af83307dfeecc969aa0083312cfb047312afffd7",
+      "CyberMeshGenerator-0.5.0/src/io/ply.cpp": "eb4d9f1070b6088155a672afdc7916280a25e81c191981b846ff8c9dfdeaf451",
+      "CyberMeshGenerator-0.5.0/src/io/dispatch.cpp": "a1e0bbf8ce5f05cea91ca03e799cbed1a5f67368b4744ef7af287f63aafcde64"
+    },
+    "build_note": "Build tagged MIT source as shared C++ core and C ABI with CPU-only defaults. C11 adapter links libcmg_c and reads a local ASCII PLY triangle through cmg_read_plc."
   }
 }

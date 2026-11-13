@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T15:49:32.564936+00:00",
+  "checked_at_utc": "2026-11-13T16:07:53.950441+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -53,6 +53,11 @@
       "source_sha256": "aeff0d532653c042c24bafe250409052fcb0bc6b2bab09f6470c858a3e079b2f",
       "compat_header_sha256": "c4d2afb3bf7f1f8f23d45a47a3aa861b809fd6052680a6af67a5da776458ef48",
       "underlying_family": "MDAL PLY driver over bundled libplyxx"
+    },
+    "cybermesh": {
+      "source_sha256": "4d4ae94ed9a56a538f3c0a5fa1dd65a25619ed4d405077d4af10b0d9d49f2bd4",
+      "installed_files": {},
+      "source_header_sha256": "e719d1a93ecacc1b73879278a12cff673da5538d8511732da061e64f5dc81b6e"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -166,6 +171,24 @@
         "vertices": 3,
         "faces": 1,
         "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "cybermesh",
+      "version": "0.5.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/CyberMeshGenerator-0.5.0/bindings/c/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/cybermesh.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/CyberMeshGenerator-0.5.0-build/bindings/c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/CyberMeshGenerator-0.5.0-build -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/CyberMeshGenerator-0.5.0-build/bindings/c -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/CyberMeshGenerator-0.5.0-build -lcmg_c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/target/cybermesh",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/target/cybermesh /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "vertex_1_x": 1.0,
+        "face": [
           0,
           1,
           2
