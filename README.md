@@ -1285,12 +1285,14 @@ or quality judgment.
   use the same underlying readers; SuperLU and SuperLU_DIST have closely related
   Matrix Market reader implementations.
 
-- [Java × Matrix Market ranking](data/java/matrix_market/ranking.md): six
-  verified Maven package paths, fourteen below the working goal. MeteoInfo
+- [Java × Matrix Market ranking](data/java/matrix_market/ranking.md): seven
+  verified package paths, thirteen below the working goal. MeteoInfo
   Math 4.3.0 adds a published `DMatrix.market(Path)` reader over a Smile-derived
   implementation; it has four known exact-release direct dependents. The
-  ranking records the shared lineage and does not equate project adoption with
-  Matrix Market use.
+  tagged Drop-seq 3.0.2 Java library independently parsed three coordinate
+  entries; its comparable Maven adoption metric is unavailable. The ranking
+  records shared lineages and does not equate project adoption with Matrix
+  Market use.
 
 - [JavaScript × PNG ranking](data/javascript/png/ranking.md): 21 packages,
   including header-only and chunk-only parsers labeled by scope. Four npm queries

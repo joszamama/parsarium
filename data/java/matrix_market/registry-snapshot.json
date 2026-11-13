@@ -321,6 +321,14 @@
         "auxiliary_github_stars": 385,
         "auxiliary_url": "https://api.github.com/repos/meteoinfo/MeteoInfo",
         "auxiliary_note": "Whole-project stars are not mixed with the exact-release direct-dependent ranking."
+      },
+      "dropseq": {
+        "direct_dependent_count": null,
+        "observed_at_utc": "2026-11-13T20:10:06Z",
+        "note": "The official release is a GitHub ZIP, not a Maven artifact with an exact-release deps.dev dependent count; order remains unresolved.",
+        "auxiliary_github_stars": 137,
+        "auxiliary_url": "https://api.github.com/repos/broadinstitute/Drop-seq",
+        "auxiliary_note": "Whole-project stars are an interest signal, not comparable Maven direct dependents or Matrix Market-specific adoption."
       }
     }
   },
@@ -348,6 +356,12 @@
       "url": "https://github.com/meteoinfo/MeteoInfo/blob/v4.3.0/meteoinfo-math/src/main/java/org/meteoinfo/math/matrix/DMatrix.java",
       "format_evidence": "Tagged DMatrix.market(Path) reads the Matrix Market banner, dimensions, and coordinate values; Maven source JAR matches the tag after newline normalization.",
       "release_evidence": "https://repo.maven.apache.org/maven2/org/meteothink/meteoinfo-math/4.3.0/"
+    },
+    {
+      "name": "dropseq",
+      "url": "https://github.com/broadinstitute/Drop-seq/blob/v3.0.2/src/java/org/broadinstitute/dropseqrna/matrixmarket/MatrixMarketReader.java",
+      "format_evidence": "Tagged public MatrixMarketReader(File) constructor and iterable Element API parse coordinate real values.",
+      "release_evidence": "https://github.com/broadinstitute/Drop-seq/releases/tag/v3.0.2"
     }
   ],
   "code_search": {
@@ -859,5 +873,21 @@
         "url": "https://github.com/Toan2003/BigData_Lab2_Hadoop/blob/f251fed9ad291ef9093296e146400118ed00ae04/src/task1_2/task1_2.java"
       }
     ]
+  },
+  "non_maven_release": {
+    "dropseq": {
+      "version": "v3.0.2",
+      "license": "MIT",
+      "source_url": "https://api.github.com/repos/broadinstitute/Drop-seq/tarball/v3.0.2",
+      "source_sha256": "6db86e0f8c2f6276e552e2bcffc4d6cee2578ee93277f900122bd2309b839cb1",
+      "source_commit": "876b3b8b4577746a2881f9a2df9b72df2e33d9eb",
+      "archive_url": "https://github.com/broadinstitute/Drop-seq/releases/download/v3.0.2/dropseq-3.0.2.zip",
+      "archive_sha256": "aa681dff54ede54154a9b626c6361da860eb5df749456ece340e152b42c16484",
+      "distribution_url": "https://github.com/broadinstitute/Drop-seq/releases/download/v3.0.2/dropseq-3.0.2.zip#dropseq-3.0.2/lib/dropseq.jar",
+      "distribution_sha256": "a3ec3a9b94ac51ec2086174b1856f3c5963b293391943035862beb2d9738674f",
+      "htsjdk_member_sha256": "b0c820f86852ed4b736793437e79de433df25fb13191902dea7c314225c894ea",
+      "source_lock": "data/java/matrix_market/dropseq-lock.json",
+      "distribution": "Official GitHub 3.0.2 ZIP with library JAR and pinned HTSJDK runtime member; no Maven Central artifact for this package path was established."
+    }
   }
 }
