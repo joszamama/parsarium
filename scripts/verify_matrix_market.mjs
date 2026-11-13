@@ -10,7 +10,8 @@ const manifest = JSON.parse(await readFile(new URL('package.json', root)));
 const controls = {};
 const third_party = [];
 for (const parser of parsers) {
-  if (manifest.dependencies[parser.name] !== parser.version) {
+  if (parser.source_kind !== 'tagged_source_build' &&
+      manifest.dependencies[parser.name] !== parser.version) {
     throw new Error(`${parser.name} is not pinned to ${parser.version} in package.json`);
   }
   if (!(parser.control in controls)) {
@@ -23,7 +24,9 @@ for (const parser of parsers) {
         .update(await readFile(new URL(companion, root))).digest('hex');
     }
   }
-  const command = ['adapters/javascript/matrix_market.mjs', parser.name, parser.control];
+  const command = parser.source_kind === 'tagged_source_build'
+    ? [parser.adapter, parser.control]
+    : ['adapters/javascript/matrix_market.mjs', parser.name, parser.control];
   const run = spawnSync(process.execPath, command, {
     cwd: root.pathname, encoding: 'utf8', timeout: 30000
   });

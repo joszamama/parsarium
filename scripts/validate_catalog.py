@@ -198,7 +198,16 @@ def main() -> None:
                 count = snapshot["download_metric"]["packages"][name]["downloads"]
                 assert count is None or isinstance(count, int)
             else:
-                assert parser["version"] == lock[name]
+                if parser.get("source_kind") == "tagged_source_build":
+                    source = read(parser["source_lock"])
+                    assert source["package"] == name
+                    assert source["release"] == parser["version"]
+                    assert source["license"] == parser["license"]
+                    assert source["source_sha256"] == snapshot["releases"][name]["source_sha256"]
+                    assert len(source["source_sha256"]) == 64
+                    assert (ROOT / parser["adapter"]).exists()
+                else:
+                    assert parser["version"] == lock[name]
                 assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)
             if not (cell["ecosystem"] == "java" and parser.get("group", "present") is None):
                 assert parser["version"] == snapshot["releases"][name]["version"]

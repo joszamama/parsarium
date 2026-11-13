@@ -130,5 +130,28 @@
       "edges": 3,
       "edge_r1_c3": true
     }
+  },
+  {
+    "name": "graphbox",
+    "version": "1.4.6",
+    "license": "MIT",
+    "license_evidence": "Official tagged v1.4.6 README License section and package.json license field",
+    "source_kind": "tagged_source_build",
+    "source_lock": "data/javascript/matrix_market/graphbox-source-lock.json",
+    "adapter": "adapters/javascript/graphbox_matrix_market.mjs",
+    "input_api": "parseMtx(local Matrix Market text) exported from src/formats/mtx/index.ts",
+    "documentation": "https://github.com/Mearman/GraphBox/blob/v1.4.6/src/formats/mtx/parse.ts",
+    "scope": "Coordinate real general matrix dimensions, entry count, value type, symmetry and value",
+    "family": "GraphBox native Matrix Market document parser",
+    "family_note": "GraphBox and keepset have the same publisher but distinct source implementations: GraphBox returns a structured matrix document with values, while keepset parses to a graph and drops values. The published graphbox npm 1.4.6 bundle has a missing import, so this path builds the tagged source parser directly using esbuild; npm bundle import is not claimed to work.",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entries": 3,
+      "value_1_3": -2,
+      "valueType": "real",
+      "symmetry": "general"
+    }
   }
 ]
