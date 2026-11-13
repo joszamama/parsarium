@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:23:24.449880+00:00",
+  "checked_at_utc": "2026-11-13T01:27:59.545469+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp3_id3v2/source-lock.json",
@@ -38,6 +38,11 @@
       "source_sha256": "a806fd36592549a03e810486f415a6858d4d8f14066bfbe97b32a447cd5eb590",
       "local_header_sha256": "a9ce341769da60d1bd97cf7f490c75004c4a5049cd0e4e0060170ab04feeceb1",
       "local_library_sha256": "425415cb513f651333cd68dfa6c0b26170f451be985882b4b7857c55f76ab050"
+    },
+    "sdl_mixer": {
+      "source_sha256": "938dff531d00ace2296557a6599abe6f34599e2f34f0a4a08a397e2ccac8b8f7",
+      "local_header_sha256": "d7284c74e5abe94049b5b483084edd0980faa0050144631931a7359c14f35851",
+      "local_library_sha256": "8b261b968b3ca95ecfaf912a0e5baefc64183ca3f2fb0a69e77fcf76b16c5418"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -129,6 +134,19 @@
         "title": "Parsarium",
         "format": "MPEG Audio",
         "sample_rate": 8000
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl_mixer",
+      "version": "2.8.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sdl_mixer.c -I/opt/homebrew/include/SDL2 -I/opt/homebrew/include -D_THREAD_SAFE -I/opt/homebrew/Cellar/libxmp/4.7.4/include -I/opt/homebrew/Cellar/fluid-synth/2.6.2/include -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/portaudio/19.7.0/include -I/opt/homebrew/Cellar/readline/8.3.6/include -D_DARWIN_C_SOURCE -I/opt/homebrew/Cellar/game-music-emu/0.6.5/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/mpg123/1.33.7/include -I/opt/homebrew/Cellar/opusfile/0.12_3/include/opus -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/wavpack/5.9.0/include -L/opt/homebrew/Cellar/sdl2_mixer/2.8.2/lib -lSDL2_mixer -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl_mixer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl_mixer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control",
+        "duration_ms": 1000
       },
       "pass": true
     }

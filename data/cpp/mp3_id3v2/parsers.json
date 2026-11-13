@@ -122,5 +122,23 @@
     "scope": "ID3v2 title, MPEG Audio format and 8 kHz sample rate from the tagged MP3",
     "family": "MediaInfoLib MPEG audio and ID3v2 parsers",
     "family_note": "Native MediaInfoLib parsers are used from both C and C++ APIs; these call sites share one parser engine across ecosystems. The source has File_Mpega.cpp and File_Id3v2.cpp; its libzen dependency is a base utility library."
+  },
+  {
+    "name": "sdl_mixer",
+    "version": "2.8.2",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.2/SDL2_mixer-2.8.2.tar.gz",
+    "documentation": "https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS",
+    "input_api": "Mix_Init(MIX_INIT_MP3); Mix_OpenAudio(dummy device); Mix_LoadMUS(local filename); Mix_GetMusicType/Mix_GetMusicTitleTag/Mix_GetMusicArtistTag/Mix_MusicDuration",
+    "adapter": "adapters/cpp/mp3_id3v2/sdl_mixer.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "duration_ms": 1000
+    },
+    "scope": "ID3v2 title and artist plus a 1-second MP3 music duration",
+    "family": "SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder",
+    "family_note": "The pinned music_mpg123.c calls mp3_read_tags from mp3utils.c and links libmpg123 for audio. C and C++ adapters use the same SDL2_mixer C API. SDL3_mixer is another major release of the same upstream package and is not separately counted."
   }
 ]
