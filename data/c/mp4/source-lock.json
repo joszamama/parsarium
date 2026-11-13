@@ -530,5 +530,20 @@
     ],
     "source_build": "l_smash",
     "build_note": "Tagged ISC source archive and public API, box parser, file layer and license are SHA-256 pinned; configure and make build a static C library. The adapter reads a local MP4 path."
+  },
+  "libav": {
+    "release": "12.3",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://github.com/libav/libav/archive/refs/tags/v12.3.tar.gz",
+    "source_sha256": "68c9e91be8456d1a7cec3af497312b4ffb1a68352849c2f68a0ad596b7409089",
+    "repository": "https://github.com/libav/libav",
+    "source_header_member": "libav-12.3/libavformat/avformat.h",
+    "source_header_sha256": "30e7cc313c13505487147df0f8a729efc8a7d0edfc3b7f53c9601179c5d5eac4",
+    "license_member": "libav-12.3/COPYING.LGPLv2.1",
+    "license_sha256": "b634ab5640e258563c536e658cad87080553df6f34f62269a21d554844e58bfe",
+    "source_engine_member": "libav-12.3/libavformat/mov.c",
+    "source_engine_sha256": "26ee3abc9777e22e511ba4805dbaa5bcc4d0cd1d34689c4492ef440b7ea93527",
+    "source_build": "libav",
+    "build_note": "Tagged Libav 12.3 archive, C header, MOV demuxer and LGPL text are SHA-256 pinned. Minimal static build enables only MOV demuxer and local file protocol, disables GPL features, codecs, asm and programs. Modern Clang requires -Wno-incompatible-function-pointer-types for historical source signatures."
   }
 }

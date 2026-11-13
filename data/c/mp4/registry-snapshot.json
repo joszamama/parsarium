@@ -141,6 +141,14 @@
       "source_sha256": "e6f7c31de684f4b89ee27e5cd6262bf96f2a5b117ba938d2d606cf6220f05935",
       "license_evidence": "https://github.com/l-smash/l-smash/blob/v2.14.5/LICENSE",
       "distribution": "tagged upstream C source; built locally"
+    },
+    "libav": {
+      "version": "12.3",
+      "license": "LGPL-2.1-or-later",
+      "source_url": "https://github.com/libav/libav/archive/refs/tags/v12.3.tar.gz",
+      "source_sha256": "68c9e91be8456d1a7cec3af497312b4ffb1a68352849c2f68a0ad596b7409089",
+      "license_evidence": "https://github.com/libav/libav/blob/v12.3/COPYING.LGPLv2.1",
+      "distribution": "tagged upstream source; minimal LGPL-only build with MOV demuxer"
     }
   },
   "popularity_metric": {
@@ -269,6 +277,14 @@
         "auxiliary_github_stars": 251,
         "auxiliary_source": "https://api.github.com/repos/l-smash/l-smash",
         "auxiliary_observed_at_utc": "2026-11-13"
+      },
+      "libav": {
+        "install_on_request_365d": null,
+        "formula": null,
+        "evidence_note": "brew info libav returned no formula on 2026-11-13; no comparable Homebrew 365-day requested-install count. GitHub stars are auxiliary project interest only.",
+        "auxiliary_github_stars": 1156,
+        "auxiliary_source": "https://api.github.com/repos/libav/libav",
+        "auxiliary_observed_at_utc": "2026-11-13"
       }
     }
   },
@@ -372,6 +388,12 @@
       "name": "bento4 formula adoption correction",
       "url": "https://formulae.brew.sh/formula/bento4",
       "disposition": "Stable formula 1.6.0-641 and comparable 365-day requested-install analytics found on 2026-11-13; prior unranked status corrected."
+    },
+    {
+      "name": "libav",
+      "url": "https://github.com/libav/libav/blob/v12.3/libavformat/avformat.h",
+      "format_evidence": "Tagged C header documents avformat_open_input on a local file; tagged libavformat/mov.c implements MOV/MP4 demuxing.",
+      "disposition": "Verified with pinned 12.3 source build and valid local MP4 control."
     }
   ],
   "search": [

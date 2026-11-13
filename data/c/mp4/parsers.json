@@ -350,5 +350,26 @@
     "scope": "two MP4 tracks, one video and one audio, 2x2 video display dimensions and 1000 ms movie duration",
     "family": "L-SMASH native ISO BMFF/MP4 box parser",
     "family_note": "Separate C library parser; no other accepted C MP4 package in this cell uses L-SMASH."
+  },
+  {
+    "name": "libav",
+    "version": "12.3",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libav/libav/blob/v12.3/COPYING.LGPLv2.1 and LGPL-only configure result for this minimal build",
+    "documentation": "https://github.com/libav/libav/blob/v12.3/libavformat/avformat.h",
+    "input_api": "av_register_all; avformat_open_input(local MP4 path); avformat_find_stream_info; AVStream.codecpar and container metadata",
+    "adapter": "adapters/c/mp4/libav.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "brand": "isom",
+      "tracks": 2,
+      "video": 1,
+      "audio": 1,
+      "width": 2,
+      "height": 2
+    },
+    "scope": "MP4 major brand, two track types and 2x2 video dimensions",
+    "family": "Libav MOV/MP4 demuxer, forked from FFmpeg",
+    "family_note": "Libav is a distinct release and package API implementation from FFmpeg 9.0.2 but descends from the same FFmpeg codebase; the adapter builds its own static Libav 12.3 libraries, with no linked FFmpeg binary. This is one path, not independent parser-family diversity."
   }
 ]

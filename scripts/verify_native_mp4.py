@@ -159,6 +159,32 @@ def build_l_smash(archive: Path, cache: Path) -> tuple[list[str], list[str], dic
             {"local_library_sha256": sha256(library.read_bytes()).hexdigest()})
 
 
+def build_libav(archive: Path, cache: Path) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build Libav's tagged MOV/MP4 demuxer without external codecs."""
+    source_dir = cache / "libav-12.3"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "libav-12.3" or member.name.startswith("libav-12.3/")
+                ):
+                    raise ValueError(f"unsafe Libav archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    run(["./configure", "--disable-everything", "--enable-demuxer=mov",
+         "--enable-protocol=file", "--disable-asm", "--disable-programs",
+         "--disable-doc", "--enable-static", "--disable-shared",
+         "--extra-cflags=-Wno-incompatible-function-pointer-types"],
+        timeout=300, cwd=source_dir)
+    libraries = [source_dir / f"lib{part}/lib{part}.a"
+                 for part in ("avformat", "avcodec", "avutil")]
+    run(["make", "-j6", *(str(path.relative_to(source_dir)) for path in libraries)],
+        timeout=600, cwd=source_dir)
+    return (["-I" + str(source_dir)], [*(str(path) for path in libraries), "-lz", "-lbz2", "-lm"],
+            {path.parent.name + "_library_sha256": sha256(path.read_bytes()).hexdigest()
+             for path in libraries})
+
+
 def build_shiguredo_mp4(archive: Path, cache: Path, expected_lock_sha256: str) -> tuple[list[str], list[str], dict[str, str]]:
     """Build the pinned Rust MP4 demuxer and published C API from Cargo.lock."""
     source_dir = cache / "mp4-rs-2026.3.0"
@@ -326,6 +352,8 @@ def verify(ecosystem: str) -> None:
             flags, built_libraries, built_hashes = build_ireader_media_server(archive, cache)
         elif source.get("source_build") == "l_smash":
             flags, built_libraries, built_hashes = build_l_smash(archive, cache)
+        elif source.get("source_build") == "libav":
+            flags, built_libraries, built_hashes = build_libav(archive, cache)
         elif source.get("source_build") == "shiguredo_mp4":
             flags, built_libraries, built_hashes = build_shiguredo_mp4(
                 archive, cache, source["cargo_lock_sha256"])
