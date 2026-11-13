@@ -30,7 +30,7 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,532 of 1,694 verified package paths have a recorded comparable cell metric;
+1,533 of 1,695 verified package paths have a recorded comparable cell metric;
 162 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -179,6 +179,7 @@ python3 scripts/verify_java_matrix_market.py
 python3 scripts/verify_java_ascii_ply.py
 python3 scripts/verify_java_ascii_ply_monkeywrench.py
 python3 scripts/verify_java_ascii_ply_irurueta.py
+python3 scripts/verify_java_ascii_ply_materia.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -1248,14 +1249,14 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): ten verified
-  paths, 10 below the working goal. Eight have exact-release Maven direct
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): eleven verified
+  paths, nine below the working goal. Nine have exact-release Maven direct
   dependent counts. F3D's source-built Java binding shares the native VTK
   reader with its C and C++ bindings; SceneView Core parses through a separate
   pure Kotlin reader. Both lack comparable direct-dependent counts and remain
-  unranked. Irurueta Geometry I/O 1.6.0 parsed the valid triangle through a
-  separate Java reader; its exact-release direct-dependent count is zero, so
-  broad adoption is not established.
+  unranked. Irurueta Geometry I/O 1.6.0 and Materia JVM 0.4.2.2 parsed the
+  valid triangle through separate readers; both have zero known public direct
+  dependents for their exact releases, so broad adoption is not established.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

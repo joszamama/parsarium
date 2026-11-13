@@ -233,5 +233,31 @@
     },
     "source_lock": "data/java/ascii_ply/irurueta-lock.json",
     "family_note": "Separate Java implementation; exact-release deps.dev public direct dependents are zero, which does not establish wide adoption."
+  },
+  {
+    "name": "materia-jvm",
+    "group": "codes.yousef",
+    "artifact": "materia-jvm",
+    "version": "0.4.2.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/codeyousef/Materia/blob/v0.4.2.2/LICENSE",
+    "input_api": "PLYLoader.load(String absolute local path) via Java coroutine runBlocking; JVM default AssetResolver reads local bytes",
+    "documentation": "https://github.com/codeyousef/Materia/blob/v0.4.2.2/src/commonMain/kotlin/io/materia/loader/PLYLoader.kt",
+    "family": "Materia Kotlin ASCII PLY loader",
+    "scope": "ASCII PLY triangle position attribute count, one face and parsed indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/materia/src/main/java/org/parsarium/MateriaPlyAdapter.java",
+    "adapter_module": "materia",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "source_lock": "data/java/ascii_ply/materia-lock.json",
+    "family_note": "Tagged JVM artifact exposes a Java-callable coroutine API over Materia\u2019s Kotlin PLY parser. Project stars are auxiliary, not exact-release dependent counts or PLY-specific use."
   }
 ]

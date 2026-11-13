@@ -178,6 +178,27 @@
       "environment": "macOS 27.2 arm64, OpenJDK 27 running Java 21-targeted bytecode",
       "source_lock": "data/java/ascii_ply/irurueta-lock.json",
       "underlying_family": "Irurueta Geometry I/O native Java PLY reader"
+    },
+    {
+      "package": "materia-jvm",
+      "version": "0.4.2.2",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_materia.py",
+      "checked_at_utc": "2026-11-13T17:10:10Z",
+      "environment": "macOS 27.2 arm64, OpenJDK 27 running Java 21-targeted bytecode",
+      "source_lock": "data/java/ascii_ply/materia-lock.json",
+      "underlying_family": "Materia Kotlin ASCII PLY loader",
+      "note": "Vertex count is read from the parsed position attribute; the engine-wide getVertexCount helper reported 1 for this control and is not the acceptance result."
     }
   ],
   "runtime": []
