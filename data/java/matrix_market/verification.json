@@ -1,10 +1,11 @@
 {
-  "checked_at_utc": "2026-11-13T12:50:05+00:00",
+  "checked_at_utc": "2026-11-13T20:04:30Z",
   "environment": {
     "java": "openjdk version \"21.0.2\" 2024-01-16 LTS",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "java_25_for_smile": "openjdk@25 25.0.5.0.3",
-    "maven_dependency_artifacts": 295
+    "maven_dependency_artifacts": 295,
+    "meteoinfo": "MeteoInfo Math 4.3.0 Maven JAR, OpenJDK 21-targeted adapter on macOS arm64; no POM transitive dependencies required by DMatrix.market on this control"
   },
   "control": "controls/matrix_market/real-general.mtx",
   "control_sha256": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
@@ -74,6 +75,21 @@
       },
       "pass": true,
       "command": "python3 scripts/verify_java_matrix_market.py"
+    },
+    {
+      "package": "meteoinfo-math",
+      "version": "4.3.0",
+      "control": "controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "value_0_2": -2.0
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_matrix_market_meteoinfo.py",
+      "checked_at_utc": "2026-11-13T20:04:30Z",
+      "source_lock": "data/java/matrix_market/meteoinfo-lock.json",
+      "underlying_family": "MeteoInfo port of Smile DMatrix Matrix Market reader"
     }
   ],
   "runtime": []
