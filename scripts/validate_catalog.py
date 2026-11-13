@@ -86,9 +86,20 @@ def main() -> None:
                 count = snapshot["popularity_metric"]["packages"][name][metric_key]
                 assert count is None or isinstance(count, int)
             elif cell["ecosystem"] == "go":
-                go_mod = (ROOT / "adapters" / "go" / cell["format"] / "go.mod").read_text()
+                adapter_dir = ROOT / parser.get(
+                    "adapter_manifest_dir", f"adapters/go/{cell['format']}")
+                go_mod = (adapter_dir / "go.mod").read_text()
                 go_versions = dict(re.findall(r"^\s*(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
                 assert parser["version"] == go_versions[parser["module"]]
+                if parser.get("source_lock"):
+                    source = read(parser["source_lock"])
+                    assert source["package"] == name
+                    assert source["module"] == parser["module"]
+                    assert source["release"] == parser["version"]
+                    assert (ROOT / parser["adapter"]).exists()
+                    go_sum = (adapter_dir / "go.sum").read_text()
+                    assert f"{parser['module']} {parser['version']} {source['module_sum']}" in go_sum
+                    assert f"{parser['module']} {parser['version']}/go.mod {source['go_mod_sum']}" in go_sum
                 count = snapshot["popularity_metric"]["packages"][name]["imported_by_packages"]
                 assert count is None or isinstance(count, int)
                 assert parser["license"] == snapshot["releases"][name]["license"]

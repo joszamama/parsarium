@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T16:02:25.732788+00:00",
+  "checked_at_utc": "2026-11-13T21:42:28.923734+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "go": "go version go1.27.2 darwin/arm64",
   "control_sha256": {
@@ -116,6 +116,44 @@
         "value_0_2": -2
       },
       "error": null
+    },
+    {
+      "package": "github.com/cpmech/gosl/la",
+      "module": "github.com/cpmech/gosl",
+      "version": "v1.2.15",
+      "scope": "Coordinate real general matrix dimensions, entries, symmetric flag and value",
+      "control": "controls/matrix_market/real-general.mtx",
+      "command": "python3 scripts/verify_gosl_go_matrix_market.py",
+      "pass": true,
+      "output": {
+        "cols": 3,
+        "entries": 3,
+        "rows": 2,
+        "symmetric": false,
+        "value_0_2": -2
+      },
+      "error": null,
+      "environment": "Ubuntu 24.04 linux/arm64 digest-pinned base; exact direct apt package versions; Go 1.22.2; module v1.2.15 verified by go.sum"
     }
-  ]
+  ],
+  "container_libraries": {
+    "github.com/cpmech/gosl/la": {
+      "image_id": "sha256:78cd3d55628aed34e18c8b81da3fce6aeccf688119c5351cfed358f90698055f",
+      "go_version": "go version go1.22.2 linux/arm64",
+      "direct_dependency_versions": {
+        "ca-certificates": "20260816ubuntu0.24.04.2",
+        "gcc": "4:13.2.0-7ubuntu1",
+        "gfortran": "4:13.2.0-7ubuntu1",
+        "golang-go": "2:1.22~2build1",
+        "libfftw3-dev": "3.3.10-1ubuntu3",
+        "liblapacke-dev": "3.12.0-3build1.1",
+        "libmetis-dev": "5.1.0.dfsg-7build3",
+        "libmumps-seq-dev": "5.6.2-2.1build2",
+        "libopenblas-dev": "0.3.26+ds-1ubuntu0.1",
+        "libsuitesparse-dev": "1:7.6.1+dfsg-1build1"
+      },
+      "module_sum": "h1:1GIDOnsovlOClOu/FqczrovzirxwO4C0wFfjgfYV3GY=",
+      "source_commit": "fa1edce7a708e34f8ae7e20cbd563618bea4e42f"
+    }
+  }
 }

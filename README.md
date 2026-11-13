@@ -30,7 +30,7 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,539 of 1,712 verified package paths have a recorded comparable cell metric;
+1,540 of 1,713 verified package paths have a recorded comparable cell metric;
 173 are unranked; 127 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -113,6 +113,7 @@ python3 scripts/verify_go_svg.py
 brew install assimp
 python3 scripts/verify_go_ascii_ply.py
 python3 scripts/verify_go_matrix_market.py
+python3 scripts/verify_gosl_go_matrix_market.py
 python3 controls/ascii_pnm/make_control.py
 python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
@@ -958,14 +959,17 @@ development library through `pkg-config`. The recorded native Assimp version is
 6.0.6 on macOS arm64. The separate Go 1.27.1 standard-library inventory finds
 no PLY-aware parser API.
 
-`verify_go_matrix_market.py` uses Go 1.27.2 and valid coordinate real general
-Matrix Market controls. The observed result is **5/5 eligible package paths
-passing**, below the 20-path goal. One reader interprets the matrix as a graph;
-another requires local companion row and column index files. The Go module
-files pin releases and transitive dependencies, and `go mod verify` passes.
+`verify_go_matrix_market.py` runs the shared adapters with Go 1.27.2 and the
+Gosl adapter in pinned Ubuntu 24.04 arm64 with Go 1.22.2. The observed result
+is **8/8 eligible package paths passing** on valid coordinate real general or
+pattern symmetric controls, below the 20-path goal. One reader interprets the
+matrix as a graph; another requires local companion row and column index files.
+Go module files pin releases and checksums. Gosl's documented reader has 65
+known pkg.go.dev importers for the `la` package, a broad adoption proxy that
+does not measure Matrix Market use. Four plausible leads remain unresolved,
+including one with a successful parse but no open-source license evidence.
 The separate Go 1.27.2 standard-library inventory finds no Matrix Market API.
-Seven plausible leads remain unresolved, including one with a successful parse
-but no open-source license evidence. See the cell record for exact limits.
+See the cell record for exact limits and dependency caveats.
 
 `verify_python_png.py` uses CPython 3.13.1 and the two valid local PNG
 controls. `requirements.in` pins 21 top-level releases; the generated
@@ -1443,11 +1447,11 @@ or quality judgment.
   plausible leads remain unresolved. The
   [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
-- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): seven eligible
+- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): eight eligible
   package paths verified on local coordinate real general or pattern symmetric
-  controls, 13 below
+  controls, 12 below
   the working goal. Six bounded pkg.go.dev queries saved 80 hits and 77 unique
-  paths; five plausible leads remain unresolved. Two pinned packages use Go
+  paths; four plausible leads remain unresolved. Two pinned packages use Go
   module replacements because their published module names differ from their
   repository paths; their adoption metric is unavailable. The
   [cell record](data/go/matrix_market/cell.json) states search and input limits.
