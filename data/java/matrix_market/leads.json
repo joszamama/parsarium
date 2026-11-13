@@ -4,5 +4,21 @@
     "status": "unresolved",
     "source": "https://github.com/javagl/MatrixMarketReader",
     "reason": "The project README documents a Matrix Market coordinate reader, but the sample consumer uses 0.0.1-SNAPSHOT; a stable open-source release and local control run have not been established."
+  },
+  {
+    "name": "net.sourceforge.parallelcolt:parallelcolt",
+    "status": "rejected",
+    "source": "https://github.com/rwl/ParallelColt/tree/parallelcolt-0.10.1",
+    "release": "0.10.1",
+    "release_jar_url": "https://repo.maven.apache.org/maven2/net/sourceforge/parallelcolt/parallelcolt/0.10.1/parallelcolt-0.10.1.jar",
+    "release_jar_sha256": "55ef7949dc2728af53caa0f40a036458c8c860dee905dde7b13a5e7819dec907",
+    "source_jar_url": "https://repo.maven.apache.org/maven2/net/sourceforge/parallelcolt/parallelcolt/0.10.1/parallelcolt-0.10.1-sources.jar",
+    "source_jar_sha256": "e1001f61a593e1ff48be18c743986497b741d0181471ddda3bc8a541db7887e3",
+    "reader_source_sha256": "34d9ba22ffed4710a399af91b94b792fcbd1387fbdc15c1780b4f972309fd172",
+    "replay": "Download release_jar_url to /tmp/parallelcolt-0.10.1.jar; check SHA-256; javac --release 21 -proc:none -cp /tmp/parallelcolt-0.10.1.jar -d /tmp adapters/java/matrix_market/src/main/java/org/parsarium/ParallelColtMatrixMarketAdapter.java; java -cp /tmp:/tmp/parallelcolt-0.10.1.jar org.parsarium.ParallelColtMatrixMarketAdapter controls/matrix_market/real-general.mtx",
+    "control_result": "The tagged cern.colt.matrix.io.MatrixVectorReader API parsed the valid 2x3 real general control and returned three entries with -2 at (1,3), using adapters/java/matrix_market/src/main/java/org/parsarium/ParallelColtMatrixMarketAdapter.java.",
+    "popularity_evidence": "deps.dev reported six known public direct dependents for exact Maven release 0.10.1 on 2026-11-13; excluded from ranking because the package fails eligibility.",
+    "license_evidence": "https://github.com/rwl/ParallelColt/blob/parallelcolt-0.10.1/license.txt",
+    "reason": "The tagged package license.txt forbids hep.aida.* use for military applications. The published jar bundles hep/aida classes, so the full library has a field-of-use restriction and does not meet the open-source eligibility rule. The MatrixVectorReader source file itself carries LGPL-2.1-or-later terms, but that does not remove the restriction on the distributed package."
   }
 ]
