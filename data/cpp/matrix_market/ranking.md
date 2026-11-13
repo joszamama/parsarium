@@ -1,6 +1,6 @@
 # C++ × Matrix Market: verified parser ranking
 
-18 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+19 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -22,6 +22,7 @@
 | unranked | [Seldon](https://www.math.u-bordeaux.fr/~durufle/seldon/functions_matrix.html) | 5.2+ | unknown | 2×3 real general coordinate matrix and all three nonzero values | Seldon native Matrix Market reader |
 | unranked | [HIFIR](https://hifirworks.github.io/hifir/group__io.html) | 0.2.0 | unknown | 2×3 real general coordinate matrix, three nonzeros, entry (1,3) = −2 | HIFIR native Matrix Market reader |
 | unranked | [TACO](https://tensor-compiler.org/docs/tensors.html) | 0.1 | unknown | 2×3 real general coordinate matrix, three nonzeros, entry (1,3) = −2 | TACO native Matrix Market reader |
+| unranked | [Trilinos Teuchos](https://trilinos.github.io/docs/teuchos/class_teuchos_1_1_matrix_market_1_1_raw_1_1_reader.html) | 17.3.0 | unknown | 2×3 real general coordinate matrix, three CSR entries, entry (1,3) = −2 | Trilinos Teuchos Matrix Market Raw reader |
 
 Formula-name hits are leads rather than parser proof. The SuiteSparse and Lis paths each share an underlying parser with their C call sites. Lis accepts the square symmetric control and rejects the rectangular general control. The C++ standard library has no documented Matrix Market parser. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -48,3 +49,5 @@ Seldon 5.2+ parsed the local control through `ReadMatrixMarket(filename, Matrix&
 HIFIR v0.2.0 parsed the control with `read_mm_sparse(local filename, …)` and exposed the three zero-based coordinate entries. It is an independent AGPL-3.0-or-later C++ release. No comparable Homebrew requested-install count exists; HIFIR remains unranked.
 
 TACO v0.1 parsed the control with `taco::read(local .mtx filename, Sparse)` into a sparse tensor. The official GitHub API showed 1,380 repository stars on 2026-11-13; this is an auxiliary adoption signal and is not comparable with the Homebrew requested-install counts in the primary ranking. TACO remains unranked in that table.
+
+Trilinos 17.3.0 parsed the control with Teuchos `Raw::Reader::readFile`, returning three CSR entries. Its Teuchos component was built from the official release and linked locally. The official GitHub API showed 1,444 repository stars on 2026-11-13; this auxiliary adoption signal is not compared with Homebrew requested installs. Trilinos remains unranked in the primary table.

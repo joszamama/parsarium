@@ -337,5 +337,25 @@
     "scope": "2x3 real general coordinate matrix, three nonzeros, entry (1,3) = -2",
     "family": "TACO native Matrix Market reader",
     "family_note": "TACO v0.1 defines its own Matrix Market reader in src/storage/file_io_mtx.cpp; the parser checks the format banner and populates a sparse tensor."
+  },
+  {
+    "name": "trilinos",
+    "version": "17.3.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/trilinos/Trilinos/blob/trilinos-release-17-3-0/packages/teuchos/LICENSE",
+    "documentation": "https://trilinos.github.io/docs/teuchos/class_teuchos_1_1_matrix_market_1_1_raw_1_1_reader.html",
+    "input_api": "Teuchos::MatrixMarket::Raw::Reader<double,int>::readFile(..., local filename)",
+    "adapter": "adapters/cpp/matrix_market/trilinos.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "parsed": true,
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real general coordinate matrix, three CSR entries, entry (1,3) = -2",
+    "family": "Trilinos Teuchos Matrix Market Raw reader",
+    "family_note": "The Teuchos Raw::Reader parses Matrix Market and populates CSR arrays. This is a distinct Trilinos package path; Tpetra readers in the same distribution are not counted separately."
   }
 ]

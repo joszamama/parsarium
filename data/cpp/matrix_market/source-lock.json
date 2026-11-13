@@ -411,5 +411,24 @@
       "taco-0.1/LICENSE": "92a4a24941fc377508c9fe58ff1b444dd05e8aeea91075302fe3bc3ce0806faf"
     },
     "build_note": "Official tagged TACO v0.1 source, SHA-256 pinned. CMake 4 requires CMAKE_POLICY_VERSION_MINIMUM=3.5 for its old minimum declaration; build only the taco static target. C++17 adapter links the locally built library and reads the valid control with taco::read(local .mtx filename, Sparse)."
+  },
+  "trilinos": {
+    "release": "17.3.0",
+    "tag": "trilinos-release-17-3-0",
+    "source_build": "trilinos",
+    "archive_root": "Trilinos-trilinos-release-17-3-0",
+    "extract_sentinel": "packages/teuchos/numerics/src/Teuchos_MatrixMarket_Raw_Reader.hpp",
+    "license": "BSD-3-Clause",
+    "source_url": "https://github.com/trilinos/Trilinos/archive/refs/tags/trilinos-release-17-3-0.tar.gz",
+    "source_sha256": "8094740da60bf75b675ad556ed00e337c8547be0dc9603893c4894f4abf0396b",
+    "source_members": {
+      "Trilinos-trilinos-release-17-3-0/packages/teuchos/numerics/src/Teuchos_MatrixMarket_Raw_Reader.hpp": "7f5b00fb8d8c0dbccf3e3603ada0cefa9d1b4cd3fd7f4d275ecf3540833a75f1",
+      "Trilinos-trilinos-release-17-3-0/packages/teuchos/numerics/src/Teuchos_MatrixMarket_CoordDataReader.hpp": "ff09e5479aca691ffa3ac92cef11627d2796f35c344174e1d6973b40c05615a9",
+      "Trilinos-trilinos-release-17-3-0/packages/teuchos/numerics/src/Teuchos_MatrixMarket_Banner.cpp": "ba1762820eb1bc077711908e75511935c509e897a294e4a4561ee069ff842ed4",
+      "Trilinos-trilinos-release-17-3-0/packages/teuchos/LICENSE": "fb6154e9a12d6c64073f5962770696ff4fd67a1d083817409f59b43be57be8c9",
+      "Trilinos-trilinos-release-17-3-0/LICENSE": "7a8b455f52bd9a4f7b80cf987309398d0e9eee3cfdd59c5d7fc04a430f5690ef",
+      "Trilinos-trilinos-release-17-3-0/CMakeLists.txt": "6c343628e5fa95c56fe853ad40dc6fda3d8f39f19610bb97c0fd048b6f4f0514"
+    },
+    "build_note": "Official Trilinos 17.3.0 tagged release, SHA-256 pinned. Configure only Teuchos with tests/examples and shared libraries disabled; build the teuchosnumerics target, which pulls required Kokkos and Teuchos dependencies. A separate CMake adapter links TeuchosNumerics::all_libs from the local build tree. The 172 MiB archive extracts to about 889 MiB; this is a C++20 build."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T09:27:30.903254+00:00",
+  "checked_at_utc": "2026-11-13T09:34:27.873180+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "5acf2addaa78babdeba35042cbf61dbe80b73b949b995ecc80e61816132d18a4"
+      "built_lib_sha256": "e700ad90f78b1a6deb7fc12fa04567eae0b041dbceea21b1c72edd098a43582f"
     },
     "viennacl": {
       "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
@@ -72,7 +72,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "294481c4cd604c54ebab0a2451fd4917213cd895d4e0caf44c73810881b55ab8"
+      "built_lib_sha256": "7d9b933fe3e0380fe3e097777237474721858a8906449bb0e01e5e3546a6e729"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -115,6 +115,11 @@
       "source_sha256": "a3e78287a9b2357e84844b2126090aa6eb126f41e36815a808b01ca299ed536c",
       "installed_files": {},
       "built_lib_sha256": "313bd818de87d0b8b954577cfd37e63744525b80cf7694e22160d87129efdc4f"
+    },
+    "trilinos": {
+      "source_sha256": "8094740da60bf75b675ad556ed00e337c8547be0dc9603893c4894f4abf0396b",
+      "installed_files": {},
+      "built_lib_sha256": "39072dabca7cc39d529622997a9b1360422fb68b5213f4c3c338a4596e657e75"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -365,6 +370,21 @@
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/taco-0.1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/taco.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/taco-build-v0.1/lib/libtaco.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/taco",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/taco /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
       "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
+      },
+      "pass": true
+    },
+    {
+      "package": "trilinos",
+      "version": "17.3.0",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "cmake --build /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/trilinos-adapter-build-17.3.0 --target parsarium_trilinos -j4",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/trilinos /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "parsed": true,
         "rows": 2,
         "cols": 3,
         "nnz": 3,
