@@ -166,5 +166,24 @@
     "scope": "2x3 real general coordinate matrix, three entries and value at (1,3)",
     "family": "BeBOP Sparse Matrix Converter reader with bundled NIST mmio banner parser",
     "family_note": "BeBOP has its own read_mm.c coordinate-entry reader and bundles a Matrix Market mmio.c banner/size parser; this is one package path and a distinct API from SuiteSparse/other solver libraries."
+  },
+  {
+    "name": "libmtx",
+    "version": "0.5.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/simulahpc/libmtx/blob/v0.5.0/COPYING",
+    "documentation": "https://github.com/simulahpc/libmtx/blob/v0.5.0/libmtx/mtxfile/mtxfile.h",
+    "input_api": "mtxfile_read(struct mtxfile *, mtx_double, local filename, false, &lines, &bytes)",
+    "adapter": "adapters/c/matrix_market/libmtx.c",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real general coordinate matrix, three nonzeros and value at (1,3)",
+    "family": "Libmtx native Matrix Market file parser",
+    "family_note": "Distinct tagged C library and local file API, parsing banner, size and entries. Its zero observed repository stars are not comparable to the cell's Homebrew requested-install metric."
   }
 ]

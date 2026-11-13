@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T11:13:48.929666+00:00",
+  "checked_at_utc": "2026-11-13T12:39:32.714322+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/matrix_market/source-lock.json",
@@ -14,7 +14,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "6745c7b6904bf647842db45bd135b18e227fe6f445189520028dfcdbe27124eb"
+      "built_lib_sha256": "726c7da446d9523fa9b485b205d2e3f9bd322dee7797003d50cc960b440d891c"
     },
     "hypre": {
       "source_sha256": "3083cf943e1dab54517acae36afad72a4ada2c72c9567e525fc9c6efedb14e0c",
@@ -35,7 +35,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "636b5603a8c9835b5e2d0fbccb3f0cfbf2ddaf0ff595d8a5bc0b43574d1ded70"
+      "built_lib_sha256": "e23bfc1c30876049760e0c02eaf81621f33d6b3e9711c5adbd7809ed373ca9ea"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -62,9 +62,16 @@
       "source_sha256": "93681831c4e6ae4796d3e1410656c1349a2baed92846bf1f02fa690126d5959b",
       "installed_files": {},
       "built_lib_sha256": {
-        "smc": "6d6e4b0ca8fcdfdb97072a02ce4ebb00e0a1d8ccdb02ea4f3e0cee32d08f19e6",
-        "util": "e8ba21e35fc77454a984330872ffc4f4f1bb69b827253de051d7cf5b18beddf1"
+        "smc": "aa8c226ed9a72a66dd893b15eceed4863e071c66c6bbbf21cf514575f530b4c8",
+        "util": "a716b428a94416bd68d68fe7cb642900d9e90c273bc6556aadba1df615d33c2f"
       }
+    },
+    "libmtx": {
+      "source_sha256": "ee86a9b79b4ddd2c27ca8fcb6ffb668d03ab0591e4701f286677bbc564aee70c",
+      "installed_files": {
+        "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
+      },
+      "built_lib_sha256": "d91dbb95dba22504a0d2674a4f4db68b542d2b6fafa48e50c47f1a8cb2ff50d4"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -188,6 +195,20 @@
       "control": "controls/matrix_market/real-general.mtx",
       "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/sparse_matrix_converter/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/bebop_util/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/bebop_smc.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/sparse_matrix_converter/libsparse_matrix_converter.a /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/bebop-smc-2009-12-11/bebop_util/libbebop_util.a -lm -lpthread -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/bebop-smc",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/bebop-smc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2.0
+      },
+      "pass": true
+    },
+    {
+      "package": "libmtx",
+      "version": "0.5.0",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/libmtx-build/build -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/libmtx-build/libmtx-0.5.0 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/libmtx.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/libmtx-build/install/lib -lmtx -L/opt/homebrew/Cellar/openblas/0.3.34/lib -lopenblas -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/libmtx",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/libmtx /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
       "output": {
         "rows": 2,
         "cols": 3,

@@ -16,6 +16,7 @@ from prepare_lagraph import prepare_lagraph
 from prepare_librsb import prepare_librsb
 from prepare_superlu_dist import prepare_superlu_dist
 from prepare_bebop_smc import download_pinned, prepare_bebop_smc
+from prepare_libmtx import prepare_libmtx
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,6 +71,8 @@ def main() -> None:
             include, libdir, built_lib_sha256 = prepare_superlu_dist(source, archive, cache)
         elif source.get("source_build") == "bebop_smc":
             smc_include, util_include, smc_library, util_library, built_lib_sha256 = prepare_bebop_smc(source, archive, cache)
+        elif source.get("source_build") == "libmtx":
+            libmtx_tree, libmtx_build, libmtx_install, built_lib_sha256 = prepare_libmtx(source, archive, cache)
         else:
             with tarfile.open(archive) as tar:
                 for member, expected in source["source_members"].items():
@@ -124,6 +127,14 @@ def main() -> None:
                        "-I" + str(smc_include), "-I" + str(util_include),
                        str(ROOT / parser["adapter"]), str(smc_library),
                        str(util_library), "-lm", "-lpthread", "-o", str(target / name)]
+        elif name == "libmtx":
+            openblas = Path(source["openblas_prefix"])
+            command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(libmtx_build), "-I" + str(libmtx_tree),
+                       str(ROOT / parser["adapter"]),
+                       "-L" + str(libmtx_install / "lib"), "-lmtx",
+                       "-L" + str(openblas / "lib"), "-lopenblas",
+                       "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
@@ -135,7 +146,7 @@ def main() -> None:
                      "output": output, "pass": True})
         local_libraries[name] = {"source_sha256": source["source_sha256"],
                                  "installed_files": source.get("installed_files", {})}
-        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist", "bebop_smc"):
+        if source.get("source_build") in ("lis", "lagraph", "librsb", "superlu_dist", "bebop_smc", "libmtx"):
             local_libraries[name]["built_lib_sha256"] = built_lib_sha256
         print(f"{name}@{parser['version']}: C Matrix Market passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),

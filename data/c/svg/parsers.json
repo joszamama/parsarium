@@ -353,5 +353,24 @@
     "scope": "SVG dimensions and two rendered RGB pixels",
     "family": "MuPDF native SVG document parser and renderer",
     "family_note": "Same MuPDF package also has a separate PDF cell path; this SVG path uses the native source/svg parser."
+  },
+  {
+    "name": "sdl2_image",
+    "version": "2.8.12",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-2.8.12/LICENSE.txt",
+    "documentation": "https://wiki.libsdl.org/SDL2_image/IMG_LoadSVG_RW",
+    "input_api": "SDL_RWFromFile(local SVG filename); IMG_LoadSVG_RW(SDL_RWops *); SDL_ConvertSurfaceFormat",
+    "adapter": "adapters/c/svg/sdl2_image.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [255, 0, 0, 255],
+      "second": [0, 255, 0, 255]
+    },
+    "scope": "SVG dimensions and two rendered RGBA pixels through SDL2_image's format-specific reader",
+    "family": "SDL2_image SVG loader embedding NanoSVG",
+    "family_note": "A distinct SDL2_image package/API from SDL3_image, but both embed NanoSVG and share the standalone NanoSVG parser family. The installed SDL2 ABI is provided by sdl2-compat."
   }
 ]

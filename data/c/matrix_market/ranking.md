@@ -1,6 +1,6 @@
 # C × Matrix Market: verified parser ranking
 
-9 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C.
+10 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -13,6 +13,7 @@
 | unranked | [librsb](https://librsb.sourceforge.net/doc/1.3.0.0/group__rsb__doc__rsb.html) | 1.3.0.3 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | librsb native Matrix Market loader |
 | unranked | [BeBOP SMC](https://bebop.cs.berkeley.edu/smc/features.html) | 2009-12-11 dated source | unknown | 2×3 real coordinate matrix, three entries, value (1,3) = −2 | BeBOP reader with bundled NIST mmio banner parser |
 | unranked | [SuperLU_DIST](https://github.com/xiaoyeli/superlu_dist/blob/v9.3.0/README.md) | 9.3.0 | unknown | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU dreadMM reader lineage |
+| unranked | [Libmtx](https://github.com/simulahpc/libmtx/blob/v0.5.0/libmtx/mtxfile/mtxfile.h) | 0.5.0 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Libmtx native Matrix Market file parser |
 
 Formula-name hits are leads rather than parser proof. The C standard library has no documented Matrix Market parser. C and C++ call sites share the CHOLMOD and Lis parser families. Lis accepts the square symmetric control and rejects the rectangular general control. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -29,3 +30,5 @@ SuperLU_DIST 9.3.0 parsed the same valid square control through `dreadMM_dist(FI
 GNU GSL 2.8 parsed the valid control with `gsl_spmatrix_fscanf(FILE *)` in both C and C++ call sites. The calls share one underlying reader. Its 5,333 Homebrew requested installs are comparable with the other ranked formulae in this ecosystem. The source skips the banner line rather than validating it; the demonstrated scope is real general coordinate input.
 
 BeBOP SMC is an official dated BSD source release with a local C API. It passed the control and remains unranked because its source distribution has no comparable Homebrew requested-install count.
+
+Libmtx 0.5.0 is a tagged GPL C library specifically for Matrix Market files. Its documented `mtxfile_read` parsed the valid local control's banner, dimensions, entries and value at (1,3). No comparable Homebrew formula metric exists; its observed primary GitHub star count was zero. This is a verified format reader with no demonstrated adoption from that auxiliary signal, and ten more paths remain needed.

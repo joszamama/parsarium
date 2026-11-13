@@ -230,7 +230,7 @@ separately, and source-to-binary equivalence is unestablished. One
 lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
-The C × SVG batch verifies **12/20 paths** and C++ × SVG verifies **15/20**.
+The C × SVG batch verifies **15/20 paths** and C++ × SVG verifies **20/20**.
 librsvg, libvips, ImageMagick, GraphicsMagick, resvg, and PlutoSVG read the
 local 2×1 SVG and render the expected red and green pixels in both ecosystems;
 LunaSVG and QtSvg do so through their C++ document APIs. The pinned libvips build links librsvg;
@@ -241,8 +241,8 @@ have separate document parsers over the same PlutoVG rasterizer. Libsvgtiny
 returns two shapes and their colors through its SVG Tiny parser; libsvg returns
 parsed root dimensions, and libsvg-cairo renders pixels using that same libsvg
 parser. ThorVG's C binding and C++ API both load and parse SVG dimensions
-through its native SVG engine. SDL3_image reads the SVG through its embedded
-NanoSVG parser; GdkPixbuf reads it through the pinned librsvg loader plugin.
+through its native SVG engine. SDL2_image and SDL3_image read the SVG through
+separate released ABIs that both embed NanoSVG; GdkPixbuf reads it through the pinned librsvg loader plugin.
 QtBase QImageReader reads it through the same QtSvg plugin used by QtSvg.
 The C++ SVG batch also verifies NovaSVG 0.11.5, whose header-only parser
 returns the root dimensions and two rectangle elements from the control,
@@ -1188,11 +1188,12 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): nine packages
-  verified on valid real coordinate or symmetric controls, 11 below the working
+- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): ten packages
+  verified on valid real coordinate or symmetric controls, 10 below the working
   goal. Three bounded Homebrew formula-name searches recorded 20 hits, 19 unique
-  names; 18 remain unverified. Five verified packages lack comparable Homebrew
-  requested-install counts and remain unranked.
+  names; 18 remain unverified. Six verified packages lack comparable Homebrew
+  requested-install counts and remain unranked. The Libmtx source build uses
+  Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

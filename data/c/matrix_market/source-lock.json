@@ -185,5 +185,25 @@
       }
     },
     "build_note": "Official Berkeley page dates all three BSD source packages to 2009-12-11. Archive SHA-256 and selected public headers, implementation and license files are pinned. GNU Make builds both static libraries locally; the adapter links them and parses the valid control."
+  },
+  "libmtx": {
+    "release": "0.5.0",
+    "source_build": "libmtx",
+    "archive_root": "libmtx-0.5.0",
+    "license": "GPL-3.0-or-later",
+    "source_url": "https://github.com/simulahpc/libmtx/archive/refs/tags/v0.5.0.tar.gz",
+    "source_sha256": "ee86a9b79b4ddd2c27ca8fcb6ffb668d03ab0591e4701f286677bbc564aee70c",
+    "source_members": {
+      "libmtx-0.5.0/COPYING": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "libmtx-0.5.0/README": "9211559813216b85fe032c02614d1eaa50daeba37f9ee1804b7235336d6dd1a3",
+      "libmtx-0.5.0/libmtx/mtxfile/mtxfile.h": "3e09fdb377e99edc340f63bdf8e46f09a82c7ba0aa6e5e2910694da6e40bfbe8",
+      "libmtx-0.5.0/libmtx/mtxfile/mtxfile.c": "9d74beb13c54530f3e9a1506387b2a62ce8888bcd1e9074ad9ed536a4002244c",
+      "libmtx-0.5.0/configure.ac": "c0b4d70139c3c6d52abe6a92e1f063fa687d216d908b032ed1ce61ba4a49bb4d"
+    },
+    "openblas_prefix": "/opt/homebrew/Cellar/openblas/0.3.34",
+    "installed_files": {
+      "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
+    },
+    "build_note": "Tagged C source and parser files are SHA-256 pinned. Autotools builds only libmtx.la and installs only its library target because the source archive lacks generated Texinfo documentation. The linked OpenBLAS 0.3.34 dylib is hash-pinned; MPI, OpenMP and gzip support are disabled. The built libmtx dylib hash is captured in verification."
   }
 }
