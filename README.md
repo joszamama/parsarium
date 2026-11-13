@@ -1211,6 +1211,11 @@ or quality judgment.
   reader is verified only on a square control. The Libmtx source build uses
   Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS. NIST's dated, hash-pinned
   `mmio.c` and `mmio.h` source files provide the reference C reader.
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): five verified package
+  paths, 15 below the working goal. `msh_ply` v1.02 parsed the valid triangle
+  through its pinned C single-header API; it has no comparable Homebrew metric.
+  Greg Turk's `ply_io` source was rejected because its file-level license
+  restricts sale.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,
