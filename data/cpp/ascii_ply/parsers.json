@@ -94,5 +94,27 @@
     "scope": "three vertices and one face in a parsed Surface_mesh",
     "family": "CGAL Surface_mesh PLY reader",
     "family_note": "CGAL owns its Surface_mesh PLY import implementation, distinct from Assimp, OpenMesh, hapPLY and tinyply."
+  },
+  {
+    "name": "rply",
+    "version": "1.1.4",
+    "license": "MIT",
+    "license_evidence": "https://w3.impa.br/~diego/software/rply/",
+    "documentation": "https://w3.impa.br/~diego/software/rply/",
+    "input_api": "ply_open(local filename); ply_read_header; ply_set_read_cb; ply_read",
+    "adapter": "adapters/cpp/ascii_ply/rply.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex callbacks and three face-index callbacks from ASCII PLY",
+    "family": "RPly 1.1.4 ANSI C parser",
+    "family_note": "C and C++ adapters link the same pinned RPly C core; the C++ adapter calls its documented extern C API."
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:24:48.022236+00:00",
+  "checked_at_utc": "2026-11-13T03:28:09.521131+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -40,6 +40,12 @@
         "/opt/homebrew/opt/mpfr/lib/libmpfr.6.dylib": "1b151049a88e86e245c300f129ebd13e2915ebc66658e59540b0223a31ddcd8e"
       },
       "source_header_sha256": null
+    },
+    "rply": {
+      "source_sha256": "daf0b060fe701adf72aab0d525323d2e2e1bde9aa6aa9713ff1a5ef1e768d703",
+      "installed_files": {},
+      "source_header_sha256": "35fd68934927b9422f7c82be00c3c17eb4f52d33a0b4f4dba362617ac588749f",
+      "built_object_sha256": "42e812456cda3da33da8ead14d3bc092b402e6421e7112883c4e8b165c78bcdf"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -113,6 +119,23 @@
       "output": {
         "vertices": 3,
         "faces": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "rply",
+      "version": "1.1.4",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/rply-1.1.4-src /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/rply.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/rply-1.1.4-src/rply.o -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/rply",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/rply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
       },
       "pass": true
     }

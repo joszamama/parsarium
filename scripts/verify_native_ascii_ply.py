@@ -62,7 +62,15 @@ def verify(ecosystem: str) -> None:
                 include_dir.mkdir(exist_ok=True)
                 (include_dir / source["header_name"]).write_bytes(header.read())
                 assert digest(include_dir / source["header_name"]) == source["source_members"][source["header_member"]]
-        if not source.get("header_only"):
+            if source.get("source_build") == "rply":
+                include_dir = cache / "rply-1.1.4-src"
+                include_dir.mkdir(exist_ok=True)
+                for member in ("rply.h", "rplyfile.h", "rply.c"):
+                    file = tar.extractfile(f"rply-1.1.4/{member}")
+                    assert file is not None
+                    (include_dir / member).write_bytes(file.read())
+                    assert digest(include_dir / member) == source["source_members"][f"rply-1.1.4/{member}"]
+        if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
                 assert digest(Path(path)) == expected, path
@@ -88,6 +96,13 @@ def verify(ecosystem: str) -> None:
                        str(ROOT / parser["adapter"]),
                        "-L/opt/homebrew/opt/gmp/lib", "-L/opt/homebrew/opt/mpfr/lib",
                        "-lgmp", "-lmpfr", "-o", str(target / name)]
+        elif source.get("source_build") == "rply":
+            object_path = include_dir / "rply.o"
+            run(["cc", "-std=c11", "-O2", "-I" + str(include_dir),
+                 "-c", str(include_dir / "rply.c"), "-o", str(object_path)])
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(include_dir), str(ROOT / parser["adapter"]),
+                       str(object_path), "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
@@ -104,6 +119,8 @@ def verify(ecosystem: str) -> None:
         local_libraries[name] = {"source_sha256": source["source_sha256"],
                                  "installed_files": source.get("installed_files", {}),
                                  "source_header_sha256": source["source_members"].get(source.get("header_member"))}
+        if source.get("source_build") == "rply":
+            local_libraries[name]["built_object_sha256"] = digest(object_path)
         print(f"{name}@{parser['version']}: {ecosystem} ASCII PLY passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["cc" if ecosystem == "c" else "c++", "--version"]).splitlines()[0],
