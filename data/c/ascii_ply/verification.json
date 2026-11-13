@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T15:39:40.612765+00:00",
+  "checked_at_utc": "2026-11-13T15:49:32.564936+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -48,6 +48,11 @@
         "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtkIOPLY-9.7.9.7.dylib": "891a222cca78f30820cb9141884a2b46befaf06c396643b48c4569a63472b644"
       },
       "underlying_family": "F3D native plugin over VTK vtkPLYReader"
+    },
+    "mdal": {
+      "source_sha256": "aeff0d532653c042c24bafe250409052fcb0bc6b2bab09f6470c858a3e079b2f",
+      "compat_header_sha256": "c4d2afb3bf7f1f8f23d45a47a3aa861b809fd6052680a6af67a5da776458ef48",
+      "underlying_family": "MDAL PLY driver over bundled libplyxx"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -148,6 +153,23 @@
         "actors": 1,
         "points": 3,
         "cells": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "mdal",
+      "version": "1.3.3",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/mdal.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mdal-1.3.3/build/mdal -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mdal-1.3.3/build/mdal -lmdal -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mdal-1.3.3/mdal-c-ply",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mdal-1.3.3/mdal-c-ply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
       },
       "pass": true
     }

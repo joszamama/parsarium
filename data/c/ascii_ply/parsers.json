@@ -126,5 +126,27 @@
     "scope": "ASCII triangle produced three parsed points and one cell",
     "family": "F3D native PLY plugin over VTK vtkPLYReader",
     "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser."
+  },
+  {
+    "name": "mdal",
+    "version": "1.3.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/LICENSE",
+    "documentation": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/mdal/api/mdal.h",
+    "input_api": "MDAL_LoadMesh(local path); MDAL_M_vertexCount; MDAL_M_faceCount; MDAL_FI_next",
+    "adapter": "adapters/c/ascii_ply/mdal.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "Three parsed vertices, one face and face indices",
+    "family": "MDAL PLY driver over bundled libplyxx",
+    "family_note": "MDAL uses its native PLY driver over a fork of libplyxx; distinct package path from the other C PLY readers. The public C ABI is called through pinned C declarations because upstream mdal.h itself is not C11-compatible."
   }
 ]

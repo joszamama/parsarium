@@ -127,5 +127,25 @@
     "cxx_version": "Homebrew clang version 23.1.4",
     "javac_version": "javac 21.0.2",
     "build_note": "F3D 4.0.1 optional C and Java bindings are source-built with Homebrew LLVM 23.1.4 and VTK 9.7.2. The native PLY plugin delegates to VTK vtkPLYReader. The C++20 build preincludes algorithm and vector to supply missing upstream includes on the recorded toolchain. Exact VTK IOPLY dylib is SHA-256 pinned."
+  },
+  "mdal": {
+    "release": "1.3.3",
+    "license": "MIT",
+    "source_build": "mdal",
+    "source_url": "https://github.com/lutraconsulting/MDAL/archive/refs/tags/release-1.3.3.tar.gz",
+    "source_sha256": "aeff0d532653c042c24bafe250409052fcb0bc6b2bab09f6470c858a3e079b2f",
+    "source_members": {
+      "MDAL-release-1.3.3/LICENSE": "dfaaecdc7ef65fcd67ffcd0290c99a297286238b2216578ef5a785d484a211d1",
+      "MDAL-release-1.3.3/README.md": "64a20688943ac5199bc52a86a48ad7c89718d94c2454dec89253a48d625ebe62",
+      "MDAL-release-1.3.3/CMakeLists.txt": "ff26ee20d7589ab675856c455956de1452828100630e3e35ea3a8b45085de97c",
+      "MDAL-release-1.3.3/mdal/CMakeLists.txt": "19091e6b51cfeecd18eff7f33648bc58d77609f3a6dabc8d0073c0dee422bac1",
+      "MDAL-release-1.3.3/mdal/api/mdal.h": "39e8c57c253bcbefa6eff2389f83311b8915fd840d9aec8f576f19a436d29b08",
+      "MDAL-release-1.3.3/mdal/frmts/mdal_ply.cpp": "d81558aee3cf369f62e9b0d9b78099bd89ced5954f424d248eb9d35ad60a62d2",
+      "MDAL-release-1.3.3/mdal/frmts/mdal_ply.hpp": "11d44950b600d7853514afbbd14cbcbe88cc430cda563dce5983029e877ac2d8",
+      "MDAL-release-1.3.3/mdal/3rdparty/libplyxx/libplyxx.cpp": "875262007c198c98b1e7d56ab1aa8a27a4e421be72ae0701fc6faff0998cf04a",
+      "MDAL-release-1.3.3/mdal/3rdparty/libplyxx.h": "dd28b0302850ec22ca4982748f9002607c9fa36ad1109732a0ccdd431021cdea"
+    },
+    "compat_header_sha256": "c4d2afb3bf7f1f8f23d45a47a3aa861b809fd6052680a6af67a5da776458ef48",
+    "build_note": "Build the tagged MDAL shared library with PLY driver ON and optional drivers OFF. Its C ABI is exported, but the published mdal.h fails in C11 because it uses C++ enum names and bool without C typedefs; the pinned local compatibility declarations mirror only the called ABI functions. The PLY driver delegates to bundled MIT libplyxx."
   }
 }

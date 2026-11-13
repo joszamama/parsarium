@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,528 of 1,685 verified package paths have a recorded comparable cell metric;
-157 are unranked. A recorded zero is still a measured value, not evidence of
+1,528 of 1,686 verified package paths have a recorded comparable cell metric;
+158 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1223,11 +1223,13 @@ or quality judgment.
   pOSKI 1.0.0 is an unresolved additional lead: its official documentation
   names a Matrix Market reader, but the released source download currently
   returns HTTP 403, so no pinned adapter or control result exists.
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): six verified package
-  paths, 14 below the working goal. F3D 4.0.1 parsed the triangle through its
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): seven verified package
+  paths, 13 below the working goal. F3D 4.0.1 parsed the triangle through its
   C binding and ranks second among packages with comparable Homebrew requested
   installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
   triangle through its pinned C single-header API; it has no comparable Homebrew metric.
+  MDAL 1.3.3 parsed the same control through its C ABI over bundled `libplyxx`;
+  its upstream header requires a minimal C compatibility declaration and it is unranked.
   Greg Turk's `ply_io` source was rejected because its file-level license
   restricts sale.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package

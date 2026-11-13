@@ -155,6 +155,13 @@
       "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
       "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
       "source_build": "C, C++ and Java bindings enabled against pinned VTK 9.7.2"
+    },
+    "mdal": {
+      "version": "1.3.3",
+      "license": "MIT",
+      "source_url": "https://github.com/lutraconsulting/MDAL/archive/refs/tags/release-1.3.3.tar.gz",
+      "source_sha256": "aeff0d532653c042c24bafe250409052fcb0bc6b2bab09f6470c858a3e079b2f",
+      "license_evidence": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/LICENSE"
     }
   },
   "popularity_metric": {
@@ -193,6 +200,10 @@
         "source": "https://formulae.brew.sh/api/formula/f3d.json",
         "source_date_window": "2025-11-13 to 2026-11-13",
         "note": "Formula-wide adoption proxy; the adapter uses a source-built binding, while the Homebrew formula covers F3D broadly."
+      },
+      "mdal": {
+        "install_on_request_365d": null,
+        "note": "No standalone Homebrew MDAL formula and thus no comparable requested-install metric. Upstream project interest is auxiliary only."
       }
     }
   },
@@ -236,6 +247,14 @@
       "input_api_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/c/scene_c_api.h",
       "disposition": "Verified pinned F3D 4.0.1 source build against the valid ASCII PLY triangle.",
       "discovery_note": "Project API and native PLY plugin documentation, outside the bounded registry name windows."
+    },
+    {
+      "name": "mdal",
+      "url": "https://github.com/lutraconsulting/MDAL/tree/release-1.3.3",
+      "format_evidence": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/mdal/frmts/mdal_ply.cpp",
+      "input_api_evidence": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/mdal/api/mdal.h",
+      "disposition": "Verified tagged MIT source build and local C ABI control.",
+      "discovery_note": "Official MDAL supported-format documentation, outside the bounded Homebrew name windows."
     }
   ]
 }
