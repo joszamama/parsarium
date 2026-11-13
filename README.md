@@ -1220,6 +1220,9 @@ or quality judgment.
   reader is verified only on a square control. The Libmtx source build uses
   Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS. NIST's dated, hash-pinned
   `mmio.c` and `mmio.h` source files provide the reference C reader.
+  pOSKI 1.0.0 is an unresolved additional lead: its official documentation
+  names a Matrix Market reader, but the released source download currently
+  returns HTTP 403, so no pinned adapter or control result exists.
 - [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): five verified package
   paths, 15 below the working goal. `msh_ply` v1.02 parsed the valid triangle
   through its pinned C single-header API; it has no comparable Homebrew metric.
