@@ -73,6 +73,18 @@ public final class PlyAdapter {
             vertices = cloud.getPoints().size();
             faces = cloud.getTriangles().size();
             indices = cloud.getTriangles().get(0);
+        } else if (args[0].equals("lwjgl-assimp")) {
+            org.lwjgl.assimp.AIScene scene = org.lwjgl.assimp.Assimp.aiImportFile(args[1], 0);
+            if (scene == null) throw new IllegalStateException(org.lwjgl.assimp.Assimp.aiGetErrorString());
+            try {
+                org.lwjgl.assimp.AIMesh mesh = org.lwjgl.assimp.AIMesh.create(scene.mMeshes().get(0));
+                vertices = mesh.mNumVertices();
+                faces = mesh.mNumFaces();
+                org.lwjgl.assimp.AIFace face = mesh.mFaces().get(0);
+                indices = new int[]{face.mIndices().get(0), face.mIndices().get(1), face.mIndices().get(2)};
+            } finally {
+                org.lwjgl.assimp.Assimp.aiReleaseImport(scene);
+            }
         } else throw new IllegalArgumentException("Unknown parser: " + args[0]);
         System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%d,%d,%d]}%n",
                 vertices, faces, indices[0], indices[1], indices[2]);

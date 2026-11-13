@@ -13,9 +13,13 @@ QUERIES = ["ply", "ascii ply", "jply", "meshio"]
 RELEASES = [("jply", "org.smurn", "jply", "0.2.0", "Apache-2.0"),
             ("meshio", "com.ripplargames", "meshio", "2.1.2", "MIT"),
             ("mesh-ply", "hu.kazocsaba.geom3d", "mesh-ply", "1.1.0", "MIT"),
-            ("pcutil", "cn.jimmiez", "pcutil", "0.3.0", "MIT")]
+            ("pcutil", "cn.jimmiez", "pcutil", "0.3.0", "MIT"),
+            ("lwjgl-assimp", "org.lwjgl", "lwjgl-assimp", "3.4.3", "BSD-3-Clause")]
 DEPENDENCIES = [("hu.kazocsaba.geom3d", "mesh", "1.0.1"),
-                ("hu.kazocsaba.math", "matrix", "1.1.0")]
+                ("hu.kazocsaba.math", "matrix", "1.1.0"),
+                ("org.lwjgl", "lwjgl", "3.4.3")]
+NATIVE_ARTIFACTS = [("org.lwjgl", "lwjgl", "3.4.3", "natives-macos-arm64"),
+                    ("org.lwjgl", "lwjgl-assimp", "3.4.3", "natives-macos-arm64")]
 
 
 def now() -> str:
@@ -84,12 +88,20 @@ def main() -> None:
             item[f"{kind}_sha256"] = sha256(get(url)).hexdigest()
         dependencies.append(item)
 
+    natives = []
+    for group, artifact, version, classifier in NATIVE_ARTIFACTS:
+        url = ("https://repo.maven.apache.org/maven2/" + group.replace(".", "/")
+               + f"/{artifact}/{version}/{artifact}-{version}-{classifier}.jar")
+        natives.append({"group": group, "artifact": artifact, "version": version,
+                        "classifier": classifier, "jar_url": url,
+                        "jar_sha256": sha256(get(url)).hexdigest()})
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "captured_at_utc": now(), "search_surface": "Maven Central Solr artifact search",
         "search_api_docs": "https://central.sonatype.org/search/rest-api-guide/",
         "search_limit_per_query": 100, "search": search, "releases": releases,
-        "dependencies": dependencies,
+        "dependencies": dependencies, "native_artifacts": natives,
         "popularity_metric": {
             "name": "deps.dev version-level directDependentCount",
             "documentation": "https://docs.deps.dev/api/v3alpha/",

@@ -42,6 +42,12 @@ def main() -> None:
                 assert sha256(path.read_bytes()).hexdigest() == dependency[f"{kind}_sha256"]
                 if kind == "jar":
                     jars[key] = path
+        for native in snapshot["native_artifacts"]:
+            path = temp / f"{native['artifact']}-{native['classifier']}.jar"
+            with urlopen(native["jar_url"], timeout=45) as response:
+                path.write_bytes(response.read())
+            assert sha256(path.read_bytes()).hexdigest() == native["jar_sha256"]
+            jars[path.stem] = path
         classes = temp / "classes"
         classes.mkdir()
         classpath = ":".join(str(path) for path in jars.values())
