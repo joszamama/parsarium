@@ -139,5 +139,25 @@
     "scope": "two ISO media tracks, 2x2 video dimensions and duration",
     "family": "GPAC native ISO media parser",
     "family_note": "C and C++ call sites share the same gpac native MP4 parser. GPAC MP4Box is a CLI alias within the gpac package, not another package row."
+  },
+  {
+    "name": "bento4",
+    "version": "1.6.0-641",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://github.com/axiomatic-systems/Bento4/archive/refs/tags/v1.6.0-641.tar.gz",
+    "documentation": "https://github.com/axiomatic-systems/Bento4/blob/v1.6.0-641/Source/C%2B%2B/CApi/Bento4C.h",
+    "input_api": "AP4_FileByteStream_Create(local filename, READ); AP4_File_FromStream; AP4_File_GetMovie/GetFileType; AP4_Movie_GetTrackCount/GetTrackByIndex/GetDurationMs",
+    "adapter": "adapters/cpp/mp4/bento4.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "brand": "isom",
+      "tracks": 2,
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "duration_ms": 1000
+    },
+    "scope": "MP4 major brand, two audio/video tracks and one-second duration",
+    "family": "Bento4 AP4 ISO BMFF core",
+    "family_note": "C and C++ call sites share Bento4 AP4 core and C binding; C++ adapter compiles the C binding call site as C++."
   }
 ]

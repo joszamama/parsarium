@@ -1,6 +1,6 @@
 # C++ × MP4: verified parser ranking
 
-7 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
+8 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
 
 | Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -11,6 +11,7 @@
 | 5 | [libmediainfo](https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start) | 26.10 | 1,285 | MPEG-4 container, title, AVC video and AAC audio, 2x2 video dimensions | MediaInfoLib native MPEG-4 parser |
 | 6 | [mp4v2](https://github.com/enzo1982/mp4v2/blob/v2.1.3/include/mp4v2/file.h) | 2.1.3 | 644 | two MP4 tracks and 2x2 video dimensions | MP4v2 native MP4 atom parser |
 
+| — | [bento4](https://github.com/axiomatic-systems/Bento4/blob/v1.6.0-641/Source/C%2B%2B/CApi/Bento4C.h) | 1.6.0-641 | unavailable | MP4 major brand, two audio/video tracks and one-second duration | Bento4 AP4 ISO BMFF core |
 | — | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | unavailable | MP4 title, video/audio tracks and one-second duration | VLC native MP4 demuxer plugin |
 
-MP4v2, GPAC, FFmpeg, GStreamer, MediaInfoLib and VLC expose distinct package APIs and MP4 parsers. libmpv shares FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask and has no comparable formula install-on-request count, so its order is unresolved. One lead remains unresolved; 13 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib and VLC expose distinct package APIs and MP4 parsers. libmpv shares FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask and Bento4 has no Homebrew formula in the bounded name search; neither has a comparable formula install-on-request count. No recorded documentation lead remains unresolved; 12 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
