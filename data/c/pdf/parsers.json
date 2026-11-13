@@ -246,5 +246,21 @@
     "scope": "parsed PDF page-tree count through C ABI",
     "family": "unpdf Rust PDF parser via C ABI",
     "family_note": "The pinned Rust crate publishes a C ABI with local-file parsing and page-count calls. This is the same underlying parser as the verified Rust unpdf path; C adoption is not inferred from Rust crate downloads."
+  },
+  {
+    "name": "gnome-papers",
+    "version": "51.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/formula/gnome-papers",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/papers/document/class.Document.html",
+    "input_api": "pps_init(); g_filename_to_uri(local path); pps_document_factory_get_document(uri, error); pps_document_load(document, uri, error); pps_document_get_n_pages(document)",
+    "adapter": "adapters/c/pdf/gnome_papers.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "pages": 2
+    },
+    "scope": "PDF document page count",
+    "family": "GNOME Papers PDF backend over Poppler GLib",
+    "family_note": "Distinct documented C document-library input API, sharing the Poppler GLib PDF engine with poppler-glib, Evince, and libvips. The public umbrella header requires a macro claiming author contact; the adapter mirrors signatures from hash-pinned headers rather than defining that macro. The API is explicitly unstable."
   }
 ]

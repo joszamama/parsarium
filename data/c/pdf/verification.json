@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T16:38:55.430453+00:00",
+  "checked_at_utc": "2026-11-13T18:04:35.634811+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,7 +26,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "45b70df4f79edd02e344a38f3e8bd76265de9bb5f805538ba0bf457e0e16054e",
+      "local_library_sha256": "399ae8c80b97012cb61054940d2329a33f1ee4f2e6e84b45658c148332e3b41d",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -41,7 +41,7 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "bbf88dc3f488cc8e2dd40f9960858a1b3d87b766bb19546f77f9d25e2c7d71b9",
+      "local_library_sha256": "a9589fb25968dbab4c832f2d263188be469e42b53b76cb9e9e83c1886735bbb4",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "imagemagick": {
@@ -87,6 +87,11 @@
       "ffi_source_sha256": "b39390b02ee1c165fce1fa1f0209efe53484e79bd83a24a3e48b3b641d09654c",
       "cargo_lock_sha256": "922833507bca286faf18e724f042569fc8be05d69e40e5bffae78042f8d6f225",
       "local_library_sha256": "a59f6620a5e9983bc42afa628e8df5bb09b38a049dc8219b3e7fea42cd65a989"
+    },
+    "gnome-papers": {
+      "source_sha256": "ac0db229883b3d2aacbbda1700dc12aa69716664df201120926096f066e4796b",
+      "local_library_sha256": "5418230aff54859facac619e27af92752b8a0cf390554a6df35874f652f6004a",
+      "local_header_sha256": "cc68a805f3cb31e2248903c082dad236a1401913a5d34bd134052458eae3d5bc"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -236,7 +241,7 @@
       "version": "26.8.3.1",
       "control": "controls/pdf/two-page.pdf",
       "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/libreofficekit-26.8.3.1-include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/libreofficekit.c -ldl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-c7y9ngbd/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-c7y9ngbd/profile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-vs7eg710/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-vs7eg710/profile",
       "output": {
         "type": "drawing",
         "pages": 2
@@ -264,6 +269,17 @@
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/unpdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "gnome-papers",
+      "version": "51.1",
+      "control": "controls/pdf/two-page.pdf",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/gnome_papers.c -I/opt/homebrew/Cellar/gnome-papers/51.1/include/papers/4.0 -I/opt/homebrew/Cellar/gtk4/4.24.1/include/gtk-4.0 -I/opt/homebrew/Cellar/pango/1.58.2/include/pango-1.0 -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libthai/0.1.30/include -I/opt/homebrew/Cellar/libdatrie/0.2.14/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/graphite2/include -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -I/opt/homebrew/Cellar/graphene/1.10.8/include/graphene-1.0 -I/opt/homebrew/Cellar/graphene/1.10.8/lib/graphene-1.0/include -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/Cellar/gnome-papers/51.1/lib -lppsdocument-4.0 -L/opt/homebrew/Cellar/gtk4/4.24.1/lib -lgtk-4 -L/opt/homebrew/Cellar/pango/1.58.2/lib -lpangocairo-1.0 -lpango-1.0 -L/opt/homebrew/Cellar/harfbuzz/15.1.0/lib -lharfbuzz -L/opt/homebrew/lib -lgdk_pixbuf-2.0 -L/opt/homebrew/Cellar/cairo/1.18.6/lib -lcairo-gobject -lcairo -L/opt/homebrew/Cellar/graphene/1.10.8/lib -lgraphene-1.0 -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/gnome-papers",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/gnome-papers /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf",
+      "output": {
+        "pages": 2
       },
       "pass": true
     }

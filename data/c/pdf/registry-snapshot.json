@@ -381,6 +381,13 @@
       "source_sha256": "bcef494a3957fe9f297e942f9953ae76665ba0408be89545a6baa54f4a3490e3",
       "license_evidence": "https://github.com/iyulab/unpdf/blob/v0.54.0/LICENSE",
       "crate_api": "https://crates.io/api/v1/crates/unpdf/0.54.0"
+    },
+    "gnome-papers": {
+      "version": "51.1",
+      "license": "GPL-2.0-or-later",
+      "source_url": "https://download.gnome.org/sources/papers/51/papers-51.1.tar.xz",
+      "source_sha256": "ac0db229883b3d2aacbbda1700dc12aa69716664df201120926096f066e4796b",
+      "license_evidence": "https://formulae.brew.sh/formula/gnome-papers"
     }
   },
   "targeted_documentation_leads": [
@@ -459,6 +466,14 @@
       "url": "https://github.com/iyulab/unpdf/blob/v0.54.0/src/ffi.rs",
       "surface": "Official tagged Rust crate C ABI source with local-file and page-count calls, verified from SHA-256-pinned crates.io 0.54.0 source and bundled Cargo.lock; discovered in targeted PDF reader search outside bounded Homebrew name hits.",
       "disposition": "Verified source-built C ABI on valid one-page local PDF; no comparable Homebrew formula metric."
+    },
+    {
+      "name": "gnome-papers",
+      "url": "https://gnome.pages.gitlab.gnome.org/papers/document/class.Document.html",
+      "format_evidence": "https://formulae.brew.sh/formula/gnome-papers",
+      "input_api_evidence": "https://gnome.pages.gitlab.gnome.org/papers/document/class.Document.html",
+      "surface": "GNOME documented C document library and Homebrew formula outside the bounded PDF formula-name query; official GNOME 51.1 source archive",
+      "disposition": "Verified GNOME Papers 51.1 local PDF URI API on a valid two-page PDF; shares the Poppler backend with Evince and Poppler GLib."
     }
   ],
   "auxiliary_project_interest_metric": {
@@ -560,7 +575,7 @@
   "popularity_metric": {
     "metric": "Homebrew install-on-request count over 365 days",
     "source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
-    "captured_at_utc": "2026-11-13T16:29:02.956548+00:00",
+    "captured_at_utc": "2026-11-13T18:03:59.694908+00:00",
     "start_date": "2025-11-13",
     "end_date": "2026-11-13",
     "scope": "Formula-wide user-requested install events; not PDF-specific use. Compare only C PDF paths distributed as formulae in this fixed window. Cask installs and GitHub stars are separate auxiliary signals.",
@@ -642,6 +657,12 @@
       "unpdf": {
         "install_on_request_365d": null,
         "note": "No Homebrew formula for the unpdf C ABI package; cross-ecosystem Rust crate downloads are not substituted."
+      },
+      "gnome-papers": {
+        "install_on_request_365d": 712,
+        "formula": "gnome-papers",
+        "source": "https://formulae.brew.sh/formula/gnome-papers",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use. Same Homebrew 365-day analytics window as the other C PDF formulae."
       }
     }
   }

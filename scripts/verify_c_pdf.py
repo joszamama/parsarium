@@ -145,15 +145,16 @@ def main() -> None:
             library = Path(source["local_library"])
             for dependency in source["installed_dependencies"]:
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
-        elif name == "evince":
-            assert source["installed_revision"] in run(["brew", "list", "--versions", "evince"]).split()
+        elif name in ("evince", "gnome-papers"):
+            assert source["installed_revision"] in run(["brew", "list", "--versions", name]).split()
             assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
             header = Path(source["local_header"])
             library = Path(source["local_library"])
             for dependency in source["installed_dependencies"]:
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
+            backend_role = "Evince PDF backend" if name == "evince" else "GNOME Papers PDF backend"
             backend = next(Path(dependency["path"]) for dependency in source["installed_dependencies"]
-                           if dependency["role"] == "Evince PDF backend")
+                           if dependency["role"] == backend_role)
             assert "libpoppler-glib.8.dylib" in run(["otool", "-L", str(backend)])
         elif name == "pdf_oxide":
             source_dir = CACHE / f"pdf_oxide-{source['release']}"
@@ -210,7 +211,7 @@ def main() -> None:
         elif name == "libvips":
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             command = [*base, adapter, *flags, "-o", str(TARGET / name)]
-        elif name == "evince":
+        elif name in ("evince", "gnome-papers"):
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             command = [*base, adapter, *flags, "-o", str(TARGET / name)]
         elif name == "pdf_oxide":

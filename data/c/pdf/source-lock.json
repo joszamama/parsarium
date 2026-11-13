@@ -307,5 +307,54 @@
     },
     "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
     "build_note": "Build tagged crates.io source as a cdylib with cargo build --release --locked --no-default-features --features ffi. The crate includes Cargo.lock. The C declarations mirror exported symbols in the pinned src/ffi.rs; the adapter reads the supplied PDF path."
+  },
+  "gnome-papers": {
+    "release": "51.1",
+    "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "installed_revision": "51.1",
+    "license": "GPL-2.0-or-later",
+    "source_url": "https://download.gnome.org/sources/papers/51/papers-51.1.tar.xz",
+    "source_sha256": "ac0db229883b3d2aacbbda1700dc12aa69716664df201120926096f066e4796b",
+    "source_header_member": "papers-51.1/libdocument/pps-document-factory.h",
+    "local_header": "/opt/homebrew/Cellar/gnome-papers/51.1/include/papers/4.0/libdocument/pps-document-factory.h",
+    "local_header_sha256": "cc68a805f3cb31e2248903c082dad236a1401913a5d34bd134052458eae3d5bc",
+    "local_library": "/opt/homebrew/Cellar/gnome-papers/51.1/lib/libppsdocument-4.0.6.dylib",
+    "local_library_sha256": "5418230aff54859facac619e27af92752b8a0cf390554a6df35874f652f6004a",
+    "pkg_config": "papers-document-4.0",
+    "source_members": {
+      "papers-51.1/COPYING": "7d6a76d2527374107026592bf4892edbed5cf46165d298721e4468e8d4382ad0",
+      "papers-51.1/libdocument/papers-document.h": "035d24dbe156a4ff6a815e67f52c2021ad2a748b5879b034e8cd411e4a2c3313",
+      "papers-51.1/libdocument/pps-document.h": "d91c326600abb6977413016b8d336c1738bb56bbd58a6ed6fb79b2f24c7c9f81",
+      "papers-51.1/libdocument/pps-init.h": "76d79c10daa4f82694b592703d59368893c121e931b15024b3584c4ded025173",
+      "papers-51.1/libdocument/backend/pdf/pps-poppler.c": "316580edc57d6c77c8e19094b68c57e54a3871409938d0509dfb6270b2d2db95"
+    },
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/gnome-papers/51.1/include/papers/4.0/papers-document.h",
+        "sha256": "035d24dbe156a4ff6a815e67f52c2021ad2a748b5879b034e8cd411e4a2c3313",
+        "role": "public umbrella header"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/gnome-papers/51.1/include/papers/4.0/libdocument/pps-document.h",
+        "sha256": "d91c326600abb6977413016b8d336c1738bb56bbd58a6ed6fb79b2f24c7c9f81",
+        "role": "load and page-count API header"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/gnome-papers/51.1/include/papers/4.0/libdocument/pps-init.h",
+        "sha256": "76d79c10daa4f82694b592703d59368893c121e931b15024b3584c4ded025173",
+        "role": "initialization API header"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/gnome-papers/51.1/lib/papers/6/backends/libpdfdocument.dylib",
+        "sha256": "ef12ce1b75a58607d505b74e8cc7cf1cb2b29343081c88c1ff00157bf01790ae",
+        "role": "GNOME Papers PDF backend"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/poppler/26.11.0/lib/libpoppler-glib.8.31.0.dylib",
+        "sha256": "47a28e807c50e19a379b6dafb1d10a191d0229535bd51d2a9df13d15a1f0f16a",
+        "role": "Poppler GLib PDF engine linked by the GNOME Papers PDF backend"
+      }
+    ],
+    "build_note": "Official GNOME 51.1 source and installed Homebrew formula are hash pinned; local API headers match source exactly. The public umbrella header requires a macro asserting contact with authors. To avoid that assertion, the C adapter mirrors documented exported signatures from pinned headers and links the library. GNOME calls this API unstable. The installed PDF backend links pinned Poppler GLib 26.11.0; GNOME Papers is a separate package input path, not an independent PDF parser engine."
   }
 }
