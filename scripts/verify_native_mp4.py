@@ -160,6 +160,69 @@ def build_shiguredo_mp4(archive: Path, cache: Path, expected_lock_sha256: str) -
              "local_library_sha256": sha256(library.read_bytes()).hexdigest()})
 
 
+def build_libopenshot(archive: Path, cache: Path, source: dict) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build tagged OpenShot C++ reader with its tagged OpenShotAudio dependency."""
+    audio = source["audio_dependency"]
+    audio_archive = cache / f"libopenshot-audio-{audio['release']}.tar.gz"
+    if not audio_archive.exists() or sha256(audio_archive.read_bytes()).hexdigest() != audio["source_sha256"]:
+        with urlopen(Request(audio["source_url"], headers={"User-Agent": "Parsarium MP4 verifier"}), timeout=120) as response:
+            audio_archive.write_bytes(response.read())
+    assert sha256(audio_archive.read_bytes()).hexdigest() == audio["source_sha256"]
+    for packed, directory, prefix in (
+        (audio_archive, cache / "libopenshot-audio-1.0.2", "libopenshot-audio-1.0.2"),
+        (archive, cache / "libopenshot-1.1.1", "libopenshot-1.1.1"),
+    ):
+        if not directory.exists():
+            with tarfile.open(packed) as tar:
+                for member in tar.getmembers():
+                    path = Path(member.name)
+                    if path.is_absolute() or ".." in path.parts or not (
+                        member.name == prefix or member.name.startswith(prefix + "/")
+                    ):
+                        raise ValueError(f"unsafe OpenShot archive path: {member.name}")
+                tar.extractall(cache, filter="data")
+    audio_source = cache / "libopenshot-audio-1.0.2"
+    assert sha256((audio_source / "COPYING").read_bytes()).hexdigest() == audio["license_sha256"]
+    audio_build = cache / "libopenshot-audio-build"
+    audio_install = cache / "libopenshot-audio-install"
+    run(["cmake", "-S", str(audio_source), "-B", str(audio_build), "-DCMAKE_BUILD_TYPE=Release",
+         "-DCMAKE_INSTALL_PREFIX=" + str(audio_install)], timeout=300)
+    run(["cmake", "--build", str(audio_build), "-j4"], timeout=600)
+    run(["cmake", "--install", str(audio_build)], timeout=300)
+
+    source_dir = cache / "libopenshot-1.1.1"
+    build_dir = cache / "libopenshot-build"
+    install_dir = cache / "libopenshot-install"
+    omp = run(["brew", "--prefix", "libomp"])
+    run(["cmake", "-S", str(source_dir), "-B", str(build_dir), "-DCMAKE_BUILD_TYPE=Release",
+         "-DCMAKE_INSTALL_PREFIX=" + str(install_dir),
+         "-DCMAKE_PREFIX_PATH=" + str(audio_install) + ";" + run(["brew", "--prefix"]) + ";" + omp,
+         "-DENABLE_TESTS=OFF", "-DENABLE_LIB_DOCS=OFF", "-DENABLE_MAGICK=OFF",
+         "-DENABLE_OPENCV=OFF", "-DENABLE_PYTHON=OFF", "-DENABLE_RUBY=OFF",
+         "-DOpenMP_C_FLAGS=-Xpreprocessor -fopenmp -I" + omp + "/include",
+         "-DOpenMP_CXX_FLAGS=-Xpreprocessor -fopenmp -I" + omp + "/include",
+         "-DOpenMP_C_LIB_NAMES=omp", "-DOpenMP_CXX_LIB_NAMES=omp",
+         "-DOpenMP_omp_LIBRARY=" + omp + "/lib/libomp.dylib"], timeout=300)
+    run(["cmake", "--build", str(build_dir), "-j4"], timeout=900)
+    run(["cmake", "--install", str(build_dir)], timeout=300)
+    ffmpeg = run(["brew", "--prefix", "ffmpeg"])
+    jsoncpp = run(["brew", "--prefix", "jsoncpp"])
+    flags = ["-Wno-unused-parameter", "-I" + str(install_dir / "include"),
+             "-I" + str(audio_install / "include"), "-I" + ffmpeg + "/include",
+             "-I" + omp + "/include", "-I" + jsoncpp + "/include"]
+    flags.extend(shlex.split(run(["pkg-config", "--cflags", "Qt6Gui"])))
+    libraries = ["-L" + str(install_dir / "lib"), "-lopenshot",
+                 "-L" + str(audio_install / "lib"), "-lopenshot-audio",
+                 "-Wl,-rpath," + str(install_dir / "lib"),
+                 "-Wl,-rpath," + str(audio_install / "lib")]
+    libraries.extend(shlex.split(run(["pkg-config", "--libs", "Qt6Gui"])))
+    return flags, libraries, {
+        "audio_source_sha256": sha256(audio_archive.read_bytes()).hexdigest(),
+        "audio_library_sha256": sha256((audio_install / "lib/libopenshot-audio.1.0.2.dylib").read_bytes()).hexdigest(),
+        "local_library_sha256": sha256((install_dir / "lib/libopenshot.1.1.1.dylib").read_bytes()).hexdigest(),
+    }
+
+
 def verify(ecosystem: str) -> None:
     assert ecosystem in ("c", "cpp")
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
@@ -212,6 +275,8 @@ def verify(ecosystem: str) -> None:
         elif source.get("source_build") == "shiguredo_mp4":
             flags, built_libraries, built_hashes = build_shiguredo_mp4(
                 archive, cache, source["cargo_lock_sha256"])
+        elif source.get("source_build") == "libopenshot":
+            flags, built_libraries, built_hashes = build_libopenshot(archive, cache, source)
         elif source.get("header_only"):
             include_dir = cache / f"{name}-{source['release']}-include"
             include_dir.mkdir(exist_ok=True)

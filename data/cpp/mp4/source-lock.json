@@ -589,5 +589,26 @@
       }
     ],
     "build_note": "Official v7.42.0 release, installed Homebrew 7.42.0_1 headers and MLT library, avformat plugin, and linked FFmpeg libavformat are hash-pinned. The plugin uses the existing FFmpeg MOV/MP4 demuxer."
+  },
+  "libopenshot": {
+    "release": "1.1.1",
+    "license": "LGPL-3.0-or-later",
+    "source_url": "https://github.com/OpenShot/libopenshot/archive/refs/tags/v1.1.1.tar.gz",
+    "source_sha256": "c5d650629b4104ec4368a2e3c183482e07de3e342d78d1e26f1cb297f9973439",
+    "repository": "https://github.com/OpenShot/libopenshot",
+    "source_header_member": "libopenshot-1.1.1/src/FFmpegReader.h",
+    "source_header_sha256": "308cc64fc7524213d238ca7e3d2379512121d560de7d59ca1f270e236b5cd741",
+    "source_engine_member": "libopenshot-1.1.1/src/FFmpegReader.cpp",
+    "source_engine_sha256": "376c207ebe787ca2f2241c3c7d03bdeccb4414c5f502c23b142abedc00b3d83e",
+    "license_member": "libopenshot-1.1.1/COPYING",
+    "license_sha256": "ea8af5e789cb2d4e9b10bce3874982ade163b749b6bfbdb32e2df21c4d106de1",
+    "source_build": "libopenshot",
+    "audio_dependency": {
+      "release": "1.0.2",
+      "source_url": "https://github.com/OpenShot/libopenshot-audio/archive/refs/tags/v1.0.2.tar.gz",
+      "source_sha256": "4ea883b1b0a7d62a2c39e65138997c947996ecd3040a7b439b83f2dbd353d28a",
+      "license_sha256": "d0495053051967ebe76fb1facd287d79d1ed800da1be75cf501a556bc39a0472"
+    },
+    "build_note": "Tagged libopenshot and libopenshot-audio archives are SHA-256 pinned. The C++ FFmpegReader links OpenShotAudio, Qt, FFmpeg and OpenMP; its demuxer shares the already counted FFmpeg MOV/MP4 family."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T12:18:04.262709+00:00",
+  "checked_at_utc": "2026-11-13T12:27:54.505331+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "309055c45964b8d97f8d115127db79e1abe009ab86dd224dbdb7e74f062090a0",
-      "c_binding_library_sha256": "79e6881605202c5fc291b0d4f073a2e3e0dca32e52b27da17c435f615824a6d6"
+      "c_binding_library_sha256": "e7d0649efd8143645e8acf30bb9b59f769589d8def8a5ab52046751219e71fc7"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -82,7 +82,7 @@
     },
     "ireader-media-server": {
       "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
-      "local_library_sha256": "58778f579a2f7657f537367a2f3e3455f932e041e592481d93bca7c1e557c8d0"
+      "local_library_sha256": "0686473a02d51c483a077631c2c9504b00a403d2c01da609d7b3c2c56b07c37e"
     },
     "shiguredo-mp4-rs": {
       "source_sha256": "5af3b3b054d5558e43455232492d9697e0b9055923b835a314d25ec370a5d012",
@@ -98,6 +98,12 @@
       "source_sha256": "8800e343f43aaa885bd5d9d23553030fa220aa3e2f0c94d9fd6a936d41638cdd",
       "local_header_sha256": "1c016b5fb4ef03c9ce2e9aa0573870cf3506ec0dd0f45b2f38c8fc44ec1a9ff1",
       "local_library_sha256": "4a42bd5965dbca19a820dd7ef30c291264a387628d29f504ce4296e215f2c668"
+    },
+    "libopenshot": {
+      "source_sha256": "c5d650629b4104ec4368a2e3c183482e07de3e342d78d1e26f1cb297f9973439",
+      "audio_source_sha256": "4ea883b1b0a7d62a2c39e65138997c947996ecd3040a7b439b83f2dbd353d28a",
+      "audio_library_sha256": "5f521f1e0fbf1b58663ee2d1bfe0719ec2c5f0bb78801577d13c07ed351f1e03",
+      "local_library_sha256": "e1e59305f76352717d53cbe356da112efea43042dc99d2624b2cb2d71250cbd6"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -372,6 +378,22 @@
         "audio_codec": "aac",
         "width": 2,
         "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "libopenshot",
+      "version": "1.1.1",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -Wno-unused-parameter -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libopenshot-install/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libopenshot-audio-install/include -I/opt/homebrew/opt/ffmpeg/include -I/opt/homebrew/opt/libomp/include -I/opt/homebrew/opt/jsoncpp/include -F/opt/homebrew/lib -I/opt/homebrew/include/QtGui -I/opt/homebrew/lib/QtGui.framework -DQT_GUI_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/libopenshot.cpp -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libopenshot-install/lib -lopenshot -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libopenshot-audio-install/lib -lopenshot-audio -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libopenshot-install/lib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libopenshot-audio-install/lib -F/opt/homebrew/lib -framework QtGui -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/libopenshot",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/libopenshot /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "video": 1,
+        "audio": 1,
+        "width": 2,
+        "height": 2,
+        "video_codec": "h264",
+        "audio_codec": "aac"
       },
       "pass": true
     }

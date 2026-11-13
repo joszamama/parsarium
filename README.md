@@ -5,7 +5,7 @@ specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 bat
 verified C × ZIP and ASCII PNM batches, a below-target C × Matrix Market batch,
 verified C++ × PNG, ZIP, and WAV batches,
 and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
-C × SVG and C/C++ × MP4 and ASCII PLY batches, plus completed C++ × SVG and MP3 with ID3v2 batches,
+C × SVG and MP4 and C/C++ × ASCII PLY batches, plus completed C++ × MP4, SVG and MP3 with ID3v2 batches,
 and a below-target C++ × Matrix Market batch,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
@@ -23,7 +23,7 @@ PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verifie
 and PHP × SVG each have a verified 20-path batch.
 PHP × ASCII PLY and PHP × Matrix Market have bounded searches and runtime
 inventories, but zero verified parser paths so far.
-There are 76 cells at the 20-parser target and twelve below target; all 88
+There are 77 cells at the 20-parser target and eleven below target; all 88
 cells now have recorded search or verification work. A zero does **not** mean
 no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -257,7 +257,7 @@ projects outside the bounded Homebrew search remain uncertain; see the [C](data/
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
 The C × MP4 cell verifies **16/20 package paths** and C++ × MP4 verifies
-**19/20** on the valid local two-track H.264/AAC control. The adapters report
+**20/20** on the valid local two-track H.264/AAC control. The adapters report
 container identity, title, tracks, dimensions, or duration through documented
 local APIs. Source releases and relevant libraries are pinned. The C++ OpenCV
 and AvCpp paths and both libmpv paths share FFmpeg's MP4 demuxer; the new C
@@ -267,11 +267,12 @@ The libheif paths share a native parser that reads the MP4 video track and 2×2
 resolution; this API ignores the audio track. Libheif ranks second in both MP4
 cells by the same Homebrew requested-install metric. MLT adds a C producer and
 a C++ wrapper over the shared FFmpeg MP4 demuxer, each with two parsed streams
-and 2×2 video dimensions.
+and 2×2 video dimensions. OpenShot/libopenshot adds a tagged C++ FFmpegReader
+path over the same FFmpeg demuxer, reporting both codecs and video dimensions.
 Four bounded Homebrew formula-name searches saved 15 hits and 15 unique names.
 Homebrew requested-install counts rank only packages with a comparable count;
-`ireader/media-server` has no such count and remains unranked, with its GitHub
-stars recorded only as auxiliary interest. The higher-interest `lieff/minimp4` lead
+`ireader/media-server` and OpenShot have no such count and remain unranked, with GitHub
+stars recorded only as auxiliary interest. The `lieff/minimp4` lead
 remains unresolved because upstream has no tagged release to pin. C++ also has
 an unresolved QtMultimedia control result. The separate C and C++ standard
 libraries have no documented MP4 parser. The count is a verified collection,

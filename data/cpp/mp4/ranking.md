@@ -1,6 +1,6 @@
 # C++ × MP4: verified parser ranking
 
-19 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
+20 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
 
 | Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -23,8 +23,9 @@
 | — | [shiguredo/mp4-rs](https://github.com/shiguredo/mp4-rs/blob/2026.3.0/crates/c-api/README.md) | 2026.3.0 | unavailable | two tracks, one video, one audio, one-second video duration | Rust ISO BMFF demuxer through C API |
 | — | [ireader/media-server](https://github.com/ireader/media-server/blob/v1.0.0/libmov/include/mov-reader.h) | 1.0.0 | unavailable | one video and one audio track, 2x2 dimensions and 1000 ms duration | ireader libmov native ISO BMFF/MOV reader |
 | — | [libmp4tag](https://libmp4tag.sourceforge.io/) | 2.0.4 | unavailable | MP4 title and 1128 ms duration | libmp4tag native MP4 atom and tag parser |
+| — | [OpenShot/libopenshot](https://github.com/OpenShot/libopenshot/blob/v1.1.1/src/FFmpegReader.h) | 1.1.1 | unavailable | H.264 video, AAC audio and 2x2 dimensions | OpenShot FFmpegReader over FFmpeg MOV/MP4 demuxer |
 
-MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, Exiv2, libmp4tag, ireader libmov and VLC expose distinct package APIs and MP4 parsers. libmpv, OpenCV and AvCpp share FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4, AvCpp, libmp4tag and ireader/media-server have no Homebrew formula in the bounded name search; none has a comparable formula install-on-request count. libquicktime, libextractor, TagLib, OpenCV, Exiv2, AvCpp and libmp4tag came from targeted project documentation; OpenCV verified container properties without decoding a frame. Two leads remain unresolved: qtmultimedia returned no format-specific control result and minimp4 has no pinnable upstream release; 1 more verified path is needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, Exiv2, libmp4tag, ireader libmov and VLC expose distinct package APIs and MP4 parsers. libmpv, OpenCV, AvCpp and OpenShot share FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4, AvCpp, libmp4tag, ireader/media-server and OpenShot have no comparable Homebrew formula install-on-request count. libquicktime, libextractor, TagLib, OpenCV, Exiv2, AvCpp, libmp4tag and OpenShot came from targeted project documentation; OpenCV verified container properties without decoding a frame. Two leads remain unresolved: qtmultimedia returned no format-specific control result and minimp4 has no pinnable upstream release. The 20-path count does not prove a most-used top 20. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
 
 libmp4tag is a genuine published C parser release that passed the control, but it is unranked because its SourceForge downloads are not comparable to Homebrew formula install-on-request counts. The C++ path uses the same C parser.
 
@@ -37,3 +38,5 @@ The tagged Apache-2.0 `shiguredo/mp4-rs` 2026.3.0 release passed the local MP4 c
 libheif 1.23.7 passed the valid MP4 control through its published sequence API, reporting the video track and 2x2 resolution while ignoring audio. Its 91,937 Homebrew requested installs place it second within this cell, measuring broad formula use rather than MP4-specific use. The C and C++ paths share one native parser.
 
 MLT 7.42.0 passed the MP4 control through its avformat producer in both C and C++. Its 1,526 Homebrew requested installs are comparable within this cell, while its avformat plugin shares FFmpeg 9.0.2 parsing. The C++ adapter uses MLT++ from the same release.
+
+OpenShot/libopenshot 1.1.1 passed the valid MP4 control through its C++ FFmpegReader API, reporting one H.264 video stream, one AAC audio stream and 2x2 dimensions. Its tagged libopenshot-audio 1.0.2 dependency is source pinned. The adapter shares FFmpeg demuxing. The project's 1,590 GitHub stars are auxiliary; no comparable Homebrew formula count exists, so OpenShot remains unranked.
