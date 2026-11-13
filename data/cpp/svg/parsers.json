@@ -361,5 +361,32 @@
     "scope": "parsed SVG dimensions and rendered red/green RGBA pixels",
     "family": "GdkPixbuf loader API with librsvg SVG plugin",
     "family_note": "The installed GdkPixbuf SVG loader module comes from librsvg 2.63.4, which is separately counted. This is a distinct package input API over the same librsvg SVG syntax engine."
+  },
+  {
+    "name": "qtbase",
+    "version": "6.12.0",
+    "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtbase-everywhere-src-6.12.0.tar.xz",
+    "documentation": "https://doc.qt.io/qt-6/qimagereader.html",
+    "input_api": "QImageReader(QString local SVG filename, \"svg\"); read() to QImage; pixelColor",
+    "adapter": "adapters/cpp/svg/qtbase.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "QtBase QImageReader with QtSvg image plugin",
+    "family_note": "QtBase provides the generic image input API; the hash-pinned QtSvg plugin and framework perform SVG syntax parsing. This shares the QtSvg engine with the separately verified QSvgRenderer package path."
   }
 ]

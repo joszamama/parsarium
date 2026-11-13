@@ -353,5 +353,38 @@
       }
     ],
     "build_note": "Pinned official release source and Homebrew native library/header hashes. The pinned SVG loader module and librsvg core are hash-pinned; GdkPixbuf delegates SVG parsing to librsvg."
+  },
+  "qtbase": {
+    "release": "6.12.0",
+    "installed_revision": "6.12.0_2",
+    "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+    "source_url": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtbase-everywhere-src-6.12.0.tar.xz",
+    "source_sha256": "a951bd163c7b80fc6b8c88d7668fb56abf91c152373e13c10666763238131307",
+    "repository": "https://code.qt.io/cgit/qt/qtbase.git/",
+    "source_header_member": "qtbase-everywhere-src-6.12.0/src/gui/image/qimagereader.h",
+    "local_header": "/opt/homebrew/Cellar/qtbase/6.12.0_2/lib/QtGui.framework/Versions/A/Headers/qimagereader.h",
+    "local_header_sha256": "b64f01268c70613aacdd4f3115fe75154028843ddd0a3dfc807873de794ffa2d",
+    "local_library": "/opt/homebrew/Cellar/qtbase/6.12.0_2/lib/QtGui.framework/Versions/A/QtGui",
+    "local_library_sha256": "0eb2e155c4c4ac02231e4a2adf0dfaa0dff39f8a49f86d0c097b1509735729a2",
+    "pkg_config": "Qt6Gui",
+    "license_member": "qtbase-everywhere-src-6.12.0/LICENSES/LGPL-3.0-only.txt",
+    "license_sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+    "installed_dependencies": [
+      {
+        "formula": "qtsvg",
+        "revision": "6.12.0_1",
+        "path": "/opt/homebrew/Cellar/qtsvg/6.12.0_1/share/qt/plugins/imageformats/libqsvg.dylib",
+        "sha256": "9d0dce63eeb63fdd952d351d8ddc169649fbd65de8648390c8e73d126afcfdb1",
+        "role": "SVG image reader plugin"
+      },
+      {
+        "formula": "qtsvg",
+        "revision": "6.12.0_1",
+        "path": "/opt/homebrew/Cellar/qtsvg/6.12.0_1/lib/QtSvg.framework/Versions/A/QtSvg",
+        "sha256": "303b0e86d60603bf5c8d53413715bd4c0b85cb32f0ae81361274cf15931bfc57",
+        "role": "shared QtSvg syntax parser and renderer"
+      }
+    ],
+    "build_note": "Official QtBase 6.12.0 source and Homebrew 6.12.0_2 install pinned. Framework QImageReader header matches source; QtGui binary, QtSvg image plugin, and QtSvg framework are SHA-256 checked."
   }
 }
