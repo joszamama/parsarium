@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T09:58:13.473468+00:00",
+  "checked_at_utc": "2026-11-13T10:45:54.691110+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/svg/source-lock.json",
@@ -67,6 +67,11 @@
     "nanosvg": {
       "source_sha256": "259f5236843a2245fdfd92fddffcaf292ac1f46d24f94f38fa3a9b690501e7d2",
       "local_header_sha256": "b0057538cd65b6d8a37a2ef7f5aa3905a14f82964b741534ca61bf20054dcc31"
+    },
+    "mupdf": {
+      "source_sha256": "dc85000640a45d90ca9b77b061f6ca67cce0c4d4fbecf8819647baf573eef101",
+      "local_header_sha256": "3c851e3727717bd651128371da8e5e4276334159cfa59aa4f7a633467bedeb7b",
+      "local_library_sha256": "085b2f375bdf1f933067fff886727d263cc79e74d6acf7114e5fbb415f55ef5b"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -336,6 +341,28 @@
       },
       "pass": true,
       "source_build_command": "tar -xzf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/nanosvg-2023-12-29.tar.gz -C /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg"
+    },
+    {
+      "package": "mupdf",
+      "version": "1.28.6",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/mupdf/1.28.6/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/mupdf.c -L/opt/homebrew/Cellar/mupdf/1.28.6/lib -lmupdf -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/mupdf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/mupdf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
     }
   ],
   "runtime": []

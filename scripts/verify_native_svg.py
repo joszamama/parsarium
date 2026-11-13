@@ -126,7 +126,7 @@ def verify(ecosystem: str) -> None:
             assert source["installed_revision"] in run(["brew", "list", "--versions", formula]).split()
             if name == "wxwidgets":
                 assert run(["wx-config", "--version"]) == source["release"]
-            else:
+            elif source.get("pkg_config"):
                 assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
             header = Path(source["local_header"])
             library = Path(source["local_library"])
@@ -148,6 +148,10 @@ def verify(ecosystem: str) -> None:
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(header.parent), str(ROOT / parser["adapter"]),
                        "-lm", "-o", str(target / name)]
+        elif name == "mupdf":
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(header.parent.parent), str(ROOT / parser["adapter"]),
+                       "-L" + str(library.parent), "-lmupdf", "-o", str(target / name)]
         elif name == "novasvg":
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(header.parent.parent), str(ROOT / parser["adapter"]),

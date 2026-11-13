@@ -326,5 +326,32 @@
     "scope": "SVG root dimensions and two parsed rectangle shapes with paths",
     "family": "NanoSVG native SVG parser",
     "family_note": "SDL3_image embeds NanoSVG; this direct C API is a distinct package path over the same parser family. Upstream has no tagged release; vcpkg publishes version-date 2023-12-29 pinned to the exact upstream commit."
+  },
+  {
+    "name": "mupdf",
+    "version": "1.28.6",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://mupdf.com/downloads/archive/mupdf-1.28.6-source.tar.gz (COPYING)",
+    "documentation": "https://github.com/ArtifexSoftware/mupdf/blob/master/include/mupdf/fitz/document.h",
+    "input_api": "fz_open_document(local SVG filename); fz_load_page; fz_new_pixmap_from_page",
+    "adapter": "adapters/c/svg/mupdf.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "SVG dimensions and two rendered RGB pixels",
+    "family": "MuPDF native SVG document parser and renderer",
+    "family_note": "Same MuPDF package also has a separate PDF cell path; this SVG path uses the native source/svg parser."
   }
 ]

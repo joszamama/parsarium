@@ -324,5 +324,29 @@
     "license_member": "nanosvg-93ce879dc4c04a3ef1758428ec80083c38610b1f/LICENSE.txt",
     "license_sha256": "e82bc3dd03400aecabe12201219ba14750dbc4b36faab58663a7a6068548d372",
     "build_note": "Use the published vcpkg version-date and exact upstream source commit; compile the source header with NANOSVG_IMPLEMENTATION as C11. No prebuilt binary."
+  },
+  "mupdf": {
+    "release": "1.28.6",
+    "installed_revision": "1.28.6",
+    "license": "AGPL-3.0-or-later",
+    "source_url": "https://mupdf.com/downloads/archive/mupdf-1.28.6-source.tar.gz",
+    "source_sha256": "dc85000640a45d90ca9b77b061f6ca67cce0c4d4fbecf8819647baf573eef101",
+    "repository": "https://git.ghostscript.com/mupdf.git",
+    "source_header_member": "mupdf-1.28.6-source/include/mupdf/fitz.h",
+    "local_header": "/opt/homebrew/Cellar/mupdf/1.28.6/include/mupdf/fitz.h",
+    "local_header_sha256": "3c851e3727717bd651128371da8e5e4276334159cfa59aa4f7a633467bedeb7b",
+    "local_library": "/opt/homebrew/Cellar/mupdf/1.28.6/lib/libmupdf.dylib",
+    "local_library_sha256": "085b2f375bdf1f933067fff886727d263cc79e74d6acf7114e5fbb415f55ef5b",
+    "license_member": "mupdf-1.28.6-source/COPYING",
+    "license_sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6",
+    "source_engine_member": "mupdf-1.28.6-source/source/svg/svg-doc.c",
+    "source_engine_sha256": "500c82634b04a96166e781b591cfc2cd34a6b03f1527de85c231caed85cd23ad",
+    "source_engine_members": [
+      {
+        "member": "mupdf-1.28.6-source/source/svg/svg-parse.c",
+        "sha256": "9d2ac6d8301ea49cd2b3abe1b79aa563f8b62510d41d92a7cc408ba29a19af72"
+      }
+    ],
+    "build_note": "Pinned MuPDF source and installed native library; exact public header, SVG parser sources, license and library hashes verified. No pkg-config file; direct local link flags used."
   }
 }
