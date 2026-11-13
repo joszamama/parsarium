@@ -1,6 +1,6 @@
 # C++ × ASCII PLY: verified parser ranking
 
-18 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
+19 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -22,6 +22,7 @@
 | unranked | [AssetKit](https://github.com/recp/AssetKit/blob/v0.7.4/samples/read_meshes.c) | 0.7.4 | unknown | mesh vertices and parsed face indices | AssetKit native ASCII PLY importer |
 | unranked | [rplycpp](https://github.com/manlito/rplycpp/blob/v1.1.0/README.md) | 1.1.0 | unknown | three vertices and a triangle face with indices | rplycpp over bundled RPly |
 | unranked | [Easy3D](https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/easy3d/fileio/surface_mesh_io.h) | 2.6.1 | unknown | three vertices and one triangle face with indices | Easy3D over bundled RPly 1.1.4 |
+| unranked | [libpointmatcher](https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/pointmatcher/IO.h) | 1.4.4 | unknown | three point vertices and coordinate sums | native libpointmatcher PLY parser |
 
 Assimp C and C++ APIs share one native loader. libigl exposes its own matrix API but bundles tinyply 2.3.2, while standalone tinyply is pinned at 3.0. Geometry Central wraps a pinned hapPLY submodule. TriMesh2 uses its native PLY reader and is a fork of Szymon Rusinkiewicz’s original TriMesh2. VCGlib ImporterPLY uses its bundled plylib implementation. PCL and VTK use separate PLY readers; VTK bundles vtkPLY. Formula-name hits are leads rather than parser proof. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -32,3 +33,5 @@ rplycpp v1.1.0 parsed the valid ASCII triangle through its documented local-file
 Geogram v1.10.1 parsed the triangle through `mesh_load`; its PLY handler uses bundled RPly 1.1.4. Its 97 Homebrew requested installs over the same 365-day window place it between PCL and OpenMesh in the recorded metric.
 
 Easy3D v2.6.1 parsed the control through its `SurfaceMeshIO::load` mesh API. Its PLY implementation wraps bundled RPly 1.1.4; a comparable Homebrew requested-install count is unavailable.
+
+libpointmatcher 1.4.4 parsed the three point vertices through its native PLY implementation and returned coordinate sums. Its point-cloud API does not return the control’s face. It has no comparable Homebrew requested-install count.

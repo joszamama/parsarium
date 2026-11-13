@@ -361,5 +361,52 @@
       "Easy3D-2.6.1/LICENSE": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
     },
     "build_note": "Official v2.6.1 tagged source archive and selected build, public API, PLY loader, bundled RPly, and GPL license members SHA-256 pinned. CMake builds only easy3d_fileio and dependencies with tutorials/tests/Qt/CGAL/Python disabled. The adapter suppresses library info logging and reports mesh vertex and face indices."
+  },
+  "libpointmatcher": {
+    "release": "1.4.4",
+    "tag": "1.4.4",
+    "source_build": "libpointmatcher",
+    "license": "BSD-3-Clause",
+    "source_url": "https://github.com/norlab-ulaval/libpointmatcher/archive/refs/tags/1.4.4.tar.gz",
+    "source_sha256": "87258fce8638979f4a6568895045f363ceb754ae63686f757d4d922b155b2e70",
+    "header_member": "libpointmatcher-1.4.4/pointmatcher/IO.h",
+    "source_members": {
+      "libpointmatcher-1.4.4/CMakeLists.txt": "bedf6ba98e903eb78ef09ffcfd935e79e845302074855eaa518edef668b8e4f5",
+      "libpointmatcher-1.4.4/pointmatcher/IO.h": "614c89eaec6a8facd263e7c0c4df8a8f42fc9ac8acb457cfe907165d5b672626",
+      "libpointmatcher-1.4.4/pointmatcher/IO.cpp": "fd32309e62a9004f849eeef47131ec3bef840e61061b318d70e3ea962bddd0de",
+      "libpointmatcher-1.4.4/pointmatcher/PointMatcher.h": "45585a28f6fe09b6f60e120eebe8e10e83252c3dfcedf0fd6d5f7e63b7ca43f3",
+      "libpointmatcher-1.4.4/LICENSE": "30355ce0c016872099514e74a20e3348b30fc44c74cd8fc26db3dcf6f1bbae00",
+      "libpointmatcher-1.4.4/README.md": "7d2b10337443288ed667c9cc2f310a48ba5a29d11da3cf420ed428a9b43050c3"
+    },
+    "dependencies": {
+      "eigen": {
+        "release": "3.4.0",
+        "archive_root": "eigen-3.4.0",
+        "source_url": "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz",
+        "source_sha256": "8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72",
+        "source_members": {
+          "eigen-3.4.0/Eigen/Core": "b8ae5f77a30d48bcaf622a56f7047baa8b2fb790f5db7361aa1d57f424fa3c1e",
+          "eigen-3.4.0/COPYING.MPL2": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+        }
+      },
+      "libnabo": {
+        "release": "1.1.2",
+        "archive_root": "libnabo-1.1.2",
+        "source_url": "https://github.com/norlab-ulaval/libnabo/archive/refs/tags/1.1.2.tar.gz",
+        "source_sha256": "6910baea4fec3c85814944eb5d06e3b23ede54deef5ffca4504724d8684362d8",
+        "source_members": {
+          "libnabo-1.1.2/CMakeLists.txt": "ce836b525932b45b62b0a769ae1d60916072376de55523f04c4891b48a58df64",
+          "libnabo-1.1.2/nabo/nabo.h": "116245ee8653edd205f2b01335a187ae9d01987be5eadfcdb014dc261ca2de86",
+          "libnabo-1.1.2/LICENSE": "edc1c94a29d6abdd32c499404397f86a9cb78dc22441023c99cacc424391c005"
+        }
+      }
+    },
+    "toolchain_files": {
+      "/opt/homebrew/opt/yaml-cpp/include/yaml-cpp/yaml.h": "739f93fadb222a39a99e463c028d65d36c74d326f7349431853d1749605060a0",
+      "/opt/homebrew/opt/yaml-cpp/lib/libyaml-cpp.0.9.0.dylib": "7521cab0d780ff7be606c0b47c8337c102be9e9cc29d8fd394d0e7035002afbb",
+      "/opt/homebrew/opt/boost/include/boost/lexical_cast.hpp": "68fdd863ddde0646c9088d75c4df50a63903ef936411fe7e7bb9b1dfd1482438",
+      "/opt/homebrew/opt/boost/lib/libboost_thread.dylib": "79869db0e8634cba7d3b18a5f275ae199c2a9df39781dc080c3d321eda545c0d"
+    },
+    "build_note": "Official libpointmatcher 1.4.4 BSD-3 tagged source and native PLY reader are SHA-256 pinned. Build against tagged libnabo 1.1.2, Eigen 3.4.0 (needed for the release C++11 build), and checked Homebrew Boost 1.92.0 and yaml-cpp 0.9.0. Disable examples/evaluations/tests/Python; link static core and dependencies. The adapter calls the documented local-file PLY API and reports point coordinate sums."
   }
 }

@@ -202,6 +202,53 @@ def verify(ecosystem: str) -> None:
                      "-DEasy3D_ENABLE_CGAL=OFF", "-DEasy3D_BUILD_PYTHON_BINDINGS=OFF"])
                 run(["cmake", "--build", str(build_dir), "--target", "easy3d_fileio",
                      "--parallel", "8"], timeout=600)
+            if source.get("source_build") == "libpointmatcher":
+                include_dir = cache / f"libpointmatcher-{source['release']}"
+                if not (include_dir / "pointmatcher/IO.h").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"libpointmatcher-{source['release']}" or member.name.startswith(f"libpointmatcher-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+                for dep_name in ("eigen", "libnabo"):
+                    dep = source["dependencies"][dep_name]
+                    dep_archive = cache / f"{dep_name}-{dep['release']}.tar.gz"
+                    if not dep_archive.exists() or digest(dep_archive) != dep["source_sha256"]:
+                        with urlopen(Request(dep["source_url"], headers={"User-Agent": "Parsarium ASCII PLY verifier"}), timeout=120) as response, dep_archive.open("wb") as output:
+                            while chunk := response.read(1024 * 1024):
+                                output.write(chunk)
+                    assert digest(dep_archive) == dep["source_sha256"]
+                    dep_dir = cache / dep["archive_root"]
+                    with tarfile.open(dep_archive) as dep_tar:
+                        if not dep_dir.exists():
+                            for member in dep_tar.getmembers():
+                                member_path = Path(member.name)
+                                assert not member_path.is_absolute() and ".." not in member_path.parts
+                                assert member.name == dep["archive_root"] or member.name.startswith(dep["archive_root"] + "/")
+                            dep_tar.extractall(cache, filter="data")
+                    for member, expected in dep["source_members"].items():
+                        assert digest(cache / member) == expected
+                eigen_dir = cache / source["dependencies"]["eigen"]["archive_root"]
+                nabo_dir = cache / source["dependencies"]["libnabo"]["archive_root"]
+                nabo_build = cache / "libnabo-1.1.2-build"
+                nabo_install = cache / "libnabo-1.1.2-install"
+                run(["cmake", "-S", str(nabo_dir), "-B", str(nabo_build),
+                     "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX=" + str(nabo_install),
+                     "-DEIGEN_INCLUDE_DIR=" + str(eigen_dir),
+                     "-DLIBNABO_BUILD_DOXYGEN=OFF", "-DLIBNABO_BUILD_EXAMPLES=OFF",
+                     "-DLIBNABO_BUILD_TESTS=OFF", "-DLIBNABO_BUILD_PYTHON=OFF"])
+                run(["cmake", "--build", str(nabo_build), "--parallel", "8"], timeout=600)
+                run(["cmake", "--install", str(nabo_build)])
+                build_dir = cache / "libpointmatcher-1.4.4-build"
+                run(["cmake", "-S", str(include_dir), "-B", str(build_dir),
+                     "-DCMAKE_BUILD_TYPE=Release", "-DEIGEN_INCLUDE_DIR=" + str(eigen_dir),
+                     "-DCMAKE_PREFIX_PATH=" + str(nabo_install),
+                     "-DBUILD_EXAMPLES=OFF", "-DBUILD_EVALUATIONS=OFF",
+                     "-DBUILD_TESTS=OFF", "-DBUILD_PYTHON_MODULE=OFF"])
+                run(["cmake", "--build", str(build_dir), "--target", "pointmatcher",
+                     "--parallel", "8"], timeout=900)
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -322,6 +369,17 @@ def verify(ecosystem: str) -> None:
                        "-Wl,-rpath," + str(build_dir / "lib"),
                        "-leasy3d_fileio", "-leasy3d_core", "-leasy3d_util",
                        "-o", str(target / name)]
+        elif source.get("source_build") == "libpointmatcher":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir), "-isystem", str(eigen_dir),
+                       "-isystem", "/opt/homebrew/opt/boost/include",
+                       "-isystem", "/opt/homebrew/opt/yaml-cpp/include",
+                       "-isystem", str(nabo_install / "include"),
+                       str(ROOT / parser["adapter"]), str(build_dir / "libpointmatcher.a"),
+                       str(nabo_install / "lib/libnabo.a"),
+                       "-L/opt/homebrew/opt/yaml-cpp/lib", "-L/opt/homebrew/opt/boost/lib",
+                       "-lyaml-cpp", "-lboost_thread", "-lboost_program_options",
+                       "-lboost_date_time", "-lboost_chrono", "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),

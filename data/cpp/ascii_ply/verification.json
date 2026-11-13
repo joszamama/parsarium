@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T08:45:00.217197+00:00",
+  "checked_at_utc": "2026-11-13T08:51:24.165907+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -129,6 +129,11 @@
       "source_sha256": "e5b5355d042d997d65958c44b80073d37b8c3972bacbb97913e824a8597d9671",
       "installed_files": {},
       "source_header_sha256": "4adca31e9a698acea15beaf59b4bb10adee564f2f4737fb9207ca96f71babf47"
+    },
+    "libpointmatcher": {
+      "source_sha256": "87258fce8638979f4a6568895045f363ceb754ae63686f757d4d922b155b2e70",
+      "installed_files": {},
+      "source_header_sha256": "614c89eaec6a8facd263e7c0c4df8a8f42fc9ac8acb457cfe907165d5b672626"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -424,6 +429,20 @@
           1,
           2
         ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libpointmatcher",
+      "version": "1.4.4",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/libpointmatcher-1.4.4 -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/eigen-3.4.0 -isystem /opt/homebrew/opt/boost/include -isystem /opt/homebrew/opt/yaml-cpp/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/libnabo-1.1.2-install/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/libpointmatcher.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/libpointmatcher-1.4.4-build/libpointmatcher.a /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/libnabo-1.1.2-install/lib/libnabo.a -L/opt/homebrew/opt/yaml-cpp/lib -L/opt/homebrew/opt/boost/lib -lyaml-cpp -lboost_thread -lboost_program_options -lboost_date_time -lboost_chrono -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/libpointmatcher",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/libpointmatcher /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "points": 3,
+        "x_sum": 1,
+        "y_sum": 1,
+        "z_sum": 0
       },
       "pass": true
     }

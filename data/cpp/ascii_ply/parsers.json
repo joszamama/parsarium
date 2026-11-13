@@ -381,5 +381,24 @@
     "scope": "three mesh vertices and one triangle face with indices from ASCII PLY",
     "family": "Easy3D PLY reader over bundled RPly 1.1.4",
     "family_note": "Easy3D SurfaceMeshIO and PlyReaderWriter use bundled RPly 1.1.4. It exposes a distinct SurfaceMesh API but shares the underlying RPly parser family with RPly, rplycpp, and Geogram."
+  },
+  {
+    "name": "libpointmatcher",
+    "version": "1.4.4",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/LICENSE",
+    "documentation": "https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/pointmatcher/IO.h",
+    "input_api": "PointMatcherIO<double>::loadPLY(local filename); DataPoints::features",
+    "adapter": "adapters/cpp/ascii_ply/libpointmatcher.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "points": 3,
+      "x_sum": 1,
+      "y_sum": 1,
+      "z_sum": 0
+    },
+    "scope": "three parsed point-cloud vertices with x/y/z coordinate sums from ASCII PLY",
+    "family": "libpointmatcher native PLY point-cloud parser",
+    "family_note": "Its pointmatcher/IO.cpp implements ASCII PLY parsing directly and does not delegate to RPly; it ignores the mesh face because the API returns point-cloud DataPoints."
   }
 ]
