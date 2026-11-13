@@ -376,5 +376,30 @@
       }
     ],
     "build_note": "Pinned MuPDF source and installed native library; exact public header, SVG parser sources, license and library hashes verified. No pkg-config file; direct local link flags used."
+  },
+  "gtk4": {
+    "release": "4.24.1",
+    "installed_revision": "4.24.1",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://download.gnome.org/sources/gtk/4.24/gtk-4.24.1.tar.xz",
+    "source_sha256": "e98abe720e16129c8c0f50761dee0a2e9ae2478055e31018f6cf977fcf6513e9",
+    "repository": "https://gitlab.gnome.org/GNOME/gtk",
+    "source_header_member": "gtk-4.24.1/gtk/svg/gtksvg.h",
+    "local_header": "/opt/homebrew/Cellar/gtk4/4.24.1/include/gtk-4.0/gtk/svg/gtksvg.h",
+    "local_header_sha256": "b10a2b3b36186cd41a4765f64b312de80f2c76f9bc70318f3b6ba8fe74400280",
+    "local_library": "/opt/homebrew/Cellar/gtk4/4.24.1/lib/libgtk-4.1.dylib",
+    "local_library_sha256": "d5c9161e65f770a348d4f29bbfd619648727af926d14c10928b5d4feba02fb39",
+    "pkg_config": "gtk4",
+    "license_member": "gtk-4.24.1/COPYING",
+    "license_sha256": "b7993225104d90ddd8024fd838faf300bea5e83d91203eab98e29512acebd69c",
+    "source_engine_member": "gtk-4.24.1/gtk/svg/gtksvgparser.c",
+    "source_engine_sha256": "36595f02af8650a755e2b70c5ffffce26c436560c07da87ec629d833c1826512",
+    "source_engine_members": [
+      {
+        "member": "gtk-4.24.1/gtk/svg/gtksvg.c",
+        "sha256": "3cf0be0fa050c551382854f2111930cdf21f930c4e7d62573e1eb9f31a98ecf9"
+      }
+    ],
+    "build_note": "Official GTK 4.24.1 source archive, local GtkSvg header, native library, parser sources, and GPL-compatible LGPL license are SHA-256 checked. GTK 4 has its own SVG parser; this does not delegate to librsvg."
   }
 }

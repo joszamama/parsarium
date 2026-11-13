@@ -1,6 +1,6 @@
 # C × SVG: verified parser ranking
 
-15 verified third-party package paths; working goal 20, ceiling 30. Exact primary GitHub stars are compared only within this ecosystem. Stars measure broad project interest, not SVG-specific adoption. Homebrew name hits are discovery leads.
+16 verified third-party package paths; working goal 20, ceiling 30. Exact primary GitHub stars are compared only within this ecosystem. Stars measure broad project interest, not SVG-specific adoption. Homebrew name hits are discovery leads.
 
 | Rank | Package | Pinned release | Primary GitHub stars | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -19,5 +19,6 @@
 | unranked | [libsvgtiny](https://www.netsurf-browser.org/projects/libsvgtiny/) | 0.1.8 | unknown | SVG dimensions, two shapes and fill colors | libsvgtiny over libdom |
 | unranked | [libsvg](https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz) | 0.1.4 | unknown | SVG root dimensions | libsvg over libxml2 |
 | unranked | [libsvg-cairo](https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz) | 0.1.6 | unknown | SVG dimensions and two rendered pixels | libsvg parser with Cairo |
+| unranked | [GTK 4 GtkSvg](https://docs.gtk.org/gtk4/class.Svg.html) | 4.24.1 | unknown | parsed SVG intrinsic dimensions | GTK 4 native GtkSvg parser |
 
-MuPDF uses its native source/svg parser. Its GitHub mirror stars are excluded; Homebrew recorded 11,659 requested installs in the same 365-day window as an auxiliary adoption signal, not comparable to the primary stars. libvips and GdkPixbuf share librsvg; libsvg-cairo shares libsvg; SDL2_image and SDL3_image both embed NanoSVG and share one upstream project star count. They are separate released package ABIs, not independent SVG engines. Upstream NanoSVG has no tagged release, so its published vcpkg version-date pins the exact source commit. No recorded leads remain unresolved; 5 additional verified paths are needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.
+MuPDF uses its native source/svg parser. Its GitHub mirror stars are excluded; Homebrew recorded 11,659 requested installs in the same 365-day window as an auxiliary adoption signal, not comparable to the primary stars. GTK 4's native GtkSvg parser is separate from the librsvg plugin used by GdkPixbuf and has 20,414 Homebrew requested installs in that window, also auxiliary only. libvips and GdkPixbuf share librsvg; libsvg-cairo shares libsvg; SDL2_image and SDL3_image both embed NanoSVG and share one upstream project star count. They are separate released package ABIs, not independent SVG engines. Upstream NanoSVG has no tagged release, so its published vcpkg version-date pins the exact source commit. No recorded leads remain unresolved; 4 additional verified paths are needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.
