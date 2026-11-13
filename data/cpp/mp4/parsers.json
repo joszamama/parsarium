@@ -233,5 +233,22 @@
     "scope": "MP4 video dimensions, frame count and frame rate from FFmpeg-backed VideoCapture",
     "family": "OpenCV VideoCapture wrapper over FFmpeg MOV/MP4 demuxer",
     "family_note": "The pinned libopencv_videoio dylib links the pinned FFmpeg libavformat and libavcodec libraries; this is a distinct C++ package API over the FFmpeg parser family."
+  },
+  {
+    "name": "libmp4tag",
+    "version": "2.0.4",
+    "license": "Zlib",
+    "license_evidence": "https://sourceforge.net/projects/libmp4tag/ and LICENSE.txt in pinned source release",
+    "documentation": "https://libmp4tag.sourceforge.io/ (GettingTags and Initializing in pinned release wiki)",
+    "input_api": "mp4tag_open(local MP4 filename); mp4tag_parse; mp4tag_get_tag_by_name; mp4tag_duration",
+    "adapter": "adapters/cpp/mp4/libmp4tag.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "title": "Parsarium",
+      "duration_ms": 1128
+    },
+    "scope": "MP4 title metadata and 1128 ms duration",
+    "family": "libmp4tag native MP4 atom and tag parser",
+    "family_note": "C and C++ adapters call the same published C API and native parser."
   }
 ]

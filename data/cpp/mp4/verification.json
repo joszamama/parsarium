@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T10:14:24.095834+00:00",
+  "checked_at_utc": "2026-11-13T10:40:52.737874+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "a1b30328365c2cfcd3a09c6ebc91fd634514055a0e1e82dbdf136b0b9c7a042e",
-      "c_binding_library_sha256": "b3261ec7fe0102d49657c40f0d2110cfbeb6afee3a4e9f8e4f38a089dfcd7107"
+      "c_binding_library_sha256": "c519810c155dec2da5559cc1aeea1ac28e4faaa657c1192ac08d02e9302330b8"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -64,6 +64,11 @@
       "source_sha256": "638c1dae7e37e45afea21aa217dc667ad7cf57acc66cdf652c074f1e0e5ad6d2",
       "local_header_sha256": "bb063cb3e5ceef3f725397eadc65838a79299f9dc7a5070ccdf718043ecec9b6",
       "local_library_sha256": "0ed831ed8599eafb7935f9cce6d3294692caeb64571b80311595d919bf65c69a"
+    },
+    "libmp4tag": {
+      "source_sha256": "2b15f96474c5cd685b31b6714498fc5f2d5463b1348dc8cc7cc2cc584dfb3e54",
+      "generated_header_sha256": "aa439d8fe2272cefefb5dc74b068b6d3f0976929383d565914e9f239a106b6c7",
+      "local_library_sha256": "852618dde43a2ececa241c10bfa425f3f66cea406550691ae77d574baadb4b37"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -241,6 +246,18 @@
         "height": 2,
         "frames": 1,
         "fps": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "libmp4tag",
+      "version": "2.0.4",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libmp4tag-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/libmp4tag.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/libmp4tag-build/libmp4tag.a -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/libmp4tag",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/libmp4tag /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "title": "Parsarium",
+        "duration_ms": 1128
       },
       "pass": true
     }

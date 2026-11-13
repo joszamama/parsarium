@@ -1,6 +1,6 @@
 # C++ × MP4: verified parser ranking
 
-12 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
+13 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
 
 | Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -17,5 +17,8 @@
 
 | — | [bento4](https://github.com/axiomatic-systems/Bento4/blob/v1.6.0-641/Source/C%2B%2B/CApi/Bento4C.h) | 1.6.0-641 | unavailable | MP4 major brand, two audio/video tracks and one-second duration | Bento4 AP4 ISO BMFF core |
 | — | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | unavailable | MP4 title, video/audio tracks and one-second duration | VLC native MP4 demuxer plugin |
+| — | [libmp4tag](https://libmp4tag.sourceforge.io/) | 2.0.4 | unavailable | MP4 title and 1128 ms duration | libmp4tag native MP4 atom and tag parser |
 
-MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib and VLC expose distinct package APIs and MP4 parsers. libmpv and OpenCV share FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask and Bento4 has no Homebrew formula in the bounded name search; neither has a comparable formula install-on-request count. libquicktime, libextractor, TagLib and OpenCV came from targeted project documentation; OpenCV verified container properties without decoding a frame. One qtmultimedia lead remains unresolved after its installed macOS backend returned no format-specific control result; 8 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, libmp4tag and VLC expose distinct package APIs and MP4 parsers. libmpv and OpenCV share FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4 and libmp4tag have no Homebrew formula in the bounded name search; none has a comparable formula install-on-request count. libquicktime, libextractor, TagLib, OpenCV and libmp4tag came from targeted project documentation; OpenCV verified container properties without decoding a frame. One qtmultimedia lead remains unresolved after its installed macOS backend returned no format-specific control result; 7 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+
+libmp4tag is a genuine published C parser release that passed the control, but it is unranked because its SourceForge downloads are not comparable to Homebrew formula install-on-request counts. The C++ path uses the same C parser.

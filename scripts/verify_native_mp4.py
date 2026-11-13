@@ -52,6 +52,30 @@ def build_bento4(archive: Path, cache: Path, ecosystem: str) -> tuple[list[str],
     return flags, libs, hashes
 
 
+def build_libmp4tag(archive: Path, cache: Path) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build the pinned C library and generated public header from its release."""
+    source_dir = cache / "libmp4tag-2.0.4"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "libmp4tag-2.0.4" or member.name.startswith("libmp4tag-2.0.4/")
+                ):
+                    raise ValueError(f"unsafe libmp4tag archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    build_dir = cache / "libmp4tag-build"
+    run(["cmake", "-S", str(source_dir), "-B", str(build_dir),
+         "-DCMAKE_BUILD_TYPE=Release", "-DBUILD_SHARED_LIBS=OFF",
+         "-DCMAKE_INSTALL_PREFIX=" + str(cache / "libmp4tag-install")], timeout=300)
+    run(["cmake", "--build", str(build_dir), "--target", "libmp4tag", "-j4"], timeout=300)
+    library = build_dir / "libmp4tag.a"
+    header = build_dir / "libmp4tag.h"
+    return (["-I" + str(build_dir)], [str(library)],
+            {"generated_header_sha256": sha256(header.read_bytes()).hexdigest(),
+             "local_library_sha256": sha256(library.read_bytes()).hexdigest()})
+
+
 def verify(ecosystem: str) -> None:
     assert ecosystem in ("c", "cpp")
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
@@ -90,10 +114,12 @@ def verify(ecosystem: str) -> None:
                 member = tar.extractfile(engine["member"])
                 assert member is not None
                 assert sha256(member.read()).hexdigest() == engine["sha256"]
-        bento4_libraries = []
-        bento4_hashes = {}
+        built_libraries = []
+        built_hashes = {}
         if source.get("source_build") == "bento4":
-            flags, bento4_libraries, bento4_hashes = build_bento4(archive, cache, ecosystem)
+            flags, built_libraries, built_hashes = build_bento4(archive, cache, ecosystem)
+        elif source.get("source_build") == "libmp4tag":
+            flags, built_libraries, built_hashes = build_libmp4tag(archive, cache)
         elif source.get("header_only"):
             include_dir = cache / f"{name}-{source['release']}-include"
             include_dir.mkdir(exist_ok=True)
@@ -121,17 +147,17 @@ def verify(ecosystem: str) -> None:
             assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
         standard = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
-        if bento4_libraries and ecosystem == "c":
+        if source.get("source_build") == "bento4" and ecosystem == "c":
             object_path = target / "bento4.o"
             compile_command = ["cc", standard, "-O2", "-Wall", "-Wextra", "-Werror",
                                *flags, "-c", str(ROOT / parser["adapter"]), "-o", str(object_path)]
             run(compile_command)
-            command = ["c++", str(object_path), *bento4_libraries, "-o", str(target / name)]
+            command = ["c++", str(object_path), *built_libraries, "-o", str(target / name)]
             run(command)
             build_command = shlex.join(compile_command) + " && " + shlex.join(command)
         else:
             command = [compiler, standard, "-O2", "-Wall", "-Wextra", "-Werror",
-                       *flags, str(ROOT / parser["adapter"]), *bento4_libraries,
+                       *flags, str(ROOT / parser["adapter"]), *built_libraries,
                        "-o", str(target / name)]
             run(command)
             build_command = shlex.join(command)
@@ -144,8 +170,8 @@ def verify(ecosystem: str) -> None:
                      "command": shlex.join(["env", *(f"{key}={value}" for key, value in runtime_env.items()), *execute]) if runtime_env else shlex.join(execute),
                      "output": output, "pass": True})
         libraries[name] = {"source_sha256": source["source_sha256"]}
-        if bento4_libraries:
-            libraries[name].update(bento4_hashes)
+        if built_libraries:
+            libraries[name].update(built_hashes)
         elif source.get("header_only"):
             libraries[name]["source_header_sha256"] = source["source_header_sha256"]
         else:
