@@ -116,6 +116,10 @@ def main() -> None:
                        "-isystem", str(prefix / "include"), str(ROOT / parser["adapter"]),
                        "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
                        "-lginkgo", "-o", str(target / name)]
+        elif name == "viennacl":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", source["include_dir"], str(ROOT / parser["adapter"]),
+                       "-o", str(target / name)]
         elif name == "lis":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(install / "include"), str(ROOT / parser["adapter"]),

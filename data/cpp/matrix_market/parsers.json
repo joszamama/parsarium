@@ -106,8 +106,27 @@
       "rows": 3,
       "nnz": 3
     },
-    "scope": "3×3 symmetric Matrix Market matrix dimensions and three nonzeros",
+    "scope": "3\u00d73 symmetric Matrix Market matrix dimensions and three nonzeros",
     "family": "Lis native Matrix Market reader",
     "family_note": "Lis C and C++ call sites share one native lis_input_mm parser. Its matrix API requires a square matrix for this control."
+  },
+  {
+    "name": "viennacl",
+    "version": "1.7.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/viennacl/viennacl-dev/blob/release-1.7.1/LICENSE",
+    "documentation": "https://viennacl.sourceforge.net/doc/iterative_8cpp-example.html",
+    "input_api": "viennacl::io::read_matrix_market_file(sparse_matrix_adapter<double>&, local filename)",
+    "adapter": "adapters/cpp/matrix_market/viennacl.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3,
+      "entry_1_3": -2.0
+    },
+    "scope": "2x3 real coordinate matrix, three nonzeros, entry (1,3) = -2",
+    "family": "ViennaCL native Matrix Market text reader",
+    "family_note": "Header-only Matrix Market parser, using a std::vector of sparse row maps without a GPU runtime."
   }
 ]

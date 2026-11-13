@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T04:18:27.930393+00:00",
+  "checked_at_utc": "2026-11-13T07:33:57.270158+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -40,7 +40,14 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "219da14eb5e798b13909d4b86648af3fb992c9958c90d4fc4cf6e92b31d6ee72"
+      "built_lib_sha256": "6cb0f0891bebfab7ca82e4997f6db2b80aaea033e532f883503dffe02c024264"
+    },
+    "viennacl": {
+      "source_sha256": "dddb8d406b21de454ae7b960a49e9f58dab49bec578574213bcaf879f3172df2",
+      "installed_files": {
+        "/opt/homebrew/Cellar/viennacl/1.7.1_1/include/viennacl/io/matrix_market.hpp": "6097449f65d30f7b31a86b8b1ef09034bceeef43c5f674b4fe3ced0763632dfb",
+        "/opt/homebrew/Cellar/viennacl/1.7.1_1/include/viennacl/tools/adapter.hpp": "9d82e8c67ec98293fdcddb5e6775f7067dbafc35408a8814fd850f06e4a987bf"
+      }
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -127,6 +134,20 @@
       "output": {
         "rows": 3,
         "nnz": 3
+      },
+      "pass": true
+    },
+    {
+      "package": "viennacl",
+      "version": "1.7.1",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/viennacl/1.7.1_1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/viennacl.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/viennacl",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/viennacl /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3,
+        "entry_1_3": -2
       },
       "pass": true
     }
