@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:59:43.679130+00:00",
+  "checked_at_utc": "2026-11-13T02:05:22.161257+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp3_id3v2/source-lock.json",
@@ -87,6 +87,11 @@
     "dr_libs": {
       "source_sha256": "6ac1dfce1fefd67eac604b685d2a3ab70d807a0b686a4b450284464f1ddba8fe",
       "source_header_sha256": "f5c8020eeebb79877184432efdd2651f24869f5bb8f379d45450fd0aed1ee915"
+    },
+    "vlc": {
+      "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
+      "local_header_sha256": "4d9527778caa18bc1b1fd5b4ea4daaff42f9f6a9f1133645b7b8eed593190ec2",
+      "local_library_sha256": "8108065eff0fea4130e7353a39c0f62cd6adb4a1b41a63b5f8f16c51d4ac9e2b"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -315,6 +320,19 @@
         "channels": 1,
         "decoded_frames": 1,
         "id3v2_bytes": 101
+      },
+      "pass": true
+    },
+    {
+      "package": "vlc",
+      "version": "3.0.24",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/vlc.c -isystem /Applications/VLC.app/Contents/MacOS/include -L/Applications/VLC.app/Contents/MacOS/lib -lvlc -Wl,-rpath,/Applications/VLC.app/Contents/MacOS/lib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/vlc",
+      "command": "env VLC_PLUGIN_PATH=/Applications/VLC.app/Contents/MacOS/plugins /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/vlc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "audio_tracks": 1,
+        "mp3_tracks": 1
       },
       "pass": true
     }

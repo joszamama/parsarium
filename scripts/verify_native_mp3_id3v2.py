@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 from urllib.request import Request, urlopen
 import json
+import os
 import platform
 import shlex
 import subprocess
@@ -17,8 +18,9 @@ CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
 CONTROL_SHA256 = "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad"
 
 
-def run(command: list[str], timeout: int = 180) -> str:
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=timeout)
+def run(command: list[str], timeout: int = 180, env: dict[str, str] | None = None) -> str:
+    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=timeout,
+                            env={**os.environ, **(env or {})})
     if result.returncode:
         raise RuntimeError(f"{shlex.join(command)}\n{result.stderr}")
     return result.stdout.strip()
@@ -68,7 +70,12 @@ def verify(ecosystem: str) -> None:
             (include_dir / "dr_mp3.h").write_bytes(header_bytes)
             flags = ["-I" + str(include_dir), "-lm"]
         else:
-            assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
+            if source.get("cask"):
+                assert source["installed_revision"] in run(["brew", "list", "--cask", "--versions", source["cask"]]).split()
+                cask_archive = Path(run(["brew", "--cache", "--cask", source["cask"]]))
+                assert sha256(cask_archive.read_bytes()).hexdigest() == source["cask_sha256"]
+            else:
+                assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             if source.get("pkg_config"):
                 assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
             header = Path(source["local_header"])
@@ -79,6 +86,7 @@ def verify(ecosystem: str) -> None:
                 flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             else:
                 flags = ["-isystem", source["include_dir"], "-L" + str(library.parent), "-l" + source["link_name"]]
+            flags.extend(source.get("extra_linker_flags", []))
         for dependency in source.get("installed_dependencies", []):
             assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
@@ -87,10 +95,12 @@ def verify(ecosystem: str) -> None:
                    str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
         run(command)
         execute = [str(target / name), str(CONTROL)]
-        output = json.loads(run(execute))
+        runtime_env = source.get("runtime_env", {})
+        output = json.loads(run(execute, env=runtime_env))
         assert output == parser["expected_output"], (name, output)
         rows.append({"package": name, "version": parser["version"], "control": parser["control"],
-                     "build_command": shlex.join(command), "command": shlex.join(execute),
+                     "build_command": shlex.join(command),
+                     "command": shlex.join(["env", *(f"{key}={value}" for key, value in runtime_env.items()), *execute]) if runtime_env else shlex.join(execute),
                      "output": output, "pass": True})
         libraries[name] = {"source_sha256": source["source_sha256"]}
         if source.get("header_only"):

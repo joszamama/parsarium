@@ -328,5 +328,23 @@
     "scope": "Tagged MP3 audio decode and raw ID3v2 tag recognition; does not decode ID3v2 text frames",
     "family": "dr_mp3 over minimp3",
     "family_note": "Standalone dr_libs release is a separate package path from miniaudio, but miniaudio embeds dr_mp3 and both derive MP3 decoding from minimp3. C and C++ adapters share this header."
+  },
+  {
+    "name": "vlc",
+    "version": "3.0.24",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://get.videolan.org/vlc/3.0.24/vlc-3.0.24.tar.xz",
+    "documentation": "https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html",
+    "input_api": "libvlc_media_new_path(instance, local filename); libvlc_media_parse_with_options; libvlc_media_get_meta; libvlc_media_tracks_get",
+    "adapter": "adapters/cpp/mp3_id3v2/vlc.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "audio_tracks": 1,
+      "mp3_tracks": 1
+    },
+    "scope": "ID3v2 title and recognized MP3 audio track from valid local tagged MP3",
+    "family": "VLC media parser with bundled TagLib and MPEG audio plugins",
+    "family_note": "VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC."
   }
 ]
