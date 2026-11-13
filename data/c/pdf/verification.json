@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T21:25:48Z",
+  "checked_at_utc": "2026-11-13T22:13:37.655277+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,7 +26,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "399ae8c80b97012cb61054940d2329a33f1ee4f2e6e84b45658c148332e3b41d",
+      "local_library_sha256": "fbc547af973cd8d2383f6a4ddded5c7df8ce8c4a831d2f1873c13d9d71c85d9b",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -41,7 +41,7 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "a9589fb25968dbab4c832f2d263188be469e42b53b76cb9e9e83c1886735bbb4",
+      "local_library_sha256": "381034236c2ee90465aa88ff6e291e598c60b42bd334fb83856ea38bdc02731e",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "imagemagick": {
@@ -102,8 +102,8 @@
     },
     "xreader": {
       "source_sha256": "aa3bb5adcee8a0358bba5d5d1344b7ea7741cf16f7de5bac79eadcce136c6a5b",
-      "source_commit": "d9bc03250a410e47a958dcb23f662539de562a91",
       "container_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+      "source_commit": "d9bc03250a410e47a958dcb23f662539de562a91",
       "build_dependency_package_sha256": {
         "build-essential": "71f6f12ced2b38f656befccf232599abbc9457ddced1b582e9ed3027773f7a5c",
         "meson": "854f70286df0fa259e9e6c2c18cdfeb41276dc3afa4356f2a2605439baf31d5f",
@@ -124,7 +124,22 @@
       "source_sha256": "0c78593829776569fe1e77e8d1e28670e4c3dbfcac1f9c283e54147410f6c07d",
       "source_commit": "f2684e7dcfd7eb8e965e87689eaf1a9bc48fc5f4",
       "cargo_lock_sha256": "5b01f2f1f77e5c51ee8098289bbb350df90d28e7080bd13fe1dbbff005c747ad",
+      "built_library_sha256": "65a1051f79591c030251a1475d9ce608e8b4a9a31cc4009497b58fcbf158e713",
       "header_sha256": "558a056684238a30c33b564e8a4eb7f3adcfa8cf635785515b56d47f200cbc4d"
+    },
+    "zathura-pdf-poppler": {
+      "source_sha256": "605d3f2c2e90efbc0434bb7206f013dc8ff99d8b679c6b519e13543777635bf1",
+      "host_source_sha256": "9efc4a92f8b2d03e5a1b80756d3ae4249d8d6efdb10e311795e8cdd8e35a9f87",
+      "container_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+      "apt_package_sha256": {
+        "gcc": "dde3a5ce12ecee04b40220d80335123f0070bb154f51b75338e08b69588318bb",
+        "pkg-config": "fc48f81f2836ebdd940fb5e62c12e134a2abb4f6be307bb48760c9b3553ce29a",
+        "libgirara-dev": "a0c788d1d54693d54a4678f61ed08cd693cd49c0bf77e460fd72f225db089ee3",
+        "libpoppler-glib-dev": "0f1b2f34af1645f6ddc6aadb81bdf74239852583d8f0fa2ce0394e61443477d4",
+        "libcairo2-dev": "d4c12e0a393c044550bd46624bf91759457fa2c4a67e50836178ba3b1c070cf5",
+        "libglib2.0-dev": "fa3bd5f9a0f6ff83a1ea60eccd679965f7fc594ddea1ebd0e7500f1abc594c2b",
+        "xz-utils": "ec24cc58464c981a31bbc55427815922a5af427e06f7f140ddc30e47357b8bb1"
+      }
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -274,7 +289,7 @@
       "version": "26.8.3.1",
       "control": "controls/pdf/two-page.pdf",
       "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/libreofficekit-26.8.3.1-include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/libreofficekit.c -ldl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-vs7eg710/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-vs7eg710/profile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-mi9e9frs/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-mi9e9frs/profile",
       "output": {
         "type": "drawing",
         "pages": 2
@@ -325,10 +340,7 @@
       },
       "pass": true,
       "command": "python3 scripts/verify_atril_c_pdf.py",
-      "build_command": "gcc -std=c11 -O2 -Wall -Wextra -Werror /src/adapters/c/pdf/atril.c -o /tmp/atril-pdf $(pkg-config --cflags --libs atril-document-1.5.0)",
-      "checked_at_utc": "2026-11-13T21:05:27Z",
-      "environment": "Ubuntu 26.04 linux/arm64 container at pinned image digest; Atril 1.28.2-1 and exact developer/runtime package versions; public header, libatrildocument and PDF backend SHA-256 pinned",
-      "underlying_family": "Atril PDF backend over Poppler GLib"
+      "build_command": "gcc -std=c11 -O2 -Wall -Wextra -Werror /src/adapters/c/pdf/atril.c -o /tmp/atril-pdf $(pkg-config --cflags --libs atril-document-1.5.0)"
     },
     {
       "package": "xreader",
@@ -339,9 +351,7 @@
       },
       "pass": true,
       "command": "python3 scripts/verify_xreader_c_pdf.py",
-      "checked_at_utc": "2026-11-13T21:18:08Z",
-      "environment": "Pinned Ubuntu 26.04 linux/arm64 container; official master.mint27 tag with version 4.6.10, source-built with exact direct build package versions and SHA-256 package hashes",
-      "underlying_family": "Xreader PDF backend over Poppler GLib"
+      "build_command": "meson setup /build /work/xreader-master.mint27 --prefix=/usr -Dps=false -Dtiff=false -Dxps=false -Dkeyring=false -Dgtk_unix_print=false -Dpreviewer=false -Dthumbnailer=false -Dhelp_files=false -Dintrospection=false -Denable_dbus=false && meson compile -C /build -j4 && meson install -C /build && gcc -std=c11 -O2 -Wall -Wextra -Werror /repo/adapters/c/pdf/xreader.c -o /tmp/xreader-pdf $(pkg-config --cflags --libs xreader-document-1.5)"
     },
     {
       "package": "rustpdf",
@@ -352,9 +362,23 @@
       },
       "pass": true,
       "command": "python3 scripts/verify_rustpdf_c_pdf.py",
-      "checked_at_utc": "2026-11-13T21:25:48Z",
-      "environment": "macOS arm64; rustc and cargo 1.99.1; official swift-v0.5.0 source; cargo build --release --locked of pdf-ffi; C adapter linked to source-built cdylib",
-      "underlying_family": "rustpdf Rust PDF parser via C ABI"
+      "build_command": "cargo build -p pdf-ffi --release --locked; cc -std=c11 -O2 -Wall -Wextra -Werror -Iinclude adapters/c/pdf/rustpdf.c -lpdf_ffi"
+    },
+    {
+      "package": "zathura-pdf-poppler",
+      "version": "2026.07.18",
+      "control": "controls/pdf/two-page.pdf",
+      "output": {
+        "pages": 2,
+        "has_parser_data": true
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_zathura_poppler_c_pdf.py",
+      "build_command": "cc -std=gnu2x -O2 -Wall -Wextra -Werror -I/pin -I/work/zathura-2026.07.18 -I/work/zathura-pdf-poppler-2026.07.18/zathura-pdf-poppler $(pkg-config --cflags girara poppler-glib cairo) /work/zathura-pdf-poppler-2026.07.18/zathura-pdf-poppler/document.c /repo/adapters/c/pdf/zathura_poppler.c $(pkg-config --libs girara poppler-glib cairo) -o /tmp/zathura-poppler-pdf",
+      "checked_at_utc": "2026-11-13T22:13:37.655277+00:00",
+      "environment": "Ubuntu 26.04 arm64 container; official plugin and matching host source archives; seven direct apt packages pinned by version and SHA-256",
+      "underlying_family": "Zathura PDF Poppler plugin over Poppler GLib",
+      "scope_limit": "Minimal host shim tests document_open; full viewer registration and rendering were not exercised."
     }
   ],
   "runtime": [

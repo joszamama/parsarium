@@ -312,5 +312,23 @@
     "scope": "parsed two-page PDF page count from local bytes",
     "family": "rustpdf Rust PDF parser via C ABI",
     "family_note": "MIT pdf-ffi 0.5.0 source-built cdylib exposes documented C byte input. Its pdf_page_count implementation calls pdf::render_page_count, which calls parser::PdfReader::parse. No other C PDF cell path uses this underlying Rust parser. The release tag is swift-v0.5.0 but the same tagged workspace includes the C ABI crate at version 0.5.0."
+  },
+  {
+    "name": "zathura-pdf-poppler",
+    "version": "2026.07.18",
+    "license": "Zlib",
+    "license_evidence": "Official 2026.07.18 source release LICENSE and SPDX headers",
+    "documentation": "https://pwmt.org/projects/zathura/plugins/development/",
+    "format_documentation": "https://pwmt.org/projects/zathura-pdf-poppler/",
+    "input_api": "pdf_document_open(zathura_document_t*) callback, called with a host document whose path resolves to the supplied local PDF; zathura_document_get_number_of_pages(document)",
+    "adapter": "adapters/c/pdf/zathura_poppler.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "pages": 2,
+      "has_parser_data": true
+    },
+    "scope": "Two-page PDF page count through released C plugin document-open callback",
+    "family": "Zathura PDF Poppler plugin over Poppler GLib",
+    "family_note": "The published plugin is a distinct Zlib-licensed C package path, but its PDF syntax engine is Poppler GLib, already represented separately. The adapter compiles the unmodified released document.c with matching pinned Zathura host headers and a minimal shim for the documented host accessors. It checks callback page count and parser data; full viewer registration and rendering are outside the verified scope."
   }
 ]

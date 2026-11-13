@@ -422,6 +422,15 @@
       "source_sha256": "0c78593829776569fe1e77e8d1e28670e4c3dbfcac1f9c283e54147410f6c07d",
       "source_commit": "f2684e7dcfd7eb8e965e87689eaf1a9bc48fc5f4",
       "license_evidence": "https://github.com/rustpdf/rustpdf/blob/swift-v0.5.0/LICENSE"
+    },
+    "zathura-pdf-poppler": {
+      "version": "2026.07.18",
+      "license": "Zlib",
+      "source_url": "https://pwmt.org/projects/zathura-pdf-poppler/download/zathura-pdf-poppler-2026.07.18.tar.xz",
+      "source_sha256": "605d3f2c2e90efbc0434bb7206f013dc8ff99d8b679c6b519e13543777635bf1",
+      "host_release": "2026.07.18",
+      "host_source_sha256": "9efc4a92f8b2d03e5a1b80756d3ae4249d8d6efdb10e311795e8cdd8e35a9f87",
+      "license_evidence": "https://pwmt.org/projects/zathura-pdf-poppler/download/"
     }
   },
   "targeted_documentation_leads": [
@@ -539,7 +548,7 @@
       "format_evidence": "https://pwmt.org/projects/zathura-pdf-poppler/",
       "input_api_evidence": "https://pwmt.org/projects/zathura/plugins/development/",
       "surface": "Official 2026.07.18 Zathura PDF Poppler plugin and plugin development documentation outside bounded Homebrew formula-name hits",
-      "disposition": "Unresolved: the C document_open callback belongs to the viewer-host plugin API; no independently runnable consumer adapter and valid-control parse is established. It would share Poppler GLib."
+      "disposition": "Verified released C document_open callback on a valid local two-page PDF with a minimal host shim; Poppler GLib provides syntax parsing. Homebrew tap requested-install metric recorded separately."
     }
   ],
   "auxiliary_project_interest_metric": {
@@ -759,6 +768,13 @@
       "rustpdf": {
         "install_on_request_365d": null,
         "note": "No matching Homebrew formula requested-install value for the rustpdf C ABI; Rust crate downloads are not substituted into C ranking."
+      },
+      "zathura-pdf-poppler": {
+        "install_on_request_365d": 504,
+        "formula": "homebrew-zathura/zathura/zathura-pdf-poppler",
+        "source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+        "observed_at_utc": "2026-11-13T22:08:15.327743+00:00",
+        "note": "Official Zathura tap formula-wide requested-install events, all versions; not PDF-specific or C callback use. Other taps are separate formulas and are not added to this count."
       }
     }
   }

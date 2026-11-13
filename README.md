@@ -2,7 +2,7 @@
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
-verified C × ZIP and ASCII PNM batches, a below-target C × Matrix Market batch,
+verified C × ZIP, PDF, and ASCII PNM batches, a below-target C × Matrix Market batch,
 verified C++ × PNG, ZIP, and WAV batches,
 and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
 C × SVG and MP4 and C/C++ × ASCII PLY batches, plus completed C++ × MP4, SVG and MP3 with ID3v2 batches,
@@ -23,14 +23,14 @@ PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verifie
 and PHP × SVG each have a verified 20-path batch.
 PHP × ASCII PLY has bounded searches and a runtime inventory, but zero verified
 parser paths so far. PHP × Matrix Market has one verified, unranked package path.
-There are 80 cells at the 20-parser target and eight below target; all 88
+There are 81 cells at the 20-parser target and seven below target; all 88
 cells now have recorded search or verification work. A zero does **not** mean
 no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,542 of 1,715 verified package paths have a recorded comparable cell metric;
+1,543 of 1,716 verified package paths have a recorded comparable cell metric;
 173 are unranked; 128 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -50,6 +50,7 @@ python3 scripts/verify_cpp_png.py
 python3 scripts/verify_cpp_http11.py
 brew install gnome-papers
 python3 scripts/verify_c_pdf.py
+python3 scripts/verify_zathura_poppler_c_pdf.py
 python3 scripts/verify_atril_c_pdf.py
 python3 scripts/verify_xreader_c_pdf.py
 python3 scripts/verify_rustpdf_c_pdf.py
@@ -216,14 +217,14 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C × PDF batch verifies **19/20 third-party package paths** from C call sites:
+The C × PDF batch verifies **20/20 third-party package paths** from C call sites:
 Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF,
 tspdf, ImageMagick, GraphicsMagick, libvips, pdf_oxide, LibreOfficeKit, Evince,
-unpdf's C ABI, GNOME Papers, Atril, Xreader, and rustpdf. The first twelve and
+unpdf's C ABI, GNOME Papers, Atril, Xreader, rustpdf, and Zathura PDF Poppler. The first twelve and
 unpdf return one parsed page from the valid local control. LibreOfficeKit,
-Evince, GNOME Papers, Atril, and Xreader load a separate valid two-page PDF and
+Evince, GNOME Papers, Atril, Xreader, and Zathura PDF Poppler load a separate valid two-page PDF and
 return two parts or pages; rustpdf parses that control from local bytes and
-returns two pages. Evince, GNOME Papers, Atril, and Xreader share Poppler's PDF
+returns two pages. Evince, GNOME Papers, Atril, Xreader, and Zathura PDF Poppler share Poppler's PDF
 engine; unpdf shares its Rust parser family.
 qpdf requires a C++ linker for its C interface; PDFio
 builds from pinned source. PDFium and Vanilla.PDF use
@@ -233,7 +234,9 @@ outside the third-party ranking. LibreOfficeKit's official distribution and C
 headers are hash pinned. unpdf's C ABI builds from a pinned crates.io release
 with its bundled Cargo.lock. Atril is verified in a pinned Ubuntu arm64
 container; Xreader is built there from its tagged source. rustpdf builds its
-C ABI from a locked Rust release. Ten of the nineteen paths have comparable Homebrew
+C ABI from a locked Rust release. The Zathura plugin's released C callback is
+verified with a minimal host shim in a pinned Ubuntu arm64 image. Eleven of the
+twenty paths have comparable Homebrew
 formula requested-install counts in the fixed 365-day window. LibreOffice's
 416,680 Homebrew cask install events are an auxiliary application-wide signal
 and do not enter the formula ranking. See the

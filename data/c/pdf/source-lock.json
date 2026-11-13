@@ -479,5 +479,57 @@
     "cargo_version": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
     "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
     "dependency_scope": "Official swift-v0.5.0 tag contains pdf-ffi 0.5.0 C ABI, MIT license, and Cargo.lock with transitive package versions/checksums. The verifier builds pdf-ffi from the pinned source with --locked using the recorded Rust toolchain and calls its documented local-byte pdf_page_count API."
+  },
+  "zathura-pdf-poppler": {
+    "release": "2026.07.18",
+    "license": "Zlib",
+    "license_evidence": "Publisher source release LICENSE and SPDX-License-Identifier: Zlib on document.c and plugin.h",
+    "source_url": "https://pwmt.org/projects/zathura-pdf-poppler/download/zathura-pdf-poppler-2026.07.18.tar.xz",
+    "source_sha256": "605d3f2c2e90efbc0434bb7206f013dc8ff99d8b679c6b519e13543777635bf1",
+    "source_members": {
+      "zathura-pdf-poppler-2026.07.18/LICENSE": "476110688dd7eb24aaca3bc1689840f5e1f00e1d70c3ea1fbdbd196bea212d86",
+      "zathura-pdf-poppler-2026.07.18/zathura-pdf-poppler/document.c": "f9a6e4df52dd5ce314660d97d42be0c1ed769c6b490bd8795eaca15a22abf742",
+      "zathura-pdf-poppler-2026.07.18/zathura-pdf-poppler/plugin.h": "cb5bffcef4e70e4a0e410eb188847e2c1de882949be443e0a18ead174412bbff",
+      "zathura-pdf-poppler-2026.07.18/zathura-pdf-poppler/plugin.c": "a67db24b1751dc2514aef51906c2e35f3a5b344c03d85b96773afbde5338bab5"
+    },
+    "host_source_url": "https://pwmt.org/projects/zathura/download/zathura-2026.07.18.tar.xz",
+    "host_source_sha256": "9efc4a92f8b2d03e5a1b80756d3ae4249d8d6efdb10e311795e8cdd8e35a9f87",
+    "host_source_members": {
+      "zathura-2026.07.18/zathura/document.h": "4cc7f8e69577bb7d535cc245ea2fb549eb1031b89243941784e09ce6b2292190",
+      "zathura-2026.07.18/zathura/plugin-api.h": "5614cb2362f126533fc6356af022601a25b9ee7a54185fd4ffd74121d4355d70",
+      "zathura-2026.07.18/zathura/types.h": "0a319aa5c42fcce2d7de0ac1b8e36eaf53cfc01abaaf275cadc81e4c40ff58bf",
+      "zathura-2026.07.18/zathura/version.h.in": "20d2edf444240df58535b2f8c477e62242411d5c08b2eb14c1fd6bf56f7b1225",
+      "zathura-2026.07.18/meson.build": "9c3961828447ed750247e7262fbc1ce33a4dc8022f5de5fbbc18b5da89ac98e9"
+    },
+    "host_version_macros": {
+      "ZVMAJOR": "2026",
+      "ZVMINOR": "07",
+      "ZVREV": "18",
+      "ZVFULL": "2026.07.18",
+      "ZVAPI": "8",
+      "ZVABI": "9"
+    },
+    "container_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+    "ubuntu_packages": {
+      "gcc": "4:15.2.0-5ubuntu1",
+      "pkg-config": "2.5.1-4",
+      "libgirara-dev": "2026.02.04-2",
+      "libpoppler-glib-dev": "26.01.0-2ubuntu0.3",
+      "libcairo2-dev": "1.18.4-3",
+      "libglib2.0-dev": "2.88.0-1ubuntu0.1",
+      "xz-utils": "5.8.3-1ubuntu0.1"
+    },
+    "apt_package_sha256": {
+      "gcc": "dde3a5ce12ecee04b40220d80335123f0070bb154f51b75338e08b69588318bb",
+      "pkg-config": "fc48f81f2836ebdd940fb5e62c12e134a2abb4f6be307bb48760c9b3553ce29a",
+      "libgirara-dev": "a0c788d1d54693d54a4678f61ed08cd693cd49c0bf77e460fd72f225db089ee3",
+      "libpoppler-glib-dev": "0f1b2f34af1645f6ddc6aadb81bdf74239852583d8f0fa2ce0394e61443477d4",
+      "libcairo2-dev": "d4c12e0a393c044550bd46624bf91759457fa2c4a67e50836178ba3b1c070cf5",
+      "libglib2.0-dev": "fa3bd5f9a0f6ff83a1ea60eccd679965f7fc594ddea1ebd0e7500f1abc594c2b",
+      "xz-utils": "ec24cc58464c981a31bbc55427815922a5af427e06f7f140ddc30e47357b8bb1"
+    },
+    "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "build_note": "The adapter compiles the unmodified released document.c with matching released Zathura headers. It supplies only the documented host accessors used by document_open; it does not claim to test the full viewer or plugin registration. The callback uses installed Poppler GLib to interpret PDF.",
+    "dependency_limit": "Seven direct Ubuntu build package versions and repository SHA-256 digests are pinned; transitive packages are resolved from Ubuntu 26.04 arm64 repositories and are not fully hash locked."
   }
 }
