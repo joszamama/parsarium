@@ -413,6 +413,15 @@
       "source_sha256": "aa3bb5adcee8a0358bba5d5d1344b7ea7741cf16f7de5bac79eadcce136c6a5b",
       "source_commit": "d9bc03250a410e47a958dcb23f662539de562a91",
       "license_evidence": "https://github.com/linuxmint/xreader/blob/master.mint27/README.md"
+    },
+    "rustpdf": {
+      "version": "0.5.0",
+      "tag": "swift-v0.5.0",
+      "license": "MIT",
+      "source_url": "https://codeload.github.com/rustpdf/rustpdf/tar.gz/refs/tags/swift-v0.5.0",
+      "source_sha256": "0c78593829776569fe1e77e8d1e28670e4c3dbfcac1f9c283e54147410f6c07d",
+      "source_commit": "f2684e7dcfd7eb8e965e87689eaf1a9bc48fc5f4",
+      "license_evidence": "https://github.com/rustpdf/rustpdf/blob/swift-v0.5.0/LICENSE"
     }
   },
   "targeted_documentation_leads": [
@@ -515,6 +524,14 @@
       "input_api_evidence": "https://github.com/linuxmint/xreader/blob/master.mint27/libdocument/ev-document-factory.h",
       "surface": "Official Linux Mint Xreader tagged source/document library, outside bounded Homebrew formula-name hits",
       "disposition": "Verified version 4.6.10 source-built C document library on valid local two-page PDF; shares Poppler parser family; no comparable Homebrew formula metric."
+    },
+    {
+      "name": "rustpdf",
+      "url": "https://github.com/rustpdf/rustpdf/releases/tag/swift-v0.5.0",
+      "format_evidence": "https://github.com/rustpdf/rustpdf/blob/swift-v0.5.0/crates/pdf/src/render.rs",
+      "input_api_evidence": "https://github.com/rustpdf/rustpdf/blob/swift-v0.5.0/include/pdf.h",
+      "surface": "Official tagged MIT Rust PDF core and C ABI outside bounded Homebrew formula-name hits",
+      "disposition": "Verified source-built C ABI on valid local two-page PDF; no comparable Homebrew formula metric."
     }
   ],
   "auxiliary_project_interest_metric": {
@@ -622,6 +639,12 @@
         "repository": "https://github.com/linuxmint/xreader",
         "observed_at_utc": "2026-11-13T21:18:08Z",
         "evidence_note": "Whole-project GitHub stars, auxiliary only; not PDF-specific use or a comparable Homebrew formula metric."
+      },
+      "rustpdf": {
+        "stars": 2,
+        "repository": "https://github.com/rustpdf/rustpdf",
+        "observed_at_utc": "2026-11-13T21:25:48Z",
+        "evidence_note": "Whole-project GitHub stars, auxiliary only; 2 stars do not establish broad C API or PDF adoption."
       }
     }
   },
@@ -724,6 +747,10 @@
       "xreader": {
         "install_on_request_365d": null,
         "note": "No matching Homebrew formula requested-install count for Xreader. Whole-project GitHub stars are auxiliary and are not mixed with Homebrew formula events."
+      },
+      "rustpdf": {
+        "install_on_request_365d": null,
+        "note": "No matching Homebrew formula requested-install value for the rustpdf C ABI; Rust crate downloads are not substituted into C ranking."
       }
     }
   }

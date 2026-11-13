@@ -296,5 +296,21 @@
     "scope": "PDF page count through source-built Xreader libdocument C API",
     "family": "Xreader PDF backend over Poppler GLib",
     "family_note": "Xreader is an Evince-derived package with its own source-built libdocument C API and PDF backend. Its tagged Meson build links poppler-glib for PDF; this is another package input path over the already counted Poppler syntax engine. No comparable Homebrew formula requested-install count exists for Xreader."
+  },
+  {
+    "name": "rustpdf",
+    "version": "0.5.0",
+    "license": "MIT",
+    "license_evidence": "Pinned swift-v0.5.0 LICENSE and workspace Cargo.toml MIT license",
+    "documentation": "https://github.com/rustpdf/rustpdf/blob/swift-v0.5.0/include/pdf.h",
+    "input_api": "pdf_page_count(const uint8_t *local bytes, uintptr_t len, uintptr_t *out_count); pdf_last_error_message()",
+    "adapter": "adapters/c/pdf/rustpdf.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "pages": 2
+    },
+    "scope": "parsed two-page PDF page count from local bytes",
+    "family": "rustpdf Rust PDF parser via C ABI",
+    "family_note": "MIT pdf-ffi 0.5.0 source-built cdylib exposes documented C byte input. Its pdf_page_count implementation calls pdf::render_page_count, which calls parser::PdfReader::parse. No other C PDF cell path uses this underlying Rust parser. The release tag is swift-v0.5.0 but the same tagged workspace includes the C ABI crate at version 0.5.0."
   }
 ]

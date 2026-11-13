@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T21:18:08Z",
+  "checked_at_utc": "2026-11-13T21:25:48Z",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -119,6 +119,12 @@
         "libsm-dev": "d79799de23eba5d5a11118b0e2a448c72e2ab86bb197fdfca4184e03e024f981",
         "libice-dev": "62ebc93639860a688bb38e8283e2ba1a0fc6e16a22353e85e0697d3d0a48404f"
       }
+    },
+    "rustpdf": {
+      "source_sha256": "0c78593829776569fe1e77e8d1e28670e4c3dbfcac1f9c283e54147410f6c07d",
+      "source_commit": "f2684e7dcfd7eb8e965e87689eaf1a9bc48fc5f4",
+      "cargo_lock_sha256": "5b01f2f1f77e5c51ee8098289bbb350df90d28e7080bd13fe1dbbff005c747ad",
+      "header_sha256": "558a056684238a30c33b564e8a4eb7f3adcfa8cf635785515b56d47f200cbc4d"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -336,6 +342,19 @@
       "checked_at_utc": "2026-11-13T21:18:08Z",
       "environment": "Pinned Ubuntu 26.04 linux/arm64 container; official master.mint27 tag with version 4.6.10, source-built with exact direct build package versions and SHA-256 package hashes",
       "underlying_family": "Xreader PDF backend over Poppler GLib"
+    },
+    {
+      "package": "rustpdf",
+      "version": "0.5.0",
+      "control": "controls/pdf/two-page.pdf",
+      "output": {
+        "pages": 2
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_rustpdf_c_pdf.py",
+      "checked_at_utc": "2026-11-13T21:25:48Z",
+      "environment": "macOS arm64; rustc and cargo 1.99.1; official swift-v0.5.0 source; cargo build --release --locked of pdf-ffi; C adapter linked to source-built cdylib",
+      "underlying_family": "rustpdf Rust PDF parser via C ABI"
     }
   ],
   "runtime": [
