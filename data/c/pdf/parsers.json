@@ -214,5 +214,21 @@
     "scope": "PDF imported as a two-page Draw document through C LibreOfficeKit",
     "family": "LibreOffice PDF import through LibreOfficeKit C ABI",
     "family_note": "The installed package bundles xpdfimport with Poppler markers; the exact PDF import execution path was not traced. It is a distinct open-source package API but independence from Poppler/PDFium syntax engines is unestablished."
+  },
+  {
+    "name": "evince",
+    "version": "48.4",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/evince/document/class.Document.html",
+    "input_api": "ev_init(); ev_document_factory_get_document_for_gfile(GFile from local path, ...); ev_document_get_n_pages()",
+    "adapter": "adapters/c/pdf/evince.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "pages": 2
+    },
+    "scope": "PDF page count through Evince libdocument C API",
+    "family": "Evince PDF backend over Poppler GLib",
+    "family_note": "Evince's public C libdocument factory loads the local PDF; the installed libpdfdocument backend directly links the Poppler GLib library already counted in this cell. This is a package path, not an independent PDF syntax engine."
   }
 ]

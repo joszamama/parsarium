@@ -75,6 +75,9 @@ def main() -> None:
             member = tar.extractfile(source["source_header_member"])
             assert member is not None
             assert sha256(member.read()).hexdigest() == source.get("source_header_sha256", source["local_header_sha256"])
+            for source_member, expected in source.get("source_members", {}).items():
+                member = tar.extractfile(source_member)
+                assert member is not None and sha256(member.read()).hexdigest() == expected
         if name == "pdfio":
             source_dir = CACHE / f"pdfio-{source['release']}"
             if not source_dir.exists():
@@ -135,6 +138,16 @@ def main() -> None:
             library = Path(source["local_library"])
             for dependency in source["installed_dependencies"]:
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
+        elif name == "evince":
+            assert source["installed_revision"] in run(["brew", "list", "--versions", "evince"]).split()
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            for dependency in source["installed_dependencies"]:
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
+            backend = next(Path(dependency["path"]) for dependency in source["installed_dependencies"]
+                           if dependency["role"] == "Evince PDF backend")
+            assert "libpoppler-glib.8.dylib" in run(["otool", "-L", str(backend)])
         elif name == "pdf_oxide":
             source_dir = CACHE / f"pdf_oxide-{source['release']}"
             if not source_dir.exists():
@@ -190,6 +203,9 @@ def main() -> None:
         elif name == "libvips":
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             command = [*base, adapter, *flags, "-o", str(TARGET / name)]
+        elif name == "evince":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+            command = [*base, adapter, *flags, "-o", str(TARGET / name)]
         elif name == "pdf_oxide":
             command = [*base, "-I" + str(source_dir / "include"), adapter, str(library),
                        "-Wl,-rpath," + str(library.parent), "-o", str(TARGET / name)]
@@ -202,7 +218,10 @@ def main() -> None:
         run(command)
         if extra_build is not None:
             run(extra_build)
-        execute = [str(TARGET / name), str(CONTROL)]
+        control_path = ROOT / parser["control"]
+        if "control_sha256" in source:
+            assert sha256(control_path.read_bytes()).hexdigest() == source["control_sha256"]
+        execute = [str(TARGET / name), str(control_path)]
         output = json.loads(run(execute))
         assert output == parser["expected_output"], (name, output)
         row = {"package": name, "version": parser["version"], "control": parser["control"],

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T16:17:23.301478+00:00",
+  "checked_at_utc": "2026-11-13T16:31:32.984933+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/pdf/source-lock.json",
@@ -26,7 +26,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "b1db0f8b34c7197aca222a40fba947cb7e95fcb16ce5ede9c2acc0548af2bde9",
+      "local_library_sha256": "382e479adccfa0d7214551c93bd3d3df4e76593927971cf657bd77ffadede94e",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -41,7 +41,7 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "fe1b1e42d61453c2a778028dd8306bf5fe26ae34e005f659b39ab186cbc9d6f5",
+      "local_library_sha256": "1cde69913b93f78df9f7b5515054c5aa195a8eaeefa9e58770f5ba7d5dafa7eb",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "imagemagick": {
@@ -76,6 +76,11 @@
         "LibreOfficeKitEnums.h": "a3847b35aa4c10fa40324f7e941200868854418b039cef4a81b53c457a5f0a52"
       },
       "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968"
+    },
+    "evince": {
+      "source_sha256": "f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668",
+      "local_library_sha256": "89f95473dd58ca147f75c69ece28b965f109b1c55744eefcde3022cc4afcf81d",
+      "local_header_sha256": "03b862635ec448d92d48facb86389994b4c436c77e8a94da6c7e9cb822bf0ae4"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -225,9 +230,20 @@
       "version": "26.8.3.1",
       "control": "controls/pdf/two-page.pdf",
       "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-pdf/libreofficekit-26.8.3.1-include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/libreofficekit.c -ldl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-gx2n4nfr/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-gx2n4nfr/profile",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/libreofficekit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-ax62a7s_/mount/LibreOffice.app/Contents/Frameworks file:///var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-lok-pdf-ax62a7s_/profile",
       "output": {
         "type": "drawing",
+        "pages": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "evince",
+      "version": "48.4",
+      "control": "controls/pdf/two-page.pdf",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/evince.c -I/opt/homebrew/Cellar/evince/48.4/include/evince/3.0 -I/opt/homebrew/Cellar/gtk+3/3.24.52_1/include/gtk-3.0 -I/opt/homebrew/Cellar/pango/1.58.2/include/pango-1.0 -I/opt/homebrew/Cellar/libthai/0.1.30/include -I/opt/homebrew/Cellar/libdatrie/0.2.14/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/graphite2/include -I/opt/homebrew/Cellar/cairo/1.18.6/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/at-spi2-core/2.62.1/include/atk-1.0 -I/opt/homebrew/Cellar/libepoxy/1.5.10/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/glib/2.90.1/include/gio-unix-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/Cellar/evince/48.4/lib -levdocument3 -L/opt/homebrew/Cellar/gtk+3/3.24.52_1/lib -lgtk-3 -lgdk-3 -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,CoreGraphics -L/opt/homebrew/Cellar/pango/1.58.2/lib -lpangocairo-1.0 -lpango-1.0 -L/opt/homebrew/Cellar/harfbuzz/15.1.0/lib -lharfbuzz -L/opt/homebrew/Cellar/cairo/1.18.6/lib -lcairo-gobject -lcairo -L/opt/homebrew/lib -lgdk_pixbuf-2.0 -L/opt/homebrew/Cellar/at-spi2-core/2.62.1/lib -latk-1.0 -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/evince",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/pdf/target/evince /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/two-page.pdf",
+      "output": {
         "pages": 2
       },
       "pass": true

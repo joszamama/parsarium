@@ -245,5 +245,54 @@
     },
     "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
     "build_note": "Official 26.8.3 macOS arm64 DMG SHA-256 pinned; bundled binary prints tagged 26.8.3.1 source commit. Pinned source headers are fetched individually and SHA-256 checked. The C adapter links via documented LibreOfficeKitInit.h dynamic-loading shim, using the app's Contents/Frameworks directory as the load path. LibreOfficeKitEnums.h contains a C++-only inline helper in this release, so the C adapter mirrors its documented DRAWING enum value 3. The two-page local PDF is imported into Draw and getParts returns 2. Binary-to-source equivalence beyond publisher version claim and hashes is unestablished."
+  },
+  "evince": {
+    "release": "48.4",
+    "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "installed_revision": "48.4",
+    "license": "GPL-2.0-or-later",
+    "source_url": "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
+    "source_sha256": "f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668",
+    "source_header_member": "evince-48.4/libdocument/ev-document-factory.h",
+    "local_header": "/opt/homebrew/Cellar/evince/48.4/include/evince/3.0/libdocument/ev-document-factory.h",
+    "local_header_sha256": "03b862635ec448d92d48facb86389994b4c436c77e8a94da6c7e9cb822bf0ae4",
+    "local_library": "/opt/homebrew/Cellar/evince/48.4/lib/libevdocument3.4.dylib",
+    "local_library_sha256": "89f95473dd58ca147f75c69ece28b965f109b1c55744eefcde3022cc4afcf81d",
+    "pkg_config": "evince-document-3.0",
+    "source_members": {
+      "evince-48.4/COPYING": "7d6a76d2527374107026592bf4892edbed5cf46165d298721e4468e8d4382ad0",
+      "evince-48.4/evince-document.h": "ef36e22c580546d1ed949501d475523d46d58b2e3800a3e7a5d0174d9e399397",
+      "evince-48.4/libdocument/ev-document.h": "c8a8d89c55ae06dedf48fe4225df55dba01c5f54d6bf16ed0378eff0a5fc38f5",
+      "evince-48.4/libdocument/ev-init.h": "4126ab064b1b6a07267324f37622f5abebba333e642eb67d03566145f53be2a0",
+      "evince-48.4/backend/pdf/ev-poppler.c": "346263fc156a1554ea85d91385f7bdb751d7fb63cf22af758e5a8e7318b239e1"
+    },
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/evince/48.4/include/evince/3.0/evince-document.h",
+        "sha256": "ef36e22c580546d1ed949501d475523d46d58b2e3800a3e7a5d0174d9e399397",
+        "role": "public umbrella header"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/evince/48.4/include/evince/3.0/libdocument/ev-document.h",
+        "sha256": "c8a8d89c55ae06dedf48fe4225df55dba01c5f54d6bf16ed0378eff0a5fc38f5",
+        "role": "page-count API header"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/evince/48.4/include/evince/3.0/libdocument/ev-init.h",
+        "sha256": "4126ab064b1b6a07267324f37622f5abebba333e642eb67d03566145f53be2a0",
+        "role": "initialization API header"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/evince/48.4/lib/evince/4/backends/libpdfdocument.so",
+        "sha256": "88a8ec8ada80d46c8aede5259cc4bee9e14cf9d990468f652df8cb2722dfb169",
+        "role": "Evince PDF backend"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/poppler/26.11.0/lib/libpoppler-glib.8.31.0.dylib",
+        "sha256": "47a28e807c50e19a379b6dafb1d10a191d0229535bd51d2a9df13d15a1f0f16a",
+        "role": "Poppler GLib PDF engine linked by the Evince PDF backend"
+      }
+    ],
+    "build_note": "Official GNOME 48.4 GPL-2.0-or-later source archive and the installed Homebrew release are pinned. The public factory and page-count headers match tagged source byte for byte. The installed Evince PDF backend links the pinned Poppler GLib engine; this is a distinct C package input API sharing Poppler PDF interpretation."
   }
 }

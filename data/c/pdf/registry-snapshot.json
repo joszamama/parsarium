@@ -366,13 +366,92 @@
       "source_tag": "libreoffice-26.8.3.1",
       "source_commit": "861effc5289d539f15c4c18d1ba8579ffd78728b",
       "license_evidence": "https://www.libreoffice.org/licenses/"
+    },
+    "evince": {
+      "version": "48.4",
+      "license": "GPL-2.0-or-later",
+      "source_url": "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz",
+      "source_sha256": "f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668",
+      "license_evidence": "https://download.gnome.org/sources/evince/48/evince-48.4.tar.xz"
     }
   },
-  "popularity_metric": {
-    "metric": "GitHub stars of primary upstream repository",
+  "targeted_documentation_leads": [
+    {
+      "name": "poppler-glib",
+      "url": "https://poppler.freedesktop.org/api/glib/PopplerDocument.html"
+    },
+    {
+      "name": "qpdf",
+      "url": "https://github.com/qpdf/qpdf/blob/v12.4.2/include/qpdf/qpdf-c.h"
+    },
+    {
+      "name": "mupdf",
+      "url": "https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html"
+    },
+    {
+      "name": "ghostscript",
+      "url": "https://ghostscript.readthedocs.io/en/master/Language.html"
+    },
+    {
+      "name": "pdfio",
+      "url": "https://www.msweet.org/pdfio/pdfio.html"
+    },
+    {
+      "name": "pdfium",
+      "url": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md"
+    },
+    {
+      "name": "vanillapdf",
+      "url": "https://vanillapdf.readthedocs.io/en/stable/c_api.html",
+      "surface": "Official v2.3.0 C API documentation and publisher NuGet release; outside Homebrew formula-name hits"
+    },
+    {
+      "name": "tspdf",
+      "url": "https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md",
+      "surface": "Tagged upstream C library documentation; absent from Homebrew formula-name hits"
+    },
+    {
+      "name": "imagemagick",
+      "url": "https://imagemagick.org/magick-wand/",
+      "surface": "Official format and local input API docs plus pinned Homebrew source release; PDF coder and Ghostscript delegate observed in installed package"
+    },
+    {
+      "name": "graphicsmagick",
+      "url": "https://graphicsmagick.sourceforge.io/wand/magick_wand.html",
+      "surface": "Official format and local input API docs plus pinned Homebrew source release; PDF coder and Ghostscript delegate observed in installed package"
+    },
+    {
+      "name": "libvips",
+      "url": "https://www.libvips.org/API/current/ctor.Image.pdfload.html",
+      "surface": "Official explicit PDF file loader API and tagged upstream source; installed vips-poppler module identified by local plugin inventory"
+    },
+    {
+      "name": "pdf_oxide",
+      "url": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h",
+      "surface": "Tagged upstream C ABI and C++17 header plus publisher macOS arm64 binary release; found through targeted PDF reader documentation search outside Homebrew name hits"
+    },
+    {
+      "name": "libreofficekit",
+      "url": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKitInit.h",
+      "format_evidence": "https://help.libreoffice.org/latest/en-US/text/shared/guide/convertfilters.html",
+      "input_api_evidence": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKit.h",
+      "surface": "Official LibreOfficeKit C API and Draw PDF import documentation; official macOS cask distribution outside bounded Homebrew formula-name hits",
+      "disposition": "Verified pinned 26.8.3.1 LibreOfficeKit C ABI on a two-page local PDF."
+    },
+    {
+      "name": "evince",
+      "url": "https://gnome.pages.gitlab.gnome.org/evince/document/class.Document.html",
+      "format_evidence": "https://gitlab.gnome.org/GNOME/evince/-/blob/gnome-48-4/backend/pdf/ev-poppler.c",
+      "input_api_evidence": "https://gitlab.gnome.org/GNOME/evince/-/blob/gnome-48-4/libdocument/ev-document-factory.h",
+      "surface": "GNOME public libdocument C API and Homebrew formula outside bounded PDF formula-name query; official GNOME release source",
+      "disposition": "Verified Evince 48.4 local GFile C API on valid two-page PDF, sharing Poppler backend."
+    }
+  ],
+  "auxiliary_project_interest_metric": {
+    "metric": "Primary upstream GitHub stars, auxiliary project-interest signal",
     "captured_at_utc": "2026-11-12T23:00:50.971139+00:00",
     "source": "https://github.com/{owner}/{repo}",
-    "limitations": "Primary GitHub stars proxy broad project interest, not PDF-specific adoption. Compared only within C PDF. Poppler, MuPDF, Ghostscript, PDFium, and GraphicsMagick have canonical non-GitHub upstreams; mirrors are omitted and those packages remain unranked. Homebrew formula-name results are discovery leads, not a popularity ranking.",
+    "limitations": "Historical project-interest snapshot; stars are not compared with the current Homebrew formula requested-install ranking or interpreted as PDF-specific use.",
     "packages": {
       "qpdf": {
         "stars": 5582,
@@ -444,71 +523,102 @@
         "auxiliary_start_date": "2025-11-13",
         "auxiliary_end_date": "2026-11-13",
         "auxiliary_note": "Cask install events for LibreOffice broadly, not PDF or LibreOfficeKit use; not comparable to GitHub stars."
+      },
+      "evince": {
+        "stars": null,
+        "repository": "https://gitlab.gnome.org/GNOME/evince",
+        "note": "Canonical GNOME GitLab upstream has no comparable primary GitHub star metric; Evince remains unranked.",
+        "auxiliary_homebrew_install_on_request_365d": 1757,
+        "auxiliary_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+        "auxiliary_start_date": "2025-11-13",
+        "auxiliary_end_date": "2026-11-13",
+        "auxiliary_observed_at_utc": "2026-11-13T16:25:28+00:00",
+        "auxiliary_note": "Formula requested-install events for Evince broadly, not PDF-specific use or comparable with GitHub stars."
       }
     }
   },
-  "targeted_documentation_leads": [
-    {
-      "name": "poppler-glib",
-      "url": "https://poppler.freedesktop.org/api/glib/PopplerDocument.html"
-    },
-    {
-      "name": "qpdf",
-      "url": "https://github.com/qpdf/qpdf/blob/v12.4.2/include/qpdf/qpdf-c.h"
-    },
-    {
-      "name": "mupdf",
-      "url": "https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html"
-    },
-    {
-      "name": "ghostscript",
-      "url": "https://ghostscript.readthedocs.io/en/master/Language.html"
-    },
-    {
-      "name": "pdfio",
-      "url": "https://www.msweet.org/pdfio/pdfio.html"
-    },
-    {
-      "name": "pdfium",
-      "url": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md"
-    },
-    {
-      "name": "vanillapdf",
-      "url": "https://vanillapdf.readthedocs.io/en/stable/c_api.html",
-      "surface": "Official v2.3.0 C API documentation and publisher NuGet release; outside Homebrew formula-name hits"
-    },
-    {
-      "name": "tspdf",
-      "url": "https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md",
-      "surface": "Tagged upstream C library documentation; absent from Homebrew formula-name hits"
-    },
-    {
-      "name": "imagemagick",
-      "url": "https://imagemagick.org/magick-wand/",
-      "surface": "Official format and local input API docs plus pinned Homebrew source release; PDF coder and Ghostscript delegate observed in installed package"
-    },
-    {
-      "name": "graphicsmagick",
-      "url": "https://graphicsmagick.sourceforge.io/wand/magick_wand.html",
-      "surface": "Official format and local input API docs plus pinned Homebrew source release; PDF coder and Ghostscript delegate observed in installed package"
-    },
-    {
-      "name": "libvips",
-      "url": "https://www.libvips.org/API/current/ctor.Image.pdfload.html",
-      "surface": "Official explicit PDF file loader API and tagged upstream source; installed vips-poppler module identified by local plugin inventory"
-    },
-    {
-      "name": "pdf_oxide",
-      "url": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h",
-      "surface": "Tagged upstream C ABI and C++17 header plus publisher macOS arm64 binary release; found through targeted PDF reader documentation search outside Homebrew name hits"
-    },
-    {
-      "name": "libreofficekit",
-      "url": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKitInit.h",
-      "format_evidence": "https://help.libreoffice.org/latest/en-US/text/shared/guide/convertfilters.html",
-      "input_api_evidence": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKit.h",
-      "surface": "Official LibreOfficeKit C API and Draw PDF import documentation; official macOS cask distribution outside bounded Homebrew formula-name hits",
-      "disposition": "Verified pinned 26.8.3.1 LibreOfficeKit C ABI on a two-page local PDF."
+  "popularity_metric": {
+    "metric": "Homebrew install-on-request count over 365 days",
+    "source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+    "captured_at_utc": "2026-11-13T16:29:02.956548+00:00",
+    "start_date": "2025-11-13",
+    "end_date": "2026-11-13",
+    "scope": "Formula-wide user-requested install events; not PDF-specific use. Compare only C PDF paths distributed as formulae in this fixed window. Cask installs and GitHub stars are separate auxiliary signals.",
+    "packages": {
+      "poppler-glib": {
+        "install_on_request_365d": 688177,
+        "formula": "poppler",
+        "source": "https://formulae.brew.sh/formula/poppler",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "qpdf": {
+        "install_on_request_365d": 65652,
+        "formula": "qpdf",
+        "source": "https://formulae.brew.sh/formula/qpdf",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "mupdf": {
+        "install_on_request_365d": 11659,
+        "formula": "mupdf",
+        "source": "https://formulae.brew.sh/formula/mupdf",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "ghostscript": {
+        "install_on_request_365d": 181380,
+        "formula": "ghostscript",
+        "source": "https://formulae.brew.sh/formula/ghostscript",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "pdfio": {
+        "install_on_request_365d": 6,
+        "formula": "pdfio",
+        "source": "https://formulae.brew.sh/formula/pdfio",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "pdfium": {
+        "install_on_request_365d": null,
+        "note": "No matching Homebrew formula requested-install count for this pinned package path."
+      },
+      "vanillapdf": {
+        "install_on_request_365d": null,
+        "note": "No matching Homebrew formula requested-install count for this pinned package path."
+      },
+      "tspdf": {
+        "install_on_request_365d": null,
+        "note": "No matching Homebrew formula requested-install count for this pinned package path."
+      },
+      "imagemagick": {
+        "install_on_request_365d": 778693,
+        "formula": "imagemagick",
+        "source": "https://formulae.brew.sh/formula/imagemagick",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "graphicsmagick": {
+        "install_on_request_365d": 38391,
+        "formula": "graphicsmagick",
+        "source": "https://formulae.brew.sh/formula/graphicsmagick",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "libvips": {
+        "install_on_request_365d": 60878,
+        "formula": "vips",
+        "source": "https://formulae.brew.sh/formula/vips",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      },
+      "pdf_oxide": {
+        "install_on_request_365d": null,
+        "note": "No matching Homebrew formula requested-install count for this pinned package path."
+      },
+      "libreofficekit": {
+        "install_on_request_365d": null,
+        "note": "Official LibreOffice distribution is a Homebrew cask; its cask install events are auxiliary and not comparable with formula requested-install events."
+      },
+      "evince": {
+        "install_on_request_365d": 1757,
+        "formula": "evince",
+        "source": "https://formulae.brew.sh/formula/evince",
+        "note": "Formula-wide requested-install event count; does not measure PDF or specific C API use."
+      }
     }
-  ]
+  }
 }
