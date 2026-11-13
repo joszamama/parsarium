@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from verify_gosl_go_matrix_market import verify as verify_gosl
+from verify_intel_go_matrix_market import verify as verify_intel
 
 ROOT = Path(__file__).resolve().parents[1]
 CELL = ROOT / "data" / "go" / "matrix_market"
@@ -19,6 +20,7 @@ def main() -> None:
     results = []
     controls = {}
     container_libraries = {}
+    source_built_libraries = {}
     for parser in parsers:
         control = parser["control"]
         path = ROOT / control
@@ -37,6 +39,20 @@ def main() -> None:
                     "version": parser["version"], "scope": parser["scope"],
                     "control": control,
                     "command": "python3 scripts/verify_gosl_go_matrix_market.py --package " + parser["name"],
+                    "pass": False, "output": None, "error": str(exc),
+                })
+            continue
+        if parser["name"] == "github.com/intel/forLAGraphGo/LAGraph/MatrixMarket":
+            try:
+                row, library = verify_intel(parser)
+                results.append(row)
+                source_built_libraries[parser["name"]] = library
+            except Exception as exc:
+                results.append({
+                    "package": parser["name"], "module": parser["module"],
+                    "version": parser["version"], "scope": parser["scope"],
+                    "control": control,
+                    "command": "python3 scripts/verify_intel_go_matrix_market.py",
                     "pass": False, "output": None, "error": str(exc),
                 })
             continue
@@ -67,6 +83,7 @@ def main() -> None:
         "control_meaning": "Valid Matrix Market coordinate real general matrices and a pattern symmetric graph control; the graph controls have three vertices and two edges",
         "third_party": results,
         "container_libraries": container_libraries,
+        "source_built_libraries": source_built_libraries,
     }
     (CELL / "verification.json").write_text(json.dumps(report, indent=2) + "\n")
     passed = sum(row["pass"] for row in results)

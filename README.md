@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,543 of 1,716 verified package paths have a recorded comparable cell metric;
-173 are unranked; 128 measured values are zero. A recorded zero is not evidence of
+1,544 of 1,717 verified package paths have a recorded comparable cell metric;
+173 are unranked; 129 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -116,6 +116,7 @@ python3 scripts/verify_go_ascii_ply.py
 python3 scripts/verify_go_matrix_market.py
 python3 scripts/verify_gosl_go_matrix_market.py
 python3 scripts/verify_gosl_go_matrix_market.py --package github.com/ATIinc/gosl-ati/la
+python3 scripts/verify_intel_go_matrix_market.py
 python3 controls/ascii_pnm/make_control.py
 python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
@@ -1455,11 +1456,12 @@ or quality judgment.
   plausible leads remain unresolved. The
   [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
-- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): nine eligible
+- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): ten eligible
   package paths verified on local coordinate real general or pattern symmetric
-  controls, 11 below
+  controls, 10 below
   the working goal. Six bounded pkg.go.dev queries saved 80 hits and 77 unique
-  paths; three plausible leads remain unresolved. Two pinned packages use Go
+  paths; two plausible leads remain unresolved. The Intel reader uses a
+  hash-pinned source build of compatible SuiteSparse GraphBLAS 8.0.2. Two pinned packages use Go
   module replacements because their published module names differ from their
   repository paths; their adoption metric is unavailable. The
   [cell record](data/go/matrix_market/cell.json) states search and input limits.

@@ -165,5 +165,27 @@
       "value_0_2": -2,
       "symmetric": false
     }
+  },
+  {
+    "name": "github.com/intel/forLAGraphGo/LAGraph/MatrixMarket",
+    "module": "github.com/intel/forLAGraphGo",
+    "version": "v0.0.0-20260223204105-af527a2f7245",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/intel/forLAGraphGo/blob/af527a2f7245d032fc80efcbda8c247e194d8781/LICENSE",
+    "input_api": "MatrixMarket.Read[float64](io.Reader) with os.Open(local Matrix Market path), returning GrB.Matrix[float64]",
+    "documentation": "https://github.com/intel/forLAGraphGo/blob/af527a2f7245d032fc80efcbda8c247e194d8781/LAGraph/MatrixMarket/read.go",
+    "scope": "Coordinate real general matrix dimensions, entries and value",
+    "family": "Intel forLAGraphGo Matrix Market reader over SuiteSparse GraphBLAS storage",
+    "family_note": "The format reader is implemented in Intel forLAGraphGo Go source and uses SuiteSparse GraphBLAS for matrix storage. It is distinct from the C LAGraph Matrix Market reader. A pinned GraphBLAS 8.0.2 source build provides C API 2.0 required by the pinned Go binding. A measured pkg.go.dev Imported by count of zero does not establish broad adoption.",
+    "control": "controls/matrix_market/real-general.mtx",
+    "adapter": "adapters/go/matrix_market/intel/main.go",
+    "adapter_manifest_dir": "adapters/go/matrix_market/intel",
+    "source_lock": "data/go/matrix_market/intel-forlagraphgo-lock.json",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entries": 3,
+      "value_0_2": -2
+    }
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T21:47:07.647032+00:00",
+  "checked_at_utc": "2026-11-13T22:24:57.103676+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "go": "go version go1.27.2 darwin/arm64",
   "control_sha256": {
@@ -152,6 +152,24 @@
       },
       "error": null,
       "environment": "Ubuntu 24.04 linux/arm64 digest-pinned base; exact direct apt package versions; Go 1.22.2; released Go module verified by go.sum"
+    },
+    {
+      "package": "github.com/intel/forLAGraphGo/LAGraph/MatrixMarket",
+      "module": "github.com/intel/forLAGraphGo",
+      "version": "v0.0.0-20260223204105-af527a2f7245",
+      "control": "controls/matrix_market/real-general.mtx",
+      "scope": "Coordinate real general matrix dimensions, entries and value",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "entries": 3,
+        "value_0_2": -2
+      },
+      "pass": true,
+      "error": null,
+      "command": "python3 scripts/verify_intel_go_matrix_market.py",
+      "checked_at_utc": "2026-11-13T22:24:56.713158+00:00",
+      "environment": "macOS arm64; GraphBLAS v8.0.2 built from pinned source; Go modules verified by go.sum"
     }
   ],
   "container_libraries": {
@@ -190,6 +208,15 @@
       },
       "module_sum": "h1:qUEuYOL+C26rlh7NqX1vNaNP92IOIHrGQOqtRNpBPuw=",
       "source_commit": "91cf5048bc226688b0ee0d061365c89317647898"
+    }
+  },
+  "source_built_libraries": {
+    "github.com/intel/forLAGraphGo/LAGraph/MatrixMarket": {
+      "graphblas_source_sha256": "cedecdcff130c3b7e5d571b693dc2c28bc96ef5f09b33e52f0bcd42b23593ea0",
+      "graphblas_library_sha256": "e67e82c4a1bc3282c0a9795ae1b92dee3b8db012d03d56f510fbbbfb28d58242",
+      "graphblas_c_api": "2.0",
+      "module_sum": "h1:juAk4+Sa7OYOQ10gZFhg38A4BiqgRmWC0j1lzcCF6vI=",
+      "source_commit": "af527a2f7245d032fc80efcbda8c247e194d8781"
     }
   }
 }
