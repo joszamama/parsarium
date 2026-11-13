@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T13:29:24.461531+00:00",
+  "checked_at_utc": "2026-11-13T13:50:01.332752+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/svg/source-lock.json",
@@ -91,13 +91,20 @@
     "imlib2": {
       "source_sha256": "d71ee5351cc1914fb01968123d0dcf276740e5af5662943ac47ae60cafa4d13b",
       "local_header_sha256": "785f4241ffdd2c89c2d64c42769b7f9f53f37ee65fb0995b870382158c0ceaf1",
-      "local_library_sha256": "840db84d05071b45bba6b4c85c2237ff6006805c36748c0fb0eae46b4ab68aec",
-      "svg_loader_sha256": "3065fbbbfe715627ba0b83751966617cc36112d8166256e15a61d6e94f746f50"
+      "local_library_sha256": "945bcc2179c30d6807911f5ed78bbfb14e3adeeb5e5defc3ced6d5c1170a1d2b",
+      "svg_loader_sha256": "b24894f2ab1d2e29ca5f2121d596068e9dc0fb61e27f6a6ef1346fc41f558a7b"
     },
     "efl": {
       "source_sha256": "248bc76141f2b8b006ccba9e0bb2cb46cbcb1be4181a1cf2728187f778853654",
       "local_header_sha256": "b180231f49fe30a97df03cc46c25b22c9217114b1aafb1d28f779fbf8a7e45ae",
       "local_library_sha256": "94395f76bfaf3632ab0cad8400401b67d4111671b7bc15758c5d455c4456636b"
+    },
+    "glycin": {
+      "source_sha256": "6a114aa1117ec2d7bd578c8cefd235d993304dedfd1a62575dc31be9a146b791",
+      "local_header_sha256": "6aef5e96765a58b151ebc08c9fad35c84a2784c32fd6776ee974cf6930bd574d",
+      "local_library_sha256": "29cea8dda62e2402164b5c2598f90f578a8151dc05d9db7198009d2516d1aa1e",
+      "svg_loader_sha256": "1931f5cac6a17202db45bb92d0b35ec64777fc52b6623526d3cb98e316fe850f",
+      "docker_image_id": "sha256:9a5d7084f206ebfd9e7b15d652de5b3c9cb73b38094bd73851daefef2c5c83d7"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -480,6 +487,30 @@
       "output": {
         "width": 2,
         "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "glycin",
+      "version": "2.2.6",
+      "control": "controls/svg/red-green.svg",
+      "source_build_command": "docker build --quiet -f /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/glycin/Dockerfile -t parsarium-glycin-svg:2.2.6 /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/glycin-docker-context",
+      "build_command": "cc via pinned Linux image",
+      "command": "docker run --rm --mount type=bind,src=/Users/c01joza/Documents/CISPA/Repositorios/parsarium,dst=/parsarium,readonly parsarium-glycin-svg:2.2.6 bash -lc 'cc -std=c11 -O2 -Wall -Wextra -Werror /parsarium/adapters/c/svg/glycin.c $(pkg-config --cflags --libs glycin-2) -o /tmp/parsarium-glycin-svg && test $(pkg-config --modversion glycin-2) = 2.2.6 && ldd /tmp/parsarium-glycin-svg | grep -q /usr/local/lib && XDG_DATA_DIRS=/usr/local/share GLYCIN_DISABLE_SANDBOX=i-know-the-risks /tmp/parsarium-glycin-svg /parsarium/controls/svg/red-green.svg'",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "mime": "image/svg+xml",
         "first": [
           255,
           0,

@@ -495,5 +495,27 @@
       }
     ],
     "build_note": "Official EFL 1.29.0 source and installed Homebrew Evas library, header, rsvg loader executable and librsvg engine are hash-pinned. The Evas image API parses a local SVG through its plugin and reports pixels."
+  },
+  "glycin": {
+    "release": "2.2.6",
+    "license": "MPL-2.0 OR LGPL-2.1-or-later",
+    "source_url": "https://download.gnome.org/sources/glycin/2.2/glycin-2.2.6.tar.xz",
+    "source_sha256": "6a114aa1117ec2d7bd578c8cefd235d993304dedfd1a62575dc31be9a146b791",
+    "repository": "https://gitlab.gnome.org/GNOME/glycin",
+    "source_header_member": "glycin-2.2.6/libglycin/include/glycin.h",
+    "local_header_sha256": "6aef5e96765a58b151ebc08c9fad35c84a2784c32fd6776ee974cf6930bd574d",
+    "license_member": "glycin-2.2.6/LICENSE",
+    "license_sha256": "3afb0531be0b931d8f3ce912a71a7093396fa095c8329f5460a6e85d320b1cf9",
+    "source_engine_member": "glycin-2.2.6/glycin-loaders/glycin-svg/src/bin/glycin-svg.rs",
+    "source_engine_sha256": "b954f75d77a9ac2100f3baf7b2e3b279e0fbca0978827cd5a218170a67234075",
+    "source_engine_members": [
+      {
+        "member": "glycin-2.2.6/Cargo.lock",
+        "sha256": "12419097b1d8cc9a36a860a4889e772c9aaa95da1725dad96481757b312e909c"
+      }
+    ],
+    "docker_base": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+    "build_recipe": "adapters/c/svg/glycin/Dockerfile",
+    "build_note": "The pinned upstream tarball is built in Linux with only glycin-svg enabled. The C adapter links the resulting local libglycin 2.2.6 and returns SVG MIME type, dimensions and both pixels. Docker image layers and source checksums are recorded by the verifier."
   }
 }

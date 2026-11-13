@@ -480,5 +480,33 @@
     "scope": "SVG dimensions and red/green pixels through Evas rsvg image loader",
     "family": "EFL Evas image API over its rsvg loader and librsvg",
     "family_note": "The pinned Evas rsvg loader executable invokes librsvg. EFL is a distinct released C image API, but shares the separately recorded librsvg SVG syntax engine."
+  },
+  {
+    "name": "glycin",
+    "version": "2.2.6",
+    "license": "MPL-2.0 OR LGPL-2.1-or-later",
+    "license_evidence": "https://download.gnome.org/sources/glycin/2.2/glycin-2.2.6.tar.xz (LICENSE and README.md)",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/glycin/libglycin/ctor.Loader.new.html",
+    "input_api": "gly_loader_new(GFile* local path); gly_loader_load; gly_image_next_frame; gly_frame_get_buf_bytes",
+    "adapter": "adapters/c/svg/glycin.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "mime": "image/svg+xml",
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "detected SVG MIME type, parsed frame dimensions and red/green pixels",
+    "family": "Glycin C API and glycin-svg loader over librsvg",
+    "family_note": "The released Glycin C binding and SVG loader form a distinct package input path, but the SVG syntax engine is librsvg. Verified in Linux because the macOS libglycin build did not install an SVG loader."
   }
 ]

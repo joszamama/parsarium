@@ -75,6 +75,44 @@ def verify(ecosystem: str) -> None:
                 engine_member = tar.extractfile(engine["member"])
                 assert engine_member is not None
                 assert sha256(engine_member.read()).hexdigest() == engine["sha256"]
+        if name == "glycin":
+            context = cache / "glycin-docker-context"
+            context.mkdir(exist_ok=True)
+            context_archive = context / "glycin-2.2.6.tar.xz"
+            if not context_archive.exists() or file_sha256(context_archive) != source["source_sha256"]:
+                shutil.copyfile(archive, context_archive)
+            image = "parsarium-glycin-svg:2.2.6"
+            build = ["docker", "build", "--quiet", "-f", str(ROOT / "adapters/c/svg/glycin/Dockerfile"),
+                     "-t", image, str(context)]
+            image_id = run(build, timeout=1800)
+            execute = ["docker", "run", "--rm", "--mount", f"type=bind,src={ROOT},dst=/parsarium,readonly",
+                       image, "bash", "-lc",
+                       "cc -std=c11 -O2 -Wall -Wextra -Werror /parsarium/adapters/c/svg/glycin.c "
+                       "$(pkg-config --cflags --libs glycin-2) -o /tmp/parsarium-glycin-svg && "
+                       "test $(pkg-config --modversion glycin-2) = 2.2.6 && "
+                       "ldd /tmp/parsarium-glycin-svg | grep -q /usr/local/lib && "
+                       "XDG_DATA_DIRS=/usr/local/share GLYCIN_DISABLE_SANDBOX=i-know-the-risks "
+                       "/tmp/parsarium-glycin-svg "
+                       "/parsarium/controls/svg/red-green.svg"]
+            output = json.loads(run(execute, timeout=180))
+            assert output == parser["expected_output"], (name, output)
+            checksum_command = ["docker", "run", "--rm", image, "bash", "-lc",
+                                "sha256sum /usr/local/include/glycin-2/glycin.h "
+                                "/usr/local/lib/$(gcc -dumpmachine)/libglycin-2.so.0 "
+                                "/usr/local/libexec/glycin-loaders/2+/glycin-svg"]
+            installed_hashes = {line.split()[1]: line.split()[0] for line in run(checksum_command).splitlines()}
+            assert installed_hashes["/usr/local/include/glycin-2/glycin.h"] == source["local_header_sha256"]
+            library_path = next(path for path in installed_hashes if path.endswith("/libglycin-2.so.0"))
+            rows.append({"package": name, "version": parser["version"], "control": parser["control"],
+                         "source_build_command": shlex.join(build), "build_command": "cc via pinned Linux image",
+                         "command": shlex.join(execute), "output": output, "pass": True})
+            libraries[name] = {"source_sha256": source["source_sha256"],
+                               "local_header_sha256": source["local_header_sha256"],
+                               "local_library_sha256": installed_hashes[library_path],
+                               "svg_loader_sha256": installed_hashes["/usr/local/libexec/glycin-loaders/2+/glycin-svg"],
+                               "docker_image_id": image_id}
+            print(f"{name}@{parser['version']}: {ecosystem} SVG passed", flush=True)
+            continue
         formula = "vips" if name == "libvips" else ("gtk+3" if name == "gtk3" else name)
         source_build = None
         juce_binary = None
