@@ -307,5 +307,24 @@
     "scope": "parsed SVG dimensions and rendered red/green RGBA pixels",
     "family": "GdkPixbuf loader API with librsvg SVG plugin",
     "family_note": "The installed GdkPixbuf SVG loader module comes from librsvg 2.63.4, which is separately counted. This is a distinct package input API over the same librsvg SVG syntax engine."
+  },
+  {
+    "name": "nanosvg",
+    "version": "2023-12-29",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/microsoft/vcpkg/blob/master/ports/nanosvg/vcpkg.json and pinned upstream LICENSE.txt",
+    "documentation": "https://github.com/memononen/nanosvg#parser",
+    "input_api": "nsvgParseFromFile(local SVG filename, \"px\", 96.0f); inspect NSVGimage shape/path lists",
+    "adapter": "adapters/c/svg/nanosvg.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "shapes": 2,
+      "paths": 2
+    },
+    "scope": "SVG root dimensions and two parsed rectangle shapes with paths",
+    "family": "NanoSVG native SVG parser",
+    "family_note": "SDL3_image embeds NanoSVG; this direct C API is a distinct package path over the same parser family. Upstream has no tagged release; vcpkg publishes version-date 2023-12-29 pinned to the exact upstream commit."
   }
 ]

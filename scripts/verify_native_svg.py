@@ -79,7 +79,15 @@ def verify(ecosystem: str) -> None:
         source_build = None
         juce_binary = None
         juce_build_command = None
-        if name == "novasvg":
+        if name == "nanosvg":
+            source_dir = cache / source["archive_root"]
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            source_build = ["tar", "-xzf", str(archive), "-C", str(cache)]
+            run(source_build)
+            header = source_dir / "src/nanosvg.h"
+            library = None
+        elif name == "novasvg":
             source_dir = cache / f"novasvg-{source['release']}"
             if source_dir.exists():
                 shutil.rmtree(source_dir)
@@ -136,6 +144,10 @@ def verify(ecosystem: str) -> None:
             flags = shlex.split(run(["wx-config", "--cxxflags", "--libs", "core,base"]))
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
+        elif name == "nanosvg":
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), str(ROOT / parser["adapter"]),
+                       "-lm", "-o", str(target / name)]
         elif name == "novasvg":
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(header.parent.parent), str(ROOT / parser["adapter"]),
