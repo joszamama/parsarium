@@ -1,0 +1,25 @@
+[
+  {
+    "name": "assimp",
+    "version": "6.0.6",
+    "license": "BSD-3-Clause AND CC-PDDC AND MIT AND BSL-1.0 AND Unlicense AND Zlib",
+    "license_evidence": "https://github.com/assimp/assimp/archive/refs/tags/v6.0.6.tar.gz",
+    "documentation": "https://github.com/assimp/assimp-docs/blob/master/source/usage/use_the_lib.rst",
+    "input_api": "aiImportFile(local filename)",
+    "adapter": "adapters/c/ascii_ply/assimp.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular face from ASCII PLY",
+    "family": "Assimp native PLY loader",
+    "family_note": "C and C++ Assimp APIs share the same native PLY loader."
+  }
+]

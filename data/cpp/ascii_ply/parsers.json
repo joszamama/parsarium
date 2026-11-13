@@ -1,0 +1,42 @@
+[
+  {
+    "name": "assimp",
+    "version": "6.0.6",
+    "license": "BSD-3-Clause AND CC-PDDC AND MIT AND BSL-1.0 AND Unlicense AND Zlib",
+    "license_evidence": "https://github.com/assimp/assimp/archive/refs/tags/v6.0.6.tar.gz",
+    "documentation": "https://github.com/assimp/assimp-docs/blob/master/source/usage/use_the_lib.rst",
+    "input_api": "Assimp::Importer::ReadFile(local filename)",
+    "adapter": "adapters/cpp/ascii_ply/assimp.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular face from ASCII PLY",
+    "family": "Assimp native PLY loader",
+    "family_note": "C and C++ Assimp APIs share the same native PLY loader."
+  },
+  {
+    "name": "open-mesh",
+    "version": "11.0.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://www.graphics.rwth-aachen.de/media/openmesh_static/Releases/11.0/OpenMesh-11.0.0.tar.bz2",
+    "documentation": "https://www.graphics.rwth-aachen.de/media/openmesh_static/Documentations/OpenMesh-6.0-Documentation/a00740.html",
+    "input_api": "OpenMesh::IO::read_mesh(mesh, local filename)",
+    "adapter": "adapters/cpp/ascii_ply/open_mesh.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "three vertices and one triangular face from ASCII PLY",
+    "family": "OpenMesh PLYReader",
+    "family_note": "OpenMesh uses its own PLYReader and mesh representation."
+  }
+]

@@ -4,7 +4,7 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
-C × SVG and C/C++ × MP4 batches, plus completed C++ × SVG and MP3 with ID3v2 batches,
+C × SVG and C/C++ × MP4 and ASCII PLY batches, plus completed C++ × SVG and MP3 with ID3v2 batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -18,7 +18,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 74 cells at the 20-parser target, six started below target, and 8
+There are 74 cells at the 20-parser target, eight started below target, and 6
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -42,6 +42,9 @@ python3 scripts/verify_c_mp3_id3v2.py
 python3 scripts/verify_cpp_mp3_id3v2.py
 python3 scripts/verify_c_mp4.py
 python3 scripts/verify_cpp_mp4.py
+brew install assimp open-mesh
+python3 scripts/verify_c_ascii_ply.py
+python3 scripts/verify_cpp_ascii_ply.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py

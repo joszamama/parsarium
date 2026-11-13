@@ -1,0 +1,59 @@
+{
+  "checked_at_utc": "2026-11-13T03:19:40.180219+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "local_libraries": {
+    "assimp": {
+      "source_sha256": "5f7ed412b76575621df0525a762b31da5874afff352b3a890c6308db4ac7204c",
+      "installed_files": {
+        "/opt/homebrew/Cellar/assimp/6.0.6/include/assimp/cimport.h": "a96abd9072d7a4116eef107d6eb9c0c466da4ba5871113062ebc74173b908f25",
+        "/opt/homebrew/Cellar/assimp/6.0.6/include/assimp/Importer.hpp": "f836de598e046f72470dcf0e3b6be8f1c7a1e78841299fd3f39d2941552b58b0",
+        "/opt/homebrew/Cellar/assimp/6.0.6/lib/libassimp.6.0.6.dylib": "c1bb8ea194fc914d4dd7177eee0065d39fad4902749942d6c8621d9f8815a318"
+      }
+    },
+    "open-mesh": {
+      "source_sha256": "9d22e65bdd6a125ac2043350a019ec4346ea83922cafdf47e125a03c16f6fa07",
+      "installed_files": {
+        "/opt/homebrew/Cellar/open-mesh/11.0.0/include/OpenMesh/Core/IO/MeshIO.hh": "becdce26972a17829c05b2f1a868cf2fdc725788af462b53aacd509504b277da",
+        "/opt/homebrew/Cellar/open-mesh/11.0.0/lib/libOpenMeshCore.11.0.dylib": "d487860d9b036ce7fae2d8f4cd6ee0e38256e08c6a5b2a2e5ff7ceedca0e17e6",
+        "/opt/homebrew/Cellar/open-mesh/11.0.0/lib/libOpenMeshTools.11.0.dylib": "b9690641454d6ce7c3fe96969f59fd582ca1dae131dffb386bc17d37487fde9e"
+      }
+    }
+  },
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "third_party": [
+    {
+      "package": "assimp",
+      "version": "6.0.6",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/assimp.cpp -I/opt/homebrew/Cellar/assimp/6.0.6/include -L/opt/homebrew/Cellar/assimp/6.0.6/lib -lassimp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/assimp",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/assimp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "meshes": 1,
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "open-mesh",
+      "version": "11.0.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /opt/homebrew/Cellar/open-mesh/11.0.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/open_mesh.cpp -L/opt/homebrew/Cellar/open-mesh/11.0.0/lib -Wl,-rpath,/opt/homebrew/Cellar/open-mesh/11.0.0/lib -lOpenMeshCore -lOpenMeshTools -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/open-mesh",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/open-mesh /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}
