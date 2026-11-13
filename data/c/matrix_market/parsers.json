@@ -1,0 +1,20 @@
+[
+  {
+    "name": "suite-sparse",
+    "version": "7.14.1",
+    "license": "LGPL-2.1-or-later AND GPL-2.0-or-later",
+    "license_evidence": "https://github.com/DrTimothyAldenDavis/SuiteSparse/blob/v7.14.1/CHOLMOD/Doc/License.txt",
+    "documentation": "https://github.com/DrTimothyAldenDavis/SuiteSparse/blob/v7.14.1/CHOLMOD/Check/cholmod_read.c",
+    "input_api": "cholmod_l_read_sparse2(FILE *local_stream, CHOLMOD_DOUBLE, cholmod_common *)",
+    "adapter": "adapters/c/matrix_market/suite_sparse.c",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "nnz": 3
+    },
+    "scope": "sparse matrix dimensions and nonzero count from a real coordinate Matrix Market file",
+    "family": "SuiteSparse CHOLMOD Check reader",
+    "family_note": "C and C++ call sites share the same SuiteSparse CHOLMOD Check parser and installed library."
+  }
+]

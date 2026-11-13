@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-11-13T04:04:29.569118+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/c/matrix_market/source-lock.json",
+  "local_libraries": {
+    "suite-sparse": {
+      "source_sha256": "81e560e1f74546df139edb765b3f5bc865866da23062312ffe8fd821063c8397",
+      "installed_files": {
+        "/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse/cholmod.h": "e15d65c8bb8d9de2b3d21941418f7779d6076a8b57541a32c4332f04b2e5b6c5",
+        "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libcholmod.5.3.5.dylib": "d3ea8afc4f84e16759b79da33861fbe587ed2e303e1269aa6f7d5b0d526c46ca"
+      }
+    }
+  },
+  "control": "controls/matrix_market/real-general.mtx",
+  "control_sha256": "65614ddf08f46422a1f6f71d67bdc4490e84635b3cc61dfe089c82c41829da4c",
+  "third_party": [
+    {
+      "package": "suite-sparse",
+      "version": "7.14.1",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/suite_sparse.c -I/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse -L/opt/homebrew/Cellar/suite-sparse/7.14.1/lib -lcholmod -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/suite-sparse",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/suite-sparse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

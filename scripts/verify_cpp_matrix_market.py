@@ -60,6 +60,11 @@ def main() -> None:
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", source["include_dir"], str(ROOT / parser["adapter"]),
                        "-o", str(target / name)]
+        elif name == "suite-sparse":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "cholmod"]))
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags,
+                       "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)

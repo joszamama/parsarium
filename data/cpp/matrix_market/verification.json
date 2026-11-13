@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T04:01:03.541632+00:00",
+  "checked_at_utc": "2026-11-13T04:04:31.342458+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/matrix_market/source-lock.json",
@@ -9,6 +9,13 @@
       "installed_files": {
         "/opt/homebrew/Cellar/eigen/5.0.1/include/eigen3/unsupported/Eigen/SparseExtra": "c5b45cee4ac9f2bbe5b7b60e8049bca2ca2e2811e2621c8990163dde0c64b3e8",
         "/opt/homebrew/Cellar/eigen/5.0.1/include/eigen3/unsupported/Eigen/src/SparseExtra/MarketIO.h": "4ae3e9a6373d8c3440d5663f25a279e1feabddf5b0e8c8df4e2ae252f4e1189f"
+      }
+    },
+    "suite-sparse": {
+      "source_sha256": "81e560e1f74546df139edb765b3f5bc865866da23062312ffe8fd821063c8397",
+      "installed_files": {
+        "/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse/cholmod.h": "e15d65c8bb8d9de2b3d21941418f7779d6076a8b57541a32c4332f04b2e5b6c5",
+        "/opt/homebrew/Cellar/suite-sparse/7.14.1/lib/libcholmod.5.3.5.dylib": "d3ea8afc4f84e16759b79da33861fbe587ed2e303e1269aa6f7d5b0d526c46ca"
       }
     }
   },
@@ -26,6 +33,19 @@
         "cols": 3,
         "nnz": 3,
         "entry_1_3": -2.0
+      },
+      "pass": true
+    },
+    {
+      "package": "suite-sparse",
+      "version": "7.14.1",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/suite_sparse.cpp -I/opt/homebrew/Cellar/suite-sparse/7.14.1/include/suitesparse -L/opt/homebrew/Cellar/suite-sparse/7.14.1/lib -lcholmod -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/suite-sparse",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/matrix_market/target/suite-sparse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "nnz": 3
       },
       "pass": true
     }
