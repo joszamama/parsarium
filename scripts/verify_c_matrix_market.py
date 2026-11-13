@@ -53,6 +53,35 @@ def main() -> None:
     for parser in parsers:
         name = parser["name"]
         source = sources[name]
+        if name == "nist-mmio":
+            source_dir = cache / "nist-mmio-2007-12-20"
+            source_dir.mkdir(exist_ok=True)
+            for filename, pinned in source["source_files"].items():
+                path = source_dir / filename
+                if not path.exists() or digest(path) != pinned["sha256"]:
+                    run(["curl", "-fsSL", "-A", "Mozilla/5.0 Parsarium verifier",
+                         "-o", str(path), pinned["url"]])
+                assert digest(path) == pinned["sha256"], filename
+            assert digest(source_dir / "mmio.c") == source["source_sha256"]
+            object_path = source_dir / "mmio.o"
+            source_command = ["cc", "-std=c11", "-O2", "-c", str(source_dir / "mmio.c"),
+                              "-o", str(object_path)]
+            run(source_command)
+            command = ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(source_dir), str(ROOT / parser["adapter"]),
+                       str(object_path), "-o", str(target / name)]
+            run(command)
+            execute = [str(target / name), str(ROOT / parser["control"])]
+            output = json.loads(run(execute))
+            assert output == parser["expected_output"], (name, output)
+            rows.append({"package": name, "version": parser["version"], "control": parser["control"],
+                         "build_command": shlex.join(source_command) + " && " + shlex.join(command),
+                         "command": shlex.join(execute), "output": output, "pass": True})
+            local_libraries[name] = {"source_sha256": source["source_sha256"],
+                                     "header_sha256": source["source_files"]["mmio.h"]["sha256"],
+                                     "built_object_sha256": digest(object_path)}
+            print(f"{name}@{parser['version']}: C Matrix Market passed", flush=True)
+            continue
         archive = cache / f"{name}-{source['release']}{'.zip' if source.get('source_build') == 'lis' else '.tar.gz'}"
         if source.get("source_build") == "bebop_smc":
             download_pinned(source["source_url"], archive, source["source_sha256"])

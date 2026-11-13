@@ -1198,12 +1198,13 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): ten packages
-  verified on valid real coordinate or symmetric controls, 10 below the working
+- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): eleven packages
+  verified on valid real coordinate or symmetric controls, 9 below the working
   goal. Three bounded Homebrew formula-name searches recorded 20 hits, 19 unique
-  names; 18 remain unverified. Six verified packages lack comparable Homebrew
+  names; 18 remain unverified. Seven verified packages lack comparable Homebrew
   requested-install counts and remain unranked. The Libmtx source build uses
-  Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS.
+  Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS. NIST's dated, hash-pinned
+  `mmio.c` and `mmio.h` source files provide the reference C reader.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

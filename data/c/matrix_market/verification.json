@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T12:39:32.714322+00:00",
+  "checked_at_utc": "2026-11-13T14:07:42.043454+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/matrix_market/source-lock.json",
@@ -14,7 +14,7 @@
     "lis": {
       "source_sha256": "bf0c60845d18ae5183f38df7e69dfa2859363579a580abdc243d13520bb83730",
       "installed_files": {},
-      "built_lib_sha256": "726c7da446d9523fa9b485b205d2e3f9bd322dee7797003d50cc960b440d891c"
+      "built_lib_sha256": "c6c9d242e365ef0242cb9934defe790ec13ff164b9ad890bb83b3bab4f4f77ef"
     },
     "hypre": {
       "source_sha256": "3083cf943e1dab54517acae36afad72a4ada2c72c9567e525fc9c6efedb14e0c",
@@ -35,7 +35,7 @@
     "librsb": {
       "source_sha256": "f9d343f9e24bceb1d6f76c3db0617ad326eb246891b51424f3931a8f3965bf5f",
       "installed_files": {},
-      "built_lib_sha256": "e23bfc1c30876049760e0c02eaf81621f33d6b3e9711c5adbd7809ed373ca9ea"
+      "built_lib_sha256": "0f21bbb0e08393e26f2774a76e16314654c50790cbce7b39f10026d788544bee"
     },
     "superlu": {
       "source_sha256": "86dcca1e086f8b8079990d07f00eb707fc9ef412cf3b2ce808b37956f0de2cb8",
@@ -71,7 +71,12 @@
       "installed_files": {
         "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
       },
-      "built_lib_sha256": "d91dbb95dba22504a0d2674a4f4db68b542d2b6fafa48e50c47f1a8cb2ff50d4"
+      "built_lib_sha256": "8ec3aefa1d4b740acf818203aa05ad2aff96a26eedb1e33ec2ff47961cd18c9c"
+    },
+    "nist-mmio": {
+      "source_sha256": "645cf3d0152e7323d2ffdbc552fbad7c87d82d3c021cb015337a10be0632a588",
+      "header_sha256": "06cb5f79615781304c1e5d00812f47f8ea39479f4e505a1f4eb5585768aac2ff",
+      "built_object_sha256": "58d51168b371f531eb40d4c21caf97f1cafc6b22edfbd791cd5426b016def2a7"
     }
   },
   "control": "controls/matrix_market/real-general.mtx",
@@ -214,6 +219,20 @@
         "cols": 3,
         "nnz": 3,
         "entry_1_3": -2.0
+      },
+      "pass": true
+    },
+    {
+      "package": "nist-mmio",
+      "version": "2007-12-20",
+      "control": "controls/matrix_market/real-general.mtx",
+      "build_command": "cc -std=c11 -O2 -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/nist-mmio-2007-12-20/mmio.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/nist-mmio-2007-12-20/mmio.o && cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/nist-mmio-2007-12-20 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/nist_mmio.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-matrix-market/nist-mmio-2007-12-20/mmio.o -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/nist-mmio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/matrix_market/target/nist-mmio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/matrix_market/real-general.mtx",
+      "output": {
+        "rows": 2,
+        "cols": 3,
+        "entries": 3,
+        "value_1_3": -2.0
       },
       "pass": true
     }

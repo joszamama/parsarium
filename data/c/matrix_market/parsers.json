@@ -185,5 +185,24 @@
     "scope": "2x3 real general coordinate matrix, three nonzeros and value at (1,3)",
     "family": "Libmtx native Matrix Market file parser",
     "family_note": "Distinct tagged C library and local file API, parsing banner, size and entries. Its zero observed repository stars are not comparable to the cell's Homebrew requested-install metric."
+  },
+  {
+    "name": "nist-mmio",
+    "version": "2007-12-20",
+    "license": "NIST software reuse terms",
+    "license_evidence": "https://www.nist.gov/copyrights-disclaimers (NIST software disclaimer) and https://math.nist.gov/MatrixMarket/mmio-c.html (official source publication)",
+    "documentation": "https://math.nist.gov/MatrixMarket/mmio-c.html",
+    "input_api": "mm_read_banner(FILE*, MM_typecode*); mm_read_mtx_crd_size(FILE*,...); mm_read_mtx_crd_data(FILE*,...)",
+    "adapter": "adapters/c/matrix_market/nist_mmio.c",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entries": 3,
+      "value_1_3": -2.0
+    },
+    "scope": "Matrix Market real general coordinate banner, dimensions, three entries and value at (1,3)",
+    "family": "NIST Matrix Market ANSI C mmio reference reader",
+    "family_note": "The NIST mmio routines are independently published source files and the reference lineage copied into several later packages; those package paths are recorded separately where verified."
   }
 ]

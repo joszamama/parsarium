@@ -1,6 +1,6 @@
 # C × Matrix Market: verified parser ranking
 
-10 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C.
+11 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -14,6 +14,7 @@
 | unranked | [BeBOP SMC](https://bebop.cs.berkeley.edu/smc/features.html) | 2009-12-11 dated source | unknown | 2×3 real coordinate matrix, three entries, value (1,3) = −2 | BeBOP reader with bundled NIST mmio banner parser |
 | unranked | [SuperLU_DIST](https://github.com/xiaoyeli/superlu_dist/blob/v9.3.0/README.md) | 9.3.0 | unknown | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU dreadMM reader lineage |
 | unranked | [Libmtx](https://github.com/simulahpc/libmtx/blob/v0.5.0/libmtx/mtxfile/mtxfile.h) | 0.5.0 | unknown | 2×3 real coordinate matrix, three nonzeros, entry (1,3) = −2 | Libmtx native Matrix Market file parser |
+| unranked | [NIST mmio](https://math.nist.gov/MatrixMarket/mmio-c.html) | 2007-12-20 dated source | unknown | real general coordinate banner, 2×3 dimensions, three entries, value (1,3) = −2 | NIST ANSI C reference reader |
 
 Formula-name hits are leads rather than parser proof. The C standard library has no documented Matrix Market parser. C and C++ call sites share the CHOLMOD and Lis parser families. Lis accepts the square symmetric control and rejects the rectangular general control. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -31,4 +32,6 @@ GNU GSL 2.8 parsed the valid control with `gsl_spmatrix_fscanf(FILE *)` in both 
 
 BeBOP SMC is an official dated BSD source release with a local C API. It passed the control and remains unranked because its source distribution has no comparable Homebrew requested-install count.
 
-Libmtx 0.5.0 is a tagged GPL C library specifically for Matrix Market files. Its documented `mtxfile_read` parsed the valid local control's banner, dimensions, entries and value at (1,3). No comparable Homebrew formula metric exists; its observed primary GitHub star count was zero. This is a verified format reader with no demonstrated adoption from that auxiliary signal, and ten more paths remain needed.
+Libmtx 0.5.0 is a tagged GPL C library specifically for Matrix Market files. Its documented `mtxfile_read` parsed the valid local control's banner, dimensions, entries and value at (1,3). No comparable Homebrew formula metric exists; its observed primary GitHub star count was zero. This is a verified format reader with no demonstrated adoption from that auxiliary signal.
+
+NIST's published `mmio.c` and `mmio.h` are content-pinned official source files. The implementation's last-modified date is 2007-12-20; the header is older. NIST's sitewide software terms allow use, modification and redistribution, but the individual files have no license header or semantic version tag. Its `FILE*` API parsed the valid control's banner, dimensions and entries. It remains unranked because there is no comparable Homebrew formula metric. Nine more paths are needed for the working count.

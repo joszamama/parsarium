@@ -205,5 +205,27 @@
       "/opt/homebrew/Cellar/openblas/0.3.34/lib/libopenblas.dylib": "07bc71aac2823e9202ea4088429a4f5d05146aded15e8aa44600e285eb700415"
     },
     "build_note": "Tagged C source and parser files are SHA-256 pinned. Autotools builds only libmtx.la and installs only its library target because the source archive lacks generated Texinfo documentation. The linked OpenBLAS 0.3.34 dylib is hash-pinned; MPI, OpenMP and gzip support are disabled. The built libmtx dylib hash is captured in verification."
+  },
+  "nist-mmio": {
+    "release": "2007-12-20",
+    "license": "NIST software reuse terms",
+    "source_kind": "official_dated_source_files",
+    "source_url": "https://math.nist.gov/MatrixMarket/mmio/c/mmio.c",
+    "source_sha256": "645cf3d0152e7323d2ffdbc552fbad7c87d82d3c021cb015337a10be0632a588",
+    "documentation": "https://math.nist.gov/MatrixMarket/mmio-c.html",
+    "source_files": {
+      "mmio.c": {
+        "url": "https://math.nist.gov/MatrixMarket/mmio/c/mmio.c",
+        "sha256": "645cf3d0152e7323d2ffdbc552fbad7c87d82d3c021cb015337a10be0632a588",
+        "last_modified_utc": "2007-12-20T21:33:31Z"
+      },
+      "mmio.h": {
+        "url": "https://math.nist.gov/MatrixMarket/mmio/c/mmio.h",
+        "sha256": "06cb5f79615781304c1e5d00812f47f8ea39479f4e505a1f4eb5585768aac2ff",
+        "last_modified_utc": "1999-04-15T17:12:42Z"
+      }
+    },
+    "source_build": "nist_mmio",
+    "build_note": "NIST publishes the two source files directly, without a semantic tag. The dated December 2007 implementation and older header are content-pinned by SHA-256 and built locally. The official NIST software disclaimer permits use, copy, modification and distribution; the two source files have no individual license header."
   }
 }
