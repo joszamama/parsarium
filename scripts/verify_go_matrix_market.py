@@ -25,7 +25,8 @@ def main() -> None:
         controls[control] = hashlib.sha256(path.read_bytes()).hexdigest()
         for companion in parser.get("control_companions", []):
             controls[companion] = hashlib.sha256((ROOT / companion).read_bytes()).hexdigest()
-        if parser["name"] == "github.com/cpmech/gosl/la":
+        if parser["name"] in ("github.com/cpmech/gosl/la",
+                              "github.com/ATIinc/gosl-ati/la"):
             try:
                 row, library = verify_gosl(parser)
                 results.append(row)
@@ -35,7 +36,7 @@ def main() -> None:
                     "package": parser["name"], "module": parser["module"],
                     "version": parser["version"], "scope": parser["scope"],
                     "control": control,
-                    "command": "python3 scripts/verify_gosl_go_matrix_market.py",
+                    "command": "python3 scripts/verify_gosl_go_matrix_market.py --package " + parser["name"],
                     "pass": False, "output": None, "error": str(exc),
                 })
             continue

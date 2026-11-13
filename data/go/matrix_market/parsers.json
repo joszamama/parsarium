@@ -142,5 +142,28 @@
       "value_0_2": -2,
       "symmetric": false
     }
+  },
+  {
+    "name": "github.com/ATIinc/gosl-ati/la",
+    "module": "github.com/ATIinc/gosl-ati",
+    "version": "v0.0.0-20250428200606-91cf5048bc22",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/ATIinc/gosl-ati/blob/91cf5048bc226688b0ee0d061365c89317647898/LICENSE",
+    "input_api": "(*Triplet).ReadSmat(localFilename string, mirrorIfSym bool)",
+    "documentation": "https://github.com/ATIinc/gosl-ati/blob/91cf5048bc226688b0ee0d061365c89317647898/la/sparse_matrix.go",
+    "scope": "Coordinate real general matrix dimensions, entries, symmetric flag and value",
+    "family": "Gosl native Matrix Market reader",
+    "family_note": "ATIinc publishes a separate Go module fork. Its real Matrix Market reader is substantially the same as cpmech/gosl: the source diff changes the imported fork packages and comments, not the real ReadSmat logic. The two packages are distinct input paths but not independent parsing engines.",
+    "control": "controls/matrix_market/real-general.mtx",
+    "adapter": "adapters/go/matrix_market/gosl_ati/main.go",
+    "adapter_manifest_dir": "adapters/go/matrix_market/gosl_ati",
+    "source_lock": "data/go/matrix_market/gosl-ati-lock.json",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entries": 3,
+      "value_0_2": -2,
+      "symmetric": false
+    }
   }
 ]
