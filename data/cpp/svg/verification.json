@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:58:54.668449+00:00",
+  "checked_at_utc": "2026-11-13T03:12:33.286093+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -97,6 +97,11 @@
       "source_sha256": "311f3a2603e1973bb59baef9dfa740a376de713157d4782ee043681e889c9260",
       "local_header_sha256": "648706211967bb4ac09fe99d215cad0f04c0276ff8088b372fb0599339b5915d",
       "local_library_sha256": "02eb64a085808b68e72cb9031fd7dc7c31c0606205a97ddafe6854f118dbdb56"
+    },
+    "qtwebengine": {
+      "source_sha256": "6101c1aa00ff933d1b65ee5d167f76e8d71b9ac5b378b0111277723ebda7c163",
+      "local_header_sha256": "fdd2cc2ea2184c0c63faa9ba6eb1e093d0d30c5a4bc804a5db575e8bf1233af4",
+      "local_library_sha256": "1af7641817a78470b7e19a90340f257dd246061b2363eefb88d6a52b4fe7e27d"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -477,6 +482,20 @@
         "width": 2,
         "height": 1,
         "ready": true
+      },
+      "pass": true
+    },
+    {
+      "package": "qtwebengine",
+      "version": "6.11.2",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/qtwebengine.cpp -F/opt/homebrew/lib -I/opt/homebrew/include/QtWebEngineCore -I/opt/homebrew/lib/QtWebEngineCore.framework -DQT_WEBENGINECORE_LIB -I/opt/homebrew/include/QtQuick -I/opt/homebrew/lib/QtQuick.framework -DQT_QUICK_LIB -I/opt/homebrew/include/QtOpenGL -I/opt/homebrew/lib/QtOpenGL.framework -DQT_OPENGL_LIB -I/opt/homebrew/include/QtGui -I/opt/homebrew/lib/QtGui.framework -DQT_GUI_LIB -I/opt/homebrew/include/QtWebChannel -I/opt/homebrew/lib/QtWebChannel.framework -DQT_WEBCHANNEL_LIB -I/opt/homebrew/include/QtQml -I/opt/homebrew/lib/QtQml.framework -DQT_QML_LIB -I/opt/homebrew/include/QtQmlIntegration -I/opt/homebrew/include -DQT_QMLINTEGRATION_LIB -I/opt/homebrew/include/QtNetwork -I/opt/homebrew/lib/QtNetwork.framework -DQT_NETWORK_LIB -I/opt/homebrew/include/QtPositioning -I/opt/homebrew/lib/QtPositioning.framework -DQT_POSITIONING_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib -framework QtWebEngineCore -framework QtQuick -framework QtOpenGL -framework QtGui -framework QtWebChannel -framework QtQml -framework QtNetwork -framework QtPositioning -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/qtwebengine",
+      "command": "env QT_QPA_PLATFORM=offscreen /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/qtwebengine /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "root": "svg",
+        "width": 2,
+        "height": 1,
+        "rectangles": 2
       },
       "pass": true
     }

@@ -18,6 +18,14 @@ CONTROL = ROOT / "controls/svg/red-green.svg"
 CONTROL_SHA256 = "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2"
 
 
+def file_sha256(path: Path) -> str:
+    digest = sha256()
+    with path.open("rb") as source:
+        for block in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def run(command: list[str], cwd: Path = ROOT, timeout: int = 180) -> str:
     result = subprocess.run(command, cwd=cwd, text=True, capture_output=True, timeout=timeout)
     if result.returncode:
@@ -44,10 +52,13 @@ def verify(ecosystem: str) -> None:
         suffix = ".tar.xz" if source["source_url"].endswith(".tar.xz") else (
             ".tar.bz2" if source["source_url"].endswith(".tar.bz2") else ".tar.gz")
         archive = cache / f"{name}-{source['release']}{suffix}"
-        if not archive.exists() or sha256(archive.read_bytes()).hexdigest() != source["source_sha256"]:
+        if not archive.exists() or file_sha256(archive) != source["source_sha256"]:
+            partial = archive.with_suffix(archive.suffix + ".part")
             with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium SVG verifier"}), timeout=120) as response:
-                archive.write_bytes(response.read())
-        assert sha256(archive.read_bytes()).hexdigest() == source["source_sha256"]
+                with partial.open("wb") as output:
+                    shutil.copyfileobj(response, output, length=1024 * 1024)
+            partial.replace(archive)
+        assert file_sha256(archive) == source["source_sha256"]
         with tarfile.open(archive) as tar:
             member = tar.extractfile(source["source_header_member"])
             assert member is not None
@@ -111,12 +122,12 @@ def verify(ecosystem: str) -> None:
                 assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source.get("pkg_config_version", source["release"])
             header = Path(source["local_header"])
             library = Path(source["local_library"])
-            assert sha256(library.read_bytes()).hexdigest() == source["local_library_sha256"]
+            assert file_sha256(library) == source["local_library_sha256"]
             for dependency in source.get("installed_dependencies", []):
                 if "formula" in dependency:
                     assert dependency["revision"] in run(["brew", "list", "--versions", dependency["formula"]]).split()
-                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
-        assert sha256(header.read_bytes()).hexdigest() == source["local_header_sha256"]
+                assert file_sha256(Path(dependency["path"])) == dependency["sha256"]
+        assert file_sha256(header) == source["local_header_sha256"]
         compiler = "c++" if ecosystem == "cpp" else "cc"
         std = "-std=c++17" if ecosystem == "cpp" else "-std=c11"
         if name == "juce":
@@ -151,7 +162,7 @@ def verify(ecosystem: str) -> None:
         if name != "juce":
             run(command)
         execute = [str(juce_binary if juce_binary is not None else target / name), str(CONTROL)]
-        if name == "qtdeclarative":
+        if name in ("qtdeclarative", "qtwebengine"):
             execute = ["env", "QT_QPA_PLATFORM=offscreen", *execute]
         output = json.loads(run(execute))
         assert output == parser["expected_output"], (name, output)
@@ -164,9 +175,9 @@ def verify(ecosystem: str) -> None:
         libraries[name] = {"source_sha256": source["source_sha256"],
                            "local_header_sha256": source["local_header_sha256"]}
         if library is not None:
-            libraries[name]["local_library_sha256"] = sha256(library.read_bytes()).hexdigest()
+            libraries[name]["local_library_sha256"] = file_sha256(library)
         if juce_binary is not None:
-            libraries[name]["built_executable_sha256"] = sha256(juce_binary.read_bytes()).hexdigest()
+            libraries[name]["built_executable_sha256"] = file_sha256(juce_binary)
         print(f"{name}@{parser['version']}: {ecosystem} SVG passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++" if ecosystem == "cpp" else "cc", "--version"]).splitlines()[0],

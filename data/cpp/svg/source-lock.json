@@ -490,5 +490,39 @@
       }
     ],
     "build_note": "Pinned QtDeclarative release and installed VectorImage private header/framework/plugin; QML adapter runs offscreen and uses QtSvg document parser."
+  },
+  "qtwebengine": {
+    "release": "6.11.2",
+    "installed_revision": "6.11.2_1",
+    "license": "LGPL-3.0-only",
+    "source_url": "https://download.qt.io/official_releases/qt/6.11/6.11.2/submodules/qtwebengine-everywhere-src-6.11.2.tar.xz",
+    "source_sha256": "6101c1aa00ff933d1b65ee5d167f76e8d71b9ac5b378b0111277723ebda7c163",
+    "repository": "https://code.qt.io/cgit/qt/qtwebengine.git/",
+    "source_header_member": "qtwebengine-everywhere-src-6.11.2/src/core/api/qwebenginepage.h",
+    "local_header": "/opt/homebrew/Cellar/qtwebengine/6.11.2_1/lib/QtWebEngineCore.framework/Versions/A/Headers/qwebenginepage.h",
+    "local_header_sha256": "fdd2cc2ea2184c0c63faa9ba6eb1e093d0d30c5a4bc804a5db575e8bf1233af4",
+    "local_library": "/opt/homebrew/Cellar/qtwebengine/6.11.2_1/lib/QtWebEngineCore.framework/Versions/A/QtWebEngineCore",
+    "local_library_sha256": "1af7641817a78470b7e19a90340f257dd246061b2363eefb88d6a52b4fe7e27d",
+    "pkg_config": "Qt6WebEngineCore",
+    "pkg_config_version": "6.12.0",
+    "license_member": "qtwebengine-everywhere-src-6.11.2/LICENSES/LGPL-3.0-only.txt",
+    "license_sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+    "source_engine_member": "qtwebengine-everywhere-src-6.11.2/src/core/api/qwebenginepage.cpp",
+    "source_engine_sha256": "6d7a5ae1e68959a3d30b11474292212af7f7a61ba3d729225c7f3d149e2c4262",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/qtwebengine/6.11.2_1/lib/QtWebEngineCore.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess",
+        "sha256": "38916f9a15c1157fb4105d244f0f59c5696c4cf1165d34eff300139eaa9f5bee",
+        "role": "Chromium renderer process"
+      }
+    ],
+    "homebrew_source_patches": [
+      {
+        "url": "https://github.com/chromium/chromium/commit/6c0a651f9cf91d07c87be8feba854a38a311aba6.patch?full_index=1",
+        "sha256": "5ed76e8bf00380d5baac097391f43c5c6f6fe438ab04efc647a8aa5511a19ce7",
+        "note": "Homebrew patch listed for Chromium source; not independently rebuilt."
+      }
+    ],
+    "build_note": "Official Qt source archive SHA matches Homebrew formula; installed public framework header matches tagged source. QtWebEngineCore and renderer process are hash pinned. Qt6WebEngineCore pkg-config reports linked Qt runtime 6.12.0 while installed QtWebEngine package is 6.11.2_1."
   }
 }

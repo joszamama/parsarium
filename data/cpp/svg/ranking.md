@@ -1,6 +1,6 @@
 # C++ × SVG: verified parser ranking
 
-19 verified third-party package paths; working goal 20, ceiling 30. Exact primary GitHub stars are compared only within this ecosystem. Stars measure broad project interest, not SVG-specific adoption. Homebrew name hits are discovery leads.
+20 verified third-party package paths; working goal 20, ceiling 30. Exact primary GitHub stars are compared only within this ecosystem. Stars measure broad project interest, not SVG-specific adoption. Homebrew name hits are discovery leads.
 
 | Rank | Package | Pinned release | Primary GitHub stars | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -20,8 +20,9 @@
 | unranked | [QtSvg](https://doc.qt.io/qt-6/qsvgrenderer.html) | 6.12.0 | unknown | SVG dimensions and two rendered pixels | QtSvg QSvgRenderer and Qt painter |
 | unranked | [QtBase QImageReader](https://doc.qt.io/qt-6/qimagereader.html) | 6.12.0 | unknown | SVG dimensions and two rendered pixels | QtSvg image plugin |
 | unranked | [QtDeclarative VectorImage](https://doc.qt.io/qt-6/qml-qtquick-vectorimage-vectorimage.html) | 6.12.0 | unknown | SVG vector scene with parsed intrinsic dimensions | QtSvg document parser via Qt Quick |
+| unranked | [QtWebEngine](https://doc.qt.io/qt-6/qwebenginepage.html) | 6.11.2 | unknown | parsed SVG DOM root, dimensions and two rectangles | Chromium Blink SVG DOM parser |
 | unranked | [libsvgtiny](https://www.netsurf-browser.org/projects/libsvgtiny/) | 0.1.8 | unknown | SVG dimensions, two shapes and fill colors | libsvgtiny over libdom |
 | unranked | [libsvg](https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz) | 0.1.4 | unknown | SVG root dimensions | libsvg over libxml2 |
 | unranked | [libsvg-cairo](https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz) | 0.1.6 | unknown | SVG dimensions and two rendered pixels | libsvg parser with Cairo |
 
-libvips and GdkPixbuf share librsvg; libsvg-cairo shares libsvg. PlutoSVG and LunaSVG share PlutoVG rasterization but retain separate SVG document parsers. JUCE bundles LunaSVG and exposes its own C++ Drawable API. wxWidgets bundles NanoSVG and exposes a separate bitmap API. QtDeclarative VectorImage shares QtSvg syntax parsing but creates a separate Qt Quick vector scene. QtSvg is a separate Qt module with its own document reader; QtBase QImageReader uses that QtSvg image plugin. One Donner documentation lead remains unresolved after a C++20 toolchain build failure; 1 additional verified path is needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.
+libvips and GdkPixbuf share librsvg; libsvg-cairo shares libsvg. PlutoSVG and LunaSVG share PlutoVG rasterization but retain separate SVG document parsers. JUCE bundles LunaSVG and exposes its own C++ Drawable API. wxWidgets bundles NanoSVG and exposes a separate bitmap API. QtDeclarative VectorImage shares QtSvg syntax parsing but creates a separate Qt Quick vector scene. QtWebEngine uses Chromium Blink SVG DOM parsing. QtSvg is a separate Qt module with its own document reader; QtBase QImageReader uses that QtSvg image plugin. The 20-path working goal is met. One Donner documentation lead remains unresolved after a C++20 toolchain build failure. See `cell.json`, `registry-snapshot.json`, and `verification.json`.

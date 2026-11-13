@@ -4,7 +4,7 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
-C and C++ × SVG and MP4 batches, plus completed MP3 with ID3v2 batches,
+C × SVG and C/C++ × MP4 batches, plus completed C++ × SVG and MP3 with ID3v2 batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -18,7 +18,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 73 cells at the 20-parser target, seven started below target, and 8
+There are 74 cells at the 20-parser target, six started below target, and 8
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -236,8 +236,10 @@ returns the root dimensions and two rectangle elements from the control,
 JUCE 9.0.5, whose Drawable API reads the local SVG through bundled LunaSVG,
 and wxWidgets 3.3.4, whose bitmap API renders the two control pixels through
 bundled NanoSVG. QtDeclarative VectorImage 6.12.0 also passes the C++ control
-through the shared QtSvg document parser. C++ SVG is at 19/20; Donner remains
-an unresolved C++ lead after a C++20 toolchain build failure. Additional
+through the shared QtSvg document parser. QtWebEngine 6.11.2 reads the local
+SVG through Chromium and reports its SVG DOM root, dimensions, and rectangles.
+C++ SVG has reached 20/20; Donner remains an unresolved C++ lead after a C++20
+toolchain build failure. Additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
