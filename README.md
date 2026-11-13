@@ -21,8 +21,8 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-PHP × ASCII PLY and PHP × Matrix Market have bounded searches and runtime
-inventories, but zero verified parser paths so far.
+PHP × ASCII PLY has bounded searches and a runtime inventory, but zero verified
+parser paths so far. PHP × Matrix Market has one verified, unranked package path.
 There are 79 cells at the 20-parser target and nine below target; all 88
 cells now have recorded search or verification work. A zero does **not** mean
 no parser exists. See the
@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,531 of 1,692 verified package paths have a recorded comparable cell metric;
-161 are unranked. A recorded zero is still a measured value, not evidence of
+1,531 of 1,693 verified package paths have a recorded comparable cell metric;
+162 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
