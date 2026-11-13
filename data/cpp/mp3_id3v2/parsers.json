@@ -198,5 +198,42 @@
     "scope": "MP3 audio parsing and decoded PCM from a valid ID3v2-tagged input; tag text is not exposed",
     "family": "miniaudio bundled dr_mp3 decoder",
     "family_note": "The pinned miniaudio.h embeds dr_mp3 code. C and C++ use the same miniaudio implementation. This is the same dr_mp3 lineage as the excluded SDL3_mixer major release; the library accepts the ID3v2-tagged control but does not expose its title."
+  },
+  {
+    "name": "csfml",
+    "version": "3.0.0",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/SFML/CSFML/archive/refs/tags/3.0.0.tar.gz",
+    "documentation": "https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h",
+    "input_api": "sfSoundBuffer_createFromFile(local filename); sfSoundBuffer_getSampleCount/getSampleRate/getChannelCount/getSamples",
+    "adapter": "adapters/cpp/mp3_id3v2/csfml.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "samples": 8000,
+      "sample_rate": 8000,
+      "channels": 1
+    },
+    "scope": "Fully decoded MP3 audio samples and stream fields from an ID3v2-tagged file; ID3v2 text is not exposed",
+    "family": "CSFML wrapper over SFML SoundFileReaderMp3/minimp3",
+    "family_note": "The CSFML C API delegates to the SFML C++ audio core, using its SoundFileReaderMp3 and bundled minimp3. C and C++ CSFML calls share the same library, and SFML is also counted separately in C++ as a distinct upstream package/API wrapper relation."
+  },
+  {
+    "name": "sfml",
+    "version": "3.0.2",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/SFML/SFML/archive/refs/tags/3.0.2.tar.gz",
+    "documentation": "https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1InputSoundFile.html",
+    "input_api": "sf::InputSoundFile::openFromFile(local filename); getSampleCount/getSampleRate/getChannelCount; read decoded sample",
+    "adapter": "adapters/cpp/mp3_id3v2/sfml.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "samples": 8000,
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_samples": 1
+    },
+    "scope": "MP3 audio sample count and one decoded sample from an ID3v2-tagged file; ID3v2 text is not exposed",
+    "family": "SFML SoundFileReaderMp3 over bundled minimp3",
+    "family_note": "The pinned SFML SoundFileReaderMp3.cpp uses bundled minimp3. CSFML 3.0.0 is a separate package wrapper over this same SFML engine; both C++ rows share the decoder family."
   }
 ]

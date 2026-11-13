@@ -290,5 +290,64 @@
     "source_engine_sha256": "ab1984bb9804ffd7b0303813595d0b345a8a86c34da1daffc353a14b34102a65",
     "installed_dependencies": [],
     "build_note": "Pinned upstream 0.11.26 release, matching public header and installed dylib. The pinned header embeds dr_mp3 and the installed library has no external MPEG audio decoder dependency."
+  },
+  "csfml": {
+    "release": "3.0.0",
+    "installed_revision": "3.0.0",
+    "formula": "csfml",
+    "license": "Zlib",
+    "source_url": "https://github.com/SFML/CSFML/archive/refs/tags/3.0.0.tar.gz",
+    "source_sha256": "903cd4a782fb0b233f732dc5b37861b552998e93ae8f268c40bd4ce50b2e88ca",
+    "repository": "https://github.com/SFML/CSFML",
+    "source_header_member": "CSFML-3.0.0/include/CSFML/Audio/SoundBuffer.h",
+    "local_header": "/opt/homebrew/Cellar/csfml/3.0.0/include/CSFML/Audio/SoundBuffer.h",
+    "local_header_sha256": "f19e49bea8e008d0c817efc28e1395199d38cfdeb7f6dfdb459b9623b20ae9ca",
+    "local_library": "/opt/homebrew/Cellar/csfml/3.0.0/lib/libcsfml-audio.3.0.0.dylib",
+    "local_library_sha256": "347a3b68bf1a880c2d62c60ee139b3b82aadd9769d03197e9300e91d1cb546d8",
+    "include_dir": "/opt/homebrew/Cellar/csfml/3.0.0/include",
+    "link_name": "csfml-audio",
+    "license_member": "CSFML-3.0.0/license.md",
+    "license_sha256": "c1b5c3f123f605e658e7d9d75216f6e96be67cfc1f6c431200f75fe9b7371f50",
+    "source_engine_member": "CSFML-3.0.0/src/CSFML/Audio/SoundBuffer.cpp",
+    "source_engine_sha256": "c9a66a21c669f853e476b3ddc31dceb9593450c6dcb02289296525f5043daed3",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-audio.3.0.2.dylib",
+        "sha256": "5096a0a4672fb4999b433e651107d242df834c6b22a15309e1afc16e8afae4e1",
+        "role": "underlying SFML MP3 parser with bundled minimp3"
+      }
+    ],
+    "build_note": "Pinned CSFML release source, matching public SoundBuffer header, C binding library, and linked SFML audio library. CSFML is a distinct package with a C API wrapper over SFML."
+  },
+  "sfml": {
+    "release": "3.0.2",
+    "installed_revision": "3.0.2",
+    "formula": "sfml",
+    "license": "Zlib",
+    "source_url": "https://github.com/SFML/SFML/archive/refs/tags/3.0.2.tar.gz",
+    "source_sha256": "0034e05f95509e5d3fb81b1625713e06da7b068f210288ce3fd67106f8f46995",
+    "repository": "https://github.com/SFML/SFML",
+    "source_header_member": "SFML-3.0.2/include/SFML/Audio/InputSoundFile.hpp",
+    "local_header": "/opt/homebrew/Cellar/sfml/3.0.2/include/SFML/Audio/InputSoundFile.hpp",
+    "local_header_sha256": "1979594912e86ff2da374102cd6b66a7d848bc5f1c7a4ba1531c1934263ca1f5",
+    "local_library": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-audio.3.0.2.dylib",
+    "local_library_sha256": "5096a0a4672fb4999b433e651107d242df834c6b22a15309e1afc16e8afae4e1",
+    "pkg_config": "sfml-audio",
+    "license_member": "SFML-3.0.2/license.md",
+    "license_sha256": "6fcb099a677ac6198ddf9ae8f3a368fe1880eb62ecf4bc56d8914969edb1c563",
+    "source_engine_member": "SFML-3.0.2/src/SFML/Audio/SoundFileReaderMp3.cpp",
+    "source_engine_sha256": "a934d3eebb681e0dafe6d298721822fa4b756e89abbf7586c24800978b89bb62",
+    "source_engine_members": [
+      {
+        "member": "SFML-3.0.2/extlibs/headers/minimp3/minimp3.h",
+        "sha256": "4ed835d69e2aa7565c9969dc73461e3d850fad5e58beae1bbce932861842484b"
+      },
+      {
+        "member": "SFML-3.0.2/extlibs/headers/minimp3/minimp3_ex.h",
+        "sha256": "bb001301b8666ea7a45ae057b62b17074483213b0d410555d97cc4d076e110df"
+      }
+    ],
+    "installed_dependencies": [],
+    "build_note": "Pinned SFML 3.0.2 source archive, matching C++ input header, native audio library, MP3 reader source and bundled minimp3 headers. MP3 parser also underlies the CSFML C wrapper."
   }
 }

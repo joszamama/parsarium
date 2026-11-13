@@ -1,6 +1,6 @@
 # C++ × MP3 with ID3v2: verified parser ranking
 
-11 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts use one 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad formula requests, not MP3-specific use.
+13 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts use one 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad formula requests, not MP3-specific use.
 
 | Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -10,10 +10,12 @@
 | 4 | [mpg123](https://www.mpg123.org/api/group__mpg123__metadata.shtml) | 1.33.7 | 12,297 | ID3v2 title/version after scanning valid MP3 audio | libmpg123 MPEG audio and ID3v2 parser |
 | 5 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 9,161 | ID3v2 title, MP3 stream info and one decoded frame | libsndfile over mpg123 |
 | 6 | [taglib](https://taglib.org/api/) | 2.3.2 | 4,111 | ID3v2 title and artist from a valid tagged MP3 | TagLib ID3v2 parser |
-| 7 | [libmediainfo](https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start) | 26.10 | 1,285 | ID3v2 title, MPEG Audio format and sample rate | MediaInfoLib MPEG audio and ID3v2 parsers |
-| 8 | [libmad](https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in) | 0.16.5 | 1,143 | MPEG Layer III frame and 576 decoded samples after ID3v2 tag | libmad MP3 decoder |
-| 9 | [libid3tag](https://codeberg.org/tenacityteam/libid3tag/src/tag/0.16.4/include/id3tag.h.in) | 0.16.4 | 479 | ID3v2 title and normalized tag version/frame count | libid3tag ID3v2 metadata parser |
-| 10 | [id3lib](https://id3lib.sourceforge.net/api/index.html) | 3.8.3 | 199 | ID3v2 title and frame count | id3lib C++ tag parser |
-| 11 | [miniaudio](https://github.com/mackron/miniaudio) | 0.11.26 | 125 | MP3 audio and decoded PCM from tagged input | miniaudio bundled dr_mp3 |
+| 7 | [sfml](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1InputSoundFile.html) | 3.0.2 | 3,828 | MP3 sample count and one decoded sample | SFML over bundled minimp3 |
+| 8 | [libmediainfo](https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start) | 26.10 | 1,285 | ID3v2 title, MPEG Audio format and sample rate | MediaInfoLib MPEG audio and ID3v2 parsers |
+| 9 | [libmad](https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in) | 0.16.5 | 1,143 | MPEG Layer III frame and 576 decoded samples after ID3v2 tag | libmad MP3 decoder |
+| 10 | [libid3tag](https://codeberg.org/tenacityteam/libid3tag/src/tag/0.16.4/include/id3tag.h.in) | 0.16.4 | 479 | ID3v2 title and normalized tag version/frame count | libid3tag ID3v2 metadata parser |
+| 11 | [id3lib](https://id3lib.sourceforge.net/api/index.html) | 3.8.3 | 199 | ID3v2 title and frame count | id3lib C++ tag parser |
+| 12 | [csfml](https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h) | 3.0.0 | 178 | Decoded MP3 samples and stream fields | CSFML over SFML/minimp3 |
+| 13 | [miniaudio](https://github.com/mackron/miniaudio) | 0.11.26 | 125 | MP3 audio and decoded PCM from tagged input | miniaudio bundled dr_mp3 |
 
-TagLib and id3lib C bindings use their C++ cores; libsndfile shares mpg123 for MP3 and ID3v2 parsing; MediaInfoLib uses its own format parsers and links ZenLib for utilities. SDL_mixer uses its own ID3v2 tag reader and shares mpg123 for MP3 audio. SoX uses libmad for audio and does not expose the control title; the direct libmad adapter skips the tag and decodes a frame. miniaudio embeds dr_mp3 and does not expose the control title. The other C and C++ call sites share their respective C libraries. libid3tag parses tags without decoding MP3 audio. Two leads remain unresolved, and 9 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.
+TagLib and id3lib C bindings use their C++ cores; libsndfile shares mpg123 for MP3 and ID3v2 parsing; MediaInfoLib uses its own format parsers and links ZenLib for utilities. SDL_mixer uses its own ID3v2 tag reader and shares mpg123 for MP3 audio. SoX uses libmad for audio and does not expose the control title; the direct libmad adapter skips the tag and decodes a frame. miniaudio embeds dr_mp3 and does not expose the control title. CSFML uses the SFML minimp3 engine also reached through the native SFML C++ API. The other C and C++ call sites share their respective C libraries. libid3tag parses tags without decoding MP3 audio. Two leads remain unresolved, and 7 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, and `verification.json`.

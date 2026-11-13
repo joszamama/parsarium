@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:35:35.934943+00:00",
+  "checked_at_utc": "2026-11-13T01:39:17.331566+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -58,6 +58,16 @@
       "source_sha256": "838ba55a21c9142adf7b76bdc4351e5cd8b7ae128f46b25ec25f94ae9969c600",
       "local_header_sha256": "6b376c7fbb1352ba1e0e432ab66069b335ea9405e45cb6c30b97ef0f3c9c3e0e",
       "local_library_sha256": "183c8e10052aa06ea4103b9e55e7d2055accfd65b6bd9b1a197a4aac5efee3d7"
+    },
+    "csfml": {
+      "source_sha256": "903cd4a782fb0b233f732dc5b37861b552998e93ae8f268c40bd4ce50b2e88ca",
+      "local_header_sha256": "f19e49bea8e008d0c817efc28e1395199d38cfdeb7f6dfdb459b9623b20ae9ca",
+      "local_library_sha256": "347a3b68bf1a880c2d62c60ee139b3b82aadd9769d03197e9300e91d1cb546d8"
+    },
+    "sfml": {
+      "source_sha256": "0034e05f95509e5d3fb81b1625713e06da7b068f210288ce3fd67106f8f46995",
+      "local_header_sha256": "1979594912e86ff2da374102cd6b66a7d848bc5f1c7a4ba1531c1934263ca1f5",
+      "local_library_sha256": "5096a0a4672fb4999b433e651107d242df834c6b22a15309e1afc16e8afae4e1"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -205,6 +215,33 @@
         "channels": 1,
         "frames": 8000,
         "decoded_frames": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "csfml",
+      "version": "3.0.0",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/csfml.cpp -isystem /opt/homebrew/Cellar/csfml/3.0.0/include -L/opt/homebrew/Cellar/csfml/3.0.0/lib -lcsfml-audio -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/csfml",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/csfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "samples": 8000,
+        "sample_rate": 8000,
+        "channels": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sfml",
+      "version": "3.0.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/sfml.cpp -I/opt/homebrew/Cellar/sfml/3.0.2/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/libogg/1.3.6/include -L/opt/homebrew/Cellar/sfml/3.0.2/lib -lsfml-audio -lsfml-system -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/sfml",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/sfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "samples": 8000,
+        "sample_rate": 8000,
+        "channels": 1,
+        "decoded_samples": 1
       },
       "pass": true
     }
