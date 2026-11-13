@@ -19,8 +19,8 @@ def fetch(url: str) -> dict:
 
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
-    if cell not in {"png", "zip", "mp4", "wav", "pdf", "svg", "http11", "ascii_ply", "ascii_pnm", "matrix_market", "mp3_id3v2"}:
-        raise SystemExit("usage: python3 scripts/enrich_rust.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|matrix_market|mp3_id3v2")
+    if cell not in {"png", "zip", "mp4", "wav", "pdf", "svg", "http11", "ascii_ply", "ascii_pnm", "mp3_id3v2"}:
+        raise SystemExit("usage: python3 scripts/enrich_rust.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|mp3_id3v2")
     directory = ROOT / "data" / "rust" / cell
     parser_path = directory / "parsers.json"
     parsers = json.loads(parser_path.read_text())
@@ -43,9 +43,6 @@ def main() -> None:
         if name == "include-pnm" and version == "1.0.0" and license_text == "non-standard":
             license_evidence = "https://docs.rs/crate/include-pnm/1.0.0/source/LICENSE.md"
             license_text = "CC0-1.0"
-        if cell == "matrix_market" and license_text == "non-standard" and name in {"matrix-market-rs", "ls_solver"}:
-            license_evidence = f"https://docs.rs/crate/{name}/{version}/source/LICENSE"
-            license_text = "MIT"
         parser["license"] = license_text
         releases[name] = {
             "version": version, "license": license_text, "checksum": checksum,

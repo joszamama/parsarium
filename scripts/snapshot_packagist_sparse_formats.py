@@ -1,4 +1,4 @@
-"""Save bounded Packagist leads for PHP Matrix Market and ASCII PLY."""
+"""Save bounded Packagist leads for PHP ASCII PLY."""
 
 from datetime import datetime, timezone
 import json
@@ -8,7 +8,6 @@ from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 SEARCHES = {
-    "matrix_market": ["matrix market", "matrixmarket", "mtx"],
     "ascii_ply": ["ply", "ascii ply"],
 }
 LIMIT = 100

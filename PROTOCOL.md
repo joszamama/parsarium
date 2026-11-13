@@ -2,7 +2,7 @@
 
 Eligibility rules were written before the pilot. Version 2 records the user's
 20-per-cell working goal; it does not change eligibility. The unit of analysis is one
-ecosystem × format cell. The eleven formats and eight ecosystems are listed in
+ecosystem × format cell. The ten formats and eight ecosystems are listed in
 `data/cells.json`.
 
 Version 3 clarifies selection after the user pointed out that verified parsing

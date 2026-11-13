@@ -74,7 +74,7 @@ def main() -> None:
     print(f"{report['verified_paths']} verified paths; "
           f"{report['with_comparable_metric']} with a cell metric; "
           f"{report['without_comparable_metric']} unranked; "
-          f"{report['cells_at_working_target']}/88 cells at 20")
+          f"{report['cells_at_working_target']}/{len(report['cells'])} cells at 20")
 
 
 if __name__ == "__main__":

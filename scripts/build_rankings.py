@@ -12,13 +12,13 @@ def read(path: Path):
 
 
 def main() -> None:
-    for format_name in ("png", "zip", "mp4", "wav", "pdf", "svg", "http11", "mp3_id3v2", "ascii_pnm", "ascii_ply", "matrix_market"):
+    for format_name in ("png", "zip", "mp4", "wav", "pdf", "svg", "http11", "mp3_id3v2", "ascii_pnm", "ascii_ply"):
         directory = ROOT / "data" / "javascript" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
         metrics = snapshot["download_metric"]["packages"]
         ranked = sorted(parsers, key=lambda parser: -metrics[parser["name"]]["downloads"])
-        format_label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2", "ascii_pnm": "ASCII PNM", "ascii_ply": "ASCII PLY", "matrix_market": "Matrix Market"}.get(format_name, format_name.upper())
+        format_label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2", "ascii_pnm": "ASCII PNM", "ascii_ply": "ASCII PLY"}.get(format_name, format_name.upper())
         lines = [
             f"# JavaScript × {format_label}: verified parser ranking",
             "",
@@ -41,7 +41,7 @@ def main() -> None:
         (directory / "ranking.md").write_text("\n".join(lines) + "\n")
         print(f"{format_name}: {len(ranked)} verified packages ranked")
 
-    for format_name in ("zip", "png", "wav", "http11", "mp4", "mp3_id3v2", "pdf", "svg", "ascii_pnm", "ascii_ply", "matrix_market"):
+    for format_name in ("zip", "png", "wav", "http11", "mp4", "mp3_id3v2", "pdf", "svg", "ascii_pnm", "ascii_ply"):
         directory = ROOT / "data" / "go" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
@@ -50,7 +50,7 @@ def main() -> None:
                         key=lambda parser: (-metrics[parser["name"]]["imported_by_packages"], parser["name"]))
         unknown = sorted((p for p in parsers if metrics[p["name"]]["imported_by_packages"] is None),
                          key=lambda parser: parser["name"])
-        label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2", "ascii_pnm": "ASCII PNM", "ascii_ply": "ASCII PLY", "matrix_market": "Matrix Market"}.get(format_name, format_name.upper())
+        label = {"http11": "HTTP/1.1", "mp3_id3v2": "MP3 with ID3v2", "ascii_pnm": "ASCII PNM", "ascii_ply": "ASCII PLY"}.get(format_name, format_name.upper())
         lines = [
             f"# Go × {label}: verified parser ranking",
             "",
@@ -92,8 +92,7 @@ def main() -> None:
                                ("ascii_pnm", "ASCII PNM"),
                                ("zip", "ZIP"), ("wav", "WAV"), ("pdf", "PDF"),
                                ("mp3_id3v2", "MP3 with ID3v2"), ("mp4", "MP4"),
-                               ("http11", "HTTP/1.1"), ("svg", "SVG"),
-                               ("matrix_market", "Matrix Market")):
+                               ("http11", "HTTP/1.1"), ("svg", "SVG")):
         directory = ROOT / "data" / "python" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")
@@ -123,8 +122,7 @@ def main() -> None:
         print(f"python/{format_name}: {len(parsers)} verified packages, {len(unknown)} unranked")
 
     for format_name, label in (("png", "PNG"), ("zip", "ZIP"), ("mp4", "MP4"), ("wav", "WAV"), ("pdf", "PDF"), ("svg", "SVG"), ("http11", "HTTP/1.1"), ("ascii_ply", "ASCII PLY"), ("ascii_pnm", "ASCII PNM"),
-                               ("mp3_id3v2", "MP3 with ID3v2"),
-                               ("matrix_market", "Matrix Market")):
+                               ("mp3_id3v2", "MP3 with ID3v2")):
         directory = ROOT / "data" / "rust" / format_name
         parsers = read(directory / "parsers.json")
         snapshot = read(directory / "registry-snapshot.json")

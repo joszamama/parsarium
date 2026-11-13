@@ -1,37 +1,20 @@
 # Parsarium
 
 Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
-specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
-verified C × ZIP, PDF, and ASCII PNM batches, a below-target C × Matrix Market batch,
-verified C++ × PNG, ZIP, and WAV batches,
-and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
-C × SVG and MP4 and C/C++ × ASCII PLY batches, plus completed C++ × MP4, SVG and MP3 with ID3v2 batches,
-and a below-target C++ × Matrix Market batch,
-a verified JavaScript × PNG pilot,
-JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
-plus a below-target JavaScript × Matrix Market search,
-Go × ZIP, PNG, WAV, HTTP/1.1, MP4, MP3 with ID3v2, PDF, SVG, ASCII PLY, and ASCII PNM,
-plus a below-target Go × Matrix Market search,
-Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
-Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
-ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, HTTP/1.1, MP3 with ID3v2, SVG, and ASCII PNM, plus below-target
-Java × Matrix Market and a verified ASCII PLY batch and
-an explicit 88-cell work matrix.
-PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
-20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
-and PHP × SVG each have a verified 20-path batch.
-PHP × ASCII PLY has bounded searches and a runtime inventory, but zero verified
-parser paths so far. PHP × Matrix Market has one verified, unranked package path.
-There are 81 cells at the 20-parser target and seven below target; all 88
-cells now have recorded search or verification work. A zero does **not** mean
-no parser exists. See the
+specific formats. Its scope is eight ecosystems (C, C++, Go, Java, JavaScript,
+Python, Rust, and PHP) and ten formats: PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1,
+ASCII PLY, ASCII PNM, and MP3 with ID3v2. The working goal is 20 distinct
+verified third-party parser paths per cell, with 30 as the ceiling. A zero count
+does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
+
+The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
+verified third-party paths; C × ASCII PLY has 8 and PHP × ASCII PLY has 0.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,544 of 1,717 verified package paths have a recorded comparable cell metric;
-173 are unranked; 129 measured values are zero. A recorded zero is not evidence of
+1,476 of 1,616 verified package paths have a recorded comparable cell metric;
+140 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -64,8 +47,6 @@ python3 scripts/verify_cpp_mp4.py
 brew install assimp open-mesh llvm vtk cmake hdf5 netcdf nlohmann-json
 python3 scripts/verify_c_ascii_ply.py
 python3 scripts/verify_cpp_ascii_ply.py
-python3 scripts/verify_c_matrix_market.py
-python3 scripts/verify_cpp_matrix_market.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py
@@ -102,7 +83,6 @@ npm run http11:verify
 npm run ascii_pnm:control
 npm run ascii_pnm:verify
 npm run ascii_ply:verify
-npm run matrix_market:verify
 python3 scripts/verify_go_zip.py
 python3 scripts/verify_go_png.py
 python3 scripts/verify_go_wav.py
@@ -113,10 +93,6 @@ python3 scripts/verify_go_pdf.py
 python3 scripts/verify_go_svg.py
 brew install assimp
 python3 scripts/verify_go_ascii_ply.py
-python3 scripts/verify_go_matrix_market.py
-python3 scripts/verify_gosl_go_matrix_market.py
-python3 scripts/verify_gosl_go_matrix_market.py --package github.com/ATIinc/gosl-ati/la
-python3 scripts/verify_intel_go_matrix_market.py
 python3 controls/ascii_pnm/make_control.py
 python3 scripts/verify_go_ascii_pnm.py
 uv venv --python python3.13 adapters/python/png/.venv
@@ -158,12 +134,6 @@ uv venv --python python3.13 adapters/python/svg/.venv
 uv pip sync adapters/python/svg/requirements.lock --python adapters/python/svg/.venv/bin/python --require-hashes
 python3 controls/svg/make_control.py
 python3 scripts/verify_python_svg.py
-uv venv --python python3.13 adapters/python/matrix_market/.venv
-CXXFLAGS='-include functional' uv pip sync adapters/python/matrix_market/requirements.lock --python adapters/python/matrix_market/.venv/bin/python --require-hashes
-uv venv --python python3.10 adapters/python/matrix_market/.venv310
-uv pip sync adapters/python/matrix_market/requirements-py310.lock --python adapters/python/matrix_market/.venv310/bin/python --require-hashes
-python3 controls/matrix_market/make_control.py
-python3 scripts/verify_python_matrix_market.py
 python3 scripts/verify_rust_png.py
 python3 scripts/verify_rust_zip.py
 python3 scripts/verify_rust_mp4.py
@@ -173,7 +143,6 @@ python3 scripts/verify_rust_svg.py
 python3 scripts/verify_rust_http11.py
 python3 scripts/verify_rust_ascii_ply.py
 python3 scripts/verify_rust_ascii_pnm.py
-python3 scripts/verify_rust_matrix_market.py
 python3 scripts/verify_rust_mp3_id3v2.py
 python3 scripts/verify_java_zip.py
 python3 scripts/verify_java_png.py
@@ -183,7 +152,6 @@ python3 scripts/verify_java_http11.py
 python3 scripts/verify_java_mp3_id3v2.py
 python3 controls/wav/make_control.py
 python3 scripts/verify_java_wav.py
-python3 scripts/verify_java_matrix_market.py
 python3 scripts/verify_java_ascii_ply.py
 python3 scripts/verify_java_ascii_ply_monkeywrench.py
 python3 scripts/verify_java_ascii_ply_irurueta.py
@@ -964,20 +932,6 @@ development library through `pkg-config`. The recorded native Assimp version is
 6.0.6 on macOS arm64. The separate Go 1.27.1 standard-library inventory finds
 no PLY-aware parser API.
 
-`verify_go_matrix_market.py` runs the shared adapters with Go 1.27.2 and the
-Gosl adapter in pinned Ubuntu 24.04 arm64 with Go 1.22.2. The observed result
-is **9/9 eligible package paths passing** on valid coordinate real general or
-pattern symmetric controls, below the 20-path goal. One reader interprets the
-matrix as a graph; another requires local companion row and column index files.
-Go module files pin releases and checksums. Gosl's documented reader has 65
-known pkg.go.dev importers for the `la` package, a broad adoption proxy that
-does not measure Matrix Market use. ATIinc's fork shares its parser lineage and
-has zero observed importers; it is not claimed as popular. Three plausible
-leads remain unresolved,
-including one with a successful parse but no open-source license evidence.
-The separate Go 1.27.2 standard-library inventory finds no Matrix Market API.
-See the cell record for exact limits and dependency caveats.
-
 `verify_python_png.py` uses CPython 3.13.1 and the two valid local PNG
 controls. `requirements.in` pins 21 top-level releases; the generated
 `requirements.lock` pins transitive versions and distribution hashes. The
@@ -1075,22 +1029,6 @@ standard-library inventory counts no verified SVG API. Official `tkinter`
 documentation describes conditional SVG reading with Tk 9.0, while the
 recorded runtime has Tk 8.6, so that path remains unresolved.
 
-`verify_python_matrix_market.py` currently verifies **20/20 recorded third-party
-package paths**, meeting the working goal. The controls are
-valid NIST coordinate matrices: a 2×3 sparse real matrix, a 3×3 graph
-adjacency matrix, and a 10x count matrix with feature and barcode files.
-The ranking records shared SciPy/fast_matrix_market implementations and leaves
-unavailable download metrics unranked. `scprep` runs in a separate Python
-3.10 environment because its pinned pandas dependency lacks a compatible
-Python 3.13 wheel. `mtl5` also uses Python 3.10 because its Python 3.13
-source build lacks a required header. `scab` and `DOTools-py` pass in the
-Python 3.13 environment after building `annoy` with `CXXFLAGS='-include functional'`.
-`piaso-tools` 1.2.6 builds its Rust extension from source on this macOS arm64
-host, so reproducing that environment requires Cargo.
-Three documented or plausible leads remain unresolved; discovery remains partial.
-The scoped CPython 3.13 standard-library inventory found no
-Matrix Market-aware input API.
-
 `verify_rust_png.py` uses Rust 1.99.1 and Cargo's locked dependency graph at
 `adapters/rust/png/Cargo.lock`. It builds the Rust adapter with
 `cargo build --locked` and runs 21 pinned crate paths against the valid two-pixel PNG or
@@ -1173,14 +1111,6 @@ and `adapters/rust/ascii_pnm/target/debug/make_qr_control controls/ascii_pnm/qr-
 The scoped Rust standard library has no documented ASCII PNM parser. Three
 plausible leads remain unresolved, and the bounded registry search is partial.
 
-`verify_rust_matrix_market.py` builds two locked Rust adapters and runs
-**20/20** crate paths against valid coordinate real general, coordinate real
-symmetric, and gzip-compressed 10x integer controls. It records shapes, entries,
-and selected values according to each API's scope. `powerio-matrix` uses `sprs`;
-`hybit` re-exports `hybit-matrix`. The separate Rust standard-library inventory
-finds no documented Matrix Market parser. Four plausible leads remain unresolved,
-including the higher-download `bixverse-sc-data` path.
-
 `verify_rust_mp3_id3v2.py` builds the pinned Rust MP3 graph with
 `cargo build --locked` and runs **20/20** crate paths against a valid tagged
 MPEG Layer III control. Each row labels its tag, frame, duration, or decoded
@@ -1209,7 +1139,7 @@ package-search hits, pinned-release license evidence, and package-level
 The public search pages supplied this snapshot after the
 [pkg.go.dev API](https://pkg.go.dev/v1/api) returned a rate limit response.
 
-For Python PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, SVG, or Matrix Market discovery, run
+For Python PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, or SVG discovery, run
 `python3 scripts/snapshot_pypi_png.py`,
 `python3 scripts/snapshot_pypi_ascii_ply.py`, or
 `python3 scripts/snapshot_pypi_ascii_pnm.py`, or
@@ -1219,8 +1149,7 @@ For Python PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1
 `python3 scripts/snapshot_pypi_mp3_id3v2.py`, or
 `python3 scripts/snapshot_pypi_mp4.py`, or
 `python3 scripts/snapshot_pypi_http11.py`, or
-`python3 scripts/snapshot_pypi_svg.py`, or
-`python3 scripts/snapshot_pypi_matrix_market.py`. Each
+`python3 scripts/snapshot_pypi_svg.py`. Each
 filters the [PyPI Simple JSON project index](https://docs.pypi.org/api/index-api/)
 by recorded name terms, saves the first 100 alphabetic matches per term, and
 fetches pinned release metadata. [PyPI Stats](https://pypistats.org/api/)
@@ -1228,8 +1157,8 @@ provides its `last_month` download signal, excluding known mirrors. The
 index is not relevance ranked, and the download signal is compared only
 within Python. Unavailable metrics remain `null`.
 
-For Rust PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, Matrix Market, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
-`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `matrix_market`, or `mp3_id3v2`, to refresh seven bounded
+For Rust PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, or MP3 with ID3v2 discovery, run `python3 scripts/snapshot_crates.py FORMAT` and
+`python3 scripts/enrich_rust.py FORMAT`, with `FORMAT` set to `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, or `mp3_id3v2`, to refresh seven bounded
 [crates.io API](https://crates.io/api/) searches, pinned release metadata,
 and crate-level recent downloads over about 90 days. The downloads are
 compared only within each Rust format cell. These commands require network access and
@@ -1245,20 +1174,6 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × Matrix Market ranking](data/c/matrix_market/ranking.md): thirteen packages
-  verified on valid real coordinate or symmetric controls, 7 below the working
-  goal. Three bounded Homebrew formula-name searches recorded 20 hits, 19 unique
-  names; 18 remain unverified. Nine verified packages lack comparable Homebrew
-  requested-install counts and remain unranked. SPM 1.2.4 is source-built; its
-  reader is verified only on a square control. The Libmtx source build uses
-  Autoconf, Automake, GNU Libtool, GNU Make and OpenBLAS. NIST's dated, hash-pinned
-  `mmio.c` and `mmio.h` source files provide the reference C reader.
-  clSPARSE 0.10.2.0 parsed the full real-general control through its documented
-  C API into OpenCL COO buffers; its 177 GitHub stars are an auxiliary project
-  signal and cannot be ranked against Homebrew requested installs.
-  pOSKI 1.0.0 is an unresolved additional lead: its official documentation
-  names a Matrix Market reader, but the released source download currently
-  returns HTTP 403, so no pinned adapter or control result exists.
 - [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): eight verified package
   paths, 12 below the working goal. F3D 4.0.1 parsed the triangle through its
   C binding and ranks second among packages with comparable Homebrew requested
@@ -1305,30 +1220,6 @@ or quality judgment.
   module whose own tests document ASCII PLY input; its public reader parsed
   three vertices, one face and a coordinate. It has no comparable Maven
   direct-dependent metric and is unranked.
-- [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
-  SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
-  LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,
-  TACO, Trilinos, and GSL verified on valid Matrix Market controls, reaching 20
-  package paths. This is not a proven most-used top 20. PIGO's raw API reports
-  dimensions one greater than the valid file header. Their source releases, relevant installed headers
-  and libraries, adapters, and results are
-  pinned. Three bounded Homebrew searches recorded 13 unique hits; ten remain
-  unverified. The header-only packages, LAGraph, librsb, PIGO, and SuperLU_DIST have no comparable Homebrew install
-  metric and remain unranked. The C and C++ standard libraries have no
-  documented Matrix Market parser. The C and C++ call sites for shared packages
-  use the same underlying readers; SuperLU and SuperLU_DIST have closely related
-  Matrix Market reader implementations.
-
-- [Java × Matrix Market ranking](data/java/matrix_market/ranking.md): eight
-  verified package paths, twelve below the working goal. MeteoInfo
-  Math 4.3.0 adds a published `DMatrix.market(Path)` reader over a Smile-derived
-  implementation; it has four known exact-release direct dependents. The
-  tagged Drop-seq 3.0.2 Java library independently parsed three coordinate
-  entries. The GraphTea v1.0.0 source-built framework reader also parsed the
-  valid control. Both lack a comparable Maven adoption metric. The ranking
-  records shared lineages and does not equate project adoption with Matrix
-  Market use.
-
 - [JavaScript × PNG ranking](data/javascript/png/ranking.md): 21 packages,
   including header-only and chunk-only parsers labeled by scope. Four npm queries
   saved the first 100 results each: 400 hits, 344 unique names. Ten named leads
@@ -1389,17 +1280,6 @@ or quality judgment.
   npm queries saved 870 hits and 706 distinct names; six explored leads remain
   unresolved. The [runtime inventory](data/javascript/ascii_ply/standard.json)
   records the scoped absence of a PLY-aware Node.js or browser platform API.
-- [JavaScript × Matrix Market ranking](data/javascript/matrix_market/ranking.md):
-  nine pinned package paths verified on valid local coordinate real general,
-  symmetric, or 10x Matrix Market controls, 11 below the working goal. Six
-  bounded npm queries saved 406 hits and 353 distinct names; one plausible
-  lead remains unresolved. `scran.js` and `bakana` share the same underlying
-  WASM reader; `keepset` ranks third by same-window npm downloads and was
-  verified with local bytes through its public fetch port. `graphbox` ranks
-  fourth using a pinned source build of its public parser because its npm
-  bundle has a missing import. `@orbifold/graphs` was verified only on a
-  no-comment control. The
-  [cell record](data/javascript/matrix_market/cell.json) gives the exact scope.
 - [Go × ZIP ranking](data/go/zip/ranking.md): 23 packages spanning direct ZIP
   readers, streaming readers, and extraction wrappers. Five pkg.go.dev queries
   saved 333 hits, 271 unique package paths. Eight named leads remain
@@ -1456,15 +1336,6 @@ or quality judgment.
   plausible leads remain unresolved. The
   [standard-library inventory](data/go/ascii_ply/standard.json) records the
   scoped Go 1.27.1 finding.
-- [Go × Matrix Market ranking](data/go/matrix_market/ranking.md): ten eligible
-  package paths verified on local coordinate real general or pattern symmetric
-  controls, 10 below
-  the working goal. Six bounded pkg.go.dev queries saved 80 hits and 77 unique
-  paths; two plausible leads remain unresolved. The Intel reader uses a
-  hash-pinned source build of compatible SuiteSparse GraphBLAS 8.0.2. Two pinned packages use Go
-  module replacements because their published module names differ from their
-  repository paths; their adoption metric is unavailable. The
-  [cell record](data/go/matrix_market/cell.json) states search and input limits.
 - [Python × PNG ranking](data/python/png/ranking.md): 21 packages verified
   on local pixel or text-chunk controls. Seven bounded PyPI name filters
   saved 379 distinct project names; eight plausible leads remain unresolved.
@@ -1519,12 +1390,6 @@ or quality judgment.
   saved 710 hits and 676 distinct names; four explored leads remain unresolved.
   Shared parser families and the conditional Tk 9.0 runtime finding are
   recorded in the [cell record](data/python/svg/cell.json).
-- [Python × Matrix Market ranking](data/python/matrix_market/ranking.md):
-  twenty verified package paths. Thirteen bounded PyPI name filters
-  saved 379 hits and 378 distinct names; three explored leads remain
-  unresolved. Targeted documentation searches found three additional readers.
-  The [cell record](data/python/matrix_market/cell.json) names the untested
-  format variants.
 - [Rust × PNG ranking](data/rust/png/ranking.md): 21 verified crate paths,
   representing 17 families or lineages. Seven bounded crates.io searches
   saved 650 hits and 459 distinct names; ten explored leads remain
@@ -1566,11 +1431,6 @@ or quality judgment.
   paths. Seven bounded crates.io searches saved 425 hits and 306 distinct
   names; three plausible leads remain unresolved. The
   [cell record](data/rust/ascii_pnm/cell.json) identifies header-only scope,
-  shared families, search limits, and the separate standard-library inventory.
-- [Rust × Matrix Market ranking](data/rust/matrix_market/ranking.md): 20 verified
-  crate paths. Seven bounded crates.io searches saved 474 hits and 403 distinct
-  names; four plausible leads remain unresolved. The
-  [cell record](data/rust/matrix_market/cell.json) records input variants,
   shared families, search limits, and the separate standard-library inventory.
 - [Rust × MP3 with ID3v2 ranking](data/rust/mp3_id3v2/ranking.md): 20 verified
   crate paths. Seven bounded crates.io searches saved 676 hits and 430

@@ -1,4 +1,4 @@
-"""Regenerate the 8 x 11 matrix without interpreting unsearched cells as empty."""
+"""Regenerate the 8 x 10 matrix without interpreting unsearched cells as empty."""
 
 from pathlib import Path
 import json
@@ -6,7 +6,7 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 ECOSYSTEMS = ["c", "cpp", "go", "java", "javascript", "python", "rust", "php"]
-FORMATS = ["png", "zip", "mp4", "wav", "pdf", "svg", "http11", "ascii_ply", "ascii_pnm", "matrix_market", "mp3_id3v2"]
+FORMATS = ["png", "zip", "mp4", "wav", "pdf", "svg", "http11", "ascii_ply", "ascii_pnm", "mp3_id3v2"]
 
 
 def main() -> None:

@@ -7,6 +7,7 @@ import tomllib
 import xml.etree.ElementTree as ET
 
 from audit_popularity_coverage import build_report
+from build_matrix import ECOSYSTEMS, FORMATS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,8 +19,10 @@ def read(path: str):
 
 def main() -> None:
     matrix = read("data/cells.json")["cells"]
-    assert len(matrix) == 88
-    assert len({(c["ecosystem"], c["format"]) for c in matrix}) == 88
+    expected_cells = {(ecosystem, format_name)
+                      for ecosystem in ECOSYSTEMS for format_name in FORMATS}
+    assert len(matrix) == len(expected_cells)
+    assert {(c["ecosystem"], c["format"]) for c in matrix} == expected_cells
     lock = read("package-lock.json")["packages"][""]["dependencies"]
     for cell in matrix:
         assert cell["working_target"] == 20 and cell["ceiling"] == 30
