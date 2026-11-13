@@ -213,7 +213,7 @@ separately, and source-to-binary equivalence is unestablished. One
 lead remains unresolved. See the
 [PDF cell record](data/cpp/pdf/cell.json) for search limits and uncertainty.
 
-The C × SVG batch verifies **10/20 paths** and C++ × SVG verifies **12/20**.
+The C × SVG batch verifies **12/20 paths** and C++ × SVG verifies **14/20**.
 librsvg, libvips, ImageMagick, GraphicsMagick, resvg, and PlutoSVG read the
 local 2×1 SVG and render the expected red and green pixels in both ecosystems;
 LunaSVG and QtSvg do so through their C++ document APIs. The pinned libvips build links librsvg;
@@ -224,7 +224,9 @@ have separate document parsers over the same PlutoVG rasterizer. Libsvgtiny
 returns two shapes and their colors through its SVG Tiny parser; libsvg returns
 parsed root dimensions, and libsvg-cairo renders pixels using that same libsvg
 parser. ThorVG's C binding and C++ API both load and parse SVG dimensions
-through its native SVG engine. All recorded SVG leads in these cells are resolved, while additional
+through its native SVG engine. SDL3_image reads the SVG through its embedded
+NanoSVG parser; GdkPixbuf reads it through the pinned librsvg loader plugin.
+All recorded SVG leads in these cells are resolved, while additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 

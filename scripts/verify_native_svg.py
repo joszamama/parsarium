@@ -55,6 +55,10 @@ def verify(ecosystem: str) -> None:
                 license_member = tar.extractfile(source["license_member"])
                 assert license_member is not None
                 assert sha256(license_member.read()).hexdigest() == source["license_sha256"]
+            if "source_engine_member" in source:
+                engine_member = tar.extractfile(source["source_engine_member"])
+                assert engine_member is not None
+                assert sha256(engine_member.read()).hexdigest() == source["source_engine_sha256"]
         formula = "vips" if name == "libvips" else name
         source_build = None
         if name == "resvg":

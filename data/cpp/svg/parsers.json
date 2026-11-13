@@ -303,5 +303,63 @@
     "scope": "parsed SVG document dimensions",
     "family": "ThorVG SVG loader and native vector engine",
     "family_note": "ThorVG C binding and native C++ API are distinct ecosystem call paths over the same ThorVG SVG loader; they do not represent independent syntax engines."
+  },
+  {
+    "name": "sdl3_image",
+    "version": "3.4.8",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/libsdl-org/SDL_image/releases/download/release-3.4.8/SDL3_image-3.4.8.tar.gz",
+    "documentation": "https://wiki.libsdl.org/SDL3_image/IMG_LoadSVG_IO",
+    "input_api": "SDL_IOFromFile(local filename); IMG_LoadSVG_IO(stream); SDL_ConvertSurface to RGBA32",
+    "adapter": "adapters/cpp/svg/sdl3_image.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green RGBA pixels",
+    "family": "SDL3_image SVG loader with embedded NanoSVG parser/rasterizer",
+    "family_note": "The pinned IMG_svg.c includes embedded NanoSVG and nanosvgrast code; SDL3_image is a distinct package input API. Its C function is called from C and C++ adapters over one SVG engine."
+  },
+  {
+    "name": "gdk-pixbuf",
+    "version": "2.44.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-2.44.8.tar.xz",
+    "documentation": "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
+    "input_api": "gdk_pixbuf_new_from_file(local SVG filename); gdk_pixbuf_get_width/height/read_pixels",
+    "adapter": "adapters/cpp/svg/gdk-pixbuf.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green RGBA pixels",
+    "family": "GdkPixbuf loader API with librsvg SVG plugin",
+    "family_note": "The installed GdkPixbuf SVG loader module comes from librsvg 2.63.4, which is separately counted. This is a distinct package input API over the same librsvg SVG syntax engine."
   }
 ]

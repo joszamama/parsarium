@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:55:08.281637+00:00",
+  "checked_at_utc": "2026-11-13T00:59:25.340957+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -63,6 +63,16 @@
       "source_sha256": "ba9957aeeadb4151d4486f11c638ae118c00210fa4906daa7b30143aa341e690",
       "local_header_sha256": "69e7a204a4c59324e337f6bb39539e9211a0ff59231eb8c9c4385471b9d2c7b7",
       "local_library_sha256": "13329042374f93e7306928901a7e45b45be83667a624b5227754599d3883e97d"
+    },
+    "sdl3_image": {
+      "source_sha256": "e8223b424bc7541cf84ffff5cf7e4f24ec3711c60462cb1bd6dc1d7bd7f25477",
+      "local_header_sha256": "8aaca25c05ea4e860a6237c68b9f77f279707e0842e38d0f3d75737466b04da9",
+      "local_library_sha256": "96970dcb1ee231ae5489d8b0f9d79c63a28f5a6306f77a7b81f5f13e86ea1f1c"
+    },
+    "gdk-pixbuf": {
+      "source_sha256": "919f529512961a12e81cd4b4b466a48c3933469e7f9a310c6513cd4fb252ba3c",
+      "local_header_sha256": "d2bfd2d2af54564adb71ea9c45dc3de81e833c2dfd1ddb555e68f23b8c4d25a2",
+      "local_library_sha256": "5e639899a4c55492c0a897d22bb86892944a92c7e9ebeabb125490f597c232d7"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -311,6 +321,54 @@
       "output": {
         "width": 2,
         "height": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3_image",
+      "version": "3.4.8",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/sdl3_image.cpp -I/opt/homebrew/Cellar/sdl3_image/3.4.8_1/include -I/opt/homebrew/include -I/opt/homebrew/Cellar/libavif/1.4.2/include -DAVIF_DLL -I/opt/homebrew/Cellar/dav1d/1.5.4/include -I/opt/homebrew/Cellar/aom/3.15.3/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include/libvmaf -I/opt/homebrew/opt/jpeg-xl/include -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -L/opt/homebrew/Cellar/sdl3_image/3.4.8_1/lib -lSDL3_image -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/sdl3_image",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/sdl3_image /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "gdk-pixbuf",
+      "version": "2.44.8",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/gdk-pixbuf.cpp -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/lib -lgdk_pixbuf-2.0 -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/gdk-pixbuf",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/gdk-pixbuf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
       },
       "pass": true
     }
