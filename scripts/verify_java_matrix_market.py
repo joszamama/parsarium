@@ -1,4 +1,4 @@
-"""Verify pinned EJML and SystemDS Matrix Market readers from the repo root."""
+"""Verify pinned Java Matrix Market readers from the repo root."""
 
 from datetime import datetime, timezone
 from hashlib import sha256
