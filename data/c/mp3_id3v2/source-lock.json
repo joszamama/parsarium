@@ -572,5 +572,42 @@
       "SDL_AUDIODRIVER": "dummy"
     },
     "build_note": "Pinned upstream release source, matching header, native library, bundled dr_mp3 source, and installed SDL2 dependency. Sound_NewSampleFromFile decoded the valid tagged MP3; no ID3v2 text is exposed."
+  },
+  "libmp3splt": {
+    "release": "0.9.2",
+    "installed_revision": "0.9.2_7",
+    "formula": "libmp3splt",
+    "license": "GPL-2.0-or-later",
+    "source_url": "https://downloads.sourceforge.net/project/mp3splt/libmp3splt/0.9.2/libmp3splt-0.9.2.tar.gz",
+    "source_sha256": "30eed64fce58cb379b7cc6a0d8e545579cb99d0f0f31eb00b9acc8aaa1b035dc",
+    "repository": "https://sourceforge.net/projects/mp3splt/",
+    "source_header_member": "libmp3splt-0.9.2/include/libmp3splt/mp3splt.h",
+    "local_header": "/opt/homebrew/Cellar/libmp3splt/0.9.2_7/include/libmp3splt/mp3splt.h",
+    "local_header_sha256": "2b9fdcd7dea92a2c026bf14cee1855618812d9cd892bf89e3d83ed979fea04d4",
+    "local_library": "/opt/homebrew/Cellar/libmp3splt/0.9.2_7/lib/libmp3splt.0.dylib",
+    "local_library_sha256": "a5c0bbb8c892c0b6c2db419563c3e7bd8d903a080a81c29634d4e5f779a037eb",
+    "pkg_config": "libmp3splt",
+    "license_member": "libmp3splt-0.9.2/COPYING",
+    "license_sha256": "640d90f6ee401241ff62834d0d1b33f83049e99b8bfdfa04ed1b0a1635dde3e7",
+    "source_engine_member": "libmp3splt-0.9.2/plugins/mp3.c",
+    "source_engine_sha256": "0c9f08ea6d60c22922da6f6aff36011d52e4026d56bdd51b2e1b06faea2e573f",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libmp3splt/0.9.2_7/lib/libmp3splt0/libsplt_mp3.0.dylib",
+        "sha256": "6596b4866343691f6a586d79a4639466c9ba7ebfed309762bca77c4e47e48cfd",
+        "role": "MP3 split plugin"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/mad/0.16.5/lib/libmad.0.dylib",
+        "sha256": "3bb643fd96527e716ee1cb4a193211f578f1efbdc912ddb0f2716bd09495dd14",
+        "role": "shared MPEG audio parser/decoder"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/libid3tag/0.16.4/lib/libid3tag.dylib",
+        "sha256": "9425153596412ef2bfeb524e15efec5f6446ec4ac2cf365dd5a19fc6bf3eeecd",
+        "role": "shared tag parser linked by MP3 plugin"
+      }
+    ],
+    "build_note": "Pinned release archive, matching header, native library, MP3 plugin and its libmad/libid3tag dependencies. Pretend-to-split processes the local valid tagged MP3 without writing a file and returns a 0.5-second MP3 frame segment."
   }
 }

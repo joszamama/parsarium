@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:09:19.226183+00:00",
+  "checked_at_utc": "2026-11-13T02:14:45.604856+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -102,6 +102,11 @@
       "source_sha256": "63be57cc80bcd29aeed6c29700759871c44c90251a7508b8d0eacd8d9cece30c",
       "local_header_sha256": "c0a6979f03e9b54ab104694eb21681283ee531703a178cc10ad0dd2c09db6f60",
       "local_library_sha256": "57bf6ca8a74d3e733597bc1b08815f8a63d362400f50434e79be91137aa12bb8"
+    },
+    "libmp3splt": {
+      "source_sha256": "30eed64fce58cb379b7cc6a0d8e545579cb99d0f0f31eb00b9acc8aaa1b035dc",
+      "local_header_sha256": "2b9fdcd7dea92a2c026bf14cee1855618812d9cd892bf89e3d83ed979fea04d4",
+      "local_library_sha256": "a5c0bbb8c892c0b6c2db419563c3e7bd8d903a080a81c29634d4e5f779a037eb"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -371,6 +376,19 @@
         "channels": 1,
         "decoded_bytes": 4096,
         "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "libmp3splt",
+      "version": "0.9.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/libmp3splt.cpp -I/opt/homebrew/Cellar/libmp3splt/0.9.2_7/include/libmp3splt -L/opt/homebrew/Cellar/libmp3splt/0.9.2_7/lib -lmp3splt -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/libmp3splt",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/libmp3splt /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "split_status": 1,
+        "segment_bytes": 2304,
+        "frame_header": "ffe348c0"
       },
       "pass": true
     }

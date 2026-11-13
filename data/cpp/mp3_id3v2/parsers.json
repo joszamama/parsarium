@@ -365,5 +365,23 @@
     "scope": "Decoded MP3 PCM, stream fields and duration from tagged local MP3; no ID3v2 text",
     "family": "SDL_sound over bundled dr_mp3/minimp3",
     "family_note": "SDL_sound is a separate upstream package from SDL_mixer. Its MP3 decoder embeds dr_mp3, also used by miniaudio and represented directly by dr_libs. C and C++ adapters share the same engine."
+  },
+  {
+    "name": "libmp3splt",
+    "version": "0.9.2",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://downloads.sourceforge.net/project/mp3splt/libmp3splt/0.9.2/libmp3splt-0.9.2.tar.gz",
+    "documentation": "https://mp3splt.sourceforge.net/mp3splt_page/documentation/libmp3splt_api/mp3splt_8h.html",
+    "input_api": "mp3splt_set_filename_to_split(local filename); mp3splt_append_splitpoint(0,50); mp3splt_split with SPLT_OPT_PRETEND_TO_SPLIT and write callback",
+    "adapter": "adapters/cpp/mp3_id3v2/libmp3splt.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "split_status": 1,
+      "segment_bytes": 2304,
+      "frame_header": "ffe348c0"
+    },
+    "scope": "MP3 frame-aware in-memory split of a 0.5-second segment from tagged local MP3; no ID3v2 text exposed",
+    "family": "libmp3splt MP3 plugin over libmad and libid3tag",
+    "family_note": "libmp3splt uses its own frame-aware split API with a bundled MP3 plugin linked to libmad and libid3tag. These underlying libraries also have direct rows. C and C++ call sites share the same plugin."
   }
 ]
