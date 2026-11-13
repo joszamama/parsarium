@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:52:17.171302+00:00",
+  "checked_at_utc": "2026-11-13T01:55:12.539987+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -83,6 +83,11 @@
       "source_sha256": "3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb",
       "local_header_sha256": "46eb6a9f0ec2186bfbf1c2455c9a667343b57e5ea53f87add97153568210b4dc",
       "local_library_sha256": "5150d16a2b09a8f6f3475dcc837fdf5435d4f97e817ca12306fec8da5614647c"
+    },
+    "aubio": {
+      "source_sha256": "d48282ae4dab83b3dc94c16cf011bcb63835c1c02b515490e1883049c3d1f3da",
+      "local_header_sha256": "960f5d44a40df3a5adc9aa41a557c32b795d1c5d7aadeb4482230d04cffd425e",
+      "local_library_sha256": "148d6cbaff1024b63f6d765c8da935c066abe8a178e0120d4852411bab2209e1"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -298,6 +303,19 @@
         "channels": 1,
         "bitrate_kbps": 32,
         "decoded_samples": 576
+      },
+      "pass": true
+    },
+    {
+      "package": "aubio",
+      "version": "0.4.9",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/aubio.cpp -I/opt/homebrew/Cellar/aubio/0.4.9_4/include -L/opt/homebrew/Cellar/aubio/0.4.9_4/lib -laubio -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/aubio",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/aubio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "decoded_samples": 256
       },
       "pass": true
     }

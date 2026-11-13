@@ -453,5 +453,44 @@
       }
     ],
     "build_note": "Pinned LAME 4.0 release source, matching public HIP header, installed libmp3lame and linked libmpg123. The adapter feeds full tagged MP3 bytes to hip_decode1_headers without separately stripping the ID3v2 tag."
+  },
+  "aubio": {
+    "release": "0.4.9",
+    "installed_revision": "0.4.9_4",
+    "formula": "aubio",
+    "license": "GPL-3.0-or-later",
+    "source_url": "https://sources.buildroot.net/aubio/aubio-0.4.9.tar.bz2",
+    "source_sha256": "d48282ae4dab83b3dc94c16cf011bcb63835c1c02b515490e1883049c3d1f3da",
+    "repository": "https://github.com/aubio/aubio",
+    "source_header_member": "aubio-0.4.9/src/io/source.h",
+    "local_header": "/opt/homebrew/Cellar/aubio/0.4.9_4/include/aubio/io/source.h",
+    "local_header_sha256": "960f5d44a40df3a5adc9aa41a557c32b795d1c5d7aadeb4482230d04cffd425e",
+    "local_library": "/opt/homebrew/Cellar/aubio/0.4.9_4/lib/libaubio.5.dylib",
+    "local_library_sha256": "148d6cbaff1024b63f6d765c8da935c066abe8a178e0120d4852411bab2209e1",
+    "pkg_config": "aubio",
+    "license_member": "aubio-0.4.9/COPYING",
+    "license_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "source_engine_members": [
+      {
+        "member": "aubio-0.4.9/src/io/source.c",
+        "sha256": "5b3c0ec1e4d2a325903ed267da871b13ff43354dfa3b785e5cd7bf679bffa1b2"
+      },
+      {
+        "member": "aubio-0.4.9/src/io/source_apple_audio.c",
+        "sha256": "7b04b556aceebfdb5fff3965bdfb57dd5027cf2cae9a06ea48f79c467ede5aa1"
+      },
+      {
+        "member": "aubio-0.4.9/src/io/source_sndfile.c",
+        "sha256": "5b42183ce0cb5cca664f522b7646d9cebed23860ae89e173fd1259a7b503c610"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/libsndfile/1.2.2_1/lib/libsndfile.1.dylib",
+        "sha256": "6f2dcfbe421649ef61af16ba02bf815dc215b51f34970debb2333bffc36f6cc3",
+        "role": "possible audio file backend; runtime choice not exposed"
+      }
+    ],
+    "build_note": "Pinned aubio 0.4.9 source and exact installed header/library. On macOS the library links Apple AudioToolbox and libsndfile; source.c tries Apple before sndfile. The runtime backend for this one control was not separately identified."
   }
 }
