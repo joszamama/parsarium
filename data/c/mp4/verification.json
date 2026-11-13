@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T10:07:02.267657+00:00",
+  "checked_at_utc": "2026-11-13T10:10:35.091220+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "dbadc26847ef2b6f77b0f358751233ed3bd791a646820afa8d4cd32ce5594d62",
-      "c_binding_library_sha256": "54989cc7e50ad32ca2dad0c7eee6c70b1a3738b8624446431bd401bb7f5a5c3d"
+      "c_binding_library_sha256": "011a92634af7468df269e765220e301fb3af8520dd2225cffbeaa78a12abe67d"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -54,6 +54,11 @@
       "source_sha256": "f4fd6c67076e04e907a3032e42bbaa7c0b35aa3a503393c5d74e303ec3eb84b4",
       "local_header_sha256": "4b1b2c667db7010782c4214178f1f8e394f02f0eb984ed66bc351bb238401158",
       "local_library_sha256": "bd5dad568f7b5ac6ae58bf6a8b70120abb69f8f936503ad205120b9c7466db73"
+    },
+    "taglib": {
+      "source_sha256": "3ca2d8afaa7f1cf7f6ed10e511ebc368bfacd6dcaa3dbfa690b89e502e8963dc",
+      "local_header_sha256": "3c86ddb006ac9ab9a6e4a3a78b2363fb8e38d20f2a2001d9a7f13d1d952410c2",
+      "local_library_sha256": "6fc69b707e44d97760e7812099900753db8c18c3bcc14ead588aef2c782d791b"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -205,6 +210,18 @@
         "duration_seconds": 1,
         "width": 2,
         "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "taglib",
+      "version": "2.3.2",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/taglib/2.3.2/include/taglib -I/opt/homebrew/Cellar/taglib/2.3.2/include -L/opt/homebrew/Cellar/taglib/2.3.2/lib -ltag_c -ltag /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/taglib.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/taglib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/taglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "title": "Parsarium",
+        "duration_seconds": 1
       },
       "pass": true
     }

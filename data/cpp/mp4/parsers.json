@@ -197,5 +197,22 @@
     "scope": "QT/MP4 plugin parsed MIME type, title, duration and 2x2 video dimensions",
     "family": "GNU libextractor native QT/MP4 metadata parser",
     "family_note": "C and C++ adapters call the same libextractor qt plugin; its exact installed native plugin hash is pinned."
+  },
+  {
+    "name": "taglib",
+    "version": "2.3.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://taglib.org/releases/taglib-2.3.2.tar.gz (COPYING.LGPL and COPYING.MPL)",
+    "documentation": "https://taglib.org/api/",
+    "input_api": "TagLib::MP4::File(local MP4 filename); tag()->title(); audioProperties()->lengthInSeconds()",
+    "adapter": "adapters/cpp/mp4/taglib.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "title": "Parsarium",
+      "duration_seconds": 1
+    },
+    "scope": "MP4 title metadata and one-second duration",
+    "family": "TagLib native MP4 metadata parser",
+    "family_note": "C binding delegates to the same TagLib C++ MP4 parser used by the C++ adapter."
   }
 ]
