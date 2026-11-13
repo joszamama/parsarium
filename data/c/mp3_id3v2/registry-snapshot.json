@@ -73,6 +73,14 @@
       "source_sha256": "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c",
       "license_evidence": "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz",
       "installed_revision": "14.4.2_6"
+    },
+    "libmad": {
+      "version": "0.16.5",
+      "license": "GPL-2.0-or-later",
+      "source_url": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
+      "source_sha256": "f401b2ccf49c26ad0c3a6ef0179b1cbbff2406338b0603bb2033e6dcaf706114",
+      "license_evidence": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
+      "installed_revision": "0.16.5"
     }
   },
   "popularity_metric": {
@@ -136,6 +144,12 @@
         "formula": "https://formulae.brew.sh/formula/sox",
         "observed_at_utc": "2026-11-13T01:29:30+00:00",
         "evidence_note": "Homebrew formula installs requested by users in the same 365-day window; broad audio use, not MP3-specific."
+      },
+      "libmad": {
+        "install_on_request_365d": 1143,
+        "formula": "https://formulae.brew.sh/formula/mad",
+        "observed_at_utc": "2026-11-13T01:32:10+00:00",
+        "evidence_note": "Homebrew mad formula installs requested by users in the same 365-day window; broad MPEG audio use, not ID3v2-specific."
       }
     }
   },
@@ -184,6 +198,11 @@
       "name": "sox",
       "url": "https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c",
       "surface": "Primary source example of sox_open_read and sox_read local file parser API; pinned MP3 handler source and libmad linkage."
+    },
+    {
+      "name": "libmad",
+      "url": "https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in",
+      "surface": "Primary pinned public API header; found through SoX linked libmad dependency and verified on tagged MP3 control."
     }
   ],
   "search": [

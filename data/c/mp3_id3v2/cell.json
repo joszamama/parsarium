@@ -4,7 +4,7 @@
   "status": "verified_below_target",
   "working_target": 20,
   "ceiling": 30,
-  "verified_third_party_count": 9,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "mp3",
@@ -16,7 +16,7 @@
   "search_hits_recorded": 38,
   "unique_search_hits": 38,
   "unresolved_documentation_leads": 2,
-  "uncertainty": "Nine pinned open-source package paths passed the valid local MP3 with ID3v2.3 control in c: TagLib, mpg123, FFmpeg, libid3tag, id3lib, libsndfile, MediaInfoLib, SDL_mixer, and SoX. Eleven more verified paths are needed for the 20-path working goal. Four bounded Homebrew formula-name queries saved 38 hits and 38 unique names (first 100 per query); names are leads, not parser proof. Additional libraries outside Homebrew and two plausible recorded leads remain uncertain. C and C++ call sites for each package share their underlying engine. TagLib and id3lib C APIs wrap C++ cores; libsndfile and SDL_mixer use libmpg123 for MP3 audio; SoX uses libmad. SDL_mixer parses ID3v2 text with its own tag code, while SoX accepts the tagged control but exposes audio fields only. SDL3_mixer was checked but excluded as another release of the same upstream package. Homebrew install-on-request counts share one 365-day window within this cell but are not MP3-specific adoption. The control covers one small tagged MP3 only. No malformed-input, resource-use, or vulnerability experiments were run.",
+  "uncertainty": "Ten pinned open-source package paths passed the valid local MP3 with ID3v2.3 control in c: TagLib, mpg123, FFmpeg, libid3tag, id3lib, libsndfile, MediaInfoLib, SDL_mixer, SoX, and libmad. Ten more verified paths are needed for the 20-path working goal. Four bounded Homebrew formula-name queries saved 38 hits and 38 unique names (first 100 per query); names are leads, not parser proof. Direct package documentation and SoX dependency inspection also led to libmad. Additional libraries outside Homebrew and two plausible recorded leads remain uncertain. C and C++ call sites for each package share their underlying engine. TagLib and id3lib C APIs wrap C++ cores; libsndfile and SDL_mixer share libmpg123 audio; SoX shares libmad audio. libmad parses a MPEG audio frame after the adapter skips the valid ID3v2 tag; it does not expose tag text. Homebrew install-on-request counts share one 365-day window within this cell but are not MP3-specific adoption. The control covers one small tagged MP3 only. No malformed-input, resource-use, or vulnerability experiments were run.",
   "third_party_evidence": "data/c/mp3_id3v2/parsers.json",
   "third_party_control_results": "data/c/mp3_id3v2/verification.json",
   "runtime_evidence": "data/c/mp3_id3v2/standard.json",

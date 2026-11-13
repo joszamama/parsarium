@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T01:30:25.005297+00:00",
+  "checked_at_utc": "2026-11-13T01:33:07.162440+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
@@ -48,6 +48,11 @@
       "source_sha256": "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c",
       "local_header_sha256": "c9530e7a0886facbe995def973cbf5ed139008a9962a01a73ebbf741aab51127",
       "local_library_sha256": "53d270cce1b5f1f0b751ecb8e8672a9ec9c5e595437487778e3afbf60a6493d4"
+    },
+    "libmad": {
+      "source_sha256": "f401b2ccf49c26ad0c3a6ef0179b1cbbff2406338b0603bb2033e6dcaf706114",
+      "local_header_sha256": "a0ac7f93a5253dd2d54da83db27dda6fcd185de8e5ae55148cead079e393df4f",
+      "local_library_sha256": "3bb643fd96527e716ee1cb4a193211f578f1efbdc912ddb0f2716bd09495dd14"
     }
   },
   "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -166,6 +171,21 @@
         "sample_rate": 8000,
         "channels": 1,
         "decoded_samples": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "libmad",
+      "version": "0.16.5",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/libmad.cpp -I/opt/homebrew/Cellar/mad/0.16.5/include -L/opt/homebrew/Cellar/mad/0.16.5/lib -lmad -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/libmad",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp3_id3v2/target/libmad /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "layer": 3,
+        "sample_rate": 8000,
+        "bit_rate": 32000,
+        "channels": 1,
+        "decoded_samples": 576
       },
       "pass": true
     }

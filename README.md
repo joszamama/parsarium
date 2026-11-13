@@ -233,12 +233,12 @@ All recorded SVG leads in these cells are resolved, while additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
-The C and C++ × MP3 with ID3v2 batches each verify **9/20 package paths** on
+The C and C++ × MP3 with ID3v2 batches each verify **10/20 package paths** on
 the valid tagged MP3 control: TagLib, mpg123, FFmpeg libavformat, libid3tag,
-id3lib, libsndfile, MediaInfoLib, SDL_mixer, and SoX.
+id3lib, libsndfile, MediaInfoLib, SDL_mixer, SoX, and libmad.
 The adapters return a parsed title, audio stream, or ID3v2 frame data. C and
 C++ call sites share each package's engine; TagLib and id3lib C bindings use
-their C++ cores. libsndfile shares mpg123 for audio and ID3v2 parsing. MediaInfoLib uses its native MPEG audio and ID3v2 parsers. SDL_mixer uses its own ID3v2 tag reader with an mpg123 audio backend. Its SDL3 major release was checked and excluded as the same upstream package. SoX parses audio from the tagged MP3 through libmad but does not expose its ID3v2 title. The
+their C++ cores. libsndfile shares mpg123 for audio and ID3v2 parsing. MediaInfoLib uses its native MPEG audio and ID3v2 parsers. SDL_mixer uses its own ID3v2 tag reader with an mpg123 audio backend. Its SDL3 major release was checked and excluded as the same upstream package. SoX parses audio from the tagged MP3 through libmad but does not expose its ID3v2 title. The direct libmad adapter skips the valid tag and decodes a frame, sharing the same audio engine as SoX. The
 source archives, native libraries, and
 relevant dependencies are SHA-256 pinned; libid3tag's generated public header
 is recorded separately from its source template. Homebrew's

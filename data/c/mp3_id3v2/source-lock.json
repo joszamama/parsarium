@@ -241,5 +241,39 @@
       }
     ],
     "build_note": "Pinned SourceForge 14.4.2 archive, matching public header, installed libsox and linked libmad. COPYING states application GPL and libsox LGPL licensing; the Homebrew formula records their combined package expression."
+  },
+  "libmad": {
+    "release": "0.16.5",
+    "installed_revision": "0.16.5",
+    "formula": "mad",
+    "license": "GPL-2.0-or-later",
+    "source_url": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
+    "source_sha256": "f401b2ccf49c26ad0c3a6ef0179b1cbbff2406338b0603bb2033e6dcaf706114",
+    "repository": "https://codeberg.org/tenacityteam/libmad",
+    "source_header_member": "mad-0.16.5-source/include/mad.h.in",
+    "source_header_sha256": "0638a3e9e11184cec2a690ef22c8e088eb18c0f680f9b97b392b5e9cfcbbed37",
+    "local_header": "/opt/homebrew/Cellar/mad/0.16.5/include/mad.h",
+    "local_header_sha256": "a0ac7f93a5253dd2d54da83db27dda6fcd185de8e5ae55148cead079e393df4f",
+    "local_library": "/opt/homebrew/Cellar/mad/0.16.5/lib/libmad.0.16.5.dylib",
+    "local_library_sha256": "3bb643fd96527e716ee1cb4a193211f578f1efbdc912ddb0f2716bd09495dd14",
+    "pkg_config": "mad",
+    "license_member": "mad-0.16.5-source/COPYING",
+    "license_sha256": "32b1062f7da84967e7019d01ab805935caa7ab7321a7ced0e30ebe75e5df1670",
+    "source_engine_members": [
+      {
+        "member": "mad-0.16.5-source/src/frame.c",
+        "sha256": "975af1cc29d84f126b008061296db70631d9fdca5fcefde20fa2f29b09ec7067"
+      },
+      {
+        "member": "mad-0.16.5-source/src/layer3.c",
+        "sha256": "922d95002d331735a94745221cb779c1495e05ca151e1b62615bc3cb7c7f5c3b"
+      },
+      {
+        "member": "mad-0.16.5-source/src/synth.c",
+        "sha256": "bca5cd73c00bbac39d72d0f37d9de99142bba29c36d9c7440213816fd3b93411"
+      }
+    ],
+    "installed_dependencies": [],
+    "build_note": "Pinned libmad release source, generated installed header and native library. The release ships mad.h.in, so source and installed header hashes are recorded separately. The adapter only parses the ID3v2 size to skip the tag, then libmad decodes an MPEG Layer III frame."
   }
 }
