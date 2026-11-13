@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T00:07:51.105379+00:00",
+  "checked_at_utc": "2026-11-13T00:13:21.001799+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/pdf/source-lock.json",
@@ -31,7 +31,7 @@
     },
     "pdfio": {
       "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
-      "local_library_sha256": "b8426450cf97c230a7c47505b93371f8f9078e379e08676fdc65119831590f12",
+      "local_library_sha256": "7f85efa48359025443fa426917ed256ad358ccc9d07642012eafcadb7af74c30",
       "local_header_sha256": "ced6a8ef6ee74f6913a92f67ac54f7ec7cd63d0c45097c98ca60f99bf3134b37"
     },
     "pdfium": {
@@ -56,7 +56,7 @@
     },
     "xpdf": {
       "source_sha256": "1c38f527c46caee0f712386d42a885b96a31ed9ce11904e872559859894d137e",
-      "local_library_sha256": "4a7e109d58f05392030f53534e240c4c2515327cab1b6f8ec086cee7a0491121",
+      "local_library_sha256": "7233d0c96bcd535c50065a5e2bf37432a2459ae059e529ee8b2d7598f6d76206",
       "local_header_sha256": "d9db2a755da945a0c80fbf30f07d4714625bde1bc832759971514f41842bb064"
     },
     "pdfmm": {
@@ -76,12 +76,12 @@
     },
     "tspdf": {
       "source_sha256": "52b164ad65da2fcfcce12061cd0308375d788c484d7bcf128afe80fcc4072978",
-      "local_library_sha256": "8c7ac209016ca2045fb810a62bba7ee434a49392f331048bbcb85e0248281856",
+      "local_library_sha256": "06e9cf0c2ed3fc77ec3b915aca835862b57dfbc06305f63b8ee1e0d298c6abfd",
       "local_header_sha256": "896a93d3374a383082514481e6c198c8fcdd3501187a8d946a1da4c059deb3d1"
     },
     "aspose_pdf_foss": {
       "source_sha256": "72d715b8589af8746a6df7f8d2d9def3a2e9a7757f9b414a8a393028c9822738",
-      "local_library_sha256": "bb8efe9428eb7635634535d0b2e7d420a9940d2bc3d6411d5e53f6d411c79b02",
+      "local_library_sha256": "003124993e5be5ef29e9b9742bc912bafd7eea62f7b3e4f092e07b2026938160",
       "local_header_sha256": "53b1317f68e461e7bc3be66d4c22b6eca2fb87797a1d464e5d8a339b029094d3"
     },
     "imagemagick": {
@@ -93,6 +93,11 @@
       "source_sha256": "7efa070dc31116b4315061b39f84bc7181e8b060bf61214ec9af851131af9c81",
       "local_library_sha256": "3e4c438d63026285d5bc5d980876b58d8b5c2cfec6d4395255492ab258263f55",
       "local_header_sha256": "a840297eae9825b5eccddff5fc02c4497470852db72c930b949a15c94beb36f7"
+    },
+    "libvips": {
+      "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
+      "local_library_sha256": "63510cf05dcb6a8cc8c06f1a435fe2eb91d414f2601dbb7c5df0c9008e6f6e44",
+      "local_header_sha256": "44f087dd8eda8b29cbb74a1c5af0e5064e302fe2e0dfed293a05b32116ebc822"
     }
   },
   "control": "controls/pdf/one-page.pdf",
@@ -293,6 +298,19 @@
       "control": "controls/pdf/one-page.pdf",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/graphicsmagick.cpp -I/opt/homebrew/opt/graphicsmagick/include/GraphicsMagick -lGraphicsMagick++ -L/opt/homebrew/opt/graphicsmagick/lib -lGraphicsMagick -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/graphicsmagick",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/graphicsmagick /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
+      "output": {
+        "pages": 1,
+        "width": 612,
+        "height": 792
+      },
+      "pass": true
+    },
+    {
+      "package": "libvips",
+      "version": "8.18.7",
+      "control": "controls/pdf/one-page.pdf",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/libvips.cpp -I/opt/homebrew/Cellar/vips/8.18.7_1/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/fftw/3.3.11/include -I/opt/homebrew/Cellar/cfitsio/4.7.0/include -I/opt/homebrew/Cellar/libimagequant/4.4.1/include -I/opt/homebrew/Cellar/cgif/0.5.4/include -I/opt/homebrew/Cellar/libexif/0.6.26/include -I/opt/homebrew/Cellar/libultrahdr/2.0.2/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/Cellar/librsvg/2.63.4/include/librsvg-2.0 -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/cairo/1.18.6/include -I/opt/homebrew/Cellar/pango/1.58.2/include/pango-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libthai/0.1.30/include -I/opt/homebrew/Cellar/libdatrie/0.2.14/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/graphite2/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -I/opt/homebrew/Cellar/libmatio/1.6.0/include -I/opt/homebrew/Cellar/hdf5/2.2.0/include -I/opt/homebrew/Cellar/openexr/3.5.3_1/include -I/opt/homebrew/Cellar/openexr/3.5.3_1/include/OpenEXR -pthread -I/opt/homebrew/Cellar/imath/3.2.3/include -I/opt/homebrew/Cellar/imath/3.2.3/include/Imath -I/opt/homebrew/Cellar/libdeflate/1.26/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/libraw/0.22.3/include/libraw -I/opt/homebrew/Cellar/libraw/0.22.3/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/Cellar/openjpeg/2.5.4_1/include/openjpeg-2.5 -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -L/opt/homebrew/Cellar/vips/8.18.7_1/lib -lvips-cpp -lvips -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/libvips",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/pdf/target/libvips /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/pdf/one-page.pdf",
       "output": {
         "pages": 1,
         "width": 612,

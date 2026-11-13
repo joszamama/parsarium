@@ -120,6 +120,13 @@ def main() -> None:
             library = Path(source["local_library"])
             for dependency in source["installed_dependencies"]:
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
+        elif name == "libvips":
+            assert source["installed_revision"] in run(["brew", "list", "--versions", "vips"]).split()
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            for dependency in source["installed_dependencies"]:
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         else:
             header = Path(source["local_header"])
             library = Path(source["local_library"])
@@ -152,6 +159,9 @@ def main() -> None:
             command = [*base, "-I" + str(source_dir / "include"), adapter,
                        str(library), "-o", str(TARGET / name)]
         elif name in ("imagemagick", "graphicsmagick"):
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+            command = [*base, adapter, *flags, "-o", str(TARGET / name)]
+        elif name == "libvips":
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             command = [*base, adapter, *flags, "-o", str(TARGET / name)]
         elif name in ("mupdf", "ghostscript"):

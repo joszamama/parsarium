@@ -162,5 +162,23 @@
     "scope": "Rendered PDF page sequence and first page dimensions",
     "family": "GraphicsMagick PDF coder + Ghostscript PDF interpreter",
     "family_note": "Distinct Magick package API; Ghostscript 10.08.0 performs underlying PDF interpretation in the recorded installation. The C and C++ APIs of this package share its core; its PDF syntax engine is shared with the separately counted Ghostscript path."
+  },
+  {
+    "name": "libvips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/LICENSE",
+    "documentation": "https://www.libvips.org/API/current/ctor.Image.pdfload.html",
+    "input_api": "vips_pdfload(local filename, &VipsImage, NULL); vips_image_get_int(\"n-pages\"); image width/height",
+    "adapter": "adapters/c/pdf/libvips.c",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 612,
+      "height": 792
+    },
+    "scope": "PDF page count and first page dimensions from PDF loader header",
+    "family": "libvips vips-poppler module over Poppler PDF parser",
+    "family_note": "The installed vips-poppler module links Poppler GLib 26.11.0; C and C++ libvips APIs share the same package and Poppler syntax engine. The adapter reads format-aware PDF metadata; libvips renders pixels lazily."
   }
 ]

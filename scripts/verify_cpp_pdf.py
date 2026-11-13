@@ -230,6 +230,13 @@ def main() -> None:
             library = Path(source["local_library"])
             for dependency in source["installed_dependencies"]:
                 assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
+        elif name == "libvips":
+            assert source["installed_revision"] in run(["brew", "list", "--versions", "vips"]).split()
+            assert run(["pkg-config", "--modversion", source["pkg_config"]]) == source["release"]
+            header = Path(source["local_header"])
+            library = Path(source["local_library"])
+            for dependency in source["installed_dependencies"]:
+                assert sha256(Path(dependency["path"]).read_bytes()).hexdigest() == dependency["sha256"]
         elif name == "docling_parse":
             patch = ROOT / source["patch"]
             adapter = ROOT / parser["adapter"]
@@ -339,6 +346,10 @@ def main() -> None:
                        "-I" + str(source_dir / "include"), str(ROOT / parser["adapter"]),
                        str(library), "-o", str(TARGET / name)]
         elif name in ("imagemagick", "graphicsmagick"):
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(TARGET / name)]
+        elif name == "libvips":
             flags = shlex.split(run(["pkg-config", "--cflags", "--libs", source["pkg_config"]]))
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        str(ROOT / parser["adapter"]), *flags, "-o", str(TARGET / name)]

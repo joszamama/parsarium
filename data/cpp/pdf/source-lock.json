@@ -340,5 +340,37 @@
       }
     ],
     "build_note": "Local PDF coder and Ghostscript delegate are required and hash-pinned; this is a format-aware package input API with a shared Ghostscript PDF interpreter, not an independent PDF syntax engine. The source header matches the installed header byte for byte."
+  },
+  "libvips": {
+    "release": "8.18.7",
+    "installed_revision": "8.18.7_1",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://github.com/libvips/libvips/releases/download/v8.18.7/vips-8.18.7.tar.xz",
+    "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
+    "repository": "https://github.com/libvips/libvips",
+    "source_header_member": "vips-8.18.7/cplusplus/include/vips/vips8",
+    "local_header": "/opt/homebrew/Cellar/vips/8.18.7_1/include/vips/vips8",
+    "local_header_sha256": "44f087dd8eda8b29cbb74a1c5af0e5064e302fe2e0dfed293a05b32116ebc822",
+    "local_library": "/opt/homebrew/Cellar/vips/8.18.7_1/lib/libvips-cpp.42.dylib",
+    "local_library_sha256": "63510cf05dcb6a8cc8c06f1a435fe2eb91d414f2601dbb7c5df0c9008e6f6e44",
+    "pkg_config": "vips-cpp",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/vips/8.18.7_1/lib/libvips.42.dylib",
+        "sha256": "a86edfe688ad79b7cb9f7fa73ca6d7e5efd7a54cee5a7de4822c14483c9346a3",
+        "role": "libvips core"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/vips/8.18.7_1/lib/vips-modules-8.18/vips-poppler.dylib",
+        "sha256": "87ffc7cd71f506f4e940ce7afd21980fa6f8960d2fdfbecae8cb6937ab98061a",
+        "role": "libvips PDF loader module"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/poppler/26.11.0/lib/libpoppler-glib.8.31.0.dylib",
+        "sha256": "47a28e807c50e19a379b6dafb1d10a191d0229535bd51d2a9df13d15a1f0f16a",
+        "role": "Poppler GLib PDF engine"
+      }
+    ],
+    "build_note": "Pinned Homebrew vips 8.18.7_1 install over upstream 8.18.7 source; header matches source, library and vips-poppler module are hash pinned. The module directly links Poppler GLib 26.11.0, whose library hash is checked. This package path shares Poppler PDF syntax interpretation."
   }
 }
