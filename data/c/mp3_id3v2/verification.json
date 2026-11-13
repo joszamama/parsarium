@@ -1,0 +1,82 @@
+{
+  "checked_at_utc": "2026-11-13T01:10:11.362894+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "local_libraries": {
+    "taglib": {
+      "source_sha256": "3ca2d8afaa7f1cf7f6ed10e511ebc368bfacd6dcaa3dbfa690b89e502e8963dc",
+      "local_header_sha256": "3c86ddb006ac9ab9a6e4a3a78b2363fb8e38d20f2a2001d9a7f13d1d952410c2",
+      "local_library_sha256": "6fc69b707e44d97760e7812099900753db8c18c3bcc14ead588aef2c782d791b"
+    },
+    "mpg123": {
+      "source_sha256": "31d0e35a4ca567ec9b5ebda6c3062bb4435d6d3eacd6ef0d95cadd7854dc03ee",
+      "local_header_sha256": "d6c7d5094aef2f6587819b4445028c45f06af26b15a5fb643a55c4be09cf7c4a",
+      "local_library_sha256": "25751ddb9880cd94b3aedd668b24305edfdcd88454d5a06077f72d93fab82b20"
+    },
+    "ffmpeg": {
+      "source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+      "local_header_sha256": "694da025f30497481f4703e06de106bd417a5718f8fdcdf5e09e34f4b5f21114",
+      "local_library_sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779"
+    },
+    "libid3tag": {
+      "source_sha256": "8b6bc96016f6ab3a52b753349ed442e15181de9db1df01884f829e3d4f3d1e78",
+      "local_header_sha256": "6de6da5573832e715c021142dca6b673900706f550e15e1929bb4667875ee0a8",
+      "local_library_sha256": "9425153596412ef2bfeb524e15efec5f6446ec4ac2cf365dd5a19fc6bf3eeecd"
+    }
+  },
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "third_party": [
+    {
+      "package": "taglib",
+      "version": "2.3.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/taglib.c -I/opt/homebrew/Cellar/taglib/2.3.2/include/taglib -I/opt/homebrew/Cellar/taglib/2.3.2/include -L/opt/homebrew/Cellar/taglib/2.3.2/lib -ltag_c -ltag -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/taglib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/taglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control"
+      },
+      "pass": true
+    },
+    {
+      "package": "mpg123",
+      "version": "1.33.7",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/mpg123.c -I/opt/homebrew/Cellar/mpg123/1.33.7/include -L/opt/homebrew/Cellar/mpg123/1.33.7/lib -lmpg123 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/mpg123",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/mpg123 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "id3v2_version": 3
+      },
+      "pass": true
+    },
+    {
+      "package": "ffmpeg",
+      "version": "9.0.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/ffmpeg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "mp3_streams": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "libid3tag",
+      "version": "0.16.4",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/libid3tag.c -I/opt/homebrew/Cellar/libid3tag/0.16.4/include -L/opt/homebrew/Cellar/libid3tag/0.16.4/lib -lid3tag -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/libid3tag",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/libid3tag /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "normalized_id3_major": 4,
+        "frames": 4
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

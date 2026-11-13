@@ -4,7 +4,7 @@ Parsarium is a reproducible catalogue of libraries and bundled APIs that parse
 specific formats. It currently contains verified C × PNG, WAV, and HTTP/1.1 batches,
 verified C × ZIP and ASCII PNM batches, verified C++ × PNG, ZIP, and WAV batches,
 and verified C++ × ASCII PNM, HTTP/1.1, and PDF batches, plus below-target
-C and C++ × SVG batches,
+C and C++ × SVG and MP3 with ID3v2 batches,
 a verified JavaScript × PNG pilot,
 JavaScript × ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, MP3 with ID3v2, ASCII PLY, and ASCII PNM,
 plus a below-target JavaScript × Matrix Market search,
@@ -18,7 +18,7 @@ an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 71 cells at the 20-parser target, five started below target, and 12
+There are 71 cells at the 20-parser target, seven started below target, and 10
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -38,6 +38,8 @@ python3 scripts/verify_c_pdf.py
 python3 scripts/verify_cpp_pdf.py
 python3 scripts/verify_c_svg.py
 python3 scripts/verify_cpp_svg.py
+python3 scripts/verify_c_mp3_id3v2.py
+python3 scripts/verify_cpp_mp3_id3v2.py
 python3 scripts/verify_c_ascii_pnm.py
 python3 scripts/verify_cpp_ascii_pnm.py
 python3 scripts/verify_c_zip.py
@@ -230,6 +232,18 @@ QtBase QImageReader reads it through the same QtSvg plugin used by QtSvg.
 All recorded SVG leads in these cells are resolved, while additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
+
+The C and C++ × MP3 with ID3v2 batches each verify **4/20 package paths** on
+the valid tagged MP3 control: TagLib, mpg123, FFmpeg libavformat, and libid3tag.
+The adapters return a parsed title, audio stream, or ID3v2 frame data. C and
+C++ call sites share the same underlying C libraries except TagLib, where the
+C binding uses the C++ core. The source archives, native libraries, and
+relevant dependencies are SHA-256 pinned; libid3tag's generated public header
+is recorded separately from its source template. Homebrew's
+install-on-request 365-day count ranks these packages within each cell, while
+three leads remain unresolved. The separate C and C++ standard-library
+inventories found no documented MP3 or ID3v2 parser. See the
+[C](data/c/mp3_id3v2/cell.json) and [C++](data/cpp/mp3_id3v2/cell.json) records.
 
 The C and C++ × ASCII PNM verifiers use valid 2×1 P3 red/green controls.
 The C batch now has **20/20 verified package paths**: fourteen prior readers plus

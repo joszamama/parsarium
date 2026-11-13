@@ -73,7 +73,9 @@ def main() -> None:
                 assert all(len(file["sha256"]) == 64 for file in source.get("files", []))
                 assert (ROOT / parser["adapter"]).exists()
                 assert (ROOT / parser["control"]).exists()
-                count = snapshot["popularity_metric"]["packages"][name]["stars"]
+                metric_key = ("install_on_request_365d" if snapshot["popularity_metric"].get("metric")
+                              == "Homebrew install-on-request count over 365 days" else "stars")
+                count = snapshot["popularity_metric"]["packages"][name][metric_key]
                 assert count is None or isinstance(count, int)
             elif cell["ecosystem"] == "go":
                 go_mod = (ROOT / "adapters" / "go" / cell["format"] / "go.mod").read_text()

@@ -1,0 +1,71 @@
+[
+  {
+    "name": "taglib",
+    "version": "2.3.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://taglib.org/releases/taglib-2.3.2.tar.gz",
+    "documentation": "https://taglib.org/api/",
+    "input_api": "TagLib::MPEG::File(local filename); ID3v2Tag()->title()/artist()",
+    "adapter": "adapters/cpp/mp3_id3v2/taglib.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control"
+    },
+    "scope": "ID3v2 title and artist from a valid tagged MP3",
+    "family": "TagLib ID3v2 parser",
+    "family_note": "The C simple API delegates to the TagLib C++ core; C and C++ share the same ID3v2 engine."
+  },
+  {
+    "name": "mpg123",
+    "version": "1.33.7",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://www.mpg123.de/download/mpg123-1.33.7.tar.bz2",
+    "documentation": "https://www.mpg123.org/api/group__mpg123__metadata.shtml",
+    "input_api": "mpg123_open(local filename); mpg123_scan; mpg123_id3(v2)->title",
+    "adapter": "adapters/cpp/mp3_id3v2/mpg123.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "id3v2_version": 3
+    },
+    "scope": "ID3v2 title/version after scanning valid MP3 audio",
+    "family": "libmpg123 MPEG audio and ID3v2 parser",
+    "family_note": "The same C library is called from C and C++; mpg123_scan reads the audio stream and mpg123_id3 returns parsed ID3v2 fields."
+  },
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+    "documentation": "https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local filename); avformat_find_stream_info; format metadata title and MP3 stream codec",
+    "adapter": "adapters/cpp/mp3_id3v2/ffmpeg.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "mp3_streams": 1
+    },
+    "scope": "ID3v2 title and identified MP3 audio stream",
+    "family": "FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader",
+    "family_note": "The same FFmpeg libavformat C demuxer serves C and C++ call sites. It identifies the MP3 audio stream and parses ID3v2 title metadata."
+  },
+  {
+    "name": "libid3tag",
+    "version": "0.16.4",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://codeberg.org/tenacityteam/libid3tag/releases/download/0.16.4/id3tag-0.16.4-source.tar.gz",
+    "documentation": "https://codeberg.org/tenacityteam/libid3tag/src/tag/0.16.4/include/id3tag.h.in",
+    "input_api": "id3_file_open(local filename); id3_file_tag; id3_tag_findframe(TIT2); id3_field_getstrings",
+    "adapter": "adapters/cpp/mp3_id3v2/libid3tag.cpp",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "normalized_id3_major": 4,
+      "frames": 4
+    },
+    "scope": "ID3v2 title and normalized tag version/frame count",
+    "family": "libid3tag ID3v2 metadata parser",
+    "family_note": "The same C ID3v2 parser serves C and C++ call sites. Its API normalizes the input 2.3 tag to internal major version 4; it does not decode MPEG audio frames."
+  }
+]
