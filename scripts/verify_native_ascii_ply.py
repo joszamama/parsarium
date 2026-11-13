@@ -106,6 +106,20 @@ def verify(ecosystem: str) -> None:
                        str(ROOT / parser["adapter"]),
                        "-L/opt/homebrew/opt/gmp/lib", "-L/opt/homebrew/opt/mpfr/lib",
                        "-lgmp", "-lmpfr", "-o", str(target / name)]
+        elif name == "pcl":
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "pcl_io"]))
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", "/opt/homebrew/opt/boost/include",
+                       str(ROOT / parser["adapter"]), *flags, "-o", str(target / name)]
+        elif name == "vtk":
+            prefix = Path("/opt/homebrew/Cellar/vtk/9.7.2")
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(prefix / "include/vtk-9.7"),
+                       str(ROOT / parser["adapter"]), "-L" + str(prefix / "lib"),
+                       "-Wl,-rpath," + str(prefix / "lib"),
+                       "-lvtkIOPLY-9.7", "-lvtkCommonDataModel-9.7", "-lvtkCommonCore-9.7",
+                       "-lvtkCommonExecutionModel-9.7", "-lvtksys-9.7",
+                       "-o", str(target / name)]
         elif source.get("source_build") == "rply":
             object_path = include_dir / "rply.o"
             run(["cc", "-std=c11", "-O2", "-I" + str(include_dir),

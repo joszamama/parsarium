@@ -117,5 +117,48 @@
       "libigl-2.6.4/LICENSE.MPL2": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
     },
     "build_note": "Official tagged libigl source and bundled tinyply 2.3.2 are hash pinned; header-only igl::readPLY adapts bundled tinyply to Eigen matrices. Homebrew Eigen 5.0.1 headers used in compilation."
+  },
+  "pcl": {
+    "release": "1.15.1",
+    "installed_revision": "1.15.1_8",
+    "formula": "pcl",
+    "license": "BSD-3-Clause",
+    "source_url": "https://github.com/PointCloudLibrary/pcl/archive/refs/tags/pcl-1.15.1.tar.gz",
+    "source_sha256": "e1d862c7b6bd27a45884a825a2e509bfcbd4561307d5bfe17ce5c8a3d94a6c29",
+    "header_member": "pcl-pcl-1.15.1/io/include/pcl/io/ply_io.h",
+    "source_members": {
+      "pcl-pcl-1.15.1/io/include/pcl/io/ply_io.h": "ede0075ce70ad719da4959abe984aa09e0a6b307f2a8f0228f70c9de59b9bd79",
+      "pcl-pcl-1.15.1/io/src/ply_io.cpp": "da16a78985480db58b84fe56ddf12e597285af72fa19a52e7fdf51a68ffa614b",
+      "pcl-pcl-1.15.1/LICENSE.txt": "303429f6701ee55a5f53106ea337e9ce4653f1dcda66d190054643bf94e947ae"
+    },
+    "installed_files": {
+      "/opt/homebrew/Cellar/pcl/1.15.1_8/include/pcl-1.15/pcl/io/ply_io.h": "ede0075ce70ad719da4959abe984aa09e0a6b307f2a8f0228f70c9de59b9bd79",
+      "/opt/homebrew/Cellar/pcl/1.15.1_8/lib/libpcl_io.1.15.1.dylib": "15af636bb1cdb5a00b93f62cfddc11412fd827aa7752ab5935999d527d1cbe95"
+    },
+    "build_note": "Official tagged source and installed Homebrew PCL 1.15.1_8; public PLY header matches source. PLYReader is linked from pinned libpcl_io."
+  },
+  "vtk": {
+    "release": "9.7.2",
+    "installed_revision": "9.7.2",
+    "formula": "vtk",
+    "license": "BSD-3-Clause",
+    "source_url": "https://www.vtk.org/files/release/9.7/VTK-9.7.2.tar.gz",
+    "source_sha256": "fecef55df5caec6298ce190024060a90ce3bb515033c0f18968b9ab5c12bf796",
+    "header_member": "VTK-9.7.2/IO/PLY/vtkPLYReader.h",
+    "source_members": {
+      "VTK-9.7.2/IO/PLY/vtkPLYReader.h": "3d07d5aaf2c4fe9114a8910644eb3c1491306b52ebb8bd92e4bc452459c87bfe",
+      "VTK-9.7.2/IO/PLY/vtkPLYReader.cxx": "b13d4703d291fd48ffb329024748bf009add5667a0383172593f8d1ae0fec0b4",
+      "VTK-9.7.2/IO/PLY/vtkPLY.h": "a9524f2714bf669816f3e70295e95a963f684a1755ada461e12b8cd188db93d6",
+      "VTK-9.7.2/IO/PLY/vtkPLY.cxx": "9a76a055c85797a1e52fb2ee78198265270f39a2d7092ac3f481adef5d28061b",
+      "VTK-9.7.2/IO/PLY/Copyright.txt": "f986802c1b8a0498fdf559c65877b760422468c1bf9ca8243ae959e97f7530c1",
+      "VTK-9.7.2/Copyright.txt": "11232448be82e0ea2c2c66219c2e36389f42249894070ee10c549ff182fc08b6"
+    },
+    "installed_files": {
+      "/opt/homebrew/Cellar/vtk/9.7.2/include/vtk-9.7/vtkPLYReader.h": "3d07d5aaf2c4fe9114a8910644eb3c1491306b52ebb8bd92e4bc452459c87bfe",
+      "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtkIOPLY-9.7.9.7.dylib": "891a222cca78f30820cb9141884a2b46befaf06c396643b48c4569a63472b644",
+      "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtkCommonDataModel-9.7.9.7.dylib": "7b3e2ba92dda8d29cd08389586235af73cd89ee44eb9599d76c912e074b21877",
+      "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtksys-9.7.9.7.dylib": "97ad2d58b3bb62780d623437bc255f9bee99ffee4478dec089ebaeb3f3059e1b"
+    },
+    "build_note": "Pinned VTK 9.7.2 source and Homebrew binary. Reader and vtkPLY parser source, installed public header and native linked libraries are SHA-256 checked."
   }
 }

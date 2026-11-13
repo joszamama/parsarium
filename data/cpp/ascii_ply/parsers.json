@@ -138,5 +138,49 @@
     "scope": "three vertex positions and one triangle face matrix",
     "family": "libigl readPLY over bundled tinyply 2.3.2",
     "family_note": "libigl has a distinct documented Eigen-matrix API but shares the tinyply parser family with the separately verified tinyply standalone package (which is pinned at 3.0)."
+  },
+  {
+    "name": "pcl",
+    "version": "1.15.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/PointCloudLibrary/pcl/archive/refs/tags/pcl-1.15.1.tar.gz",
+    "documentation": "https://pointclouds.org/documentation/classpcl_1_1_p_l_y_reader.html",
+    "input_api": "pcl::PLYReader::read(local filename, PolygonMesh)",
+    "adapter": "adapters/cpp/ascii_ply/pcl.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices, one polygon and its three indices",
+    "family": "PCL PLYReader native implementation",
+    "family_note": "PCL has its own PLY reader implementation."
+  },
+  {
+    "name": "vtk",
+    "version": "9.7.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://www.vtk.org/files/release/9.7/VTK-9.7.2.tar.gz",
+    "documentation": "https://examples.vtk.org/site/Cxx/IO/ReadPLY/",
+    "input_api": "vtkPLYReader::SetFileName(local filename); Update; GetOutput",
+    "adapter": "adapters/cpp/ascii_ply/vtk.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices, one polygon and its three indices",
+    "family": "VTK vtkPLYReader over bundled vtkPLY syntax parser",
+    "family_note": "VTK bundles vtkPLY; distinct from RPly and the other listed PLY engines."
   }
 ]
