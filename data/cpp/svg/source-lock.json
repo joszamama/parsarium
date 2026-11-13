@@ -450,5 +450,45 @@
       }
     ],
     "build_note": "Pinned upstream release and matching installed public header/core dylib, base dylib and setup.h. Bundle parses local SVG using embedded NanoSVG."
+  },
+  "qtdeclarative": {
+    "release": "6.12.0",
+    "installed_revision": "6.12.0_1",
+    "license": "LGPL-3.0-only",
+    "source_url": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtdeclarative-everywhere-src-6.12.0.tar.xz",
+    "source_sha256": "311f3a2603e1973bb59baef9dfa740a376de713157d4782ee043681e889c9260",
+    "repository": "https://code.qt.io/cgit/qt/qtdeclarative.git/",
+    "source_header_member": "qtdeclarative-everywhere-src-6.12.0/src/quickvectorimage/qquickvectorimage_p.h",
+    "local_header": "/opt/homebrew/Cellar/qtdeclarative/6.12.0_1/lib/QtQuickVectorImage.framework/Versions/A/Headers/6.12.0/QtQuickVectorImage/private/qquickvectorimage_p.h",
+    "local_header_sha256": "648706211967bb4ac09fe99d215cad0f04c0276ff8088b372fb0599339b5915d",
+    "local_library": "/opt/homebrew/Cellar/qtdeclarative/6.12.0_1/lib/QtQuickVectorImage.framework/Versions/A/QtQuickVectorImage",
+    "local_library_sha256": "02eb64a085808b68e72cb9031fd7dc7c31c0606205a97ddafe6854f118dbdb56",
+    "pkg_config": "Qt6Quick",
+    "pkg_config_version": "6.12.0",
+    "license_member": "qtdeclarative-everywhere-src-6.12.0/LICENSES/LGPL-3.0-only.txt",
+    "license_sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+    "source_engine_member": "qtdeclarative-everywhere-src-6.12.0/src/quickvectorimage/qquickvectorimage.cpp",
+    "source_engine_sha256": "78c0a393798e23343822b080673d205419e30538f32cf9535ebb9b44f4a17cf1",
+    "source_engine_members": [
+      {
+        "member": "qtdeclarative-everywhere-src-6.12.0/src/quickvectorimage/generator/qsvgvisitorimpl.cpp",
+        "sha256": "ce44ae8e6fa1662cf948c1a047093cb319cd63dae4004d9ee8b3b56fd000724d"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/qtdeclarative/6.12.0_1/share/qt/qml/QtQuick/VectorImage/libqquickvectorimageplugin.dylib",
+        "sha256": "c5964c72b92fe95768488ef2aa28fc9015f3909816500a6c30a412aabe713604",
+        "role": "QtQuick VectorImage QML plugin"
+      },
+      {
+        "formula": "qtsvg",
+        "revision": "6.12.0_1",
+        "path": "/opt/homebrew/Cellar/qtsvg/6.12.0_1/lib/QtSvg.framework/Versions/A/QtSvg",
+        "sha256": "303b0e86d60603bf5c8d53413715bd4c0b85cb32f0ae81361274cf15931bfc57",
+        "role": "shared QtSvg SVG document parser"
+      }
+    ],
+    "build_note": "Pinned QtDeclarative release and installed VectorImage private header/framework/plugin; QML adapter runs offscreen and uses QtSvg document parser."
   }
 }

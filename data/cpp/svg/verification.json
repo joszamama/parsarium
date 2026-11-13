@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T02:50:42.154649+00:00",
+  "checked_at_utc": "2026-11-13T02:58:54.668449+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/svg/source-lock.json",
@@ -92,6 +92,11 @@
       "source_sha256": "815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98",
       "local_header_sha256": "62c649769fa09bcde2453ee180c6d32e1ed10c260e242d1727bf4778c46e88c5",
       "local_library_sha256": "2e03524f551ff307dc8047c8d511f5018d93862f97a34811cd5432b5020e72db"
+    },
+    "qtdeclarative": {
+      "source_sha256": "311f3a2603e1973bb59baef9dfa740a376de713157d4782ee043681e889c9260",
+      "local_header_sha256": "648706211967bb4ac09fe99d215cad0f04c0276ff8088b372fb0599339b5915d",
+      "local_library_sha256": "02eb64a085808b68e72cb9031fd7dc7c31c0606205a97ddafe6854f118dbdb56"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -459,6 +464,19 @@
           255,
           0
         ]
+      },
+      "pass": true
+    },
+    {
+      "package": "qtdeclarative",
+      "version": "6.12.0",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/qtdeclarative.cpp -F/opt/homebrew/lib -I/opt/homebrew/include/QtQuick -I/opt/homebrew/lib/QtQuick.framework -DQT_QUICK_LIB -I/opt/homebrew/include/QtOpenGL -I/opt/homebrew/lib/QtOpenGL.framework -DQT_OPENGL_LIB -I/opt/homebrew/include/QtGui -I/opt/homebrew/lib/QtGui.framework -DQT_GUI_LIB -I/opt/homebrew/include/QtQml -I/opt/homebrew/lib/QtQml.framework -DQT_QML_LIB -I/opt/homebrew/include/QtQmlIntegration -I/opt/homebrew/include -DQT_QMLINTEGRATION_LIB -I/opt/homebrew/include/QtNetwork -I/opt/homebrew/lib/QtNetwork.framework -DQT_NETWORK_LIB -I/opt/homebrew/include/QtCore -I/opt/homebrew/lib/QtCore.framework -DQT_CORE_LIB -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib -framework QtQuick -framework QtOpenGL -framework QtGui -framework QtQml -framework QtNetwork -framework QtCore -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/qtdeclarative",
+      "command": "env QT_QPA_PLATFORM=offscreen /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/svg/target/qtdeclarative /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "ready": true
       },
       "pass": true
     }

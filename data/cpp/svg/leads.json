@@ -10,5 +10,11 @@
     "status": "excluded_external_cli_fallback",
     "reason": "The installed GEGL 0.4.72 gegl:load API rendered the valid SVG, but it reported no native .svg loader and fell back to gegl:magick-load. The pinned GEGL source shows that operation spawns ImageMagick convert on the filename and reloads a temporary PNG. This installed path does not itself parse SVG as a library API; ImageMagick already has a direct verified row. GEGL svg-load source exists but that plugin was not installed or exercised.",
     "source": "https://github.com/GNOME/gegl/blob/GEGL_0_4_72/operations/common/magick-load.c"
+  },
+  {
+    "name": "Donner",
+    "status": "unresolved",
+    "reason": "Tagged ISC v0.8.0 documents SVGParser::ParseSVG for local bytes and was SHA-256 pinned (fbc90e95e518f226a5e54b870b2896395e9ffc4966744f06963c7d9f6bfd44ab). A Bazel 8.8.1 adapter build reached its source but failed under the installed Apple C++ toolchain: std::format and std::views were unavailable. The installed Homebrew LLVM 23 supports them, but a matching Bazel macOS toolchain has not been configured or tested. No valid control result was verified.",
+    "source": "https://github.com/jwmcglynn/donner/tree/v0.8.0"
   }
 ]

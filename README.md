@@ -235,8 +235,9 @@ The C++ SVG batch also verifies NovaSVG 0.11.5, whose header-only parser
 returns the root dimensions and two rectangle elements from the control,
 JUCE 9.0.5, whose Drawable API reads the local SVG through bundled LunaSVG,
 and wxWidgets 3.3.4, whose bitmap API renders the two control pixels through
-bundled NanoSVG.
-All recorded SVG leads in these cells are resolved, while additional
+bundled NanoSVG. QtDeclarative VectorImage 6.12.0 also passes the C++ control
+through the shared QtSvg document parser. C++ SVG is at 19/20; Donner remains
+an unresolved C++ lead after a C++20 toolchain build failure. Additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 

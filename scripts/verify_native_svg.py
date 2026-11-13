@@ -151,6 +151,8 @@ def verify(ecosystem: str) -> None:
         if name != "juce":
             run(command)
         execute = [str(juce_binary if juce_binary is not None else target / name), str(CONTROL)]
+        if name == "qtdeclarative":
+            execute = ["env", "QT_QPA_PLATFORM=offscreen", *execute]
         output = json.loads(run(execute))
         assert output == parser["expected_output"], (name, output)
         row = {"package": name, "version": parser["version"], "control": parser["control"],
