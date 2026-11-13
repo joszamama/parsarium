@@ -1,0 +1,18 @@
+{
+  "ecosystem": "Java",
+  "format": "ASCII PLY",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "JDK 21 java.base",
+      "official_documentation_scope": [
+        "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/package-summary.html",
+        "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/package-summary.html"
+      ],
+      "finding": "The scoped JDK APIs provide local bytes and text streams but no PLY header, vertex, or face parser. Generic file I/O does not qualify."
+    }
+  ],
+  "limit": "jPLY and MeshIO are third-party libraries, recorded separately."
+}

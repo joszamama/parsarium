@@ -1,0 +1,32 @@
+[
+  {
+    "name": "jply",
+    "group": "org.smurn",
+    "artifact": "jply",
+    "version": "0.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned Maven POM licenses element",
+    "input_api": "new PlyReaderFile(File local path), nextElementReader(), readElement()",
+    "documentation": "https://github.com/smurn/jPLY",
+    "family": "jPLY native PLY element reader",
+    "scope": "ASCII PLY vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+  },
+  {
+    "name": "meshio",
+    "group": "com.ripplargames",
+    "artifact": "meshio",
+    "version": "2.1.2",
+    "license": "MIT",
+    "license_evidence": "Upstream GitHub repository LICENSE; Maven artifact pinned at 2.1.2",
+    "input_api": "new PlyFormatAscii_1_0().read(InputStream from local path)",
+    "documentation": "https://github.com/NathanJAdams/MeshIO#using-formats-directly",
+    "family": "MeshIO native ASCII PLY mesh reader",
+    "scope": "ASCII PLY vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]}
+  }
+]

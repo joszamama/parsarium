@@ -1066,15 +1066,27 @@
     {
       "ecosystem": "java",
       "format": "ascii_ply",
-      "status": "not_started",
+      "status": "verified_partial_search_incomplete",
       "working_target": 20,
       "ceiling": 30,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 2,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. Zero means no verified entry yet, not evidence of absence."
+      "search_queries": [
+        "ply",
+        "ascii ply",
+        "jply",
+        "meshio"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 6,
+      "unique_search_hits": 6,
+      "unresolved_documentation_leads": 2,
+      "uncertainty": "Two pinned open-source Maven package paths, jPLY 0.2.0 and MeshIO 2.1.2, each parsed the valid ASCII PLY triangle and returned three vertices, one face and face indices [0,1,2]. Eighteen more verified paths are needed for the 20-path working target. Four bounded Maven Central searches saved six hits from 'ply' and 'jply'; 'ascii ply' and 'meshio' timed out. Search names are not parser proof, and MeshIO came from its project documentation. The mesh-ply Maven artifact and Ardor3D PLY importer are unresolved leads. deps.dev exact-release public direct dependents are zero for both verified releases; this metric may omit adoption and does not measure PLY use. Only a triangle with float vertices and one face was demonstrated; other PLY properties and binary PLY are untested. No malformed-input, resource-use, or vulnerability experiments were run.",
+      "third_party_evidence": "data/java/ascii_ply/parsers.json",
+      "third_party_control_results": "data/java/ascii_ply/verification.json",
+      "runtime_evidence": "data/java/ascii_ply/standard.json",
+      "registry_snapshot": "data/java/ascii_ply/registry-snapshot.json",
+      "unresolved_leads": "data/java/ascii_ply/leads.json"
     },
     {
       "ecosystem": "java",

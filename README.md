@@ -15,13 +15,13 @@ plus a below-target Go × Matrix Market search,
 Python × PNG, ASCII PLY, ASCII PNM, ZIP, WAV, PDF, MP3 with ID3v2, MP4, HTTP/1.1, and SVG,
 Python × Matrix Market, Rust × PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY,
 ASCII PNM, Matrix Market, and MP3 with ID3v2, plus Java × ZIP, PNG, PDF,
-WAV, MP4, HTTP/1.1, MP3 with ID3v2, SVG, and ASCII PNM, plus a below-target
-Java × Matrix Market batch and
+WAV, MP4, HTTP/1.1, MP3 with ID3v2, SVG, and ASCII PNM, plus below-target
+Java × Matrix Market and ASCII PLY batches and
 an explicit 88-cell work matrix.
 PHP × ZIP, PHP × PNG, PHP × ASCII PNM, and PHP × MP3 with ID3v2 have verified
 20-parser batches, including PHP × WAV, PHP × PDF, and PHP × MP4. PHP × HTTP/1.1
 and PHP × SVG each have a verified 20-path batch.
-There are 74 cells at the 20-parser target, eleven started below target, and 3
+There are 74 cells at the 20-parser target, twelve started below target, and 2
 marked `not_started`;
 a zero in those cells does **not** mean no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
@@ -165,6 +165,7 @@ python3 scripts/verify_java_mp3_id3v2.py
 python3 controls/wav/make_control.py
 python3 scripts/verify_java_wav.py
 python3 scripts/verify_java_matrix_market.py
+python3 scripts/verify_java_ascii_ply.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
