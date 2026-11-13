@@ -107,5 +107,24 @@
     "scope": "ASCII PLY triangle: three parsed vertex coordinates and one face with final index 2",
     "family": "msh_ply native single-header C reader",
     "family_note": "Standalone versioned header at a pinned upstream commit. It is a distinct reader from RPly/SPly and Assimp; its benchmark is project-authored and is not treated as a popularity metric."
+  },
+  {
+    "name": "f3d",
+    "version": "4.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
+    "documentation": "https://github.com/f3d-app/f3d/blob/v4.0.1/c/scene_c_api.h",
+    "input_api": "f3d_scene_add(scene, local filename); f3d_scene_get_scene_info",
+    "adapter": "adapters/c/ascii_ply/f3d.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "files": 1,
+      "actors": 1,
+      "points": 3,
+      "cells": 1
+    },
+    "scope": "ASCII triangle produced three parsed points and one cell",
+    "family": "F3D native PLY plugin over VTK vtkPLYReader",
+    "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser."
   }
 ]

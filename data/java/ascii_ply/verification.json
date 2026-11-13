@@ -1,9 +1,10 @@
 {
-  "checked_at_utc": "2026-11-13T07:18:42+00:00",
+  "checked_at_utc": "2026-11-13T15:43:10.094666+00:00",
   "environment": {
     "java": "Eclipse Temurin OpenJDK 21.0.2",
     "platform": "macOS 27.2 arm64",
-    "native": "LWJGL 3.4.3 macOS arm64 classifier jars, SHA-256 pinned in registry snapshot"
+    "native": "LWJGL 3.4.3 macOS arm64 classifier jars, SHA-256 pinned in registry snapshot",
+    "f3d": "F3D 4.0.1 source built with LLVM 23.1.4, VTK 9.7.2, JDK 21.0.2 on macOS 27.2 arm64"
   },
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
@@ -122,6 +123,22 @@
       "pass": true,
       "command": "python3 scripts/verify_java_ascii_ply.py",
       "checked_at_utc": "2026-11-13T15:09:32+00:00"
+    },
+    {
+      "package": "f3d",
+      "version": "4.0.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "javac --release 21 -cp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/java/f3d.jar -d /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/classes /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/java/ascii_ply/f3d/src/main/java/org/parsarium/F3DPlyAdapter.java",
+      "command": "java -Djava.library.path=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/lib -cp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/classes:/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/java/f3d.jar org.parsarium.F3DPlyAdapter /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "files": 1,
+        "actors": 1,
+        "points": 3,
+        "cells": 1
+      },
+      "pass": true,
+      "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
+      "underlying_family": "F3D native plugin over VTK vtkPLYReader"
     }
   ],
   "runtime": []

@@ -7,6 +7,8 @@ import subprocess
 import tempfile
 from urllib.request import urlopen
 
+from verify_f3d_ascii_ply import record_java as verify_f3d_java
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/java/ascii_ply"
 
@@ -65,6 +67,7 @@ def main() -> None:
             assert output == parser["expected_output"]
             print(json.dumps({"package": parser["name"], "version": parser["version"],
                               "output": output, "pass": True}))
+    verify_f3d_java()
 
 
 if __name__ == "__main__":

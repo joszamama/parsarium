@@ -255,6 +255,10 @@
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/de.javagl%3Aply/versions/0.0.4:dependents",
         "direct_dependent_count": 0,
         "observed_at_utc": "2026-11-13T15:08:20+00:00"
+      },
+      "f3d": {
+        "direct_dependent_count": null,
+        "note": "No Maven artifact for F3D Java binding; deps.dev exact-release direct-dependent metric is unavailable. Homebrew formula installs are an auxiliary C/C++ ecosystem signal and not used for Java ranking."
       }
     }
   },
@@ -277,6 +281,24 @@
       "url": "https://github.com/m0glan/pcljava",
       "format_evidence": "https://github.com/m0glan/pcljava#examples",
       "disposition": "Unresolved snapshot-only JNI wrapper over PCL."
+    },
+    {
+      "name": "f3d",
+      "url": "https://github.com/f3d-app/f3d/tree/v4.0.1",
+      "format_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/plugins/native/CMakeLists.txt",
+      "input_api_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/java/Scene.java",
+      "disposition": "Verified pinned F3D 4.0.1 source build against the valid ASCII PLY triangle.",
+      "discovery_note": "Project API and native PLY plugin documentation, outside the bounded registry name windows."
     }
-  ]
+  ],
+  "non_maven_release": {
+    "f3d": {
+      "version": "4.0.1",
+      "license": "BSD-3-Clause",
+      "source_url": "https://github.com/f3d-app/f3d/archive/refs/tags/v4.0.1.tar.gz",
+      "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
+      "source_lock": "data/java/ascii_ply/source-lock.json",
+      "distribution": "Official tagged source built with the documented optional Java binding; no Maven release."
+    }
+  }
 }

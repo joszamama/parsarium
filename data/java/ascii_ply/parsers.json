@@ -160,5 +160,28 @@
         2
       ]
     }
+  },
+  {
+    "name": "f3d",
+    "group": null,
+    "version": "4.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
+    "documentation": "https://github.com/f3d-app/f3d/blob/v4.0.1/java/Scene.java",
+    "input_api": "Scene.add(String local filename); Scene.getSceneInfo()",
+    "adapter": "adapters/java/ascii_ply/f3d/src/main/java/org/parsarium/F3DPlyAdapter.java",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "files": 1,
+      "actors": 1,
+      "points": 3,
+      "cells": 1
+    },
+    "scope": "ASCII triangle produced three parsed points and one cell",
+    "family": "F3D native PLY plugin over VTK vtkPLYReader",
+    "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser.",
+    "source_kind": "source_build",
+    "source_lock": "data/java/ascii_ply/source-lock.json",
+    "adapter_module": "f3d"
   }
 ]

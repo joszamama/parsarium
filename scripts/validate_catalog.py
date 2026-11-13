@@ -114,12 +114,21 @@ def main() -> None:
                 assert (ROOT / parser["control"]).exists()
             elif cell["ecosystem"] == "java":
                 if parser.get("group") is None:
-                    assert cell["format"] == "pdf" and name == "pdfclown"
                     release = snapshot["non_maven_release"][name]
                     assert release["version"] == parser["version"]
                     assert release["license"] == parser["license"]
-                    assert len(release["archive_sha256"]) == 64 and len(release["jar_sha256"]) == 64
-                    assert release["popularity_metric"] is None
+                    if parser.get("source_kind") == "source_build":
+                        source = read(parser["source_lock"])[name]
+                        assert source["release"] == parser["version"]
+                        assert source["license"] == parser["license"]
+                        assert source["source_sha256"] == release["source_sha256"]
+                        assert len(source["source_sha256"]) == 64
+                        assert (ROOT / parser["adapter"]).exists()
+                        assert snapshot["popularity_metric"]["packages"][name]["direct_dependent_count"] is None
+                    else:
+                        assert cell["format"] == "pdf" and name == "pdfclown"
+                        assert len(release["archive_sha256"]) == 64 and len(release["jar_sha256"]) == 64
+                        assert release["popularity_metric"] is None
                 else:
                     adapter_module = parser.get("adapter_module", "main")
                     adapter_dir = ROOT / "adapters" / "java" / cell["format"]

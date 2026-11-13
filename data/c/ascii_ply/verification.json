@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T14:55:38.823666+00:00",
+  "checked_at_utc": "2026-11-13T15:39:40.612765+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -41,6 +41,13 @@
       "source_sha256": "78871f55649c6a9704ea56f24e2ca93e5b51504605023587de8798625754c671",
       "installed_files": {},
       "source_header_sha256": "5f5d8d2d8a335dee311b7b3a5d4a3ac39ceb3d802ce9b85003af56754f18a29f"
+    },
+    "f3d": {
+      "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
+      "installed_files": {
+        "/opt/homebrew/Cellar/vtk/9.7.2/lib/libvtkIOPLY-9.7.9.7.dylib": "891a222cca78f30820cb9141884a2b46befaf06c396643b48c4569a63472b644"
+      },
+      "underlying_family": "F3D native plugin over VTK vtkPLYReader"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -127,6 +134,20 @@
         "faces": 1,
         "second_x": 1.0,
         "last_index": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "f3d",
+      "version": "4.0.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/f3d-4.0.1/c -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/library/public /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/f3d.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/lib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/lib -lf3d_c_api -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/f3d-c-ply",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/f3d-c-ply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "files": 1,
+        "actors": 1,
+        "points": 3,
+        "cells": 1
       },
       "pass": true
     }

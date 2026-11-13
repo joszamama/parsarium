@@ -1,6 +1,6 @@
 # C++ × ASCII PLY: verified parser ranking
 
-20 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
+21 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -8,8 +8,9 @@
 | 2 | [assimp](https://github.com/assimp/assimp-docs/blob/master/source/usage/use_the_lib.rst) | 6.0.6 | 7,646 | three vertices and one triangular face from ASCII PLY | Assimp native PLY loader |
 | 3 | [cgal](https://doc.cgal.org/latest/Surface_mesh/group__PkgSurfaceMeshIOFuncPLY.html) | 6.2.1 | 5,504 | three vertices and one face in a parsed Surface_mesh | CGAL Surface_mesh PLY reader |
 | 4 | [pcl](https://pointclouds.org/documentation/classpcl_1_1_p_l_y_reader.html) | 1.15.1 | 1,697 | three vertices, one polygon and its three indices | PCL PLYReader native implementation |
-| 5 | [geogram](https://github.com/BrunoLevy/geogram/wiki/Mesh) | 1.10.1 | 97 | three mesh vertices and one triangle facet with indices | Geogram over bundled RPly 1.1.4 |
-| 6 | [open-mesh](https://www.graphics.rwth-aachen.de/media/openmesh_static/Documentations/OpenMesh-6.0-Documentation/a00740.html) | 11.0.0 | 66 | three vertices and one triangular face from ASCII PLY | OpenMesh PLYReader |
+| 5 | [F3D](https://github.com/f3d-app/f3d/blob/v4.0.1/library/public/scene.h) | 4.0.1 | 1,516 | one loaded file, one actor, three points, one cell | F3D native PLY plugin over VTK vtkPLYReader |
+| 6 | [geogram](https://github.com/BrunoLevy/geogram/wiki/Mesh) | 1.10.1 | 97 | three mesh vertices and one triangle facet with indices | Geogram over bundled RPly 1.1.4 |
+| 7 | [open-mesh](https://www.graphics.rwth-aachen.de/media/openmesh_static/Documentations/OpenMesh-6.0-Documentation/a00740.html) | 11.0.0 | 66 | three vertices and one triangular face from ASCII PLY | OpenMesh PLYReader |
 | unranked | [happly](https://github.com/nmwsharp/happly/blob/v1.1.0/README.md) | 1.1.0 | unknown | three parsed vertices and one triangular face from ASCII PLY | hapPLY header-only PLY parser |
 | unranked | [tinyply](https://github.com/ddiakopoulos/tinyply/blob/3.0/README.md) | 3.0 | unknown | three parsed vertices and one triangular face from ASCII PLY | tinyply header-only PLY parser |
 | unranked | [rply](https://w3.impa.br/~diego/software/rply/) | 1.1.4 | unknown | three vertex callbacks and three face-index callbacks from ASCII PLY | RPly 1.1.4 ANSI C parser |
@@ -38,3 +39,5 @@ Easy3D v2.6.1 parsed the control through its `SurfaceMeshIO::load` mesh API. Its
 libpointmatcher 1.4.4 parsed the three point vertices through its native PLY implementation and returned coordinate sums. Its point-cloud API does not return the control’s face. It has no comparable Homebrew requested-install count.
 
 meshio++ v20.0.0 parsed the valid triangle through its documented C++ `read_ply` API and its own PLY implementation. The released code needs pinned LLVM 23.1.4 and explicit `<bit>` and `<cstdlib>` includes for the recorded macOS build. Its requested-install count is unavailable; its recent adoption is uncertain. The cell meets the 20-path working target, while unsearched projects and broader PLY layouts remain uncertain.
+
+F3D 4.0.1 parsed the local triangle through its C++ scene API. Its 1,516 requested installs rank fifth among packages with the same Homebrew metric. F3D's native plugin delegates PLY parsing to VTK vtkPLYReader, already present as a separate package path in this cell. The adapter verifies the exposed F3D API; the shared underlying family is explicit.

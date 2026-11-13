@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,526 of 1,682 verified package paths have a recorded comparable cell metric;
-156 are unranked. A recorded zero is still a measured value, not evidence of
+1,528 of 1,685 verified package paths have a recorded comparable cell metric;
+157 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -56,7 +56,7 @@ python3 scripts/verify_c_mp3_id3v2.py
 python3 scripts/verify_cpp_mp3_id3v2.py
 python3 scripts/verify_c_mp4.py
 python3 scripts/verify_cpp_mp4.py
-brew install assimp open-mesh
+brew install assimp open-mesh llvm vtk cmake hdf5 netcdf nlohmann-json
 python3 scripts/verify_c_ascii_ply.py
 python3 scripts/verify_cpp_ascii_ply.py
 python3 scripts/verify_c_matrix_market.py
@@ -1223,11 +1223,22 @@ or quality judgment.
   pOSKI 1.0.0 is an unresolved additional lead: its official documentation
   names a Matrix Market reader, but the released source download currently
   returns HTTP 403, so no pinned adapter or control result exists.
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): five verified package
-  paths, 15 below the working goal. `msh_ply` v1.02 parsed the valid triangle
-  through its pinned C single-header API; it has no comparable Homebrew metric.
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): six verified package
+  paths, 14 below the working goal. F3D 4.0.1 parsed the triangle through its
+  C binding and ranks second among packages with comparable Homebrew requested
+  installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
+  triangle through its pinned C single-header API; it has no comparable Homebrew metric.
   Greg Turk's `ply_io` source was rejected because its file-level license
   restricts sale.
+- [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
+  paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
+  shares VTK's PLY reader family. Other unranked paths have unresolved adoption
+  order; the count does not establish a definitive most-used top 20.
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): eight verified
+  paths, 12 below the working goal. Seven are ranked by exact-release Maven
+  direct dependents. F3D's source-built Java binding is unranked because no
+  comparable metric exists; it shares the native VTK reader with the C and C++
+  F3D bindings.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,
   SuiteSparse, fast_matrix_market, eminem, Ginkgo, Lis, ViennaCL, MTL5, HYPRE,
   LAGraph, librsb, SuperLU, PIGO, SuperLU_DIST, tatami_mtx, Seldon, HIFIR,

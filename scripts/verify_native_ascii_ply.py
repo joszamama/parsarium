@@ -11,6 +11,8 @@ import subprocess
 import tarfile
 import tempfile
 
+from verify_f3d_ascii_ply import verify_native as verify_f3d_native
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTROL = ROOT / "controls/ascii_ply/triangle.ply"
@@ -44,6 +46,12 @@ def verify(ecosystem: str) -> None:
     for parser in parsers:
         name = parser["name"]
         source = sources[name]
+        if name == "f3d":
+            row, library = verify_f3d_native(ecosystem)
+            rows.append(row)
+            local_libraries[name] = library
+            print(f"f3d@{parser['version']}: {ecosystem} ASCII PLY passed", flush=True)
+            continue
         suffix = next(s for s in (".tar.gz", ".tar.bz2", ".tar.xz") if source["source_url"].endswith(s))
         archive = cache / f"{name}-{source['release']}{suffix}"
         if not archive.exists() or digest(archive) != source["source_sha256"]:
