@@ -4,5 +4,15 @@
     "status": "unresolved",
     "reason": "A C wrapper over the Poppler GLib engine has a documented local PDF API, but its upstream has no tagged release and no pinned control adapter has been verified; it would share the Poppler parser family.",
     "source": "https://github.com/abiiranathan/lexicon-pdf"
+  },
+  {
+    "name": "zathura-pdf-poppler",
+    "status": "unresolved",
+    "reason": "Official 2026.07.18 plugin is a C PDF backend over Poppler, but its documented document_open callback is invoked by the Zathura host with a zathura_document_t. The host build exposes a static internal library and plugin API; no standalone consumer adapter with a valid local PDF and observable parsed output has been established. It would share the Poppler parser family.",
+    "source": "https://pwmt.org/projects/zathura-pdf-poppler/download/",
+    "api_evidence": "https://pwmt.org/projects/zathura/plugins/development/",
+    "host_build_evidence": "https://github.com/pwmt/zathura/blob/develop/meson.build",
+    "release": "2026.07.18",
+    "publisher_source_sha256": "605d3f2c2e90efbc0434bb7206f013dc8ff99d8b679c6b519e13543777635bf1"
   }
 ]
