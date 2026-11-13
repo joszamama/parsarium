@@ -245,6 +245,20 @@
       "source_url": "https://api.github.com/repos/iAmGio/vofxel/tarball/v0.0.2",
       "source_sha256": "a707bacb85308c0a9672cbe427f60051bb1618e274925f1505e790b7891bce86",
       "tag_commit": "3c25ce926b1832db564c367031be43e0bbeefa57"
+    },
+    "boofcv-io": {
+      "group": "org.boofcv",
+      "artifact": "boofcv-io",
+      "version": "1.6.0",
+      "license": "Apache-2.0",
+      "jar_url": "https://repo.maven.apache.org/maven2/org/boofcv/boofcv-io/1.6.0/boofcv-io-1.6.0.jar",
+      "jar_sha256": "af381c255796a7edbe502fe397f8c2bbbaa7179c117966293123741d4e82c192",
+      "pom_url": "https://repo.maven.apache.org/maven2/org/boofcv/boofcv-io/1.6.0/boofcv-io-1.6.0.pom",
+      "pom_sha256": "95e94fdb4bea831b0786519c701521ec2ff881bd78f6ea008a5bf9f0538c65d7",
+      "sources_jar_url": "https://repo.maven.apache.org/maven2/org/boofcv/boofcv-io/1.6.0/boofcv-io-1.6.0-sources.jar",
+      "sources_jar_sha256": "dcc4376ad41b0e8a44f9a9931ed30b87cbd193976f6536efd5df0d2d56159777",
+      "tag_commit": "c6401d374de710a3a6904480717970573ad05b82",
+      "source_lock": "data/java/ascii_ply/boofcv-lock.json"
     }
   },
   "dependencies": [
@@ -390,6 +404,15 @@
         "auxiliary_github_stars": 5,
         "auxiliary_source": "https://api.github.com/repos/iAmGio/vofxel",
         "auxiliary_observed_at_utc": "2026-11-13T19:54:44Z"
+      },
+      "boofcv-io": {
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.boofcv%3Aboofcv-io/versions/1.6.0:dependents",
+        "direct_dependent_count": 11,
+        "observed_at_utc": "2026-11-13T20:23:12Z",
+        "note": "Known public direct dependents of this exact Maven release; not PLY-specific use.",
+        "auxiliary_github_stars": 1207,
+        "auxiliary_source": "https://api.github.com/repos/lessthanoptimal/BoofCV",
+        "auxiliary_observed_at_utc": "2026-11-13T20:23:12Z"
       }
     }
   },
@@ -454,6 +477,14 @@
       "url": "https://github.com/maeda6uiui/JAssimp/blob/v1.0.0/src/main/java/com/github/dabasan/jassimp/Jassimp.java",
       "surface": "Official tagged Java Assimp binding documentation and Maven Central release outside four bounded PLY name searches",
       "disposition": "Verified Maven JAR with JNI built from the tagged source on the valid ASCII PLY control; underlying native parser is Assimp 6.0.6."
+    },
+    {
+      "name": "org.boofcv:boofcv-io",
+      "url": "https://github.com/lessthanoptimal/BoofCV/tree/v1.6.0",
+      "format_evidence": "https://boofcv.org/index.php?title=Example_Load_and_Save_Point_Clouds",
+      "input_api_evidence": "https://github.com/lessthanoptimal/BoofCV/blob/v1.6.0/main/boofcv-io/src/main/java/boofcv/io/points/PointCloudIO.java",
+      "release_evidence": "https://repo.maven.apache.org/maven2/org/boofcv/boofcv-io/1.6.0/boofcv-io-1.6.0.pom",
+      "disposition": "Verified ASCII triangle mesh through released PointCloudIO.load(Ply, InputStream, VertexMesh); 11 exact-release known public direct dependents."
     }
   ],
   "non_maven_release": {
@@ -492,5 +523,515 @@
         "observed_at_utc": "2026-11-13T17:10:10Z"
       }
     }
+  },
+  "code_search": {
+    "captured_at_utc": "2026-11-13T20:23:12Z",
+    "surface": "GitHub code search API, discovery only",
+    "query": "\"PLYReader\" language:Java",
+    "limit": 100,
+    "total_count": 536,
+    "incomplete_results": false,
+    "hits": [
+      {
+        "repository": "lessthanoptimal/BoofCV",
+        "path": "main/boofcv-io/src/main/java/boofcv/io/points/impl/PlyReader.java",
+        "url": "https://github.com/lessthanoptimal/BoofCV/blob/bf8e21bb20ec998b81414de4ca667e35c0e98796/main/boofcv-io/src/main/java/boofcv/io/points/impl/PlyReader.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/PlyReader.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/PlyReader.java"
+      },
+      {
+        "repository": "artisynth/artisynth_core",
+        "path": "src/maspack/geometry/io/PlyReader.java",
+        "url": "https://github.com/artisynth/artisynth_core/blob/ef5d214f86dfa0b4b87ff388ed244e7ec53d8b59/src/maspack/geometry/io/PlyReader.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/PlyReader.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/PlyReader.java"
+      },
+      {
+        "repository": "cansik/pointcloud-processing",
+        "path": "src/main/java/ch/bildspur/pointcloud/io/reader/PLYReader.java",
+        "url": "https://github.com/cansik/pointcloud-processing/blob/62906e644fe98069b1dbc28054466a12438e4b95/src/main/java/ch/bildspur/pointcloud/io/reader/PLYReader.java"
+      },
+      {
+        "repository": "raphaelpaiva/JTrace",
+        "path": "src/main/java/org/jtrace/io/PlyReader.java",
+        "url": "https://github.com/raphaelpaiva/JTrace/blob/9ac3874c5a71aabdc7401f017b31d6e7c70ac359/src/main/java/org/jtrace/io/PlyReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "AdvGraph1314/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/AdvGraph1314/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "AdvGraph1516/framework/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/AdvGraph1516/framework/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "AdvGraph1617/framework/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/AdvGraph1617/framework/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "AdvGraph1415/framework/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/AdvGraph1415/framework/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "AdvGraph1718/framework/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/AdvGraph1718/framework/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "FGraphics1819/framework/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/FGraphics1819/framework/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "AlexBenton/Teaching",
+        "path": "FGraphics1920/framework/src/main/java/com/bentonian/framework/io/PLYReader.java",
+        "url": "https://github.com/AlexBenton/Teaching/blob/0056b0c931032935f2675da82595f436c5f256d7/FGraphics1920/framework/src/main/java/com/bentonian/framework/io/PLYReader.java"
+      },
+      {
+        "repository": "zhoujianling/PointCloudUtilities",
+        "path": "src/main/java/cn/jimmiez/pcu/io/ply/PlyReader.java",
+        "url": "https://github.com/zhoujianling/PointCloudUtilities/blob/300e156f74278522d7fd7edec7ad4ce0307da622/src/main/java/cn/jimmiez/pcu/io/ply/PlyReader.java"
+      },
+      {
+        "repository": "simplay/3d_geometry_processing",
+        "path": "src/meshes/reader/PlyReader.java",
+        "url": "https://github.com/simplay/3d_geometry_processing/blob/e8568f05b66e87fa02b7055d32ad87d727c16667/src/meshes/reader/PlyReader.java"
+      },
+      {
+        "repository": "ozermetin/camino",
+        "path": "simulation/geometry/PLYreader.java",
+        "url": "https://github.com/ozermetin/camino/blob/47c4c6781e817e39fb7641570c8312b81be7fbd0/simulation/geometry/PLYreader.java"
+      },
+      {
+        "repository": "Ninhache/Projet-Mod-lisation-S3",
+        "path": "src/main/java/model/io/PlyReader.java",
+        "url": "https://github.com/Ninhache/Projet-Mod-lisation-S3/blob/37e585019e89e17a09870dedc25ff995c09a67bd/src/main/java/model/io/PlyReader.java"
+      },
+      {
+        "repository": "ozermetin/camino",
+        "path": "src/simulation/geometry/PLYreader.java",
+        "url": "https://github.com/ozermetin/camino/blob/47c4c6781e817e39fb7641570c8312b81be7fbd0/src/simulation/geometry/PLYreader.java"
+      },
+      {
+        "repository": "viveret/XPRT_Winter_2016",
+        "path": "src/main/java/org/smurn/jply/PlyReader.java",
+        "url": "https://github.com/viveret/XPRT_Winter_2016/blob/b357afe2bd648ec8712ca2a42af86383f538af18/src/main/java/org/smurn/jply/PlyReader.java"
+      },
+      {
+        "repository": "misch/3d_geometry_processing_unibe",
+        "path": "framework/src/meshes/reader/PlyReader.java",
+        "url": "https://github.com/misch/3d_geometry_processing_unibe/blob/a49a227a463bf5b67da6748d291f1c7e1ffd2a9f/framework/src/meshes/reader/PlyReader.java"
+      },
+      {
+        "repository": "FHOOEAIST/imaging",
+        "path": "mesh/src/main/java/science/aist/imaging/mesh/storage/ply/PlyReader.java",
+        "url": "https://github.com/FHOOEAIST/imaging/blob/c425a24d8c712c443b4a8f49300036a782b3c126/mesh/src/main/java/science/aist/imaging/mesh/storage/ply/PlyReader.java"
+      },
+      {
+        "repository": "tf2mandeokyi/BTETerraRenderer",
+        "path": "draco/src/main/java/com/mndk/bteterrarenderer/draco/io/PlyReader.java",
+        "url": "https://github.com/tf2mandeokyi/BTETerraRenderer/blob/935f73a2440fcf0719e0c1aa245c753450575fd4/draco/src/main/java/com/mndk/bteterrarenderer/draco/io/PlyReader.java"
+      },
+      {
+        "repository": "RobLfbv/PLYReader",
+        "path": "src/main/java/model/plyreader/PLYReader.java",
+        "url": "https://github.com/RobLfbv/PLYReader/blob/35f3df833d7a300c3bf074a24d351b98025d1dea/src/main/java/model/plyreader/PLYReader.java"
+      },
+      {
+        "repository": "UTFPRCM/scan3d-with-opencv-in-java",
+        "path": "src/main/java/scan3d/PlyReader.java",
+        "url": "https://github.com/UTFPRCM/scan3d-with-opencv-in-java/blob/476a059d0658ec1f831d5d2df1c2a362b742cb3d/src/main/java/scan3d/PlyReader.java"
+      },
+      {
+        "repository": "shirley9073/mipav",
+        "path": "src/gov/nih/mipav/view/renderer/WildMagic/BallPivoting/PlyReader.java",
+        "url": "https://github.com/shirley9073/mipav/blob/3716b62b4715718424f5be92d10e70876822c0aa/src/gov/nih/mipav/view/renderer/WildMagic/BallPivoting/PlyReader.java"
+      },
+      {
+        "repository": "awaelchli/3D-Geometry-Processing",
+        "path": "JRTR/src/meshes/reader/PlyReader.java",
+        "url": "https://github.com/awaelchli/3D-Geometry-Processing/blob/52784779531fcf2b6d31deeffb890fd33ef6a4ba/JRTR/src/meshes/reader/PlyReader.java"
+      },
+      {
+        "repository": "Andwerpz/MyUtils",
+        "path": "MyUtils/src/myutils/file/ply/PLYReader.java",
+        "url": "https://github.com/Andwerpz/MyUtils/blob/3a9264a12c06edef11b84c91330426d2bee9db4e/MyUtils/src/myutils/file/ply/PLYReader.java"
+      },
+      {
+        "repository": "comword/RealsenseCapture",
+        "path": "app/src/main/java/org/smurn/jply/PlyReader.java",
+        "url": "https://github.com/comword/RealsenseCapture/blob/1a74b7f5965ac1e5674d93a92bc1dc41da8cc8d9/app/src/main/java/org/smurn/jply/PlyReader.java"
+      },
+      {
+        "repository": "TORO-Server/MarumaSign",
+        "path": "core/src/main/java/marumasa/marumasa_sign/core/splat/PlyReader.java",
+        "url": "https://github.com/TORO-Server/MarumaSign/blob/e10c1ce76e620e4748098d229f0c83106aee4cc6/core/src/main/java/marumasa/marumasa_sign/core/splat/PlyReader.java"
+      },
+      {
+        "repository": "anoncx/CxVisuals",
+        "path": "src/lib/java/me/cxiy/cxvisuals/modules/avatar/format/PlyReader.java",
+        "url": "https://github.com/anoncx/CxVisuals/blob/ca9a522cb80c6894afcd87af5a95778c10f58882/src/lib/java/me/cxiy/cxvisuals/modules/avatar/format/PlyReader.java"
+      },
+      {
+        "repository": "JaneliaSciComp/mipav",
+        "path": "src/gov/nih/mipav/view/renderer/WildMagic/BallPivoting/PlyReader.java",
+        "url": "https://github.com/JaneliaSciComp/mipav/blob/97ca8bd9b461052d1590b4c53906ff9090251342/src/gov/nih/mipav/view/renderer/WildMagic/BallPivoting/PlyReader.java"
+      },
+      {
+        "repository": "bwkimmel/jmist",
+        "path": "jmist-core/src/main/java/ca/eandb/jmist/framework/loader/ply/PlyReader.java",
+        "url": "https://github.com/bwkimmel/jmist/blob/830ab358fdcf961a5c471cec2037be8a8c1fe8bf/jmist-core/src/main/java/ca/eandb/jmist/framework/loader/ply/PlyReader.java"
+      },
+      {
+        "repository": "NevoGadassi/Undergraduate-final-project-PhotoGrammetry",
+        "path": "‏‏boofcv1/main/boofcv-io/src/main/java/boofcv/io/points/impl/PlyReader.java",
+        "url": "https://github.com/NevoGadassi/Undergraduate-final-project-PhotoGrammetry/blob/b8e15300d0cface081377f7dc62c38c8d1fdb54c/‏‏boofcv1/main/boofcv-io/src/main/java/boofcv/io/points/impl/PlyReader.java"
+      },
+      {
+        "repository": "jorigin/jeometry",
+        "path": "jeometry-api/src/main/java/org/jeometry/io/ply/PLYReader.java",
+        "url": "https://github.com/jorigin/jeometry/blob/5d0bb3f952221a846555484cfbfadddc36726cf7/jeometry-api/src/main/java/org/jeometry/io/ply/PLYReader.java"
+      },
+      {
+        "repository": "makiam/Tokonga",
+        "path": "Translators/src/main/java/artofillusion/translators/PLYReader.java",
+        "url": "https://github.com/makiam/Tokonga/blob/8316d41d04a03283884e419cdc53a3412b72a367/Translators/src/main/java/artofillusion/translators/PLYReader.java"
+      },
+      {
+        "repository": "f3d-app/f3d",
+        "path": "java/testing/TestSceneBuffer.java",
+        "url": "https://github.com/f3d-app/f3d/blob/4e3dd0036fd574af2ac17040e654b2b64f577101/java/testing/TestSceneBuffer.java"
+      },
+      {
+        "repository": "artisynth/artisynth_core",
+        "path": "src/maspack/geometry/io/PlyReaderWriterTest.java",
+        "url": "https://github.com/artisynth/artisynth_core/blob/ef5d214f86dfa0b4b87ff388ed244e7ec53d8b59/src/maspack/geometry/io/PlyReaderWriterTest.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/PlyReaderFile.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/PlyReaderFile.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/util/RandomPlyReader.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/util/RandomPlyReader.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/util/WrappingPlyReader.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/util/WrappingPlyReader.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java"
+      },
+      {
+        "repository": "vespa-engine/vespa",
+        "path": "vespaclient-container-plugin/src/main/java/com/yahoo/vespa/http/server/FeedReplyReader.java",
+        "url": "https://github.com/vespa-engine/vespa/blob/a5a6d3cfe261f5716a5d7ee09ea98adc75241c07/vespaclient-container-plugin/src/main/java/com/yahoo/vespa/http/server/FeedReplyReader.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/PlyReaderFile.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/PlyReaderFile.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/util/RandomPlyReader.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/util/RandomPlyReader.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/util/WrappingPlyReader.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/util/WrappingPlyReader.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java"
+      },
+      {
+        "repository": "RobLfbv/PLYReader",
+        "path": "src/main/java/model/plyreader/Property.java",
+        "url": "https://github.com/RobLfbv/PLYReader/blob/35f3df833d7a300c3bf074a24d351b98025d1dea/src/main/java/model/plyreader/Property.java"
+      },
+      {
+        "repository": "RobLfbv/PLYReader",
+        "path": "src/main/java/model/plyreader/IdxReader.java",
+        "url": "https://github.com/RobLfbv/PLYReader/blob/35f3df833d7a300c3bf074a24d351b98025d1dea/src/main/java/model/plyreader/IdxReader.java"
+      },
+      {
+        "repository": "artisynth/artisynth_core",
+        "path": "src/maspack/apps/PlyToObj.java",
+        "url": "https://github.com/artisynth/artisynth_core/blob/ef5d214f86dfa0b4b87ff388ed244e7ec53d8b59/src/maspack/apps/PlyToObj.java"
+      },
+      {
+        "repository": "artisynth/artisynth_core",
+        "path": "src/maspack/apps/PlyToPly.java",
+        "url": "https://github.com/artisynth/artisynth_core/blob/ef5d214f86dfa0b4b87ff388ed244e7ec53d8b59/src/maspack/apps/PlyToPly.java"
+      },
+      {
+        "repository": "lessthanoptimal/BoofCV",
+        "path": "main/boofcv-io/src/main/java/boofcv/io/points/impl/PlyCodec.java",
+        "url": "https://github.com/lessthanoptimal/BoofCV/blob/bf8e21bb20ec998b81414de4ca667e35c0e98796/main/boofcv-io/src/main/java/boofcv/io/points/impl/PlyCodec.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/package-info.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/package-info.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/ElementReader.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-tools/jzy3d-tools-jply/src/main/java/org/smurn/jply/ElementReader.java"
+      },
+      {
+        "repository": "artisynth/artisynth_core",
+        "path": "src/maspack/geometry/io/GenericMeshReader.java",
+        "url": "https://github.com/artisynth/artisynth_core/blob/ef5d214f86dfa0b4b87ff388ed244e7ec53d8b59/src/maspack/geometry/io/GenericMeshReader.java"
+      },
+      {
+        "repository": "ShapeNet/shapenet-viewer",
+        "path": "src/main/java/edu/stanford/graphics/shapenet/jme3/plugins/PLYLoader.java",
+        "url": "https://github.com/ShapeNet/shapenet-viewer/blob/e33d3e9770b456a6cc361328383c13b52ff8f34b/src/main/java/edu/stanford/graphics/shapenet/jme3/plugins/PLYLoader.java"
+      },
+      {
+        "repository": "RobLfbv/PLYReader",
+        "path": "src/main/java/model/plyreader/Header.java",
+        "url": "https://github.com/RobLfbv/PLYReader/blob/35f3df833d7a300c3bf074a24d351b98025d1dea/src/main/java/model/plyreader/Header.java"
+      },
+      {
+        "repository": "viveret/XPRT_Winter_2016",
+        "path": "src/main/java/org/smurn/jply/PlyReaderFile.java",
+        "url": "https://github.com/viveret/XPRT_Winter_2016/blob/b357afe2bd648ec8712ca2a42af86383f538af18/src/main/java/org/smurn/jply/PlyReaderFile.java"
+      },
+      {
+        "repository": "viveret/XPRT_Winter_2016",
+        "path": "src/main/java/org/smurn/jply/util/RandomPlyReader.java",
+        "url": "https://github.com/viveret/XPRT_Winter_2016/blob/b357afe2bd648ec8712ca2a42af86383f538af18/src/main/java/org/smurn/jply/util/RandomPlyReader.java"
+      },
+      {
+        "repository": "artisynth/artisynth_core",
+        "path": "src/maspack/apps/MeshViewer.java",
+        "url": "https://github.com/artisynth/artisynth_core/blob/ef5d214f86dfa0b4b87ff388ed244e7ec53d8b59/src/maspack/apps/MeshViewer.java"
+      },
+      {
+        "repository": "robeverest/UNSWgraph",
+        "path": "src/unsw/graphics/geometry/TriangleMesh.java",
+        "url": "https://github.com/robeverest/UNSWgraph/blob/63e5aaaf890cf10b35b96eeb8c4a6aeab18121dd/src/unsw/graphics/geometry/TriangleMesh.java"
+      },
+      {
+        "repository": "viveret/XPRT_Winter_2016",
+        "path": "src/main/java/org/smurn/jply/util/WrappingPlyReader.java",
+        "url": "https://github.com/viveret/XPRT_Winter_2016/blob/b357afe2bd648ec8712ca2a42af86383f538af18/src/main/java/org/smurn/jply/util/WrappingPlyReader.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/package-info.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/package-info.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "jply/src/main/java/org/smurn/jply/ElementReader.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/jply/src/main/java/org/smurn/jply/ElementReader.java"
+      },
+      {
+        "repository": "jorigin/jeometry",
+        "path": "jeometry-api/src/main/java/org/jeometry/io/ply/PLYReaderListener.java",
+        "url": "https://github.com/jorigin/jeometry/blob/5d0bb3f952221a846555484cfbfadddc36726cf7/jeometry-api/src/main/java/org/jeometry/io/ply/PLYReaderListener.java"
+      },
+      {
+        "repository": "viveret/XPRT_Winter_2016",
+        "path": "src/main/java/org/smurn/jply/util/NormalizingPlyReader.java",
+        "url": "https://github.com/viveret/XPRT_Winter_2016/blob/b357afe2bd648ec8712ca2a42af86383f538af18/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java"
+      },
+      {
+        "repository": "baidu/tera",
+        "path": "src/sdk/java/tera/src/main/java/com/baidu/tera/client/TeraTableImpl.java",
+        "url": "https://github.com/baidu/tera/blob/dbcd28af792d879d961bf9fc7eb60de81b437646/src/sdk/java/tera/src/main/java/com/baidu/tera/client/TeraTableImpl.java"
+      },
+      {
+        "repository": "lorensen/VTKExamples",
+        "path": "src/Java/IO/ReadPLY.java",
+        "url": "https://github.com/lorensen/VTKExamples/blob/a195d67ddd662c821431e07c5a14d1804af4153e/src/Java/IO/ReadPLY.java"
+      },
+      {
+        "repository": "lorensen/VTKExamples",
+        "path": "src/Java/IO/WritePLY.java",
+        "url": "https://github.com/lorensen/VTKExamples/blob/a195d67ddd662c821431e07c5a14d1804af4153e/src/Java/IO/WritePLY.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "LWJGLDemo/src/main/java/org/smurn/jply/lwjgldemo/LWJGLDemo.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/LWJGLDemo/src/main/java/org/smurn/jply/lwjgldemo/LWJGLDemo.java"
+      },
+      {
+        "repository": "smurn/jPLY",
+        "path": "consoledemo/src/main/java/org/smurn/jply/consoledemo/ConsoleDemo.java",
+        "url": "https://github.com/smurn/jPLY/blob/77cb8c47fff7549ae1da8d8568ad8bdf374fe89f/consoledemo/src/main/java/org/smurn/jply/consoledemo/ConsoleDemo.java"
+      },
+      {
+        "repository": "comword/RealsenseCapture",
+        "path": "app/src/main/java/org/smurn/jply/PlyReaderFile.java",
+        "url": "https://github.com/comword/RealsenseCapture/blob/1a74b7f5965ac1e5674d93a92bc1dc41da8cc8d9/app/src/main/java/org/smurn/jply/PlyReaderFile.java"
+      },
+      {
+        "repository": "fwzhuangCg/3D_face_meshmodel",
+        "path": "src/io/ply/PlyImporter.java",
+        "url": "https://github.com/fwzhuangCg/3D_face_meshmodel/blob/828b2b8ebf569cdce98b9b36274a0e7e0313ee10/src/io/ply/PlyImporter.java"
+      },
+      {
+        "repository": "comword/RealsenseCapture",
+        "path": "app/src/main/java/org/smurn/jply/util/RandomPlyReader.java",
+        "url": "https://github.com/comword/RealsenseCapture/blob/1a74b7f5965ac1e5674d93a92bc1dc41da8cc8d9/app/src/main/java/org/smurn/jply/util/RandomPlyReader.java"
+      },
+      {
+        "repository": "comword/RealsenseCapture",
+        "path": "app/src/main/java/org/smurn/jply/util/WrappingPlyReader.java",
+        "url": "https://github.com/comword/RealsenseCapture/blob/1a74b7f5965ac1e5674d93a92bc1dc41da8cc8d9/app/src/main/java/org/smurn/jply/util/WrappingPlyReader.java"
+      },
+      {
+        "repository": "comword/RealsenseCapture",
+        "path": "app/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java",
+        "url": "https://github.com/comword/RealsenseCapture/blob/1a74b7f5965ac1e5674d93a92bc1dc41da8cc8d9/app/src/main/java/org/smurn/jply/util/NormalizingPlyReader.java"
+      },
+      {
+        "repository": "shawn-hillstrom/point-cloud-project",
+        "path": "src/core/Run.java",
+        "url": "https://github.com/shawn-hillstrom/point-cloud-project/blob/e9195a11d97c413c1a96a5da43a13062e156ba64/src/core/Run.java"
+      },
+      {
+        "repository": "SymmetryLabs/SLStudio",
+        "path": "src/main/java/com/symmetrylabs/shows/japantree/JapanTreeShow.java",
+        "url": "https://github.com/SymmetryLabs/SLStudio/blob/0e887eac76e0cb4b835c5dabc01685b81c69fb5a/src/main/java/com/symmetrylabs/shows/japantree/JapanTreeShow.java"
+      },
+      {
+        "repository": "tf2mandeokyi/BTETerraRenderer",
+        "path": "draco/src/main/java/com/mndk/bteterrarenderer/draco/io/PlyDecoder.java",
+        "url": "https://github.com/tf2mandeokyi/BTETerraRenderer/blob/935f73a2440fcf0719e0c1aa245c753450575fd4/draco/src/main/java/com/mndk/bteterrarenderer/draco/io/PlyDecoder.java"
+      },
+      {
+        "repository": "vespa-engine/vespa",
+        "path": "vespaclient-container-plugin/src/main/java/com/yahoo/vespa/http/server/FeedHandler.java",
+        "url": "https://github.com/vespa-engine/vespa/blob/a5a6d3cfe261f5716a5d7ee09ea98adc75241c07/vespaclient-container-plugin/src/main/java/com/yahoo/vespa/http/server/FeedHandler.java"
+      },
+      {
+        "repository": "javagl/JSplat",
+        "path": "jsplat-io-ply/src/main/java/de/javagl/jsplat/io/ply/PlySplatReader.java",
+        "url": "https://github.com/javagl/JSplat/blob/808573c496af4f31a392e052202d11d0d6355677/jsplat-io-ply/src/main/java/de/javagl/jsplat/io/ply/PlySplatReader.java"
+      },
+      {
+        "repository": "vespa-engine/vespa",
+        "path": "vespaclient-container-plugin/src/main/java/com/yahoo/vespa/http/server/FeedHandlerV3.java",
+        "url": "https://github.com/vespa-engine/vespa/blob/a5a6d3cfe261f5716a5d7ee09ea98adc75241c07/vespaclient-container-plugin/src/main/java/com/yahoo/vespa/http/server/FeedHandlerV3.java"
+      },
+      {
+        "repository": "NicoKiaru/LimeSeg",
+        "path": "src/main/java/eu/kiaru/limeseg/io/IOXmlPlyLimeSeg.java",
+        "url": "https://github.com/NicoKiaru/LimeSeg/blob/8288e2e53ee449b93991ab02c942be1f8e1ff8d6/src/main/java/eu/kiaru/limeseg/io/IOXmlPlyLimeSeg.java"
+      },
+      {
+        "repository": "imglib/imglib2-mesh",
+        "path": "src/main/java/net/imglib2/mesh/io/ply/PLYMeshIO.java",
+        "url": "https://github.com/imglib/imglib2-mesh/blob/078db9e06670a84c05d152d15622d83209674505/src/main/java/net/imglib2/mesh/io/ply/PLYMeshIO.java"
+      },
+      {
+        "repository": "raphaelpaiva/JTrace",
+        "path": "src/main/java/org/jtrace/examples/io/SimplePLYExample.java",
+        "url": "https://github.com/raphaelpaiva/JTrace/blob/9ac3874c5a71aabdc7401f017b31d6e7c70ac359/src/main/java/org/jtrace/examples/io/SimplePLYExample.java"
+      },
+      {
+        "repository": "raphaelpaiva/JTrace",
+        "path": "src/main/java/org/jtrace/examples/io/ChopperPLYExample.java",
+        "url": "https://github.com/raphaelpaiva/JTrace/blob/9ac3874c5a71aabdc7401f017b31d6e7c70ac359/src/main/java/org/jtrace/examples/io/ChopperPLYExample.java"
+      },
+      {
+        "repository": "raphaelpaiva/JTrace",
+        "path": "src/main/java/org/jtrace/examples/io/BeethovenPLYExample.java",
+        "url": "https://github.com/raphaelpaiva/JTrace/blob/9ac3874c5a71aabdc7401f017b31d6e7c70ac359/src/main/java/org/jtrace/examples/io/BeethovenPLYExample.java"
+      },
+      {
+        "repository": "raphaelpaiva/JTrace",
+        "path": "src/main/java/org/jtrace/examples/BeethovenTextureExample.java",
+        "url": "https://github.com/raphaelpaiva/JTrace/blob/9ac3874c5a71aabdc7401f017b31d6e7c70ac359/src/main/java/org/jtrace/examples/BeethovenTextureExample.java"
+      },
+      {
+        "repository": "raphaelpaiva/JTrace",
+        "path": "src/main/java/org/jtrace/io/yaml/TriangleMeshDeserializer.java",
+        "url": "https://github.com/raphaelpaiva/JTrace/blob/9ac3874c5a71aabdc7401f017b31d6e7c70ac359/src/main/java/org/jtrace/io/yaml/TriangleMeshDeserializer.java"
+      },
+      {
+        "repository": "zhoujianling/PointCloudUtilSample",
+        "path": "src/main/java/cn/jimmiez/sample/demo/ShowReSample.java",
+        "url": "https://github.com/zhoujianling/PointCloudUtilSample/blob/e2ab35de8ad6b70781ce579a8e480543b97922d6/src/main/java/cn/jimmiez/sample/demo/ShowReSample.java"
+      },
+      {
+        "repository": "zhoujianling/PointCloudUtilSample",
+        "path": "src/main/java/cn/jimmiez/sample/demo/ShowNeighbors.java",
+        "url": "https://github.com/zhoujianling/PointCloudUtilSample/blob/e2ab35de8ad6b70781ce579a8e480543b97922d6/src/main/java/cn/jimmiez/sample/demo/ShowNeighbors.java"
+      },
+      {
+        "repository": "zhoujianling/PointCloudUtilSample",
+        "path": "src/main/java/cn/jimmiez/sample/demo/ShowPointCloud.java",
+        "url": "https://github.com/zhoujianling/PointCloudUtilSample/blob/e2ab35de8ad6b70781ce579a8e480543b97922d6/src/main/java/cn/jimmiez/sample/demo/ShowPointCloud.java"
+      },
+      {
+        "repository": "jzy3d/jzy3d-api",
+        "path": "jzy3d-core/jzy3d-core/src/main/java/org/jzy3d/io/ply/Ply.java",
+        "url": "https://github.com/jzy3d/jzy3d-api/blob/b880b74eaaeae6bf3dedbfc84448401edc1bb905/jzy3d-core/jzy3d-core/src/main/java/org/jzy3d/io/ply/Ply.java"
+      },
+      {
+        "repository": "simplay/3d_geometry_processing",
+        "path": "src/assignment3/SSD.java",
+        "url": "https://github.com/simplay/3d_geometry_processing/blob/e8568f05b66e87fa02b7055d32ad87d727c16667/src/assignment3/SSD.java"
+      },
+      {
+        "repository": "aklivity/zilla",
+        "path": "runtime/engine/src/main/java/io/aklivity/zilla/runtime/engine/internal/layouts/metrics/ScalarsLayout.java",
+        "url": "https://github.com/aklivity/zilla/blob/508660f2db4f56d1d37027325806860999f42617/runtime/engine/src/main/java/io/aklivity/zilla/runtime/engine/internal/layouts/metrics/ScalarsLayout.java"
+      },
+      {
+        "repository": "zhoujianling/Code-for-Curve-Skeleton-Extraction-via-k-Nearest-Neighbors-Based-Contraction",
+        "path": "src/main/java/cn/edu/cqu/graphics/platform/DataLoader.java",
+        "url": "https://github.com/zhoujianling/Code-for-Curve-Skeleton-Extraction-via-k-Nearest-Neighbors-Based-Contraction/blob/029c8264838aa9121764b60ff26e18a789353309/src/main/java/cn/edu/cqu/graphics/platform/DataLoader.java"
+      },
+      {
+        "repository": "LSTS/neptus",
+        "path": "src/java/pt/lsts/neptus/vtk/io/Reader3D.java",
+        "url": "https://github.com/LSTS/neptus/blob/fe27d8ddf603e678778779ea9592d57cf1240f51/src/java/pt/lsts/neptus/vtk/io/Reader3D.java"
+      },
+      {
+        "repository": "RobLfbv/PLYReader",
+        "path": "src/main/java/model/Model.java",
+        "url": "https://github.com/RobLfbv/PLYReader/blob/35f3df833d7a300c3bf074a24d351b98025d1dea/src/main/java/model/Model.java"
+      },
+      {
+        "repository": "simplay/3d_geometry_processing",
+        "path": "src/assignment2/Assignment2.java",
+        "url": "https://github.com/simplay/3d_geometry_processing/blob/e8568f05b66e87fa02b7055d32ad87d727c16667/src/assignment2/Assignment2.java"
+      },
+      {
+        "repository": "Bennyhwanggggg/Computer-Graphics-Library",
+        "path": "src/unsw/graphics/geometry/TriangleMesh.java",
+        "url": "https://github.com/Bennyhwanggggg/Computer-Graphics-Library/blob/081ac1ad3e04c8416faee025dcd2a8e8b63c662b/src/unsw/graphics/geometry/TriangleMesh.java"
+      },
+      {
+        "repository": "aklivity/zilla",
+        "path": "runtime/engine/src/main/java/io/aklivity/zilla/runtime/engine/internal/layouts/metrics/MetricsLayout.java",
+        "url": "https://github.com/aklivity/zilla/blob/508660f2db4f56d1d37027325806860999f42617/runtime/engine/src/main/java/io/aklivity/zilla/runtime/engine/internal/layouts/metrics/MetricsLayout.java"
+      }
+    ]
   }
 }

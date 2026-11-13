@@ -329,5 +329,31 @@
       "last_z": 1.0
     },
     "source_lock": "data/java/ascii_ply/vofxel-lock.json"
+  },
+  {
+    "name": "boofcv-io",
+    "group": "org.boofcv",
+    "artifact": "boofcv-io",
+    "version": "1.6.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned Maven POM licenses section and tagged LICENSE-2.0.txt",
+    "input_api": "PointCloudIO.load(PointCloudIO.Format.PLY, InputStream from local file, VertexMesh)",
+    "documentation": "https://boofcv.org/index.php?title=Example_Load_and_Save_Point_Clouds",
+    "family": "BoofCV native Java PLY mesh reader",
+    "family_note": "Public BoofCV mesh API dispatches to its own PlyCodec and PlyReader, with no shared syntax reader found among the other included Java paths.",
+    "scope": "ASCII triangle, three vertices, one face, parsed indices [0,1,2]",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/boofcv/src/main/java/org/parsarium/BoofcvPlyAdapter.java",
+    "adapter_module": "boofcv",
+    "source_lock": "data/java/ascii_ply/boofcv-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
   }
 ]
