@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T10:32:37.886784+00:00",
+  "checked_at_utc": "2026-11-13T11:50:07.837082+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "dbadc26847ef2b6f77b0f358751233ed3bd791a646820afa8d4cd32ce5594d62",
-      "c_binding_library_sha256": "acb784a8cec3bb06486f5e18be236365a0575f5a049b55e7f5f59c591c16fad9"
+      "c_binding_library_sha256": "ca3e95d40775e152c28a5aa84ee7b9b1c4d246661cebd446529236bda6dfa443"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -64,6 +64,10 @@
       "source_sha256": "2b15f96474c5cd685b31b6714498fc5f2d5463b1348dc8cc7cc2cc584dfb3e54",
       "generated_header_sha256": "aa439d8fe2272cefefb5dc74b068b6d3f0976929383d565914e9f239a106b6c7",
       "local_library_sha256": "246c6382edcff9a25b7118ea9bab139481818303e529b14aab521c3d6a063245"
+    },
+    "ireader-media-server": {
+      "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
+      "local_library_sha256": "3035698993ba31b9bdb46b2db9ca793108ce040dbe9bb82118fcb9231a71333f"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -239,6 +243,21 @@
       "output": {
         "title": "Parsarium",
         "duration_ms": 1128
+      },
+      "pass": true
+    },
+    {
+      "package": "ireader-media-server",
+      "version": "1.0.0",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-mp4/media-server-1.0.0/libmov/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-mp4/media-server-1.0.0/libmov/test /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/ireader_media_server.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-mp4/media-server-build/libmov.a -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/ireader-media-server",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/ireader-media-server /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2,
+        "duration_ms": 1000
       },
       "pass": true
     }

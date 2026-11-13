@@ -454,5 +454,26 @@
       }
     ],
     "build_note": "Tagged AvCpp 3.0.1 source built locally with CMake, GCC 16 C++20, static avcpp target and pinned FFmpeg 9.0.2 libraries. Apple system libc++ lacks std::views::transform, so GCC libstdc++ is required for this release. The verifier records generated header and static library hashes."
+  },
+  "ireader-media-server": {
+    "release": "1.0.0",
+    "license": "MIT",
+    "source_url": "https://github.com/ireader/media-server/archive/refs/tags/v1.0.0.tar.gz",
+    "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
+    "repository": "https://github.com/ireader/media-server",
+    "source_header_member": "media-server-1.0.0/libmov/include/mov-reader.h",
+    "source_header_sha256": "580c1b9c2ebdb216cd32965e857b759e8665943d6d761ae0f3f66be20bedf251",
+    "license_member": "media-server-1.0.0/LICENSE",
+    "license_sha256": "20ffe010d80298f45e13af7c4f19195a45c2a942d357125972f98f9b388dba88",
+    "source_engine_member": "media-server-1.0.0/libmov/source/mov-reader.c",
+    "source_engine_sha256": "14c564d4c4435f3c73422c49b7eab27dc707fc278da1ee17e809215ec29eb901",
+    "source_engine_members": [
+      {
+        "member": "media-server-1.0.0/libmov/test/mov-file-buffer.c",
+        "sha256": "3bc9cdd2da500e779f498d531251777f26d219fe49718502f229c070c1be0bbe"
+      }
+    ],
+    "source_build": "ireader_media_server",
+    "build_note": "Tagged MIT v1.0.0 archive and parser/header/license/callback implementation are SHA-256-pinned. Compile libmov C sources and upstream FILE callback adapter to a static library; C and C++ adapters share the parser."
   }
 }

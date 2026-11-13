@@ -107,6 +107,37 @@ def build_avcpp(archive: Path, cache: Path, compiler: str) -> tuple[list[str], l
     }
 
 
+def build_ireader_media_server(archive: Path, cache: Path) -> tuple[list[str], list[str], dict[str, str]]:
+    """Build the tagged libmov C parser and its upstream FILE callback adapter."""
+    source_dir = cache / "media-server-1.0.0"
+    if not source_dir.exists():
+        with tarfile.open(archive) as tar:
+            for member in tar.getmembers():
+                path = Path(member.name)
+                if path.is_absolute() or ".." in path.parts or not (
+                    member.name == "media-server-1.0.0" or member.name.startswith("media-server-1.0.0/")
+                ):
+                    raise ValueError(f"unsafe media-server archive path: {member.name}")
+            tar.extractall(cache, filter="data")
+    build_dir = cache / "media-server-build"
+    build_dir.mkdir(exist_ok=True)
+    sources = sorted((source_dir / "libmov/source").glob("*.c"))
+    sources.append(source_dir / "libmov/test/mov-file-buffer.c")
+    objects = []
+    for index, source in enumerate(sources):
+        object_path = build_dir / f"{index:02d}-{source.stem}.o"
+        run(["cc", "-std=c11", "-O2", "-I" + str(source_dir / "libmov/include"),
+             "-I" + str(source_dir / "libmov/test"), "-c", str(source),
+             "-o", str(object_path)])
+        objects.append(object_path)
+    library = build_dir / "libmov.a"
+    run(["ar", "rcs", str(library), *(str(obj) for obj in objects)])
+    return (["-I" + str(source_dir / "libmov/include"),
+             "-I" + str(source_dir / "libmov/test")],
+            [str(library), "-lm"],
+            {"local_library_sha256": sha256(library.read_bytes()).hexdigest()})
+
+
 def verify(ecosystem: str) -> None:
     assert ecosystem in ("c", "cpp")
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
@@ -154,6 +185,8 @@ def verify(ecosystem: str) -> None:
         elif source.get("source_build") == "avcpp":
             assert source["compiler_revision"] in run(["brew", "list", "--versions", "gcc"]).split()
             flags, built_libraries, built_hashes = build_avcpp(archive, cache, source["compiler"])
+        elif source.get("source_build") == "ireader_media_server":
+            flags, built_libraries, built_hashes = build_ireader_media_server(archive, cache)
         elif source.get("header_only"):
             include_dir = cache / f"{name}-{source['release']}-include"
             include_dir.mkdir(exist_ok=True)

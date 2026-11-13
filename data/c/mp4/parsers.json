@@ -231,5 +231,25 @@
     "scope": "MP4 title metadata and 1128 ms duration",
     "family": "libmp4tag native MP4 atom and tag parser",
     "family_note": "C and C++ adapters call the same published C API and native parser."
+  },
+  {
+    "name": "ireader-media-server",
+    "version": "1.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ireader/media-server/blob/v1.0.0/LICENSE",
+    "documentation": "https://github.com/ireader/media-server/blob/v1.0.0/libmov/include/mov-reader.h",
+    "input_api": "mov_reader_create(mov_file_buffer(), local FILE*); mov_reader_getinfo callbacks; mov_reader_getduration",
+    "adapter": "adapters/c/mp4/ireader_media_server.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "video_tracks": 1,
+      "audio_tracks": 1,
+      "width": 2,
+      "height": 2,
+      "duration_ms": 1000
+    },
+    "scope": "One video and one audio track, 2x2 video dimensions and 1000 ms duration from valid MP4",
+    "family": "ireader libmov native ISO BMFF/MOV reader",
+    "family_note": "C and C++ adapters call the same tagged libmov C parser and upstream FILE callback adapter; counted as one underlying parser family."
   }
 ]

@@ -256,7 +256,21 @@ toolchain build failure. Additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
-The C and C++ × MP4 batches each verify **8/20 pinned package paths** on the valid local two-track H.264/AAC control: FFmpeg, MediaInfoLib, GStreamer, libmpv, libVLC, MP4v2, GPAC, and Bento4. Their adapters return the MP4 brand or container, title, track types and codecs, video dimensions, or duration. The source archives, installed native libraries, MP4 plugins, and relevant dependencies are hash-pinned; Bento4's AP4 core and C binding are built from a pinned upstream source archive. libmpv shares FFmpeg; the other seven use their own MP4 parsing paths. Four bounded Homebrew formula-name searches saved 15 hits and 15 unique names; no documented lead from these surfaces remains unresolved, but other projects may be missing. MP4Box is a GPAC alias and mp4ff is Go-only. The formula install-on-request metric ranks six packages within each ecosystem, while libVLC and Bento4 remain unranked because they lack comparable formula counts. The separate C and C++ standard-library inventories found no documented MP4 parser. See the [C](data/c/mp4/cell.json) and [C++](data/cpp/mp4/cell.json) cell records.
+The C × MP4 cell verifies **13/20 package paths** and C++ × MP4 verifies
+**16/20** on the valid local two-track H.264/AAC control. The adapters report
+container identity, title, tracks, dimensions, or duration through documented
+local APIs. Source releases and relevant libraries are pinned. The C++ OpenCV
+and AvCpp paths and both libmpv paths share FFmpeg's MP4 demuxer; the new C
+and C++ `ireader/media-server` adapters share one native `libmov` parser.
+Four bounded Homebrew formula-name searches saved 15 hits and 15 unique names.
+Homebrew requested-install counts rank only packages with a comparable count;
+`ireader/media-server` has no such count and remains unranked, with its GitHub
+stars recorded only as auxiliary interest. The higher-interest `lieff/minimp4` lead
+remains unresolved because upstream has no tagged release to pin. C++ also has
+an unresolved QtMultimedia control result. The separate C and C++ standard
+libraries have no documented MP4 parser. The count is a verified collection,
+not a proven most-used top 20. See the [C](data/c/mp4/cell.json) and
+[C++](data/cpp/mp4/cell.json) records for exact search limits and uncertainty.
 
 The C × MP3 with ID3v2 batch verifies **20/20 package paths** and the C++ batch verifies **21 package paths** (20 working goal) on
 the valid tagged MP3 control: TagLib, mpg123, FFmpeg libavformat, libid3tag,

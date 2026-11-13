@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T11:00:19.270690+00:00",
+  "checked_at_utc": "2026-11-13T12:03:59.222909+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/mp4/source-lock.json",
@@ -42,8 +42,8 @@
     "bento4": {
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
-      "local_library_sha256": "a1b30328365c2cfcd3a09c6ebc91fd634514055a0e1e82dbdf136b0b9c7a042e",
-      "c_binding_library_sha256": "817352b124758ebcdcdeef1842bff692e10d92f9b4f3aeed40ca176033b9ba93"
+      "local_library_sha256": "309055c45964b8d97f8d115127db79e1abe009ab86dd224dbdb7e74f062090a0",
+      "c_binding_library_sha256": "e8683d3e83665097b9f35cc2f28aa5b73763e2b27f77b8be02e32914eb50de3d"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -68,7 +68,7 @@
     "libmp4tag": {
       "source_sha256": "2b15f96474c5cd685b31b6714498fc5f2d5463b1348dc8cc7cc2cc584dfb3e54",
       "generated_header_sha256": "aa439d8fe2272cefefb5dc74b068b6d3f0976929383d565914e9f239a106b6c7",
-      "local_library_sha256": "852618dde43a2ececa241c10bfa425f3f66cea406550691ae77d574baadb4b37"
+      "local_library_sha256": "1538cd5de1f1f019734774c64a6f7260dae931e73e7468853840c325d30f52ec"
     },
     "exiv2": {
       "source_sha256": "700b76b97695b2fab4ef8c79619c68ae57d09e0c130724791cafbd39e0eb4aef",
@@ -78,7 +78,11 @@
     "avcpp": {
       "source_sha256": "27636d3f4a37b982b6a9f779b1a1e72710c60a7c0004949deb578d28306bfb9d",
       "generated_header_sha256": "cd67357e2e5cd2da0068b7c5bbe88efd9612b1e370bc62e13adc0069394b554a",
-      "local_library_sha256": "89ba3d1b02089d1a24071bd4eceb375c6b3e28b5f3e465469efc5730029b474d"
+      "local_library_sha256": "b72d148fd1259a554085d1b8104709c784274232f56fc29c7ad18d44661554ae"
+    },
+    "ireader-media-server": {
+      "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
+      "local_library_sha256": "c1711ce27bd5a4ce101e5c11a1fd3b515c893f9ead65a1e5de977b0c2e232d60"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -295,6 +299,21 @@
         "streams": 2,
         "video": 1,
         "audio": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "ireader-media-server",
+      "version": "1.0.0",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/media-server-1.0.0/libmov/include -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/media-server-1.0.0/libmov/test /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/ireader_media_server.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-cpp-mp4/media-server-build/libmov.a -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/ireader-media-server",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/mp4/target/ireader-media-server /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "video_tracks": 1,
+        "audio_tracks": 1,
+        "width": 2,
+        "height": 2,
+        "duration_ms": 1000
       },
       "pass": true
     }
