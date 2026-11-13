@@ -282,6 +282,14 @@
       "source_sha256": "80931fa472a77b9a164f6740e3c0b444fac6770054632d35a7ff9d679e5e7b9f",
       "license_evidence": "https://download.gnome.org/sources/gtk/3.24/gtk-3.24.52.tar.xz",
       "installed_revision": "3.24.52_1"
+    },
+    "imlib2": {
+      "version": "1.12.7",
+      "license": "Imlib2",
+      "source_url": "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.7.tar.xz",
+      "source_sha256": "d71ee5351cc1914fb01968123d0dcf276740e5af5662943ac47ae60cafa4d13b",
+      "license_evidence": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+      "build_variant": "SVG-enabled source build; Homebrew binary lacks SVG plugin"
     }
   },
   "popularity_metric": {
@@ -397,6 +405,16 @@
         "auxiliary_window_end": "2026-11-13",
         "auxiliary_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
         "auxiliary_note": "Broad GTK 3 formula requests; not SVG-specific or mixed into the primary GitHub-star ranking."
+      },
+      "imlib2": {
+        "stars": null,
+        "repository": "https://git.enlightenment.org/old/legacy-imlib2",
+        "note": "Canonical Enlightenment upstream has no comparable primary GitHub star metric.",
+        "auxiliary_homebrew_install_on_request_365d": 2096,
+        "auxiliary_window_start": "2025-11-13",
+        "auxiliary_window_end": "2026-11-13",
+        "auxiliary_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+        "auxiliary_note": "Broad Homebrew Imlib2 formula requests are not SVG-specific; the formula binary lacks the SVG plugin and differs from the verified source-build variant. This value is not used as an SVG-enabled adoption metric."
       }
     }
   },
@@ -484,6 +502,11 @@
       "name": "gtk3",
       "url": "https://docs.gtk.org/gtk3/ctor.Image.new_from_file.html",
       "surface": "Official GTK 3 local file image API; the installed GdkPixbuf SVG loader and librsvg dependency are explicitly pinned."
+    },
+    {
+      "name": "imlib2",
+      "url": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+      "surface": "Official source release documents local file input in Imlib2.h and optional SVG loader in loader_svg.c; source build enables it."
     }
   ]
 }

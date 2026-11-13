@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T13:07:50.496547+00:00",
+  "checked_at_utc": "2026-11-13T13:14:58.203370+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/svg/source-lock.json",
@@ -87,6 +87,12 @@
       "source_sha256": "80931fa472a77b9a164f6740e3c0b444fac6770054632d35a7ff9d679e5e7b9f",
       "local_header_sha256": "b4e206761879e179b131740165a0691604e19d6b589f79932828ede22e786860",
       "local_library_sha256": "d02f5f059f862fdb802fd69070221ea358b990afde42f66aee024f06e11b9397"
+    },
+    "imlib2": {
+      "source_sha256": "d71ee5351cc1914fb01968123d0dcf276740e5af5662943ac47ae60cafa4d13b",
+      "local_header_sha256": "785f4241ffdd2c89c2d64c42769b7f9f53f37ee65fb0995b870382158c0ceaf1",
+      "local_library_sha256": "c5b1f7a531077a74fd0c4574a3c66c90753518863562617f88f900ab2512435f",
+      "svg_loader_sha256": "e81d27ec7cb959b725bd5f2544a7d5da4af8af965dc2dee4b8730cac20212541"
     }
   },
   "control": "controls/svg/red-green.svg",
@@ -436,6 +442,29 @@
         ]
       },
       "pass": true
+    },
+    {
+      "package": "imlib2",
+      "version": "1.12.7",
+      "control": "controls/svg/red-green.svg",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-svg-install/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/imlib2.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-svg-install/lib -lImlib2 -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-svg-install/lib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/imlib2",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/svg/target/imlib2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true,
+      "source_build_command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-1.12.7/configure --prefix=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-c-svg/imlib2-svg-install --with-svg --without-x --without-raw && make -j8 && make install"
     }
   ],
   "runtime": []

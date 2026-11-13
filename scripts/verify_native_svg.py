@@ -79,6 +79,7 @@ def verify(ecosystem: str) -> None:
         source_build = None
         juce_binary = None
         juce_build_command = None
+        imlib2_build_command = None
         if name == "nanosvg":
             source_dir = cache / source["archive_root"]
             if source_dir.exists():
@@ -122,6 +123,32 @@ def verify(ecosystem: str) -> None:
             source_build = ["cargo", "build", "--release", "--locked", "-p", "resvg-capi"]
             run(source_build, cwd=source_dir, timeout=900)
             library = source_dir / "target/release/libresvg.dylib"
+        elif name == "imlib2":
+            source_dir = cache / f"imlib2-{source['release']}"
+            build_dir = cache / "imlib2-svg-build"
+            install_dir = cache / "imlib2-svg-install"
+            for directory in (source_dir, build_dir, install_dir):
+                if directory.exists():
+                    shutil.rmtree(directory)
+            run(["tar", "-xf", str(archive), "-C", str(cache)])
+            build_dir.mkdir()
+            install_dir.mkdir()
+            configure = [str(source_dir / "configure"), "--prefix=" + str(install_dir),
+                         "--with-svg", "--without-x", "--without-raw"]
+            build = ["make", "-j8"]
+            install = ["make", "install"]
+            run(configure, cwd=build_dir, timeout=600)
+            run(build, cwd=build_dir, timeout=600)
+            run(install, cwd=build_dir, timeout=600)
+            source_build = configure
+            imlib2_build_command = " && ".join(map(shlex.join, (configure, build, install)))
+            header = install_dir / "include/Imlib2.h"
+            library = install_dir / "lib/libImlib2.1.dylib"
+            svg_loader = install_dir / "lib/imlib2/loaders/svg.so"
+            assert svg_loader.is_file()
+            for dependency in source.get("installed_dependencies", []):
+                assert dependency["revision"] in run(["brew", "list", "--versions", dependency["formula"]]).split()
+                assert file_sha256(Path(dependency["path"])) == dependency["sha256"]
         else:
             assert source["installed_revision"] in run(["brew", "list", "--versions", formula]).split()
             if name == "wxwidgets":
@@ -160,6 +187,12 @@ def verify(ecosystem: str) -> None:
             command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-I" + str(header.parent), str(ROOT / parser["adapter"]),
                        str(library), "-Wl,-rpath," + str(library.parent), "-o", str(target / name)]
+        elif name == "imlib2":
+            x11_flags = shlex.split(run(["pkg-config", "--cflags", "x11"]))
+            command = [compiler, std, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-I" + str(header.parent), *x11_flags, str(ROOT / parser["adapter"]),
+                       "-L" + str(library.parent), "-lImlib2",
+                       "-Wl,-rpath," + str(library.parent), "-o", str(target / name)]
         else:
             if name in ("libsvg", "libsvg-cairo"):
                 # These old .pc files require -lpng/-ljpeg without their Homebrew
@@ -186,12 +219,14 @@ def verify(ecosystem: str) -> None:
                      "build_command": juce_build_command or shlex.join(command), "command": shlex.join(execute),
                      "output": output, "pass": True}
         if source_build is not None:
-            row["source_build_command"] = juce_build_command or shlex.join(source_build)
+            row["source_build_command"] = juce_build_command or imlib2_build_command or shlex.join(source_build)
         rows.append(row)
         libraries[name] = {"source_sha256": source["source_sha256"],
                            "local_header_sha256": source["local_header_sha256"]}
         if library is not None:
             libraries[name]["local_library_sha256"] = file_sha256(library)
+        if name == "imlib2":
+            libraries[name]["svg_loader_sha256"] = file_sha256(svg_loader)
         if juce_binary is not None:
             libraries[name]["built_executable_sha256"] = file_sha256(juce_binary)
         print(f"{name}@{parser['version']}: {ecosystem} SVG passed", flush=True)

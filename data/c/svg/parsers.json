@@ -426,5 +426,32 @@
     "scope": "SVG dimensions and red/green pixels through GTK 3 image loader",
     "family": "GTK 3 image loader over GdkPixbuf and librsvg",
     "family_note": "GTK 3 is a separate released toolkit API. It delegates SVG interpretation to the installed GdkPixbuf SVG loader from librsvg, already recorded as its own package path. No independent SVG syntax engine is claimed."
+  },
+  {
+    "name": "imlib2",
+    "version": "1.12.7",
+    "license": "Imlib2",
+    "license_evidence": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/ (pinned COPYING)",
+    "documentation": "https://git.enlightenment.org/old/legacy-imlib2/src/branch/master/src/lib/Imlib2.h",
+    "input_api": "imlib_load_image_with_errno_return(local SVG filename, &error); imlib_image_get_width/height and imlib_image_get_data_for_reading_only",
+    "adapter": "adapters/c/svg/imlib2.c",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "SVG dimensions and red/green pixels through source-built Imlib2 SVG loader",
+    "family": "Imlib2 SVG loader over librsvg",
+    "family_note": "The official Imlib2 1.12.7 source contains an optional SVG plugin that delegates to librsvg. The installed Homebrew Imlib2 package lacks this plugin; the verifier enables and builds it from the pinned source. This is a distinct Imlib2 file-input API but shares the separately recorded librsvg syntax engine."
   }
 ]

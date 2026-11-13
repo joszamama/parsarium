@@ -436,5 +436,29 @@
       }
     ],
     "build_note": "Official GTK 3.24.52 source, local API header, toolkit binary, license, and GdkPixbuf/librsvg loader dependencies are hash-pinned. The GTK 3 file-input API delegates SVG parsing to the already counted librsvg family."
+  },
+  "imlib2": {
+    "release": "1.12.7",
+    "license": "Imlib2",
+    "source_build": "autotools with SVG loader",
+    "source_url": "https://downloads.sourceforge.net/enlightenment/imlib2-1.12.7.tar.xz",
+    "source_sha256": "d71ee5351cc1914fb01968123d0dcf276740e5af5662943ac47ae60cafa4d13b",
+    "repository": "https://git.enlightenment.org/old/legacy-imlib2",
+    "source_header_member": "imlib2-1.12.7/src/lib/Imlib2.h",
+    "local_header_sha256": "785f4241ffdd2c89c2d64c42769b7f9f53f37ee65fb0995b870382158c0ceaf1",
+    "license_member": "imlib2-1.12.7/COPYING",
+    "license_sha256": "fb70339dd33a77b6213c7ae067fccf93d04af44ff3f937c61f8863f7970e73f6",
+    "source_engine_member": "imlib2-1.12.7/src/modules/loaders/loader_svg.c",
+    "source_engine_sha256": "212d7b5b766d3c5b1fefce63a8abf748538ec53f6f46e905d6dec666dd39a1a7",
+    "installed_dependencies": [
+      {
+        "formula": "librsvg",
+        "revision": "2.63.4",
+        "path": "/opt/homebrew/Cellar/librsvg/2.63.4/lib/librsvg-2.2.dylib",
+        "sha256": "2c6cf6300889e3ae00e4468d736475310398335a9e4fbaa7a9a47538bc9fcb6c",
+        "role": "SVG syntax parser used by built Imlib2 SVG loader"
+      }
+    ],
+    "build_note": "Build pinned official Imlib2 1.12.7 source with --with-svg --without-x --without-raw, make, and make install in a fixed temporary prefix. The SVG plugin, built native library, and public header are checked by the verifier. The Homebrew Imlib2 formula is not used for this parser run."
   }
 }
