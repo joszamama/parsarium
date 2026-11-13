@@ -246,6 +246,22 @@
       "jar_sha256": "5d413955b119fff2076929037bf6bbca0eb7de39064e946eaadd436e6066ed60",
       "pom_url": "https://repo.maven.apache.org/maven2/org/la4j/la4j/0.5.0/la4j-0.5.0.pom",
       "pom_sha256": "341e0d70e25bf7a47d81fd424b441efb17b23fbbb2f42e8d125a4be8d94b9dc2"
+    },
+    "smile-base": {
+      "group": "com.github.haifengl",
+      "artifact": "smile-base",
+      "version": "7.2.0",
+      "license": "GPL-3.0-or-later OR LicenseRef-SMILE-Commercial",
+      "jar_url": "https://repo.maven.apache.org/maven2/com/github/haifengl/smile-base/7.2.0/smile-base-7.2.0.jar",
+      "jar_sha256": "ee6a23d15e9d53ec04b32ebb003074e14b7cacc53ed8bf45e8dfd9b4e8ca8e77",
+      "pom_url": "https://repo.maven.apache.org/maven2/com/github/haifengl/smile-base/7.2.0/smile-base-7.2.0.pom",
+      "pom_sha256": "d2b14f0165a97ff3fba06047078ea5520a5dd18361221a2e811462cb0d328606",
+      "sources_jar_url": "https://repo.maven.apache.org/maven2/com/github/haifengl/smile-base/7.2.0/smile-base-7.2.0-sources.jar",
+      "sources_jar_sha256": "d4583bfb03ade7b1b28757c466b78f5aecb8d573427ccdc04eea7c0ac11789b7",
+      "source_member": "smile/tensor/Matrix.java",
+      "source_member_sha256": "870e8d5378acc93c5ab59f74bcb1b2f694789b5c6b2443cf35b4f75b5e021313",
+      "tagged_source_url": "https://github.com/haifengl/smile/archive/refs/tags/v7.2.0.tar.gz",
+      "tagged_source_sha256": "e8090436cddfdfd51fb9bd80072e72ba14222a88ec9da7919e7dbc7d899074d6"
     }
   },
   "popularity_metric": {
@@ -273,6 +289,12 @@
         "direct_dependent_count": 0,
         "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.la4j%3Ala4j/versions/0.5.0:dependents",
         "note": "Exact older 0.5.0 release, not current 0.6.0; zero known public direct dependents may reflect version age and deps.dev coverage."
+      },
+      "smile-base": {
+        "direct_dependent_count": 6,
+        "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.github.haifengl%3Asmile-base/versions/7.2.0:dependents",
+        "observed_at_utc": "2026-11-13",
+        "note": "Exact current release; known public direct dependents are incomplete and measure library use, not Matrix Market-specific use."
       }
     }
   },
@@ -282,6 +304,12 @@
       "url": "https://la4j.org/",
       "format_evidence": "https://github.com/vkostyukov/la4j/blob/0.5.0/src/main/java/org/la4j/io/MatrixMarketStream.java",
       "version_disposition": "0.5.0 includes MatrixMarketStream; Maven 0.5.5 and 0.6.0 jars omit it."
+    },
+    {
+      "name": "smile-base",
+      "url": "https://github.com/haifengl/smile/blob/v7.2.0/base/src/main/java/smile/tensor/Matrix.java",
+      "format_evidence": "The tagged Matrix.market(Path) method parses the Matrix Market banner, dimensions and entries; published source jar matches this file.",
+      "release_evidence": "https://github.com/haifengl/smile/releases/tag/v7.2.0"
     }
   ]
 }

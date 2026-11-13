@@ -7,6 +7,7 @@ import platform
 from pathlib import Path
 import subprocess
 import tempfile
+import zipfile
 from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,13 @@ def download_checked(row: dict, temp: Path) -> None:
         with urlopen(row[f"{kind}_url"], timeout=60) as response:
             path.write_bytes(response.read())
         assert digest(path) == row[f"{kind}_sha256"], f"{path.name} release hash mismatch"
+    if "sources_jar_url" in row:
+        path = temp / f"{row['artifact']}-{row['version']}-sources.jar"
+        with urlopen(row["sources_jar_url"], timeout=60) as response:
+            path.write_bytes(response.read())
+        assert digest(path) == row["sources_jar_sha256"]
+        with zipfile.ZipFile(path) as jar:
+            assert sha256(jar.read(row["source_member"])).hexdigest() == row["source_member_sha256"]
 
 
 def locked_classpath(temp: Path) -> str:
@@ -56,12 +64,17 @@ def main() -> None:
         classpath = locked_classpath(temp)
         classes = temp / "classes"
         classes.mkdir()
+        java25 = Path(run("brew", "--prefix", "openjdk@25")) / "bin"
+        assert "25.0.5.0.3" in run("brew", "list", "--versions", "openjdk@25").split()
         for parser in parsers:
             source = ROOT / parser["adapter"]
-            run("javac", "--release", "21", "-proc:none", "-cp", classpath,
+            smile = parser["name"] == "smile-base"
+            javac = str(java25 / "javac") if smile else "javac"
+            java = str(java25 / "java") if smile else "java"
+            run(javac, "--release", "25" if smile else "21", "-proc:none", "-cp", classpath,
                 "-d", str(classes), str(source))
             class_name = "org.parsarium." + source.stem
-            raw = run("java", "--add-modules", "jdk.incubator.vector", "-cp",
+            raw = run(java, "--add-modules", "jdk.incubator.vector", "-cp",
                       f"{classes}:{classpath}", class_name, str(CONTROL))
             result = json.loads(raw.splitlines()[-1])
             assert result == parser["expected_output"], (parser["name"], result)
@@ -78,6 +91,7 @@ def main() -> None:
                 ["java", "-version"], capture_output=True, text=True, check=True
             ).stderr.splitlines()[0],
             "platform": platform.platform(),
+            "java_25_for_smile": run("brew", "list", "--versions", "openjdk@25"),
             "maven_dependency_artifacts": len(json.loads(
                 (DATA / "maven-dependency-lock.json").read_text())["artifacts"]),
         },
