@@ -4,5 +4,11 @@
     "status": "excluded_no_upstream_release",
     "reason": "The primary memononen/nanosvg repository documents nsvgParseFromFile and uses a zlib license, but the official GitHub releases and tags APIs return no releases or tags. A moving branch snapshot does not satisfy this collection's pinned-release rule. SDL3_image includes NanoSVG code at its own pinned release and records that shared family.",
     "source": "https://github.com/memononen/nanosvg"
+  },
+  {
+    "name": "gegl",
+    "status": "excluded_external_cli_fallback",
+    "reason": "The installed GEGL 0.4.72 gegl:load API rendered the valid SVG, but it reported no native .svg loader and fell back to gegl:magick-load. The pinned GEGL source shows that operation spawns ImageMagick convert on the filename and reloads a temporary PNG. This installed path does not itself parse SVG as a library API; ImageMagick already has a direct verified row. GEGL svg-load source exists but that plugin was not installed or exercised.",
+    "source": "https://github.com/GNOME/gegl/blob/GEGL_0_4_72/operations/common/magick-load.c"
   }
 ]
