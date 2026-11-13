@@ -131,6 +131,16 @@ def main() -> None:
                         assert len(source["source_sha256"]) == 64
                         assert (ROOT / parser["adapter"]).exists()
                         assert snapshot["popularity_metric"]["packages"][name]["direct_dependent_count"] is None
+                    elif parser.get("source_kind") == "official_binary_distribution":
+                        source = read(parser["source_lock"])[name]
+                        assert source["release"] == parser["version"]
+                        assert source["license"] == parser["license"]
+                        assert source["source_sha256"] == release["source_sha256"]
+                        assert source["jar_sha256"] == release["distribution_sha256"]
+                        assert source["tag_commit"] == release["source_commit"]
+                        assert len(source["jar_sha256"]) == 64
+                        assert (ROOT / parser["adapter"]).exists()
+                        assert snapshot["popularity_metric"]["packages"][name]["direct_dependent_count"] is None
                     else:
                         assert cell["format"] == "pdf" and name == "pdfclown"
                         assert len(release["archive_sha256"]) == 64 and len(release["jar_sha256"]) == 64

@@ -1,10 +1,11 @@
 {
-  "checked_at_utc": "2026-11-13T16:48:00.687476+00:00",
+  "checked_at_utc": "2026-11-13T17:55:58.166777+00:00",
   "environment": {
     "java": "Eclipse Temurin OpenJDK 21.0.2",
     "platform": "macOS 27.2 arm64",
     "native": "LWJGL 3.4.3 macOS arm64 classifier jars, SHA-256 pinned in registry snapshot",
-    "f3d": "F3D 4.0.1 source built with LLVM 23.1.4, VTK 9.7.2, JDK 21.0.2 on macOS 27.2 arm64"
+    "f3d": "F3D 4.0.1 source built with LLVM 23.1.4, VTK 9.7.2, JDK 21.0.2 on macOS 27.2 arm64",
+    "kotlin-assimp": "Official v4.0 assimp-all.jar release asset and tagged source, SHA-256 pinned; Java 21 on macOS 27.2 arm64"
   },
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
@@ -199,6 +200,24 @@
       "source_lock": "data/java/ascii_ply/materia-lock.json",
       "underlying_family": "Materia Kotlin ASCII PLY loader",
       "note": "Vertex count is read from the parsed position attribute; the engine-wide getVertexCount helper reported 1 for this control and is not the acceptance result."
+    },
+    {
+      "package": "kotlin-assimp",
+      "version": "v4.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_kotlin_assimp.py",
+      "artifact_sha256": "ad7aef390521eaf3741614749ced1ef0803ed9e803161d14838eaeb8a9372a56",
+      "source_sha256": "1edb9ad3b65adb721b91b02acf9014717e83c93de1dbc4b2278d4006ed043fad"
     }
   ],
   "runtime": []

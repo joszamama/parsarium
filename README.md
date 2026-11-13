@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,533 of 1,696 verified package paths have a recorded comparable cell metric;
-163 are unranked. A recorded zero is still a measured value, not evidence of
+1,533 of 1,697 verified package paths have a recorded comparable cell metric;
+164 are unranked. A recorded zero is still a measured value, not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -180,6 +180,7 @@ python3 scripts/verify_java_ascii_ply.py
 python3 scripts/verify_java_ascii_ply_monkeywrench.py
 python3 scripts/verify_java_ascii_ply_irurueta.py
 python3 scripts/verify_java_ascii_ply_materia.py
+python3 scripts/verify_java_ascii_ply_kotlin_assimp.py
 python3 scripts/build_matrix.py
 python3 scripts/build_rankings.py
 python3 scripts/validate_catalog.py
@@ -1252,12 +1253,14 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): eleven verified
-  paths, nine below the working goal. Nine have exact-release Maven direct
+- [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): twelve verified
+  paths, eight below the working goal. Nine have exact-release Maven direct
   dependent counts. F3D's source-built Java binding shares the native VTK
   reader with its C and C++ bindings; SceneView Core parses through a separate
   pure Kotlin reader. Both lack comparable direct-dependent counts and remain
-  unranked. Irurueta Geometry I/O 1.6.0 and Materia JVM 0.4.2.2 parsed the
+  unranked. The tagged Kotlin-graphics JVM Assimp port parsed the same triangle
+  through its own Kotlin reader and is also unranked. Irurueta Geometry I/O
+  1.6.0 and Materia JVM 0.4.2.2 parsed the
   valid triangle through separate readers; both have zero known public direct
   dependents for their exact releases, so broad adoption is not established.
 - [C++ × Matrix Market ranking](data/cpp/matrix_market/ranking.md): Eigen,

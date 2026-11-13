@@ -206,7 +206,7 @@
     },
     "scope": "ASCII PLY triangle vertices, triangulated face and parsed indices",
     "family": "SceneView Core pure Kotlin PLY parser",
-    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core\u2019s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
+    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core’s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
   },
   {
     "name": "irurueta-geometry-io",
@@ -258,6 +258,32 @@
       ]
     },
     "source_lock": "data/java/ascii_ply/materia-lock.json",
-    "family_note": "Tagged JVM artifact exposes a Java-callable coroutine API over Materia\u2019s Kotlin PLY parser. Project stars are auxiliary, not exact-release dependent counts or PLY-specific use."
+    "family_note": "Tagged JVM artifact exposes a Java-callable coroutine API over Materia’s Kotlin PLY parser. Project stars are auxiliary, not exact-release dependent counts or PLY-specific use."
+  },
+  {
+    "name": "kotlin-assimp",
+    "version": "v4.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/kotlin-graphics/assimp/blob/v4.0/LICENSE.txt",
+    "input_api": "new Importer().readFile(local File.toURI(), 0) -> AiScene with AiMesh vertices/faces",
+    "documentation": "https://github.com/kotlin-graphics/assimp/tree/v4.0#code",
+    "family": "Kotlin-graphics JVM Assimp port PLY importer",
+    "family_note": "Pure JVM port of native Assimp with its own Kotlin PlyLoader and PlyParser; derived parser lineage is recorded separately from the existing LWJGL/native Assimp wrappers.",
+    "scope": "ASCII PLY triangle, three vertices, one face, parsed indices [0,1,2]",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/kotlin_assimp/KotlinAssimpPlyAdapter.java",
+    "adapter_module": "kotlin_assimp",
+    "source_kind": "official_binary_distribution",
+    "source_lock": "data/java/ascii_ply/kotlin-assimp-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "group": null
   }
 ]
