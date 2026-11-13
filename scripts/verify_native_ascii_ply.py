@@ -152,6 +152,24 @@ def verify(ecosystem: str) -> None:
                     tar.extractall(cache, filter="data")
                 for member, expected in source["source_members"].items():
                     assert digest(cache / member) == expected
+            if source.get("source_build") == "assetkit":
+                include_dir = cache / f"AssetKit-{source['release']}-git"
+                if not (include_dir / ".git").exists():
+                    run(["git", "clone", "--depth", "1", "--branch", f"v{source['release']}",
+                         "--recurse-submodules", source["git_url"], str(include_dir)], timeout=240)
+                assert run(["git", "-C", str(include_dir), "rev-parse", "HEAD"]) == source["release_commit"]
+                for submodule, commit in source["submodule_commits"].items():
+                    assert run(["git", "-C", str(include_dir / "deps" / submodule),
+                                "rev-parse", "HEAD"]) == commit
+                for member, expected in source["source_members"].items():
+                    relative = Path(member).relative_to(f"AssetKit-{source['release']}")
+                    assert digest(include_dir / relative) == expected
+                build_dir = cache / f"AssetKit-{source['release']}-build"
+                run(["cmake", "-S", str(include_dir), "-B", str(build_dir),
+                     "-DCMAKE_BUILD_TYPE=Release", "-DAK_BUILD_EXPORTERS=OFF",
+                     "-DAK_BUILD_DECODER_SHIMS=OFF", "-DAK_FETCH_DEPS=OFF",
+                     "-DAK_BUILD_CLI=OFF", "-DAK_BUILD_SAMPLES=OFF"], timeout=240)
+                run(["cmake", "--build", str(build_dir), "--parallel", "8"], timeout=300)
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -246,6 +264,14 @@ def verify(ecosystem: str) -> None:
                        str(ROOT / parser["adapter"]),
                        str(include_dir / "wrap/ply/plylib.cpp"),
                        "-o", str(target / name)]
+        elif source.get("source_build") == "assetkit":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir / "include"),
+                       str(ROOT / parser["adapter"]), "-L" + str(build_dir),
+                       "-L" + str(build_dir / "deps/ds"),
+                       "-Wl,-rpath," + str(build_dir),
+                       "-Wl,-rpath," + str(build_dir / "deps/ds"),
+                       "-lassetkit", "-lds", "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
@@ -269,6 +295,9 @@ def verify(ecosystem: str) -> None:
         if source.get("source_build") == "geometry_central":
             local_libraries[name]["submodule_source_sha256"] = source["submodule"]["source_sha256"]
             local_libraries[name]["submodule_header_sha256"] = source["submodule"]["header_sha256"]
+        if source.get("source_build") == "assetkit":
+            local_libraries[name]["release_commit"] = source["release_commit"]
+            local_libraries[name]["submodule_commits"] = source["submodule_commits"]
         print(f"{name}@{parser['version']}: {ecosystem} ASCII PLY passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["cc" if ecosystem == "c" else "c++", "--version"]).splitlines()[0],

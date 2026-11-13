@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:52:52.456711+00:00",
+  "checked_at_utc": "2026-11-13T07:27:51.680701+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -97,6 +97,19 @@
       "source_sha256": "e49fc9342d5476b3e39a5e1939b965b57c91d7a17b4f97b8c5eaf01228b16cf0",
       "installed_files": {},
       "source_header_sha256": "d5fb43ce9134a86f91201edbaea474ac5285ad03e98d2abb2fc50cc5568104fc"
+    },
+    "assetkit": {
+      "source_sha256": "6a0325976d46a30e6369c9718e31122e87f071ee3af114675ac43fb8b9ed45ec",
+      "installed_files": {},
+      "source_header_sha256": null,
+      "release_commit": "4f0ec8f2fbca2578d4b927551a51232190892ce2",
+      "submodule_commits": {
+        "cglm": "b7813d0edb33064d46ba8d30f637c321cdf3cc2c",
+        "ds": "20faf31bbdc796ad0d791615c5ab65d393bfeee3",
+        "json": "c69befd5996e29412bc2b705732f6508da19950f",
+        "libdeflate": "b122c8be1d78b19f6d0a6efc5bb79bfcbb30dd51",
+        "xml": "4289c02cda9a73a8e11137279a6dc6e9347adee3"
+      }
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -316,6 +329,24 @@
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/vcglib-2025.07 -isystem /opt/homebrew/opt/eigen/include/eigen3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/vcglib.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/vcglib-2025.07/wrap/ply/plylib.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/vcglib",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/vcglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "assetkit",
+      "version": "0.7.4",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/AssetKit-0.7.4-git/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/assetkit.cpp -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/AssetKit-0.7.4-build -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/AssetKit-0.7.4-build/deps/ds -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/AssetKit-0.7.4-build -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/AssetKit-0.7.4-build/deps/ds -lassetkit -lds -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/assetkit",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/assetkit /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "meshes": 1,
         "vertices": 3,
         "faces": 1,
         "face": [
