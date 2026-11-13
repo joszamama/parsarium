@@ -6,6 +6,8 @@ import re
 import tomllib
 import xml.etree.ElementTree as ET
 
+from audit_popularity_coverage import build_report
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -205,6 +207,7 @@ def main() -> None:
             else:
                 assert runtime_results["pass"]
         assert cell["verified_standard_or_runtime_count"] == len(read(f"{key}/standard.json")["verified_apis"])
+    assert read("data/popularity-coverage.json") == build_report()
     print(f"Validated {len(matrix)} cells, {sum(c['status'] != 'not_started' for c in matrix)} with recorded evidence")
 
 
