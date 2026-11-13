@@ -333,5 +333,46 @@
     ],
     "installed_dependencies": [],
     "build_note": "Pinned upstream release, matching installed public header, exact native library hash and MP4 parser source. C binding and C++ API share the MP4 core."
+  },
+  "opencv": {
+    "release": "5.1.0",
+    "installed_revision": "5.1.0",
+    "formula": "opencv",
+    "license": "Apache-2.0",
+    "source_url": "https://github.com/opencv/opencv/archive/refs/tags/5.1.0.tar.gz",
+    "source_sha256": "638c1dae7e37e45afea21aa217dc667ad7cf57acc66cdf652c074f1e0e5ad6d2",
+    "repository": "https://github.com/opencv/opencv",
+    "source_header_member": "opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+    "local_header": "/opt/homebrew/Cellar/opencv/5.1.0/include/opencv5/opencv2/videoio.hpp",
+    "local_header_sha256": "bb063cb3e5ceef3f725397eadc65838a79299f9dc7a5070ccdf718043ecec9b6",
+    "local_library": "/opt/homebrew/Cellar/opencv/5.1.0/lib/libopencv_videoio.5.1.0.dylib",
+    "local_library_sha256": "0ed831ed8599eafb7935f9cce6d3294692caeb64571b80311595d919bf65c69a",
+    "include_dir": "/opt/homebrew/Cellar/opencv/5.1.0/include/opencv5",
+    "link_name": "opencv_videoio",
+    "extra_linker_flags": [
+      "-lopencv_core"
+    ],
+    "license_member": "opencv-5.1.0/LICENSE",
+    "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "source_engine_member": "opencv-5.1.0/modules/videoio/src/cap_ffmpeg_impl.hpp",
+    "source_engine_sha256": "69a967703c3cb16cf32f8a26d27ff4ef958735e7281e34dc08fe01fb1317e838",
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/opencv/5.1.0/lib/libopencv_core.5.1.0.dylib",
+        "sha256": "b9d94545520b1e54697524c74e0da9add1aad75618ccad7eb8fe9663141c2501",
+        "role": "OpenCV core"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.dylib",
+        "sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+        "role": "shared FFmpeg MOV/MP4 demuxer"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavcodec.63.dylib",
+        "sha256": "887a9775777c2fdb45228fb7776c3f040e4cf56a0cce2b773ae1b978e26dce5a",
+        "role": "shared FFmpeg decoder"
+      }
+    ],
+    "build_note": "Pinned upstream tag and Homebrew C++ VideoCapture header/library hashes; direct FFmpeg backend selected and linked FFmpeg libraries pinned."
   }
 }

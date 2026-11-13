@@ -214,5 +214,24 @@
     "scope": "MP4 title metadata and one-second duration",
     "family": "TagLib native MP4 metadata parser",
     "family_note": "C binding delegates to the same TagLib C++ MP4 parser used by the C++ adapter."
+  },
+  {
+    "name": "opencv",
+    "version": "5.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/opencv/opencv/blob/5.1.0/LICENSE",
+    "documentation": "https://github.com/opencv/opencv/blob/5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+    "input_api": "cv::VideoCapture(local MP4 filename, cv::CAP_FFMPEG); get(CAP_PROP_FRAME_WIDTH/HEIGHT/FRAME_COUNT/FPS)",
+    "adapter": "adapters/cpp/mp4/opencv.cpp",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "width": 2,
+      "height": 2,
+      "frames": 1,
+      "fps": 1
+    },
+    "scope": "MP4 video dimensions, frame count and frame rate from FFmpeg-backed VideoCapture",
+    "family": "OpenCV VideoCapture wrapper over FFmpeg MOV/MP4 demuxer",
+    "family_note": "The pinned libopencv_videoio dylib links the pinned FFmpeg libavformat and libavcodec libraries; this is a distinct C++ package API over the FFmpeg parser family."
   }
 ]
