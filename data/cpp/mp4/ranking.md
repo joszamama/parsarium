@@ -1,6 +1,6 @@
 # C++ × MP4: verified parser ranking
 
-18 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
+19 verified third-party package paths; working goal 20, ceiling 30. Formula install-on-request counts use the same 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad package requests, not MP4-specific use.
 
 | Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -12,10 +12,11 @@
 | 6 | [gpac](https://doxygen.gpac.io/group__isogen__grp.html) | 26.07.0 | 7,814 | two ISO media tracks, 2x2 video dimensions and duration | GPAC native ISO media parser |
 | 7 | [TagLib](https://taglib.org/api/) | 2.3.2 | 4,021 | MP4 title and one-second duration | TagLib native MP4 metadata parser |
 | 8 | [Exiv2](https://exiv2.org/doc/classExiv2_1_1QuickTimeVideo.html) | 0.28.9 | 2,425 | MP4 major brand and 2x2 video dimensions | Exiv2 native QuickTime/MP4 metadata parser |
-| 9 | [libmediainfo](https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start) | 26.10 | 1,285 | MPEG-4 container, title, AVC video and AAC audio, 2x2 video dimensions | MediaInfoLib native MPEG-4 parser |
-| 10 | [mp4v2](https://github.com/enzo1982/mp4v2/blob/v2.1.3/include/mp4v2/file.h) | 2.1.3 | 644 | two MP4 tracks and 2x2 video dimensions | MP4v2 native MP4 atom parser |
-| 11 | [libextractor](https://www.gnu.org/software/libextractor/manual/extractor.html) | 1.20 | 164 | MP4 title, duration and 2x2 video dimensions | GNU libextractor qt plugin |
-| 12 | [libquicktime](https://libquicktime.sourceforge.net/introduction.html) | 1.2.4 | 100 | two MP4 tracks and 2x2 video dimensions | libquicktime native QuickTime/MP4 atom reader |
+| 9 | [MLT](https://mltframework.org/plugins/ProducerAvformat/) | 7.42.0 | 1,526 | two streams, H.264/AAC codecs and 2x2 video dimensions | MLT avformat plugin over FFmpeg MOV/MP4 demuxer |
+| 10 | [libmediainfo](https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start) | 26.10 | 1,285 | MPEG-4 container, title, AVC video and AAC audio, 2x2 video dimensions | MediaInfoLib native MPEG-4 parser |
+| 11 | [mp4v2](https://github.com/enzo1982/mp4v2/blob/v2.1.3/include/mp4v2/file.h) | 2.1.3 | 644 | two MP4 tracks and 2x2 video dimensions | MP4v2 native MP4 atom parser |
+| 12 | [libextractor](https://www.gnu.org/software/libextractor/manual/extractor.html) | 1.20 | 164 | MP4 title, duration and 2x2 video dimensions | GNU libextractor qt plugin |
+| 13 | [libquicktime](https://libquicktime.sourceforge.net/introduction.html) | 1.2.4 | 100 | two MP4 tracks and 2x2 video dimensions | libquicktime native QuickTime/MP4 atom reader |
 | — | [bento4](https://github.com/axiomatic-systems/Bento4/blob/v1.6.0-641/Source/C%2B%2B/CApi/Bento4C.h) | 1.6.0-641 | unavailable | MP4 major brand, two audio/video tracks and one-second duration | Bento4 AP4 ISO BMFF core |
 | — | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | unavailable | MP4 title, video/audio tracks and one-second duration | VLC native MP4 demuxer plugin |
 | — | [AvCpp](https://h4tr3d.github.io/avcpp/formatcontext_8h_source.html) | 3.0.1 | unavailable | MP4 demuxer, one video and one audio stream | C++ wrapper over FFmpeg MOV/MP4 demuxer |
@@ -23,7 +24,7 @@
 | — | [ireader/media-server](https://github.com/ireader/media-server/blob/v1.0.0/libmov/include/mov-reader.h) | 1.0.0 | unavailable | one video and one audio track, 2x2 dimensions and 1000 ms duration | ireader libmov native ISO BMFF/MOV reader |
 | — | [libmp4tag](https://libmp4tag.sourceforge.io/) | 2.0.4 | unavailable | MP4 title and 1128 ms duration | libmp4tag native MP4 atom and tag parser |
 
-MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, Exiv2, libmp4tag, ireader libmov and VLC expose distinct package APIs and MP4 parsers. libmpv, OpenCV and AvCpp share FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4, AvCpp, libmp4tag and ireader/media-server have no Homebrew formula in the bounded name search; none has a comparable formula install-on-request count. libquicktime, libextractor, TagLib, OpenCV, Exiv2, AvCpp and libmp4tag came from targeted project documentation; OpenCV verified container properties without decoding a frame. Two leads remain unresolved: qtmultimedia returned no format-specific control result and minimp4 has no pinnable upstream release; 2 more verified paths are needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
+MP4v2, GPAC, Bento4, FFmpeg, GStreamer, MediaInfoLib, libquicktime, libextractor, TagLib, Exiv2, libmp4tag, ireader libmov and VLC expose distinct package APIs and MP4 parsers. libmpv, OpenCV and AvCpp share FFmpeg. MP4Box is an alias for GPAC, and mp4ff supplies a Go API rather than a native library API. VLC is a cask, while Bento4, AvCpp, libmp4tag and ireader/media-server have no Homebrew formula in the bounded name search; none has a comparable formula install-on-request count. libquicktime, libextractor, TagLib, OpenCV, Exiv2, AvCpp and libmp4tag came from targeted project documentation; OpenCV verified container properties without decoding a frame. Two leads remain unresolved: qtmultimedia returned no format-specific control result and minimp4 has no pinnable upstream release; 1 more verified path is needed. See `cell.json`, `registry-snapshot.json`, `source-lock.json`, and `verification.json`.
 
 libmp4tag is a genuine published C parser release that passed the control, but it is unranked because its SourceForge downloads are not comparable to Homebrew formula install-on-request counts. The C++ path uses the same C parser.
 
@@ -34,3 +35,5 @@ The tagged MIT `ireader/media-server` v1.0.0 `libmov` API passed the local MP4 c
 The tagged Apache-2.0 `shiguredo/mp4-rs` 2026.3.0 release passed the local MP4 control through its published C API. Both ecosystem paths share the Rust demuxer. Its 158 project-wide GitHub stars are auxiliary; no comparable Homebrew formula count exists, so it remains unranked.
 
 libheif 1.23.7 passed the valid MP4 control through its published sequence API, reporting the video track and 2x2 resolution while ignoring audio. Its 91,937 Homebrew requested installs place it second within this cell, measuring broad formula use rather than MP4-specific use. The C and C++ paths share one native parser.
+
+MLT 7.42.0 passed the MP4 control through its avformat producer in both C and C++. Its 1,526 Homebrew requested installs are comparable within this cell, while its avformat plugin shares FFmpeg 9.0.2 parsing. The C++ adapter uses MLT++ from the same release.

@@ -289,5 +289,25 @@
     "scope": "MP4 video sequence track and 2x2 image resolution; the library does not expose the audio track through this sequence API",
     "family": "libheif native ISO BMFF image-sequence and MP4 parser",
     "family_note": "C and C++ adapters call the same libheif 1.23.7 C API and parser. This separate parser reads the MP4 video sequence and ignores audio."
+  },
+  {
+    "name": "mlt",
+    "version": "7.42.0",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/mltframework/mlt/blob/v7.42.0/COPYING and license header in pinned producer_avformat.c",
+    "documentation": "https://mltframework.org/docs/framework/",
+    "input_api": "mlt_factory_producer(profile, \"avformat\", local filename); mlt_producer_properties",
+    "adapter": "adapters/c/mp4/mlt.c",
+    "control": "controls/mp4/red-av.mp4",
+    "expected_output": {
+      "streams": 2,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "width": 2,
+      "height": 2
+    },
+    "scope": "AVFormat producer parsed MP4 video/audio codecs and 2x2 video dimensions",
+    "family": "MLT avformat producer over FFmpeg MOV/MP4 demuxer",
+    "family_note": "MLT C and C++ package APIs use the same MLT avformat plugin; the plugin links FFmpeg 9.0.2 libavformat, sharing the existing FFmpeg parser family."
   }
 ]

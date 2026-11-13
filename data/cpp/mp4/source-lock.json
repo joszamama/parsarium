@@ -544,5 +544,50 @@
       }
     ],
     "build_note": "Official v1.23.7 release archive, sequence header, ISO BMFF implementation, license, installed Homebrew headers and dylib are pinned by SHA-256. pkg-config supplies flags; both ecosystem adapters share the native parser."
+  },
+  "mlt": {
+    "release": "7.42.0",
+    "installed_revision": "7.42.0_1",
+    "formula": "mlt",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://github.com/mltframework/mlt/releases/download/v7.42.0/mlt-7.42.0.tar.gz",
+    "source_sha256": "8800e343f43aaa885bd5d9d23553030fa220aa3e2f0c94d9fd6a936d41638cdd",
+    "repository": "https://github.com/mltframework/mlt",
+    "source_header_member": "mlt-7.42.0/src/mlt++/MltProducer.h",
+    "source_header_sha256": "1c016b5fb4ef03c9ce2e9aa0573870cf3506ec0dd0f45b2f38c8fc44ec1a9ff1",
+    "local_header": "/opt/homebrew/Cellar/mlt/7.42.0_1/include/mlt-7/mlt++/MltProducer.h",
+    "local_header_sha256": "1c016b5fb4ef03c9ce2e9aa0573870cf3506ec0dd0f45b2f38c8fc44ec1a9ff1",
+    "local_library": "/opt/homebrew/Cellar/mlt/7.42.0_1/lib/libmlt++-7.7.42.0.dylib",
+    "local_library_sha256": "4a42bd5965dbca19a820dd7ef30c291264a387628d29f504ce4296e215f2c668",
+    "pkg_config": "mlt++-7",
+    "pkg_config_version": "7.42.0",
+    "license_member": "mlt-7.42.0/COPYING",
+    "license_sha256": "592987e8510228d546540b84a22444bde98e48d03078d3b2eefcd889bec5ce8c",
+    "source_engine_member": "mlt-7.42.0/src/modules/avformat/producer_avformat.c",
+    "source_engine_sha256": "87ade181fa43b953fbb30156adafe476e5ac86a14dee0531d059d0b93804875d",
+    "source_engine_members": [
+      {
+        "member": "mlt-7.42.0/src/mlt++/MltProducer.cpp",
+        "sha256": "c082dd7906b26b9a509a6f6470cbb90ac9d427d2faebf2f77ef940c4ac6f9a2c"
+      }
+    ],
+    "installed_dependencies": [
+      {
+        "path": "/opt/homebrew/Cellar/mlt/7.42.0_1/lib/libmlt-7.7.42.0.dylib",
+        "sha256": "9e3e0704445f1687d56ebb4e1e2dcbc594429eb0d3f0347f9ef6751b55e83172",
+        "role": "native MLT core behind C++ wrapper"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/mlt/7.42.0_1/lib/mlt/libmltavformat.so",
+        "sha256": "ef7dca919cfb956768ef9272615dba3bbc422557ce9859ac5bbe36a1b2e785d9",
+        "role": "avformat producer plugin"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib/libavformat.63.1.102.dylib",
+        "sha256": "29cf1a49a39f4e8e99c7bfa6f7aef3df2e7d91c8282cd7e1ef1fb206aec75779",
+        "role": "underlying FFmpeg MOV/MP4 demuxer"
+      }
+    ],
+    "build_note": "Official v7.42.0 release, installed Homebrew 7.42.0_1 headers and MLT library, avformat plugin, and linked FFmpeg libavformat are hash-pinned. The plugin uses the existing FFmpeg MOV/MP4 demuxer."
   }
 }

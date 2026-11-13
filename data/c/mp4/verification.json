@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T12:12:40.394675+00:00",
+  "checked_at_utc": "2026-11-13T12:18:01.209495+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/mp4/source-lock.json",
@@ -43,7 +43,7 @@
       "source_sha256": "e6575877708526e399cff752b4ee23cb1e2ac32fb251e2ca0a1e8d691fd172a7",
       "source_header_sha256": "efb5b6853ee58d1536f065ee1f8d828f0a23015016d5f8f798888544ce9bffe6",
       "local_library_sha256": "8c0bd973372da2106ef6ec5dbdd8f58bc46e7ce401b646aa1847ee0c5de38789",
-      "c_binding_library_sha256": "c9d5b571ba2bc9ba3339a4d0891bdf1c7c7b6080d3ddba252880f5141daa918b"
+      "c_binding_library_sha256": "79e6881605202c5fc291b0d4f073a2e3e0dca32e52b27da17c435f615824a6d6"
     },
     "libquicktime": {
       "source_sha256": "1c53359c33b31347b4d7b00d3611463fe5e942cae3ec0fefe0d2fd413fd47368",
@@ -67,7 +67,7 @@
     },
     "ireader-media-server": {
       "source_sha256": "91c099160dc6e94ea1c4532058f1bedcec5058cb072de00264a2596e9c1c403e",
-      "local_library_sha256": "f628f7bb85426c78d122ee9c54c69ffd6d25c8e43dc0ec18d40b2d35e705c6df"
+      "local_library_sha256": "62558d85aa4f57fb90b3168cd58359ee80f0542a6dac80b54a7e52331d4d5a7f"
     },
     "shiguredo-mp4-rs": {
       "source_sha256": "5af3b3b054d5558e43455232492d9697e0b9055923b835a314d25ec370a5d012",
@@ -78,6 +78,11 @@
       "source_sha256": "f7483e818503ea6224c8863e4a56ac02c7089021a98472c811c12aa19faf2475",
       "local_header_sha256": "6a80fc88c9a43054231d84e7c247c0c043a1bfbf103e77e816ebfcc37d2bedce",
       "local_library_sha256": "72cf019f0643e695001646016a4890b30e13b9291d9c682f0529b3bd707bbbe1"
+    },
+    "mlt": {
+      "source_sha256": "8800e343f43aaa885bd5d9d23553030fa220aa3e2f0c94d9fd6a936d41638cdd",
+      "local_header_sha256": "806971be6c0ef60c08917ae11d138023cc27967b238fa937b48567ada42daa7b",
+      "local_library_sha256": "9e3e0704445f1687d56ebb4e1e2dcbc594429eb0d3f0347f9ef6751b55e83172"
     }
   },
   "control": "controls/mp4/red-av.mp4",
@@ -294,6 +299,21 @@
       "output": {
         "sequence_tracks": 1,
         "video_tracks": 1,
+        "width": 2,
+        "height": 2
+      },
+      "pass": true
+    },
+    {
+      "package": "mlt",
+      "version": "7.42.0",
+      "control": "controls/mp4/red-av.mp4",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/opt/homebrew/Cellar/mlt/7.42.0_1/include/mlt-7 -L/opt/homebrew/Cellar/mlt/7.42.0_1/lib -lmlt-7 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/mlt.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/mlt",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp4/target/mlt /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp4/red-av.mp4",
+      "output": {
+        "streams": 2,
+        "video_codec": "h264",
+        "audio_codec": "aac",
         "width": 2,
         "height": 2
       },

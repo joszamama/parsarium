@@ -256,8 +256,8 @@ toolchain build failure. Additional
 projects outside the bounded Homebrew search remain uncertain; see the [C](data/c/svg/cell.json) and
 [C++](data/cpp/svg/cell.json) records for search limits and uncertainty.
 
-The C × MP4 cell verifies **15/20 package paths** and C++ × MP4 verifies
-**18/20** on the valid local two-track H.264/AAC control. The adapters report
+The C × MP4 cell verifies **16/20 package paths** and C++ × MP4 verifies
+**19/20** on the valid local two-track H.264/AAC control. The adapters report
 container identity, title, tracks, dimensions, or duration through documented
 local APIs. Source releases and relevant libraries are pinned. The C++ OpenCV
 and AvCpp paths and both libmpv paths share FFmpeg's MP4 demuxer; the new C
@@ -265,7 +265,9 @@ and C++ `ireader/media-server` adapters share one native `libmov` parser.
 The C and C++ `shiguredo/mp4-rs` paths share one Rust demuxer through its C API.
 The libheif paths share a native parser that reads the MP4 video track and 2×2
 resolution; this API ignores the audio track. Libheif ranks second in both MP4
-cells by the same Homebrew requested-install metric.
+cells by the same Homebrew requested-install metric. MLT adds a C producer and
+a C++ wrapper over the shared FFmpeg MP4 demuxer, each with two parsed streams
+and 2×2 video dimensions.
 Four bounded Homebrew formula-name searches saved 15 hits and 15 unique names.
 Homebrew requested-install counts rank only packages with a comparable count;
 `ireader/media-server` has no such count and remains unranked, with its GitHub
