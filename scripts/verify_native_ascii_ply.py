@@ -55,9 +55,17 @@ def verify(ecosystem: str) -> None:
             for member, expected in source["source_members"].items():
                 file = tar.extractfile(member)
                 assert file is not None and sha256(file.read()).hexdigest() == expected, member
-        assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
-        for path, expected in source["installed_files"].items():
-            assert digest(Path(path)) == expected, path
+            if source.get("header_only"):
+                header = tar.extractfile(source["header_member"])
+                assert header is not None
+                include_dir = cache / f"{name}-{source['release']}-include"
+                include_dir.mkdir(exist_ok=True)
+                (include_dir / source["header_name"]).write_bytes(header.read())
+                assert digest(include_dir / source["header_name"]) == source["source_members"][source["header_member"]]
+        if not source.get("header_only"):
+            assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
+            for path, expected in source["installed_files"].items():
+                assert digest(Path(path)) == expected, path
         compiler = "cc" if ecosystem == "c" else "c++"
         language = "-std=c11" if ecosystem == "c" else "-std=c++17"
         if name == "assimp":
@@ -70,6 +78,10 @@ def verify(ecosystem: str) -> None:
                        "-isystem", str(prefix / "include"), str(ROOT / parser["adapter"]),
                        "-L" + str(prefix / "lib"), "-Wl,-rpath," + str(prefix / "lib"),
                        "-lOpenMeshCore", "-lOpenMeshTools", "-o", str(target / name)]
+        elif source.get("header_only"):
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
+                       "-o", str(target / name)]
         else:
             raise ValueError(name)
         run(command)
@@ -80,7 +92,8 @@ def verify(ecosystem: str) -> None:
                      "build_command": shlex.join(command), "command": shlex.join(execute),
                      "output": output, "pass": True})
         local_libraries[name] = {"source_sha256": source["source_sha256"],
-                                 "installed_files": source["installed_files"]}
+                                 "installed_files": source.get("installed_files", {}),
+                                 "source_header_sha256": source["source_members"].get(source.get("header_member"))}
         print(f"{name}@{parser['version']}: {ecosystem} ASCII PLY passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["cc" if ecosystem == "c" else "c++", "--version"]).splitlines()[0],

@@ -38,5 +38,44 @@
     "scope": "three vertices and one triangular face from ASCII PLY",
     "family": "OpenMesh PLYReader",
     "family_note": "OpenMesh uses its own PLYReader and mesh representation."
+  },
+  {
+    "name": "happly",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nmwsharp/happly/archive/refs/tags/v1.1.0.tar.gz",
+    "documentation": "https://github.com/nmwsharp/happly/blob/v1.1.0/README.md",
+    "input_api": "happly::PLYData(local filename); getVertexPositions(); getFaceIndices()",
+    "adapter": "adapters/cpp/ascii_ply/happly.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one triangular face from ASCII PLY",
+    "family": "hapPLY header-only PLY parser",
+    "family_note": "Independent header-only C++ PLY parser, not an alias of Assimp or OpenMesh."
+  },
+  {
+    "name": "tinyply",
+    "version": "3.0",
+    "license": "Public-Domain",
+    "license_evidence": "https://github.com/ddiakopoulos/tinyply/archive/refs/tags/3.0.tar.gz",
+    "documentation": "https://github.com/ddiakopoulos/tinyply/blob/3.0/README.md",
+    "input_api": "std::ifstream(local filename); tinyply::PlyFile::parse_header/request_properties_from_element/read",
+    "adapter": "adapters/cpp/ascii_ply/tinyply.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "three parsed vertices and one triangular face from ASCII PLY",
+    "family": "tinyply header-only PLY parser",
+    "family_note": "Independent header-only C++ PLY parser, not an alias of Assimp or OpenMesh."
   }
 ]
