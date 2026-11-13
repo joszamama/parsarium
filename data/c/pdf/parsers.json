@@ -279,5 +279,22 @@
     "scope": "PDF page count through Atril libdocument C API",
     "family": "Atril PDF backend over Poppler GLib",
     "family_note": "Atril is an Evince-derived package with its own public libdocument C API and PDF backend. The pinned backend links Poppler GLib; it adds a package input path, not an independent PDF syntax engine. Ubuntu arm64 binaries and official tagged source are pinned; no comparable Homebrew formula requested-install count is available."
+  },
+  {
+    "name": "xreader",
+    "version": "4.6.10",
+    "license": "GPL-2.0",
+    "license_evidence": "Pinned master.mint27 README and COPYING state GNU GPL version 2; public factory header grants version 2 or later",
+    "documentation": "https://github.com/linuxmint/xreader/blob/master.mint27/libdocument/ev-document-factory.h",
+    "format_documentation": "https://github.com/linuxmint/xreader/blob/master.mint27/README.md",
+    "input_api": "ev_init(); g_filename_to_uri(local path); ev_document_factory_get_document(uri, error); ev_document_get_n_pages(document)",
+    "adapter": "adapters/c/pdf/xreader.c",
+    "control": "controls/pdf/two-page.pdf",
+    "expected_output": {
+      "pages": 2
+    },
+    "scope": "PDF page count through source-built Xreader libdocument C API",
+    "family": "Xreader PDF backend over Poppler GLib",
+    "family_note": "Xreader is an Evince-derived package with its own source-built libdocument C API and PDF backend. Its tagged Meson build links poppler-glib for PDF; this is another package input path over the already counted Poppler syntax engine. No comparable Homebrew formula requested-install count exists for Xreader."
   }
 ]

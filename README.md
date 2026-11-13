@@ -30,8 +30,8 @@ no parser exists. See the
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,539 of 1,710 verified package paths have a recorded comparable cell metric;
-171 are unranked; 127 measured values are zero. A recorded zero is not evidence of
+1,539 of 1,711 verified package paths have a recorded comparable cell metric;
+172 are unranked; 127 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -51,6 +51,7 @@ python3 scripts/verify_cpp_http11.py
 brew install gnome-papers
 python3 scripts/verify_c_pdf.py
 python3 scripts/verify_atril_c_pdf.py
+python3 scripts/verify_xreader_c_pdf.py
 python3 scripts/verify_cpp_pdf.py
 python3 scripts/verify_c_svg.py
 python3 scripts/verify_cpp_svg.py
@@ -212,12 +213,12 @@ and builds source releases where needed. Eight leads remain unresolved, so the
 standard library documents no HTTP parser. See the
 [cell record](data/cpp/http11/cell.json) for search limits and uncertainty.
 
-The C × PDF batch verifies **17/20 third-party package paths** from C call sites:
+The C × PDF batch verifies **18/20 third-party package paths** from C call sites:
 Poppler GLib, qpdf's C API, MuPDF, Ghostscript, PDFio, PDFium, Vanilla.PDF,
 tspdf, ImageMagick, GraphicsMagick, libvips, pdf_oxide, LibreOfficeKit, Evince,
-unpdf's C ABI, GNOME Papers, and Atril. The first twelve and unpdf return one parsed page from the valid local control;
-LibreOfficeKit, Evince, GNOME Papers, and Atril import a separate valid two-page PDF and return two parts
-or pages, respectively. Evince, GNOME Papers, and Atril share Poppler's PDF engine; unpdf shares its
+unpdf's C ABI, GNOME Papers, Atril, and Xreader. The first twelve and unpdf return one parsed page from the valid local control;
+LibreOfficeKit, Evince, GNOME Papers, Atril, and Xreader import a separate valid two-page PDF and return two parts
+or pages, respectively. Evince, GNOME Papers, Atril, and Xreader share Poppler's PDF engine; unpdf shares its
 Rust parser family.
 qpdf requires a C++ linker for its C interface; PDFio
 builds from pinned source. PDFium and Vanilla.PDF use
@@ -226,7 +227,8 @@ Graphics is independently verified as a macOS platform runtime API and is kept
 outside the third-party ranking. LibreOfficeKit's official distribution and C
 headers are hash pinned. unpdf's C ABI builds from a pinned crates.io release
 with its bundled Cargo.lock. Atril is verified in a pinned Ubuntu arm64
-container. Ten of the seventeen paths have comparable Homebrew
+container; Xreader is built there from its tagged source. Ten of the eighteen
+paths have comparable Homebrew
 formula requested-install counts in the fixed 365-day window. LibreOffice's
 416,680 Homebrew cask install events are an auxiliary application-wide signal
 and do not enter the formula ranking. See the
