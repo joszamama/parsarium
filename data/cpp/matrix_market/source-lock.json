@@ -357,5 +357,24 @@
       }
     ],
     "build_note": "Official v2.1.2 header-only release and exact tagged dependencies tatami 4.0.3, subpar 0.4.0, eminem 1.2.3, byteme 2.1.4, and sanisizer 0.2.2 are hash-pinned. Compile a C++17 local-file adapter with zlib. tatami_mtx wraps the eminem parser and shares its underlying parser family."
+  },
+  "seldon": {
+    "release": "5.2+",
+    "source_build": "header_only",
+    "archive_format": "bz2",
+    "archive_root": "SELDON",
+    "extract_sentinel": "SeldonLib.hxx",
+    "local_source_archive": "sources/seldon-5.2plus-a8d60322.tar.bz2",
+    "license": "LGPL-2.1-or-later",
+    "source_url": "https://www.math.u-bordeaux.fr/~durufle/seldon.tar.bz2",
+    "source_sha256": "a8d6032293f6a68e41c9fe70ab6e594d0cb2701cead26e7fbd16586e56e5479a",
+    "source_members": {
+      "SELDON/SeldonLib.hxx": "618abb0ec1c4be802d58c8b4821e9643b3924632a5260b57b7271fb27f214115",
+      "SELDON/matrix_sparse/IOMatrixMarket.hxx": "5b97df5cb153d5787bdba1a927518adfb775b24d234488f6044546d6292e183d",
+      "SELDON/matrix_sparse/IOMatrixMarket.cxx": "13a78430a9511d9642700a029ceb33a6f6323a93ffce0a7ebcb86e6092b337d1",
+      "SELDON/version": "a02933e3a9c4e9f10e9deda89d043609ed65843fef151d7c6b5f1e2789d2aaa4",
+      "SELDON/license": "9ccf26cfe845e0eb8bb58053e47366e7ab6b697ae010f7650978d4b71b7d1fc1"
+    },
+    "build_note": "Official author download is labeled latest and has an internal version file 5.2+. The exact 714 KiB LGPL source snapshot is bundled and SHA-256 pinned because the download URL is mutable. Header-only SeldonLib.hxx compiled with C++17; -iquote prevents SELDON/version shadowing the standard <version> header. Suppress two pre-existing unused-variable warning classes in released headers."
   }
 }

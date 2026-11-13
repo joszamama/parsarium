@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 import json
 import platform
 import shlex
+import shutil
 import subprocess
 import tarfile
 import tempfile
@@ -51,11 +52,17 @@ def main() -> None:
     for parser in parsers:
         name = parser["name"]
         source = sources[name]
-        archive = cache / f"{name}-{source['release']}{'.zip' if source.get('source_build') == 'lis' else '.tar.gz'}"
+        suffix = {"zip": ".zip", "bz2": ".tar.bz2"}.get(source.get("archive_format"), ".tar.gz")
+        archive = cache / f"{name}-{source['release']}{suffix}"
         if not archive.exists() or digest(archive) != source["source_sha256"]:
-            with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium Matrix Market verifier"}), timeout=120) as response, archive.open("wb") as output:
-                while chunk := response.read(1024 * 1024):
-                    output.write(chunk)
+            if source.get("local_source_archive"):
+                local_archive = ROOT / source["local_source_archive"]
+                assert digest(local_archive) == source["source_sha256"]
+                shutil.copyfile(local_archive, archive)
+            else:
+                with urlopen(Request(source["source_url"], headers={"User-Agent": "Parsarium Matrix Market verifier"}), timeout=120) as response, archive.open("wb") as output:
+                    while chunk := response.read(1024 * 1024):
+                        output.write(chunk)
         assert digest(archive) == source["source_sha256"]
         if source.get("source_build") == "lis":
             install, built_lib_sha256 = prepare_lis(source, archive, cache)
@@ -76,7 +83,8 @@ def main() -> None:
                         member_path = Path(member.name)
                         assert not member_path.is_absolute() and ".." not in member_path.parts
                         assert member.name == root or member.name.startswith(root + "/")
-                    if not (cache / root / "include").exists():
+                    sentinel = source.get("extract_sentinel", "include")
+                    if not (cache / root / sentinel).exists():
                         tar.extractall(cache, filter="data")
         for dependency in source.get("dependencies", []):
             dep_archive = cache / f"{dependency['name']}-{dependency['release']}.tar.gz"
@@ -123,6 +131,11 @@ def main() -> None:
                        *[flag for dep in source["dependencies"]
                          for flag in ("-isystem", str(cache / dep["archive_root"] / "include"))],
                        str(ROOT / parser["adapter"]), "-lz", "-o", str(target / name)]
+        elif name == "seldon":
+            command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-Wno-unused-parameter", "-Wno-unused-but-set-variable",
+                       "-iquote", str(cache / source["archive_root"]),
+                       str(ROOT / parser["adapter"]), "-o", str(target / name)]
         elif name == "eminem":
             command = ["c++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(cache / source["archive_root"] / "include"),

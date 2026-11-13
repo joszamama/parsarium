@@ -279,5 +279,25 @@
     "scope": "2x3 real coordinate matrix and entry (1,3) = -2",
     "family": "eminem Matrix Market parser",
     "family_note": "tatami_mtx adds a tatami matrix wrapper around the eminem parser; it is a distinct package path sharing that parser family."
+  },
+  {
+    "name": "seldon",
+    "version": "5.2+",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://www.math.u-bordeaux.fr/~durufle/seldon.tar.bz2",
+    "documentation": "https://www.math.u-bordeaux.fr/~durufle/seldon/functions_matrix.html",
+    "input_api": "Seldon::ReadMatrixMarket(local filename, Matrix<double, General, ArrayRowSparse>&)",
+    "adapter": "adapters/cpp/matrix_market/seldon.cpp",
+    "control": "controls/matrix_market/real-general.mtx",
+    "expected_output": {
+      "rows": 2,
+      "cols": 3,
+      "entry_1_1": 1.5,
+      "entry_1_3": -2.0,
+      "entry_2_2": 4.0
+    },
+    "scope": "2x3 real general coordinate matrix and all three nonzero values",
+    "family": "Seldon native Matrix Market reader",
+    "family_note": "Seldon defines its own Matrix Market reader in matrix_sparse/IOMatrixMarket.cxx; the verified release snapshot is bundled because its official latest-release URL can change."
   }
 ]

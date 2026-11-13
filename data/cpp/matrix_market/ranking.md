@@ -1,6 +1,6 @@
 # C++ × Matrix Market: verified parser ranking
 
-15 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
+16 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not Matrix Market-specific use. Compare only within C++.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -19,6 +19,7 @@
 | unranked | [PIGO](https://github.com/GT-TDAlab/PIGO/blob/v0.6/tests/coo/test_weight_mtx.cpp) | 0.6 | unknown | three 1-based entries and value −2 at (1,3); reports dimensions 3×4 for a 2×3 file | PIGO native COO reader |
 | unranked | [SuperLU_DIST](https://github.com/xiaoyeli/superlu_dist/blob/v9.3.0/README.md) | 9.3.0 | unknown | 3×3 symmetric matrix, three diagonal entries, entry (3,3) = 3 | SuperLU dreadMM reader lineage |
 | unranked | [tatami_mtx](https://github.com/tatami-inc/tatami_mtx/blob/v2.1.2/README.md) | 2.1.2 | unknown | 2×3 real coordinate matrix and entry (1,3) = −2 | eminem Matrix Market parser |
+| unranked | [Seldon](https://www.math.u-bordeaux.fr/~durufle/seldon/functions_matrix.html) | 5.2+ | unknown | 2×3 real general coordinate matrix and all three nonzero values | Seldon native Matrix Market reader |
 
 Formula-name hits are leads rather than parser proof. The SuiteSparse and Lis paths each share an underlying parser with their C call sites. Lis accepts the square symmetric control and rejects the rectangular general control. The C++ standard library has no documented Matrix Market parser. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -39,3 +40,5 @@ PIGO v0.6 parsed the three weighted coordinate entries in the valid 2×3 real ge
 SuperLU_DIST 9.3.0 parsed the valid square control through `dreadMM_dist(FILE *)`. It is a separate released package and build whose reader shares the SuperLU dreadMM lineage. Its C and C++ adapters share one native implementation. No comparable Homebrew requested-install count is available, so it remains unranked.
 
 tatami_mtx 2.1.2 parsed the valid 2×3 control through `load_matrix_from_text_file`. It adds a tatami matrix wrapper around eminem and shares that underlying parser. All five tagged header dependencies are pinned. No comparable Homebrew requested-install count is available, so it remains unranked.
+
+Seldon 5.2+ parsed the local control through `ReadMatrixMarket(filename, Matrix&)`. The author-hosted URL is labeled latest release and can change, so the exact 714 KiB LGPL source archive is included under `sources/` and hash-pinned. The extracted release reports `5.2+` in its version file. No comparable Homebrew requested-install count exists; Seldon remains unranked.
