@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T03:46:37.306882+00:00",
+  "checked_at_utc": "2026-11-13T03:52:52.456711+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/cpp/ascii_ply/source-lock.json",
@@ -87,6 +87,16 @@
       "source_header_sha256": "e79c24fc8b6a54fbb4f3bedf8baf8ed695cd0e688bb931fc309488b2d9654f5c",
       "submodule_source_sha256": "61c6d112ac011408eab2154f145a9b71e188fa4b60cf3903b95e08f3a0d1fb17",
       "submodule_header_sha256": "b6b63315d90745e465b758df2e716aa14d7078030e26bcb0532e15b3e5de2b3f"
+    },
+    "trimesh2": {
+      "source_sha256": "a0223352e535159d6485a07df14fe721cd5be42f2c68deec13bc8f72c96f6459",
+      "installed_files": {},
+      "source_header_sha256": "120b2b65b4357d9a9cbb9a91f70b3a8a55f270aea6e570dd27104d29da2b5516"
+    },
+    "vcglib": {
+      "source_sha256": "e49fc9342d5476b3e39a5e1939b965b57c91d7a17b4f97b8c5eaf01228b16cf0",
+      "installed_files": {},
+      "source_header_sha256": "d5fb43ce9134a86f91201edbaea474ac5285ad03e98d2abb2fc50cc5568104fc"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -271,6 +281,40 @@
       "control": "controls/ascii_ply/triangle.ply",
       "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function -ffunction-sections -fdata-sections -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/geometry-central-1.1.0/include -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/geometry-central-1.1.0/deps/happly -isystem /opt/homebrew/opt/eigen/include/eigen3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/geometry_central.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/geometry-central-1.1.0/src/surface/simple_polygon_mesh.cpp -Wl,-dead_strip -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/geometry-central",
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/geometry-central /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "trimesh2",
+      "version": "2022.03.04",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -ffunction-sections -fdata-sections -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/trimesh2-2022.03.04/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/trimesh2.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/trimesh2-2022.03.04/libsrc/TriMesh_io.cc /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/trimesh2-2022.03.04/libsrc/TriMesh_tstrips.cc -Wl,-dead_strip -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/trimesh2",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/trimesh2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "vcglib",
+      "version": "2025.07",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "c++ -std=c++17 -O2 -Wall -Wextra -Werror -isystem /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/vcglib-2025.07 -isystem /opt/homebrew/opt/eigen/include/eigen3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/vcglib.cpp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-native-ascii-ply/vcglib-2025.07/wrap/ply/plylib.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/vcglib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/ascii_ply/target/vcglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "faces": 1,

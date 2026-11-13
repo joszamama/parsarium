@@ -231,5 +231,42 @@
       "/opt/homebrew/opt/eigen/include/eigen3/Eigen/Core": "267988e70f30e9a4e27b41541e162c4d0610480f63649994156c135d8a1e658f"
     },
     "build_note": "Official tagged v1.1.0 source plus the exact hapPLY submodule commit from its Git tree, both archive-hash pinned. Compile the tagged SimplePolygonMesh source with pinned hapPLY header and Eigen 5.0.1; link only the mesh I/O call path with dead-strip. Geometry Central wraps hapPLY for PLY parsing."
+  },
+  "trimesh2": {
+    "release": "2022.03.04",
+    "tag": "2022.03.04",
+    "source_build": "trimesh2",
+    "license": "GPL-2.0-only",
+    "source_url": "https://github.com/Forceflow/trimesh2/archive/refs/tags/2022.03.04.tar.gz",
+    "source_sha256": "a0223352e535159d6485a07df14fe721cd5be42f2c68deec13bc8f72c96f6459",
+    "header_member": "trimesh2-2022.03.04/include/TriMesh.h",
+    "source_members": {
+      "trimesh2-2022.03.04/include/TriMesh.h": "120b2b65b4357d9a9cbb9a91f70b3a8a55f270aea6e570dd27104d29da2b5516",
+      "trimesh2-2022.03.04/libsrc/TriMesh_io.cc": "4541ea773ade074cbbfd9c412360f9d219a3eeb7cd76b7e8d5d8405efbb23d1d",
+      "trimesh2-2022.03.04/libsrc/TriMesh_tstrips.cc": "6d503d2b50223e3f84b39c2bfb1210f9b9f314a6df90b5f7edafd2018b1828c2",
+      "trimesh2-2022.03.04/COPYING": "ad94420a2108dd490a7613588ca7ae808887f7d31cd31a51bd97d735e7d1b6f6",
+      "trimesh2-2022.03.04/README.md": "ba7905ee9edd06711bddda7b8af5a402b7f1e4ea7edabfaa552bd90572a19cf1"
+    },
+    "build_note": "Official release archive and selected members hash-pinned. Build TriMesh_io and TriMesh_tstrips from source; dead-strip unused write paths. Native local-file read handles PLY."
+  },
+  "vcglib": {
+    "release": "2025.07",
+    "tag": "2025.07",
+    "source_build": "vcglib",
+    "license": "GPL-3.0-only",
+    "source_url": "https://github.com/cnr-isti-vclab/vcglib/archive/refs/tags/2025.07.tar.gz",
+    "source_sha256": "e49fc9342d5476b3e39a5e1939b965b57c91d7a17b4f97b8c5eaf01228b16cf0",
+    "header_member": "vcglib-2025.07/wrap/io_trimesh/import_ply.h",
+    "source_members": {
+      "vcglib-2025.07/wrap/io_trimesh/import_ply.h": "d5fb43ce9134a86f91201edbaea474ac5285ad03e98d2abb2fc50cc5568104fc",
+      "vcglib-2025.07/wrap/ply/plylib.cpp": "18c63eec842edf103e083fc835615429de2878481821807dc4f0c2c5898f6999",
+      "vcglib-2025.07/wrap/ply/plylib.h": "14f9e3c66ca4e8887c576698665247d48de6d3ac34eb747e9b2fa77be3ebeaea",
+      "vcglib-2025.07/apps/sample/trimesh_attribute_ply/trimesh_attribute_ply.cpp": "6739a922bbe69ff89478b3494e12b14fe8e53102e70a3686ee3cae5af26e06eb",
+      "vcglib-2025.07/LICENSE.txt": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2"
+    },
+    "toolchain_files": {
+      "/opt/homebrew/opt/eigen/include/eigen3/Eigen/Core": "267988e70f30e9a4e27b41541e162c4d0610480f63649994156c135d8a1e658f"
+    },
+    "build_note": "Official tagged source archive and PLY importer implementation hash-pinned; link bundled plylib.cpp and pinned Eigen header."
   }
 }

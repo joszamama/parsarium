@@ -1,6 +1,6 @@
 # C++ × ASCII PLY: verified parser ranking
 
-12 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
+14 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within C++; packages without a comparable Homebrew metric remain unranked.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -15,6 +15,8 @@
 | unranked | [libigl](https://libigl.github.io/dox/readPLY_8h.html) | 2.6.4 | unknown | three vertex positions and one triangle face matrix | libigl readPLY over bundled tinyply 2.3.2 |
 | unranked | [plywoot](https://github.com/ton/PLYwoot/blob/v0.3.0/README.md) | 0.3.0 | unknown | vertices and face indices | PLYwoot native ASCII parser |
 | unranked | [turboply](https://github.com/guangxi-research/turboply/blob/v1.0.6/README.md) | 1.0.6 | unknown | vertices and face indices | TurboPLY native reader |
+| unranked | [vcglib](https://github.com/cnr-isti-vclab/vcglib/blob/2025.07/apps/sample/trimesh_attribute_ply/trimesh_attribute_ply.cpp) | 2025.07 | unknown | three vertices and a triangle face with indices | VCGlib native plylib parser |
+| unranked | [trimesh2](https://github.com/Forceflow/trimesh2/blob/2022.03.04/README.md) | 2022.03.04 | unknown | three vertices and a triangle face with indices | TriMesh2 native PLY reader |
 | unranked | [geometry-central](https://geometry-central.net/surface/utilities/simple_polygon_mesh/) | 1.1.0 | unknown | mesh vertices and polygon indices | Geometry Central over hapPLY |
 
-Assimp C and C++ APIs share one native loader. libigl exposes its own matrix API but bundles tinyply 2.3.2, while standalone tinyply is pinned at 3.0. Geometry Central wraps a pinned hapPLY submodule. PCL and VTK use separate PLY readers; VTK bundles vtkPLY. Formula-name hits are leads rather than parser proof. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
+Assimp C and C++ APIs share one native loader. libigl exposes its own matrix API but bundles tinyply 2.3.2, while standalone tinyply is pinned at 3.0. Geometry Central wraps a pinned hapPLY submodule. TriMesh2 uses its native PLY reader and is a fork of Szymon Rusinkiewicz’s original TriMesh2. VCGlib ImporterPLY uses its bundled plylib implementation. PCL and VTK use separate PLY readers; VTK bundles vtkPLY. Formula-name hits are leads rather than parser proof. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.

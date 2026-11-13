@@ -248,5 +248,49 @@
     "scope": "three mesh vertices and one polygon with three indices",
     "family": "Geometry Central SimplePolygonMesh over hapPLY",
     "family_note": "Tagged Geometry Central v1.1.0 uses pinned hapPLY submodule commit 88f79725; this shares the hapPLY parser family with the standalone happly 1.1.0 path."
+  },
+  {
+    "name": "trimesh2",
+    "version": "2022.03.04",
+    "license": "GPL-2.0-only",
+    "license_evidence": "https://github.com/Forceflow/trimesh2/blob/2022.03.04/COPYING",
+    "documentation": "https://github.com/Forceflow/trimesh2/blob/2022.03.04/README.md",
+    "input_api": "trimesh::TriMesh::read(local filename)",
+    "adapter": "adapters/cpp/ascii_ply/trimesh2.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangle face with parsed indices from ASCII PLY",
+    "family": "TriMesh2 native PLY reader",
+    "family_note": "TriMesh2 parses PLY in its own TriMesh_io.cc; this Forceflow release is a fork of Szymon Rusinkiewicz TriMesh2."
+  },
+  {
+    "name": "vcglib",
+    "version": "2025.07",
+    "license": "GPL-3.0-only",
+    "license_evidence": "https://github.com/cnr-isti-vclab/vcglib/blob/2025.07/LICENSE.txt",
+    "documentation": "https://github.com/cnr-isti-vclab/vcglib/blob/2025.07/apps/sample/trimesh_attribute_ply/trimesh_attribute_ply.cpp",
+    "input_api": "vcg::tri::io::ImporterPLY<Mesh>::Open(mesh, local filename)",
+    "adapter": "adapters/cpp/ascii_ply/vcglib.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangle face with parsed indices from ASCII PLY",
+    "family": "VCGlib native plylib parser",
+    "family_note": "VCGlib ImporterPLY uses its bundled plylib implementation; this is not an alias of TriMesh2 or RPly."
   }
 ]

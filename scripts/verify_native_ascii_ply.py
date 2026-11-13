@@ -132,6 +132,26 @@ def verify(ecosystem: str) -> None:
                     assert sha256(header_bytes).hexdigest() == sub["header_sha256"]
                 (include_dir / "deps/happly/happly.h").write_bytes(header_bytes)
                 assert digest(include_dir / "deps/happly/happly.h") == sub["header_sha256"]
+            if source.get("source_build") == "trimesh2":
+                include_dir = cache / f"trimesh2-{source['release']}"
+                if not (include_dir / "libsrc/TriMesh_io.cc").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"trimesh2-{source['release']}" or member.name.startswith(f"trimesh2-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
+            if source.get("source_build") == "vcglib":
+                include_dir = cache / f"vcglib-{source['release']}"
+                if not (include_dir / "wrap/ply/plylib.cpp").exists():
+                    for member in tar.getmembers():
+                        member_path = Path(member.name)
+                        assert not member_path.is_absolute() and ".." not in member_path.parts
+                        assert member.name == f"vcglib-{source['release']}" or member.name.startswith(f"vcglib-{source['release']}/")
+                    tar.extractall(cache, filter="data")
+                for member, expected in source["source_members"].items():
+                    assert digest(cache / member) == expected
         if not source.get("header_only") and not source.get("source_build"):
             assert source["installed_revision"] in run(["brew", "list", "--versions", source["formula"]]).split()
             for path, expected in source["installed_files"].items():
@@ -211,6 +231,21 @@ def verify(ecosystem: str) -> None:
                        str(ROOT / parser["adapter"]),
                        str(include_dir / "src/surface/simple_polygon_mesh.cpp"),
                        "-Wl,-dead_strip", "-o", str(target / name)]
+        elif source.get("source_build") == "trimesh2":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-ffunction-sections", "-fdata-sections",
+                       "-isystem", str(include_dir / "include"),
+                       str(ROOT / parser["adapter"]),
+                       str(include_dir / "libsrc/TriMesh_io.cc"),
+                       str(include_dir / "libsrc/TriMesh_tstrips.cc"),
+                       "-Wl,-dead_strip", "-o", str(target / name)]
+        elif source.get("source_build") == "vcglib":
+            command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
+                       "-isystem", str(include_dir),
+                       "-isystem", "/opt/homebrew/opt/eigen/include/eigen3",
+                       str(ROOT / parser["adapter"]),
+                       str(include_dir / "wrap/ply/plylib.cpp"),
+                       "-o", str(target / name)]
         elif source.get("header_only"):
             command = [compiler, language, "-O2", "-Wall", "-Wextra", "-Werror",
                        "-isystem", str(include_dir), str(ROOT / parser["adapter"]),
