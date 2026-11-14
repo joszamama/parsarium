@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T20:43:45.710943+00:00",
+  "checked_at_utc": "2026-11-14T21:07:11.699759+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -83,6 +83,14 @@
         "/tmp/parsarium-pdal-c-env/lib/libpdalc.2.10.0.dylib": "3754c7fedd877eac84345d58d4d016287d4f5599e4ed8dce1a570a4ed4e3b760",
         "/tmp/parsarium-pdal-c-env/lib/libpdalcpp.20.2.0.dylib": "7623d20e8530ae78691f2f7ce456c772f4c56f9c20b63d719483434c1c21174f"
       }
+    },
+    "blukpast": {
+      "source_sha256": "8bfdf2017fd4f2e0e5e5002613bf9f14c07fba8e01ab879ae42628ed9e0e1368",
+      "release_commit": "d9b648de788dc0c56e8ef3736011978b286a7fd2",
+      "adapter_sha256": "00ba7f81b7123fc7ac2b41dea25fd461aa1ff1d6cf3c1fc021099a9532fc505b",
+      "compiler": "Homebrew clang version 23.1.4",
+      "architecture": "arm64",
+      "build_scope": "Tagged upstream PLY loader linked to a C harness that captures the GPU upload arguments; full Vulkan engine not built."
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -266,6 +274,26 @@
         "triangles": 0
       },
       "pass": true
+    },
+    {
+      "package": "blukpast",
+      "version": "1.0.6",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "clang -arch x86_64 -std=gnu2x -O2 -Wall -Wextra -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-blukpast-_hmgbwdn/blukpast-1.0.6 -I/opt/homebrew/Cellar/vulkan-loader/1.4.363.0/../../../opt/vulkan-headers/include -I/opt/homebrew/Cellar/glfw/3.5.1/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/blukpast.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-blukpast-_hmgbwdn/blukpast-1.0.6/loaders/bkp_loader_ply.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-blukpast-_hmgbwdn/blukpast-ply",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-blukpast-_hmgbwdn/blukpast-ply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "indices": 3,
+        "meshes": 1,
+        "face": [
+          0,
+          1,
+          2
+        ],
+        "second_x": 1.0
+      },
+      "pass": true,
+      "note": "Actual upstream C loader parsed the supplied ASCII PLY; only GPU upload and model storage were replaced by observation functions."
     }
   ],
   "runtime": []

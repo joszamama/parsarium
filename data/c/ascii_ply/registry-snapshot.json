@@ -194,6 +194,14 @@
       "pdal_version": "2.10.2",
       "pdal_source_sha256": "cd85b00503a596107eb67be6e837f6cd679db2d1cb7d1121f4c426563a5f0723",
       "license_evidence": "https://github.com/PDAL/CAPI/blob/v2.2.3/LICENSE.md"
+    },
+    "blukpast": {
+      "version": "1.0.6",
+      "license": "LGPL-2.1",
+      "license_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/LICENSE",
+      "source_url": "https://github.com/wypifu/blukpast/archive/refs/tags/v1.0.6.tar.gz",
+      "source_sha256": "8bfdf2017fd4f2e0e5e5002613bf9f14c07fba8e01ab879ae42628ed9e0e1368",
+      "source_reference": "d9b648de788dc0c56e8ef3736011978b286a7fd2"
     }
   },
   "popularity_metric": {
@@ -255,6 +263,13 @@
       "pdal_c": {
         "install_on_request_365d": null,
         "note": "No Homebrew formula for pdal-c. The PDAL C++ formula is a different package and is not used as a comparable metric."
+      },
+      "blukpast": {
+        "install_on_request_365d": null,
+        "note": "No exact Homebrew formula or comparable requested-install count; zero GitHub stars at discovery are auxiliary project-interest only.",
+        "auxiliary_github_stars": 0,
+        "auxiliary_url": "https://api.github.com/repos/wypifu/blukpast",
+        "auxiliary_observed_at_utc": "2026-11-14"
       }
     }
   },
@@ -332,6 +347,12 @@
       "url": "https://github.com/PDAL/CAPI/blob/v2.2.3/README.md",
       "format_evidence": "https://pdal.io/en/latest/stages/readers.ply.html",
       "disposition": "Verified pdal-c 2.2.3 C pipeline over PDAL 2.10.2 readers.ply against valid ASCII PLY point count."
+    },
+    {
+      "name": "blukpast",
+      "url": "https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h",
+      "format_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/bkp_loader_ply.c",
+      "disposition": "Tagged upstream C bkpLoadPly passed the local ASCII triangle using a GPU capture harness; full Vulkan engine not built."
     }
   ]
 }

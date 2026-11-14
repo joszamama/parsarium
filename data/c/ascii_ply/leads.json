@@ -180,13 +180,13 @@
   },
   {
     "name": "wypifu/blukpast",
-    "status": "unresolved",
+    "status": "verified",
     "source": "https://github.com/wypifu/blukpast",
     "release": "v1.0.6",
     "release_commit": "d9b648de788dc0c56e8ef3736011978b286a7fd2",
     "license_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/LICENSE",
     "api_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h",
-    "reason": "Tagged LGPL-2.1 C package documents bkpLoadPly(adapter, local path, model, scratchGroupId). Source inspection confirms ASCII vertex and face parsing before GPU upload. On macOS arm64, full source build failed first at upstream -msse4.1 and then at unconditional x86 immintrin.h inclusion after removing that build flag in a temporary checkout; Docker daemon unavailable for Linux x86 replay. No successful local API control; not counted. GitHub search observed zero stars, only an auxiliary adoption signal."
+    "reason": "Tagged LGPL-2.1 C bkpLoadPly API parsed the valid local ASCII triangle under an x86_64 Rosetta source-level replay. The observation harness captures parsed vertices and face indices at the GPU upload boundary; no full Vulkan engine integration is claimed. The initially failed native arm64 build remains documented in cell uncertainty. GitHub zero stars are auxiliary only."
   },
   {
     "name": "jing-interactive/melo",

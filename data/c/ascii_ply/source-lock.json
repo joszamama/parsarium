@@ -238,5 +238,25 @@
       "lib/libpdalcpp.20.2.0.dylib": "7623d20e8530ae78691f2f7ce456c772f4c56f9c20b63d719483434c1c21174f"
     },
     "build_note": "Exact 60-package conda-forge osx-arm64 artifact lock fixes pdal-c 2.2.3 and libpdal-core 2.10.2. C API pipeline uses PDAL native readers.ply and returns three points from the valid ASCII control; its PointView does not report a mesh for this input."
+  },
+  "blukpast": {
+    "release": "1.0.6",
+    "license": "LGPL-2.1",
+    "source_build": "upstream_ply_loader_with_gpu_capture_harness",
+    "source_url": "https://github.com/wypifu/blukpast/archive/refs/tags/v1.0.6.tar.gz",
+    "source_sha256": "8bfdf2017fd4f2e0e5e5002613bf9f14c07fba8e01ab879ae42628ed9e0e1368",
+    "release_commit": "d9b648de788dc0c56e8ef3736011978b286a7fd2",
+    "source_members": {
+      "blukpast-1.0.6/LICENSE": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "blukpast-1.0.6/README.md": "4f2db721b74b13ccc88a6ec18060a8bc3b90ae00144145e469b9291908c7c3fc",
+      "blukpast-1.0.6/loaders/bkp_loader_ply.c": "9929cc33ead0db1e451fe80ced1c313de7c2c132f67b98fdfae556efe97fd32f",
+      "blukpast-1.0.6/loaders/include/bkp_loaders.h": "90d01c3d94cb7f46c39482e87e634f15c203f083f3328e20970aebd33c0c624d",
+      "blukpast-1.0.6/include/blukpast.h": "5ad491512d8446bc9577fcabe4606c3178b9c1e8b4a5cd0291e74b52c6f1dbb1",
+      "blukpast-1.0.6/math/include/bkp_vect.h": "2849c676c1f02be547450612810899e5be0749d28e4a939190f4aba5fc19a39b",
+      "blukpast-1.0.6/math/include/bkp_vertex_geometries.h": "e93937d579ed8510c816a626b2de25d89c75cfbf5de37eca4cddb6044b69eafa",
+      "blukpast-1.0.6/system/include/bkp_log.h": "d42d08fdf0da8a1bff72cb04d8b519f48dd99363a1e9873f9c39fa47a6ea8eae"
+    },
+    "adapter_sha256": "00ba7f81b7123fc7ac2b41dea25fd461aa1ff1d6cf3c1fc021099a9532fc505b",
+    "build_note": "Build unmodified tagged PLY loader source and the C observation harness for x86_64. The harness implements the GPU upload and model storage boundaries without a graphics device; all PLY header, vertex, face and index parsing runs in upstream code. macOS arm64 executes the x86_64 binary through Rosetta. Full Vulkan engine is outside this control replay."
   }
 }

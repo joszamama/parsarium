@@ -230,5 +230,29 @@
     "scope": "ASCII PLY point-cloud subset: three parsed points through explicit readers.ply stage; no mesh exposed in this view",
     "family": "PDAL native PLY reader via pdal-c C API",
     "family_note": "pdal-c is a separately released BSD-3-Clause C API wrapper over PDAL 2.10.2. The underlying syntax parser is PDAL readers.ply; do not count it as an independent engine from PDAL."
+  },
+  {
+    "name": "blukpast",
+    "version": "1.0.6",
+    "license": "LGPL-2.1",
+    "license_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/LICENSE",
+    "documentation": "https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h",
+    "input_api": "bkpLoadPly(GPU adapter, local PLY path, BkpModel output, scratch group); harness captures parsed geometry at GPU upload boundary",
+    "adapter": "adapters/c/ascii_ply/blukpast.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "indices": 3,
+      "meshes": 1,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle with three parsed positions and face indices; upstream syntax parser with GPU upload replaced by observation harness",
+    "family": "Blukpast native C PLY loader",
+    "family_note": "Distinct tagged C package with native PLY syntax parsing. The harness replaces only GPU upload and model storage calls; no full Vulkan engine is built. This row is a source-level C API replay, not a GPU integration test."
   }
 ]
