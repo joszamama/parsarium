@@ -166,5 +166,22 @@
       "CyberMeshGenerator-0.5.0/src/io/dispatch.cpp": "a1e0bbf8ce5f05cea91ca03e799cbed1a5f67368b4744ef7af287f63aafcde64"
     },
     "build_note": "Build tagged MIT source as shared C++ core and C ABI with CPU-only defaults. C11 adapter links libcmg_c and reads a local ASCII PLY triangle through cmg_read_plc."
+  },
+  "brlcad": {
+    "release": "7.46.0",
+    "license": "LGPL-2.1-only AND MIT",
+    "source_build": "brlcad",
+    "source_url": "https://brlcad.org/download/brlcad-7.46.0.tar.gz",
+    "source_sha256": "7ac576889e3ea83a96eb1f79685cbb47c1314d5a07b57ff55665b229c2ce996c",
+    "bext_commit": "42d8d7ca57f9d2f61192b41f0b41a731f1ba6c47",
+    "source_members": {
+      "brlcad-7.46.0/COPYING": "1c84c09ab7414e56b2d1a8b2b7011306fcf9f6d2bdafc74581e42e733f73bcc3",
+      "brlcad-7.46.0/include/gcv/api.h": "54baa68bd598d40a0a380b4ef044d26ae64a15f86779b802815f56f941b6f306",
+      "brlcad-7.46.0/src/libgcv/plugins/ply/ply_read.c": "e112dcf3cd7c88970c660cc96e0200cd242b0bf41375e669e3ff877bc81e3cbe",
+      "brlcad-7.46.0/src/libgcv/plugins/ply/rply.c": "a8ab4576417ac3ff2b1230ab607fcc828e22c99b455a592798a648ef3cef6e22",
+      "brlcad-7.46.0/src/libgcv/plugins/ply/rply_license.txt": "0ea6ddfb984223c844b4183c2cc6edf85bda4852270c78916990b804cd5f887a",
+      "brlcad-7.46.0/src/libgcv/plugins/ply/CMakeLists.txt": "e3e2be49b483daa71709ddc53485c200cc0d0d0db728ca6d8ec7ed7470ebcd93"
+    },
+    "build_note": "Build gcv-ply with BRL-CAD 7.46.0 and its pinned bext dependency commit. Disable optional BRLCAD_EXTRA dependencies in bext. Its PLY plugin bundles RPly 1.1.4 and defaults to a 1000 coordinate scale (meters to millimeters)."
   }
 }

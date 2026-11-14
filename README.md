@@ -9,12 +9,12 @@ does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 8 and PHP × ASCII PLY has 0.
+verified third-party paths; C × ASCII PLY has 9 and PHP × ASCII PLY has 0.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,476 of 1,616 verified package paths have a recorded comparable cell metric;
-140 are unranked; 122 measured values are zero. A recorded zero is not evidence of
+1,476 of 1,617 verified package paths have a recorded comparable cell metric;
+141 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1174,8 +1174,8 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): eight verified package
-  paths, 12 below the working goal. F3D 4.0.1 parsed the triangle through its
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): nine verified package
+  paths, 11 below the working goal. F3D 4.0.1 parsed the triangle through its
   C binding and ranks second among packages with comparable Homebrew requested
   installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
   triangle through its pinned C single-header API; it has no comparable Homebrew metric.
@@ -1187,7 +1187,7 @@ or quality judgment.
   restricts sale. Four supplementary [GitHub search windows](data/c/ascii_ply/supplementary-search.json)
   added 34 leads. Three documented C readers lack a versioned upstream release;
   MeshLib's pinned license is non-open-source and simpleOCCTVP only exports PLY.
-  BRL-CAD libgcv remains an unverified, documented C PLY import lead.
+  BRL-CAD libgcv 7.46.0 also passed the control through its C import API. Its native PLY filter bundles RPly 1.1.4 and has no comparable Homebrew metric. Reproduce this path with `python3 scripts/verify_brlcad_ascii_ply.py`.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption

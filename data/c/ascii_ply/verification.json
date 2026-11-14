@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-13T16:07:53.950441+00:00",
+  "checked_at_utc": "2026-11-14T20:33:06.303723+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -58,6 +58,12 @@
       "source_sha256": "4d4ae94ed9a56a538f3c0a5fa1dd65a25619ed4d405077d4af10b0d9d49f2bd4",
       "installed_files": {},
       "source_header_sha256": "e719d1a93ecacc1b73879278a12cff673da5538d8511732da061e64f5dc81b6e"
+    },
+    "brlcad": {
+      "source_sha256": "7ac576889e3ea83a96eb1f79685cbb47c1314d5a07b57ff55665b229c2ce996c",
+      "bext_commit": "42d8d7ca57f9d2f61192b41f0b41a731f1ba6c47",
+      "libgcv_sha256": "70f0a652c1449031497c1dd1d7b21217c4364ae73cabce925c794cb89dd4b410",
+      "gcv_ply_plugin_sha256": "af0fed287ec6dda097d794669c16bb6cdbfee2ff826ff79237b9f48398c268bc"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -188,6 +194,26 @@
         "vertices": 3,
         "faces": 1,
         "vertex_1_x": 1.0,
+        "face": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "brlcad",
+      "version": "7.46.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "configure_command": "cmake -S /tmp/parsarium-brlcad-7.46.0-source/brlcad-7.46.0 -B /tmp/parsarium-brlcad-7.46.0-build -DBRLCAD_EXT_SOURCE_DIR=/tmp/parsarium-brlcad-7.46.0-build/bext -DBRLCAD_ENABLE_MINIMAL=ON -DBRLCAD_ENABLE_TCL=OFF -DBRLCAD_ENABLE_ASSETIMPORT=OFF -DBRLCAD_ENABLE_STEP=OFF -DBRLCAD_ENABLE_GDAL=OFF -DBRLCAD_ENABLE_OPENVDB=OFF -DBUILD_STATIC_LIBS=OFF -DBRLCAD_VALIDATE_STATIC_LINKS=OFF -DCMAKE_BUILD_TYPE=Release",
+      "build_target": "gcv-ply",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/tmp/parsarium-brlcad-7.46.0-source/brlcad-7.46.0/include -I/tmp/parsarium-brlcad-7.46.0-build/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/brlcad.c -L/tmp/parsarium-brlcad-7.46.0-build/lib -Wl,-rpath,/tmp/parsarium-brlcad-7.46.0-build/lib -lgcv -lrt -lbu -o /tmp/parsarium-brlcad-c-ply",
+      "command": "/tmp/parsarium-brlcad-c-ply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "second_x": 1000.0,
         "face": [
           0,
           1,

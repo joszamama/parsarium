@@ -162,10 +162,37 @@
       "vertices": 3,
       "faces": 1,
       "vertex_1_x": 1.0,
-      "face": [0, 1, 2]
+      "face": [
+        0,
+        1,
+        2
+      ]
     },
     "scope": "ASCII PLY three parsed vertices, one triangle, coordinate and face indices",
     "family": "CyberMeshGenerator native ASCII PLY reader through its C ABI",
     "family_note": "The C ABI wraps the project's C++ ASCII PLY parser. This is a released package path but has no comparable Homebrew metric; GitHub stars at review time were zero and are only auxiliary project-interest evidence."
+  },
+  {
+    "name": "brlcad",
+    "version": "7.46.0",
+    "license": "LGPL-2.1-only AND MIT",
+    "license_evidence": "https://brlcad.org/download/",
+    "documentation": "https://brlcad.org/docs/html/articles/gcv.html",
+    "input_api": "gcv_context_init; find_filter(GCV_FILTER_READ, BU_MIME_MODEL_PLY, local filename); gcv_execute; rt_db_get_internal",
+    "adapter": "adapters/c/ascii_ply/brlcad.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1000.0,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices, one face, triangle indices and BRL-CAD default scaled coordinate from local ASCII PLY",
+    "family": "BRL-CAD gcv-ply plugin over bundled RPly 1.1.4",
+    "family_note": "Distinct BRL-CAD library package and import API; bundled RPly is the underlying syntax parser family already represented by standalone RPly and SPly."
   }
 ]
