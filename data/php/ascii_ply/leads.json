@@ -120,5 +120,12 @@
     "status": "excluded_magic_only",
     "source": "https://github.com/Daniel-KM/Omeka-S-module-Common/blob/main/src/Mvc/Controller/Plugin/SpecifyMediaType.php",
     "reason": "The PHP plugin accepts a local filepath and recognizes the first bytes ply plus newline to return application/x-ply. This is MIME identification, not PLY header, vertex, or face parsing, so it fails the format-aware parser criterion."
+  },
+  {
+    "name": "Whitehouse-256/php-ply-convertor",
+    "status": "excluded_no_open_source_release",
+    "source": "https://github.com/Whitehouse-256/php-ply-convertor",
+    "api_evidence": "https://github.com/Whitehouse-256/php-ply-convertor/blob/main/README.md",
+    "reason": "The README documents a PHP CLI local ASCII PLY file converter, and ply_converter.php reads header vertex/face counts and body rows. The repository has no license declaration, tag, or release, so the open-source release criterion fails. Its zero observed GitHub stars also provide no adoption evidence. No control is credited."
   }
 ]
