@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-12T08:04:53.033557+00:00",
+  "checked_at_utc": "2026-11-14T23:08:57.175134+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/png/source-lock.json",
@@ -9,6 +9,16 @@
       "pkg_config_version": "3.0.2",
       "library": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-graphics.3.0.2.dylib",
       "library_sha256": "cd85f8c400a933362a4fb134aad7a0fbe352b2762e9253a3227c17b23172480d"
+    },
+    "opencv": {
+      "bottle_sha256": "fbe6cb5e9894afacdf203d4b710d0441405c93742b01789a2e7e19b222512d3a",
+      "header_sha256": "36b21dddf7866f2a394d1d4bbedc9547bbcde14461151b320b95ae3fbe03e2c5",
+      "library_sha256": {
+        "libopencv_imgcodecs.5.1.0.dylib": "db13d27effcd50c2ffd157882e00dbbb7956e5b8160e8f29d33fb432ac0d87d8",
+        "libopencv_imgproc.5.1.0.dylib": "fb3cc5590dd66c04c0e893396de1d6a725e1314ba4d307eb2a7d3ffc15433b0f",
+        "libopencv_core.5.1.0.dylib": "b9d94545520b1e54697524c74e0da9add1aad75618ccad7eb8fe9663141c2501"
+      },
+      "linked_libpng_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73"
     }
   },
   "prerequisite_verifier": "scripts/verify_c_png.py",
@@ -508,6 +518,31 @@
       "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/sfml.cpp -I/opt/homebrew/Cellar/sfml/3.0.2/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -L/opt/homebrew/Cellar/sfml/3.0.2/lib -lsfml-graphics -lsfml-window -lsfml-system -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sfml",
       "prebuild_command": null,
       "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "opencv",
+      "version": "5.1.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/opencv.cpp -I/opt/homebrew/opt/opencv/include/opencv5 -L/opt/homebrew/opt/opencv/lib -Wl,-rpath,/opt/homebrew/opt/opencv/lib -lopencv_imgcodecs -lopencv_core -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/opencv",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/opencv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
       "output": {
         "width": 2,
         "height": 1,

@@ -629,5 +629,34 @@
     "scope": "RGBA pixels",
     "family": "SFML bundled stb_image PNG decoder",
     "family_note": "The pinned Image.cpp embeds stb_image and calls stbi_load_from_callbacks; this shares decoder lineage with the verified stb and raylib paths."
+  },
+  {
+    "name": "opencv",
+    "version": "5.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/opencv/opencv/blob/5.1.0/LICENSE",
+    "documentation": "https://docs.opencv.org/5.0/main_modules/imgcodecs.html",
+    "input_api": "cv::imread(local PNG filename, cv::IMREAD_UNCHANGED) returns cv::Mat with decoded BGRA pixels",
+    "adapter": "adapters/cpp/png/opencv.cpp",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "RGBA pixels",
+    "family": "OpenCV imgcodecs PNG loader over linked libpng",
+    "family_note": "The pinned OpenCV imgcodecs dylib links Homebrew libpng 1.6.59. This is a distinct, widely used C++ local-file API sharing libpng as its PNG syntax engine."
   }
 ]
