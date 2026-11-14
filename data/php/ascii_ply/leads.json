@@ -114,5 +114,11 @@
     "underlying_parser_family": "PotreeConverter",
     "underlying_evidence": "https://github.com/potree/PotreeConverter/blob/2.1.5/Converter/src/main.cpp",
     "reason": "The tagged PHP service documents a local path and claims .ply support, but its prescribed PotreeConverter build is unpinned. The inspected PotreeConverter 2.1.5 curateSources implementation admits only .las/.laz files and calls loadLasHeader, so this documented dependency path cannot return a format-aware ASCII PLY result. No adapter or control passed. A different PotreeConverter release might behave differently, but it is not verified here."
+  },
+  {
+    "name": "Daniel-KM/Omeka-S-module-Common SpecifyMediaType",
+    "status": "excluded_magic_only",
+    "source": "https://github.com/Daniel-KM/Omeka-S-module-Common/blob/main/src/Mvc/Controller/Plugin/SpecifyMediaType.php",
+    "reason": "The PHP plugin accepts a local filepath and recognizes the first bytes ply plus newline to return application/x-ply. This is MIME identification, not PLY header, vertex, or face parsing, so it fails the format-aware parser criterion."
   }
 ]
