@@ -13,7 +13,7 @@ verified third-party paths; PHP × ASCII PLY has 5.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,479 of 1,634 verified package paths have a recorded comparable cell metric;
+1,480 of 1,635 verified package paths have a recorded comparable cell metric;
 155 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -168,11 +168,12 @@ The C × PNG verifier uses `cc`, CMake, `pkg-config`, and zlib development heade
 
 The C++ × PNG verifier recompiles format-aware call sites as C++17 against the
 same 20 pinned library releases, after rerunning the C source and binary checks.
-It also checks exact-release, binary-hashed SFML and OpenCV libraries. The observed
-result is **22/22 package paths passing** the valid PNG control. Twenty paths share
-releases and parser implementations with C; SFML provides a native C++ API over
-bundled stb_image, while OpenCV links libpng. Five plausible C++ leads, including
-OpenImageIO and Qt, remain unverified, so the [C++ PNG cell](data/cpp/png/cell.json)
+It also checks exact-release, binary-hashed SFML, OpenCV and OpenImageIO libraries.
+The observed result is **23/23 package paths passing** the valid PNG control.
+Twenty paths share releases and parser implementations with C; SFML provides a
+native C++ API over bundled stb_image, while OpenCV and OpenImageIO link libpng.
+Four plausible C++ leads, including Qt and wxWidgets, remain unverified, so the
+[C++ PNG cell](data/cpp/png/cell.json)
 does not claim a complete most-used top 20. The ISO C++ standard library has no
 documented PNG parser.
 

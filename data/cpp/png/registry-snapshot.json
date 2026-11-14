@@ -243,13 +243,23 @@
       "source_sha256": "638c1dae7e37e45afea21aa217dc667ad7cf57acc66cdf652c074f1e0e5ad6d2",
       "release_commit": "dd8d9c3833e6fbda076660cfbf2ae45611723481",
       "installed_bottle_sha256": "fbe6cb5e9894afacdf203d4b710d0441405c93742b01789a2e7e19b222512d3a"
+    },
+    "openimageio": {
+      "version": "3.2.2.0",
+      "license": "Apache-2.0",
+      "license_evidence": "https://github.com/AcademySoftwareFoundation/OpenImageIO/blob/v3.2.2.0/LICENSE.md",
+      "source_url": "https://github.com/AcademySoftwareFoundation/OpenImageIO/archive/refs/tags/v3.2.2.0.tar.gz",
+      "source_sha256": "fa94876cfbd4c817deaba81ced8bad4af2956689faf4085f277b20197cd70b4e",
+      "release_commit": "96377f681cc9e6650c8534671f4fc36b3c8acbc1",
+      "installed_bottle_release": "3.2.2.0_1",
+      "installed_bottle_sha256": "39a93aff673496178878499900c4b864e03764b56fc1c19b55b0a7250fe97bf6"
     }
   },
   "popularity_metric": {
     "name": "GitHub repository stargazers_count",
     "source": "GitHub REST repository API",
     "captured_at_utc": "2026-11-12T07:20:18.790315+00:00",
-    "limitation": "Primary repository stars are compared only within this C++ PNG cell. They measure repository-level attention, not C++ usage or PNG parser calls. The C and C++ cells share 20 package paths; SFML bundles stb_image and OpenCV links libpng; no cross-ecosystem star comparison is made. Six primary upstreams lack a comparable GitHub metric.",
+    "limitation": "Primary repository stars are compared only within this C++ PNG cell. They measure repository-level attention, not C++ usage or PNG parser calls. The C and C++ cells share 20 package paths; SFML bundles stb_image, while OpenCV and OpenImageIO link libpng; no cross-ecosystem star comparison is made. Six primary upstreams lack a comparable GitHub metric.",
     "packages": {
       "libpng": {
         "repository": "pnggroup/libpng",
@@ -367,11 +377,17 @@
         "repository": "https://github.com/opencv/opencv",
         "source": "https://api.github.com/repos/opencv/opencv",
         "observed_at_utc": "2026-11-14T23:08:27.255792+00:00"
+      },
+      "openimageio": {
+        "stars": 2405,
+        "repository": "https://github.com/AcademySoftwareFoundation/OpenImageIO",
+        "source": "https://api.github.com/repos/AcademySoftwareFoundation/OpenImageIO",
+        "observed_at_utc": "2026-11-14T23:13:11Z"
       }
     },
     "captured_between_utc": [
       "2026-11-12T07:20:18.790315+00:00",
-      "2026-11-14T23:08:27.255792+00:00"
+      "2026-11-14T23:13:11Z"
     ]
   },
   "targeted_documentation": [
@@ -476,6 +492,12 @@
       "url": "https://docs.opencv.org/5.0/main_modules/imgcodecs.html",
       "candidate": "opencv",
       "finding": "Official imgcodecs API documents cv::imread local filename and PNG support; the pinned 5.1.0 Homebrew bottle passed the valid PNG control with decoded RGBA pixels."
+    },
+    {
+      "query": "OpenImageIO 3.2.2.0 C++ ImageInput local file PNG",
+      "url": "https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html",
+      "candidate": "openimageio",
+      "finding": "Official release documentation shows ImageInput::open(local filename), ImageSpec dimensions and read_image pixels; the pinned Homebrew bottle passed the PNG control with decoded RGBA pixels."
     }
   ],
   "shared_registry_snapshot_from": "data/c/png/registry-snapshot.json"

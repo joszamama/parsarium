@@ -658,5 +658,24 @@
     "scope": "RGBA pixels",
     "family": "OpenCV imgcodecs PNG loader over linked libpng",
     "family_note": "The pinned OpenCV imgcodecs dylib links Homebrew libpng 1.6.59. This is a distinct, widely used C++ local-file API sharing libpng as its PNG syntax engine."
+  },
+  {
+    "name": "openimageio",
+    "version": "3.2.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/AcademySoftwareFoundation/OpenImageIO/blob/v3.2.2.0/LICENSE.md",
+    "documentation": "https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html",
+    "input_api": "OIIO::ImageInput::open(local PNG filename) and read_image(..., OIIO::TypeDesc::UINT8, buffer) return dimensions and RGBA pixels",
+    "adapter": "adapters/cpp/png/openimageio.cpp",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [255, 0, 0, 255],
+      "second": [0, 255, 0, 255]
+    },
+    "scope": "RGBA pixels",
+    "family": "OpenImageIO PNG ImageInput plugin over linked libpng",
+    "family_note": "The pinned OpenImageIO dylib links Homebrew libpng 1.6.59. This is a distinct C++ ImageInput API sharing libpng as its PNG syntax engine."
   }
 ]

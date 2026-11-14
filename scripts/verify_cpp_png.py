@@ -31,15 +31,45 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/png/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 22 and {p["name"] for p in parsers} == set(c_parsers) | {"sfml", "opencv"}
-    assert set(c_parsers) == set(c_runs) and set(extra_lock) == {"sfml", "opencv"}
+    assert len(parsers) == 23 and {p["name"] for p in parsers} == set(c_parsers) | {"sfml", "opencv", "openimageio"}
+    assert set(c_parsers) == set(c_runs) and set(extra_lock) == {"sfml", "opencv", "openimageio"}
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
     local_libraries = {}
     for parser in parsers:
         name = parser["name"]
         prebuild_command = None
-        if name == "opencv":
+        if name == "openimageio":
+            item = extra_lock[name]
+            assert parser["version"] == item["release"]
+            assert platform.system() == "Darwin" and platform.machine() == "arm64"
+            assert run(["brew", "list", "--versions", name]) == f"{name} {item['bottle_release']}"
+            assert sha256(Path(run(["brew", "--cache", name])).read_bytes()).hexdigest() == item["bottle_sha256"]
+            prefix = Path(run(["brew", "--prefix", name]))
+            header = prefix / item["installed_header"]
+            assert sha256(header.read_bytes()).hexdigest() == item["installed_header_sha256"]
+            libraries = {library: prefix / "lib" / library for library in item["installed_libraries"]}
+            assert all(sha256(path.read_bytes()).hexdigest() == item["installed_libraries"][library]
+                       for library, path in libraries.items())
+            libpng = Path(item["linked_libpng"])
+            assert sha256(libpng.read_bytes()).hexdigest() == item["linked_libpng_sha256"]
+            assert str(libpng) in run(["otool", "-L", str(libraries["libOpenImageIO.3.2.2.dylib"])])
+            assert run(["pkg-config", "--modversion", "fmt"]) == item["fmt_release"]
+            fmt_prefix = Path(run(["brew", "--prefix", "fmt"]))
+            fmt_header = fmt_prefix / "include/fmt/format.h"
+            assert sha256(fmt_header.read_bytes()).hexdigest() == item["fmt_header_sha256"]
+            fmt_library = fmt_prefix / "lib/libfmt.12.2.1.dylib"
+            assert sha256(fmt_library.read_bytes()).hexdigest() == item["fmt_library_sha256"]
+            flags = shlex.split(run(["pkg-config", "--cflags", "--libs", "OpenImageIO", "fmt"]))
+            command = ["c++", "-std=c++17", "-O2", str(ROOT / parser["adapter"]),
+                       *flags, "-Wl,-rpath," + str(prefix / "lib"), "-o", str(TARGET / name)]
+            local_libraries[name] = {"bottle_sha256": item["bottle_sha256"],
+                                     "header_sha256": item["installed_header_sha256"],
+                                     "library_sha256": item["installed_libraries"],
+                                     "linked_libpng_sha256": item["linked_libpng_sha256"],
+                                     "fmt_header_sha256": item["fmt_header_sha256"],
+                                     "fmt_library_sha256": item["fmt_library_sha256"]}
+        elif name == "opencv":
             item = extra_lock[name]
             assert parser["version"] == item["release"]
             assert platform.system() == "Darwin" and platform.machine() == "arm64"
