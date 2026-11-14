@@ -62,9 +62,10 @@ def verify() -> None:
     execute = ["php", str(ROOT / PARSER["adapter"]), str(CONTROL)]
     output = json.loads(run(execute))
     assert output == PARSER["expected_output"], output
+    checked_at_utc = datetime.now(timezone.utc).isoformat()
     result = json.loads((DATA / "verification.json").read_text())
     result.update({
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": checked_at_utc,
         "platform": platform.platform(), "php": run(["php", "-v"]).splitlines()[0],
         "composer": run(["composer", "--version"]).splitlines()[0],
         "source_lock": "data/php/ascii_ply/source-lock.json",
@@ -74,7 +75,8 @@ def verify() -> None:
             "assimp_binary_sha256": SOURCE["underlying_parser"]["binary_sha256"]}},
         "third_party": [{"package": PARSER["name"], "version": PARSER["version"],
                          "control": PARSER["control"], "install_command": shlex.join(install),
-                         "command": shlex.join(execute), "output": output, "pass": True}]
+                         "command": shlex.join(execute), "output": output, "pass": True,
+                         "checked_at_utc": checked_at_utc}]
                        + [row for row in result["third_party"] if row["package"] != PARSER["name"]],
         "note": "This run reverified magdev/php-assimp 0.3.2. All verified PHP paths are listed in third_party; the separately tested magdev/php-assimp 0.6.0 remains excluded."})
     (DATA / "verification.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")

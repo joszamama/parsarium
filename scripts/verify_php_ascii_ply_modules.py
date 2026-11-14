@@ -56,11 +56,12 @@ def verify() -> None:
             command = ["php", str(ROOT / parser["adapter"]), str(CONTROL), str(source_path)]
             output = json.loads(run(command))
             assert output == parser["expected_output"], (name, output)
+            checked_at_utc = datetime.now(timezone.utc).isoformat()
             records.append({
                 "package": name, "version": parser["version"], "control": parser["control"],
                 "source_url": source["source_url"], "source_sha256": source["source_sha256"],
                 "release_commit": source["release_commit"], "command": shlex.join(command),
-                "output": output, "pass": True,
+                "output": output, "pass": True, "checked_at_utc": checked_at_utc,
             })
             print(f"{name}@{parser['version']}: PHP ASCII PLY passed", flush=True)
 

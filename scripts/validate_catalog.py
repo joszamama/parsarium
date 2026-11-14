@@ -1,6 +1,7 @@
 """Check cross-file consistency of accepted cells and their recorded evidence."""
 
 from pathlib import Path
+from datetime import datetime
 import json
 import re
 import tomllib
@@ -256,6 +257,9 @@ def main() -> None:
                        and row["control"] == expected[row["package"]]["control"]
                        and row["output"] == expected[row["package"]]["expected_output"]
                        for row in runs)
+            if cell["ecosystem"] == "php" and cell["format"] == "ascii_ply":
+                assert all(datetime.fromisoformat(row["checked_at_utc"]).tzinfo is not None
+                           for row in runs)
         if browser_png:
             assert read(f"{key}/browser-verification.json")["pass"]
         elif cell["verified_standard_or_runtime_count"]:

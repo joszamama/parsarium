@@ -70,7 +70,8 @@ def verify() -> None:
 
     verification_path = DATA / "verification.json"
     results = json.loads(verification_path.read_text())
-    results["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
+    checked_at_utc = datetime.now(timezone.utc).isoformat()
+    results["checked_at_utc"] = checked_at_utc
     results.setdefault("local_libraries", {})["zelon88/hrconvert2"] = {
         "source_sha256": LOCK["source_sha256"],
         "release_commit": LOCK["release_commit"],
@@ -86,6 +87,7 @@ def verify() -> None:
     results["third_party"].append({
         "package": "zelon88/hrconvert2", "version": "v4.0.0", "control": PARSER["control"],
         "command": shlex.join(command), "output": output, "pass": True,
+        "checked_at_utc": checked_at_utc,
         "note": "Unmodified tagged PHP convertModels pipeline accepted local ASCII PLY and used real PyMeshLab and Assimp stages; standalone host-service shims supplied tool paths and ran commands without the web application's sandbox."
     })
     results["note"] = "Five PHP package paths passed the valid ASCII PLY control; HRConvert2 is a tagged PHP application module over PyMeshLab and Assimp. The PHP standard/runtime inventory remains separate."
