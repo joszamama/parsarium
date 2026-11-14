@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T21:45:32.288008+00:00",
+  "checked_at_utc": "2026-11-14T21:58:24.679457+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -112,6 +112,19 @@
         "share/mcstas/resources/share/interoff-lib.h": "67828df8b163c57cabfaca9b54ddb7cde8c4b1d3360012bd1ea86cc5023fde43",
         "share/mcstas/resources/optics/Guide_anyshape.comp": "9637b831219106dd2eb28d3c182e53757101231663d06486af58f4e2bebc2447"
       }
+    },
+    "rig": {
+      "source_sha256": "ea5fdd2122ec0e82b424328b9e4cc10fb69473543d20f8661e95cade2e681403",
+      "release_commit": "52cf229568b678e8d74f4ac33cfee34ee42d66da",
+      "adapter_files": {
+        "adapters/c/ascii_ply/rig.c": "e5f727a8ff337b29a1f248f9016886d5f703f34442832364fcc6f08dd67dc764",
+        "adapters/c/ascii_ply/rig_compat.h": "17919271b69002df86449b6229f6406c5fb65f9b0917a6b3c4745eddd4a621a0",
+        "adapters/c/ascii_ply/cogl/cogl.h": "e8b2437977757c93a5c8edf2c456cf72024227a6b7a2dc400b4b54f6df05feeb"
+      },
+      "compiler": "Homebrew clang version 23.1.4",
+      "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+      "glib": "2.90.1",
+      "build_scope": "Unmodified tagged rut-mesh-ply.c and bundled rply.c; mesh allocation and Cogl feature calls are observation stand-ins, not a full Rig graphics build."
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -368,6 +381,25 @@
       },
       "pass": true,
       "note": "Guide_anyshape initialized McCode's tagged C OFF/PLY runtime on local ASCII PLY and reported parsed vertices, polygon and bounding-box dimensions."
+    },
+    {
+      "package": "rig",
+      "version": "2",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "clang -std=gnu11 -O2 -Wall -Wextra -Wno-unused-parameter -include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/rig_compat.h -I /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-rig-4a6s4tgv/rib-rig-20795d2/rut -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/rig.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-rig-4a6s4tgv/rib-rig-20795d2/rut/rut-mesh-ply.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-rig-4a6s4tgv/rib-rig-20795d2/rut/rply.c -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-rig-4a6s4tgv/rig-ply-control",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-rig-4a6s4tgv/rig-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "indices": 3,
+        "face": [
+          0,
+          1,
+          2
+        ],
+        "second_x": 1.0
+      },
+      "pass": true,
+      "note": "Tagged Rig C loader parsed the local ASCII PLY triangle through bundled RPly; stand-ins only retain parsed mesh fields. Full graphics integration is not verified."
     }
   ],
   "runtime": []

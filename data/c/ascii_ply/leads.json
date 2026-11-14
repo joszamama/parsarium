@@ -203,9 +203,12 @@
   },
   {
     "name": "rib/rig rut-mesh-ply",
-    "status": "unresolved",
+    "status": "verified",
     "source": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.c",
-    "reason": "Tagged C Rut loader uses RPly and appears to expose a local PLY mesh reader; required Cogl/Rut build and control have not been replayed. Shared RPly family if verified."
+    "reason": "Tagged LGPL Rut C loader parsed the local ASCII PLY triangle and returned three vertices, one triangle and the second X coordinate. The unmodified loader and bundled MIT RPly source ran with observation-only stubs for mesh allocation and Cogl. Full graphics integration remains untested; shared RPly family.",
+    "release": "2",
+    "release_commit": "52cf229568b678e8d74f4ac33cfee34ee42d66da",
+    "api_evidence": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.h"
   },
   {
     "name": "afni/afni PLY module",

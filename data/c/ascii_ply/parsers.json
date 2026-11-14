@@ -310,5 +310,29 @@
     "scope": "One valid ASCII PLY triangle; C runtime parsed three vertices and one polygon and computed 1.0 by 1.0 bounding box",
     "family": "McCode native C OFF/PLY parser (interoff-lib)",
     "family_note": "McStas component library compiles the tagged C interoff-lib parser into an instrument. It is a distinct engine. The 80-artifact conda environment and installed parser sources are pinned; only geometry initialization is tested, not neutron simulation."
+  },
+  {
+    "name": "rig",
+    "version": "2",
+    "license": "LGPL-2.1-or-later; bundled RPly MIT",
+    "license_evidence": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.c",
+    "documentation": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.h",
+    "input_api_evidence": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.c",
+    "input_api": "rut_mesh_new_from_ply(RutContext*, local filename, position attributes, status, GError**) returns RutMesh with parsed vertices and triangle indices",
+    "adapter": "adapters/c/ascii_ply/rig.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "indices": 3,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; unmodified tagged parser with mesh/GPU support replaced by observation-only stand-ins",
+    "family": "Rig Rut PLY loader over bundled RPly 1.01",
+    "family_note": "Separate tagged C package path, but its PLY syntax parsing uses bundled RPly 1.01, so it is not an independent parser engine from RPly or BRL-CAD. Full Cogl/Rut graphics integration is not verified."
   }
 ]

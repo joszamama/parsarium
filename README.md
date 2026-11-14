@@ -9,12 +9,12 @@ does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 15 and PHP × ASCII PLY has 4.
+verified third-party paths; C × ASCII PLY has 16 and PHP × ASCII PLY has 4.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,477 of 1,627 verified package paths have a recorded comparable cell metric;
-150 are unranked; 122 measured values are zero. A recorded zero is not evidence of
+1,477 of 1,628 verified package paths have a recorded comparable cell metric;
+151 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1174,8 +1174,8 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): fifteen verified package
-  paths, 5 below the working goal. F3D 4.0.1 parsed the triangle through its
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): sixteen verified package
+  paths, 4 below the working goal. F3D 4.0.1 parsed the triangle through its
   C binding and ranks second among packages with comparable Homebrew requested
   installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
   triangle through its pinned C single-header API; it has no comparable Homebrew metric.
@@ -1211,6 +1211,10 @@ or quality judgment.
   Its 80-artifact conda environment is locked; the replay observes three
   vertices, one polygon, and bounding-box dimensions. Reproduce with
   `python3 scripts/verify_mccode_c_ascii_ply.py`.
+  Rig tag `2` parsed the triangle through its C Rut loader over bundled RPly;
+  the replay observes returned geometry using mesh/GPU stand-ins and does not
+  cover the full graphics stack. Reproduce with
+  `python3 scripts/verify_rig_c_ascii_ply.py`.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption

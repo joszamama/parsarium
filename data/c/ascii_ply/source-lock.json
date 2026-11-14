@@ -351,5 +351,29 @@
     },
     "adapter_sha256": "b1d1a75f8a3f0cd505bc214ed0d0a8a6df94dc9e931a8febb3596f11abcc5c94",
     "build_note": "An 80-artifact osx-arm64 conda lock pins mcstas-core 3.10.2. The installed interoff-lib.c, interoff-lib.h and Guide_anyshape.comp are byte-identical to upstream v3.10.2 tagged files. The adapter is a minimal McStas instrument with documented Guide_anyshape(geometry=local file) input. mcrun compiles it, and the C off_init parser reports vertex/polygon counts and bounding-box dimensions. No simulated particle result is claimed. Conda relocates executable bytes by installation prefix, so installed source files are hash checked while executable artifacts are pinned by the conda package lock."
+  },
+  "rig": {
+    "release": "2",
+    "release_tag": "2",
+    "release_tag_object": "20795d20c9a696eb78a4965557811be57ef674a4",
+    "release_commit": "52cf229568b678e8d74f4ac33cfee34ee42d66da",
+    "license": "LGPL-2.1-or-later; bundled RPly MIT",
+    "source_url": "https://api.github.com/repos/rib/rig/tarball/refs/tags/2",
+    "source_sha256": "ea5fdd2122ec0e82b424328b9e4cc10fb69473543d20f8661e95cade2e681403",
+    "archive_root": "rib-rig-20795d2",
+    "source_members": {
+      "rib-rig-20795d2/rut/rut-mesh-ply.c": "5e921c0ce5f35f98abeb5b49ecfe3227159c2716310d1612f6597fd898c63589",
+      "rib-rig-20795d2/rut/rut-mesh-ply.h": "25f37dae54d9fae9715f958820b97acb4230a567244c450502c7df4b0c4698e4",
+      "rib-rig-20795d2/rut/rply.c": "23f238368051ee6f832b05effbb90c27d4b1c6eb7cb8eb0aad3454baf24dfbc7",
+      "rib-rig-20795d2/rut/rply.h": "5114975a3de7782703e0c9cb15844de60ee834a989f9192af8c4416225a9f738",
+      "rib-rig-20795d2/rut/COPYING": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+      "rib-rig-20795d2/rut/LICENSE.rply": "3fbb3988caf3c6e38d327b68c0f05494195a1cde8446edabf620ad941b2df6a0"
+    },
+    "adapter_files": {
+      "adapters/c/ascii_ply/rig.c": "e5f727a8ff337b29a1f248f9016886d5f703f34442832364fcc6f08dd67dc764",
+      "adapters/c/ascii_ply/rig_compat.h": "17919271b69002df86449b6229f6406c5fb65f9b0917a6b3c4745eddd4a621a0",
+      "adapters/c/ascii_ply/cogl/cogl.h": "e8b2437977757c93a5c8edf2c456cf72024227a6b7a2dc400b4b54f6df05feeb"
+    },
+    "build_note": "The tagged PLY loader and bundled RPly sources compile unchanged. A minimal preincluded compatibility header suppresses unrelated Rut and Cogl dependency headers; observation functions retain mesh fields after upstream parsing. This is not a full Rig graphics integration test."
   }
 }
