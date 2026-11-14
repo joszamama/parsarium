@@ -1,0 +1,27 @@
+{
+  "magdev/php-assimp": {
+    "release": "0.3.2",
+    "license": "MIT",
+    "source_url": "https://github.com/magdev/php-assimp/archive/refs/tags/0.3.2.tar.gz",
+    "source_sha256": "050466bc09e98cf4c995221ae59cbf56bf7475a0b872e54fe67e3d4310a476ee",
+    "release_commit": "92e6cbf3716ca8ccde63e17f92554b5544f8853e",
+    "source_members": {
+      "php-assimp-0.3.2/LICENSE": "5f84593d755f393b2d621516d3ca46945e75c0f1fc0cfaf9a4ac872c893ea152",
+      "php-assimp-0.3.2/README.md": "fb361c3ba64624dd6c1c96974ed6b8714383b4e9358f8bb1b6f7832f5ea8d80c",
+      "php-assimp-0.3.2/src/Assimp/Command/Verbs/AbstractVerb.php": "52f42483e710e7db1c19c80ee6be1eb665900773594dc17e793f45c178477750",
+      "php-assimp-0.3.2/src/Assimp/Command/Command.php": "9804917cb3ab2923f6c5ddb6e3ec4de661abfb8d5936b5572e5c2fad9081adc2",
+      "php-assimp-0.3.2/src/Assimp/Command/Verbs/InfoVerb.php": "7757b500df6068d527129aaf677bced378dbe2fddb87a948f56d0a9e5ac4fe02"
+    },
+    "composer_json_sha256": "844dae6e4be4866f4e4c98dbcc8eb888b45e0ab21bdec49a6ce30d3ac47072c7",
+    "composer_lock_sha256": "3cea1ffd5d9853370537cc441193f0ee5a5cd9d3d8872ee85fca3dd04b75abb4",
+    "underlying_parser": {
+      "name": "Assimp CLI",
+      "release": "6.0.6",
+      "source_url": "https://github.com/assimp/assimp/archive/refs/tags/v6.0.6.tar.gz",
+      "source_sha256": "5f7ed412b76575621df0525a762b31da5874afff352b3a890c6308db4ac7204c",
+      "installed_binary": "/opt/homebrew/Cellar/assimp/6.0.6/bin/assimp",
+      "binary_sha256": "6cfda9d0a72da8e730d5e0266b2d32ae5fa07c07a138e284c0f3054e7dab7ce3"
+    },
+    "build_note": "Composer installs the exact 0.3.2 PHP wrapper release. Its InfoVerb appends the supplied local filename and executes the pinned Assimp CLI; the adapter extracts Assimp mesh, vertex and face fields. Later 0.6.0 remains excluded due its observed control failure. The wrapper uses a shell command without escaping, so this replay uses the repository control path."
+  }
+}

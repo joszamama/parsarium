@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "name": "magdev/php-assimp",
+    "version": "0.3.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/magdev/php-assimp/blob/0.3.2/LICENSE",
+    "documentation": "https://github.com/magdev/php-assimp/blob/0.3.2/README.md",
+    "input_api_evidence": "https://github.com/magdev/php-assimp/blob/0.3.2/src/Assimp/Command/Verbs/AbstractVerb.php",
+    "format_verb_evidence": "https://github.com/magdev/php-assimp/blob/0.3.2/src/Assimp/Command/Verbs/InfoVerb.php",
+    "input_api": "Assimp\\Command\\Command::execute(new Assimp\\Command\\Verbs\\InfoVerb(local filename), true); Result::getOutput",
+    "adapter": "adapters/php/ascii_ply/magdev_php_assimp.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "One mesh with three vertices and one face reported from a valid local ASCII PLY triangle",
+    "family": "Assimp native PLY loader through magdev/php-assimp CLI wrapper",
+    "family_note": "The PHP 0.3.2 package invokes the external Assimp 6.0.6 CLI and returns its format-aware info output. It is a distinct PHP package path but shares Assimp PLY parsing with C/C++ paths. Version 0.6.0 is separately recorded as failing.",
+    "composer_lock": "adapters/php/ascii_ply/composer.lock"
+  }
+]

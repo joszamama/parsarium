@@ -3,7 +3,8 @@
   "purpose": "Supplementary discovery for below-target ASCII PLY cells; names and descriptions are not parser evidence",
   "search_api_docs": {
     "github": "https://docs.github.com/en/rest/search/search#search-repositories",
-    "packagist": "https://packagist.org/apidoc"
+    "packagist": "https://packagist.org/apidoc",
+    "sourcegraph": "https://sourcegraph.com/docs/api/stream-api"
   },
   "search": [
     {
@@ -246,6 +247,42 @@
           "stars_at_search": 0
         }
       ]
+    },
+    {
+      "surface": "sourcegraph_public_code",
+      "query": "file:\\.php$ \"end_header\" patterntype:literal count:100 archived:yes fork:yes",
+      "url": "https://sourcegraph.com/.api/search/stream?q=file%3A%5C.php%24%20%22end_header%22%20patterntype%3Aliteral%20count%3A100%20archived%3Ayes%20fork%3Ayes",
+      "limit": 100,
+      "captured_at_utc": "2026-11-14T20:51:57Z",
+      "total": 0,
+      "hits": [],
+      "note": "Exact literal search restricted to .php files, including archived and forked indexed repositories. Zero results are scoped to Sourcegraph public indexing, not proof of global absence."
+    },
+    {
+      "surface": "sourcegraph_public_code",
+      "query": "file:\\.php$ \"vertex_indices\" patterntype:literal count:100 archived:yes fork:yes",
+      "url": "https://sourcegraph.com/.api/search/stream?q=file%3A%5C.php%24%20%22vertex_indices%22%20patterntype%3Aliteral%20count%3A100%20archived%3Ayes%20fork%3Ayes",
+      "limit": 100,
+      "captured_at_utc": "2026-11-14T20:51:57Z",
+      "total": 0,
+      "hits": [],
+      "note": "Exact literal search restricted to .php files, including archived and forked indexed repositories. Zero results are scoped to Sourcegraph public indexing, not proof of global absence."
+    },
+    {
+      "surface": "sourcegraph_public_code",
+      "query": "file:\\.php$ \"element vertex\" patterntype:literal count:100 archived:yes fork:yes",
+      "url": "https://sourcegraph.com/.api/search/stream?q=file%3A%5C.php%24%20%22element%20vertex%22%20patterntype%3Aliteral%20count%3A100%20archived%3Ayes%20fork%3Ayes",
+      "limit": 100,
+      "captured_at_utc": "2026-11-14T20:51:57Z",
+      "total": 0,
+      "hits": [],
+      "note": "Exact literal search restricted to .php files, including archived and forked indexed repositories. Zero results are scoped to Sourcegraph public indexing, not proof of global absence."
     }
-  ]
+  ],
+  "sourcegraph_positive_control": {
+    "query": "file:\\.php$ \"class\" patterntype:literal count:10",
+    "result_count": 10,
+    "captured_at_utc": "2026-11-14T20:51:57Z",
+    "purpose": "Confirmed that the .php path filter returns PHP files on this search surface."
+  }
 }

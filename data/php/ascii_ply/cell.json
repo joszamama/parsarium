@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "ascii_ply",
-  "status": "searched_no_verified_parser",
+  "status": "verified_below_target",
   "working_target": 20,
   "ceiling": 30,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "ply",
@@ -16,14 +16,18 @@
     "3d mesh",
     "ply mesh language:PHP",
     "\"Stanford PLY\" language:PHP",
-    "assimp language:PHP"
+    "assimp language:PHP",
+    "file:\\.php$ \"end_header\" patterntype:literal count:100 archived:yes fork:yes",
+    "file:\\.php$ \"vertex_indices\" patterntype:literal count:100 archived:yes fork:yes",
+    "file:\\.php$ \"element vertex\" patterntype:literal count:100 archived:yes fork:yes"
   ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 50,
   "unique_search_hits": 46,
   "unresolved_documentation_leads": 0,
-  "uncertainty": "Two bounded Packagist searches saved 12 unique name hits for 'ply' and zero for 'ascii ply'. Those hits concern unrelated products. Two supplementary GitHub PHP repository searches saved only two unrelated app hits. A separately discovered Assimp CLI wrapper, magdev/php-assimp 0.6.0, offered a local InfoVerb and had 92 Packagist installs at inspection, but its PHP 8.5.12 control failed before its result object could load because an implementation method lacks the interface return type. The underlying Assimp CLI parsed the control; this does not verify the PHP wrapper. Thus no qualifying PHP PLY parser release has been established; the verified count remains zero and all 20 working-target paths remain unknown. This bounded search is not evidence of absence across all PHP projects. Generic PHP file readers and FFI do not themselves parse PLY vertices or faces. No malformed-input, resource-use, or vulnerability experiment was performed. A PHP 7.4.33 retest of magdev/php-assimp 0.6.0 also failed before parsing: its default cache path returns null for a nonnullable result type, and bypassing cache triggers the result interface signature error. Its InfoVerb command omits the provided file path. The lead remains excluded. Three supplementary Packagist queries and three GitHub repository queries saved 36 more hits, producing 50 total exact hits and 46 unique result identifiers across the recorded windows. The Assimp-name hits include validator and service-provider packages around the already failing magdev/php-assimp wrapper; the laravel-assimp2amc package documents OBJ handling through a separate executable, not local PLY parsing. No additional PHP PLY parser API was documented or verified, and the count remains zero.",
+  "uncertainty": "Two bounded Packagist searches saved 12 unique name hits for 'ply' and zero for 'ascii ply'. Those hits concern unrelated products. Two supplementary GitHub PHP repository searches saved only two unrelated app hits. A separately discovered Assimp CLI wrapper, magdev/php-assimp 0.6.0, offered a local InfoVerb and had 92 Packagist installs at inspection, but its PHP 8.5.12 control failed before its result object could load because an implementation method lacks the interface return type. The underlying Assimp CLI parsed the control; this does not verify the PHP wrapper. The later 0.6.0 release remains excluded; an older 0.3.2 release has now been verified separately. This bounded search is not evidence of absence across all PHP projects. Generic PHP file readers and FFI do not themselves parse PLY vertices or faces. No malformed-input, resource-use, or vulnerability experiment was performed. A PHP 7.4.33 retest of magdev/php-assimp 0.6.0 also failed before parsing: its default cache path returns null for a nonnullable result type, and bypassing cache triggers the result interface signature error. Its InfoVerb command omits the provided file path. The lead remains excluded. Three supplementary Packagist queries and three GitHub repository queries saved 36 more hits, producing 50 total exact hits and 46 unique result identifiers across the recorded windows. The Assimp-name hits include validator and service-provider packages around the already failing magdev/php-assimp wrapper; the laravel-assimp2amc package documents OBJ handling through a separate executable, not local PLY parsing. No additional PHP PLY parser API was documented or verified in those windows. The tagged MIT magdev/php-assimp 0.3.2 release successfully invoked pinned Assimp CLI 6.0.6 on the valid local triangle and returned one mesh, three vertices, and one face through its published PHP InfoVerb API. It has 94 Packagist lifetime downloads across all versions at observation, which is an adoption proxy, not PLY-specific usage. It shares Assimp native PLY parser lineage. Nineteen paths remain below the 20 working goal; PHP PLY parser availability beyond the bounded searches remains uncertain. Three exact Sourcegraph public-code searches restricted to .php files (end_header, vertex_indices, element vertex) returned zero matches in their first-100 windows with archived and forked repositories included. A class keyword positive control returned ten .php matches. This search surface is incomplete and does not establish absence of PHP PLY parsers.",
   "third_party_evidence": "data/php/ascii_ply/parsers.json",
+  "source_lock": "data/php/ascii_ply/source-lock.json",
   "third_party_control_results": "data/php/ascii_ply/verification.json",
   "runtime_evidence": "data/php/ascii_ply/standard.json",
   "registry_snapshot": "data/php/ascii_ply/registry-snapshot.json",

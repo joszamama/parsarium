@@ -9,11 +9,11 @@ does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 11 and PHP × ASCII PLY has 0.
+verified third-party paths; C × ASCII PLY has 11 and PHP × ASCII PLY has 1.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,476 of 1,619 verified package paths have a recorded comparable cell metric;
+1,477 of 1,620 verified package paths have a recorded comparable cell metric;
 143 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -1198,10 +1198,15 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [PHP × ASCII PLY ranking](data/php/ascii_ply/ranking.md): zero verified paths.
+- [PHP × ASCII PLY ranking](data/php/ascii_ply/ranking.md): one verified path,
+  19 below the working goal. The tagged MIT magdev/php-assimp 0.3.2 wrapper
+  invoked pinned Assimp 6.0.6 on the local ASCII triangle and returned one
+  mesh, three vertices, and one face. Its later 0.6.0 release remains excluded
+  after a separate failed control. The verified version has 94 Packagist
+  lifetime downloads across all releases, not PLY-specific use. Reproduce it
+  with `python3 scripts/verify_php_ascii_ply.py`.
   [Supplementary bounded searches](data/php/ascii_ply/supplementary-search.json)
-  found Assimp wrapper extensions and unrelated packages, but no working
-  documented PHP ASCII PLY input API. All 20 target paths remain unknown.
+  leave the existence of other qualifying PHP paths uncertain.
 - [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): twenty verified
   paths, reaching the working count. Incomplete adoption metrics and bounded
   search coverage prevent a definitive most-used top-20 claim. Thirteen have
