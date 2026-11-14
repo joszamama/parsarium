@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T22:09:41.743063+00:00",
+  "checked_at_utc": "2026-11-14T22:21:16.144033+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -147,6 +147,14 @@
       "compiler": "Homebrew clang version 23.1.4",
       "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
       "build_scope": "Tag-pinned standalone micro_ply.h from sk_renderer; no graphics runtime linked. The file is identical to the author's header-libs copy, so this is one shared parser family."
+    },
+    "stereokit": {
+      "source_sha256": "2dfcd144df326733a6d75e171414a6d737b79a538de9edf1e8c705ee9274ec07",
+      "release_commit": "0be056efebcee5e58ad1438f4cf6dfdb942f6cf9",
+      "adapter_sha256": "2ab58834e406691f3b2601babf94be73673f161e0cddb6a5fc299ad06452c406",
+      "docker_image": "ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+      "host_platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+      "build_scope": "Full tagged StereoKitC shared library in Ubuntu 24.04 arm64; C11 adapter uses a one-line header compatibility copy for an unguarded C++ default argument. Offscreen Mesa EGL initialization and model file loading passed."
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -458,6 +466,26 @@
       },
       "pass": true,
       "note": "Tagged C micro_ply parser read local ASCII PLY bytes and converted the second vertex X coordinate; full renderer was not built."
+    },
+    {
+      "package": "stereokit",
+      "version": "v0.3.11",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "cmake -S /src -B /src/build -G Ninja -DSK_BUILD_TESTS=OFF -DSK_PHYSICS=OFF -DSK_BUILD_SHARED_LIBS=ON; cmake --build /src/build --target StereoKitC -j4; cc -std=c11 -O2 -I /src /src/stereokit.c -L /src/build -Wl,-rpath,/src/build -lStereoKitC -o /src/stereokit-ply-control",
+      "command": "/src/stereokit-ply-control /src/triangle.ply",
+      "output": {
+        "subsets": 1,
+        "vertices": 3,
+        "indices": 3,
+        "face": [
+          0,
+          1,
+          2
+        ],
+        "second_x": 1.0
+      },
+      "pass": true,
+      "note": "Full StereoKit C ABI parsed a local PLY file, returning one mesh subset, three vertex coordinates, and triangle indices. C header compatibility copy removes an invalid C++ default argument only. Shares the micro_ply parser family."
     }
   ],
   "runtime": []

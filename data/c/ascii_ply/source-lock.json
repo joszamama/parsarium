@@ -427,5 +427,33 @@
     },
     "adapter_sha256": "fbef51b4a9e343432517cabfc903d44641a4e2516f533f6d6b08eb2344b128c1",
     "build_note": "Tagged sk_renderer publishes micro_ply.h as a documented standalone C tool. This header is byte-identical to the author’s unversioned header-libs copy; no graphics runtime is linked. The input file is read locally into bytes, then passed to ply_read and ply_convert."
+  },
+  "stereokit": {
+    "release": "v0.3.11",
+    "release_tag": "v0.3.11",
+    "release_tag_object": "2cf25c156d96dee40c6f03216eb90197e4bcf003",
+    "release_commit": "0be056efebcee5e58ad1438f4cf6dfdb942f6cf9",
+    "source_kind": "tagged_source_archive",
+    "license": "MIT",
+    "source_url": "https://api.github.com/repos/StereoKit/StereoKit/tarball/refs/tags/v0.3.11",
+    "source_sha256": "2dfcd144df326733a6d75e171414a6d737b79a538de9edf1e8c705ee9274ec07",
+    "source_files_sha256": {
+      "CMakeLists.txt": "de39b13c01aea4462649d2d01649c632e63c788bd1c9d6d44abe60601ae2f13b",
+      "LICENSE": "9517b7b95e37c6db8c71848a1943d4fb36c0a483bdf619c0b68e76a1d0ea0308",
+      "StereoKitC/stereokit.h": "81d4a0e03ea8ff044023c545a1b5511d15cad90bd837aba253c633e8c39fbf7e",
+      "StereoKitC/asset_types/model.cpp": "5cb482375517dda85b857e8692918db857d4a428caa115abb78f2524287d6a1e",
+      "StereoKitC/asset_types/model_ply.cpp": "5695a9daeb6d225a0dd37b73e34aacaf056ca0d8b5056b59feca6a948d12fa98",
+      "StereoKitC/libraries/micro_ply.h": "95d37d8f983c1689689427f6905f9429a3e87476735e53d908411794f0852685"
+    },
+    "adapter_sha256": "2ab58834e406691f3b2601babf94be73673f161e0cddb6a5fc299ad06452c406",
+    "docker_image": "ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+    "upstream_cmake_dependencies": {
+      "openxr_loader": "288d3a7ebc1ad959f62d51da75baa3d27438c499",
+      "meshoptimizer": "c21d3be6ddf627f8ca852ba4b6db9903b0557858",
+      "basis_universal": "900e40fb5d2502927360fe2f31762bdbb624455f",
+      "sk_gpu": "v2025.6.27",
+      "CPM.cmake": "0.38.7"
+    },
+    "build_note": "Builds the full StereoKitC shared library in a digest-pinned Ubuntu 24.04 image using upstream CMake dependency references. A generated compatibility copy of the public header removes one unguarded C++ default argument so an ordinary C11 client compiles; the tagged library sources are unchanged. Offscreen Mesa EGL is required. The PLY path uses bundled micro_ply from the same family as sk_renderer."
   }
 }
