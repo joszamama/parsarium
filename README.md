@@ -1184,9 +1184,11 @@ or quality judgment.
   CyberMeshGenerator 0.5.0 parsed the same triangle through a tagged MIT C ABI;
   it has no comparable Homebrew metric, and zero GitHub stars are only an auxiliary signal.
   Greg Turk's `ply_io` source was rejected because its file-level license
-  restricts sale. Four supplementary [GitHub search windows](data/c/ascii_ply/supplementary-search.json)
-  added 34 leads. Three documented C readers lack a versioned upstream release;
+  restricts sale. Seven supplementary [GitHub search windows](data/c/ascii_ply/supplementary-search.json)
+  saved 48 hits. Three documented C readers lack a versioned upstream release;
   MeshLib's pinned license is non-open-source and simpleOCCTVP only exports PLY.
+  Blukpast 1.0.6 has a documented C PLY loader but remains unverified after its
+  x86-only SIMD build failed on this arm64 host.
   BRL-CAD libgcv 7.46.0 also passed the control through its C import API. Its native PLY filter bundles RPly 1.1.4 and has no comparable Homebrew metric. Reproduce this path with `python3 scripts/verify_brlcad_ascii_ply.py`.
   Open Pointcloud Studio 2026.45.1 also parsed the three PLY vertices through its
   pinned C SDK; its point-cloud API does not expose the face in this adapter.

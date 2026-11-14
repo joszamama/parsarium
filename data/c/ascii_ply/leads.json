@@ -177,5 +177,22 @@
     "api_evidence": "https://github.com/PDAL/CAPI/blob/v2.2.3/source/pdal/pdalc_pipeline.h",
     "format_evidence": "https://pdal.io/en/latest/stages/readers.ply.html",
     "reason": "Pinned C API pipeline and PDAL readers.ply returned three points from valid ASCII PLY; view contained no mesh, so only point-cloud parsing is claimed."
+  },
+  {
+    "name": "wypifu/blukpast",
+    "status": "unresolved",
+    "source": "https://github.com/wypifu/blukpast",
+    "release": "v1.0.6",
+    "release_commit": "d9b648de788dc0c56e8ef3736011978b286a7fd2",
+    "license_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/LICENSE",
+    "api_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h",
+    "reason": "Tagged LGPL-2.1 C package documents bkpLoadPly(adapter, local path, model, scratchGroupId). Source inspection confirms ASCII vertex and face parsing before GPU upload. On macOS arm64, full source build failed first at upstream -msse4.1 and then at unconditional x86 immintrin.h inclusion after removing that build flag in a temporary checkout; Docker daemon unavailable for Linux x86 replay. No successful local API control; not counted. GitHub search observed zero stars, only an auxiliary adoption signal."
+  },
+  {
+    "name": "jing-interactive/melo",
+    "status": "excluded_cpp_api",
+    "source": "https://github.com/jing-interactive/melo",
+    "api_evidence": "https://github.com/jing-interactive/melo/blob/master/include/melo.h",
+    "reason": "Search classified repository as language:C, but public local mesh loader is a C++ namespace API using std::string and Cinder types. No documented C input API or versioned tag."
   }
 ]
