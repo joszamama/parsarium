@@ -283,5 +283,37 @@
     },
     "adapter_sha256": "dc840530fea2ccf3fe25028bbe09a6f2dcba906342182d39e48d52d98abb204e",
     "build_note": "Upstream CMake build with USE_ZSTD=OFF still compiles pcc.c, which unconditionally includes zstd.h. The replay configures CMake to generate its export header, then compiles the unmodified point_cloud.c, octree.c, ply.cpp and miniply.cpp parser path directly, without unrelated codec code. Public C point-cloud API delegates to bundled miniply C++ PLYReader."
+  },
+  "pcprep": {
+    "release": "pcprep-v1.0",
+    "release_tag": "pcprep-v1.0",
+    "cmake_project_version": "1.0.1",
+    "license": "MIT",
+    "source_url": "https://github.com/filrg/pcprep/archive/refs/tags/pcprep-v1.0.tar.gz",
+    "source_sha256": "59548c40e8eb8402a8a42fd655e12d52a10c439ee8381f8ac137f3b8f40f1e77",
+    "release_commit": "1f58b745c44631d76baffbe04357ba13013cf136",
+    "source_members": {
+      "pcprep-pcprep-v1.0/LICENSE": "469016274a299303f46be0340d86be71d872cf1f16c9a87542ca4e7c7f2b3bd6",
+      "pcprep-pcprep-v1.0/README.md": "9b826d23d37f568cd445c9d17ffadd3282d8547d5144dc50083f6132c3e9dc23",
+      "pcprep-pcprep-v1.0/BUILDING.md": "f608b90e804cc67458987fc878ff542f0d84661c7615e4b2da623702dfdcadbe",
+      "pcprep-pcprep-v1.0/CMakeLists.txt": "502921334ce048c3b01fd786ac9e79ebdca5ef91baafd008d7efc37865ab083f",
+      "pcprep-pcprep-v1.0/include/pcprep/pointcloud.h": "59cc28bd94994f544b8d0a70b89d18bd43f626efc2062be8d1cad1f2b982f904",
+      "pcprep-pcprep-v1.0/include/pcprep/wrapper.h": "2af4670075a5f8d93c920f51f94a1ce5e88fab4f486c4492cede6b30ab33d8a3",
+      "pcprep-pcprep-v1.0/include/pcprep/core.h": "003dd722bd307659c1c567cbf6948813456db4de47ee43ec641da48454e98f99",
+      "pcprep-pcprep-v1.0/include/pcprep/vec3f.h": "395e51df60e349de4cec4fc6499aee8909b5c860be83f36932c6d82c417b4a99",
+      "pcprep-pcprep-v1.0/include/pcprep/vec3uc.h": "f49b00cfb59ba617fe2e8e86cc42589cb736ac66fd6bfce56f6fbbeb171fc44f",
+      "pcprep-pcprep-v1.0/source/pointcloud.c": "9cc0309978619982fa33df4acb9b2c80c12667ff2565deb0de1d3262ac327c54",
+      "pcprep-pcprep-v1.0/source/wrapper.cpp": "6ed08089f0b5fd8bbbd9adf8000d3a3dad964b20d76dbc5b5645f2fd80a5073c",
+      "pcprep-pcprep-v1.0/source/miniply.cpp": "e7c26f71ac156cd8a923692a9b64eb247e9ec01134365c1493fbbbc16619ee62",
+      "pcprep-pcprep-v1.0/source/include/miniply/miniply.h": "c98e1ce3479028583cc312b9ddea0520652511fef5c74ae65af84d6b7879f092",
+      "pcprep-pcprep-v1.0/source/include/msh_ply.h": "e80d0d3ab6983cc8bbf48882c0e6a05fc4e878fe0d85fa1447fa1dd8a6c11da2"
+    },
+    "adapter_sha256": "2e0e282d7eaaf2917b22368ec89063850cac9e18c58cc64114c354ef73a6c368",
+    "build_dependency": {
+      "name": "libpng headers via pkg-config",
+      "observed_version": "1.6.59",
+      "reason": "The upstream pointcloud.h indirectly includes png.h even though its PLY loader does not call libpng."
+    },
+    "build_note": "CMake generates upstream pcprep_export.h. The replay compiles unmodified pointcloud.c, wrapper.cpp and miniply.cpp with function sections, then dead-strips unrelated functions, so no core/cJSON/PNG codec code is linked. This is the public C pointcloud_load call path, not the full pcprep application. Upstream tag says v1.0 while CMake project version in the tag is 1.0.1; both are recorded."
   }
 }

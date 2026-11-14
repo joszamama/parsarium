@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T21:27:51.658947+00:00",
+  "checked_at_utc": "2026-11-14T21:33:51.716064+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -96,6 +96,12 @@
       "source_sha256": "265a3d2cb3c73582edf300c172c1cb566991952aad22c6cb18c96530636bfbe0",
       "release_commit": "2690a0c76f8cdcdbbf3b2c7926f14c16ed33db5f",
       "adapter_sha256": "dc840530fea2ccf3fe25028bbe09a6f2dcba906342182d39e48d52d98abb204e"
+    },
+    "pcprep": {
+      "source_sha256": "59548c40e8eb8402a8a42fd655e12d52a10c439ee8381f8ac137f3b8f40f1e77",
+      "release_commit": "1f58b745c44631d76baffbe04357ba13013cf136",
+      "adapter_sha256": "2e0e282d7eaaf2917b22368ec89063850cac9e18c58cc64114c354ef73a6c368",
+      "libpng_header_version": "1.6.59"
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -301,18 +307,37 @@
       "note": "Actual upstream C loader parsed the supplied ASCII PLY; only GPU upload and model storage were replaced by observation functions."
     },
     {
+      "package": "pcprep",
+      "version": "pcprep-v1.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_commands": [
+        "cc -std=c99 -ffunction-sections -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/include -I/opt/homebrew/opt/libpng/include/libpng16 -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/pointcloud.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/pointcloud.c.o",
+        "c++ -std=c++17 -ffunction-sections -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/include -I/opt/homebrew/opt/libpng/include/libpng16 -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/wrapper.cpp -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/wrapper.cpp.o",
+        "c++ -std=c++17 -ffunction-sections -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/include -I/opt/homebrew/opt/libpng/include/libpng16 -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/miniply.cpp -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/miniply.cpp.o",
+        "cc -std=c99 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/pcprep-pcprep-v1.0/source/include -I/opt/homebrew/opt/libpng/include/libpng16 -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/pcprep.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/pcprep-adapter.o",
+        "c++ -Wl,-dead_strip /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/pcprep-adapter.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/pointcloud.c.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/wrapper.cpp.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/miniply.cpp.o -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/pcprep-ply-control"
+      ],
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcprep-wxmqy8hw/build/pcprep-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "second_x": 1.0
+      },
+      "pass": true,
+      "note": "Tagged public C pointcloud_load parsed three local ASCII PLY coordinates through bundled miniply. The targeted build omits unrelated source functions using dead stripping."
+    },
+    {
       "package": "pcc",
       "version": "0.1.0",
       "control": "controls/ascii_ply/triangle.ply",
       "build_commands": [
-        "cc -std=c17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/point_cloud.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/point_cloud.c.o",
-        "cc -std=c17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/octree.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/octree.c.o",
-        "c++ -std=c++17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/ply.cpp -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/ply.cpp.o",
-        "c++ -std=c++17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/miniply.cpp -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/miniply.cpp.o",
-        "cc -std=c17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/pcc-0.1.0/source/internal -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/pcc.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/pcc-adapter.o",
-        "c++ /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/pcc-adapter.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/point_cloud.c.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/octree.c.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/ply.cpp.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/miniply.cpp.o -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/pcc-ply-control"
+        "cc -std=c17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/point_cloud.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/point_cloud.c.o",
+        "cc -std=c17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/octree.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/octree.c.o",
+        "c++ -std=c++17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/ply.cpp -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/ply.cpp.o",
+        "c++ -std=c++17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/internal -c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/miniply.cpp -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/miniply.cpp.o",
+        "cc -std=c17 -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/include -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/export -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/pcc-0.1.0/source/internal -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/pcc.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/pcc-adapter.o",
+        "c++ /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/pcc-adapter.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/point_cloud.c.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/octree.c.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/ply.cpp.o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/miniply.cpp.o -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/pcc-ply-control"
       ],
-      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-e1tus3p8/build/pcc-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-pcc-lztpbaie/build/pcc-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
       "output": {
         "vertices": 3,
         "second_x": 1.0

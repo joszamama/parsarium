@@ -1,6 +1,6 @@
 # C × ASCII PLY: verified parser ranking
 
-13 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within this ecosystem.
+14 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within this ecosystem.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -17,6 +17,7 @@
 | unranked | [pdal-c](https://github.com/PDAL/CAPI/tree/v2.2.3) | 2.2.3 | unknown | three parsed points from explicit PLY reader | PDAL native readers.ply through C ABI |
 | unranked | [Blukpast](https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h) | 1.0.6 | unknown | three parsed positions and face indices at GPU upload boundary | Blukpast native C PLY loader |
 | unranked | [PCC](https://github.com/filrg/pcc/blob/v0.1.0/include/pcc/point_cloud.h) | 0.1.0 | unknown | three parsed point coordinates; second X is 1.0 | C point-cloud API over bundled miniply C++ PLYReader |
+| unranked | [pcprep](https://github.com/filrg/pcprep/blob/pcprep-v1.0/include/pcprep/pointcloud.h) | pcprep-v1.0 | unknown | three parsed point coordinates; second X is 1.0 | C point-cloud API over bundled miniply C++ PLYReader |
 
 Assimp C and C++ entry points share one native loader; RPly has its own C parser and a C++ callable API; SPly is a separately released fork of the same parser lineage. The search results include fuzzy names and unresolved leads; a registry hit alone is not proof of format parsing. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -24,7 +25,7 @@ AssetKit v0.7.4 was verified through its local `ak_load` API in both C and C++. 
 
 SPly 1.2.0 was verified from its tagged MIT source. Its three GitHub stars are an auxiliary project-interest signal; no comparable Homebrew formula metric exists, so its popularity order remains unresolved.
 
-`msh_ply.h` is an upstream versioned single-header publication, pinned to commit `eb1996102858ad467f68d087644759d84df21ca6` and SHA-256. Its documented C local-file API parsed the ASCII triangle. The header offers MIT or Unlicense terms. The repository has no Git tag for this version; that release-form limitation is explicit. Its 67 upstream stars are auxiliary only; no comparable Homebrew requested-install metric exists. Seven paths remain below the working count. Greg Turk's `ply_io` publication is excluded: its source-file license prohibits selling the software, despite the broader publication page calling it MIT.
+`msh_ply.h` is an upstream versioned single-header publication, pinned to commit `eb1996102858ad467f68d087644759d84df21ca6` and SHA-256. Its documented C local-file API parsed the ASCII triangle. The header offers MIT or Unlicense terms. The repository has no Git tag for this version; that release-form limitation is explicit. Its 67 upstream stars are auxiliary only; no comparable Homebrew requested-install metric exists. Six paths remain below the working count. Greg Turk's `ply_io` publication is excluded: its source-file license prohibits selling the software, despite the broader publication page calling it MIT.
 
 F3D 4.0.1 parsed the local triangle through its C scene API. Its Homebrew requested-install count is comparable with Assimp's in this cell, so it ranks second. The optional C binding and native PLY plugin were built from a SHA-256-pinned source release with pinned VTK 9.7.2. This is a package path over VTK's PLY reader, not an independent parser engine.
 
@@ -43,3 +44,5 @@ Open Pointcloud Studio `ops_pointcloud` 2026.45.1 parsed the three PLY vertices 
 Blukpast v1.0.6 passed the valid triangle through its unmodified upstream `bkpLoadPly` source, compiled for x86_64 and executed under Rosetta. The C harness captures the parsed vertex and index arrays at the GPU upload boundary; it does not simulate the parser or claim that the full Vulkan engine runs on this host. The native arm64 engine build failed because upstream uses x86 SIMD flags and headers. Its zero GitHub stars at discovery are an auxiliary project-interest signal, and no comparable Homebrew requested-install count is available. This entry is not claimed to be popular. Reproduce with `python3 scripts/verify_blukpast_ascii_ply.py`.
 
 PCC 0.1.0 passed the valid triangle through its public C `pcc_point_cloud_t.read_from_file` API and returned three positions with second X coordinate 1.0. Its tagged GPL source bundles miniply's C++ PLYReader, a parser family also used by two recorded Python packages. The unrelated PCC codec source requires `zstd.h` even when `USE_ZSTD=OFF`, so the replay configures upstream CMake for its generated header and compiles only unmodified source files on the PLY call path. The full compression library is not covered. No comparable Homebrew requested-install metric exists; three GitHub stars are auxiliary only. Reproduce with `python3 scripts/verify_pcc_c_ascii_ply.py`.
+
+pcprep `pcprep-v1.0` passed the same valid triangle through its public C `pointcloud_load` API and returned three positions with second X coordinate 1.0. Its tagged MIT source bundles miniply's C++ PLYReader, shared with PCC and the Python miniply paths. PCC and pcprep are distinct released library packages, but their verified PLY parsing is not an independent engine. pcprep's tag says `pcprep-v1.0` while its CMake project declares version 1.0.1; both are recorded. The replay compiles its unmodified PLY call path and dead-strips unrelated functions; the full application is not covered. An unrelated upstream header include requires libpng headers at build time, observed at version 1.6.59. No comparable Homebrew requested-install metric exists; four GitHub stars are auxiliary only. Reproduce with `python3 scripts/verify_pcprep_c_ascii_ply.py`.

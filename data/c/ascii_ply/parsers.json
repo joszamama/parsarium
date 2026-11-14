@@ -272,5 +272,23 @@
     "scope": "Three parsed point coordinates from one valid ASCII PLY triangle; face not exposed by point-cloud API",
     "family": "PCC C facade over bundled miniply C++ PLYReader",
     "family_note": "Distinct tagged GPL C API package. Its PLY syntax parsing delegates to bundled miniply C++ source. The unrelated codec source requires zstd.h even when USE_ZSTD=OFF, so the replay compiles only the unmodified local PLY call path. miniply also underlies separately recorded Python pyminiply and pyvista-miniply paths."
+  },
+  {
+    "name": "pcprep",
+    "version": "pcprep-v1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/LICENSE",
+    "documentation": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/include/pcprep/pointcloud.h",
+    "input_api_evidence": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/source/pointcloud.c",
+    "input_api": "pointcloud_load(pointcloud_t *, local PLY filename) returns success; cloud.size and cloud.pos contain parsed points",
+    "adapter": "adapters/c/ascii_ply/pcprep.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "Three parsed point coordinates from one valid ASCII PLY triangle; no face data exposed by this API",
+    "family": "pcprep C facade over bundled miniply C++ PLYReader",
+    "family_note": "A distinct released C library package from filrg. It shares bundled miniply C++ parsing with PCC and separately recorded Python paths. The exact GitHub release tag is pcprep-v1.0, while its CMake version is 1.0.1."
   }
 ]

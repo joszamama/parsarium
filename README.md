@@ -9,12 +9,12 @@ does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 13 and PHP × ASCII PLY has 3.
+verified third-party paths; C × ASCII PLY has 14 and PHP × ASCII PLY has 3.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,477 of 1,624 verified package paths have a recorded comparable cell metric;
-147 are unranked; 122 measured values are zero. A recorded zero is not evidence of
+1,477 of 1,625 verified package paths have a recorded comparable cell metric;
+148 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1174,8 +1174,8 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): thirteen verified package
-  paths, 7 below the working goal. F3D 4.0.1 parsed the triangle through its
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): fourteen verified package
+  paths, 6 below the working goal. F3D 4.0.1 parsed the triangle through its
   C binding and ranks second among packages with comparable Homebrew requested
   installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
   triangle through its pinned C single-header API; it has no comparable Homebrew metric.
@@ -1202,6 +1202,10 @@ or quality judgment.
   backed by bundled miniply C++ source. The replay builds the PLY call path
   from its pinned release; it has no comparable Homebrew metric. Reproduce with
   `python3 scripts/verify_pcc_c_ascii_ply.py`.
+  pcprep `pcprep-v1.0` also parsed the three PLY points through a separate
+  public C package API backed by bundled miniply. Its release tag and internal
+  CMake version differ, and its popularity order remains unranked. Reproduce
+  with `python3 scripts/verify_pcprep_c_ascii_ply.py`.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
