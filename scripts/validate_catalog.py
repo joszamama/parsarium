@@ -84,6 +84,12 @@ def main() -> None:
                     assert source["release_commit"] == release["release_commit"]
                     assert source["files"] == release["files"]
                     assert len(source["release_commit"]) == 40
+                elif source.get("source_kind") == "tagged_source_files":
+                    assert release["source_kind"] == "tagged_source_files"
+                    assert source["release_commit"] == release["release_commit"]
+                    assert source["tagged_files"] == release["tagged_files"]
+                    assert source["source_sha256"] == release["source_sha256"]
+                    assert len(source["release_commit"]) == 40
                 else:
                     assert source["source_sha256"] == release["source_sha256"]
                     assert len(source["source_sha256"]) == 64

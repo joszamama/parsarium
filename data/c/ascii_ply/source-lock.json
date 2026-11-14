@@ -315,5 +315,41 @@
       "reason": "The upstream pointcloud.h indirectly includes png.h even though its PLY loader does not call libpng."
     },
     "build_note": "CMake generates upstream pcprep_export.h. The replay compiles unmodified pointcloud.c, wrapper.cpp and miniply.cpp with function sections, then dead-strips unrelated functions, so no core/cJSON/PNG codec code is linked. This is the public C pointcloud_load call path, not the full pcprep application. Upstream tag says v1.0 while CMake project version in the tag is 1.0.1; both are recorded."
+  },
+  "mccode": {
+    "release": "3.10.2",
+    "release_tag": "v3.10.2",
+    "release_commit": "acdacbea447f24d08b26bf517c89057c2cbfa837",
+    "license": "GPL-3.0",
+    "source_kind": "tagged_source_files",
+    "source_url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/common/lib/share/interoff-lib.c",
+    "source_sha256": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7",
+    "tagged_files": {
+      "interoff-lib.c": {
+        "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/common/lib/share/interoff-lib.c",
+        "sha256": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7"
+      },
+      "interoff-lib.h": {
+        "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/common/lib/share/interoff-lib.h",
+        "sha256": "67828df8b163c57cabfaca9b54ddb7cde8c4b1d3360012bd1ea86cc5023fde43"
+      },
+      "Guide_anyshape.comp": {
+        "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp",
+        "sha256": "9637b831219106dd2eb28d3c182e53757101231663d06486af58f4e2bebc2447"
+      },
+      "COPYING": {
+        "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/COPYING",
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      }
+    },
+    "conda_lock": "adapters/c/ascii_ply/mccode-conda-lock.json",
+    "conda_lock_sha256": "8eaa33db93120007b26051a9519bc8d74249dc5159ecfdff8a3fa2fe161f9c05",
+    "installed_files": {
+      "share/mcstas/resources/share/interoff-lib.c": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7",
+      "share/mcstas/resources/share/interoff-lib.h": "67828df8b163c57cabfaca9b54ddb7cde8c4b1d3360012bd1ea86cc5023fde43",
+      "share/mcstas/resources/optics/Guide_anyshape.comp": "9637b831219106dd2eb28d3c182e53757101231663d06486af58f4e2bebc2447"
+    },
+    "adapter_sha256": "b1d1a75f8a3f0cd505bc214ed0d0a8a6df94dc9e931a8febb3596f11abcc5c94",
+    "build_note": "An 80-artifact osx-arm64 conda lock pins mcstas-core 3.10.2. The installed interoff-lib.c, interoff-lib.h and Guide_anyshape.comp are byte-identical to upstream v3.10.2 tagged files. The adapter is a minimal McStas instrument with documented Guide_anyshape(geometry=local file) input. mcrun compiles it, and the C off_init parser reports vertex/polygon counts and bounding-box dimensions. No simulated particle result is claimed. Conda relocates executable bytes by installation prefix, so installed source files are hash checked while executable artifacts are pinned by the conda package lock."
   }
 }

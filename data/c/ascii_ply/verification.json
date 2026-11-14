@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T21:33:51.716064+00:00",
+  "checked_at_utc": "2026-11-14T21:45:32.288008+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -102,6 +102,16 @@
       "release_commit": "1f58b745c44631d76baffbe04357ba13013cf136",
       "adapter_sha256": "2e0e282d7eaaf2917b22368ec89063850cac9e18c58cc64114c354ef73a6c368",
       "libpng_header_version": "1.6.59"
+    },
+    "mccode": {
+      "source_sha256": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7",
+      "release_commit": "acdacbea447f24d08b26bf517c89057c2cbfa837",
+      "conda_lock": "adapters/c/ascii_ply/mccode-conda-lock.json",
+      "installed_files": {
+        "share/mcstas/resources/share/interoff-lib.c": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7",
+        "share/mcstas/resources/share/interoff-lib.h": "67828df8b163c57cabfaca9b54ddb7cde8c4b1d3360012bd1ea86cc5023fde43",
+        "share/mcstas/resources/optics/Guide_anyshape.comp": "9637b831219106dd2eb28d3c182e53757101231663d06486af58f4e2bebc2447"
+      }
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -344,6 +354,20 @@
       },
       "pass": true,
       "note": "Public C point-cloud API read the valid local ASCII PLY through bundled miniply; only three vertices and the second X coordinate are claimed."
+    },
+    {
+      "package": "mccode",
+      "version": "3.10.2",
+      "control": "controls/ascii_ply/triangle.ply",
+      "command": "micromamba run -p /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mcstas-core mcrun -c -n 1 --no-output-files --dir /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mccode-xd5g7vxj/run /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mccode-xd5g7vxj/ParsariumPLY.instr geometry=/Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "length": 1.0,
+        "width": 1.0
+      },
+      "pass": true,
+      "note": "Guide_anyshape initialized McCode's tagged C OFF/PLY runtime on local ASCII PLY and reported parsed vertices, polygon and bounding-box dimensions."
     }
   ],
   "runtime": []

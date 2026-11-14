@@ -290,5 +290,25 @@
     "scope": "Three parsed point coordinates from one valid ASCII PLY triangle; no face data exposed by this API",
     "family": "pcprep C facade over bundled miniply C++ PLYReader",
     "family_note": "A distinct released C library package from filrg. It shares bundled miniply C++ parsing with PCC and separately recorded Python paths. The exact GitHub release tag is pcprep-v1.0, while its CMake version is 1.0.1."
+  },
+  {
+    "name": "mccode",
+    "version": "3.10.2",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/mccode-dev/McCode/blob/v3.10.2/COPYING",
+    "documentation": "https://github.com/mccode-dev/McCode/blob/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp",
+    "input_api_evidence": "https://github.com/mccode-dev/McCode/blob/v3.10.2/common/lib/share/interoff-lib.h",
+    "input_api": "McStas Guide_anyshape(geometry=local ASCII PLY path) component parameter; generated C calls off_init into off_struct",
+    "adapter": "adapters/c/ascii_ply/mccode.instr",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "length": 1.0,
+      "width": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; C runtime parsed three vertices and one polygon and computed 1.0 by 1.0 bounding box",
+    "family": "McCode native C OFF/PLY parser (interoff-lib)",
+    "family_note": "McStas component library compiles the tagged C interoff-lib parser into an instrument. It is a distinct engine. The 80-artifact conda environment and installed parser sources are pinned; only geometry initialization is tested, not neutron simulation."
   }
 ]

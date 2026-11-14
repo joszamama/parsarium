@@ -221,6 +221,36 @@
       "release_url": "https://github.com/filrg/pcprep/releases/tag/pcprep-v1.0",
       "published_at_utc": "2025-04-17T07:10:16Z",
       "cmake_project_version": "1.0.1"
+    },
+    "mccode": {
+      "version": "3.10.2",
+      "license": "GPL-3.0",
+      "license_evidence": "https://github.com/mccode-dev/McCode/blob/v3.10.2/COPYING",
+      "source_kind": "tagged_source_files",
+      "source_url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/common/lib/share/interoff-lib.c",
+      "source_sha256": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7",
+      "release_commit": "acdacbea447f24d08b26bf517c89057c2cbfa837",
+      "tagged_files": {
+        "interoff-lib.c": {
+          "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/common/lib/share/interoff-lib.c",
+          "sha256": "d54efcda615337e69f0f32f9d37d207921154526d50f794dbd633eab87e73fd7"
+        },
+        "interoff-lib.h": {
+          "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/common/lib/share/interoff-lib.h",
+          "sha256": "67828df8b163c57cabfaca9b54ddb7cde8c4b1d3360012bd1ea86cc5023fde43"
+        },
+        "Guide_anyshape.comp": {
+          "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp",
+          "sha256": "9637b831219106dd2eb28d3c182e53757101231663d06486af58f4e2bebc2447"
+        },
+        "COPYING": {
+          "url": "https://raw.githubusercontent.com/mccode-dev/McCode/v3.10.2/COPYING",
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        }
+      },
+      "conda_lock": "adapters/c/ascii_ply/mccode-conda-lock.json",
+      "release_url": "https://github.com/mccode-dev/McCode/releases/tag/v3.10.2",
+      "published_at_utc": "2026-11-02T14:34:49Z"
     }
   },
   "popularity_metric": {
@@ -302,6 +332,13 @@
         "note": "No exact Homebrew pcprep formula or comparable requested-install count; four GitHub repository stars are auxiliary only.",
         "auxiliary_github_stars": 4,
         "auxiliary_url": "https://api.github.com/repos/filrg/pcprep",
+        "auxiliary_observed_at_utc": "2026-11-14"
+      },
+      "mccode": {
+        "install_on_request_365d": null,
+        "note": "No exact Homebrew McCode/McStas formula or comparable requested-install count; GitHub repository stars are auxiliary only.",
+        "auxiliary_github_stars": 100,
+        "auxiliary_url": "https://api.github.com/repos/mccode-dev/McCode",
         "auxiliary_observed_at_utc": "2026-11-14"
       }
     }
@@ -398,6 +435,12 @@
       "source": "https://github.com/filrg/pcprep/releases/tag/pcprep-v1.0",
       "api_evidence": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/include/pcprep/pointcloud.h",
       "disposition": "Verified public C pointcloud_load(local filename) over bundled miniply; three coordinates observed from valid ASCII PLY control."
+    },
+    {
+      "name": "mccode",
+      "source": "https://github.com/mccode-dev/McCode/releases/tag/v3.10.2",
+      "api_evidence": "https://github.com/mccode-dev/McCode/blob/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp",
+      "disposition": "Verified tagged McStas Guide_anyshape local ASCII PLY geometry input through C interoff-lib; parsed vertex, polygon and bounding-box output."
     }
   ]
 }
