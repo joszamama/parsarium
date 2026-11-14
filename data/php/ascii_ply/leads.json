@@ -134,5 +134,26 @@
     "source": "https://github.com/srv/pointcloud_web_viewer",
     "documentation": "https://github.com/srv/pointcloud_web_viewer/blob/master/README.md",
     "reason": "Higher-star PHP repository found by pointcloud search, but its documented local point-cloud input is pc.csv with x,y,z,r,g,b rows, not a PLY file. Browser Three.js renders the CSV point cloud. No PLY parser API is documented, and the repository has no tag."
+  },
+  {
+    "name": "geobim-app/geobim pointcloud upload",
+    "status": "excluded_dispatch_only",
+    "source": "https://github.com/geobim-app/geobim/tree/v1.12.0",
+    "api_evidence": "https://github.com/geobim-app/geobim/blob/v1.12.0/api/pointcloud-upload.php",
+    "reason": "MPL-2.0 tagged application accepts .ply uploads, stages the bytes and starts a detached Python convert_pointcloud.py worker. The PHP endpoint checks the extension and job status but exposes no documented local PHP API that interprets ASCII PLY fields. A Python conversion outcome would not verify a PHP parser path."
+  },
+  {
+    "name": "cnr-isti-vclab/VisualMedia",
+    "status": "excluded_no_released_php_ply_api",
+    "source": "https://github.com/cnr-isti-vclab/VisualMedia",
+    "api_evidence": "https://github.com/cnr-isti-vclab/VisualMedia/blob/master/www/application/controllers/Mediacontroller.php",
+    "reason": "GPL-3.0 application documentation describes model uploads and server conversion, but inspected PHP controller stages uploads rather than exposing a local PLY parsing API. GitHub lists no tags or releases, and no ASCII PLY control was credited."
+  },
+  {
+    "name": "OriolCanillasGautier/SOME-PackagingAssistant",
+    "status": "excluded_python_service_only",
+    "source": "https://github.com/OriolCanillasGautier/SOME-PackagingAssistant",
+    "api_evidence": "https://github.com/OriolCanillasGautier/SOME-PackagingAssistant/blob/main/web/api/start-server.php",
+    "reason": "The PHP endpoint starts server.py and relays a pymeshlab capability flag. It does not expose a PHP local PLY input parser API or format-aware parsed result."
   }
 ]

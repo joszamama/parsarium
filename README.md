@@ -1246,6 +1246,8 @@ or quality judgment.
   distributions. Heratio `ahg/3d-model` 1.165.35 parsed PLY header element
   counts, without reading body geometry. Only magdev has the comparable
   Packagist metric (94 lifetime downloads); the other four remain unranked.
+  GitHub stars are recorded separately for all five as repository interest,
+  not as evidence of PLY use.
   Reproduce with `python3 scripts/verify_php_ascii_ply.py` and
   `python3 scripts/verify_php_ascii_ply_modules.py`.
   HRConvert2 v4.0.0 parsed the triangle through its tagged PHP Model pipeline
