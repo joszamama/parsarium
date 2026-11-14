@@ -31,15 +31,39 @@ def main() -> None:
     c_runs = {r["package"]: r for r in json.loads((ROOT / "data/c/png/verification.json").read_text())["third_party"]}
     parsers = json.loads((DATA / "parsers.json").read_text())
     extra_lock = json.loads((DATA / "extra-source-lock.json").read_text())
-    assert len(parsers) == 23 and {p["name"] for p in parsers} == set(c_parsers) | {"sfml", "opencv", "openimageio"}
-    assert set(c_parsers) == set(c_runs) and set(extra_lock) == {"sfml", "opencv", "openimageio"}
+    assert len(parsers) == 24 and {p["name"] for p in parsers} == set(c_parsers) | {"sfml", "opencv", "openimageio", "wxwidgets"}
+    assert set(c_parsers) == set(c_runs) and set(extra_lock) == {"sfml", "opencv", "openimageio", "wxwidgets"}
     TARGET.mkdir(parents=True, exist_ok=True)
     rows = []
     local_libraries = {}
     for parser in parsers:
         name = parser["name"]
         prebuild_command = None
-        if name == "openimageio":
+        if name == "wxwidgets":
+            item = extra_lock[name]
+            assert parser["version"] == item["release"]
+            assert platform.system() == "Darwin" and platform.machine() == "arm64"
+            assert run(["brew", "list", "--versions", name]) == f"{name} {item['release']}"
+            assert run(["wx-config", "--version"]) == item["release"]
+            assert sha256(Path(run(["brew", "--cache", name])).read_bytes()).hexdigest() == item["bottle_sha256"]
+            prefix = Path(run(["brew", "--prefix", name]))
+            headers = {header: prefix / header for header in item["installed_headers"]}
+            assert all(sha256(path.read_bytes()).hexdigest() == item["installed_headers"][header]
+                       for header, path in headers.items())
+            libraries = {library: prefix / "lib" / library for library in item["installed_libraries"]}
+            assert all(sha256(path.read_bytes()).hexdigest() == item["installed_libraries"][library]
+                       for library, path in libraries.items())
+            libpng = Path(item["linked_libpng"])
+            assert sha256(libpng.read_bytes()).hexdigest() == item["linked_libpng_sha256"]
+            assert str(libpng) in run(["otool", "-L", str(libraries["libwx_osx_cocoau_core-3.3.4.0.0.dylib"])])
+            flags = shlex.split(run(["wx-config", "--cxxflags"])) + shlex.split(run(["wx-config", "--libs", "base,core"]))
+            command = ["c++", "-std=c++17", "-O2", str(ROOT / parser["adapter"]),
+                       *flags, "-o", str(TARGET / name)]
+            local_libraries[name] = {"bottle_sha256": item["bottle_sha256"],
+                                     "header_sha256": item["installed_headers"],
+                                     "library_sha256": item["installed_libraries"],
+                                     "linked_libpng_sha256": item["linked_libpng_sha256"]}
+        elif name == "openimageio":
             item = extra_lock[name]
             assert parser["version"] == item["release"]
             assert platform.system() == "Darwin" and platform.machine() == "arm64"

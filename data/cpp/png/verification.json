@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T23:15:23.561989+00:00",
+  "checked_at_utc": "2026-11-14T23:20:47.239758+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/png/source-lock.json",
@@ -30,6 +30,18 @@
       "linked_libpng_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73",
       "fmt_header_sha256": "5e740d482da59d18744ee2065fcfef721a332f88d09872139733fe8822ba3c2a",
       "fmt_library_sha256": "08e7dfa0b2fd39fca232d44a7f1b4c9969ef1c702cc8635fd4d1a8f0cb2ca941"
+    },
+    "wxwidgets": {
+      "bottle_sha256": "0f554fde69b6abacfc3c6ed0f39611c9419295d8f6e19933300fe7028ee9359b",
+      "header_sha256": {
+        "include/wx-3.3/wx/image.h": "f992d9c3fb64f1f2b9ad9af009f056d6bac8b0be8e1fa42349c95c8f5eba640d",
+        "include/wx-3.3/wx/imagpng.h": "13ab8798b0e19b37e9cef9aeb6afc7a3ada7765d4cbf6b9f64d634007676730a"
+      },
+      "library_sha256": {
+        "libwx_osx_cocoau_core-3.3.4.0.0.dylib": "2e03524f551ff307dc8047c8d511f5018d93862f97a34811cd5432b5020e72db",
+        "libwx_baseu-3.3.4.0.0.dylib": "7cc3639987fd1d3940e23b5207063040e8feeb86007c9eebb4f5db8134760aa5"
+      },
+      "linked_libpng_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73"
     }
   },
   "prerequisite_verifier": "scripts/verify_c_png.py",
@@ -593,6 +605,29 @@
           255,
           0,
           255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "wxwidgets",
+      "version": "3.3.4",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/wxwidgets.cpp -I/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.3 -I/opt/homebrew/include/wx-3.3 -D_FILE_OFFSET_BITS=64 -DwxDEBUG_LEVEL=0 -DWXUSINGDLL -D__WXMAC__ -D__WXOSX__ -D__WXOSX_COCOA__ -L/opt/homebrew/lib -framework IOKit -framework Carbon -framework Cocoa -framework QuartzCore -framework AudioToolbox -framework System -framework OpenGL -lwx_baseu-3.3 -lwx_osx_cocoau_core-3.3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/wxwidgets",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/wxwidgets /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
         ]
       },
       "pass": true

@@ -253,13 +253,22 @@
       "release_commit": "96377f681cc9e6650c8534671f4fc36b3c8acbc1",
       "installed_bottle_release": "3.2.2.0_1",
       "installed_bottle_sha256": "39a93aff673496178878499900c4b864e03764b56fc1c19b55b0a7250fe97bf6"
+    },
+    "wxwidgets": {
+      "version": "3.3.4",
+      "license": "LGPL-2.0-or-later WITH WxWindows-exception-3.1",
+      "license_evidence": "https://github.com/wxWidgets/wxWidgets/blob/v3.3.4/docs/licence.txt",
+      "source_url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2",
+      "source_sha256": "815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98",
+      "release_commit": "6a42a4b999b127cf28a8b5fe686da6b8ca93a9b8",
+      "installed_bottle_sha256": "0f554fde69b6abacfc3c6ed0f39611c9419295d8f6e19933300fe7028ee9359b"
     }
   },
   "popularity_metric": {
     "name": "GitHub repository stargazers_count",
     "source": "GitHub REST repository API",
     "captured_at_utc": "2026-11-12T07:20:18.790315+00:00",
-    "limitation": "Primary repository stars are compared only within this C++ PNG cell. They measure repository-level attention, not C++ usage or PNG parser calls. The C and C++ cells share 20 package paths; SFML bundles stb_image, while OpenCV and OpenImageIO link libpng; no cross-ecosystem star comparison is made. Six primary upstreams lack a comparable GitHub metric.",
+    "limitation": "Primary repository stars are compared only within this C++ PNG cell. They measure repository-level attention, not C++ usage or PNG parser calls. The C and C++ cells share 20 package paths; SFML bundles stb_image, while OpenCV, OpenImageIO and wxWidgets link libpng; no cross-ecosystem star comparison is made. Six primary upstreams lack a comparable GitHub metric.",
     "packages": {
       "libpng": {
         "repository": "pnggroup/libpng",
@@ -383,11 +392,17 @@
         "repository": "https://github.com/AcademySoftwareFoundation/OpenImageIO",
         "source": "https://api.github.com/repos/AcademySoftwareFoundation/OpenImageIO",
         "observed_at_utc": "2026-11-14T23:13:11Z"
+      },
+      "wxwidgets": {
+        "stars": 7307,
+        "repository": "https://github.com/wxWidgets/wxWidgets",
+        "source": "https://api.github.com/repos/wxWidgets/wxWidgets",
+        "observed_at_utc": "2026-11-14T23:19:08Z"
       }
     },
     "captured_between_utc": [
       "2026-11-12T07:20:18.790315+00:00",
-      "2026-11-14T23:13:11Z"
+      "2026-11-14T23:19:08Z"
     ]
   },
   "targeted_documentation": [
@@ -498,6 +513,12 @@
       "url": "https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html",
       "candidate": "openimageio",
       "finding": "Official release documentation shows ImageInput::open(local filename), ImageSpec dimensions and read_image pixels; the pinned Homebrew bottle passed the PNG control with decoded RGBA pixels."
+    },
+    {
+      "query": "wxWidgets 3.3.4 wxPNGHandler wxImage LoadFile local PNG",
+      "url": "https://github.com/wxWidgets/wxWidgets/blob/v3.3.4/include/wx/image.h",
+      "candidate": "wxwidgets",
+      "finding": "Tagged header declares wxImage::LoadFile(local filename) and handler registration; the official wxWidgets programming book documents wxPNGHandler and PNG file input. The pinned bottle passed the valid PNG control with decoded RGB pixels."
     }
   ],
   "shared_registry_snapshot_from": "data/c/png/registry-snapshot.json"
