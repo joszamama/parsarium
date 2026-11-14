@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T22:04:01.607665+00:00",
+  "checked_at_utc": "2026-11-14T22:09:41.743063+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -139,6 +139,14 @@
       "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
       "glib": "2.90.1",
       "build_scope": "Unmodified tagged Mash data and PLY loader sources with bundled RPly; preincluded compatibility header fixes upstream's data-loader type alias, and Cogl upload functions observe parsed geometry. Full Clutter rendering is not verified."
+    },
+    "sk_renderer": {
+      "source_sha256": "18e5db4993352b2bca7ad871b07ce157083e3c65d28a8f125e248451bdc9f4b1",
+      "release_commit": "31d7a85cc6926b045319a5f881b857ac51d11b4a",
+      "adapter_sha256": "fbef51b4a9e343432517cabfc903d44641a4e2516f533f6d6b08eb2344b128c1",
+      "compiler": "Homebrew clang version 23.1.4",
+      "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+      "build_scope": "Tag-pinned standalone micro_ply.h from sk_renderer; no graphics runtime linked. The file is identical to the author's header-libs copy, so this is one shared parser family."
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -435,6 +443,21 @@
       },
       "pass": true,
       "note": "Public mash_data_load parsed local ASCII PLY through bundled RPly; graphics upload was observed with stand-ins, and a published type-alias typo needed a compile-time correction."
+    },
+    {
+      "package": "sk_renderer",
+      "version": "v2026.11.3",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "clang -std=c11 -O2 -Wall -Wextra -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-sk-renderer-kwssp5oh /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/sk_renderer.c -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-sk-renderer-kwssp5oh/sk-renderer-ply-control",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-sk-renderer-kwssp5oh/sk-renderer-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "converted": 3,
+        "second_x": 1.0
+      },
+      "pass": true,
+      "note": "Tagged C micro_ply parser read local ASCII PLY bytes and converted the second vertex X coordinate; full renderer was not built."
     }
   ],
   "runtime": []

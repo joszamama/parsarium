@@ -116,7 +116,7 @@
     "status": "unresolved",
     "source": "https://github.com/maluoi/header-libs",
     "api_evidence": "https://github.com/maluoi/header-libs/blob/master/micro_ply.h",
-    "reason": "MIT or public-domain C header documents ply_read(local bytes, length, output), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded."
+    "reason": "MIT or public-domain C header documents ply_read(local bytes, length, output), but header-libs itself publishes no tag or numbered release. A byte-identical copy in separately tagged sk_renderer v2026.11.3 passed a local ASCII PLY control and is counted under that package path, not as header-libs."
   },
   {
     "name": "MeshInspector/MeshLib",
@@ -269,5 +269,11 @@
     "status": "excluded_no_library_api",
     "source": "https://github.com/mnhrdt/imscript",
     "reason": "Repository describes standalone C image-processing utilities, with PLY handling in program files; no released library-level local PLY input API or tag was documented."
+  },
+  {
+    "name": "vfonov/rply 1.1.4",
+    "status": "excluded_duplicate",
+    "source": "https://github.com/vfonov/rply/tree/1.1.4",
+    "reason": "Tagged fork is a byte-identical mirror of official RPly 1.1.4 for rply.c, rply.h, and LICENSE (SHA-256 80575385..., 35fd6893..., 0ea6ddfb...). It is the same package source, so a second row would duplicate RPly."
   }
 ]

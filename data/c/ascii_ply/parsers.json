@@ -360,5 +360,25 @@
     "scope": "One valid ASCII PLY triangle; tagged C loader and bundled RPly with graphics upload observed through stand-ins",
     "family": "Mash PLY loader over bundled RPly 1.01",
     "family_note": "Separate released LGPL C package, sharing RPly parser lineage with Rig, BRL-CAD and the RPly package. The tagged MASH_TYPE_DATA_LOADER header has a type alias typo corrected by preinclude during this control; full Clutter rendering is not verified."
+  },
+  {
+    "name": "sk_renderer",
+    "version": "v2026.11.3",
+    "license": "MIT OR Unlicense",
+    "license_evidence": "https://github.com/StereoKit/sk_renderer/blob/v2026.11.3/example/tools/micro_ply.h",
+    "documentation": "https://github.com/StereoKit/sk_renderer/blob/v2026.11.3/README.md",
+    "input_api_evidence": "https://github.com/StereoKit/sk_renderer/blob/v2026.11.3/example/tools/micro_ply.h",
+    "input_api": "Read local PLY file into bytes; ply_read(bytes, length, ply_file_t*); ply_convert(vertex element, position properties, output)",
+    "adapter": "adapters/c/ascii_ply/sk_renderer.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "converted": 3,
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; parsed vertex and face element counts and second X coordinate from converted vertex body",
+    "family": "micro_ply standalone C parser by Nick Klingensmith",
+    "family_note": "Released sk_renderer package publishes the same micro_ply.h bytes as the author’s unversioned maluoi/header-libs repository. This is one parser family, not two independent engines. Renderer GPU APIs are not involved in this standalone reader control."
   }
 ]
