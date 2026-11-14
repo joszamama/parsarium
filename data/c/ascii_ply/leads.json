@@ -224,5 +224,47 @@
     "status": "excluded_no_ply_input_api",
     "source": "https://github.com/neperfepx/neper/blob/v7.0.0/src/neut/neut_tess/neut_tess_fprintf/neut_tess_fprintf1.c",
     "reason": "Code-search PLY match is a tessellation print/export function, not local PLY input."
+  },
+  {
+    "name": "EvilPudding/candle",
+    "status": "unresolved",
+    "source": "https://github.com/EvilPudding/candle/blob/master/formats/ply.c",
+    "reason": "MIT C game engine source exposes mesh_load_ply(local filename) and has substantial repository interest (385 stars at inspection), but upstream has no tag or numbered release; a pinned qualifying release and control replay are absent."
+  },
+  {
+    "name": "synave/a2ri",
+    "status": "unresolved",
+    "source": "https://github.com/synave/a2ri/blob/main/src/ply.c",
+    "reason": "LGPL C library source exposes a2ri_vf_load_ply_ascii and a2ri_vef_load_ply_ascii. The archived 0.3 source tarball lacks PLY code; current PLY source labels itself 0.4 but no 0.4 package release or tag was found. No qualifying release/control replay."
+  },
+  {
+    "name": "ros-interactive-manipulation/household_objects_database PLY module",
+    "status": "rejected_non_open_source",
+    "source": "https://github.com/ros-interactive-manipulation/household_objects_database/blob/0.1.4/src/ply.c",
+    "reason": "Tagged project bundles Greg Turk PLY source whose file header prohibits sale, despite the project having a versioned release."
+  },
+  {
+    "name": "nci/drishti PLY module",
+    "status": "rejected_non_open_source",
+    "source": "https://github.com/nci/drishti/blob/v-3.2linux/common/src/mesh/ply.c",
+    "reason": "Tagged MIT project bundles Greg Turk PLY source whose file header prohibits sale; the bundled parser cannot satisfy the open-source requirement."
+  },
+  {
+    "name": "mteg/capoc PLY module",
+    "status": "rejected_non_open_source",
+    "source": "https://github.com/mteg/capoc/blob/master/ply_io.c",
+    "reason": "Apache-2.0 project bundles Greg Turk PLY source whose file header prohibits sale; no independent open-source PLY implementation was established."
+  },
+  {
+    "name": "MPI-IS/mesh plyutils C extension",
+    "status": "excluded_python_api",
+    "source": "https://github.com/MPI-IS/mesh/blob/v0.4/mesh/src/plyutils.c",
+    "reason": "Tagged project documents a Python mesh package; its C source exposes a Python extension method, not a documented C local-file input API. Potential Python lead, outside the C cell."
+  },
+  {
+    "name": "mnhrdt/imscript",
+    "status": "excluded_no_library_api",
+    "source": "https://github.com/mnhrdt/imscript",
+    "reason": "Repository describes standalone C image-processing utilities, with PLY handling in program files; no released library-level local PLY input API or tag was documented."
   }
 ]
