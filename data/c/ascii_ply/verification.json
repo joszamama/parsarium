@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T20:33:06.303723+00:00",
+  "checked_at_utc": "2026-11-14T20:37:28.792954+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -64,6 +64,14 @@
       "bext_commit": "42d8d7ca57f9d2f61192b41f0b41a731f1ba6c47",
       "libgcv_sha256": "70f0a652c1449031497c1dd1d7b21217c4364ae73cabce925c794cb89dd4b410",
       "gcv_ply_plugin_sha256": "af0fed287ec6dda097d794669c16bb6cdbfee2ff826ff79237b9f48398c268bc"
+    },
+    "ops_pointcloud": {
+      "source_sha256": "88c85517a02ce6ac25b7cfce0c4e742c7c5b75258d67ac8285f48136a78ca153",
+      "sdk_sha256": "43d5f8d0f430b6419af393ec332a3f6ffb1abe63690497e43b9151aece4cc6a0",
+      "installed_files": {
+        "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/include/ops_pointcloud.h": "70d4261ee8c562f0500a2350a81d54773388e00e0e6c65f10fc810871f911f32",
+        "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/lib/libops_pointcloud.dylib": "83c4c7502144b931c8fc44c78c48b3285bb3bc3bea083c824f4fb3c1b65b7066"
+      }
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -219,6 +227,19 @@
           1,
           2
         ]
+      },
+      "pass": true
+    },
+    {
+      "package": "ops_pointcloud",
+      "version": "2026.45.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/ops_pointcloud.c -L/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/lib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/lib -lops_pointcloud -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/ops-pointcloud-c-ply",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/ops-pointcloud-c-ply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "points": 3,
+        "second_x": 1.0,
+        "last_y": 1.0
       },
       "pass": true
     }

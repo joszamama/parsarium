@@ -183,5 +183,31 @@
       "brlcad-7.46.0/src/libgcv/plugins/ply/CMakeLists.txt": "e3e2be49b483daa71709ddc53485c200cc0d0d0db728ca6d8ec7ed7470ebcd93"
     },
     "build_note": "Build gcv-ply with BRL-CAD 7.46.0 and its pinned bext dependency commit. Disable optional BRLCAD_EXTRA dependencies in bext. Its PLY plugin bundles RPly 1.1.4 and defaults to a 1000 coordinate scale (meters to millimeters)."
+  },
+  "ops_pointcloud": {
+    "release": "2026.45.1",
+    "license": "LGPL-3.0-or-later",
+    "source_build": "official_binary_sdk",
+    "source_url": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/archive/refs/tags/v2026.45.1.tar.gz",
+    "source_sha256": "88c85517a02ce6ac25b7cfce0c4e742c7c5b75258d67ac8285f48136a78ca153",
+    "sdk_url": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/releases/download/v2026.45.1/open-pointcloud-studio-sdk_2026.45.1_macos-universal-dylib.tar.gz",
+    "sdk_sha256": "43d5f8d0f430b6419af393ec332a3f6ffb1abe63690497e43b9151aece4cc6a0",
+    "sdk_prefix": "open-pointcloud-studio-sdk_2026.45.1_macos-universal-dylib",
+    "sdk_members": {
+      "include/ops_pointcloud.h": "70d4261ee8c562f0500a2350a81d54773388e00e0e6c65f10fc810871f911f32",
+      "lib/libops_pointcloud.dylib": "83c4c7502144b931c8fc44c78c48b3285bb3bc3bea083c824f4fb3c1b65b7066"
+    },
+    "source_members": {
+      "open-pointcloud-studio-2026.45.1/LICENSE.md": "a66cc080f0bbdf2c47c356b7b0b4f93502d549348374d7ae4503a226cc3ff29a",
+      "open-pointcloud-studio-2026.45.1/docs/library.md": "5a5e2363d09f692589b690e0c323f1036cd1093bff7ec3756ebf3f88093967a2",
+      "open-pointcloud-studio-2026.45.1/native/Cargo.toml": "7f0dfe51d2c65c7d3511c298101239fdaa4f1222bddb743b9bd85173bde34975",
+      "open-pointcloud-studio-2026.45.1/native/Cargo.lock": "154a4b19382ae0a9c061fa7abb60004fd68ed225d04b68c464b5b9caca5adddd",
+      "open-pointcloud-studio-2026.45.1/native/sdk/include/ops_pointcloud.h": "70d4261ee8c562f0500a2350a81d54773388e00e0e6c65f10fc810871f911f32",
+      "open-pointcloud-studio-2026.45.1/native/sdk/src/lib.rs": "4f3cb5214fb78de7f0b1028e40fa1a129b49ee5b3da65a7542b6d96f55d36da4",
+      "open-pointcloud-studio-2026.45.1/native/core/src/ply.rs": "c45835b8e703ce274f6a2fbe67b0cf729b78d23d0b5edbc272f9e0e6d56505b9",
+      "open-pointcloud-studio-2026.45.1/native/core/src/ply_mesh.rs": "124d2f3406221a0a7031d1773b43d92ab892a25a298a2dd20c72be87a0a514c1",
+      "open-pointcloud-studio-2026.45.1/native/core/src/ops.rs": "84e0e3f53c14e0d6c4b25ea6884c48afadb3390cf200abff7760496853888b9f"
+    },
+    "build_note": "Official macOS universal C SDK binary and matching tagged source are SHA-256 pinned. The C API wraps the project native Rust ASCII PLY point reader. The triangle control proves vertex parsing; this API does not expose the face through this adapter."
   }
 }

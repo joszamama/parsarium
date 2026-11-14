@@ -14,6 +14,7 @@ import tempfile
 from verify_f3d_ascii_ply import verify_native as verify_f3d_native
 from verify_mdal_ascii_ply import verify as verify_mdal_native
 from verify_brlcad_ascii_ply import verify_native as verify_brlcad_native
+from verify_ops_pointcloud_ascii_ply import verify_native as verify_ops_pointcloud_native
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,6 +68,13 @@ def verify(ecosystem: str) -> None:
             rows.append(row)
             local_libraries[name] = library
             print(f"brlcad@{parser['version']}: c ASCII PLY passed", flush=True)
+            continue
+        if name == "ops_pointcloud":
+            assert ecosystem == "c"
+            row, library = verify_ops_pointcloud_native()
+            rows.append(row)
+            local_libraries[name] = library
+            print(f"ops_pointcloud@{parser['version']}: c ASCII PLY passed", flush=True)
             continue
         suffix = next(s for s in (".tar.gz", ".tar.bz2", ".tar.xz") if source["source_url"].endswith(s))
         archive = cache / f"{name}-{source['release']}{suffix}"
