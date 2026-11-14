@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T20:37:28.792954+00:00",
+  "checked_at_utc": "2026-11-14T20:43:45.710943+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -71,6 +71,17 @@
       "installed_files": {
         "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/include/ops_pointcloud.h": "70d4261ee8c562f0500a2350a81d54773388e00e0e6c65f10fc810871f911f32",
         "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-ops-pointcloud-2026.45.1/sdk/lib/libops_pointcloud.dylib": "83c4c7502144b931c8fc44c78c48b3285bb3bc3bea083c824f4fb3c1b65b7066"
+      }
+    },
+    "pdal_c": {
+      "source_sha256": "69161ed5abcdde26192fd4a02b646fcb5f3451dea3bebf73e92ba2f28a7346f4",
+      "pdal_source_sha256": "cd85b00503a596107eb67be6e837f6cd679db2d1cb7d1121f4c426563a5f0723",
+      "conda_lock": "adapters/c/ascii_ply/pdal_c-conda-lock.json",
+      "installed_files": {
+        "/tmp/parsarium-pdal-c-env/include/pdal/pdalc.h": "66fde127746f343881f69cec94db1e2ae2e45482f2c39afbe2252714bf83d9c0",
+        "/tmp/parsarium-pdal-c-env/include/pdal/pdalc_pipeline.h": "0abeb2f036640cfeea903aab591bbcc06a4de668f6cddb5d96d0e6dbb61025c9",
+        "/tmp/parsarium-pdal-c-env/lib/libpdalc.2.10.0.dylib": "3754c7fedd877eac84345d58d4d016287d4f5599e4ed8dce1a570a4ed4e3b760",
+        "/tmp/parsarium-pdal-c-env/lib/libpdalcpp.20.2.0.dylib": "7623d20e8530ae78691f2f7ce456c772f4c56f9c20b63d719483434c1c21174f"
       }
     }
   },
@@ -240,6 +251,19 @@
         "points": 3,
         "second_x": 1.0,
         "last_y": 1.0
+      },
+      "pass": true
+    },
+    {
+      "package": "pdal_c",
+      "version": "2.2.3",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror -I/tmp/parsarium-pdal-c-env/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/pdal_c.c -L/tmp/parsarium-pdal-c-env/lib -Wl,-rpath,/tmp/parsarium-pdal-c-env/lib -lpdalc -o /tmp/parsarium-pdal-c-ply",
+      "command": "/tmp/parsarium-pdal-c-ply /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "points": 3,
+        "view_points": 3,
+        "triangles": 0
       },
       "pass": true
     }

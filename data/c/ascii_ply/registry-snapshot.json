@@ -185,6 +185,15 @@
       "sdk_url": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/releases/download/v2026.45.1/open-pointcloud-studio-sdk_2026.45.1_macos-universal-dylib.tar.gz",
       "sdk_sha256": "43d5f8d0f430b6419af393ec332a3f6ffb1abe63690497e43b9151aece4cc6a0",
       "license_evidence": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/LICENSE.md"
+    },
+    "pdal_c": {
+      "version": "2.2.3",
+      "license": "BSD-3-Clause",
+      "source_url": "https://github.com/PDAL/CAPI/archive/refs/tags/v2.2.3.tar.gz",
+      "source_sha256": "69161ed5abcdde26192fd4a02b646fcb5f3451dea3bebf73e92ba2f28a7346f4",
+      "pdal_version": "2.10.2",
+      "pdal_source_sha256": "cd85b00503a596107eb67be6e837f6cd679db2d1cb7d1121f4c426563a5f0723",
+      "license_evidence": "https://github.com/PDAL/CAPI/blob/v2.2.3/LICENSE.md"
     }
   },
   "popularity_metric": {
@@ -242,6 +251,10 @@
       "ops_pointcloud": {
         "install_on_request_365d": null,
         "note": "No Homebrew formula for the C SDK; no comparable requested-install metric."
+      },
+      "pdal_c": {
+        "install_on_request_365d": null,
+        "note": "No Homebrew formula for pdal-c. The PDAL C++ formula is a different package and is not used as a comparable metric."
       }
     }
   },
@@ -313,6 +326,12 @@
       "url": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/docs/library.md",
       "format_evidence": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/README.md#file-formats",
       "disposition": "Verified official 2026.45.1 C SDK against ASCII PLY point coordinates; matching tagged source pinned."
+    },
+    {
+      "name": "pdal_c",
+      "url": "https://github.com/PDAL/CAPI/blob/v2.2.3/README.md",
+      "format_evidence": "https://pdal.io/en/latest/stages/readers.ply.html",
+      "disposition": "Verified pdal-c 2.2.3 C pipeline over PDAL 2.10.2 readers.ply against valid ASCII PLY point count."
     }
   ]
 }

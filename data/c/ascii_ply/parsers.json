@@ -212,5 +212,23 @@
     "scope": "ASCII PLY point cloud subset: three parsed vertex coordinates; faces are not exposed by the point-cloud API",
     "family": "Open Pointcloud Studio native Rust PLY reader through ops_pointcloud C ABI",
     "family_note": "One LGPL point-cloud core with C ABI; distinct package and syntax reader from the other C PLY paths. The local C adapter uses the official released SDK binary."
+  },
+  {
+    "name": "pdal_c",
+    "version": "2.2.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/PDAL/CAPI/blob/v2.2.3/LICENSE.md",
+    "documentation": "https://github.com/PDAL/CAPI/blob/v2.2.3/README.md",
+    "input_api": "PDALCreatePipeline(JSON readers.ply with local filename); PDALExecutePipeline; PDALGetPointViews; PDALGetPointViewSize",
+    "adapter": "adapters/c/ascii_ply/pdal_c.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "points": 3,
+      "view_points": 3,
+      "triangles": 0
+    },
+    "scope": "ASCII PLY point-cloud subset: three parsed points through explicit readers.ply stage; no mesh exposed in this view",
+    "family": "PDAL native PLY reader via pdal-c C API",
+    "family_note": "pdal-c is a separately released BSD-3-Clause C API wrapper over PDAL 2.10.2. The underlying syntax parser is PDAL readers.ply; do not count it as an independent engine from PDAL."
   }
 ]

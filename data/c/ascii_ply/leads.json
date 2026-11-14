@@ -168,5 +168,14 @@
     "release": "2026.45.1",
     "api_evidence": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/native/sdk/include/ops_pointcloud.h",
     "reason": "Official C SDK parsed three ASCII PLY point coordinates from the valid local control; matching tagged source and released library are hash pinned. Point-cloud API does not expose faces in this adapter."
+  },
+  {
+    "name": "PDAL/CAPI pdal-c",
+    "status": "verified",
+    "source": "https://github.com/PDAL/CAPI/tree/v2.2.3",
+    "release": "2.2.3",
+    "api_evidence": "https://github.com/PDAL/CAPI/blob/v2.2.3/source/pdal/pdalc_pipeline.h",
+    "format_evidence": "https://pdal.io/en/latest/stages/readers.ply.html",
+    "reason": "Pinned C API pipeline and PDAL readers.ply returned three points from valid ASCII PLY; view contained no mesh, so only point-cloud parsing is claimed."
   }
 ]

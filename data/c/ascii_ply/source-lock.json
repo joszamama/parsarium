@@ -209,5 +209,34 @@
       "open-pointcloud-studio-2026.45.1/native/core/src/ops.rs": "84e0e3f53c14e0d6c4b25ea6884c48afadb3390cf200abff7760496853888b9f"
     },
     "build_note": "Official macOS universal C SDK binary and matching tagged source are SHA-256 pinned. The C API wraps the project native Rust ASCII PLY point reader. The triangle control proves vertex parsing; this API does not expose the face through this adapter."
+  },
+  "pdal_c": {
+    "release": "2.2.3",
+    "license": "BSD-3-Clause",
+    "source_build": "conda_forge_locked",
+    "source_url": "https://github.com/PDAL/CAPI/archive/refs/tags/v2.2.3.tar.gz",
+    "source_sha256": "69161ed5abcdde26192fd4a02b646fcb5f3451dea3bebf73e92ba2f28a7346f4",
+    "pdal_release": "2.10.2",
+    "pdal_license": "BSD-3-Clause",
+    "pdal_source_url": "https://github.com/PDAL/PDAL/archive/refs/tags/2.10.2.tar.gz",
+    "pdal_source_sha256": "cd85b00503a596107eb67be6e837f6cd679db2d1cb7d1121f4c426563a5f0723",
+    "conda_lock": "adapters/c/ascii_ply/pdal_c-conda-lock.json",
+    "source_members": {
+      "CAPI-2.2.3/LICENSE.md": "1b71d2c763b12a03945fe2c26334946d1fded388efaed306fb08e02cdb753ace",
+      "CAPI-2.2.3/source/pdal/pdalc.h": "66fde127746f343881f69cec94db1e2ae2e45482f2c39afbe2252714bf83d9c0",
+      "CAPI-2.2.3/source/pdal/pdalc_pipeline.h": "0abeb2f036640cfeea903aab591bbcc06a4de668f6cddb5d96d0e6dbb61025c9",
+      "CAPI-2.2.3/source/pdal/pdalc_pointview.h": "ea88b451aa38cf4478e316ca5b36bd5b172236e9d172545016e25aca298670bd"
+    },
+    "pdal_source_members": {
+      "PDAL-2.10.2/LICENSE.txt": "9ab1261b649806f4884539d5fd49d8f2c9a634762ee52f1ddd2330ef417f5cdf",
+      "PDAL-2.10.2/io/PlyReader.cpp": "8f257d990aabf57e16c3d769accb25209c31a0031994cec83e072492c7132c2f"
+    },
+    "installed_files": {
+      "include/pdal/pdalc.h": "66fde127746f343881f69cec94db1e2ae2e45482f2c39afbe2252714bf83d9c0",
+      "include/pdal/pdalc_pipeline.h": "0abeb2f036640cfeea903aab591bbcc06a4de668f6cddb5d96d0e6dbb61025c9",
+      "lib/libpdalc.2.10.0.dylib": "3754c7fedd877eac84345d58d4d016287d4f5599e4ed8dce1a570a4ed4e3b760",
+      "lib/libpdalcpp.20.2.0.dylib": "7623d20e8530ae78691f2f7ce456c772f4c56f9c20b63d719483434c1c21174f"
+    },
+    "build_note": "Exact 60-package conda-forge osx-arm64 artifact lock fixes pdal-c 2.2.3 and libpdal-core 2.10.2. C API pipeline uses PDAL native readers.ply and returns three points from the valid ASCII control; its PointView does not report a mesh for this input."
   }
 }
