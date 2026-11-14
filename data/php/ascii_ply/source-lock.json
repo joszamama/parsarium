@@ -23,5 +23,37 @@
       "binary_sha256": "6cfda9d0a72da8e730d5e0266b2d32ae5fa07c07a138e284c0f3054e7dab7ce3"
     },
     "build_note": "Composer installs the exact 0.3.2 PHP wrapper release. Its InfoVerb appends the supplied local filename and executes the pinned Assimp CLI; the adapter extracts Assimp mesh, vertex and face fields. Later 0.6.0 remains excluded due its observed control failure. The wrapper uses a shell command without escaping, so this replay uses the repository control path."
+  },
+  "collectiveaccess/providence": {
+    "release": "2.0.12",
+    "release_tag": "2.0.12",
+    "release_commit": "49f5d21cbfdbe95568ddba77bcb78fa065bb4664",
+    "license": "GPL-3.0",
+    "source_url": "https://raw.githubusercontent.com/collectiveaccess/providence/2.0.12/app/lib/Parsers/PlyToStl.php",
+    "license_url": "https://raw.githubusercontent.com/collectiveaccess/providence/2.0.12/License.txt",
+    "documentation_url": "https://raw.githubusercontent.com/collectiveaccess/providence/2.0.12/README.md",
+    "adapter": "adapters/php/ascii_ply/providence_ply_to_stl.php",
+    "support": "adapters/php/ascii_ply/support/Db.php",
+    "build_note": "Released app/lib/Parsers/PlyToStl.php reads a local ASCII PLY file and writes STL vertices/facets. Its unused legacy Db.php include is satisfied by a no-op support file; no database or full Providence application is loaded.",
+    "source_sha256": "ad0176a247a6cdc3d4e7a816520e332427e6066385ba483c239aefbc43d15a18",
+    "license_sha256": "c53a65c2fd561c87eaabf1072ef5dcab8653042bc15308465f52413585eb6271",
+    "documentation_sha256": "2964e947f9f081e0d8725c15b069fda094ee46f2e37c4658e1193db2e35f9c29",
+    "adapter_sha256": "06604135e59c1b3b20a3c7af268e99b4d9ad8fef2d0717f4aef68251ed496b76",
+    "support_sha256": "81d75a630c535a5886341c08e9fcd4eaff1bb05030229743d8251322c13a04cb"
+  },
+  "ahg/3d-model": {
+    "release": "1.165.35",
+    "release_tag": "v1.165.35",
+    "release_commit": "e170f84c1246305cf8e57b2a56045b34cdf680ed",
+    "license": "AGPL-3.0-or-later",
+    "source_url": "https://raw.githubusercontent.com/ArchiveHeritageGroup/heratio/v1.165.35/packages/ahg-3d-model/src/Services/ModelMetadataExtractor.php",
+    "license_url": "https://raw.githubusercontent.com/ArchiveHeritageGroup/heratio/v1.165.35/LICENSE",
+    "manifest_url": "https://raw.githubusercontent.com/ArchiveHeritageGroup/heratio/v1.165.35/packages/ahg-3d-model/composer.json",
+    "adapter": "adapters/php/ascii_ply/ahg_3d_model.php",
+    "build_note": "The tagged ahg/3d-model Composer library contains a pure PHP local-file metadata extractor. Its PLY branch parses header-declared vertex and face element counts only; body geometry is outside this row's scope.",
+    "source_sha256": "6183477dfb064f92b008ae85c359200c6de69294f70ac624cb4c515b19562439",
+    "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+    "manifest_sha256": "ecfc83f1446002f911807f3cdda7ba3e89778019b397a4a992943afe84051019",
+    "adapter_sha256": "35a09ebfa14d2f91343fe19da74bd167de7c3a0d8fc3997222acc9196cd8c30c"
   }
 }

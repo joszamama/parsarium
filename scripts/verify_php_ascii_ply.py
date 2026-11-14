@@ -68,14 +68,15 @@ def verify() -> None:
         "platform": platform.platform(), "php": run(["php", "-v"]).splitlines()[0],
         "composer": run(["composer", "--version"]).splitlines()[0],
         "source_lock": "data/php/ascii_ply/source-lock.json",
-        "local_libraries": {"magdev/php-assimp": {
+        "local_libraries": {**result.get("local_libraries", {}), "magdev/php-assimp": {
             "source_sha256": SOURCE["source_sha256"],
             "release_commit": SOURCE["release_commit"],
             "assimp_binary_sha256": SOURCE["underlying_parser"]["binary_sha256"]}},
         "third_party": [{"package": PARSER["name"], "version": PARSER["version"],
                          "control": PARSER["control"], "install_command": shlex.join(install),
-                         "command": shlex.join(execute), "output": output, "pass": True}],
-        "note": "The 0.3.2 PHP package passed through its local InfoVerb API over Assimp 6.0.6; the separately tested 0.6.0 release remains excluded."})
+                         "command": shlex.join(execute), "output": output, "pass": True}]
+                       + [row for row in result["third_party"] if row["package"] != PARSER["name"]],
+        "note": "Three PHP paths passed the valid ASCII PLY control. Providence converted vertex and face rows to STL with a no-op Db.php include for an unused legacy dependency. Heratio parsed header element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded."})
     (DATA / "verification.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
     print("magdev/php-assimp@0.3.2: PHP ASCII PLY passed", flush=True)
 

@@ -193,6 +193,12 @@ def main() -> None:
                     assert parser["version"] == release["version"] == source["release"]
                     assert source["source_sha256"] == release["source_sha256"]
                     assert len(source["source_sha256"]) == 64
+                elif parser.get("source_kind") == "tagged_source_module":
+                    source = read(parser["source_lock"])[name]
+                    assert parser["version"] == release["version"] == source["release"]
+                    assert source["release_commit"] == release["source_reference"]
+                    assert source["source_sha256"] == release["source_sha256"]
+                    assert len(source["source_sha256"]) == 64
                 else:
                     lock_path = ROOT / parser["composer_lock"]
                     locked = {package["name"]: package
