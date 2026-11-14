@@ -375,5 +375,35 @@
       "adapters/c/ascii_ply/cogl/cogl.h": "e8b2437977757c93a5c8edf2c456cf72024227a6b7a2dc400b4b54f6df05feeb"
     },
     "build_note": "The tagged PLY loader and bundled RPly sources compile unchanged. A minimal preincluded compatibility header suppresses unrelated Rut and Cogl dependency headers; observation functions retain mesh fields after upstream parsing. This is not a full Rig graphics integration test."
+  },
+  "mash": {
+    "release": "0.2.0",
+    "release_tag": "0.2.0",
+    "release_tag_object": "024e980e137896cc5e4bd490ae03aaa66cf8567c",
+    "release_commit": "56ecce4b5f31eb77a418f84550653517d8b3dd7f",
+    "license": "LGPL-2.1-or-later; bundled RPly MIT",
+    "source_url": "https://api.github.com/repos/clutter-project/mash/tarball/refs/tags/0.2.0",
+    "source_sha256": "a25f8bd267e12f1914849ac3db3280eeba0fa84785346e8ee8847f3f8414bfa1",
+    "archive_root": "clutter-project-mash-024e980",
+    "source_members": {
+      "clutter-project-mash-024e980/COPYING.LIB": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a",
+      "clutter-project-mash-024e980/README": "23d2ef2e9e6fef9fcf012c53275d3bdff773811cce7972bfc08d03113ebdb5fc",
+      "clutter-project-mash-024e980/mash/mash-data.h": "5a029a971057ace4392fff80ac8538509b4ab64bb48353297f7b3fb40f31d797",
+      "clutter-project-mash-024e980/mash/mash-data.c": "4f4bc1ecb0c68edc648a9c64f6cc28e76273b53f58ef47cc7829925eb045e345",
+      "clutter-project-mash-024e980/mash/mash-data-loader.h": "0fd7a14283491570b5036ee683572fb1470d3fd4a116bad49d4029ab89c0b3e7",
+      "clutter-project-mash-024e980/mash/mash-data-loader.c": "117b4ce5cf42ee1fbc24f8774c267d2277619d9e05faf8691c6dab334f445773",
+      "clutter-project-mash-024e980/mash/mash-ply-loader.h": "92428c3a19ab0277a5863e1ebbd47bc9f9ec349f74b1a7a84c26b3f51617a8bf",
+      "clutter-project-mash-024e980/mash/mash-ply-loader.c": "f7f28d7de55729de8e7c5ac5dd4c15ce6ac78b673e90e8ff28183fd31b0e4e2e",
+      "clutter-project-mash-024e980/mash/rply/rply.c": "23f238368051ee6f832b05effbb90c27d4b1c6eb7cb8eb0aad3454baf24dfbc7",
+      "clutter-project-mash-024e980/mash/rply/rply.h": "5114975a3de7782703e0c9cb15844de60ee834a989f9192af8c4416225a9f738",
+      "clutter-project-mash-024e980/mash/rply/LICENSE": "3fbb3988caf3c6e38d327b68c0f05494195a1cde8446edabf620ad941b2df6a0"
+    },
+    "adapter_files": {
+      "adapters/c/ascii_ply/mash.c": "7581e741972b79605218c0cd6931f5c8013523398778353dc8b31d096b3252fe",
+      "adapters/c/ascii_ply/mash_mock/mash_compat.h": "62848847c15ed06e57ffc39e0bdcb71a7bb670506689d129f8cb69643d1c4221",
+      "adapters/c/ascii_ply/mash_mock/cogl/cogl.h": "c68803d9d0842ffe57459f12aa032408666d2510d69e2378287b5555767f99e3",
+      "adapters/c/ascii_ply/mash_mock/clutter/clutter.h": "b781d3fdf70378c174c736892a2a02b39dc4c8aeba234451fd0345705b3f026b"
+    },
+    "build_note": "Tagged Mash C sources are unmodified. A preincluded header corrects the published MASH_TYPE_DATA_LOADER macro, which aliases MashData rather than MashDataLoader. Stand-in Cogl and Clutter types capture parsed geometry after Mash reads the input; full rendering integration is not tested."
   }
 }

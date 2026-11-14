@@ -334,5 +334,31 @@
     "scope": "One valid ASCII PLY triangle; unmodified tagged parser with mesh/GPU support replaced by observation-only stand-ins",
     "family": "Rig Rut PLY loader over bundled RPly 1.01",
     "family_note": "Separate tagged C package path, but its PLY syntax parsing uses bundled RPly 1.01, so it is not an independent parser engine from RPly or BRL-CAD. Full Cogl/Rut graphics integration is not verified."
+  },
+  {
+    "name": "mash",
+    "version": "0.2.0",
+    "license": "LGPL-2.1-or-later; bundled RPly MIT",
+    "license_evidence": "https://github.com/clutter-project/mash/blob/0.2.0/COPYING.LIB",
+    "documentation": "https://github.com/clutter-project/mash/blob/0.2.0/mash/mash-data.h",
+    "input_api_evidence": "https://github.com/clutter-project/mash/blob/0.2.0/mash/mash-data.c",
+    "input_api": "mash_data_new(); mash_data_load(data, MASH_DATA_NONE, local .ply filename, GError**); mash_data_get_extents",
+    "adapter": "adapters/c/ascii_ply/mash.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "indices": 3,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0,
+      "min_x": 0.0,
+      "max_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; tagged C loader and bundled RPly with graphics upload observed through stand-ins",
+    "family": "Mash PLY loader over bundled RPly 1.01",
+    "family_note": "Separate released LGPL C package, sharing RPly parser lineage with Rig, BRL-CAD and the RPly package. The tagged MASH_TYPE_DATA_LOADER header has a type alias typo corrected by preinclude during this control; full Clutter rendering is not verified."
   }
 ]

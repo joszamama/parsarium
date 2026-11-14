@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T21:58:24.679457+00:00",
+  "checked_at_utc": "2026-11-14T22:04:01.607665+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -125,6 +125,20 @@
       "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
       "glib": "2.90.1",
       "build_scope": "Unmodified tagged rut-mesh-ply.c and bundled rply.c; mesh allocation and Cogl feature calls are observation stand-ins, not a full Rig graphics build."
+    },
+    "mash": {
+      "source_sha256": "a25f8bd267e12f1914849ac3db3280eeba0fa84785346e8ee8847f3f8414bfa1",
+      "release_commit": "56ecce4b5f31eb77a418f84550653517d8b3dd7f",
+      "adapter_files": {
+        "adapters/c/ascii_ply/mash.c": "7581e741972b79605218c0cd6931f5c8013523398778353dc8b31d096b3252fe",
+        "adapters/c/ascii_ply/mash_mock/mash_compat.h": "62848847c15ed06e57ffc39e0bdcb71a7bb670506689d129f8cb69643d1c4221",
+        "adapters/c/ascii_ply/mash_mock/cogl/cogl.h": "c68803d9d0842ffe57459f12aa032408666d2510d69e2378287b5555767f99e3",
+        "adapters/c/ascii_ply/mash_mock/clutter/clutter.h": "b781d3fdf70378c174c736892a2a02b39dc4c8aeba234451fd0345705b3f026b"
+      },
+      "compiler": "Homebrew clang version 23.1.4",
+      "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+      "glib": "2.90.1",
+      "build_scope": "Unmodified tagged Mash data and PLY loader sources with bundled RPly; preincluded compatibility header fixes upstream's data-loader type alias, and Cogl upload functions observe parsed geometry. Full Clutter rendering is not verified."
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -400,6 +414,27 @@
       },
       "pass": true,
       "note": "Tagged Rig C loader parsed the local ASCII PLY triangle through bundled RPly; stand-ins only retain parsed mesh fields. Full graphics integration is not verified."
+    },
+    {
+      "package": "mash",
+      "version": "0.2.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "clang -std=gnu11 -O2 -Wno-deprecated-declarations -DMASH_COMPILATION -include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/mash_mock/mash_compat.h -I /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/mash_mock -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/clutter-project-mash-024e980/mash -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/mash.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/clutter-project-mash-024e980/mash/mash-data.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/clutter-project-mash-024e980/mash/mash-data-loader.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/clutter-project-mash-024e980/mash/mash-ply-loader.c /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/clutter-project-mash-024e980/mash/rply/rply.c -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/mash-ply-control",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-mash-944px6dc/mash-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "indices": 3,
+        "face": [
+          0,
+          1,
+          2
+        ],
+        "second_x": 1.0,
+        "min_x": 0.0,
+        "max_x": 1.0
+      },
+      "pass": true,
+      "note": "Public mash_data_load parsed local ASCII PLY through bundled RPly; graphics upload was observed with stand-ins, and a published type-alias typo needed a compile-time correction."
     }
   ],
   "runtime": []
