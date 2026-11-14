@@ -91,5 +91,28 @@
     "status": "excluded_no_open_source_license",
     "reason": "PHP source contains PLY-related header inspection and the repository has a tag, but no repository-level open-source license was found at the inspected main branch; vendor TinyMCE license files do not license this application. The package therefore fails the open-source release criterion.",
     "source": "https://github.com/ilyamus74-ctrl/insta3D"
+  },
+  {
+    "name": "MyMiniFactory/pluggable-threesixty-renderer",
+    "status": "excluded_no_release",
+    "source": "https://github.com/MyMiniFactory/pluggable-threesixty-renderer",
+    "api_evidence": "https://github.com/MyMiniFactory/pluggable-threesixty-renderer/blob/master/README.md",
+    "reason": "The Docker CLI accepts a local 3D file and the PHP script can invoke Assimp, but the repository has no tagged release. Its documentation does not establish PLY-specific support or a released PHP library API. Search hit only; no control was credited."
+  },
+  {
+    "name": "zelon88/HRCloud2",
+    "status": "excluded_no_local_library_api",
+    "source": "https://github.com/zelon88/HRCloud2/tree/v3.0",
+    "api_evidence": "https://github.com/zelon88/HRCloud2/blob/v3.0/cloudCore.php",
+    "reason": "Tagged web application v3.0 lists PLY among model extensions and runs meshlabserver in a convertSelected POST handler. No documented callable local file/byte/stream PHP parser API was found. The web action is not a qualifying library path, and no local PLY control was credited."
+  },
+  {
+    "name": "ahg/core PointCloudConverterService",
+    "status": "excluded_underlying_converter_no_ascii_ply",
+    "source": "https://github.com/ArchiveHeritageGroup/heratio/blob/v1.165.35/packages/ahg-core/src/Services/PointCloudConverterService.php",
+    "documentation": "https://github.com/ArchiveHeritageGroup/heratio/blob/v1.165.35/docs/pointcloud-setup.md",
+    "underlying_parser_family": "PotreeConverter",
+    "underlying_evidence": "https://github.com/potree/PotreeConverter/blob/2.1.5/Converter/src/main.cpp",
+    "reason": "The tagged PHP service documents a local path and claims .ply support, but its prescribed PotreeConverter build is unpinned. The inspected PotreeConverter 2.1.5 curateSources implementation admits only .las/.laz files and calls loadLasHeader, so this documented dependency path cannot return a format-aware ASCII PLY result. No adapter or control passed. A different PotreeConverter release might behave differently, but it is not verified here."
   }
 ]
