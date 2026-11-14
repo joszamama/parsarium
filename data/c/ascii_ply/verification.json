@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T22:21:16.144033+00:00",
+  "checked_at_utc": "2026-11-14T22:29:58.471750+00:00",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
   "source_lock": "data/c/ascii_ply/source-lock.json",
@@ -155,6 +155,14 @@
       "docker_image": "ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
       "host_platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
       "build_scope": "Full tagged StereoKitC shared library in Ubuntu 24.04 arm64; C11 adapter uses a one-line header compatibility copy for an unguarded C++ default argument. Offscreen Mesa EGL initialization and model file loading passed."
+    },
+    "gmsh": {
+      "source_sha256": "be3f66f225d27ba9fa014f07e83169285da8a051b0e8ab7103d88066b39bdd3e",
+      "sdk_sha256": "2ebbc7c241a1681fc21e1bd32fe7f6637449bf407dbd642cf4f8751d56d46b25",
+      "adapter_sha256": "76f6689d05cc161ff6ecec852a31e7aa6c05d4c59c797f31e7fe8e97d675790b",
+      "compiler": "Homebrew clang version 23.1.4",
+      "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+      "build_scope": "Official 4.15.2 SDK's libgmsh and C header; source archive and matching header checked against the tagged release. No source build."
     }
   },
   "control": "controls/ascii_ply/triangle.ply",
@@ -486,6 +494,21 @@
       },
       "pass": true,
       "note": "Full StereoKit C ABI parsed a local PLY file, returning one mesh subset, three vertex coordinates, and triangle indices. C header compatibility copy removes an invalid C++ default argument only. Shares the micro_ply parser family."
+    },
+    {
+      "package": "gmsh",
+      "version": "4.15.2",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "clang -std=c11 -O2 -Wall -Wextra -Werror -I /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-gmsh-muu9bhut/gmsh-4.15.2-MacOSARM-sdk/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/ascii_ply/gmsh.c -L /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-gmsh-muu9bhut/gmsh-4.15.2-MacOSARM-sdk/lib -Wl,-rpath,/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-gmsh-muu9bhut/gmsh-4.15.2-MacOSARM-sdk/lib -lgmsh -o /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-gmsh-muu9bhut/gmsh-ply-control",
+      "command": "/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-gmsh-muu9bhut/gmsh-ply-control /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "triangles": 1,
+        "triangle_nodes": 3,
+        "x_sum": 1.0
+      },
+      "pass": true,
+      "note": "Gmsh's C gmshOpen parsed the local ASCII PLY triangle; mesh getters returned three coordinates, one triangle and its three node references."
     }
   ],
   "runtime": []

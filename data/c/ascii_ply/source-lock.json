@@ -455,5 +455,29 @@
       "CPM.cmake": "0.38.7"
     },
     "build_note": "Builds the full StereoKitC shared library in a digest-pinned Ubuntu 24.04 image using upstream CMake dependency references. A generated compatibility copy of the public header removes one unguarded C++ default argument so an ordinary C11 client compiles; the tagged library sources are unchanged. Offscreen Mesa EGL is required. The PLY path uses bundled micro_ply from the same family as sk_renderer."
+  },
+  "gmsh": {
+    "release": "4.15.2",
+    "release_tag": "gmsh_4_15_2",
+    "release_commit": "657c8e915f60405e6cad0c8ec7faf812bfff1a60",
+    "source_kind": "official_source_and_sdk",
+    "license": "GPL-2.0-or-later with listed linking exception",
+    "source_url": "https://gmsh.info/src/gmsh-4.15.2-source.tgz",
+    "source_sha256": "be3f66f225d27ba9fa014f07e83169285da8a051b0e8ab7103d88066b39bdd3e",
+    "source_files_sha256": {
+      "LICENSE.txt": "32085d8c954e2e22dc667c089f360049e8f1af955f946fb0a18f29d70390276a",
+      "api/gmshc.h": "05c906d986976e057e0305027212e2d10dd09915298efe5684627bbe4a9d112f",
+      "src/common/OpenFile.cpp": "fb4fd25921bca55a6d4ac24768ce660a489499caf41879c968eca3d8ac9ab427",
+      "src/geo/GModelIO_PLY.cpp": "677c69774707600bb8868939f05cbb5cba29bec8d3108543e9c7517366dd2d93"
+    },
+    "sdk_url": "https://gmsh.info/bin/macOS/gmsh-4.15.2-MacOSARM-sdk.tgz",
+    "sdk_sha256": "2ebbc7c241a1681fc21e1bd32fe7f6637449bf407dbd642cf4f8751d56d46b25",
+    "sdk_published_sha256_url": "https://gmsh.info/bin/macOS/gmsh-4.15.2-MacOSARM-sdk.tgz.sha256",
+    "sdk_files_sha256": {
+      "include/gmshc.h": "05c906d986976e057e0305027212e2d10dd09915298efe5684627bbe4a9d112f",
+      "lib/libgmsh.4.15.2.dylib": "def0f5c10988a986e5e879b3db9669d8fe016a81e2d994bbaf2b8497c6b8a58a"
+    },
+    "adapter_sha256": "76f6689d05cc161ff6ecec852a31e7aa6c05d4c59c797f31e7fe8e97d675790b",
+    "build_note": "Official source tarball and MacOS ARM SDK are SHA-256 pinned. The SDK C header is byte-identical to the source release header. The C11 adapter links the released libgmsh; the full library is not built locally."
   }
 }

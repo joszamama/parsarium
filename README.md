@@ -8,12 +8,12 @@ verified third-party parser paths per cell, with 30 as the ceiling. A zero count
 does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
-The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 19 and PHP × ASCII PLY has 4.
+The catalogue has 80 ecosystem × format cells. Seventy-nine have at least 20
+verified third-party paths; PHP × ASCII PLY has 4.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,477 of 1,631 verified package paths have a recorded comparable cell metric;
+1,478 of 1,632 verified package paths have a recorded comparable cell metric;
 154 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
@@ -1174,10 +1174,11 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): nineteen verified package
-  paths, 1 below the working goal. F3D 4.0.1 parsed the triangle through its
-  C binding and ranks second among packages with comparable Homebrew requested
-  installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): 20 verified package
+  paths, meeting the working goal. Gmsh 4.15.2 parsed the triangle through
+  its C API and ranks second among packages with comparable Homebrew requested
+  installs. F3D 4.0.1 ranks third; its C binding delegates PLY parsing to
+  VTK. `msh_ply` v1.02 parsed the valid
   triangle through its pinned C single-header API; it has no comparable Homebrew metric.
   MDAL 1.3.3 parsed the same control through its C ABI over bundled `libplyxx`;
   its upstream header requires a minimal C compatibility declaration and it is unranked.
@@ -1228,6 +1229,10 @@ or quality judgment.
   pinned Ubuntu container; the loader shares the `micro_ply` family with
   sk_renderer. Reproduce with Docker and
   `python3 scripts/verify_stereokit_c_ascii_ply.py`.
+  Gmsh 4.15.2 parsed the triangle through the official C SDK's `gmshOpen`
+  and mesh getters. Its source and SDK archives are SHA-256 pinned; the
+  source and SDK C headers are identical. Reproduce on macOS ARM with
+  `python3 scripts/verify_gmsh_c_ascii_ply.py`.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
