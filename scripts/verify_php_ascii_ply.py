@@ -76,7 +76,7 @@ def verify() -> None:
                          "control": PARSER["control"], "install_command": shlex.join(install),
                          "command": shlex.join(execute), "output": output, "pass": True}]
                        + [row for row in result["third_party"] if row["package"] != PARSER["name"]],
-        "note": "Three PHP paths passed the valid ASCII PLY control. Providence converted vertex and face rows to STL with a no-op Db.php include for an unused legacy dependency. Heratio parsed header element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded."})
+        "note": "Four PHP package paths passed the valid ASCII PLY control. Providence and Pawtucket2 contain byte-identical PLY-to-STL classes; Heratio parsed header element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded."})
     (DATA / "verification.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
     print("magdev/php-assimp@0.3.2: PHP ASCII PLY passed", flush=True)
 

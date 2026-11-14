@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T21:20:35.161035+00:00",
+  "checked_at_utc": "2026-11-14T21:37:37.417476+00:00",
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
   "third_party": [
@@ -23,7 +23,7 @@
       "source_url": "https://raw.githubusercontent.com/collectiveaccess/providence/2.0.12/app/lib/Parsers/PlyToStl.php",
       "source_sha256": "ad0176a247a6cdc3d4e7a816520e332427e6066385ba483c239aefbc43d15a18",
       "release_commit": "49f5d21cbfdbe95568ddba77bcb78fa065bb4664",
-      "command": "php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_ply/providence_ply_to_stl.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-php-ply-y2ze807t/collectiveaccess-providence.php",
+      "command": "php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_ply/providence_ply_to_stl.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-php-ply-sl4kjyrl/collectiveaccess-providence.php",
       "output": {
         "facets": 1,
         "vertices": 3,
@@ -38,10 +38,25 @@
       "source_url": "https://raw.githubusercontent.com/ArchiveHeritageGroup/heratio/v1.165.35/packages/ahg-3d-model/src/Services/ModelMetadataExtractor.php",
       "source_sha256": "6183477dfb064f92b008ae85c359200c6de69294f70ac624cb4c515b19562439",
       "release_commit": "e170f84c1246305cf8e57b2a56045b34cdf680ed",
-      "command": "php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_ply/ahg_3d_model.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-php-ply-y2ze807t/ahg-3d-model.php",
+      "command": "php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_ply/ahg_3d_model.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-php-ply-sl4kjyrl/ahg-3d-model.php",
       "output": {
         "vertices": 3,
         "faces": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "collectiveaccess/pawtucket2",
+      "version": "2.0.12",
+      "control": "controls/ascii_ply/triangle.ply",
+      "source_url": "https://raw.githubusercontent.com/collectiveaccess/pawtucket2/2.0.12/app/lib/Parsers/PlyToStl.php",
+      "source_sha256": "ad0176a247a6cdc3d4e7a816520e332427e6066385ba483c239aefbc43d15a18",
+      "release_commit": "34467e9974e6e7525c55c39b4aced584eb873d21",
+      "command": "php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_ply/providence_ply_to_stl.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-php-ply-sl4kjyrl/collectiveaccess-pawtucket2.php",
+      "output": {
+        "facets": 1,
+        "vertices": 3,
+        "second_x": 1
       },
       "pass": true
     }
@@ -59,7 +74,7 @@
       "observed_error": "Declaration of Assimp\\Command\\Result\\AbstractResult::isExecuted() must be compatible with Assimp\\Command\\Result\\Interfaces\\ResultInterface::isExecuted(): bool"
     }
   ],
-  "note": "Three PHP paths passed the valid ASCII PLY control. Providence converted vertex and face rows to STL using a no-op Db.php include for its unused legacy dependency. Heratio parsed header element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded.",
+  "note": "Four PHP package paths passed the valid ASCII PLY control. Providence and Pawtucket2 contain byte-identical PLY-to-STL classes and converted vertex and face rows using a no-op Db.php include for an unused legacy dependency. Heratio parsed header element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded.",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php": "PHP 8.5.12 (cli) (built: Oct 19 2026 17:02:46) (NTS)",
   "composer": "Composer version 2.11.2 2026-11-10 10:09:37",
@@ -77,6 +92,10 @@
     "ahg/3d-model": {
       "source_sha256": "6183477dfb064f92b008ae85c359200c6de69294f70ac624cb4c515b19562439",
       "release_commit": "e170f84c1246305cf8e57b2a56045b34cdf680ed"
+    },
+    "collectiveaccess/pawtucket2": {
+      "source_sha256": "ad0176a247a6cdc3d4e7a816520e332427e6066385ba483c239aefbc43d15a18",
+      "release_commit": "34467e9974e6e7525c55c39b4aced584eb873d21"
     }
   }
 }

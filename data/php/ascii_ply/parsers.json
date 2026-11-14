@@ -58,5 +58,25 @@
     "scope": "PLY header-only parsing: declared vertex and face element counts from a valid local ASCII triangle; no vertex/face body data read",
     "family": "Heratio pure PHP PLY header metadata extractor",
     "family_note": "Distinct ahg/3d-model Composer library within the Heratio monorepo. Extracts PLY-specific header counts directly in PHP, without Assimp or Providence code."
+  },
+  {
+    "name": "collectiveaccess/pawtucket2",
+    "version": "2.0.12",
+    "source_kind": "tagged_source_module",
+    "source_lock": "data/php/ascii_ply/source-lock.json",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/collectiveaccess/pawtucket2/blob/2.0.12/License.txt",
+    "documentation": "https://github.com/collectiveaccess/pawtucket2/blob/2.0.12/app/lib/Parsers/PlyToStl.php",
+    "input_api": "PlyToStl::convert(local ASCII PLY path, local STL output path); parses vertex coordinates and face indices",
+    "adapter": "adapters/php/ascii_ply/providence_ply_to_stl.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "facets": 1,
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; converted STL contains one facet, three vertices and the second X coordinate",
+    "family": "CollectiveAccess native PHP PlyToStl shared with Providence",
+    "family_note": "Separately tagged Pawtucket2 application distribution; its 2.0.12 parser file is byte-identical to Providence 2.0.12. The shared adapter supplies a no-op file for an unused Db.php include. These are distinct package paths but only one source-level parser engine."
   }
 ]

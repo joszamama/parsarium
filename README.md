@@ -9,12 +9,12 @@ does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 14 and PHP × ASCII PLY has 3.
+verified third-party paths; C × ASCII PLY has 14 and PHP × ASCII PLY has 4.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,477 of 1,625 verified package paths have a recorded comparable cell metric;
-148 are unranked; 122 measured values are zero. A recorded zero is not evidence of
+1,477 of 1,626 verified package paths have a recorded comparable cell metric;
+149 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1210,14 +1210,15 @@ or quality judgment.
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
-- [PHP × ASCII PLY ranking](data/php/ascii_ply/ranking.md): three verified paths,
-  17 below the working goal. The tagged MIT magdev/php-assimp 0.3.2 wrapper
+- [PHP × ASCII PLY ranking](data/php/ascii_ply/ranking.md): four verified paths,
+  16 below the working goal. The tagged MIT magdev/php-assimp 0.3.2 wrapper
   invoked pinned Assimp 6.0.6 on the local triangle and returned one mesh,
   three vertices, and one face; its later 0.6.0 release failed separately.
-  Providence 2.0.12 converted parsed PLY vertex and face rows to STL through
-  its PHP parser class. Heratio `ahg/3d-model` 1.165.35 parsed PLY header
-  element counts, without reading body geometry. Only magdev has the comparable
-  Packagist metric (94 lifetime downloads); the other two remain unranked.
+  Providence and Pawtucket2 2.0.12 converted parsed PLY vertex and face rows
+  to STL through byte-identical PHP parser classes in separately tagged
+  distributions. Heratio `ahg/3d-model` 1.165.35 parsed PLY header element
+  counts, without reading body geometry. Only magdev has the comparable
+  Packagist metric (94 lifetime downloads); the other three remain unranked.
   Reproduce with `python3 scripts/verify_php_ascii_ply.py` and
   `python3 scripts/verify_php_ascii_ply_modules.py`.
   [Supplementary bounded searches](data/php/ascii_ply/supplementary-search.json)

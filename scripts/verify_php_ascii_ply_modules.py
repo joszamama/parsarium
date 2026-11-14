@@ -16,7 +16,7 @@ DATA = ROOT / "data/php/ascii_ply"
 CONTROL = ROOT / "controls/ascii_ply/triangle.ply"
 LOCK = json.loads((DATA / "source-lock.json").read_text())
 PARSERS = {item["name"]: item for item in json.loads((DATA / "parsers.json").read_text())}
-NAMES = ("collectiveaccess/providence", "ahg/3d-model")
+NAMES = ("collectiveaccess/providence", "ahg/3d-model", "collectiveaccess/pawtucket2")
 
 
 def digest(path: Path) -> str:
@@ -71,9 +71,10 @@ def verify() -> None:
     result["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
     result["platform"] = platform.platform()
     result["php"] = run(["php", "-v"]).splitlines()[0]
-    result["note"] = ("Three PHP paths passed the valid ASCII PLY control. Providence converted vertex and face rows "
-                      "to STL using a no-op Db.php include for its unused legacy dependency. Heratio parsed header "
-                      "element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded.")
+    result["note"] = ("Four PHP package paths passed the valid ASCII PLY control. Providence and Pawtucket2 "
+                      "contain byte-identical PLY-to-STL classes and converted vertex and face rows using a no-op "
+                      "Db.php include for an unused legacy dependency. Heratio parsed header element counts only. "
+                      "The separately tested magdev/php-assimp 0.6.0 remains excluded.")
     result.setdefault("local_libraries", {}).update({name: {
         "source_sha256": LOCK[name]["source_sha256"],
         "release_commit": LOCK[name]["release_commit"],
