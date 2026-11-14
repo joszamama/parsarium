@@ -1184,11 +1184,18 @@ or quality judgment.
   CyberMeshGenerator 0.5.0 parsed the same triangle through a tagged MIT C ABI;
   it has no comparable Homebrew metric, and zero GitHub stars are only an auxiliary signal.
   Greg Turk's `ply_io` source was rejected because its file-level license
-  restricts sale.
+  restricts sale. Four supplementary [GitHub search windows](data/c/ascii_ply/supplementary-search.json)
+  added 34 leads. Three documented C readers lack a versioned upstream release;
+  MeshLib's pinned license is non-open-source and simpleOCCTVP only exports PLY.
+  BRL-CAD libgcv remains an unverified, documented C PLY import lead.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption
   order; the count does not establish a definitive most-used top 20.
+- [PHP × ASCII PLY ranking](data/php/ascii_ply/ranking.md): zero verified paths.
+  [Supplementary bounded searches](data/php/ascii_ply/supplementary-search.json)
+  found Assimp wrapper extensions and unrelated packages, but no working
+  documented PHP ASCII PLY input API. All 20 target paths remain unknown.
 - [Java × ASCII PLY ranking](data/java/ascii_ply/ranking.md): twenty verified
   paths, reaching the working count. Incomplete adoption metrics and bounded
   search coverage prevent a definitive most-used top-20 claim. Thirteen have

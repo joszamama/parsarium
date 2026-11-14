@@ -41,5 +41,23 @@
       "command": "Instantiate Assimp\\Command\\Verbs\\InfoVerb(local control path), execute with Assimp\\Command\\Command and noCache=true",
       "observed_result": "Fatal error: AbstractResult::isExecuted() declaration must be compatible with ResultInterface::isExecuted(): bool. With default caching, execution stops earlier because getCached() declares a nonnullable ResultInterface return but returns null. InfoVerb::getCommand() emits only info without the input path."
     }
+  },
+  {
+    "name": "magdev/php-assimp-validator",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://packagist.org/packages/magdev/php-assimp-validator",
+    "reason": "Symfony validator extension depends on the magdev Assimp wrapper and documents validation, not a PLY file parsing API."
+  },
+  {
+    "name": "magdev/php-assimp-silex-provider",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://packagist.org/packages/magdev/php-assimp-silex-provider",
+    "reason": "Silex service provider exposes the magdev Assimp wrapper; it does not supply a distinct working local PLY parsing API."
+  },
+  {
+    "name": "soiposervices/laravel-assimp2amc",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://github.com/SoipoServices/laravel-assimp2amc",
+    "reason": "Project documentation describes verification of OBJ model folders via a separate .NET executable; no PLY input API is documented."
   }
 ]

@@ -95,5 +95,69 @@
     "source": "https://people.sc.fsu.edu/~jburkardt/c_src/ply_io/ply_io.html",
     "license_evidence": "https://people.sc.fsu.edu/~jburkardt/c_src/ply_io/ply_io.c",
     "reason": "The publication page calls the code MIT, but the published source file header prohibits selling the software; the file-level field restriction fails open-source eligibility. No adapter counted."
+  },
+  {
+    "name": "renehorstmann/Plyc",
+    "status": "unresolved",
+    "source": "https://github.com/renehorstmann/Plyc",
+    "api_evidence": "https://github.com/renehorstmann/Plyc#loading-a-point-cloud",
+    "reason": "MIT C library documents ply_simple_load(local filename), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded."
+  },
+  {
+    "name": "quepas/O-RPLY",
+    "status": "unresolved",
+    "source": "https://github.com/quepas/O-RPLY",
+    "api_evidence": "https://github.com/quepas/O-RPLY#whats-new",
+    "family": "RPly 1.1.4 fork",
+    "reason": "MIT C library documents ply_open_from_memory(buffer), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded."
+  },
+  {
+    "name": "maluoi/header-libs micro_ply",
+    "status": "unresolved",
+    "source": "https://github.com/maluoi/header-libs",
+    "api_evidence": "https://github.com/maluoi/header-libs/blob/master/micro_ply.h",
+    "reason": "MIT or public-domain C header documents ply_read(local bytes, length, output), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded."
+  },
+  {
+    "name": "MeshInspector/MeshLib",
+    "status": "rejected_non_open_source",
+    "source": "https://github.com/MeshInspector/MeshLib",
+    "release": "v3.2.0.3",
+    "license_evidence": "https://github.com/MeshInspector/MeshLib/blob/v3.2.0.3/LICENSE",
+    "reason": "The pinned release license limits use to non-commercial evaluation or education and restricts redistribution, so it fails open-source eligibility despite a documented C PLY input API."
+  },
+  {
+    "name": "SecondMouseAU/simpleOCCTVP",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://github.com/SecondMouseAU/simpleOCCTVP",
+    "release": "v0.2.1",
+    "api_evidence": "https://github.com/SecondMouseAU/simpleOCCTVP/blob/v0.2.1/src/occt_templot.h",
+    "reason": "The tagged C API provides ot_export_ply but no PLY import function; its PLY claim is export-only."
+  },
+  {
+    "name": "MrSinho/plyimporter",
+    "status": "excluded_binary_only",
+    "source": "https://github.com/MrSinho/plyimporter",
+    "reason": "Project documentation explicitly says binary-only PLY loading; this cell requires ASCII PLY."
+  },
+  {
+    "name": "jtsiomb/meshfile",
+    "status": "excluded_no_ply_support",
+    "source": "https://github.com/jtsiomb/meshfile#file-formats",
+    "reason": "Documented supported mesh formats omit PLY."
+  },
+  {
+    "name": "esmitt/PLYReader",
+    "status": "excluded_cpp_api",
+    "source": "https://github.com/esmitt/PLYReader",
+    "family": "RPly 1.1.4",
+    "reason": "The documented reader is a C++ wrapper over RPly; no distinct C library input API beyond already counted RPly."
+  },
+  {
+    "name": "BRL-CAD libgcv",
+    "status": "unresolved",
+    "source": "https://brlcad.org/docs/html/articles/gcv.html",
+    "api_evidence": "https://www.brlcad.org/docs/html/man3/libgcv.html",
+    "reason": "Official documentation describes a C geometry-conversion API and PLY import support, including an Assimp-backed reader. A pinned release, local C API control run, and exact underlying PLY plugin family are still needed; no Homebrew formula is available on this host."
   }
 ]
