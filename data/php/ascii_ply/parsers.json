@@ -78,5 +78,27 @@
     "scope": "One valid ASCII PLY triangle; converted STL contains one facet, three vertices and the second X coordinate",
     "family": "CollectiveAccess native PHP PlyToStl shared with Providence",
     "family_note": "Separately tagged Pawtucket2 application distribution; its 2.0.12 parser file is byte-identical to Providence 2.0.12. The shared adapter supplies a no-op file for an unused Db.php include. These are distinct package paths but only one source-level parser engine."
+  },
+  {
+    "name": "zelon88/hrconvert2",
+    "version": "v4.0.0",
+    "source_kind": "tagged_source_module",
+    "source_lock": "data/php/ascii_ply/source-lock.json",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/zelon88/HRConvert2/blob/v4.0.0/LICENSE",
+    "documentation": "https://github.com/zelon88/HRConvert2/blob/v4.0.0/Resources/Pipelines/Model/pipelineConfig.php",
+    "input_api_evidence": "https://github.com/zelon88/HRConvert2/blob/v4.0.0/Resources/Pipelines/Model/pipeline.php",
+    "input_api": "convertModels(local ASCII PLY path, local OBJ output path, \"obj\"); uses PyMeshLab to load PLY and Assimp to export OBJ",
+    "adapter": "adapters/php/ascii_ply/hrconvert2.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "x_sum": 1.0,
+      "completed_stages": 2
+    },
+    "scope": "One valid ASCII PLY triangle converted through real PyMeshLab and Assimp stages; OBJ geometry and both stage outputs observed",
+    "family": "HRConvert2 PHP Model pipeline over PyMeshLab PLY reader and Assimp exporter",
+    "family_note": "Separate tagged GPL PHP application module; PyMeshLab/MeshLab reads PLY and Assimp exports OBJ. The standalone adapter supplies host-application services and omits the web server sandbox. This is one package path over underlying native readers, not an independent PHP syntax parser."
   }
 ]

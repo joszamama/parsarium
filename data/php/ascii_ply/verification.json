@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-14T21:37:37.417476+00:00",
+  "checked_at_utc": "2026-11-14T22:41:27.587929+00:00",
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
   "third_party": [
@@ -59,6 +59,20 @@
         "second_x": 1
       },
       "pass": true
+    },
+    {
+      "package": "zelon88/hrconvert2",
+      "version": "v4.0.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "command": "php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/php/ascii_ply/hrconvert2.php /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-hrconvert2-3mkouevk/source/Resources/Pipelines/Model/pipeline.php /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-hrconvert2-3mkouevk/triangle.obj",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "x_sum": 1,
+        "completed_stages": 2
+      },
+      "pass": true,
+      "note": "Unmodified tagged PHP convertModels pipeline accepted local ASCII PLY and used real PyMeshLab and Assimp stages; standalone host-service shims supplied tool paths and ran commands without the web application's sandbox."
     }
   ],
   "runtime": [],
@@ -74,7 +88,7 @@
       "observed_error": "Declaration of Assimp\\Command\\Result\\AbstractResult::isExecuted() must be compatible with Assimp\\Command\\Result\\Interfaces\\ResultInterface::isExecuted(): bool"
     }
   ],
-  "note": "Four PHP package paths passed the valid ASCII PLY control. Providence and Pawtucket2 contain byte-identical PLY-to-STL classes and converted vertex and face rows using a no-op Db.php include for an unused legacy dependency. Heratio parsed header element counts only. The separately tested magdev/php-assimp 0.6.0 remains excluded.",
+  "note": "Five PHP package paths passed the valid ASCII PLY control; HRConvert2 is a tagged PHP application module over PyMeshLab and Assimp. The PHP standard/runtime inventory remains separate.",
   "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
   "php": "PHP 8.5.12 (cli) (built: Oct 19 2026 17:02:46) (NTS)",
   "composer": "Composer version 2.11.2 2026-11-10 10:09:37",
@@ -96,6 +110,17 @@
     "collectiveaccess/pawtucket2": {
       "source_sha256": "ad0176a247a6cdc3d4e7a816520e332427e6066385ba483c239aefbc43d15a18",
       "release_commit": "34467e9974e6e7525c55c39b4aced584eb873d21"
+    },
+    "zelon88/hrconvert2": {
+      "source_sha256": "7e5018273402f38fc61c9e17d34238dbbc038a1d27b9373e24e6689df4c7bd09",
+      "release_commit": "c23a536c4929196666f08d2b294482accf22c001",
+      "adapter_sha256": "5fa19c7947450bcf069613611124956927965ea237bfaff6784c60ad958a2e55",
+      "requirements_lock_sha256": "610824d4e7d0cff32cd898954271ddea23fee8b81adf578e1b8b716a3d456c25",
+      "assimp_binary_sha256": "6cfda9d0a72da8e730d5e0266b2d32ae5fa07c07a138e284c0f3054e7dab7ce3",
+      "assimp_library_sha256": "c1bb8ea194fc914d4dd7177eee0065d39fad4902749942d6c8621d9f8815a318",
+      "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+      "php": "PHP 8.5.12 (cli) (built: Oct 19 2026 17:02:46) (NTS)",
+      "build_scope": "Tagged HRConvert2 PHP Model pipeline with standalone host-service shims; real PyMeshLab 2025.7 and Assimp 6.0.6 stages both produced output. Full web server and its sandbox policy were not run."
     }
   }
 }

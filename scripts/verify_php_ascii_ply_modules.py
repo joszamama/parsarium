@@ -71,7 +71,7 @@ def verify() -> None:
     result["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
     result["platform"] = platform.platform()
     result["php"] = run(["php", "-v"]).splitlines()[0]
-    result["note"] = ("Four PHP package paths passed the valid ASCII PLY control. Providence and Pawtucket2 "
+    result["note"] = ("This run reverified the Providence, Pawtucket2 and Heratio modules. Providence and Pawtucket2 "
                       "contain byte-identical PLY-to-STL classes and converted vertex and face rows using a no-op "
                       "Db.php include for an unused legacy dependency. Heratio parsed header element counts only. "
                       "The separately tested magdev/php-assimp 0.6.0 remains excluded.")
