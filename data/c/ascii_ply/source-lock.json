@@ -258,5 +258,30 @@
     },
     "adapter_sha256": "00ba7f81b7123fc7ac2b41dea25fd461aa1ff1d6cf3c1fc021099a9532fc505b",
     "build_note": "Build unmodified tagged PLY loader source and the C observation harness for x86_64. The harness implements the GPU upload and model storage boundaries without a graphics device; all PLY header, vertex, face and index parsing runs in upstream code. macOS arm64 executes the x86_64 binary through Rosetta. Full Vulkan engine is outside this control replay."
+  },
+  "pcc": {
+    "release": "0.1.0",
+    "license": "GPL-3.0",
+    "source_url": "https://github.com/filrg/pcc/archive/refs/tags/v0.1.0.tar.gz",
+    "source_sha256": "265a3d2cb3c73582edf300c172c1cb566991952aad22c6cb18c96530636bfbe0",
+    "release_commit": "2690a0c76f8cdcdbbf3b2c7926f14c16ed33db5f",
+    "source_members": {
+      "pcc-0.1.0/LICENSE": "e57f1c320b8cf8798a7d2ff83a6f9e06a33a03585f6e065fea97f1d86db84052",
+      "pcc-0.1.0/README.md": "94270c8108779769cf2d8ea9874b821572e611141c2ad8e51917be52a161d719",
+      "pcc-0.1.0/BUILDING.md": "ac136f1abc45311c4c17f8f0a48bb97a727ac3949bbc039353de5fa1fb4ecc3f",
+      "pcc-0.1.0/CMakeLists.txt": "a24bb90ffd727855a3a2c32f5e7fab49f18400e89f811841bd5ceadb3195f934",
+      "pcc-0.1.0/include/pcc/point_cloud.h": "4a8293f6f0142466afafce5864cdb834df88eebdb202b5aaccbf338c2a4eac8f",
+      "pcc-0.1.0/include/pcc/def.h": "587159c8a0380dce18c3deead821f8cd641757aa7e6fcb6fc2c9a4cd4b724903",
+      "pcc-0.1.0/include/pcc/octree.h": "a63962998bc4b64eff6b407f2a07de1c13a7c9021a76e5164342e95b9f8df074",
+      "pcc-0.1.0/source/point_cloud.c": "0d718df58aec1e09306f41a4e096eed7c93b4f20a422741355e4508a44f5978d",
+      "pcc-0.1.0/source/octree.c": "a2b473dacd150089bc03a558957dc8aa516645ab05ae624120cbb22c324f25cc",
+      "pcc-0.1.0/source/ply.cpp": "49146c071c190fbee9f9e1305bc014cd391b2521482d961b2a63d86dd809b4c2",
+      "pcc-0.1.0/source/miniply.cpp": "6355134bc456c7af5220b8b216b133cc32e8a97106e59bb6cae392d3500bee55",
+      "pcc-0.1.0/source/internal/ply.h": "b61be8491b214f3568d1347e9508732671c13bbbe690dd9e689b6b0115a6fffb",
+      "pcc-0.1.0/source/internal/miniply/miniply.h": "96ecee2a18fa5f336ea57b9d100d1003c9db7295f5676fd1bb95346dadf2528d",
+      "pcc-0.1.0/source/internal/msh_ply.h": "52c0b9d985eaec1d3bca463bed8a132ea8cd3d5159c8f931b94f47643828122e"
+    },
+    "adapter_sha256": "dc840530fea2ccf3fe25028bbe09a6f2dcba906342182d39e48d52d98abb204e",
+    "build_note": "Upstream CMake build with USE_ZSTD=OFF still compiles pcc.c, which unconditionally includes zstd.h. The replay configures CMake to generate its export header, then compiles the unmodified point_cloud.c, octree.c, ply.cpp and miniply.cpp parser path directly, without unrelated codec code. Public C point-cloud API delegates to bundled miniply C++ PLYReader."
   }
 }

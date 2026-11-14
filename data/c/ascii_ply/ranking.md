@@ -1,6 +1,6 @@
 # C × ASCII PLY: verified parser ranking
 
-12 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within this ecosystem.
+13 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts cover 2025-11-13 through 2026-11-13 and measure broad formula adoption, not PLY-specific use. They are compared only within this ecosystem.
 
 | Rank | Package | Pinned release | Homebrew requested installs (365d) | Scope | Underlying family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -16,6 +16,7 @@
 | unranked | [Open Pointcloud Studio C SDK](https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/docs/library.md) | 2026.45.1 | unknown | three parsed point coordinates | native Rust PLY reader through C ABI |
 | unranked | [pdal-c](https://github.com/PDAL/CAPI/tree/v2.2.3) | 2.2.3 | unknown | three parsed points from explicit PLY reader | PDAL native readers.ply through C ABI |
 | unranked | [Blukpast](https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h) | 1.0.6 | unknown | three parsed positions and face indices at GPU upload boundary | Blukpast native C PLY loader |
+| unranked | [PCC](https://github.com/filrg/pcc/blob/v0.1.0/include/pcc/point_cloud.h) | 0.1.0 | unknown | three parsed point coordinates; second X is 1.0 | C point-cloud API over bundled miniply C++ PLYReader |
 
 Assimp C and C++ entry points share one native loader; RPly has its own C parser and a C++ callable API; SPly is a separately released fork of the same parser lineage. The search results include fuzzy names and unresolved leads; a registry hit alone is not proof of format parsing. See `cell.json`, `leads.json`, `source-lock.json`, and `verification.json`.
 
@@ -23,7 +24,7 @@ AssetKit v0.7.4 was verified through its local `ak_load` API in both C and C++. 
 
 SPly 1.2.0 was verified from its tagged MIT source. Its three GitHub stars are an auxiliary project-interest signal; no comparable Homebrew formula metric exists, so its popularity order remains unresolved.
 
-`msh_ply.h` is an upstream versioned single-header publication, pinned to commit `eb1996102858ad467f68d087644759d84df21ca6` and SHA-256. Its documented C local-file API parsed the ASCII triangle. The header offers MIT or Unlicense terms. The repository has no Git tag for this version; that release-form limitation is explicit. Its 67 upstream stars are auxiliary only; no comparable Homebrew requested-install metric exists. Eight paths remain below the working count. Greg Turk's `ply_io` publication is excluded: its source-file license prohibits selling the software, despite the broader publication page calling it MIT.
+`msh_ply.h` is an upstream versioned single-header publication, pinned to commit `eb1996102858ad467f68d087644759d84df21ca6` and SHA-256. Its documented C local-file API parsed the ASCII triangle. The header offers MIT or Unlicense terms. The repository has no Git tag for this version; that release-form limitation is explicit. Its 67 upstream stars are auxiliary only; no comparable Homebrew requested-install metric exists. Seven paths remain below the working count. Greg Turk's `ply_io` publication is excluded: its source-file license prohibits selling the software, despite the broader publication page calling it MIT.
 
 F3D 4.0.1 parsed the local triangle through its C scene API. Its Homebrew requested-install count is comparable with Assimp's in this cell, so it ranks second. The optional C binding and native PLY plugin were built from a SHA-256-pinned source release with pinned VTK 9.7.2. This is a package path over VTK's PLY reader, not an independent parser engine.
 
@@ -31,7 +32,7 @@ MDAL 1.3.3 parsed the same control through its exported C ABI, returning the tri
 
 CyberMeshGenerator 0.5.0's tagged MIT source provides a documented C ABI for local `.ply` input. Its C++ core implements an ASCII-only PLY reader; the C adapter observed the valid control's coordinates and face indices. It has no comparable Homebrew formula count and remains unranked. Its zero GitHub stars observed on 2026-11-13 are an auxiliary signal only, so this path is not claimed to be popular.
 
-Seven supplementary bounded GitHub repository searches saved 48 hits, for 64 exact search hits and 54 unique result identifiers across both recorded surfaces. Plyc, O-RPLY, and `micro_ply` document local C parsing APIs but lack a versioned upstream release, so they remain leads. MeshLib v3.2.0.3 has a non-commercial source license and is excluded. simpleOCCTVP v0.2.1 exposes only PLY export; `plyimporter` is binary-only. The newer search classified melo as C, but its input API is C++. See `supplementary-search.json` and `leads.json`.
+The bounded Homebrew and GitHub search windows saved 464 exact hits with 354 unique result identifiers, including four first-100 code-search windows. Plyc, O-RPLY, `micro_ply`, and `apg_ply` document local C parsing APIs but lack a versioned upstream release. Tagged McCode and Rig C loaders remain unresolved without a control. MeshLib v3.2.0.3 and AFNI's bundled Greg Turk PLY source have non-commercial source restrictions; Goxel and simpleOCCTVP expose only PLY export; `plyimporter` is binary-only. The search classified melo as C, but its input API is C++. See `supplementary-search.json` and `leads.json`.
 
 BRL-CAD libgcv 7.46.0 parsed the local ASCII triangle through its C import API and native `gcv-ply` filter. The adapter retrieved an in-memory BOT with three vertices, one face, indices `[0,1,2]`, and second X coordinate `1000.0`; the plugin defaults to converting meter coordinates to millimeters. Its PLY syntax parser is bundled RPly 1.1.4, so this is a distinct package path and API in an existing parser family. The official release archive, relevant source files, and BRL-CAD's pinned bext commit are recorded. No comparable Homebrew requested-install metric exists, so its popularity position remains unknown.
 
@@ -40,3 +41,5 @@ Open Pointcloud Studio `ops_pointcloud` 2026.45.1 parsed the three PLY vertices 
 `pdal-c` 2.2.3 executed a C API pipeline containing PDAL 2.10.2 `readers.ply` on the local ASCII triangle. It returned three points and a three-point view; the view reported no triangle, so only point-cloud parsing is claimed. The two source releases and 60 exact conda-forge artifacts are pinned. It has no comparable Homebrew requested-install count; the separate PDAL C++ formula is not used as its popularity metric.
 
 Blukpast v1.0.6 passed the valid triangle through its unmodified upstream `bkpLoadPly` source, compiled for x86_64 and executed under Rosetta. The C harness captures the parsed vertex and index arrays at the GPU upload boundary; it does not simulate the parser or claim that the full Vulkan engine runs on this host. The native arm64 engine build failed because upstream uses x86 SIMD flags and headers. Its zero GitHub stars at discovery are an auxiliary project-interest signal, and no comparable Homebrew requested-install count is available. This entry is not claimed to be popular. Reproduce with `python3 scripts/verify_blukpast_ascii_ply.py`.
+
+PCC 0.1.0 passed the valid triangle through its public C `pcc_point_cloud_t.read_from_file` API and returned three positions with second X coordinate 1.0. Its tagged GPL source bundles miniply's C++ PLYReader, a parser family also used by two recorded Python packages. The unrelated PCC codec source requires `zstd.h` even when `USE_ZSTD=OFF`, so the replay configures upstream CMake for its generated header and compiles only unmodified source files on the PLY call path. The full compression library is not covered. No comparable Homebrew requested-install metric exists; three GitHub stars are auxiliary only. Reproduce with `python3 scripts/verify_pcc_c_ascii_ply.py`.

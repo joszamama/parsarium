@@ -194,5 +194,41 @@
     "source": "https://github.com/jing-interactive/melo",
     "api_evidence": "https://github.com/jing-interactive/melo/blob/master/include/melo.h",
     "reason": "Search classified repository as language:C, but public local mesh loader is a C++ namespace API using std::string and Cinder types. No documented C input API or versioned tag."
+  },
+  {
+    "name": "capnramses/gfx_expmts apg_ply",
+    "status": "unresolved",
+    "source": "https://github.com/capnramses/gfx_expmts/blob/master/077_apg_ply/apg_ply.h",
+    "reason": "The public C apg_ply_read(local filename) API is documented in the header and source, but the repository has no Git tags and no numbered upstream release was identified. No pinned release or control replay."
+  },
+  {
+    "name": "mccode-dev/McCode interoff-lib",
+    "status": "unresolved",
+    "source": "https://github.com/mccode-dev/McCode/blob/v3.10.2/common/lib/share/interoff-lib.h",
+    "reason": "Tagged GPL McCode runtime header documents ASCII PLY input and off_init(local filename). Its source uses McCode template includes and has not yet passed a standalone control or full runtime build."
+  },
+  {
+    "name": "rib/rig rut-mesh-ply",
+    "status": "unresolved",
+    "source": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.c",
+    "reason": "Tagged C Rut loader uses RPly and appears to expose a local PLY mesh reader; required Cogl/Rut build and control have not been replayed. Shared RPly family if verified."
+  },
+  {
+    "name": "afni/afni PLY module",
+    "status": "rejected_non_open_source",
+    "source": "https://github.com/afni/afni/blob/AFNI_26.3.11/src/SUMA/PLY/plyfile.c",
+    "reason": "Bundled Greg Turk PLY source file says the software may not be sold, a non-commercial restriction incompatible with the collection's open-source requirement."
+  },
+  {
+    "name": "guillaumechereau/goxel",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://github.com/guillaumechereau/goxel/blob/v0.15.1/src/formats/wavefront.c",
+    "reason": "Tagged PLY format entry provides an export function only; its import function is Wavefront OBJ, not PLY."
+  },
+  {
+    "name": "neperfepx/neper",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://github.com/neperfepx/neper/blob/v7.0.0/src/neut/neut_tess/neut_tess_fprintf/neut_tess_fprintf1.c",
+    "reason": "Code-search PLY match is a tessellation print/export function, not local PLY input."
   }
 ]

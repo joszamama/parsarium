@@ -9,12 +9,12 @@ does **not** establish that no parser exists. See the
 [selection protocol](PROTOCOL.md) before adding a package.
 
 The catalogue has 80 ecosystem × format cells. Seventy-eight have at least 20
-verified third-party paths; C × ASCII PLY has 12 and PHP × ASCII PLY has 3.
+verified third-party paths; C × ASCII PLY has 13 and PHP × ASCII PLY has 3.
 
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
-1,477 of 1,623 verified package paths have a recorded comparable cell metric;
-146 are unranked; 122 measured values are zero. A recorded zero is not evidence of
+1,477 of 1,624 verified package paths have a recorded comparable cell metric;
+147 are unranked; 122 measured values are zero. A recorded zero is not evidence of
 adoption. Twenty verified paths in a cell do not establish a definitive
 most-used top 20 when search coverage or adoption measurements are incomplete.
 Regenerate the report with `python3 scripts/audit_popularity_coverage.py`;
@@ -1174,8 +1174,8 @@ Packages verified after the twentieth row are kept in
 the collection. Package downloads are an adoption proxy, not a security
 or quality judgment.
 
-- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): twelve verified package
-  paths, 8 below the working goal. F3D 4.0.1 parsed the triangle through its
+- [C × ASCII PLY ranking](data/c/ascii_ply/ranking.md): thirteen verified package
+  paths, 7 below the working goal. F3D 4.0.1 parsed the triangle through its
   C binding and ranks second among packages with comparable Homebrew requested
   installs. It delegates PLY parsing to VTK. `msh_ply` v1.02 parsed the valid
   triangle through its pinned C single-header API; it has no comparable Homebrew metric.
@@ -1184,8 +1184,8 @@ or quality judgment.
   CyberMeshGenerator 0.5.0 parsed the same triangle through a tagged MIT C ABI;
   it has no comparable Homebrew metric, and zero GitHub stars are only an auxiliary signal.
   Greg Turk's `ply_io` source was rejected because its file-level license
-  restricts sale. Seven supplementary [GitHub search windows](data/c/ascii_ply/supplementary-search.json)
-  saved 48 hits. Three documented C readers lack a versioned upstream release;
+  restricts sale. Supplementary [GitHub search windows](data/c/ascii_ply/supplementary-search.json)
+  include repository and code searches. Four documented C readers lack a versioned upstream release;
   MeshLib's pinned license is non-open-source and simpleOCCTVP only exports PLY.
   Blukpast 1.0.6 parsed the triangle through its tagged C PLY loader under
   Rosetta. A C harness captures its parsed geometry at the GPU upload boundary;
@@ -1198,6 +1198,10 @@ or quality judgment.
   pdal-c 2.2.3 also parsed the three PLY points through a C pipeline API backed
   by PDAL 2.10.2 `readers.ply`; its 60-package conda environment is locked.
   Reproduce it with `python3 scripts/verify_pdal_c_ascii_ply.py`.
+  PCC 0.1.0 parsed the three PLY points through its public C point-cloud API,
+  backed by bundled miniply C++ source. The replay builds the PLY call path
+  from its pinned release; it has no comparable Homebrew metric. Reproduce with
+  `python3 scripts/verify_pcc_c_ascii_ply.py`.
 - [C++ × ASCII PLY ranking](data/cpp/ascii_ply/ranking.md): 21 verified package
   paths. F3D 4.0.1 ranks fifth by comparable Homebrew requested installs and
   shares VTK's PLY reader family. Other unranked paths have unresolved adoption

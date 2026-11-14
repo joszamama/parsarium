@@ -254,5 +254,23 @@
     "scope": "One valid ASCII PLY triangle with three parsed positions and face indices; upstream syntax parser with GPU upload replaced by observation harness",
     "family": "Blukpast native C PLY loader",
     "family_note": "Distinct tagged C package with native PLY syntax parsing. The harness replaces only GPU upload and model storage calls; no full Vulkan engine is built. This row is a source-level C API replay, not a GPU integration test."
+  },
+  {
+    "name": "pcc",
+    "version": "0.1.0",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/filrg/pcc/blob/v0.1.0/LICENSE",
+    "documentation": "https://github.com/filrg/pcc/blob/v0.1.0/include/pcc/point_cloud.h",
+    "input_api_evidence": "https://github.com/filrg/pcc/blob/v0.1.0/source/point_cloud.c",
+    "input_api": "pcc_point_cloud_init; pcc_point_cloud_t.read_from_file(&cloud, local PLY path); cloud.positions and cloud.size",
+    "adapter": "adapters/c/ascii_ply/pcc.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "Three parsed point coordinates from one valid ASCII PLY triangle; face not exposed by point-cloud API",
+    "family": "PCC C facade over bundled miniply C++ PLYReader",
+    "family_note": "Distinct tagged GPL C API package. Its PLY syntax parsing delegates to bundled miniply C++ source. The unrelated codec source requires zstd.h even when USE_ZSTD=OFF, so the replay compiles only the unmodified local PLY call path. miniply also underlies separately recorded Python pyminiply and pyvista-miniply paths."
   }
 ]
