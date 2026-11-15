@@ -85,8 +85,13 @@ def main() -> None:
             lock = lock_path.read_text()
             if f"{manifest['package']}=={manifest['release']}" not in lock or manifest["source_sha256"] not in lock:
                 raise ValueError(f"source lock mismatch: {path}")
-        if not (path.parent / "Dockerfile").is_file() or not (path.parent / manifest["harness"]).is_file():
+        dockerfile = path.parent / "Dockerfile"
+        if not dockerfile.is_file() or not (path.parent / manifest["harness"]).is_file():
             raise ValueError(f"missing Dockerfile or harness: {path}")
+        docker_text = dockerfile.read_text()
+        for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
+            if field in manifest and manifest[field] not in docker_text:
+                raise ValueError(f"Dockerfile does not pin {field}: {path}")
         verification_path = path.parent / "verification.json"
         if not verification_path.exists():
             staged.add(key)
@@ -97,7 +102,13 @@ def main() -> None:
                          if file.is_file() and file.name != "verification.json"
                          and "target" not in file.relative_to(path.parent).parts}
         if (result.get("pass") is not True or result.get("fuzz_engine_smoke_pass") is not True
+                or result.get("manifest") != str(path.relative_to(ROOT))
+                or result.get("source_sha256") != manifest["source_sha256"]
+                or result.get("platform") != manifest["platform"]
+                or not result.get("image_id", "").startswith("sha256:")
+                or not result.get("toolchain")
                 or result.get("output") != manifest["expected_output"]
+                or result.get("parser_source_files", 0) <= 0
                 or result.get("parser_source_lines_covered", 0) <= 0
                 or ("format_specific_coverage_file_suffix" in manifest
                     and result.get("format_specific_source_lines_covered", 0) <= 0)

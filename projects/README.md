@@ -17,7 +17,12 @@ identified in the catalog.
 
 The first batch is `png/c/libpng`, `png/c/stb`, `png/cpp/lodepng`, `png/python/pypng`,
 `png/go/imaging`, `png/rust/png`, `png/java/pngj`, `png/javascript/pngjs`,
-`png/php/marc1706_fast_image_size`, and `zip/c/libzip`.
+`png/php/marc1706_fast_image_size`, and `zip/c/libzip`. The next batch adds
+`pdf/python/pypdf` and `pdf/python/pdfrw`, both with byte-input Atheris targets
+and package line coverage during valid-control replay. The PDF reader source
+file must show executed lines for each receipt. `http11/python/h11` adds raw
+HTTP/1.1 request parsing and coverage in h11's request reader.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -58,12 +63,21 @@ python3 scripts/run_project.py png java pngj
 python3 scripts/run_project.py png javascript pngjs
 python3 scripts/run_project.py png php marc1706_fast_image_size
 python3 scripts/run_project.py zip c libzip
+python3 scripts/run_project.py pdf python pypdf
+python3 scripts/run_project.py pdf python pdfrw
+python3 scripts/run_project.py http11 python h11
+python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
+python3 scripts/run_project_batch.py --format pdf --ecosystem python
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
 
-The audit compares project manifests and successful coverage receipts against
-all third-party parser paths in `data/*/*/parsers.json`. Pending paths remain
+The batch runner verifies selected projects sequentially and refreshes the
+matrix audit only when every selected project passes. The audit compares
+project manifests and successful coverage receipts against all third-party
+parser paths in `data/*/*/parsers.json`. Standard-library and runtime-bundled
+APIs are inventoried separately in `data/*/*/standard.json`; their container
+harnesses are not yet in this audit. Pending third-party paths remain
 visible in `data/projects-coverage.json`; a copied Dockerfile or name alone
 does not count. Ubuntu package repositories are not snapshot-pinned in the
 pilot, so a later rebuild may use newer compiler and dependency package
