@@ -41,7 +41,8 @@ def main() -> None:
             expected = parser["expected_output"]
         else:
             legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
-            record, = [item for item in legacy["third_party"] if item["package"] == manifest["package"]]
+            records = legacy.get("third_party", legacy.get("results", []))
+            record, = [item for item in records if item["package"] == manifest["package"]]
             if record["pass"] is not True or record["version"] != manifest["release"]:
                 raise ValueError(f"legacy verification mismatch: {path}")
             expected = record["output"]
@@ -58,6 +59,16 @@ def main() -> None:
             if "go_module_sum" in source and (f"{manifest['package']} {manifest['release']} "
                     f"{source['go_module_sum']}") not in (path.parent / "go.sum").read_text():
                 raise ValueError(f"Go module sum mismatch: {path}")
+            if "npm_integrity" in source:
+                npm_lock = json.loads((path.parent / "package-lock.json").read_text())
+                npm_package = npm_lock["packages"][f"node_modules/{manifest['package']}"]
+                if (npm_package["version"] != manifest["release"]
+                        or npm_package["integrity"] != source["npm_integrity"]):
+                    raise ValueError(f"npm integrity mismatch: {path}")
+                if (manifest.get("fuzz_engine") == "Jazzer.js"
+                        and npm_lock["packages"]["node_modules/@jazzer.js/core"]["version"]
+                        != manifest["fuzz_engine_release"]):
+                    raise ValueError(f"Jazzer.js release mismatch: {path}")
         else:
             lock = lock_path.read_text()
             if f"{manifest['package']}=={manifest['release']}" not in lock or manifest["source_sha256"] not in lock:

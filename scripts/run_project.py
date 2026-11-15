@@ -6,6 +6,7 @@ from hashlib import sha256
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 
 
@@ -25,7 +26,9 @@ def main() -> None:
     cli.add_argument("ecosystem")
     cli.add_argument("package_slug")
     args = cli.parse_args()
-    project = ROOT / "projects" / args.format / args.ecosystem / args.package_slug
+    project_root = ROOT / "projects"
+    project = (project_root / args.format / args.ecosystem / args.package_slug).resolve()
+    assert project.is_relative_to(project_root)
     manifest = json.loads((project / "manifest.json").read_text())
     assert manifest["schema_version"] == 1
     assert (manifest["format"], manifest["ecosystem"]) == (args.format, args.ecosystem)
@@ -36,7 +39,8 @@ def main() -> None:
         expected = parser["expected_output"]
     else:
         legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
-        record, = [item for item in legacy["third_party"] if item["package"] == manifest["package"]]
+        records = legacy.get("third_party", legacy.get("results", []))
+        record, = [item for item in records if item["package"] == manifest["package"]]
         assert record["pass"] and record["version"] == manifest["release"]
         expected = record["output"]
     assert expected == manifest["expected_output"]
@@ -48,6 +52,13 @@ def main() -> None:
         if "go_module_sum" in lock:
             go_sum = (project / "go.sum").read_text()
             assert f"{manifest['package']} {manifest['release']} {lock['go_module_sum']}" in go_sum
+        if "npm_integrity" in lock:
+            npm_lock = json.loads((project / "package-lock.json").read_text())
+            package = npm_lock["packages"][f"node_modules/{manifest['package']}"]
+            assert package["version"] == manifest["release"]
+            assert package["integrity"] == lock["npm_integrity"]
+            if manifest.get("fuzz_engine") == "Jazzer.js":
+                assert npm_lock["packages"]["node_modules/@jazzer.js/core"]["version"] == manifest["fuzz_engine_release"]
     else:
         lock = lock_path.read_text()
         assert f"{manifest['package']}=={manifest['release']}" in lock
@@ -60,6 +71,8 @@ def main() -> None:
     command(["docker", "build", "--quiet", "--platform", manifest["platform"],
              "-t", image, str(project)])
     output_dir = project / "target/coverage"
+    if output_dir.exists():
+        shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     docker_run = ["docker", "run", "--rm", "--platform", manifest["platform"],
                   "--network", "none", "--read-only", "--cap-drop", "ALL",
