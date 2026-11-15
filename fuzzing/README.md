@@ -181,9 +181,17 @@ and a passing one-input fuzz-entry replay. The 73 non-PHP projects also pass
 no-mutation corpus replay; PHP uses its per-input fuzz entry.
 The source-level AFL++ overlay is verified for all 31 current C, C++, and Rust
 paths. Go, Java, JavaScript, Python, and PHP use their ecosystem's
-coverage-guided engines in the native plans above. Running AFL++ against those
-runtimes is possible with additional instrumentation, but an interpreter-level
-edge map would need validation that parser behavior actually steers feedback.
+coverage-guided engines in the native plans above. AFL++ could be added there
+with custom bridges or binary instrumentation, but those routes would need
+evidence that parser behavior steers the feedback.
+
+The no-mutation engine check also passed for all 52 Go, Java, JavaScript,
+Python, and PHP paths (`data/ecosystem-feedback-smoke.json`). It records Go parser
+package coverage, Jazzer and Atheris coverage counters, Jazzer.js coverage or
+instrumentation counters, and PHP-Fuzzer parser coverage reports. A counter
+alone does not identify which parser branches were covered, so the source
+coverage receipt remains a separate required check.
+
 Keep the parser project, seed set, time budget,
 platform, and input limit in each run plan. Do not compare AFL++ edge counts
 with LLVM line coverage or with edge counts from a different parser build.
@@ -194,5 +202,6 @@ start a fuzz campaign or perform malformed-input experiments.
 Run `python3 scripts/smoke_case_bridge.py` to repeat all one-input control
 checks, `python3 scripts/smoke_corpus_batch.py` to repeat the no-mutation
 batch checks, `python3 scripts/smoke_native_plans.py` to repeat native plan
-preflights, and `python3 scripts/audit_fuzzing.py` to check the committed
+preflights, `python3 scripts/smoke_ecosystem_feedback.py` to repeat ecosystem
+feedback checks, and `python3 scripts/audit_fuzzing.py` to check the committed
 receipts.

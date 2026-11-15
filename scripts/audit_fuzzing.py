@@ -101,9 +101,24 @@ def main() -> None:
         assert len(afl) == 1 and afl[0]["checksum"] == receipt["afl_rust_checksum"]
         for name, digest in receipt["overlay_file_sha256"].items():
             assert sha256((overlay / name).read_bytes()).hexdigest() == digest
+    managed = [path for path in manifests if path.parent.parent.name in
+               {"go", "java", "javascript", "python", "php"}]
+    managed_report = json.loads((ROOT / "data/ecosystem-feedback-smoke.json").read_text())
+    managed_records = {item["project"]: item for item in managed_report["results"]}
+    assert len(managed_records) == len(managed) == managed_report["projects_total"]
+    for path in managed:
+        relative = path.parent.relative_to(ROOT / "projects")
+        project, manifest = project_for(*relative.parts)
+        record = managed_records[str(relative)]
+        assert record["status"] == "verified" and record["ecosystem"] == manifest["ecosystem"]
+        assert record["control_sha256"] == manifest["control_sha256"]
+        assert record["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
+        assert record["parser_source_lines_covered"] > 0
+        assert record["feedback_evidence"]["value"] > 0
     print(f"{len(manifests)}/{len(manifests)} one-input projects and native plans, "
           f"{batch_report['batch_passing']} batch replay projects, and "
-          f"{len(native) + len(rust)}/{len(native) + len(rust)} AFL++ native overlays current")
+          f"{len(native) + len(rust)}/{len(native) + len(rust)} AFL++ overlays plus "
+          f"{len(managed)}/{len(managed)} ecosystem feedback checks current")
 
 
 if __name__ == "__main__":
