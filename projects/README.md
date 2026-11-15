@@ -16,13 +16,14 @@ source, not just in the harness. Shared underlying parser families remain
 identified in the catalog.
 
 The first batch is `png/c/libpng`, `png/c/stb`, `png/python/pypng`,
-`png/go/imaging`, and `zip/c/libzip`. Each Dockerfile pins its base image by digest and its parser
+`png/go/imaging`, `png/rust/png`, and `zip/c/libzip`. Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 PyPNG uses Atheris and Python line tracing of its pure-Python package. The Go
 entry uses a compiled native Go fuzz test and Go's `-coverpkg` instrumentation.
 Its valid-control profile records both the `imaging` wrapper and the delegated
 `image/png` parser separately. The Go runtime image contains only two static
-binaries.
+binaries. The Rust entry uses LLVM source coverage for the pinned `png` crate
+and sanitizer coverage counters in its libFuzzer binary.
 The native final images contain the binaries, parser source for coverage display,
 and LLVM coverage tools. The PyPNG image contains only pinned wheels and Python.
 The runner disables
@@ -38,6 +39,7 @@ python3 scripts/run_project.py png c libpng
 python3 scripts/run_project.py png c stb
 python3 scripts/run_project.py png python pypng
 python3 scripts/run_project.py png go imaging
+python3 scripts/run_project.py png rust png
 python3 scripts/run_project.py zip c libzip
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
