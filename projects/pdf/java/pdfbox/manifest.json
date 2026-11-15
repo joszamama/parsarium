@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "java",
+  "package": "pdfbox",
+  "release": "3.0.8",
+  "catalog_parser": "data/java/pdf/parsers.json",
+  "source_lock": "projects/pdf/java/pdfbox/source-lock.json",
+  "source_sha256": "eaed642d27599c78229857e4ab571805979f828f5ec8c695e3135ca933766132",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "PdfboxHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "PdfboxHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/parser.jar",
+    "--target_class=PdfboxHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage in PDFBox document loader during valid-control replay; Jazzer entry",
+  "coverage_subject_prefix": "/work/parser-sources/org/apache/pdfbox/",
+  "format_specific_coverage_file_suffix": "/Loader.java"
+}

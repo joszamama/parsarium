@@ -90,6 +90,13 @@ JavaScript `music-metadata`, PHP getID3, and Rust `mp4` to Python Mutagen.
 TagLib's C and C++ paths use the same pinned MP4 parser source. All eight MP4
 cells are runnable on the valid audio and video MP4 control.
 
+The PDF row adds C and C++ PDFio, Go `ledongthuc/pdf`, Java PDFBox,
+JavaScript `pdf-lib`, PHP FPDI, and Rust `lopdf` to Python pypdf and pdfrw.
+The C and C++ paths share PDFio's parser source. Each harness reads local bytes
+or a temporary local file, checks a page count or page metadata from the valid
+one-page PDF control, and records parser source coverage. All 80 format and
+ecosystem cells now have at least one verified third-party container path.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -132,6 +139,13 @@ python3 scripts/run_project.py png php marc1706_fast_image_size
 python3 scripts/run_project.py zip c libzip
 python3 scripts/run_project.py pdf python pypdf
 python3 scripts/run_project.py pdf python pdfrw
+python3 scripts/run_project.py pdf c pdfio
+python3 scripts/run_project.py pdf cpp pdfio
+python3 scripts/run_project.py pdf go ledongthuc_pdf
+python3 scripts/run_project.py pdf java pdfbox
+python3 scripts/run_project.py pdf javascript pdf_lib
+python3 scripts/run_project.py pdf php fpdi
+python3 scripts/run_project.py pdf rust lopdf
 python3 scripts/run_project.py http11 python h11
 python3 scripts/run_project.py mp3_id3v2 python mutagen
 python3 scripts/run_project.py ascii_ply python plyfile
@@ -156,6 +170,8 @@ python3 scripts/run_project.py ascii_pnm cpp leptonica
 python3 scripts/run_project.py ascii_pnm php imagine
 python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
 python3 scripts/run_project_batch.py --format pdf --ecosystem python
+python3 scripts/run_project_batch.py --format pdf --dry-run
+python3 scripts/run_project_batch.py --format pdf
 python3 scripts/run_project_batch.py --format zip --ecosystem go
 python3 scripts/run_project_batch.py --format zip --dry-run
 python3 scripts/run_project_batch.py --format ascii_pnm --dry-run

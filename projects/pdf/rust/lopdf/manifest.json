@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "rust",
+  "package": "lopdf",
+  "release": "0.47.0",
+  "catalog_parser": "data/rust/pdf/parsers.json",
+  "source_lock": "projects/pdf/rust/lopdf/source-lock.json",
+  "source_sha256": "c6ad532ff9262dd4bfd6e085400cbb39959d48cb8d08518b01b68f77bdf6feca",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in lopdf PDF parser during valid-control replay; libFuzzer with sanitizer coverage counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/lopdf-0.47.0/",
+  "format_specific_coverage_file_suffix": "/document.rs"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "cpp",
+  "package": "pdfio",
+  "release": "1.6.5",
+  "catalog_parser": "data/cpp/pdf/parsers.json",
+  "source_lock": "projects/pdf/cpp/pdfio/source-lock.json",
+  "source_sha256": "f9fc6252d32023458778b40744c63897604d25300321ba5babba2e86f6619c13",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in PDFio page and object parser and CPP byte-input harness",
+  "coverage_subject_prefix": "/work/pdfio-1.6.5/",
+  "format_specific_coverage_file_suffix": "/pdfio-file.c"
+}
