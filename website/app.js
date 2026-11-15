@@ -29,6 +29,9 @@ const artColors = {
 let catalog;
 const pageSize = 18;
 let visible = pageSize;
+let activeDemoIndex = 0;
+let labStep = 0;
+let labTimer = null;
 function formatLabel(id) { return catalog.formats.find((format) => format.id === id)?.label ?? id; }
 function announceCopy(button, label) {
   const old = button.textContent;
@@ -85,7 +88,7 @@ function parserCard(parser) {
     <h3>${escapeHtml(parser.name)}</h3><span class="parser-version">${escapeHtml(parser.version)} · ${escapeHtml(details)}</span>
     <p class="parser-api"><strong>Input API:</strong> ${escapeHtml(parser.inputApi)}</p>
     <p class="parser-family">Family: ${escapeHtml(parser.family)}</p>
-    <div class="parser-card-links"><a href="${safeUrl(parser.documentation)}" target="_blank" rel="noopener noreferrer">Docs ↗</a><a href="${safeUrl(parser.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a>${project}</div>
+    <div class="parser-card-links"><a href="${safeUrl(parser.guideUrl)}" target="_blank" rel="noopener noreferrer">Parser guide ↗</a><a href="${safeUrl(parser.documentation)}" target="_blank" rel="noopener noreferrer">API docs ↗</a><a href="${safeUrl(parser.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a>${project}</div>
   </article>`;
 }
 function renderAtlas() {
@@ -112,7 +115,8 @@ function renderAtlas() {
     note.hidden = false;
     note.innerHTML = `<strong>${escapeHtml(formatLabel(filters.format))} × ${escapeHtml(ecoLabel[filters.ecosystem])}</strong>
       <p>${cell.verified} verified third-party paths · ${cell.runnable} runnable harness${cell.runnable === 1 ? "" : "es"} · ${cell.standard} standard/runtime APIs · ${cell.unresolved} unresolved documentation leads.</p>
-      <div class="cell-links"><a href="${safeUrl(cell.rankingUrl)}" target="_blank" rel="noopener noreferrer">Popularity ranking & search limits ↗</a>
+      <div class="cell-links"><a href="${safeUrl(cell.cellGuideUrl)}" target="_blank" rel="noopener noreferrer">All parser & runtime guides ↗</a>
+      <a href="${safeUrl(cell.rankingUrl)}" target="_blank" rel="noopener noreferrer">Popularity ranking & search limits ↗</a>
       <a href="${safeUrl(cell.standardUrl)}" target="_blank" rel="noopener noreferrer">Standard API inventory ↗</a>
       ${cell.standardProjectUrl ? `<a href="${safeUrl(cell.standardProjectUrl)}" target="_blank" rel="noopener noreferrer">Standard API harness ↗</a>` : ""}</div>
       <details><summary>What remains uncertain</summary><p>${escapeHtml(cell.uncertainty)}</p></details>`;
@@ -154,6 +158,12 @@ function commandBlock(label, command, key) {
 }
 function renderDemo(index) {
   const demo = catalog.demos[index];
+  activeDemoIndex = index;
+  labStep = 0;
+  stopLab();
+  const format = catalog.formats.find((item) => item.id === demo.format);
+  $("#format-guide").href = safeUrl(format.guideUrl);
+  $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
   $("#demo-tabs").querySelectorAll("button").forEach((button, buttonIndex) => {
     button.setAttribute("aria-selected", String(buttonIndex === index));
     button.tabIndex = buttonIndex === index ? 0 : -1;
@@ -164,12 +174,12 @@ function renderDemo(index) {
   const afl = demo.aflCommands.map((command) => `<span>$</span> ${escapeHtml(command)}`).join("\n");
   panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / EXAMPLE RUNNABLE TARGET</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="workbench-body">
-      <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.manifestUrl)}" target="_blank" rel="noopener noreferrer">Inspect harness ↗</a></div>
+      <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.projectGuideUrl)}" target="_blank" rel="noopener noreferrer">Harness guide ↗</a></div>
       <p class="target-api"><strong>Documented input API</strong><code>${escapeHtml(demo.inputApi)}</code></p>
       <div class="workbench-flow"><span>Input file(s)</span><b aria-hidden="true">→</b><span>Parser harness</span><b aria-hidden="true">→</b><span>Run receipts</span></div>
       <div class="run-step"><div class="run-step-head"><span>01</span><h4>Check the target</h4></div><p>Run its supplied valid control, <a href="${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a> (${demo.bytes.toLocaleString()} bytes).</p>
         ${commandBlock("VALID CONTROL", demo.controlCommand, "control")}
-        <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and saved in the manifest. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre></details>
+        <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre></details>
       </div>
       <div class="run-step"><div class="run-step-head"><span>02</span><h4>Run your file</h4></div><p>Replace <code>INPUT_FILE</code> with a local file of the same format.</p>
         ${commandBlock("ONE INPUT", demo.inputCommand, "input")}
@@ -184,6 +194,64 @@ function renderDemo(index) {
     const command = key === "afl" ? demo.aflCommands.join("\n") : demo[`${key}Command`];
     copyText(command, button);
   }));
+  renderLab();
+}
+function stopLab() {
+  if (labTimer !== null) clearInterval(labTimer);
+  labTimer = null;
+  const button = $("#lab-play");
+  if (button) button.innerHTML = 'Play walkthrough <span aria-hidden="true">▶</span>';
+}
+function renderLab() {
+  const demo = catalog.demos[activeDemoIndex];
+  const format = formatLabel(demo.format);
+  const control = demo.control.split("/").pop();
+  const formatClues = {
+    png: "PNG readers interpret named chunks such as IHDR and IDAT before they can report dimensions or pixels.",
+    zip: "ZIP readers use archive records and the central directory to identify and open entries.",
+    mp4: "MP4 readers walk nested boxes to find tracks, timing, and media metadata.",
+    wav: "WAV readers interpret RIFF chunks, including the format and sample-data chunks.",
+    pdf: "PDF readers resolve document objects and pages before returning page-level information.",
+    svg: "SVG readers interpret XML elements and attributes as vector graphics.",
+    http11: "HTTP/1.1 parsers separate the start line, headers, and message body from the byte stream.",
+    ascii_ply: "ASCII PLY readers use the header to define the vertex and face records that follow.",
+    ascii_pnm: "ASCII PNM readers use the magic number, dimensions, and sample values to build an image.",
+    mp3_id3v2: "MP3 with ID3v2 readers interpret tag headers and frames before exposing audio metadata."
+  };
+  const steps = [
+    {title: "A complete input file", tag: "GENERATOR → FILE", body: `A generator such as Fandango writes complete ${format} files when a matching spec is available. This repository also includes a small valid control: <strong>${escapeHtml(control)}</strong> (${demo.bytes.toLocaleString()} bytes). The generator supplies bytes; it does not report what a parser understood.`, detail: `<a href="${escapeHtml(demo.controlUrl)}" download>Download this control ↓</a>`},
+    {title: "A named parser API", tag: "FILE → PARSER", body: `The pinned <strong>${escapeHtml(demo.package)}</strong> release ${escapeHtml(demo.release)} receives that file through a documented local input API. ${formatClues[demo.format]} The Docker harness invokes this package path.`, detail: `<code>${escapeHtml(demo.inputApi)}</code>`},
+    {title: "Proof from a valid control", tag: "PARSER → OBSERVATION", body: `Control verification observed these format-specific fields and recorded <strong>${demo.coverageLines.toLocaleString()} parser-source lines</strong> executed. This proves the documented path reached parser code on this valid input; it does not establish support for every variant.`, detail: `<pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>`},
+    {title: "A replay you can inspect", tag: "CORPUS → RECEIPTS", body: `Parsarium can replay a directory of ${format} files through the same target. It keeps input hashes, per-input execution receipts, and a summary. AFL++ can instead generate inputs and use parser feedback to steer its search. A successful harness exit alone does not prove the parser accepted every file.`, detail: `<code>${escapeHtml(demo.replayCommand)}</code>`}
+  ];
+  const current = steps[labStep];
+  $("#lab-context").textContent = `${format} · ${demo.package} · ${demo.ecosystem.toUpperCase()} example`;
+  $("#lab-stage").dataset.step = String(labStep);
+  $("#lab-stage").querySelectorAll("[data-lab-step]").forEach((button) => button.setAttribute("aria-pressed", String(Number(button.dataset.labStep) === labStep)));
+  $("#lab-panel").innerHTML = `<div class="lab-tag">${current.tag}</div><h3>${current.title}</h3><p>${current.body}</p><div class="lab-detail">${current.detail}</div>`;
+  $("#lab-next").disabled = labStep === steps.length - 1;
+}
+function initLab() {
+  $("#lab-stage").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-lab-step]");
+    if (!button) return;
+    stopLab();
+    labStep = Number(button.dataset.labStep);
+    renderLab();
+  });
+  $("#lab-next").addEventListener("click", () => { stopLab(); labStep = Math.min(labStep + 1, 3); renderLab(); });
+  $("#lab-play").addEventListener("click", () => {
+    if (labTimer !== null) { stopLab(); return; }
+    labStep = 0;
+    renderLab();
+    $("#lab-play").innerHTML = 'Pause walkthrough <span aria-hidden="true">Ⅱ</span>';
+    labTimer = setInterval(() => {
+      if (labStep === 3) { stopLab(); return; }
+      labStep += 1;
+      renderLab();
+    }, 1700);
+  });
+  renderLab();
 }
 function initDemo() {
   $("#demo-tabs").innerHTML = catalog.demos.map((demo, index) => `<button type="button" role="tab" id="demo-tab-${index}" aria-controls="demo-panel" aria-selected="false">${escapeHtml(formatLabel(demo.format))}</button>`).join("");
@@ -226,9 +294,9 @@ async function start() {
     $("#stat-formats").textContent = catalog.summary.formats;
     $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
     $("#stat-runnable").textContent = catalog.summary.runnable;
-    renderFormats(); initAtlas(); initDemo();
+    renderFormats(); initAtlas(); initDemo(); initLab();
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
-    if (["#formats", "#atlas", "#specimen", "#how-it-works"].includes(location.hash)) {
+    if (["#formats", "#atlas", "#specimen", "#lab", "#how-it-works"].includes(location.hash)) {
       requestAnimationFrame(() => $(location.hash).scrollIntoView({ behavior: "instant" }));
     }
   } catch (error) {

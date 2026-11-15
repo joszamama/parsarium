@@ -1,0 +1,25 @@
+# github.com/lemon4ksan/mach/server/h1 — HTTP/1.1 / Go
+
+- **Pinned release:** `v0.2.0`
+- **License:** BSD-3-Clause
+- **Parsed scope:** request message
+- **Underlying family:** mach H1 parser
+- **Local input API:** `Request.ReadRequest(*bufio.Reader, *ByteBuffer, int64)`
+- **Documentation:** [API reference](<https://pkg.go.dev/github.com/lemon4ksan/mach/server/h1@v0.2.0>)
+- **Catalog evidence:** [parser record](../../../../data/go/http11/parsers.json) · [control verification](../../../../data/go/http11/verification.json) · [within-ecosystem ranking](../../../../data/go/http11/ranking.md)
+- **Valid control:** [`controls/http11/request.http`](../../../../controls/http11/request.http)
+
+## Observed control result
+
+```json
+{
+  "method": "GET",
+  "target": "/parsarium?x=1",
+  "host": "example.test",
+  "proto": "HTTP/1.1"
+}
+```
+
+## Runnable harness
+
+A Docker harness with parser-source coverage has not yet been verified for this API path.

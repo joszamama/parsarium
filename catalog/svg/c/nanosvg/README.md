@@ -1,0 +1,27 @@
+# nanosvg — SVG / C
+
+- **Pinned release:** `2023-12-29`
+- **License:** Zlib
+- **Parsed scope:** SVG root dimensions and two parsed rectangle shapes with paths
+- **Underlying family:** NanoSVG native SVG parser
+- **Local input API:** `nsvgParseFromFile(local SVG filename, "px", 96.0f); inspect NSVGimage shape/path lists`
+- **Documentation:** [API reference](<https://github.com/memononen/nanosvg#parser>)
+- **Catalog evidence:** [parser record](../../../../data/c/svg/parsers.json) · [control verification](../../../../data/c/svg/verification.json) · [within-ecosystem ranking](../../../../data/c/svg/ranking.md)
+- **Valid control:** [`controls/svg/red-green.svg`](../../../../controls/svg/red-green.svg)
+
+## Observed control result
+
+```json
+{
+  "width": 2,
+  "height": 1,
+  "shapes": 2,
+  "paths": 2
+}
+```
+
+SDL3_image embeds NanoSVG; this direct C API is a distinct package path over the same parser family. Upstream has no tagged release; vcpkg publishes version-date 2023-12-29 pinned to the exact upstream commit.
+
+## Runnable harness
+
+A Docker harness with parser-source coverage has not yet been verified for this API path.

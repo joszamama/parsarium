@@ -1,0 +1,25 @@
+# mikehaertl/php-pdftk — PDF / PHP
+
+- **Pinned release:** `0.14.4`
+- **License:** MIT
+- **Parsed scope:** One PDF page and document title
+- **Underlying family:** pdftk-java PDF parser
+- **Local input API:** `Pdf(local PDF path)->getData(); parsed page count and Title metadata`
+- **Documentation:** [API reference](<https://github.com/mikehaertl/php-pdftk/blob/9a88810285c1a26459b67a50e30af51eccc57a9e/README.md>)
+- **Catalog evidence:** [parser record](../../../../data/php/pdf/parsers.json) · [control verification](../../../../data/php/pdf/verification.json) · [within-ecosystem ranking](../../../../data/php/pdf/ranking.md)
+- **Valid control:** [`controls/pdf/one-page.pdf`](../../../../controls/pdf/one-page.pdf)
+
+## Observed control result
+
+```json
+{
+  "pages": 1,
+  "title": "Parsarium PDF control"
+}
+```
+
+PHP wrapper invokes pinned local pdftk-java 3.3.3; the native PDF reader is shared with other pdftk wrappers.
+
+## Runnable harness
+
+A Docker harness with parser-source coverage has not yet been verified for this API path.

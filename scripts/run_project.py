@@ -160,6 +160,7 @@ def main() -> None:
             str(path.relative_to(project)): sha256(path.read_bytes()).hexdigest()
             for path in sorted(project.rglob("*"))
             if path.is_file() and path.name != "verification.json"
+            and path.relative_to(project) != Path("README.md")
             and "target" not in path.relative_to(project).parts
         },
         "output": summary["output"],

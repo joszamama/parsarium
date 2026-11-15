@@ -1,0 +1,26 @@
+# vlc — MP3 with ID3v2 / C++
+
+- **Pinned release:** `3.0.24`
+- **License:** GPL-2.0-or-later AND LGPL-2.1-or-later
+- **Parsed scope:** ID3v2 title and recognized MP3 audio track from valid local tagged MP3
+- **Underlying family:** VLC media parser with bundled TagLib and MPEG audio plugins
+- **Local input API:** `libvlc_media_new_path(instance, local filename); libvlc_media_parse_with_options; libvlc_media_get_meta; libvlc_media_tracks_get`
+- **Documentation:** [API reference](<https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html>)
+- **Catalog evidence:** [parser record](../../../../data/cpp/mp3_id3v2/parsers.json) · [control verification](../../../../data/cpp/mp3_id3v2/verification.json) · [within-ecosystem ranking](../../../../data/cpp/mp3_id3v2/ranking.md)
+- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+
+## Observed control result
+
+```json
+{
+  "title": "Parsarium",
+  "audio_tracks": 1,
+  "mp3_tracks": 1
+}
+```
+
+VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC.
+
+## Runnable harness
+
+A Docker harness with parser-source coverage has not yet been verified for this API path.

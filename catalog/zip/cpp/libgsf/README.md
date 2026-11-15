@@ -1,0 +1,26 @@
+# libgsf — ZIP / C++
+
+- **Pinned release:** `1.14.60`
+- **License:** LGPL-2.1-only
+- **Parsed scope:** entry name and decompressed entry bytes
+- **Underlying family:** libgsf ZIP reader
+- **Local input API:** `gsf_input_stdio_new; gsf_infile_zip_new; gsf_infile_child_by_index; gsf_input_read`
+- **Documentation:** [API reference](<https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html>)
+- **Catalog evidence:** [parser record](../../../../data/cpp/zip/parsers.json) · [control verification](../../../../data/cpp/zip/verification.json) · [within-ecosystem ranking](../../../../data/cpp/zip/ranking.md)
+- **Valid control:** [`controls/zip/hello.zip`](../../../../controls/zip/hello.zip)
+
+## Observed control result
+
+```json
+{
+  "entries": 1,
+  "name": "hello.txt",
+  "content": "parsarium\n"
+}
+```
+
+Own ZIP directory and entry API; uses compression dependencies for DEFLATE. The C++ path reuses the exact C-cell release and underlying decoder.
+
+## Runnable harness
+
+A Docker harness with parser-source coverage has not yet been verified for this API path.

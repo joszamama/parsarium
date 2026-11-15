@@ -1,0 +1,26 @@
+# mongoose — HTTP/1.1 / C++
+
+- **Pinned release:** `7.23`
+- **License:** GPL-2.0-only
+- **Parsed scope:** HTTP/1.1 GET request method, target, query and version
+- **Underlying family:** Mongoose C HTTP request parser; related to CivetWeb and LibHTTP ancestry
+- **Local input API:** `mg_http_parse(const char *local request bytes, size_t len, struct mg_http_message *out)`
+- **Documentation:** [API reference](<https://mongoose.ws/docs/api/http/#mg_http_parse>)
+- **Catalog evidence:** [parser record](../../../../data/cpp/http11/parsers.json) · [control verification](../../../../data/cpp/http11/verification.json) · [within-ecosystem ranking](../../../../data/cpp/http11/ranking.md)
+- **Valid control:** [`controls/http11/request.http`](../../../../controls/http11/request.http)
+
+## Observed control result
+
+```json
+{
+  "method": "GET",
+  "path": "/parsarium?x=1",
+  "version": "1.1"
+}
+```
+
+ Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine.
+
+## Runnable harness
+
+A Docker harness with parser-source coverage has not yet been verified for this API path.

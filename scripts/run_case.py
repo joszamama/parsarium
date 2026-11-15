@@ -33,6 +33,7 @@ def project_for(format_name: str, ecosystem: str, slug: str) -> tuple[Path, dict
         raise ValueError("project has no passing verification receipt")
     present = {str(path.relative_to(project)) for path in project.rglob("*")
                if path.is_file() and path.name != "verification.json"
+               and path.relative_to(project) != Path("README.md")
                and "target" not in path.relative_to(project).parts
                and "__pycache__" not in path.relative_to(project).parts}
     if present != set(receipt["project_file_sha256"]):

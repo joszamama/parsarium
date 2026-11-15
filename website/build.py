@@ -53,6 +53,11 @@ def repo_link(path: str) -> str:
 def build(output: Path) -> None:
     cells_source = read_json(ROOT / "data/cells.json")["cells"]
     coverage = read_json(ROOT / "data/projects-coverage.json")
+    readme_items = read_json(ROOT / "data/parser-readmes.json")["parsers"]
+    readmes = {(item["format"], item["ecosystem"], item["name"]): item
+               for item in readme_items}
+    if len(readmes) != coverage["catalog_paths"]:
+        raise ValueError("parser guides do not match catalog path count")
     coverage_by_cell = {(c["format"], c["ecosystem"]): c for c in coverage["cells"]}
     manifests = {}
     standard_projects = {}
@@ -83,14 +88,18 @@ def build(output: Path) -> None:
             "rankingUrl": repo_link(f"data/{eco}/{fmt}/ranking.md"),
             "evidenceUrl": repo_link(source),
             "standardUrl": repo_link(f"data/{eco}/{fmt}/standard.json"),
+            "cellGuideUrl": repo_link(f"catalog/{fmt}/{eco}/README.md"),
             "standardProjectUrl": (
-                repo_link(str(standard_projects[(fmt, eco)].relative_to(ROOT)))
+                repo_link(str((standard_projects[(fmt, eco)].parent / "README.md").relative_to(ROOT)))
                 if (fmt, eco) in standard_projects else None
             ),
         })
         for entry in entries:
             key = (fmt, eco, entry["name"], entry["version"])
             project = manifests.get(key)
+            guide = readmes[(fmt, eco, entry["name"])]
+            if guide["runnable"] != bool(project) or not (ROOT / guide["readme"]).is_file():
+                raise ValueError(f"parser guide and harness disagree: {fmt}/{eco}/{entry['name']}")
             record = {
                 "format": fmt,
                 "ecosystem": eco,
@@ -102,11 +111,12 @@ def build(output: Path) -> None:
                 "inputApi": entry["input_api"],
                 "documentation": entry["documentation"],
                 "evidenceUrl": repo_link(source),
+                "guideUrl": repo_link(guide["readme"]),
             }
             if project:
                 project_path, _ = project
                 record["project"] = str(project_path.parent.relative_to(ROOT))
-                record["projectUrl"] = repo_link(str(project_path.relative_to(ROOT)))
+                record["projectUrl"] = repo_link(str((project_path.parent / "README.md").relative_to(ROOT)))
             parsers.append(record)
 
     if len(parsers) != coverage["catalog_paths"]:
@@ -140,7 +150,8 @@ def build(output: Path) -> None:
             "inputApi": manifest["api"],
             "documentation": documented_api["documentation"],
             "evidenceUrl": repo_link(str(inventory_path.relative_to(ROOT))),
-            "projectUrl": repo_link(str(project_path.relative_to(ROOT))),
+            "guideUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
+            "projectUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
         })
 
     format_counts = Counter(p["format"] for p in parsers)
@@ -149,7 +160,8 @@ def build(output: Path) -> None:
         format_runs[cell["format"]] += cell["runnable"]
     formats = [
         {"id": fmt, "label": label, "category": category, "description": description,
-         "verified": format_counts[fmt], "runnable": format_runs[fmt]}
+         "verified": format_counts[fmt], "runnable": format_runs[fmt],
+         "guideUrl": repo_link(f"catalog/{fmt}/README.md")}
         for fmt, label, category, description in FORMATS
     ]
 
@@ -159,6 +171,7 @@ def build(output: Path) -> None:
         shutil.rmtree(controls_output)
     for source in DEMO_PROJECTS:
         manifest = read_json(ROOT / source)
+        verification = read_json(ROOT / Path(source).parent / "verification.json")
         fmt, eco, slug = manifest["format"], manifest["ecosystem"], Path(source).parent.name
         parser_record = next(
             (record for record in parsers if record["format"] == fmt
@@ -187,7 +200,9 @@ def build(output: Path) -> None:
             "controlUrl": str(destination.relative_to(output)),
             "bytes": len(data),
             "expectedOutput": manifest["expected_output"],
+            "coverageLines": verification["parser_source_lines_covered"],
             "manifestUrl": repo_link(source),
+            "projectGuideUrl": repo_link(str((ROOT / source).parent.relative_to(ROOT) / "README.md")),
             "controlCommand": f"python3 parsarium.py run {target} {manifest['control']} --results {run_dir}-control",
             "inputCommand": f"python3 parsarium.py run {target} INPUT_FILE --results {run_dir}-single",
             "replayCommand": f"python3 parsarium.py replay {target} CORPUS_DIR {run_dir}-replay",

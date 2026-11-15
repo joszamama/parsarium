@@ -1,0 +1,33 @@
+# MP3 with ID3v2 / C++
+
+21 verified third-party API paths; 1 have verified Docker harnesses.
+
+[Ranking and search limits](../../../data/cpp/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/cpp/mp3_id3v2/standard.json)
+
+## Third-party parsers
+
+- [taglib](taglib/README.md) — Docker harness ready
+- [mpg123](mpg123/README.md) — verified API path
+- [ffmpeg](ffmpeg/README.md) — verified API path
+- [libid3tag](libid3tag/README.md) — verified API path
+- [id3lib](id3lib/README.md) — verified API path
+- [libsndfile](libsndfile/README.md) — verified API path
+- [libmediainfo](libmediainfo/README.md) — verified API path
+- [sdl_mixer](sdl-mixer/README.md) — verified API path
+- [sox](sox/README.md) — verified API path
+- [libmad](libmad/README.md) — verified API path
+- [miniaudio](miniaudio/README.md) — verified API path
+- [csfml](csfml/README.md) — verified API path
+- [sfml](sfml/README.md) — verified API path
+- [gstreamer](gstreamer/README.md) — verified API path
+- [mpv](mpv/README.md) — verified API path
+- [lame](lame/README.md) — verified API path
+- [aubio](aubio/README.md) — verified API path
+- [dr_libs](dr-libs/README.md) — verified API path
+- [vlc](vlc/README.md) — verified API path
+- [sdl2_sound](sdl2-sound/README.md) — verified API path
+- [libmp3splt](libmp3splt/README.md) — verified API path
+
+## Standard and runtime APIs
+
+None documented in this inventory.

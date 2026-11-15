@@ -17,6 +17,7 @@ def receipt_verified(path: Path, manifest: dict) -> bool:
     current_files = {str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
                      for file in sorted(path.parent.rglob("*"))
                      if file.is_file() and file.name != "verification.json"
+                     and file.relative_to(path.parent) != Path("README.md")
                      and "target" not in file.relative_to(path.parent).parts}
     if (result.get("pass") is not True or result.get("fuzz_engine_smoke_pass") is not True
             or result.get("kind", "third_party") != manifest.get("kind", "third_party")

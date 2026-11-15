@@ -923,6 +923,13 @@ img,svg {
   max-width:365px;
   color:#506445
 }
+.guide-link {
+  margin:0 0 13px;
+  font:700 13px var(--display)!important
+}
+.guide-link a {
+  text-underline-offset:4px
+}
 .specimen-workbench {
   background:#182720;
   color:#f4f2e7;
@@ -1114,6 +1121,161 @@ img,svg {
   margin:8px 0;
   background:#102219;
   border:1px solid #4a614f
+}
+.lab-section {
+  background:#c6dce7;
+  border-block:1px solid var(--ink)
+}
+.lab-heading h2 em {
+  color:#d85432
+}
+.lab-controls {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px
+}
+.lab-controls .button {
+  min-height:48px;
+  font-size:12px
+}
+.lab-controls button:disabled {
+  opacity:.45;
+  cursor:default;
+  transform:none;
+  box-shadow:none
+}
+.lab-stage {
+  border:2px solid var(--ink);
+  background:#fffaf0;
+  box-shadow:12px 12px 0 rgba(20,37,31,.16)
+}
+.lab-rail {
+  height:110px;
+  position:relative;
+  margin:0 7%;
+  border-bottom:2px dashed #84958e
+}
+.lab-token {
+  position:absolute;
+  left:12.5%;
+  bottom:-17px;
+  z-index:1;
+  display:inline-flex;
+  justify-content:space-between;
+  align-items:center;
+  width:76px;
+  height:63px;
+  padding:9px;
+  border:2px solid var(--ink);
+  background:var(--orange);
+  color:var(--ink);
+  font:700 12px var(--mono);
+  box-shadow:5px 5px 0 var(--ink);
+  transform:translateX(-50%) rotate(-6deg);
+  transition:left .65s cubic-bezier(.2,.85,.2,1),background .3s;
+  animation:lab-float 2.8s ease-in-out infinite
+}
+.lab-token span {
+  font-size:19px
+}
+.lab-stage[data-step="1"] .lab-token {
+  left:37.5%;
+  background:var(--lime)
+}
+.lab-stage[data-step="2"] .lab-token {
+  left:62.5%;
+  background:var(--blue)
+}
+.lab-stage[data-step="3"] .lab-token {
+  left:87.5%;
+  background:#e4c8ef
+}
+@keyframes lab-float {
+  0%,100% { transform:translateX(-50%) rotate(-6deg) translateY(0) }
+  50% { transform:translateX(-50%) rotate(-3deg) translateY(-6px) }
+}
+.lab-step-list {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  padding:28px 16px 17px
+}
+.lab-step-list button {
+  border:0;
+  border-right:1px solid var(--line);
+  background:transparent;
+  color:var(--ink);
+  text-align:center;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  align-items:center
+}
+.lab-step-list button:last-child {
+  border:0
+}
+.lab-step-list button[aria-pressed="true"] {
+  background:var(--ink);
+  color:#fffaf0
+}
+.lab-step-list button span {
+  font:500 10px var(--mono)
+}
+.lab-step-list button strong {
+  font:700 clamp(14px,2vw,20px) var(--display)
+}
+.lab-explainer {
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  column-gap:45px;
+  background:var(--ink);
+  color:#fffaf0;
+  padding:30px 36px;
+  min-height:230px;
+  border:2px solid var(--ink);
+  border-top:0
+}
+.lab-tag {
+  grid-column:1/-1;
+  color:var(--lime);
+  font:700 10px var(--mono);
+  letter-spacing:.1em
+}
+.lab-explainer h3 {
+  grid-column:1;
+  font:700 27px/1.1 var(--display);
+  letter-spacing:-.04em;
+  margin:12px 0 4px
+}
+.lab-explainer p {
+  grid-column:1;
+  font-size:14px;
+  line-height:1.6;
+  color:#d4dfcf;
+  margin:0
+}
+.lab-detail {
+  grid-column:2;
+  grid-row:2/span 2;
+  align-self:center;
+  border:1px solid #58735c;
+  background:#0e1d15;
+  padding:17px;
+  min-width:0;
+  color:var(--lime);
+  font:12px/1.6 var(--mono);
+  overflow-wrap:anywhere
+}
+.lab-detail a {
+  font:700 13px var(--display)
+}
+.lab-detail pre {
+  color:#bbdfc1;
+  white-space:pre-wrap;
+  margin:0;
+  max-height:130px;
+  overflow:auto
 }
 .method-section {
   background:#f0e4d2;
@@ -1360,6 +1522,11 @@ img,svg {
   .specimen-intro>p:not(.section-index) {
     max-width:650px
   }
+  .lab-heading {
+    align-items:start;
+    flex-direction:column;
+    gap:20px
+  }
   .readiness-strip>div {
     align-items:start;
     flex-direction:column;
@@ -1527,6 +1694,50 @@ img,svg {
   }
   .target-head h3 {
     font-size:24px
+  }
+  .lab-controls {
+    width:100%
+  }
+  .lab-controls .button {
+    flex:1;
+    padding:0 10px;
+    gap:6px;
+    white-space:nowrap;
+    font-size:10px
+  }
+  .lab-rail {
+    height:78px;
+    margin:0 10%
+  }
+  .lab-token {
+    width:55px;
+    height:48px;
+    padding:5px;
+    font-size:9px;
+    bottom:-13px
+  }
+  .lab-token span {
+    font-size:13px
+  }
+  .lab-step-list {
+    padding:24px 8px 10px
+  }
+  .lab-step-list button {
+    padding:6px 2px
+  }
+  .lab-step-list button strong {
+    font-size:12px
+  }
+  .lab-explainer {
+    display:block;
+    padding:22px;
+    min-height:0
+  }
+  .lab-explainer h3 {
+    font-size:23px
+  }
+  .lab-detail {
+    margin-top:18px
   }
   .workbench-flow {
     font-size:9px
