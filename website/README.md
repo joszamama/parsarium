@@ -15,7 +15,7 @@ Open `http://localhost:8765/`. The build checks the catalog's 80 cell counts and
 
 ## Publish on GitHub Pages
 
-In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source. Run the `Publish field guide` workflow from the Actions tab to build and deploy the site. No repository secrets are needed.
+In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source. The `Publish field guide` workflow deploys changes to the website, catalog, projects, or controls on `main`. It can also run manually from the Actions tab. No repository secrets are needed.
 
 The repository is currently private. GitHub Pages needs a plan that supports private repositories, and a Pages site is public by default. The site's GitHub links to evidence and harness source require repository read access until the repository is made public.
 

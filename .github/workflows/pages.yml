@@ -1,6 +1,14 @@
 name: Publish field guide
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pages.yml'
+      - 'website/**'
+      - 'data/**'
+      - 'projects/**'
+      - 'controls/**'
   workflow_dispatch:
 
 permissions:
@@ -14,13 +22,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
       - name: Build static site from catalog evidence
         run: python3 website/build.py
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: website/dist
 
@@ -35,4 +43,4 @@ jobs:
       id-token: write
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
