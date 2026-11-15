@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "java",
+  "package": "jsvg",
+  "release": "2.0.0",
+  "catalog_parser": "data/java/svg/parsers.json",
+  "source_lock": "projects/svg/java/jsvg/source-lock.json",
+  "source_sha256": "5875aa8321132b1867a58cf7f7e230c1a1612faf546f79600d3ec866aed7096d",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "pixels": "ffff0000,ff00ff00"
+  },
+  "harness": "JsvgHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "JsvgHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/parser.jar",
+    "--target_class=JsvgHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage in JSVG SVG parser during valid-control replay; Jazzer entry",
+  "coverage_subject_prefix": "/work/parser-sources/com/github/weisj/jsvg/",
+  "format_specific_coverage_file_suffix": "/SVGLoader.java"
+}

@@ -61,6 +61,12 @@ Mutagen path. The C++ harness calls the C `dr_wav` API and shares that decoder
 family with the C cell. Each receipt requires executed lines in the package's
 WAV reader on a valid mono PCM16 control. All eight WAV cells are runnable.
 
+The SVG row adds C and C++ PlutoSVG, Go `oksvg`, Java JSVG, JavaScript
+`image-size`, PHP `dompdf/php-svg-lib`, and Rust `usvg` to the existing Python
+path. PlutoSVG's C and C++ paths share the same document parser and pinned
+PlutoVG rasterizer. The valid SVG control exercises format-specific parser
+source in each project. All eight SVG cells are runnable.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -132,6 +138,8 @@ python3 scripts/run_project_batch.py --format zip --dry-run
 python3 scripts/run_project_batch.py --format ascii_pnm --dry-run
 python3 scripts/run_project_batch.py --format wav --dry-run
 python3 scripts/run_project_batch.py --format wav
+python3 scripts/run_project_batch.py --format svg --dry-run
+python3 scripts/run_project_batch.py --format svg
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```

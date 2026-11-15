@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "go",
+  "package": "github.com/srwiley/oksvg",
+  "release": "v0.0.0-20221011165216-be6e8873101c",
+  "catalog_parser": "data/go/svg/parsers.json",
+  "source_lock": "projects/svg/go/oksvg/source-lock.json",
+  "source_sha256": "d8e517dd8a48583bc32892a7c430dda165f79907b1fc9e3d49fe59a2894f587b",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "paths": 2,
+    "width": 2
+  },
+  "harness": "harness.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzSVG",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzSVG",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/srwiley/oksvg during valid-control replay",
+  "coverage_subject_prefix": "github.com/srwiley/oksvg/"
+}
