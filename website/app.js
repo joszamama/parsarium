@@ -214,9 +214,14 @@ function initDemo() {
 }
 async function start() {
   try {
-    const response = await fetch("catalog.json");
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    catalog = await response.json();
+    const embedded = $("#catalog-data");
+    if (embedded) {
+      catalog = JSON.parse(embedded.textContent);
+    } else {
+      const response = await fetch("catalog.json", { cache: "no-store" });
+      if (!response.ok) throw new Error(`Catalog HTTP ${response.status}`);
+      catalog = await response.json();
+    }
     $("#stat-verified").textContent = catalog.summary.verified.toLocaleString();
     $("#stat-formats").textContent = catalog.summary.formats;
     $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
@@ -227,8 +232,8 @@ async function start() {
       requestAnimationFrame(() => $(location.hash).scrollIntoView({ behavior: "instant" }));
     }
   } catch (error) {
-    $("#format-grid").innerHTML = '<p>The catalog could not be loaded. Build the site with <code>python3 website/build.py</code> and serve <code>website/dist</code>.</p>';
-    $("#result-count").textContent = "Catalog unavailable.";
+    $("#format-grid").innerHTML = '<p>The catalog view could not start. <a href="">Reload the page</a> or open the <a href="catalog.json">catalog data</a>.</p>';
+    $("#result-count").textContent = "Catalog view unavailable.";
     console.error(error);
   }
 }

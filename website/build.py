@@ -217,10 +217,18 @@ def build(output: Path) -> None:
         "demos": demos,
     }
     output.mkdir(parents=True, exist_ok=True)
-    (output / "catalog.json").write_text(
-        json.dumps(catalog, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8"
-    )
-    shutil.copyfile(SITE / "index.html", output / "index.html")
+    catalog_json = json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
+    (output / "catalog.json").write_text(catalog_json + "\n", encoding="utf-8")
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    marker = "<!-- CATALOG_DATA -->"
+    if html.count(marker) != 1:
+        raise ValueError("index.html must contain one catalog placeholder")
+    # Keep the JSON from terminating its own script element if catalog text contains HTML.
+    inline_json = catalog_json.replace("<", "\\u003c")
+    html = html.replace(marker, f'<script id="catalog-data" type="application/json">{inline_json}</script>')
+    html = html.replace("{{RUNNABLE}}", f"{catalog['summary']['runnable']:,}")
+    html = html.replace("{{VERIFIED}}", f"{catalog['summary']['verified']:,}")
+    (output / "index.html").write_text(html, encoding="utf-8")
     shutil.copyfile(SITE / "favicon.svg", output / "favicon.svg")
     assets = output / "assets"
     assets.mkdir(exist_ok=True)

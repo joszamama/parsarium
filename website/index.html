@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f0e6">
-  <meta name="description" content="Parsarium is a format-first testbed of verified parser APIs and 83 runnable, instrumented targets across eight language ecosystems.">
+  <meta name="description" content="Parsarium is a format-first testbed of verified parser APIs and runnable, instrumented targets across eight language ecosystems.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="assets/styles.css">
   <title>Parsarium — Real parsers, ready to test</title>
@@ -40,7 +40,7 @@
           <span class="art-caption">your input, a real parser, a result you can inspect</span>
         </div>
       </div>
-      <div class="hero-ticker"><div class="ticker-inner container"><span><b id="stat-runnable">83</b> runnable targets</span><span class="ticker-sep" aria-hidden="true">✳</span><span><b id="stat-verified">1,636</b> verified package paths</span><span class="ticker-sep" aria-hidden="true">✳</span><span><b id="stat-formats">10</b> formats</span><span class="ticker-sep" aria-hidden="true">✳</span><span><b id="stat-ecosystems">8</b> ecosystems</span></div></div>
+      <div class="hero-ticker"><div class="ticker-inner container"><span><b id="stat-runnable">{{RUNNABLE}}</b> runnable targets</span><span class="ticker-sep" aria-hidden="true">✳</span><span><b id="stat-verified">{{VERIFIED}}</b> verified package paths</span><span class="ticker-sep" aria-hidden="true">✳</span><span><b id="stat-formats">10</b> formats</span><span class="ticker-sep" aria-hidden="true">✳</span><span><b id="stat-ecosystems">8</b> ecosystems</span></div></div>
     </section>
 
     <section class="formats-section section-pad" id="formats" aria-labelledby="formats-title"><div class="container">
@@ -51,10 +51,10 @@
     <section class="atlas-section section-pad" id="atlas" aria-labelledby="atlas-title"><div class="container">
       <div class="section-heading atlas-heading"><div><p class="section-index">02 / CHOOSE A TARGET</p><h2 id="atlas-title">Find your parser.</h2><p>Filter by format, language, or runnable harness. Each path shows its input API and parser family; cell notes include within-ecosystem adoption rankings and search limits.</p></div><span class="atlas-stamp" aria-hidden="true">80<br>CELLS</span></div>
       <div class="readiness-strip" aria-label="What verified and runnable mean">
-        <div><span class="readiness-count">1,636</span><div><strong>Verified API paths</strong><p>A pinned release and documented input API passed a small valid control. These entries are cataloged with evidence.</p></div></div>
-        <div><span class="readiness-count">83</span><div><strong>Runnable targets</strong><p>A verified path packaged with a Docker build, byte-input harness, parser-source coverage, and replay command.</p></div></div>
+        <div><span class="readiness-count">{{VERIFIED}}</span><div><strong>Verified API paths</strong><p>A pinned release and documented input API passed a small valid control. These entries are cataloged with evidence.</p></div></div>
+        <div><span class="readiness-count">{{RUNNABLE}}</span><div><strong>Runnable targets</strong><p>A verified path packaged with a Docker build, byte-input harness, parser-source coverage, and replay command.</p></div></div>
       </div>
-      <p class="readiness-why"><strong>Why 83?</strong> Packaging and checking a Docker harness is separate work for each parser. The current runnable set covers every format × ecosystem cell; the other cataloged paths are not yet packaged for the Parsarium CLI.</p>
+      <p class="readiness-why"><strong>Why only some?</strong> Packaging and checking a Docker harness is separate work for each parser. The current runnable set covers every format × ecosystem cell; the other cataloged paths are not yet packaged for the Parsarium CLI.</p>
       <div class="atlas-toolbar">
         <label class="search-label" for="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search package, API, or parser family…" autocomplete="off"><span class="key-hint" aria-hidden="true">/</span></label>
         <div class="filter-row"><label>Format <select id="format-filter"><option value="">All formats</option></select></label><label>Ecosystem <select id="ecosystem-filter"><option value="">All ecosystems</option></select></label><label class="check-filter"><input id="runnable-filter" type="checkbox"><span class="switch" aria-hidden="true"></span> Docker harness ready</label></div>
@@ -87,6 +87,7 @@
     </div></section>
   </main>
   <footer class="site-footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">P<span>.</span></span><span>Parsarium</span></a><p>Real format parsers, ready for your experiments.</p></div><div class="footer-links"><a href="#formats">Formats</a><a href="#atlas">Targets</a><a href="#how-it-works">How to use it</a><a href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><p class="footer-note">Built from the repository’s committed evidence.<br>Pinned releases, valid controls, and visible limits.</p></div></footer>
+  <!-- CATALOG_DATA -->
   <script src="assets/app.js" defer></script>
 </body>
 </html>
