@@ -55,7 +55,7 @@ For bit-for-bit regeneration, pin and archive the Fandango version and the
 complete local specification and its dependencies as well. A local spec's hash
 can be recorded with `--spec-sha256`.
 
-## AFL++ feedback for C and C++
+## AFL++ feedback for C, C++, and Rust
 
 `scripts/build_afl_native.py` derives an external AFL++ build from each
 verified C or C++ project. It keeps the project's pinned parser source and
@@ -68,17 +68,28 @@ source-coverage receipt are left intact. Function-pointer type checking is
 disabled in these overlays because PDFio's valid control trips that UBSan
 check; AddressSanitizer and the other undefined-behavior checks remain enabled.
 
+`scripts/build_afl_rust.py` builds equivalent overlays for the Rust projects
+using pinned [afl.rs](https://github.com/rust-fuzz/afl.rs) 0.18.2. It adds a
+separate byte-input target that calls the same verified `parse` function,
+checks the locked parser crate checksum against the project source lock, and
+requires nonzero `afl-showmap` feedback from the valid control. All 10 Rust
+overlays passed; see `data/afl-rust-smoke.json`. C and C++ results remain in
+`data/afl-native-smoke.json` (21 paths).
+
 ```sh
 python3 scripts/build_afl_native.py --all
+python3 scripts/build_afl_rust.py --all
 python3 scripts/prepare_afl_run.py pdf c pdfio runs/pdfio-afl
 python3 scripts/prepare_afl_run.py png c libpng runs/png-afl --seed-dir generated/png
+python3 scripts/prepare_afl_run.py png rust png runs/png-rust-afl --seed-dir generated/png
 ```
 
-The second command copies the valid control into `runs/pdfio-afl/seeds/`,
+The PDFio preparation command copies the valid control into `runs/pdfio-afl/seeds/`,
 writes `plan.json`, and prints an exact Docker command. It does **not** start
 `afl-fuzz`. Add `--seed-dir generated/pdf` to include a generated corpus.
 When a researcher runs the printed command, AFL++ reads the seeds from
-`/seeds`, mutates in memory through its libFuzzer-compatible driver, and
+`/seeds`, calls the C/C++ libFuzzer-compatible driver or the Rust afl.rs
+byte-input target, and
 writes to `runs/pdfio-afl/afl-out/`. Its live edge map steers mutation; the
 `afl-showmap` count is only a preflight check. AFL++ saves interesting inputs
 in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`,
@@ -152,8 +163,27 @@ runs/<native-run>/campaign.json execution status, timing, image, and log hash
 
 ## Scope and comparison
 
+| Ecosystem | Projects | Coverage-guided engine | AFL++ source overlay |
+| --- | ---: | --- | ---: |
+| C | 11 | libFuzzer | 11 |
+| C++ | 10 | libFuzzer | 10 |
+| Go | 10 | Go native fuzzing | — |
+| Java | 10 | Jazzer | — |
+| JavaScript | 10 | Jazzer.js | — |
+| Python | 12 | Atheris | — |
+| Rust | 10 | libFuzzer | 10 |
+| PHP | 10 | PHP-Fuzzer | — |
+
 The one-input bridge and native engine plans work across all eight ecosystems.
-The source-level AFL++ overlay is verified for all 21 current C and C++ paths.
+For every one of the 83 projects, the audit requires positive coverage in
+parser package source from a valid control, a passing fuzz-engine smoke check,
+and a passing one-input fuzz-entry replay. The 73 non-PHP projects also pass
+no-mutation corpus replay; PHP uses its per-input fuzz entry.
+The source-level AFL++ overlay is verified for all 31 current C, C++, and Rust
+paths. Go, Java, JavaScript, Python, and PHP use their ecosystem's
+coverage-guided engines in the native plans above. Running AFL++ against those
+runtimes is possible with additional instrumentation, but an interpreter-level
+edge map would need validation that parser behavior actually steers feedback.
 Keep the parser project, seed set, time budget,
 platform, and input limit in each run plan. Do not compare AFL++ edge counts
 with LLVM line coverage or with edge counts from a different parser build.

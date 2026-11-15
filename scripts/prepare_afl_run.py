@@ -19,7 +19,7 @@ from run_case import MAX_CASE_BYTES, ROOT, project_for
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("format")
-    cli.add_argument("ecosystem", choices=["c", "cpp"])
+    cli.add_argument("ecosystem", choices=["c", "cpp", "rust"])
     cli.add_argument("package_slug")
     cli.add_argument("run_dir", type=Path)
     cli.add_argument("--seed", type=Path, action="append", default=[])
@@ -36,8 +36,14 @@ def main() -> None:
     receipt = json.loads(receipt_path.read_text())
     if not receipt.get("pass") or receipt["base_project_receipt_sha256"] != sha256((project / "verification.json").read_bytes()).hexdigest():
         cli.error("AFL++ overlay receipt does not match the verified project")
-    if receipt["overlay_dockerfile_sha256"] != sha256((overlay / "Dockerfile").read_bytes()).hexdigest():
+    file_hashes = receipt.get("overlay_file_sha256")
+    expected_dockerfile = (file_hashes or {}).get("Dockerfile", receipt.get("overlay_dockerfile_sha256"))
+    if expected_dockerfile != sha256((overlay / "Dockerfile").read_bytes()).hexdigest():
         cli.error("AFL++ overlay Dockerfile changed since verification")
+    if file_hashes:
+        for name, expected in file_hashes.items():
+            if sha256((overlay / name).read_bytes()).hexdigest() != expected:
+                cli.error(f"AFL++ overlay file changed since verification: {name}")
     image = f"parsarium-afl/{args.format}-{args.ecosystem}-{args.package_slug}:local"
     inspection = subprocess.run(["docker", "image", "inspect", image, "--format", "{{.Id}}"],
                                 capture_output=True, text=True)
@@ -77,10 +83,11 @@ def main() -> None:
               "-e", f"AFL_MAP_SIZE={receipt['afl_map_size']}",
               "-v", f"{seed_dir}:/seeds:ro", "-v", f"{output_dir}:/results",
               "--entrypoint", "afl-fuzz", receipt["image_id"]]
+    target = "/work/afl_fuzzer" if args.ecosystem == "rust" else "/work/fuzzer"
     command = [*common, "-m", "none", "-t", str(args.timeout_ms), "-i", "/seeds",
-               "-o", "/results", "--", "/work/fuzzer"]
+               "-o", "/results", "--", target]
     resume = [*common, "-m", "none", "-t", str(args.timeout_ms), "-i", "-",
-              "-o", "/results", "--", "/work/fuzzer"]
+              "-o", "/results", "--", target]
     plan = {"schema_version": 1,
             "project": str(project.relative_to(ROOT / "projects")),
             "afl_package": receipt["afl_package"],
