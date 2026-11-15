@@ -32,12 +32,22 @@ def main() -> None:
     parsers = json.loads((ROOT / manifest["catalog_parser"]).read_text())
     parser, = [p for p in parsers if p["name"] == manifest["package"]]
     assert parser["version"] == manifest["release"]
-    assert parser["expected_output"] == manifest["expected_output"]
+    if "expected_output" in parser:
+        expected = parser["expected_output"]
+    else:
+        legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
+        record, = [item for item in legacy["third_party"] if item["package"] == manifest["package"]]
+        assert record["pass"] and record["version"] == manifest["release"]
+        expected = record["output"]
+    assert expected == manifest["expected_output"]
     lock_path = ROOT / manifest["source_lock"]
     if lock_path.suffix == ".json":
         lock = json.loads(lock_path.read_text())[manifest["package"]]
         assert lock["release"] == manifest["release"]
         assert lock["source_sha256"] == manifest["source_sha256"]
+        if "go_module_sum" in lock:
+            go_sum = (project / "go.sum").read_text()
+            assert f"{manifest['package']} {manifest['release']} {lock['go_module_sum']}" in go_sum
     else:
         lock = lock_path.read_text()
         assert f"{manifest['package']}=={manifest['release']}" in lock
@@ -54,12 +64,14 @@ def main() -> None:
     docker_run = ["docker", "run", "--rm", "--platform", manifest["platform"],
                   "--network", "none", "--read-only", "--cap-drop", "ALL",
                   "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
+                  "--tmpfs", "/tmp:rw,nosuid,size=64m",
                   "-v", f"{control}:/input/control:ro",
                   "-v", f"{output_dir}:/coverage", image]
     print(command(docker_run), flush=True)
     engine = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
                              "--network", "none", "--read-only", "--cap-drop", "ALL",
                              "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
+                             "--tmpfs", "/tmp:rw,nosuid,size=64m",
                              "--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"),
                              image, *manifest.get("fuzz_smoke_args", ["-help=1"])],
                             cwd=ROOT, text=True, capture_output=True)
@@ -73,22 +85,34 @@ def main() -> None:
                     if f["filename"].startswith(manifest["coverage_subject_prefix"])]
     assert len(source_files) == summary["parser_source_files"]
     assert sum(f["summary"]["lines"]["covered"] for f in source_files) == summary["parser_source_lines_covered"]
+    if "underlying_coverage_subject_prefix" in manifest:
+        underlying = [f for f in coverage["data"][0]["files"]
+                      if f["filename"].startswith(manifest["underlying_coverage_subject_prefix"])]
+        assert len(underlying) == summary["underlying_source_files"]
+        assert sum(f["summary"]["lines"]["covered"] for f in underlying) == summary["underlying_source_lines_covered"]
+        assert summary["underlying_source_lines_covered"] > 0
     receipt = {
         "verified_at_utc": datetime.now(timezone.utc).isoformat(),
         "manifest": f"projects/{args.format}/{args.ecosystem}/{args.package_slug}/manifest.json",
         "image_id": command(["docker", "image", "inspect", image, "--format", "{{.Id}}"]),
         "docker_server_version": command(["docker", "version", "--format", "{{.Server.Version}}"]),
         "platform": manifest["platform"],
-        "toolchain": command(["docker", "run", "--rm", "--entrypoint", "cat", image, "/work/toolchain.txt"]).splitlines(),
+        "toolchain": command(["docker", "run", "--rm", "--entrypoint",
+                              manifest.get("toolchain_entrypoint", "cat"), image,
+                              *manifest.get("toolchain_args", ["/work/toolchain.txt"])]).splitlines(),
         "source_sha256": manifest["source_sha256"],
         "control_sha256": manifest["control_sha256"],
         "project_file_sha256": {
-            path.name: sha256(path.read_bytes()).hexdigest()
-            for path in sorted(project.iterdir()) if path.is_file() and path.name != "verification.json"
+            str(path.relative_to(project)): sha256(path.read_bytes()).hexdigest()
+            for path in sorted(project.rglob("*"))
+            if path.is_file() and path.name != "verification.json"
+            and "target" not in path.relative_to(project).parts
         },
         "output": summary["output"],
         "parser_source_files": summary["parser_source_files"],
         "parser_source_lines_covered": summary["parser_source_lines_covered"],
+        "underlying_source_files": summary.get("underlying_source_files"),
+        "underlying_source_lines_covered": summary.get("underlying_source_lines_covered"),
         "fuzz_engine_smoke_pass": True,
         "coverage_output": f"projects/{args.format}/{args.ecosystem}/{args.package_slug}/target/coverage/coverage.json",
         "pass": True,

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "go",
+  "package": "github.com/disintegration/imaging",
+  "release": "v1.6.2",
+  "catalog_parser": "data/go/png/parsers.json",
+  "source_lock": "projects/png/go/imaging/source-lock.json",
+  "source_sha256": "2934e7bace3c8c0b1b4a07144197e8720b9ffbe922600e3a3c764f77792ac7c4",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgba": [255, 0, 0, 255, 0, 255, 0, 255]
+  },
+  "harness": "harness.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzPNG",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": ["-test.list=Fuzz"],
+  "fuzz_smoke_expect": "FuzzPNG",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": ["--toolchain"],
+  "coverage": "Go test coverpkg instrumentation of github.com/disintegration/imaging and delegated image/png during valid-control replay",
+  "coverage_subject_prefix": "github.com/disintegration/imaging/",
+  "underlying_coverage_subject_prefix": "image/png/"
+}

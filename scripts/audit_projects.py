@@ -37,7 +37,15 @@ def main() -> None:
         if key in completed or key in staged:
             raise ValueError(f"duplicate project: {key}")
         parser = catalog[key]
-        if manifest["release"] != parser["version"] or manifest["expected_output"] != parser["expected_output"]:
+        if "expected_output" in parser:
+            expected = parser["expected_output"]
+        else:
+            legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
+            record, = [item for item in legacy["third_party"] if item["package"] == manifest["package"]]
+            if record["pass"] is not True or record["version"] != manifest["release"]:
+                raise ValueError(f"legacy verification mismatch: {path}")
+            expected = record["output"]
+        if manifest["release"] != parser["version"] or manifest["expected_output"] != expected:
             raise ValueError(f"release or output mismatch: {path}")
         control = ROOT / manifest["control"]
         if sha256(control.read_bytes()).hexdigest() != manifest["control_sha256"]:
@@ -47,6 +55,9 @@ def main() -> None:
             source = json.loads(lock_path.read_text())[manifest["package"]]
             if source["release"] != manifest["release"] or source["source_sha256"] != manifest["source_sha256"]:
                 raise ValueError(f"source lock mismatch: {path}")
+            if "go_module_sum" in source and (f"{manifest['package']} {manifest['release']} "
+                    f"{source['go_module_sum']}") not in (path.parent / "go.sum").read_text():
+                raise ValueError(f"Go module sum mismatch: {path}")
         else:
             lock = lock_path.read_text()
             if f"{manifest['package']}=={manifest['release']}" not in lock or manifest["source_sha256"] not in lock:
@@ -58,12 +69,15 @@ def main() -> None:
             staged.add(key)
             continue
         result = json.loads(verification_path.read_text())
-        current_files = {file.name: sha256(file.read_bytes()).hexdigest()
-                         for file in sorted(path.parent.iterdir())
-                         if file.is_file() and file.name != "verification.json"}
+        current_files = {str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+                         for file in sorted(path.parent.rglob("*"))
+                         if file.is_file() and file.name != "verification.json"
+                         and "target" not in file.relative_to(path.parent).parts}
         if (result.get("pass") is not True or result.get("fuzz_engine_smoke_pass") is not True
                 or result.get("output") != manifest["expected_output"]
                 or result.get("parser_source_lines_covered", 0) <= 0
+                or ("underlying_coverage_subject_prefix" in manifest
+                    and result.get("underlying_source_lines_covered", 0) <= 0)
                 or result.get("control_sha256") != manifest["control_sha256"]
                 or result.get("project_file_sha256") != current_files):
             raise ValueError(f"unverified project result: {verification_path}")
