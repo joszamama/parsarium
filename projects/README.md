@@ -16,7 +16,7 @@ source, not just in the harness. Shared underlying parser families remain
 identified in the catalog.
 
 The first batch is `png/c/libpng`, `png/c/stb`, `png/cpp/lodepng`, `png/python/pypng`,
-`png/go/imaging`, `png/rust/png`, `png/javascript/pngjs`,
+`png/go/imaging`, `png/rust/png`, `png/java/pngj`, `png/javascript/pngjs`,
 `png/php/marc1706_fast_image_size`, and `zip/c/libzip`.
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
@@ -34,6 +34,9 @@ source ranges and can include import-time code; the receipt separately requires
 execution in `parser.js`. The PHP entry uses a local temporary file for the
 package's path API, Xdebug line coverage in the package, and a pinned
 coverage-guided PHP fuzzer. Its receipt requires executed lines in `TypePng.php`.
+The Java entry uses a pinned PNGJ JAR and source JAR, JaCoCo coverage in the
+library bytecode, and Jazzer for the fuzz entry. Jazzer requires the JDK
+attach module, so its runtime image carries a pinned JDK rather than a JRE.
 The native final images contain the binaries, parser source for coverage display,
 and LLVM coverage tools. The PyPNG image contains only pinned wheels and Python.
 The runner disables
@@ -51,6 +54,7 @@ python3 scripts/run_project.py png cpp lodepng
 python3 scripts/run_project.py png python pypng
 python3 scripts/run_project.py png go imaging
 python3 scripts/run_project.py png rust png
+python3 scripts/run_project.py png java pngj
 python3 scripts/run_project.py png javascript pngjs
 python3 scripts/run_project.py png php marc1706_fast_image_size
 python3 scripts/run_project.py zip c libzip

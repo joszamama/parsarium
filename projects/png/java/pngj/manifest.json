@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "java",
+  "package": "pngj",
+  "release": "2.1.0",
+  "catalog_parser": "data/java/png/parsers.json",
+  "source_lock": "projects/png/java/pngj/source-lock.json",
+  "source_sha256": "4debe6db2149c45aff47567ba76adde2ec5593e801b2982dc1cc55594c94f588",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "pixels": "ffff0000,ff00ff00"
+  },
+  "harness": "PngjHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "PngjHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": ["--cp=/work/classes:/work/pngj.jar", "--target_class=PngjHarness", "-help=1"],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo JVM bytecode coverage in PNGJ JAR during valid-control replay; Jazzer coverage-guided fuzz entry",
+  "coverage_subject_prefix": "/work/pngj-sources/ar/com/hjg/pngj/",
+  "format_specific_coverage_file_suffix": "/PngReader.java"
+}

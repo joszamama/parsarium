@@ -82,17 +82,18 @@ def main() -> None:
     if output_dir.exists():
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    tmpfs = "/tmp:rw,exec,nosuid,size=64m" if manifest.get("tmpfs_exec") else "/tmp:rw,nosuid,size=64m"
     docker_run = ["docker", "run", "--rm", "--platform", manifest["platform"],
                   "--network", "none", "--read-only", "--cap-drop", "ALL",
                   "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
-                  "--tmpfs", "/tmp:rw,nosuid,size=64m",
+                  "--tmpfs", tmpfs,
                   "-v", f"{control}:/input/control:ro",
                   "-v", f"{output_dir}:/coverage", image]
     print(command(docker_run), flush=True)
     engine = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
                              "--network", "none", "--read-only", "--cap-drop", "ALL",
                              "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
-                             "--tmpfs", "/tmp:rw,nosuid,size=64m",
+                             "--tmpfs", tmpfs,
                              "-v", f"{control}:/input/control:ro",
                              "--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"),
                              image, *manifest.get("fuzz_smoke_args", ["-help=1"])],
