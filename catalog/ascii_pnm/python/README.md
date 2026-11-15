@@ -1,6 +1,6 @@
 # ASCII PNM / Python
 
-20 verified third-party API paths; 3 have verified Docker harnesses.
+20 verified third-party API paths; 4 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/ascii_pnm/ranking.md) · [standard API inventory](../../../data/python/ascii_pnm/standard.json)
 
@@ -12,7 +12,7 @@
 - [scikit-image](scikit-image/README.md) — verified API path
 - [matplotlib](matplotlib/README.md) — verified API path
 - [pyvips](pyvips/README.md) — verified API path
-- [Wand](wand/README.md) — verified API path
+- [Wand](wand/README.md) — Docker harness ready
 - [pygame](pygame/README.md) — verified API path
 - [imagesize](imagesize/README.md) — Docker harness ready
 - [OpenImageIO](openimageio/README.md) — verified API path

@@ -1,6 +1,6 @@
 # HTTP/1.1 / Python
 
-22 verified third-party API paths; 3 have verified Docker harnesses.
+22 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/http11/ranking.md) · [standard API inventory](../../../data/python/http11/standard.json)
 
@@ -20,13 +20,13 @@
 - [tp-http-request-response-parser](tp-http-request-response-parser/README.md) — verified API path
 - [gunicorn-h1c](gunicorn-h1c/README.md) — verified API path
 - [h1parser](h1parser/README.md) — verified API path
-- [h11-mypyc](h11-mypyc/README.md) — verified API path
+- [h11-mypyc](h11-mypyc/README.md) — Docker harness ready
 - [h11pro](h11pro/README.md) — Docker harness ready
 - [parserheader](parserheader/README.md) — verified API path
 - [proxy.py](proxy-py/README.md) — verified API path
 - [http-parser](http-parser/README.md) — verified API path
 - [tornado](tornado/README.md) — verified API path
-- [websockets](websockets/README.md) — verified API path
+- [websockets](websockets/README.md) — Docker harness ready
 - [Twisted](twisted/README.md) — verified API path
 
 ## Standard and runtime APIs

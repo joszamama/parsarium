@@ -10,5 +10,6 @@
 - [jsvg / Java](java/jsvg/README.md)
 - [image-size / JavaScript](javascript/image_size/README.md)
 - [dompdf/php-svg-lib / PHP](php/php_svg_lib/README.md)
+- [Wand / Python](python/wand/README.md)
 - [svgelements / Python](python/svgelements/README.md)
 - [usvg / Rust](rust/usvg/README.md)

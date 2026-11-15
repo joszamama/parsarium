@@ -1,6 +1,6 @@
 # ZIP / Python
 
-20 verified third-party API paths; 9 have verified Docker harnesses.
+20 verified third-party API paths; 11 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/zip/ranking.md) · [standard API inventory](../../../data/python/zip/standard.json)
 
@@ -11,7 +11,7 @@
 - [zipp](zipp/README.md) — Docker harness ready
 - [fsspec](fsspec/README.md) — Docker harness ready
 - [fs](fs/README.md) — verified API path
-- [libarchive-c](libarchive-c/README.md) — verified API path
+- [libarchive-c](libarchive-c/README.md) — Docker harness ready
 - [stream-unzip](stream-unzip/README.md) — verified API path
 - [pyzip](pyzip/README.md) — Docker harness ready
 - [zipfile36](zipfile36/README.md) — Docker harness ready
@@ -24,7 +24,7 @@
 - [archivey](archivey/README.md) — Docker harness ready
 - [zipmonkey](zipmonkey/README.md) — Docker harness ready
 - [archive-path](archive-path/README.md) — Docker harness ready
-- [patool](patool/README.md) — verified API path
+- [patool](patool/README.md) — Docker harness ready
 - [pyunpack](pyunpack/README.md) — verified API path
 
 ## Standard and runtime APIs
