@@ -90,8 +90,8 @@ The batch runner verifies selected projects sequentially and refreshes the
 matrix audit only when every selected project passes. The audit compares
 project manifests and successful coverage receipts against all third-party
 parser paths in `data/*/*/parsers.json`. Standard-library and runtime-bundled
-APIs are inventoried separately in `data/*/*/standard.json`; their container
-harnesses are not yet in this audit. Pending third-party paths remain
+APIs are inventoried separately in `data/*/*/standard.json`; the audit records
+their 45 pending paths separately. Pending third-party paths remain
 visible in `data/projects-coverage.json`; a copied Dockerfile or name alone
 does not count. Ubuntu package repositories are not snapshot-pinned in the
 pilot, so a later rebuild may use newer compiler and dependency package

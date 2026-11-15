@@ -26,6 +26,13 @@ def main() -> None:
                 raise ValueError(f"duplicate catalog path: {key}")
             catalog[key] = parser
 
+    standard_by_cell = {}
+    for path in sorted((ROOT / "data").glob("*/*/standard.json")):
+        ecosystem, format_name = path.relative_to(ROOT / "data").parts[:2]
+        standard_by_cell[(format_name, ecosystem)] = len(json.loads(path.read_text())["verified_apis"])
+    if set(standard_by_cell) != {key[:2] for key in catalog}:
+        raise ValueError("standard API inventory does not cover the catalog matrix")
+
     completed = set()
     staged = set()
     for path in sorted((ROOT / "projects").glob("*/*/*/manifest.json")):
@@ -128,12 +135,21 @@ def main() -> None:
     cells = []
     for format_name, ecosystem in sorted({key[:2] for key in catalog}):
         keys = {key for key in catalog if key[:2] == (format_name, ecosystem)}
+        standard_count = standard_by_cell[(format_name, ecosystem)]
         cells.append({"format": format_name, "ecosystem": ecosystem,
                       "catalog_paths": len(keys), "containerized_verified": len(keys & completed),
-                      "staged": len(keys & staged), "pending": len(keys - completed - staged)})
-    report = {"schema_version": 1, "catalog_paths": len(catalog),
+                      "staged": len(keys & staged), "pending": len(keys - completed - staged),
+                      "standard_api_paths": standard_count,
+                      "standard_containerized_verified": 0,
+                      "standard_pending": standard_count})
+    standard_total = sum(standard_by_cell.values())
+    report = {"schema_version": 2, "catalog_paths": len(catalog),
               "containerized_verified": len(completed), "staged": len(staged),
-              "pending": len(catalog) - len(completed) - len(staged), "cells": cells}
+              "pending": len(catalog) - len(completed) - len(staged),
+              "standard_api_paths": standard_total,
+              "standard_containerized_verified": 0,
+              "standard_pending": standard_total,
+              "cells": cells}
     output = ROOT / "data/projects-coverage.json"
     serialized = json.dumps(report, indent=2) + "\n"
     if args.write:
@@ -141,7 +157,8 @@ def main() -> None:
     if args.check and output.read_text() != serialized:
         raise ValueError("data/projects-coverage.json is stale; run --write")
     print(f"{len(completed)}/{len(catalog)} containerized parser paths verified; "
-          f"{len(staged)} staged; {report['pending']} pending")
+          f"{len(staged)} staged; {report['pending']} pending; "
+          f"{standard_total} standard API paths pending")
 
 
 if __name__ == "__main__":
