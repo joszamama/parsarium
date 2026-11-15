@@ -1,8 +1,8 @@
 # Parsarium
 
-The [field guide website](website/README.md) provides a visual atlas of formats, ecosystems, evidence, and runnable projects. It is built from the committed catalog and deploys as a static GitHub Pages site.
+The [website](website/README.md) helps users choose a format, find a documented parser, and open a runnable target. It is built from the committed catalog and deploys as a static GitHub Pages site.
 
-Parsarium catalogs open-source libraries and standard APIs that parse local inputs in ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
+Parsarium is a format-first catalog and target set for parser experiments. It verifies open-source libraries and standard APIs that parse local inputs in ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Selected paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
 
 The catalog currently contains **1,636 verified third-party package paths** in **80 format × ecosystem cells**. Seventy-nine cells meet the working goal of 20; PHP × ASCII PLY has five. **83 project harnesses** are runnable in containers: 82 third-party paths and one Python standard-library API. A catalog entry without a project harness remains documented but is not runnable through the commands below.
 

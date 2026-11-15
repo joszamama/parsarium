@@ -1,6 +1,6 @@
-# Parsarium field guide
+# Parsarium website
 
-The field guide is a static website generated from the repository's parser evidence. It runs at a GitHub Pages project URL, including the `/parsarium/` path. No server, database, or JavaScript build tool is required.
+The website is generated from the repository's parser evidence and runnable target manifests. It runs at a GitHub Pages project URL, including the `/parsarium/` path. No server, database, or JavaScript build tool is required.
 
 ## Preview locally
 

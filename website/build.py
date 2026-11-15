@@ -114,6 +114,31 @@ def build(output: Path) -> None:
     if len(standard_projects) != coverage["standard_containerized_verified"]:
         raise ValueError("standard project links do not match project coverage")
 
+    standard_targets = []
+    for (fmt, eco), project_path in sorted(standard_projects.items()):
+        manifest = read_json(project_path)
+        inventory_path = ROOT / manifest["standard_inventory"]
+        inventory = read_json(inventory_path)
+        documented_api = next(
+            (api for api in inventory["verified_apis"] if api["api"] == manifest["api"]),
+            None,
+        )
+        if documented_api is None:
+            raise ValueError(f"standard API missing from inventory: {project_path}")
+        standard_targets.append({
+            "type": "standard",
+            "format": fmt,
+            "ecosystem": eco,
+            "name": manifest["package"],
+            "version": manifest["release"],
+            "scope": "format-aware runtime API",
+            "family": manifest["runtime"],
+            "inputApi": manifest["api"],
+            "documentation": documented_api["documentation"],
+            "evidenceUrl": repo_link(str(inventory_path.relative_to(ROOT))),
+            "projectUrl": repo_link(str(project_path.relative_to(ROOT))),
+        })
+
     format_counts = Counter(p["format"] for p in parsers)
     format_runs = Counter()
     for cell in cells:
@@ -163,6 +188,7 @@ def build(output: Path) -> None:
         "ecosystems": ECOSYSTEMS,
         "cells": cells,
         "parsers": parsers,
+        "standardTargets": standard_targets,
         "demos": demos,
     }
     output.mkdir(parents=True, exist_ok=True)

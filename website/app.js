@@ -77,9 +77,11 @@ function updateUrl(filters) {
 }
 function parserCard(parser) {
   const project = parser.projectUrl ? `<a href="${safeUrl(parser.projectUrl)}" target="_blank" rel="noopener noreferrer">Harness ↗</a>` : "";
+  const badge = parser.type === "standard" ? "STANDARD + RUNNABLE" : parser.projectUrl ? "RUNNABLE" : "";
+  const details = parser.type === "standard" ? "standard library API" : `${parser.license} · scope: ${parser.scope}`;
   return `<article class="parser-card-item">
-    <div class="parser-meta"><span>${escapeHtml(formatLabel(parser.format))} / ${escapeHtml(ecoLabel[parser.ecosystem])}</span>${parser.projectUrl ? '<span class="runnable-badge">RUNNABLE</span>' : ""}</div>
-    <h3>${escapeHtml(parser.name)}</h3><span class="parser-version">${escapeHtml(parser.version)} · ${escapeHtml(parser.license)} · scope: ${escapeHtml(parser.scope)}</span>
+    <div class="parser-meta"><span>${escapeHtml(formatLabel(parser.format))} / ${escapeHtml(ecoLabel[parser.ecosystem])}</span>${badge ? `<span class="runnable-badge">${badge}</span>` : ""}</div>
+    <h3>${escapeHtml(parser.name)}</h3><span class="parser-version">${escapeHtml(parser.version)} · ${escapeHtml(details)}</span>
     <p class="parser-api"><strong>Input API:</strong> ${escapeHtml(parser.inputApi)}</p>
     <p class="parser-family">Family: ${escapeHtml(parser.family)}</p>
     <div class="parser-card-links"><a href="${safeUrl(parser.documentation)}" target="_blank" rel="noopener noreferrer">Docs ↗</a><a href="${safeUrl(parser.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a>${project}</div>
@@ -87,10 +89,12 @@ function parserCard(parser) {
 }
 function renderAtlas() {
   const filters = currentFilters();
-  const result = catalog.parsers.filter((parser) => {
+  const pool = filters.runnable
+    ? catalog.parsers.filter((parser) => parser.projectUrl).concat(catalog.standardTargets)
+    : catalog.parsers;
+  const result = pool.filter((parser) => {
     if (filters.format && parser.format !== filters.format) return false;
     if (filters.ecosystem && parser.ecosystem !== filters.ecosystem) return false;
-    if (filters.runnable && !parser.projectUrl) return false;
     if (filters.query) {
       const haystack = [parser.name, parser.inputApi, parser.family, parser.scope, parser.version].join(" ").toLocaleLowerCase();
       if (!haystack.includes(filters.query)) return false;
@@ -98,8 +102,8 @@ function renderAtlas() {
     return true;
   });
   const shown = result.slice(0, visible);
-  $("#result-count").textContent = `Showing ${shown.length.toLocaleString()} of ${result.length.toLocaleString()} verified package paths`;
-  $("#parser-grid").innerHTML = shown.length ? shown.map(parserCard).join("") : '<div class="empty-state">No verified parsers match those filters. Try another format, ecosystem, or search term.</div>';
+  $("#result-count").textContent = `Showing ${shown.length.toLocaleString()} of ${result.length.toLocaleString()} ${filters.runnable ? "runnable targets" : "verified package paths"}`;
+  $("#parser-grid").innerHTML = shown.length ? shown.map(parserCard).join("") : '<div class="empty-state">No parsers match those filters. Try another format, ecosystem, or search term.</div>';
   $("#load-more").hidden = shown.length >= result.length;
   const note = $("#cell-note");
   if (filters.format && filters.ecosystem) {
