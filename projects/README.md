@@ -49,6 +49,12 @@ LLVM source coverage, Java Commons Compress with JaCoCo coverage, and PHP
 PclZip with Xdebug coverage. The C and C++ libzip paths share one parser family
 and are not independent engines. All eight ZIP cells now have a runnable path.
 
+The ASCII PNM row adds JavaScript `image-size` (P3 header), Go `gopnm`, Rust
+`image`, Java JAI ImageIO, C and C++ Leptonica, and PHP Imagine with Imagick.
+The C and C++ entries share Leptonica. The PHP wrapper delegates PNM decoding
+to ImageMagick, and the receipt records the native version in its toolchain.
+All eight ASCII PNM cells now have a runnable path for the valid P3 control.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -106,10 +112,18 @@ python3 scripts/run_project.py zip cpp libzip
 python3 scripts/run_project.py zip rust zip
 python3 scripts/run_project.py zip java commons_compress
 python3 scripts/run_project.py zip php pclzip
+python3 scripts/run_project.py ascii_pnm javascript image_size
+python3 scripts/run_project.py ascii_pnm go gopnm
+python3 scripts/run_project.py ascii_pnm rust image
+python3 scripts/run_project.py ascii_pnm java jai_imageio_core
+python3 scripts/run_project.py ascii_pnm c leptonica
+python3 scripts/run_project.py ascii_pnm cpp leptonica
+python3 scripts/run_project.py ascii_pnm php imagine
 python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
 python3 scripts/run_project_batch.py --format pdf --ecosystem python
 python3 scripts/run_project_batch.py --format zip --ecosystem go
 python3 scripts/run_project_batch.py --format zip --dry-run
+python3 scripts/run_project_batch.py --format ascii_pnm --dry-run
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
