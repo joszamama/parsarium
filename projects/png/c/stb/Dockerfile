@@ -1,0 +1,33 @@
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang curl libclang-rt-21-dev llvm unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://github.com/nothings/stb/archive/a7d4c2175630e1ea5b6f8dd00ab96fed0b97b96d.zip \
+    --output /work/stb.zip \
+    && echo 'fc6e7c840a0e025ee238fc09e136452614a4b765afa6ff4177d2e9e1b3493675  /work/stb.zip' | sha256sum --check \
+    && unzip -q /work/stb.zip -d /work \
+    && mv /work/stb-a7d4c2175630e1ea5b6f8dd00ab96fed0b97b96d /work/stb \
+    && echo '594c2fe35d49488b4382dbfaec8f98366defca819d916ac95becf3e75f4200b3  /work/stb/stb_image.h' | sha256sum --check
+
+COPY harness.c harness.h replay.c build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang --version | head -1; llvm-cov --version | head -1; \
+         dpkg-query -W -f='${Package}=${Version}\n' clang-21 llvm-21; } \
+       > /work/toolchain.txt
+
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    llvm python3 && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/stb/stb_image.h /work/stb/stb_image.h
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

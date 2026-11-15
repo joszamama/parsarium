@@ -11,6 +11,11 @@ does **not** establish that no parser exists. See the
 The catalogue has 80 ecosystem × format cells. Seventy-nine have at least 20
 verified third-party paths; PHP × ASCII PLY has 5.
 
+The [container harness collection](projects/README.md) is organized by format,
+ecosystem, and package. It has separate source-instrumented builds and valid-control
+coverage checks. The [project coverage audit](data/projects-coverage.json) tracks
+which verified parser paths have a completed container harness.
+
 Popularity guides lead inspection and ranks only verified packages within each
 cell. The [popularity coverage report](data/popularity-coverage.json) shows that
 1,481 of 1,636 verified package paths have a recorded comparable cell metric;
