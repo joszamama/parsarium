@@ -16,7 +16,8 @@ source, not just in the harness. Shared underlying parser families remain
 identified in the catalog.
 
 The first batch is `png/c/libpng`, `png/c/stb`, `png/python/pypng`,
-`png/go/imaging`, `png/rust/png`, `png/javascript/pngjs`, and `zip/c/libzip`.
+`png/go/imaging`, `png/rust/png`, `png/javascript/pngjs`,
+`png/php/marc1706_fast_image_size`, and `zip/c/libzip`.
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 PyPNG uses Atheris and Python line tracing of its pure-Python package. The Go
@@ -27,7 +28,11 @@ binaries. The Rust entry uses LLVM source coverage for the pinned `png` crate
 and sanitizer coverage counters in its libFuzzer binary. The JavaScript entry
 uses V8 source-range coverage for `pngjs` and Jazzer.js with explicit package
 instrumentation. Its Node runtime uses a base with the glibc version required
-by Jazzer's pinned native addon.
+by Jazzer's pinned native addon. V8 line counts are derived from executed
+source ranges and can include import-time code; the receipt separately requires
+execution in `parser.js`. The PHP entry uses a local temporary file for the
+package's path API, Xdebug line coverage in the package, and a pinned
+coverage-guided PHP fuzzer. Its receipt requires executed lines in `TypePng.php`.
 The native final images contain the binaries, parser source for coverage display,
 and LLVM coverage tools. The PyPNG image contains only pinned wheels and Python.
 The runner disables
@@ -45,6 +50,7 @@ python3 scripts/run_project.py png python pypng
 python3 scripts/run_project.py png go imaging
 python3 scripts/run_project.py png rust png
 python3 scripts/run_project.py png javascript pngjs
+python3 scripts/run_project.py png php marc1706_fast_image_size
 python3 scripts/run_project.py zip c libzip
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check

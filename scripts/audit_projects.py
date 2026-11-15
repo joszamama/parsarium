@@ -69,6 +69,18 @@ def main() -> None:
                         and npm_lock["packages"]["node_modules/@jazzer.js/core"]["version"]
                         != manifest["fuzz_engine_release"]):
                     raise ValueError(f"Jazzer.js release mismatch: {path}")
+            if "composer_reference" in source:
+                composer_lock = json.loads((path.parent / "composer.lock").read_text())
+                composer_package, = [item for item in composer_lock["packages"]
+                                     if item["name"] == manifest["package"]]
+                if (composer_package["version"] != manifest["release"]
+                        or composer_package["source"]["reference"] != source["composer_reference"]):
+                    raise ValueError(f"Composer source mismatch: {path}")
+                if manifest.get("fuzz_engine") == "nikic/php-fuzzer":
+                    engine, = [item for item in composer_lock["packages"]
+                               if item["name"] == "nikic/php-fuzzer"]
+                    if engine["version"] != manifest["fuzz_engine_release"]:
+                        raise ValueError(f"PHP fuzzer release mismatch: {path}")
         else:
             lock = lock_path.read_text()
             if f"{manifest['package']}=={manifest['release']}" not in lock or manifest["source_sha256"] not in lock:
@@ -87,6 +99,8 @@ def main() -> None:
         if (result.get("pass") is not True or result.get("fuzz_engine_smoke_pass") is not True
                 or result.get("output") != manifest["expected_output"]
                 or result.get("parser_source_lines_covered", 0) <= 0
+                or ("format_specific_coverage_file_suffix" in manifest
+                    and result.get("format_specific_source_lines_covered", 0) <= 0)
                 or ("underlying_coverage_subject_prefix" in manifest
                     and result.get("underlying_source_lines_covered", 0) <= 0)
                 or result.get("control_sha256") != manifest["control_sha256"]

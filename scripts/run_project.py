@@ -59,6 +59,14 @@ def main() -> None:
             assert package["integrity"] == lock["npm_integrity"]
             if manifest.get("fuzz_engine") == "Jazzer.js":
                 assert npm_lock["packages"]["node_modules/@jazzer.js/core"]["version"] == manifest["fuzz_engine_release"]
+        if "composer_reference" in lock:
+            composer_lock = json.loads((project / "composer.lock").read_text())
+            package, = [item for item in composer_lock["packages"] if item["name"] == manifest["package"]]
+            assert package["version"] == manifest["release"]
+            assert package["source"]["reference"] == lock["composer_reference"]
+            if manifest.get("fuzz_engine") == "nikic/php-fuzzer":
+                engine, = [item for item in composer_lock["packages"] if item["name"] == "nikic/php-fuzzer"]
+                assert engine["version"] == manifest["fuzz_engine_release"]
     else:
         lock = lock_path.read_text()
         assert f"{manifest['package']}=={manifest['release']}" in lock
@@ -85,6 +93,7 @@ def main() -> None:
                              "--network", "none", "--read-only", "--cap-drop", "ALL",
                              "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
                              "--tmpfs", "/tmp:rw,nosuid,size=64m",
+                             "-v", f"{control}:/input/control:ro",
                              "--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"),
                              image, *manifest.get("fuzz_smoke_args", ["-help=1"])],
                             cwd=ROOT, text=True, capture_output=True)
@@ -98,6 +107,12 @@ def main() -> None:
                     if f["filename"].startswith(manifest["coverage_subject_prefix"])]
     assert len(source_files) == summary["parser_source_files"]
     assert sum(f["summary"]["lines"]["covered"] for f in source_files) == summary["parser_source_lines_covered"]
+    format_specific_lines = None
+    if "format_specific_coverage_file_suffix" in manifest:
+        specific = [f for f in source_files
+                    if f["filename"].endswith(manifest["format_specific_coverage_file_suffix"])]
+        format_specific_lines = sum(f["summary"]["lines"]["covered"] for f in specific)
+        assert format_specific_lines > 0
     if "underlying_coverage_subject_prefix" in manifest:
         underlying = [f for f in coverage["data"][0]["files"]
                       if f["filename"].startswith(manifest["underlying_coverage_subject_prefix"])]
@@ -124,6 +139,7 @@ def main() -> None:
         "output": summary["output"],
         "parser_source_files": summary["parser_source_files"],
         "parser_source_lines_covered": summary["parser_source_lines_covered"],
+        "format_specific_source_lines_covered": format_specific_lines,
         "underlying_source_files": summary.get("underlying_source_files"),
         "underlying_source_lines_covered": summary.get("underlying_source_lines_covered"),
         "fuzz_engine_smoke_pass": True,
