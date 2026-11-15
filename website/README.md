@@ -19,4 +19,4 @@ In the repository's **Settings → Pages**, choose **GitHub Actions** as the bui
 
 The repository is currently private. GitHub Pages needs a plan that supports private repositories, and a Pages site is public by default. The site's GitHub links to evidence and harness source require repository read access until the repository is made public.
 
-The atlas links to format and parser guides, rankings, evidence, and harness manifests in the main repository. The site preserves the distinction between 1,636 verified third-party package paths, 45 recorded standard/runtime APIs, and 92 runnable project harnesses.
+The atlas links to format and parser guides, rankings, evidence, and harness manifests in the main repository. The site preserves the distinction between 1,636 verified third-party package paths, 45 recorded standard/runtime APIs, and 109 runnable project harnesses.

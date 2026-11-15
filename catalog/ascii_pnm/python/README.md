@@ -1,6 +1,6 @@
 # ASCII PNM / Python
 
-20 verified third-party API paths; 2 have verified Docker harnesses.
+20 verified third-party API paths; 3 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/ascii_pnm/ranking.md) · [standard API inventory](../../../data/python/ascii_pnm/standard.json)
 
@@ -16,7 +16,7 @@
 - [pygame](pygame/README.md) — verified API path
 - [imagesize](imagesize/README.md) — Docker harness ready
 - [OpenImageIO](openimageio/README.md) — verified API path
-- [PyPNM](pypnm/README.md) — verified API path
+- [PyPNM](pypnm/README.md) — Docker harness ready
 - [netpbmfile](netpbmfile/README.md) — Docker harness ready
 - [netpbm](netpbm/README.md) — verified API path
 - [pgm-reader](pgm-reader/README.md) — verified API path

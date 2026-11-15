@@ -162,7 +162,8 @@ def main() -> None:
                         raise ValueError(f"PHP fuzzer release mismatch: {path}")
         else:
             lock = lock_path.read_text()
-            if f"{manifest['package']}=={manifest['release']}" not in lock or manifest["source_sha256"] not in lock:
+            if (f"{manifest['package']}=={manifest['release']}".lower() not in lock.lower()
+                    or manifest["source_sha256"] not in lock):
                 raise ValueError(f"source lock mismatch: {path}")
         dockerfile = path.parent / "Dockerfile"
         if not dockerfile.is_file() or not (path.parent / manifest["harness"]).is_file():

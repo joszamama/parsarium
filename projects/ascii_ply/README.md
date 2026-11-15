@@ -10,5 +10,7 @@
 - [jply / Java](java/jply/README.md)
 - [three / JavaScript](javascript/three/README.md)
 - [collectiveaccess/providence / PHP](php/providence/README.md)
+- [ply-parser / Python](python/ply_parser/README.md)
 - [plyfile / Python](python/plyfile/README.md)
+- [shapeviz / Python](python/shapeviz/README.md)
 - [ply-rs-bw / Rust](rust/ply_rs_bw/README.md)

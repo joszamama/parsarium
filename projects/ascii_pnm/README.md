@@ -10,6 +10,7 @@
 - [jai-imageio-core / Java](java/jai_imageio_core/README.md)
 - [image-size / JavaScript](javascript/image_size/README.md)
 - [imagine/imagine / PHP](php/imagine/README.md)
+- [PyPNM / Python](python/pypnm/README.md)
 - [imagesize / Python](python/imagesize/README.md)
 - [netpbmfile / Python](python/netpbmfile/README.md)
 - [image / Rust](rust/image/README.md)

@@ -1,6 +1,6 @@
 # MP4 / Python
 
-20 verified third-party API paths; 2 have verified Docker harnesses.
+20 verified third-party API paths; 3 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/mp4/ranking.md) · [standard API inventory](../../../data/python/mp4/standard.json)
 
@@ -10,7 +10,7 @@
 - [tinytag](tinytag/README.md) — Docker harness ready
 - [pytaglib](pytaglib/README.md) — verified API path
 - [pymediainfo](pymediainfo/README.md) — verified API path
-- [hachoir](hachoir/README.md) — verified API path
+- [hachoir](hachoir/README.md) — Docker harness ready
 - [pydub](pydub/README.md) — verified API path
 - [audioread](audioread/README.md) — verified API path
 - [av](av/README.md) — verified API path

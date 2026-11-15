@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/python/hachoir/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 python hachoir
+python3 parsarium.py run mp3_id3v2 python hachoir controls/mp3_id3v2/tone-tags.mp3
+```

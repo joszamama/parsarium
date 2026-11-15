@@ -1,6 +1,6 @@
 # ASCII PLY / Python
 
-21 verified third-party API paths; 1 have verified Docker harnesses.
+21 verified third-party API paths; 3 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/ascii_ply/ranking.md) · [standard API inventory](../../../data/python/ascii_ply/standard.json)
 
@@ -13,8 +13,8 @@
 - [pyminiply](pyminiply/README.md) — verified API path
 - [pyvista-miniply](pyvista-miniply/README.md) — verified API path
 - [polyxios](polyxios/README.md) — verified API path
-- [shapeviz](shapeviz/README.md) — verified API path
-- [ply-parser](ply-parser/README.md) — verified API path
+- [shapeviz](shapeviz/README.md) — Docker harness ready
+- [ply-parser](ply-parser/README.md) — Docker harness ready
 - [py3d](py3d/README.md) — verified API path
 - [pyvista](pyvista/README.md) — verified API path
 - [vtk](vtk/README.md) — verified API path

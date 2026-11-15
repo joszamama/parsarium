@@ -10,6 +10,7 @@
 - [isoparser / Java](java/isoparser/README.md)
 - [music-metadata / JavaScript](javascript/music_metadata/README.md)
 - [james-heinrich/getid3 / PHP](php/getid3/README.md)
+- [hachoir / Python](python/hachoir/README.md)
 - [mutagen / Python](python/mutagen/README.md)
 - [tinytag / Python](python/tinytag/README.md)
 - [mp4 / Rust](rust/mp4/README.md)

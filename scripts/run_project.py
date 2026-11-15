@@ -83,7 +83,7 @@ def main() -> None:
                     assert engine["version"] == manifest["fuzz_engine_release"]
         else:
             lock = lock_path.read_text()
-            assert f"{manifest['package']}=={manifest['release']}" in lock
+            assert f"{manifest['package']}=={manifest['release']}".lower() in lock.lower()
             assert manifest["source_sha256"] in lock
     docker_text = (project / "Dockerfile").read_text()
     for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):

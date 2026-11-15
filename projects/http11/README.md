@@ -11,4 +11,6 @@
 - [http-parser-js / JavaScript](javascript/http_parser_js/README.md)
 - [guzzlehttp/psr7 / PHP](php/guzzle_psr7/README.md)
 - [h11 / Python](python/h11/README.md)
+- [h11pro / Python](python/h11pro/README.md)
+- [http-parse / Python](python/http_parse/README.md)
 - [httparse / Rust](rust/httparse/README.md)
