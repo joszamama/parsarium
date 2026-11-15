@@ -23,6 +23,14 @@ and package line coverage during valid-control replay. The PDF reader source
 file must show executed lines for each receipt. `http11/python/h11` adds raw
 HTTP/1.1 request parsing and coverage in h11's request reader.
 
+The next six projects cover the remaining formats: `mp3_id3v2/python/mutagen`,
+`ascii_ply/python/plyfile`, `mp4/python/mutagen`, `wav/python/mutagen`,
+`svg/python/svgelements`, and `ascii_pnm/python/netpbmfile`. The three Mutagen
+projects exercise separate MP3/ID3v2, MP4, and WAVE parser modules from the
+same pinned release; they are separate format paths, not independent packages.
+The PLY and PNM projects pin their NumPy dependency wheel as well as the parser
+wheel. All ten formats now have at least one covered container project.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -66,6 +74,12 @@ python3 scripts/run_project.py zip c libzip
 python3 scripts/run_project.py pdf python pypdf
 python3 scripts/run_project.py pdf python pdfrw
 python3 scripts/run_project.py http11 python h11
+python3 scripts/run_project.py mp3_id3v2 python mutagen
+python3 scripts/run_project.py ascii_ply python plyfile
+python3 scripts/run_project.py mp4 python mutagen
+python3 scripts/run_project.py wav python mutagen
+python3 scripts/run_project.py svg python svgelements
+python3 scripts/run_project.py ascii_pnm python netpbmfile
 python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
 python3 scripts/run_project_batch.py --format pdf --ecosystem python
 python3 scripts/audit_projects.py --write

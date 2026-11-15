@@ -92,6 +92,12 @@ def main() -> None:
         for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
             if field in manifest and manifest[field] not in docker_text:
                 raise ValueError(f"Dockerfile does not pin {field}: {path}")
+        for dependency in manifest.get("dependencies", []):
+            if (lock_path.suffix == ".json"
+                    or f"{dependency['package']}=={dependency['release']}" not in lock
+                    or dependency["sha256"] not in lock
+                    or dependency["sha256"] not in docker_text):
+                raise ValueError(f"dependency pin mismatch: {path}")
         verification_path = path.parent / "verification.json"
         if not verification_path.exists():
             staged.add(key)

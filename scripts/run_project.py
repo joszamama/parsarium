@@ -71,6 +71,14 @@ def main() -> None:
         lock = lock_path.read_text()
         assert f"{manifest['package']}=={manifest['release']}" in lock
         assert manifest["source_sha256"] in lock
+    docker_text = (project / "Dockerfile").read_text()
+    for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
+        if field in manifest:
+            assert manifest[field] in docker_text
+    for dependency in manifest.get("dependencies", []):
+        assert lock_path.suffix != ".json"
+        assert f"{dependency['package']}=={dependency['release']}" in lock
+        assert dependency["sha256"] in lock and dependency["sha256"] in docker_text
     control = ROOT / manifest["control"]
     assert sha256(control.read_bytes()).hexdigest() == manifest["control_sha256"]
 
