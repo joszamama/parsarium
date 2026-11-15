@@ -85,6 +85,11 @@ Go receipt also covers the delegated `go-mp3` decoder. C and C++ use separate
 TagLib APIs over the same parser source. All eight cells are runnable on their
 valid tagged MP3 controls.
 
+The MP4 row adds C and C++ TagLib, Go `go-mp4`, Java isoparser,
+JavaScript `music-metadata`, PHP getID3, and Rust `mp4` to Python Mutagen.
+TagLib's C and C++ paths use the same pinned MP4 parser source. All eight MP4
+cells are runnable on the valid audio and video MP4 control.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -164,6 +169,8 @@ python3 scripts/run_project_batch.py --format ascii_ply --dry-run
 python3 scripts/run_project_batch.py --format ascii_ply
 python3 scripts/run_project_batch.py --format mp3_id3v2 --dry-run
 python3 scripts/run_project_batch.py --format mp3_id3v2
+python3 scripts/run_project_batch.py --format mp4 --dry-run
+python3 scripts/run_project_batch.py --format mp4
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
