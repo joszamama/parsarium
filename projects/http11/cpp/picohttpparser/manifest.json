@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "cpp",
+  "package": "picohttpparser",
+  "release": "1.5",
+  "catalog_parser": "data/cpp/http11/parsers.json",
+  "source_lock": "projects/http11/cpp/picohttpparser/source-lock.json",
+  "source_sha256": "ca7781ebb208c35437d9c5bbab994711071faaf9db8ad4e25e874b635df264e1",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium?x=1",
+    "version": "1.1"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in picohttpparser C source and CPP byte-input harness",
+  "coverage_subject_prefix": "/work/picohttpparser-1.5/",
+  "format_specific_coverage_file_suffix": "/picohttpparser.c"
+}

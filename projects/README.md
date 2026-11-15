@@ -67,6 +67,12 @@ path. PlutoSVG's C and C++ paths share the same document parser and pinned
 PlutoVG rasterizer. The valid SVG control exercises format-specific parser
 source in each project. All eight SVG cells are runnable.
 
+The HTTP/1.1 row adds C and C++ picohttpparser, Go `fasthttp`, Java Netty,
+JavaScript `http-parser-js`, PHP Guzzle PSR-7, and Rust `httparse` to Python
+`h11`. Each harness parses a local request byte sequence and reports method,
+target, version, or headers from the parsed request. The C and C++ projects
+share the same picohttpparser C source. All eight HTTP/1.1 cells are runnable.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -140,6 +146,8 @@ python3 scripts/run_project_batch.py --format wav --dry-run
 python3 scripts/run_project_batch.py --format wav
 python3 scripts/run_project_batch.py --format svg --dry-run
 python3 scripts/run_project_batch.py --format svg
+python3 scripts/run_project_batch.py --format http11 --dry-run
+python3 scripts/run_project_batch.py --format http11
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
