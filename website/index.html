@@ -50,9 +50,14 @@
 
     <section class="atlas-section section-pad" id="atlas" aria-labelledby="atlas-title"><div class="container">
       <div class="section-heading atlas-heading"><div><p class="section-index">02 / CHOOSE A TARGET</p><h2 id="atlas-title">Find your parser.</h2><p>Filter by format, language, or runnable harness. Each path shows its input API and parser family; cell notes include within-ecosystem adoption rankings and search limits.</p></div><span class="atlas-stamp" aria-hidden="true">80<br>CELLS</span></div>
+      <div class="readiness-strip" aria-label="What verified and runnable mean">
+        <div><span class="readiness-count">1,636</span><div><strong>Verified API paths</strong><p>A pinned release and documented input API passed a small valid control. These entries are cataloged with evidence.</p></div></div>
+        <div><span class="readiness-count">83</span><div><strong>Runnable targets</strong><p>A verified path packaged with a Docker build, byte-input harness, parser-source coverage, and replay command.</p></div></div>
+      </div>
+      <p class="readiness-why"><strong>Why 83?</strong> Packaging and checking a Docker harness is separate work for each parser. The current runnable set covers every format × ecosystem cell; the other cataloged paths are not yet packaged for the Parsarium CLI.</p>
       <div class="atlas-toolbar">
         <label class="search-label" for="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search package, API, or parser family…" autocomplete="off"><span class="key-hint" aria-hidden="true">/</span></label>
-        <div class="filter-row"><label>Format <select id="format-filter"><option value="">All formats</option></select></label><label>Ecosystem <select id="ecosystem-filter"><option value="">All ecosystems</option></select></label><label class="check-filter"><input id="runnable-filter" type="checkbox"><span class="switch" aria-hidden="true"></span> Runnable only</label></div>
+        <div class="filter-row"><label>Format <select id="format-filter"><option value="">All formats</option></select></label><label>Ecosystem <select id="ecosystem-filter"><option value="">All ecosystems</option></select></label><label class="check-filter"><input id="runnable-filter" type="checkbox"><span class="switch" aria-hidden="true"></span> Docker harness ready</label></div>
       </div>
       <div class="atlas-summary"><p id="result-count" aria-live="polite">Loading the atlas…</p><button id="clear-filters" class="clear-button" type="button">Clear filters <span aria-hidden="true">↺</span></button></div>
       <div id="cell-note" class="cell-note" hidden></div><div id="parser-grid" class="parser-grid" aria-live="polite"></div>
@@ -60,34 +65,25 @@
     </div></section>
 
     <section class="specimen-section section-pad" id="specimen" aria-labelledby="specimen-title"><div class="container specimen-layout">
-      <div class="specimen-intro"><p class="section-index">03 / SEE THE CONTRACT</p><h2 id="specimen-title">From bytes to<br><em>a parser result.</em></h2><p>Here is a valid control from a runnable target: input bytes, format-aware output, and the exact replay command. Copy the command, then try the target with an input of your own.</p><div class="specimen-selector" id="demo-tabs" role="tablist" aria-label="Choose a control format"></div><p class="specimen-disclaimer">This browser view shows a saved manifest result. The container runs the parser. A valid control establishes support for this input, not every format variant.</p></div>
+      <div class="specimen-intro"><p class="section-index">03 / USE A TARGET</p><h2 id="specimen-title">Bring a file.<br><em>Run a parser.</em></h2><p>A generator such as Fandango writes complete input files. Parsarium gives those files to a pinned parser harness and saves what happened. Start with the supplied valid control, then use your own file or corpus.</p><p class="selector-label">Try the workflow for a format:</p><div class="specimen-selector" id="demo-tabs" role="tablist" aria-label="Choose a format for the run example"></div><p class="specimen-disclaimer">The commands run locally in containers after cloning the repository. The page displays saved control evidence; it does not execute parsers in your browser.</p></div>
       <div class="specimen-workbench" id="demo-panel" role="tabpanel" tabindex="0" aria-live="polite"></div>
     </div></section>
 
-    <section class="map-section section-pad" id="map" aria-labelledby="map-title"><div class="container">
-      <div class="section-heading"><div><p class="section-index">04 / THE LANDSCAPE</p><h2 id="map-title">Find a target in every cell.</h2><p>Each number is a verified third-party package path. Open a cell to see its parsers, runnable harnesses, adoption ranking, and search limits.</p></div><div class="map-legend"><span class="legend-dot"></span> 20+ paths <span class="legend-dot legend-low"></span> under 20</div></div>
-      <div class="matrix-scroll"><div id="matrix" class="matrix" role="group" aria-label="Verified parser counts by format and ecosystem"></div></div><p class="map-footnote">Standard and runtime APIs are recorded separately. Shared underlying parser families are named in the catalog.</p>
-    </div></section>
-
     <section class="method-section section-pad" id="how-it-works" aria-labelledby="method-title"><div class="container">
-      <div class="section-heading"><div><p class="section-index">05 / MAKE IT YOUR EXPERIMENT</p><h2 id="method-title">One target.<br><em>Many ways to test.</em></h2></div><p class="method-lede">Exercise one corpus across parser APIs, or keep a target fixed while trying different generators. Each harness accepts local inputs and offers an instrumented path for coverage-guided fuzzing.</p></div>
+      <div class="section-heading"><div><p class="section-index">04 / MAKE IT YOUR EXPERIMENT</p><h2 id="method-title">One target.<br><em>Many ways to test.</em></h2></div><p class="method-lede">Exercise one corpus across parser APIs, or keep a target fixed while trying different generators. Each harness accepts local inputs and offers an instrumented path for coverage-guided fuzzing.</p></div>
       <div class="method-grid"><article><span class="method-number">01</span><div class="method-icon">⌕</div><h3>Choose what matters</h3><p>Find a parser by format and language. Within-cell adoption rankings and family labels help you choose relevant, distinct targets.</p></article><article><span class="method-number">02</span><div class="method-icon">↗</div><h3>Bring your inputs</h3><p>Run one file or replay a corpus from Fandango or another generator through the target’s local byte-input harness.</p></article><article><span class="method-number">03</span><div class="method-icon">▣</div><h3>See what ran</h3><p>Pinned releases, parser-source coverage, and run receipts make the execution inspectable. AFL++ and ecosystem fuzz entry points are prepared.</p></article></div>
       <div class="method-links"><a href="https://github.com/joszamama/parsarium/blob/main/fuzzing/README.md" target="_blank" rel="noopener noreferrer">Run inputs and fuzzers ↗</a><a href="https://github.com/joszamama/parsarium/blob/main/PROTOCOL.md" target="_blank" rel="noopener noreferrer">How targets are verified ↗</a></div>
     </div></section>
 
     <section class="run-section" aria-labelledby="run-title"><div class="container run-layout">
-      <div><p class="section-index">TAKE IT TO THE TERMINAL</p><h2 id="run-title">Bring your<br>own inputs.</h2><p>Use a verified control to start. Then replay a generated corpus or prepare AFL++ on the same parser target.</p><a class="button button-light" href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">Get the harnesses <span aria-hidden="true">↗</span></a></div>
-      <div class="terminal"><div class="terminal-top"><div><i></i><i></i><i></i></div><span>parsarium / same target, different inputs</span></div><pre><code><span class="comment"># run one file</span>
-<span class="prompt">$</span> python3 parsarium.py run png c libpng \
-    controls/png/red-green.png
-<span class="comment"># replay inputs from a generator</span>
+      <div><p class="section-index">INPUT GENERATION MEETS PARSER EXECUTION</p><h2 id="run-title">The file is<br>the handoff.</h2><p>For PNG, <a href="https://fandango-fuzzer.github.io/Fanbase.html" target="_blank" rel="noopener noreferrer">Fanbase supplies a Fandango spec</a> that generates complete PNG files. Parsarium replays that directory through a chosen parser and records each run. Other formats can use an available Fanbase spec, a custom spec, or any corpus of files.</p><a class="button button-light" href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">Get the harnesses <span aria-hidden="true">↗</span></a></div>
+      <div class="terminal"><div class="terminal-top"><div><i></i><i></i><i></i></div><span>PNG example / generator → files → parser</span></div><pre><code><span class="comment"># Fandango writes 100 complete PNG files</span>
+<span class="prompt">$</span> fandango fuzz -F png -n 100 -d generated/png
+<span class="comment"># Parsarium runs those files through libpng</span>
 <span class="prompt">$</span> python3 parsarium.py replay png c libpng \
     generated/png runs/png-replay \
     --generator Fandango --spec png
-<span class="comment"># prepare the same target for AFL++</span>
-<span class="prompt">$</span> python3 parsarium.py afl build png c libpng
-<span class="prompt">$</span> python3 parsarium.py afl prepare png c libpng \
-    runs/png-afl</code></pre><button class="copy-terminal" type="button" data-copy="python3 parsarium.py run png c libpng controls/png/red-green.png&#10;python3 parsarium.py replay png c libpng generated/png runs/png-replay --generator Fandango --spec png&#10;python3 parsarium.py afl build png c libpng&#10;python3 parsarium.py afl prepare png c libpng runs/png-afl">Copy commands</button></div>
+<span class="comment"># results go to runs/png-replay/</span></code></pre><button class="copy-terminal" type="button" data-copy="fandango fuzz -F png -n 100 -d generated/png&#10;python3 parsarium.py replay png c libpng generated/png runs/png-replay --generator Fandango --spec png">Copy example</button></div>
     </div></section>
   </main>
   <footer class="site-footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">P<span>.</span></span><span>Parsarium</span></a><p>Real format parsers, ready for your experiments.</p></div><div class="footer-links"><a href="#formats">Formats</a><a href="#atlas">Targets</a><a href="#how-it-works">How to use it</a><a href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><p class="footer-note">Built from the repository’s committed evidence.<br>Pinned releases, valid controls, and visible limits.</p></div></footer>

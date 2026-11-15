@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static Parsarium field guide from committed catalog evidence."""
+"""Build the static Parsarium site from committed catalog evidence."""
 
 from __future__ import annotations
 
@@ -31,10 +31,14 @@ ECOSYSTEMS = ["c", "cpp", "go", "java", "javascript", "python", "rust", "php"]
 DEMO_PROJECTS = [
     "projects/png/python/pypng/manifest.json",
     "projects/zip/rust/zip/manifest.json",
-    "projects/http11/python/h11/manifest.json",
+    "projects/mp4/php/getid3/manifest.json",
     "projects/wav/c/dr_wav/manifest.json",
     "projects/pdf/java/pdfbox/manifest.json",
     "projects/svg/rust/usvg/manifest.json",
+    "projects/http11/python/h11/manifest.json",
+    "projects/ascii_ply/python/plyfile/manifest.json",
+    "projects/ascii_pnm/python/netpbmfile/manifest.json",
+    "projects/mp3_id3v2/python/mutagen/manifest.json",
 ]
 
 
@@ -151,8 +155,19 @@ def build(output: Path) -> None:
 
     demos = []
     controls_output = output / "controls"
+    if controls_output.exists():
+        shutil.rmtree(controls_output)
     for source in DEMO_PROJECTS:
         manifest = read_json(ROOT / source)
+        fmt, eco, slug = manifest["format"], manifest["ecosystem"], Path(source).parent.name
+        parser_record = next(
+            (record for record in parsers if record["format"] == fmt
+             and record["ecosystem"] == eco and record["name"] == manifest["package"]
+             and record["version"] == manifest["release"]),
+            None,
+        )
+        if parser_record is None:
+            raise ValueError(f"demo target missing from verified catalog: {source}")
         control_path = ROOT / manifest["control"]
         data = control_path.read_bytes()
         if hashlib.sha256(data).hexdigest() != manifest["control_sha256"]:
@@ -160,20 +175,30 @@ def build(output: Path) -> None:
         destination = controls_output / manifest["format"] / control_path.name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(control_path, destination)
+        target = f"{fmt} {eco} {slug}"
+        run_dir = f"runs/{fmt}-{slug}"
         demos.append({
-            "format": manifest["format"],
-            "ecosystem": manifest["ecosystem"],
+            "format": fmt,
+            "ecosystem": eco,
             "package": manifest["package"],
             "release": manifest["release"],
+            "inputApi": parser_record["inputApi"],
             "control": manifest["control"],
             "controlUrl": str(destination.relative_to(output)),
             "bytes": len(data),
-            "hex": data[:48].hex(" "),
             "expectedOutput": manifest["expected_output"],
             "manifestUrl": repo_link(source),
-            "command": (f"python3 parsarium.py run {manifest['format']} "
-                        f"{manifest['ecosystem']} {Path(source).parent.name} {manifest['control']}"),
+            "controlCommand": f"python3 parsarium.py run {target} {manifest['control']} --results {run_dir}-control",
+            "inputCommand": f"python3 parsarium.py run {target} INPUT_FILE --results {run_dir}-single",
+            "replayCommand": f"python3 parsarium.py replay {target} CORPUS_DIR {run_dir}-replay",
+            "aflCommands": [
+                f"python3 parsarium.py afl build {target}",
+                f"python3 parsarium.py afl prepare {target} {run_dir}-afl",
+                f"python3 parsarium.py afl run {run_dir}-afl --seconds 60",
+            ],
         })
+    if [demo["format"] for demo in demos] != [fmt for fmt, *_ in FORMATS]:
+        raise ValueError("run examples must cover every format in display order")
 
     catalog = {
         "summary": {

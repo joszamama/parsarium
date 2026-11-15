@@ -55,6 +55,7 @@ function renderFormats() {
     $("#runnable-filter").checked = false;
     visible = pageSize;
     renderAtlas();
+    showDemoForFormat(button.dataset.format);
     $("#atlas").scrollIntoView({ behavior: "smooth" });
   });
 }
@@ -126,11 +127,15 @@ function initAtlas() {
   if (catalog.ecosystems.includes(initial.get("ecosystem"))) $("#ecosystem-filter").value = initial.get("ecosystem");
   $("#search").value = initial.get("q") || "";
   $("#runnable-filter").checked = initial.get("runnable") === "1";
-  ["format-filter", "ecosystem-filter", "runnable-filter"].forEach((id) => $(`#${id}`).addEventListener("change", () => { visible = pageSize; renderAtlas(); }));
+  ["format-filter", "ecosystem-filter", "runnable-filter"].forEach((id) => $(`#${id}`).addEventListener("change", () => {
+    visible = pageSize;
+    renderAtlas();
+    if (id === "format-filter" && $("#format-filter").value) showDemoForFormat($("#format-filter").value);
+  }));
   $("#search").addEventListener("input", () => { visible = pageSize; renderAtlas(); });
   $("#clear-filters").addEventListener("click", () => {
     $("#format-filter").value = ""; $("#ecosystem-filter").value = ""; $("#search").value = ""; $("#runnable-filter").checked = false;
-    visible = pageSize; renderAtlas();
+    visible = pageSize; renderAtlas(); renderDemo(0);
   });
   $("#load-more").addEventListener("click", () => { visible += pageSize; renderAtlas(); });
   document.addEventListener("keydown", (event) => {
@@ -140,31 +145,12 @@ function initAtlas() {
   });
   renderAtlas();
 }
-function selectCell(format, ecosystem) {
-  $("#format-filter").value = format;
-  $("#ecosystem-filter").value = ecosystem;
-  $("#search").value = "";
-  $("#runnable-filter").checked = false;
-  visible = pageSize;
-  renderAtlas();
-  $("#atlas").scrollIntoView({ behavior: "smooth" });
+function showDemoForFormat(format) {
+  const index = catalog.demos.findIndex((demo) => demo.format === format);
+  if (index >= 0) renderDemo(index);
 }
-function renderMatrix() {
-  const map = new Map(catalog.cells.map((cell) => [`${cell.format}:${cell.ecosystem}`, cell]));
-  let html = '<span></span>';
-  html += catalog.ecosystems.map((eco) => `<span class="matrix-heading">${escapeHtml(ecoLabel[eco])}</span>`).join("");
-  for (const format of catalog.formats) {
-    html += `<span class="matrix-row-label">${escapeHtml(format.label)}</span>`;
-    for (const eco of catalog.ecosystems) {
-      const cell = map.get(`${format.id}:${eco}`);
-      html += `<button class="matrix-cell ${cell.verified < 20 ? "low" : ""}" type="button" data-format="${escapeHtml(format.id)}" data-eco="${escapeHtml(eco)}" aria-label="${cell.verified} verified ${escapeHtml(format.label)} parsers in ${escapeHtml(ecoLabel[eco])}">${cell.verified}</button>`;
-    }
-  }
-  $("#matrix").innerHTML = html;
-  $("#matrix").addEventListener("click", (event) => {
-    const button = event.target.closest(".matrix-cell");
-    if (button) selectCell(button.dataset.format, button.dataset.eco);
-  });
+function commandBlock(label, command, key) {
+  return `<div class="command-block"><div class="command-label"><span>${escapeHtml(label)}</span><button type="button" data-command="${key}">Copy</button></div><pre><code><span>$</span> ${escapeHtml(command)}</code></pre></div>`;
 }
 function renderDemo(index) {
   const demo = catalog.demos[index];
@@ -172,25 +158,44 @@ function renderDemo(index) {
     button.setAttribute("aria-selected", String(buttonIndex === index));
     button.tabIndex = buttonIndex === index ? 0 : -1;
   });
-  $("#demo-panel").setAttribute("aria-labelledby", `demo-tab-${index}`);
-  const hex = demo.hex.match(/.{1,47}(?: |$)/g)?.join("\n") ?? demo.hex;
-  $("#demo-panel").innerHTML = `<div class="workbench-top"><span>VALID CONTROL / ${escapeHtml(formatLabel(demo.format))}</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
-    <div class="workbench-body"><div class="workbench-step">01 — INPUT BYTES</div>
-      <div class="workbench-file"><strong>${escapeHtml(demo.control.split("/").pop())}</strong><span>${demo.bytes.toLocaleString()} bytes</span></div>
-      <pre class="hex-view">${escapeHtml(hex)}${demo.bytes > 48 ? "\n…" : ""}</pre>
-      <div class="parse-arrow">PARSED BY ${escapeHtml(demo.package)} ${escapeHtml(demo.release)}</div>
-      <div class="workbench-step">02 — OBSERVED FORMAT-AWARE RESULT</div>
-      <pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>
-      <div class="workbench-actions"><a href="${safeUrl(demo.manifestUrl)}" target="_blank" rel="noopener noreferrer">View manifest ↗</a><a href="${escapeHtml(demo.controlUrl)}" download>Download control ↓</a><button type="button" class="copy-command">Copy replay command</button></div>
-      <div class="workbench-command"><span>$</span> ${escapeHtml(demo.command)}</div>
+  const panel = $("#demo-panel");
+  panel.setAttribute("aria-labelledby", `demo-tab-${index}`);
+  const controlName = demo.control.split("/").pop();
+  const afl = demo.aflCommands.map((command) => `<span>$</span> ${escapeHtml(command)}`).join("\n");
+  panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / EXAMPLE RUNNABLE TARGET</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="workbench-body">
+      <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.manifestUrl)}" target="_blank" rel="noopener noreferrer">Inspect harness ↗</a></div>
+      <p class="target-api"><strong>Documented input API</strong><code>${escapeHtml(demo.inputApi)}</code></p>
+      <div class="workbench-flow"><span>Input file(s)</span><b aria-hidden="true">→</b><span>Parser harness</span><b aria-hidden="true">→</b><span>Run receipts</span></div>
+      <div class="run-step"><div class="run-step-head"><span>01</span><h4>Check the target</h4></div><p>Run its supplied valid control, <a href="${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a> (${demo.bytes.toLocaleString()} bytes).</p>
+        ${commandBlock("VALID CONTROL", demo.controlCommand, "control")}
+        <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and saved in the manifest. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre></details>
+      </div>
+      <div class="run-step"><div class="run-step-head"><span>02</span><h4>Run your file</h4></div><p>Replace <code>INPUT_FILE</code> with a local file of the same format.</p>
+        ${commandBlock("ONE INPUT", demo.inputCommand, "input")}
+      </div>
+      <div class="run-step"><div class="run-step-head"><span>03</span><h4>Replay a corpus</h4></div><p>Replace <code>CORPUS_DIR</code> with a directory of files from Fandango, another generator, or your own collection. Parsarium records each run.</p>
+        ${commandBlock("MANY INPUTS", demo.replayCommand, "replay")}
+        <details class="afl-details"><summary>Use AFL++ with this target</summary><p>Build the instrumented image, prepare its valid seed, then run a short campaign.</p><pre><code>${afl}</code></pre><button type="button" data-command="afl">Copy AFL++ commands</button></details>
+      </div>
     </div>`;
-  $("#demo-panel .copy-command").addEventListener("click", (event) => copyText(demo.command, event.currentTarget));
+  panel.querySelectorAll("[data-command]").forEach((button) => button.addEventListener("click", () => {
+    const key = button.dataset.command;
+    const command = key === "afl" ? demo.aflCommands.join("\n") : demo[`${key}Command`];
+    copyText(command, button);
+  }));
 }
 function initDemo() {
   $("#demo-tabs").innerHTML = catalog.demos.map((demo, index) => `<button type="button" role="tab" id="demo-tab-${index}" aria-controls="demo-panel" aria-selected="false">${escapeHtml(formatLabel(demo.format))}</button>`).join("");
   $("#demo-tabs").addEventListener("click", (event) => {
     const button = event.target.closest("button");
-    if (button) renderDemo([...button.parentNode.children].indexOf(button));
+    if (button) {
+      const index = [...button.parentNode.children].indexOf(button);
+      renderDemo(index);
+      $("#format-filter").value = catalog.demos[index].format;
+      visible = pageSize;
+      renderAtlas();
+    }
   });
   $("#demo-tabs").addEventListener("keydown", (event) => {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
@@ -201,8 +206,11 @@ function initDemo() {
     else if (event.key === "End") index = tabs.length - 1;
     else index = (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
     tabs[index].focus(); renderDemo(index);
+    $("#format-filter").value = catalog.demos[index].format;
+    visible = pageSize;
+    renderAtlas();
   });
-  renderDemo(0);
+  showDemoForFormat($("#format-filter").value || catalog.demos[0].format);
 }
 async function start() {
   try {
@@ -213,8 +221,11 @@ async function start() {
     $("#stat-formats").textContent = catalog.summary.formats;
     $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
     $("#stat-runnable").textContent = catalog.summary.runnable;
-    renderFormats(); initAtlas(); initDemo(); renderMatrix();
+    renderFormats(); initAtlas(); initDemo();
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
+    if (["#formats", "#atlas", "#specimen", "#how-it-works"].includes(location.hash)) {
+      requestAnimationFrame(() => $(location.hash).scrollIntoView({ behavior: "instant" }));
+    }
   } catch (error) {
     $("#format-grid").innerHTML = '<p>The catalog could not be loaded. Build the site with <code>python3 website/build.py</code> and serve <code>website/dist</code>.</p>';
     $("#result-count").textContent = "Catalog unavailable.";
