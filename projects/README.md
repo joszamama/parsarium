@@ -55,6 +55,12 @@ The C and C++ entries share Leptonica. The PHP wrapper delegates PNM decoding
 to ImageMagick, and the receipt records the native version in its toolchain.
 All eight ASCII PNM cells now have a runnable path for the valid P3 control.
 
+The WAV row adds C and C++ `dr_wav`, Go `go-audio/wav`, Java JCodec,
+JavaScript `music-metadata`, Rust Hound, and PHP getID3 to the existing Python
+Mutagen path. The C++ harness calls the C `dr_wav` API and shares that decoder
+family with the C cell. Each receipt requires executed lines in the package's
+WAV reader on a valid mono PCM16 control. All eight WAV cells are runnable.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -124,6 +130,8 @@ python3 scripts/run_project_batch.py --format pdf --ecosystem python
 python3 scripts/run_project_batch.py --format zip --ecosystem go
 python3 scripts/run_project_batch.py --format zip --dry-run
 python3 scripts/run_project_batch.py --format ascii_pnm --dry-run
+python3 scripts/run_project_batch.py --format wav --dry-run
+python3 scripts/run_project_batch.py --format wav
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "cpp",
+  "package": "dr_wav",
+  "release": "wav-0.14.6",
+  "catalog_parser": "data/cpp/wav/parsers.json",
+  "source_lock": "data/c/wav/source-lock.json",
+  "source_sha256": "2b1277b82ce97020dd2266ce4783b4bfc5c0b212da1388c6af7a1c7b81678d81",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "frames": 4,
+    "samples": [
+      0,
+      1000,
+      -1000,
+      0
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in dr_wav.h and C++17 byte-input harness using C API",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/dr_wav.h"
+}
