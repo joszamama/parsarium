@@ -7,6 +7,9 @@ existing parser evidence and control. The third-party catalog remains
 authoritative for package eligibility, release, and expected output; standard
 API projects link to the separate official-documentation inventory.
 
+For external one-input replay, Fandango corpus generation, and AFL++ run
+preparation, see the [fuzzing workflow](../fuzzing/README.md).
+
 The harness interface must accept the supplied bytes, call the package's real
 local parser API, and consume an observable format-specific result. For C and
 C++, the engine entry is `LLVMFuzzerTestOneInput`; the valid-control replay uses
