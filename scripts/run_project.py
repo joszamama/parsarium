@@ -32,45 +32,58 @@ def main() -> None:
     manifest = json.loads((project / "manifest.json").read_text())
     assert manifest["schema_version"] == 1
     assert (manifest["format"], manifest["ecosystem"]) == (args.format, args.ecosystem)
-    parsers = json.loads((ROOT / manifest["catalog_parser"]).read_text())
-    parser, = [p for p in parsers if p["name"] == manifest["package"]]
-    assert parser["version"] == manifest["release"]
-    if "expected_output" in parser:
-        expected = parser["expected_output"]
+    if manifest.get("kind") == "standard":
+        inventory = json.loads((ROOT / manifest["standard_inventory"]).read_text())
+        entry, = [item for item in inventory["verified_apis"] if item["api"] == manifest["api"]]
+        assert entry["runtime"] == manifest["runtime"]
+        assert entry["control"] == manifest["control"]
+        assert entry["expected"] == manifest["expected_output"]
+        lock_path = project / manifest["runtime_lock"]
+        lock = json.loads(lock_path.read_text())
+        assert lock == {"runtime": manifest["runtime"],
+                        "base_image": manifest["base_image"],
+                        "source_sha256": manifest["source_sha256"]}
     else:
-        legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
-        records = legacy.get("third_party", legacy.get("results", []))
-        record, = [item for item in records if item["package"] == manifest["package"]]
-        assert record["pass"] and record["version"] == manifest["release"]
-        expected = record["output"]
-    assert expected == manifest["expected_output"]
-    lock_path = ROOT / manifest["source_lock"]
-    if lock_path.suffix == ".json":
-        lock = json.loads(lock_path.read_text())[manifest["package"]]
-        assert lock["release"] == manifest["release"]
-        assert lock["source_sha256"] == manifest["source_sha256"]
-        if "go_module_sum" in lock:
-            go_sum = (project / "go.sum").read_text()
-            assert f"{manifest['package']} {manifest['release']} {lock['go_module_sum']}" in go_sum
-        if "npm_integrity" in lock:
-            npm_lock = json.loads((project / "package-lock.json").read_text())
-            package = npm_lock["packages"][f"node_modules/{manifest['package']}"]
-            assert package["version"] == manifest["release"]
-            assert package["integrity"] == lock["npm_integrity"]
-            if manifest.get("fuzz_engine") == "Jazzer.js":
-                assert npm_lock["packages"]["node_modules/@jazzer.js/core"]["version"] == manifest["fuzz_engine_release"]
-        if "composer_reference" in lock:
-            composer_lock = json.loads((project / "composer.lock").read_text())
-            package, = [item for item in composer_lock["packages"] if item["name"] == manifest["package"]]
-            assert package["version"] == manifest["release"]
-            assert package["source"]["reference"] == lock["composer_reference"]
-            if manifest.get("fuzz_engine") == "nikic/php-fuzzer":
-                engine, = [item for item in composer_lock["packages"] if item["name"] == "nikic/php-fuzzer"]
-                assert engine["version"] == manifest["fuzz_engine_release"]
-    else:
-        lock = lock_path.read_text()
-        assert f"{manifest['package']}=={manifest['release']}" in lock
-        assert manifest["source_sha256"] in lock
+        assert manifest.get("kind", "third_party") == "third_party"
+        parsers = json.loads((ROOT / manifest["catalog_parser"]).read_text())
+        parser, = [p for p in parsers if p["name"] == manifest["package"]]
+        assert parser["version"] == manifest["release"]
+        if "expected_output" in parser:
+            expected = parser["expected_output"]
+        else:
+            legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
+            records = legacy.get("third_party", legacy.get("results", []))
+            record, = [item for item in records if item["package"] == manifest["package"]]
+            assert record["pass"] and record["version"] == manifest["release"]
+            expected = record["output"]
+        assert expected == manifest["expected_output"]
+        lock_path = ROOT / manifest["source_lock"]
+        if lock_path.suffix == ".json":
+            lock = json.loads(lock_path.read_text())[manifest["package"]]
+            assert lock["release"] == manifest["release"]
+            assert lock["source_sha256"] == manifest["source_sha256"]
+            if "go_module_sum" in lock:
+                go_sum = (project / "go.sum").read_text()
+                assert f"{manifest['package']} {manifest['release']} {lock['go_module_sum']}" in go_sum
+            if "npm_integrity" in lock:
+                npm_lock = json.loads((project / "package-lock.json").read_text())
+                package = npm_lock["packages"][f"node_modules/{manifest['package']}"]
+                assert package["version"] == manifest["release"]
+                assert package["integrity"] == lock["npm_integrity"]
+                if manifest.get("fuzz_engine") == "Jazzer.js":
+                    assert npm_lock["packages"]["node_modules/@jazzer.js/core"]["version"] == manifest["fuzz_engine_release"]
+            if "composer_reference" in lock:
+                composer_lock = json.loads((project / "composer.lock").read_text())
+                package, = [item for item in composer_lock["packages"] if item["name"] == manifest["package"]]
+                assert package["version"] == manifest["release"]
+                assert package["source"]["reference"] == lock["composer_reference"]
+                if manifest.get("fuzz_engine") == "nikic/php-fuzzer":
+                    engine, = [item for item in composer_lock["packages"] if item["name"] == "nikic/php-fuzzer"]
+                    assert engine["version"] == manifest["fuzz_engine_release"]
+        else:
+            lock = lock_path.read_text()
+            assert f"{manifest['package']}=={manifest['release']}" in lock
+            assert manifest["source_sha256"] in lock
     docker_text = (project / "Dockerfile").read_text()
     for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
         if field in manifest:
@@ -129,6 +142,9 @@ def main() -> None:
         assert sum(f["summary"]["lines"]["covered"] for f in underlying) == summary["underlying_source_lines_covered"]
         assert summary["underlying_source_lines_covered"] > 0
     receipt = {
+        "kind": manifest.get("kind", "third_party"),
+        "api": manifest.get("api"),
+        "runtime": manifest.get("runtime"),
         "verified_at_utc": datetime.now(timezone.utc).isoformat(),
         "manifest": f"projects/{args.format}/{args.ecosystem}/{args.package_slug}/manifest.json",
         "image_id": command(["docker", "image", "inspect", image, "--format", "{{.Id}}"]),

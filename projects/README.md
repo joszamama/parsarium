@@ -3,8 +3,9 @@
 Projects are organized as `projects/<format>/<ecosystem>/<package>/`. Each
 project has a `manifest.json`, a Dockerfile, a byte-input harness, a valid-control
 replay, and a recorded `verification.json`. The manifest links back to the
-existing parser evidence and control. The catalog remains authoritative for
-package eligibility, release, and expected output.
+existing parser evidence and control. The third-party catalog remains
+authoritative for package eligibility, release, and expected output; standard
+API projects link to the separate official-documentation inventory.
 
 The harness interface must accept the supplied bytes, call the package's real
 local parser API, and consume an observable format-specific result. For C and
@@ -30,6 +31,12 @@ projects exercise separate MP3/ID3v2, MP4, and WAVE parser modules from the
 same pinned release; they are separate format paths, not independent packages.
 The PLY and PNM projects pin their NumPy dependency wheel as well as the parser
 wheel. All ten formats now have at least one covered container project.
+
+`wav/python/stdlib_wave` is the first standard-library project. It pins the
+CPython 3.13.1 image by architecture-specific digest and checks the SHA-256 of
+its `wave.py` source before installing a pinned Atheris wheel. The valid-control
+replay counts lines in CPython's `wave.py`, and the audit keeps this API separate
+from third-party package paths.
 
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
@@ -80,6 +87,7 @@ python3 scripts/run_project.py mp4 python mutagen
 python3 scripts/run_project.py wav python mutagen
 python3 scripts/run_project.py svg python svgelements
 python3 scripts/run_project.py ascii_pnm python netpbmfile
+python3 scripts/run_project.py wav python stdlib_wave
 python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
 python3 scripts/run_project_batch.py --format pdf --ecosystem python
 python3 scripts/audit_projects.py --write
@@ -91,7 +99,7 @@ matrix audit only when every selected project passes. The audit compares
 project manifests and successful coverage receipts against all third-party
 parser paths in `data/*/*/parsers.json`. Standard-library and runtime-bundled
 APIs are inventoried separately in `data/*/*/standard.json`; the audit records
-their 45 pending paths separately. Pending third-party paths remain
+their 45 paths and separate container progress. Pending third-party paths remain
 visible in `data/projects-coverage.json`; a copied Dockerfile or name alone
 does not count. Ubuntu package repositories are not snapshot-pinned in the
 pilot, so a later rebuild may use newer compiler and dependency package
