@@ -15,8 +15,8 @@ control passes and the coverage report shows executed lines in the package
 source, not just in the harness. Shared underlying parser families remain
 identified in the catalog.
 
-The first batch is `png/c/libpng`, `png/c/stb`, `png/python/pypng`, and
-`png/go/imaging`. Each Dockerfile pins its base image by digest and its parser
+The first batch is `png/c/libpng`, `png/c/stb`, `png/python/pypng`,
+`png/go/imaging`, and `zip/c/libzip`. Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 PyPNG uses Atheris and Python line tracing of its pure-Python package. The Go
 entry uses a compiled native Go fuzz test and Go's `-coverpkg` instrumentation.
@@ -38,6 +38,7 @@ python3 scripts/run_project.py png c libpng
 python3 scripts/run_project.py png c stb
 python3 scripts/run_project.py png python pypng
 python3 scripts/run_project.py png go imaging
+python3 scripts/run_project.py zip c libzip
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
