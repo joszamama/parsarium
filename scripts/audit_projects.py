@@ -134,7 +134,7 @@ def main() -> None:
             source = json.loads(lock_path.read_text())[manifest["package"]]
             if source["release"] != manifest["release"] or source["source_sha256"] != manifest["source_sha256"]:
                 raise ValueError(f"source lock mismatch: {path}")
-            if "go_module_sum" in source and (f"{manifest['package']} {manifest['release']} "
+            if "go_module_sum" in source and (f"{source.get('go_module', manifest['package'])} {manifest['release']} "
                     f"{source['go_module_sum']}") not in (path.parent / "go.sum").read_text():
                 raise ValueError(f"Go module sum mismatch: {path}")
             if "npm_integrity" in source:
@@ -191,7 +191,10 @@ def main() -> None:
                       "standard_staged": len(standard_keys & standard_staged),
                       "standard_pending": len(standard_keys - standard_completed - standard_staged)})
     standard_total = sum(standard_by_cell.values())
-    report = {"schema_version": 2, "catalog_paths": len(catalog),
+    runnable_cells = sum(cell["containerized_verified"] > 0 for cell in cells)
+    report = {"schema_version": 3, "catalog_paths": len(catalog),
+              "cells_total": len(cells), "cells_with_verified_project": runnable_cells,
+              "cells_pending": len(cells) - runnable_cells,
               "containerized_verified": len(completed), "staged": len(staged),
               "pending": len(catalog) - len(completed) - len(staged),
               "standard_api_paths": standard_total,
@@ -205,7 +208,8 @@ def main() -> None:
         output.write_text(serialized)
     if args.check and output.read_text() != serialized:
         raise ValueError("data/projects-coverage.json is stale; run --write")
-    print(f"{len(completed)}/{len(catalog)} containerized parser paths verified; "
+    print(f"{runnable_cells}/{len(cells)} cells runnable; "
+          f"{len(completed)}/{len(catalog)} containerized parser paths verified; "
           f"{len(staged)} staged; {report['pending']} pending; "
           f"{len(standard_completed)}/{standard_total} standard API paths covered")
 

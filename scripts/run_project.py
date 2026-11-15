@@ -64,7 +64,8 @@ def main() -> None:
             assert lock["source_sha256"] == manifest["source_sha256"]
             if "go_module_sum" in lock:
                 go_sum = (project / "go.sum").read_text()
-                assert f"{manifest['package']} {manifest['release']} {lock['go_module_sum']}" in go_sum
+                module = lock.get("go_module", manifest["package"])
+                assert f"{module} {manifest['release']} {lock['go_module_sum']}" in go_sum
             if "npm_integrity" in lock:
                 npm_lock = json.loads((project / "package-lock.json").read_text())
                 package = npm_lock["packages"][f"node_modules/{manifest['package']}"]

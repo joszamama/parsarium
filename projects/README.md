@@ -38,6 +38,13 @@ its `wave.py` source before installing a pinned Atheris wheel. The valid-control
 replay counts lines in CPython's `wave.py`, and the audit keeps this API separate
 from third-party package paths.
 
+The ZIP batch adds `zip/python/fsspec`, `zip/javascript/fflate`, and
+`zip/go/klauspost_compress_zip`. Each reads the same valid ZIP control through
+the package's documented byte or stream API. The Python receipt also records
+delegation to CPython `zipfile`; the Go and JavaScript receipts require executed
+lines in their package source. `data/projects-coverage.json` reports how many
+format/ecosystem cells have at least one verified third-party project.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -88,8 +95,12 @@ python3 scripts/run_project.py wav python mutagen
 python3 scripts/run_project.py svg python svgelements
 python3 scripts/run_project.py ascii_pnm python netpbmfile
 python3 scripts/run_project.py wav python stdlib_wave
+python3 scripts/run_project.py zip python fsspec
+python3 scripts/run_project.py zip javascript fflate
+python3 scripts/run_project.py zip go klauspost_compress_zip
 python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
 python3 scripts/run_project_batch.py --format pdf --ecosystem python
+python3 scripts/run_project_batch.py --format zip --ecosystem go
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
