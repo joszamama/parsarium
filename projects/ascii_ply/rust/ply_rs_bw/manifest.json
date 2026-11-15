@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "rust",
+  "package": "ply-rs-bw",
+  "release": "4.0.1",
+  "catalog_parser": "data/rust/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/rust/ply_rs_bw/source-lock.json",
+  "source_sha256": "65841c1e3a10c38a78ae2cb2bf14f21832e3b0895680361675745749bfb2578e",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "format": "Ascii"
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in ply-rs-bw ASCII PLY parser; fuzz binary has sanitizer coverage counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ply-rs-bw-4.0.1/",
+  "format_specific_coverage_file_suffix": "/parser/mod.rs"
+}

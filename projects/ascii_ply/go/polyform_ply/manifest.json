@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "go",
+  "package": "github.com/EliCDavis/polyform/formats/ply",
+  "release": "v0.44.0",
+  "catalog_parser": "data/go/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/go/polyform_ply/source-lock.json",
+  "source_sha256": "b5c14fd759a50d5bfa0dd2fc29604221eb234810b93e8b9b0af2f61eb2f8c388",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1
+  },
+  "harness": "harness.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzPLY",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzPLY",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of Polyform PLY parser during valid-control replay",
+  "coverage_subject_prefix": "github.com/EliCDavis/polyform/formats/ply/"
+}

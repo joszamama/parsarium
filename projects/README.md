@@ -73,6 +73,12 @@ JavaScript `http-parser-js`, PHP Guzzle PSR-7, and Rust `httparse` to Python
 target, version, or headers from the parsed request. The C and C++ projects
 share the same picohttpparser C source. All eight HTTP/1.1 cells are runnable.
 
+The ASCII PLY row adds C and C++ rply, Go Polyform, Java JPLY, JavaScript
+Three.js PLYLoader, PHP Providence `PlyToStl`, and Rust `ply-rs-bw` to Python
+`plyfile`. The PHP project uses the released standalone Providence parser module
+and validates parsed triangle geometry in its STL output. C and C++ share rply's
+C parser. All eight ASCII PLY cells are runnable.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -148,6 +154,8 @@ python3 scripts/run_project_batch.py --format svg --dry-run
 python3 scripts/run_project_batch.py --format svg
 python3 scripts/run_project_batch.py --format http11 --dry-run
 python3 scripts/run_project_batch.py --format http11
+python3 scripts/run_project_batch.py --format ascii_ply --dry-run
+python3 scripts/run_project_batch.py --format ascii_ply
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
