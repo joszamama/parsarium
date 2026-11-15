@@ -33,6 +33,17 @@ def main() -> None:
         assert entry["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         if entry["status"] == "ok":
             assert entry["image_id"]
+    native_plans = json.loads((ROOT / "data/native-plan-smoke.json").read_text())
+    plan_records = {item["project"]: item for item in native_plans["results"]}
+    assert len(plan_records) == len(manifests) == native_plans["projects_total"]
+    for path in manifests:
+        relative = path.parent.relative_to(ROOT / "projects")
+        project, manifest = project_for(*relative.parts)
+        entry = plan_records[str(relative)]
+        assert entry["status"] == "ready" and entry["unique_seeds"] == 1
+        assert entry["control_sha256"] == manifest["control_sha256"]
+        assert entry["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
+        assert entry["image_id"] == json.loads((project / "verification.json").read_text())["image_id"]
     native = [path for path in manifests if path.parent.parent.name in {"c", "cpp"}]
     afl_report = json.loads((ROOT / "data/afl-native-smoke.json").read_text())
     afl_records = {item["project"]: item for item in afl_report["results"]}
@@ -52,7 +63,7 @@ def main() -> None:
         dockerfile = (overlay / "Dockerfile").read_bytes()
         assert dockerfile == derived_dockerfile(project).encode()
         assert receipt["overlay_dockerfile_sha256"] == sha256(dockerfile).hexdigest()
-    print(f"{len(manifests)}/{len(manifests)} one-input projects, "
+    print(f"{len(manifests)}/{len(manifests)} one-input projects and native plans, "
           f"{batch_report['batch_passing']} batch replay projects, and "
           f"{len(native)}/{len(native)} AFL++ native overlays current")
 

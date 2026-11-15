@@ -97,6 +97,41 @@ hashes of every saved queue, crash, and hang file. `plan.json` contains a
 resume command using `-i -`. Generated inputs can be used as AFL++ seeds, but
 the black-box and grey-box results stay in separate run directories.
 
+## Native coverage-guided campaigns in all eight ecosystems
+
+Every project also has a plan for its existing fuzz engine: libFuzzer in C,
+C++, and Rust; Go native fuzzing; Jazzer in Java; Jazzer.js in JavaScript;
+Atheris in Python; and PHP-Fuzzer in PHP. Their feedback counts are not
+comparable across ecosystems.
+
+```sh
+python3 scripts/prepare_native_run.py png javascript pngjs runs/pngjs-native \
+  --seed-dir generated/png --duration-seconds 3600
+python3 scripts/run_prepared_native.py runs/pngjs-native --check
+python3 scripts/run_prepared_native.py runs/pngjs-native
+```
+
+Preparation copies and hashes the valid control plus optional supplied seeds,
+pins the verified image ID, and writes `plan.json` with an exact Docker
+command. `--check` validates the plan and seeds without starting a campaign.
+The final command starts mutation and records `campaign.log` and
+`campaign.json`. The engine receives writable corpus and artifact directories.
+Go seeds are encoded as Go fuzz corpus files; its generated coverage corpus is
+stored separately in `go-cache/`. PHP-Fuzzer updates its corpus in place. It
+has no engine duration flag, so the runner stops its container at the
+requested duration. Other engines receive their own duration flag, with a
+short shutdown allowance in the runner.
+
+The plan preflight passed for all 83 current projects; see
+`data/native-plan-smoke.json`. It verifies plan construction, pinned images,
+seeds, and command structure. It does not prove that a full campaign will run
+to completion. The one-input and batch replays above verify valid controls
+through the same fuzz targets. Engine details: [Go](https://go.dev/doc/security/fuzz/),
+[Jazzer](https://github.com/CodeIntelligenceTesting/jazzer),
+[Jazzer.js](https://github.com/CodeIntelligenceTesting/jazzer.js/blob/main/docs/fuzz-settings.md),
+[Atheris](https://github.com/google/atheris), and
+[PHP-Fuzzer](https://github.com/nikic/PHP-Fuzzer).
+
 The run layouts are:
 
 ```text
@@ -107,16 +142,19 @@ runs/<afl-run>/seeds/            immutable seed copies
 runs/<afl-run>/plan.json         exact image, map size, command, and resume command
 runs/<afl-run>/afl-out/          AFL++ queue, crashes, hangs, and fuzzer_stats
 runs/<afl-run>/afl-summary.json  post-run inventory and hashes
+runs/<native-run>/corpus/       writable seed and interesting-input corpus
+runs/<native-run>/artifacts/    engine-saved findings and reproducers
+runs/<native-run>/go-cache/     Go generated coverage corpus, when applicable
+runs/<native-run>/plan.json     pinned image, seeds, duration, and Docker command
+runs/<native-run>/campaign.log  engine progress and feedback reports
+runs/<native-run>/campaign.json execution status, timing, image, and log hash
 ```
 
 ## Scope and comparison
 
-The one-input bridge works across all eight ecosystems. The source-level
-AFL++ overlay is verified for all 21 current C and C++ paths. Go, Java,
-JavaScript, Python, Rust, and
-PHP projects already contain their ecosystem's native fuzz entry points; an
-AFL++ edge map over a language runtime would not be comparable to parser
-source instrumentation. Keep the parser project, seed set, time budget,
+The one-input bridge and native engine plans work across all eight ecosystems.
+The source-level AFL++ overlay is verified for all 21 current C and C++ paths.
+Keep the parser project, seed set, time budget,
 platform, and input limit in each run plan. Do not compare AFL++ edge counts
 with LLVM line coverage or with edge counts from a different parser build.
 
@@ -125,5 +163,6 @@ start a fuzz campaign or perform malformed-input experiments.
 
 Run `python3 scripts/smoke_case_bridge.py` to repeat all one-input control
 checks, `python3 scripts/smoke_corpus_batch.py` to repeat the no-mutation
-batch checks, and `python3 scripts/audit_fuzzing.py` to check the committed
+batch checks, `python3 scripts/smoke_native_plans.py` to repeat native plan
+preflights, and `python3 scripts/audit_fuzzing.py` to check the committed
 receipts.
