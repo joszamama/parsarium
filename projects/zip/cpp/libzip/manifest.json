@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "cpp",
+  "package": "libzip",
+  "release": "1.12.1",
+  "catalog_parser": "data/cpp/zip/parsers.json",
+  "source_lock": "data/c/zip/source-lock.json",
+  "source_sha256": "c40062022a1963c80573d48f6070792297cecd7c6bffe3aefcac0d8b9bee8913",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {"entries": 1, "name": "hello.txt", "content": "parsarium\n"},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source-based coverage in libzip C source and C++17 byte-input harness",
+  "coverage_subject_prefix": "/work/libzip-1.12.1/"
+}

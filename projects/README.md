@@ -44,6 +44,10 @@ the package's documented byte or stream API. The Python receipt also records
 delegation to CPython `zipfile`; the Go and JavaScript receipts require executed
 lines in their package source. `data/projects-coverage.json` reports how many
 format/ecosystem cells have at least one verified third-party project.
+The remaining ZIP cells use C++17 with instrumented libzip, Rust `zip` with
+LLVM source coverage, Java Commons Compress with JaCoCo coverage, and PHP
+PclZip with Xdebug coverage. The C and C++ libzip paths share one parser family
+and are not independent engines. All eight ZIP cells now have a runnable path.
 
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
@@ -98,9 +102,14 @@ python3 scripts/run_project.py wav python stdlib_wave
 python3 scripts/run_project.py zip python fsspec
 python3 scripts/run_project.py zip javascript fflate
 python3 scripts/run_project.py zip go klauspost_compress_zip
+python3 scripts/run_project.py zip cpp libzip
+python3 scripts/run_project.py zip rust zip
+python3 scripts/run_project.py zip java commons_compress
+python3 scripts/run_project.py zip php pclzip
 python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
 python3 scripts/run_project_batch.py --format pdf --ecosystem python
 python3 scripts/run_project_batch.py --format zip --ecosystem go
+python3 scripts/run_project_batch.py --format zip --dry-run
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```
