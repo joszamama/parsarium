@@ -15,10 +15,14 @@ control passes and the coverage report shows executed lines in the package
 source, not just in the harness. Shared underlying parser families remain
 identified in the catalog.
 
-The first batch is `png/c/libpng` and `png/c/stb`. Each Dockerfile pins the Ubuntu
+The first batch is `png/c/libpng`, `png/c/stb`, and `png/python/pypng`.
+Each Dockerfile pins the Ubuntu
 base by digest and its parser source by SHA-256. Each builds a coverage replay
-and a separate libFuzzer binary with instrumented parser code. The final images
-contain the binaries, source for coverage display, and LLVM coverage tools. The runner disables
+and a separate fuzz entry with instrumented parser code. Native C entries use
+libFuzzer; PyPNG uses Atheris and Python line tracing of its pure-Python package.
+The native final images contain the binaries, parser source for coverage display,
+and LLVM coverage tools. The PyPNG image contains only pinned wheels and Python.
+The runner disables
 network access, mounts the control read-only, drops capabilities, and writes
 profiles to an ignored `target/coverage` directory. It checks that the fuzz
 engine starts in help mode and executes only the valid
@@ -29,6 +33,7 @@ Run from the repository root:
 ```sh
 python3 scripts/run_project.py png c libpng
 python3 scripts/run_project.py png c stb
+python3 scripts/run_project.py png python pypng
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```

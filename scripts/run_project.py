@@ -33,9 +33,15 @@ def main() -> None:
     parser, = [p for p in parsers if p["name"] == manifest["package"]]
     assert parser["version"] == manifest["release"]
     assert parser["expected_output"] == manifest["expected_output"]
-    lock = json.loads((ROOT / manifest["source_lock"]).read_text())[manifest["package"]]
-    assert lock["release"] == manifest["release"]
-    assert lock["source_sha256"] == manifest["source_sha256"]
+    lock_path = ROOT / manifest["source_lock"]
+    if lock_path.suffix == ".json":
+        lock = json.loads(lock_path.read_text())[manifest["package"]]
+        assert lock["release"] == manifest["release"]
+        assert lock["source_sha256"] == manifest["source_sha256"]
+    else:
+        lock = lock_path.read_text()
+        assert f"{manifest['package']}=={manifest['release']}" in lock
+        assert manifest["source_sha256"] in lock
     control = ROOT / manifest["control"]
     assert sha256(control.read_bytes()).hexdigest() == manifest["control_sha256"]
 
@@ -54,9 +60,10 @@ def main() -> None:
     engine = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
                              "--network", "none", "--read-only", "--cap-drop", "ALL",
                              "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
-                             "--entrypoint", "/work/fuzzer", image, "-help=1"],
+                             "--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"),
+                             image, *manifest.get("fuzz_smoke_args", ["-help=1"])],
                             cwd=ROOT, text=True, capture_output=True)
-    if engine.returncode or "Usage:" not in engine.stdout + engine.stderr:
+    if engine.returncode or manifest.get("fuzz_smoke_expect", "Usage:") not in engine.stdout + engine.stderr:
         raise RuntimeError(f"fuzz engine smoke test failed:\n{engine.stderr[-2000:]}")
     summary = json.loads((output_dir / "summary.json").read_text())
     assert summary["control_pass"] and summary["output"] == manifest["expected_output"]

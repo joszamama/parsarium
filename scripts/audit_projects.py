@@ -42,9 +42,15 @@ def main() -> None:
         control = ROOT / manifest["control"]
         if sha256(control.read_bytes()).hexdigest() != manifest["control_sha256"]:
             raise ValueError(f"control hash mismatch: {path}")
-        source = json.loads((ROOT / manifest["source_lock"]).read_text())[manifest["package"]]
-        if source["release"] != manifest["release"] or source["source_sha256"] != manifest["source_sha256"]:
-            raise ValueError(f"source lock mismatch: {path}")
+        lock_path = ROOT / manifest["source_lock"]
+        if lock_path.suffix == ".json":
+            source = json.loads(lock_path.read_text())[manifest["package"]]
+            if source["release"] != manifest["release"] or source["source_sha256"] != manifest["source_sha256"]:
+                raise ValueError(f"source lock mismatch: {path}")
+        else:
+            lock = lock_path.read_text()
+            if f"{manifest['package']}=={manifest['release']}" not in lock or manifest["source_sha256"] not in lock:
+                raise ValueError(f"source lock mismatch: {path}")
         if not (path.parent / "Dockerfile").is_file() or not (path.parent / manifest["harness"]).is_file():
             raise ValueError(f"missing Dockerfile or harness: {path}")
         verification_path = path.parent / "verification.json"
