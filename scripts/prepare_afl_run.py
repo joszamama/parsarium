@@ -19,14 +19,16 @@ from run_case import MAX_CASE_BYTES, ROOT, project_for
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("format")
-    cli.add_argument("ecosystem", choices=["c", "cpp", "rust"])
+    cli.add_argument("ecosystem", choices=["c", "cpp", "go", "java", "javascript", "python", "rust", "php"])
     cli.add_argument("package_slug")
     cli.add_argument("run_dir", type=Path)
     cli.add_argument("--seed", type=Path, action="append", default=[])
     cli.add_argument("--seed-dir", type=Path, action="append", default=[])
-    cli.add_argument("--timeout-ms", type=int, default=1000)
+    cli.add_argument("--timeout-ms", type=int)
     args = cli.parse_args()
-    if args.timeout_ms < 1:
+    timeout_ms = args.timeout_ms if args.timeout_ms is not None else (
+        10000 if args.ecosystem in {"go", "java", "javascript", "python", "php"} else 1000)
+    if timeout_ms < 1:
         cli.error("timeout-ms must be positive")
     project, manifest = project_for(args.format, args.ecosystem, args.package_slug)
     overlay = OVERLAYS / args.format / args.ecosystem / args.package_slug
@@ -44,6 +46,9 @@ def main() -> None:
         for name, expected in file_hashes.items():
             if sha256((overlay / name).read_bytes()).hexdigest() != expected:
                 cli.error(f"AFL++ overlay file changed since verification: {name}")
+    for name, expected in receipt.get("bridge_file_sha256", {}).items():
+        if sha256((ROOT / "fuzzing/afl-bridge" / name).read_bytes()).hexdigest() != expected:
+            cli.error(f"AFL++ bridge file changed since verification: {name}")
     image = f"parsarium-afl/{args.format}-{args.ecosystem}-{args.package_slug}:local"
     inspection = subprocess.run(["docker", "image", "inspect", image, "--format", "{{.Id}}"],
                                 capture_output=True, text=True)
@@ -83,11 +88,15 @@ def main() -> None:
               "-e", f"AFL_MAP_SIZE={receipt['afl_map_size']}",
               "-v", f"{seed_dir}:/seeds:ro", "-v", f"{output_dir}:/results",
               "--entrypoint", "afl-fuzz", receipt["image_id"]]
-    target = "/work/afl_fuzzer" if args.ecosystem == "rust" else "/work/fuzzer"
-    command = [*common, "-m", "none", "-t", str(args.timeout_ms), "-i", "/seeds",
-               "-o", "/results", "--", target]
-    resume = [*common, "-m", "none", "-t", str(args.timeout_ms), "-i", "-",
-              "-o", "/results", "--", target]
+    target = ("/work/afl_fuzzer" if args.ecosystem == "rust" else
+              "/work/afl_proxy" if args.ecosystem in
+              {"go", "java", "javascript", "python", "php"} else "/work/fuzzer")
+    target_args = ([target, "@@"] if args.ecosystem in
+                   {"go", "java", "javascript", "python", "php"} else [target])
+    command = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
+               "-o", "/results", "--", *target_args]
+    resume = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "-",
+              "-o", "/results", "--", *target_args]
     plan = {"schema_version": 1,
             "project": str(project.relative_to(ROOT / "projects")),
             "afl_package": receipt["afl_package"],
@@ -98,7 +107,8 @@ def main() -> None:
             "source_sha256": manifest["source_sha256"],
             "control_sha256": manifest["control_sha256"],
             "seed_sources": sources, "unique_seeds": len(seed_data),
-            "timeout_ms": args.timeout_ms,
+            "timeout_ms": timeout_ms,
+            "feedback_kind": receipt.get("feedback_kind", "source_instrumented_edges"),
             "command": command, "resume_command": resume,
             "output_directory": str(output_dir)}
     (run_dir / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")

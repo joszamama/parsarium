@@ -1619,5 +1619,8 @@ uncertainty.
 - `data/javascript/{png,zip,mp4,mp3_id3v2,wav,pdf,svg,http11}/verification.json` and `png/browser-verification.json`:
   observed outputs, environment, and pass/fail result.
 
-This collection does not contain malformed-input, security, or resource-use
-experiments.
+The [fuzzing workflow](fuzzing/README.md) now provides verified AFL++ launchers
+for all 83 runnable parser projects, including parser-source feedback bridges
+for Go, Java, JavaScript, Python, and PHP. Brief AFL++ mutation runs checked
+the launchers and statistics; no vulnerability or resource-use assessment has
+been performed.

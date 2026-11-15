@@ -115,9 +115,56 @@ def main() -> None:
         assert record["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         assert record["parser_source_lines_covered"] > 0
         assert record["feedback_evidence"]["value"] > 0
+    python_report = json.loads((ROOT / "data/afl-python-smoke.json").read_text())
+    bridge_report = json.loads((ROOT / "data/afl-bridge-smoke.json").read_text())
+    bridge_records = {item["project"]: item for report in (python_report, bridge_report)
+                      for item in report["results"]}
+    assert python_report["projects_verified"] == python_report["projects_total"] == len(
+        [path for path in managed if path.parent.parent.name == "python"])
+    assert bridge_report["projects_verified"] == bridge_report["projects_total"] == len(
+        [path for path in managed if path.parent.parent.name != "python"])
+    assert len(bridge_records) == len(managed)
+    for path in managed:
+        relative = path.parent.relative_to(ROOT / "projects")
+        project, manifest = project_for(*relative.parts)
+        overlay = OVERLAYS / relative
+        receipt = json.loads((overlay / "verification.json").read_text())
+        record = bridge_records[str(relative)]
+        assert receipt == record and receipt["pass"]
+        assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
+        assert receipt["afl_map_size"] == 65536
+        assert receipt["control_sha256"] == manifest["control_sha256"]
+        assert receipt["base_project_receipt_sha256"] == sha256(
+            (project / "verification.json").read_bytes()).hexdigest()
+        for name, digest in receipt["overlay_file_sha256"].items():
+            assert sha256((overlay / name).read_bytes()).hexdigest() == digest
+        for name, digest in receipt["bridge_file_sha256"].items():
+            assert sha256((ROOT / "fuzzing/afl-bridge" / name).read_bytes()).hexdigest() == digest
+    for report_name in ("afl-feedback-differential.json", "afl-campaign-smoke.json"):
+        report = json.loads((ROOT / "data" / report_name).read_text())
+        assert report["projects_total"] == report["projects_passed"] == 5
+        assert {item["project"].split("/")[1] for item in report["results"]} == {
+            "go", "java", "javascript", "python", "php"}
+        for item in report["results"]:
+            overlay = OVERLAYS / item["project"]
+            assert item["pass"]
+            assert item["overlay_receipt_sha256"] == sha256(
+                (overlay / "verification.json").read_bytes()).hexdigest()
+            if report_name == "afl-feedback-differential.json":
+                assert item["parser_feature_difference"] > 0
+                assert item["afl_tuple_difference"] > 0
+            else:
+                assert item["executions"] > 0 and item["edges_found"] > 0
+                assert item["queue_items"] > 0
+    afl_plans = json.loads((ROOT / "data/afl-plan-smoke.json").read_text())
+    assert afl_plans["projects_ready"] == afl_plans["projects_total"] == len(manifests)
+    for item in afl_plans["results"]:
+        assert item["status"] == "ready"
+        receipt = OVERLAYS / item["project"] / "verification.json"
+        assert item["overlay_receipt_sha256"] == sha256(receipt.read_bytes()).hexdigest()
     print(f"{len(manifests)}/{len(manifests)} one-input projects and native plans, "
           f"{batch_report['batch_passing']} batch replay projects, and "
-          f"{len(native) + len(rust)}/{len(native) + len(rust)} AFL++ overlays plus "
+          f"{len(native) + len(rust) + len(managed)}/{len(manifests)} AFL++ overlays plus "
           f"{len(managed)}/{len(managed)} ecosystem feedback checks current")
 
 

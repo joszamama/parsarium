@@ -55,7 +55,7 @@ For bit-for-bit regeneration, pin and archive the Fandango version and the
 complete local specification and its dependencies as well. A local spec's hash
 can be recorded with `--spec-sha256`.
 
-## AFL++ feedback for C, C++, and Rust
+## AFL++ feedback in all eight ecosystems
 
 `scripts/build_afl_native.py` derives an external AFL++ build from each
 verified C or C++ project. It keeps the project's pinned parser source and
@@ -76,20 +76,38 @@ requires nonzero `afl-showmap` feedback from the valid control. All 10 Rust
 overlays passed; see `data/afl-rust-smoke.json`. C and C++ results remain in
 `data/afl-native-smoke.json` (21 paths).
 
+For Go, Java, JavaScript, Python, and PHP, `scripts/build_afl_bridge.py` and
+`scripts/build_afl_python.py` add a small AFL++ proxy to each verified project
+image. The proxy runs one existing byte-input harness and writes executed
+parser-source features into AFL++'s shared 64 KiB feedback map. The bridge
+uses Go's compiled `-coverpkg` statement blocks, Java's JaCoCo source lines,
+Node's V8 source ranges, Python line tracing, or PHP's Xdebug lines. AFL++
+therefore sees parser-dependent feedback and writes its normal queue and
+`fuzzer_stats` for these projects too. The original parser images remain
+unchanged. The map hashes feature names, so collisions are possible; a tuple
+count is not a count of distinct parser lines. Interpreter startup and
+coverage export make these bridges slower than native instrumentation.
+All 52 managed-language overlays passed valid-control `afl-showmap` checks:
+`data/afl-python-smoke.json` and `data/afl-bridge-smoke.json`. All 83 AFL++
+seed and command plans passed preflight in `data/afl-plan-smoke.json`.
+
 ```sh
 python3 scripts/build_afl_native.py --all
 python3 scripts/build_afl_rust.py --all
+python3 scripts/build_afl_python.py --all
+python3 scripts/build_afl_bridge.py --all
 python3 scripts/prepare_afl_run.py pdf c pdfio runs/pdfio-afl
 python3 scripts/prepare_afl_run.py png c libpng runs/png-afl --seed-dir generated/png
 python3 scripts/prepare_afl_run.py png rust png runs/png-rust-afl --seed-dir generated/png
+python3 scripts/prepare_afl_run.py ascii_ply java jply runs/jply-afl
+python3 scripts/prepare_afl_run.py png python pypng runs/pypng-afl --seed-dir generated/png
 ```
 
 The PDFio preparation command copies the valid control into `runs/pdfio-afl/seeds/`,
 writes `plan.json`, and prints an exact Docker command. It does **not** start
 `afl-fuzz`. Add `--seed-dir generated/pdf` to include a generated corpus.
 When a researcher runs the printed command, AFL++ reads the seeds from
-`/seeds`, calls the C/C++ libFuzzer-compatible driver or the Rust afl.rs
-byte-input target, and
+`/seeds`, calls the native driver or the managed-language parser-coverage proxy, and
 writes to `runs/pdfio-afl/afl-out/`. Its live edge map steers mutation; the
 `afl-showmap` count is only a preflight check. AFL++ saves interesting inputs
 in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`,
@@ -167,23 +185,29 @@ runs/<native-run>/campaign.json execution status, timing, image, and log hash
 | --- | ---: | --- | ---: |
 | C | 11 | libFuzzer | 11 |
 | C++ | 10 | libFuzzer | 10 |
-| Go | 10 | Go native fuzzing | — |
-| Java | 10 | Jazzer | — |
-| JavaScript | 10 | Jazzer.js | — |
-| Python | 12 | Atheris | — |
+| Go | 10 | Go native fuzzing | 10 parser-block bridges |
+| Java | 10 | Jazzer | 10 parser-line bridges |
+| JavaScript | 10 | Jazzer.js | 10 parser-range bridges |
+| Python | 12 | Atheris | 12 parser-line bridges |
 | Rust | 10 | libFuzzer | 10 |
-| PHP | 10 | PHP-Fuzzer | — |
+| PHP | 10 | PHP-Fuzzer | 10 parser-line bridges |
 
 The one-input bridge and native engine plans work across all eight ecosystems.
 For every one of the 83 projects, the audit requires positive coverage in
 parser package source from a valid control, a passing fuzz-engine smoke check,
 and a passing one-input fuzz-entry replay. The 73 non-PHP projects also pass
 no-mutation corpus replay; PHP uses its per-input fuzz entry.
-The source-level AFL++ overlay is verified for all 31 current C, C++, and Rust
-paths. Go, Java, JavaScript, Python, and PHP use their ecosystem's
-coverage-guided engines in the native plans above. AFL++ could be added there
-with custom bridges or binary instrumentation, but those routes would need
-evidence that parser behavior steers the feedback.
+The AFL++ overlay is verified for all 83 paths. C, C++, and Rust have compiled
+coverage instrumentation; the other 52 feed parser-source coverage into
+AFL++ through the bridge. Input pairs changed both parser features and AFL++
+tuples in all five managed ecosystems; the cases and differences are recorded
+in `data/afl-feedback-differential.json`. The PHP comparison uses one truncated
+SVG input; the other pairs use valid controls. Short campaigns in one project
+per managed ecosystem recorded actual executions, queue items, and feedback
+in `data/afl-campaign-smoke.json`. These are launcher checks, not parser safety
+results. A thrown exception can be saved as a potential crash and requires
+replay and triage. The PHP bridge treats ordinary `Exception` values as parser
+rejections while PHP `Error` values and process failures remain fatal.
 
 The no-mutation engine check also passed for all 52 Go, Java, JavaScript,
 Python, and PHP paths (`data/ecosystem-feedback-smoke.json`). It records Go parser
@@ -196,12 +220,17 @@ Keep the parser project, seed set, time budget,
 platform, and input limit in each run plan. Do not compare AFL++ edge counts
 with LLVM line coverage or with edge counts from a different parser build.
 
-The preparation and smoke commands execute valid controls only. They do not
-start a fuzz campaign or perform malformed-input experiments.
+The build and preflight commands execute valid controls only. The brief
+`smoke_afl_campaigns.py` campaigns exercise AFL++ mutation solely to validate
+the launcher, feedback, and statistics; their generated cases are discarded.
+No vulnerability or resource-use assessment has been performed.
 
 Run `python3 scripts/smoke_case_bridge.py` to repeat all one-input control
 checks, `python3 scripts/smoke_corpus_batch.py` to repeat the no-mutation
 batch checks, `python3 scripts/smoke_native_plans.py` to repeat native plan
 preflights, `python3 scripts/smoke_ecosystem_feedback.py` to repeat ecosystem
 feedback checks, and `python3 scripts/audit_fuzzing.py` to check the committed
-receipts.
+receipts. Run `python3 scripts/smoke_afl_campaigns.py` to repeat the five
+short campaign checks, and `python3 scripts/smoke_afl_differential.py` to
+repeat the five input-dependent feedback checks. Run
+`python3 scripts/smoke_afl_plans.py` to check all 83 launch plans.
