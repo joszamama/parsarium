@@ -85,7 +85,7 @@ def main() -> None:
     image, image_id = image_for(project, manifest)
     project_receipt = (project / "verification.json").read_bytes()
     if image_id != json.loads(project_receipt)["image_id"]:
-        cli.error("local project image differs from its verification receipt")
+        cli.error("local project image differs from its verification receipt; run python3 parsarium.py build FORMAT ECOSYSTEM SLUG")
     run_dir = args.run_dir.resolve()
     if run_dir.exists() and any(run_dir.iterdir()):
         cli.error("run directory already contains files")

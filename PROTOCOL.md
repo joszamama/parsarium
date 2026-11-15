@@ -1,88 +1,25 @@
-# Parser selection protocol (v3, 2026-11-13)
+# Parser selection protocol
 
-Eligibility rules were written before the pilot. Version 2 records the user's
-20-per-cell working goal; it does not change eligibility. The unit of analysis is one
-ecosystem × format cell. The ten formats and eight ecosystems are listed in
-`data/cells.json`.
+Parsarium evaluates one **format × ecosystem cell** at a time. The working goal is 20 verified third-party package paths per cell, with 30 as a ceiling. A count is never filled with unrelated software. A package path may share an underlying parser with another package; shared families are recorded.
 
-Version 3 clarifies selection after the user pointed out that verified parsing
-alone does not establish popularity. For each cell, inspect plausible candidates
-with stronger adoption evidence before adding obscure or unranked candidates.
-The working goal is subject to this selection rule. A count of 20 does not
-establish that the included set is the 20 most used packages when the search
-surface is bounded or adoption metrics are missing.
+## Eligibility
 
-## Eligibility and verification
+A parser must be an open-source, pinned library release or a documented standard/runtime API that accepts local bytes, a local file, or a local stream and interprets the named format. Verification requires a small valid control and an observable format-specific result, such as dimensions, entries, pages, tags, samples, or protocol fields. Generic file I/O, filename or MIME detection, byte copying, signature search, and remote services do not qualify. A wrapper can qualify as a package API, with its underlying parser family identified.
 
-An included parser must be an open-source, version-pinned library or a documented
-standard/runtime API that accepts local bytes, a local file, or a local stream
-and interprets the target format. It must expose at least one observable
-format-specific result (for example dimensions, entries, tags, or fields) from
-a small valid control. Merely opening a file, copying bytes, identifying a
-filename or MIME type, searching for signatures, or handing input to a remote
-service does not qualify. Wrappers qualify when their local API parses the
-format, but the underlying parser family is recorded. A package appears once
-per cell even when it exposes several APIs.
+Each accepted path records its release and license evidence, documented input API, control, expected output, adapter, observed result, and environment. A registry hit or project name remains a *lead* until these checks pass. The valid control establishes only the tested format subset.
 
-For each accepted release, record its exact version, license evidence,
-documentation for the input API, a control file, a runnable adapter, expected
-structured output, and a successful run with environment and date. The adapter
-must read the supplied control path; a hard-coded output is invalid. A candidate
-remains a *lead* until all of these checks pass. Unsupported or unavailable
-dependencies and ambiguous APIs remain unresolved leads, never accepted rows.
+## Discovery and stopping
 
-Controls are minimal valid examples of the named variant: ASCII for PLY and
-PNM, HTTP/1.1 for HTTP, and MP3 with ID3v2 for the MP3 cell. Coverage beyond the
-control's feature subset is not implied by one successful run. No malformed
-input or performance experiments are in scope.
+Registry searches use the format name and relevant parser, decoder, or reader terms. Each query, date, result limit, hit count, and unresolved lead is recorded. Search hits stay separate from verified parsers. Search inspection is bounded to the first 100 results per query, followed by project documentation and plausible high-adoption leads.
 
-## Discovery, stopping, and counts
-
-For each cell, search its ecosystem registry using the format name and common
-parser/decoder/reader terms, then inspect the highest-ranked relevant results
-and project documentation. Save the exact queries, date, result limit, and
-lead dispositions. Search hits are discovery material, not parser evidence.
-Inspect at most the first 100 results per query and aim for 20 distinct
-*verified* third-party packages per cell. Twenty is the working goal following
-the 2026-11-11 user revision; the original ceiling of 30 remains. Twenty is
-never a quota to fill with unrelated software. A batch may stop at the working
-goal after the listed query windows are saved and plausible higher-download
-leads have been checked or explicitly marked unresolved. Before the goal,
-stop only after the listed searches and relevant documentation leads have been
-reviewed, or when a stated environmental limit prevents further checks. Every summary gives the actual
-verified count, searched surface, number of leads still unresolved, and a
-plain-language account of what could have been missed.
+A cell may stop at the 20-path working goal when the saved query windows and plausible stronger-adoption leads have been inspected or marked unresolved. Below 20, stopping requires a recorded search limit or environmental blocker. Every cell reports the actual verified count, search surface, unresolved leads, and what remains uncertain. Twenty verified paths do not automatically establish the definitive most-used 20.
 
 ## Popularity
 
-Rank only verified third-party packages within the same ecosystem and cell.
-Use one documented metric, source, and observation window per ranking. Prefer
-registry download counts over GitHub stars; when the registry lacks comparable
-counts, use one consistently collected ecosystem-specific metric and name its
-limits. Do not extrapolate absent values, combine unlike metrics, compare
-scores across ecosystems, or rank standard-library/runtime APIs against
-packages. An unavailable metric is `null` and leaves its order unresolved.
-Popularity is an adoption proxy, not a quality or security judgment.
-Additional adoption signals can be recorded separately, with their source and
-date, but must not be mixed into the primary ranking or used to infer a missing
-primary value. Label packages without a comparable primary metric as unranked,
-and state when this prevents a defensible top-N claim.
+Third-party packages are ranked only among verified paths in the **same cell**. One documented metric, source, and observation window is used per ranking. Registry downloads are preferred when comparable; an ecosystem-specific alternative is named when needed. Missing values remain `null` or unranked. Metrics are not invented, mixed, or compared across ecosystems. Standard and runtime APIs remain outside third-party rankings. Popularity is an adoption proxy, not a quality or security judgment.
 
-## Standard libraries and runtime bundles
+## Standard APIs and reproducibility
 
-Inspect official API documentation independently for every cell. A documented
-candidate still requires the same control and observable output to become
-verified. Record an explicit `none_documented` finding only when the searched
-official documentation and its scope are stated. Otherwise use `pending` or
-`unresolved`; silence is not evidence of absence. Bundled APIs are kept outside
-third-party rankings, including wrappers over system libraries.
+Official documentation is searched separately for standard-library and runtime-bundled APIs in every cell. A documented API needs the same control and observable result for verification. `none_documented`, `pending`, and `unresolved` describe distinct outcomes; silence is not evidence of absence.
 
-## Reproducibility and uncertainty
-
-Registry search hits and metric responses are dated snapshots. Repository
-data separates leads, verified parsers, standard APIs, and cell summaries.
-Record versions and transitive lockfiles where available. Commands must run
-from a fresh checkout using the README instructions. A failed or unrun check
-must stay visible with its reason. Shared parser families prevent misleading
-independence claims. Revisit conclusions when sources or versions change;
-do not silently replace pinned evidence.
+Registry snapshots, source locks, parser evidence, controls, and receipts remain in `data/`, `adapters/`, `controls/`, and `projects/`. Failed or unrun checks stay visible with their reasons. Container harnesses are a verified runnable subset of the catalog. Fuzzing launcher checks are recorded separately from parser selection and do not establish vulnerability findings.

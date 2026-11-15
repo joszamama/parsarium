@@ -1,215 +1,27 @@
-# Container harness collection
+# Parser harnesses
 
-Projects are organized as `projects/<format>/<ecosystem>/<package>/`. Each
-project has a `manifest.json`, a Dockerfile, a byte-input harness, a valid-control
-replay, and a recorded `verification.json`. The manifest links back to the
-existing parser evidence and control. The third-party catalog remains
-authoritative for package eligibility, release, and expected output; standard
-API projects link to the separate official-documentation inventory.
+`projects/<format>/<ecosystem>/<slug>/` contains one runnable parser path. The collection has 83 projects across all 80 cells: 82 third-party package paths and CPython's `wave` API. Other verified catalog packages remain in `data/` until a harness and container are verified.
 
-For external one-input replay, Fandango corpus generation, and AFL++ run
-preparation, see the [fuzzing workflow](../fuzzing/README.md).
+Each project includes:
 
-The harness interface must accept the supplied bytes, call the package's real
-local parser API, and consume an observable format-specific result. For C and
-C++, the engine entry is `LLVMFuzzerTestOneInput`; the valid-control replay uses
-the same parser function. The package source and harness are instrumented in
-the container. A project is counted as containerized only after the valid
-control passes and the coverage report shows executed lines in the package
-source, not just in the harness. Shared underlying parser families remain
-identified in the catalog.
+| File | Purpose |
+| --- | --- |
+| `manifest.json` | Pinned package or runtime, source hash, control, expected output, fuzz engine, and coverage subject |
+| `Dockerfile` | Parser and harness build for the declared Linux platform |
+| `harness.*` | Local byte-input parser call and observable format-specific result |
+| `fuzz.*` or equivalent | Entry point for the ecosystem fuzz engine |
+| `run-control.*` | Valid-control replay with parser-source coverage |
+| `verification.json` | Observed output, covered parser source, toolchain, and image ID |
 
-The first batch is `png/c/libpng`, `png/c/stb`, `png/cpp/lodepng`, `png/python/pypng`,
-`png/go/imaging`, `png/rust/png`, `png/java/pngj`, `png/javascript/pngjs`,
-`png/php/marc1706_fast_image_size`, and `zip/c/libzip`. The next batch adds
-`pdf/python/pypdf` and `pdf/python/pdfrw`, both with byte-input Atheris targets
-and package line coverage during valid-control replay. The PDF reader source
-file must show executed lines for each receipt. `http11/python/h11` adds raw
-HTTP/1.1 request parsing and coverage in h11's request reader.
-
-The next six projects cover the remaining formats: `mp3_id3v2/python/mutagen`,
-`ascii_ply/python/plyfile`, `mp4/python/mutagen`, `wav/python/mutagen`,
-`svg/python/svgelements`, and `ascii_pnm/python/netpbmfile`. The three Mutagen
-projects exercise separate MP3/ID3v2, MP4, and WAVE parser modules from the
-same pinned release; they are separate format paths, not independent packages.
-The PLY and PNM projects pin their NumPy dependency wheel as well as the parser
-wheel. All ten formats now have at least one covered container project.
-
-`wav/python/stdlib_wave` is the first standard-library project. It pins the
-CPython 3.13.1 image by architecture-specific digest and checks the SHA-256 of
-its `wave.py` source before installing a pinned Atheris wheel. The valid-control
-replay counts lines in CPython's `wave.py`, and the audit keeps this API separate
-from third-party package paths.
-
-The ZIP batch adds `zip/python/fsspec`, `zip/javascript/fflate`, and
-`zip/go/klauspost_compress_zip`. Each reads the same valid ZIP control through
-the package's documented byte or stream API. The Python receipt also records
-delegation to CPython `zipfile`; the Go and JavaScript receipts require executed
-lines in their package source. `data/projects-coverage.json` reports how many
-format/ecosystem cells have at least one verified third-party project.
-The remaining ZIP cells use C++17 with instrumented libzip, Rust `zip` with
-LLVM source coverage, Java Commons Compress with JaCoCo coverage, and PHP
-PclZip with Xdebug coverage. The C and C++ libzip paths share one parser family
-and are not independent engines. All eight ZIP cells now have a runnable path.
-
-The ASCII PNM row adds JavaScript `image-size` (P3 header), Go `gopnm`, Rust
-`image`, Java JAI ImageIO, C and C++ Leptonica, and PHP Imagine with Imagick.
-The C and C++ entries share Leptonica. The PHP wrapper delegates PNM decoding
-to ImageMagick, and the receipt records the native version in its toolchain.
-All eight ASCII PNM cells now have a runnable path for the valid P3 control.
-
-The WAV row adds C and C++ `dr_wav`, Go `go-audio/wav`, Java JCodec,
-JavaScript `music-metadata`, Rust Hound, and PHP getID3 to the existing Python
-Mutagen path. The C++ harness calls the C `dr_wav` API and shares that decoder
-family with the C cell. Each receipt requires executed lines in the package's
-WAV reader on a valid mono PCM16 control. All eight WAV cells are runnable.
-
-The SVG row adds C and C++ PlutoSVG, Go `oksvg`, Java JSVG, JavaScript
-`image-size`, PHP `dompdf/php-svg-lib`, and Rust `usvg` to the existing Python
-path. PlutoSVG's C and C++ paths share the same document parser and pinned
-PlutoVG rasterizer. The valid SVG control exercises format-specific parser
-source in each project. All eight SVG cells are runnable.
-
-The HTTP/1.1 row adds C and C++ picohttpparser, Go `fasthttp`, Java Netty,
-JavaScript `http-parser-js`, PHP Guzzle PSR-7, and Rust `httparse` to Python
-`h11`. Each harness parses a local request byte sequence and reports method,
-target, version, or headers from the parsed request. The C and C++ projects
-share the same picohttpparser C source. All eight HTTP/1.1 cells are runnable.
-
-The ASCII PLY row adds C and C++ rply, Go Polyform, Java JPLY, JavaScript
-Three.js PLYLoader, PHP Providence `PlyToStl`, and Rust `ply-rs-bw` to Python
-`plyfile`. The PHP project uses the released standalone Providence parser module
-and validates parsed triangle geometry in its STL output. C and C++ share rply's
-C parser. All eight ASCII PLY cells are runnable.
-
-The MP3 with ID3v2 row adds C and C++ TagLib, Go Beep MP3, Java Jaudiotagger,
-JavaScript `music-metadata`, PHP getID3, and Rust `id3` to Python Mutagen. The
-Go receipt also covers the delegated `go-mp3` decoder. C and C++ use separate
-TagLib APIs over the same parser source. All eight cells are runnable on their
-valid tagged MP3 controls.
-
-The MP4 row adds C and C++ TagLib, Go `go-mp4`, Java isoparser,
-JavaScript `music-metadata`, PHP getID3, and Rust `mp4` to Python Mutagen.
-TagLib's C and C++ paths use the same pinned MP4 parser source. All eight MP4
-cells are runnable on the valid audio and video MP4 control.
-
-The PDF row adds C and C++ PDFio, Go `ledongthuc/pdf`, Java PDFBox,
-JavaScript `pdf-lib`, PHP FPDI, and Rust `lopdf` to Python pypdf and pdfrw.
-The C and C++ paths share PDFio's parser source. Each harness reads local bytes
-or a temporary local file, checks a page count or page metadata from the valid
-one-page PDF control, and records parser source coverage. All 80 format and
-ecosystem cells now have at least one verified third-party container path.
-
-Each Dockerfile pins its base image by digest and its parser
-source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
-the C++ entry uses the LodePNG byte decoder with the same instrumentation.
-PyPNG uses Atheris and Python line tracing of its pure-Python package. The Go
-entry uses a compiled native Go fuzz test and Go's `-coverpkg` instrumentation.
-Its valid-control profile records both the `imaging` wrapper and the delegated
-`image/png` parser separately. The Go runtime image contains only two static
-binaries. The Rust entry uses LLVM source coverage for the pinned `png` crate
-and sanitizer coverage counters in its libFuzzer binary. The JavaScript entry
-uses V8 source-range coverage for `pngjs` and Jazzer.js with explicit package
-instrumentation. Its Node runtime uses a base with the glibc version required
-by Jazzer's pinned native addon. V8 line counts are derived from executed
-source ranges and can include import-time code; the receipt separately requires
-execution in `parser.js`. The PHP entry uses a local temporary file for the
-package's path API, Xdebug line coverage in the package, and a pinned
-coverage-guided PHP fuzzer. Its receipt requires executed lines in `TypePng.php`.
-The Java entry uses a pinned PNGJ JAR and source JAR, JaCoCo coverage in the
-library bytecode, and Jazzer for the fuzz entry. Jazzer requires the JDK
-attach module, so its runtime image carries a pinned JDK rather than a JRE.
-The native final images contain the binaries, parser source for coverage display,
-and LLVM coverage tools. The PyPNG image contains only pinned wheels and Python.
-The runner disables
-network access, mounts the control read-only, drops capabilities, and writes
-profiles to an ignored `target/coverage` directory. It checks that the fuzz
-engine starts in help mode and executes only the valid
-control. No fuzz campaign or malformed-input experiment is run by this command.
-
-Run from the repository root:
+The harness reads supplied bytes or a temporary local file and calls the parser's documented API. Generic file I/O and a hard-coded expected result do not qualify. Verification requires a passing valid control and coverage in parser source, separate from coverage in the harness. Shared underlying parser families are recorded in the catalog.
 
 ```sh
-python3 scripts/run_project.py png c libpng
-python3 scripts/run_project.py png c stb
-python3 scripts/run_project.py png cpp lodepng
-python3 scripts/run_project.py png python pypng
-python3 scripts/run_project.py png go imaging
-python3 scripts/run_project.py png rust png
-python3 scripts/run_project.py png java pngj
-python3 scripts/run_project.py png javascript pngjs
-python3 scripts/run_project.py png php marc1706_fast_image_size
-python3 scripts/run_project.py zip c libzip
-python3 scripts/run_project.py pdf python pypdf
-python3 scripts/run_project.py pdf python pdfrw
-python3 scripts/run_project.py pdf c pdfio
-python3 scripts/run_project.py pdf cpp pdfio
-python3 scripts/run_project.py pdf go ledongthuc_pdf
-python3 scripts/run_project.py pdf java pdfbox
-python3 scripts/run_project.py pdf javascript pdf_lib
-python3 scripts/run_project.py pdf php fpdi
-python3 scripts/run_project.py pdf rust lopdf
-python3 scripts/run_project.py http11 python h11
-python3 scripts/run_project.py mp3_id3v2 python mutagen
-python3 scripts/run_project.py ascii_ply python plyfile
-python3 scripts/run_project.py mp4 python mutagen
-python3 scripts/run_project.py wav python mutagen
-python3 scripts/run_project.py svg python svgelements
-python3 scripts/run_project.py ascii_pnm python netpbmfile
-python3 scripts/run_project.py wav python stdlib_wave
-python3 scripts/run_project.py zip python fsspec
-python3 scripts/run_project.py zip javascript fflate
-python3 scripts/run_project.py zip go klauspost_compress_zip
-python3 scripts/run_project.py zip cpp libzip
-python3 scripts/run_project.py zip rust zip
-python3 scripts/run_project.py zip java commons_compress
-python3 scripts/run_project.py zip php pclzip
-python3 scripts/run_project.py ascii_pnm javascript image_size
-python3 scripts/run_project.py ascii_pnm go gopnm
-python3 scripts/run_project.py ascii_pnm rust image
-python3 scripts/run_project.py ascii_pnm java jai_imageio_core
-python3 scripts/run_project.py ascii_pnm c leptonica
-python3 scripts/run_project.py ascii_pnm cpp leptonica
-python3 scripts/run_project.py ascii_pnm php imagine
-python3 scripts/run_project_batch.py --format pdf --ecosystem python --dry-run
-python3 scripts/run_project_batch.py --format pdf --ecosystem python
-python3 scripts/run_project_batch.py --format pdf --dry-run
-python3 scripts/run_project_batch.py --format pdf
-python3 scripts/run_project_batch.py --format zip --ecosystem go
-python3 scripts/run_project_batch.py --format zip --dry-run
-python3 scripts/run_project_batch.py --format ascii_pnm --dry-run
-python3 scripts/run_project_batch.py --format wav --dry-run
-python3 scripts/run_project_batch.py --format wav
-python3 scripts/run_project_batch.py --format svg --dry-run
-python3 scripts/run_project_batch.py --format svg
-python3 scripts/run_project_batch.py --format http11 --dry-run
-python3 scripts/run_project_batch.py --format http11
-python3 scripts/run_project_batch.py --format ascii_ply --dry-run
-python3 scripts/run_project_batch.py --format ascii_ply
-python3 scripts/run_project_batch.py --format mp3_id3v2 --dry-run
-python3 scripts/run_project_batch.py --format mp3_id3v2
-python3 scripts/run_project_batch.py --format mp4 --dry-run
-python3 scripts/run_project_batch.py --format mp4
-python3 scripts/audit_projects.py --write
-python3 scripts/audit_projects.py --check
+python3 parsarium.py projects --format pdf
+python3 parsarium.py show pdf java pdfbox
+python3 parsarium.py build pdf java pdfbox
+python3 parsarium.py run pdf java pdfbox controls/pdf/one-page.pdf
 ```
 
-The batch runner verifies selected projects sequentially and refreshes the
-matrix audit only when every selected project passes. The audit compares
-project manifests and successful coverage receipts against all third-party
-parser paths in `data/*/*/parsers.json`. Standard-library and runtime-bundled
-APIs are inventoried separately in `data/*/*/standard.json`; the audit records
-their 45 paths and separate container progress. Pending third-party paths remain
-visible in `data/projects-coverage.json`; a copied Dockerfile or name alone
-does not count. Ubuntu package repositories are not snapshot-pinned in the
-pilot, so a later rebuild may use newer compiler and dependency package
-revisions. The build receipt records the observed versions; pinning those
-repositories is required before claiming bit-for-bit image reproducibility.
+A project can be rebuilt and its control rechecked with `python3 scripts/run_project.py FORMAT ECOSYSTEM SLUG`. `python3 scripts/audit_projects.py --check` compares manifests and receipts with the catalog. Builds can depend on package repositories or system packages beyond the pinned parser source; `verification.json` records the observed image and toolchain. Image IDs are checked before prepared fuzz runs.
 
-The same acceptance rule applies across ecosystems. Native targets use LLVM
-source coverage in the parser build. Go targets need package coverage from an
-instrumented Go build; Java targets need class coverage from the parser JAR;
-JavaScript targets need V8 coverage for parser files; Python targets need
-coverage of imported package code; PHP targets need PHP line coverage for the
-package. Each project must select a suitable byte-input entry and record its
-underlying native engine when a wrapper delegates parsing.
+The [fuzzing guide](../fuzzing/README.md) covers AFL++, native engines, external corpora, and run artifacts. A project receipt proves its stated control and coverage conditions; it does not establish behavior on other inputs.
