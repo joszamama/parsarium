@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "javascript",
+  "package": "music-metadata",
+  "release": "12.4.0",
+  "catalog_parser": "data/javascript/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/javascript/music_metadata/source-lock.json",
+  "source_sha256": "8115205e40bee693366ced9363580c9ccf9bb4cea39e08ecf6ee49cd07036b42",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "title": "Parsarium",
+    "artist": "Control",
+    "album": "Pilot",
+    "sampleRate": 8000
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/music-metadata/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage in music-metadata ID3v2 parser during valid-control replay; Jazzer.js package instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/music-metadata/lib/",
+  "format_specific_coverage_file_suffix": "/id3v2/ID3v2Parser.js"
+}

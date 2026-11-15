@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "go",
+  "package": "github.com/faiface/beep/mp3",
+  "release": "v1.1.0",
+  "catalog_parser": "data/go/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/go/faiface_beep_mp3/source-lock.json",
+  "source_sha256": "6f41d156f61d8227f10b40bce8ec124fcedf3d0a3dc30387ff36e3823d3f84d7",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+  "control_sha256": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307",
+  "expected_output": {
+    "sample_rate": 44100,
+    "samples": 16
+  },
+  "harness": "harness.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzMP3",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzMP3",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of Beep MP3 wrapper and delegated go-mp3 decoder during valid tagged-control replay",
+  "coverage_subject_prefix": "github.com/faiface/beep/mp3/",
+  "underlying_coverage_subject_prefix": "github.com/hajimehoshi/go-mp3/"
+}

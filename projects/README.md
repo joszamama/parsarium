@@ -79,6 +79,12 @@ Three.js PLYLoader, PHP Providence `PlyToStl`, and Rust `ply-rs-bw` to Python
 and validates parsed triangle geometry in its STL output. C and C++ share rply's
 C parser. All eight ASCII PLY cells are runnable.
 
+The MP3 with ID3v2 row adds C and C++ TagLib, Go Beep MP3, Java Jaudiotagger,
+JavaScript `music-metadata`, PHP getID3, and Rust `id3` to Python Mutagen. The
+Go receipt also covers the delegated `go-mp3` decoder. C and C++ use separate
+TagLib APIs over the same parser source. All eight cells are runnable on their
+valid tagged MP3 controls.
+
 Each Dockerfile pins its base image by digest and its parser
 source by SHA-256. Native C entries use libFuzzer and LLVM source coverage;
 the C++ entry uses the LodePNG byte decoder with the same instrumentation.
@@ -156,6 +162,8 @@ python3 scripts/run_project_batch.py --format http11 --dry-run
 python3 scripts/run_project_batch.py --format http11
 python3 scripts/run_project_batch.py --format ascii_ply --dry-run
 python3 scripts/run_project_batch.py --format ascii_ply
+python3 scripts/run_project_batch.py --format mp3_id3v2 --dry-run
+python3 scripts/run_project_batch.py --format mp3_id3v2
 python3 scripts/audit_projects.py --write
 python3 scripts/audit_projects.py --check
 ```

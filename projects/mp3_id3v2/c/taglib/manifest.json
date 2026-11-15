@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "c",
+  "package": "taglib",
+  "release": "2.3.2",
+  "catalog_parser": "data/c/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/c/taglib/source-lock.json",
+  "source_sha256": "3ca2d8afaa7f1cf7f6ed10e511ebc368bfacd6dcaa3dbfa690b89e502e8963dc",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "title": "Parsarium",
+    "artist": "Control"
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in TagLib ID3v2 parser and C byte-input harness",
+  "coverage_subject_prefix": "/work/taglib-2.3.2/taglib/",
+  "format_specific_coverage_file_suffix": "/id3v2tag.cpp"
+}
