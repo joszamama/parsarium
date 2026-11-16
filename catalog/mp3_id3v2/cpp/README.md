@@ -1,6 +1,6 @@
 # MP3 with ID3v2 / C++
 
-21 verified third-party API paths; 10 have verified Docker harnesses.
+21 verified third-party API paths; 11 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/cpp/mp3_id3v2/standard.json)
 
@@ -15,7 +15,7 @@
 - [libmediainfo](libmediainfo/README.md) — verified API path
 - [sdl_mixer](sdl-mixer/README.md) — Docker harness ready
 - [sox](sox/README.md) — Docker harness ready
-- [libmad](libmad/README.md) — verified API path
+- [libmad](libmad/README.md) — Docker harness ready
 - [miniaudio](miniaudio/README.md) — Docker harness ready
 - [csfml](csfml/README.md) — verified API path
 - [sfml](sfml/README.md) — verified API path

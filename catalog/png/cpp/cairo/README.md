@@ -32,6 +32,11 @@
 
 Cairo PNG loader uses libpng; primary repository is freedesktop GitLab, so GitHub stars are unavailable for this ranking. Same underlying package and decoder as the C × PNG cell; this C++ path is not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/cpp/cairo/README.md)
+
+```sh
+python3 parsarium.py build png cpp cairo
+python3 parsarium.py run png cpp cairo controls/png/red-green.png
+```

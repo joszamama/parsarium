@@ -4,11 +4,13 @@
 
 ## Targets
 
+- [cairo / C](c/cairo/README.md)
 - [gd / C](c/gd/README.md)
 - [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
 - [imlib2 / C](c/imlib2/README.md)
+- [leptonica / C](c/leptonica/README.md)
 - [libpng / C](c/libpng/README.md)
 - [libspng / C](c/libspng/README.md)
 - [lodepng / C](c/lodepng/README.md)
@@ -19,11 +21,13 @@
 - [sdl3_image / C](c/sdl3_image/README.md)
 - [stb / C](c/stb/README.md)
 - [wuffs / C](c/wuffs/README.md)
+- [cairo / C++](cpp/cairo/README.md)
 - [gd / C++](cpp/gd/README.md)
 - [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [graphicsmagick / C++](cpp/graphicsmagick/README.md)
 - [imagemagick / C++](cpp/imagemagick/README.md)
 - [imlib2 / C++](cpp/imlib2/README.md)
+- [leptonica / C++](cpp/leptonica/README.md)
 - [libpng / C++](cpp/libpng/README.md)
 - [libspng / C++](cpp/libspng/README.md)
 - [lodepng / C++](cpp/lodepng/README.md)

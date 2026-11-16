@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "cpp",
+  "package": "libmad",
+  "release": "0.16.5",
+  "catalog_parser": "data/cpp/mp3_id3v2/parsers.json",
+  "source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "source_sha256": "f401b2ccf49c26ad0c3a6ef0179b1cbbff2406338b0603bb2033e6dcaf706114",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "layer": 3,
+    "sample_rate": 8000,
+    "bit_rate": 32000,
+    "channels": 1,
+    "decoded_samples": 576
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in libmad MP3 decoder after ID3v2 tag skip",
+  "coverage_subject_prefix": "/work/source/src/",
+  "format_specific_coverage_file_suffix": "/layer3.c"
+}

@@ -30,6 +30,11 @@
 
 Recorded Leptonica dylib links libpng; output checks RGB pixels because the standard pixRead path strips alpha. Same underlying package and decoder as the C × PNG cell; this C++ path is not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/cpp/leptonica/README.md)
+
+```sh
+python3 parsarium.py build png cpp leptonica
+python3 parsarium.py run png cpp leptonica controls/png/red-green.png
+```
