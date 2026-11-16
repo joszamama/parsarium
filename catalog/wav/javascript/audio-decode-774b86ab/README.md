@@ -27,6 +27,11 @@
 
 Package metadata describes this as an unscoped alias of @audio/decode.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/javascript/audio_decode/README.md)
+
+```sh
+python3 parsarium.py build wav javascript audio_decode
+python3 parsarium.py run wav javascript audio_decode controls/wav/four-samples.wav
+```
