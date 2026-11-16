@@ -18,3 +18,5 @@ Open `http://localhost:8765/`. `website/build.py` checks the 80 cell counts and 
 In the repository's **Settings → Pages**, choose **GitHub Actions** as the deployment source. The `Publish site` workflow deploys relevant changes on `main` and can run manually. The site has no server, database, or JavaScript build step.
 
 The Atlas links to format and parser guides, rankings, evidence, and harness manifests in the main repository. A private repository's links require repository read access until it is made public. Counts are generated from the current audit during each build.
+
+All five pages include the Cloudflare Web Analytics beacon for `parsarium.com`. The site remains hosted on GitHub Pages; analytics does not require moving DNS to Cloudflare.

@@ -19,6 +19,7 @@ from audit_projects import fully_runnable
 ROOT = Path(__file__).resolve().parents[1]
 SITE = Path(__file__).resolve().parent
 REPO_URL = "https://github.com/joszamama/parsarium"
+CLOUDFLARE_BEACON_TOKEN = "768b709cb62a40f8a65bacc76109381b"
 
 FORMATS = [
     ("png", "PNG", "Image", "A tiny grid of pixels, carried in chunks."),
@@ -474,6 +475,11 @@ def build(output: Path) -> None:
         html = html.replace("{{ROOT}}", root)
         html = html.replace("{{RUNNABLE}}", f"{catalog['summary']['runnable']:,}")
         html = html.replace("{{VERIFIED}}", f"{catalog['summary']['verified']:,}")
+        beacon = ("<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+                  f"data-cf-beacon='{{\"token\": \"{CLOUDFLARE_BEACON_TOKEN}\"}}'></script>")
+        if html.count("</body>") != 1:
+            raise ValueError(f"{page}.html must have one closing body tag")
+        html = html.replace("</body>", f"  {beacon}\n</body>")
         destination = output if page == "index" else output / page
         destination.mkdir(parents=True, exist_ok=True)
         (destination / "index.html").write_text(html, encoding="utf-8")
