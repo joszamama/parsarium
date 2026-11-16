@@ -9,6 +9,7 @@
 - [qpdf / C](c/qpdf/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [mupdf / C++](cpp/mupdf/README.md)
+- [poppler / C++](cpp/poppler/README.md)
 - [qpdf / C++](cpp/qpdf/README.md)
 - [github.com/aspose-pdf-foss/aspose-pdf-foss-for-go / Go](go/github_com_aspose_pdf_foss_aspose_pdf_foss_for_go/README.md)
 - [github.com/digitorus/pdf / Go](go/github_com_digitorus_pdf/README.md)

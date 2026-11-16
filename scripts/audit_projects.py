@@ -94,6 +94,10 @@ def third_party_control_verified(path: Path, manifest: dict) -> bool:
     if not receipt.is_file():
         return False
     observed = json.loads(receipt.read_text())
+    parser_binary_pins = {
+        key: value for key, value in manifest.items()
+        if key.endswith(("_module_sha256", "_plugin_sha256"))
+    }
     current_files = {
         str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
         for file in sorted(path.parent.rglob("*"))
@@ -115,7 +119,10 @@ def third_party_control_verified(path: Path, manifest: dict) -> bool:
         and sha256((ROOT / manifest["control_variant"]).read_bytes()).hexdigest()
             == manifest["control_variant_sha256"]
         and observed.get("variant_output") != observed.get("output")
-        and observed.get("qtsvg_module_sha256") == manifest.get("qtsvg_module_sha256")
+        and bool(parser_binary_pins)
+        and all(re.fullmatch(r"[0-9a-f]{64}", value) is not None
+                and observed.get(key) == value
+                for key, value in parser_binary_pins.items())
         and observed.get("parser_source_lines_covered") is None
         and observed.get("parser_feedback_available") is False
         and observed.get("afl_feedback_edges") is None
