@@ -53,7 +53,7 @@
     <p class="off">0x0030<b>selection</b></p>
     <div class="sec-head">
       <h2>How parsers are chosen.</h2>
-      <p>The catalog works one format × language cell at a time, with a working goal of twenty verified packages per cell. A parser qualifies when it is open source, has a pinned release, and parses local bytes through a documented API with an observable, format-specific result. Wrappers are allowed and their underlying parser family is recorded.</p>
+      <p>The catalog works one format × language cell at a time, keeping the most adopted verified packages in each cell, up to the limit the selection protocol sets. A parser qualifies when it is open source, has a pinned release, and parses local bytes through a documented API with an observable, format-specific result. Wrappers are allowed and their underlying parser family is recorded.</p>
       <p>Packages are ranked by one adoption metric per cell, usually registry downloads, and only against other packages in the same cell. Standard-library APIs are verified the same way and listed separately. Every search query, result, and unresolved lead is saved, so you can see exactly how a cell was built. The full rules are in the <a href="https://github.com/joszamama/parsarium/blob/main/PROTOCOL.md">selection protocol</a>.</p>
     </div>
   </div>

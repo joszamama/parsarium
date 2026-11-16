@@ -18,7 +18,7 @@
 <h2>Seeds</h2>
 <p>By default, a campaign starts from the target's valid control. That is a good minimal seed: it reaches the main parsing path. A richer seed corpus usually helps, especially for formats with many optional parts. You can add files with <code>--seed</code> or whole directories with <code>--seed-dir</code>:</p>
 <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-afl --seed-dir generated/png</pre>
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-afl --seed-dir generated/png</pre>
 <p>When you compare tools, give every tool the same seeds, so the comparison is about what the tool does after it starts.</p>
 
 <h2>Budgets</h2>
@@ -28,7 +28,7 @@
 <h2>Running many campaigns</h2>
 <p>The <a href="{{ROOT}}bench/">bench</a> generates a script that runs a selection one target at a time. To run several at once, write the target list to a file and use <code>xargs</code>:</p>
 <pre data-copy>cat &gt; targets.txt &lt;&lt;'EOF'
-png c libpng
+png c stb
 png rust png
 zip go stdlib_openreader
 zip python stdlib_zipfile
@@ -73,14 +73,14 @@ xargs -P 4 -I{} bash -c 'run_one "{}"' &lt; targets.txt</pre>
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 7.2</span><span class="level">Practice</span></p>
-  <p>Measure the effect of seeds. Generate a PNG corpus with Fandango, then run libpng twice for ten minutes: once from the control only, and once with the generated seeds.</p>
+  <p>Measure the effect of seeds. Generate a PNG corpus with Fandango, then run stb_image twice for ten minutes: once from the control only, and once with the generated seeds.</p>
   <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-control-only
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-seeded --seed-dir generated/png
-<span class="p">$ </span>parsarium afl run runs/libpng-control-only --seconds 600
-<span class="p">$ </span>parsarium afl run runs/libpng-seeded --seconds 600</pre>
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-control-only
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-seeded --seed-dir generated/png
+<span class="p">$ </span>parsarium afl run runs/stb-control-only --seconds 600
+<span class="p">$ </span>parsarium afl run runs/stb-seeded --seconds 600</pre>
   <p>Compare <code>corpus_count</code> and <code>edges_found</code>. Does the richer seed set help, and is one run enough to say so?</p>
-  <details><summary>Hint</summary><p>If Fandango is not installed: <code>pip install fandango-fuzzer</code>. Run <code>afl build png c libpng</code> first if you have not built the image.</p></details>
+  <details><summary>Hint</summary><p>If Fandango is not installed: <code>pip install fandango-fuzzer</code>. Run <code>afl build png c stb</code> first if you have not built the image.</p></details>
   <details><summary>Solution</summary><p>A varied seed corpus usually starts with more coverage, because it already contains chunk types the control lacks. Whether it ends higher after ten minutes is less certain. One run of each is not enough to claim a difference; run each configuration at least five times and compare the medians, as chapter 9 describes.</p></details>
 </div>
 <div class="exercise">

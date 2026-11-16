@@ -45,18 +45,18 @@ Working from a clone instead? Run `python3 parsarium.py …` from the repository
 ## Quick tour
 
 ```sh
-parsarium list --format png                 # verified and runnable parsers per language
-parsarium catalog png rust                  # one cell's ranking, metric, and open leads
-parsarium show png c libpng                 # release, input API, control, fuzz engine
+parsarium list --format png        # verified and runnable parsers per language
+parsarium catalog png rust         # one cell's ranking, metric, and open leads
+parsarium show png c stb           # release, input API, control, fuzz engine
 
-parsarium run png c libpng my.png --results runs/libpng              # one file, one parser
-parsarium run-format png --file my.png --results runs/png --workers 4  # one file, every PNG parser
-parsarium replay png c libpng corpus/ runs/libpng-replay              # a whole corpus
+parsarium run png c stb my.png --results runs/stb                       # one file, one parser
+parsarium run-format png --file my.png --results runs/png --workers 4   # one file, every PNG parser
+parsarium replay png c stb corpus/ runs/stb-replay                      # a whole corpus
 
-parsarium afl build png c libpng                                    # AFL++
-parsarium afl prepare png c libpng runs/libpng-afl --seed-dir corpus/
-parsarium afl run runs/libpng-afl --seconds 3600
-parsarium afl summary runs/libpng-afl
+parsarium afl build png c stb                                           # AFL++
+parsarium afl prepare png c stb runs/stb-afl --seed-dir corpus/
+parsarium afl run runs/stb-afl --seconds 3600
+parsarium afl summary runs/stb-afl
 ```
 
 `status: ok` in a run receipt means the harness finished; whether the parser accepted the input is in its output. Formats are `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3_id3v2`; languages are `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.

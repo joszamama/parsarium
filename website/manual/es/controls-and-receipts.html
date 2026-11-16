@@ -60,22 +60,22 @@
 <h2>Ejercicios</h2>
 <div class="exercise">
   <p class="label"><span>Ejercicio 3.1</span><span class="level">Calentamiento</span></p>
-  <p>Ejecuta el target libpng con su propio control y con un archivo que ni siquiera es un PNG.</p>
-  <pre data-copy><span class="p">$ </span>parsarium show png c libpng --json
-<span class="p">$ </span>parsarium run png c libpng "$PARSARIUM/controls/png/red-green.png" --results runs/libpng-control
-<span class="p">$ </span>parsarium run png c libpng "$PARSARIUM/controls/zip/hello.zip" --results runs/libpng-zip</pre>
-  <p>Abre los dos registros y compara <code>status</code>, <code>exit_code</code> y las finales de la salida. ¿Dónde dice libpng qué le ha parecido el archivo ZIP?</p>
+  <p>Ejecuta el target stb_image con su propio control y con un archivo que ni siquiera es un PNG.</p>
+  <pre data-copy><span class="p">$ </span>parsarium show png c stb --json
+<span class="p">$ </span>parsarium run png c stb "$PARSARIUM/controls/png/red-green.png" --results runs/stb-control
+<span class="p">$ </span>parsarium run png c stb "$PARSARIUM/controls/zip/hello.zip" --results runs/stb-zip</pre>
+  <p>Abre los dos registros y compara <code>status</code>, <code>exit_code</code> y las finales de la salida. ¿Dónde dice stb_image qué le ha parecido el archivo ZIP?</p>
   <details><summary>Pista</summary><p>Los registros se escriben como <code>&lt;sha256&gt;.json</code> dentro del directorio de <code>--results</code>.</p></details>
-  <details><summary>Solución</summary><p>El registro del control muestra las dimensiones y los píxeles en <code>stdout_tail</code>. El registro del ZIP muestra el rechazo de libpng, en las finales de la salida o como un código de salida distinto de cero, según cómo informe el harness de los errores. El hábito importante es mirar la salida, no solo <code>status</code>.</p></details>
+  <details><summary>Solución</summary><p>El registro del control muestra las dimensiones y los píxeles en <code>stdout_tail</code>. El registro del ZIP muestra el rechazo de stb_image, en las finales de la salida o como un código de salida distinto de cero, según cómo informe el harness de los errores. El hábito importante es mirar la salida, no solo <code>status</code>.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Ejercicio 3.2</span><span class="level">Práctica</span></p>
   <p>Abre los registros de verificación de dos targets PNG en lenguajes distintos y compáralos campo a campo.</p>
-  <pre data-copy>cat "$PARSARIUM/projects/png/c/libpng/verification.json"
+  <pre data-copy>cat "$PARSARIUM/projects/png/c/stb/verification.json"
 cat "$PARSARIUM/projects/png/python/pillow/verification.json"</pre>
   <p>¿Qué contiene cada lista de la cadena de herramientas? ¿Cuántas líneas del código fuente del parser cubrió cada control? ¿Puedes decir con estas cifras qué parser está mejor probado?</p>
   <details><summary>Pista</summary><p>Busca <code>toolchain</code>, <code>output</code> y <code>parser_source_lines_covered</code>.</p></details>
-  <details><summary>Solución</summary><p>En el momento de escribir esto, el control de libpng cubre 1.698 líneas del parser y el de Pillow 2.097. Eso no significa que Pillow esté mejor probado: las dos bases de código tienen tamaños distintos, están escritas en lenguajes distintos y las cifras de líneas salen de herramientas de cobertura distintas. Las cifras sirven para cada target por separado, por ejemplo para comprobar que una entrada nueva llega a más partes del mismo parser.</p></details>
+  <details><summary>Solución</summary><p>En el momento de escribir esto, el control de stb_image cubre 435 líneas del parser y el de Pillow 2.097. Eso no significa que Pillow esté mejor probado: las dos bases de código tienen tamaños distintos, están escritas en lenguajes distintos y las cifras de líneas salen de herramientas de cobertura distintas. Las cifras sirven para cada target por separado, por ejemplo para comprobar que una entrada nueva llega a más partes del mismo parser.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Ejercicio 3.3</span><span class="level">Reto</span></p>

@@ -18,7 +18,7 @@
 <h2>Semillas</h2>
 <p>Por defecto, una campaña parte del control válido del target. Es una buena semilla mínima: llega al camino principal del parsing. Un corpus de semillas más rico suele ayudar, sobre todo en formatos con muchas partes opcionales. Puedes añadir archivos con <code>--seed</code> o directorios completos con <code>--seed-dir</code>:</p>
 <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-afl --seed-dir generated/png</pre>
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-afl --seed-dir generated/png</pre>
 <p>Cuando compares herramientas, dales a todas las mismas semillas, para que la comparación trate de lo que hace cada herramienta una vez que arranca.</p>
 
 <h2>Presupuestos</h2>
@@ -28,7 +28,7 @@
 <h2>Ejecutar muchas campañas</h2>
 <p>El <a href="{{ROOT}}bench/">banco</a> genera un script que ejecuta una selección target a target. Para ejecutar varias a la vez, escribe la lista de targets en un archivo y usa <code>xargs</code>:</p>
 <pre data-copy>cat &gt; targets.txt &lt;&lt;'EOF'
-png c libpng
+png c stb
 png rust png
 zip go stdlib_openreader
 zip python stdlib_zipfile
@@ -73,14 +73,14 @@ xargs -P 4 -I{} bash -c 'run_one "{}"' &lt; targets.txt</pre>
 </div>
 <div class="exercise">
   <p class="label"><span>Ejercicio 7.2</span><span class="level">Práctica</span></p>
-  <p>Mide el efecto de las semillas. Genera un corpus de PNG con Fandango y ejecuta libpng dos veces durante diez minutos: una solo con el control y otra con las semillas generadas.</p>
+  <p>Mide el efecto de las semillas. Genera un corpus de PNG con Fandango y ejecuta stb_image dos veces durante diez minutos: una solo con el control y otra con las semillas generadas.</p>
   <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-control-only
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-seeded --seed-dir generated/png
-<span class="p">$ </span>parsarium afl run runs/libpng-control-only --seconds 600
-<span class="p">$ </span>parsarium afl run runs/libpng-seeded --seconds 600</pre>
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-control-only
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-seeded --seed-dir generated/png
+<span class="p">$ </span>parsarium afl run runs/stb-control-only --seconds 600
+<span class="p">$ </span>parsarium afl run runs/stb-seeded --seconds 600</pre>
   <p>Compara <code>corpus_count</code> y <code>edges_found</code>. ¿Ayuda el conjunto de semillas más rico? ¿Basta una ejecución para afirmarlo?</p>
-  <details><summary>Pista</summary><p>Si no tienes Fandango instalado: <code>pip install fandango-fuzzer</code>. Ejecuta antes <code>afl build png c libpng</code> si todavía no has construido la imagen.</p></details>
+  <details><summary>Pista</summary><p>Si no tienes Fandango instalado: <code>pip install fandango-fuzzer</code>. Ejecuta antes <code>afl build png c stb</code> si todavía no has construido la imagen.</p></details>
   <details><summary>Solución</summary><p>Un corpus de semillas variado suele empezar con más cobertura, porque ya contiene tipos de chunk que el control no tiene. Que termine más alto a los diez minutos es menos seguro. Una ejecución de cada no basta para afirmar una diferencia; ejecuta cada configuración al menos cinco veces y compara las medianas, como explica el capítulo 9.</p></details>
 </div>
 <div class="exercise">

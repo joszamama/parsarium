@@ -50,8 +50,8 @@
   <p>List the catalog, open one cell, and inspect one target.</p>
   <pre data-copy><span class="p">$ </span>parsarium list
 <span class="p">$ </span>parsarium catalog png c
-<span class="p">$ </span>parsarium show png c libpng</pre>
-  <p>The <code>catalog</code> output ranks the twenty C packages by GitHub stars. Look at the last column, the underlying family. How many packages read PNG through <code>stb_image</code>?</p>
+<span class="p">$ </span>parsarium show png c stb</pre>
+  <p>The <code>catalog</code> output ranks the C packages by GitHub stars. Look at the last column, the underlying family. How many packages read PNG through <code>stb_image</code>?</p>
   <details><summary>Hint</summary><p>Search the family column for the text <code>stb_image</code>. Bundled copies count too.</p></details>
   <details><summary>Solution</summary><p>Three: <code>raylib</code> and <code>sdl3</code> bundle <code>stb_image</code>, and <code>stb</code> is <code>stb_image</code> itself. Three packages in the ranking, one decoder underneath. Chapter 4 comes back to this.</p></details>
 </div>
@@ -61,7 +61,7 @@
   <pre data-copy><span class="p">$ </span>parsarium list --format http11</pre>
   <p>Which languages have the most runnable HTTP/1.1 targets, and which the fewest? Check your answer against the HTTP/1.1 row of the <a href="{{ROOT}}atlas/?format=http11">atlas</a>.</p>
   <details><summary>Hint</summary><p>The runnable count is the number of targets with a Docker harness. It can be higher than the verified count because standard-library APIs are counted separately.</p></details>
-  <details><summary>Solution</summary><p>At the time of writing, Go and Rust have the most runnable HTTP/1.1 targets (22 each), and C and C++ the fewest (9 each). Many C and C++ HTTP parsers are embedded in larger servers and are harder to drive from a file, which is why fewer of them have harnesses yet.</p></details>
+  <details><summary>Solution</summary><p>Read the RUNNABLE column against the verified columns. Where a language has fewer runnable targets than verified packages, harnesses are still being built. For HTTP/1.1 this shows most in C and C++: many of their HTTP parsers are embedded in larger servers and are harder to drive from a file.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 1.3</span><span class="level">Challenge</span></p>

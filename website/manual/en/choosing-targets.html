@@ -1,8 +1,8 @@
 <!-- {"title": "Choosing targets", "summary": "Cells, adoption ranks, parser families, and standard APIs: how to pick a target set that fits your question."} -->
-<p>The targets you choose shape the results you get. A fuzzer that does well on twenty C image decoders may do very differently on Java archive readers. This chapter explains how the catalog is built, so you can pick a set that answers your question and describe it clearly.</p>
+<p>The targets you choose shape the results you get. A fuzzer that does well on C image decoders may do very differently on Java archive readers. This chapter explains how the catalog is built, so you can pick a set that answers your question and describe it clearly.</p>
 
 <h2>Cells and the working goal</h2>
-<p>The catalog is built one cell at a time, where a cell is one format in one language. For every cell, Parsarium searches the package registries with the format name and terms like parser, decoder, or reader, inspects the results, and verifies the candidates against a control. The working goal is twenty verified packages per cell, with thirty as a ceiling. Most cells reach twenty. Every search query, its date, and its hit count is saved next to the cell, together with any leads that are still open.</p>
+<p>The catalog is built one cell at a time, where a cell is one format in one language. For every cell, Parsarium searches the package registries with the format name and terms like parser, decoder, or reader, inspects the results, and verifies the candidates against a control. Each cell keeps the most adopted verified packages, up to a limit set in the selection protocol. A cell can stay below the limit when the search finds no more candidates with enough adoption evidence. Every search query, its date, and its hit count is saved next to the cell, together with any leads that are still open.</p>
 
 <h2>Adoption ranks</h2>
 <p>Inside a cell, packages are ranked by one adoption metric: registry downloads when the registry publishes comparable numbers, otherwise a documented alternative such as GitHub stars. The ranking says which packages people use most. It is not a quality score, and it is only meaningful inside the cell, because downloads on npm and stars on GitHub are not the same unit.</p>
@@ -13,7 +13,7 @@
 <p>Whether to count packages or families depends on what you want to measure:</p>
 <ul>
   <li>If you study <strong>ecosystems</strong> (how PHP developers parse images, for instance), every package counts, because each one is a separate dependency with its own API and wrapper code.</li>
-  <li>If you study <strong>parser engines</strong> (how many distinct implementations crash on an input), count families. Otherwise one bug in GD shows up as thirteen.</li>
+  <li>If you study <strong>parser engines</strong> (how many distinct implementations crash on an input), count families. Otherwise one bug in GD shows up once per wrapper.</li>
   <li>If you <strong>compare fuzzers</strong>, one target per family keeps the comparison from leaning toward whichever engine happens to have many wrappers.</li>
 </ul>
 
@@ -28,13 +28,13 @@
 
 <section class="recap">
 <h2>Key ideas</h2>
-<ul><li>The catalog is built cell by cell, with a working goal of twenty verified packages per cell.</li><li>Adoption ranks compare packages only inside one cell, because each cell may use a different metric.</li><li>Many packages share a parser family. Count packages to study ecosystems; count families to study engines or compare tools.</li><li>Standard-library APIs are verified like packages but listed separately and not ranked.</li><li>A selection ID plus the Parsarium commit is enough for someone else to rebuild your exact target set.</li></ul>
+<ul><li>The catalog is built cell by cell, keeping the most adopted verified packages up to the limit in the selection protocol.</li><li>Adoption ranks compare packages only inside one cell, because each cell may use a different metric.</li><li>Many packages share a parser family. Count packages to study ecosystems; count families to study engines or compare tools.</li><li>Standard-library APIs are verified like packages but listed separately and not ranked.</li><li>A selection ID plus the Parsarium commit is enough for someone else to rebuild your exact target set.</li></ul>
 </section>
 <section class="quiz">
 <div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
 <div class="q" data-answer="2"><p class="q-text">Can you compare rank 1 in the Python PNG cell with rank 1 in the Rust PNG cell?</p><ol class="q-opts"><li>Yes, both are the most popular.</li><li>Yes, if both use downloads.</li><li>No. Ranks are only meaningful inside one cell.</li></ol><p class="q-why">Each cell uses one documented metric, often from a different registry. Downloads on PyPI and on crates.io are not the same unit.</p></div>
 <div class="q" data-answer="0"><p class="q-text">You want to compare two fuzzers on image formats. Which selection fits best?</p><ol class="q-opts"><li>One target per parser family</li><li>Every package in every image cell</li><li>Only the top-ranked package in each cell</li></ol><p class="q-why">One target per family keeps the comparison from leaning toward engines that happen to have many wrappers, such as GD in PHP.</p></div>
-<div class="q" data-answer="1"><p class="q-text">Thirteen PHP PNG packages crash on the same input inside the same GD function. How many bug reports should you write?</p><ol class="q-opts"><li>Thirteen, one per package</li><li>One, to GD</li><li>None, PHP bugs are out of scope</li></ol><p class="q-why">The bug lives in the shared engine. One report to the engine fixes it for every wrapper.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Eight PHP PNG packages crash on the same input inside the same GD function. How many bug reports should you write?</p><ol class="q-opts"><li>Eight, one per package</li><li>One, to GD</li><li>None, PHP bugs are out of scope</li></ol><p class="q-why">The bug lives in the shared engine. One report to the engine fixes it for every wrapper.</p></div>
 <div class="q" data-answer="1"><p class="q-text">How are standard-library APIs treated in the catalog?</p><ol class="q-opts"><li>They are ranked with the third-party packages.</li><li>They are verified the same way but listed separately and not ranked.</li><li>They are not included.</li></ol><p class="q-why">Go's <code>image/png</code> or Python's <code>zipfile</code> go through the same control check and have harnesses, but they sit outside the adoption ranking.</p></div>
 <div class="q" data-answer="2"><p class="q-text">What lets someone rebuild exactly the target set you used?</p><ol class="q-opts"><li>The number of targets</li><li>A screenshot of the bench</li><li>The selection ID and the Parsarium commit</li></ol><p class="q-why">The ID is derived from the sorted target list, and the commit pins every release, harness, and control. The manifest records both.</p></div>
 </section>
@@ -47,7 +47,7 @@
 <span class="p">$ </span>parsarium catalog pdf go</pre>
   <p>Then open the bench with <a href="{{ROOT}}bench/?f=pdf">PDF selected</a>, and turn on <em>One target per parser family</em>. How many targets are left? Which languages lose the most? Note the two selection IDs.</p>
   <details><summary>Hint</summary><p>Look for repeated family names in the last column of each ranking, such as <code>mozilla/pdf.js</code>.</p></details>
-  <details><summary>Solution</summary><p>JavaScript loses the most: thirteen of its PDF packages build on pdf.js, so they collapse into one target. Go also shrinks, because ten of its packages descend from the same PDF reader. The two IDs differ because the target lists differ; write both down if you report results for both.</p></details>
+  <details><summary>Solution</summary><p>JavaScript loses the most: most of its PDF packages build on pdf.js, so they collapse into one target. Go also shrinks, because several of its packages descend from the same PDF reader. The two IDs differ because the target lists differ; write both down if you report results for both.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 4.2</span><span class="level">Practice</span></p>
@@ -57,10 +57,10 @@
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 4.3</span><span class="level">Challenge</span></p>
-  <p>Not every cell reaches twenty packages. PHP × ASCII PLY has five. Open its data and find out why the search stopped there.</p>
+  <p>Some cells are much smaller than others, and PHP × ASCII PLY is one of the smallest. Open its data and find out why.</p>
   <pre data-copy>cat "$PARSARIUM/data/php/ascii_ply/cell.json"
 cat "$PARSARIUM/data/php/ascii_ply/leads.json"</pre>
   <details><summary>Hint</summary><p>Read the <code>uncertainty</code> field in <code>cell.json</code>; it summarises the search and what was found.</p></details>
-  <details><summary>Solution</summary><p>The searches over Packagist, GitHub, and Sourcegraph returned hundreds of hits, but very few were PHP code that actually parses PLY: most were writers, unrelated names, or JavaScript embedded in PHP pages. Two of the five packages even share one engine. The cell stops below twenty because the search surface is documented and exhausted, not because nobody looked. This is what the protocol means by a recorded search limit.</p></details>
+  <details><summary>Solution</summary><p>The searches over Packagist, GitHub, and Sourcegraph returned hundreds of hits, but very few were PHP code that actually parses PLY: most were writers, unrelated names, or JavaScript embedded in PHP pages. Some of the packages it did find share one engine. The cell is small because the search surface is documented and exhausted, not because nobody looked. This is what the protocol means by a recorded search limit.</p></details>
 </div>
 </section>

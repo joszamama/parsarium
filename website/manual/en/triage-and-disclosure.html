@@ -3,14 +3,14 @@
 
 <h2>1. Reproduce</h2>
 <p>Run the saved file through the normal harness, outside the fuzzer:</p>
-<pre data-copy><span class="p">$ </span>parsarium run png c libpng runs/libpng-afl/afl-out/default/crashes/id:000000,* --results runs/libpng-triage</pre>
+<pre data-copy><span class="p">$ </span>parsarium run png c stb runs/stb-afl/afl-out/default/crashes/id:000000,* --results runs/stb-triage</pre>
 <p>A reproducible crash gives <code>target_nonzero</code> with the error in <code>stderr_tail</code>; a hang gives <code>timeout</code>. Run it a few times. If the result changes between runs, note that: it may depend on memory layout, timing, or the limits of the fuzzing environment rather than the input alone.</p>
 
 <h2>2. Reduce</h2>
 <p>Fuzzer outputs are usually larger than they need to be. A smaller input makes the cause easier to see. For compiled targets, AFL++ includes <code>afl-tmin</code>, which removes bytes while the crash still happens. For any target, you can also reduce by hand with the format in mind: drop chunks, shorten fields, and re-run after each change. Keep the original file next to the reduced one.</p>
 
 <h2>3. Deduplicate</h2>
-<p>A campaign often saves many files for one bug. Group them by where they fail: the top frames of the stack trace for native crashes, the exception type and location for managed languages. Then group again by parser family. If thirteen PHP packages crash in the same GD function, that is one report to GD.</p>
+<p>A campaign often saves many files for one bug. Group them by where they fail: the top frames of the stack trace for native crashes, the exception type and location for managed languages. Then group again by parser family. If eight PHP packages crash in the same GD function, that is one report to GD.</p>
 
 <h2>4. Check the latest release</h2>
 <p>Parsarium pins releases so results are reproducible. The bug you found may already be fixed upstream. Before reporting, try the input against the latest release and look through the project's issue tracker and changelog.</p>

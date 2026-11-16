@@ -42,14 +42,14 @@
 <div class="exercise">
   <p class="label"><span>Exercise 5.1</span><span class="level">Warm-up</span></p>
   <p>Prepare an AFL++ run for a compiled target and a bridged target, and compare their plans.</p>
-  <pre data-copy><span class="p">$ </span>parsarium afl build png c libpng
-<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-afl
+  <pre data-copy><span class="p">$ </span>parsarium afl build png c stb
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-afl
 <span class="p">$ </span>parsarium afl build png python pillow
 <span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow-afl
 <span class="p">$ </span>parsarium afl run runs/pillow-afl --check</pre>
   <p>Open both <code>plan.json</code> files and find the feedback kind. Then run each for five minutes with <code>--seconds 300</code> and compare <code>execs_per_sec</code> in <code>afl-out/default/fuzzer_stats</code>.</p>
   <details><summary>Hint</summary><p><code>fuzzer_stats</code> is a plain text file of <code>key : value</code> lines.</p></details>
-  <details><summary>Solution</summary><p>The Pillow plan names the Python bridge; the libpng plan uses compiled edges. Expect libpng to run many more executions per second, often by an order of magnitude or more, because the bridge traces Python lines and passes them through a proxy. This is why budgets for bridged targets need care.</p></details>
+  <details><summary>Solution</summary><p>The Pillow plan names the Python bridge; the stb_image plan uses compiled edges. Expect stb_image to run many more executions per second, often by an order of magnitude or more, because the bridge traces Python lines and passes them through a proxy. This is why budgets for bridged targets need care.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 5.2</span><span class="level">Practice</span></p>

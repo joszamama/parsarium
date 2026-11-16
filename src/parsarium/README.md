@@ -16,12 +16,12 @@ Requires Python 3.11+ and Docker for running targets. The first command that nee
 
 ```sh
 parsarium list --format png
-parsarium show png c libpng
-parsarium run png c libpng my.png --results runs/libpng
+parsarium show png c stb
+parsarium run png c stb my.png --results runs/stb
 parsarium run-format png --file my.png --results runs/png-my-file
-parsarium afl build png c libpng
-parsarium afl prepare png c libpng runs/libpng-afl
-parsarium afl run runs/libpng-afl --seconds 3600
+parsarium afl build png c stb
+parsarium afl prepare png c stb runs/stb-afl
+parsarium afl run runs/stb-afl --seconds 3600
 ```
 
 Run a selection saved from the [bench](https://parsarium.com/bench/):

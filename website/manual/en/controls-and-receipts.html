@@ -60,22 +60,22 @@
 <h2>Exercises</h2>
 <div class="exercise">
   <p class="label"><span>Exercise 3.1</span><span class="level">Warm-up</span></p>
-  <p>Run the libpng target on its own control and on a file that is not a PNG at all.</p>
-  <pre data-copy><span class="p">$ </span>parsarium show png c libpng --json
-<span class="p">$ </span>parsarium run png c libpng "$PARSARIUM/controls/png/red-green.png" --results runs/libpng-control
-<span class="p">$ </span>parsarium run png c libpng "$PARSARIUM/controls/zip/hello.zip" --results runs/libpng-zip</pre>
-  <p>Open both receipts and compare <code>status</code>, <code>exit_code</code>, and the output tails. Where does libpng say what it thought of the ZIP file?</p>
+  <p>Run the stb_image target on its own control and on a file that is not a PNG at all.</p>
+  <pre data-copy><span class="p">$ </span>parsarium show png c stb --json
+<span class="p">$ </span>parsarium run png c stb "$PARSARIUM/controls/png/red-green.png" --results runs/stb-control
+<span class="p">$ </span>parsarium run png c stb "$PARSARIUM/controls/zip/hello.zip" --results runs/stb-zip</pre>
+  <p>Open both receipts and compare <code>status</code>, <code>exit_code</code>, and the output tails. Where does stb_image say what it thought of the ZIP file?</p>
   <details><summary>Hint</summary><p>Receipts are written as <code>&lt;sha256&gt;.json</code> inside the <code>--results</code> directory.</p></details>
-  <details><summary>Solution</summary><p>The control receipt shows the dimensions and pixels in <code>stdout_tail</code>. The ZIP receipt shows libpng's rejection, either in the output tails or as a non-zero exit, depending on how the harness reports errors. The important habit is to look at the output, not only at <code>status</code>.</p></details>
+  <details><summary>Solution</summary><p>The control receipt shows the dimensions and pixels in <code>stdout_tail</code>. The ZIP receipt shows stb_image's rejection, either in the output tails or as a non-zero exit, depending on how the harness reports errors. The important habit is to look at the output, not only at <code>status</code>.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 3.2</span><span class="level">Practice</span></p>
   <p>Open the verification receipts of two PNG targets in different languages and compare them field by field.</p>
-  <pre data-copy>cat "$PARSARIUM/projects/png/c/libpng/verification.json"
+  <pre data-copy>cat "$PARSARIUM/projects/png/c/stb/verification.json"
 cat "$PARSARIUM/projects/png/python/pillow/verification.json"</pre>
   <p>What does each toolchain list contain? How many parser source lines did each control cover? Can you say which parser is better tested from these numbers?</p>
   <details><summary>Hint</summary><p>Look for <code>toolchain</code>, <code>output</code>, and <code>parser_source_lines_covered</code>.</p></details>
-  <details><summary>Solution</summary><p>At the time of writing the libpng control covers 1,698 parser lines and the Pillow control 2,097. That does not make Pillow better tested: the two code bases are different sizes, written in different languages, and the line counts come from different coverage tools. The numbers are useful for each target on its own, for example to check that a new input reaches more of the same parser.</p></details>
+  <details><summary>Solution</summary><p>At the time of writing the stb_image control covers 435 parser lines and the Pillow control 2,097. That does not make Pillow better tested: the two code bases are different sizes, written in different languages, and the line counts come from different coverage tools. The numbers are useful for each target on its own, for example to check that a new input reaches more of the same parser.</p></details>
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 3.3</span><span class="level">Challenge</span></p>

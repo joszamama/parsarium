@@ -47,7 +47,7 @@ RANKING_ALIASES = {
     ("java", "ascii_ply", "bteterrarenderer-draco"): "BTETerraRenderer Draco module",
 }
 DEMO_PROJECTS = [
-    "projects/png/c/libpng/manifest.json",
+    "projects/png/c/stb/manifest.json",
     "projects/zip/rust/zip/manifest.json",
     "projects/mp4/php/getid3/manifest.json",
     "projects/wav/c/dr_wav/manifest.json",

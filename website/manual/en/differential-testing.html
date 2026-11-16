@@ -30,7 +30,7 @@ EOF</pre>
 <p>The largest group is usually the consensus. Small groups are the interesting ones.</p>
 
 <h2>Families again</h2>
-<p>When you count agreement, remember that wrappers share engines. Thirteen PHP packages agreeing with each other may be one decoder agreeing with itself. Group results by parser family before deciding how unusual a disagreement is.</p>
+<p>When you count agreement, remember that wrappers share engines. Eight PHP packages agreeing with each other may be one decoder agreeing with itself. Group results by parser family before deciding how unusual a disagreement is.</p>
 
 <section class="recap">
 <h2>Key ideas</h2>
@@ -41,7 +41,7 @@ EOF</pre>
 <div class="q" data-answer="0"><p class="q-text">Do you need to know the correct output before running a differential test?</p><ol class="q-opts"><li>No. The disagreement between implementations is the signal.</li><li>Yes, otherwise results cannot be interpreted.</li><li>Only for binary formats.</li></ol><p class="q-why">That is the main strength of differential testing. You look at the minority answers, then decide who is right.</p></div>
 <div class="q" data-answer="1"><p class="q-text">What causes HTTP request smuggling?</p><ol class="q-opts"><li>A server that crashes on long headers</li><li>A front end and a back end that disagree about where a request ends</li><li>Requests that use HTTP/2</li></ol><p class="q-why">If one program uses Content-Length and the other Transfer-Encoding, the bytes one sees as a body the other sees as the start of a new request.</p></div>
 <div class="q" data-answer="2"><p class="q-text"><code>run-format</code> reports <code>ok</code> for every target. Do all the parsers agree?</p><ol class="q-opts"><li>Yes, all of them accepted the file.</li><li>Yes, if they are in the same language.</li><li>Not necessarily. <code>ok</code> means each harness finished; you still have to compare their outputs.</li></ol><p class="q-why">A clean rejection and a successful parse both give <code>ok</code>. The agreement is in the output fields.</p></div>
-<div class="q" data-answer="1"><p class="q-text">Twelve of thirteen PHP packages give the same answer. Is that strong consensus?</p><ol class="q-opts"><li>Yes, twelve independent votes</li><li>Maybe not. If they share one engine, it is one answer repeated.</li><li>No, PHP is always lenient.</li></ol><p class="q-why">Wrappers inherit their engine's behaviour. Group results by family to count independent opinions.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Nine of ten PHP packages give the same answer. Is that strong consensus?</p><ol class="q-opts"><li>Yes, nine independent votes</li><li>Maybe not. If they share one engine, it is one answer repeated.</li><li>No, PHP is always lenient.</li></ol><p class="q-why">Wrappers inherit their engine's behaviour. Group results by family to count independent opinions.</p></div>
 <div class="q" data-answer="0"><p class="q-text">Why normalise field names before comparing outputs?</p><ol class="q-opts"><li>Harnesses name the same field differently, so a naive comparison shows false disagreements.</li><li>To make the receipts smaller</li><li>Because JSON is case-sensitive</li></ol><p class="q-why">One PNG harness prints <code>rgba0</code>, another <code>first</code>. Pick the fields your question needs and map them to common names.</p></div>
 </section>
 <section class="exercises">
