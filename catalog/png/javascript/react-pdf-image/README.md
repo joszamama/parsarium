@@ -21,6 +21,11 @@
 
 The pinned package depends on png-js@^2.0.0.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/javascript/react_pdf_image/README.md)
+
+```sh
+python3 parsarium.py build png javascript react_pdf_image
+python3 parsarium.py run png javascript react_pdf_image controls/png/red-green.png
+```
