@@ -214,8 +214,10 @@ function renderWorkbench(demo, selectedTarget) {
   $("#format-guide").href = safeUrl(format.guideUrl);
   $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
   $("#run-format-name").textContent = format.label;
+  $("#run-format-count").textContent = format.runnable.toLocaleString();
   const batchCommands = {
     "run-batch-list": `python3 parsarium.py run-format ${demo.format} --list`,
+    "run-batch-first": `python3 parsarium.py run-format ${demo.format} --limit 3 --results runs/${demo.format}-first-3`,
     "run-batch-controls": `python3 parsarium.py run-format ${demo.format} --results runs/${demo.format}-controls`,
     "run-batch-file": `python3 parsarium.py run-format ${demo.format} --file INPUT_FILE --results runs/${demo.format}-my-file`,
   };
@@ -224,7 +226,7 @@ function renderWorkbench(demo, selectedTarget) {
     code.textContent = command;
     code.parentElement.querySelector("[data-copy]").dataset.copy = command;
   }
-  $("#run-batch-map").innerHTML = `runs/${escapeHtml(demo.format)}-controls/<br>├─ c/&lt;target&gt;/&lt;input-hash&gt;.json<br>├─ python/&lt;target&gt;/&lt;input-hash&gt;.json<br>└─ summary.json`;
+  $("#run-batch-map").innerHTML = `runs/${escapeHtml(demo.format)}-controls/<br>├─ &lt;ecosystem&gt;/&lt;target&gt;/&lt;input-hash&gt;.json<br>├─ …<br>└─ summary.json`;
   $("#demo-tabs").querySelectorAll("button").forEach((button, buttonIndex) => {
     button.setAttribute("aria-selected", String(buttonIndex === activeDemoIndex));
     button.tabIndex = buttonIndex === activeDemoIndex ? 0 : -1;
