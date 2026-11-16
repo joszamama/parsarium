@@ -35,15 +35,19 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Native MeshLab PLY importer source coverage required; Python binding import coverage alone is insufficient",
+  "coverage": "The pinned Docker control parses ASCII PLY. Python wrapper traces are separate from MeshLab parser coverage. AFL++ QEMU crashes or times out on a valid PLY load, so native parser feedback and source-line coverage are unavailable.",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pymeshlab/",
-  "underlying_coverage_subject_prefix": "/work/source/meshlab/src/meshlabplugins/io_base/",
-  "underlying_format_specific_coverage_file_suffix": "/baseio.cpp",
   "dependencies": [
     {
       "package": "numpy",
       "release": "2.5.4",
       "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
     }
-  ]
+  ],
+  "coverage_kind": "control_only",
+  "parser_feedback_available": false,
+  "native_parser_source_coverage": "unavailable",
+  "ply_plugin_sha256": "5bb48614839a1eebd01b9fa98e96ce878dfa770ca5bbb302c50a91a77bc36838",
+  "control_variant": "controls/ascii_ply/triangle-colour.ply",
+  "control_variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342"
 }

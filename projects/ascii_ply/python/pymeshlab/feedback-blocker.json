@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "native_feedback_unavailable",
+  "scope": "pymeshlab 2025.7.post1 MeshSet.load_new_mesh on valid ASCII PLY",
+  "wheel_sha256": "951fe5aeb3e92632f3db3a1a6525279b41e5d7191c6b9011429dbb0b67f2f0d3",
+  "ply_plugin": "/opt/venv/lib/python3.14/site-packages/pymeshlab/lib/plugins/libio_base.so",
+  "ply_plugin_sha256": "5bb48614839a1eebd01b9fa98e96ce878dfa770ca5bbb302c50a91a77bc36838",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "control_output": {"vertex_count": 3, "face_count": 1, "first_vertex": [0.0, 0.0, 0.0], "last_vertex": [0.0, 1.0, 0.0]},
+  "variant": "controls/ascii_ply/triangle-colour.ply",
+  "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+  "variant_output": {"vertex_count": 3, "face_count": 0, "first_vertex": [0.0, 0.0, 0.0], "last_vertex": [0.0, 1.0, 0.0]},
+  "afl_image": "aflplusplus/aflplusplus@sha256:d3e2dcafcfbc27bf6b6890e9f9a6e3c420737bb2dc3d8c29d33a76f9c108a090",
+  "probes": [
+    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a QEMU", "module_preloaded": true, "timeout_ms": 30000, "result": "Valid triangle target exited SIGSEGV and the map probe timed out."},
+    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a QEMU", "module_preloaded": false, "timeout_ms": 60000, "result": "Valid triangle target exited SIGSEGV and the map probe timed out."}
+  ],
+  "parser_source_lines_covered": null,
+  "native_feedback_edges": null,
+  "repeat_variant_map_check": "unavailable: the instrumented valid-control process did not complete",
+  "decision": "Keep this path staged as a verified Docker control. Maps from crashed or timed-out targets are excluded from feedback claims."
+}

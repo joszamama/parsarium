@@ -1,17 +1,15 @@
-# pymeshlab — ASCII PLY / Python
+# PyMeshLab — ASCII PLY / Python
 
-Pinned release: `2025.7.post1`. [Manifest](manifest.json) · [verification receipt](verification.json)
+PyMeshLab `2025.7.post1` is pinned in the [manifest](manifest.json). Its Docker control is verified, while native MeshLab parser feedback and source-line coverage are unavailable. See the [control receipt](control-verification.json), [feedback blocker](feedback-blocker.json), and [catalog API evidence](../../../../catalog/ascii_ply/python/pymeshlab/README.md).
 
-[API, control result, and parser family](../../../../catalog/ascii_ply/python/pymeshlab/README.md)
-
-## Run from the repository root
+From the repository root:
 
 ```sh
-python3 parsarium.py build ascii_ply python pymeshlab
-python3 parsarium.py run ascii_ply python pymeshlab controls/ascii_ply/triangle.ply
-python3 parsarium.py replay ascii_ply python pymeshlab CORPUS_DIR runs/ascii_ply-pymeshlab-replay
-python3 parsarium.py afl build ascii_ply python pymeshlab
-python3 parsarium.py afl prepare ascii_ply python pymeshlab runs/ascii_ply-pymeshlab-afl
+python3 projects/ascii_ply/python/pymeshlab/control.py verify
+python3 projects/ascii_ply/python/pymeshlab/control.py run controls/ascii_ply/triangle.ply
+python3 projects/ascii_ply/python/pymeshlab/control.py run YOUR_LOCAL_PLY_FILE
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+`MeshSet.load_new_mesh(local path)` parses the triangle control as three vertices and one face. The valid coloured PLY control loads as three vertices and no faces. The runner builds the pinned image and accepts a local PLY path.
+
+AFL++ QEMU terminated while loading a valid PLY on the tested amd64 image, with and without preloading MeshLab's `libio_base.so` importer. Python binding lines in the receipt are separate from native PLY parser coverage. This path is staged and has no verified AFL++ campaign overlay.

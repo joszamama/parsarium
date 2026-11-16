@@ -5,12 +5,12 @@ import adapter
 
 
 def parse_data(data: bytes):
-    if not data or len(data) > (1 << 20):
+    if not data:
         return None
     with tempfile.NamedTemporaryFile(suffix=".ply") as source:
         source.write(data)
         source.flush()
-        return adapter.parse('pymeshlab', source.name)
+        return adapter.read_mesh(Path(source.name))
 
 
 def fuzz_one_input(data: bytes):
