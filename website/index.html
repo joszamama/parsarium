@@ -4,70 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#171448">
-  <meta name="description" content="Parsarium is an open atlas of verified format parsers and runnable, coverage-aware harnesses across eight language ecosystems.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="assets/styles.css">
-  <title>Parsarium — The parser atlas</title>
+  <meta name="description" content="Parsarium maps verified format parsers to their real input APIs, controls, rankings, and runnable coverage-aware harnesses.">
+  <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg">
+  <link rel="stylesheet" href="{{ROOT}}assets/styles.css">
+  <title>Parsarium — The open parser atlas</title>
 </head>
-<body>
+<body data-page="home" data-root="{{ROOT}}">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="#top" aria-label="Parsarium home"><img class="brand-mark" src="favicon.svg" alt=""><span>parsarium<span class="brand-period">.</span></span></a>
-      <nav class="nav" aria-label="Main navigation"><a href="#formats">Formats</a><a href="#atlas">Atlas</a><a href="#specimen">Run a target</a><a href="#lab">Mini lab</a></nav>
-      <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">☰</span></button>
-      <a class="header-github" href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-    </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#formats">Formats</a><a href="#atlas">Atlas</a><a href="#specimen">Run a target</a><a href="#lab">Mini lab</a><a href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
-  </header>
-
+  <!-- SITE_HEADER -->
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> THE OPEN PARSER ATLAS</p>
-          <h1 id="hero-title">A field guide to<br><em>format parsers.</em></h1>
-          <p class="hero-lede">Explore the parser landscape across eight ecosystems. Compare adoption within each format and ecosystem cell, inspect parsing evidence, and take a pinned harness into your next experiment.</p>
-          <div class="hero-actions"><a class="button button-light" href="?runnable=1#atlas">Find a runnable target <span aria-hidden="true">↗</span></a><a class="text-link" href="#specimen">See a run <span aria-hidden="true">↗</span></a></div>
+          <h1 id="hero-title">Outside bytes.<br><em>Inside code.</em></h1>
+          <p class="hero-lede">A practical map of the libraries that turn files and streams into pixels, pages, tracks, messages, and meshes. Find a verified input API, inspect its control, then run a pinned harness.</p>
+          <div class="hero-actions"><a class="button button-light" href="{{ROOT}}atlas/?runnable=1">Explore the atlas <span aria-hidden="true">↗</span></a><a class="text-link" href="{{ROOT}}why/">Why focus on parsers? <span aria-hidden="true">↗</span></a></div>
         </div>
         <div class="hero-stamp" aria-hidden="true"><span>PAR<br>SE</span><i></i><small>FORMATS IN<br>THE WILD</small></div>
       </div>
       <div class="hero-ticker"><div class="ticker-inner container"><span><b id="stat-formats">10</b> formats</span><span><b id="stat-ecosystems">8</b> ecosystems</span><span><b id="stat-verified">{{VERIFIED}}</b> verified package paths</span><span><b id="stat-runnable">{{RUNNABLE}}</b> runnable targets</span></div></div>
-      <div class="format-wall container" id="formats">
-        <div class="format-wall-heading"><div><p class="section-kicker">THE FORMATS</p><h2>Pick a file type.</h2></div><p>The same format can meet very different code. Select one to explore its parser landscape.</p></div>
-        <div class="format-grid" id="format-grid" aria-live="polite"></div>
-        <p class="format-count-note">Runnable totals include verified standard and runtime APIs where available.</p>
-      </div>
     </section>
-
-    <section class="atlas-section section-pad" id="atlas" aria-labelledby="atlas-title"><div class="container">
-      <div class="section-heading atlas-heading"><div><p class="section-kicker">THE ATLAS</p><h2 id="atlas-title">Find your parser.</h2><p>Filter by format and ecosystem. Cards show the documented input API, shared parser family, and adoption rank within that cell. Metrics from different ecosystems are never compared.</p></div><span class="atlas-stamp" aria-hidden="true">80<br>CELLS</span></div>
-      <div class="readiness-strip" aria-label="What verified and runnable mean">
-        <div><div><strong>Verified third-party path</strong><p>A pinned API parsed a valid local control and has evidence in the catalog.</p></div></div>
-        <div><div><strong>Runnable target</strong><p>Docker harness, coverage receipt, AFL++ feedback, and corpus replay. Each guide states the coverage scope.</p></div></div>
-      </div>
-      <div class="atlas-toolbar">
-        <label class="search-label" for="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search parser, API, or family…" autocomplete="off"><span class="key-hint" aria-hidden="true">/</span></label>
-        <div class="filter-row"><label>Format <select id="format-filter"><option value="">All formats</option></select></label><label>Ecosystem <select id="ecosystem-filter"><option value="">All ecosystems</option></select></label><label class="check-filter"><input id="runnable-filter" type="checkbox"><span class="switch" aria-hidden="true"></span> Runnable only</label></div>
-      </div>
-      <div class="atlas-summary"><p id="result-count" aria-live="polite">Loading the atlas…</p><button id="clear-filters" class="clear-button" type="button">Clear filters <span aria-hidden="true">↺</span></button></div>
-      <div id="cell-note" class="cell-note" hidden></div><div id="parser-grid" class="parser-grid" aria-live="polite"></div>
-      <div class="load-wrap"><button id="load-more" class="button button-outline" type="button" hidden>Show more parsers <span aria-hidden="true">↓</span></button></div>
+    <section class="format-wall home-formats" id="formats" aria-labelledby="formats-title"><div class="container">
+      <div class="format-wall-heading"><div><p class="section-kicker">CHOOSE AN ENTRY POINT</p><h2 id="formats-title">Pick a format.</h2></div><p>Every tile opens a focused view of one format across its ecosystems.</p></div>
+      <div class="format-grid" id="format-grid" aria-live="polite"></div>
+      <p class="format-count-note">Runnable totals include verified standard and runtime APIs where available.</p>
     </div></section>
-
-    <section class="specimen-section section-pad" id="specimen" aria-labelledby="specimen-title"><div class="container specimen-layout">
-      <div class="specimen-intro"><p class="section-kicker">THE WORKBENCH</p><h2 id="specimen-title">Try a target.</h2><p>Choose <strong>Use this target</strong> on any runnable atlas card to get its exact commands and control result.</p><div class="setup-card"><strong>First run</strong><p>Install and start Docker, then clone the repository. The commands on this page run from its root.</p><div><code>git clone https://github.com/joszamama/parsarium.git &amp;&amp; cd parsarium</code><button type="button" data-copy="git clone https://github.com/joszamama/parsarium.git &amp;&amp; cd parsarium">Copy</button></div></div><p class="selector-label">Or start with a format example:</p><div class="specimen-selector" id="demo-tabs" role="tablist" aria-label="Choose a format for the run example"></div><p class="guide-link"><a id="format-guide" target="_blank" rel="noopener noreferrer">Read the format guide ↗</a></p><p class="specimen-disclaimer">The page shows saved evidence; parsers run locally in Docker.</p></div>
-      <div class="specimen-workbench" id="demo-panel" role="tabpanel" tabindex="0" aria-live="polite"></div>
-    </div></section>
-
-    <section class="lab-section section-pad" id="lab" aria-labelledby="lab-title"><div class="container">
-      <div class="section-heading lab-heading"><div><p class="section-kicker">THE MINI LAB</p><h2 id="lab-title">Decode a clue.</h2><p>One highlighted byte sequence from a real control. Choose what it means, then see a field the pinned parser returned.</p></div><span class="lesson-progress" id="lesson-progress" aria-live="polite">0 / 10 explored</span></div>
-      <div class="lesson-shell"><div class="lesson-tabs" id="lesson-tabs" role="group" aria-label="Choose a format lesson"></div><div class="lesson-body" id="lab-panel" aria-live="polite"></div></div>
-      <p class="lesson-note">The clue uses bytes from the linked valid control. Its result comes from a saved parser verification receipt; the quiz does not parse new files in the browser.</p>
+    <section class="home-paths section-pad" aria-labelledby="paths-title"><div class="container">
+      <div class="section-heading"><div><p class="section-kicker">GO FURTHER</p><h2 id="paths-title">Choose your route.</h2><p>Browse the evidence, run a target locally, or learn what a format-aware parse exposes.</p></div></div>
+      <div class="home-path-grid">
+        <a class="home-path" href="{{ROOT}}atlas/"><span>EXPLORE</span><strong>The atlas</strong><p>Search 80 format × ecosystem cells. Compare adoption only within a cell, and see what is still uncertain.</p><b aria-hidden="true">↗</b></a>
+        <a class="home-path" href="{{ROOT}}run/"><span>USE</span><strong>Run a target</strong><p>Copy exact Docker commands, inspect the valid control, and replay a corpus through a pinned harness.</p><b aria-hidden="true">↗</b></a>
+        <a class="home-path" href="{{ROOT}}lab/"><span>LEARN</span><strong>The live lab</strong><p>Type a command and watch real control bytes become a parsed result in your browser.</p><b aria-hidden="true">↗</b></a>
+      </div>
     </div></section>
   </main>
-  <footer class="site-footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="#top"><img class="brand-mark" src="favicon.svg" alt=""><span>parsarium<span class="brand-period">.</span></span></a><p>Explore. Run. Compare.</p></div><div class="footer-links"><a href="#formats">Formats</a><a href="#atlas">Atlas</a><a href="#specimen">Run a target</a><a href="#lab">Mini lab</a><a href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><p class="footer-note"><a href="https://github.com/joszamama/parsarium/blob/main/PROTOCOL.md" target="_blank" rel="noopener noreferrer">Selection protocol ↗</a></p></div></footer>
-  <!-- CATALOG_DATA -->
-  <script src="assets/app.js" defer></script>
+  <!-- SITE_FOOTER -->
+  <script src="{{ROOT}}assets/site.js" defer></script>
+  <script src="{{ROOT}}assets/app.js" defer></script>
 </body>
 </html>

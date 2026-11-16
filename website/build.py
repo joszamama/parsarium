@@ -444,20 +444,43 @@ def build(output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     catalog_json = json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
     (output / "catalog.json").write_text(catalog_json + "\n", encoding="utf-8")
-    html = (SITE / "index.html").read_text(encoding="utf-8")
-    marker = "<!-- CATALOG_DATA -->"
-    if html.count(marker) != 1:
-        raise ValueError("index.html must contain one catalog placeholder")
-    # Keep the JSON from terminating its own script element if catalog text contains HTML.
-    inline_json = catalog_json.replace("<", "\\u003c")
-    html = html.replace(marker, f'<script id="catalog-data" type="application/json">{inline_json}</script>')
-    html = html.replace("{{RUNNABLE}}", f"{catalog['summary']['runnable']:,}")
-    html = html.replace("{{VERIFIED}}", f"{catalog['summary']['verified']:,}")
-    (output / "index.html").write_text(html, encoding="utf-8")
+    def site_header(root: str, active: str) -> str:
+        links = [("Atlas", "atlas"), ("Run", "run"), ("Lab", "lab"), ("Why parsers?", "why")]
+        def nav_items() -> str:
+            return "".join(
+                f'<a href="{root}{route}/"{(" aria-current=\"page\"" if route == active else "")}>{label}</a>'
+                for label, route in links
+            )
+        return f'''<header class="site-header"><div class="container header-inner">
+          <a class="brand" href="{root or './'}" aria-label="Parsarium home"><span class="brand-mark" aria-hidden="true">P<span class="brand-period">.</span></span>Parsarium</a>
+          <nav class="nav" aria-label="Main navigation">{nav_items()}</nav>
+          <a class="header-github" href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+        </div><nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>{nav_items()}<a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>'''
+
+    def site_footer(root: str) -> str:
+        return f'''<footer class="site-footer"><div class="container footer-grid">
+          <div><a class="brand footer-brand" href="{root or './'}">Parsarium<span class="brand-period">.</span></a><p>The open parser atlas.</p></div>
+          <nav class="footer-links" aria-label="Footer navigation"><a href="{root}atlas/">Atlas</a><a href="{root}run/">Run</a><a href="{root}lab/">Lab</a><a href="{root}why/">Why parsers?</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+          <p class="footer-note">Verified input APIs. Pinned controls. Runnable harnesses.<br>Built from the repository evidence.</p>
+        </div></footer>'''
+
+    # Real static routes work when loaded directly or refreshed on GitHub Pages.
+    for page in ("index", "atlas", "run", "lab", "why"):
+        root = "" if page == "index" else "../"
+        html = (SITE / f"{page}.html").read_text(encoding="utf-8")
+        html = html.replace("<!-- SITE_HEADER -->", site_header(root, page))
+        html = html.replace("<!-- SITE_FOOTER -->", site_footer(root))
+        html = html.replace("{{ROOT}}", root)
+        html = html.replace("{{RUNNABLE}}", f"{catalog['summary']['runnable']:,}")
+        html = html.replace("{{VERIFIED}}", f"{catalog['summary']['verified']:,}")
+        destination = output if page == "index" else output / page
+        destination.mkdir(parents=True, exist_ok=True)
+        (destination / "index.html").write_text(html, encoding="utf-8")
     shutil.copyfile(SITE / "favicon.svg", output / "favicon.svg")
     assets = output / "assets"
     assets.mkdir(exist_ok=True)
-    for name in ("styles.css", "app.js"):
+    for name in ("styles.css", "app.js", "site.js", "lab.css", "lab.js"):
         shutil.copyfile(SITE / name, assets / name)
     print(f"Built {output}: {len(parsers)} verified paths, {len(cells)} cells, {len(manifests)} projects")
 

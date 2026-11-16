@@ -27,13 +27,12 @@ const artColors = {
 };
 
 let catalog;
+const siteRoot = document.body.dataset.root || "";
+const page = document.body.dataset.page;
 const pageSize = 18;
 let visible = pageSize;
 let activeDemoIndex = 0;
-let activeDemo = null;
 let activeTargetId = null;
-const exploredFormats = new Set();
-const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 function formatLabel(id) { return catalog.formats.find((format) => format.id === id)?.label ?? id; }
 function roundRobin(items, groupKey, keyOrder) {
   const groups = new Map();
@@ -72,13 +71,7 @@ function renderFormats() {
   $("#format-grid").addEventListener("click", (event) => {
     const button = event.target.closest("[data-format]");
     if (!button) return;
-    $("#format-filter").value = button.dataset.format;
-    $("#ecosystem-filter").value = "";
-    $("#search").value = "";
-    visible = pageSize;
-    renderAtlas();
-    showDemoForFormat(button.dataset.format);
-    $("#atlas").scrollIntoView({ behavior: reducedMotion() ? "instant" : "smooth" });
+    location.href = `${siteRoot}atlas/?format=${encodeURIComponent(button.dataset.format)}`;
   });
 }
 function currentFilters() {
@@ -95,9 +88,14 @@ function updateUrl(filters) {
   if (filters.ecosystem) params.set("ecosystem", filters.ecosystem);
   if (filters.query) params.set("q", filters.query);
   if (filters.runnable) params.set("runnable", "1");
-  if (activeTargetId) params.set("target", activeTargetId);
-  const url = `${location.pathname}${params.size ? `?${params}` : ""}${activeTargetId ? "#specimen" : location.hash}`;
+  const url = `${location.pathname}${params.size ? `?${params}` : ""}`;
   history.replaceState(null, "", url);
+}
+function updateRunUrl() {
+  const params = new URLSearchParams();
+  if (activeTargetId) params.set("target", activeTargetId);
+  else params.set("format", catalog.demos[activeDemoIndex].format);
+  history.replaceState(null, "", `${location.pathname}?${params}`);
 }
 function parserCard(parser) {
   const project = parser.projectUrl ? `<a href="${safeUrl(parser.projectUrl)}" target="_blank" rel="noopener noreferrer">Harness ↗</a>` : "";
@@ -172,23 +170,21 @@ function initAtlas() {
   ["format-filter", "ecosystem-filter", "runnable-filter"].forEach((id) => $(`#${id}`).addEventListener("change", () => {
     visible = pageSize;
     renderAtlas();
-    if (id === "format-filter" && $("#format-filter").value) showDemoForFormat($("#format-filter").value);
   }));
   $("#search").addEventListener("input", () => { visible = pageSize; renderAtlas(); });
   $("#clear-filters").addEventListener("click", () => {
     $("#format-filter").value = ""; $("#ecosystem-filter").value = ""; $("#search").value = ""; $("#runnable-filter").checked = false;
-    visible = pageSize; renderAtlas(); renderDemo(0);
+    visible = pageSize; renderAtlas();
   });
   $("#load-more").addEventListener("click", () => { visible += pageSize; renderAtlas(); });
   $("#parser-grid").addEventListener("click", (event) => {
     const button = event.target.closest("[data-use-target]");
     if (!button) return;
-    renderTarget(button.dataset.useTarget);
-    $("#specimen").scrollIntoView({ behavior: reducedMotion() ? "instant" : "smooth" });
+    location.href = `${siteRoot}run/?target=${encodeURIComponent(button.dataset.useTarget)}`;
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
-      event.preventDefault(); $("#search").focus(); $("#atlas").scrollIntoView({ behavior: reducedMotion() ? "instant" : "smooth" });
+      event.preventDefault(); $("#search").focus();
     }
   });
   renderAtlas();
@@ -214,7 +210,6 @@ function renderTarget(targetId) {
   renderWorkbench(demo, true);
 }
 function renderWorkbench(demo, selectedTarget) {
-  activeDemo = demo;
   const format = catalog.formats.find((item) => item.id === demo.format);
   $("#format-guide").href = safeUrl(format.guideUrl);
   $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
@@ -228,7 +223,7 @@ function renderWorkbench(demo, selectedTarget) {
   const afl = demo.aflCommands.map((command) => `<span>$</span> ${escapeHtml(command)}`).join("\n");
   const controlLink = selectedTarget
     ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(controlName)} ↗</a>`
-    : `<a href="${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a>`;
+    : `<a href="${siteRoot}${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a>`;
   const resultPreview = Object.fromEntries(Object.entries(demo.expectedOutput ?? {}).slice(0, 4));
   const coverageBadge = demo.coverageKind === "native_binary_edges"
     ? `${Number(demo.coverageTuples || 0).toLocaleString()} binary edge tuples · no source lines`
@@ -240,7 +235,7 @@ function renderWorkbench(demo, selectedTarget) {
       ${selectedTarget ? `<div class="selected-target-note"><span>Picked from the atlas</span><button type="button" id="restore-example">Show featured example ↺</button></div>` : ""}
       <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.projectGuideUrl)}" target="_blank" rel="noopener noreferrer">Harness guide ↗</a></div>
       <p class="target-api"><strong>Documented input API</strong><code>${escapeHtml(demo.inputApi)}</code></p>
-      <div class="result-preview"><div class="result-preview-head"><strong>Observed control result</strong><span>${escapeHtml(coverageBadge)}</span></div><pre>${escapeHtml(JSON.stringify(resultPreview))}</pre></div>
+      <div class="result-preview"><div class="result-preview-head"><strong>Observed control result · preview</strong><span>${escapeHtml(coverageBadge)}</span></div><pre>${escapeHtml(JSON.stringify(resultPreview))}</pre></div>
       <div class="run-step"><div class="run-step-head"><h4>Check the target</h4></div><p>Run its supplied valid control, ${controlLink} (${demo.bytes.toLocaleString()} bytes).</p>
         ${commandBlock("VALID CONTROL", demo.controlCommand, "control")}
         <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>${demo.coverageLimit ? `<p class="coverage-limit">Coverage scope: ${escapeHtml(demo.coverageLimit)}</p>` : ""}</details>
@@ -259,91 +254,7 @@ function renderWorkbench(demo, selectedTarget) {
     copyText(command, button);
   }));
   panel.querySelector("#restore-example")?.addEventListener("click", () => renderDemo(activeDemoIndex));
-  updateUrl(currentFilters());
-  renderLab();
-}
-function lessonDemo() {
-  return catalog.demos.find((demo) => demo.format === activeDemo.format);
-}
-function renderLab() {
-  const demo = lessonDemo();
-  const lesson = demo.lesson;
-  const format = formatLabel(demo.format);
-  const control = demo.control.split("/").pop();
-  const clueHex = lesson.tokens.filter((token) => token.focus).map((token) => token.hex).join(" ");
-  const tokens = lesson.tokens.map((token, index) => `<span class="lesson-byte ${token.focus ? "is-clue" : ""}" style="--i:${index}"><b>${token.hex}</b><small>${escapeHtml(token.ascii)}</small></span>`).join("");
-  $("#lesson-progress").textContent = `${exploredFormats.size} / ${catalog.formats.length} explored`;
-  $("#lesson-tabs").querySelectorAll("button").forEach((button) => {
-    const formatId = button.dataset.lessonFormat;
-    button.setAttribute("aria-pressed", String(formatId === demo.format));
-    button.classList.toggle("is-explored", exploredFormats.has(formatId));
-  });
-  $("#lab-panel").innerHTML = `
-    <div class="lesson-file">
-      <div class="lesson-file-head"><div><span class="lesson-overline">REAL CONTROL FILE</span><h3>${escapeHtml(control)}</h3><p>${escapeHtml(format)} · ${demo.bytes.toLocaleString()} bytes · ${escapeHtml(demo.package)} ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">Open file ↗</a></div>
-      <div class="lesson-hex" role="img" aria-label="Highlighted control bytes ${clueHex} at offset ${lesson.clueOffset}">
-        <div class="lesson-byte-grid" aria-hidden="true">${tokens}</div>
-      </div>
-      <p class="lesson-byte-label">Highlighted bytes start at offset <strong>${lesson.clueOffset}</strong>. The surrounding bytes come from the same pinned control.</p>
-    </div>
-    <div class="lesson-quiz">
-      <span class="lesson-overline">YOUR TURN</span><h3>${escapeHtml(lesson.question)}</h3>
-      <div class="lesson-choices">${lesson.choices.map((choice, index) => `<button type="button" data-choice="${index}">${escapeHtml(choice)}</button>`).join("")}</div>
-      <div class="lesson-quiz-foot"><p id="lesson-feedback" role="status">Choose an answer, or reveal the explanation.</p><button type="button" class="lesson-reveal" data-reveal>Reveal explanation</button></div>
-      <div class="lesson-outcome" id="lesson-outcome" hidden><strong>What the parser observed</strong><p>${escapeHtml(lesson.explanation)}</p><pre>${escapeHtml(JSON.stringify(lesson.output, null, 2))}</pre><button type="button" data-next-lesson>Try another format ↗</button></div>
-    </div>`;
-}
-function chooseLesson(format) {
-  const index = catalog.demos.findIndex((demo) => demo.format === format);
-  if (index < 0) return;
-  $("#format-filter").value = format;
-  visible = pageSize;
-  renderAtlas();
-  renderDemo(index);
-}
-function revealLesson() {
-  const demo = lessonDemo();
-  const lesson = demo.lesson;
-  exploredFormats.add(demo.format);
-  $("#lesson-progress").textContent = `${exploredFormats.size} / ${catalog.formats.length} explored`;
-  $("#lesson-tabs").querySelector(`[data-lesson-format="${demo.format}"]`)?.classList.add("is-explored");
-  $("#lab-panel").querySelectorAll("[data-choice]").forEach((button) => {
-    button.disabled = true;
-    if (Number(button.dataset.choice) === lesson.answer) button.classList.add("is-correct");
-  });
-  $("#lab-panel").querySelector("[data-reveal]").hidden = true;
-  $("#lesson-outcome").hidden = false;
-}
-function initLab() {
-  $("#lesson-tabs").innerHTML = catalog.demos.map((demo) => `<button type="button" data-lesson-format="${escapeHtml(demo.format)}" aria-pressed="false">${escapeHtml(formatLabel(demo.format))}</button>`).join("");
-  $("#lesson-tabs").addEventListener("click", (event) => {
-    const button = event.target.closest("[data-lesson-format]");
-    if (button) chooseLesson(button.dataset.lessonFormat);
-  });
-  $("#lab-panel").addEventListener("click", (event) => {
-    const choice = event.target.closest("[data-choice]");
-    if (choice) {
-      const correct = Number(choice.dataset.choice) === lessonDemo().lesson.answer;
-      if (correct) {
-        $("#lesson-feedback").textContent = "Exactly. The saved parser result is below.";
-        revealLesson();
-      } else {
-        choice.classList.add("is-wrong");
-        $("#lesson-feedback").textContent = "Look at the highlighted bytes and try another answer.";
-      }
-      return;
-    }
-    if (event.target.closest("[data-reveal]")) {
-      $("#lesson-feedback").textContent = "Explanation revealed.";
-      revealLesson();
-      return;
-    }
-    if (event.target.closest("[data-next-lesson]")) {
-      const next = (catalog.demos.findIndex((demo) => demo.format === activeDemo.format) + 1) % catalog.demos.length;
-      chooseLesson(catalog.demos[next].format);
-    }
-  });
-  renderLab();
+  updateRunUrl();
 }
 function initDemo() {
   $("#demo-tabs").innerHTML = catalog.demos.map((demo, index) => `<button type="button" role="tab" id="demo-tab-${index}" aria-controls="demo-panel" aria-selected="false">${escapeHtml(formatLabel(demo.format))}</button>`).join("");
@@ -352,9 +263,6 @@ function initDemo() {
     if (button) {
       const index = [...button.parentNode.children].indexOf(button);
       renderDemo(index);
-      $("#format-filter").value = catalog.demos[index].format;
-      visible = pageSize;
-      renderAtlas();
     }
   });
   $("#demo-tabs").addEventListener("keydown", (event) => {
@@ -366,49 +274,27 @@ function initDemo() {
     else if (event.key === "End") index = tabs.length - 1;
     else index = (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
     tabs[index].focus(); renderDemo(index);
-    $("#format-filter").value = catalog.demos[index].format;
-    visible = pageSize;
-    renderAtlas();
   });
-  showDemoForFormat($("#format-filter").value || catalog.demos[0].format);
-}
-function initMobileMenu() {
-  const toggle = $("#mobile-menu-toggle");
-  const menu = $("#mobile-nav");
-  const close = () => { menu.hidden = true; toggle.setAttribute("aria-expanded", "false"); };
-  toggle.addEventListener("click", () => {
-    const open = menu.hidden;
-    menu.hidden = !open;
-    toggle.setAttribute("aria-expanded", String(open));
-  });
-  menu.addEventListener("click", (event) => { if (event.target.closest("a")) close(); });
-  document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
-  matchMedia("(min-width: 801px)").addEventListener("change", (event) => { if (event.matches) close(); });
+  const initial = new URLSearchParams(location.search);
+  if (initial.get("target") && catalog.targets[initial.get("target")]) renderTarget(initial.get("target"));
+  else showDemoForFormat(initial.get("format") || catalog.demos[0].format);
 }
 async function start() {
   try {
-    const requestedTarget = new URLSearchParams(location.search).get("target");
-    const embedded = $("#catalog-data");
-    if (embedded) {
-      catalog = JSON.parse(embedded.textContent);
-    } else {
-      const response = await fetch("catalog.json", { cache: "no-store" });
-      if (!response.ok) throw new Error(`Catalog HTTP ${response.status}`);
-      catalog = await response.json();
-    }
-    $("#stat-verified").textContent = catalog.summary.verified.toLocaleString();
-    $("#stat-formats").textContent = catalog.summary.formats;
-    $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
-    $("#stat-runnable").textContent = catalog.summary.runnable;
-    renderFormats(); initAtlas(); initDemo(); initLab(); initMobileMenu();
-    if (requestedTarget && catalog.targets[requestedTarget]) renderTarget(requestedTarget);
+    const response = await fetch(`${siteRoot}catalog.json`);
+    if (!response.ok) throw new Error(`Catalog HTTP ${response.status}`);
+    catalog = await response.json();
+    if (page === "home") {
+      $("#stat-verified").textContent = catalog.summary.verified.toLocaleString();
+      $("#stat-formats").textContent = catalog.summary.formats;
+      $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
+      $("#stat-runnable").textContent = catalog.summary.runnable.toLocaleString();
+      renderFormats();
+    } else if (page === "atlas") initAtlas();
+    else if (page === "run") initDemo();
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
-    if (["#formats", "#atlas", "#specimen", "#lab"].includes(location.hash)) {
-      requestAnimationFrame(() => $(location.hash).scrollIntoView({ behavior: "instant" }));
-    }
   } catch (error) {
-    $("#format-grid").innerHTML = '<p>The catalog view could not start. <a href="">Reload the page</a> or open the <a href="catalog.json">catalog data</a>.</p>';
-    $("#result-count").textContent = "Catalog view unavailable.";
+    document.querySelector("main")?.insertAdjacentHTML("afterbegin", `<div class="container page-error" role="alert">The catalog view could not start. <a href="${siteRoot}catalog.json">Open the catalog data</a> or reload this page.</div>`);
     console.error(error);
   }
 }
