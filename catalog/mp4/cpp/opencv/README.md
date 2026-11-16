@@ -22,6 +22,11 @@
 
 The pinned libopencv_videoio dylib links the pinned FFmpeg libavformat and libavcodec libraries; this is a distinct C++ package API over the FFmpeg parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/cpp/opencv/README.md)
+
+```sh
+python3 parsarium.py build mp4 cpp opencv
+python3 parsarium.py run mp4 cpp opencv controls/mp4/red-av.mp4
+```

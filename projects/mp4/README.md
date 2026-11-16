@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [bento4 / C](c/bento4/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [gstreamer / C](c/gstreamer/README.md)
 - [libmediainfo / C](c/libmediainfo/README.md)
@@ -11,6 +12,7 @@
 - [exiv2 / C++](cpp/exiv2/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
+- [opencv / C++](cpp/opencv/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [github.com/Eyevinn/mp4ff/mp4 / Go](go/github_com_eyevinn_mp4ff_mp4/README.md)
 - [github.com/MStoykov/mp4 / Go](go/github_com_mstoykov_mp4/README.md)

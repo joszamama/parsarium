@@ -1,6 +1,6 @@
 # MP4 / C++
 
-10 verified third-party API paths; 4 have verified Docker harnesses.
+10 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/mp4/ranking.md) · [standard API inventory](../../../data/cpp/mp4/standard.json)
 
@@ -12,7 +12,7 @@
 - [vlc](vlc/README.md) — verified API path
 - [gpac](gpac/README.md) — verified API path
 - [taglib](taglib/README.md) — Docker harness ready
-- [opencv](opencv/README.md) — verified API path
+- [opencv](opencv/README.md) — Docker harness ready
 - [exiv2](exiv2/README.md) — Docker harness ready
 - [libheif](libheif/README.md) — verified API path
 - [libopenshot](libopenshot/README.md) — verified API path
