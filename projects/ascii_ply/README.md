@@ -6,6 +6,7 @@
 
 - [assetkit / C](c/assetkit/README.md)
 - [assimp / C](c/assimp/README.md)
+- [f3d / C](c/f3d/README.md)
 - [gmsh / C](c/gmsh/README.md)
 - [mdal / C](c/mdal/README.md)
 - [assimp / C++](cpp/assimp/README.md)
