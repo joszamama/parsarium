@@ -21,6 +21,11 @@
 
 Distinct 1.0.0 package with C callback/memory API and bundled zlib; its unzip.h credits Gilles Vollant and shares classic MiniZip lineage. Package license is Apache-2.0 with zlib-licensed bundled code. The C++ path reuses the exact C-cell source release and parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/unziplib/README.md)
+
+```sh
+python3 parsarium.py build zip cpp unziplib
+python3 parsarium.py run zip cpp unziplib controls/zip/hello.zip
+```

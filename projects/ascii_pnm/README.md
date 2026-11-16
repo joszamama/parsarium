@@ -5,8 +5,10 @@
 ## Targets
 
 - [leptonica / C](c/leptonica/README.md)
+- [libimago / C](c/libimago/README.md)
 - [libpnmio / C](c/libpnmio/README.md)
 - [libpnmrw / C](c/libpnmrw/README.md)
+- [cimg / C++](cpp/cimg/README.md)
 - [leptonica / C++](cpp/leptonica/README.md)
 - [libpnmrw / C++](cpp/libpnmrw/README.md)
 - [pnmpp / C++](cpp/pnmpp/README.md)

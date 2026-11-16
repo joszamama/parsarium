@@ -1,6 +1,6 @@
 # ASCII PNM / C++
 
-20 verified third-party API paths; 3 have verified Docker harnesses.
+20 verified third-party API paths; 4 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/ascii_pnm/ranking.md) · [standard API inventory](../../../data/cpp/ascii_pnm/standard.json)
 
@@ -24,7 +24,7 @@
 - [qtbase](qtbase/README.md) — verified API path
 - [wxwidgets](wxwidgets/README.md) — verified API path
 - [boost-gil](boost-gil/README.md) — verified API path
-- [cimg](cimg/README.md) — verified API path
+- [cimg](cimg/README.md) — Docker harness ready
 - [openimageio](openimageio/README.md) — verified API path
 
 ## Standard and runtime APIs

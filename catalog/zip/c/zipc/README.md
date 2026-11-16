@@ -19,6 +19,11 @@
 
 zipc parses ZIP container records itself and uses zlib for DEFLATE. Its public reading API opens a named entry; this path does not claim enumeration or an observed entry count.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/zipc/README.md)
+
+```sh
+python3 parsarium.py build zip c zipc
+python3 parsarium.py run zip c zipc controls/zip/hello.zip
+```

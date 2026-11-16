@@ -32,6 +32,11 @@
 
 CImg 4.0.5 misreads the original valid P3 control whose maxval occupies a separate line; a second valid P3 control with dimensions and maxval on the same line is used, and the limitation is not generalized to all P3 layouts.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/cimg/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp cimg
+python3 parsarium.py run ascii_pnm cpp cimg controls/ascii_pnm/red-green-inline.ppm
+```

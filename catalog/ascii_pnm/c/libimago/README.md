@@ -32,6 +32,11 @@
 
 libimago has its own PPM reader; optional PNG and JPEG dependencies are disabled in this build.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/c/libimago/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm c libimago
+python3 parsarium.py run ascii_pnm c libimago controls/ascii_pnm/red-green.ppm
+```
