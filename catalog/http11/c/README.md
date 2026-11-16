@@ -1,6 +1,6 @@
 # HTTP/1.1 / C
 
-10 verified third-party API paths; 7 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/http11/ranking.md) · [standard API inventory](../../../data/c/http11/standard.json)
 
@@ -9,8 +9,8 @@
 - [http-parser](http-parser/README.md) — Docker harness ready
 - [picohttpparser](picohttpparser/README.md) — Docker harness ready
 - [mongoose](mongoose/README.md) — Docker harness ready
-- [libmicrohttpd](libmicrohttpd/README.md) — verified API path
-- [libwebsockets](libwebsockets/README.md) — verified API path
+- [libmicrohttpd](libmicrohttpd/README.md) — Docker harness ready
+- [libwebsockets](libwebsockets/README.md) — Docker harness ready
 - [libsoup](libsoup/README.md) — Docker harness ready
 - [serf](serf/README.md) — Docker harness ready
 - [facil-legacy](facil-legacy/README.md) — verified API path
