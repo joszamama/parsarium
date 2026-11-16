@@ -1,6 +1,6 @@
 # ZIP / C
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/zip/ranking.md) · [standard API inventory](../../../data/c/zip/standard.json)
 
@@ -15,7 +15,7 @@
 - [zziplib](zziplib/README.md) — Docker harness ready
 - [unarr](unarr/README.md) — Docker harness ready
 - [physfs](physfs/README.md) — Docker harness ready
-- [sqlite](sqlite/README.md) — verified API path
+- [sqlite](sqlite/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

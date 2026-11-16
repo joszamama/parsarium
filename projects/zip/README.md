@@ -11,6 +11,7 @@
 - [miniz / C](c/miniz/README.md)
 - [minizip-ng / C](c/minizip-ng/README.md)
 - [physfs / C](c/physfs/README.md)
+- [sqlite / C](c/sqlite/README.md)
 - [unarr / C](c/unarr/README.md)
 - [zziplib / C](c/zziplib/README.md)
 - [kuba-zip / C++](cpp/kuba-zip/README.md)
