@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-const packagePrefix = "github.com/zhaofenghao/clash/listener/http/"
+const packagePrefix = "net/http/"
 const underlyingPrefix = "\x00"
 
 func main() {

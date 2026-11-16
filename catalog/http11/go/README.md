@@ -1,6 +1,6 @@
 # HTTP/1.1 / Go
 
-20 verified third-party API paths; 18 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/http11/ranking.md) · [standard API inventory](../../../data/go/http11/standard.json)
 
@@ -17,10 +17,10 @@
 - [github.com/gobwas/httphead](github-com-gobwas-httphead/README.md) — Docker harness ready
 - [github.com/lesismal/nbio/nbhttp](github-com-lesismal-nbio-nbhttp/README.md) — Docker harness ready
 - [github.com/lesismal/fib/http](github-com-lesismal-fib-http/README.md) — Docker harness ready
-- [github.com/antlabs/fio/http](github-com-antlabs-fio-http/README.md) — verified API path
+- [github.com/antlabs/fio/http](github-com-antlabs-fio-http/README.md) — Docker harness ready
 - [github.com/meta-apex/metarpc/codec/http](github-com-meta-apex-metarpc-codec-http/README.md) — Docker harness ready
 - [github.com/go-fasthttp/fasthttp](github-com-go-fasthttp-fasthttp/README.md) — Docker harness ready
-- [github.com/zhaofenghao/clash/listener/http](github-com-zhaofenghao-clash-listener-http/README.md) — verified API path
+- [github.com/zhaofenghao/clash/listener/http](github-com-zhaofenghao-clash-listener-http/README.md) — Docker harness ready
 - [github.com/lemon4ksan/mach/server/h1](github-com-lemon4ksan-mach-server-h1/README.md) — Docker harness ready
 - [github.com/antlabs/httparser](github-com-antlabs-httparser/README.md) — Docker harness ready
 - [github.com/hsiafan/httpdump/httpport](github-com-hsiafan-httpdump-httpport/README.md) — Docker harness ready

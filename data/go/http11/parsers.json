@@ -228,14 +228,14 @@
     "input_api": "ReadRequest(*bufio.Reader)",
     "documentation": "https://pkg.go.dev/github.com/zhaofenghao/clash/listener/http@v1.0.14",
     "scope": "request message",
-    "family": "Go net/http fork or wrapper",
+    "family": "Go net/http stdlib parser exposed through Clash linkname alias",
     "expected_output": {
       "method": "GET",
       "target": "/parsarium?x=1",
       "host": "example.test",
       "proto": "HTTP/1.1"
     },
-    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+    "family_note": "Clash v1.0.14 declares ReadRequest with //go:linkname to net/http.readRequest; the package API executes the Go runtime parser. Coverage and AFL++ feedback therefore target net/http source, and this row is not an independent parser engine."
   },
   {
     "name": "github.com/lemon4ksan/mach/server/h1",

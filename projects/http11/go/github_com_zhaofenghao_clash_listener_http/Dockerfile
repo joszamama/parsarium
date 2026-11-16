@@ -4,7 +4,7 @@ COPY go.mod go.sum ./
 RUN go mod download \
     && echo 'd56d13bf912ee76d1f3930d6c4808d9daa7576387b652a6a75a0869d9c32e8f2  /go/pkg/mod/cache/download/github.com/zhaofenghao/clash/@v/v1.0.14.zip' | sha256sum --check
 COPY adapter.go harness_test.go ./
-RUN CGO_ENABLED=0 go test -c -coverpkg=github.com/zhaofenghao/clash/listener/http -o /work/harness.test .
+RUN CGO_ENABLED=0 go test -c -coverpkg=net/http -o /work/harness.test .
 COPY reporter/main.go ./reporter/main.go
 RUN CGO_ENABLED=0 go build -o /work/reporter-bin ./reporter
 

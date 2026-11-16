@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66 AS build
+FROM --platform=linux/amd64 golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66 AS build
 WORKDIR /work
 COPY go.mod go.sum ./
 RUN go mod download \
