@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare svg java imageio_native_vips runs/svg-imageio_n
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** JaCoCo and AFL++ trace the ImageIO Vips Java adapter. The system libvips/librsvg SVG parser is not source-instrumented in this path.

@@ -19,6 +19,13 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/java/imageio_native_vips/README.md)
+
+```sh
+python3 parsarium.py build svg java imageio_native_vips
+python3 parsarium.py run svg java imageio_native_vips controls/svg/red-green.svg
+```
+
+**Coverage limit:** JaCoCo and AFL++ trace the ImageIO Vips Java adapter. The system libvips/librsvg SVG parser is not source-instrumented in this path.

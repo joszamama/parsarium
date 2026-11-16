@@ -49,6 +49,7 @@
 - [fop-core / Java](java/fop_core/README.md)
 - [gsvg / Java](java/gsvg/README.md)
 - [imageio-batik / Java](java/imageio_batik/README.md)
+- [imageio-native-vips / Java](java/imageio_native_vips/README.md)
 - [itext-svg / Java](java/itext_svg/README.md)
 - [jSVGIcon / Java](java/jsvgicon/README.md)
 - [jairosvg / Java](java/jairosvg/README.md)

@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9 AS build
+FROM --platform=linux/arm64 eclipse-temurin@sha256:9c0e8eddecccc0d5679b317b0c90fa7103ad25cae33df1c00280675eb681c7f8 AS build
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends curl unzip \
     && rm -rf /var/lib/apt/lists/*
@@ -22,10 +22,11 @@ COPY VipsSvgAdapter.java GenericHarness.java /work/src/
 RUN mkdir /work/classes && javac -cp '/work/lib/*' -d /work/classes /work/src/*.java \
     && { java -version 2>&1 | head -1; /work/jazzer --version 2>&1 | head -1; } > /work/toolchain.txt
 
-FROM --platform=linux/arm64 eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9
+FROM --platform=linux/arm64 eclipse-temurin@sha256:9c0e8eddecccc0d5679b317b0c90fa7103ad25cae33df1c00280675eb681c7f8
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 libvips42t64=8.15.1-1.1build4 librsvg2-2=2.58.0+dfsg-1ubuntu0.1 \
     && rm -rf /var/lib/apt/lists/*
+ENV JAVA_TOOL_OPTIONS="-Dimageio.native.vips.lib=/usr/lib/aarch64-linux-gnu/libvips.so.42 --enable-native-access=ALL-UNNAMED"
 WORKDIR /work
 COPY --from=build /work/classes /work/classes
 COPY --from=build /work/lib /work/lib

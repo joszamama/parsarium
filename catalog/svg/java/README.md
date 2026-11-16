@@ -1,6 +1,6 @@
 # SVG / Java
 
-20 verified third-party API paths; 15 have verified Docker harnesses.
+20 verified third-party API paths; 16 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/svg/ranking.md) · [standard API inventory](../../../data/java/svg/standard.json)
 
@@ -16,7 +16,7 @@
 - [imageio-batik](imageio-batik/README.md) — Docker harness ready
 - [jSVGIcon](jsvgicon/README.md) — Docker harness ready
 - [jairosvg](jairosvg/README.md) — Docker harness ready
-- [imageio-native-vips](imageio-native-vips/README.md) — verified API path
+- [imageio-native-vips](imageio-native-vips/README.md) — Docker harness ready
 - [echosvg-anim](echosvg-anim/README.md) — verified API path
 - [echosvg-transcoder-svg](echosvg-transcoder-svg/README.md) — verified API path
 - [echosvg-swing](echosvg-swing/README.md) — verified API path

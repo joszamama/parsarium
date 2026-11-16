@@ -7,8 +7,8 @@
   "catalog_parser": "data/java/svg/parsers.json",
   "source_lock": "projects/svg/java/imageio_native_vips/source-lock.json",
   "source_sha256": "9d31ca47bd27ef2710657efd8a16103970ecb2a7ee78e9218c8b809c4f9190a8",
-  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
-  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "base_image": "eclipse-temurin@sha256:9c0e8eddecccc0d5679b317b0c90fa7103ad25cae33df1c00280675eb681c7f8",
+  "runtime_base_image": "eclipse-temurin@sha256:9c0e8eddecccc0d5679b317b0c90fa7103ad25cae33df1c00280675eb681c7f8",
   "platform": "linux/arm64",
   "tmpfs_exec": true,
   "control": "controls/svg/red-green.svg",
@@ -30,5 +30,7 @@
   ],
   "fuzz_smoke_expect": "Usage:",
   "coverage": "JaCoCo bytecode coverage of io.github.ghosthack:imageio-native-vips:2.0.0 during valid-control replay; Jazzer fuzz entry",
-  "coverage_subject_prefix": "/work/parser-source/"
+  "coverage_subject_prefix": "/work/parser-source/",
+  "external_parser": "Ubuntu libvips42t64 8.15.1-1.1build4 with librsvg2-2 2.58.0+dfsg-1ubuntu0.1",
+  "coverage_limit": "JaCoCo and AFL++ trace the ImageIO Vips Java adapter. The system libvips/librsvg SVG parser is not source-instrumented in this path."
 }
