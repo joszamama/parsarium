@@ -19,6 +19,11 @@
 
 Direct or transitive PDF.js use, fork, or redistribution; package count does not imply an independent parser engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/javascript/unpdf/README.md)
+
+```sh
+python3 parsarium.py build pdf javascript unpdf
+python3 parsarium.py run pdf javascript unpdf controls/pdf/one-page.pdf
+```
