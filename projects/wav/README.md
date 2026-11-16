@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [aubio / C](c/aubio/README.md)
 - [dr_wav / C](c/dr_wav/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [libaudiofile / C](c/libaudiofile/README.md)
@@ -17,6 +18,7 @@
 - [sdl3_mixer / C](c/sdl3_mixer/README.md)
 - [sdl3_sound / C](c/sdl3_sound/README.md)
 - [sox / C](c/sox/README.md)
+- [aubio / C++](cpp/aubio/README.md)
 - [dr_wav / C++](cpp/dr_wav/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [libaudiofile / C++](cpp/libaudiofile/README.md)

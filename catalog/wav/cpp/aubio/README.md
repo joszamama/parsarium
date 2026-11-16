@@ -27,6 +27,11 @@
 
 Distinct C package source API; installed build links Apple AudioToolbox and libsndfile. The exact backend chosen for this control was not isolated, so parser-engine independence is not claimed. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/aubio/README.md)
+
+```sh
+python3 parsarium.py build wav cpp aubio
+python3 parsarium.py run wav cpp aubio controls/wav/four-samples.wav
+```

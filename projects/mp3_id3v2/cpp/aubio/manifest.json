@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "cpp",
+  "package": "aubio",
+  "release": "0.4.9",
+  "catalog_parser": "data/cpp/mp3_id3v2/parsers.json",
+  "source_lock": "data/cpp/mp3_id3v2/source-lock.json",
+  "source_sha256": "d48282ae4dab83b3dc94c16cf011bcb63835c1c02b515490e1883049c3d1f3da",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "decoded_samples": 256
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in aubio MP3 source frontend over libsndfile through the C++ adapter",
+  "coverage_subject_prefix": "/work/source/src/",
+  "format_specific_coverage_file_suffix": "/source_sndfile.c",
+  "build_patch": "Bundled Waf uses Python imp.new_module and rU open mode removed in current Python. Replace them with types.ModuleType and r without changing parser logic."
+}

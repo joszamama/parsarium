@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [aubio / C](c/aubio/README.md)
 - [dr_libs / C](c/dr_libs/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [lame / C](c/lame/README.md)
@@ -16,6 +17,7 @@
 - [sdl_mixer / C](c/sdl_mixer/README.md)
 - [sox / C](c/sox/README.md)
 - [taglib / C](c/taglib/README.md)
+- [aubio / C++](cpp/aubio/README.md)
 - [dr_libs / C++](cpp/dr_libs/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [lame / C++](cpp/lame/README.md)

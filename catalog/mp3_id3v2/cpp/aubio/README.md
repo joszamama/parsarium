@@ -21,6 +21,11 @@
 
 Pinned source.c tries Apple AudioToolbox before libsndfile on this macOS build, and installed libaubio links both. The adapter does not reveal which backend succeeded; exact underlying decoder family remains unresolved. C and C++ share one aubio C implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/aubio/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp aubio
+python3 parsarium.py run mp3_id3v2 cpp aubio controls/mp3_id3v2/tone-tags.mp3
+```
