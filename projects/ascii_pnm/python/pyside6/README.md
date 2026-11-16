@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare ascii_pnm python pyside6 runs/ascii_pnm-pyside6
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Feedback scope:** AFL++ observes edges in the pinned `libQt6Gui.so.6` shared library. This target does not claim source-line coverage. The verification receipt records the module hash and differential valid-control check.

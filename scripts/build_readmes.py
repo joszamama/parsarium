@@ -258,6 +258,13 @@ def main() -> None:
                   "seeded run; it does not start a campaign.", ""]
         if manifest.get("coverage_limit"):
             lines += [f"**Coverage limit:** {manifest['coverage_limit']}", ""]
+        if manifest.get("coverage_kind") == "native_binary_edges":
+            module = Path(manifest["binary_feedback_module"]).name
+            lines += [
+                f"**Feedback scope:** AFL++ observes edges in the pinned `{module}` shared library. "
+                "This target does not claim source-line coverage. The verification receipt records "
+                "the module hash and differential valid-control check.", "",
+            ]
         generated[project_dir / "README.md"] = "\n".join(lines)
 
     index_path = ROOT / "data/parser-readmes.json"
