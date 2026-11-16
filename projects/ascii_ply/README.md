@@ -4,7 +4,9 @@
 
 ## Targets
 
+- [assimp / C](c/assimp/README.md)
 - [mdal / C](c/mdal/README.md)
+- [assimp / C++](cpp/assimp/README.md)
 - [libigl / C++](cpp/libigl/README.md)
 - [open-mesh / C++](cpp/open_mesh/README.md)
 - [github.com/EliCDavis/polyform/formats/ply / Go](go/polyform_ply/README.md)

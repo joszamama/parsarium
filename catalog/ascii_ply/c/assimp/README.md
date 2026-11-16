@@ -26,6 +26,11 @@
 
 C and C++ Assimp APIs share the same native PLY loader.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/assimp/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c assimp
+python3 parsarium.py run ascii_ply c assimp controls/ascii_ply/triangle.ply
+```
