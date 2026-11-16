@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "cpp",
+  "package": "csfml",
+  "release": "3.0.0",
+  "catalog_parser": "data/cpp/mp3_id3v2/parsers.json",
+  "source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "source_sha256": "903cd4a782fb0b233f732dc5b37861b552998e93ae8f268c40bd4ce50b2e88ca",
+  "underlying_source_sha256": "0034e05f95509e5d3fb81b1625713e06da7b068f210288ce3fd67106f8f46995",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "samples": 8000,
+    "sample_rate": 8000,
+    "channels": 1
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned CSFML binding and underlying SFML SoundFileReaderMp3.cpp",
+  "coverage_subject_prefix": "/work/source/",
+  "underlying_coverage_subject_prefix": "/work/source/sfml/src/SFML/Audio/",
+  "format_specific_coverage_file_suffix": "/SoundFileReaderMp3.cpp"
+}

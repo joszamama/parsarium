@@ -5,6 +5,7 @@
 ## Targets
 
 - [aubio / C](c/aubio/README.md)
+- [csfml / C](c/csfml/README.md)
 - [dr_libs / C](c/dr_libs/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [gstreamer / C](c/gstreamer/README.md)
@@ -20,6 +21,7 @@
 - [sox / C](c/sox/README.md)
 - [taglib / C](c/taglib/README.md)
 - [aubio / C++](cpp/aubio/README.md)
+- [csfml / C++](cpp/csfml/README.md)
 - [dr_libs / C++](cpp/dr_libs/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
@@ -32,6 +34,7 @@
 - [mpg123 / C++](cpp/mpg123/README.md)
 - [sdl2_sound / C++](cpp/sdl2_sound/README.md)
 - [sdl_mixer / C++](cpp/sdl_mixer/README.md)
+- [sfml / C++](cpp/sfml/README.md)
 - [sox / C++](cpp/sox/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [github.com/ascherkus/go-id3/src/id3 / Go](go/github_com_ascherkus_go_id3_src_id3/README.md)

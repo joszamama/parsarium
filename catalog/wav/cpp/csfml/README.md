@@ -27,6 +27,11 @@
 
 Official C binding around SFML SoundBuffer. The installed CSFML and SFML audio binaries are both SHA-256-checked; this shares SFML parser implementation rather than adding a new engine. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/csfml/README.md)
+
+```sh
+python3 parsarium.py build wav cpp csfml
+python3 parsarium.py run wav cpp csfml controls/wav/four-samples.wav
+```

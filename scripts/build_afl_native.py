@@ -56,12 +56,14 @@ def derived_dockerfile(project: Path) -> str:
             "&& chmod +x /work/build.sh && /work/build.sh",
             1,
         )
-    if project.name == "gstreamer":
-        # GStreamer builds its shared parser plugins before the harness. Keep
-        # the source build as a reusable Docker layer, compiled by AFL++ too.
+    if project.name in {"gstreamer", "sfml", "csfml"}:
+        # Build shared parser libraries with AFL++ before linking the harness.
+        # The source build remains a reusable Docker layer.
         source_rewrite = (
             "RUN python3 -c 'from pathlib import Path; p=Path(\"/work/build-source.sh\"); "
-            "s=p.read_text().replace(\"clang\",\"afl-clang-fast\"); p.write_text(s)' "
+            "s=p.read_text().replace(\"clang++\",\"AFL_CXX\")"
+            ".replace(\"clang\",\"afl-clang-fast\")"
+            ".replace(\"AFL_CXX\",\"afl-clang-fast++\"); p.write_text(s)' "
             "&& chmod +x /work/build-source.sh && /work/build-source.sh"
         )
         text = text.replace(
@@ -69,6 +71,14 @@ def derived_dockerfile(project: Path) -> str:
             source_rewrite,
             1,
         )
+        if project.name == "csfml":
+            csfml_rewrite = source_rewrite.replace("build-source.sh", "build-csfml.sh")
+            text = text.replace(
+                "RUN chmod +x /work/build-csfml.sh && /work/build-csfml.sh",
+                csfml_rewrite,
+                1,
+            )
+    if project.name == "gstreamer":
         plugins = (
             "app", "audioconvert", "audioparsers", "coreelements",
             "id3demux", "isomp4", "playback", "pnm", "typefindfunctions",

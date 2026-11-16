@@ -5,6 +5,7 @@
 ## Targets
 
 - [aubio / C](c/aubio/README.md)
+- [csfml / C](c/csfml/README.md)
 - [dr_wav / C](c/dr_wav/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [gstreamer / C](c/gstreamer/README.md)
@@ -20,6 +21,7 @@
 - [sdl3_sound / C](c/sdl3_sound/README.md)
 - [sox / C](c/sox/README.md)
 - [aubio / C++](cpp/aubio/README.md)
+- [csfml / C++](cpp/csfml/README.md)
 - [dr_wav / C++](cpp/dr_wav/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
@@ -33,6 +35,7 @@
 - [sdl3 / C++](cpp/sdl3/README.md)
 - [sdl3_mixer / C++](cpp/sdl3_mixer/README.md)
 - [sdl3_sound / C++](cpp/sdl3_sound/README.md)
+- [sfml / C++](cpp/sfml/README.md)
 - [sox / C++](cpp/sox/README.md)
 - [azul3d.org/engine/audio/wav / Go](go/azul3d_org_engine_audio_wav/README.md)
 - [github.com/200sc/klangsynthese/wav / Go](go/github_com_200sc_klangsynthese_wav/README.md)

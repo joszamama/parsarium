@@ -22,6 +22,11 @@
 
 The pinned SFML SoundFileReaderMp3.cpp uses bundled minimp3. CSFML 3.0.0 is a separate package wrapper over this same SFML engine; both C++ rows share the decoder family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/sfml/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp sfml
+python3 parsarium.py run mp3_id3v2 cpp sfml controls/mp3_id3v2/tone-tags.mp3
+```

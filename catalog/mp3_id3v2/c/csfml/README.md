@@ -21,6 +21,11 @@
 
 The CSFML C API delegates to the SFML C++ audio core, using its SoundFileReaderMp3 and bundled minimp3. C and C++ CSFML calls share the same library, and SFML is also counted separately in C++ as a distinct upstream package/API wrapper relation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/csfml/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c csfml
+python3 parsarium.py run mp3_id3v2 c csfml controls/mp3_id3v2/tone-tags.mp3
+```
