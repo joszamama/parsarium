@@ -41,6 +41,7 @@
 - [sdl2_image / C++](cpp/sdl2_image/README.md)
 - [sdl3 / C++](cpp/sdl3/README.md)
 - [sdl3_image / C++](cpp/sdl3_image/README.md)
+- [sfml / C++](cpp/sfml/README.md)
 - [stb / C++](cpp/stb/README.md)
 - [vips / C++](cpp/vips/README.md)
 - [wuffs / C++](cpp/wuffs/README.md)

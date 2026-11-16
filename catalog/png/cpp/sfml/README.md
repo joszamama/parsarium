@@ -32,6 +32,11 @@
 
 The pinned Image.cpp embeds stb_image and calls stbi_load_from_callbacks; this shares decoder lineage with the verified stb and raylib paths.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/cpp/sfml/README.md)
+
+```sh
+python3 parsarium.py build png cpp sfml
+python3 parsarium.py run png cpp sfml controls/png/red-green.png
+```

@@ -1,6 +1,6 @@
 # PNG / C++
 
-24 verified third-party API paths; 20 have verified Docker harnesses.
+24 verified third-party API paths; 21 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/png/ranking.md) · [standard API inventory](../../../data/cpp/png/standard.json)
 
@@ -26,7 +26,7 @@
 - [devil](devil/README.md) — Docker harness ready
 - [imlib2](imlib2/README.md) — Docker harness ready
 - [wuffs](wuffs/README.md) — Docker harness ready
-- [sfml](sfml/README.md) — verified API path
+- [sfml](sfml/README.md) — Docker harness ready
 - [opencv](opencv/README.md) — verified API path
 - [openimageio](openimageio/README.md) — verified API path
 - [wxwidgets](wxwidgets/README.md) — verified API path
