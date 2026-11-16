@@ -1,12 +1,12 @@
 # ASCII PLY / JavaScript
 
-20 verified third-party API paths; 18 have verified Docker harnesses.
+20 verified third-party API paths; 19 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/ascii_ply/ranking.md) · [standard API inventory](../../../data/javascript/ascii_ply/standard.json)
 
 ## Third-party parsers
 
-- [three](three/README.md) — verified API path
+- [three](three/README.md) — Docker harness ready
 - [three-stdlib](three-stdlib/README.md) — Docker harness ready
 - [@loaders.gl/ply](loaders-gl-ply/README.md) — Docker harness ready
 - [parse-ply](parse-ply/README.md) — Docker harness ready

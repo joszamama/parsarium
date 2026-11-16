@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "c",
+  "package": "jasper",
+  "release": "4.2.9",
+  "catalog_parser": "data/c/ascii_pnm/parsers.json",
+  "source_lock": "data/c/ascii_pnm/source-lock.json",
+  "source_sha256": "f71cf643937a5fcaedcfeb30a22ba406912948ad4413148214df280afc425454",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [255, 0, 0],
+    "second": [0, 255, 0]
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in JasPer 4.2.9 native PNM decoder reached by P3 byte-input harness",
+  "coverage_subject_prefix": "/work/source/src/libjasper/",
+  "format_specific_coverage_file_suffix": "/src/libjasper/pnm/pnm_dec.c",
+  "native_codec_scope": "Only the JasPer PNM codec is enabled in the source build."
+}

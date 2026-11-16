@@ -6,12 +6,12 @@ The catalog records 163 verified third-party API paths across eight ecosystems. 
 
 | Ecosystem | Verified paths | Docker harnesses |
 | --- | ---: | ---: |
-| [C](c/README.md) | 20 | 17 |
+| [C](c/README.md) | 20 | 19 |
 | [C++](cpp/README.md) | 20 | 17 |
 | [Go](go/README.md) | 20 | 20 |
 | [Java](java/README.md) | 20 | 18 |
-| [JavaScript](javascript/README.md) | 22 | 21 |
-| [Python](python/README.md) | 20 | 4 |
+| [JavaScript](javascript/README.md) | 22 | 22 |
+| [Python](python/README.md) | 20 | 5 |
 | [Rust](rust/README.md) | 21 | 18 |
 | [PHP](php/README.md) | 20 | 20 |
 

@@ -1,12 +1,12 @@
 # ASCII PNM / JavaScript
 
-22 verified third-party API paths; 21 have verified Docker harnesses.
+22 verified third-party API paths; 22 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/ascii_pnm/ranking.md) · [standard API inventory](../../../data/javascript/ascii_pnm/standard.json)
 
 ## Third-party parsers
 
-- [image-size](image-size/README.md) — verified API path
+- [image-size](image-size/README.md) — Docker harness ready
 - [netpbm-parser](netpbm-parser/README.md) — Docker harness ready
 - [pgmjs](pgmjs/README.md) — Docker harness ready
 - [@lp-labs/ppm-image-codec](lp-labs-ppm-image-codec/README.md) — Docker harness ready

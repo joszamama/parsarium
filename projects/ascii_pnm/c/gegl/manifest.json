@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "c",
+  "package": "gegl",
+  "release": "0.4.72",
+  "catalog_parser": "data/c/ascii_pnm/parsers.json",
+  "source_lock": "data/c/ascii_pnm/source-lock.json",
+  "source_sha256": "ccbb8cdd1db56ecd4ece5dbabae0118ab2c46b5b3439c94f3cec467798ce956d",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [255, 0, 0],
+    "second": [0, 255, 0]
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in GEGL 0.4.72 ppm-load plugin reached by P3 byte-input harness",
+  "coverage_subject_prefix": "/work/source/operations/external/",
+  "format_specific_coverage_file_suffix": "/operations/external/ppm-load.c",
+  "native_codec_scope": "GEGL is built from its pinned source; feedback is scoped to its ppm-load plugin, not unrelated image operations.",
+  "libfuzzer_scope": "The libFuzzer target uses ASan/UBSan-instrumented GEGL shared libraries; package-specific edge feedback is provided by the separate AFL++ ppm-load build."
+}
