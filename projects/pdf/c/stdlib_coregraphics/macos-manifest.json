@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "status": "staged_macos_host_control_only",
+  "format": "pdf",
+  "ecosystem": "c",
+  "api": "macOS Core Graphics CGPDFDocument",
+  "input_api": "CFURLCreateFromFileSystemRepresentation(local path); CGPDFDocumentCreateWithURL(CFURLRef); CGPDFDocumentGetNumberOfPages",
+  "runtime": "ISO/IEC 9899:2024 C standard library and macOS Core Graphics platform runtime",
+  "standard_inventory": "data/c/pdf/standard.json",
+  "catalog": "catalog/pdf/c/standard/macos-core-graphics-cgpdfdocument/README.md",
+  "evidence_adapter": "adapters/c/pdf/coregraphics.c",
+  "evidence_adapter_sha256": "24d247fbec00e0d5b803e1346af73b67b5706e85708822f6f907d2e4c5dec6e2",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "replay.c",
+  "build": "build-macos.sh",
+  "execution": "macos_host",
+  "container": "unavailable: Core Graphics is a closed macOS system framework and does not run in a Linux Docker image",
+  "toolchain": {
+    "os_version": "27.2",
+    "os_build": "26B123",
+    "arch": "arm64",
+    "developer_dir": "/Library/Developer/CommandLineTools",
+    "command_line_tools": "27.2.0.0.1792721180",
+    "xcode": "not installed; Command Line Tools only",
+    "sdk_version": "27.2",
+    "sdk_build": "26B118",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+    "core_graphics_tbd_sha256": "a05cac0d6dcef8e21dfbc086bbc9051554266170d6b0133ad96142d9a99cc3e1"
+  },
+  "coverage_kind": "macos_host_control_only",
+  "parser_source_coverage": "unavailable: Core Graphics source is not public",
+  "parser_feedback_available": false,
+  "afl_feedback": "unavailable: no source instrumentation; binary-only AFL++ modes are not set up for macOS system frameworks"
+}
