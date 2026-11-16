@@ -22,6 +22,11 @@
 
 SDL_sound is a separate upstream package from SDL_mixer. Its MP3 decoder embeds dr_mp3, also used by miniaudio and represented directly by dr_libs. C and C++ adapters share the same engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/sdl2_sound/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp sdl2_sound
+python3 parsarium.py run mp3_id3v2 cpp sdl2_sound controls/mp3_id3v2/tone-tags.mp3
+```

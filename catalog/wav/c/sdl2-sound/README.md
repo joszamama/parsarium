@@ -27,6 +27,11 @@
 
 SDL2_sound ships an internal WAVE decoder in the SDL_sound upstream family. SDL2_sound and SDL3_sound are separate major-version packages/APIs but share decoder lineage and upstream star count. This Homebrew binary links sdl2-compat and macOS AudioToolbox; the adapter observed its Microsoft WAVE decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/sdl2_sound/README.md)
+
+```sh
+python3 parsarium.py build wav c sdl2_sound
+python3 parsarium.py run wav c sdl2_sound controls/wav/four-samples.wav
+```
