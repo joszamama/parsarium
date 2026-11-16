@@ -48,6 +48,42 @@ def browser_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
+def native_source_control_verified(path: Path, manifest: dict) -> bool:
+    """Validate a staged native parser source control without AFL feedback."""
+    if (manifest.get("coverage_kind") != "native_source_control_only"
+            or manifest.get("parser_feedback_available") is not False
+            or "fuzz_engine" in manifest or "fuzz_engine_sha256" in manifest):
+        return False
+    receipt = path.parent / "control-verification.json"
+    if not receipt.is_file():
+        return False
+    observed = json.loads(receipt.read_text())
+    current_files = {
+        str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+        for file in sorted(path.parent.rglob("*"))
+        if file.is_file() and file.name not in {"control-verification.json", "README.md"}
+        and "target" not in file.relative_to(path.parent).parts
+        and "__pycache__" not in file.relative_to(path.parent).parts
+    }
+    return (
+        observed.get("status") == "verified_control_only"
+        and observed.get("api") == manifest["api"]
+        and observed.get("runtime") == manifest["runtime"]
+        and observed.get("base_image") == manifest["base_image"]
+        and observed.get("source_sha256") == manifest["source_sha256"]
+        and observed.get("python_source_sha256") == manifest["python_source_sha256"]
+        and observed.get("png_reader_source_sha256") == manifest["png_reader_source_sha256"]
+        and observed.get("image_id", "").startswith("sha256:")
+        and observed.get("output") == manifest["expected_output"]
+        and observed.get("control_sha256") == manifest["control_sha256"]
+        and sha256((ROOT / manifest["control"]).read_bytes()).hexdigest() == manifest["control_sha256"]
+        and observed.get("parser_source_file") == "tkImgPNG.c"
+        and observed.get("parser_source_lines_covered", 0) > 0
+        and observed.get("parser_feedback_available") is False
+        and observed.get("project_file_sha256") == current_files
+    )
+
+
 @cache
 def smoke_rows(filename: str) -> dict[str, dict]:
     report = json.loads((ROOT / "data" / filename).read_text())
@@ -229,6 +265,11 @@ def main() -> None:
                 if not browser_control_verified(path, manifest):
                     raise ValueError(f"browser control receipt mismatch: {path}")
                 pinned_fields = ("base_image", "source_sha256")
+            elif manifest.get("coverage_kind") == "native_source_control_only":
+                if not native_source_control_verified(path, manifest):
+                    raise ValueError(f"native source control receipt mismatch: {path}")
+                pinned_fields = ("base_image", "source_sha256", "python_source_sha256",
+                                 "png_reader_source_sha256")
             else:
                 pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")
             if any(manifest[field] not in docker_text for field in pinned_fields):

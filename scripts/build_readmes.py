@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import re
 
-from audit_projects import browser_control_verified, fully_runnable
+from audit_projects import browser_control_verified, native_source_control_verified, fully_runnable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,11 +75,14 @@ def main() -> None:
     projects = {}
     standard_projects = {}
     staged_browser_projects = {}
+    staged_native_source_projects = {}
     project_guides = 0
     for path in manifest_paths:
         manifest = read(path)
         if manifest.get("kind") == "standard" and browser_control_verified(path, manifest):
             staged_browser_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+        if manifest.get("kind") == "standard" and native_source_control_verified(path, manifest):
+            staged_native_source_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
         if not fully_runnable(path, manifest):
             continue
         project_guides += 1
@@ -209,6 +212,14 @@ def main() -> None:
                               "```", "",
                               "The browser runs this control, but its native parser source coverage and "
                               "AFL++ parser feedback are unavailable. This path remains staged.", ""]
+                elif staged := staged_native_source_projects.get((fmt, eco, item.get("api"))):
+                    lines += ["## Run this control", "",
+                              f"[Docker harness and control receipt]({link(item_dir, staged.parent / 'README.md')})", "",
+                              "```sh",
+                              f"python3 {staged.parent.relative_to(ROOT)}/verify-control.py",
+                              "```", "",
+                              "Tk's native PNG reader has measured source coverage on this control. "
+                              "AFL++ parser feedback is unavailable, so this path remains staged.", ""]
                 else:
                     lines += ["## Runnable harness", "",
                               "A Docker harness with parser-source coverage has not yet been verified for this API path.", ""]
