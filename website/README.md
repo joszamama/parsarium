@@ -11,7 +11,7 @@ python3 website/build.py
 python3 -m http.server 8765 --directory website/dist
 ```
 
-Open `http://localhost:8765/`. The build checks the catalog's 80 cell counts and parser guide links, embeds the catalog in the built page, and copies one valid control for each of the ten formats. Atlas cards show the recorded within-cell adoption rank and metric, leaving unknown values unranked. Every runnable card opens target-specific commands and saved control evidence in section 03. Section 04 follows the selected file through generation, parsing, verification, and replay. Its parser result and covered-line count come from committed control receipts. The website does not execute parsers in the browser.
+Open `http://localhost:8765/`. The build checks the catalog's 80 cell counts and parser guide links, embeds the catalog in the built page, and copies one valid control for each of the ten formats. The format wall filters the atlas and updates the example. Atlas cards show recorded within-cell adoption ranks and metrics, leaving unknown values unranked. Every runnable card opens target-specific commands and saved control evidence in the workbench. The receipt walkthrough follows the selected target through control input, parser API, observed result, and corpus replay. The website does not execute parsers in the browser.
 
 ## Publish on GitHub Pages
 

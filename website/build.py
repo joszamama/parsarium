@@ -251,7 +251,12 @@ def build(output: Path) -> None:
             "bytes": control_path.stat().st_size,
             "expectedOutput": manifest["expected_output"],
             "coverageLines": verification["parser_source_lines_covered"],
-            "coverageLimit": manifest.get("coverage_limit") or manifest.get("underlying_coverage_limitation"),
+            "coverageKind": verification.get("coverage_kind", "source_lines"),
+            "coverageTuples": (verification.get("binary_feedback") or {}).get("control_tuples"),
+            "coverageLimit": manifest.get("coverage_limit") or manifest.get("underlying_coverage_limitation") or (
+                "AFL++ edge feedback is scoped to the pinned underlying shared library; source-line coverage is unavailable."
+                if verification.get("coverage_kind") == "native_binary_edges" else None
+            ),
             "projectGuideUrl": record["projectUrl"],
             "controlCommand": f"python3 parsarium.py run {target_args} {manifest['control']} --results {run_dir}-control",
             "inputCommand": f"python3 parsarium.py run {target_args} INPUT_FILE --results {run_dir}-single",
@@ -312,6 +317,8 @@ def build(output: Path) -> None:
             "bytes": len(data),
             "expectedOutput": manifest["expected_output"],
             "coverageLines": verification["parser_source_lines_covered"],
+            "coverageKind": verification.get("coverage_kind", "source_lines"),
+            "coverageTuples": (verification.get("binary_feedback") or {}).get("control_tuples"),
             "manifestUrl": repo_link(source),
             "projectGuideUrl": repo_link(str((ROOT / source).parent.relative_to(ROOT) / "README.md")),
             "controlCommand": f"python3 parsarium.py run {target} {manifest['control']} --results {run_dir}-control",

@@ -10,16 +10,16 @@ const safeUrl = (value) => {
 };
 const ecoLabel = { c: "C", cpp: "C++", go: "Go", java: "Java", javascript: "JavaScript", python: "Python", rust: "Rust", php: "PHP" };
 const formatGlyphs = {
-  png: '<rect x="54" y="16" width="88" height="70" rx="4" fill="#fff8e8" stroke="#14251f" stroke-width="2"/><rect x="63" y="25" width="70" height="52" fill="#f5efdf"/><rect x="63" y="25" width="35" height="26" fill="#fa7454"/><rect x="98" y="51" width="35" height="26" fill="#b9db79"/><circle cx="113" cy="36" r="10" fill="#14251f"/><path d="M63 77 83 52l18 25" fill="none" stroke="#14251f" stroke-width="3"/>',
-  zip: '<rect x="55" y="19" width="87" height="68" rx="5" fill="#fff6e5" stroke="#14251f" stroke-width="2"/><path d="M55 41h87M55 64h87" stroke="#14251f" stroke-width="2"/><path d="M88 19v68" stroke="#14251f" stroke-width="2" stroke-dasharray="5 4"/><rect x="79" y="45" width="18" height="15" rx="2" fill="#ff6b42" stroke="#14251f" stroke-width="2"/>',
-  mp4: '<rect x="48" y="19" width="100" height="68" rx="5" fill="#14251f"/><rect x="58" y="30" width="80" height="46" rx="2" fill="#f7e7be"/><path d="m94 39 20 14-20 14Z" fill="#ff6b42"/><path d="M61 19v10m17-10v10m17-10v10m17-10v10m17-10v10" stroke="#f7e7be" stroke-width="4"/>',
-  wav: '<path d="M40 52h15m4-16v32m9-43v54m9-36v18m9-40v62m9-46v28m9-34v40m9-22v8m9-30v50m9-38v26m9-17h16" fill="none" stroke="#14251f" stroke-width="4" stroke-linecap="round"/><circle cx="98" cy="52" r="47" fill="none" stroke="#14251f" stroke-width="2" stroke-dasharray="3 5"/>',
-  pdf: '<path d="M62 14h59l17 18v58H62Z" fill="#fff8ed" stroke="#14251f" stroke-width="2"/><path d="M121 14v18h17" fill="#f5ceb5" stroke="#14251f" stroke-width="2"/><path d="M72 47h56M72 56h47M72 65h54M72 74h27" stroke="#14251f" stroke-width="3"/><rect x="75" y="22" width="23" height="13" fill="#ff6b42"/>',
-  svg: '<circle cx="98" cy="52" r="39" fill="#fff7e4" stroke="#14251f" stroke-width="2"/><path d="M62 70q28-56 68 0" fill="none" stroke="#ff6b42" stroke-width="5"/><circle cx="62" cy="70" r="6" fill="#14251f"/><circle cx="98" cy="27" r="6" fill="#14251f"/><circle cx="130" cy="70" r="6" fill="#14251f"/>',
-  http11: '<rect x="47" y="19" width="103" height="69" rx="4" fill="#fff8ed" stroke="#14251f" stroke-width="2"/><path d="M47 34h103" stroke="#14251f" stroke-width="2"/><circle cx="57" cy="27" r="3" fill="#ff6b42"/><circle cx="67" cy="27" r="3" fill="#e3c560"/><circle cx="77" cy="27" r="3" fill="#9ac466"/><path d="M59 47h30m-30 11h73M59 69h56" stroke="#14251f" stroke-width="3"/><rect x="102" y="42" width="29" height="11" fill="#b7da81"/>',
-  ascii_ply: '<path d="m96 15 45 70H51Z" fill="#f7ead0" stroke="#14251f" stroke-width="2"/><path d="m96 15 6 42-51 28m51-28 39 28" fill="none" stroke="#14251f" stroke-width="2"/><circle cx="96" cy="15" r="5" fill="#ff6b42"/><circle cx="102" cy="57" r="5" fill="#ff6b42"/><circle cx="51" cy="85" r="5" fill="#ff6b42"/><circle cx="141" cy="85" r="5" fill="#ff6b42"/>',
-  ascii_pnm: '<rect x="54" y="17" width="92" height="72" fill="#fff8ea" stroke="#14251f" stroke-width="2"/><path d="M77 17v72m23-72v72m23-72v72M54 41h92M54 65h92" stroke="#14251f" stroke-width="2"/><rect x="55" y="18" width="21" height="22" fill="#ff6b42"/><rect x="101" y="42" width="21" height="22" fill="#d6ee7f"/><rect x="124" y="66" width="21" height="22" fill="#a6c9e5"/>',
-  mp3_id3v2: '<circle cx="98" cy="52" r="42" fill="#14251f"/><circle cx="98" cy="52" r="27" fill="none" stroke="#6f846f" stroke-width="2"/><circle cx="98" cy="52" r="13" fill="#ff6b42"/><circle cx="98" cy="52" r="4" fill="#fff8e8"/><path d="m130 17 17 20" stroke="#14251f" stroke-width="5" stroke-linecap="round"/><circle cx="147" cy="38" r="5" fill="#14251f"/>'
+  png: '<rect x="54" y="16" width="88" height="70" rx="4" fill="#f8f9ff" stroke="#171448" stroke-width="2"/><rect x="63" y="25" width="70" height="52" fill="#f5efdf"/><rect x="63" y="25" width="35" height="26" fill="#fa7454"/><rect x="98" y="51" width="35" height="26" fill="#b9db79"/><circle cx="113" cy="36" r="10" fill="#171448"/><path d="M63 77 83 52l18 25" fill="none" stroke="#171448" stroke-width="3"/>',
+  zip: '<rect x="55" y="19" width="87" height="68" rx="5" fill="#fff6e5" stroke="#171448" stroke-width="2"/><path d="M55 41h87M55 64h87" stroke="#171448" stroke-width="2"/><path d="M88 19v68" stroke="#171448" stroke-width="2" stroke-dasharray="5 4"/><rect x="79" y="45" width="18" height="15" rx="2" fill="#ff6877" stroke="#171448" stroke-width="2"/>',
+  mp4: '<rect x="48" y="19" width="100" height="68" rx="5" fill="#171448"/><rect x="58" y="30" width="80" height="46" rx="2" fill="#f7e7be"/><path d="m94 39 20 14-20 14Z" fill="#ff6877"/><path d="M61 19v10m17-10v10m17-10v10m17-10v10m17-10v10" stroke="#f7e7be" stroke-width="4"/>',
+  wav: '<path d="M40 52h15m4-16v32m9-43v54m9-36v18m9-40v62m9-46v28m9-34v40m9-22v8m9-30v50m9-38v26m9-17h16" fill="none" stroke="#171448" stroke-width="4" stroke-linecap="round"/><circle cx="98" cy="52" r="47" fill="none" stroke="#171448" stroke-width="2" stroke-dasharray="3 5"/>',
+  pdf: '<path d="M62 14h59l17 18v58H62Z" fill="#fff8ed" stroke="#171448" stroke-width="2"/><path d="M121 14v18h17" fill="#f5ceb5" stroke="#171448" stroke-width="2"/><path d="M72 47h56M72 56h47M72 65h54M72 74h27" stroke="#171448" stroke-width="3"/><rect x="75" y="22" width="23" height="13" fill="#ff6877"/>',
+  svg: '<circle cx="98" cy="52" r="39" fill="#fff7e4" stroke="#171448" stroke-width="2"/><path d="M62 70q28-56 68 0" fill="none" stroke="#ff6877" stroke-width="5"/><circle cx="62" cy="70" r="6" fill="#171448"/><circle cx="98" cy="27" r="6" fill="#171448"/><circle cx="130" cy="70" r="6" fill="#171448"/>',
+  http11: '<rect x="47" y="19" width="103" height="69" rx="4" fill="#fff8ed" stroke="#171448" stroke-width="2"/><path d="M47 34h103" stroke="#171448" stroke-width="2"/><circle cx="57" cy="27" r="3" fill="#ff6877"/><circle cx="67" cy="27" r="3" fill="#e3c560"/><circle cx="77" cy="27" r="3" fill="#9ac466"/><path d="M59 47h30m-30 11h73M59 69h56" stroke="#171448" stroke-width="3"/><rect x="102" y="42" width="29" height="11" fill="#b7da81"/>',
+  ascii_ply: '<path d="m96 15 45 70H51Z" fill="#f7ead0" stroke="#171448" stroke-width="2"/><path d="m96 15 6 42-51 28m51-28 39 28" fill="none" stroke="#171448" stroke-width="2"/><circle cx="96" cy="15" r="5" fill="#ff6877"/><circle cx="102" cy="57" r="5" fill="#ff6877"/><circle cx="51" cy="85" r="5" fill="#ff6877"/><circle cx="141" cy="85" r="5" fill="#ff6877"/>',
+  ascii_pnm: '<rect x="54" y="17" width="92" height="72" fill="#fff8ea" stroke="#171448" stroke-width="2"/><path d="M77 17v72m23-72v72m23-72v72M54 41h92M54 65h92" stroke="#171448" stroke-width="2"/><rect x="55" y="18" width="21" height="22" fill="#ff6877"/><rect x="101" y="42" width="21" height="22" fill="#ffe05c"/><rect x="124" y="66" width="21" height="22" fill="#62d9e8"/>',
+  mp3_id3v2: '<circle cx="98" cy="52" r="42" fill="#171448"/><circle cx="98" cy="52" r="27" fill="none" stroke="#6f846f" stroke-width="2"/><circle cx="98" cy="52" r="13" fill="#ff6877"/><circle cx="98" cy="52" r="4" fill="#f8f9ff"/><path d="m130 17 17 20" stroke="#171448" stroke-width="5" stroke-linecap="round"/><circle cx="147" cy="38" r="5" fill="#171448"/>'
 };
 const artColors = {
   png:"#f9d7b8", zip:"#c7d9f0", mp4:"#e4ccf0", wav:"#d5ebaa", pdf:"#ffd5c4",
@@ -34,7 +34,26 @@ let activeDemo = null;
 let activeTargetId = null;
 let labStep = 0;
 let labTimer = null;
+const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 function formatLabel(id) { return catalog.formats.find((format) => format.id === id)?.label ?? id; }
+function roundRobin(items, groupKey, keyOrder) {
+  const groups = new Map();
+  for (const item of items) {
+    const key = groupKey(item);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(item);
+  }
+  const queues = keyOrder
+    ? [...keyOrder.map((key) => groups.get(key)).filter(Boolean),
+       ...[...groups].filter(([key]) => !keyOrder.includes(key)).map(([, group]) => group)]
+    : [...groups.values()];
+  const ordered = [];
+  let remaining = items.length;
+  while (remaining) for (const group of queues) {
+    if (group.length) { ordered.push(group.shift()); remaining -= 1; }
+  }
+  return ordered;
+}
 function announceCopy(button, label) {
   const old = button.textContent;
   button.textContent = label;
@@ -49,7 +68,7 @@ function renderFormats() {
   $("#format-grid").innerHTML = catalog.formats.map((format) => `
     <button class="format-card" type="button" data-format="${escapeHtml(format.id)}" aria-label="Explore ${escapeHtml(format.label)} parsers">
       <span class="format-art" style="background:${artColors[format.id]}"><svg viewBox="0 0 196 104" aria-hidden="true">${formatGlyphs[format.id]}</svg></span>
-      <span class="format-content"><span class="format-category">${escapeHtml(format.category)}</span><span class="format-name">${escapeHtml(format.label)} <span aria-hidden="true">↗</span></span><span class="format-count"><b>${format.verified}</b> third-party paths · <b>${format.runnable}</b> runnable targets</span></span>
+      <span class="format-content"><span class="format-category">${escapeHtml(format.category)}</span><span class="format-name">${escapeHtml(format.label)}</span><span class="format-count"><b>${format.verified}</b> third-party paths · <b>${format.runnable}</b> runnable targets</span></span>
     </button>`).join("");
   $("#format-grid").addEventListener("click", (event) => {
     const button = event.target.closest("[data-format]");
@@ -57,11 +76,10 @@ function renderFormats() {
     $("#format-filter").value = button.dataset.format;
     $("#ecosystem-filter").value = "";
     $("#search").value = "";
-    $("#runnable-filter").checked = false;
     visible = pageSize;
     renderAtlas();
     showDemoForFormat(button.dataset.format);
-    $("#atlas").scrollIntoView({ behavior: "smooth" });
+    $("#atlas").scrollIntoView({ behavior: reducedMotion() ? "instant" : "smooth" });
   });
 }
 function currentFilters() {
@@ -106,7 +124,7 @@ function renderAtlas() {
   const pool = filters.runnable
     ? catalog.parsers.filter((parser) => parser.projectUrl).concat(catalog.standardTargets)
     : catalog.parsers;
-  const result = pool.filter((parser) => {
+  let result = pool.filter((parser) => {
     if (filters.format && parser.format !== filters.format) return false;
     if (filters.ecosystem && parser.ecosystem !== filters.ecosystem) return false;
     if (filters.query) {
@@ -115,8 +133,19 @@ function renderAtlas() {
     }
     return true;
   });
+  if (!filters.format) {
+    const cellOrder = [];
+    for (let offset = 0; offset < catalog.ecosystems.length; offset += 1) {
+      catalog.formats.forEach((format, index) => cellOrder.push(
+        `${format.id}/${catalog.ecosystems[(index + offset) % catalog.ecosystems.length]}`
+      ));
+    }
+    result = roundRobin(result, (parser) => `${parser.format}/${parser.ecosystem}`, cellOrder);
+  }
+  else if (!filters.ecosystem) result = roundRobin(result, (parser) => parser.ecosystem);
   const shown = result.slice(0, visible);
-  $("#result-count").textContent = `Showing ${shown.length.toLocaleString()} of ${result.length.toLocaleString()} ${filters.runnable ? "runnable targets" : "verified package paths"}`;
+  const view = !filters.format ? " · across formats and ecosystems" : !filters.ecosystem ? " · across ecosystems" : "";
+  $("#result-count").textContent = `Showing ${shown.length.toLocaleString()} of ${result.length.toLocaleString()} ${filters.runnable ? "runnable targets" : "verified package paths"}${view}`;
   $("#parser-grid").innerHTML = shown.length ? shown.map(parserCard).join("") : '<div class="empty-state">No parsers match those filters. Try another format, ecosystem, or search term.</div>';
   $("#load-more").hidden = shown.length >= result.length;
   const note = $("#cell-note");
@@ -156,11 +185,11 @@ function initAtlas() {
     const button = event.target.closest("[data-use-target]");
     if (!button) return;
     renderTarget(button.dataset.useTarget);
-    $("#specimen").scrollIntoView({ behavior: "smooth" });
+    $("#specimen").scrollIntoView({ behavior: reducedMotion() ? "instant" : "smooth" });
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
-      event.preventDefault(); $("#search").focus(); $("#atlas").scrollIntoView();
+      event.preventDefault(); $("#search").focus(); $("#atlas").scrollIntoView({ behavior: reducedMotion() ? "instant" : "smooth" });
     }
   });
   renderAtlas();
@@ -203,20 +232,26 @@ function renderWorkbench(demo, selectedTarget) {
   const controlLink = selectedTarget
     ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(controlName)} ↗</a>`
     : `<a href="${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a>`;
+  const resultPreview = Object.fromEntries(Object.entries(demo.expectedOutput ?? {}).slice(0, 4));
+  const coverageBadge = demo.coverageKind === "native_binary_edges"
+    ? `${Number(demo.coverageTuples || 0).toLocaleString()} binary edge tuples · no source lines`
+    : Number.isInteger(demo.coverageLines)
+      ? `${demo.coverageLines.toLocaleString()} package-source lines covered`
+      : "See guide for coverage scope";
   panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / ${selectedTarget ? "YOUR SELECTED TARGET" : "FEATURED EXAMPLE"}</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="workbench-body">
       ${selectedTarget ? `<div class="selected-target-note"><span>Picked from the atlas</span><button type="button" id="restore-example">Show featured example ↺</button></div>` : ""}
       <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.projectGuideUrl)}" target="_blank" rel="noopener noreferrer">Harness guide ↗</a></div>
       <p class="target-api"><strong>Documented input API</strong><code>${escapeHtml(demo.inputApi)}</code></p>
-      <div class="workbench-flow"><span>Input file(s)</span><b aria-hidden="true">→</b><span>Parser harness</span><b aria-hidden="true">→</b><span>Run receipts</span></div>
-      <div class="run-step"><div class="run-step-head"><span>01</span><h4>Check the target</h4></div><p>Run its supplied valid control, ${controlLink} (${demo.bytes.toLocaleString()} bytes).</p>
+      <div class="result-preview"><div class="result-preview-head"><strong>Observed control result</strong><span>${escapeHtml(coverageBadge)}</span></div><pre>${escapeHtml(JSON.stringify(resultPreview))}</pre></div>
+      <div class="run-step"><div class="run-step-head"><h4>Check the target</h4></div><p>Run its supplied valid control, ${controlLink} (${demo.bytes.toLocaleString()} bytes).</p>
         ${commandBlock("VALID CONTROL", demo.controlCommand, "control")}
         <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>${demo.coverageLimit ? `<p class="coverage-limit">Coverage scope: ${escapeHtml(demo.coverageLimit)}</p>` : ""}</details>
       </div>
-      <div class="run-step"><div class="run-step-head"><span>02</span><h4>Run your file</h4></div><p>Replace <code>INPUT_FILE</code> with a local file of the same format.</p>
+      <div class="run-step"><div class="run-step-head"><h4>Run your file</h4></div><p>Replace <code>INPUT_FILE</code> with a local file of the same format.</p>
         ${commandBlock("ONE INPUT", demo.inputCommand, "input")}
       </div>
-      <div class="run-step"><div class="run-step-head"><span>03</span><h4>Replay a corpus</h4></div><p>Replace <code>CORPUS_DIR</code> with a directory of files from Fandango, another generator, or your own collection. Parsarium records each run.</p>
+      <div class="run-step"><div class="run-step-head"><h4>Replay a corpus</h4></div><p>Replace <code>CORPUS_DIR</code> with a directory of files from Fandango, another generator, or your own collection. Parsarium records each run.</p>
         ${commandBlock("MANY INPUTS", demo.replayCommand, "replay")}
         <details class="afl-details"><summary>Use AFL++ with this target</summary><p>Build the instrumented image, prepare its valid seed, then run a short campaign.</p><pre><code>${afl}</code></pre><button type="button" data-command="afl">Copy AFL++ commands</button></details>
       </div>
@@ -234,7 +269,7 @@ function stopLab() {
   if (labTimer !== null) clearInterval(labTimer);
   labTimer = null;
   const button = $("#lab-play");
-  if (button) button.innerHTML = 'Play walkthrough <span aria-hidden="true">▶</span>';
+  if (button) { button.hidden = reducedMotion(); button.innerHTML = 'Play walkthrough <span aria-hidden="true">▶</span>'; }
 }
 function renderLab() {
   const demo = activeDemo;
@@ -252,11 +287,16 @@ function renderLab() {
     ascii_pnm: "ASCII PNM readers use the magic number, dimensions, and sample values to build an image.",
     mp3_id3v2: "MP3 with ID3v2 readers interpret tag headers and frames before exposing audio metadata."
   };
+  const coverageObservation = demo.coverageKind === "native_binary_edges"
+    ? `The control produced format-specific fields and recorded <strong>${Number(demo.coverageTuples || 0).toLocaleString()} AFL++ edge tuples</strong> inside a pinned native parser module. This is binary feedback, not source-line coverage. See the harness guide for the measured scope.`
+    : Number.isInteger(demo.coverageLines)
+      ? `The control produced format-specific fields and covered <strong>${demo.coverageLines.toLocaleString()} package-source lines</strong>. See the harness guide for what was instrumented; this control does not establish support for every variant.`
+      : `The control produced format-specific fields. See the harness guide for its coverage receipt and measurement limits.`;
   const steps = [
-    {title: "A complete input file", tag: "GENERATOR → FILE", body: `A generator such as Fandango writes complete ${format} files when a matching spec is available. This repository also includes a small valid control: <strong>${escapeHtml(control)}</strong> (${demo.bytes.toLocaleString()} bytes). The generator supplies bytes; it does not report what a parser understood.`, detail: activeTargetId ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">Open this control ↗</a>` : `<a href="${escapeHtml(demo.controlUrl)}" download>Download this control ↓</a>`},
-    {title: "A named parser API", tag: "FILE → PARSER", body: `The pinned <strong>${escapeHtml(demo.package)}</strong> release ${escapeHtml(demo.release)} receives that file through a documented local input API. ${formatClues[demo.format]} The Docker harness invokes this package path.`, detail: `<code>${escapeHtml(demo.inputApi)}</code>`},
-    {title: "Proof from a valid control", tag: "PARSER → OBSERVATION", body: `Control verification observed these format-specific fields and recorded <strong>${demo.coverageLines.toLocaleString()} covered package-source lines</strong>. The linked harness guide identifies the instrumented code. Some native decoders are prebuilt and outside source coverage. This valid input does not establish support for every variant.`, detail: `<pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>`},
-    {title: "A replay you can inspect", tag: "CORPUS → RECEIPTS", body: `Parsarium can replay a directory of ${format} files through the same target. It keeps input hashes, per-input execution receipts, and a summary. AFL++ can instead generate inputs and use parser feedback to steer its search. A successful harness exit alone does not prove the parser accepted every file.`, detail: `<code>${escapeHtml(demo.replayCommand)}</code>`}
+    {title: "A file the parser understands", tag: "CONTROL FILE", body: `The small valid control <strong>${escapeHtml(control)}</strong> (${demo.bytes.toLocaleString()} bytes) establishes a baseline for this ${format} target. Generators such as Fandango can supply further files when a matching format spec is available.`, detail: activeTargetId ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">Open this control ↗</a>` : `<a href="${escapeHtml(demo.controlUrl)}" download>Download this control ↓</a>`},
+    {title: "A specific input API", tag: "PARSER ENTRY", body: `Pinned release <strong>${escapeHtml(demo.package)} ${escapeHtml(demo.release)}</strong> receives the file through the documented API below. ${formatClues[demo.format]}`, detail: `<code>${escapeHtml(demo.inputApi)}</code>`},
+    {title: "An observable result", tag: "COVERAGE RECEIPT", body: coverageObservation, detail: `<pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>`},
+    {title: "A repeatable experiment", tag: "CORPUS REPLAY", body: `Replay a directory of ${format} files through this target. Receipts keep input hashes and per-input outcomes. AFL++ uses parser feedback to explore further inputs. The parser's reported result matters more than a successful harness exit.`, detail: `<code>${escapeHtml(demo.replayCommand)}</code>`}
   ];
   const current = steps[labStep];
   $("#lab-context").textContent = `${format} · ${demo.package} · ${demo.ecosystem.toUpperCase()} ${activeTargetId ? "selected target" : "example"}`;
@@ -266,6 +306,7 @@ function renderLab() {
   $("#lab-next").disabled = labStep === steps.length - 1;
 }
 function initLab() {
+  $("#lab-play").hidden = reducedMotion();
   $("#lab-stage").addEventListener("click", (event) => {
     const button = event.target.closest("[data-lab-step]");
     if (!button) return;
@@ -275,6 +316,7 @@ function initLab() {
   });
   $("#lab-next").addEventListener("click", () => { stopLab(); labStep = Math.min(labStep + 1, 3); renderLab(); });
   $("#lab-play").addEventListener("click", () => {
+    if (reducedMotion()) return;
     if (labTimer !== null) { stopLab(); return; }
     labStep = 0;
     renderLab();
@@ -345,7 +387,7 @@ async function start() {
     renderFormats(); initAtlas(); initDemo(); initLab(); initMobileMenu();
     if (requestedTarget && catalog.targets[requestedTarget]) renderTarget(requestedTarget);
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
-    if (["#formats", "#atlas", "#specimen", "#lab", "#how-it-works"].includes(location.hash)) {
+    if (["#formats", "#atlas", "#specimen", "#lab"].includes(location.hash)) {
       requestAnimationFrame(() => $(location.hash).scrollIntoView({ behavior: "instant" }));
     }
   } catch (error) {
