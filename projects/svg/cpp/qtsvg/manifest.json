@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "cpp",
+  "package": "qtsvg",
+  "release": "6.12.0",
+  "catalog_parser": "data/cpp/svg/parsers.json",
+  "source_lock": "data/cpp/svg/source-lock.json",
+  "source_sha256": "e4ab39534ec97987b1b9b60ef7f4d3253d5912a69f8c713a01753174a4029331",
+  "qtbase_release": "6.12.0",
+  "qtbase_source_sha256": "a951bd163c7b80fc6b8c88d7668fb56abf91c152373e13c10666763238131307",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [255, 0, 0],
+    "second": [0, 255, 0]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in QtSvg SVG document parser",
+  "coverage_subject_prefix": "/work/source/src/svg/",
+  "format_specific_coverage_file_suffix": "/qsvghandler.cpp"
+}
