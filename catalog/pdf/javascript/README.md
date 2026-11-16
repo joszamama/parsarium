@@ -1,13 +1,13 @@
 # PDF / JavaScript
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/pdf/ranking.md) · [standard API inventory](../../../data/javascript/pdf/standard.json)
 
 ## Third-party parsers
 
 - [pdfjs-dist](pdfjs-dist/README.md) — Docker harness ready
-- [pdf-lib](pdf-lib/README.md) — verified API path
+- [pdf-lib](pdf-lib/README.md) — Docker harness ready
 - [pdf-parse](pdf-parse/README.md) — Docker harness ready
 - [unpdf](unpdf/README.md) — Docker harness ready
 - [clawpdf](clawpdf/README.md) — Docker harness ready

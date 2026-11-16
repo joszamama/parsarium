@@ -6,5 +6,6 @@ COPY fuzzing/afl-bridge/afl_proxy.c /work/afl_proxy.c
 COPY fuzzing/afl-bridge/python_trace.py /work/afl_python_trace.py
 COPY fuzzing/afl-native/wav/python/stdlib_wave/afl_trace /work/afl_trace
 ENV PARSARIUM_SUBJECT_PREFIX=/usr/local/lib/python3.13/wave.py
+
 RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
 ENTRYPOINT ["/work/afl_proxy"]

@@ -1,13 +1,13 @@
 # PDF / Python
 
-10 verified third-party API paths; 7 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/pdf/ranking.md) · [standard API inventory](../../../data/python/pdf/standard.json)
 
 ## Third-party parsers
 
-- [pypdf](pypdf/README.md) — verified API path
-- [pdfrw](pdfrw/README.md) — verified API path
+- [pypdf](pypdf/README.md) — Docker harness ready
+- [pdfrw](pdfrw/README.md) — Docker harness ready
 - [pdfminer.six](pdfminer-six/README.md) — Docker harness ready
 - [pdfplumber](pdfplumber/README.md) — Docker harness ready
 - [PyMuPDF](pymupdf/README.md) — Docker harness ready

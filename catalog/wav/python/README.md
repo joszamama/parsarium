@@ -1,6 +1,6 @@
 # WAV / Python
 
-10 verified third-party API paths; 8 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/wav/ranking.md) · [standard API inventory](../../../data/python/wav/standard.json)
 
@@ -11,8 +11,8 @@
 - [librosa](librosa/README.md) — Docker harness ready
 - [audioread](audioread/README.md) — Docker harness ready
 - [pydub](pydub/README.md) — Docker harness ready
-- [tinytag](tinytag/README.md) — verified API path
-- [mutagen](mutagen/README.md) — verified API path
+- [tinytag](tinytag/README.md) — Docker harness ready
+- [mutagen](mutagen/README.md) — Docker harness ready
 - [pygame](pygame/README.md) — Docker harness ready
 - [av](av/README.md) — Docker harness ready
 - [pymediainfo](pymediainfo/README.md) — Docker harness ready

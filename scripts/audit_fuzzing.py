@@ -154,6 +154,10 @@ def main() -> None:
             assert receipt["feedback_edges"] > 0
             assert receipt["source_lines_covered"] is None
             assert receipt["feedback_kind"] == "underlying_shared_library_binary_edges"
+        elif manifest.get("kind") == "standard" and manifest["ecosystem"] == "php":
+            assert receipt["feedback_edges"] > 0
+            assert receipt["feedback_kind"] in {"native_php_runtime_source_edges",
+                                                "native_php_http_parser_source_edges"}
         else:
             assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
         assert receipt["afl_map_size"] == 65536

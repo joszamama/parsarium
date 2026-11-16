@@ -1,13 +1,13 @@
 # MP3 with ID3v2 / Python
 
-10 verified third-party API paths; 8 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/python/mp3_id3v2/standard.json)
 
 ## Third-party parsers
 
-- [mutagen](mutagen/README.md) — verified API path
-- [tinytag](tinytag/README.md) — verified API path
+- [mutagen](mutagen/README.md) — Docker harness ready
+- [tinytag](tinytag/README.md) — Docker harness ready
 - [pydub](pydub/README.md) — Docker harness ready
 - [soundfile](soundfile/README.md) — Docker harness ready
 - [audioread](audioread/README.md) — Docker harness ready

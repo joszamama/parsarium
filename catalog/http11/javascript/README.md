@@ -1,12 +1,12 @@
 # HTTP/1.1 / JavaScript
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/http11/ranking.md) · [standard API inventory](../../../data/javascript/http11/standard.json)
 
 ## Third-party parsers
 
-- [http-parser-js](http-parser-js/README.md) — verified API path
+- [http-parser-js](http-parser-js/README.md) — Docker harness ready
 - [@achingbrain/http-parser-js](achingbrain-http-parser-js/README.md) — Docker harness ready
 - [@frida/http-parser-js](frida-http-parser-js/README.md) — Docker harness ready
 - [@browsery/http-parser](browsery-http-parser/README.md) — Docker harness ready
