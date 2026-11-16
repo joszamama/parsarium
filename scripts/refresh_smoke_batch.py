@@ -24,6 +24,20 @@ from smoke_ecosystem_feedback import check_one as check_feedback
 
 def check_native_plan(relative: Path, scratch: Path) -> dict:
     project, manifest = project_for(*relative.parts)
+    if manifest.get("native_campaign_supported") is False:
+        rejected = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/prepare_native_run.py"),
+             *relative.parts, str(scratch / "native" / "-".join(relative.parts))],
+            capture_output=True, text=True, timeout=90,
+        )
+        if rejected.returncode == 0 or "unsupported" not in rejected.stderr:
+            raise RuntimeError(f"native campaign was not rejected: {relative}")
+        return {"project": str(relative), "status": "unsupported",
+                "engine": "in-process native campaign",
+                "reason": "parser state persists across inputs; use one-shot AFL++",
+                "image_id": json.loads((project / "verification.json").read_text())["image_id"],
+                "control_sha256": manifest["control_sha256"],
+                "project_receipt_sha256": sha256((project / "verification.json").read_bytes()).hexdigest()}
     run_dir = scratch / "native" / "-".join(relative.parts)
     prepare = subprocess.run(
         [sys.executable, str(ROOT / "scripts/prepare_native_run.py"),

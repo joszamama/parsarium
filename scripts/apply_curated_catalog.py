@@ -131,7 +131,10 @@ def main() -> None:
         report["projects_total"] = len(results)
         for key in ("projects_verified", "projects_ready", "projects_passing"):
             if key in report:
-                report[key] = len(results)
+                if name == "native-plan-smoke.json" and key == "projects_ready":
+                    report[key] = sum(item["status"] == "ready" for item in results)
+                else:
+                    report[key] = len(results)
         if "batch_passing" in report:
             report["batch_passing"] = sum(item["status"] == "ok" for item in results)
             report["per_case_only"] = sum(item["status"] == "per_case_only"

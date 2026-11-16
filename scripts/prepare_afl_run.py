@@ -51,6 +51,8 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
         target_args = ["/work/afl_proxy", "@@"]
     else:
         target_args = [manifest.get("afl_entrypoint", "/work/fuzzer")]
+        if manifest.get("afl_file_input") is True:
+            target_args.append("@@")
     mode = ["-Q"] if binary else []
     command = [*common, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
                "-o", "/results", "--", *target_args]

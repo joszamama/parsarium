@@ -209,9 +209,10 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
                 or overlay.get("overlay_file_sha256", {}).get("Dockerfile")
                 != sha256(dockerfile.read_bytes()).hexdigest()):
             return False
+    native_status = "unsupported" if manifest.get("native_campaign_supported") is False else "ready"
     checks = (("fuzz-case-smoke.json", {"ok"}),
               ("fuzz-batch-smoke.json", {"ok", "per_case_only"}),
-              ("native-plan-smoke.json", {"ready"}),
+              ("native-plan-smoke.json", {native_status}),
               ("afl-plan-smoke.json", {"ready"}))
     for filename, accepted in checks:
         row = smoke_rows(filename).get(key)

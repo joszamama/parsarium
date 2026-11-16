@@ -43,7 +43,9 @@ def main() -> None:
         relative = path.parent.relative_to(ROOT / "projects")
         project, manifest = project_for(*relative.parts)
         entry = batch_records[str(relative)]
-        assert entry["status"] == ("per_case_only" if manifest["ecosystem"] == "php" else "ok")
+        per_case = (manifest["ecosystem"] == "php"
+                    or manifest.get("native_campaign_supported") is False)
+        assert entry["status"] == ("per_case_only" if per_case else "ok")
         assert entry["control_sha256"] == manifest["control_sha256"]
         assert entry["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         if entry["status"] == "ok":
@@ -55,7 +57,11 @@ def main() -> None:
         relative = path.parent.relative_to(ROOT / "projects")
         project, manifest = project_for(*relative.parts)
         entry = plan_records[str(relative)]
-        assert entry["status"] == "ready" and entry["unique_seeds"] == 1
+        if manifest.get("native_campaign_supported") is False:
+            assert entry["status"] == "unsupported"
+            assert entry["engine"] == "in-process native campaign"
+        else:
+            assert entry["status"] == "ready" and entry["unique_seeds"] == 1
         assert entry["control_sha256"] == manifest["control_sha256"]
         assert entry["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         native_override = (manifest["ecosystem"] == "php" and
@@ -190,7 +196,8 @@ def main() -> None:
         assert item["status"] == "ready"
         receipt = OVERLAYS / item["project"] / "verification.json"
         assert item["overlay_receipt_sha256"] == sha256(receipt.read_bytes()).hexdigest()
-    print(f"{len(manifests)}/{len(manifests)} one-input projects and native plans, "
+    print(f"{len(manifests)}/{len(manifests)} one-input projects; "
+          f"{native_plans['projects_ready']} in-process native plans ready, "
           f"{batch_report['batch_passing']} batch replay projects, and "
           f"{len(native) + len(rust) + len(managed)}/{len(manifests)} AFL++ overlays plus "
           f"{len(managed)}/{len(managed)} ecosystem feedback checks current")

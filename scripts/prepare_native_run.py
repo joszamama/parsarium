@@ -91,6 +91,8 @@ def main() -> None:
     if args.duration_seconds < 1:
         cli.error("duration-seconds must be positive")
     project, manifest = project_for(args.format, args.ecosystem, args.package_slug)
+    if manifest.get("native_campaign_supported") is False:
+        cli.error("in-process native campaign is unsupported for this parser; use 'python3 parsarium.py afl prepare' for its one-shot AFL++ target")
     image, image_id = image_for(project, manifest)
     project_receipt = (project / "verification.json").read_bytes()
     if image_id != json.loads(project_receipt)["image_id"]:
