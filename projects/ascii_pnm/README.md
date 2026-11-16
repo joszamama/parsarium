@@ -6,6 +6,7 @@
 
 - [devil / C](c/devil/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
+- [freeimage / C](c/freeimage/README.md)
 - [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
@@ -19,6 +20,7 @@
 - [cimg / C++](cpp/cimg/README.md)
 - [devil / C++](cpp/devil/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
+- [freeimage / C++](cpp/freeimage/README.md)
 - [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [graphicsmagick / C++](cpp/graphicsmagick/README.md)
 - [imagemagick / C++](cpp/imagemagick/README.md)

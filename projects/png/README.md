@@ -6,6 +6,7 @@
 
 - [cairo / C](c/cairo/README.md)
 - [devil / C](c/devil/README.md)
+- [freeimage / C](c/freeimage/README.md)
 - [gd / C](c/gd/README.md)
 - [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
@@ -24,6 +25,7 @@
 - [wuffs / C](c/wuffs/README.md)
 - [cairo / C++](cpp/cairo/README.md)
 - [devil / C++](cpp/devil/README.md)
+- [freeimage / C++](cpp/freeimage/README.md)
 - [gd / C++](cpp/gd/README.md)
 - [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [graphicsmagick / C++](cpp/graphicsmagick/README.md)
