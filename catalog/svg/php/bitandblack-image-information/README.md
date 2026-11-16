@@ -20,6 +20,11 @@
 
 Composer package wraps a PECL Imagick SVG reader; pinned extension source is data/php/ascii_pnm/pecl-imagick-lock.json.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/bitandblack_image_information/README.md)
+
+```sh
+python3 parsarium.py build svg php bitandblack_image_information
+python3 parsarium.py run svg php bitandblack_image_information controls/svg/red-green.svg
+```

@@ -13,6 +13,6 @@ The catalog records 168 verified third-party API paths across eight ecosystems. 
 | [JavaScript](javascript/README.md) | 22 | 22 |
 | [Python](python/README.md) | 20 | 17 |
 | [Rust](rust/README.md) | 25 | 24 |
-| [PHP](php/README.md) | 20 | 17 |
+| [PHP](php/README.md) | 20 | 20 |
 
 [Harness instructions](../../projects/README.md)

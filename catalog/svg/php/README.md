@@ -1,6 +1,6 @@
 # SVG / PHP
 
-20 verified third-party API paths; 17 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/svg/ranking.md) · [standard API inventory](../../../data/php/svg/standard.json)
 
@@ -17,12 +17,12 @@
 - [mober/phpsvg](mober-phpsvg/README.md) — Docker harness ready
 - [mgrulich/php-svg-lib](mgrulich-php-svg-lib/README.md) — Docker harness ready
 - [mediashowroom/php-svg](mediashowroom-php-svg/README.md) — Docker harness ready
-- [choowx/rasterize-svg](choowx-rasterize-svg/README.md) — verified API path
+- [choowx/rasterize-svg](choowx-rasterize-svg/README.md) — Docker harness ready
 - [phil/svg-sanitizer](phil-svg-sanitizer/README.md) — Docker harness ready
 - [decmuc/svgsanitizer](decmuc-svgsanitizer/README.md) — Docker harness ready
 - [yoya/php-svg](yoya-php-svg/README.md) — Docker harness ready
-- [renfordt/php-svg](renfordt-php-svg/README.md) — verified API path
-- [bitandblack/image-information](bitandblack-image-information/README.md) — verified API path
+- [renfordt/php-svg](renfordt-php-svg/README.md) — Docker harness ready
+- [bitandblack/image-information](bitandblack-image-information/README.md) — Docker harness ready
 - [darylldoyle/safe-svg](darylldoyle-safe-svg/README.md) — Docker harness ready
 - [t3g/svg-sanitize-elts7](t3g-svg-sanitize-elts7/README.md) — Docker harness ready
 - [laratusk/larasvg](laratusk-larasvg/README.md) — Docker harness ready

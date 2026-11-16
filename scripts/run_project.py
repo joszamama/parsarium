@@ -92,9 +92,14 @@ def main() -> None:
             assert locked.get(normalized_package) == manifest["release"]
             assert manifest["source_sha256"] in lock
     docker_text = (project / "Dockerfile").read_text()
-    for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
+    for field in ("base_image", "source_sha256", "fuzz_engine_sha256", "underlying_runtime_base_image"):
         if field in manifest:
             assert manifest[field] in docker_text
+    if "underlying_npm_integrity" in manifest:
+        npm_lock = json.loads((project / "package-lock.json").read_text())
+        underlying = npm_lock["packages"][f"node_modules/{manifest['underlying_package']}"]
+        assert underlying["version"] == manifest["underlying_release"]
+        assert underlying["integrity"] == manifest["underlying_npm_integrity"]
     for dependency in manifest.get("dependencies", []):
         assert lock_path.suffix != ".json"
         assert f"{dependency['package']}=={dependency['release']}" in lock

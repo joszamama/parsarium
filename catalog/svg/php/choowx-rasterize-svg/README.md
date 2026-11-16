@@ -30,6 +30,11 @@
 
 PHP package invokes a Node script requiring sharp; underlying SVG engine is sharp/libvips, not native PHP.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/choowx_rasterize_svg/README.md)
+
+```sh
+python3 parsarium.py build svg php choowx_rasterize_svg
+python3 parsarium.py run svg php choowx_rasterize_svg controls/svg/red-green.svg
+```

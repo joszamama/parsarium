@@ -1,3 +1,9 @@
+FROM --platform=linux/arm64 node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0 AS sharp-deps
+WORKDIR /work
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
+    && npm ls sharp --depth=0
+
 FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
 ENV DEBIAN_FRONTEND=noninteractive COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
@@ -18,5 +24,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 WORKDIR /work
 COPY --from=build /work/vendor /work/vendor
 COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY --from=sharp-deps /usr/local/bin/node /usr/local/bin/node
+COPY --from=sharp-deps /work/node_modules /work/node_modules
 COPY adapter.php harness.php fuzz-target.php run-control.php /work/
 ENTRYPOINT ["php", "-d", "xdebug.mode=coverage", "/work/run-control.php"]

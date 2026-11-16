@@ -211,9 +211,15 @@ def main() -> None:
         if not dockerfile.is_file() or not (path.parent / manifest["harness"]).is_file():
             raise ValueError(f"missing Dockerfile or harness: {path}")
         docker_text = dockerfile.read_text()
-        for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
+        for field in ("base_image", "source_sha256", "fuzz_engine_sha256", "underlying_runtime_base_image"):
             if field in manifest and manifest[field] not in docker_text:
                 raise ValueError(f"Dockerfile does not pin {field}: {path}")
+        if "underlying_npm_integrity" in manifest:
+            npm_lock = json.loads((path.parent / "package-lock.json").read_text())
+            underlying = npm_lock["packages"][f"node_modules/{manifest['underlying_package']}"]
+            if (underlying["version"] != manifest["underlying_release"]
+                    or underlying["integrity"] != manifest["underlying_npm_integrity"]):
+                raise ValueError(f"underlying NPM lock mismatch: {path}")
         for dependency in manifest.get("dependencies", []):
             if (lock_path.suffix == ".json"
                     or f"{dependency['package']}=={dependency['release']}" not in lock
