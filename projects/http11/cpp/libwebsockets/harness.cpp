@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #include <mutex>
+#include <optional>
 #include <vector>
 
 namespace {
@@ -23,6 +24,7 @@ struct Exchange {
     struct lws *wsi = nullptr;  // adopted connection of the current input
     bool destroyed = false;
     bool captured = false;
+    bool failed = false;
     ParsariumHttpResult result;
 };
 
@@ -45,17 +47,18 @@ const struct {
     {WSI_TOKEN_HEAD_URI, "HEAD"},
 };
 
-std::string header(struct lws *wsi, lws_token_indexes token) {
+std::optional<std::string> header(struct lws *wsi, lws_token_indexes token) {
     int length = lws_hdr_total_length(wsi, token);
     if (length <= 0) return "";
     std::vector<char> buffer(static_cast<std::size_t>(length) + 1);
     int copied = lws_hdr_copy(wsi, buffer.data(), length + 1, token);
-    return copied < 0 ? "" : std::string(buffer.data(), static_cast<std::size_t>(copied));
+    if (copied < 0) return std::nullopt;
+    return std::string(buffer.data(), static_cast<std::size_t>(copied));
 }
 
 // lws stores the query as one urldecoded fragment per argument; they are
 // rejoined here in parser order.
-std::string query(struct lws *wsi) {
+std::optional<std::string> query(struct lws *wsi) {
     std::string out;
     for (int index = 0;; index++) {
         int length = lws_hdr_fragment_length(wsi, WSI_TOKEN_HTTP_URI_ARGS, index);
@@ -63,7 +66,7 @@ std::string query(struct lws *wsi) {
         std::vector<char> buffer(static_cast<std::size_t>(length) + 1);
         int copied = lws_hdr_copy_fragment(wsi, buffer.data(), length + 1,
                                            WSI_TOKEN_HTTP_URI_ARGS, index);
-        if (copied < 0) break;
+        if (copied < 0) return std::nullopt;
         if (!out.empty()) out += '&';
         out.append(buffer.data(), static_cast<std::size_t>(copied));
     }
@@ -80,7 +83,7 @@ int on_event(struct lws *wsi, enum lws_callback_reasons reason, void *, void *in
     case LWS_CALLBACK_WSI_DESTROY:
         if (wsi == active->wsi) active->destroyed = true;
         return 0;
-    case LWS_CALLBACK_HTTP:
+    case LWS_CALLBACK_HTTP: {
         if (wsi != active->wsi || active->captured) return 1;
         for (const auto &method : methods) {
             if (lws_hdr_total_length(wsi, method.token) > 0) {
@@ -92,12 +95,16 @@ int on_event(struct lws *wsi, enum lws_callback_reasons reason, void *, void *in
         // normalization; no mounts are configured, so nothing is stripped.
         active->result.path.assign(in ? static_cast<const char *>(in) : "", in ? length : 0);
         {
-            std::string args = query(wsi);
-            if (!args.empty()) active->result.path += "?" + args;
+            auto args = query(wsi);
+            if (!args) active->failed = true;
+            else if (!args->empty()) active->result.path += "?" + *args;
         }
-        active->result.host = header(wsi, WSI_TOKEN_HOST);
+        auto host = header(wsi, WSI_TOKEN_HOST);
+        if (!host) active->failed = true;
+        else active->result.host = *host;
         active->captured = true;
         return 1;  // close: no response is needed
+    }
     default:
         return 0;
     }
@@ -131,7 +138,7 @@ struct lws_vhost *vhost_instance() {
 
 bool parsarium_parse_http(const std::uint8_t *data, std::size_t size,
                           ParsariumHttpResult *result) {
-    if (!result || !data || size == 0 || size > (1u << 20)) return false;
+    if (!result || !data || size == 0 || size > kMaxInputBytes) return false;
     std::lock_guard<std::mutex> call(call_mutex);
     struct lws_vhost *vhost = vhost_instance();
     if (!vhost) return false;
@@ -161,7 +168,7 @@ bool parsarium_parse_http(const std::uint8_t *data, std::size_t size,
         lws_set_timeout(exchange.wsi, PENDING_TIMEOUT_CLOSE_SEND, LWS_TO_KILL_SYNC);
     active = nullptr;
     close(sockets[1]);
-    if (!exchange.captured) return false;
+    if (!exchange.captured || exchange.failed) return false;
     *result = exchange.result;
     return true;
 }

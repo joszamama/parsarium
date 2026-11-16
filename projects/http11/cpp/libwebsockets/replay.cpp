@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     for (;;) {
         std::size_t count = std::fread(buffer, 1, sizeof(buffer), file);
         input.insert(input.end(), buffer, buffer + count);
-        if (input.size() > (1u << 20)) {
+        if (input.size() > kMaxInputBytes) {
             std::fclose(file);
             return 4;
         }
