@@ -65,7 +65,7 @@ def derived_dockerfile(project: Path) -> str:
             "&& chmod +x /work/build.sh && /work/build.sh",
             1,
         )
-    if project.name in {"gstreamer", "sfml", "csfml", "taglib", "id3lib", "libmp3splt", "mupdf", "qpdf", "poppler", "poppler-glib", "freealut", "sdl2_compat", "allegro"}:
+    if project.name in {"gstreamer", "sfml", "csfml", "taglib", "id3lib", "libmp3splt", "mupdf", "qpdf", "podofo", "poppler", "poppler-glib", "freealut", "sdl2_compat", "allegro"}:
         # Build shared parser libraries with AFL++ before linking the harness.
         # The source build remains a reusable Docker layer.
         source_rewrite = (
