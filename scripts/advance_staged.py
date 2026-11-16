@@ -78,10 +78,22 @@ def main() -> None:
             if not passed:
                 failures.append(relative)
     ready = [relative for relative in candidates if overlay_ready(relative)]
-    checked = {item["project"] for item in json.loads(
+    checked = {item["project"]: item for item in json.loads(
         (ROOT / "data/fuzz-case-smoke.json").read_text())["results"]
                if item["status"] == "ok"}
-    to_smoke = [str(relative) for relative in ready if str(relative) not in checked]
+    afl_checked = {item["project"]: item for item in json.loads(
+        (ROOT / "data/afl-plan-smoke.json").read_text())["results"]
+                   if item["status"] == "ready"}
+    to_smoke = []
+    for relative in ready:
+        name = str(relative)
+        project = ROOT / "projects" / relative
+        overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+        base_sha = sha256((project / "verification.json").read_bytes()).hexdigest()
+        overlay_sha = sha256(overlay.read_bytes()).hexdigest()
+        if (checked.get(name, {}).get("project_receipt_sha256") != base_sha
+                or afl_checked.get(name, {}).get("overlay_receipt_sha256") != overlay_sha):
+            to_smoke.append(name)
     print(f"AFL++ ready: {len(ready)}; smoke checks: {len(to_smoke)}", flush=True)
     if to_smoke and not args.no_smoke:
         smoke = subprocess.run([sys.executable, str(ROOT / "scripts/refresh_smoke_batch.py"),

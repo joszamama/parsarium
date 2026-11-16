@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"image"
@@ -20,7 +19,6 @@ func pixels(img image.Image) map[string]any {
 }
 
 func run(name string, data []byte) (map[string]any, error) {
-	r := bytes.NewReader(data)
 	var img image.Image
 	var err error
 	switch name {

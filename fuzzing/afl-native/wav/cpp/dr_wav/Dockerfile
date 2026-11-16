@@ -2,7 +2,7 @@
 FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends afl++=4.33c-1.1ubuntu1 python3 \
-    ca-certificates clang curl libclang-rt-21-dev llvm python3 \
+    ca-certificates clang curl libclang-rt-21-dev llvm python3 g++ \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 RUN curl --fail --location --retry 3 \
@@ -13,7 +13,7 @@ RUN curl --fail --location --retry 3 \
     && echo 'fad60f1e360d6de726efc1b9a7985610c89c551719e3f110e8b992f0e1f308cd  /work/source/dr_wav.h' | sha256sum --check
 COPY harness.cpp harness.h replay.cpp build.sh /work/
 RUN python3 -c 'from pathlib import Path; p=Path("/work/build.sh"); s=p.read_text(); s=s.replace("clang++","AFL_CXX").replace("clang","afl-clang-fast").replace("AFL_CXX","afl-clang-fast++").replace(",undefined",",undefined -fno-sanitize=function"); p.write_text(s)' && chmod +x /work/build.sh && /work/build.sh \
-    && { clang++ --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+    && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
 
 FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 ENV DEBIAN_FRONTEND=noninteractive

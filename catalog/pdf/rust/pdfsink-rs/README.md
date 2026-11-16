@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/rust/pdfsink_rs/README.md)
+
+```sh
+python3 parsarium.py build pdf rust pdfsink_rs
+python3 parsarium.py run pdf rust pdfsink_rs controls/pdf/one-page.pdf
+```

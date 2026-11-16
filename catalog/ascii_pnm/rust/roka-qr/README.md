@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/rust/roka_qr/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm rust roka_qr
+python3 parsarium.py run ascii_pnm rust roka_qr controls/ascii_pnm/qr-p1.pbm
+```

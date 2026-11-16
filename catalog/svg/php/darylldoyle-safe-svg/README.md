@@ -20,6 +20,11 @@
 
 WordPress package wraps the same enshrined/svg-sanitize 1.1.1 parser; not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/darylldoyle_safe_svg/README.md)
+
+```sh
+python3 parsarium.py build svg php darylldoyle_safe_svg
+python3 parsarium.py run svg php darylldoyle_safe_svg controls/svg/red-green.svg
+```

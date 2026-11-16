@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/go/github_com_gen2brain_go_fitz/README.md)
+
+```sh
+python3 parsarium.py build pdf go github_com_gen2brain_go_fitz
+python3 parsarium.py run pdf go github_com_gen2brain_go_fitz controls/pdf/one-page.pdf
+```

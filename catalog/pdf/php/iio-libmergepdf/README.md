@@ -20,6 +20,11 @@
 
 Merger wrapper delegates PDF import to pinned FPDI 2.6.10; shared parser family with setasign/fpdi, counted as a separate Composer package path.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/iio_libmergepdf/README.md)
+
+```sh
+python3 parsarium.py build pdf php iio_libmergepdf
+python3 parsarium.py run pdf php iio_libmergepdf controls/pdf/one-page.pdf
+```

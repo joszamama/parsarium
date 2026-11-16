@@ -27,6 +27,11 @@
 
 Distinct miniaudio package and public C decoder API; WAV decoder derives from dr_wav.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/miniaudio/README.md)
+
+```sh
+python3 parsarium.py build wav c miniaudio
+python3 parsarium.py run wav c miniaudio controls/wav/four-samples.wav
+```

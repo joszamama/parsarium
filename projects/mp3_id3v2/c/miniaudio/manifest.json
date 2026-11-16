@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "c",
+  "package": "miniaudio",
+  "release": "0.11.26",
+  "catalog_parser": "data/c/mp3_id3v2/parsers.json",
+  "source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "source_sha256": "838ba55a21c9142adf7b76bdc4351e5cd8b7ae128f46b25ec25f94ae9969c600",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "frames": 8000,
+    "decoded_frames": 1
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in miniaudio.h and C byte-input harness",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/miniaudio.h"
+}

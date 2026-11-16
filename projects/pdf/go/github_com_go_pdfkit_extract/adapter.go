@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bytes"
 
 	"encoding/json"
 	"fmt"
@@ -14,7 +13,6 @@ import (
 )
 
 func run(name string, data []byte) (map[string]any, error) {
-	r := bytes.NewReader(data)
 	pageCount := 0
 	var err error
 	switch name {

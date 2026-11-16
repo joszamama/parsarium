@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/rust/zip_forensic_core/README.md)
+
+```sh
+python3 parsarium.py build zip rust zip_forensic_core
+python3 parsarium.py run zip rust zip_forensic_core controls/zip/hello.zip
+```

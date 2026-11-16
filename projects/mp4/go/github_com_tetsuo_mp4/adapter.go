@@ -23,7 +23,6 @@ func run(name, path string) (map[string]any, error) {
 	if err != nil {
 		return nil, err
 	}
-	r := bytes.NewReader(data)
 	switch name {
 	case "github.com/tetsuo/mp4":
 		reader := tetsuo.NewReader(data)

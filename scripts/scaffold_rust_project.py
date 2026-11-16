@@ -109,6 +109,8 @@ pub fn parse(data: &[u8]) -> Result<serde_json::Value, Box<dyn std::error::Error
     referenced = set(re.findall(r"\b([A-Za-z_][A-Za-z0-9_]*)::", source))
     chosen = {target, "serde_json"}
     chosen.update(key for key in dependencies if key.replace("-", "_") in referenced)
+    if package == "opencv-no-c-imgcodecs":
+        chosen.add("opencv-no-c-core")
     missing = chosen - dependency_lines.keys()
     if missing:
         raise ValueError(f"missing dependency declarations: {missing}")
@@ -168,6 +170,8 @@ fuzz_target!(|data: &[u8]| {{ let _ = parse(data); }});
     crate_dir = f"{crate_name}-{parser['version']}"
     coverage_crate = (f"threecrate-io-{parser['version']}"
                       if format_name == "ascii_ply" and package == "threecrate"
+                      else f"bevy_image-{parser['version']}" if format_name == "ascii_pnm" and package == "bevy"
+                      else f"photocraft-{parser['version']}" if format_name == "ascii_pnm" and package == "unicraft"
                       else "zip-1.3.1" if format_name == "zip" and package == "zip_next"
                       else f"zpdf-parser-{parser['version']}" if format_name == "pdf" and package == "zpdf"
                       else crate_dir)
@@ -176,6 +180,19 @@ fuzz_target!(|data: &[u8]| {{ let _ = parse(data); }});
     docker = docker.replace("mp4-0.14.0", crate_dir).replace(
         "c9ef834d5ed55e494a2ae350220314dc4aacd1c43a9498b00e320e0ea352a5c3", digest)
     docker = docker.replace("mp4-source", "parser-source")
+    if format_name == "zip" and package == "libarchive2":
+        docker = docker.replace("--no-install-recommends g++ ",
+                                "--no-install-recommends g++ cmake make clang libclang-dev pkg-config "
+                                "liblzma-dev libzstd-dev liblz4-dev libxml2-dev libssl-dev "
+                                "libacl1-dev libbz2-dev zlib1g-dev ", 1)
+        docker = docker.replace("libstdc++6 python3 &&", "libstdc++6 python3 "
+                                "liblzma5 libzstd1 liblz4-1 libxml2 libssl3 "
+                                "libacl1 libbz2-1.0 zlib1g &&", 1)
+    if format_name == "svg" and package == "librsvg":
+        docker = docker.replace("--no-install-recommends g++ ",
+                                "--no-install-recommends g++ pkg-config libglib2.0-dev "
+                                "libgdk-pixbuf-2.0-dev libcairo2-dev libpango1.0-dev ", 1)
+        docker = docker.replace("libstdc++6 python3 &&", "libstdc++6 python3 librsvg2-2 &&", 1)
     (destination / "Dockerfile").write_text(docker)
     expected = json.dumps(parser["expected_output"], separators=(",", ":"))
     control_script = (template / "run-control.sh").read_text()

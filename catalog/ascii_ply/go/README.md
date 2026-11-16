@@ -1,6 +1,6 @@
 # ASCII PLY / Go
 
-21 verified third-party API paths; 9 have verified Docker harnesses.
+21 verified third-party API paths; 13 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_ply/ranking.md) · [standard API inventory](../../../data/go/ascii_ply/standard.json)
 
@@ -23,10 +23,10 @@
 - [github.com/BhaumikTalwar/assimp-go/asig](github-com-bhaumiktalwar-assimp-go-asig/README.md) — verified API path
 - [github.com/pydpll/dedalo/obj](github-com-pydpll-dedalo-obj/README.md) — Docker harness ready
 - [github.com/barnex/bruteray/tracer/objects/ply](github-com-barnex-bruteray-tracer-objects-ply/README.md) — Docker harness ready
-- [github.com/NOT-REAL-GAMES/assimpgo](github-com-not-real-games-assimpgo/README.md) — verified API path
-- [github.com/tbogdala/assimp-go](github-com-tbogdala-assimp-go/README.md) — verified API path
-- [github.com/sg3des/assimp-go](github-com-sg3des-assimp-go/README.md) — verified API path
-- [github.com/PetrusJPrinsloo/assimp-go](github-com-petrusjprinsloo-assimp-go/README.md) — verified API path
+- [github.com/NOT-REAL-GAMES/assimpgo](github-com-not-real-games-assimpgo/README.md) — Docker harness ready
+- [github.com/tbogdala/assimp-go](github-com-tbogdala-assimp-go/README.md) — Docker harness ready
+- [github.com/sg3des/assimp-go](github-com-sg3des-assimp-go/README.md) — Docker harness ready
+- [github.com/PetrusJPrinsloo/assimp-go](github-com-petrusjprinsloo-assimp-go/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

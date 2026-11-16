@@ -23,6 +23,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/rust/coldiron/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm rust coldiron
+python3 parsarium.py run ascii_pnm rust coldiron controls/ascii_pnm/black-white.pgm
+```

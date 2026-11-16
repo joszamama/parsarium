@@ -22,6 +22,11 @@
 
 Standalone dr_libs release is a separate package path from miniaudio, but miniaudio embeds dr_mp3 and both derive MP3 decoding from minimp3. C and C++ adapters share this header.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/dr_libs/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp dr_libs
+python3 parsarium.py run mp3_id3v2 cpp dr_libs controls/mp3_id3v2/tone-tags.mp3
+```

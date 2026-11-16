@@ -20,6 +20,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/rust/async_http_codec/README.md)
+
+```sh
+python3 parsarium.py build http11 rust async_http_codec
+python3 parsarium.py run http11 rust async_http_codec controls/http11/request.http
+```

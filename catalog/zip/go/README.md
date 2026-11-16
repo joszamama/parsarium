@@ -1,6 +1,6 @@
 # ZIP / Go
 
-23 verified third-party API paths; 21 have verified Docker harnesses.
+23 verified third-party API paths; 22 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/zip/ranking.md) · [standard API inventory](../../../data/go/zip/standard.json)
 
@@ -19,7 +19,7 @@
 - [github.com/xyproto/unzip](github-com-xyproto-unzip/README.md) — Docker harness ready
 - [github.com/krolaw/zipstream](github-com-krolaw-zipstream/README.md) — Docker harness ready
 - [github.com/pierrre/archivefile/zip](github-com-pierrre-archivefile-zip/README.md) — Docker harness ready
-- [github.com/unknwon/cae/zip](github-com-unknwon-cae-zip/README.md) — verified API path
+- [github.com/unknwon/cae/zip](github-com-unknwon-cae-zip/README.md) — Docker harness ready
 - [github.com/nmiyake/archiver](github-com-nmiyake-archiver/README.md) — Docker harness ready
 - [github.com/codeclysm/extract/v4](github-com-codeclysm-extract-v4/README.md) — Docker harness ready
 - [github.com/git-pkgs/archives](github-com-git-pkgs-archives/README.md) — Docker harness ready

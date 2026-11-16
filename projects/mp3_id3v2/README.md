@@ -4,7 +4,11 @@
 
 ## Targets
 
+- [dr_libs / C](c/dr_libs/README.md)
+- [miniaudio / C](c/miniaudio/README.md)
 - [taglib / C](c/taglib/README.md)
+- [dr_libs / C++](cpp/dr_libs/README.md)
+- [miniaudio / C++](cpp/miniaudio/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [github.com/ascherkus/go-id3/src/id3 / Go](go/github_com_ascherkus_go_id3_src_id3/README.md)
 - [github.com/bogem/id3v2/v2 / Go](go/github_com_bogem_id3v2_v2/README.md)
@@ -17,11 +21,14 @@
 - [github.com/gcottom/mp3meta / Go](go/github_com_gcottom_mp3meta/README.md)
 - [github.com/gopxl/beep/v2/mp3 / Go](go/github_com_gopxl_beep_v2_mp3/README.md)
 - [github.com/guregu/tag / Go](go/github_com_guregu_tag/README.md)
+- [github.com/hajimehoshi/ebiten/v2/audio/mp3 / Go](go/github_com_hajimehoshi_ebiten_v2_audio_mp3/README.md)
 - [github.com/hajimehoshi/go-mp3 / Go](go/github_com_hajimehoshi_go_mp3/README.md)
 - [github.com/icanhazbroccoli/tag / Go](go/github_com_icanhazbroccoli_tag/README.md)
 - [github.com/mattetti/audio/mp3 / Go](go/github_com_mattetti_audio_mp3/README.md)
 - [github.com/qiniu/audio/mp3 / Go](go/github_com_qiniu_audio_mp3/README.md)
+- [github.com/sa6mwa/mp3duration / Go](go/github_com_sa6mwa_mp3duration/README.md)
 - [github.com/tcolgate/mp3 / Go](go/github_com_tcolgate_mp3/README.md)
+- [github.com/tosone/minimp3 / Go](go/github_com_tosone_minimp3/README.md)
 - [honnef.co/go/id3 / Go](go/honnef_co_go_id3/README.md)
 - [bramp-ffmpeg / Java](java/bramp_ffmpeg/README.md)
 - [codecmedia / Java](java/codecmedia/README.md)

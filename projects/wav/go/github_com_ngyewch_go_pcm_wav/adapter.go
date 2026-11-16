@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -23,11 +22,6 @@ func signs(values []int) []int {
 }
 
 func run(name, path string) (map[string]any, error) {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	r := bytes.NewReader(data)
 	switch name {
 
 	case "github.com/ngyewch/go-pcm/wav":

@@ -1,31 +1,31 @@
 # WAV / Rust
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/wav/ranking.md) · [standard API inventory](../../../data/rust/wav/standard.json)
 
 ## Third-party parsers
 
 - [hound](hound/README.md) — Docker harness ready
-- [wav](wav/README.md) — verified API path
-- [wav_io](wav-io/README.md) — verified API path
-- [riff-wave](riff-wave/README.md) — verified API path
-- [wavers](wavers/README.md) — verified API path
-- [bwavfile](bwavfile/README.md) — verified API path
-- [symphonia](symphonia/README.md) — verified API path
-- [symphonia-format-riff](symphonia-format-riff/README.md) — verified API path
-- [symphonium](symphonium/README.md) — verified API path
-- [audio-file](audio-file/README.md) — verified API path
-- [waveadapter](waveadapter/README.md) — verified API path
-- [ryf](ryf/README.md) — verified API path
-- [wav-codec](wav-codec/README.md) — verified API path
-- [wave_stream](wave-stream/README.md) — verified API path
-- [creak](creak/README.md) — verified API path
-- [pure_wav](pure-wav/README.md) — verified API path
-- [symphonia-format-wav](symphonia-format-wav/README.md) — verified API path
-- [nwav](nwav/README.md) — verified API path
-- [surge-hound](surge-hound/README.md) — verified API path
-- [rff-format-wav](rff-format-wav/README.md) — verified API path
+- [wav](wav/README.md) — Docker harness ready
+- [wav_io](wav-io/README.md) — Docker harness ready
+- [riff-wave](riff-wave/README.md) — Docker harness ready
+- [wavers](wavers/README.md) — Docker harness ready
+- [bwavfile](bwavfile/README.md) — Docker harness ready
+- [symphonia](symphonia/README.md) — Docker harness ready
+- [symphonia-format-riff](symphonia-format-riff/README.md) — Docker harness ready
+- [symphonium](symphonium/README.md) — Docker harness ready
+- [audio-file](audio-file/README.md) — Docker harness ready
+- [waveadapter](waveadapter/README.md) — Docker harness ready
+- [ryf](ryf/README.md) — Docker harness ready
+- [wav-codec](wav-codec/README.md) — Docker harness ready
+- [wave_stream](wave-stream/README.md) — Docker harness ready
+- [creak](creak/README.md) — Docker harness ready
+- [pure_wav](pure-wav/README.md) — Docker harness ready
+- [symphonia-format-wav](symphonia-format-wav/README.md) — Docker harness ready
+- [nwav](nwav/README.md) — Docker harness ready
+- [surge-hound](surge-hound/README.md) — Docker harness ready
+- [rff-format-wav](rff-format-wav/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

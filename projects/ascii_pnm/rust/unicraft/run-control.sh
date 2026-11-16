@@ -16,10 +16,10 @@ if observed != expected:
     raise SystemExit(f'control mismatch: {observed}')
 coverage = json.loads(Path('/coverage/coverage.json').read_text())
 files = coverage['data'][0]['files']
-parser_files = [f for f in files if '/unicraft-0.1.2/' in f['filename']]
+parser_files = [f for f in files if '/photocraft-0.1.2/' in f['filename']]
 covered = sum(f['summary']['lines']['covered'] for f in parser_files)
 if not parser_files or covered == 0:
-    raise SystemExit('no instrumented unicraft crate source lines covered')
+    raise SystemExit('no instrumented photocraft crate source lines covered')
 result = {'control_pass': True, 'output': observed,
           'parser_source_files': len(parser_files),
           'parser_source_lines_covered': covered,

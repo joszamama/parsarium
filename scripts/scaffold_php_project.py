@@ -58,6 +58,8 @@ def adapted_source(source: str) -> str:
                             "require __DIR__ . '/vendor/autoload.php';")
     source = source.replace("require __DIR__ . $vendor;",
                             "require __DIR__ . '/vendor/autoload.php';")
+    source = source.replace("/safe_svg/vendor/darylldoyle/safe-svg/includes/",
+                            "/vendor/darylldoyle/safe-svg/includes/")
     return re.sub(r"(?m)^\s*require __DIR__ .*vendor/autoload\.php';",
                   "    require __DIR__ . '/vendor/autoload.php';", source)
 
@@ -172,12 +174,14 @@ $config->setMaxLen(1 << 20);
     runtime_extra = {
         "png": "libvips42t64 php8.5-imagick imagemagick",
         "ascii_pnm": "libvips42t64 php8.5-imagick imagemagick",
-        "svg": "libvips42t64 php8.5-imagick imagemagick",
+        "svg": "libvips42t64 php8.5-imagick imagemagick librsvg2-bin",
         "mp3_id3v2": "ffmpeg mediainfo",
         "wav": "ffmpeg mediainfo",
         "mp4": "ffmpeg mediainfo",
-        "pdf": "poppler-utils php8.5-imagick imagemagick",
+        "pdf": "poppler-utils php8.5-imagick php8.5-curl imagemagick",
     }.get(format_name, "")
+    runtime_env = ("ENV PARSARIUM_RSVG_CONVERT=/usr/bin/rsvg-convert\n"
+                   if format_name == "svg" else "")
     docker = f'''FROM --platform=linux/arm64 {BASE_IMAGE} AS build
 ENV DEBIAN_FRONTEND=noninteractive COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \\
@@ -192,7 +196,7 @@ RUN {{ php --version | head -1; composer --version; }} > /work/toolchain.txt
 
 FROM --platform=linux/arm64 {BASE_IMAGE}
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -qq && apt-get install -y --no-install-recommends \\
+{runtime_env}RUN apt-get update -qq && apt-get install -y --no-install-recommends \\
     php8.5-cli php8.5-mbstring php8.5-gd php8.5-zip php8.5-xml php8.5-xdebug {runtime_extra} \\
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work

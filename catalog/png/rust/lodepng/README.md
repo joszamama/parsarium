@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/rust/lodepng/README.md)
+
+```sh
+python3 parsarium.py build png rust lodepng
+python3 parsarium.py run png rust lodepng controls/png/red-green.png
+```

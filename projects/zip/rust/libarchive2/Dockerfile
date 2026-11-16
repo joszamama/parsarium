@@ -1,5 +1,5 @@
 FROM --platform=linux/arm64 rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd AS build
-RUN apt-get update -qq && apt-get install -y --no-install-recommends g++ \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends g++ cmake make clang libclang-dev pkg-config liblzma-dev libzstd-dev liblz4-dev libxml2-dev libssl-dev libacl1-dev libbz2-dev zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY Cargo.toml Cargo.lock ./
@@ -27,7 +27,7 @@ FROM --platform=linux/arm64 debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    libstdc++6 python3 && rm -rf /var/lib/apt/lists/*
+    libstdc++6 python3 liblzma5 libzstd1 liblz4-1 libxml2 libssl3 libacl1 libbz2-1.0 zlib1g && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY --from=build /work/replay /work/fuzzer /work/llvm-cov /work/llvm-profdata /work/
 COPY --from=build /usr/local/rustup/toolchains/1.99.1-aarch64-unknown-linux-gnu/lib/libLLVM.so.23.1-rust-1.99.1-stable /usr/local/lib/

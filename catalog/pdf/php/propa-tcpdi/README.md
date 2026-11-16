@@ -21,6 +21,11 @@
 
 TCPDI is a separately maintained FPDI-derived import implementation bundled with its own tcpdi_parser; TCPDF is the rendering companion.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/propa_tcpdi/README.md)
+
+```sh
+python3 parsarium.py build pdf php propa_tcpdi
+python3 parsarium.py run pdf php propa_tcpdi controls/pdf/one-page.pdf
+```

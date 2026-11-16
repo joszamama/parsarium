@@ -173,7 +173,7 @@ switch ($package) {
         define('ABSPATH', __DIR__);
         function get_option($key) { return false; }
         function apply_filters($name, $value) { return $value; }
-        $base = __DIR__ . '/safe_svg/vendor/darylldoyle/safe-svg/includes/';
+        $base = __DIR__ . '/vendor/darylldoyle/safe-svg/includes/';
         require $base . 'safe-svg-tags.php';
         require $base . 'safe-svg-attributes.php';
         require $base . 'safe-svg-sanitizer.php';

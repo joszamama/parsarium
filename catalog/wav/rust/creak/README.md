@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/rust/creak/README.md)
+
+```sh
+python3 parsarium.py build wav rust creak
+python3 parsarium.py run wav rust creak controls/wav/four-samples.wav
+```

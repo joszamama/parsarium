@@ -21,6 +21,11 @@
 
 Separately packaged TCPDI fork with bundled parser; shares the FPDI-derived TCPDI family with propa/tcpdi.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/rafikhaceb_tcpdi/README.md)
+
+```sh
+python3 parsarium.py build pdf php rafikhaceb_tcpdi
+python3 parsarium.py run pdf php rafikhaceb_tcpdi controls/pdf/one-page.pdf
+```

@@ -9,6 +9,7 @@ import (
 
 	"os"
 	"strings"
+	"github.com/tdewolff/minify/v2"
 
 	minsvg "github.com/tdewolff/minify/v2/svg"
 )

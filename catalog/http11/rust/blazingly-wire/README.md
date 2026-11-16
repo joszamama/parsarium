@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/rust/blazingly_wire/README.md)
+
+```sh
+python3 parsarium.py build http11 rust blazingly_wire
+python3 parsarium.py run http11 rust blazingly_wire controls/http11/request.http
+```

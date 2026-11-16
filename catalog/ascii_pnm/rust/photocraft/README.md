@@ -26,6 +26,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/rust/photocraft/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm rust photocraft
+python3 parsarium.py run ascii_pnm rust photocraft controls/ascii_pnm/red-green.ppm
+```

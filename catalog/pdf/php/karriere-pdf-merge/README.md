@@ -20,6 +20,11 @@
 
 Wrapper bundles a TCPDI parser derived from FPDI and uses pinned TCPDF 6.11.4 as rendering companion.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/karriere_pdf_merge/README.md)
+
+```sh
+python3 parsarium.py build pdf php karriere_pdf_merge
+python3 parsarium.py run pdf php karriere_pdf_merge controls/pdf/one-page.pdf
+```

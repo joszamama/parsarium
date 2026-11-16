@@ -21,6 +21,11 @@
 
 Separately packaged TCPDI fork; TCPDF 6.11.4 is pinned as companion because its open-ended constraint selected incompatible TCPDF 7. PHP 8.5 emits a deprecation and parser warning while still returning the expected valid-control result.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/andreaventuri_tcpdi/README.md)
+
+```sh
+python3 parsarium.py build pdf php andreaventuri_tcpdi
+python3 parsarium.py run pdf php andreaventuri_tcpdi controls/pdf/one-page.pdf
+```

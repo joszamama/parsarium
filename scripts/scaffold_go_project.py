@@ -68,6 +68,24 @@ def stage(format_name: str, package: str) -> Path:
                              capture_output=True, text=True, timeout=60)
         if cut.returncode:
             raise RuntimeError(cut.stderr[-1000:])
+    adapted = (destination / "adapter.go").read_text()
+    reader_line = "\tr := bytes.NewReader(data)\n"
+    reader_tail = adapted.split(reader_line, 1)[1] if reader_line in adapted else ""
+    reader_scope = reader_tail.split("\n}\n", 1)[0]
+    if reader_line in adapted and not re.search(r"\br\b", reader_scope):
+        adapted = adapted.replace(reader_line, "", 1)
+        if "bytes." not in adapted:
+            adapted = adapted.replace('\t"bytes"\n', "", 1)
+    unused_data = "\tdata, err := os.ReadFile(path)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n"
+    if unused_data in adapted and len(re.findall(r"\bdata\b", adapted)) == 1:
+        adapted = adapted.replace(unused_data, "", 1)
+    if package == "github.com/tdewolff/minify/v2/svg" and '\t"github.com/tdewolff/minify/v2"\n' not in adapted:
+        adapted = adapted.replace('\t"strings"\n',
+                                  '\t"strings"\n\t"github.com/tdewolff/minify/v2"\n', 1)
+    if package == "github.com/Sorrow446/go-mp4tag":
+        adapted = adapted.replace('\t"os"\n', '\t"os"\n\t"github.com/Sorrow446/go-mp4tag"\n', 1)
+        adapted = adapted.replace("\tdata, err := os.ReadFile(path)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n", "", 1)
+    (destination / "adapter.go").write_text(adapted)
     has_run = bool(re.search(r"func run\(", source.read_text()))
     if has_run:
         if re.search(r"func run\(name string, data \[\]byte\)", source.read_text()):
@@ -145,7 +163,7 @@ func FuzzParser(f *testing.F) {{
                                 'if packageFiles == 0 || total == 0 {')
     (destination / "reporter").mkdir()
     (destination / "reporter/main.go").write_text(reporter)
-    cgo = "1" if native else "0"
+    cgo = "1" if native or package == "github.com/tosone/minimp3" else "0"
     toolchain = "ENV GOTOOLCHAIN=auto\n" if format_name == "pdf" else ""
     docker = f'''FROM --platform=linux/arm64 {BASE_IMAGE} AS build
 {toolchain}WORKDIR /work

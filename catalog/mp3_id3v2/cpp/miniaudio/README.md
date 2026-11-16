@@ -22,6 +22,11 @@
 
 The pinned miniaudio.h embeds dr_mp3 code. C and C++ use the same miniaudio implementation. This is the same dr_mp3 lineage as the excluded SDL3_mixer major release; the library accepts the ID3v2-tagged control but does not expose its title.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/miniaudio/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp miniaudio
+python3 parsarium.py run mp3_id3v2 cpp miniaudio controls/mp3_id3v2/tone-tags.mp3
+```

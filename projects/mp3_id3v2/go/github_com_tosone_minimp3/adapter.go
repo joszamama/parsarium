@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 
@@ -16,7 +15,6 @@ func run(name, path string) (map[string]any, error) {
 	if err != nil {
 		return nil, err
 	}
-	r := bytes.NewReader(data)
 	switch name {
 
 	case "github.com/tosone/minimp3":

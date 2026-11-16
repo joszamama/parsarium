@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"github.com/Sorrow446/go-mp4tag"
 )
 
 type rangeReader struct{ data []byte }
@@ -17,11 +18,6 @@ func (r rangeReader) RangeRead(start, length uint64) (io.ReadCloser, error) {
 }
 
 func run(name, path string) (map[string]any, error) {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	r := bytes.NewReader(data)
 	switch name {
 
 	case "github.com/Sorrow446/go-mp4tag":

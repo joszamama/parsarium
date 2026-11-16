@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/rust/saf_httparser/README.md)
+
+```sh
+python3 parsarium.py build http11 rust saf_httparser
+python3 parsarium.py run http11 rust saf_httparser controls/http11/request.http
+```

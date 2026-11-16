@@ -27,6 +27,11 @@
 
 Distinct miniaudio package and public C decoder API; WAV decoder derives from dr_wav. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/miniaudio/README.md)
+
+```sh
+python3 parsarium.py build wav cpp miniaudio
+python3 parsarium.py run wav cpp miniaudio controls/wav/four-samples.wav
+```
