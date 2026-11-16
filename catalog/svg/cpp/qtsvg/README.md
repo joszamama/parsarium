@@ -4,7 +4,7 @@
 - **License:** LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** QtSvg QSvgRenderer document parser and Qt painter
-- **Local input API:** `QSvgRenderer(QString local filename)` or `QSvgRenderer::load(QByteArray local bytes)`; `isValid`, `defaultSize`, and `render(QPainter*)` to `QImage`
+- **Local input API:** `QSvgRenderer(QString local filename) or QSvgRenderer::load(QByteArray local bytes); isValid; defaultSize; render(QPainter*) to QImage`
 - **Documentation:** [API reference](<https://doc.qt.io/qt-6/qsvgrenderer.html>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/svg/parsers.json) · [control verification](../../../../data/cpp/svg/verification.json) · [within-ecosystem ranking](../../../../data/cpp/svg/ranking.md)
 - **Valid control:** [`controls/svg/red-green.svg`](../../../../controls/svg/red-green.svg)
@@ -30,6 +30,11 @@
 
 QtSvg provides its own C++ SVG document reader. QtCore and QtGui supply the paint device and pixels; this row does not re-count a second QtSvg API as an independent parser.
 
-## Runnable harness
+## Run this target
 
-The [Docker harness](../../../../projects/svg/cpp/qtsvg/README.md) loads local bytes with `QSvgRenderer::load(QByteArray)`, renders to `QImage`, and checks the dimensions and top-row pixels. Its [receipt](../../../../projects/svg/cpp/qtsvg/verification.json) records QtSvg source coverage on the valid control.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/qtsvg/README.md)
+
+```sh
+python3 parsarium.py build svg cpp qtsvg
+python3 parsarium.py run svg cpp qtsvg controls/svg/red-green.svg
+```

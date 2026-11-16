@@ -1,6 +1,8 @@
-# QtSvg — SVG / C++
+# qtsvg — SVG / C++
 
-Pinned QtSvg and QtBase release: `6.12.0`. The [Qt API](https://doc.qt.io/qt-6/qsvgrenderer.html) accepts local SVG bytes through `QSvgRenderer::load(QByteArray)`. The harness renders to `QImage` and reports dimensions and the first and last pixels of the top row. For a one-pixel-wide SVG, `second` is `null`.
+Pinned release: `6.12.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
+
+[API, control result, and parser family](../../../../catalog/svg/cpp/qtsvg/README.md)
 
 ## Run from the repository root
 
@@ -12,6 +14,4 @@ python3 parsarium.py afl build svg cpp qtsvg
 python3 parsarium.py afl prepare svg cpp qtsvg runs/svg-qtsvg-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of SVG inputs. The AFL++ command prepares a seeded run; it does not start a campaign. See the [manifest](manifest.json), [control receipt](verification.json), and [catalog record](../../../../catalog/svg/cpp/qtsvg/README.md).
-
-The valid red/green control covers 1,044 QtSvg source lines, including 542 in `qsvghandler.cpp`. The [AFL++ overlay](../../../../fuzzing/afl-native/svg/cpp/qtsvg/verification.json) records 704 feedback edges. A [valid-input feedback check](../../../../fuzzing/afl-native/svg/cpp/qtsvg/valid-feedback.json) confirms an identical repeated map and 35 different edge IDs for a second valid SVG. Reproduce that check with `python3 fuzzing/afl-native/svg/cpp/qtsvg/verify-valid-feedback.py` after building the AFL++ image.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

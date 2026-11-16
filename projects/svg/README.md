@@ -12,6 +12,7 @@
 - [imagemagick / C++](cpp/imagemagick/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [lunasvg / C++](cpp/lunasvg/README.md)
+- [qtsvg / C++](cpp/qtsvg/README.md)
 - [cogentcore.org/core/svg / Go](go/cogentcore_org_core_svg/README.md)
 - [github.com/JoshVarga/svgparser / Go](go/github_com_joshvarga_svgparser/README.md)
 - [github.com/benoitkugler/oksvg/svgicon / Go](go/github_com_benoitkugler_oksvg_svgicon/README.md)
