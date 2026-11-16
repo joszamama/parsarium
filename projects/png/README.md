@@ -18,6 +18,7 @@
 - [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [imagemagick / C++](cpp/imagemagick/README.md)
 - [imlib2 / C++](cpp/imlib2/README.md)
+- [opencv / C++](cpp/opencv/README.md)
 - [raylib / C++](cpp/raylib/README.md)
 - [sdl3 / C++](cpp/sdl3/README.md)
 - [sfml / C++](cpp/sfml/README.md)
