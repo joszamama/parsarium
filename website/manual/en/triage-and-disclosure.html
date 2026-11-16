@@ -3,7 +3,7 @@
 
 <h2>1. Reproduce</h2>
 <p>Run the saved file through the normal harness, outside the fuzzer:</p>
-<pre data-copy><span class="p">$ </span>python3 parsarium.py run png c libpng runs/libpng-afl/afl-out/default/crashes/id:000000,* --results runs/libpng-triage</pre>
+<pre data-copy><span class="p">$ </span>parsarium run png c libpng runs/libpng-afl/afl-out/default/crashes/id:000000,* --results runs/libpng-triage</pre>
 <p>A reproducible crash gives <code>target_nonzero</code> with the error in <code>stderr_tail</code>; a hang gives <code>timeout</code>. Run it a few times. If the result changes between runs, note that: it may depend on memory layout, timing, or the limits of the fuzzing environment rather than the input alone.</p>
 
 <h2>2. Reduce</h2>

@@ -21,10 +21,13 @@
     <p class="off">0x0020<b>preparación</b></p>
     <div class="sec-head">
       <h2>Antes de los ejercicios.</h2>
-      <p>Necesitas Python 3.11 o posterior y Docker. Para explorar el catálogo basta con Python; para ejecutar harnesses necesitas Docker con soporte para Linux amd64 y arm64. Clona el repositorio y ejecuta todos los comandos desde su raíz.</p>
-      <pre data-copy><span class="p">$ </span>git clone https://github.com/joszamama/parsarium
-<span class="p">$ </span>cd parsarium
-<span class="p">$ </span>python3 parsarium.py list</pre>
+      <p>Instala el comando <code>parsarium</code> con pip. Necesitas Python 3.11 o posterior; para ejecutar harnesses también necesitas Docker con soporte para Linux amd64 y arm64. El primer comando descarga los archivos del catálogo y de los harnesses de tu versión, unos 19 MB, y los comprueba.</p>
+      <pre data-copy><span class="p">$ </span>pip install parsarium
+<span class="p">$ </span>parsarium list</pre>
+      <p>Algunos ejercicios leen archivos del catálogo, como controles y registros. Están en la carpeta que imprime <code>parsarium home --path</code>. Expórtala una vez en cada terminal; los ejercicios se refieren a ella como <code>$PARSARIUM</code>:</p>
+      <pre data-copy><span class="p">$ </span>export PARSARIUM="$(parsarium home --path)"
+<span class="p">$ </span>ls "$PARSARIUM"</pre>
+      <p>Los resultados se guardan en <code>runs/</code>, dentro de la carpeta desde la que ejecutas los comandos. Si trabajas con un clon del repositorio, apunta <code>PARSARIUM_HOME</code> al clon y el comando lo usará.</p>
     </div>
   </div>
 </section>

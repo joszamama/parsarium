@@ -3,10 +3,10 @@
 
 <h2>Una campaña</h2>
 <p>Todo target ejecutable tiene una imagen para AFL++. Una campaña tiene cuatro pasos:</p>
-<pre data-copy><span class="p">$ </span>python3 parsarium.py afl build zip go stdlib_openreader
-<span class="p">$ </span>python3 parsarium.py afl prepare zip go stdlib_openreader runs/zip-go-afl
-<span class="p">$ </span>python3 parsarium.py afl run runs/zip-go-afl --seconds 3600
-<span class="p">$ </span>python3 parsarium.py afl summary runs/zip-go-afl</pre>
+<pre data-copy><span class="p">$ </span>parsarium afl build zip go stdlib_openreader
+<span class="p">$ </span>parsarium afl prepare zip go stdlib_openreader runs/zip-go-afl
+<span class="p">$ </span>parsarium afl run runs/zip-go-afl --seconds 3600
+<span class="p">$ </span>parsarium afl summary runs/zip-go-afl</pre>
 <ul>
   <li><code>afl build</code> construye la imagen instrumentada y comprueba que el control produce feedback.</li>
   <li><code>afl prepare</code> copia las semillas, fija el ID de la imagen y escribe <code>plan.json</code> con el comando exacto.</li>
@@ -18,7 +18,7 @@
 <h2>Semillas</h2>
 <p>Por defecto, una campaña parte del control válido del target. Es una buena semilla mínima: llega al camino principal del parsing. Un corpus de semillas más rico suele ayudar, sobre todo en formatos con muchas partes opcionales. Puedes añadir archivos con <code>--seed</code> o directorios completos con <code>--seed-dir</code>:</p>
 <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
-<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-afl --seed-dir generated/png</pre>
+<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-afl --seed-dir generated/png</pre>
 <p>Cuando compares herramientas, dales a todas las mismas semillas, para que la comparación trate de lo que hace cada herramienta una vez que arranca.</p>
 
 <h2>Presupuestos</h2>
@@ -37,14 +37,14 @@ EOF
 run_one() {
   set -- $1
   dir="runs/batch/$1-$2-$3"
-  python3 parsarium.py afl build "$1" "$2" "$3" &amp;&amp;
-  python3 parsarium.py afl prepare "$1" "$2" "$3" "$dir" &amp;&amp;
-  python3 parsarium.py afl run "$dir" --seconds 3600 &amp;&amp;
-  python3 parsarium.py afl summary "$dir" &gt; /dev/null
+  parsarium afl build "$1" "$2" "$3" &amp;&amp;
+  parsarium afl prepare "$1" "$2" "$3" "$dir" &amp;&amp;
+  parsarium afl run "$dir" --seconds 3600 &amp;&amp;
+  parsarium afl summary "$dir" &gt; /dev/null
 }
 export -f run_one
 xargs -P 4 -I{} bash -c 'run_one "{}"' &lt; targets.txt</pre>
-<p>Usa <code>python3 parsarium.py projects --format zip</code> para consultar los slugs. Cada campaña escribe su propio <code>plan.json</code>, <code>campaign.json</code> y <code>afl-summary.json</code>, así que un lote se puede recoger y comparar más tarde con un script corto.</p>
+<p>Usa <code>parsarium projects --format zip</code> para consultar los slugs. Cada campaña escribe su propio <code>plan.json</code>, <code>campaign.json</code> y <code>afl-summary.json</code>, así que un lote se puede recoger y comparar más tarde con un script corto.</p>
 
 <h2>Repeticiones</h2>
 <p>El fuzzing es aleatorio. Dos campañas con la misma semilla y el mismo presupuesto pueden terminar con una cobertura distinta y encontrar crashes distintos. Una sola ejecución por target dice poco de una herramienta. Ejecuta cada configuración varias veces, presenta la mediana y la dispersión, y usa un test estadístico cuando afirmes que una herramienta es mejor. <a href="https://arxiv.org/abs/1808.09700">Klees et al., "Evaluating Fuzz Testing" (CCS 2018)</a> es la referencia estándar y merece la pena leerla antes de un experimento grande.</p>
@@ -65,8 +65,8 @@ xargs -P 4 -I{} bash -c 'run_one "{}"' &lt; targets.txt</pre>
 <h2>Ejercicios</h2>
 <div class="exercise">
   <p class="label"><span>Ejercicio 7.1</span><span class="level">Calentamiento</span></p>
-  <p>Usa el banco para crear una selección de cuatro targets de ZIP, uno por lenguaje, con el modo <em>AFL++</em>, y guarda el script. Ejecútalo con un presupuesto de cinco minutos:</p>
-  <pre data-copy><span class="p">$ </span>SECONDS_PER_TARGET=300 bash run-selection.sh</pre>
+  <p>Usa el banco para crear una selección de cuatro targets de ZIP, uno por lenguaje, y descarga su manifiesto. Ejecútala con un presupuesto de cinco minutos por target:</p>
+  <pre data-copy><span class="p">$ </span>parsarium run-selection sel-….json --mode afl --seconds 300</pre>
   <p>Recoge <code>execs_per_sec</code>, <code>corpus_count</code> y <code>saved_crashes</code> de cada <code>afl-summary.json</code>.</p>
   <details><summary>Pista</summary><p>Selecciona ZIP, pon <em>Targets por formato × lenguaje</em> a 1 y elige cuatro lenguajes.</p></details>
   <details><summary>Solución</summary><p>Las cifras de cada target están en <code>instances[0].fuzzer_stats</code> de su <code>afl-summary.json</code>. Los targets compilados suelen tener el <code>execs_per_sec</code> más alto. Guarda la tabla: el ejercicio 7.3 parte de ella.</p></details>
@@ -75,10 +75,10 @@ xargs -P 4 -I{} bash -c 'run_one "{}"' &lt; targets.txt</pre>
   <p class="label"><span>Ejercicio 7.2</span><span class="level">Práctica</span></p>
   <p>Mide el efecto de las semillas. Genera un corpus de PNG con Fandango y ejecuta libpng dos veces durante diez minutos: una solo con el control y otra con las semillas generadas.</p>
   <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
-<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-control-only
-<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-seeded --seed-dir generated/png
-<span class="p">$ </span>python3 parsarium.py afl run runs/libpng-control-only --seconds 600
-<span class="p">$ </span>python3 parsarium.py afl run runs/libpng-seeded --seconds 600</pre>
+<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-control-only
+<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-seeded --seed-dir generated/png
+<span class="p">$ </span>parsarium afl run runs/libpng-control-only --seconds 600
+<span class="p">$ </span>parsarium afl run runs/libpng-seeded --seconds 600</pre>
   <p>Compara <code>corpus_count</code> y <code>edges_found</code>. ¿Ayuda el conjunto de semillas más rico? ¿Basta una ejecución para afirmarlo?</p>
   <details><summary>Pista</summary><p>Si no tienes Fandango instalado: <code>pip install fandango-fuzzer</code>. Ejecuta antes <code>afl build png c libpng</code> si todavía no has construido la imagen.</p></details>
   <details><summary>Solución</summary><p>Un corpus de semillas variado suele empezar con más cobertura, porque ya contiene tipos de chunk que el control no tiene. Que termine más alto a los diez minutos es menos seguro. Una ejecución de cada no basta para afirmar una diferencia; ejecuta cada configuración al menos cinco veces y compara las medianas, como explica el capítulo 9.</p></details>

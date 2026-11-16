@@ -48,9 +48,9 @@
 <div class="exercise">
   <p class="label"><span>Ejercicio 1.1</span><span class="level">Calentamiento</span></p>
   <p>Lista el catálogo, abre una celda e inspecciona un target.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py list
-<span class="p">$ </span>python3 parsarium.py catalog png c
-<span class="p">$ </span>python3 parsarium.py show png c libpng</pre>
+  <pre data-copy><span class="p">$ </span>parsarium list
+<span class="p">$ </span>parsarium catalog png c
+<span class="p">$ </span>parsarium show png c libpng</pre>
   <p>La salida de <code>catalog</code> ordena los veinte paquetes en C por estrellas de GitHub. Fíjate en la última columna, la familia subyacente. ¿Cuántos paquetes leen PNG a través de <code>stb_image</code>?</p>
   <details><summary>Pista</summary><p>Busca el texto <code>stb_image</code> en la columna de familia. Las copias incluidas en otros proyectos también cuentan.</p></details>
   <details><summary>Solución</summary><p>Tres: <code>raylib</code> y <code>sdl3</code> incluyen <code>stb_image</code>, y <code>stb</code> es el propio <code>stb_image</code>. Tres paquetes en el ranking y un solo decodificador debajo. El capítulo 4 vuelve sobre esto.</p></details>
@@ -58,7 +58,7 @@
 <div class="exercise">
   <p class="label"><span>Ejercicio 1.2</span><span class="level">Práctica</span></p>
   <p>Compara cómo de cubierto está cada lenguaje para un formato.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py list --format http11</pre>
+  <pre data-copy><span class="p">$ </span>parsarium list --format http11</pre>
   <p>¿Qué lenguajes tienen más targets ejecutables de HTTP/1.1 y cuáles menos? Comprueba tu respuesta con la fila de HTTP/1.1 del <a href="{{ROOT}}atlas/?format=http11">atlas</a>.</p>
   <details><summary>Pista</summary><p>El recuento de ejecutables es el número de targets con un harness Docker. Puede ser mayor que el de verificados porque las APIs de la biblioteca estándar se cuentan aparte.</p></details>
   <details><summary>Solución</summary><p>En el momento de escribir esto, Go y Rust tienen más targets ejecutables de HTTP/1.1 (22 cada uno), y C y C++ menos (9 cada uno). Muchos parsers HTTP en C y C++ están integrados en servidores más grandes y es más difícil alimentarlos desde un archivo, por eso todavía hay menos con harness.</p></details>

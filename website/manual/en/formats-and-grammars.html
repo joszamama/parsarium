@@ -47,15 +47,15 @@
   <p class="label"><span>Exercise 2.2</span><span class="level">Practice</span></p>
   <p>Change the width in the PNG control from 2 to 3. Make two versions: one that keeps the old CRC, and one with the CRC fixed. Then run both through Pillow.</p>
   <pre data-copy>python3 - &lt;&lt;'EOF'
-import struct, zlib
-data = bytearray(open("controls/png/red-green.png", "rb").read())
+import os, struct, zlib
+data = bytearray(open(os.path.join(os.environ["PARSARIUM"], "controls/png/red-green.png"), "rb").read())
 data[16:20] = struct.pack("&gt;I", 3)                       # IHDR width: 2 -&gt; 3
 open("wide-old-crc.png", "wb").write(data)
 data[29:33] = struct.pack("&gt;I", zlib.crc32(data[12:29]))  # CRC over type + data
 open("wide-new-crc.png", "wb").write(data)
 EOF</pre>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py run png python pillow wide-old-crc.png --results runs/wide-old
-<span class="p">$ </span>python3 parsarium.py run png python pillow wide-new-crc.png --results runs/wide-new</pre>
+  <pre data-copy><span class="p">$ </span>parsarium run png python pillow wide-old-crc.png --results runs/wide-old
+<span class="p">$ </span>parsarium run png python pillow wide-new-crc.png --results runs/wide-new</pre>
   <p>Compare <code>stdout_tail</code> and <code>stderr_tail</code> in the two receipts. Which check stopped the first file? How far did the second one get?</p>
   <details><summary>Hint</summary><p>IHDR starts at offset 8: four bytes of length, four of type (offsets 12 to 15), thirteen of data (16 to 28), and four of CRC (29 to 32). The width is the first four data bytes.</p></details>
   <details><summary>Solution</summary><p>The first file fails the IHDR checksum, so a strict decoder stops there. The second file passes that check and reaches the image data, where it finds fewer pixels than the header promises. What happens next is the decoder's choice: report an error, fill the missing pixels, or return a partial image. The receipt shows which one Pillow makes. Keep <code>wide-new-crc.png</code>; chapter 6 sends it to every PNG parser.</p></details>

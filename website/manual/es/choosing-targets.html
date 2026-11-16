@@ -43,8 +43,8 @@
 <div class="exercise">
   <p class="label"><span>Ejercicio 4.1</span><span class="level">Calentamiento</span></p>
   <p>Abre las celdas de PDF y compara paquetes con familias.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py catalog pdf javascript
-<span class="p">$ </span>python3 parsarium.py catalog pdf go</pre>
+  <pre data-copy><span class="p">$ </span>parsarium catalog pdf javascript
+<span class="p">$ </span>parsarium catalog pdf go</pre>
   <p>Después abre el banco con <a href="{{ROOT}}bench/?f=pdf">PDF seleccionado</a> y activa <em>Un target por familia de parser</em>. ¿Cuántos targets quedan? ¿Qué lenguajes pierden más? Apunta los dos IDs de selección.</p>
   <details><summary>Pista</summary><p>Busca nombres de familia repetidos en la última columna de cada ranking, como <code>mozilla/pdf.js</code>.</p></details>
   <details><summary>Solución</summary><p>JavaScript es el que más pierde: trece de sus paquetes de PDF se apoyan en pdf.js, así que se reducen a un solo target. Go también encoge, porque diez de sus paquetes descienden del mismo lector de PDF. Los dos IDs son distintos porque las listas de targets son distintas; apunta los dos si publicas resultados de ambas.</p></details>
@@ -58,8 +58,8 @@
 <div class="exercise">
   <p class="label"><span>Ejercicio 4.3</span><span class="level">Reto</span></p>
   <p>No todas las celdas llegan a veinte paquetes. PHP × ASCII PLY tiene cinco. Abre sus datos y averigua por qué la búsqueda se detuvo ahí.</p>
-  <pre data-copy>data/php/ascii_ply/cell.json
-data/php/ascii_ply/leads.json</pre>
+  <pre data-copy>cat "$PARSARIUM/data/php/ascii_ply/cell.json"
+cat "$PARSARIUM/data/php/ascii_ply/leads.json"</pre>
   <details><summary>Pista</summary><p>Lee el campo <code>uncertainty</code> de <code>cell.json</code>; resume la búsqueda y lo que se encontró.</p></details>
   <details><summary>Solución</summary><p>Las búsquedas en Packagist, GitHub y Sourcegraph devolvieron cientos de resultados, pero muy pocos eran código PHP que realmente parsea PLY: la mayoría eran escritores, nombres sin relación o JavaScript incrustado en páginas PHP. Dos de los cinco paquetes incluso comparten un motor. La celda se queda por debajo de veinte porque el espacio de búsqueda está documentado y agotado, no porque nadie buscara. Esto es lo que el protocolo llama un límite de búsqueda registrado.</p></details>
 </div>

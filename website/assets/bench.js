@@ -160,7 +160,7 @@
       "#!/usr/bin/env bash",
       `# Parsarium ${id}: ${picked.length} targets, ${fmts.length} formats`,
       `# ${pageUrl()}`,
-      `# Built from parsarium commit ${catalog.commit}. Run from the repository root.`,
+      `# Built from parsarium commit ${catalog.commit}. Needs the parsarium command: pip install parsarium`,
       "set -uo pipefail",
       `OUT="\${OUT:-runs/${id}}"`,
     ];
@@ -175,24 +175,24 @@
     } else if (state.mode === "afl") {
       lines.push('SECONDS_PER_TARGET="${SECONDS_PER_TARGET:-3600}"');
     }
-    lines.push('mkdir -p "$OUT"', "", "TARGETS=(");
+    lines.push('PARSARIUM="${PARSARIUM:-$(parsarium home --path)}"', 'mkdir -p "$OUT"', "", "TARGETS=(");
     for (const t of picked) lines.push(`  "${t.format} ${t.ecosystem} ${t.slug} ${t.control}"`);
     lines.push(")", "", 'for entry in "${TARGETS[@]}"; do', '  read -r fmt eco slug control <<<"$entry"', '  name="$fmt-$eco-$slug"', '  echo "== $name"');
     const fail = '|| echo "$name" >> "$OUT/failed.txt"';
     if (state.mode === "control") {
-      lines.push(`  python3 parsarium.py run "$fmt" "$eco" "$slug" "$control" --results "$OUT/$name" ${fail}`);
+      lines.push(`  parsarium run "$fmt" "$eco" "$slug" "$PARSARIUM/$control" --results "$OUT/$name" ${fail}`);
     } else if (state.mode === "file") {
-      if (single) lines.push(`  python3 parsarium.py run "$fmt" "$eco" "$slug" "$INPUT" --results "$OUT/$name" ${fail}`);
+      if (single) lines.push(`  parsarium run "$fmt" "$eco" "$slug" "$INPUT" --results "$OUT/$name" ${fail}`);
       else lines.push('  for input in "$INPUTS/$fmt"/*; do', '    [ -f "$input" ] || continue',
-        `    python3 parsarium.py run "$fmt" "$eco" "$slug" "$input" --results "$OUT/$name/$(basename "$input")" ${fail}`, "  done");
+        `    parsarium run "$fmt" "$eco" "$slug" "$input" --results "$OUT/$name/$(basename "$input")" ${fail}`, "  done");
     } else if (state.mode === "replay") {
       const dir = single ? '"$CORPUS"' : '"$CORPUS/$fmt"';
-      lines.push(`  python3 parsarium.py replay "$fmt" "$eco" "$slug" ${dir} "$OUT/$name" ${fail}`);
+      lines.push(`  parsarium replay "$fmt" "$eco" "$slug" ${dir} "$OUT/$name" ${fail}`);
     } else {
-      lines.push('  python3 parsarium.py afl build "$fmt" "$eco" "$slug" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
-        '  python3 parsarium.py afl prepare "$fmt" "$eco" "$slug" "$OUT/$name" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
-        `  python3 parsarium.py afl run "$OUT/$name" --seconds "$SECONDS_PER_TARGET" ${fail}`,
-        '  python3 parsarium.py afl summary "$OUT/$name" >/dev/null || true');
+      lines.push('  parsarium afl build "$fmt" "$eco" "$slug" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
+        '  parsarium afl prepare "$fmt" "$eco" "$slug" "$OUT/$name" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
+        `  parsarium afl run "$OUT/$name" --seconds "$SECONDS_PER_TARGET" ${fail}`,
+        '  parsarium afl summary "$OUT/$name" >/dev/null || true');
     }
     lines.push("done", 'echo "Receipts in $OUT"');
     return lines.join("\n") + "\n";
@@ -299,6 +299,8 @@
     const report = reportFor(id, picked);
     root.querySelector('[data-out="script"]').textContent = script;
     root.querySelector('[data-out="manifest"]').textContent = manifest;
+    root.querySelector('[data-out="runcmd"]').innerHTML =
+      `<span class="p">$ </span>parsarium run-selection ${id}.json --mode ${state.mode}${state.mode === "afl" ? " --seconds 3600" : ""}${["file", "replay"].includes(state.mode) ? " --input PATH" : ""}`;
     root.querySelector('[data-out="report"]').textContent = report;
     setDownload("script", "run-selection.sh", script, "text/x-shellscript");
     setDownload("manifest", `${id}.json`, manifest, "application/json");

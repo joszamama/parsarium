@@ -42,11 +42,11 @@
 <div class="exercise">
   <p class="label"><span>Ejercicio 5.1</span><span class="level">Calentamiento</span></p>
   <p>Prepara una ejecución de AFL++ para un target compilado y otra para un target con puente, y compara sus planes.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py afl build png c libpng
-<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-afl
-<span class="p">$ </span>python3 parsarium.py afl build png python pillow
-<span class="p">$ </span>python3 parsarium.py afl prepare png python pillow runs/pillow-afl
-<span class="p">$ </span>python3 parsarium.py afl run runs/pillow-afl --check</pre>
+  <pre data-copy><span class="p">$ </span>parsarium afl build png c libpng
+<span class="p">$ </span>parsarium afl prepare png c libpng runs/libpng-afl
+<span class="p">$ </span>parsarium afl build png python pillow
+<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow-afl
+<span class="p">$ </span>parsarium afl run runs/pillow-afl --check</pre>
   <p>Abre los dos archivos <code>plan.json</code> y busca el tipo de feedback. Después ejecuta cada uno durante cinco minutos con <code>--seconds 300</code> y compara <code>execs_per_sec</code> en <code>afl-out/default/fuzzer_stats</code>.</p>
   <details><summary>Pista</summary><p><code>fuzzer_stats</code> es un archivo de texto plano con líneas <code>key : value</code>.</p></details>
   <details><summary>Solución</summary><p>El plan de Pillow indica el puente de Python; el de libpng usa aristas compiladas. Cuenta con que libpng haga muchas más ejecuciones por segundo, a menudo un orden de magnitud o más, porque el puente traza líneas de Python y las pasa por un proxy. Por eso los presupuestos de los targets con puente hay que fijarlos con cuidado.</p></details>
@@ -55,8 +55,8 @@
   <p class="label"><span>Ejercicio 5.2</span><span class="level">Práctica</span></p>
   <p>Parsarium comprueba que los puentes responden a la entrada ejecutando dos entradas distintas y registrando las características del parser que alcanzó cada una. Lee <code>data/afl-feedback-differential.json</code> y, para cada proyecto, calcula la diferencia como proporción de las características de la primera entrada.</p>
   <pre data-copy>python3 - &lt;&lt;'EOF'
-import json
-for r in json.load(open("data/afl-feedback-differential.json"))["results"]:
+import json, os
+for r in json.load(open(os.path.join(os.environ["PARSARIUM"], "data/afl-feedback-differential.json")))["results"]:
     share = r["parser_feature_difference"] / r["first_parser_features"]
     print(f"{r['project']:30} {r['first_parser_features']:4} {r['second_parser_features']:4} {share:6.1%}")
 EOF</pre>

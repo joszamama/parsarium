@@ -395,13 +395,13 @@ def build(output: Path) -> None:
                 if verification.get("coverage_kind") == "native_binary_edges" else None
             ),
             "projectGuideUrl": record["projectUrl"],
-            "controlCommand": f"python3 parsarium.py run {target_args} {manifest['control']} --results {run_dir}-control",
-            "inputCommand": f"python3 parsarium.py run {target_args} INPUT_FILE --results {run_dir}-single",
-            "replayCommand": f"python3 parsarium.py replay {target_args} CORPUS_DIR {run_dir}-replay",
+            "controlCommand": f"parsarium run {target_args} \"$PARSARIUM/{manifest['control']}\" --results {run_dir}-control",
+            "inputCommand": f"parsarium run {target_args} INPUT_FILE --results {run_dir}-single",
+            "replayCommand": f"parsarium replay {target_args} CORPUS_DIR {run_dir}-replay",
             "aflCommands": [
-                f"python3 parsarium.py afl build {target_args}",
-                f"python3 parsarium.py afl prepare {target_args} {run_dir}-afl",
-                f"python3 parsarium.py afl run {run_dir}-afl --seconds 60",
+                f"parsarium afl build {target_args}",
+                f"parsarium afl prepare {target_args} {run_dir}-afl",
+                f"parsarium afl run {run_dir}-afl --seconds 60",
             ],
         }
     if len(targets) != coverage["containerized_verified"] + coverage["standard_containerized_verified"]:
@@ -460,13 +460,13 @@ def build(output: Path) -> None:
             "coverageTuples": (verification.get("binary_feedback") or {}).get("control_tuples"),
             "manifestUrl": repo_link(source),
             "projectGuideUrl": repo_link(str((ROOT / source).parent.relative_to(ROOT) / "README.md")),
-            "controlCommand": f"python3 parsarium.py run {target} {manifest['control']} --results {run_dir}-control",
-            "inputCommand": f"python3 parsarium.py run {target} INPUT_FILE --results {run_dir}-single",
-            "replayCommand": f"python3 parsarium.py replay {target} CORPUS_DIR {run_dir}-replay",
+            "controlCommand": f"parsarium run {target} \"$PARSARIUM/{manifest['control']}\" --results {run_dir}-control",
+            "inputCommand": f"parsarium run {target} INPUT_FILE --results {run_dir}-single",
+            "replayCommand": f"parsarium replay {target} CORPUS_DIR {run_dir}-replay",
             "aflCommands": [
-                f"python3 parsarium.py afl build {target}",
-                f"python3 parsarium.py afl prepare {target} {run_dir}-afl",
-                f"python3 parsarium.py afl run {run_dir}-afl --seconds 60",
+                f"parsarium afl build {target}",
+                f"parsarium afl prepare {target} {run_dir}-afl",
+                f"parsarium afl run {run_dir}-afl --seconds 60",
             ],
         })
     if [demo["format"] for demo in demos] != [fmt for fmt, *_ in FORMATS]:

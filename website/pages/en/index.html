@@ -48,28 +48,29 @@
     <div>
       <div class="sec-head">
         <h2>Three ways to use it.</h2>
-        <p>Everything runs locally with Python 3.11 and Docker. Clone the repository and start from the root.</p>
+        <p>Install the command with pip. It needs Python 3.11, and Docker to run targets. The first run downloads the harness files for your version, about 19 MB.</p>
+        <pre data-copy><span class="p">$ </span>pip install parsarium</pre>
       </div>
       <div class="uses">
         <div class="use">
           <div><h3>Run one file through one parser.</h3>
             <p>You get a JSON receipt with the input hash, the image ID, the exit status, and the time it took. It is the quickest way to check how a specific library handles a specific input.</p></div>
-          <pre data-copy><span class="p">$ </span>python3 parsarium.py show png python pillow
-<span class="p">$ </span>python3 parsarium.py run png python pillow my.png</pre>
+          <pre data-copy><span class="p">$ </span>parsarium show png python pillow
+<span class="p">$ </span>parsarium run png python pillow my.png</pre>
         </div>
         <div class="use">
           <div><h3>Send the same file to every parser.</h3>
             <p>Each target writes its own receipt and <code>summary.json</code> collects them. When parsers disagree about the same bytes, that is a good place to start looking.</p></div>
-          <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --list
-<span class="p">$ </span>python3 parsarium.py run-format png \
+          <pre data-copy><span class="p">$ </span>parsarium run-format png --list
+<span class="p">$ </span>parsarium run-format png \
     --file my.png --results runs/png-my-file</pre>
         </div>
         <div class="use">
           <div><h3>Fuzz a parser with AFL++.</h3>
             <p>All runnable targets have an AFL++ overlay. C, C++, and Rust parsers are instrumented directly. Go, Java, JavaScript, Python, and PHP parsers send their coverage to AFL++ through a small bridge.</p></div>
-          <pre data-copy><span class="p">$ </span>python3 parsarium.py afl build png python pillow
-<span class="p">$ </span>python3 parsarium.py afl prepare png python pillow runs/pillow
-<span class="p">$ </span>python3 parsarium.py afl run runs/pillow --seconds 3600</pre>
+          <pre data-copy><span class="p">$ </span>parsarium afl build png python pillow
+<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow
+<span class="p">$ </span>parsarium afl run runs/pillow --seconds 3600</pre>
         </div>
       </div>
     </div>

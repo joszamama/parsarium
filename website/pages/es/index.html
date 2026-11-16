@@ -48,28 +48,29 @@
     <div>
       <div class="sec-head">
         <h2>Tres formas de usarlo.</h2>
-        <p>Todo se ejecuta en local con Python 3.11 y Docker. Clona el repositorio y empieza desde la raíz.</p>
+        <p>Instala el comando con pip. Necesita Python 3.11, y Docker para ejecutar targets. La primera ejecución descarga los archivos de los harnesses de tu versión, unos 19 MB.</p>
+        <pre data-copy><span class="p">$ </span>pip install parsarium</pre>
       </div>
       <div class="uses">
         <div class="use">
           <div><h3>Pasa un archivo por un parser.</h3>
             <p>Obtienes un registro JSON con el hash de la entrada, el ID de la imagen, el código de salida y el tiempo que tardó. Es la forma más rápida de comprobar cómo trata una biblioteca concreta una entrada concreta.</p></div>
-          <pre data-copy><span class="p">$ </span>python3 parsarium.py show png python pillow
-<span class="p">$ </span>python3 parsarium.py run png python pillow my.png</pre>
+          <pre data-copy><span class="p">$ </span>parsarium show png python pillow
+<span class="p">$ </span>parsarium run png python pillow my.png</pre>
         </div>
         <div class="use">
           <div><h3>Envía el mismo archivo a todos los parsers.</h3>
             <p>Cada target escribe su propio registro y <code>summary.json</code> los reúne. Cuando los parsers no se ponen de acuerdo sobre los mismos bytes, ahí es donde conviene empezar a mirar.</p></div>
-          <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --list
-<span class="p">$ </span>python3 parsarium.py run-format png \
+          <pre data-copy><span class="p">$ </span>parsarium run-format png --list
+<span class="p">$ </span>parsarium run-format png \
     --file my.png --results runs/png-my-file</pre>
         </div>
         <div class="use">
           <div><h3>Haz fuzzing a un parser con AFL++.</h3>
             <p>Todos los targets ejecutables tienen una imagen para AFL++. Los parsers en C, C++ y Rust se instrumentan directamente. Los parsers en Go, Java, JavaScript, Python y PHP envían su cobertura a AFL++ mediante un pequeño puente.</p></div>
-          <pre data-copy><span class="p">$ </span>python3 parsarium.py afl build png python pillow
-<span class="p">$ </span>python3 parsarium.py afl prepare png python pillow runs/pillow
-<span class="p">$ </span>python3 parsarium.py afl run runs/pillow --seconds 3600</pre>
+          <pre data-copy><span class="p">$ </span>parsarium afl build png python pillow
+<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow
+<span class="p">$ </span>parsarium afl run runs/pillow --seconds 3600</pre>
         </div>
       </div>
     </div>

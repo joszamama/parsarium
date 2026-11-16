@@ -7,8 +7,8 @@
 
 <h2>Pasar un archivo por todos los parsers</h2>
 <p>Parsarium tiene un comando para esto. Ejecuta todos los harnesses verificados de un formato, opcionalmente limitados a un lenguaje, y guarda un registro por target más un <code>summary.json</code>.</p>
-<pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --list
-<span class="p">$ </span>python3 parsarium.py run-format png --file my.png --results runs/png-my-file --workers 4</pre>
+<pre data-copy><span class="p">$ </span>parsarium run-format png --list
+<span class="p">$ </span>parsarium run-format png --file my.png --results runs/png-my-file --workers 4</pre>
 <p><code>summary.json</code> enumera cada target con su estado y el directorio de su registro. Los recuentos por estado dan una primera visión: cuántos terminaron, cuántos salieron con error y cuántos agotaron el tiempo.</p>
 
 <h2>Comparar las respuestas</h2>
@@ -49,7 +49,7 @@ EOF</pre>
 <div class="exercise">
   <p class="label"><span>Ejercicio 6.1</span><span class="level">Calentamiento</span></p>
   <p>Toma <code>wide-new-crc.png</code> del ejercicio 2.2: un PNG que dice medir 3 píxeles de ancho pero solo trae datos para 2. Envíalo a todos los parsers de PNG.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --file wide-new-crc.png --results runs/png-wide --workers 4</pre>
+  <pre data-copy><span class="p">$ </span>parsarium run-format png --file wide-new-crc.png --results runs/png-wide --workers 4</pre>
   <p>Agrupa los resultados con el script de este capítulo. ¿Cuántos parsers rechazan el archivo? ¿Alguno informa de un ancho de 3? ¿Las respuestas se separan por lenguajes o por familias de parsers?</p>
   <details><summary>Pista</summary><p>Empieza por <code>status_counts</code> en <code>summary.json</code> y después ejecuta el script de agrupación.</p></details>
   <details><summary>Solución</summary><p>El reparto exacto depende de los parsers, y precisamente por eso hay que ejecutarlo. Busca tres grupos: los parsers que rechazan el archivo porque los datos de la imagen son demasiado cortos, los que lo aceptan e informan de un ancho de 3 (rellenando o ignorando los píxeles que faltan), y los que terminan con un error o agotan el tiempo. Este último grupo merece una mirada más atenta. Luego revisa la columna de familia: si un grupo está formado por wrappers de un mismo motor, es un solo comportamiento, no muchos.</p></details>
@@ -57,7 +57,7 @@ EOF</pre>
 <div class="exercise">
   <p class="label"><span>Ejercicio 6.2</span><span class="level">Práctica</span></p>
   <p>Las entradas de un ZIP se pueden comprimir con métodos distintos. <code>controls/zip/hello-zstd.zip</code> usa Zstandard, un método más reciente que no todos los lectores soportan. Envíalo a todos los parsers de ZIP.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format zip --file controls/zip/hello-zstd.zip --results runs/zip-zstd --workers 4</pre>
+  <pre data-copy><span class="p">$ </span>parsarium run-format zip --file "$PARSARIUM/controls/zip/hello-zstd.zip" --results runs/zip-zstd --workers 4</pre>
   <p>¿Qué parsers pueden leer la entrada? ¿Cómo fallan los demás: con un error claro, con un resultado incorrecto o con un crash?</p>
   <details><summary>Pista</summary><p>Solo un target de ZIP del catálogo usa este archivo como control. Eso ya te dice algo sobre cuántos lectores se espera que lo soporten.</p></details>
   <details><summary>Solución</summary><p>Lo normal es que la mayoría de los lectores no soporten Zstandard; el target <code>zipfile-zstd</code> del propio catálogo existe precisamente porque el <code>zipfile</code> de la biblioteca estándar de Python necesita una extensión para leerlo. Lo interesante es cómo falla cada lector. Un error claro del tipo «método de compresión no soportado» es un buen comportamiento. Devolver basura o un archivo vacío sin ningún error es el tipo de desacuerdo que puede importar en la práctica, por ejemplo cuando una herramienta comprueba un archivo comprimido y otra lo extrae.</p></details>
@@ -66,7 +66,7 @@ EOF</pre>
   <p class="label"><span>Ejercicio 6.3</span><span class="level">Reto</span></p>
   <p>Escribe una petición HTTP con una cabecera <code>Content-Length</code> y otra <code>Transfer-Encoding: chunked</code>, y envíala a todos los parsers de HTTP/1.1.</p>
   <pre data-copy>printf 'POST / HTTP/1.1\r\nHost: example.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n' &gt; cl-te.http
-<span class="p">$ </span>python3 parsarium.py run-format http11 --file cl-te.http --results runs/http-cl-te --workers 4</pre>
+<span class="p">$ </span>parsarium run-format http11 --file cl-te.http --results runs/http-cl-te --workers 4</pre>
   <p>¿Qué cabecera sigue cada parser y cuáles rechazan la petición?</p>
   <details><summary>Pista</summary><p>Lee primero la sección 6.1 del <a href="https://www.rfc-editor.org/rfc/rfc9112#section-6.1">RFC 9112</a> para saber qué permite la especificación.</p></details>
   <details><summary>Solución</summary><p>El RFC 9112 permite a un servidor rechazar una petición así o procesarla usando solo Transfer-Encoding. Las dos opciones son válidas. El caso peligroso es un parser que usa Content-Length en su lugar, porque si está delante o detrás de un parser que sigue Transfer-Encoding, los dos no coinciden en dónde termina la petición. Agrupa tus resultados en esos tres comportamientos. Ten en cuenta que algunos targets analizan respuestas en lugar de peticiones; déjalos fuera de esta comparación.</p></details>

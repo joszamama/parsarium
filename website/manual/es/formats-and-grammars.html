@@ -47,15 +47,15 @@
   <p class="label"><span>Ejercicio 2.2</span><span class="level">Práctica</span></p>
   <p>Cambia el ancho del control PNG de 2 a 3. Haz dos versiones: una que mantenga el CRC antiguo y otra con el CRC corregido. Después pasa las dos por Pillow.</p>
   <pre data-copy>python3 - &lt;&lt;'EOF'
-import struct, zlib
-data = bytearray(open("controls/png/red-green.png", "rb").read())
+import os, struct, zlib
+data = bytearray(open(os.path.join(os.environ["PARSARIUM"], "controls/png/red-green.png"), "rb").read())
 data[16:20] = struct.pack("&gt;I", 3)                       # ancho de IHDR: 2 -&gt; 3
 open("wide-old-crc.png", "wb").write(data)
 data[29:33] = struct.pack("&gt;I", zlib.crc32(data[12:29]))  # CRC sobre tipo + datos
 open("wide-new-crc.png", "wb").write(data)
 EOF</pre>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py run png python pillow wide-old-crc.png --results runs/wide-old
-<span class="p">$ </span>python3 parsarium.py run png python pillow wide-new-crc.png --results runs/wide-new</pre>
+  <pre data-copy><span class="p">$ </span>parsarium run png python pillow wide-old-crc.png --results runs/wide-old
+<span class="p">$ </span>parsarium run png python pillow wide-new-crc.png --results runs/wide-new</pre>
   <p>Compara <code>stdout_tail</code> y <code>stderr_tail</code> en los dos registros. ¿Qué comprobación detuvo el primer archivo? ¿Hasta dónde llegó el segundo?</p>
   <details><summary>Pista</summary><p>IHDR empieza en el desplazamiento 8: cuatro bytes de longitud, cuatro de tipo (desplazamientos 12 a 15), trece de datos (16 a 28) y cuatro de CRC (29 a 32). El ancho son los cuatro primeros bytes de datos.</p></details>
   <details><summary>Solución</summary><p>El primer archivo no supera la suma de comprobación de IHDR, así que un decodificador estricto se detiene ahí. El segundo supera esa comprobación y llega a los datos de la imagen, donde encuentra menos píxeles de los que promete la cabecera. Lo que pasa después lo decide el decodificador: informar de un error, rellenar los píxeles que faltan o devolver una imagen parcial. El registro muestra qué hace Pillow. Guarda <code>wide-new-crc.png</code>; en el capítulo 6 lo enviamos a todos los parsers de PNG.</p></details>

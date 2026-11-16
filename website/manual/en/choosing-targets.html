@@ -43,8 +43,8 @@
 <div class="exercise">
   <p class="label"><span>Exercise 4.1</span><span class="level">Warm-up</span></p>
   <p>Open the PDF cells and compare packages with families.</p>
-  <pre data-copy><span class="p">$ </span>python3 parsarium.py catalog pdf javascript
-<span class="p">$ </span>python3 parsarium.py catalog pdf go</pre>
+  <pre data-copy><span class="p">$ </span>parsarium catalog pdf javascript
+<span class="p">$ </span>parsarium catalog pdf go</pre>
   <p>Then open the bench with <a href="{{ROOT}}bench/?f=pdf">PDF selected</a>, and turn on <em>One target per parser family</em>. How many targets are left? Which languages lose the most? Note the two selection IDs.</p>
   <details><summary>Hint</summary><p>Look for repeated family names in the last column of each ranking, such as <code>mozilla/pdf.js</code>.</p></details>
   <details><summary>Solution</summary><p>JavaScript loses the most: thirteen of its PDF packages build on pdf.js, so they collapse into one target. Go also shrinks, because ten of its packages descend from the same PDF reader. The two IDs differ because the target lists differ; write both down if you report results for both.</p></details>
@@ -58,8 +58,8 @@
 <div class="exercise">
   <p class="label"><span>Exercise 4.3</span><span class="level">Challenge</span></p>
   <p>Not every cell reaches twenty packages. PHP × ASCII PLY has five. Open its data and find out why the search stopped there.</p>
-  <pre data-copy>data/php/ascii_ply/cell.json
-data/php/ascii_ply/leads.json</pre>
+  <pre data-copy>cat "$PARSARIUM/data/php/ascii_ply/cell.json"
+cat "$PARSARIUM/data/php/ascii_ply/leads.json"</pre>
   <details><summary>Hint</summary><p>Read the <code>uncertainty</code> field in <code>cell.json</code>; it summarises the search and what was found.</p></details>
   <details><summary>Solution</summary><p>The searches over Packagist, GitHub, and Sourcegraph returned hundreds of hits, but very few were PHP code that actually parses PLY: most were writers, unrelated names, or JavaScript embedded in PHP pages. Two of the five packages even share one engine. The cell stops below twenty because the search surface is documented and exhausted, not because nobody looked. This is what the protocol means by a recorded search limit.</p></details>
 </div>
