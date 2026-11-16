@@ -46,6 +46,16 @@ def derived_dockerfile(project: Path) -> str:
             "&& chmod +x /work/build.sh && /work/build.sh",
             1,
         )
+    if project.name == "libmediainfo":
+        # CMake cannot discover clang-scan-deps through the AFL++ compiler
+        # wrapper when MediaInfoLib auto-selects C++26. The library supports
+        # C++17, which avoids module dependency scanning.
+        text = text.replace(
+            "&& chmod +x /work/build.sh && /work/build.sh",
+            "&& sed -i 's@-DCMAKE_BUILD_TYPE=Release @-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 @' /work/build.sh "
+            "&& chmod +x /work/build.sh && /work/build.sh",
+            1,
+        )
     if project.name == "imlib2":
         loader = {"png": "png", "ascii_pnm": "pnm", "svg": "svg"}[project.parent.parent.name]
         text += f"\nENV AFL_PRELOAD=/work/install/lib/imlib2/loaders/{loader}.so\n"

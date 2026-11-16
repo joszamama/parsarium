@@ -21,6 +21,11 @@
 
 Native MediaInfoLib parsers are used from both C and C++ APIs; these call sites share one parser engine across ecosystems. The source has File_Mpega.cpp and File_Id3v2.cpp; its libzen dependency is a base utility library.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/libmediainfo/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp libmediainfo
+python3 parsarium.py run mp3_id3v2 cpp libmediainfo controls/mp3_id3v2/tone-tags.mp3
+```
