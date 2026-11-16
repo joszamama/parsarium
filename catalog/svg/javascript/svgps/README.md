@@ -25,6 +25,11 @@
 
 Converts SVG rectangle elements into path records.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/javascript/svgps/README.md)
+
+```sh
+python3 parsarium.py build svg javascript svgps
+python3 parsarium.py run svg javascript svgps controls/svg/red-green.svg
+```

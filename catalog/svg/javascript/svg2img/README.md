@@ -30,6 +30,11 @@
 
 README states the v1 conversion backend is resvg-js.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/javascript/svg2img/README.md)
+
+```sh
+python3 parsarium.py build svg javascript svg2img
+python3 parsarium.py run svg javascript svg2img controls/svg/red-green.svg
+```

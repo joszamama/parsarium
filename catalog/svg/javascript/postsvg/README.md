@@ -25,6 +25,11 @@
 
 SVG-oriented wrapper over htmlparser2 in XML mode.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/javascript/postsvg/README.md)
+
+```sh
+python3 parsarium.py build svg javascript postsvg
+python3 parsarium.py run svg javascript postsvg controls/svg/red-green.svg
+```

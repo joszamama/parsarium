@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/javascript/probe_image_size/README.md)
+
+```sh
+python3 parsarium.py build svg javascript probe_image_size
+python3 parsarium.py run svg javascript probe_image_size controls/svg/red-green.svg
+```
