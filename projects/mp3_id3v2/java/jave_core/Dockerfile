@@ -36,8 +36,8 @@ RUN mkdir /work/lib \
     && echo '850508c837454a1b06017c32a36876fae516de1e89a829f725fee1e6dcc52000  /work/lib/jlayer-1.0.1.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0.jar -o /work/lib/jave-core-4.2.0.jar \
     && echo '538dc69c6e154921a2f2d7a9cfa50dd9b39ed9a18a3d0455484fdd00f1557ffb  /work/lib/jave-core-4.2.0.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/ws/schild/jave-nativebin-osxm1/4.2.0/jave-nativebin-osxm1-4.2.0.jar -o /work/lib/jave-nativebin-osxm1-4.2.0.jar \
-    && echo '5f4c7932489f130311dc8b5864958becdaf2e683307c83fb35cab83b76779388  /work/lib/jave-nativebin-osxm1-4.2.0.jar' | sha256sum --check \
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/ws/schild/jave-nativebin-linux-arm64/4.2.0/jave-nativebin-linux-arm64-4.2.0.jar -o /work/lib/jave-nativebin-linux-arm64-4.2.0.jar \
+    && echo 'c80ab22e15d41f2f1464c27c9e5d7ae2f018661e6561bcc1f31da699a16a14db  /work/lib/jave-nativebin-linux-arm64-4.2.0.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29.jar -o /work/lib/jaffree-2024.08.29.jar \
     && echo 'f998ba5c805f92317f748f5e768dd4011db65bd2817029eea82dc87ce3c0e734  /work/lib/jaffree-2024.08.29.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/com/grack/nanojson/1.9/nanojson-1.9.jar -o /work/lib/nanojson-1.9.jar \

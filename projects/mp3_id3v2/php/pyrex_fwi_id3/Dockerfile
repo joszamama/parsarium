@@ -19,4 +19,6 @@ WORKDIR /work
 COPY --from=build /work/vendor /work/vendor
 COPY --from=build /work/toolchain.txt /work/toolchain.txt
 COPY adapter.php harness.php fuzz-target.php run-control.php /work/
+COPY pyrex/mediainfo_oldxml.sh /work/pyrex/mediainfo_oldxml.sh
+RUN chmod +x /work/pyrex/mediainfo_oldxml.sh
 ENTRYPOINT ["php", "-d", "xdebug.mode=coverage", "/work/run-control.php"]

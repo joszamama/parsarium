@@ -25,6 +25,11 @@
 
 Independent header-only C++ PLY parser with direct stream input.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/plywoot/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp plywoot
+python3 parsarium.py run ascii_ply cpp plywoot controls/ascii_ply/triangle.ply
+```

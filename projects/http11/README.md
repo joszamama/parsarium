@@ -4,7 +4,9 @@
 
 ## Targets
 
+- [http-parser / C](c/http-parser/README.md)
 - [picohttpparser / C](c/picohttpparser/README.md)
+- [http-parser / C++](cpp/http-parser/README.md)
 - [picohttpparser / C++](cpp/picohttpparser/README.md)
 - [github.com/FastTLS/oohttp / Go](go/github_com_fasttls_oohttp/README.md)
 - [github.com/antlabs/httparser / Go](go/github_com_antlabs_httparser/README.md)
@@ -111,7 +113,9 @@
 - [blazingly-wire / Rust](rust/blazingly_wire/README.md)
 - [h11r / Rust](rust/h11r/README.md)
 - [http-kit-h1 / Rust](rust/http_kit_h1/README.md)
+- [http-muncher / Rust](rust/http_muncher/README.md)
 - [http-net / Rust](rust/http_net/README.md)
+- [http_parser / Rust](rust/http_parser/README.md)
 - [httparse / Rust](rust/httparse/README.md)
 - [minihttpse / Rust](rust/minihttpse/README.md)
 - [ntex-httparse / Rust](rust/ntex_httparse/README.md)

@@ -130,8 +130,9 @@ switch ($package) {
         $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];
         break;
     case 'gufy/pdftohtml-php':
-        \Gufy\PdfToHtml\Config::set('pdfinfo.bin', getenv('PARSARIUM_PDFINFO') ?: '/opt/homebrew/bin/pdfinfo');
-        \Gufy\PdfToHtml\Config::set('pdftohtml.bin', getenv('PARSARIUM_PDFTOHTML') ?: '/opt/homebrew/bin/pdftohtml');
+        \Gufy\PdfToHtml\Config::set('pdfinfo.bin', getenv('PARSARIUM_PDFINFO') ?: '/usr/bin/pdfinfo');
+        \Gufy\PdfToHtml\Config::set('pdftohtml.bin', getenv('PARSARIUM_PDFTOHTML') ?: '/usr/bin/pdftohtml');
+        \Gufy\PdfToHtml\Config::set('pdftohtml.output', '/tmp/parsarium-pdftohtml');
         $document = new \Gufy\PdfToHtml\Pdf($path);
         $html = $document->html();
         $text = trim(preg_replace('/\s+/u', ' ', html_entity_decode(strip_tags($html))));

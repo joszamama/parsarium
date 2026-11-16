@@ -1,13 +1,13 @@
 # HTTP/1.1 / C
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/http11/ranking.md) · [standard API inventory](../../../data/c/http11/standard.json)
 
 ## Third-party parsers
 
 - [llhttp](llhttp/README.md) — verified API path
-- [http-parser](http-parser/README.md) — verified API path
+- [http-parser](http-parser/README.md) — Docker harness ready
 - [picohttpparser](picohttpparser/README.md) — Docker harness ready
 - [mongoose](mongoose/README.md) — verified API path
 - [httpp](httpp/README.md) — verified API path

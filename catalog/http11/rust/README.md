@@ -1,6 +1,6 @@
 # HTTP/1.1 / Rust
 
-22 verified third-party API paths; 20 have verified Docker harnesses.
+22 verified third-party API paths; 22 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/http11/ranking.md) · [standard API inventory](../../../data/rust/http11/standard.json)
 
@@ -26,8 +26,8 @@
 - [webparse](webparse/README.md) — Docker harness ready
 - [async-h1](async-h1/README.md) — Docker harness ready
 - [async-http-codec](async-http-codec/README.md) — Docker harness ready
-- [http-muncher](http-muncher/README.md) — verified API path
-- [http_parser](http-parser/README.md) — verified API path
+- [http-muncher](http-muncher/README.md) — Docker harness ready
+- [http_parser](http-parser/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

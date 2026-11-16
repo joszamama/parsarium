@@ -145,6 +145,7 @@ switch ($package) {
         ];
         break;
     case 'uberchel/mediainfo4php':
+        require_once __DIR__ . '/vendor/uberchel/mediainfo4php/mediainfo.php';
         $parsed = \uberchel\MediaInfo::Get($path, false);
         $output = [
             'video_codec' => $parsed['streams']['video']['codec'] ?? null,

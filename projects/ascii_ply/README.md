@@ -6,7 +6,10 @@
 
 - [rply / C](c/rply/README.md)
 - [sply / C](c/sply/README.md)
+- [happly / C++](cpp/happly/README.md)
+- [plywoot / C++](cpp/plywoot/README.md)
 - [rply / C++](cpp/rply/README.md)
+- [tinyply / C++](cpp/tinyply/README.md)
 - [github.com/EliCDavis/polyform/formats/ply / Go](go/polyform_ply/README.md)
 - [github.com/NOT-REAL-GAMES/assimpgo / Go](go/github_com_not_real_games_assimpgo/README.md)
 - [github.com/PetrusJPrinsloo/assimp-go / Go](go/github_com_petrusjprinsloo_assimp_go/README.md)

@@ -67,6 +67,7 @@
 - [unpdf / JavaScript](javascript/unpdf/README.md)
 - [andreaventuri/tcpdi / PHP](php/andreaventuri_tcpdi/README.md)
 - [asika/pdf2text / PHP](php/asika_pdf2text/README.md)
+- [gufy/pdftohtml-php / PHP](php/gufy_pdftohtml_php/README.md)
 - [howtomakeaturn/pdfinfo / PHP](php/howtomakeaturn_pdfinfo/README.md)
 - [iio/libmergepdf / PHP](php/iio_libmergepdf/README.md)
 - [jurosh/pdf-merge / PHP](php/jurosh_pdf_merge/README.md)

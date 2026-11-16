@@ -1,6 +1,6 @@
 # PDF / PHP
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/pdf/ranking.md) · [standard API inventory](../../../data/php/pdf/standard.json)
 
@@ -25,7 +25,7 @@
 - [rafikhaceb/tcpdi](rafikhaceb-tcpdi/README.md) — Docker harness ready
 - [andreaventuri/tcpdi](andreaventuri-tcpdi/README.md) — Docker harness ready
 - [tomsgu/pdf-merger](tomsgu-pdf-merger/README.md) — Docker harness ready
-- [gufy/pdftohtml-php](gufy-pdftohtml-php/README.md) — verified API path
+- [gufy/pdftohtml-php](gufy-pdftohtml-php/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "zip",
+  "ecosystem": "java",
+  "package": "jdk-jarfile",
+  "release": "21.0.2",
+  "api": "jdk-jarfile",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.base",
+  "standard_inventory": "data/java/zip/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "db87d005701923c8b38d829219b6245bbf022262eb4851be47639fe50aa9a916",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "name": "hello.txt",
+    "content_base64": "cGFyc2FyaXVtCg=="
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_engine_sha256": "0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of OpenJDK java.base format readers",
+  "coverage_subject_prefix": "/work/parser-classes/"
+}

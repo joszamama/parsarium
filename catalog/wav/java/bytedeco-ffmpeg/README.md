@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/java/bytedeco_ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build wav java bytedeco_ffmpeg
+python3 parsarium.py run wav java bytedeco_ffmpeg controls/wav/256-samples.wav
+```

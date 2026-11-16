@@ -8,8 +8,8 @@ RUN mkdir /work/lib \
     && echo '538dc69c6e154921a2f2d7a9cfa50dd9b39ed9a18a3d0455484fdd00f1557ffb  /work/lib/jave-core-4.2.0.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar -o /work/lib/slf4j-api-2.0.18.jar \
     && echo '44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55  /work/lib/slf4j-api-2.0.18.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/ws/schild/jave-nativebin-osxm1/4.2.0/jave-nativebin-osxm1-4.2.0.jar -o /work/lib/jave-nativebin-osxm1-4.2.0.jar \
-    && echo '5f4c7932489f130311dc8b5864958becdaf2e683307c83fb35cab83b76779388  /work/lib/jave-nativebin-osxm1-4.2.0.jar' | sha256sum --check
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/ws/schild/jave-nativebin-linux-arm64/4.2.0/jave-nativebin-linux-arm64-4.2.0.jar -o /work/lib/jave-nativebin-linux-arm64-4.2.0.jar \
+    && echo 'c80ab22e15d41f2f1464c27c9e5d7ae2f018661e6561bcc1f31da699a16a14db  /work/lib/jave-nativebin-linux-arm64-4.2.0.jar' | sha256sum --check
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-sources.jar -o /work/parser-sources.jar \
     && echo '1d44016129d72f1b218df2fcf18fa9a36980d8b7824fc1122b444dd82012fe4c  /work/parser-sources.jar' | sha256sum --check \
     && mkdir /work/parser-source && unzip -q /work/parser-sources.jar -d /work/parser-source

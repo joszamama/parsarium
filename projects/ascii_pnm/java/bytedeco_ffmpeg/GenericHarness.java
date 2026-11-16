@@ -19,7 +19,7 @@ public final class GenericHarness {
             System.setOut(new PrintStream(output, true, "UTF-8"));
             try {
                 Class.forName(ADAPTER).getMethod("main", String[].class)
-                     .invoke(null, (Object) new String[]{input.toString()});
+                     .invoke(null, (Object) new String[]{LABEL, input.toString()});
             } catch (InvocationTargetException error) {
                 Throwable cause = error.getCause();
                 if (cause instanceof Exception checked) throw checked;

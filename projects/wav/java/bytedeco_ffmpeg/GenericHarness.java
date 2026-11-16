@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 public final class GenericHarness {
     private static final String ADAPTER = "org.parsarium.BytedecoWavAdapter";
-    private static final String LABEL = "bytedeco-ffmpeg";
+    private static final String LABEL = "ffmpeg";
     private static final String SUFFIX = ".wav";
 
     private static String parse(byte[] data) throws Exception {
@@ -19,7 +19,7 @@ public final class GenericHarness {
             System.setOut(new PrintStream(output, true, "UTF-8"));
             try {
                 Class.forName(ADAPTER).getMethod("main", String[].class)
-                     .invoke(null, (Object) new String[]{input.toString()});
+                     .invoke(null, (Object) new String[]{LABEL, input.toString()});
             } catch (InvocationTargetException error) {
                 Throwable cause = error.getCause();
                 if (cause instanceof Exception checked) throw checked;

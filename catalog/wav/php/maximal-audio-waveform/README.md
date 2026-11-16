@@ -22,6 +22,11 @@
 
 Package invokes local SoX to decode PCM samples before constructing waveform data; not an independent WAV decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/maximal_audio_waveform/README.md)
+
+```sh
+python3 parsarium.py build wav php maximal_audio_waveform
+python3 parsarium.py run wav php maximal_audio_waveform controls/wav/256-samples.wav
+```

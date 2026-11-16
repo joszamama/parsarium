@@ -25,6 +25,11 @@
 
 Independent header-only C++ PLY parser, not an alias of Assimp or OpenMesh.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/happly/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp happly
+python3 parsarium.py run ascii_ply cpp happly controls/ascii_ply/triangle.ply
+```

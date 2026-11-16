@@ -10,10 +10,10 @@ RUN mkdir /work/lib \
     && echo '1bc7d6db5ef4d8fee1b3be8cd6b2e3ef8409cb7be630f290c4d5d82d2a2fa079  /work/lib/ffmpeg-8.1.2-1.5.14.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/bytedeco/javacpp/1.5.14/javacpp-1.5.14.jar -o /work/lib/javacpp-1.5.14.jar \
     && echo 'cb95a82ce1c337690436017eb8886597de71c1463dc16a3570f6a96b7c98a82b  /work/lib/javacpp-1.5.14.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-macosx-arm64.jar -o /work/lib/ffmpeg-8.1.2-1.5.14-macosx-arm64.jar \
-    && echo 'af57468c0bb7b2e9c8c93547e6d599e2b4faa4117118555be92675850972420c  /work/lib/ffmpeg-8.1.2-1.5.14-macosx-arm64.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/bytedeco/javacpp/1.5.14/javacpp-1.5.14-macosx-arm64.jar -o /work/lib/javacpp-1.5.14-macosx-arm64.jar \
-    && echo '75d755656d3ddafaa51c5d2d8d340c731a0bf2d742b033a37641a905aa2a7332  /work/lib/javacpp-1.5.14-macosx-arm64.jar' | sha256sum --check
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-linux-arm64.jar -o /work/lib/ffmpeg-8.1.2-1.5.14-linux-arm64.jar \
+    && echo 'c8729978c862b0e2e5643ade1b41266c5ba8c34b791f41104e5794ad3cefd0bf  /work/lib/ffmpeg-8.1.2-1.5.14-linux-arm64.jar' | sha256sum --check \
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/bytedeco/javacpp/1.5.14/javacpp-1.5.14-linux-arm64.jar -o /work/lib/javacpp-1.5.14-linux-arm64.jar \
+    && echo '30f63f17bb05cba4bdf488b77a3d9785b2ec261d4d528cf219b6c7081d20d636  /work/lib/javacpp-1.5.14-linux-arm64.jar' | sha256sum --check
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-sources.jar -o /work/parser-sources.jar \
     && echo 'e4a0ebd8c21aa769645945f240a7e25f16716bceb82063deddb868b7747770cf  /work/parser-sources.jar' | sha256sum --check \
     && mkdir /work/parser-source && unzip -q /work/parser-sources.jar -d /work/parser-source

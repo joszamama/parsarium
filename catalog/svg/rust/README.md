@@ -1,36 +1,36 @@
 # SVG / Rust
 
-25 verified third-party API paths; 1 have verified Docker harnesses.
+25 verified third-party API paths; 24 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/svg/ranking.md) · [standard API inventory](../../../data/rust/svg/standard.json)
 
 ## Third-party parsers
 
-- [svgtypes](svgtypes/README.md) — verified API path
+- [svgtypes](svgtypes/README.md) — Docker harness ready
 - [usvg](usvg/README.md) — Docker harness ready
-- [resvg](resvg/README.md) — verified API path
-- [svg](svg/README.md) — verified API path
-- [usvg-parser](usvg-parser/README.md) — verified API path
-- [svg-hush](svg-hush/README.md) — verified API path
-- [svgdom](svgdom/README.md) — verified API path
-- [svgrtypes](svgrtypes/README.md) — verified API path
-- [usvgr](usvgr/README.md) — verified API path
-- [svgr](svgr/README.md) — verified API path
-- [oxvg_path](oxvg-path/README.md) — verified API path
-- [svgparser](svgparser/README.md) — verified API path
-- [nsvg](nsvg/README.md) — verified API path
-- [svg_metadata](svg-metadata/README.md) — verified API path
-- [spreet](spreet/README.md) — verified API path
-- [ps-usvg](ps-usvg/README.md) — verified API path
-- [svgcleaner](svgcleaner/README.md) — verified API path
-- [ferrigura-path](ferrigura-path/README.md) — verified API path
-- [vello_svg](vello-svg/README.md) — verified API path
-- [anyrender_svg](anyrender-svg/README.md) — verified API path
-- [ps-anyrender-svg](ps-anyrender-svg/README.md) — verified API path
+- [resvg](resvg/README.md) — Docker harness ready
+- [svg](svg/README.md) — Docker harness ready
+- [usvg-parser](usvg-parser/README.md) — Docker harness ready
+- [svg-hush](svg-hush/README.md) — Docker harness ready
+- [svgdom](svgdom/README.md) — Docker harness ready
+- [svgrtypes](svgrtypes/README.md) — Docker harness ready
+- [usvgr](usvgr/README.md) — Docker harness ready
+- [svgr](svgr/README.md) — Docker harness ready
+- [oxvg_path](oxvg-path/README.md) — Docker harness ready
+- [svgparser](svgparser/README.md) — Docker harness ready
+- [nsvg](nsvg/README.md) — Docker harness ready
+- [svg_metadata](svg-metadata/README.md) — Docker harness ready
+- [spreet](spreet/README.md) — Docker harness ready
+- [ps-usvg](ps-usvg/README.md) — Docker harness ready
+- [svgcleaner](svgcleaner/README.md) — Docker harness ready
+- [ferrigura-path](ferrigura-path/README.md) — Docker harness ready
+- [vello_svg](vello-svg/README.md) — Docker harness ready
+- [anyrender_svg](anyrender-svg/README.md) — Docker harness ready
+- [ps-anyrender-svg](ps-anyrender-svg/README.md) — Docker harness ready
 - [librsvg](librsvg/README.md) — verified API path
-- [svg_path_ops](svg-path-ops/README.md) — verified API path
-- [oxideav-svg](oxideav-svg/README.md) — verified API path
-- [oxvg_ast](oxvg-ast/README.md) — verified API path
+- [svg_path_ops](svg-path-ops/README.md) — Docker harness ready
+- [oxideav-svg](oxideav-svg/README.md) — Docker harness ready
+- [oxvg_ast](oxvg-ast/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

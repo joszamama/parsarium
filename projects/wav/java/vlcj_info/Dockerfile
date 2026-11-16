@@ -24,7 +24,7 @@ RUN mkdir /work/classes && javac -cp '/work/lib/*' -d /work/classes /work/src/*.
 
 FROM --platform=linux/arm64 eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 libmediainfo-dev \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY --from=build /work/classes /work/classes

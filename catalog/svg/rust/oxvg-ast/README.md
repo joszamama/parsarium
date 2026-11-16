@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/rust/oxvg_ast/README.md)
+
+```sh
+python3 parsarium.py build svg rust oxvg_ast
+python3 parsarium.py run svg rust oxvg_ast controls/svg/red-green.svg
+```

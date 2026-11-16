@@ -1,6 +1,6 @@
 # MP3 with ID3v2 / PHP
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/php/mp3_id3v2/standard.json)
 
@@ -17,7 +17,7 @@
 - [mhor/php-mediainfo](mhor-php-mediainfo/README.md) — Docker harness ready
 - [buggedcom/phpvideotoolkit](buggedcom-phpvideotoolkit/README.md) — Docker harness ready
 - [vollbehr/php-reader](vollbehr-php-reader/README.md) — Docker harness ready
-- [pyrex-fwi/id3](pyrex-fwi-id3/README.md) — verified API path
+- [pyrex-fwi/id3](pyrex-fwi-id3/README.md) — Docker harness ready
 - [sempia/getid3](sempia-getid3/README.md) — Docker harness ready
 - [indiehd/audio-manipulator](indiehd-audio-manipulator/README.md) — Docker harness ready
 - [wikimedia/getid3](wikimedia-getid3/README.md) — Docker harness ready

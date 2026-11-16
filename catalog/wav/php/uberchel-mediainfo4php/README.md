@@ -22,6 +22,11 @@
 
 MediaInfo4PHP wrapper invokes local FFmpeg 9.0.2; not the MediaInfoLib backend despite its name.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/uberchel_mediainfo4php/README.md)
+
+```sh
+python3 parsarium.py build wav php uberchel_mediainfo4php
+python3 parsarium.py run wav php uberchel_mediainfo4php controls/wav/256-samples.wav
+```

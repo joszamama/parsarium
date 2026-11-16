@@ -94,7 +94,22 @@ def stage(format_name: str, package: str) -> Path:
     destination.mkdir(parents=True)
     shutil.copyfile(augmented / "composer.json", destination / "composer.json")
     shutil.copyfile(augmented / "composer.lock", destination / "composer.lock")
-    (destination / "adapter.php").write_text(adapted_source(source))
+    adapted = adapted_source(source)
+    if package == "uberchel/mediainfo4php":
+        adapted = adapted.replace("        $parsed = \\uberchel\\MediaInfo::Get($path, false);",
+                                  "        require_once __DIR__ . '/vendor/uberchel/mediainfo4php/mediainfo.php';\n"
+                                  "        $parsed = \\uberchel\\MediaInfo::Get($path, false);")
+    if package == "gufy/pdftohtml-php":
+        adapted = adapted.replace("/opt/homebrew/bin/pdfinfo", "/usr/bin/pdfinfo")
+        adapted = adapted.replace("/opt/homebrew/bin/pdftohtml", "/usr/bin/pdftohtml")
+        adapted = adapted.replace("        $document = new \\Gufy\\PdfToHtml\\Pdf($path);",
+                                  "        \\Gufy\\PdfToHtml\\Config::set('pdftohtml.output', '/tmp/parsarium-pdftohtml');\n"
+                                  "        $document = new \\Gufy\\PdfToHtml\\Pdf($path);")
+    (destination / "adapter.php").write_text(adapted)
+    if package == "pyrex-fwi/id3":
+        (destination / "pyrex").mkdir()
+        shutil.copyfile(adapter.parent / "pyrex/mediainfo_oldxml.sh",
+                        destination / "pyrex/mediainfo_oldxml.sh")
     args = f"['/work/adapter.php', {json.dumps(package)}, $path]" if uses_package_arg else "['/work/adapter.php', $path]"
     harness = f'''<?php
 declare(strict_types=1);
@@ -180,8 +195,13 @@ $config->setMaxLen(1 << 20);
         "mp4": "ffmpeg mediainfo",
         "pdf": "poppler-utils php8.5-imagick php8.5-curl imagemagick",
     }.get(format_name, "")
+    if package == "maximal/audio-waveform":
+        runtime_extra += " sox"
     runtime_env = ("ENV PARSARIUM_RSVG_CONVERT=/usr/bin/rsvg-convert\n"
                    if format_name == "svg" else "")
+    extra_runtime_files = ("COPY pyrex/mediainfo_oldxml.sh /work/pyrex/mediainfo_oldxml.sh\n"
+                           "RUN chmod +x /work/pyrex/mediainfo_oldxml.sh\n"
+                           if package == "pyrex-fwi/id3" else "")
     docker = f'''FROM --platform=linux/arm64 {BASE_IMAGE} AS build
 ENV DEBIAN_FRONTEND=noninteractive COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \\
@@ -203,7 +223,7 @@ WORKDIR /work
 COPY --from=build /work/vendor /work/vendor
 COPY --from=build /work/toolchain.txt /work/toolchain.txt
 COPY adapter.php harness.php fuzz-target.php run-control.php /work/
-ENTRYPOINT ["php", "-d", "xdebug.mode=coverage", "/work/run-control.php"]
+{extra_runtime_files}ENTRYPOINT ["php", "-d", "xdebug.mode=coverage", "/work/run-control.php"]
 '''
     (destination / "Dockerfile").write_text(docker)
     (destination / "source-lock.json").write_text(json.dumps({package: {

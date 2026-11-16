@@ -20,6 +20,11 @@
 
 PHP wrapper invokes local Poppler pdfinfo/pdftohtml 26.11.0; the release is abandoned upstream but pinned and replays on the valid control.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/gufy_pdftohtml_php/README.md)
+
+```sh
+python3 parsarium.py build pdf php gufy_pdftohtml_php
+python3 parsarium.py run pdf php gufy_pdftohtml_php controls/pdf/one-page.pdf
+```

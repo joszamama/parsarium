@@ -1,6 +1,6 @@
 # MP3 with ID3v2 / Java
 
-20 verified third-party API paths; 13 have verified Docker harnesses.
+20 verified third-party API paths; 18 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/java/mp3_id3v2/standard.json)
 
@@ -10,11 +10,11 @@
 - [mp3agic](mp3agic/README.md) — Docker harness ready
 - [tika-audiovideo](tika-audiovideo/README.md) — Docker harness ready
 - [jlayer](jlayer/README.md) — Docker harness ready
-- [jave-core](jave-core/README.md) — verified API path
+- [jave-core](jave-core/README.md) — Docker harness ready
 - [jaffree](jaffree/README.md) — verified API path
 - [mp3spi](mp3spi/README.md) — Docker harness ready
-- [javacv](javacv/README.md) — verified API path
-- [bytedeco-ffmpeg](bytedeco-ffmpeg/README.md) — verified API path
+- [javacv](javacv/README.md) — Docker harness ready
+- [bytedeco-ffmpeg](bytedeco-ffmpeg/README.md) — Docker harness ready
 - [jcodec](jcodec/README.md) — Docker harness ready
 - [codecmedia](codecmedia/README.md) — Docker harness ready
 - [jid3lib](jid3lib/README.md) — verified API path
@@ -24,8 +24,8 @@
 - [bramp-ffmpeg](bramp-ffmpeg/README.md) — Docker harness ready
 - [imagic-ffmpeg-java](imagic-ffmpeg-java/README.md) — Docker harness ready
 - [v47-jaffree](v47-jaffree/README.md) — Docker harness ready
-- [vlcj-info](vlcj-info/README.md) — verified API path
-- [mediainfo-jna-wrapper](mediainfo-jna-wrapper/README.md) — verified API path
+- [vlcj-info](vlcj-info/README.md) — Docker harness ready
+- [mediainfo-jna-wrapper](mediainfo-jna-wrapper/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

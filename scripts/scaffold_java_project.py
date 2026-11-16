@@ -16,6 +16,13 @@ BASE25 = "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d57
 JACOCO_AGENT = "3fb76eea65f81bd9415202bab34b6571728841dff1ab8e6bbe81adc2e299face"
 JACOCO_CLI = "811c7f8c6b358c5d68a8973cfa867f6892be7a671b697a4b13c4b447e6daf75c"
 JAZZER = "0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f"
+JAVE_LINUX_ARM64_SHA256 = "c80ab22e15d41f2f1464c27c9e5d7ae2f018661e6561bcc1f31da699a16a14db"
+BYTEDECO_LINUX_ARM64 = {
+    "ffmpeg-8.1.2-1.5.14-macosx-arm64.jar":
+        ("ffmpeg-8.1.2-1.5.14-linux-arm64.jar", "c8729978c862b0e2e5643ade1b41266c5ba8c34b791f41104e5794ad3cefd0bf"),
+    "javacpp-1.5.14-macosx-arm64.jar":
+        ("javacpp-1.5.14-linux-arm64.jar", "30f63f17bb05cba4bdf488b77a3d9785b2ec261d4d528cf219b6c7081d20d636"),
+}
 ADAPTER_CLASSES = {"png": "PngAdapter", "zip": "ZipAdapter", "mp4": "Mp4Adapter",
                    "wav": "WavAdapter", "pdf": "PdfAdapter", "svg": "SvgAdapter",
                    "http11": "Http11Adapter", "ascii_ply": "PlyAdapter",
@@ -50,6 +57,20 @@ def stage(format_name: str, package: str) -> Path:
             if not (format_name == "wav" and Path(item["repository_path"]).name in {
                 "xmpcore-6.1.11.jar", "jvm-2.5.jar", "core-2.5.jar"})
             and not (format_name == "wav" and "junit" in item["repository_path"].lower())]
+    jars = [{**item,
+             "repository_path": item["repository_path"].replace(
+                 "jave-nativebin-osxm1", "jave-nativebin-linux-arm64"),
+             "sha256": JAVE_LINUX_ARM64_SHA256}
+            if "jave-nativebin-osxm1" in item["repository_path"] else item
+            for item in jars]
+    def linux_bytedeco(item: dict) -> dict:
+        name = Path(item["repository_path"]).name
+        if name not in BYTEDECO_LINUX_ARM64:
+            return item
+        replacement, digest = BYTEDECO_LINUX_ARM64[name]
+        return {**item, "repository_path": item["repository_path"].replace(name, replacement),
+                "sha256": digest}
+    jars = [linux_bytedeco(item) for item in jars]
     target, = [item for item in jars if item["repository_path"] == jar_path]
     if lock_path.parent == adapter_root:
         source = adapter_root / "src/main/java/org/parsarium" / (ADAPTER_CLASSES[format_name] + ".java")
@@ -77,7 +98,8 @@ def stage(format_name: str, package: str) -> Path:
     (destination / source.name).write_text(adapter_text)
     label = parser.get("adapter_label", package)
     if format_name == "wav":
-        label = {"jhove-modules": "jhove", "tika-audiovideo": "tika"}.get(label, label)
+        label = {"jhove-modules": "jhove", "tika-audiovideo": "tika",
+                 "bytedeco-ffmpeg": "ffmpeg"}.get(label, label)
     class_name = "org.parsarium." + source.stem
     control = ROOT / parser["control"]
     harness = '''import java.io.ByteArrayOutputStream;
@@ -128,7 +150,9 @@ public final class GenericHarness {
     }
 }
 '''
-    arguments = "new String[]{LABEL, input.toString()}" if uses_mode else "new String[]{input.toString()}"
+    arguments = ("new String[]{LABEL, input.toString()}"
+                 if uses_mode or re.search(r"args\.length\s*!=\s*2", adapter_text)
+                 else "new String[]{input.toString()}")
     harness = (harness.replace("ADAPTER_CLASS", json.dumps(class_name))
               .replace("ADAPTER_LABEL", json.dumps(label))
               .replace("INPUT_SUFFIX", json.dumps(control.suffix))
@@ -146,6 +170,10 @@ public final class GenericHarness {
     base_image = BASE25 if format_name in {"mp3_id3v2", "pdf"} else BASE
     runtime_packages = (" ffmpeg" if re.search(r"ffprobe|ffmpeg|FFprobe|FFmpeg", adapter_text) else "")
     runtime_packages += (" imagemagick" if re.search(r"ImageMagick|magick|convert", adapter_text) else "")
+    if package in {"vlcj-info", "mediainfo-jna-wrapper"}:
+        runtime_packages += " libmediainfo-dev"
+    if format_name == "mp4" and package in {"bytedeco-ffmpeg", "javacv"}:
+        runtime_packages += " libva-drm2"
     docker = f'''FROM --platform=linux/arm64 {base_image} AS build
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends curl unzip \\
