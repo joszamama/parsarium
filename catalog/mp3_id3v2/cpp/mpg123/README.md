@@ -20,6 +20,11 @@
 
 The same C library is called from C and C++; mpg123_scan reads the audio stream and mpg123_id3 returns parsed ID3v2 fields.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/mpg123/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp mpg123
+python3 parsarium.py run mp3_id3v2 cpp mpg123 controls/mp3_id3v2/tone-tags.mp3
+```
