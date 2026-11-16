@@ -1,6 +1,6 @@
 # WAV / C++
 
-22 verified third-party API paths; 12 have verified Docker harnesses.
+22 verified third-party API paths; 13 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/wav/ranking.md) · [standard API inventory](../../../data/cpp/wav/standard.json)
 
@@ -11,7 +11,7 @@
 - [libsndfile](libsndfile/README.md) — Docker harness ready
 - [raylib](raylib/README.md) — Docker harness ready
 - [ffmpeg](ffmpeg/README.md) — Docker harness ready
-- [sox](sox/README.md) — verified API path
+- [sox](sox/README.md) — Docker harness ready
 - [sdl3](sdl3/README.md) — Docker harness ready
 - [sdl3_mixer](sdl3-mixer/README.md) — Docker harness ready
 - [libaudiofile](libaudiofile/README.md) — Docker harness ready

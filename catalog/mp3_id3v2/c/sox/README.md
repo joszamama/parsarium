@@ -22,6 +22,11 @@
 
 The pinned src/mp3.c is the MP3 format handler and the installed libsox links libmad. C and C++ call sites use the same C library. The valid ID3v2-tagged control is accepted, but libsox does not return its title.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/sox/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c sox
+python3 parsarium.py run mp3_id3v2 c sox controls/mp3_id3v2/tone-tags.mp3
+```

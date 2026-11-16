@@ -27,6 +27,11 @@
 
 SoX public libsox audio file API reads RIFF/WAVE and decoded samples; pinned source release is the primary SourceForge package. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/sox/README.md)
+
+```sh
+python3 parsarium.py build wav cpp sox
+python3 parsarium.py run wav cpp sox controls/wav/four-samples.wav
+```
