@@ -11,6 +11,7 @@
 - [h2o / C++](cpp/h2o/README.md)
 - [http-parser / C++](cpp/http-parser/README.md)
 - [libhv / C++](cpp/libhv/README.md)
+- [libmicrohttpd / C++](cpp/libmicrohttpd/README.md)
 - [libsoup / C++](cpp/libsoup/README.md)
 - [mongoose / C++](cpp/mongoose/README.md)
 - [poco / C++](cpp/poco/README.md)

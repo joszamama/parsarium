@@ -4,8 +4,6 @@ Pinned release: `1.0.10`. [Manifest](manifest.json) · [verification receipt](ve
 
 [API, control result, and parser family](../../../../catalog/http11/cpp/libmicrohttpd/README.md)
 
-The harness starts one `MHD_USE_NO_LISTEN_SOCKET | MHD_USE_INTERNAL_POLLING_THREAD` daemon, hands one end of a local socketpair to `MHD_add_connection` for each input, writes the bytes, half-closes, and waits for MHD to close the connection. The access handler reports the parsed method, path with its parsed GET arguments, and version.
-
 ## Run from the repository root
 
 ```sh

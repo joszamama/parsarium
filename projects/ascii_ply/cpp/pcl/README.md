@@ -4,8 +4,6 @@ Pinned release: `1.15.1`. [Manifest](manifest.json) · [verification receipt](ve
 
 [API, control result, and parser family](../../../../catalog/ascii_ply/cpp/pcl/README.md)
 
-The replay reports the parsed vertex count, polygon count, and the full index list of the first polygon. For a point cloud without polygons, `face` is empty.
-
 ## Run from the repository root
 
 ```sh
