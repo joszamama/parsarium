@@ -27,6 +27,12 @@
 
 [Control adapter](../../../../../adapters/python/png/standard.py)
 
-## Runnable harness
+## Run this control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and control receipt](../../../../../projects/png/python/stdlib_tkinter_photoimage/README.md)
+
+```sh
+python3 projects/png/python/stdlib_tkinter_photoimage/verify-control.py
+```
+
+Tk's native PNG reader has measured source coverage on this control. AFL++ parser feedback is unavailable, so this path remains staged.
