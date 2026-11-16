@@ -25,6 +25,11 @@
 
 libigl has a distinct documented Eigen-matrix API but shares the tinyply parser family with the separately verified tinyply standalone package (which is pinned at 3.0).
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/libigl/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp libigl
+python3 parsarium.py run ascii_ply cpp libigl controls/ascii_ply/triangle.ply
+```
