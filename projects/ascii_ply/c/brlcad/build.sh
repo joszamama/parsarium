@@ -2,7 +2,7 @@
 set -eu
 
 common='-O1 -g -fno-omit-frame-pointer -fprofile-instr-generate -fcoverage-mapping'
-harness_flags="$common -fsanitize=fuzzer-no-link,address,undefined"
+harness_flags="$common -fsanitize=address,undefined"
 cmake -S /work/source -B /work/build \
   -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
   -DCMAKE_C_FLAGS="$common" -DCMAKE_CXX_FLAGS="$common" \
@@ -24,5 +24,5 @@ clang++ -O1 -g -fprofile-instr-generate -fcoverage-mapping \
 
 clang -std=c11 $harness_flags -c /work/fuzz.c -o /work/fuzz.o
 clang++ -O1 -g -fprofile-instr-generate -fcoverage-mapping \
-  -fsanitize=fuzzer,address,undefined /work/harness.o /work/fuzz.o \
+  -fsanitize=address,undefined /work/harness.o /work/fuzz.o \
   -L/work/build/lib -Wl,-rpath,/work/lib -lgcv -lrt -lbu -o /work/fuzzer
