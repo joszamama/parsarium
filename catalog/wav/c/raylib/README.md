@@ -27,6 +27,11 @@
 
 Distinct raylib package C loading API; WAV implementation shares dr_wav family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/raylib/README.md)
+
+```sh
+python3 parsarium.py build wav c raylib
+python3 parsarium.py run wav c raylib controls/wav/four-samples.wav
+```

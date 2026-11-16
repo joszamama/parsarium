@@ -32,6 +32,11 @@
 
 Raylib package exposes local C image loading over its bundled stb_image; shares parser lineage with stb and SDL3 core.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/raylib/README.md)
+
+```sh
+python3 parsarium.py build png c raylib
+python3 parsarium.py run png c raylib controls/png/red-green.png
+```

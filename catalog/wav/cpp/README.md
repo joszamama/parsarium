@@ -1,6 +1,6 @@
 # WAV / C++
 
-22 verified third-party API paths; 3 have verified Docker harnesses.
+22 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/wav/ranking.md) · [standard API inventory](../../../data/cpp/wav/standard.json)
 
@@ -9,12 +9,12 @@
 - [dr_wav](dr-wav/README.md) — Docker harness ready
 - [miniaudio](miniaudio/README.md) — Docker harness ready
 - [libsndfile](libsndfile/README.md) — Docker harness ready
-- [raylib](raylib/README.md) — verified API path
+- [raylib](raylib/README.md) — Docker harness ready
 - [ffmpeg](ffmpeg/README.md) — verified API path
 - [sox](sox/README.md) — verified API path
 - [sdl3](sdl3/README.md) — verified API path
 - [sdl3_mixer](sdl3-mixer/README.md) — verified API path
-- [libaudiofile](libaudiofile/README.md) — verified API path
+- [libaudiofile](libaudiofile/README.md) — Docker harness ready
 - [aubio](aubio/README.md) — verified API path
 - [csfml](csfml/README.md) — verified API path
 - [allegro](allegro/README.md) — verified API path

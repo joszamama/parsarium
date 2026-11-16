@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "cpp",
+  "package": "libaudiofile",
+  "release": "0.3.6",
+  "catalog_parser": "data/cpp/wav/parsers.json",
+  "source_lock": "data/c/wav/source-lock.json",
+  "source_sha256": "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "frames": 4,
+    "samples": [
+      0,
+      1000,
+      -1000,
+      0
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in libaudiofile WAVE reader reached by C++ file-backed byte-input harness",
+  "coverage_subject_prefix": "/work/source/libaudiofile/",
+  "format_specific_coverage_file_suffix": "/WAVE.cpp"
+}

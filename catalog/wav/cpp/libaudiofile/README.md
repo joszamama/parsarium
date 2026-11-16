@@ -27,6 +27,11 @@
 
 Tagged 0.3.6 C API from mpruett/audiofile, unrelated to the Conan audiofile recipe for a C++ header-only package. One build-only signed-shift compatibility patch is documented. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/libaudiofile/README.md)
+
+```sh
+python3 parsarium.py build wav cpp libaudiofile
+python3 parsarium.py run wav cpp libaudiofile controls/wav/four-samples.wav
+```
