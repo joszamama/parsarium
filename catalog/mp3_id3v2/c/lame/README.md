@@ -22,6 +22,11 @@
 
 The pinned LAME HIP interface accepts the full tagged control and returns MP3 frame fields; the installed libmp3lame links the separately verified libmpg123 decoder. C and C++ use one C library.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/lame/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c lame
+python3 parsarium.py run mp3_id3v2 c lame controls/mp3_id3v2/tone-tags.mp3
+```

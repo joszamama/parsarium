@@ -30,6 +30,11 @@
 
 LunaSVG exposes a C++ document API; its C extern section has version and font helpers but no C document loader. It shares PlutoVG rasterization with PlutoSVG, while retaining separate SVG parsing logic.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/lunasvg/README.md)
+
+```sh
+python3 parsarium.py build svg cpp lunasvg
+python3 parsarium.py run svg cpp lunasvg controls/svg/red-green.svg
+```

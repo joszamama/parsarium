@@ -6,6 +6,7 @@
 
 - [dr_libs / C](c/dr_libs/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
+- [lame / C](c/lame/README.md)
 - [libid3tag / C](c/libid3tag/README.md)
 - [libmad / C](c/libmad/README.md)
 - [libsndfile / C](c/libsndfile/README.md)
@@ -17,6 +18,7 @@
 - [taglib / C](c/taglib/README.md)
 - [dr_libs / C++](cpp/dr_libs/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
+- [lame / C++](cpp/lame/README.md)
 - [libid3tag / C++](cpp/libid3tag/README.md)
 - [libmad / C++](cpp/libmad/README.md)
 - [libsndfile / C++](cpp/libsndfile/README.md)
