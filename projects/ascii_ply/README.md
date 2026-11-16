@@ -12,5 +12,7 @@
 - [collectiveaccess/providence / PHP](php/providence/README.md)
 - [ply-parser / Python](python/ply_parser/README.md)
 - [plyfile / Python](python/plyfile/README.md)
+- [polyxios / Python](python/polyxios/README.md)
 - [shapeviz / Python](python/shapeviz/README.md)
+- [trimesh / Python](python/trimesh/README.md)
 - [ply-rs-bw / Rust](rust/ply_rs_bw/README.md)

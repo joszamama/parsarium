@@ -15,4 +15,6 @@
 - [riffy / Python](python/riffy/README.md)
 - [tinytag / Python](python/tinytag/README.md)
 - [wave.open(local path, 'rb'); getparams(); readframes() / Python](python/stdlib_wave/README.md)
+- [wavfile / Python](python/wavfile/README.md)
+- [wavio / Python](python/wavio/README.md)
 - [hound / Rust](rust/hound/README.md)

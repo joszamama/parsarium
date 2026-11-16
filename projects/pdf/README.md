@@ -10,6 +10,7 @@
 - [pdfbox / Java](java/pdfbox/README.md)
 - [pdf-lib / JavaScript](javascript/pdf_lib/README.md)
 - [setasign/fpdi / PHP](php/fpdi/README.md)
+- [pdfnaut / Python](python/pdfnaut/README.md)
 - [pdfrw / Python](python/pdfrw/README.md)
 - [pypdf / Python](python/pypdf/README.md)
 - [lopdf / Rust](rust/lopdf/README.md)

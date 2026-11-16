@@ -13,5 +13,6 @@
 - [PyPNM / Python](python/pypnm/README.md)
 - [Wand / Python](python/wand/README.md)
 - [imagesize / Python](python/imagesize/README.md)
+- [napari-netpbmfile / Python](python/napari_netpbmfile/README.md)
 - [netpbmfile / Python](python/netpbmfile/README.md)
 - [image / Rust](rust/image/README.md)

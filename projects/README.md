@@ -1,6 +1,6 @@
 # Parser harnesses
 
-`projects/<format>/<ecosystem>/<slug>/` contains one runnable parser path. The collection has 122 projects across all 80 cells: 115 third-party package paths and seven CPython standard-library APIs. Other verified catalog packages remain in the [format catalog](../catalog/png/README.md) until a harness and container are verified.
+`projects/<format>/<ecosystem>/<slug>/` contains one runnable parser path. The collection has 133 projects across all 80 cells: 126 third-party package paths and seven CPython standard-library APIs. Other verified catalog packages remain in the [format catalog](../catalog/png/README.md) until a harness and container are verified.
 
 Each project includes:
 

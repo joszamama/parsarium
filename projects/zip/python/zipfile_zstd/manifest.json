@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "python",
+  "package": "zipfile-zstd",
+  "release": "0.0.4",
+  "catalog_parser": "data/python/zip/parsers.json",
+  "source_lock": "adapters/python/zip/requirements.lock",
+  "source_sha256": "c8e07be35765c072eb7b1be715c89ecb248a1127b014e12a9b8ac7db2600c166",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/zip/hello-zstd.zip",
+  "control_sha256": "82caaab4323af4b06d013bd41f054946deb59bac898b243d40e58e742c785754",
+  "expected_output": {
+    "names": [
+      "hello.txt"
+    ],
+    "hello": "parsarium\n"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/zipfile_zstd/",
+  "dependencies": [
+    {
+      "package": "zstandard",
+      "release": "0.25.0",
+      "sha256": "e09bb6252b6476d8d56100e8147b803befa9a12cea144bbe629dd508800d1ad0"
+    }
+  ]
+}

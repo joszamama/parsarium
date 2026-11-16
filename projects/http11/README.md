@@ -17,5 +17,7 @@
 - [http.client.HTTPConnection.getresponse / Python](python/stdlib_http_response/README.md)
 - [http.client.parse_headers / Python](python/stdlib_http_headers/README.md)
 - [http.server.BaseHTTPRequestHandler / Python](python/stdlib_http_server/README.md)
+- [parse-http-header-line / Python](python/parse_http_header_line/README.md)
 - [websockets / Python](python/websockets/README.md)
+- [zttp / Python](python/zttp/README.md)
 - [httparse / Rust](rust/httparse/README.md)

@@ -12,6 +12,7 @@
 - [pngjs / JavaScript](javascript/pngjs/README.md)
 - [marc1706/fast-image-size / PHP](php/marc1706_fast_image_size/README.md)
 - [Wand / Python](python/wand/README.md)
+- [Willow / Python](python/willow/README.md)
 - [apng / Python](python/apng/README.md)
 - [byteparse / Python](python/byteparse/README.md)
 - [imagesize / Python](python/imagesize/README.md)

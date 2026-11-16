@@ -5,6 +5,7 @@ large matrix expansions reviewable without replaying unrelated containers.
 """
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -58,48 +59,58 @@ def update_report(name: str, additions: list[dict], count_fields: dict[str, str]
     path.write_text(json.dumps(report, indent=2) + "\n")
 
 
+def check_project(relative: Path, scratch: Path) -> dict:
+    project, manifest = project_for(*relative.parts)
+    if manifest["ecosystem"] != "python":
+        raise ValueError(f"only Python project batches are supported: {relative}")
+    path = project / "manifest.json"
+    receipt = json.loads((project / "verification.json").read_text())
+    if not receipt.get("pass"):
+        raise ValueError(f"project has no passing verification: {relative}")
+    case = check_case(path)
+    batch = check_batch(path)
+    native = check_native_plan(relative, scratch)
+    afl_plan = check_afl_plan(relative, scratch / "afl")
+    if (case["status"] != "ok" or batch["status"] not in {"ok", "per_case_only"}
+            or afl_plan["status"] != "ready"):
+        raise ValueError(f"smoke check failed: {relative}")
+    feedback = check_feedback(path)
+    if feedback["status"] != "verified":
+        raise ValueError(f"feedback check failed: {relative}")
+    overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+    python_afl = json.loads(overlay.read_text())
+    if (not python_afl["pass"] or python_afl["base_project_receipt_sha256"] !=
+            sha256((project / "verification.json").read_bytes()).hexdigest()):
+        raise ValueError(f"AFL++ overlay mismatch: {relative}")
+    return {"case": case, "batch": batch, "native": native,
+            "afl_plan": afl_plan, "feedback": feedback, "python_afl": python_afl}
+
+
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("project", nargs="+", help="format/ecosystem/slug")
+    cli.add_argument("--workers", type=int, default=3,
+                     help="independent project checks to run at once")
     args = cli.parse_args()
     relatives = [Path(item) for item in args.project]
     if len(set(relatives)) != len(relatives) or any(len(path.parts) != 3 for path in relatives):
         cli.error("give distinct format/ecosystem/slug paths")
+    if not 1 <= args.workers <= 8:
+        cli.error("--workers must be between 1 and 8")
     case, batch, native, feedback, afl_plan, python_afl = [], [], [], [], [], []
     with tempfile.TemporaryDirectory(prefix="parsarium-refresh-smoke-") as temporary:
         scratch = Path(temporary)
-        for relative in relatives:
-            project, manifest = project_for(*relative.parts)
-            if manifest["ecosystem"] != "python":
-                raise ValueError(f"only Python project batches are supported: {relative}")
-            path = project / "manifest.json"
-            receipt = json.loads((project / "verification.json").read_text())
-            if not receipt.get("pass"):
-                raise ValueError(f"project has no passing verification: {relative}")
-            case_item = check_case(path)
-            batch_item = check_batch(path)
-            native_item = check_native_plan(relative, scratch)
-            afl_item = check_afl_plan(relative, scratch / "afl")
-            if (case_item["status"] != "ok" or batch_item["status"] not in
-                    {"ok", "per_case_only"} or afl_item["status"] != "ready"):
-                raise ValueError(f"smoke check failed: {relative}")
-            case.append(case_item)
-            batch.append(batch_item)
-            native.append(native_item)
-            afl_plan.append(afl_item)
-            if manifest["ecosystem"] in {"go", "java", "javascript", "python", "php"}:
-                feedback_item = check_feedback(path)
-                if feedback_item["status"] != "verified":
-                    raise ValueError(f"feedback check failed: {relative}")
-                feedback.append(feedback_item)
-            if manifest["ecosystem"] == "python":
-                overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
-                item = json.loads(overlay.read_text())
-                if not item["pass"] or item["base_project_receipt_sha256"] != sha256(
-                        (project / "verification.json").read_bytes()).hexdigest():
-                    raise ValueError(f"AFL++ overlay mismatch: {relative}")
-                python_afl.append(item)
-            print(f"Checked {relative}", flush=True)
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            futures = {pool.submit(check_project, relative, scratch): relative
+                       for relative in relatives}
+            for future in as_completed(futures):
+                relative = futures[future]
+                result = future.result()
+                for field, rows in (("case", case), ("batch", batch),
+                                    ("native", native), ("feedback", feedback),
+                                    ("afl_plan", afl_plan), ("python_afl", python_afl)):
+                    rows.append(result[field])
+                print(f"Checked {relative}", flush=True)
     update_report("fuzz-case-smoke.json", case, {"projects_passing": "ok"})
     update_report("fuzz-batch-smoke.json", batch,
                   {"batch_passing": "ok", "per_case_only": "per_case_only"})

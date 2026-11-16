@@ -18,6 +18,7 @@
 - [patool / Python](python/patool/README.md)
 - [pyzip / Python](python/pyzip/README.md)
 - [shutil.unpack_archive / Python](python/stdlib_unpack_archive/README.md)
+- [zipfile-zstd / Python](python/zipfile_zstd/README.md)
 - [zipfile.Path / Python](python/stdlib_zippath/README.md)
 - [zipfile.ZipFile / Python](python/stdlib_zipfile/README.md)
 - [zipfile2 / Python](python/zipfile2/README.md)

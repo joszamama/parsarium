@@ -1,6 +1,6 @@
 # WAV / Python
 
-21 verified third-party API paths; 4 have verified Docker harnesses.
+21 verified third-party API paths; 6 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/wav/ranking.md) · [standard API inventory](../../../data/python/wav/standard.json)
 
@@ -12,8 +12,8 @@
 - [audioread](audioread/README.md) — verified API path
 - [pydub](pydub/README.md) — verified API path
 - [miniaudio](miniaudio/README.md) — verified API path
-- [wavio](wavio/README.md) — verified API path
-- [wavfile](wavfile/README.md) — verified API path
+- [wavio](wavio/README.md) — Docker harness ready
+- [wavfile](wavfile/README.md) — Docker harness ready
 - [tinytag](tinytag/README.md) — Docker harness ready
 - [mutagen](mutagen/README.md) — Docker harness ready
 - [waveinfo](waveinfo/README.md) — verified API path
