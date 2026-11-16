@@ -22,6 +22,11 @@
 
 A protected HTTPSession is instantiated inside a NanoHTTPD subclass using local byte streams; execute() invokes serve() with parsed request fields. The control includes Connection: close, so the normal session shutdown SocketException is caught after a parsed callback. No listening socket is opened.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/nanohttpd/README.md)
+
+```sh
+python3 parsarium.py build http11 java nanohttpd
+python3 parsarium.py run http11 java nanohttpd controls/http11/request.http
+```

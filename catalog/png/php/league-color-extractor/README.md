@@ -22,6 +22,11 @@
 
 Uses PHP GD imagecreatefromstring; verifies both control colors and counts.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/league_color_extractor/README.md)
+
+```sh
+python3 parsarium.py build png php league_color_extractor
+python3 parsarium.py run png php league_color_extractor controls/png/red-green.png
+```

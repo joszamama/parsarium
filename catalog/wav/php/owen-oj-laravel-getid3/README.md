@@ -22,6 +22,11 @@
 
 Laravel wrapper delegates to the same pinned james-heinrich/getid3 package in its shared lock; separate package path, same parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/owen_oj_laravel_getid3/README.md)
+
+```sh
+python3 parsarium.py build wav php owen_oj_laravel_getid3
+python3 parsarium.py run wav php owen_oj_laravel_getid3 controls/wav/256-samples.wav
+```

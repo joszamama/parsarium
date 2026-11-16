@@ -20,6 +20,11 @@
 
 PHP FFI binding delegates PNG decoding to installed libvips 8.18.7, a separate family from PHP GD.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/jcupitt_vips/README.md)
+
+```sh
+python3 parsarium.py build png php jcupitt_vips
+python3 parsarium.py run png php jcupitt_vips controls/png/red-green.png
+```

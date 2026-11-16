@@ -23,6 +23,11 @@
 
 WARC toolkit jwat-common exposes HttpHeader.processPayload for both request and response messages; the adapter feeds a local stream and checks isValid(). No WARC container is needed.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/jwat_common/README.md)
+
+```sh
+python3 parsarium.py build http11 java jwat_common
+python3 parsarium.py run http11 java jwat_common controls/http11/request.http
+```

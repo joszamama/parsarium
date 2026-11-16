@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "python",
+  "package": "parserheader",
+  "release": "0.38.3",
+  "catalog_parser": "data/python/http11/parsers.json",
+  "source_lock": "adapters/python/http11/requirements.lock",
+  "source_sha256": "9270d559780c8f480aeca4fccdcd2e9242694169c4ff0f35b9643fedb28b6b52",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "host": "example.test",
+    "x_parsarium": "yes"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/parserheader/",
+  "dependencies": [
+    {
+      "package": "click",
+      "release": "8.5.1",
+      "sha256": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "rust",
+  "package": "oxideav-image",
+  "release": "0.0.7",
+  "catalog_parser": "data/rust/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/rust/oxideav_image/source-lock.json",
+  "source_sha256": "2c367866345e1117b82eaf81ccd1e1f477c2038b4600bccdc871562f5e9a2e2d",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgb": [
+      255,
+      0,
+      0,
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in oxideav-image; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/oxideav-image-0.0.7/"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "go",
+  "package": "github.com/guregu/tag",
+  "release": "v0.0.3",
+  "catalog_parser": "data/go/mp4/parsers.json",
+  "source_lock": "projects/mp4/go/github_com_guregu_tag/source-lock.json",
+  "source_sha256": "0baa364e240fcbe5c56dd20371ed86f398fba0c945f2d1c8b73dfd67d65aa89c",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "title": "Parsarium"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/guregu/tag during valid-control replay",
+  "coverage_subject_prefix": "github.com/guregu/tag/"
+}

@@ -21,6 +21,11 @@
 
 MediaFile wraps the pinned wapmorgan/mp3info parser in its isolated lock. This adapter exposes audio properties, not the tag text; it is a separate package path, not an independent parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/wapmorgan_media_file/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php wapmorgan_media_file
+python3 parsarium.py run mp3_id3v2 php wapmorgan_media_file controls/mp3_id3v2/tone-tags.mp3
+```

@@ -21,6 +21,11 @@
 
 Typed wrapper invokes local FFprobe 9.0.2; distinct package path over shared FFmpeg family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/rasuvaeff_media_converter/README.md)
+
+```sh
+python3 parsarium.py build wav php rasuvaeff_media_converter
+python3 parsarium.py run wav php rasuvaeff_media_converter controls/wav/256-samples.wav
+```

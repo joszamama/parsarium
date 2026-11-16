@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/go/github_com_lesismal_nbio_nbhttp/README.md)
+
+```sh
+python3 parsarium.py build http11 go github_com_lesismal_nbio_nbhttp
+python3 parsarium.py run http11 go github_com_lesismal_nbio_nbhttp controls/http11/request.http
+```

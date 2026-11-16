@@ -23,6 +23,11 @@
 
 Composer package delegates to the local FFmpeg/FFprobe backend; separate PHP wrapper package path, not an independent parser family. Pinned source LICENSE.md offers MIT, while composer.json also lists GPL-3.0+.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/buggedcom_phpvideotoolkit/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php buggedcom_phpvideotoolkit
+python3 parsarium.py run mp3_id3v2 php buggedcom_phpvideotoolkit controls/mp3_id3v2/tone-tags.mp3
+```

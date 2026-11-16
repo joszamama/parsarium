@@ -1,12 +1,51 @@
 """Audit container harnesses against third-party and standard API inventories."""
 
 import argparse
+from functools import cache
 from hashlib import sha256
 import json
 from pathlib import Path
+import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+@cache
+def smoke_rows(filename: str) -> dict[str, dict]:
+    report = json.loads((ROOT / "data" / filename).read_text())
+    return {item["project"]: item for item in report["results"]}
+
+
+def fully_runnable(path: Path, manifest: dict) -> bool:
+    """Require a current base receipt, AFL++ overlay, and replay plans."""
+    if not receipt_verified(path, manifest):
+        return False
+    project = path.parent.relative_to(ROOT / "projects")
+    key = str(project)
+    base_sha = sha256((path.parent / "verification.json").read_bytes()).hexdigest()
+    overlay_path = ROOT / "fuzzing" / "afl-native" / project / "verification.json"
+    if not overlay_path.is_file():
+        return False
+    overlay = json.loads(overlay_path.read_text())
+    if (overlay.get("pass") is not True
+            or overlay.get("base_project_receipt_sha256") != base_sha
+            or overlay.get("control_sha256") != manifest["control_sha256"]
+            or overlay.get("feedback_edges", 0) < 2):
+        return False
+    checks = (("fuzz-case-smoke.json", {"ok"}),
+              ("fuzz-batch-smoke.json", {"ok", "per_case_only"}),
+              ("native-plan-smoke.json", {"ready"}),
+              ("afl-plan-smoke.json", {"ready"}))
+    for filename, accepted in checks:
+        row = smoke_rows(filename).get(key)
+        if row is None or row.get("status") not in accepted:
+            return False
+        if "project_receipt_sha256" in row and row["project_receipt_sha256"] != base_sha:
+            return False
+        if "overlay_receipt_sha256" in row and row["overlay_receipt_sha256"] != sha256(overlay_path.read_bytes()).hexdigest():
+            return False
+    return True
 
 
 def receipt_verified(path: Path, manifest: dict) -> bool:
@@ -38,7 +77,7 @@ def receipt_verified(path: Path, manifest: dict) -> bool:
                 and result.get("underlying_source_lines_covered", 0) <= 0)
             or result.get("control_sha256") != manifest["control_sha256"]
             or result.get("project_file_sha256") != current_files):
-        raise ValueError(f"unverified project result: {verification_path}")
+        return False
     return True
 
 
@@ -106,7 +145,7 @@ def main() -> None:
             if any(manifest[field] not in docker_text
                    for field in ("base_image", "source_sha256", "fuzz_engine_sha256")):
                 raise ValueError(f"standard Dockerfile pin mismatch: {path}")
-            (standard_completed if receipt_verified(path, manifest) else standard_staged).add(key)
+            (standard_completed if fully_runnable(path, manifest) else standard_staged).add(key)
             continue
         if manifest.get("kind", "third_party") != "third_party":
             raise ValueError(f"unknown project kind: {path}")
@@ -162,7 +201,10 @@ def main() -> None:
                         raise ValueError(f"PHP fuzzer release mismatch: {path}")
         else:
             lock = lock_path.read_text()
-            if (f"{manifest['package']}=={manifest['release']}".lower() not in lock.lower()
+            normalized = lambda value: re.sub(r"[-_.]+", "-", value).lower()
+            versions = {normalized(name): version for name, version in
+                        re.findall(r"(?m)^([A-Za-z0-9_.-]+)==([^\s\\]+)", lock)}
+            if (versions.get(normalized(manifest["package"])) != manifest["release"]
                     or manifest["source_sha256"] not in lock):
                 raise ValueError(f"source lock mismatch: {path}")
         dockerfile = path.parent / "Dockerfile"
@@ -178,7 +220,7 @@ def main() -> None:
                     or dependency["sha256"] not in lock
                     or dependency["sha256"] not in docker_text):
                 raise ValueError(f"dependency pin mismatch: {path}")
-        (completed if receipt_verified(path, manifest) else staged).add(key)
+        (completed if fully_runnable(path, manifest) else staged).add(key)
 
     cells = []
     for format_name, ecosystem in sorted({key[:2] for key in catalog}):

@@ -20,6 +20,11 @@
 
 Independent generated-C PNG decoder. Control result covers parsed PNG image configuration (dimensions), not decoded pixels.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/wuffs/README.md)
+
+```sh
+python3 parsarium.py build png c wuffs
+python3 parsarium.py run png c wuffs controls/png/red-green.png
+```

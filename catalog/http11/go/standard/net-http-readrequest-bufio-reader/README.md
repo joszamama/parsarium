@@ -1,6 +1,6 @@
 # net/http.ReadRequest(*bufio.Reader) — HTTP/1.1 / Go
 
-- **Runtime:** Go 1.27.1 darwin/arm64 standard library
+- **Runtime:** Go 1.27.1 linux/arm64 standard library
 - **Input API:** `net/http.ReadRequest(*bufio.Reader)`
 - **Official documentation:** [reference](https://pkg.go.dev/net/http@go1.27.1)
 - **Valid control:** [`controls/http11/request.http`](../../../../../controls/http11/request.http)
@@ -8,10 +8,20 @@
 
 ## Observed control result
 
-GET /parsarium?x=1, Host example.test, HTTP/1.1
+```json
+{
+  "host": "example.test",
+  "method": "GET",
+  "proto": "HTTP/1.1",
+  "target": "/parsarium?x=1"
+}
+```
 
 [Control adapter](../../../../../adapters/go/http11_std.go)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build http11 go stdlib_request
+python3 parsarium.py run http11 go stdlib_request controls/http11/request.http
+```

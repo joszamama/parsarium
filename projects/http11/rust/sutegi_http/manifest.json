@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "rust",
+  "package": "sutegi-http",
+  "release": "0.13.0",
+  "catalog_parser": "data/rust/http11/parsers.json",
+  "source_lock": "projects/http11/rust/sutegi_http/source-lock.json",
+  "source_sha256": "c87e8e254c958bc468d07ad2d266444c640f6735e26929c4f1ab4a7ce5e11b98",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium",
+    "query": "x=1",
+    "version": "HTTP/1.1"
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in sutegi-http; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sutegi-http-0.13.0/"
+}

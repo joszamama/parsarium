@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "go",
+  "package": "github.com/dustin/go-id3",
+  "release": "v0.0.0-20131108194644-73f4b1cf2a4e",
+  "catalog_parser": "data/go/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/go/github_com_dustin_go_id3/source-lock.json",
+  "source_sha256": "7dbf5da7aaa2b08e96c62f2f9a7857478057778714e9fbca5704ec54f8b6f5cb",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+  "control_sha256": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307",
+  "expected_output": {
+    "title": "Parsarium"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/dustin/go-id3 during valid-control replay",
+  "coverage_subject_prefix": "github.com/dustin/go-id3/"
+}

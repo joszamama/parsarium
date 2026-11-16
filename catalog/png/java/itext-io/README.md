@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/java/itext_io/README.md)
+
+```sh
+python3 parsarium.py build png java itext_io
+python3 parsarium.py run png java itext_io controls/png/red-green.png
+```

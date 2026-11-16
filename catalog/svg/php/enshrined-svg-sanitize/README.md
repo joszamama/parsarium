@@ -21,6 +21,11 @@
 
 Its output is reparsed with PHP DOM only for observing the sanitized SVG tree; the counted input parser is the sanitizer.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/enshrined_svg_sanitize/README.md)
+
+```sh
+python3 parsarium.py build svg php enshrined_svg_sanitize
+python3 parsarium.py run svg php enshrined_svg_sanitize controls/svg/red-green.svg
+```

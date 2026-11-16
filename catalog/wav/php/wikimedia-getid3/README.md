@@ -22,6 +22,11 @@
 
 Wikimedia fork of namespaced getID3; distinct Composer package path and shared parser lineage.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/wikimedia_getid3/README.md)
+
+```sh
+python3 parsarium.py build wav php wikimedia_getid3
+python3 parsarium.py run wav php wikimedia_getid3 controls/wav/256-samples.wav
+```

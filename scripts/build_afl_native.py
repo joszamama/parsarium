@@ -16,6 +16,7 @@ from pathlib import Path
 import subprocess
 
 from run_case import ROOT, project_for
+from docker_slots import docker_build_slot
 
 
 AFL_PACKAGE = "4.33c-1.1ubuntu1"
@@ -55,15 +56,17 @@ def build_one(format_name: str, ecosystem: str, slug: str) -> dict:
     dockerfile = overlay / "Dockerfile"
     dockerfile.write_text(derived_dockerfile(project))
     image = f"parsarium-afl/{format_name}-{ecosystem}-{slug}:local"
+    entrypoint = manifest.get("afl_entrypoint", "/work/fuzzer")
     print(f"Building {image}", flush=True)
-    command(["docker", "build", "--quiet", "--platform", manifest["platform"],
-             "-f", str(dockerfile), "-t", image, str(project)])
+    with docker_build_slot():
+        command(["docker", "build", "--quiet", "--platform", manifest["platform"],
+                 "-f", str(dockerfile), "-t", image, str(project)])
     image_id = command(["docker", "image", "inspect", image, "--format", "{{.Id}}"])
     tool_version = command(["docker", "run", "--rm", "--platform", manifest["platform"],
                             "--entrypoint", "dpkg-query", image,
                             "-W", "-f=${Version}", "afl++"])
     map_probe = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
-                                "-e", "AFL_DUMP_MAP_SIZE=1", "--entrypoint", "/work/fuzzer", image],
+                            "-e", "AFL_DUMP_MAP_SIZE=1", "--entrypoint", entrypoint, image],
                                cwd=ROOT, capture_output=True, text=True)
     if not map_probe.stdout.strip().isdigit():
         raise RuntimeError(f"AFL++ map size probe failed: {map_probe.stderr[-2000:]}")
@@ -79,7 +82,7 @@ def build_one(format_name: str, ecosystem: str, slug: str) -> dict:
         "-v", f"{control}:/input/control:ro", "-v", f"{overlay}:/coverage",
         "--entrypoint", "afl-showmap", image,
         "-m", "none", "-t", "10000", "-o", "/coverage/edges.txt", "--",
-        "/work/fuzzer", "/input/control",
+        entrypoint, "/input/control",
     ], cwd=ROOT, capture_output=True, text=True)
     if showmap.returncode:
         raise RuntimeError(f"afl-showmap failed: {(showmap.stdout + showmap.stderr)[-4000:]}")

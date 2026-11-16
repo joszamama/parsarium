@@ -1,6 +1,6 @@
 # image/png.DecodeConfig(io.Reader) — PNG / Go
 
-- **Runtime:** Go 1.27.1 darwin/arm64 standard library
+- **Runtime:** Go 1.27.1 linux/arm64 standard library
 - **Input API:** `image/png.DecodeConfig(io.Reader)`
 - **Official documentation:** [reference](https://pkg.go.dev/image/png@go1.27.1)
 - **Valid control:** [`controls/png/red-green.png`](../../../../../controls/png/red-green.png)
@@ -8,10 +8,18 @@
 
 ## Observed control result
 
-PNG configuration width 2, height 1
+```json
+{
+  "height": 1,
+  "width": 2
+}
+```
 
 [Control adapter](../../../../../adapters/go/png_std.go)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build png go stdlib_config
+python3 parsarium.py run png go stdlib_config controls/png/red-green.png
+```

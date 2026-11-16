@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "php",
+  "package": "asika/pdf2text",
+  "release": "1.0.6",
+  "catalog_parser": "data/php/pdf/parsers.json",
+  "source_lock": "projects/pdf/php/asika_pdf2text/source-lock.json",
+  "source_sha256": "0a9e0a3d38af09d3e3946c7f3e6ab7f736102f8186be9b2956424a255eb582b6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "text": "Parsarium"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in asika/pdf2text PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/asika/pdf2text/"
+}

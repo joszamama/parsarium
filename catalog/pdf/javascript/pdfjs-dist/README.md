@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/javascript/pdfjs_dist/README.md)
+
+```sh
+python3 parsarium.py build pdf javascript pdfjs_dist
+python3 parsarium.py run pdf javascript pdfjs_dist controls/pdf/one-page.pdf
+```

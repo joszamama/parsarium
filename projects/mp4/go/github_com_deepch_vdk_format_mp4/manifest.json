@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "go",
+  "package": "github.com/deepch/vdk/format/mp4",
+  "release": "v0.0.27",
+  "catalog_parser": "data/go/mp4/parsers.json",
+  "source_lock": "projects/mp4/go/github_com_deepch_vdk_format_mp4/source-lock.json",
+  "source_sha256": "cfd7ae9886b5d0d9ea9d7a3f9a29e3d3f2b3835f76e7d7462b221da446eb82d7",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "streams": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/deepch/vdk/format/mp4 during valid-control replay",
+  "coverage_subject_prefix": "github.com/deepch/vdk/format/mp4/"
+}

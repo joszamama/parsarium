@@ -21,6 +21,11 @@
 
 PHP wrapper delegates to local MediaInfo 26.10 CLI; same release lock as PHP MP3/WAV cells.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/php/mhor_php_mediainfo/README.md)
+
+```sh
+python3 parsarium.py build mp4 php mhor_php_mediainfo
+python3 parsarium.py run mp4 php mhor_php_mediainfo controls/mp4/red-av.mp4
+```

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "java",
+  "package": "vlcj-info",
+  "release": "2.0.3",
+  "catalog_parser": "data/java/mp4/parsers.json",
+  "source_lock": "projects/mp4/java/vlcj_info/source-lock.json",
+  "source_sha256": "d8f1879f3b79c55cb9ef32c890bad80113a7fa5df8d2dbfe06a5aa4eba2edc9e",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "format": "MPEG-4",
+    "width": 2,
+    "height": 2,
+    "sample_rate": 8000
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/vlcj-info-2.0.3.jar:/work/lib/jna-5.8.0.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of uk.co.caprica:vlcj-info:2.0.3 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

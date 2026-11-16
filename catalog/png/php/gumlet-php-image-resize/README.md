@@ -20,6 +20,11 @@
 
 The package loads the local PNG through PHP GD.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/gumlet_php_image_resize/README.md)
+
+```sh
+python3 parsarium.py build png php gumlet_php_image_resize
+python3 parsarium.py run png php gumlet_php_image_resize controls/png/red-green.png
+```

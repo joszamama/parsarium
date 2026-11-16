@@ -21,6 +21,11 @@
 
 A separately released Composer package of the PclZip PHP reader; same underlying parser lineage as pclzip/pclzip.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/chamilo_pclzip/README.md)
+
+```sh
+python3 parsarium.py build zip php chamilo_pclzip
+python3 parsarium.py run zip php chamilo_pclzip controls/zip/hello.zip
+```

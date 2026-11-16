@@ -23,6 +23,11 @@
 
 Separate Maven artifact and NIO parser class from blocking httpcore 4.4.16, but same Apache HttpComponents project and shared line parser ancestry. The documented NIO API parses the message head, not an entity body.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/httpcore_nio/README.md)
+
+```sh
+python3 parsarium.py build http11 java httpcore_nio
+python3 parsarium.py run http11 java httpcore_nio controls/http11/request.http
+```

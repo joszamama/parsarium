@@ -20,6 +20,11 @@
 
 Laravel facade forwards to Intervention Image 4 configured with PHP GD; the core Intervention package is separately listed.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/intervention_image_laravel/README.md)
+
+```sh
+python3 parsarium.py build png php intervention_image_laravel
+python3 parsarium.py run png php intervention_image_laravel controls/png/red-green.png
+```

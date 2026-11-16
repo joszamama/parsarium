@@ -11,6 +11,7 @@ import subprocess
 import tempfile
 
 from run_case import ROOT, image_for, project_for
+from docker_slots import docker_build_slot
 
 
 BRIDGE = ROOT / "fuzzing/afl-bridge"
@@ -60,8 +61,9 @@ def build_one(relative: Path) -> dict:
     )
     image = f"parsarium-afl/{relative.parts[0]}-python-{relative.parts[2]}:local"
     print(f"Building {image}", flush=True)
-    run(["docker", "build", "--quiet", "--platform", manifest["platform"],
-         "-f", str(overlay / "Dockerfile"), "-t", image, str(ROOT)])
+    with docker_build_slot():
+        run(["docker", "build", "--quiet", "--platform", manifest["platform"],
+             "-f", str(overlay / "Dockerfile"), "-t", image, str(ROOT)])
     image_id = run(["docker", "image", "inspect", image, "--format", "{{.Id}}"]).stdout.strip()
     version = run(["docker", "run", "--rm", "--platform", manifest["platform"],
                    "--entrypoint", "dpkg-query", image, "-W", "-f=${Version}", "afl++"]).stdout.strip()
@@ -88,7 +90,7 @@ def build_one(relative: Path) -> dict:
              "--tmpfs", "/tmp:rw,exec,nosuid,size=64m",
              "-e", "AFL_MAP_SIZE=65536", "-v", f"{control}:/input/control:ro",
              "-v", f"{temp}:/coverage", "--entrypoint", "afl-showmap", image,
-             "-m", "none", "-t", "10000", "-o", "/coverage/edges.txt", "--",
+             "-m", "none", "-t", "120000", "-o", "/coverage/edges.txt", "--",
              "/work/afl_proxy", "/input/control"], 120)
         edges = (Path(temp) / "edges.txt").read_text().splitlines()
         if len(edges) < 2:

@@ -23,6 +23,11 @@
 
 Native request frame parser over Innmind IO; pinned version 4.0.0 requires PHP 8.4, replayed with Homebrew PHP 8.4.27.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/innmind_http_parser/README.md)
+
+```sh
+python3 parsarium.py build http11 php innmind_http_parser
+python3 parsarium.py run http11 php innmind_http_parser controls/http11/request.http
+```

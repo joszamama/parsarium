@@ -1,0 +1,17 @@
+# karriere/pdf-merge — PDF / PHP
+
+Pinned release: `v3.4.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
+
+[API, control result, and parser family](../../../../catalog/pdf/php/karriere-pdf-merge/README.md)
+
+## Run from the repository root
+
+```sh
+python3 parsarium.py build pdf php karriere_pdf_merge
+python3 parsarium.py run pdf php karriere_pdf_merge controls/pdf/one-page.pdf
+python3 parsarium.py replay pdf php karriere_pdf_merge CORPUS_DIR runs/pdf-karriere_pdf_merge-replay
+python3 parsarium.py afl build pdf php karriere_pdf_merge
+python3 parsarium.py afl prepare pdf php karriere_pdf_merge runs/pdf-karriere_pdf_merge-afl
+```
+
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

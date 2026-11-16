@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/java/openpdf/README.md)
+
+```sh
+python3 parsarium.py build png java openpdf
+python3 parsarium.py run png java openpdf controls/png/red-green.png
+```

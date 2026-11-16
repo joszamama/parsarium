@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "go",
+  "package": "github.com/pgavlin/svg2",
+  "release": "v0.0.0-20210919231505-4ace7308edc1",
+  "catalog_parser": "data/go/svg/parsers.json",
+  "source_lock": "projects/svg/go/github_com_pgavlin_svg2/source-lock.json",
+  "source_sha256": "28b60f1010683361c309c9ab489fbfaee7495a2e93347bf34a2cbe6340ba25c0",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "height": 1,
+    "width": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/pgavlin/svg2 during valid-control replay",
+  "coverage_subject_prefix": "github.com/pgavlin/svg2/"
+}

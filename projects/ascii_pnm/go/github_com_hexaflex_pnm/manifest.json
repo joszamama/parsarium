@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "go",
+  "package": "github.com/hexaflex/pnm",
+  "release": "v0.0.0-20200810192450-e891a41ac33b",
+  "catalog_parser": "data/go/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/go/github_com_hexaflex_pnm/source-lock.json",
+  "source_sha256": "28ffb94e2979b6a133d6d102210954db319ee8fc66d717a9014343d5f81791c3",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "height": 1,
+    "rgb0": [
+      255,
+      0,
+      0
+    ],
+    "rgb1": [
+      0,
+      255,
+      0
+    ],
+    "width": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/hexaflex/pnm during valid-control replay",
+  "coverage_subject_prefix": "github.com/hexaflex/pnm/"
+}

@@ -22,6 +22,11 @@
 
 Sentinel transport parses raw HTTP responses with Content-Length. Its documented parser does not support chunked responses; only the valid fixed-length control is verified. The adapter suppresses package startup log chatter while reporting parsed fields.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/sentinel_transport_simple_http/README.md)
+
+```sh
+python3 parsarium.py build http11 java sentinel_transport_simple_http
+python3 parsarium.py run http11 java sentinel_transport_simple_http controls/http11/response.http
+```

@@ -19,6 +19,11 @@
 
 PHP wrapper invokes local Poppler pdftotext 26.11.0; shared backend with spatie/pdf-to-text.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/ottosmops_pdftotext/README.md)
+
+```sh
+python3 parsarium.py build pdf php ottosmops_pdftotext
+python3 parsarium.py run pdf php ottosmops_pdftotext controls/pdf/one-page.pdf
+```

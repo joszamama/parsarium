@@ -1,13 +1,13 @@
 # MP3 with ID3v2 / Java
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/java/mp3_id3v2/standard.json)
 
 ## Third-party parsers
 
 - [jaudiotagger](jaudiotagger/README.md) — Docker harness ready
-- [mp3agic](mp3agic/README.md) — verified API path
+- [mp3agic](mp3agic/README.md) — Docker harness ready
 - [tika-audiovideo](tika-audiovideo/README.md) — verified API path
 - [jlayer](jlayer/README.md) — verified API path
 - [jave-core](jave-core/README.md) — verified API path

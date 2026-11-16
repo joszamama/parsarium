@@ -1,13 +1,13 @@
 # ZIP / Rust
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/zip/ranking.md) · [standard API inventory](../../../data/rust/zip/standard.json)
 
 ## Third-party parsers
 
 - [zip](zip/README.md) — Docker harness ready
-- [eazip](eazip/README.md) — verified API path
+- [eazip](eazip/README.md) — Docker harness ready
 - [rc-zip-sync](rc-zip-sync/README.md) — verified API path
 - [rawzip](rawzip/README.md) — verified API path
 - [tinyzip](tinyzip/README.md) — verified API path

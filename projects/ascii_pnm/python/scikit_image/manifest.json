@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "python",
+  "package": "scikit-image",
+  "release": "0.26.0",
+  "catalog_parser": "data/python/ascii_pnm/parsers.json",
+  "source_lock": "adapters/python/ascii_pnm/requirements.lock",
+  "source_sha256": "c6624a76c6085218248154cc7e1500e6b488edcd9499004dd0d35040607d7505",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgb0": [
+      255,
+      0,
+      0
+    ],
+    "rgb1": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/skimage/",
+  "dependencies": [
+    {
+      "package": "imageio",
+      "release": "2.38.1",
+      "sha256": "36d23eb7423d2fb63f637098758edb3d2df3687f7125e0a5ce8596572022dcf9"
+    },
+    {
+      "package": "lazy-loader",
+      "release": "0.6",
+      "sha256": "77253be3391b06124a0e16105bd663b6c54470af1a9ca8e1cf026f38d58ed056"
+    },
+    {
+      "package": "networkx",
+      "release": "3.7",
+      "sha256": "e3fd2c13a7814cee3746340d8d7f8598a67f16a58bf47fb7f8793fab6efca1b0"
+    },
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "packaging",
+      "release": "26.3",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "package": "pillow",
+      "release": "13.0.0",
+      "sha256": "e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d"
+    },
+    {
+      "package": "scipy",
+      "release": "1.18.1",
+      "sha256": "ac0333bdf38309aa3dcbe7e3fa7ea29e7a2c37c6ea306a757b700ded8e4596ad"
+    },
+    {
+      "package": "tifffile",
+      "release": "2026.11.8",
+      "sha256": "bb41732b357a7fa3077db439961ea1ec3a88d2fda4b45fd3ea9f7786690f6049"
+    }
+  ]
+}

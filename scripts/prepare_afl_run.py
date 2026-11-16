@@ -31,7 +31,8 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
     ecosystem = manifest["ecosystem"]
     target = ("/work/afl_fuzzer" if ecosystem == "rust" else
               "/work/afl_proxy" if ecosystem in
-              {"go", "java", "javascript", "python", "php"} else "/work/fuzzer")
+              {"go", "java", "javascript", "python", "php"} else
+              manifest.get("afl_entrypoint", "/work/fuzzer"))
     target_args = ([target, "@@"] if ecosystem in
                    {"go", "java", "javascript", "python", "php"} else [target])
     command = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",

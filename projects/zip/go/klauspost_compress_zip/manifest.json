@@ -11,15 +11,22 @@
   "platform": "linux/arm64",
   "control": "controls/zip/hello.zip",
   "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-  "expected_output": {"name": "hello.txt", "text": "parsarium\n"},
-  "harness": "harness.go",
+  "expected_output": {
+    "name": "hello.txt",
+    "text": "parsarium\n"
+  },
+  "harness": "harness_test.go",
   "fuzz_engine": "Go native fuzzing",
   "fuzz_entry": "FuzzZIP",
   "fuzz_smoke_entrypoint": "/work/harness.test",
-  "fuzz_smoke_args": ["-test.list=Fuzz"],
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
   "fuzz_smoke_expect": "FuzzZIP",
   "toolchain_entrypoint": "/work/reporter",
-  "toolchain_args": ["--toolchain"],
+  "toolchain_args": [
+    "--toolchain"
+  ],
   "coverage": "Go test coverpkg instrumentation of github.com/klauspost/compress/zip during valid-control replay",
   "coverage_subject_prefix": "github.com/klauspost/compress/zip/"
 }

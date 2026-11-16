@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "python",
+  "package": "PySide6",
+  "release": "6.12.0",
+  "catalog_parser": "data/python/ascii_pnm/parsers.json",
+  "source_lock": "adapters/python/ascii_pnm/requirements.lock",
+  "source_sha256": "d13ed4d0053cc20f3e4e0fdbf12790a9b7f958d7e22c0843411ecfa8c799e2a9",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgb0": [
+      255,
+      0,
+      0
+    ],
+    "rgb1": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/PySide6/",
+  "dependencies": [
+    {
+      "package": "pyside6-addons",
+      "release": "6.12.0",
+      "sha256": "4ab38c0017f0453671a9313d3a53ca1c0e378924f54b07e596bcea94a9642391"
+    },
+    {
+      "package": "pyside6-essentials",
+      "release": "6.12.0",
+      "sha256": "16f4b5e41daf49235ae048458243da9efe5f3d8040f9cc5aa454ce69893d3bd9"
+    },
+    {
+      "package": "pyside6-pdf",
+      "release": "6.12.0.140",
+      "sha256": "0c94370b6b9d65fbfe54f9d6d25df0677db0cdcfd0a842a63958a3603a42007c"
+    },
+    {
+      "package": "pyside6-webengine",
+      "release": "6.12.0.140",
+      "sha256": "c041c9921d7c91c9e51a2c027f434d05c3c59baa2c8f17b71dc8194e77791f06"
+    },
+    {
+      "package": "shiboken6",
+      "release": "6.12.0",
+      "sha256": "3bde565bb0890044b5c7f63808adddede5abc241e9395a2bfed61919884d6240"
+    }
+  ]
+}

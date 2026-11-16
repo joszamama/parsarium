@@ -11,15 +11,29 @@
   "platform": "linux/arm64",
   "control": "controls/wav/four-samples.wav",
   "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-  "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16, "signs": [0, 1, -1, 0]},
-  "harness": "harness.go",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits": 16,
+    "signs": [
+      0,
+      1,
+      -1,
+      0
+    ]
+  },
+  "harness": "harness_test.go",
   "fuzz_engine": "Go native fuzzing",
   "fuzz_entry": "FuzzWAV",
   "fuzz_smoke_entrypoint": "/work/harness.test",
-  "fuzz_smoke_args": ["-test.list=Fuzz"],
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
   "fuzz_smoke_expect": "FuzzWAV",
   "toolchain_entrypoint": "/work/reporter",
-  "toolchain_args": ["--toolchain"],
+  "toolchain_args": [
+    "--toolchain"
+  ],
   "coverage": "Go test coverpkg instrumentation of github.com/go-audio/wav during valid-control replay",
   "coverage_subject_prefix": "github.com/go-audio/wav/"
 }

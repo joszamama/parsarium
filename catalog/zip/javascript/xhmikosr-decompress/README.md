@@ -22,6 +22,11 @@
 
 Uses @xhmikosr/decompress-unzip, which uses yauzl.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/javascript/xhmikosr_decompress/README.md)
+
+```sh
+python3 parsarium.py build zip javascript xhmikosr_decompress
+python3 parsarium.py run zip javascript xhmikosr_decompress controls/zip/hello.zip
+```

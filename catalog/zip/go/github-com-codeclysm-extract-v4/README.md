@@ -20,6 +20,11 @@
 
 Shared underlying parser lineage or wrapper; package count is not an independent engine count.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/go/github_com_codeclysm_extract_v4/README.md)
+
+```sh
+python3 parsarium.py build zip go github_com_codeclysm_extract_v4
+python3 parsarium.py run zip go github_com_codeclysm_extract_v4 controls/zip/hello.zip
+```

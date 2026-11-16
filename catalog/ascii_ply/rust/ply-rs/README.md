@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/rust/ply_rs/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply rust ply_rs
+python3 parsarium.py run ascii_ply rust ply_rs controls/ascii_ply/triangle.ply
+```

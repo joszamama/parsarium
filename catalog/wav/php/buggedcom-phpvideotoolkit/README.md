@@ -21,6 +21,11 @@
 
 Composer wrapper delegates to local FFmpeg 9.0.2; same release lock as the PHP MP3 cell.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/buggedcom_phpvideotoolkit/README.md)
+
+```sh
+python3 parsarium.py build wav php buggedcom_phpvideotoolkit
+python3 parsarium.py run wav php buggedcom_phpvideotoolkit controls/wav/256-samples.wav
+```

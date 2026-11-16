@@ -30,6 +30,11 @@
 
 Fork of the UPNG.js decoder also published as upng-js.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/javascript/pdf_lib_upng/README.md)
+
+```sh
+python3 parsarium.py build png javascript pdf_lib_upng
+python3 parsarium.py run png javascript pdf_lib_upng controls/png/red-green.png
+```

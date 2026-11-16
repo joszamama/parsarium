@@ -1,4 +1,4 @@
-"""Refresh the committed smoke reports for newly verified Python project paths.
+"""Refresh smoke reports for newly verified managed-language paths.
 
 Run only the named projects, then retain existing checked records. This keeps
 large matrix expansions reviewable without replaying unrelated containers.
@@ -7,6 +7,7 @@ large matrix expansions reviewable without replaying unrelated containers.
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
+import fcntl
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -47,22 +48,24 @@ def check_native_plan(relative: Path, scratch: Path) -> dict:
 
 def update_report(name: str, additions: list[dict], count_fields: dict[str, str]) -> None:
     path = ROOT / "data" / name
-    report = json.loads(path.read_text())
-    rows = {item["project"]: item for item in report["results"]}
-    for item in additions:
-        rows[item["project"]] = item
-    report["results"] = [rows[key] for key in sorted(rows)]
-    report["projects_total"] = len(rows)
-    for field, status in count_fields.items():
-        report[field] = sum(item["status"] == status for item in rows.values())
-    report["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
-    path.write_text(json.dumps(report, indent=2) + "\n")
+    with (ROOT / "data/.smoke-report.lock").open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        report = json.loads(path.read_text())
+        rows = {item["project"]: item for item in report["results"]}
+        for item in additions:
+            rows[item["project"]] = item
+        report["results"] = [rows[key] for key in sorted(rows)]
+        report["projects_total"] = len(rows)
+        for field, status in count_fields.items():
+            report[field] = sum(item["status"] == status for item in rows.values())
+        report["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
+        path.write_text(json.dumps(report, indent=2) + "\n")
 
 
 def check_project(relative: Path, scratch: Path) -> dict:
     project, manifest = project_for(*relative.parts)
-    if manifest["ecosystem"] != "python":
-        raise ValueError(f"only Python project batches are supported: {relative}")
+    if manifest["ecosystem"] not in {"python", "javascript", "go", "php", "java", "rust", "c", "cpp"}:
+        raise ValueError(f"unsupported project batch ecosystem: {relative}")
     path = project / "manifest.json"
     receipt = json.loads((project / "verification.json").read_text())
     if not receipt.get("pass"):
@@ -74,16 +77,19 @@ def check_project(relative: Path, scratch: Path) -> dict:
     if (case["status"] != "ok" or batch["status"] not in {"ok", "per_case_only"}
             or afl_plan["status"] != "ready"):
         raise ValueError(f"smoke check failed: {relative}")
-    feedback = check_feedback(path)
-    if feedback["status"] != "verified":
+    feedback = check_feedback(path) if manifest["ecosystem"] in {
+        "python", "javascript", "go", "php", "java"} else None
+    if feedback is not None and feedback["status"] != "verified":
         raise ValueError(f"feedback check failed: {relative}")
     overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
-    python_afl = json.loads(overlay.read_text())
-    if (not python_afl["pass"] or python_afl["base_project_receipt_sha256"] !=
+    overlay_record = json.loads(overlay.read_text())
+    if (not overlay_record["pass"] or overlay_record["base_project_receipt_sha256"] !=
             sha256((project / "verification.json").read_bytes()).hexdigest()):
         raise ValueError(f"AFL++ overlay mismatch: {relative}")
+    kind = ("python_afl" if manifest["ecosystem"] == "python" else
+            "native_afl" if manifest["ecosystem"] in {"rust", "c", "cpp"} else "bridge_afl")
     return {"case": case, "batch": batch, "native": native,
-            "afl_plan": afl_plan, "feedback": feedback, "python_afl": python_afl}
+            "afl_plan": afl_plan, "feedback": feedback, kind: overlay_record}
 
 
 def main() -> None:
@@ -97,7 +103,8 @@ def main() -> None:
         cli.error("give distinct format/ecosystem/slug paths")
     if not 1 <= args.workers <= 8:
         cli.error("--workers must be between 1 and 8")
-    case, batch, native, feedback, afl_plan, python_afl = [], [], [], [], [], []
+    case, batch, native, feedback, afl_plan, python_afl, bridge_afl, native_afl = [], [], [], [], [], [], [], []
+    failures = []
     with tempfile.TemporaryDirectory(prefix="parsarium-refresh-smoke-") as temporary:
         scratch = Path(temporary)
         with ThreadPoolExecutor(max_workers=args.workers) as pool:
@@ -105,11 +112,27 @@ def main() -> None:
                        for relative in relatives}
             for future in as_completed(futures):
                 relative = futures[future]
-                result = future.result()
+                try:
+                    result = future.result()
+                except Exception as error:
+                    failures.append((str(relative), str(error)))
+                    print(f"Failed {relative}: {error}", flush=True)
+                    continue
                 for field, rows in (("case", case), ("batch", batch),
-                                    ("native", native), ("feedback", feedback),
-                                    ("afl_plan", afl_plan), ("python_afl", python_afl)):
+                                    ("native", native),
+                                    ("afl_plan", afl_plan)):
                     rows.append(result[field])
+                if result["feedback"] is not None:
+                    feedback.append(result["feedback"])
+                if "native_afl" in result:
+                    record = result["native_afl"]
+                    native_afl.append({"project": record["project"], "status": "verified",
+                                       "feedback_edges": record["feedback_edges"],
+                                       "image_id": record["image_id"]})
+                elif "python_afl" in result:
+                    python_afl.append(result["python_afl"])
+                else:
+                    bridge_afl.append(result["bridge_afl"])
                 print(f"Checked {relative}", flush=True)
     update_report("fuzz-case-smoke.json", case, {"projects_passing": "ok"})
     update_report("fuzz-batch-smoke.json", batch,
@@ -119,17 +142,27 @@ def main() -> None:
     if feedback:
         update_report("ecosystem-feedback-smoke.json", feedback,
                       {"projects_verified": "verified"})
-    if python_afl:
-        path = ROOT / "data/afl-python-smoke.json"
-        report = json.loads(path.read_text())
-        rows = {item["project"]: item for item in report["results"]}
-        rows.update({item["project"]: item for item in python_afl})
-        report["results"] = [rows[key] for key in sorted(rows)]
-        report["projects_total"] = len(rows)
-        report["projects_verified"] = sum(item["pass"] for item in rows.values())
-        report["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
-        path.write_text(json.dumps(report, indent=2) + "\n")
+    if native_afl:
+        update_report("afl-native-smoke.json", native_afl,
+                      {"projects_verified": "verified"})
+    for name, additions in (("afl-python-smoke.json", python_afl),
+                            ("afl-bridge-smoke.json", bridge_afl)):
+        if not additions:
+            continue
+        path = ROOT / "data" / name
+        with (ROOT / "data/.smoke-report.lock").open("w") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            report = json.loads(path.read_text())
+            rows = {item["project"]: item for item in report["results"]}
+            rows.update({item["project"]: item for item in additions})
+            report["results"] = [rows[key] for key in sorted(rows)]
+            report["projects_total"] = len(rows)
+            report["projects_verified"] = sum(item["pass"] for item in rows.values())
+            report["checked_at_utc"] = datetime.now(timezone.utc).isoformat()
+            path.write_text(json.dumps(report, indent=2) + "\n")
     print(f"Refreshed {len(relatives)} projects across smoke reports")
+    if failures:
+        raise SystemExit(f"{len(failures)} project smoke checks failed: {failures}")
 
 
 if __name__ == "__main__":

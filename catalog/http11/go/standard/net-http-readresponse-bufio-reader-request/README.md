@@ -1,6 +1,6 @@
 # net/http.ReadResponse(*bufio.Reader, *Request) — HTTP/1.1 / Go
 
-- **Runtime:** Go 1.27.1 darwin/arm64 standard library
+- **Runtime:** Go 1.27.1 linux/arm64 standard library
 - **Input API:** `net/http.ReadResponse(*bufio.Reader, *Request)`
 - **Official documentation:** [reference](https://pkg.go.dev/net/http@go1.27.1)
 - **Valid control:** [`controls/http11/response.http`](../../../../../controls/http11/response.http)
@@ -8,10 +8,19 @@
 
 ## Observed control result
 
-HTTP/1.1 200 OK, body parsarium
+```json
+{
+  "body": "parsarium",
+  "proto": "HTTP/1.1",
+  "status": 200
+}
+```
 
 [Control adapter](../../../../../adapters/go/http11_std.go)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build http11 go stdlib_response
+python3 parsarium.py run http11 go stdlib_response controls/http11/response.http
+```

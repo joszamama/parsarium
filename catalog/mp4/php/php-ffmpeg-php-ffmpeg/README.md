@@ -22,6 +22,11 @@
 
 PHP FFProbe wrapper delegates to local FFmpeg 9.0.2; shares native parser family with buggedcom/phpvideotoolkit.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/php/php_ffmpeg_php_ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build mp4 php php_ffmpeg_php_ffmpeg
+python3 parsarium.py run mp4 php php_ffmpeg_php_ffmpeg controls/mp4/red-av.mp4
+```

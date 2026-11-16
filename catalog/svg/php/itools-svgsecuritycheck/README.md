@@ -20,6 +20,11 @@
 
 Uses bundled libxml XMLReader for syntax and package-specific SVG allowlists for semantic checks.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/itools_svgsecuritycheck/README.md)
+
+```sh
+python3 parsarium.py build svg php itools_svgsecuritycheck
+python3 parsarium.py run svg php itools_svgsecuritycheck controls/svg/red-green.svg
+```

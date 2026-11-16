@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "go",
+  "package": "github.com/andrianbdn/iospng",
+  "release": "v0.0.0-20180730113000-dccef1992541",
+  "catalog_parser": "data/go/png/parsers.json",
+  "source_lock": "projects/png/go/github_com_andrianbdn_iospng/source-lock.json",
+  "source_sha256": "125cc93b590af755b757ed7d4b22345e878088aa403d73849cf0c95c29484ee5",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "height": 1,
+    "output_bytes": 71,
+    "width": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/andrianbdn/iospng during valid-control replay",
+  "coverage_subject_prefix": "github.com/andrianbdn/iospng/"
+}

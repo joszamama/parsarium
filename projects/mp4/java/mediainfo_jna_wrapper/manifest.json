@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "java",
+  "package": "mediainfo-jna-wrapper",
+  "release": "2.1.9",
+  "catalog_parser": "data/java/mp4/parsers.json",
+  "source_lock": "projects/mp4/java/mediainfo_jna_wrapper/source-lock.json",
+  "source_sha256": "e84b9f7cc57b1f46f1716918902de94b329e7a2bfe06018951925fea2b6859a9",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp4/red-av-padded.mp4",
+  "control_sha256": "bb0b6f47495dab84af1baa2ff4270f476fe7ce8752d0a391135c49f6184d3ae1",
+  "expected_output": {
+    "format": "MPEG-4",
+    "width": 2,
+    "height": 2,
+    "sample_rate": 8000
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/mediainfo-jna-wrapper-2.1.9.jar:/work/lib/slf4j-api-2.0.20.jar:/work/lib/jna-platform-5.19.1.jar:/work/lib/jna-5.19.1.jar:/work/lib/mediainfo-jna-lib-mac-aarch64-2.1.9.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.amilesend:mediainfo-jna-wrapper:2.1.9 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

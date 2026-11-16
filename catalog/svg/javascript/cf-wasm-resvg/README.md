@@ -30,6 +30,11 @@
 
 WebAssembly wrapper around Rust resvg.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/javascript/cf_wasm_resvg/README.md)
+
+```sh
+python3 parsarium.py build svg javascript cf_wasm_resvg
+python3 parsarium.py run svg javascript cf_wasm_resvg controls/svg/red-green.svg
+```

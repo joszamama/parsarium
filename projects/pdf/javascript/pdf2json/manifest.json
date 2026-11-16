@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "javascript",
+  "package": "pdf2json",
+  "release": "4.1.1",
+  "catalog_parser": "data/javascript/pdf/parsers.json",
+  "source_lock": "projects/pdf/javascript/pdf2json/source-lock.json",
+  "source_sha256": "94fe263538bd01681af67a8cecd26da6dbfc20c0250dc7032852af25a50df6b3",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "text": "Parsarium"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/pdf2json/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/pdf2json/"
+}

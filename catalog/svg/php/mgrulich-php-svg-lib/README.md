@@ -20,6 +20,11 @@
 
 Older fork of PhenX/dompdf php-svg-lib; shared parser lineage with dompdf/php-svg-lib.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/mgrulich_php_svg_lib/README.md)
+
+```sh
+python3 parsarium.py build svg php mgrulich_php_svg_lib
+python3 parsarium.py run svg php mgrulich_php_svg_lib controls/svg/red-green.svg
+```

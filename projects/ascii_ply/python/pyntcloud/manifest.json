@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "python",
+  "package": "pyntcloud",
+  "release": "0.3.1",
+  "catalog_parser": "data/python/ascii_ply/parsers.json",
+  "source_lock": "adapters/python/ascii_ply/requirements.lock",
+  "source_sha256": "2c064f53ae75175e8a9b8fe9f59d430b02b203a4e7ef8620af01d5e247d4df88",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertex_count": 3,
+    "face_count": 1,
+    "first_vertex": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "last_vertex": [
+      0.0,
+      1.0,
+      0.0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pyntcloud/",
+  "dependencies": [
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "pandas",
+      "release": "3.1.1",
+      "sha256": "326459d8a9be11b5f48c7fc1d63e38ba7cfeaebe5d41bd19e4c5f4f11dc9ac91"
+    },
+    {
+      "package": "python-dateutil",
+      "release": "4.0.0",
+      "sha256": "a5e246f79eb80475e691bf93862cead98decd8a498cf53ba0516fcdc0f50dc1c"
+    },
+    {
+      "package": "scipy",
+      "release": "1.18.1",
+      "sha256": "ac0333bdf38309aa3dcbe7e3fa7ea29e7a2c37c6ea306a757b700ded8e4596ad"
+    },
+    {
+      "package": "tzdata",
+      "release": "2026.6",
+      "sha256": "0a10eec6e13ef16b627fabed9a5f2ba61a62b1c67f327305f4e7e412a70b4aec"
+    }
+  ]
+}

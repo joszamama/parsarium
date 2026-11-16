@@ -20,6 +20,11 @@
 
 PHP wrapper invokes local Poppler pdfinfo 26.11.0 and parses its metadata output.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/howtomakeaturn_pdfinfo/README.md)
+
+```sh
+python3 parsarium.py build pdf php howtomakeaturn_pdfinfo
+python3 parsarium.py run pdf php howtomakeaturn_pdfinfo controls/pdf/one-page.pdf
+```

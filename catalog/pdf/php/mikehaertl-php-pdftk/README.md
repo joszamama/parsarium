@@ -20,6 +20,11 @@
 
 PHP wrapper invokes pinned local pdftk-java 3.3.3; the native PDF reader is shared with other pdftk wrappers.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/mikehaertl_php_pdftk/README.md)
+
+```sh
+python3 parsarium.py build pdf php mikehaertl_php_pdftk
+python3 parsarium.py run pdf php mikehaertl_php_pdftk controls/pdf/one-page.pdf
+```

@@ -19,6 +19,7 @@ import tomllib
 
 from build_afl_native import AFL_PACKAGE, OVERLAYS
 from run_case import ROOT, project_for
+from docker_slots import docker_build_slot
 
 
 AFL_RUST_RELEASE = "0.18.2"
@@ -39,7 +40,7 @@ def overlay_target(project: Path) -> str:
     marker = "use libfuzzer_sys::fuzz_target;\n"
     if source.count(marker) != 1 or "fuzz_target!(" not in source:
         raise ValueError("unsupported Rust fuzz target")
-    return source.replace("#![no_main]\n\n", "", 1).replace(marker, "", 1).replace(
+    return source.replace("#![no_main]", "", 1).lstrip("\n").replace(marker, "", 1).replace(
         "fuzz_target!(", "fn main() { afl::fuzz!(", 1).rstrip() + "\n}\n"
 
 
@@ -106,8 +107,9 @@ def build_one(format_name: str, ecosystem: str, slug: str) -> dict:
     (overlay / "Dockerfile").write_text(dockerfile(relative))
     image = f"parsarium-afl/{format_name}-rust-{slug}:local"
     print(f"Building {image}", flush=True)
-    command(["docker", "build", "--quiet", "--platform", manifest["platform"],
-             "-f", str(overlay / "Dockerfile"), "-t", image, str(ROOT)])
+    with docker_build_slot():
+        command(["docker", "build", "--quiet", "--platform", manifest["platform"],
+                 "-f", str(overlay / "Dockerfile"), "-t", image, str(ROOT)])
     image_id = command(["docker", "image", "inspect", image, "--format", "{{.Id}}"])
     image_id_text = image_id.stdout.decode().strip()
     map_probe = command(["docker", "run", "--rm", "--platform", manifest["platform"],

@@ -22,6 +22,11 @@
 
 Official PHP-FFMpeg wrapper invokes local FFprobe 9.0.2; not an independent decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/php_ffmpeg_php_ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build wav php php_ffmpeg_php_ffmpeg
+python3 parsarium.py run wav php php_ffmpeg_php_ffmpeg controls/wav/256-samples.wav
+```

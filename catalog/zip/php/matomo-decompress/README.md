@@ -21,6 +21,11 @@
 
 The explicit ZipArchive backend parses the local archive and returns per-entry metadata; the package also offers a bundled PclZip backend.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/matomo_decompress/README.md)
+
+```sh
+python3 parsarium.py build zip php matomo_decompress
+python3 parsarium.py run zip php matomo_decompress controls/zip/hello.zip
+```

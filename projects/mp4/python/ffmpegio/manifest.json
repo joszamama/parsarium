@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "python",
+  "package": "ffmpegio",
+  "release": "0.12.0",
+  "catalog_parser": "data/python/mp4/parsers.json",
+  "source_lock": "adapters/python/mp4/requirements.lock",
+  "source_sha256": "b55c408c1da3d22b11ba74193512c75dcb153552602462547b6a14431bfa46a0",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "title": "Parsarium",
+    "width": 2,
+    "height": 2,
+    "video_codec": "h264"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/ffmpegio/",
+  "dependencies": [
+    {
+      "package": "packaging",
+      "release": "26.3",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "package": "pluggy",
+      "release": "1.7.0",
+      "sha256": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec"
+    },
+    {
+      "package": "typing-extensions",
+      "release": "4.16.0",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+    }
+  ]
+}

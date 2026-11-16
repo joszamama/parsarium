@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "javascript",
+  "package": "coherentpdf",
+  "release": "2.5.5",
+  "catalog_parser": "data/javascript/pdf/parsers.json",
+  "source_lock": "projects/pdf/javascript/coherentpdf/source-lock.json",
+  "source_sha256": "5ab11947165b4e19111931f30593528f73253c09732f5f3deb4608fd524574de",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/coherentpdf/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/coherentpdf/"
+}

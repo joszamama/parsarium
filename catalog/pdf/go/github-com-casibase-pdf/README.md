@@ -19,6 +19,11 @@
 
 Shared code lineage; package count does not imply independent parser engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/go/github_com_casibase_pdf/README.md)
+
+```sh
+python3 parsarium.py build pdf go github_com_casibase_pdf
+python3 parsarium.py run pdf go github_com_casibase_pdf controls/pdf/one-page.pdf
+```

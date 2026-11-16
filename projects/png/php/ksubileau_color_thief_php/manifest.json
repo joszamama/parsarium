@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "php",
+  "package": "ksubileau/color-thief-php",
+  "release": "v3.0.0",
+  "catalog_parser": "data/php/png/parsers.json",
+  "source_lock": "projects/png/php/ksubileau_color_thief_php/source-lock.json",
+  "source_sha256": "b140806885f3c1d0b0eab88be7417833185b6ab0f8231d6b5566cf7e579b7e66",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "palette": [
+      "#00ff00",
+      "#ff0000"
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in ksubileau/color-thief-php PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/ksubileau/color-thief-php/"
+}

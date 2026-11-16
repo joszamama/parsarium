@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "php",
+  "package": "gemorroj/file-wav",
+  "release": "2.3.2",
+  "catalog_parser": "data/php/wav/parsers.json",
+  "source_lock": "projects/wav/php/gemorroj_file_wav/source-lock.json",
+  "source_sha256": "623df48f8281498559fbd53482261576513c404ea8d15faf2fb6a836fc43c74f",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/wav/256-samples.wav",
+  "control_sha256": "d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7",
+  "expected_output": {
+    "compression": 1,
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "duration_seconds": 0.032
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in gemorroj/file-wav PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/gemorroj/file-wav/"
+}

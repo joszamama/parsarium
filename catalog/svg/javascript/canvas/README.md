@@ -30,6 +30,11 @@
 
 Node canvas binding uses the system SVG rendering stack.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/javascript/canvas/README.md)
+
+```sh
+python3 parsarium.py build svg javascript canvas
+python3 parsarium.py run svg javascript canvas controls/svg/red-green.svg
+```

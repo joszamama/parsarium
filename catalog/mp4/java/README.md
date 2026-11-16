@@ -1,16 +1,16 @@
 # MP4 / Java
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/mp4/ranking.md) · [standard API inventory](../../../data/java/mp4/standard.json)
 
 ## Third-party parsers
 
 - [isoparser](isoparser/README.md) — Docker harness ready
-- [metadata-extractor](metadata-extractor/README.md) — verified API path
-- [jcodec](jcodec/README.md) — verified API path
-- [muxer](muxer/README.md) — verified API path
-- [tika-mp4](tika-mp4/README.md) — verified API path
+- [metadata-extractor](metadata-extractor/README.md) — Docker harness ready
+- [jcodec](jcodec/README.md) — Docker harness ready
+- [muxer](muxer/README.md) — Docker harness ready
+- [tika-mp4](tika-mp4/README.md) — Docker harness ready
 - [javacv](javacv/README.md) — verified API path
 - [bytedeco-ffmpeg](bytedeco-ffmpeg/README.md) — verified API path
 - [jaffree](jaffree/README.md) — verified API path

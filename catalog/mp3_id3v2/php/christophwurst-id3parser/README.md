@@ -22,6 +22,11 @@
 
 This package vendors a stripped-down getID3 ID3 implementation; it is a separate package path, not an independent parser family. Packagist marks it abandoned in favor of nextcloud/id3parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/christophwurst_id3parser/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php christophwurst_id3parser
+python3 parsarium.py run mp3_id3v2 php christophwurst_id3parser controls/mp3_id3v2/tone-tags.mp3
+```

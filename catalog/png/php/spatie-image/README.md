@@ -20,6 +20,11 @@
 
 The adapter selects Spatie’s GD driver, which delegates PNG decoding to PHP GD.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/spatie_image/README.md)
+
+```sh
+python3 parsarium.py build png php spatie_image
+python3 parsarium.py run png php spatie_image controls/png/red-green.png
+```

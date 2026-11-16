@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "php",
+  "package": "darylldoyle/safe-svg",
+  "release": "2.5.2",
+  "catalog_parser": "data/php/svg/parsers.json",
+  "source_lock": "projects/svg/php/darylldoyle_safe_svg/source-lock.json",
+  "source_sha256": "59f670963da273d03a124d0b8ba02b1a3dc793e341cd6a7dacf5e83918410125",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "rectangles": 2,
+    "first_fill": "#ff0000"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in darylldoyle/safe-svg PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/darylldoyle/safe-svg/"
+}

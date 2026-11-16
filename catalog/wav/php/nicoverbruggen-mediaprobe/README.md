@@ -21,6 +21,11 @@
 
 Composer wrapper delegates to local FFprobe 9.0.2; package path over the FFmpeg parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/nicoverbruggen_mediaprobe/README.md)
+
+```sh
+python3 parsarium.py build wav php nicoverbruggen_mediaprobe
+python3 parsarium.py run wav php nicoverbruggen_mediaprobe controls/wav/256-samples.wav
+```

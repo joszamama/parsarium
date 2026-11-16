@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "python",
+  "package": "imgio",
+  "release": "1.7.4",
+  "catalog_parser": "data/python/png/parsers.json",
+  "source_lock": "adapters/python/png/requirements.lock",
+  "source_sha256": "dcb18caea26fb6e5902492caa1c60e9ae47537aeedf4d0d6877d992670568210",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgba0": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "rgba1": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/imgio/",
+  "dependencies": [
+    {
+      "package": "imageio",
+      "release": "2.38.1",
+      "sha256": "36d23eb7423d2fb63f637098758edb3d2df3687f7125e0a5ce8596572022dcf9"
+    },
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "openexr",
+      "release": "3.5.3",
+      "sha256": "dd27c20ccfdcd1d8eade0c35f1c5d4502e2a81fcf78c52130aa55619abd11aa5"
+    },
+    {
+      "package": "pillow",
+      "release": "13.0.0",
+      "sha256": "e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d"
+    },
+    {
+      "package": "pyexr",
+      "release": "0.5.0",
+      "sha256": "d7c509f038950dce223be063a8ebf28e891eafd0ac9e7fb1b470c4e02898f0de"
+    }
+  ]
+}

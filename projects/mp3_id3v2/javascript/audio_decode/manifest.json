@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "javascript",
+  "package": "@audio/decode",
+  "release": "4.3.0",
+  "catalog_parser": "data/javascript/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/javascript/audio_decode/source-lock.json",
+  "source_sha256": "2ff8c180e4f2accdaeec8185560f7086e8df23fee1fcbf78759427fe4ac3bc13",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "sampleRate": 8000,
+    "channels": 1,
+    "samples": 8000
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/@audio/decode/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/@audio/decode/"
+}

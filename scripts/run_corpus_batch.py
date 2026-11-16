@@ -49,7 +49,7 @@ def run_batch(project: Path, manifest: dict, inputs_dir: Path, timeout: int) -> 
                 entrypoint = manifest["fuzz_smoke_entrypoint"]
                 args = manifest["fuzz_smoke_args"]
                 args = args[:args.index("--")] if "--" in args else list(args)
-                args += ["/corpus", "--", "-runs=0"]
+                args += ["--timeout", "30000", "/corpus", "--", "-runs=0"]
             elif ecosystem == "python":
                 entrypoint = manifest["fuzz_smoke_entrypoint"]
                 args = ["/work/fuzz.py", "/corpus", "-runs=0"]

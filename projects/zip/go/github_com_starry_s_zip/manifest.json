@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "go",
+  "package": "github.com/STARRY-S/zip",
+  "release": "v0.2.3",
+  "catalog_parser": "data/go/zip/parsers.json",
+  "source_lock": "projects/zip/go/github_com_starry_s_zip/source-lock.json",
+  "source_sha256": "7b7af5c34cdc6d4b55be309ef0c7bfa5147029f8484d799c092be3141463a76b",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "name": "hello.txt",
+    "text": "parsarium\n"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/STARRY-S/zip during valid-control replay",
+  "coverage_subject_prefix": "github.com/STARRY-S/zip/"
+}

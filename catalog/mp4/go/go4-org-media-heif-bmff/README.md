@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/go/go4_org_media_heif_bmff/README.md)
+
+```sh
+python3 parsarium.py build mp4 go go4_org_media_heif_bmff
+python3 parsarium.py run mp4 go go4_org_media_heif_bmff controls/mp4/red-av.mp4
+```

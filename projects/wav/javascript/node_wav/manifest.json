@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "javascript",
+  "package": "node-wav",
+  "release": "0.0.2",
+  "catalog_parser": "data/javascript/wav/parsers.json",
+  "source_lock": "projects/wav/javascript/node_wav/source-lock.json",
+  "source_sha256": "41e932bc7fb027c8e5d5725aeeaf8174c35d2d7521d1b8e18baedc1d7d8b2e23",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sampleRate": 8000,
+    "channels": 1,
+    "sampleCount": 4,
+    "sampleSigns": [
+      0,
+      1,
+      -1,
+      0
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/node-wav/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/node-wav/"
+}

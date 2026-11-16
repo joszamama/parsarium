@@ -20,6 +20,11 @@
 
 Shares libxml DOM XML syntax parser with other sanitizer packages; SVG allowlist implementation differs.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/decmuc_svgsanitizer/README.md)
+
+```sh
+python3 parsarium.py build svg php decmuc_svgsanitizer
+python3 parsarium.py run svg php decmuc_svgsanitizer controls/svg/red-green.svg
+```

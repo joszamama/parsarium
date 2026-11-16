@@ -20,6 +20,11 @@
 
 Wrapper delegates page import to pinned FPDI 2.6.10 and uses pinned FPDF 1.9.0 as rendering companion.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/tomsgu_pdf_merger/README.md)
+
+```sh
+python3 parsarium.py build pdf php tomsgu_pdf_merger
+python3 parsarium.py run pdf php tomsgu_pdf_merger controls/pdf/one-page.pdf
+```

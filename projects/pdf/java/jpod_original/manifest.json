@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "java",
+  "package": "jpod-original",
+  "release": "5.6",
+  "catalog_parser": "data/java/pdf/parsers.json",
+  "source_lock": "projects/pdf/java/jpod_original/source-lock.json",
+  "source_sha256": "b331de52cae1d4b54f8f18d09520fd43fc8ea4224df668bea10f7ebbc7dcc773",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jPod-5.6.jar:/work/lib/isrt-4.11.jar:/work/lib/iscwt-5.6.jar:/work/lib/jbig2-5.5.1.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of de.intarsys.opensource:jPod:5.6 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

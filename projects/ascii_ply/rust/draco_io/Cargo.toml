@@ -1,0 +1,22 @@
+[package]
+name = "parsarium-ascii-ply-draco-io-harness"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+draco-io = { version = "=0.6.1", default-features = false, features = ["ply-reader"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.154"
+libfuzzer-sys = { version = "=0.4.13", optional = true }
+
+[features]
+fuzzing = ["dep:libfuzzer-sys"]
+
+[[bin]]
+name = "replay"
+path = "src/bin/replay.rs"
+
+[[bin]]
+name = "fuzzer"
+path = "src/bin/fuzzer.rs"
+required-features = ["fuzzing"]

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "php",
+  "package": "decmuc/svgsanitizer",
+  "release": "v1.1.1",
+  "catalog_parser": "data/php/svg/parsers.json",
+  "source_lock": "projects/svg/php/decmuc_svgsanitizer/source-lock.json",
+  "source_sha256": "fe2e96ebfc18b494b85d0db3670bf60411ec57095094b2c559251c236417a75e",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "rectangles": 2,
+    "first_fill": "#ff0000"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in decmuc/svgsanitizer PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/decmuc/svgsanitizer/"
+}

@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/go/goki_dev_svg/README.md)
+
+```sh
+python3 parsarium.py build svg go goki_dev_svg
+python3 parsarium.py run svg go goki_dev_svg controls/svg/red-green.svg
+```

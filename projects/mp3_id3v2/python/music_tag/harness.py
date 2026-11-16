@@ -1,0 +1,20 @@
+"""Byte-input harness for music-tag 0.4.3 on mp3_id3v2."""
+import tempfile
+from pathlib import Path
+import adapter
+
+
+def parse_data(data: bytes):
+    if not data or len(data) > (1 << 20):
+        return None
+    with tempfile.NamedTemporaryFile(suffix=".mp3") as source:
+        source.write(data)
+        source.flush()
+        return adapter.parse('music-tag', Path(source.name))
+
+
+def fuzz_one_input(data: bytes):
+    try:
+        parse_data(data)
+    except (EOFError, OSError, UnicodeError, ValueError):
+        pass

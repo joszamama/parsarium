@@ -20,6 +20,11 @@
 
 This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine. This older package is marked abandoned by Packagist.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/osiemsiedem_intervention_image_vips_driver/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php osiemsiedem_intervention_image_vips_driver
+python3 parsarium.py run ascii_pnm php osiemsiedem_intervention_image_vips_driver controls/ascii_pnm/red-green.ppm
+```

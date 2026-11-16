@@ -21,6 +21,11 @@
 
 Facade delegates MP3 decoding to @audio/decode-mp3 and mpg123-decoder WASM.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/javascript/audio_decode/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 javascript audio_decode
+python3 parsarium.py run mp3_id3v2 javascript audio_decode controls/mp3_id3v2/tone-tags.mp3
+```

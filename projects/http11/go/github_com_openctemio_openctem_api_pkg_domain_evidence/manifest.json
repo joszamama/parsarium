@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "go",
+  "package": "github.com/openctemio/openctem/api/pkg/domain/evidence",
+  "release": "v0.0.0-20261107202920-27e7faec6f5d",
+  "catalog_parser": "data/go/http11/parsers.json",
+  "source_lock": "projects/http11/go/github_com_openctemio_openctem_api_pkg_domain_evidence/source-lock.json",
+  "source_sha256": "17626c4a5f744bff8f8d49010c8d2de858a1a67efa3fab8a764185ab49f283f9",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "url": "http://example.test/parsarium?x=1",
+    "proto": "HTTP/1.1"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/openctemio/openctem/api/pkg/domain/evidence during valid-control replay",
+  "coverage_subject_prefix": "github.com/openctemio/openctem/api/pkg/domain/evidence/"
+}

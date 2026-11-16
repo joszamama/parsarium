@@ -21,6 +21,11 @@
 
 Fork of MediaFile; its pinned lock still delegates MP3 parsing to wapmorgan/mp3info. This API exposes MP3 audio properties rather than tag text.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/codememory_media_file_fork/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php codememory_media_file_fork
+python3 parsarium.py run mp3_id3v2 php codememory_media_file_fork controls/mp3_id3v2/tone-tags.mp3
+```

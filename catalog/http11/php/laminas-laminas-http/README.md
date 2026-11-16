@@ -23,6 +23,11 @@
 
 Laminas continuation of Zend HTTP; shared request parser lineage with zendframework/zend-http.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/laminas_laminas_http/README.md)
+
+```sh
+python3 parsarium.py build http11 php laminas_laminas_http
+python3 parsarium.py run http11 php laminas_laminas_http controls/http11/request.http
+```

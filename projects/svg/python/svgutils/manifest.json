@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "python",
+  "package": "svgutils",
+  "release": "0.3.4",
+  "catalog_parser": "data/python/svg/parsers.json",
+  "source_lock": "adapters/python/svg/requirements.lock",
+  "source_sha256": "4d08524a08126553c1a9bf2639616cf31290adea6fd235a3eb67d77c748abc00",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "size": [
+      "2",
+      "1"
+    ],
+    "elements": 2
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/svgutils/",
+  "dependencies": [
+    {
+      "package": "lxml",
+      "release": "6.1.3",
+      "sha256": "c6c0c13128a32eb04a51357e56a094e13aa8e6d3d1884de2e9ae923f6915e1a8"
+    }
+  ]
+}

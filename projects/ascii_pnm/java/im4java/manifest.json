@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "java",
+  "package": "im4java",
+  "release": "1.4.0",
+  "catalog_parser": "data/java/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/java/im4java/source-lock.json",
+  "source_sha256": "3afe65020e2162b49df2dc51b7c633f295570a216a8583214d25f0ab92c0b371",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "format": "PPM",
+    "width": 2,
+    "height": 1
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/im4java-1.4.0.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.im4java:im4java:1.4.0 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

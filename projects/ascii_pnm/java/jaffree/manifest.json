@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "java",
+  "package": "jaffree",
+  "release": "2024.08.29",
+  "catalog_parser": "data/java/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/java/jaffree/source-lock.json",
+  "source_sha256": "ca8d146b466a53b25e45ae450a1a2ad7509897c5743813556314cc8ea7a30e33",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "codec": "ppm",
+    "width": 2,
+    "height": 1
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jaffree-2024.08.29.jar:/work/lib/nanojson-1.9.jar:/work/lib/slf4j-api-1.7.32.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.github.kokorin.jaffree:jaffree:2024.08.29 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

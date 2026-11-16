@@ -19,6 +19,11 @@
 
 Composer adaptation of Darren Inwood/SilverStripe PDF-to-text reader; separate package source and shared lineage noted.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/asika_pdf2text/README.md)
+
+```sh
+python3 parsarium.py build pdf php asika_pdf2text
+python3 parsarium.py run pdf php asika_pdf2text controls/pdf/one-page.pdf
+```

@@ -21,6 +21,11 @@
 
 A fork of Chumper Zipper with its own Composer package API; delegates archive parsing to PHP ZipArchive.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/madnest_madzipper/README.md)
+
+```sh
+python3 parsarium.py build zip php madnest_madzipper
+python3 parsarium.py run zip php madnest_madzipper controls/zip/hello.zip
+```

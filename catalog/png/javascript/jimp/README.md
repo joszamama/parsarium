@@ -30,6 +30,11 @@
 
 jimp@1.6.1 depends on @jimp/js-png@1.6.1, which depends on pngjs@^7.0.0.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/javascript/jimp/README.md)
+
+```sh
+python3 parsarium.py build png javascript jimp
+python3 parsarium.py run png javascript jimp controls/png/red-green.png
+```

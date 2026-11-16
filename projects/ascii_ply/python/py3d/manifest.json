@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "python",
+  "package": "py3d",
+  "release": "0.1.92",
+  "catalog_parser": "data/python/ascii_ply/parsers.json",
+  "source_lock": "adapters/python/ascii_ply/requirements.lock",
+  "source_sha256": "c2716ff45fa7de3f8b70b449b471619e0e3176d5ec62a43c22a4e03d576d9d2a",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertex_count": 3,
+    "face_count": 1,
+    "first_vertex": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "last_vertex": [
+      0.0,
+      1.0,
+      0.0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/py3d/",
+  "dependencies": [
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "pillow",
+      "release": "13.0.0",
+      "sha256": "e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d"
+    }
+  ]
+}

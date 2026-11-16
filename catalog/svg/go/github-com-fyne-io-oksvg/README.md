@@ -20,6 +20,11 @@
 
 Shared code lineage; package count does not imply independent SVG parser engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/go/github_com_fyne_io_oksvg/README.md)
+
+```sh
+python3 parsarium.py build svg go github_com_fyne_io_oksvg
+python3 parsarium.py run svg go github_com_fyne_io_oksvg controls/svg/red-green.svg
+```

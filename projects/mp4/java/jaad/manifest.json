@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "java",
+  "package": "jaad",
+  "release": "0.8.7",
+  "catalog_parser": "data/java/mp4/parsers.json",
+  "source_lock": "projects/mp4/java/jaad/source-lock.json",
+  "source_sha256": "8fd4e834b74144201ade7bf5d008934ad0988f4cb5786e28432ba7e9b3de0fff",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp4/red-av-no-udta.mp4",
+  "control_sha256": "6c181e06c4a1ccdce7b55b39580bbf80286bd5949660bce1aebbb00dd4baebc7",
+  "expected_output": {
+    "tracks": 2,
+    "audio_codec": "AAC",
+    "sample_rate": 8000,
+    "channels": 1
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jaad-0.8.7.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of de.sfuhrm:jaad:0.8.7 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

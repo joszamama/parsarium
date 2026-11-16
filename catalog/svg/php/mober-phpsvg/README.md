@@ -21,6 +21,11 @@
 
 Fork of older mewebstudio/phpsvg, not meyfa/php-svg. Uses SimpleXML for XML syntax.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/mober_phpsvg/README.md)
+
+```sh
+python3 parsarium.py build svg php mober_phpsvg
+python3 parsarium.py run svg php mober_phpsvg controls/svg/red-green.svg
+```

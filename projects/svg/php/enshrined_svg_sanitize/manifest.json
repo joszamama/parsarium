@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "php",
+  "package": "enshrined/svg-sanitize",
+  "release": "1.1.1",
+  "catalog_parser": "data/php/svg/parsers.json",
+  "source_lock": "projects/svg/php/enshrined_svg_sanitize/source-lock.json",
+  "source_sha256": "fac34e4333b2fa5f5a6256249a54ece5833253ea889cfeef115a02a14632a188",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "root": "svg",
+    "rectangles": 2,
+    "first_fill": "#ff0000"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in enshrined/svg-sanitize PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/enshrined/svg-sanitize/"
+}

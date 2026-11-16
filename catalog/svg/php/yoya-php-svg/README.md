@@ -21,6 +21,11 @@
 
 Fork of older mediashowroom PHP-SVG code; shares parser lineage with mediashowroom/php-svg and meyfa/php-svg.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/yoya_php_svg/README.md)
+
+```sh
+python3 parsarium.py build svg php yoya_php_svg
+python3 parsarium.py run svg php yoya_php_svg controls/svg/red-green.svg
+```

@@ -32,6 +32,11 @@
 
 Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/python/imgio/README.md)
+
+```sh
+python3 parsarium.py build png python imgio
+python3 parsarium.py run png python imgio controls/png/red-green.png
+```

@@ -1,32 +1,32 @@
 # ZIP / JavaScript
 
-21 verified third-party API paths; 1 have verified Docker harnesses.
+21 verified third-party API paths; 21 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/zip/ranking.md) · [standard API inventory](../../../data/javascript/zip/standard.json)
 
 ## Third-party parsers
 
-- [jszip](jszip/README.md) — verified API path
-- [adm-zip](adm-zip/README.md) — verified API path
-- [yauzl](yauzl/README.md) — verified API path
-- [unzipper](unzipper/README.md) — verified API path
+- [jszip](jszip/README.md) — Docker harness ready
+- [adm-zip](adm-zip/README.md) — Docker harness ready
+- [yauzl](yauzl/README.md) — Docker harness ready
+- [unzipper](unzipper/README.md) — Docker harness ready
 - [fflate](fflate/README.md) — Docker harness ready
-- [@zip.js/zip.js](zip-js-zip-js/README.md) — verified API path
-- [node-stream-zip](node-stream-zip/README.md) — verified API path
-- [extract-zip](extract-zip/README.md) — verified API path
-- [@electron-internal/extract-zip](electron-internal-extract-zip/README.md) — verified API path
-- [yauzl-promise](yauzl-promise/README.md) — verified API path
-- [decompress-unzip](decompress-unzip/README.md) — verified API path
-- [@xhmikosr/decompress-unzip](xhmikosr-decompress-unzip/README.md) — verified API path
-- [decompress](decompress/README.md) — verified API path
-- [@xhmikosr/decompress](xhmikosr-decompress/README.md) — verified API path
-- [unzipper-esm](unzipper-esm/README.md) — verified API path
-- [pizzip](pizzip/README.md) — verified API path
-- [unzip-stream](unzip-stream/README.md) — verified API path
-- [@loaders.gl/zip](loaders-gl-zip/README.md) — verified API path
-- [decompress-zip](decompress-zip/README.md) — verified API path
-- [zip-lib](zip-lib/README.md) — verified API path
-- [node-zip](node-zip/README.md) — verified API path
+- [@zip.js/zip.js](zip-js-zip-js/README.md) — Docker harness ready
+- [node-stream-zip](node-stream-zip/README.md) — Docker harness ready
+- [extract-zip](extract-zip/README.md) — Docker harness ready
+- [@electron-internal/extract-zip](electron-internal-extract-zip/README.md) — Docker harness ready
+- [yauzl-promise](yauzl-promise/README.md) — Docker harness ready
+- [decompress-unzip](decompress-unzip/README.md) — Docker harness ready
+- [@xhmikosr/decompress-unzip](xhmikosr-decompress-unzip/README.md) — Docker harness ready
+- [decompress](decompress/README.md) — Docker harness ready
+- [@xhmikosr/decompress](xhmikosr-decompress/README.md) — Docker harness ready
+- [unzipper-esm](unzipper-esm/README.md) — Docker harness ready
+- [pizzip](pizzip/README.md) — Docker harness ready
+- [unzip-stream](unzip-stream/README.md) — Docker harness ready
+- [@loaders.gl/zip](loaders-gl-zip/README.md) — Docker harness ready
+- [decompress-zip](decompress-zip/README.md) — Docker harness ready
+- [zip-lib](zip-lib/README.md) — Docker harness ready
+- [node-zip](node-zip/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

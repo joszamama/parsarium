@@ -19,6 +19,11 @@
 
 Depends on pdf2json, a PDF.js-derived parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/javascript/pdfreader/README.md)
+
+```sh
+python3 parsarium.py build pdf javascript pdfreader
+python3 parsarium.py run pdf javascript pdfreader controls/pdf/one-page.pdf
+```

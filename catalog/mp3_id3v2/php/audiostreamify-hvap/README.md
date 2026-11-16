@@ -22,6 +22,11 @@
 
 The documented Audio constructor accepts a file path and the ID3Tags trait documents analyze(); the pinned package delegates to james-heinrich/getid3 v1.9.28. Other HVAP features require Linux tools, but this read API passed on macOS.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/audiostreamify_hvap/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php audiostreamify_hvap
+python3 parsarium.py run mp3_id3v2 php audiostreamify_hvap controls/mp3_id3v2/tone-tags.mp3
+```

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "go",
+  "package": "github.com/JoshVarga/svgparser",
+  "release": "v0.0.0-20200804023048-5eaba627a7d1",
+  "catalog_parser": "data/go/svg/parsers.json",
+  "source_lock": "projects/svg/go/github_com_joshvarga_svgparser/source-lock.json",
+  "source_sha256": "b47a350b896075b5d884164a5557a993b4e953633383938c99cb8b47368879aa",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "rects": 2,
+    "root": "svg"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/JoshVarga/svgparser during valid-control replay",
+  "coverage_subject_prefix": "github.com/JoshVarga/svgparser/"
+}

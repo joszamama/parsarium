@@ -23,6 +23,11 @@
 
 Zend predecessor of Laminas Diactoros; shared serializer lineage with phly/http and laminas/laminas-diactoros.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/zendframework_zend_diactoros/README.md)
+
+```sh
+python3 parsarium.py build http11 php zendframework_zend_diactoros
+python3 parsarium.py run http11 php zendframework_zend_diactoros controls/http11/request.http
+```

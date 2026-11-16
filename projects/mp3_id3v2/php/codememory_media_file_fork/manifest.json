@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "php",
+  "package": "codememory/media-file-fork",
+  "release": "v1.0",
+  "catalog_parser": "data/php/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/php/codememory_media_file_fork/source-lock.json",
+  "source_sha256": "2a027a3280474236ee5035941d86517071b632c99005220df0e6cd9513de0145",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "is_audio": true,
+    "sample_rate": 8000,
+    "bit_rate": 32000
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in codememory/media-file-fork PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/codememory/media-file-fork/"
+}

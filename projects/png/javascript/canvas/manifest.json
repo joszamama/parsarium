@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "javascript",
+  "package": "canvas",
+  "release": "3.2.3",
+  "catalog_parser": "data/javascript/png/parsers.json",
+  "source_lock": "projects/png/javascript/canvas/source-lock.json",
+  "source_sha256": "8b0e958df3511566da8e797da68035d0b2425f13a4b6879b5b3e39bca2f96217",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgba": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/canvas/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/canvas/"
+}

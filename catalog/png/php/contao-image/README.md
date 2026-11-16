@@ -21,6 +21,11 @@
 
 Contao uses Imagine GD to decode and resize the PNG; its dimension path also calls bundled getimagesize.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/contao_image/README.md)
+
+```sh
+python3 parsarium.py build png php contao_image
+python3 parsarium.py run png php contao_image controls/png/red-green.png
+```

@@ -30,6 +30,11 @@
 
 This package path delegates PNG decoding to the bundled PHP GD extension.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/claviska_simpleimage/README.md)
+
+```sh
+python3 parsarium.py build png php claviska_simpleimage
+python3 parsarium.py run png php claviska_simpleimage controls/png/red-green.png
+```

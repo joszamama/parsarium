@@ -21,6 +21,11 @@
 
 Opens the local ZIP with PHP ZipArchive and exposes a navigable entry tree.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/smuuf_zip_reader/README.md)
+
+```sh
+python3 parsarium.py build zip php smuuf_zip_reader
+python3 parsarium.py run zip php smuuf_zip_reader controls/zip/hello.zip
+```

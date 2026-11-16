@@ -21,6 +21,11 @@
 
 VideoInfoReader handles the valid WAV control and delegates to local FFprobe 9.0.2.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/soluble_mediatools/README.md)
+
+```sh
+python3 parsarium.py build wav php soluble_mediatools
+python3 parsarium.py run wav php soluble_mediatools controls/wav/256-samples.wav
+```

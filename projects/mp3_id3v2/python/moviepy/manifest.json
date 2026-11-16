@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "python",
+  "package": "moviepy",
+  "release": "2.2.1",
+  "catalog_parser": "data/python/mp3_id3v2/parsers.json",
+  "source_lock": "adapters/python/mp3_id3v2/requirements.lock",
+  "source_sha256": "6b56803fec2ac54b557404126ac1160e65448e03798fa282bd23e8fab3795060",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "duration_seconds": 1.0,
+    "decoded_audio": true
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/moviepy/",
+  "dependencies": [
+    {
+      "package": "decorator",
+      "release": "5.3.1",
+      "sha256": "f47fe6fdbd2edd623ecfe36875d37aba411624e2670dd395dddae1358689bb3c"
+    },
+    {
+      "package": "imageio",
+      "release": "2.38.1",
+      "sha256": "36d23eb7423d2fb63f637098758edb3d2df3687f7125e0a5ce8596572022dcf9"
+    },
+    {
+      "package": "imageio-ffmpeg",
+      "release": "0.8.1",
+      "sha256": "050d6850601c3b3890bd2b28306f3b842b3daea390a561101174375a1c460bda"
+    },
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "pillow",
+      "release": "11.3.0",
+      "sha256": "2465a69cf967b8b49ee1b96d76718cd98c4e925414ead59fdf75cf0fd07df673"
+    },
+    {
+      "package": "proglog",
+      "release": "0.1.12",
+      "sha256": "ccaafce51e80a81c65dc907a460c07ccb8ec1f78dc660cfd8f9ec3a22f01b84c"
+    },
+    {
+      "package": "python-dotenv",
+      "release": "1.2.4",
+      "sha256": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc"
+    },
+    {
+      "package": "tqdm",
+      "release": "4.70.1",
+      "sha256": "c293e525e6fef9c20e8728fd4612df02a0aa31bb5fe91ecd93e123b1b7bffa73"
+    }
+  ]
+}

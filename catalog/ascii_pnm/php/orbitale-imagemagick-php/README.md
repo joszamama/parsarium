@@ -21,6 +21,11 @@
 
 This Composer command wrapper invokes the installed ImageMagick CLI to identify ASCII P3; it is not an independent decoder engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/orbitale_imagemagick_php/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php orbitale_imagemagick_php
+python3 parsarium.py run ascii_pnm php orbitale_imagemagick_php controls/ascii_pnm/red-green.ppm
+```

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "rust",
+  "package": "rigidity-io",
+  "release": "0.2.0",
+  "catalog_parser": "data/rust/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/rust/rigidity_io/source-lock.json",
+  "source_sha256": "4a50ee492274b06fd68c1540a870884855c1c262f0342bca739c55dae10a5e24",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in rigidity-io; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rigidity-io-0.2.0/"
+}

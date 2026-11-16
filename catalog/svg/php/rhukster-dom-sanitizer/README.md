@@ -21,6 +21,11 @@
 
 Shares the PHP DOM XML syntax parser with other sanitizers, but supplies its own SVG policy.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/rhukster_dom_sanitizer/README.md)
+
+```sh
+python3 parsarium.py build svg php rhukster_dom_sanitizer
+python3 parsarium.py run svg php rhukster_dom_sanitizer controls/svg/red-green.svg
+```

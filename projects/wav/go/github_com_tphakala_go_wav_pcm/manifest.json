@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "go",
+  "package": "github.com/tphakala/go-wav/pcm",
+  "release": "v1.1.1",
+  "catalog_parser": "data/go/wav/parsers.json",
+  "source_lock": "projects/wav/go/github_com_tphakala_go_wav_pcm/source-lock.json",
+  "source_sha256": "8ed56bc589a6a4d9ad13610b1952443d3d1214679a462095aa59ce31a4ecf8eb",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits": 16,
+    "data_bytes": 8
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/tphakala/go-wav/pcm during valid-control replay",
+  "coverage_subject_prefix": "github.com/tphakala/go-wav/pcm/"
+}

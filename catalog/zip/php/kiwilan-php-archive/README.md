@@ -21,6 +21,11 @@
 
 Its ZIP reader delegates to PHP ZipArchive; the package also supports other archive formats.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/kiwilan_php_archive/README.md)
+
+```sh
+python3 parsarium.py build zip php kiwilan_php_archive
+python3 parsarium.py run zip php kiwilan_php_archive controls/zip/hello.zip
+```

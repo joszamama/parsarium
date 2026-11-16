@@ -21,6 +21,11 @@
 
 The adapter selects Zippy’s ZipExtensionAdapter explicitly; ZIP parsing uses bundled ZipArchive/libzip, not an external command.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/alchemy_zippy/README.md)
+
+```sh
+python3 parsarium.py build zip php alchemy_zippy
+python3 parsarium.py run zip php alchemy_zippy controls/zip/hello.zip
+```

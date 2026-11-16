@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "go",
+  "package": "github.com/gobwas/httphead",
+  "release": "v0.1.0",
+  "catalog_parser": "data/go/http11/parsers.json",
+  "source_lock": "projects/http11/go/github_com_gobwas_httphead/source-lock.json",
+  "source_sha256": "a4646f1d12786fee639c489219e7c667b10f7dc19578a4e7222bd17c5d9bdf8a",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "major": 1,
+    "minor": 1
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/gobwas/httphead during valid-control replay",
+  "coverage_subject_prefix": "github.com/gobwas/httphead/"
+}

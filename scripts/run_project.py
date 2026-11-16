@@ -4,17 +4,19 @@ import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
+import re
 import os
 from pathlib import Path
 import shutil
 import subprocess
+from docker_slots import docker_build_slot
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def command(args: list[str]) -> str:
-    result = subprocess.run(args, cwd=ROOT, text=True, capture_output=True)
+    result = subprocess.run(args, cwd=ROOT, text=True, errors="replace", capture_output=True)
     if result.returncode:
         raise RuntimeError(f"{' '.join(args)} failed:\n{result.stderr[-4000:]}")
     return result.stdout.strip()
@@ -83,7 +85,10 @@ def main() -> None:
                     assert engine["version"] == manifest["fuzz_engine_release"]
         else:
             lock = lock_path.read_text()
-            assert f"{manifest['package']}=={manifest['release']}".lower() in lock.lower()
+            normalized_package = re.sub(r"[-_.]+", "-", manifest["package"]).lower()
+            locked = {re.sub(r"[-_.]+", "-", name).lower(): version
+                      for name, version in re.findall(r"(?m)^([A-Za-z0-9_.-]+)==([^\s\\]+)", lock)}
+            assert locked.get(normalized_package) == manifest["release"]
             assert manifest["source_sha256"] in lock
     docker_text = (project / "Dockerfile").read_text()
     for field in ("base_image", "source_sha256", "fuzz_engine_sha256"):
@@ -98,8 +103,9 @@ def main() -> None:
 
     image = f"parsarium/{args.format}-{args.ecosystem}-{args.package_slug}:local"
     print(f"Building {image}", flush=True)
-    command(["docker", "build", "--quiet", "--platform", manifest["platform"],
-             "-t", image, str(project)])
+    with docker_build_slot():
+        command(["docker", "build", "--quiet", "--platform", manifest["platform"],
+                 "-t", image, str(project)])
     output_dir = project / "target/coverage"
     if output_dir.exists():
         shutil.rmtree(output_dir)
@@ -119,7 +125,7 @@ def main() -> None:
                              "-v", f"{control}:/input/control:ro",
                              "--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"),
                              image, *manifest.get("fuzz_smoke_args", ["-help=1"])],
-                            cwd=ROOT, text=True, capture_output=True)
+                            cwd=ROOT, text=True, errors="replace", capture_output=True)
     if engine.returncode or manifest.get("fuzz_smoke_expect", "Usage:") not in engine.stdout + engine.stderr:
         raise RuntimeError(f"fuzz engine smoke test failed:\n{engine.stderr[-2000:]}")
     summary = json.loads((output_dir / "summary.json").read_text())

@@ -8,6 +8,8 @@ import os
 from pathlib import Path
 import re
 
+from audit_projects import fully_runnable
+
 
 ROOT = Path(__file__).resolve().parents[1]
 FORMATS = {
@@ -72,8 +74,12 @@ def main() -> None:
     manifest_paths = sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
     projects = {}
     standard_projects = {}
+    project_guides = 0
     for path in manifest_paths:
         manifest = read(path)
+        if not fully_runnable(path, manifest):
+            continue
+        project_guides += 1
         if manifest.get("kind") == "standard":
             standard_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
             continue
@@ -104,6 +110,7 @@ def main() -> None:
                 item_dir = cell_dir / slug(name, bases)
                 readme = item_dir / "README.md"
                 project = projects.get((fmt, eco, name))
+                ready = bool(project and fully_runnable(project[0], project[1]))
                 if project and project[1]["release"] != entry["version"]:
                     raise ValueError(f"release mismatch in {project[0]}")
                 control, output = verified_result(entry, verification)
@@ -126,7 +133,7 @@ def main() -> None:
                          json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
                 if entry.get("family_note"):
                     lines += [entry["family_note"], ""]
-                if project:
+                if ready:
                     project_path, manifest = project
                     project_dir = project_path.parent
                     lines += ["## Run this target", "",
@@ -140,9 +147,9 @@ def main() -> None:
                               "A Docker harness with parser-source coverage has not yet been verified for this API path.", ""]
                 generated[readme] = "\n".join(lines)
                 index.append({"format": fmt, "ecosystem": eco, "name": name,
-                              "readme": str(readme.relative_to(ROOT)), "runnable": bool(project)})
+                              "readme": str(readme.relative_to(ROOT)), "runnable": ready})
                 cell_rows.append(f"- [{label(name)}]({link(cell_dir, readme)}) — "
-                                 f"{'Docker harness ready' if project else 'verified API path'}")
+                                 f"{'Docker harness ready' if ready else 'verified API path'}")
             inventory = read(source / "standard.json")
             standard_entries = inventory["verified_apis"]
             standard_bases = Counter(re.sub(r"[^a-z0-9]+", "-", (item.get("name") or item.get("api") or "api").lower()).strip("-") or "api"
@@ -183,7 +190,7 @@ def main() -> None:
                 if item.get("adapter"):
                     lines += [f"[Control adapter]({link(item_dir, ROOT / item['adapter'])})", ""]
                 standard_project = standard_projects.get((fmt, eco, item.get("api")))
-                if standard_project:
+                if standard_project and fully_runnable(standard_project, read(standard_project)):
                     slug_name = standard_project.parent.name
                     format_projects.append((eco, api_name, standard_project.parent))
                     lines += ["## Run this target", "", "```sh",
@@ -262,7 +269,7 @@ def main() -> None:
             path.write_text(content, encoding="utf-8")
     print(f"{'Checked' if args.check else 'Built'} {len(FORMATS)} format guides, "
           f"{len(index)} third-party parser guides, {standard_count} standard API guides, "
-          f"and {len(manifest_paths)} project guides")
+          f"and {project_guides} project guides")
 
 
 if __name__ == "__main__":

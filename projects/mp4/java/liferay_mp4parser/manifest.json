@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "java",
+  "package": "liferay-mp4parser",
+  "release": "1.9.41.2.LIFERAY-PATCHED-2",
+  "catalog_parser": "data/java/mp4/parsers.json",
+  "source_lock": "projects/mp4/java/liferay_mp4parser/source-lock.json",
+  "source_sha256": "6fb3cb86c088575fde412ef541f104730cbe366b09258960d46fb8a1a759ec39",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "tracks": 2,
+    "timescale": 8000
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/org.mp4parser-1.9.41.2.LIFERAY-PATCHED-2.jar:/work/lib/isoparser-1.9.41.2.jar:/work/lib/slf4j-api-1.7.30.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.liferay:org.mp4parser:1.9.41.2.LIFERAY-PATCHED-2 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

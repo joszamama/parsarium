@@ -21,6 +21,11 @@
 
 Parses ZIP records in PHP and uses compression primitives; no ZipArchive dependency observed.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/nelexa_zip/README.md)
+
+```sh
+python3 parsarium.py build zip php nelexa_zip
+python3 parsarium.py run zip php nelexa_zip controls/zip/hello.zip
+```

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "rust",
+  "package": "oxideav-id3",
+  "release": "0.0.7",
+  "catalog_parser": "data/rust/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/rust/oxideav_id3/source-lock.json",
+  "source_sha256": "6718fd422e7dd0221bd6effbc5005f177132e1a284bc3ed89ac01d5f9f8a3950",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "version": "V2_3",
+    "frame_count": 4,
+    "tag_bytes": 101
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in oxideav-id3; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/oxideav-id3-0.0.7/"
+}

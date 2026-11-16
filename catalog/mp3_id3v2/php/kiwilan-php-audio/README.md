@@ -21,6 +21,11 @@
 
 Audio delegates to james-heinrich/getid3 v1.9.22 in its isolated lock; this is a distinct wrapper package path but shares the getID3 parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/kiwilan_php_audio/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php kiwilan_php_audio
+python3 parsarium.py run mp3_id3v2 php kiwilan_php_audio controls/mp3_id3v2/tone-tags.mp3
+```

@@ -30,6 +30,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/python/pillow/README.md)
+
+```sh
+python3 parsarium.py build png python pillow
+python3 parsarium.py run png python pillow controls/png/red-green.png
+```

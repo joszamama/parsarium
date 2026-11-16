@@ -22,6 +22,11 @@
 
 PHP FFI binding to package-distributed libsndfile 1.2.2. Same release lock as the PHP MP3 cell.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/phpmlkit_soundfile/README.md)
+
+```sh
+python3 parsarium.py build wav php phpmlkit_soundfile
+python3 parsarium.py run wav php phpmlkit_soundfile controls/wav/256-samples.wav
+```

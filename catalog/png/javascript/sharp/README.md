@@ -30,6 +30,11 @@
 
 Native wrapper; libvips performs image loading. The PNG backend beneath libvips is not determined here.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/javascript/sharp/README.md)
+
+```sh
+python3 parsarium.py build png javascript sharp
+python3 parsarium.py run png javascript sharp controls/png/red-green.png
+```

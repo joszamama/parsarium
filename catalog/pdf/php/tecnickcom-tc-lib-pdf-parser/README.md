@@ -20,6 +20,11 @@
 
 Standalone PDF parser package; tc-lib-pdf-filter 2.11.9 is its pinned stream filter dependency.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/tecnickcom_tc_lib_pdf_parser/README.md)
+
+```sh
+python3 parsarium.py build pdf php tecnickcom_tc_lib_pdf_parser
+python3 parsarium.py run pdf php tecnickcom_tc_lib_pdf_parser controls/pdf/one-page.pdf
+```

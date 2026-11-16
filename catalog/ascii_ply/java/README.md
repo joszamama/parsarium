@@ -1,6 +1,6 @@
 # ASCII PLY / Java
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/ascii_ply/ranking.md) · [standard API inventory](../../../data/java/ascii_ply/standard.json)
 
@@ -11,7 +11,7 @@
 - [mesh-ply](mesh-ply/README.md) — verified API path
 - [pcutil](pcutil/README.md) — verified API path
 - [lwjgl-assimp](lwjgl-assimp/README.md) — verified API path
-- [MonkeyWrench](monkeywrench/README.md) — verified API path
+- [MonkeyWrench](monkeywrench/README.md) — Docker harness ready
 - [javagl-ply](javagl-ply/README.md) — verified API path
 - [f3d](f3d/README.md) — verified API path
 - [sceneview-core](sceneview-core/README.md) — verified API path

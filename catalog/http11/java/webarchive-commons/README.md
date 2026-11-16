@@ -23,6 +23,11 @@
 
 WARC utility library exposes a direct HttpRequestParser that composes its own request-line and header parsers. No WARC container is needed for this control.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/webarchive_commons/README.md)
+
+```sh
+python3 parsarium.py build http11 java webarchive_commons
+python3 parsarium.py run http11 java webarchive_commons controls/http11/request.http
+```

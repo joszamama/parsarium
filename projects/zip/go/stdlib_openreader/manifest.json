@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "zip",
+  "ecosystem": "go",
+  "package": "archive/zip.OpenReader(path); File.Open()",
+  "release": "1.27.1",
+  "api": "archive/zip.OpenReader(path); File.Open()",
+  "runtime": "Go 1.27.1 linux/arm64 standard library",
+  "standard_inventory": "data/go/zip/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "d35e8e55c85c222c16b29f8976a51698533c3874ff478427794a29af7b23e417",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_engine_release": "1.27.1",
+  "fuzz_engine_sha256": "1675694ef690db0f18fbe7046a886170904bede1d9db6ec96ae27945c1705c64",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "name": "hello.txt",
+    "text": "parsarium\n"
+  },
+  "harness": "harness_test.go",
+  "fuzz_entry": "FuzzParser",
+  "coverage": "Go coverpkg instrumentation of standard archive/zip",
+  "coverage_subject_prefix": "archive/zip/"
+}

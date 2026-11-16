@@ -33,7 +33,7 @@ def check(relative: Path, scratch: Path) -> dict:
     assert plan["command"][-2:] == (["/work/afl_proxy", "@@"] if manifest["ecosystem"] in
                                       {"go", "java", "javascript", "python", "php"} else
                                       ["--", "/work/afl_fuzzer"] if manifest["ecosystem"] == "rust" else
-                                      ["--", "/work/fuzzer"])
+                                      ["--", manifest.get("afl_entrypoint", "/work/fuzzer")])
     return {"project": str(relative), "status": "ready",
             "image_id": plan["image_id"], "control_sha256": plan["control_sha256"],
             "overlay_receipt_sha256": plan["overlay_receipt_sha256"],

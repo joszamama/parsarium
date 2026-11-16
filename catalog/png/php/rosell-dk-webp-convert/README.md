@@ -21,6 +21,11 @@
 
 Explicit GD converter decodes local PNG through bundled PHP GD before WebP encoding.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/rosell_dk_webp_convert/README.md)
+
+```sh
+python3 parsarium.py build png php rosell_dk_webp_convert
+python3 parsarium.py run png php rosell_dk_webp_convert controls/png/red-green.png
+```

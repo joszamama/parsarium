@@ -21,6 +21,11 @@
 
 The installed PHP zip extension selects Joomla’s native ZipArchive branch; its source also has a custom ZIP reader fallback.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/joomla_archive/README.md)
+
+```sh
+python3 parsarium.py build zip php joomla_archive
+python3 parsarium.py run zip php joomla_archive controls/zip/hello.zip
+```

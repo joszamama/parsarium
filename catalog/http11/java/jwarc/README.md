@@ -23,6 +23,11 @@
 
 WARC library exposes its own direct HttpRequest.parse(ReadableByteChannel) API; no WARC container is needed for this control.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/jwarc/README.md)
+
+```sh
+python3 parsarium.py build http11 java jwarc
+python3 parsarium.py run http11 java jwarc controls/http11/request.http
+```

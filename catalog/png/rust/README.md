@@ -1,13 +1,13 @@
 # PNG / Rust
 
-21 verified third-party API paths; 1 have verified Docker harnesses.
+21 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/png/ranking.md) · [standard API inventory](../../../data/rust/png/standard.json)
 
 ## Third-party parsers
 
 - [png](png/README.md) — Docker harness ready
-- [image](image/README.md) — verified API path
+- [image](image/README.md) — Docker harness ready
 - [img-parts](img-parts/README.md) — verified API path
 - [png_pong](png-pong/README.md) — verified API path
 - [lodepng](lodepng/README.md) — verified API path

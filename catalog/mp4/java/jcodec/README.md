@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/java/jcodec/README.md)
+
+```sh
+python3 parsarium.py build mp4 java jcodec
+python3 parsarium.py run mp4 java jcodec controls/mp4/red-av.mp4
+```

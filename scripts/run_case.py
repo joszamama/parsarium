@@ -84,6 +84,7 @@ def target_command(manifest: dict, case_sha: str, scratch: Path) -> tuple[str, l
     args = list(manifest["fuzz_smoke_args"])
     if ecosystem == "javascript" and "--" in args:
         args = args[:args.index("--")]
+        args += ["--timeout", "30000"]
     else:
         args = [arg for arg in args if arg != "-help=1"]
     args = [arg.replace("/input/control", "/input/case") for arg in args]

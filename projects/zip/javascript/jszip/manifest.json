@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "javascript",
+  "package": "jszip",
+  "release": "3.10.2",
+  "catalog_parser": "data/javascript/zip/parsers.json",
+  "source_lock": "projects/zip/javascript/jszip/source-lock.json",
+  "source_sha256": "4ee15dcb3f5433b736a41d091bcad37facee4a4aa96f9e21194789da886ac226",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": [
+      "hello.txt"
+    ],
+    "content": "parsarium\n"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/jszip/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/jszip/"
+}

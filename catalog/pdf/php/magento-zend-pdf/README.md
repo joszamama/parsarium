@@ -20,6 +20,11 @@
 
 Magento package contains the Zend Framework PDF object reader; its own local file load method parses page and document metadata.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/magento_zend_pdf/README.md)
+
+```sh
+python3 parsarium.py build pdf php magento_zend_pdf
+python3 parsarium.py run pdf php magento_zend_pdf controls/pdf/one-page.pdf
+```

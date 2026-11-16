@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "python",
+  "package": "pyvista",
+  "release": "0.49.2",
+  "catalog_parser": "data/python/ascii_ply/parsers.json",
+  "source_lock": "adapters/python/ascii_ply/requirements.lock",
+  "source_sha256": "63f78495b30e146c9d1debeca7fa44c7a3935cc9f9ded8638b809ef955fc167a",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertex_count": 3,
+    "face_count": 1,
+    "first_vertex": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "last_vertex": [
+      0.0,
+      1.0,
+      0.0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pyvista/",
+  "dependencies": [
+    {
+      "package": "attrs",
+      "release": "26.1.0",
+      "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+    },
+    {
+      "package": "certifi",
+      "release": "2026.10.23",
+      "sha256": "e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1"
+    },
+    {
+      "package": "charset-normalizer",
+      "release": "3.5.2",
+      "sha256": "b6b751274acb69d77b3323d6b7dbaa3c7fdfc1eb829b7eb61d262f32e1af9685"
+    },
+    {
+      "package": "contourpy",
+      "release": "1.4.0",
+      "sha256": "e439ab450c93455feb0218532ded3e946ec7a9b5f459069f122cfa44b89229f6"
+    },
+    {
+      "package": "cycler",
+      "release": "0.12.1",
+      "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30"
+    },
+    {
+      "package": "cyclopts",
+      "release": "5.4.1",
+      "sha256": "48a80e4e49a10f7aa0bb99211f6eeb7e4f35b0c79a797c526670522daa35d7f2"
+    },
+    {
+      "package": "docstring-parser",
+      "release": "0.18.0",
+      "sha256": "b3fcbed555c47d8479be0796ef7e19c2670d428d72e96da63f3a40122860374b"
+    },
+    {
+      "package": "fonttools",
+      "release": "4.68.0",
+      "sha256": "d76f8fdcb6936f5e1045a0c9dd721a4bf11112e60d1e243bfa1d39f06a8b3104"
+    },
+    {
+      "package": "idna",
+      "release": "3.20",
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+    },
+    {
+      "package": "kiwisolver",
+      "release": "1.5.1",
+      "sha256": "18a0cfb124546a4c2e6087c5f3029c7f44b37c85b142e0ced71f73a7599ac208"
+    },
+    {
+      "package": "markdown-it-py",
+      "release": "4.3.0",
+      "sha256": "7aa1511a46c39138de78d9eba92ce47e63124d8003fc98b3a351909e04239efa"
+    },
+    {
+      "package": "matplotlib",
+      "release": "3.11.2",
+      "sha256": "8c8255de28f986d935a64c9ca71c0ec2d2f41d355691f5ea684725dc91413f71"
+    },
+    {
+      "package": "mdurl",
+      "release": "0.1.2",
+      "sha256": "84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"
+    },
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "packaging",
+      "release": "26.3",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "package": "pillow",
+      "release": "13.0.0",
+      "sha256": "e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d"
+    },
+    {
+      "package": "platformdirs",
+      "release": "4.14.5",
+      "sha256": "8e778c6fa421516f4d3369449f8df3b0e1b72c0e0005fe88e3ec772d0a14e750"
+    },
+    {
+      "package": "pooch",
+      "release": "1.9.0",
+      "sha256": "f265597baa9f760d25ceb29d0beb8186c243d6607b0f60b83ecf14078dbc703b"
+    },
+    {
+      "package": "pygments",
+      "release": "2.21.0",
+      "sha256": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9"
+    },
+    {
+      "package": "pyparsing",
+      "release": "3.3.3",
+      "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4"
+    },
+    {
+      "package": "python-dateutil",
+      "release": "4.0.0",
+      "sha256": "a5e246f79eb80475e691bf93862cead98decd8a498cf53ba0516fcdc0f50dc1c"
+    },
+    {
+      "package": "pyvista-validation",
+      "release": "0.2.2",
+      "sha256": "a45b633b89d843329db1608ba2bbed75d075ab63c5a7427c8dfa9ad9c23eadb4"
+    },
+    {
+      "package": "requests",
+      "release": "2.34.2",
+      "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+    },
+    {
+      "package": "rich",
+      "release": "15.0.0",
+      "sha256": "33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb"
+    },
+    {
+      "package": "rich-rst",
+      "release": "2.2.0",
+      "sha256": "1ea1c43813dc4a8d86475fce27ffb74e0ada3d4656c9f8130ba2a59868055fe9"
+    },
+    {
+      "package": "scooby",
+      "release": "0.12.1",
+      "sha256": "4e3e474a3542fd1d19d775cea70d19ce58a005102c0206955dddbbd33f07eb4e"
+    },
+    {
+      "package": "typing-extensions",
+      "release": "4.16.0",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+    },
+    {
+      "package": "tzdata",
+      "release": "2026.6",
+      "sha256": "0a10eec6e13ef16b627fabed9a5f2ba61a62b1c67f327305f4e7e412a70b4aec"
+    },
+    {
+      "package": "urllib3",
+      "release": "2.8.0",
+      "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3"
+    },
+    {
+      "package": "vtk",
+      "release": "9.7.2",
+      "sha256": "8a762b8d6a711f1e8c9c58f319efc3aa3d7d4f97902e0045f1a4ccf2849e9345"
+    }
+  ]
+}

@@ -23,6 +23,11 @@
 
 Fork of older Guzzle PSR-7 code; shared parser lineage with ringcentral/psr7 and guzzlehttp/psr7.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/workerman_psr7/README.md)
+
+```sh
+python3 parsarium.py build http11 php workerman_psr7
+python3 parsarium.py run http11 php workerman_psr7 controls/http11/request.http
+```

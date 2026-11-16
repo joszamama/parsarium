@@ -20,6 +20,11 @@
 
 ImageWorkshop initializes an image layer from local PNG through PHP GD.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/sybio_image_workshop/README.md)
+
+```sh
+python3 parsarium.py build png php sybio_image_workshop
+python3 parsarium.py run png php sybio_image_workshop controls/png/red-green.png
+```

@@ -20,6 +20,11 @@
 
 The Laravel integration package registers a facade that delegates ASCII P3 decoding to Intervention Image and PECL Imagick/ImageMagick. The adapter supplies a minimal pinned Illuminate container, config repository, and config helper.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/intervention_image_laravel/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php intervention_image_laravel
+python3 parsarium.py run ascii_pnm php intervention_image_laravel controls/ascii_pnm/red-green.ppm
+```

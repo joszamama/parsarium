@@ -22,6 +22,11 @@
 
 Public MediaParserInterface accepts a local file path; implementation delegates to pinned getID3.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/indiehd_audio_manipulator/README.md)
+
+```sh
+python3 parsarium.py build wav php indiehd_audio_manipulator
+python3 parsarium.py run wav php indiehd_audio_manipulator controls/wav/256-samples.wav
+```

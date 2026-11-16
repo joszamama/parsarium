@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "php",
+  "package": "contao/image",
+  "release": "1.2.4",
+  "catalog_parser": "data/php/png/parsers.json",
+  "source_lock": "projects/png/php/contao_image/source-lock.json",
+  "source_sha256": "7bd708d10877c24bd212b56bd93f3b6e6a001eba348745d01ba3ae982478dd68",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 1,
+    "height": 1,
+    "type": 3
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in contao/image PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/contao/image/"
+}

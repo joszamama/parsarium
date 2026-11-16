@@ -21,6 +21,11 @@
 
 phMagick invokes the installed ImageMagick CLI to decode ASCII P3 and output PNG; it is not an independent decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/francodacosta_phmagick/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php francodacosta_phmagick
+python3 parsarium.py run ascii_pnm php francodacosta_phmagick controls/ascii_pnm/red-green.ppm
+```

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "javascript",
+  "package": "mp4-metadata",
+  "release": "1.0.2",
+  "catalog_parser": "data/javascript/mp4/parsers.json",
+  "source_lock": "projects/mp4/javascript/mp4_metadata/source-lock.json",
+  "source_sha256": "ac61ec9c4d3acadecc77b205c63da177de8628cd495f0a806686a1c013d70803",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "creationTime": "2020-01-02T03:04:05.000Z"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/mp4-metadata/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/mp4-metadata/"
+}

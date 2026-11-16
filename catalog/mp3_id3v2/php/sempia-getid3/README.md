@@ -22,6 +22,11 @@
 
 Namespaced PSR-4 fork periodically merged from upstream getID3; distinct Composer release path, same underlying getID3 parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/sempia_getid3/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php sempia_getid3
+python3 parsarium.py run mp3_id3v2 php sempia_getid3 controls/mp3_id3v2/tone-tags.mp3
+```

@@ -21,6 +21,11 @@
 
 Own PHP ID3v2 module; the documented default-module setup is required. The ID3v2.4 control uses synchsafe frame sizes.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/duncan3dc_meta_audio/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php duncan3dc_meta_audio
+python3 parsarium.py run mp3_id3v2 php duncan3dc_meta_audio controls/mp3_id3v2/tone-tags-v24.mp3
+```

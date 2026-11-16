@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "python",
+  "package": "meshio",
+  "release": "5.3.5",
+  "catalog_parser": "data/python/ascii_ply/parsers.json",
+  "source_lock": "adapters/python/ascii_ply/requirements.lock",
+  "source_sha256": "0736c6e34ecc768f62f2cde5d8233a3529512a9399b25c68ea2ca0d5900cdc10",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertex_count": 3,
+    "face_count": 1,
+    "first_vertex": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "last_vertex": [
+      0.0,
+      1.0,
+      0.0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/meshio/",
+  "dependencies": [
+    {
+      "package": "markdown-it-py",
+      "release": "4.3.0",
+      "sha256": "7aa1511a46c39138de78d9eba92ce47e63124d8003fc98b3a351909e04239efa"
+    },
+    {
+      "package": "mdurl",
+      "release": "0.1.2",
+      "sha256": "84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"
+    },
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "pygments",
+      "release": "2.21.0",
+      "sha256": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9"
+    },
+    {
+      "package": "rich",
+      "release": "15.0.0",
+      "sha256": "33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb"
+    }
+  ]
+}

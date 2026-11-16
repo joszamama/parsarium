@@ -19,6 +19,11 @@
 
 Browser FileReader requirement supplied by adapter using Blob.arrayBuffer in Node.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/javascript/mp4_metadata/README.md)
+
+```sh
+python3 parsarium.py build mp4 javascript mp4_metadata
+python3 parsarium.py run mp4 javascript mp4_metadata controls/mp4/red-av.mp4
+```

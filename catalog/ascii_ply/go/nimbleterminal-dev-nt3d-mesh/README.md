@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/go/nimbleterminal_dev_nt3d_mesh/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply go nimbleterminal_dev_nt3d_mesh
+python3 parsarium.py run ascii_ply go nimbleterminal_dev_nt3d_mesh controls/ascii_ply/triangle.ply
+```

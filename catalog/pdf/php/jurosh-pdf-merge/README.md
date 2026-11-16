@@ -20,6 +20,11 @@
 
 Wrapper delegates page import to pinned FPDI 2.6.10. Composer metadata says MIT, but the pinned LICENSE file and README specify Apache-2.0.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/jurosh_pdf_merge/README.md)
+
+```sh
+python3 parsarium.py build pdf php jurosh_pdf_merge
+python3 parsarium.py run pdf php jurosh_pdf_merge controls/pdf/one-page.pdf
+```

@@ -21,6 +21,11 @@
 
 Opens the local ZIP with PHP ZipArchive and extracts the selected entry.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/zanysoft_laravel_zip/README.md)
+
+```sh
+python3 parsarium.py build zip php zanysoft_laravel_zip
+python3 parsarium.py run zip php zanysoft_laravel_zip controls/zip/hello.zip
+```

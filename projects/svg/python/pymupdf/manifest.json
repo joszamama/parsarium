@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "python",
+  "package": "PyMuPDF",
+  "release": "2.1",
+  "catalog_parser": "data/python/svg/parsers.json",
+  "source_lock": "adapters/python/svg/requirements.lock",
+  "source_sha256": "a9efa2e9e5f469d3b5749199329739cfef1ff1d1846538ced4885c544eecbcd9",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "pages": 1,
+    "size": [
+      2,
+      1
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pymupdf/",
+  "dependencies": [
+    {
+      "package": "flatbuffers",
+      "release": "25.12.19",
+      "sha256": "7634f50c427838bb021c2d66a3d1168e9d199b0607e6329399f04846d42e20b4"
+    },
+    {
+      "package": "networkx",
+      "release": "3.7",
+      "sha256": "e3fd2c13a7814cee3746340d8d7f8598a67f16a58bf47fb7f8793fab6efca1b0"
+    },
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "onnxruntime",
+      "release": "1.31.1",
+      "sha256": "c20d7f15d84427db070b163f78c2c7146cc93edd6113fa7327671259a24184fe"
+    },
+    {
+      "package": "packaging",
+      "release": "26.3",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "package": "protobuf",
+      "release": "7.36.2",
+      "sha256": "bdb3a345d48db958e6ce1f18e508beb0cc981d64f24088427549c866cd039f1e"
+    },
+    {
+      "package": "psutil",
+      "release": "7.2.2",
+      "sha256": "076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9"
+    },
+    {
+      "package": "pymupdf-layout",
+      "release": "2.1",
+      "sha256": "e7e00bc50ec9113d36bdbb0dd5cdafa5f4d61e22e598960fc187ee4f721f5095"
+    },
+    {
+      "package": "pymupdf4llm",
+      "release": "2.1",
+      "sha256": "2fe8bb344444c6a8ef41fd745d2d10f6da59df6e104ef20f35d51dd26914b5fb"
+    },
+    {
+      "package": "pyyaml",
+      "release": "6.0.3",
+      "sha256": "c458b6d084f9b935061bc36216e8a69a7e293a2f1e68bf956dcd9e6cbcd143f5"
+    },
+    {
+      "package": "tabulate",
+      "release": "0.10.0",
+      "sha256": "f0b0622e567335c8fabaaa659f1b33bcb6ddfe2e496071b743aa113f8774f2d3"
+    }
+  ]
+}

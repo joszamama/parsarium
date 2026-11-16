@@ -47,8 +47,11 @@ def check_one(path: Path) -> dict:
                 "/corpus", "/report",
             ]
             result = subprocess.run(command, capture_output=True, text=True, timeout=60)
-            suffix = Path(manifest["format_specific_coverage_file_suffix"]).name + ".html"
-            parser_pages = [p for p in report.rglob(suffix) if p.is_file()]
+            if suffix := manifest.get("format_specific_coverage_file_suffix"):
+                parser_pages = [p for p in report.rglob(Path(suffix).name + ".html") if p.is_file()]
+            else:
+                parser_pages = [p for p in (report / "vendor" / manifest["package"]).rglob("*.php.html")
+                                if p.is_file()]
             if result.returncode or not (report / "index.html").is_file() or not parser_pages:
                 raise RuntimeError(f"PHP-Fuzzer parser coverage report failed: {result.stderr[-1000:]}")
             feedback = {"kind": "parser_source_coverage_report", "value": len(parser_pages)}

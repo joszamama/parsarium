@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "rust",
+  "package": "h11r",
+  "release": "0.3.1",
+  "catalog_parser": "data/rust/http11/parsers.json",
+  "source_lock": "projects/http11/rust/h11r/source-lock.json",
+  "source_sha256": "3592cd21a3a621c44d597ca0c3998a574072c31fea84b25e89936d835e294ba1",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "Method([71, 69, 84])",
+    "target": "/parsarium?x=1",
+    "version": "Http11"
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in h11r; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/h11r-0.3.1/"
+}

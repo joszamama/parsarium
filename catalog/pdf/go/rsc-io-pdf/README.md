@@ -19,6 +19,11 @@
 
 Shared code lineage; package count does not imply independent parser engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/go/rsc_io_pdf/README.md)
+
+```sh
+python3 parsarium.py build pdf go rsc_io_pdf
+python3 parsarium.py run pdf go rsc_io_pdf controls/pdf/one-page.pdf
+```

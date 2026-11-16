@@ -22,6 +22,11 @@
 
 Metadata comes from pinned getID3. Audio::isValid() is false because the control has no selected tags; header metadata still parses.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/kiwilan_php_audio/README.md)
+
+```sh
+python3 parsarium.py build wav php kiwilan_php_audio
+python3 parsarium.py run wav php kiwilan_php_audio controls/wav/256-samples.wav
+```

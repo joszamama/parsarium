@@ -23,6 +23,11 @@
 
 Monolithic Guzzle 3 release bundles the same parser lineage as guzzle/parser and guzzle/http.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/guzzle_guzzle/README.md)
+
+```sh
+python3 parsarium.py build http11 php guzzle_guzzle
+python3 parsarium.py run http11 php guzzle_guzzle controls/http11/request.http
+```

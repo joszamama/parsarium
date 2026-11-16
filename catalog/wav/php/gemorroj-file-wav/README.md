@@ -23,6 +23,11 @@
 
 Dedicated WAV reader with its own header decoder; based on classAudioFile. No shared parser package in this cell.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/gemorroj_file_wav/README.md)
+
+```sh
+python3 parsarium.py build wav php gemorroj_file_wav
+python3 parsarium.py run wav php gemorroj_file_wav controls/wav/256-samples.wav
+```

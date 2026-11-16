@@ -22,6 +22,11 @@
 
 ColorThief delegates PNG input to its GD adapter, then quantizes decoded pixels.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/ksubileau_color_thief_php/README.md)
+
+```sh
+python3 parsarium.py build png php ksubileau_color_thief_php
+python3 parsarium.py run png php ksubileau_color_thief_php controls/png/red-green.png
+```

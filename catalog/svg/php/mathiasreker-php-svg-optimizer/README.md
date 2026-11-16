@@ -20,6 +20,11 @@
 
 Uses libxml DOM for XML syntax with SVG-specific optimization rules.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/mathiasreker_php_svg_optimizer/README.md)
+
+```sh
+python3 parsarium.py build svg php mathiasreker_php_svg_optimizer
+python3 parsarium.py run svg php mathiasreker_php_svg_optimizer controls/svg/red-green.svg
+```

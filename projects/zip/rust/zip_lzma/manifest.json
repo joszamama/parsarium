@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "rust",
+  "package": "zip-lzma",
+  "release": "0.6.3",
+  "catalog_parser": "data/rust/zip/parsers.json",
+  "source_lock": "projects/zip/rust/zip_lzma/source-lock.json",
+  "source_sha256": "b480cb31fccfb2786565c0e0712865fd6f1ea0ea850c50316f643c3948196e63",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "name": "hello.txt",
+    "content": "parsarium\n",
+    "size": 10
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in zip-lzma; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zip-lzma-0.6.3/"
+}

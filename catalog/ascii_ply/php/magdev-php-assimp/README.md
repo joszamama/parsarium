@@ -21,6 +21,11 @@
 
 The PHP 0.3.2 package invokes the external Assimp 6.0.6 CLI and returns its format-aware info output. It is a distinct PHP package path but shares Assimp PLY parsing with C/C++ paths. Version 0.6.0 is separately recorded as failing.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/php/magdev_php_assimp/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply php magdev_php_assimp
+python3 parsarium.py run ascii_ply php magdev_php_assimp controls/ascii_ply/triangle.ply
+```

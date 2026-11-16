@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "javascript",
+  "package": "@catlabtech/webcvt-image-legacy",
+  "release": "0.3.0",
+  "catalog_parser": "data/javascript/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/javascript/catlabtech_webcvt_image_legacy/source-lock.json",
+  "source_sha256": "fdda45014f2d585cbb486e7442952f1a7a1a1c7c21dcadb97f0c73679eb21d34",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "variant": "ascii",
+    "width": 2,
+    "height": 1,
+    "rgb": [
+      255,
+      0,
+      0,
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/@catlabtech/webcvt-image-legacy/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/@catlabtech/webcvt-image-legacy/"
+}

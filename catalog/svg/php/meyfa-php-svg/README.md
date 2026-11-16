@@ -22,6 +22,11 @@
 
 jangobrick/php-svg is a Packagist alias for this identical source release and is excluded.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/meyfa_php_svg/README.md)
+
+```sh
+python3 parsarium.py build svg php meyfa_php_svg
+python3 parsarium.py run svg php meyfa_php_svg controls/svg/red-green.svg
+```

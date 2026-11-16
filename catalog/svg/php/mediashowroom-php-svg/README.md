@@ -21,6 +21,11 @@
 
 Earlier PHP-SVG lineage shared with meyfa/php-svg; distinct source release and package path.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/mediashowroom_php_svg/README.md)
+
+```sh
+python3 parsarium.py build svg php mediashowroom_php_svg
+python3 parsarium.py run svg php mediashowroom_php_svg controls/svg/red-green.svg
+```

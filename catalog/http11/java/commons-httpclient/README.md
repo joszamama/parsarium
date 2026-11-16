@@ -23,6 +23,11 @@
 
 The legacy Apache Commons HttpClient 3.1 package provides its own public status-line and header parser APIs; the adapter uses both on one local InputStream. It is the predecessor project of HttpComponents but a distinct package and parser implementation line. Only the response head is tested.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/commons_httpclient/README.md)
+
+```sh
+python3 parsarium.py build http11 java commons_httpclient
+python3 parsarium.py run http11 java commons_httpclient controls/http11/response.http
+```

@@ -22,6 +22,11 @@
 
 Distinct Composer package path using getID3 QuickTime/MP4 parsing; shares the underlying getID3 family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/php/indiehd_audio_manipulator/README.md)
+
+```sh
+python3 parsarium.py build mp4 php indiehd_audio_manipulator
+python3 parsarium.py run mp4 php indiehd_audio_manipulator controls/mp4/red-av.mp4
+```

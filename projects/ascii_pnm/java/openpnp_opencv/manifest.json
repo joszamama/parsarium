@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "java",
+  "package": "openpnp-opencv",
+  "release": "4.9.0-0",
+  "catalog_parser": "data/java/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/java/openpnp_opencv/source-lock.json",
+  "source_sha256": "552c922e9edebd2bc639bc4c7a8e1e38d2fcbc1eb243b995df26e00d78dd69b2",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "pixels": "ffff0000,ff00ff00"
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/commons-imaging-1.0.0-alpha6.jar:/work/lib/commons-io-2.19.0.jar:/work/lib/commons-lang3-3.17.0.jar:/work/lib/imageio-pnm-3.15.3.jar:/work/lib/imageio-core-3.15.3.jar:/work/lib/common-lang-3.15.3.jar:/work/lib/common-io-3.15.3.jar:/work/lib/common-image-3.15.3.jar:/work/lib/jai-imageio-core-1.4.0.jar:/work/lib/ij-1.54p.jar:/work/lib/opencv-4.9.0-0.jar:/work/lib/thumbnailator-0.4.21.jar:/work/lib/boofcv-io-1.6.0.jar:/work/lib/georegression-0.30.2.jar:/work/lib/ddogleg-1.0.0.jar:/work/lib/ejml-core-0.46.1.jar:/work/lib/ejml-fdense-0.46.1.jar:/work/lib/ejml-ddense-0.46.1.jar:/work/lib/ejml-simple-0.46.1.jar:/work/lib/ejml-cdense-0.46.1.jar:/work/lib/ejml-zdense-0.46.1.jar:/work/lib/ejml-fsparse-0.46.1.jar:/work/lib/ejml-dsparse-0.46.1.jar:/work/lib/trove4j-3.0.3.jar:/work/lib/boofcv-ip-1.6.0.jar:/work/lib/boofcv-types-1.6.0.jar:/work/lib/boofcv-geo-1.6.0.jar:/work/lib/boofcv-sfm-1.6.0.jar:/work/lib/boofcv-ip-multiview-1.6.0.jar:/work/lib/boofcv-feature-1.6.0.jar:/work/lib/boofcv-recognition-1.6.0.jar:/work/lib/boofcv-reconstruction-1.6.0.jar:/work/lib/snakeyaml-2.3.jar:/work/lib/tika-parser-image-module-4.2.0.jar:/work/lib/metadata-extractor-2.22.0.jar:/work/lib/xmpcore-6.1.11.jar:/work/lib/tika-parser-xmp-commons-4.2.0.jar:/work/lib/jbig2-imageio-3.0.5.jar:/work/lib/tika-core-4.2.0.jar:/work/lib/slf4j-api-2.0.20.jar:/work/lib/commons-secure-xml-1.1.0.jar:/work/lib/commonmark-0.31.0.jar:/work/lib/commonmark-ext-gfm-tables-0.31.0.jar:/work/lib/commonmark-ext-gfm-strikethrough-0.31.0.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.openpnp:opencv:4.9.0-0 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

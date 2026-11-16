@@ -20,6 +20,11 @@
 
 Glide delegates to Intervention Image, configured to use PHP GD. This is a package path sharing both the Intervention Image package and GD decoder family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/league_glide/README.md)
+
+```sh
+python3 parsarium.py build png php league_glide
+python3 parsarium.py run png php league_glide controls/png/red-green.png
+```

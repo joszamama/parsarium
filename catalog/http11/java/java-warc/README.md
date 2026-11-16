@@ -21,6 +21,11 @@
 
 Public ResponseContentBlockFactory accepts a raw local HTTP response InputStream without a WARC container and returns a structured response block. Its POM depends on httpcore 4.4.14; the combined adapter classpath resolves httpcore 4.4.16. Counted as a separate Maven package path, not an independent parser engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/java_warc/README.md)
+
+```sh
+python3 parsarium.py build http11 java java_warc
+python3 parsarium.py run http11 java java_warc controls/http11/response.http
+```

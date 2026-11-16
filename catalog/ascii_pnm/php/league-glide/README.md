@@ -21,6 +21,11 @@
 
 Glide reads local P3 bytes and delegates decoding to Intervention Image with the separately built PECL Imagick extension and ImageMagick; it is not an independent decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/league_glide/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php league_glide
+python3 parsarium.py run ascii_pnm php league_glide controls/ascii_pnm/red-green.ppm
+```

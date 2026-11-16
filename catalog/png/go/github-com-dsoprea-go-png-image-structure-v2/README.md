@@ -23,6 +23,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/go/github_com_dsoprea_go_png_image_structure_v2/README.md)
+
+```sh
+python3 parsarium.py build png go github_com_dsoprea_go_png_image_structure_v2
+python3 parsarium.py run png go github_com_dsoprea_go_png_image_structure_v2 controls/png/red-green.png
+```

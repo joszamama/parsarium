@@ -20,6 +20,11 @@
 
 Uses PHP 8.5 DOM for XML syntax and its own SVG allowlists; output observed with DOMDocument.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/phil_svg_sanitizer/README.md)
+
+```sh
+python3 parsarium.py build svg php phil_svg_sanitizer
+python3 parsarium.py run svg php phil_svg_sanitizer controls/svg/red-green.svg
+```

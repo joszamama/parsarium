@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "java",
+  "package": "jlayer",
+  "release": "1.0.1",
+  "catalog_parser": "data/java/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/java/jlayer/source-lock.json",
+  "source_sha256": "ecde410fc8940ab5d8d5a1d5c585870a3a194f4001701e66a27b8dd8cb7b75ce",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "frequency": 8000,
+    "layer": 3,
+    "id3v2_present": true
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jaudiotagger-3.0.1.jar:/work/lib/mp3agic-0.9.1.jar:/work/lib/tika-parser-audiovideo-module-4.2.0.jar:/work/lib/metadata-extractor-2.22.0.jar:/work/lib/xmpcore-6.1.11.jar:/work/lib/vorbis-java-core-0.8.jar:/work/lib/tika-core-4.2.0.jar:/work/lib/slf4j-api-2.0.20.jar:/work/lib/commons-io-2.22.0.jar:/work/lib/commons-secure-xml-1.1.0.jar:/work/lib/commonmark-0.31.0.jar:/work/lib/commonmark-ext-gfm-tables-0.31.0.jar:/work/lib/commonmark-ext-gfm-strikethrough-0.31.0.jar:/work/lib/slf4j-nop-2.0.20.jar:/work/lib/jlayer-1.0.1.jar:/work/lib/jave-core-4.2.0.jar:/work/lib/jave-nativebin-osxm1-4.2.0.jar:/work/lib/jaffree-2024.08.29.jar:/work/lib/nanojson-1.9.jar:/work/lib/jcodec-0.2.5.jar:/work/lib/codecmedia-1.2.2.jar:/work/lib/jid3lib-0.5.4.jar:/work/lib/taglib-1.0.0.jar:/work/lib/javamp3-1.0.1.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of javazoom:jlayer:1.0.1 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

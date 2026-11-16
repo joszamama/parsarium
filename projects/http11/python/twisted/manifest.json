@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "python",
+  "package": "Twisted",
+  "release": "26.10.0",
+  "catalog_parser": "data/python/http11/parsers.json",
+  "source_lock": "adapters/python/http11/requirements.lock",
+  "source_sha256": "3732f42af218925a0fe78d6668db55853f7fb532245a89a2669babe7d3000fa8",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "host": "example.test"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/twisted/",
+  "dependencies": [
+    {
+      "package": "attrs",
+      "release": "26.1.0",
+      "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+    },
+    {
+      "package": "automat",
+      "release": "25.4.16",
+      "sha256": "04e9bce696a8d5671ee698005af6e5a9fa15354140a87f4870744604dcdd3ba1"
+    },
+    {
+      "package": "constantly",
+      "release": "23.10.4",
+      "sha256": "3fd9b4d1c3dc1ec9757f3c52aef7e53ad9323dbe39f51dfd4c43853b68dfa3f9"
+    },
+    {
+      "package": "hyperlink",
+      "release": "21.0.0",
+      "sha256": "e6b14c37ecb73e89c77d78cdb4c2cc8f3fb59a885c5b3f819ff4ed80f25af1b4"
+    },
+    {
+      "package": "idna",
+      "release": "3.20",
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+    },
+    {
+      "package": "incremental",
+      "release": "24.11.0",
+      "sha256": "a34450716b1c4341fe6676a0598e88a39e04189f4dce5dc96f656e040baa10b3"
+    },
+    {
+      "package": "packaging",
+      "release": "26.3",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "package": "typing-extensions",
+      "release": "4.16.0",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+    },
+    {
+      "package": "zope-interface",
+      "release": "8.7",
+      "sha256": "6260ccc856a2c561b20341a74a8c1d9bb13916f6b52e880f336a0ddf61a1b726"
+    }
+  ]
+}

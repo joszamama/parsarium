@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "go",
+  "package": "github.com/thebanri/limoni/graphics",
+  "release": "v0.16.0",
+  "catalog_parser": "data/go/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/go/github_com_thebanri_limoni_graphics/source-lock.json",
+  "source_sha256": "f68239894408c3d7c69a50ad3505423e72358394dc692541c961bfb516bf4c13",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/thebanri/limoni/graphics during valid-control replay",
+  "coverage_subject_prefix": "github.com/thebanri/limoni/graphics/"
+}

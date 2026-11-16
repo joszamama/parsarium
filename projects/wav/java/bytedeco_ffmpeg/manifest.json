@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "java",
+  "package": "bytedeco-ffmpeg",
+  "release": "8.1.2-1.5.14",
+  "catalog_parser": "data/java/wav/parsers.json",
+  "source_lock": "projects/wav/java/bytedeco_ffmpeg/source-lock.json",
+  "source_sha256": "8f15502bd5651b0814dee9eebc8addbeaf10293456ec058694704ab2a9df18f4",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/wav/256-samples.wav",
+  "control_sha256": "d0dd329ac475ac10d5d918633c6dd798e4fc83db5f4c6afccfaa60e405d41ea7",
+  "expected_output": {
+    "format": "wav",
+    "sample_rate": 8000,
+    "channels": 1
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/javacv-1.5.14.jar:/work/lib/ffmpeg-8.1.2-1.5.14.jar:/work/lib/javacpp-1.5.14.jar:/work/lib/ffmpeg-8.1.2-1.5.14-macosx-arm64.jar:/work/lib/javacpp-1.5.14-macosx-arm64.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.bytedeco:ffmpeg:8.1.2-1.5.14 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

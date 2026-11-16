@@ -1,26 +1,26 @@
 # PNG / Java
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 13 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/png/ranking.md) · [standard API inventory](../../../data/java/png/standard.json)
 
 ## Third-party parsers
 
-- [commons-imaging](commons-imaging/README.md) — verified API path
+- [commons-imaging](commons-imaging/README.md) — Docker harness ready
 - [pngj](pngj/README.md) — Docker harness ready
 - [thumbnailator](thumbnailator/README.md) — verified API path
-- [ij](ij/README.md) — verified API path
-- [boofcv-io](boofcv-io/README.md) — verified API path
-- [batik-codec](batik-codec/README.md) — verified API path
-- [pngtastic](pngtastic/README.md) — verified API path
-- [itextpdf](itextpdf/README.md) — verified API path
-- [metadata-extractor](metadata-extractor/README.md) — verified API path
+- [ij](ij/README.md) — Docker harness ready
+- [boofcv-io](boofcv-io/README.md) — Docker harness ready
+- [batik-codec](batik-codec/README.md) — Docker harness ready
+- [pngtastic](pngtastic/README.md) — Docker harness ready
+- [itextpdf](itextpdf/README.md) — Docker harness ready
+- [metadata-extractor](metadata-extractor/README.md) — Docker harness ready
 - [jOpenDocument](jopendocument/README.md) — verified API path
-- [pdfbox](pdfbox/README.md) — verified API path
-- [jcodec](jcodec/README.md) — verified API path
-- [jcodec-javase](jcodec-javase/README.md) — verified API path
-- [openpdf](openpdf/README.md) — verified API path
-- [itext-io](itext-io/README.md) — verified API path
+- [pdfbox](pdfbox/README.md) — Docker harness ready
+- [jcodec](jcodec/README.md) — Docker harness ready
+- [jcodec-javase](jcodec-javase/README.md) — Docker harness ready
+- [openpdf](openpdf/README.md) — Docker harness ready
+- [itext-io](itext-io/README.md) — Docker harness ready
 - [lwjgl-stb](lwjgl-stb/README.md) — verified API path
 - [tika-image](tika-image/README.md) — verified API path
 - [xmlgraphics-commons](xmlgraphics-commons/README.md) — verified API path

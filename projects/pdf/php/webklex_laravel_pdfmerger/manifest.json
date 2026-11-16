@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "php",
+  "package": "webklex/laravel-pdfmerger",
+  "release": "1.3.2",
+  "catalog_parser": "data/php/pdf/parsers.json",
+  "source_lock": "projects/pdf/php/webklex_laravel_pdfmerger/source-lock.json",
+  "source_sha256": "020e5f38474c0b13574c435308352960c23411a045a312dc35761ed5671b27ac",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pdf_header": true,
+    "page_objects": 1
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in webklex/laravel-pdfmerger PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/webklex/laravel-pdfmerger/"
+}

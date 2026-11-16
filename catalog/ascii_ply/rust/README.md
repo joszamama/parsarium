@@ -1,15 +1,15 @@
 # ASCII PLY / Rust
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 4 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/ascii_ply/ranking.md) · [standard API inventory](../../../data/rust/ascii_ply/standard.json)
 
 ## Third-party parsers
 
 - [ply-rs-bw](ply-rs-bw/README.md) — Docker harness ready
-- [ply-rs](ply-rs/README.md) — verified API path
-- [serde-ply](serde-ply/README.md) — verified API path
-- [threecrate-io](threecrate-io/README.md) — verified API path
+- [ply-rs](ply-rs/README.md) — Docker harness ready
+- [serde-ply](serde-ply/README.md) — Docker harness ready
+- [threecrate-io](threecrate-io/README.md) — Docker harness ready
 - [brepkit-io](brepkit-io/README.md) — verified API path
 - [draco-io](draco-io/README.md) — verified API path
 - [wblidar](wblidar/README.md) — verified API path

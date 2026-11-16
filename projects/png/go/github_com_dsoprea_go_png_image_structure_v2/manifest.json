@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "go",
+  "package": "github.com/dsoprea/go-png-image-structure/v2",
+  "release": "v2.0.0-20210512210324-29b889a6093d",
+  "catalog_parser": "data/go/png/parsers.json",
+  "source_lock": "projects/png/go/github_com_dsoprea_go_png_image_structure_v2/source-lock.json",
+  "source_sha256": "d179b127f7576c8d66974b81ba8ba31ecdcdff143c0ecb96d450f2a27c5836fc",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "chunks": [
+      "IHDR",
+      "IDAT",
+      "IEND"
+    ],
+    "height": 1,
+    "width": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/dsoprea/go-png-image-structure/v2 during valid-control replay",
+  "coverage_subject_prefix": "github.com/dsoprea/go-png-image-structure/v2/"
+}

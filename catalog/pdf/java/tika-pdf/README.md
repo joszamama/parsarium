@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/java/tika_pdf/README.md)
+
+```sh
+python3 parsarium.py build pdf java tika_pdf
+python3 parsarium.py run pdf java tika_pdf controls/pdf/one-page.pdf
+```

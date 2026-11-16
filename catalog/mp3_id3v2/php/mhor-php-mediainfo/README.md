@@ -21,6 +21,11 @@
 
 Composer wrapper invokes the external MediaInfo 26.10 CLI; this is a package path over the MediaInfoLib parser family. The longer valid control is needed for the backend to read sufficient audio bytes.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/mhor_php_mediainfo/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php mhor_php_mediainfo
+python3 parsarium.py run mp3_id3v2 php mhor_php_mediainfo controls/mp3_id3v2/tone-tags-long.mp3
+```

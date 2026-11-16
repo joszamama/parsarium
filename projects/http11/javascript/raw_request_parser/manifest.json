@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "javascript",
+  "package": "raw-request-parser",
+  "release": "1.0.7",
+  "catalog_parser": "data/javascript/http11/parsers.json",
+  "source_lock": "projects/http11/javascript/raw_request_parser/source-lock.json",
+  "source_sha256": "f01e580964cf7f00f090d416dd49833c177a0b18adb478d21f1223d3e27e991a",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/raw-request-parser/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/raw-request-parser/"
+}

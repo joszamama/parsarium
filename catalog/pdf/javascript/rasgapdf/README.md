@@ -19,6 +19,11 @@
 
 Package documents an independent Rust implementation of the PDF format.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/javascript/rasgapdf/README.md)
+
+```sh
+python3 parsarium.py build pdf javascript rasgapdf
+python3 parsarium.py run pdf javascript rasgapdf controls/pdf/one-page.pdf
+```

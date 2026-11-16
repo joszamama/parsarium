@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "javascript",
+  "package": "http-message-parser-ts",
+  "release": "0.0.5",
+  "catalog_parser": "data/javascript/http11/parsers.json",
+  "source_lock": "projects/http11/javascript/http_message_parser_ts/source-lock.json",
+  "source_sha256": "41aa27fa9dc65f36c175fdd52ce99daa978401fa5cdf7bdcb46506e1926aed63",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/http11/response.http",
+  "control_sha256": "89095a71f21f4047f3d86e05d4fdf37bdfffcbf746a3aa85bc32fd7b7ea3a2c4",
+  "expected_output": {
+    "status": 200,
+    "body": "parsarium"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/http-message-parser-ts/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/http-message-parser-ts/"
+}

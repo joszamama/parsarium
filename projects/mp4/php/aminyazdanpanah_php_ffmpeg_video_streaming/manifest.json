@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "php",
+  "package": "aminyazdanpanah/php-ffmpeg-video-streaming",
+  "release": "v1.3.1",
+  "catalog_parser": "data/php/mp4/parsers.json",
+  "source_lock": "projects/mp4/php/aminyazdanpanah_php_ffmpeg_video_streaming/source-lock.json",
+  "source_sha256": "b57b4d0400e62ea0628a4ff63b862d94427a7fbc8614dc28a6bddde4463a988a",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "video_codec": "h264",
+    "width": 2,
+    "height": 2
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in aminyazdanpanah/php-ffmpeg-video-streaming PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/aminyazdanpanah/php-ffmpeg-video-streaming/"
+}

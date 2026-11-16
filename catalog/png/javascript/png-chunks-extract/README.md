@@ -23,6 +23,11 @@
 
 Parses PNG chunk structure only; does not decode pixels.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/javascript/png_chunks_extract/README.md)
+
+```sh
+python3 parsarium.py build png javascript png_chunks_extract
+python3 parsarium.py run png javascript png_chunks_extract controls/png/red-green.png
+```

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "go",
+  "package": "github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw",
+  "release": "v3.11.1",
+  "catalog_parser": "data/go/http11/parsers.json",
+  "source_lock": "projects/http11/go/github_com_projectdiscovery_nuclei_v3_pkg_protocols_http_raw/source-lock.json",
+  "source_sha256": "cce186e360da844f0ae8ddd51bfe4d2604b7700200692de8462727b0c5d559ad",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "host": "example.test"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw during valid-control replay",
+  "coverage_subject_prefix": "github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw/"
+}

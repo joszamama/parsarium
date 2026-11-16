@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "go",
+  "package": "github.com/borud/pointcloud",
+  "release": "v0.6.1",
+  "catalog_parser": "data/go/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/go/github_com_borud_pointcloud/source-lock.json",
+  "source_sha256": "5b6cd6559991a3f26917c863bb7029dca4b6ab90f56f2824a8682a05891f0f5f",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "bounds": [
+      0,
+      1,
+      0,
+      1
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/borud/pointcloud during valid-control replay",
+  "coverage_subject_prefix": "github.com/borud/pointcloud/"
+}

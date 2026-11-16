@@ -20,6 +20,11 @@
 
 Older TYPO3 fork/replacement of enshrined/svg-sanitize, sharing parser lineage and namespace.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/t3g_svg_sanitize_elts7/README.md)
+
+```sh
+python3 parsarium.py build svg php t3g_svg_sanitize_elts7
+python3 parsarium.py run svg php t3g_svg_sanitize_elts7 controls/svg/red-green.svg
+```

@@ -22,6 +22,11 @@
 
 Uses Node zlib for DEFLATE; archive parsing is in unzipper.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/javascript/unzipper/README.md)
+
+```sh
+python3 parsarium.py build zip javascript unzipper
+python3 parsarium.py run zip javascript unzipper controls/zip/hello.zip
+```

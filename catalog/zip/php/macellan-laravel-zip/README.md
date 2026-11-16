@@ -21,6 +21,11 @@
 
 A separate Composer package path with code lineage from ZanySoft Laravel ZIP; delegates parsing to PHP ZipArchive.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/macellan_laravel_zip/README.md)
+
+```sh
+python3 parsarium.py build zip php macellan_laravel_zip
+python3 parsarium.py run zip php macellan_laravel_zip controls/zip/hello.zip
+```

@@ -23,6 +23,11 @@
 
 Older Guzzle 3 parser implementation; Composer package is abandoned, but its pinned release passed.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/guzzle_parser/README.md)
+
+```sh
+python3 parsarium.py build http11 php guzzle_parser
+python3 parsarium.py run http11 php guzzle_parser controls/http11/request.http
+```

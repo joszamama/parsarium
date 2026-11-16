@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "php",
+  "package": "locomotivemtl/charcoal-image",
+  "release": "v0.4.3.4",
+  "catalog_parser": "data/php/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/php/locomotivemtl_charcoal_image/source-lock.json",
+  "source_sha256": "393a4303dc0c580a513325dc30dbc9c8eba05db858d90e13d5eee4c7adb25fc3",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in locomotivemtl/charcoal-image PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/locomotivemtl/charcoal-image/"
+}

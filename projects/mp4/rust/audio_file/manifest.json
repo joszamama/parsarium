@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "rust",
+  "package": "audio-file",
+  "release": "0.5.1",
+  "catalog_parser": "data/rust/mp4/parsers.json",
+  "source_lock": "projects/mp4/rust/audio_file/source-lock.json",
+  "source_sha256": "5b41a7aeb9d0f22453734ec6d23ba41d589b29015247f33a073a031413fa3b7d",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "samples": 9216
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in audio-file; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/audio-file-0.5.1/"
+}

@@ -22,6 +22,11 @@
 
 The ssl-proxies artifact includes its own HTTPParser and HTTPResponseParser classes. The response parser reads the local InputStream directly and reports status, reason and headers; the valid control verifies those fields, not response body handling. Apache-2.0 header is in the pinned source JAR.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/ssl_proxies/README.md)
+
+```sh
+python3 parsarium.py build http11 java ssl_proxies
+python3 parsarium.py run http11 java ssl_proxies controls/http11/response.http
+```

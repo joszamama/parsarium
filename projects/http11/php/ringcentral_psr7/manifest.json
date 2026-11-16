@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "php",
+  "package": "ringcentral/psr7",
+  "release": "1.3.0",
+  "catalog_parser": "data/php/http11/parsers.json",
+  "source_lock": "projects/http11/php/ringcentral_psr7/source-lock.json",
+  "source_sha256": "7c1800f3461229a46aaff6b4b7ef3aa685e2a94852505e00fbfe0de4ebd5a9c8",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "version": "1.1",
+    "host": "example.test",
+    "custom": "yes"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in ringcentral/psr7 PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/ringcentral/psr7/"
+}

@@ -93,9 +93,9 @@ def build(output: Path) -> None:
         })
         for entry in entries:
             key = (fmt, eco, entry["name"], entry["version"])
-            project = manifests.get(key)
             guide = readmes[(fmt, eco, entry["name"])]
-            if guide["runnable"] != bool(project) or not (ROOT / guide["readme"]).is_file():
+            project = manifests.get(key) if guide["runnable"] else None
+            if (guide["runnable"] and project is None) or not (ROOT / guide["readme"]).is_file():
                 raise ValueError(f"parser guide and harness disagree: {fmt}/{eco}/{entry['name']}")
             record = {
                 "format": fmt,

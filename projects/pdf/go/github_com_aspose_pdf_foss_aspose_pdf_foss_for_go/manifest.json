@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "go",
+  "package": "github.com/aspose-pdf-foss/aspose-pdf-foss-for-go",
+  "release": "v0.16.0",
+  "catalog_parser": "data/go/pdf/parsers.json",
+  "source_lock": "projects/pdf/go/github_com_aspose_pdf_foss_aspose_pdf_foss_for_go/source-lock.json",
+  "source_sha256": "056e8640460cb4068d10af4d0b6123bed89cf5fcf1c2a7399363c5477a2e8f8c",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/aspose-pdf-foss/aspose-pdf-foss-for-go during valid-control replay",
+  "coverage_subject_prefix": "github.com/aspose-pdf-foss/aspose-pdf-foss-for-go/"
+}

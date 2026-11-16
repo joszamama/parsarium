@@ -4,13 +4,17 @@
   "status": "standard_api_verified",
   "verified_apis": [
     {
-      "runtime": "Go 1.27.1 darwin/arm64 standard library",
+      "runtime": "Go 1.27.1 linux/arm64 standard library",
       "api": "archive/zip.OpenReader(path); File.Open()",
       "documentation": "https://pkg.go.dev/archive/zip@go1.27.1",
       "adapter": "adapters/go/zip_std.go",
       "control": "controls/zip/hello.zip",
       "observable_result": "One entry named hello.txt containing parsarium followed by a newline",
-      "result": "data/go/zip/verification.json"
+      "result": "data/go/zip/verification.json",
+      "expected": {
+        "name": "hello.txt",
+        "text": "parsarium\n"
+      }
     }
   ],
   "no_api_findings": [],

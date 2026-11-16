@@ -23,6 +23,11 @@
 
 The 2.2.10 mina-http source writes a native HttpRequestImpl into ProtocolDecoderOutput; headers are normalized to lowercase. The Maven POM declares mina-core with bundle type, which Maven cannot resolve as a normal artifact; adapter POM excludes that broken transitive edge and explicitly pins the same mina-core JAR. slf4j-nop pins the 1.7 logger binding for deterministic quiet output.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/java/mina_http/README.md)
+
+```sh
+python3 parsarium.py build http11 java mina_http
+python3 parsarium.py run http11 java mina_http controls/http11/request.http
+```

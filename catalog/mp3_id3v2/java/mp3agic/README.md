@@ -22,6 +22,11 @@
 
 jid3lib's project README identifies mp3agic as a fork in the same historical lineage.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/java/mp3agic/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 java mp3agic
+python3 parsarium.py run mp3_id3v2 java mp3agic controls/mp3_id3v2/tone-tags.mp3
+```

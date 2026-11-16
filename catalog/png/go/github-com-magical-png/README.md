@@ -30,6 +30,11 @@
 
 Shared underlying parser lineage or wrapper; package count is not an independent engine count.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/go/github_com_magical_png/README.md)
+
+```sh
+python3 parsarium.py build png go github_com_magical_png
+python3 parsarium.py run png go github_com_magical_png controls/png/red-green.png
+```

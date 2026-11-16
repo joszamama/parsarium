@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/go/github_com_projectdiscovery_nuclei_v3_pkg_protocols_http_raw/README.md)
+
+```sh
+python3 parsarium.py build http11 go github_com_projectdiscovery_nuclei_v3_pkg_protocols_http_raw
+python3 parsarium.py run http11 go github_com_projectdiscovery_nuclei_v3_pkg_protocols_http_raw controls/http11/request.http
+```

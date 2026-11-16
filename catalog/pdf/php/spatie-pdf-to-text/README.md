@@ -19,6 +19,11 @@
 
 PHP wrapper invokes local pdftotext 26.11.0; shared native backend is recorded.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/spatie_pdf_to_text/README.md)
+
+```sh
+python3 parsarium.py build pdf php spatie_pdf_to_text
+python3 parsarium.py run pdf php spatie_pdf_to_text controls/pdf/one-page.pdf
+```

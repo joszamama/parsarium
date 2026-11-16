@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "php",
+  "package": "guzzle/guzzle",
+  "release": "v3.9.3",
+  "catalog_parser": "data/php/http11/parsers.json",
+  "source_lock": "projects/http11/php/guzzle_guzzle/source-lock.json",
+  "source_sha256": "828efb74f1f52e90a62be15b7735cf28a156324d16ee90dea4be33ae2cd26124",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "version": "1.1",
+    "host": "example.test",
+    "custom": "yes"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in guzzle/guzzle PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/guzzle/guzzle/"
+}

@@ -23,6 +23,11 @@
 
 Package WavAudioDecoder reads RIFF chunks and PCM samples directly; BPM analysis uses the decoded samples.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/bpmfinder_bpm_finder/README.md)
+
+```sh
+python3 parsarium.py build wav php bpmfinder_bpm_finder
+python3 parsarium.py run wav php bpmfinder_bpm_finder controls/wav/120-bpm-clicks.wav
+```

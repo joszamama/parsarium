@@ -21,6 +21,11 @@
 
 Parses central-directory records in PHP and uses zlib to decompress DEFLATE entries.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/seblucas_tbszip/README.md)
+
+```sh
+python3 parsarium.py build zip php seblucas_tbszip
+python3 parsarium.py run zip php seblucas_tbszip controls/zip/hello.zip
+```

@@ -21,6 +21,11 @@
 
 Distinct package API that delegates ZIP parsing to bundled ZipArchive/libzip.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/vipsoft_unzip/README.md)
+
+```sh
+python3 parsarium.py build zip php vipsoft_unzip
+python3 parsarium.py run zip php vipsoft_unzip controls/zip/hello.zip
+```

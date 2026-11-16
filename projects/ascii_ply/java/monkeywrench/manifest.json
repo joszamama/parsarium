@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "MonkeyWrench",
+  "release": "1.0.1",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/java/monkeywrench/source-lock.json",
+  "source_sha256": "8032d8f4bc667402780ea9cd969f8eb67a1e8ee266f0a4360386d17de5071987",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/MonkeyWrench-1.0.1.jar:/work/lib/lwjgl-assimp-3.3.6.jar:/work/lib/lwjgl-3.3.6.jar:/work/lib/Heart-9.3.0.jar:/work/lib/jme3-core-3.9.0-stable.jar:/work/lib/Wes-0.8.3.jar:/work/lib/jme3-desktop-3.9.0-stable.jar:/work/lib/jme3-lwjgl3-3.9.0-stable.jar:/work/lib/lwjgl3-awt-0.2.3.jar:/work/lib/lwjgl-vulkan-3.3.5-natives-macos-arm64.jar:/work/lib/lwjgl-glfw-3.3.6.jar:/work/lib/lwjgl-jawt-3.3.6.jar:/work/lib/lwjgl-jemalloc-3.3.6.jar:/work/lib/lwjgl-openal-3.3.6.jar:/work/lib/lwjgl-opencl-3.3.6.jar:/work/lib/lwjgl-opengl-3.3.6.jar:/work/lib/lwjgl-3.3.6-natives-windows.jar:/work/lib/lwjgl-3.3.6-natives-windows-x86.jar:/work/lib/lwjgl-3.3.6-natives-linux.jar:/work/lib/lwjgl-3.3.6-natives-linux-arm32.jar:/work/lib/lwjgl-3.3.6-natives-linux-arm64.jar:/work/lib/lwjgl-3.3.6-natives-macos.jar:/work/lib/lwjgl-3.3.6-natives-macos-arm64.jar:/work/lib/lwjgl-glfw-3.3.6-natives-windows.jar:/work/lib/lwjgl-glfw-3.3.6-natives-windows-x86.jar:/work/lib/lwjgl-glfw-3.3.6-natives-linux.jar:/work/lib/lwjgl-glfw-3.3.6-natives-linux-arm32.jar:/work/lib/lwjgl-glfw-3.3.6-natives-linux-arm64.jar:/work/lib/lwjgl-glfw-3.3.6-natives-macos.jar:/work/lib/lwjgl-glfw-3.3.6-natives-macos-arm64.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-windows.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-windows-x86.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-linux.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-linux-arm32.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-linux-arm64.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-macos.jar:/work/lib/lwjgl-jemalloc-3.3.6-natives-macos-arm64.jar:/work/lib/lwjgl-opengl-3.3.6-natives-windows.jar:/work/lib/lwjgl-opengl-3.3.6-natives-windows-x86.jar:/work/lib/lwjgl-opengl-3.3.6-natives-linux.jar:/work/lib/lwjgl-opengl-3.3.6-natives-linux-arm32.jar:/work/lib/lwjgl-opengl-3.3.6-natives-linux-arm64.jar:/work/lib/lwjgl-opengl-3.3.6-natives-macos.jar:/work/lib/lwjgl-opengl-3.3.6-natives-macos-arm64.jar:/work/lib/lwjgl-openal-3.3.6-natives-windows.jar:/work/lib/lwjgl-openal-3.3.6-natives-windows-x86.jar:/work/lib/lwjgl-openal-3.3.6-natives-linux.jar:/work/lib/lwjgl-openal-3.3.6-natives-linux-arm32.jar:/work/lib/lwjgl-openal-3.3.6-natives-linux-arm64.jar:/work/lib/lwjgl-openal-3.3.6-natives-macos.jar:/work/lib/lwjgl-openal-3.3.6-natives-macos-arm64.jar:/work/lib/lwjgl-assimp-3.3.6-natives-windows.jar:/work/lib/lwjgl-assimp-3.3.6-natives-windows-x86.jar:/work/lib/lwjgl-assimp-3.3.6-natives-linux.jar:/work/lib/lwjgl-assimp-3.3.6-natives-linux-arm32.jar:/work/lib/lwjgl-assimp-3.3.6-natives-linux-arm64.jar:/work/lib/lwjgl-assimp-3.3.6-natives-macos.jar:/work/lib/lwjgl-assimp-3.3.6-natives-macos-arm64.jar:/work/lib/imageio-tga-3.15.3.jar:/work/lib/imageio-core-3.15.3.jar:/work/lib/common-lang-3.15.3.jar:/work/lib/common-io-3.15.3.jar:/work/lib/common-image-3.15.3.jar:/work/lib/imageio-webp-3.15.3.jar:/work/lib/imageio-metadata-3.15.3.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.github.stephengold:MonkeyWrench:1.0.1 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

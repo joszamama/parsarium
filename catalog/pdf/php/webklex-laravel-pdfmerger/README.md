@@ -20,6 +20,11 @@
 
 Laravel-oriented wrapper delegates page import to pinned FPDI 2.6.10; illuminate/filesystem 13.42.0 is an explicit companion dependency.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/webklex_laravel_pdfmerger/README.md)
+
+```sh
+python3 parsarium.py build pdf php webklex_laravel_pdfmerger
+python3 parsarium.py run pdf php webklex_laravel_pdfmerger controls/pdf/one-page.pdf
+```

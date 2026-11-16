@@ -15,10 +15,15 @@
 {
   "sample_rate": 8000,
   "channels": 1,
-  "duration_seconds": 1.152
+  "duration_seconds": 1.0
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/python/audioread/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 python audioread
+python3 parsarium.py run mp3_id3v2 python audioread controls/mp3_id3v2/tone-tags.mp3
+```

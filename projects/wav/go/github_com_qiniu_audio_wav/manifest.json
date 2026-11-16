@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "go",
+  "package": "github.com/qiniu/audio/wav",
+  "release": "v0.2.1",
+  "catalog_parser": "data/go/wav/parsers.json",
+  "source_lock": "projects/wav/go/github_com_qiniu_audio_wav/source-lock.json",
+  "source_sha256": "ef5b128402ff72b8e517407b39ccb724d0276a75de8ae41d6d4e0a73ab6318d2",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "decoded_bytes": 8
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/qiniu/audio/wav during valid-control replay",
+  "coverage_subject_prefix": "github.com/qiniu/audio/wav/"
+}

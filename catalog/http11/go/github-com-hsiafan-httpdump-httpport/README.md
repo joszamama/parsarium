@@ -22,6 +22,11 @@
 
 This package shares a parser family or code lineage with another row; package paths do not imply independent engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/go/github_com_hsiafan_httpdump_httpport/README.md)
+
+```sh
+python3 parsarium.py build http11 go github_com_hsiafan_httpdump_httpport
+python3 parsarium.py run http11 go github_com_hsiafan_httpdump_httpport controls/http11/request.http
+```

@@ -19,6 +19,11 @@
 
 Uses PHP DOM for XML syntax and its own SVG element objects.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/php/atelier_svg/README.md)
+
+```sh
+python3 parsarium.py build svg php atelier_svg
+python3 parsarium.py run svg php atelier_svg controls/svg/red-green.svg
+```

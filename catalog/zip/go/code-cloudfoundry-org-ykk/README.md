@@ -20,6 +20,11 @@
 
 Wrapper over Go archive/zip.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/go/code_cloudfoundry_org_ykk/README.md)
+
+```sh
+python3 parsarium.py build zip go code_cloudfoundry_org_ykk
+python3 parsarium.py run zip go code_cloudfoundry_org_ykk controls/zip/hello.zip
+```

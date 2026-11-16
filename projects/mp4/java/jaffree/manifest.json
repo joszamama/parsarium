@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "java",
+  "package": "jaffree",
+  "release": "2024.08.29",
+  "catalog_parser": "data/java/mp4/parsers.json",
+  "source_lock": "projects/mp4/java/jaffree/source-lock.json",
+  "source_sha256": "ca8d146b466a53b25e45ae450a1a2ad7509897c5743813556314cc8ea7a30e33",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "video_codec": "h264",
+    "width": 2,
+    "height": 2,
+    "audio_codec": "aac",
+    "sample_rate": 8000
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jaffree-2024.08.29.jar:/work/lib/nanojson-1.9.jar:/work/lib/slf4j-api-1.7.32.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.github.kokorin.jaffree:jaffree:2024.08.29 during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

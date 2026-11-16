@@ -1,0 +1,23 @@
+[package]
+name = "parsarium-ascii-pnm-oxideav-io-harness"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+oxideav-image = "=0.0.7"
+oxideav-io = { version = "=0.1.2", default-features = false, features = ["registry"] }
+oxideav-pbm = "=0.0.5"
+serde_json = "=1.0.154"
+libfuzzer-sys = { version = "=0.4.13", optional = true }
+
+[features]
+fuzzing = ["dep:libfuzzer-sys"]
+
+[[bin]]
+name = "replay"
+path = "src/bin/replay.rs"
+
+[[bin]]
+name = "fuzzer"
+path = "src/bin/fuzzer.rs"
+required-features = ["fuzzing"]

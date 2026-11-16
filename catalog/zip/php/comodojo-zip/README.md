@@ -21,6 +21,11 @@
 
 Distinct package API backed by bundled ZipArchive/libzip; emits PHP 8.5 deprecation notices during the valid control.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/comodojo_zip/README.md)
+
+```sh
+python3 parsarium.py build zip php comodojo_zip
+python3 parsarium.py run zip php comodojo_zip controls/zip/hello.zip
+```

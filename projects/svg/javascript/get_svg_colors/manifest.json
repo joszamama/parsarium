@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "javascript",
+  "package": "get-svg-colors",
+  "release": "2.0.1",
+  "catalog_parser": "data/javascript/svg/parsers.json",
+  "source_lock": "projects/svg/javascript/get_svg_colors/source-lock.json",
+  "source_sha256": "57819534d8045db55c59ddbd7724bb7c24dc5dba5741f6d80facfbad1cd8f9cf",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "fills": [
+      "#ff0000",
+      "#00ff00"
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/get-svg-colors/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/get-svg-colors/"
+}

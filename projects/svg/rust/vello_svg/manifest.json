@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "rust",
+  "package": "vello_svg",
+  "release": "0.11.0",
+  "catalog_parser": "data/rust/svg/parsers.json",
+  "source_lock": "projects/svg/rust/vello_svg/source-lock.json",
+  "source_sha256": "76e121946d05c44dd71a767fcc462ff632baf30d05a3b9dfe4e655c1ac93ff06",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "paths": 2,
+    "path_segments": 8
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in vello_svg; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/vello_svg-0.11.0/"
+}

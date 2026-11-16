@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "php",
+  "package": "league/glide",
+  "release": "4.1.0",
+  "catalog_parser": "data/php/png/parsers.json",
+  "source_lock": "projects/png/php/league_glide/source-lock.json",
+  "source_sha256": "3cc229dc9b22467510b867c766f6166a42f7f8efb14322e270f3a0c2015bc8e2",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in league/glide PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/league/glide/"
+}

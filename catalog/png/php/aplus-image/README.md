@@ -20,6 +20,11 @@
 
 Aplus Image calls getimagesize then imagecreatefrompng in the bundled PHP GD extension.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/aplus_image/README.md)
+
+```sh
+python3 parsarium.py build png php aplus_image
+python3 parsarium.py run png php aplus_image controls/png/red-green.png
+```

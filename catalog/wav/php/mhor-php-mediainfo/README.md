@@ -22,6 +22,11 @@
 
 Composer wrapper delegates to external MediaInfo 26.10 CLI; same release lock as the PHP MP3 cell. The 65,580-byte control satisfies the CLI read buffer.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/php/mhor_php_mediainfo/README.md)
+
+```sh
+python3 parsarium.py build wav php mhor_php_mediainfo
+python3 parsarium.py run wav php mhor_php_mediainfo controls/wav/32768-samples.wav
+```

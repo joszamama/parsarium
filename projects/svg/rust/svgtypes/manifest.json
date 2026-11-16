@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "rust",
+  "package": "svgtypes",
+  "release": "0.16.2",
+  "catalog_parser": "data/rust/svg/parsers.json",
+  "source_lock": "projects/svg/rust/svgtypes/source-lock.json",
+  "source_sha256": "9f12b12995e3638c70618c1facb1ce65302f6a6f706b675f07c58a5d7391120e",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-blue-path.svg",
+  "control_sha256": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172",
+  "expected_output": {
+    "first_command": "M",
+    "path_segments": 4
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in svgtypes; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/svgtypes-0.16.2/"
+}

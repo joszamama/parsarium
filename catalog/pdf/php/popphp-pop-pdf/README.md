@@ -19,6 +19,11 @@
 
 Own PDF object, content and text parser implementation; dependencies are pinned in its isolated Composer lock.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/php/popphp_pop_pdf/README.md)
+
+```sh
+python3 parsarium.py build pdf php popphp_pop_pdf
+python3 parsarium.py run pdf php popphp_pop_pdf controls/pdf/one-page.pdf
+```

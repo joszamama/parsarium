@@ -51,8 +51,9 @@ def parse(name, path):
     if name == "audioread":
         import audioread
         with audioread.audio_open(path) as doc:
+            sample_bytes = sum(len(chunk) for chunk in doc)
             return {"sample_rate": doc.samplerate, "channels": doc.channels,
-                    "duration_seconds": round(doc.duration, 3)}
+                    "duration_seconds": round(sample_bytes / (2 * doc.samplerate * doc.channels), 3)}
     if name == "librosa":
         import librosa
         samples, rate = librosa.load(path, sr=None)
@@ -91,7 +92,7 @@ def parse(name, path):
         return tags(doc.tag.title, doc.tag.artist, doc.tag.album)
     if name == "mp3-tagger":
         from mp3_tagger import MP3File, VERSION_2
-        doc = MP3File(path)
+        doc = MP3File(str(path))
         doc.set_version(VERSION_2)
         return tags(doc.song, doc.artist, doc.album)
     if name == "music-tag":

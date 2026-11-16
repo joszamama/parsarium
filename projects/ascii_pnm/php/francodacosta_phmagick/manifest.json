@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "php",
+  "package": "francodacosta/phmagick",
+  "release": "v5.0.2",
+  "catalog_parser": "data/php/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/php/francodacosta_phmagick/source-lock.json",
+  "source_sha256": "995e04ceae3c83ea8574d1f2531423a2bbe5b02c656db91a8387b67febff4c14",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "mime": "image/png"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in francodacosta/phmagick PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/francodacosta/phmagick/"
+}

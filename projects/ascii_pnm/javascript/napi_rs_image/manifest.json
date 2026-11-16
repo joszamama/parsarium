@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "javascript",
+  "package": "@napi-rs/image",
+  "release": "1.16.0",
+  "catalog_parser": "data/javascript/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/javascript/napi_rs_image/source-lock.json",
+  "source_sha256": "5cec9a7e6512b8cd852f81d6baa2bbde8e612696c281b865caf742d7e071d739",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "format": "pnm",
+    "width": 2,
+    "height": 1
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/@napi-rs/image/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/@napi-rs/image/"
+}

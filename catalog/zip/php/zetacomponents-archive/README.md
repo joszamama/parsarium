@@ -21,6 +21,11 @@
 
 Parses ZIP headers through its own PHP archive classes and uses zlib for DEFLATE; this adapter does not use ZipArchive.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/zetacomponents_archive/README.md)
+
+```sh
+python3 parsarium.py build zip php zetacomponents_archive
+python3 parsarium.py run zip php zetacomponents_archive controls/zip/hello.zip
+```

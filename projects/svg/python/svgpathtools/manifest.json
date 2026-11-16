@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "python",
+  "package": "svgpathtools",
+  "release": "1.8.0",
+  "catalog_parser": "data/python/svg/parsers.json",
+  "source_lock": "adapters/python/svg/requirements.lock",
+  "source_sha256": "783f6d32b37e1d6090fb31d56e6925909682b24ed50c361119a732d1a2c646f2",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/svg/red-blue-path.svg",
+  "control_sha256": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172",
+  "expected_output": {
+    "paths": 2,
+    "width": "4",
+    "height": "2",
+    "blue_path": "M 2 0 L 4 0 L 4 2 Z"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/svgpathtools/",
+  "dependencies": [
+    {
+      "package": "numpy",
+      "release": "2.5.4",
+      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
+    },
+    {
+      "package": "scipy",
+      "release": "1.18.1",
+      "sha256": "ac0333bdf38309aa3dcbe7e3fa7ea29e7a2c37c6ea306a757b700ded8e4596ad"
+    },
+    {
+      "package": "svgwrite",
+      "release": "1.4.3",
+      "sha256": "bb6b2b5450f1edbfa597d924f9ac2dd099e625562e492021d7dd614f65f8a22d"
+    }
+  ]
+}

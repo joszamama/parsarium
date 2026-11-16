@@ -22,6 +22,11 @@
 
 Laravel wrapper delegates to pinned james-heinrich/getid3 in the same Composer lock; separate package path and shared QuickTime/MP4 family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/php/owen_oj_laravel_getid3/README.md)
+
+```sh
+python3 parsarium.py build mp4 php owen_oj_laravel_getid3
+python3 parsarium.py run mp4 php owen_oj_laravel_getid3 controls/mp4/red-av.mp4
+```

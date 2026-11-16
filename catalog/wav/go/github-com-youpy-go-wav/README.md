@@ -25,6 +25,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/go/github_com_youpy_go_wav/README.md)
+
+```sh
+python3 parsarium.py build wav go github_com_youpy_go_wav
+python3 parsarium.py run wav go github_com_youpy_go_wav controls/wav/four-samples.wav
+```

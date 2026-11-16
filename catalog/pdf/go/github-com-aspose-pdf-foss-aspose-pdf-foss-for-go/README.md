@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/go/github_com_aspose_pdf_foss_aspose_pdf_foss_for_go/README.md)
+
+```sh
+python3 parsarium.py build pdf go github_com_aspose_pdf_foss_aspose_pdf_foss_for_go
+python3 parsarium.py run pdf go github_com_aspose_pdf_foss_aspose_pdf_foss_for_go controls/pdf/one-page.pdf
+```

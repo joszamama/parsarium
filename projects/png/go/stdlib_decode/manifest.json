@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "png",
+  "ecosystem": "go",
+  "package": "image/png.Decode(io.Reader)",
+  "release": "1.27.1",
+  "api": "image/png.Decode(io.Reader)",
+  "runtime": "Go 1.27.1 linux/arm64 standard library",
+  "standard_inventory": "data/go/png/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "f6e97084ce561f92ae7658b34f16d797aa46c65325b2ae9cd931d0f2434993c1",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_engine_release": "1.27.1",
+  "fuzz_engine_sha256": "1675694ef690db0f18fbe7046a886170904bede1d9db6ec96ae27945c1705c64",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "height": 1,
+    "rgba": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255
+    ],
+    "width": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_entry": "FuzzParser",
+  "coverage": "Go coverpkg instrumentation of standard image/png",
+  "coverage_subject_prefix": "image/png/"
+}

@@ -21,6 +21,11 @@
 
 Modern framework-agnostic PHP Reader release; same original author and code lineage as debach/zend-mp3, but distinct Composer package path.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/vollbehr_php_reader/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 php vollbehr_php_reader
+python3 parsarium.py run mp3_id3v2 php vollbehr_php_reader controls/mp3_id3v2/tone-tags.mp3
+```

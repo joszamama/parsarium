@@ -23,6 +23,11 @@
 
 Native raw-message parser creates a PSR-7 server request using pinned Guzzle PSR-7 2.13.1 factories.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/phpstandard_raw_request_factory/README.md)
+
+```sh
+python3 parsarium.py build http11 php phpstandard_raw_request_factory
+python3 parsarium.py run http11 php phpstandard_raw_request_factory controls/http11/request.http
+```

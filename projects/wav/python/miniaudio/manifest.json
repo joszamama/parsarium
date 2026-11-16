@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "python",
+  "package": "miniaudio",
+  "release": "1.73",
+  "catalog_parser": "data/python/wav/parsers.json",
+  "source_lock": "adapters/python/wav/requirements.lock",
+  "source_sha256": "8af74bbb1e5821ca53ccfb776c224b098b31c0778ab9d8ff3f8dbf91eb9d3809",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "samples": [
+      0,
+      1000,
+      -1000,
+      0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/miniaudio.py",
+  "dependencies": [
+    {
+      "package": "cffi",
+      "release": "2.1.1",
+      "sha256": "b0431303acaea1089ad4b3e9ce4e6518193def1118d4073ca848635ee4ea2e96"
+    },
+    {
+      "package": "pycparser",
+      "release": "3.12",
+      "sha256": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e"
+    }
+  ]
+}

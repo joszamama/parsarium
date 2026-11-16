@@ -21,6 +21,11 @@
 
 Observed driver is wapmorgan\UnifiedArchive\Drivers\Zip, which uses bundled ZipArchive/libzip; package also bundles PclZip as an alternative backend.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/wapmorgan_unified_archive/README.md)
+
+```sh
+python3 parsarium.py build zip php wapmorgan_unified_archive
+python3 parsarium.py run zip php wapmorgan_unified_archive controls/zip/hello.zip
+```

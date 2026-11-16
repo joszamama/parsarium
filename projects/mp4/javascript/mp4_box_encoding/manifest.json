@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "javascript",
+  "package": "mp4-box-encoding",
+  "release": "1.4.1",
+  "catalog_parser": "data/javascript/mp4/parsers.json",
+  "source_lock": "projects/mp4/javascript/mp4_box_encoding/source-lock.json",
+  "source_sha256": "24d34e0e5c84f29e24ba2d2c9438e61c413500ffc34fca74eed647e71d9b47c6",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "type": "ftyp",
+    "brand": "isom",
+    "compatible": [
+      "isom",
+      "iso2",
+      "avc1",
+      "mp41"
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/mp4-box-encoding/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/mp4-box-encoding/"
+}

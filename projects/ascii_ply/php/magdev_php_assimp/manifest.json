@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "php",
+  "package": "magdev/php-assimp",
+  "release": "0.3.2",
+  "catalog_parser": "data/php/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/php/magdev_php_assimp/source-lock.json",
+  "source_sha256": "9614f83ea47a8830f3a3b2536a1b77b9d98cbcb4c0458a20cec523eedd29cd35",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "meshes": 1,
+    "vertices": 3,
+    "faces": 1
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in magdev/php-assimp PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/magdev/php-assimp/"
+}

@@ -21,6 +21,11 @@
 
 Pure PHP ZIP reader with central-directory parsing and zlib decompression.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/php/splitbrain_php_archive/README.md)
+
+```sh
+python3 parsarium.py build zip php splitbrain_php_archive
+python3 parsarium.py run zip php splitbrain_php_archive controls/zip/hello.zip
+```

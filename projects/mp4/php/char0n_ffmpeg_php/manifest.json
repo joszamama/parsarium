@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "php",
+  "package": "char0n/ffmpeg-php",
+  "release": "3.2.2",
+  "catalog_parser": "data/php/mp4/parsers.json",
+  "source_lock": "projects/mp4/php/char0n_ffmpeg_php/source-lock.json",
+  "source_sha256": "0ca111f4dc53c0ebf9f24ec608abd757a1fdc204e9c44e88436903b1c8a0f68c",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "video_codec": "h264",
+    "duration_seconds": 1
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in char0n/ffmpeg-php PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/char0n/ffmpeg-php/"
+}

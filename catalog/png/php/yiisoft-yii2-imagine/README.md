@@ -20,6 +20,11 @@
 
 Yii wrapper calls Imagine with its GD driver; the underlying Imagine and PHP GD families are shared with other paths.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/yiisoft_yii2_imagine/README.md)
+
+```sh
+python3 parsarium.py build png php yiisoft_yii2_imagine
+python3 parsarium.py run png php yiisoft_yii2_imagine controls/png/red-green.png
+```

@@ -23,6 +23,11 @@
 
 Native incremental parser; PHP 8.5 emits deprecation notices when logging is enabled.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/sekjun9878_request_parser/README.md)
+
+```sh
+python3 parsarium.py build http11 php sekjun9878_request_parser
+python3 parsarium.py run http11 php sekjun9878_request_parser controls/http11/request.http
+```

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "go",
+  "package": "github.com/tdewolff/canvas/image",
+  "release": "v0.0.0-20260923214215-09804640d00c",
+  "catalog_parser": "data/go/png/parsers.json",
+  "source_lock": "projects/png/go/github_com_tdewolff_canvas_image/source-lock.json",
+  "source_sha256": "75f77f986f4afe182d4f4618dca902a08e95cdd2c84d9df84b7fb2ae9756b715",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "height": 1,
+    "rgba": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255
+    ],
+    "width": 2
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/tdewolff/canvas/image during valid-control replay",
+  "coverage_subject_prefix": "github.com/tdewolff/canvas/image/"
+}

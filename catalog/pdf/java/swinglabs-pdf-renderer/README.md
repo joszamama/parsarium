@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/java/swinglabs_pdf_renderer/README.md)
+
+```sh
+python3 parsarium.py build pdf java swinglabs_pdf_renderer
+python3 parsarium.py run pdf java swinglabs_pdf_renderer controls/pdf/one-page.pdf
+```

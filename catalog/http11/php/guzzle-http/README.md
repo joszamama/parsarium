@@ -23,6 +23,11 @@
 
 Package factory delegates to pinned guzzle/parser dependency; shared underlying parser implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/php/guzzle_http/README.md)
+
+```sh
+python3 parsarium.py build http11 php guzzle_http
+python3 parsarium.py run http11 php guzzle_http controls/http11/request.http
+```

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "rust",
+  "package": "wav-codec",
+  "release": "0.1.0",
+  "catalog_parser": "data/rust/wav/parsers.json",
+  "source_lock": "projects/wav/rust/wav_codec/source-lock.json",
+  "source_sha256": "73c7ca5602a58c74474e2479cacfb5a032757c81e8759551098c42aeec1f027f",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "samples": 4
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in wav-codec; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wav-codec-0.1.0/"
+}

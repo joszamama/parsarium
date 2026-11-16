@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "go",
+  "package": "github.com/moutend/go-wav",
+  "release": "v0.0.0-20170820031854-56127fbbb7ba",
+  "catalog_parser": "data/go/wav/parsers.json",
+  "source_lock": "projects/wav/go/github_com_moutend_go_wav/source-lock.json",
+  "source_sha256": "085c83e3455862faa83374f5456ae1b22193c075af9d279c7e615d01e8178f37",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits": 16,
+    "signs": [
+      0,
+      1,
+      -1,
+      0
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/moutend/go-wav during valid-control replay",
+  "coverage_subject_prefix": "github.com/moutend/go-wav/"
+}

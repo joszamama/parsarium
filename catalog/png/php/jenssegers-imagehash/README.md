@@ -19,6 +19,11 @@
 
 ImageHash uses Intervention Image 3 with GD to decode PNG; separate Composer lock resolves the incompatible core major version.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/jenssegers_imagehash/README.md)
+
+```sh
+python3 parsarium.py build png php jenssegers_imagehash
+python3 parsarium.py run png php jenssegers_imagehash controls/png/red-green.png
+```

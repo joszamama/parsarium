@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "rust",
+  "package": "minihttpse",
+  "release": "0.1.6",
+  "catalog_parser": "data/rust/http11/parsers.json",
+  "source_lock": "projects/http11/rust/minihttpse/source-lock.json",
+  "source_sha256": "8e50e8cee436b4318ec759930d6ea5f839d14dab94e81b6fba37d492d07ebf55",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/http11/response.http",
+  "control_sha256": "89095a71f21f4047f3d86e05d4fdf37bdfffcbf746a3aa85bc32fd7b7ea3a2c4",
+  "expected_output": {
+    "body": "parsarium",
+    "reason": "OK",
+    "status": 200
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in minihttpse; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/minihttpse-0.1.6/"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "rust",
+  "package": "audiotags",
+  "release": "0.5.0",
+  "catalog_parser": "data/rust/mp3_id3v2/parsers.json",
+  "source_lock": "projects/mp3_id3v2/rust/audiotags/source-lock.json",
+  "source_sha256": "44e797ce0164cf599c71f2c3849b56301d96a3dc033544588e875686b050ed39",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "title": "Parsarium",
+    "artist": "Control",
+    "album": "Pilot"
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in audiotags; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/audiotags-0.5.0/"
+}

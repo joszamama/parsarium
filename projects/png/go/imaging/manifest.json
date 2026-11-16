@@ -14,16 +14,29 @@
   "expected_output": {
     "width": 2,
     "height": 1,
-    "rgba": [255, 0, 0, 255, 0, 255, 0, 255]
+    "rgba": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255
+    ]
   },
-  "harness": "harness.go",
+  "harness": "harness_test.go",
   "fuzz_engine": "Go native fuzzing",
   "fuzz_entry": "FuzzPNG",
   "fuzz_smoke_entrypoint": "/work/harness.test",
-  "fuzz_smoke_args": ["-test.list=Fuzz"],
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
   "fuzz_smoke_expect": "FuzzPNG",
   "toolchain_entrypoint": "/work/reporter",
-  "toolchain_args": ["--toolchain"],
+  "toolchain_args": [
+    "--toolchain"
+  ],
   "coverage": "Go test coverpkg instrumentation of github.com/disintegration/imaging and delegated image/png during valid-control replay",
   "coverage_subject_prefix": "github.com/disintegration/imaging/",
   "underlying_coverage_subject_prefix": "image/png/"
