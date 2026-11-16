@@ -6,9 +6,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -32,6 +33,14 @@ FORMATS = [
     ("mp3_id3v2", "MP3 + ID3v2", "Audio", "Compressed audio with a metadata prelude."),
 ]
 ECOSYSTEMS = ["c", "cpp", "go", "java", "javascript", "python", "rust", "php"]
+RANKING_ALIASES = {
+    ("cpp", "svg", "qtbase"): "QtBase QImageReader",
+    ("cpp", "svg", "qtdeclarative"): "QtDeclarative VectorImage",
+    ("java", "ascii_ply", "f3d"): "F3D Java binding",
+    ("java", "ascii_ply", "kotlin-assimp"): "Kotlin-graphics Assimp",
+    ("java", "ascii_ply", "imaging-mesh"): "AIST Imaging Mesh",
+    ("java", "ascii_ply", "bteterrarenderer-draco"): "BTETerraRenderer Draco module",
+}
 DEMO_PROJECTS = [
     "projects/png/python/pypng/manifest.json",
     "projects/zip/rust/zip/manifest.json",
@@ -52,6 +61,26 @@ def read_json(path: Path):
 
 def repo_link(path: str) -> str:
     return f"{REPO_URL}/blob/main/{path}"
+
+
+def ranking_rows(path: Path) -> tuple[str, dict[str, tuple[str, str, str]]]:
+    """Read the recorded within-cell metric without inferring missing values."""
+    metric = "recorded adoption metric"
+    rows = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("|"):
+            continue
+        columns = [part.strip() for part in line.strip("|").split("|")]
+        if len(columns) < 4:
+            continue
+        if columns[0] == "Rank":
+            metric = columns[3]
+            continue
+        package = re.search(r"\[([^\]]+)\]\([^)]+\)", columns[1])
+        if package and (columns[0].rstrip("=").isdigit() or columns[0] in {"unranked", "—"}):
+            rank = "unranked" if columns[0] == "—" else columns[0]
+            rows[package.group(1).casefold()] = (rank, columns[3], columns[2])
+    return metric, rows
 
 
 def build(output: Path) -> None:
@@ -80,6 +109,30 @@ def build(output: Path) -> None:
         entries = read_json(ROOT / source)
         if len(entries) != cell["verified_third_party_count"]:
             raise ValueError(f"count mismatch in {source}")
+        metric, ranks = ranking_rows(ROOT / f"data/{eco}/{fmt}/ranking.md")
+        normalized_rows = defaultdict(list)
+        rows_by_release = defaultdict(list)
+        for ranking_name, ranked_row in ranks.items():
+            normalized_rows[re.sub(r"[^a-z0-9]", "", ranking_name)].append(ranked_row)
+            rows_by_release[ranked_row[2]].append(ranked_row)
+        entry_release_counts = Counter(entry["version"] for entry in entries)
+
+        def rank_for(entry):
+            direct = ranks.get(entry["name"].casefold())
+            if direct:
+                return direct
+            alias = RANKING_ALIASES.get((eco, fmt, entry["name"]))
+            if alias and alias.casefold() in ranks:
+                return ranks[alias.casefold()]
+            normalized = normalized_rows[re.sub(r"[^a-z0-9]", "", entry["name"].casefold())]
+            if len(normalized) == 1:
+                return normalized[0]
+            # Some ranking labels describe a binding rather than repeat the
+            # catalog package name. An exact, unique release identifies it.
+            same_release = rows_by_release[entry["version"]]
+            if entry_release_counts[entry["version"]] == 1 and len(same_release) == 1:
+                return same_release[0]
+            return None
         c = coverage_by_cell[(fmt, eco)]
         cells.append({
             "format": fmt,
@@ -95,6 +148,11 @@ def build(output: Path) -> None:
             "cellGuideUrl": repo_link(f"catalog/{fmt}/{eco}/README.md"),
             "standardProjectUrl": None,
         })
+        entries = sorted(entries, key=lambda entry: (
+            int(rank_for(entry)[0].rstrip("="))
+            if rank_for(entry) and rank_for(entry)[0].rstrip("=").isdigit()
+            else 100_000
+        ))
         for entry in entries:
             key = (fmt, eco, entry["name"], entry["version"])
             guide = readmes[(fmt, eco, entry["name"])]
@@ -113,11 +171,18 @@ def build(output: Path) -> None:
                 "documentation": entry["documentation"],
                 "evidenceUrl": repo_link(source),
                 "guideUrl": repo_link(guide["readme"]),
+                "rankingUrl": repo_link(f"data/{eco}/{fmt}/ranking.md"),
             }
+            ranked = rank_for(entry)
+            if ranked:
+                record["rank"] = ranked[0]
+                record["popularityMetric"] = metric
+                record["metricValue"] = ranked[1]
             if project:
                 project_path, _ = project
                 record["project"] = str(project_path.parent.relative_to(ROOT))
                 record["projectUrl"] = repo_link(str((project_path.parent / "README.md").relative_to(ROOT)))
+                record["targetId"] = f"{fmt}/{eco}/{project_path.parent.name}"
             parsers.append(record)
 
     if len(parsers) != coverage["catalog_paths"]:
@@ -154,7 +219,46 @@ def build(output: Path) -> None:
             "evidenceUrl": repo_link(str(inventory_path.relative_to(ROOT))),
             "guideUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
             "projectUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
+            "project": str(project_path.parent.relative_to(ROOT)),
+            "targetId": f"{fmt}/{eco}/{project_path.parent.name}",
         })
+
+    targets = {}
+    for record in [*parsers, *standard_targets]:
+        target_id = record.get("targetId")
+        if not target_id:
+            continue
+        project_dir = ROOT / record["project"]
+        manifest = read_json(project_dir / "manifest.json")
+        verification = read_json(project_dir / "verification.json")
+        control_path = ROOT / manifest["control"]
+        fmt, eco, slug = target_id.split("/")
+        target_args = f"{fmt} {eco} {slug}"
+        run_dir = f"runs/{fmt}-{slug}"
+        targets[target_id] = {
+            "format": fmt,
+            "ecosystem": eco,
+            "package": manifest["package"],
+            "release": manifest["release"],
+            "inputApi": record["inputApi"],
+            "control": manifest["control"],
+            "controlUrl": repo_link(manifest["control"]),
+            "bytes": control_path.stat().st_size,
+            "expectedOutput": manifest["expected_output"],
+            "coverageLines": verification["parser_source_lines_covered"],
+            "coverageLimit": manifest.get("coverage_limit") or manifest.get("underlying_coverage_limitation"),
+            "projectGuideUrl": record["projectUrl"],
+            "controlCommand": f"python3 parsarium.py run {target_args} {manifest['control']} --results {run_dir}-control",
+            "inputCommand": f"python3 parsarium.py run {target_args} INPUT_FILE --results {run_dir}-single",
+            "replayCommand": f"python3 parsarium.py replay {target_args} CORPUS_DIR {run_dir}-replay",
+            "aflCommands": [
+                f"python3 parsarium.py afl build {target_args}",
+                f"python3 parsarium.py afl prepare {target_args} {run_dir}-afl",
+                f"python3 parsarium.py afl run {run_dir}-afl --seconds 60",
+            ],
+        }
+    if len(targets) != coverage["containerized_verified"] + coverage["standard_containerized_verified"]:
+        raise ValueError("run walkthrough targets do not match project coverage")
 
     format_counts = Counter(p["format"] for p in parsers)
     format_runs = Counter()
@@ -231,6 +335,7 @@ def build(output: Path) -> None:
         "cells": cells,
         "parsers": parsers,
         "standardTargets": standard_targets,
+        "targets": targets,
         "demos": demos,
     }
     output.mkdir(parents=True, exist_ok=True)

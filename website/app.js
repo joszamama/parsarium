@@ -30,6 +30,8 @@ let catalog;
 const pageSize = 18;
 let visible = pageSize;
 let activeDemoIndex = 0;
+let activeDemo = null;
+let activeTargetId = null;
 let labStep = 0;
 let labTimer = null;
 function formatLabel(id) { return catalog.formats.find((format) => format.id === id)?.label ?? id; }
@@ -47,7 +49,7 @@ function renderFormats() {
   $("#format-grid").innerHTML = catalog.formats.map((format) => `
     <button class="format-card" type="button" data-format="${escapeHtml(format.id)}" aria-label="Explore ${escapeHtml(format.label)} parsers">
       <span class="format-art" style="background:${artColors[format.id]}"><svg viewBox="0 0 196 104" aria-hidden="true">${formatGlyphs[format.id]}</svg></span>
-      <span class="format-content"><span class="format-category">${escapeHtml(format.category)}</span><span class="format-name">${escapeHtml(format.label)} <span aria-hidden="true">↗</span></span><span class="format-count"><b>${format.verified}</b> verified · <b>${format.runnable}</b> runnable</span></span>
+      <span class="format-content"><span class="format-category">${escapeHtml(format.category)}</span><span class="format-name">${escapeHtml(format.label)} <span aria-hidden="true">↗</span></span><span class="format-count"><b>${format.verified}</b> third-party paths · <b>${format.runnable}</b> runnable targets</span></span>
     </button>`).join("");
   $("#format-grid").addEventListener("click", (event) => {
     const button = event.target.closest("[data-format]");
@@ -76,19 +78,27 @@ function updateUrl(filters) {
   if (filters.ecosystem) params.set("ecosystem", filters.ecosystem);
   if (filters.query) params.set("q", filters.query);
   if (filters.runnable) params.set("runnable", "1");
-  const url = `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`;
+  if (activeTargetId) params.set("target", activeTargetId);
+  const url = `${location.pathname}${params.size ? `?${params}` : ""}${activeTargetId ? "#specimen" : location.hash}`;
   history.replaceState(null, "", url);
 }
 function parserCard(parser) {
   const project = parser.projectUrl ? `<a href="${safeUrl(parser.projectUrl)}" target="_blank" rel="noopener noreferrer">Harness ↗</a>` : "";
   const badge = parser.type === "standard" ? "STANDARD + RUNNABLE" : parser.projectUrl ? "RUNNABLE" : "";
   const details = parser.type === "standard" ? "standard library API" : `${parser.license} · scope: ${parser.scope}`;
+  const popularity = parser.type === "standard"
+    ? "Standard/runtime API · outside third-party ranking"
+    : parser.rank?.match(/^\d+=?$/)
+      ? `#${escapeHtml(parser.rank.replace("=", ""))}${parser.rank.endsWith("=") ? " (tie)" : ""} within ${escapeHtml(ecoLabel[parser.ecosystem])} × ${escapeHtml(formatLabel(parser.format))} · ${escapeHtml(parser.popularityMetric)}: ${escapeHtml(parser.metricValue)}`
+      : parser.rank === "unranked" ? "Unranked · adoption metric unavailable" : "Ranking match unresolved · see source";
   return `<article class="parser-card-item">
     <div class="parser-meta"><span>${escapeHtml(formatLabel(parser.format))} / ${escapeHtml(ecoLabel[parser.ecosystem])}</span>${badge ? `<span class="runnable-badge">${badge}</span>` : ""}</div>
     <h3>${escapeHtml(parser.name)}</h3><span class="parser-version">${escapeHtml(parser.version)} · ${escapeHtml(details)}</span>
+    <p class="parser-popularity">${popularity}${parser.rankingUrl ? ` <a href="${safeUrl(parser.rankingUrl)}" target="_blank" rel="noopener noreferrer">Ranking ↗</a>` : ""}</p>
     <p class="parser-api"><strong>Input API:</strong> ${escapeHtml(parser.inputApi)}</p>
     <p class="parser-family">Family: ${escapeHtml(parser.family)}</p>
     <div class="parser-card-links"><a href="${safeUrl(parser.guideUrl)}" target="_blank" rel="noopener noreferrer">Parser guide ↗</a><a href="${safeUrl(parser.documentation)}" target="_blank" rel="noopener noreferrer">API docs ↗</a><a href="${safeUrl(parser.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a>${project}</div>
+    ${parser.targetId ? `<button class="use-target" type="button" data-use-target="${escapeHtml(parser.targetId)}">Use this target <span aria-hidden="true">→</span></button>` : ""}
   </article>`;
 }
 function renderAtlas() {
@@ -142,6 +152,12 @@ function initAtlas() {
     visible = pageSize; renderAtlas(); renderDemo(0);
   });
   $("#load-more").addEventListener("click", () => { visible += pageSize; renderAtlas(); });
+  $("#parser-grid").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-use-target]");
+    if (!button) return;
+    renderTarget(button.dataset.useTarget);
+    $("#specimen").scrollIntoView({ behavior: "smooth" });
+  });
   document.addEventListener("keydown", (event) => {
     if (event.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
       event.preventDefault(); $("#search").focus(); $("#atlas").scrollIntoView();
@@ -159,27 +175,43 @@ function commandBlock(label, command, key) {
 function renderDemo(index) {
   const demo = catalog.demos[index];
   activeDemoIndex = index;
+  activeTargetId = null;
+  renderWorkbench(demo, false);
+}
+function renderTarget(targetId) {
+  const demo = catalog.targets[targetId];
+  if (!demo) return;
+  activeDemoIndex = catalog.demos.findIndex((item) => item.format === demo.format);
+  activeTargetId = targetId;
+  renderWorkbench(demo, true);
+}
+function renderWorkbench(demo, selectedTarget) {
+  activeDemo = demo;
   labStep = 0;
   stopLab();
   const format = catalog.formats.find((item) => item.id === demo.format);
   $("#format-guide").href = safeUrl(format.guideUrl);
   $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
   $("#demo-tabs").querySelectorAll("button").forEach((button, buttonIndex) => {
-    button.setAttribute("aria-selected", String(buttonIndex === index));
-    button.tabIndex = buttonIndex === index ? 0 : -1;
+    button.setAttribute("aria-selected", String(buttonIndex === activeDemoIndex));
+    button.tabIndex = buttonIndex === activeDemoIndex ? 0 : -1;
   });
   const panel = $("#demo-panel");
-  panel.setAttribute("aria-labelledby", `demo-tab-${index}`);
+  panel.setAttribute("aria-labelledby", `demo-tab-${activeDemoIndex}`);
   const controlName = demo.control.split("/").pop();
   const afl = demo.aflCommands.map((command) => `<span>$</span> ${escapeHtml(command)}`).join("\n");
-  panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / EXAMPLE RUNNABLE TARGET</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
+  const controlLink = selectedTarget
+    ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(controlName)} ↗</a>`
+    : `<a href="${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a>`;
+  panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / ${selectedTarget ? "YOUR SELECTED TARGET" : "FEATURED EXAMPLE"}</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="workbench-body">
+      ${selectedTarget ? `<div class="selected-target-note"><span>Picked from the atlas</span><button type="button" id="restore-example">Show featured example ↺</button></div>` : ""}
       <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.projectGuideUrl)}" target="_blank" rel="noopener noreferrer">Harness guide ↗</a></div>
       <p class="target-api"><strong>Documented input API</strong><code>${escapeHtml(demo.inputApi)}</code></p>
       <div class="workbench-flow"><span>Input file(s)</span><b aria-hidden="true">→</b><span>Parser harness</span><b aria-hidden="true">→</b><span>Run receipts</span></div>
-      <div class="run-step"><div class="run-step-head"><span>01</span><h4>Check the target</h4></div><p>Run its supplied valid control, <a href="${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a> (${demo.bytes.toLocaleString()} bytes).</p>
+      <div class="run-step"><div class="run-step-head"><span>01</span><h4>Check the target</h4></div><p>Run its supplied valid control, ${controlLink} (${demo.bytes.toLocaleString()} bytes).</p>
         ${commandBlock("VALID CONTROL", demo.controlCommand, "control")}
-        <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre></details>
+        <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>${demo.coverageLimit ? `<p class="coverage-limit">Coverage scope: ${escapeHtml(demo.coverageLimit)}</p>` : ""}</details>
       </div>
       <div class="run-step"><div class="run-step-head"><span>02</span><h4>Run your file</h4></div><p>Replace <code>INPUT_FILE</code> with a local file of the same format.</p>
         ${commandBlock("ONE INPUT", demo.inputCommand, "input")}
@@ -194,6 +226,8 @@ function renderDemo(index) {
     const command = key === "afl" ? demo.aflCommands.join("\n") : demo[`${key}Command`];
     copyText(command, button);
   }));
+  panel.querySelector("#restore-example")?.addEventListener("click", () => renderDemo(activeDemoIndex));
+  updateUrl(currentFilters());
   renderLab();
 }
 function stopLab() {
@@ -203,7 +237,7 @@ function stopLab() {
   if (button) button.innerHTML = 'Play walkthrough <span aria-hidden="true">▶</span>';
 }
 function renderLab() {
-  const demo = catalog.demos[activeDemoIndex];
+  const demo = activeDemo;
   const format = formatLabel(demo.format);
   const control = demo.control.split("/").pop();
   const formatClues = {
@@ -219,13 +253,13 @@ function renderLab() {
     mp3_id3v2: "MP3 with ID3v2 readers interpret tag headers and frames before exposing audio metadata."
   };
   const steps = [
-    {title: "A complete input file", tag: "GENERATOR → FILE", body: `A generator such as Fandango writes complete ${format} files when a matching spec is available. This repository also includes a small valid control: <strong>${escapeHtml(control)}</strong> (${demo.bytes.toLocaleString()} bytes). The generator supplies bytes; it does not report what a parser understood.`, detail: `<a href="${escapeHtml(demo.controlUrl)}" download>Download this control ↓</a>`},
+    {title: "A complete input file", tag: "GENERATOR → FILE", body: `A generator such as Fandango writes complete ${format} files when a matching spec is available. This repository also includes a small valid control: <strong>${escapeHtml(control)}</strong> (${demo.bytes.toLocaleString()} bytes). The generator supplies bytes; it does not report what a parser understood.`, detail: activeTargetId ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">Open this control ↗</a>` : `<a href="${escapeHtml(demo.controlUrl)}" download>Download this control ↓</a>`},
     {title: "A named parser API", tag: "FILE → PARSER", body: `The pinned <strong>${escapeHtml(demo.package)}</strong> release ${escapeHtml(demo.release)} receives that file through a documented local input API. ${formatClues[demo.format]} The Docker harness invokes this package path.`, detail: `<code>${escapeHtml(demo.inputApi)}</code>`},
-    {title: "Proof from a valid control", tag: "PARSER → OBSERVATION", body: `Control verification observed these format-specific fields and recorded <strong>${demo.coverageLines.toLocaleString()} parser-source lines</strong> executed. This proves the documented path reached parser code on this valid input; it does not establish support for every variant.`, detail: `<pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>`},
+    {title: "Proof from a valid control", tag: "PARSER → OBSERVATION", body: `Control verification observed these format-specific fields and recorded <strong>${demo.coverageLines.toLocaleString()} covered package-source lines</strong>. The linked harness guide identifies the instrumented code. Some native decoders are prebuilt and outside source coverage. This valid input does not establish support for every variant.`, detail: `<pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>`},
     {title: "A replay you can inspect", tag: "CORPUS → RECEIPTS", body: `Parsarium can replay a directory of ${format} files through the same target. It keeps input hashes, per-input execution receipts, and a summary. AFL++ can instead generate inputs and use parser feedback to steer its search. A successful harness exit alone does not prove the parser accepted every file.`, detail: `<code>${escapeHtml(demo.replayCommand)}</code>`}
   ];
   const current = steps[labStep];
-  $("#lab-context").textContent = `${format} · ${demo.package} · ${demo.ecosystem.toUpperCase()} example`;
+  $("#lab-context").textContent = `${format} · ${demo.package} · ${demo.ecosystem.toUpperCase()} ${activeTargetId ? "selected target" : "example"}`;
   $("#lab-stage").dataset.step = String(labStep);
   $("#lab-stage").querySelectorAll("[data-lab-step]").forEach((button) => button.setAttribute("aria-pressed", String(Number(button.dataset.labStep) === labStep)));
   $("#lab-panel").innerHTML = `<div class="lab-tag">${current.tag}</div><h3>${current.title}</h3><p>${current.body}</p><div class="lab-detail">${current.detail}</div>`;
@@ -282,6 +316,7 @@ function initDemo() {
 }
 async function start() {
   try {
+    const requestedTarget = new URLSearchParams(location.search).get("target");
     const embedded = $("#catalog-data");
     if (embedded) {
       catalog = JSON.parse(embedded.textContent);
@@ -295,6 +330,7 @@ async function start() {
     $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
     $("#stat-runnable").textContent = catalog.summary.runnable;
     renderFormats(); initAtlas(); initDemo(); initLab();
+    if (requestedTarget && catalog.targets[requestedTarget]) renderTarget(requestedTarget);
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
     if (["#formats", "#atlas", "#specimen", "#lab", "#how-it-works"].includes(location.hash)) {
       requestAnimationFrame(() => $(location.hash).scrollIntoView({ behavior: "instant" }));
