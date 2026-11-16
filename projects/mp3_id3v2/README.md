@@ -101,6 +101,7 @@
 - [wapmorgan/media-file / PHP](php/wapmorgan_media_file/README.md)
 - [wapmorgan/mp3info / PHP](php/wapmorgan_mp3info/README.md)
 - [wikimedia/getid3 / PHP](php/wikimedia_getid3/README.md)
+- [pygame / Python](python/pygame/README.md)
 - [pytaglib / Python](python/pytaglib/README.md)
 - [audio-file / Rust](rust/audio_file/README.md)
 - [audiotags / Rust](rust/audiotags/README.md)

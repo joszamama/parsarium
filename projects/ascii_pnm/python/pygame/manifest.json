@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "python",
+  "package": "pygame",
+  "release": "2.6.1",
+  "catalog_parser": "data/python/ascii_pnm/parsers.json",
+  "source_lock": "adapters/python/ascii_pnm/requirements.lock",
+  "source_sha256": "1206125f14cae22c44565c9d333607f1d9f59487b1f1432945dfc809aeaa3e88",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "ec5e11f21a4c197fe91f7aea2b2de88e623c73a21fc07b105ac6329a1588457b",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:73b999393d07f2bf65a40373778a44dc9a6d54ad7718d29247d8ff9413c4d6a8",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgb0": [
+      255,
+      0,
+      0
+    ],
+    "rgb1": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Pinned prebuilt native shared-library edge feedback via AFL++ QEMU; no native source-line or function coverage",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.12/site-packages/pygame/",
+  "underlying_coverage_subject_prefix": "/work/source/SDL_image/",
+  "coverage_kind": "native_binary_edges",
+  "binary_feedback_scope": "underlying_shared_library",
+  "binary_feedback_module": "/opt/venv/lib/python3.12/site-packages/pygame.libs/libSDL2_image-2-6bbdaa8d.0.so.0.2.3",
+  "binary_feedback_module_sha256": "70a41c9fb0864e76f87e3957dba6836524fd063f0b470d5f8761a374c5b18bf6",
+  "binary_feedback_variant": "controls/ascii_pnm/black-white.pgm",
+  "binary_feedback_variant_sha256": "29f6a1ca59a8ff644dc66ce3f9b77abd50d6245fedebb35cdf18b5448547051b",
+  "binary_feedback_tool_image_digest": "sha256:d3e2dcafcfbc27bf6b6890e9f9a6e3c420737bb2dc3d8c29d33a76f9c108a090"
+}

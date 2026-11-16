@@ -1,6 +1,6 @@
 # MP3 with ID3v2 / Python
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/python/mp3_id3v2/standard.json)
 
@@ -16,7 +16,7 @@
 - [audioread](audioread/README.md) — verified API path
 - [librosa](librosa/README.md) — verified API path
 - [miniaudio](miniaudio/README.md) — verified API path
-- [pygame](pygame/README.md) — verified API path
+- [pygame](pygame/README.md) — Docker harness ready
 - [av](av/README.md) — verified API path
 - [audiofile](audiofile/README.md) — verified API path
 - [audiomath](audiomath/README.md) — verified API path

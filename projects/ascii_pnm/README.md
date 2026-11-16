@@ -99,6 +99,7 @@
 - [tpmanc/yii2-imagick / PHP](php/tpmanc_yii2_imagick/README.md)
 - [PyQt6 / Python](python/pyqt6/README.md)
 - [PySide6 / Python](python/pyside6/README.md)
+- [pygame / Python](python/pygame/README.md)
 - [ai-image / Rust](rust/ai_image/README.md)
 - [bevy / Rust](rust/bevy/README.md)
 - [bevy_image / Rust](rust/bevy_image/README.md)

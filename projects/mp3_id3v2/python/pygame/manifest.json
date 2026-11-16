@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "python",
+  "package": "pygame",
+  "release": "2.6.1",
+  "catalog_parser": "data/python/mp3_id3v2/parsers.json",
+  "source_lock": "adapters/python/mp3_id3v2/requirements.lock",
+  "source_sha256": "1206125f14cae22c44565c9d333607f1d9f59487b1f1432945dfc809aeaa3e88",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "ec5e11f21a4c197fe91f7aea2b2de88e623c73a21fc07b105ac6329a1588457b",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:73b999393d07f2bf65a40373778a44dc9a6d54ad7718d29247d8ff9413c4d6a8",
+  "platform": "linux/amd64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "duration_ms": 1000
+  },
+  "harness": "harness.py",
+  "coverage": "Pinned prebuilt native shared-library edge feedback via AFL++ QEMU; no native source-line or function coverage",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.12/site-packages/pygame/",
+  "underlying_coverage_subject_prefix": "/work/source/SDL_mixer/",
+  "coverage_kind": "native_binary_edges",
+  "binary_feedback_scope": "underlying_shared_library",
+  "binary_feedback_module": "/opt/venv/lib/python3.12/site-packages/pygame.libs/libmpg123-fad61782.so.0.47.0",
+  "binary_feedback_module_sha256": "283d66c558749013e1be9e1ca49524543600f75f49d1b121ded94b6ed54870fb",
+  "binary_feedback_variant": "controls/mp3_id3v2/tone-tags-v24.mp3",
+  "binary_feedback_variant_sha256": "a5337540e40f66d89398dbc29e366034d21ec5ba5f0cd539392cddb07530616d",
+  "binary_feedback_tool_image_digest": "sha256:d3e2dcafcfbc27bf6b6890e9f9a6e3c420737bb2dc3d8c29d33a76f9c108a090"
+}

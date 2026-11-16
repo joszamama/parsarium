@@ -1,6 +1,6 @@
 # PNG / Python
 
-21 verified third-party API paths; 0 have verified Docker harnesses.
+21 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/png/ranking.md) · [standard API inventory](../../../data/python/png/standard.json)
 
@@ -17,7 +17,7 @@
 - [Wand](wand/README.md) — verified API path
 - [Willow](willow/README.md) — verified API path
 - [pycairo](pycairo/README.md) — verified API path
-- [pygame](pygame/README.md) — verified API path
+- [pygame](pygame/README.md) — Docker harness ready
 - [rasterio](rasterio/README.md) — verified API path
 - [imagesize](imagesize/README.md) — verified API path
 - [apng](apng/README.md) — verified API path

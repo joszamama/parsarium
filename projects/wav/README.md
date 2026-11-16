@@ -106,6 +106,7 @@
 - [soluble/mediatools / PHP](php/soluble_mediatools/README.md)
 - [uberchel/mediainfo4php / PHP](php/uberchel_mediainfo4php/README.md)
 - [wikimedia/getid3 / PHP](php/wikimedia_getid3/README.md)
+- [pygame / Python](python/pygame/README.md)
 - [pytaglib / Python](python/pytaglib/README.md)
 - [simpleaudio / Python](python/simpleaudio/README.md)
 - [audio-file / Rust](rust/audio_file/README.md)

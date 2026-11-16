@@ -1,6 +1,6 @@
 # WAV / Python
 
-21 verified third-party API paths; 2 have verified Docker harnesses.
+21 verified third-party API paths; 3 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/wav/ranking.md) · [standard API inventory](../../../data/python/wav/standard.json)
 
@@ -19,7 +19,7 @@
 - [waveinfo](waveinfo/README.md) — verified API path
 - [audiomath](audiomath/README.md) — verified API path
 - [riffy](riffy/README.md) — verified API path
-- [pygame](pygame/README.md) — verified API path
+- [pygame](pygame/README.md) — Docker harness ready
 - [av](av/README.md) — verified API path
 - [audiofile](audiofile/README.md) — verified API path
 - [pymediainfo](pymediainfo/README.md) — verified API path

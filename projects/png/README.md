@@ -109,6 +109,7 @@
 - [spatie/image / PHP](php/spatie_image/README.md)
 - [sybio/image-workshop / PHP](php/sybio_image_workshop/README.md)
 - [yiisoft/yii2-imagine / PHP](php/yiisoft_yii2_imagine/README.md)
+- [pygame / Python](python/pygame/README.md)
 - [format-png / Rust](rust/format_png/README.md)
 - [gufo-png / Rust](rust/gufo_png/README.md)
 - [image / Rust](rust/image/README.md)

@@ -23,7 +23,10 @@ def check_binary_feedback(project: Path, root: Path, manifest: dict, feedback: d
     module = manifest["binary_feedback_module"]
     module_hash = manifest["binary_feedback_module_sha256"]
     tool_digest = manifest["binary_feedback_tool_image_digest"]
-    if (not module.startswith("/opt/venv/lib/") or not module.endswith(".so.6")
+    module_path = Path(module)
+    if (not module.startswith("/opt/venv/lib/")
+            or ".." in module_path.parts
+            or not re.fullmatch(r"lib[A-Za-z0-9_+.-]+\.so(?:\.[A-Za-z0-9_.-]+)?", module_path.name)
             or not re.fullmatch(r"[0-9a-f]{64}", module_hash)
             or not re.fullmatch(r"sha256:[0-9a-f]{64}", tool_digest)):
         raise ValueError("binary module or tool image is not pinned")
