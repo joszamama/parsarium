@@ -1,0 +1,33 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang cmake curl libboost-filesystem-dev libboost-iostreams-dev \
+    libboost-serialization-dev libclang-rt-21-dev libeigen3-dev llvm make python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://github.com/PointCloudLibrary/pcl/archive/refs/tags/pcl-1.15.1.tar.gz \
+    --output /work/pcl-1.15.1.tar.gz \
+    && echo 'e1d862c7b6bd27a45884a825a2e509bfcbd4561307d5bfe17ce5c8a3d94a6c29  /work/pcl-1.15.1.tar.gz' | sha256sum --check \
+    && mkdir /work/source \
+    && tar -xf /work/pcl-1.15.1.tar.gz -C /work/source --strip-components=1 \
+    && echo 'da16a78985480db58b84fe56ddf12e597285af72fa19a52e7fdf51a68ffa614b  /work/source/io/src/ply_io.cpp' | sha256sum --check \
+    && echo 'af75de2524595e79bb930346660addad07304e366d95874655fd928cfd51a0e3  /work/source/io/src/ply/ply_parser.cpp' | sha256sum --check
+COPY harness.h harness.cpp replay.cpp fuzz.cpp build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang++ --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    llvm python3 libstdc++6 libboost-filesystem-dev libboost-iostreams-dev \
+    libboost-serialization-dev && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/build/lib /work/lib
+COPY --from=build /work/source /work/source
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENV LD_LIBRARY_PATH=/work/lib
+ENTRYPOINT ["/work/run-control.sh"]

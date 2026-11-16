@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "pcl",
+  "release": "1.15.1",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "e1d862c7b6bd27a45884a825a2e509bfcbd4561307d5bfe17ce5c8a3d94a6c29",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "face": [0, 1, 2]},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of PCL PLYReader and its native PLY parser",
+  "coverage_subject_prefix": "/work/source/io/src/",
+  "format_specific_coverage_file_suffix": "/ply_io.cpp",
+  "underlying_coverage_subject_prefix": "/work/source/io/src/ply/",
+  "underlying_format_specific_coverage_file_suffix": "/ply_parser.cpp"
+}
