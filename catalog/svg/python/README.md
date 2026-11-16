@@ -1,6 +1,6 @@
 # SVG / Python
 
-20 verified third-party API paths; 16 have verified Docker harnesses.
+20 verified third-party API paths; 17 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/svg/ranking.md) · [standard API inventory](../../../data/python/svg/standard.json)
 
@@ -14,7 +14,7 @@
 - [svglab](svglab/README.md) — Docker harness ready
 - [svgelements](svgelements/README.md) — Docker harness ready
 - [resvg](resvg/README.md) — Docker harness ready
-- [mpl-simple-svg-parser](mpl-simple-svg-parser/README.md) — verified API path
+- [mpl-simple-svg-parser](mpl-simple-svg-parser/README.md) — Docker harness ready
 - [pyvips](pyvips/README.md) — Docker harness ready
 - [Wand](wand/README.md) — Docker harness ready
 - [scour](scour/README.md) — Docker harness ready

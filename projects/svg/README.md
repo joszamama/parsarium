@@ -96,6 +96,7 @@
 - [CairoSVG / Python](python/cairosvg/README.md)
 - [PyMuPDF / Python](python/pymupdf/README.md)
 - [Wand / Python](python/wand/README.md)
+- [mpl-simple-svg-parser / Python](python/mpl_simple_svg_parser/README.md)
 - [picosvg / Python](python/picosvg/README.md)
 - [picosvgx / Python](python/picosvgx/README.md)
 - [pillow-lunasvg / Python](python/pillow_lunasvg/README.md)
