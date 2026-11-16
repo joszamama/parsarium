@@ -1,4 +1,10 @@
 (() => {
+  document.querySelectorAll("a.language-switch, .mobile-nav a[hreflang]").forEach((link) => {
+    const target = new URL(link.href);
+    target.search = location.search;
+    target.hash = location.hash;
+    link.href = target.href;
+  });
   const toggle = document.querySelector("#mobile-menu-toggle");
   const menu = document.querySelector("#mobile-nav");
   if (!toggle || !menu) return;

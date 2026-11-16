@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203d49">
+  <meta name="description" content="Por qué Parsarium ofrece a la investigación sobre parsers una colección compartida y reproducible de programas y evidencia.">
+  <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg"><link rel="stylesheet" href="{{ROOT}}assets/styles.css">
+  <title>Acerca de Parsarium</title>
+</head>
+<body data-page="about" data-root="{{ROOT}}" data-lang="es">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <!-- SITE_HEADER -->
+  <main id="main" class="about-page">
+    <section class="page-intro about-intro"><div class="container">
+      <p class="section-kicker">ACERCA DEL PROYECTO</p><h1>Un punto de partida común para estudiar parsers.</h1>
+      <p>En mi trabajo sobre fuzzing de formatos me encontré una y otra vez con un problema práctico: elegir y preparar los programas podía exigir tanto cuidado como el propio experimento. Parsarium hace visible ese trabajo previo para que otros puedan reutilizarlo.</p>
+      <div class="page-intro-links"><a href="#the-problem">El problema ↓</a><a href="#the-collection">La colección ↓</a><a href="#what-next">Qué permite hacer ↓</a></div>
+    </div></section>
+
+    <section class="about-story section-pad" id="the-problem"><div class="container about-story-grid">
+      <div><p class="section-kicker">LA DIFICULTAD</p><h2>Los conjuntos de objetivos cambian.</h2></div>
+      <div class="about-prose"><p>Los estudios de fuzzing de parsers y gramáticas suelen reunir su propio conjunto de programas. Ese conjunto puede ser adecuado para el estudio, pero la siguiente persona tiene que repetir la selección, instalación, adaptación de entradas y preparación de controles. Comparar resultados depende entonces de decisiones que no siempre se pueden inspeccionar.</p><p>Quería una colección donde se pudiera ver <strong>por qué está incluido un programa</strong>, qué API local analiza realmente el formato y qué observó el harness con una entrada válida. Es un punto de partida modesto, aunque hacerlo bien en distintos lenguajes y formatos exige bastante trabajo.</p></div>
+    </div></section>
+
+    <section class="about-boundary section-pad"><div class="container about-boundary-grid">
+      <div><p class="section-kicker">¿POR QUÉ PARSERS?</p><h2>Aquí la entrada externa se convierte en comportamiento del programa.</h2><p>Un archivo, mensaje o registro de texto llega al parser mediante una API concreta. El programa toma decisiones a partir de la estructura que encuentra. El formato permite localizar y ejercitar esas entradas en muchas implementaciones.</p><p>Parsarium mantiene el foco en el programa: su versión, familia de parsing, API de entrada, resultado del control y alcance del feedback medido.</p></div>
+      <div class="boundary-card" aria-label="La entrada externa llega a un programa por una API de parsing"><span>ENTRADA EXTERNA</span><strong>archivo · texto · flujo</strong><i aria-hidden="true">↓</i><span>PUNTO DE ENTRADA</span><strong>API de parsing documentada</strong><i aria-hidden="true">↓</i><span>COMPORTAMIENTO OBSERVADO</span><strong>estructura · campos · salida</strong></div>
+    </div></section>
+
+    <section class="about-evidence section-pad" id="the-collection"><div class="container">
+      <div class="section-heading"><div><p class="section-kicker">LA COLECCIÓN</p><h2>Qué contiene un objetivo.</h2><p>Cada ruta tiene evidencia que justifica su inclusión. Las rutas ejecutables añaden un harness Docker y el alcance del feedback registrado.</p></div></div>
+      <div class="about-evidence-grid">
+        <article><h3>Selección que puedes inspeccionar</h3><p>Las pistas específicas de cada formato se contrastan con APIs de parsing documentadas. Los rankings de adopción solo comparan paquetes del mismo formato y ecosistema.</p></article>
+        <article><h3>Un resultado que puedes reproducir</h3><p>Una versión fijada, un control válido pequeño y un adaptador muestran un resultado observable del parsing.</p></article>
+        <article><h3>Un objetivo que puedes ejecutar</h3><p>Los harnesses Docker verificados aceptan entradas y corpus locales. Los registros de cobertura y AFL++ indican qué código proporcionó feedback.</p></article>
+      </div>
+    </div></section>
+
+    <section class="about-possibilities section-pad" id="what-next"><div class="container about-possibilities-grid">
+      <div><p class="section-kicker">POSIBLES USOS</p><h2>Más de un experimento.</h2></div>
+      <div><p>Un conjunto compartido de objetivos puede facilitar la repetición de comparaciones entre fuzzers. También puede servir para estudiar decisiones de diseño recurrentes, patrones de código entre lenguajes y cuestiones de seguridad en distintas implementaciones de un mismo formato.</p><p>Son oportunidades de investigación, no resultados que esta colección afirme haber descubierto. Por ahora, Parsarium reúne los programas, la evidencia y los puntos de entrada ejecutables que permiten plantear esos trabajos.</p><a class="about-action" href="{{ROOT}}atlas/">Explorar los objetivos ↗</a></div>
+    </div></section>
+  </main>
+  <!-- SITE_FOOTER -->
+  <script src="{{ROOT}}assets/site.js" defer></script>
+</body>
+</html>

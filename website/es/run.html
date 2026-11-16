@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203d49">
+  <meta name="description" content="Ejecuta un parser fijado o todos los objetivos Docker verificados de un formato, con registros y feedback de cobertura.">
+  <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg"><link rel="stylesheet" href="{{ROOT}}assets/styles.css">
+  <title>Ejecutar localmente — Parsarium</title>
+</head>
+<body data-page="run" data-root="{{ROOT}}" data-lang="es">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <!-- SITE_HEADER -->
+  <main id="main" class="run-page">
+    <section class="page-intro run-intro"><div class="container"><p class="section-kicker">EJECUTAR LOCALMENTE</p><h1>Ejecuta un objetivo. Luego, todo el conjunto.</h1><p>Cada ruta ejecutable tiene un harness Docker fijado. Empieza con un parser y su control válido; después, repite una entrada en todos los objetivos verificados de un formato.</p><div class="page-intro-links"><a href="#one-target">Un objetivo ↓</a><a href="#whole-format">Todo un formato ↓</a></div></div></section>
+
+    <section class="run-setup section-pad"><div class="container run-setup-grid">
+      <div><p class="section-kicker">ANTES DE EMPEZAR</p><h2>Obtén la colección.</h2><p>Instala e inicia Docker y clona el repositorio. Ejecuta los comandos de esta página desde la raíz del repositorio. La web muestra evidencia guardada; tu ordenador ejecuta la biblioteca real.</p></div>
+      <div class="run-setup-command"><span>TERMINAL</span><code>git clone https://github.com/joszamama/parsarium.git &amp;&amp; cd parsarium</code><button type="button" data-copy="git clone https://github.com/joszamama/parsarium.git && cd parsarium">Copiar</button></div>
+    </div></section>
+
+    <section class="run-targets section-pad" id="one-target"><div class="container">
+      <div class="run-section-heading"><p class="section-kicker">UN OBJETIVO</p><h2>Sigue un parser de principio a fin.</h2><p>Elige un formato. El objetivo destacado muestra su API de entrada, un control fijado, un comando para tu archivo, la reproducción de un corpus y la preparación de AFL++.</p></div>
+      <div class="run-format-picker"><span>ELIGE UN FORMATO</span><div class="specimen-selector" id="demo-tabs" role="tablist" aria-label="Elegir un objetivo por formato"></div></div>
+      <div class="run-target-grid"><aside class="run-target-aside"><h3>Qué demuestra</h3><p>El resultado del control se registró durante la verificación. El comando siguiente genera un nuevo registro desde tu entorno Docker.</p><p>La guía del harness indica la API del parser y el alcance del feedback. La ejecución correcta del proceso y la aceptación de la entrada por el parser se registran por separado.</p><p><a id="format-guide" target="_blank" rel="noopener noreferrer">Leer la guía del formato ↗</a></p><p><a href="{{ROOT}}lab/">Aprender primero la estructura ↗</a></p></aside>
+        <div class="specimen-workbench" id="demo-panel" role="tabpanel" tabindex="0" aria-live="polite"></div>
+      </div>
+    </div></section>
+
+    <section class="run-batch section-pad" id="whole-format"><div class="container run-batch-grid">
+      <div class="run-batch-copy"><p class="section-kicker">TODO UN FORMATO</p><h2>Repite la entrada en la colección.</h2><p><code>run-format</code> selecciona todos los objetivos Docker plenamente verificados de <strong id="run-format-name">PNG</strong>. Hay <strong id="run-format-count">153</strong> objetivos verificados para este formato. Por defecto, cada uno recibe su propio control válido. Añade un archivo para comparar la misma entrada entre parsers.</p><p>Cada objetivo guarda un registro separado. El lote escribe <code>summary.json</code> con el número de objetivos y los resultados. Prueba primero con tres; una ejecución completa puede necesitar tiempo y espacio Docker proporcionales al número de objetivos.</p><p>Añade <code>--ecosystem python</code> para limitar el conjunto. <code>--list</code> muestra los objetivos seleccionados sin iniciar Docker.</p></div>
+      <div class="run-batch-commands">
+        <div class="run-command"><span>VER LOS OBJETIVOS VERIFICADOS</span><code id="run-batch-list">python3 parsarium.py run-format png --list</code><button type="button" data-copy="python3 parsarium.py run-format png --list">Copiar</button></div>
+        <div class="run-command"><span>PRIMERA PRUEBA: TRES OBJETIVOS</span><code id="run-batch-first">python3 parsarium.py run-format png --limit 3 --results runs/png-first-3</code><button type="button" data-copy="python3 parsarium.py run-format png --limit 3 --results runs/png-first-3">Copiar</button></div>
+        <div class="run-command"><span>EJECUTAR CADA CONTROL FIJADO</span><code id="run-batch-controls">python3 parsarium.py run-format png --results runs/png-controls</code><button type="button" data-copy="python3 parsarium.py run-format png --results runs/png-controls">Copiar</button></div>
+        <div class="run-command"><span>UN ARCHIVO EN TODOS LOS OBJETIVOS</span><code id="run-batch-file">python3 parsarium.py run-format png --file INPUT_FILE --results runs/png-my-file</code><button type="button" data-copy="python3 parsarium.py run-format png --file INPUT_FILE --results runs/png-my-file">Copiar</button></div>
+        <div class="run-result-map"><strong>Qué se guarda</strong><code id="run-batch-map">runs/png-controls/<br>├─ &lt;ecosystem&gt;/&lt;target&gt;/&lt;input-hash&gt;.json<br>├─ …<br>└─ summary.json</code><p>Una carpeta por ecosistema y objetivo del formato seleccionado.</p></div>
+      </div>
+    </div></section>
+  </main>
+  <!-- SITE_FOOTER -->
+  <script src="{{ROOT}}assets/site.js" defer></script><script src="{{ROOT}}assets/app.js" defer></script>
+</body>
+</html>

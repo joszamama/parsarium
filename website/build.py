@@ -43,16 +43,16 @@ RANKING_ALIASES = {
     ("java", "ascii_ply", "bteterrarenderer-draco"): "BTETerraRenderer Draco module",
 }
 DEMO_PROJECTS = [
-    "projects/png/python/pypng/manifest.json",
+    "projects/png/c/libpng/manifest.json",
     "projects/zip/rust/zip/manifest.json",
     "projects/mp4/php/getid3/manifest.json",
     "projects/wav/c/dr_wav/manifest.json",
     "projects/pdf/java/pdfbox/manifest.json",
     "projects/svg/rust/usvg/manifest.json",
-    "projects/http11/python/h11/manifest.json",
+    "projects/http11/go/fasthttp/manifest.json",
     "projects/ascii_ply/python/plyfile/manifest.json",
-    "projects/ascii_pnm/python/netpbmfile/manifest.json",
-    "projects/mp3_id3v2/python/mutagen/manifest.json",
+    "projects/ascii_pnm/go/gopnm/manifest.json",
+    "projects/mp3_id3v2/java/jaudiotagger/manifest.json",
 ]
 
 # Each clue is searched in the exact pinned valid control used by the featured
@@ -386,8 +386,8 @@ def build(output: Path) -> None:
              and record["version"] == manifest["release"]),
             None,
         )
-        if parser_record is None:
-            raise ValueError(f"demo target missing from verified catalog: {source}")
+        if parser_record is None or not parser_record.get("targetId"):
+            raise ValueError(f"demo target is not fully runnable: {source}")
         control_path = ROOT / manifest["control"]
         data = control_path.read_bytes()
         if hashlib.sha256(data).hexdigest() != manifest["control_sha256"]:
@@ -446,9 +446,16 @@ def build(output: Path) -> None:
     catalog_json = json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
     (output / "catalog.json").write_text(catalog_json + "\n", encoding="utf-8")
     (output / "CNAME").write_text("parsarium.com\n", encoding="utf-8")
-    def site_header(root: str, active: str) -> str:
-        links = [("Home", "index"), ("Atlas", "atlas"), ("About", "about"),
-                 ("Run locally", "run"), ("Learn", "lab")]
+    def site_header(root: str, asset_root: str, active: str, lang: str) -> str:
+        labels = ({"index": "Inicio", "about": "Acerca de", "atlas": "Atlas",
+                   "run": "Ejecutar", "lab": "Aprender"} if lang == "es" else
+                  {"index": "Home", "about": "About", "atlas": "Atlas",
+                   "run": "Run locally", "lab": "Learn"})
+        links = [(labels[route], route) for route in ("index", "about", "atlas", "run", "lab")]
+        other_lang = "en" if lang == "es" else "es"
+        suffix = "" if active == "index" else f"{active}/"
+        other_url = f"{asset_root}{suffix}" if lang == "es" else f"{asset_root}es/{suffix}"
+        other_label = "English version" if lang == "es" else "Versión en español"
         def nav_items() -> str:
             items = []
             for label, route in links:
@@ -456,36 +463,74 @@ def build(output: Path) -> None:
                 current = ' aria-current="page"' if route == active else ""
                 items.append(f'<a href="{href}"{current}>{label}</a>')
             return "".join(items)
+        home_label = "Inicio de Parsarium" if lang == "es" else "Parsarium home"
+        menu_label = "Menú" if lang == "es" else "Menu"
+        nav_label = "Navegación principal" if lang == "es" else "Main navigation"
+        mobile_label = "Navegación móvil" if lang == "es" else "Mobile navigation"
         return f'''<header class="site-header"><div class="container header-inner">
-          <a class="brand" href="{root or './'}" aria-label="Parsarium home"><span class="brand-mark" aria-hidden="true">P<span class="brand-period">.</span></span>Parsarium</a>
-          <nav class="nav" aria-label="Main navigation">{nav_items()}</nav>
+          <a class="brand" href="{root or './'}" aria-label="{home_label}"><span class="brand-mark" aria-hidden="true">P<span class="brand-period">.</span></span>Parsarium</a>
+          <nav class="nav" aria-label="{nav_label}">{nav_items()}</nav>
+          <a class="language-switch" href="{other_url}" lang="{other_lang}" hreflang="{other_lang}" aria-label="{other_label}">{other_lang.upper()}</a>
           <a class="header-github" href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-          <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
-        </div><nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>{nav_items()}<a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>'''
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">{menu_label}</button>
+        </div><nav class="mobile-nav" id="mobile-nav" aria-label="{mobile_label}" hidden>{nav_items()}<a href="{other_url}" lang="{other_lang}" hreflang="{other_lang}">{other_lang.upper()}</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>'''
 
-    def site_footer(root: str) -> str:
+    def site_footer(root: str, lang: str) -> str:
+        if lang == "es":
+            tagline = "El atlas abierto de parsers."
+            footer_label = "Navegación del pie de página"
+            links = [("Inicio", ""), ("Acerca de", "about/"), ("Atlas", "atlas/"),
+                     ("Ejecutar", "run/"), ("Aprender", "lab/")]
+            note = "APIs de entrada verificadas. Controles fijados. Harnesses ejecutables.<br>Construido a partir de la evidencia del repositorio."
+            origin = "Parsarium es un proyecto de investigación abierto de José Antonio Zamudio Amaya. La colección está disponible para quienes quieran inspeccionar, reproducir o ampliar sus objetivos."
+        else:
+            tagline = "The open parser atlas."
+            footer_label = "Footer navigation"
+            links = [("Home", ""), ("About", "about/"), ("Atlas", "atlas/"),
+                     ("Run locally", "run/"), ("Learn", "lab/")]
+            note = "Verified input APIs. Pinned controls. Runnable harnesses.<br>Built from the repository evidence."
+            origin = "Parsarium is an open research project by José Antonio Zamudio Amaya. The collection is meant for anyone who wants to inspect, reproduce, or extend the target set."
+        links_html = "".join(f'<a href="{root or "./" if not route else root + route}">{label}</a>' for label, route in links)
         return f'''<footer class="site-footer"><div class="container footer-grid">
-          <div><a class="brand footer-brand" href="{root or './'}">Parsarium<span class="brand-period">.</span></a><p>The open parser atlas.</p></div>
-          <nav class="footer-links" aria-label="Footer navigation"><a href="{root or './'}">Home</a><a href="{root}atlas/">Atlas</a><a href="{root}about/">About</a><a href="{root}run/">Run locally</a><a href="{root}lab/">Learn</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
-          <p class="footer-note">Verified input APIs. Pinned controls. Runnable harnesses.<br>Built from the repository evidence.</p>
+          <div><a class="brand footer-brand" href="{root or './'}">Parsarium<span class="brand-period">.</span></a><p>{tagline}</p></div>
+          <nav class="footer-links" aria-label="{footer_label}">{links_html}<a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+          <p class="footer-note">{note}</p><p class="footer-origin">{origin}</p>
         </div></footer>'''
 
     # Real static routes work when loaded directly or refreshed on GitHub Pages.
-    for page in ("index", "atlas", "about", "run", "lab", "why"):
+    for lang, pages in (("en", ("index", "about", "atlas", "run", "lab", "why")),
+                        ("es", ("index", "about", "atlas", "run", "lab"))):
+      for page in pages:
         root = "" if page == "index" else "../"
-        html = (SITE / f"{page}.html").read_text(encoding="utf-8")
-        html = html.replace("<!-- SITE_HEADER -->", site_header(root, page))
-        html = html.replace("<!-- SITE_FOOTER -->", site_footer(root))
-        html = html.replace("{{ROOT}}", root)
+        asset_root = ("../" if page == "index" else "../../") if lang == "es" else root
+        source = (SITE / "es" / f"{page}.html") if lang == "es" else SITE / f"{page}.html"
+        html = source.read_text(encoding="utf-8")
+        html = html.replace("{{ROOT}}assets/", "{{ASSET_ROOT}}assets/")
+        html = html.replace("{{ROOT}}favicon.svg", "{{ASSET_ROOT}}favicon.svg")
+        html = html.replace('data-root="{{ROOT}}"',
+                            'data-root="{{ASSET_ROOT}}" data-locale-root="{{ROOT}}"')
+        html = html.replace("<!-- SITE_HEADER -->", site_header(root, asset_root, page, lang))
+        html = html.replace("<!-- SITE_FOOTER -->", site_footer(root, lang))
+        html = html.replace("{{ROOT}}", root).replace("{{ASSET_ROOT}}", asset_root)
         html = html.replace("{{RUNNABLE}}", f"{catalog['summary']['runnable']:,}")
         html = html.replace("{{VERIFIED}}", f"{catalog['summary']['verified']:,}")
+        if page != "why":
+            suffix = "" if page == "index" else f"{page}/"
+            english_url = f"https://parsarium.com/{suffix}"
+            spanish_url = f"https://parsarium.com/es/{suffix}"
+            canonical = spanish_url if lang == "es" else english_url
+            alternates = (f'<link rel="canonical" href="{canonical}">\n'
+                          f'  <link rel="alternate" hreflang="en" href="{english_url}">\n'
+                          f'  <link rel="alternate" hreflang="es" href="{spanish_url}">\n'
+                          f'  <link rel="alternate" hreflang="x-default" href="{english_url}">')
+            html = html.replace("</head>", f"  {alternates}\n</head>")
         beacon = ("<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
                   f"data-cf-beacon='{{\"token\": \"{CLOUDFLARE_BEACON_TOKEN}\"}}'></script>")
         if html.count("</body>") != 1:
             raise ValueError(f"{page}.html must have one closing body tag")
         if page != "why":
             html = html.replace("</body>", f"  {beacon}\n</body>")
-        destination = output if page == "index" else output / page
+        destination = (output if page == "index" else output / page) if lang == "en" else (output / "es" if page == "index" else output / "es" / page)
         destination.mkdir(parents=True, exist_ok=True)
         (destination / "index.html").write_text(html, encoding="utf-8")
     shutil.copyfile(SITE / "favicon.svg", output / "favicon.svg")
@@ -493,6 +538,14 @@ def build(output: Path) -> None:
     assets.mkdir(exist_ok=True)
     for name in ("styles.css", "app.js", "site.js", "lab.css", "lab.js"):
         shutil.copyfile(SITE / name, assets / name)
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for page in ("index", "about", "atlas", "run", "lab"):
+        suffix = "" if page == "index" else f"{page}/"
+        sitemap.extend((f'  <url><loc>https://parsarium.com/{suffix}</loc></url>',
+                        f'  <url><loc>https://parsarium.com/es/{suffix}</loc></url>'))
+    sitemap.append('</urlset>')
+    (output / "sitemap.xml").write_text("\n".join(sitemap) + "\n", encoding="utf-8")
     print(f"Built {output}: {len(parsers)} verified paths, {len(cells)} cells, {len(manifests)} projects")
 
 

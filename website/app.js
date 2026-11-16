@@ -9,6 +9,11 @@ const safeUrl = (value) => {
   } catch { return "#"; }
 };
 const ecoLabel = { c: "C", cpp: "C++", go: "Go", java: "Java", javascript: "JavaScript", python: "Python", rust: "Rust", php: "PHP" };
+const lang = document.body.dataset.lang || "en";
+const es = lang === "es";
+const tr = (english, spanish) => es ? spanish : english;
+const number = (value) => Number(value).toLocaleString(es ? "es-ES" : "en-US");
+const categoryEs = { Image: "Imagen", Archive: "Archivo", Audio: "Audio", Document: "Documento", Vector: "Vectorial", Protocol: "Protocolo", Geometry: "Geometría", Media: "Multimedia", Text: "Texto" };
 const formatGlyphs = {
   png: '<rect x="54" y="16" width="88" height="70" rx="4" fill="#f8f9ff" stroke="#171448" stroke-width="2"/><rect x="63" y="25" width="70" height="52" fill="#f5efdf"/><rect x="63" y="25" width="35" height="26" fill="#fa7454"/><rect x="98" y="51" width="35" height="26" fill="#b9db79"/><circle cx="113" cy="36" r="10" fill="#171448"/><path d="M63 77 83 52l18 25" fill="none" stroke="#171448" stroke-width="3"/>',
   zip: '<rect x="55" y="19" width="87" height="68" rx="5" fill="#fff6e5" stroke="#171448" stroke-width="2"/><path d="M55 41h87M55 64h87" stroke="#171448" stroke-width="2"/><path d="M88 19v68" stroke="#171448" stroke-width="2" stroke-dasharray="5 4"/><rect x="79" y="45" width="18" height="15" rx="2" fill="#ff6877" stroke="#171448" stroke-width="2"/>',
@@ -28,6 +33,7 @@ const artColors = {
 
 let catalog;
 const siteRoot = document.body.dataset.root || "";
+const localeRoot = document.body.dataset.localeRoot ?? siteRoot;
 const page = document.body.dataset.page;
 const pageSize = 18;
 let visible = pageSize;
@@ -58,20 +64,20 @@ function announceCopy(button, label) {
   setTimeout(() => { button.textContent = old; }, 1500);
 }
 async function copyText(value, button) {
-  try { await navigator.clipboard.writeText(value); announceCopy(button, "Copied ✓"); }
-  catch { announceCopy(button, "Copy unavailable"); }
+  try { await navigator.clipboard.writeText(value); announceCopy(button, tr("Copied ✓", "Copiado ✓")); }
+  catch { announceCopy(button, tr("Copy unavailable", "No se pudo copiar")); }
 }
 
 function renderFormats() {
   $("#format-grid").innerHTML = catalog.formats.map((format) => `
-    <button class="format-card" type="button" data-format="${escapeHtml(format.id)}" aria-label="Explore ${escapeHtml(format.label)} parsers">
+    <button class="format-card" type="button" data-format="${escapeHtml(format.id)}" aria-label="${es ? "Explorar parsers de" : "Explore"} ${escapeHtml(format.label)}${es ? "" : " parsers"}">
       <span class="format-art" style="background:${artColors[format.id]}"><svg viewBox="0 0 196 104" aria-hidden="true">${formatGlyphs[format.id]}</svg></span>
-      <span class="format-content"><span class="format-category">${escapeHtml(format.category)}</span><span class="format-name">${escapeHtml(format.label)}</span><span class="format-count"><b>${format.verified}</b> third-party paths · <b>${format.runnable}</b> runnable targets</span></span>
+      <span class="format-content"><span class="format-category">${escapeHtml(es ? categoryEs[format.category] || format.category : format.category)}</span><span class="format-name">${escapeHtml(format.label)}</span><span class="format-count"><b>${number(format.verified)}</b> ${tr("third-party paths", "rutas de terceros")} · <b>${number(format.runnable)}</b> ${tr("runnable targets", "objetivos ejecutables")}</span></span>
     </button>`).join("");
   $("#format-grid").addEventListener("click", (event) => {
     const button = event.target.closest("[data-format]");
     if (!button) return;
-    location.href = `${siteRoot}atlas/?format=${encodeURIComponent(button.dataset.format)}`;
+    location.href = `${localeRoot}atlas/?format=${encodeURIComponent(button.dataset.format)}`;
   });
 }
 function currentFilters() {
@@ -99,21 +105,21 @@ function updateRunUrl() {
 }
 function parserCard(parser) {
   const project = parser.projectUrl ? `<a href="${safeUrl(parser.projectUrl)}" target="_blank" rel="noopener noreferrer">Harness ↗</a>` : "";
-  const badge = parser.type === "standard" ? "STANDARD + RUNNABLE" : parser.projectUrl ? "RUNNABLE" : "";
-  const details = parser.type === "standard" ? "standard library API" : `${parser.license} · scope: ${parser.scope}`;
+  const badge = parser.type === "standard" ? tr("STANDARD + RUNNABLE", "ESTÁNDAR + EJECUTABLE") : parser.projectUrl ? tr("RUNNABLE", "EJECUTABLE") : "";
+  const details = parser.type === "standard" ? tr("standard library API", "API de la biblioteca estándar") : `${parser.license} · ${tr("scope", "alcance")}: ${parser.scope}`;
   const popularity = parser.type === "standard"
-    ? "Standard/runtime API · outside third-party ranking"
+    ? tr("Standard/runtime API · outside third-party ranking", "API estándar o del runtime · fuera del ranking de terceros")
     : parser.rank?.match(/^\d+=?$/)
-      ? `#${escapeHtml(parser.rank.replace("=", ""))}${parser.rank.endsWith("=") ? " (tie)" : ""} within ${escapeHtml(ecoLabel[parser.ecosystem])} × ${escapeHtml(formatLabel(parser.format))} · ${escapeHtml(parser.popularityMetric)}: ${escapeHtml(parser.metricValue)}`
-      : parser.rank === "unranked" ? "Unranked · adoption metric unavailable" : "Ranking match unresolved · see source";
+      ? `#${escapeHtml(parser.rank.replace("=", ""))}${parser.rank.endsWith("=") ? tr(" (tie)", " (empate)") : ""} ${tr("within", "en")} ${escapeHtml(ecoLabel[parser.ecosystem])} × ${escapeHtml(formatLabel(parser.format))} · ${escapeHtml(parser.popularityMetric)}: ${escapeHtml(parser.metricValue)}`
+      : parser.rank === "unranked" ? tr("Unranked · adoption metric unavailable", "Sin ranking · métrica de adopción no disponible") : tr("Ranking match unresolved · see source", "Correspondencia del ranking sin resolver · ver fuente");
   return `<article class="parser-card-item">
     <div class="parser-meta"><span>${escapeHtml(formatLabel(parser.format))} / ${escapeHtml(ecoLabel[parser.ecosystem])}</span>${badge ? `<span class="runnable-badge">${badge}</span>` : ""}</div>
     <h3>${escapeHtml(parser.name)}</h3><span class="parser-version">${escapeHtml(parser.version)} · ${escapeHtml(details)}</span>
     <p class="parser-popularity">${popularity}${parser.rankingUrl ? ` <a href="${safeUrl(parser.rankingUrl)}" target="_blank" rel="noopener noreferrer">Ranking ↗</a>` : ""}</p>
-    <p class="parser-api"><strong>Input API:</strong> ${escapeHtml(parser.inputApi)}</p>
-    <p class="parser-family">Family: ${escapeHtml(parser.family)}</p>
-    <div class="parser-card-links"><a href="${safeUrl(parser.guideUrl)}" target="_blank" rel="noopener noreferrer">Parser guide ↗</a><a href="${safeUrl(parser.documentation)}" target="_blank" rel="noopener noreferrer">API docs ↗</a><a href="${safeUrl(parser.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a>${project}</div>
-    ${parser.targetId ? `<button class="use-target" type="button" data-use-target="${escapeHtml(parser.targetId)}">Use this target <span aria-hidden="true">→</span></button>` : ""}
+    <p class="parser-api"><strong>${tr("Input API", "API de entrada")}:</strong> ${escapeHtml(parser.inputApi)}</p>
+    <p class="parser-family">${tr("Family", "Familia")}: ${escapeHtml(parser.family)}</p>
+    <div class="parser-card-links"><a href="${safeUrl(parser.guideUrl)}" target="_blank" rel="noopener noreferrer">${tr("Parser guide", "Guía del parser")} ↗</a><a href="${safeUrl(parser.documentation)}" target="_blank" rel="noopener noreferrer">${tr("API docs", "Documentación de la API")} ↗</a><a href="${safeUrl(parser.evidenceUrl)}" target="_blank" rel="noopener noreferrer">${tr("Evidence", "Evidencia")} ↗</a>${project}</div>
+    ${parser.targetId ? `<button class="use-target" type="button" data-use-target="${escapeHtml(parser.targetId)}">${tr("Use this target", "Usar este objetivo")} <span aria-hidden="true">→</span></button>` : ""}
   </article>`;
 }
 function renderAtlas() {
@@ -141,21 +147,21 @@ function renderAtlas() {
   }
   else if (!filters.ecosystem) result = roundRobin(result, (parser) => parser.ecosystem);
   const shown = result.slice(0, visible);
-  const view = !filters.format ? " · across formats and ecosystems" : !filters.ecosystem ? " · across ecosystems" : "";
-  $("#result-count").textContent = `Showing ${shown.length.toLocaleString()} of ${result.length.toLocaleString()} ${filters.runnable ? "runnable targets" : "verified package paths"}${view}`;
-  $("#parser-grid").innerHTML = shown.length ? shown.map(parserCard).join("") : '<div class="empty-state">No parsers match those filters. Try another format, ecosystem, or search term.</div>';
+  const view = !filters.format ? tr(" · across formats and ecosystems", " · en todos los formatos y ecosistemas") : !filters.ecosystem ? tr(" · across ecosystems", " · en todos los ecosistemas") : "";
+  $("#result-count").textContent = `${tr("Showing", "Mostrando")} ${number(shown.length)} ${tr("of", "de")} ${number(result.length)} ${filters.runnable ? tr("runnable targets", "objetivos ejecutables") : tr("verified package paths", "rutas de paquetes verificadas")}${view}`;
+  $("#parser-grid").innerHTML = shown.length ? shown.map(parserCard).join("") : `<div class="empty-state">${tr("No parsers match those filters. Try another format, ecosystem, or search term.", "Ningún parser coincide con esos filtros. Prueba otro formato, ecosistema o término de búsqueda.")}</div>`;
   $("#load-more").hidden = shown.length >= result.length;
   const note = $("#cell-note");
   if (filters.format && filters.ecosystem) {
     const cell = catalog.cells.find((item) => item.format === filters.format && item.ecosystem === filters.ecosystem);
     note.hidden = false;
     note.innerHTML = `<strong>${escapeHtml(formatLabel(filters.format))} × ${escapeHtml(ecoLabel[filters.ecosystem])}</strong>
-      <p>${cell.verified} verified third-party paths · ${cell.runnable} runnable harness${cell.runnable === 1 ? "" : "es"} · ${cell.standard} standard/runtime APIs · ${cell.unresolved} unresolved documentation leads.</p>
-      <div class="cell-links"><a href="${safeUrl(cell.cellGuideUrl)}" target="_blank" rel="noopener noreferrer">All parser & runtime guides ↗</a>
-      <a href="${safeUrl(cell.rankingUrl)}" target="_blank" rel="noopener noreferrer">Popularity ranking & search limits ↗</a>
-      <a href="${safeUrl(cell.standardUrl)}" target="_blank" rel="noopener noreferrer">Standard API inventory ↗</a>
-      ${cell.standardProjectUrl ? `<a href="${safeUrl(cell.standardProjectUrl)}" target="_blank" rel="noopener noreferrer">Standard API harness ↗</a>` : ""}</div>
-      <details><summary>What remains uncertain</summary><p>${escapeHtml(cell.uncertainty)}</p></details>`;
+      <p>${number(cell.verified)} ${tr("verified third-party paths", "rutas de terceros verificadas")} · ${number(cell.runnable)} ${tr("runnable harnesses", "harnesses ejecutables")} · ${number(cell.standard)} ${tr("standard/runtime APIs", "APIs estándar o del runtime")} · ${number(cell.unresolved)} ${tr("unresolved documentation leads", "pistas documentales sin resolver")}.</p>
+      <div class="cell-links"><a href="${safeUrl(cell.cellGuideUrl)}" target="_blank" rel="noopener noreferrer">${tr("All parser & runtime guides", "Todas las guías de parsers y runtimes")} ↗</a>
+      <a href="${safeUrl(cell.rankingUrl)}" target="_blank" rel="noopener noreferrer">${tr("Popularity ranking & search limits", "Ranking de popularidad y límites de búsqueda")} ↗</a>
+      <a href="${safeUrl(cell.standardUrl)}" target="_blank" rel="noopener noreferrer">${tr("Standard API inventory", "Inventario de APIs estándar")} ↗</a>
+      ${cell.standardProjectUrl ? `<a href="${safeUrl(cell.standardProjectUrl)}" target="_blank" rel="noopener noreferrer">${tr("Standard API harness", "Harness de API estándar")} ↗</a>` : ""}</div>
+      <details><summary>${tr("What remains uncertain", "Qué sigue siendo incierto")}</summary><p>${escapeHtml(cell.uncertainty)}</p></details>`;
   } else { note.hidden = true; note.innerHTML = ""; }
   updateUrl(filters);
 }
@@ -180,7 +186,7 @@ function initAtlas() {
   $("#parser-grid").addEventListener("click", (event) => {
     const button = event.target.closest("[data-use-target]");
     if (!button) return;
-    location.href = `${siteRoot}run/?target=${encodeURIComponent(button.dataset.useTarget)}`;
+    location.href = `${localeRoot}run/?target=${encodeURIComponent(button.dataset.useTarget)}`;
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
@@ -194,7 +200,7 @@ function showDemoForFormat(format) {
   if (index >= 0) renderDemo(index);
 }
 function commandBlock(label, command, key) {
-  return `<div class="command-block"><div class="command-label"><span>${escapeHtml(label)}</span><button type="button" data-command="${key}">Copy</button></div><pre><code><span>$</span> ${escapeHtml(command)}</code></pre></div>`;
+  return `<div class="command-block"><div class="command-label"><span>${escapeHtml(label)}</span><button type="button" data-command="${key}">${tr("Copy", "Copiar")}</button></div><pre><code><span>$</span> ${escapeHtml(command)}</code></pre></div>`;
 }
 function renderDemo(index) {
   const demo = catalog.demos[index];
@@ -212,9 +218,9 @@ function renderTarget(targetId) {
 function renderWorkbench(demo, selectedTarget) {
   const format = catalog.formats.find((item) => item.id === demo.format);
   $("#format-guide").href = safeUrl(format.guideUrl);
-  $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
+  $("#format-guide").textContent = `${tr("Read the", "Leer la guía del formato")} ${format.label}${es ? "" : " format guide"} ↗`;
   $("#run-format-name").textContent = format.label;
-  $("#run-format-count").textContent = format.runnable.toLocaleString();
+  $("#run-format-count").textContent = number(format.runnable);
   const batchCommands = {
     "run-batch-list": `python3 parsarium.py run-format ${demo.format} --list`,
     "run-batch-first": `python3 parsarium.py run-format ${demo.format} --limit 3 --results runs/${demo.format}-first-3`,
@@ -240,26 +246,26 @@ function renderWorkbench(demo, selectedTarget) {
     : `<a href="${siteRoot}${escapeHtml(demo.controlUrl)}" download>${escapeHtml(controlName)} ↓</a>`;
   const resultPreview = Object.fromEntries(Object.entries(demo.expectedOutput ?? {}).slice(0, 4));
   const coverageBadge = demo.coverageKind === "native_binary_edges"
-    ? `${Number(demo.coverageTuples || 0).toLocaleString()} binary edge tuples · no source lines`
+    ? `${number(demo.coverageTuples || 0)} ${tr("binary edge tuples · no source lines", "tuplas de aristas binarias · sin líneas de código fuente")}`
     : Number.isInteger(demo.coverageLines)
-      ? `${demo.coverageLines.toLocaleString()} package-source lines covered`
-      : "See guide for coverage scope";
-  panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / ${selectedTarget ? "YOUR SELECTED TARGET" : "FEATURED EXAMPLE"}</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
+      ? `${number(demo.coverageLines)} ${tr("package-source lines covered", "líneas del paquete cubiertas")}`
+      : tr("See guide for coverage scope", "Consulta la guía para conocer el alcance");
+  panel.innerHTML = `<div class="workbench-top"><span>${escapeHtml(formatLabel(demo.format))} / ${selectedTarget ? tr("YOUR SELECTED TARGET", "OBJETIVO SELECCIONADO") : tr("FEATURED EXAMPLE", "EJEMPLO DESTACADO")}</span><span class="workbench-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="workbench-body">
-      ${selectedTarget ? `<div class="selected-target-note"><span>Picked from the atlas</span><button type="button" id="restore-example">Show featured example ↺</button></div>` : ""}
-      <div class="target-head"><div><span class="workbench-step">PINNED PARSER</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · release ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.projectGuideUrl)}" target="_blank" rel="noopener noreferrer">Harness guide ↗</a></div>
-      <p class="target-api"><strong>Documented input API</strong><code>${escapeHtml(demo.inputApi)}</code></p>
-      <div class="result-preview"><div class="result-preview-head"><strong>Observed control result · preview</strong><span>${escapeHtml(coverageBadge)}</span></div><pre>${escapeHtml(JSON.stringify(resultPreview))}</pre></div>
-      <div class="run-step"><div class="run-step-head"><h4>Check the target</h4></div><p>Run its supplied valid control, ${controlLink} (${demo.bytes.toLocaleString()} bytes).</p>
-        ${commandBlock("VALID CONTROL", demo.controlCommand, "control")}
-        <details class="control-evidence"><summary>What does this control check?</summary><p>These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>${demo.coverageLimit ? `<p class="coverage-limit">Coverage scope: ${escapeHtml(demo.coverageLimit)}</p>` : ""}</details>
+      ${selectedTarget ? `<div class="selected-target-note"><span>${tr("Picked from the atlas", "Elegido en el atlas")}</span><button type="button" id="restore-example">${tr("Show featured example", "Mostrar ejemplo destacado")} ↺</button></div>` : ""}
+      <div class="target-head"><div><span class="workbench-step">${tr("PINNED PARSER", "PARSER FIJADO")}</span><h3>${escapeHtml(demo.package)}</h3><p>${escapeHtml(ecoLabel[demo.ecosystem])} · ${tr("release", "versión")} ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.projectGuideUrl)}" target="_blank" rel="noopener noreferrer">${tr("Harness guide", "Guía del harness")} ↗</a></div>
+      <p class="target-api"><strong>${tr("Documented input API", "API de entrada documentada")}</strong><code>${escapeHtml(demo.inputApi)}</code></p>
+      <div class="result-preview"><div class="result-preview-head"><strong>${tr("Observed control result · preview", "Resultado observado del control · vista previa")}</strong><span>${escapeHtml(coverageBadge)}</span></div><pre>${escapeHtml(JSON.stringify(resultPreview))}</pre></div>
+      <div class="run-step"><div class="run-step-head"><h4>${tr("Check the target", "Comprueba el objetivo")}</h4></div><p>${tr("Run its supplied valid control", "Ejecuta su control válido")}, ${controlLink} (${number(demo.bytes)} bytes).</p>
+        ${commandBlock(tr("VALID CONTROL", "CONTROL VÁLIDO"), demo.controlCommand, "control")}
+        <details class="control-evidence"><summary>${tr("What does this control check?", "¿Qué comprueba este control?")}</summary><p>${tr("These fields were observed during format-aware control verification and checked against the harness receipt. This command runs the same control through the Docker harness and saves a JSON receipt.", "Estos campos se observaron al verificar el control y se contrastaron con el registro del harness. El comando ejecuta el mismo control en Docker y guarda un registro JSON.")}</p><pre class="output-view">${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>${demo.coverageLimit ? `<p class="coverage-limit">${tr("Coverage scope", "Alcance de la cobertura")}: ${escapeHtml(demo.coverageLimit)}</p>` : ""}</details>
       </div>
-      <div class="run-step"><div class="run-step-head"><h4>Run your file</h4></div><p>Replace <code>INPUT_FILE</code> with a local file of the same format.</p>
-        ${commandBlock("ONE INPUT", demo.inputCommand, "input")}
+      <div class="run-step"><div class="run-step-head"><h4>${tr("Run your file", "Ejecuta tu archivo")}</h4></div><p>${tr("Replace", "Sustituye")} <code>INPUT_FILE</code> ${tr("with a local file of the same format.", "por un archivo local del mismo formato.")}</p>
+        ${commandBlock(tr("ONE INPUT", "UNA ENTRADA"), demo.inputCommand, "input")}
       </div>
-      <div class="run-step"><div class="run-step-head"><h4>Replay a corpus</h4></div><p>Replace <code>CORPUS_DIR</code> with a directory of files from Fandango, another generator, or your own collection. Parsarium records each run.</p>
-        ${commandBlock("MANY INPUTS", demo.replayCommand, "replay")}
-        <details class="afl-details"><summary>Use AFL++ with this target</summary><p>Build the instrumented image, prepare its valid seed, then run a short campaign.</p><pre><code>${afl}</code></pre><button type="button" data-command="afl">Copy AFL++ commands</button></details>
+      <div class="run-step"><div class="run-step-head"><h4>${tr("Replay a corpus", "Reproduce un corpus")}</h4></div><p>${tr("Replace", "Sustituye")} <code>CORPUS_DIR</code> ${tr("with a directory of files from Fandango, another generator, or your own collection. Parsarium records each run.", "por una carpeta de archivos de Fandango, otro generador o tu propia colección. Parsarium registra cada ejecución.")}</p>
+        ${commandBlock(tr("MANY INPUTS", "MUCHAS ENTRADAS"), demo.replayCommand, "replay")}
+        <details class="afl-details"><summary>${tr("Use AFL++ with this target", "Usa AFL++ con este objetivo")}</summary><p>${tr("Build the instrumented image, prepare its valid seed, then run a short campaign.", "Construye la imagen instrumentada, prepara su semilla válida y ejecuta una campaña breve.")}</p><pre><code>${afl}</code></pre><button type="button" data-command="afl">${tr("Copy AFL++ commands", "Copiar comandos de AFL++")}</button></details>
       </div>
     </div>`;
   panel.querySelectorAll("[data-command]").forEach((button) => button.addEventListener("click", () => {
@@ -299,16 +305,16 @@ async function start() {
     if (!response.ok) throw new Error(`Catalog HTTP ${response.status}`);
     catalog = await response.json();
     if (page === "home") {
-      $("#stat-verified").textContent = catalog.summary.verified.toLocaleString();
+      $("#stat-verified").textContent = number(catalog.summary.verified);
       $("#stat-formats").textContent = catalog.summary.formats;
       $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
-      $("#stat-runnable").textContent = catalog.summary.runnable.toLocaleString();
+      $("#stat-runnable").textContent = number(catalog.summary.runnable);
       renderFormats();
     } else if (page === "atlas") initAtlas();
     else if (page === "run") initDemo();
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
   } catch (error) {
-    document.querySelector("main")?.insertAdjacentHTML("afterbegin", `<div class="container page-error" role="alert">The catalog view could not start. <a href="${siteRoot}catalog.json">Open the catalog data</a> or reload this page.</div>`);
+    document.querySelector("main")?.insertAdjacentHTML("afterbegin", `<div class="container page-error" role="alert">${tr("The catalog view could not start.", "No se pudo iniciar la vista del catálogo.")} <a href="${siteRoot}catalog.json">${tr("Open the catalog data", "Abrir los datos del catálogo")}</a> ${tr("or reload this page.", "o recarga esta página.")}</div>`);
     console.error(error);
   }
 }

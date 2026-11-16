@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203d49">
+  <meta name="description" content="Busca parsers de formatos verificados por formato y ecosistema; consulta APIs de entrada, adopción y harnesses ejecutables.">
+  <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg"><link rel="stylesheet" href="{{ROOT}}assets/styles.css">
+  <title>Atlas — Parsarium</title>
+</head>
+<body data-page="atlas" data-root="{{ROOT}}" data-lang="es">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <!-- SITE_HEADER -->
+  <main id="main">
+    <section class="page-intro atlas-intro"><div class="container">
+      <p class="section-kicker">EL ATLAS</p><h1>Encuentra un parser.</h1>
+      <p>Filtra el catálogo por formato, ecosistema o API. Cada ruta verificada registra una versión fijada y un resultado específico del formato; los objetivos ejecutables también incluyen un harness Docker y un registro de feedback.</p>
+      <div class="page-intro-links"><a href="{{ROOT}}run/">Cómo ejecutar un objetivo ↗</a><a href="{{ROOT}}about/">Por qué existe este catálogo ↗</a></div>
+    </div></section>
+    <section class="atlas-section section-pad" id="atlas" aria-labelledby="atlas-title"><div class="container">
+      <div class="section-heading atlas-heading"><div><p class="section-kicker">BUSCA EN LA COLECCIÓN</p><h2 id="atlas-title">Explora el catálogo.</h2><p>La popularidad solo compara parsers del mismo formato y ecosistema. Si falta una métrica, el paquete queda sin clasificar. Los nombres de APIs, métricas y alcances conservan el idioma de la evidencia original.</p></div></div>
+      <div class="readiness-strip" aria-label="Significado de verificado y ejecutable">
+        <div><div><strong>Ruta verificada</strong><p>Una API documentada analizó un control local válido y produjo un resultado específico del formato.</p></div></div>
+        <div><div><strong>Objetivo ejecutable</strong><p>Un harness Docker fijado tiene un resultado del control, feedback de cobertura y un plan de reproducción. Cada guía declara el alcance de la medición.</p></div></div>
+      </div>
+      <div class="atlas-toolbar">
+        <label class="search-label" for="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar biblioteca, API o familia…" autocomplete="off"><span class="key-hint" aria-hidden="true">/</span></label>
+        <div class="filter-row"><label>Formato <select id="format-filter"><option value="">Todos los formatos</option></select></label><label>Ecosistema <select id="ecosystem-filter"><option value="">Todos los ecosistemas</option></select></label><label class="check-filter"><input id="runnable-filter" type="checkbox"><span class="switch" aria-hidden="true"></span> Solo ejecutables</label></div>
+      </div>
+      <div class="atlas-summary"><p id="result-count" aria-live="polite">Cargando el atlas…</p><button id="clear-filters" class="clear-button" type="button">Limpiar filtros <span aria-hidden="true">↺</span></button></div>
+      <div id="cell-note" class="cell-note" hidden></div><div id="parser-grid" class="parser-grid"></div>
+      <div class="load-wrap"><button id="load-more" class="button button-outline" type="button" hidden>Mostrar más <span aria-hidden="true">↓</span></button></div>
+    </div></section>
+  </main>
+  <!-- SITE_FOOTER -->
+  <script src="{{ROOT}}assets/site.js" defer></script><script src="{{ROOT}}assets/app.js" defer></script>
+</body>
+</html>
