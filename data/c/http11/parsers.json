@@ -76,6 +76,7 @@
     "input_api": "lws_create_context in no-listen server mode; lws_adopt_socket_vhost_readbuf(vhost, local socketpair fd, local HTTP request bytes, length); LWS_CALLBACK_HTTP and parsed header/query accessors",
     "family": "libwebsockets C HTTP/1 parser in the server adoption path; independent from llhttp and LibHTP",
     "scope": "HTTP/1.1 GET request method, path, query argument and Host header from local read buffer",
+    "harness_note": "The Docker harness accepts at most 2048 initial bytes, the documented limit of lws_adopt_socket_vhost_readbuf; larger inputs are rejected before parsing.",
     "adapter": "adapters/c/http11/libwebsockets.c",
     "control": "controls/http11/request.http",
     "expected_output": {

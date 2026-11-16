@@ -19,6 +19,8 @@
 }
 ```
 
+The Docker harness accepts at most 2048 initial bytes, the documented limit of lws_adopt_socket_vhost_readbuf; larger inputs are rejected before parsing.
+
 ## Run this target
 
 [Docker harness and verification receipt](../../../../projects/http11/c/libwebsockets/README.md)

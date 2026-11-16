@@ -146,6 +146,8 @@ def main() -> None:
                          json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
                 if entry.get("family_note"):
                     lines += [entry["family_note"], ""]
+                if entry.get("harness_note"):
+                    lines += [entry["harness_note"], ""]
                 if ready:
                     project_path, manifest = project
                     project_dir = project_path.parent

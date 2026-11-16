@@ -21,6 +21,8 @@
 
  Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine.
 
+The Docker harness accepts at most 2048 initial bytes, the documented limit of lws_adopt_socket_vhost_readbuf; larger inputs are rejected before parsing.
+
 ## Run this target
 
 [Docker harness and verification receipt](../../../../projects/http11/cpp/libwebsockets/README.md)

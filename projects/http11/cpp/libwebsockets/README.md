@@ -15,5 +15,3 @@ python3 parsarium.py afl prepare http11 cpp libwebsockets runs/http11-libwebsock
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
-
-The documented `lws_adopt_socket_vhost_readbuf` API accepts at most 2048 initial bytes; the harness and replay reject larger inputs before calling libwebsockets. Header and query copy failures reject the parse.
