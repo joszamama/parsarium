@@ -21,6 +21,11 @@
 
 Own ZIP reader and entry data API; DEFLATE uses compression support. The C++ path reuses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/libarchive/README.md)
+
+```sh
+python3 parsarium.py build zip cpp libarchive
+python3 parsarium.py run zip cpp libarchive controls/zip/hello.zip
+```

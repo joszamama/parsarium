@@ -6,6 +6,8 @@
 
 - [junzip / C](c/junzip/README.md)
 - [kuba-zip / C](c/kuba-zip/README.md)
+- [libarchive / C](c/libarchive/README.md)
+- [libgsf / C](c/libgsf/README.md)
 - [libzip / C](c/libzip/README.md)
 - [lowzip / C](c/lowzip/README.md)
 - [miniz / C](c/miniz/README.md)
@@ -18,6 +20,8 @@
 - [zziplib / C](c/zziplib/README.md)
 - [junzip / C++](cpp/junzip/README.md)
 - [kuba-zip / C++](cpp/kuba-zip/README.md)
+- [libarchive / C++](cpp/libarchive/README.md)
+- [libgsf / C++](cpp/libgsf/README.md)
 - [libzip / C++](cpp/libzip/README.md)
 - [libzippp / C++](cpp/libzippp/README.md)
 - [lowzip / C++](cpp/lowzip/README.md)

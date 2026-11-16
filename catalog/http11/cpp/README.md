@@ -1,6 +1,6 @@
 # HTTP/1.1 / C++
 
-20 verified third-party API paths; 7 have verified Docker harnesses.
+20 verified third-party API paths; 8 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/http11/ranking.md) · [standard API inventory](../../../data/cpp/http11/standard.json)
 
@@ -18,7 +18,7 @@
 - [libhv](libhv/README.md) — verified API path
 - [libparsehttp](libparsehttp/README.md) — Docker harness ready
 - [libevhtp](libevhtp/README.md) — verified API path
-- [HTTPParserC](httpparserc/README.md) — verified API path
+- [HTTPParserC](httpparserc/README.md) — Docker harness ready
 - [libsoup](libsoup/README.md) — verified API path
 - [libmicrohttpd](libmicrohttpd/README.md) — verified API path
 - [libwebsockets](libwebsockets/README.md) — verified API path
