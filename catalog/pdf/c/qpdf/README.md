@@ -19,6 +19,11 @@
 
 C translation unit linked with C++ linker, as official qpdf library documentation requires; shares qpdf engine with C++ PDF cell.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/c/qpdf/README.md)
+
+```sh
+python3 parsarium.py build pdf c qpdf
+python3 parsarium.py run pdf c qpdf controls/pdf/one-page.pdf
+```

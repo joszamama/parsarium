@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "c",
+  "package": "qpdf",
+  "release": "12.4.2",
+  "catalog_parser": "data/c/pdf/parsers.json",
+  "source_lock": "data/c/pdf/source-lock.json",
+  "source_sha256": "8a58af5b6141319287c1883bec8bd1bd545b7567b7fc5e6ce5d25a1c85f36397",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned qpdf PDF parser",
+  "coverage_subject_prefix": "/work/source/libqpdf/",
+  "format_specific_coverage_file_suffix": "/QPDFParser.cc"
+}

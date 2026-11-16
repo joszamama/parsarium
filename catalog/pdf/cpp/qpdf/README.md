@@ -19,6 +19,11 @@
 
 Native qpdf C++ parser; distinct from Poppler and PoDoFo.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/qpdf/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp qpdf
+python3 parsarium.py run pdf cpp qpdf controls/pdf/one-page.pdf
+```
