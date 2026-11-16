@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "cpp",
+  "package": "poppler",
+  "release": "26.11.0",
+  "catalog_parser": "data/cpp/pdf/parsers.json",
+  "source_lock": "projects/pdf/cpp/poppler/source-lock.json",
+  "source_sha256": "41c32680160addf5a8dd7a830e4869c01e9f6bee1abb91e44fabd1ba9d7828fb",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in the pinned Poppler C++ frontend and the Poppler PDF core parser it calls",
+  "parser_family": "Poppler PDF parser; the C++ frontend (cpp/) and the GLib C frontend (glib/, data/c/pdf poppler-glib) are wrappers over the same Poppler core in poppler/ and are one parser family, not independent engines",
+  "coverage_subject_prefix": "/work/source/cpp/",
+  "format_specific_coverage_file_suffix": "/poppler-document.cpp",
+  "underlying_coverage_subject_prefix": "/work/source/poppler/",
+  "underlying_format_specific_coverage_file_suffix": "/Parser.cc"
+}
