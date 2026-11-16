@@ -10,13 +10,26 @@
       "adapter": "adapters/javascript/wav_browser.mjs",
       "control": "controls/wav/four-samples.wav",
       "result": "data/javascript/wav/verification.json",
-      "scope": "Browser-bundled Web Audio decoding; the resulting AudioBuffer reports sample rate, channels, sample count, and PCM signs."
+      "scope": "Browser-bundled Web Audio decoding; the resulting AudioBuffer reports sample rate, channels, sample count, and PCM signs.",
+      "expected": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "sampleCount": 4,
+        "sampleSigns": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      }
     }
   ],
   "no_api_findings": [
     {
       "runtime": "Node.js 26.10.0 core modules",
-      "official_documentation_scope": ["https://nodejs.org/download/release/v26.10.0/docs/api/"],
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/"
+      ],
       "finding": "The versioned core-module index lists no WAV-specific reader or decoder. Buffer, fs, and streams offer generic bytes/I/O and do not meet parser eligibility. This finding is limited to the documented Node.js core API index."
     }
   ],
