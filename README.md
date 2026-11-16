@@ -1,104 +1,133 @@
+<p align="center"><a href="https://parsarium.com"><img src=".github/assets/banner.svg" alt="Parsarium: an open testbed of real parsers" width="860"></a></p>
+
+<p align="center">
+  <a href="https://parsarium.com">Website</a> ·
+  <a href="https://parsarium.com/bench/">Bench</a> ·
+  <a href="https://parsarium.com/atlas/">Atlas</a> ·
+  <a href="https://parsarium.com/manual/">Manual</a> ·
+  <a href="https://pypi.org/project/parsarium/">PyPI</a>
+</p>
+
+<p align="center">
+  <a href="https://pypi.org/project/parsarium/"><img src="https://img.shields.io/pypi/v/parsarium?color=0f7d46&label=pypi" alt="PyPI version"></a>
+  <img src="https://img.shields.io/pypi/pyversions/parsarium?color=191814" alt="Python versions">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-d42a1f" alt="License: Apache-2.0"></a>
+</p>
+
 # Parsarium
 
-The [website](https://parsarium.com/) helps users choose a format, find a documented parser, and open a runnable target. It is built from the committed catalog and hosted on GitHub Pages.
+Parsarium is an open testbed of real parsers for software testing and security research. It collects open-source libraries and standard-library APIs that read ten formats in eight languages, and wraps them in pinned, instrumented Docker harnesses. You can run one file through a parser, send the same file to every parser of a format, replay a generated corpus, or start an AFL++ campaign, and every step leaves a JSON receipt.
 
-Parsarium is a format-first catalog and target set for parser experiments. It verifies open-source libraries and standard APIs that parse local inputs in ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Selected paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
+Every target has:
 
-The catalog contains **1,636 verified third-party package paths** across ten formats and eight ecosystems. Most format and ecosystem combinations meet the working goal of 20; PHP × ASCII PLY has five. Every combination has at least one runnable harness. The [current coverage report](data/projects-coverage.json) distinguishes fully verified harnesses from staged and pending paths; a documented catalog entry is runnable only when that report marks it verified.
+- a **pinned release**, installed from a lock file with its source hash recorded;
+- the **documented input API** that parses the bytes, not generic file handling;
+- a small **valid control** file and the output the parser must report for it;
+- a **Docker harness** with a verification receipt: image ID, toolchain, file hashes, and parser coverage;
+- an **AFL++ overlay** with its own feedback receipt, plus the language's native fuzzing engine.
+
+| Formats | Languages |
+| --- | --- |
+| PNG · ZIP · MP4 · WAV · PDF · SVG · HTTP/1.1 · ASCII PLY · ASCII PNM · MP3 + ID3v2 | C · C++ · Go · Java · JavaScript · Python · Rust · PHP |
+
+Current counts per format and language are on the [atlas](https://parsarium.com/atlas/) and in `parsarium list`.
 
 ## Install
 
 ```sh
 pip install parsarium
-parsarium list --format png
 ```
 
-The package installs the `parsarium` command and a small Python API (`from parsarium import catalog`). On first use it downloads the snapshot of harnesses, controls, and catalog data for its version (about 19 MB), checks its SHA-256, and keeps it in your cache directory. Each package version pins one snapshot, so the version identifies an exact set of targets. `parsarium run-selection MANIFEST` runs a selection saved from the [bench](https://parsarium.com/bench/). Set `PARSARIUM_HOME` to a clone of this repository to use the clone instead of a download.
+Requires Python 3.11+, and Docker (Linux amd64 or arm64 images) to run targets. The package has no dependencies. On first use it downloads the snapshot of harnesses, controls, and catalog data for its version, checks its SHA-256, and keeps it in your cache directory. Each package version pins one snapshot, so a version identifies an exact set of targets.
 
-## Start here
+Working from a clone instead? Run `python3 parsarium.py …` from the repository root, or set `PARSARIUM_HOME` to the clone and use the `parsarium` command anywhere.
 
-Requirements: Python 3.11+ and Docker with Linux amd64 and arm64 support for container runs. Catalog browsing requires only Python. Commands run from the repository root.
+## Quick tour
 
 ```sh
-python3 parsarium.py list --format png
-python3 parsarium.py catalog png python
-python3 parsarium.py projects --format png
-python3 parsarium.py show png python pypng
-python3 parsarium.py run png python pypng controls/png/red-green.png
+parsarium list --format png                 # verified and runnable parsers per language
+parsarium catalog png rust                  # one cell's ranking, metric, and open leads
+parsarium show png c libpng                 # release, input API, control, fuzz engine
+
+parsarium run png c libpng my.png --results runs/libpng              # one file, one parser
+parsarium run-format png --file my.png --results runs/png --workers 4  # one file, every PNG parser
+parsarium replay png c libpng corpus/ runs/libpng-replay              # a whole corpus
+
+parsarium afl build png c libpng                                    # AFL++
+parsarium afl prepare png c libpng runs/libpng-afl --seed-dir corpus/
+parsarium afl run runs/libpng-afl --seconds 3600
+parsarium afl summary runs/libpng-afl
 ```
 
-`list` shows verified and runnable counts for each format and ecosystem. `catalog` shows the ranking, metric, search limits, and unresolved leads. `projects` lists container harnesses. `show` displays a harness's pinned release, parser API, control, and fuzz engine. `run` returns a JSON receipt for one supplied file; `status: ok` means the harness completed, not necessarily that the parser accepted the input. `--json` is available for `list`, `catalog`, `projects`, and `show`.
+`status: ok` in a run receipt means the harness finished; whether the parser accepted the input is in its output. Formats are `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3_id3v2`; languages are `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
 
-Run every fully verified Docker target for one format with its own pinned control, or send the same file to each target. Results are saved under one directory, with a receipt per target and a `summary.json`:
+To work with a subset, build a selection on the [bench](https://parsarium.com/bench/). It gives the selection a stable ID, a manifest, and a report table, and the package runs the manifest directly:
 
 ```sh
-python3 parsarium.py run-format png --list
-python3 parsarium.py run-format png --results runs/png-controls
-python3 parsarium.py run-format png --file my.png --results runs/png-my-file
+parsarium run-selection sel-90378f4e58.json --mode afl --seconds 600
 ```
 
-Use `--ecosystem python` to narrow the batch. A shared file may be accepted by some parsers and rejected by others; the receipts record each outcome.
+### From Python
 
-Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3_id3v2`. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
+```python
+from parsarium import catalog
 
-## Fuzzing
-
-Every runnable project has an AFL++ overlay with parser-dependent feedback. AFL++ instruments compiled C, C++, and Rust targets directly. Go, Java, JavaScript, Python, and PHP harnesses use parser coverage bridges. A prepared run includes a valid seed, pinned image ID, exact command, and output directory.
-
-```sh
-python3 parsarium.py afl build png python pypng
-python3 parsarium.py afl prepare png python pypng runs/pypng-afl
-python3 parsarium.py afl run runs/pypng-afl --check
-python3 parsarium.py afl run runs/pypng-afl --seconds 60
-python3 parsarium.py afl summary runs/pypng-afl
+for target in catalog.targets(format="zip", ecosystem="go"):
+    print(target.id, target.release, target.family, target.input_api)
 ```
 
-Additional seeds enter with `--seed FILE` or `--seed-dir DIRECTORY` on `afl prepare`. `afl run --resume` continues an existing output directory. AFL++ saves interesting inputs in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`, and progress in `fuzzer_stats`.
+## What you can use it for
 
-Each project also has a plan for its ecosystem fuzz engine:
+- **Comparing fuzzers and test generators** on the same pinned targets, with one target per parser family when engines matter more than wrappers.
+- **Differential testing**: send one input to every implementation of a format and look at where they disagree.
+- **Corpus evaluation**: replay inputs from [Fandango](https://fandango-fuzzer.github.io/) or any other generator through many parsers, then use them as AFL++ seeds.
+- **Teaching**: the [manual](https://parsarium.com/manual/) covers formats, controls, coverage feedback, differential testing, fuzzing at scale, triage, and experiment design, with quizzes and exercises that run on Parsarium.
 
-```sh
-python3 parsarium.py build png python pypng
-python3 parsarium.py native prepare png python pypng runs/pypng-native --duration-seconds 60
-python3 parsarium.py native run runs/pypng-native --check
-python3 parsarium.py native run runs/pypng-native
-```
+## How targets are chosen
 
-[Fandango 1.3+ and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) can generate inputs externally. A generated corpus can be replayed through any matching project or added as AFL++ seeds:
+The catalog is built one format × language cell at a time. Registry searches find candidates; a candidate becomes an entry only after it parses a valid control through its documented API and reports the expected, format-specific result. Packages are ranked by one adoption metric per cell and only against other packages in that cell. Wrappers are allowed, and the parser family behind each one is recorded. Standard-library APIs are verified the same way and listed separately. Every query, hit count, and open lead is saved next to the cell.
 
-```sh
-fandango fuzz -F png -n 100 -d generated/png
-python3 parsarium.py replay png python pypng generated/png runs/pypng-fandango \
-  --generator Fandango --spec png
-python3 parsarium.py afl prepare png python pypng runs/pypng-generated-afl \
-  --seed-dir generated/png
-```
+The full rules are in the [selection protocol](PROTOCOL.md). The [harness guide](projects/README.md) describes what a target contains, and the [fuzzing guide](fuzzing/README.md) covers AFL++, bridges, native engines, and run files.
 
-The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation.
-
-## Evidence and layout
+## Repository layout
 
 | Path | Contents |
 | --- | --- |
-| `data/<ecosystem>/<format>/` | Verified parsers, ranking, search leads, standard APIs, control results, and release evidence |
-| `controls/<format>/` | Small valid inputs used for parser verification |
-| `projects/<format>/<ecosystem>/<slug>/` | Dockerfile, byte-input harness, manifest, and coverage receipt |
-| `fuzzing/afl-native/<format>/<ecosystem>/<slug>/` | AFL++ overlay and feedback receipt |
+| `catalog/<format>/` | Generated guides for every format, cell, and parser |
+| `data/<language>/<format>/` | Verified parsers, rankings, search leads, standard APIs, and evidence |
+| `controls/<format>/` | The valid control files and the scripts that make them |
+| `projects/<format>/<language>/<slug>/` | Dockerfile, harness, manifest, and verification receipt for each target |
+| `fuzzing/` | AFL++ overlays, coverage bridges, and their feedback receipts |
 | `adapters/` | Catalog verification adapters and source locks |
-| `scripts/` | Rebuild, audit, and discovery utilities |
+| `scripts/` | Verification, audit, discovery, and build tools |
+| `src/parsarium/` | The PyPI package |
+| `website/` | The [parsarium.com](https://parsarium.com) source, built from the catalog |
 
-The [selection protocol](PROTOCOL.md) defines parser eligibility, ranking, stopping rules, and uncertainty. The [project guide](projects/README.md) describes the harness contract. `python3 scripts/validate_catalog.py` checks catalog data; `python3 scripts/audit_fuzzing.py` checks the committed harness and AFL++ receipts.
+## Maintaining the catalog
 
-The valid controls cover specific format subsets. A successful control does not establish support for every variant, security, or resource limits. Package paths that share an underlying parser are identified in the catalog. AFL++ feedback counts from different instrumentation methods are not comparable.
+```sh
+python3 scripts/validate_catalog.py         # catalog data consistency
+python3 scripts/audit_projects.py --check   # manifests and receipts against the catalog
+python3 scripts/audit_fuzzing.py            # harness and AFL++ receipts
+python3 scripts/build_readmes.py            # regenerate catalog and project guides
+python3 website/build.py                    # build the website into website/dist
+```
+
+Pushes to `main` that touch the catalog or the website redeploy [parsarium.com](https://parsarium.com). A version tag publishes the package: set `__version__` in `src/parsarium/__init__.py` (calendar versions, such as `2026.11.16`), commit, then `git tag v2026.11.16 && git push origin v2026.11.16`. The [release workflow](.github/workflows/release.yml) builds a byte-reproducible snapshot with `scripts/build_snapshot.py`, attaches it to a GitHub release, smoke-tests the wheel, and uploads it to PyPI with trusted publishing.
+
+## Citing
+
+Cite the package version (`parsarium --version`) or the commit you used, and the selection ID if you worked with a subset.
+
+```bibtex
+@misc{parsarium,
+  author       = {Zamudio Amaya, Jos{\'e} Antonio},
+  title        = {Parsarium: An Open Testbed of Real Parsers},
+  year         = {2026},
+  howpublished = {\url{https://parsarium.com}}
+}
+```
 
 ## License
 
 Parsarium is licensed under the [Apache License 2.0](LICENSE). Each parser keeps its own license, recorded in the catalog.
-
-## Releasing the package
-
-`.github/workflows/release.yml` publishes on a version tag. It builds the snapshot from the tagged commit with `scripts/build_snapshot.py` (byte-reproducible), attaches it to a GitHub release, records its URL and SHA-256 in the wheel, smoke-tests the wheel, and uploads to PyPI with trusted publishing.
-
-1. Once: on PyPI, add a trusted publisher for project `parsarium`, owner `joszamama`, repository `parsarium`, workflow `release.yml`, environment `pypi`. On GitHub, create the `pypi` environment under Settings → Environments.
-2. Set `__version__` in `src/parsarium/__init__.py` (calendar versions, such as `2026.11.16`), commit, and push.
-3. Tag and push: `git tag v2026.11.16 && git push origin v2026.11.16`.

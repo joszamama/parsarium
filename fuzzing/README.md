@@ -1,6 +1,6 @@
 # Running parser harnesses
 
-Every project accepts a local byte input. The [main CLI](../README.md) lists runnable projects and routes inputs to their pinned container images. Fuzzing runs write under `runs/`, which is ignored by Git.
+Every project accepts a local byte input. The [main CLI](../README.md) lists runnable projects and routes inputs to their pinned container images. Fuzzing runs write under `runs/`, which is ignored by Git. Commands below run from a clone; with the [package](https://pypi.org/project/parsarium/), use `parsarium` in place of `python3 parsarium.py`.
 
 ## One input or an external corpus
 
@@ -18,17 +18,19 @@ python3 parsarium.py replay png c libpng generated/png runs/libpng-replay \
 
 ## AFL++
 
-All 83 projects have a verified AFL++ overlay. The feedback source depends on the ecosystem:
+Every runnable project has a verified AFL++ overlay. The feedback source depends on the ecosystem:
 
-| Ecosystem | Projects | AFL++ feedback |
-| --- | ---: | --- |
-| C, C++ | 21 | Compiled parser edges |
-| Rust | 10 | Compiled parser edges through afl.rs |
-| Go | 10 | Covered parser-package statement blocks |
-| Java | 10 | JaCoCo-covered parser source lines |
-| JavaScript | 10 | Executed V8 parser source ranges |
-| Python | 12 | Executed parser source lines |
-| PHP | 10 | Xdebug-covered parser source lines |
+| Ecosystem | AFL++ feedback |
+| --- | --- |
+| C, C++ | Compiled parser edges |
+| Rust | Compiled parser edges through afl.rs |
+| Go | Covered parser-package statement blocks |
+| Java | JaCoCo-covered parser source lines |
+| JavaScript | Executed V8 parser source ranges |
+| Python | Executed parser source lines |
+| PHP | Xdebug-covered parser source lines |
+
+A few targets wrap a native library from a managed language; their overlays take edges from the pinned shared library instead, and their receipts say so.
 
 For Go, Java, JavaScript, Python, and PHP, a small instrumented proxy maps parser features into AFL++'s shared feedback map. The parser packages remain unchanged. These bridges are slower than native instrumentation, and their feature and tuple counts are not comparable across ecosystems. Hash collisions in the 64 KiB map are possible. The PHP bridge treats ordinary `Exception` values as parser rejections; PHP `Error` values and process failures remain fatal.
 
@@ -42,7 +44,7 @@ python3 parsarium.py afl summary runs/jply-afl
 
 `afl build` creates the selected local image and verifies its parser coverage. A fresh checkout needs this step before preparation. `afl prepare` copies the project's valid control into `seeds/`, checks the overlay receipt and local image, and writes `plan.json`. Additional inputs enter with repeated `--seed FILE` or `--seed-dir DIRECTORY`. `afl run` checks the plan, image, and seed hashes before starting a time-bounded campaign. `--resume` continues the same `afl-out/` directory. `afl summary` inventories queue, crash, and hang files with hashes and reads AFL++'s `fuzzer_stats`.
 
-Five short campaigns exercised the Go, Java, JavaScript, Python, and PHP bridges; [campaign receipts](../data/afl-campaign-smoke.json) record actual executions and statistics. [Differential checks](../data/afl-feedback-differential.json) show that input-dependent parser features change AFL++ feedback in each of those ecosystems. [Plan preflights](../data/afl-plan-smoke.json) cover all 83 projects. These checks establish runnable launchers and feedback, not parser safety.
+Five short campaigns exercised the Go, Java, JavaScript, Python, and PHP bridges; [campaign receipts](../data/afl-campaign-smoke.json) record actual executions and statistics. [Differential checks](../data/afl-feedback-differential.json) show that input-dependent parser features change AFL++ feedback in each of those ecosystems. [Plan preflights](../data/afl-plan-smoke.json) prepare a run for every overlay. These checks establish runnable launchers and feedback, not parser safety.
 
 ## Ecosystem fuzz engines
 

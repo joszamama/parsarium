@@ -1,6 +1,6 @@
 # Parser harnesses
 
-`projects/<format>/<ecosystem>/<slug>/` contains one runnable parser path. The collection has 133 projects across all 80 cells: 126 third-party package paths and seven CPython standard-library APIs. Other verified catalog packages remain in the [format catalog](../catalog/png/README.md) until a harness and container are verified.
+`projects/<format>/<ecosystem>/<slug>/` contains one runnable parser path: a third-party package or a standard-library API. Every format × language cell has at least one. A target counts as runnable once its harness, verification receipt, and AFL++ overlay all pass; `parsarium list` and the [atlas](https://parsarium.com/atlas/) show the current numbers. Verified catalog packages without a harness yet stay in the [format catalog](../catalog/png/README.md).
 
 Each project includes:
 
@@ -14,6 +14,8 @@ Each project includes:
 | `verification.json` | Observed output, covered parser source, toolchain, and image ID |
 
 The harness reads supplied bytes or a temporary local file and calls the parser's documented API. Generic file I/O and a hard-coded expected result do not qualify. Verification requires a passing valid control and coverage in parser source, separate from coverage in the harness. Shared underlying parser families are recorded in the catalog.
+
+From the repository root (or with `parsarium` from the [package](https://pypi.org/project/parsarium/)):
 
 ```sh
 python3 parsarium.py projects --format pdf
