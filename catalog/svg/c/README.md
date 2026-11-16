@@ -1,6 +1,6 @@
 # SVG / C
 
-20 verified third-party API paths; 2 have verified Docker harnesses.
+20 verified third-party API paths; 3 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/svg/ranking.md) · [standard API inventory](../../../data/c/svg/standard.json)
 
@@ -16,7 +16,7 @@
 - [libsvg](libsvg/README.md) — verified API path
 - [libsvg-cairo](libsvg-cairo/README.md) — verified API path
 - [thorvg](thorvg/README.md) — verified API path
-- [sdl3_image](sdl3-image/README.md) — verified API path
+- [sdl3_image](sdl3-image/README.md) — Docker harness ready
 - [gdk-pixbuf](gdk-pixbuf/README.md) — verified API path
 - [nanosvg](nanosvg/README.md) — Docker harness ready
 - [mupdf](mupdf/README.md) — verified API path

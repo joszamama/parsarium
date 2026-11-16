@@ -32,6 +32,11 @@
 
 SDL3 core package path; implementation in SDL_stb.c uses stb_image, shared with the stb package.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/sdl3/README.md)
+
+```sh
+python3 parsarium.py build png c sdl3
+python3 parsarium.py run png c sdl3 controls/png/red-green.png
+```

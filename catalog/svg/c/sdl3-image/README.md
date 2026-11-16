@@ -32,6 +32,11 @@
 
 The pinned IMG_svg.c includes embedded NanoSVG and nanosvgrast code; SDL3_image is a distinct package input API. Its C function is called from C and C++ adapters over one SVG engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/sdl3_image/README.md)
+
+```sh
+python3 parsarium.py build svg c sdl3_image
+python3 parsarium.py run svg c sdl3_image controls/svg/red-green.svg
+```

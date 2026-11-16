@@ -1,13 +1,13 @@
 # ASCII PNM / C
 
-20 verified third-party API paths; 5 have verified Docker harnesses.
+20 verified third-party API paths; 6 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/ascii_pnm/ranking.md) · [standard API inventory](../../../data/c/ascii_pnm/standard.json)
 
 ## Third-party parsers
 
 - [imagemagick](imagemagick/README.md) — verified API path
-- [sdl3_image](sdl3-image/README.md) — verified API path
+- [sdl3_image](sdl3-image/README.md) — Docker harness ready
 - [sdl2_image](sdl2-image/README.md) — verified API path
 - [leptonica](leptonica/README.md) — Docker harness ready
 - [graphicsmagick](graphicsmagick/README.md) — verified API path

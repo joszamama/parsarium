@@ -27,6 +27,11 @@
 
 SDL3 core WAV-specific loading API; separate package and parser path from SDL_mixer, which remains unresolved. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/sdl3/README.md)
+
+```sh
+python3 parsarium.py build wav cpp sdl3
+python3 parsarium.py run wav cpp sdl3 controls/wav/four-samples.wav
+```

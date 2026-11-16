@@ -6,7 +6,9 @@
 
 - [nanosvg / C](c/nanosvg/README.md)
 - [plutosvg / C](c/plutosvg/README.md)
+- [sdl3_image / C](c/sdl3_image/README.md)
 - [plutosvg / C++](cpp/plutosvg/README.md)
+- [sdl3_image / C++](cpp/sdl3_image/README.md)
 - [cogentcore.org/core/svg / Go](go/cogentcore_org_core_svg/README.md)
 - [github.com/JoshVarga/svgparser / Go](go/github_com_joshvarga_svgparser/README.md)
 - [github.com/NimbleMarkets/oksvg / Go](go/github_com_nimblemarkets_oksvg/README.md)
