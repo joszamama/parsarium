@@ -447,12 +447,15 @@ def build(output: Path) -> None:
     (output / "catalog.json").write_text(catalog_json + "\n", encoding="utf-8")
     (output / "CNAME").write_text("parsarium.com\n", encoding="utf-8")
     def site_header(root: str, active: str) -> str:
-        links = [("Atlas", "atlas"), ("Run", "run"), ("Lab", "lab"), ("Why parsers?", "why")]
+        links = [("Home", "index"), ("Atlas", "atlas"), ("Run locally", "run"),
+                 ("Learn", "lab"), ("Why parsers?", "why")]
         def nav_items() -> str:
-            return "".join(
-                f'<a href="{root}{route}/"{(" aria-current=\"page\"" if route == active else "")}>{label}</a>'
-                for label, route in links
-            )
+            items = []
+            for label, route in links:
+                href = (root or "./") if route == "index" else f"{root}{route}/"
+                current = ' aria-current="page"' if route == active else ""
+                items.append(f'<a href="{href}"{current}>{label}</a>')
+            return "".join(items)
         return f'''<header class="site-header"><div class="container header-inner">
           <a class="brand" href="{root or './'}" aria-label="Parsarium home"><span class="brand-mark" aria-hidden="true">P<span class="brand-period">.</span></span>Parsarium</a>
           <nav class="nav" aria-label="Main navigation">{nav_items()}</nav>
@@ -463,7 +466,7 @@ def build(output: Path) -> None:
     def site_footer(root: str) -> str:
         return f'''<footer class="site-footer"><div class="container footer-grid">
           <div><a class="brand footer-brand" href="{root or './'}">Parsarium<span class="brand-period">.</span></a><p>The open parser atlas.</p></div>
-          <nav class="footer-links" aria-label="Footer navigation"><a href="{root}atlas/">Atlas</a><a href="{root}run/">Run</a><a href="{root}lab/">Lab</a><a href="{root}why/">Why parsers?</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+          <nav class="footer-links" aria-label="Footer navigation"><a href="{root or './'}">Home</a><a href="{root}atlas/">Atlas</a><a href="{root}run/">Run locally</a><a href="{root}lab/">Learn</a><a href="{root}why/">Why parsers?</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
           <p class="footer-note">Verified input APIs. Pinned controls. Runnable harnesses.<br>Built from the repository evidence.</p>
         </div></footer>'''
 

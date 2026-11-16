@@ -11,7 +11,7 @@ python3 website/build.py
 python3 -m http.server 8765 --directory website/dist
 ```
 
-Open `http://localhost:8765/`. `website/build.py` checks the 80 cell counts and guide links, writes one shared catalog JSON file, and copies one valid control for each format. The Atlas shows recorded within-cell adoption ranks and metrics. The Run page shows saved control evidence and commands for pinned Docker harnesses. The Lab executes small PNG, SVG, and ASCII PNM parsers in the browser, then separates those live results from saved Docker receipts. Its byte clues for all ten formats use offsets and output keys checked during the build.
+Open `http://localhost:8765/`. `website/build.py` checks counts and guide links for every format and ecosystem, writes one shared catalog JSON file, and copies one valid control for each format. The Atlas shows adoption ranks among parsers that handle the same format in the same ecosystem. Run locally provides saved control evidence and commands for pinned Docker harnesses. Learn executes small PNG, SVG, and ASCII PNM parsers in the browser, then separates those live results from saved Docker receipts. Its byte clues for all ten current formats use offsets and output keys checked during the build.
 
 ## Publish on GitHub Pages
 
