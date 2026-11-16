@@ -21,6 +21,11 @@
 
 Header-only C++17 library with its own SVG document parser and rasterizer.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/novasvg/README.md)
+
+```sh
+python3 parsarium.py build svg cpp novasvg
+python3 parsarium.py run svg cpp novasvg controls/svg/red-green.svg
+```
