@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "c",
+  "package": "libsoup",
+  "release": "3.8.1",
+  "catalog_parser": "data/c/http11/parsers.json",
+  "source_lock": "projects/http11/c/libsoup/source-lock.json",
+  "source_sha256": "5013dcef9136f6f861e6529fca578af50c1f52a39219027fb5aff652d1371a04",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium?x=1",
+    "version": "1.1",
+    "host": "example.test"
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libsoup's HTTP/1 request-head parser (soup_headers_parse_request) and SoupMessageHeaders from a C11 byte-input harness compiled with clang",
+  "coverage_subject_prefix": "/work/source/libsoup/",
+  "format_specific_coverage_file_suffix": "/soup-headers.c",
+  "parser_family": "GNOME libsoup 3.8.1 soup_headers_parse_request; same pinned source archive and parser family as projects/http11/cpp/libsoup, so the C and C++ paths are one parser engine reached from two harness languages, not independent engines"
+}
