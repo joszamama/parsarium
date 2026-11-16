@@ -36,7 +36,16 @@ def derived_dockerfile(project: Path) -> str:
         raise ValueError("native Dockerfile shape is not supported")
     text = source.replace("apt-get install -y --no-install-recommends",
                           f"apt-get install -y --no-install-recommends afl++={AFL_PACKAGE} python3")
-    text = text.replace(marker, REWRITE)
+    rewrite = REWRITE
+    if project.name == "geogram":
+        # Geogram's CMake platform is a source-tree key, not a compiler command.
+        # Keep that key while replacing the actual compilers with AFL wrappers.
+        rewrite = rewrite.replace(
+            "; p.write_text(s)",
+            '.replace("Linux64-nonx86-afl-clang-fast-dynamic",'
+            '"Linux64-nonx86-clang-dynamic"); p.write_text(s)',
+        )
+    text = text.replace(marker, rewrite)
     if project.name == "imagemagick":
         # The CLI utility is unnecessary for library harnesses and its link
         # pulls the AFL runtime into libtool more than once.
