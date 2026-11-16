@@ -58,6 +58,21 @@ python3 parsarium.py native run runs/pngjs-native
 
 `native prepare` records the seed hashes, pinned image, engine, duration, and command. `native run` writes `campaign.log` and `campaign.json`. Engine feedback counters differ in meaning and should not be compared between ecosystems.
 
+## Coverage reports
+
+```sh
+python3 parsarium.py build svg c libvips
+python3 parsarium.py report svg c libvips projects/svg/c/libvips/target/coverage \
+  --output reports/libvips --source /work/source=vips-8.18.7.tar.xz
+python3 parsarium.py report png c libpng runs/libpng-replay --output reports/libpng-replay
+```
+
+`report` writes `index.html`, `report.json`, and one line view per parser source file under `files/`. The pages are static, need no network, and embed no input bytes. The run must match the project's current verification receipt: changed project files, coverage counts, control output, or replay image IDs stop the report. `--max-report-mib` limits the complete output, including the index and JSON.
+
+A valid-control directory from `build` gives source lines when the coverage is an `llvm-cov export` (C, C++, Rust). Line counts follow the export's segments; files outside the manifest's parser prefixes, such as adapters and harnesses, are excluded and counted. Go, Java, JavaScript, Python, and PHP projects report the receipt's covered-line totals without a line view, separating the package and underlying parser groups where present. Native binary-edge projects report edges and no source lines. Replay directories report input hashes and outcomes; they record no coverage.
+
+Source text appears only through `--source CONTAINER_DIR=ARCHIVE`, where the archive's SHA-256 equals the manifest's `source_sha256` or `underlying_source_sha256`. Download the pinned release archive listed in the project's source lock before using the example above. `--strip-components` (default 1) removes the archive's top directory. A file whose coverage maps lines beyond its length is shown without text. Without `--source`, line views list counts only.
+
 ## Run files
 
 | Path | Contents |
@@ -70,5 +85,6 @@ python3 parsarium.py native run runs/pngjs-native
 | `runs/<afl>/campaign.json` | Execution time, status, and log hash |
 | `runs/<afl>/afl-summary.json` | Saved-file inventory and `fuzzer_stats` |
 | `runs/<native>/campaign.json` | Native engine execution receipt |
+| `<report>/report.json` | Pinned evidence, outcomes, and per-line counts |
 
 Potential crashes and hangs are leads. A saved case requires reproduction and parser-specific triage before any defect claim.

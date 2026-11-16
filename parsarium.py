@@ -199,6 +199,20 @@ def main() -> int:
     corpus.add_argument("--timeout", type=int, default=60)
     corpus.add_argument("--batch-timeout", type=int, default=3600)
 
+    report = commands.add_parser("report", help="write an offline coverage report for a completed run")
+    report.add_argument("format", choices=FORMATS)
+    report.add_argument("ecosystem", choices=ECOSYSTEMS)
+    report.add_argument("slug")
+    report.add_argument("run_dir", type=Path)
+    report.add_argument("--output", type=Path, required=True)
+    report.add_argument("--source", action="append", default=[],
+                        help="CONTAINER_DIR=ARCHIVE matching a manifest source SHA-256")
+    report.add_argument("--strip-components", type=int, default=1)
+    report.add_argument("--max-files", type=int, default=1000)
+    report.add_argument("--max-lines-per-file", type=int, default=50000)
+    report.add_argument("--max-inputs", type=int, default=10000)
+    report.add_argument("--max-report-mib", type=int, default=256)
+
     format_run = commands.add_parser("run-format", help="run every verified Docker harness for a format")
     format_run.add_argument("format", choices=FORMATS)
     format_run.add_argument("--ecosystem", choices=ECOSYSTEMS)
@@ -295,6 +309,19 @@ def main() -> int:
             extra.append("--per-case")
         return execute("replay_corpus.py", args.format, args.ecosystem, args.slug,
                        str(args.corpus), str(args.run_dir), *extra)
+    if args.command == "report":
+        extra = ["--strip-components", str(args.strip_components),
+                 "--max-files", str(args.max_files),
+                 "--max-lines-per-file", str(args.max_lines_per_file),
+                 "--max-inputs", str(args.max_inputs),
+                 "--max-report-mib", str(args.max_report_mib)]
+        for source in args.source:
+            directory, separator, path = source.partition("=")
+            if not separator or not directory or not path:
+                report.error("--source requires CONTAINER_DIR=ARCHIVE")
+            extra += ["--source", f"{directory}={Path(path).resolve()}"]
+        return execute("coverage_report.py", args.format, args.ecosystem, args.slug,
+                       str(args.run_dir.resolve()), str(args.output.resolve()), *extra)
     if args.command == "run-format":
         extra = ["--workers", str(args.workers), "--timeout", str(args.timeout)]
         if args.ecosystem:
