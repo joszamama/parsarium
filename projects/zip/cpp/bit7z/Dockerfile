@@ -1,0 +1,103 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang cmake curl libclang-rt-21-dev llvm make python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+# SevenZip 26.04 source: the ZIP reader and decoders behind bit7z.
+RUN curl --fail --location --retry 3 \
+    https://github.com/ip7z/7zip/archive/refs/tags/26.04.tar.gz \
+    --output /work/sevenzip.tar.gz \
+    && echo '48fdc6dfe879ee2db867bb07f19c4a9406bfea01d51f48785b6c7a137881e25c  /work/sevenzip.tar.gz' | sha256sum --check \
+    && mkdir /work/sevenzip && tar -xzf /work/sevenzip.tar.gz -C /work/sevenzip --strip-components=1 \
+    && rm /work/sevenzip.tar.gz \
+    && cd /work/sevenzip && printf '%s\n' \
+    'dac8389b6bc39339537bc351772106afe7951cb242cdf03e855b67c3a683deb1  DOC/License.txt' \
+    '2137618c38addd457378987313c238a7d5480b4106ec1d253484cf732e7dfb55  DOC/readme.txt' \
+    'f517e8ae6127ab766d90b7d801a41e97223db6fcc11378d5d6c2e3058c027bd0  CPP/7zip/7zip_gcc.mak' \
+    'a8cfd2cc3d6a1dc00f377f21ab68a06faaf13fca7e6fb401e70283eed7c3b079  CPP/7zip/Bundles/Format7zF/makefile.gcc' \
+    'f24c12cc78399ffabe87ba27adbf4206ca3aad38607129efc7b4d3670f5ab435  CPP/7zip/Bundles/Format7zF/Arc_gcc.mak' \
+    'ef2c258d27a99c8b5138305b603ccf92c33194c4497b3a5bb22fc5565b107915  CPP/7zip/Archive/ArchiveExports.cpp' \
+    '49c007333470599cd50912bb9f5c18a2bc18598aab8cc7c8daa860f40df2ff1d  CPP/7zip/Archive/DllExports2.cpp' \
+    'fff9db3b10763a74853fee6f1769ddd352e69adeacbadbdbee87b5324df8b063  CPP/7zip/Archive/IArchive.h' \
+    '4efd0603a316dddb900de91a4a203f6dcc8451afd9f02f12e2baac79f8aa1d48  CPP/7zip/Compress/CodecExports.cpp' \
+    '579287a77ab8213851638c574126e613109a0571701bc4b719fcc572458d0641  CPP/7zip/Archive/Zip/ZipHandler.cpp' \
+    '66521397cb614b4c53e0f8943e1ca52a69decad13847d5158e82964bdedad4e9  CPP/7zip/Archive/Zip/ZipHandler.h' \
+    '6f64d4d9db3e6ac3173da8d405ec4236e208553f0b5efa02c72d9de9f03b5a24  CPP/7zip/Archive/Zip/ZipHeader.h' \
+    'ce1d84afb8126b1a86542128e8919177d3afdf9d7b4994c0c47db66ea2cc0388  CPP/7zip/Archive/Zip/ZipIn.cpp' \
+    'dd470945f8bc3be5875ac1f07057bd7a49c42470c7df56aca73697233f71208f  CPP/7zip/Archive/Zip/ZipIn.h' \
+    'e4e9d21cfda5ece01c220e202b148ac1de916f5d6f4f5d58c7d3c7d1f1cd4720  CPP/7zip/Archive/Zip/ZipItem.cpp' \
+    '3920b1205973b8a9c0f76908650dee2cde5204547f7d1fb13fa594a0b3b69601  CPP/7zip/Archive/Zip/ZipItem.h' \
+    '3de4a73c7b790e24ccaee553281b712732b7b1c056fec73b4b310b6a95f06a32  CPP/7zip/Archive/Zip/ZipRegister.cpp' \
+    '9bc6c3589d448bfb233956f11549a5e3cda2f7571f8dadb8b16c668bf9b26ff7  CPP/7zip/Compress/CopyCoder.cpp' \
+    '286bb6e21316419b564d3f65c18fe16427c4c10d08d64755385f41e07ea855a4  CPP/7zip/Compress/DeflateDecoder.cpp' \
+    '306919f5c35f655fda2a1fee7e270974a3bcb14cf386cdac0d0cd0feafcc983f  CPP/7zip/Compress/DeflateDecoder.h' \
+    '2876414543ef93533df24fbc31eae2aaae156da54164e8940e0f30c07c6d5313  CPP/7zip/Compress/DeflateRegister.cpp' \
+    | sha256sum --check
+# bit7z 4.1.0 release source: the C++ wrapper API.
+RUN curl --fail --location --retry 3 \
+    https://github.com/rikyoz/bit7z/archive/refs/tags/v4.1.0.tar.gz \
+    --output /work/bit7z.tar.gz \
+    && echo '82393783f81d5e4eef8d6657c9cf7fa8b66c3e0e7a58328a7c101eafbf84f308  /work/bit7z.tar.gz' | sha256sum --check \
+    && mkdir /work/bit7z && tar -xzf /work/bit7z.tar.gz -C /work/bit7z --strip-components=1 \
+    && rm /work/bit7z.tar.gz \
+    && cd /work/bit7z && printf '%s\n' \
+    '66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172  LICENSE' \
+    'db2710110991c61bec9fe2855079a0295418ef014520dcd8c489e3432700d0d8  CMakeLists.txt' \
+    '35d3f63ab84cf090cebf032ebdab28c38bc31abf62848c7511b48c19f52a0a85  cmake/BuildOptions.cmake' \
+    '57a5e834dfc9942006147177183d4d88017154557c9641d3b5d64ce6ca12eb33  cmake/CompilerOptions.cmake' \
+    'f04046ddd942d19f230b16da49c4ea6690b8905e068ad14a79bede2d0fc8a392  cmake/Dependencies.cmake' \
+    'd8db01a4a4c640c3710b8275453d2125e519725c5c692c094d059292dc943778  cmake/FilesystemDetect.cmake' \
+    'cf659e47c43e0aa07da36af37f6067d68837cf775ccdf6de322df98423073f5b  include/bit7z/bit7zlibrary.hpp' \
+    '02566877da3f5557c6f7f3dc39352b4a943f8b4520956a81218b2286729f5e8b  include/bit7z/bitabstractarchivehandler.hpp' \
+    '37f50c207835dd10aaff3196da796b6d96be614dfe300d1749bd478585ac0b64  include/bit7z/bitarchiveitem.hpp' \
+    '97888902e932cd1a965c34916f683074cfc7078d36ee5302dff93507512c3428  include/bit7z/bitarchivereader.hpp' \
+    'fcaac5687e3657192b1d8d1b9d29360bab4aee980f589180e391d81e5f9eb45f  include/bit7z/bitformat.hpp' \
+    'fd79d547fe0af9aede3afa60c25af2e34f87b62fa3bd262ff5785064596ef799  include/bit7z/bitinputarchive.hpp' \
+    '4ba7976fdbe2ba98a824185b4f23ef9e646f543b7c87fea0e92035298cb9bfcf  src/bit7zlibrary.cpp' \
+    '06fcffef17d59a946e647b174add60d38e7a634cb5520e186ae3d595a62ec2ed  src/bitarchiveitem.cpp' \
+    '834dcf0254cc0400e33285e660f54d039ef35e8c0a585e891c0ab8491fda2744  src/bitarchivereader.cpp' \
+    '57a7d7007d6af1fbf0701dcfe55148cd968c9da08cf8df4b76f33a1f10c8b947  src/bitformat.cpp' \
+    '970d116dd2bce397599957456c0bac3586de7bbeab5a208bde252d200b00527b  src/bitinputarchive.cpp' \
+    '74ade6b47532e9f266b64d9cd843b83c0d099fc492c3bb2c8ee07cd3aa153698  src/bitsharedlibrary.cpp' \
+    'a5ebef8888680c8c7b5ca5fbdb96a89d4b2bf0319af93205d03e196aa4449f4b  src/internal/bufferextractcallback.cpp' \
+    'b20a1a83595992607d2b012ec42cbe60ab22358869393418bfb08208017814a3  src/internal/cbufferoutstream.cpp' \
+    '26fb5e0bc977f9dede606db7401c5df37a688bae3f27cfb2c612709ee2d354c2  src/internal/cfileinstream.cpp' \
+    '51c1126b470e5118c846ea388c5894eb7c680686447131dbbb72264925d88955  src/internal/extractcallback.cpp' \
+    'e372adb25228c2b5fd9c807a3b2362ee9211430833ace560654dfe1c2917eb48  src/internal/guids.cpp' \
+    '53c01aa0b7d3b94b545499c5ba543d0467af73057eef84df7082771885427090  src/internal/opencallback.cpp' \
+    | sha256sum --check
+# bit7z's cmake/Dependencies.cmake always includes CPM.cmake 0.42.3 and pins
+# its hash. Pre-seeding the cache avoids a configure-time download; with a
+# custom SevenZip path and std::filesystem no CPM package is fetched.
+RUN mkdir -p /work/cpm-cache/cpm && curl --fail --location --retry 3 \
+    https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.42.3/CPM.cmake \
+    --output /work/cpm-cache/cpm/CPM_0.42.3.cmake \
+    && echo 'a609e875fd532b067174250f6abbc3dac22fe2d64869783fb1e80bda1625c844  /work/cpm-cache/cpm/CPM_0.42.3.cmake' | sha256sum --check
+COPY harness.h harness.cpp replay.cpp fuzz.cpp build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang++ --version | head -1; llvm-cov --version | head -1; cmake --version | head -1; make --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+# Both bit7z and the SevenZip shared module intentionally define COM GUID
+# constants; their duplicate registration triggers ASan's ODR check at load.
+# Keep ASan's memory checks while disabling this loader-only duplicate check.
+ENV ASAN_OPTIONS=detect_odr_violation=0
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    llvm python3 libstdc++6 && rm -rf /var/lib/apt/lists/*
+ENV HOME=/tmp XDG_CACHE_HOME=/tmp
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/lib-cov/7z.so /work/lib-cov/7z.so
+COPY --from=build /work/lib-fuzz/7z.so /work/lib-fuzz/7z.so
+COPY --from=build /work/bit7z/src /work/bit7z/src
+COPY --from=build /work/bit7z/include /work/bit7z/include
+COPY --from=build /work/bit7z/LICENSE /work/bit7z/LICENSE
+COPY --from=build /work/sevenzip/C /work/sevenzip/C
+COPY --from=build /work/sevenzip/CPP /work/sevenzip/CPP
+COPY --from=build /work/sevenzip/DOC /work/sevenzip/DOC
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]
