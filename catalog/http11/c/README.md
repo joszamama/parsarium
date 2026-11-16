@@ -1,6 +1,6 @@
 # HTTP/1.1 / C
 
-10 verified third-party API paths; 3 have verified Docker harnesses.
+10 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/http11/ranking.md) · [standard API inventory](../../../data/c/http11/standard.json)
 
@@ -14,8 +14,8 @@
 - [libsoup](libsoup/README.md) — verified API path
 - [serf](serf/README.md) — verified API path
 - [facil-legacy](facil-legacy/README.md) — verified API path
-- [libhv](libhv/README.md) — verified API path
-- [h2o](h2o/README.md) — verified API path
+- [libhv](libhv/README.md) — Docker harness ready
+- [h2o](h2o/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

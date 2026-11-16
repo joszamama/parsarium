@@ -4,12 +4,6 @@ Pinned release: `2.2.6`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/http11/c/h2o/README.md)
 
-H2O 2.2.6 bundles PicoHTTPParser in `deps/picohttpparser`. This C harness calls that bundled `phr_parse_request` copy, so it shares its parser family with [picohttpparser](../picohttpparser/README.md) and the [C++ h2o path](../../cpp/h2o/README.md); it is not an independent HTTP engine.
-
-The harness accepts up to 1 MiB per request and reserves 32 header slots. It retains the parsed method and target as slices of the input buffer until the result is printed.
-
-The pinned Docker control parsed `GET /parsarium?x=1 HTTP/1.1`, covered 126 lines in H2O's bundled PicoHTTPParser, and produced 94 AFL++ feedback edges.
-
 ## Run from the repository root
 
 ```sh

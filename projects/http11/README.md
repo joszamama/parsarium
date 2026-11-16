@@ -4,7 +4,9 @@
 
 ## Targets
 
+- [h2o / C](c/h2o/README.md)
 - [http-parser / C](c/http-parser/README.md)
+- [libhv / C](c/libhv/README.md)
 - [mongoose / C](c/mongoose/README.md)
 - [picohttpparser / C](c/picohttpparser/README.md)
 - [boost_beast / C++](cpp/boost_beast/README.md)
