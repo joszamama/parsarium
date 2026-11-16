@@ -4,8 +4,6 @@ Pinned release: `2.2.6`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/http11/cpp/h2o/README.md)
 
-The harness builds only `deps/picohttpparser` from the H2O 2.2.6 tarball and calls its `phr_parse_request` from C++17. This is the PicoHTTPParser family, shared with [C × HTTP/1.1 picohttpparser](../../c/picohttpparser/README.md), not an independent engine. The bundled copy is an older snapshot than standalone PicoHTTPParser 1.5: `picohttpparser.c` and `picohttpparser.h` differ byte-for-byte (for example, the status-code `PARSE_INT` range checks and `findchar_fast` range tables). [`source-lock.json`](source-lock.json) records both bundled file hashes.
-
 ## Run from the repository root
 
 ```sh

@@ -4,8 +4,6 @@ Pinned release: `1.3.1`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/http11/cpp/libhv/README.md)
 
-libhv bundles a modified Node http-parser 2.9.1 in `http/http_parser.c`. This harness calls that bundled C API from C++. It shares its parser family with [Node http-parser](../http-parser/README.md) and is not an independent engine.
-
 ## Run from the repository root
 
 ```sh

@@ -14,4 +14,4 @@ python3 parsarium.py afl build http11 cpp poco
 python3 parsarium.py afl prepare http11 cpp poco runs/http11-poco-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of HTTP/1.1 request files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

@@ -4,10 +4,13 @@
 
 ## Targets
 
+- [assetkit / C](c/assetkit/README.md)
 - [assimp / C](c/assimp/README.md)
 - [mdal / C](c/mdal/README.md)
 - [assimp / C++](cpp/assimp/README.md)
 - [cgal / C++](cpp/cgal/README.md)
+- [easy3d / C++](cpp/easy3d/README.md)
+- [geogram / C++](cpp/geogram/README.md)
 - [libigl / C++](cpp/libigl/README.md)
 - [open-mesh / C++](cpp/open_mesh/README.md)
 - [github.com/EliCDavis/polyform/formats/ply / Go](go/polyform_ply/README.md)

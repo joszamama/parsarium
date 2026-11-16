@@ -25,6 +25,11 @@
 
 Easy3D SurfaceMeshIO and PlyReaderWriter use bundled RPly 1.1.4. It exposes a distinct SurfaceMesh API but shares the underlying RPly parser family with RPly, rplycpp, and Geogram.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/easy3d/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp easy3d
+python3 parsarium.py run ascii_ply cpp easy3d controls/ascii_ply/triangle.ply
+```

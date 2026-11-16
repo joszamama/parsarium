@@ -12,6 +12,42 @@ from binary_feedback import check_binary_feedback
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def browser_control_verified(path: Path, manifest: dict) -> bool:
+    """Validate a staged browser control without treating adapter coverage as parser feedback."""
+    if (manifest.get("coverage_kind") != "browser_control_only"
+            or manifest.get("native_decoder_source_coverage") != "unavailable"
+            or manifest.get("parser_feedback_available") is not False
+            or "fuzz_engine" in manifest or "fuzz_engine_sha256" in manifest):
+        return False
+    receipt = path.parent / "control-verification.json"
+    if not receipt.is_file():
+        return False
+    observed = json.loads(receipt.read_text())
+    current_files = {
+        str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+        for file in sorted(path.parent.rglob("*"))
+        if file.is_file() and file.name not in {"control-verification.json", "README.md"}
+        and "target" not in file.relative_to(path.parent).parts
+        and "__pycache__" not in file.relative_to(path.parent).parts
+    }
+    return (
+        observed.get("status") == "verified_control_only"
+        and observed.get("api") == manifest["api"]
+        and observed.get("runtime") == manifest["runtime"]
+        and observed.get("base_image") == manifest["base_image"]
+        and observed.get("browser_binary_sha256") == manifest["source_sha256"]
+        and observed.get("image_id", "").startswith("sha256:")
+        and observed.get("output") == manifest["expected_output"]
+        and observed.get("control_sha256") == manifest["control_sha256"]
+        and sha256((ROOT / manifest["control"]).read_bytes()).hexdigest() == manifest["control_sha256"]
+        and observed.get("adapter_js_functions_covered", 0) > 0
+        and observed.get("adapter_coverage_scope") == "browser-harness.js only"
+        and observed.get("native_decoder_source_coverage") == "unavailable"
+        and observed.get("parser_feedback_available") is False
+        and observed.get("project_file_sha256") == current_files
+    )
+
+
 @cache
 def smoke_rows(filename: str) -> dict[str, dict]:
     report = json.loads((ROOT / "data" / filename).read_text())
@@ -190,36 +226,8 @@ def main() -> None:
                 raise ValueError(f"missing standard Dockerfile or harness: {path}")
             docker_text = dockerfile.read_text()
             if manifest.get("coverage_kind") == "browser_control_only":
-                if (manifest.get("native_decoder_source_coverage") != "unavailable"
-                        or manifest.get("parser_feedback_available") is not False
-                        or "fuzz_engine" in manifest or "fuzz_engine_sha256" in manifest):
-                    raise ValueError(f"browser control-only coverage is misrepresented: {path}")
-                control_receipt = path.parent / "control-verification.json"
-                if not control_receipt.is_file():
-                    raise ValueError(f"missing browser control receipt: {path}")
-                observed = json.loads(control_receipt.read_text())
-                if (observed.get("status") != "verified_control_only"
-                        or observed.get("api") != manifest["api"]
-                        or observed.get("runtime") != manifest["runtime"]
-                        or observed.get("base_image") != manifest["base_image"]
-                        or observed.get("browser_binary_sha256") != manifest["source_sha256"]
-                        or not observed.get("image_id", "").startswith("sha256:")
-                        or observed.get("output") != manifest["expected_output"]
-                        or observed.get("control_sha256") != manifest["control_sha256"]
-                        or observed.get("adapter_js_functions_covered", 0) <= 0
-                        or observed.get("adapter_coverage_scope") != "browser-harness.js only"
-                        or observed.get("native_decoder_source_coverage") != "unavailable"
-                        or observed.get("parser_feedback_available") is not False):
+                if not browser_control_verified(path, manifest):
                     raise ValueError(f"browser control receipt mismatch: {path}")
-                current_files = {
-                    str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
-                    for file in sorted(path.parent.rglob("*"))
-                    if file.is_file() and file.name not in {"control-verification.json", "README.md"}
-                    and "target" not in file.relative_to(path.parent).parts
-                    and "__pycache__" not in file.relative_to(path.parent).parts
-                }
-                if observed.get("project_file_sha256") != current_files:
-                    raise ValueError(f"browser control files changed since verification: {path}")
                 pinned_fields = ("base_image", "source_sha256")
             else:
                 pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")

@@ -4,8 +4,6 @@ Pinned release: `0.7.4`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/ascii_ply/c/assetkit/README.md)
 
-The harness loads local ASCII PLY files with AssetKit, then reports mesh and vertex counts, face count, and the first three face indices when present. Point clouds report zero faces.
-
 ## Run from the repository root
 
 ```sh

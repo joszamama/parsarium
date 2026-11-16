@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import re
 
-from audit_projects import fully_runnable
+from audit_projects import browser_control_verified, fully_runnable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -74,9 +74,12 @@ def main() -> None:
     manifest_paths = sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
     projects = {}
     standard_projects = {}
+    staged_browser_projects = {}
     project_guides = 0
     for path in manifest_paths:
         manifest = read(path)
+        if manifest.get("kind") == "standard" and browser_control_verified(path, manifest):
+            staged_browser_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
         if not fully_runnable(path, manifest):
             continue
         project_guides += 1
@@ -198,6 +201,14 @@ def main() -> None:
                     lines += ["## Run this target", "", "```sh",
                               f"python3 parsarium.py build {fmt} {eco} {slug_name}",
                               f"python3 parsarium.py run {fmt} {eco} {slug_name} {control}", "```", ""]
+                elif staged := staged_browser_projects.get((fmt, eco, item.get("api"))):
+                    lines += ["## Run the valid control", "",
+                              f"[Browser container and control receipt]({link(item_dir, staged.parent / 'README.md')})", "",
+                              "```sh",
+                              f"python3 {staged.parent.relative_to(ROOT)}/verify-control.py",
+                              "```", "",
+                              "The browser runs this control, but its native parser source coverage and "
+                              "AFL++ parser feedback are unavailable. This path remains staged.", ""]
                 else:
                     lines += ["## Runnable harness", "",
                               "A Docker harness with parser-source coverage has not yet been verified for this API path.", ""]
@@ -234,6 +245,8 @@ def main() -> None:
 
     for path in manifest_paths:
         manifest = read(path)
+        if not fully_runnable(path, manifest):
+            continue
         fmt, eco, slug_name = manifest["format"], manifest["ecosystem"], path.parent.name
         project_dir = path.parent
         key = (fmt, eco, manifest["package"])
