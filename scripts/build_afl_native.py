@@ -74,6 +74,8 @@ def derived_dockerfile(project: Path) -> str:
             "id3demux", "isomp4", "playback", "pnm", "typefindfunctions",
             "wavparse",
         )
+        if project.parent.parent.name in {"mp4", "mp3_id3v2"}:
+            plugins += ("libav",)
         text += "\nENV AFL_PRELOAD=" + ":".join(
             f"/work/install/lib/gstreamer-1.0/libgst{name}.so"
             for name in plugins
