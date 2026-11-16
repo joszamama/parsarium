@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "cpp",
+  "package": "libvips",
+  "release": "8.18.7",
+  "catalog_parser": "data/cpp/pdf/parsers.json",
+  "source_lock": "data/c/pdf/source-lock.json",
+  "source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1,
+    "width": 612,
+    "height": 792
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in libvips PDF loader through the C++ API",
+  "coverage_subject_prefix": "/work/source/libvips/",
+  "format_specific_coverage_file_suffix": "/popplerload.c"
+}

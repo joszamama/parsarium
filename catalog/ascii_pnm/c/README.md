@@ -1,6 +1,6 @@
 # ASCII PNM / C
 
-20 verified third-party API paths; 13 have verified Docker harnesses.
+20 verified third-party API paths; 14 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/ascii_pnm/ranking.md) · [standard API inventory](../../../data/c/ascii_pnm/standard.json)
 
@@ -14,7 +14,7 @@
 - [devil](devil/README.md) — Docker harness ready
 - [imlib2](imlib2/README.md) — Docker harness ready
 - [gdk-pixbuf](gdk-pixbuf/README.md) — Docker harness ready
-- [vips](vips/README.md) — verified API path
+- [vips](vips/README.md) — Docker harness ready
 - [freeimage](freeimage/README.md) — Docker harness ready
 - [netpbm](netpbm/README.md) — verified API path
 - [ffmpeg](ffmpeg/README.md) — Docker harness ready

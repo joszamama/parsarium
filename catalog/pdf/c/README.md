@@ -1,6 +1,6 @@
 # PDF / C
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/pdf/ranking.md) · [standard API inventory](../../../data/c/pdf/standard.json)
 
@@ -16,7 +16,7 @@
 - [tspdf](tspdf/README.md) — verified API path
 - [imagemagick](imagemagick/README.md) — verified API path
 - [graphicsmagick](graphicsmagick/README.md) — verified API path
-- [libvips](libvips/README.md) — verified API path
+- [libvips](libvips/README.md) — Docker harness ready
 - [pdf_oxide](pdf-oxide/README.md) — verified API path
 - [libreofficekit](libreofficekit/README.md) — verified API path
 - [evince](evince/README.md) — verified API path

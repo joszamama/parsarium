@@ -1,13 +1,13 @@
 # SVG / C
 
-20 verified third-party API paths; 7 have verified Docker harnesses.
+20 verified third-party API paths; 8 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/svg/ranking.md) · [standard API inventory](../../../data/c/svg/standard.json)
 
 ## Third-party parsers
 
 - [librsvg](librsvg/README.md) — verified API path
-- [libvips](libvips/README.md) — verified API path
+- [libvips](libvips/README.md) — Docker harness ready
 - [imagemagick](imagemagick/README.md) — Docker harness ready
 - [graphicsmagick](graphicsmagick/README.md) — Docker harness ready
 - [resvg](resvg/README.md) — verified API path

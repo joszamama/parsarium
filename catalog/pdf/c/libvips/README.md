@@ -21,6 +21,11 @@
 
 The installed vips-poppler module links Poppler GLib 26.11.0; C and C++ libvips APIs share the same package and Poppler syntax engine. The adapter reads format-aware PDF metadata; libvips renders pixels lazily.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/c/libvips/README.md)
+
+```sh
+python3 parsarium.py build pdf c libvips
+python3 parsarium.py run pdf c libvips controls/pdf/one-page.pdf
+```

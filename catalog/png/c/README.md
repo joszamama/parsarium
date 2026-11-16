@@ -1,6 +1,6 @@
 # PNG / C
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/png/ranking.md) · [standard API inventory](../../../data/c/png/standard.json)
 
@@ -12,7 +12,7 @@
 - [libspng](libspng/README.md) — Docker harness ready
 - [imagemagick](imagemagick/README.md) — Docker harness ready
 - [gdk-pixbuf](gdk-pixbuf/README.md) — Docker harness ready
-- [vips](vips/README.md) — verified API path
+- [vips](vips/README.md) — Docker harness ready
 - [pngle](pngle/README.md) — Docker harness ready
 - [sdl3](sdl3/README.md) — Docker harness ready
 - [sdl3_image](sdl3-image/README.md) — Docker harness ready

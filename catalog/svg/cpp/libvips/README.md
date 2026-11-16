@@ -30,6 +30,11 @@
 
 Installed libvips core directly links librsvg 2.63.4. libvips is a distinct package input API but shares SVG syntax interpretation with the librsvg row.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/libvips/README.md)
+
+```sh
+python3 parsarium.py build svg cpp libvips
+python3 parsarium.py run svg cpp libvips controls/svg/red-green.svg
+```

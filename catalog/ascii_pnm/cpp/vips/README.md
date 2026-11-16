@@ -30,6 +30,11 @@
 
 ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/vips/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp vips
+python3 parsarium.py run ascii_pnm cpp vips controls/ascii_pnm/red-green.ppm
+```

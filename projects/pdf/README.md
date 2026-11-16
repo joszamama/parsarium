@@ -4,7 +4,9 @@
 
 ## Targets
 
+- [libvips / C](c/libvips/README.md)
 - [pdfio / C](c/pdfio/README.md)
+- [libvips / C++](cpp/libvips/README.md)
 - [pdfio / C++](cpp/pdfio/README.md)
 - [gitee.com/leijacob/pdf / Go](go/gitee_com_leijacob_pdf/README.md)
 - [github.com/ajroetker/pdf / Go](go/github_com_ajroetker_pdf/README.md)

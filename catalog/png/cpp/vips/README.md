@@ -32,6 +32,11 @@
 
 Image loader package path; PNG loader shares libpng lineage. Same underlying package and decoder as the C × PNG cell; this C++ path is not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/cpp/vips/README.md)
+
+```sh
+python3 parsarium.py build png cpp vips
+python3 parsarium.py run png cpp vips controls/png/red-green.png
+```

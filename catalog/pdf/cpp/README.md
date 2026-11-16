@@ -1,6 +1,6 @@
 # PDF / C++
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/pdf/ranking.md) · [standard API inventory](../../../data/cpp/pdf/standard.json)
 
@@ -24,7 +24,7 @@
 - [aspose_pdf_foss](aspose-pdf-foss/README.md) — verified API path
 - [imagemagick](imagemagick/README.md) — verified API path
 - [graphicsmagick](graphicsmagick/README.md) — verified API path
-- [libvips](libvips/README.md) — verified API path
+- [libvips](libvips/README.md) — Docker harness ready
 - [pdf_oxide](pdf-oxide/README.md) — verified API path
 
 ## Standard and runtime APIs
