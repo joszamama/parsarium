@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "cpp",
+  "package": "poco",
+  "release": "1.15.4",
+  "catalog_parser": "data/cpp/zip/parsers.json",
+  "source_lock": "data/cpp/zip/extra-source-lock.json",
+  "source_sha256": "4635007f593646b3db8754bbb31ded34cd533487519d4d4a45c788dbff3fe07f",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": 1,
+    "name": "hello.txt",
+    "content": "parsarium\n"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Poco.Zip ZipArchive, ZipLocalFileHeader, and ZipStream reader source plus the bundled zlib 1.3.2 inflate source linked into Poco.Foundation",
+  "coverage_subject_prefix": "/work/source/Zip/src/",
+  "format_specific_coverage_file_suffix": "/ZipArchive.cpp",
+  "underlying_coverage_subject_prefix": "/work/source/dependencies/zlib/src/",
+  "underlying_format_specific_coverage_file_suffix": "/inflate.c"
+}
