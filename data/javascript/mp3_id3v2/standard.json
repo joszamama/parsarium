@@ -10,7 +10,12 @@
       "adapter": "adapters/javascript/mp3_id3v2_browser.mjs",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
       "observable_result": "Decoded 8000 samples of 8000 Hz mono PCM from the tagged MP3",
-      "result": "data/javascript/mp3_id3v2/verification.json"
+      "result": "data/javascript/mp3_id3v2/verification.json",
+      "expected": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "samples": 8000
+      }
     },
     {
       "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
@@ -19,7 +24,10 @@
       "adapter": "adapters/javascript/mp3_id3v2_browser.mjs",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
       "observable_result": "Loaded local tagged MP3 and reported one-second duration",
-      "result": "data/javascript/mp3_id3v2/verification.json"
+      "result": "data/javascript/mp3_id3v2/verification.json",
+      "expected": {
+        "duration": 1
+      }
     }
   ],
   "no_api_findings": [
