@@ -27,6 +27,11 @@
 
 GStreamer Good Plug-ins wavparse handles WAV; the adapter explicitly uses the named plugin and reads parsed caps and PCM from appsink. It is a separate package path, with plugin binary and release checked. Its primary upstream is GitLab, so no GitHub-star score is borrowed from a mirror.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/gstreamer/README.md)
+
+```sh
+python3 parsarium.py build wav c gstreamer
+python3 parsarium.py run wav c gstreamer controls/wav/four-samples.wav
+```

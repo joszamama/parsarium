@@ -31,6 +31,11 @@
 
 PNM decoder plugin from the pinned GStreamer 1.28.9 monorepo source release; local pnm plugin dylib separately checked by SHA-256.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/gstreamer/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp gstreamer
+python3 parsarium.py run ascii_pnm cpp gstreamer controls/ascii_pnm/red-green.ppm
+```

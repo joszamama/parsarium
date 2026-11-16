@@ -56,6 +56,28 @@ def derived_dockerfile(project: Path) -> str:
             "&& chmod +x /work/build.sh && /work/build.sh",
             1,
         )
+    if project.name == "gstreamer":
+        # GStreamer builds its shared parser plugins before the harness. Keep
+        # the source build as a reusable Docker layer, compiled by AFL++ too.
+        source_rewrite = (
+            "RUN python3 -c 'from pathlib import Path; p=Path(\"/work/build-source.sh\"); "
+            "s=p.read_text().replace(\"clang\",\"afl-clang-fast\"); p.write_text(s)' "
+            "&& chmod +x /work/build-source.sh && /work/build-source.sh"
+        )
+        text = text.replace(
+            "RUN chmod +x /work/build-source.sh && /work/build-source.sh",
+            source_rewrite,
+            1,
+        )
+        plugins = (
+            "app", "audioconvert", "audioparsers", "coreelements",
+            "id3demux", "isomp4", "playback", "pnm", "typefindfunctions",
+            "wavparse",
+        )
+        text += "\nENV AFL_PRELOAD=" + ":".join(
+            f"/work/install/lib/gstreamer-1.0/libgst{name}.so"
+            for name in plugins
+        ) + "\n"
     if project.name == "imlib2":
         loader = {"png": "png", "ascii_pnm": "pnm", "svg": "svg"}[project.parent.parent.name]
         text += f"\nENV AFL_PRELOAD=/work/install/lib/imlib2/loaders/{loader}.so\n"
@@ -87,8 +109,15 @@ def build_one(format_name: str, ecosystem: str, slug: str) -> dict:
     tool_version = command(["docker", "run", "--rm", "--platform", manifest["platform"],
                             "--entrypoint", "dpkg-query", image,
                             "-W", "-f=${Version}", "afl++"])
+    image_env = json.loads(command(["docker", "image", "inspect", image,
+                                    "--format", "{{json .Config.Env}}"]))
+    preload = next((item.partition("=")[2] for item in image_env
+                    if item.startswith("AFL_PRELOAD=")), None)
+    probe_env = ["-e", "AFL_DUMP_MAP_SIZE=1"]
+    if preload:
+        probe_env += ["-e", f"LD_PRELOAD={preload}"]
     map_probe = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
-                            "-e", "AFL_DUMP_MAP_SIZE=1", "--entrypoint", entrypoint, image],
+                            *probe_env, "--entrypoint", entrypoint, image],
                                cwd=ROOT, capture_output=True, text=True)
     if not map_probe.stdout.strip().isdigit():
         raise RuntimeError(f"AFL++ map size probe failed: {map_probe.stderr[-2000:]}")
