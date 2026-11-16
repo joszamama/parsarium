@@ -27,4 +27,4 @@ Exit codes: `0` prints `{"pages":N}`; `1` usage; `2` path not convertible to a U
 
 ## Limits
 
-The receipt proves the valid control only. Core Graphics source is not public, so there is no parser source coverage and no AFL++ feedback. This path stays staged.
+The receipt proves the valid control only. Core Graphics source is not public, so there is no parser source coverage. A pinned [AFL++ Frida probe](feedback-blocker.json) found no reliable Core Graphics scoped feedback on two valid PDFs; this path stays staged.
