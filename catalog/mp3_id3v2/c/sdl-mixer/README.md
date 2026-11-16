@@ -21,6 +21,11 @@
 
 The pinned music_mpg123.c calls mp3_read_tags from mp3utils.c and links libmpg123 for audio. C and C++ adapters use the same SDL2_mixer C API. SDL3_mixer is another major release of the same upstream package and is not separately counted.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/sdl_mixer/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c sdl_mixer
+python3 parsarium.py run mp3_id3v2 c sdl_mixer controls/mp3_id3v2/tone-tags.mp3
+```

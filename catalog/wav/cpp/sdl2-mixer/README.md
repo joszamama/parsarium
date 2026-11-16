@@ -27,6 +27,11 @@
 
 Same SDL_mixer upstream project as SDL3_mixer but distinct 2.x package/API. On this macOS build it links sdl2-compat, which uses SDL3 underneath; no independent WAV engine is claimed. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/sdl2_mixer/README.md)
+
+```sh
+python3 parsarium.py build wav cpp sdl2_mixer
+python3 parsarium.py run wav cpp sdl2_mixer controls/wav/four-samples.wav
+```

@@ -21,6 +21,11 @@
 
 Dedicated src/decoder_wav.c in the pinned release derives from SDL2_mixer music_wav.c and earlier SDL_wave.c; related SDL lineage but separate from SDL3 core LoadWAV implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/sdl3_mixer/README.md)
+
+```sh
+python3 parsarium.py build wav c sdl3_mixer
+python3 parsarium.py run wav c sdl3_mixer controls/wav/four-samples.wav
+```
