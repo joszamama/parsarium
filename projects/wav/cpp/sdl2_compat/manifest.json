@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "cpp",
+  "package": "sdl2-compat",
+  "release": "2.32.74",
+  "catalog_parser": "data/cpp/wav/parsers.json",
+  "source_lock": "data/c/wav/source-lock.json",
+  "source_sha256": "ec68abde77e2e459c8abc4f9587b8976b5d2a657b2bfda2fb3a079b0f8924588",
+  "underlying_source_sha256": "f3bb06f55bed9557227a700af2ea62e49497ebdf58037732a731a5fb3ef8581f",
+  "underlying_release": "SDL3 3.4.20",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "frames": 4,
+    "samples": [
+      0,
+      1000,
+      -1000,
+      0
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned SDL2-compat layer and SDL3 WAV reader",
+  "coverage_subject_prefix": "/work/compat/src/",
+  "underlying_coverage_subject_prefix": "/work/sdl3/src/audio/",
+  "format_specific_coverage_file_suffix": "/sdl2_compat.c",
+  "underlying_format_specific_coverage_file_suffix": "/SDL_wave.c"
+}

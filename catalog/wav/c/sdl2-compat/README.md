@@ -27,6 +27,11 @@
 
 Separate SDL2-compat release/package offering SDL2 C API while using SDL3 internally; same underlying WAV parser family as SDL3 core, counted as a package path only.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/sdl2_compat/README.md)
+
+```sh
+python3 parsarium.py build wav c sdl2_compat
+python3 parsarium.py run wav c sdl2_compat controls/wav/four-samples.wav
+```

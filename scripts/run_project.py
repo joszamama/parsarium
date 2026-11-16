@@ -149,6 +149,10 @@ def main() -> None:
         assert len(underlying) == summary["underlying_source_files"]
         assert sum(f["summary"]["lines"]["covered"] for f in underlying) == summary["underlying_source_lines_covered"]
         assert summary["underlying_source_lines_covered"] > 0
+        if "underlying_format_specific_coverage_file_suffix" in manifest:
+            specific = [f for f in underlying if f["filename"].endswith(
+                manifest["underlying_format_specific_coverage_file_suffix"])]
+            assert sum(f["summary"]["lines"]["covered"] for f in specific) > 0
     receipt = {
         "kind": manifest.get("kind", "third_party"),
         "api": manifest.get("api"),
