@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "cpp",
+  "package": "boost-gil",
+  "release": "1.92.0",
+  "catalog_parser": "data/cpp/ascii_pnm/parsers.json",
+  "source_lock": "data/cpp/ascii_pnm/extra-source-lock.json",
+  "source_sha256": "6d20dbc568efeb0336c1cf4e988a50ad028eb0837b6b7dc85356d46a32955f66",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [255, 0, 0, 255],
+    "second": [0, 255, 0, 255]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Boost.GIL 1.92.0 PNM reader reached from byte-input harness",
+  "coverage_subject_prefix": "/work/source/gil/include/boost/gil/",
+  "format_specific_coverage_file_suffix": "/extension/io/pnm/detail/read.hpp",
+  "base_boost_source_sha256": "ea7b982002cc9dfbe59b0b217b206f470dc75f3de0bb2973d844118934d82411"
+}

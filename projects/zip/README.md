@@ -64,6 +64,7 @@
 - [commons-compress / Java](java/commons_compress/README.md)
 - [commons-vfs2 / Java](java/commons_vfs2/README.md)
 - [compress4j / Java](java/compress4j/README.md)
+- [jarchivelib / Java](java/jarchivelib/README.md)
 - [jdk-jarfile / Java](java/jdk_jarfile/README.md)
 - [jdk-zipfile / Java](java/jdk_zipfile/README.md)
 - [jdk-zipinputstream / Java](java/jdk_zipinputstream/README.md)

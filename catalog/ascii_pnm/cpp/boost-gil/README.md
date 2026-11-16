@@ -32,6 +32,11 @@
 
 The Boost.GIL I/O documentation describes P1–P6 input; the committed control proves only P3. Its tag-pinned GIL parser source is compiled with exact-release installed Boost base headers.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/boost-gil/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp boost-gil
+python3 parsarium.py run ascii_pnm cpp boost-gil controls/ascii_pnm/red-green.ppm
+```

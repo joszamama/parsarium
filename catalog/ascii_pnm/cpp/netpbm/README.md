@@ -31,6 +31,11 @@
 
 Direct libnetpbm library API; PPM reader also accepts PBM/PGM with on-the-fly conversion per official manual. Only P3 is verified here.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/netpbm/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp netpbm
+python3 parsarium.py run ascii_pnm cpp netpbm controls/ascii_pnm/red-green.ppm
+```

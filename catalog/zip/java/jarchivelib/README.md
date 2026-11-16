@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/java/jarchivelib/README.md)
+
+```sh
+python3 parsarium.py build zip java jarchivelib
+python3 parsarium.py run zip java jarchivelib controls/zip/hello.zip
+```

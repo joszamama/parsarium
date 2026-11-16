@@ -1,6 +1,6 @@
 # ZIP / Java
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/zip/ranking.md) · [standard API inventory](../../../data/java/zip/standard.json)
 
@@ -15,7 +15,7 @@
 - [zip4jvm](zip4jvm/README.md) — Docker harness ready
 - [quarkus-fs-util](quarkus-fs-util/README.md) — Docker harness ready
 - [plexus-archiver](plexus-archiver/README.md) — Docker harness ready
-- [jarchivelib](jarchivelib/README.md) — verified API path
+- [jarchivelib](jarchivelib/README.md) — Docker harness ready
 - [compress4j](compress4j/README.md) — Docker harness ready
 - [arcana](arcana/README.md) — Docker harness ready
 - [tika-parser-pkg-module](tika-parser-pkg-module/README.md) — Docker harness ready

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "cpp",
+  "package": "netpbm",
+  "release": "11.02.30",
+  "catalog_parser": "data/cpp/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/cpp/netpbm/source-lock.json",
+  "source_sha256": "6137ebc9d3ab5cc1a7b6c24b9b64723a6818bb43d5037d0963114f20a367dea9",
+  "source_integrity_scope": "Subversion stable revision 5358 plus SHA-256 checks of version.mk, libppm1.c, and libppm2.c",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "maxval": 255,
+    "first": [255, 0, 0],
+    "second": [0, 255, 0]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Netpbm libppm reached through C++17 byte-input bridge to FILE* API",
+  "coverage_subject_prefix": "/work/source/lib/",
+  "format_specific_coverage_file_suffix": "/lib/libppm1.c",
+  "language_bridge": "C libnetpbm API compiled and invoked from a C++17 translation unit"
+}

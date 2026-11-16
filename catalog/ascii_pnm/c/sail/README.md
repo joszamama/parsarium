@@ -30,6 +30,11 @@
 
 Built with only its native PNM codec and no external image codec.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/c/sail/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm c sail
+python3 parsarium.py run ascii_pnm c sail controls/ascii_pnm/red-green.ppm
+```

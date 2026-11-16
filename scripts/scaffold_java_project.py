@@ -39,6 +39,13 @@ def stage(format_name: str, package: str) -> Path:
     repository = "https://repo.maven.apache.org/maven2/"
     prefix = f"{group.replace('.', '/')}/{artifact}/{version}/{artifact}-{version}"
     source_url = repository + prefix + "-sources.jar"
+    source_tree = None
+    if package == "jarchivelib":
+        # Maven Central publishes the binary but no sources JAR for 1.2.0.
+        # The upstream v1.2.0 tag resolves to this exact commit.
+        commit = "6ecbbbbb598df8715188001433d27687a2585369"
+        source_url = f"https://codeload.github.com/thrau/jarchivelib/zip/{commit}"
+        source_tree = f"jarchivelib-{commit}"
     with urllib.request.urlopen(source_url, timeout=30) as response:
         source_sha = sha256(response.read()).hexdigest()
     adapter_root = ROOT / "adapters/java" / format_name
@@ -174,6 +181,8 @@ public final class GenericHarness {
         runtime_packages += " libmediainfo-dev"
     if format_name == "mp4" and package in {"bytedeco-ffmpeg", "javacv"}:
         runtime_packages += " libva-drm2"
+    source_copy = (f" && cp -a /work/parser-source/{source_tree}/src/main/java/. /work/parser-source"
+                   if source_tree else "")
     docker = f'''FROM --platform=linux/arm64 {base_image} AS build
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends curl unzip \\
@@ -183,7 +192,7 @@ RUN mkdir /work/lib \\
 {chr(10).join(downloads)}
 RUN curl --fail --location --retry 3 {source_url} -o /work/parser-sources.jar \\
     && echo '{source_sha}  /work/parser-sources.jar' | sha256sum --check \\
-    && mkdir /work/parser-source && unzip -qo /work/parser-sources.jar -d /work/parser-source
+    && mkdir /work/parser-source && unzip -qo /work/parser-sources.jar -d /work/parser-source{source_copy}
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.14/org.jacoco.agent-0.8.14-runtime.jar -o /work/jacocoagent.jar \\
     && echo '{JACOCO_AGENT}  /work/jacocoagent.jar' | sha256sum --check \\
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.cli/0.8.14/org.jacoco.cli-0.8.14-nodeps.jar -o /work/jacococli.jar \\
