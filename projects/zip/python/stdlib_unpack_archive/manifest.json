@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "zip",
+  "ecosystem": "python",
+  "package": "shutil.unpack_archive",
+  "release": "3.13.1",
+  "api": "shutil.unpack_archive",
+  "runtime": "CPython 3.13.1 standard library",
+  "standard_inventory": "data/python/zip/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "4743478681682a016952618173451379e6d66b8f6d44c1e676bd3c97ad2213e3",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "f8a9f51ce8369026e8eb7b7174835e8c4c85a1a6db5d9add36c15100779d2a39",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "python@sha256:4888fbac5737c749d34214356d2350ec0faa1c9df871fec5fe420d38085b0e7d",
+  "platform": "linux/amd64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "names": [
+      "hello.txt"
+    ],
+    "hello": "parsarium\n"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of pinned CPython zipfile package during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/usr/local/lib/python3.13/zipfile/",
+  "format_specific_coverage_file_suffix": "/zipfile/__init__.py"
+}

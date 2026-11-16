@@ -66,7 +66,7 @@ def build(output: Path) -> None:
         key = (manifest["format"], manifest["ecosystem"], manifest["package"], manifest["release"])
         manifests[key] = (path, manifest)
         if manifest.get("kind") == "standard":
-            standard_projects[(manifest["format"], manifest["ecosystem"])] = path
+            standard_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
 
     parsers = []
     cells = []
@@ -89,10 +89,7 @@ def build(output: Path) -> None:
             "evidenceUrl": repo_link(source),
             "standardUrl": repo_link(f"data/{eco}/{fmt}/standard.json"),
             "cellGuideUrl": repo_link(f"catalog/{fmt}/{eco}/README.md"),
-            "standardProjectUrl": (
-                repo_link(str((standard_projects[(fmt, eco)].parent / "README.md").relative_to(ROOT)))
-                if (fmt, eco) in standard_projects else None
-            ),
+            "standardProjectUrl": None,
         })
         for entry in entries:
             key = (fmt, eco, entry["name"], entry["version"])
@@ -129,7 +126,7 @@ def build(output: Path) -> None:
         raise ValueError("standard project links do not match project coverage")
 
     standard_targets = []
-    for (fmt, eco), project_path in sorted(standard_projects.items()):
+    for (fmt, eco, _api), project_path in sorted(standard_projects.items()):
         manifest = read_json(project_path)
         inventory_path = ROOT / manifest["standard_inventory"]
         inventory = read_json(inventory_path)
