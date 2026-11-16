@@ -24,4 +24,4 @@ docker run --rm --platform linux/arm64 --network none --read-only \
   /work/replay-cli.py /input/file
 ```
 
-Replace the mounted path to replay another PNG. The control receipt records covered lines in Tk's native `tkImgPNG.c` reader. AFL++ parser feedback is not yet available, so this path remains staged rather than counted as fully instrumented.
+Replace the mounted path to replay another PNG. The control receipt records covered lines in Tk's native `tkImgPNG.c` reader. The [AFL++ feedback overlay](../../../../fuzzing/afl-native/png/python/stdlib_tkinter_photoimage/README.md) recompiles the pinned Tk PNG decoder and checks two valid PNGs for stable, format-sensitive feedback.
