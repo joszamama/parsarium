@@ -27,6 +27,11 @@
 
 Own tagged C WAV loader package; this API requires an OpenAL context, created by alutInit on macOS. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/freealut/README.md)
+
+```sh
+python3 parsarium.py build wav cpp freealut
+python3 parsarium.py run wav cpp freealut controls/wav/four-samples.wav
+```
