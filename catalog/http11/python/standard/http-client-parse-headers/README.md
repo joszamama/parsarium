@@ -17,6 +17,9 @@
 
 [Control adapter](../../../../../adapters/python/http11/standard.py)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build http11 python stdlib_http_headers
+python3 parsarium.py run http11 python stdlib_http_headers controls/http11/response.http
+```

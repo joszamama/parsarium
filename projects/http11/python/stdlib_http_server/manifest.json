@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "http11",
+  "ecosystem": "python",
+  "package": "http.server.BaseHTTPRequestHandler",
+  "release": "3.13.1",
+  "api": "http.server.BaseHTTPRequestHandler(local socket, client address, server) parses and dispatches request",
+  "runtime": "CPython 3.13.1 standard library",
+  "standard_inventory": "data/python/http11/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "b38fcdf7a19f9d8e08b4e3767cd6d939fe740712acc828b57fe8df09a625c493",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "f8a9f51ce8369026e8eb7b7174835e8c4c85a1a6db5d9add36c15100779d2a39",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "python@sha256:4888fbac5737c749d34214356d2350ec0faa1c9df871fec5fe420d38085b0e7d",
+  "platform": "linux/amd64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "host": "example.test"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of pinned CPython http package during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/usr/local/lib/python3.13/http/",
+  "format_specific_coverage_file_suffix": "/http/server.py"
+}
