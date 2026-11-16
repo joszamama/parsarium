@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "zip",
+  "ecosystem": "php",
+  "package": "php-ziparchive",
+  "release": "8.5.12",
+  "api": "php-ziparchive",
+  "runtime": "PHP 8.5.12 CLI with zip extension 1.22.8 (libzip 1.12.1) and Phar extension",
+  "standard_inventory": "data/php/zip/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "fuzz_smoke_entrypoint": "/opt/php/bin/php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": 1,
+    "name": "hello.txt",
+    "content": "parsarium\n"
+  },
+  "harness": "harness.php",
+  "coverage": "Clang/LLVM source coverage in pinned libzip 1.12.1 ZIP open parser during valid-control replay",
+  "coverage_subject_prefix": "/work/source/libzip-1.12.1/lib/",
+  "format_specific_coverage_file_suffix": "/zip_open.c",
+  "native_dependency": {
+    "name": "libzip",
+    "release": "1.12.1",
+    "source_sha256": "c40062022a1963c80573d48f6070792297cecd7c6bffe3aefcac0d8b9bee8913"
+  }
+}

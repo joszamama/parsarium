@@ -25,6 +25,11 @@
 
 Independent C++20 PLY parser; compatibility build patch changes declaration order only.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/turboply/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp turboply
+python3 parsarium.py run ascii_ply cpp turboply controls/ascii_ply/triangle.ply
+```

@@ -1,6 +1,6 @@
 # MP4 / C
 
-20 verified third-party API paths; 4 have verified Docker harnesses.
+20 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/mp4/ranking.md) · [standard API inventory](../../../data/c/mp4/standard.json)
 
@@ -17,7 +17,7 @@
 - [libquicktime](libquicktime/README.md) — verified API path
 - [libextractor](libextractor/README.md) — verified API path
 - [taglib](taglib/README.md) — Docker harness ready
-- [libmp4tag](libmp4tag/README.md) — verified API path
+- [libmp4tag](libmp4tag/README.md) — Docker harness ready
 - [ireader-media-server](ireader-media-server/README.md) — verified API path
 - [shiguredo-mp4-rs](shiguredo-mp4-rs/README.md) — verified API path
 - [libheif](libheif/README.md) — verified API path

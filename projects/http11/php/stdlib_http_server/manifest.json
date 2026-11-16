@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "http11",
+  "ecosystem": "php",
+  "package": "php-cli-http-server",
+  "release": "8.5.12",
+  "api": "PHP CLI built-in web server request parser with $_SERVER and getallheaders",
+  "runtime": "PHP 8.5.12 CLI built-in web server",
+  "standard_inventory": "data/php/http11/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "fuzz_smoke_entrypoint": "/usr/bin/python3",
+  "fuzz_smoke_args": [
+    "/work/http-replay.py",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "GET",
+  "afl_entrypoint": "/work/fuzzer",
+  "afl_coverage": "AFL++ source feedback from the PHP CLI server's pinned php_http_parser.c using a direct C byte-input harness; the public server API is checked by the loopback control replay",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "target": "/parsarium?x=1",
+    "version": "1.1",
+    "host": "example.test",
+    "custom": "yes"
+  },
+  "harness": "http-replay.py",
+  "coverage": "Clang/LLVM source coverage in PHP 8.5.12 sapi/cli/php_http_parser.c during loopback HTTP/1.1 valid-request replay",
+  "coverage_subject_prefix": "/work/source/php-8.5.12/sapi/cli/",
+  "format_specific_coverage_file_suffix": "/php_http_parser.c"
+}

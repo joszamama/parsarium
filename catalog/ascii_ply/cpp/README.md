@@ -1,6 +1,6 @@
 # ASCII PLY / C++
 
-21 verified third-party API paths; 5 have verified Docker harnesses.
+21 verified third-party API paths; 6 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/ascii_ply/ranking.md) · [standard API inventory](../../../data/cpp/ascii_ply/standard.json)
 
@@ -16,7 +16,7 @@
 - [pcl](pcl/README.md) — verified API path
 - [vtk](vtk/README.md) — verified API path
 - [plywoot](plywoot/README.md) — Docker harness ready
-- [turboply](turboply/README.md) — verified API path
+- [turboply](turboply/README.md) — Docker harness ready
 - [geometry-central](geometry-central/README.md) — verified API path
 - [trimesh2](trimesh2/README.md) — verified API path
 - [vcglib](vcglib/README.md) — verified API path

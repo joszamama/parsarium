@@ -31,14 +31,15 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
     ecosystem = manifest["ecosystem"]
     php_native = (ecosystem == "php" and manifest.get("kind") == "standard"
                   and manifest.get("fuzz_engine") == "AFL++")
-    target = ("/opt/php/bin/php" if php_native else
-              "/work/afl_fuzzer" if ecosystem == "rust" else
-              "/work/afl_proxy" if ecosystem in
-              {"go", "java", "javascript", "python", "php"} else
-              manifest.get("afl_entrypoint", "/work/fuzzer"))
-    target_args = ([target, "/work/fuzz-target.php", "@@"] if php_native else
-                   [target, "@@"] if ecosystem in
-                   {"go", "java", "javascript", "python", "php"} else [target])
+    if php_native:
+        target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
+                       else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
+    elif ecosystem == "rust":
+        target_args = ["/work/afl_fuzzer", "@@"]
+    elif ecosystem in {"go", "java", "javascript", "python", "php"}:
+        target_args = ["/work/afl_proxy", "@@"]
+    else:
+        target_args = [manifest.get("afl_entrypoint", "/work/fuzzer")]
     command = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
                "-o", "/results", "--", *target_args]
     resume = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "-",

@@ -21,6 +21,11 @@
 
 Distinct C++ package API with bundled miniz; shares underlying parser lineage with miniz and kuba-zip.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/troldal_zippy/README.md)
+
+```sh
+python3 parsarium.py build zip cpp troldal_zippy
+python3 parsarium.py run zip cpp troldal_zippy controls/zip/hello.zip
+```

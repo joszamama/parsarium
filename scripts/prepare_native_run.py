@@ -63,10 +63,12 @@ def command_for(manifest: dict, image_id: str, corpus: Path, artifacts: Path,
                  f"-max_len={MAX_CASE_BYTES}", "-artifact_prefix=/artifacts/"]
     elif (ecosystem == "php" and manifest.get("kind") == "standard"
           and manifest.get("fuzz_engine") == "AFL++"):
+        target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
+                       else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
         args += ["-e", "AFL_SKIP_CPUFREQ=1", "-e", "AFL_NO_AFFINITY=1",
                  "-e", "AFL_NO_UI=1", "--entrypoint", "afl-fuzz", image_id,
                  "-m", "none", "-t", "10000", "-i", "/corpus", "-o", "/artifacts",
-                 "--", "/opt/php/bin/php", "/work/fuzz-target.php", "@@"]
+                 "--", *target_args]
     elif ecosystem == "php":
         args += ["--entrypoint", manifest["fuzz_smoke_entrypoint"], image_id,
                  "-d", "xdebug.mode=coverage", "/work/vendor/bin/php-fuzzer",

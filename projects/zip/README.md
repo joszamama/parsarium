@@ -29,6 +29,7 @@
 - [minizip / C++](cpp/minizip/README.md)
 - [minizip-ng / C++](cpp/minizip-ng/README.md)
 - [physfs / C++](cpp/physfs/README.md)
+- [troldal-zippy / C++](cpp/troldal_zippy/README.md)
 - [unarr / C++](cpp/unarr/README.md)
 - [unziplib / C++](cpp/unziplib/README.md)
 - [zipc / C++](cpp/zipc/README.md)

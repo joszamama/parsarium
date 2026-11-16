@@ -1,6 +1,6 @@
 # ZIP / C++
 
-27 verified third-party API paths; 15 have verified Docker harnesses.
+27 verified third-party API paths; 16 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/zip/ranking.md) · [standard API inventory](../../../data/cpp/zip/standard.json)
 
@@ -16,7 +16,7 @@
 - [zziplib](zziplib/README.md) — Docker harness ready
 - [unarr](unarr/README.md) — Docker harness ready
 - [libzippp](libzippp/README.md) — Docker harness ready
-- [troldal-zippy](troldal-zippy/README.md) — verified API path
+- [troldal-zippy](troldal-zippy/README.md) — Docker harness ready
 - [poco](poco/README.md) — verified API path
 - [zipios](zipios/README.md) — verified API path
 - [zipper](zipper/README.md) — verified API path

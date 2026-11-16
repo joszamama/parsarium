@@ -5,6 +5,7 @@
 ## Targets
 
 - [HTTPParserC / C](c/httpparserc/README.md)
+- [finwo-http-parser / C](c/finwo-http-parser/README.md)
 - [http-parser / C](c/http-parser/README.md)
 - [httpp / C](c/httpp/README.md)
 - [libparsehttp / C](c/libparsehttp/README.md)
@@ -13,6 +14,7 @@
 - [picohttpparser / C](c/picohttpparser/README.md)
 - [samsung-http-parser / C](c/samsung-http-parser/README.md)
 - [HTTPParserC / C++](cpp/httpparserc/README.md)
+- [finwo-http-parser / C++](cpp/finwo-http-parser/README.md)
 - [http-parser / C++](cpp/http-parser/README.md)
 - [httpp / C++](cpp/httpp/README.md)
 - [libparsehttp / C++](cpp/libparsehttp/README.md)

@@ -1,6 +1,6 @@
 # ASCII PLY / Python
 
-21 verified third-party API paths; 16 have verified Docker harnesses.
+21 verified third-party API paths; 17 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/ascii_ply/ranking.md) · [standard API inventory](../../../data/python/ascii_ply/standard.json)
 
@@ -24,7 +24,7 @@
 - [vedo](vedo/README.md) — Docker harness ready
 - [assimp-py](assimp-py/README.md) — verified API path
 - [libigl](libigl/README.md) — verified API path
-- [openmesh](openmesh/README.md) — verified API path
+- [openmesh](openmesh/README.md) — Docker harness ready
 - [numpy-stl](numpy-stl/README.md) — Docker harness ready
 - [pyassimp](pyassimp/README.md) — Docker harness ready
 

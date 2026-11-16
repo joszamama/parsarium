@@ -7,6 +7,7 @@
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [gstreamer / C](c/gstreamer/README.md)
 - [libmediainfo / C](c/libmediainfo/README.md)
+- [libmp4tag / C](c/libmp4tag/README.md)
 - [taglib / C](c/taglib/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)

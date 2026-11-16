@@ -206,6 +206,11 @@ def build(output: Path) -> None:
         )
         if documented_api is None:
             raise ValueError(f"standard API missing from inventory: {project_path}")
+        official_documentation = documented_api.get("documentation") or documented_api.get("official_documentation")
+        if isinstance(official_documentation, list):
+            official_documentation = official_documentation[0] if official_documentation else None
+        if not official_documentation:
+            raise ValueError(f"standard API documentation missing: {project_path}")
         standard_targets.append({
             "type": "standard",
             "format": fmt,
@@ -215,7 +220,7 @@ def build(output: Path) -> None:
             "scope": "format-aware runtime API",
             "family": manifest["runtime"],
             "inputApi": manifest["api"],
-            "documentation": documented_api["documentation"],
+            "documentation": official_documentation,
             "evidenceUrl": repo_link(str(inventory_path.relative_to(ROOT))),
             "guideUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
             "projectUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),

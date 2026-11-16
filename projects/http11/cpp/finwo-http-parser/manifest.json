@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "cpp",
+  "package": "finwo-http-parser",
+  "release": "stable@3d78ef3ad068",
+  "catalog_parser": "data/cpp/http11/parsers.json",
+  "source_lock": "data/cpp/http11/extra-source-lock.json",
+  "source_sha256": "79641d6f2ffc227a1a082191a509b8e49e4a2f31f2057e6e22eefa01d4602512",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {"method": "GET", "path": "/parsarium", "query": "x=1", "version": "1.1", "host": "example.test"},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in the pinned C parser reached through a C++17 harness; same parser family as C path",
+  "coverage_subject_prefix": "/work/source/src/",
+  "format_specific_coverage_file_suffix": "/http-parser.c"
+}

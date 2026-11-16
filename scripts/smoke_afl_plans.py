@@ -32,11 +32,15 @@ def check(relative: Path, scratch: Path) -> dict:
     assert plan["overlay_receipt_sha256"] == sha256(receipt_path.read_bytes()).hexdigest()
     php_native = (manifest["ecosystem"] == "php" and manifest.get("kind") == "standard"
                   and manifest.get("fuzz_engine") == "AFL++")
-    assert plan["command"][-(3 if php_native else 2):] == (["/opt/php/bin/php", "/work/fuzz-target.php", "@@"]
-                                      if php_native else ["/work/afl_proxy", "@@"] if manifest["ecosystem"] in
+    if php_native:
+        expected_tail = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
+                         else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
+    else:
+        expected_tail = (["/work/afl_proxy", "@@"] if manifest["ecosystem"] in
                                       {"go", "java", "javascript", "python", "php"} else
                                       ["--", "/work/afl_fuzzer"] if manifest["ecosystem"] == "rust" else
                                       ["--", manifest.get("afl_entrypoint", "/work/fuzzer")])
+    assert plan["command"][-len(expected_tail):] == expected_tail
     return {"project": str(relative), "status": "ready",
             "image_id": plan["image_id"], "control_sha256": plan["control_sha256"],
             "overlay_receipt_sha256": plan["overlay_receipt_sha256"],
