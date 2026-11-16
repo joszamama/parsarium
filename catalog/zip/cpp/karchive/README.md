@@ -21,6 +21,11 @@
 
 KDE Frameworks KArchive exposes its own ZIP reader through KZip and Qt; the same package is counted only once.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/karchive/README.md)
+
+```sh
+python3 parsarium.py build zip cpp karchive
+python3 parsarium.py run zip cpp karchive controls/zip/hello.zip
+```
