@@ -1,6 +1,8 @@
 # PyQt5 — ASCII PNM / Python
 
-Pinned PyQt5 release: `5.15.11`; pinned Qt runtime: `5.15.19`. [Manifest](manifest.json) · [verification receipt](verification.json) · [catalog API and parser-family evidence](../../../../catalog/ascii_pnm/python/pyqt5/README.md)
+Pinned release: `5.15.11`. [Manifest](manifest.json) · [verification receipt](verification.json)
+
+[API, control result, and parser family](../../../../catalog/ascii_pnm/python/pyqt5/README.md)
 
 ## Run from the repository root
 
@@ -12,6 +14,6 @@ python3 parsarium.py afl build ascii_pnm python pyqt5
 python3 parsarium.py afl prepare ascii_pnm python pyqt5 runs/ascii_pnm-pyqt5-afl
 ```
 
-`QImageReader(local path).read()` returns a 2 × 1 image with red `(255, 0, 0)` and green `(0, 255, 0)` pixels for the valid P3 control. Replace `CORPUS_DIR` with a directory of matching PNM files. `afl prepare` creates a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Feedback:** AFL++ QEMU observes native binary edges in the pinned Qt GUI shared library. [The smoke check](binary-feedback/README.md) demonstrates stable and input-sensitive feedback. The wheel does not expose instrumented Qt decoder source, so the receipt reports no Qt source-line coverage or PNM function-level attribution.
+**Feedback scope:** AFL++ observes edges in the pinned `libQt5Gui.so.5` shared library. This target does not claim source-line coverage. The verification receipt records the module hash and differential valid-control check.

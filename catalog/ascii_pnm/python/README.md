@@ -1,6 +1,6 @@
 # ASCII PNM / Python
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/ascii_pnm/ranking.md) · [standard API inventory](../../../data/python/ascii_pnm/standard.json)
 
@@ -15,7 +15,7 @@
 - [imagesize](imagesize/README.md) — Docker harness ready
 - [PySide6](pyside6/README.md) — Docker harness ready
 - [PyQt6](pyqt6/README.md) — Docker harness ready
-- [PyQt5](pyqt5/README.md) — verified API path
+- [PyQt5](pyqt5/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

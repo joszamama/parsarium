@@ -59,6 +59,7 @@
 - [rokka/imagine-vips / PHP](php/rokka_imagine_vips/README.md)
 - [spatie/image / PHP](php/spatie_image/README.md)
 - [Pillow / Python](python/pillow/README.md)
+- [PyQt5 / Python](python/pyqt5/README.md)
 - [PyQt6 / Python](python/pyqt6/README.md)
 - [PySide6 / Python](python/pyside6/README.md)
 - [imageio / Python](python/imageio/README.md)
