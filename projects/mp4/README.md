@@ -8,6 +8,7 @@
 - [gstreamer / C](c/gstreamer/README.md)
 - [libmediainfo / C](c/libmediainfo/README.md)
 - [taglib / C](c/taglib/README.md)
+- [exiv2 / C++](cpp/exiv2/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
 - [taglib / C++](cpp/taglib/README.md)
