@@ -82,6 +82,7 @@
 - [mediainfo-jna-wrapper / Java](java/mediainfo_jna_wrapper/README.md)
 - [metadata-extractor / Java](java/metadata_extractor/README.md)
 - [musicg / Java](java/musicg/README.md)
+- [tarsosdsp-jvm / Java](java/tarsosdsp_jvm/README.md)
 - [tika-audiovideo / Java](java/tika_audiovideo/README.md)
 - [v47-jaffree / Java](java/v47_jaffree/README.md)
 - [vlcj-info / Java](java/vlcj_info/README.md)

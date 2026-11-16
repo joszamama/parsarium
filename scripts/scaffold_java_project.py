@@ -40,6 +40,8 @@ def stage(format_name: str, package: str) -> Path:
     prefix = f"{group.replace('.', '/')}/{artifact}/{version}/{artifact}-{version}"
     source_url = repository + prefix + "-sources.jar"
     source_tree = None
+    if package == "tarsosdsp-jvm":
+        source_url = "https://mvn.0110.be/releases/" + prefix + "-sources.jar"
     if package == "jarchivelib":
         # Maven Central publishes the binary but no sources JAR for 1.2.0.
         # The upstream v1.2.0 tag resolves to this exact commit.
@@ -61,7 +63,8 @@ def stage(format_name: str, package: str) -> Path:
         raise ValueError(f"no locked JAR for {jar_path}")
     lock_path, lock = matches[0]
     jars = [item for item in lock["classpath"]
-            if not (format_name == "wav" and Path(item["repository_path"]).name in {
+            if not (format_name == "wav" and package != "tarsosdsp-jvm"
+                    and Path(item["repository_path"]).name in {
                 "xmpcore-6.1.11.jar", "jvm-2.5.jar", "core-2.5.jar"})
             and not (format_name == "wav" and "junit" in item["repository_path"].lower())]
     jars = [{**item,
@@ -98,7 +101,7 @@ def stage(format_name: str, package: str) -> Path:
     destination.mkdir(parents=True)
     adapter_text = source.read_text()
     adapter_text = adapter_text.replace("/opt/homebrew/bin", "/usr/bin")
-    if format_name == "wav" and uses_mode:
+    if format_name == "wav" and uses_mode and package != "tarsosdsp-jvm":
         start = adapter_text.index('            case "tarsos" -> {')
         end = adapter_text.index('            case "musicg" -> {', start)
         adapter_text = adapter_text[:start] + adapter_text[end:]
@@ -106,7 +109,7 @@ def stage(format_name: str, package: str) -> Path:
     label = parser.get("adapter_label", package)
     if format_name == "wav":
         label = {"jhove-modules": "jhove", "tika-audiovideo": "tika",
-                 "bytedeco-ffmpeg": "ffmpeg"}.get(label, label)
+                 "bytedeco-ffmpeg": "ffmpeg", "tarsosdsp-jvm": "tarsos"}.get(label, label)
     class_name = "org.parsarium." + source.stem
     control = ROOT / parser["control"]
     harness = '''import java.io.ByteArrayOutputStream;
@@ -171,7 +174,9 @@ public final class GenericHarness {
     downloads = []
     for item in jars:
         name = Path(item["repository_path"]).name
-        downloads.extend([f"    && curl --fail --location --retry 3 {repository + item['repository_path']} -o /work/lib/{name} \\",
+        jar_repository = ("https://mvn.0110.be/releases/"
+                          if item["repository_path"].startswith("be/tarsos/dsp/") else repository)
+        downloads.extend([f"    && curl --fail --location --retry 3 {jar_repository + item['repository_path']} -o /work/lib/{name} \\",
                           f"    && echo '{item['sha256']}  /work/lib/{name}' | sha256sum --check \\"])
     downloads[-1] = downloads[-1].removesuffix(" \\")
     base_image = BASE25 if format_name in {"mp3_id3v2", "pdf"} else BASE

@@ -112,6 +112,10 @@ def build_one(relative: Path) -> dict:
             java_environment["PARSARIUM_JAVA_BOOTPATH"] = extract(r"-Xbootclasspath/a:(\S+)")
         else:
             java_environment["PARSARIUM_JACOCO_INCLUDES"] = extract(r"includes=([^ ,\\]+)")
+        if manifest.get("afl_underlying_jar"):
+            java_trace_name = "java_dual_trace.py"
+            java_environment["PARSARIUM_UNDERLYING_JAR"] = manifest["afl_underlying_jar"]
+            java_environment["PARSARIUM_UNDERLYING_SOURCES"] = manifest["afl_underlying_sources"]
         trace_command = f'python3 /work/afl_{java_trace_name}'
         bridge_names = ("afl_proxy.c", "JavaCase.java", java_trace_name)
     elif ecosystem == "javascript":

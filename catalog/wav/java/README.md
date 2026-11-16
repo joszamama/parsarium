@@ -1,6 +1,6 @@
 # WAV / Java
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/wav/ranking.md) · [standard API inventory](../../../data/java/wav/standard.json)
 
@@ -16,7 +16,7 @@
 - [javacv](javacv/README.md) — Docker harness ready
 - [bytedeco-ffmpeg](bytedeco-ffmpeg/README.md) — Docker harness ready
 - [jhove-modules](jhove-modules/README.md) — Docker harness ready
-- [tarsosdsp-jvm](tarsosdsp-jvm/README.md) — verified API path
+- [tarsosdsp-jvm](tarsosdsp-jvm/README.md) — Docker harness ready
 - [musicg](musicg/README.md) — Docker harness ready
 - [jaffree](jaffree/README.md) — Docker harness ready
 - [jave-core](jave-core/README.md) — Docker harness ready

@@ -20,6 +20,13 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/java/tarsosdsp_jvm/README.md)
+
+```sh
+python3 parsarium.py build wav java tarsosdsp_jvm
+python3 parsarium.py run wav java tarsosdsp_jvm controls/wav/256-samples.wav
+```
+
+**Coverage limit:** Feedback covers TarsosDSP JVM and core classes. The WAV decoder underneath is Java Sound in the JDK and is not included in the package-source line count.
