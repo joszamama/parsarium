@@ -4,10 +4,6 @@ Pinned release: `9.7.2`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/ascii_ply/cpp/vtk/README.md)
 
-The harness writes each input to a temporary local `.ply` file and reads it with `vtkPLYReader::SetFileName`, `Update`, and `GetOutput`. The build compiles the minimal static VTK module closure of `VTK::IOPLY`, then recompiles `IO/PLY/vtkPLYReader.cxx` and the bundled `IO/PLY/vtkPLY.cxx` parser with coverage and sanitizer instrumentation.
-
-The valid control passed with 564 covered VTK PLY source lines and 3,014 AFL++ feedback edges.
-
 ## Run from the repository root
 
 ```sh

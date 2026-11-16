@@ -4,8 +4,6 @@ Pinned release: `1.3.10`. [Manifest](manifest.json) · [verification receipt](ve
 
 [API, control result, and parser family](../../../../catalog/http11/cpp/serf/README.md)
 
-The harness wraps the input in `serf_bucket_simple_create`, reads it through `serf_bucket_response_create`, and prints the status line, `Content-Type`, and the decoded body. Serf's SCons build is not used; `build.sh` compiles the bucket sources the response path needs (no TLS buckets, no OpenSSL) against the distribution's APR, APR-util, and zlib.
-
 ## Run from the repository root
 
 ```sh

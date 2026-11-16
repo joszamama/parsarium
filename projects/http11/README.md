@@ -15,6 +15,7 @@
 - [libsoup / C++](cpp/libsoup/README.md)
 - [mongoose / C++](cpp/mongoose/README.md)
 - [poco / C++](cpp/poco/README.md)
+- [serf / C++](cpp/serf/README.md)
 - [github.com/antlabs/httparser / Go](go/github_com_antlabs_httparser/README.md)
 - [github.com/cloudwego/hertz/pkg/protocol/http1/req / Go](go/github_com_cloudwego_hertz_pkg_protocol_http1_req/README.md)
 - [github.com/evanphx/wildcat / Go](go/github_com_evanphx_wildcat/README.md)
