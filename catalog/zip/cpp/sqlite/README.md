@@ -21,6 +21,11 @@
 
 Official SQLite ext/misc/zipfile.c extension parses ZIP archive records and delegates DEFLATE to zlib; its repository stars measure all SQLite usage, not Zipfile adoption. The C++ path reuses the exact C-cell release and implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/sqlite/README.md)
+
+```sh
+python3 parsarium.py build zip cpp sqlite
+python3 parsarium.py run zip cpp sqlite controls/zip/hello.zip
+```
