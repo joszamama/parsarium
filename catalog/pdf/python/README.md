@@ -1,6 +1,6 @@
 # PDF / Python
 
-20 verified third-party API paths; 2 have verified Docker harnesses.
+20 verified third-party API paths; 17 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/pdf/ranking.md) · [standard API inventory](../../../data/python/pdf/standard.json)
 
@@ -8,24 +8,24 @@
 
 - [pypdf](pypdf/README.md) — verified API path
 - [pdfrw](pdfrw/README.md) — verified API path
-- [pdfminer.six](pdfminer-six/README.md) — verified API path
-- [pdfplumber](pdfplumber/README.md) — verified API path
-- [PyMuPDF](pymupdf/README.md) — verified API path
-- [pypdfium2](pypdfium2/README.md) — verified API path
-- [pikepdf](pikepdf/README.md) — verified API path
-- [pdfquery](pdfquery/README.md) — verified API path
-- [pdf2image](pdf2image/README.md) — verified API path
-- [PyPDF4](pypdf4/README.md) — verified API path
-- [pdf_oxide](pdf-oxide/README.md) — verified API path
+- [pdfminer.six](pdfminer-six/README.md) — Docker harness ready
+- [pdfplumber](pdfplumber/README.md) — Docker harness ready
+- [PyMuPDF](pymupdf/README.md) — Docker harness ready
+- [pypdfium2](pypdfium2/README.md) — Docker harness ready
+- [pikepdf](pikepdf/README.md) — Docker harness ready
+- [pdfquery](pdfquery/README.md) — Docker harness ready
+- [pdf2image](pdf2image/README.md) — Docker harness ready
+- [PyPDF4](pypdf4/README.md) — Docker harness ready
+- [pdf_oxide](pdf-oxide/README.md) — Docker harness ready
 - [pymupdf4llm](pymupdf4llm/README.md) — verified API path
-- [pdf2docx](pdf2docx/README.md) — verified API path
-- [pdftext](pdftext/README.md) — verified API path
-- [markitdown](markitdown/README.md) — verified API path
+- [pdf2docx](pdf2docx/README.md) — Docker harness ready
+- [pdftext](pdftext/README.md) — Docker harness ready
+- [markitdown](markitdown/README.md) — Docker harness ready
 - [paper2md](paper2md/README.md) — Docker harness ready
-- [pdfnaut](pdfnaut/README.md) — verified API path
+- [pdfnaut](pdfnaut/README.md) — Docker harness ready
 - [pdftotext](pdftotext/README.md) — Docker harness ready
-- [pdfx](pdfx/README.md) — verified API path
-- [slate3k](slate3k/README.md) — verified API path
+- [pdfx](pdfx/README.md) — Docker harness ready
+- [slate3k](slate3k/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 
