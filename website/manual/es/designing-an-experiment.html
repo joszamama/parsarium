@@ -1,0 +1,74 @@
+<!-- {"title": "Diseñar un experimento", "summary": "Una lista de comprobación para estudios con muchos parsers: pregunta, targets, presupuestos, repeticiones, métricas y qué publicar."} -->
+<p>Este último capítulo junta todos los anteriores. Es la lista de comprobación que uso antes de empezar un experimento con muchos targets, escrita para no tener que recordarla cada vez.</p>
+
+<h2>Empieza por la pregunta</h2>
+<p>Escribe la pregunta en una frase antes de elegir nada. «¿Llega la herramienta A a más código del parser que la herramienta B en formatos de imagen?» lleva a un diseño distinto del de «¿Cuántos lectores de ZIP aceptan archivos con entradas solapadas?». La pregunta te dice qué targets, qué entradas y qué mediciones necesitas.</p>
+
+<h2>Elige y fija los targets</h2>
+<ul>
+  <li>Crea la selección en el <a href="{{ROOT}}bench/">banco</a>. Decide si cuentas paquetes o familias, y si incluyes las APIs de la biblioteca estándar.</li>
+  <li>Guarda el manifiesto y anota el ID de la selección y el commit de Parsarium.</li>
+  <li>Ejecuta primero los controles de toda la selección. Lleva unos minutos y confirma que todos los targets funcionan en tu máquina antes de que empiecen las ejecuciones largas.</li>
+</ul>
+
+<h2>Fija las condiciones</h2>
+<ul>
+  <li><strong>Semillas.</strong> El mismo conjunto de semillas para todas las herramientas. Los controles son una opción razonable por defecto.</li>
+  <li><strong>Presupuesto.</strong> Tiempo real por target, o número de ejecuciones. Indica cuál.</li>
+  <li><strong>Repeticiones.</strong> Varias ejecuciones por configuración. Cinco es el mínimo; diez es mejor si te lo puedes permitir.</li>
+  <li><strong>Hardware.</strong> Modelo de CPU, núcleos usados, memoria y si las campañas compartieron máquina.</li>
+</ul>
+
+<h2>Elige las métricas</h2>
+<table>
+  <thead><tr><th>Métrica</th><th>Sirve para</th><th>Cómo comparar</th></tr></thead>
+  <tbody>
+    <tr><td>Cobertura</td><td>Hasta dónde llega una herramienta dentro del parser</td><td>Dentro de un target, entre herramientas o a lo largo del tiempo</td></tr>
+    <tr><td>Bugs distintos</td><td>Qué encuentra una herramienta</td><td>Después de deduplicar por ubicación y familia</td></tr>
+    <tr><td>Tiempo hasta el primer crash</td><td>Lo rápido que encuentra una herramienta un bug conocido</td><td>Mediana de las repeticiones</td></tr>
+    <tr><td>Aceptación</td><td>Cómo tratan los parsers un conjunto de entradas</td><td>Entre todos los targets de un formato</td></tr>
+  </tbody>
+</table>
+<p>Para la cobertura, un método justo es volver a pasar el corpus final de cada herramienta por el mismo target instrumentado y medirlo igual para todas, en lugar de comparar las cifras que cada herramienta da sobre sí misma.</p>
+
+<h2>Analiza</h2>
+<p>Presenta medianas con su dispersión, no ejecuciones sueltas. Usa un test estadístico como Mann-Whitney U para comparar herramientas en cada target, y un tamaño del efecto junto al p-valor. Presenta primero los resultados por target y después los agregados; una media entre lenguajes puede ocultar una herramienta que funciona bien en C y mal en todo lo demás.</p>
+
+<h2>Publica</h2>
+<p>Comparte el manifiesto, los scripts que ejecutaste y los directorios de ejecución, o al menos cada <code>summary.json</code>, <code>campaign.json</code> y <code>afl-summary.json</code>. Cita el commit de Parsarium y el ID de la selección. Con eso, otra persona puede reconstruir exactamente tu conjunto de targets y repetir las partes que le interesen.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Escribe la pregunta en una frase antes de elegir targets, entradas o métricas.</li><li>Fija la selección y el commit, y ejecuta los controles antes de las ejecuciones largas.</li><li>Fija las semillas, el presupuesto, las repeticiones y el hardware, y documenta los cuatro.</li><li>Compara primero por target, con medianas, dispersión y un test estadístico. Agrega después.</li><li>Publica el manifiesto, los scripts y los resúmenes de las ejecuciones.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="2"><p class="q-text">La herramienta A tiene más cobertura media que la B en 30 targets, con una ejecución de cada. ¿Basta para decir que A es mejor?</p><ol class="q-opts"><li>Sí, 30 targets son muchos.</li><li>Sí, si la diferencia es grande.</li><li>No. Necesitas repeticiones por target y un test estadístico, y la media puede ocultar targets en los que pierde.</li></ol><p class="q-why">Una ejecución por target mezcla el efecto de la herramienta con el azar, y una media entre lenguajes puede ocultar una herramienta que solo funciona bien en C.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Para qué sirve aquí un test U de Mann-Whitney?</p><ol class="q-opts"><li>Para medir la cobertura</li><li>Para comparar los resultados de dos herramientas en un target sin suponer una distribución normal</li><li>Para elegir el número de repeticiones</li></ol><p class="q-why">Los resultados de fuzzing rara vez siguen una distribución normal. Mann-Whitney U compara dos muestras de ejecuciones; acompáñalo de un tamaño del efecto.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Cómo mides la cobertura de forma justa entre herramientas?</p><ol class="q-opts"><li>Vuelves a pasar el corpus final de cada herramienta por el mismo target instrumentado</li><li>Usas la cifra que imprime cada herramienta al terminar</li><li>Cuentas los archivos de cada cola</li></ol><p class="q-why">Cada herramienta mide la cobertura a su manera. Una medición común hace que las cifras sean comparables.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Por qué ejecutar los controles de toda la selección antes de las campañas?</p><ol class="q-opts"><li>Para calentar la CPU</li><li>Para confirmar que todos los targets funcionan en tu máquina antes de horas de fuzzing</li><li>Porque el banco lo exige</li></ol><p class="q-why">Una imagen rota o una compilación que falta se encuentran en minutos y sin coste; después de un día de campañas, salen caras.</p></div>
+<div class="q" data-answer="2"><p class="q-text">¿Qué es lo mínimo que debes compartir para que otros puedan reconstruir tu configuración?</p><ol class="q-opts"><li>El artículo</li><li>La versión del fuzzer</li><li>El manifiesto de la selección con su ID, el commit de Parsarium y los resúmenes de las ejecuciones</li></ol><p class="q-why">Con eso, cualquiera puede reconstruir el conjunto de targets y repetir las partes que le interesen.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 9.1</span><span class="level">Calentamiento</span></p>
+  <p>Para cada una de estas ideas de estudio, escribe la pregunta en una frase y elige una selección en el banco: formatos, lenguajes, límite por celda y si usar un target por familia.</p>
+  <ol><li>¿La generación consciente de la estructura llega a más código que la mutación de bytes en formatos binarios?</li><li>¿Cuántos lectores de ZIP aceptan un archivo cuyo directorio central y cuyas cabeceras locales no coinciden?</li><li>¿Los parsers de Python manejan las entradas mal formadas de forma más segura que los de C?</li></ol>
+  <details><summary>Pista</summary><p>Pregúntate qué estás contando en cada caso: código, comportamientos o lenguajes.</p></details>
+  <details><summary>Solución</summary><ol><li>PNG, ZIP, MP4, WAV y MP3; un target por familia; tres por celda. Estás comparando herramientas, así que los motores importan más que los wrappers.</li><li>Solo ZIP, todos los lenguajes, todos los targets, incluidas las APIs estándar. Estás contando comportamiento real, así que cuenta cada paquete; presenta también las familias.</li><li>Todos los formatos, solo Python y C, todos los targets, y después repite con uno por familia. El lenguaje es la variable, así que deja todo lo demás igual y muestra los dos recuentos.</li></ol></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 9.2</span><span class="level">Práctica</span></p>
+  <p>Lee este párrafo de evaluación y apunta todo lo que debería preguntar un revisor.</p>
+  <blockquote class="note">«Evaluamos nuestro fuzzer en 40 parsers de Parsarium durante 24 horas. Encontró 12 crashes y logró un 18 % más de cobertura que AFL++ de media, lo que demuestra su superioridad».</blockquote>
+  <details><summary>Pista</summary><p>Repasa la lista de este capítulo: selección, semillas, presupuesto, repeticiones, métricas, estadística y artefactos.</p></details>
+  <details><summary>Solución</summary><ul><li>¿Qué 40 parsers? No hay ID de selección ni commit.</li><li>¿24 horas en total o por target? ¿Cuántos en paralelo y en qué hardware?</li><li>¿Cuántas repeticiones? ¿El 18 % es una mediana o una sola ejecución, y es significativo?</li><li>¿Cómo se midió la cobertura: con las cifras de cada herramienta o con una medición común? ¿Se mezclaron targets con puente y compilados?</li><li>¿Los 12 crashes son antes o después de deduplicar? ¿Cuántos bugs distintos, en cuántas familias? ¿Se reprodujeron y se comunicaron?</li><li>¿Las dos herramientas usaron las mismas semillas?</li><li>La «superioridad» de media puede ocultar targets en los que AFL++ fue mejor; faltan los resultados por target.</li></ul></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 9.3</span><span class="level">Reto</span></p>
+  <p>Diseña un estudio pequeño de principio a fin: dos formatos, un target por familia, campañas de cinco minutos y tres repeticiones. Crea la selección en el banco, descarga el manifiesto y la plantilla del informe, ejecuta los controles y después las campañas. Rellena las líneas de configuración del informe y añade una tabla con la mediana de <code>corpus_count</code> por target.</p>
+  <details><summary>Pista</summary><p>Reutiliza el script del ejercicio 7.3 y después calcula las medianas por proyecto con <code>statistics.median</code>.</p></details>
+  <details><summary>Solución</summary><p>Una respuesta completa tiene cinco archivos: el manifiesto, el script de ejecución, el CSV del script de recogida, el informe relleno y una nota breve sobre lo que no salió como estaba previsto. Es un experimento pequeño pero completo, y la misma estructura sirve para cientos de targets.</p></details>
+</div>
+</section>

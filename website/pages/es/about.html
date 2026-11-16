@@ -1,0 +1,100 @@
+<!-- {"title": "Acerca de Parsarium", "description": "Por qué existe Parsarium, qué contiene un target, cómo se eligen los parsers, cómo citarlo y cómo contribuir."} -->
+<section class="intro">
+  <div class="wrap">
+    <p class="off">0x0000<b>acerca de</b></p>
+    <div>
+      <h1>Un conjunto compartido de targets para investigar parsers.</h1>
+      <p class="lede">Soy Pepe Zamudio, doctorando en CISPA, en Saarbrücken. Trabajo en fuzzing y generación de pruebas para programas cuyas entradas tienen estructura: archivos, peticiones y mensajes de protocolo. Parsarium es el conjunto de targets que construí para ese trabajo, publicado para que otras personas también puedan usarlo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0010<b>por qué</b></p>
+    <div class="split">
+      <div>
+        <h2>Por qué lo construí.</h2>
+        <p>Casi todos los estudios sobre pruebas de parsers empiezan igual: elegir unos programas, instalarlos, escribir un adaptador que les pase bytes y comprobar que funcionan con una entrada válida. Cada grupo repite este paso en cada artículo, y cada grupo elige de forma distinta. Así es difícil comparar los resultados y difícil reproducirlos.</p>
+        <p>Quería hacer este paso una vez y hacerlo bien. Para cada formato y lenguaje, Parsarium busca en los repositorios de paquetes, verifica los parsers que encuentra con un control válido, los ordena por adopción y prepara un harness con versiones fijadas para los que pasan. El resultado es un conjunto de targets que puedes inspeccionar, volver a ejecutar y citar.</p>
+      </div>
+      <div>
+        <h2>Para qué sirve.</h2>
+        <p>Para comparar fuzzers y generadores de pruebas sobre los mismos targets. Para comprobar cuántas implementaciones de un formato aceptan o rechazan una entrada dada. Para estudiar cómo cambia el comportamiento de los parsers entre lenguajes. Para enseñar: el <a href="{{ROOT}}manual/">manual</a> usa Parsarium en todos sus ejercicios.</p>
+        <p>También sirve como punto de partida para investigar en seguridad. Un corpus generado se puede pasar por todos los parsers de un formato con un solo comando, y cualquier target puede entrar directamente en una campaña de AFL++.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0020<b>un target</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>Qué contiene un target.</h2>
+        <p>Cada target ejecutable vive en <code>projects/&lt;format&gt;/&lt;language&gt;/&lt;package&gt;/</code>. Tomando como ejemplo el target PNG de Pillow:</p>
+      </div>
+      <dl class="anatomy">
+        <dt>Versión fijada</dt><dd><code>pillow 13.0.0</code>, instalado desde un archivo de bloqueo con el hash de su código fuente registrado.</dd>
+        <dt>API de entrada</dt><dd>La llamada documentada que analiza los bytes, aquí <code>Image.open()</code>, <code>Image.load()</code> e <code>Image.getpixel()</code>. La E/S genérica de archivos o la detección de tipo MIME no cuentan.</dd>
+        <dt>Control válido</dt><dd><code>controls/png/red-green.png</code>, una imagen de 71 bytes con un píxel rojo y uno verde.</dd>
+        <dt>Salida esperada</dt><dd>Lo que el parser debe devolver con el control: <code>width 2, height 1</code> y los dos píxeles RGBA.</dd>
+        <dt>Harness Docker</dt><dd>Un Dockerfile sobre una imagen base fijada y un harness que lee una entrada e imprime lo que observó el parser.</dd>
+        <dt>Registro de verificación</dt><dd>El ID de la imagen, las versiones de la cadena de herramientas, los hashes de los archivos, la salida observada y cuántas líneas del código fuente del parser cubrió el control.</dd>
+        <dt>Fuzzing</dt><dd>Una imagen para AFL++ con su propio registro de feedback, además del motor de fuzzing propio del lenguaje (Atheris en Python).</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0030<b>selección</b></p>
+    <div class="sec-head">
+      <h2>Cómo se eligen los parsers.</h2>
+      <p>El catálogo avanza celda a celda, un formato × lenguaje cada vez, con la meta de llegar a veinte paquetes verificados por celda. Un parser entra cuando es de código abierto, tiene una versión fijada y analiza bytes locales mediante una API documentada con un resultado observable y propio del formato. Se admiten wrappers, y se registra la familia de parser que hay debajo.</p>
+      <p>Los paquetes se ordenan con una sola métrica de adopción por celda, normalmente las descargas del repositorio, y solo frente a otros paquetes de la misma celda. Las APIs de la biblioteca estándar se verifican igual y se listan aparte. Se guardan todas las búsquedas, sus resultados y las pistas sin resolver, así que puedes ver exactamente cómo se construyó una celda. Las reglas completas están en el <a href="https://github.com/joszamama/parsarium/blob/main/PROTOCOL.md">protocolo de selección</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec receipts">
+  <div class="wrap">
+    <p class="off">0x0040<b>cuaderno</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>Cuaderno de laboratorio.</h2>
+        <p>Cada harness escribe un registro cuando se verifica. Estas son las fechas de los {{RUNNABLE}} registros actuales y los más recientes. La web se reconstruye desde el repositorio con cada cambio.</p>
+      </div>
+      {{RECEIPTS}}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cite">
+  <div class="wrap">
+    <p class="off">0x0050<b>cita</b></p>
+    <div class="sec-head">
+      <h2>Cómo citar Parsarium.</h2>
+      <p>Si usas Parsarium en un artículo, cita el commit que usaste. Si trabajas con un subconjunto, incluye también el ID de selección del <a href="{{ROOT}}bench/">banco</a>.</p>
+      <pre data-copy>@misc{parsarium,
+  author       = {Zamudio Amaya, Jos{\'e} Antonio},
+  title        = {Parsarium: An Open Testbed of Real Parsers},
+  year         = {{{YEAR}}},
+  howpublished = {\url{https://parsarium.com}},
+  note         = {Commit {{COMMIT}}}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0060<b>contacto</b></p>
+    <div class="sec-head">
+      <h2>Cómo contribuir.</h2>
+      <p>Las sugerencias de parsers, formatos o correcciones son bienvenidas como <a href="https://github.com/joszamama/parsarium/issues">issues en GitHub</a>. Si encuentras un bug en un parser usando Parsarium, notifícalo primero al proyecto original, a través de su política de seguridad si la tiene. Para colaboraciones de investigación, puedes encontrarme en <a href="https://pepezamudio.com">pepezamudio.com</a>.</p>
+    </div>
+  </div>
+</section>

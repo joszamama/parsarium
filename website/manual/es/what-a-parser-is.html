@@ -1,0 +1,72 @@
+<!-- {"title": "Qué hace un parser", "summary": "Entran bytes y sale estructura. Por qué ese paso importa para las pruebas y la seguridad, y cómo lo organiza Parsarium."} -->
+<p>Un parser toma bytes y los convierte en una estructura que un programa puede usar. Un decodificador PNG lee una firma y una secuencia de bloques, y devuelve un ancho, un alto y unos píxeles. Un parser HTTP lee una línea de petición y unas cabeceras, y devuelve un método, un destino y un mapa de campos. El resto del programa trabaja con esa estructura y confía en que sea correcta.</p>
+
+<p>Eso convierte al parser en el primer código que ve la entrada externa. Los archivos llegan de usuarios, de adjuntos de correo, de subidas, de otros servicios. Digan lo que digan los bytes, el parser tiene que decidir qué significan antes de que se ejecute nada más.</p>
+
+<h2>Por qué merece la pena probar parsers</h2>
+<p>La mayoría de los formatos describen su propia estructura. Un bloque PNG empieza con su longitud, un archivo ZIP guarda los desplazamientos de sus entradas, una caja MP4 declara su tamaño, una cabecera PLY anuncia cuántos vértices vienen después. El parser lee esos números y actúa en consecuencia: reserva memoria, salta a un desplazamiento, repite un bucle un número de veces. Cuando los números están mal, un parser cuidadoso rechaza la entrada. Uno menos cuidadoso puede leer más allá del final de un búfer, reservar muchísima más memoria de la necesaria, entrar en una recursión sin límite o quedarse en un bucle durante mucho tiempo.</p>
+<p>Un segundo tipo de problema aparece cuando dos parsers leen los mismos bytes de forma distinta. Un proxy y un servidor que no coinciden en dónde termina una petición HTTP pueden acabar viendo dos peticiones donde se pretendía enviar una. Una herramienta de compresión y un verificador de firmas que eligen entradas distintas del mismo ZIP pueden comprobar un archivo y extraer otro. Estos bugs no necesitan un crash. Necesitan dos programas que parecen correctos y toman decisiones distintas.</p>
+<p>Ambos tipos de bugs se encuentran pasando muchas entradas por parsers reales y observando qué ocurre. Para eso está hecho Parsarium.</p>
+
+<h2>Aceptar y rechazar</h2>
+<p>Todo parser traza una línea entre las entradas que acepta y las que rechaza. Los parsers estrictos siguen la especificación de cerca. Los permisivos intentan recuperarse de pequeños errores, algo cómodo para los usuarios y a veces sorprendente para quien revisa la seguridad. Ninguna de las dos opciones es incorrecta por sí sola; lo que importa al probar es saber dónde traza su línea cada parser y si trata de forma segura todo lo que queda del lado aceptado.</p>
+
+<h2>Cómo organiza Parsarium los parsers</h2>
+<p>Parsarium se organiza primero por <strong>formato</strong> y después por <strong>lenguaje</strong>. Un formato en un lenguaje es una <em>celda</em>: PNG en C, ZIP en Go, HTTP/1.1 en PHP. Hay diez formatos y ocho lenguajes, así que ochenta celdas.</p>
+<table>
+  <thead><tr><th>Formato</th><th>Estructura</th></tr></thead>
+  <tbody>
+    <tr><td>PNG</td><td>Firma y después bloques con longitud y tipo, con sumas de comprobación</td></tr>
+    <tr><td>ZIP</td><td>Entradas locales, con un directorio central al final</td></tr>
+    <tr><td>MP4</td><td>Cajas anidadas, cada una con un tamaño y un tipo</td></tr>
+    <tr><td>WAV</td><td>Bloques RIFF: una descripción del formato y después las muestras</td></tr>
+    <tr><td>PDF</td><td>Objetos numerados y una tabla de referencias cruzadas</td></tr>
+    <tr><td>SVG</td><td>Un árbol de elementos XML</td></tr>
+    <tr><td>HTTP/1.1</td><td>Una línea inicial de texto, cabeceras y un cuerpo opcional</td></tr>
+    <tr><td>ASCII PLY</td><td>Una cabecera de texto que declara elementos y después registros</td></tr>
+    <tr><td>ASCII PNM</td><td>Tokens separados por espacios: número mágico, tamaño, muestras</td></tr>
+    <tr><td>MP3 + ID3v2</td><td>Un preámbulo de metadatos etiquetados antes de las tramas de audio</td></tr>
+  </tbody>
+</table>
+<p>Elegí los formatos para cubrir distintos tipos de estructura: binarios y de texto, planos y anidados, secuenciales y basados en desplazamientos, archivos y mensajes de protocolo. Una herramienta que funciona bien con un tipo suele tener problemas con otro, así que una mezcla da una imagen más honesta.</p>
+<p>Cada entrada de una celda es una <strong>ruta de paquete</strong>: una biblioteca de código abierto, o una API de la biblioteca estándar, junto con la función exacta que analiza la entrada. Cada una se ha comprobado con una entrada válida antes de añadirla. La mayoría tiene un harness Docker que puedes ejecutar.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Un parser convierte bytes en estructura, y el resto del programa se fía de esa estructura.</li><li>Los formatos describen su propia estructura con longitudes, recuentos y desplazamientos. Los parsers actúan sobre esos números, y ahí empiezan muchos bugs.</li><li>Hay dos tipos de bugs de parser que merece la pena buscar: el manejo inseguro de una sola entrada, y dos parsers que no se ponen de acuerdo sobre la misma entrada.</li><li>Parsarium se organiza por formato y después por lenguaje. Un formato en un lenguaje es una celda; diez formatos y ocho lenguajes dan ochenta celdas.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Por qué el parser suele ser lo primero que conviene probar en un programa que maneja archivos?</p><ol class="q-opts"><li>Es el primer código que interpreta la entrada externa.</li><li>Los parsers suelen estar escritos en C.</li><li>Los parsers se ejecutan con más privilegios que el resto del programa.</li></ol><p class="q-why">Sean cuales sean los bytes, el parser decide qué significan antes de que se ejecute nada más. Eso vale para cualquier lenguaje, no solo para C.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Un archivo ZIP guarda al final un directorio central que apunta a cada entrada. ¿Qué tipo de estructura es esta?</p><ol class="q-opts"><li>Una secuencia de bloques</li><li>Desplazamientos y un directorio</li><li>Un árbol de texto</li></ol><p class="q-why">El lector encuentra primero el directorio y después salta a las entradas que enumera, así que a los mismos bytes se puede llegar por más de un camino.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Un proxy y un servidor leen la misma petición HTTP. El proxy cree que termina después de las cabeceras; el servidor lee un cuerpo. Ninguno falla. ¿Es un problema?</p><ol class="q-opts"><li>No. Sin fallo no hay bug.</li><li>Sí. El desacuerdo puede permitir que una petición se esconda dentro de otra.</li><li>Solo si los dos programas están escritos en el mismo lenguaje.</li></ol><p class="q-why">Los bugs diferenciales no necesitan un fallo. Dos programas que parecen correctos por separado toman decisiones distintas sobre los mismos bytes.</p></div>
+<div class="q" data-answer="2"><p class="q-text">¿Qué es una celda en Parsarium?</p><ol class="q-opts"><li>Una versión de un parser</li><li>Un archivo de control</li><li>Un formato en un lenguaje</li></ol><p class="q-why">PNG en C, ZIP en Go y HTTP/1.1 en PHP son celdas. Cada celda tiene su propia búsqueda, su propio ranking y sus propios paquetes verificados.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Un parser permisivo acepta un PNG con una suma de comprobación incorrecta. ¿Qué te dice eso?</p><ol class="q-opts"><li>Que tiene un bug.</li><li>Que traza la línea de aceptación en otro sitio. Si eso importa depende de cómo maneje lo que acepta.</li><li>Que en realidad no es un parser de PNG.</li></ol><p class="q-why">La permisividad es una decisión de diseño. Para probar, lo que importa es dónde traza la línea cada parser y si maneja de forma segura todo lo que queda del lado aceptado.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 1.1</span><span class="level">Calentamiento</span></p>
+  <p>Lista el catálogo, abre una celda e inspecciona un target.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py list
+<span class="p">$ </span>python3 parsarium.py catalog png c
+<span class="p">$ </span>python3 parsarium.py show png c libpng</pre>
+  <p>La salida de <code>catalog</code> ordena los veinte paquetes en C por estrellas de GitHub. Fíjate en la última columna, la familia subyacente. ¿Cuántos paquetes leen PNG a través de <code>stb_image</code>?</p>
+  <details><summary>Pista</summary><p>Busca el texto <code>stb_image</code> en la columna de familia. Las copias incluidas en otros proyectos también cuentan.</p></details>
+  <details><summary>Solución</summary><p>Tres: <code>raylib</code> y <code>sdl3</code> incluyen <code>stb_image</code>, y <code>stb</code> es el propio <code>stb_image</code>. Tres paquetes en el ranking y un solo decodificador debajo. El capítulo 4 vuelve sobre esto.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 1.2</span><span class="level">Práctica</span></p>
+  <p>Compara cómo de cubierto está cada lenguaje para un formato.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py list --format http11</pre>
+  <p>¿Qué lenguajes tienen más targets ejecutables de HTTP/1.1 y cuáles menos? Comprueba tu respuesta con la fila de HTTP/1.1 del <a href="{{ROOT}}atlas/?format=http11">atlas</a>.</p>
+  <details><summary>Pista</summary><p>El recuento de ejecutables es el número de targets con un harness Docker. Puede ser mayor que el de verificados porque las APIs de la biblioteca estándar se cuentan aparte.</p></details>
+  <details><summary>Solución</summary><p>En el momento de escribir esto, Go y Rust tienen más targets ejecutables de HTTP/1.1 (22 cada uno), y C y C++ menos (9 cada uno). Muchos parsers HTTP en C y C++ están integrados en servidores más grandes y es más difícil alimentarlos desde un archivo, por eso todavía hay menos con harness.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 1.3</span><span class="level">Reto</span></p>
+  <p>Busca una vulnerabilidad publicada en un parser de uno de los diez formatos. La <a href="https://nvd.nist.gov/vuln/search">búsqueda de NVD</a> o los avisos de seguridad de un proyecto son buenos puntos de partida. Responde a tres preguntas: qué campo del formato controlaba el atacante, qué hacía el parser con él, y si era un bug de una sola entrada o un desacuerdo entre dos programas.</p>
+  <details><summary>Pista</summary><p>Busca el nombre de una biblioteca junto con palabras como <em>overflow</em>, <em>out-of-bounds</em> o <em>path traversal</em>. Los avisos que incluyen un archivo de prueba de concepto son los más fáciles de analizar.</p></details>
+  <details><summary>Solución</summary><p>Un ejemplo muy conocido es <a href="https://security.snyk.io/research/zip-slip-vulnerability">Zip Slip</a> (2018). El atacante controla el nombre de una entrada en un archivo ZIP y escribe nombres como <code>../../etc/cron.d/job</code>. Muchas rutinas de extracción unían ese nombre al directorio de destino sin comprobarlo, así que los archivos se escribían fuera de él. Es un bug de una sola entrada: un programa se fió de un campo que debería haber validado. Apunta tu propio ejemplo de la misma manera: campo, comportamiento, tipo.</p></details>
+</div>
+</section>

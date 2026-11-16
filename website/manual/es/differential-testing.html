@@ -1,0 +1,74 @@
+<!-- {"title": "Testing diferencial", "summary": "Envía los mismos bytes a muchos parsers y compara lo que dicen. Donde no coinciden es donde hay que mirar."} -->
+<p>Cuando muchos programas implementan el mismo formato, pueden comprobarse entre sí. Envía una entrada a todos y compara las respuestas. Si la mayoría de los parsers dicen que la imagen mide 2 por 1 y uno dice 3 por 1, al menos uno de ellos merece una mirada más atenta. No necesitas saber de antemano la respuesta correcta; el desacuerdo es la señal.</p>
+
+<h2>Por qué importan los desacuerdos</h2>
+<p>Algunos desacuerdos son inofensivos: un parser es tolerante con un campo que falta y otro es estricto. Otros son problemas de seguridad. Si un proxy y un servidor parsean la misma petición HTTP de forma distinta, un atacante puede esconder una segunda petición dentro de la primera. Si un verificador de firmas y un instalador leen entradas distintas del mismo ZIP, el archivo comprobado y el instalado no son el mismo. Si un PDF muestra contenido distinto en visores distintos, quien lo revisa y quien lo lee ven documentos diferentes. En todos estos casos, cada programa puede parecer correcto por separado.</p>
+<p>El testing diferencial también encuentra bugs normales. Un parser que acepta un archivo que todas las demás implementaciones rechazan suele estar saltándose alguna comprobación.</p>
+
+<h2>Pasar un archivo por todos los parsers</h2>
+<p>Parsarium tiene un comando para esto. Ejecuta todos los harnesses verificados de un formato, opcionalmente limitados a un lenguaje, y guarda un registro por target más un <code>summary.json</code>.</p>
+<pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --list
+<span class="p">$ </span>python3 parsarium.py run-format png --file my.png --results runs/png-my-file --workers 4</pre>
+<p><code>summary.json</code> enumera cada target con su estado y el directorio de su registro. Los recuentos por estado dan una primera visión: cuántos terminaron, cuántos salieron con error y cuántos agotaron el tiempo.</p>
+
+<h2>Comparar las respuestas</h2>
+<p>El estado por sí solo no te dice si un parser aceptó la entrada, así que el siguiente paso es comparar las salidas. Los harnesses imprimen los campos que observaron, y los nombres de los campos varían un poco entre targets, así que elige los campos que importan para tu pregunta y normalízalos. Para imágenes, el ancho y el alto son un buen punto de partida. Basta con un script corto:</p>
+<pre data-copy>python3 - runs/png-my-file &lt;&lt;'EOF'
+import json, sys, pathlib, collections
+root = pathlib.Path(sys.argv[1])
+summary = json.loads((root / "summary.json").read_text())
+groups = collections.defaultdict(list)
+for row in summary["results"]:
+    receipts = list((root / row["receipt_dir"]).glob("*.json"))
+    tail = json.loads(receipts[0].read_text()).get("stdout_tail", "") if receipts else ""
+    groups[(row["status"], tail.strip()[-80:])].append(row["project"])
+for (status, tail), projects in sorted(groups.items(), key=lambda g: -len(g[1])):
+    print(f"{len(projects):4}  {status:15}  {tail}")
+    for p in projects[:5]:
+        print("        ", p)
+EOF</pre>
+<p>El grupo más grande suele ser el consenso. Los grupos pequeños son los interesantes.</p>
+
+<h2>Otra vez las familias</h2>
+<p>Cuando cuentes coincidencias, recuerda que los wrappers comparten motor. Trece paquetes de PHP que coinciden entre sí pueden ser un solo decodificador que coincide consigo mismo. Agrupa los resultados por familia de parsers antes de decidir lo raro que es un desacuerdo.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Enviar una misma entrada a muchas implementaciones no exige conocer de antemano la respuesta correcta: el desacuerdo es la señal.</li><li>Algunos desacuerdos son simple tolerancia. Otros son problemas de seguridad cuando dos parsers están en el mismo camino.</li><li><code>run-format</code> ejecuta todos los harnesses de un formato y guarda un registro por target, además de un resumen.</li><li>Los recuentos de estados son una primera vista; la comparación de verdad se hace sobre los campos de salida normalizados.</li><li>Agrupa por familia de parsers antes de decidir lo raro que es un desacuerdo.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Necesitas conocer la salida correcta antes de lanzar una prueba diferencial?</p><ol class="q-opts"><li>No. El desacuerdo entre implementaciones es la señal.</li><li>Sí; si no, los resultados no se pueden interpretar.</li><li>Solo en los formatos binarios.</li></ol><p class="q-why">Esa es la gran ventaja de las pruebas diferenciales. Miras las respuestas minoritarias y luego decides quién tiene razón.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Qué provoca el HTTP request smuggling?</p><ol class="q-opts"><li>Un servidor que falla con cabeceras largas</li><li>Un front end y un back end que no se ponen de acuerdo sobre dónde termina una petición</li><li>Las peticiones que usan HTTP/2</li></ol><p class="q-why">Si un programa usa Content-Length y el otro Transfer-Encoding, los bytes que uno ve como cuerpo el otro los ve como el comienzo de una petición nueva.</p></div>
+<div class="q" data-answer="2"><p class="q-text"><code>run-format</code> devuelve <code>ok</code> para todos los targets. ¿Están de acuerdo todos los parsers?</p><ol class="q-opts"><li>Sí, todos aceptaron el archivo.</li><li>Sí, si están escritos en el mismo lenguaje.</li><li>No necesariamente. <code>ok</code> significa que cada harness terminó; todavía tienes que comparar sus salidas.</li></ol><p class="q-why">Un rechazo limpio y un análisis correcto dan los dos <code>ok</code>. El acuerdo está en los campos de salida.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Doce de trece paquetes de PHP dan la misma respuesta. ¿Es un consenso sólido?</p><ol class="q-opts"><li>Sí, son doce votos independientes.</li><li>Puede que no. Si comparten motor, es una sola respuesta repetida.</li><li>No, PHP siempre es tolerante.</li></ol><p class="q-why">Los wrappers heredan el comportamiento de su motor. Agrupa los resultados por familia para contar opiniones independientes.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Por qué normalizar los nombres de los campos antes de comparar salidas?</p><ol class="q-opts"><li>Los harnesses llaman de forma distinta al mismo campo, así que una comparación ingenua muestra desacuerdos falsos.</li><li>Para que los registros ocupen menos</li><li>Porque JSON distingue mayúsculas y minúsculas</li></ol><p class="q-why">Un harness de PNG imprime <code>rgba0</code> y otro <code>first</code>. Elige los campos que necesita tu pregunta y asígnales nombres comunes.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 6.1</span><span class="level">Calentamiento</span></p>
+  <p>Toma <code>wide-new-crc.png</code> del ejercicio 2.2: un PNG que dice medir 3 píxeles de ancho pero solo trae datos para 2. Envíalo a todos los parsers de PNG.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --file wide-new-crc.png --results runs/png-wide --workers 4</pre>
+  <p>Agrupa los resultados con el script de este capítulo. ¿Cuántos parsers rechazan el archivo? ¿Alguno informa de un ancho de 3? ¿Las respuestas se separan por lenguajes o por familias de parsers?</p>
+  <details><summary>Pista</summary><p>Empieza por <code>status_counts</code> en <code>summary.json</code> y después ejecuta el script de agrupación.</p></details>
+  <details><summary>Solución</summary><p>El reparto exacto depende de los parsers, y precisamente por eso hay que ejecutarlo. Busca tres grupos: los parsers que rechazan el archivo porque los datos de la imagen son demasiado cortos, los que lo aceptan e informan de un ancho de 3 (rellenando o ignorando los píxeles que faltan), y los que terminan con un error o agotan el tiempo. Este último grupo merece una mirada más atenta. Luego revisa la columna de familia: si un grupo está formado por wrappers de un mismo motor, es un solo comportamiento, no muchos.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 6.2</span><span class="level">Práctica</span></p>
+  <p>Las entradas de un ZIP se pueden comprimir con métodos distintos. <code>controls/zip/hello-zstd.zip</code> usa Zstandard, un método más reciente que no todos los lectores soportan. Envíalo a todos los parsers de ZIP.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format zip --file controls/zip/hello-zstd.zip --results runs/zip-zstd --workers 4</pre>
+  <p>¿Qué parsers pueden leer la entrada? ¿Cómo fallan los demás: con un error claro, con un resultado incorrecto o con un crash?</p>
+  <details><summary>Pista</summary><p>Solo un target de ZIP del catálogo usa este archivo como control. Eso ya te dice algo sobre cuántos lectores se espera que lo soporten.</p></details>
+  <details><summary>Solución</summary><p>Lo normal es que la mayoría de los lectores no soporten Zstandard; el target <code>zipfile-zstd</code> del propio catálogo existe precisamente porque el <code>zipfile</code> de la biblioteca estándar de Python necesita una extensión para leerlo. Lo interesante es cómo falla cada lector. Un error claro del tipo «método de compresión no soportado» es un buen comportamiento. Devolver basura o un archivo vacío sin ningún error es el tipo de desacuerdo que puede importar en la práctica, por ejemplo cuando una herramienta comprueba un archivo comprimido y otra lo extrae.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 6.3</span><span class="level">Reto</span></p>
+  <p>Escribe una petición HTTP con una cabecera <code>Content-Length</code> y otra <code>Transfer-Encoding: chunked</code>, y envíala a todos los parsers de HTTP/1.1.</p>
+  <pre data-copy>printf 'POST / HTTP/1.1\r\nHost: example.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n' &gt; cl-te.http
+<span class="p">$ </span>python3 parsarium.py run-format http11 --file cl-te.http --results runs/http-cl-te --workers 4</pre>
+  <p>¿Qué cabecera sigue cada parser y cuáles rechazan la petición?</p>
+  <details><summary>Pista</summary><p>Lee primero la sección 6.1 del <a href="https://www.rfc-editor.org/rfc/rfc9112#section-6.1">RFC 9112</a> para saber qué permite la especificación.</p></details>
+  <details><summary>Solución</summary><p>El RFC 9112 permite a un servidor rechazar una petición así o procesarla usando solo Transfer-Encoding. Las dos opciones son válidas. El caso peligroso es un parser que usa Content-Length en su lugar, porque si está delante o detrás de un parser que sigue Transfer-Encoding, los dos no coinciden en dónde termina la petición. Agrupa tus resultados en esos tres comportamientos. Ten en cuenta que algunos targets analizan respuestas en lugar de peticiones; déjalos fuera de esta comparación.</p></details>
+</div>
+</section>

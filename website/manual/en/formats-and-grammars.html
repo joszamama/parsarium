@@ -1,0 +1,73 @@
+<!-- {"title": "Formats and grammars", "summary": "How formats are built, how a grammar and constraints describe them, and how to read a control file byte by byte."} -->
+<p>A format is an agreement between whoever writes the bytes and whoever reads them. It says which parts exist, in what order, and how to find their boundaries. Before testing a parser, it helps to be able to read its input yourself.</p>
+
+<h2>Four common shapes</h2>
+<h3>Chunks</h3>
+<p>PNG, WAV, and MP4 are sequences of self-describing blocks. Each block starts with a length and a type, so a reader can skip blocks it does not understand. PNG adds a CRC checksum to every chunk. MP4 boxes can contain other boxes, so the structure is a tree.</p>
+<h3>Offsets and directories</h3>
+<p>ZIP stores a central directory at the end of the file that points back to each entry. PDF keeps a cross-reference table with the byte offset of every object. A reader jumps around the file instead of reading it front to back, which means the same bytes can be reached in more than one way.</p>
+<h3>Trees of text</h3>
+<p>SVG is XML: elements, attributes, and nesting. The parser builds a tree before anything else looks at it.</p>
+<h3>Lines and tokens</h3>
+<p>HTTP/1.1, ASCII PLY, and ASCII PNM are text. HTTP has a start line and header lines ending in CRLF. PNM is a list of whitespace-separated numbers. PLY has a header that declares how many records follow. Text formats look simple, but they still carry counts and lengths that the parser has to check.</p>
+
+<h2>Grammars and constraints</h2>
+<p>A grammar describes the shape of valid inputs. Here is a rough grammar for a PNG file:</p>
+<pre>&lt;png&gt;    ::= &lt;sig&gt; &lt;ihdr&gt; &lt;chunk&gt;* &lt;iend&gt;
+&lt;sig&gt;    ::= 89 50 4E 47 0D 0A 1A 0A
+&lt;chunk&gt;  ::= &lt;length:4&gt; &lt;type:4&gt; &lt;data&gt; &lt;crc:4&gt;</pre>
+<p>The grammar captures the order of the parts, but not the relationships between them. Two rules are missing: the length field must match the size of the data, and the CRC must match the checksum of the type and data. These are <strong>constraints</strong>. Most real formats need both: a grammar for the structure, and constraints for lengths, counts, checksums, and offsets.</p>
+<p>This matters for testing. If you change random bytes in a PNG, you will almost always break a CRC, and a strict decoder will reject the file at the first chunk. The interesting code behind that check is never reached. Generators that know the grammar and the constraints, such as <a href="https://fandango-fuzzer.github.io/">Fandango</a>, can produce inputs that pass these checks and still vary the parts that matter.</p>
+
+<h2>Read the controls</h2>
+<p>Each format in Parsarium has small valid control files. Pick one below, look at the highlighted bytes, and answer the question. The answer shows what a real parser reported for that file.</p>
+<div class="inspector" data-manual="{{ASSET_ROOT}}manual.json"></div>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>Formats come in a few shapes: chunks, offsets and directories, trees of text, and lines of tokens.</li><li>A grammar describes the order and nesting of parts. Constraints describe how parts relate: lengths, counts, checksums, offsets.</li><li>Random mutations usually break a constraint, so a strict parser rejects the input before reaching interesting code.</li><li>Generators that know both the grammar and the constraints can produce inputs that pass these checks and still vary what matters.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="1"><p class="q-text">In a PNG chunk, which bytes does the CRC cover?</p><ol class="q-opts"><li>The length, the type, and the data</li><li>The type and the data</li><li>Only the data</li></ol><p class="q-why">The PNG specification computes the CRC over the chunk type and the chunk data. The length field is not included.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Why do random byte flips rarely reach deep code in a PNG decoder?</p><ol class="q-opts"><li>Most flips break a CRC, and a strict decoder rejects the chunk.</li><li>PNG decoders ignore changed bytes.</li><li>PNG files are too small to mutate.</li></ol><p class="q-why">A single flipped byte in a chunk invalidates its checksum. The decoder stops at the first check, and the code after it never runs.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Which of these can a grammar alone not express?</p><ol class="q-opts"><li>The order of the parts</li><li>That a length field equals the size of the data that follows</li><li>Which parts can repeat</li></ol><p class="q-why">Order, nesting, and repetition are what grammars do well. Relationships between values, such as lengths and checksums, need constraints.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Which format is usually read starting from its end?</p><ol class="q-opts"><li>WAV</li><li>ZIP</li><li>ASCII PNM</li></ol><p class="q-why">A ZIP reader looks for the end-of-central-directory record at the end of the file, then follows it to the central directory and the entries.</p></div>
+<div class="q" data-answer="0"><p class="q-text">An ASCII PNM file starts with <code>P3 2 1 255</code>. What do 2 and 1 mean?</p><ol class="q-opts"><li>Width and height</li><li>Channels and bit depth</li><li>Major and minor version</li></ol><p class="q-why">P3 selects ASCII RGB, then come the width and height, then the maximum sample value, then the samples.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 2.1</span><span class="level">Warm-up</span></p>
+  <p>Answer all ten questions in the byte inspector above, one per format. For each one, find the highlighted bytes in the hexdump and say what part of the format they belong to.</p>
+  <details><summary>Hint</summary><p>The ASCII column on the right of the dump often makes the structure easier to see, especially for text formats and chunk types.</p></details>
+  <details><summary>Solution</summary><p>The answers are revealed in the inspector. The point of the exercise is the second step: being able to say, for each format, where its structure starts and what tells the reader how much to read next.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 2.2</span><span class="level">Practice</span></p>
+  <p>Change the width in the PNG control from 2 to 3. Make two versions: one that keeps the old CRC, and one with the CRC fixed. Then run both through Pillow.</p>
+  <pre data-copy>python3 - &lt;&lt;'EOF'
+import struct, zlib
+data = bytearray(open("controls/png/red-green.png", "rb").read())
+data[16:20] = struct.pack("&gt;I", 3)                       # IHDR width: 2 -&gt; 3
+open("wide-old-crc.png", "wb").write(data)
+data[29:33] = struct.pack("&gt;I", zlib.crc32(data[12:29]))  # CRC over type + data
+open("wide-new-crc.png", "wb").write(data)
+EOF</pre>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py run png python pillow wide-old-crc.png --results runs/wide-old
+<span class="p">$ </span>python3 parsarium.py run png python pillow wide-new-crc.png --results runs/wide-new</pre>
+  <p>Compare <code>stdout_tail</code> and <code>stderr_tail</code> in the two receipts. Which check stopped the first file? How far did the second one get?</p>
+  <details><summary>Hint</summary><p>IHDR starts at offset 8: four bytes of length, four of type (offsets 12 to 15), thirteen of data (16 to 28), and four of CRC (29 to 32). The width is the first four data bytes.</p></details>
+  <details><summary>Solution</summary><p>The first file fails the IHDR checksum, so a strict decoder stops there. The second file passes that check and reaches the image data, where it finds fewer pixels than the header promises. What happens next is the decoder's choice: report an error, fill the missing pixels, or return a partial image. The receipt shows which one Pillow makes. Keep <code>wide-new-crc.png</code>; chapter 6 sends it to every PNG parser.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 2.3</span><span class="level">Challenge</span></p>
+  <p>Write a grammar and the constraints for ASCII PNM in P3 form, precise enough that a generator could produce valid files from it. Then list three ways to break a constraint while keeping the grammar valid.</p>
+  <details><summary>Hint</summary><p>Start from the control: <code>P3</code>, width, height, maximum value, then the samples. Think about how many samples there must be and what range each one can take.</p></details>
+  <details><summary>Solution</summary><pre>&lt;pnm&gt;    ::= "P3" &lt;ws&gt; &lt;width&gt; &lt;ws&gt; &lt;height&gt; &lt;ws&gt; &lt;maxval&gt; (&lt;ws&gt; &lt;sample&gt;)+ &lt;ws&gt;?
+&lt;width&gt;  ::= &lt;digits&gt;
+&lt;height&gt; ::= &lt;digits&gt;
+&lt;maxval&gt; ::= &lt;digits&gt;
+&lt;sample&gt; ::= &lt;digits&gt;</pre><p>Constraints: the number of samples equals 3 × width × height; every sample is at most <code>maxval</code>; <code>maxval</code> is between 1 and 65535. Grammar-valid but constraint-breaking inputs: one sample too few or too many; a sample larger than <code>maxval</code>; a width and height whose product overflows a 32-bit integer. Each of these tests a check the parser should make.</p></details>
+</div>
+</section>

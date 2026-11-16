@@ -1,0 +1,86 @@
+<!-- {"title": "Controls and receipts", "summary": "What it means for a parser to be verified, what a harness records, and how to read a run receipt."} -->
+<p>Before a parser enters Parsarium, it has to read a valid input and report the right thing about it. That input is the <strong>control</strong>, and the record of what happened is the <strong>receipt</strong>. Together they tell you that the target is wired up correctly before you spend hours fuzzing it.</p>
+
+<h2>Why start with a valid input</h2>
+<p>A harness that rejects every input looks very robust: it never crashes. It also tests nothing. The same happens when the harness calls the wrong function, opens the wrong file, or catches every error before the parser runs. A valid control with a known expected output catches all of these problems in one step. If the harness reports width 2 and height 1 for <code>red-green.png</code>, the bytes reached the parser and the parser understood them.</p>
+
+<h2>What verification checks</h2>
+<ul>
+  <li><strong>A pinned release.</strong> The exact version, installed from a lock file or a pinned image, with source hashes.</li>
+  <li><strong>A documented input API.</strong> The function the project documents for parsing this format. Detecting a MIME type or copying bytes does not count.</li>
+  <li><strong>A valid control.</strong> A small file in <code>controls/&lt;format&gt;/</code>, identified by its SHA-256.</li>
+  <li><strong>An observed result.</strong> Format-specific fields such as dimensions, entry names, page counts, tags, or header values, compared with the expected output.</li>
+</ul>
+<p>Until all four pass, a package is a <em>lead</em>, not an entry. Leads are kept in the catalog data with the reason they are still open.</p>
+
+<h2>The verification receipt</h2>
+<p>Every runnable target has a <code>verification.json</code> next to its Dockerfile. It records when the harness was verified, the Docker image ID, the toolchain versions, the hash of every project file, the observed output, and how many lines of parser source the control covered. If any project file changes, its hash no longer matches and the harness refuses to run until it is verified again.</p>
+
+<h2>The run receipt</h2>
+<p>When you run a file through a target, you get a receipt like this:</p>
+<pre>{
+  "schema_version": 1,
+  "project": "png/python/pillow",
+  "input": "my.png",
+  "status": "ok",
+  "case_sha256": "…",
+  "case_bytes": 71,
+  "image_id": "sha256:…",
+  "exit_code": 0,
+  "duration_seconds": 0.412,
+  "stdout_tail": "…",
+  "stderr_tail": ""
+}</pre>
+<p>The <code>status</code> field describes the harness, not the parser:</p>
+<table>
+  <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>ok</code></td><td>The harness finished. The parser may have accepted or rejected the input; its output is in <code>stdout_tail</code>.</td></tr>
+    <tr><td><code>target_nonzero</code></td><td>The process exited with an error. Worth replaying.</td></tr>
+    <tr><td><code>timeout</code></td><td>The run took longer than the limit (60 seconds by default).</td></tr>
+    <tr><td><code>input_too_large</code></td><td>The input is over 1 MiB, the harness limit.</td></tr>
+    <tr><td><code>infrastructure_error</code></td><td>Docker or the harness setup failed before the parser ran.</td></tr>
+  </tbody>
+</table>
+<p>Keeping these apart is useful. A rejection is normal parser behaviour. A non-zero exit or a timeout is something to look at.</p>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>A valid control with a known expected output proves that bytes reach the parser and that the parser understands them.</li><li>A package becomes a target only after four checks: pinned release, documented input API, valid control, and observed result. Before that it is a lead.</li><li>The run receipt's status describes the harness, not the parser. Acceptance is in the observed output.</li><li>Verification receipts pin file hashes, so a changed harness has to be verified again before it runs.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="1"><p class="q-text">A run receipt says <code>status: ok</code>. What do you know?</p><ol class="q-opts"><li>The parser accepted the input.</li><li>The harness finished. Whether the parser accepted the input is in its output.</li><li>The input is a valid file.</li></ol><p class="q-why"><code>ok</code> only means the harness completed. A clean rejection is also <code>ok</code>; the parser's answer is in <code>stdout_tail</code>.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Why does every target need a valid control before fuzzing?</p><ol class="q-opts"><li>It makes fuzzing faster.</li><li>It shows that bytes reach the parser and are understood. A harness that rejects everything would look very robust.</li><li>AFL++ refuses to start without one.</li></ol><p class="q-why">Without a control you cannot tell a robust parser from a broken harness. The control is the cheapest way to rule out the second.</p></div>
+<div class="q" data-answer="1"><p class="q-text">A package shows up in an npm search for "png" but has not passed the control yet. What is it in Parsarium?</p><ol class="q-opts"><li>A target</li><li>A lead</li><li>A family</li></ol><p class="q-why">Search hits stay leads until all four checks pass. Leads are kept in the cell's data with the reason they are still open.</p></div>
+<div class="q" data-answer="0"><p class="q-text">You edit the harness file of a project. What happens on the next run?</p><ol class="q-opts"><li>Its hash no longer matches the receipt, so it has to be verified again.</li><li>Nothing; the receipt is only informative.</li><li>Docker silently rebuilds the image.</li></ol><p class="q-why">The verification receipt lists the hash of every project file. Runs check these hashes, which keeps results tied to the harness that was verified.</p></div>
+<div class="q" data-answer="2"><p class="q-text">You run a 2 MiB file through a target. What status do you get?</p><ol class="q-opts"><li><code>timeout</code></li><li><code>target_nonzero</code></li><li><code>input_too_large</code></li></ol><p class="q-why">Harnesses accept inputs up to 1 MiB. Larger inputs are refused before the parser runs.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 3.1</span><span class="level">Warm-up</span></p>
+  <p>Run the libpng target on its own control and on a file that is not a PNG at all.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py show png c libpng --json
+<span class="p">$ </span>python3 parsarium.py run png c libpng controls/png/red-green.png --results runs/libpng-control
+<span class="p">$ </span>python3 parsarium.py run png c libpng controls/zip/hello.zip --results runs/libpng-zip</pre>
+  <p>Open both receipts and compare <code>status</code>, <code>exit_code</code>, and the output tails. Where does libpng say what it thought of the ZIP file?</p>
+  <details><summary>Hint</summary><p>Receipts are written as <code>&lt;sha256&gt;.json</code> inside the <code>--results</code> directory.</p></details>
+  <details><summary>Solution</summary><p>The control receipt shows the dimensions and pixels in <code>stdout_tail</code>. The ZIP receipt shows libpng's rejection, either in the output tails or as a non-zero exit, depending on how the harness reports errors. The important habit is to look at the output, not only at <code>status</code>.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 3.2</span><span class="level">Practice</span></p>
+  <p>Open the verification receipts of two PNG targets in different languages and compare them field by field.</p>
+  <pre data-copy>projects/png/c/libpng/verification.json
+projects/png/python/pillow/verification.json</pre>
+  <p>What does each toolchain list contain? How many parser source lines did each control cover? Can you say which parser is better tested from these numbers?</p>
+  <details><summary>Hint</summary><p>Look for <code>toolchain</code>, <code>output</code>, and <code>parser_source_lines_covered</code>.</p></details>
+  <details><summary>Solution</summary><p>At the time of writing the libpng control covers 1,698 parser lines and the Pillow control 2,097. That does not make Pillow better tested: the two code bases are different sizes, written in different languages, and the line counts come from different coverage tools. The numbers are useful for each target on its own, for example to check that a new input reaches more of the same parser.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 3.3</span><span class="level">Challenge</span></p>
+  <p>Pick a PNG library you know that is not in the catalog. Write a minimal harness for it: read one file, call the documented parsing API, and print the width and height. Decide what it should print and which exit code it should use when the parser rejects the input, and when something unexpected happens.</p>
+  <details><summary>Hint</summary><p>Compare your draft with <code>projects/png/python/pillow/harness.py</code> and <code>adapter.py</code>.</p></details>
+  <details><summary>Solution</summary><p>A good harness does four things. It calls the parser through the API a real user would use. It prints observable, format-specific fields. It treats a normal rejection as a normal outcome, so the exit code stays zero and the reason goes to the output. And it lets unexpected failures, such as crashes or errors that are not part of the parser's documented behaviour, surface as a non-zero exit, because those are the ones worth investigating.</p></details>
+</div>
+</section>

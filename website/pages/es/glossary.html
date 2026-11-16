@@ -1,0 +1,40 @@
+<!-- {"title": "Glosario — Manual de Parsarium", "description": "Definiciones de los términos que usa el manual de Parsarium: celdas, controles, registros, familias, pistas, aristas, puentes, semillas, corpus y más."} -->
+<section class="intro">
+  <div class="wrap">
+    <p class="off">0x00A0<b>glosario</b></p>
+    <div>
+      <h1>Glosario.</h1>
+      <p class="lede">Los términos que usa este manual, con una definición breve y el capítulo donde se explica cada uno.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x00A8<b>términos</b></p>
+    <dl class="gloss">
+      <dt id="afl">AFL++</dt><dd>Un fuzzer guiado por cobertura. Cada target ejecutable de Parsarium tiene una imagen para AFL++. <a href="{{ROOT}}manual/coverage-feedback/">Cap. 5</a></dd>
+      <dt id="input-api">API de entrada</dt><dd>La función documentada que ofrece un paquete para analizar el formato, como <code>png_image_begin_read_from_file</code>. <a href="{{ROOT}}manual/controls-and-receipts/">Cap. 3</a></dd>
+      <dt id="standard">API estándar</dt><dd>Un parser incluido en la biblioteca estándar o el runtime de un lenguaje, como <code>image/png</code> de Go. Se verifica como los paquetes y aparece por separado. <a href="{{ROOT}}manual/choosing-targets/">Cap. 4</a></dd>
+      <dt id="edge">Arista</dt><dd>Una transición entre dos puntos del código. AFL++ cuenta aristas en su mapa para medir la cobertura. <a href="{{ROOT}}manual/coverage-feedback/">Cap. 5</a></dd>
+      <dt id="cell">Celda</dt><dd>Un formato en un lenguaje, como PNG en Rust. Parsarium tiene 80 celdas. <a href="{{ROOT}}manual/what-a-parser-is/">Cap. 1</a></dd>
+      <dt id="control">Control</dt><dd>Una entrada válida y pequeña con una salida esperada conocida, que sirve para verificar que un target funciona. <a href="{{ROOT}}manual/controls-and-receipts/">Cap. 3</a></dd>
+      <dt id="corpus">Corpus</dt><dd>Un conjunto de entradas: las semillas que recibe un fuzzer, la cola que construye o un conjunto generado que se vuelve a pasar por los targets. <a href="{{ROOT}}manual/fuzzing-at-scale/">Cap. 7</a></dd>
+      <dt id="family">Familia de parsers</dt><dd>El código que realmente lee el formato detrás de un paquete. Muchos paquetes pueden compartir una familia. <a href="{{ROOT}}manual/choosing-targets/">Cap. 4</a></dd>
+      <dt id="grammar">Gramática</dt><dd>Una descripción de las partes de una entrada, su orden y su anidamiento. <a href="{{ROOT}}manual/formats-and-grammars/">Cap. 2</a></dd>
+      <dt id="harness">Harness</dt><dd>El pequeño programa que lee una entrada, llama a la API documentada del parser e imprime lo que observó. El harness de cada target se ejecuta en una imagen Docker fijada. <a href="{{ROOT}}manual/controls-and-receipts/">Cap. 3</a></dd>
+      <dt id="selection">ID de selección</dt><dd>Un identificador que el banco deriva de una lista ordenada de targets. Junto con el commit de Parsarium, fija un conjunto de targets. <a href="{{ROOT}}manual/designing-an-experiment/">Cap. 9</a></dd>
+      <dt id="lead">Pista</dt><dd>Un candidato que todavía no ha pasado todas las comprobaciones: un resultado de búsqueda en el catálogo, o un fallo o bloqueo guardado en una campaña. <a href="{{ROOT}}manual/triage-and-disclosure/">Cap. 8</a></dd>
+      <dt id="bridge">Puente</dt><dd>El componente que registra la cobertura del código fuente del parser en Go, Java, JavaScript, Python o PHP y la escribe en el mapa de AFL++. <a href="{{ROOT}}manual/coverage-feedback/">Cap. 5</a></dd>
+      <dt id="adoption">Ranking de adopción</dt><dd>La posición de un paquete según una métrica de popularidad, como descargas o estrellas, entre los paquetes de la misma celda. <a href="{{ROOT}}manual/choosing-targets/">Cap. 4</a></dd>
+      <dt id="receipt">Registro</dt><dd>Un registro JSON de lo que pasó: un registro de verificación para un target, un registro de ejecución para una entrada, un resumen para un lote. <a href="{{ROOT}}manual/controls-and-receipts/">Cap. 3</a></dd>
+      <dt id="smuggling">Request smuggling</dt><dd>Un ataque que aprovecha que dos parsers HTTP no se ponen de acuerdo sobre dónde termina una petición. <a href="{{ROOT}}manual/differential-testing/">Cap. 6</a></dd>
+      <dt id="constraint">Restricción</dt><dd>Una regla que relaciona partes de una entrada, como un campo de longitud que coincide con el tamaño de los datos o una suma de comprobación que coincide con los bytes que cubre. <a href="{{ROOT}}manual/formats-and-grammars/">Cap. 2</a></dd>
+      <dt id="package-path">Ruta de paquete</dt><dd>Un paquete o una API estándar junto con su API de entrada. Es la unidad que se cuenta en el catálogo. <a href="{{ROOT}}manual/what-a-parser-is/">Cap. 1</a></dd>
+      <dt id="seed">Semilla</dt><dd>Una entrada de la que parte una campaña de fuzzing. Por defecto, el control del target. <a href="{{ROOT}}manual/fuzzing-at-scale/">Cap. 7</a></dd>
+      <dt id="target">Target</dt><dd>Una ruta de paquete verificada con un harness Docker ejecutable. <a href="{{ROOT}}manual/controls-and-receipts/">Cap. 3</a></dd>
+      <dt id="differential">Testing diferencial</dt><dd>Enviar la misma entrada a varias implementaciones y comparar sus respuestas. <a href="{{ROOT}}manual/differential-testing/">Cap. 6</a></dd>
+      <dt id="feedback">Tipo de feedback</dt><dd>Cómo informa un target de su cobertura a AFL++: con aristas compiladas o con un puente para un lenguaje concreto. <a href="{{ROOT}}manual/coverage-feedback/">Cap. 5</a></dd>
+    </dl>
+  </div>
+</section>

@@ -1,0 +1,121 @@
+<!-- {"title": "Parsarium — an open testbed of real parsers", "description": "Parsarium is an open testbed of real parsers for ten formats and eight languages, each with a pinned release, a documented input API, a valid control file, and a runnable Docker harness."} -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="label">red-green.png · {{HERO_BYTES}} bytes · 2 × 1 pixels</p>
+      <h1>{{READERS_COUNT}} programs read this&nbsp;file.</h1>
+      <p class="lede">Parsarium is an open testbed of real parsers. It collects {{VERIFIED}} open-source packages and standard APIs that read ten formats in eight languages. {{RUNNABLE}} of them come with a pinned Docker harness: you can run one file through them, replay a corpus, or fuzz them with AFL++.</p>
+      <div class="figures">
+        <span><b>10</b>formats</span>
+        <span><b>8</b>languages</span>
+        <span><b>{{VERIFIED}}</b>verified parsers</span>
+        <span><b>{{RUNNABLE}}</b>runnable harnesses</span>
+      </div>
+      <div class="actions">
+        <a class="btn" href="{{ROOT}}bench/">Build a target set →</a>
+        <a class="btn ghost" href="{{ROOT}}manual/">Read the manual</a>
+        <a href="{{ROOT}}atlas/">Browse the atlas</a>
+      </div>
+    </div>
+    <figure class="specimen" aria-label="Hexdump of red-green.png and the programs that read it">
+      <div class="specimen-head"><span><b>controls/png/red-green.png</b></span><span class="pixels" title="The two pixels in this file"><i></i><i></i></span></div>
+      <div class="hexdump">{{HEXDUMP}}</div>
+      <ul class="legend">{{LEGEND}}</ul>
+      <div class="readers">
+        <div class="readers-head"><span>reader · release</span><span>observed</span></div>
+        <div class="readers-window" tabindex="0" aria-label="Programs that read red-green.png"><ol>{{READERS}}</ol></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="formats">
+  <div class="wrap">
+    <p class="off">0x0010<b>formats</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>Ten formats, from pixels to protocols.</h2>
+        <p>Every format has small, valid control files that each parser must read correctly before it enters the catalog. These are the first eight bytes of each one. Pick a format to see the parsers that read it.</p>
+      </div>
+      <div class="fmt-table">{{FORMAT_STRIP}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="use">
+  <div class="wrap">
+    <p class="off">0x0020<b>use it</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>Three ways to use it.</h2>
+        <p>Everything runs locally with Python 3.11 and Docker. Clone the repository and start from the root.</p>
+      </div>
+      <div class="uses">
+        <div class="use">
+          <div><h3>Run one file through one parser.</h3>
+            <p>You get a JSON receipt with the input hash, the image ID, the exit status, and the time it took. It is the quickest way to check how a specific library handles a specific input.</p></div>
+          <pre data-copy><span class="p">$ </span>python3 parsarium.py show png python pillow
+<span class="p">$ </span>python3 parsarium.py run png python pillow my.png</pre>
+        </div>
+        <div class="use">
+          <div><h3>Send the same file to every parser.</h3>
+            <p>Each target writes its own receipt and <code>summary.json</code> collects them. When parsers disagree about the same bytes, that is a good place to start looking.</p></div>
+          <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --list
+<span class="p">$ </span>python3 parsarium.py run-format png \
+    --file my.png --results runs/png-my-file</pre>
+        </div>
+        <div class="use">
+          <div><h3>Fuzz a parser with AFL++.</h3>
+            <p>All runnable targets have an AFL++ overlay. C, C++, and Rust parsers are instrumented directly. Go, Java, JavaScript, Python, and PHP parsers send their coverage to AFL++ through a small bridge.</p></div>
+          <pre data-copy><span class="p">$ </span>python3 parsarium.py afl build png python pillow
+<span class="p">$ </span>python3 parsarium.py afl prepare png python pillow runs/pillow
+<span class="p">$ </span>python3 parsarium.py afl run runs/pillow --seconds 3600</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="families">
+  <div class="wrap">
+    <p class="off">0x0030<b>engines</b></p>
+    <div class="split">
+      <div>
+        <h2>Packages and the engines behind them.</h2>
+        <p>Many packages wrap the same decoder. In PHP, thirteen of the PNG packages read images through GD; in JavaScript, thirteen PDF packages build on pdf.js. Parsarium records the parser family of every entry, so you decide what to count.</p>
+        <p>A study about ecosystems may want every package. A study about parser engines may want one target per family. The bench builds either selection and gives it an ID you can put in a paper.</p>
+        <p><a href="{{ROOT}}bench/?family=1">Open the bench with one target per family →</a></p>
+      </div>
+      <div class="count-pair">
+        <div><b>{{VERIFIED}}</b><span>verified package paths</span></div>
+        <div><b>{{FAMILIES}}</b><span>distinct parser families, counted per format</span></div>
+        <div><b>{{RUNNABLE}}</b><span>runnable Docker harnesses</span></div>
+        <div><b>{{AFL}}</b><span>AFL++ overlays with a feedback receipt</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="manual">
+  <div class="wrap">
+    <p class="off">0x0040<b>manual</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>A manual for testing parsers.</h2>
+        <p>I am writing these chapters as the notes I wanted when I started: how formats are built, what a harness verifies, how to read coverage feedback, and how to run campaigns across many targets. Each chapter ends with a short quiz and exercises you can run on Parsarium, with hints and solutions.</p>
+      </div>
+      <div class="toc-two">{{MANUAL_TOC}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="who">
+  <div class="wrap">
+    <p class="off">0x0050<b>about</b></p>
+    <div class="sec-head">
+      <h2>Why it exists.</h2>
+      <p>I'm Pepe Zamudio, a PhD researcher at CISPA working on fuzzing and test generation for programs with complex inputs. Every study I ran started by picking parsers, installing them, and writing adapters. Parsarium is that work done once, carefully, and shared, so experiments can start from the same targets and their results can be compared.</p>
+      <p><a href="{{ROOT}}about/">More about the project →</a></p>
+    </div>
+  </div>
+</section>

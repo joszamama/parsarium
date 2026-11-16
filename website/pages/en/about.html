@@ -1,0 +1,100 @@
+<!-- {"title": "About Parsarium", "description": "Why Parsarium exists, what a target contains, how parsers are selected, how to cite it, and how to contribute."} -->
+<section class="intro">
+  <div class="wrap">
+    <p class="off">0x0000<b>about</b></p>
+    <div>
+      <h1>A shared set of targets for parser research.</h1>
+      <p class="lede">I'm Pepe Zamudio, a PhD researcher at CISPA in Saarbrücken. My work is on fuzzing and test generation for programs whose inputs have structure: files, requests, and protocol messages. Parsarium is the target set I built for that work, made public so other people can use it too.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0010<b>why</b></p>
+    <div class="split">
+      <div>
+        <h2>Why I built it.</h2>
+        <p>Most studies on parser testing start the same way: pick some programs, install them, write an adapter that feeds them bytes, and check that they work on a valid input. Each group does this again for every paper, and each group picks differently. That makes results hard to compare and hard to reproduce.</p>
+        <p>I wanted to do this step once and do it well. For each format and language, Parsarium searches the package registries, verifies the parsers it finds against a valid control, ranks them by adoption, and wraps the ones that pass in a pinned harness. The result is a set of targets you can inspect, rerun, and cite.</p>
+      </div>
+      <div>
+        <h2>What it is for.</h2>
+        <p>Comparing fuzzers and test generators on the same targets. Checking how many implementations of a format accept or reject a given input. Studying how parser behaviour differs across languages. Teaching: the <a href="{{ROOT}}manual/">manual</a> uses Parsarium for all of its exercises.</p>
+        <p>It also works as a starting point for security research. A generated corpus can be replayed through every parser for a format with one command, and any target can go straight into an AFL++ campaign.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0020<b>a target</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>What a target contains.</h2>
+        <p>Every runnable target lives in <code>projects/&lt;format&gt;/&lt;language&gt;/&lt;package&gt;/</code>. Taking Pillow's PNG target as an example:</p>
+      </div>
+      <dl class="anatomy">
+        <dt>Pinned release</dt><dd><code>pillow 13.0.0</code>, installed from a lock file with its source hash recorded.</dd>
+        <dt>Input API</dt><dd>The documented call that parses the bytes, here <code>Image.open()</code>, <code>Image.load()</code>, and <code>Image.getpixel()</code>. Generic file I/O or MIME sniffing does not count.</dd>
+        <dt>Valid control</dt><dd><code>controls/png/red-green.png</code>, a 71-byte image with one red and one green pixel.</dd>
+        <dt>Expected output</dt><dd>What the parser must report for the control: <code>width 2, height 1</code>, and both RGBA pixels.</dd>
+        <dt>Docker harness</dt><dd>A Dockerfile on a pinned base image and a harness that reads one input and prints what the parser observed.</dd>
+        <dt>Verification receipt</dt><dd>The image ID, toolchain versions, file hashes, the observed output, and how many parser source lines the control covered.</dd>
+        <dt>Fuzzing</dt><dd>An AFL++ overlay with its own feedback receipt, plus the ecosystem's native engine (Atheris for Python).</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0030<b>selection</b></p>
+    <div class="sec-head">
+      <h2>How parsers are chosen.</h2>
+      <p>The catalog works one format × language cell at a time, with a working goal of twenty verified packages per cell. A parser qualifies when it is open source, has a pinned release, and parses local bytes through a documented API with an observable, format-specific result. Wrappers are allowed and their underlying parser family is recorded.</p>
+      <p>Packages are ranked by one adoption metric per cell, usually registry downloads, and only against other packages in the same cell. Standard-library APIs are verified the same way and listed separately. Every search query, result, and unresolved lead is saved, so you can see exactly how a cell was built. The full rules are in the <a href="https://github.com/joszamama/parsarium/blob/main/PROTOCOL.md">selection protocol</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec receipts">
+  <div class="wrap">
+    <p class="off">0x0040<b>notebook</b></p>
+    <div>
+      <div class="sec-head">
+        <h2>Lab notebook.</h2>
+        <p>Each harness writes a receipt when it is verified. These are the dates of the current {{RUNNABLE}} receipts, and the most recent ones. The site is rebuilt from the repository on every change.</p>
+      </div>
+      {{RECEIPTS}}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cite">
+  <div class="wrap">
+    <p class="off">0x0050<b>cite</b></p>
+    <div class="sec-head">
+      <h2>Citing Parsarium.</h2>
+      <p>If you use Parsarium in a paper, please cite the commit you used. When you work with a subset, include the selection ID from the <a href="{{ROOT}}bench/">bench</a> as well.</p>
+      <pre data-copy>@misc{parsarium,
+  author       = {Zamudio Amaya, Jos{\'e} Antonio},
+  title        = {Parsarium: An Open Testbed of Real Parsers},
+  year         = {{{YEAR}}},
+  howpublished = {\url{https://parsarium.com}},
+  note         = {Commit {{COMMIT}}}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x0060<b>contact</b></p>
+    <div class="sec-head">
+      <h2>Contributing.</h2>
+      <p>Suggestions for parsers, formats, or fixes are welcome as <a href="https://github.com/joszamama/parsarium/issues">GitHub issues</a>. If you find a bug in a parser using Parsarium, report it to the upstream project first, through its security policy when it has one. For research collaborations, you can find me at <a href="https://pepezamudio.com">pepezamudio.com</a>.</p>
+    </div>
+  </div>
+</section>

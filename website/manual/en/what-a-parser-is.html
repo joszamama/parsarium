@@ -1,0 +1,72 @@
+<!-- {"title": "What a parser does", "summary": "Bytes come in, structure comes out. Why that step matters for testing and security, and how Parsarium organises it."} -->
+<p>A parser takes bytes and turns them into structure a program can use. A PNG decoder reads a signature and a sequence of chunks, then gives back a width, a height, and pixels. An HTTP parser reads a request line and headers, then gives back a method, a target, and a map of fields. The rest of the program works with that structure and trusts that it is right.</p>
+
+<p>That makes the parser the first code to see external input. Files arrive from users, from email attachments, from uploads, from other services. Whatever the bytes say, the parser has to decide what they mean before anything else runs.</p>
+
+<h2>Why parsers are worth testing</h2>
+<p>Most formats describe their own layout. A PNG chunk starts with its length, a ZIP archive stores offsets to its entries, an MP4 box declares its size, a PLY header announces how many vertices follow. The parser reads those numbers and acts on them: it allocates memory, seeks to an offset, loops a number of times. When the numbers are wrong, a careful parser rejects the input. A less careful one may read past a buffer, allocate far too much memory, recurse without limit, or loop for a very long time.</p>
+<p>A second kind of problem appears when two parsers read the same bytes differently. A proxy and a server that disagree about where an HTTP request ends can be tricked into seeing two requests where one was intended. An archive tool and a signature checker that pick different entries from the same ZIP can check one file and extract another. These bugs do not need a crash. They need two correct-looking programs that make different decisions.</p>
+<p>Both kinds of bugs are found by running many inputs through real parsers and watching what happens. That is what Parsarium is built for.</p>
+
+<h2>Accepting and rejecting</h2>
+<p>Every parser draws a line between inputs it accepts and inputs it rejects. Strict parsers follow the specification closely. Lenient parsers try to recover from small mistakes, which is friendly to users and sometimes surprising to security reviewers. Neither choice is wrong on its own; what matters for testing is knowing where each parser draws its line and whether it handles everything on the accepting side safely.</p>
+
+<h2>How Parsarium organises parsers</h2>
+<p>Parsarium is organised by <strong>format</strong> first, then by <strong>language</strong>. One format in one language is a <em>cell</em>: PNG in C, ZIP in Go, HTTP/1.1 in PHP. There are ten formats and eight languages, so eighty cells.</p>
+<table>
+  <thead><tr><th>Format</th><th>Structure</th></tr></thead>
+  <tbody>
+    <tr><td>PNG</td><td>Signature, then length-typed chunks with checksums</td></tr>
+    <tr><td>ZIP</td><td>Local entries, with a central directory at the end</td></tr>
+    <tr><td>MP4</td><td>Nested boxes, each with a size and a type</td></tr>
+    <tr><td>WAV</td><td>RIFF chunks: a format description, then samples</td></tr>
+    <tr><td>PDF</td><td>Numbered objects and a cross-reference table</td></tr>
+    <tr><td>SVG</td><td>An XML element tree</td></tr>
+    <tr><td>HTTP/1.1</td><td>A text start line, headers, and an optional body</td></tr>
+    <tr><td>ASCII PLY</td><td>A text header declaring elements, then records</td></tr>
+    <tr><td>ASCII PNM</td><td>Whitespace-separated tokens: magic, size, samples</td></tr>
+    <tr><td>MP3 + ID3v2</td><td>A tagged metadata prelude before audio frames</td></tr>
+  </tbody>
+</table>
+<p>The formats were chosen to cover different kinds of structure: binary and text, flat and nested, sequential and offset-based, files and protocol messages. A tool that works well on one kind often struggles with another, so a mix gives a more honest picture.</p>
+<p>Each entry in a cell is a <strong>package path</strong>: an open-source library, or a standard-library API, together with the exact function that parses the input. Each one has been checked with a valid input before it was added. Most have a Docker harness you can run.</p>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>A parser turns bytes into structure, and the rest of the program trusts that structure.</li><li>Formats describe their own layout with lengths, counts, and offsets. Parsers act on those numbers, which is where many bugs start.</li><li>There are two kinds of parser bugs worth looking for: unsafe handling of a single input, and two parsers that disagree about the same input.</li><li>Parsarium is organised by format, then language. One format in one language is a cell; ten formats and eight languages make eighty cells.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="0"><p class="q-text">Why is the parser often the first place to test in a program that handles files?</p><ol class="q-opts"><li>It is the first code that interprets external input.</li><li>Parsers are usually written in C.</li><li>Parsers run with more privileges than the rest of the program.</li></ol><p class="q-why">Whatever the bytes are, the parser decides what they mean before anything else runs. That is true in every language, not only in C.</p></div>
+<div class="q" data-answer="1"><p class="q-text">A ZIP archive keeps a central directory at the end that points back to each entry. What kind of structure is this?</p><ol class="q-opts"><li>A sequence of chunks</li><li>Offsets and a directory</li><li>A tree of text</li></ol><p class="q-why">The reader finds the directory first and then jumps to the entries it lists, so the same bytes can be reached in more than one way.</p></div>
+<div class="q" data-answer="1"><p class="q-text">A proxy and a server read the same HTTP request. The proxy thinks it ends after the headers; the server reads a body. Neither crashes. Is that a problem?</p><ol class="q-opts"><li>No. Without a crash there is no bug.</li><li>Yes. The disagreement can let one request hide inside another.</li><li>Only if both programs are written in the same language.</li></ol><p class="q-why">Differential bugs need no crash. Two programs that each look correct make different decisions about the same bytes.</p></div>
+<div class="q" data-answer="2"><p class="q-text">What is a cell in Parsarium?</p><ol class="q-opts"><li>One release of one parser</li><li>One control file</li><li>One format in one language</li></ol><p class="q-why">PNG in C, ZIP in Go, and HTTP/1.1 in PHP are all cells. Each cell has its own search, ranking, and verified packages.</p></div>
+<div class="q" data-answer="1"><p class="q-text">A lenient parser accepts a PNG with a wrong checksum. What does that tell you?</p><ol class="q-opts"><li>It is buggy.</li><li>It draws its accept line in a different place. Whether that matters depends on how it handles what it accepts.</li><li>It is not really a PNG parser.</li></ol><p class="q-why">Leniency is a design choice. For testing, what matters is where each parser draws the line and whether it handles everything on the accepting side safely.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 1.1</span><span class="level">Warm-up</span></p>
+  <p>List the catalog, open one cell, and inspect one target.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py list
+<span class="p">$ </span>python3 parsarium.py catalog png c
+<span class="p">$ </span>python3 parsarium.py show png c libpng</pre>
+  <p>The <code>catalog</code> output ranks the twenty C packages by GitHub stars. Look at the last column, the underlying family. How many packages read PNG through <code>stb_image</code>?</p>
+  <details><summary>Hint</summary><p>Search the family column for the text <code>stb_image</code>. Bundled copies count too.</p></details>
+  <details><summary>Solution</summary><p>Three: <code>raylib</code> and <code>sdl3</code> bundle <code>stb_image</code>, and <code>stb</code> is <code>stb_image</code> itself. Three packages in the ranking, one decoder underneath. Chapter 4 comes back to this.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 1.2</span><span class="level">Practice</span></p>
+  <p>Compare how well each language is covered for one format.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py list --format http11</pre>
+  <p>Which languages have the most runnable HTTP/1.1 targets, and which the fewest? Check your answer against the HTTP/1.1 row of the <a href="{{ROOT}}atlas/?format=http11">atlas</a>.</p>
+  <details><summary>Hint</summary><p>The runnable count is the number of targets with a Docker harness. It can be higher than the verified count because standard-library APIs are counted separately.</p></details>
+  <details><summary>Solution</summary><p>At the time of writing, Go and Rust have the most runnable HTTP/1.1 targets (22 each), and C and C++ the fewest (9 each). Many C and C++ HTTP parsers are embedded in larger servers and are harder to drive from a file, which is why fewer of them have harnesses yet.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 1.3</span><span class="level">Challenge</span></p>
+  <p>Find a published vulnerability in a parser for one of the ten formats. The <a href="https://nvd.nist.gov/vuln/search">NVD search</a> or a project's security advisories are good places to start. Answer three questions: which field of the format did the attacker control, what did the parser do with it, and was it a single-input bug or a disagreement between two programs?</p>
+  <details><summary>Hint</summary><p>Search for a library name together with words like <em>overflow</em>, <em>out-of-bounds</em>, or <em>path traversal</em>. Advisories that include a proof-of-concept file are the easiest to analyse.</p></details>
+  <details><summary>Solution</summary><p>One well-known example is <a href="https://security.snyk.io/research/zip-slip-vulnerability">Zip Slip</a> (2018). The attacker controls the entry name in a ZIP archive and writes names like <code>../../etc/cron.d/job</code>. Many extraction routines joined that name to the target directory without checking it, so files were written outside it. It is a single-input bug: one program trusted a field it should have validated. Write your own example down the same way: field, behaviour, kind.</p></details>
+</div>
+</section>

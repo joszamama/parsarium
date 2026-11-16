@@ -1,0 +1,40 @@
+<!-- {"title": "Glossary — Parsarium manual", "description": "Definitions of the terms used in the Parsarium manual: cells, controls, receipts, families, leads, edges, bridges, seeds, corpora, and more."} -->
+<section class="intro">
+  <div class="wrap">
+    <p class="off">0x00A0<b>glossary</b></p>
+    <div>
+      <h1>Glossary.</h1>
+      <p class="lede">The terms this manual uses, with a short definition and the chapter where each one is explained.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="off">0x00A8<b>terms</b></p>
+    <dl class="gloss">
+      <dt id="afl">AFL++</dt><dd>A coverage-guided fuzzer. Every runnable target in Parsarium has an AFL++ overlay. <a href="{{ROOT}}manual/coverage-feedback/">Ch. 5</a></dd>
+      <dt id="adoption">Adoption rank</dt><dd>A package's position by one popularity metric, such as downloads or stars, among the packages in the same cell. <a href="{{ROOT}}manual/choosing-targets/">Ch. 4</a></dd>
+      <dt id="bridge">Bridge</dt><dd>The component that records parser source coverage in Go, Java, JavaScript, Python, or PHP and writes it into the AFL++ map. <a href="{{ROOT}}manual/coverage-feedback/">Ch. 5</a></dd>
+      <dt id="cell">Cell</dt><dd>One format in one language, such as PNG in Rust. Parsarium has 80 cells. <a href="{{ROOT}}manual/what-a-parser-is/">Ch. 1</a></dd>
+      <dt id="constraint">Constraint</dt><dd>A rule that relates parts of an input, such as a length field matching the data size or a checksum matching the bytes it covers. <a href="{{ROOT}}manual/formats-and-grammars/">Ch. 2</a></dd>
+      <dt id="control">Control</dt><dd>A small valid input with a known expected output, used to verify that a target works. <a href="{{ROOT}}manual/controls-and-receipts/">Ch. 3</a></dd>
+      <dt id="corpus">Corpus</dt><dd>A set of inputs: seeds given to a fuzzer, the queue it builds, or a generated set replayed through targets. <a href="{{ROOT}}manual/fuzzing-at-scale/">Ch. 7</a></dd>
+      <dt id="differential">Differential testing</dt><dd>Sending the same input to several implementations and comparing their answers. <a href="{{ROOT}}manual/differential-testing/">Ch. 6</a></dd>
+      <dt id="edge">Edge</dt><dd>A transition between two code locations. AFL++ counts edges in its map to measure coverage. <a href="{{ROOT}}manual/coverage-feedback/">Ch. 5</a></dd>
+      <dt id="family">Parser family</dt><dd>The code that actually reads the format behind a package. Many packages can share one family. <a href="{{ROOT}}manual/choosing-targets/">Ch. 4</a></dd>
+      <dt id="feedback">Feedback kind</dt><dd>How a target reports coverage to AFL++: compiled edges, or a bridge for a given language. <a href="{{ROOT}}manual/coverage-feedback/">Ch. 5</a></dd>
+      <dt id="grammar">Grammar</dt><dd>A description of the parts of an input and their order and nesting. <a href="{{ROOT}}manual/formats-and-grammars/">Ch. 2</a></dd>
+      <dt id="harness">Harness</dt><dd>The small program that reads one input, calls the parser's documented API, and prints what it observed. Each target's harness runs in a pinned Docker image. <a href="{{ROOT}}manual/controls-and-receipts/">Ch. 3</a></dd>
+      <dt id="lead">Lead</dt><dd>A candidate that has not passed every check yet: a search hit in the catalog, or a saved crash or hang in a campaign. <a href="{{ROOT}}manual/triage-and-disclosure/">Ch. 8</a></dd>
+      <dt id="input-api">Input API</dt><dd>The documented function a package provides to parse the format, such as <code>png_image_begin_read_from_file</code>. <a href="{{ROOT}}manual/controls-and-receipts/">Ch. 3</a></dd>
+      <dt id="package-path">Package path</dt><dd>One package or standard API together with its input API. The unit counted in the catalog. <a href="{{ROOT}}manual/what-a-parser-is/">Ch. 1</a></dd>
+      <dt id="receipt">Receipt</dt><dd>A JSON record of what happened: a verification receipt for a target, a run receipt for one input, a summary for a batch. <a href="{{ROOT}}manual/controls-and-receipts/">Ch. 3</a></dd>
+      <dt id="seed">Seed</dt><dd>An input a fuzzing campaign starts from. By default, the target's control. <a href="{{ROOT}}manual/fuzzing-at-scale/">Ch. 7</a></dd>
+      <dt id="selection">Selection ID</dt><dd>An identifier the bench derives from a sorted list of targets. With the Parsarium commit, it pins a target set. <a href="{{ROOT}}manual/designing-an-experiment/">Ch. 9</a></dd>
+      <dt id="smuggling">Request smuggling</dt><dd>An attack that uses two HTTP parsers disagreeing about where a request ends. <a href="{{ROOT}}manual/differential-testing/">Ch. 6</a></dd>
+      <dt id="standard">Standard API</dt><dd>A parser shipped with a language's standard library or runtime, such as Go's <code>image/png</code>. Verified like packages, listed separately. <a href="{{ROOT}}manual/choosing-targets/">Ch. 4</a></dd>
+      <dt id="target">Target</dt><dd>A verified package path with a runnable Docker harness. <a href="{{ROOT}}manual/controls-and-receipts/">Ch. 3</a></dd>
+    </dl>
+  </div>
+</section>

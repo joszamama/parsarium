@@ -1,0 +1,24 @@
+<!-- {"title": "Atlas — every parser in Parsarium", "description": "A format by language map of every verified parser in Parsarium, with releases, input APIs, adoption ranks, parser families, and links to the evidence and harnesses."} -->
+<section class="intro">
+  <div class="wrap">
+    <p class="off">0x0000<b>atlas</b></p>
+    <div>
+      <h1>Every parser, by format and language.</h1>
+      <p class="lede">Each square is one format in one language. The number is how many parsers have a runnable harness; the smaller number is how many are verified in the catalog, standard-library APIs included. Select a square, a row, or a column to list its parsers with their release, input API, and evidence.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="border-bottom:0;padding-top:40px">
+  <div class="wrap">
+    <p class="off">0x0010<b>map</b></p>
+    <div id="atlas" data-catalog="{{ASSET_ROOT}}catalog.json">
+      <div class="matrix-wrap"><table class="matrix" aria-label="Runnable and verified parsers by format and language"></table></div>
+      <div class="atlas-tools">
+        <input class="search" type="search" placeholder="Search packages, families, or APIs — e.g. libpng, GD, ReadRequest" aria-label="Search parsers">
+        <label class="check" style="margin:0"><input type="checkbox" data-runnable><span>Only runnable</span></label>
+      </div>
+      <div class="atlas-list" aria-live="polite"></div>
+    </div>
+  </div>
+</section>

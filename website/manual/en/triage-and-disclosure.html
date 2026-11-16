@@ -1,0 +1,88 @@
+<!-- {"title": "Triage and disclosure", "summary": "From a file in crashes/ to a report a maintainer can act on: reproduce, reduce, deduplicate, assess, and disclose."} -->
+<p>After a campaign, <code>crashes/</code> and <code>hangs/</code> may contain files. Each one is a lead. Turning a lead into a bug report takes a few steps, and doing them carefully is what makes the report useful to the people who maintain the parser.</p>
+
+<h2>1. Reproduce</h2>
+<p>Run the saved file through the normal harness, outside the fuzzer:</p>
+<pre data-copy><span class="p">$ </span>python3 parsarium.py run png c libpng runs/libpng-afl/afl-out/default/crashes/id:000000,* --results runs/libpng-triage</pre>
+<p>A reproducible crash gives <code>target_nonzero</code> with the error in <code>stderr_tail</code>; a hang gives <code>timeout</code>. Run it a few times. If the result changes between runs, note that: it may depend on memory layout, timing, or the limits of the fuzzing environment rather than the input alone.</p>
+
+<h2>2. Reduce</h2>
+<p>Fuzzer outputs are usually larger than they need to be. A smaller input makes the cause easier to see. For compiled targets, AFL++ includes <code>afl-tmin</code>, which removes bytes while the crash still happens. For any target, you can also reduce by hand with the format in mind: drop chunks, shorten fields, and re-run after each change. Keep the original file next to the reduced one.</p>
+
+<h2>3. Deduplicate</h2>
+<p>A campaign often saves many files for one bug. Group them by where they fail: the top frames of the stack trace for native crashes, the exception type and location for managed languages. Then group again by parser family. If thirteen PHP packages crash in the same GD function, that is one report to GD.</p>
+
+<h2>4. Check the latest release</h2>
+<p>Parsarium pins releases so results are reproducible. The bug you found may already be fixed upstream. Before reporting, try the input against the latest release and look through the project's issue tracker and changelog.</p>
+
+<h2>5. Assess</h2>
+<p>Describe what the bug allows, as precisely as you can:</p>
+<ul>
+  <li>A memory-safety error in C or C++ (out-of-bounds read or write, use after free) is usually the most serious. AddressSanitizer output helps the maintainer see it.</li>
+  <li>An unhandled exception in a managed language is often a denial of service: the parser stops a request or a worker.</li>
+  <li>A hang or a huge allocation from a small input is a resource problem, also usually a denial of service.</li>
+  <li>A disagreement between parsers matters when two of them sit on the same path, for example a checker and a consumer.</li>
+</ul>
+
+<h2>6. Disclose</h2>
+<p>Look for a <code>SECURITY.md</code> file or a security policy in the project's repository, and use the channel it names. Many GitHub projects accept private vulnerability reports directly. A good report includes the reduced input, the exact release, the command that reproduces it, the observed result, and what you think the impact is. Offer a fix if you can. Give the maintainers time; ninety days is a common default, and most maintainers are glad to hear from someone who did the work to make the problem clear.</p>
+<p>For a serious issue, the maintainers or a CVE Numbering Authority such as GitHub can assign a CVE once it is fixed.</p>
+
+<div class="note"><b>Keep a log</b>For each lead, record the target, the input hash, the status, the stack or exception, the family, the upstream status, and the date you reported it. After a few campaigns this log becomes the most useful file you have.</div>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>Every file in <code>crashes/</code> or <code>hangs/</code> is a lead until it is reproduced outside the fuzzer.</li><li>Reduce inputs before analysing them; a smaller file makes the cause visible.</li><li>Deduplicate by failure location, then by parser family.</li><li>Check the latest upstream release before reporting.</li><li>Report privately through the project's security policy, with the reduced input, the exact release, and the command to reproduce.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="1"><p class="q-text">AFL++ saved a file in <code>crashes/</code>. What is it?</p><ol class="q-opts"><li>A confirmed bug</li><li>A lead to reproduce and triage</li><li>A false positive</li></ol><p class="q-why">It may be a real bug, a harness problem, or an environment effect. Reproduction outside the fuzzer is the first test.</p></div>
+<div class="q" data-answer="0"><p class="q-text">What is the first step of triage?</p><ol class="q-opts"><li>Reproduce the input with <code>parsarium.py run</code> outside the fuzzer</li><li>Write the report</li><li>Request a CVE</li></ol><p class="q-why">Everything else depends on being able to trigger the behaviour reliably.</p></div>
+<div class="q" data-answer="2"><p class="q-text">A Python parser raises an unhandled exception on a crafted file. What is the most likely impact?</p><ol class="q-opts"><li>Remote code execution</li><li>Memory corruption</li><li>Denial of service: the request or worker stops</li></ol><p class="q-why">Managed languages protect memory, so an exception usually stops processing rather than corrupting state. That can still matter for a service.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Where should you send a security report for a parser?</p><ol class="q-opts"><li>A public issue with the proof-of-concept file</li><li>The channel named in the project's security policy, usually private</li><li>A social media post tagging the maintainers</li></ol><p class="q-why">Private disclosure gives maintainers time to fix the problem before it is public.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Why test the input against the latest release before reporting?</p><ol class="q-opts"><li>The bug may already be fixed upstream.</li><li>Pinned releases are not allowed in reports.</li><li>Newer releases always crash more.</li></ol><p class="q-why">Parsarium pins releases for reproducibility. A quick check upstream saves everyone time.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 8.1</span><span class="level">Warm-up</span></p>
+  <p>Take any campaign from chapter 7 and run <code>afl summary</code> on it. If <code>crashes/</code> or <code>hangs/</code> is not empty, reproduce one file with <code>parsarium.py run</code> and fill in the log described above. If both are empty, run the control through <code>run</code> and read the receipt as if it were a lead.</p>
+  <details><summary>Hint</summary><p>Saved files are named like <code>id:000000,sig:11,...</code>. Quote the path in the shell.</p></details>
+  <details><summary>Solution</summary><p>A reproduced crash shows <code>target_nonzero</code> with the error in <code>stderr_tail</code>; a hang shows <code>timeout</code>. Record the target, input hash, status, the first lines of the error, the family, and today's date. That row is the start of your triage log.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 8.2</span><span class="level">Practice</span></p>
+  <p>Five crashes were saved in a campaign on several PHP PNG packages. Group them into distinct bugs.</p>
+  <pre>A  nette_utils      Error: imagecreatefromstring() gd_png.c:212 png_read_info
+B  league_glide     Error: imagecreatefromstring() gd_png.c:212 png_read_info
+C  nette_utils      TypeError: Image::fromString() argument must be string
+D  intervention     Error: imagecreatefromstring() gd_png.c:212 png_read_info
+E  league_glide     Error: imagecreatefromstring() gd_png.c:340 png_read_image</pre>
+  <p>(These traces are made up for the exercise.)</p>
+  <details><summary>Hint</summary><p>Group first by the deepest frame that belongs to the parser, then ask whether the remaining differences are in wrapper code.</p></details>
+  <details><summary>Solution</summary><p>Three groups. A, B, and D fail at the same place in GD (<code>gd_png.c:212</code>): one bug in the shared engine, one report to GD. E fails at a different line in GD: probably a second engine bug. C is a type error in the wrapper's own code, not in the parser: a separate, smaller report to that package. Five files, three reports.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 8.3</span><span class="level">Challenge</span></p>
+  <p>Write a disclosure report for lead A from the previous exercise, as if you had reproduced it. Use headings a maintainer can scan.</p>
+  <details><summary>Hint</summary><p>Think about what the maintainer needs to reproduce it in five minutes without asking you anything.</p></details>
+  <details><summary>Solution</summary><pre>Title: Out-of-bounds read in PNG header parsing (gd_png.c:212)
+
+Affected: libgd X.Y.Z (also current main as of YYYY-MM-DD)
+Reached through: imagecreatefromstring() in PHP; wrappers nette/utils, league/glide, intervention/image
+
+Reproduce:
+  php -r 'imagecreatefromstring(file_get_contents("crash.png"));'
+  (crash.png attached, 57 bytes, sha256 ...)
+
+Observed: process aborts; ASan report attached
+Expected: imagecreatefromstring() returns false
+
+Cause (as far as I can tell): IHDR length is not checked before ...
+Impact: denial of service; possible information disclosure
+Fix suggestion: ...
+
+Found with Parsarium (commit ..., target png/php/nette_utils).
+I am happy to keep this private for 90 days or until a fix is released.</pre></details>
+</div>
+</section>

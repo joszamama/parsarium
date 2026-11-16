@@ -1,0 +1,74 @@
+<!-- {"title": "Differential testing", "summary": "Send the same bytes to many parsers and compare what they say. Where they disagree is where to look."} -->
+<p>When many programs implement the same format, they can check each other. Send one input to all of them and compare the answers. If most parsers say the image is 2 by 1 and one says 3 by 1, at least one of them is worth a closer look. You do not need to know the correct answer in advance; the disagreement is the signal.</p>
+
+<h2>Why disagreements matter</h2>
+<p>Some disagreements are harmless: one parser is lenient about a missing field, another is strict. Others are security problems. If a proxy and a server parse the same HTTP request differently, an attacker can hide a second request inside the first. If a signature checker and an installer read different entries from the same ZIP, the checked file and the installed file are not the same. If a PDF shows different content in different viewers, a reviewer and a reader see different documents. In each case, both programs may look correct on their own.</p>
+<p>Differential testing also finds plain bugs. A parser that accepts a file every other implementation rejects is often skipping a check.</p>
+
+<h2>Running one file through every parser</h2>
+<p>Parsarium has a command for this. It runs every verified harness for a format, optionally limited to one language, and saves one receipt per target plus a <code>summary.json</code>.</p>
+<pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --list
+<span class="p">$ </span>python3 parsarium.py run-format png --file my.png --results runs/png-my-file --workers 4</pre>
+<p><code>summary.json</code> lists each target with its status and the directory of its receipt. The status counts give a first view: how many finished, exited with an error, or timed out.</p>
+
+<h2>Comparing the answers</h2>
+<p>Status alone does not tell you whether a parser accepted the input, so the next step is to compare outputs. Harnesses print the fields they observed, and the field names differ slightly between targets, so pick the fields that matter for your question and normalise them. For images, width and height are a good start. A short script is enough:</p>
+<pre data-copy>python3 - runs/png-my-file &lt;&lt;'EOF'
+import json, sys, pathlib, collections
+root = pathlib.Path(sys.argv[1])
+summary = json.loads((root / "summary.json").read_text())
+groups = collections.defaultdict(list)
+for row in summary["results"]:
+    receipts = list((root / row["receipt_dir"]).glob("*.json"))
+    tail = json.loads(receipts[0].read_text()).get("stdout_tail", "") if receipts else ""
+    groups[(row["status"], tail.strip()[-80:])].append(row["project"])
+for (status, tail), projects in sorted(groups.items(), key=lambda g: -len(g[1])):
+    print(f"{len(projects):4}  {status:15}  {tail}")
+    for p in projects[:5]:
+        print("        ", p)
+EOF</pre>
+<p>The largest group is usually the consensus. Small groups are the interesting ones.</p>
+
+<h2>Families again</h2>
+<p>When you count agreement, remember that wrappers share engines. Thirteen PHP packages agreeing with each other may be one decoder agreeing with itself. Group results by parser family before deciding how unusual a disagreement is.</p>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>Sending one input to many implementations needs no correct answer in advance: disagreement is the signal.</li><li>Some disagreements are leniency. Others are security problems when two parsers sit on the same path.</li><li><code>run-format</code> runs every harness for a format and saves one receipt per target plus a summary.</li><li>Status counts are a first view; the real comparison is on normalised output fields.</li><li>Group by parser family before deciding how unusual a disagreement is.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="0"><p class="q-text">Do you need to know the correct output before running a differential test?</p><ol class="q-opts"><li>No. The disagreement between implementations is the signal.</li><li>Yes, otherwise results cannot be interpreted.</li><li>Only for binary formats.</li></ol><p class="q-why">That is the main strength of differential testing. You look at the minority answers, then decide who is right.</p></div>
+<div class="q" data-answer="1"><p class="q-text">What causes HTTP request smuggling?</p><ol class="q-opts"><li>A server that crashes on long headers</li><li>A front end and a back end that disagree about where a request ends</li><li>Requests that use HTTP/2</li></ol><p class="q-why">If one program uses Content-Length and the other Transfer-Encoding, the bytes one sees as a body the other sees as the start of a new request.</p></div>
+<div class="q" data-answer="2"><p class="q-text"><code>run-format</code> reports <code>ok</code> for every target. Do all the parsers agree?</p><ol class="q-opts"><li>Yes, all of them accepted the file.</li><li>Yes, if they are in the same language.</li><li>Not necessarily. <code>ok</code> means each harness finished; you still have to compare their outputs.</li></ol><p class="q-why">A clean rejection and a successful parse both give <code>ok</code>. The agreement is in the output fields.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Twelve of thirteen PHP packages give the same answer. Is that strong consensus?</p><ol class="q-opts"><li>Yes, twelve independent votes</li><li>Maybe not. If they share one engine, it is one answer repeated.</li><li>No, PHP is always lenient.</li></ol><p class="q-why">Wrappers inherit their engine's behaviour. Group results by family to count independent opinions.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Why normalise field names before comparing outputs?</p><ol class="q-opts"><li>Harnesses name the same field differently, so a naive comparison shows false disagreements.</li><li>To make the receipts smaller</li><li>Because JSON is case-sensitive</li></ol><p class="q-why">One PNG harness prints <code>rgba0</code>, another <code>first</code>. Pick the fields your question needs and map them to common names.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 6.1</span><span class="level">Warm-up</span></p>
+  <p>Take <code>wide-new-crc.png</code> from exercise 2.2: a PNG that claims to be 3 pixels wide but carries data for 2. Send it to every PNG parser.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format png --file wide-new-crc.png --results runs/png-wide --workers 4</pre>
+  <p>Group the results with the script in this chapter. How many parsers reject the file? Do any report width 3? Do the answers split along languages, or along parser families?</p>
+  <details><summary>Hint</summary><p>Start with <code>status_counts</code> in <code>summary.json</code>, then run the grouping script.</p></details>
+  <details><summary>Solution</summary><p>The exact split depends on the parsers, which is the point of running it. Look for three groups: parsers that reject the file because the image data is too short, parsers that accept it and report width 3 (filling or ignoring the missing pixels), and any that exit with an error or time out. The last group is worth a closer look. Then check the family column: if a group is made of one engine's wrappers, it is one behaviour, not many.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 6.2</span><span class="level">Practice</span></p>
+  <p>ZIP entries can be compressed with different methods. <code>controls/zip/hello-zstd.zip</code> uses Zstandard, a newer method that not every reader supports. Send it to every ZIP parser.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py run-format zip --file controls/zip/hello-zstd.zip --results runs/zip-zstd --workers 4</pre>
+  <p>Which parsers can read the entry? How do the others fail: a clear error, a wrong result, or a crash?</p>
+  <details><summary>Hint</summary><p>Only one ZIP target in the catalog uses this file as its control. That tells you something about how many readers are expected to support it.</p></details>
+  <details><summary>Solution</summary><p>Expect most readers not to support Zstandard; the catalog's own <code>zipfile-zstd</code> target exists precisely because Python's standard <code>zipfile</code> needs an extension for it. The useful finding is how each reader fails. A clear "unsupported compression method" error is good behaviour. Returning garbage or an empty file without an error is the kind of disagreement that can matter in practice, for example when one tool checks an archive and another extracts it.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 6.3</span><span class="level">Challenge</span></p>
+  <p>Write an HTTP request with both a <code>Content-Length</code> and a <code>Transfer-Encoding: chunked</code> header, and send it to every HTTP/1.1 parser.</p>
+  <pre data-copy>printf 'POST / HTTP/1.1\r\nHost: example.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n' &gt; cl-te.http
+<span class="p">$ </span>python3 parsarium.py run-format http11 --file cl-te.http --results runs/http-cl-te --workers 4</pre>
+  <p>Which header does each parser follow, and which ones reject the request?</p>
+  <details><summary>Hint</summary><p>Read section 6.1 of <a href="https://www.rfc-editor.org/rfc/rfc9112#section-6.1">RFC 9112</a> first to know what the specification allows.</p></details>
+  <details><summary>Solution</summary><p>RFC 9112 lets a server either reject such a request or process it using Transfer-Encoding alone. Both are fine. A parser that uses Content-Length instead is the dangerous case, because if it sits in front of or behind a parser that follows Transfer-Encoding, the two disagree about where the request ends. Group your results into those three behaviours. Note that some targets parse responses rather than requests; leave those out of this comparison.</p></details>
+</div>
+</section>

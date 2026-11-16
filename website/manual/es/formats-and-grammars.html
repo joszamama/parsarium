@@ -1,0 +1,73 @@
+<!-- {"title": "Formatos y gramáticas", "summary": "Cómo se construyen los formatos, cómo los describen una gramática y unas restricciones, y cómo leer un archivo de control byte a byte."} -->
+<p>Un formato es un acuerdo entre quien escribe los bytes y quien los lee. Dice qué partes existen, en qué orden y cómo encontrar sus límites. Antes de probar un parser, ayuda saber leer su entrada por tu cuenta.</p>
+
+<h2>Cuatro formas habituales</h2>
+<h3>Bloques</h3>
+<p>PNG, WAV y MP4 son secuencias de bloques que se describen a sí mismos. Cada bloque empieza con una longitud y un tipo, así que un lector puede saltarse los bloques que no entiende. PNG añade una suma de comprobación CRC a cada bloque. Las cajas MP4 pueden contener otras cajas, así que la estructura es un árbol.</p>
+<h3>Desplazamientos y directorios</h3>
+<p>ZIP guarda al final del archivo un directorio central que apunta a cada entrada. PDF mantiene una tabla de referencias cruzadas con el desplazamiento en bytes de cada objeto. Un lector salta de un sitio a otro del archivo en lugar de leerlo de principio a fin, lo que significa que a los mismos bytes se puede llegar por más de un camino.</p>
+<h3>Árboles de texto</h3>
+<p>SVG es XML: elementos, atributos y anidamiento. El parser construye un árbol antes de que nada más lo examine.</p>
+<h3>Líneas y tokens</h3>
+<p>HTTP/1.1, ASCII PLY y ASCII PNM son texto. HTTP tiene una línea inicial y líneas de cabecera que terminan en CRLF. PNM es una lista de números separados por espacios. PLY tiene una cabecera que declara cuántos registros vienen después. Los formatos de texto parecen sencillos, pero también llevan recuentos y longitudes que el parser tiene que comprobar.</p>
+
+<h2>Gramáticas y restricciones</h2>
+<p>Una gramática describe la forma de las entradas válidas. Esta es una gramática aproximada de un archivo PNG:</p>
+<pre>&lt;png&gt;    ::= &lt;sig&gt; &lt;ihdr&gt; &lt;chunk&gt;* &lt;iend&gt;
+&lt;sig&gt;    ::= 89 50 4E 47 0D 0A 1A 0A
+&lt;chunk&gt;  ::= &lt;length:4&gt; &lt;type:4&gt; &lt;data&gt; &lt;crc:4&gt;</pre>
+<p>La gramática recoge el orden de las partes, pero no las relaciones entre ellas. Faltan dos reglas: el campo de longitud debe coincidir con el tamaño de los datos, y el CRC debe coincidir con la suma de comprobación del tipo y los datos. Estas son <strong>restricciones</strong>. La mayoría de los formatos reales necesitan ambas cosas: una gramática para la estructura y restricciones para longitudes, recuentos, sumas de comprobación y desplazamientos.</p>
+<p>Esto importa al probar. Si cambias bytes al azar en un PNG, casi siempre romperás un CRC, y un decodificador estricto rechazará el archivo en el primer bloque. El código interesante que hay detrás de esa comprobación nunca se alcanza. Los generadores que conocen la gramática y las restricciones, como <a href="https://fandango-fuzzer.github.io/">Fandango</a>, pueden producir entradas que superan estas comprobaciones y aun así variar las partes que importan.</p>
+
+<h2>Lee los controles</h2>
+<p>Cada formato de Parsarium tiene archivos de control pequeños y válidos. Elige uno abajo, mira los bytes resaltados y responde a la pregunta. La respuesta muestra lo que devolvió un parser real con ese archivo.</p>
+<div class="inspector" data-manual="{{ASSET_ROOT}}manual.json"></div>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Los formatos tienen unas pocas formas: bloques, desplazamientos y directorios, árboles de texto, y líneas de tokens.</li><li>Una gramática describe el orden y el anidamiento de las partes. Las restricciones describen cómo se relacionan: longitudes, recuentos, sumas de comprobación, desplazamientos.</li><li>Las mutaciones aleatorias suelen romper una restricción, así que un parser estricto rechaza la entrada antes de llegar al código interesante.</li><li>Los generadores que conocen la gramática y las restricciones pueden producir entradas que superan estas comprobaciones y aun así variar lo que importa.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="1"><p class="q-text">En un bloque PNG, ¿qué bytes cubre el CRC?</p><ol class="q-opts"><li>La longitud, el tipo y los datos</li><li>El tipo y los datos</li><li>Solo los datos</li></ol><p class="q-why">La especificación de PNG calcula el CRC sobre el tipo y los datos del bloque. El campo de longitud no se incluye.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Por qué cambiar bytes al azar rara vez llega al código profundo de un decodificador PNG?</p><ol class="q-opts"><li>La mayoría de los cambios rompen un CRC, y un decodificador estricto rechaza el bloque.</li><li>Los decodificadores PNG ignoran los bytes modificados.</li><li>Los archivos PNG son demasiado pequeños para mutarlos.</li></ol><p class="q-why">Un solo byte cambiado en un bloque invalida su suma de comprobación. El decodificador se detiene en la primera comprobación, y el código que viene después nunca se ejecuta.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Cuál de estas cosas no puede expresar una gramática por sí sola?</p><ol class="q-opts"><li>El orden de las partes</li><li>Que un campo de longitud sea igual al tamaño de los datos que le siguen</li><li>Qué partes pueden repetirse</li></ol><p class="q-why">El orden, el anidamiento y la repetición son lo que las gramáticas hacen bien. Las relaciones entre valores, como longitudes y sumas de comprobación, necesitan restricciones.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Qué formato se suele leer empezando por el final?</p><ol class="q-opts"><li>WAV</li><li>ZIP</li><li>ASCII PNM</li></ol><p class="q-why">Un lector de ZIP busca el registro de fin de directorio central al final del archivo y lo sigue hasta el directorio central y las entradas.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Un archivo ASCII PNM empieza por <code>P3 2 1 255</code>. ¿Qué significan el 2 y el 1?</p><ol class="q-opts"><li>Ancho y alto</li><li>Canales y profundidad de bits</li><li>Versión principal y secundaria</li></ol><p class="q-why">P3 indica RGB en ASCII; después vienen el ancho y el alto, luego el valor máximo de muestra y por último las muestras.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 2.1</span><span class="level">Calentamiento</span></p>
+  <p>Responde a las diez preguntas del inspector de bytes de arriba, una por formato. En cada una, localiza los bytes resaltados en el volcado hexadecimal y di a qué parte del formato pertenecen.</p>
+  <details><summary>Pista</summary><p>La columna ASCII a la derecha del volcado suele hacer más visible la estructura, sobre todo en los formatos de texto y en los tipos de bloque.</p></details>
+  <details><summary>Solución</summary><p>Las respuestas aparecen en el inspector. Lo que importa del ejercicio es el segundo paso: saber decir, para cada formato, dónde empieza su estructura y qué le dice al lector cuánto tiene que leer a continuación.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 2.2</span><span class="level">Práctica</span></p>
+  <p>Cambia el ancho del control PNG de 2 a 3. Haz dos versiones: una que mantenga el CRC antiguo y otra con el CRC corregido. Después pasa las dos por Pillow.</p>
+  <pre data-copy>python3 - &lt;&lt;'EOF'
+import struct, zlib
+data = bytearray(open("controls/png/red-green.png", "rb").read())
+data[16:20] = struct.pack("&gt;I", 3)                       # ancho de IHDR: 2 -&gt; 3
+open("wide-old-crc.png", "wb").write(data)
+data[29:33] = struct.pack("&gt;I", zlib.crc32(data[12:29]))  # CRC sobre tipo + datos
+open("wide-new-crc.png", "wb").write(data)
+EOF</pre>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py run png python pillow wide-old-crc.png --results runs/wide-old
+<span class="p">$ </span>python3 parsarium.py run png python pillow wide-new-crc.png --results runs/wide-new</pre>
+  <p>Compara <code>stdout_tail</code> y <code>stderr_tail</code> en los dos registros. ¿Qué comprobación detuvo el primer archivo? ¿Hasta dónde llegó el segundo?</p>
+  <details><summary>Pista</summary><p>IHDR empieza en el desplazamiento 8: cuatro bytes de longitud, cuatro de tipo (desplazamientos 12 a 15), trece de datos (16 a 28) y cuatro de CRC (29 a 32). El ancho son los cuatro primeros bytes de datos.</p></details>
+  <details><summary>Solución</summary><p>El primer archivo no supera la suma de comprobación de IHDR, así que un decodificador estricto se detiene ahí. El segundo supera esa comprobación y llega a los datos de la imagen, donde encuentra menos píxeles de los que promete la cabecera. Lo que pasa después lo decide el decodificador: informar de un error, rellenar los píxeles que faltan o devolver una imagen parcial. El registro muestra qué hace Pillow. Guarda <code>wide-new-crc.png</code>; en el capítulo 6 lo enviamos a todos los parsers de PNG.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 2.3</span><span class="level">Reto</span></p>
+  <p>Escribe una gramática y las restricciones de ASCII PNM en forma P3, con la precisión suficiente para que un generador pueda producir archivos válidos a partir de ellas. Después enumera tres formas de romper una restricción sin dejar de cumplir la gramática.</p>
+  <details><summary>Pista</summary><p>Parte del control: <code>P3</code>, ancho, alto, valor máximo y después las muestras. Piensa en cuántas muestras tiene que haber y qué rango puede tomar cada una.</p></details>
+  <details><summary>Solución</summary><pre>&lt;pnm&gt;    ::= "P3" &lt;ws&gt; &lt;width&gt; &lt;ws&gt; &lt;height&gt; &lt;ws&gt; &lt;maxval&gt; (&lt;ws&gt; &lt;sample&gt;)+ &lt;ws&gt;?
+&lt;width&gt;  ::= &lt;digits&gt;
+&lt;height&gt; ::= &lt;digits&gt;
+&lt;maxval&gt; ::= &lt;digits&gt;
+&lt;sample&gt; ::= &lt;digits&gt;</pre><p>Restricciones: el número de muestras es igual a 3 × ancho × alto; cada muestra es como mucho <code>maxval</code>; <code>maxval</code> está entre 1 y 65535. Entradas que cumplen la gramática pero rompen una restricción: una muestra de menos o de más; una muestra mayor que <code>maxval</code>; un ancho y un alto cuyo producto desborda un entero de 32 bits. Cada una pone a prueba una comprobación que el parser debería hacer.</p></details>
+</div>
+</section>

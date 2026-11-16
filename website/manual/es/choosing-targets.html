@@ -1,0 +1,66 @@
+<!-- {"title": "Elegir targets", "summary": "Celdas, rankings de adopción, familias de parsers y APIs estándar: cómo elegir un conjunto de targets que encaje con tu pregunta."} -->
+<p>Los targets que eliges determinan los resultados que obtienes. Un fuzzer que funciona bien con veinte decodificadores de imágenes en C puede comportarse de forma muy distinta con lectores de archivos comprimidos en Java. Este capítulo explica cómo se construye el catálogo, para que puedas elegir un conjunto que responda a tu pregunta y describirlo con claridad.</p>
+
+<h2>Celdas y la meta de trabajo</h2>
+<p>El catálogo se construye celda a celda, donde una celda es un formato en un lenguaje. Para cada celda, Parsarium busca en los repositorios de paquetes el nombre del formato junto con términos como parser, decoder o reader, revisa los resultados y verifica los candidatos con un control. La meta es tener veinte paquetes verificados por celda, con un máximo de treinta. La mayoría de las celdas llegan a veinte. Cada búsqueda, su fecha y su número de resultados se guardan junto a la celda, igual que las pistas que siguen abiertas.</p>
+
+<h2>Rankings de adopción</h2>
+<p>Dentro de una celda, los paquetes se ordenan según una única métrica de adopción: las descargas del repositorio cuando este publica cifras comparables y, si no, una alternativa documentada como las estrellas de GitHub. El ranking indica qué paquetes usa más la gente. No es una medida de calidad, y solo tiene sentido dentro de la celda, porque las descargas de npm y las estrellas de GitHub no son la misma unidad.</p>
+<p>Los rankings son útiles para elegir un conjunto más pequeño. Si tomas los cinco primeros de cada celda, te quedas con las bibliotecas que tienen más probabilidades de estar en software real.</p>
+
+<h2>Paquetes y familias</h2>
+<p>Muchos paquetes son wrappers. En PHP, la mayoría de los paquetes de imágenes llaman por debajo a GD o a ImageMagick. En JavaScript, muchos paquetes de PDF se apoyan en pdf.js. Cada entrada del catálogo registra su <strong>familia de parsers</strong>: el código que realmente lee el formato.</p>
+<p>Contar paquetes o familias depende de lo que quieras medir:</p>
+<ul>
+  <li>Si estudias <strong>ecosistemas</strong> (por ejemplo, cómo parsean imágenes los desarrolladores de PHP), cuenta cada paquete, porque cada uno es una dependencia distinta con su propia API y su propio código de wrapper.</li>
+  <li>Si estudias <strong>motores de parsing</strong> (cuántas implementaciones distintas fallan con una entrada), cuenta familias. Si no, un solo bug en GD aparece trece veces.</li>
+  <li>Si <strong>comparas fuzzers</strong>, usar un target por familia evita que la comparación se incline hacia el motor que casualmente tenga muchos wrappers.</li>
+</ul>
+
+<h2>APIs de la biblioteca estándar</h2>
+<p>Algunos lenguajes incluyen parsers en su biblioteca estándar: <code>image/png</code> y <code>net/http</code> en Go, <code>zipfile</code> y <code>http.client</code> en Python, <code>java.util.zip</code> en Java. Se verifican igual que los paquetes y tienen sus propios harnesses, pero aparecen por separado y no forman parte del ranking de adopción. Cuando existen, suelen ser el parser más usado de su lenguaje, así que la mayoría de los estudios querrán incluirlos.</p>
+
+<h2>Tipo de feedback</h2>
+<p>Los targets también se diferencian en cómo ve AFL++ su cobertura. Los targets en C, C++ y Rust se compilan con instrumentación. Los demás usan un puente que informa de la cobertura del código fuente del parser. Si tu experimento depende de un feedback nativo y rápido, filtra por este criterio. El siguiente capítulo lo trata en detalle.</p>
+
+<h2>Dejarlo por escrito</h2>
+<p>El <a href="{{ROOT}}bench/">banco</a> convierte estas decisiones en una selección. Le asigna un ID derivado de su lista de targets, un manifiesto con versiones y controles, y una tabla para tu informe. Con el ID y el commit de Parsarium, cualquiera puede reconstruir el mismo conjunto.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>El catálogo se construye celda a celda, con una meta de trabajo de veinte paquetes verificados por celda.</li><li>Los rankings de adopción solo comparan paquetes dentro de una celda, porque cada celda puede usar una métrica distinta.</li><li>Muchos paquetes comparten una familia de parsers. Cuenta paquetes para estudiar ecosistemas; cuenta familias para estudiar motores o comparar herramientas.</li><li>Las APIs de la biblioteca estándar se verifican igual que los paquetes, pero aparecen por separado y no entran en el ranking.</li><li>Un ID de selección más el commit de Parsarium bastan para que otra persona reconstruya exactamente tu conjunto de targets.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="2"><p class="q-text">¿Puedes comparar el puesto 1 de la celda PNG de Python con el puesto 1 de la celda PNG de Rust?</p><ol class="q-opts"><li>Sí, los dos son los más populares.</li><li>Sí, si los dos usan descargas.</li><li>No. Los puestos solo tienen sentido dentro de una celda.</li></ol><p class="q-why">Cada celda usa una métrica documentada, a menudo de un registro distinto. Las descargas en PyPI y en crates.io no son la misma unidad.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Quieres comparar dos fuzzers con formatos de imagen. ¿Qué selección encaja mejor?</p><ol class="q-opts"><li>Un target por familia de parser</li><li>Todos los paquetes de todas las celdas de imagen</li><li>Solo el paquete mejor clasificado de cada celda</li></ol><p class="q-why">Un target por familia evita que la comparación se incline hacia motores que casualmente tienen muchos wrappers, como GD en PHP.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Trece paquetes PNG de PHP fallan con la misma entrada dentro de la misma función de GD. ¿Cuántos informes de bug deberías escribir?</p><ol class="q-opts"><li>Trece, uno por paquete</li><li>Uno, a GD</li><li>Ninguno, los bugs de PHP quedan fuera del alcance</li></ol><p class="q-why">El bug está en el motor compartido. Un solo informe al motor lo arregla para todos los wrappers.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Cómo se tratan las APIs de la biblioteca estándar en el catálogo?</p><ol class="q-opts"><li>Se clasifican junto con los paquetes de terceros.</li><li>Se verifican de la misma manera, pero aparecen por separado y sin ranking.</li><li>No se incluyen.</li></ol><p class="q-why"><code>image/png</code> de Go o <code>zipfile</code> de Python pasan la misma comprobación de control y tienen harnesses, pero quedan fuera del ranking de adopción.</p></div>
+<div class="q" data-answer="2"><p class="q-text">¿Qué permite a otra persona reconstruir exactamente el conjunto de targets que usaste?</p><ol class="q-opts"><li>El número de targets</li><li>Una captura de pantalla del banco</li><li>El ID de selección y el commit de Parsarium</li></ol><p class="q-why">El ID se deriva de la lista ordenada de targets, y el commit fija cada versión, harness y control. El manifiesto registra ambos.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 4.1</span><span class="level">Calentamiento</span></p>
+  <p>Abre las celdas de PDF y compara paquetes con familias.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py catalog pdf javascript
+<span class="p">$ </span>python3 parsarium.py catalog pdf go</pre>
+  <p>Después abre el banco con <a href="{{ROOT}}bench/?f=pdf">PDF seleccionado</a> y activa <em>Un target por familia de parser</em>. ¿Cuántos targets quedan? ¿Qué lenguajes pierden más? Apunta los dos IDs de selección.</p>
+  <details><summary>Pista</summary><p>Busca nombres de familia repetidos en la última columna de cada ranking, como <code>mozilla/pdf.js</code>.</p></details>
+  <details><summary>Solución</summary><p>JavaScript es el que más pierde: trece de sus paquetes de PDF se apoyan en pdf.js, así que se reducen a un solo target. Go también encoge, porque diez de sus paquetes descienden del mismo lector de PDF. Los dos IDs son distintos porque las listas de targets son distintas; apunta los dos si publicas resultados de ambas.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 4.2</span><span class="level">Práctica</span></p>
+  <p>Construye una selección para comparar fuzzers con formatos de imagen: PNG y ASCII PNM, un target por familia, como mucho tres por celda. Después activa <em>Solo feedback nativo</em>. ¿Cómo cambia la selección y qué perderías si dejaras ese filtro activado?</p>
+  <details><summary>Pista</summary><p>El feedback nativo viene de C, C++, Rust y unos pocos targets nativos en otros lenguajes.</p></details>
+  <details><summary>Solución</summary><p>Con el filtro activado, la selección se reduce a targets compilados, sobre todo en C, C++ y Rust. Ganas un feedback rápido y preciso en todos los targets, lo que conviene a las herramientas que dependen de instrumentación nativa. Pierdes los lenguajes gestionados y, con ellos, parsers que usan muchas aplicaciones reales. Un informe justo dice qué opción elegiste y por qué.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 4.3</span><span class="level">Reto</span></p>
+  <p>No todas las celdas llegan a veinte paquetes. PHP × ASCII PLY tiene cinco. Abre sus datos y averigua por qué la búsqueda se detuvo ahí.</p>
+  <pre data-copy>data/php/ascii_ply/cell.json
+data/php/ascii_ply/leads.json</pre>
+  <details><summary>Pista</summary><p>Lee el campo <code>uncertainty</code> de <code>cell.json</code>; resume la búsqueda y lo que se encontró.</p></details>
+  <details><summary>Solución</summary><p>Las búsquedas en Packagist, GitHub y Sourcegraph devolvieron cientos de resultados, pero muy pocos eran código PHP que realmente parsea PLY: la mayoría eran escritores, nombres sin relación o JavaScript incrustado en páginas PHP. Dos de los cinco paquetes incluso comparten un motor. La celda se queda por debajo de veinte porque el espacio de búsqueda está documentado y agotado, no porque nadie buscara. Esto es lo que el protocolo llama un límite de búsqueda registrado.</p></details>
+</div>
+</section>

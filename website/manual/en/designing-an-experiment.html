@@ -1,0 +1,74 @@
+<!-- {"title": "Designing an experiment", "summary": "A checklist for studies that use many parsers: question, targets, budgets, repetitions, metrics, and what to publish."} -->
+<p>This last chapter puts the others together. It is the checklist I use before starting an experiment on many targets, written so I do not have to remember it each time.</p>
+
+<h2>Start with the question</h2>
+<p>Write the question in one sentence before choosing anything. "Does tool A reach more parser code than tool B on image formats?" leads to a different setup than "How many ZIP readers accept archives with overlapping entries?" The question tells you which targets, which inputs, and which measurements you need.</p>
+
+<h2>Choose and pin the targets</h2>
+<ul>
+  <li>Build the selection on the <a href="{{ROOT}}bench/">bench</a>. Decide whether you count packages or families, and whether to include standard-library APIs.</li>
+  <li>Save the manifest and note the selection ID and the Parsarium commit.</li>
+  <li>Run the controls for the whole selection first. It takes minutes and confirms that every target works on your machine before the long runs start.</li>
+</ul>
+
+<h2>Fix the conditions</h2>
+<ul>
+  <li><strong>Seeds.</strong> The same seed set for every tool. The controls are a reasonable default.</li>
+  <li><strong>Budget.</strong> Wall-clock time per target, or number of executions. State which.</li>
+  <li><strong>Repetitions.</strong> Several runs per configuration. Five is a minimum; ten is better when you can afford it.</li>
+  <li><strong>Hardware.</strong> CPU model, cores used, memory, and whether campaigns shared a machine.</li>
+</ul>
+
+<h2>Choose the metrics</h2>
+<table>
+  <thead><tr><th>Metric</th><th>Good for</th><th>How to compare</th></tr></thead>
+  <tbody>
+    <tr><td>Coverage</td><td>How far into the parser a tool gets</td><td>Within one target, across tools or over time</td></tr>
+    <tr><td>Unique bugs</td><td>What a tool finds</td><td>After deduplication by location and family</td></tr>
+    <tr><td>Time to first crash</td><td>How fast a tool finds a known bug</td><td>Median over repetitions</td></tr>
+    <tr><td>Acceptance</td><td>How parsers treat an input set</td><td>Across all targets of a format</td></tr>
+  </tbody>
+</table>
+<p>For coverage, a fair method is to replay each tool's final corpus through the same instrumented target and measure it the same way for every tool, instead of comparing the numbers each tool reports about itself.</p>
+
+<h2>Analyse</h2>
+<p>Report medians with the spread, not single runs. Use a statistical test such as Mann-Whitney U to compare tools on each target, and an effect size alongside the p-value. Report per target first and aggregate second; an average across languages can hide a tool that does well on C and poorly on everything else.</p>
+
+<h2>Publish</h2>
+<p>Share the manifest, the scripts you ran, and the run directories, or at least every <code>summary.json</code>, <code>campaign.json</code>, and <code>afl-summary.json</code>. Cite the Parsarium commit and the selection ID. With those, someone else can rebuild your exact target set and rerun the parts they care about.</p>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>Write the question in one sentence before choosing targets, inputs, or metrics.</li><li>Pin the selection and the commit, and run the controls before the long runs.</li><li>Fix seeds, budget, repetitions, and hardware, and report all four.</li><li>Compare per target first, with medians, spread, and a statistical test. Aggregate second.</li><li>Publish the manifest, the scripts, and the run summaries.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="2"><p class="q-text">Tool A has higher average coverage than tool B across 30 targets, from one run each. Is that enough to say A is better?</p><ol class="q-opts"><li>Yes, 30 targets is a lot.</li><li>Yes, if the difference is large.</li><li>No. You need repetitions per target and a statistical test, and the average can hide per-target losses.</li></ol><p class="q-why">One run per target mixes the tool's effect with randomness, and an average across languages can hide a tool that only does well on C.</p></div>
+<div class="q" data-answer="1"><p class="q-text">What is a Mann-Whitney U test used for here?</p><ol class="q-opts"><li>Measuring coverage</li><li>Comparing the results of two tools on one target without assuming a normal distribution</li><li>Choosing the number of repetitions</li></ol><p class="q-why">Fuzzing results are rarely normally distributed. Mann-Whitney U compares two samples of runs; report an effect size with it.</p></div>
+<div class="q" data-answer="0"><p class="q-text">How do you measure coverage fairly across tools?</p><ol class="q-opts"><li>Replay each tool's final corpus through the same instrumented target</li><li>Use the number each tool prints at the end</li><li>Count the files in each queue</li></ol><p class="q-why">Tools measure coverage in different ways. One shared measurement makes the numbers comparable.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Why run the controls for the whole selection before the campaigns?</p><ol class="q-opts"><li>To warm up the CPU</li><li>To confirm every target works on your machine before hours of fuzzing</li><li>Because the bench requires it</li></ol><p class="q-why">A broken image or a missing build is cheap to find in minutes and expensive to find after a day of campaigns.</p></div>
+<div class="q" data-answer="2"><p class="q-text">What is the minimum to share so others can rebuild your setup?</p><ol class="q-opts"><li>The paper</li><li>The fuzzer's version</li><li>The selection manifest with its ID, the Parsarium commit, and the run summaries</li></ol><p class="q-why">With those, someone can rebuild the target set and rerun the parts they care about.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 9.1</span><span class="level">Warm-up</span></p>
+  <p>For each study idea below, write the question in one sentence and choose a bench selection: formats, languages, per-cell limit, and whether to use one target per family.</p>
+  <ol><li>Does structure-aware generation reach more code than byte mutation on binary formats?</li><li>How many ZIP readers accept an archive whose central directory and local headers disagree?</li><li>Do Python parsers handle malformed inputs more safely than C parsers?</li></ol>
+  <details><summary>Hint</summary><p>Ask what you are counting in each case: code, behaviours, or languages.</p></details>
+  <details><summary>Solution</summary><ol><li>PNG, ZIP, MP4, WAV, MP3; one target per family; three per cell. You are comparing tools, so engines matter more than wrappers.</li><li>ZIP only, all languages, all targets, standard APIs included. You are counting real-world behaviour, so every package counts; report families as well.</li><li>All formats, Python and C only, all targets, then repeat with one per family. Language is the variable, so keep everything else the same and show both counts.</li></ol></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 9.2</span><span class="level">Practice</span></p>
+  <p>Read this evaluation paragraph and list everything a reviewer should ask about.</p>
+  <blockquote class="note">"We evaluated our fuzzer on 40 parsers from Parsarium for 24 hours. It found 12 crashes and achieved 18% more coverage than AFL++ on average, demonstrating its superiority."</blockquote>
+  <details><summary>Hint</summary><p>Go through the checklist in this chapter: selection, seeds, budget, repetitions, metrics, statistics, artifacts.</p></details>
+  <details><summary>Solution</summary><ul><li>Which 40 parsers? No selection ID or commit.</li><li>24 hours in total or per target? How many in parallel, on what hardware?</li><li>How many repetitions? Is 18% a median or a single run, and is it significant?</li><li>How was coverage measured: each tool's own numbers, or one shared measurement? Bridged and compiled targets mixed?</li><li>12 crashes before or after deduplication? How many distinct bugs, in how many families? Were they reproduced and reported?</li><li>Same seeds for both tools?</li><li>"Superiority" on average can hide targets where AFL++ was better; per-target results are missing.</li></ul></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 9.3</span><span class="level">Challenge</span></p>
+  <p>Design a small study end to end: two formats, one target per family, five-minute campaigns, three repetitions. Build the selection on the bench, download the manifest and the report template, run the controls, then the campaigns. Fill in the setup lines of the report and add a table with the median <code>corpus_count</code> per target.</p>
+  <details><summary>Hint</summary><p>Reuse the collector from exercise 7.3, then compute medians per project with <code>statistics.median</code>.</p></details>
+  <details><summary>Solution</summary><p>A complete answer has five files: the manifest, the run script, the CSV from the collector, the filled report, and a short note on anything that did not go as planned. That is a small but complete experiment, and the same structure scales to hundreds of targets.</p></details>
+</div>
+</section>

@@ -1,0 +1,102 @@
+<!-- {"title": "Fuzzing a escala", "summary": "De una campaña de AFL++ a cientos: semillas, presupuestos, ejecuciones en paralelo, repeticiones y cómo no perder el control de todo."} -->
+<p>Una campaña de fuzzing es un comando. Cien campañas son un plan: cuánto dura cada una, cuántas se ejecutan a la vez, dónde van los resultados y cómo los vas a comparar después. Este capítulo cubre las dos cosas.</p>
+
+<h2>Una campaña</h2>
+<p>Todo target ejecutable tiene una imagen para AFL++. Una campaña tiene cuatro pasos:</p>
+<pre data-copy><span class="p">$ </span>python3 parsarium.py afl build zip go stdlib_openreader
+<span class="p">$ </span>python3 parsarium.py afl prepare zip go stdlib_openreader runs/zip-go-afl
+<span class="p">$ </span>python3 parsarium.py afl run runs/zip-go-afl --seconds 3600
+<span class="p">$ </span>python3 parsarium.py afl summary runs/zip-go-afl</pre>
+<ul>
+  <li><code>afl build</code> construye la imagen instrumentada y comprueba que el control produce feedback.</li>
+  <li><code>afl prepare</code> copia las semillas, fija el ID de la imagen y escribe <code>plan.json</code> con el comando exacto.</li>
+  <li><code>afl run</code> comprueba el plan, la imagen y los hashes de las semillas, y después ejecuta AFL++ durante el tiempo indicado. <code>--check</code> solo hace las comprobaciones. <code>--resume</code> continúa una ejecución existente.</li>
+  <li><code>afl summary</code> enumera los archivos de <code>queue/</code>, <code>crashes/</code> y <code>hangs/</code> con sus hashes, y lee el <code>fuzzer_stats</code> de AFL++.</li>
+</ul>
+<p>Cada target tiene también el motor de fuzzing propio de su lenguaje (libFuzzer, el fuzzing nativo de Go, Jazzer, Jazzer.js, Atheris, PHP-Fuzzer) a través de <code>parsarium.py build</code> y <code>parsarium.py native</code>. Son útiles cuando quieres comparar con la herramienta que ya usan los desarrolladores de ese lenguaje.</p>
+
+<h2>Semillas</h2>
+<p>Por defecto, una campaña parte del control válido del target. Es una buena semilla mínima: llega al camino principal del parsing. Un corpus de semillas más rico suele ayudar, sobre todo en formatos con muchas partes opcionales. Puedes añadir archivos con <code>--seed</code> o directorios completos con <code>--seed-dir</code>:</p>
+<pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
+<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-afl --seed-dir generated/png</pre>
+<p>Cuando compares herramientas, dales a todas las mismas semillas, para que la comparación trate de lo que hace cada herramienta una vez que arranca.</p>
+
+<h2>Presupuestos</h2>
+<p>Calcula el tiempo total antes de empezar. Cada instancia de AFL++ usa un núcleo de CPU. Con <em>T</em> targets, <em>S</em> segundos cada uno, <em>R</em> repeticiones y <em>P</em> campañas en paralelo, el tiempo real es aproximadamente <em>T × S × R / P</em>. Cien targets de una hora cada uno, repetidos cinco veces en dieciséis núcleos, son algo más de 31 horas. Deja uno o dos núcleos libres para Docker y el sistema, y revisa el espacio en disco: las colas y los logs crecen con cada campaña.</p>
+<p>Los targets con puente hacen menos ejecuciones por segundo que los compilados. Si usas el mismo presupuesto de tiempo real para ambos, dilo en tu informe; si prefieres igualar el número de ejecuciones, el <code>execs_done</code> de AFL++ en <code>fuzzer_stats</code> te da la cifra.</p>
+
+<h2>Ejecutar muchas campañas</h2>
+<p>El <a href="{{ROOT}}bench/">banco</a> genera un script que ejecuta una selección target a target. Para ejecutar varias a la vez, escribe la lista de targets en un archivo y usa <code>xargs</code>:</p>
+<pre data-copy>cat &gt; targets.txt &lt;&lt;'EOF'
+png c libpng
+png rust png
+zip go stdlib_openreader
+zip python stdlib_zipfile
+EOF
+
+run_one() {
+  set -- $1
+  dir="runs/batch/$1-$2-$3"
+  python3 parsarium.py afl build "$1" "$2" "$3" &amp;&amp;
+  python3 parsarium.py afl prepare "$1" "$2" "$3" "$dir" &amp;&amp;
+  python3 parsarium.py afl run "$dir" --seconds 3600 &amp;&amp;
+  python3 parsarium.py afl summary "$dir" &gt; /dev/null
+}
+export -f run_one
+xargs -P 4 -I{} bash -c 'run_one "{}"' &lt; targets.txt</pre>
+<p>Usa <code>python3 parsarium.py projects --format zip</code> para consultar los slugs. Cada campaña escribe su propio <code>plan.json</code>, <code>campaign.json</code> y <code>afl-summary.json</code>, así que un lote se puede recoger y comparar más tarde con un script corto.</p>
+
+<h2>Repeticiones</h2>
+<p>El fuzzing es aleatorio. Dos campañas con la misma semilla y el mismo presupuesto pueden terminar con una cobertura distinta y encontrar crashes distintos. Una sola ejecución por target dice poco de una herramienta. Ejecuta cada configuración varias veces, presenta la mediana y la dispersión, y usa un test estadístico cuando afirmes que una herramienta es mejor. <a href="https://arxiv.org/abs/1808.09700">Klees et al., "Evaluating Fuzz Testing" (CCS 2018)</a> es la referencia estándar y merece la pena leerla antes de un experimento grande.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Una campaña son cuatro comandos: build, prepare, run y summary. <code>--check</code> verifica un plan y <code>--resume</code> continúa uno.</li><li>Da a todas las herramientas las mismas semillas, para que la comparación trate de lo que hace cada herramienta una vez arranca.</li><li>El tiempo total es aproximadamente targets × segundos × repeticiones ÷ campañas en paralelo. Cada instancia de AFL++ usa un núcleo.</li><li>El fuzzing es aleatorio. Repite cada configuración y presenta la dispersión, no una sola ejecución.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="1"><p class="q-text">50 targets, 2 horas cada uno, 5 repeticiones y 10 campañas en paralelo. ¿Cuánto dura más o menos el experimento?</p><ol class="q-opts"><li>10 horas</li><li>50 horas</li><li>500 horas</li></ol><p class="q-why">50 × 2 × 5 = 500 horas de campaña; divididas entre 10 en paralelo, unas 50 horas.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Qué hace <code>afl run --check</code>?</p><ol class="q-opts"><li>Comprueba el plan, la imagen y los hashes de las semillas sin lanzar la campaña</li><li>Lanza una campaña de un minuto</li><li>Busca crashes en el target</li></ol><p class="q-why">Es un ensayo en seco: todo lo que una campaña verifica antes de empezar, y nada más.</p></div>
+<div class="q" data-answer="2"><p class="q-text">Vas a comparar dos fuzzers. ¿Qué semillas deberías usar?</p><ol class="q-opts"><li>Las que genere cada herramienta por su cuenta</li><li>El control para una herramienta y un corpus grande para la otra</li><li>El mismo conjunto de semillas para las dos</li></ol><p class="q-why">Con las mismas semillas aíslas el efecto de la herramienta. Con semillas distintas mezclas dos variables.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Por qué ejecutar cada configuración varias veces?</p><ol class="q-opts"><li>Para aprovechar todo el hardware</li><li>Porque dos ejecuciones con la misma configuración pueden terminar con cobertura y crashes distintos</li><li>Porque AFL++ lo exige</li></ol><p class="q-why">La mutación aleatoria recorre caminos distintos cada vez. Una sola ejecución por configuración dice poco de la herramienta.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Una campaña se paró a mitad porque la máquina se reinició. ¿Cómo la continúas?</p><ol class="q-opts"><li><code>afl run</code> con <code>--resume</code> sobre el mismo directorio de ejecución</li><li>Preparas una ejecución nueva con la cola como semillas</li><li>Empiezas de cero; AFL++ no puede continuar</li></ol><p class="q-why"><code>--resume</code> continúa el directorio <code>afl-out/</code> existente, con su cola y sus estadísticas.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 7.1</span><span class="level">Calentamiento</span></p>
+  <p>Usa el banco para crear una selección de cuatro targets de ZIP, uno por lenguaje, con el modo <em>AFL++</em>, y guarda el script. Ejecútalo con un presupuesto de cinco minutos:</p>
+  <pre data-copy><span class="p">$ </span>SECONDS_PER_TARGET=300 bash run-selection.sh</pre>
+  <p>Recoge <code>execs_per_sec</code>, <code>corpus_count</code> y <code>saved_crashes</code> de cada <code>afl-summary.json</code>.</p>
+  <details><summary>Pista</summary><p>Selecciona ZIP, pon <em>Targets por formato × lenguaje</em> a 1 y elige cuatro lenguajes.</p></details>
+  <details><summary>Solución</summary><p>Las cifras de cada target están en <code>instances[0].fuzzer_stats</code> de su <code>afl-summary.json</code>. Los targets compilados suelen tener el <code>execs_per_sec</code> más alto. Guarda la tabla: el ejercicio 7.3 parte de ella.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 7.2</span><span class="level">Práctica</span></p>
+  <p>Mide el efecto de las semillas. Genera un corpus de PNG con Fandango y ejecuta libpng dos veces durante diez minutos: una solo con el control y otra con las semillas generadas.</p>
+  <pre data-copy><span class="p">$ </span>fandango fuzz -F png -n 100 -d generated/png
+<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-control-only
+<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-seeded --seed-dir generated/png
+<span class="p">$ </span>python3 parsarium.py afl run runs/libpng-control-only --seconds 600
+<span class="p">$ </span>python3 parsarium.py afl run runs/libpng-seeded --seconds 600</pre>
+  <p>Compara <code>corpus_count</code> y <code>edges_found</code>. ¿Ayuda el conjunto de semillas más rico? ¿Basta una ejecución para afirmarlo?</p>
+  <details><summary>Pista</summary><p>Si no tienes Fandango instalado: <code>pip install fandango-fuzzer</code>. Ejecuta antes <code>afl build png c libpng</code> si todavía no has construido la imagen.</p></details>
+  <details><summary>Solución</summary><p>Un corpus de semillas variado suele empezar con más cobertura, porque ya contiene tipos de chunk que el control no tiene. Que termine más alto a los diez minutos es menos seguro. Una ejecución de cada no basta para afirmar una diferencia; ejecuta cada configuración al menos cinco veces y compara las medianas, como explica el capítulo 9.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 7.3</span><span class="level">Reto</span></p>
+  <p>Escribe un script que recorra un directorio de ejecuciones de AFL++ y escriba una fila de CSV por campaña: project, execs_done, execs_per_sec, corpus_count, saved_crashes, saved_hangs.</p>
+  <details><summary>Pista</summary><p>Cada directorio de ejecución tiene un <code>afl-summary.json</code> con <code>project</code> y una lista de <code>instances</code>, cada una con un diccionario <code>fuzzer_stats</code>.</p></details>
+  <details><summary>Solución</summary><pre data-copy>python3 - runs/batch &lt;&lt;'EOF'
+import csv, json, pathlib, sys
+fields = ["execs_done", "execs_per_sec", "corpus_count", "saved_crashes", "saved_hangs"]
+out = csv.writer(sys.stdout)
+out.writerow(["project", "run", *fields])
+for path in sorted(pathlib.Path(sys.argv[1]).rglob("afl-summary.json")):
+    summary = json.loads(path.read_text())
+    for instance in summary["instances"]:
+        stats = instance["fuzzer_stats"]
+        out.writerow([summary["project"], path.parent.name, *(stats.get(f, "") for f in fields)])
+EOF</pre><p>Ejecútalo una vez por lote y guarda el CSV junto al manifiesto de la selección.</p></details>
+</div>
+</section>

@@ -1,0 +1,82 @@
+<!-- {"title": "Feedback de cobertura", "summary": "Cómo decide AFL++ que una entrada es interesante, cómo obtiene Parsarium esa señal en ocho lenguajes y cómo leer las cifras."} -->
+<p>Un fuzzer guiado por cobertura muta entradas y se queda con las que hacen que el programa haga algo nuevo. Ese «algo nuevo» se mide con el feedback de cobertura: qué partes del código alcanzó una entrada. Sin él, el fuzzer va a ciegas. Con él, el fuzzer construye un corpus paso a paso, y cada entrada llega un poco más lejos dentro del parser.</p>
+
+<h2>Cómo ve AFL++ la cobertura</h2>
+<p>AFL++ mantiene un mapa en memoria compartida, de 64 KiB por defecto. Mientras se ejecuta el target, cada transición entre dos puntos del código, una <em>arista</em>, incrementa una posición del mapa. Después de cada ejecución, AFL++ revisa el mapa. Si una entrada tocó una posición que ninguna entrada anterior había tocado, o la tocó un número de veces muy distinto, se guarda en la cola y se sigue mutando.</p>
+<p>En C, C++ y Rust, el compilador inserta esta instrumentación en el parser. Es la configuración más rápida y más precisa.</p>
+
+<h2>Puentes para otros lenguajes</h2>
+<p>Go, Java, JavaScript, Python y PHP no se compilan a código nativo de la misma manera, así que Parsarium usa un puente. El harness registra qué partes del código fuente del parser se ejecutaron, con la herramienta de cobertura del propio lenguaje, y un pequeño proxy escribe esas características en el mapa de AFL++.</p>
+<table>
+  <thead><tr><th>Lenguaje</th><th>Característica</th><th>Origen</th></tr></thead>
+  <tbody>
+    <tr><td>C, C++</td><td>Aristas compiladas</td><td>Instrumentación del compilador de AFL++</td></tr>
+    <tr><td>Rust</td><td>Aristas compiladas</td><td>afl.rs</td></tr>
+    <tr><td>Go</td><td>Bloques de sentencias</td><td>Cobertura de Go del paquete del parser</td></tr>
+    <tr><td>Java</td><td>Líneas de código</td><td>JaCoCo</td></tr>
+    <tr><td>JavaScript</td><td>Rangos de código</td><td>Cobertura de V8</td></tr>
+    <tr><td>Python</td><td>Líneas de código</td><td>Trazado de líneas</td></tr>
+    <tr><td>PHP</td><td>Líneas de código</td><td>Xdebug</td></tr>
+  </tbody>
+</table>
+<p>Los paquetes del parser no se modifican, y la cobertura se limita al código fuente del propio parser, de modo que la señal habla del parser y no del intérprete ni del harness. Los puentes son más lentos que la instrumentación compilada, y conviene tenerlo en cuenta al fijar los presupuestos de tiempo.</p>
+<p>Parsarium comprueba que los puentes responden de verdad a la entrada. Para algunos targets de cada lenguaje con puente, ejecuta dos entradas distintas y registra cuántas características del parser alcanzó cada una. Para el lector de PLY en Java jply, por ejemplo, las dos entradas alcanzaron 235 y 146 características. Esa diferencia es lo que usa el fuzzer para distinguirlas.</p>
+
+<h2>Cómo leer las cifras</h2>
+<p>Un recuento de cobertura solo significa algo al lado de otro recuento del mismo target. Úsalo para comparar dos entradas, dos corpus o la misma campaña a lo largo del tiempo. No compares recuentos entre lenguajes: una línea de Java, un bloque de Go y una arista de C son unidades distintas. Cuando presentes resultados de muchos targets, indica el tipo de feedback de cada uno. El banco lo añade por ti a la tabla del informe.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>AFL++ registra aristas en un mapa compartido y se queda con las entradas que alcanzan posiciones nuevas o recuentos muy distintos.</li><li>Los targets en C, C++ y Rust se instrumentan al compilar. Los targets en Go, Java, JavaScript, Python y PHP usan un puente que informa de la cobertura del código fuente del parser.</li><li>La cobertura del puente se limita al código fuente del propio parser, así que la señal habla del parser.</li><li>Los recuentos de cobertura solo se pueden comparar dentro de un mismo target. Indica el tipo de feedback de cada target.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Qué entradas guarda AFL++ en su cola?</p><ol class="q-opts"><li>Todas las entradas que genera</li><li>Las entradas que alcanzan una posición nueva del mapa, o que tocan una posición un número de veces muy distinto</li><li>Solo las entradas que provocan un fallo</li></ol><p class="q-why">La cobertura nueva, incluido un nuevo rango de recuento para una arista que ya había visto, es lo que hace que merezca la pena guardar una entrada y seguir mutándola.</p></div>
+<div class="q" data-answer="2"><p class="q-text">Un target en Go informa de 900 características y uno en C de 600 aristas con el mismo archivo. ¿Qué parser está mejor cubierto?</p><ol class="q-opts"><li>El target en Go</li><li>El target en C</li><li>No se puede saber: las unidades son distintas.</li></ol><p class="q-why">Un bloque de sentencias de Go y una arista compilada de C miden cosas distintas. Compara recuentos solo dentro del mismo target.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Por qué los puentes miden solo el código fuente del parser y no el intérprete?</p><ol class="q-opts"><li>Para que el feedback describa el parser, no el runtime ni el harness</li><li>Porque los intérpretes no se pueden medir</li><li>Para que el mapa sea más pequeño</li></ol><p class="q-why">Si contara el código del propio intérprete, el fuzzer perseguiría caminos nuevos en el runtime en lugar de en el parser que estás probando.</p></div>
+<div class="q" data-answer="1"><p class="q-text">El mapa de AFL++ tiene 64 KiB de posiciones. ¿Qué puede pasar cuando dos aristas distintas caen en la misma posición?</p><ol class="q-opts"><li>El target falla.</li><li>El fuzzer puede no darse cuenta de que una de ellas es cobertura nueva.</li><li>Nada; las colisiones son imposibles.</li></ol><p class="q-why">Las colisiones son posibles en cualquier mapa de tamaño fijo. Hacen el feedback algo menos preciso, pero no estropean la campaña.</p></div>
+<div class="q" data-answer="2"><p class="q-text">Das a un target con puente y a uno compilado el mismo presupuesto de una hora. ¿Qué debería decir tu informe?</p><ol class="q-opts"><li>Nada más; el tiempo es el tiempo.</li><li>Solo la cobertura final</li><li>El tipo de feedback de cada target y cuántas ejecuciones hizo cada uno</li></ol><p class="q-why">Los targets con puente suelen hacer menos ejecuciones por segundo. Indicar las ejecuciones y el tipo de feedback permite a los lectores interpretar la comparación.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 5.1</span><span class="level">Calentamiento</span></p>
+  <p>Prepara una ejecución de AFL++ para un target compilado y otra para un target con puente, y compara sus planes.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py afl build png c libpng
+<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-afl
+<span class="p">$ </span>python3 parsarium.py afl build png python pillow
+<span class="p">$ </span>python3 parsarium.py afl prepare png python pillow runs/pillow-afl
+<span class="p">$ </span>python3 parsarium.py afl run runs/pillow-afl --check</pre>
+  <p>Abre los dos archivos <code>plan.json</code> y busca el tipo de feedback. Después ejecuta cada uno durante cinco minutos con <code>--seconds 300</code> y compara <code>execs_per_sec</code> en <code>afl-out/default/fuzzer_stats</code>.</p>
+  <details><summary>Pista</summary><p><code>fuzzer_stats</code> es un archivo de texto plano con líneas <code>key : value</code>.</p></details>
+  <details><summary>Solución</summary><p>El plan de Pillow indica el puente de Python; el de libpng usa aristas compiladas. Cuenta con que libpng haga muchas más ejecuciones por segundo, a menudo un orden de magnitud o más, porque el puente traza líneas de Python y las pasa por un proxy. Por eso los presupuestos de los targets con puente hay que fijarlos con cuidado.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 5.2</span><span class="level">Práctica</span></p>
+  <p>Parsarium comprueba que los puentes responden a la entrada ejecutando dos entradas distintas y registrando las características del parser que alcanzó cada una. Lee <code>data/afl-feedback-differential.json</code> y, para cada proyecto, calcula la diferencia como proporción de las características de la primera entrada.</p>
+  <pre data-copy>python3 - &lt;&lt;'EOF'
+import json
+for r in json.load(open("data/afl-feedback-differential.json"))["results"]:
+    share = r["parser_feature_difference"] / r["first_parser_features"]
+    print(f"{r['project']:30} {r['first_parser_features']:4} {r['second_parser_features']:4} {share:6.1%}")
+EOF</pre>
+  <p>¿Qué puente muestra la mayor diferencia relativa y cuál la menor? ¿Qué significa una diferencia pequeña?</p>
+  <details><summary>Pista</summary><p>La diferencia cuenta las características que alcanzó una entrada y no la otra, en cualquiera de los dos sentidos.</p></details>
+  <details><summary>Solución</summary><p>En el momento de escribir esto, el lector de SVG en PHP muestra la mayor proporción (difieren 40 de 72 características) y la biblioteca de PDF en JavaScript <code>pdf-lib</code> la menor (4 de 656). Una diferencia pequeña no significa que el puente esté roto: estas dos entradas PDF simplemente siguen casi el mismo camino por un parser grande. Sí significa que un fuzzer necesitará entradas que se diferencien de formas más interesantes para avanzar ahí.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 5.3</span><span class="level">Reto</span></p>
+  <p>Ejecuta la campaña de Pillow dos veces, diez minutos cada una, y representa cómo crece el corpus a lo largo del tiempo en las dos ejecuciones. AFL++ escribe una serie temporal en <code>afl-out/default/plot_data</code>.</p>
+  <details><summary>Pista</summary><p>La primera línea de <code>plot_data</code> es una cabecera que empieza por <code>#</code>. Lee de ahí los nombres de las columnas en lugar de fijar las posiciones a mano.</p></details>
+  <details><summary>Solución</summary><pre data-copy>python3 - runs/pillow-a runs/pillow-b &lt;&lt;'EOF'
+import sys, csv
+import matplotlib.pyplot as plt
+for run in sys.argv[1:]:
+    with open(f"{run}/afl-out/default/plot_data") as f:
+        header = [h.strip() for h in f.readline().lstrip("# ").split(",")]
+        rows = [dict(zip(header, (v.strip() for v in line))) for line in csv.reader(f)]
+    plt.plot([int(r["relative_time"]) for r in rows], [int(r["corpus_count"]) for r in rows], label=run)
+plt.xlabel("seconds"); plt.ylabel("corpus size"); plt.legend(); plt.savefig("corpus.png")
+EOF</pre><p>Las dos curvas no serán idénticas. La mayor parte del crecimiento ocurre al principio y después se aplana; las ejecuciones se diferencian en cuándo se producen los saltos. Esa dispersión es la razón por la que los capítulos siguientes insisten en las repeticiones.</p></details>
+</div>
+</section>

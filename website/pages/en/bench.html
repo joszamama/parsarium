@@ -1,0 +1,63 @@
+<!-- {"title": "Bench — build a Parsarium target set", "description": "Choose formats, languages, and parser families, then get a reproducible target list, a run script, a manifest, and a report table with a stable selection ID."} -->
+<section class="intro">
+  <div class="wrap">
+    <p class="off">0x0000<b>bench</b></p>
+    <div>
+      <h1>Build a target set.</h1>
+      <p class="lede">Choose the formats and languages you want to test. The bench gives you the list of pinned targets, a script that runs them, a manifest for your artifact, and a table for your paper. Every selection gets an ID derived from its targets, so anyone can rebuild the same set.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap bench" id="bench" data-catalog="{{ASSET_ROOT}}catalog.json">
+  <form class="bench-controls" aria-label="Selection">
+    <fieldset>
+      <legend>Formats <button type="button" data-all="f">all</button></legend>
+      <div class="chips" data-group="f"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Languages <button type="button" data-all="e">all</button></legend>
+      <div class="chips" data-group="e"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Targets per format × language</legend>
+      <div class="seg" data-group="n">
+        <button type="button" data-v="1">1</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="all">all</button>
+      </div>
+      <p class="muted" style="margin:8px 0 0;font-size:11.5px">Ordered by adoption within each cell.</p>
+    </fieldset>
+    <fieldset>
+      <legend>Options</legend>
+      <label class="check"><input type="checkbox" data-opt="family"><span>One target per parser family<small>Keeps the most adopted package for each engine, so a shared decoder is counted once.</small></span></label>
+      <label class="check"><input type="checkbox" data-opt="std" checked><span>Include standard-library APIs<small>Runtime parsers such as Go's <code>image/png</code> or Python's <code>zipfile</code>.</small></span></label>
+      <label class="check"><input type="checkbox" data-opt="native"><span>Only compiled-edge feedback<small>Targets whose AFL++ feedback comes from compiled parser edges.</small></span></label>
+    </fieldset>
+  </form>
+
+  <div class="bench-out">
+    <div class="sel-summary" aria-live="polite"></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="targets">Targets</button>
+      <button role="tab" aria-selected="false" data-tab="script">Run script</button>
+      <button role="tab" aria-selected="false" data-tab="manifest">Manifest</button>
+      <button role="tab" aria-selected="false" data-tab="report">Report</button>
+    </div>
+    <div class="panel" data-panel="targets"></div>
+    <div class="panel" data-panel="script" hidden>
+      <p class="panel-note">Save this as <code>run-selection.sh</code> in the repository root. It runs the targets one after another and writes every receipt under one directory.</p>
+      <div class="mode" data-group="mode"></div>
+      <div class="panel-actions"><a class="btn" data-download="script">Download script</a></div>
+      <pre data-out="script"></pre>
+    </div>
+    <div class="panel" data-panel="manifest" hidden>
+      <p class="panel-note">The manifest pins the selection: target IDs, releases, controls, feedback kinds, and the Parsarium commit it was built from. Keep it with your experiment artifact.</p>
+      <div class="panel-actions"><a class="btn" data-download="manifest">Download manifest.json</a></div>
+      <pre data-out="manifest"></pre>
+    </div>
+    <div class="panel" data-panel="report" hidden>
+      <p class="panel-note">A starting point for the evaluation section of a paper or report. Fill in the setup lines with your own budget and hardware.</p>
+      <div class="panel-actions"><a class="btn" data-download="report">Download report.md</a></div>
+      <pre data-out="report"></pre>
+    </div>
+  </div>
+</div>

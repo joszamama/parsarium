@@ -1,0 +1,86 @@
+<!-- {"title": "Controles y registros", "summary": "Qué significa que un parser esté verificado, qué registra un harness y cómo leer el registro de una ejecución."} -->
+<p>Antes de entrar en Parsarium, un parser tiene que leer una entrada válida e informar correctamente sobre ella. Esa entrada es el <strong>control</strong>, y lo que pasó queda anotado en un <strong>registro</strong>. Juntos te dicen que el target está bien conectado antes de que pases horas haciéndole fuzzing.</p>
+
+<h2>Por qué empezar con una entrada válida</h2>
+<p>Un harness que rechaza todas las entradas parece muy robusto: nunca falla. Tampoco prueba nada. Lo mismo ocurre cuando el harness llama a la función equivocada, abre el archivo equivocado o captura todos los errores antes de que se ejecute el parser. Un control válido con una salida esperada conocida detecta todos estos problemas de una vez. Si el harness informa de ancho 2 y alto 1 para <code>red-green.png</code>, los bytes llegaron al parser y el parser los entendió.</p>
+
+<h2>Qué comprueba la verificación</h2>
+<ul>
+  <li><strong>Una versión fijada.</strong> La versión exacta, instalada desde un archivo de bloqueo o una imagen fijada, con los hashes del código fuente.</li>
+  <li><strong>Una API de entrada documentada.</strong> La función que el proyecto documenta para analizar este formato. Detectar un tipo MIME o copiar bytes no cuenta.</li>
+  <li><strong>Un control válido.</strong> Un archivo pequeño en <code>controls/&lt;format&gt;/</code>, identificado por su SHA-256.</li>
+  <li><strong>Un resultado observado.</strong> Campos propios del formato, como dimensiones, nombres de entradas, número de páginas, etiquetas o valores de cabecera, comparados con la salida esperada.</li>
+</ul>
+<p>Hasta que no se cumplen las cuatro, un paquete es una <em>pista</em>, no una entrada. Las pistas se guardan en los datos del catálogo junto con el motivo por el que siguen abiertas.</p>
+
+<h2>El registro de verificación</h2>
+<p>Cada target ejecutable tiene un <code>verification.json</code> junto a su Dockerfile. Registra cuándo se verificó el harness, el ID de la imagen Docker, las versiones de la cadena de herramientas, el hash de cada archivo del proyecto, la salida observada y cuántas líneas del código fuente del parser cubrió el control. Si cambia algún archivo del proyecto, su hash deja de coincidir y el harness se niega a ejecutarse hasta que se vuelva a verificar.</p>
+
+<h2>El registro de ejecución</h2>
+<p>Cuando pasas un archivo por un target, obtienes un registro como este:</p>
+<pre>{
+  "schema_version": 1,
+  "project": "png/python/pillow",
+  "input": "my.png",
+  "status": "ok",
+  "case_sha256": "…",
+  "case_bytes": 71,
+  "image_id": "sha256:…",
+  "exit_code": 0,
+  "duration_seconds": 0.412,
+  "stdout_tail": "…",
+  "stderr_tail": ""
+}</pre>
+<p>El campo <code>status</code> describe el harness, no el parser:</p>
+<table>
+  <thead><tr><th>Estado</th><th>Significado</th></tr></thead>
+  <tbody>
+    <tr><td><code>ok</code></td><td>El harness terminó. El parser puede haber aceptado o rechazado la entrada; su salida está en <code>stdout_tail</code>.</td></tr>
+    <tr><td><code>target_nonzero</code></td><td>El proceso terminó con un error. Merece la pena reproducirlo.</td></tr>
+    <tr><td><code>timeout</code></td><td>La ejecución superó el límite de tiempo (60 segundos por defecto).</td></tr>
+    <tr><td><code>input_too_large</code></td><td>La entrada supera 1 MiB, el límite del harness.</td></tr>
+    <tr><td><code>infrastructure_error</code></td><td>Docker o la preparación del harness fallaron antes de que se ejecutara el parser.</td></tr>
+  </tbody>
+</table>
+<p>Conviene mantenerlos separados. Un rechazo es un comportamiento normal del parser. Una salida distinta de cero o un timeout son algo que hay que mirar.</p>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Un control válido con una salida esperada conocida demuestra que los bytes llegan al parser y que el parser los entiende.</li><li>Un paquete solo se convierte en target después de cuatro comprobaciones: versión fijada, API de entrada documentada, control válido y resultado observado. Hasta entonces es una pista.</li><li>El estado del registro de ejecución describe el harness, no el parser. La aceptación está en la salida observada.</li><li>Los registros de verificación fijan los hashes de los archivos, así que un harness modificado tiene que verificarse de nuevo antes de ejecutarse.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="1"><p class="q-text">Un registro de ejecución dice <code>status: ok</code>. ¿Qué sabes?</p><ol class="q-opts"><li>Que el parser aceptó la entrada.</li><li>Que el harness terminó. Si el parser aceptó la entrada está en su salida.</li><li>Que la entrada es un archivo válido.</li></ol><p class="q-why"><code>ok</code> solo significa que el harness terminó. Un rechazo limpio también es <code>ok</code>; la respuesta del parser está en <code>stdout_tail</code>.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Por qué cada target necesita un control válido antes de hacer fuzzing?</p><ol class="q-opts"><li>Hace que el fuzzing vaya más rápido.</li><li>Muestra que los bytes llegan al parser y se entienden. Un harness que lo rechaza todo parecería muy robusto.</li><li>AFL++ no arranca sin uno.</li></ol><p class="q-why">Sin un control no puedes distinguir un parser robusto de un harness roto. El control es la forma más barata de descartar lo segundo.</p></div>
+<div class="q" data-answer="1"><p class="q-text">Un paquete aparece en una búsqueda de npm de «png», pero todavía no ha pasado el control. ¿Qué es en Parsarium?</p><ol class="q-opts"><li>Un target</li><li>Una pista</li><li>Una familia</li></ol><p class="q-why">Los resultados de búsqueda siguen siendo pistas hasta que pasan las cuatro comprobaciones. Las pistas se guardan en los datos de la celda junto con el motivo por el que siguen abiertas.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Editas el archivo del harness de un proyecto. ¿Qué pasa en la siguiente ejecución?</p><ol class="q-opts"><li>Su hash ya no coincide con el registro, así que hay que verificarlo de nuevo.</li><li>Nada; el registro es solo informativo.</li><li>Docker reconstruye la imagen sin avisar.</li></ol><p class="q-why">El registro de verificación enumera el hash de cada archivo del proyecto. Las ejecuciones comprueban esos hashes, lo que mantiene los resultados ligados al harness que se verificó.</p></div>
+<div class="q" data-answer="2"><p class="q-text">Pasas un archivo de 2 MiB por un target. ¿Qué estado obtienes?</p><ol class="q-opts"><li><code>timeout</code></li><li><code>target_nonzero</code></li><li><code>input_too_large</code></li></ol><p class="q-why">Los harnesses aceptan entradas de hasta 1 MiB. Las entradas más grandes se rechazan antes de que se ejecute el parser.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 3.1</span><span class="level">Calentamiento</span></p>
+  <p>Ejecuta el target libpng con su propio control y con un archivo que ni siquiera es un PNG.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py show png c libpng --json
+<span class="p">$ </span>python3 parsarium.py run png c libpng controls/png/red-green.png --results runs/libpng-control
+<span class="p">$ </span>python3 parsarium.py run png c libpng controls/zip/hello.zip --results runs/libpng-zip</pre>
+  <p>Abre los dos registros y compara <code>status</code>, <code>exit_code</code> y las finales de la salida. ¿Dónde dice libpng qué le ha parecido el archivo ZIP?</p>
+  <details><summary>Pista</summary><p>Los registros se escriben como <code>&lt;sha256&gt;.json</code> dentro del directorio de <code>--results</code>.</p></details>
+  <details><summary>Solución</summary><p>El registro del control muestra las dimensiones y los píxeles en <code>stdout_tail</code>. El registro del ZIP muestra el rechazo de libpng, en las finales de la salida o como un código de salida distinto de cero, según cómo informe el harness de los errores. El hábito importante es mirar la salida, no solo <code>status</code>.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 3.2</span><span class="level">Práctica</span></p>
+  <p>Abre los registros de verificación de dos targets PNG en lenguajes distintos y compáralos campo a campo.</p>
+  <pre data-copy>projects/png/c/libpng/verification.json
+projects/png/python/pillow/verification.json</pre>
+  <p>¿Qué contiene cada lista de la cadena de herramientas? ¿Cuántas líneas del código fuente del parser cubrió cada control? ¿Puedes decir con estas cifras qué parser está mejor probado?</p>
+  <details><summary>Pista</summary><p>Busca <code>toolchain</code>, <code>output</code> y <code>parser_source_lines_covered</code>.</p></details>
+  <details><summary>Solución</summary><p>En el momento de escribir esto, el control de libpng cubre 1.698 líneas del parser y el de Pillow 2.097. Eso no significa que Pillow esté mejor probado: las dos bases de código tienen tamaños distintos, están escritas en lenguajes distintos y las cifras de líneas salen de herramientas de cobertura distintas. Las cifras sirven para cada target por separado, por ejemplo para comprobar que una entrada nueva llega a más partes del mismo parser.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 3.3</span><span class="level">Reto</span></p>
+  <p>Elige una biblioteca de PNG que conozcas y que no esté en el catálogo. Escribe un harness mínimo para ella: que lea un archivo, llame a la API de parsing documentada e imprima el ancho y el alto. Decide qué debe imprimir y qué código de salida debe usar cuando el parser rechaza la entrada, y cuando ocurre algo inesperado.</p>
+  <details><summary>Pista</summary><p>Compara tu borrador con <code>projects/png/python/pillow/harness.py</code> y <code>adapter.py</code>.</p></details>
+  <details><summary>Solución</summary><p>Un buen harness hace cuatro cosas. Llama al parser a través de la API que usaría un usuario real. Imprime campos observables y propios del formato. Trata un rechazo normal como un resultado normal, así que el código de salida sigue siendo cero y el motivo va a la salida. Y deja que los fallos inesperados, como cierres abruptos o errores que no forman parte del comportamiento documentado del parser, salgan como un código distinto de cero, porque esos son los que merece la pena investigar.</p></details>
+</div>
+</section>

@@ -1,0 +1,82 @@
+<!-- {"title": "Coverage feedback", "summary": "How AFL++ decides an input is interesting, how Parsarium gets that signal from eight languages, and how to read the numbers."} -->
+<p>A coverage-guided fuzzer mutates inputs and keeps the ones that make the program do something new. "Something new" is measured with coverage feedback: which parts of the code an input reached. Without it, a fuzzer is guessing. With it, the fuzzer builds a corpus step by step, each input reaching a little further into the parser.</p>
+
+<h2>How AFL++ sees coverage</h2>
+<p>AFL++ keeps a shared memory map, 64 KiB by default. As the target runs, each transition between code locations, an <em>edge</em>, increments a slot in the map. After every execution AFL++ looks at the map. If an input touched a slot no earlier input touched, or touched one a very different number of times, it is saved to the queue and mutated further.</p>
+<p>For C, C++, and Rust, the compiler inserts this instrumentation into the parser. That is the fastest and most precise setup.</p>
+
+<h2>Bridges for other languages</h2>
+<p>Go, Java, JavaScript, Python, and PHP do not compile to native code in the same way, so Parsarium uses a bridge. The harness records which parts of the parser source ran, using the language's own coverage tool, and a small proxy writes those features into the AFL++ map.</p>
+<table>
+  <thead><tr><th>Language</th><th>Feature</th><th>Source</th></tr></thead>
+  <tbody>
+    <tr><td>C, C++</td><td>Compiled edges</td><td>AFL++ compiler instrumentation</td></tr>
+    <tr><td>Rust</td><td>Compiled edges</td><td>afl.rs</td></tr>
+    <tr><td>Go</td><td>Statement blocks</td><td>Go coverage of the parser package</td></tr>
+    <tr><td>Java</td><td>Source lines</td><td>JaCoCo</td></tr>
+    <tr><td>JavaScript</td><td>Source ranges</td><td>V8 coverage</td></tr>
+    <tr><td>Python</td><td>Source lines</td><td>Line tracing</td></tr>
+    <tr><td>PHP</td><td>Source lines</td><td>Xdebug</td></tr>
+  </tbody>
+</table>
+<p>The parser packages stay unchanged, and coverage is limited to the parser's own source, so the signal is about the parser and not about the interpreter or the harness. Bridges are slower than compiled instrumentation, which is worth remembering when you set time budgets.</p>
+<p>Parsarium checks that the bridges really respond to the input. For a few targets in each bridged language, it runs two different inputs and records how many parser features each one reached. For the Java PLY reader jply, for example, the two inputs reached 235 and 146 features. That difference is what the fuzzer uses to tell them apart.</p>
+
+<h2>Reading the numbers</h2>
+<p>A coverage count means something only next to another count from the same target. Use it to compare two inputs, two corpora, or the same campaign over time. Do not compare counts across languages: a Java line, a Go block, and a C edge are different units. When you report results across many targets, report the feedback kind of each one. The bench adds it to the report table for you.</p>
+
+<section class="recap">
+<h2>Key ideas</h2>
+<ul><li>AFL++ records edges in a shared map and keeps inputs that reach new slots or very different hit counts.</li><li>C, C++, and Rust targets are instrumented at compile time. Go, Java, JavaScript, Python, and PHP targets use a bridge that reports parser source coverage.</li><li>Bridge coverage is limited to the parser's own source, so the signal is about the parser.</li><li>Coverage counts are comparable only within one target. Report the feedback kind of every target.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
+<div class="q" data-answer="1"><p class="q-text">Which inputs does AFL++ keep in its queue?</p><ol class="q-opts"><li>Every input it generates</li><li>Inputs that reach a new slot in the map, or hit a slot a very different number of times</li><li>Only inputs that crash</li></ol><p class="q-why">New coverage, including a new hit-count bucket for an edge it has seen, is what makes an input worth keeping and mutating further.</p></div>
+<div class="q" data-answer="2"><p class="q-text">A Go target reports 900 features and a C target 600 edges on the same file. Which parser is better covered?</p><ol class="q-opts"><li>The Go target</li><li>The C target</li><li>You cannot tell: the units are different.</li></ol><p class="q-why">A Go statement block and a compiled C edge measure different things. Compare counts only within the same target.</p></div>
+<div class="q" data-answer="0"><p class="q-text">Why do bridges measure only the parser's source and not the interpreter?</p><ol class="q-opts"><li>So the feedback describes the parser, not the runtime or the harness</li><li>Because interpreters cannot be measured</li><li>To make the map smaller</li></ol><p class="q-why">If the interpreter's own code counted, the fuzzer would chase new paths in the runtime instead of in the parser under test.</p></div>
+<div class="q" data-answer="1"><p class="q-text">The AFL++ map has 64 KiB of slots. What can happen when two different edges hash to the same slot?</p><ol class="q-opts"><li>The target crashes.</li><li>The fuzzer may not notice that one of them is new coverage.</li><li>Nothing; collisions are impossible.</li></ol><p class="q-why">Collisions are possible in any fixed-size map. They make the feedback slightly less precise; they do not break the campaign.</p></div>
+<div class="q" data-answer="2"><p class="q-text">You give a bridged target and a compiled target the same one-hour budget. What should your report say?</p><ol class="q-opts"><li>Nothing extra; time is time.</li><li>Only the final coverage</li><li>The feedback kind of each target and how many executions each one ran</li></ol><p class="q-why">Bridged targets usually run fewer executions per second. Reporting executions and feedback kind lets readers interpret the comparison.</p></div>
+</section>
+<section class="exercises">
+<h2>Exercises</h2>
+<div class="exercise">
+  <p class="label"><span>Exercise 5.1</span><span class="level">Warm-up</span></p>
+  <p>Prepare an AFL++ run for a compiled target and a bridged target, and compare their plans.</p>
+  <pre data-copy><span class="p">$ </span>python3 parsarium.py afl build png c libpng
+<span class="p">$ </span>python3 parsarium.py afl prepare png c libpng runs/libpng-afl
+<span class="p">$ </span>python3 parsarium.py afl build png python pillow
+<span class="p">$ </span>python3 parsarium.py afl prepare png python pillow runs/pillow-afl
+<span class="p">$ </span>python3 parsarium.py afl run runs/pillow-afl --check</pre>
+  <p>Open both <code>plan.json</code> files and find the feedback kind. Then run each for five minutes with <code>--seconds 300</code> and compare <code>execs_per_sec</code> in <code>afl-out/default/fuzzer_stats</code>.</p>
+  <details><summary>Hint</summary><p><code>fuzzer_stats</code> is a plain text file of <code>key : value</code> lines.</p></details>
+  <details><summary>Solution</summary><p>The Pillow plan names the Python bridge; the libpng plan uses compiled edges. Expect libpng to run many more executions per second, often by an order of magnitude or more, because the bridge traces Python lines and passes them through a proxy. This is why budgets for bridged targets need care.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 5.2</span><span class="level">Practice</span></p>
+  <p>Parsarium checks that bridges respond to the input by running two different inputs and recording the parser features each one reached. Read <code>data/afl-feedback-differential.json</code> and, for each project, compute the difference as a share of the first input's features.</p>
+  <pre data-copy>python3 - &lt;&lt;'EOF'
+import json
+for r in json.load(open("data/afl-feedback-differential.json"))["results"]:
+    share = r["parser_feature_difference"] / r["first_parser_features"]
+    print(f"{r['project']:30} {r['first_parser_features']:4} {r['second_parser_features']:4} {share:6.1%}")
+EOF</pre>
+  <p>Which bridge shows the largest relative difference, and which the smallest? What does a small difference mean?</p>
+  <details><summary>Hint</summary><p>The difference counts features reached by one input but not the other, in either direction.</p></details>
+  <details><summary>Solution</summary><p>At the time of writing, the PHP SVG reader shows the largest share (40 of 72 features differ) and the JavaScript PDF library <code>pdf-lib</code> the smallest (4 of 656). A small difference does not mean the bridge is broken: these two PDF inputs simply take almost the same path through a large parser. It does mean that a fuzzer will need inputs that differ in more interesting ways to make progress there.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Exercise 5.3</span><span class="level">Challenge</span></p>
+  <p>Run the Pillow campaign twice for ten minutes each and plot how the corpus grows over time in both runs. AFL++ writes a time series to <code>afl-out/default/plot_data</code>.</p>
+  <details><summary>Hint</summary><p>The first line of <code>plot_data</code> is a header starting with <code>#</code>. Read the column names from it instead of hard-coding positions.</p></details>
+  <details><summary>Solution</summary><pre data-copy>python3 - runs/pillow-a runs/pillow-b &lt;&lt;'EOF'
+import sys, csv
+import matplotlib.pyplot as plt
+for run in sys.argv[1:]:
+    with open(f"{run}/afl-out/default/plot_data") as f:
+        header = [h.strip() for h in f.readline().lstrip("# ").split(",")]
+        rows = [dict(zip(header, (v.strip() for v in line))) for line in csv.reader(f)]
+    plt.plot([int(r["relative_time"]) for r in rows], [int(r["corpus_count"]) for r in rows], label=run)
+plt.xlabel("seconds"); plt.ylabel("corpus size"); plt.legend(); plt.savefig("corpus.png")
+EOF</pre><p>The two curves will not be identical. Most of the growth happens early and then flattens; the runs differ in when the jumps happen. That spread is why the next chapters insist on repetitions.</p></details>
+</div>
+</section>

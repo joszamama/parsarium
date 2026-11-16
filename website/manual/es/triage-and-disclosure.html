@@ -1,0 +1,88 @@
+<!-- {"title": "Triaje y divulgación", "summary": "De un archivo en crashes/ a un informe con el que un mantenedor pueda trabajar: reproducir, reducir, deduplicar, evaluar y divulgar."} -->
+<p>Después de una campaña, <code>crashes/</code> y <code>hangs/</code> pueden contener archivos. Cada uno es una pista. Convertir una pista en un informe de bug lleva unos cuantos pasos, y hacerlos con cuidado es lo que hace que el informe sea útil para quienes mantienen el parser.</p>
+
+<h2>1. Reproducir</h2>
+<p>Pasa el archivo guardado por el harness normal, fuera del fuzzer:</p>
+<pre data-copy><span class="p">$ </span>python3 parsarium.py run png c libpng runs/libpng-afl/afl-out/default/crashes/id:000000,* --results runs/libpng-triage</pre>
+<p>Un crash reproducible da <code>target_nonzero</code> con el error en <code>stderr_tail</code>; un bloqueo da <code>timeout</code>. Ejecútalo varias veces. Si el resultado cambia entre ejecuciones, anótalo: puede depender de la disposición de la memoria, de los tiempos o de los límites del entorno de fuzzing, y no solo de la entrada.</p>
+
+<h2>2. Reducir</h2>
+<p>Las salidas de un fuzzer suelen ser más grandes de lo necesario. Una entrada más pequeña deja ver mejor la causa. Para targets compilados, AFL++ incluye <code>afl-tmin</code>, que elimina bytes mientras el crash siga ocurriendo. Para cualquier target, también puedes reducir a mano teniendo en cuenta el formato: quita bloques, acorta campos y vuelve a ejecutar después de cada cambio. Guarda el archivo original junto al reducido.</p>
+
+<h2>3. Deduplicar</h2>
+<p>Una campaña suele guardar muchos archivos para un mismo bug. Agrúpalos según dónde fallan: los primeros frames de la traza de pila en crashes nativos, el tipo y la ubicación de la excepción en lenguajes gestionados. Después agrúpalos otra vez por familia de parsers. Si trece paquetes de PHP fallan en la misma función de GD, eso es un único informe para GD.</p>
+
+<h2>4. Comprobar la última versión</h2>
+<p>Parsarium fija las versiones para que los resultados sean reproducibles. Puede que el bug que has encontrado ya esté corregido en el proyecto original. Antes de informar, prueba la entrada con la última versión y revisa el gestor de incidencias y el changelog del proyecto.</p>
+
+<h2>5. Evaluar</h2>
+<p>Describe lo que permite el bug con la mayor precisión posible:</p>
+<ul>
+  <li>Un error de seguridad de memoria en C o C++ (lectura o escritura fuera de límites, uso después de liberar) suele ser lo más grave. La salida de AddressSanitizer ayuda al mantenedor a verlo.</li>
+  <li>Una excepción no controlada en un lenguaje gestionado suele ser una denegación de servicio: el parser detiene una petición o un proceso.</li>
+  <li>Un bloqueo o una reserva de memoria enorme a partir de una entrada pequeña es un problema de recursos, normalmente también una denegación de servicio.</li>
+  <li>Un desacuerdo entre parsers importa cuando dos de ellos están en el mismo camino, por ejemplo un verificador y un consumidor.</li>
+</ul>
+
+<h2>6. Divulgar</h2>
+<p>Busca un archivo <code>SECURITY.md</code> o una política de seguridad en el repositorio del proyecto, y usa el canal que indique. Muchos proyectos de GitHub aceptan directamente informes privados de vulnerabilidades. Un buen informe incluye la entrada reducida, la versión exacta, el comando que lo reproduce, el resultado observado y el impacto que crees que tiene. Ofrece una corrección si puedes. Da tiempo a los mantenedores; noventa días es un plazo habitual, y la mayoría agradece saber de alguien que se ha tomado el trabajo de dejar claro el problema.</p>
+<p>Para un problema grave, los mantenedores o una CVE Numbering Authority como GitHub pueden asignar un CVE una vez corregido.</p>
+
+<div class="note"><b>Lleva un registro</b>Para cada pista, anota el target, el hash de la entrada, el estado, la pila o la excepción, la familia, el estado en el proyecto original y la fecha en que lo comunicaste. Después de unas cuantas campañas, este registro se convierte en el archivo más útil que tienes.</div>
+
+<section class="recap">
+<h2>Ideas clave</h2>
+<ul><li>Cada archivo de <code>crashes/</code> o <code>hangs/</code> es una pista hasta que lo reproduces fuera del fuzzer.</li><li>Reduce las entradas antes de analizarlas; un archivo más pequeño deja ver la causa.</li><li>Deduplica por el lugar del fallo y después por familia de parsers.</li><li>Comprueba la última versión del proyecto original antes de informar.</li><li>Informa en privado por el canal que indique la política de seguridad del proyecto, con la entrada reducida, la versión exacta y el comando para reproducirlo.</li></ul>
+</section>
+<section class="quiz">
+<div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
+<div class="q" data-answer="1"><p class="q-text">AFL++ ha guardado un archivo en <code>crashes/</code>. ¿Qué es?</p><ol class="q-opts"><li>Un bug confirmado</li><li>Una pista que hay que reproducir y clasificar</li><li>Un falso positivo</li></ol><p class="q-why">Puede ser un bug real, un problema del harness o un efecto del entorno. Reproducirlo fuera del fuzzer es la primera prueba.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Cuál es el primer paso del triaje?</p><ol class="q-opts"><li>Reproducir la entrada con <code>parsarium.py run</code> fuera del fuzzer</li><li>Escribir el informe</li><li>Pedir un CVE</li></ol><p class="q-why">Todo lo demás depende de poder provocar el comportamiento de forma fiable.</p></div>
+<div class="q" data-answer="2"><p class="q-text">Un parser de Python lanza una excepción no controlada con un archivo manipulado. ¿Cuál es el impacto más probable?</p><ol class="q-opts"><li>Ejecución remota de código</li><li>Corrupción de memoria</li><li>Denegación de servicio: la petición o el proceso se detiene</li></ol><p class="q-why">Los lenguajes gestionados protegen la memoria, así que una excepción suele detener el procesamiento en lugar de corromper el estado. Aun así, puede importar en un servicio.</p></div>
+<div class="q" data-answer="1"><p class="q-text">¿Adónde deberías enviar un informe de seguridad sobre un parser?</p><ol class="q-opts"><li>A una issue pública con el archivo de prueba de concepto</li><li>Al canal que indique la política de seguridad del proyecto, normalmente privado</li><li>A una publicación en redes sociales mencionando a los mantenedores</li></ol><p class="q-why">La divulgación privada da tiempo a los mantenedores para corregir el problema antes de que sea público.</p></div>
+<div class="q" data-answer="0"><p class="q-text">¿Por qué probar la entrada con la última versión antes de informar?</p><ol class="q-opts"><li>Puede que el bug ya esté corregido en el proyecto original.</li><li>Los informes no admiten versiones fijadas.</li><li>Las versiones más nuevas siempre fallan más.</li></ol><p class="q-why">Parsarium fija las versiones para que todo sea reproducible. Una comprobación rápida en el proyecto original nos ahorra tiempo a todos.</p></div>
+</section>
+<section class="exercises">
+<h2>Ejercicios</h2>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 8.1</span><span class="level">Calentamiento</span></p>
+  <p>Toma cualquier campaña del capítulo 7 y pásale <code>afl summary</code>. Si <code>crashes/</code> o <code>hangs/</code> no están vacíos, reproduce un archivo con <code>parsarium.py run</code> y rellena el registro descrito arriba. Si los dos están vacíos, pasa el control por <code>run</code> y lee el registro como si fuera una pista.</p>
+  <details><summary>Pista</summary><p>Los archivos guardados tienen nombres como <code>id:000000,sig:11,...</code>. Pon la ruta entre comillas en la shell.</p></details>
+  <details><summary>Solución</summary><p>Un crash reproducido aparece como <code>target_nonzero</code>, con el error en <code>stderr_tail</code>; un bloqueo aparece como <code>timeout</code>. Anota el target, el hash de la entrada, el estado, las primeras líneas del error, la familia y la fecha de hoy. Esa fila es el comienzo de tu registro de triaje.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 8.2</span><span class="level">Práctica</span></p>
+  <p>En una campaña sobre varios paquetes de PNG de PHP se guardaron cinco crashes. Agrúpalos en bugs distintos.</p>
+  <pre>A  nette_utils      Error: imagecreatefromstring() gd_png.c:212 png_read_info
+B  league_glide     Error: imagecreatefromstring() gd_png.c:212 png_read_info
+C  nette_utils      TypeError: Image::fromString() argument must be string
+D  intervention     Error: imagecreatefromstring() gd_png.c:212 png_read_info
+E  league_glide     Error: imagecreatefromstring() gd_png.c:340 png_read_image</pre>
+  <p>(Estas trazas son inventadas para el ejercicio).</p>
+  <details><summary>Pista</summary><p>Agrupa primero por el marco más profundo que pertenezca al parser y después pregúntate si las diferencias que quedan están en el código del wrapper.</p></details>
+  <details><summary>Solución</summary><p>Tres grupos. A, B y D fallan en el mismo punto de GD (<code>gd_png.c:212</code>): un bug en el motor compartido y un informe para GD. E falla en otra línea de GD: probablemente un segundo bug del motor. C es un error de tipos en el propio código del wrapper, no en el parser: un informe aparte, más pequeño, para ese paquete. Cinco archivos, tres informes.</p></details>
+</div>
+<div class="exercise">
+  <p class="label"><span>Ejercicio 8.3</span><span class="level">Reto</span></p>
+  <p>Escribe un informe de divulgación para la pista A del ejercicio anterior, como si la hubieras reproducido. Usa encabezados que un mantenedor pueda leer de un vistazo.</p>
+  <details><summary>Pista</summary><p>Piensa en lo que necesita el mantenedor para reproducirlo en cinco minutos sin tener que preguntarte nada.</p></details>
+  <details><summary>Solución</summary><pre>Title: Out-of-bounds read in PNG header parsing (gd_png.c:212)
+
+Affected: libgd X.Y.Z (also current main as of YYYY-MM-DD)
+Reached through: imagecreatefromstring() in PHP; wrappers nette/utils, league/glide, intervention/image
+
+Reproduce:
+  php -r 'imagecreatefromstring(file_get_contents("crash.png"));'
+  (crash.png attached, 57 bytes, sha256 ...)
+
+Observed: process aborts; ASan report attached
+Expected: imagecreatefromstring() returns false
+
+Cause (as far as I can tell): IHDR length is not checked before ...
+Impact: denial of service; possible information disclosure
+Fix suggestion: ...
+
+Found with Parsarium (commit ..., target png/php/nette_utils).
+I am happy to keep this private for 90 days or until a fix is released.</pre><p>Dejo la plantilla en inglés porque los informes a proyectos internacionales se suelen escribir en inglés.</p></details>
+</div>
+</section>
