@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "c",
+  "package": "facil-legacy",
+  "release": "0.7.6",
+  "catalog_parser": "data/c/http11/parsers.json",
+  "source_lock": "projects/http11/c/facil-legacy/source-lock.json",
+  "source_sha256": "dc004017093e1ae3838b8c2a281d77d7cc94a84e0f157d93740838fb61e26d47",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium",
+    "query": "x=1",
+    "version": "HTTP/1.1",
+    "host": "example.test"
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of facil.io 0.7.6's header-only HTTP/1 callback parser (lib/facil/http/parsers/http1_parser.h) driven through http1_parse on a writable, exactly sized copy of the request bytes from a C11 byte-input harness compiled with clang",
+  "coverage_subject_prefix": "/work/source/lib/facil/http/parsers/",
+  "format_specific_coverage_file_suffix": "/http1_parser.h",
+  "parser_family": "facil.io 0.7.6 HTTP/1 callback parser (lib/facil/http/parsers/http1_parser.h); an earlier, distinct distribution and API of the facil.io family later developed as C STL 0.8 (catalog package facil-cstl), so the two package paths share lineage and this path is not claimed as an independent parser family"
+}
