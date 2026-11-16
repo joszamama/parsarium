@@ -37,10 +37,12 @@ jobs:
         run: |
           python3 -m venv /tmp/venv
           /tmp/venv/bin/pip install dist/*.whl
-          snapshot=$(ls dist-snapshot/*.tar.gz)
-          PARSARIUM_CACHE=/tmp/cache PARSARIUM_SNAPSHOT_URL="$PWD/$snapshot" /tmp/venv/bin/parsarium home --fetch
-          PARSARIUM_CACHE=/tmp/cache PARSARIUM_SNAPSHOT_URL="$PWD/$snapshot" /tmp/venv/bin/parsarium list --format png
-          PARSARIUM_CACHE=/tmp/cache PARSARIUM_SNAPSHOT_URL="$PWD/$snapshot" /tmp/venv/bin/python -c "from parsarium import catalog; print(len(catalog.targets()), 'runnable targets')"
+          export PARSARIUM_CACHE=/tmp/cache PARSARIUM_SNAPSHOT_URL="$PWD/$(ls dist-snapshot/*.tar.gz)"
+          # Run outside the checkout, where ./parsarium.py would shadow the installed package.
+          mkdir -p /tmp/smoke && cd /tmp/smoke
+          /tmp/venv/bin/parsarium home --fetch
+          /tmp/venv/bin/parsarium list --format png
+          /tmp/venv/bin/python -c "from parsarium import catalog; print(len(catalog.targets()), 'runnable targets')"
       - name: Create GitHub release with the snapshot
         env:
           GH_TOKEN: ${{ github.token }}
