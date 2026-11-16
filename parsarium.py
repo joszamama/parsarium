@@ -236,6 +236,13 @@ def main() -> int:
     native_run.add_argument("--check", action="store_true")
 
     args = cli.parse_args()
+    # Helper scripts run with the repository as their working directory, so
+    # file and directory arguments are resolved against the caller's directory.
+    for name, value in vars(args).items():
+        if isinstance(value, Path):
+            setattr(args, name, value.expanduser().resolve())
+        elif isinstance(value, list) and value and all(isinstance(item, Path) for item in value):
+            setattr(args, name, [item.expanduser().resolve() for item in value])
     if args.command == "list":
         items = rows(args.format, args.ecosystem)
         if args.json:
