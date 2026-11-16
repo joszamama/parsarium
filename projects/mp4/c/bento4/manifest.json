@@ -20,6 +20,7 @@
   },
   "harness": "harness.c",
   "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "sanitizer_exception": "The pinned Bento4 AP4 core calls memcpy with a null pointer and zero length on the valid MP4 control. UBSan's nonnull check reports this upstream call, so this harness uses AddressSanitizer without UBSan; the pinned source is unchanged.",
   "coverage": "LLVM source coverage in the pinned Bento4 C binding (CApi) and the AP4 ISO BMFF atom and byte-stream parser core it calls from a C byte-input harness",
   "parser_family": "Bento4 AP4 ISO BMFF core; the C binding (CApi/Bento4C.cpp) is a wrapper over AP4 Core, and the C++ call site (adapters/cpp/mp4/bento4.cpp) compiles this same C binding call site as C++, so both are one parser family, not independent engines",
   "coverage_subject_prefix": "/work/Bento4-1.6.0-641/Source/C++/CApi/",
