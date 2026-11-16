@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [devil / C](c/devil/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
 - [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
@@ -16,6 +17,7 @@
 - [sdl2_image / C](c/sdl2_image/README.md)
 - [sdl3_image / C](c/sdl3_image/README.md)
 - [cimg / C++](cpp/cimg/README.md)
+- [devil / C++](cpp/devil/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [graphicsmagick / C++](cpp/graphicsmagick/README.md)

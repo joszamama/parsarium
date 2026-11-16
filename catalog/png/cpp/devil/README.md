@@ -32,6 +32,11 @@
 
 Recorded libIL links libpng; primary SourceForge project has no comparable GitHub repository star metric. Same underlying package and decoder as the C × PNG cell; this C++ path is not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/cpp/devil/README.md)
+
+```sh
+python3 parsarium.py build png cpp devil
+python3 parsarium.py run png cpp devil controls/png/red-green.png
+```
