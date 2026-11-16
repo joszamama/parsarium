@@ -1,7 +1,7 @@
 FROM --platform=linux/amd64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    ca-certificates curl python3 python3-venv python3-setuptools python3-wheel \
+    ca-certificates curl gcc libasound2-dev python3 python3-dev python3-venv python3-setuptools python3-wheel \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 RUN mkdir /work/wheels \
@@ -17,7 +17,7 @@ RUN { python3 --version; /opt/venv/bin/pip show simpleaudio atheris | grep -E '^
 FROM --platform=linux/amd64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    libstdc++6 python3 && rm -rf /var/lib/apt/lists/*
+    libasound2t64 libstdc++6 python3 && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /work/toolchain.txt /work/toolchain.txt

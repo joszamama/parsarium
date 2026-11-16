@@ -1,6 +1,6 @@
 # WAV / Python
 
-21 verified third-party API paths; 18 have verified Docker harnesses.
+21 verified third-party API paths; 19 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/wav/ranking.md) · [standard API inventory](../../../data/python/wav/standard.json)
 
@@ -26,7 +26,7 @@
 - [hachoir](hachoir/README.md) — Docker harness ready
 - [pytaglib](pytaglib/README.md) — verified API path
 - [audiolab](audiolab/README.md) — Docker harness ready
-- [simpleaudio](simpleaudio/README.md) — verified API path
+- [simpleaudio](simpleaudio/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

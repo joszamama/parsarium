@@ -57,7 +57,7 @@ def build_one(relative: Path) -> dict:
         f'#!/bin/sh\nexec {manifest["fuzz_smoke_entrypoint"]} /work/afl_python_trace.py "$1" "$2"\n'
     )
     (overlay / "Dockerfile").write_text(
-        dockerfile(base_image, relative, manifest["coverage_subject_prefix"], afl_package)
+        dockerfile(base_image, relative, manifest.get("afl_coverage_subject_prefix", manifest["coverage_subject_prefix"]), afl_package)
     )
     image = f"parsarium-afl/{relative.parts[0]}-python-{relative.parts[2]}:local"
     print(f"Building {image}", flush=True)

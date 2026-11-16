@@ -143,6 +143,7 @@
 - [pymediainfo / Python](python/pymediainfo/README.md)
 - [riffy / Python](python/riffy/README.md)
 - [scipy / Python](python/scipy/README.md)
+- [simpleaudio / Python](python/simpleaudio/README.md)
 - [soundfile / Python](python/soundfile/README.md)
 - [tinytag / Python](python/tinytag/README.md)
 - [wave.open(local path, 'rb'); getparams(); readframes() / Python](python/stdlib_wave/README.md)

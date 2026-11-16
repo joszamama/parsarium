@@ -31,6 +31,8 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/simpleaudio/"
+  "coverage": "Python line tracing of SimpleAudio and its underlying CPython wave parser during valid-control replay; AFL++ feedback from wave parser lines",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/simpleaudio/",
+  "underlying_coverage_subject_prefix": "/usr/lib/python3.14/wave.py",
+  "afl_coverage_subject_prefix": "/usr/lib/python3.14/wave.py"
 }
