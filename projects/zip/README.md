@@ -20,6 +20,7 @@
 - [libzip / C++](cpp/libzip/README.md)
 - [miniz / C++](cpp/miniz/README.md)
 - [minizip-ng / C++](cpp/minizip-ng/README.md)
+- [poco / C++](cpp/poco/README.md)
 - [sqlite / C++](cpp/sqlite/README.md)
 - [archive/zip.OpenReader(path); File.Open() / Go](go/stdlib_openreader/README.md)
 - [code.cloudfoundry.org/ykk / Go](go/code_cloudfoundry_org_ykk/README.md)

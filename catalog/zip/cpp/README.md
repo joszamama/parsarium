@@ -1,6 +1,6 @@
 # ZIP / C++
 
-10 verified third-party API paths; 7 have verified Docker harnesses.
+10 verified third-party API paths; 8 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/zip/ranking.md) · [standard API inventory](../../../data/cpp/zip/standard.json)
 
@@ -12,7 +12,7 @@
 - [miniz](miniz/README.md) — Docker harness ready
 - [libgsf](libgsf/README.md) — Docker harness ready
 - [kuba-zip](kuba-zip/README.md) — Docker harness ready
-- [poco](poco/README.md) — verified API path
+- [poco](poco/README.md) — Docker harness ready
 - [bit7z](bit7z/README.md) — verified API path
 - [karchive](karchive/README.md) — verified API path
 - [sqlite](sqlite/README.md) — Docker harness ready
