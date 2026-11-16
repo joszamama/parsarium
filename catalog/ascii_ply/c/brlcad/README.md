@@ -26,6 +26,11 @@
 
 Distinct BRL-CAD library package and import API; bundled RPly is the underlying syntax parser family already represented by standalone RPly and SPly.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/brlcad/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c brlcad
+python3 parsarium.py run ascii_ply c brlcad controls/ascii_ply/triangle.ply
+```

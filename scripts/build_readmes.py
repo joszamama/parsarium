@@ -314,6 +314,12 @@ def main() -> None:
             lines += [f"**Coverage limit:** {manifest['coverage_limit']}", ""]
         if manifest.get("sanitizer_exception"):
             lines += [f"**Sanitizer exception:** {manifest['sanitizer_exception']}", ""]
+        if manifest.get("native_campaign_supported") is False:
+            blocker = project_dir / "inprocess-blocker.json"
+            detail = (f" [Reason]({link(project_dir, blocker)})." if blocker.is_file() else "")
+            lines += ["**Native engine limit:** This target starts a fresh process for each input. "
+                      "In-process native fuzzing is unsupported; use one-input replay or the "
+                      "prepared AFL++ run." + detail, ""]
         if manifest.get("coverage_kind") == "native_binary_edges":
             module = Path(manifest["binary_feedback_module"]).name
             lines += [
