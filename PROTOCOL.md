@@ -1,6 +1,6 @@
 # Parser selection protocol
 
-Parsarium evaluates one **format × ecosystem cell** at a time. The working goal is 20 verified third-party package paths per cell, with 30 as a ceiling. A count is never filled with unrelated software. A package path may share an underlying parser with another package; shared families are recorded.
+Parsarium evaluates one **format × ecosystem cell** at a time. Ten selected third-party package paths is a ceiling, not a quota. Standard/runtime APIs are inventoried separately and do not use that ceiling. A package path may share an underlying parser with another package; shared families are recorded.
 
 ## Eligibility
 
@@ -12,11 +12,13 @@ Each accepted path records its release and license evidence, documented input AP
 
 Registry searches use the format name and relevant parser, decoder, or reader terms. Each query, date, result limit, hit count, and unresolved lead is recorded. Search hits stay separate from verified parsers. Search inspection is bounded to the first 100 results per query, followed by project documentation and plausible high-adoption leads.
 
-A cell may stop at the 20-path working goal when the saved query windows and plausible stronger-adoption leads have been inspected or marked unresolved. Below 20, stopping requires a recorded search limit or environmental blocker. Every cell reports the actual verified count, search surface, unresolved leads, and what remains uncertain. Twenty verified paths do not automatically establish the definitive most-used 20.
+A cell reports its actual selected count, search surface, unresolved leads, and what remains uncertain. A count below ten is acceptable when the bounded search or available adoption evidence does not support more choices. Ten paths do not establish a definitive most-used ten.
 
 ## Popularity
 
-Third-party packages are ranked only among verified paths in the **same cell**. One documented metric, source, and observation window is used per ranking. Registry downloads are preferred when comparable; an ecosystem-specific alternative is named when needed. Missing values remain `null` or unranked. Metrics are not invented, mixed, or compared across ecosystems. Standard and runtime APIs remain outside third-party rankings. Popularity is an adoption proxy, not a quality or security judgment.
+Third-party packages are ranked only among verified paths in the **same cell**. One documented primary metric, source, and observation window is used per ranking. Registry downloads are preferred when comparable; an ecosystem-specific alternative is named when needed. Missing values remain `null` or unranked. Metrics are not invented, mixed into one rank, or compared across ecosystems. Standard and runtime APIs remain outside third-party rankings. Popularity is an adoption proxy, not a quality or security judgment.
+
+The ten-path curation first keeps positive primary-metric paths in descending order. A primary-unranked C/C++ path may use a separately labeled Debian Popcon source-package installation count of at least 1,000; at most three such paths per non-PLY cell receive slots. PLY cells may fill remaining slots with pinned upstream GitHub repositories with at least 100 stars. These signals are separately ranked and never treated as numerically comparable to the primary metric. An identical short package name does not establish Debian source identity. A path with zero or missing evidence is not added just to reach ten. One byte-identical PHP PLY parser-family duplicate is excluded. The saved [selection plan](data/curation/plan.json) records every retained and removed path, metric, source snapshot hash, and reason. The thresholds are curation rules, not claims that a particular number proves use of the format.
 
 ## Standard APIs and reproducibility
 
