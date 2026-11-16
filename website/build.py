@@ -54,6 +54,96 @@ DEMO_PROJECTS = [
     "projects/mp3_id3v2/python/mutagen/manifest.json",
 ]
 
+# Each clue is searched in the exact pinned valid control used by the featured
+# parser. The site shows real file bytes and a field from that parser's receipt.
+LESSON_SPECS = {
+    "png": {
+        "needle": b"IHDR", "question": "What does the IHDR chunk describe?",
+        "choices": ["Image dimensions and color mode", "Archive entries", "Audio sample rate"],
+        "answer": 0, "explanation": "IHDR is a required PNG chunk. Its payload includes width, height, bit depth, and color type.",
+        "output_keys": ["width", "height"],
+    },
+    "zip": {
+        "needle": b"PK\x01\x02", "question": "What does this ZIP record help a reader find?",
+        "choices": ["A pixel color", "The archive entry table", "An HTTP host"],
+        "answer": 1, "explanation": "The central directory records the archive's entries and where their local data lives.",
+        "output_keys": ["name", "size"],
+    },
+    "mp4": {
+        "needle": b"moov", "question": "What lives in the moov box?",
+        "choices": ["The PDF page tree", "A ZIP file name", "Track and timing metadata"],
+        "answer": 2, "explanation": "MP4 is built from nested boxes. The moov box carries movie and track metadata used to interpret media.",
+        "output_keys": ["width", "height", "video_fourcc"],
+    },
+    "wav": {
+        "needle": b"fmt ", "question": "What does the fmt chunk tell a WAV reader?",
+        "choices": ["Archive compression level", "Sample encoding and channel layout", "Page count"],
+        "answer": 1, "explanation": "The fmt chunk describes how to interpret the sample data, including rate, channel count, and sample format.",
+        "output_keys": ["sample_rate", "channels"],
+    },
+    "pdf": {
+        "needle": b"/Count 1", "question": "What does /Count 1 say about this page tree?",
+        "choices": ["The file has one byte", "There is one font", "One page is below this node"],
+        "answer": 2, "explanation": "A PDF page tree uses /Count to report the number of descendant pages. The parser resolves that structure.",
+        "output_keys": ["pages"],
+    },
+    "svg": {
+        "needle": b'width="2" height="1"', "question": "What do these root SVG attributes set?",
+        "choices": ["The ZIP entry size", "The viewport dimensions", "The HTTP body length"],
+        "answer": 1, "explanation": "The SVG root gives the image dimensions; child elements then describe vector shapes inside that space.",
+        "output_keys": ["width", "height", "nodes"],
+    },
+    "http11": {
+        "needle": b"Host: example.test", "question": "What does this header identify?",
+        "choices": ["The audio codec", "The image width", "The requested host"],
+        "answer": 2, "explanation": "An HTTP/1.1 request has a start line and headers. Host identifies the server name requested by the client.",
+        "output_keys": ["method", "target", "host"],
+    },
+    "ascii_ply": {
+        "needle": b"element vertex 3", "question": "What does this PLY header line declare?",
+        "choices": ["Three pixels follow", "Three vertex records follow", "Three audio channels follow"],
+        "answer": 1, "explanation": "An ASCII PLY header declares the record layout before the vertex and face lines are read.",
+        "output_keys": ["vertex_count", "face_count"],
+    },
+    "ascii_pnm": {
+        "needle": b"P3", "question": "What does the P3 magic number select?",
+        "choices": ["A compressed PNG chunk", "An ID3 title frame", "ASCII RGB samples"],
+        "answer": 2, "explanation": "P3 marks an ASCII color PNM image. The reader then uses dimensions, maximum value, and sample triples.",
+        "output_keys": ["width", "height", "rgb0"],
+    },
+    "mp3_id3v2": {
+        "needle": b"TIT2", "question": "What does this ID3v2 frame contain?",
+        "choices": ["The MP3 sample rate", "The track title", "The file length"],
+        "answer": 1, "explanation": "TIT2 is the ID3v2 title frame. It lives in the tag before the audio frames in this control.",
+        "output_keys": ["title", "artist"],
+    },
+}
+
+
+def lesson_for(fmt: str, data: bytes, expected_output: dict) -> dict:
+    spec = LESSON_SPECS[fmt]
+    needle = spec["needle"]
+    offset = data.find(needle)
+    if offset < 0 or data.find(needle, offset + 1) >= 0:
+        raise ValueError(f"lesson clue must occur exactly once in {fmt} control")
+    if any(key not in expected_output for key in spec["output_keys"]):
+        raise ValueError(f"lesson output keys missing from {fmt} control receipt")
+    start = max(0, offset - 7)
+    end = min(len(data), offset + len(needle) + 7)
+    return {
+        "question": spec["question"],
+        "choices": spec["choices"],
+        "answer": spec["answer"],
+        "explanation": spec["explanation"],
+        "output": {key: expected_output[key] for key in spec["output_keys"]},
+        "clueOffset": offset,
+        "clueLength": len(needle),
+        "previewStart": start,
+        "tokens": [{"hex": f"{byte:02X}", "ascii": chr(byte) if 32 <= byte < 127 else "·",
+                    "focus": offset <= position < offset + len(needle)}
+                   for position, byte in enumerate(data[start:end], start)],
+    }
+
 
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -316,6 +406,7 @@ def build(output: Path) -> None:
             "controlUrl": str(destination.relative_to(output)),
             "bytes": len(data),
             "expectedOutput": manifest["expected_output"],
+            "lesson": lesson_for(fmt, data, manifest["expected_output"]),
             "coverageLines": verification["parser_source_lines_covered"],
             "coverageKind": verification.get("coverage_kind", "source_lines"),
             "coverageTuples": (verification.get("binary_feedback") or {}).get("control_tuples"),

@@ -32,8 +32,7 @@ let visible = pageSize;
 let activeDemoIndex = 0;
 let activeDemo = null;
 let activeTargetId = null;
-let labStep = 0;
-let labTimer = null;
+const exploredFormats = new Set();
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 function formatLabel(id) { return catalog.formats.find((format) => format.id === id)?.label ?? id; }
 function roundRobin(items, groupKey, keyOrder) {
@@ -216,8 +215,6 @@ function renderTarget(targetId) {
 }
 function renderWorkbench(demo, selectedTarget) {
   activeDemo = demo;
-  labStep = 0;
-  stopLab();
   const format = catalog.formats.find((item) => item.id === demo.format);
   $("#format-guide").href = safeUrl(format.guideUrl);
   $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
@@ -265,67 +262,86 @@ function renderWorkbench(demo, selectedTarget) {
   updateUrl(currentFilters());
   renderLab();
 }
-function stopLab() {
-  if (labTimer !== null) clearInterval(labTimer);
-  labTimer = null;
-  const button = $("#lab-play");
-  if (button) { button.hidden = reducedMotion(); button.innerHTML = 'Play walkthrough <span aria-hidden="true">▶</span>'; }
+function lessonDemo() {
+  return catalog.demos.find((demo) => demo.format === activeDemo.format);
 }
 function renderLab() {
-  const demo = activeDemo;
+  const demo = lessonDemo();
+  const lesson = demo.lesson;
   const format = formatLabel(demo.format);
   const control = demo.control.split("/").pop();
-  const formatClues = {
-    png: "PNG readers interpret named chunks such as IHDR and IDAT before they can report dimensions or pixels.",
-    zip: "ZIP readers use archive records and the central directory to identify and open entries.",
-    mp4: "MP4 readers walk nested boxes to find tracks, timing, and media metadata.",
-    wav: "WAV readers interpret RIFF chunks, including the format and sample-data chunks.",
-    pdf: "PDF readers resolve document objects and pages before returning page-level information.",
-    svg: "SVG readers interpret XML elements and attributes as vector graphics.",
-    http11: "HTTP/1.1 parsers separate the start line, headers, and message body from the byte stream.",
-    ascii_ply: "ASCII PLY readers use the header to define the vertex and face records that follow.",
-    ascii_pnm: "ASCII PNM readers use the magic number, dimensions, and sample values to build an image.",
-    mp3_id3v2: "MP3 with ID3v2 readers interpret tag headers and frames before exposing audio metadata."
-  };
-  const coverageObservation = demo.coverageKind === "native_binary_edges"
-    ? `The control produced format-specific fields and recorded <strong>${Number(demo.coverageTuples || 0).toLocaleString()} AFL++ edge tuples</strong> inside a pinned native parser module. This is binary feedback, not source-line coverage. See the harness guide for the measured scope.`
-    : Number.isInteger(demo.coverageLines)
-      ? `The control produced format-specific fields and covered <strong>${demo.coverageLines.toLocaleString()} package-source lines</strong>. See the harness guide for what was instrumented; this control does not establish support for every variant.`
-      : `The control produced format-specific fields. See the harness guide for its coverage receipt and measurement limits.`;
-  const steps = [
-    {title: "A file the parser understands", tag: "CONTROL FILE", body: `The small valid control <strong>${escapeHtml(control)}</strong> (${demo.bytes.toLocaleString()} bytes) establishes a baseline for this ${format} target. Generators such as Fandango can supply further files when a matching format spec is available.`, detail: activeTargetId ? `<a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">Open this control ↗</a>` : `<a href="${escapeHtml(demo.controlUrl)}" download>Download this control ↓</a>`},
-    {title: "A specific input API", tag: "PARSER ENTRY", body: `Pinned release <strong>${escapeHtml(demo.package)} ${escapeHtml(demo.release)}</strong> receives the file through the documented API below. ${formatClues[demo.format]}`, detail: `<code>${escapeHtml(demo.inputApi)}</code>`},
-    {title: "An observable result", tag: "COVERAGE RECEIPT", body: coverageObservation, detail: `<pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre>`},
-    {title: "A repeatable experiment", tag: "CORPUS REPLAY", body: `Replay a directory of ${format} files through this target. Receipts keep input hashes and per-input outcomes. AFL++ uses parser feedback to explore further inputs. The parser's reported result matters more than a successful harness exit.`, detail: `<code>${escapeHtml(demo.replayCommand)}</code>`}
-  ];
-  const current = steps[labStep];
-  $("#lab-context").textContent = `${format} · ${demo.package} · ${demo.ecosystem.toUpperCase()} ${activeTargetId ? "selected target" : "example"}`;
-  $("#lab-stage").dataset.step = String(labStep);
-  $("#lab-stage").querySelectorAll("[data-lab-step]").forEach((button) => button.setAttribute("aria-pressed", String(Number(button.dataset.labStep) === labStep)));
-  $("#lab-panel").innerHTML = `<div class="lab-tag">${current.tag}</div><h3>${current.title}</h3><p>${current.body}</p><div class="lab-detail">${current.detail}</div>`;
-  $("#lab-next").disabled = labStep === steps.length - 1;
+  const clueHex = lesson.tokens.filter((token) => token.focus).map((token) => token.hex).join(" ");
+  const tokens = lesson.tokens.map((token, index) => `<span class="lesson-byte ${token.focus ? "is-clue" : ""}" style="--i:${index}"><b>${token.hex}</b><small>${escapeHtml(token.ascii)}</small></span>`).join("");
+  $("#lesson-progress").textContent = `${exploredFormats.size} / ${catalog.formats.length} explored`;
+  $("#lesson-tabs").querySelectorAll("button").forEach((button) => {
+    const formatId = button.dataset.lessonFormat;
+    button.setAttribute("aria-pressed", String(formatId === demo.format));
+    button.classList.toggle("is-explored", exploredFormats.has(formatId));
+  });
+  $("#lab-panel").innerHTML = `
+    <div class="lesson-file">
+      <div class="lesson-file-head"><div><span class="lesson-overline">REAL CONTROL FILE</span><h3>${escapeHtml(control)}</h3><p>${escapeHtml(format)} · ${demo.bytes.toLocaleString()} bytes · ${escapeHtml(demo.package)} ${escapeHtml(demo.release)}</p></div><a href="${safeUrl(demo.controlUrl)}" target="_blank" rel="noopener noreferrer">Open file ↗</a></div>
+      <div class="lesson-hex" role="img" aria-label="Highlighted control bytes ${clueHex} at offset ${lesson.clueOffset}">
+        <div class="lesson-byte-grid" aria-hidden="true">${tokens}</div>
+      </div>
+      <p class="lesson-byte-label">Highlighted bytes start at offset <strong>${lesson.clueOffset}</strong>. The surrounding bytes come from the same pinned control.</p>
+    </div>
+    <div class="lesson-quiz">
+      <span class="lesson-overline">YOUR TURN</span><h3>${escapeHtml(lesson.question)}</h3>
+      <div class="lesson-choices">${lesson.choices.map((choice, index) => `<button type="button" data-choice="${index}">${escapeHtml(choice)}</button>`).join("")}</div>
+      <div class="lesson-quiz-foot"><p id="lesson-feedback" role="status">Choose an answer, or reveal the explanation.</p><button type="button" class="lesson-reveal" data-reveal>Reveal explanation</button></div>
+      <div class="lesson-outcome" id="lesson-outcome" hidden><strong>What the parser observed</strong><p>${escapeHtml(lesson.explanation)}</p><pre>${escapeHtml(JSON.stringify(lesson.output, null, 2))}</pre><button type="button" data-next-lesson>Try another format ↗</button></div>
+    </div>`;
+}
+function chooseLesson(format) {
+  const index = catalog.demos.findIndex((demo) => demo.format === format);
+  if (index < 0) return;
+  $("#format-filter").value = format;
+  visible = pageSize;
+  renderAtlas();
+  renderDemo(index);
+}
+function revealLesson() {
+  const demo = lessonDemo();
+  const lesson = demo.lesson;
+  exploredFormats.add(demo.format);
+  $("#lesson-progress").textContent = `${exploredFormats.size} / ${catalog.formats.length} explored`;
+  $("#lesson-tabs").querySelector(`[data-lesson-format="${demo.format}"]`)?.classList.add("is-explored");
+  $("#lab-panel").querySelectorAll("[data-choice]").forEach((button) => {
+    button.disabled = true;
+    if (Number(button.dataset.choice) === lesson.answer) button.classList.add("is-correct");
+  });
+  $("#lab-panel").querySelector("[data-reveal]").hidden = true;
+  $("#lesson-outcome").hidden = false;
 }
 function initLab() {
-  $("#lab-play").hidden = reducedMotion();
-  $("#lab-stage").addEventListener("click", (event) => {
-    const button = event.target.closest("[data-lab-step]");
-    if (!button) return;
-    stopLab();
-    labStep = Number(button.dataset.labStep);
-    renderLab();
+  $("#lesson-tabs").innerHTML = catalog.demos.map((demo) => `<button type="button" data-lesson-format="${escapeHtml(demo.format)}" aria-pressed="false">${escapeHtml(formatLabel(demo.format))}</button>`).join("");
+  $("#lesson-tabs").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-lesson-format]");
+    if (button) chooseLesson(button.dataset.lessonFormat);
   });
-  $("#lab-next").addEventListener("click", () => { stopLab(); labStep = Math.min(labStep + 1, 3); renderLab(); });
-  $("#lab-play").addEventListener("click", () => {
-    if (reducedMotion()) return;
-    if (labTimer !== null) { stopLab(); return; }
-    labStep = 0;
-    renderLab();
-    $("#lab-play").innerHTML = 'Pause walkthrough <span aria-hidden="true">Ⅱ</span>';
-    labTimer = setInterval(() => {
-      if (labStep === 3) { stopLab(); return; }
-      labStep += 1;
-      renderLab();
-    }, 1700);
+  $("#lab-panel").addEventListener("click", (event) => {
+    const choice = event.target.closest("[data-choice]");
+    if (choice) {
+      const correct = Number(choice.dataset.choice) === lessonDemo().lesson.answer;
+      if (correct) {
+        $("#lesson-feedback").textContent = "Exactly. The saved parser result is below.";
+        revealLesson();
+      } else {
+        choice.classList.add("is-wrong");
+        $("#lesson-feedback").textContent = "Look at the highlighted bytes and try another answer.";
+      }
+      return;
+    }
+    if (event.target.closest("[data-reveal]")) {
+      $("#lesson-feedback").textContent = "Explanation revealed.";
+      revealLesson();
+      return;
+    }
+    if (event.target.closest("[data-next-lesson]")) {
+      const next = (catalog.demos.findIndex((demo) => demo.format === activeDemo.format) + 1) % catalog.demos.length;
+      chooseLesson(catalog.demos[next].format);
+    }
   });
   renderLab();
 }
