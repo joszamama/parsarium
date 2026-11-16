@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare png java lwjgl_stb runs/png-lwjgl_stb-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** JaCoCo and AFL++ trace the LWJGL STBImage Java binding. The pinned native stb_image library is prebuilt, so its internal PNG branches are not in this feedback.

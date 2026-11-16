@@ -144,10 +144,10 @@ RUN mkdir /work/lib \
     && echo '544753f5e49c53580949b9f1fc341f0e434991303c93d5a428fbaafaacc2cd69  /work/lib/lwjgl-stb-3.4.3.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3.jar -o /work/lib/lwjgl-3.4.3.jar \
     && echo '46eeca5471833c3cf5da3c1da015b41e3bb3eb16dd3da03f366886da10096751  /work/lib/lwjgl-3.4.3.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-macos-arm64.jar -o /work/lib/lwjgl-stb-3.4.3-natives-macos-arm64.jar \
-    && echo 'c038b8f586214fe762eb0876890103ffc77869c96c94572f13b1428b384df034  /work/lib/lwjgl-stb-3.4.3-natives-macos-arm64.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-macos-arm64.jar -o /work/lib/lwjgl-3.4.3-natives-macos-arm64.jar \
-    && echo '0cf1eac3c360395846320ec47a5e0da313fbb5ee92414ce09ba7e7cc11274509  /work/lib/lwjgl-3.4.3-natives-macos-arm64.jar' | sha256sum --check \
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-linux-arm64.jar -o /work/lib/lwjgl-stb-3.4.3-natives-linux-arm64.jar \
+    && echo '1b8ac3ca18850a967cad194587c5b6c51016f9ff2f8a4c442c2b9c38ccc22345  /work/lib/lwjgl-stb-3.4.3-natives-linux-arm64.jar' | sha256sum --check \
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-linux-arm64.jar -o /work/lib/lwjgl-3.4.3-natives-linux-arm64.jar \
+    && echo '80a500dfb39fdea719a6bb2458235756e9b1e488fcbd7345aee9fd2cdaced6ff  /work/lib/lwjgl-3.4.3-natives-linux-arm64.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-image-module/4.2.0/tika-parser-image-module-4.2.0.jar -o /work/lib/tika-parser-image-module-4.2.0.jar \
     && echo 'd307ebcc4f472d0c00286101b891a722c05e3fdbd3dc3aa84776b7b70981839b  /work/lib/tika-parser-image-module-4.2.0.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-xmp-commons/4.2.0/tika-parser-xmp-commons-4.2.0.jar -o /work/lib/tika-parser-xmp-commons-4.2.0.jar \

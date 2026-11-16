@@ -51,6 +51,7 @@
 - [imageio-batik / Java](java/imageio_batik/README.md)
 - [itext-svg / Java](java/itext_svg/README.md)
 - [jSVGIcon / Java](java/jsvgicon/README.md)
+- [jairosvg / Java](java/jairosvg/README.md)
 - [jsvg / Java](java/jsvg/README.md)
 - [radiance-svg-transcoder / Java](java/radiance_svg_transcoder/README.md)
 - [svg-salamander / Java](java/svg_salamander/README.md)

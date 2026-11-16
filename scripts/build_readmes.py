@@ -141,6 +141,8 @@ def main() -> None:
                               f"python3 parsarium.py build {fmt} {eco} {project_dir.name}",
                               f"python3 parsarium.py run {fmt} {eco} {project_dir.name} {control}",
                               "```", ""]
+                    if manifest.get("coverage_limit"):
+                        lines += [f"**Coverage limit:** {manifest['coverage_limit']}", ""]
                     format_projects.append((eco, name, project_dir))
                 else:
                     lines += ["## Runnable harness", "",
@@ -254,6 +256,8 @@ def main() -> None:
                   "```", "",
                   "Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a "
                   "seeded run; it does not start a campaign.", ""]
+        if manifest.get("coverage_limit"):
+            lines += [f"**Coverage limit:** {manifest['coverage_limit']}", ""]
         generated[project_dir / "README.md"] = "\n".join(lines)
 
     index_path = ROOT / "data/parser-readmes.json"

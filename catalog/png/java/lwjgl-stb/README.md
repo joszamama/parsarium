@@ -19,6 +19,13 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/java/lwjgl_stb/README.md)
+
+```sh
+python3 parsarium.py build png java lwjgl_stb
+python3 parsarium.py run png java lwjgl_stb controls/png/red-green.png
+```
+
+**Coverage limit:** JaCoCo and AFL++ trace the LWJGL STBImage Java binding. The pinned native stb_image library is prebuilt, so its internal PNG branches are not in this feedback.
