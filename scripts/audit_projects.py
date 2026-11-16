@@ -189,8 +189,25 @@ def main() -> None:
             if not dockerfile.is_file() or not (path.parent / manifest["harness"]).is_file():
                 raise ValueError(f"missing standard Dockerfile or harness: {path}")
             docker_text = dockerfile.read_text()
-            if any(manifest[field] not in docker_text
-                   for field in ("base_image", "source_sha256", "fuzz_engine_sha256")):
+            if manifest.get("coverage_kind") == "browser_control_only":
+                if (manifest.get("native_decoder_source_coverage") != "unavailable"
+                        or manifest.get("parser_feedback_available") is not False
+                        or "fuzz_engine" in manifest or "fuzz_engine_sha256" in manifest):
+                    raise ValueError(f"browser control-only coverage is misrepresented: {path}")
+                control_receipt = path.parent / "control-verification.json"
+                if not control_receipt.is_file():
+                    raise ValueError(f"missing browser control receipt: {path}")
+                observed = json.loads(control_receipt.read_text())
+                if (observed.get("status") != "verified_control_only"
+                        or observed.get("output") != manifest["expected_output"]
+                        or observed.get("control_sha256") != manifest["control_sha256"]
+                        or observed.get("native_decoder_source_coverage") != "unavailable"
+                        or observed.get("parser_feedback_available") is not False):
+                    raise ValueError(f"browser control receipt mismatch: {path}")
+                pinned_fields = ("base_image", "source_sha256")
+            else:
+                pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")
+            if any(manifest[field] not in docker_text for field in pinned_fields):
                 raise ValueError(f"standard Dockerfile pin mismatch: {path}")
             (standard_completed if fully_runnable(path, manifest) else standard_staged).add(key)
             continue
