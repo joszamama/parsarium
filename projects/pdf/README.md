@@ -52,6 +52,7 @@
 - [webklex/laravel-pdfmerger / PHP](php/webklex_laravel_pdfmerger/README.md)
 - [PyMuPDF / Python](python/pymupdf/README.md)
 - [markitdown / Python](python/markitdown/README.md)
+- [pdf2docx / Python](python/pdf2docx/README.md)
 - [pdf2image / Python](python/pdf2image/README.md)
 - [pdfminer.six / Python](python/pdfminer_six/README.md)
 - [pdfplumber / Python](python/pdfplumber/README.md)

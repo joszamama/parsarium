@@ -15,8 +15,8 @@ PyPI Stats last_month downloads excluding known mirrors.
 | 5 | [pdfplumber](https://github.com/jsvine/pdfplumber) | 0.11.10 | 40,689,748 | page text | pdfplumber via pdfminer.six |
 | 6 | [pdf2image](https://github.com/Belval/pdf2image) | 1.17.0 | 16,169,954 | rendered page dimensions | Poppler pdftoppm subprocess |
 | 7 | [markitdown](https://pypi.org/project/markitdown/0.1.9/) | 0.1.9 | 14,569,559 | page text as Markdown | MarkItDown via pdfplumber/pdfminer.six |
-| 8 | [pymupdf4llm](https://pymupdf.readthedocs.io/en/latest/pymupdf4llm/api.html) | 2.1 | 10,299,318 | page text as Markdown | PyMuPDF4LLM via MuPDF |
-| 9 | [pikepdf](https://pikepdf.readthedocs.io/en/latest/tutorial.html) | 10.18.0 | 9,480,221 | page count and document title | QPDF |
-| 10 | [pdfrw](https://github.com/pmaupin/pdfrw) | 0.4 | 3,195,794 | page count and document title | pdfrw parser |
+| 8 | [pikepdf](https://pikepdf.readthedocs.io/en/latest/tutorial.html) | 10.18.0 | 9,480,221 | page count and document title | QPDF |
+| 9 | [pdfrw](https://github.com/pmaupin/pdfrw) | 0.4 | 3,195,794 | page count and document title | pdfrw parser |
+| 10 | [pdf2docx](https://github.com/ArtifexSoftware/pdf2docx/blob/master/pdf2docx/converter.py) | 0.5.13 | 1,208,898 | parsed page sections | pdf2docx layout over MuPDF |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

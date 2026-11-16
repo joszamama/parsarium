@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate is excluded.",
+  "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded.",
   "supplemental_sources": {
     "popcon_snapshot_sha256": "497f958fdd1472676fce567fc9ecf2ac319b3291c4b57f9598998f181204b2b8",
     "github_snapshot_sha256": "b2d9a4635bc15e9abe6083bdf911d229fb169776ab5fb942c25d5f2c1db2b137"
@@ -10140,26 +10140,26 @@
           "rank": 7
         },
         {
-          "name": "pymupdf4llm",
-          "version": "2.1",
-          "family": "PyMuPDF4LLM via MuPDF",
-          "metric": 10299318,
-          "selection": "primary_metric",
-          "rank": 8
-        },
-        {
           "name": "pikepdf",
           "version": "10.18.0",
           "family": "QPDF",
           "metric": 9480221,
           "selection": "primary_metric",
-          "rank": 9
+          "rank": 8
         },
         {
           "name": "pdfrw",
           "version": "0.4",
           "family": "pdfrw parser",
           "metric": 3195794,
+          "selection": "primary_metric",
+          "rank": 9
+        },
+        {
+          "name": "pdf2docx",
+          "version": "0.5.13",
+          "family": "pdf2docx layout over MuPDF",
+          "metric": 1208898,
           "selection": "primary_metric",
           "rank": 10
         }
@@ -10171,15 +10171,7 @@
           "family": "paper2md via MuPDF",
           "metric": 10,
           "reason": "outside_ten_path_ceiling",
-          "rank": 20
-        },
-        {
-          "name": "pdf2docx",
-          "version": "0.5.13",
-          "family": "pdf2docx layout over MuPDF",
-          "metric": 1208898,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
+          "rank": 19
         },
         {
           "name": "pdf_oxide",
@@ -10187,7 +10179,7 @@
           "family": "PDF Oxide Rust core",
           "metric": 151469,
           "reason": "outside_ten_path_ceiling",
-          "rank": 13
+          "rank": 12
         },
         {
           "name": "pdfnaut",
@@ -10195,7 +10187,7 @@
           "family": "pdfnaut pure Python",
           "metric": 70,
           "reason": "outside_ten_path_ceiling",
-          "rank": 19
+          "rank": 18
         },
         {
           "name": "pdfquery",
@@ -10203,7 +10195,7 @@
           "family": "pdfquery via pdfminer.six",
           "metric": 36030,
           "reason": "outside_ten_path_ceiling",
-          "rank": 16
+          "rank": 15
         },
         {
           "name": "pdftext",
@@ -10211,7 +10203,7 @@
           "family": "pdftext via PDFium/pypdfium2",
           "metric": 258280,
           "reason": "outside_ten_path_ceiling",
-          "rank": 12
+          "rank": 11
         },
         {
           "name": "pdftotext",
@@ -10219,7 +10211,7 @@
           "family": "Poppler C++ binding",
           "metric": 148981,
           "reason": "outside_ten_path_ceiling",
-          "rank": 14
+          "rank": 13
         },
         {
           "name": "pdfx",
@@ -10227,7 +10219,15 @@
           "family": "PDFx via pdfminer.six 20201018",
           "metric": 2903,
           "reason": "outside_ten_path_ceiling",
-          "rank": 18
+          "rank": 17
+        },
+        {
+          "name": "pymupdf4llm",
+          "version": "2.1",
+          "family": "PyMuPDF4LLM via MuPDF",
+          "metric": 10299318,
+          "reason": "empty_compatibility_distribution",
+          "evidence_url": "https://pypi.org/project/pymupdf4llm/2.1/"
         },
         {
           "name": "PyPDF4",
@@ -10235,7 +10235,7 @@
           "family": "PyPDF4 fork of PyPDF2/pypdf family",
           "metric": 98686,
           "reason": "outside_ten_path_ceiling",
-          "rank": 15
+          "rank": 14
         },
         {
           "name": "slate3k",
@@ -10243,7 +10243,7 @@
           "family": "Slate3k via pdfminer3k",
           "metric": 17340,
           "reason": "outside_ten_path_ceiling",
-          "rank": 17
+          "rank": 16
         }
       ]
     },

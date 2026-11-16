@@ -6,6 +6,8 @@ Parsarium evaluates one **format × ecosystem cell** at a time. Ten selected thi
 
 A parser must be an open-source, pinned library release or a documented standard/runtime API that accepts local bytes, a local file, or a local stream and interprets the named format. Verification requires a small valid control and an observable format-specific result, such as dimensions, entries, pages, tags, samples, or protocol fields. Generic file I/O, filename or MIME detection, byte copying, signature search, and remote services do not qualify. A wrapper can qualify as a package API, with its underlying parser family identified.
 
+An empty compatibility distribution that only installs another selected parser package is not a separate parser path, even if importing the installed dependency succeeds.
+
 Each accepted path records its release and license evidence, documented input API, control, expected output, adapter, observed result, and environment. A registry hit or project name remains a *lead* until these checks pass. The valid control establishes only the tested format subset.
 
 ## Discovery and stopping

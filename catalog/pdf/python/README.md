@@ -1,6 +1,6 @@
 # PDF / Python
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/pdf/ranking.md) · [standard API inventory](../../../data/python/pdf/standard.json)
 
@@ -14,7 +14,7 @@
 - [pypdfium2](pypdfium2/README.md) — Docker harness ready
 - [pikepdf](pikepdf/README.md) — Docker harness ready
 - [pdf2image](pdf2image/README.md) — Docker harness ready
-- [pymupdf4llm](pymupdf4llm/README.md) — verified API path
+- [pdf2docx](pdf2docx/README.md) — Docker harness ready
 - [markitdown](markitdown/README.md) — Docker harness ready
 
 ## Standard and runtime APIs

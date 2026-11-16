@@ -136,19 +136,20 @@
     }
   },
   {
-    "name": "pymupdf4llm",
-    "version": "2.1",
-    "license": "AGPL-3.0-or-later",
-    "license_evidence": "https://pymupdf.readthedocs.io/en/latest/faq/index.html",
-    "input_api": "pymupdf4llm.to_markdown(local path)",
-    "documentation": "https://pymupdf.readthedocs.io/en/latest/pymupdf4llm/api.html",
-    "scope": "page text as Markdown",
-    "family": "PyMuPDF4LLM via MuPDF",
+    "name": "pdf2docx",
+    "version": "0.5.13",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdf2docx/0.5.13/json",
+    "input_api": "pdf2docx.Converter(local path).parse()",
+    "documentation": "https://github.com/ArtifexSoftware/pdf2docx/blob/master/pdf2docx/converter.py",
+    "scope": "parsed page sections",
+    "family": "pdf2docx layout over MuPDF",
     "control": "controls/pdf/one-page.pdf",
     "adapter": "adapters/python/pdf/main.py",
     "environment_lock": "adapters/python/pdf/requirements.lock",
     "expected_output": {
-      "text": "Parsarium"
+      "pages": 1,
+      "parsed_sections": 1
     }
   },
   {

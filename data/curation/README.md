@@ -21,6 +21,13 @@ have no secondary number recorded. These are **unresolved adoption signals**,
 not claims that nobody uses the package. The remaining case is a byte-identical
 PHP PLY parser family duplicate with a lower upstream star count.
 
+One further candidate is excluded on eligibility grounds: the pinned
+[`pymupdf4llm` 2.1 release](https://pypi.org/project/pymupdf4llm/2.1/) is
+explicitly an empty compatibility distribution. Its PDF parsing code is in
+PyMuPDF, already selected for the Python PDF cell. The next control-verified
+candidate, `pdf2docx`, takes the vacated slot with its recorded PyPI download
+metric. This is recorded separately from missing-metric exceptions.
+
 The primary metrics come from each cell's `registry-snapshot.json`. Debian
 counts are from [Popularity Contest](popcon-snapshot.json) and its pinned
 [`by_inst.gz`](popcon-sourcemax-by_inst.gz) snapshot; they measure installed
