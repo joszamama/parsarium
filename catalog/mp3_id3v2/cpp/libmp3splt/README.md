@@ -21,6 +21,11 @@
 
 libmp3splt uses its own frame-aware split API with a bundled MP3 plugin linked to libmad and libid3tag. These underlying libraries also have direct rows. C and C++ call sites share the same plugin.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/libmp3splt/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 cpp libmp3splt
+python3 parsarium.py run mp3_id3v2 cpp libmp3splt controls/mp3_id3v2/tone-tags.mp3
+```
