@@ -55,15 +55,23 @@ python3 parsarium.py native run runs/pypng-native --check
 python3 parsarium.py native run runs/pypng-native
 ```
 
-[Fandango 1.3+ and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) can generate inputs externally. A generated corpus can be replayed through any matching project or added as AFL++ seeds:
+[Fandango 1.3+ and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. Fandango is installed separately. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run:
 
 ```sh
-fandango fuzz -F png -n 100 -d generated/png
-python3 parsarium.py replay png python pypng generated/png runs/pypng-fandango \
-  --generator Fandango --spec png
-python3 parsarium.py afl prepare png python pypng runs/pypng-generated-afl \
-  --seed-dir generated/png
+python3 parsarium.py afl build png c lodepng
+python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
+  --count 100 --seed 42 --replay --prepare-afl
+python3 parsarium.py afl run runs/lodepng-fandango/afl --check
 ```
+
+Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, and `mp3_id3v2` (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies small local specs for HTTP/1.1 requests, ASCII PLY, and ASCII PNM P3. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. MP4 and PDF currently require a supplied specification:
+
+```sh
+python3 parsarium.py fandango generate mp4 cpp exiv2 runs/exiv2-fandango \
+  --spec path/to/mp4.fan --count 100 --seed 42 --replay
+```
+
+The run directory must be new or empty, and inside this repository it must be under `runs/` or `generated/`, which Git ignores. It contains `generated/`, a copy or snapshot of the spec, and `fandango.json`. The receipt records the Fandango executable path, SHA-256, and version; the exact command and environment; the seed (`--random-seed`, also used as `PYTHONHASHSEED`); the spec hash; and each output's SHA-256 and size. `--fanbase-registry DIR` pins a local Fanbase checkout and checks the installed spec against its `index.yml`. Without it, the registry revision is not recorded; only the installed spec snapshot is. If Fandango fails, writes no files, or writes empty, oversized, or linked files, the command stops before replay or AFL++ preparation.
 
 The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation.
 

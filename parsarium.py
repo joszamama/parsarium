@@ -143,6 +143,9 @@ def seed_arguments(args: argparse.Namespace) -> list[str]:
 
 
 def main() -> int:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import fandango_generate as generator
+
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
 
@@ -227,6 +230,13 @@ def main() -> int:
     afl_run.add_argument("--resume", action="store_true")
     afl_summary = afl_commands.add_parser("summary", help="summarize AFL++ statistics and saved files")
     afl_summary.add_argument("run_dir", type=Path)
+
+    fandango = commands.add_parser("fandango", help="generate a corpus with Fandango and record provenance")
+    fandango_commands = fandango.add_subparsers(dest="action", required=True)
+    fandango_generate = fandango_commands.add_parser(
+        "generate", help="run fandango fuzz into a new run directory; optionally replay or prepare AFL++",
+        description=generator.__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    generator.add_arguments(fandango_generate)
 
     native = commands.add_parser("native", help="prepare and run ecosystem fuzz engines")
     native_commands = native.add_subparsers(dest="action", required=True)
@@ -314,6 +324,8 @@ def main() -> int:
                 extra.append("--resume")
             return execute("run_prepared_afl.py", str(args.run_dir), *extra)
         return execute("summarize_afl_run.py", str(args.run_dir))
+    if args.command == "fandango":
+        return generator.generate(fandango_generate, args)
     if args.action == "prepare":
         return execute("prepare_native_run.py", args.format, args.ecosystem, args.slug,
                        str(args.run_dir), *seed_arguments(args),
