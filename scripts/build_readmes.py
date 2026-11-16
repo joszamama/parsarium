@@ -258,6 +258,8 @@ def main() -> None:
                   "seeded run; it does not start a campaign.", ""]
         if manifest.get("coverage_limit"):
             lines += [f"**Coverage limit:** {manifest['coverage_limit']}", ""]
+        if manifest.get("sanitizer_exception"):
+            lines += [f"**Sanitizer exception:** {manifest['sanitizer_exception']}", ""]
         if manifest.get("coverage_kind") == "native_binary_edges":
             module = Path(manifest["binary_feedback_module"]).name
             lines += [

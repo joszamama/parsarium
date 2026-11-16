@@ -1,13 +1,13 @@
 # ASCII PLY / C++
 
-10 verified third-party API paths; 0 have verified Docker harnesses.
+10 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/ascii_ply/ranking.md) · [standard API inventory](../../../data/cpp/ascii_ply/standard.json)
 
 ## Third-party parsers
 
 - [assimp](assimp/README.md) — verified API path
-- [open-mesh](open-mesh/README.md) — verified API path
+- [open-mesh](open-mesh/README.md) — Docker harness ready
 - [cgal](cgal/README.md) — verified API path
 - [libigl](libigl/README.md) — verified API path
 - [pcl](pcl/README.md) — verified API path

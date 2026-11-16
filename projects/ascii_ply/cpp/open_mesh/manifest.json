@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "open-mesh",
+  "release": "11.0.0",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "9d22e65bdd6a125ac2043350a019ec4346ea83922cafdf47e125a03c16f6fa07",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of OpenMesh PLY reader from a C++17 caller",
+  "coverage_subject_prefix": "/work/OpenMesh-11.0.0/src/OpenMesh/Core/IO/reader/",
+  "format_specific_coverage_file_suffix": "/PLYReader.cc"
+}

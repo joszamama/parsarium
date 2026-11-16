@@ -20,6 +20,11 @@
 
 OpenMesh uses its own PLYReader and mesh representation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/open_mesh/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp open_mesh
+python3 parsarium.py run ascii_ply cpp open_mesh controls/ascii_ply/triangle.ply
+```
