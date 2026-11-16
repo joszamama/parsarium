@@ -39,10 +39,9 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Native Qt SVG source coverage required; Python binding import coverage alone is insufficient",
+  "coverage": "The pinned Docker control parses and renders valid SVG. Python binding traces are separate from QtSvg parser coverage. AFL++ QEMU and Frida crash on valid SVG loading, so native parser feedback and source-line coverage are unavailable.",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/PyQt6/",
-  "underlying_coverage_subject_prefix": "/work/source/qtsvg-6.12.0/src/svg/",
-  "underlying_format_specific_coverage_file_suffix": "/qsvghandler.cpp",
+  "coverage_kind": "control_only",
   "dependencies": [
     {
       "package": "pyqt6-qt6",
@@ -54,5 +53,10 @@
       "release": "13.13.1",
       "sha256": "c3bbc6d119c581d3f90a5c3cfc97025e6ae2ccc5bfc87a2fa68fe3d72ec2e631"
     }
-  ]
+  ],
+  "parser_feedback_available": false,
+  "native_parser_source_coverage": "unavailable",
+  "qtsvg_module_sha256": "ad54290bfb1929296b1662375d1902ad9810162051f51ff00bce3b2843bdbf2c",
+  "control_variant": "controls/svg/red-blue-path.svg",
+  "control_variant_sha256": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172"
 }

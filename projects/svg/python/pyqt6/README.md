@@ -1,17 +1,15 @@
 # PyQt6 — SVG / Python
 
-Pinned release: `6.12.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
+PyQt6 `6.12.0` and Qt `6.12.0` are pinned in the [manifest](manifest.json). The Docker control is verified, while parser-source coverage and native AFL++ feedback are unavailable. See the [control receipt](control-verification.json), [feedback blocker](feedback-blocker.json), and [catalog API evidence](../../../../catalog/svg/python/pyqt6/README.md).
 
-[API, control result, and parser family](../../../../catalog/svg/python/pyqt6/README.md)
-
-## Run from the repository root
+From the repository root:
 
 ```sh
-python3 parsarium.py build svg python pyqt6
-python3 parsarium.py run svg python pyqt6 controls/svg/red-green.svg
-python3 parsarium.py replay svg python pyqt6 CORPUS_DIR runs/svg-pyqt6-replay
-python3 parsarium.py afl build svg python pyqt6
-python3 parsarium.py afl prepare svg python pyqt6 runs/svg-pyqt6-afl
+python3 projects/svg/python/pyqt6/control.py verify
+python3 projects/svg/python/pyqt6/control.py run controls/svg/red-green.svg
+python3 projects/svg/python/pyqt6/control.py run YOUR_LOCAL_SVG_FILE
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+`QSvgRenderer(local path)` parses and renders the 2 × 1 control as red `(255, 0, 0, 255)` and green `(0, 255, 0, 255)` pixels. The second valid SVG control renders at 4 × 2. The runner builds the pinned image and accepts a local SVG path. It uses an offscreen Qt GUI context.
+
+AFL++ QEMU and Frida terminated while loading a valid SVG on the tested amd64 and arm64 images, so no parser feedback map is accepted. Python binding lines in the receipt are separate from QtSvg parser coverage. This path is staged and has no verified AFL++ campaign overlay.

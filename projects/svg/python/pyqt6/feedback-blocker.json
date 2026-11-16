@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "native_feedback_unavailable",
+  "scope": "PyQt6 6.12.0 QSvgRenderer loading valid local SVG controls",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "variant": "controls/svg/red-blue-path.svg",
+  "variant_sha256": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172",
+  "linux_amd64": {
+    "pyqt6_wheel_sha256": "1922bf7440310845a4fd06f4242288084dc26cf682a67e561b115570a8def3d1",
+    "qtsvg_module_sha256": "ad54290bfb1929296b1662375d1902ad9810162051f51ff00bce3b2843bdbf2c",
+    "native_control": "2x1 red and green pixels observed",
+    "afl_qemu_5_04a": "Valid SVG rendering under QEMU exited with target SIGSEGV or timeout; native parser feedback could not be measured."
+  },
+  "linux_arm64": {
+    "pyqt6_wheel_sha256": "2799f2e75594af313222a2dc2da9f965fe88be29ee4293d7937e7763630f5610",
+    "pyqt6_qt6_wheel_sha256": "2460119ac5f725cfddc331bd56eca22fbb61b29a549d417b7bcc304c7fc9459b",
+    "pyqt6_sip_wheel_sha256": "4a751c542ffb7afcc945eb824fc3fa3c3dae002c91fe5c1da86a5a567c6271b9",
+    "qtsvg_module_sha256": "d4b15bd32364702fa5cf7238458eda236cacbc2b678084bdf8d777a16a6b6dc7",
+    "afl_image": "aflplusplus/aflplusplus@sha256:f0f9368ef92c8794103bc4dcb51505c4e6a52cc18f37d75e31409b21c6b55bab",
+    "native_control": "2x1 first=255,0,0,255",
+    "native_variant": "4x2 first=255,0,0,255",
+    "afl_qemu_5_04a": "Basic Python, QtSvg import, QGuiApplication, and an empty QSvgRenderer completed. Loading the valid SVG by path or QByteArray exited with target SIGILL, including with QEMU_CPU=max.",
+    "afl_frida_5_04a": "Basic Python and QtSvg import completed. Loading the valid SVG exited with target SIGILL."
+  },
+  "parser_source_lines_covered": null,
+  "native_feedback_edges": null,
+  "repeat_variant_map_check": "unavailable: the instrumented valid-control process did not complete",
+  "decision": "Keep this path staged as a verified Docker control. AFL maps from crashed or timed-out targets are excluded from feedback claims."
+}
