@@ -2,12 +2,14 @@
 
 from contextlib import contextmanager
 import fcntl
+import os
 from pathlib import Path
+import tempfile
 import time
 
 
-SLOTS = 6
-LOCKS = Path(__file__).resolve().parents[1] / "target/docker-build-slots"
+SLOTS = 3
+LOCKS = Path(tempfile.gettempdir()) / f"parsarium-docker-build-slots-{os.getuid()}"
 
 
 @contextmanager
