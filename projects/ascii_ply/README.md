@@ -12,6 +12,7 @@
 - [easy3d / C++](cpp/easy3d/README.md)
 - [geogram / C++](cpp/geogram/README.md)
 - [libigl / C++](cpp/libigl/README.md)
+- [libpointmatcher / C++](cpp/libpointmatcher/README.md)
 - [open-mesh / C++](cpp/open_mesh/README.md)
 - [pcl / C++](cpp/pcl/README.md)
 - [vtk / C++](cpp/vtk/README.md)

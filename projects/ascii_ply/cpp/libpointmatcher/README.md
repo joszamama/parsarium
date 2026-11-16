@@ -4,8 +4,6 @@ Pinned release: `1.4.4`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/ascii_ply/cpp/libpointmatcher/README.md)
 
-The build removes an obsolete Boost.System link component from the release's CMake configuration for Ubuntu's header-only Boost.System. The pinned PLY parser source is unchanged.
-
 ## Run from the repository root
 
 ```sh
