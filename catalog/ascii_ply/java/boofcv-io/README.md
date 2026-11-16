@@ -25,6 +25,11 @@
 
 Public BoofCV mesh API dispatches to its own PlyCodec and PlyReader, with no shared syntax reader found among the other included Java paths.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/java/boofcv_io/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply java boofcv_io
+python3 parsarium.py run ascii_ply java boofcv_io controls/ascii_ply/triangle.ply
+```
