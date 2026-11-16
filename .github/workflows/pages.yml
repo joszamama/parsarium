@@ -28,8 +28,10 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
-      - name: Check parser guides
-        run: python3 scripts/build_readmes.py --check
+      - name: Rebuild catalog counts and parser guides
+        run: |
+          python3 scripts/audit_projects.py --write
+          python3 scripts/build_readmes.py
       - name: Build static site from catalog evidence
         run: python3 website/build.py
       - uses: actions/upload-pages-artifact@v5
