@@ -4,10 +4,6 @@ Pinned release: `0.7.6`. [Manifest](manifest.json) · [verification receipt](ver
 
 [API, control result, and parser family](../../../../catalog/http11/c/facil-legacy/README.md)
 
-The pinned Docker control parsed a complete GET request, including its path, query, version, and Host header. LLVM coverage reached 144 lines in facil.io's `http1_parser.h`; AFL++ produced 78 feedback edges.
-
-The harness copies each input into a writable buffer of exactly its length and calls facil.io's documented `http1_parse` once. It reports the method, path, query, version and Host header when one complete request uses every byte. facil.io 0.7 and C STL 0.8 belong to the same parser family.
-
 ## Run from the repository root
 
 ```sh

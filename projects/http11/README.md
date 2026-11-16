@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [facil-legacy / C](c/facil-legacy/README.md)
 - [h2o / C](c/h2o/README.md)
 - [http-parser / C](c/http-parser/README.md)
 - [libhv / C](c/libhv/README.md)
