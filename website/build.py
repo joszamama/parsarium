@@ -447,8 +447,8 @@ def build(output: Path) -> None:
     (output / "catalog.json").write_text(catalog_json + "\n", encoding="utf-8")
     (output / "CNAME").write_text("parsarium.com\n", encoding="utf-8")
     def site_header(root: str, active: str) -> str:
-        links = [("Home", "index"), ("Atlas", "atlas"), ("Run locally", "run"),
-                 ("Learn", "lab"), ("Why parsers?", "why")]
+        links = [("Home", "index"), ("Atlas", "atlas"), ("About", "about"),
+                 ("Run locally", "run"), ("Learn", "lab")]
         def nav_items() -> str:
             items = []
             for label, route in links:
@@ -466,12 +466,12 @@ def build(output: Path) -> None:
     def site_footer(root: str) -> str:
         return f'''<footer class="site-footer"><div class="container footer-grid">
           <div><a class="brand footer-brand" href="{root or './'}">Parsarium<span class="brand-period">.</span></a><p>The open parser atlas.</p></div>
-          <nav class="footer-links" aria-label="Footer navigation"><a href="{root or './'}">Home</a><a href="{root}atlas/">Atlas</a><a href="{root}run/">Run locally</a><a href="{root}lab/">Learn</a><a href="{root}why/">Why parsers?</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+          <nav class="footer-links" aria-label="Footer navigation"><a href="{root or './'}">Home</a><a href="{root}atlas/">Atlas</a><a href="{root}about/">About</a><a href="{root}run/">Run locally</a><a href="{root}lab/">Learn</a><a href="{REPO_URL}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
           <p class="footer-note">Verified input APIs. Pinned controls. Runnable harnesses.<br>Built from the repository evidence.</p>
         </div></footer>'''
 
     # Real static routes work when loaded directly or refreshed on GitHub Pages.
-    for page in ("index", "atlas", "run", "lab", "why"):
+    for page in ("index", "atlas", "about", "run", "lab", "why"):
         root = "" if page == "index" else "../"
         html = (SITE / f"{page}.html").read_text(encoding="utf-8")
         html = html.replace("<!-- SITE_HEADER -->", site_header(root, page))
@@ -483,7 +483,8 @@ def build(output: Path) -> None:
                   f"data-cf-beacon='{{\"token\": \"{CLOUDFLARE_BEACON_TOKEN}\"}}'></script>")
         if html.count("</body>") != 1:
             raise ValueError(f"{page}.html must have one closing body tag")
-        html = html.replace("</body>", f"  {beacon}\n</body>")
+        if page != "why":
+            html = html.replace("</body>", f"  {beacon}\n</body>")
         destination = output if page == "index" else output / page
         destination.mkdir(parents=True, exist_ok=True)
         (destination / "index.html").write_text(html, encoding="utf-8")

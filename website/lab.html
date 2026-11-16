@@ -3,18 +3,39 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#171448">
-  <meta name="description" content="Learn how parsing works through live browser examples and pinned control clues.">
+  <meta name="description" content="A small interactive book about format structure, parser APIs, controls, and observed results.">
   <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg">
   <link rel="stylesheet" href="{{ROOT}}assets/styles.css">
   <link rel="stylesheet" href="{{ROOT}}assets/lab.css">
-  <title>Interactive lesson — Parsarium</title>
+  <title>Learn how parsers read formats — Parsarium</title>
 </head>
 <body data-page="lab" data-root="{{ROOT}}">
   <a class="skip-link" href="#main">Skip to content</a>
   <!-- SITE_HEADER -->
   <main id="main" class="lab-page">
-    <section class="page-intro lab-intro"><div class="container"><p class="section-kicker">LEARN IN THE BROWSER</p><h1>See a parse happen.</h1><p>Try three small examples and watch input become parsed structure. This lesson runs in your browser; full library harnesses run in Docker on your machine.</p><div class="page-intro-links"><a href="{{ROOT}}run/">Run a full target locally ↗</a></div></div></section>
-    <section class="lab-workspace section-pad"><div class="container"><div id="lab-app"><p>Loading the lab…</p></div></div></section>
+    <section class="page-intro lab-intro"><div class="container"><p class="section-kicker">A SMALL BOOK ABOUT PARSING</p><h1>How does a program read a format?</h1><p>Follow a valid input from its grammar to the structure a parser exposes. Then try a browser example and take the same format to a real library harness.</p><div class="page-intro-links"><a href="#chapter-1">Start reading ↓</a><a href="#practice">Go to the exercise ↓</a></div></div></section>
+
+    <nav class="book-toc" aria-label="Book chapters"><div class="container"><a href="#chapter-1">The agreement</a><a href="#chapter-2">The grammar</a><a href="#practice">Try a parse</a><a href="#chapter-4">Lessons to keep</a></div></nav>
+
+    <section class="book-chapter book-chapter-one section-pad" id="chapter-1"><div class="container book-grid"><div><span class="book-chapter-label">CHAPTER 1 · THE AGREEMENT</span><h2>A format tells the program what to expect.</h2></div><div class="book-prose"><p>A parser receives input and tries to recognize a structure. The format describes the possible parts and their order; the program chooses an API and an implementation to read them. A valid control gives us one concrete example that should pass.</p><p>That is why the first question in Parsarium is practical: <strong>which program and input API will receive this file, text, or stream?</strong> The same format can reach many programs with different code behind the API.</p><div class="book-definition"><strong>Grammar</strong><p>The rules for how an input is organized. They may describe binary chunks, text tokens, nested elements, or a protocol message.</p></div></div></div></section>
+
+    <section class="book-chapter book-chapter-two section-pad" id="chapter-2"><div class="container"><div class="book-chapter-heading"><span class="book-chapter-label">CHAPTER 2 · THE GRAMMAR</span><h2>Three tiny inputs, three kinds of structure.</h2><p>These are the valid controls used in the exercise below. Notice how the parser must do more than check a filename.</p></div>
+      <div class="grammar-grid">
+        <article class="grammar-card"><div class="grammar-card-head"><span>PNG</span><strong>Chunks</strong></div><p>A PNG begins with a signature. Each following chunk has a length, a type, data, and a checksum. The IHDR chunk tells the decoder the image dimensions; IDAT carries compressed image data.</p><div class="grammar-flow" aria-label="PNG structure"><b>signature</b><i>→</i><b>IHDR</b><i>→</i><b>IDAT</b><i>→</i><b>IEND</b></div><small>Question for the parser: which dimensions and pixels do these chunks describe?</small></article>
+        <article class="grammar-card"><div class="grammar-card-head"><span>SVG</span><strong>Element tree</strong></div><p>SVG is XML. A root <code>&lt;svg&gt;</code> element contains shapes and attributes. The browser builds an element tree before we inspect its width, height, and rectangles.</p><div class="grammar-tree" aria-label="SVG structure"><b>&lt;svg width="2" height="1"&gt;</b><span>├─ &lt;rect fill="#ff0000"&gt;</span><span>└─ &lt;rect fill="#00ff00"&gt;</span></div><small>Question for the parser: which elements and attributes are present?</small></article>
+        <article class="grammar-card"><div class="grammar-card-head"><span>ASCII PNM</span><strong>Tokens</strong></div><p>In a P3 PNM image, plain text tokens carry a magic value, dimensions, a maximum channel value, then RGB samples. Whitespace separates tokens; the numbers still need checking.</p><div class="grammar-flow" aria-label="PNM structure"><b>P3</b><i>→</i><b>2 1</b><i>→</i><b>255</b><i>→</i><b>RGB × 2</b></div><small>Question for the parser: do the samples match the declared image size?</small></article>
+      </div>
+      <p class="book-bridge">The grammar helps explain an input. The next chapter runs a decoder and shows what this particular program observed.</p>
+    </div></section>
+
+    <section class="book-chapter book-practice section-pad" id="practice"><div class="container"><div class="book-chapter-heading"><span class="book-chapter-label">CHAPTER 3 · TRY A PARSE</span><h2>Inspect structure before the result.</h2><p>Load PNG, SVG, or ASCII PNM. Run <code>parse</code> to see the grammar found in the control. The result stays covered until you choose <code>result</code>. This exercise uses browser or teaching decoders; the linked Docker targets use the actual libraries.</p></div><div id="lab-app"><p>Loading the lesson…</p></div></div></section>
+
+    <section class="book-chapter book-takeaways section-pad" id="chapter-4"><div class="container"><div class="book-chapter-heading"><span class="book-chapter-label">CHAPTER 4 · LESSONS TO KEEP</span><h2>What a successful parse tells you.</h2></div><div class="book-takeaway-grid">
+      <article><h3>The control establishes a starting point.</h3><p>One valid input shows that the chosen API can reach format-aware code and produce an expected result. It does not describe every input that the parser accepts.</p></article>
+      <article><h3>Structure and result are separate observations.</h3><p>A file may have recognizable parts, while a program interprets them differently. Inspect both the format grammar and the output or fields the parser exposes.</p></article>
+      <article><h3>Feedback belongs to a program.</h3><p>Coverage says which implementation lines or edges executed for that input. It helps study the target program; a format has no coverage of its own.</p></article>
+      <article><h3>Comparisons need the same ground rules.</h3><p>Pin the release, input API, control, and harness. Record shared underlying parser families so two package names are not mistaken for independent engines.</p></article>
+    </div><p class="book-final-link"><a href="{{ROOT}}run/">Take a format into a Docker harness ↗</a></p></div></section>
   </main>
   <!-- SITE_FOOTER -->
   <script src="{{ROOT}}assets/site.js" defer></script>

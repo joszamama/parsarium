@@ -14,7 +14,7 @@
   };
   const encoder = new TextDecoder("utf-8", { fatal: true });
   const state = { catalog: null, demos: new Map(), format: null, data: null,
-    structure: null, observed: null, swatches: [], busy: false,
+    structure: null, observed: null, revealed: false, swatches: [], busy: false,
     commands: [], commandIndex: 0, quizFormat: "png", explored: new Set() };
   const el = (selector) => root.querySelector(selector);
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
@@ -37,7 +37,7 @@
               <label for="teach-input">Command</label>
               <div><span aria-hidden="true">$</span><input id="teach-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="teach-hint" placeholder="try: parse"><button type="submit">Run <span aria-hidden="true">↵</span></button></div>
             </form>
-            <p id="teach-hint" class="teach-hint">Try <code>help</code>, <code>bytes</code>, <code>parse</code>, or <code>result</code>. ↑ recalls a command.</p>
+            <p id="teach-hint" class="teach-hint">Try <code>parse</code> to inspect structure. Use <code>result</code> only when you are ready to see the observed fields. ↑ recalls a command.</p>
             <div class="teach-shortcuts" aria-label="Example commands"><button type="button" data-teach-command="bytes">bytes</button><button type="button" data-teach-command="parse">parse</button><button type="button" data-teach-command="result">result</button><button type="button" data-teach-command="reset">reset</button></div>
           </section>
           <section class="teach-visual" aria-labelledby="teach-visual-title">
@@ -45,8 +45,8 @@
             <ol class="teach-pipeline" aria-label="Parsing stages"><li data-teach-stage="bytes"><b>Bytes</b><small>loaded control</small></li><li data-teach-stage="structure"><b>Structure</b><small>format grammar</small></li><li data-teach-stage="result"><b>Result</b><small>observed fields</small></li></ol>
             <div class="teach-panels">
               <div class="teach-panel" id="teach-bytes"><h3>Bytes</h3><p>Load a format to inspect its control.</p></div>
-              <div class="teach-panel" id="teach-structure"><h3>Structure</h3><p>Run <code>parse</code> to see how the format is organized.</p></div>
-              <div class="teach-panel" id="teach-result"><h3>Result</h3><p>The browser's observed fields will appear here.</p></div>
+              <div class="teach-panel" id="teach-structure"><h3>Format grammar</h3><p>Run <code>parse</code> to see how the format is organized.</p></div>
+              <div class="teach-panel" id="teach-result"><h3>Result</h3><p>First inspect the grammar. Then choose when to reveal the parser result.</p></div>
             </div>
           </section>
         </div>
@@ -115,7 +115,12 @@
   }
 
   function renderStructure(items) {
-    el("#teach-structure").innerHTML = `<h3>Structure</h3><ul class="teach-structure-list">${items.map((item, index) => `<li style="--n:${index}"><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.detail)}</span></li>`).join("")}</ul>`;
+    const explanations = {
+      png: "The signature identifies PNG. The parser then walks chunks; each chunk declares a length and type before its data and checksum.",
+      svg: "The XML parser builds an element tree. The SVG root and rectangle attributes provide the structure inspected here.",
+      ascii_pnm: "The P3 magic value starts an ordered sequence of text tokens: dimensions, maxval, then exactly enough RGB samples.",
+    };
+    el("#teach-structure").innerHTML = `<h3>Format grammar</h3><p class="teach-grammar-note">${escapeHtml(explanations[state.format])}</p><ul class="teach-structure-list">${items.map((item, index) => `<li style="--n:${index}"><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.detail)}</span></li>`).join("")}</ul><button class="teach-reveal-result" type="button" data-teach-command="result">Continue to result →</button>`;
   }
 
   function renderResult(output, swatches) {
@@ -140,11 +145,12 @@
     state.data = data;
     state.structure = null;
     state.observed = null;
+    state.revealed = false;
     state.swatches = [];
     el("#teach-format-badge").textContent = `${names[format]} · ${engines[format]}`;
     renderBytes();
-    el("#teach-structure").innerHTML = `<h3>Structure</h3><p>Run <code>parse</code> to inspect the ${names[format]} structure.</p>`;
-    el("#teach-result").innerHTML = `<h3>Result</h3><p>The observed fields will appear after parsing.</p>`;
+    el("#teach-structure").innerHTML = `<h3>Format grammar</h3><p>Run <code>parse</code> to inspect the ${names[format]} structure.</p>`;
+    el("#teach-result").innerHTML = `<h3>Result</h3><p>First inspect the grammar. Then choose when to reveal the parser result.</p>`;
     nextStep(demo);
     stage("bytes");
     const url = new URL(location.href);
@@ -237,18 +243,15 @@
       : state.format === "svg" ? parseSvg(state.data) : parsePnm(state.data);
     state.structure = parsed.structure;
     state.observed = parsed.output;
+    state.revealed = false;
     state.swatches = parsed.swatches;
     renderStructure(parsed.structure);
     stage("structure");
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      await new Promise((resolve) => setTimeout(resolve, 420));
-    }
-    renderResult(parsed.output, parsed.swatches);
-    stage("result");
-    terminalLine("success", `Parsed ${names[state.format]} with ${engines[state.format]}.\n${JSON.stringify(parsed.output, null, 2)}`);
+    el("#teach-result").innerHTML = `<h3>Result</h3><p>The ${names[state.format]} result is ready. Review the format grammar, then type <code>result</code> or use the Continue button.</p>`;
+    terminalLine("success", `Parsed ${names[state.format]} with ${engines[state.format]}. Found ${parsed.structure.length} structure parts. Inspect the grammar, then type result when ready.`);
   }
 
-  async function execute(raw) {
+  async function execute(raw, focusInput = false) {
     const command = raw.trim();
     if (!command) return;
     terminalLine("command", command);
@@ -259,10 +262,10 @@
       busy(true);
       switch (parts[0]) {
         case "help":
-          terminalLine("output", "load png | load svg | load ascii_pnm  — fetch a pinned control\nbytes [offset] [count]  — inspect 8–64 bytes\nparse  — run the browser or teaching decoder\nresult  — print the live result again\nformats  — list live formats\nreset  — clear the terminal session");
+          terminalLine("output", "load png | load svg | load ascii_pnm  — fetch a pinned control\nbytes [offset] [count]  — inspect 8–64 bytes\nparse  — reveal the format grammar\nresult  — reveal the observed fields\nformats  — list live formats\nreset  — clear the terminal session");
           break;
         case "formats":
-          terminalLine("output", "Live here: png (browser image decoder), svg (DOMParser), ascii_pnm (P3 teaching decoder). All ten formats also have byte-clue lessons below.");
+          terminalLine("output", "Live here: png (browser image decoder), svg (DOMParser), ascii_pnm (P3 teaching decoder). All ten formats also have control-file questions below.");
           break;
         case "load":
           if (parts.length !== 2) throw new Error("Usage: load png | load svg | load ascii_pnm");
@@ -274,7 +277,7 @@
           const count = parts[2] === undefined ? 32 : Number(parts[2]);
           if (parts.length > 3 || !Number.isInteger(offset) || offset < 0 || offset >= state.data.length || !Number.isInteger(count) || count < 8 || count > 64) throw new Error(`Usage: bytes [offset 0–${state.data.length - 1}] [count 8–64]`);
           renderBytes(offset, count);
-          stage(state.observed ? "result" : "bytes");
+          stage(state.revealed ? "result" : state.structure ? "structure" : "bytes");
           terminalLine("output", hexDump(state.data, offset, count));
           break;
         }
@@ -284,16 +287,20 @@
           break;
         case "result":
           if (!state.observed) throw new Error("Run parse first to produce an observed result.");
+          renderResult(state.observed, state.swatches);
+          el(".teach-reveal-result")?.remove();
+          state.revealed = true;
+          stage("result");
           terminalLine("output", JSON.stringify(state.observed, null, 2));
           break;
         case "reset":
           if (parts.length !== 1) throw new Error("Usage: reset");
-          state.format = null; state.data = null; state.structure = null; state.observed = null; state.swatches = [];
+          state.format = null; state.data = null; state.structure = null; state.observed = null; state.revealed = false; state.swatches = [];
           state.commands = []; state.commandIndex = 0;
           el("#teach-format-badge").textContent = "Waiting";
           el("#teach-bytes").innerHTML = "<h3>Bytes</h3><p>Load a format to inspect its control.</p>";
-          el("#teach-structure").innerHTML = "<h3>Structure</h3><p>Run <code>parse</code> to see how the format is organized.</p>";
-          el("#teach-result").innerHTML = "<h3>Result</h3><p>The browser's observed fields will appear here.</p>";
+          el("#teach-structure").innerHTML = "<h3>Format grammar</h3><p>Run <code>parse</code> to see how the format is organized.</p>";
+          el("#teach-result").innerHTML = "<h3>Result</h3><p>First inspect the grammar. Then choose when to reveal the parser result.</p>";
           el("#teach-next-step").innerHTML = "";
           el("#teach-terminal-history").innerHTML = "";
           stage(null);
@@ -310,7 +317,7 @@
       terminalLine("error", error instanceof Error ? error.message : String(error));
     } finally {
       busy(false);
-      el("#teach-input").focus();
+      if (focusInput) el("#teach-input").focus();
     }
   }
 
@@ -323,7 +330,7 @@
     const clueHex = clue.map((token) => token.hex).join(" ");
     const clueAscii = clue.map((token) => token.ascii).join("");
     el("#teach-quiz").innerHTML = `
-      <div class="teach-quiz-header"><div><span class="teach-overline">TEN SMALL FORMAT LESSONS</span><h2 id="teach-quiz-title">Decode a clue.</h2><p>Choose a format. These highlighted bytes come from its real pinned control; the answer is a saved parser observation.</p></div><strong>${state.explored.size} / ${state.catalog.demos.length} explored</strong></div>
+      <div class="teach-quiz-header"><div><span class="teach-overline">FIELD NOTES · ALL TEN FORMATS</span><h2 id="teach-quiz-title">Test a clue.</h2><p>Choose a format. Inspect part of its real pinned control, then connect it to a saved parser observation.</p></div><strong>${state.explored.size} / ${state.catalog.demos.length} explored</strong></div>
       <label class="teach-quiz-picker">FORMAT <select id="teach-quiz-select">${state.catalog.demos.map((item) => `<option value="${escapeHtml(item.format)}" ${item.format === state.quizFormat ? "selected" : ""}>${escapeHtml(state.catalog.formats.find((format) => format.id === item.format)?.label || item.format)}</option>`).join("")}</select></label>
       <div class="teach-quiz-body"><div class="teach-quiz-file"><span class="teach-overline">${escapeHtml(label)} · ${escapeHtml(demo.control.split("/").pop())}</span><div class="teach-quiz-bytes" role="img" aria-label="Highlighted control bytes at offset ${lesson.clueOffset}: hex ${escapeHtml(clueHex)}, ASCII ${escapeHtml(clueAscii)}">${lesson.tokens.map((token, index) => `<span class="teach-byte ${token.focus ? "is-clue" : ""}" style="--n:${index}" aria-hidden="true"><b>${escapeHtml(token.hex)}</b><small>${escapeHtml(token.ascii)}</small></span>`).join("")}</div><p>Clue starts at byte offset <b>${lesson.clueOffset}</b>. <a href="${escapeHtml(localControlUrl(demo))}" target="_blank" rel="noopener noreferrer">Open control ↗</a></p></div>
       <div class="teach-quiz-answer"><h3>${escapeHtml(lesson.question)}</h3><div class="teach-quiz-choices">${lesson.choices.map((choice, index) => `<button type="button" data-teach-choice="${index}" ${complete ? "disabled" : ""} class="${complete && index === lesson.answer ? "is-correct" : ""}">${escapeHtml(choice)}</button>`).join("")}</div><p id="teach-quiz-feedback" role="status">${complete ? "Explanation revealed." : "Choose an answer or reveal the explanation."}</p><button type="button" class="teach-quiz-reveal" data-teach-reveal ${complete ? "hidden" : ""}>Reveal explanation</button>${complete ? `<div class="teach-quiz-explanation"><strong>Saved parser receipt</strong><p>${escapeHtml(lesson.explanation)}</p><pre>${escapeHtml(JSON.stringify(lesson.output, null, 2))}</pre></div>` : ""}</div></div>`;
@@ -347,7 +354,7 @@
       const input = el("#teach-input");
       const command = input.value.trim();
       input.value = "";
-      if (!state.busy && command) void execute(command);
+      if (!state.busy && command) void execute(command, true);
     });
     el("#teach-input").addEventListener("keydown", (event) => {
       if (event.key === "ArrowUp" && state.commands.length) {

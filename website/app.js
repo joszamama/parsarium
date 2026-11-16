@@ -213,6 +213,18 @@ function renderWorkbench(demo, selectedTarget) {
   const format = catalog.formats.find((item) => item.id === demo.format);
   $("#format-guide").href = safeUrl(format.guideUrl);
   $("#format-guide").textContent = `Read the ${format.label} format guide ↗`;
+  $("#run-format-name").textContent = format.label;
+  const batchCommands = {
+    "run-batch-list": `python3 parsarium.py run-format ${demo.format} --list`,
+    "run-batch-controls": `python3 parsarium.py run-format ${demo.format} --results runs/${demo.format}-controls`,
+    "run-batch-file": `python3 parsarium.py run-format ${demo.format} --file INPUT_FILE --results runs/${demo.format}-my-file`,
+  };
+  for (const [id, command] of Object.entries(batchCommands)) {
+    const code = document.getElementById(id);
+    code.textContent = command;
+    code.parentElement.querySelector("[data-copy]").dataset.copy = command;
+  }
+  $("#run-batch-map").innerHTML = `runs/${escapeHtml(demo.format)}-controls/<br>├─ c/&lt;target&gt;/&lt;input-hash&gt;.json<br>├─ python/&lt;target&gt;/&lt;input-hash&gt;.json<br>└─ summary.json`;
   $("#demo-tabs").querySelectorAll("button").forEach((button, buttonIndex) => {
     button.setAttribute("aria-selected", String(buttonIndex === activeDemoIndex));
     button.tabIndex = buttonIndex === activeDemoIndex ? 0 : -1;

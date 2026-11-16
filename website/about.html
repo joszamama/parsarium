@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171448">
+  <meta name="description" content="Why Parsarium gives parser research a shared, reproducible set of programs and evidence.">
+  <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg">
+  <link rel="stylesheet" href="{{ROOT}}assets/styles.css">
+  <title>About Parsarium</title>
+</head>
+<body data-page="about" data-root="{{ROOT}}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- SITE_HEADER -->
+  <main id="main" class="about-page">
+    <section class="page-intro about-intro"><div class="container">
+      <p class="section-kicker">ABOUT THE PROJECT</p>
+      <h1>A common starting point for parser research.</h1>
+      <p>In my work on format fuzzing, I kept running into a practical problem: choosing and setting up the programs could take as much care as the experiment itself. Parsarium makes that groundwork visible and reusable.</p>
+      <div class="page-intro-links"><a href="#the-problem">The problem ↓</a><a href="#the-collection">What is collected ↓</a><a href="#what-next">What it enables ↓</a></div>
+    </div></section>
+
+    <section class="about-story section-pad" id="the-problem"><div class="container about-story-grid">
+      <div><p class="section-kicker">THE FRICTION</p><h2>The target set keeps changing.</h2></div>
+      <div class="about-prose"><p>Parser and grammar-fuzzing studies often assemble their own set of programs. A new set may be right for that study, but it leaves the next researcher rebuilding selection, installation, input adapters, and controls. Comparisons then depend on choices that can be hard to inspect.</p><p>I wanted a collection where someone can see <strong>why a program is here</strong>, which local API actually parses the format, and what the harness observed on a valid input. That is a modest starting point, but getting it right across languages and formats is substantial work.</p></div>
+    </div></section>
+
+    <section class="about-boundary section-pad"><div class="container about-boundary-grid">
+      <div><p class="section-kicker">WHY PARSERS?</p><h2>External input becomes program behavior here.</h2><p>A file, message, or text record enters a parser through a concrete API. The program then makes decisions from the structure it reads. A format gives researchers a way to find and exercise those entry points across many implementations.</p><p>Parsarium keeps the program in view: its release, parser family, input API, control result, and measured feedback scope.</p></div>
+      <div class="boundary-card" aria-label="External input reaches a program through a parser API"><span>EXTERNAL INPUT</span><strong>file · text · stream</strong><i aria-hidden="true">↓</i><span>PROGRAM ENTRY POINT</span><strong>documented parser API</strong><i aria-hidden="true">↓</i><span>OBSERVED BEHAVIOR</span><strong>structure · fields · output</strong></div>
+    </div></section>
+
+    <section class="about-evidence section-pad" id="the-collection"><div class="container">
+      <div class="section-heading"><div><p class="section-kicker">THE COLLECTION</p><h2>What a target contains.</h2><p>Each path has evidence for inclusion. Runnable paths add a Docker harness and a recorded feedback scope.</p></div></div>
+      <div class="about-evidence-grid">
+        <article><span>01</span><h3>Selection you can inspect</h3><p>Format-specific leads are checked against documented parsing APIs. Adoption ranks compare packages only within the same format and ecosystem.</p></article>
+        <article><span>02</span><h3>A result you can reproduce</h3><p>A pinned release, a small valid control, and an adapter show the parser producing an observable format-aware result.</p></article>
+        <article><span>03</span><h3>A target you can run</h3><p>Verified Docker harnesses accept local inputs and corpora. Coverage and AFL++ receipts say what code supplied feedback.</p></article>
+      </div>
+    </div></section>
+
+    <section class="about-possibilities section-pad" id="what-next"><div class="container about-possibilities-grid">
+      <div><p class="section-kicker">WHAT THIS COULD ENABLE</p><h2>More than one experiment.</h2></div>
+      <div><p>A shared target set can make fuzzer comparisons easier to repeat. It can also support studies of recurring parser design choices, cross-language code patterns, and security questions across implementations of the same format.</p><p>Those are research opportunities, not findings claimed by this collection. Parsarium currently establishes the programs, evidence, and runnable entry points that make such work possible.</p><a class="about-action" href="{{ROOT}}atlas/">Explore the targets ↗</a></div>
+    </div></section>
+
+    <section class="about-note"><div class="container"><p>Parsarium is an open research project by <strong>José Antonio Zamudio Amaya</strong>. The collection is meant to be useful to anyone who wants to inspect, reproduce, or extend the target set.</p><a href="https://github.com/joszamama/parsarium" target="_blank" rel="noopener noreferrer">View the repository ↗</a></div></section>
+  </main>
+  <!-- SITE_FOOTER -->
+  <script src="{{ROOT}}assets/site.js" defer></script>
+</body>
+</html>
