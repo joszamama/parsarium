@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/java/thumbnailator/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm java thumbnailator
+python3 parsarium.py run ascii_pnm java thumbnailator controls/ascii_pnm/red-green.ppm
+```

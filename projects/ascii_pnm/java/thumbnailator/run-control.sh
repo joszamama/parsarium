@@ -2,9 +2,9 @@
 set -eu
 mkdir -p /coverage
 java -javaagent:/work/jacocoagent.jar=destfile=/coverage/jacoco.exec,append=false,includes=* \
-  -cp '/work/classes:/work/lib/*' GenericHarness /input/control > /coverage/observed.raw
+  -cp '/work/classes:/work/parser-classes:/work/lib/*' GenericHarness /input/control > /coverage/observed.raw
 java -jar /work/jacococli.jar report /coverage/jacoco.exec \
-  --classfiles /work/lib/thumbnailator-0.4.21.jar --sourcefiles /work/parser-source --xml /coverage/jacoco.xml --quiet
+  --classfiles /work/parser-classes --sourcefiles /work/parser-source --xml /coverage/jacoco.xml --quiet
 python3 - <<'PYRUN'
 import json
 from pathlib import Path

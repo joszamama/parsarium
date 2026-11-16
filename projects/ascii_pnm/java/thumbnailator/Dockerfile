@@ -102,6 +102,7 @@ RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/ja
     && curl --fail --location --retry 3 https://github.com/CodeIntelligenceTesting/jazzer/releases/download/v0.26.0/jazzer-linux-arm64.tar.gz -o /work/jazzer.tar.gz \
     && echo '0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f  /work/jazzer.tar.gz' | sha256sum --check \
     && tar -xf /work/jazzer.tar.gz -C /work
+RUN mkdir /work/parser-classes && javac -g:source,lines,vars -d /work/parser-classes $(find /work/parser-source/net -name '*.java')
 COPY PnmAdapter.java GenericHarness.java /work/src/
 RUN mkdir /work/classes && javac -cp '/work/lib/*' -d /work/classes /work/src/*.java \
     && { java -version 2>&1 | head -1; /work/jazzer --version 2>&1 | head -1; } > /work/toolchain.txt
@@ -114,6 +115,7 @@ WORKDIR /work
 COPY --from=build /work/classes /work/classes
 COPY --from=build /work/lib /work/lib
 COPY --from=build /work/parser-source /work/parser-source
+COPY --from=build /work/parser-classes /work/parser-classes
 COPY --from=build /work/jacocoagent.jar /work/jacococli.jar /work/jazzer /work/jazzer_standalone.jar /work/
 COPY --from=build /work/toolchain.txt /work/toolchain.txt
 COPY run-control.sh /work/run-control.sh

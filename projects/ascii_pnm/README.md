@@ -67,6 +67,7 @@
 - [jave-core / Java](java/jave_core/README.md)
 - [lafa-imageio-pnm / Java](java/lafa_imageio_pnm/README.md)
 - [openpnp-opencv / Java](java/openpnp_opencv/README.md)
+- [thumbnailator / Java](java/thumbnailator/README.md)
 - [tika-image / Java](java/tika_image/README.md)
 - [v47-jaffree / Java](java/v47_jaffree/README.md)
 - [@catlabtech/webcvt-image-legacy / JavaScript](javascript/catlabtech_webcvt_image_legacy/README.md)

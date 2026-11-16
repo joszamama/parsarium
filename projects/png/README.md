@@ -85,6 +85,7 @@
 - [pdfbox / Java](java/pdfbox/README.md)
 - [pngj / Java](java/pngj/README.md)
 - [pngtastic / Java](java/pngtastic/README.md)
+- [thumbnailator / Java](java/thumbnailator/README.md)
 - [tika-image / Java](java/tika_image/README.md)
 - [xmlgraphics-commons / Java](java/xmlgraphics_commons/README.md)
 - [@jsquash/png / JavaScript](javascript/jsquash_png/README.md)
