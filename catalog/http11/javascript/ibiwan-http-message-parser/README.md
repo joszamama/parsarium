@@ -20,6 +20,11 @@
 
 Fork of miguelmota/http-message-parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/javascript/ibiwan_http_message_parser/README.md)
+
+```sh
+python3 parsarium.py build http11 javascript ibiwan_http_message_parser
+python3 parsarium.py run http11 javascript ibiwan_http_message_parser controls/http11/request.http
+```

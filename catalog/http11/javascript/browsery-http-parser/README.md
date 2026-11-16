@@ -20,6 +20,11 @@
 
 Browser-compatible fork of http-parser-js.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/javascript/browsery_http_parser/README.md)
+
+```sh
+python3 parsarium.py build http11 javascript browsery_http_parser
+python3 parsarium.py run http11 javascript browsery_http_parser controls/http11/request.http
+```

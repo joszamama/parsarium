@@ -1,6 +1,6 @@
 # PDF / Java
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/pdf/ranking.md) · [standard API inventory](../../../data/java/pdf/standard.json)
 
@@ -24,7 +24,7 @@
 - [swinglabs-pdf-renderer](swinglabs-pdf-renderer/README.md) — Docker harness ready
 - [scireum-jpod](scireum-jpod/README.md) — Docker harness ready
 - [jpod-original](jpod-original/README.md) — Docker harness ready
-- [pdfclown](pdfclown/README.md) — verified API path
+- [pdfclown](pdfclown/README.md) — Docker harness ready
 - [tess4j-pdfbox](tess4j-pdfbox/README.md) — Docker harness ready
 
 ## Standard and runtime APIs

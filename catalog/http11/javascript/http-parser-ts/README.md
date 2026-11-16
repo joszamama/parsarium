@@ -20,6 +20,11 @@
 
 Separate TypeScript rewrite based on the http-parser-js design.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/javascript/http_parser_ts/README.md)
+
+```sh
+python3 parsarium.py build http11 javascript http_parser_ts
+python3 parsarium.py run http11 javascript http_parser_ts controls/http11/request.http
+```
