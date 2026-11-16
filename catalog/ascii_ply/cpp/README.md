@@ -1,6 +1,6 @@
 # ASCII PLY / C++
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/ascii_ply/ranking.md) · [standard API inventory](../../../data/cpp/ascii_ply/standard.json)
 
@@ -15,7 +15,7 @@
 - [geogram](geogram/README.md) — Docker harness ready
 - [easy3d](easy3d/README.md) — Docker harness ready
 - [libpointmatcher](libpointmatcher/README.md) — Docker harness ready
-- [f3d](f3d/README.md) — verified API path
+- [f3d](f3d/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

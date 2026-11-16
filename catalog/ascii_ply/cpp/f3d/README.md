@@ -22,6 +22,11 @@
 
 C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/f3d/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp f3d
+python3 parsarium.py run ascii_ply cpp f3d controls/ascii_ply/triangle.ply
+```

@@ -11,6 +11,7 @@
 - [assimp / C++](cpp/assimp/README.md)
 - [cgal / C++](cpp/cgal/README.md)
 - [easy3d / C++](cpp/easy3d/README.md)
+- [f3d / C++](cpp/f3d/README.md)
 - [geogram / C++](cpp/geogram/README.md)
 - [libigl / C++](cpp/libigl/README.md)
 - [libpointmatcher / C++](cpp/libpointmatcher/README.md)
