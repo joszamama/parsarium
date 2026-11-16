@@ -1,0 +1,445 @@
+[
+  {
+    "name": "assimp",
+    "version": "6.0.6",
+    "license": "BSD-3-Clause AND CC-PDDC AND MIT AND BSL-1.0 AND Unlicense AND Zlib",
+    "license_evidence": "https://github.com/assimp/assimp/archive/refs/tags/v6.0.6.tar.gz",
+    "documentation": "https://github.com/assimp/assimp-docs/blob/master/source/usage/use_the_lib.rst",
+    "input_api": "Assimp::Importer::ReadFile(local filename)",
+    "adapter": "adapters/cpp/ascii_ply/assimp.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular face from ASCII PLY",
+    "family": "Assimp native PLY loader",
+    "family_note": "C and C++ Assimp APIs share the same native PLY loader."
+  },
+  {
+    "name": "open-mesh",
+    "version": "11.0.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://www.graphics.rwth-aachen.de/media/openmesh_static/Releases/11.0/OpenMesh-11.0.0.tar.bz2",
+    "documentation": "https://www.graphics.rwth-aachen.de/media/openmesh_static/Documentations/OpenMesh-6.0-Documentation/a00740.html",
+    "input_api": "OpenMesh::IO::read_mesh(mesh, local filename)",
+    "adapter": "adapters/cpp/ascii_ply/open_mesh.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "three vertices and one triangular face from ASCII PLY",
+    "family": "OpenMesh PLYReader",
+    "family_note": "OpenMesh uses its own PLYReader and mesh representation."
+  },
+  {
+    "name": "happly",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nmwsharp/happly/archive/refs/tags/v1.1.0.tar.gz",
+    "documentation": "https://github.com/nmwsharp/happly/blob/v1.1.0/README.md",
+    "input_api": "happly::PLYData(local filename); getVertexPositions(); getFaceIndices()",
+    "adapter": "adapters/cpp/ascii_ply/happly.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one triangular face from ASCII PLY",
+    "family": "hapPLY header-only PLY parser",
+    "family_note": "Independent header-only C++ PLY parser, not an alias of Assimp or OpenMesh."
+  },
+  {
+    "name": "tinyply",
+    "version": "3.0",
+    "license": "Public-Domain",
+    "license_evidence": "https://github.com/ddiakopoulos/tinyply/archive/refs/tags/3.0.tar.gz",
+    "documentation": "https://github.com/ddiakopoulos/tinyply/blob/3.0/README.md",
+    "input_api": "std::ifstream(local filename); tinyply::PlyFile::parse_header/request_properties_from_element/read",
+    "adapter": "adapters/cpp/ascii_ply/tinyply.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "three parsed vertices and one triangular face from ASCII PLY",
+    "family": "tinyply header-only PLY parser",
+    "family_note": "Independent header-only C++ PLY parser, not an alias of Assimp or OpenMesh."
+  },
+  {
+    "name": "cgal",
+    "version": "6.2.1",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/CGAL/cgal/releases/download/v6.2.1/CGAL-6.2.1.tar.xz",
+    "documentation": "https://doc.cgal.org/latest/Surface_mesh/group__PkgSurfaceMeshIOFuncPLY.html",
+    "input_api": "std::ifstream(local filename); CGAL::IO::read_PLY(stream, Surface_mesh, comments)",
+    "adapter": "adapters/cpp/ascii_ply/cgal.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "three vertices and one face in a parsed Surface_mesh",
+    "family": "CGAL Surface_mesh PLY reader",
+    "family_note": "CGAL owns its Surface_mesh PLY import implementation, distinct from Assimp, OpenMesh, hapPLY and tinyply."
+  },
+  {
+    "name": "rply",
+    "version": "1.1.4",
+    "license": "MIT",
+    "license_evidence": "https://w3.impa.br/~diego/software/rply/",
+    "documentation": "https://w3.impa.br/~diego/software/rply/",
+    "input_api": "ply_open(local filename); ply_read_header; ply_set_read_cb; ply_read",
+    "adapter": "adapters/cpp/ascii_ply/rply.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex callbacks and three face-index callbacks from ASCII PLY",
+    "family": "RPly 1.1.4 ANSI C parser",
+    "family_note": "C and C++ adapters link the same pinned RPly C core; the C++ adapter calls its documented extern C API."
+  },
+  {
+    "name": "libigl",
+    "version": "2.6.4",
+    "license": "MPL-2.0",
+    "license_evidence": "https://github.com/libigl/libigl/blob/v2.6.4/LICENSE.MPL2",
+    "documentation": "https://libigl.github.io/dox/readPLY_8h.html",
+    "input_api": "igl::readPLY(local filename, Eigen vertex matrix, Eigen face matrix)",
+    "adapter": "adapters/cpp/ascii_ply/libigl.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex positions and one triangle face matrix",
+    "family": "libigl readPLY over bundled tinyply 2.3.2",
+    "family_note": "libigl has a distinct documented Eigen-matrix API but shares the tinyply parser family with the separately verified tinyply standalone package (which is pinned at 3.0)."
+  },
+  {
+    "name": "pcl",
+    "version": "1.15.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/PointCloudLibrary/pcl/archive/refs/tags/pcl-1.15.1.tar.gz",
+    "documentation": "https://pointclouds.org/documentation/classpcl_1_1_p_l_y_reader.html",
+    "input_api": "pcl::PLYReader::read(local filename, PolygonMesh)",
+    "adapter": "adapters/cpp/ascii_ply/pcl.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices, one polygon and its three indices",
+    "family": "PCL PLYReader native implementation",
+    "family_note": "PCL has its own PLY reader implementation."
+  },
+  {
+    "name": "vtk",
+    "version": "9.7.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://www.vtk.org/files/release/9.7/VTK-9.7.2.tar.gz",
+    "documentation": "https://examples.vtk.org/site/Cxx/IO/ReadPLY/",
+    "input_api": "vtkPLYReader::SetFileName(local filename); Update; GetOutput",
+    "adapter": "adapters/cpp/ascii_ply/vtk.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices, one polygon and its three indices",
+    "family": "VTK vtkPLYReader over bundled vtkPLY syntax parser",
+    "family_note": "VTK bundles vtkPLY; distinct from RPly and the other listed PLY engines."
+  },
+  {
+    "name": "plywoot",
+    "version": "0.3.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/ton/PLYwoot/blob/v0.3.0/LICENSE",
+    "documentation": "https://github.com/ton/PLYwoot/blob/v0.3.0/README.md",
+    "input_api": "std::ifstream(local filename); plywoot::IStream(stream); readElement<Vertex, Layout>(); readElement<Triangle, Layout>()",
+    "adapter": "adapters/cpp/ascii_ply/plywoot.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one triangle with three indices",
+    "family": "PLYwoot native ASCII parser",
+    "family_note": "Independent header-only C++ PLY parser with direct stream input."
+  },
+  {
+    "name": "turboply",
+    "version": "1.0.6",
+    "license": "MIT",
+    "license_evidence": "https://github.com/guangxi-research/turboply/blob/v1.0.6/LICENSE",
+    "documentation": "https://github.com/guangxi-research/turboply/blob/v1.0.6/README.md",
+    "input_api": "PlyFileReader(local filename); parseHeader; bind_reader(VertexSpec, FaceSpec)",
+    "adapter": "adapters/cpp/ascii_ply/turboply.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one face with three indices",
+    "family": "TurboPLY native reader",
+    "family_note": "Independent C++20 PLY parser; compatibility build patch changes declaration order only."
+  },
+  {
+    "name": "geometry-central",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nmwsharp/geometry-central/blob/v1.1.0/LICENSE",
+    "documentation": "https://geometry-central.net/surface/utilities/simple_polygon_mesh/",
+    "input_api": "geometrycentral::surface::SimplePolygonMesh(local filename, \"ply\")",
+    "adapter": "adapters/cpp/ascii_ply/geometry_central.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three mesh vertices and one polygon with three indices",
+    "family": "Geometry Central SimplePolygonMesh over hapPLY",
+    "family_note": "Tagged Geometry Central v1.1.0 uses pinned hapPLY submodule commit 88f79725; this shares the hapPLY parser family with the standalone happly 1.1.0 path."
+  },
+  {
+    "name": "trimesh2",
+    "version": "2022.03.04",
+    "license": "GPL-2.0-only",
+    "license_evidence": "https://github.com/Forceflow/trimesh2/blob/2022.03.04/COPYING",
+    "documentation": "https://github.com/Forceflow/trimesh2/blob/2022.03.04/README.md",
+    "input_api": "trimesh::TriMesh::read(local filename)",
+    "adapter": "adapters/cpp/ascii_ply/trimesh2.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangle face with parsed indices from ASCII PLY",
+    "family": "TriMesh2 native PLY reader",
+    "family_note": "TriMesh2 parses PLY in its own TriMesh_io.cc; this Forceflow release is a fork of Szymon Rusinkiewicz TriMesh2."
+  },
+  {
+    "name": "vcglib",
+    "version": "2025.07",
+    "license": "GPL-3.0-only",
+    "license_evidence": "https://github.com/cnr-isti-vclab/vcglib/blob/2025.07/LICENSE.txt",
+    "documentation": "https://github.com/cnr-isti-vclab/vcglib/blob/2025.07/apps/sample/trimesh_attribute_ply/trimesh_attribute_ply.cpp",
+    "input_api": "vcg::tri::io::ImporterPLY<Mesh>::Open(mesh, local filename)",
+    "adapter": "adapters/cpp/ascii_ply/vcglib.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangle face with parsed indices from ASCII PLY",
+    "family": "VCGlib native plylib parser",
+    "family_note": "VCGlib ImporterPLY uses its bundled plylib implementation; this is not an alias of TriMesh2 or RPly."
+  },
+  {
+    "name": "assetkit",
+    "version": "0.7.4",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/recp/AssetKit/blob/v0.7.4/LICENSE",
+    "documentation": "https://github.com/recp/AssetKit/blob/v0.7.4/samples/read_meshes.c",
+    "input_api": "ak_load(&doc, local filename, AK_FILE_TYPE_AUTO); ak_meshFromGeometry; ak_meshPrimitiveIndexAccessor",
+    "adapter": "adapters/cpp/ascii_ply/assetkit.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular face with parsed indices from ASCII PLY",
+    "family": "AssetKit native ASCII PLY importer",
+    "family_note": "C and C++ adapters call the same AssetKit C API and native PLY importer."
+  },
+  {
+    "name": "rplycpp",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/manlito/rplycpp/blob/v1.1.0/LICENSE",
+    "documentation": "https://github.com/manlito/rplycpp/blob/v1.1.0/README.md",
+    "input_api": "rplycpp::PLYReader::Open(local filename); GetElements; Read(handlers)",
+    "adapter": "adapters/cpp/ascii_ply/rplycpp.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed vertices and one triangle face with indices from ASCII PLY",
+    "family": "rplycpp wrapper over bundled RPly",
+    "family_note": "Tagged rplycpp v1.1.0 exposes a distinct C++ callback API but bundles RPly; it shares the RPly parser family with the standalone rply C and C++ paths."
+  },
+  {
+    "name": "geogram",
+    "version": "1.10.1",
+    "license": "BSD-3-Clause AND MIT",
+    "license_evidence": "https://github.com/BrunoLevy/geogram/blob/v1.10.1/LICENSE",
+    "documentation": "https://github.com/BrunoLevy/geogram/wiki/Mesh",
+    "input_api": "GEO::initialize(); GEO::mesh_load(local filename, GEO::Mesh&, MeshIOFlags)",
+    "adapter": "adapters/cpp/ascii_ply/geogram.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three parsed mesh vertices and one triangle facet with indices",
+    "family": "Geogram PLYIOHandler over bundled RPly 1.1.4",
+    "family_note": "Geogram v1.10.1 registers PLYIOHandler in mesh_io.cpp and calls bundled RPly 1.1.4. This shares the RPly underlying syntax parser family with standalone RPly and rplycpp, but Geogram exposes its distinct mesh_load API and mesh representation."
+  },
+  {
+    "name": "easy3d",
+    "version": "2.6.1",
+    "license": "GPL-3.0-only AND MIT",
+    "license_evidence": "https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/LICENSE",
+    "documentation": "https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/easy3d/fileio/surface_mesh_io.h",
+    "input_api": "easy3d::SurfaceMeshIO::load(local filename); SurfaceMesh::n_vertices/n_faces/vertices(face)",
+    "adapter": "adapters/cpp/ascii_ply/easy3d.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three mesh vertices and one triangle face with indices from ASCII PLY",
+    "family": "Easy3D PLY reader over bundled RPly 1.1.4",
+    "family_note": "Easy3D SurfaceMeshIO and PlyReaderWriter use bundled RPly 1.1.4. It exposes a distinct SurfaceMesh API but shares the underlying RPly parser family with RPly, rplycpp, and Geogram."
+  },
+  {
+    "name": "libpointmatcher",
+    "version": "1.4.4",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/LICENSE",
+    "documentation": "https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/pointmatcher/IO.h",
+    "input_api": "PointMatcherIO<double>::loadPLY(local filename); DataPoints::features",
+    "adapter": "adapters/cpp/ascii_ply/libpointmatcher.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "points": 3,
+      "x_sum": 1,
+      "y_sum": 1,
+      "z_sum": 0
+    },
+    "scope": "three parsed point-cloud vertices with x/y/z coordinate sums from ASCII PLY",
+    "family": "libpointmatcher native PLY point-cloud parser",
+    "family_note": "Its pointmatcher/IO.cpp implements ASCII PLY parsing directly and does not delegate to RPly; it ignores the mesh face because the API returns point-cloud DataPoints."
+  },
+  {
+    "name": "meshioplusplus",
+    "version": "20.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/loumalouomega/meshioplusplus/blob/v20.0.0/LICENSE",
+    "documentation": "https://github.com/loumalouomega/meshioplusplus/blob/v20.0.0/src/cpp/include/meshioplusplus/formats/ply.hpp",
+    "input_api": "meshioplusplus::read_ply(local filename); Mesh::NumPoints; Mesh::CellRange/CellView::Conn",
+    "adapter": "adapters/cpp/ascii_ply/meshioplusplus.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three mesh vertices and one triangle face with parsed indices from ASCII PLY",
+    "family": "meshio++ native C++ PLY parser",
+    "family_note": "The tagged src/cpp/src/formats/ply.cpp implements PLY parsing directly. It is a separate package and underlying parser family from RPly, tinyply, hapPLY, and the other listed readers."
+  },
+  {
+    "name": "f3d",
+    "version": "4.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
+    "documentation": "https://github.com/f3d-app/f3d/blob/v4.0.1/library/public/scene.h",
+    "input_api": "f3d::scene::add(local filename); getSceneInfo",
+    "adapter": "adapters/cpp/ascii_ply/f3d.cpp",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "files": 1,
+      "actors": 1,
+      "points": 3,
+      "cells": 1
+    },
+    "scope": "ASCII triangle produced three parsed points and one cell",
+    "family": "F3D native PLY plugin over VTK vtkPLYReader",
+    "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser."
+  }
+]

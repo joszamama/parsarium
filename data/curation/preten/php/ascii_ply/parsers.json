@@ -1,0 +1,104 @@
+[
+  {
+    "name": "magdev/php-assimp",
+    "version": "0.3.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/magdev/php-assimp/blob/0.3.2/LICENSE",
+    "documentation": "https://github.com/magdev/php-assimp/blob/0.3.2/README.md",
+    "input_api_evidence": "https://github.com/magdev/php-assimp/blob/0.3.2/src/Assimp/Command/Verbs/AbstractVerb.php",
+    "format_verb_evidence": "https://github.com/magdev/php-assimp/blob/0.3.2/src/Assimp/Command/Verbs/InfoVerb.php",
+    "input_api": "Assimp\\Command\\Command::execute(new Assimp\\Command\\Verbs\\InfoVerb(local filename), true); Result::getOutput",
+    "adapter": "adapters/php/ascii_ply/magdev_php_assimp.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "One mesh with three vertices and one face reported from a valid local ASCII PLY triangle",
+    "family": "Assimp native PLY loader through magdev/php-assimp CLI wrapper",
+    "family_note": "The PHP 0.3.2 package invokes the external Assimp 6.0.6 CLI and returns its format-aware info output. It is a distinct PHP package path but shares Assimp PLY parsing with C/C++ paths. Version 0.6.0 is separately recorded as failing.",
+    "composer_lock": "adapters/php/ascii_ply/composer.lock"
+  },
+  {
+    "name": "collectiveaccess/providence",
+    "version": "2.0.12",
+    "source_kind": "tagged_source_module",
+    "source_lock": "data/php/ascii_ply/source-lock.json",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/collectiveaccess/providence/blob/2.0.12/License.txt",
+    "documentation": "https://github.com/collectiveaccess/providence/blob/2.0.12/app/lib/Parsers/PlyToStl.php",
+    "input_api": "PlyToStl::convert(local ASCII PLY path, local STL output path); parses vertex coordinates and face indices",
+    "adapter": "adapters/php/ascii_ply/providence_ply_to_stl.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "facets": 1,
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; converted STL contains one parsed facet, three vertices and the second X coordinate",
+    "family": "CollectiveAccess Providence native PHP PlyToStl",
+    "family_note": "Providence exposes a PHP parser class in app/lib/Parsers. Its conversion path reads PLY vertex and face rows; the adapter supplies a no-op file for an unused Db.php include. Search hits containing copied PlyToStl.php files are not counted as separate packages without independent release and API verification."
+  },
+  {
+    "name": "ahg/3d-model",
+    "version": "1.165.35",
+    "source_kind": "tagged_source_module",
+    "source_lock": "data/php/ascii_ply/source-lock.json",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://github.com/ArchiveHeritageGroup/heratio/blob/v1.165.35/LICENSE",
+    "documentation": "https://github.com/ArchiveHeritageGroup/heratio/blob/v1.165.35/packages/ahg-3d-model/src/Services/ModelMetadataExtractor.php",
+    "input_api": "Ahg3dModel\\Services\\ModelMetadataExtractor::extract(local PLY path, \"ply\") reads header element counts",
+    "adapter": "adapters/php/ascii_ply/ahg_3d_model.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    },
+    "scope": "PLY header-only parsing: declared vertex and face element counts from a valid local ASCII triangle; no vertex/face body data read",
+    "family": "Heratio pure PHP PLY header metadata extractor",
+    "family_note": "Distinct ahg/3d-model Composer library within the Heratio monorepo. Extracts PLY-specific header counts directly in PHP, without Assimp or Providence code."
+  },
+  {
+    "name": "collectiveaccess/pawtucket2",
+    "version": "2.0.12",
+    "source_kind": "tagged_source_module",
+    "source_lock": "data/php/ascii_ply/source-lock.json",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/collectiveaccess/pawtucket2/blob/2.0.12/License.txt",
+    "documentation": "https://github.com/collectiveaccess/pawtucket2/blob/2.0.12/app/lib/Parsers/PlyToStl.php",
+    "input_api": "PlyToStl::convert(local ASCII PLY path, local STL output path); parses vertex coordinates and face indices",
+    "adapter": "adapters/php/ascii_ply/providence_ply_to_stl.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "facets": 1,
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; converted STL contains one facet, three vertices and the second X coordinate",
+    "family": "CollectiveAccess native PHP PlyToStl shared with Providence",
+    "family_note": "Separately tagged Pawtucket2 application distribution; its 2.0.12 parser file is byte-identical to Providence 2.0.12. The shared adapter supplies a no-op file for an unused Db.php include. These are distinct package paths but only one source-level parser engine."
+  },
+  {
+    "name": "zelon88/hrconvert2",
+    "version": "v4.0.0",
+    "source_kind": "tagged_source_module",
+    "source_lock": "data/php/ascii_ply/source-lock.json",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/zelon88/HRConvert2/blob/v4.0.0/LICENSE",
+    "documentation": "https://github.com/zelon88/HRConvert2/blob/v4.0.0/Resources/Pipelines/Model/pipelineConfig.php",
+    "input_api_evidence": "https://github.com/zelon88/HRConvert2/blob/v4.0.0/Resources/Pipelines/Model/pipeline.php",
+    "input_api": "convertModels(local ASCII PLY path, local OBJ output path, \"obj\"); uses PyMeshLab to load PLY and Assimp to export OBJ",
+    "adapter": "adapters/php/ascii_ply/hrconvert2.php",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "x_sum": 1.0,
+      "completed_stages": 2
+    },
+    "scope": "One valid ASCII PLY triangle converted through real PyMeshLab and Assimp stages; OBJ geometry and both stage outputs observed",
+    "family": "HRConvert2 PHP Model pipeline over PyMeshLab PLY reader and Assimp exporter",
+    "family_note": "Separate tagged GPL PHP application module; PyMeshLab/MeshLab reads PLY and Assimp exports OBJ. The standalone adapter supplies host-application services and omits the web server sandbox. This is one package path over underlying native readers, not an independent PHP syntax parser."
+  }
+]

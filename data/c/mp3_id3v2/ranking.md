@@ -1,29 +1,29 @@
-# C × MP3 with ID3v2: verified parser ranking
+# C × MP3 with ID3v2: selected parsers
 
-20 verified third-party package paths; working goal 20, ceiling 30. Homebrew install-on-request counts use one 365-day window (2025-11-13 through 2026-11-13) within this ecosystem. They measure broad formula requests, not MP3-specific use.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-| Rank | Package | Pinned release | Homebrew requested installs | Scope | Underlying family |
+## Primary within-cell adoption metric
+
+Homebrew install-on-request count over 365 days.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [ffmpeg](https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html) | 9.0.2 | 1,763,198 | ID3v2 title and identified MP3 audio stream | FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader |
-| 2 | [mpv](https://mpv.io/manual/stable/) | 0.42.0 | 91,258 | ID3v2 title, MP3 track codec and duration | libmpv over FFmpeg |
-| 3 | [gstreamer](https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html) | 1.28.9 | 44,909 | ID3v2 title and parsed MPEG audio stream fields | GStreamer id3demux and mpegaudioparse |
-| 4 | [sox](https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c) | 14.4.2 | 28,127 | MP3 audio handler and one decoded sample on tagged input | libsox over libmad |
-| 5 | [sdl_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS) | 2.8.2 | 15,365 | ID3v2 title and artist, MP3 duration | SDL2_mixer tag reader over mpg123 audio decoder |
+| 2 | [mpv](https://mpv.io/manual/stable/) | 0.42.0 | 91,258 | ID3v2 title, MP3 audio track codec and duration from local tagged file | libmpv local media frontend over FFmpeg libavformat and libavcodec |
+| 3 | [gstreamer](https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html) | 1.28.9 | 44,909 | ID3v2 title plus one parsed MPEG audio stream with sample rate and channels | GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer |
+| 4 | [sox](https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c) | 14.4.2 | 28,127 | MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed | libsox MP3 handler over libmad decoder |
+| 5 | [sdl_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS) | 2.8.2 | 15,365 | ID3v2 title and artist plus a 1-second MP3 music duration | SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder |
 | 6 | [mpg123](https://www.mpg123.org/api/group__mpg123__metadata.shtml) | 1.33.7 | 12,297 | ID3v2 title/version after scanning valid MP3 audio | libmpg123 MPEG audio and ID3v2 parser |
-| 7 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 9,161 | ID3v2 title, MP3 stream info and one decoded frame | libsndfile over mpg123 |
-| 8 | [lame](https://github.com/lameproject/lame/blob/master/include/lame.h) | 4.0 | 6,924 | MP3 frame fields and 576 decoded samples on tagged input | LAME HIP over libmpg123 |
+| 7 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 9,161 | ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame | libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader |
+| 8 | [lame](https://github.com/lameproject/lame/blob/master/include/lame.h) | 4.0 | 6,924 | MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed | LAME HIP decoder interface over libmpg123 |
 | 9 | [taglib](https://taglib.org/api/) | 2.3.2 | 4,111 | ID3v2 title and artist from a valid tagged MP3 | TagLib ID3v2 parser |
-| 10 | [aubio](https://aubio.org/doc/latest/io_2test-source_8c-example.html) | 0.4.9 | 2,212 | MP3 stream fields and 256 decoded samples | aubio over Apple AudioToolbox or libsndfile (runtime choice unresolved) |
-| 11 | [libmediainfo](https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start) | 26.10 | 1,285 | ID3v2 title, MPEG Audio format and sample rate | MediaInfoLib MPEG audio and ID3v2 parsers |
-| 12 | [libmad](https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in) | 0.16.5 | 1,143 | MPEG Layer III frame and 576 decoded samples after ID3v2 tag | libmad MP3 decoder |
-| 13 | [libid3tag](https://codeberg.org/tenacityteam/libid3tag/src/tag/0.16.4/include/id3tag.h.in) | 0.16.4 | 479 | ID3v2 title and normalized tag version/frame count | libid3tag ID3v2 metadata parser |
-| 14 | [sdl2_sound](https://github.com/icculus/SDL_sound/blob/v2.0.6/src/SDL_sound.h) | 2.0.6 | 402 | MP3 PCM, stream fields and duration | SDL_sound over bundled dr_mp3/minimp3 |
-| 15 | [id3lib](https://id3lib.sourceforge.net/api/index.html) | 3.8.3 | 199 | ID3v2 title and frame count | id3lib C++ tag parser |
-| 16 | [csfml](https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h) | 3.0.0 | 178 | Decoded MP3 samples and stream fields | CSFML over SFML/minimp3 |
-| 17 | [miniaudio](https://github.com/mackron/miniaudio) | 0.11.26 | 125 | MP3 audio and decoded PCM from tagged input | miniaudio bundled dr_mp3 |
-| 18 | [libmp3splt](https://mp3splt.sourceforge.net/mp3splt_page/documentation/libmp3splt_api/mp3splt_8h.html) | 0.9.2 | 101 | MP3 frame-aware in-memory split from tagged file | libmp3splt plugin over libmad and libid3tag |
 
-| — | [dr_libs](https://github.com/mackron/dr_libs/blob/mp3-0.7.4/dr_mp3.h) | mp3-0.7.4 | unavailable | Tagged MP3 decode and raw ID3v2 tag recognition | standalone dr_mp3 over minimp3 |
-| — | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | unavailable | ID3v2 title and MP3 audio track | VLC media parser with bundled TagLib and MPEG audio plugins |
+## Supplemental numeric evidence
 
-TagLib and id3lib C bindings use their C++ cores; libsndfile shares mpg123 for MP3 and ID3v2 parsing; MediaInfoLib uses its own format parsers and links ZenLib for utilities. SDL_mixer uses its own ID3v2 tag reader and shares mpg123 for MP3 audio. SoX uses libmad for audio and does not expose the control title; the direct libmad adapter skips the tag and decodes a frame. miniaudio embeds dr_mp3 and does not expose the control title. CSFML uses the SFML minimp3 engine. GStreamer C and C++ call sites share its ID3 demuxer and MPEG audio parser plugins. libmpv shares FFmpeg libavformat and libavcodec with the FFmpeg row. LAME HIP shares libmpg123 in the installed build. Aubio links Apple AudioToolbox and libsndfile; the run does not expose its chosen backend. The other C and C++ call sites share their respective C libraries. libid3tag parses tags without decoding MP3 audio. One lead remains unresolved; the working target is reached, while additional parser paths outside the bounded search remain uncertain. SDL2_sound is separate from SDL_mixer and shares dr_mp3/minimp3 lineage with miniaudio and standalone dr_libs; the standalone release has no Homebrew formula, so its popularity metric and rank are unresolved. libmp3splt produced a frame-aligned half-second MP3 segment from the tagged control and shares libmad and libid3tag. libVLC uses the bundled TagLib and MPEG audio plugins; exact runtime plugin selection was not traced. Its Homebrew cask install count is not comparable to formula install-on-request counts, so its rank is unresolved. See `cell.json`, `registry-snapshot.json`, and `verification.json`.
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
+
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | [Debian source installed count](https://sources.debian.org/src/vlc/) | 68,409 | ID3v2 title and recognized MP3 audio track from valid local tagged MP3 | VLC media parser with bundled TagLib and MPEG audio plugins |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

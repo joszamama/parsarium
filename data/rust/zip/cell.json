@@ -1,22 +1,30 @@
 {
   "ecosystem": "rust",
   "format": "zip",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
-    "zip", "zip archive", "zip reader", "zip extract", "unzip", "libzip", "pkzip"
+    "zip",
+    "zip archive",
+    "zip reader",
+    "zip extract",
+    "unzip",
+    "libzip",
+    "pkzip"
   ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 526,
   "unique_search_hits": 384,
   "unresolved_documentation_leads": 10,
-  "uncertainty": "Seven first-page crates.io searches saved 526 hits and 384 unique names. The per-query windows were 100, 100, 100, 100, 100, 10, and 16; five query totals exceed 100 and their tails were not reviewed. Twenty pinned open-source crate paths passed the valid one-entry DEFLATE ZIP control. They represent 12 underlying parser families or lineages: several wrap or fork zip-rs, two share rs-async-zip, and archive-core uses zip-forensic-core. The count is package paths, not independent engines. Ten plausible leads remain unresolved, including some with higher registry download counts than accepted paths. zip_structs checks a local header only, archiver-rs checks entry names only, and two archive readers use external flate2 for DEFLATE. One successful control does not establish support for ZIP64, encryption, unusual compression methods, or other ZIP features. The libarchive2 binding builds vendored native libarchive code via CMake and bindgen. crates.io recent downloads count all versions over approximately 90 days and are compared only within Rust. This search is partial and may miss eligible packages.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/rust/zip/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/rust/zip/parsers.json",
   "third_party_control_results": "data/rust/zip/verification.json",
   "runtime_evidence": "data/rust/zip/standard.json",
   "registry_snapshot": "data/rust/zip/registry-snapshot.json",
-  "unresolved_leads": "data/rust/zip/leads.json"
+  "unresolved_leads": "data/rust/zip/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/rust/zip"
 }

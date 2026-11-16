@@ -13,7 +13,11 @@
     "scope": "local MP3 identification and ID3v2 title, artist and album",
     "adapter_label": "jaudiotagger",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot"}
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    }
   },
   {
     "name": "mp3agic",
@@ -29,23 +33,12 @@
     "scope": "local MP3 frames and ID3v2 title, artist, album and API tag version",
     "adapter_label": "mp3agic",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3.0"}
-  },
-  {
-    "name": "tika-audiovideo",
-    "group": "org.apache.tika",
-    "artifact": "tika-parser-audiovideo-module",
-    "version": "4.2.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Release JAR META-INF/LICENSE and Maven POM",
-    "input_api": "Mp3Parser.parse(TikaInputStream, ContentHandler, Metadata, ParseContext)",
-    "documentation": "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-sources.jar",
-    "documentation_archive_entry": "org/apache/tika/parser/mp3/Mp3Parser.java",
-    "family": "Apache Tika native MP3 and ID3v2 parser",
-    "scope": "local tagged MP3 title, artist and album metadata",
-    "adapter_label": "tika",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot"}
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "tag_version": "3.0"
+    }
   },
   {
     "name": "jlayer",
@@ -61,7 +54,11 @@
     "scope": "local tagged MP3 frame frequency and layer, plus ID3v2 presence",
     "adapter_label": "jlayer",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"frequency": 8000, "layer": 3, "id3v2_present": true}
+    "expected_output": {
+      "frequency": 8000,
+      "layer": 3,
+      "id3v2_present": true
+    }
   },
   {
     "name": "jave-core",
@@ -77,7 +74,12 @@
     "scope": "local tagged MP3 format, codec, sample rate and channels",
     "adapter_label": "jave",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"format": "mp3", "codec": "mp3 (mp3float)", "frequency": 8000, "channels": 1}
+    "expected_output": {
+      "format": "mp3",
+      "codec": "mp3 (mp3float)",
+      "frequency": 8000,
+      "channels": 1
+    }
   },
   {
     "name": "jaffree",
@@ -93,7 +95,12 @@
     "scope": "local tagged MP3 codec, sample rate, title and artist",
     "adapter_label": "jaffree",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"codec": "mp3", "frequency": 8000, "title": "Parsarium", "artist": "Control"}
+    "expected_output": {
+      "codec": "mp3",
+      "frequency": 8000,
+      "title": "Parsarium",
+      "artist": "Control"
+    }
   },
   {
     "name": "mp3spi",
@@ -110,7 +117,13 @@
     "adapter_module": "mp3spi",
     "adapter_label": "mp3spi",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"type": "MP3", "title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3"}
+    "expected_output": {
+      "type": "MP3",
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "tag_version": "3"
+    }
   },
   {
     "name": "javacv",
@@ -127,7 +140,12 @@
     "adapter_module": "bytedeco",
     "adapter_label": "javacv",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"format": "mp3", "codec": "mp3float", "frequency": 8000, "channels": 1}
+    "expected_output": {
+      "format": "mp3",
+      "codec": "mp3float",
+      "frequency": 8000,
+      "channels": 1
+    }
   },
   {
     "name": "bytedeco-ffmpeg",
@@ -144,7 +162,11 @@
     "adapter_module": "bytedeco",
     "adapter_label": "ffmpeg",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"format": "mp3", "frequency": 8000, "channels": 1}
+    "expected_output": {
+      "format": "mp3",
+      "frequency": 8000,
+      "channels": 1
+    }
   },
   {
     "name": "jcodec",
@@ -160,54 +182,11 @@
     "scope": "first MP3 audio frame codec, byte length and timescale from local tagged MP3",
     "adapter_label": "jcodec",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"codec": "MP3", "frame_bytes": 288, "timescale": 8000}
-  },
-  {
-    "name": "codecmedia",
-    "group": "me.tamkungz.codecmedia",
-    "artifact": "codecmedia",
-    "version": "1.2.2",
-    "license": "Apache-2.0",
-    "license_evidence": "Release Maven POM and project LICENSE",
-    "input_api": "CodecMedia.createDefault().probe(Path).streams()",
-    "documentation": "https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar",
-    "documentation_archive_entry": "me/tamkungz/codecmedia/CodecMediaEngine.html",
-    "family": "CodecMedia native MP3 frame parser",
-    "scope": "local tagged MP3 codec, sample rate and channels",
-    "adapter_label": "codecmedia",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"codec": "mp3", "frequency": 8000, "channels": 1}
-  },
-  {
-    "name": "jid3lib",
-    "group": "net.sf.javamusictag",
-    "artifact": "jid3lib",
-    "version": "0.5.4",
-    "license": "LGPL-2.1",
-    "license_evidence": "Project LGPL.html v2.1 and release Maven POM 'LPGL' declaration",
-    "input_api": "new MP3File(File).getID3v2Tag(), getSongTitle(), getLeadArtist(), getAlbumTitle()",
-    "documentation": "https://github.com/ericfarng/jid3lib",
-    "family": "jid3lib native ID3v2 tag parser; historical ancestry shared with jaudiotagger and mp3agic",
-    "scope": "local tagged MP3 title, artist and album",
-    "adapter_label": "jid3lib",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot"}
-  },
-  {
-    "name": "taglib-java",
-    "group": "cz.skyba",
-    "artifact": "taglib",
-    "version": "1.0.0",
-    "license": "LGPL-2.1 OR MPL-2.0",
-    "license_evidence": "Release Maven POM dual licenses",
-    "input_api": "new MpegFile(Path).hasId3v2Tag(), id3v2Tag(), detailedProperties()",
-    "documentation": "https://repo.maven.apache.org/maven2/cz/skyba/taglib/1.0.0/taglib-1.0.0-sources.jar",
-    "documentation_archive_entry": "cz/skyba/taglib/mpeg/MpegFile.java",
-    "family": "TagLib Java adaptation with native Java MPEG and ID3v2 implementation",
-    "scope": "local tagged MP3 title, artist, album and sample rate",
-    "adapter_label": "taglib",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"title": "Parsarium", "artist": "Control", "album": "Pilot", "frequency": 8000}
+    "expected_output": {
+      "codec": "MP3",
+      "frame_bytes": 288,
+      "timescale": 8000
+    }
   },
   {
     "name": "javamp3",
@@ -222,109 +201,10 @@
     "scope": "44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes",
     "adapter_label": "javamp3",
     "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
-    "expected_output": {"frequency": 44100, "stereo": false, "sample_bytes": 32}
-  },
-  {
-    "name": "tianscar-mp3spi",
-    "group": "com.tianscar.javasound",
-    "artifact": "javasound-mp3",
-    "version": "1.9.8",
-    "license": "LGPL-2.0-only",
-    "license_evidence": "Release Maven POM GNU Library or Lesser General Public License v2.0 declaration",
-    "input_api": "new MpegAudioFileReader().getAudioFileFormat(File).properties()",
-    "documentation": "https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-mp3/1.9.8/javasound-mp3-1.9.8-sources.jar",
-    "documentation_archive_entry": "javazoom/spi/mpeg/sampled/file/MpegAudioFileReader.java",
-    "family": "Tianscar fork of JavaZOOM MP3SPI over JLayer and Tritonus",
-    "family_note": "Its source MpegAudioFileReader differs from the soundlibs MP3SPI release but preserves the same JavaZOOM parser lineage and public API.",
-    "scope": "local tagged MP3 type, ID3v2 title, artist, album and tag version",
-    "adapter_module": "tianscar",
-    "adapter_label": "tianscar",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"type": "MP3", "title": "Parsarium", "artist": "Control", "album": "Pilot", "tag_version": "3"}
-  },
-  {
-    "name": "bramp-ffmpeg",
-    "group": "net.bramp.ffmpeg",
-    "artifact": "ffmpeg",
-    "version": "0.9.2",
-    "license": "BSD-2-Clause",
-    "license_evidence": "Release Maven POM and project LICENSE",
-    "input_api": "new FFprobe(String localExecutable).probe(String localMp3).getStreams(), getFormat().getTags()",
-    "documentation": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar",
-    "documentation_archive_entry": "net/bramp/ffmpeg/FFprobe.html",
-    "family": "bramp FFprobe CLI wrapper over FFmpeg",
-    "scope": "local tagged MP3 format, codec, sample rate, channels and title",
-    "adapter_module": "bramp",
-    "adapter_label": "bramp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"format": "mp3", "codec": "mp3", "frequency": 8000, "channels": 1, "title": "Parsarium"}
-  },
-  {
-    "name": "imagic-ffmpeg-java",
-    "group": "ch.imagic",
-    "artifact": "ffmpeg-java",
-    "version": "0.1.2",
-    "license": "BSD-2-Clause",
-    "license_evidence": "Release Maven POM and fork project LICENSE",
-    "input_api": "new FFprobe(Executor,File localExecutable).probe(File localMp3).get(), getStreams(), getFormat().getTags()",
-    "documentation": "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar",
-    "documentation_archive_entry": "ch/imagic/ffmpeg/FFprobe.html",
-    "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg",
-    "scope": "local tagged MP3 format, codec, sample rate, channels and title",
-    "adapter_module": "imagic",
-    "adapter_label": "imagic",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"format": "mp3", "codec": "mp3", "frequency": 8000, "channels": 1, "title": "Parsarium"}
-  },
-  {
-    "name": "v47-jaffree",
-    "group": "io.v47.jaffree",
-    "artifact": "jaffree",
-    "version": "2.1.0",
-    "license": "GPL-3.0-only",
-    "license_evidence": "Release Maven POM and fork project LICENSE",
-    "input_api": "FFprobe.atPath(Path localBin).setShowStreams(true).setShowFormat(true).setInput(Path localMp3).execute()",
-    "documentation": "https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar",
-    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
-    "family": "v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg",
-    "scope": "local tagged MP3 codec, sample rate, channels and title",
-    "adapter_module": "v47",
-    "adapter_label": "v47",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"codec": "mp3", "frequency": 8000, "channels": 1, "title": "Parsarium"}
-  },
-  {
-    "name": "vlcj-info",
-    "group": "uk.co.caprica",
-    "artifact": "vlcj-info",
-    "version": "2.0.3",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "Release Maven POM and project LICENSE",
-    "input_api": "new MediaInfoFile(String localMp3).open(), info(String MediaInfo template)",
-    "documentation": "https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar",
-    "documentation_archive_entry": "uk/co/caprica/vlcjinfo/MediaInfoFile.html",
-    "family": "vlcj-info JNA binding to libmediainfo",
-    "scope": "local tagged MP3 format, sample rate, channels and title",
-    "adapter_module": "vlcj_info",
-    "adapter_label": "vlcj_info",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {"format": "MPEG Audio", "frequency": 8000, "channels": 1, "title": "Parsarium"}
-  },
-  {
-    "name": "mediainfo-jna-wrapper",
-    "group": "com.amilesend",
-    "artifact": "mediainfo-jna-wrapper",
-    "version": "2.1.9",
-    "license": "MIT + MediaInfoLib Binary License",
-    "license_evidence": "Release parent Maven POM and project LICENSE; bundled MediaInfoLib binary notices apply",
-    "input_api": "new MediaInfo(new MediaInfoAccessor(MediaInfoLibrary.newInstance())).open(File localMp3).get(StreamType,int,String)",
-    "documentation": "https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar",
-    "documentation_archive_entry": "com/amilesend/mediainfo/MediaInfo.html",
-    "family": "amilesend JNA binding to libmediainfo",
-    "scope": "local 72,941-byte tagged MP3 format, sample rate, channels and title",
-    "adapter_module": "amilesend",
-    "adapter_label": "amilesend",
-    "control": "controls/mp3_id3v2/tone-tags-long.mp3",
-    "expected_output": {"format": "MPEG Audio", "frequency": 8000, "channels": 1, "title": "Parsarium"}
+    "expected_output": {
+      "frequency": 44100,
+      "stereo": false,
+      "sample_bytes": 32
+    }
   }
 ]

@@ -98,50 +98,6 @@
     ]
   },
   {
-    "name": "intervention/image-driver-vips",
-    "version": "4.2.0",
-    "license": "MIT",
-    "license_evidence": "https://github.com/Intervention/image-driver-vips/blob/2aca734a68c447aed1304d8b2121b223d2790e00/LICENSE",
-    "documentation": "https://github.com/Intervention/image-driver-vips/blob/2aca734a68c447aed1304d8b2121b223d2790e00/src/Driver.php",
-    "input_api": "Vips\\Driver::decodeImage(local P3 file); width/height",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/composer.lock",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "libvips PPM/PNM decoder",
-    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine.",
-    "php_ini": [
-      "ffi.enable=1",
-      "zend.max_allowed_stack_size=-1"
-    ]
-  },
-  {
-    "name": "osiemsiedem/intervention-image-vips-driver",
-    "version": "v0.11.0",
-    "license": "MIT",
-    "license_evidence": "https://github.com/osiemsiedem/intervention-image-vips-driver/blob/3068585d60277674f9ebfc73e5577db86ab28e4a/LICENSE.md",
-    "documentation": "https://github.com/osiemsiedem/intervention-image-vips-driver/blob/3068585d60277674f9ebfc73e5577db86ab28e4a/src/Decoder.php",
-    "input_api": "Vips\\Decoder::initFromPath(local P3 file); width/height",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/legacy/composer.lock",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "libvips PPM/PNM decoder",
-    "family_note": "This package path delegates ASCII P3 decoding to libvips through the PHP Vips binding. It is not an independent decoder engine. This older package is marked abandoned by Packagist.",
-    "php_ini": [
-      "ffi.enable=1",
-      "zend.max_allowed_stack_size=-1"
-    ]
-  },
-  {
     "name": "imagine/imagine",
     "version": "1.5.4",
     "license": "MIT",
@@ -159,35 +115,6 @@
     "scope": "decoded image dimensions",
     "family": "ImageMagick PNM decoder",
     "family_note": "This package path delegates ASCII P3 decoding to the separately built PECL Imagick extension and ImageMagick; it is not an independent engine."
-  },
-  {
-    "name": "pecl/imagick",
-    "version": "3.8.1",
-    "license": "PHP-3.01",
-    "license_evidence": "https://github.com/Imagick/imagick/blob/3.8.1/LICENSE",
-    "documentation": "https://www.php.net/manual/en/imagick.readimage.php",
-    "input_api": "Imagick::readImage(local P3 path); getImageWidth/getImageHeight/getImagePixelColor",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "source_kind": "pecl",
-    "source_lock": "data/php/ascii_pnm/pecl-imagick-lock.json",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "left_rgb": [
-        255,
-        0,
-        0
-      ],
-      "right_rgb": [
-        0,
-        255,
-        0
-      ]
-    },
-    "scope": "decoded dimensions and RGB pixels",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "PECL Imagick is an open-source extension built from a SHA-256-pinned release; it delegates ASCII P3 decoding to installed ImageMagick, not to bundled PHP GD."
   },
   {
     "name": "calcinai/php-imagick",
@@ -238,25 +165,6 @@
     "family_note": "This Composer command wrapper invokes the installed ImageMagick CLI to identify ASCII P3; it is not an independent decoder engine."
   },
   {
-    "name": "phpthumb/phpthumb",
-    "version": "2.5.1",
-    "license": "MIT",
-    "license_evidence": "https://github.com/PHPThumb/PHPThumb/blob/b76d5bd7b53a69ac0c9572802b06c7071479cf04/LICENSE",
-    "documentation": "https://github.com/PHPThumb/PHPThumb/blob/b76d5bd7b53a69ac0c9572802b06c7071479cf04/README.md",
-    "input_api": "PHPThumb\\Imagick(local P3 file)->getCurrentDimensions()",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/imagick_wrappers/composer.lock",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "This Composer wrapper delegates ASCII P3 decoding to PECL Imagick and installed ImageMagick; it is not an independent decoder engine.",
-    "requires_imagick": true
-  },
-  {
     "name": "league/glide",
     "version": "4.2.0",
     "license": "MIT",
@@ -275,44 +183,6 @@
     "family": "ImageMagick PNM decoder",
     "family_note": "Glide reads local P3 bytes and delegates decoding to Intervention Image with the separately built PECL Imagick extension and ImageMagick; it is not an independent decoder.",
     "requires_imagick": true
-  },
-  {
-    "name": "phpixie/image",
-    "version": "3.3",
-    "license": "BSD-3-Clause",
-    "license_evidence": "https://github.com/PHPixie/Image/blob/a75f6cb484c8b8a5f26c4e2772d81fdff71b3265/composer.json",
-    "documentation": "https://github.com/PHPixie/Image/blob/a75f6cb484c8b8a5f26c4e2772d81fdff71b3265/README.md",
-    "input_api": "PHPixie\\Image::read(local P3 file, imagick driver); width/height",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "PHPixie Image delegates ASCII P3 decoding to the separately built PECL Imagick extension and ImageMagick; it is not an independent decoder.",
-    "requires_imagick": true
-  },
-  {
-    "name": "francodacosta/phmagick",
-    "version": "v5.0.2",
-    "license": "MIT",
-    "license_evidence": "https://github.com/francodacosta/phmagick/blob/8871ec58ca5d12cc458d08ce1b9801d66ef35f16/composer.json",
-    "documentation": "https://github.com/francodacosta/phmagick/blob/8871ec58ca5d12cc458d08ce1b9801d66ef35f16/docs/Convert.html",
-    "input_api": "phMagick\\Core\\Runner::run(Convert(local P3 file, local PNG output)); inspect converted image dimensions",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/image_pipeline/composer.lock",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "mime": "image/png"
-    },
-    "scope": "converted PNG dimensions and MIME",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "phMagick invokes the installed ImageMagick CLI to decode ASCII P3 and output PNG; it is not an independent decoder."
   },
   {
     "name": "php-ffmpeg/php-ffmpeg",
@@ -334,63 +204,6 @@
     "family_note": "FFProbe delegates ASCII P3 probing to the installed FFmpeg PPM decoder. This is one package path into a distinct FFmpeg parser family."
   },
   {
-    "name": "phphleb/imageresizer",
-    "version": "v2.0.8",
-    "license": "MIT",
-    "license_evidence": "https://github.com/phphleb/imageresizer/blob/b785b6b9c9089e836c669136d70230988ef91d07/composer.json",
-    "documentation": "https://github.com/phphleb/imageresizer/blob/b785b6b9c9089e836c669136d70230988ef91d07/readme.md",
-    "input_api": "SimpleImage::load(local P3 file) with Imagick processor; getWidth/getHeight",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/media_pipeline/composer.lock",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "The package uses PECL Imagick and installed ImageMagick to decode P3. The README lists common formats but not PNM; this pinned release accepts the valid P3 control through its documented local-path API.",
-    "requires_imagick": true
-  },
-  {
-    "name": "tpmanc/yii2-imagick",
-    "version": "1.3.2",
-    "license": "BSD-3-Clause",
-    "license_evidence": "https://github.com/tpmanc/yii2-imagick/blob/be5f3c1dc1b1f18acde1f4672bf6d4dc77f2fd1a/composer.json",
-    "documentation": "https://github.com/tpmanc/yii2-imagick/blob/be5f3c1dc1b1f18acde1f4672bf6d4dc77f2fd1a/README.md",
-    "input_api": "tpmanc\\imagick\\Imagick::open(local P3 file); getWidth/getHeight",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/extension_wrappers/composer.lock",
-    "requires_imagick": true,
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "The package delegates ASCII P3 decoding to PECL Imagick and ImageMagick."
-  },
-  {
-    "name": "horde/image",
-    "version": "v3.0.0",
-    "license": "LGPL-2.1-only",
-    "license_evidence": "https://github.com/horde/Image/blob/a7686307adba2f25f32be6b219d51742fb338ba6/LICENSE",
-    "documentation": "https://github.com/horde/Image/blob/a7686307adba2f25f32be6b219d51742fb338ba6/doc/USAGE.md",
-    "input_api": "Horde\\Image\\Driver\\ImagickDriver::loadFile(local P3 file); size()",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/extension_wrappers/composer.lock",
-    "requires_imagick": true,
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "The package delegates ASCII P3 decoding to PECL Imagick and ImageMagick."
-  },
-  {
     "name": "intervention/image-laravel",
     "version": "4.1.1",
     "license": "MIT",
@@ -408,24 +221,5 @@
     "scope": "decoded image dimensions",
     "family": "ImageMagick PNM decoder",
     "family_note": "The Laravel integration package registers a facade that delegates ASCII P3 decoding to Intervention Image and PECL Imagick/ImageMagick. The adapter supplies a minimal pinned Illuminate container, config repository, and config helper."
-  },
-  {
-    "name": "locomotivemtl/charcoal-image",
-    "version": "v0.4.3.4",
-    "license": "MIT",
-    "license_evidence": "https://github.com/locomotivemtl/charcoal-image/blob/d94c2b9809c12fe63bac05702db6124537d843c5/composer.json",
-    "documentation": "https://github.com/locomotivemtl/charcoal-image/blob/d94c2b9809c12fe63bac05702db6124537d843c5/README.md",
-    "input_api": "Charcoal\\Image\\Imagick\\ImagickImage::open(local P3 file); width/height",
-    "adapter": "adapters/php/ascii_pnm/parse.php",
-    "composer_lock": "adapters/php/ascii_pnm/palette_wrappers/composer.lock",
-    "requires_imagick": true,
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    },
-    "scope": "decoded image dimensions",
-    "family": "ImageMagick PNM decoder",
-    "family_note": "This Composer image wrapper delegates ASCII P3 decoding to PECL Imagick and installed ImageMagick; it is not an independent decoder engine."
   }
 ]

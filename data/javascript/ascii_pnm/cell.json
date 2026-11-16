@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "ascii_pnm",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 22,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "pnm",
@@ -20,10 +20,12 @@
   "search_hits_recorded": 658,
   "unique_search_hits": 458,
   "unresolved_documentation_leads": 2,
-  "uncertainty": "Twenty-two distinct package paths passed valid ASCII P3 or P2 controls, exceeding the working goal of 20 but below the original ceiling of 30. Eight npm queries saved 658 hits and 458 distinct names, at most 100 per query; broad ppm/pgm parser queries returned many unrelated language parsers. Two plausible leads remain unresolved: the Fitbit PPM decoder lacks established ASCII support and a tested local API, and the early pnm package lacks a documented input API. The pinned ppm-parser release failed the valid P3 control and was excluded. The high-download ImageScript project did not document a PNM input API and was excluded. Eleven accepted packages expose only format-aware PNM dimensions, one exposes format-aware metadata, and ten expose pixels; forks and wrappers of image-size are labeled by family. The controls check 2\u00d71 P2 and P3 samples only; P1 and higher maxval variants remain untested in this cell. The Chromium probe rejected valid P3 input; that result is limited to one runtime build. Discovery remains partial and other qualified packages may sit outside the saved search windows.",
+  "uncertainty": "10 of 22 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/javascript/ascii_pnm/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/javascript/ascii_pnm/parsers.json",
   "third_party_control_results": "data/javascript/ascii_pnm/verification.json",
   "runtime_evidence": "data/javascript/ascii_pnm/standard.json",
   "registry_snapshot": "data/javascript/ascii_pnm/registry-snapshot.json",
-  "unresolved_leads": "data/javascript/ascii_pnm/leads.json"
+  "unresolved_leads": "data/javascript/ascii_pnm/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/javascript/ascii_pnm"
 }

@@ -1,20 +1,28 @@
 {
   "ecosystem": "java",
   "format": "mp3_id3v2",
-  "status": "verified_target_search_incomplete",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
-  "search_queries": ["mp3", "id3", "mp3 parser", "audio tag", "mpeg audio"],
+  "search_queries": [
+    "mp3",
+    "id3",
+    "mp3 parser",
+    "audio tag",
+    "mpeg audio"
+  ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 0,
   "unique_search_hits": 0,
   "unresolved_documentation_leads": 1,
-  "uncertainty": "Twenty targeted project and Maven release package paths passed valid tagged MP3 controls, meeting the working target. All five bounded Maven Central Solr queries timed out, so zero recorded search hits is not evidence of absence; targeted Sonatype release pages and project documentation supplied leads. One documentation lead remains unresolved, and the incomplete broad search prevents a claim that these are the definitive most-used Java top 20. metadata-extractor 2.19.0 was excluded after its MP3 reader reported an MPEG-2.5 unsupported error and no frame fields on the valid 8 kHz and 44.1 kHz controls; proprietary GroupDocs was excluded by license. The exact-release deps.dev direct-dependent counts rank only the verified paths and have version-level coverage bias. Most paths used one ID3v2.3 tagged mono 8 kHz MP3; JavaMP3 required the second valid ID3v2.3 tagged mono 44.1 kHz control because its decoder threw on the 8 kHz control; the amilesend MediaInfo wrapper required a valid 72,941-byte 18-second control because its file API rejects shorter files. Variant coverage remains limited. JLayer reports an MP3 frame and presence of raw ID3v2 data, not parsed tag field values; JCodec and CodecMedia parse MP3 audio fields without tag text. jid3lib, jaudiotagger and mp3agic share historical project ancestry. MP3SPI and the Tianscar fork share JavaZOOM MP3SPI/JLayer lineage. JAVE2, Jaffree, JavaCV, Bytedeco FFmpeg, Bramp, Imagic and v47 Jaffree share FFmpeg; vlcj-info and amilesend share libmediainfo. These twenty package paths are fewer than twenty independent parsing engines. TagLib Java requires JDK 25; JAVE2 uses a bundled native executable, FFprobe wrappers use a checksummed local FFprobe 9.0.2 executable, Bytedeco uses pinned macOS arm64 native JARs, vlcj-info uses checksummed local libmediainfo and libzen, and amilesend uses a pinned native JAR. The JDK-only Java Sound probe rejected the 8 kHz control, and no bundled MP3/ID3v2 parser was verified.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/java/mp3_id3v2/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/java/mp3_id3v2/parsers.json",
   "third_party_control_results": "data/java/mp3_id3v2/verification.json",
   "runtime_evidence": "data/java/mp3_id3v2/standard.json",
   "registry_snapshot": "data/java/mp3_id3v2/registry-snapshot.json",
-  "unresolved_leads": "data/java/mp3_id3v2/leads.json"
+  "unresolved_leads": "data/java/mp3_id3v2/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/java/mp3_id3v2"
 }

@@ -1,24 +1,98 @@
 [
-  {"name":"sharp","version":"0.35.5","license":"Apache-2.0","input_api":"sharp(Buffer).metadata()","documentation":"https://sharp.pixelplumbing.com/api-input/","scope":"dimensions","family":"libvips/librsvg","family_note":"Native libvips SVG input backend."},
-  {"name":"image-size","version":"2.1.0","license":"MIT","input_api":"imageSize(Buffer)","documentation":"https://www.npmjs.com/package/image-size","scope":"dimensions","family":"image-size SVG reader"},
-  {"name":"probe-image-size","version":"7.5.0","license":"MIT","input_api":"probe.sync(Buffer)","documentation":"https://www.npmjs.com/package/probe-image-size","scope":"dimensions","family":"probe-image-size SVG reader"},
-  {"name":"skia-canvas","version":"4.0.0","license":"MIT","input_api":"loadImage(Buffer); drawImage()","documentation":"https://skia-canvas.org/api/image","scope":"pixels","family":"Skia"},
-  {"name":"@napi-rs/canvas","version":"1.1.0","license":"MIT","input_api":"loadImage(Buffer); drawImage()","documentation":"https://www.npmjs.com/package/@napi-rs/canvas","scope":"pixels","family":"Skia","family_note":"Separate binding over Skia."},
-  {"name":"canvas","version":"3.2.3","license":"MIT","input_api":"loadImage(Buffer); drawImage()","documentation":"https://github.com/Automattic/node-canvas#loadimage","scope":"pixels","family":"Cairo/librsvg","family_note":"Node canvas binding uses the system SVG rendering stack."},
-  {"name":"svg-parser","version":"2.1.0","license":"MIT","input_api":"parse(svgString)","documentation":"https://www.npmjs.com/package/svg-parser","scope":"structure","family":"svg-parser"},
-  {"name":"canvg","version":"4.0.3","license":"MIT","input_api":"Canvg.fromString(canvasContext,svgString,presets.node(...)).render()","documentation":"https://canvg.js.org/api/classes/Canvg","scope":"pixels","family":"canvg","family_note":"Uses a supplied DOMParser to construct SVG DOM before rendering."},
-  {"name":"@yworks/canvg","version":"4.0.4","license":"MIT","input_api":"Canvg.fromString(canvasContext,svgString,presets.node(...)).render()","documentation":"https://www.npmjs.com/package/@yworks/canvg","scope":"pixels","family":"canvg","family_note":"Fork/distribution of canvg."},
-  {"name":"@resvg/resvg-js","version":"2.6.2","license":"MPL-2.0","input_api":"new Resvg(svgString).render().pixels","documentation":"https://www.npmjs.com/package/@resvg/resvg-js","scope":"pixels","family":"resvg","family_note":"Native binding around Rust resvg."},
-  {"name":"@resvg/resvg-wasm","version":"2.6.2","license":"MPL-2.0","input_api":"initWasm(localWasmBytes); new Resvg(svgString).render().pixels","documentation":"https://unpkg.com/@resvg/resvg-wasm@2.6.2/index.d.ts","scope":"pixels","family":"resvg","family_note":"WebAssembly distribution of the same Rust resvg engine."},
-  {"name":"svgson","version":"5.3.1","license":"MIT","input_api":"parse(svgString)","documentation":"https://www.npmjs.com/package/svgson","scope":"structure","family":"svgson"},
-  {"name":"svgps","version":"0.9.0","license":"MIT","input_api":"parse(svgString)","documentation":"https://www.npmjs.com/package/svgps","scope":"paths","family":"svgps","family_note":"Converts SVG rectangle elements into path records."},
-  {"name":"postsvg","version":"2.2.7","license":"MIT","input_api":"parse(svgString); tree.select('rect')","documentation":"https://www.npmjs.com/package/postsvg","scope":"structure","family":"postsvg/htmlparser2","family_note":"SVG-oriented wrapper over htmlparser2 in XML mode."},
-  {"name":"streaming-svg-parser","version":"1.1.0","license":"MIT","input_api":"createStreamingSVGParser(onOpen,onClose); parseText(svgString)","documentation":"https://github.com/anvaka/streaming-svg-parser","scope":"structure","family":"streaming-svg-parser"},
-  {"name":"svg2img","version":"1.0.0-beta.2","license":"MIT","input_api":"svg2img(svgString,callback)","documentation":"https://www.npmjs.com/package/svg2img","scope":"pixels","family":"resvg","family_note":"README states the v1 conversion backend is resvg-js."},
-  {"name":"svgo","version":"4.1.0","license":"MIT","input_api":"optimize(svgString,{plugins:['convertShapeToPath']})","documentation":"https://svgo.dev/docs/introduction/","scope":"optimized_paths","family":"SVGO"},
-  {"name":"get-svg-colors","version":"2.0.1","license":"ISC","input_api":"getColors(svgString,{flat:true})","documentation":"https://www.npmjs.com/package/get-svg-colors","scope":"colors","family":"get-svg-colors","family_note":"Extracts SVG element colors; does not render shapes."},
-  {"name":"@stacksjs/ts-svg","version":"0.1.7","license":"MIT","input_api":"new Resvg(svgString).render().pixels()","documentation":"https://www.npmjs.com/package/@stacksjs/ts-svg","scope":"pixels","family":"stacksjs/ts-svg","family_note":"Pure TypeScript SVG parser/rasterizer with a resvg-compatible API."},
-  {"name":"svg-eslint-parser","version":"0.5.1","license":"MIT","input_api":"parse(svgString)","documentation":"https://www.npmjs.com/package/svg-eslint-parser","scope":"structure","family":"svg-eslint-parser"},
-  {"name":"@cf-wasm/resvg","version":"0.4.0","license":"MPL-2.0","input_api":"await Resvg.async(svgString); render().pixels","documentation":"https://www.npmjs.com/package/@cf-wasm/resvg","scope":"pixels","family":"resvg","family_note":"WebAssembly wrapper around Rust resvg."},
-  {"name":"vsvg-parser","version":"0.3.1","license":"MIT","input_api":"parse(svgString)","documentation":"https://www.npmjs.com/package/vsvg-parser","scope":"structure","family":"vsvg-parser"}
+  {
+    "name": "sharp",
+    "version": "0.35.5",
+    "license": "Apache-2.0",
+    "input_api": "sharp(Buffer).metadata()",
+    "documentation": "https://sharp.pixelplumbing.com/api-input/",
+    "scope": "dimensions",
+    "family": "libvips/librsvg",
+    "family_note": "Native libvips SVG input backend."
+  },
+  {
+    "name": "image-size",
+    "version": "2.1.0",
+    "license": "MIT",
+    "input_api": "imageSize(Buffer)",
+    "documentation": "https://www.npmjs.com/package/image-size",
+    "scope": "dimensions",
+    "family": "image-size SVG reader"
+  },
+  {
+    "name": "probe-image-size",
+    "version": "7.5.0",
+    "license": "MIT",
+    "input_api": "probe.sync(Buffer)",
+    "documentation": "https://www.npmjs.com/package/probe-image-size",
+    "scope": "dimensions",
+    "family": "probe-image-size SVG reader"
+  },
+  {
+    "name": "@napi-rs/canvas",
+    "version": "1.1.0",
+    "license": "MIT",
+    "input_api": "loadImage(Buffer); drawImage()",
+    "documentation": "https://www.npmjs.com/package/@napi-rs/canvas",
+    "scope": "pixels",
+    "family": "Skia",
+    "family_note": "Separate binding over Skia."
+  },
+  {
+    "name": "canvas",
+    "version": "3.2.3",
+    "license": "MIT",
+    "input_api": "loadImage(Buffer); drawImage()",
+    "documentation": "https://github.com/Automattic/node-canvas#loadimage",
+    "scope": "pixels",
+    "family": "Cairo/librsvg",
+    "family_note": "Node canvas binding uses the system SVG rendering stack."
+  },
+  {
+    "name": "svg-parser",
+    "version": "2.1.0",
+    "license": "MIT",
+    "input_api": "parse(svgString)",
+    "documentation": "https://www.npmjs.com/package/svg-parser",
+    "scope": "structure",
+    "family": "svg-parser"
+  },
+  {
+    "name": "canvg",
+    "version": "4.0.3",
+    "license": "MIT",
+    "input_api": "Canvg.fromString(canvasContext,svgString,presets.node(...)).render()",
+    "documentation": "https://canvg.js.org/api/classes/Canvg",
+    "scope": "pixels",
+    "family": "canvg",
+    "family_note": "Uses a supplied DOMParser to construct SVG DOM before rendering."
+  },
+  {
+    "name": "@resvg/resvg-js",
+    "version": "2.6.2",
+    "license": "MPL-2.0",
+    "input_api": "new Resvg(svgString).render().pixels",
+    "documentation": "https://www.npmjs.com/package/@resvg/resvg-js",
+    "scope": "pixels",
+    "family": "resvg",
+    "family_note": "Native binding around Rust resvg."
+  },
+  {
+    "name": "@resvg/resvg-wasm",
+    "version": "2.6.2",
+    "license": "MPL-2.0",
+    "input_api": "initWasm(localWasmBytes); new Resvg(svgString).render().pixels",
+    "documentation": "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index.d.ts",
+    "scope": "pixels",
+    "family": "resvg",
+    "family_note": "WebAssembly distribution of the same Rust resvg engine."
+  },
+  {
+    "name": "svgo",
+    "version": "4.1.0",
+    "license": "MIT",
+    "input_api": "optimize(svgString,{plugins:['convertShapeToPath']})",
+    "documentation": "https://svgo.dev/docs/introduction/",
+    "scope": "optimized_paths",
+    "family": "SVGO"
+  }
 ]

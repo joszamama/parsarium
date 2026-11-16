@@ -1,0 +1,366 @@
+[
+  {
+    "name": "setasign/fpdi",
+    "version": "v2.6.10",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Setasign/FPDI/blob/be29a9d43c64f06569c1075f181e43d829a3d5bb/LICENSE.txt",
+    "documentation": "https://github.com/Setasign/FPDI/blob/be29a9d43c64f06569c1075f181e43d829a3d5bb/README.md",
+    "input_api": "Fpdi::setSourceFile(local PDF path), importPage(1), getTemplateSize(); page count and dimensions",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 216,
+      "height": 279
+    },
+    "scope": "One PDF page, 216 × 279 mm rounded imported MediaBox",
+    "family": "FPDI native PHP PDF object reader",
+    "family_note": "FPDI reads and imports the PDF page using its own parser; setasign/fpdf 1.9.0 is a required rendering companion, not a separate PDF reader.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "smalot/pdfparser",
+    "version": "v2.13.1",
+    "license": "LGPL-3.0",
+    "license_evidence": "https://github.com/smalot/pdfparser/blob/a71c6dd38e60a995fdb4d36e4433b8b3557c65dc/LICENSE.txt",
+    "documentation": "https://github.com/smalot/pdfparser/blob/a71c6dd38e60a995fdb4d36e4433b8b3557c65dc/README.md",
+    "input_api": "Parser::parseFile(local PDF path); page count and extracted text",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    },
+    "scope": "One PDF page and embedded Parsarium text",
+    "family": "Smalot native PHP PDF parser",
+    "family_note": "Own PHP PDF object and content stream parser.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "tecnickcom/tc-lib-pdf-parser",
+    "version": "3.16.7",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/tecnickcom/tc-lib-pdf-parser/blob/f83cadbc3b347732ed928cd7b654589688812c5f/LICENSE",
+    "documentation": "https://github.com/tecnickcom/tc-lib-pdf-parser/blob/f83cadbc3b347732ed928cd7b654589688812c5f/README.md",
+    "input_api": "Parser::parse(local PDF bytes); cross-reference array and decoded object count",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "objects": 6,
+      "xref_type": "array"
+    },
+    "scope": "Six indirect PDF objects and parsed cross-reference structure",
+    "family": "TCPDF parser native PHP PDF object reader",
+    "family_note": "Standalone PDF parser package; tc-lib-pdf-filter 2.11.9 is its pinned stream filter dependency.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "spatie/pdf-to-text",
+    "version": "1.55.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/spatie/pdf-to-text/blob/c5c6c7fa8aaa34de7eb6cde42b45aec480c8afb6/LICENSE.md",
+    "documentation": "https://github.com/spatie/pdf-to-text/blob/c5c6c7fa8aaa34de7eb6cde42b45aec480c8afb6/README.md",
+    "input_api": "Pdf::getText(local PDF path); extracted text",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "Poppler pdftotext PDF parser",
+    "family_note": "PHP wrapper invokes local pdftotext 26.11.0; shared native backend is recorded.",
+    "adapter": "adapters/php/pdf/parse.php",
+    "external_backend": "Poppler pdftotext 26.11.0 CLI"
+  },
+  {
+    "name": "prinsfrank/pdfparser",
+    "version": "v4.3.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/PrinsFrank/pdfparser/blob/441e0669b61e4028ba34c030d6625770c8f7e1ad/LICENSE",
+    "documentation": "https://github.com/PrinsFrank/pdfparser/blob/441e0669b61e4028ba34c030d6625770c8f7e1ad/README.md",
+    "input_api": "PdfParser::parseFile(local PDF path)->getText()",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "PrinsFrank native PHP PDF parser",
+    "family_note": "Own PHP PDF object and content stream parser.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "asika/pdf2text",
+    "version": "1.0.6",
+    "license": "MIT",
+    "license_evidence": "https://github.com/asika32764/php-pdf-2-text/blob/7e328221418ee237b60aee291f416633469162f7/composer.json",
+    "documentation": "https://github.com/asika32764/php-pdf-2-text/blob/7e328221418ee237b60aee291f416633469162f7/README.md",
+    "input_api": "Pdf2text::decode(local PDF path); extracted text",
+    "composer_lock": "adapters/php/pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "SilverStripe-derived native PHP PDF text parser",
+    "family_note": "Composer adaptation of Darren Inwood/SilverStripe PDF-to-text reader; separate package source and shared lineage noted.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "mikehaertl/php-pdftk",
+    "version": "0.14.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/mikehaertl/php-pdftk/blob/9a88810285c1a26459b67a50e30af51eccc57a9e/LICENSE",
+    "documentation": "https://github.com/mikehaertl/php-pdftk/blob/9a88810285c1a26459b67a50e30af51eccc57a9e/README.md",
+    "input_api": "Pdf(local PDF path)->getData(); parsed page count and Title metadata",
+    "composer_lock": "adapters/php/pdf/pdftk/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    },
+    "scope": "One PDF page and document title",
+    "family": "pdftk-java PDF parser",
+    "family_note": "PHP wrapper invokes pinned local pdftk-java 3.3.3; the native PDF reader is shared with other pdftk wrappers.",
+    "adapter": "adapters/php/pdf/parse.php",
+    "external_backend": "pdftk-java 3.3.3 CLI"
+  },
+  {
+    "name": "propa/tcpdi",
+    "version": "v1.3.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/kulbakin/tcpdi/blob/4fec3053f8792e3c546eab62d82f6ce42925169b/LICENSE",
+    "documentation": "https://github.com/kulbakin/tcpdi/blob/4fec3053f8792e3c546eab62d82f6ce42925169b/README.md",
+    "input_api": "TCPDI::setSourceFile(local PDF path), importPage(1), getTemplateSize(); page count and dimensions",
+    "composer_lock": "adapters/php/pdf/tcpdi/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 216,
+      "height": 279
+    },
+    "scope": "One PDF page, 216 × 279 mm rounded imported MediaBox",
+    "family": "TCPDI FPDI-derived PHP PDF parser",
+    "family_note": "TCPDI is a separately maintained FPDI-derived import implementation bundled with its own tcpdi_parser; TCPDF is the rendering companion.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "popphp/pop-pdf",
+    "version": "6.2.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/popphp/pop-pdf/blob/c508ff26aa383f09b44d1c58ea9e3f3bffd9af2f/LICENSE.TXT",
+    "documentation": "https://github.com/popphp/pop-pdf/blob/c508ff26aa383f09b44d1c58ea9e3f3bffd9af2f/README.md",
+    "input_api": "Pdf::extractTextFromFile(local PDF path); extracted text",
+    "composer_lock": "adapters/php/pdf/pop_pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "Pop PDF native PHP parser",
+    "family_note": "Own PDF object, content and text parser implementation; dependencies are pinned in its isolated Composer lock.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "iio/libmergepdf",
+    "version": "4.0.4",
+    "license": "WTFPL",
+    "license_evidence": "https://github.com/hanneskod/libmergepdf/blob/6613b978c08d00d559796ab510614243e4dd5dfb/composer.json",
+    "documentation": "https://github.com/hanneskod/libmergepdf/blob/6613b978c08d00d559796ab510614243e4dd5dfb/src/Merger.php",
+    "input_api": "Merger::addFile(local PDF path), merge(); imported page object in emitted PDF",
+    "composer_lock": "adapters/php/pdf/libmergepdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pdf_header": true,
+      "page_objects": 1
+    },
+    "scope": "One imported PDF page object in emitted PDF",
+    "family": "FPDI native PHP PDF object reader",
+    "family_note": "Merger wrapper delegates PDF import to pinned FPDI 2.6.10; shared parser family with setasign/fpdi, counted as a separate Composer package path.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "ottosmops/pdftotext",
+    "version": "2.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ottosmops/pdftotext/blob/ab349a44a051673c40d3d690da1e4878afb03339/LICENSE.md",
+    "documentation": "https://github.com/ottosmops/pdftotext/blob/ab349a44a051673c40d3d690da1e4878afb03339/README.md",
+    "input_api": "Extract::pdf(local PDF path)->text(); extracted text",
+    "composer_lock": "adapters/php/pdf/ottosmops/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "text": "Parsarium"
+    },
+    "scope": "Embedded Parsarium text extracted from PDF",
+    "family": "Poppler pdftotext PDF parser",
+    "family_note": "PHP wrapper invokes local Poppler pdftotext 26.11.0; shared backend with spatie/pdf-to-text.",
+    "adapter": "adapters/php/pdf/parse.php",
+    "external_backend": "Poppler pdftotext 26.11.0 CLI"
+  },
+  {
+    "name": "magento/zend-pdf",
+    "version": "1.16.7",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/magento/magento-zend-pdf/blob/3c1bc0e69c15666c29b202c37e0bd5897f4db69e/LICENSE.txt",
+    "documentation": "https://github.com/magento/magento-zend-pdf/blob/3c1bc0e69c15666c29b202c37e0bd5897f4db69e/library/Zend/Pdf.php",
+    "input_api": "Zend_Pdf::load(local PDF path); parsed pages and Title metadata",
+    "composer_lock": "adapters/php/pdf/zend_pdf/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    },
+    "scope": "One PDF page and document title",
+    "family": "Zend PDF native PHP parser",
+    "family_note": "Magento package contains the Zend Framework PDF object reader; its own local file load method parses page and document metadata.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "webklex/laravel-pdfmerger",
+    "version": "1.3.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Webklex/laravel-pdfmerger/blob/de88152c793fb190631a050688478f4a18bbac22/LICENSE",
+    "documentation": "https://github.com/Webklex/laravel-pdfmerger/blob/de88152c793fb190631a050688478f4a18bbac22/README.md",
+    "input_api": "PDFMerger::addPDF(local PDF path, page 1), merge(), output(); one imported PDF page object",
+    "composer_lock": "adapters/php/pdf/webklex/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pdf_header": true,
+      "page_objects": 1
+    },
+    "scope": "One imported page object in emitted PDF",
+    "family": "FPDI native PHP PDF object reader",
+    "family_note": "Laravel-oriented wrapper delegates page import to pinned FPDI 2.6.10; illuminate/filesystem 13.42.0 is an explicit companion dependency.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "jurosh/pdf-merge",
+    "version": "2.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/jurosh/php-pdf-merge/blob/89ba3446c9f38c573e3b8bf577d2f22993494130/LICENSE",
+    "documentation": "https://github.com/jurosh/php-pdf-merge/blob/89ba3446c9f38c573e3b8bf577d2f22993494130/README.md",
+    "input_api": "PDFMerger::addPDF(local PDF path), merge(string); one imported PDF page object",
+    "composer_lock": "adapters/php/pdf/jurosh/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pdf_header": true,
+      "page_objects": 1
+    },
+    "scope": "One imported page object in emitted PDF",
+    "family": "FPDI native PHP PDF object reader",
+    "family_note": "Wrapper delegates page import to pinned FPDI 2.6.10. Composer metadata says MIT, but the pinned LICENSE file and README specify Apache-2.0.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "karriere/pdf-merge",
+    "version": "v3.4.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/karriereat/pdf-merge/blob/13e6f60fe42c0fac238a65b9e19d69875658379b/LICENSE",
+    "documentation": "https://github.com/karriereat/pdf-merge/blob/13e6f60fe42c0fac238a65b9e19d69875658379b/README.md",
+    "input_api": "PdfMerge::add(local PDF path), merge(string); one imported PDF page object",
+    "composer_lock": "adapters/php/pdf/karriere/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pdf_header": true,
+      "page_objects": 1
+    },
+    "scope": "One imported page object in emitted PDF",
+    "family": "TCPDI FPDI-derived PHP PDF parser",
+    "family_note": "Wrapper bundles a TCPDI parser derived from FPDI and uses pinned TCPDF 6.11.4 as rendering companion.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "howtomakeaturn/pdfinfo",
+    "version": "1.1.6",
+    "license": "MIT",
+    "license_evidence": "https://github.com/howtomakeaturn/pdfinfo/blob/564542360f4052a45905e1be80aee6f8d843e1ae/LICENSE.txt",
+    "documentation": "https://github.com/howtomakeaturn/pdfinfo/blob/564542360f4052a45905e1be80aee6f8d843e1ae/README.md",
+    "input_api": "PDFInfo(local PDF path); parsed pages and title metadata",
+    "composer_lock": "adapters/php/pdf/pdfinfo/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    },
+    "scope": "One PDF page and document title",
+    "family": "Poppler pdfinfo PDF parser",
+    "family_note": "PHP wrapper invokes local Poppler pdfinfo 26.11.0 and parses its metadata output.",
+    "adapter": "adapters/php/pdf/parse.php",
+    "external_backend": "Poppler pdfinfo 26.11.0 CLI"
+  },
+  {
+    "name": "rafikhaceb/tcpdi",
+    "version": "2.0.3",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/RafikHaceb/tcpdi/blob/ff0ef413c94196247b2c36ff328aacf41ac3e586/LICENSE",
+    "documentation": "https://github.com/RafikHaceb/tcpdi/blob/ff0ef413c94196247b2c36ff328aacf41ac3e586/README.md",
+    "input_api": "TCPDI::setSourceFile(local PDF path), importPage(1), getTemplateSize(); page count and dimensions",
+    "composer_lock": "adapters/php/pdf/rafikhaceb/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 216,
+      "height": 279
+    },
+    "scope": "One PDF page, 216 × 279 mm rounded imported MediaBox",
+    "family": "TCPDI FPDI-derived PHP PDF parser",
+    "family_note": "Separately packaged TCPDI fork with bundled parser; shares the FPDI-derived TCPDI family with propa/tcpdi.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "andreaventuri/tcpdi",
+    "version": "1.0.6",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/andreaventuri/tcpdi/blob/b85b4a1aa02823917285d0c46595282abdbb5ac3/LICENSE",
+    "documentation": "https://github.com/andreaventuri/tcpdi/blob/b85b4a1aa02823917285d0c46595282abdbb5ac3/README.md",
+    "input_api": "TCPDI::setSourceFile(local PDF path), importPage(1), getTemplateSize(); page count and dimensions",
+    "composer_lock": "adapters/php/pdf/andreaventuri/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 216,
+      "height": 279
+    },
+    "scope": "One PDF page, 216 × 279 mm rounded imported MediaBox",
+    "family": "TCPDI FPDI-derived PHP PDF parser",
+    "family_note": "Separately packaged TCPDI fork; TCPDF 6.11.4 is pinned as companion because its open-ended constraint selected incompatible TCPDF 7. PHP 8.5 emits a deprecation and parser warning while still returning the expected valid-control result.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "tomsgu/pdf-merger",
+    "version": "v0.5.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Tomsgu/PDFMerger/blob/4093d45a9c4bcbc1c986a513b07b2736d64d253f/LICENSE",
+    "documentation": "https://github.com/Tomsgu/PDFMerger/blob/4093d45a9c4bcbc1c986a513b07b2736d64d253f/README.md",
+    "input_api": "PdfCollection::addPdf(local PDF path), PdfMerger::merge(..., MODE_STRING); one imported PDF page object",
+    "composer_lock": "adapters/php/pdf/tomsgu/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pdf_header": true,
+      "page_objects": 1
+    },
+    "scope": "One imported page object in emitted PDF",
+    "family": "FPDI native PHP PDF object reader",
+    "family_note": "Wrapper delegates page import to pinned FPDI 2.6.10 and uses pinned FPDF 1.9.0 as rendering companion.",
+    "adapter": "adapters/php/pdf/parse.php"
+  },
+  {
+    "name": "gufy/pdftohtml-php",
+    "version": "v2.0.8",
+    "license": "MIT",
+    "license_evidence": "https://github.com/mgufrone/pdf-to-html/blob/4b0c2c60d48b8e3e08394a3f130606408e7f7d2e/LICENSE",
+    "documentation": "https://github.com/mgufrone/pdf-to-html/blob/4b0c2c60d48b8e3e08394a3f130606408e7f7d2e/README.md",
+    "input_api": "Pdf(local PDF path)->getPages(), html(); parsed page count and extracted text",
+    "composer_lock": "adapters/php/pdf/gufy/composer.lock",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    },
+    "scope": "One PDF page and embedded Parsarium text",
+    "family": "Poppler pdfinfo and pdftohtml PDF parsers",
+    "family_note": "PHP wrapper invokes local Poppler pdfinfo/pdftohtml 26.11.0; the release is abandoned upstream but pinned and replays on the valid control.",
+    "adapter": "adapters/php/pdf/parse.php",
+    "external_backend": "Poppler pdfinfo/pdftohtml 26.11.0 CLI"
+  }
+]

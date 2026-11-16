@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "zip",
-  "status": "verified_target_search_incomplete",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 5,
   "search_queries": [
     "zip parser",
@@ -16,10 +16,12 @@
   "search_hits_recorded": 115,
   "unique_search_hits": 115,
   "unresolved_documentation_leads": 5,
-  "uncertainty": "Four bounded Maven Central Solr searches saved 115 hits and 115 distinct artifact coordinates. Two queries timed out; Java ZIP retained 100 of 178 hits from its earlier successful capture, leaving 78 in that query tail. Targeted Maven Central release lookups and official project documentation found 20 distinct pinned, open-source Java package paths with local ZIP input APIs; all pass the valid one-entry DEFLATE ZIP control. 5 plausible leads remain unresolved. The 20-path working goal is met for this cell, but search is incomplete and higher-adoption paths may remain, including a documented NetBeans ZIP filesystem API. Package paths include wrappers over JDK ZIP, Commons Compress, TrueZIP, and TrueVFS, each labeled in the family field; the count is not independent engines. The control checks one ordinary entry only. deps.dev version-level direct dependent counts cover known public dependents of exact releases and may undercount or bias newer versions; rankings compare only Java paths. Five Java 21 runtime APIs passed separately and do not enter the third-party ranking.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/java/zip/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/java/zip/parsers.json",
   "third_party_control_results": "data/java/zip/verification.json",
   "runtime_evidence": "data/java/zip/standard.json",
   "registry_snapshot": "data/java/zip/registry-snapshot.json",
-  "unresolved_leads": "data/java/zip/leads.json"
+  "unresolved_leads": "data/java/zip/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/java/zip"
 }

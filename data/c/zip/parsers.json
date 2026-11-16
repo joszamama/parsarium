@@ -36,24 +36,6 @@
     "family_note": "Own ZIP archive reader and entry API."
   },
   {
-    "name": "minizip",
-    "version": "1.4",
-    "license": "Zlib",
-    "license_evidence": "https://formulae.brew.sh/formula/minizip",
-    "documentation": "https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h",
-    "input_api": "unzOpen64(const char*); unzGetGlobalInfo64; unzGetCurrentFileInfo64; unzReadCurrentFile",
-    "adapter": "adapters/c/zip/minizip.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name and decompressed entry bytes",
-    "family": "classic MiniZip",
-    "family_note": "Classic MiniZip from the zlib contrib/minizip source subtree; separate from minizip-ng but related lineage."
-  },
-  {
     "name": "minizip-ng",
     "version": "4.2.2",
     "license": "Zlib",
@@ -180,98 +162,6 @@
     "family_note": "PhysicsFS provides a distinct virtual filesystem package API with an internal ZIP archive handler; its C++ call site reuses this C library."
   },
   {
-    "name": "lowzip",
-    "version": "1.0.1",
-    "license": "MIT",
-    "license_evidence": "https://github.com/svaarala/lowzip/blob/v1.0.1/LICENSE",
-    "documentation": "https://github.com/svaarala/lowzip/blob/v1.0.1/README.md",
-    "input_api": "lowzip_init_archive with read_callback over local ZIP bytes; lowzip_locate_file; lowzip_get_data",
-    "adapter": "adapters/c/zip/lowzip.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name and decompressed entry bytes",
-    "family": "lowzip ZIP reader",
-    "family_note": "Independent footprint-optimized ZIP reader with built-in DEFLATE; the C++ path compiles the same source and C API."
-  },
-  {
-    "name": "unziplib",
-    "version": "1.0.0",
-    "license": "Apache-2.0 AND Zlib",
-    "license_evidence": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/LICENSE",
-    "documentation": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h",
-    "input_api": "unzOpen(local ZIP bytes, ZIPFILE); unzGetGlobalInfo; unzGetCurrentFileInfo; unzReadCurrentFile",
-    "adapter": "adapters/c/zip/unziplib.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name and decompressed entry bytes",
-    "family": "unzipLIB modified classic MiniZip",
-    "family_note": "Distinct 1.0.0 package with C callback/memory API and bundled zlib; its unzip.h credits Gilles Vollant and shares classic MiniZip lineage. Package license is Apache-2.0 with zlib-licensed bundled code.",
-    "license_evidence_additional": "https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h"
-  },
-  {
-    "name": "libc7zip",
-    "version": "v1.10.0",
-    "license": "MIT AND MPL-2.0 AND LGPL-2.1-or-later",
-    "license_evidence": "https://github.com/itchio/libc7zip/blob/v1.10.0/README.md",
-    "license_note": "Wrapper MIT; vendored lib7zip MPL-2.0; bundled 7-Zip engine LGPL 2.1 with project-noted additional terms dependent on build.",
-    "documentation": "https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h",
-    "input_api": "in_stream_new with local FILE read/seek callbacks; archive_open; archive_get_item_count; item_get_string_property(kpidPath); archive_extract_item to output callback",
-    "adapter": "adapters/c/zip/libc7zip.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name and decompressed entry bytes",
-    "family": "libc7zip \u2192 lib7zip \u2192 7-Zip ZIP engine",
-    "family_note": "Tagged MIT C facade vendors an MPL-2.0 lib7zip fork and loads a 7-Zip 26.03 engine; a distinct package path sharing the 7-Zip parser family with bit7z in C++."
-  },
-  {
-    "name": "infozip-unzip",
-    "version": "6.0",
-    "license": "Info-ZIP",
-    "license_evidence": "https://downloads.sourceforge.net/project/infozip/UnZip%206.x%20%28latest%29/UnZip%206.0/unzip60.tar.gz",
-    "documentation": "https://github.com/madler/unzip/blob/master/unzip.h",
-    "input_api": "UzpAltMain on a local ZIP path with listing callback; UzpUnzipToMemory(local ZIP path, parsed entry name); UzpFreeMemBuffer",
-    "adapter": "adapters/c/zip/infozip_unzip.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API",
-    "family": "Info-ZIP UnZip 6.0 engine",
-    "family_note": "Official Info-ZIP UnZip 6.0 source exposes a C DLL API. This path compiles its library objects and calls the API directly; it is separate from MiniZip, unzipLIB, and other ZIP engines."
-  },
-  {
-    "name": "junzip",
-    "version": "v0.1.1",
-    "license": "Unlicense",
-    "license_evidence": "https://github.com/jokkebk/JUnzip/blob/v0.1.1/LICENSE",
-    "documentation": "https://github.com/jokkebk/JUnzip/blob/v0.1.1/junzip.h",
-    "input_api": "jzReadEndRecord(FILE*); jzReadCentralDirectory(FILE*, callback); jzReadLocalFileHeader; jzReadData",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name and decompressed entry bytes",
-    "family": "JUnzip ZIP record reader with zlib DEFLATE",
-    "family_note": "JUnzip parses ZIP end, central and local records itself, then delegates DEFLATE decompression to zlib; separate package from Info-ZIP UnZip.",
-    "adapter": "adapters/c/zip/junzip.c"
-  },
-  {
     "name": "sqlite",
     "version": "3.54.1",
     "license": "Public-Domain",
@@ -288,75 +178,5 @@
     "family": "SQLite Zipfile virtual table with zlib DEFLATE",
     "family_note": "Official SQLite ext/misc/zipfile.c extension parses ZIP archive records and delegates DEFLATE to zlib; its repository stars measure all SQLite usage, not Zipfile adoption.",
     "adapter": "adapters/c/zip/sqlite.c"
-  },
-  {
-    "name": "zipc",
-    "version": "v1.3",
-    "license": "BSD-2-Clause",
-    "license_evidence": "https://github.com/michaelrsweet/zipc/blob/v1.3/LICENSE",
-    "documentation": "https://www.msweet.org/zipc/zipc.html",
-    "input_api": "zipcOpen(local_path,\"r\"); zipcOpenFile(archive,\"hello.txt\"); zipcFileRead; zipcFileFinish",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "content": "parsarium\n"
-    },
-    "scope": "decompressed bytes for a known named ZIP entry; no entry enumeration API verified",
-    "family": "zipc ZIP container reader with zlib DEFLATE",
-    "family_note": "zipc parses ZIP container records itself and uses zlib for DEFLATE. Its public reading API opens a named entry; this path does not claim enumeration or an observed entry count.",
-    "adapter": "adapters/c/zip/zipc.c"
-  },
-  {
-    "name": "libtfs",
-    "version": "v0.13.0",
-    "license": "BSD-2-Clause",
-    "license_evidence": "https://github.com/tamatebako/libtfs/blob/v0.13.0/include/tebako/fs/c_api.h",
-    "documentation": "https://github.com/tamatebako/libtfs/blob/v0.13.0/include/tebako/fs/c_api.h",
-    "input_api": "tebako_fs_init_from_file(const char* archive_path, const char* mount_point); tebako_fs_opendir/readdir; tebako_fs_open/read",
-    "adapter": "adapters/c/zip/libtfs.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "mounted ZIP entry name and decompressed entry bytes",
-    "family": "libtfs C facade over libzip ZIP backend",
-    "family_note": "The documented C facade uses a C++ ZIP backend linked against libzip. This is a distinct package path but shares the libzip parser engine."
-  },
-  {
-    "name": "tcl-zipfs",
-    "version": "9.1.0",
-    "license": "TCL",
-    "license_evidence": "https://www.tcl-lang.org/software/tcltk/license.html",
-    "documentation": "https://www.tcl-lang.org/man/tcl9.1/TclLib/zipfs.html",
-    "input_api": "TclZipfs_Mount(interp, local_zip_path, mountpoint, NULL); Tcl_OpenFileChannel and Tcl_Read",
-    "adapter": "adapters/c/zip/tcl_zipfs.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "mounted ZIP entry name and decompressed entry bytes",
-    "family": "Tcl Zipfs ZIP reader",
-    "family_note": "Tcl core Zipfs parses ZIP records and uses zlib for DEFLATE. The C API is third-party to ISO C, despite being bundled with the Tcl runtime."
-  },
-  {
-    "name": "aosp-libzipfile",
-    "version": "android-4.4.4_r2",
-    "license": "Apache-2.0",
-    "license_evidence": "https://android.googlesource.com/platform/system/core/+/refs/tags/android-4.4.4_r2/libzipfile/NOTICE",
-    "documentation": "https://android.googlesource.com/platform/system/core/+/refs/tags/android-4.4.4_r2/include/zipfile/zipfile.h",
-    "input_api": "init_zipfile(const void* data, size_t size); iterate_zipfile; get_zipentry_name; decompress_zipentry",
-    "adapter": "adapters/c/zip/aosp_libzipfile.c",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "entries": 1,
-      "name": "hello.txt",
-      "content": "parsarium\n"
-    },
-    "scope": "entry name and decompressed entry bytes from local ZIP bytes",
-    "family": "AOSP libzipfile ZIP reader",
-    "family_note": "Standalone source build of the Android Open Source Project libzipfile C module; own central-directory parser, using zlib for DEFLATE. It is used here as a third-party package outside the Android runtime."
   }
 ]

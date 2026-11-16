@@ -75,51 +75,6 @@
     }
   },
   {
-    "name": "piz",
-    "version": "0.5.1",
-    "license": "Zlib",
-    "input_api": "ZipArchive::new(&[u8]).entries(); archive.read(entry)",
-    "documentation": "https://docs.rs/piz/0.5.1/piz/",
-    "scope": "Entry name and decompressed text",
-    "family": "piz engine",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "zip_next",
-    "version": "1.1.1",
-    "license": "MIT",
-    "input_api": "ZipArchive::new(Cursor<&[u8]>).by_index(0).read_to_string()",
-    "documentation": "https://docs.rs/zip_next/1.1.1/zip_next/",
-    "scope": "Entry name and decompressed text",
-    "family": "zip-rs lineage",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "zip-lzma",
-    "version": "0.6.3",
-    "license": "MIT",
-    "input_api": "ZipArchive::new(Cursor<&[u8]>).by_index(0).read_to_string()",
-    "documentation": "https://docs.rs/zip-lzma/0.6.3/zip_lzma/",
-    "scope": "Entry name and decompressed text",
-    "family": "zip-rs lineage",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
     "name": "zip-extract",
     "version": "0.4.1",
     "license": "MIT",
@@ -147,65 +102,6 @@
       "name": "hello.txt",
       "content": "parsarium\n",
       "size": 10
-    }
-  },
-  {
-    "name": "oxiarc-archive",
-    "version": "0.4.2",
-    "license": "Apache-2.0",
-    "input_api": "zip::read_zip(Cursor<&[u8]>).entries(); extract(entry)",
-    "documentation": "https://docs.rs/oxiarc-archive/0.4.2/oxiarc_archive/",
-    "scope": "Entry name and decompressed text",
-    "family": "OxiArc ZIP engine",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "openpack",
-    "version": "0.2.7",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "OpenPack::open_default(path).entries(); read_entry(name)",
-    "documentation": "https://docs.rs/openpack/0.2.7/openpack/",
-    "scope": "Entry name and decompressed text",
-    "family": "zip-rs lineage",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "s-zip",
-    "version": "0.15.0",
-    "license": "MIT",
-    "input_api": "StreamingZipReader::open(path).entries(); read_entry_by_name(name)",
-    "documentation": "https://docs.rs/s-zip/0.15.0/s_zip/",
-    "scope": "Entry name and decompressed text",
-    "family": "s-zip engine",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "archiver-rs",
-    "version": "0.5.1",
-    "license": "MIT",
-    "input_api": "Zip::new(Cursor<&[u8]>).files()",
-    "documentation": "https://docs.rs/archiver-rs/0.5.1/archiver_rs/struct.Zip.html",
-    "scope": "ZIP entry name and count",
-    "family": "zip-rs lineage",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "entry_count": 1
     }
   },
   {
@@ -247,51 +143,6 @@
     "documentation": "https://docs.rs/astral_async_zip/0.0.22/async_zip/",
     "scope": "Entry name and decompressed text",
     "family": "rs-async-zip lineage",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "archive-core",
-    "version": "0.1.6",
-    "license": "Apache-2.0",
-    "input_api": "Archive::open(&[u8], Some(\"hello.zip\")).entries(); read(0)",
-    "documentation": "https://docs.rs/archive-core/0.1.6/archive_core/",
-    "scope": "ZIP entry name and decompressed text",
-    "family": "zip-forensic-core engine",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "zip-forensic-core",
-    "version": "0.2.3",
-    "license": "Apache-2.0",
-    "input_api": "ZipArchive::new(Cursor<&[u8]>).file_names(); by_index(0).read_to_string()",
-    "documentation": "https://docs.rs/zip-forensic-core/0.2.3/zip_core/",
-    "scope": "ZIP entry name and decompressed text",
-    "family": "zip-forensic-core engine",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content": "parsarium\n",
-      "size": 10
-    }
-  },
-  {
-    "name": "libarchive2",
-    "version": "0.2.1",
-    "license": "BSD-2-Clause",
-    "input_api": "ReadArchive::open(path).next_entry(); read_data_to_vec()",
-    "documentation": "https://docs.rs/libarchive2/0.2.1/libarchive2/",
-    "scope": "ZIP entry name and decompressed text",
-    "family": "libarchive native engine",
     "control": "controls/zip/hello.zip",
     "expected_output": {
       "name": "hello.txt",

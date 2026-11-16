@@ -51,41 +51,6 @@
     "family_note": "The same FFmpeg libavformat C demuxer serves C and C++ call sites. It identifies the MP3 audio stream and parses ID3v2 title metadata."
   },
   {
-    "name": "libid3tag",
-    "version": "0.16.4",
-    "license": "GPL-2.0-or-later",
-    "license_evidence": "https://codeberg.org/tenacityteam/libid3tag/releases/download/0.16.4/id3tag-0.16.4-source.tar.gz",
-    "documentation": "https://codeberg.org/tenacityteam/libid3tag/src/tag/0.16.4/include/id3tag.h.in",
-    "input_api": "id3_file_open(local filename); id3_file_tag; id3_tag_findframe(TIT2); id3_field_getstrings",
-    "adapter": "adapters/cpp/mp3_id3v2/libid3tag.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "normalized_id3_major": 4,
-      "frames": 4
-    },
-    "scope": "ID3v2 title and normalized tag version/frame count",
-    "family": "libid3tag ID3v2 metadata parser",
-    "family_note": "The same C ID3v2 parser serves C and C++ call sites. Its API normalizes the input 2.3 tag to internal major version 4; it does not decode MPEG audio frames."
-  },
-  {
-    "name": "id3lib",
-    "version": "3.8.3",
-    "license": "LGPL-2.0-or-later",
-    "license_evidence": "https://downloads.sourceforge.net/project/id3lib/id3lib/3.8.3/id3lib-3.8.3.tar.gz",
-    "documentation": "https://id3lib.sourceforge.net/api/index.html",
-    "input_api": "ID3_Tag::Link(local filename, ID3TT_ID3V2); Find(ID3FID_TITLE); GetField(ID3FN_TEXT)->Get",
-    "adapter": "adapters/cpp/mp3_id3v2/id3lib.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "frames": 4
-    },
-    "scope": "ID3v2 title and frame count in a valid tagged MP3",
-    "family": "id3lib ID3v2 parser",
-    "family_note": "The C API wraps the same C++ id3lib engine used by the native C++ adapter. Both are one package path per ecosystem, not independent tag parsers."
-  },
-  {
     "name": "libsndfile",
     "version": "1.2.2",
     "license": "LGPL-2.1-or-later",
@@ -104,24 +69,6 @@
     "scope": "ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame",
     "family": "libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader",
     "family_note": "The pinned libsndfile mpeg_decode.c uses mpg123_id3 and mpg123 audio decoding. This is a distinct package input API sharing the separately counted libmpg123 syntax engine. C and C++ call sites use the same C implementation."
-  },
-  {
-    "name": "libmediainfo",
-    "version": "26.10",
-    "license": "BSD-2-Clause",
-    "license_evidence": "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz",
-    "documentation": "https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start",
-    "input_api": "MediaInfoLib::MediaInfo::Open(local filename); Get general Title and audio Format/SamplingRate",
-    "adapter": "adapters/cpp/mp3_id3v2/libmediainfo.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "format": "MPEG Audio",
-      "sample_rate": 8000
-    },
-    "scope": "ID3v2 title, MPEG Audio format and 8 kHz sample rate from the tagged MP3",
-    "family": "MediaInfoLib MPEG audio and ID3v2 parsers",
-    "family_note": "Native MediaInfoLib parsers are used from both C and C++ APIs; these call sites share one parser engine across ecosystems. The source has File_Mpega.cpp and File_Id3v2.cpp; its libzen dependency is a base utility library."
   },
   {
     "name": "sdl_mixer",
@@ -159,82 +106,6 @@
     "scope": "MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed",
     "family": "libsox MP3 handler over libmad decoder",
     "family_note": "The pinned src/mp3.c is the MP3 format handler and the installed libsox links libmad. C and C++ call sites use the same C library. The valid ID3v2-tagged control is accepted, but libsox does not return its title."
-  },
-  {
-    "name": "libmad",
-    "version": "0.16.5",
-    "license": "GPL-2.0-or-later",
-    "license_evidence": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
-    "documentation": "https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in",
-    "input_api": "mad_stream_buffer(local bytes after ID3v2 tag); mad_stream_skip; mad_frame_decode; mad_synth_frame",
-    "adapter": "adapters/cpp/mp3_id3v2/libmad.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "layer": 3,
-      "sample_rate": 8000,
-      "bit_rate": 32000,
-      "channels": 1,
-      "decoded_samples": 576
-    },
-    "scope": "MPEG Layer III frame parsing and 576 PCM samples from an ID3v2-tagged local file; adapter skips tag header/body",
-    "family": "libmad MPEG audio decoder",
-    "family_note": "libmad is the same decoder family linked by the separately counted SoX package. It parses MPEG audio frames, not ID3v2 text. The adapter skips the valid control tag using its syncsafe length before calling libmad."
-  },
-  {
-    "name": "miniaudio",
-    "version": "0.11.26",
-    "license": "LicenseRef-Homebrew-public-domain OR MIT-0",
-    "license_evidence": "https://github.com/mackron/miniaudio/archive/refs/tags/0.11.26.tar.gz",
-    "documentation": "https://github.com/mackron/miniaudio",
-    "input_api": "ma_decoder_init_file(local tagged MP3 filename); ma_decoder_read_pcm_frames; ma_decoder_get_length_in_pcm_frames",
-    "adapter": "adapters/cpp/mp3_id3v2/miniaudio.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "frames": 8000,
-      "decoded_frames": 1
-    },
-    "scope": "MP3 audio parsing and decoded PCM from a valid ID3v2-tagged input; tag text is not exposed",
-    "family": "miniaudio bundled dr_mp3 decoder",
-    "family_note": "The pinned miniaudio.h embeds dr_mp3 code. C and C++ use the same miniaudio implementation. This is the same dr_mp3 lineage as the excluded SDL3_mixer major release; the library accepts the ID3v2-tagged control but does not expose its title."
-  },
-  {
-    "name": "csfml",
-    "version": "3.0.0",
-    "license": "Zlib",
-    "license_evidence": "https://github.com/SFML/CSFML/archive/refs/tags/3.0.0.tar.gz",
-    "documentation": "https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h",
-    "input_api": "sfSoundBuffer_createFromFile(local filename); sfSoundBuffer_getSampleCount/getSampleRate/getChannelCount/getSamples",
-    "adapter": "adapters/cpp/mp3_id3v2/csfml.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "samples": 8000,
-      "sample_rate": 8000,
-      "channels": 1
-    },
-    "scope": "Fully decoded MP3 audio samples and stream fields from an ID3v2-tagged file; ID3v2 text is not exposed",
-    "family": "CSFML wrapper over SFML SoundFileReaderMp3/minimp3",
-    "family_note": "The CSFML C API delegates to the SFML C++ audio core, using its SoundFileReaderMp3 and bundled minimp3. C and C++ CSFML calls share the same library, and SFML is also counted separately in C++ as a distinct upstream package/API wrapper relation."
-  },
-  {
-    "name": "sfml",
-    "version": "3.0.2",
-    "license": "Zlib",
-    "license_evidence": "https://github.com/SFML/SFML/archive/refs/tags/3.0.2.tar.gz",
-    "documentation": "https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1InputSoundFile.html",
-    "input_api": "sf::InputSoundFile::openFromFile(local filename); getSampleCount/getSampleRate/getChannelCount; read decoded sample",
-    "adapter": "adapters/cpp/mp3_id3v2/sfml.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "samples": 8000,
-      "sample_rate": 8000,
-      "channels": 1,
-      "decoded_samples": 1
-    },
-    "scope": "MP3 audio sample count and one decoded sample from an ID3v2-tagged file; ID3v2 text is not exposed",
-    "family": "SFML SoundFileReaderMp3 over bundled minimp3",
-    "family_note": "The pinned SFML SoundFileReaderMp3.cpp uses bundled minimp3. CSFML 3.0.0 is a separate package wrapper over this same SFML engine; both C++ rows share the decoder family."
   },
   {
     "name": "gstreamer",
@@ -293,43 +164,6 @@
     "family_note": "The pinned LAME HIP interface accepts the full tagged control and returns MP3 frame fields; the installed libmp3lame links the separately verified libmpg123 decoder. C and C++ use one C library."
   },
   {
-    "name": "aubio",
-    "version": "0.4.9",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "https://sources.buildroot.net/aubio/aubio-0.4.9.tar.bz2",
-    "documentation": "https://aubio.org/doc/latest/io_2test-source_8c-example.html",
-    "input_api": "new_aubio_source(local filename, native sample rate, 256); aubio_source_do; aubio_source_get_samplerate/get_channels",
-    "adapter": "adapters/cpp/mp3_id3v2/aubio.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "decoded_samples": 256
-    },
-    "scope": "MP3 audio stream fields and 256 decoded samples from tagged local file; tag text is not exposed",
-    "family": "aubio source frontend over Apple AudioToolbox or libsndfile",
-    "family_note": "Pinned source.c tries Apple AudioToolbox before libsndfile on this macOS build, and installed libaubio links both. The adapter does not reveal which backend succeeded; exact underlying decoder family remains unresolved. C and C++ share one aubio C implementation."
-  },
-  {
-    "name": "dr_libs",
-    "version": "mp3-0.7.4",
-    "license": "Unlicense OR MIT-0",
-    "license_evidence": "https://github.com/mackron/dr_libs/archive/refs/tags/mp3-0.7.4.tar.gz",
-    "documentation": "https://github.com/mackron/dr_libs/blob/mp3-0.7.4/dr_mp3.h",
-    "input_api": "drmp3_init_file_with_metadata(local filename, callback); drmp3_read_pcm_frames_s16",
-    "adapter": "adapters/cpp/mp3_id3v2/dr_libs.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "decoded_frames": 1,
-      "id3v2_bytes": 101
-    },
-    "scope": "Tagged MP3 audio decode and raw ID3v2 tag recognition; does not decode ID3v2 text frames",
-    "family": "dr_mp3 over minimp3",
-    "family_note": "Standalone dr_libs release is a separate package path from miniaudio, but miniaudio embeds dr_mp3 and both derive MP3 decoding from minimp3. C and C++ adapters share this header."
-  },
-  {
     "name": "vlc",
     "version": "3.0.24",
     "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
@@ -346,42 +180,5 @@
     "scope": "ID3v2 title and recognized MP3 audio track from valid local tagged MP3",
     "family": "VLC media parser with bundled TagLib and MPEG audio plugins",
     "family_note": "VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC."
-  },
-  {
-    "name": "sdl2_sound",
-    "version": "2.0.6",
-    "license": "Zlib AND (Artistic-1.0-Perl OR LGPL-2.1-or-later)",
-    "license_evidence": "https://github.com/icculus/SDL_sound/releases/download/v2.0.6/SDL2_sound-2.0.6.tar.gz",
-    "documentation": "https://github.com/icculus/SDL_sound/blob/v2.0.6/src/SDL_sound.h",
-    "input_api": "Sound_NewSampleFromFile(local filename, desired, buffer size); Sound_Decode; Sound_GetDuration",
-    "adapter": "adapters/cpp/mp3_id3v2/sdl2_sound.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "decoded_bytes": 4096,
-      "duration_ms": 1000
-    },
-    "scope": "Decoded MP3 PCM, stream fields and duration from tagged local MP3; no ID3v2 text",
-    "family": "SDL_sound over bundled dr_mp3/minimp3",
-    "family_note": "SDL_sound is a separate upstream package from SDL_mixer. Its MP3 decoder embeds dr_mp3, also used by miniaudio and represented directly by dr_libs. C and C++ adapters share the same engine."
-  },
-  {
-    "name": "libmp3splt",
-    "version": "0.9.2",
-    "license": "GPL-2.0-or-later",
-    "license_evidence": "https://downloads.sourceforge.net/project/mp3splt/libmp3splt/0.9.2/libmp3splt-0.9.2.tar.gz",
-    "documentation": "https://mp3splt.sourceforge.net/mp3splt_page/documentation/libmp3splt_api/mp3splt_8h.html",
-    "input_api": "mp3splt_set_filename_to_split(local filename); mp3splt_append_splitpoint(0,50); mp3splt_split with SPLT_OPT_PRETEND_TO_SPLIT and write callback",
-    "adapter": "adapters/cpp/mp3_id3v2/libmp3splt.cpp",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "split_status": 1,
-      "segment_bytes": 2304,
-      "frame_header": "ffe348c0"
-    },
-    "scope": "MP3 frame-aware in-memory split of a 0.5-second segment from tagged local MP3; no ID3v2 text exposed",
-    "family": "libmp3splt MP3 plugin over libmad and libid3tag",
-    "family_note": "libmp3splt uses its own frame-aware split API with a bundled MP3 plugin linked to libmad and libid3tag. These underlying libraries also have direct rows. C and C++ call sites share the same plugin."
   }
 ]

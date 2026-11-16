@@ -21,27 +21,6 @@
     "family_note": "C and C++ call sites share libavformat; the MP4 box parser is in the MOV demuxer."
   },
   {
-    "name": "libmediainfo",
-    "version": "26.10",
-    "license": "BSD-2-Clause",
-    "license_evidence": "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz",
-    "documentation": "https://mediaarea.net/en/MediaInfo/Support/SDK/Quick_Start",
-    "input_api": "MediaInfo::Open(local filename); MediaInfo::Get for container, tracks, title and dimensions",
-    "adapter": "adapters/cpp/mp4/libmediainfo.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "container": "MPEG-4",
-      "title": "Parsarium",
-      "video": "AVC",
-      "audio": "AAC",
-      "width": 2,
-      "height": 2
-    },
-    "scope": "MPEG-4 container, title, AVC video and AAC audio, 2x2 video dimensions",
-    "family": "MediaInfoLib native MPEG-4 parser",
-    "family_note": "C and native C++ call sites share MediaInfoLib MPEG-4 parser and ZenLib utility library."
-  },
-  {
     "name": "gstreamer",
     "version": "1.28.9",
     "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
@@ -100,26 +79,6 @@
     "family_note": "C and C++ call sites share libVLC and its bundled MP4 demuxer; exact plugin selection during this run was not independently traced."
   },
   {
-    "name": "mp4v2",
-    "version": "2.1.3",
-    "license": "MPL-1.1",
-    "license_evidence": "https://github.com/enzo1982/mp4v2/releases/download/v2.1.3/mp4v2-2.1.3.tar.bz2",
-    "documentation": "https://github.com/enzo1982/mp4v2/blob/v2.1.3/include/mp4v2/file.h",
-    "input_api": "MP4Read(local filename); MP4GetNumberOfTracks; MP4FindTrackId; MP4GetTrackVideoWidth/Height",
-    "adapter": "adapters/cpp/mp4/mp4v2.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "tracks": 2,
-      "video_tracks": 1,
-      "audio_tracks": 1,
-      "width": 2,
-      "height": 2
-    },
-    "scope": "two MP4 tracks and 2x2 video dimensions",
-    "family": "MP4v2 native MP4 atom parser",
-    "family_note": "C and C++ call sites share MP4v2 native parser."
-  },
-  {
     "name": "gpac",
     "version": "26.07.0",
     "license": "LGPL-2.1-or-later",
@@ -139,64 +98,6 @@
     "scope": "two ISO media tracks, 2x2 video dimensions and duration",
     "family": "GPAC native ISO media parser",
     "family_note": "C and C++ call sites share the same gpac native MP4 parser. GPAC MP4Box is a CLI alias within the gpac package, not another package row."
-  },
-  {
-    "name": "bento4",
-    "version": "1.6.0-641",
-    "license": "GPL-2.0-or-later",
-    "license_evidence": "https://github.com/axiomatic-systems/Bento4/archive/refs/tags/v1.6.0-641.tar.gz",
-    "documentation": "https://github.com/axiomatic-systems/Bento4/blob/v1.6.0-641/Source/C%2B%2B/CApi/Bento4C.h",
-    "input_api": "AP4_FileByteStream_Create(local filename, READ); AP4_File_FromStream; AP4_File_GetMovie/GetFileType; AP4_Movie_GetTrackCount/GetTrackByIndex/GetDurationMs",
-    "adapter": "adapters/cpp/mp4/bento4.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "brand": "isom",
-      "tracks": 2,
-      "video_tracks": 1,
-      "audio_tracks": 1,
-      "duration_ms": 1000
-    },
-    "scope": "MP4 major brand, two audio/video tracks and one-second duration",
-    "family": "Bento4 AP4 ISO BMFF core",
-    "family_note": "C and C++ call sites share Bento4 AP4 core and C binding; C++ adapter compiles the C binding call site as C++."
-  },
-  {
-    "name": "libquicktime",
-    "version": "1.2.4",
-    "license": "LGPL-2.1-or-later",
-    "license_evidence": "https://libquicktime.sourceforge.net/ and pinned source COPYING",
-    "documentation": "https://libquicktime.sourceforge.net/introduction.html",
-    "input_api": "quicktime_open(local MP4 filename, 1, 0); quicktime_video_tracks; quicktime_audio_tracks; quicktime_video_width/height",
-    "adapter": "adapters/cpp/mp4/libquicktime.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "video_tracks": 1,
-      "audio_tracks": 1,
-      "width": 2,
-      "height": 2
-    },
-    "scope": "MP4 video/audio track counts and 2x2 video dimensions from parsed atoms",
-    "family": "libquicktime native QuickTime/MP4 atom reader",
-    "family_note": "C and C++ adapters call the same pinned libquicktime C API. Codec decode plugins are not required for the container result."
-  },
-  {
-    "name": "libextractor",
-    "version": "1.20",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "https://www.gnu.org/software/libextractor/ and pinned source COPYING",
-    "documentation": "https://www.gnu.org/software/libextractor/manual/extractor.html",
-    "input_api": "EXTRACTOR_plugin_add(\"qt\"); EXTRACTOR_extract(local MP4 filename, callback) returns format-specific metadata",
-    "adapter": "adapters/cpp/mp4/libextractor.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "title": "Parsarium",
-      "duration_seconds": 1,
-      "width": 2,
-      "height": 2
-    },
-    "scope": "QT/MP4 plugin parsed MIME type, title, duration and 2x2 video dimensions",
-    "family": "GNU libextractor native QT/MP4 metadata parser",
-    "family_note": "C and C++ adapters call the same libextractor qt plugin; its exact installed native plugin hash is pinned."
   },
   {
     "name": "taglib",
@@ -235,23 +136,6 @@
     "family_note": "The pinned libopencv_videoio dylib links the pinned FFmpeg libavformat and libavcodec libraries; this is a distinct C++ package API over the FFmpeg parser family."
   },
   {
-    "name": "libmp4tag",
-    "version": "2.0.4",
-    "license": "Zlib",
-    "license_evidence": "https://sourceforge.net/projects/libmp4tag/ and LICENSE.txt in pinned source release",
-    "documentation": "https://libmp4tag.sourceforge.io/ (GettingTags and Initializing in pinned release wiki)",
-    "input_api": "mp4tag_open(local MP4 filename); mp4tag_parse; mp4tag_get_tag_by_name; mp4tag_duration",
-    "adapter": "adapters/cpp/mp4/libmp4tag.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "title": "Parsarium",
-      "duration_ms": 1128
-    },
-    "scope": "MP4 title metadata and 1128 ms duration",
-    "family": "libmp4tag native MP4 atom and tag parser",
-    "family_note": "C and C++ adapters call the same published C API and native parser."
-  },
-  {
     "name": "exiv2",
     "version": "0.28.9",
     "license": "GPL-2.0-or-later",
@@ -268,64 +152,6 @@
     "scope": "MP4 major brand and video dimensions from parsed QuickTime XMP metadata",
     "family": "Exiv2 native QuickTime/MP4 metadata parser",
     "family_note": "Exiv2 has a native QuickTimeVideo reader in src/quicktimevideo.cpp; this is not the FFmpeg or TagLib parser family."
-  },
-  {
-    "name": "avcpp",
-    "version": "3.0.1",
-    "license": "BSD-3-Clause OR LGPL-2.1-only",
-    "license_evidence": "https://github.com/h4tr3d/avcpp/blob/v3.0.1/LICENSE.md and pinned license files",
-    "documentation": "https://h4tr3d.github.io/avcpp/formatcontext_8h_source.html",
-    "input_api": "av::FormatContext::openInput(local MP4 filename); findStreamInfo; inputFormat; stream(index)",
-    "adapter": "adapters/cpp/mp4/avcpp.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "format": "mp4",
-      "streams": 2,
-      "video": 1,
-      "audio": 1
-    },
-    "scope": "MP4 demuxer and one video plus one audio stream",
-    "family": "AvCpp API over FFmpeg MOV/MP4 demuxer",
-    "family_note": "Distinct published C++ package/API built against the pinned FFmpeg 9.0.2 libraries; shares the already recorded FFmpeg parser engine."
-  },
-  {
-    "name": "ireader-media-server",
-    "version": "1.0.0",
-    "license": "MIT",
-    "license_evidence": "https://github.com/ireader/media-server/blob/v1.0.0/LICENSE",
-    "documentation": "https://github.com/ireader/media-server/blob/v1.0.0/libmov/include/mov-reader.h",
-    "input_api": "mov_reader_create(mov_file_buffer(), local FILE*); mov_reader_getinfo callbacks; mov_reader_getduration",
-    "adapter": "adapters/cpp/mp4/ireader_media_server.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "video_tracks": 1,
-      "audio_tracks": 1,
-      "width": 2,
-      "height": 2,
-      "duration_ms": 1000
-    },
-    "scope": "One video and one audio track, 2x2 video dimensions and 1000 ms duration from valid MP4",
-    "family": "ireader libmov native ISO BMFF/MOV reader",
-    "family_note": "C and C++ adapters call the same tagged libmov C parser and upstream FILE callback adapter; counted as one underlying parser family."
-  },
-  {
-    "name": "shiguredo-mp4-rs",
-    "version": "2026.3.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://github.com/shiguredo/mp4-rs/blob/2026.3.0/LICENSE",
-    "documentation": "https://github.com/shiguredo/mp4-rs/blob/2026.3.0/crates/c-api/README.md",
-    "input_api": "mp4_file_demuxer_get_required_input; mp4_file_demuxer_handle_input(local FILE bytes); mp4_file_demuxer_get_tracks",
-    "adapter": "adapters/cpp/mp4/shiguredo_mp4.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "tracks": 2,
-      "video_tracks": 1,
-      "audio_tracks": 1,
-      "video_duration_ms": 1000
-    },
-    "scope": "Two parsed MP4 tracks (one video, one audio) and one-second video duration",
-    "family": "shiguredo/mp4-rs Rust ISO BMFF demuxer through its published C API",
-    "family_note": "The C and C++ adapters link the same tagged Rust static library and call its published C API; one underlying parser family."
   },
   {
     "name": "libheif",
@@ -345,26 +171,6 @@
     "scope": "MP4 video sequence track and 2x2 image resolution; the library does not expose the audio track through this sequence API",
     "family": "libheif native ISO BMFF image-sequence and MP4 parser",
     "family_note": "C and C++ adapters call the same libheif 1.23.7 C API and parser. This separate parser reads the MP4 video sequence and ignores audio."
-  },
-  {
-    "name": "mlt",
-    "version": "7.42.0",
-    "license": "LGPL-2.1-or-later",
-    "license_evidence": "https://github.com/mltframework/mlt/blob/v7.42.0/COPYING and license header in pinned producer_avformat.c",
-    "documentation": "https://mltframework.org/docs/mlt++/",
-    "input_api": "Mlt::Producer(profile, \"avformat\", local filename); Producer::get/get_int",
-    "adapter": "adapters/cpp/mp4/mlt.cpp",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "streams": 2,
-      "video_codec": "h264",
-      "audio_codec": "aac",
-      "width": 2,
-      "height": 2
-    },
-    "scope": "AVFormat producer parsed MP4 video/audio codecs and 2x2 video dimensions",
-    "family": "MLT avformat producer over FFmpeg MOV/MP4 demuxer",
-    "family_note": "MLT C and C++ package APIs use the same MLT avformat plugin; the plugin links FFmpeg 9.0.2 libavformat, sharing the existing FFmpeg parser family."
   },
   {
     "name": "libopenshot",

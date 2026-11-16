@@ -2,17 +2,17 @@
 
 Text mesh geometry.
 
-The catalog records 148 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
+The catalog records 59 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
 
 | Ecosystem | Verified paths | Docker harnesses |
 | --- | ---: | ---: |
-| [C](c/README.md) | 20 | 4 |
-| [C++](cpp/README.md) | 21 | 6 |
-| [Go](go/README.md) | 21 | 21 |
-| [Java](java/README.md) | 20 | 2 |
-| [JavaScript](javascript/README.md) | 20 | 19 |
-| [Python](python/README.md) | 21 | 17 |
-| [Rust](rust/README.md) | 20 | 20 |
-| [PHP](php/README.md) | 5 | 5 |
+| [C](c/README.md) | 8 | 0 |
+| [C++](cpp/README.md) | 10 | 0 |
+| [Go](go/README.md) | 6 | 6 |
+| [Java](java/README.md) | 2 | 0 |
+| [JavaScript](javascript/README.md) | 10 | 9 |
+| [Python](python/README.md) | 10 | 7 |
+| [Rust](rust/README.md) | 10 | 10 |
+| [PHP](php/README.md) | 3 | 3 |
 
 [Harness instructions](../../projects/README.md)

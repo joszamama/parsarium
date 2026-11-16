@@ -1,24 +1,32 @@
 {
   "ecosystem": "rust",
   "format": "svg",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 25,
-  "verified_document_input_count": 20,
-  "verified_path_data_only_count": 5,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
+  "verified_document_input_count": 8,
+  "verified_path_data_only_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
-    "svg", "svg parser", "svg reader", "svg render", "svg image", "svg path", "svg xml"
+    "svg",
+    "svg parser",
+    "svg reader",
+    "svg render",
+    "svg image",
+    "svg path",
+    "svg xml"
   ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 700,
   "unique_search_hits": 524,
   "unresolved_documentation_leads": 2,
-  "uncertainty": "Seven first-page crates.io searches saved 700 hits and 524 distinct crate names. All seven query totals exceed 100, so their tails remain unreviewed. Twenty-five pinned open-source crate paths passed valid SVG controls: 20 accept a complete SVG document and five accept only the extracted SVG path d attribute. The latter do not establish full-document support. These paths are not 25 independent parser engines: resvg, spreet, vello_svg, and anyrender_svg use usvg-lineage parsers; svgr and usvgr share a fork; ps-anyrender-svg uses ps-usvg; svg_path_ops uses svgtypes; svgcleaner uses svgdom. The 2×1 rectangle and 4×2 path controls do not establish support for scripts, CSS, fonts, filters, embedded images, SVGZ, or malformed inputs. Two plausible leads remain unresolved. crates.io recent downloads count all releases over about 90 days, are compared only within Rust, and are an adoption proxy rather than proof of parsing quality. Discovery remains partial.",
+  "uncertainty": "10 of 25 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/rust/svg/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/rust/svg/parsers.json",
   "third_party_control_results": "data/rust/svg/verification.json",
   "runtime_evidence": "data/rust/svg/standard.json",
   "registry_snapshot": "data/rust/svg/registry-snapshot.json",
-  "unresolved_leads": "data/rust/svg/leads.json"
+  "unresolved_leads": "data/rust/svg/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/rust/svg"
 }

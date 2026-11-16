@@ -1,38 +1,29 @@
-# C++ × PNG: verified parser ranking
+# CPP × PNG: selected parsers
 
-24 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:20:18.790315+00:00 and 2026-11-14T23:19:08Z. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C++, and do not establish a complete most-used set. 6 path(s) lack a metric and remain unranked.
+10 control-verified third-party paths selected from 24 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits, unresolved leads, and the C++ standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Repository stars | Scope | Underlying family |
+GitHub repository stargazers_count. Primary repository stars are compared only within this C++ PNG cell. They measure repository-level attention, not C++ usage or PNG parser calls. The C and C++ cells share 20 package paths; SFML bundles stb_image, while OpenCV, OpenImageIO and wxWidgets link libpng; no cross-ecosystem star comparison is made. Six primary upstreams lack a comparable GitHub metric.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [OpenCV](https://docs.opencv.org/5.0/main_modules/imgcodecs.html) | 5.1.0 | 91,569 | RGBA pixels | OpenCV imgcodecs PNG loader over linked libpng |
+| 1 | [opencv](https://docs.opencv.org/5.0/main_modules/imgcodecs.html) | 5.1.0 | 91,569 | RGBA pixels | OpenCV imgcodecs PNG loader over linked libpng |
 | 2 | [raylib](https://github.com/raysan5/raylib/blob/6.2/src/raylib.h) | 6.2 | 35,637 | pixels | raylib bundled stb_image PNG decoder |
 | 3 | [stb](https://github.com/nothings/stb/blob/a7d4c2175630e1ea5b6f8dd00ab96fed0b97b96d/stb_image.h) | cci.20261021 | 35,006 | pixels | stb_image |
 | 4 | [imagemagick](https://imagemagick.org/magick-wand/) | 7.1.2-35 | 17,848 | pixels | ImageMagick PNG coder (libpng-backed) |
 | 5 | [sdl3](https://wiki.libsdl.org/SDL3/SDL_LoadPNG) | 3.4.20 | 16,974 | pixels | SDL3 bundled stb_image PNG decoder |
 | 6 | [sfml](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Image.html) | 3.0.2 | 12,105 | RGBA pixels | SFML bundled stb_image PNG decoder |
 | 7 | [vips](https://www.libvips.org/API/current/VipsImage.html) | 8.18.7 | 11,801 | pixels | libvips PNG loader (libpng-backed) |
-| 8 | [wxWidgets](https://github.com/wxWidgets/wxWidgets/blob/v3.3.4/include/wx/image.h) | 3.3.4 | 7,307 | RGB pixels | wxWidgets wxPNGHandler over linked libpng |
-| 9 | [wuffs](https://github.com/google/wuffs/blob/v0.3.6/doc/std/image-decoders.md) | 0.3.6 | 4,881 | PNG image configuration | Wuffs PNG decoder |
-| 10 | [OpenImageIO](https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html) | 3.2.2.0 | 2,405 | RGBA pixels | OpenImageIO PNG ImageInput plugin over linked libpng |
-| 11 | [lodepng](https://github.com/lvandeve/lodepng/blob/865adac2b8149774401626101ec618e3de45e1d8/lodepng.h) | cci.20260102 | 2,357 | pixels | LodePNG |
-| 12 | [leptonica](https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/allheaders.h) | 1.87.0 | 2,107 | RGB pixels | Leptonica PNG loader (libpng-backed) |
-| 13 | [libpng](https://github.com/pnggroup/libpng/blob/v1.6.59/example.c) | 1.6.59 | 1,679 | pixels | libpng |
-| 14 | [sdl2_image](https://wiki.libsdl.org/SDL2_image/IMG_Load) | 2.8.12 | 997 | pixels | SDL_image 2 PNG loader (libpng-backed) |
-| 14 | [sdl3_image](https://wiki.libsdl.org/SDL3_image/IMG_Load) | 3.4.8 | 997 | pixels | SDL_image 3 PNG loader (libpng in recorded build) |
-| 16 | [gd](https://github.com/libgd/libgd/blob/gd-2.3.3/src/gd.h) | 2.3.3 | 989 | pixels | GD PNG codec (libpng-backed) |
-| 17 | [libspng](https://github.com/randy408/libspng/blob/v0.7.4/spng/spng.h) | 0.7.4 | 851 | pixels | libspng |
-| 18 | [pngle](https://github.com/kikuchan/pngle/blob/v1.1.0/src/pngle.h) | 1.1.0 | 141 | pixels | pngle with bundled miniz |
-| unranked | [cairo](https://www.cairographics.org/manual/cairo-PNG-Support.html) | 1.18.6 | unknown | pixels | Cairo PNG surface loader (libpng-backed) |
-| unranked | [devil](https://openil.sourceforge.net/docs/DevIL%20Reference%20Guide.pdf) | 1.8.0 | unknown | pixels | DevIL PNG loader (libpng-backed) |
-| unranked | [freeimage](https://freeimage.sourceforge.io/faq.html) | 3.18.0 | unknown | pixels | FreeImage PNG plugin (bundled libpng lineage) |
-| unranked | [gdk-pixbuf](https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html) | 2.44.8 | unknown | pixels | GdkPixbuf PNG loader (libpng-backed) |
-| unranked | [graphicsmagick](https://graphicsmagick.sourceforge.io/wand/magick_wand.html) | 1.3.49 | unknown | pixels | GraphicsMagick PNG coder (libpng-backed) |
-| unranked | [imlib2](https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/) | 1.12.7 | unknown | pixels | Imlib2 PNG loader (libpng-backed) |
 
-OpenCV 5.1.0 was inspected after the initial candidate batch because its 91,569 GitHub stars make it a high-interest C++ PNG path. The documented `cv::imread(local filename, IMREAD_UNCHANGED)` API parsed both pixels of the valid RGBA control through the pinned Homebrew arm64 bottle. The replay hashes the bottle, installed header, core/imgproc/imgcodecs libraries, and linked libpng library. OpenCV supplies a distinct C++ input API but shares libpng as an underlying PNG decoder. Reproduce with `python3 scripts/verify_cpp_png.py` on macOS ARM.
+## Supplemental numeric evidence
 
-OpenImageIO 3.2.2.0 was inspected from the previously unresolved Conan recipe lead. Its release documentation shows `ImageInput::open(local filename)` and `read_image`, and the adapter returned both RGBA pixels. The Homebrew 3.2.2.0_1 arm64 bottle, installed header and libraries, linked libpng, and fmt dependency are SHA-256-pinned in the replay. This is another C++ input API over libpng. Its 2,405 repository stars are compared only within this cell.
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
 
-wxWidgets 3.3.4 was inspected from the previously unresolved C++ documentation lead. The tagged `wxImage::LoadFile` API with `wxPNGHandler` returned both RGB pixels from the valid RGBA PNG control. The Homebrew arm64 bottle, installed headers, core/base libraries and linked libpng are SHA-256-pinned. wxWidgets supplies a separate C++ input API over the shared libpng decoder; the observed scope is RGB pixels. Its 7,307 repository stars are compared only within this cell.
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [cairo](https://www.cairographics.org/manual/cairo-PNG-Support.html) | 1.18.6 | [Debian source installed count](https://sources.debian.org/src/cairo/) | 208,328 | pixels | Cairo PNG surface loader (libpng-backed) |
+| 2 | [gdk-pixbuf](https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html) | 2.44.8 | [Debian source installed count](https://sources.debian.org/src/gdk-pixbuf/) | 198,025 | pixels | GdkPixbuf PNG loader (libpng-backed) |
+| 3 | [imlib2](https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/) | 1.12.7 | [Debian source installed count](https://sources.debian.org/src/imlib2/) | 20,958 | pixels | Imlib2 PNG loader (libpng-backed) |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

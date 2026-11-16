@@ -1,6 +1,6 @@
 # PDF / JavaScript
 
-22 verified third-party API paths; 21 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/pdf/ranking.md) · [standard API inventory](../../../data/javascript/pdf/standard.json)
 
@@ -16,18 +16,6 @@
 - [pdf2json](pdf2json/README.md) — Docker harness ready
 - [pdf.js-extract](pdf-js-extract/README.md) — Docker harness ready
 - [pdfreader](pdfreader/README.md) — Docker harness ready
-- [office-text-extractor](office-text-extractor/README.md) — Docker harness ready
-- [pdf-parse-new](pdf-parse-new/README.md) — Docker harness ready
-- [pdf-text-reader](pdf-text-reader/README.md) — Docker harness ready
-- [pdf-ts](pdf-ts/README.md) — Docker harness ready
-- [pdfdataextract](pdfdataextract/README.md) — Docker harness ready
-- [pdfnano](pdfnano/README.md) — Docker harness ready
-- [pdf-parser.js](pdf-parser-js/README.md) — Docker harness ready
-- [coherentpdf](coherentpdf/README.md) — Docker harness ready
-- [pdfnative](pdfnative/README.md) — Docker harness ready
-- [afpp](afpp/README.md) — Docker harness ready
-- [rasgapdf](rasgapdf/README.md) — Docker harness ready
-- [@firecrawl/pdf-inspector-wasm](firecrawl-pdf-inspector-wasm/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

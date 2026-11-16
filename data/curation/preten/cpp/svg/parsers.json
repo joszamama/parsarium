@@ -1,0 +1,491 @@
+[
+  {
+    "name": "librsvg",
+    "version": "2.63.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/class.Handle.html",
+    "input_api": "rsvg_handle_new_from_file(local filename), rsvg_handle_get_intrinsic_size_in_pixels, rsvg_handle_render_document",
+    "adapter": "adapters/cpp/svg/librsvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "librsvg Rust SVG engine through C API",
+    "family_note": "The same librsvg source package and engine serve C and C++ call sites; this is one package path per ecosystem, not two independent parsers."
+  },
+  {
+    "name": "libvips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/LICENSE",
+    "documentation": "https://www.libvips.org/API/current/ctor.Image.svgload.html",
+    "input_api": "vips::VImage::svgload(local filename); getpoint(x,y)",
+    "adapter": "adapters/cpp/svg/libvips.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "libvips SVG loader over librsvg",
+    "family_note": "Installed libvips core directly links librsvg 2.63.4. libvips is a distinct package input API but shares SVG syntax interpretation with the librsvg row."
+  },
+  {
+    "name": "imagemagick",
+    "version": "7.1.2-35",
+    "license": "ImageMagick",
+    "license_evidence": "https://imagemagick.org/license/",
+    "documentation": "https://imagemagick.org/formats/",
+    "input_api": "Magick::Image(std::string(\"MSVG:\") + local filename); pixelColor(0,0), pixelColor(1,0)",
+    "adapter": "adapters/cpp/svg/imagemagick.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "ImageMagick internal MSVG renderer with libxml2",
+    "family_note": "The adapter forces ImageMagick's documented MSVG format, selecting its internal SVG renderer. The pinned SVG coder module links system libxml2; this path does not use librsvg or the external Inkscape delegate."
+  },
+  {
+    "name": "graphicsmagick",
+    "version": "1.3.49",
+    "license": "MIT",
+    "license_evidence": "https://graphicsmagick.sourceforge.io/Copyright.html",
+    "documentation": "https://graphicsmagick.sourceforge.io/formats.html",
+    "input_api": "Magick::Image(local filename); pixelColor(0,0), pixelColor(1,0)",
+    "adapter": "adapters/cpp/svg/graphicsmagick.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "GraphicsMagick SVG-to-MVG coder with libxml2",
+    "family_note": "The pinned GraphicsMagick SVG coder links system libxml2 and translates SVG to MVG. It is a separate package and SVG implementation; system libxml2 is a shared XML dependency."
+  },
+  {
+    "name": "resvg",
+    "version": "0.50.0",
+    "license": "Apache-2.0 OR MIT",
+    "license_evidence": "https://github.com/linebender/resvg/blob/v0.50.0/crates/c-api/README.md",
+    "documentation": "https://github.com/linebender/resvg/blob/v0.50.0/crates/c-api/resvg.h",
+    "input_api": "resvg_parse_tree_from_file(local filename, options, &tree); resvg_get_image_size; resvg_render to RGBA pixmap",
+    "adapter": "adapters/cpp/svg/resvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "resvg/usvg Rust SVG parser and tiny-skia renderer through C API",
+    "family_note": "The C and C++ adapters use the same tagged resvg-capi source library. This is a distinct engine from librsvg, ImageMagick MSVG, and GraphicsMagick SVG-to-MVG; the two ecosystem paths are not independent from one another."
+  },
+  {
+    "name": "plutosvg",
+    "version": "0.0.8",
+    "license": "MIT",
+    "license_evidence": "https://github.com/sammycage/plutosvg/blob/v0.0.8/LICENSE",
+    "documentation": "https://github.com/sammycage/plutosvg/blob/v0.0.8/source/plutosvg.h",
+    "adapter": "adapters/cpp/svg/plutosvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "PlutoSVG document parser with PlutoVG rasterizer",
+    "family_note": "PlutoSVG has a C document parser used from C and C++; both ecosystem paths share that engine. LunaSVG shares the PlutoVG rasterizer but has separate SVG document parsing code.",
+    "input_api": "plutosvg_document_load_from_file(local filename, -1, -1); plutosvg_document_render_to_surface; plutovg_convert_argb_to_rgba"
+  },
+  {
+    "name": "lunasvg",
+    "version": "3.5.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/sammycage/lunasvg/blob/v3.5.0/LICENSE",
+    "documentation": "https://github.com/sammycage/lunasvg/blob/v3.5.0/include/lunasvg.h",
+    "adapter": "adapters/cpp/svg/lunasvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "LunaSVG C++ document parser with PlutoVG rasterizer",
+    "family_note": "LunaSVG exposes a C++ document API; its C extern section has version and font helpers but no C document loader. It shares PlutoVG rasterization with PlutoSVG, while retaining separate SVG parsing logic.",
+    "input_api": "lunasvg::Document::loadFromFile(local filename); renderToBitmap; Bitmap::convertToRGBA"
+  },
+  {
+    "name": "qtsvg",
+    "version": "6.12.0",
+    "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtsvg-everywhere-src-6.12.0.tar.xz",
+    "documentation": "https://doc.qt.io/qt-6/qsvgrenderer.html",
+    "input_api": "QSvgRenderer(QString local filename); isValid; defaultSize; render(QPainter*) to QImage",
+    "adapter": "adapters/cpp/svg/qtsvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "QtSvg QSvgRenderer document parser and Qt painter",
+    "family_note": "QtSvg provides its own C++ SVG document reader. QtCore and QtGui supply the paint device and pixels; this row does not re-count a second QtSvg API as an independent parser."
+  },
+  {
+    "name": "libsvgtiny",
+    "version": "0.1.8",
+    "license": "MIT",
+    "license_evidence": "https://download.netsurf-browser.org/libs/releases/libsvgtiny-0.1.8-src.tar.gz",
+    "documentation": "https://www.netsurf-browser.org/projects/libsvgtiny/",
+    "input_api": "svgtiny_parse(local SVG file bytes, size, URL, viewport); diagram width, height, shape count and fill colors",
+    "adapter": "adapters/cpp/svg/libsvgtiny.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "shapes": 2,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions, two shapes, and red/green fill colors",
+    "family": "NetSurf libsvgtiny SVG Tiny parser over libdom",
+    "family_note": "The same C source library serves C and C++ call sites. libsvgtiny uses the NetSurf libdom XML parser and returns parsed shapes; it does not rasterize."
+  },
+  {
+    "name": "libsvg",
+    "version": "0.1.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz",
+    "documentation": "https://cairographics.org/snapshots/libsvg-0.1.4.tar.gz",
+    "input_api": "svg_create; svg_parse(local filename); svg_get_size parsed SVG width and height",
+    "adapter": "adapters/cpp/svg/libsvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "parsed SVG root dimensions",
+    "family": "libsvg parser with system libxml2",
+    "family_note": "libsvg parses SVG without drawing. Its README says it was based on old librsvg code; the installed library is separate from current librsvg. libsvg-cairo uses this same underlying parser."
+  },
+  {
+    "name": "libsvg-cairo",
+    "version": "0.1.6",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz",
+    "documentation": "https://cairographics.org/snapshots/libsvg-cairo-0.1.6.tar.gz",
+    "input_api": "svg_cairo_create; svg_cairo_parse(local filename); svg_cairo_get_size; svg_cairo_render to Cairo image surface",
+    "adapter": "adapters/cpp/svg/libsvg-cairo.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "libsvg-cairo adapter over libsvg parser and Cairo renderer",
+    "family_note": "A distinct package input API, but SVG syntax parsing is delegated to the separately counted libsvg 0.1.4 package. Cairo supplies rasterization."
+  },
+  {
+    "name": "thorvg",
+    "version": "1.1.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thorvg/thorvg/blob/v1.1.3/LICENSE",
+    "documentation": "https://github.com/thorvg/thorvg/blob/v1.1.3/README.md",
+    "input_api": "tvg::Initializer::init; tvg::Picture::gen; Picture::load(local filename); Picture::size",
+    "adapter": "adapters/cpp/svg/thorvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "parsed SVG document dimensions",
+    "family": "ThorVG SVG loader and native vector engine",
+    "family_note": "ThorVG C binding and native C++ API are distinct ecosystem call paths over the same ThorVG SVG loader; they do not represent independent syntax engines."
+  },
+  {
+    "name": "sdl3_image",
+    "version": "3.4.8",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/libsdl-org/SDL_image/releases/download/release-3.4.8/SDL3_image-3.4.8.tar.gz",
+    "documentation": "https://wiki.libsdl.org/SDL3_image/IMG_LoadSVG_IO",
+    "input_api": "SDL_IOFromFile(local filename); IMG_LoadSVG_IO(stream); SDL_ConvertSurface to RGBA32",
+    "adapter": "adapters/cpp/svg/sdl3_image.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green RGBA pixels",
+    "family": "SDL3_image SVG loader with embedded NanoSVG parser/rasterizer",
+    "family_note": "The pinned IMG_svg.c includes embedded NanoSVG and nanosvgrast code; SDL3_image is a distinct package input API. Its C function is called from C and C++ adapters over one SVG engine."
+  },
+  {
+    "name": "gdk-pixbuf",
+    "version": "2.44.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-2.44.8.tar.xz",
+    "documentation": "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
+    "input_api": "gdk_pixbuf_new_from_file(local SVG filename); gdk_pixbuf_get_width/height/read_pixels",
+    "adapter": "adapters/cpp/svg/gdk-pixbuf.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green RGBA pixels",
+    "family": "GdkPixbuf loader API with librsvg SVG plugin",
+    "family_note": "The installed GdkPixbuf SVG loader module comes from librsvg 2.63.4, which is separately counted. This is a distinct package input API over the same librsvg SVG syntax engine."
+  },
+  {
+    "name": "qtbase",
+    "version": "6.12.0",
+    "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtbase-everywhere-src-6.12.0.tar.xz",
+    "documentation": "https://doc.qt.io/qt-6/qimagereader.html",
+    "input_api": "QImageReader(QString local SVG filename, \"svg\"); read() to QImage; pixelColor",
+    "adapter": "adapters/cpp/svg/qtbase.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "parsed SVG dimensions and rendered red/green rectangle pixels",
+    "family": "QtBase QImageReader with QtSvg image plugin",
+    "family_note": "QtBase provides the generic image input API; the hash-pinned QtSvg plugin and framework perform SVG syntax parsing. This shares the QtSvg engine with the separately verified QSvgRenderer package path."
+  },
+  {
+    "name": "novasvg",
+    "version": "0.11.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/MohammadRaziei/novasvg/blob/v0.11.5/LICENSE.txt",
+    "documentation": "https://mohammadraziei.github.io/novasvg/index.html",
+    "input_api": "novasvg::Document::loadFromFile(local filename); width(); height(); querySelectorAll(\"rect\")",
+    "adapter": "adapters/cpp/svg/novasvg.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rectangles": 2
+    },
+    "scope": "SVG root dimensions and two parsed rectangle elements",
+    "family": "NovaSVG native C++ SVG parser",
+    "family_note": "Header-only C++17 library with its own SVG document parser and rasterizer."
+  },
+  {
+    "name": "juce",
+    "version": "9.0.5",
+    "license": "AGPL-3.0-only",
+    "license_evidence": "https://github.com/juce-framework/JUCE/blob/9.0.5/LICENSE.md",
+    "documentation": "https://docs.juce.com/develop/classjuce_1_1Drawable.html",
+    "input_api": "juce::Drawable::createFromSVGFile(juce::File(local filename)); getDrawableBounds()",
+    "adapter": "adapters/cpp/svg/juce.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "parsed SVG drawable bounds from local file",
+    "family": "JUCE juce_graphics over bundled LunaSVG",
+    "family_note": "JUCE SVGParser.cpp calls bundled LunaSVG and converts its document to a JUCE Drawable tree; this shares the LunaSVG parser family with the direct LunaSVG row."
+  },
+  {
+    "name": "wxwidgets",
+    "version": "3.3.4",
+    "license": "LGPL-2.0-or-later WITH WxWindows-exception-3.1",
+    "license_evidence": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2",
+    "documentation": "https://github.com/wxWidgets/wxWidgets/blob/v3.3.4/include/wx/bmpbndl.h",
+    "input_api": "wxBitmapBundle::FromSVGFile(local filename, wxSize); GetBitmap; ConvertToImage",
+    "adapter": "adapters/cpp/svg/wxwidgets.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "left_rgb": [
+        255,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "SVG dimensions and two rendered RGB pixels",
+    "family": "wxWidgets wxBitmapBundle over bundled NanoSVG",
+    "family_note": "This Homebrew wxWidgets build defines wxUSE_NANOSVG=1, wxUSE_NANOSVG_EXTERNAL=0 and wxUSE_LUNASVG=0. It embeds NanoSVG, sharing that syntax parser family with SDL3_image."
+  },
+  {
+    "name": "qtdeclarative",
+    "version": "6.12.0",
+    "license": "LGPL-3.0-only",
+    "license_evidence": "https://download.qt.io/official_releases/qt/6.12/6.12.0/submodules/qtdeclarative-everywhere-src-6.12.0.tar.xz",
+    "documentation": "https://doc.qt.io/qt-6/qml-qtquick-vectorimage-vectorimage.html",
+    "input_api": "QQmlComponent creates QtQuick.VectorImage; source=QUrl::fromLocalFile(local filename); status and implicitWidth/implicitHeight",
+    "adapter": "adapters/cpp/svg/qtdeclarative.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "ready": true
+    },
+    "scope": "SVG vector scene loaded with parsed intrinsic dimensions",
+    "family": "Qt Quick VectorImage over QtSvg SVG document parser",
+    "family_note": "QtDeclarative VectorImage builds a Qt Quick scene from the QtSvg document/visitor parser. It is a separate package API sharing the QtSvg syntax engine with QtSvg and QtBase QImageReader."
+  },
+  {
+    "name": "qtwebengine",
+    "version": "6.11.2",
+    "license": "LGPL-3.0-only",
+    "license_evidence": "https://download.qt.io/official_releases/qt/6.11/6.11.2/submodules/qtwebengine-everywhere-src-6.11.2.tar.xz",
+    "documentation": "https://doc.qt.io/qt-6/qwebenginepage.html",
+    "input_api": "QWebEnginePage::load(QUrl::fromLocalFile(local filename)); loadFinished; runJavaScript(document.documentElement and querySelectorAll)",
+    "adapter": "adapters/cpp/svg/qtwebengine.cpp",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "root": "svg",
+      "width": 2,
+      "height": 1,
+      "rectangles": 2
+    },
+    "scope": "parsed SVG DOM root, dimensions and two rectangle elements",
+    "family": "QtWebEngine over Chromium Blink SVG DOM parser",
+    "family_note": "The QtWebEngine package embeds Chromium Blink; the adapter reads SVG-specific DOM elements from a local SVG document, distinct from QtSvg and QtDeclarative VectorImage."
+  }
+]

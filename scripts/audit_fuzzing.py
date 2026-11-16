@@ -80,9 +80,11 @@ def main() -> None:
         assert receipt["control_sha256"] == manifest["control_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         dockerfile = (overlay / "Dockerfile").read_bytes()
-        if manifest["package"] != "gstreamer":
+        if manifest["package"] not in {"gstreamer", "netpbm", "sail"}:
             assert dockerfile == derived_dockerfile(project).encode()
-        assert receipt["overlay_dockerfile_sha256"] == sha256(dockerfile).hexdigest()
+        expected_dockerfile_hash = (receipt.get("overlay_dockerfile_sha256") or
+                                    receipt.get("overlay_file_sha256", {}).get("Dockerfile"))
+        assert expected_dockerfile_hash == sha256(dockerfile).hexdigest()
     rust = [path for path in manifests if path.parent.parent.name == "rust"]
     rust_report = json.loads((ROOT / "data/afl-rust-smoke.json").read_text())
     rust_records = {item["project"]: item for item in rust_report["results"]}

@@ -1,6 +1,6 @@
 # ZIP / Python
 
-20 verified third-party API paths; 20 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/zip/ranking.md) · [standard API inventory](../../../data/python/zip/standard.json)
 
@@ -13,17 +13,7 @@
 - [fs](fs/README.md) — Docker harness ready
 - [libarchive-c](libarchive-c/README.md) — Docker harness ready
 - [stream-unzip](stream-unzip/README.md) — Docker harness ready
-- [pyzip](pyzip/README.md) — Docker harness ready
 - [zipfile36](zipfile36/README.md) — Docker harness ready
-- [zipfile37](zipfile37/README.md) — Docker harness ready
-- [zipfile38](zipfile38/README.md) — Docker harness ready
-- [zipfile2](zipfile2/README.md) — Docker harness ready
-- [larzarchive](larzarchive/README.md) — Docker harness ready
-- [python-archive](python-archive/README.md) — Docker harness ready
-- [omni-archive](omni-archive/README.md) — Docker harness ready
-- [archivey](archivey/README.md) — Docker harness ready
-- [zipmonkey](zipmonkey/README.md) — Docker harness ready
-- [archive-path](archive-path/README.md) — Docker harness ready
 - [patool](patool/README.md) — Docker harness ready
 - [pyunpack](pyunpack/README.md) — Docker harness ready
 

@@ -1,0 +1,206 @@
+[
+  {
+    "name": "jszip",
+    "version": "3.10.2",
+    "license": "MIT OR GPL-3.0-or-later",
+    "input_api": "JSZip.loadAsync(Buffer); zip.file(name).async('string')",
+    "documentation": "https://github.com/Stuk/jszip/blob/main/documentation/api_jszip/load_async.md",
+    "scope": "entries_and_content",
+    "family": "JSZip"
+  },
+  {
+    "name": "adm-zip",
+    "version": "0.6.1",
+    "license": "MIT",
+    "input_api": "new AdmZip(Buffer); getEntries(); readAsText(entry)",
+    "documentation": "https://www.npmjs.com/package/adm-zip",
+    "scope": "entries_and_content",
+    "family": "ADM-ZIP"
+  },
+  {
+    "name": "yauzl",
+    "version": "3.4.0",
+    "license": "MIT",
+    "input_api": "fromBufferPromise(Buffer); eachEntry(); openReadStreamPromise(entry)",
+    "documentation": "https://www.npmjs.com/package/yauzl",
+    "scope": "entries_and_content",
+    "family": "yauzl"
+  },
+  {
+    "name": "unzipper",
+    "version": "0.12.5",
+    "license": "MIT",
+    "input_api": "Open.buffer(Buffer); entry.buffer()",
+    "documentation": "https://www.npmjs.com/package/unzipper",
+    "scope": "entries_and_content",
+    "family": "unzipper",
+    "family_note": "Uses Node zlib for DEFLATE; archive parsing is in unzipper."
+  },
+  {
+    "name": "fflate",
+    "version": "0.8.3",
+    "license": "MIT",
+    "input_api": "unzipSync(Uint8Array)",
+    "documentation": "https://www.npmjs.com/package/fflate",
+    "scope": "entries_and_content",
+    "family": "fflate"
+  },
+  {
+    "name": "@zip.js/zip.js",
+    "version": "2.24.0",
+    "license": "BSD-3-Clause",
+    "input_api": "new ZipReader(new Uint8ArrayReader(bytes)); getEntries(); entry.getData(new TextWriter())",
+    "documentation": "https://gildas-lormeau.github.io/zip.js/api/classes/ZipReader.html",
+    "scope": "entries_and_content",
+    "family": "zip.js"
+  },
+  {
+    "name": "node-stream-zip",
+    "version": "1.16.0",
+    "license": "MIT",
+    "input_api": "new StreamZip.async({file:path}); entries(); entryData(name)",
+    "documentation": "https://www.npmjs.com/package/node-stream-zip",
+    "scope": "entries_and_content",
+    "family": "node-stream-zip"
+  },
+  {
+    "name": "extract-zip",
+    "version": "2.0.1",
+    "license": "BSD-2-Clause",
+    "input_api": "extract(localZipPath, {dir, onEntry})",
+    "documentation": "https://www.npmjs.com/package/extract-zip",
+    "scope": "entries_and_content",
+    "family": "yauzl",
+    "family_note": "This release depends on yauzl@^2.10.0."
+  },
+  {
+    "name": "@electron-internal/extract-zip",
+    "version": "1.0.8",
+    "license": "MIT",
+    "input_api": "extract(localZipPath, {dir})",
+    "documentation": "https://www.npmjs.com/package/@electron-internal/extract-zip",
+    "scope": "entries_and_content",
+    "family": "Electron native ZIP extractor",
+    "family_note": "Native implementation; exact underlying parser library has not been established."
+  },
+  {
+    "name": "yauzl-promise",
+    "version": "4.0.0",
+    "license": "MIT",
+    "input_api": "fromBuffer(Buffer); async iterate entries; entry.openReadStream()",
+    "documentation": "https://www.npmjs.com/package/yauzl-promise",
+    "scope": "entries_and_content",
+    "family": "yauzl-promise",
+    "family_note": "Version 4 is a rewrite rather than a wrapper of yauzl."
+  },
+  {
+    "name": "decompress-unzip",
+    "version": "4.0.1",
+    "license": "MIT",
+    "input_api": "decompressUnzip()(Buffer)",
+    "documentation": "https://www.npmjs.com/package/decompress-unzip",
+    "scope": "entries_and_content",
+    "family": "yauzl",
+    "family_note": "The pinned release depends on yauzl@^2.4.2."
+  },
+  {
+    "name": "@xhmikosr/decompress-unzip",
+    "version": "8.2.1",
+    "license": "MIT",
+    "input_api": "decompressUnzip()(Buffer)",
+    "documentation": "https://www.npmjs.com/package/@xhmikosr/decompress-unzip",
+    "scope": "entries_and_content",
+    "family": "yauzl",
+    "family_note": "The pinned release depends on yauzl@^3.4.0."
+  },
+  {
+    "name": "decompress",
+    "version": "4.2.1",
+    "license": "MIT",
+    "input_api": "decompress(Buffer)",
+    "documentation": "https://www.npmjs.com/package/decompress",
+    "scope": "entries_and_content",
+    "family": "yauzl",
+    "family_note": "Uses decompress-unzip, which uses yauzl."
+  },
+  {
+    "name": "@xhmikosr/decompress",
+    "version": "11.1.4",
+    "license": "MIT",
+    "input_api": "decompress(Buffer)",
+    "documentation": "https://www.npmjs.com/package/@xhmikosr/decompress",
+    "scope": "entries_and_content",
+    "family": "yauzl",
+    "family_note": "Uses @xhmikosr/decompress-unzip, which uses yauzl."
+  },
+  {
+    "name": "unzipper-esm",
+    "version": "0.13.3",
+    "license": "MIT",
+    "input_api": "Open.buffer(Buffer); entry.buffer()",
+    "documentation": "https://github.com/catamphetamine/node-unzipper",
+    "scope": "entries_and_content",
+    "family": "unzipper",
+    "family_note": "ES module fork of unzipper."
+  },
+  {
+    "name": "pizzip",
+    "version": "3.3.0",
+    "license": "MIT OR GPL-3.0",
+    "input_api": "new PizZip(Buffer); zip.file(name).asText()",
+    "documentation": "https://www.npmjs.com/package/pizzip",
+    "scope": "entries_and_content",
+    "family": "JSZip",
+    "family_note": "Fork of JSZip 2.x."
+  },
+  {
+    "name": "unzip-stream",
+    "version": "0.3.4",
+    "license": "MIT",
+    "input_api": "Readable.pipe(unzip.Parse()); async iterate entries",
+    "documentation": "https://www.npmjs.com/package/unzip-stream",
+    "scope": "entries_and_content",
+    "family": "unzip-stream",
+    "family_note": "Based on unzip and unzipper, but documents a new streaming engine."
+  },
+  {
+    "name": "@loaders.gl/zip",
+    "version": "4.5.4",
+    "license": "MIT",
+    "input_api": "ZipLoader.parse(ArrayBuffer)",
+    "documentation": "https://loaders.gl/docs/modules/zip/api-reference/zip-loader",
+    "scope": "entries_and_content",
+    "family": "JSZip",
+    "family_note": "The ZIP loader wraps JSZip."
+  },
+  {
+    "name": "decompress-zip",
+    "version": "0.3.3",
+    "license": "MIT",
+    "input_api": "new DecompressZip(localZipPath).extract({path:target})",
+    "documentation": "https://www.npmjs.com/package/decompress-zip",
+    "scope": "entries_and_content",
+    "family": "decompress-zip"
+  },
+  {
+    "name": "zip-lib",
+    "version": "1.4.0",
+    "license": "MIT",
+    "input_api": "extract(Buffer, targetFolder)",
+    "documentation": "https://www.npmjs.com/package/zip-lib",
+    "scope": "entries_and_content",
+    "family": "yauzl",
+    "family_note": "The pinned release depends on yauzl@^3.4.0."
+  },
+  {
+    "name": "node-zip",
+    "version": "1.1.1",
+    "license": "MIT (package README; registry metadata omits license)",
+    "license_evidence": "https://www.npmjs.com/package/node-zip",
+    "input_api": "new NodeZip(Buffer, {base64:false}); zip.file(name).asText()",
+    "documentation": "https://www.npmjs.com/package/node-zip",
+    "scope": "entries_and_content",
+    "family": "JSZip",
+    "family_note": "The pinned release depends on jszip@2.5.0."
+  }
+]

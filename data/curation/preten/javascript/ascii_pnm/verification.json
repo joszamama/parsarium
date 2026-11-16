@@ -1,0 +1,391 @@
+{
+  "checked_at_utc": "2026-11-11T22:57:05.007Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v26.10.0",
+  "controls": {
+    "controls/ascii_pnm/red-green.ppm": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+    "controls/ascii_pnm/black-white.pgm": "29f6a1ca59a8ff644dc66ce3f9b77abd50d6245fedebb35cdf18b5448547051b"
+  },
+  "third_party": [
+    {
+      "package": "image-size",
+      "version": "2.1.0",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs image-size controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "netpbm-parser",
+      "version": "1.1.7",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs netpbm-parser controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "P3",
+        "width": 2,
+        "height": 1,
+        "rgba": [
+          255,
+          0,
+          0,
+          255,
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "pgmjs",
+      "version": "1.1.6",
+      "scope": "P2 grayscale pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs pgmjs controls/ascii_pnm/black-white.pgm",
+      "pass": true,
+      "output": {
+        "type": "P2",
+        "width": 2,
+        "height": 1,
+        "maxval": 255,
+        "pixels": [
+          0,
+          255
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@lp-labs/ppm-image-codec",
+      "version": "0.1.0",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs @lp-labs/ppm-image-codec controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "maxval": 255,
+        "rgb": [
+          255,
+          0,
+          0,
+          0,
+          255,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@jdmichaud/netpbm",
+      "version": "0.2.1",
+      "scope": "P3 RGBA pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs @jdmichaud/netpbm controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rgba": [
+          255,
+          0,
+          0,
+          255,
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "ppm",
+      "version": "0.0.0",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs ppm controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rgb": [
+          255,
+          0,
+          0,
+          0,
+          255,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@napi-rs/image",
+      "version": "1.16.0",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs @napi-rs/image controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "format": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "image-size-next",
+      "version": "2.1.1",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs image-size-next controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "image-size-safe",
+      "version": "2.0.3",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs image-size-safe controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "@nous-research/image-size",
+      "version": "2.0.3",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs @nous-research/image-size controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "tiny-image-size",
+      "version": "1.0.0",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs tiny-image-size controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "@localnerve/image-size",
+      "version": "2.1.5",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs @localnerve/image-size controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "@portable/image-size",
+      "version": "0.1.0",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs @portable/image-size controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "view-image-size",
+      "version": "2.1.1",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs view-image-size controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "fastimage",
+      "version": "7.0.1",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs fastimage controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "image-meta",
+      "version": "0.2.2",
+      "scope": "P3 header dimensions and PNM type",
+      "command": "node adapters/javascript/ascii_pnm.mjs image-meta controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "type": "pnm",
+        "width": 2,
+        "height": 1
+      },
+      "error": null
+    },
+    {
+      "package": "@imgdrop/pnm",
+      "version": "1.0.2",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs @imgdrop/pnm controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "tuple": "RGB",
+        "rgb": [
+          255,
+          0,
+          0,
+          0,
+          255,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "pgmts",
+      "version": "1.0.1",
+      "scope": "P2 grayscale pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs pgmts controls/ascii_pnm/black-white.pgm",
+      "pass": true,
+      "output": {
+        "type": "P2",
+        "width": 2,
+        "height": 1,
+        "maxval": 255,
+        "pixels": [
+          0,
+          255
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "purejsimage",
+      "version": "0.17.0",
+      "scope": "P3 parsed format metadata and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs purejsimage controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "format": "netpbm",
+        "variant": "P3",
+        "width": 2,
+        "height": 1,
+        "channels": 3
+      },
+      "error": null
+    },
+    {
+      "package": "image-in-browser",
+      "version": "3.7.0",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs image-in-browser controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rgb": [
+          255,
+          0,
+          0,
+          0,
+          255,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@designliquido/delegua-imagens",
+      "version": "0.1.0",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs @designliquido/delegua-imagens controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rgb": [
+          255,
+          0,
+          0,
+          0,
+          255,
+          0
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@catlabtech/webcvt-image-legacy",
+      "version": "0.3.0",
+      "scope": "P3 RGB pixels and dimensions",
+      "command": "node adapters/javascript/ascii_pnm.mjs @catlabtech/webcvt-image-legacy controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "variant": "ascii",
+        "width": 2,
+        "height": 1,
+        "rgb": [
+          255,
+          0,
+          0,
+          0,
+          255,
+          0
+        ]
+      },
+      "error": null
+    }
+  ],
+  "runtime": [],
+  "browser_probe": {
+    "command": "node adapters/javascript/ascii_pnm_browser.mjs controls/ascii_pnm/red-green.ppm",
+    "ran": true,
+    "output": {
+      "chromium": "153.0.8010.12",
+      "htmlImage": {
+        "decoded": false,
+        "error": "EncodingError"
+      },
+      "imageBitmap": {
+        "decoded": false,
+        "error": "InvalidStateError"
+      }
+    },
+    "error": null
+  }
+}

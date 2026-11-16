@@ -4,7 +4,7 @@ The [website](https://parsarium.com/) helps users choose a format, find a docume
 
 Parsarium is a format-first catalog and target set for parser experiments. It verifies open-source libraries and standard APIs that parse local inputs in ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Selected paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
 
-The catalog contains **1,636 verified third-party package paths** across ten formats and eight ecosystems. Most format and ecosystem combinations meet the working goal of 20; PHP × ASCII PLY has five. Every combination has at least one runnable harness. The [current coverage report](data/projects-coverage.json) distinguishes fully verified harnesses from staged and pending paths; a documented catalog entry is runnable only when that report marks it verified.
+The catalog selects **775 control-verified third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 74 of 80 reach ten, and the other six report the smaller supported count. Every selected path has a positive numeric adoption signal, though 48 use a separately labeled secondary source. The [curation record](data/curation/README.md) explains metrics, exclusions, and remaining uncertainty. The [current coverage report](data/projects-coverage.json) distinguishes fully verified harnesses from staged and pending paths; a catalog entry is runnable only when that report marks it verified.
 
 ## Start here
 
@@ -72,6 +72,7 @@ The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and re
 | Path | Contents |
 | --- | --- |
 | `data/<ecosystem>/<format>/` | Verified parsers, ranking, search leads, standard APIs, control results, and release evidence |
+| `data/curation/` | Ten-path selection, pinned adoption sources, metric exceptions, and original verification evidence |
 | `controls/<format>/` | Small valid inputs used for parser verification |
 | `projects/<format>/<ecosystem>/<slug>/` | Dockerfile, byte-input harness, manifest, and coverage receipt |
 | `fuzzing/afl-native/<format>/<ecosystem>/<slug>/` | AFL++ overlay and feedback receipt |

@@ -51,23 +51,6 @@
     }
   },
   {
-    "name": "lljzip",
-    "group": "software.coley",
-    "artifact": "lljzip",
-    "version": "2.1.0",
-    "license": "MIT",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "software.coley.lljzip.ZipIO.readJvm(path); archive.getLocalFileByName(name)",
-    "documentation": "https://github.com/Col-E/LL-Java-Zip/blob/2.1.0/README.md",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "LLJZip own ZIP reader",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
     "name": "ant",
     "group": "org.apache.ant",
     "artifact": "ant",
@@ -95,23 +78,6 @@
     "documentation": "https://commons.apache.org/proper/commons-vfs/filesystems.html",
     "scope": "ZIP entry name and decompressed content from a local archive",
     "family": "Commons VFS ZIP provider over JDK ZipFile",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "zip4jvm",
-    "group": "ru.oleg-cherednik.zip4jvm",
-    "artifact": "zip4jvm",
-    "version": "1.13",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "UnzipIt.zip(path).stream(name)",
-    "documentation": "https://github.com/oleg-cherednik/zip4jvm",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "zip4jvm own ZIP parser",
     "control": "controls/zip/hello.zip",
     "expected_output": {
       "name": "hello.txt",
@@ -170,57 +136,6 @@
     }
   },
   {
-    "name": "compress4j",
-    "group": "com.hominux",
-    "artifact": "compress4j",
-    "version": "5.1.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "ZipArchiveExtractor.builder(path).build().stream(); ArchiveItem.content()",
-    "documentation": "https://github.com/hominux/compress4j",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "Compress4J wrapper over Commons Compress",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "arcana",
-    "group": "io.github.realburst",
-    "artifact": "arcana",
-    "version": "1.1.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "Arcana.read(file); ArchiveReader iteration and ArchiveItem.openStream()",
-    "documentation": "https://realburst.github.io/arcana/",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "Arcana own ZIP parser",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "tika-parser-pkg-module",
-    "group": "org.apache.tika",
-    "artifact": "tika-parser-pkg-module",
-    "version": "4.2.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release JAR META-INF/LICENSE",
-    "input_api": "new ZipParser().parse(TikaInputStream.get(path), handler, metadata, context)",
-    "documentation": "https://tika.apache.org/4.2.0/api/org/apache/tika/parser/pkg/ZipParser.html",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "Apache Tika ZipParser over Commons Compress",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
     "name": "truezip-driver-zip",
     "group": "de.schlichtherle.truezip",
     "artifact": "truezip-driver-zip",
@@ -238,23 +153,6 @@
     }
   },
   {
-    "name": "commons-archive",
-    "group": "io.github.deepakdaneva.commons",
-    "artifact": "commons-archive",
-    "version": "1.1.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release JAR META-INF/LICENSE",
-    "input_api": "ArchiveUtil.getArchiveInputStream(Files.newInputStream(path), \"application/zip\"); getNextEntry(); getEntryInputStream()",
-    "documentation": "https://github.com/deepakdaneva/commons/blob/main/commons-archive/README.md",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "Commons Archive wrapper over Apache Commons Compress",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
     "name": "truezip-utils",
     "group": "org.codehaus.mojo",
     "artifact": "truezip-utils",
@@ -265,74 +163,6 @@
     "documentation": "https://www.mojohaus.org/truezip/truezip-utils/apidocs/index-all.html",
     "scope": "ZIP entry name and decompressed content from a local archive",
     "family": "MojoHaus TrueZIP wrapper over TrueZIP ZIP driver",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "simplezip",
-    "group": "com.j256.simplezip",
-    "artifact": "simplezip",
-    "version": "2.2",
-    "license": "ISC",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "new ZipFileInput(file).readFileHeader(); readFileData(output)",
-    "documentation": "https://256stuff.com/sources/simplezip/docs/simplezip.pdf",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "SimpleZip own ZIP parser",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "tinyzip-core",
-    "group": "io.github.bitstorm",
-    "artifact": "tinyzip-core",
-    "version": "1.0.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "TinyZip.unzip(archivePath, destinationPath)",
-    "documentation": "https://github.com/bitstorm/tiny-zip",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "TinyZip wrapper over JDK ZipInputStream",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "sevenzipjbinding",
-    "group": "net.sf.sevenzipjbinding",
-    "artifact": "sevenzipjbinding",
-    "version": "23.01-2.2",
-    "license": "LGPL-2.1",
-    "license_evidence": "Maven release POM licenses; unRAR restriction also declared",
-    "input_api": "SevenZip.openInArchive(ArchiveFormat.ZIP, new RandomAccessFileInStream(file)); item.extractSlow(output)",
-    "documentation": "https://sevenzipjbind.sourceforge.net/snippets/index.html",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "7-Zip C++ archive parser via JNI",
-    "control": "controls/zip/hello.zip",
-    "expected_output": {
-      "name": "hello.txt",
-      "content_base64": "cGFyc2FyaXVtCg=="
-    }
-  },
-  {
-    "name": "truevfs-driver-zip",
-    "group": "net.java.truevfs",
-    "artifact": "truevfs-driver-zip",
-    "version": "0.14.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "new TFile(zipFile, entryName); new TFileInputStream(entry); TVFS.umount()",
-    "documentation": "https://truevfs.namespace.global/kick-start/tutorial.html",
-    "scope": "ZIP entry name and decompressed content from a local archive",
-    "family": "TrueVFS ZIP driver (TrueZIP successor family)",
     "control": "controls/zip/hello.zip",
     "expected_output": {
       "name": "hello.txt",

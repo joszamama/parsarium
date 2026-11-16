@@ -1,0 +1,333 @@
+[
+  {
+    "name": "poppler",
+    "version": "26.11.0",
+    "license": "GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://formulae.brew.sh/formula/poppler",
+    "documentation": "https://poppler.freedesktop.org/api/cpp/classpoppler_1_1document.html",
+    "input_api": "poppler::document::load_from_file(const std::string&) on a local PDF path; pages()",
+    "adapter": "adapters/cpp/pdf/poppler.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "Poppler PDF parser, C++ frontend",
+    "family_note": "Native Poppler C++ frontend over Poppler core; its other frontends share the same parser engine."
+  },
+  {
+    "name": "podofo",
+    "version": "1.1.2",
+    "license": "LGPL-2.0-or-later OR MPL-2.0",
+    "license_evidence": "https://github.com/podofo/podofo/blob/1.1.2/README.md",
+    "documentation": "https://github.com/podofo/podofo/blob/1.1.2/src/podofo/main/PdfMemDocument.h",
+    "input_api": "PoDoFo::PdfMemDocument::Load(std::string_view local filename); GetPages().GetCount()",
+    "adapter": "adapters/cpp/pdf/podofo.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PoDoFo PDF parser",
+    "family_note": "Native C++17 PoDoFo PDF document reader; distinct from Poppler."
+  },
+  {
+    "name": "qpdf",
+    "version": "12.4.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/qpdf/qpdf/blob/v12.4.2/LICENSE.txt",
+    "documentation": "https://github.com/qpdf/qpdf/blob/v12.4.2/examples/pdf-parse-content.cc",
+    "input_api": "QPDF::processFile(const char* local filename); QPDFPageDocumentHelper::getAllPages()",
+    "adapter": "adapters/cpp/pdf/qpdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "qpdf C++ PDF parser",
+    "family_note": "Native qpdf C++ parser; distinct from Poppler and PoDoFo."
+  },
+  {
+    "name": "mupdf",
+    "version": "1.28.6",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://mupdf.readthedocs.io/en/1.28.6/license.html",
+    "documentation": "https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html",
+    "input_api": "fz_open_document(fz_context*, const char* local filename); fz_count_pages(...) called from C++17",
+    "adapter": "adapters/cpp/pdf/mupdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "MuPDF C document parser",
+    "family_note": "Direct MuPDF C API call from a C++17 translation unit; distinct from Poppler, PoDoFo, and qpdf. The official GitHub repository is a mirror of the canonical Ghostscript Git repository.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "ghostscript",
+    "version": "10.08.0",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/formula/ghostscript",
+    "documentation": "https://ghostscript.readthedocs.io/en/master/Language.html",
+    "api_documentation": "https://ghostscript.readthedocs.io/en/master/LanguageBindings.html",
+    "input_api": "gsapi_run_string on a local file path using Ghostscript PDF interpreter .PDFInit, .PDFFile, .PDFInfo /NumPages; C API called from C++17",
+    "adapter": "adapters/cpp/pdf/ghostscript.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF interpreter NumPages metadata",
+    "family": "Ghostscript PDF interpreter",
+    "family_note": "Direct Ghostscript C API call from C++17; PDF interpreter is a distinct engine from Poppler, PoDoFo, qpdf, and MuPDF. Source archive is GhostPDL, which contains Ghostscript. Canonical upstream is Ghostscript Git; GitHub mirrors are not used for popularity.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "pdfio",
+    "version": "1.6.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/michaelrsweet/pdfio/blob/v1.6.5/LICENSE",
+    "documentation": "https://www.msweet.org/pdfio/pdfio.html",
+    "input_api": "pdfioFileOpen(const char* local filename, ...); pdfioFileGetNumPages and pdfioFileGetPage, called from C++17",
+    "adapter": "adapters/cpp/pdf/pdfio.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "PDFio PDF parser",
+    "family_note": "Direct PDFio C API call from C++17; independent PDFio engine, built from its pinned source archive.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "pdfium",
+    "version": "159.0.8152.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/LICENSE",
+    "documentation": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md",
+    "input_api": "FPDF_LoadDocument(const char* local filename, nullptr); FPDF_GetPageCount and FPDF_LoadPage, called from C++17",
+    "adapter": "adapters/cpp/pdf/pdfium.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "PDFium PDF parser",
+    "family_note": "Direct PDFium C API call from C++17. Prebuilt macOS arm64 artifact from bblanchon/pdfium-binaries chromium/8152 release is SHA-256 pinned; its original API header matches an independently pinned canonical PDFium source revision. Distribution is third-party; core engine is canonical PDFium. Binary provenance is limited to the distributor release claim and original header match.",
+    "language_bridge": "Pinned C API compiled and called from C++17 translation unit"
+  },
+  {
+    "name": "pdfwriter",
+    "version": "4.6.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/galkahana/PDF-Writer/blob/v4.6.2/LICENSE",
+    "documentation": "https://github.com/galkahana/PDF-Writer/wiki/PDF-Parsing",
+    "input_api": "InputFile::OpenFile(local path), PDFParser::StartPDFParsing(file.GetInputStream()), PDFParser::GetPagesCount()",
+    "adapter": "adapters/cpp/pdf/pdfwriter.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PDF-Writer (PDFHummus) PDF parser",
+    "family_note": "Native C++ PDFParser in the PDF-Writer package; source-built from pinned v4.6.2 release with bundled Aesgm and system Zlib/FreeType. DCT, TIFF, and PNG integrations are disabled for this simple PDF control."
+  },
+  {
+    "name": "pdf4qt",
+    "version": "1.6.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/JakubMelka/PDF4QT/blob/v1.6.0.0/LICENSE",
+    "documentation": "https://github.com/JakubMelka/PDF4QT/blob/v1.6.0.0/Pdf4QtLibCore/sources/pdfdocumentreader.h",
+    "input_api": "pdf::PDFDocumentReader::readFromFile(const QString& local filename); getReadingResult(); PDFDocument::getCatalog()->getPageCount()",
+    "adapter": "adapters/cpp/pdf/pdf4qt.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PDF4QT PDF engine",
+    "family_note": "Native PDF4QT C++ document reader built from pinned v1.6.0.0 source. Its pinned Blend2D dependency uses NO_JIT. A recorded patch enables core-only building with Qt 6.12 on macOS and replaces parallel-policy calls with sequential algorithms for Apple libc++; the adapter uses C++20."
+  },
+  {
+    "name": "qtpdf",
+    "version": "6.11.2",
+    "license": "LGPL-3.0-only OR GPL-2.0-only",
+    "license_evidence": "https://doc.qt.io/qt-6/qtpdf-licensing.html",
+    "documentation": "https://doc.qt.io/qt-6/qpdfdocument.html",
+    "input_api": "QPdfDocument::load(const QString& local filename); error(); pageCount()",
+    "adapter": "adapters/cpp/pdf/qtpdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "PDFium engine via Qt PDF",
+    "family_note": "Qt PDF module from the separate QtWebEngine distribution exposes the QPdfDocument C++17 API and bundles PDFium internally. It shares the PDFium engine with the direct PDFium path but is a distinct third-party package/API. The installed 6.11.2_1 framework and official v6.11.2 header are hash checked; Qt6Pdf.pc reports 6.12.0 despite the Homebrew formula version, so both values are recorded."
+  },
+  {
+    "name": "xpdf",
+    "version": "4.06",
+    "license": "GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://formulae.brew.sh/formula/xpdf",
+    "documentation": "https://dl.xpdfreader.com/xpdf-4.06.tar.gz",
+    "input_api": "PDFDoc(char* local UTF-8 filename) after GlobalParams initialization; isOk(); getNumPages(), defined in xpdf/PDFDoc.h and used by xpdf/pdfinfo.cc in the pinned source archive",
+    "adapter": "adapters/cpp/pdf/xpdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "Xpdf PDF parser",
+    "family_note": "Xpdf 4.06 source publishes a CMake xpdf_objs object library containing PDFDoc; the verifier archives it and links its goo and fofi libraries for a direct C++17 adapter. There is no installed public libxpdf artifact or stable ABI claim. Poppler descends from older Xpdf code, but this is the independently maintained Xpdf 4.06 parser family."
+  },
+  {
+    "name": "pdfmm",
+    "version": "0.10.0",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://github.com/pdfmm/pdfmm/blob/v0.10.0/README.md",
+    "documentation": "https://github.com/pdfmm/pdfmm/blob/v0.10.0/src/pdfmm/base/PdfMemDocument.h",
+    "input_api": "mm::PdfMemDocument::Load(std::string_view local filename); GetPages().GetCount()",
+    "adapter": "adapters/cpp/pdf/pdfmm.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "pdfmm, fork of PoDoFo",
+    "family_note": "Pdfmm 0.10.0 is a distinct C++17 library forked from PoDoFo and later moved back to the PoDoFo community. Its parser lineage is shared with PoDoFo, and its separate pinned source release is built as a shared library with direct dependency hashes recorded."
+  },
+  {
+    "name": "docling_parse",
+    "version": "7.25.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/docling-project/docling-parse/blob/v7.25.0/LICENSE",
+    "documentation": "https://github.com/docling-project/docling-parse/blob/v7.25.0/src/parse/pdf_decoders/document.h",
+    "input_api": "pdflib::pdf_decoder<pdflib::DOCUMENT>::process_document_from_file(std::string& local filename, std::optional<std::string>& password); get_number_of_pages()",
+    "adapter": "adapters/cpp/pdf/docling_parse.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "qpdf engine via Docling Parse",
+    "family_note": "Docling Parse 7.25.0 exposes a C++20 local-file decoder over bundled qpdf. It is a distinct source package and API but shares qpdf as the PDF syntax engine. A pinned-source CMake target builds the adapter with pinned LLVM and bundled dependency tags; the recorded patch only adds the adapter target and propagates LLVM into the qpdf subbuild. The source does not publish a separately installed stable C++ ABI."
+  },
+  {
+    "name": "vanillapdf",
+    "version": "2.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/vanillapdf/vanillapdf/blob/v2.3.0/LICENSE.txt",
+    "documentation": "https://vanillapdf.readthedocs.io/en/stable/c_api.html",
+    "input_api": "Document_Open(local filename); Document_GetCatalog(); Catalog_GetPages(); PageTree_GetPageCount() and PageTree_GetPage(1)",
+    "adapter": "adapters/cpp/pdf/vanillapdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first page object",
+    "family": "Vanilla.PDF C API over C++ PDF parser",
+    "family_note": "Official publisher C ABI backed by its native C++ parser. C and C++ call sites share the same v2.3.0 engine and are one package path per ecosystem; the C++ call site uses the documented C API, not a separate C++ API."
+  },
+  {
+    "name": "tspdf",
+    "version": "0.5.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/be-lang/tspdf/blob/v0.5.1/LICENSE",
+    "documentation": "https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md",
+    "input_api": "tspdf_reader_open_file(local filename, error); tspdf_reader_page_count(); tspdf_reader_get_page(0)",
+    "adapter": "adapters/cpp/pdf/tspdf.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count and first parsed page",
+    "family": "tspdf pure C11 PDF parser",
+    "family_note": "The same source library and parser engine is used by the C and C++17 adapters; counted once per ecosystem, not as separate syntax engines. Its zero-star GitHub metric is recorded without claiming broad adoption."
+  },
+  {
+    "name": "aspose_pdf_foss",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/aspose-pdf-foss/Aspose.PDF-FOSS-for-Cpp/blob/v1.0.1/LICENSE",
+    "documentation": "https://github.com/aspose-pdf-foss/Aspose.PDF-FOSS-for-Cpp/blob/v1.0.1/README.md",
+    "input_api": "Aspose::Pdf::Document(local path); document.Pages().Count()",
+    "adapter": "adapters/cpp/pdf/aspose_pdf_foss.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "PDF document page count",
+    "family": "Aspose.PDF FOSS native C++ parser",
+    "family_note": "Open-source Aspose.PDF FOSS v1.0.1 is source-built and distinct from the commercial Aspose.PDF SDK; primary repository stars are two, so external adoption is not established."
+  },
+  {
+    "name": "imagemagick",
+    "version": "7.1.2-35",
+    "license": "ImageMagick",
+    "license_evidence": "https://imagemagick.org/license/",
+    "documentation": "https://imagemagick.org/magick++/",
+    "input_api": "Magick::readImages(vector<Magick::Image>*, local filename); vector size and first Image::columns()/rows()",
+    "adapter": "adapters/cpp/pdf/imagemagick.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 612,
+      "height": 792
+    },
+    "scope": "Rendered PDF page sequence and first page dimensions",
+    "family": "ImageMagick PDF coder + Ghostscript PDF interpreter",
+    "family_note": "Distinct Magick package API; Ghostscript 10.08.0 performs underlying PDF interpretation in the recorded installation. The C and C++ APIs of this package share its core; its PDF syntax engine is shared with the separately counted Ghostscript path."
+  },
+  {
+    "name": "graphicsmagick",
+    "version": "1.3.49",
+    "license": "MIT",
+    "license_evidence": "https://graphicsmagick.sourceforge.io/Copyright.html",
+    "documentation": "https://graphicsmagick.sourceforge.io/",
+    "input_api": "Magick::readImages(vector<Magick::Image>*, local filename); vector size and first Image::columns()/rows()",
+    "adapter": "adapters/cpp/pdf/graphicsmagick.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 612,
+      "height": 792
+    },
+    "scope": "Rendered PDF page sequence and first page dimensions",
+    "family": "GraphicsMagick PDF coder + Ghostscript PDF interpreter",
+    "family_note": "Distinct Magick package API; Ghostscript 10.08.0 performs underlying PDF interpretation in the recorded installation. The C and C++ APIs of this package share its core; its PDF syntax engine is shared with the separately counted Ghostscript path."
+  },
+  {
+    "name": "libvips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/LICENSE",
+    "documentation": "https://www.libvips.org/API/current/ctor.Image.pdfload.html",
+    "input_api": "vips::VImage::pdfload(local filename); get_int(\"n-pages\"); width()/height()",
+    "adapter": "adapters/cpp/pdf/libvips.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1,
+      "width": 612,
+      "height": 792
+    },
+    "scope": "PDF page count and first page dimensions from PDF loader header",
+    "family": "libvips vips-poppler module over Poppler PDF parser",
+    "family_note": "The installed vips-poppler module links Poppler GLib 26.11.0; C and C++ libvips APIs share the same package and Poppler syntax engine. The adapter reads format-aware PDF metadata; libvips renders pixels lazily."
+  },
+  {
+    "name": "pdf_oxide",
+    "version": "0.3.78",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/LICENSE-MIT",
+    "documentation": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/cpp/include/pdf_oxide/pdf_oxide.hpp",
+    "input_api": "pdf_oxide::Document::open(local file path); page_count()",
+    "adapter": "adapters/cpp/pdf/pdf_oxide.cpp",
+    "control": "controls/pdf/one-page.pdf",
+    "expected_output": {
+      "pages": 1
+    },
+    "scope": "parsed PDF page count",
+    "family": "pdf_oxide Rust PDF parser via C ABI",
+    "family_note": "The native C++17 RAII header wraps the same C ABI and Rust engine as the C adapter. C and C++ are separate ecosystem package paths, but not independent PDF parser engines."
+  }
+]

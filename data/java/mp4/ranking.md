@@ -1,28 +1,22 @@
-# Java × MP4: verified parser ranking
+# JAVA × MP4: selected parsers
 
-20 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T06:37:48.262004+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Direct dependents | Scope | Underlying family |
+deps.dev exact-version directDependentCount.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | org.jcodec:jcodec:0.2.5 | 44 | track count and video dimensions | JCodec MP4 box parser |
-| 2 | [old-isoparser](https://repo.maven.apache.org/maven2/com/googlecode/mp4parser/isoparser/1.1.22/isoparser-1.1.22-javadoc.jar) | com.googlecode.mp4parser:isoparser:1.1.22 | 11 | movie track count and timescale | older CoreMedia/sannies MP4Parser ISO BMFF parser |
-| 3 | [bytedeco-ffmpeg](https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar) | org.bytedeco:ffmpeg:8.1.2-1.5.14 | 9 | MP4 demuxer format, two streams and video dimensions | Bytedeco binding to FFmpeg demuxer |
-| 3 | [isoparser](https://repo.maven.apache.org/maven2/org/mp4parser/isoparser/1.9.56/isoparser-1.9.56-javadoc.jar) | org.mp4parser:isoparser:1.9.56 | 9 | movie track count and timescale | sannies MP4Parser ISO BMFF box parser |
-| 5 | [metadata-extractor](https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.22.0/metadata-extractor-2.22.0-javadoc.jar) | com.drewnoakes:metadata-extractor:2.22.0 | 6 | parsed video width and height | metadata-extractor MP4 box reader |
-| 6 | [javacv](https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar) | org.bytedeco:javacv:1.5.14 | 4 | MP4 demuxer format, video dimensions, AAC sample rate and channels | JavaCV wrapper over FFmpeg demuxer |
-| 7 | [red5-io](https://repo.maven.apache.org/maven2/org/red5/red5-io/2.0.40/red5-io-2.0.40-javadoc.jar) | org.red5:red5-io:2.0.40 | 3 | MP4 video presence, parsed keyframe count and H.264/AAC codec identifiers | Red5 MP4Reader over JCodec MP4 demuxer |
-| 8 | [jaffree](https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-javadoc.jar) | com.github.kokorin.jaffree:jaffree:2024.08.29 | 2 | MP4 H.264/AAC stream codecs, video dimensions and audio rate | Jaffree wrapper over local FFprobe/FFmpeg |
-| 8 | [javasound-aac](https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-aac/0.9.8/javasound-aac-0.9.8-javadoc.jar) | com.tianscar.javasound:javasound-aac:0.9.8 | 2 | MP4 track count, AAC codec, sample rate and channels | Tianscar fork of JAAD pure Java MP4 demultiplexer |
-| 8 | [jave-core](https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar) | ws.schild:jave-core:4.2.0 | 2 | MP4 format, video dimensions, audio rate and channels | JAVE2 wrapper over bundled FFmpeg |
-| 11 | [jaad](https://repo.maven.apache.org/maven2/de/sfuhrm/jaad/0.8.7/jaad-0.8.7-javadoc.jar) | de.sfuhrm:jaad:0.8.7 | 1 | MP4 track count, AAC codec, sample rate and channels | JAAD pure Java MP4 demultiplexer |
-| 11 | [muxer](https://repo.maven.apache.org/maven2/org/mp4parser/muxer/1.9.56/muxer-1.9.56-javadoc.jar) | org.mp4parser:muxer:1.9.56 | 1 | video and audio track handlers | sannies MP4Parser movie builder over isoparser |
-| 11 | [tallison-isoparser](https://repo.maven.apache.org/maven2/org/tallison/isoparser/1.9.41.7/isoparser-1.9.41.7-javadoc.jar) | org.tallison:isoparser:1.9.41.7 | 1 | movie track count and timescale | Tallison distribution of sannies MP4Parser ISO BMFF parser |
-| 11 | [tika-mp4](https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-javadoc.jar) | org.apache.tika:tika-parser-audiovideo-module:4.2.0 | 1 | parsed video dimensions, audio properties and title | Apache Tika MP4Parser over metadata-extractor |
-| 15 | [bramp-ffmpeg](https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar) | net.bramp.ffmpeg:ffmpeg:0.9.2 | 0 | MP4 demuxer format, H.264/AAC stream codecs, video dimensions and audio rate | bramp FFprobe CLI wrapper over FFmpeg |
-| 15 | [imagic-ffmpeg-java](https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar) | ch.imagic:ffmpeg-java:0.1.2 | 0 | MP4 demuxer format, H.264/AAC stream codecs, video dimensions and audio rate | Imagic fork of bramp FFprobe CLI wrapper over FFmpeg |
-| 15 | [liferay-mp4parser](https://repo.maven.apache.org/maven2/com/liferay/org.mp4parser/1.9.41.2.LIFERAY-PATCHED-2/org.mp4parser-1.9.41.2.LIFERAY-PATCHED-2-sources.jar) | com.liferay:org.mp4parser:1.9.41.2.LIFERAY-PATCHED-2 | 0 | movie track count and timescale | Liferay-patched distribution of sannies MP4Parser ISO BMFF parser |
-| 15 | [mediainfo-jna-wrapper](https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar) | com.amilesend:mediainfo-jna-wrapper:2.1.9 | 0 | MP4 format, video dimensions and audio sample rate | amilesend JNA binding to libmediainfo |
-| 15 | [v47-jaffree](https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar) | io.v47.jaffree:jaffree:2.1.0 | 0 | MP4 H.264/AAC stream codecs, video dimensions and audio rate | v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg |
-| 15 | [vlcj-info](https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar) | uk.co.caprica:vlcj-info:2.0.3 | 0 | MP4 format, video dimensions and audio sample rate | vlcj-info JNA binding to libmediainfo |
+| 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 44 | track count and video dimensions | JCodec MP4 box parser |
+| 2 | [old-isoparser](https://repo.maven.apache.org/maven2/com/googlecode/mp4parser/isoparser/1.1.22/isoparser-1.1.22-javadoc.jar) | 1.1.22 | 11 | movie track count and timescale | older CoreMedia/sannies MP4Parser ISO BMFF parser |
+| 3 | [bytedeco-ffmpeg](https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar) | 8.1.2-1.5.14 | 9 | MP4 demuxer format, two streams and video dimensions | Bytedeco binding to FFmpeg demuxer |
+| 4 | [isoparser](https://repo.maven.apache.org/maven2/org/mp4parser/isoparser/1.9.56/isoparser-1.9.56-javadoc.jar) | 1.9.56 | 9 | movie track count and timescale | sannies MP4Parser ISO BMFF box parser |
+| 5 | [metadata-extractor](https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.22.0/metadata-extractor-2.22.0-javadoc.jar) | 2.22.0 | 6 | parsed video width and height | metadata-extractor MP4 box reader |
+| 6 | [javacv](https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar) | 1.5.14 | 4 | MP4 demuxer format, video dimensions, AAC sample rate and channels | JavaCV wrapper over FFmpeg demuxer |
+| 7 | [red5-io](https://repo.maven.apache.org/maven2/org/red5/red5-io/2.0.40/red5-io-2.0.40-javadoc.jar) | 2.0.40 | 3 | MP4 video presence, parsed keyframe count and H.264/AAC codec identifiers | Red5 MP4Reader over JCodec MP4 demuxer |
+| 8 | [jaffree](https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-javadoc.jar) | 2024.08.29 | 2 | MP4 H.264/AAC stream codecs, video dimensions and audio rate | Jaffree wrapper over local FFprobe/FFmpeg |
+| 9 | [javasound-aac](https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-aac/0.9.8/javasound-aac-0.9.8-javadoc.jar) | 0.9.8 | 2 | MP4 track count, AAC codec, sample rate and channels | Tianscar fork of JAAD pure Java MP4 demultiplexer |
+| 10 | [jave-core](https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar) | 4.2.0 | 2 | MP4 format, video dimensions, audio rate and channels | JAVE2 wrapper over bundled FFmpeg |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

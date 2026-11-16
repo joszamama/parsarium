@@ -1,113 +1,160 @@
 [
   {
-    "name": "commons-imaging", "group": "org.apache.commons", "artifact": "commons-imaging", "version": "1.0.0-alpha6",
-    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE.txt",
+    "name": "commons-imaging",
+    "group": "org.apache.commons",
+    "artifact": "commons-imaging",
+    "version": "1.0.0-alpha6",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven JAR META-INF/LICENSE.txt",
     "input_api": "Imaging.getBufferedImage(File)",
     "documentation": "https://commons.apache.org/proper/commons-imaging/formatsupport.html",
-    "family": "Apache Commons Imaging PNM decoder", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "commons-imaging",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+    "family": "Apache Commons Imaging PNM decoder",
+    "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "commons-imaging",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
   },
   {
-    "name": "imageio-pnm", "group": "com.twelvemonkeys.imageio", "artifact": "imageio-pnm", "version": "3.15.3",
-    "license": "BSD-3-Clause", "license_evidence": "Maven parent POM and project LICENSE.txt",
-    "input_api": "TwelveMonkeys PNM ImageReader.setInput(ImageInputStream).read(0)",
-    "documentation": "https://github.com/haraldk/TwelveMonkeys#file-formats-supported",
-    "family": "TwelveMonkeys PNM ImageIO plugin", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "twelvemonkeys-pnm",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
-  },
-  {
-    "name": "jai-imageio-core", "group": "com.github.jai-imageio", "artifact": "jai-imageio-core", "version": "1.4.0",
-    "license": "BSD-3-Clause", "license_evidence": "Maven POM license and project LICENSE.txt",
+    "name": "jai-imageio-core",
+    "group": "com.github.jai-imageio",
+    "artifact": "jai-imageio-core",
+    "version": "1.4.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven POM license and project LICENSE.txt",
     "input_api": "JAI PNM ImageReader.setInput(ImageInputStream).read(0)",
     "documentation": "https://github.com/jai-imageio/jai-imageio-core#jai-imageio-core-standalone",
-    "family": "JAI ImageIO PNM plugin", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "jai-imageio-core",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+    "family": "JAI ImageIO PNM plugin",
+    "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "jai-imageio-core",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
   },
   {
-    "name": "ij", "group": "net.imagej", "artifact": "ij", "version": "1.54p",
-    "license": "Public domain", "license_evidence": "Maven POM public-domain declaration and ImageJ disclaimer",
+    "name": "ij",
+    "group": "net.imagej",
+    "artifact": "ij",
+    "version": "1.54p",
+    "license": "Public domain",
+    "license_evidence": "Maven POM public-domain declaration and ImageJ disclaimer",
     "input_api": "ij.io.Opener.openImage(String local path).getBufferedImage()",
     "documentation": "https://imagej.net/ij/developer/api/ij/ij/plugin/PGM_Reader.html",
-    "family": "ImageJ PGM/PPM reader", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imagej",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+    "family": "ImageJ PGM/PPM reader",
+    "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "imagej",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
   },
   {
-    "name": "openpnp-opencv", "group": "org.openpnp", "artifact": "opencv", "version": "4.9.0-0",
-    "license": "BSD-3-Clause", "license_evidence": "Maven POM license and OpenCV project license",
+    "name": "openpnp-opencv",
+    "group": "org.openpnp",
+    "artifact": "opencv",
+    "version": "4.9.0-0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven POM license and OpenCV project license",
     "input_api": "OpenCV.loadLocally(); Imgcodecs.imread(String local path)",
     "documentation": "https://docs.opencv.org/4.9.0/d4/da8/group__imgcodecs.html",
-    "family": "OpenPnP Java binding over native OpenCV PNM decoder", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "openpnp-opencv",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+    "family": "OpenPnP Java binding over native OpenCV PNM decoder",
+    "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "openpnp-opencv",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
   },
   {
-    "name": "thumbnailator", "group": "net.coobird", "artifact": "thumbnailator", "version": "0.4.21",
-    "license": "MIT", "license_evidence": "Maven POM license and project LICENSE",
+    "name": "thumbnailator",
+    "group": "net.coobird",
+    "artifact": "thumbnailator",
+    "version": "0.4.21",
+    "license": "MIT",
+    "license_evidence": "Maven POM license and project LICENSE",
     "input_api": "Thumbnails.of(File).scale(1.0).asBufferedImage() with installed PNM ImageIO provider",
     "documentation": "https://github.com/coobird/thumbnailator/wiki/Examples",
-    "family": "Thumbnailator wrapper over ImageIO PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "thumbnailator",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+    "family": "Thumbnailator wrapper over ImageIO PNM provider (TwelveMonkeys or JAI)",
+    "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "thumbnailator",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
   },
   {
-    "name": "boofcv-io", "group": "org.boofcv", "artifact": "boofcv-io", "version": "1.6.0",
-    "license": "Apache-2.0", "license_evidence": "Maven POM license and project LICENSE",
+    "name": "boofcv-io",
+    "group": "org.boofcv",
+    "artifact": "boofcv-io",
+    "version": "1.6.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM license and project LICENSE",
     "input_api": "UtilImageIO.loadImage(String local path) with installed PNM ImageIO provider",
     "documentation": "https://boofcv.org/javadoc/boofcv/io/image/UtilImageIO.html",
-    "family": "BoofCV ImageIO wrapper over PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "boofcv-io",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+    "family": "BoofCV ImageIO wrapper over PNM provider (TwelveMonkeys or JAI)",
+    "scope": "ASCII PPM dimensions and red/green pixels",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "boofcv-io",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "pixels": "ffff0000,ff00ff00"
+    }
   },
   {
-    "name": "tika-image", "group": "org.apache.tika", "artifact": "tika-parser-image-module", "version": "4.2.0",
-    "license": "Apache-2.0", "license_evidence": "Maven parent POM license and project LICENSE",
-    "input_api": "ImageParser.parse(TikaInputStream local path, ContentHandler, Metadata, ParseContext) with PNM ImageIO provider",
-    "documentation": "https://tika.apache.org/docs/4.0.x/formats.html",
-    "family": "Apache Tika ImageParser over ImageIO PNM provider (TwelveMonkeys or JAI)", "scope": "ASCII PPM image width and height",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "tika-image",
-    "expected_output": {"width": 2, "height": 1}
-  },
-  {
-    "name": "imageio-native-vips", "group": "io.github.ghosthack", "artifact": "imageio-native-vips", "version": "2.0.0",
-    "license": "MIT", "license_evidence": "Maven parent io.github.ghosthack:imageio-native-parent:2.0.0 POM license",
-    "input_api": "ImageIO.getImageReaders(ImageInputStream local file) selects ghosthack routing reader; read(0) delegates to libvips",
-    "documentation": "https://github.com/ghosthack/imageio-native#optional-backends",
-    "family": "imageio-native-vips wrapper over libvips Netpbm decoder", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imageio-native-vips", "adapter_module": "vips",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
-  },
-  {
-    "name": "imageio-native-magick", "group": "io.github.ghosthack", "artifact": "imageio-native-magick", "version": "2.0.0",
-    "license": "MIT", "license_evidence": "Maven parent io.github.ghosthack:imageio-native-parent:2.0.0 POM license",
-    "input_api": "ImageIO.getImageReaders(ImageInputStream local file) selects ghosthack routing reader; read(0) delegates to ImageMagick",
-    "documentation": "https://github.com/ghosthack/imageio-native#imagemagick",
-    "family": "imageio-native-magick wrapper over ImageMagick Netpbm decoder", "scope": "ASCII PPM dimensions and red/green pixels",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "imageio-native-magick", "adapter_module": "magick",
-    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
-  },
-  {
-    "name": "javacv", "group": "org.bytedeco", "artifact": "javacv", "version": "1.5.14",
-    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "license_evidence": "Maven POM licenses; bundled native FFmpeg has its own notices",
+    "name": "javacv",
+    "group": "org.bytedeco",
+    "artifact": "javacv",
+    "version": "1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+    "license_evidence": "Maven POM licenses; bundled native FFmpeg has its own notices",
     "input_api": "new FFmpegFrameGrabber(File localPpm).start(); grabImage(); getVideoCodec(); getImageWidth(); getImageHeight()",
     "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar",
     "documentation_archive_entry": "org/bytedeco/javacv/FFmpegFrameGrabber.html",
-    "family": "JavaCV wrapper over native FFmpeg PPM decoder", "scope": "ASCII P3 PPM decoded frame, codec and dimensions; pixel values not inspected",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "javacv", "adapter_module": "ffmpeg",
-    "expected_output": {"codec": "ppm", "width": 2, "height": 1, "frame": true}
+    "family": "JavaCV wrapper over native FFmpeg PPM decoder",
+    "scope": "ASCII P3 PPM decoded frame, codec and dimensions; pixel values not inspected",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "javacv",
+    "adapter_module": "ffmpeg",
+    "expected_output": {
+      "codec": "ppm",
+      "width": 2,
+      "height": 1,
+      "frame": true
+    }
   },
   {
-    "name": "bytedeco-ffmpeg", "group": "org.bytedeco", "artifact": "ffmpeg", "version": "8.1.2-1.5.14",
-    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception", "license_evidence": "Parent javacpp-presets Maven POM licenses; bundled native FFmpeg has its own notices",
+    "name": "bytedeco-ffmpeg",
+    "group": "org.bytedeco",
+    "artifact": "ffmpeg",
+    "version": "8.1.2-1.5.14",
+    "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
+    "license_evidence": "Parent javacpp-presets Maven POM licenses; bundled native FFmpeg has its own notices",
     "input_api": "avformat_open_input(AVFormatContext, String localPpmPath, ...); avformat_find_stream_info(...); AVStream.codecpar()",
     "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar",
     "documentation_archive_entry": "org/bytedeco/ffmpeg/global/avformat.html",
-    "family": "Bytedeco binding to native FFmpeg PPM decoder", "scope": "ASCII P3 PPM codec and dimensions parsed from stream",
-    "control": "controls/ascii_pnm/red-green.ppm", "adapter_label": "bytedeco-ffmpeg", "adapter_module": "ffmpeg",
-    "expected_output": {"codec": "ppm", "width": 2, "height": 1}
+    "family": "Bytedeco binding to native FFmpeg PPM decoder",
+    "scope": "ASCII P3 PPM codec and dimensions parsed from stream",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "adapter_label": "bytedeco-ffmpeg",
+    "adapter_module": "ffmpeg",
+    "expected_output": {
+      "codec": "ppm",
+      "width": 2,
+      "height": 1
+    }
   },
   {
     "name": "jaffree",
@@ -129,133 +176,6 @@
       "height": 1
     },
     "adapter_label": "jaffree"
-  },
-  {
-    "name": "bramp-ffmpeg",
-    "group": "net.bramp.ffmpeg",
-    "artifact": "ffmpeg",
-    "version": "0.9.2",
-    "license": "BSD-2-Clause",
-    "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "new FFprobe(String localExecutable).probe(String localPpm).getStreams()",
-    "documentation": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar",
-    "documentation_archive_entry": "net/bramp/ffmpeg/FFprobe.html",
-    "family": "bramp FFprobe CLI wrapper over FFmpeg",
-    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
-    "adapter_module": "bramp",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "codec": "ppm",
-      "width": 2,
-      "height": 1
-    },
-    "adapter_label": "bramp-ffmpeg"
-  },
-  {
-    "name": "v47-jaffree",
-    "group": "io.v47.jaffree",
-    "artifact": "jaffree",
-    "version": "2.1.0",
-    "license": "GPL-3.0-only",
-    "license_evidence": "Maven POM licenses and fork project LICENSE",
-    "input_api": "FFprobe.atPath(Path localBin).setShowStreams(true).setInput(Path localPpm).execute().getStreams()",
-    "documentation": "https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar",
-    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
-    "family": "v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg",
-    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
-    "adapter_module": "v47",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "codec": "ppm",
-      "width": 2,
-      "height": 1
-    },
-    "adapter_label": "v47-jaffree"
-  },
-  {
-    "name": "imagic-ffmpeg-java",
-    "group": "ch.imagic",
-    "artifact": "ffmpeg-java",
-    "version": "0.1.2",
-    "license": "BSD-2-Clause",
-    "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "new FFprobe(Executor,File localExecutable).probe(File localPpm).get().getStreams()",
-    "documentation": "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar",
-    "documentation_archive_entry": "ch/imagic/ffmpeg/FFprobe.html",
-    "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg",
-    "scope": "ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream",
-    "adapter_module": "imagic",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "codec": "ppm",
-      "width": 2,
-      "height": 1
-    },
-    "adapter_label": "imagic-ffmpeg-java"
-  },
-  {
-    "name": "jave-core",
-    "group": "ws.schild",
-    "artifact": "jave-core",
-    "version": "4.2.0",
-    "license": "GPL-3.0-only",
-    "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "new MultimediaObject(File localPpm).getInfo().getVideo().getSize()",
-    "documentation": "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar",
-    "documentation_archive_entry": "ws/schild/jave/MultimediaObject.html",
-    "family": "JAVE2 wrapper over bundled FFmpeg PPM decoder",
-    "scope": "ASCII P3 PPM demuxer format and dimensions",
-    "adapter_module": "jave",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "format": "ppm_pipe",
-      "width": 2,
-      "height": 1
-    },
-    "adapter_label": "jave-core"
-  },
-  {
-    "name": "lafa-imageio-pnm",
-    "group": "com.github.lafa.twelvemonkeyspurejava.imageio",
-    "artifact": "imageio-pnm",
-    "version": "1.0",
-    "license": "BSD-3-Clause",
-    "license_evidence": "Maven parent com.github.lafa.twelvemonkeyspurejava:twelvemonkeys:1.0 POM license",
-    "input_api": "ImageIO.getImageReaders(ImageInputStream local file); PNMImageReader.read(0)",
-    "documentation": "https://repo.maven.apache.org/maven2/com/github/lafa/twelvemonkeyspurejava/imageio/imageio-pnm/1.0/imageio-pnm-1.0.pom",
-    "input_api_documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/ImageReader.html",
-    "family": "Lafa fork of TwelveMonkeys PNM ImageIO plugin",
-    "scope": "ASCII P3 PPM dimensions and red/green pixels; isolated fork classpath",
-    "adapter_module": "lafa",
-    "adapter_label": "lafa-imageio-pnm",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "reader": "com.twelvemonkeys.imageio.plugins.pnm.PNMImageReader",
-      "width": 2,
-      "height": 1,
-      "pixels": "ffff0000,ff00ff00"
-    }
-  },
-  {
-    "name": "ijp-imageio",
-    "group": "net.sf.ij-plugins",
-    "artifact": "ijp_imageio",
-    "version": "2.3.1",
-    "license": "LGPL-2.1-or-later",
-    "license_evidence": "Maven POM license and project License.txt",
-    "input_api": "IJImageIO.read(File localPpm) with installed JAI ImageIO PNM provider",
-    "documentation": "https://github.com/ij-plugins/ijp-imageio/blob/master/src/main/java/ij_plugins/imageio/IJImageIO.java",
-    "format_documentation": "https://github.com/ij-plugins/ijp-imageio#overview",
-    "family": "IJ Plugins ImageIO wrapper over JAI PNM ImageIO provider",
-    "scope": "ASCII P3 PPM dimensions and red/green pixels",
-    "adapter_module": "ijp",
-    "adapter_label": "ijp-imageio",
-    "control": "controls/ascii_pnm/red-green.ppm",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "pixels": "ffff0000,ff00ff00"
-    }
   },
   {
     "name": "im4java",

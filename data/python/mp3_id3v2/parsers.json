@@ -32,53 +32,6 @@
     }
   },
   {
-    "name": "pytaglib",
-    "version": "3.2.0",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "https://pypi.org/pypi/pytaglib/3.2.0/json",
-    "input_api": "taglib.File(local path)",
-    "documentation": "https://pypi.org/project/pytaglib/3.2.0/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "TagLib native MP3/ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "pymediainfo",
-    "version": "7.0.1",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/pymediainfo/7.0.1/json",
-    "input_api": "pymediainfo.MediaInfo.parse(local path)",
-    "documentation": "https://pypi.org/project/pymediainfo/7.0.1/",
-    "scope": "ID3v2 tags and MP3 sample rate",
-    "family": "MediaInfo native MP3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot",
-      "sample_rate": 8000
-    }
-  },
-  {
-    "name": "hachoir",
-    "version": "3.4.0",
-    "license": "GPL-2.0-only",
-    "license_evidence": "https://pypi.org/pypi/hachoir/3.4.0/json",
-    "input_api": "hachoir.parser.createParser(local path)",
-    "documentation": "https://hachoir.readthedocs.io/en/latest/",
-    "scope": "MPEG audio frame description",
-    "family": "Hachoir MPEG audio parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "description": "MPEG-2.5 layer III, 32.0 Kbit/sec, 8.0 kHz, Single channel"
-    }
-  },
-  {
     "name": "pydub",
     "version": "0.25.1",
     "license": "MIT",
@@ -144,22 +97,6 @@
     }
   },
   {
-    "name": "miniaudio",
-    "version": "1.73",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/miniaudio/1.73/json",
-    "input_api": "miniaudio.mp3_read_f32(local bytes)",
-    "documentation": "https://pypi.org/project/miniaudio/1.73/",
-    "scope": "decoded PCM sample count",
-    "family": "miniaudio native MP3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "samples": 8000
-    }
-  },
-  {
     "name": "pygame",
     "version": "2.6.1",
     "license": "LGPL",
@@ -182,101 +119,6 @@
     "documentation": "https://pyav.org/docs/stable/api/container.html",
     "scope": "ID3v2 tags and MP3 audio stream",
     "family": "FFmpeg libavformat via PyAV",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot",
-      "sample_rate": 8000
-    }
-  },
-  {
-    "name": "audiofile",
-    "version": "1.6.1",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/audiofile/1.6.1/json",
-    "input_api": "audiofile.read(local path)",
-    "documentation": "https://pypi.org/project/audiofile/1.6.1/",
-    "scope": "decoded PCM sample count",
-    "family": "audiofile via soundfile/libsndfile",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "samples": 8000
-    }
-  },
-  {
-    "name": "audiomath",
-    "version": "1.23.0",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "https://pypi.org/pypi/audiomath/1.23.0/json",
-    "input_api": "audiomath.Sound(local path)",
-    "documentation": "https://pypi.org/project/audiomath/1.23.0/",
-    "scope": "decoded PCM sample count",
-    "family": "audiomath via audioread/FFmpeg",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "samples": 9216
-    }
-  },
-  {
-    "name": "eyed3",
-    "version": "0.9.9",
-    "license": "GPL-3.0-only",
-    "license_evidence": "https://pypi.org/pypi/eyed3/0.9.9/json",
-    "input_api": "eyed3.load(local path)",
-    "documentation": "https://pypi.org/project/eyeD3/0.9.9/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "eyeD3 MP3/ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "mp3-tagger",
-    "version": "1.0",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/mp3-tagger/1.0/json",
-    "input_api": "mp3_tagger.MP3File(local path); set_version(VERSION_2)",
-    "documentation": "https://pypi.org/project/mp3-tagger/1.0/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "mp3-tagger ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "music-tag",
-    "version": "0.4.3",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/music-tag/0.4.3/json",
-    "input_api": "music_tag.load_file(local path)",
-    "documentation": "https://pypi.org/project/music-tag/0.4.3/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "music-tag via Mutagen",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "chemz",
-    "version": "0.1.0",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/chemz/0.1.0/json",
-    "input_api": "chemz.read_track(local Path)",
-    "documentation": "https://pypi.org/project/chemz/0.1.0/",
-    "scope": "ID3v2 tags and MP3 sample rate",
-    "family": "chemz via Mutagen",
     "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
       "title": "Parsarium",

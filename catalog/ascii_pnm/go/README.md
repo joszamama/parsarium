@@ -1,6 +1,6 @@
 # ASCII PNM / Go
 
-20 verified third-party API paths; 20 have verified Docker harnesses.
+7 verified third-party API paths; 7 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_pnm/ranking.md) · [standard API inventory](../../../data/go/ascii_pnm/standard.json)
 
@@ -10,22 +10,9 @@
 - [github.com/spakin/netpbm](github-com-spakin-netpbm/README.md) — Docker harness ready
 - [github.com/UNO-SOFT/gopnm](github-com-uno-soft-gopnm/README.md) — Docker harness ready
 - [github.com/hexaflex/pnm](github-com-hexaflex-pnm/README.md) — Docker harness ready
-- [github.com/wkqco33/tdraw/pnm](github-com-wkqco33-tdraw-pnm/README.md) — Docker harness ready
-- [github.com/shogo82148/go-imaging/pnm](github-com-shogo82148-go-imaging-pnm/README.md) — Docker harness ready
-- [github.com/ncruces/go-pnm](github-com-ncruces-go-pnm/README.md) — Docker harness ready
 - [github.com/harrydb/go/img/pnm](github-com-harrydb-go-img-pnm/README.md) — Docker harness ready
-- [github.com/peterh/go/img/pnm](github-com-peterh-go-img-pnm/README.md) — Docker harness ready
-- [github.com/571451370/go-media/image/pnm](github-com-571451370-go-media-image-pnm/README.md) — Docker harness ready
-- [github.com/jcbritobr/pnm](github-com-jcbritobr-pnm/README.md) — Docker harness ready
-- [github.com/kovidgoyal/imaging/netpbm](github-com-kovidgoyal-imaging-netpbm/README.md) — Docker harness ready
-- [codeberg.org/rabenauge/picsetgo/formats/netpbm](codeberg-org-rabenauge-picsetgo-formats-netpbm/README.md) — Docker harness ready
 - [github.com/go-gfx/gfx/codec](github-com-go-gfx-gfx-codec/README.md) — Docker harness ready
 - [gopkg.in/gographics/imagick.v3/imagick](gopkg-in-gographics-imagick-v3-imagick/README.md) — Docker harness ready
-- [github.com/kirklin/vipsx/vips](github-com-kirklin-vipsx-vips/README.md) — Docker harness ready
-- [gitee.com/shiqiyue/go-vips](gitee-com-shiqiyue-go-vips/README.md) — Docker harness ready
-- [github.com/bu/govips/pkg/vips](github-com-bu-govips-pkg-vips/README.md) — Docker harness ready
-- [github.com/robxyy/govips/pkg/vips](github-com-robxyy-govips-pkg-vips/README.md) — Docker harness ready
-- [github.com/perelin/govips/pkg/vips](github-com-perelin-govips-pkg-vips/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

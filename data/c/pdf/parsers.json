@@ -64,70 +64,6 @@
     "family_note": "Direct Ghostscript C API; same engine and release as C++ PDF call site."
   },
   {
-    "name": "pdfio",
-    "version": "1.6.5",
-    "license": "Apache-2.0",
-    "license_evidence": "https://github.com/michaelrsweet/pdfio/blob/v1.6.5/LICENSE",
-    "documentation": "https://www.msweet.org/pdfio/pdfio.html",
-    "input_api": "pdfioFileOpen(local filename, ...); pdfioFileGetNumPages() and pdfioFileGetPage()",
-    "adapter": "adapters/c/pdf/pdfio.c",
-    "control": "controls/pdf/one-page.pdf",
-    "expected_output": {
-      "pages": 1
-    },
-    "scope": "PDF document page count and first page object",
-    "family": "PDFio PDF parser",
-    "family_note": "Direct C API built from pinned source; same engine and release as C++ PDF call site."
-  },
-  {
-    "name": "pdfium",
-    "version": "159.0.8152.0",
-    "license": "BSD-3-Clause",
-    "license_evidence": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/LICENSE",
-    "documentation": "https://pdfium.googlesource.com/pdfium/+/6688c576fd851f4159c6fae39396da50939de110/docs/getting-started.md",
-    "input_api": "FPDF_LoadDocument(local filename, NULL); FPDF_GetPageCount() and FPDF_LoadPage()",
-    "adapter": "adapters/c/pdf/pdfium.c",
-    "control": "controls/pdf/one-page.pdf",
-    "expected_output": {
-      "pages": 1
-    },
-    "scope": "PDF document page count and first page object",
-    "family": "PDFium PDF parser",
-    "family_note": "Direct C API. SHA-256-pinned distributor binary release and original header matched to canonical source revision; binary provenance remains limited to distributor release claim and header match. Same release and engine as C++ PDF cell."
-  },
-  {
-    "name": "vanillapdf",
-    "version": "2.3.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://github.com/vanillapdf/vanillapdf/blob/v2.3.0/LICENSE.txt",
-    "documentation": "https://vanillapdf.readthedocs.io/en/stable/c_api.html",
-    "input_api": "Document_Open(local filename); Document_GetCatalog(); Catalog_GetPages(); PageTree_GetPageCount() and PageTree_GetPage(1)",
-    "adapter": "adapters/c/pdf/vanillapdf.c",
-    "control": "controls/pdf/one-page.pdf",
-    "expected_output": {
-      "pages": 1
-    },
-    "scope": "PDF document page count and first page object",
-    "family": "Vanilla.PDF C API over C++ PDF parser",
-    "family_note": "Official publisher C ABI backed by its native C++ parser. C and C++ call sites share the same v2.3.0 engine and are one package path per ecosystem; the C++ call site uses the documented C API, not a separate C++ API."
-  },
-  {
-    "name": "tspdf",
-    "version": "0.5.1",
-    "license": "MIT",
-    "license_evidence": "https://github.com/be-lang/tspdf/blob/v0.5.1/LICENSE",
-    "documentation": "https://github.com/be-lang/tspdf/blob/v0.5.1/docs/library.md",
-    "input_api": "tspdf_reader_open_file(local filename, error); tspdf_reader_page_count(); tspdf_reader_get_page(0)",
-    "adapter": "adapters/c/pdf/tspdf.c",
-    "control": "controls/pdf/one-page.pdf",
-    "expected_output": {
-      "pages": 1
-    },
-    "scope": "PDF document page count and first parsed page",
-    "family": "tspdf pure C11 PDF parser",
-    "family_note": "The same source library and parser engine is used by the C and C++17 adapters; counted once per ecosystem, not as separate syntax engines. Its zero-star GitHub metric is recorded without claiming broad adoption."
-  },
-  {
     "name": "imagemagick",
     "version": "7.1.2-35",
     "license": "ImageMagick",
@@ -182,40 +118,6 @@
     "family_note": "The installed vips-poppler module links Poppler GLib 26.11.0; C and C++ libvips APIs share the same package and Poppler syntax engine. The adapter reads format-aware PDF metadata; libvips renders pixels lazily."
   },
   {
-    "name": "pdf_oxide",
-    "version": "0.3.78",
-    "license": "MIT OR Apache-2.0",
-    "license_evidence": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/LICENSE-MIT",
-    "documentation": "https://github.com/yfedoseev/pdf_oxide/blob/v0.3.78/include/pdf_oxide_c/pdf_oxide.h",
-    "input_api": "pdf_document_open(local file path, &error); pdf_document_get_page_count(handle, &error)",
-    "adapter": "adapters/c/pdf/pdf_oxide.c",
-    "control": "controls/pdf/one-page.pdf",
-    "expected_output": {
-      "pages": 1
-    },
-    "scope": "parsed PDF page count",
-    "family": "pdf_oxide Rust PDF parser via C ABI",
-    "family_note": "The C ABI calls the Rust pdf_oxide engine. The C++ adapter uses the same source release and engine through its RAII header; paths in different ecosystems are not independent syntax engines."
-  },
-  {
-    "name": "libreofficekit",
-    "version": "26.8.3.1",
-    "license": "MPL-2.0",
-    "license_evidence": "https://www.libreoffice.org/licenses/",
-    "documentation": "https://github.com/LibreOffice/core/blob/libreoffice-26.8.3.1/include/LibreOfficeKit/LibreOfficeKitInit.h",
-    "format_documentation": "https://help.libreoffice.org/latest/en-US/text/shared/guide/convertfilters.html",
-    "input_api": "lok_init_2(pinned local app Frameworks, local profile URI); documentLoad(file:// local PDF path); getDocumentType(); getParts()",
-    "adapter": "adapters/c/pdf/libreofficekit.c",
-    "control": "controls/pdf/two-page.pdf",
-    "expected_output": {
-      "type": "drawing",
-      "pages": 2
-    },
-    "scope": "PDF imported as a two-page Draw document through C LibreOfficeKit",
-    "family": "LibreOffice PDF import through LibreOfficeKit C ABI",
-    "family_note": "The installed package bundles xpdfimport with Poppler markers; the exact PDF import execution path was not traced. It is a distinct open-source package API but independence from Poppler/PDFium syntax engines is unestablished."
-  },
-  {
     "name": "evince",
     "version": "48.4",
     "license": "GPL-2.0-or-later",
@@ -230,22 +132,6 @@
     "scope": "PDF page count through Evince libdocument C API",
     "family": "Evince PDF backend over Poppler GLib",
     "family_note": "Evince's public C libdocument factory loads the local PDF; the installed libpdfdocument backend directly links the Poppler GLib library already counted in this cell. This is a package path, not an independent PDF syntax engine."
-  },
-  {
-    "name": "unpdf",
-    "version": "0.54.0",
-    "license": "MIT",
-    "license_evidence": "https://github.com/iyulab/unpdf/blob/v0.54.0/LICENSE",
-    "documentation": "https://github.com/iyulab/unpdf/blob/v0.54.0/src/ffi.rs",
-    "input_api": "unpdf_parse_file(local path) returns document handle; unpdf_page_count(document) returns PDF page-tree count; unpdf_free_document(handle)",
-    "adapter": "adapters/c/pdf/unpdf.c",
-    "control": "controls/pdf/one-page.pdf",
-    "expected_output": {
-      "pages": 1
-    },
-    "scope": "parsed PDF page-tree count through C ABI",
-    "family": "unpdf Rust PDF parser via C ABI",
-    "family_note": "The pinned Rust crate publishes a C ABI with local-file parsing and page-count calls. This is the same underlying parser as the verified Rust unpdf path; C adoption is not inferred from Rust crate downloads."
   },
   {
     "name": "gnome-papers",
@@ -279,56 +165,5 @@
     "scope": "PDF page count through Atril libdocument C API",
     "family": "Atril PDF backend over Poppler GLib",
     "family_note": "Atril is an Evince-derived package with its own public libdocument C API and PDF backend. The pinned backend links Poppler GLib; it adds a package input path, not an independent PDF syntax engine. Ubuntu arm64 binaries and official tagged source are pinned; no comparable Homebrew formula requested-install count is available."
-  },
-  {
-    "name": "xreader",
-    "version": "4.6.10",
-    "license": "GPL-2.0",
-    "license_evidence": "Pinned master.mint27 README and COPYING state GNU GPL version 2; public factory header grants version 2 or later",
-    "documentation": "https://github.com/linuxmint/xreader/blob/master.mint27/libdocument/ev-document-factory.h",
-    "format_documentation": "https://github.com/linuxmint/xreader/blob/master.mint27/README.md",
-    "input_api": "ev_init(); g_filename_to_uri(local path); ev_document_factory_get_document(uri, error); ev_document_get_n_pages(document)",
-    "adapter": "adapters/c/pdf/xreader.c",
-    "control": "controls/pdf/two-page.pdf",
-    "expected_output": {
-      "pages": 2
-    },
-    "scope": "PDF page count through source-built Xreader libdocument C API",
-    "family": "Xreader PDF backend over Poppler GLib",
-    "family_note": "Xreader is an Evince-derived package with its own source-built libdocument C API and PDF backend. Its tagged Meson build links poppler-glib for PDF; this is another package input path over the already counted Poppler syntax engine. No comparable Homebrew formula requested-install count exists for Xreader."
-  },
-  {
-    "name": "rustpdf",
-    "version": "0.5.0",
-    "license": "MIT",
-    "license_evidence": "Pinned swift-v0.5.0 LICENSE and workspace Cargo.toml MIT license",
-    "documentation": "https://github.com/rustpdf/rustpdf/blob/swift-v0.5.0/include/pdf.h",
-    "input_api": "pdf_page_count(const uint8_t *local bytes, uintptr_t len, uintptr_t *out_count); pdf_last_error_message()",
-    "adapter": "adapters/c/pdf/rustpdf.c",
-    "control": "controls/pdf/two-page.pdf",
-    "expected_output": {
-      "pages": 2
-    },
-    "scope": "parsed two-page PDF page count from local bytes",
-    "family": "rustpdf Rust PDF parser via C ABI",
-    "family_note": "MIT pdf-ffi 0.5.0 source-built cdylib exposes documented C byte input. Its pdf_page_count implementation calls pdf::render_page_count, which calls parser::PdfReader::parse. No other C PDF cell path uses this underlying Rust parser. The release tag is swift-v0.5.0 but the same tagged workspace includes the C ABI crate at version 0.5.0."
-  },
-  {
-    "name": "zathura-pdf-poppler",
-    "version": "2026.07.18",
-    "license": "Zlib",
-    "license_evidence": "Official 2026.07.18 source release LICENSE and SPDX headers",
-    "documentation": "https://pwmt.org/projects/zathura/plugins/development/",
-    "format_documentation": "https://pwmt.org/projects/zathura-pdf-poppler/",
-    "input_api": "pdf_document_open(zathura_document_t*) callback, called with a host document whose path resolves to the supplied local PDF; zathura_document_get_number_of_pages(document)",
-    "adapter": "adapters/c/pdf/zathura_poppler.c",
-    "control": "controls/pdf/two-page.pdf",
-    "expected_output": {
-      "pages": 2,
-      "has_parser_data": true
-    },
-    "scope": "Two-page PDF page count through released C plugin document-open callback",
-    "family": "Zathura PDF Poppler plugin over Poppler GLib",
-    "family_note": "The published plugin is a distinct Zlib-licensed C package path, but its PDF syntax engine is Poppler GLib, already represented separately. The adapter compiles the unmodified released document.c with matching pinned Zathura host headers and a minimal shim for the documented host accessors. It checks callback page count and parser data; full viewer registration and rendering are outside the verified scope."
   }
 ]

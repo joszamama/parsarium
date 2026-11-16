@@ -23,6 +23,9 @@ def read(path: Path):
 
 def build_report() -> dict:
     cells = read(ROOT / "data/cells.json")["cells"]
+    plan = read(ROOT / "data/curation/plan.json")
+    selected = {(cell["ecosystem"], cell["format"]): {
+        item["name"]: item for item in cell["selected"]} for cell in plan["cells"]}
     rows = []
     for cell in cells:
         ecosystem, format_name = cell["ecosystem"], cell["format"]
@@ -35,9 +38,13 @@ def build_report() -> dict:
         if field == "dynamic":
             field = ("install_on_request_365d" if metric.get("metric")
                      == "Homebrew install-on-request count over 365 days" else "stars")
-        measured = zero = missing = 0
+        measured = zero = missing = supplemental = 0
         for parser in parsers:
             value = packages.get(parser["name"], {}).get(field)
+            choice = selected[(ecosystem, format_name)].get(parser["name"])
+            if choice and choice["selection"] == "supplemental_numeric_metric":
+                assert choice["supplemental_metric"] > 0
+                supplemental += 1
             if value is None:
                 missing += 1
             else:
@@ -53,14 +60,18 @@ def build_report() -> dict:
             "with_comparable_metric": measured,
             "without_comparable_metric": missing,
             "zero_metric_count": zero,
+            "with_supplemental_numeric_metric": supplemental,
+            "without_positive_numeric_signal": len(parsers) - (measured - zero) - supplemental,
             "working_target_met": len(parsers) >= cell["working_target"],
         })
     report = {
-        "description": "Metric availability among verified package paths; values and ranks are never compared across ecosystems or cells.",
+        "description": "Metric availability among verified package paths. Primary within-cell rankings and supplemental numeric signals are separate; values are never compared across ecosystems.",
         "verified_paths": sum(row["verified_count"] for row in rows),
         "with_comparable_metric": sum(row["with_comparable_metric"] for row in rows),
         "without_comparable_metric": sum(row["without_comparable_metric"] for row in rows),
         "zero_metric_count": sum(row["zero_metric_count"] for row in rows),
+        "with_supplemental_numeric_metric": sum(row["with_supplemental_numeric_metric"] for row in rows),
+        "without_positive_numeric_signal": sum(row["without_positive_numeric_signal"] for row in rows),
         "cells_at_working_target": sum(row["working_target_met"] for row in rows),
         "cells": rows,
     }
@@ -73,8 +84,9 @@ def main() -> None:
     path.write_text(json.dumps(report, indent=2) + "\n")
     print(f"{report['verified_paths']} verified paths; "
           f"{report['with_comparable_metric']} with a cell metric; "
-          f"{report['without_comparable_metric']} unranked; "
-          f"{report['cells_at_working_target']}/{len(report['cells'])} cells at 20")
+          f"{report['with_supplemental_numeric_metric']} with supplemental numeric evidence; "
+          f"{report['without_positive_numeric_signal']} without a positive numeric signal; "
+          f"{report['cells_at_working_target']}/{len(report['cells'])} cells at 10")
 
 
 if __name__ == "__main__":

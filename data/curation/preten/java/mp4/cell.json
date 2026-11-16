@@ -1,0 +1,30 @@
+{
+  "ecosystem": "java",
+  "format": "mp4",
+  "status": "verified_target_search_incomplete",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 20,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "mp4",
+    "mp4 parser",
+    "isoparser",
+    "Java MP4",
+    "ISO base media",
+    "JAAD MP4",
+    "JavaSound AAC MP4",
+    "MP4 demuxer",
+    "red5 mp4"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 128,
+  "unique_search_hits": 122,
+  "unresolved_documentation_leads": 3,
+  "uncertainty": "Twenty distinct pinned Maven package paths passed valid MP4 controls; this reaches the working count but does not establish an exhaustive most-used top 20. The latest paths are Red5 red5-io, com.googlecode.mp4parser:isoparser, org.tallison:isoparser, and com.liferay:org.mp4parser. Red5 reads a valid three-second 16x16 H.264/AAC MP4 and reports parsed keyframe count and codecs; its published POM requests an unavailable mina-core bundle, so the adapter excludes transitive dependencies and pins the needed JARs explicitly. The three additional isoparser distributions and existing org.mp4parser:isoparser/muxer share the MP4Parser underlying family. Tika uses metadata-extractor; seven paths rely on FFmpeg/FFprobe; two use libmediainfo; two use the JAAD family; Red5 uses JCodec. These twenty package paths are therefore not twenty independent parser implementations. Four valid controls cover the original 2x2 H.264/AAC MP4, a padded variant with a valid free box for the amilesend minimum-size API, a metadata-free two-stream variant for JAAD 0.8.7, and a three-second variant for Red5. All control bytes and SHA-256 checks are pinned. Nine bounded Maven Solr queries used 100-result limits. Successful windows saved 128 hits, 122 unique: mp4 saved 100 of 350, mp4 parser six, isoparser four, and Java MP4 18. ISO base media and MP4 demuxer returned zero; JAAD MP4, JavaSound AAC MP4, and red5 mp4 timed out. Earlier successful windows are preserved after refresh timeouts. Most Java MP4 hits use mp for unrelated software; 18 remain unreviewed search hits. Three targeted leads remain unresolved: the MP4Parser streaming module, a Gitee isoparser distribution, and Velvet Video. The MP4Parser aggregate POM, ytk-mp4j, CodecMedia 1.2.2, jaudiotagger 3.0.1, MonteMedia MP4 write-only support, and jcodec-javase 0.2.5 were rejected after documentation checks or failed control runs. The controls establish format-aware parsing for their specific MP4 variants only. Java SE 25 official API documentation yielded no bundled MP4 parser; a JDK-only run found no ImageIO or Java Sound reader for the original control, though third-party providers may add support. No vulnerability, malformed-input or resource-use experiments were run.",
+  "third_party_evidence": "data/java/mp4/parsers.json",
+  "third_party_control_results": "data/java/mp4/verification.json",
+  "runtime_evidence": "data/java/mp4/standard.json",
+  "registry_snapshot": "data/java/mp4/registry-snapshot.json",
+  "unresolved_leads": "data/java/mp4/leads.json"
+}

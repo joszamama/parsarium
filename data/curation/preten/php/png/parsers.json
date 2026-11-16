@@ -1,0 +1,384 @@
+[
+  {
+    "name": "intervention/image",
+    "version": "4.4.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Intervention/image/blob/3a47838f2e0f4ec6c8c9b43a5d73ac985b975830/LICENSE",
+    "documentation": "https://github.com/Intervention/image/blob/3a47838f2e0f4ec6c8c9b43a5d73ac985b975830/readme.md",
+    "input_api": "ImageManager::usingDriver(GdDriver)::decodePath(local PNG path); Image::width/height",
+    "adapter": "adapters/php/png/intervention_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "This package path delegates PNG decoding to the bundled PHP GD extension."
+  },
+  {
+    "name": "imagine/imagine",
+    "version": "1.5.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/php-imagine/Imagine/blob/dd57a4c290ff4d223d17bcd219dac9ac8bf1cc16/LICENSE",
+    "documentation": "https://github.com/php-imagine/Imagine/blob/dd57a4c290ff4d223d17bcd219dac9ac8bf1cc16/src/Gd/Imagine.php",
+    "input_api": "Imagine\\Gd\\Imagine::open(local PNG path); Image::getSize",
+    "adapter": "adapters/php/png/imagine_imagine.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "This package path delegates PNG decoding to the bundled PHP GD extension."
+  },
+  {
+    "name": "claviska/simpleimage",
+    "version": "4.4.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/claviska/SimpleImage/blob/f2397d67a06ed3334e5cfc22df55e55fb5f8bae1/LICENSE.md",
+    "documentation": "https://github.com/claviska/SimpleImage/blob/f2397d67a06ed3334e5cfc22df55e55fb5f8bae1/README.md",
+    "input_api": "SimpleImage::fromFile(local PNG path); getWidth/getHeight/getColorAt",
+    "adapter": "adapters/php/png/claviska_simpleimage.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "left_rgb": [
+        255,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "decoded dimensions and two RGB pixels",
+    "family": "PHP GD PNG decoder",
+    "family_note": "This package path delegates PNG decoding to the bundled PHP GD extension."
+  },
+  {
+    "name": "spatie/image",
+    "version": "3.9.10",
+    "license": "MIT",
+    "license_evidence": "https://github.com/spatie/image/blob/de071f9aceaeed977401d6983a8bbe0c21b411dd/LICENSE.md",
+    "documentation": "https://spatie.be/docs/image/v3/usage/basic-usage",
+    "input_api": "Image::useImageDriver(Gd)->loadFile(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/spatie_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "The adapter selects Spatie\u2019s GD driver, which delegates PNG decoding to PHP GD."
+  },
+  {
+    "name": "marc1706/fast-image-size",
+    "version": "v1.3.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/marc1706/fast-image-size/blob/35c193f56d3a3abaf441918ea4eda7cd5d89d443/LICENSE",
+    "documentation": "https://packagist.org/packages/marc1706/fast-image-size",
+    "input_api": "FastImageSize::getImageSize(local PNG path)",
+    "adapter": "adapters/php/png/marc1706_fast_image_size.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "type": 3
+    },
+    "scope": "PNG dimensions and format type",
+    "family": "FastImageSize PNG header reader",
+    "family_note": "Parses PNG dimensions and type from headers in PHP; it does not decode pixels."
+  },
+  {
+    "name": "gumlet/php-image-resize",
+    "version": "3.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/gumlet/php-image-resize/blob/cd01c9e8aa2382211d760c825799c8102987a8c2/Licence.md",
+    "documentation": "https://github.com/gumlet/php-image-resize/blob/cd01c9e8aa2382211d760c825799c8102987a8c2/README.md",
+    "input_api": "ImageResize(local PNG path); getSourceWidth/getSourceHeight",
+    "adapter": "adapters/php/png/gumlet_php_image_resize.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "The package loads the local PNG through PHP GD."
+  },
+  {
+    "name": "gregwar/image",
+    "version": "v2.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Gregwar/Image/blob/1cf64c34cbb22933b36727c16b15ed4d925b6fc6/Gregwar/Image/LICENSE",
+    "documentation": "https://github.com/Gregwar/Image/blob/1cf64c34cbb22933b36727c16b15ed4d925b6fc6/Gregwar/Image/README.md",
+    "input_api": "Gregwar\\Image\\Image::open(local PNG path); width/height",
+    "adapter": "adapters/php/png/gregwar_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "The adapter uses Gregwar\u2019s GD backend to decode the PNG."
+  },
+  {
+    "name": "jcupitt/vips",
+    "version": "v2.6.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/libvips/php-vips/blob/6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee/LICENSE.txt",
+    "documentation": "https://github.com/libvips/php-vips/blob/6dbba1bb3a4ba1e39edb71016a2aa6da5bff32ee/README.md",
+    "input_api": "Image::newFromFile(local PNG path); width/height fields",
+    "adapter": "adapters/php/png/jcupitt_vips.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "libvips PNG decoder",
+    "family_note": "PHP FFI binding delegates PNG decoding to installed libvips 8.18.7, a separate family from PHP GD.",
+    "php_ini": [
+      "ffi.enable=1",
+      "zend.max_allowed_stack_size=-1"
+    ]
+  },
+  {
+    "name": "league/color-extractor",
+    "version": "0.4.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thephpleague/color-extractor/blob/21fcac6249c5ef7d00eb83e128743ee6678fe505/LICENSE",
+    "documentation": "https://github.com/thephpleague/color-extractor/blob/21fcac6249c5ef7d00eb83e128743ee6678fe505/README.md",
+    "input_api": "Palette::fromFilename(local PNG path); getMostUsedColors",
+    "adapter": "adapters/php/png/league_color_extractor.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "colors": {
+        "#00ff00": 1,
+        "#ff0000": 1
+      }
+    },
+    "scope": "decoded pixel color histogram",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Uses PHP GD imagecreatefromstring; verifies both control colors and counts."
+  },
+  {
+    "name": "league/glide",
+    "version": "4.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/thephpleague/glide/blob/54643c4c55ce6dc7f8a11d9c643340051d54c4d9/LICENSE",
+    "documentation": "https://github.com/thephpleague/glide/blob/54643c4c55ce6dc7f8a11d9c643340051d54c4d9/src/ServerFactory.php",
+    "input_api": "ServerFactory::create with local source; Server::makeImage(PNG filename, parameters)",
+    "adapter": "adapters/php/png/league_glide.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded and re-encoded PNG dimensions",
+    "family": "Intervention Image / PHP GD PNG decoder",
+    "family_note": "Glide delegates to Intervention Image, configured to use PHP GD. This is a package path sharing both the Intervention Image package and GD decoder family."
+  },
+  {
+    "name": "rosell-dk/webp-convert",
+    "version": "2.9.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/rosell-dk/webp-convert/blob/bce87de61cff098e899a91960f9fdb08e8867194/LICENSE",
+    "documentation": "https://github.com/rosell-dk/webp-convert/blob/bce87de61cff098e899a91960f9fdb08e8867194/README.md",
+    "input_api": "WebPConvert::convert(local PNG path, local WebP path, gd converter)",
+    "adapter": "adapters/php/png/rosell_webp_convert.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "output_type": 18
+    },
+    "scope": "PNG decoded to WebP with dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Explicit GD converter decodes local PNG through bundled PHP GD before WebP encoding."
+  },
+  {
+    "name": "ksubileau/color-thief-php",
+    "version": "v3.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ksubileau/color-thief-php/blob/2ca3d3a05c947f71c8cf22d2b0a85603b3f2df94/LICENSE",
+    "documentation": "https://github.com/ksubileau/color-thief-php/blob/2ca3d3a05c947f71c8cf22d2b0a85603b3f2df94/src/ColorThief/ColorThief.php",
+    "input_api": "ColorThief(quality:1, preferredAdapter:Gd)::getPalette(local PNG path, 2); toHex",
+    "adapter": "adapters/php/png/ksubileau_color_thief.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "palette": [
+        "#00ff00",
+        "#ff0000"
+      ]
+    },
+    "scope": "decoded two-color palette",
+    "family": "PHP GD PNG decoder",
+    "family_note": "ColorThief delegates PNG input to its GD adapter, then quantizes decoded pixels."
+  },
+  {
+    "name": "yiisoft/yii2-imagine",
+    "version": "2.3.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/yiisoft/yii2-imagine/blob/7ec4332dc25893aec5a7cf084722b162b3a4d55d/LICENSE.md",
+    "documentation": "https://github.com/yiisoft/yii2-imagine/blob/7ec4332dc25893aec5a7cf084722b162b3a4d55d/src/BaseImage.php",
+    "input_api": "Image::thumbnail(local PNG path, 2, 1); ImageInterface::getSize",
+    "adapter": "adapters/php/png/yiisoft_yii2_imagine.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded PNG dimensions after thumbnail",
+    "family": "Imagine / PHP GD PNG decoder",
+    "family_note": "Yii wrapper calls Imagine with its GD driver; the underlying Imagine and PHP GD families are shared with other paths."
+  },
+  {
+    "name": "aplus/image",
+    "version": "v3.0.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/aplus-framework/image/blob/02a8145dc166b4e850b0e58bc11f41d4192bc4a7/LICENSE",
+    "documentation": "https://github.com/aplus-framework/image/blob/02a8145dc166b4e850b0e58bc11f41d4192bc4a7/src/Image.php",
+    "input_api": "Framework\\Image\\Image(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/aplus_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Aplus Image calls getimagesize then imagecreatefrompng in the bundled PHP GD extension."
+  },
+  {
+    "name": "smottt/wideimage",
+    "version": "1.1.4",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/smottt/WideImage/blob/755d1b2b474ce9c32092aa6ac0357ebf857545f5/LICENSE",
+    "documentation": "https://github.com/smottt/WideImage/blob/755d1b2b474ce9c32092aa6ac0357ebf857545f5/lib/WideImage/WideImage.php",
+    "input_api": "WideImage::load(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/smottt_wideimage.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "WideImage uses its PNG mapper backed by PHP GD; Composer lists GPL-2.0 and LGPL-2.1, while the pinned LICENSE text states LGPL 2.1 or later."
+  },
+  {
+    "name": "contao/image",
+    "version": "1.2.4",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/contao/image/blob/06cafbcf787276b0a1639b44c89439dde14ca151/src/Image.php",
+    "documentation": "https://github.com/contao/image/blob/06cafbcf787276b0a1639b44c89439dde14ca151/README.md",
+    "input_api": "Contao\\Image\\Image(local PNG path, Imagine GD); Resizer::resize",
+    "adapter": "adapters/php/png/contao_image.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 1,
+      "height": 1,
+      "type": 3
+    },
+    "scope": "PNG decoded and resized to 1\u00d71",
+    "family": "Imagine / PHP GD PNG decoder",
+    "family_note": "Contao uses Imagine GD to decode and resize the PNG; its dimension path also calls bundled getimagesize."
+  },
+  {
+    "name": "sybio/image-workshop",
+    "version": "3.0.0-beta1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Sybio/ImageWorkshop/blob/ae252ab16c8f1f8b797c7ecd3a60c3cde0e8b569/src/ImageWorkshop.php",
+    "documentation": "https://github.com/Sybio/ImageWorkshop/blob/ae252ab16c8f1f8b797c7ecd3a60c3cde0e8b569/src/ImageWorkshop.php",
+    "input_api": "ImageWorkshop::initFromPath(local PNG path); getWidth/getHeight",
+    "adapter": "adapters/php/png/sybio_image_workshop.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "PHP GD PNG decoder",
+    "family_note": "ImageWorkshop initializes an image layer from local PNG through PHP GD."
+  },
+  {
+    "name": "nette/utils",
+    "version": "v4.1.6",
+    "license": "BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only",
+    "license_evidence": "https://github.com/nette/utils/blob/6bf24518accf32cf845bca305e0b92078700fd01/license.md",
+    "documentation": "https://github.com/nette/utils/blob/6bf24518accf32cf845bca305e0b92078700fd01/src/Utils/Image.php",
+    "input_api": "Nette\\Utils\\Image::fromFile(local PNG path, detected type); getWidth/getHeight",
+    "adapter": "adapters/php/png/nette_utils.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "type": 3
+    },
+    "scope": "decoded dimensions and PNG type",
+    "family": "PHP GD PNG decoder",
+    "family_note": "Nette Utils Image delegates PNG decoding to bundled PHP GD; package-level downloads cover many unrelated utility APIs.",
+    "api_documentation": "https://doc.nette.org/en/utils/images"
+  },
+  {
+    "name": "intervention/image-laravel",
+    "version": "4.1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Intervention/image-laravel/blob/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2/LICENSE",
+    "documentation": "https://github.com/Intervention/image-laravel/blob/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2/src/Facades/Image.php",
+    "input_api": "Laravel Image facade::decodePath(local PNG path); width/height",
+    "adapter": "adapters/php/png/intervention_image_laravel.php",
+    "composer_lock": "adapters/php/png/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "scope": "decoded image dimensions",
+    "family": "Intervention Image 4 / PHP GD PNG decoder",
+    "family_note": "Laravel facade forwards to Intervention Image 4 configured with PHP GD; the core Intervention package is separately listed."
+  },
+  {
+    "name": "jenssegers/imagehash",
+    "version": "v0.11.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/jenssegers/imagehash/blob/87ba7051d2fca2edc718091f052424474dedfeae/LICENSE",
+    "documentation": "https://github.com/jenssegers/imagehash/blob/87ba7051d2fca2edc718091f052424474dedfeae/README.md",
+    "input_api": "ImageHash(AverageHash, GD manager)::hash(local PNG path); toBits",
+    "adapter": "adapters/php/png/imagehash/jenssegers_imagehash.php",
+    "composer_lock": "adapters/php/png/imagehash/composer.lock",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "average_hash_bits": "0000111100001111000011110000111100001111000011110000111100001111"
+    },
+    "scope": "decoded pixel-derived average hash",
+    "family": "Intervention Image 3 / PHP GD PNG decoder",
+    "family_note": "ImageHash uses Intervention Image 3 with GD to decode PNG; separate Composer lock resolves the incompatible core major version."
+  }
+]

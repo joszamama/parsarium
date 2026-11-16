@@ -1,0 +1,454 @@
+[
+  {
+    "name": "image",
+    "version": "0.25.10",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "load_from_memory_with_format(&bytes, ImageFormat::Pnm)",
+    "documentation": "https://docs.rs/image/0.25.10/image/fn.load_from_memory_with_format.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "image-rs PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "imagesize",
+    "version": "0.15.0",
+    "license": "MIT",
+    "input_api": "blob_size(&bytes)",
+    "documentation": "https://docs.rs/imagesize/0.15.0/imagesize/fn.blob_size.html",
+    "scope": "P3 ASCII PPM header dimensions only; raster samples are not decoded",
+    "family": "imagesize PNM header reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "ai-image",
+    "version": "0.25.10",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "load_from_memory_with_format(&bytes, ImageFormat::Pnm)",
+    "documentation": "https://docs.rs/ai-image/0.25.10/ai_image/fn.load_from_memory_with_format.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "image-rs fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "imageun",
+    "version": "0.0.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "load_from_memory_with_format(&bytes, ImageFormat::Pnm)",
+    "documentation": "https://docs.rs/imageun/0.0.0/imageun/fn.load_from_memory_with_format.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "image-rs fork",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "bevy_image",
+    "version": "0.20.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Image::from_buffer(&bytes, ImageType::Format(ImageFormat::Pnm), ...)",
+    "documentation": "https://docs.rs/bevy_image/0.20.1/bevy_image/struct.Image.html#method.from_buffer",
+    "scope": "P3 ASCII PPM expanded RGBA pixels",
+    "family": "Bevy image wrapper over image-rs PNM",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba": [
+        255,
+        0,
+        0,
+        255,
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "bevy",
+    "version": "0.20.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "bevy::image::Image::from_buffer(&bytes, ImageType::Format(ImageFormat::Pnm), ...)",
+    "documentation": "https://docs.rs/bevy/0.20.1/bevy/image/struct.Image.html#method.from_buffer",
+    "scope": "P3 ASCII PPM expanded RGBA pixels",
+    "family": "Bevy re-export of bevy_image over image-rs PNM",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba": [
+        255,
+        0,
+        0,
+        255,
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "devela",
+    "version": "0.30.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Pnm::decoded_len_u8(&bytes); Pnm::decode_u8(&bytes, &mut pixels)",
+    "documentation": "https://docs.rs/devela/0.30.0/devela/media/visual/image/format/struct.Pnm.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "devela PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "size": "Extent { dim: [2, 1] }",
+      "channels": 3,
+      "pixels": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "oxideav-pbm",
+    "version": "0.0.5",
+    "license": "MIT",
+    "input_api": "decode_pbm(&bytes)",
+    "documentation": "https://docs.rs/oxideav-pbm/0.0.5/oxideav_pbm/decoder/fn.decode_pbm.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "OxideAV PBM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "format": "Rgb24",
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "oxideav-image",
+    "version": "0.0.7",
+    "license": "MIT",
+    "input_api": "decode_bytes(&RuntimeContext with oxideav-pbm registered, &bytes)",
+    "documentation": "https://docs.rs/oxideav-image/0.0.7/oxideav_image/fn.decode_bytes.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "OxideAV image gateway over oxideav-pbm",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "oxideav-io",
+    "version": "0.1.2",
+    "license": "MIT",
+    "input_api": "open_image_with(&RuntimeContext with oxideav-pbm registered, Source::bytes(&bytes), &OpenOptions::eager())",
+    "documentation": "https://docs.rs/oxideav-io/0.1.2/oxideav_io/fn.open_image_with.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "OxideAV I/O gateway over oxideav-image and oxideav-pbm",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "zenbitmaps",
+    "version": "0.1.5",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "decode(&bytes, enough::Unstoppable)",
+    "documentation": "https://docs.rs/zenbitmaps/0.1.5/zenbitmaps/fn.decode.html",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "zenbitmaps PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "layout": "Rgb8",
+      "pixels": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "coldiron",
+    "version": "0.1.0",
+    "license": "MIT",
+    "input_api": "Image::read_from(&mut Cursor::new(&bytes))",
+    "documentation": "https://docs.rs/coldiron/0.1.0/coldiron/struct.Image.html#method.read_from",
+    "scope": "P2 ASCII PGM grayscale pixels",
+    "family": "coldiron Netpbm reader",
+    "control": "controls/ascii_pnm/black-white.pgm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "format": "Graymap",
+      "pixels": [
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "photocraft",
+    "version": "0.1.2",
+    "license": "GPL-3.0-or-later",
+    "input_api": "Image::read_ppm(&mut BufReader<Cursor<&[u8]>>)",
+    "documentation": "https://docs.rs/photocraft/0.1.2/photocraft/struct.Image.html#method.read_ppm",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "photocraft PPM reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "unicraft",
+    "version": "0.1.2",
+    "license": "GPL-3.0-or-later",
+    "input_api": "photo::Image::read_ppm(&mut BufReader<Cursor<&[u8]>>)",
+    "documentation": "https://docs.rs/unicraft/0.1.2/unicraft/prelude/struct.Image.html#method.read_ppm",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "unicraft re-export of photocraft PPM reader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "libviprs",
+    "version": "0.6.1",
+    "license": "MIT",
+    "input_api": "Raster::ppm_load(&bytes)",
+    "documentation": "https://docs.rs/libviprs/0.6.1/libviprs/raster/struct.Raster.html#method.ppm_load",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "libviprs Netpbm decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "opencv-no-c-imgcodecs",
+    "version": "0.1.0",
+    "license": "Apache-2.0",
+    "input_api": "pnm::decode(&bytes)",
+    "documentation": "https://docs.rs/opencv-no-c-imgcodecs/0.1.0/cv_imgcodecs/pnm/fn.decode.html",
+    "scope": "P3 ASCII PPM BGR pixels",
+    "family": "opencv-no-c PNM decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "bgr": [
+        0,
+        0,
+        255,
+        0,
+        255,
+        0
+      ]
+    }
+  },
+  {
+    "name": "rusty-ppm",
+    "version": "0.3.0",
+    "license": "MIT",
+    "input_api": "ppm_reader::read_ppm(&control_path, control_filename)",
+    "documentation": "https://docs.rs/rusty-ppm/0.3.0/rusty_ppm/ppm_reader/fn.read_ppm.html",
+    "scope": "P3 ASCII PPM RGB pixels; compact spacing required by this release",
+    "family": "rusty-ppm reader",
+    "control": "controls/ascii_pnm/red-green-compact.ppm",
+    "expected_output": {
+      "pixels": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          0,
+          255,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "name": "roka-qr",
+    "version": "0.1.1",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "Reader::from_pbm(&bytes)",
+    "documentation": "https://docs.rs/roka-qr/0.1.1/roka_qr/struct.Reader.html#method.from_pbm",
+    "scope": "P1 ASCII PBM QR image and payload",
+    "family": "roka-qr P1 bitmap reader plus QR decoder",
+    "control": "controls/ascii_pnm/qr-p1.pbm",
+    "expected_output": {
+      "size": 25,
+      "payload": "Parsarium P1 control"
+    }
+  },
+  {
+    "name": "include-pnm",
+    "version": "1.0.0",
+    "license": "CC0-1.0",
+    "input_api": "include_ppm!(supplied_control_path) in a generated build source",
+    "documentation": "https://docs.rs/include-pnm/1.0.0/include_pnm/macro.include_ppm.html",
+    "scope": "P3 ASCII PPM RGB pixels at compile time",
+    "family": "include-pnm compile-time parser",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        [
+          [
+            255,
+            0,
+            0
+          ],
+          [
+            0,
+            255,
+            0
+          ]
+        ]
+      ]
+    },
+    "adapter_manifest_dir": "adapters/rust/ascii_pnm/include_pnm_dynamic",
+    "license_evidence": "https://docs.rs/crate/include-pnm/1.0.0/source/LICENSE.md"
+  },
+  {
+    "name": "pnm",
+    "version": "0.1.1",
+    "license": "MIT",
+    "input_api": "decode(&bytes)",
+    "documentation": "https://docs.rs/pnm/0.1.1/pnm/fn.decode.html",
+    "scope": "P3 ASCII PPM RGB pixels; pinned release requires nightly feature",
+    "family": "pnm crate decoder",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "parsed": "Rgb(Image { buffer: [255, 0, 0, 0, 255, 0], width: 2, height: 1 })"
+    },
+    "adapter_manifest_dir": "adapters/rust/ascii_pnm/pnm_nightly"
+  },
+  {
+    "name": "fltk",
+    "version": "1.5.23",
+    "license": "MIT",
+    "input_api": "PnmImage::load(control_path)",
+    "documentation": "https://docs.rs/fltk/1.5.23/fltk/image/struct.PnmImage.html#method.load",
+    "scope": "P3 ASCII PPM RGB pixels",
+    "family": "FLTK C++ PNM image loader",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgb": [
+        255,
+        0,
+        0,
+        0,
+        255,
+        0
+      ]
+    },
+    "adapter_manifest_dir": "adapters/rust/ascii_pnm/fltk_native"
+  }
+]

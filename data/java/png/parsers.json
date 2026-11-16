@@ -72,59 +72,6 @@
     }
   },
   {
-    "name": "boofcv-io",
-    "group": "org.boofcv",
-    "artifact": "boofcv-io",
-    "version": "1.6.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "UtilImageIO.loadImage(path)",
-    "documentation": "https://boofcv.org/javadoc/boofcv/io/image/UtilImageIO.html",
-    "scope": "RGBA pixels",
-    "family": "BoofCV image I/O over Java ImageIO",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "pixels": "ffff0000,ff00ff00"
-    }
-  },
-  {
-    "name": "batik-codec",
-    "group": "org.apache.xmlgraphics",
-    "artifact": "batik-codec",
-    "version": "1.20",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release JAR META-INF/LICENSE",
-    "input_api": "new PNGImageDecoder(InputStream,null).decodeAsRenderedImage()",
-    "documentation": "https://xmlgraphics.apache.org/batik/javadoc/org/apache/batik/ext/awt/image/codec/png/PNGImageDecoder.html",
-    "scope": "RGBA pixels",
-    "family": "Apache Batik PNG codec",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "pixels": "ffff0000,ff00ff00"
-    }
-  },
-  {
-    "name": "pngtastic",
-    "group": "com.github.depsypher",
-    "artifact": "pngtastic",
-    "version": "1.8",
-    "license": "MIT",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "new PngImage(InputStream).getWidth/getHeight",
-    "documentation": "https://github.com/depsypher/pngtastic/blob/master/src/main/java/com/googlecode/pngtastic/core/PngImage.java",
-    "scope": "PNG dimensions",
-    "family": "PNGTastic PNG chunk parser",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    }
-  },
-  {
     "name": "itextpdf",
     "group": "com.itextpdf",
     "artifact": "itextpdf",
@@ -135,40 +82,6 @@
     "documentation": "https://javadoc.io/static/com.itextpdf/itextpdf/5.5.13/com/itextpdf/text/pdf/codec/PngImage.html",
     "scope": "PNG dimensions",
     "family": "iText 5 PNG codec",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    }
-  },
-  {
-    "name": "metadata-extractor",
-    "group": "com.drewnoakes",
-    "artifact": "metadata-extractor",
-    "version": "2.22.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "ImageMetadataReader.readMetadata(File); PngDirectory IHDR width/height",
-    "documentation": "https://github.com/drewnoakes/metadata-extractor",
-    "scope": "PNG dimensions",
-    "family": "metadata-extractor PNG chunk reader",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    }
-  },
-  {
-    "name": "jOpenDocument",
-    "group": "org.jopendocument",
-    "artifact": "jOpenDocument",
-    "version": "1.3",
-    "license": "GPL-3.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "ImageInfo.setInput(InputStream).check(); getFormatName/getWidth/getHeight",
-    "documentation": "https://javadoc.io/static/org.jopendocument/jOpenDocument/1.3/org/jopendocument/util/ImageInfo.html",
-    "scope": "PNG dimensions and format identity",
-    "family": "jOpenDocument bundled ImageInfo header parser",
     "control": "controls/png/red-green.png",
     "expected_output": {
       "width": 2,
@@ -241,93 +154,6 @@
     "expected_output": {
       "width": 2,
       "height": 1
-    }
-  },
-  {
-    "name": "itext-io",
-    "group": "com.itextpdf",
-    "artifact": "io",
-    "version": "9.8.0",
-    "license": "AGPL-3.0-or-later",
-    "license_evidence": "https://github.com/itext/itext-java/blob/9.8.0/LICENSE.md",
-    "input_api": "ImageDataFactory.createPng(byte[]).getWidth/getHeight",
-    "documentation": "https://api.itextpdf.com/iText/java/9.8.0/com/itextpdf/io/image/ImageDataFactory.html",
-    "scope": "PNG dimensions",
-    "family": "iText 9 image I/O PNG codec",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    }
-  },
-  {
-    "name": "lwjgl-stb",
-    "group": "org.lwjgl",
-    "artifact": "lwjgl-stb",
-    "version": "3.4.3",
-    "license": "BSD-3-Clause",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "STBImage.stbi_load_from_memory(ByteBuffer,...)",
-    "documentation": "https://javadoc.lwjgl.org/org/lwjgl/stb/STBImage.html",
-    "scope": "RGBA pixels",
-    "family": "LWJGL binding to native stb_image PNG decoder",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "pixels": "ffff0000,ff00ff00"
-    }
-  },
-  {
-    "name": "tika-image",
-    "group": "org.apache.tika",
-    "artifact": "tika-parser-image-module",
-    "version": "4.2.0",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release JAR META-INF/LICENSE",
-    "input_api": "ImageParser.parse(InputStream,ContentHandler,Metadata,ParseContext) with image/png MIME",
-    "documentation": "https://tika.apache.org/4.2.0/api/org/apache/tika/parser/image/ImageParser.html",
-    "scope": "PNG dimensions",
-    "family": "Apache Tika ImageParser over Java ImageIO",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    }
-  },
-  {
-    "name": "xmlgraphics-commons",
-    "group": "org.apache.xmlgraphics",
-    "artifact": "xmlgraphics-commons",
-    "version": "2.12",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "ImageManager.getImageInfo(file URI,DefaultImageSessionContext)",
-    "documentation": "https://xmlgraphics.apache.org/commons/image-loader.html",
-    "scope": "PNG dimensions and MIME",
-    "family": "XML Graphics image loader over Java ImageIO",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1
-    }
-  },
-  {
-    "name": "javafx-graphics",
-    "group": "org.openjfx",
-    "artifact": "javafx-graphics",
-    "version": "21.0.9",
-    "license": "GPL-2.0-with-classpath-exception",
-    "license_evidence": "https://openjfx.io/",
-    "input_api": "new javafx.scene.image.Image(InputStream); getPixelReader().getArgb(x,y)",
-    "documentation": "https://openjfx.io/javadoc/21/javafx.graphics/javafx/scene/image/Image.html",
-    "scope": "RGBA pixels",
-    "family": "OpenJFX PNG image loader",
-    "control": "controls/png/red-green.png",
-    "expected_output": {
-      "width": 2,
-      "height": 1,
-      "pixels": "ffff0000,ff00ff00"
     }
   },
   {

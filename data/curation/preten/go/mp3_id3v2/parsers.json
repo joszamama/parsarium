@@ -1,0 +1,291 @@
+[
+  {
+    "name": "github.com/faiface/beep/mp3",
+    "module": "github.com/faiface/beep",
+    "version": "v1.1.0",
+    "license": "MIT",
+    "input_api": "Decode(io.ReadCloser); Stream(samples)",
+    "documentation": "https://pkg.go.dev/github.com/faiface/beep/mp3@v1.1.0",
+    "scope": "decoded samples and sample rate",
+    "family": "hajime/go-mp3 via beep",
+    "expected_output": {
+      "sample_rate": 44100,
+      "samples": 16
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/gopxl/beep/v2/mp3",
+    "module": "github.com/gopxl/beep/v2",
+    "version": "v2.1.1",
+    "license": "MIT",
+    "input_api": "Decode(io.ReadCloser); Stream(samples)",
+    "documentation": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1",
+    "scope": "decoded samples and sample rate",
+    "family": "hajime/go-mp3 via beep",
+    "expected_output": {
+      "sample_rate": 44100,
+      "samples": 16
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/hajimehoshi/go-mp3",
+    "module": "github.com/hajimehoshi/go-mp3",
+    "version": "v0.3.4",
+    "license": "Apache-2.0",
+    "input_api": "NewDecoder(io.Reader); Read([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4",
+    "scope": "decoded PCM bytes and sample rate",
+    "family": "hajime/go-mp3 lineage",
+    "expected_output": {
+      "sample_rate": 44100,
+      "decoded_bytes": 64
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
+    "module": "github.com/hajimehoshi/ebiten/v2",
+    "version": "v2.10.6",
+    "license": "Apache-2.0",
+    "input_api": "DecodeWithoutResampling(io.Reader); Read([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3@v2.10.6",
+    "scope": "decoded PCM bytes and sample rate",
+    "family": "hajime/go-mp3 lineage",
+    "expected_output": {
+      "sample_rate": 44100,
+      "decoded_bytes": 64
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/dece2183/go-stream-mp3",
+    "module": "github.com/dece2183/go-stream-mp3",
+    "version": "v1.0.2",
+    "license": "Apache-2.0",
+    "input_api": "NewDecoder(io.Reader); Read([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/dece2183/go-stream-mp3@v1.0.2",
+    "scope": "decoded PCM bytes and sample rate",
+    "family": "hajime/go-mp3 lineage",
+    "expected_output": {
+      "sample_rate": 44100,
+      "decoded_bytes": 64
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/tcolgate/mp3",
+    "module": "github.com/tcolgate/mp3",
+    "version": "v0.0.0-20170426193717-e79c5a46d300",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader).Decode(*Frame,*int)",
+    "documentation": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300",
+    "scope": "MPEG frame size and samples",
+    "family": "tcolgate MP3 frame lineage",
+    "expected_output": {
+      "frame_bytes": 208,
+      "samples": 1152
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/fgergo/mp3",
+    "module": "github.com/fgergo/mp3",
+    "version": "v1.0.0",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader).Decode(*Frame,*int)",
+    "documentation": "https://pkg.go.dev/github.com/fgergo/mp3@v1.0.0",
+    "scope": "MPEG frame size and samples",
+    "family": "tcolgate MP3 frame lineage",
+    "expected_output": {
+      "frame_bytes": 208,
+      "samples": 1152
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/tosone/minimp3",
+    "module": "github.com/tosone/minimp3",
+    "version": "v1.1.0",
+    "license": "MIT",
+    "input_api": "DecodeFull([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0",
+    "scope": "decoded PCM bytes and audio format",
+    "family": "minimp3 decoder",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "decoded_bytes": 94464
+    }
+  },
+  {
+    "name": "github.com/mattetti/audio/mp3",
+    "module": "github.com/mattetti/audio",
+    "version": "v0.0.0-20240411020228-c5379f9b5b61",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader).Duration()",
+    "documentation": "https://pkg.go.dev/github.com/mattetti/audio/mp3@v0.0.0-20240411020228-c5379f9b5b61",
+    "scope": "reported duration and frame count",
+    "family": "tcolgate MP3 frame lineage",
+    "expected_output": {
+      "duration_ms": 1071,
+      "frames": 42
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "verification_note": "Reported duration includes MP3 encoder delay/padding and exceeds the one-second source duration; only the reported frame-based parse path is established."
+  },
+  {
+    "name": "github.com/qiniu/audio/mp3",
+    "module": "github.com/qiniu/audio",
+    "version": "v0.2.1",
+    "license": "Apache-2.0",
+    "input_api": "Decode(io.ReadSeeker); Read([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/qiniu/audio/mp3@v0.2.1",
+    "scope": "decoded PCM bytes and audio format",
+    "family": "hajime/go-mp3 wrapper",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 2,
+      "decoded_bytes": 64
+    }
+  },
+  {
+    "name": "github.com/sa6mwa/mp3duration",
+    "module": "github.com/sa6mwa/mp3duration",
+    "version": "v0.0.0-20221104103912-0716b1a5de6e",
+    "license": "MIT",
+    "input_api": "ReadFile(local path)",
+    "documentation": "https://pkg.go.dev/github.com/sa6mwa/mp3duration@v0.0.0-20221104103912-0716b1a5de6e",
+    "scope": "reported duration and frame count",
+    "family": "sa6mwa MP3 duration reader",
+    "expected_output": {
+      "duration_ms": 1071,
+      "frames": 41
+    },
+    "verification_note": "Reported duration includes MP3 encoder delay/padding and exceeds the one-second source duration; only the reported frame-based parse path is established."
+  },
+  {
+    "name": "github.com/bogem/id3v2/v2",
+    "module": "github.com/bogem/id3v2/v2",
+    "version": "v2.1.4",
+    "license": "MIT",
+    "input_api": "ParseReader(io.Reader,Options{Parse:true}).Title()",
+    "documentation": "https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4",
+    "scope": "ID3v2.3 title",
+    "family": "bogem ID3v2 parser",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "github.com/dhowden/tag",
+    "module": "github.com/dhowden/tag",
+    "version": "v0.0.0-20240417053706-3d75831295e8",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker).Title()",
+    "documentation": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8",
+    "scope": "ID3v2.3 title",
+    "family": "dhowden/tag lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/gcottom/mp3meta",
+    "module": "github.com/gcottom/mp3meta",
+    "version": "v0.0.4",
+    "license": "MIT",
+    "input_api": "ParseMP3(io.ReadSeeker)",
+    "documentation": "https://pkg.go.dev/github.com/gcottom/mp3meta@v0.0.4",
+    "scope": "ID3v2.3 title",
+    "family": "gcottom MP3 tag reader",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "github.com/guregu/tag",
+    "module": "github.com/guregu/tag",
+    "version": "v0.0.3",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker).Title()",
+    "documentation": "https://pkg.go.dev/github.com/guregu/tag@v0.0.3",
+    "scope": "ID3v2.3 title",
+    "family": "dhowden/tag lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/icanhazbroccoli/tag",
+    "module": "github.com/icanhazbroccoli/tag",
+    "version": "v0.0.0-20210306220707-0c387c570328",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker).Title()",
+    "documentation": "https://pkg.go.dev/github.com/icanhazbroccoli/tag@v0.0.0-20210306220707-0c387c570328",
+    "scope": "ID3v2.3 title",
+    "family": "dhowden/tag lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/frolovo22/tag",
+    "module": "github.com/frolovo22/tag",
+    "version": "v0.0.2",
+    "license": "GPL-3.0",
+    "input_api": "ReadID3v23(io.ReadSeeker).GetTitle()",
+    "documentation": "https://pkg.go.dev/github.com/frolovo22/tag@v0.0.2",
+    "scope": "ID3v2.3 title with trailing NUL",
+    "family": "frolovo22 ID3 parser",
+    "expected_output": {
+      "title": "Parsarium\u0000"
+    },
+    "verification_note": "The title reader includes one trailing NUL byte; the raw observed value is recorded rather than silently normalized."
+  },
+  {
+    "name": "github.com/ascherkus/go-id3/src/id3",
+    "module": "github.com/ascherkus/go-id3",
+    "version": "v0.0.0-20120522061058-b139b6a612de",
+    "license": "Apache-2.0",
+    "input_api": "Read(io.Reader).Name",
+    "documentation": "https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3@v0.0.0-20120522061058-b139b6a612de",
+    "scope": "ID3v2.3 title",
+    "family": "ascherkus/go-id3 lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/dustin/go-id3",
+    "module": "github.com/dustin/go-id3",
+    "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
+    "license": "Apache-2.0",
+    "input_api": "Read(io.Reader).Name",
+    "documentation": "https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e",
+    "scope": "ID3v2.3 title",
+    "family": "ascherkus/go-id3 lineage",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "honnef.co/go/id3",
+    "module": "honnef.co/go/id3",
+    "version": "v0.0.0-20250113165337-e36fa5d059c5",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader).Parse().Title()",
+    "documentation": "https://pkg.go.dev/honnef.co/go/id3@v0.0.0-20250113165337-e36fa5d059c5",
+    "scope": "ID3v2.3 title",
+    "family": "honnef ID3 parser",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "ecosystem": "php",
+  "format": "zip",
+  "status": "verified_goal_met_partial_search",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 20,
+  "verified_standard_or_runtime_count": 2,
+  "search_queries": [
+    "zip",
+    "unzip",
+    "archive"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 300,
+  "unique_search_hits": 258,
+  "unresolved_documentation_leads": 3,
+  "uncertainty": "Twenty pinned Composer package paths have documented local ZIP input APIs and passed the valid one-entry DEFLATE control. Chumper returned decompressed bytes for a named entry; the other nineteen returned the parsed entry name and bytes. Two bundled PHP 8.5 APIs passed separately. Fourteen of twenty third-party paths use PHP ZipArchive/libzip on this host, while several pure-PHP readers use zlib for decompression. UnifiedArchive and Matomo also have PclZip backends; Joomla has a custom fallback. Madnest is a Chumper fork, Macellan derives from ZanySoft, and Chamilo is a PclZip fork. These are package paths, not twenty independent engines. Chumper listFiles fails under PHP 8.5 due to named-argument handling; its narrower verified scope is recorded. Older packages emit nonfatal PHP 8.5 warnings, saved in verification results. Six Composer locks isolate conflicting packages and dependencies. Three Packagist name searches saved 100 results each; query tails and keyword mismatch can hide relevant parsers. Three documentation leads remain unresolved, including Grandt PHPZipMerge and Distill; Ticketpark’s release lacks license evidence. Lifetime Packagist downloads rank only verified PHP packages, not ZIP API uses. The numerical goal of 20 is met, but the search is incomplete and this does not establish a definitive most-used top 20. The control covers one ordinary DEFLATE entry. No malformed-input, vulnerability, or resource-use experiments were run.",
+  "third_party_evidence": "data/php/zip/parsers.json",
+  "third_party_control_results": "data/php/zip/verification.json",
+  "runtime_evidence": "data/php/zip/standard.json",
+  "registry_snapshot": "data/php/zip/registry-snapshot.json",
+  "unresolved_leads": "data/php/zip/leads.json"
+}

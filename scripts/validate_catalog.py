@@ -26,7 +26,7 @@ def main() -> None:
     assert {(c["ecosystem"], c["format"]) for c in matrix} == expected_cells
     lock = read("package-lock.json")["packages"][""]["dependencies"]
     for cell in matrix:
-        assert cell["working_target"] == 20 and cell["ceiling"] == 30
+        assert cell["working_target"] == 10 and cell["ceiling"] == 10
         if cell["status"] == "not_started":
             assert cell["verified_third_party_count"] == 0
             assert cell["search_hits_recorded"] == 0

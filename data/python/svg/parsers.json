@@ -47,24 +47,6 @@
     }
   },
   {
-    "name": "svgutils",
-    "version": "0.3.4",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/svgutils/0.3.4/json",
-    "input_api": "svgutils.transform.fromfile(local_svg_path)",
-    "documentation": "https://svgutils.readthedocs.io/en/latest/transform.html",
-    "scope": "SVG element tree and dimensions",
-    "family": "svgutils lxml SVG tree wrapper",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        "2",
-        "1"
-      ],
-      "elements": 2
-    }
-  },
-  {
     "name": "svgpathtools",
     "version": "1.8.0",
     "license": "MIT",
@@ -111,27 +93,6 @@
     }
   },
   {
-    "name": "svglab",
-    "version": "0.18.0",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/svglab/0.18.0/json",
-    "input_api": "svglab.parse_svg(local_svg_bytes)",
-    "documentation": "https://pypi.org/project/svglab/0.18.0/",
-    "scope": "SVG typed element tree and colors",
-    "family": "svglab Rust/Python typed SVG tree",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        2,
-        1
-      ],
-      "fills": [
-        "red",
-        "lime"
-      ]
-    }
-  },
-  {
     "name": "svgelements",
     "version": "1.9.6",
     "license": "MIT",
@@ -147,43 +108,6 @@
         1
       ],
       "rectangles": 2
-    }
-  },
-  {
-    "name": "resvg",
-    "version": "0.2.0",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/resvg/0.2.0/json",
-    "input_api": "resvg.usvg.Tree.from_str(local_svg_text, resvg.usvg.Options.default())",
-    "documentation": "https://pypi.org/project/resvg/0.2.0/",
-    "scope": "SVG tree and intrinsic dimensions",
-    "family": "Rust resvg/usvg through resvg-py binding",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        2,
-        1
-      ]
-    }
-  },
-  {
-    "name": "mpl-simple-svg-parser",
-    "version": "0.2.1",
-    "license": "BSD-3-Clause",
-    "license_evidence": "https://pypi.org/pypi/mpl-simple-svg-parser/0.2.1/json",
-    "input_api": "SVGMplPathIterator(local_svg_bytes).iter_path_attrib()",
-    "documentation": "https://leejjoon.github.io/jjl-mpl-blog/posts/mpl-20241027-mpl-simple-svg-parser-user-guide/index.html",
-    "scope": "SVG paths for Matplotlib",
-    "family": "CairoSVG and picosvg conversion plus svgpath2mpl",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "viewbox": [
-        0,
-        0,
-        2,
-        1
-      ],
-      "paths": 2
     }
   },
   {
@@ -241,139 +165,6 @@
         255,
         0,
         255
-      ]
-    }
-  },
-  {
-    "name": "scour",
-    "version": "0.38.2",
-    "license": "Apache-2.0",
-    "license_evidence": "https://pypi.org/pypi/scour/0.38.2/json",
-    "input_api": "scour.scour.scourString(local_svg_text)",
-    "documentation": "https://github.com/scour-project/scour/blob/v0.38.2/scour/scour.py",
-    "scope": "SVG-aware optimization and element tree",
-    "family": "Scour SVG XML optimizer",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        "2",
-        "1"
-      ],
-      "rectangles": 2,
-      "optimized_fills": [
-        "#f00",
-        "#0f0"
-      ]
-    }
-  },
-  {
-    "name": "picosvg",
-    "version": "0.23.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://github.com/googlefonts/picosvg/blob/main/LICENSE",
-    "input_api": "picosvg.svg.SVG.parse(local_svg_path)",
-    "documentation": "https://github.com/googlefonts/picosvg/blob/v0.23.0/src/picosvg/svg.py",
-    "scope": "SVG element tree and dimensions",
-    "family": "Google Fonts picosvg tree and simplifier",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        "2",
-        "1"
-      ],
-      "rectangles": 2
-    }
-  },
-  {
-    "name": "resvglite",
-    "version": "0.2.0",
-    "license": "MIT OR Apache-2.0",
-    "license_evidence": "https://pypi.org/pypi/resvglite/0.2.0/json",
-    "input_api": "resvglite.render_svg(local_svg_bytes, size_px=1)",
-    "documentation": "https://pypi.org/project/resvglite/0.2.0/",
-    "scope": "SVG rendering with dimensions and colored pixels",
-    "family": "Rust resvg/usvg vendored binding",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        2,
-        1
-      ],
-      "red": [
-        255,
-        0,
-        0,
-        255
-      ],
-      "green": [
-        0,
-        255,
-        0,
-        255
-      ]
-    }
-  },
-  {
-    "name": "pillow-lunasvg",
-    "version": "0.1.1",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/pillow-lunasvg/0.1.1/json",
-    "input_api": "import pillow_lunasvg; PIL.Image.open(local_svg_path)",
-    "documentation": "https://pypi.org/project/pillow-lunasvg/0.1.1/",
-    "scope": "SVG rendering with dimensions and colored pixels",
-    "family": "LunaSVG/plutovg through Pillow plugin",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        2,
-        1
-      ],
-      "red": [
-        255,
-        0,
-        0,
-        255
-      ],
-      "green": [
-        0,
-        255,
-        0,
-        255
-      ]
-    }
-  },
-  {
-    "name": "picosvgx",
-    "version": "0.1.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://pypi.org/pypi/picosvgx/0.1.0/json",
-    "input_api": "picosvgx.svg.SVG.parse(local_svg_path)",
-    "documentation": "https://pypi.org/project/picosvgx/0.1.0/",
-    "scope": "SVG element tree and dimensions",
-    "family": "picosvg fork (shared underlying picosvg family)",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        "2",
-        "1"
-      ],
-      "rectangles": 2
-    }
-  },
-  {
-    "name": "skia-python",
-    "version": "144.1",
-    "license": "BSD-3-Clause",
-    "license_evidence": "https://pypi.org/pypi/skia-python/144.1/json",
-    "input_api": "skia.SVGDOM.MakeFromStream(skia.MemoryStream.MakeCopy(local_svg_bytes))",
-    "documentation": "https://github.com/skia-python/skia-python/blob/main/src/skia/SVGDOM.cpp",
-    "scope": "SVG DOM and intrinsic dimensions",
-    "family": "Skia SVGDOM binding",
-    "control": "controls/svg/red-green.svg",
-    "expected_output": {
-      "size": [
-        2,
-        1
       ]
     }
   },

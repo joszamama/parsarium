@@ -1,0 +1,27 @@
+{
+  "ecosystem": "c",
+  "format": "wav",
+  "status": "verified_target_search_incomplete",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 20,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "wav",
+    "audio",
+    "sndfile",
+    "raylib",
+    "ffmpeg"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 11,
+  "unique_search_hits": 10,
+  "unresolved_documentation_leads": 1,
+  "uncertainty": "Twenty distinct pinned open-source C package paths passed the valid four-sample mono 16-bit PCM RIFF/WAVE control. Eighteen returned sample rate, channels, frame count and all four decoded PCM values; SDL3_mixer returned parsed sample rate, channels and duration in frames; TagLib C bindings returned WAV sample rate, channels and bitrate without PCM decoding. GStreamer explicitly used the wavparse plugin and returned caps plus four PCM samples. Four paths are built from SHA-256-pinned source archives or headers; sixteen use exact-release, binary-hashed installed libraries. The Audio File Library 0.3.6 build uses a documented signed-shift compatibility patch. The Conan Center recipe-name search recorded 11 hits (10 unique) across five bounded alphabetic substring queries, each capped at 100; names are discovery leads, not parser proof or a usage ranking. The Conan audiofile recipe is unrelated C++ software and is excluded from this C cell. Targeted project documentation supplied many additional candidates. One plausible lead remains unresolved. This reaches the 20-path working goal, but the search does not establish a definitive most-used set. Eighteen paths have primary GitHub star counts; SoX and GStreamer are unranked because their primary SourceForge and GitLab projects lack comparable GitHub counts. GitHub stars are a C-within-ecosystem adoption proxy, and FFmpeg/raylib are multi-format projects. Miniaudio and raylib share dr_wav decoder lineage; CSFML wraps SFML; SDL2_mixer and SDL3_mixer share an upstream project and SDL parser lineage; SDL2-compat exposes SDL2 WAV loading over SDL3, while a separate native SDL2 release was built; SDL2 and SDL3 share one repository star metric; aubio links Apple AudioToolbox and libsndfile and its selected backend was not isolated. TagLib C bindings wrap its C++ RIFF/WAV parser. SDL2_sound and SDL3_sound share one upstream WAV decoder lineage and star count; the former links sdl2-compat on this host, while both identified their built-in Microsoft WAVE decoder. Twenty package paths are not twenty independent engines. Installed-library checks depend on recorded Homebrew releases and binary hashes, including the GStreamer wavparse plugin and FFmpeg 9.0.2_1 bottle revision. FreeALUT requires a macOS OpenAL context. The control covers only ordinary RIFF PCM16. The ISO C standard library documents no WAV parser; generic stdio reads do not qualify. No malformed-input, vulnerability, or resource-use experiments were run.",
+  "third_party_evidence": "data/c/wav/parsers.json",
+  "third_party_control_results": "data/c/wav/verification.json",
+  "runtime_evidence": "data/c/wav/standard.json",
+  "registry_snapshot": "data/c/wav/registry-snapshot.json",
+  "unresolved_leads": "data/c/wav/leads.json",
+  "source_lock": "data/c/wav/source-lock.json"
+}

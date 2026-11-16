@@ -1,0 +1,269 @@
+{
+  "checked_at_utc": "2026-11-12T20:01:22.601698+00:00",
+  "environment": {
+    "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
+    "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "classpath_jars": {
+      "echosvg": 32,
+      "jairo": 2,
+      "main": 97,
+      "vips": 2
+    }
+  },
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "control_meaning": "Valid 2x1 SVG with red and green unit rectangles",
+  "third_party": [
+    {
+      "package": "batik-anim",
+      "version": "1.20",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter batik-anim controls/svg/red-green.svg"
+    },
+    {
+      "package": "batik-transcoder",
+      "version": "1.20",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter batik-transcoder controls/svg/red-green.svg"
+    },
+    {
+      "package": "jsvg",
+      "version": "2.0.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter jsvg controls/svg/red-green.svg"
+    },
+    {
+      "package": "svg-salamander",
+      "version": "1.1.5.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter svg-salamander controls/svg/red-green.svg"
+    },
+    {
+      "package": "batik-svgrasterizer",
+      "version": "1.20",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter batik-svgrasterizer controls/svg/red-green.svg"
+    },
+    {
+      "package": "batik-swing",
+      "version": "1.20",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter batik-swing controls/svg/red-green.svg"
+    },
+    {
+      "package": "itext-svg",
+      "version": "9.8.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter itext-svg controls/svg/red-green.svg"
+    },
+    {
+      "package": "imageio-batik",
+      "version": "3.15.2",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter twelvemonkeys-batik controls/svg/red-green.svg"
+    },
+    {
+      "package": "jSVGIcon",
+      "version": "1.6",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter jsvgicon controls/svg/red-green.svg"
+    },
+    {
+      "package": "jairosvg",
+      "version": "1.0.16",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "/opt/homebrew/opt/openjdk@25/bin/java -Djava.awt.headless=true -cp <locked jairo classpath> org.parsarium.JairoSvgAdapter controls/svg/red-green.svg"
+    },
+    {
+      "package": "imageio-native-vips",
+      "version": "2.0.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "/opt/homebrew/opt/openjdk/bin/java --enable-native-access=ALL-UNNAMED -Djava.awt.headless=true -cp <locked vips classpath> org.parsarium.VipsSvgAdapter controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-anim",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-anim controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-transcoder-svg",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-transcoder-svg controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-swing",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-swing controls/svg/red-green.svg"
+    },
+    {
+      "package": "echosvg-svgrasterizer",
+      "version": "2.5",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked echosvg classpath> org.parsarium.EchoSvgAdapter echosvg-svgrasterizer controls/svg/red-green.svg"
+    },
+    {
+      "package": "fop-core",
+      "version": "2.12",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "red": true,
+        "green": true
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter fop-core controls/svg/red-green.svg"
+    },
+    {
+      "package": "radiance-svg-transcoder",
+      "version": "7.5.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "dimensions": true,
+        "red": true,
+        "green": true
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter radiance-svg-transcoder controls/svg/red-green.svg"
+    },
+    {
+      "package": "gsvg",
+      "version": "1.2.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2,
+        "fills": "#ff0000,#00ff00"
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter gsvg controls/svg/red-green.svg"
+    },
+    {
+      "package": "aurora-tools-svg-transcoder-desktop",
+      "version": "1.3.0",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "rects": 2
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter aurora-svg-transcoder controls/svg/red-green.svg"
+    },
+    {
+      "package": "transcoder-core",
+      "version": "0.1.1",
+      "control": "controls/svg/red-green.svg",
+      "output": {
+        "dimensions": true,
+        "red": true,
+        "green": true
+      },
+      "pass": true,
+      "command": "java -Djava.awt.headless=true -cp <locked classpath> org.parsarium.SvgAdapter furutuki-transcoder controls/svg/red-green.svg"
+    }
+  ],
+  "runtime": [],
+  "runtime_probe": {
+    "output": {
+      "svg_readers": 0,
+      "imageio_result": null
+    },
+    "pass": true,
+    "command": "java -cp <bare JDK runtime probe> JdkSvgProbe controls/svg/red-green.svg"
+  }
+}

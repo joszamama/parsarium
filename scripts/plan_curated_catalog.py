@@ -45,9 +45,11 @@ def plan() -> dict:
     result = []
     for cell in cells:
         ecosystem, format_name = cell["ecosystem"], cell["format"]
-        source = ROOT / "data" / ecosystem / format_name
+        source = ROOT / "data/curation/preten" / ecosystem / format_name
+        if not source.exists():
+            source = ROOT / "data" / ecosystem / format_name
         parser_file = source / "parsers.json"
-        snapshot_file = source / "registry-snapshot.json"
+        snapshot_file = ROOT / "data" / ecosystem / format_name / "registry-snapshot.json"
         parsers = json.loads(parser_file.read_text())
         snapshot = json.loads(snapshot_file.read_text())
         metric = snapshot.get("download_metric", snapshot.get("popularity_metric", {}))

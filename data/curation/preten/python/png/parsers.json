@@ -1,0 +1,509 @@
+[
+  {
+    "name": "Pillow",
+    "version": "13.0.0",
+    "license": "MIT-CMU",
+    "license_evidence": "https://pypi.org/pypi/Pillow/13.0.0/json",
+    "input_api": "Image.open(local path); Image.load(); Image.getpixel",
+    "documentation": "https://pillow.readthedocs.io/en/stable/reference/open_files.html",
+    "scope": "pixels",
+    "family": "Pillow PNG",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "opencv-python-headless",
+    "version": "5.0.0.93",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/opencv-python-headless/5.0.0.93/json",
+    "input_api": "cv2.imread(local path, IMREAD_UNCHANGED)",
+    "documentation": "https://docs.opencv.org/5.0/main_modules/imgcodecs.html",
+    "scope": "pixels",
+    "family": "OpenCV imgcodecs",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "imageio",
+    "version": "2.38.1",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://pypi.org/pypi/imageio/2.38.1/json",
+    "input_api": "imageio.v3.imread(local path)",
+    "documentation": "https://imageio.readthedocs.io/en/stable/reference/userapi.html",
+    "scope": "pixels",
+    "family": "ImageIO via Pillow",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "family_note": "Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine."
+  },
+  {
+    "name": "scikit-image",
+    "version": "0.26.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/scikit-image/0.26.0/json",
+    "input_api": "skimage.io.imread(local path)",
+    "documentation": "https://scikit-image.org/docs/0.26.x/api/skimage.io.html",
+    "scope": "pixels",
+    "family": "scikit-image via ImageIO/Pillow",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "family_note": "Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine."
+  },
+  {
+    "name": "matplotlib",
+    "version": "3.11.2",
+    "license": "Matplotlib License 1.3",
+    "license_evidence": "https://pypi.org/pypi/matplotlib/3.11.2/json",
+    "input_api": "matplotlib.image.imread(local path)",
+    "documentation": "https://matplotlib.org/stable/api/image_api.html",
+    "scope": "pixels",
+    "family": "Matplotlib via Pillow",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "family_note": "Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine."
+  },
+  {
+    "name": "pypng",
+    "version": "0.20220715.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pypng/0.20220715.0/json",
+    "input_api": "png.Reader(filename=local path).asRGBA8()",
+    "documentation": "https://drj11.gitlab.io/pypng/png.html",
+    "scope": "pixels",
+    "family": "PyPNG",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "imagecodecs",
+    "version": "2026.10.10",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/imagecodecs/2026.10.10/json",
+    "input_api": "imagecodecs.png_decode(local bytes)",
+    "documentation": "https://github.com/cgohlke/imagecodecs",
+    "scope": "pixels",
+    "family": "imagecodecs PNG codec",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "pyvips",
+    "version": "3.2.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pyvips/3.2.0/json",
+    "input_api": "pyvips.Image.new_from_file(local path).write_to_memory()",
+    "documentation": "https://libvips.github.io/pyvips/vimage.html",
+    "scope": "pixels",
+    "family": "libvips PNG",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "Wand",
+    "version": "0.7.2",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/Wand/0.7.2/json",
+    "input_api": "wand.image.Image(filename=local path).export_pixels",
+    "documentation": "https://docs.wand-py.org/en/latest/guide/read.html",
+    "scope": "pixels",
+    "family": "ImageMagick",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "Willow",
+    "version": "1.12.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/wagtail/Willow/blob/v1.12.0/LICENSE",
+    "input_api": "willow.image.Image.open(local stream).get_size()",
+    "documentation": "https://pypi.org/project/Willow/1.12.0/",
+    "scope": "dimensions",
+    "family": "Willow via Pillow",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    },
+    "family_note": "Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine."
+  },
+  {
+    "name": "pycairo",
+    "version": "1.29.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://pypi.org/pypi/pycairo/1.29.2/json",
+    "input_api": "cairo.ImageSurface.create_from_png(local path).get_data()",
+    "documentation": "https://pycairo.readthedocs.io/en/latest/reference/surfaces.html",
+    "scope": "pixels",
+    "family": "Cairo/libpng",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "pygame",
+    "version": "2.6.1",
+    "license": "LGPL",
+    "license_evidence": "https://pypi.org/pypi/pygame/2.6.1/json",
+    "input_api": "pygame.image.load(local path).get_at",
+    "documentation": "https://www.pygame.org/docs/ref/image.html",
+    "scope": "pixels",
+    "family": "SDL_image/libpng",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "rasterio",
+    "version": "1.5.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/rasterio/1.5.2/json",
+    "input_api": "rasterio.open(local path).read()",
+    "documentation": "https://rasterio.readthedocs.io/en/stable/quickstart.html",
+    "scope": "pixels",
+    "family": "GDAL PNG",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "imagesize",
+    "version": "2.0.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/imagesize/2.0.1/json",
+    "input_api": "imagesize.get(local path)",
+    "documentation": "https://pypi.org/project/imagesize/2.0.1/",
+    "scope": "dimensions",
+    "family": "imagesize PNG header",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "apng",
+    "version": "0.3.4",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/apng/0.3.4/json",
+    "input_api": "apng.PNG.open(local path)",
+    "documentation": "https://pypi.org/project/apng/0.3.4/",
+    "scope": "chunks and dimensions",
+    "family": "pyAPNG chunk parser",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "chunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ]
+    }
+  },
+  {
+    "name": "pngtools",
+    "version": "1.0.2",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pngtools/1.0.2/json",
+    "input_api": "pngtools.read_file(local path); get_type_of_chunk",
+    "documentation": "https://github.com/its-just-nans/pngtools/blob/main/pngtools/lib.py",
+    "scope": "chunks",
+    "family": "pngtools chunk parser",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "chunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ]
+    }
+  },
+  {
+    "name": "imgio",
+    "version": "1.7.4",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/imgio/1.7.4/json",
+    "input_api": "imgio.imread(local path)",
+    "documentation": "https://github.com/toaarnio/imgio/blob/master/imgio/imgio.py",
+    "scope": "pixels",
+    "family": "imgio via Pillow on macOS",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "family_note": "Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine."
+  },
+  {
+    "name": "simpleimageio",
+    "version": "1.13.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/simpleimageio/1.13.0/json",
+    "input_api": "simpleimageio.read(local path)",
+    "documentation": "https://github.com/pgrit/SimpleImageIO",
+    "scope": "pixels",
+    "family": "SimpleImageIO native reader",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "OpenImageIO",
+    "version": "3.2.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/OpenImageIO/3.2.2.0/json",
+    "input_api": "OpenImageIO.ImageInput.open(local path).read_image()",
+    "documentation": "https://openimageio.readthedocs.io/en/v3.2.1.0/pythonbindings.html",
+    "scope": "pixels",
+    "family": "OpenImageIO PNG",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "rgba0": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "rgba1": [
+        0,
+        255,
+        0,
+        255
+      ]
+    }
+  },
+  {
+    "name": "pngmeta",
+    "version": "0.2.1",
+    "license": "Unlicense",
+    "license_evidence": "https://pypi.org/pypi/pngmeta/0.2.1/json",
+    "input_api": "pngmeta.PngMeta(local path).get(\"Title\")",
+    "documentation": "https://pypi.org/project/pngmeta/0.2.1/",
+    "scope": "tEXt metadata",
+    "family": "pngmeta chunk parser",
+    "control": "controls/png/red-green-title.png",
+    "expected_output": {
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "byteparse",
+    "version": "0.1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/byteparse/0.1.0/json",
+    "input_api": "byteparse.formats.PNGFile.parse(local bytes)",
+    "documentation": "https://pypi.org/project/byteparse/0.1.0/",
+    "scope": "IHDR dimensions",
+    "family": "byteparse PNG grammar",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  }
+]

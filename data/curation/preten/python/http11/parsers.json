@@ -1,0 +1,350 @@
+[
+  {
+    "name": "h11",
+    "version": "0.16.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/h11/0.16.0/json",
+    "input_api": "h11.Connection(h11.SERVER).receive_data(bytes); next_event()",
+    "documentation": "https://pypi.org/project/h11/0.16.0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "h11 state-machine parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "httptools",
+    "version": "0.9.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/httptools/0.9.0/json",
+    "input_api": "httptools.HttpRequestParser(callbacks).feed_data(bytes)",
+    "documentation": "https://pypi.org/project/httptools/0.9.0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "llhttp C parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "zttp",
+    "version": "0.0.35",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/zttp/0.0.35/json",
+    "input_api": "zttp.Connection(zttp.SERVER).receive_data(bytes); next_event()",
+    "documentation": "https://pypi.org/project/zttp/0.0.35/",
+    "scope": "HTTP/1.1 request head",
+    "family": "zttp Zig parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "h11r",
+    "version": "0.2.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/h11r/0.2.0/json",
+    "input_api": "h11r.Connection(Role.SERVER).receive_data(bytes); next_event()",
+    "documentation": "https://pypi.org/project/h11r/0.2.0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "h11r Rust/httparse core",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "httppackets",
+    "version": "0.1.0a0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/httppackets/0.1.0a0/json",
+    "input_api": "httppackets.http_1_1_parser.parse_http_1_1_requests(BytesIO(bytes), callbacks)",
+    "documentation": "https://pypi.org/project/httppackets/0.1.0a0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "httppackets Lark grammar",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "http-parse",
+    "version": "0.1.5",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/http-parse/0.1.5/json",
+    "input_api": "http_parse.parse(raw_request_str)",
+    "documentation": "https://pypi.org/project/http-parse/0.1.5/",
+    "scope": "HTTP/1.1 request method, target and Host",
+    "family": "http-parse Python parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "http-pyparser",
+    "version": "0.5.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/http-pyparser/0.5.1/json",
+    "input_api": "http_pyparser.HTTPParser().parser(raw_request_str)",
+    "documentation": "https://pypi.org/project/http-pyparser/0.5.1/",
+    "scope": "HTTP/1.1 request method, target and Host",
+    "family": "http-pyparser Python parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "httparse",
+    "version": "0.2.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/httparse/0.2.1/json",
+    "input_api": "httparse.RequestParser().parse(bytes)",
+    "documentation": "https://pypi.org/project/httparse/0.2.1/",
+    "scope": "HTTP/1.1 request head",
+    "family": "Rust httparse binding",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "pycohttpparser",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pycohttpparser/1.1.0/json",
+    "input_api": "pycohttpparser.api.Parser().parse_request(memoryview(bytes))",
+    "documentation": "https://pypi.org/project/pycohttpparser/1.1.0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "picohttpparser C via CFFI",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "parse-http-header-line",
+    "version": "0.1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/parse-http-header-line/0.1.0/json",
+    "input_api": "parse_http_header_line.parse_name_value(local request Host field line)",
+    "documentation": "https://pypi.org/project/parse-http-header-line/0.1.0/",
+    "scope": "HTTP Host header field line only",
+    "family": "parse-http-header-line Python parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "header": "host",
+      "value": "example.test"
+    }
+  },
+  {
+    "name": "ParseRawHTTP",
+    "version": "1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/ParseRawHTTP/1.0/json",
+    "input_api": "ParseRawHTTP.ParseRawHTTP(raw_request_str)",
+    "documentation": "https://pypi.org/project/ParseRawHTTP/1.0/",
+    "scope": "HTTP/1.1 request method, target and Host",
+    "family": "ParseRawHTTP Python parser with CPython http.server",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "tp-http-request-response-parser",
+    "version": "2026.5.18",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/tp-http-request-response-parser/2026.5.18/json",
+    "input_api": "TP_HTTP_Request_Response_Parser.TP_HTTP_REQUEST_PARSER(raw_request_str)",
+    "documentation": "https://pypi.org/project/tp-http-request-response-parser/2026.5.18/",
+    "scope": "HTTP/1.1 request method and version",
+    "family": "TP Python HTTP parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "version": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "gunicorn-h1c",
+    "version": "0.6.14",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/gunicorn-h1c/0.6.14/json",
+    "input_api": "gunicorn_h1c.parse_request(bytes)",
+    "documentation": "https://pypi.org/project/gunicorn-h1c/0.6.14/",
+    "scope": "HTTP/1.1 request head",
+    "family": "picohttpparser C binding",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "h1parser",
+    "version": "0.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/h1parser/0.1/json",
+    "input_api": "h1parser.ParseHeader(bytes)",
+    "documentation": "https://pypi.org/project/h1parser/0.1/",
+    "scope": "HTTP/1.1 request head",
+    "family": "h1parser Python parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "h11-mypyc",
+    "version": "0.17.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/h11-mypyc/0.17.0/json",
+    "input_api": "h11_mypyc.Connection(h11_mypyc.SERVER).receive_data(bytes); next_event()",
+    "documentation": "https://pypi.org/project/h11-mypyc/0.17.0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "h11 mypyc-compiled fork",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "h11pro",
+    "version": "0.0.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/h11pro/0.0.1/json",
+    "input_api": "h11pro.Connection(h11pro.SERVER).receive_data(bytes); next_event()",
+    "documentation": "https://pypi.org/project/h11pro/0.0.1/",
+    "scope": "HTTP/1.1 request head",
+    "family": "h11 code fork",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "parserheader",
+    "version": "0.38.3",
+    "license": "BSD",
+    "license_evidence": "https://pypi.org/pypi/parserheader/0.38.3/json",
+    "input_api": "parserheader.parserheader(raw_request_str)",
+    "documentation": "https://pypi.org/project/parserheader/0.38.3/",
+    "scope": "HTTP header fields only",
+    "family": "parserheader Python parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "host": "example.test",
+      "x_parsarium": "yes"
+    }
+  },
+  {
+    "name": "proxy.py",
+    "version": "2.4.10",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/abhinavsingh/proxy.py/blob/v2.4.10/LICENSE",
+    "input_api": "proxy.http.parser.HttpParser.request(bytes)",
+    "documentation": "https://proxypy.readthedocs.io/en/latest/pkg/proxy.http.parser/",
+    "scope": "HTTP/1.1 request head",
+    "family": "proxy.py Python HTTP parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "http-parser",
+    "version": "0.9.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/http-parser/0.9.0/json",
+    "input_api": "http_parser.parser.HttpParser().execute(bytes, len(bytes))",
+    "documentation": "https://pypi.org/project/http-parser/0.9.0/",
+    "scope": "HTTP/1.1 request head",
+    "family": "node http-parser C binding",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "tornado",
+    "version": "6.6.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/tornado/6.6.1/json",
+    "input_api": "tornado.http1connection.HTTP1Connection(local IOStream, is_client=True).read_response(delegate)",
+    "documentation": "https://www.tornadoweb.org/en/stable/http1connection.html",
+    "scope": "HTTP/1.1 response status, headers and body",
+    "family": "Tornado Python HTTP/1 parser",
+    "control": "controls/http11/response.http",
+    "expected_output": {
+      "status": 200,
+      "content_type": "text/plain",
+      "body": "parsarium"
+    }
+  },
+  {
+    "name": "websockets",
+    "version": "17.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/websockets/17.3/json",
+    "input_api": "websockets.http11.Request.parse(read_line from local bytes)",
+    "documentation": "https://websockets.readthedocs.io/en/stable/reference/datastructures.html",
+    "scope": "HTTP/1.1 handshake request head",
+    "family": "websockets Python HTTP/1.1 parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "Twisted",
+    "version": "26.10.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/Twisted/26.10.0/json",
+    "input_api": "twisted.web.http.HTTPChannel.dataReceived(local HTTP bytes) with Request.process callback",
+    "documentation": "https://docs.twisted.org/en/latest/api/twisted.web.http.HTTPChannel.html",
+    "scope": "HTTP/1.1 request head",
+    "family": "Twisted HTTPChannel parser",
+    "control": "controls/http11/request.http",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  }
+]

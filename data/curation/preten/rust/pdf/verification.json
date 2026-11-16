@@ -1,0 +1,266 @@
+{
+  "checked_at_utc": "2026-11-12T01:38:27.210986+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
+  "build_command": "cargo build --locked (from adapters/rust/pdf)",
+  "control_sha256": {
+    "controls/pdf/one-page.pdf": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a"
+  },
+  "control_meaning": "Valid one-page PDF 1.4 with searchable Parsarium text and Info title Parsarium PDF control",
+  "third_party": [
+    {
+      "package": "lopdf",
+      "version": "0.47.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf lopdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdf-extract",
+      "version": "0.12.1",
+      "scope": "PDF text extraction",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf-extract controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "has_parsarium": true
+      },
+      "error": null
+    },
+    {
+      "package": "printpdf",
+      "version": "0.12.9",
+      "scope": "PDF page model",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf printpdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdf-inspector",
+      "version": "1.25.2",
+      "scope": "PDF page count and Info title",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf-inspector controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1,
+        "title": "Parsarium PDF control"
+      },
+      "error": null
+    },
+    {
+      "package": "pdf_oxide",
+      "version": "0.3.78",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf_oxide controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "oxidize-pdf",
+      "version": "5.5.7",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf oxidize-pdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdf",
+      "version": "0.10.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdf-text-extract",
+      "version": "0.2.0",
+      "scope": "PDF xref, catalog, and page count",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf-text-extract controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfsink-rs",
+      "version": "0.2.20",
+      "scope": "PDF page model",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfsink-rs controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfpurr",
+      "version": "0.4.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfpurr controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdf-cos",
+      "version": "0.39.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf-cos controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfrum",
+      "version": "0.5.3",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfrum controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfrum-parser",
+      "version": "0.5.3",
+      "scope": "PDF xref and page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfrum-parser controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "zpdf",
+      "version": "0.18.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf zpdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "zpdf-document",
+      "version": "0.18.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf zpdf-document controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfboss-core",
+      "version": "2.16.1",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfboss-core controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "unpdf",
+      "version": "0.54.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf unpdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfer_forms",
+      "version": "0.3.4",
+      "scope": "PDF page handles",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfer_forms controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdfplumber",
+      "version": "0.4.1",
+      "scope": "PDF page model",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdfplumber controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "pdf-syntax",
+      "version": "0.6.2",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf pdf-syntax controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    },
+    {
+      "package": "flpdf",
+      "version": "0.10.0",
+      "scope": "PDF page tree",
+      "control": "controls/pdf/one-page.pdf",
+      "command": "adapters/rust/pdf/target/debug/parsarium-rust-pdf flpdf controls/pdf/one-page.pdf",
+      "pass": true,
+      "output": {
+        "pages": 1
+      },
+      "error": null
+    }
+  ]
+}

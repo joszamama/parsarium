@@ -1,10 +1,12 @@
-# JavaScript × MP4: verified parser ranking
+# JAVASCRIPT × MP4: selected parsers
 
-20 verified third-party packages; working goal 20, original ceiling 30. npm downloads cover 2026-10-11 through 2026-11-09 inclusive, counting all versions of each package name. This ranks adoption signals only within this cell.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits and unresolved leads are separate from this ranking. See `cell.json`, `registry-snapshot.json`, and `verification.json` in this directory.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Downloads | Scope | Underlying family |
+npm registry tarball downloads.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [mediabunny](https://www.npmjs.com/package/mediabunny) | 1.65.2 | 22,132,891 | tracks+duration | mediabunny |
 | 2 | [music-metadata](https://www.npmjs.com/package/music-metadata) | 12.4.0 | 8,670,098 | tracks+title | music-metadata/ISO BMFF reader |
@@ -16,13 +18,5 @@ Search hits and unresolved leads are separate from this ranking. See `cell.json`
 | 8 | [mp4-stream](https://www.npmjs.com/package/mp4-stream) | 3.1.3 | 14,942 | box_headers | mp4-stream |
 | 9 | [mp4-box-encoding](https://www.npmjs.com/package/mp4-box-encoding) | 1.4.1 | 14,928 | ftyp | mp4-box-encoding |
 | 10 | [node-video-lib](https://www.npmjs.com/package/node-video-lib) | 2.5.0 | 12,764 | duration+tracks | node-video-lib |
-| 11 | [@dantheman827/taglib-ts](https://www.npmjs.com/package/@dantheman827/taglib-ts) | 0.1.5 | 1,055 | tags+audio_properties | TagLib TypeScript port |
-| 12 | [metaprobe](https://www.npmjs.com/package/metaprobe) | 0.2.1 | 730 | video_metadata | metaprobe Rust core |
-| 13 | [@isomp4/parser](https://unpkg.com/@isomp4/parser@0.3.0/dist/parser.d.ts) | 0.3.0 | 239 | box_headers | @isomp4/parser |
-| 14 | [mp4-parser](https://www.npmjs.com/package/mp4-parser) | 0.3.0 | 115 | tags+duration | mp4-parser |
-| 15 | [mediafile-metadata](https://www.npmjs.com/package/mediafile-metadata) | 1.3.0 | 57 | creation_time | mediafile-metadata |
-| 16 | [mp4-metadata](https://www.npmjs.com/package/mp4-metadata) | 1.0.2 | 51 | creation_time | mp4-metadata |
-| 17 | [fmp4.js](https://www.npmjs.com/package/fmp4.js) | 0.2.2 | 48 | box_headers | fmp4.js |
-| 18 | [mp4reader](https://www.npmjs.com/package/mp4reader) | 0.1.6 | 46 | brand+handlers | mp4reader |
-| 19 | [isobmff-inspector](https://www.npmjs.com/package/isobmff-inspector) | 0.5.0 | 43 | boxes+brand | isobmff-inspector |
-| 20 | [mp4tree](https://unpkg.com/mp4tree@0.10.4/lib/mp4Tree.d.ts) | 0.10.4 | 19 | box_tree | mp4tree |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

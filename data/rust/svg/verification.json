@@ -8,7 +8,7 @@
     "controls/svg/red-blue-path.svg": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172",
     "controls/svg/red-green.svg": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2"
   },
-  "control_meaning": "Valid SVG 1.1 documents: a 2\u00d71 red/green rectangle image and a 4\u00d72 red rectangle plus blue four-command closed path.",
+  "control_meaning": "Valid SVG 1.1 documents: a 2×1 red/green rectangle image and a 4×2 red rectangle plus blue four-command closed path.",
   "component_scope": "SVG path-data crates receive the path d attribute extracted from the valid SVG control; they are not counted as full-document parsers.",
   "third_party": [
     {
@@ -101,120 +101,6 @@
       "error": null
     },
     {
-      "package": "svgdom",
-      "version": "0.18.0",
-      "scope": "SVG DOM elements",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg svgdom controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "has_svg": true,
-        "rects": 2
-      },
-      "error": null
-    },
-    {
-      "package": "svgrtypes",
-      "version": "0.50.2",
-      "scope": "SVG path command grammar",
-      "control": "controls/svg/red-blue-path.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg svgrtypes controls/svg/red-blue-path.svg",
-      "pass": true,
-      "output": {
-        "first_command": "M",
-        "path_segments": 4
-      },
-      "error": null
-    },
-    {
-      "package": "usvgr",
-      "version": "0.50.2",
-      "scope": "SVG document tree and dimensions",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg usvgr controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "height": 1.0,
-        "nodes": 2,
-        "width": 2.0
-      },
-      "error": null
-    },
-    {
-      "package": "svgr",
-      "version": "0.50.2",
-      "scope": "SVG raster rendering",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg svgr controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "height": 1.0,
-        "rgba": [
-          255,
-          0,
-          0,
-          255,
-          0,
-          255,
-          0,
-          255
-        ],
-        "width": 2.0
-      },
-      "error": null
-    },
-    {
-      "package": "oxvg_path",
-      "version": "0.0.9",
-      "scope": "SVG path command grammar",
-      "control": "controls/svg/red-blue-path.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg oxvg_path controls/svg/red-blue-path.svg",
-      "pass": true,
-      "output": {
-        "path_commands": 4,
-        "serialized": "M2 0 4 0 4 2Z"
-      },
-      "error": null
-    },
-    {
-      "package": "svgparser",
-      "version": "0.8.1",
-      "scope": "SVG 1.1 element tokenization",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg svgparser controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "rects": 2
-      },
-      "error": null
-    },
-    {
-      "package": "nsvg",
-      "version": "0.5.1",
-      "scope": "SVG image dimensions via NanoSVG",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg nsvg controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "height": 1.0,
-        "width": 2.0
-      },
-      "error": null
-    },
-    {
-      "package": "svg_metadata",
-      "version": "0.6.0",
-      "scope": "SVG viewBox metadata",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg svg_metadata controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "viewbox_height": 1.0,
-        "viewbox_width": 2.0
-      },
-      "error": null
-    },
-    {
       "package": "spreet",
       "version": "0.14.0",
       "scope": "SVG document tree and dimensions",
@@ -225,48 +111,6 @@
         "height": 1.0,
         "nodes": 2,
         "width": 2.0
-      },
-      "error": null
-    },
-    {
-      "package": "ps-usvg",
-      "version": "0.48.1",
-      "scope": "SVG document tree and dimensions",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg ps-usvg controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "height": 1.0,
-        "nodes": 2,
-        "width": 2.0
-      },
-      "error": null
-    },
-    {
-      "package": "svgcleaner",
-      "version": "0.9.5",
-      "scope": "SVG DOM elements before cleaning",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg svgcleaner controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "has_svg": true,
-        "rects": 2
-      },
-      "error": null
-    },
-    {
-      "package": "ferrigura-path",
-      "version": "0.7.0",
-      "scope": "SVG path geometry",
-      "control": "controls/svg/red-blue-path.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg ferrigura-path controls/svg/red-blue-path.svg",
-      "pass": true,
-      "output": {
-        "height": 2.0,
-        "width": 2.0,
-        "x": 2.0,
-        "y": 0.0
       },
       "error": null
     },
@@ -296,31 +140,6 @@
       "error": null
     },
     {
-      "package": "ps-anyrender-svg",
-      "version": "0.15.0",
-      "scope": "SVG rendering scene commands",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg ps-anyrender-svg controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "render_commands": 2
-      },
-      "error": null
-    },
-    {
-      "package": "librsvg",
-      "version": "2.63.4",
-      "scope": "SVG document loading and intrinsic dimensions",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg librsvg controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "height": 1.0,
-        "width": 2.0
-      },
-      "error": null
-    },
-    {
       "package": "svg_path_ops",
       "version": "0.12.0",
       "scope": "SVG path command grammar and serialization",
@@ -329,33 +148,6 @@
       "pass": true,
       "output": {
         "serialized": "M 2 0 L 4 0 L 4 2 Z"
-      },
-      "error": null
-    },
-    {
-      "package": "oxideav-svg",
-      "version": "0.2.0",
-      "scope": "SVG document scene graph and dimensions",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg oxideav-svg controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "height": 1.0,
-        "nodes": 2,
-        "width": 2.0
-      },
-      "error": null
-    },
-    {
-      "package": "oxvg_ast",
-      "version": "0.0.9",
-      "scope": "SVG AST element structure",
-      "control": "controls/svg/red-green.svg",
-      "command": "adapters/rust/svg/target/debug/parsarium-rust-svg oxvg_ast controls/svg/red-green.svg",
-      "pass": true,
-      "output": {
-        "elements": 2,
-        "root": "svg"
       },
       "error": null
     }

@@ -1,0 +1,254 @@
+{
+  "checked_at_utc": "2026-11-11T19:12:20.474816+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.27.1 darwin/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "control_meaning": "Progressive MP4: isom major brand, 2x2 H.264 frame, one-second AAC track, title Parsarium, two tracks",
+  "third_party": [
+    {
+      "package": "github.com/abema/go-mp4",
+      "module": "github.com/abema/go-mp4",
+      "version": "v1.7.4",
+      "scope": "movie box",
+      "command": "go run . github.com/abema/go-mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "moov_size": 1442
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/dhowden/tag",
+      "module": "github.com/dhowden/tag",
+      "version": "v0.0.0-20240417053706-3d75831295e8",
+      "scope": "MP4 title",
+      "command": "go run . github.com/dhowden/tag ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/Eyevinn/mp4ff/mp4",
+      "module": "github.com/Eyevinn/mp4ff",
+      "version": "v0.62.1",
+      "scope": "brand and track count",
+      "command": "go run . github.com/Eyevinn/mp4ff/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom",
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/yapingcat/gomedia/go-mp4",
+      "module": "github.com/yapingcat/gomedia",
+      "version": "v0.0.0-20240906162731-17feea57090c",
+      "scope": "track count",
+      "command": "go run . github.com/yapingcat/gomedia/go-mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/alfg/mp4",
+      "module": "github.com/alfg/mp4",
+      "version": "v0.0.0-20210728035756-55ea58c08aeb",
+      "scope": "major brand",
+      "command": "go run . github.com/alfg/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/deepch/vdk/format/mp4",
+      "module": "github.com/deepch/vdk",
+      "version": "v0.0.27",
+      "scope": "stream count",
+      "command": "go run . github.com/deepch/vdk/format/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "streams": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/jfbus/mp4",
+      "module": "github.com/jfbus/mp4",
+      "version": "v0.0.0-20150401112544-b5bc0819ce33",
+      "scope": "ftyp brand only",
+      "command": "go run . github.com/jfbus/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/nareix/joy4/format/mp4",
+      "module": "github.com/nareix/joy4",
+      "version": "v0.0.0-20200507095837-05a4ffbb5369",
+      "scope": "stream count",
+      "command": "go run . github.com/nareix/joy4/format/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "streams": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/MStoykov/mp4",
+      "module": "github.com/MStoykov/mp4",
+      "version": "v0.1.4",
+      "scope": "major brand",
+      "command": "go run . github.com/MStoykov/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "go4.org/media/heif/bmff",
+      "module": "go4.org",
+      "version": "v0.0.0-20261028031214-ed6929a230fe",
+      "scope": "ftyp brand only",
+      "command": "go run . go4.org/media/heif/bmff ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/Sorrow446/go-mp4tag",
+      "module": "github.com/Sorrow446/go-mp4tag",
+      "version": "v0.0.0-20240130220823-68ce31d53e37",
+      "scope": "MP4 title",
+      "command": "go run . github.com/Sorrow446/go-mp4tag ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/gcottom/mp4meta",
+      "module": "github.com/gcottom/mp4meta",
+      "version": "v0.0.5",
+      "scope": "MP4 title",
+      "command": "go run . github.com/gcottom/mp4meta ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/guregu/tag",
+      "module": "github.com/guregu/tag",
+      "version": "v0.0.3",
+      "scope": "MP4 title",
+      "command": "go run . github.com/guregu/tag ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/frolovo22/tag",
+      "module": "github.com/frolovo22/tag",
+      "version": "v0.0.2",
+      "scope": "MP4 title",
+      "command": "go run . github.com/frolovo22/tag ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/rcarmo/go-264/audio/mp4",
+      "module": "github.com/rcarmo/go-264",
+      "version": "v0.0.0-20261008100743-cecca3835cbd",
+      "scope": "track count",
+      "command": "go run . github.com/rcarmo/go-264/audio/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/edgeware/mp4ff/mp4",
+      "module": "github.com/edgeware/mp4ff",
+      "version": "v0.31.0",
+      "scope": "brand and track count",
+      "command": "go run . github.com/edgeware/mp4ff/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom",
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/eluv-io/mp4ff/mp4",
+      "module": "github.com/eluv-io/mp4ff",
+      "version": "v0.48.0",
+      "scope": "brand and track count",
+      "command": "go run . github.com/eluv-io/mp4ff/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom",
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/montybay/mp4ff/mp4",
+      "module": "github.com/montybay/mp4ff",
+      "version": "v0.0.0-20261017003302-c9570d1e4b3c",
+      "scope": "brand and track count",
+      "command": "go run . github.com/montybay/mp4ff/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom",
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/tetsuo/mp4",
+      "module": "github.com/tetsuo/mp4",
+      "version": "v0.3.0",
+      "scope": "ftyp brand only",
+      "command": "go run . github.com/tetsuo/mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/ntklink/gomediautils/go-mp4",
+      "module": "github.com/ntklink/gomediautils",
+      "version": "v0.0.0-20260924103313-787406a6c4b3",
+      "scope": "track count",
+      "command": "go run . github.com/ntklink/gomediautils/go-mp4 ../../../controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "tracks": 2
+      },
+      "error": null
+    }
+  ]
+}
