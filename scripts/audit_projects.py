@@ -84,6 +84,46 @@ def native_source_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
+def macos_host_control_verified(path: Path, manifest: dict) -> bool:
+    """Validate the pinned macOS control, separately from Docker and AFL paths."""
+    if (manifest.get("kind") != "standard"
+            or manifest.get("coverage_kind") != "macos_host_control_only"
+            or manifest.get("execution") != "macos_host"
+            or manifest.get("parser_feedback_available") is not False):
+        return False
+    receipt = path.parent / "control-verification.json"
+    if not receipt.is_file():
+        return False
+    observed = json.loads(receipt.read_text())
+    current_files = {
+        str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+        for file in sorted(path.parent.rglob("*"))
+        if file.is_file() and file.name not in {"control-verification.json", "README.md"}
+        and "target" not in file.relative_to(path.parent).parts
+        and "__pycache__" not in file.relative_to(path.parent).parts
+    }
+    adapter = ROOT / manifest["evidence_adapter"]
+    return (
+        observed.get("status") == "verified_control_only"
+        and observed.get("api") == manifest["api"]
+        and observed.get("runtime") == manifest["runtime"]
+        and observed.get("execution") == "macos_host"
+        and observed.get("toolchain") == manifest["toolchain"]
+        and re.fullmatch(r"[0-9a-f]{64}", observed.get("replay_binary_sha256", "")) is not None
+        and observed.get("evidence_adapter_sha256") == manifest["evidence_adapter_sha256"]
+        and observed.get("evidence_adapter_output") == manifest["expected_output"]
+        and sha256(adapter.read_bytes()).hexdigest() == manifest["evidence_adapter_sha256"]
+        and observed.get("control_sha256") == manifest["control_sha256"]
+        and sha256((ROOT / manifest["control"]).read_bytes()).hexdigest() == manifest["control_sha256"]
+        and observed.get("output") == manifest["expected_output"]
+        and observed.get("container") == "unavailable"
+        and observed.get("parser_source_coverage") == "unavailable"
+        and observed.get("parser_feedback_available") is False
+        and observed.get("afl_feedback") == "unavailable"
+        and observed.get("project_file_sha256") == current_files
+    )
+
+
 @cache
 def smoke_rows(filename: str) -> dict[str, dict]:
     report = json.loads((ROOT / "data" / filename).read_text())
@@ -356,6 +396,24 @@ def main() -> None:
                     or dependency["sha256"] not in docker_text):
                 raise ValueError(f"dependency pin mismatch: {path}")
         (completed if fully_runnable(path, manifest) else staged).add(key)
+
+    for path in sorted((ROOT / "projects").glob("*/*/*/macos-manifest.json")):
+        parts = path.relative_to(ROOT / "projects").parts
+        manifest = json.loads(path.read_text())
+        key = (manifest["format"], manifest["ecosystem"], manifest["api"])
+        if parts[0:2] != key[0:2] or key not in standard_catalog:
+            raise ValueError(f"host-only project does not match standard inventory: {path}")
+        if key in standard_completed or key in standard_staged:
+            raise ValueError(f"duplicate standard project: {key}")
+        entry = standard_catalog[key]
+        if (entry["runtime"] != manifest["runtime"]
+                or entry["control"] != manifest["control"]
+                or entry["expected"] != manifest["expected_output"]
+                or entry["input_api"] != manifest["input_api"]):
+            raise ValueError(f"host-only standard evidence mismatch: {path}")
+        if not macos_host_control_verified(path, manifest):
+            raise ValueError(f"host-only control receipt mismatch: {path}")
+        standard_staged.add(key)
 
     cells = []
     for format_name, ecosystem in sorted({key[:2] for key in catalog}):

@@ -8,7 +8,8 @@ import os
 from pathlib import Path
 import re
 
-from audit_projects import browser_control_verified, native_source_control_verified, fully_runnable
+from audit_projects import (browser_control_verified, native_source_control_verified,
+                            macos_host_control_verified, fully_runnable)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,6 +77,7 @@ def main() -> None:
     standard_projects = {}
     staged_browser_projects = {}
     staged_native_source_projects = {}
+    staged_macos_projects = {}
     project_guides = 0
     for path in manifest_paths:
         manifest = read(path)
@@ -93,6 +95,11 @@ def main() -> None:
         if key in projects:
             raise ValueError(f"duplicate project path: {key}")
         projects[key] = (path, manifest)
+    for path in sorted((ROOT / "projects").glob("*/*/*/macos-manifest.json")):
+        manifest = read(path)
+        if not macos_host_control_verified(path, manifest):
+            raise ValueError(f"host-only control receipt mismatch: {path}")
+        staged_macos_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
     generated: dict[Path, str] = {}
     index = []
     standard_count = 0
@@ -220,6 +227,14 @@ def main() -> None:
                               "```", "",
                               "Tk's native PNG reader has measured source coverage on this control. "
                               "AFL++ parser feedback is unavailable, so this path remains staged.", ""]
+                elif staged := staged_macos_projects.get((fmt, eco, item.get("api") or item.get("name"))):
+                    lines += ["## Run this macOS control", "",
+                              f"[Host harness and control receipt]({link(item_dir, staged.parent / 'README.md')})", "",
+                              "```sh",
+                              f"python3 {staged.parent.relative_to(ROOT)}/verify-control.py",
+                              "```", "",
+                              "Core Graphics runs on macOS. Its parser source and AFL++ feedback are "
+                              "unavailable, so this path remains staged.", ""]
                 else:
                     lines += ["## Runnable harness", "",
                               "A Docker harness with parser-source coverage has not yet been verified for this API path.", ""]
