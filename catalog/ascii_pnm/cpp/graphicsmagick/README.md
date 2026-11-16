@@ -32,6 +32,11 @@
 
 GraphicsMagick MagickWand parsed P3; primary SourceForge project lacks a comparable GitHub star metric.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/graphicsmagick/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp graphicsmagick
+python3 parsarium.py run ascii_pnm cpp graphicsmagick controls/ascii_pnm/red-green.ppm
+```

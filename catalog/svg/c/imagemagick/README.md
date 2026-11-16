@@ -30,6 +30,11 @@
 
 The adapter forces ImageMagick's documented MSVG format, selecting its internal SVG renderer. The pinned SVG coder module links system libxml2; this path does not use librsvg or the external Inkscape delegate.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/imagemagick/README.md)
+
+```sh
+python3 parsarium.py build svg c imagemagick
+python3 parsarium.py run svg c imagemagick controls/svg/red-green.svg
+```

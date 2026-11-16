@@ -32,6 +32,11 @@
 
 ImageMagick MagickWand parses ASCII P3 as a PNM image; repository stars reflect many formats.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/imagemagick/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp imagemagick
+python3 parsarium.py run ascii_pnm cpp imagemagick controls/ascii_pnm/red-green.ppm
+```

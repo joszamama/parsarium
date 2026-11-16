@@ -30,6 +30,11 @@
 
 The pinned GraphicsMagick SVG coder links system libxml2 and translates SVG to MVG. It is a separate package and SVG implementation; system libxml2 is a shared XML dependency.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/graphicsmagick/README.md)
+
+```sh
+python3 parsarium.py build svg cpp graphicsmagick
+python3 parsarium.py run svg cpp graphicsmagick controls/svg/red-green.svg
+```

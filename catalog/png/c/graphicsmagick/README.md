@@ -32,6 +32,11 @@
 
 GraphicsMagick Wand C package path, distinct from ImageMagick but using libpng for PNG. SourceForge upstream has no comparable GitHub primary-repository stars.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/graphicsmagick/README.md)
+
+```sh
+python3 parsarium.py build png c graphicsmagick
+python3 parsarium.py run png c graphicsmagick controls/png/red-green.png
+```

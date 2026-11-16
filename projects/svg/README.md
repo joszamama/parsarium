@@ -4,10 +4,14 @@
 
 ## Targets
 
+- [graphicsmagick / C](c/graphicsmagick/README.md)
+- [imagemagick / C](c/imagemagick/README.md)
 - [nanosvg / C](c/nanosvg/README.md)
 - [plutosvg / C](c/plutosvg/README.md)
 - [sdl2_image / C](c/sdl2_image/README.md)
 - [sdl3_image / C](c/sdl3_image/README.md)
+- [graphicsmagick / C++](cpp/graphicsmagick/README.md)
+- [imagemagick / C++](cpp/imagemagick/README.md)
 - [plutosvg / C++](cpp/plutosvg/README.md)
 - [sdl3_image / C++](cpp/sdl3_image/README.md)
 - [cogentcore.org/core/svg / Go](go/cogentcore_org_core_svg/README.md)
