@@ -9,6 +9,7 @@
 - [happly / C++](cpp/happly/README.md)
 - [plywoot / C++](cpp/plywoot/README.md)
 - [rply / C++](cpp/rply/README.md)
+- [rplycpp / C++](cpp/rplycpp/README.md)
 - [tinyply / C++](cpp/tinyply/README.md)
 - [github.com/ARF-DEV/assimp-go/asig / Go](go/github_com_arf_dev_assimp_go_asig/README.md)
 - [github.com/BhaumikTalwar/assimp-go/asig / Go](go/github_com_bhaumiktalwar_assimp_go_asig/README.md)

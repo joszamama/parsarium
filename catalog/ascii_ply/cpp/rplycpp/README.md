@@ -25,6 +25,11 @@
 
 Tagged rplycpp v1.1.0 exposes a distinct C++ callback API but bundles RPly; it shares the RPly parser family with the standalone rply C and C++ paths.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/rplycpp/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp rplycpp
+python3 parsarium.py run ascii_ply cpp rplycpp controls/ascii_ply/triangle.ply
+```
