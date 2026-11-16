@@ -5,8 +5,10 @@
 ## Targets
 
 - [ffmpeg / C](c/ffmpeg/README.md)
+- [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
+- [imlib2 / C](c/imlib2/README.md)
 - [leptonica / C](c/leptonica/README.md)
 - [libimago / C](c/libimago/README.md)
 - [libpnmio / C](c/libpnmio/README.md)
@@ -15,8 +17,10 @@
 - [sdl3_image / C](c/sdl3_image/README.md)
 - [cimg / C++](cpp/cimg/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
+- [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [graphicsmagick / C++](cpp/graphicsmagick/README.md)
 - [imagemagick / C++](cpp/imagemagick/README.md)
+- [imlib2 / C++](cpp/imlib2/README.md)
 - [leptonica / C++](cpp/leptonica/README.md)
 - [libpnmrw / C++](cpp/libpnmrw/README.md)
 - [pnmpp / C++](cpp/pnmpp/README.md)

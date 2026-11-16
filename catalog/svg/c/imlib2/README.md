@@ -30,6 +30,11 @@
 
 The official Imlib2 1.12.7 source contains an optional SVG plugin that delegates to librsvg. The installed Homebrew Imlib2 package lacks this plugin; the verifier enables and builds it from the pinned source. This is a distinct Imlib2 file-input API but shares the separately recorded librsvg syntax engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/imlib2/README.md)
+
+```sh
+python3 parsarium.py build svg c imlib2
+python3 parsarium.py run svg c imlib2 controls/svg/red-green.svg
+```

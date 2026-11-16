@@ -32,6 +32,11 @@
 
 GD PNG codec calls libpng; this is a distinct C package API over a shared decoder family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/gd/README.md)
+
+```sh
+python3 parsarium.py build png c gd
+python3 parsarium.py run png c gd controls/png/red-green.png
+```

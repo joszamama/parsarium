@@ -32,6 +32,11 @@
 
 Imlib2 loader parsed P3; its primary upstream is not GitHub, so a comparable primary repository star count is unavailable.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/c/imlib2/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm c imlib2
+python3 parsarium.py run ascii_pnm c imlib2 controls/ascii_pnm/red-green.ppm
+```

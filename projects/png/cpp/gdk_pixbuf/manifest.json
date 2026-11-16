@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "cpp",
+  "package": "gdk-pixbuf",
+  "release": "2.44.8",
+  "catalog_parser": "data/cpp/png/parsers.json",
+  "source_lock": "data/c/png/source-lock.json",
+  "source_sha256": "919f529512961a12e81cd4b4b466a48c3933469e7f9a310c6513cd4fb252ba3c",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "second": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in GdkPixbuf PNG loader",
+  "coverage_subject_prefix": "/work/source/gdk-pixbuf/",
+  "format_specific_coverage_file_suffix": "/io-png.c"
+}

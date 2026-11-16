@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "c",
+  "package": "imlib2",
+  "release": "1.12.7",
+  "catalog_parser": "data/c/svg/parsers.json",
+  "source_lock": "data/c/svg/source-lock.json",
+  "source_sha256": "d71ee5351cc1914fb01968123d0dcf276740e5af5662943ac47ae60cafa4d13b",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0
+    ],
+    "second": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Imlib2 SVG loader",
+  "coverage_subject_prefix": "/work/source/src/modules/loaders/",
+  "format_specific_coverage_file_suffix": "/loader_svg.c"
+}

@@ -6,6 +6,7 @@
 
 - [graphicsmagick / C](c/graphicsmagick/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
+- [imlib2 / C](c/imlib2/README.md)
 - [nanosvg / C](c/nanosvg/README.md)
 - [plutosvg / C](c/plutosvg/README.md)
 - [sdl2_image / C](c/sdl2_image/README.md)

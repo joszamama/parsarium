@@ -32,6 +32,11 @@
 
 Image loader package path; PNG loader shares libpng lineage. Official upstream is GNOME GitLab, so GitHub mirror stars are omitted.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/gdk_pixbuf/README.md)
+
+```sh
+python3 parsarium.py build png c gdk_pixbuf
+python3 parsarium.py run png c gdk_pixbuf controls/png/red-green.png
+```
