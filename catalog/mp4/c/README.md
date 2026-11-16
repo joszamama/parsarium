@@ -1,12 +1,12 @@
 # MP4 / C
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/mp4/ranking.md) · [standard API inventory](../../../data/c/mp4/standard.json)
 
 ## Third-party parsers
 
-- [ffmpeg](ffmpeg/README.md) — verified API path
+- [ffmpeg](ffmpeg/README.md) — Docker harness ready
 - [libmediainfo](libmediainfo/README.md) — verified API path
 - [gstreamer](gstreamer/README.md) — verified API path
 - [mpv](mpv/README.md) — verified API path

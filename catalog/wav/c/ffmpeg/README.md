@@ -27,6 +27,11 @@
 
 FFmpeg libavformat/libavcodec pair; installed Homebrew build is GPL-enabled.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build wav c ffmpeg
+python3 parsarium.py run wav c ffmpeg controls/wav/four-samples.wav
+```

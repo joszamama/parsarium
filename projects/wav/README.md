@@ -5,11 +5,13 @@
 ## Targets
 
 - [dr_wav / C](c/dr_wav/README.md)
+- [ffmpeg / C](c/ffmpeg/README.md)
 - [libaudiofile / C](c/libaudiofile/README.md)
 - [libsndfile / C](c/libsndfile/README.md)
 - [miniaudio / C](c/miniaudio/README.md)
 - [raylib / C](c/raylib/README.md)
 - [dr_wav / C++](cpp/dr_wav/README.md)
+- [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [libaudiofile / C++](cpp/libaudiofile/README.md)
 - [libsndfile / C++](cpp/libsndfile/README.md)
 - [miniaudio / C++](cpp/miniaudio/README.md)

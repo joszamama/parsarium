@@ -24,6 +24,11 @@
 
 C and C++ call sites share libavformat; the MP4 box parser is in the MOV demuxer.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/c/ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build mp4 c ffmpeg
+python3 parsarium.py run mp4 c ffmpeg controls/mp4/red-av.mp4
+```

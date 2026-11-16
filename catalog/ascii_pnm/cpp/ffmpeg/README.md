@@ -31,6 +31,11 @@
 
 FFmpeg image2 demuxer passes PPM packets to the native PNM decoder; the C++ path uses the same FFmpeg C implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp ffmpeg
+python3 parsarium.py run ascii_pnm cpp ffmpeg controls/ascii_pnm/red-green.ppm
+```

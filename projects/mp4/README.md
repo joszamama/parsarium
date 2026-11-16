@@ -4,7 +4,9 @@
 
 ## Targets
 
+- [ffmpeg / C](c/ffmpeg/README.md)
 - [taglib / C](c/taglib/README.md)
+- [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [github.com/Eyevinn/mp4ff/mp4 / Go](go/github_com_eyevinn_mp4ff_mp4/README.md)
 - [github.com/MStoykov/mp4 / Go](go/github_com_mstoykov_mp4/README.md)

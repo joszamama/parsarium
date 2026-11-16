@@ -5,10 +5,12 @@
 ## Targets
 
 - [dr_libs / C](c/dr_libs/README.md)
+- [ffmpeg / C](c/ffmpeg/README.md)
 - [libsndfile / C](c/libsndfile/README.md)
 - [miniaudio / C](c/miniaudio/README.md)
 - [taglib / C](c/taglib/README.md)
 - [dr_libs / C++](cpp/dr_libs/README.md)
+- [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [libsndfile / C++](cpp/libsndfile/README.md)
 - [miniaudio / C++](cpp/miniaudio/README.md)
 - [taglib / C++](cpp/taglib/README.md)
