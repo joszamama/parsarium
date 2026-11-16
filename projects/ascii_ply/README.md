@@ -39,6 +39,7 @@
 - [zelon88/hrconvert2 / PHP](php/zelon88_hrconvert2/README.md)
 - [meshio / Python](python/meshio/README.md)
 - [numpy-stl / Python](python/numpy_stl/README.md)
+- [open3d / Python](python/open3d/README.md)
 - [plyfile / Python](python/plyfile/README.md)
 - [point-cloud-utils / Python](python/point_cloud_utils/README.md)
 - [pyvista / Python](python/pyvista/README.md)
