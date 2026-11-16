@@ -30,11 +30,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/python/opencv_python_headless/README.md)
-
-```sh
-python3 parsarium.py build png python opencv_python_headless
-python3 parsarium.py run png python opencv_python_headless controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

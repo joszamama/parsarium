@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "php",
+  "package": "collectiveaccess/pawtucket2",
+  "release": "2.0.12",
+  "catalog_parser": "data/php/ascii_ply/parsers.json",
+  "source_lock": "data/php/ascii_ply/source-lock.json",
+  "source_sha256": "ad0176a247a6cdc3d4e7a816520e332427e6066385ba483c239aefbc43d15a18",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "facets": 1,
+    "vertices": 3,
+    "second_x": 1.0
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in Pawtucket2 pure PHP ASCII PLY parser/converter; php-fuzzer entry. Its released parser source is SHA-256-identical to Providence 2.0.12, so this is a distinct package path in one parser family.",
+  "coverage_subject_prefix": "/work/parser/",
+  "format_specific_coverage_file_suffix": "/PlyToStl.php"
+}

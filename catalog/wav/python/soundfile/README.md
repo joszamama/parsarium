@@ -24,11 +24,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/wav/python/soundfile/README.md)
-
-```sh
-python3 parsarium.py build wav python soundfile
-python3 parsarium.py run wav python soundfile controls/wav/four-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

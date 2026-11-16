@@ -30,11 +30,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/python/pypng/README.md)
-
-```sh
-python3 parsarium.py build png python pypng
-python3 parsarium.py run png python pypng controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

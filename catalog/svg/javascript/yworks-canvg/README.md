@@ -30,11 +30,6 @@
 
 Fork/distribution of canvg.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/svg/javascript/yworks_canvg/README.md)
-
-```sh
-python3 parsarium.py build svg javascript yworks_canvg
-python3 parsarium.py run svg javascript yworks_canvg controls/svg/red-green.svg
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

@@ -24,11 +24,6 @@
 
 Parses top-level MP4 box headers only in this control.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/mp4/javascript/mp4_stream/README.md)
-
-```sh
-python3 parsarium.py build mp4 javascript mp4_stream
-python3 parsarium.py run mp4 javascript mp4_stream controls/mp4/red-av.mp4
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

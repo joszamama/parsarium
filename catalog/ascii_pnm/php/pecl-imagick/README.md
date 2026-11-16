@@ -30,6 +30,11 @@
 
 PECL Imagick is an open-source extension built from a SHA-256-pinned release; it delegates ASCII P3 decoding to installed ImageMagick, not to bundled PHP GD.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/pecl_imagick/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php pecl_imagick
+python3 parsarium.py run ascii_pnm php pecl_imagick controls/ascii_pnm/red-green.ppm
+```

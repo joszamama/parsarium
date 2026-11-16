@@ -20,11 +20,6 @@
 
 CommonJS distribution of the same Rust/WebAssembly parser.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/http11/javascript/perseveranza_pets_milo_cjs/README.md)
-
-```sh
-python3 parsarium.py build http11 javascript perseveranza_pets_milo_cjs
-python3 parsarium.py run http11 javascript perseveranza_pets_milo_cjs controls/http11/request.http
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

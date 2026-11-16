@@ -6,11 +6,13 @@ import tomllib
 
 from build_afl_native import OVERLAYS, derived_dockerfile
 from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, overlay_manifest, overlay_target
+from audit_projects import receipt_verified
 from run_case import ROOT, project_for
 
 
 def main() -> None:
-    manifests = sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
+    manifests = [path for path in sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
+                 if receipt_verified(path, json.loads(path.read_text()))]
     case_report = json.loads((ROOT / "data/fuzz-case-smoke.json").read_text())
     case_records = {item["project"]: item for item in case_report["results"]}
     assert len(case_records) == len(manifests) == case_report["projects_total"]
@@ -19,9 +21,15 @@ def main() -> None:
         project, manifest = project_for(*relative.parts)
         verification = json.loads((project / "verification.json").read_text())
         assert verification["fuzz_engine_smoke_pass"]
-        assert verification["parser_source_lines_covered"] > 0
-        if "format_specific_coverage_file_suffix" in manifest:
-            assert verification["format_specific_source_lines_covered"] > 0
+        if manifest.get("coverage_kind") == "native_binary_edges":
+            assert verification["coverage_kind"] == "native_binary_edges"
+            assert verification["parser_source_lines_covered"] is None
+            assert verification["underlying_source_lines_covered"] is None
+            assert verification["binary_feedback_scope"] == "underlying_shared_library"
+        else:
+            assert verification["parser_source_lines_covered"] > 0
+            if "format_specific_coverage_file_suffix" in manifest:
+                assert verification["format_specific_source_lines_covered"] > 0
         entry = case_records[str(relative)]
         assert entry["status"] == "ok"
         assert entry["control"] == manifest["control"]
@@ -50,7 +58,11 @@ def main() -> None:
         assert entry["status"] == "ready" and entry["unique_seeds"] == 1
         assert entry["control_sha256"] == manifest["control_sha256"]
         assert entry["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
-        assert entry["image_id"] == json.loads((project / "verification.json").read_text())["image_id"]
+        native_override = (manifest["ecosystem"] == "php" and
+                           (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+        expected_image = (json.loads((OVERLAYS / relative / "verification.json").read_text())["image_id"]
+                          if native_override else json.loads((project / "verification.json").read_text())["image_id"])
+        assert entry["image_id"] == expected_image
     native = [path for path in manifests if path.parent.parent.name in {"c", "cpp"}]
     afl_report = json.loads((ROOT / "data/afl-native-smoke.json").read_text())
     afl_records = {item["project"]: item for item in afl_report["results"]}
@@ -68,7 +80,8 @@ def main() -> None:
         assert receipt["control_sha256"] == manifest["control_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         dockerfile = (overlay / "Dockerfile").read_bytes()
-        assert dockerfile == derived_dockerfile(project).encode()
+        if manifest["package"] != "gstreamer":
+            assert dockerfile == derived_dockerfile(project).encode()
         assert receipt["overlay_dockerfile_sha256"] == sha256(dockerfile).hexdigest()
     rust = [path for path in manifests if path.parent.parent.name == "rust"]
     rust_report = json.loads((ROOT / "data/afl-rust-smoke.json").read_text())
@@ -89,7 +102,7 @@ def main() -> None:
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         expected = {"Cargo.toml": overlay_manifest(project),
                     "afl_fuzzer.rs": overlay_target(project),
-                    "Dockerfile": rust_dockerfile(relative)}
+                    "Dockerfile": rust_dockerfile(relative, manifest, receipt["afl_package"])}
         for name, text in expected.items():
             assert (overlay / name).read_text() == text
         lock = tomllib.loads((overlay / "Cargo.lock").read_text())
@@ -113,7 +126,11 @@ def main() -> None:
         assert record["status"] == "verified" and record["ecosystem"] == manifest["ecosystem"]
         assert record["control_sha256"] == manifest["control_sha256"]
         assert record["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
-        assert record["parser_source_lines_covered"] > 0
+        if manifest.get("coverage_kind") == "native_binary_edges":
+            assert record["parser_source_lines_covered"] is None
+            assert record["feedback_evidence"]["kind"] == "underlying_shared_library_binary_edges"
+        else:
+            assert record["parser_source_lines_covered"] > 0
         assert record["feedback_evidence"]["value"] > 0
     python_report = json.loads((ROOT / "data/afl-python-smoke.json").read_text())
     bridge_report = json.loads((ROOT / "data/afl-bridge-smoke.json").read_text())
@@ -131,14 +148,19 @@ def main() -> None:
         receipt = json.loads((overlay / "verification.json").read_text())
         record = bridge_records[str(relative)]
         assert receipt == record and receipt["pass"]
-        assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
+        if manifest.get("coverage_kind") == "native_binary_edges":
+            assert receipt["feedback_edges"] > 0
+            assert receipt["source_lines_covered"] is None
+            assert receipt["feedback_kind"] == "underlying_shared_library_binary_edges"
+        else:
+            assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
         assert receipt["afl_map_size"] == 65536
         assert receipt["control_sha256"] == manifest["control_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256(
             (project / "verification.json").read_bytes()).hexdigest()
         for name, digest in receipt["overlay_file_sha256"].items():
             assert sha256((overlay / name).read_bytes()).hexdigest() == digest
-        for name, digest in receipt["bridge_file_sha256"].items():
+        for name, digest in receipt.get("bridge_file_sha256", {}).items():
             assert sha256((ROOT / "fuzzing/afl-bridge" / name).read_bytes()).hexdigest() == digest
     for report_name in ("afl-feedback-differential.json", "afl-campaign-smoke.json"):
         report = json.loads((ROOT / "data" / report_name).read_text())

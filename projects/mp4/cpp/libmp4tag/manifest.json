@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "cpp",
+  "package": "libmp4tag",
+  "release": "2.0.4",
+  "catalog_parser": "data/cpp/mp4/parsers.json",
+  "source_lock": "data/cpp/mp4/source-lock.json",
+  "source_sha256": "2b15f96474c5cd685b31b6714498fc5f2d5463b1348dc8cc7cc2cc584dfb3e54",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {"title": "Parsarium", "duration_ms": 1128},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in the pinned C MP4 parser called through a C++17 harness; shared family with C path",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/mp4tagparse.c"
+}

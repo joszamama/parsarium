@@ -87,7 +87,8 @@ def check_project(relative: Path, scratch: Path) -> dict:
             sha256((project / "verification.json").read_bytes()).hexdigest()):
         raise ValueError(f"AFL++ overlay mismatch: {relative}")
     kind = ("python_afl" if manifest["ecosystem"] == "python" else
-            "native_afl" if manifest["ecosystem"] in {"rust", "c", "cpp"} else "bridge_afl")
+            "rust_afl" if manifest["ecosystem"] == "rust" else
+            "native_afl" if manifest["ecosystem"] in {"c", "cpp"} else "bridge_afl")
     return {"case": case, "batch": batch, "native": native,
             "afl_plan": afl_plan, "feedback": feedback, kind: overlay_record}
 
@@ -103,7 +104,7 @@ def main() -> None:
         cli.error("give distinct format/ecosystem/slug paths")
     if not 1 <= args.workers <= 8:
         cli.error("--workers must be between 1 and 8")
-    case, batch, native, feedback, afl_plan, python_afl, bridge_afl, native_afl = [], [], [], [], [], [], [], []
+    case, batch, native, feedback, afl_plan, python_afl, bridge_afl, native_afl, rust_afl = [], [], [], [], [], [], [], [], []
     failures = []
     with tempfile.TemporaryDirectory(prefix="parsarium-refresh-smoke-") as temporary:
         scratch = Path(temporary)
@@ -129,6 +130,11 @@ def main() -> None:
                     native_afl.append({"project": record["project"], "status": "verified",
                                        "feedback_edges": record["feedback_edges"],
                                        "image_id": record["image_id"]})
+                elif "rust_afl" in result:
+                    record = result["rust_afl"]
+                    rust_afl.append({"project": record["project"], "status": "verified",
+                                     "feedback_edges": record["feedback_edges"],
+                                     "image_id": record["image_id"]})
                 elif "python_afl" in result:
                     python_afl.append(result["python_afl"])
                 else:
@@ -144,6 +150,9 @@ def main() -> None:
                       {"projects_verified": "verified"})
     if native_afl:
         update_report("afl-native-smoke.json", native_afl,
+                      {"projects_verified": "verified"})
+    if rust_afl:
+        update_report("afl-rust-smoke.json", rust_afl,
                       {"projects_verified": "verified"})
     for name, additions in (("afl-python-smoke.json", python_afl),
                             ("afl-bridge-smoke.json", bridge_afl)):

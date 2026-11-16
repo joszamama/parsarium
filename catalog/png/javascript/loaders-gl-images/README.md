@@ -21,11 +21,6 @@
 
 Reads encoded PNG header fields; does not decode pixels through this API.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/loaders_gl_images/README.md)
-
-```sh
-python3 parsarium.py build png javascript loaders_gl_images
-python3 parsarium.py run png javascript loaders_gl_images controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

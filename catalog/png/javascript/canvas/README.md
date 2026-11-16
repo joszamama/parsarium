@@ -30,11 +30,6 @@
 
 Native Canvas binding; PNG decoding is delegated to the Cairo/libpng stack.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/canvas/README.md)
-
-```sh
-python3 parsarium.py build png javascript canvas
-python3 parsarium.py run png javascript canvas controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

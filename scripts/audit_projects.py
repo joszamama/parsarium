@@ -6,6 +6,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+from binary_feedback import check_binary_feedback
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,6 +34,23 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
             or overlay.get("control_sha256") != manifest["control_sha256"]
             or overlay.get("feedback_edges", 0) < 2):
         return False
+    for name, digest in overlay.get("bridge_file_sha256", {}).items():
+        bridge_file = ROOT / "fuzzing/afl-bridge" / name
+        if not bridge_file.is_file() or sha256(bridge_file.read_bytes()).hexdigest() != digest:
+            return False
+    if manifest.get("coverage_kind") == "native_binary_edges":
+        base = json.loads((path.parent / "verification.json").read_text())
+        dockerfile = overlay_path.parent / "Dockerfile"
+        if (overlay.get("coverage_kind") != "native_binary_edges"
+                or overlay.get("feedback_kind") != "underlying_shared_library_binary_edges"
+                or overlay.get("source_lines_covered", False) is not None
+                or overlay.get("binary_feedback") != base["binary_feedback"]
+                or overlay.get("image_id") != base["binary_feedback_image_id"]
+                or not dockerfile.is_file()
+                or dockerfile.read_bytes() != (path.parent / "binary-feedback/Dockerfile").read_bytes()
+                or overlay.get("overlay_file_sha256", {}).get("Dockerfile")
+                != sha256(dockerfile.read_bytes()).hexdigest()):
+            return False
     checks = (("fuzz-case-smoke.json", {"ok"}),
               ("fuzz-batch-smoke.json", {"ok", "per_case_only"}),
               ("native-plan-smoke.json", {"ready"}),
@@ -58,6 +76,32 @@ def receipt_verified(path: Path, manifest: dict) -> bool:
                      if file.is_file() and file.name != "verification.json"
                      and file.relative_to(path.parent) != Path("README.md")
                      and "target" not in file.relative_to(path.parent).parts}
+    binary = manifest.get("coverage_kind") == "native_binary_edges"
+    if binary:
+        try:
+            check_binary_feedback(path.parent, ROOT, manifest, result["binary_feedback"])
+        except (KeyError, TypeError, ValueError, OSError):
+            return False
+        coverage_ok = (
+            result.get("coverage_kind") == "native_binary_edges"
+            and result.get("binary_feedback_scope") == "underlying_shared_library"
+            and result.get("binary_feedback_image_id", "").startswith("sha256:")
+            and result.get("parser_source_files") is None
+            and result.get("parser_source_lines_covered") is None
+            and result.get("format_specific_source_lines_covered") is None
+            and result.get("underlying_source_files") is None
+            and result.get("underlying_source_lines_covered") is None
+            and result.get("coverage_output") is None
+        )
+    else:
+        coverage_ok = (
+            result.get("parser_source_files", 0) > 0
+            and result.get("parser_source_lines_covered", 0) > 0
+            and ("format_specific_coverage_file_suffix" not in manifest
+                 or (result.get("format_specific_source_lines_covered") or 0) > 0)
+            and ("underlying_coverage_subject_prefix" not in manifest
+                 or (result.get("underlying_source_lines_covered") or 0) > 0)
+        )
     if (result.get("pass") is not True or result.get("fuzz_engine_smoke_pass") is not True
             or result.get("kind", "third_party") != manifest.get("kind", "third_party")
             or (manifest.get("kind") == "standard"
@@ -69,12 +113,7 @@ def receipt_verified(path: Path, manifest: dict) -> bool:
             or not result.get("image_id", "").startswith("sha256:")
             or not result.get("toolchain")
             or result.get("output") != manifest["expected_output"]
-            or result.get("parser_source_files", 0) <= 0
-            or result.get("parser_source_lines_covered", 0) <= 0
-            or ("format_specific_coverage_file_suffix" in manifest
-                and (result.get("format_specific_source_lines_covered") or 0) <= 0)
-            or ("underlying_coverage_subject_prefix" in manifest
-                and (result.get("underlying_source_lines_covered") or 0) <= 0)
+            or not coverage_ok
             or result.get("control_sha256") != manifest["control_sha256"]
             or result.get("project_file_sha256") != current_files):
         return False

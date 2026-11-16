@@ -17,11 +17,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/wav/javascript/wav_audio_length/README.md)
-
-```sh
-python3 parsarium.py build wav javascript wav_audio_length
-python3 parsarium.py run wav javascript wav_audio_length controls/wav/four-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

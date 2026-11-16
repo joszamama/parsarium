@@ -22,11 +22,6 @@
 
 Uses decompress-unzip, which uses yauzl.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/zip/javascript/decompress/README.md)
-
-```sh
-python3 parsarium.py build zip javascript decompress
-python3 parsarium.py run zip javascript decompress controls/zip/hello.zip
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

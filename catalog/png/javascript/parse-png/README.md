@@ -30,11 +30,6 @@
 
 The pinned release depends on pngjs@^3.3.0, a separate major version of the same family.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/parse_png/README.md)
-
-```sh
-python3 parsarium.py build png javascript parse_png
-python3 parsarium.py run png javascript parse_png controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

@@ -28,11 +28,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/skia_canvas/README.md)
-
-```sh
-python3 parsarium.py build png javascript skia_canvas
-python3 parsarium.py run png javascript skia_canvas controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

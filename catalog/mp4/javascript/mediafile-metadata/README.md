@@ -17,11 +17,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/mp4/javascript/mediafile_metadata/README.md)
-
-```sh
-python3 parsarium.py build mp4 javascript mediafile_metadata
-python3 parsarium.py run mp4 javascript mediafile_metadata controls/mp4/red-av.mp4
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

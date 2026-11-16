@@ -18,11 +18,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/http11/javascript/sylphx_gust_core/README.md)
-
-```sh
-python3 parsarium.py build http11 javascript sylphx_gust_core
-python3 parsarium.py run http11 javascript sylphx_gust_core controls/http11/request.http
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

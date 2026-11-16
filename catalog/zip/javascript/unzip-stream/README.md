@@ -22,11 +22,6 @@
 
 Based on unzip and unzipper, but documents a new streaming engine.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/zip/javascript/unzip_stream/README.md)
-
-```sh
-python3 parsarium.py build zip javascript unzip_stream
-python3 parsarium.py run zip javascript unzip_stream controls/zip/hello.zip
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

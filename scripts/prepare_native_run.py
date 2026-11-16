@@ -61,8 +61,8 @@ def command_for(manifest: dict, image_id: str, corpus: Path, artifacts: Path,
         args += ["--entrypoint", manifest["fuzz_smoke_entrypoint"], image_id,
                  "/work/fuzz.py", "/corpus", f"-max_total_time={duration}",
                  f"-max_len={MAX_CASE_BYTES}", "-artifact_prefix=/artifacts/"]
-    elif (ecosystem == "php" and manifest.get("kind") == "standard"
-          and manifest.get("fuzz_engine") == "AFL++"):
+    elif (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
+          and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint"))):
         target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                        else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
         args += ["-e", "AFL_SKIP_CPUFREQ=1", "-e", "AFL_NO_AFFINITY=1",
@@ -95,8 +95,8 @@ def main() -> None:
     project_receipt = (project / "verification.json").read_bytes()
     if image_id != json.loads(project_receipt)["image_id"]:
         cli.error("local project image differs from its verification receipt; run python3 parsarium.py build FORMAT ECOSYSTEM SLUG")
-    php_native = (args.ecosystem == "php" and manifest.get("kind") == "standard"
-                  and manifest.get("fuzz_engine") == "AFL++")
+    php_native = (args.ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
+                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
     if php_native:
         overlay = ROOT / "fuzzing/afl-native" / args.format / args.ecosystem / args.package_slug
         overlay_receipt = json.loads((overlay / "verification.json").read_text())
@@ -142,7 +142,9 @@ def main() -> None:
                           args.duration_seconds, go_cache)
     container_name = f"parsarium-native-{uuid.uuid4().hex[:16]}"
     command[3:3] = ["--name", container_name]
-    engine = "AFL++ native PHP" if php_native else ENGINE[args.ecosystem]
+    engine = ("AFL++ PHP parser source bridge" if php_native and
+              manifest.get("afl_entrypoint") == "/work/afl_proxy" else
+              "AFL++ native PHP" if php_native else ENGINE[args.ecosystem])
     plan = {"schema_version": 1, "project": str(project.relative_to(ROOT / "projects")),
             "engine": engine, "image": image, "image_id": image_id,
             "project_receipt_sha256": sha256(project_receipt).hexdigest(),

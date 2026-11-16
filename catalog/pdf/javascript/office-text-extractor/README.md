@@ -19,11 +19,6 @@
 
 Depends on pdf-parse@2.4.5, which uses PDF.js.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/pdf/javascript/office_text_extractor/README.md)
-
-```sh
-python3 parsarium.py build pdf javascript office_text_extractor
-python3 parsarium.py run pdf javascript office_text_extractor controls/pdf/one-page.pdf
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import subprocess
 from docker_slots import docker_build_slot
+from binary_feedback import check_binary_feedback
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,9 @@ def main() -> None:
     manifest = json.loads((project / "manifest.json").read_text())
     assert manifest["schema_version"] == 1
     assert (manifest["format"], manifest["ecosystem"]) == (args.format, args.ecosystem)
+    coverage_kind = manifest.get("coverage_kind", "source_lines")
+    if coverage_kind not in {"source_lines", "native_binary_edges"}:
+        raise ValueError(f"unsupported coverage kind: {coverage_kind}")
     if manifest.get("kind") == "standard":
         inventory = json.loads((ROOT / manifest["standard_inventory"]).read_text())
         entry, = [item for item in inventory["verified_apis"]
@@ -150,7 +154,19 @@ def main() -> None:
                     if f["filename"].endswith(manifest["format_specific_coverage_file_suffix"])]
         format_specific_lines = sum(f["summary"]["lines"]["covered"] for f in specific)
         assert format_specific_lines > 0
-    if "underlying_coverage_subject_prefix" in manifest:
+    binary_feedback = None
+    binary_image_id = None
+    if coverage_kind == "native_binary_edges":
+        smoke = subprocess.run([str(project / "binary-feedback/run-smoke.sh")],
+                               cwd=ROOT, text=True, errors="replace", capture_output=True,
+                               timeout=300)
+        if smoke.returncode:
+            raise RuntimeError(f"native binary feedback failed:\n{smoke.stderr[-4000:]}")
+        binary_feedback = json.loads(smoke.stdout)
+        check_binary_feedback(project, ROOT, manifest, binary_feedback)
+        binary_image = f"parsarium/{args.format}-{args.ecosystem}-{args.package_slug}-binary-feedback:local"
+        binary_image_id = command(["docker", "image", "inspect", binary_image, "--format", "{{.Id}}"])
+    elif "underlying_coverage_subject_prefix" in manifest:
         if ((summary.get("underlying_source_files") or 0) <= 0 or
                 (summary.get("underlying_source_lines_covered") or 0) <= 0):
             raise RuntimeError(f"{manifest['package']}: underlying parser source was not instrumented")
@@ -194,8 +210,27 @@ def main() -> None:
         "coverage_output": f"projects/{args.format}/{args.ecosystem}/{args.package_slug}/target/coverage/coverage.json",
         "pass": True,
     }
+    if binary_feedback is not None:
+        receipt.update({
+            "coverage_kind": "native_binary_edges",
+            "binary_feedback_scope": manifest["binary_feedback_scope"],
+            "binary_feedback": binary_feedback,
+            "binary_feedback_image_id": binary_image_id,
+            "binding_source_lines_covered": summary["parser_source_lines_covered"],
+            "parser_source_files": None,
+            "parser_source_lines_covered": None,
+            "format_specific_source_lines_covered": None,
+            "underlying_source_files": None,
+            "underlying_source_lines_covered": None,
+            "coverage_output": None,
+        })
     (project / "verification.json").write_text(json.dumps(receipt, indent=2) + "\n")
-    print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: {receipt['parser_source_lines_covered']} library lines covered")
+    if binary_feedback is not None:
+        print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: "
+              f"{binary_feedback['control_tuples']} native binary tuples in {binary_feedback['module']}")
+    else:
+        print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: "
+              f"{receipt['parser_source_lines_covered']} library lines covered")
 
 
 if __name__ == "__main__":

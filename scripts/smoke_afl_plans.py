@@ -30,15 +30,17 @@ def check(relative: Path, scratch: Path) -> dict:
     assert plan["image_id"] == receipt["image_id"]
     assert plan["control_sha256"] == manifest["control_sha256"]
     assert plan["overlay_receipt_sha256"] == sha256(receipt_path.read_bytes()).hexdigest()
-    php_native = (manifest["ecosystem"] == "php" and manifest.get("kind") == "standard"
-                  and manifest.get("fuzz_engine") == "AFL++")
-    if php_native:
+    php_native = (manifest["ecosystem"] == "php" and manifest.get("fuzz_engine") == "AFL++"
+                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+    if manifest.get("coverage_kind") == "native_binary_edges":
+        expected_tail = ["--", "/opt/venv/bin/python", "/work/binary-run-once.py", "@@"]
+    elif php_native:
         expected_tail = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                          else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
     else:
         expected_tail = (["/work/afl_proxy", "@@"] if manifest["ecosystem"] in
                                       {"go", "java", "javascript", "python", "php"} else
-                                      ["--", "/work/afl_fuzzer"] if manifest["ecosystem"] == "rust" else
+                                      ["--", "/work/afl_fuzzer", "@@"] if manifest["ecosystem"] == "rust" else
                                       ["--", manifest.get("afl_entrypoint", "/work/fuzzer")])
     assert plan["command"][-len(expected_tail):] == expected_tail
     return {"project": str(relative), "status": "ready",

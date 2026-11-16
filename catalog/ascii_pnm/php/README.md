@@ -1,6 +1,6 @@
 # ASCII PNM / PHP
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/ascii_pnm/ranking.md) · [standard API inventory](../../../data/php/ascii_pnm/standard.json)
 
@@ -13,7 +13,7 @@
 - [intervention/image-driver-vips](intervention-image-driver-vips/README.md) — Docker harness ready
 - [osiemsiedem/intervention-image-vips-driver](osiemsiedem-intervention-image-vips-driver/README.md) — Docker harness ready
 - [imagine/imagine](imagine-imagine/README.md) — Docker harness ready
-- [pecl/imagick](pecl-imagick/README.md) — verified API path
+- [pecl/imagick](pecl-imagick/README.md) — Docker harness ready
 - [calcinai/php-imagick](calcinai-php-imagick/README.md) — Docker harness ready
 - [orbitale/imagemagick-php](orbitale-imagemagick-php/README.md) — Docker harness ready
 - [phpthumb/phpthumb](phpthumb-phpthumb/README.md) — Docker harness ready

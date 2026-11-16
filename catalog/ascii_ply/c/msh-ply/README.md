@@ -22,6 +22,13 @@
 
 Standalone versioned header at a pinned upstream commit. It is a distinct reader from RPly/SPly and Assimp; its benchmark is project-authored and is not treated as a popularity metric.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/msh_ply/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c msh_ply
+python3 parsarium.py run ascii_ply c msh_ply controls/ascii_ply/triangle.ply
+```
+
+**Coverage limit:** The base libFuzzer valid control returns expected fields while UBSan reports misaligned int32_t accesses in upstream msh_ply.h lines 1436 and 969. The AFL++ valid control trapped with alignment checks enabled, so its build adds -fno-sanitize=alignment while retaining AddressSanitizer and other UBSan checks.

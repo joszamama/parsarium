@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-16T14:00:22.715339+00:00",
-  "projects_total": 191,
-  "projects_verified": 191,
+  "checked_at_utc": "2026-11-16T14:54:01.804831+00:00",
+  "projects_total": 193,
+  "projects_verified": 193,
   "results": [
     {
       "schema_version": 1,
@@ -11,20 +11,20 @@
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
       "base_project_receipt_sha256": "8bd7a26fe694f9e59ef58645cb940f9fec32867175af8088d778e47037ce157c",
       "base_image_id": "sha256:90b673e6eae7caa17db7edb572dfc396ea41d1af535d2e4e37eb57e76ab2ca8d",
-      "image_id": "sha256:8020104bed2831a4b466cf6dbcf965e9bf1b34d1e56bd3e3440fa4344f63e13e",
+      "image_id": "sha256:dc0e2339375c080468a3af47d4f9aa8c1831ed4b00a189172b303fe744b4fcd7",
       "platform": "linux/amd64",
       "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
       "parser_source_features": 2205,
-      "feedback_edges": 2197,
+      "feedback_edges": 2196,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "414660d3cb280ee618bae2d162dc55dea6e6e4aca172c0d3b83fa2fe0f750709",
+        "Dockerfile": "1792ca62a7727b8db183f22e44b8f0e68960ef7e4caa954db350092f193d318d",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -669,6 +669,70 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_pnm/python/pyqt6",
+      "verified_at_utc": "2026-11-16T14:42:55.599709+00:00",
+      "pass": true,
+      "coverage_kind": "native_binary_edges",
+      "feedback_kind": "underlying_shared_library_binary_edges",
+      "afl_package": "AFL++ 5.04a QEMU",
+      "afl_map_size": 65536,
+      "feedback_edges": 794,
+      "binary_feedback": {
+        "feedback_kind": "native_binary_edges_not_source_coverage",
+        "module": "/opt/venv/lib/python3.14/site-packages/PyQt6/Qt6/lib/libQt6Gui.so.6",
+        "module_sha256": "392cf5a2fed77ca7b861484ae0f25a2f7f54789024e79518c6c28e1ddf5b4b1a",
+        "module_text_range": "0x4000971000-0x400118f000",
+        "executable_excluded_range": "0x400000-0xb22000",
+        "control_tuples": 794,
+        "control_map_sha256": "467211cee57489af90cc8e2976cea55322cdc6bfd285a3b4e9c20b66404a0944",
+        "repeat_identical": true,
+        "variant_tuples": 793,
+        "variant_differs": true,
+        "excluded_module_tuples": 1
+      },
+      "source_lines_covered": null,
+      "base_project_receipt_sha256": "31b8f3087ac26fb831afd05d3efaad4eb1bd9decbb350ee6cf86ccd1065db9f6",
+      "source_sha256": "1922bf7440310845a4fd06f4242288084dc26cf682a67e561b115570a8def3d1",
+      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+      "image_id": "sha256:50f0e841d0d40526fea05c8048aed8693f8dce5082e94f5d719fb4c6fe4dc3d0",
+      "overlay_file_sha256": {
+        "Dockerfile": "c77bd0a1cb45ba9220a700658e735b39d01b22b6c8c9d19a3ec441d8aa11a6e7"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_pnm/python/pyside6",
+      "verified_at_utc": "2026-11-16T14:42:55.865068+00:00",
+      "pass": true,
+      "coverage_kind": "native_binary_edges",
+      "feedback_kind": "underlying_shared_library_binary_edges",
+      "afl_package": "AFL++ 5.04a QEMU",
+      "afl_map_size": 65536,
+      "feedback_edges": 733,
+      "binary_feedback": {
+        "feedback_kind": "native_binary_edges_not_source_coverage",
+        "module": "/opt/venv/lib/python3.14/site-packages/PySide6/Qt/lib/libQt6Gui.so.6",
+        "module_sha256": "392cf5a2fed77ca7b861484ae0f25a2f7f54789024e79518c6c28e1ddf5b4b1a",
+        "module_text_range": "0x4000971000-0x400118f000",
+        "executable_excluded_range": "0x400000-0xb22000",
+        "control_tuples": 733,
+        "control_map_sha256": "b9f892af1c3dee0ea7e253d3a9c714dcfedbbee9cab39254ff6ec12bceaf3c0c",
+        "repeat_identical": true,
+        "variant_tuples": 732,
+        "variant_differs": true,
+        "excluded_module_tuples": 1
+      },
+      "source_lines_covered": null,
+      "base_project_receipt_sha256": "860f481d72996c908b63b2d99efba6bb0275f2282abdbce64eabe2354ea0f87d",
+      "source_sha256": "d13ed4d0053cc20f3e4e0fdbf12790a9b7f958d7e22c0843411ecfa8c799e2a9",
+      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+      "image_id": "sha256:906f7f21e5e29157a0cbdd77255830d3c01c630044136ffa9d112a84005bf6aa",
+      "overlay_file_sha256": {
+        "Dockerfile": "2fa9ac2c403fbd6d9d69ebdf5c767839a14ff4dc4fbfd89dd3736ccf89162fb5"
       }
     },
     {

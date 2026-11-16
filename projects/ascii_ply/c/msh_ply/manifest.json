@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "c",
+  "package": "msh_ply",
+  "release": "1.02",
+  "catalog_parser": "data/c/ascii_ply/parsers.json",
+  "source_lock": "data/c/ascii_ply/source-lock.json",
+  "source_sha256": "78871f55649c6a9704ea56f24e2ca93e5b51504605023587de8798625754c671",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "second_x": 1.0, "last_index": 2},
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned msh_ply single-header ASCII PLY reader",
+  "coverage_limit": "The base libFuzzer valid control returns expected fields while UBSan reports misaligned int32_t accesses in upstream msh_ply.h lines 1436 and 969. The AFL++ valid control trapped with alignment checks enabled, so its build adds -fno-sanitize=alignment while retaining AddressSanitizer and other UBSan checks.",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/msh_ply.h"
+}

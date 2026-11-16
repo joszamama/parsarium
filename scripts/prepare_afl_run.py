@@ -19,6 +19,14 @@ from run_case import MAX_CASE_BYTES, ROOT, project_for
 
 def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
                  output_dir: Path, timeout_ms: int, container_name: str) -> tuple[list[str], list[str]]:
+    binary = manifest.get("coverage_kind") == "native_binary_edges"
+    binary_env = []
+    if binary:
+        feedback = receipt["binary_feedback"]
+        binary_env = ["-e", f"AFL_QEMU_INST_RANGES={feedback['module_text_range']}",
+                      "-e", f"AFL_QEMU_EXCLUDE_RANGES={feedback['executable_excluded_range']}",
+                      "-e", f"LD_PRELOAD={feedback['module']}",
+                      "-e", "AFL_QEMU_MODE=trace"]
     common = ["docker", "run", "--rm", "--name", container_name,
               "--pull", "never", "--platform", manifest["platform"],
               "--network", "none", "--read-only", "--cap-drop", "ALL",
@@ -26,12 +34,15 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
               "--tmpfs", "/tmp:rw,exec,nosuid,size=64m", "--workdir", "/tmp",
               "-e", "AFL_SKIP_CPUFREQ=1", "-e", "AFL_NO_AFFINITY=1",
               "-e", "AFL_NO_UI=1", "-e", f"AFL_MAP_SIZE={receipt['afl_map_size']}",
+              *binary_env,
               "-v", f"{seed_dir}:/seeds:ro", "-v", f"{output_dir}:/results",
-              "--entrypoint", "afl-fuzz", receipt["image_id"]]
+              "--entrypoint", "/opt/afl/bin/afl-fuzz" if binary else "afl-fuzz", receipt["image_id"]]
     ecosystem = manifest["ecosystem"]
-    php_native = (ecosystem == "php" and manifest.get("kind") == "standard"
-                  and manifest.get("fuzz_engine") == "AFL++")
-    if php_native:
+    php_native = (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
+                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+    if binary:
+        target_args = ["/opt/venv/bin/python", "/work/binary-run-once.py", "@@"]
+    elif php_native:
         target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                        else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
     elif ecosystem == "rust":
@@ -40,9 +51,10 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
         target_args = ["/work/afl_proxy", "@@"]
     else:
         target_args = [manifest.get("afl_entrypoint", "/work/fuzzer")]
-    command = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
+    mode = ["-Q"] if binary else []
+    command = [*common, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
                "-o", "/results", "--", *target_args]
-    resume = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "-",
+    resume = [*common, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "-",
               "-o", "/results", "--", *target_args]
     return command, resume
 
@@ -57,11 +69,12 @@ def main() -> None:
     cli.add_argument("--seed-dir", type=Path, action="append", default=[])
     cli.add_argument("--timeout-ms", type=int)
     args = cli.parse_args()
+    project, manifest = project_for(args.format, args.ecosystem, args.package_slug)
     timeout_ms = args.timeout_ms if args.timeout_ms is not None else (
-        10000 if args.ecosystem in {"go", "java", "javascript", "python", "php"} else 1000)
+        30000 if manifest.get("coverage_kind") == "native_binary_edges"
+        else 10000 if args.ecosystem in {"go", "java", "javascript", "python", "php"} else 1000)
     if timeout_ms < 1:
         cli.error("timeout-ms must be positive")
-    project, manifest = project_for(args.format, args.ecosystem, args.package_slug)
     overlay = OVERLAYS / args.format / args.ecosystem / args.package_slug
     receipt_path = overlay / "verification.json"
     if not receipt_path.is_file():

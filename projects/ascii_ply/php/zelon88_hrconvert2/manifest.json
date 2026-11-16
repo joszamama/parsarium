@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "php",
+  "package": "zelon88/hrconvert2",
+  "release": "v4.0.0",
+  "catalog_parser": "data/php/ascii_ply/parsers.json",
+  "source_lock": "data/php/ascii_ply/source-lock.json",
+  "source_sha256": "7e5018273402f38fc61c9e17d34238dbbc038a1d27b9373e24e6689df4c7bd09",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "x_sum": 1.0,
+    "completed_stages": 2
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "\"vertices\":3",
+  "coverage": "Xdebug executed line coverage in HRConvert2 tagged PHP Model pipeline. AFL++ feedback is derived from those PHP source lines through the parser trace bridge. Real PyMeshLab PLY loading and Assimp OBJ export run as native subprocesses but their native code is not instrumented.",
+  "coverage_subject_prefix": "/work/parser/",
+  "format_specific_coverage_file_suffix": "/pipeline.php",
+  "underlying_parser_family": "PyMeshLab/MeshLab PLY reader and Assimp exporter",
+  "underlying_coverage_limit": "Native PyMeshLab and Assimp code is not instrumented; only the PHP conversion pipeline receives source coverage and AFL++ feedback.",
+  "underlying_dependency_release": "PyMeshLab 2025.7.post1 wheel, NumPy 2.5.4 wheel, Ubuntu Assimp 6.0.4+ds-1build1",
+  "afl_entrypoint": "/work/afl_proxy"
+}

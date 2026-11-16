@@ -21,6 +21,11 @@
 
 Separately tagged Pawtucket2 application distribution; its 2.0.12 parser file is byte-identical to Providence 2.0.12. The shared adapter supplies a no-op file for an unused Db.php include. These are distinct package paths but only one source-level parser engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/php/collectiveaccess_pawtucket2/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply php collectiveaccess_pawtucket2
+python3 parsarium.py run ascii_ply php collectiveaccess_pawtucket2 controls/ascii_ply/triangle.ply
+```

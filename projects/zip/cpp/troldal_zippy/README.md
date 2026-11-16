@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare zip cpp troldal_zippy runs/zip-troldal_zippy-af
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** The base libFuzzer build retains AddressSanitizer and UndefinedBehaviorSanitizer. AFL++ at -O1 crashed in bundled miniz on the valid ZIP control both with and without sanitizers. The verified AFL++ build uses -O0 without those sanitizers; the cause of the instrumentation-specific crash is unestablished.

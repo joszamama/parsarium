@@ -40,11 +40,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/ascii_ply/javascript/three/README.md)
-
-```sh
-python3 parsarium.py build ascii_ply javascript three
-python3 parsarium.py run ascii_ply javascript three controls/ascii_ply/triangle.ply
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

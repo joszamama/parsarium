@@ -19,11 +19,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/javascript/mp3tag_js/README.md)
-
-```sh
-python3 parsarium.py build mp3_id3v2 javascript mp3tag_js
-python3 parsarium.py run mp3_id3v2 javascript mp3tag_js controls/mp3_id3v2/tone-tags.mp3
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

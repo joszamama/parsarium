@@ -20,6 +20,11 @@
 
 Distinct ahg/3d-model Composer library within the Heratio monorepo. Extracts PLY-specific header counts directly in PHP, without Assimp or Providence code.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/php/ahg_3d_model/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply php ahg_3d_model
+python3 parsarium.py run ascii_ply php ahg_3d_model controls/ascii_ply/triangle.ply
+```

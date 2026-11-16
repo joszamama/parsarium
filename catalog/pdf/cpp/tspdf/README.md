@@ -19,6 +19,11 @@
 
 The same source library and parser engine is used by the C and C++17 adapters; counted once per ecosystem, not as separate syntax engines. Its zero-star GitHub metric is recorded without claiming broad adoption.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/tspdf/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp tspdf
+python3 parsarium.py run pdf cpp tspdf controls/pdf/one-page.pdf
+```

@@ -15,6 +15,7 @@
   "harness": "harness.cpp",
   "fuzz_entry": "LLVMFuzzerTestOneInput",
   "coverage": "LLVM source coverage in Zippy ZipArchive and its bundled miniz ZIP parser",
+  "coverage_limit": "The base libFuzzer build retains AddressSanitizer and UndefinedBehaviorSanitizer. AFL++ at -O1 crashed in bundled miniz on the valid ZIP control both with and without sanitizers. The verified AFL++ build uses -O0 without those sanitizers; the cause of the instrumentation-specific crash is unestablished.",
   "coverage_subject_prefix": "/work/source/library/Zippy/ZipArchive.hpp",
   "format_specific_coverage_file_suffix": "/ZipArchive.hpp",
   "underlying_coverage_subject_prefix": "/work/source/library/Zippy/miniz/",

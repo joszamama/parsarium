@@ -19,11 +19,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/wav/python/tinytag/README.md)
-
-```sh
-python3 parsarium.py build wav python tinytag
-python3 parsarium.py run wav python tinytag controls/wav/four-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

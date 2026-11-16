@@ -30,11 +30,6 @@
 
 Uses a supplied DOMParser to construct SVG DOM before rendering.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/svg/javascript/canvg/README.md)
-
-```sh
-python3 parsarium.py build svg javascript canvg
-python3 parsarium.py run svg javascript canvg controls/svg/red-green.svg
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

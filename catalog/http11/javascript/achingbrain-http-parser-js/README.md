@@ -20,11 +20,6 @@
 
 Fork of the creationix implementation.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/http11/javascript/achingbrain_http_parser_js/README.md)
-
-```sh
-python3 parsarium.py build http11 javascript achingbrain_http_parser_js
-python3 parsarium.py run http11 javascript achingbrain_http_parser_js controls/http11/request.http
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

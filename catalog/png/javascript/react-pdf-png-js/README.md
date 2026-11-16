@@ -30,11 +30,6 @@
 
 Fork of the png.js decoder also published as png-js.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/react_pdf_png_js/README.md)
-
-```sh
-python3 parsarium.py build png javascript react_pdf_png_js
-python3 parsarium.py run png javascript react_pdf_png_js controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

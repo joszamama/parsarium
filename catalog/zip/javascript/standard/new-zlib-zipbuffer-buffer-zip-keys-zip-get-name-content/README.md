@@ -8,10 +8,20 @@
 
 ## Observed control result
 
-See the linked saved verification record for this API.
+```json
+{
+  "entries": [
+    "hello.txt"
+  ],
+  "content": "parsarium\n"
+}
+```
 
 [Control adapter](../../../../../adapters/javascript/zip_node.mjs)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build zip javascript stdlib_node_zipbuffer
+python3 parsarium.py run zip javascript stdlib_node_zipbuffer controls/zip/hello.zip
+```

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "php",
+  "package": "pecl/imagick",
+  "release": "3.8.1",
+  "catalog_parser": "data/php/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/php/pecl_imagick/source-lock.json",
+  "source_sha256": "3a3587c0a524c17d0dad9673a160b90cd776e836838474e173b549ed864352ee",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "left_rgb": [
+      255,
+      0,
+      0
+    ],
+    "right_rgb": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "-d",
+    "extension=/opt/imagick/imagick.so",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "afl_entrypoint": "/work/fuzzer",
+  "coverage": "Clang/LLVM source coverage in PECL Imagick 3.8.1 imagick_class.c for readImage and pixel access. The ImageMagick 7 PNM decoder is a native dependency and is not source-instrumented by this harness.",
+  "coverage_subject_prefix": "/work/source/imagick-3.8.1/",
+  "format_specific_coverage_file_suffix": "/imagick_class.c",
+  "underlying_parser_family": "ImageMagick PNM decoder",
+  "underlying_coverage_limit": "ImageMagick 7 codec source is not instrumented; AFL++ feedback originates from PECL Imagick C extension entrypoints."
+}

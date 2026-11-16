@@ -22,11 +22,6 @@
 
 The pinned release depends on yauzl@^3.4.0.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/zip/javascript/xhmikosr_decompress_unzip/README.md)
-
-```sh
-python3 parsarium.py build zip javascript xhmikosr_decompress_unzip
-python3 parsarium.py run zip javascript xhmikosr_decompress_unzip controls/zip/hello.zip
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

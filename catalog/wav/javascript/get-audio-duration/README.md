@@ -19,11 +19,6 @@
 
 Local wrapper invoking the bundled ffprobe executable; its output is not an independent parser implementation.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/wav/javascript/get_audio_duration/README.md)
-
-```sh
-python3 parsarium.py build wav javascript get_audio_duration
-python3 parsarium.py run wav javascript get_audio_duration controls/wav/four-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

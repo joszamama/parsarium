@@ -21,11 +21,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/svg/python/picosvg/README.md)
-
-```sh
-python3 parsarium.py build svg python picosvg
-python3 parsarium.py run svg python picosvg controls/svg/red-green.svg
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

@@ -20,11 +20,6 @@
 
 Rust parser compiled to WebAssembly.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/http11/javascript/perseveranza_pets_milo/README.md)
-
-```sh
-python3 parsarium.py build http11 javascript perseveranza_pets_milo
-python3 parsarium.py run http11 javascript perseveranza_pets_milo controls/http11/request.http
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

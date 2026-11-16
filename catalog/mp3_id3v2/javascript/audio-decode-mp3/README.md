@@ -21,11 +21,6 @@
 
 Uses mpg123-decoder WASM. On this mono control the codec API yielded two PCM channels; only sample rate and sample count establish acceptance of the tagged MP3.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/javascript/audio_decode_mp3/README.md)
-
-```sh
-python3 parsarium.py build mp3_id3v2 javascript audio_decode_mp3
-python3 parsarium.py run mp3_id3v2 javascript audio_decode_mp3 controls/mp3_id3v2/tone-tags.mp3
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

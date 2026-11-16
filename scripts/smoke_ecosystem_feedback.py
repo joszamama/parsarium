@@ -16,6 +16,7 @@ import tempfile
 
 from run_case import ROOT, image_for, project_for
 from run_corpus_batch import run_batch
+from binary_feedback import check_binary_feedback
 
 
 MANAGED = {"go", "java", "javascript", "python", "php"}
@@ -26,15 +27,33 @@ def check_one(path: Path) -> dict:
     project, manifest = project_for(*relative.parts)
     ecosystem = manifest["ecosystem"]
     verification = json.loads((project / "verification.json").read_text())
-    assert verification["parser_source_lines_covered"] > 0
+    binary = manifest.get("coverage_kind") == "native_binary_edges"
+    if binary:
+        assert verification["parser_source_lines_covered"] is None
+        check_binary_feedback(project, ROOT, manifest, verification["binary_feedback"])
+    else:
+        assert verification["parser_source_lines_covered"] > 0
     with tempfile.TemporaryDirectory(prefix="parsarium-feedback-") as temp:
         scratch = Path(temp)
         corpus = scratch / "corpus"
         corpus.mkdir()
         control = ROOT / manifest["control"]
         shutil.copyfile(control, corpus / manifest["control_sha256"])
-        if (ecosystem == "php" and manifest.get("kind") == "standard"
-                and manifest.get("fuzz_engine") == "AFL++"):
+        if binary:
+            overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+            record = json.loads(overlay.read_text())
+            if (record.get("pass") is not True
+                    or record.get("coverage_kind") != "native_binary_edges"
+                    or record.get("source_lines_covered", False) is not None
+                    or record.get("binary_feedback") != verification["binary_feedback"]
+                    or record.get("base_project_receipt_sha256") !=
+                    sha256((project / "verification.json").read_bytes()).hexdigest()):
+                raise RuntimeError("native binary AFL++ feedback is not current")
+            image_id = record["image_id"]
+            feedback = {"kind": "underlying_shared_library_binary_edges",
+                        "value": record["feedback_edges"]}
+        elif (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
+                and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint"))):
             _, image_id = image_for(project, manifest)
             overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
             record = json.loads(overlay.read_text())
@@ -42,7 +61,9 @@ def check_one(path: Path) -> dict:
                     or record.get("base_project_receipt_sha256") !=
                     sha256((project / "verification.json").read_bytes()).hexdigest()):
                 raise RuntimeError("native PHP parser AFL++ feedback is not current")
-            feedback = {"kind": "native_php_parser_afl_feedback_edges",
+            feedback = {"kind": ("php_parser_source_lines_to_afl_bitmap"
+                                 if record.get("feedback_kind") == "php_parser_source_lines_to_afl_bitmap"
+                                 else "native_php_parser_afl_feedback_edges"),
                         "value": record["feedback_edges"]}
         elif ecosystem == "php":
             report = scratch / "report"

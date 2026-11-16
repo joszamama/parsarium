@@ -19,11 +19,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/ascii_ply/javascript/voxelkloud_format_single/README.md)
-
-```sh
-python3 parsarium.py build ascii_ply javascript voxelkloud_format_single
-python3 parsarium.py run ascii_ply javascript voxelkloud_format_single controls/ascii_ply/triangle.ply
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

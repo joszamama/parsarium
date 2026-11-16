@@ -32,11 +32,6 @@
 
 Observed or documented wrapper path; this package is counted as a distinct API package, not an independent PNG engine.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/python/scikit_image/README.md)
-
-```sh
-python3 parsarium.py build png python scikit_image
-python3 parsarium.py run png python scikit_image controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

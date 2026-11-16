@@ -1,6 +1,6 @@
 # MP4 / C++
 
-20 verified third-party API paths; 4 have verified Docker harnesses.
+20 verified third-party API paths; 5 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/mp4/ranking.md) · [standard API inventory](../../../data/cpp/mp4/standard.json)
 
@@ -18,7 +18,7 @@
 - [libextractor](libextractor/README.md) — verified API path
 - [taglib](taglib/README.md) — Docker harness ready
 - [opencv](opencv/README.md) — verified API path
-- [libmp4tag](libmp4tag/README.md) — verified API path
+- [libmp4tag](libmp4tag/README.md) — Docker harness ready
 - [exiv2](exiv2/README.md) — verified API path
 - [avcpp](avcpp/README.md) — verified API path
 - [ireader-media-server](ireader-media-server/README.md) — verified API path

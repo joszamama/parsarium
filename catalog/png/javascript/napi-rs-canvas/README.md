@@ -30,11 +30,6 @@
 
 Native Node-API binding; pinned package type declarations document Buffer input.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/napi_rs_canvas/README.md)
-
-```sh
-python3 parsarium.py build png javascript napi_rs_canvas
-python3 parsarium.py run png javascript napi_rs_canvas controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

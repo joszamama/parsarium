@@ -19,11 +19,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/probe_image_size/README.md)
-
-```sh
-python3 parsarium.py build png javascript probe_image_size
-python3 parsarium.py run png javascript probe_image_size controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

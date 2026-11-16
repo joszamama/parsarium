@@ -22,6 +22,11 @@
 
 Released sk_renderer package publishes the same micro_ply.h bytes as the author’s unversioned maluoi/header-libs repository. This is one parser family, not two independent engines. Renderer GPU APIs are not involved in this standalone reader control.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/sk_renderer/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c sk_renderer
+python3 parsarium.py run ascii_ply c sk_renderer controls/ascii_ply/triangle.ply
+```

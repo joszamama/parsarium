@@ -28,11 +28,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/ascii_pnm/python/pyvips/README.md)
-
-```sh
-python3 parsarium.py build ascii_pnm python pyvips
-python3 parsarium.py run ascii_pnm python pyvips controls/ascii_pnm/red-green.ppm
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

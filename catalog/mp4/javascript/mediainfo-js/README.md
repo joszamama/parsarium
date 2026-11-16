@@ -22,11 +22,6 @@
 
 WebAssembly distribution of MediaInfoLib; same family as native MediaInfo.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/mp4/javascript/mediainfo_js/README.md)
-
-```sh
-python3 parsarium.py build mp4 javascript mediainfo_js
-python3 parsarium.py run mp4 javascript mediainfo_js controls/mp4/red-av.mp4
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

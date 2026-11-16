@@ -18,11 +18,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/ascii_pnm/python/imagesize/README.md)
-
-```sh
-python3 parsarium.py build ascii_pnm python imagesize
-python3 parsarium.py run ascii_pnm python imagesize controls/ascii_pnm/red-green.ppm
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

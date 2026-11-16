@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "zip",
+  "ecosystem": "javascript",
+  "package": "node:zlib.ZipBuffer",
+  "release": "26.10.0",
+  "api": "new zlib.ZipBuffer(Buffer); zip.keys(); zip.get(name).content()",
+  "runtime": "Node.js 26.10.0",
+  "standard_inventory": "data/javascript/zip/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": [
+      "hello.txt"
+    ],
+    "content": "parsarium\n"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_engine_sha256": "7f281856b36dde6fcd1b078c40c9f74b01ed1f61b9314cd882e0409651dc0431",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/harness.js",
+    "--disableBugDetectors",
+    "ssrf",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "fuzz_entry": "fuzz.js",
+  "coverage": "V8 source-range coverage of Node.js bundled internal/zip JavaScript parser modules; Jazzer.js instruments the harness and AFL++ maps internal/zip regions; native zlib remains prebuilt and outside source coverage",
+  "coverage_limit": "AFL++ maps bundled Node ZIP JavaScript modules; prebuilt native zlib decompression branches are outside this feedback.",
+  "coverage_subject_prefix": "node:internal/zip/",
+  "format_specific_coverage_file_suffix": "internal/zip/headers"
+}

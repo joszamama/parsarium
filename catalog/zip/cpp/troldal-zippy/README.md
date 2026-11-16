@@ -29,3 +29,5 @@ Distinct C++ package API with bundled miniz; shares underlying parser lineage wi
 python3 parsarium.py build zip cpp troldal_zippy
 python3 parsarium.py run zip cpp troldal_zippy controls/zip/hello.zip
 ```
+
+**Coverage limit:** The base libFuzzer build retains AddressSanitizer and UndefinedBehaviorSanitizer. AFL++ at -O1 crashed in bundled miniz on the valid ZIP control both with and without sanitizers. The verified AFL++ build uses -O0 without those sanitizers; the cause of the instrumentation-specific crash is unestablished.

@@ -21,11 +21,6 @@
 
 TypeScript port of TagLib; shared design lineage, not the native C++ implementation.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/mp4/javascript/dantheman827_taglib_ts/README.md)
-
-```sh
-python3 parsarium.py build mp4 javascript dantheman827_taglib_ts
-python3 parsarium.py run mp4 javascript dantheman827_taglib_ts controls/mp4/red-av.mp4
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

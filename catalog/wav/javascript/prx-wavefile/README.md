@@ -21,11 +21,6 @@
 
 Published variant of the wavefile parser; shared family records common origin, not independent implementation.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/wav/javascript/prx_wavefile/README.md)
-
-```sh
-python3 parsarium.py build wav javascript prx_wavefile
-python3 parsarium.py run wav javascript prx_wavefile controls/wav/four-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

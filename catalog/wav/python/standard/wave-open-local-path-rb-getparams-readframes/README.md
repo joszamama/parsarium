@@ -24,9 +24,6 @@
 
 [Control adapter](../../../../../adapters/python/wav/standard.py)
 
-## Run this target
+## Runnable harness
 
-```sh
-python3 parsarium.py build wav python stdlib_wave
-python3 parsarium.py run wav python stdlib_wave controls/wav/four-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

@@ -30,11 +30,6 @@
 
 Fork of the pngjs parser family.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/png/javascript/pngjs_nozlib/README.md)
-
-```sh
-python3 parsarium.py build png javascript pngjs_nozlib
-python3 parsarium.py run png javascript pngjs_nozlib controls/png/red-green.png
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

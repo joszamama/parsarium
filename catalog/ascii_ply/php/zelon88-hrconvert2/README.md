@@ -22,6 +22,11 @@
 
 Separate tagged GPL PHP application module; PyMeshLab/MeshLab reads PLY and Assimp exports OBJ. The standalone adapter supplies host-application services and omits the web server sandbox. This is one package path over underlying native readers, not an independent PHP syntax parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/php/zelon88_hrconvert2/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply php zelon88_hrconvert2
+python3 parsarium.py run ascii_ply php zelon88_hrconvert2 controls/ascii_ply/triangle.ply
+```

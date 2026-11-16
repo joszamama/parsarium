@@ -19,9 +19,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-```sh
-python3 parsarium.py build wav java jdk_audioinputstream
-python3 parsarium.py run wav java jdk_audioinputstream controls/wav/256-samples.wav
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

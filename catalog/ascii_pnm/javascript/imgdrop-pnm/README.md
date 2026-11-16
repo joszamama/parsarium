@@ -27,11 +27,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/ascii_pnm/javascript/imgdrop_pnm/README.md)
-
-```sh
-python3 parsarium.py build ascii_pnm javascript imgdrop_pnm
-python3 parsarium.py run ascii_pnm javascript imgdrop_pnm controls/ascii_pnm/red-green.ppm
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

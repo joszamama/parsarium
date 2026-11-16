@@ -19,11 +19,6 @@
 
 WASM binding around MuPDF.
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/pdf/javascript/mupdf/README.md)
-
-```sh
-python3 parsarium.py build pdf javascript mupdf
-python3 parsarium.py run pdf javascript mupdf controls/pdf/one-page.pdf
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.

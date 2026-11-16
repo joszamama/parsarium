@@ -17,11 +17,6 @@
 }
 ```
 
-## Run this target
+## Runnable harness
 
-[Docker harness and verification receipt](../../../../projects/pdf/python/markitdown/README.md)
-
-```sh
-python3 parsarium.py build pdf python markitdown
-python3 parsarium.py run pdf python markitdown controls/pdf/one-page.pdf
-```
+A Docker harness with parser-source coverage has not yet been verified for this API path.
