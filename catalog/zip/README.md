@@ -10,7 +10,7 @@ The catalog records 171 verified third-party API paths across eight ecosystems. 
 | [C++](cpp/README.md) | 27 | 16 |
 | [Go](go/README.md) | 23 | 23 |
 | [Java](java/README.md) | 20 | 20 |
-| [JavaScript](javascript/README.md) | 21 | 1 |
+| [JavaScript](javascript/README.md) | 21 | 21 |
 | [Python](python/README.md) | 20 | 1 |
 | [Rust](rust/README.md) | 20 | 20 |
 | [PHP](php/README.md) | 20 | 20 |

@@ -22,6 +22,11 @@
 
 ES module fork of unzipper.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/javascript/unzipper_esm/README.md)
+
+```sh
+python3 parsarium.py build zip javascript unzipper_esm
+python3 parsarium.py run zip javascript unzipper_esm controls/zip/hello.zip
+```
