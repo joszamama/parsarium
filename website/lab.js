@@ -50,7 +50,7 @@
             </div>
           </section>
         </div>
-        <aside class="teach-receipt" id="teach-receipt" aria-label="Saved Docker verification"></aside>
+        <aside class="teach-next-step" id="teach-next-step" aria-label="Continue with a runnable target"></aside>
         <section class="teach-quiz" id="teach-quiz" aria-labelledby="teach-quiz-title"></section>
       </div>`;
   }
@@ -124,9 +124,9 @@
     el("#teach-result").innerHTML = `<h3>Result <span>computed here</span></h3>${strip}<pre>${escapeHtml(JSON.stringify(output, null, 2))}</pre>`;
   }
 
-  function savedReceipt(demo) {
-    const guide = demo.projectGuideUrl;
-    el("#teach-receipt").innerHTML = `<div><span class="teach-overline">SAVED VERIFICATION · DOCKER HARNESS</span><h2>Run the catalog target locally.</h2><p>This saved receipt comes from <strong>${escapeHtml(demo.package)} ${escapeHtml(demo.release)}</strong>. The live terminal above runs a browser decoder or teaching decoder; it does not run this container.</p><a href="${escapeHtml(guide)}" target="_blank" rel="noopener noreferrer">Read the pinned harness guide ↗</a></div><div class="teach-receipt-detail"><span>REPOSITORY COMMAND</span><code>${escapeHtml(demo.controlCommand)}</code><span>SAVED PARSER RESULT</span><pre>${escapeHtml(JSON.stringify(demo.expectedOutput, null, 2))}</pre></div>`;
+  function nextStep(demo) {
+    const runUrl = new URL(`../run/?format=${encodeURIComponent(demo.format)}`, document.baseURI).href;
+    el("#teach-next-step").innerHTML = `<div><span class="teach-overline">FROM LESSON TO TARGET</span><h2>Test the actual library.</h2><p>The example above uses a browser decoder or small teaching decoder. Run locally opens a pinned <strong>${escapeHtml(demo.package)}</strong> harness for this format, with a valid control and coverage feedback.</p><a href="${escapeHtml(runUrl)}">Open Run locally ↗</a></div><div class="teach-next-step-detail"><span>HERE IN THE BROWSER</span><p>Watch parsing steps and inspect the control.</p><span>THERE ON YOUR MACHINE</span><p>Run a library on your own file or corpus in Docker.</p></div>`;
   }
 
   async function loadFormat(format) {
@@ -145,7 +145,7 @@
     renderBytes();
     el("#teach-structure").innerHTML = `<h3>Structure</h3><p>Run <code>parse</code> to inspect the ${names[format]} structure.</p>`;
     el("#teach-result").innerHTML = `<h3>Result</h3><p>The observed fields will appear after parsing.</p>`;
-    savedReceipt(demo);
+    nextStep(demo);
     stage("bytes");
     const url = new URL(location.href);
     url.searchParams.set("format", format);
@@ -294,7 +294,7 @@
           el("#teach-bytes").innerHTML = "<h3>Bytes</h3><p>Load a format to inspect its control.</p>";
           el("#teach-structure").innerHTML = "<h3>Structure</h3><p>Run <code>parse</code> to see how the format is organized.</p>";
           el("#teach-result").innerHTML = "<h3>Result</h3><p>The browser's observed fields will appear here.</p>";
-          el("#teach-receipt").innerHTML = "";
+          el("#teach-next-step").innerHTML = "";
           el("#teach-terminal-history").innerHTML = "";
           stage(null);
           const resetUrl = new URL(location.href);
