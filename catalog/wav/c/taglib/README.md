@@ -21,6 +21,11 @@
 
 The C binding wraps TagLib C++ and uses its RIFF/WAV properties implementation; one package path, not a separate C parser engine. It reports WAV sample rate, channel count and bitrate, not decoded samples.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/taglib/README.md)
+
+```sh
+python3 parsarium.py build wav c taglib
+python3 parsarium.py run wav c taglib controls/wav/four-samples.wav
+```
