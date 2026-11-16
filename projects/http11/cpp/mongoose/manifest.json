@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "cpp",
+  "package": "mongoose",
+  "release": "7.23",
+  "catalog_parser": "data/cpp/http11/parsers.json",
+  "source_lock": "data/c/http11/source-lock.json",
+  "source_sha256": "93208f164038b05d156935b8b725063e1afb3984a362dbcf3a9ea37b6f1f2255",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium?x=1",
+    "version": "1.1"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Mongoose HTTP parser reached by byte-input harness",
+  "coverage_subject_prefix": "/work/mongoose-7.23/",
+  "format_specific_coverage_file_suffix": "/mongoose.c"
+}

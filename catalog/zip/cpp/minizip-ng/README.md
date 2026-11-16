@@ -21,6 +21,11 @@
 
 Separate maintained package descended from classic MiniZip; not an independent family claim. The C++ path reuses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/minizip-ng/README.md)
+
+```sh
+python3 parsarium.py build zip cpp minizip-ng
+python3 parsarium.py run zip cpp minizip-ng controls/zip/hello.zip
+```

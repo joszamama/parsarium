@@ -21,6 +21,11 @@
 
  Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/cpp/llhttp/README.md)
+
+```sh
+python3 parsarium.py build http11 cpp llhttp
+python3 parsarium.py run http11 cpp llhttp controls/http11/request.http
+```

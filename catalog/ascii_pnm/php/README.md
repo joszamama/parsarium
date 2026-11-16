@@ -1,6 +1,6 @@
 # ASCII PNM / PHP
 
-20 verified third-party API paths; 17 have verified Docker harnesses.
+20 verified third-party API paths; 18 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/ascii_pnm/ranking.md) · [standard API inventory](../../../data/php/ascii_pnm/standard.json)
 
@@ -20,7 +20,7 @@
 - [league/glide](league-glide/README.md) — Docker harness ready
 - [phpixie/image](phpixie-image/README.md) — Docker harness ready
 - [francodacosta/phmagick](francodacosta-phmagick/README.md) — Docker harness ready
-- [php-ffmpeg/php-ffmpeg](php-ffmpeg-php-ffmpeg/README.md) — verified API path
+- [php-ffmpeg/php-ffmpeg](php-ffmpeg-php-ffmpeg/README.md) — Docker harness ready
 - [phphleb/imageresizer](phphleb-imageresizer/README.md) — Docker harness ready
 - [tpmanc/yii2-imagick](tpmanc-yii2-imagick/README.md) — Docker harness ready
 - [horde/image](horde-image/README.md) — Docker harness ready

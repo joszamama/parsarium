@@ -173,8 +173,8 @@ switch ($package) {
         $container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
         $container->register('logger', \Psr\Log\NullLogger::class)->setPublic(true);
         (new \Dubture\FFmpegBundle\DependencyInjection\DubtureFFmpegExtension())->load([[
-            'ffmpeg_binary' => getenv('PARSARIUM_FFMPEG') ?: '/opt/homebrew/bin/ffmpeg',
-            'ffprobe_binary' => getenv('PARSARIUM_FFPROBE') ?: '/opt/homebrew/bin/ffprobe',
+            'ffmpeg_binary' => getenv('PARSARIUM_FFMPEG') ?: '/usr/bin/ffmpeg',
+            'ffprobe_binary' => getenv('PARSARIUM_FFPROBE') ?: '/usr/bin/ffprobe',
             'temporary_directory' => sys_get_temp_dir(),
         ]], $container);
         $container->getDefinition('dubture_ffmpeg.ffprobe')->setPublic(true);

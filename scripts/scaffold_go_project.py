@@ -163,10 +163,14 @@ func FuzzParser(f *testing.F) {{
                                 'if packageFiles == 0 || total == 0 {')
     (destination / "reporter").mkdir()
     (destination / "reporter/main.go").write_text(reporter)
-    cgo = "1" if native or package == "github.com/tosone/minimp3" else "0"
+    needs_vips = "vips" in package.lower() or package == "github.com/h2non/bimg"
+    cgo = "1" if native or needs_vips or package == "github.com/tosone/minimp3" else "0"
+    vips_build = "RUN apt-get update -qq && apt-get install -y --no-install-recommends libvips-dev pkg-config && rm -rf /var/lib/apt/lists/*\n" if needs_vips else ""
+    runtime_base = BASE_IMAGE if needs_vips else "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96"
+    vips_runtime = "RUN apt-get update -qq && apt-get install -y --no-install-recommends libvips42 && rm -rf /var/lib/apt/lists/*\nWORKDIR /work\n" if needs_vips else ""
     toolchain = "ENV GOTOOLCHAIN=auto\n" if format_name == "pdf" else ""
     docker = f'''FROM --platform=linux/arm64 {BASE_IMAGE} AS build
-{toolchain}WORKDIR /work
+{toolchain}{vips_build}WORKDIR /work
 COPY go.mod go.sum ./
 RUN go mod download \\
     && echo '{digest}  /go/pkg/mod/cache/download/{escaped_module}/@v/{version}.zip' | sha256sum --check
@@ -175,8 +179,8 @@ RUN CGO_ENABLED={cgo} go test -c -coverpkg={package} -o /work/harness.test .
 COPY reporter/main.go ./reporter/main.go
 RUN CGO_ENABLED=0 go build -o /work/reporter-bin ./reporter
 
-FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
-COPY --from=build /work/harness.test /work/harness.test
+FROM --platform=linux/arm64 {runtime_base}
+{vips_runtime}COPY --from=build /work/harness.test /work/harness.test
 COPY --from=build /work/reporter-bin /work/reporter
 ENTRYPOINT ["/work/reporter"]
 '''

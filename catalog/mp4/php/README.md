@@ -1,6 +1,6 @@
 # MP4 / PHP
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/mp4/ranking.md) · [standard API inventory](../../../data/php/mp4/standard.json)
 
@@ -23,7 +23,7 @@
 - [uberchel/mediainfo4php](uberchel-mediainfo4php/README.md) — Docker harness ready
 - [clwu/php-read-mp4info](clwu-php-read-mp4info/README.md) — Docker harness ready
 - [aminyazdanpanah/php-ffmpeg-video-streaming](aminyazdanpanah-php-ffmpeg-video-streaming/README.md) — Docker harness ready
-- [fmonts/ffmpeg-bundle](fmonts-ffmpeg-bundle/README.md) — verified API path
+- [fmonts/ffmpeg-bundle](fmonts-ffmpeg-bundle/README.md) — Docker harness ready
 - [minuteoflaravel/laravel-audio-video-validator](minuteoflaravel-laravel-audio-video-validator/README.md) — Docker harness ready
 - [kiwilan/php-audio](kiwilan-php-audio/README.md) — Docker harness ready
 

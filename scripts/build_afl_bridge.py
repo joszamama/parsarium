@@ -43,7 +43,9 @@ def dockerfile(base_image: str, platform: str, relative: Path, prefix: str,
     go_assimp = ecosystem == "go" and "assimp" in relative.parts[2]
     image_base = DEBIAN_BOOKWORM if go_assimp else (UBUNTU_BASE if ecosystem == "go" else base_image)
     go_extra = (" libassimp5" if go_assimp else
-                " libmupdf-dev" if relative.as_posix() == "pdf/go/github_com_gen2brain_go_fitz" else "")
+                " libmupdf-dev" if relative.as_posix() == "pdf/go/github_com_gen2brain_go_fitz" else
+                " libvips42" if ecosystem == "go" and
+                ("vips" in relative.parts[2] or "bimg" in relative.parts[2]) else "")
     go_binary = f"COPY --from={base_image} /work/harness.test /work/harness.test\n" if ecosystem == "go" else ""
     python_runtime = " python3" if ecosystem == "go" else ""
     java_compile = ("RUN mkdir /work/afl-java-classes && javac -d /work/afl-java-classes "

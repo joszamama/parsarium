@@ -31,6 +31,11 @@
 
 A compact PBMPLUS-derived reader with a local FILE* API; it shares historical lineage with Netpbm but is a separately distributed parser implementation. The date-named archive is 14Aug2014; its README labels the code version 03jul2014.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/libpnmrw/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp libpnmrw
+python3 parsarium.py run ascii_pnm cpp libpnmrw controls/ascii_pnm/red-green.ppm
+```

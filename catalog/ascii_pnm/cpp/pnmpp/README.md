@@ -32,6 +32,11 @@
 
 The upstream v1.0.1 header requires an eight-reference compatibility patch to compile with the local C++17 compiler: line_proxy comparisons refer to rhs.ny_ instead of rhs.iy_. The patch does not touch PNM decoding code. Original and patched header SHA-256 hashes are recorded.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/pnmpp/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp pnmpp
+python3 parsarium.py run ascii_pnm cpp pnmpp controls/ascii_pnm/red-green.ppm
+```

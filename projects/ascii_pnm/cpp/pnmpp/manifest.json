@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "cpp",
+  "package": "pnmpp",
+  "release": "1.0.1",
+  "catalog_parser": "data/cpp/ascii_pnm/parsers.json",
+  "source_lock": "data/cpp/ascii_pnm/extra-source-lock.json",
+  "source_sha256": "50ec55e28e3223950bf69470cf7d6dcdc4240858595d2bf0418734d6ba0a2fe6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "second": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pnm++ PNM reader reached by C++17 byte-input harness",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/pnm.hpp"
+}

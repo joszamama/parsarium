@@ -21,6 +21,11 @@
 
 miniz archive reader; its DEFLATE implementation is integrated.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/miniz/README.md)
+
+```sh
+python3 parsarium.py build zip c miniz
+python3 parsarium.py run zip c miniz controls/zip/hello.zip
+```

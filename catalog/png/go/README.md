@@ -1,6 +1,6 @@
 # PNG / Go
 
-20 verified third-party API paths; 17 have verified Docker harnesses.
+20 verified third-party API paths; 19 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/png/ranking.md) · [standard API inventory](../../../data/go/png/standard.json)
 
@@ -19,8 +19,8 @@
 - [github.com/m8rge/go-scaled-png](github-com-m8rge-go-scaled-png/README.md) — Docker harness ready
 - [github.com/knoweather/simple-png](github-com-knoweather-simple-png/README.md) — Docker harness ready
 - [github.com/andrianbdn/iospng](github-com-andrianbdn-iospng/README.md) — Docker harness ready
-- [github.com/h2non/bimg](github-com-h2non-bimg/README.md) — verified API path
-- [github.com/davidbyttow/govips/v2/vips](github-com-davidbyttow-govips-v2-vips/README.md) — verified API path
+- [github.com/h2non/bimg](github-com-h2non-bimg/README.md) — Docker harness ready
+- [github.com/davidbyttow/govips/v2/vips](github-com-davidbyttow-govips-v2-vips/README.md) — Docker harness ready
 - [gopkg.in/gographics/imagick.v3/imagick](gopkg-in-gographics-imagick-v3-imagick/README.md) — verified API path
 - [github.com/shogo82148/go-imaging/png](github-com-shogo82148-go-imaging-png/README.md) — Docker harness ready
 - [github.com/magical/png](github-com-magical-png/README.md) — Docker harness ready

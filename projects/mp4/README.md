@@ -71,6 +71,7 @@
 - [buggedcom/phpvideotoolkit / PHP](php/buggedcom_phpvideotoolkit/README.md)
 - [char0n/ffmpeg-php / PHP](php/char0n_ffmpeg_php/README.md)
 - [clwu/php-read-mp4info / PHP](php/clwu_php_read_mp4info/README.md)
+- [fmonts/ffmpeg-bundle / PHP](php/fmonts_ffmpeg_bundle/README.md)
 - [indiehd/audio-manipulator / PHP](php/indiehd_audio_manipulator/README.md)
 - [james-heinrich/getid3 / PHP](php/getid3/README.md)
 - [kiwilan/php-audio / PHP](php/kiwilan_php_audio/README.md)

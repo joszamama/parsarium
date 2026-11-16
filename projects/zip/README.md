@@ -4,8 +4,20 @@
 
 ## Targets
 
+- [kuba-zip / C](c/kuba-zip/README.md)
 - [libzip / C](c/libzip/README.md)
+- [miniz / C](c/miniz/README.md)
+- [minizip / C](c/minizip/README.md)
+- [minizip-ng / C](c/minizip-ng/README.md)
+- [unarr / C](c/unarr/README.md)
+- [zziplib / C](c/zziplib/README.md)
+- [kuba-zip / C++](cpp/kuba-zip/README.md)
 - [libzip / C++](cpp/libzip/README.md)
+- [miniz / C++](cpp/miniz/README.md)
+- [minizip / C++](cpp/minizip/README.md)
+- [minizip-ng / C++](cpp/minizip-ng/README.md)
+- [unarr / C++](cpp/unarr/README.md)
+- [zziplib / C++](cpp/zziplib/README.md)
 - [archive/zip.OpenReader(path); File.Open() / Go](go/stdlib_openreader/README.md)
 - [code.cloudfoundry.org/ykk / Go](go/code_cloudfoundry_org_ykk/README.md)
 - [github.com/STARRY-S/zip / Go](go/github_com_starry_s_zip/README.md)

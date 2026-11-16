@@ -20,6 +20,11 @@
 
 Shared code lineage or native parser; package count does not imply independent parser engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/go/gitee_com_shiqiyue_go_vips/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm go gitee_com_shiqiyue_go_vips
+python3 parsarium.py run ascii_pnm go gitee_com_shiqiyue_go_vips controls/ascii_pnm/red-green.ppm
+```

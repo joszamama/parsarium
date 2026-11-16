@@ -21,6 +21,11 @@
 
 Distinct PHP package path delegating local MP4 inspection to FFmpeg ffprobe 9.0.2; shared native parser family. The pinned bundle registers the FFProbe service through Symfony DI.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/php/fmonts_ffmpeg_bundle/README.md)
+
+```sh
+python3 parsarium.py build mp4 php fmonts_ffmpeg_bundle
+python3 parsarium.py run mp4 php fmonts_ffmpeg_bundle controls/mp4/red-av.mp4
+```

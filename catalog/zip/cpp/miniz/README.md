@@ -21,6 +21,11 @@
 
 miniz archive reader; its DEFLATE implementation is integrated. The C++ path reuses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/miniz/README.md)
+
+```sh
+python3 parsarium.py build zip cpp miniz
+python3 parsarium.py run zip cpp miniz controls/zip/hello.zip
+```

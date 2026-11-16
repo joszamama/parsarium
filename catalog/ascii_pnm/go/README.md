@@ -1,6 +1,6 @@
 # ASCII PNM / Go
 
-20 verified third-party API paths; 14 have verified Docker harnesses.
+20 verified third-party API paths; 18 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_pnm/ranking.md) · [standard API inventory](../../../data/go/ascii_pnm/standard.json)
 
@@ -22,10 +22,10 @@
 - [github.com/go-gfx/gfx/codec](github-com-go-gfx-gfx-codec/README.md) — Docker harness ready
 - [gopkg.in/gographics/imagick.v3/imagick](gopkg-in-gographics-imagick-v3-imagick/README.md) — verified API path
 - [github.com/kirklin/vipsx/vips](github-com-kirklin-vipsx-vips/README.md) — verified API path
-- [gitee.com/shiqiyue/go-vips](gitee-com-shiqiyue-go-vips/README.md) — verified API path
-- [github.com/bu/govips/pkg/vips](github-com-bu-govips-pkg-vips/README.md) — verified API path
-- [github.com/robxyy/govips/pkg/vips](github-com-robxyy-govips-pkg-vips/README.md) — verified API path
-- [github.com/perelin/govips/pkg/vips](github-com-perelin-govips-pkg-vips/README.md) — verified API path
+- [gitee.com/shiqiyue/go-vips](gitee-com-shiqiyue-go-vips/README.md) — Docker harness ready
+- [github.com/bu/govips/pkg/vips](github-com-bu-govips-pkg-vips/README.md) — Docker harness ready
+- [github.com/robxyy/govips/pkg/vips](github-com-robxyy-govips-pkg-vips/README.md) — Docker harness ready
+- [github.com/perelin/govips/pkg/vips](github-com-perelin-govips-pkg-vips/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

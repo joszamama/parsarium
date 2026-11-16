@@ -5,8 +5,10 @@
 ## Targets
 
 - [dr_wav / C](c/dr_wav/README.md)
+- [libsndfile / C](c/libsndfile/README.md)
 - [miniaudio / C](c/miniaudio/README.md)
 - [dr_wav / C++](cpp/dr_wav/README.md)
+- [libsndfile / C++](cpp/libsndfile/README.md)
 - [miniaudio / C++](cpp/miniaudio/README.md)
 - [azul3d.org/engine/audio/wav / Go](go/azul3d_org_engine_audio_wav/README.md)
 - [github.com/200sc/klangsynthese/wav / Go](go/github_com_200sc_klangsynthese_wav/README.md)

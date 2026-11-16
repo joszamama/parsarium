@@ -21,6 +21,11 @@
 
 FFProbe delegates ASCII P3 probing to the installed FFmpeg PPM decoder. This is one package path into a distinct FFmpeg parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/php_ffmpeg_php_ffmpeg/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php php_ffmpeg_php_ffmpeg
+python3 parsarium.py run ascii_pnm php php_ffmpeg_php_ffmpeg controls/ascii_pnm/red-green.ppm
+```

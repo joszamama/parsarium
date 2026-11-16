@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/c/mongoose/README.md)
+
+```sh
+python3 parsarium.py build http11 c mongoose
+python3 parsarium.py run http11 c mongoose controls/http11/request.http
+```

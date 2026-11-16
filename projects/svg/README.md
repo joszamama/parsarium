@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [nanosvg / C](c/nanosvg/README.md)
 - [plutosvg / C](c/plutosvg/README.md)
 - [plutosvg / C++](cpp/plutosvg/README.md)
 - [cogentcore.org/core/svg / Go](go/cogentcore_org_core_svg/README.md)

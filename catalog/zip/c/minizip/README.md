@@ -21,6 +21,11 @@
 
 Classic MiniZip from the zlib contrib/minizip source subtree; separate from minizip-ng but related lineage.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/minizip/README.md)
+
+```sh
+python3 parsarium.py build zip c minizip
+python3 parsarium.py run zip c minizip controls/zip/hello.zip
+```

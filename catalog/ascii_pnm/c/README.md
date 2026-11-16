@@ -1,6 +1,6 @@
 # ASCII PNM / C
 
-20 verified third-party API paths; 1 have verified Docker harnesses.
+20 verified third-party API paths; 2 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/ascii_pnm/ranking.md) · [standard API inventory](../../../data/c/ascii_pnm/standard.json)
 
@@ -19,7 +19,7 @@
 - [netpbm](netpbm/README.md) — verified API path
 - [ffmpeg](ffmpeg/README.md) — verified API path
 - [gstreamer](gstreamer/README.md) — verified API path
-- [libpnmrw](libpnmrw/README.md) — verified API path
+- [libpnmrw](libpnmrw/README.md) — Docker harness ready
 - [jasper](jasper/README.md) — verified API path
 - [libimago](libimago/README.md) — verified API path
 - [gegl](gegl/README.md) — verified API path

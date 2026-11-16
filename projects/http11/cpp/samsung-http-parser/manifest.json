@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "cpp",
+  "package": "samsung-http-parser",
+  "release": "2.5.0",
+  "catalog_parser": "data/cpp/http11/parsers.json",
+  "source_lock": "data/c/http11/source-lock.json",
+  "source_sha256": "e3b4ba58f4e6ee5fbec781df020e5cb74c3a799a07f059e1e125127a0b801481",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium?x=1",
+    "version": "1.1"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Samsung http-parser C source reached by byte-input harness",
+  "coverage_subject_prefix": "/work/http-parser-2.5.0/",
+  "format_specific_coverage_file_suffix": "/http_parser.c"
+}

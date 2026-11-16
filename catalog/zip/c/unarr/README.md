@@ -21,6 +21,11 @@
 
 selmf/unarr fork of zeniko/unarr; its ZIP parser and decompression API are part of the pinned source package.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/unarr/README.md)
+
+```sh
+python3 parsarium.py build zip c unarr
+python3 parsarium.py run zip c unarr controls/zip/hello.zip
+```

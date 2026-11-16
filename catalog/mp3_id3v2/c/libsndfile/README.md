@@ -23,6 +23,11 @@
 
 The pinned libsndfile mpeg_decode.c uses mpg123_id3 and mpg123 audio decoding. This is a distinct package input API sharing the separately counted libmpg123 syntax engine. C and C++ call sites use the same C implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/libsndfile/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c libsndfile
+python3 parsarium.py run mp3_id3v2 c libsndfile controls/mp3_id3v2/tone-tags.mp3
+```

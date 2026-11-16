@@ -27,6 +27,11 @@
 
 Own audio file parser and PCM reader. The C++ path uses the exact C-cell release and underlying decoder.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/libsndfile/README.md)
+
+```sh
+python3 parsarium.py build wav cpp libsndfile
+python3 parsarium.py run wav cpp libsndfile controls/wav/four-samples.wav
+```

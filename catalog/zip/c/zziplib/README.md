@@ -21,6 +21,11 @@
 
 Own ZIP archive reader; uses zlib for DEFLATE.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/zziplib/README.md)
+
+```sh
+python3 parsarium.py build zip c zziplib
+python3 parsarium.py run zip c zziplib controls/zip/hello.zip
+```

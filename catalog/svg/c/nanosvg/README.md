@@ -22,6 +22,11 @@
 
 SDL3_image embeds NanoSVG; this direct C API is a distinct package path over the same parser family. Upstream has no tagged release; vcpkg publishes version-date 2023-12-29 pinned to the exact upstream commit.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/nanosvg/README.md)
+
+```sh
+python3 parsarium.py build svg c nanosvg
+python3 parsarium.py run svg c nanosvg controls/svg/red-green.svg
+```

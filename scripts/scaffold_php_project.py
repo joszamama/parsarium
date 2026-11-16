@@ -99,6 +99,9 @@ def stage(format_name: str, package: str) -> Path:
         adapted = adapted.replace("        $parsed = \\uberchel\\MediaInfo::Get($path, false);",
                                   "        require_once __DIR__ . '/vendor/uberchel/mediainfo4php/mediainfo.php';\n"
                                   "        $parsed = \\uberchel\\MediaInfo::Get($path, false);")
+    if package == "fmonts/ffmpeg-bundle":
+        adapted = adapted.replace("/opt/homebrew/bin/ffmpeg", "/usr/bin/ffmpeg")
+        adapted = adapted.replace("/opt/homebrew/bin/ffprobe", "/usr/bin/ffprobe")
     if package == "gufy/pdftohtml-php":
         adapted = adapted.replace("/opt/homebrew/bin/pdfinfo", "/usr/bin/pdfinfo")
         adapted = adapted.replace("/opt/homebrew/bin/pdftohtml", "/usr/bin/pdftohtml")
@@ -197,6 +200,8 @@ $config->setMaxLen(1 << 20);
     }.get(format_name, "")
     if package == "maximal/audio-waveform":
         runtime_extra += " sox"
+    if format_name == "ascii_pnm" and package == "php-ffmpeg/php-ffmpeg":
+        runtime_extra += " ffmpeg"
     runtime_env = ("ENV PARSARIUM_RSVG_CONVERT=/usr/bin/rsvg-convert\n"
                    if format_name == "svg" else "")
     extra_runtime_files = ("COPY pyrex/mediainfo_oldxml.sh /work/pyrex/mediainfo_oldxml.sh\n"

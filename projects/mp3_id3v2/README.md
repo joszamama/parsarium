@@ -5,9 +5,11 @@
 ## Targets
 
 - [dr_libs / C](c/dr_libs/README.md)
+- [libsndfile / C](c/libsndfile/README.md)
 - [miniaudio / C](c/miniaudio/README.md)
 - [taglib / C](c/taglib/README.md)
 - [dr_libs / C++](cpp/dr_libs/README.md)
+- [libsndfile / C++](cpp/libsndfile/README.md)
 - [miniaudio / C++](cpp/miniaudio/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [github.com/ascherkus/go-id3/src/id3 / Go](go/github_com_ascherkus_go_id3_src_id3/README.md)

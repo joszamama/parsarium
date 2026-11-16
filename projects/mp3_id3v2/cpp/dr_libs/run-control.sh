@@ -9,8 +9,7 @@ python3 - <<'PY'
 import json
 from pathlib import Path
 observed = json.loads(Path('/coverage/observed.json').read_text())
-expected = {'sample_rate': 8000, 'channels': 1, 'decoded_frames': 1,
-            'id3v2_bytes': 101}
+expected = {'sample_rate': 8000, 'channels': 1, 'decoded_frames': 1, 'id3v2_bytes': 101}
 if observed != expected:
     raise SystemExit(f'control mismatch: {observed}')
 files = json.loads(Path('/coverage/coverage.json').read_text())['data'][0]['files']
