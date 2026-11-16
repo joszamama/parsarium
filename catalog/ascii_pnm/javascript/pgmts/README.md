@@ -24,6 +24,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/javascript/pgmts/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm javascript pgmts
+python3 parsarium.py run ascii_pnm javascript pgmts controls/ascii_pnm/black-white.pgm
+```

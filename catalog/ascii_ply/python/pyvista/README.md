@@ -28,6 +28,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/python/pyvista/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply python pyvista
+python3 parsarium.py run ascii_ply python pyvista controls/ascii_ply/triangle.ply
+```
