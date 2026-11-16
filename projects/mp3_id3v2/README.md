@@ -6,6 +6,7 @@
 
 - [dr_libs / C](c/dr_libs/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
+- [libid3tag / C](c/libid3tag/README.md)
 - [libsndfile / C](c/libsndfile/README.md)
 - [miniaudio / C](c/miniaudio/README.md)
 - [sdl2_sound / C](c/sdl2_sound/README.md)
@@ -13,6 +14,7 @@
 - [taglib / C](c/taglib/README.md)
 - [dr_libs / C++](cpp/dr_libs/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
+- [libid3tag / C++](cpp/libid3tag/README.md)
 - [libsndfile / C++](cpp/libsndfile/README.md)
 - [miniaudio / C++](cpp/miniaudio/README.md)
 - [sdl2_sound / C++](cpp/sdl2_sound/README.md)

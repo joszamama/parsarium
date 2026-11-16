@@ -21,6 +21,11 @@
 
 The same C ID3v2 parser serves C and C++ call sites. Its API normalizes the input 2.3 tag to internal major version 4; it does not decode MPEG audio frames.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/libid3tag/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c libid3tag
+python3 parsarium.py run mp3_id3v2 c libid3tag controls/mp3_id3v2/tone-tags.mp3
+```

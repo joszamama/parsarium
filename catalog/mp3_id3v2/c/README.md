@@ -1,6 +1,6 @@
 # MP3 with ID3v2 / C
 
-20 verified third-party API paths; 7 have verified Docker harnesses.
+20 verified third-party API paths; 8 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/c/mp3_id3v2/standard.json)
 
@@ -9,7 +9,7 @@
 - [taglib](taglib/README.md) — Docker harness ready
 - [mpg123](mpg123/README.md) — verified API path
 - [ffmpeg](ffmpeg/README.md) — Docker harness ready
-- [libid3tag](libid3tag/README.md) — verified API path
+- [libid3tag](libid3tag/README.md) — Docker harness ready
 - [id3lib](id3lib/README.md) — verified API path
 - [libsndfile](libsndfile/README.md) — Docker harness ready
 - [libmediainfo](libmediainfo/README.md) — verified API path
