@@ -1,12 +1,12 @@
 # MP3 with ID3v2 / JavaScript
 
-24 verified third-party API paths; 0 have verified Docker harnesses.
+24 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/javascript/mp3_id3v2/standard.json)
 
 ## Third-party parsers
 
-- [music-metadata](music-metadata/README.md) — verified API path
+- [music-metadata](music-metadata/README.md) — Docker harness ready
 - [mediainfo.js](mediainfo-js/README.md) — verified API path
 - [jsmediatags](jsmediatags/README.md) — verified API path
 - [@dantheman827/taglib-ts](dantheman827-taglib-ts/README.md) — verified API path

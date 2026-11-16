@@ -1,12 +1,12 @@
 # SVG / Python
 
-20 verified third-party API paths; 0 have verified Docker harnesses.
+20 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/svg/ranking.md) · [standard API inventory](../../../data/python/svg/standard.json)
 
 ## Third-party parsers
 
-- [CairoSVG](cairosvg/README.md) — verified API path
+- [CairoSVG](cairosvg/README.md) — Docker harness ready
 - [svglib](svglib/README.md) — verified API path
 - [svgutils](svgutils/README.md) — verified API path
 - [svgpathtools](svgpathtools/README.md) — verified API path

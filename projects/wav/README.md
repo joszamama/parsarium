@@ -87,6 +87,7 @@
 - [v47-jaffree / Java](java/v47_jaffree/README.md)
 - [vlcj-info / Java](java/vlcj_info/README.md)
 - [wavfile / Java](java/wavfile/README.md)
+- [music-metadata / JavaScript](javascript/music_metadata/README.md)
 - [audiostreamify/hvap / PHP](php/audiostreamify_hvap/README.md)
 - [bpmfinder/bpm-finder / PHP](php/bpmfinder_bpm_finder/README.md)
 - [buggedcom/phpvideotoolkit / PHP](php/buggedcom_phpvideotoolkit/README.md)

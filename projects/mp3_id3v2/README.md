@@ -81,6 +81,7 @@
 - [tika-audiovideo / Java](java/tika_audiovideo/README.md)
 - [v47-jaffree / Java](java/v47_jaffree/README.md)
 - [vlcj-info / Java](java/vlcj_info/README.md)
+- [music-metadata / JavaScript](javascript/music_metadata/README.md)
 - [audiostreamify/hvap / PHP](php/audiostreamify_hvap/README.md)
 - [buggedcom/phpvideotoolkit / PHP](php/buggedcom_phpvideotoolkit/README.md)
 - [christophwurst/id3parser / PHP](php/christophwurst_id3parser/README.md)

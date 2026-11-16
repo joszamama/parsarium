@@ -1,12 +1,12 @@
 # ZIP / Python
 
-20 verified third-party API paths; 0 have verified Docker harnesses.
+20 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/zip/ranking.md) · [standard API inventory](../../../data/python/zip/standard.json)
 
 ## Third-party parsers
 
-- [pyzipper](pyzipper/README.md) — verified API path
+- [pyzipper](pyzipper/README.md) — Docker harness ready
 - [zipfile-zstd](zipfile-zstd/README.md) — verified API path
 - [zipp](zipp/README.md) — verified API path
 - [fsspec](fsspec/README.md) — verified API path

@@ -1,12 +1,12 @@
 # WAV / JavaScript
 
-22 verified third-party API paths; 0 have verified Docker harnesses.
+22 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/wav/ranking.md) · [standard API inventory](../../../data/javascript/wav/standard.json)
 
 ## Third-party parsers
 
-- [music-metadata](music-metadata/README.md) — verified API path
+- [music-metadata](music-metadata/README.md) — Docker harness ready
 - [audio-decode](audio-decode-774b86ab/README.md) — verified API path
 - [wavefile](wavefile/README.md) — verified API path
 - [node-wav](node-wav/README.md) — verified API path

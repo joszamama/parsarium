@@ -1,12 +1,12 @@
 # ZIP / JavaScript
 
-21 verified third-party API paths; 0 have verified Docker harnesses.
+21 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/zip/ranking.md) · [standard API inventory](../../../data/javascript/zip/standard.json)
 
 ## Third-party parsers
 
-- [jszip](jszip/README.md) — verified API path
+- [jszip](jszip/README.md) — Docker harness ready
 - [adm-zip](adm-zip/README.md) — verified API path
 - [yauzl](yauzl/README.md) — verified API path
 - [unzipper](unzipper/README.md) — verified API path

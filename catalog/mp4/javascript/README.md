@@ -1,12 +1,12 @@
 # MP4 / JavaScript
 
-20 verified third-party API paths; 0 have verified Docker harnesses.
+20 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/mp4/ranking.md) · [standard API inventory](../../../data/javascript/mp4/standard.json)
 
 ## Third-party parsers
 
-- [music-metadata](music-metadata/README.md) — verified API path
+- [music-metadata](music-metadata/README.md) — Docker harness ready
 - [mediainfo.js](mediainfo-js/README.md) — verified API path
 - [codem-isoboxer](codem-isoboxer/README.md) — verified API path
 - [mp4box](mp4box/README.md) — verified API path

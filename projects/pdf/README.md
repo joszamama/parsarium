@@ -54,6 +54,7 @@
 - [tess4j-pdfbox / Java](java/tess4j_pdfbox/README.md)
 - [tika-pdf / Java](java/tika_pdf/README.md)
 - [verapdf-parser / Java](java/verapdf_parser/README.md)
+- [pdfjs-dist / JavaScript](javascript/pdfjs_dist/README.md)
 - [andreaventuri/tcpdi / PHP](php/andreaventuri_tcpdi/README.md)
 - [asika/pdf2text / PHP](php/asika_pdf2text/README.md)
 - [gufy/pdftohtml-php / PHP](php/gufy_pdftohtml_php/README.md)

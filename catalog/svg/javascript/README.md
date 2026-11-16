@@ -1,12 +1,12 @@
 # SVG / JavaScript
 
-22 verified third-party API paths; 0 have verified Docker harnesses.
+22 verified third-party API paths; 1 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/svg/ranking.md) · [standard API inventory](../../../data/javascript/svg/standard.json)
 
 ## Third-party parsers
 
-- [sharp](sharp/README.md) — verified API path
+- [sharp](sharp/README.md) — Docker harness ready
 - [image-size](image-size/README.md) — verified API path
 - [probe-image-size](probe-image-size/README.md) — verified API path
 - [skia-canvas](skia-canvas/README.md) — verified API path

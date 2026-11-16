@@ -54,6 +54,7 @@
 - [tika-mp4 / Java](java/tika_mp4/README.md)
 - [v47-jaffree / Java](java/v47_jaffree/README.md)
 - [vlcj-info / Java](java/vlcj_info/README.md)
+- [music-metadata / JavaScript](javascript/music_metadata/README.md)
 - [aminyazdanpanah/php-ffmpeg-video-streaming / PHP](php/aminyazdanpanah_php_ffmpeg_video_streaming/README.md)
 - [audiostreamify/hvap / PHP](php/audiostreamify_hvap/README.md)
 - [buggedcom/phpvideotoolkit / PHP](php/buggedcom_phpvideotoolkit/README.md)
