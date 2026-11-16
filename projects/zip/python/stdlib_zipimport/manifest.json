@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "zip",
+  "ecosystem": "python",
+  "package": "zipimport.zipimporter",
+  "release": "3.13.1",
+  "api": "zipimport.zipimporter",
+  "runtime": "CPython 3.13.1 standard library",
+  "standard_inventory": "data/python/zip/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "ec9f157ff6d4ebd26a6fd1715247578068b5af2799d07ecf06f2b531a5605e13",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "f8a9f51ce8369026e8eb7b7174835e8c4c85a1a6db5d9add36c15100779d2a39",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "python@sha256:4888fbac5737c749d34214356d2350ec0faa1c9df871fec5fe420d38085b0e7d",
+  "platform": "linux/amd64",
+  "control": "controls/zip/hello-module.zip",
+  "control_sha256": "37860a2daf54bd14b9a8c764d298471478208e557a57421ecf6b6ac5c1f2d6dd",
+  "expected_output": {
+    "source": "message = 'parsarium'\n"
+  },
+  "harness": "harness.py",
+  "coverage": "Python line tracing of the pinned CPython frozen zipimport module mapped to its matching zipimport.py source; Atheris harness instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/usr/local/lib/python3.13/zipimport.py",
+  "format_specific_coverage_file_suffix": "/zipimport.py"
+}

@@ -142,6 +142,7 @@
 - [zipfile36 / Python](python/zipfile36/README.md)
 - [zipfile37 / Python](python/zipfile37/README.md)
 - [zipfile38 / Python](python/zipfile38/README.md)
+- [zipimport.zipimporter / Python](python/stdlib_zipimport/README.md)
 - [zipmonkey / Python](python/zipmonkey/README.md)
 - [zipp / Python](python/zipp/README.md)
 - [archive-core / Rust](rust/archive_core/README.md)
