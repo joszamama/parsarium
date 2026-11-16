@@ -28,10 +28,10 @@ JAVA25_BASE = "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380e
 def dockerfile(base_image: str, platform: str, relative: Path, prefix: str,
                ecosystem: str, parse_function: str | None,
                fuzz_entry: str | None, java_environment: dict[str, str],
-               afl_package: str) -> str:
+               afl_package: str, java_trace_name: str = "java_trace.py") -> str:
     overlay = f"fuzzing/afl-native/{relative.as_posix()}"
     trace_files = ({"go": ["go_trace.py"],
-                    "java": ["JavaCase.java", "java_trace.py"],
+                    "java": ["JavaCase.java", java_trace_name],
                     "javascript": ["javascript_child.js", "javascript_trace.js"],
                     "php": ["php_trace.php"]}[ecosystem])
     copies = "".join(f"COPY fuzzing/afl-bridge/{name} /work/{name if name == 'JavaCase.java' else 'afl_' + name}\n"
@@ -76,10 +76,13 @@ def build_one(relative: Path) -> dict:
     overlay.mkdir(parents=True, exist_ok=True)
     parse_function = None
     java_environment = {}
+    java_trace_name = "java_trace.py"
     if ecosystem == "go":
         trace_command = 'python3 /work/afl_go_trace.py'
         bridge_names = ("afl_proxy.c", "go_trace.py")
     elif ecosystem == "java":
+        if manifest.get("kind") == "standard":
+            java_trace_name = "java_runtime_trace.py"
         args = manifest["fuzz_smoke_args"]
         classpath = next(arg.removeprefix("--cp=") for arg in args if arg.startswith("--cp="))
         target = next(arg.removeprefix("--target_class=") for arg in args
@@ -97,8 +100,8 @@ def build_one(relative: Path) -> dict:
             "PARSARIUM_PARSER_JAR": extract(r"--classfiles\s+(\S+)"),
             "PARSARIUM_PARSER_SOURCES": extract(r"--sourcefiles\s+(\S+)"),
         }
-        trace_command = 'python3 /work/afl_java_trace.py'
-        bridge_names = ("afl_proxy.c", "JavaCase.java", "java_trace.py")
+        trace_command = f'python3 /work/afl_{java_trace_name}'
+        bridge_names = ("afl_proxy.c", "JavaCase.java", java_trace_name)
     elif ecosystem == "javascript":
         trace_command = 'node /work/afl_javascript_trace.js'
         bridge_names = ("afl_proxy.c", "javascript_child.js", "javascript_trace.js")
@@ -118,7 +121,7 @@ def build_one(relative: Path) -> dict:
     (overlay / "Dockerfile").write_text(
         dockerfile(base_image, manifest["platform"], relative, manifest["coverage_subject_prefix"],
                    ecosystem, parse_function, manifest.get("fuzz_entry"), java_environment,
-                   afl_package)
+                   afl_package, java_trace_name)
     )
     image = f"parsarium-afl/{relative.parts[0]}-{ecosystem}-{relative.parts[2]}:local"
     print(f"Building {image}", flush=True)

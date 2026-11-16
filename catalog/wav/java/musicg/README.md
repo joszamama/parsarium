@@ -21,6 +21,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/java/musicg/README.md)
+
+```sh
+python3 parsarium.py build wav java musicg
+python3 parsarium.py run wav java musicg controls/wav/256-samples.wav
+```

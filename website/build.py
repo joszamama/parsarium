@@ -7,8 +7,12 @@ import argparse
 import hashlib
 import json
 import shutil
+import sys
 from collections import Counter
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+from audit_projects import fully_runnable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,7 +69,7 @@ def build(output: Path) -> None:
         manifest = read_json(path)
         key = (manifest["format"], manifest["ecosystem"], manifest["package"], manifest["release"])
         manifests[key] = (path, manifest)
-        if manifest.get("kind") == "standard":
+        if manifest.get("kind") == "standard" and fully_runnable(path, manifest):
             standard_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
 
     parsers = []
@@ -131,7 +135,8 @@ def build(output: Path) -> None:
         inventory_path = ROOT / manifest["standard_inventory"]
         inventory = read_json(inventory_path)
         documented_api = next(
-            (api for api in inventory["verified_apis"] if api["api"] == manifest["api"]),
+            (api for api in inventory["verified_apis"]
+             if (api.get("api") or api.get("name") or api.get("input_api")) == manifest["api"]),
             None,
         )
         if documented_api is None:

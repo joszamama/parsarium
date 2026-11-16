@@ -19,7 +19,7 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
     match args[1].as_str() {
         "async_zip" => {
             #[allow(deprecated)]
-            pollster::block_on(async {
+            return pollster::block_on(async {
                 let reader = upstream_async_zip::base::read::mem::ZipFileReader::new(bytes).await?;
                 let entry = reader.file().entries().first().ok_or("no ZIP entry")?;
                 let name = entry.filename().as_str()?.to_string();
@@ -27,9 +27,8 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
                 let mut content = String::new();
                 futures_lite::io::AsyncReadExt::read_to_string(
                     &mut reader.reader_with_entry(0).await?, &mut content).await?;
-                return Ok(output(&name, Some(&content), size));
-                Ok::<(), Box<dyn Error>>(())
-            })?;
+                Ok::<serde_json::Value, Box<dyn Error>>(output(&name, Some(&content), size))
+            });
         }
         other => return Err(format!("unknown ZIP package: {other}").into()),
     }

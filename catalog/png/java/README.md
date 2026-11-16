@@ -1,6 +1,6 @@
 # PNG / Java
 
-20 verified third-party API paths; 13 have verified Docker harnesses.
+20 verified third-party API paths; 16 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/png/ranking.md) · [standard API inventory](../../../data/java/png/standard.json)
 
@@ -22,10 +22,10 @@
 - [openpdf](openpdf/README.md) — Docker harness ready
 - [itext-io](itext-io/README.md) — Docker harness ready
 - [lwjgl-stb](lwjgl-stb/README.md) — verified API path
-- [tika-image](tika-image/README.md) — verified API path
-- [xmlgraphics-commons](xmlgraphics-commons/README.md) — verified API path
+- [tika-image](tika-image/README.md) — Docker harness ready
+- [xmlgraphics-commons](xmlgraphics-commons/README.md) — Docker harness ready
 - [javafx-graphics](javafx-graphics/README.md) — verified API path
-- [openpnp-opencv](openpnp-opencv/README.md) — verified API path
+- [openpnp-opencv](openpnp-opencv/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

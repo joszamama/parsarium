@@ -1,8 +1,8 @@
 # AudioSystem.getAudioInputStream(File) — WAV / Java
 
-- **Runtime:** OpenJDK 25, Java SE 25 API inventory
+- **Runtime:** Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop
 - **Input API:** `AudioSystem.getAudioInputStream(File)`
-- **Official documentation:** [reference](https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html)
+- **Official documentation:** [reference](https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html)
 - **Valid control:** [`controls/wav/256-samples.wav`](../../../../../controls/wav/256-samples.wav)
 - **Inventory and verification:** [standard API record](../../../../../data/java/wav/standard.json) · [saved result](../../../../../data/java/wav/verification.json)
 
@@ -19,6 +19,9 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build wav java jdk_audioinputstream
+python3 parsarium.py run wav java jdk_audioinputstream controls/wav/256-samples.wav
+```

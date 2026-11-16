@@ -20,6 +20,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/java/red5_io/README.md)
+
+```sh
+python3 parsarium.py build mp4 java red5_io
+python3 parsarium.py run mp4 java red5_io controls/mp4/red-av-3s.mp4
+```

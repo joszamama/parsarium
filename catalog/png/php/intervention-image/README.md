@@ -20,6 +20,11 @@
 
 This package path delegates PNG decoding to the bundled PHP GD extension.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/php/intervention_image/README.md)
+
+```sh
+python3 parsarium.py build png php intervention_image
+python3 parsarium.py run png php intervention_image controls/png/red-green.png
+```

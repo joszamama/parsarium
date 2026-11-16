@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/java/jhove_modules/README.md)
+
+```sh
+python3 parsarium.py build wav java jhove_modules
+python3 parsarium.py run wav java jhove_modules controls/wav/256-samples.wav
+```

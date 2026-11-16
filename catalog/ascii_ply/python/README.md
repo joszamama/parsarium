@@ -1,6 +1,6 @@
 # ASCII PLY / Python
 
-21 verified third-party API paths; 13 have verified Docker harnesses.
+21 verified third-party API paths; 15 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/ascii_ply/ranking.md) · [standard API inventory](../../../data/python/ascii_ply/standard.json)
 
@@ -9,7 +9,7 @@
 - [plyfile](plyfile/README.md) — Docker harness ready
 - [trimesh](trimesh/README.md) — Docker harness ready
 - [meshio](meshio/README.md) — Docker harness ready
-- [pyntcloud](pyntcloud/README.md) — verified API path
+- [pyntcloud](pyntcloud/README.md) — Docker harness ready
 - [pyminiply](pyminiply/README.md) — verified API path
 - [pyvista-miniply](pyvista-miniply/README.md) — Docker harness ready
 - [polyxios](polyxios/README.md) — Docker harness ready
@@ -22,7 +22,7 @@
 - [pymeshlab](pymeshlab/README.md) — verified API path
 - [point-cloud-utils](point-cloud-utils/README.md) — verified API path
 - [vedo](vedo/README.md) — Docker harness ready
-- [assimp-py](assimp-py/README.md) — verified API path
+- [assimp-py](assimp-py/README.md) — Docker harness ready
 - [libigl](libigl/README.md) — Docker harness ready
 - [openmesh](openmesh/README.md) — verified API path
 - [numpy-stl](numpy-stl/README.md) — Docker harness ready

@@ -32,6 +32,11 @@
 
 Independent PNG parser with a bundled miniz DEFLATE implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/pngle/README.md)
+
+```sh
+python3 parsarium.py build png c pngle
+python3 parsarium.py run png c pngle controls/png/red-green.png
+```

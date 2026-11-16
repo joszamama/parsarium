@@ -19,6 +19,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/java/transcoder_core/README.md)
+
+```sh
+python3 parsarium.py build svg java transcoder_core
+python3 parsarium.py run svg java transcoder_core controls/svg/red-green.svg
+```

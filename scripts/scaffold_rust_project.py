@@ -62,6 +62,13 @@ def stage(format_name: str, package: str) -> Path:
             source = re.sub(r"(?m)^(\s*)(output(?:_entry)?)\((.*)\);$",
                             r"\1return Ok(\2(\3));", source)
             source = source.replace("    Ok(())\n}", '    Err("parser produced no result".into())\n}', 1)
+            if format_name == "zip" and package in {"async_zip", "astral_async_zip"}:
+                source = source.replace("pollster::block_on(async {", "return pollster::block_on(async {", 1)
+                source = source.replace(
+                    "return Ok(output(&name, Some(&content), size));\n"
+                    "                Ok::<(), Box<dyn Error>>(())\n            })?;",
+                    "Ok::<serde_json::Value, Box<dyn Error>>(output(&name, Some(&content), size))\n"
+                    "            });", 1)
         if "fn parse_package(" not in source or '    println!("{output}");' in source:
             raise ValueError("could not transform cell main into parser function")
     else:
@@ -159,6 +166,11 @@ fuzz_target!(|data: &[u8]| {{ let _ = parse(data); }});
               if entry["name"] == crate_name and entry["version"] == parser["version"]]
     digest = crate["checksum"]
     crate_dir = f"{crate_name}-{parser['version']}"
+    coverage_crate = (f"threecrate-io-{parser['version']}"
+                      if format_name == "ascii_ply" and package == "threecrate"
+                      else "zip-1.3.1" if format_name == "zip" and package == "zip_next"
+                      else f"zpdf-parser-{parser['version']}" if format_name == "pdf" and package == "zpdf"
+                      else crate_dir)
     template = ROOT / "projects/mp4/rust/mp4"
     docker = (template / "Dockerfile").read_text()
     docker = docker.replace("mp4-0.14.0", crate_dir).replace(
@@ -169,8 +181,8 @@ fuzz_target!(|data: &[u8]| {{ let _ = parse(data); }});
     control_script = (template / "run-control.sh").read_text()
     control_script = re.sub(r"expected = \{.*?\}",
                             lambda _: f"expected = json.loads({repr(expected)})", control_script)
-    control_script = control_script.replace("/mp4-0.14.0/", f"/{crate_dir}/")
-    control_script = control_script.replace("mp4 crate", f"{crate_name} crate")
+    control_script = control_script.replace("/mp4-0.14.0/", f"/{coverage_crate}/")
+    control_script = control_script.replace("mp4 crate", f"{coverage_crate} crate")
     (destination / "run-control.sh").write_text(control_script)
     (destination / "source-lock.json").write_text(json.dumps({package: {
         "release": parser["version"], "source_sha256": digest}}, indent=2) + "\n")
@@ -184,8 +196,8 @@ fuzz_target!(|data: &[u8]| {{ let _ = parse(data); }});
                      "source_sha256": digest, "control": parser["control"],
                      "control_sha256": sha256(control.read_bytes()).hexdigest(),
                      "expected_output": parser["expected_output"],
-                     "coverage": f"Rust LLVM source coverage in {crate_name}; libFuzzer sanitizer counters",
-                     "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/" + crate_dir + "/"})
+                     "coverage": f"Rust LLVM source coverage in {coverage_crate}; libFuzzer sanitizer counters",
+                     "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/" + coverage_crate + "/"})
     (destination / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     return destination
 

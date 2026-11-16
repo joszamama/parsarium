@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/java/tika_audiovideo/README.md)
+
+```sh
+python3 parsarium.py build wav java tika_audiovideo
+python3 parsarium.py run wav java tika_audiovideo controls/wav/256-samples.wav
+```

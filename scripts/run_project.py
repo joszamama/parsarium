@@ -36,7 +36,8 @@ def main() -> None:
     assert (manifest["format"], manifest["ecosystem"]) == (args.format, args.ecosystem)
     if manifest.get("kind") == "standard":
         inventory = json.loads((ROOT / manifest["standard_inventory"]).read_text())
-        entry, = [item for item in inventory["verified_apis"] if item["api"] == manifest["api"]]
+        entry, = [item for item in inventory["verified_apis"]
+                  if (item.get("api") or item.get("name")) == manifest["api"]]
         assert entry["runtime"] == manifest["runtime"]
         assert entry["control"] == manifest["control"]
         assert entry["expected"] == manifest["expected_output"]

@@ -5,6 +5,7 @@
 ## Targets
 
 - [rply / C](c/rply/README.md)
+- [sply / C](c/sply/README.md)
 - [rply / C++](cpp/rply/README.md)
 - [github.com/EliCDavis/polyform/formats/ply / Go](go/polyform_ply/README.md)
 - [github.com/barnex/bruteray/tracer/objects/ply / Go](go/github_com_barnex_bruteray_tracer_objects_ply/README.md)
@@ -39,6 +40,7 @@
 - [threejs-ply-loader / JavaScript](javascript/threejs_ply_loader/README.md)
 - [collectiveaccess/providence / PHP](php/providence/README.md)
 - [magdev/php-assimp / PHP](php/magdev_php_assimp/README.md)
+- [assimp-py / Python](python/assimp_py/README.md)
 - [libigl / Python](python/libigl/README.md)
 - [meshio / Python](python/meshio/README.md)
 - [numpy-stl / Python](python/numpy_stl/README.md)
@@ -46,6 +48,7 @@
 - [plyfile / Python](python/plyfile/README.md)
 - [polyxios / Python](python/polyxios/README.md)
 - [py3d / Python](python/py3d/README.md)
+- [pyntcloud / Python](python/pyntcloud/README.md)
 - [pyvista / Python](python/pyvista/README.md)
 - [pyvista-miniply / Python](python/pyvista_miniply/README.md)
 - [shapeviz / Python](python/shapeviz/README.md)

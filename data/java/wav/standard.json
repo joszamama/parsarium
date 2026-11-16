@@ -1,42 +1,66 @@
 {
   "ecosystem": "Java",
   "format": "WAV",
-  "runtime": "OpenJDK 25, Java SE 25 API inventory",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
   "status": "verified",
   "verified_apis": [
     {
       "api": "AudioSystem.getAudioFileFormat(File)",
-      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
       "family": "OpenJDK Java Sound WAVE file reader",
       "control": "controls/wav/256-samples.wav",
-      "expected_output": {"type": "WAVE", "sample_rate": 8000, "channels": 1, "frames": 256},
-      "adapter_mode": "audio_file_format"
+      "expected_output": {
+        "type": "WAVE",
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256
+      },
+      "adapter_mode": "audio_file_format",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
+      "expected": {
+        "type": "WAVE",
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256
+      }
     },
     {
       "api": "AudioSystem.getAudioInputStream(File)",
-      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
+      "documentation": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
       "family": "OpenJDK Java Sound WAVE file reader",
       "control": "controls/wav/256-samples.wav",
-      "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256, "sample_bytes": 8},
-      "adapter_mode": "audio_input_stream"
+      "expected_output": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256,
+        "sample_bytes": 8
+      },
+      "adapter_mode": "audio_input_stream",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
+      "expected": {
+        "sample_rate": 8000,
+        "channels": 1,
+        "frames": 256,
+        "sample_bytes": 8
+      }
     }
   ],
   "official_documentation_checked": [
     {
       "api": "AudioSystem local File and InputStream overloads",
-      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html",
       "finding": "The getAudioFileFormat and getAudioInputStream overloads consume local files or streams and return parsed audio properties."
     },
     {
       "api": "AudioFileFormat.Type.WAVE",
-      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioFileFormat.Type.html",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioFileFormat.Type.html",
       "finding": "Java SE documents a WAVE file type."
     },
     {
       "api": "AudioInputStream",
-      "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioInputStream.html",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/sound/sampled/AudioInputStream.html",
       "finding": "Its format, frame length and sample bytes are observable after AudioSystem opens the WAV file."
     }
   ],
-  "limit": "Two verified public API paths share the same OpenJDK Java Sound WAVE reader family. They are runtime entries, not third-party ranked packages. Verification compiles the adapter with no Maven or external classpath and runs it on OpenJDK 25."
+  "limit": "Two verified public API paths share the same OpenJDK Java Sound WAVE reader family. They are runtime entries, not third-party ranked packages. Verification compiles the adapter with no Maven or external classpath and runs it on OpenJDK 21.0.2."
 }

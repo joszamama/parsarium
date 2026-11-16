@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/java/tika_parser_pkg_module/README.md)
+
+```sh
+python3 parsarium.py build zip java tika_parser_pkg_module
+python3 parsarium.py run zip java tika_parser_pkg_module controls/zip/hello.zip
+```

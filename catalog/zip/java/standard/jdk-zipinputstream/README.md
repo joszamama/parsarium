@@ -1,6 +1,6 @@
 # jdk-zipinputstream — ZIP / Java
 
-- **Runtime:** Eclipse Temurin OpenJDK 21.0.2
+- **Runtime:** Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.base
 - **Input API:** `java.util.zip.ZipInputStream(InputStream); getNextEntry/readAllBytes`
 - **Official documentation:** [reference](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/zip/ZipInputStream.html)
 - **Valid control:** [`controls/zip/hello.zip`](../../../../../controls/zip/hello.zip)

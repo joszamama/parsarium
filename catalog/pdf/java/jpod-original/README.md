@@ -17,6 +17,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/java/jpod_original/README.md)
+
+```sh
+python3 parsarium.py build pdf java jpod_original
+python3 parsarium.py run pdf java jpod_original controls/pdf/one-page.pdf
+```

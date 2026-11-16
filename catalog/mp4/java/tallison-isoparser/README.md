@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/java/tallison_isoparser/README.md)
+
+```sh
+python3 parsarium.py build mp4 java tallison_isoparser
+python3 parsarium.py run mp4 java tallison_isoparser controls/mp4/red-av.mp4
+```

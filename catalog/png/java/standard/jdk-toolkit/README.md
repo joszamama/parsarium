@@ -1,6 +1,6 @@
 # jdk-toolkit — PNG / Java
 
-- **Runtime:** Eclipse Temurin OpenJDK 21.0.2
+- **Runtime:** Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop
 - **Input API:** `Toolkit.getDefaultToolkit().createImage(byte[])`
 - **Official documentation:** [reference](https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/java/awt/Toolkit.html)
 - **Valid control:** [`controls/png/red-green.png`](../../../../../controls/png/red-green.png)
@@ -18,6 +18,9 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build png java jdk_toolkit
+python3 parsarium.py run png java jdk_toolkit controls/png/red-green.png
+```

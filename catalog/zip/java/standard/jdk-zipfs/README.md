@@ -1,6 +1,6 @@
 # jdk-zipfs — ZIP / Java
 
-- **Runtime:** Eclipse Temurin OpenJDK 21.0.2
+- **Runtime:** Eclipse Temurin OpenJDK 21.0.2 linux/arm64 jdk.zipfs
 - **Input API:** `FileSystems.newFileSystem(Path, Map); Files.readAllBytes(archivePath)`
 - **Official documentation:** [reference](https://docs.oracle.com/en/java/javase/21/docs/api/jdk.zipfs/module-summary.html)
 - **Valid control:** [`controls/zip/hello.zip`](../../../../../controls/zip/hello.zip)
@@ -17,6 +17,9 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build zip java jdk_zipfs
+python3 parsarium.py run zip java jdk_zipfs controls/zip/hello.zip
+```

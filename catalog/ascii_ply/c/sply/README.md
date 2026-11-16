@@ -25,6 +25,11 @@
 
 SPly 1.2.0 is a separately tagged MIT library package with custom-I/O and locale changes, fully compatible with RPly; shares the RPly parser lineage and C callback API.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/sply/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c sply
+python3 parsarium.py run ascii_ply c sply controls/ascii_ply/triangle.ply
+```

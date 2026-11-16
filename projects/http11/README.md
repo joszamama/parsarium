@@ -89,6 +89,7 @@
 - [h11-mypyc / Python](python/h11_mypyc/README.md)
 - [h11pro / Python](python/h11pro/README.md)
 - [h11r / Python](python/h11r/README.md)
+- [h1parser / Python](python/h1parser/README.md)
 - [http-parse / Python](python/http_parse/README.md)
 - [http.client.HTTPConnection.getresponse / Python](python/stdlib_http_response/README.md)
 - [http.client.parse_headers / Python](python/stdlib_http_headers/README.md)

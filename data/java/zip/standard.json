@@ -1,7 +1,7 @@
 {
   "ecosystem": "Java",
   "format": "ZIP",
-  "runtime": "Eclipse Temurin OpenJDK 21.0.2",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.base",
   "status": "verified",
   "verified_apis": [
     {
@@ -14,7 +14,13 @@
         "name": "hello.txt",
         "content_base64": "cGFyc2FyaXVtCg=="
       },
-      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry",
+      "api": "jdk-zipfile",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.base",
+      "expected": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      }
     },
     {
       "name": "jdk-zipinputstream",
@@ -62,7 +68,13 @@
         "name": "hello.txt",
         "content_base64": "cGFyc2FyaXVtCg=="
       },
-      "scope": "Valid ZIP archive with one DEFLATE-compressed entry"
+      "scope": "Valid ZIP archive with one DEFLATE-compressed entry",
+      "api": "jdk-zipfs",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 jdk.zipfs",
+      "expected": {
+        "name": "hello.txt",
+        "content_base64": "cGFyc2FyaXVtCg=="
+      }
     }
   ],
   "limit": "JarFile and JarInputStream are JAR-oriented subclasses that also parse this valid ordinary ZIP control. They share JDK ZIP parser families and are not separate third-party packages. Generic Files.readAllBytes is only the byte source for an actual ZIP parser."

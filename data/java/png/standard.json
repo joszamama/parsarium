@@ -1,7 +1,7 @@
 {
   "ecosystem": "Java",
   "format": "PNG",
-  "runtime": "Eclipse Temurin OpenJDK 21.0.2",
+  "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
   "status": "verified",
   "verified_apis": [
     {
@@ -15,7 +15,14 @@
         "height": 1,
         "pixels": "ffff0000,ff00ff00"
       },
-      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG",
+      "api": "jdk-imageio",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      }
     },
     {
       "name": "jdk-imagereader",
@@ -28,7 +35,14 @@
         "height": 1,
         "pixels": "ffff0000,ff00ff00"
       },
-      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG",
+      "api": "jdk-imagereader",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      }
     },
     {
       "name": "jdk-imageicon",
@@ -41,7 +55,14 @@
         "height": 1,
         "pixels": "ffff0000,ff00ff00"
       },
-      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG",
+      "api": "jdk-imageicon",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      }
     },
     {
       "name": "jdk-toolkit",
@@ -54,7 +75,14 @@
         "height": 1,
         "pixels": "ffff0000,ff00ff00"
       },
-      "scope": "RGBA pixels from a valid 2\u00d71 PNG"
+      "scope": "RGBA pixels from a valid 2\u00d71 PNG",
+      "api": "jdk-toolkit",
+      "runtime": "Eclipse Temurin OpenJDK 21.0.2 linux/arm64 java.desktop",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "pixels": "ffff0000,ff00ff00"
+      }
     }
   ],
   "limit": "ImageIO and ImageReader share the same JDK PNG plugin. ImageIcon and Toolkit use the AWT image loading path. All four are runtime APIs, not third-party packages; Files.readAllBytes only supplies bytes. This is a documented Java 21 PNG API inventory, not a claim that every possible wrapper API was enumerated.",

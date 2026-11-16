@@ -1,12 +1,12 @@
 # PNG / PHP
 
-20 verified third-party API paths; 19 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/png/ranking.md) · [standard API inventory](../../../data/php/png/standard.json)
 
 ## Third-party parsers
 
-- [intervention/image](intervention-image/README.md) — verified API path
+- [intervention/image](intervention-image/README.md) — Docker harness ready
 - [imagine/imagine](imagine-imagine/README.md) — Docker harness ready
 - [claviska/simpleimage](claviska-simpleimage/README.md) — Docker harness ready
 - [spatie/image](spatie-image/README.md) — Docker harness ready

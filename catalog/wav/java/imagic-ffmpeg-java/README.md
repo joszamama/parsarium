@@ -20,6 +20,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/java/imagic_ffmpeg_java/README.md)
+
+```sh
+python3 parsarium.py build wav java imagic_ffmpeg_java
+python3 parsarium.py run wav java imagic_ffmpeg_java controls/wav/256-samples.wav
+```

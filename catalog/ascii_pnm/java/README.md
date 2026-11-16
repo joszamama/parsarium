@@ -1,6 +1,6 @@
 # ASCII PNM / Java
 
-20 verified third-party API paths; 12 have verified Docker harnesses.
+20 verified third-party API paths; 14 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/ascii_pnm/ranking.md) · [standard API inventory](../../../data/java/ascii_pnm/standard.json)
 
@@ -24,8 +24,8 @@
 - [imagic-ffmpeg-java](imagic-ffmpeg-java/README.md) — Docker harness ready
 - [jave-core](jave-core/README.md) — verified API path
 - [lafa-imageio-pnm](lafa-imageio-pnm/README.md) — Docker harness ready
-- [ijp-imageio](ijp-imageio/README.md) — verified API path
-- [im4java](im4java/README.md) — verified API path
+- [ijp-imageio](ijp-imageio/README.md) — Docker harness ready
+- [im4java](im4java/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

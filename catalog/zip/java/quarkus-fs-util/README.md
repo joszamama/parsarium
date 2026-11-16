@@ -18,6 +18,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/java/quarkus_fs_util/README.md)
+
+```sh
+python3 parsarium.py build zip java quarkus_fs_util
+python3 parsarium.py run zip java quarkus_fs_util controls/zip/hello.zip
+```
