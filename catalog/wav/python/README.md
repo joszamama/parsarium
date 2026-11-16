@@ -1,31 +1,31 @@
 # WAV / Python
 
-21 verified third-party API paths; 3 have verified Docker harnesses.
+21 verified third-party API paths; 17 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/wav/ranking.md) · [standard API inventory](../../../data/python/wav/standard.json)
 
 ## Third-party parsers
 
-- [scipy](scipy/README.md) — verified API path
-- [soundfile](soundfile/README.md) — verified API path
-- [librosa](librosa/README.md) — verified API path
-- [audioread](audioread/README.md) — verified API path
-- [pydub](pydub/README.md) — verified API path
-- [miniaudio](miniaudio/README.md) — verified API path
-- [wavio](wavio/README.md) — verified API path
-- [wavfile](wavfile/README.md) — verified API path
+- [scipy](scipy/README.md) — Docker harness ready
+- [soundfile](soundfile/README.md) — Docker harness ready
+- [librosa](librosa/README.md) — Docker harness ready
+- [audioread](audioread/README.md) — Docker harness ready
+- [pydub](pydub/README.md) — Docker harness ready
+- [miniaudio](miniaudio/README.md) — Docker harness ready
+- [wavio](wavio/README.md) — Docker harness ready
+- [wavfile](wavfile/README.md) — Docker harness ready
 - [tinytag](tinytag/README.md) — verified API path
 - [mutagen](mutagen/README.md) — verified API path
-- [waveinfo](waveinfo/README.md) — verified API path
-- [audiomath](audiomath/README.md) — verified API path
+- [waveinfo](waveinfo/README.md) — Docker harness ready
+- [audiomath](audiomath/README.md) — Docker harness ready
 - [riffy](riffy/README.md) — verified API path
 - [pygame](pygame/README.md) — Docker harness ready
-- [av](av/README.md) — verified API path
-- [audiofile](audiofile/README.md) — verified API path
-- [pymediainfo](pymediainfo/README.md) — verified API path
+- [av](av/README.md) — Docker harness ready
+- [audiofile](audiofile/README.md) — Docker harness ready
+- [pymediainfo](pymediainfo/README.md) — Docker harness ready
 - [hachoir](hachoir/README.md) — verified API path
 - [pytaglib](pytaglib/README.md) — Docker harness ready
-- [audiolab](audiolab/README.md) — verified API path
+- [audiolab](audiolab/README.md) — Docker harness ready
 - [simpleaudio](simpleaudio/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
