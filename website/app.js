@@ -314,6 +314,19 @@ function initDemo() {
   });
   showDemoForFormat($("#format-filter").value || catalog.demos[0].format);
 }
+function initMobileMenu() {
+  const toggle = $("#mobile-menu-toggle");
+  const menu = $("#mobile-nav");
+  const close = () => { menu.hidden = true; toggle.setAttribute("aria-expanded", "false"); };
+  toggle.addEventListener("click", () => {
+    const open = menu.hidden;
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  menu.addEventListener("click", (event) => { if (event.target.closest("a")) close(); });
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
+  matchMedia("(min-width: 801px)").addEventListener("change", (event) => { if (event.matches) close(); });
+}
 async function start() {
   try {
     const requestedTarget = new URLSearchParams(location.search).get("target");
@@ -329,7 +342,7 @@ async function start() {
     $("#stat-formats").textContent = catalog.summary.formats;
     $("#stat-ecosystems").textContent = catalog.summary.ecosystems;
     $("#stat-runnable").textContent = catalog.summary.runnable;
-    renderFormats(); initAtlas(); initDemo(); initLab();
+    renderFormats(); initAtlas(); initDemo(); initLab(); initMobileMenu();
     if (requestedTarget && catalog.targets[requestedTarget]) renderTarget(requestedTarget);
     document.querySelectorAll("[data-copy]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy, button)));
     if (["#formats", "#atlas", "#specimen", "#lab", "#how-it-works"].includes(location.hash)) {
