@@ -6,6 +6,15 @@ Parsarium is a format-first catalog and target set for parser experiments. It ve
 
 The catalog selects **775 control-verified third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 74 of 80 reach ten, and the other six report the smaller supported count. Every selected path has a positive numeric adoption signal, though 48 use a separately labeled secondary source. The [curation record](data/curation/README.md) explains metrics, exclusions, and remaining uncertainty. The [current coverage report](data/projects-coverage.json) distinguishes fully verified harnesses from staged and pending paths; a catalog entry is runnable only when that report marks it verified.
 
+## Install
+
+```sh
+pip install parsarium
+parsarium list --format png
+```
+
+The package installs the `parsarium` command and a small Python API (`from parsarium import catalog`). On first use it downloads the snapshot of harnesses, controls, and catalog data for its version (about 19 MB), checks its SHA-256, and keeps it in your cache directory. Each package version pins one snapshot, so the version identifies an exact set of targets. `parsarium run-selection MANIFEST` runs a selection saved from the [bench](https://parsarium.com/bench/). Set `PARSARIUM_HOME` to a clone of this repository to use the clone instead of a download.
+
 ## Start here
 
 Requirements: Python 3.11+ and Docker with Linux amd64 and arm64 support for container runs. Catalog browsing requires only Python. Commands run from the repository root.
@@ -100,3 +109,15 @@ The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and re
 The [selection protocol](PROTOCOL.md) defines parser eligibility, ranking, stopping rules, and uncertainty. The [project guide](projects/README.md) describes the harness contract. `python3 scripts/validate_catalog.py` checks catalog data; `python3 scripts/audit_fuzzing.py` checks the committed harness and AFL++ receipts.
 
 The valid controls cover specific format subsets. A successful control does not establish support for every variant, security, or resource limits. Package paths that share an underlying parser are identified in the catalog. AFL++ feedback counts from different instrumentation methods are not comparable.
+
+## License
+
+Parsarium is licensed under the [Apache License 2.0](LICENSE). Each parser keeps its own license, recorded in the catalog.
+
+## Releasing the package
+
+`.github/workflows/release.yml` publishes on a version tag. It builds the snapshot from the tagged commit with `scripts/build_snapshot.py` (byte-reproducible), attaches it to a GitHub release, records its URL and SHA-256 in the wheel, smoke-tests the wheel, and uploads to PyPI with trusted publishing.
+
+1. Once: on PyPI, add a trusted publisher for project `parsarium`, owner `joszamama`, repository `parsarium`, workflow `release.yml`, environment `pypi`. On GitHub, create the `pypi` environment under Settings → Environments.
+2. Set `__version__` in `src/parsarium/__init__.py` (calendar versions, such as `2026.11.16`), commit, and push.
+3. Tag and push: `git tag v2026.11.16 && git push origin v2026.11.16`.

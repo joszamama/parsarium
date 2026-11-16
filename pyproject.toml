@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parsarium"
+dynamic = ["version"]
+description = "An open testbed of real parsers: pinned, verified, runnable targets for ten formats in eight languages."
+readme = "src/parsarium/README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "José Antonio Zamudio Amaya" }]
+keywords = ["fuzzing", "parsers", "benchmark", "security", "testing", "afl"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Security",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.urls]
+Homepage = "https://parsarium.com"
+Manual = "https://parsarium.com/manual/"
+Source = "https://github.com/joszamama/parsarium"
+
+[project.scripts]
+parsarium = "parsarium.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "parsarium.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+parsarium = ["_snapshot.json", "README.md"]
