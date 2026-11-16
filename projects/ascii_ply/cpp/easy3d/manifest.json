@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "easy3d",
+  "release": "2.6.1",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "e5b5355d042d997d65958c44b80073d37b8c3972bacbb97913e824a8597d9671",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "face": [0, 1, 2]},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of Easy3D SurfaceMeshIO PLY loader and bundled RPly 1.1.4",
+  "coverage_subject_prefix": "/work/source/easy3d/fileio/",
+  "format_specific_coverage_file_suffix": "/surface_mesh_io_ply.cpp",
+  "underlying_coverage_subject_prefix": "/work/source/3rd_party/rply/",
+  "underlying_format_specific_coverage_file_suffix": "/rply.c"
+}
