@@ -21,6 +21,11 @@
 
 Independent footprint-optimized ZIP reader with built-in DEFLATE; the C++ path compiles the same source and C API.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/lowzip/README.md)
+
+```sh
+python3 parsarium.py build zip c lowzip
+python3 parsarium.py run zip c lowzip controls/zip/hello.zip
+```

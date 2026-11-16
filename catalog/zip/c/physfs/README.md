@@ -21,6 +21,11 @@
 
 PhysicsFS provides a distinct virtual filesystem package API with an internal ZIP archive handler; its C++ call site reuses this C library.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/physfs/README.md)
+
+```sh
+python3 parsarium.py build zip c physfs
+python3 parsarium.py run zip c physfs controls/zip/hello.zip
+```

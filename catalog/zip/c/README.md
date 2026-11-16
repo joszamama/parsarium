@@ -1,6 +1,6 @@
 # ZIP / C
 
-20 verified third-party API paths; 7 have verified Docker harnesses.
+20 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/zip/ranking.md) · [standard API inventory](../../../data/c/zip/standard.json)
 
@@ -15,12 +15,12 @@
 - [kuba-zip](kuba-zip/README.md) — Docker harness ready
 - [zziplib](zziplib/README.md) — Docker harness ready
 - [unarr](unarr/README.md) — Docker harness ready
-- [physfs](physfs/README.md) — verified API path
-- [lowzip](lowzip/README.md) — verified API path
+- [physfs](physfs/README.md) — Docker harness ready
+- [lowzip](lowzip/README.md) — Docker harness ready
 - [unziplib](unziplib/README.md) — verified API path
 - [libc7zip](libc7zip/README.md) — verified API path
 - [infozip-unzip](infozip-unzip/README.md) — verified API path
-- [junzip](junzip/README.md) — verified API path
+- [junzip](junzip/README.md) — Docker harness ready
 - [sqlite](sqlite/README.md) — verified API path
 - [zipc](zipc/README.md) — verified API path
 - [libtfs](libtfs/README.md) — verified API path

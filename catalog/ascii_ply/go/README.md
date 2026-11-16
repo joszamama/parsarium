@@ -1,6 +1,6 @@
 # ASCII PLY / Go
 
-21 verified third-party API paths; 13 have verified Docker harnesses.
+21 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_ply/ranking.md) · [standard API inventory](../../../data/go/ascii_ply/standard.json)
 
@@ -13,14 +13,14 @@
 - [nimbleterminal.dev/nt3d/mesh](nimbleterminal-dev-nt3d-mesh/README.md) — Docker harness ready
 - [github.com/malcolmston/opencv/surface_matching](github-com-malcolmston-opencv-surface-matching/README.md) — verified API path
 - [github.com/borud/pointcloud](github-com-borud-pointcloud/README.md) — Docker harness ready
-- [github.com/cobaltgray/go-plyfile](github-com-cobaltgray-go-plyfile/README.md) — verified API path
-- [github.com/ecopia-map/go-plyfile](github-com-ecopia-map-go-plyfile/README.md) — verified API path
-- [github.com/rishabh-bector/assimp-golang](github-com-rishabh-bector-assimp-golang/README.md) — verified API path
-- [github.com/bloeys/assimp-go/asig](github-com-bloeys-assimp-go-asig/README.md) — verified API path
-- [github.com/ajermaky/assimp-go/v2/asig](github-com-ajermaky-assimp-go-v2-asig/README.md) — verified API path
+- [github.com/cobaltgray/go-plyfile](github-com-cobaltgray-go-plyfile/README.md) — Docker harness ready
+- [github.com/ecopia-map/go-plyfile](github-com-ecopia-map-go-plyfile/README.md) — Docker harness ready
+- [github.com/rishabh-bector/assimp-golang](github-com-rishabh-bector-assimp-golang/README.md) — Docker harness ready
+- [github.com/bloeys/assimp-go/asig](github-com-bloeys-assimp-go-asig/README.md) — Docker harness ready
+- [github.com/ajermaky/assimp-go/v2/asig](github-com-ajermaky-assimp-go-v2-asig/README.md) — Docker harness ready
 - [github.com/unixpickle/model3d/fileformats](github-com-unixpickle-model3d-fileformats/README.md) — Docker harness ready
-- [github.com/ARF-DEV/assimp-go/asig](github-com-arf-dev-assimp-go-asig/README.md) — verified API path
-- [github.com/BhaumikTalwar/assimp-go/asig](github-com-bhaumiktalwar-assimp-go-asig/README.md) — verified API path
+- [github.com/ARF-DEV/assimp-go/asig](github-com-arf-dev-assimp-go-asig/README.md) — Docker harness ready
+- [github.com/BhaumikTalwar/assimp-go/asig](github-com-bhaumiktalwar-assimp-go-asig/README.md) — Docker harness ready
 - [github.com/pydpll/dedalo/obj](github-com-pydpll-dedalo-obj/README.md) — Docker harness ready
 - [github.com/barnex/bruteray/tracer/objects/ply](github-com-barnex-bruteray-tracer-objects-ply/README.md) — Docker harness ready
 - [github.com/NOT-REAL-GAMES/assimpgo](github-com-not-real-games-assimpgo/README.md) — Docker harness ready

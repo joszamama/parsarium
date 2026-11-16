@@ -10,7 +10,7 @@ struct pixel_capture {
 
 static void capture(pngle_t *pngle, uint32_t x, uint32_t y, uint32_t w,
                     uint32_t h, const uint8_t rgba[4]) {
-    struct pixel_capture *state = pngle_get_user_data(pngle);
+    struct pixel_capture *state = (struct pixel_capture *)pngle_get_user_data(pngle);
     if (y != 0 || w != 1 || h != 1 || x > 1) return;
     memcpy(x == 0 ? state->result->first : state->result->second, rgba, 4);
     state->seen |= 1u << x;

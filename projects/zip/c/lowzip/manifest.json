@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "c",
+  "package": "lowzip",
+  "release": "1.0.1",
+  "catalog_parser": "data/c/zip/parsers.json",
+  "source_lock": "data/c/zip/source-lock.json",
+  "source_sha256": "a8b41c63cacc508291421a973c59f0d58fc3c455da206c654c445df5621f4392",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": 1,
+    "name": "hello.txt",
+    "content": "parsarium\n"
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in Lowzip ZIP parser reached by callback byte-input harness",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/lowzip.c"
+}

@@ -16,9 +16,13 @@ func main() {
 	}
 	name, path := os.Args[1], os.Args[2]
 	data, err := os.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
+	if err != nil { panic(err) }
+	copy, err := os.CreateTemp("", "parsarium-*.ply")
+	if err != nil { panic(err) }
+	defer os.Remove(copy.Name())
+	if _, err := copy.Write(data); err != nil { copy.Close(); panic(err) }
+	if err := copy.Close(); err != nil { panic(err) }
+	path = copy.Name()
 	output := map[string]any{}
 	switch name {
 

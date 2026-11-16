@@ -21,6 +21,11 @@
 
 Distinct C++ package API built from pinned source; shares the libzip ZIP reader and installed libzip 1.12.1 with the libzip path.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/libzippp/README.md)
+
+```sh
+python3 parsarium.py build zip cpp libzippp
+python3 parsarium.py run zip cpp libzippp controls/zip/hello.zip
+```

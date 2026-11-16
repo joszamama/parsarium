@@ -21,6 +21,11 @@
 
 JUnzip parses ZIP end, central and local records itself, then delegates DEFLATE decompression to zlib; separate package from Info-ZIP UnZip.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/c/junzip/README.md)
+
+```sh
+python3 parsarium.py build zip c junzip
+python3 parsarium.py run zip c junzip controls/zip/hello.zip
+```

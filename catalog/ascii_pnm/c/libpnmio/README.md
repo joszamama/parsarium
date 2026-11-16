@@ -31,6 +31,11 @@
 
 README declares 1.2.7, VERSION remains 1.2.6, and no tag exists; the exact source commit and archive hash identify the tested code. The README API text has an outdated pointer/value signature; the pinned header is authoritative.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/c/libpnmio/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm c libpnmio
+python3 parsarium.py run ascii_pnm c libpnmio controls/ascii_pnm/red-green.ppm
+```

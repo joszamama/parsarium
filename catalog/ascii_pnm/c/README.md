@@ -1,6 +1,6 @@
 # ASCII PNM / C
 
-20 verified third-party API paths; 2 have verified Docker harnesses.
+20 verified third-party API paths; 3 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/ascii_pnm/ranking.md) · [standard API inventory](../../../data/c/ascii_pnm/standard.json)
 
@@ -24,7 +24,7 @@
 - [libimago](libimago/README.md) — verified API path
 - [gegl](gegl/README.md) — verified API path
 - [sail](sail/README.md) — verified API path
-- [libpnmio](libpnmio/README.md) — verified API path
+- [libpnmio](libpnmio/README.md) — Docker harness ready
 - [imtoolkit](imtoolkit/README.md) — verified API path
 
 ## Standard and runtime APIs

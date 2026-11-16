@@ -14,10 +14,6 @@ func main() {
 		panic("usage: go run . PACKAGE CONTROL")
 	}
 	name, path := os.Args[1], os.Args[2]
-	data, err := os.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
 	output := map[string]any{}
 	switch name {
 

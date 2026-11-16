@@ -17,7 +17,7 @@ int parsarium_parse_png(const uint8_t *data, size_t length,
     if (!error && (header.width == 0 || header.height == 0 ||
                    (uint64_t)header.width * header.height > (1u << 22))) error = 1;
     if (!error) error = spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &size);
-    unsigned char *pixels = error ? NULL : malloc(size);
+    unsigned char *pixels = error ? NULL : (unsigned char *)malloc(size);
     if (!error && !pixels) error = 1;
     if (!error) error = spng_decode_image(ctx, pixels, size, SPNG_FMT_RGBA8, 0);
     if (!error && size < 4) error = 1;

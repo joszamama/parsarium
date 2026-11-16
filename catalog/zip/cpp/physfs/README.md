@@ -21,6 +21,11 @@
 
 Same PhysicsFS release and ZIP handler as the C cell; the C API is compiled and invoked from a C++17 translation unit.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/physfs/README.md)
+
+```sh
+python3 parsarium.py build zip cpp physfs
+python3 parsarium.py run zip cpp physfs controls/zip/hello.zip
+```
