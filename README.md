@@ -55,10 +55,11 @@ python3 parsarium.py native run runs/pypng-native --check
 python3 parsarium.py native run runs/pypng-native
 ```
 
-[Fandango 1.3+ and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. Fandango is installed separately. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run:
+[Fandango and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. `fandango setup` installs Fandango 1.3.1 in the ignored local `.venv/` and records the installed dependencies. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run:
 
 ```sh
 python3 parsarium.py afl build png c lodepng
+python3 parsarium.py fandango setup
 python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
   --count 100 --seed 42 --replay --prepare-afl
 python3 parsarium.py afl run runs/lodepng-fandango/afl --check

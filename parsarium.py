@@ -233,6 +233,7 @@ def main() -> int:
 
     fandango = commands.add_parser("fandango", help="generate a corpus with Fandango and record provenance")
     fandango_commands = fandango.add_subparsers(dest="action", required=True)
+    fandango_commands.add_parser("setup", help="install pinned Fandango in the ignored local .venv")
     fandango_generate = fandango_commands.add_parser(
         "generate", help="run fandango fuzz into a new run directory; optionally replay or prepare AFL++",
         description=generator.__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -325,6 +326,8 @@ def main() -> int:
             return execute("run_prepared_afl.py", str(args.run_dir), *extra)
         return execute("summarize_afl_run.py", str(args.run_dir))
     if args.command == "fandango":
+        if args.action == "setup":
+            return generator.setup()
         return generator.generate(fandango_generate, args)
     if args.action == "prepare":
         return execute("prepare_native_run.py", args.format, args.ecosystem, args.slug,

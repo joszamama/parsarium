@@ -21,6 +21,7 @@ import shutil
 import subprocess
 import sys
 import time
+import venv
 
 from run_case import MAX_CASE_BYTES, ROOT, project_for
 
@@ -43,6 +44,9 @@ SPEC_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
 SLUG = re.compile(r"[a-z0-9][a-z0-9_-]*")
 OUTPUT_ROOTS = (ROOT / "runs", ROOT / "generated")
 DEFAULT_REGISTRY = "https://github.com/fandango-fuzzer/fanbase"
+MANAGED_VERSION = "1.3.1"
+MANAGED_VENV = ROOT / ".venv" / "fandango-1.3.1"
+MANAGED_EXE = MANAGED_VENV / "bin" / "fandango"
 
 
 def digest(path: Path) -> str:
@@ -67,10 +71,37 @@ def output_directory(path: Path) -> Path:
 
 
 def fandango_executable(value: str | None) -> Path:
-    found = shutil.which(value or "fandango")
+    found = shutil.which(value) if value else (
+        str(MANAGED_EXE) if MANAGED_EXE.is_file() else shutil.which("fandango"))
     if not found:
-        raise ValueError("fandango executable not found; install Fandango 1.3+ or pass --fandango PATH")
+        raise ValueError("fandango executable not found; run python3 parsarium.py fandango setup or pass --fandango PATH")
     return Path(found).resolve()
+
+
+def setup() -> int:
+    """Install the pinned generator in the ignored local .venv directory."""
+    if MANAGED_EXE.is_file():
+        version = fandango_version(MANAGED_EXE)
+        if f"{MANAGED_VERSION}" in version:
+            print(f"Ready: {MANAGED_EXE} ({version})")
+            return 0
+        raise RuntimeError(f"unexpected Fandango in {MANAGED_VENV}: {version}")
+    MANAGED_VENV.parent.mkdir(parents=True, exist_ok=True)
+    venv.EnvBuilder(with_pip=True).create(MANAGED_VENV)
+    python = MANAGED_VENV / "bin" / "python"
+    subprocess.run([str(python), "-m", "pip", "install", "--disable-pip-version-check",
+                    "--no-input", f"fandango-fuzzer=={MANAGED_VERSION}"], check=True)
+    version = fandango_version(MANAGED_EXE)
+    if MANAGED_VERSION not in version:
+        raise RuntimeError(f"installed Fandango did not match {MANAGED_VERSION}: {version}")
+    freeze = subprocess.run([str(python), "-m", "pip", "freeze"], check=True,
+                            capture_output=True, text=True).stdout
+    receipt = {"schema_version": 1, "fandango_version": version,
+               "executable_sha256": digest(MANAGED_EXE), "python": sys.version,
+               "installed_packages": freeze.splitlines()}
+    (MANAGED_VENV / "setup.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    print(f"Ready: {MANAGED_EXE} ({version})")
+    return 0
 
 
 def fandango_version(executable: Path) -> str:
@@ -227,6 +258,15 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
             overrides["FANBASE_REGISTRY"] = str(args.fanbase_registry.expanduser().resolve())
     if args.seed is not None:
         overrides["PYTHONHASHSEED"] = str(args.seed)
+    if executable == MANAGED_EXE.resolve() and "SSL_CERT_FILE" not in env:
+        # Framework Python on macOS can lack a system OpenSSL CA path. pip's
+        # bundled CA store is part of the recorded managed installation.
+        ca_path = subprocess.run(
+            [str(MANAGED_VENV / "bin" / "python"), "-c",
+             "import pip._vendor.certifi as certifi; print(certifi.where())"],
+            check=True, capture_output=True, text=True).stdout.strip()
+        if Path(ca_path).is_file():
+            overrides["SSL_CERT_FILE"] = ca_path
     env.update(overrides)
     spec_before = digest(spec) if spec else None
     if spec:
@@ -244,6 +284,8 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
         "command": command, "environment": overrides, "cwd": str(run_dir),
         "seed": args.seed, "requested_count": args.count,
     }
+    if "SSL_CERT_FILE" in overrides:
+        receipt["ssl_cert_file_sha256"] = digest(Path(overrides["SSL_CERT_FILE"]))
     started = time.monotonic()
     try:
         result = subprocess.run(command, cwd=run_dir, env=env, capture_output=True,

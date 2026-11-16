@@ -264,6 +264,14 @@ class FandangoGenerateTest(unittest.TestCase):
             self.assertEqual(parsarium.main(), 0)
         self.assertEqual(self.receipt(run)["output_count"], 1)
 
+    def test_parsarium_cli_routes_to_setup(self):
+        sys.path.insert(0, str(ROOT))
+        import parsarium
+        with mock.patch.object(sys, "argv", ["parsarium.py", "fandango", "setup"]), \
+             mock.patch.object(fandango_generate, "setup", return_value=0) as setup:
+            self.assertEqual(parsarium.main(), 0)
+            setup.assert_called_once_with()
+
 
 if __name__ == "__main__":
     unittest.main()
