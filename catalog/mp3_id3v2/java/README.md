@@ -1,6 +1,6 @@
 # MP3 with ID3v2 / Java
 
-20 verified third-party API paths; 18 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/mp3_id3v2/ranking.md) · [standard API inventory](../../../data/java/mp3_id3v2/standard.json)
 
@@ -11,13 +11,13 @@
 - [tika-audiovideo](tika-audiovideo/README.md) — Docker harness ready
 - [jlayer](jlayer/README.md) — Docker harness ready
 - [jave-core](jave-core/README.md) — Docker harness ready
-- [jaffree](jaffree/README.md) — verified API path
+- [jaffree](jaffree/README.md) — Docker harness ready
 - [mp3spi](mp3spi/README.md) — Docker harness ready
 - [javacv](javacv/README.md) — Docker harness ready
 - [bytedeco-ffmpeg](bytedeco-ffmpeg/README.md) — Docker harness ready
 - [jcodec](jcodec/README.md) — Docker harness ready
 - [codecmedia](codecmedia/README.md) — Docker harness ready
-- [jid3lib](jid3lib/README.md) — verified API path
+- [jid3lib](jid3lib/README.md) — Docker harness ready
 - [taglib-java](taglib-java/README.md) — Docker harness ready
 - [javamp3](javamp3/README.md) — Docker harness ready
 - [tianscar-mp3spi](tianscar-mp3spi/README.md) — Docker harness ready
