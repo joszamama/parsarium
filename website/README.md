@@ -1,6 +1,6 @@
 # Parsarium website
 
-Parsarium is a static site at [parsarium.com](https://parsarium.com), generated from the repository's parser evidence and runnable target manifests. Its routes are real HTML pages: Home, Atlas, Run, Lab, and Why parsers. They work directly on refresh.
+Parsarium is a static site at [parsarium.com](https://parsarium.com), generated from the repository's parser evidence and runnable target manifests. Its routes are real HTML pages: Home, Atlas, Run locally, Learn, and Why parsers? They work directly on refresh.
 
 ## Preview locally
 
