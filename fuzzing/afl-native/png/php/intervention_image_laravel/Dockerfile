@@ -5,7 +5,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends afl++=4.33c
 COPY fuzzing/afl-bridge/afl_proxy.c /work/afl_proxy.c
 COPY fuzzing/afl-bridge/php_trace.php /work/afl_php_trace.php
 COPY fuzzing/afl-native/png/php/intervention_image_laravel/afl_trace /work/afl_trace
-ENV PARSARIUM_SUBJECT_PREFIX=/work/vendor/intervention/image-laravel/
+ENV PARSARIUM_SUBJECT_PREFIX=/work/vendor/intervention/image/src/
 ENV PARSARIUM_PARSE_FUNCTION=parsarium_parse
 ENV PARSARIUM_FUZZ_ENTRY=fuzz-target.php
 RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy

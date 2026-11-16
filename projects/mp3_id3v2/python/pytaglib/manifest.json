@@ -5,8 +5,8 @@
   "package": "pytaglib",
   "release": "3.2.0",
   "catalog_parser": "data/python/mp3_id3v2/parsers.json",
-  "source_lock": "adapters/python/mp3_id3v2/requirements.lock",
-  "source_sha256": "b5d910905962649913a74a0d11a407f989a381a423041794628c5e650501da83",
+  "source_lock": "projects/mp3_id3v2/python/pytaglib/source-lock.json",
+  "source_sha256": "964e32e86edcda107eb3821dd4ca226de04f7f0f99bb4c18737e138b4ed3313f",
   "fuzz_engine": "atheris",
   "fuzz_engine_release": "3.1.0",
   "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
@@ -26,6 +26,8 @@
     "album": "Pilot"
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pyprinttags.py"
+  "coverage": "LLVM source coverage of the pinned pytaglib Cython C++ extension during valid-control replay; Atheris fuzz entry. Linked TagLib is a prebuilt system library and its parser is not source-instrumented.",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/src/taglib.cpp",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.14/site-packages/taglib.cpython-*.so"
 }

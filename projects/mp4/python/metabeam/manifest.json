@@ -7,17 +7,15 @@
   "catalog_parser": "data/python/mp4/parsers.json",
   "source_lock": "adapters/python/mp4/requirements.lock",
   "source_sha256": "6b003b75189f33782f53d246754c44109aa6f3f874cee79e867078ca7f46e5a8",
-  "fuzz_engine": "atheris",
-  "fuzz_engine_release": "3.1.0",
-  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
-  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_engine_release": "0.4.13",
+  "fuzz_smoke_entrypoint": "/work/fuzzer",
   "fuzz_smoke_args": [
-    "/work/fuzz.py",
     "-help=1"
   ],
   "fuzz_smoke_expect": "Usage:",
-  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
-  "platform": "linux/amd64",
+  "base_image": "rust@sha256:8a4e90c7946b74626488b1446f712c0fe0ed1a596cbd3d871684bc9c5433ae07",
+  "platform": "linux/arm64",
   "control": "controls/mp4/red-av.mp4",
   "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
   "expected_output": {
@@ -31,6 +29,12 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/python/"
+  "coverage": "Rust LLVM source coverage of the pinned metabeam MP4 box parser during valid-control replay; native libFuzzer entry and LLVM parser-region AFL++ feedback.",
+  "coverage_subject_prefix": "/work/source/",
+  "runtime_base_image": "debian@sha256:a72b4433de1cf7d6bae0c4cee74d0547f58601a643b3375f070c51600d63b6b2",
+  "format_specific_coverage_file_suffix": "/core/src/extractors/media.rs",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.13/site-packages/metabeam/_metabeam*.so",
+  "fuzz_entry": "fuzz/src/main.rs",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_package_release": "4.21c-5"
 }

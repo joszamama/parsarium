@@ -114,6 +114,9 @@ def build_afl(format_name: str, ecosystem: str, slug: str) -> int:
         result = execute("run_project.py", format_name, ecosystem, slug)
         if result:
             return result
+    custom = ROOT / "fuzzing" / "afl-native" / format_name / ecosystem / slug / "build.py"
+    if custom.is_file():
+        return subprocess.call([sys.executable, str(custom)], cwd=ROOT)
     script = ("build_afl_native.py" if ecosystem in {"c", "cpp"} else
               "build_afl_rust.py" if ecosystem == "rust" else
               "build_afl_python.py" if ecosystem == "python" else

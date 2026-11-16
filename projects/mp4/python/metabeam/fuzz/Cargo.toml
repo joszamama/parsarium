@@ -1,0 +1,12 @@
+[package]
+name = "parsarium-metabeam-fuzz"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+metabeam-core = { path = "../source/core" }
+libfuzzer-sys = "=0.4.13"
+
+[[bin]]
+name = "fuzzer"
+path = "src/main.rs"

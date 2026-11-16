@@ -26,6 +26,10 @@
     "host": "example.test"
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/gunicorn_h1c/"
+  "coverage": "Python line tracing and LLVM source coverage of the pinned gunicorn-h1c C extension and bundled picohttpparser during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/gunicorn_h1c/",
+  "underlying_coverage_subject_prefix": "/work/source/src/gunicorn_h1c/",
+  "underlying_format_specific_coverage_file_suffix": "/picohttpparser.c",
+  "afl_coverage_subject_prefix": "/work/source/src/gunicorn_h1c/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.14/site-packages/gunicorn_h1c/_parser.cpython-*.so"
 }

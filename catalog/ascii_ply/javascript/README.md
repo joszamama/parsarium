@@ -1,6 +1,6 @@
 # ASCII PLY / JavaScript
 
-20 verified third-party API paths; 20 have verified Docker harnesses.
+20 verified third-party API paths; 19 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/javascript/ascii_ply/ranking.md) · [standard API inventory](../../../data/javascript/ascii_ply/standard.json)
 
@@ -12,7 +12,7 @@
 - [parse-ply](parse-ply/README.md) — Docker harness ready
 - [plyparser](plyparser/README.md) — Docker harness ready
 - [ply-js](ply-js/README.md) — Docker harness ready
-- [@draco-rust/ply](draco-rust-ply/README.md) — Docker harness ready
+- [@draco-rust/ply](draco-rust-ply/README.md) — verified API path
 - [three-ply-loader](three-ply-loader/README.md) — Docker harness ready
 - [three-ply-loader-ts](three-ply-loader-ts/README.md) — Docker harness ready
 - [@kibeo/loaders.gl-ply](kibeo-loaders-gl-ply/README.md) — Docker harness ready

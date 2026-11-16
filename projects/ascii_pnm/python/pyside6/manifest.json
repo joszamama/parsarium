@@ -35,8 +35,10 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "Native Qt PNM source coverage required; Python binding import coverage alone is insufficient",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/PySide6/",
+  "underlying_coverage_subject_prefix": "/work/source/qtbase-6.12.0/src/gui/image/",
+  "underlying_format_specific_coverage_file_suffix": "/qppmhandler.cpp",
   "dependencies": [
     {
       "package": "pyside6-addons",

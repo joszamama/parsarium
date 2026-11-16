@@ -35,7 +35,7 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "The valid PLY reaches assimp-py, but Python tracing sees only an import; instrument Assimp PlyLoader.cpp before counting parser coverage.",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/assimp_py/",
   "dependencies": [
     {
@@ -43,5 +43,7 @@
       "release": "2.5.4",
       "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
     }
-  ]
+  ],
+  "underlying_coverage_subject_prefix": "/work/source/assimp/",
+  "underlying_format_specific_coverage_file_suffix": "/PlyLoader.cpp"
 }

@@ -5,18 +5,19 @@
   "package": "point-cloud-utils",
   "release": "0.34.0",
   "catalog_parser": "data/python/ascii_ply/parsers.json",
-  "source_lock": "adapters/python/ascii_ply/requirements.lock",
+  "source_lock": "projects/ascii_ply/python/point_cloud_utils/source-lock.json",
   "source_sha256": "922f326f4c3058cb0b48b32105fb979edb048cb4b8e4f371e92c040365b130c5",
   "fuzz_engine": "atheris",
   "fuzz_engine_release": "3.1.0",
-  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_engine_sha256": "ec5e11f21a4c197fe91f7aea2b2de88e623c73a21fc07b105ac6329a1588457b",
+  "afl_package_release": "4.09c-1ubuntu3",
   "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
   "fuzz_smoke_args": [
     "/work/fuzz.py",
     "-help=1"
   ],
   "fuzz_smoke_expect": "Usage:",
-  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "base_image": "ubuntu@sha256:73b999393d07f2bf65a40373778a44dc9a6d54ad7718d29247d8ff9413c4d6a8",
   "platform": "linux/amd64",
   "control": "controls/ascii_ply/triangle.ply",
   "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
@@ -35,18 +36,7 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/point_cloud_utils/",
-  "dependencies": [
-    {
-      "package": "numpy",
-      "release": "2.5.4",
-      "sha256": "d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3"
-    },
-    {
-      "package": "scipy",
-      "release": "1.18.1",
-      "sha256": "ac0333bdf38309aa3dcbe7e3fa7ea29e7a2c37c6ea306a757b700ded8e4596ad"
-    }
-  ]
+  "coverage": "Python mesh I/O wrapper tracing; pinned prebuilt native PLY decoder is not source-instrumented",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.12/site-packages/point_cloud_utils/",
+  "underlying_coverage_limitation": "The AFL++ Python bridge observes wrapper lines but not native decoder branches"
 }

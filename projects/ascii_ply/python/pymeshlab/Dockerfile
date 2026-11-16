@@ -18,7 +18,7 @@ RUN { python3 --version; /opt/venv/bin/pip show pymeshlab atheris | grep -E '^(N
 FROM --platform=linux/amd64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    libstdc++6 python3 libgl1 && rm -rf /var/lib/apt/lists/*
+    libstdc++6 python3 libgl1 libopengl0 libp11-kit0 && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /work/toolchain.txt /work/toolchain.txt

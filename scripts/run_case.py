@@ -79,8 +79,9 @@ def target_command(manifest: dict, case_sha: str, scratch: Path) -> tuple[str, l
         (corpus / case_sha).write_text(f'go test fuzz v1\n[]byte("{encoded}")\n')
         mounts.append(f"{corpus}:/testdata/fuzz/{entry}:ro")
         return "/work/harness.test", [f"-test.run=^{entry}$", "-test.v"], mounts
-    if ecosystem in {"c", "cpp", "rust"}:
-        return "/work/fuzzer", ["/input/case"], mounts
+    if ecosystem in {"c", "cpp", "rust"} or (ecosystem == "python" and
+            manifest.get("fuzz_engine", "").startswith("libFuzzer")):
+        return manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"), ["/input/case"], mounts
     args = list(manifest["fuzz_smoke_args"])
     if ecosystem == "javascript" and "--" in args:
         args = args[:args.index("--")]

@@ -35,7 +35,7 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "The valid PLY reaches libigl, but Python tracing sees only an import; instrument readPLY.cpp and bundled tinyply parser source.",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/igl/",
   "dependencies": [
     {
@@ -48,5 +48,7 @@
       "release": "1.18.1",
       "sha256": "ac0333bdf38309aa3dcbe7e3fa7ea29e7a2c37c6ea306a757b700ded8e4596ad"
     }
-  ]
+  ],
+  "underlying_coverage_subject_prefix": "/work/source/libigl/",
+  "underlying_format_specific_coverage_file_suffix": "/readPLY.cpp"
 }

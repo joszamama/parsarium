@@ -35,8 +35,12 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "Python line tracing plus LLVM source coverage of pinned miniply C++ parser during valid-control replay",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pyminiply/",
+  "underlying_coverage_subject_prefix": "/work/source/src/",
+  "underlying_format_specific_coverage_file_suffix": "/miniply.cpp",
+  "afl_coverage_subject_prefix": "/work/source/src/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.14/site-packages/pyminiply/_wrapper.abi3.so",
   "dependencies": [
     {
       "package": "numpy",

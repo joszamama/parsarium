@@ -33,7 +33,18 @@ def check_one(path: Path) -> dict:
         corpus.mkdir()
         control = ROOT / manifest["control"]
         shutil.copyfile(control, corpus / manifest["control_sha256"])
-        if ecosystem == "php":
+        if (ecosystem == "php" and manifest.get("kind") == "standard"
+                and manifest.get("fuzz_engine") == "AFL++"):
+            _, image_id = image_for(project, manifest)
+            overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+            record = json.loads(overlay.read_text())
+            if (record.get("pass") is not True or record.get("feedback_edges", 0) <= 0
+                    or record.get("base_project_receipt_sha256") !=
+                    sha256((project / "verification.json").read_bytes()).hexdigest()):
+                raise RuntimeError("native PHP parser AFL++ feedback is not current")
+            feedback = {"kind": "native_php_parser_afl_feedback_edges",
+                        "value": record["feedback_edges"]}
+        elif ecosystem == "php":
             report = scratch / "report"
             report.mkdir()
             image, image_id = image_for(project, manifest)
@@ -47,7 +58,8 @@ def check_one(path: Path) -> dict:
                 "/corpus", "/report",
             ]
             result = subprocess.run(command, capture_output=True, text=True, timeout=60)
-            if suffix := manifest.get("format_specific_coverage_file_suffix"):
+            if suffix := (manifest.get("underlying_format_specific_coverage_file_suffix")
+                          or manifest.get("format_specific_coverage_file_suffix")):
                 parser_pages = [p for p in report.rglob(Path(suffix).name + ".html") if p.is_file()]
             else:
                 parser_pages = [p for p in (report / "vendor" / manifest["package"]).rglob("*.php.html")
@@ -67,6 +79,15 @@ def check_one(path: Path) -> dict:
                     raise RuntimeError("Go parser package coverage was not reported")
                 feedback = {"kind": "parser_package_statement_coverage_percent",
                             "value": float(match.group(1))}
+            elif ecosystem == "python" and manifest.get("fuzz_engine", "").startswith("libFuzzer"):
+                overlay = (ROOT / "fuzzing/afl-native" / relative / "verification.json")
+                record = json.loads(overlay.read_text())
+                if (record.get("pass") is not True or record.get("feedback_edges", 0) <= 0
+                        or record.get("base_project_receipt_sha256") !=
+                        sha256((project / "verification.json").read_bytes()).hexdigest()):
+                    raise RuntimeError("native Python parser AFL++ feedback is not current")
+                feedback = {"kind": "llvm_native_parser_afl_feedback_edges",
+                            "value": record["feedback_edges"]}
             elif ecosystem in {"java", "python"}:
                 match = re.search(r"DONE\s+cov:\s*(\d+)", log)
                 if not match or int(match.group(1)) <= 0:

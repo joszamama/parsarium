@@ -141,6 +141,7 @@
 - [mutagen / Python](python/mutagen/README.md)
 - [pydub / Python](python/pydub/README.md)
 - [pymediainfo / Python](python/pymediainfo/README.md)
+- [pytaglib / Python](python/pytaglib/README.md)
 - [riffy / Python](python/riffy/README.md)
 - [scipy / Python](python/scipy/README.md)
 - [simpleaudio / Python](python/simpleaudio/README.md)

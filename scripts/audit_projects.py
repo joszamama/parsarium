@@ -72,9 +72,9 @@ def receipt_verified(path: Path, manifest: dict) -> bool:
             or result.get("parser_source_files", 0) <= 0
             or result.get("parser_source_lines_covered", 0) <= 0
             or ("format_specific_coverage_file_suffix" in manifest
-                and result.get("format_specific_source_lines_covered", 0) <= 0)
+                and (result.get("format_specific_source_lines_covered") or 0) <= 0)
             or ("underlying_coverage_subject_prefix" in manifest
-                and result.get("underlying_source_lines_covered", 0) <= 0)
+                and (result.get("underlying_source_lines_covered") or 0) <= 0)
             or result.get("control_sha256") != manifest["control_sha256"]
             or result.get("project_file_sha256") != current_files):
         return False
@@ -102,14 +102,20 @@ def main() -> None:
     standard_catalog = {}
     for path in sorted((ROOT / "data").glob("*/*/standard.json")):
         ecosystem, format_name = path.relative_to(ROOT / "data").parts[:2]
-        entries = json.loads(path.read_text())["verified_apis"]
+        inventory = json.loads(path.read_text())
+        entries = inventory["verified_apis"]
         standard_by_cell[(format_name, ecosystem)] = len(entries)
         for entry in entries:
             identifier = entry.get("api") or entry.get("name") or entry.get("input_api")
             key = (format_name, ecosystem, identifier)
             if key in standard_catalog:
                 raise ValueError(f"duplicate standard API path: {key}")
-            standard_catalog[key] = entry
+            standard_catalog[key] = {
+                **entry,
+                "runtime": entry.get("runtime", inventory.get("runtime")),
+                "expected": entry.get("expected", entry.get("expected_output",
+                            entry.get("result") if isinstance(entry.get("result"), dict) else None)),
+            }
     if set(standard_by_cell) != {key[:2] for key in catalog}:
         raise ValueError("standard API inventory does not cover the catalog matrix")
 

@@ -118,6 +118,7 @@
 - [svgutils / Python](python/svgutils/README.md)
 - [anyrender_svg / Rust](rust/anyrender_svg/README.md)
 - [ferrigura-path / Rust](rust/ferrigura_path/README.md)
+- [librsvg / Rust](rust/librsvg/README.md)
 - [nsvg / Rust](rust/nsvg/README.md)
 - [oxideav-svg / Rust](rust/oxideav_svg/README.md)
 - [oxvg_ast / Rust](rust/oxvg_ast/README.md)

@@ -29,11 +29,15 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
               "-v", f"{seed_dir}:/seeds:ro", "-v", f"{output_dir}:/results",
               "--entrypoint", "afl-fuzz", receipt["image_id"]]
     ecosystem = manifest["ecosystem"]
-    target = ("/work/afl_fuzzer" if ecosystem == "rust" else
+    php_native = (ecosystem == "php" and manifest.get("kind") == "standard"
+                  and manifest.get("fuzz_engine") == "AFL++")
+    target = ("/opt/php/bin/php" if php_native else
+              "/work/afl_fuzzer" if ecosystem == "rust" else
               "/work/afl_proxy" if ecosystem in
               {"go", "java", "javascript", "python", "php"} else
               manifest.get("afl_entrypoint", "/work/fuzzer"))
-    target_args = ([target, "@@"] if ecosystem in
+    target_args = ([target, "/work/fuzz-target.php", "@@"] if php_native else
+                   [target, "@@"] if ecosystem in
                    {"go", "java", "javascript", "python", "php"} else [target])
     command = [*common, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
                "-o", "/results", "--", *target_args]

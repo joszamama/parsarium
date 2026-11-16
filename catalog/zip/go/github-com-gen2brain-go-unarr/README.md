@@ -20,6 +20,11 @@
 
 Unarr-backed multi-format archive reader.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/go/github_com_gen2brain_go_unarr/README.md)
+
+```sh
+python3 parsarium.py build zip go github_com_gen2brain_go_unarr
+python3 parsarium.py run zip go github_com_gen2brain_go_unarr controls/zip/hello.zip
+```

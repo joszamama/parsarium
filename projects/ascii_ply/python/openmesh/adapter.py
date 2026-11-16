@@ -100,7 +100,7 @@ def parse(name, path):
         return summarize(vertices, len(faces))
     if name == "openmesh":
         import openmesh
-        mesh = openmesh.read_trimesh(path)
+        mesh = openmesh.read_trimesh(str(path))
         return summarize(mesh.points(), mesh.n_faces())
     if name == "numpy-stl":
         from stl import mesh as stl_mesh

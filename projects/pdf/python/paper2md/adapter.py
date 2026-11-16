@@ -76,8 +76,8 @@ def parse(name, path):
         from markitdown import MarkItDown
         return {"text": text(MarkItDown().convert(path).markdown)}
     if name == "paper2md":
-        from paper2md import convert
-        return {"text": text(convert(path).markdown)}
+        from paper2md import convert, PipelineConfig
+        return {"text": text(convert(path, PipelineConfig(ocr_enabled=False)).markdown)}
     if name == "pdfnaut":
         from pdfnaut import PdfDocument
         doc = PdfDocument.from_filename(path)

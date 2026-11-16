@@ -42,6 +42,7 @@
 - [github.com/codeclysm/extract/v4 / Go](go/github_com_codeclysm_extract_v4/README.md)
 - [github.com/daaku/go.zipexe / Go](go/github_com_daaku_go_zipexe/README.md)
 - [github.com/evilsocket/islazy/zip / Go](go/github_com_evilsocket_islazy_zip/README.md)
+- [github.com/gen2brain/go-unarr / Go](go/github_com_gen2brain_go_unarr/README.md)
 - [github.com/git-pkgs/archives / Go](go/github_com_git_pkgs_archives/README.md)
 - [github.com/google/safearchive/zip / Go](go/github_com_google_safearchive_zip/README.md)
 - [github.com/hillu/go-archive-zip-crypto / Go](go/github_com_hillu_go_archive_zip_crypto/README.md)

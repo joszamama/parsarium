@@ -19,7 +19,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	img, err := vips.PpmloadBuffer(data, nil)
+	img, err := vips.LoadBuffer(data)
 	if err != nil {
 		panic(err)
 	}

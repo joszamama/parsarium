@@ -35,7 +35,7 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "The valid PNM is decoded by Qt, but Python tracing sees only a PyQt5 import; instrument the Qt PNM handler source.",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/PyQt5/",
   "dependencies": [
     {
@@ -48,5 +48,7 @@
       "release": "12.20.1",
       "sha256": "d815b444fba57024a5f051905286c048792ded4edc89ea5de40a8c5f2f8fcd21"
     }
-  ]
+  ],
+  "underlying_coverage_subject_prefix": "/work/source/qtbase/",
+  "underlying_format_specific_coverage_file_suffix": "/qppmhandler.cpp"
 }

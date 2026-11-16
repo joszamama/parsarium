@@ -13,20 +13,35 @@ if ($observed != $expected) { throw new RuntimeException('control mismatch: ' . 
 $raw = xdebug_get_code_coverage();
 $files = [];
 $total = 0;
+$primaryFiles = 0;
+$underlyingFiles = 0;
+$underlyingLines = 0;
 foreach ($raw as $filename => $lines) {
-    if (!str_starts_with($filename, "/work/vendor/intervention/image-laravel/")) { continue; }
+    $primary = str_starts_with($filename, "/work/vendor/intervention/image-laravel/");
+    $underlying = str_starts_with($filename, "/work/vendor/intervention/image/src/");
+    if (!$primary && !$underlying) { continue; }
     $executed = [];
     foreach ($lines as $line => $hits) { if ($hits > 0) { $executed[] = (int) $line; } }
     sort($executed);
-    $total += count($executed);
+    if ($primary) {
+        $primaryFiles++;
+        $total += count($executed);
+    }
+    if ($underlying) {
+        $underlyingFiles++;
+        $underlyingLines += count($executed);
+    }
     $files[] = ['filename' => $filename,
                 'summary' => ['lines' => ['covered' => count($executed)]],
                 'executed_lines' => $executed];
 }
 if ($total === 0) { throw new RuntimeException('no PHP parser package source lines covered'); }
+if ($underlyingLines === 0) { throw new RuntimeException('no Intervention Image source covered'); }
 $coverage = ['data' => [['files' => $files]]];
 $summary = ['control_pass' => true, 'output' => $observed,
-            'parser_source_files' => count($files), 'parser_source_lines_covered' => $total,
+            'parser_source_files' => $primaryFiles, 'parser_source_lines_covered' => $total,
+            'underlying_source_files' => $underlyingFiles,
+            'underlying_source_lines_covered' => $underlyingLines,
             'coverage' => '/coverage/coverage.json'];
 file_put_contents('/coverage/observed.json', json_encode($observed, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . "\n");
 file_put_contents('/coverage/coverage.json', json_encode($coverage, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . "\n");

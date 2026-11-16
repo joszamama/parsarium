@@ -22,8 +22,9 @@ function main() {
       if (!entry.startsWith('coverage-') || !entry.endsWith('.json')) continue;
       const raw = JSON.parse(fs.readFileSync(path.join(directory, entry), 'utf8'));
       for (const script of raw.result) {
-        if (!script.url.startsWith('file:')) continue;
-        const filename = fileURLToPath(script.url);
+        const filename = script.url.startsWith('file:') ? fileURLToPath(script.url)
+          : script.url.startsWith('node:') ? script.url : null;
+        if (filename === null) continue;
         if (!filename.startsWith(prefix)) continue;
         for (const fn of script.functions) {
           for (const range of fn.ranges) {

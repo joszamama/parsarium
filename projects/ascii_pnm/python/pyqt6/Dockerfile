@@ -20,7 +20,7 @@ RUN { python3 --version; /opt/venv/bin/pip show PyQt6 atheris | grep -E '^(Name|
 FROM --platform=linux/amd64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    libstdc++6 python3 libglib2.0-0 libgl1 libegl1 libxkbcommon0 libfreetype6 libglib2.0-0 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6 && rm -rf /var/lib/apt/lists/*
+    libstdc++6 python3 libdbus-1-3 libglib2.0-0 libgl1 libegl1 libxkbcommon0 libfreetype6 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6 && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /work/toolchain.txt /work/toolchain.txt

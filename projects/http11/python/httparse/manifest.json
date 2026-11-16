@@ -26,6 +26,8 @@
     "host": "example.test"
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/httparse/"
+  "coverage": "The HTTP control reaches the Rust extension, but Python tracing sees only imports; instrument its Rust wrapper and httparse crate.",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/httparse/",
+  "underlying_coverage_subject_prefix": "/work/source/httparse/",
+  "underlying_format_specific_coverage_file_suffix": "/src/lib.rs"
 }

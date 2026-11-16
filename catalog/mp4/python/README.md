@@ -1,6 +1,6 @@
 # MP4 / Python
 
-20 verified third-party API paths; 17 have verified Docker harnesses.
+20 verified third-party API paths; 19 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/mp4/ranking.md) · [standard API inventory](../../../data/python/mp4/standard.json)
 
@@ -8,7 +8,7 @@
 
 - [mutagen](mutagen/README.md) — Docker harness ready
 - [tinytag](tinytag/README.md) — Docker harness ready
-- [pytaglib](pytaglib/README.md) — verified API path
+- [pytaglib](pytaglib/README.md) — Docker harness ready
 - [pymediainfo](pymediainfo/README.md) — Docker harness ready
 - [hachoir](hachoir/README.md) — Docker harness ready
 - [pydub](pydub/README.md) — Docker harness ready
@@ -21,7 +21,7 @@
 - [imageio-ffmpeg](imageio-ffmpeg/README.md) — Docker harness ready
 - [opencv-python-headless](opencv-python-headless/README.md) — Docker harness ready
 - [pymp4](pymp4/README.md) — Docker harness ready
-- [metabeam](metabeam/README.md) — verified API path
+- [metabeam](metabeam/README.md) — Docker harness ready
 - [ffmpegio](ffmpegio/README.md) — Docker harness ready
 - [pymp4v2](pymp4v2/README.md) — verified API path
 - [pycord](pycord/README.md) — Docker harness ready

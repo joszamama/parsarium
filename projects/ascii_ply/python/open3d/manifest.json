@@ -35,8 +35,10 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "Native Open3D PLY source coverage required; Python binding import coverage alone is insufficient",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/open3d/",
+  "underlying_coverage_subject_prefix": "/work/source/Open3D-0.20.0/cpp/open3d/io/file_format/",
+  "underlying_format_specific_coverage_file_suffix": "/FilePLY.cpp",
   "dependencies": [
     {
       "package": "annotated-types",

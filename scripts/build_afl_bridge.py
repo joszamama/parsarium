@@ -29,7 +29,8 @@ JAVA25_BASE = "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380e
 def dockerfile(base_image: str, platform: str, relative: Path, prefix: str,
                ecosystem: str, parse_function: str | None,
                fuzz_entry: str | None, java_environment: dict[str, str],
-               afl_package: str, java_trace_name: str = "java_trace.py") -> str:
+               afl_package: str, java_trace_name: str = "java_trace.py",
+               runtime_packages: tuple[str, ...] = ()) -> str:
     overlay = f"fuzzing/afl-native/{relative.as_posix()}"
     trace_files = ({"go": ["go_trace.py"],
                     "java": ["JavaCase.java", java_trace_name],
@@ -46,6 +47,7 @@ def dockerfile(base_image: str, platform: str, relative: Path, prefix: str,
                 " libmupdf-dev" if relative.as_posix() == "pdf/go/github_com_gen2brain_go_fitz" else
                 " libvips42" if ecosystem == "go" and
                 ("vips" in relative.parts[2] or "bimg" in relative.parts[2]) else "")
+    go_extra += "".join(f" {package}" for package in runtime_packages)
     go_binary = f"COPY --from={base_image} /work/harness.test /work/harness.test\n" if ecosystem == "go" else ""
     python_runtime = " python3" if ecosystem == "go" else ""
     java_compile = ("RUN mkdir /work/afl-java-classes && javac -d /work/afl-java-classes "
@@ -129,10 +131,15 @@ def build_one(relative: Path) -> dict:
     afl_package = ("4.04c-4" if ecosystem == "go" and "assimp" in relative.parts[2] else
                    "4.33c-1.1ubuntu1" if ecosystem == "java"
                    and manifest["base_image"] == JAVA25_BASE else AFL_PACKAGE[ecosystem])
+    runtime_packages = tuple(manifest.get("afl_runtime_packages", ()))
+    if any(not re.fullmatch(r"[a-z0-9][a-z0-9.+-]*", package)
+           for package in runtime_packages):
+        raise ValueError("invalid AFL++ runtime package name")
     (overlay / "Dockerfile").write_text(
-        dockerfile(base_image, manifest["platform"], relative, manifest["coverage_subject_prefix"],
+        dockerfile(base_image, manifest["platform"], relative,
+                   manifest.get("afl_coverage_subject_prefix", manifest["coverage_subject_prefix"]),
                    ecosystem, parse_function, manifest.get("fuzz_entry"), java_environment,
-                   afl_package, java_trace_name)
+                   afl_package, java_trace_name, runtime_packages)
     )
     image = f"parsarium-afl/{relative.parts[0]}-{ecosystem}-{relative.parts[2]}:local"
     print(f"Building {image}", flush=True)

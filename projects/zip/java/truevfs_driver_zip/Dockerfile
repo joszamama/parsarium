@@ -140,7 +140,14 @@ RUN mkdir /work/lib \
     && echo '9b70bb63b79faa0e4c4b1aa820c610c1aa1c9fc9d4653edbe76a328f0d3c1a75  /work/lib/truecommons-shed-2.5.0.jar' | sha256sum --check
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/net/java/truevfs/truevfs-driver-zip/0.14.0/truevfs-driver-zip-0.14.0-sources.jar -o /work/parser-sources.jar \
     && echo 'cf38ec95e096ff6c72e84288cad1ee83c53d462b551bc4a1b51eda9d97f6cfc1  /work/parser-sources.jar' | sha256sum --check \
-    && mkdir /work/parser-source && unzip -q /work/parser-sources.jar -d /work/parser-source
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/net/java/truevfs/truevfs-comp-zip/0.14.0/truevfs-comp-zip-0.14.0-sources.jar -o /work/comp-zip-sources.jar \
+    && echo 'f0c29ee05aae7d30cfb9e82cd26618413cd44045b775cbdfa1af7c16d56877e2  /work/comp-zip-sources.jar' | sha256sum --check \
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/net/java/truevfs/truevfs-comp-zipdriver/0.14.0/truevfs-comp-zipdriver-0.14.0-sources.jar -o /work/comp-zipdriver-sources.jar \
+    && echo 'd2d547a7030f62dac69b293525b1cb5f3228c3fcb4bdba22265006f9d7379753  /work/comp-zipdriver-sources.jar' | sha256sum --check \
+    && mkdir /work/parser-source \
+    && unzip -qo /work/parser-sources.jar -d /work/parser-source \
+    && unzip -qo /work/comp-zip-sources.jar -d /work/parser-source \
+    && unzip -qo /work/comp-zipdriver-sources.jar -d /work/parser-source
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.14/org.jacoco.agent-0.8.14-runtime.jar -o /work/jacocoagent.jar \
     && echo '3fb76eea65f81bd9415202bab34b6571728841dff1ab8e6bbe81adc2e299face  /work/jacocoagent.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.cli/0.8.14/org.jacoco.cli-0.8.14-nodeps.jar -o /work/jacococli.jar \

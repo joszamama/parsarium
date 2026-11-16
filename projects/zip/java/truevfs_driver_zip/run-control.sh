@@ -4,7 +4,10 @@ mkdir -p /coverage
 java -javaagent:/work/jacocoagent.jar=destfile=/coverage/jacoco.exec,append=false,includes=* \
   -cp '/work/classes:/work/lib/*' GenericHarness /input/control > /coverage/observed.raw
 java -jar /work/jacococli.jar report /coverage/jacoco.exec \
-  --classfiles /work/lib/truevfs-driver-zip-0.14.0.jar --sourcefiles /work/parser-source --xml /coverage/jacoco.xml --quiet
+  --classfiles /work/lib/truevfs-comp-zip-0.14.0.jar \
+  --classfiles /work/lib/truevfs-comp-zipdriver-0.14.0.jar \
+  --classfiles /work/lib/truevfs-driver-zip-0.14.0.jar \
+  --sourcefiles /work/parser-source --xml /coverage/jacoco.xml --quiet
 python3 - <<'PYRUN'
 import json
 from pathlib import Path
@@ -25,11 +28,24 @@ for package in root.findall('package'):
             files.append({'filename': filename,
                           'summary': {'lines': {'covered': len(executed)}},
                           'executed_lines': executed})
-covered = sum(f['summary']['lines']['covered'] for f in files)
-if covered == 0:
+primary = [f for f in files if f['filename'].startswith(
+    '/work/parser-source/net/java/truevfs/driver/zip/')]
+primary_covered = sum(f['summary']['lines']['covered'] for f in primary)
+if primary_covered == 0:
     raise SystemExit('no parser package source lines covered')
+zip_core = [f for f in files if f['filename'].endswith(
+    '/net/java/truevfs/comp/zip/AbstractZipFile.java')]
+if not zip_core or zip_core[0]['summary']['lines']['covered'] == 0:
+    raise SystemExit('no TrueVFS ZIP core source lines covered')
+zip_core_lines = zip_core[0]['summary']['lines']['covered']
 summary = {'control_pass': True, 'output': observed,
-           'parser_source_files': len(files), 'parser_source_lines_covered': covered,
+           'parser_source_files': len(primary), 'parser_source_lines_covered': primary_covered,
+           'underlying_source_files': sum(f['filename'].startswith(
+               '/work/parser-source/net/java/truevfs/comp/zip/') for f in files),
+           'underlying_source_lines_covered': sum(f['summary']['lines']['covered']
+               for f in files if f['filename'].startswith(
+                   '/work/parser-source/net/java/truevfs/comp/zip/')),
+           'format_specific_source_lines_covered': zip_core_lines,
            'coverage': '/coverage/coverage.json'}
 Path('/coverage/observed.json').write_text(json.dumps(observed, indent=2) + '\n')
 Path('/coverage/coverage.json').write_text(json.dumps({'data': [{'files': files}]}, indent=2) + '\n')

@@ -1,6 +1,6 @@
 # ZIP / Go
 
-23 verified third-party API paths; 22 have verified Docker harnesses.
+23 verified third-party API paths; 23 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/zip/ranking.md) · [standard API inventory](../../../data/go/zip/standard.json)
 
@@ -28,7 +28,7 @@
 - [github.com/c4milo/unpackit](github-com-c4milo-unpackit/README.md) — Docker harness ready
 - [github.com/daaku/go.zipexe](github-com-daaku-go-zipexe/README.md) — Docker harness ready
 - [code.cloudfoundry.org/ykk](code-cloudfoundry-org-ykk/README.md) — Docker harness ready
-- [github.com/gen2brain/go-unarr](github-com-gen2brain-go-unarr/README.md) — verified API path
+- [github.com/gen2brain/go-unarr](github-com-gen2brain-go-unarr/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

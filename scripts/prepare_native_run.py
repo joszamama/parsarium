@@ -40,8 +40,9 @@ def command_for(manifest: dict, image_id: str, corpus: Path, artifacts: Path,
                  f"-test.fuzz=^{entry}$", "-test.run=^$",
                  f"-test.fuzztime={duration}s", "-test.parallel=1",
                  "-test.fuzzcachedir=/go-fuzz-cache"]
-    elif ecosystem in {"c", "cpp", "rust"}:
-        args += ["--entrypoint", "/work/fuzzer", image_id, "/corpus",
+    elif ecosystem in {"c", "cpp", "rust"} or (ecosystem == "python" and
+            manifest.get("fuzz_engine", "").startswith("libFuzzer")):
+        args += ["--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"), image_id, "/corpus",
                  f"-max_total_time={duration}", f"-max_len={MAX_CASE_BYTES}",
                  "-artifact_prefix=/artifacts/"]
     elif ecosystem == "java":
@@ -60,6 +61,12 @@ def command_for(manifest: dict, image_id: str, corpus: Path, artifacts: Path,
         args += ["--entrypoint", manifest["fuzz_smoke_entrypoint"], image_id,
                  "/work/fuzz.py", "/corpus", f"-max_total_time={duration}",
                  f"-max_len={MAX_CASE_BYTES}", "-artifact_prefix=/artifacts/"]
+    elif (ecosystem == "php" and manifest.get("kind") == "standard"
+          and manifest.get("fuzz_engine") == "AFL++"):
+        args += ["-e", "AFL_SKIP_CPUFREQ=1", "-e", "AFL_NO_AFFINITY=1",
+                 "-e", "AFL_NO_UI=1", "--entrypoint", "afl-fuzz", image_id,
+                 "-m", "none", "-t", "10000", "-i", "/corpus", "-o", "/artifacts",
+                 "--", "/opt/php/bin/php", "/work/fuzz-target.php", "@@"]
     elif ecosystem == "php":
         args += ["--entrypoint", manifest["fuzz_smoke_entrypoint"], image_id,
                  "-d", "xdebug.mode=coverage", "/work/vendor/bin/php-fuzzer",
@@ -86,6 +93,16 @@ def main() -> None:
     project_receipt = (project / "verification.json").read_bytes()
     if image_id != json.loads(project_receipt)["image_id"]:
         cli.error("local project image differs from its verification receipt; run python3 parsarium.py build FORMAT ECOSYSTEM SLUG")
+    php_native = (args.ecosystem == "php" and manifest.get("kind") == "standard"
+                  and manifest.get("fuzz_engine") == "AFL++")
+    if php_native:
+        overlay = ROOT / "fuzzing/afl-native" / args.format / args.ecosystem / args.package_slug
+        overlay_receipt = json.loads((overlay / "verification.json").read_text())
+        if (not overlay_receipt.get("pass") or overlay_receipt.get("base_project_receipt_sha256")
+                != sha256(project_receipt).hexdigest()):
+            cli.error("native PHP AFL++ overlay differs from the base receipt")
+        image = f"parsarium-afl/{args.format}-{args.ecosystem}-{args.package_slug}:local"
+        image_id = overlay_receipt["image_id"]
     run_dir = args.run_dir.resolve()
     if run_dir.exists() and any(run_dir.iterdir()):
         cli.error("run directory already contains files")
@@ -123,8 +140,9 @@ def main() -> None:
                           args.duration_seconds, go_cache)
     container_name = f"parsarium-native-{uuid.uuid4().hex[:16]}"
     command[3:3] = ["--name", container_name]
+    engine = "AFL++ native PHP" if php_native else ENGINE[args.ecosystem]
     plan = {"schema_version": 1, "project": str(project.relative_to(ROOT / "projects")),
-            "engine": ENGINE[args.ecosystem], "image": image, "image_id": image_id,
+            "engine": engine, "image": image, "image_id": image_id,
             "project_receipt_sha256": sha256(project_receipt).hexdigest(),
             "platform": manifest["platform"], "source_sha256": manifest["source_sha256"],
             "control_sha256": manifest["control_sha256"], "seed_sources": sources,
@@ -135,10 +153,10 @@ def main() -> None:
             "artifacts_directory": str(artifacts),
             "go_cache_directory": str(go_cache) if go_cache else None}
     (run_dir / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")
-    print(f"Prepared {len(data_by_sha)} seeds for {ENGINE[args.ecosystem]} in {run_dir}")
+    print(f"Prepared {len(data_by_sha)} seeds for {engine} in {run_dir}")
     print(shlex.join(command))
     if args.ecosystem == "php":
-        print("PHP-Fuzzer has no engine duration flag; stop the command after your chosen time budget.")
+        print(f"{engine} uses the prepared duration as the run limit.")
 
 
 if __name__ == "__main__":

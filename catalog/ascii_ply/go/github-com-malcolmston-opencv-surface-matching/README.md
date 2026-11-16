@@ -22,6 +22,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/go/github_com_malcolmston_opencv_surface_matching/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply go github_com_malcolmston_opencv_surface_matching
+python3 parsarium.py run ascii_ply go github_com_malcolmston_opencv_surface_matching controls/ascii_ply/triangle.ply
+```

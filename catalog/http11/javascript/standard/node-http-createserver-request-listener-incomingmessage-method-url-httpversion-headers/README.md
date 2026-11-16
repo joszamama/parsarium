@@ -19,6 +19,9 @@
 
 [Control adapter](../../../../../adapters/javascript/http11_node.mjs)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build http11 javascript stdlib_node_http
+python3 parsarium.py run http11 javascript stdlib_node_http controls/http11/request.http
+```

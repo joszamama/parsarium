@@ -35,6 +35,8 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
+  "coverage": "Python line tracing of pyassimp wrapper during valid-control replay; Assimp 6 native PLY importer is prebuilt and not source-instrumented",
+  "underlying_parser_family": "Assimp 6 native importer",
+  "underlying_coverage_limitation": "The AFL++ Python bridge observes wrapper lines but not native Assimp branches",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pyassimp/"
 }

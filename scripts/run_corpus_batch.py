@@ -38,8 +38,9 @@ def run_batch(project: Path, manifest: dict, inputs_dir: Path, timeout: int) -> 
             args = [f"-test.run=^{entry}$", "-test.v"]
         else:
             command += ["-v", f"{inputs_dir}:/corpus:ro"]
-            if ecosystem in {"c", "cpp", "rust"}:
-                entrypoint = "/work/fuzzer"
+            if ecosystem in {"c", "cpp", "rust"} or (ecosystem == "python" and
+                    manifest.get("fuzz_engine", "").startswith("libFuzzer")):
+                entrypoint = manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer")
                 args = ["/corpus", "-runs=0", "-max_len=1048576"]
             elif ecosystem == "java":
                 entrypoint = manifest["fuzz_smoke_entrypoint"]

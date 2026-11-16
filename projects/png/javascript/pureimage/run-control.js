@@ -58,9 +58,17 @@ for (const file of fs.readdirSync(rawDir)) {
   }
 }
 const files = [];
+const pngFunctions = new Set();
 for (const [filename, functions] of [...scripts.entries()].sort()) {
+  for (const fn of functions) {
+    if (fn.ranges.some(range => range.count > 0)) pngFunctions.add(fn.functionName);
+  }
   const lines = coveredLines(fs.readFileSync(filename, 'utf8'), functions);
   files.push({ filename, summary: { lines: { covered: lines.length } }, executed_lines: lines });
+}
+for (const name of ['_parseSignature', '_parseChunkBegin', '_parseIHDR']) {
+  if (![...pngFunctions].some(observed => observed.endsWith(`.${name}`)))
+    throw new Error(`embedded PNG parser function ${name} was not executed`);
 }
 const covered = files.reduce((sum, file) => sum + file.summary.lines.covered, 0);
 if (covered === 0) throw new Error('no parser package source lines covered');

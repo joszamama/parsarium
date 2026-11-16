@@ -112,7 +112,7 @@ def parse(name, path):
             if brew_lib.is_dir():
                 os.environ["LD_LIBRARY_PATH"] = f"{brew_lib}:{os.environ.get('LD_LIBRARY_PATH', '')}"
         import pyassimp
-        with pyassimp.load(path) as scene:
+        with pyassimp.load(str(path)) as scene:
             mesh = scene.meshes[0]
             return summarize(mesh.vertices, len(mesh.faces))
     raise ValueError(f"unknown package: {name}")

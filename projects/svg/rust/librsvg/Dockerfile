@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd AS build
+FROM --platform=linux/arm64 rust@sha256:8a4e90c7946b74626488b1446f712c0fe0ed1a596cbd3d871684bc9c5433ae07 AS build
 RUN apt-get update -qq && apt-get install -y --no-install-recommends g++ pkg-config libglib2.0-dev libgdk-pixbuf-2.0-dev libcairo2-dev libpango1.0-dev \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
@@ -23,7 +23,7 @@ RUN { rustc --version; cargo --version; /work/llvm-cov --version | head -1; } > 
     && mkdir -p /work/parser-source \
     && cp -a "$(find /usr/local/cargo/registry/src -type d -name librsvg-2.63.4 | head -1)" /work/parser-source/librsvg-2.63.4
 
-FROM --platform=linux/arm64 debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+FROM --platform=linux/arm64 debian@sha256:a72b4433de1cf7d6bae0c4cee74d0547f58601a643b3375f070c51600d63b6b2
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \

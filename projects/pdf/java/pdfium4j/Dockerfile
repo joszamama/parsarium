@@ -6,8 +6,8 @@ WORKDIR /work
 RUN mkdir /work/lib \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/grimmory/pdfium4j/1.3.0/pdfium4j-1.3.0.jar -o /work/lib/pdfium4j-1.3.0.jar \
     && echo 'd4d1e96c828104124ed86be0ee0b50af219356de9d8efe45e41f6b8f1423fbcd  /work/lib/pdfium4j-1.3.0.jar' | sha256sum --check \
-    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/grimmory/pdfium4j/1.3.0/pdfium4j-1.3.0-natives-darwin-arm64.jar -o /work/lib/pdfium4j-1.3.0-natives-darwin-arm64.jar \
-    && echo '44742ec252caea004c6ec258489f293bc6fdc35cb1ab9dab60b0eb5f6f0b38cf  /work/lib/pdfium4j-1.3.0-natives-darwin-arm64.jar' | sha256sum --check
+    && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/grimmory/pdfium4j/1.3.0/pdfium4j-1.3.0-natives-linux-arm64.jar -o /work/lib/pdfium4j-1.3.0-natives-linux-arm64.jar \
+    && echo '1b420349024ce3c5a0d91fafeb23fbb42b0a493e96ac855fd9a0d5744a507250683ffd5851fc8a02d466fb54e45ab2fd18f3e6739e76c852eb6f5bb353b5f11f  /work/lib/pdfium4j-1.3.0-natives-linux-arm64.jar' | sha512sum --check
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/grimmory/pdfium4j/1.3.0/pdfium4j-1.3.0-sources.jar -o /work/parser-sources.jar \
     && echo '649fe551b4f860c16c2c347506d134808913aecc4e3fd8e5097f7846f2872c9b  /work/parser-sources.jar' | sha256sum --check \
     && mkdir /work/parser-source && unzip -q /work/parser-sources.jar -d /work/parser-source
@@ -19,11 +19,12 @@ RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/ja
     && echo '0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f  /work/jazzer.tar.gz' | sha256sum --check \
     && tar -xf /work/jazzer.tar.gz -C /work
 COPY FfmPdfAdapter.java GenericHarness.java /work/src/
-RUN mkdir /work/classes && javac -cp '/work/lib/*' -d /work/classes /work/src/*.java \
+RUN mkdir /work/classes && javac --enable-preview --release 25 -cp '/work/lib/*' -d /work/classes /work/src/*.java \
     && { java -version 2>&1 | head -1; /work/jazzer --version 2>&1 | head -1; } > /work/toolchain.txt
 
 FROM --platform=linux/arm64 eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d
 ENV DEBIAN_FRONTEND=noninteractive
+ENV JAVA_TOOL_OPTIONS=--enable-preview
 RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work

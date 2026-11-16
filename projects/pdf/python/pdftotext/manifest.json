@@ -25,6 +25,8 @@
     "text": "Parsarium"
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/tests/"
+  "coverage": "LLVM source coverage of the pinned pdftotext C++ extension during valid-control replay; Atheris fuzz entry. Linked Poppler is a prebuilt system library and its C++ parser is not source-instrumented.",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/pdftotext.cpp",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.14/site-packages/pdftotext.cpython-*.so"
 }

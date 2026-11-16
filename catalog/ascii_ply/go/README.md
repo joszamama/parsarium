@@ -1,6 +1,6 @@
 # ASCII PLY / Go
 
-21 verified third-party API paths; 20 have verified Docker harnesses.
+21 verified third-party API paths; 21 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_ply/ranking.md) · [standard API inventory](../../../data/go/ascii_ply/standard.json)
 
@@ -11,7 +11,7 @@
 - [github.com/chenzhekl/goply](github-com-chenzhekl-goply/README.md) — Docker harness ready
 - [github.com/thebanri/limoni/graphics](github-com-thebanri-limoni-graphics/README.md) — Docker harness ready
 - [nimbleterminal.dev/nt3d/mesh](nimbleterminal-dev-nt3d-mesh/README.md) — Docker harness ready
-- [github.com/malcolmston/opencv/surface_matching](github-com-malcolmston-opencv-surface-matching/README.md) — verified API path
+- [github.com/malcolmston/opencv/surface_matching](github-com-malcolmston-opencv-surface-matching/README.md) — Docker harness ready
 - [github.com/borud/pointcloud](github-com-borud-pointcloud/README.md) — Docker harness ready
 - [github.com/cobaltgray/go-plyfile](github-com-cobaltgray-go-plyfile/README.md) — Docker harness ready
 - [github.com/ecopia-map/go-plyfile](github-com-ecopia-map-go-plyfile/README.md) — Docker harness ready

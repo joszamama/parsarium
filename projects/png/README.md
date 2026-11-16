@@ -64,6 +64,7 @@
 - [github.com/shogo82148/go-imaging/png / Go](go/github_com_shogo82148_go_imaging_png/README.md)
 - [github.com/tdewolff/canvas/image / Go](go/github_com_tdewolff_canvas_image/README.md)
 - [github.com/woozymasta/png / Go](go/github_com_woozymasta_png/README.md)
+- [gopkg.in/gographics/imagick.v3/imagick / Go](go/gopkg_in_gographics_imagick_v3_imagick/README.md)
 - [image.Decode(io.Reader) with image/png registered / Go](go/stdlib_generic/README.md)
 - [image/png.Decode(io.Reader) / Go](go/stdlib_decode/README.md)
 - [image/png.DecodeConfig(io.Reader) / Go](go/stdlib_config/README.md)

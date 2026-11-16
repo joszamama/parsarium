@@ -31,6 +31,11 @@
 
 This Composer polyfill invokes the installed ImageMagick CLI to decode ASCII P3 and emits P6 pixel bytes; it is not an independent decoder engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/php/calcinai_php_imagick/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm php calcinai_php_imagick
+python3 parsarium.py run ascii_pnm php calcinai_php_imagick controls/ascii_pnm/red-green.ppm
+```

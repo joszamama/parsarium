@@ -1,6 +1,6 @@
 # SVG / Rust
 
-25 verified third-party API paths; 24 have verified Docker harnesses.
+25 verified third-party API paths; 25 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/svg/ranking.md) · [standard API inventory](../../../data/rust/svg/standard.json)
 
@@ -27,7 +27,7 @@
 - [vello_svg](vello-svg/README.md) — Docker harness ready
 - [anyrender_svg](anyrender-svg/README.md) — Docker harness ready
 - [ps-anyrender-svg](ps-anyrender-svg/README.md) — Docker harness ready
-- [librsvg](librsvg/README.md) — verified API path
+- [librsvg](librsvg/README.md) — Docker harness ready
 - [svg_path_ops](svg-path-ops/README.md) — Docker harness ready
 - [oxideav-svg](oxideav-svg/README.md) — Docker harness ready
 - [oxvg_ast](oxvg-ast/README.md) — Docker harness ready

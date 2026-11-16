@@ -38,9 +38,11 @@ def main() -> None:
         inventory = json.loads((ROOT / manifest["standard_inventory"]).read_text())
         entry, = [item for item in inventory["verified_apis"]
                   if (item.get("api") or item.get("name")) == manifest["api"]]
-        assert entry["runtime"] == manifest["runtime"]
+        assert entry.get("runtime", inventory.get("runtime")) == manifest["runtime"]
         assert entry["control"] == manifest["control"]
-        assert entry["expected"] == manifest["expected_output"]
+        expected = entry.get("expected", entry.get("expected_output",
+                    entry.get("result") if isinstance(entry.get("result"), dict) else None))
+        assert expected == manifest["expected_output"]
         lock_path = project / manifest["runtime_lock"]
         lock = json.loads(lock_path.read_text())
         assert lock == {"runtime": manifest["runtime"],
@@ -149,6 +151,9 @@ def main() -> None:
         format_specific_lines = sum(f["summary"]["lines"]["covered"] for f in specific)
         assert format_specific_lines > 0
     if "underlying_coverage_subject_prefix" in manifest:
+        if ((summary.get("underlying_source_files") or 0) <= 0 or
+                (summary.get("underlying_source_lines_covered") or 0) <= 0):
+            raise RuntimeError(f"{manifest['package']}: underlying parser source was not instrumented")
         underlying = [f for f in coverage["data"][0]["files"]
                       if f["filename"].startswith(manifest["underlying_coverage_subject_prefix"])]
         assert len(underlying) == summary["underlying_source_files"]

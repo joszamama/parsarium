@@ -35,8 +35,10 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Python line tracing of parser package source during valid-control replay; Atheris import instrumentation for fuzz entry",
-  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pymeshlab-2025.7.post1.data/",
+  "coverage": "Native MeshLab PLY importer source coverage required; Python binding import coverage alone is insufficient",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pymeshlab/",
+  "underlying_coverage_subject_prefix": "/work/source/meshlab/src/meshlabplugins/io_base/",
+  "underlying_format_specific_coverage_file_suffix": "/baseio.cpp",
   "dependencies": [
     {
       "package": "numpy",

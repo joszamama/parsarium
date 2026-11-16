@@ -58,10 +58,19 @@ for (const file of fs.readdirSync(rawDir)) {
   }
 }
 const files = [];
+let pnmParserExecuted = false;
 for (const [filename, functions] of [...scripts.entries()].sort()) {
-  const lines = coveredLines(fs.readFileSync(filename, 'utf8'), functions);
+  const source = fs.readFileSync(filename, 'utf8');
+  const pnmStart = source.indexOf('e.PNM={validate');
+  const calculateStart = source.indexOf('calculate(t,e){const r=e(t,0,2)', pnmStart);
+  if (pnmStart >= 0 && calculateStart >= 0 && functions.some(fn =>
+      fn.functionName === 'calculate' && fn.ranges.some(range =>
+        range.startOffset === calculateStart && range.count > 0)))
+    pnmParserExecuted = true;
+  const lines = coveredLines(source, functions);
   files.push({ filename, summary: { lines: { covered: lines.length } }, executed_lines: lines });
 }
+if (!pnmParserExecuted) throw new Error('bundled PNM calculate function was not executed');
 const covered = files.reduce((sum, file) => sum + file.summary.lines.covered, 0);
 if (covered === 0) throw new Error('no parser package source lines covered');
 const coverage = { data: [{ files }] };

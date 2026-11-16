@@ -22,11 +22,11 @@
   "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
   "fuzz_smoke_entrypoint": "/work/jazzer",
   "fuzz_smoke_args": [
-    "--cp=/work/classes:/work/lib/jpdfium-1.3.1.jar:/work/lib/xz-1.12.jar:/work/lib/jpdfium-natives-darwin-arm64-1.3.1.jar",
+    "--cp=/work/classes:/work/lib/jpdfium-1.3.1.jar:/work/lib/xz-1.12.jar:/work/lib/jpdfium-natives-linux-arm64-1.3.1.jar",
     "--target_class=GenericHarness",
     "-help=1"
   ],
   "fuzz_smoke_expect": "Usage:",
-  "coverage": "JaCoCo bytecode coverage of com.stirling:jpdfium:1.3.1 during valid-control replay; Jazzer fuzz entry",
+  "coverage": "JaCoCo bytecode coverage of com.stirling:jpdfium:1.3.1 Java binding during valid-control replay; Jazzer fuzz entry. The pinned native PDFium artifact executes but its C++ parser is prebuilt and has no source coverage.",
   "coverage_subject_prefix": "/work/parser-source/"
 }
