@@ -35,10 +35,15 @@
     ]
   },
   "harness": "harness.py",
-  "coverage": "Native Open3D PLY source coverage required; Python binding import coverage alone is insufficient",
+  "coverage": "AFL++ QEMU records native binary edges in the pinned Open3D ReadTriangleMeshFromPLY function during valid PLY parsing. The wheel has no instrumented parser source; source-line coverage is unavailable.",
   "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/open3d/",
-  "underlying_coverage_subject_prefix": "/work/source/Open3D-0.20.0/cpp/open3d/io/file_format/",
-  "underlying_format_specific_coverage_file_suffix": "/FilePLY.cpp",
+  "coverage_kind": "native_binary_edges",
+  "binary_feedback_scope": "underlying_shared_library",
+  "binary_feedback_module": "/opt/venv/lib/python3.14/site-packages/open3d/libOpen3D.so.0.20",
+  "binary_feedback_module_sha256": "f0a24df9c2e81e2aba038f191a2bf96a21ce412902ef77018c71c6012a5c932f",
+  "binary_feedback_variant": "controls/ascii_ply/triangle-colour.ply",
+  "binary_feedback_variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+  "binary_feedback_tool_image_digest": "sha256:d3e2dcafcfbc27bf6b6890e9f9a6e3c420737bb2dc3d8c29d33a76f9c108a090",
   "dependencies": [
     {
       "package": "annotated-types",
@@ -335,5 +340,8 @@
       "release": "4.1.2",
       "sha256": "b30cb6cd253122169c47de245ca24a86bac2a5d3802ba15bf7ba6414eb9e144d"
     }
-  ]
+  ],
+  "binary_feedback_symbol": "open3d::io::ReadTriangleMeshFromPLY",
+  "binary_feedback_symbol_elf_value": "0x40132d0",
+  "binary_feedback_symbol_size_bytes": 1751
 }
