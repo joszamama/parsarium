@@ -445,6 +445,7 @@ def build(output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     catalog_json = json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
     (output / "catalog.json").write_text(catalog_json + "\n", encoding="utf-8")
+    (output / "CNAME").write_text("parsarium.com\n", encoding="utf-8")
     def site_header(root: str, active: str) -> str:
         links = [("Atlas", "atlas"), ("Run", "run"), ("Lab", "lab"), ("Why parsers?", "why")]
         def nav_items() -> str:

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "python",
+  "package": "pycairo",
+  "release": "1.29.2",
+  "catalog_parser": "data/python/png/parsers.json",
+  "source_lock": "adapters/python/png/requirements.lock",
+  "source_sha256": "3e69fff74fe64f5ba2dfa31f67c6bdf26413342574047437d2ac520d35e9a489",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgba0": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "rgba1": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.py",
+  "coverage": "Pycairo binding trace plus isolated AFL++ QEMU edge feedback in the pinned underlying libpng object; no native source-line coverage",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/cairo/",
+  "coverage_kind": "native_binary_edges",
+  "binary_feedback_scope": "underlying_shared_library",
+  "binary_feedback_module": "/opt/venv/lib/libpng16.so.16",
+  "binary_feedback_module_sha256": "2a570998f08a406b4083b06888e528fa0c5d6cc3bef77b40026d661c91cbfb90",
+  "binary_feedback_variant": "controls/png/red-green-title.png",
+  "binary_feedback_variant_sha256": "d643731d4a91c228d705b9cf54c0d6af2c9f53ae4a2d9b2fe5035d649fad1450",
+  "binary_feedback_tool_image_digest": "sha256:d3e2dcafcfbc27bf6b6890e9f9a6e3c420737bb2dc3d8c29d33a76f9c108a090"
+}

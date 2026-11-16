@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-16T15:40:13.810236+00:00",
-  "projects_total": 197,
-  "projects_verified": 197,
+  "checked_at_utc": "2026-11-16T16:04:01.054423+00:00",
+  "projects_total": 199,
+  "projects_verified": 199,
   "results": [
     {
       "schema_version": 1,
@@ -2963,6 +2963,38 @@
     },
     {
       "schema_version": 1,
+      "project": "png/python/pycairo",
+      "verified_at_utc": "2026-11-16T15:48:40.802218+00:00",
+      "pass": true,
+      "coverage_kind": "native_binary_edges",
+      "feedback_kind": "underlying_shared_library_binary_edges",
+      "afl_package": "AFL++ 5.04a QEMU",
+      "afl_map_size": 65536,
+      "feedback_edges": 557,
+      "binary_feedback": {
+        "feedback_kind": "native_binary_edges_not_source_coverage",
+        "module": "/opt/venv/lib/libpng16.so.16",
+        "module_sha256": "2a570998f08a406b4083b06888e528fa0c5d6cc3bef77b40026d661c91cbfb90",
+        "module_text_range": "0x4000849000-0x4000873000",
+        "executable_excluded_range": "0x400000-0xb22000",
+        "control_tuples": 557,
+        "control_map_sha256": "255079a352770ed032b6758611316c8b9c1b7537fc5232b513f50beffe084884",
+        "repeat_identical": true,
+        "variant_tuples": 662,
+        "variant_differs": true,
+        "excluded_module_tuples": 1
+      },
+      "source_lines_covered": null,
+      "base_project_receipt_sha256": "14d59511f095430e1d75aa533832ff93800b41cf472f657ebb604218b772fbcb",
+      "source_sha256": "3e69fff74fe64f5ba2dfa31f67c6bdf26413342574047437d2ac520d35e9a489",
+      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+      "image_id": "sha256:815f7ebd8dc88a937a29c1d381025fb9963d3d3236c1c111fe408af9159de939",
+      "overlay_file_sha256": {
+        "Dockerfile": "bffa47595add9a96cb7d91316db7c341363d5da47bf636da0d07dec0589a18b0"
+      }
+    },
+    {
+      "schema_version": 1,
       "project": "png/python/pygame",
       "verified_at_utc": "2026-11-16T15:19:59.877073+00:00",
       "pass": true,
@@ -3083,6 +3115,29 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "png/python/simpleimageio",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "aba3bd501c0b1ba94defc50bcb64f83c74f3e8c5508e242a426371e0ea93e1f4",
+      "base_image_id": "sha256:fef759eddd4105abbcc1650be4387f1d22418bb9b51bae69837fa83c02cb2cb2",
+      "image_id": "sha256:cb7fe48c5e6b04ba080897434f7e4fd71ea4ecac4396e27769325586cc46540c",
+      "platform": "linux/amd64",
+      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+      "parser_source_features": 611,
+      "feedback_edges": 630,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "5de9e505c30c29bf60be6d12d6ecbccea856876a77fee29e8ea28e34e9d31945",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
       }
     },
     {

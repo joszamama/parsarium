@@ -1,6 +1,6 @@
 # Parsarium website
 
-Parsarium is a static site generated from the repository's parser evidence and runnable target manifests. Its routes are real HTML pages: Home, Atlas, Run, Lab, and Why parsers. They work directly at the GitHub Pages project path and on refresh.
+Parsarium is a static site at [parsarium.com](https://parsarium.com), generated from the repository's parser evidence and runnable target manifests. Its routes are real HTML pages: Home, Atlas, Run, Lab, and Why parsers. They work directly on refresh.
 
 ## Preview locally
 
@@ -15,7 +15,7 @@ Open `http://localhost:8765/`. `website/build.py` checks the 80 cell counts and 
 
 ## Publish on GitHub Pages
 
-In the repository's **Settings → Pages**, choose **GitHub Actions** as the deployment source. The `Publish site` workflow deploys relevant changes on `main` and can run manually. The site has no server, database, or JavaScript build step.
+In the repository's **Settings → Pages**, choose **GitHub Actions** as the deployment source and set the custom domain to `parsarium.com`. The `Publish site` workflow deploys relevant changes on `main` and can run manually. The build writes `CNAME` into the Pages artifact. The site has no server, database, or JavaScript build step.
 
 The Atlas links to format and parser guides, rankings, evidence, and harness manifests in the main repository. A private repository's links require repository read access until it is made public. Counts are generated from the current audit during each build.
 
