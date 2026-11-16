@@ -19,6 +19,11 @@
 
 Direct MuPDF C API call from a C++17 translation unit; distinct from Poppler, PoDoFo, and qpdf. The official GitHub repository is a mirror of the canonical Ghostscript Git repository.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/mupdf/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp mupdf
+python3 parsarium.py run pdf cpp mupdf controls/pdf/one-page.pdf
+```

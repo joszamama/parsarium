@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "cpp",
+  "package": "mupdf",
+  "release": "1.28.6",
+  "catalog_parser": "data/cpp/pdf/parsers.json",
+  "source_lock": "data/cpp/pdf/source-lock.json",
+  "source_sha256": "dc85000640a45d90ca9b77b061f6ca67cce0c4d4fbecf8819647baf573eef101",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned MuPDF PDF parser",
+  "coverage_subject_prefix": "/work/source/source/",
+  "underlying_coverage_subject_prefix": "/work/source/source/pdf/",
+  "format_specific_coverage_file_suffix": "/pdf-parse.c"
+}

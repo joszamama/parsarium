@@ -30,6 +30,11 @@
 
 Same MuPDF package also has a separate PDF cell path; this SVG path uses the native source/svg parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/mupdf/README.md)
+
+```sh
+python3 parsarium.py build svg c mupdf
+python3 parsarium.py run svg c mupdf controls/svg/red-green.svg
+```

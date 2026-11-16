@@ -19,6 +19,11 @@
 
 Direct C API; same engine and release as C++ PDF call site.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/c/mupdf/README.md)
+
+```sh
+python3 parsarium.py build pdf c mupdf
+python3 parsarium.py run pdf c mupdf controls/pdf/one-page.pdf
+```

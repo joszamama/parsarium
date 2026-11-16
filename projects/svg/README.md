@@ -8,6 +8,7 @@
 - [imagemagick / C](c/imagemagick/README.md)
 - [imlib2 / C](c/imlib2/README.md)
 - [libvips / C](c/libvips/README.md)
+- [mupdf / C](c/mupdf/README.md)
 - [nanosvg / C](c/nanosvg/README.md)
 - [plutosvg / C](c/plutosvg/README.md)
 - [sdl2_image / C](c/sdl2_image/README.md)
