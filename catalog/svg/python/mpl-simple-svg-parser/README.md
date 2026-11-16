@@ -23,6 +23,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/python/mpl_simple_svg_parser/README.md)
+
+```sh
+python3 parsarium.py build svg python mpl_simple_svg_parser
+python3 parsarium.py run svg python mpl_simple_svg_parser controls/svg/red-green.svg
+```

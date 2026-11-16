@@ -32,6 +32,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/python/resvglite/README.md)
+
+```sh
+python3 parsarium.py build svg python resvglite
+python3 parsarium.py run svg python resvglite controls/svg/red-green.svg
+```
