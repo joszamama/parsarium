@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "cpp",
+  "package": "karchive",
+  "release": "6.31.0",
+  "catalog_parser": "data/cpp/zip/parsers.json",
+  "source_lock": "data/cpp/zip/extra-source-lock.json",
+  "source_sha256": "95acaf5a459593184104e1c157cef415ec59a33e71674186169e0df33cdacaac",
+  "build_dependencies": {
+    "extra-cmake-modules": {
+      "release": "6.31.0",
+      "source_url": "https://download.kde.org/stable/frameworks/6.31/extra-cmake-modules-6.31.0.tar.xz",
+      "source_sha256": "8f74af329e4c918358bfe54316f8cf4d530c28444595a3e2fb15075f72877f17",
+      "role": "CMake modules only; nothing is compiled"
+    },
+    "qt6-base-dev": {
+      "release": "6.10.2+dfsg-7",
+      "source": "Ubuntu 26.04 archive; version asserted in the Dockerfile build and runtime stages",
+      "instrumented": false
+    },
+    "zlib1g-dev": {
+      "release": "Ubuntu 26.04 archive version at build time, recorded in /work/toolchain.txt",
+      "source": "Ubuntu 26.04 archive; not version-asserted because security updates replace it",
+      "instrumented": false
+    }
+  },
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": 1,
+    "name": "hello.txt",
+    "content": "parsarium\n"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in the static KArchive 6.31.0 library (KZip, KArchive, KCompressionDevice, KGzipFilter, KLimitedIODevice) reached through KZip(local path), open(QIODevice::ReadOnly), KArchiveDirectory::entries/file and KArchiveFile::data on a temporary copy of the input; Qt6Core and zlib are uninstrumented Ubuntu libraries",
+  "coverage_subject_prefix": "/work/source/src/",
+  "format_specific_coverage_file_suffix": "/kzip.cpp"
+}
