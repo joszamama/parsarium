@@ -11,7 +11,18 @@
       "adapter": "adapters/javascript/svg_browser.mjs",
       "control": "controls/svg/red-green.svg",
       "observable_result": "SVGSVGElement with two SVGRectElement children and parsed width, height, and fill fields",
-      "result": "data/javascript/svg/verification.json"
+      "result": "data/javascript/svg/verification.json",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "rects": 2,
+        "fills": [
+          "#ff0000",
+          "#00ff00"
+        ],
+        "typed_root": true,
+        "typed_rects": true
+      }
     },
     {
       "runtime": "Chromium 153.0.8010.12 via Playwright 1.63.0",
@@ -20,7 +31,21 @@
       "adapter": "adapters/javascript/svg_browser.mjs",
       "control": "controls/svg/red-green.svg",
       "observable_result": "2×1 decoded image with red and green RGBA pixels",
-      "result": "data/javascript/svg/verification.json"
+      "result": "data/javascript/svg/verification.json",
+      "expected": {
+        "width": 2,
+        "height": 1,
+        "rgba": [
+          255,
+          0,
+          0,
+          255,
+          0,
+          255,
+          0,
+          255
+        ]
+      }
     }
   ],
   "candidate_control_failures": [
@@ -33,7 +58,9 @@
   "no_api_findings": [
     {
       "runtime": "Node.js 26.10.0 core modules",
-      "official_documentation_scope": ["https://nodejs.org/download/release/v26.10.0/docs/api/"],
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/"
+      ],
       "finding": "The built-in API index documents no SVG-specific image reader or renderer. File system, Buffer, and XML-adjacent generic text APIs do not expose parsed SVG elements or pixels."
     }
   ],
