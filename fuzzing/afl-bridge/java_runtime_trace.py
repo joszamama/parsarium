@@ -15,10 +15,19 @@ def main() -> None:
         work = Path(temporary)
         execution = work / "jacoco.exec"
         report = work / "jacoco.xml"
-        agent = (f"-javaagent:/work/jacocoagent.jar=destfile={execution},append=false,"
-                 f"includes={os.environ['PARSARIUM_JACOCO_INCLUDES']},inclbootstrapclasses=true")
+        if "PARSARIUM_JAVA_PATCH" in os.environ:
+            coverage_args = [
+                "--patch-module", f"java.base={os.environ['PARSARIUM_JAVA_PATCH']}",
+                "--add-reads", "java.base=ALL-UNNAMED",
+                f"-Xbootclasspath/a:{os.environ['PARSARIUM_JAVA_BOOTPATH']}",
+                f"-Djacoco-agent.destfile={execution}",
+            ]
+        else:
+            agent = (f"-javaagent:/work/jacocoagent.jar=destfile={execution},append=false,"
+                     f"includes={os.environ['PARSARIUM_JACOCO_INCLUDES']},inclbootstrapclasses=true")
+            coverage_args = [agent]
         result = subprocess.run(
-            ["java", agent, "-cp", "/work/afl-java-classes:" +
+            ["java", *coverage_args, "-cp", "/work/afl-java-classes:" +
              os.environ["PARSARIUM_JAVA_CLASSPATH"], "JavaCase", sys.argv[1]],
             capture_output=True, text=True, errors="replace", timeout=30,
         )

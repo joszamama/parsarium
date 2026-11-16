@@ -17,6 +17,9 @@ RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/ja
 RUN curl --fail --location --retry 3 https://github.com/CodeIntelligenceTesting/jazzer/releases/download/v0.26.0/jazzer-linux-arm64.tar.gz -o /work/jazzer.tar.gz \
     && echo '0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f  /work/jazzer.tar.gz' | sha256sum --check \
     && tar -xf /work/jazzer.tar.gz -C /work
+RUN mkdir -p /work/instrumented/java/util/jar /work/jacoco-agent-unpacked \
+    && java -jar /work/jacococli.jar instrument /work/parser-classes/java/util/jar/JarFile.class --dest /work/instrumented/java/util/jar \
+    && cd /work/jacoco-agent-unpacked && jar xf /work/jacocoagent.jar
 COPY GenericHarness.java /work/
 RUN mkdir /work/classes && javac -d /work/classes /work/GenericHarness.java \
     && { java -version 2>&1 | head -1; /work/jazzer --version 2>&1 | head -1; } > /work/toolchain.txt
@@ -28,6 +31,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 \
 WORKDIR /work
 COPY --from=build /work/classes /work/classes
 COPY --from=build /work/parser-classes /work/parser-classes
+COPY --from=build /work/instrumented /work/instrumented
+COPY --from=build /work/jacoco-agent-unpacked /work/jacoco-agent-unpacked
 COPY --from=build /work/parser-sources /work/parser-sources
 COPY --from=build /work/jacocoagent.jar /work/jacocoagent.jar
 COPY --from=build /work/jacococli.jar /work/jacococli.jar

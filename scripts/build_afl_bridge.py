@@ -102,10 +102,14 @@ def build_one(relative: Path) -> dict:
         java_environment = {
             "PARSARIUM_JAVA_CLASSPATH": classpath,
             "PARSARIUM_TARGET_CLASS": target,
-            "PARSARIUM_JACOCO_INCLUDES": extract(r"includes=([^ ,\\]+)"),
             "PARSARIUM_PARSER_JAR": extract(r"--classfiles\s+(\S+)"),
             "PARSARIUM_PARSER_SOURCES": extract(r"--sourcefiles\s+(\S+)"),
         }
+        if "--patch-module java.base=" in control_script:
+            java_environment["PARSARIUM_JAVA_PATCH"] = extract(r"--patch-module java.base=(\S+)")
+            java_environment["PARSARIUM_JAVA_BOOTPATH"] = extract(r"-Xbootclasspath/a:(\S+)")
+        else:
+            java_environment["PARSARIUM_JACOCO_INCLUDES"] = extract(r"includes=([^ ,\\]+)")
         trace_command = f'python3 /work/afl_{java_trace_name}'
         bridge_names = ("afl_proxy.c", "JavaCase.java", java_trace_name)
     elif ecosystem == "javascript":

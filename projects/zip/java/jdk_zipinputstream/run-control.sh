@@ -2,7 +2,10 @@
 set -eu
 test -f /input/control
 mkdir -p /coverage
-java -javaagent:/work/jacocoagent.jar=destfile=/coverage/jacoco.exec,append=false,includes=java.util.zip.*:java.util.jar.*,inclbootstrapclasses=true \
+java --patch-module java.base=/work/instrumented \
+  --add-reads java.base=ALL-UNNAMED \
+  -Xbootclasspath/a:/work/jacoco-agent-unpacked \
+  -Djacoco-agent.destfile=/coverage/jacoco.exec \
   -cp /work/classes GenericHarness /input/control > /coverage/observed.json
 java -jar /work/jacococli.jar report /coverage/jacoco.exec \
   --classfiles /work/parser-classes --sourcefiles /work/parser-sources --xml /coverage/jacoco.xml --quiet

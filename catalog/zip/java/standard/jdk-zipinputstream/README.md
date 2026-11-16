@@ -17,6 +17,9 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build zip java jdk_zipinputstream
+python3 parsarium.py run zip java jdk_zipinputstream controls/zip/hello.zip
+```
