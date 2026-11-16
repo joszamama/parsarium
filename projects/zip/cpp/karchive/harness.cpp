@@ -35,7 +35,13 @@ static bool read_archive(const std::string& path, std::size_t input_size, ParseR
   const KArchiveDirectory* root = archive.directory();
   if (!root) return false;
   QStringList names = root->entries();
-  if (names.isEmpty()) return false;
+  if (names.isEmpty()) {
+    out.entries = 0;
+    out.name.clear();
+    out.content.clear();
+    archive.close();
+    return true;
+  }
   // entries() follows QHash order; sorting keeps the reported entry stable.
   names.sort();
   const KArchiveFile* file = root->file(names.first());
