@@ -1,6 +1,6 @@
 # PNG / Java
 
-20 verified third-party API paths; 16 have verified Docker harnesses.
+20 verified third-party API paths; 17 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/png/ranking.md) · [standard API inventory](../../../data/java/png/standard.json)
 
@@ -8,7 +8,7 @@
 
 - [commons-imaging](commons-imaging/README.md) — Docker harness ready
 - [pngj](pngj/README.md) — Docker harness ready
-- [thumbnailator](thumbnailator/README.md) — verified API path
+- [thumbnailator](thumbnailator/README.md) — Docker harness ready
 - [ij](ij/README.md) — Docker harness ready
 - [boofcv-io](boofcv-io/README.md) — Docker harness ready
 - [batik-codec](batik-codec/README.md) — Docker harness ready

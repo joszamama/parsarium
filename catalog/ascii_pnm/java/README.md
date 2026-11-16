@@ -1,6 +1,6 @@
 # ASCII PNM / Java
 
-20 verified third-party API paths; 17 have verified Docker harnesses.
+20 verified third-party API paths; 18 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/ascii_pnm/ranking.md) · [standard API inventory](../../../data/java/ascii_pnm/standard.json)
 
@@ -11,7 +11,7 @@
 - [jai-imageio-core](jai-imageio-core/README.md) — Docker harness ready
 - [ij](ij/README.md) — Docker harness ready
 - [openpnp-opencv](openpnp-opencv/README.md) — Docker harness ready
-- [thumbnailator](thumbnailator/README.md) — verified API path
+- [thumbnailator](thumbnailator/README.md) — Docker harness ready
 - [boofcv-io](boofcv-io/README.md) — Docker harness ready
 - [tika-image](tika-image/README.md) — Docker harness ready
 - [imageio-native-vips](imageio-native-vips/README.md) — verified API path
