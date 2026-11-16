@@ -84,6 +84,45 @@ def native_source_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
+def third_party_control_verified(path: Path, manifest: dict) -> bool:
+    """Validate a staged third-party Docker control without promoting parser feedback."""
+    if (manifest.get("coverage_kind") != "control_only"
+            or manifest.get("parser_feedback_available") is not False
+            or manifest.get("native_parser_source_coverage") != "unavailable"):
+        return False
+    receipt = path.parent / "control-verification.json"
+    if not receipt.is_file():
+        return False
+    observed = json.loads(receipt.read_text())
+    current_files = {
+        str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+        for file in sorted(path.parent.rglob("*"))
+        if file.is_file() and file.name not in {"control-verification.json", "README.md"}
+        and "target" not in file.relative_to(path.parent).parts
+        and "__pycache__" not in file.relative_to(path.parent).parts
+    }
+    return (
+        observed.get("status") == "verified_control_only"
+        and observed.get("platform") == manifest["platform"]
+        and observed.get("base_image") == manifest["base_image"]
+        and observed.get("release") == manifest["release"]
+        and observed.get("source_sha256") == manifest["source_sha256"]
+        and observed.get("image_id", "").startswith("sha256:")
+        and observed.get("control_sha256") == manifest["control_sha256"]
+        and observed.get("output") == manifest["expected_output"]
+        and sha256((ROOT / manifest["control"]).read_bytes()).hexdigest() == manifest["control_sha256"]
+        and observed.get("variant_sha256") == manifest.get("control_variant_sha256")
+        and sha256((ROOT / manifest["control_variant"]).read_bytes()).hexdigest()
+            == manifest["control_variant_sha256"]
+        and observed.get("variant_output") != observed.get("output")
+        and observed.get("qtsvg_module_sha256") == manifest.get("qtsvg_module_sha256")
+        and observed.get("parser_source_lines_covered") is None
+        and observed.get("parser_feedback_available") is False
+        and observed.get("afl_feedback_edges") is None
+        and observed.get("project_file_sha256") == current_files
+    )
+
+
 def macos_host_control_verified(path: Path, manifest: dict) -> bool:
     """Validate the pinned macOS control, separately from Docker and AFL paths."""
     if (manifest.get("kind") != "standard"
@@ -395,6 +434,9 @@ def main() -> None:
                     or dependency["sha256"] not in lock
                     or dependency["sha256"] not in docker_text):
                 raise ValueError(f"dependency pin mismatch: {path}")
+        if (manifest.get("coverage_kind") == "control_only"
+                and not third_party_control_verified(path, manifest)):
+            raise ValueError(f"third-party staged control receipt mismatch: {path}")
         (completed if fully_runnable(path, manifest) else staged).add(key)
 
     for path in sorted((ROOT / "projects").glob("*/*/*/macos-manifest.json")):

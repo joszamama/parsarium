@@ -9,7 +9,8 @@ from pathlib import Path
 import re
 
 from audit_projects import (browser_control_verified, native_source_control_verified,
-                            macos_host_control_verified, fully_runnable)
+                            macos_host_control_verified, third_party_control_verified,
+                            fully_runnable)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -74,6 +75,7 @@ def main() -> None:
     args = cli.parse_args()
     manifest_paths = sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
     projects = {}
+    staged_third_party_projects = {}
     standard_projects = {}
     staged_browser_projects = {}
     staged_native_source_projects = {}
@@ -85,6 +87,10 @@ def main() -> None:
             staged_browser_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
         if manifest.get("kind") == "standard" and native_source_control_verified(path, manifest):
             staged_native_source_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+        if (manifest.get("kind") != "standard" and manifest.get("coverage_kind") == "control_only"
+                and third_party_control_verified(path, manifest)):
+            staged_third_party_projects[(manifest["format"], manifest["ecosystem"],
+                                         manifest["package"])] = path
         if not fully_runnable(path, manifest):
             continue
         project_guides += 1
@@ -123,6 +129,7 @@ def main() -> None:
                 item_dir = cell_dir / slug(name, bases)
                 readme = item_dir / "README.md"
                 project = projects.get((fmt, eco, name))
+                staged_project = staged_third_party_projects.get((fmt, eco, name))
                 ready = bool(project and fully_runnable(project[0], project[1]))
                 if project and project[1]["release"] != entry["version"]:
                     raise ValueError(f"release mismatch in {project[0]}")
@@ -159,6 +166,12 @@ def main() -> None:
                     if manifest.get("coverage_limit"):
                         lines += [f"**Coverage limit:** {manifest['coverage_limit']}", ""]
                     format_projects.append((eco, name, project_dir))
+                elif staged_project:
+                    project_dir = staged_project.parent
+                    lines += ["## Verified Docker control", "",
+                              f"[Control harness and receipt]({link(item_dir, project_dir / 'README.md')})", "",
+                              "The pinned valid control parses successfully in Docker. Native parser source "
+                              "coverage and AFL++ feedback are unavailable for this path, so it remains staged.", ""]
                 else:
                     lines += ["## Runnable harness", "",
                               "A Docker harness with parser-source coverage has not yet been verified for this API path.", ""]
