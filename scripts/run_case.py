@@ -35,6 +35,7 @@ def project_for(format_name: str, ecosystem: str, slug: str) -> tuple[Path, dict
                if path.is_file() and path.name != "verification.json"
                and path.relative_to(project) != Path("README.md")
                and "target" not in path.relative_to(project).parts
+               and "vendor" not in path.relative_to(project).parts
                and "__pycache__" not in path.relative_to(project).parts}
     if present != set(receipt["project_file_sha256"]):
         raise ValueError("project file set changed since verification")

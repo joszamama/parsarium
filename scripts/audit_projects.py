@@ -75,7 +75,9 @@ def receipt_verified(path: Path, manifest: dict) -> bool:
                      for file in sorted(path.parent.rglob("*"))
                      if file.is_file() and file.name != "verification.json"
                      and file.relative_to(path.parent) != Path("README.md")
-                     and "target" not in file.relative_to(path.parent).parts}
+                     and "target" not in file.relative_to(path.parent).parts
+                     and "vendor" not in file.relative_to(path.parent).parts
+                     and "__pycache__" not in file.relative_to(path.parent).parts}
     binary = manifest.get("coverage_kind") == "native_binary_edges"
     if binary:
         try:

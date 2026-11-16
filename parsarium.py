@@ -139,7 +139,7 @@ def main() -> int:
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
 
-    listed = commands.add_parser("list", help="show verified and runnable counts by cell")
+    listed = commands.add_parser("list", help="show verified and runnable counts by format and ecosystem")
     listed.add_argument("--format", choices=FORMATS)
     listed.add_argument("--ecosystem", choices=ECOSYSTEMS)
     listed.add_argument("--json", action="store_true")
@@ -188,6 +188,16 @@ def main() -> int:
     corpus.add_argument("--workers", type=int, default=4)
     corpus.add_argument("--timeout", type=int, default=60)
     corpus.add_argument("--batch-timeout", type=int, default=3600)
+
+    format_run = commands.add_parser("run-format", help="run every verified Docker harness for a format")
+    format_run.add_argument("format", choices=FORMATS)
+    format_run.add_argument("--ecosystem", choices=ECOSYSTEMS)
+    format_run.add_argument("--file", type=Path)
+    format_run.add_argument("--results", type=Path)
+    format_run.add_argument("--workers", type=int, default=1)
+    format_run.add_argument("--timeout", type=int, default=60)
+    format_run.add_argument("--limit", type=int)
+    format_run.add_argument("--list", action="store_true")
 
     afl = commands.add_parser("afl", help="build, prepare, run, and summarize AFL++")
     afl_commands = afl.add_subparsers(dest="action", required=True)
@@ -263,6 +273,19 @@ def main() -> int:
             extra.append("--per-case")
         return execute("replay_corpus.py", args.format, args.ecosystem, args.slug,
                        str(args.corpus), str(args.run_dir), *extra)
+    if args.command == "run-format":
+        extra = ["--workers", str(args.workers), "--timeout", str(args.timeout)]
+        if args.ecosystem:
+            extra += ["--ecosystem", args.ecosystem]
+        if args.file:
+            extra += ["--file", str(args.file)]
+        if args.results:
+            extra += ["--results", str(args.results)]
+        if args.limit:
+            extra += ["--limit", str(args.limit)]
+        if args.list:
+            extra.append("--list")
+        return execute("run_format.py", args.format, *extra)
     if args.command == "afl":
         if args.action == "build":
             return build_afl(args.format, args.ecosystem, args.slug)

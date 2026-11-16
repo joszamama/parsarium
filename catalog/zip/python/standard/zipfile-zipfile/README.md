@@ -21,6 +21,9 @@
 
 [Control adapter](../../../../../adapters/python/zip/standard.py)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build zip python stdlib_zipfile
+python3 parsarium.py run zip python stdlib_zipfile controls/zip/hello.zip
+```

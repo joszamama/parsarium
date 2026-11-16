@@ -199,6 +199,8 @@ def main() -> None:
             if path.is_file() and path.name != "verification.json"
             and path.relative_to(project) != Path("README.md")
             and "target" not in path.relative_to(project).parts
+            and "vendor" not in path.relative_to(project).parts
+            and "__pycache__" not in path.relative_to(project).parts
         },
         "output": summary["output"],
         "parser_source_files": summary["parser_source_files"],
