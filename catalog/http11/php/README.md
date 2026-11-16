@@ -1,6 +1,6 @@
 # HTTP/1.1 / PHP
 
-20 verified third-party API paths; 18 have verified Docker harnesses.
+20 verified third-party API paths; 20 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/php/http11/ranking.md) · [standard API inventory](../../../data/php/http11/standard.json)
 
@@ -24,8 +24,8 @@
 - [phpstandard/raw-request-factory](phpstandard-raw-request-factory/README.md) — Docker harness ready
 - [angus/laminas-http](angus-laminas-http/README.md) — Docker harness ready
 - [workerman/workerman](workerman-workerman/README.md) — Docker harness ready
-- [react/http](react-http/README.md) — verified API path
-- [amphp/http-server](amphp-http-server/README.md) — verified API path
+- [react/http](react-http/README.md) — Docker harness ready
+- [amphp/http-server](amphp-http-server/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 
