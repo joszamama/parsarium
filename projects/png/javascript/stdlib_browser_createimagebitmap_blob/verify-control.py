@@ -26,8 +26,8 @@ def main() -> None:
     manifest = json.loads((PROJECT / "manifest.json").read_text())
     control = ROOT / manifest["control"]
     if sha256(control.read_bytes()).hexdigest() != manifest["control_sha256"]:
-        raise RuntimeError("PNG control changed")
-    image = "parsarium/png-javascript-stdlib_browser_createimagebitmap_blob:local"
+        raise RuntimeError("valid control changed")
+    image = f"parsarium/{manifest['format']}-{manifest['ecosystem']}-{PROJECT.name}:local"
     with docker_build_slot():
         command(["docker", "build", "--quiet", "--platform", manifest["platform"],
                  "-t", image, str(PROJECT)])
@@ -64,6 +64,13 @@ def main() -> None:
         "adapter_coverage_scope": summary["adapter_coverage_scope"],
         "native_decoder_source_coverage": "unavailable",
         "parser_feedback_available": False,
+        "project_file_sha256": {
+            str(file.relative_to(PROJECT)): sha256(file.read_bytes()).hexdigest()
+            for file in sorted(PROJECT.rglob("*"))
+            if file.is_file() and file.name not in {"control-verification.json", "README.md"}
+            and "target" not in file.relative_to(PROJECT).parts
+            and "__pycache__" not in file.relative_to(PROJECT).parts
+        },
     }
     (PROJECT / "control-verification.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(observed)

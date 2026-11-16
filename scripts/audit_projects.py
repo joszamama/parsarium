@@ -199,11 +199,27 @@ def main() -> None:
                     raise ValueError(f"missing browser control receipt: {path}")
                 observed = json.loads(control_receipt.read_text())
                 if (observed.get("status") != "verified_control_only"
+                        or observed.get("api") != manifest["api"]
+                        or observed.get("runtime") != manifest["runtime"]
+                        or observed.get("base_image") != manifest["base_image"]
+                        or observed.get("browser_binary_sha256") != manifest["source_sha256"]
+                        or not observed.get("image_id", "").startswith("sha256:")
                         or observed.get("output") != manifest["expected_output"]
                         or observed.get("control_sha256") != manifest["control_sha256"]
+                        or observed.get("adapter_js_functions_covered", 0) <= 0
+                        or observed.get("adapter_coverage_scope") != "browser-harness.js only"
                         or observed.get("native_decoder_source_coverage") != "unavailable"
                         or observed.get("parser_feedback_available") is not False):
                     raise ValueError(f"browser control receipt mismatch: {path}")
+                current_files = {
+                    str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+                    for file in sorted(path.parent.rglob("*"))
+                    if file.is_file() and file.name not in {"control-verification.json", "README.md"}
+                    and "target" not in file.relative_to(path.parent).parts
+                    and "__pycache__" not in file.relative_to(path.parent).parts
+                }
+                if observed.get("project_file_sha256") != current_files:
+                    raise ValueError(f"browser control files changed since verification: {path}")
                 pinned_fields = ("base_image", "source_sha256")
             else:
                 pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")
