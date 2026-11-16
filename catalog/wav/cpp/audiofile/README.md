@@ -4,7 +4,7 @@
 - **License:** MIT
 - **Parsed scope:** WAV sample rate, channels, frame count and four decoded PCM samples
 - **Underlying family:** adamstark AudioFile WAV parser
-- **Local input API:** `AudioFile<int16_t>::load(const std::string&); getSampleRate; getNumChannels; getNumSamplesPerChannel; samples`
+- **Local input API:** `AudioFile<int16_t>::load(const std::string&) or loadFromMemory(const std::vector<uint8_t>&); getSampleRate; getNumChannels; getNumSamplesPerChannel; samples`
 - **Documentation:** [API reference](<https://github.com/adamstark/AudioFile/blob/1.1.4/README.md>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/wav/parsers.json) · [control verification](../../../../data/cpp/wav/verification.json) · [within-ecosystem ranking](../../../../data/cpp/wav/ranking.md)
 - **Valid control:** [`controls/wav/four-samples.wav`](../../../../controls/wav/four-samples.wav)
@@ -27,6 +27,11 @@
 
 Header-only C++ WAV parser; unrelated to the C Audio File Library package called libaudiofile.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/cpp/audiofile/README.md)
+
+```sh
+python3 parsarium.py build wav cpp audiofile
+python3 parsarium.py run wav cpp audiofile controls/wav/four-samples.wav
+```

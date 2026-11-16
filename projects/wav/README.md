@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [allegro / C](c/allegro/README.md)
 - [aubio / C](c/aubio/README.md)
 - [csfml / C](c/csfml/README.md)
 - [dr_wav / C](c/dr_wav/README.md)
@@ -23,7 +24,9 @@
 - [sdl3_sound / C](c/sdl3_sound/README.md)
 - [sox / C](c/sox/README.md)
 - [taglib / C](c/taglib/README.md)
+- [allegro / C++](cpp/allegro/README.md)
 - [aubio / C++](cpp/aubio/README.md)
+- [audiofile / C++](cpp/audiofile/README.md)
 - [csfml / C++](cpp/csfml/README.md)
 - [dr_wav / C++](cpp/dr_wav/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)

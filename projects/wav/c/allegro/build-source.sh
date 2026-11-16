@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+cmake -S /work/source -B /work/build \
+ -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER=clang \
+ -DCMAKE_C_FLAGS='-O1 -g -fprofile-instr-generate -fcoverage-mapping' \
+ -DCMAKE_SHARED_LINKER_FLAGS=-fprofile-instr-generate \
+ -DCMAKE_INSTALL_PREFIX=/work/install -DSHARED=ON \
+ -DWANT_X11=OFF -DWANT_OPENGL=OFF -DWANT_IMAGE=OFF -DWANT_TTF=OFF \
+ -DWANT_FONT=OFF -DWANT_PRIMITIVES=OFF -DWANT_VIDEO=OFF -DWANT_NATIVE_DIALOG=OFF \
+ -DWANT_EXAMPLES=OFF -DWANT_DEMO=OFF -DWANT_TESTS=OFF -DWANT_DOCS=OFF \
+ -DWANT_FLAC=OFF -DWANT_VORBIS=OFF -DWANT_TREMOR=OFF -DWANT_OPUS=OFF \
+ -DWANT_DUMB=OFF -DWANT_OPENMPT=OFF -DWANT_MP3=OFF
+cmake --build /work/build --parallel 6
+cmake --install /work/build

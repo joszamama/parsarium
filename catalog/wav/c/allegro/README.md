@@ -27,6 +27,11 @@
 
 Allegro audio codec add-on registers its own WAV loader; official versioned docs list little-endian PCM WAV support. Core, audio and codec add-on binaries are SHA-256-checked.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/allegro/README.md)
+
+```sh
+python3 parsarium.py build wav c allegro
+python3 parsarium.py run wav c allegro controls/wav/four-samples.wav
+```

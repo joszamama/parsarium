@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "format": "wav",
+  "ecosystem": "c",
+  "package": "allegro",
+  "release": "5.2.11.3",
+  "catalog_parser": "data/c/wav/parsers.json",
+  "source_lock": "data/c/wav/source-lock.json",
+  "source_sha256": "aba4679a5b1f2bf62482eba6e8814a94de7ffc86de5f8587ba199fcc61b4a04f",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/wav/four-samples.wav",
+  "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
+  "expected_output": {
+    "sample_rate": 8000,
+    "channels": 1,
+    "frames": 4,
+    "samples": [
+      0,
+      1000,
+      -1000,
+      0
+    ]
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned Allegro audio codec WAV reader",
+  "coverage_subject_prefix": "/work/source/addons/acodec/",
+  "format_specific_coverage_file_suffix": "/wav.c"
+}
