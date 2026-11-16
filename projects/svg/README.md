@@ -6,6 +6,7 @@
 
 - [nanosvg / C](c/nanosvg/README.md)
 - [plutosvg / C](c/plutosvg/README.md)
+- [sdl2_image / C](c/sdl2_image/README.md)
 - [sdl3_image / C](c/sdl3_image/README.md)
 - [plutosvg / C++](cpp/plutosvg/README.md)
 - [sdl3_image / C++](cpp/sdl3_image/README.md)

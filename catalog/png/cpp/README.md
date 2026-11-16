@@ -1,6 +1,6 @@
 # PNG / C++
 
-24 verified third-party API paths; 9 have verified Docker harnesses.
+24 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/png/ranking.md) · [standard API inventory](../../../data/cpp/png/standard.json)
 
@@ -16,7 +16,7 @@
 - [pngle](pngle/README.md) — Docker harness ready
 - [sdl3](sdl3/README.md) — Docker harness ready
 - [sdl3_image](sdl3-image/README.md) — Docker harness ready
-- [sdl2_image](sdl2-image/README.md) — verified API path
+- [sdl2_image](sdl2-image/README.md) — Docker harness ready
 - [freeimage](freeimage/README.md) — verified API path
 - [cairo](cairo/README.md) — verified API path
 - [gd](gd/README.md) — verified API path

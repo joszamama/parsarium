@@ -32,6 +32,11 @@
 
 Separate SDL2_image distribution path from SDL3_image; recorded binary links libpng. Both share the SDL_image project family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/c/sdl2_image/README.md)
+
+```sh
+python3 parsarium.py build png c sdl2_image
+python3 parsarium.py run png c sdl2_image controls/png/red-green.png
+```

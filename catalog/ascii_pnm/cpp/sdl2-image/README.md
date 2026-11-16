@@ -32,6 +32,11 @@
 
 SDL2_image IMG_Load parsed the P3 control; SDL3_image is a separate major-version package from the same upstream project and shares parser lineage.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/sdl2_image/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp sdl2_image
+python3 parsarium.py run ascii_pnm cpp sdl2_image controls/ascii_pnm/red-green.ppm
+```

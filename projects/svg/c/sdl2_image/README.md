@@ -1,0 +1,17 @@
+# sdl2_image — SVG / C
+
+Pinned release: `2.8.12`. [Manifest](manifest.json) · [verification receipt](verification.json)
+
+[API, control result, and parser family](../../../../catalog/svg/c/sdl2-image/README.md)
+
+## Run from the repository root
+
+```sh
+python3 parsarium.py build svg c sdl2_image
+python3 parsarium.py run svg c sdl2_image controls/svg/red-green.svg
+python3 parsarium.py replay svg c sdl2_image CORPUS_DIR runs/svg-sdl2_image-replay
+python3 parsarium.py afl build svg c sdl2_image
+python3 parsarium.py afl prepare svg c sdl2_image runs/svg-sdl2_image-afl
+```
+
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

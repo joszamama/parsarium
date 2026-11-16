@@ -27,6 +27,11 @@
 
 Official SDL2 2.32.10 source-built library, separate from sdl2-compat and SDL3 package paths; SDL WAV code lineage is shared across major versions. Same adapter C API is linked against this isolated native SDL2 binary.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/wav/c/sdl2/README.md)
+
+```sh
+python3 parsarium.py build wav c sdl2
+python3 parsarium.py run wav c sdl2 controls/wav/four-samples.wav
+```

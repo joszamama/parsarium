@@ -32,6 +32,11 @@
 
 A distinct SDL2_image package/API from SDL3_image, but both embed NanoSVG and share the standalone NanoSVG parser family. The installed SDL2 ABI is provided by sdl2-compat.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/sdl2_image/README.md)
+
+```sh
+python3 parsarium.py build svg c sdl2_image
+python3 parsarium.py run svg c sdl2_image controls/svg/red-green.svg
+```
