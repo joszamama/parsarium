@@ -6,6 +6,7 @@
 
 - [libvips / C](c/libvips/README.md)
 - [mupdf / C](c/mupdf/README.md)
+- [poppler-glib / C](c/poppler-glib/README.md)
 - [qpdf / C](c/qpdf/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [mupdf / C++](cpp/mupdf/README.md)

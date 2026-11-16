@@ -1,12 +1,12 @@
 # PDF / C
 
-10 verified third-party API paths; 3 have verified Docker harnesses.
+10 verified third-party API paths; 4 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/pdf/ranking.md) · [standard API inventory](../../../data/c/pdf/standard.json)
 
 ## Third-party parsers
 
-- [poppler-glib](poppler-glib/README.md) — verified API path
+- [poppler-glib](poppler-glib/README.md) — Docker harness ready
 - [qpdf](qpdf/README.md) — Docker harness ready
 - [mupdf](mupdf/README.md) — Docker harness ready
 - [ghostscript](ghostscript/README.md) — verified API path
