@@ -3327,5 +3327,473 @@
       "limitation": "Package-level downloads; they do not measure YAML parsing."
     },
     "project": "projects/yaml/python/yamlcore"
+  },
+  {
+    "name": "ryaml",
+    "version": "0.5.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/ryaml/0.5.1/json (License: MIT in PKG-INFO; LICENSE in the sdist pinned by SHA-256); serde_yaml (MIT OR Apache-2.0) and unsafe-libyaml (MIT) pinned by Cargo.lock checksum",
+    "input_api": "ryaml.loads(str) on the strict UTF-8 decoding of local YAML bytes; ryaml.load(local binary stream) gives the same tree (the binding has no bytes API)",
+    "documentation": "https://github.com/emmatyping/ryaml/blob/v0.5.1/README.md",
+    "documentation_evidence": "The ryaml README (sdist and upstream) documents ryaml.loads(str) for a str and ryaml.load(fp) for a file object, returning Python values; py-src/ryaml/__init__.py decodes a binary file object as UTF-8 before loads.",
+    "source": "https://files.pythonhosted.org/packages/91/c7/f7357990e2ee4958258fe8b8a65a1bcd5d7526d76a04c3a2a5c1707ee05c/ryaml-0.5.1.tar.gz",
+    "source_sha256": "b092d15521016f567aace04365d0aa36bea4270f34ebe264ef9e071cea0a8381",
+    "dependencies": [],
+    "scope": "One YAML 1.2 document from local bytes as a typed tree on the two schema-neutral valid controls. unsafe-libyaml 0.2.11 scans and parses, serde_yaml 0.9.34 loads the events into a serde_yaml::Value (aliases expanded, YAML 1.2 core-schema scalar resolution) and pythonize converts it to Python values. No tags, merge keys, multi-document streams or malformed input were tested.",
+    "family": "serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family",
+    "family_note": "Python binding over Rust crates: ryaml's src/lib.rs loads is serde_yaml::from_str into a serde_yaml::Value plus pythonize; the event stream comes from unsafe-libyaml 0.2.11, a c2rust transpilation of libyaml 0.2.5, and serde_yaml's loader expands aliases and resolves YAML 1.2 core scalars. It shares the serde_yaml / unsafe-libyaml family with the Rust cell paths and the libyaml family with PyYAML CSafeLoader and ruamel.yaml.clib; a separate PyPI package and API.",
+    "shared_families": [
+      "serde_yaml 0.9.34 (Rust cell path)",
+      "unsafe-libyaml (Rust cell path; libyaml transpilation)",
+      "libyaml family (PyYAML CSafeLoader, ruamel.yaml.clib)"
+    ],
+    "control": "controls/yaml/catalog.yaml",
+    "expected_output": {
+      "root": "map",
+      "nodes": {
+        "bool": 2,
+        "float": 2,
+        "int": 7,
+        "map": 7,
+        "null": 1,
+        "seq": 2,
+        "str": 13
+      },
+      "max_depth": 3,
+      "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_control": "controls/yaml/order.yaml",
+    "differential_expected_output": {
+      "root": "seq",
+      "nodes": {
+        "bool": 1,
+        "float": 2,
+        "int": 5,
+        "map": 7,
+        "null": 1,
+        "seq": 5,
+        "str": 11
+      },
+      "max_depth": 4,
+      "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 23629,
+      "source": "https://pypistats.org/api/packages/ryaml/recent?period=month",
+      "observed_on_utc": "2026-11-18",
+      "snapshot": "data/python/yaml/registry-snapshot.json"
+    },
+    "project": "projects/yaml/python/ryaml"
   }
 ]

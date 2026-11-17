@@ -221,5 +221,18 @@
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/ruamel.yaml.clibz/",
     "reason": "Not run: same C loader family as the selected ruamel.yaml.clib path built with a different toolchain; 69,913 last-month downloads."
+  },
+  {
+    "name": "ryaml",
+    "metric_value": 23629,
+    "metric_error": null,
+    "family": "serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family",
+    "api_hint": "ryaml.loads(str) on the strict UTF-8 decoding of local YAML bytes",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/ryaml/0.5.1/",
+    "status": "selected",
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
+    "evidence": "projects/yaml/python/ryaml/verification.json"
   }
 ]

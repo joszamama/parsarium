@@ -1,6 +1,6 @@
 # Python × YAML: pilot ranking
 
-Seven control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
+Eight control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -15,6 +15,7 @@ PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 (
 | 5 | [srsly](https://github.com/explosion/srsly#yaml) | 3.0.1 | 24,260,205 | srsly.yaml_loads(local YAML text as str) | Wrapper: srsly.yaml_loads over ruamel.yaml 0.19.1 YAML(typ='safe', pure=True), the pure-Python ruamel.yaml loader; not an independent parser |
 | 6 | [rapidyaml](https://github.com/biojppm/rapidyaml-python/blob/v0.15.2/README.md) | 0.15.2 | 224,758 | ryml.parse_in_arena(local YAML bytes) then Tree.resolve(); scalars typed by the adapter | rapidyaml (ryml) 0.15.2 C++ parse engine and tree, through the rapidyaml Python package's SWIG _ryml extension; same parser family as the C++ rapidyaml path (which pins 0.16.0) |
 | 7 | [yamlcore](https://pypi.org/project/yamlcore/0.1.1/) | 0.1.1 | 92,413 | yaml.load(local YAML bytes, Loader=yamlcore.CoreLoader) | yamlcore CoreLoader: PyYAML 6.0.3 pure-Python BaseLoader (Reader/Scanner/Parser/Composer) with yamlcore's YAML 1.2 core-schema resolver and constructors; not CCoreLoader (libyaml) |
+| 8 | [ryaml](https://github.com/emmatyping/ryaml/blob/v0.5.1/README.md) | 0.5.1 | 23,629 | ryaml.loads(str) on the UTF-8 decoding of local YAML bytes | serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family |
 
 Both controls must equal the hand-written typed trees in [check_controls.py](../../../controls/yaml/check_controls.py); see [verification.json](verification.json).
 

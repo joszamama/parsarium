@@ -50,6 +50,15 @@ TARGETS = {
         'scope': ('executed LLVM source regions and branch directions of the C++ rapidyaml {release} sources under '
                   '{prefix} compiled into the {package} _ryml extension (c4core helpers, the SWIG wrapper and the '
                   'adapter\'s Python scalar typing are not counted)')},
+    'ryaml': {
+        'package': 'ryaml',
+        'prefix': '/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unsafe-libyaml-0.2.11/src/',
+        'platform': 'linux/arm64',
+        'required': ('scanner.rs', 'parser.rs'),
+        'differences': {'scanner_rs_feature_difference': 'scanner.rs:', 'parser_rs_feature_difference': 'parser.rs:'},
+        'scope': ('executed LLVM source regions and branch directions of unsafe-libyaml 0.2.11 under {prefix}, compiled '
+                  'into the source-built {package} {release} _ryaml extension (serde_yaml, pythonize and the PyO3 module '
+                  'are not counted)')},
     # Wrappers: features cover the wrapper package and the parser package it calls under site-packages.
     'srsly': {
         'package': 'srsly', 'prefix': SITE, 'platform': 'linux/amd64',
