@@ -94,5 +94,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/simd_json/verification.json"
+  },
+  {
+    "name": "sonic-rs",
+    "version": "0.5.11",
+    "license": "Apache-2.0",
+    "input_api": "sonic_rs::from_slice::<sonic_rs::Value>(&[u8]); Value::as_ref() -> ValueRef; Object::iter(); Array::iter(); JsonNumberTrait::as_f64()",
+    "documentation": "https://docs.rs/sonic-rs/0.5.11/sonic_rs/fn.from_slice.html",
+    "source": "https://static.crates.io/crates/sonic-rs/sonic-rs-0.5.11.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped sonic_rs::Value tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "sonic-rs SIMD JSON parser and own arena-backed Value DOM, with sonic-simd/sonic-number dependencies; separate implementation from serde_json and simd-json, with documented simdjson/other code references",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 3669348,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/sonic_rs/verification.json"
   }
 ]
