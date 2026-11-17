@@ -6,7 +6,8 @@ import tomllib
 
 from build_afl_native import OVERLAYS, derived_dockerfile
 from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, overlay_manifest, overlay_target
-from audit_projects import fully_runnable, lwjgl_assimp_native_feedback_verified
+from audit_projects import (fltk_native_feedback_verified, fully_runnable,
+                            lwjgl_assimp_native_feedback_verified)
 from run_case import ROOT, project_for
 
 
@@ -121,11 +122,15 @@ def main() -> None:
         assert receipt["control_sha256"] == manifest["control_sha256"]
         assert receipt["parser_source_sha256"] == manifest["source_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
-        expected = {"Cargo.toml": overlay_manifest(project),
-                    "afl_fuzzer.rs": overlay_target(project),
-                    "Dockerfile": rust_dockerfile(relative, manifest, receipt["afl_package"])}
-        for name, text in expected.items():
-            assert (overlay / name).read_text() == text
+        if str(relative) == "ascii_pnm/rust/fltk":
+            assert fltk_native_feedback_verified(path, manifest, receipt)
+            assert (overlay / "build.py").is_file()
+        else:
+            expected = {"Cargo.toml": overlay_manifest(project),
+                        "afl_fuzzer.rs": overlay_target(project),
+                        "Dockerfile": rust_dockerfile(relative, manifest, receipt["afl_package"])}
+            for name, text in expected.items():
+                assert (overlay / name).read_text() == text
         lock = tomllib.loads((overlay / "Cargo.lock").read_text())
         parser = [item for item in lock["package"] if item["name"] == manifest["package"]
                   and item["version"] == manifest["release"]]

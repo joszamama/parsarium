@@ -315,6 +315,34 @@ def lwjgl_assimp_native_feedback_verified(path: Path, manifest: dict,
     )
 
 
+def fltk_native_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Require the native FLTK PNM source to contribute AFL++ feedback."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "ascii_pnm/rust/fltk":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    rust_edges = overlay.get("rust_only_feedback_edges", 0)
+    native_edges = overlay.get("native_feedback_edges", 0)
+    return (
+        manifest.get("underlying_format_specific_coverage_file_suffix")
+            == "/Fl_PNM_Image.cxx"
+        and overlay.get("feedback_kind") == "rust_and_native_fltk_source_edges"
+        and overlay.get("parser_source_sha256") == manifest["source_sha256"]
+        and overlay.get("underlying_source_sha256") == manifest["underlying_source_sha256"]
+        and overlay.get("afl_rust_release") == "0.18.2"
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and native_edges > 0 and rust_edges > 0
+        and native_edges + rust_edges == overlay.get("feedback_edges")
+        and overlay.get("afl_map_size", 0) > overlay.get("rust_only_afl_map_size", 0)
+        and set(file_hashes)
+            == {"Cargo.toml", "Cargo.lock", "afl_fuzzer.rs", "Dockerfile", "build.py"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
     if manifest.get("coverage_kind") == "native_source_afl_feedback":
@@ -334,6 +362,8 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
             or overlay.get("feedback_edges", 0) < 2):
         return False
     if not lwjgl_assimp_native_feedback_verified(path, manifest, overlay):
+        return False
+    if not fltk_native_feedback_verified(path, manifest, overlay):
         return False
     for name, digest in overlay.get("bridge_file_sha256", {}).items():
         bridge_file = ROOT / "fuzzing/afl-bridge" / name

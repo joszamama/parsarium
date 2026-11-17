@@ -74,6 +74,7 @@
 - [bevy / Rust](rust/bevy/README.md)
 - [bevy_image / Rust](rust/bevy_image/README.md)
 - [devela / Rust](rust/devela/README.md)
+- [fltk / Rust](rust/fltk/README.md)
 - [image / Rust](rust/image/README.md)
 - [imagesize / Rust](rust/imagesize/README.md)
 - [libviprs / Rust](rust/libviprs/README.md)

@@ -1,6 +1,6 @@
 # ASCII PNM / Rust
 
-10 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/rust/ascii_pnm/ranking.md) · [standard API inventory](../../../data/rust/ascii_pnm/standard.json)
 
@@ -15,7 +15,7 @@
 - [oxideav-io](oxideav-io/README.md) — Docker harness ready
 - [zenbitmaps](zenbitmaps/README.md) — Docker harness ready
 - [libviprs](libviprs/README.md) — Docker harness ready
-- [fltk](fltk/README.md) — verified API path
+- [fltk](fltk/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 
