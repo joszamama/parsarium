@@ -1,16 +1,19 @@
-# JavaScript × YAML: pilot ranking
+# JavaScript × YAML: selected parsers (pilot)
 
-No third-party path is verified yet; this cell records the bounded search and the leads in primary-metric order. The ceiling is ten.
+One control-verified third-party path; the ceiling is ten and the cell is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
 
 ## Primary within-cell adoption metric
 
-npm downloads in the last month, captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, not YAML-specific use, and are compared only within this cell.
+npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use.
 
-## Leads (unverified)
+| Rank | Package | Release | Metric | AFL++ parser ranges (control / differing) | Parser family |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | [js-yaml](https://github.com/nodeca/js-yaml/blob/5.5.0/docs/usage.md) | 5.5.0 | 1,533,329,423 | 387 / 102 | js-yaml (nodeca) event parser and constructor |
+
+## Unverified leads
 
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |
-| js-yaml | unresolved | 1,533,329,423 | js-yaml |
 | yaml | unresolved | 1,224,431,010 | eemeli/yaml |
 | yaml-ast-parser | shared_family | 88,646,128 | yaml-ast-parser (js-yaml fork) |
 | @stoplight/yaml | shared_family | 29,327,835 | yaml-ast-parser (js-yaml fork) |
