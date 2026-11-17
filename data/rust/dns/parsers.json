@@ -311,6 +311,110 @@
     "afl_feedback": "data/rust/dns/dns-parser-feedback-differential.json"
   },
   {
+    "name": "dns-message-parser",
+    "version": "0.9.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Cargo metadata 'BSD-3-Clause' and LICENSE in the crate (sha256 2b7668ab...), checked in the image",
+    "input_api": "dns_message_parser::Dns::decode(bytes: Bytes) -> DecodeResult<Dns>",
+    "documentation": "https://docs.rs/dns-message-parser/0.9.0/dns_message_parser/struct.Dns.html#method.decode",
+    "source": "https://crates.io/crates/dns-message-parser/0.9.0",
+    "source_lock": "projects/dns/rust/dns_message_parser/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-message-parser (src/decode/*: decoder, dns, domain_name, rr)",
+    "family_note": "Own pure-Rust decoder (LinkTed); no code from hickory-proto, domain or simple-dns. Flags keep AD and CD but not the reserved Z bit, so z reports AD and CD only. Records decode into typed structs; A and AAAA structs carry no class because the decoder accepts those types only in class IN (any other class is a decode error), so the harness reports class 1 for them. The harness copies the local bytes into a bytes::Bytes buffer for the documented decode entry point.",
+    "project": "projects/dns/rust/dns_message_parser",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 7679,
+      "source": "https://crates.io/api/v1/crates/dns-message-parser",
+      "captured_at_utc": "2026-11-17T16:37:54.692625+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 4,
+    "afl_feedback": "data/rust/dns/dns-message-parser-feedback-differential.json"
+  },
+  {
     "name": "rsdns",
     "version": "0.23.0",
     "license": "MIT OR Apache-2.0",
@@ -411,7 +515,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 4,
+    "rank": 5,
     "afl_feedback": "data/rust/dns/rsdns-feedback-differential.json"
   }
 ]
