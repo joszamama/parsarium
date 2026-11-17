@@ -65,15 +65,16 @@
   },
   {
     "name": "serde-saphyr",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 15482906,
     "metric_error": null,
-    "family": "saphyr-parser",
+    "family": "granit-parser (saphyr-parser fork, yaml-rust lineage)",
     "api_hint": "serde_saphyr::from_str",
     "note": null,
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde-saphyr",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected. Pinned 2.1.1 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 1896 own lines and 2001 granit-parser lines; AFL++ scoped to granit_parser, serde_saphyr: 5 identical repeats per control, 2924 vs 2899 edges, 179/154 unique.",
+    "evidence": "projects/yaml/rust/serde_saphyr/verification.json"
   },
   {
     "name": "granit-parser",

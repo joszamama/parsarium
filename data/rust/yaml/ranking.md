@@ -1,6 +1,6 @@
 # Rust × YAML: pilot ranking
 
-Four control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. Leads were checked in descending metric order; [leads.json](leads.json) records each decision.
+Five control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. Leads were checked in descending metric order; [leads.json](leads.json) records each decision.
 
 ## Primary within-cell adoption metric
 
@@ -12,6 +12,7 @@ crates.io `recent_downloads` (90 days), captured 2026-11-17 ([snapshot](registry
 | 2 | [unsafe-libyaml](https://docs.rs/unsafe-libyaml/0.2.11/unsafe_libyaml/fn.yaml_parser_load.html) | 0.2.11 | 91,340,058 | libyaml (c2rust translation) |
 | 3 | [yaml-rust](https://docs.rs/yaml-rust/0.4.5/yaml_rust/yaml/struct.YamlLoader.html) | 0.4.5 | 35,630,044 | yaml-rust |
 | 4 | [yaml-rust2](https://docs.rs/yaml-rust2/0.13.0/yaml_rust2/yaml/struct.YamlLoader.html) | 0.13.0 | 23,795,451 | yaml-rust lineage (yaml-rust fork) |
+| 5 | [serde-saphyr](https://docs.rs/serde-saphyr/2.1.1/serde_saphyr/fn.from_str.html) | 2.1.1 | 15,482,906 | yaml-rust lineage (via granit-parser) |
 
 Every path returns the exact typed trees of [`check_controls.py`](../../../controls/yaml/check_controls.py) for [`catalog.yaml`](../../../controls/yaml/catalog.yaml) and [`order.yaml`](../../../controls/yaml/order.yaml). The unsafe-libyaml APIs return untyped scalars, so their harnesses type plain scalars with the YAML 1.2 core-schema patterns, as the C libyaml and C++ harnesses do.
 
@@ -20,7 +21,6 @@ Every path returns the exact typed trees of [`check_controls.py`](../../../contr
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |
 | serde_yaml_ng | unresolved | 16,564,340 | unsafe-libyaml (libyaml translation) |
-| serde-saphyr | unresolved | 15,482,906 | saphyr-parser |
 | granit-parser | unresolved | 14,752,724 | granit-parser (saphyr-parser fork, yaml-rust lineage) |
 | serde_norway | shared_family | 12,111,405 | unsafe-libyaml-norway (libyaml translation) |
 | saphyr-parser | unresolved | 8,941,580 | saphyr (yaml-rust2 lineage) |
