@@ -51,19 +51,27 @@
       "api_lead": "toml.Parse / toml.Unmarshal",
       "note": "Fork of naoina/toml; the only proxy version is the pseudo-version v0.0.0-20180607005434-2a2e3012f7cf (2018-06-07), before TOML 0.5 added local dates. Not run; naoina/toml v0.1.1 failed the second control.",
       "source": "https://pkg.go.dev/github.com/influxdata/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.0.0-20180607005434-2a2e3012f7cf",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "toml.Unmarshal into map[string]any rejects controls/toml/service-config.toml with 'toml: unmarshal: line 6: `map[string]interface {}.owner' must be struct or map, but interface given' and controls/toml/typed-scalars.toml with 'toml: line 7: parse error' at `octal = 0o755` (TOML 0.4 grammar inherited from naoina/toml). It shares 1,032 of its 1,988 distinct non-test source lines with naoina/toml v0.1.1.",
+      "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
     },
     {
       "name": "github.com/creachadair/tomledit/parser",
       "metric_value": 46,
       "metric": "pkg.go.dev Imported by package count",
       "family": "tomledit (creachadair)",
-      "api_lead": "parser.Parse(io.Reader)",
+      "api_lead": "parser.New(io.Reader).Items() -> []parser.Item",
       "note": "Syntax-preserving editor; parser package exposes items.",
       "source": "https://pkg.go.dev/github.com/creachadair/tomledit/parser",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.0.29",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "parser.New(r).Items() accepts both controls but returns each value as a parser.Token holding its token type and raw source text (for example Token{Type: Integer, text: \"0xDEAD_BEEF\"}, Token{Type: String, text: \"\\\"tab\\\\tquote...\\\\u00e9\\\"\"}). The package documents that it does not convert values into Go data; a typed tree would require the harness to decode integers, escapes and date-times from the raw text itself, which the protocol excludes.",
+      "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
     },
     {
       "name": "github.com/midbel/toml",
@@ -73,8 +81,12 @@
       "api_lead": "toml.Decode(io.Reader, any)",
       "note": null,
       "source": "https://pkg.go.dev/github.com/midbel/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v1.0.5",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "toml.Decode into map[string]any matches service-config except that it cannot mark kinds: offset, local date-time, local date and local time all come back as time.Time (local kinds in UTC, the offset one in a fixed zone), so a local date-time is indistinguishable from a UTC offset date-time. On typed-scalars the basic-string escape \\u00e9 decodes to \"I\" instead of \"é\" (observed strings.escapes \"tab\\tquote\\\"backslash\\\\ I\").",
+      "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
     },
     {
       "name": "github.com/komkom/toml",
@@ -84,6 +96,36 @@
       "api_lead": "toml.New(io.Reader) io.Reader emitting JSON",
       "note": null,
       "source": "https://pkg.go.dev/github.com/komkom/toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.1.2",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "toml.New(r) is an io.Reader that streams the document as JSON. Both controls convert, but date-times become JSON strings (\"1979-05-27T00:32:00.5-07:00\", \"1979-05-27\", \"00:32:00.25\"), indistinguishable from TOML strings, and numbers are copied as JSON number text (1e3), so the typed tree would need the harness to re-parse the JSON lexemes; the four date-time kinds are lost.",
+      "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
+    },
+    {
+      "name": "github.com/lixenwraith/toml",
+      "metric_value": 5,
+      "metric": "pkg.go.dev Imported by package count",
+      "family": "lixenwraith/toml (deterministic TOML subset)",
+      "api_lead": "toml.Unmarshal([]byte, any)",
+      "note": "README describes a deterministic TOML subset encoder, decoder and formatter.",
+      "source": "https://pkg.go.dev/github.com/lixenwraith/toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.10.0",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "toml.Unmarshal rejects service-config with 'expected newline at line 8' (`since = 1979-05-27T07:32:00Z`) and typed-scalars with 'expected newline at line 5' (`underscored = 1_000_000`): the subset has no date-time values or underscored integers.",
+      "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
+    },
+    {
+      "name": "github.com/kezhuw/toml",
+      "metric_value": 3,
+      "metric": "pkg.go.dev Imported by package count",
+      "family": "kezhuw/toml",
+      "api_lead": "toml.Unmarshal([]byte, any)",
+      "note": "README: compatible with TOML v0.4.0 (no hexadecimal/octal/binary integers or local date-time kinds), last commit 2019.",
+      "source": "https://pkg.go.dev/github.com/kezhuw/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
     }
@@ -114,10 +156,46 @@
       "reason": "Flag-file adapter over pelletier/go-toml."
     },
     {
+      "name": "github.com/hydronica/toml",
+      "metric_value": 13,
+      "status": "excluded",
+      "reason": "Modified fork of the selected BurntSushi/toml (README); v0.5.0 shares 1,128 of its 1,661 distinct non-blank, non-comment, non-test Go source lines with BurntSushi/toml v1.6.0, including lex.go and parse.go."
+    },
+    {
       "name": "github.com/smacker/go-tree-sitter/toml",
       "metric_value": 10,
       "status": "excluded",
       "reason": "Tree-sitter grammar binding (cgo); syntax tree only, no typed values."
+    },
+    {
+      "name": "gopkg.in/BurntSushi/toml.v0",
+      "metric_value": 8,
+      "status": "excluded",
+      "reason": "Old gopkg.in import path of the selected BurntSushi/toml (predecessor release line)."
+    },
+    {
+      "name": "github.com/chef/toml",
+      "metric_value": 6,
+      "status": "excluded",
+      "reason": "Fork of the selected BurntSushi/toml (same README, lex.go, parse.go); v0.3.0 shares 810 of its 1,382 distinct non-test source lines with BurntSushi/toml v1.6.0 (the rest is the older upstream code it forked)."
+    },
+    {
+      "name": "github.com/troian/toml",
+      "metric_value": 5,
+      "status": "excluded",
+      "reason": "Fork of the selected BurntSushi/toml (same README, lex.go, parse.go); v0.4.2 shares 808 of its 1,429 distinct non-test source lines with BurntSushi/toml v1.6.0."
+    },
+    {
+      "name": "github.com/GuanceCloud/toml",
+      "metric_value": 4,
+      "status": "excluded",
+      "reason": "Comment-preserving fork of the selected BurntSushi/toml (README: 'forked from BurntSushi/toml'); v1.2.5 shares 1,491 of its 2,108 distinct non-test source lines with BurntSushi/toml v1.6.0."
+    },
+    {
+      "name": "cuelang.org/go/encoding/toml",
+      "metric_value": 2,
+      "status": "excluded",
+      "reason": "CUE encoder/decoder over the selected go-toml v2 unstable parser."
     }
   ],
   "promoted": [
