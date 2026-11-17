@@ -11,6 +11,7 @@
 - [gmsh / C](c/gmsh/README.md)
 - [mccode / C](c/mccode/README.md)
 - [mdal / C](c/mdal/README.md)
+- [stereokit / C](c/stereokit/README.md)
 - [assimp / C++](cpp/assimp/README.md)
 - [cgal / C++](cpp/cgal/README.md)
 - [easy3d / C++](cpp/easy3d/README.md)

@@ -5,6 +5,7 @@
 ## Targets
 
 - [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
+- [gtk4 / C](c/gtk4/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
 - [librsvg / C](c/librsvg/README.md)
 - [libvips / C](c/libvips/README.md)
@@ -20,6 +21,7 @@
 - [libvips / C++](cpp/libvips/README.md)
 - [lunasvg / C++](cpp/lunasvg/README.md)
 - [qtsvg / C++](cpp/qtsvg/README.md)
+- [resvg / C++](cpp/resvg/README.md)
 - [thorvg / C++](cpp/thorvg/README.md)
 - [wxwidgets / C++](cpp/wxwidgets/README.md)
 - [cogentcore.org/core/svg / Go](go/cogentcore_org_core_svg/README.md)

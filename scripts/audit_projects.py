@@ -378,6 +378,92 @@ def vlc_cpp_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     )
 
 
+def resvg_cpp_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind C++ resvg feedback to usvg parser guards and valid SVG probes."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "svg/cpp/resvg":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    validation_path = overlay_dir / "feedback-validation.json"
+    if not validation_path.is_file():
+        return False
+    validation = json.loads(validation_path.read_text())
+    variant = overlay_dir / "valid-path.svg"
+    one_pixel = path.parent / manifest.get("one_pixel_input", "")
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    return (
+        overlay.get("feedback_kind") == "usvg_rust_pcguard_edges"
+        and overlay.get("feedback_scope") == validation.get("feedback_scope")
+        and overlay.get("shared_parser_family") == manifest.get("shared_parser_family")
+        and overlay.get("shared_parser_family_projects")
+            == manifest.get("shared_parser_family_projects")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and overlay.get("afl_file_input") is True
+        and overlay.get("afl_entrypoint") == "/work/replay"
+        and validation.get("pass") is True
+        and validation.get("usvg_guard_slots", 0) > 0
+        and validation.get("harness_guard_slots") == 0
+        and validation.get("afl_map_size") == overlay.get("afl_map_size")
+        and validation.get("control_sha256") == manifest["control_sha256"]
+        and validation.get("control_output") == manifest["expected_output"]
+        and validation.get("control_repeat_edge_counts")
+            == [overlay.get("feedback_edges")] * 3
+        and validation.get("control_stable_edge_ids") == overlay.get("feedback_edges")
+        and validation.get("stable_variant_only_edge_ids", 0) > 0
+        and variant.is_file()
+        and validation.get("valid_variant_sha256") == sha256(variant.read_bytes()).hexdigest()
+        and one_pixel.is_file()
+        and validation.get("one_pixel_valid_input_sha256")
+            == manifest.get("one_pixel_sha256") == sha256(one_pixel.read_bytes()).hexdigest()
+        and validation.get("one_pixel_output") == manifest.get("one_pixel_expected_output")
+        and overlay.get("feedback_validation_sha256") == sha256(validation_path.read_bytes()).hexdigest()
+        and set(file_hashes)
+            == {"Dockerfile", "build.py", "valid-path.svg", "feedback-validation.json"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
+def stereokit_ply_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind StereoKit's one-shot AFL map to bundled micro_ply source."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "ascii_ply/c/stereokit":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    validation_path = overlay_dir / "feedback-validation.json"
+    variant = overlay_dir / "valid-quad.ply"
+    if not validation_path.is_file() or not variant.is_file():
+        return False
+    validation = json.loads(validation_path.read_text())
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    return (
+        manifest.get("coverage_subject_prefix", "").endswith("/libraries/micro_ply.h")
+        and manifest.get("native_campaign_supported") is False
+        and overlay.get("feedback_kind") == "stereokit_micro_ply_source_scoped_afl_edges"
+        and overlay.get("feedback_scope") == validation.get("feedback_scope")
+        and "src:model_ply.cpp" in overlay.get("feedback_scope", "")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("afl_entrypoint") == "/work/replay"
+        and overlay.get("afl_file_input") is True
+        and validation.get("pass") is True
+        and validation.get("afl_map_size") == overlay.get("afl_map_size")
+        and validation.get("control_sha256") == manifest["control_sha256"]
+        and validation.get("control_output") == manifest["expected_output"]
+        and validation.get("control_repeat_edge_counts")
+            == [overlay.get("feedback_edges")] * 3
+        and validation.get("control_stable_edge_ids") == overlay.get("feedback_edges")
+        and validation.get("stable_variant_only_edge_ids", 0) > 0
+        and validation.get("valid_variant_sha256") == sha256(variant.read_bytes()).hexdigest()
+        and set(file_hashes)
+            == {"Dockerfile", "build.py", "valid-quad.ply", "feedback-validation.json"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
     if manifest.get("coverage_kind") == "native_source_afl_feedback":
@@ -401,6 +487,10 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
     if not fltk_native_feedback_verified(path, manifest, overlay):
         return False
     if not vlc_cpp_mp4_feedback_verified(path, manifest, overlay):
+        return False
+    if not resvg_cpp_feedback_verified(path, manifest, overlay):
+        return False
+    if not stereokit_ply_feedback_verified(path, manifest, overlay):
         return False
     for name, digest in overlay.get("bridge_file_sha256", {}).items():
         bridge_file = ROOT / "fuzzing/afl-bridge" / name

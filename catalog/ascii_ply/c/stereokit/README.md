@@ -27,6 +27,13 @@
 
 A separate released library and public C package path over the micro_ply syntax parser family also present in sk_renderer. The public header has one unguarded C++ default argument; replay uses a one-line generated C compatibility copy without changing library source.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/stereokit/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c stereokit
+python3 parsarium.py run ascii_ply c stereokit controls/ascii_ply/triangle.ply
+```
+
+**Coverage limit:** The C header needs one generated compatibility fix for an unguarded C++ default argument; tagged library source is unchanged. Full graphics initialization retains allocations after shutdown, so fixed-input /work/fuzzer replay disables leak checking while /work/fuzzer-bin exposes the original sanitizer behavior. AFL++ uses /work/replay @@ because StereoKit initializes offscreen Mesa per process.
