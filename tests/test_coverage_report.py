@@ -495,6 +495,36 @@ class CoverageReportTest(unittest.TestCase):
         with self.assertRaisesRegex(coverage_report.ReportError, "sorted unique"):
             coverage_report.source_files(coverage, manifest, [], LIMITS, executed_only=True)
 
+    def test_native_function_entries_report_counts_without_source_lines(self):
+        fixture = self.fixture()
+        fixture.manifest["coverage_kind"] = "native_function_entries"
+        fixture.write_json(fixture.project / "manifest.json", fixture.manifest)
+        fixture.receipt["project_file_sha256"]["manifest.json"] = digest(
+            (fixture.project / "manifest.json").read_bytes())
+        fixture.receipt["parser_source_files"] = None
+        fixture.receipt["parser_source_lines_covered"] = None
+        fixture.receipt["native_feedback"] = {
+            "feedback_kind": "native_function_entries_not_source_coverage",
+            "scope": "pinned parser symbols", "baseline_functions": 0,
+            "control_functions": 21, "variant_functions": 23,
+            "repeat_identical": True, "variant_differs": True,
+        }
+        fixture.receipt["native_feedback_limit"] = "Function entries only; no AFL++ feedback"
+        fixture.write_receipt()
+        fixture.write_json(fixture.run_dir / "summary.json", {
+            "control_pass": True, "output": {"width": 2},
+            "parser_source_files": None, "parser_source_lines_covered": None,
+        })
+        fixture.write_json(fixture.run_dir / "coverage.json", {"data": [{"files": []}]})
+        output = self.base / "function-report"
+        report = fixture.report(output, sources=[])
+        self.assertEqual(report["coverage"]["status"], "native_function_entries")
+        self.assertEqual(report["coverage"]["functions"]["control_functions"], 21)
+        html = (output / "index.html").read_text()
+        self.assertIn("Observed native parser function entries", html)
+        self.assertNotIn("None parser source lines", html)
+        self.assertFalse((output / "files").exists())
+
     def test_executed_lines_render_for_each_exporting_ecosystem(self):
         names = {"python": "Python", "javascript": "JavaScript", "java": "Java",
                  "php": "PHP"}

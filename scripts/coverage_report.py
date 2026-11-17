@@ -240,6 +240,8 @@ def project_evidence(root: Path, format_name: str, ecosystem: str, slug: str) ->
                 "afl_overlay": overlay,
                 "binary_feedback": receipt.get("binary_feedback"),
                 "binary_feedback_scope": receipt.get("binary_feedback_scope"),
+                "native_feedback": receipt.get("native_feedback"),
+                "native_feedback_limit": receipt.get("native_feedback_limit"),
             }}
 
 
@@ -279,6 +281,14 @@ def control_run(run_dir: Path, evidence: dict) -> tuple[dict, dict | None]:
             raise ReportError("binding coverage differs from the verification receipt; "
                               "rerun parsarium.py build")
         return run, None
+    if kind == "native_function_entries":
+        if files or summary.get("parser_source_files") is not None or \
+                summary.get("parser_source_lines_covered") is not None or \
+                receipt.get("parser_source_files") is not None or \
+                receipt.get("parser_source_lines_covered") is not None:
+            raise ReportError("native function-entry path unexpectedly records parser source "
+                              "lines; rerun parsarium.py build")
+        return run, coverage
     for name, prefix, files_field, lines_field in coverage_groups(manifest):
         selected = [f for f in files if f["filename"].startswith(prefix)]
         covered = sum(f["summary"]["lines"]["covered"] for f in selected)
@@ -608,6 +618,16 @@ def index_page(report: dict) -> str:
                                "binary_module": binary.get("module"),
                                "binary_module_sha256": binary.get("module_sha256"),
                                "control_tuples": binary.get("control_tuples")})
+    if feedback.get("native_feedback"):
+        native = feedback["native_feedback"]
+        feedback_items.update({"native_feedback_kind": native.get("feedback_kind"),
+                               "native_scope": native.get("scope"),
+                               "baseline_functions": native.get("baseline_functions"),
+                               "control_functions": native.get("control_functions"),
+                               "variant_functions": native.get("variant_functions"),
+                               "repeat_identical": native.get("repeat_identical"),
+                               "variant_differs": native.get("variant_differs"),
+                               "native_feedback_limit": feedback.get("native_feedback_limit")})
     feedback_table = definition_rows("Feedback", feedback_items)
     if run["kind"] == "replay":
         run_table = definition_rows("Replay", {"checked_at_utc": run["checked_at_utc"],
@@ -701,6 +721,13 @@ def index_page(report: dict) -> str:
         parts.append(table("Covered source by group (verification receipt totals; no line view)",
                            ("Group", "Container prefix", "Files", "Covered lines"), rows,
                            numeric=(2, 3)))
+    elif coverage["status"] == "native_function_entries":
+        native = coverage["functions"]
+        rows = [("Baseline", native["baseline_functions"]),
+                ("Valid control", native["control_functions"]),
+                ("Valid variant", native["variant_functions"])]
+        parts.append(table("Observed native parser function entries",
+                           ("Input", "Functions entered"), rows, numeric=(1,)))
     for warning in report["warnings"]:
         parts.append(f"<p class=\"warn\">{escape(warning, 2000)}</p>")
     parts.append("<h2>Run outcomes</h2>")
@@ -763,6 +790,17 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
                                       f"control tuples in {binary.get('module')}. No parser "
                                       "source-line coverage exists for this project; binding "
                                       "lines are not parser lines."}
+    elif kind == "native_function_entries":
+        native = evidence["feedback"]["native_feedback"]
+        if not isinstance(native, dict) or native.get("feedback_kind") != \
+                "native_function_entries_not_source_coverage":
+            raise ReportError("native function-entry receipt is missing or inconsistent")
+        coverage_info = {"status": "native_function_entries",
+                         "statement": "The pinned runtime entered format-parser functions on the "
+                                      "valid controls. This is function-entry feedback, not "
+                                      "source-line, branch, edge, or AFL++ coverage. No source "
+                                      "line view or percentage is available.",
+                         "functions": native}
     elif ecosystem in {"go", "python", "javascript", "java", "php"} and \
             coverage.get("type") != LLVM_EXPORT_TYPE and all(
             "executed_lines" in item for item in coverage["data"][0]["files"]):
