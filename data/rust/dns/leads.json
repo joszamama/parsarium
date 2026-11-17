@@ -218,5 +218,19 @@
     "reason": "Minimal resolver library: its public helpers parse the header and answer records, but the question section is only skipped (skip_question) and its name, type and class are not returned, and authority/additional handling is left to callers. The control's question cannot be reported from the library.",
     "api_lead_checked_against_pinned_release": true,
     "lead_adoption_order": 8
+  },
+  {
+    "name": "hns-dns-wire",
+    "status": "resolved_verified_selected",
+    "primary_metric": "crates.io recent_downloads (90 days)",
+    "primary_metric_value": 1588,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://docs.rs/hns-dns-wire/0.2.2/hns_dns_wire/struct.Message.html#method.parse",
+    "input_api_lead": "hns_dns_wire::Message::parse(message: &[u8]) -> Result<Message, Error>",
+    "family": "hns-dns-wire (single-file strict decoder, src/lib.rs)",
+    "version_seen": "0.2.2",
+    "api_lead_checked_against_pinned_release": true,
+    "verification": "projects/dns/rust/hns_dns_wire/verification.json",
+    "reason": "Pinned 0.2.2 passes both DNS controls; see parsers.json and data/rust/dns/hns-dns-wire-feedback-differential.json."
   }
 ]

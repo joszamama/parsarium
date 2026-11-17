@@ -725,5 +725,109 @@
     },
     "rank": 7,
     "afl_feedback": "data/rust/dns/rsdns-feedback-differential.json"
+  },
+  {
+    "name": "hns-dns-wire",
+    "version": "0.2.2",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo metadata 'MIT OR Apache-2.0' and LICENSE-MIT/LICENSE-APACHE in the crate (sha256 bfaf23f3...), checked in the image",
+    "input_api": "hns_dns_wire::Message::parse(message: &[u8]) -> Result<Message, Error>",
+    "documentation": "https://docs.rs/hns-dns-wire/0.2.2/hns_dns_wire/struct.Message.html#method.parse",
+    "source": "https://crates.io/crates/hns-dns-wire/0.2.2",
+    "source_lock": "projects/dns/rust/hns_dns_wire/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "hns-dns-wire (single-file strict decoder, src/lib.rs)",
+    "family_note": "Own pure-Rust bounded decoder from the hns-dane-engine project (Handshake DNSSEC/DANE); no dependencies and no code from hickory-proto, domain or simple-dns. It rejects forward, cyclic and out-of-message compression pointers and a set reserved Z bit. It exposes AD but not CD, so z is read from the parsed Flags::bits() word; names are printed by the crate's own Display (lower case, absolute) and A/AAAA are std::net addresses.",
+    "project": "projects/dns/rust/hns_dns_wire",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 1588,
+      "source": "https://crates.io/api/v1/crates/hns-dns-wire",
+      "captured_at_utc": "2026-11-17T22:22:19.414258+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 8,
+    "afl_feedback": "data/rust/dns/hns-dns-wire-feedback-differential.json"
   }
 ]

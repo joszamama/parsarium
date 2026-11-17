@@ -1,6 +1,6 @@
 # Rust × DNS: selected parsers (pilot)
 
-Seven verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Eight verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -15,6 +15,7 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 | 5 | [dns-message-parser](https://docs.rs/dns-message-parser/0.9.0/dns_message_parser/struct.Dns.html#method.decode) | 0.9.0 | 7,679 | dns-message-parser (src/decode/*: decoder, dns, domain_name, rr) |
 | 6 | [rustdns](https://docs.rs/rustdns/0.7.0/rustdns/struct.Message.html#method.from_slice) | 0.7.0 | 2,786 | rustdns (src/dns.rs MessageParser, types.rs, resource.rs) |
 | 7 | [rsdns](https://docs.rs/rsdns/0.23.0/rsdns/message/reader/struct.MessageIterator.html#method.new) | 0.23.0 | 2,486 | rsdns message reader (src/message/reader/*, bytes/cursor, names, records/data) |
+| 8 | [hns-dns-wire](https://docs.rs/hns-dns-wire/0.2.2/hns_dns_wire/struct.Message.html#method.parse) | 0.2.2 | 1,588 | hns-dns-wire (single-file strict decoder, src/lib.rs) |
 
 **hickory-proto 0.26.3** (MIT OR Apache-2.0) parses local bytes with `hickory_proto::op::Message::from_vec(buffer: &[u8]) -> Result<Message, DecodeError>`. Both controls match the oracle summary. The response control covers 479 library lines in 55 files. AFL++ feedback repeats 3 times per control; response and query give 703/446 parser features and 285/178 AFL++ tuples, differing by 259 features and 107 tuples ([receipt](hickory-proto-feedback-differential.json)). Own pure-Rust decoder (serialize/binary/decoder.rs, op/message.rs, rr/record.rs, rr/domain/name.rs). trust-dns-proto is the same project under its earlier crate name. The crate drops the reserved Z bit, so z reports AD and CD only.
 
@@ -29,6 +30,8 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 **rustdns 0.7.0** (Apache-2.0) parses local bytes with `rustdns::Message::from_slice(buf: &[u8]) -> io::Result<Message>`. Both controls match the oracle summary. The response control covers 221 library lines in 9 files. AFL++ feedback repeats 3 times per control; response and query give 350/203 parser features and 218/150 AFL++ tuples, differing by 149 features and 68 tuples ([receipt](rustdns-feedback-differential.json)). Own pure-Rust decoder (bramp); no code from hickory-proto or the other selected crates. Built with default-features = false, so the DNS clients (UDP/TCP/DoH) and zone-file parser are not compiled; the message parser is part of the base crate. It keeps the Z, AD and CD bits. TTLs are Durations printed in whole seconds.
 
 **rsdns 0.23.0** (MIT OR Apache-2.0) parses local bytes with `rsdns::message::reader::MessageIterator::new(buf: &[u8]) -> Result<MessageIterator>; header(), questions(), records()`. Both controls match the oracle summary. The response control covers 463 library lines in 33 files. AFL++ feedback repeats 3 times per control; response and query give 607/386 parser features and 259/108 AFL++ tuples, differing by 223 features and 151 tuples ([receipt](rsdns-feedback-differential.json)). Own pure-Rust decoder in a DNS client library; built without any net-* feature, so no client code is compiled. The records iterator tags every record with its section. rsdns exposes no Z, AD or CD flag (the Z getter is test-only), so z is reported as 0.
+
+**hns-dns-wire 0.2.2** (MIT OR Apache-2.0) parses local bytes with `hns_dns_wire::Message::parse(message: &[u8]) -> Result<Message, Error>`. Both controls match the oracle summary. The response control covers 291 library lines in 1 file. AFL++ feedback repeats 3 times per control; response and query give 502/313 parser features and 156/103 AFL++ tuples, differing by 189 features and 55 tuples ([receipt](hns-dns-wire-feedback-differential.json)). Own single-file pure-Rust decoder from the hns-dane-engine project (Handshake DNSSEC/DANE), with no dependencies and no code from the other selected crates. It is strict: it rejects forward, cyclic and out-of-message compression pointers and a set reserved Z bit, and it exposes AD but not CD, so the harness reads z from the parsed Flags::bits() word. Names are printed by the crate's own Display (lower case, absolute); A and AAAA are std::net addresses. Found by the round-3 crates.io searches sorted by recent downloads.
 
 ## Remaining leads
 

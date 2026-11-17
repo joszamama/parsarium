@@ -1,0 +1,89 @@
+{
+  "kind": "third_party",
+  "api": "hns_dns_wire::Message::parse(&[u8]) on local bytes; the header id, Flags accessors and declared counts, and the questions, answers, authorities and additionals fields",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T22:24:10.105912+00:00",
+  "manifest": "projects/dns/rust/hns_dns_wire/manifest.json",
+  "image_id": "sha256:0080dff71a276d4072702421ae5ddf8bd59305ecef12b48f2f17fd0f77f6fb5c",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "bfaf23f3344407a3be6db09fe9a70e172c65287a7675934526a4f3b1ab397e59",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Cargo.lock": "3e9731241741b520fe14ed612f1833956a03b3e4b452cdcd59293ef70083770a",
+    "Cargo.toml": "66e28dd4e1261b48c235e1600ddd4ef1f6d7f7abbe9923683663f3b06a65fe96",
+    "Dockerfile": "7ed6ced5d3c8e1cb4fe290c49460d5398c84f442b0c52460f453992414d276a2",
+    "manifest.json": "294e1a9f7e21e09bdb039c87d435ab3382a396b82699a58127aa7cb4cd9d07c3",
+    "run-control.sh": "c824be44b1497b43e13a349bd64fc4725b8fc564dd66b35ad91c249b14edd941",
+    "source-lock.json": "68f735e56a82d0326ec478ba38e3998f00b8fc43a4b8b65dc51cfeaad7134ddd",
+    "src/bin/fuzzer.rs": "f78b90e96306b250f0a3d972aff02060d69cbbee497e93ef27676cb94711682f",
+    "src/bin/replay.rs": "dba81fb179dff91425529dcdf117d7c6e1ff4b10f86e9e11d1664c2e1ec8bfc5",
+    "src/lib.rs": "abf6c72dcd8ec2c00e2b26a0d86a614f938be6bfa7de165e1bafecac3fe189c4"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 291,
+  "format_specific_source_lines_covered": 291,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/rust/hns_dns_wire/target/coverage/coverage.json",
+  "pass": true
+}
