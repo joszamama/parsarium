@@ -1,0 +1,94 @@
+{
+  "kind": "third_party",
+  "api": "Packet.parse(buffer) from native-dns-packet on a local Buffer; numeric type and class fields as decoded; AAAA's eight uncompressed hex groups are RFC 5952-compressed by the harness",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T19:57:58.451180+00:00",
+  "manifest": "projects/dns/javascript/native_dns_packet/manifest.json",
+  "image_id": "sha256:678ed34112f7945ad81c6acabe3bd4c2b4b07483308363fbf50b4e9cd7c0588f",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-native-dns-packet-target@0.1.1 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- native-dns-packet@0.1.1",
+    "  +-- buffercursor@0.0.12",
+    "  `-- ipaddr.js@2.5.0"
+  ],
+  "source_sha256": "db60c381df90f2ed4dff22c8bb6dabcbd7adb111fbf97380a4be60e20d7615ae",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "c557e87ec0612f90a638d66b83fcc99aa82942a4b990085ad590313cff5fa3cc",
+    "fuzz.js": "da98f7cdbd06b6256fa9662a8cfdce5a6ffc26433ab102b4eb1087cdaa823289",
+    "harness.js": "3a9b7cb43dae3b62b8e4d16a9ec3b451c7b229f8ab27f1f1bd741525e6c53e2c",
+    "manifest.json": "65da3c90c45119d4af0886ba56cdb2e9e24ef8c0478bddf70c8f1999160ed3e7",
+    "package-lock.json": "a734ad6d6db68dbf9718bc0ab306106bca67295fa39c6c6985e0310f127cc504",
+    "package.json": "c77cd90123e0245aae33b5a41c7a38fe2c2249b26ca83228847fa2416d8a5b27",
+    "replay.js": "4303f822c933f19d7b35d977142a94bc9f14033c57db00fb3b3ba64c2a69d31e",
+    "run-control.js": "476e2494b47502788ccdb41c66bc4ce515eb718424bee69906386f491bdba257",
+    "source-lock.json": "676357f9e07eaadf9a326e3853cd28715278fa7a94ce3f389901f74263b0f5d3"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 3,
+  "parser_source_lines_covered": 433,
+  "format_specific_source_lines_covered": 275,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/javascript/native_dns_packet/target/coverage/coverage.json",
+  "pass": true
+}

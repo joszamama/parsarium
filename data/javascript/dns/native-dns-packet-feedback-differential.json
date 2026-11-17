@@ -1,0 +1,38 @@
+{
+  "checked_at_utc": "2026-11-17T20:02:25.128570+00:00",
+  "project": "dns/javascript/native_dns_packet",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "/work/node_modules/native-dns-packet/",
+  "base_image_id": "sha256:678ed34112f7945ad81c6acabe3bd4c2b4b07483308363fbf50b4e9cd7c0588f",
+  "overlay_image_id": "sha256:35ee64e35635d6f8395e87e927b6a70709a31b3fdd922527e2b78d30ecdc5034",
+  "overlay_receipt_sha256": "66bf1b19439c6c554a8d0f90c614dbdf7d92eced05d707510b8202fffcf48c7d",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 42,
+  "variant_parser_features": 21,
+  "parser_feature_difference": 23,
+  "control_afl_tuples": 62,
+  "variant_afl_tuples": 41,
+  "afl_tuple_difference": 23,
+  "control_features_by_file": {
+    "/work/node_modules/native-dns-packet/consts.js": 3,
+    "/work/node_modules/native-dns-packet/index.js": 1,
+    "/work/node_modules/native-dns-packet/packet.js": 38
+  },
+  "variant_features_by_file": {
+    "/work/node_modules/native-dns-packet/consts.js": 3,
+    "/work/node_modules/native-dns-packet/index.js": 1,
+    "/work/node_modules/native-dns-packet/packet.js": 17
+  },
+  "mutation_campaign_run": false
+}

@@ -330,5 +330,109 @@
       "shared_distinct_lines": 5,
       "share": 0.003
     }
+  },
+  {
+    "name": "native-dns-packet",
+    "version": "0.1.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 db60c381...), checked in the image",
+    "input_api": "Packet.parse(buffer: Buffer) -> Packet",
+    "documentation": "https://github.com/tjfontaine/native-dns-packet/blob/master/README.md",
+    "documentation_note": "The npm tarball's README.md (0.1.1, 2014) documents Packet.parse(buffer) returning a Packet; the project has no 0.1.1 tag, so the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/native-dns-packet/v/0.1.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "native-dns-packet (tjfontaine node-dns packet.js)",
+    "family_note": "Own JavaScript state-machine decoder (packet.js) reading through its buffercursor dependency; native-dns (a resolver) builds on it. It keeps all three bits after RA (res1, res2, res3), which the harness packs into z. It prints AAAA as eight uncompressed hex groups, which the harness compresses per RFC 5952. Its question parser asserts a single question, so messages with QDCOUNT > 1 are outside its scope. The near-identical forks @luminati-io/native-dns-packet (99.2% shared distinct source lines) and native-node-dns-packet (99.3%) are not counted.",
+    "project": "projects/dns/javascript/native_dns_packet",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 72104,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/native-dns-packet",
+      "captured_at_utc": "2026-11-17T16:37:41.767410+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 4,
+    "afl_feedback": "data/javascript/dns/native-dns-packet-feedback-differential.json"
   }
 ]
