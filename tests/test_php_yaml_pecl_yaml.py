@@ -129,6 +129,26 @@ class PhpYamlPeclYamlTest(unittest.TestCase):
         self.assertIn("parsarium_yaml_parse", (PROJECT / "fuzz-target.php").read_text())
         self.assertIn("src:parsarium-no-php-source.c", (OVERLAY / "Dockerfile").read_text())
 
+    def test_round_two_leads_are_excluded_with_probe_or_source_evidence(self):
+        leads = read(BASE / "leads.json")
+        probes = {item["package"]: item for item in read(BASE / "round2-lead-probes.json")["probes"]}
+        self.assertTrue(all(lead["status"] == "excluded" for lead in leads))
+        values = [lead["metric_value"] for lead in leads]
+        self.assertEqual(values, sorted(values, reverse=True))
+        snapshot = read(BASE / "registry-snapshot.json")
+        self.assertEqual([entry["query"] for entry in snapshot["search"]],
+                         ["yaml", "yaml parser", "yaml-parser", "yml", "spyc"])
+        for lead in leads:
+            self.assertEqual(snapshot["metrics"][lead["name"]]["value"], lead["metric_value"])
+            if lead.get("evidence") == "data/php/yaml/round2-lead-probes.json":
+                self.assertEqual(probes[lead["name"]]["version"], lead["version_probed"])
+        for package, probe in probes.items():
+            self.assertEqual(set(probe["results"]), {"catalog.yaml", "order.yaml"})
+            self.assertEqual(probe["pass"], package == "tbela99/yaml")
+        overlap = read(BASE / "round2-lead-probes.json")["tbela99_overlap"]
+        self.assertGreater(overlap["shared_with"]["symfony/yaml v5.1.0 (codeload tag archive)"]["shared_lines"],
+                           overlap["fork_distinct_lines"] * 3 // 4)
+
 
 if __name__ == "__main__":
     unittest.main()
