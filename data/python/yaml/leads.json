@@ -213,7 +213,7 @@
   },
   {
     "name": "ruamel.yaml.clibz",
-    "status": "shared_family",
+    "status": "excluded_identical_fork",
     "metric_value": 69913,
     "metric_error": null,
     "family": "ruamel.yaml.clib C sources built with setuptools-zig",
@@ -221,7 +221,7 @@
     "note": "Zig-built variant of the ruamel.yaml.clib C loader; ruamel.yaml 0.19.1 loads ruamel.yaml.clib first.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/ruamel.yaml.clibz/",
-    "reason": "Not run: same C loader family as the selected ruamel.yaml.clib path built with a different toolchain; 69,913 last-month downloads."
+    "reason": "Excluded as a byte-identical fork of the selected ruamel.yaml.clib: in the ruamel.yaml.clibz 0.3.7 sdist (2be85214) scanner.c, parser.c, reader.c, api.c, loader.c, yaml.h and yaml_private.h are byte-identical to ruamel.yaml.clib 0.2.15, and _ruamel_yaml_clibz.pyx differs from _ruamel_yaml.pyx only in a freethreading_compatible Cython directive; it is the same C loader built with Zig (fgergo/mp3 precedent)."
   },
   {
     "name": "ryaml",
@@ -248,5 +248,113 @@
     "status": "selected",
     "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
     "evidence": "projects/yaml/python/libfyaml/verification.json"
+  },
+  {
+    "name": "poyo",
+    "status": "excluded_failed_control",
+    "metric_value": 149219,
+    "metric_error": null,
+    "family": "poyo (own regex line parser)",
+    "api_hint": "poyo.parse_string(str)",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/poyo/0.5.0/",
+    "reason": "Excluded: poyo 0.5.0 poyo.parse_string raises ValueError (\"Parent of ChildMixin instance needs to be a Container.\") on both valid controls (exploratory run, python:3.13-slim, 2026-11-18); its regex grammar has no anchors, aliases or flow collections."
+  },
+  {
+    "name": "yamlium",
+    "status": "excluded_failed_control",
+    "metric_value": 5662,
+    "metric_error": null,
+    "family": "yamlium (own pure-Python lexer/parser)",
+    "api_hint": "yamlium.parse(str).to_dict()",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/yamlium/0.3.1/",
+    "reason": "Excluded: yamlium 0.3.1 (own lexer and parser) gives the exact tree for catalog.yaml through parse(text).to_dict(), but order.yaml fails with ParsingError \"Found unexpected token SCALAR\" at the strip-chomped literal block with more-indented lines (parse and parse_full alike; exploratory run, python:3.13-slim, 2026-11-18)."
+  },
+  {
+    "name": "msgspec",
+    "status": "excluded_mapping_layer",
+    "metric_value": 39138375,
+    "metric_error": null,
+    "family": "PyYAML via msgspec.yaml",
+    "api_hint": "msgspec.yaml.decode(buf)",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/msgspec/0.22.0/",
+    "reason": "Excluded as a thin wrapper / mapping layer (tap-yaml and pydantic-yaml precedents): msgspec 0.22.0 msgspec.yaml.decode imports PyYAML (its optional yaml extra) and calls yaml.load with CSafeLoader (SafeLoader when libyaml is absent), then msgspec.convert maps the already-parsed values onto the requested type; no scanner or parser of its own. Not run."
+  },
+  {
+    "name": "omegaconf",
+    "status": "excluded_mapping_layer",
+    "metric_value": 38848824,
+    "metric_error": null,
+    "family": "PyYAML via OmegaConf",
+    "api_hint": "OmegaConf.create(str)",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/omegaconf/2.4.0/",
+    "reason": "Excluded as a configuration mapping layer over PyYAML (requires PyYAML>=5.1.0): OmegaConf loads with a PyYAML SafeLoader subclass and wraps the values in DictConfig/ListConfig nodes with interpolation; no parser of its own. Not run."
+  },
+  {
+    "name": "confuse",
+    "status": "excluded_mapping_layer",
+    "metric_value": 1048008,
+    "metric_error": null,
+    "family": "PyYAML via confuse",
+    "api_hint": "confuse.yaml_util.load_yaml",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/confuse/2.3.1/",
+    "reason": "Excluded as a configuration layer over PyYAML: confuse loads files with a PyYAML Loader subclass (OrderedDict mappings) and merges configuration views; no parser of its own. Not run."
+  },
+  {
+    "name": "hiyapyco",
+    "status": "excluded_mapping_layer",
+    "metric_value": 140245,
+    "metric_error": null,
+    "family": "PyYAML via HiYaPyCo",
+    "api_hint": "hiyapyco.load(...)",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/hiyapyco/0.7.0/",
+    "reason": "Excluded as a hierarchical configuration merger over PyYAML (PyYAML<7, Jinja2 interpolation); no parser of its own. Not run."
+  },
+  {
+    "name": "yamale",
+    "status": "excluded_not_parser",
+    "metric_value": 2408176,
+    "metric_error": null,
+    "family": "PyYAML or ruamel.yaml via yamale",
+    "api_hint": "yamale.make_data(...)",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/yamale/6.1.0/",
+    "reason": "Excluded: schema validator; make_data parses with PyYAML (or ruamel.yaml with the ruamel extra) and validates against a schema; the protocol excludes schema validators without their own parse step. Not run."
+  },
+  {
+    "name": "pyaml",
+    "status": "excluded_not_parser",
+    "metric_value": 5350047,
+    "metric_error": null,
+    "family": "PyYAML dumper",
+    "api_hint": "pyaml.dump(obj)",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/pyaml/26.7.0/",
+    "reason": "Excluded: pyaml 26.7.0 is a pretty-printing emitter over PyYAML (pyaml.dump); it has no load API of its own. Not run."
+  },
+  {
+    "name": "yamlpath",
+    "status": "excluded_not_parser",
+    "metric_value": 94562,
+    "metric_error": null,
+    "family": "ruamel.yaml via yamlpath",
+    "api_hint": "yamlpath CLI / Processor",
+    "note": null,
+    "found_by": "targeted_documentation_lead_round_3",
+    "source": "https://pypi.org/project/yamlpath/3.9.1/",
+    "reason": "Excluded: command-line get/set/merge processors over ruamel.yaml 0.19.1 (pinned dependency); it queries already-parsed ruamel documents and has no parser of its own (CLI-only tools excluded). Not run."
   }
 ]
