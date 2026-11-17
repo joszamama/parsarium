@@ -1,8 +1,8 @@
 # DNS / C — pilot
 
-**Status:** pilot_two_verified_search_bounded; incomplete. 2 verified third-party paths, 0 verified standard APIs, 2 verified Docker harnesses.
+**Status:** pilot_five_verified_search_bounded; incomplete. 5 verified third-party paths, 1 verified standard APIs, 5 verified Docker harnesses.
 
-Pilot cell: two C paths verified, c-ares and ldns, ranked by Debian popcon sourcemax installations. bind9, unbound and libevent are excluded because they document no public parser for caller-supplied message bytes; knot, udns and getdns remain leads (getdns shares the ldns-derived gldns code). glibc and musl libresolv ns_initparse are recorded as standard/runtime leads and were not run. c-ares and ldns drop the reserved Z bit (z carries AD and CD). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.
+Pilot cell: five C paths verified, c-ares, ldns, knot (libknot), udns and getdns, ranked by Debian popcon sourcemax installations from the pinned table; every C lead with a positive primary metric and a documented bytes API is now selected. getdns bundles gldns (Unbound's sldns, ldns lineage), but its own decoder files share 75 of 3,228 distinct normalized source lines (2.3%) with ldns 1.8.4, so it is kept as a distinct package API with the lineage stated. Round 2 added targeted lookups for further debian-source:dns and conan:dns hits (registry-snapshot.json round2_targeted): libmicrodns, libjdns and djbdns are excluded (no documented message-bytes API or no library), as are adns, unbound, bind9, libevent and libspf2 from round 1; dnsjit (popcon 4) stays unresolved because its parser is a Lua module inside the dnsjit engine with no linkable C library; Conan-only mdns and pro-mdnsd have no primary metric. glibc libresolv ns_initparse/ns_parserr is verified on both controls as a standard/runtime path (not instrumented, no AFL++ feedback, outside the ranking); musl was not run. c-ares, ldns and udns drop the reserved Z bit (z carries AD and CD); knot and getdns report all three bits. Harness-side RDATA formatting (lower-casing, joining the MX preference and exchange) is disclosed per path. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Popcon counts are package-level, include non-DNS use and are small below c-ares; the cell is not a definitive top ten.
 
 [Ranking and search limits](../../../data/c/dns/ranking.md) · [Standard API inventory](../../../data/c/dns/standard.json)
 
@@ -10,7 +10,10 @@ Pilot cell: two C paths verified, c-ares and ldns, ranked by Debian popcon sourc
 
 - [c-ares](c-ares/README.md) — verified Docker harness
 - [ldns](ldns/README.md) — verified Docker harness
+- [knot](knot/README.md) — verified Docker harness
+- [udns](udns/README.md) — verified Docker harness
+- [getdns](getdns/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 
-None verified in this pilot cell yet.
+- [glibc libresolv ns_initparse/ns_parserr](standard/glibc-libresolv-ns-initparse-ns-parserr/README.md) — verified API path
