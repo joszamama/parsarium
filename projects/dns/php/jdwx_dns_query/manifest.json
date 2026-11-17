@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "jdwx/dns-query",
+  "release": "v2.0.11",
+  "catalog_parser": "data/php/dns/parsers.json",
+  "source_lock": "projects/dns/php/jdwx_dns_query/source-lock.json",
+  "source_sha256": "49c873edee9657c3414ed9257b178b6d2b95b896c2ffa12ac83da17330e069d6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "coverage": "Xdebug executed line coverage in jdwx/dns-query PHP source (Packet, Header, Question, RR and per-type rrSet decoders, Lookups); php-fuzzer basic-block instrumentation for the fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/jdwx/dns-query/",
+  "format_specific_coverage_file_suffix": "/src/Packet/Packet.php",
+  "api": "new JDWX\\DNSQuery\\Packet\\ResponsePacket(string $i_data, int $i_size)",
+  "scope": "One RFC 1035 DNS message from local bytes through the ResponsePacket constructor only; no Resolver, transport or socket is created. Header keeps the reserved Z bit, AD and CD; the harness assembles z from them. Types and classes are decoded to mnemonics and mapped back to numbers through the library's Lookups tables. AAAA::rrSet prints eight uncompressed hex groups; the harness compresses that text (inet_pton/inet_ntop) to RFC 5952 form. Names get a trailing dot and lower case."
+}

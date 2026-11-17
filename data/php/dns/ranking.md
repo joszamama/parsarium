@@ -1,6 +1,6 @@
 # PHP × DNS: selected parsers (pilot)
 
-Four verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -12,6 +12,7 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 | 2 | [daverandom/libdns](https://github.com/DaveRandom/LibDNS/blob/v2.1.0/examples/AQuery.php) | v2.1.0 | 66,619,313 | LibDNS (Decoder, DecodingContext, Packets\Packet and Records\Types decoders) |
 | 3 | [pear/net_dns2](https://github.com/mikepultz/netdns2/blob/v2.0.7/src/NetDNS2/Packet/Response.php) | v2.0.7 | 3,392,919 | Net_DNS2 / NetDNS2 (Packet, Header, Question and per-type RR rrSet decoders) |
 | 4 | [utopia-php/dns](https://github.com/utopia-php/dns/blob/3.1.0/README.md) | 3.1.0 | 196,676 | Utopia DNS (Message, Message/Header, Question, Record and Domain decoders) |
+| 5 | [jdwx/dns-query](https://github.com/jdwx/dns-query/blob/v2.0.11/src/Packet/ResponsePacket.php) | v2.0.11 | 6,451 | jdwx DNSQuery (Net_DNS2 1.x fork: Packet, Header, Question and per-type RR rrSet decoders) |
 
 **react/dns v1.14.0** (MIT) parses local bytes with `React\Dns\Protocol\Parser::parseMessage(string $data): Message`. Both controls match the oracle summary. The response control covers 108 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 108/49 parser features and 128/69 AFL++ tuples, differing by 59 features and 59 tuples ([receipt](react-dns-feedback-differential.json)). Own pure-PHP decoder (unpack, readDomain with pointer following, inet_ntop for addresses). It drops the Z, AD and CD bits, so z is reported as 0.
 
@@ -21,12 +22,13 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 
 **utopia-php/dns 3.1.0** (MIT) parses local bytes with `Utopia\DNS\Message::decode(string $packet): Message`. Both controls match the oracle summary. The response control covers 181 library lines in 5 files. AFL++ feedback repeats 3 times per control; response and query give 181/113 parser features and 201/133 AFL++ tuples, differing by 68 features and 68 tuples ([receipt](utopia-php-dns-feedback-differential.json)). Own pure-PHP decoder (unpack, Domain::decode with backward-only pointer following, inet_ntop for addresses) in Appwrite's DNS server toolkit. It ignores the Z, AD and CD bits, so z is reported as 0. The package pulls in its telemetry and validator dependencies; only Message::decode runs.
 
+**jdwx/dns-query v2.0.11** (BSD-2-Clause) parses local bytes with `JDWX\DNSQuery\Packet\ResponsePacket::__construct(string $i_data, int $i_size)`. Both controls match the oracle summary. The response control covers 156 library lines in 10 files. AFL++ feedback repeats 3 times per control; response and query give 156/87 parser features and 176/107 AFL++ tuples, differing by 69 features and 69 tuples ([receipt](jdwx-dns-query-feedback-differential.json)). Forked from Net_DNS2 1.x and rewritten for PHP 8.1 (README credits Mike Pultz). It shares the Net_DNS2 family with the selected pear/net_dns2 2.x path but is a separate rewrite: 196 of its 3,279 distinct normalized non-blank, non-comment source lines (6.0%) also occur in pear/net_dns2 v2.0.7's src. Keeps Z, AD and CD. Types and classes are mnemonics mapped back through the library's Lookups tables; AAAA text is compressed from the library's uncompressed hex groups.
+
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | jdwx/dns-query | 6,451 | `new JDWX\DNSQuery\Packet\ResponsePacket($data, strlen($data))` | jdwx DNSQuery (Net_DNS2 1.x fork) |
-| 2 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
+| 1 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
 
 ## Checked, excluded or recorded separately
 
