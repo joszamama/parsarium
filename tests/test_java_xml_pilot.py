@@ -32,7 +32,7 @@ class JavaXmlPilotTest(unittest.TestCase):
                           "com.fasterxml:aalto-xml",
                           "com.fasterxml.jackson.dataformat:jackson-dataformat-xml",
                           "org.apache.xmlbeans:xmlbeans",
-                          "org.jdom:jdom2"})
+                          "org.jdom:jdom2", "xom:xom"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             coordinate = f"{parser['group']}:{parser['artifact']}"
@@ -105,15 +105,31 @@ class JavaXmlPilotTest(unittest.TestCase):
             for name, digest in receipt["project_file_sha256"].items():
                 self.assertEqual(sha256((project / name).read_bytes()).hexdigest(), digest, name)
 
+    def test_xom_source_rebuild_and_underlying_family_are_recorded(self):
+        xom = next(parser for parser in read(BASE / "parsers.json")
+                   if parser["name"] == "xom")
+        self.assertIn("Xerces2-J", xom["family"])
+        project = ROOT / xom["project"]
+        manifest = read(project / "manifest.json")
+        receipt = read(project / "verification.json")
+        lock = read(project / "source-lock.json")["xom"]
+        self.assertEqual(manifest["source_sha256"], lock["source_sha256"])
+        self.assertGreater(receipt["parser_source_lines_covered"], 0)
+        self.assertGreater(receipt["underlying_source_lines_covered"], 0)
+        self.assertIn("/work/parser-classes", (project / "run-control.sh").read_text())
+        self.assertNotIn("/work/build-libs/xerces.jar",
+                         manifest["fuzz_smoke_args"][0])
+
     def test_feedback_is_stable_and_differential(self):
         report = read(BASE / "afl-feedback.json")
         oracle = read(ROOT / "data/go/xml/verification.json")["differential_output"]
-        self.assertEqual(report["projects_passed"], len(read(BASE / "parsers.json")) + 1)
         expected_projects = {str(Path(parser["project"]).relative_to("projects"))
-                             for parser in read(BASE / "parsers.json")}
+                             for parser in read(BASE / "parsers.json") if parser["name"] != "xom"}
         expected_projects.add("xml/java/jdk_documentbuilder")
-        self.assertEqual({item["project"] for item in report["results"]},
-                         expected_projects)
+        aggregated = {item["project"] for item in report["results"]}
+        self.assertIn(aggregated, (expected_projects,
+                                   expected_projects | {"xml/java/xom"}))
+        self.assertEqual(report["projects_passed"], len(aggregated))
         for result in report["results"]:
             overlay = ROOT / "fuzzing/afl-native" / result["project"] / "verification.json"
             self.assertEqual(sha256(overlay.read_bytes()).hexdigest(), result["overlay_receipt_sha256"])
@@ -125,6 +141,15 @@ class JavaXmlPilotTest(unittest.TestCase):
                 self.assertEqual(len(result["differential_output"]["events"]), 25)
             else:
                 self.assertEqual(result["differential_output"], oracle)
+        xom = read(ROOT / "fuzzing/afl-native/xml/java/xom/differential.json")
+        self.assertEqual(xom["differential_output"], oracle)
+        self.assertTrue(xom["pass"] and xom["repeated_control_identical"]
+                        and xom["repeated_differential_identical"])
+        self.assertGreater(xom["parser_feature_difference"], 0)
+        self.assertGreater(xom["afl_tuple_difference"], 0)
+        overlay = ROOT / "fuzzing/afl-native/xml/java/xom/verification.json"
+        self.assertEqual(sha256(overlay.read_bytes()).hexdigest(),
+                         xom["overlay_receipt_sha256"])
 
 
 if __name__ == "__main__":

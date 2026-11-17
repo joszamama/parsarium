@@ -1,0 +1,46 @@
+{
+  "project": "xml/java/xom",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "overlay_receipt_sha256": "244ee8c422b92810073ca2d0e3a81dc049946e722f90c8a2fd05c2dcadc1e9f4",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential": "controls/xml/order-default-ns.xml",
+  "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 579,
+  "control_afl_tuples": 596,
+  "differential_parser_features": 585,
+  "differential_afl_tuples": 602,
+  "parser_feature_difference": 72,
+  "afl_tuple_difference": 72
+}

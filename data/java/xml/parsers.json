@@ -397,5 +397,62 @@
       ]
     },
     "project": "projects/xml/java/aalto_xml"
+  },
+  {
+    "name": "xom",
+    "group": "xom",
+    "artifact": "xom",
+    "version": "1.4.6",
+    "license": "LGPL-2.1",
+    "license_evidence": "Pinned Maven release POM licenses (The GNU Lesser General Public License, Version 2.1)",
+    "input_api": "new nu.xom.Builder().build(Files.newInputStream(local Path)) into XOM Document",
+    "documentation": "https://xom.nu/apidocs/nu/xom/Builder.html",
+    "source": "https://repo.maven.apache.org/maven2/xom/xom/1.4.6/xom-1.4.6-sources.jar",
+    "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE into XOM Document: expanded element/attribute names, namespace declarations, depth, and decoded text",
+    "family": "XOM Builder/tree over OpenJDK Xerces2-J fork",
+    "family_note": "XOM Builder.findParser selects the OpenJDK internal Xerces SAX reader when the optional external Xerces dependency is absent. XOM constructs its own Document tree but has no independent XML tokenizer. Its parser path shares the Xerces2-J family with the standard, JDOM2, dom4j, and XMLBeans paths.",
+    "shared_families": [
+      "Apache Xerces2-J (OpenJDK fork)"
+    ],
+    "coverage_note": "Published XOM 1.4.6 release JAR lacks line tables; pinned same-release XOM sources are recompiled with javac -g --release 8 for line coverage. Underlying OpenJDK java.xml Xerces classes and sources are covered and reported separately.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 355,
+      "max_release": "1.2.5",
+      "max_release_value": 116,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/xom%3Axom",
+      "captured_at_utc": "2026-11-17T03:37:59.222235+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Coordinate adoption reflects XOM tree API use, not independent XML tokenization; shares the OpenJDK Xerces fork."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xom"
   }
 ]

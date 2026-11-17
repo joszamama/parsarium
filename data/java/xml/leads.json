@@ -151,13 +151,14 @@
   {
     "name": "xom",
     "coordinate": "xom:xom",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "1.4.6",
     "summed_direct_dependent_count": 355,
     "max_release_direct_dependent_count": 116,
     "default_release_direct_dependent_count": 19,
-    "reason": "nu.xom.Builder.build(InputStream) builds a tree over an XMLReader (Xerces when present, else JDK); no tokenizer of its own. Control not run.",
-    "source": "https://central.sonatype.com/artifact/xom/xom"
+    "reason": "Builder.build(InputStream) parsed both valid namespace-aware XML controls into the expected XOM tree. Pinned same-release classes and OpenJDK Xerces SAX source lines are covered separately; repeated valid traces are stable and input-dependent. XOM is a tree path over the shared JDK Xerces tokenizer, not an independent tokenizer.",
+    "source": "https://central.sonatype.com/artifact/xom/xom",
+    "verified_evidence": "projects/xml/java/xom/verification.json"
   },
   {
     "name": "xpp3",
