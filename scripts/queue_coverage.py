@@ -25,6 +25,7 @@ MAX_PROFILE_BYTES = 256 << 20
 MAX_PROFILE_FILES = 1024
 MAX_EXPORT_BYTES = 128 << 20
 MAX_INTERPRETED_TRACE_BYTES = 16 << 20
+MAX_GO_PROFILE_BYTES = 16 << 20
 
 
 class QueueCoverageError(ValueError):
@@ -536,7 +537,7 @@ def replay_go_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
                     "bytes": len(data), "status": status, "exit_code": exit_code,
                     "profile_files": 0}
             if profile.is_file():
-                if profile.stat().st_size > MAX_PYTHON_TRACE_BYTES:
+                if profile.stat().st_size > MAX_GO_PROFILE_BYTES:
                     raise QueueCoverageError(f"Go coverprofile exceeds size limit: {label}")
                 lines = go_profile_lines(profile.read_bytes(), prefixes)
                 for filename, observed in lines.items():
