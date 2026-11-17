@@ -1,10 +1,54 @@
 # POCO JSON — JSON / C++
 
-- **Pinned release:** POCO `1.15.4` (BSL-1.0), bundled `pdjson` tokenizer
-- **Local input API:** `Poco::JSON::Parser::parse(const std::string&)` ([official API](https://docs.pocoproject.org/current/Poco.JSON.Parser.html))
-- **Parser family:** POCO `ParserImpl.cpp` over bundled `pdjson.c`; separate C++ package path, shared underlying tokenizer family
-- **Valid controls:** [nested object](../../../../controls/json/nested-object.json), [nested array](../../../../controls/json/nested-array.json)
-- **Adoption:** unranked on the primary metric; 190 `libpoco-dev` installations measure the full suite, while 125 JSON runtime installations all have no recent file access. [Ranking and limits](../../../../data/cpp/json/ranking.md)
-- **Evidence:** [parser record](../../../../data/cpp/json/parsers.json), [control result](../../../../data/cpp/json/verification.json), [parser-only AFL++ feedback](../../../../fuzzing/afl-native/json/cpp/poco-json/differential.json)
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The [runnable project](../../../../projects/json/cpp/poco-json/README.md) contains the pinned Docker build, local-string harness, source-coverage check, and AFL++ target.
+- **Pinned release:** `1.15.4`
+- **License:** BSL-1.0
+- **Parser family:** Poco::JSON::ParserImpl over bundled pdjson C tokenizer
+- **Local input API:** `Poco::JSON::Parser::parse(const std::string&) on a local byte-backed std::string; ParseHandler(true) builds an order-preserving Poco::JSON Object or Array DOM`
+- **Documentation:** [API reference](<https://docs.pocoproject.org/current/Poco.JSON.Parser.html>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/cpp/json/parsers.json) · [control result](../../../../data/cpp/json/verification.json)
+
+## Observed control result
+
+```json
+{
+  "arrays": 3,
+  "booleans": 2,
+  "max_depth": 4,
+  "nulls": 1,
+  "numbers": [
+    -2.5,
+    1,
+    1,
+    2,
+    2
+  ],
+  "objects": 5,
+  "root": "object",
+  "strings": [
+    "café \"quoted\"",
+    "go",
+    "json",
+    "parsarium",
+    "rfc8259"
+  ],
+  "top_level_keys": [
+    "enabled",
+    "missing",
+    "name",
+    "nested",
+    "ratio",
+    "tags",
+    "version"
+  ]
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json cpp poco-json
+python3 parsarium.py run json cpp poco-json controls/json/nested-object.json
+```

@@ -16,4 +16,4 @@ python3 parsarium.py afl prepare mp3 javascript music_metadata runs/mp3-music_me
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Coverage limit:** Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info/LAME, free-format, Layer I/II, MPEG-2.5, ADTS, ID3 or CRC-protected support. MpegParser walks frame headers and skips side information; it does not decode audio. The harness passes `duration: true` so every frame is walked.
+**Coverage limit:** Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info/LAME, free-format, Layer I/II, MPEG-2.5, ADTS, ID3 or CRC-protected support. MpegParser walks frame headers and skips side information; it does not decode audio. duration: true is required for a full frame walk; without it the parser reads four frames and estimates CBR length from file size.

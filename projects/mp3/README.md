@@ -13,6 +13,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [jlayer / Java](java/jlayer/README.md)
 - [codec-parser / JavaScript](javascript/codec_parser/README.md)
 - [mediabunny / JavaScript](javascript/mediabunny/README.md)
+- [music-metadata / JavaScript](javascript/music_metadata/README.md)
 - [james-heinrich/getid3 / PHP](php/getid3/README.md)
 - [wapmorgan/mp3info / PHP](php/wapmorgan_mp3info/README.md)
 - [hachoir / Python](python/hachoir/README.md)

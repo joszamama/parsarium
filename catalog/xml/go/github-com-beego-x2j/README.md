@@ -5,8 +5,8 @@
 - **Pinned release:** `v0.0.0-20131220205130-a0352aadc542`
 - **License:** BSD-3-Clause
 - **Parser family:** x2j map conversion over Go encoding/xml Decoder tokenizer
-- **Local input API:** `x2j.Unmarshal([]byte, &map[string]interface{}), x2j.ByteDocToMap([]byte) and x2j.DocToMap(string), which must agree, plus x2j.ToMap(io.Reader), each returning map[string]interface{}; the harness walks the map keys and reports the []byte/string and io.Reader maps separately`
-- **Documentation:** [API reference](<https://pkg.go.dev/github.com/beego/x2j@v0.0.0-20131220205130-a0352aadc542#Unmarshal>)
+- **Local input API:** `Primary oracle-matching route: x2j.ToMap(io.Reader) on a local byte stream. The harness also records x2j.Unmarshal([]byte, &map[string]interface{}), ByteDocToMap([]byte), and DocToMap(string) as auxiliary routes; those three agree with one another but alter CDATA whitespace on the first valid control.`
+- **Documentation:** [API reference](<https://pkg.go.dev/github.com/beego/x2j@v0.0.0-20131220205130-a0352aadc542#ToMap>)
 - **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
 - **Catalog evidence:** [parser record](../../../../data/go/xml/parsers.json) · [control result](../../../../data/go/xml/verification.json)
 
@@ -75,4 +75,11 @@
     ]
   }
 }
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml go github_com_beego_x2j
+python3 parsarium.py run xml go github_com_beego_x2j controls/xml/catalog-ns.xml
 ```

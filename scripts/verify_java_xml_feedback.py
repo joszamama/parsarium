@@ -12,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("xercesimpl", "woodstox_core", "dom4j", "xmlbeans", "jdom2", "aalto_xml", "jdk_documentbuilder", "jackson_xml", "xom", "xpp3")
+PROJECTS = ("xercesimpl", "woodstox_core", "dom4j", "xmlbeans", "jdom2", "aalto_xml", "jdk_documentbuilder", "jackson_xml", "xom", "xpp3", "kxml2")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 # Structure of controls/xml/order-default-ns.xml, read off the file by hand:

@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 105,
-    "containerized_verified": 105,
+    "catalog_paths": 110,
+    "containerized_verified": 110,
     "staged": 0,
     "standard_api_paths": 8,
     "standard_containerized_verified": 7,
@@ -1008,8 +1008,8 @@
       {
         "format": "json",
         "ecosystem": "cpp",
-        "catalog_paths": 6,
-        "containerized_verified": 6,
+        "catalog_paths": 7,
+        "containerized_verified": 7,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1017,9 +1017,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_six_selected_search_bounded",
+        "status": "pilot_seven_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Six C++ JSON package paths pass two valid controls with scoped parser source coverage and AFL++ feedback; Glaze uses its generic_i64 DOM and a parser-only AFL++ target. Glaze has 171 Debian source-package and libglaze-dev installations, both from the same hashed snapshot. The source-package metric favors runtime packages and undercounts header-only libraries; Boost.JSON has no JSON-specific Debian source count and remains primary-unranked. Four documentation leads remain unresolved: Qt and POCO have framework/multi-library counts, while PicoJSON and jsoncons have low or incomplete signals. The 320 JSON-name source hits exclude Glaze, found by a supplementary exact source-name lookup. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, or malformed-input behavior."
+        "uncertainty": "Seven C++ JSON package paths pass two valid controls with scoped parser source coverage and stable AFL++ feedback. Glaze uses a generic_i64 DOM and a parser-only probe; POCO JSON reaches its ParserImpl and bundled pdjson tokenizer with a parser-only probe. Glaze has 171 comparable Debian source-package installations, but the source metric favors runtime packages and undercounts header-only libraries. Boost.JSON and POCO have no JSON-specific Debian source count and remain primary-unranked; POCO's 190 libpoco-dev installs are suite-wide, while its component runtime 125 are all classified no_files. Three documentation leads remain unresolved: Qt, PicoJSON, and jsoncons. The 320 JSON-name source hits exclude Glaze, found by a supplementary exact source-name lookup. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, other encodings, or malformed-input behavior."
       },
       {
         "format": "json",
@@ -1088,8 +1088,8 @@
       {
         "format": "json",
         "ecosystem": "python",
-        "catalog_paths": 5,
-        "containerized_verified": 5,
+        "catalog_paths": 6,
+        "containerized_verified": 6,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1097,9 +1097,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_five_selected_search_bounded",
+        "status": "pilot_six_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Five positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), orjson 3.13.0 (218,014,317), simplejson 4.3.0 (49,365,386), ijson 3.6.0 (46,615,664), and ujson 6.1.0 (29,543,889). Pydantic embeds Jiter; orjson shares the yyjson C syntax-parser family but this pilot measures its Rust deserializer, not vendored C source lines. ijson uses the asserted yajl2_c backend, with pinned YAJL C tokenizer and Python extension coverage; its source-built embedded YAJL -O0 route differs from the official Linux wheel linkage and optimisation, and its other backends are untested. ujson uses its own UltraJSON C decoder with vendored double-conversion C++ for fractional numbers; both controls equal an exact CPython json oracle tree, and duplicate-key and edge-number behavior is recorded from source, not tested. PyPI package downloads include non-parse uses and transitive installs. Four targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified."
+        "uncertainty": "Six positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), orjson 3.13.0 (218,014,317), simplejson 4.3.0 (49,365,386), ijson 3.6.0 (46,615,664), msgspec 0.22.0 (39,138,375), and ujson 6.1.0 (29,543,889). Pydantic embeds Jiter; orjson shares the yyjson C syntax-parser family but this pilot measures its Rust deserializer, not vendored C source lines. ijson uses the asserted yajl2_c backend, with pinned YAJL C tokenizer and Python extension coverage; its source-built embedded YAJL -O0 route differs from the official Linux wheel linkage and optimisation, and its other backends are untested. msgspec uses its own C JSON decoder in _core.c through untyped msgspec.json.decode; its source-built clang -O0 path differs from the official GCC wheel, typed decoding is untested, and JSON decoder sections are counted separately from other codecs in the same file. ujson uses its own UltraJSON C decoder with vendored double-conversion C++ for fractional numbers; both controls equal an exact CPython json oracle tree, and duplicate-key and edge-number behavior is recorded from source, not tested. PyPI package downloads include non-parse uses and transitive installs. Three targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified."
       },
       {
         "format": "json",
@@ -1184,8 +1184,8 @@
       {
         "format": "mp3",
         "ecosystem": "javascript",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
+        "catalog_paths": 3,
+        "containerized_verified": 3,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1193,9 +1193,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_selected_search_bounded",
+        "status": "pilot_three_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Two verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. music-metadata ranks above codec-parser and was not built here, so the two selected paths are not the top two by downloads. Neither path decodes Layer III audio. music-metadata and the mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call."
+        "uncertainty": "Three verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. The three selected paths are the top three by downloads among the fetched candidates. None decodes Layer III audio. The mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call. music-metadata reports MPEG version and layer only through its codec string ('MPEG 1 Layer 3'), not as separate fields, and needs duration: true for a full frame walk. Its valid-control AFL++ differential is 4 sync() tail-policy ranges that track frame length, not version or channel branches. Its V8 package line count (3,539) is mostly module evaluation; MpegParser.js alone is 245 lines."
       },
       {
         "format": "mp3",
@@ -1280,8 +1280,8 @@
       {
         "format": "xml",
         "ecosystem": "go",
-        "catalog_paths": 3,
-        "containerized_verified": 3,
+        "catalog_paths": 4,
+        "containerized_verified": 4,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1289,15 +1289,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_three_selected_search_bounded",
+        "status": "pilot_four_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: the three highest Imported-by XML parser leads (etree 2,098; xmlquery 627; mxj 553) were built and control-verified. All three use the Go encoding/xml Decoder tokenizer and build their own trees or maps; none is an independent tokenizer. mxj's map drops namespace URIs and prefixes, order between differently named siblings, comments, processing instructions and mixed-content runs, so only its map paths, attribute keys and trimmed text are claimed. 13 further numeric leads remain unresolved and are not selected or ranked. The first 100 hits of six queries were captured (xml dom returned 68; xml reader 28). The two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour."
+        "uncertainty": "Pilot cell: the four highest Imported-by XML parser leads (etree 2,098; xmlquery 627; mxj 553; beego/x2j 436) were built and control-verified. All four use the Go encoding/xml Decoder tokenizer and build their own trees or maps; none is an independent tokenizer. mxj's map drops namespace URIs and prefixes, order between differently named siblings, comments, processing instructions and mixed-content runs, so only its map paths, attribute keys and trimmed text are claimed. beego/x2j has the same map losses; in addition its []byte/string APIs delete whitespace before every '<' in the raw document, which changes CDATA content on the valid catalog control ('x < y' becomes 'x< y'), and its io.Reader API keeps indentation as '#text' entries. x2j is pinned at its only pseudo-version (a 2013 fork of clbanning/x2j); its own AFL++ blocks differ between the two controls by only one block, while its encoding/xml blocks differ by 30. 12 further numeric leads remain unresolved and are not selected or ranked. The first 100 hits of six queries were captured (xml dom returned 68; xml reader 28). The two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour."
       },
       {
         "format": "xml",
         "ecosystem": "java",
-        "catalog_paths": 9,
-        "containerized_verified": 9,
+        "catalog_paths": 10,
+        "containerized_verified": 10,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1305,9 +1305,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_nine_selected_search_bounded",
+        "status": "pilot_ten_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Nine third-party XML package paths are verified and runnable: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, Aalto, XOM, and XPP3. Xerces2-J, Woodstox, Aalto, and XPP3 are independent tokenizer/parser engines. Jackson XML projects Woodstox StAX into Jackson tokens; dom4j, XMLBeans, JDOM2, and XOM build distinct trees over the OpenJDK Xerces SAX fork. Each wrapper has its own source coverage and stable parser-derived AFL++ feedback, while underlying tokenizer coverage is reported separately. The standard javax.xml.parsers path shares the Xerces2-J family. Five documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior. XOM and XPP3 control and differential results are in their project-scoped receipts and shared XML aggregates."
+        "uncertainty": "Ten third-party XML package paths are verified and runnable, reaching this cell's ceiling without padding: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, Aalto, XOM, XPP3, and kXML2. Xerces2-J, Woodstox, Aalto, XPP3, and kXML2 are five independent tokenizer/parser families. Jackson XML projects Woodstox StAX events into Jackson tokens; dom4j, XMLBeans, JDOM2, and XOM build distinct trees over the OpenJDK Xerces SAX fork. Each wrapper has own source coverage and stable parser-derived AFL++ feedback, while underlying parser coverage is reported separately. The standard javax.xml.parsers path is counted separately and shares the Xerces2-J family. Four documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior. kXML2 control and differential results are in its project-scoped receipt and the shared XML aggregates."
       },
       {
         "format": "xml",
