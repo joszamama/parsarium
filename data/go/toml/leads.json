@@ -128,6 +128,24 @@
       "source": "https://pkg.go.dev/github.com/kezhuw/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "github.com/tabnas/toml/go",
+      "metric_value": 2,
+      "metric": "pkg.go.dev Imported by package count",
+      "note": "Module github.com/tabnas/toml/go v0.5.22 requires no TOML library, so it may be an own parser; Imported-by 2. Not run in this round.",
+      "source": "https://pkg.go.dev/github.com/tabnas/toml/go",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "github.com/achun/tom-toml",
+      "metric_value": 6,
+      "metric": "pkg.go.dev Imported by package count",
+      "note": "Module v0.2.0 (TOML 0.2-era own parser, 2014-2015) requires no TOML library; likely fails the TOML 1.0 controls. Not run in this round.",
+      "source": "https://pkg.go.dev/github.com/achun/tom-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
     }
   ],
   "excluded": [
@@ -215,5 +233,266 @@
       "project": "projects/toml/go/github_com_go_rotini_toml",
       "status": "promoted_to_verified"
     }
-  ]
+  ],
+  "search_recheck": {
+    "checked_at_utc": "2026-11-18",
+    "scope": "every hit of the recorded pkg.go.dev snapshot with a positive Imported-by count that was not yet a selected path, lead or exclusion (118 rows, 100 unique packages)",
+    "method": "go.mod of the module's latest version from proxy.golang.org, searched for requirements on BurntSushi/toml, pelletier/go-toml, naoina/toml, influxdata/toml, go-rotini/toml, creachadair/tomledit, komkom/toml or midbel/toml",
+    "wrappers_or_loaders_requiring_a_toml_library": {
+      "count": 63,
+      "packages": [
+        "cogentcore.org/core/base/iox/tomlx",
+        "cosmossdk.io/tools/confix",
+        "github.com/DavidGodefroid/lockkit/config",
+        "github.com/MontFerret/contrib/modules/toml",
+        "github.com/OpenNHP/opennhp/nhp/common/clusterconfig",
+        "github.com/alecthomas/kong-toml",
+        "github.com/ancientlore/flagcfg",
+        "github.com/asciimoth/inplace/toml",
+        "github.com/bharvest-devops/blockchain-toml",
+        "github.com/chef/automate/components/automate-deployment/pkg/toml",
+        "github.com/colt3k/mycli",
+        "github.com/ethereum-optimism/superchain-registry/validation",
+        "github.com/faustbrian/go-wire/v3/tomlwire",
+        "github.com/go-admin-team/go-admin-core/config/encoder/toml",
+        "github.com/go-micro/plugins/v4/config/encoder/toml",
+        "github.com/go-orb/plugins/codecs/toml",
+        "github.com/go-zoox/config",
+        "github.com/go-zoox/encoding/toml",
+        "github.com/gogf/gf/v2/encoding/gtoml",
+        "github.com/goki/ki/toml",
+        "github.com/gopherex/xconf/contrib/decoders/toml",
+        "github.com/goplugin/plugin-testing-framework/seth",
+        "github.com/goraz/onion/loaders/toml-0.5.0",
+        "github.com/hedzr/cmdr-loaders/lite",
+        "github.com/hedzr/store/codecs/toml",
+        "github.com/influxdata/influxdb/v2/toml",
+        "github.com/ivangsm/koanf/parsers/toml",
+        "github.com/larsartmann/go-output/serialization",
+        "github.com/meeyio/meey-lib/log",
+        "github.com/meeypioneer/mey-library/log",
+        "github.com/meycoin/meey-library/log",
+        "github.com/meycoin/mey-lib/log",
+        "github.com/micro/go-micro/v2/config/encoder/toml",
+        "github.com/nyaruka/ezconf",
+        "github.com/oblq/sprbox",
+        "github.com/oblq/swap",
+        "github.com/ondbyte/turbo_flag",
+        "github.com/open-policy-agent/conftest/parser/toml",
+        "github.com/origadmin/toolkits/codec/toml",
+        "github.com/paularlott/cli/toml",
+        "github.com/peterbourgon/ff/v4/fftoml",
+        "github.com/pilosa/pilosa/toml",
+        "github.com/ribeirohugo/go_config/config/toml",
+        "github.com/rytsh/liz/file",
+        "github.com/sandwich-go/xconf",
+        "github.com/shafreeck/toml",
+        "github.com/smartcontractkit/chainlink-evm/pkg/config/toml",
+        "github.com/smartcontractkit/chainlink-integrations/evm/config/toml",
+        "github.com/smartcontractkit/seth",
+        "github.com/starpkg/toml",
+        "github.com/stellar/go-stellar-sdk/support/config",
+        "github.com/stellar/go/support/config",
+        "github.com/stellar/kelp/support/toml",
+        "github.com/taigrr/jety",
+        "github.com/tdrn-org/go-config-toml",
+        "github.com/urfave/cli-altsrc/v3",
+        "github.com/vroomy/vroomy",
+        "github.com/xtls/xray-core/main/toml",
+        "github.com/xxxserxxx/lingo/v2",
+        "goki.dev/grows/tomls",
+        "goshop.dev/headless/pkg/config",
+        "kedara.eu/go/kong-toml",
+        "peterdekok.nl/gotools/config"
+      ]
+    },
+    "no_toml_library_requirement": [
+      {
+        "package": "github.com/larsartmann/go-output",
+        "imported_by": 28,
+        "module_version": "v0.38.7"
+      },
+      {
+        "package": "github.com/stvp/go-toml-config",
+        "imported_by": 20,
+        "module_version": "v0.0.0-20220807175811-1347a3c4169c"
+      },
+      {
+        "package": "kcl-lang.io/kcl-go/pkg/3rdparty/toml",
+        "imported_by": 4,
+        "module_version": "v0.13.2"
+      },
+      {
+        "package": "github.com/shibukawa/tinybind-go/configbind",
+        "imported_by": 9,
+        "module_version": "v0.6.0"
+      },
+      {
+        "package": "vuvuzela.io/alpenhorn/encoding/toml",
+        "imported_by": 8,
+        "module_version": "v0.0.0-20190912152808-6b33518f681e"
+      },
+      {
+        "package": "github.com/achiku/varfmt",
+        "imported_by": 16,
+        "module_version": "v0.0.0-20160708124000-f820e1efecee"
+      },
+      {
+        "package": "github.com/tabnas/toml/go",
+        "imported_by": 2,
+        "module_version": "v0.5.22"
+      },
+      {
+        "package": "github.com/ihatiko/chef/components/tech/toml",
+        "imported_by": 2,
+        "module_version": "v0.0.0-20250106180424-fd38ceafb42f"
+      },
+      {
+        "package": "github.com/morgulbrut/toml",
+        "imported_by": 4,
+        "module_version": "v0.3.1"
+      },
+      {
+        "package": "github.com/Psiphon-Inc/configloader-go/toml",
+        "imported_by": 4,
+        "module_version": "v1.0.2"
+      },
+      {
+        "package": "github.com/megamsys/vertice/toml",
+        "imported_by": 10,
+        "module_version": "v0.0.0-20260504154615-6f3c81a68c1a"
+      },
+      {
+        "package": "github.com/achun/tom-toml",
+        "imported_by": 6,
+        "module_version": "v0.2.0"
+      },
+      {
+        "package": "github.com/pepelazz/go-toml",
+        "imported_by": 1,
+        "module_version": "v0.0.0-20220620070911-2cb158c85cd6"
+      },
+      {
+        "package": "github.com/Oneledger/toml",
+        "imported_by": 1,
+        "module_version": "v0.4.1"
+      },
+      {
+        "package": "github.com/gozelle/toml",
+        "imported_by": 1,
+        "module_version": "v0.0.0-20230114155416-da089ee3724d"
+      },
+      {
+        "package": "54hub.com/arkdep/toml",
+        "imported_by": 1,
+        "module_version": "v0.1.0"
+      },
+      {
+        "package": "github.com/kitsunium/sdk/pkg/v1/data/codec/toml",
+        "imported_by": 1,
+        "module_version": "v0.14.7"
+      },
+      {
+        "package": "github.com/go-xe2/third/github.com/BurntSushi/toml",
+        "imported_by": 1,
+        "module_version": "v1.0.3"
+      },
+      {
+        "package": "github.com/shellyln/go-loose-json-parser/marshal",
+        "imported_by": 2,
+        "module_version": "v0.0.19"
+      },
+      {
+        "package": "gopkg.in/leyra/toml.v1",
+        "imported_by": 2,
+        "module_version": "v1.0.0-20150817003349-751171607256"
+      },
+      {
+        "package": "github.com/kjzz/go-toml",
+        "imported_by": 1,
+        "module_version": "v1.2.1"
+      },
+      {
+        "package": "github.com/winstonprivacyinc/go-toml",
+        "imported_by": 1,
+        "module_version": "v1.2.0"
+      },
+      {
+        "package": "github.com/yesnault/go-toml",
+        "imported_by": 1,
+        "module_version": "v1.0.0"
+      },
+      {
+        "package": "gopkg.in/pelletier/go-toml.v1",
+        "imported_by": 1,
+        "module_version": null
+      },
+      {
+        "package": "github.com/timob/toml",
+        "imported_by": 1,
+        "module_version": "v0.1.1"
+      },
+      {
+        "package": "github.com/LixenWraith/tinytoml",
+        "imported_by": 1,
+        "module_version": "v0.0.0-20250422065624-8aa28720f04a"
+      },
+      {
+        "package": "github.com/go-forks/toml",
+        "imported_by": 2,
+        "module_version": "v0.2.0"
+      },
+      {
+        "package": "github.com/patrickhaller/toml",
+        "imported_by": 2,
+        "module_version": "v0.3.1"
+      },
+      {
+        "package": "github.com/lxlxw/toml",
+        "imported_by": 2,
+        "module_version": "v0.3.1"
+      },
+      {
+        "package": "github.com/reusee/toml",
+        "imported_by": 2,
+        "module_version": "v0.4.0"
+      },
+      {
+        "package": "github.com/Shopify/ecfg/pkg/toml",
+        "imported_by": 2,
+        "module_version": "v0.0.0-20180601165609-0d34ca80e426"
+      },
+      {
+        "package": "github.com/zannen/toml",
+        "imported_by": 2,
+        "module_version": "v0.3.2"
+      },
+      {
+        "package": "github.com/jonsen/toml",
+        "imported_by": 1,
+        "module_version": "v0.4.0"
+      },
+      {
+        "package": "github.com/cxzgb123/toml",
+        "imported_by": 1,
+        "module_version": "v0.3.4"
+      },
+      {
+        "package": "github.com/cloudradar-monitoring/toml",
+        "imported_by": 1,
+        "module_version": "v0.4.2"
+      },
+      {
+        "package": "github.com/ando-masaki/toml",
+        "imported_by": 1,
+        "module_version": "v0.3.1"
+      },
+      {
+        "package": "github.com/FireworkMC/toml",
+        "imported_by": 1,
+        "module_version": "v0.3.1"
+      }
+    ],
+    "finding": "Packages that require a TOML library are configuration loaders or wrappers over an already examined parser and are not separate paths. Among the rest, most modules named */toml with v0.3.x/v0.4.x tags (go-forks, patrickhaller, lxlxw, reusee, zannen, jonsen, cxzgb123, cloudradar-monitoring, ando-masaki, FireworkMC, Oneledger, morgulbrut, timob, gozelle, arkdep, go-xe2/third, kcl-go 3rdparty) carry BurntSushi/toml-era version numbers and are forks or vendored copies of BurntSushi/toml or of go-toml v1 (kjzz, winstonprivacyinc, yesnault, gopkg.in/pelletier/go-toml.v1), each with Imported-by 1-6; others are not TOML parsers (go-output, varfmt, tinybind configbind, go-loose-json-parser, Psiphon configloader, Shopify ecfg, stvp/go-toml-config flag loader, vuvuzela encoding). These were classified from module metadata only and were not run."
+  }
 }
