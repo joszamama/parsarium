@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:28:33.107410+00:00",
+  "checked_at_utc": "2026-11-17T07:27:55.284369+00:00",
   "platform": "linux/arm64 Docker",
   "php": "PHP 8.5 (Ubuntu php8.5-cli for seld/jsonlint; PHP 8.5.12 source build for json_decode)",
   "controls": {
@@ -50,6 +50,66 @@
       },
       "parser_source_files": 3,
       "parser_source_lines_covered": 226,
+      "error": null
+    },
+    {
+      "package": "halaxa/json-machine",
+      "version": "1.2.6",
+      "scope": "JSON object or array roots; JSON Machine incrementally parses top-level members and PHP ext/json decodes each yielded member value",
+      "command": "python3 scripts/run_project.py json php halaxa_json_machine",
+      "receipt": "projects/json/php/halaxa_json_machine/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 11,
+      "parser_source_lines_covered": 261,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_keys": []
+      },
       "error": null
     }
   ],
