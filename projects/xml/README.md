@@ -59,6 +59,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [xmlschema / Python](python/xmlschema/README.md)
 - [xmltodict / Python](python/xmltodict/README.md)
 - [RustyXML / Rust](rust/rustyxml/README.md)
+- [instant-xml / Rust](rust/instant_xml/README.md)
 - [minidom / Rust](rust/minidom/README.md)
 - [quick-xml / Rust](rust/quick_xml/README.md)
 - [roxmltree / Rust](rust/roxmltree/README.md)
