@@ -1,6 +1,6 @@
 # GO × XML: selected parsers (pilot)
 
-8 control-verified third-party paths selected. The ceiling is ten; selected ranks cover only verified paths from the bounded search. A path is an API or package route, not necessarily an independent parser engine.
+9 control-verified third-party paths selected. The ceiling is ten; selected ranks cover only verified paths from the bounded search. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -16,6 +16,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | 6 | [github.com/mmcdole/goxpp](https://pkg.go.dev/github.com/mmcdole/goxpp@v1.3.0#NewXMLPullParser) | v1.3.0 | 132 | XML 1.0 UTF-8 document through a pull event cursor with expanded element names, attributes, decoded text and depth | goxpp cursor over Go encoding/xml Decoder tokenizer |
 | 7 | [github.com/moovweb/gokogiri/xml](https://pkg.go.dev/github.com/moovweb/gokogiri/xml@v0.0.0-20180713195410-a1a828153468#Parse) | v0.0.0-20180713195410-a1a828153468 | 108 | Local UTF-8 bytes through `xml.Parse`; namespace-aware DOM summary on both valid controls | Go cgo binding over libxml2 2.15.4 XML parser |
 | 8 | [github.com/go-forks/go-pkg-xmlx](https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx@v0.0.0-20151201012946-76f54ee73233#Document.LoadBytes) | v0.0.0-20151201012946-76f54ee73233 | 20 | XML 1.0 UTF-8 document loaded into a node tree with expanded names, attributes, namespace declarations, decoded text/CDATA, comment and PI nodes | go-pkg-xmlx node tree over Go encoding/xml Decoder tokenizer |
+| 9 | [github.com/lestrrat-go/helium](https://pkg.go.dev/github.com/lestrrat-go/helium@v0.11.0#Parser.Parse) | v0.11.0 | 12 | XML 1.0 UTF-8 document parsed into a namespace-aware DOM with expanded names, namespace declarations and decoded text/CDATA | helium pure-Go XML parser (own tokenizer; libxml2-style port, no encoding/xml) |
 
 ## Standard API (unranked)
 
@@ -33,6 +34,8 @@ govmomi/vim25/xml exposes the general `NewDecoder(io.Reader).Token()` API. The p
 
 gokogiri's `xml.Parse([]byte)` cgo route builds a DOM through native libxml2. Both namespace-aware controls match the independently specified summaries. The first covers 93 Go binding lines and 1,730 libxml2 parser lines. The AFL++ target instruments only `parser.c`, `parserInternals.c`, and `entities.c`; full and parse-only maps are identical, so DOM traversal contributes no tuples. Five repeats per control are stable, with 364 tuple IDs differing between the two valid controls. It shares the libxml2 parser family counted in C and C++ and is ranked by its Go package's 108 importers, not by libxml2 adoption.
 go-pkg-xmlx's `Document.LoadBytes([]byte, nil)` runs `LoadStream`, which builds its own node tree (element, text, comment, directive and processing-instruction nodes) from `encoding/xml.Decoder.Token`. Both namespace-aware controls match the expat oracle summaries. The catalog control covers 44 package lines (`document.go`, `node.go`) and 294 underlying `encoding/xml` lines. Its own AFL++ blocks repeat per control and differ by two between controls, the comment and processing-instruction node branches; a separate `encoding/xml` trace differs by 30 blocks ([receipt](../../../fuzzing/afl-native/xml/go/github_com_go_forks_go_pkg_xmlx/differential.json)). The module has no tagged release and is pinned at its only proxy pseudo-version. It is a fork of the original jteeuwen/go-pkg-xmlx; `github.com/mattn/go-pkg-xmlx` (15) is byte-identical in all three non-test source files and is not counted.
+
+helium's `NewParser().Parse(ctx, []byte)` is an independent pure-Go XML parser: its linked package graph has no `encoding/xml` and no cgo, and its tokenizer, reference decoding, namespace resolution and DOM builder are its own code, ported in structure from libxml2. Both namespace-aware controls match the expat oracle summaries. The catalog control covers 1,501 lines in 41 helium source files. Its AFL++ blocks repeat per control and differ by 221 source blocks and 219 tuples between the controls ([receipt](../../../fuzzing/afl-native/xml/go/github_com_lestrrat_go_helium/differential.json)). Its 12 importers tie with three other snapshot leads (printesoi/xml-go, sbabiv/xml2map, dgrr/quickxml), all excluded on overlap or control evidence.
 
 ## Lead log
 

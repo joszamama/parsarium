@@ -121,5 +121,15 @@
     "reason": "Pinned 76f54ee73233 pseudo-version Document.LoadBytes builds its own node tree (elements, text, comment, directive and PI nodes) from encoding/xml Decoder.Token and matches the expat oracle summaries on both valid controls. Its own AFL++ blocks repeat per control and differ by two (comment and processing-instruction nodes); encoding/xml blocks differ by 30, measured separately.",
     "source": "https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx",
     "verified_evidence": "fuzzing/afl-native/xml/go/github_com_go_forks_go_pkg_xmlx/differential.json"
+  },
+  {
+    "name": "github.com/lestrrat-go/helium",
+    "status": "promoted_to_verified",
+    "version_seen": "v0.11.0",
+    "license": "MIT",
+    "imported_by": 12,
+    "reason": "Pinned v0.11.0 NewParser().Parse([]byte) is an independent pure-Go XML parser (no encoding/xml, no cgo). Both valid controls match the expat oracle summaries; the catalog control covers 1501 helium lines in 41 files. Own AFL++ blocks repeat per control and differ by 221 features / 219 tuples between controls.",
+    "source": "https://pkg.go.dev/github.com/lestrrat-go/helium",
+    "verified_evidence": "fuzzing/afl-native/xml/go/github_com_lestrrat_go_helium/differential.json"
   }
 ]

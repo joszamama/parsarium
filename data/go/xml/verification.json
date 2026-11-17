@@ -659,6 +659,77 @@
         ]
       },
       "differential_command": "python3 projects/xml/go/github_com_go_forks_go_pkg_xmlx/verify-feedback.py"
+    },
+    {
+      "package": "github.com/lestrrat-go/helium",
+      "module": "github.com/lestrrat-go/helium",
+      "version": "v0.11.0",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed by helium.NewParser().Parse into a namespace-aware DOM: expanded element and attribute names, per-element namespace declarations, decoded text/CDATA, maximum depth on two valid controls",
+      "command": "python3 parsarium.py build xml go github_com_lestrrat_go_helium",
+      "receipt": "projects/xml/go/github_com_lestrrat_go_helium/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 41,
+      "parser_source_lines_covered": 1501,
+      "encoding_xml_lines_covered": 0,
+      "error": null,
+      "differential_pass": true,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_command": "python3 projects/xml/go/github_com_lestrrat_go_helium/verify-feedback.py"
     }
   ],
   "standard": [
@@ -721,6 +792,13 @@
         "github.com/vmware/govmomi/vim25/xml.Decoder.Token() (forked own tokenizer)"
       ],
       "note": "govmomi/vim25/xml has its own xml.go tokenizer derived from Go source and directly instrumented; it does not invoke the runtime encoding/xml package. The other five third-party paths share the runtime tokenizer via wrapper APIs."
+    },
+    {
+      "family": "helium pure-Go XML parser",
+      "paths": [
+        "github.com/lestrrat-go/helium.Parser.Parse (own tokenizer and DOM builder)"
+      ],
+      "note": "helium links no encoding/xml and no cgo; its parser is a Go port in structure of libxml2's parser. No compiled parser code is shared with another Go path; libxml2 (used by gokogiri) is a design ancestor only."
     }
   ]
 }

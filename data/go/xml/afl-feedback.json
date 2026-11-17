@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T22:31:36.723213+00:00",
-  "projects_total": 8,
-  "projects_passed": 8,
+  "checked_at_utc": "2026-11-17T22:36:42.141462+00:00",
+  "projects_total": 9,
+  "projects_passed": 9,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -147,6 +147,23 @@
       "underlying_differential_afl_tuples": 218,
       "underlying_feature_difference": 30,
       "underlying_afl_tuple_difference": 30
+    },
+    {
+      "project": "xml/go/github_com_lestrrat_go_helium",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "0eef579bb84dff5a9d1f122bcecab7ae44c7826df0ff65f0f4dc09bff283a85a",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_parser_features": 1006,
+      "control_afl_tuples": 1022,
+      "differential_parser_features": 1125,
+      "differential_afl_tuples": 1139,
+      "parser_feature_difference": 221,
+      "afl_tuple_difference": 219
     },
     {
       "project": "xml/go/stdlib_decoder",

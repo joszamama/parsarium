@@ -500,5 +500,56 @@
     },
     "differential_control": "controls/xml/order-default-ns.xml",
     "project": "projects/xml/go/github_com_go_forks_go_pkg_xmlx"
+  },
+  {
+    "name": "github.com/lestrrat-go/helium",
+    "module": "github.com/lestrrat-go/helium",
+    "version": "v0.11.0",
+    "license": "MIT",
+    "input_api": "helium.NewParser().Parse(context.Context, []byte) (*Document, error) with default settings; Document.DocumentElement() DOM walk over Element.URI/LocalName, Element.Namespaces, Element.Attributes (Attribute.URI/LocalName/Value) and FirstChild/NextSibling text, CDATA, comment and PI nodes",
+    "documentation": "https://pkg.go.dev/github.com/lestrrat-go/helium@v0.11.0#Parser.Parse",
+    "source": "https://github.com/lestrrat-go/helium/tree/v0.11.0",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed from local bytes into a namespace-aware DOM: expanded element and attribute names, per-element namespace declarations and URIs, decoded text and CDATA node content, maximum depth; comment and processing-instruction nodes end text runs",
+    "family": "helium pure-Go XML parser (libxml2-style port; independent of encoding/xml)",
+    "family_note": "helium's parser.go and internal/parser packages implement their own byte-level XML tokenizer, entity and character-reference decoding, namespace resolution and DOM construction, ported in structure from libxml2's parser (xmlParseDoc / xmlParseMemory) but written in Go; the linked package graph contains no encoding/xml and no cgo. It therefore shares no compiled parser code with the encoding/xml-based paths, the govmomi fork, or the cgo libxml2 binding; libxml2 is a design ancestor, not linked code.",
+    "shared_families": [],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 12,
+      "source": "https://pkg.go.dev/github.com/lestrrat-go/helium?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json",
+      "caveat": "Package importers, not installations. Three other snapshot leads also show 12 (printesoi/xml-go, sbabiv/xml2map, dgrr/quickxml); each was excluded on overlap or control evidence before this slot was assigned, so the tie does not decide the tenth path."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "project": "projects/xml/go/github_com_lestrrat_go_helium"
   }
 ]
