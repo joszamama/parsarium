@@ -99,6 +99,23 @@ class RustYamlPilotTest(unittest.TestCase):
         for name in set(families) - {"serde_yaml", "unsafe-libyaml", "yaml-rust", "noyalib", "dbt-yaml"}:
             self.assertIn("yaml-rust lineage", families[name])
 
+    def test_fork_and_shim_decisions_carry_overlap_evidence(self):
+        leads = {lead["name"]: lead for lead in json.loads((CELL / "leads.json").read_text())}
+        overlap = json.loads((CELL / "fork-overlap.json").read_text())
+        for name in ("serde_yaml_ng", "serde_norway", "yaml_serde"):
+            self.assertEqual(leads[name]["status"], "shared_family")
+            self.assertEqual(leads[name]["evidence"], "data/rust/yaml/fork-overlap.json")
+        forks = overlap["serde_yaml_forks"]
+        ng = forks["serde_yaml_ng-0.10.0"]["parse_path_vs_serde_yaml"]
+        self.assertTrue(all(ng[name]["byte_identical_after_crate_rename"]
+                            for name in ("de.rs", "loader.rs", "libyaml/parser.rs", "value/de.rs")))
+        for copy in ("unsafe-libyaml-norway-0.2.15", "libyaml-rs-0.3.0"):
+            record = overlap["libyaml_translation_forks"][copy]
+            self.assertEqual(record["byte_identical_files"], record["common_files"] - 1)
+        self.assertGreater(forks["dbt-yaml-0.10.8"]["parse_path_vs_serde_yaml"]["value/de.rs"]["changed_lines"], 1000)
+        for name in ("serde_yml", "libyml", "tree-sitter-yaml"):
+            self.assertEqual(leads[name]["status"], "excluded")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -25,15 +25,15 @@ Every path returns the exact typed trees of [`check_controls.py`](../../../contr
 
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |
-| serde_yaml_ng | unresolved | 16,564,340 | unsafe-libyaml (libyaml translation) |
-| serde_norway | shared_family | 12,111,405 | unsafe-libyaml-norway (libyaml translation) |
-| yaml_serde | unresolved | 5,615,643 | libyaml-rs (libyaml translation) |
-| serde_yml | shared_family | 4,221,754 | libyml (libyaml translation) |
-| libyml | unresolved | 3,581,849 | unsafe-libyaml (libyaml translation) |
-| tree-sitter-yaml | unresolved | 2,452,432 | tree-sitter grammar (generated C parser) |
+| serde_yaml_ng | shared_family | 16,564,340 | unsafe-libyaml (libyaml translation); serde_yaml fork |
+| serde_norway | shared_family | 12,111,405 | unsafe-libyaml-norway (unsafe-libyaml copy); serde_yaml fork |
+| yaml_serde | shared_family | 5,615,643 | libyaml-rs (unsafe-libyaml copy); serde_yaml fork |
+| serde_yml | excluded | 4,221,754 | noyalib (re-export) |
+| libyml | excluded | 3,581,849 | unsafe-libyaml (forwarding shim) |
+| tree-sitter-yaml | excluded | 2,452,432 | tree-sitter grammar (generated C parser) |
 | yaml_parser | unresolved | 358,533 | yaml_parser (rowan CST) |
 | yaml-edit | unresolved | 274,824 | yaml-edit (rowan CST) |
 | serde_yaml_bw | unresolved | 193,796 | saphyr-parser / unsafe-libyaml-norway |
-| marked-yaml | unresolved | 169,322 | yaml-rust2 lineage |
+| marked-yaml | unresolved | 169,322 | yaml-rust2 lineage (depends on yaml-rust2 0.10 under the name yaml-rust) |
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

@@ -53,15 +53,16 @@
   },
   {
     "name": "serde_yaml_ng",
-    "status": "unresolved",
+    "status": "shared_family",
     "metric_value": 16564340,
     "metric_error": null,
-    "family": "unsafe-libyaml (libyaml translation)",
+    "family": "unsafe-libyaml (libyaml translation); serde_yaml fork",
     "api_hint": "serde_yaml_ng::from_str::<Value>",
     "note": "Fork of serde_yaml over the same unsafe-libyaml 0.2.11.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde_yaml_ng",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not counted: shared-family duplicate of the selected serde_yaml (fgergo/mp3 precedent). serde_yaml_ng 0.10.0 forks serde_yaml's last upstream commit (README) and drives the same unsafe-libyaml 0.2.11 crate. After replacing crate identifiers, its parse path is byte-identical to serde_yaml 0.9.34: de.rs, loader.rs, libyaml/parser.rs, libyaml/cstr.rs, libyaml/tag.rs, value/de.rs and mapping.rs have 0 changed lines, number.rs only spells i64::MAX instead of i64::max_value(); 20 of its 24 source files are identical after the rename and 2,911 of its 3,042 distinct non-test lines also occur in serde_yaml. The local control run matched the typed trees, but a Docker harness would repeat the serde_yaml and unsafe-libyaml receipts under another crate name.",
+    "evidence": "data/rust/yaml/fork-overlap.json"
   },
   {
     "name": "serde-saphyr",
@@ -94,12 +95,13 @@
     "status": "shared_family",
     "metric_value": 12111405,
     "metric_error": null,
-    "family": "unsafe-libyaml-norway (libyaml translation)",
+    "family": "unsafe-libyaml-norway (unsafe-libyaml copy); serde_yaml fork",
     "api_hint": "serde_norway::from_str::<Value>",
     "note": "Fork of serde_yaml.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde_norway",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Not counted: shared-family duplicate of the selected serde_yaml and unsafe-libyaml. serde_norway 0.9.42 is a hard fork of serde_yaml whose parse-path changes are syntax rewrites only (let-else, cast_mut, lint attributes: 20 changed lines in de.rs, 5 in loader.rs, 0 in libyaml/parser.rs and value/de.rs after crate renaming; 2,907 of 3,011 distinct non-test lines shared). Its parser crate unsafe-libyaml-norway 0.2.15 has 12 of 13 library files byte-identical to unsafe-libyaml 0.2.11 and lib.rs differs by one lint attribute (3,505 of 3,506 distinct lines shared). The local control run matched; a Docker harness would repeat the serde_yaml receipt. Recorded for a user decision because the fork is not strictly byte-identical.",
+    "evidence": "data/rust/yaml/fork-overlap.json"
   },
   {
     "name": "saphyr-parser",
@@ -116,43 +118,45 @@
   },
   {
     "name": "yaml_serde",
-    "status": "unresolved",
+    "status": "shared_family",
     "metric_value": 5615643,
     "metric_error": null,
-    "family": "libyaml-rs (libyaml translation)",
+    "family": "libyaml-rs (unsafe-libyaml copy); serde_yaml fork",
     "api_hint": "yaml_serde::from_str::<Value>",
     "note": "YAML organization fork of serde_yaml over libyaml-rs.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/yaml_serde",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not counted: shared-family duplicate of the selected serde_yaml and unsafe-libyaml. yaml_serde 0.10.7 is the YAML organization's maintained fork of serde_yaml (README); its changes are a no_std port and syntax rewrites (core/alloc imports, let-else, elided lifetimes: 90 changed lines in de.rs, 13 in loader.rs, 25 in libyaml/parser.rs after crate renaming; 2,802 of 3,065 distinct non-test lines shared). Its parser crate libyaml-rs 0.3.0 has 12 of 13 library files byte-identical to unsafe-libyaml 0.2.11 (3,503 of 3,506 distinct lines shared). The local control run matched; a Docker harness would repeat the serde_yaml receipt. Flagged for a user decision: it presents itself as the maintained continuation of serde_yaml, so under the successor rule it could instead replace serde_yaml.",
+    "evidence": "data/rust/yaml/fork-overlap.json"
   },
   {
     "name": "serde_yml",
-    "status": "shared_family",
+    "status": "excluded",
     "metric_value": 4221754,
     "metric_error": null,
-    "family": "libyml (libyaml translation)",
+    "family": "noyalib (re-export)",
     "api_hint": "serde_yml::from_str::<Value>",
     "note": "Fork of serde_yaml.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde_yml",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Excluded: empty compatibility distribution. serde_yml 0.0.13 is deprecated and its only source file re-exports noyalib's compat::serde_yaml module (pub use noyalib::compat::serde_yaml::{from_str, Value, ...}) from noyalib 0.0.5; it has no parser code of its own. noyalib itself is selected. Its metric largely reflects earlier libyml-based releases."
   },
   {
     "name": "libyml",
-    "status": "unresolved",
+    "status": "excluded",
     "metric_value": 3581849,
     "metric_error": null,
-    "family": "unsafe-libyaml (libyaml translation)",
+    "family": "unsafe-libyaml (forwarding shim)",
     "api_hint": "yaml_parser_* (forwarded)",
     "note": "0.0.6 is a deprecated shim forwarding to unsafe-libyaml.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/libyml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Excluded: compatibility shim of a selected path. libyml 0.0.6 is deprecated (crate description) and forwards every yaml_* call to unsafe-libyaml 0.2.11, which is selected; only 2 of its 423 distinct non-test lines also occur in unsafe-libyaml because the file is forwarding wrappers, and it ships none of the scanner or parser files.",
+    "evidence": "data/rust/yaml/fork-overlap.json"
   },
   {
     "name": "tree-sitter-yaml",
-    "status": "unresolved",
+    "status": "excluded",
     "metric_value": 2452432,
     "metric_error": null,
     "family": "tree-sitter grammar (generated C parser)",
@@ -160,7 +164,7 @@
     "note": "Concrete syntax tree grammar.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/tree-sitter-yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Excluded: a tree-sitter grammar for editors. The crate exports a Language for the separate tree-sitter runtime, which returns a concrete syntax tree of token ranges; it does not decode escapes, fold block scalars or resolve aliases, so the harness would have to implement YAML loading to produce the typed tree."
   },
   {
     "name": "saphyr",
@@ -211,7 +215,7 @@
     "note": "Semi-tolerant concrete syntax tree parser.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/yaml_parser",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not evaluated: ranked below dbt-yaml (408,383), the tenth selected path. Semi-tolerant rowan concrete syntax tree parser (crate description)."
   },
   {
     "name": "yaml-edit",
@@ -223,7 +227,7 @@
     "note": "Lossless parser and editor.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/yaml-edit",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not evaluated: ranked below dbt-yaml (408,383), the tenth selected path. Lossless rowan-based parser and editor."
   },
   {
     "name": "serde_yaml_bw",
@@ -235,18 +239,18 @@
     "note": "serde_yaml fork by the serde-saphyr author.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde_yaml_bw",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not evaluated: ranked below dbt-yaml (408,383), the tenth selected path."
   },
   {
     "name": "marked-yaml",
     "status": "unresolved",
     "metric_value": 169322,
     "metric_error": null,
-    "family": "yaml-rust2 lineage",
+    "family": "yaml-rust2 lineage (depends on yaml-rust2 0.10 under the name yaml-rust)",
     "api_hint": "marked_yaml::parse_yaml",
     "note": null,
     "found_by": "registry_search",
     "source": "https://crates.io/crates/marked-yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not evaluated: ranked below dbt-yaml (408,383), the tenth selected path. marked-yaml 0.8.0 builds its own node tree over yaml-rust2 0.10 events."
   }
 ]
