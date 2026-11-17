@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "dns-js",
+  "release": "0.3.1",
+  "catalog_parser": "data/javascript/dns/parsers.json",
+  "source_lock": "projects/dns/javascript/dns_js/source-lock.json",
+  "source_sha256": "abcd2cd621502a00d3dd51fa024c896faef3880c8aa3ea1f313d5a44f37aeb2c",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "api": "DNSPacket.parse(buffer) from dns-js on a local Buffer; numeric type and class fields as decoded; AAAA's eight uncompressed hex groups are RFC 5952-compressed by the harness",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/dns-js/lib/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "summary_command": [
+    "node",
+    "/work/replay.js",
+    "/input/case"
+  ],
+  "coverage": "Node V8 source-range coverage of dns-js lib/ (dnspacket.js, dnsrecord.js, bufferconsumer.js); dns-js's nested node_modules/debug copy is outside the subject; Jazzer.js instrumentation for the fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/dns-js/lib/",
+  "format_specific_coverage_file_suffix": "/dns-js/lib/dnspacket.js",
+  "afl_coverage_subject_prefix": "/work/node_modules/dns-js/lib/",
+  "parser_family": "dns-js (mdns-js) own decoder in lib/dnspacket.js, lib/dnsrecord.js and lib/bufferconsumer.js; mdns-js-packet is its earlier name (98.1% shared lines) and is not counted",
+  "coverage_limit": "Two valid controls (a query and a response with CNAME, A, AAAA and MX answers). They do not establish EDNS0, DNSSEC, TXT or authority/additional behaviour."
+}

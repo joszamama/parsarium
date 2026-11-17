@@ -546,5 +546,116 @@
       "share": 0.978,
       "normalized_share": 0.979
     }
+  },
+  {
+    "name": "dns-js",
+    "version": "0.3.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 abcd2cd6...), checked in the image",
+    "input_api": "dns.DNSPacket.parse(buffer: Buffer) -> DNSPacket",
+    "documentation": "https://github.com/mdns-js/node-dns-js/blob/master/README.md#example",
+    "documentation_note": "The npm tarball's README.md (0.3.1) documents dns.DNSPacket.parse(message) on a message buffer; the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/dns-js/v/0.3.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-js (mdns-js) decoder (lib/dnspacket.js, lib/dnsrecord.js)",
+    "family_note": "Own JavaScript decoder written for mdns-js (lib/dnspacket.js and lib/dnsrecord.js over its BufferConsumer); its README says it borrows test fixtures and some parts from native-dns-packet, but only 40 of its 521 distinct non-test source lines (7.7%) occur in native-dns-packet 0.1.1. mdns-js-packet 0.2.0 is the same code under its earlier name (98.1% shared lines) and is not counted. dns-js keeps all three bits after RA (res1..res3, packed into z) and prints AAAA as eight uncompressed hex groups, which the harness compresses per RFC 5952. The coverage subject is the package's lib/ directory, which keeps its nested copy of the debug dependency out.",
+    "project": "projects/dns/javascript/dns_js",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 13675,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/dns-js",
+      "captured_at_utc": "2026-11-17T16:37:41.612750+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 6,
+    "afl_feedback": "data/javascript/dns/dns-js-feedback-differential.json",
+    "source_overlap_with_native_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection against native-dns-packet 0.1.1",
+      "distinct_lines": 521,
+      "native_dns_packet_distinct_lines": 606,
+      "shared_distinct_lines": 40,
+      "share": 0.077
+    }
   }
 ]
