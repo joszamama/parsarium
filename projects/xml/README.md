@@ -57,6 +57,8 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot() / Python](python/stdlib_elementtree/README.md)
 - [xmlschema / Python](python/xmlschema/README.md)
 - [xmltodict / Python](python/xmltodict/README.md)
+- [RustyXML / Rust](rust/rustyxml/README.md)
+- [minidom / Rust](rust/minidom/README.md)
 - [quick-xml / Rust](rust/quick_xml/README.md)
 - [roxmltree / Rust](rust/roxmltree/README.md)
 - [rxml / Rust](rust/rxml/README.md)
