@@ -100,5 +100,67 @@
       ]
     },
     "project": "projects/xml/go/github_com_antchfx_xmlquery"
+  },
+  {
+    "name": "github.com/clbanning/mxj",
+    "module": "github.com/clbanning/mxj",
+    "version": "v1.8.4",
+    "license": "MIT, with BSD-3-Clause Go Authors notice",
+    "input_api": "mxj.NewMapXml([]byte) and mxj.NewMapXmlReader(io.Reader), each returning mxj.Map (map[string]interface{}); the harness requires both maps to agree and walks the map keys",
+    "documentation": "https://pkg.go.dev/github.com/clbanning/mxj@v1.8.4#NewMapXml",
+    "source": "https://github.com/clbanning/mxj/tree/v1.8.4",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE converted to a map[string]interface{} with default settings: local element names as keys, repeated sibling names as ordered lists, '-'-prefixed attribute keys (namespace declarations included), trimmed decoded character data and CDATA as string values or '#text', and empty elements as empty strings",
+    "family": "mxj map conversion over Go encoding/xml Decoder tokenizer",
+    "family_note": "mxj xml.go creates an encoding/xml.Decoder and builds the map itself in xmlToMapParser from Decoder.Token. Lexing, entity and character-reference decoding, CDATA and namespace resolution are the standard encoding/xml code, so mxj shares the Go encoding/xml tokenizer family with etree, xmlquery and the unranked standard path; it is not an independent tokenizer. Only the map construction is mxj's own.",
+    "shared_families": [
+      "Go encoding/xml Decoder tokenizer"
+    ],
+    "representation_losses": [
+      "Namespace URIs are dropped: keys use Name.Local only, so c:catalog becomes catalog and p:amount becomes amount.",
+      "Namespace prefixes are dropped from element and attribute keys (c:lang becomes -lang).",
+      "Namespace declarations are kept only as ordinary attributes named by their local part (xmlns becomes -xmlns, xmlns:c becomes -c); a declaration and an attribute with the same local name collide.",
+      "Order between differently named siblings is lost; only same-name siblings keep their relative order in a list.",
+      "Comments and processing instructions are discarded.",
+      "Mixed content is not preserved: leading and trailing whitespace is trimmed, and multiple text runs in one element overwrite each other in '#text'.",
+      "The XML declaration is discarded."
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 553,
+      "source": "https://pkg.go.dev/github.com/clbanning/mxj?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json",
+      "caveat": "Counts importers of the v1 module path github.com/clbanning/mxj only; the separate github.com/clbanning/mxj/v2 path (178) stays an unresolved lead and is not added. Importers may use mxj for JSON or map utilities rather than XML."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "catalog/-c=urn:parsarium:catalog",
+        "catalog/-version=1",
+        "catalog/-xmlns=urn:parsarium:item",
+        "catalog/item[0]/-id=a1",
+        "catalog/item[0]/-lang=es",
+        "catalog/item[1]/-id=b2"
+      ],
+      "elements": [
+        "catalog",
+        "catalog/item[0]",
+        "catalog/item[1]",
+        "catalog/item[1]/name",
+        "catalog/item[1]/note"
+      ],
+      "empty_elements": [],
+      "lists": [
+        "catalog/item=2"
+      ],
+      "max_depth": 3,
+      "root": "catalog",
+      "text": [
+        "catalog/item[0]/#text=Café & té",
+        "catalog/item[1]/name=Zürich <HQ>",
+        "catalog/item[1]/note=x < y"
+      ]
+    },
+    "project": "projects/xml/go/github_com_clbanning_mxj"
   }
 ]

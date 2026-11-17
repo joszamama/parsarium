@@ -1,6 +1,6 @@
 # GO × XML: selected parsers (pilot)
 
-2 control-verified third-party paths selected. The ceiling is ten; this pilot builds only the two highest-adoption XML parser leads and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+3 control-verified third-party paths selected. The ceiling is ten; this pilot builds only the three highest-adoption XML parser leads and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -10,6 +10,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/beevik/etree](https://pkg.go.dev/github.com/beevik/etree@v1.8.1) | v1.8.1 | 2,098 | XML 1.0 UTF-8 document into an element tree with namespace lookup | etree element tree over Go encoding/xml Decoder tokenizer |
 | 2 | [github.com/antchfx/xmlquery](https://pkg.go.dev/github.com/antchfx/xmlquery@v1.5.2) | v1.5.2 | 627 | XML 1.0 UTF-8 document into an XPath-ready DOM with expanded names | xmlquery DOM over Go encoding/xml Decoder tokenizer |
+| 3 | [github.com/clbanning/mxj](https://pkg.go.dev/github.com/clbanning/mxj@v1.8.4) | v1.8.4 | 553 | XML 1.0 UTF-8 document into a map[string]interface{} keyed by local names; namespace URIs, sibling order, comments and PIs are lost | mxj map conversion over Go encoding/xml Decoder tokenizer |
 
 ## Standard API (unranked)
 
@@ -17,7 +18,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | --- | --- | --- |
 | [encoding/xml.Decoder.Token()](https://pkg.go.dev/encoding/xml@go1.27.1#Decoder.Token) | Go 1.27.1 | Go encoding/xml Decoder tokenizer |
 
-etree reads through `encoding/xml.Decoder.RawToken`; xmlquery reads through `encoding/xml.Decoder.Token`. All three paths share the Go encoding/xml tokenizer. etree and xmlquery each build their own trees. `encoding/xml` itself shows 79,507 importers but stays outside the third-party ranking.
+etree reads through `encoding/xml.Decoder.RawToken`; xmlquery and mxj read through `encoding/xml.Decoder.Token`. All four paths share the Go encoding/xml tokenizer. etree and xmlquery each build their own trees; mxj builds a map. mxj's 553 counts only the v1 module path; the v2 path (178) stays a separate lead. `encoding/xml` itself shows 79,507 importers but stays outside the third-party ranking.
 
 ## Lead log
 
@@ -25,10 +26,9 @@ Numeric leads from the same snapshot, not verified and not selected. Renderers, 
 
 | Lead | Version seen | Imported by | Status |
 | --- | --- | ---: | --- |
-| [github.com/clbanning/mxj](https://pkg.go.dev/github.com/clbanning/mxj) | v1.8.4 | 553 | Converts XML to map[string]interface{} via NewMapXml([]byte); not run. A v2 module path is logged separately. |
 | [github.com/beego/x2j](https://pkg.go.dev/github.com/beego/x2j) | v0.0.0-...-a0352aa | 436 | Unmarshals arbitrary XML to map values; pseudo-version only, not run. |
 | [github.com/basgys/goxml2json](https://pkg.go.dev/github.com/basgys/goxml2json) | v1.1.0 | 182 | XML-to-JSON converter over an io.Reader; not run. |
-| [github.com/clbanning/mxj/v2](https://pkg.go.dev/github.com/clbanning/mxj/v2) | v2.7.0 | 178 | v2 module of clbanning/mxj; would share its decoding path. Not run. |
+| [github.com/clbanning/mxj/v2](https://pkg.go.dev/github.com/clbanning/mxj/v2) | v2.7.0 | 178 | v2 module of clbanning/mxj; its XML path is expected to follow the verified v1.8.4 map conversion over encoding/xml, but the v2 source was not compared or run. Its 178 importers are not added to the v1 metric. |
 | [github.com/vmware/govmomi/vim25/xml](https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml) | v0.56.2 | 163 | Synopsis is identical to encoding/xml, which suggests a vendored fork in the encoding/xml family. Not checked or run. |
 | [github.com/mmcdole/goxpp](https://pkg.go.dev/github.com/mmcdole/goxpp) | v1.3.0 | 132 | XML pull parser API; its tokenizer source was not checked and no control was run. |
 | [github.com/moovweb/gokogiri/xml](https://pkg.go.dev/github.com/moovweb/gokogiri/xml) | v0.0.0-...-a1a8281 | 108 | cgo binding to libxml2; pseudo-version only, native build not attempted. |

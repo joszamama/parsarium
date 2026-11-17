@@ -12,7 +12,8 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_beevik_etree", "github_com_antchfx_xmlquery", "stdlib_decoder")
+PROJECTS = ("github_com_beevik_etree", "github_com_antchfx_xmlquery", "github_com_clbanning_mxj",
+            "stdlib_decoder")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 REPORT = ROOT / "data/go/xml/afl-feedback.json"
