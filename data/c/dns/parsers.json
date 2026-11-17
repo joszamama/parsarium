@@ -328,5 +328,115 @@
     },
     "rank": 3,
     "afl_feedback": "data/c/dns/knot-feedback-differential.json"
+  },
+  {
+    "name": "udns",
+    "version": "0.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "COPYING.LGPL and the udns_parse.c header in the release tarball (sha256 69df35dc...), checked in the image",
+    "input_api": "dns_getdn(pkt, &cur, end, dn, dnsiz) for question names, then void dns_initparse(struct dns_parse *p, dnscc_t *qdn, dnscc_t *pkt, dnscc_t *cur, dnscc_t *end) + int dns_nextrr(struct dns_parse *p, struct dns_rr *rr), with the dns_qid/dns_qr/.../dns_numar header accessors",
+    "documentation": "https://www.corpit.ru/mjt/udns/udns.3.html",
+    "documentation_note": "udns(3) manual page (also udns.3 in the pinned tarball), section 'Low-level routines': dns_getdn, dns_initparse, dns_nextrr, the dns_parse structure (dnsp_qdn/dnsp_qcls/dnsp_qtyp may be 0 to accept any RR), the header accessors and dns_dntop/dns_ntop.",
+    "source": "https://www.corpit.ru/mjt/udns/udns-0.7.tar.gz",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "udns (Michael Tokarev) raw-packet routines (udns_parse.c, udns_dn.c, udns_XtoX.c)",
+    "family_note": "Own C decoder of an asynchronous stub-resolver library; only its documented low-level parsing routines are called and no resolver context is created. The routines return each RR's owner, type, class, TTL and RDATA span; the harness renders RDATA with udns calls (dns_ntop for A/AAAA, dns_getdn + dns_dntop for names, dns_get16 for the MX preference) and reads authority/additional by resetting dnsp_rrl to the section count. udns has accessors for AD and CD but none for the reserved Z bit, so z carries AD and CD only.",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package udns",
+      "value": 463,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot": "data/curation/popcon-sourcemax-by_inst.gz"
+    },
+    "project": "projects/dns/c/udns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+      "value": 463,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T16:38:19.172843+00:00",
+      "snapshot": "data/c/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 4,
+    "afl_feedback": "data/c/dns/udns-feedback-differential.json"
   }
 ]
