@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "toml",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_two_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "toml",
@@ -19,10 +19,14 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 300,
   "unique_search_hits": 263,
-  "unresolved_documentation_leads": 8,
-  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 300 recorded hits (263 unique), at most 100 per query. 8 parser leads are recorded and none is verified yet. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+  "unresolved_documentation_leads": 6,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 pkg.go.dev queries, 300 recorded hits (263 unique), at most 100 per query. Two Go TOML paths pass both valid controls with the exact typed tree, parser-source coverage and stable AFL++ feedback: BurntSushi/toml v1.6.0 (38,240 Imported by; 585 own lines on service-config, 385/420 AFL++ tuples, 169 differ) and pelletier/go-toml/v2 v2.4.3 (1,986; 739 lines, 482/480 tuples, 342 differ). Each uses its own lexer/parser; they share no code. Higher-ranked pelletier/go-toml v1.9.5 (3,687) fails the typed-scalars control on a local date followed by a newline, and naoina/toml v0.1.1 (2,071) rejects the TOML 0.5 octal integer 0o755; both stay leads, so ranks cover verified paths only. 6 parser leads remain unresolved. BurntSushi/toml marks local date-times, dates and times only by the names of fixed time zones it attaches to time.Time (datetime-local, date-local, time-local), not by distinct Go types. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
   "primary_metric": "pkg.go.dev Imported by package count",
   "registry_snapshot": "data/go/toml/registry-snapshot.json",
   "unresolved_leads": "data/go/toml/leads.json",
-  "runtime_evidence": "data/go/toml/standard.json"
+  "runtime_evidence": "data/go/toml/standard.json",
+  "third_party_evidence": "data/go/toml/parsers.json",
+  "third_party_control_results": "data/go/toml/verification.json",
+  "afl_feedback": "data/go/toml/afl-feedback.json",
+  "protocol": "catalog/toml/PROTOCOL.md"
 }

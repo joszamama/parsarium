@@ -4,17 +4,6 @@
   "observed": "2026-11-17",
   "leads": [
     {
-      "name": "github.com/BurntSushi/toml",
-      "metric_value": 38240,
-      "metric": "pkg.go.dev Imported by package count",
-      "family": "BurntSushi/toml",
-      "api_lead": "toml.Decode(string, &any) / toml.NewDecoder(io.Reader)",
-      "note": null,
-      "source": "https://pkg.go.dev/github.com/BurntSushi/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
       "name": "github.com/pelletier/go-toml",
       "metric_value": 3687,
       "metric": "pkg.go.dev Imported by package count",
@@ -22,8 +11,17 @@
       "api_lead": "toml.LoadBytes / toml.LoadReader -> *toml.Tree",
       "note": "v1 module; separate implementation from v2.",
       "source": "https://pkg.go.dev/github.com/pelletier/go-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v1.9.5",
+      "release_time_utc": "2022-01-05T14:17:32Z",
+      "module_zip_sha256": "de3dcda660cc800cd86d03273a25956d67f416e8fcbe4d2001a2cb4a01e6ac60",
+      "go_module_sum": "h1:4yBQzkHv+7BHq2PQUZF3Mx0IYxG7LsP222s7Agd3ve8=",
+      "license": "MIT (localtime.go Apache-2.0 from Google civil)",
+      "license_sha256": "87d700d1dfac26ddcecc73971b854b5d00c4734214fb8252961212f9e06d2388",
+      "documentation": "https://pkg.go.dev/github.com/pelletier/go-toml@v1.9.5#LoadBytes",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "toml.LoadBytes on controls/toml/service-config.toml returns the expected typed tree (walked with Tree.Keys/GetPath). On controls/toml/typed-scalars.toml it fails with '(29, 24): parsing error: incorrect date/time separation character: \\n' at 'local_date = 1979-05-27'. The v1.9.5 lexer (lexer.go:355, sha256 c46ba00c34d6a706a54b915779c236629252a7e802e5b2a89ae2cf50f4b57013) accepts only EOF, ' ' or 'T' after a local date, so a local date followed by a newline is rejected; the one-line document 'd = 1979-05-27\\n' fails at (1, 15) the same way."
     },
     {
       "name": "github.com/naoina/toml",
@@ -33,19 +31,17 @@
       "api_lead": "toml.Parse([]byte) -> *ast.Table / toml.Unmarshal",
       "note": null,
       "source": "https://pkg.go.dev/github.com/naoina/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "github.com/pelletier/go-toml/v2",
-      "metric_value": 1986,
-      "metric": "pkg.go.dev Imported by package count",
-      "family": "go-toml v2 (pelletier)",
-      "api_lead": "toml.Unmarshal([]byte, &any) / toml.NewDecoder",
-      "note": "Separate implementation from v1; unstable/ parser exposes an AST.",
-      "source": "https://pkg.go.dev/github.com/pelletier/go-toml/v2",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.1.1",
+      "release_time_utc": "2017-04-28T09:08:43Z",
+      "module_zip_sha256": "8e34d510563d9e8b3f2dbdf0927bf5108b669144bdbe2fda4fcb44e7e2e55268",
+      "go_module_sum": "h1:PT/lllxVVN0gzzSqSlHEmP8MJB4MY2U7STGxiouV4X8=",
+      "license": "MIT",
+      "license_sha256": "12641e5dfd397ae2acdd28dbda45f8e559afd721d5a223f3ad820ca07affd777",
+      "documentation": "https://pkg.go.dev/github.com/naoina/toml@v0.1.1#Parse",
+      "checked_at_utc": "2026-11-17",
+      "evidence": "v0.1.1 (latest tagged release, 2017) implements the TOML 0.4 PEG grammar. toml.Parse accepts controls/toml/service-config.toml but rejects controls/toml/typed-scalars.toml with 'line 7: invalid TOML syntax' at 'octal = 0o755' (TOML 0.5 octal integer); its ast.Datetime.Time() also has no local date, local time or local date-time form."
     },
     {
       "name": "github.com/influxdata/toml",
@@ -53,7 +49,7 @@
       "metric": "pkg.go.dev Imported by package count",
       "family": "naoina/toml family (influxdata fork)",
       "api_lead": "toml.Parse / toml.Unmarshal",
-      "note": "Fork of naoina/toml.",
+      "note": "Fork of naoina/toml; the only proxy version is the pseudo-version v0.0.0-20180607005434-2a2e3012f7cf (2018-06-07), before TOML 0.5 added local dates. Not run; naoina/toml v0.1.1 failed the second control.",
       "source": "https://pkg.go.dev/github.com/influxdata/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
@@ -122,6 +118,18 @@
       "metric_value": 10,
       "status": "excluded",
       "reason": "Tree-sitter grammar binding (cgo); syntax tree only, no typed values."
+    }
+  ],
+  "promoted": [
+    {
+      "name": "github.com/BurntSushi/toml",
+      "release": "v1.6.0",
+      "project": "projects/toml/go/github_com_burntsushi_toml"
+    },
+    {
+      "name": "github.com/pelletier/go-toml/v2",
+      "release": "v2.4.3",
+      "project": "projects/toml/go/github_com_pelletier_go_toml_v2"
     }
   ]
 }
