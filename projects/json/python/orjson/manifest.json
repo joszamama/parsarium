@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "orjson",
+  "release": "3.13.0",
+  "catalog_parser": "data/python/json/parsers.json",
+  "source_lock": "projects/json/python/orjson/source-lock.json",
+  "source_sha256": "d1de5eb04485110c5da4c657e49168995d55e076b1ce60f1a042e254f4186c4f",
+  "underlying_release": "vendored yyjson 0.12.0",
+  "base_image": "rust@sha256:b78cfbe4c0fd96b8a06b259092f1f412cb3ad3c5aed89d188bc40a1b8637f8f6",
+  "runtime_base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/json/structure.json",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "expected_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.0.0",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-range coverage of source-built orjson Rust deserializer; vendored yyjson C syntax parser is not covered by this instrumented build",
+  "coverage_subject_prefix": "/work/orjson-source/src/deserialize/",
+  "format_specific_coverage_file_suffix": "/backend/yyjson.rs",
+  "afl_coverage_subject_prefix": "/work/orjson-source/src/deserialize/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/orjson/orjson*.so",
+  "scope": "JSON structure and values from local UTF-8 bytes through orjson.loads; two valid nested object and array controls",
+  "afl_package_release": "4.04c-4"
+}

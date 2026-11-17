@@ -37,6 +37,41 @@
     "project": "projects/json/python/pydantic"
   },
   {
+    "name": "orjson",
+    "version": "3.13.0",
+    "license": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+    "license_evidence": "https://pypi.org/pypi/orjson/3.13.0/json",
+    "input_api": "orjson.loads(local UTF-8 bytes)",
+    "documentation": "https://github.com/ijl/orjson/blob/3.13.0/README.md#deserialize",
+    "source": "https://files.pythonhosted.org/packages/f2/72/380b97dc45bd162d23afe5194721ef678d9eac7cfaa549fe2873f7f0a518/orjson-3.13.0.tar.gz",
+    "source_sha256": "d1de5eb04485110c5da4c657e49168995d55e076b1ce60f1a042e254f4186c4f",
+    "scope": "JSON structure and values from local UTF-8 bytes; valid nested object and nested array controls",
+    "family": "orjson Rust deserializer backed by vendored yyjson 0.12.0 C parser",
+    "family_note": "The pinned source compiles include/yyjson/yyjson.c and Rust src/deserialize. This pilot reports LLVM source regions from orjson Rust JSON deserializer; yyjson C syntax-parser source lines are not included in those coverage counts. Standalone yyjson C is a shared underlying parser family.",
+    "control": "controls/json/structure.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 218014317,
+      "source": "https://pypistats.org/api/packages/orjson/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package downloads include encoding use and transitive installs; they do not measure JSON parsing directly."
+    },
+    "project": "projects/json/python/orjson"
+  },
+  {
     "name": "simplejson",
     "version": "4.3.0",
     "license": "MIT OR AFL-2.1",

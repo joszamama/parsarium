@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T05:33:30.889313+00:00",
+  "checked_at_utc": "2026-11-17T08:51:29.991501+00:00",
   "platform": "mixed",
   "control": {
     "path": "controls/json/structure.json",
@@ -31,6 +31,32 @@
       "afl_feedback": "data/python/json/pydantic-valid-feedback.json",
       "project_receipt": "projects/json/python/pydantic/verification.json",
       "coverage_caveat": "llvm-cov export warned that 99 whole-extension functions had mismatched profile data. Scoped Jiter region starts, including parse.rs, were nonempty and stable across both valid controls; aggregate whole-extension coverage is not claimed."
+    },
+    {
+      "package": "orjson",
+      "version": "3.13.0",
+      "pass": true,
+      "input_api": "orjson.loads(local UTF-8 bytes)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "parser_family": "orjson Rust deserializer backed by vendored yyjson 0.12.0 C parser",
+      "native_orjson_source_files": 5,
+      "native_orjson_source_lines": 168,
+      "coverage_caveat": "Rust JSON deserializer source regions only; vendored yyjson C syntax parser is not instrumented in this build.",
+      "afl_feedback": "data/python/json/orjson-valid-feedback.json",
+      "project_receipt": "projects/json/python/orjson/verification.json",
+      "native_orjson_yyjson_rs_lines": 114
     },
     {
       "package": "simplejson",
@@ -85,6 +111,7 @@
   "platforms": {
     "pydantic": "linux/arm64",
     "simplejson": "linux/amd64",
-    "standard": "linux/amd64"
+    "standard": "linux/amd64",
+    "orjson": "linux/arm64"
   }
 }
