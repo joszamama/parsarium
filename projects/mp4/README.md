@@ -19,6 +19,7 @@
 - [libheif / C++](cpp/libheif/README.md)
 - [opencv / C++](cpp/opencv/README.md)
 - [taglib / C++](cpp/taglib/README.md)
+- [vlc / C++](cpp/vlc/README.md)
 - [github.com/Eyevinn/mp4ff/mp4 / Go](go/github_com_eyevinn_mp4ff_mp4/README.md)
 - [github.com/MStoykov/mp4 / Go](go/github_com_mstoykov_mp4/README.md)
 - [github.com/abema/go-mp4 / Go](go/abema_go_mp4/README.md)

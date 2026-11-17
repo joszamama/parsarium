@@ -343,6 +343,41 @@ def fltk_native_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     )
 
 
+def vlc_cpp_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind C++ VLC feedback to its MP4-only instrumented plugin."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "mp4/cpp/vlc":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    variant = path.parent / manifest.get("valid_variant", "")
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    control_stability = overlay.get("control_stability", {})
+    variant_stability = overlay.get("variant_stability", {})
+    return (
+        overlay.get("feedback_kind") == "vlc_mp4_plugin_pcguard_edges"
+        and "modules/demux/mp4" in overlay.get("feedback_scope", "")
+        and "harness uninstrumented" in overlay.get("feedback_scope", "")
+        and overlay.get("shared_parser_family") == manifest.get("shared_parser_family")
+        and overlay.get("shared_parser_family_projects")
+            == manifest.get("shared_parser_family_projects")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and variant.is_file()
+        and overlay.get("variant_sha256") == manifest.get("valid_variant_sha256")
+            == sha256(variant.read_bytes()).hexdigest()
+        and overlay.get("variant_output") == manifest.get("valid_variant_expected_output")
+        and overlay.get("repeats", 0) >= 3
+        and control_stability.get("all_repeats_identical") is True
+        and variant_stability.get("all_repeats_identical") is True
+        and control_stability.get("stable_edges") == overlay.get("feedback_edges")
+        and variant_stability.get("stable_edges") == overlay.get("variant_feedback_edges")
+        and overlay.get("stable_variant_only_edges", 0) > 0
+        and set(file_hashes) == {"Dockerfile", "build.py"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
     if manifest.get("coverage_kind") == "native_source_afl_feedback":
@@ -364,6 +399,8 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
     if not lwjgl_assimp_native_feedback_verified(path, manifest, overlay):
         return False
     if not fltk_native_feedback_verified(path, manifest, overlay):
+        return False
+    if not vlc_cpp_mp4_feedback_verified(path, manifest, overlay):
         return False
     for name, digest in overlay.get("bridge_file_sha256", {}).items():
         bridge_file = ROOT / "fuzzing/afl-bridge" / name

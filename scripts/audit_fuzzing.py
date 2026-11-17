@@ -7,7 +7,8 @@ import tomllib
 from build_afl_native import OVERLAYS, derived_dockerfile
 from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, overlay_manifest, overlay_target
 from audit_projects import (fltk_native_feedback_verified, fully_runnable,
-                            lwjgl_assimp_native_feedback_verified)
+                            lwjgl_assimp_native_feedback_verified,
+                            vlc_cpp_mp4_feedback_verified)
 from run_case import ROOT, project_for
 
 
@@ -95,11 +96,15 @@ def main() -> None:
         custom_rust_svg = str(relative) in {
             "svg/c/gdk_pixbuf", "svg/c/librsvg", "svg/cpp/gdk_pixbuf",
             "svg/cpp/librsvg", "svg/c/resvg"}
-        if manifest["package"] not in {"gstreamer", "netpbm", "sail"} and not custom_rust_svg:
+        custom_vlc_mp4 = str(relative) == "mp4/cpp/vlc"
+        if (manifest["package"] not in {"gstreamer", "netpbm", "sail"}
+                and not custom_rust_svg and not custom_vlc_mp4):
             assert dockerfile == derived_dockerfile(project).encode()
-        if custom_rust_svg:
+        if custom_rust_svg or custom_vlc_mp4:
             assert (overlay / "build.py").is_file()
             assert "build.py" in receipt.get("overlay_file_sha256", {})
+        if custom_vlc_mp4:
+            assert vlc_cpp_mp4_feedback_verified(path, manifest, receipt)
         for name, digest in receipt.get("overlay_file_sha256", {}).items():
             assert sha256((overlay / name).read_bytes()).hexdigest() == digest
         expected_dockerfile_hash = (receipt.get("overlay_dockerfile_sha256") or
