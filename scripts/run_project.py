@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import subprocess
 from docker_slots import docker_build_slot
+from format_registry import resolve_data_path
 from binary_feedback import check_binary_feedback
 from audit_projects import v8_json_source_feedback_ok
 
@@ -40,7 +41,7 @@ def main() -> None:
     if coverage_kind not in {"source_lines", "native_binary_edges", "native_function_entries"}:
         raise ValueError(f"unsupported coverage kind: {coverage_kind}")
     if manifest.get("kind") == "standard":
-        inventory = json.loads((ROOT / manifest["standard_inventory"]).read_text())
+        inventory = json.loads((ROOT / resolve_data_path(manifest["standard_inventory"])).read_text())
         entry, = [item for item in inventory["verified_apis"]
                   if (item.get("api") or item.get("name")) == manifest["api"]]
         assert entry.get("runtime", inventory.get("runtime")) == manifest["runtime"]
@@ -55,19 +56,20 @@ def main() -> None:
                         "source_sha256": manifest["source_sha256"]}
     else:
         assert manifest.get("kind", "third_party") == "third_party"
-        parsers = json.loads((ROOT / manifest["catalog_parser"]).read_text())
+        parsers = json.loads((ROOT / resolve_data_path(manifest["catalog_parser"])).read_text())
         parser, = [p for p in parsers if p["name"] == manifest["package"]]
         assert parser["version"] == manifest["release"]
         if "expected_output" in parser:
             expected = parser["expected_output"]
         else:
-            legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
+            legacy = json.loads((ROOT / resolve_data_path(manifest["catalog_parser"]))
+                            .with_name("verification.json").read_text())
             records = legacy.get("third_party", legacy.get("results", []))
             record, = [item for item in records if item["package"] == manifest["package"]]
             assert record["pass"] and record["version"] == manifest["release"]
             expected = record["output"]
         assert expected == manifest["expected_output"]
-        lock_path = ROOT / manifest["source_lock"]
+        lock_path = ROOT / resolve_data_path(manifest["source_lock"])
         if lock_path.suffix == ".json":
             lock = json.loads(lock_path.read_text())[manifest["package"]]
             assert lock["release"] == manifest["release"]

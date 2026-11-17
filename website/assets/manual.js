@@ -81,7 +81,7 @@
     ? { observed: "Lo que devolvió el parser", run: "Para reproducirlo:", right: "Correcto.", wrong: "No exactamente.", bytes: "bytes", of: "de" }
     : { observed: "What the parser reported", run: "To reproduce it:", right: "Right.", wrong: "Not quite.", bytes: "bytes", of: "of" };
   const ECO = { c: "C", cpp: "C++", go: "Go", java: "Java", javascript: "JavaScript", python: "Python", rust: "Rust", php: "PHP" };
-  const LABEL = { png: "PNG", zip: "ZIP", mp4: "MP4", wav: "WAV", pdf: "PDF", svg: "SVG", http11: "HTTP/1.1", ascii_ply: "PLY", ascii_pnm: "PNM", mp3_id3v2: "ID3v2" };
+  const LABEL = { png: "PNG", zip: "ZIP", mp4: "MP4", wav: "WAV", pdf: "PDF", svg: "SVG", http11: "HTTP/1.1", ascii_ply: "PLY", ascii_pnm: "PNM", mp3: "MP3" };
   const { demos } = await fetch(box.dataset.manual).then((r) => r.json());
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 

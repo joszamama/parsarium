@@ -18,7 +18,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from audit_projects import fully_runnable
-from format_registry import ECOSYSTEMS as REGISTRY_ECOSYSTEMS, FORMAT_RECORDS
+from format_registry import (ECOSYSTEMS as REGISTRY_ECOSYSTEMS, FORMAT_RECORDS, catalog_format,
+                             resolve_data_path)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -146,7 +147,7 @@ LESSON_SPECS = {
         "explanation_es": "P3 marca una imagen PNM en color y en ASCII. Después el lector usa las dimensiones, el valor máximo y los tríos de muestras.",
         "output_keys": ["width", "height", "rgb0"],
     },
-    "mp3_id3v2": {
+    "mp3": {
         "needle": b"TIT2", "question": "What does this ID3v2 frame contain?",
         "choices": ["The MP3 sample rate", "The track title", "The file length"],
         "answer": 1, "explanation": "TIT2 is the ID3v2 title frame. It lives in the tag before the audio frames in this control.",
@@ -256,11 +257,12 @@ def build(output: Path) -> None:
     standard_projects = {}
     for path in sorted((ROOT / "projects").glob("*/*/*/manifest.json")):
         manifest = read_json(path)
-        key = (manifest["format"], manifest["ecosystem"], manifest["package"], project_release(manifest))
+        project_format = catalog_format(manifest["format"])
+        key = (project_format, manifest["ecosystem"], manifest["package"], project_release(manifest))
         manifests[key] = (path, manifest)
-        if (manifest.get("kind") == "standard" and manifest["format"] in active_formats
+        if (manifest.get("kind") == "standard" and project_format in active_formats
                 and fully_runnable(path, manifest)):
-            standard_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+            standard_projects[(project_format, manifest["ecosystem"], manifest["api"])] = path
 
     parsers = []
     cells = []
@@ -351,7 +353,7 @@ def build(output: Path) -> None:
                 project_path, _ = project
                 record["project"] = str(project_path.parent.relative_to(ROOT))
                 record["projectUrl"] = repo_link(str((project_path.parent / "README.md").relative_to(ROOT)))
-                record["targetId"] = f"{fmt}/{eco}/{project_path.parent.name}"
+                record["targetId"] = project_path.parent.relative_to(ROOT / "projects").as_posix()
             parsers.append(record)
 
     if len(parsers) != totals["catalog_paths"]:
@@ -366,7 +368,7 @@ def build(output: Path) -> None:
     standard_targets = []
     for (fmt, eco, _api), project_path in sorted(standard_projects.items()):
         manifest = read_json(project_path)
-        inventory_path = ROOT / manifest["standard_inventory"]
+        inventory_path = ROOT / resolve_data_path(manifest["standard_inventory"])
         inventory = read_json(inventory_path)
         documented_api = next(
             (api for api in inventory["verified_apis"]
@@ -394,7 +396,7 @@ def build(output: Path) -> None:
             "guideUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
             "projectUrl": repo_link(str((project_path.parent / "README.md").relative_to(ROOT))),
             "project": str(project_path.parent.relative_to(ROOT)),
-            "targetId": f"{fmt}/{eco}/{project_path.parent.name}",
+            "targetId": project_path.parent.relative_to(ROOT / "projects").as_posix(),
         })
 
     targets = {}
@@ -409,8 +411,11 @@ def build(output: Path) -> None:
             receipt = project_dir / "control-verification.json"
         verification = read_json(receipt)
         control_path = ROOT / manifest["control"]
-        fmt, eco, slug = target_id.split("/")
-        target_args = f"{fmt} {eco} {slug}"
+        # Target IDs name the project directory; a merged catalog format (MP3)
+        # can keep targets under an older directory such as mp3_id3v2/.
+        project_format, eco, slug = target_id.split("/")
+        fmt = catalog_format(project_format)
+        target_args = f"{project_format} {eco} {slug}"
         run_dir = f"runs/{fmt}-{slug}"
         afl_receipt_path = ROOT / "fuzzing/afl-native" / target_id / "verification.json"
         afl_receipt = read_json(afl_receipt_path) if afl_receipt_path.is_file() else {}
@@ -472,7 +477,7 @@ def build(output: Path) -> None:
     for source in DEMO_PROJECTS:
         manifest = read_json(ROOT / source)
         verification = read_json(ROOT / Path(source).parent / "verification.json")
-        fmt, eco, slug = manifest["format"], manifest["ecosystem"], Path(source).parent.name
+        fmt, eco, slug = catalog_format(manifest["format"]), manifest["ecosystem"], Path(source).parent.name
         parser_record = next(
             (record for record in parsers if record["format"] == fmt
              and record["ecosystem"] == eco and record["name"] == manifest["package"]
@@ -485,10 +490,10 @@ def build(output: Path) -> None:
         data = control_path.read_bytes()
         if hashlib.sha256(data).hexdigest() != manifest["control_sha256"]:
             raise ValueError(f"control hash mismatch: {control_path}")
-        destination = controls_output / manifest["format"] / control_path.name
+        destination = controls_output / fmt / control_path.name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(control_path, destination)
-        target = f"{fmt} {eco} {slug}"
+        target = f"{manifest['format']} {eco} {slug}"
         run_dir = f"runs/{fmt}-{slug}"
         demos.append({
             "format": fmt,

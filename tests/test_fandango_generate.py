@@ -147,7 +147,7 @@ class FandangoGenerateTest(unittest.TestCase):
         control = ROOT / "controls/mp3/go-tone-44k-mono.mp3"
         run = self.tmp / "plain-mp3"
         with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
-            code, output = self.run_cli("mp3", "go", "github_com_hajimehoshi_go_mp3",
+            code, output = self.run_cli("mp3", "go", "github_com_dmulholl_mp3lib",
                                         str(run), "--count", "1", "--seed", "7",
                                         mode="plain-mp3")
         self.assertEqual(code, 0, output)
@@ -165,14 +165,14 @@ class FandangoGenerateTest(unittest.TestCase):
         control = ROOT / "controls/mp3/tone-44k-mono.mp3"
         run = self.tmp / "other-plain-mp3"
         with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
-            code, output = self.run_cli("mp3", "go", "github_com_hajimehoshi_go_mp3",
+            code, output = self.run_cli("mp3", "go", "github_com_dmulholl_mp3lib",
                                         str(run), "--count", "1", mode="plain-mp3")
         self.assertEqual(code, 1, output)
         self.assertIn("differs from the six decoded samples", output)
 
     def test_plain_mp3_rejects_output_without_frames(self):
         run = self.tmp / "bad-plain-mp3"
-        code, output = self.run_cli("mp3", "go", "github_com_hajimehoshi_go_mp3",
+        code, output = self.run_cli("mp3", "go", "github_com_dmulholl_mp3lib",
                                     str(run), "--count", "1")
         self.assertEqual(code, 1, output)
         self.assertIn("plain MP3 output is outside", output)

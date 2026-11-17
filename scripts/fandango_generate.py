@@ -24,15 +24,19 @@ import time
 import venv
 
 from run_case import MAX_CASE_BYTES, ROOT, project_for
-from format_registry import ALL_FORMATS, ECOSYSTEMS
+from format_registry import ECOSYSTEMS, PROJECT_FORMATS
 from mp3_plain import BUNDLED_DECODED_SHA256, SOURCE_CONTROLS, validate_frames
 
 
-FORMATS = ALL_FORMATS
-# Parsarium format -> Fanbase format directory. Formats missing here have no
-# Fanbase spec as of index.yml schema 2 and need --spec. Plain mp3 is omitted:
-# Fanbase's mp3 grammar emits ID3 tags plus Layer I/II frames, so removing
-# the tags does not yield the pilot's contiguous Layer III stream.
+# Target format directories. The single MP3 catalog format keeps two target
+# directories: mp3_id3v2/ targets were verified on the ID3v2-tagged control and
+# use Fanbase's mp3 grammar; mp3/ targets were verified on untagged Layer III
+# frames and use the local plain grammar.
+FORMATS = PROJECT_FORMATS
+# Target format -> Fanbase format directory. Formats missing here have no
+# Fanbase spec as of index.yml schema 2 and need --spec. Untagged mp3 targets are
+# omitted: Fanbase's mp3 grammar emits ID3 tags plus Layer I/II frames, so
+# removing the tags does not yield a contiguous Layer III stream.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
                    "mp3_id3v2": "mp3", "json": "json", "xml": "xml"}
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",

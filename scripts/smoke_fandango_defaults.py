@@ -29,7 +29,7 @@ CASES = (
     ("mp3_id3v2", "c", "mpv"),
     ("json", "python", "simplejson"),
     ("xml", "python", "xmltodict"),
-    ("mp3", "go", "github_com_hajimehoshi_go_mp3"),
+    ("mp3", "go", "github_com_dmulholl_mp3lib"),
 )
 
 

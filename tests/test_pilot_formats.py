@@ -35,7 +35,10 @@ class PilotFormatTest(unittest.TestCase):
 
     def test_registry_keeps_existing_ten_active(self):
         self.assertEqual(len(format_registry.ACTIVE_FORMATS), 10)
-        self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml", "mp3"))
+        self.assertIn("mp3", format_registry.ACTIVE_FORMATS)
+        self.assertNotIn("mp3_id3v2", format_registry.FORMAT_BY_ID)
+        self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml"))
+        self.assertEqual(format_registry.catalog_format("mp3_id3v2"), "mp3")
         self.assertEqual(len(format_registry.ECOSYSTEMS), 8)
 
     def test_one_verified_pilot_parser_and_standard_stay_separate(self):
@@ -81,7 +84,7 @@ class PilotFormatTest(unittest.TestCase):
                 active = json.loads((root / "data/cells.json").read_text())["cells"]
                 pilot = json.loads((root / "data/pilot-cells.json").read_text())["cells"]
                 self.assertEqual(len(active), 80)
-                self.assertEqual(len(pilot), 24)
+                self.assertEqual(len(pilot), 16)
                 self.assertEqual(sum(c["verified_third_party_count"] for c in active), 0)
                 self.assertEqual(sum(c["verified_third_party_count"] for c in pilot), 1)
                 self.assertFalse(next(c for c in pilot if c["ecosystem"] == "python"

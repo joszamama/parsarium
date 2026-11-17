@@ -135,6 +135,20 @@ def validate_pilot_cells() -> None:
                     raise ValueError(f"pilot standard API lacks official docs/control: {eco}/{fmt}")
 
 
+def adapter_format(cell: dict, parser: dict) -> str:
+    """The format directory of a parser's adapters and project.
+
+    Merged cells keep each path's adapters under the format its project was
+    verified in (for example, MP3 paths on the ID3v2-tagged control use
+    adapters/<ecosystem>/mp3_id3v2/).
+    """
+    project = parser.get("project", "")
+    parts = project.split("/")
+    if len(parts) > 2 and parts[0] == "projects":
+        return parts[1]
+    return cell["format"]
+
+
 def main() -> None:
     matrix = read("data/cells.json")["cells"]
     expected_cells = {(ecosystem, format_name)
@@ -220,9 +234,10 @@ def main() -> None:
                 assert count is None or isinstance(count, int)
             elif cell["ecosystem"] == "go":
                 adapter_dir = ROOT / parser.get(
-                    "adapter_manifest_dir", f"adapters/go/{cell['format']}")
+                    "adapter_manifest_dir", f"adapters/go/{adapter_format(cell, parser)}")
                 go_mod = (adapter_dir / "go.mod").read_text()
                 go_versions = dict(re.findall(r"^\s*(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
+                go_versions.update(re.findall(r"^require\s+(\S+)\s+(v\S+)", go_mod, re.MULTILINE))
                 assert parser["version"] == go_versions[parser["module"]]
                 if parser.get("source_lock"):
                     source = read(parser["source_lock"])
@@ -237,7 +252,7 @@ def main() -> None:
                 assert count is None or isinstance(count, int)
                 assert parser["license"] == snapshot["releases"][name]["license"]
             elif cell["ecosystem"] == "python":
-                requirements_dir = ROOT / "adapters" / "python" / cell["format"]
+                requirements_dir = ROOT / "adapters" / "python" / adapter_format(cell, parser)
                 requirements = "\n".join(path.read_text() for path in requirements_dir.glob("requirements*.in"))
                 python_versions = dict(re.findall(r"^([A-Za-z0-9_.-]+)(?:\[[^]]+\])?==([^\s]+)$",
                                                   requirements, re.MULTILINE))
@@ -246,7 +261,8 @@ def main() -> None:
                 assert count is None or isinstance(count, int)
                 assert (ROOT / parser["control"]).exists()
             elif cell["ecosystem"] == "rust":
-                adapter = ROOT / parser.get("adapter_manifest_dir", f"adapters/rust/{cell['format']}")
+                adapter = ROOT / parser.get("adapter_manifest_dir",
+                                            f"adapters/rust/{adapter_format(cell, parser)}")
                 manifest = tomllib.loads((adapter / "Cargo.toml").read_text())
                 dependency = manifest["dependencies"][parser.get("manifest_dependency", name)]
                 requirement = dependency if isinstance(dependency, str) else dependency["version"]
@@ -291,7 +307,7 @@ def main() -> None:
                         assert release["popularity_metric"] is None
                 else:
                     adapter_module = parser.get("adapter_module", "main")
-                    adapter_dir = ROOT / "adapters" / "java" / cell["format"]
+                    adapter_dir = ROOT / "adapters" / "java" / adapter_format(cell, parser)
                     pom_path = adapter_dir / (adapter_module if adapter_module != "main" else "") / "pom.xml"
                     pom = ET.parse(pom_path).getroot()
                     ns = {"m": "http://maven.apache.org/POM/4.0.0"}
@@ -345,6 +361,10 @@ def main() -> None:
                     assert source["source_sha256"] == snapshot["releases"][name]["source_sha256"]
                     assert len(source["source_sha256"]) == 64
                     assert (ROOT / parser["adapter"]).exists()
+                elif parser.get("project_package_lock"):
+                    project_lock = read(parser["project_package_lock"])["packages"][f"node_modules/{name}"]
+                    assert project_lock["version"] == parser["version"]
+                    assert project_lock["integrity"] == snapshot["releases"][name]["integrity"]
                 else:
                     assert parser["version"] == lock[name]
                 assert isinstance(snapshot["download_metric"]["packages"][name]["downloads"], int)

@@ -51,9 +51,26 @@ def _formats(root: Path) -> tuple[str, ...]:
     return tuple(sorted({path.parent.name for path in (root / "data").glob("*/*/cell.json")}))
 
 
+def _format_aliases(root: Path) -> dict[str, str]:
+    """Map project-directory formats to catalog formats (for example mp3_id3v2 -> mp3)."""
+    registry = root / "data" / "formats.json"
+    if not registry.is_file():
+        return {}
+    return {alias: item["id"] for item in json.loads(registry.read_text())["formats"]
+            for alias in item.get("project_formats", [item["id"]])}
+
+
+def _data_path(relative: str, aliases: dict[str, str]) -> str:
+    parts = relative.split("/")
+    if len(parts) > 3 and parts[0] == "data" and aliases.get(parts[2], parts[2]) != parts[2]:
+        parts[2] = aliases[parts[2]]
+    return "/".join(parts)
+
+
 @lru_cache(maxsize=4)
 def _load(root: Path) -> tuple[Target, ...]:
     fully_runnable = _runnable_check(root)
+    aliases = _format_aliases(root)
     found = []
     for path in sorted((root / "projects").glob("*/*/*/manifest.json")):
         manifest = json.loads(path.read_text())
@@ -65,14 +82,14 @@ def _load(root: Path) -> tuple[Target, ...]:
         family = manifest.get("runtime")
         input_api = manifest.get("api")
         if manifest.get("catalog_parser"):
-            entries = json.loads((root / manifest["catalog_parser"]).read_text())
+            entries = json.loads((root / _data_path(manifest["catalog_parser"], aliases)).read_text())
             entry = next((e for e in entries if e["name"] == manifest["package"]), None)
             if entry:
                 family = entry.get("family")
                 input_api = entry.get("input_api")
         fmt, eco, slug = path.parent.relative_to(root / "projects").parts
         found.append(Target(
-            id=f"{fmt}/{eco}/{slug}", format=fmt, ecosystem=eco, slug=slug,
+            id=f"{fmt}/{eco}/{slug}", format=aliases.get(fmt, fmt), ecosystem=eco, slug=slug,
             package=manifest["package"], release=release,
             kind=manifest.get("kind", "third_party"), family=family, input_api=input_api,
             control=manifest["control"], expected_output=manifest.get("expected_output", {}),

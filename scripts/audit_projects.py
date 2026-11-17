@@ -7,7 +7,8 @@ import json
 from pathlib import Path
 import re
 from binary_feedback import check_binary_feedback
-from format_registry import ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS
+from format_registry import (ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS,
+                             LEGACY_PROJECT_FORMATS, catalog_format, resolve_data_path)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1182,6 +1183,8 @@ def main() -> None:
     catalog = {}
     for path in sorted((ROOT / "data").glob("*/*/parsers.json")):
         ecosystem, format_name = path.relative_to(ROOT / "data").parts[:2]
+        if format_name in LEGACY_PROJECT_FORMATS:
+            continue  # compatibility links for pinned manifests; not a catalog cell
         if ecosystem not in ECOSYSTEMS or format_name not in FORMAT_BY_ID:
             raise ValueError(f"unregistered catalog cell: {path}")
         for parser in json.loads(path.read_text()):
@@ -1194,6 +1197,8 @@ def main() -> None:
     standard_catalog = {}
     for path in sorted((ROOT / "data").glob("*/*/standard.json")):
         ecosystem, format_name = path.relative_to(ROOT / "data").parts[:2]
+        if format_name in LEGACY_PROJECT_FORMATS:
+            continue  # compatibility links for pinned manifests; not a catalog cell
         if ecosystem not in ECOSYSTEMS or format_name not in FORMAT_BY_ID:
             raise ValueError(f"unregistered standard inventory: {path}")
         inventory = json.loads(path.read_text())
@@ -1224,8 +1229,8 @@ def main() -> None:
         parts = path.relative_to(ROOT / "projects").parts
         manifest = json.loads(path.read_text())
         if manifest.get("kind") == "standard":
-            key = (manifest["format"], manifest["ecosystem"], manifest["api"])
-            if parts[0:2] != key[0:2] or key not in standard_catalog:
+            key = (catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])
+            if parts[0:2] != (manifest["format"], manifest["ecosystem"]) or key not in standard_catalog:
                 raise ValueError(f"standard project does not match inventory: {path}")
             if key in standard_completed or key in standard_staged:
                 raise ValueError(f"duplicate standard project: {key}")
@@ -1271,8 +1276,8 @@ def main() -> None:
             continue
         if manifest.get("kind", "third_party") != "third_party":
             raise ValueError(f"unknown project kind: {path}")
-        key = (manifest["format"], manifest["ecosystem"], manifest["package"])
-        if parts[0:2] != key[0:2] or key not in catalog:
+        key = (catalog_format(manifest["format"]), manifest["ecosystem"], manifest["package"])
+        if parts[0:2] != (manifest["format"], manifest["ecosystem"]) or key not in catalog:
             raise ValueError(f"project does not match catalog: {path}")
         if key in completed or key in staged:
             raise ValueError(f"duplicate project: {key}")
@@ -1280,7 +1285,8 @@ def main() -> None:
         if "expected_output" in parser:
             expected = parser["expected_output"]
         else:
-            legacy = json.loads((ROOT / manifest["catalog_parser"]).with_name("verification.json").read_text())
+            legacy = json.loads((ROOT / resolve_data_path(manifest["catalog_parser"]))
+                                .with_name("verification.json").read_text())
             records = legacy.get("third_party", legacy.get("results", []))
             record, = [item for item in records if item["package"] == manifest["package"]]
             if record["pass"] is not True or record["version"] != manifest["release"]:
@@ -1291,7 +1297,7 @@ def main() -> None:
         control = ROOT / manifest["control"]
         if sha256(control.read_bytes()).hexdigest() != manifest["control_sha256"]:
             raise ValueError(f"control hash mismatch: {path}")
-        lock_path = ROOT / manifest["source_lock"]
+        lock_path = ROOT / resolve_data_path(manifest["source_lock"])
         if lock_path.suffix == ".json":
             source = json.loads(lock_path.read_text())[manifest["package"]]
             if source["release"] != manifest["release"] or source["source_sha256"] != manifest["source_sha256"]:
@@ -1356,8 +1362,8 @@ def main() -> None:
     for path in sorted((ROOT / "projects").glob("*/*/*/macos-manifest.json")):
         parts = path.relative_to(ROOT / "projects").parts
         manifest = json.loads(path.read_text())
-        key = (manifest["format"], manifest["ecosystem"], manifest["api"])
-        if parts[0:2] != key[0:2] or key not in standard_catalog:
+        key = (catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])
+        if parts[0:2] != (manifest["format"], manifest["ecosystem"]) or key not in standard_catalog:
             raise ValueError(f"host-only project does not match standard inventory: {path}")
         if key in standard_completed or key in standard_staged:
             raise ValueError(f"duplicate standard project: {key}")

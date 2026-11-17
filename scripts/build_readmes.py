@@ -12,7 +12,8 @@ from audit_projects import (browser_control_verified, native_source_control_veri
                             native_function_control_verified,
                             macos_host_control_verified, third_party_control_verified,
                             fully_runnable)
-from format_registry import ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS
+from format_registry import (ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS,
+                             catalog_format, resolve_data_path)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,22 +77,22 @@ def main() -> None:
     for path in manifest_paths:
         manifest = read(path)
         if manifest.get("kind") == "standard" and browser_control_verified(path, manifest):
-            staged_browser_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+            staged_browser_projects[(catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])] = path
         if manifest.get("kind") == "standard" and native_source_control_verified(path, manifest):
-            staged_native_source_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+            staged_native_source_projects[(catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])] = path
         if manifest.get("kind") == "standard" and native_function_control_verified(path, manifest):
-            staged_function_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+            staged_function_projects[(catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])] = path
         if (manifest.get("kind") != "standard" and manifest.get("coverage_kind") == "control_only"
                 and third_party_control_verified(path, manifest)):
-            staged_third_party_projects[(manifest["format"], manifest["ecosystem"],
+            staged_third_party_projects[(catalog_format(manifest["format"]), manifest["ecosystem"],
                                          manifest["package"])] = path
         if not fully_runnable(path, manifest):
             continue
         project_guides += 1
         if manifest.get("kind") == "standard":
-            standard_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+            standard_projects[(catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])] = path
             continue
-        key = (manifest["format"], manifest["ecosystem"], manifest["package"])
+        key = (catalog_format(manifest["format"]), manifest["ecosystem"], manifest["package"])
         if key in projects:
             raise ValueError(f"duplicate project path: {key}")
         projects[key] = (path, manifest)
@@ -99,7 +100,7 @@ def main() -> None:
         manifest = read(path)
         if not macos_host_control_verified(path, manifest):
             raise ValueError(f"host-only control receipt mismatch: {path}")
-        staged_macos_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+        staged_macos_projects[(catalog_format(manifest["format"]), manifest["ecosystem"], manifest["api"])] = path
     generated: dict[Path, str] = {}
     index = []
     standard_count = 0
@@ -445,12 +446,12 @@ def main() -> None:
             continue
         fmt, eco, slug_name = manifest["format"], manifest["ecosystem"], path.parent.name
         project_dir = path.parent
-        key = (fmt, eco, manifest["package"])
+        key = (catalog_format(fmt), eco, manifest["package"])
         catalog_readme = next((ROOT / item["readme"] for item in [*index, *pilot_index]
                                if (item["format"], item["ecosystem"], item["name"]) == key), None)
         source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
         receipt_name = "control-verification.json" if source_feedback else "verification.json"
-        lines = [f"# {manifest['package']} — {FORMATS[fmt][0]} / {ECO_LABEL[eco]}", "",
+        lines = [f"# {manifest['package']} — {FORMATS[catalog_format(fmt)][0]} / {ECO_LABEL[eco]}", "",
                  f"{'Pinned runtime' if source_feedback else 'Pinned release'}: "
                  f"`{manifest.get('release', manifest.get('runtime'))}`. "
                  f"[Manifest]({link(project_dir, path)}) · "
@@ -458,7 +459,7 @@ def main() -> None:
         if catalog_readme:
             lines += [f"[API, control result, and parser family]({link(project_dir, catalog_readme)})", ""]
         else:
-            lines += [f"[Standard API inventory]({link(project_dir, ROOT / manifest['standard_inventory'])})", ""]
+            lines += [f"[Standard API inventory]({link(project_dir, ROOT / resolve_data_path(manifest['standard_inventory']))})", ""]
         lines += ["## Run from the repository root", "", "```sh",
                   f"python3 parsarium.py build {fmt} {eco} {slug_name}",
                   f"python3 parsarium.py run {fmt} {eco} {slug_name} {manifest['control']}",

@@ -17,12 +17,12 @@ def read(path):
 
 class Mpg123DecoderLeadTest(unittest.TestCase):
     def test_control_evidence_and_feedback_blocker(self):
-        lead, = (item for item in read(ROOT / "data/javascript/mp3/leads.json")
+        lead, = (item for item in read(ROOT / "data/javascript/mp3/plain-mp3-pilot/leads.json")
                  if item["name"] == "mpg123-decoder")
         report = read(ROOT / lead["control_evidence"])
         lock = read(ROOT / "projects/mp3_id3v2/javascript/audio_decode_mp3/package-lock.json")
         selected = {item["name"] for item in read(ROOT / "data/javascript/mp3/parsers.json")}
-        snapshot = read(ROOT / "data/javascript/mp3/registry-snapshot.json")
+        snapshot = read(ROOT / "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json")
         self.assertEqual(lead["status"], "unresolved_shared_family")
         self.assertNotIn("mpg123-decoder", selected)
         self.assertEqual(lead["npm_downloads_30d"], snapshot["downloads"]["mpg123-decoder"]["downloads"])
