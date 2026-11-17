@@ -51,6 +51,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [beautifulsoup4 / Python](python/beautifulsoup4/README.md)
 - [defusedxml / Python](python/defusedxml/README.md)
 - [lxml / Python](python/lxml/README.md)
+- [parsel / Python](python/parsel/README.md)
 - [untangle / Python](python/untangle/README.md)
 - [xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot() / Python](python/stdlib_elementtree/README.md)
 - [xmlschema / Python](python/xmlschema/README.md)
