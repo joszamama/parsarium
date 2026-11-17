@@ -30,7 +30,8 @@ class JavaXmlPilotTest(unittest.TestCase):
                          {"com.fasterxml.woodstox:woodstox-core",
                           "org.dom4j:dom4j",
                           "com.fasterxml:aalto-xml",
-                          "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"})
+                          "com.fasterxml.jackson.dataformat:jackson-dataformat-xml",
+                          "org.apache.xmlbeans:xmlbeans"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             coordinate = f"{parser['group']}:{parser['artifact']}"

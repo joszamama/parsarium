@@ -8,7 +8,7 @@ COPY fuzzing/afl-bridge/java_trace.py /work/afl_java_trace.py
 COPY fuzzing/afl-native/xml/java/xmlbeans/afl_trace /work/afl_trace
 ENV PARSARIUM_SUBJECT_PREFIX=/work/parser-source/module/
 ENV PARSARIUM_FUZZ_ENTRY=GenericHarness.fuzzerTestOneInput
-ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/*
+ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/xmlbeans-5.4.1.jar:/work/lib/log4j-api-2.26.1.jar:/work/lib/log4j-core-2.26.1.jar
 ENV PARSARIUM_TARGET_CLASS=GenericHarness
 ENV PARSARIUM_PARSER_JAR=/work/module-classes
 ENV PARSARIUM_PARSER_SOURCES=/work/parser-source/module
