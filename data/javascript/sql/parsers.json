@@ -948,5 +948,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "@saralsql/tsql-parser",
+    "version": "0.4.7",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "analyze(local UTF-8 text) -> {ast: Program, issues}",
+    "documentation": "https://www.npmjs.com/package/@saralsql/tsql-parser/v/0.4.7",
+    "source": "https://registry.npmjs.org/@saralsql/tsql-parser/-/tsql-parser-0.4.7.tgz",
+    "source_sha256": "939262514c4f61ad2e4476954706c43465aa5fd372acc493f2560aa5087b4f31",
+    "dependencies": [],
+    "dialect": "T-SQL (SQL Server)",
+    "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to analyze; any recoverable parser issue rejects the input; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "@saralsql/tsql-parser hand-written T-SQL parser",
+    "family_note": "analyze runs the package's own T-SQL lexer and recursive-descent parser (dist/src/parser) and then scope, lineage and diagnostic passes; the adapter reads only the Program AST (SelectStatement columns, from TableReference with joins, where, groupBy, orderBy, FunctionCall and Literal nodes; InsertStatement table, columns and value rows) and counts coverage only in the parser directory. Numeric Literal values are JavaScript numbers converted with String(), which equals the source text for both controls. No runtime dependencies; independent of the other selected paths.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 731,
+      "source": "https://api.npmjs.org/downloads/point/last-month/@saralsql/tsql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; a small download count."
+    },
+    "project": "projects/sql/javascript/saralsql_tsql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

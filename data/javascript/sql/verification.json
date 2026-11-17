@@ -831,8 +831,100 @@
       "parser_feature_difference": 79,
       "project_receipt": "projects/sql/javascript/questdb_sql_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/javascript/questdb_sql_parser/differential.json"
+    },
+    {
+      "package": "@saralsql/tsql-parser",
+      "version": "0.4.7",
+      "pass": true,
+      "input_api": "analyze(local UTF-8 text) -> {ast: Program, issues}",
+      "dialect": "T-SQL (SQL Server)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "@saralsql/tsql-parser hand-written T-SQL parser",
+      "parser_source_files": 15,
+      "parser_source_lines_covered": 1650,
+      "afl_tuple_difference": 84,
+      "parser_feature_difference": 84,
+      "project_receipt": "projects/sql/javascript/saralsql_tsql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/saralsql_tsql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:52:36.568119+00:00"
+  "checked_at_utc": "2026-11-17T20:52:44.831843+00:00"
 }
