@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "dnspython",
+  "release": "2.9.2",
+  "catalog_parser": "data/python/dns/parsers.json",
+  "source_lock": "projects/dns/python/dnspython/runtime-requirements.lock",
+  "source_sha256": "af15f7d385a6ae2fb35a796fde2138004c8c42c7389090e2addc83e3b3340fd8",
+  "sdist_sha256": "8d4d39a513e649d634004ce4d39ade2352efcea472a0247535a5c2d18a9d7ba9",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel by hash; the image checks that the wheel's dns/ package is byte-identical to the pinned sdist and that dns/message.py, name.py, wire.py and the LICENSE match recorded SHA-256 values. No runtime dependencies (all Requires-Dist entries are extras).",
+  "dependencies_note": "atheris 3.1.0 is the in-process fuzz bridge only; dnspython has no required runtime dependencies.",
+  "parser_family": "dnspython wire reader (dns/message.py _WireReader over dns/wire.py Parser, dns/name.py from_wire and per-type rdata from_wire_parser)",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "api": "dns.message.from_wire(local DNS message bytes)",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the installed dnspython dns/ package during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/dns/",
+  "format_specific_coverage_file_suffix": "/dns/message.py",
+  "scope": "One RFC 1035 DNS message from local bytes via dns.message.from_wire: header flags and counts, questions, and answer records (CNAME, A, AAAA, MX) with compressed names; valid response and query controls only, each matching the hand-written controls/dns/check_controls.py summary. dnspython groups records into RRsets; the harness lists every rdata with its RRset owner, type, class and TTL.",
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ]
+}

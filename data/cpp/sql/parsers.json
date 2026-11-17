@@ -1,1 +1,105 @@
-[]
+[
+  {
+    "name": "dnspython",
+    "version": "2.9.2",
+    "license": "ISC",
+    "license_evidence": "Wheel METADATA 'License-Expression: ISC' and dist-info/licenses/LICENSE (SHA-256 c3ea3ff5654b329c19d3bc5f7481af623c3dded4a6145585499f843ad3d741cd), checked in the image",
+    "input_api": "dns.message.from_wire(wire: bytes) -> dns.message.Message",
+    "documentation": "https://dnspython.readthedocs.io/en/v2.9.2/message-make.html#dns.message.from_wire",
+    "source": "https://pypi.org/project/dnspython/2.9.2/",
+    "scope": "RFC 1035 message from local bytes: header, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dnspython wire reader (dns/message.py _WireReader, dns/wire.py Parser, dns/name.py)",
+    "family_note": "Own pure-Python decoder; no C extension and no other DNS library. RRsets group records by owner and type; the harness lists each rdata with its RRset's owner, type, class and TTL.",
+    "project": "projects/dns/python/dnspython",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 286812791,
+      "source": "https://pypistats.org/api/packages/dnspython/recent",
+      "captured_at_utc": "2026-11-17T16:38:47.090718+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 1,
+    "afl_feedback": "data/python/dns/dnspython-feedback-differential.json"
+  }
+]

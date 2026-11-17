@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "dns",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_one_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'dns'"
@@ -15,10 +15,11 @@
   },
   "search_hits_recorded": 100,
   "unique_search_hits": 100,
-  "unresolved_documentation_leads": 7,
+  "unresolved_documentation_leads": 6,
   "leads_recorded": 10,
   "leads_by_status": {
-    "unresolved": 7,
+    "resolved_verified_selected": 1,
+    "unresolved": 6,
     "excluded": 3
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
@@ -31,5 +32,8 @@
     "differential": "controls/dns/query.bin",
     "oracle": "controls/dns/check_controls.py",
     "expected": "controls/dns/expected.json"
-  }
+  },
+  "third_party_evidence": "data/python/dns/parsers.json",
+  "third_party_control_results": "data/python/dns/verification.json",
+  "selection": "One control-verified Python DNS path(s), ranked by PyPI Stats last_month downloads excluding known mirrors: dnspython 2.9.2 (286,812,791)."
 }
