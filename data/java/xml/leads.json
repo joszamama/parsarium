@@ -163,13 +163,15 @@
   {
     "name": "xpp3",
     "coordinate": "xpp3:xpp3",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "1.1.3.4",
     "summed_direct_dependent_count": 285,
     "max_release_direct_dependent_count": 143,
     "default_release_direct_dependent_count": 0,
-    "reason": "XmlPullParser implementation (MXParser) with its own tokenizer; old 2006-era release line. Control not run.",
-    "source": "https://central.sonatype.com/artifact/xpp3/xpp3"
+    "reason": "Exact 1.1.3.4 artifact was unavailable from Maven Central. The published same-coordinate 1.1.4c MXParser.setInput(InputStream, null)/next() independently tokenized both valid namespace-aware XML controls; pinned own source lines and stable input-dependent AFL++ feedback were verified.",
+    "source": "https://central.sonatype.com/artifact/xpp3/xpp3",
+    "verified_release": "1.1.4c",
+    "verified_evidence": "projects/xml/java/xpp3/verification.json"
   },
   {
     "name": "kxml2",

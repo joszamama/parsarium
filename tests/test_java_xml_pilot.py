@@ -32,7 +32,7 @@ class JavaXmlPilotTest(unittest.TestCase):
                           "com.fasterxml:aalto-xml",
                           "com.fasterxml.jackson.dataformat:jackson-dataformat-xml",
                           "org.apache.xmlbeans:xmlbeans",
-                          "org.jdom:jdom2", "xom:xom"})
+                          "org.jdom:jdom2", "xom:xom", "xpp3:xpp3"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             coordinate = f"{parser['group']}:{parser['artifact']}"
@@ -124,11 +124,10 @@ class JavaXmlPilotTest(unittest.TestCase):
         report = read(BASE / "afl-feedback.json")
         oracle = read(ROOT / "data/go/xml/verification.json")["differential_output"]
         expected_projects = {str(Path(parser["project"]).relative_to("projects"))
-                             for parser in read(BASE / "parsers.json") if parser["name"] != "xom"}
+                             for parser in read(BASE / "parsers.json")}
         expected_projects.add("xml/java/jdk_documentbuilder")
         aggregated = {item["project"] for item in report["results"]}
-        self.assertIn(aggregated, (expected_projects,
-                                   expected_projects | {"xml/java/xom"}))
+        self.assertEqual(aggregated, expected_projects)
         self.assertEqual(report["projects_passed"], len(aggregated))
         for result in report["results"]:
             overlay = ROOT / "fuzzing/afl-native" / result["project"] / "verification.json"
@@ -150,6 +149,15 @@ class JavaXmlPilotTest(unittest.TestCase):
         overlay = ROOT / "fuzzing/afl-native/xml/java/xom/verification.json"
         self.assertEqual(sha256(overlay.read_bytes()).hexdigest(),
                          xom["overlay_receipt_sha256"])
+        xpp3 = read(ROOT / "fuzzing/afl-native/xml/java/xpp3/differential.json")
+        self.assertEqual(xpp3["differential_output"], oracle)
+        self.assertTrue(xpp3["pass"] and xpp3["repeated_control_identical"]
+                        and xpp3["repeated_differential_identical"])
+        self.assertGreater(xpp3["parser_feature_difference"], 0)
+        self.assertGreater(xpp3["afl_tuple_difference"], 0)
+        overlay = ROOT / "fuzzing/afl-native/xml/java/xpp3/verification.json"
+        self.assertEqual(sha256(overlay.read_bytes()).hexdigest(),
+                         xpp3["overlay_receipt_sha256"])
 
 
 if __name__ == "__main__":
