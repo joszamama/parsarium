@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T23:19:30.026931+00:00",
-  "projects_total": 582,
-  "projects_verified": 582,
+  "checked_at_utc": "2026-11-17T23:29:58.245675+00:00",
+  "projects_total": 586,
+  "projects_verified": 586,
   "results": [
     {
       "schema_version": 1,
@@ -493,6 +493,32 @@
     },
     {
       "schema_version": 1,
+      "project": "ascii_pnm/go/github_com_cshum_vipsgen_vips",
+      "pass": true,
+      "feedback_kind": "go_cgo_libvips_native_ppmload_edges",
+      "feedback_scope": "AFL++ CLASSIC allowlist of the native libvips libvips/foreign/ppmload.c loader; Go runtime, vipsgen binding and other libvips sources excluded",
+      "base_project_receipt_sha256": "16e866557b1db9ca09efc8741b1e66448c625e734e4f2cc4cf6570c31fb0ff34",
+      "base_image_id": "sha256:2fa747a390b2fd04c53d31cd6bd8b215854cc72f9c7718e5e82ad3c1c2383b82",
+      "image_id": "sha256:26989cebf92fd065da822cfb082f0e4b89d75e0c586af82f6f53b8e1f8e4bd3e",
+      "platform": "linux/arm64",
+      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+      "source_sha256": "579ca148c80ec89469257e0df8c78a47cbc2cfc895ef09f7fa0933fbd1749dcf",
+      "underlying_source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94",
+      "parser_source_features": 1,
+      "feedback_edges": 91,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "afl_entrypoint": "/work/afl-target",
+      "afl_file_input": true,
+      "allowlist_sha256": "7e7efa7052088b6248ab7bab989ce4c5e619dea67fae14e409f30b99e5d7b8a2",
+      "overlay_file_sha256": {
+        "Dockerfile": "880e45e7bdf60f55ead7e28a5a5eeedea97c413a22194b254ca0839febac7eb8",
+        "build.py": "3063815f2b2e0f62c9e2c8ec04f663f3733055297c0b7faf74d3039983e7de53",
+        "feedback-validation.json": "a8bd140c0bba52f4c24be748f43ca68b28178b836a9d6bd02333f20b85fd1416"
+      }
+    },
+    {
+      "schema_version": 1,
       "project": "ascii_pnm/go/github_com_go_gfx_gfx_codec",
       "pass": true,
       "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
@@ -512,6 +538,32 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "go_trace.py": "4e3e7f79657ee8de9ec6240dbc98074a09dc325b29f22747ed18564aae9848f5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_pnm/go/github_com_gographics_gmagick",
+      "pass": true,
+      "feedback_kind": "go_cgo_graphicsmagick_native_pnm_coder_edges",
+      "feedback_scope": "AFL++ CLASSIC allowlist of the native GraphicsMagick coders/pnm.c reader; Go runtime, gmagick binding and other GraphicsMagick sources excluded",
+      "base_project_receipt_sha256": "d693479431bb74952f6ae0b45e85020c1bb616b25531b226f856bce7876d55fa",
+      "base_image_id": "sha256:ff0b9eb9fe902971e6add98161c6a36f481b3df56a4331d93e4b7f2ca9e8bfd9",
+      "image_id": "sha256:1aa22179db8c58c40bb0ba4d9b0c1ecf458dd91d04734ad26b92e0caff892e33",
+      "platform": "linux/arm64",
+      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+      "source_sha256": "6efd2688d5323783ce893fa183a20ef76fdf4e548bc1e611f66119552431e4fe",
+      "underlying_source_sha256": "7efa070dc31116b4315061b39f84bc7181e8b060bf61214ec9af851131af9c81",
+      "parser_source_features": 1,
+      "feedback_edges": 80,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "afl_entrypoint": "/work/afl-target",
+      "afl_file_input": true,
+      "allowlist_sha256": "e07c3a894383d969286946a33537f8ec7f58e76a1d0a3b16a332432cc9165a6a",
+      "overlay_file_sha256": {
+        "Dockerfile": "db313336ece4cb7b04477e5718978806ae276aa741ab5f9e469c3b2013b5a25b",
+        "build.py": "24c21f18d9e007ce7007df17236a3b3f9462f8dd36b43835ff7489c24b56484c",
+        "feedback-validation.json": "8faf3dd7f2aa51ac871439d0c7d6ad2ae351909f414ab96a2013be9870110af3"
       }
     },
     {
@@ -553,6 +605,29 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "8c710acfbe600b8110210728ec88e2e080ffd9b03b9b3d956ec2f6f176bd4f0a",
+        "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "go_trace.py": "4e3e7f79657ee8de9ec6240dbc98074a09dc325b29f22747ed18564aae9848f5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_pnm/go/github_com_kovidgoyal_imaging",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "base_project_receipt_sha256": "c4d2bceaba704059c0d0cf21fbd84349dead6cb60ef48aac4044b6a40cfea244",
+      "base_image_id": "sha256:10017267ede9cff2fffcecdcd61e541fbf9d1dc89bc5b9278f6d293b4f3bbe70",
+      "image_id": "sha256:1ea6c1f3204f8995cf408b66197ea2068a27654e22d5ea43e7de01c715e63819",
+      "platform": "linux/arm64",
+      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+      "parser_source_features": 242,
+      "feedback_edges": 262,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "481bd7ab69e4622d49ed36b68ff43cbaa7834cd98db6de169f6c8574d92efa18",
         "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31"
       },
       "bridge_file_sha256": {
@@ -2197,6 +2272,29 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "896d4c0a47828568f3711c42616eca6bb22d2a5093364a348bd21258dc4a42fa",
+        "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "go_trace.py": "4e3e7f79657ee8de9ec6240dbc98074a09dc325b29f22747ed18564aae9848f5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "http11/go/gnalloy_org_codec_http1",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "base_project_receipt_sha256": "9c9882268d3a3703e496349a7c75f5fec90a64dd6ce0c87ebdc237c2d8e0bee5",
+      "base_image_id": "sha256:f2e754ed31b9d12615000675550ba07d340e950e2b438dadb42ff912f753806e",
+      "image_id": "sha256:26414a91f8b6017e68af6fc8bbe4e3d3fa5c867235622cb594f44fa165230a4a",
+      "platform": "linux/arm64",
+      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+      "parser_source_features": 72,
+      "feedback_edges": 92,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "a968073f2a05acdf5647b2bd81c824a06a092a1ee42a058720b7a019df14952f",
         "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31"
       },
       "bridge_file_sha256": {
