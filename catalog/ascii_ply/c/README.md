@@ -1,6 +1,6 @@
 # ASCII PLY / C
 
-8 verified third-party API paths; 6 have verified Docker harnesses.
+8 verified third-party API paths; 7 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/ascii_ply/ranking.md) · [standard API inventory](../../../data/c/ascii_ply/standard.json)
 
@@ -11,7 +11,7 @@
 - [f3d](f3d/README.md) — Docker harness ready
 - [mdal](mdal/README.md) — Docker harness ready
 - [brlcad](brlcad/README.md) — Docker harness ready
-- [mccode](mccode/README.md) — verified API path
+- [mccode](mccode/README.md) — Docker harness ready
 - [stereokit](stereokit/README.md) — verified API path
 - [gmsh](gmsh/README.md) — Docker harness ready
 

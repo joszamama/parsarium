@@ -9,6 +9,7 @@
 - [brlcad / C](c/brlcad/README.md)
 - [f3d / C](c/f3d/README.md)
 - [gmsh / C](c/gmsh/README.md)
+- [mccode / C](c/mccode/README.md)
 - [mdal / C](c/mdal/README.md)
 - [assimp / C++](cpp/assimp/README.md)
 - [cgal / C++](cpp/cgal/README.md)

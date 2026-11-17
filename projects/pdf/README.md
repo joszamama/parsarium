@@ -11,6 +11,7 @@
 - [qpdf / C](c/qpdf/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [mupdf / C++](cpp/mupdf/README.md)
+- [pdfwriter / C++](cpp/pdfwriter/README.md)
 - [podofo / C++](cpp/podofo/README.md)
 - [poppler / C++](cpp/poppler/README.md)
 - [qpdf / C++](cpp/qpdf/README.md)

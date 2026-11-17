@@ -30,7 +30,7 @@ def main() -> None:
                 receipt = path.parent / "verification.json"
                 records.append({"project": str(relative), "status": "unsupported",
                                 "engine": "in-process native campaign",
-                                "reason": "parser state persists across inputs; use one-shot AFL++",
+                                "reason": "in-process native campaign is unsupported; use one-shot AFL++",
                                 "image_id": json.loads(receipt.read_text())["image_id"],
                                 "control_sha256": manifest["control_sha256"],
                                 "project_receipt_sha256": sha256(receipt.read_bytes()).hexdigest()})

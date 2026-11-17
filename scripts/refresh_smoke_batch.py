@@ -34,7 +34,7 @@ def check_native_plan(relative: Path, scratch: Path) -> dict:
             raise RuntimeError(f"native campaign was not rejected: {relative}")
         return {"project": str(relative), "status": "unsupported",
                 "engine": "in-process native campaign",
-                "reason": "parser state persists across inputs; use one-shot AFL++",
+                "reason": "in-process native campaign is unsupported; use one-shot AFL++",
                 "image_id": json.loads((project / "verification.json").read_text())["image_id"],
                 "control_sha256": manifest["control_sha256"],
                 "project_receipt_sha256": sha256((project / "verification.json").read_bytes()).hexdigest()}

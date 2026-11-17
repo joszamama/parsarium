@@ -22,6 +22,13 @@
 
 McStas component library compiles the tagged C interoff-lib parser into an instrument. It is a distinct engine. The 80-artifact conda environment and installed parser sources are pinned; only geometry initialization is tested, not neutron simulation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/mccode/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c mccode
+python3 parsarium.py run ascii_ply c mccode controls/ascii_ply/triangle.ply
+```
+
+**Coverage limit:** McCode 3.10.2 rejects valid zero-face PLY point clouds; this path accepts polygonal meshes with at least one face. The upstream parser can exit on rejected input, so execution is one file per process.
