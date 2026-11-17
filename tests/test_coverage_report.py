@@ -546,6 +546,60 @@ class CoverageReportTest(unittest.TestCase):
         self.assertEqual(replay["trace_script_sha256"], digest(script.read_bytes()))
         self.assertIn("PHP Xdebug", replay["mechanism"])
 
+    def test_bounded_javascript_queue_replay_unions_v8_package_lines(self):
+        fixture = self.fixture()
+        fixture.afl_plan()
+        fixture.manifest.update({
+            "ecosystem": "javascript", "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+            "coverage_subject_prefix": "/work/node_modules/example-parser/",
+        })
+        (fixture.project / "replay.js").write_text("process.argv[2];\n")
+        (fixture.project / "run-control.js").write_text("NODE_V8_COVERAGE;\n")
+        script = fixture.root / "scripts/javascript_queue_trace.js"
+        script.parent.mkdir()
+        script.write_bytes((ROOT / "scripts/javascript_queue_trace.js").read_bytes())
+        source_overlay = fixture.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        overlay = fixture.root / "fuzzing/afl-native/png/javascript/demo/verification.json"
+        overlay.parent.mkdir(parents=True)
+        overlay.write_bytes(source_overlay.read_bytes())
+        plan_path = fixture.run_dir / "plan.json"
+        plan = json.loads(plan_path.read_text())
+        plan["project"] = "png/javascript/demo"
+        plan["overlay_receipt_sha256"] = digest(overlay.read_bytes())
+        fixture.write_json(plan_path, plan)
+        evidence = {
+            "identity": {"format": "png", "ecosystem": "javascript", "slug": "demo"},
+            "manifest": fixture.manifest, "project": fixture.project,
+            "receipt": fixture.receipt,
+            "evidence": {"receipt_sha256": digest((fixture.project / "verification.json").read_bytes())},
+            "feedback": {"coverage_kind": "source_lines"},
+        }
+
+        def docker(command, **_):
+            if command[1:3] == ["image", "inspect"]:
+                return subprocess.CompletedProcess(command, 0, f"{IMAGE} linux/arm64\n", "")
+            self.assertIn("/usr/local/bin/node", command)
+            output_mount = next(item for item in command if item.endswith(":/coverage"))
+            output_dir = Path(output_mount.removesuffix(":/coverage"))
+            output_name = Path(command[-2]).name
+            lines = [10, 11] if output_name == "000.json" else [10, 15]
+            (output_dir / output_name).write_text(json.dumps({
+                "outcome": "ok", "files": [{
+                    "filename": "/work/node_modules/example-parser/index.js",
+                    "executed_lines": lines,
+                }],
+            }))
+            return subprocess.CompletedProcess(command, 0)
+
+        with mock.patch.object(queue_coverage.subprocess, "run", side_effect=docker):
+            replay, coverage = queue_coverage.replay_interpreted_queue(
+                fixture.run_dir, fixture.root, evidence, 2, 15)
+        self.assertEqual(replay["queue_inputs_sampled"], 2)
+        self.assertEqual([item["trace_files"] for item in replay["inputs"]], [1, 1])
+        self.assertEqual(coverage["data"][0]["files"][0]["executed_lines"], [10, 11, 15])
+        self.assertEqual(replay["trace_script_sha256"], digest(script.read_bytes()))
+        self.assertIn("Node V8 coverage", replay["mechanism"])
+
     def test_afl_queue_source_scope_and_input_limits_are_honest(self):
         fixture = self.fixture("native_binary_edges")
         queue = fixture.afl_plan()

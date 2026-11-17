@@ -378,10 +378,10 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
     if not replay:
         return run, None
     ecosystem = evidence["identity"]["ecosystem"]
-    if ecosystem not in {"c", "cpp", "python", "php"} or \
+    if ecosystem not in {"c", "cpp", "python", "php", "javascript"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
         run["queue_replay_unsupported"] = (
-            "Source replay currently supports LLVM-covered C/C++ and Python/PHP source-line projects; "
+            "Source replay currently supports LLVM-covered C/C++ and Python/PHP/JavaScript source-line projects; "
             "this project's saved AFL++ feedback remains separately documented.")
         return run, None
     if ecosystem in {"c", "cpp"}:
@@ -398,7 +398,8 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
         except QueueCoverageError as error:
             if "no supported Python harness/interpreter" in str(error) or \
                     "needs native source replay" in str(error) or \
-                    "no supported PHP byte-input harness/interpreter" in str(error):
+                    "no supported PHP byte-input harness/interpreter" in str(error) or \
+                    "no supported Node V8 replay harness" in str(error):
                 run["queue_replay_unsupported"] = str(error)
                 return run, None
             raise
@@ -842,10 +843,13 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
         if not archives:
             warnings.append(f"No --source archive was supplied; {language} line views list executed "
                             "line numbers without source text.")
-        if run["kind"] == "afl" and ecosystem in {"python", "php"}:
-            warnings.append(f"{ecosystem.title()} queue tracing observes interpreted package source only; "
+        if run["kind"] == "afl" and ecosystem in {"python", "php", "javascript"}:
+            warnings.append(f"{ecosystem.title()} queue tracing observes package source only; "
                             "native extensions and their underlying libraries need a separate "
                             "source replay.")
+        if run["kind"] == "afl" and ecosystem == "javascript":
+            warnings.append("V8 source ranges use the same line conversion as the valid-control "
+                            "project; comment lines inside executed ranges may be counted.")
         if any(entry["source"]["status"] == "rejected_line_mismatch" for entry in files):
             warnings.append(f"Some {language} source files were rejected because executed lines exceed "
                             "the pinned archive length.")
