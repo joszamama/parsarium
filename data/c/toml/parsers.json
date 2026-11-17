@@ -101,5 +101,109 @@
     },
     "rank": 1,
     "afl_feedback": "data/javascript/dns/dns-packet-feedback-differential.json"
+  },
+  {
+    "name": "@dnsquery/dns-packet",
+    "version": "6.1.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 a157dfff...), checked in the image",
+    "input_api": "decode(buf: Uint8Array | Buffer) -> packet object",
+    "documentation": "https://github.com/dnsquery/dns-packet/blob/main/README.md#packet-decodebuf-offset",
+    "documentation_note": "The npm tarball's README.md (6.1.1) documents decode(buf, [offset]); the project has no release tag for 6.1.1, so the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/@dnsquery/dns-packet/v/6.1.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-packet family (fork of mafintosh dns-packet)",
+    "family_note": "Shared family with dns-packet: the README calls it a fork with TypeScript types that does not use Node.js primitives. Its index.js is a separate TypeScript build (about 3,100 differing non-whitespace lines from dns-packet 5.6.1) and reads integers through its own buffer_utils.js; the decoding algorithm and record codecs follow dns-packet. A/AAAA text comes from @leichtgewicht/ip-codec 2.0.5.",
+    "project": "projects/dns/javascript/dnsquery_dns_packet",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 785358,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@dnsquery%2Fdns-packet",
+      "captured_at_utc": "2026-11-17T16:37:42.536945+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/javascript/dns/dnsquery-dns-packet-feedback-differential.json"
   }
 ]
