@@ -2,7 +2,7 @@
   "kind": "standard",
   "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
   "runtime": "Node.js 26.10.0",
-  "verified_at_utc": "2026-11-17T03:32:29.044247+00:00",
+  "verified_at_utc": "2026-11-17T03:51:11.373300+00:00",
   "manifest": "projects/json/javascript/stdlib_json_parse/manifest.json",
   "image_id": "sha256:5566820d79cb451e7c772fa6ea05b592947a29f910b2c138a1be8eb0ebf5e868",
   "docker_server_version": "29.9.3",
@@ -16,7 +16,7 @@
   "project_file_sha256": {
     "Dockerfile": "2b9dd259468c6f058ca4467d004e6bfb1bd4bb03cff1b1f677c66d914e19b015",
     "adapter.mjs": "e8e24e794840f27e21c13e9f7266c4803cf5976f9da2674fc6552d671d2c44e2",
-    "manifest.json": "c7e85cd812a596ec20c4a5bb9e7d6d5cbb99778f794833e8e8df4cdeb38abe99",
+    "manifest.json": "3f809c4326369449e26c64650bd408b47f515106cf45a760ffae97a2630d72a1",
     "native-feedback-probe/Dockerfile": "d0f642dd4301896f61e9ca8d50584259e7bc5de16dd0387b6318f502e3baf394",
     "native-feedback-probe/probe.py": "2c5e0a63b13c43b24f84b0ccb59eb2373effe615d77f492edf534c213fc95102",
     "native-feedback-probe/probe.sh": "b71fb04dc69ff64d15b97f375b2f754b7519e6bf73c6f22fad3ca31d9483fc72",
@@ -88,5 +88,5 @@
       "void v8::internal::JsonParser<unsigned char>::ScanLiteral<6ul>(char const (&) [6ul])"
     ]
   },
-  "native_feedback_limit": "Function-entry sets only (which JsonParser functions ran), from one-shot gdb breakpoints with SYS_PTRACE and seccomp=unconfined in a separate probe image. Not source lines, not basic blocks or edges, not AFL++ feedback, no fuzz engine. Inlined code is invisible. The gdb package in the probe image is Debian's, recorded but not hash-pinned. Runnable path is valid-control replay only."
+  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb; that probe is not AFL++ feedback. A separate AFL++ overlay hashes these function names into its bitmap and requires SYS_PTRACE and seccomp=unconfined. Neither route measures parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package."
 }

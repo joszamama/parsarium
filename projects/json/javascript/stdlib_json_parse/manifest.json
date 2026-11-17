@@ -79,5 +79,5 @@
   "coverage": "No parser source lines: JSON.parse is V8 C++ inside the node binary and V8 source-range coverage lists no JSON parser script (the run-control checks this). Feedback is gdb function-entry hits on v8::internal::JsonParser<...> text symbols of the pinned, unstripped node binary.",
   "coverage_subject_prefix": "v8::internal::JsonParser<",
   "native_feedback_smoke": "native-feedback-probe/run-smoke.sh",
-  "native_feedback_limit": "Function-entry sets only (which JsonParser functions ran), from one-shot gdb breakpoints with SYS_PTRACE and seccomp=unconfined in a separate probe image. Not source lines, not basic blocks or edges, not AFL++ feedback, no fuzz engine. Inlined code is invisible. The gdb package in the probe image is Debian's, recorded but not hash-pinned. Runnable path is valid-control replay only."
+  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb; that probe is not AFL++ feedback. A separate AFL++ overlay hashes these function names into its bitmap and requires SYS_PTRACE and seccomp=unconfined. Neither route measures parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package."
 }

@@ -18,7 +18,7 @@ The binary is unstripped, so `native-feedback-probe/run-smoke.sh` sets a one-sho
 | nested-object control, twice | 21, identical sets |
 | nested-array control | 23 (5 not in the control set, 3 missing from it) |
 
-That is function-entry feedback. It is not source-line coverage, basic blocks, or edges, and it is not AFL++ feedback. Inlined code does not show up. The probe needs `SYS_PTRACE` and `seccomp=unconfined` in a separate image, and Debian's gdb package there is not hash-pinned (its version is in the receipt). No fuzz engine is wired to this path.
+That is function-entry feedback. It is not source-line coverage, basic blocks, or edges. Inlined code does not show up. The probe needs `SYS_PTRACE` and `seccomp=unconfined` in a separate image, and Debian's gdb package there is not hash-pinned (its version is in the receipt). A [separate AFL++ bridge](../../../../fuzzing/afl-native/json/javascript/stdlib_json_parse/README.md) hashes these function names into a feedback bitmap. Its tuples are not V8 parser edges.
 
 ## Run from the repository root
 

@@ -101,6 +101,64 @@ def native_function_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
+def node_json_function_afl_verified(path: Path, manifest: dict) -> bool:
+    """Bind the staged Node JSON AFL bitmap to its pinned function-entry probe."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "json/javascript/stdlib_json_parse":
+        return True
+    if not native_function_control_verified(path, manifest):
+        return False
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    receipt_path = overlay_dir / "verification.json"
+    if not receipt_path.is_file():
+        return False
+    receipt = json.loads(receipt_path.read_text())
+    files = ("Dockerfile", "afl_trace", "build.py", "README.md")
+    file_hashes = {name: sha256((overlay_dir / name).read_bytes()).hexdigest()
+                   for name in files if (overlay_dir / name).is_file()}
+    probe_files = ("probe.py", "probe.sh")
+    probe_hashes = {name: sha256((path.parent / "native-feedback-probe" / name).read_bytes()).hexdigest()
+                    for name in probe_files
+                    if (path.parent / "native-feedback-probe" / name).is_file()}
+    bridge = ROOT / "fuzzing/afl-bridge/afl_proxy.c"
+    feedback = receipt.get("native_feedback") or {}
+    counts = feedback.get("bitmap_tuples") or {}
+    maps = feedback.get("bitmap_sha256") or {}
+    base = json.loads((path.parent / "verification.json").read_text())
+    return (
+        receipt.get("pass") is True
+        and receipt.get("project") == str(project)
+        and receipt.get("coverage_kind") == "native_function_entries"
+        and receipt.get("feedback_kind") == "v8_json_parser_function_entries_to_afl_bitmap"
+        and receipt.get("source_lines_covered") is None
+        and receipt.get("afl_requires_ptrace") is True
+        and receipt.get("source_sha256") == manifest["source_sha256"]
+        and receipt.get("control_sha256") == manifest["control_sha256"]
+        and receipt.get("base_project_receipt_sha256")
+            == sha256((path.parent / "verification.json").read_bytes()).hexdigest()
+        and receipt.get("probe_image_id", "").startswith("sha256:")
+        and receipt.get("probe_file_sha256") == probe_hashes
+        and len(probe_hashes) == len(probe_files)
+        and receipt.get("overlay_file_sha256") == file_hashes
+        and len(file_hashes) == len(files)
+        and bridge.is_file()
+        and receipt.get("bridge_file_sha256") == {"afl_proxy.c": sha256(bridge.read_bytes()).hexdigest()}
+        and receipt.get("image_id", "").startswith("sha256:")
+        and receipt.get("afl_map_size", 0) > 0
+        and receipt.get("feedback_tuples", 0) == counts.get("control1", 0) > counts.get("baseline", 0)
+        and counts.get("control1") == counts.get("control2")
+        and counts.get("variant", 0) > counts.get("baseline", 0)
+        and maps.get("control1") == maps.get("control2")
+        and maps.get("control1") != maps.get("variant")
+        and feedback.get("scope_symbols") == base["native_feedback"]["scope_symbols"]
+        and feedback.get("baseline_functions") == 0
+        and feedback.get("control_functions") == base["native_feedback"]["control_functions"]
+        and feedback.get("variant_functions") == base["native_feedback"]["variant_functions"]
+        and feedback.get("repeat_identical") is True
+        and feedback.get("variant_differs") is True
+    )
+
+
 def native_source_control_verified(path: Path, manifest: dict) -> bool:
     """Validate a staged native parser source control without AFL feedback."""
     kind = manifest.get("coverage_kind")
@@ -1078,6 +1136,8 @@ def main() -> None:
             elif manifest.get("coverage_kind") == "native_function_entries":
                 if not native_function_control_verified(path, manifest):
                     raise ValueError(f"native function control receipt mismatch: {path}")
+                if not node_json_function_afl_verified(path, manifest):
+                    raise ValueError(f"native function AFL bridge receipt mismatch: {path}")
                 pinned_fields = ("base_image", "source_sha256")
             else:
                 pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")
