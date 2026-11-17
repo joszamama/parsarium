@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:53:01.299527+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T05:35:16.408700+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_nested_array",
   "results": [
     {
@@ -38,6 +38,24 @@
       "differential_afl_tuples": 248,
       "parser_feature_difference": 11,
       "afl_tuple_difference": 11
+    },
+    {
+      "project": "json/go/github_com_tidwall_gjson",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "f051148da81cc4b7de4d9aa29ca8a2b367ffe527f320d568dd270e8fa8330d8b",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_parser_features": 246,
+      "control_afl_tuples": 265,
+      "differential_parser_features": 215,
+      "differential_afl_tuples": 234,
+      "parser_feature_difference": 39,
+      "afl_tuple_difference": 39,
+      "differential_control_pass": true
     },
     {
       "project": "json/go/stdlib_unmarshal",

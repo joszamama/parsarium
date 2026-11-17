@@ -11,7 +11,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_goccy_go_json", "github_com_json_iterator_go", "stdlib_unmarshal")
+PROJECTS = ("github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_tidwall_gjson", "stdlib_unmarshal")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 REPORT = ROOT / "data/go/json/afl-feedback.json"
@@ -48,6 +48,16 @@ def check(slug: str) -> dict:
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     image = receipt["image_id"]
+    if slug == "github_com_tidwall_gjson":
+        base_image = f"parsarium/json-go-{slug}:local"
+        run(["docker", "run", "--rm", "--platform", manifest["platform"],
+             "--network", "none", "--read-only", "--cap-drop", "ALL",
+             "--security-opt", "no-new-privileges",
+             "--user", f"{os.getuid()}:{os.getgid()}",
+             "--tmpfs", "/tmp:rw,nosuid,size=64m",
+             "-v", f"{ROOT / DIFFERENTIAL}:/input/differential:ro",
+             "--entrypoint", "/work/harness.test", base_image,
+             "-test.run=^TestDifferential$", "-test.v"])
     with tempfile.TemporaryDirectory(prefix="parsarium-json-go-") as temporary:
         work = Path(temporary)
         first = probe(manifest, image, ROOT / CONTROL, work, "first")
@@ -77,7 +87,9 @@ def check(slug: str) -> dict:
             "differential_parser_features": len(other[0]),
             "differential_afl_tuples": len(other[1]),
             "parser_feature_difference": feature_difference,
-            "afl_tuple_difference": tuple_difference}
+            "afl_tuple_difference": tuple_difference,
+            **({"differential_control_pass": True}
+               if slug == "github_com_tidwall_gjson" else {})}
 
 
 def main() -> None:

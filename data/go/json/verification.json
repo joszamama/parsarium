@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:52:11.267341+00:00",
+  "checked_at_utc": "2026-11-17T05:35:16.410930+00:00",
   "platform": "linux/arm64 Docker",
   "go": "go1.27.1",
   "controls": {
@@ -51,6 +51,49 @@
           "version"
         ]
       },
+      "error": null
+    },
+    {
+      "package": "github.com/tidwall/gjson",
+      "module": "github.com/tidwall/gjson",
+      "version": "v1.20.4",
+      "scope": "RFC 8259 JSON text validated as a complete local byte slice, then traversed through GJSON Result nodes; observed control subset",
+      "command": "python3 scripts/run_project.py json go github_com_tidwall_gjson",
+      "receipt": "projects/json/go/github_com_tidwall_gjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 372,
       "error": null
     },
     {

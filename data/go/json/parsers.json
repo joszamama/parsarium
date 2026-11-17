@@ -51,6 +51,59 @@
     "project": "projects/json/go/github_com_json_iterator_go"
   },
   {
+    "name": "github.com/tidwall/gjson",
+    "module": "github.com/tidwall/gjson",
+    "version": "v1.20.4",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "gjson.ValidBytes([]byte) then gjson.ParseBytes([]byte); Result.ForEach traverses objects and arrays",
+    "documentation": "https://pkg.go.dev/github.com/tidwall/gjson@v1.20.4#ParseBytes",
+    "source": "https://github.com/tidwall/gjson/tree/v1.20.4",
+    "scope": "RFC 8259 JSON text validated as a complete local byte slice, then traversed through GJSON Result nodes; observed control subset",
+    "family": "tidwall/gjson path-query parser",
+    "family_note": "GJSON owns its byte/character scanner in gjson.go. ParseBytes assumes well-formed JSON, so the harness first invokes its own ValidBytes; the full Result tree is then visited with ForEach. It does not call encoding/json to parse input. The package serves JSON path queries, so its adoption count is not evidence of general-purpose decoding use.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 10420,
+      "source": "https://pkg.go.dev/github.com/tidwall/gjson?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_tidwall_gjson"
+  },
+  {
     "name": "github.com/goccy/go-json",
     "module": "github.com/goccy/go-json",
     "version": "v0.12.0",
