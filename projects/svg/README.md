@@ -6,6 +6,7 @@
 
 - [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
+- [librsvg / C](c/librsvg/README.md)
 - [libvips / C](c/libvips/README.md)
 - [nanosvg / C](c/nanosvg/README.md)
 - [sdl2_image / C](c/sdl2_image/README.md)
