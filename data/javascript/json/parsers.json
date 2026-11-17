@@ -676,5 +676,118 @@
     },
     "project": "projects/json/javascript/streamparser_json",
     "license_evidence": "https://registry.npmjs.org/@streamparser%2Fjson/0.0.26"
+  },
+  {
+    "name": "lossless-json",
+    "version": "4.3.3",
+    "license": "MIT",
+    "npm_integrity": "sha512-FGFrGArHsv7BRiYOf37ZRieT9HlKw+Kpu9HvtpYjcoOEo8lqNkjny8A2YAfWNWWQC+9pcLIrLZ+IviKJhaHwGQ==",
+    "tarball_sha256": "89652330e5ef627ada0d428c509a257f775a0685e5a7019714b6a4be943d032c",
+    "input_api": "parse(text) from the pinned ESM export after strict UTF-8 TextDecoder of local bytes; returns LosslessNumber objects for every JSON numeric token",
+    "documentation": "https://github.com/josdejong/lossless-json/blob/v4.3.3/README.md",
+    "source": "https://registry.npmjs.org/lossless-json/-/lossless-json-4.3.3.tgz",
+    "scope": "One RFC 8259 JSON text from strictly decoded local bytes as a nested value tree; each number retains its exact source lexeme in LosslessNumber.value",
+    "family": "lossless-json own recursive-descent JSON value parser",
+    "family_note": "Pinned lib/esm/parse.js implements parseValue, parseObject, parseArray, parseString, and parseNumber directly; it does not delegate input to native JSON.parse or to another selected JS JSON parser. Its source credits the parser of Tan Li Hou; that is an algorithmic inspiration, not a shared runtime parser family. lib/esm/numberParsers.js creates LosslessNumber representations from numeric lexemes.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 9738476,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/lossless-json",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "type": "object",
+      "members": {
+        "enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "missing": {
+          "type": "null"
+        },
+        "name": {
+          "type": "string",
+          "value": "parsarium"
+        },
+        "nested": {
+          "type": "object",
+          "members": {
+            "empty": {
+              "type": "object",
+              "members": {}
+            },
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "LosslessNumber",
+                      "raw": "1"
+                    },
+                    "ok": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "LosslessNumber",
+                      "raw": "2"
+                    },
+                    "text": {
+                      "type": "string",
+                      "value": "café \"quoted\""
+                    }
+                  }
+                }
+              ]
+            },
+            "level": {
+              "type": "LosslessNumber",
+              "raw": "2"
+            },
+            "list": {
+              "type": "array",
+              "items": []
+            }
+          }
+        },
+        "ratio": {
+          "type": "LosslessNumber",
+          "raw": "-0.25e1"
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rfc8259"
+            }
+          ]
+        },
+        "version": {
+          "type": "LosslessNumber",
+          "raw": "1"
+        }
+      }
+    },
+    "project": "projects/json/javascript/lossless_json",
+    "candidate_for_selection": true,
+    "verification_note": "Docker valid controls match independent Python JSON parsing with exact numeric lexemes: every JSON number is a LosslessNumber with raw source spelling. V8 covers 252 own lib/esm/parse.js lines; parser-source AFL++ ranges are stable over three fresh runs per control and differ by 8 features/8 tuples. No shared parser engine, malformed-input, or campaign claim. Selection pending integrator review."
   }
 ]

@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "lossless-json",
+  "release": "4.3.3",
+  "catalog_parser": "data/javascript/json/parsers.json",
+  "source_lock": "projects/json/javascript/lossless_json/source-lock.json",
+  "source_sha256": "89652330e5ef627ada0d428c509a257f775a0685e5a7019714b6a4be943d032c",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "type": "object",
+    "members": {
+      "enabled": {
+        "type": "boolean",
+        "value": true
+      },
+      "missing": {
+        "type": "null"
+      },
+      "name": {
+        "type": "string",
+        "value": "parsarium"
+      },
+      "nested": {
+        "type": "object",
+        "members": {
+          "empty": {
+            "type": "object",
+            "members": {}
+          },
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "members": {
+                  "id": {
+                    "type": "LosslessNumber",
+                    "raw": "1"
+                  },
+                  "ok": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "members": {
+                  "id": {
+                    "type": "LosslessNumber",
+                    "raw": "2"
+                  },
+                  "text": {
+                    "type": "string",
+                    "value": "café \"quoted\""
+                  }
+                }
+              }
+            ]
+          },
+          "level": {
+            "type": "LosslessNumber",
+            "raw": "2"
+          },
+          "list": {
+            "type": "array",
+            "items": []
+          }
+        }
+      },
+      "ratio": {
+        "type": "LosslessNumber",
+        "raw": "-0.25e1"
+      },
+      "tags": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string",
+            "value": "json"
+          },
+          {
+            "type": "string",
+            "value": "go"
+          },
+          {
+            "type": "string",
+            "value": "rfc8259"
+          }
+        ]
+      },
+      "version": {
+        "type": "LosslessNumber",
+        "raw": "1"
+      }
+    }
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "type": "array",
+    "items": [
+      {
+        "type": "LosslessNumber",
+        "raw": "1"
+      },
+      {
+        "type": "LosslessNumber",
+        "raw": "2.5e-1"
+      },
+      {
+        "type": "string",
+        "value": "two"
+      },
+      {
+        "type": "array",
+        "items": [
+          {
+            "type": "boolean",
+            "value": true
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "members": {
+          "k": {
+            "type": "array",
+            "items": []
+          },
+          "n": {
+            "type": "object",
+            "members": {
+              "deep": {
+                "type": "string",
+                "value": "A"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/lossless-json/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of lossless-json 4.3.3 lib/esm/parse.js; adapter and Jazzer.js runtime excluded",
+  "coverage_subject_prefix": "/work/node_modules/lossless-json/lib/esm/parse.js",
+  "afl_coverage_subject_prefix": "/work/node_modules/lossless-json/lib/esm/parse.js"
+}

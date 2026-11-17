@@ -160,12 +160,12 @@
   {
     "name": "lossless-json",
     "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "lead_kind": "verified_candidate_pending_selection",
     "version_seen": "4.3.3",
     "license": "MIT",
     "npm_downloads_30d": 9738476,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/lossless-json",
-    "reason": "Own parser (JSON.parse appears only in a doc comment); documented parse(text) takes a string. Not run.",
+    "reason": "Pinned 4.3.3 parse(text) reads strictly decoded local bytes through its own recursive-descent parser. Both valid controls match an independent JSON oracle including exact LosslessNumber numeric lexemes. Docker covers 252 own parse.js lines; three-run AFL++ parser-source feedback is stable and changes by 8 features and 8 tuples. Scoped project evidence is ready for selection review.",
     "source": "https://www.npmjs.com/package/lossless-json"
   },
   {
