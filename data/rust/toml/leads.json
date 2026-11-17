@@ -4,34 +4,12 @@
   "observed": "2026-11-17",
   "leads": [
     {
-      "name": "toml",
-      "metric_value": 323348893,
-      "metric": "crates.io recent downloads (90 days)",
-      "family": "toml / toml_parser family (toml-rs)",
-      "api_lead": "toml::from_str::<toml::Table>(&str) / toml::Table::from_str",
-      "note": "toml 0.9+ lexes and parses through toml_parser; shares that family with toml_edit.",
-      "source": "https://crates.io/crates/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "toml_edit",
-      "metric_value": 292512904,
-      "metric": "crates.io recent downloads (90 days)",
-      "family": "toml / toml_parser family (toml-rs)",
-      "api_lead": "str::parse::<toml_edit::DocumentMut>() / ImDocument::parse",
-      "note": "Format-preserving; parses through toml_parser.",
-      "source": "https://crates.io/crates/toml_edit",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
       "name": "toml_parser",
       "metric_value": 197554106,
       "metric": "crates.io recent downloads (90 days)",
       "family": "toml_parser (toml-rs)",
       "api_lead": "toml_parser::Source::new(&str).lex() + parse_document(events)",
-      "note": "Low-level lexer and event parser without a value tree; a harness would have to assemble tables itself.",
+      "note": "Low-level lexer and event parser without a value tree; a harness would have to assemble tables itself. Its source coverage and AFL++ feedback are recorded as the underlying parser of the selected toml and toml_edit paths (toml_parser 1.1.5+spec-1.1.0).",
       "source": "https://crates.io/crates/toml_parser",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
@@ -41,22 +19,30 @@
       "metric_value": 20713123,
       "metric": "crates.io recent downloads (90 days)",
       "family": "basic-toml (dtolnay; fork of toml 0.5 parser)",
-      "api_lead": "basic_toml::from_str::<serde_json::Value or own type>",
-      "note": "No own generic value type; serde-only.",
+      "api_lead": "basic_toml::from_str::<T: Deserialize>(&str); the crate exports only from_str, from_slice, to_string and Error",
+      "note": "No own generic value type and no datetime support: the pinned crate has no Datetime type and its tokenizer reads 1979-05-27T07:32:00Z as a number. Tried with basic_toml::from_str::<serde_json::Value> on 2026-11-17: service-config.toml fails with \"invalid number at line 8 column 9\" (owner.since) and typed-scalars.toml with \"invalid number at line 27 column 10\" (times.offset).",
       "source": "https://crates.io/crates/basic-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.1.10",
+      "source_sha256": "ba62675e8242a4c4e806d12f11d136e626e6c8361d6b829310732241652a178a",
+      "license": "MIT OR Apache-2.0 (LICENSE-MIT and LICENSE-APACHE in the .crate)",
+      "checked_at_utc": "2026-11-17"
     },
     {
       "name": "toml-span",
       "metric_value": 6719423,
       "metric": "crates.io recent downloads (90 days)",
       "family": "toml-span (Embark; own parser)",
-      "api_lead": "toml_span::parse(&str) -> Value with spans",
-      "note": null,
+      "api_lead": "toml_span::parse(&str) -> Result<Value<'_>, Error>; ValueInner::{String, Integer, Float, Boolean, Array, Table}",
+      "note": "ValueInner has no datetime variant and the README states \"No datetime deserialization\". Tried toml_span::parse on 2026-11-17: service-config.toml fails with Error { kind: InvalidNumber, span: 174..187, line_info: (7, 8) } (owner.since) and typed-scalars.toml with InvalidNumber at 439..452, line_info (26, 9) (times.offset).",
       "source": "https://crates.io/crates/toml-span",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.7.2",
+      "source_sha256": "ac7807845e399906fbe4e7f57369d284d5bf102836423073290b7c01948dbda3",
+      "license": "MIT OR Apache-2.0 (LICENSE-MIT and LICENSE-APACHE in the .crate)",
+      "checked_at_utc": "2026-11-17"
     },
     {
       "name": "taplo",
