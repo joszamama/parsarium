@@ -103,5 +103,110 @@
     },
     "rank": 1,
     "afl_feedback": "data/go/dns/github-com-miekg-dns-feedback-differential.json"
+  },
+  {
+    "name": "github.com/google/gopacket/layers",
+    "module": "github.com/google/gopacket",
+    "version": "v1.1.19",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the module zip (sha256 fc8cbe22...), checked in the image; pkg.go.dev lists BSD-3-Clause",
+    "input_api": "(*layers.DNS).DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error",
+    "documentation": "https://pkg.go.dev/github.com/google/gopacket@v1.1.19/layers#DNS.DecodeFromBytes",
+    "source": "https://proxy.golang.org/github.com/google/gopacket/@v/v1.1.19.zip",
+    "source_lock": "projects/dns/go/github_com_google_gopacket_layers/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "gopacket DNS layer (layers/dns.go)",
+    "family_note": "Own pure-Go decoder inside Google's packet-decoding library; no libpcap is used (the pcap subpackage is not imported). It keeps the 3-bit Z field. Its importer count covers the whole multi-protocol layers package. github.com/gopacket/gopacket is a community fork of the same code.",
+    "project": "projects/dns/go/github_com_google_gopacket_layers",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 5428,
+      "source": "https://pkg.go.dev/github.com/google/gopacket/layers?tab=importedby",
+      "captured_at_utc": "2026-11-17T16:40:46.428060+00:00",
+      "snapshot": "data/go/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/go/dns/github-com-google-gopacket-layers-feedback-differential.json"
   }
 ]
