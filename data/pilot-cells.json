@@ -324,8 +324,8 @@
     {
       "ecosystem": "go",
       "format": "mp3",
-      "status": "pilot_four_verified_bounded_search",
-      "verified_third_party_count": 4,
+      "status": "pilot_seven_verified_bounded_search",
+      "verified_third_party_count": 7,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "mp3",
@@ -337,16 +337,16 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 313,
       "unique_search_hits": 242,
-      "leads_recorded": 14,
+      "leads_recorded": 39,
       "leads_by_status": {
-        "shared_family": 4,
-        "excluded": 5,
-        "selected": 3,
-        "unresolved": 2
+        "selected": 6,
+        "shared_family": 3,
+        "excluded": 25,
+        "unresolved": 5
       },
       "ranking_metric": "pkg.go.dev Imported by package count",
-      "selection": "Four MPEG Layer III parser paths verified: hajimehoshi/go-mp3 (294 Imported by) and tosone/minimp3 (34) decode PCM; tcolgate/mp3 (62) and dmulholl/mp3lib (9) parse complete frame headers and boundaries without PCM. Each uses a documented local byte or io.Reader API and matches the applicable independent valid-control oracle. tosone/minimp3 invokes its vendored native C decoder through cgo; Go wrapper lines and native decoder lines are recorded separately.",
-      "uncertainty": "Four verified Go plain-MP3 paths; korandiz/mpa v1.0.0 is excluded by a pinned valid MPEG-2 control that yields zero frames and unexpected EOF, matching its MPEG-1-only header check; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Two leads remain unresolved and four recorded wrappers or forks share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling. minimp3 PCM hashes are pinned to the Clang-built linux/arm64 image and are not compared across toolchains.",
+      "selection": "Seven MPEG Layer III parser paths verified from four parser families. Own decoders or frame parsers: hajimehoshi/go-mp3 (294 Imported by) and tosone/minimp3 (34) decode PCM; tcolgate/mp3 (62) and dmulholl/mp3lib (9) parse complete frame headers and boundaries without PCM. Wrapper package APIs over the go-mp3 family, each with its own metric and that family stated: faiface/beep/mp3 (444; go-mp3 v0.3.0), hajimehoshi/ebiten/v2/audio/mp3 (144; go-mp3 v0.3.4, PCM byte-identical to the go-mp3 path) and gopxl/beep/v2/mp3 (44; go-mp3 v0.3.4). These wrappers add no independent decoder, and their AFL++ control differences are all in go-mp3 code. Each uses a documented local byte, io.Reader or io.ReadCloser API and matches the applicable independent valid-control oracle. tosone/minimp3 invokes its vendored native C decoder through cgo; Go wrapper lines and native decoder lines are recorded separately.",
+      "uncertainty": "Seven verified Go plain-MP3 paths; korandiz/mpa v1.0.0 is excluded by a pinned valid MPEG-2 control that yields zero frames and unexpected EOF, matching its MPEG-1-only header check; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Every hit with at least two Imported by packages is now a selected path or a recorded lead. Of the 13 one-importer hits, only sdobz/go-mpg123, a distinct decoder family, is recorded; the others were judged from path and synopsis only (go-mp3 or tcolgate forks by name, tag readers, a video converter, and HLS or livego copies). 39 leads are recorded: five remain unresolved (go-mp3 wrappers pipelined.dev/audio/mp3 and qiniu/audio/mp3, tcolgate wrapper sa6mwa/mp3duration, cgo minimp3 binding cowork-ai/go-minimp3 and cgo libmpg123 wrapper sdobz/go-mpg123, none harnessed), and three are unselected shared-family forks or wrappers. derat/mpeg and mattetti/audio/mp3 parse both valid controls correctly but are excluded by the feedback gate, because each control pair covers identical parser blocks. fgergo/mp3 is a byte-identical fork of tcolgate/mp3 (15 of 16 files identical) and is not counted. pkg.go.dev Imported by counts package adoption rather than MP3-specific use, and wrapper counts are not independent decoder adoption. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling. minimp3 PCM hashes are pinned to the Clang-built linux/arm64 image, and Beep float64 sample hashes to their go-mp3 release on linux/arm64; neither is compared across toolchains or releases.",
       "third_party_evidence": "data/go/mp3/parsers.json",
       "runtime_evidence": "data/go/mp3/standard.json",
       "registry_snapshot": "data/go/mp3/registry-snapshot.json",
@@ -354,10 +354,13 @@
       "working_target": 10,
       "ceiling": 10,
       "third_party_control_results": [
+        "projects/mp3/go/github_com_faiface_beep_mp3/verification.json",
         "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
+        "projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3/verification.json",
         "projects/mp3/go/github_com_tcolgate_mp3/verification.json",
-        "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
-        "projects/mp3/go/github_com_tosone_minimp3/verification.json"
+        "projects/mp3/go/github_com_gopxl_beep_v2_mp3/verification.json",
+        "projects/mp3/go/github_com_tosone_minimp3/verification.json",
+        "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json"
       ],
       "phase": "pilot",
       "complete": false
