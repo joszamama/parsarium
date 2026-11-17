@@ -1,0 +1,168 @@
+{
+  "captured_from": "data/rust/toml/registry-snapshot.json",
+  "metric": "crates.io recent downloads (90 days)",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "toml",
+      "metric_value": 323348893,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml / toml_parser family (toml-rs)",
+      "api_lead": "toml::from_str::<toml::Table>(&str) / toml::Table::from_str",
+      "note": "toml 0.9+ lexes and parses through toml_parser; shares that family with toml_edit.",
+      "source": "https://crates.io/crates/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml_edit",
+      "metric_value": 292512904,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml / toml_parser family (toml-rs)",
+      "api_lead": "str::parse::<toml_edit::DocumentMut>() / ImDocument::parse",
+      "note": "Format-preserving; parses through toml_parser.",
+      "source": "https://crates.io/crates/toml_edit",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml_parser",
+      "metric_value": 197554106,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml_parser (toml-rs)",
+      "api_lead": "toml_parser::Source::new(&str).lex() + parse_document(events)",
+      "note": "Low-level lexer and event parser without a value tree; a harness would have to assemble tables itself.",
+      "source": "https://crates.io/crates/toml_parser",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "basic-toml",
+      "metric_value": 20713123,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "basic-toml (dtolnay; fork of toml 0.5 parser)",
+      "api_lead": "basic_toml::from_str::<serde_json::Value or own type>",
+      "note": "No own generic value type; serde-only.",
+      "source": "https://crates.io/crates/basic-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml-span",
+      "metric_value": 6719423,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml-span (Embark; own parser)",
+      "api_lead": "toml_span::parse(&str) -> Value with spans",
+      "note": null,
+      "source": "https://crates.io/crates/toml-span",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "taplo",
+      "metric_value": 703745,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "taplo (rowan syntax tree)",
+      "api_lead": "taplo::parser::parse(&str).into_dom()",
+      "note": null,
+      "source": "https://crates.io/crates/taplo",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "nanoserde",
+      "metric_value": 488505,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "nanoserde (own TOML parser among formats)",
+      "api_lead": "nanoserde::TomlParser::parse(&str)",
+      "note": null,
+      "source": "https://crates.io/crates/nanoserde",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "boml",
+      "metric_value": 136881,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "boml (own parser)",
+      "api_lead": "boml::Toml::parse(&str)",
+      "note": null,
+      "source": "https://crates.io/crates/boml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml-spanner",
+      "metric_value": 44429,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml-spanner (own parser)",
+      "api_lead": "toml_spanner::parse(&str)",
+      "note": null,
+      "source": "https://crates.io/crates/toml-spanner",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    }
+  ],
+  "excluded": [
+    {
+      "name": "toml_datetime",
+      "metric_value": 352322591,
+      "status": "excluded",
+      "reason": "Datetime value type shared by toml and toml_edit; no document parser."
+    },
+    {
+      "name": "toml_writer",
+      "metric_value": 140246169,
+      "status": "excluded",
+      "reason": "Writer only."
+    },
+    {
+      "name": "toml_write",
+      "metric_value": 77871109,
+      "status": "excluded",
+      "reason": "Writer only."
+    },
+    {
+      "name": "cargo_toml",
+      "metric_value": 25938015,
+      "status": "excluded",
+      "reason": "Cargo manifest structs deserialized through toml."
+    },
+    {
+      "name": "pyproject-toml",
+      "metric_value": 1596251,
+      "status": "excluded",
+      "reason": "pyproject.toml structs over toml."
+    },
+    {
+      "name": "tree-sitter-toml-ng",
+      "metric_value": 1431829,
+      "status": "excluded",
+      "reason": "Tree-sitter grammar; syntax tree only."
+    },
+    {
+      "name": "oxc-toml",
+      "metric_value": 78263,
+      "status": "excluded",
+      "reason": "Formatter library."
+    },
+    {
+      "name": "toml-test-data",
+      "metric_value": 80257,
+      "status": "excluded",
+      "reason": "Test data."
+    },
+    {
+      "name": "toml-test-harness",
+      "metric_value": 56709,
+      "status": "excluded",
+      "reason": "Test harness."
+    },
+    {
+      "name": "toml-test",
+      "metric_value": 55958,
+      "status": "excluded",
+      "reason": "Test harness."
+    }
+  ]
+}

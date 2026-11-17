@@ -1,0 +1,232 @@
+{
+  "captured_from": "data/javascript/toml/registry-snapshot.json",
+  "metric": "npm downloads, last month",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "confbox",
+      "metric_value": 414804968,
+      "metric": "npm downloads, last month",
+      "family": "smol-toml family (confbox bundles smol-toml's parser)",
+      "api_lead": "parseTOML(string)",
+      "note": "Multi-format config parser; its TOML entry point is a bundled copy of smol-toml. Counts only as a wrapper path with that family.",
+      "source": "https://www.npmjs.com/package/confbox",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "smol-toml",
+      "metric_value": 252264468,
+      "metric": "npm downloads, last month",
+      "family": "smol-toml (own parser)",
+      "api_lead": "parse(string) -> TomlTable with TomlDate values",
+      "note": null,
+      "source": "https://www.npmjs.com/package/smol-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml",
+      "metric_value": 164115023,
+      "metric": "npm downloads, last month",
+      "family": "toml (BinaryMuse; own PEG parser)",
+      "api_lead": "toml.parse(string)",
+      "note": "Registry description claims TOML 1.1.0 compliance for 5.0.1; earlier releases were TOML 0.4.",
+      "source": "https://www.npmjs.com/package/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "@iarna/toml",
+      "metric_value": 46454916,
+      "metric": "npm downloads, last month",
+      "family": "@iarna/toml (own parser)",
+      "api_lead": "TOML.parse(string) / TOML.parse.async",
+      "note": "TOML 0.5.0; dates are Date objects with isDate/isTime flags.",
+      "source": "https://www.npmjs.com/package/@iarna/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml-eslint-parser",
+      "metric_value": 7684028,
+      "metric": "npm downloads, last month",
+      "family": "toml-eslint-parser (own parser; ESLint AST)",
+      "api_lead": "parseTOML(string) -> AST; getStaticTOMLValue(ast)",
+      "note": null,
+      "source": "https://www.npmjs.com/package/toml-eslint-parser",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "@ltd/j-toml",
+      "metric_value": 948738,
+      "metric": "npm downloads, last month",
+      "family": "j-toml (LongTengDao)",
+      "api_lead": "TOML.parse(string, options)",
+      "note": null,
+      "source": "https://www.npmjs.com/package/@ltd/j-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "@decimalturn/toml-patch",
+      "metric_value": 503811,
+      "metric": "npm downloads, last month",
+      "family": "toml-patch (own parser)",
+      "api_lead": "parse(string)",
+      "note": null,
+      "source": "https://www.npmjs.com/package/@decimalturn/toml-patch",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "@taplo/lib",
+      "metric_value": 408802,
+      "metric": "npm downloads, last month",
+      "family": "taplo (Rust, compiled to WebAssembly)",
+      "api_lead": "Taplo.initialize().then(t => t.parse...)",
+      "note": "WebAssembly build of the Rust taplo parser; JS coverage would not reach parser source.",
+      "source": "https://www.npmjs.com/package/@taplo/lib",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "js-toml",
+      "metric_value": 198933,
+      "metric": "npm downloads, last month",
+      "family": "js-toml (own parser)",
+      "api_lead": "load(string)",
+      "note": null,
+      "source": "https://www.npmjs.com/package/js-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml-j0.4",
+      "metric_value": 59237,
+      "metric": "npm downloads, last month",
+      "family": "toml-j0.4 (PEG)",
+      "api_lead": "toml.parse(string)",
+      "note": "TOML 0.4.0 only.",
+      "source": "https://www.npmjs.com/package/toml-j0.4",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "fast-toml",
+      "metric_value": 23058,
+      "metric": "npm downloads, last month",
+      "family": "fast-toml",
+      "api_lead": "parse(string)",
+      "note": "TOML 0.5.",
+      "source": "https://www.npmjs.com/package/fast-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    }
+  ],
+  "excluded": [
+    {
+      "name": "gray-matter",
+      "metric_value": 55194677,
+      "status": "excluded",
+      "reason": "Front-matter splitter; TOML needs a caller-supplied engine."
+    },
+    {
+      "name": "micromark-extension-frontmatter",
+      "metric_value": 44907266,
+      "status": "excluded",
+      "reason": "Recognizes front-matter fences only; no TOML parsing."
+    },
+    {
+      "name": "mdast-util-frontmatter",
+      "metric_value": 44453889,
+      "status": "excluded",
+      "reason": "Front-matter AST node only; no TOML parsing."
+    },
+    {
+      "name": "remark-frontmatter",
+      "metric_value": 32778550,
+      "status": "excluded",
+      "reason": "Front-matter fences only; no TOML parsing."
+    },
+    {
+      "name": "eslint-plugin-toml",
+      "metric_value": 2916425,
+      "status": "excluded",
+      "reason": "Lint rules over toml-eslint-parser."
+    },
+    {
+      "name": "tomlify-j0.4",
+      "metric_value": 2726084,
+      "status": "excluded",
+      "reason": "Encoder only."
+    },
+    {
+      "name": "cosmiconfig-toml-loader",
+      "metric_value": 2194239,
+      "status": "excluded",
+      "reason": "Loader delegating to @iarna/toml."
+    },
+    {
+      "name": "@types/iarna__toml",
+      "metric_value": 1249335,
+      "status": "excluded",
+      "reason": "Type definitions only."
+    },
+    {
+      "name": "@tree-sitter-grammars/tree-sitter-toml",
+      "metric_value": 1248411,
+      "status": "excluded",
+      "reason": "Tree-sitter grammar; syntax tree only."
+    },
+    {
+      "name": "@dprint/toml",
+      "metric_value": 1246280,
+      "status": "excluded",
+      "reason": "Formatter (WebAssembly)."
+    },
+    {
+      "name": "prettier-plugin-toml",
+      "metric_value": 681808,
+      "status": "excluded",
+      "reason": "Formatter."
+    },
+    {
+      "name": "@taplo/cli",
+      "metric_value": 374008,
+      "status": "excluded",
+      "reason": "CLI."
+    },
+    {
+      "name": "tombi",
+      "metric_value": 45123,
+      "status": "excluded",
+      "reason": "CLI toolkit."
+    },
+    {
+      "name": "v8r",
+      "metric_value": 66761,
+      "status": "excluded",
+      "reason": "CLI validator."
+    },
+    {
+      "name": "@rsbuild/plugin-toml",
+      "metric_value": 34229,
+      "status": "excluded",
+      "reason": "Build plugin delegating to a TOML parser."
+    },
+    {
+      "name": "@shopify/toml-patch",
+      "metric_value": 114753,
+      "status": "excluded",
+      "reason": "WebAssembly build of Rust toml_edit (toml_parser family); JS coverage would not reach parser source."
+    },
+    {
+      "name": "@rainbowatcher/toml-edit-js",
+      "metric_value": 114319,
+      "status": "excluded",
+      "reason": "WebAssembly build of Rust toml_edit (toml_parser family)."
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "kind": "standard_host_control",
+  "api": "tomllib.load(local binary file)",
+  "runtime": "CPython 3.13.1 standard library tomllib",
+  "python": "3.13.1 (v3.13.1:06714517797, Dec  3 2024, 14:00:22) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "tomllib_source_sha256": "71f67036895f4c5acab942618af0cbd3d814451ba61e967f358d0f341a5b8f51",
+  "tomllib_parser_source_sha256": "4579b04a7566452304781ccce37d3ebc1c36e810b058bdb1f33c0e51ddab0397",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "output": {
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "database": {
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      }
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        }
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "second_control": {
+    "control": "controls/toml/typed-scalars.toml",
+    "control_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+    "output": {
+      "integers": {
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        }
+      },
+      "floats": {
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        },
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        }
+      },
+      "keys": {
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        },
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        }
+      }
+    },
+    "pass": true
+  },
+  "pass": true,
+  "scope_note": "Host run, no container, no coverage or AFL++ feedback. tomllib is a vendored copy of tomli and is also the oracle in controls/toml/check_controls.py; the hand-written expected trees are the independent check."
+}
