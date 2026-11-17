@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "bleksak/sqlite-toolkit",
+  "release": "1.0.4",
+  "catalog_parser": "data/php/sql/parsers.json",
+  "source_lock": "projects/sql/php/bleksak_sqlite_toolkit/source-lock.json",
+  "source_sha256": "de54ebff771fa846c84edcdfa50cd98619b3ca0ad4a6fe9d6a5e0fc49a3dd048",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in bleksak/sqlite-toolkit PHP source (Lexer, state-machine Parser states and Ast node classes); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/bleksak/sqlite-toolkit/",
+  "format_specific_coverage_file_suffix": "/src/Parser.php",
+  "scope": "SQL text from local bytes passed to Parser::parse(), which returns one typed AST statement node per ';'-terminated statement (Select with a SingleSelect body, Insert with a ValuesSource). The harness reads SingleSelect items, where, groupBy and orderBy and Insert table, columns and ValuesSource rows, and walks the public node properties for FromSource table names, Join nodes, Call names and String/Integer/FloatLiteral values (literal nodes keep the number source text).",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "dialect": "SQLite 3.54 grammar (the only dialect)",
+  "parser_family": "bleksak/sqlite-toolkit: hand-written token-at-a-time state-machine parser for the SQLite 3.54.0 grammar with its own lexer and typed AST; independent of the phpMyAdmin, PHP-SQL-Parser, pg_builder, crodas, libpg_query and inilim/sqlite-parser (phplrt) code bases",
+  "api": "(new Bleksak\\SqliteToolkit\\Parser())->parse(local SQL text) -> list of AST statement nodes (Ast\\Select, Ast\\Insert, ...)"
+}

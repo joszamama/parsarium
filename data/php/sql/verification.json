@@ -657,8 +657,100 @@
       "parser_feature_difference": 127,
       "project_receipt": "projects/sql/php/crodas_sql_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/php/crodas_sql_parser/differential.json"
+    },
+    {
+      "package": "bleksak/sqlite-toolkit",
+      "version": "1.0.4",
+      "pass": true,
+      "input_api": "(new Bleksak\\SqliteToolkit\\Parser())->parse(local SQL text) -> list of AST statement nodes (Ast\\Select, Ast\\Insert, ...)",
+      "dialect": "SQLite 3.54 grammar (the only dialect)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "bleksak/sqlite-toolkit hand-written SQLite state-machine parser (typed AST)",
+      "parser_source_files": 90,
+      "parser_source_lines_covered": 1073,
+      "afl_tuple_difference": 983,
+      "parser_feature_difference": 995,
+      "project_receipt": "projects/sql/php/bleksak_sqlite_toolkit/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/bleksak_sqlite_toolkit/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T23:28:31.200567+00:00"
+  "checked_at_utc": "2026-11-17T23:31:54.841896+00:00"
 }

@@ -349,6 +349,17 @@
       "reason": "README documents an AST parser, but 1.2.2 requires symfony/yaml 4.2.0-BETA2, which Composer 2.11 refuses to install because of five Packagist security advisories (PKSA-nktx-f1n1-b4yd and others). The advisory block was not overridden, so the controls were not run. Re-checked 2026-11-18: 1.2.2 is still the latest release with the same symfony/yaml constraint; the advisory block was not overridden."
     },
     {
+      "name": "bleksak/sqlite-toolkit",
+      "status": "selected",
+      "metric_value": 14,
+      "metric_error": null,
+      "latest_release_observed": "1.0.4",
+      "family": "bleksak/sqlite-toolkit hand-written SQLite state-machine parser",
+      "documented_api_lead": "Parser::parse",
+      "reason": "Round-3 search hit (\"sqlite parser\", 2026-11-18). (new Parser())->parse($sql) runs the package lexer and a token-at-a-time state machine for the SQLite 3.54.0 grammar and returns typed Ast\\Select and Ast\\Insert nodes (MIT LICENSE in the archive). Verified with both controls; Xdebug covers 1073 package lines and the parser-line AFL++ bridge differs by 983 tuples. Independent of inilim/sqlite-parser (phplrt grammar). Very low adoption (14 lifetime downloads).",
+      "selected_release": "1.0.4"
+    },
+    {
       "name": "lbreme/lexepa-sql",
       "status": "excluded",
       "metric_value": 7,

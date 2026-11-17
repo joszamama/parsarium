@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "(new Bleksak\\SqliteToolkit\\Parser())->parse(local SQL text) -> list of AST statement nodes (Ast\\Select, Ast\\Insert, ...)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:30:52.058946+00:00",
+  "manifest": "projects/sql/php/bleksak_sqlite_toolkit/manifest.json",
+  "image_id": "sha256:8105ca513bd0dc45a187ca8d86fb667c3172b1e8fa098485b344e9a47c77c781",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "de54ebff771fa846c84edcdfa50cd98619b3ca0ad4a6fe9d6a5e0fc49a3dd048",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "17334513f675da0298655ff22a2da7a76e03375236bdcbf6882f7b4aaecae161",
+    "composer.json": "1444a8aa03111762c2497b1685b9d9059202b285217e9d7d203d0a08ab7d62ca",
+    "composer.lock": "c0aa094156f82e4902fb27f23717e02c42b5e655e1f0d68fc45674c711a8dd22",
+    "fuzz-target.php": "ce06aa611e84b8baa762a0943ec8119dee8da50fb90b3aad5a9142de98d474a2",
+    "harness.php": "e8622543779a7f385fe7e849221569443e87d7c381ba093646ddbd3d615e3bf5",
+    "manifest.json": "b61d7cef584a3f8d66e3ca85f4742732af6595a8a8ffd9da6edd53b2106770b1",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "1fc5450b813ab1dbaeccd85726bc826079fb0e68630c2734762dc0caca44da16",
+    "source-lock.json": "00b3016fb0e4221b47c760b0359155d36078bd8f23f1cb2fb528054c69d369bc",
+    "target.json": "182a1c596530d29f3e0f5707d47436c06e20e3176d2832bd6aeb2040bbd2e38b"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 90,
+  "parser_source_lines_covered": 1073,
+  "format_specific_source_lines_covered": 31,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/bleksak_sqlite_toolkit/target/coverage/coverage.json",
+  "pass": true
+}
