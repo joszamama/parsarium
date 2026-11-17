@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T16:57:49.892855+00:00",
+  "projects_total": 2,
+  "projects_passed": 2,
+  "differential_kind": "fixed valid second control controls/toml/typed-scalars.toml; parser-only probes with parser-scoped AFL++ allowlists and three repeats per control",
+  "parser_feature_scope": "covered LLVM source lines under each pinned parser source prefix in the parser-only probe; harness and typed-tree printing excluded",
+  "afl_feedback_scope": "parser-only probe with an AFL_LLVM_ALLOWLIST naming the single parser source file; the instrumented object set is checked with nm during the build",
+  "standard_feedback": "none: the ISO C standard library documents no TOML API",
+  "results": [
+    {
+      "project": "toml/c/tomlc17",
+      "pass": true,
+      "overlay_receipt_sha256": "cc01cb37b244c8b92edaae2290847f4c9282cca3786d71b670a63b58df1caa9d",
+      "differential_receipt_sha256": "4b0cff015bc3b608e480ee441bb74313f2b97c736fda5b37583d28d44b6b756c",
+      "control_afl_tuples": 268,
+      "differential_afl_tuples": 368,
+      "afl_tuple_difference": 216,
+      "control_parser_lines": 1034,
+      "differential_parser_lines": 1105,
+      "source_line_difference": 424,
+      "repeats_per_control": 3
+    },
+    {
+      "project": "toml/c/toml-c",
+      "pass": true,
+      "overlay_receipt_sha256": "60697f7bb5d2bba9e51c799cc3ee13ff959052e243c2c81f8acc003d7a9da999",
+      "differential_receipt_sha256": "6952132016f94037f7d14b5f4c8ee01e680860592eb18f124ea736ebe1caf723",
+      "control_afl_tuples": 233,
+      "differential_afl_tuples": 193,
+      "afl_tuple_difference": 156,
+      "control_parser_lines": 630,
+      "differential_parser_lines": 512,
+      "source_line_difference": 421,
+      "repeats_per_control": 3
+    }
+  ]
+}

@@ -1,0 +1,521 @@
+[
+  {
+    "name": "tomlc17",
+    "version": "R261116",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned R261116 archive (MIT, Copyright (c) 2024-2026, CK Tan)",
+    "input_api": "toml_parse(const char *src, int len) -> toml_result_t; walk result.toptab (toml_datum_t: type, u.tab, u.arr, u.str, u.int64, u.fp64, u.boolean, u.ts)",
+    "documentation": "https://github.com/cktan/tomlc17/blob/R261116/API.md#toml_parse",
+    "documentation_note": "API.md at tag R261116 documents toml_parse, toml_free and the toml_datum_t fields; src/tomlc17.h in the pinned archive declares them with the same comments.",
+    "source": "https://github.com/cktan/tomlc17/releases/tag/R261116",
+    "scope": "TOML 1.0.0 document from an in-memory byte buffer of explicit length, default options, decoded into a toml_datum_t tree",
+    "family": "tomlc17 (cktan; single-file scanner and parser in src/tomlc17.c)",
+    "family_note": "tomlc17 is a separate rewrite by the author of tomlc99 with its own scanner and datum tree; it shares no parser source with tomlc99 or its toml-c fork. Its compat/tomlc99 directory is an API shim over tomlc17 and is not compiled here.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "metric": {
+      "name": "Debian popcon installations",
+      "value": null,
+      "ranked": false,
+      "reason": "No C TOML library is packaged in Debian (popcon source/binary substring search) or Conan Center, so the primary C metric has no value for this path.",
+      "snapshot": "data/c/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:12.747400+00:00"
+    },
+    "adoption_exception": {
+      "name": "GitHub stargazers of the pinned upstream repository (C TOML fallback; no Debian or Conan package)",
+      "value": 201,
+      "source": "https://api.github.com/repos/cktan/tomlc17",
+      "snapshot": "data/c/toml/leads.json",
+      "captured_at_utc": "2026-11-17T16:41:53.808725+00:00"
+    },
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/c/tomlc17"
+  },
+  {
+    "name": "toml-c",
+    "version": "2025-12-18",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned commit archive (MIT, Copyright (c) CK Tan, carried over from tomlc99); the GitHub API reports NOASSERTION because the file names tomlc99",
+    "input_api": "toml_parse(char *toml, char *errbuf, int errbufsz) on a NUL-terminated copy; walk with toml_table_len/toml_table_key and toml_table_*/toml_array_* accessors",
+    "documentation": "https://github.com/arp242/toml-c/blob/6a38d404184a3b399d61821dbfff229579d59a00/toml.h",
+    "documentation_note": "The README at the pinned commit points to toml.h for usage; toml.h documents toml_parse, toml_free, the table/array accessors and the toml_value_t/toml_timestamp_t fields (kind, tz in minutes, millisec).",
+    "source": "https://github.com/arp242/toml-c/tree/6a38d404184a3b399d61821dbfff229579d59a00",
+    "release_note": "No tags or releases upstream; pinned to commit 6a38d404184a3b399d61821dbfff229579d59a00 (2025-12-18), recorded by commit date.",
+    "scope": "TOML 1.0.0 document from a NUL-terminated in-memory string, decoded into a toml_table_t tree and read through the typed accessors",
+    "family": "tomlc99 family (arp242 toml-c fork)",
+    "family_note": "toml-c is a fork of cktan/tomlc99 (README: \"This is a fork of https://github.com/cktan/tomlc99\") with an incompatible API and TOML 1.1 changes; it shares tomlc99 parser lineage. tomlc99 itself remains a lead because its pinned commit rejects lowercase \\u escapes in the second control. tomlc17 is a separate rewrite.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "metric": {
+      "name": "Debian popcon installations",
+      "value": null,
+      "ranked": false,
+      "reason": "No C TOML library is packaged in Debian (popcon source/binary substring search) or Conan Center, so the primary C metric has no value for this path.",
+      "snapshot": "data/c/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:12.747400+00:00"
+    },
+    "adoption_exception": {
+      "name": "GitHub stargazers of the pinned upstream repository (C TOML fallback; no Debian or Conan package)",
+      "value": 114,
+      "source": "https://api.github.com/repos/arp242/toml-c",
+      "snapshot": "data/c/toml/leads.json",
+      "captured_at_utc": "2026-11-17T16:41:54.338883+00:00"
+    },
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/c/toml-c"
+  }
+]

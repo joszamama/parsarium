@@ -9,10 +9,10 @@
       "metric": "GitHub stargazers (adoption exception)",
       "family": "tomlc99 (cktan)",
       "api_lead": "toml_parse(char*, errbuf, len) / toml_parse_file(FILE*); toml_table_t accessors",
-      "note": "MIT-style license file; no tagged releases, pin a commit.",
+      "note": "README at the pinned commit (2026-11-04) declares the library obsolete and points to tomlc17. No tagged releases.",
       "source": "https://github.com/cktan/tomlc99",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false,
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
       "github": {
         "stargazers_count": 664,
         "archived": false,
@@ -21,26 +21,19 @@
         "language": "C",
         "url": "https://api.github.com/repos/cktan/tomlc99",
         "captured_at_utc": "2026-11-17T16:41:53.383778+00:00"
-      }
-    },
-    {
-      "name": "tomlc17",
-      "metric_value": 201,
-      "metric": "GitHub stargazers (adoption exception)",
-      "family": "tomlc17 (cktan; rewrite, separate code base from tomlc99)",
-      "api_lead": "toml_parse(const char*, int len) / toml_parse_file_ex; toml_datum_t tree",
-      "note": "TOML 1.0/1.1; tagged releases.",
-      "source": "https://github.com/cktan/tomlc17",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false,
-      "github": {
-        "stargazers_count": 201,
-        "archived": false,
-        "license_spdx": "MIT",
-        "pushed_at": "2026-11-17T00:06:00Z",
-        "language": "C",
-        "url": "https://api.github.com/repos/cktan/tomlc17",
-        "captured_at_utc": "2026-11-17T16:41:53.808725+00:00"
+      },
+      "pinned_commit": "62ce93ceb713dc49909d0fef1411f9d37bef83f2",
+      "pinned_source": "https://codeload.github.com/cktan/tomlc99/tar.gz/62ce93ceb713dc49909d0fef1411f9d37bef83f2",
+      "pinned_source_sha256": "158dbe2b3a98923277db182ec6151ef39fbd3a70f6cc4a6b0460bbcd02ad9a50",
+      "license_checked": "LICENSE in the pinned archive is the MIT License text (Copyright (c) CK Tan); GitHub reports NOASSERTION.",
+      "evidence": {
+        "checked_at_utc": "2026-11-17",
+        "api": "toml_parse(char *conf, char *errbuf, int errbufsz) on a NUL-terminated copy; toml_key_in/toml_*_in/toml_*_at accessors",
+        "service_config": "pass: typed tree equals controls/toml/service-config.expected.json",
+        "typed_scalars": "fail: toml_parse returns NULL",
+        "error": "line 17: expect hex char",
+        "cause": "toml.c (scan_string, lines 1695-1699 and 1744-1748) accepts only uppercase hex digits after \\u/\\U (\"0123456789ABCDEF\"); the control writes \\u00e9, which TOML 1.0.0 HEXDIG allows. A diagnostic copy with \\u00E9 (control unchanged) produced the expected tree, so this is the only difference on the two controls.",
+        "harness_route": "local clang build of the same typed-tree harness used for the promoted C paths; no Docker receipt recorded"
       }
     },
     {
@@ -49,7 +42,7 @@
       "metric": "GitHub stargazers (adoption exception)",
       "family": "libtoml (ajwans; Ragel state machine)",
       "api_lead": "toml_parse(struct toml_node*, char*, int)",
-      "note": "Last push 2019; TOML 0.4-era; likely rejects TOML 1.0 control features.",
+      "note": "README at the latest commit 03e8a3ab1d4d014e63a2befe8a48e74783a81521 (2016-06-06) states \"Currently targetted at TOML v0.4.0\"; building needs ragel and ICU. TOML 0.4.0 has no dotted keys, hex/octal/binary integers or local date/time types, all of which the second control uses. Not run within this bounded pass.",
       "source": "https://github.com/ajwans/libtoml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false,
@@ -61,28 +54,22 @@
         "language": "C",
         "url": "https://api.github.com/repos/ajwans/libtoml",
         "captured_at_utc": "2026-11-17T16:41:54.862087+00:00"
-      }
+      },
+      "pinned_source_checked": "https://codeload.github.com/ajwans/libtoml/tar.gz/03e8a3ab1d4d014e63a2befe8a48e74783a81521",
+      "pinned_source_sha256_checked": "9b5ff5c7e4468f1401efb294369a78a8ce89b41c704abecc9d9954ccae674b2c"
+    }
+  ],
+  "excluded": [],
+  "promoted": [
+    {
+      "name": "tomlc17",
+      "status": "resolved_verified_selected",
+      "project": "projects/toml/c/tomlc17"
     },
     {
       "name": "toml-c",
-      "metric_value": 114,
-      "metric": "GitHub stargazers (adoption exception)",
-      "family": "tomlc99 family (arp242 fork)",
-      "api_lead": "toml_parse(char*, errbuf, len)",
-      "note": "Fork of tomlc99 with TOML 1.1 changes; shared-family candidate.",
-      "source": "https://github.com/arp242/toml-c",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false,
-      "github": {
-        "stargazers_count": 114,
-        "archived": false,
-        "license_spdx": "NOASSERTION",
-        "pushed_at": "2025-12-18T14:25:14Z",
-        "language": "C",
-        "url": "https://api.github.com/repos/arp242/toml-c",
-        "captured_at_utc": "2026-11-17T16:41:54.338883+00:00"
-      }
+      "status": "resolved_verified_selected",
+      "project": "projects/toml/c/toml-c"
     }
-  ],
-  "excluded": []
+  ]
 }
