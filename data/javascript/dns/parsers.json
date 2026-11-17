@@ -883,5 +883,116 @@
       "dns_packet_share": 0.018,
       "dns_packet_normalized_share": 0.157
     }
+  },
+  {
+    "name": "@portable/dns-packet",
+    "version": "0.1.0",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 29276e97...), checked in the image",
+    "input_api": "decode(bytes: Uint8Array, options?) -> DecodedPacket",
+    "documentation": "https://github.com/portablejs/portable/blob/main/packages/dns-packet/README.md",
+    "documentation_note": "The npm tarball's README.md (0.1.0) documents DnsPacket.decode(bytes) with its options and errors; the link is to the monorepo's default branch.",
+    "source": "https://www.npmjs.com/package/@portable/dns-packet/v/0.1.0",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "@portable/dns-packet own decoder (dist/packet.js, wire.js, records.js)",
+    "family_note": "Own TypeScript-built decoder (dist/packet.js, wire.js, records.js) published as an ES module; its README says it replaces dns-packet, but only 6 of its 831 distinct non-test source lines occur in dns-packet 5.6.1. It decodes AD and CD but not the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). Types, classes, opcode and rcode are names; the harness maps them back to numbers with the package's own dist/codes.js tables, which are outside its export map and are loaded by file path. Address text comes from its own codecs over @portable/ip. It was first released on 2026-10-27, so its 30-day count covers a new package.",
+    "project": "projects/dns/javascript/portable_dns_packet",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 594,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@portable%2Fdns-packet",
+      "captured_at_utc": "2026-11-17T19:47:31.497456+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 9,
+    "afl_feedback": "data/javascript/dns/portable-dns-packet-feedback-differential.json",
+    "source_overlap_with_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection against dns-packet 5.6.1",
+      "distinct_lines": 831,
+      "dns_packet_distinct_lines": 1106,
+      "shared_distinct_lines": 6,
+      "share": 0.007
+    }
   }
 ]

@@ -1,0 +1,95 @@
+{
+  "kind": "third_party",
+  "api": "decode(bytes: Uint8Array) from @portable/dns-packet (ES module, loaded with require) on local bytes; type, class, opcode and rcode names mapped back to numbers with the package's own dist/codes.js tables",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:52:11.676861+00:00",
+  "manifest": "projects/dns/javascript/portable_dns_packet/manifest.json",
+  "image_id": "sha256:9bb4fc6dfae1ca0f1e4fcb39cfa7fdb926880b7c8d4e0b23f7c6e638799f7e9c",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-portable-dns-packet-target@0.1.0 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- @portable/dns-packet@0.1.0",
+    "  +-- @portable/bytes@0.1.0",
+    "  +-- @portable/errors@0.1.0",
+    "  `-- @portable/ip@0.1.0"
+  ],
+  "source_sha256": "29276e97e76eac222bdf3893fd3d3133a3c55d255e97b4db89633c63b5616d18",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "21392fa3979757f164efcbb05ea1234da57b714fdf5041726af4fce02d581b8d",
+    "fuzz.js": "e2c775b951efc7ef460275ffcc833604829ae58f88463e232a3a388ab3f22898",
+    "harness.js": "c6add8eae114addab33b4c85e22d7d86a3692a57e75c5915b2e844c6ad25e155",
+    "manifest.json": "06659414fdc674ebb004e8434c1093c3a409e88a62079a9c3d44e2c28c8552a1",
+    "package-lock.json": "05a3360fa15bc2367dcfed3c3365b106f915d61185a7bca544115c62de2f2811",
+    "package.json": "fe99869569462457a5a8d8043686ff06a8f657c41456531b2a211a43cd353aee",
+    "replay.js": "4303f822c933f19d7b35d977142a94bc9f14033c57db00fb3b3ba64c2a69d31e",
+    "run-control.js": "3f5d0e840a20d1fc5c9615216aadac6488397ee80dbc031fb5ed6806529744ac",
+    "source-lock.json": "8eda18370628bfd6738e0d0f898c20c5019e5561a2526d887d2dbe9ef00d6dc7"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 580,
+  "format_specific_source_lines_covered": 118,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/javascript/portable_dns_packet/target/coverage/coverage.json",
+  "pass": true
+}
