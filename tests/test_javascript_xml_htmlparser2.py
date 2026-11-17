@@ -11,7 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "projects/xml/javascript/htmlparser2"
 OVERLAY = ROOT / "fuzzing/afl-native/xml/javascript/htmlparser2"
-CANDIDATE = ROOT / "data/javascript/xml/htmlparser2-candidate.json"
+CATALOG = ROOT / "data/javascript/xml/parsers.json"
 FEEDBACK = ROOT / "data/javascript/xml/htmlparser2-feedback-differential.json"
 
 
@@ -36,8 +36,8 @@ class JavaScriptXmlHtmlparser2Test(unittest.TestCase):
             self.assertIn(digest, dockerfile)
         self.assertIn("{ xmlMode: true }", (PROJECT / "adapter.mjs").read_text())
 
-    def test_candidate_row_records_html_metric_and_no_namespace_resolution(self):
-        parser, = read(CANDIDATE)
+    def test_selected_row_records_html_metric_and_no_namespace_resolution(self):
+        parser, = [item for item in read(CATALOG) if item["name"] == "htmlparser2"]
         manifest = read(PROJECT / "manifest.json")
         snapshot = read(ROOT / "data/javascript/xml/registry-snapshot.json")
         self.assertEqual(parser["popularity"]["value"], snapshot["downloads"]["htmlparser2"]["value"], 526964241)

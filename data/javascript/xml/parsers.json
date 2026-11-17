@@ -106,6 +106,101 @@
     "verification_note": "jsdom is an API path over the selected saxes 6.0.0 tokenizer, not a separate parser engine; the receipt counts jsdom package lines, jsdom's own XML document parser lib/jsdom/browser/parser/xml.js alone, and saxes saxes.js lines separately. The jsdom package count is dominated by module loading and window setup; the coverage run only constructs the document and closes the window, so the adapter's DOM read-back is not counted. Both valid controls, catalog-ns.xml and order-default-ns.xml, match the expat oracle exactly, including namespace URIs, attribute order and text; comments and processing instructions remain DOM nodes and split text as in expat. AFL++ feedback spans /work/node_modules/ during construction only: saxes, jsdom XML tree construction and DOM node creation, plus input-independent module-load and window setup ranges; window named-property and id-cache updates from id attributes are input-dependent jsdom construction, and xmlchars ranges are saxes character-class checks. Scope limits: jsdom copies DOCTYPE <!ENTITY name \"value\"> declarations into saxes' entity table (a jsdom extension, not general DTD processing), forces XML 1.0 rules for version 1.1 documents, and drops text outside the root element. DOMParser.parseFromString shares parseIntoDocument but turns errors into a parsererror document; it was not the measured path. No malformed-input, resource-use, or fuzz campaign was run."
   },
   {
+    "name": "htmlparser2",
+    "version": "12.0.0",
+    "license": "MIT",
+    "npm_integrity": "sha512-Tz7u1i95/g2x2jz81+x0FBVhBhY5aRTvD3tXXdFaljuNdzDLJ8UGNRrTcj2cgQvAg3iW/h77Fz15nLW0L0CrZw==",
+    "tarball_sha256": "bd21df686ef9b29b6786aac9aa75a9d20e1e884ad3f3089882db1d576dd4aaa0",
+    "input_api": "new Parser(handler, {xmlMode: true}).write(string) then end(), after strict UTF-8 TextDecoder of local bytes; handler callbacks onopentagname, onattribute, onclosetag, ontext, oncdatastart, oncomment/oncommentend, onprocessinginstruction, onerror",
+    "documentation": "https://github.com/fb55/htmlparser2/blob/c73fec0c0586647cd1269d2598e2ba4203d0207f/README.md",
+    "source": "https://github.com/fb55/htmlparser2/tree/c73fec0c0586647cd1269d2598e2ba4203d0207f",
+    "license_evidence": "package/LICENSE in the pinned npm tarball (MIT)",
+    "scope": "One UTF-8 local document through htmlparser2's xmlMode callback events: raw qualified element and attribute names (prefix:local, no namespace URIs), attribute order and decoded values, xmlns/xmlns:* as ordinary attributes, decoded text and CDATA, comments, processing instructions including the XML declaration, CDATA count, tree depth; no DOCTYPE",
+    "namespace_resolution": false,
+    "well_formedness_checking": false,
+    "family": "htmlparser2 forgiving HTML/XML tokenizer (own Tokenizer.js state machine) with entities decode trees",
+    "family_note": "htmlparser2 has its own Tokenizer and Parser; it shares no code with sax, saxes, @xmldom/xmldom, fast-xml-parser or libxml2. In xmlMode it switches the entities decoder to the XML decode tree, keeps tag case, recognizes CDATA and self-closing tags, and disables HTML implied open/close rules. It neither resolves namespaces nor enforces XML 1.0 well-formedness, so this is an XML-tolerant tokenizer path, not an XML 1.0 + Namespaces parser.",
+    "shared_families": [],
+    "control": "controls/xml/catalog-ns.xml",
+    "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 526964241,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/htmlparser2",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json",
+      "limitation": "Package-wide npm downloads. htmlparser2 is mostly an HTML parser (default mode, and the parser under cheerio, domutils users and many HTML tooling chains); the count does not measure xmlMode use or XML parsing and must not be read as XML adoption."
+    },
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "cdata_sections": 1,
+      "comments": [],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "processing_instructions": [
+        "xml version=\"1.0\" encoding=\"UTF-8\""
+      ],
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "cdata_sections": 0,
+      "comments": [
+        " order receipt "
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "processing_instructions": [
+        "xml version=\"1.0\" encoding=\"UTF-8\"",
+        "audit step=\"1\""
+      ],
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/javascript/htmlparser2/oracle.py (Python expat without namespace processing, ordered attributes, raw XML declaration via DefaultHandlerExpand)",
+    "project": "projects/xml/javascript/htmlparser2",
+    "verification_note": "Measured as a raw-name XML event path, not as a namespace-aware XML parser. htmlparser2 returns qualified names only, so prefixes, local names, attribute order and xmlns declarations are compared as raw qualified-name strings; no namespace URI, expanded name or in-scope binding is produced by the parser or inferred by the harness. The comparison oracle is expat in non-namespace mode, which exposes the same fields. Fields htmlparser2 exposes but the oracle cannot (attribute quote style, startIndex/endIndex) are not compared."
+  },
+  {
     "name": "sax",
     "version": "1.6.1",
     "license": "BlueOak-1.0.0",
@@ -368,5 +463,109 @@
     },
     "project": "projects/xml/javascript/xml_js",
     "verification_note": "Docker valid-control replay matches the Expat oracle on both namespace-aware controls. V8 coverage counts 163 xml-js lib/xml2js.js tree-builder lines and 888 underlying sax lib/sax.js tokenizer lines separately. AFL++ feedback is scoped to the sax file only and is stable on repeated valid-control replays with an input-dependent 40-feature/40-tuple difference. xml-js delegates tokenization to the same sax 1.6.1 code selected independently as sax and by xml2js; it adds ordered tree construction, not an independent tokenizer. Namespace URI expansion is done by the adapter from preserved xmlns attributes. The hardcoded pureJsParser=true path does not use the optional node-expat import. Two valid controls do not prove complete XML conformance; no malformed, resource-use or campaign tests were run."
+  },
+  {
+    "name": "xmldoc",
+    "version": "3.0.0",
+    "license": "MIT",
+    "npm_integrity": "sha512-lwxfsv7+O+0vSVSDlfK60afS7kWWGMFeJmbZQwRfHPY37oPDBQ1iI4sCE14bE+NeJeNG0hC0M4RETUavPcvk6w==",
+    "tarball_sha256": "5546bf0c619adf2b7583797849d905b5e0e92ef3cfcf2b5f04bc0ca49d570e2a",
+    "input_api": "new XmlDocument(xml: string) (ESM import { XmlDocument } from 'xmldoc'), after strict UTF-8 TextDecoder of local bytes; the result is read through the documented members name, attr and children (type element, text, cdata, comment) and doctype",
+    "documentation": "https://github.com/nfarina/xmldoc/blob/3a5eb7c0af49006b7eede95114c7be49adfde61d/README.md",
+    "source": "https://github.com/nfarina/xmldoc/tree/3a5eb7c0af49006b7eede95114c7be49adfde61d",
+    "license_evidence": "package/LICENSE in the pinned npm tarball (MIT), byte-identical to LICENSE at npm gitHead 3a5eb7c0",
+    "scope": "One UTF-8 local document through xmldoc's in-memory tree: the root element and its descendants with raw qualified element and attribute names (prefix:local, no namespace URIs), attribute order and decoded values, xmlns/xmlns:* as ordinary attributes, decoded text and CDATA, comments inside the root, CDATA count, tree depth and the doctype string (empty; no DOCTYPE in either control)",
+    "namespace_resolution": false,
+    "well_formedness_checking": "partial: strict sax errors thrown during write(); close() is never called, so end-of-document checks are not run",
+    "family": "sax-js strict XML state machine (sax 1.6.1 in non-namespace mode), shared with the selected sax path, xml2js and xml-js",
+    "family_note": "xmldoc has no tokenizer of its own. dist/index.js creates sax.parser(true) (strict, no xmlns option), writes the trimmed string once and builds XmlElement/XmlTextNode/XmlCDataNode/XmlCommentNode objects from onopentag, onclosetag, ontext, oncdata, oncomment and ondoctype; onerror rethrows. Its ^1.6.0 range resolves to sax 1.6.1, the same release as the selected sax path. sax runs here without namespace processing, so this is a raw-name XML tree path, not an XML 1.0 + Namespaces parser.",
+    "shared_families": [
+      "sax",
+      "xml2js",
+      "xml-js"
+    ],
+    "control": "controls/xml/catalog-ns.xml",
+    "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 21414489,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xmldoc",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json",
+      "limitation": "Package-wide npm downloads over all versions, including the 1.x/2.x CommonJS lines still pulled by dependents; it is an adoption proxy for the package, not for the 3.0.0 ESM release or for any particular input. The count is also not added to sax's: xmldoc downloads pull sax transitively."
+    },
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "cdata_sections": 1,
+      "comments": [],
+      "doctype": "",
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "cdata_sections": 0,
+      "comments": [],
+      "doctype": "",
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/javascript/xmldoc/oracle.py (Python expat without namespace processing, ordered attributes, comments and text inside the root only, processing instructions ignored)",
+    "project": "projects/xml/javascript/xmldoc",
+    "verification_note": "Measured as a raw-name XML tree path, not as a namespace-aware XML parser. xmldoc documents that namespaces are ignored (<office:body> becomes \"office:body\"), so prefixes, local names, attribute order and xmlns declarations are compared as raw qualified-name strings; no namespace URI, expanded name or in-scope binding is produced by xmldoc or inferred by the harness. The comparison oracle is expat in non-namespace mode restricted to what the tree keeps. Fields xmldoc exposes but the oracle cannot (line, column, position, startTagPosition, val) are not compared.",
+    "data_loss": [
+      "Namespace URIs: none are produced. In order-default-ns.xml, <plain xmlns=\"\"> is only the attribute string 'xmlns=' and order/line/sku/plain/leaf share the unprefixed names; a consumer cannot tell that order, line and sku are in urn:parsarium:order while plain and leaf are in no namespace. Equal qualified names with different bindings, or different prefixes for one URI, are indistinguishable without consumer-side resolution.",
+      "Processing instructions are not kept: the XML declarations of both controls and <?audit step=\"1\"?> in order-default-ns.xml are absent from the tree, and text split only by a PI is not distinguishable from one run.",
+      "Comments and text before or after the root element are dropped by design (CHANGELOG 3.0.0); the order control's prolog comment ' order receipt ' is not in the tree.",
+      "attr is a plain object keyed by qualified name; sax strict mode rejects duplicates, so no attribute is lost on valid input."
+    ],
+    "source_read_limits": [
+      "The constructor runs xml.toString().trim() before parsing, so leading and trailing whitespace (and a leading U+FEFF, which String.prototype.trim removes) never reaches sax. Not exercised: only valid controls were run.",
+      "parser.write(xml) is not followed by parser.close(), so sax's end-of-input checks (unclosed elements, missing root) never run; truncated documents can return a partial tree. Read from dist/index.js only; no malformed input was run.",
+      "sax.parser(true) without strictEntities uses sax's HTML entity table for named references. Read from sax lib/sax.js only; not exercised.",
+      "The TypeScript signature is constructor(xml: string). A Buffer works only through xml.toString(), which decodes UTF-8 with replacement characters; the harness passes a strictly decoded string instead."
+    ]
   }
 ]

@@ -11,7 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "projects/xml/javascript/xmldoc"
 OVERLAY = ROOT / "fuzzing/afl-native/xml/javascript/xmldoc"
-CANDIDATE = ROOT / "data/javascript/xml/xmldoc-candidate.json"
+CATALOG = ROOT / "data/javascript/xml/parsers.json"
 FEEDBACK = ROOT / "data/javascript/xml/xmldoc-feedback-differential.json"
 
 
@@ -40,8 +40,8 @@ class JavaScriptXmlXmldocTest(unittest.TestCase):
             self.assertIn(digest, dockerfile)
         self.assertIn("new XmlDocument(text)", (PROJECT / "adapter.mjs").read_text())
 
-    def test_candidate_row_records_metric_family_and_no_namespace_resolution(self):
-        parser, = read(CANDIDATE)
+    def test_selected_row_records_metric_family_and_no_namespace_resolution(self):
+        parser, = [item for item in read(CATALOG) if item["name"] == "xmldoc"]
         manifest = read(PROJECT / "manifest.json")
         snapshot = read(ROOT / "data/javascript/xml/registry-snapshot.json")
         downloads = snapshot["downloads"]["xmldoc"]
