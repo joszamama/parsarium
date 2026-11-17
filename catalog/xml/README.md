@@ -9,7 +9,7 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | [C](c/README.md) | pilot_two_selected_search_bounded | 2 | 2 |
 | [C++](cpp/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
 | [Go](go/README.md) | pilot_two_selected_search_bounded | 2 | 2 |
-| [Java](java/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
+| [Java](java/README.md) | pilot_four_selected_search_bounded | 4 | 4 |
 | [JavaScript](javascript/README.md) | pilot_five_selected_search_bounded | 5 | 5 |
 | [Python](python/README.md) | pilot_two_third_party_one_standard_verified_bounded_search_pending | 2 | 2 |
 | [Rust](rust/README.md) | pilot_four_paths_verified_search_bounded | 4 | 4 |

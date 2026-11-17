@@ -41,3 +41,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml java dom4j
+python3 parsarium.py run xml java dom4j controls/xml/catalog-ns.xml
+```
