@@ -457,5 +457,158 @@
     },
     "project": "projects/toml/javascript/ltd_j_toml",
     "verification_note": "The README in the 1.38.0 tarball documents TOML.parse(source[, options]) with options.joiner (the string that joins multi-line string lines; required when a document has multi-line strings) and options.bigint (true returns every integer as BigInt), and TOML.parse[1.0] to fix the specification version. With bigint: true, integers are BigInts and floats Numbers, so integer 1000 and float 1e3 stay distinct; offset date-times, local date-times, local dates and local times come back as distinct exported classes. The adapter decodes the bytes with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), calls TOML.parse[1.0] once with joiner '\\n' and bigint true, and walks the result: offset date-times through the documented getUTC* getters (millisecond precision), local kinds through their toISOString, floats as shortest round-trip digits written positionally. Tables are instances of j-toml's internal null-prototype Table class. It never re-parses the text. Both controls match the expected typed trees exactly (data/javascript/toml/ltd-j-toml-tree-verification.json). Only valid controls were run."
+  },
+  {
+    "name": "@decimalturn/toml-patch",
+    "version": "3.3.3",
+    "license": "MIT",
+    "npm_integrity": "sha512-x3+jj/r8uEEnnVs0vgdSYxn4YXcnklZPmbQ105DI/e4mng+9z/eDUuc8PMwASab51CWt15DTVHLYiEbDBUzHJA==",
+    "tarball_sha256": "ed9d062bd0620484156ac1e425fcd1ef4d9ceb3c94a79b698e47cae55b0c547f",
+    "source": "https://registry.npmjs.org/@decimalturn/toml-patch/-/toml-patch-3.3.3.tgz",
+    "license_evidence": "https://registry.npmjs.org/@decimalturn/toml-patch/3.3.3 (license MIT; LICENSE file in the tarball)",
+    "documentation": "https://www.npmjs.com/package/@decimalturn/toml-patch/v/3.3.3",
+    "input_api": "parse(text, { integersAsBigInt: true }) on local bytes decoded as strict UTF-8 text; returns plain objects with BigInt integers, Number floats and the exported OffsetDateTime/LocalDateTime/LocalDate/LocalTime Date subclasses",
+    "scope": "One TOML document from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parse(text, { integersAsBigInt: true }); the typed tree is built from the returned objects, arrays and typed values. Date-times are observed with millisecond precision. Only the two valid TOML 1.0.0 controls were run",
+    "family": "toml-patch (Tim Hall's format-preserving TOML parser, maintained fork by DecimalTurn)",
+    "family_note": "@decimalturn/toml-patch 3.3.3 is the maintained continuation of Tim Hall's toml-patch (npm toml-patch, 1,667 downloads in the same window, not selected): its own tokenizer, concrete/abstract syntax-tree parser that keeps comments and formatting, and AST-to-value conversion, published as one minified bundle dist/toml-patch.js. The package has no runtime dependencies and calls no other TOML parser; it shares no code with smol-toml, toml-eslint-parser or j-toml. @shopify/toml-patch, despite the name, is a WebAssembly build of Rust toml_edit (excluded).",
+    "shared_family_statement": "Own family (toml-patch lineage); no code shared with smol-toml, toml-eslint-parser or j-toml.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "metric": {
+      "name": "npm downloads, last month",
+      "value": 503811,
+      "window": "2026-10-18 to 2026-11-16",
+      "source": "https://api.npmjs.org/downloads/point/last-month/@decimalturn/toml-patch",
+      "snapshot": "data/javascript/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:52.972792+00:00"
+    },
+    "project": "projects/toml/javascript/decimalturn_toml_patch",
+    "verification_note": "The package type declarations (dist/toml-patch.d.ts in the 3.3.3 tarball) document parse(value, options?) with ParseOptions.integersAsBigInt (true returns every integer as bigint; the default 'asNeeded' returns safe integers as Numbers, which would make integer 1000 and float 1e3 indistinguishable) and the exported Date subclasses LocalDate, LocalTime, LocalDateTime and OffsetDateTime. The adapter decodes the bytes with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), calls parse once with integersAsBigInt true, and walks the result: date kinds from the exported classes, their fields through Date.prototype.toISOString (millisecond precision; local kinds are stored in the Date's UTC fields, the offset date-time Date is the instant), floats as shortest round-trip digits written positionally. It never re-parses the text. The published bundle is minified into 83 long lines, so its line counts understate the code reached. Both controls match the expected typed trees exactly (data/javascript/toml/decimalturn-toml-patch-tree-verification.json). Only valid controls were run."
   }
 ]

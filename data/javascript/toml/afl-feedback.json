@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T19:58:22.573791+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T20:08:42.647234+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_typed_scalars",
   "results": [
     {
@@ -160,6 +160,47 @@
       },
       "differential_only_parser_source_lines_by_file": {
         "index.mjs": 140
+      }
+    },
+    {
+      "project": "toml/javascript/decimalturn_toml_patch",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "6c98d5cd5b418f0da8e887190d2f5d84aa75cad2582021bc3cd291366ea62275",
+      "base_project_receipt_sha256": "5f698a1c270560901524fe649484fc7e6ea258ce7cf40e0b5f2f155b6d85b383",
+      "base_image_id": "sha256:0eaa030c43d891642007269b43a915d6451c45249359190c353ea2447bf1963e",
+      "overlay_image_id": "sha256:17b3ec233e53dc4628b1d6f219ca958d9091ad2fac971ee1a035966837def721",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output_matches_expected": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 238,
+      "control_afl_tuples": 256,
+      "differential_parser_features": 280,
+      "differential_afl_tuples": 299,
+      "parser_feature_difference": 182,
+      "afl_tuple_difference": 181,
+      "control_only_afl_tuples": 69,
+      "differential_only_afl_tuples": 112,
+      "control_only_features_by_file": {
+        "dist/toml-patch.js": 70
+      },
+      "differential_only_features_by_file": {
+        "dist/toml-patch.js": 112
+      },
+      "control_parser_source_lines_by_file": {
+        "dist/toml-patch.js": 51
+      },
+      "differential_parser_source_lines_by_file": {
+        "dist/toml-patch.js": 54
+      },
+      "control_only_parser_source_lines_by_file": {},
+      "differential_only_parser_source_lines_by_file": {
+        "dist/toml-patch.js": 3
       }
     }
   ]
