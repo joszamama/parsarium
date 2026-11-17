@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T15:28:52.946754+00:00",
+  "project": "mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3",
+  "pass": true,
+  "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+  "base_project_receipt_sha256": "57cc7e67e481ab89875142ba47f42745429ff9f072cde7074ae2ff5f8b39fb17",
+  "overlay_receipt_sha256": "c927382f4f02f76b051d5d851cf561fef1e0a7bfc51b22efcd7c7b0c3c25ecaa",
+  "base_image_id": "sha256:49a75ede0a63d99c69b25665332c3c706e1142862f2a92fa2449452c9650a078",
+  "overlay_image_id": "sha256:500c48774d396dacdf3213235c1b17a6cc495dbd6c6ac347f8b41b0825f4b085",
+  "repeats_per_control": 2,
+  "first_control": "controls/mp3/go-tone-44k-mono.mp3",
+  "first_sha256": "494492685c8ac5bfdbcbefa217c18a0fd4d2a44e21831e15a3fe0b0861d96c36",
+  "second_control": "controls/mp3/go-tone-22k-stereo.mp3",
+  "second_sha256": "e14721b65abfed142af10f51b43f29993a22003091eaa29086d2e36d7157761a",
+  "second_control_output": {
+    "decoded_bytes": 27648,
+    "length_bytes": 27648,
+    "pcm_sha256": "454a8580b026f4b35026042df3e21768beb3b9fc1f1f1037701902abab2ea0a9",
+    "sample_rate": 22050
+  },
+  "first_parser_features": 412,
+  "second_parser_features": 412,
+  "parser_feature_difference": 112,
+  "first_only_features_by_file": {
+    "github.com/hajimehoshi/go-mp3/decode.go": 2,
+    "github.com/hajimehoshi/go-mp3/internal/bits/bits.go": 1,
+    "github.com/hajimehoshi/go-mp3/internal/frame/frame.go": 1,
+    "github.com/hajimehoshi/go-mp3/internal/frameheader/frameheader.go": 7,
+    "github.com/hajimehoshi/go-mp3/internal/maindata/huffman.go": 3,
+    "github.com/hajimehoshi/go-mp3/internal/maindata/maindata.go": 37,
+    "github.com/hajimehoshi/go-mp3/internal/sideinfo/sideinfo.go": 5
+  },
+  "second_only_features_by_file": {
+    "github.com/hajimehoshi/go-mp3/decode.go": 4,
+    "github.com/hajimehoshi/go-mp3/internal/frame/frame.go": 10,
+    "github.com/hajimehoshi/go-mp3/internal/frameheader/frameheader.go": 12,
+    "github.com/hajimehoshi/go-mp3/internal/huffman/huffman.go": 1,
+    "github.com/hajimehoshi/go-mp3/internal/maindata/huffman.go": 1,
+    "github.com/hajimehoshi/go-mp3/internal/maindata/maindata.go": 25,
+    "github.com/hajimehoshi/go-mp3/internal/sideinfo/sideinfo.go": 2,
+    "github.com/hajimehoshi/go-mp3/source.go": 1
+  },
+  "first_afl_tuples": 432,
+  "second_afl_tuples": 431,
+  "afl_tuple_difference": 111,
+  "second_case_kind": "valid_control"
+}

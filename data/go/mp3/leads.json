@@ -20,12 +20,13 @@
   },
   {
     "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
-    "status": "shared_family",
+    "status": "selected",
     "imported_by_packages": 144,
     "version_seen": "v2.10.6",
     "license": "Apache-2.0",
-    "reason": "Ebitengine audio wrapper around github.com/hajimehoshi/go-mp3; not counted separately.",
-    "source": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3"
+    "reason": "Selected as a package API over the go-mp3 family. Pinned v2.10.6 DecodeWithoutResampling(io.Reader) returns the go-mp3 v0.3.4 stream unchanged: both untagged valid controls give 50,688 and 27,648 PCM bytes, byte-identical to the selected go-mp3 receipt. Docker coverage, wrapper and go-mp3 lines, and stable AFL++ feedback whose control differences are all in go-mp3 are in the project receipts.",
+    "source": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3",
+    "evidence": "projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3/verification.json"
   },
   {
     "name": "github.com/tcolgate/mp3",
