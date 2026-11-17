@@ -11,6 +11,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)
 - [github.com/goccy/go-json / Go](go/github_com_goccy_go_json/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
+- [github.com/tidwall/gjson / Go](go/github_com_tidwall_gjson/README.md)
 - [gson / Java](java/gson/README.md)
 - [jackson-databind / Java](java/jackson_databind/README.md)
 - [@streamparser/json / JavaScript](javascript/streamparser_json/README.md)
