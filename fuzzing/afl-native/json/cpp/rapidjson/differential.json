@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T08:28:57.367657+00:00",
+  "project": "json/cpp/rapidjson",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "28e6ccb02f2b2849e414cfb9f5758a639de554d89418efcc9be47d6ab71f4ec3",
+  "overlay_receipt_sha256": "bd75f49413e575d7e54aa561fa208c1607d03a560fad70b7257bb7f26a04e4da",
+  "base_image_id": "sha256:c1d6693b8921f1ae96e01726635cc69a49326f78e9f9c68cac8c452bff3b8b40",
+  "overlay_image_id": "sha256:c9004d10b922addb34bd1c655b028f269abb3c0d51fe6fcdd527d4d264854db7",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 2,
+  "first_control": "controls/json/nested-object.json",
+  "first_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "second_control": "controls/json/nested-array.json",
+  "second_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "second_control_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "first_source_lines": 716,
+  "second_source_lines": 695,
+  "source_line_difference": 31,
+  "first_only_lines_by_file": {
+    "include/rapidjson/document.h": 5,
+    "include/rapidjson/encodings.h": 4,
+    "include/rapidjson/reader.h": 17
+  },
+  "second_only_lines_by_file": {
+    "include/rapidjson/encodings.h": 1,
+    "include/rapidjson/reader.h": 4
+  },
+  "first_afl_tuples": 375,
+  "second_afl_tuples": 319,
+  "afl_tuple_difference": 88,
+  "second_case_kind": "valid_control"
+}

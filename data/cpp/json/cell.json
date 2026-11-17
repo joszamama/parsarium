@@ -1,10 +1,10 @@
 {
   "ecosystem": "cpp",
   "format": "json",
-  "status": "pilot_three_selected_search_bounded",
+  "status": "pilot_four_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "json"
@@ -12,10 +12,10 @@
   "search_limit_per_query": 320,
   "search_hits_recorded": 320,
   "unique_search_hits": 320,
-  "unresolved_documentation_leads": 7,
+  "unresolved_documentation_leads": 6,
   "ranking_metric": "Debian popcon installations (sourcemax/by_inst), maximum over binary packages of the source package",
-  "selection": "Among control-verified C++ JSON paths, rank by recorded Debian popcon source-package sourcemax installations: JsonCpp 32,707, simdjson 2,688, nlohmann/json 1,799. simdjson runtime is pulled in by dependents, while nlohmann is header-only and has only a development package; the source-package metric therefore measures different installation patterns. The source count remains the one primary metric; development-package counts and GitHub stars are labeled cross-checks only.",
-  "uncertainty": "Three independent C++ JSON parser families now pass two valid controls and native parser source/AFL feedback: JsonCpp 1.9.8 (32,707 Debian popcon sourcemax), simdjson 5.0.4 (2,688) and nlohmann/json 3.12.0 (1,799). Source-package installation counts favor runtime libraries and undercount header-only libraries; simdjson-dev has 36 installations, nlohmann-json3-dev 1,799, and JSON-specific use is unknown. Seven documentation leads remain unverified, including Boost.JSON and RapidJSON. The search records 320 Debian source-name hits; no complete top-ten claim follows. The ISO C++ standard library has no JSON API. Valid controls do not establish complete RFC 8259 support.",
+  "selection": "Four control-verified C++ JSON paths rank by recorded Debian source-package sourcemax installations: JsonCpp 32,707, simdjson 2,688, nlohmann/json 1,799, RapidJSON 899. The source metric favors runtime packages; development-package counts are a separately labeled cross-check.",
+  "uncertainty": "Four independent C++ JSON parser families pass two valid controls and scoped parser source/AFL feedback. RapidJSON 1.1.0 is a 2016 release that needs Clang -fdelayed-template-parsing to build without source changes on this toolchain; this target uses AddressSanitizer and AFL++, without UndefinedBehaviorSanitizer. Source-package installations favor runtime packages and undercount header-only libraries; RapidJSON is header-only with 899 Debian development-package installs. Six documentation leads remain unverified, including Boost.JSON. The search records 320 Debian source-name hits; no complete top-ten claim follows. JSON-specific use is unknown; valid controls do not establish complete RFC 8259 support.",
   "third_party_evidence": "data/cpp/json/parsers.json",
   "third_party_control_results": "data/cpp/json/verification.json",
   "runtime_evidence": "data/cpp/json/standard.json",
@@ -23,5 +23,6 @@
   "unresolved_leads": "data/cpp/json/leads.json",
   "source_lock": "projects/json/cpp/jsoncpp/source-lock.json",
   "extra_source_lock": "projects/json/cpp/nlohmann-json/source-lock.json",
-  "afl_feedback": "data/cpp/json/afl-feedback.json"
+  "afl_feedback": "data/cpp/json/afl-feedback.json",
+  "rapidjson_source_lock": "projects/json/cpp/rapidjson/source-lock.json"
 }

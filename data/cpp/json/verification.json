@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T07:18:53.772567+00:00",
+  "checked_at_utc": "2026-11-17T08:29:38.601491+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -140,6 +140,66 @@
       },
       "parser_source_lines_covered": 1147,
       "format_specific_source_lines_covered": 134,
+      "error": null
+    },
+    {
+      "package": "RapidJSON",
+      "version": "1.1.0",
+      "scope": "RFC 8259-compatible JSON text through length-bounded DOM Parse; object/array roots on two valid controls",
+      "command": "python3 scripts/run_project.py json cpp rapidjson",
+      "receipt": "projects/json/cpp/rapidjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 691,
+      "format_specific_source_lines_covered": 347,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_keys": []
+      },
       "error": null
     }
   ],

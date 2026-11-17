@@ -176,5 +176,63 @@
       ]
     },
     "project": "projects/json/cpp/nlohmann-json"
+  },
+  {
+    "name": "RapidJSON",
+    "version": "1.1.0",
+    "license": "MIT (parser headers)",
+    "license_evidence": "https://github.com/Tencent/rapidjson/blob/v1.1.0/license.txt",
+    "input_api": "rapidjson::Document::Parse(const char* json, size_t length) over locally supplied bytes; default strict parse flags",
+    "documentation": "https://rapidjson.org/md_doc_tutorial.html",
+    "source": "https://github.com/Tencent/rapidjson/tree/v1.1.0",
+    "adapter": "projects/json/cpp/rapidjson/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259-compatible JSON text through length-bounded DOM Parse; object/array roots on two valid controls",
+    "family": "RapidJSON header-only SAX/DOM parser",
+    "family_note": "Own header-only GenericReader and GenericDocument implementation; no JsonCpp, simdjson or nlohmann/json parser dependency. Only include/rapidjson headers are compiled; the archive also contains third-party examples/tests with separate license terms.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 899,
+      "binary_package": "rapidjson-dev",
+      "dev_package_installs": {
+        "rapidjson-dev": 899
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/rapidjson",
+    "not_verified": "Only two valid nested object/array controls; scalar roots, optional relaxed flags, large inputs and malformed input remain unverified."
   }
 ]
