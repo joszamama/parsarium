@@ -170,111 +170,6 @@
       "tree_caveat": "The bs4 tree drops CDATA section boundaries and the XML declaration node and lists xmlns declarations after ordinary attributes; element/attribute namespaces, comments, processing instructions and character-data order are kept on both controls."
     },
     {
-      "package": "xmltodict",
-      "version": "1.0.4",
-      "pass": true,
-      "output": {
-        "root": "library",
-        "namespace": "urn:parsarium:xml:pilot",
-        "child_count": 2,
-        "first_item_id": "7",
-        "first_item_text": "A & B",
-        "second_item_text": "π"
-      },
-      "package_source_lines": 97,
-      "expat_source_lines": 2330,
-      "expat_xmlparse_lines": 1615,
-      "project_receipt": "projects/xml/python/xmltodict/verification.json",
-      "project_receipt_sha256": "70a2dd8cf120b99d9ba8cbda4be0b9633334c28381a7eafee8831da7837bd657"
-    },
-    {
-      "package": "untangle",
-      "version": "1.3.1",
-      "pass": true,
-      "input_api": "untangle.parse(pathlib.Path(local XML file)); Element._name, _attributes, cdata and children filled by untangle.Handler from SAX startElement/characters/endElement events",
-      "tested_sax_parser": "defusedxml.expatreader.DefusedExpatParser",
-      "control": "controls/xml/catalog-ns.xml",
-      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
-      "output": {
-        "attributes": [
-          "version=1",
-          "id=a1",
-          "c:lang=es",
-          "id=b2"
-        ],
-        "elements": [
-          "c_catalog",
-          "item",
-          "item",
-          "name",
-          "note"
-        ],
-        "max_depth": 3,
-        "namespace_declarations": 2,
-        "namespaces": [
-          "urn:parsarium:catalog",
-          "urn:parsarium:item"
-        ],
-        "text": [
-          "Café & té",
-          "Zürich <HQ>",
-          "x < y"
-        ],
-        "root": "c_catalog"
-      },
-      "differential_control": "controls/xml/order-default-ns.xml",
-      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
-      "differential_output": {
-        "attributes": [
-          "n=1",
-          "p:currency=EUR",
-          "n=2",
-          "note=say \"hi\""
-        ],
-        "elements": [
-          "order",
-          "line",
-          "sku",
-          "p_amount",
-          "line",
-          "plain",
-          "leaf"
-        ],
-        "max_depth": 4,
-        "namespace_declarations": 3,
-        "namespaces": [
-          "urn:parsarium:order",
-          "urn:parsarium:price"
-        ],
-        "text": [
-          "A-7",
-          "12.50 €"
-        ],
-        "root": "order"
-      },
-      "differential_pass": true,
-      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image, projected to untangle qualified-name output with the documented \"-\", \".\", \":\" -> \"_\" rule",
-      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
-      "untangle_matches_projected_oracle": true,
-      "feature_namespaces_true_root_children": 0,
-      "parser_family": "untangle SAX handler over defusedxml 0.7.1 DefusedExpatParser over CPython 3.14 xml.sax/pyexpat over Expat 2.10.0 (shared with xmltodict and xml.etree.ElementTree)",
-      "package_source_files": 3,
-      "package_source_lines": 49,
-      "untangle_lines": 35,
-      "sax_driver_source_lines": 111,
-      "expat_source_lines": 2238,
-      "expat_xmlparse_lines": 1509,
-      "differential_package_source_lines": 49,
-      "differential_sax_driver_source_lines": 112,
-      "differential_expat_source_lines": 2475,
-      "differential_expat_xmlparse_lines": 1586,
-      "afl_feedback": "data/python/xml/untangle-valid-feedback.json",
-      "project_receipt": "projects/xml/python/untangle/verification.json",
-      "project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
-      "namespace_caveat": "untangle drops namespace URIs. The adapter does not reconstruct them: element names are lossy (':' becomes '_', indistinguishable from '-', '.' or a literal '_'), so any URI in the summary would be adapter-side namespace processing, not untangle's parse result. Shared fields are therefore compared against the independent lxml/libxml2 oracle projected to untangle's documented naming rule, and the expanded names it loses are recorded in data/python/xml/untangle-valid-feedback.json.",
-      "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
-    },
-    {
       "package": "defusedxml",
       "version": "0.7.1",
       "pass": true,
@@ -357,6 +252,24 @@
       "project_receipt_sha256": "1785d16a7798119424f409fbc8d61fac4b454a636c99e856cb0d36c7f3d23edf",
       "namespace_caveat": "ElementTree discards xmlns declarations, so the summary has no namespace_declarations count and its namespaces field lists the URIs in expanded names. On both controls this equals the declared non-empty URIs; the comparison with the independent lxml/libxml2 oracle drops only the declaration count.",
       "tree_caveat": "The default TreeBuilder drops comments and processing instructions; text and tail data are kept per node (CDATA included)."
+    },
+    {
+      "package": "xmltodict",
+      "version": "1.0.4",
+      "pass": true,
+      "output": {
+        "root": "library",
+        "namespace": "urn:parsarium:xml:pilot",
+        "child_count": 2,
+        "first_item_id": "7",
+        "first_item_text": "A & B",
+        "second_item_text": "π"
+      },
+      "package_source_lines": 97,
+      "expat_source_lines": 2330,
+      "expat_xmlparse_lines": 1615,
+      "project_receipt": "projects/xml/python/xmltodict/verification.json",
+      "project_receipt_sha256": "70a2dd8cf120b99d9ba8cbda4be0b9633334c28381a7eafee8831da7837bd657"
     },
     {
       "package": "xmlschema",
@@ -544,6 +457,175 @@
       "coverage_caveat": "libxml2 parser.c lines 8700-8720 (an address-sensitive attribute hash lookup) vary between identical replays: over three replays the catalog control's parser.c total ranged 1,484-1,493 and the order control's 1,639-1,645. The AFL++ bridge excludes that range, as in projects/xml/python/lxml and beautifulsoup4; five repeats per control then give identical features (940 and 1,039) and tuples (934 and 1,031).",
       "feedback_caveat": "Parsel's own selector.py lines do not differ between the two valid controls (0 features); all 213 differing features and 209 differing AFL++ tuples are libxml2 parser.c regions. The path is a wrapper whose input-dependent feedback is the shared libxml2 parser's, labeled as such.",
       "tree_caveat": "lxml's default strip_cdata turns CDATA into ordinary text and the XML declaration is not a node; namespace declarations are counted as in-scope changes through XPath namespace::*, so a redundant redeclaration would be missed (neither control has one)."
+    },
+    {
+      "package": "pyquery",
+      "version": "2.1.0",
+      "pass": true,
+      "input_api": "pyquery.PyQuery(local XML bytes, parser=\"xml\"); PyQuery.contents() recursion (child text nodes and child elements) over the returned lxml elements' tag, attrib and nsmap",
+      "tested_parser": "lxml.etree.fromstring with lxml's default XMLParser (pyquery.pyquery.fromstring, parser='xml')",
+      "tested_root_type": "lxml.etree._Element",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "oracle": "projects/xml/python/pyquery/oracle.py: CPython pyexpat in namespace mode, no lxml or libxml2 (comment and PI keys not compared)",
+      "pyquery_matches_oracle": true,
+      "parser_family": "pyquery PyQuery over lxml 6.1.3 default XMLParser over libxml2 2.15.4 (shared with lxml.etree, beautifulsoup4 and parsel)",
+      "pyquery_source_files": 1,
+      "pyquery_source_lines": 48,
+      "libxml2_parser_c_source_lines": 1475,
+      "afl_feedback": "data/python/xml/pyquery-valid-feedback.json",
+      "afl_tuple_difference": 209,
+      "pyquery_feature_difference": 0,
+      "libxml2_feature_difference": 213,
+      "project_receipt": "projects/xml/python/pyquery/verification.json",
+      "feedback_caveat": "pyquery's own pyquery.py lines do not differ between the two valid controls (0 features); all 213 differing features and 209 differing AFL++ tuples are libxml2 parser.c regions. The path is a wrapper whose input-dependent feedback is the shared libxml2 parser's, labeled as such.",
+      "tree_caveat": "lxml's default strip_cdata turns CDATA into ordinary text; contents() returns no comments or processing instructions, so text separated only by one is merged; namespace declarations are counted as in-scope changes, so a redundant redeclaration would be missed (neither control has one).",
+      "project_receipt_sha256": "ad31681841cc867c3d63f3f330fdc8d12b8e67bc24cdc458269236cd7f7740bd"
+    },
+    {
+      "package": "untangle",
+      "version": "1.3.1",
+      "pass": true,
+      "input_api": "untangle.parse(pathlib.Path(local XML file)); Element._name, _attributes, cdata and children filled by untangle.Handler from SAX startElement/characters/endElement events",
+      "tested_sax_parser": "defusedxml.expatreader.DefusedExpatParser",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c_catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "c_catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p_amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "order"
+      },
+      "differential_pass": true,
+      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image, projected to untangle qualified-name output with the documented \"-\", \".\", \":\" -> \"_\" rule",
+      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "untangle_matches_projected_oracle": true,
+      "feature_namespaces_true_root_children": 0,
+      "parser_family": "untangle SAX handler over defusedxml 0.7.1 DefusedExpatParser over CPython 3.14 xml.sax/pyexpat over Expat 2.10.0 (shared with xmltodict and xml.etree.ElementTree)",
+      "package_source_files": 3,
+      "package_source_lines": 49,
+      "untangle_lines": 35,
+      "sax_driver_source_lines": 111,
+      "expat_source_lines": 2238,
+      "expat_xmlparse_lines": 1509,
+      "differential_package_source_lines": 49,
+      "differential_sax_driver_source_lines": 112,
+      "differential_expat_source_lines": 2475,
+      "differential_expat_xmlparse_lines": 1586,
+      "afl_feedback": "data/python/xml/untangle-valid-feedback.json",
+      "project_receipt": "projects/xml/python/untangle/verification.json",
+      "project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
+      "namespace_caveat": "untangle drops namespace URIs. The adapter does not reconstruct them: element names are lossy (':' becomes '_', indistinguishable from '-', '.' or a literal '_'), so any URI in the summary would be adapter-side namespace processing, not untangle's parse result. Shared fields are therefore compared against the independent lxml/libxml2 oracle projected to untangle's documented naming rule, and the expanded names it loses are recorded in data/python/xml/untangle-valid-feedback.json.",
+      "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
     }
   ],
   "standard": [
@@ -572,7 +654,8 @@
       "paths": [
         "lxml.etree",
         "beautifulsoup4 (\"xml\" builder via lxml.etree)",
-        "parsel (Selector type=\"xml\" via lxml.etree SafeXMLParser)"
+        "parsel (Selector type=\"xml\" via lxml.etree SafeXMLParser)",
+        "pyquery (PyQuery parser=\"xml\" via lxml.etree.fromstring)"
       ]
     },
     {

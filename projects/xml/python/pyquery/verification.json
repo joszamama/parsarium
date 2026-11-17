@@ -1,0 +1,72 @@
+{
+  "kind": "third_party",
+  "api": "pyquery.PyQuery(local XML bytes, parser=\"xml\"); PyQuery.contents() recursion (child text nodes and child elements) over the returned lxml elements' tag, attrib and nsmap",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:03:17.883425+00:00",
+  "manifest": "projects/xml/python/pyquery/manifest.json",
+  "image_id": "sha256:b30097c7f6bfe9fc2792bec60457e38f5fdf3954c1c31beeef9ac46bca666587",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: pyquery",
+    "Version: 2.1.0",
+    "Name: lxml",
+    "Version: 6.1.3",
+    "Name: cssselect",
+    "Version: 1.6.0",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "oracle expat_2.7.4",
+    "b77dc43e5e284efcdc87d5c6ec4112eb41a810ef19bb05570c3d1880858cb843  /work/libxml2/parser.c",
+    "47b408ae4a697175498d2b2b0c222de52823fc4952bebf56974cdad2d4c2f656  pyquery/pyquery.py"
+  ],
+  "source_sha256": "74c9e65ea0cfbcf644a8c3fd438a3dedbcbbd497b9cb366a4f360dba72f8aebb",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "1e6a0cd755bdd5ebfef5b113a77c698989f1b5af32d0f9f825a3badfe1bd5f57",
+    "fuzz.py": "99c99847c048d23e6f6c2da4a14f5851797903948af5c191e996dc75c1de0515",
+    "harness.py": "016cea91963f225e58d984d0baed085c40e8dc0647df6b19b751f8d22db1061d",
+    "manifest.json": "de8cfa633e7f0babf2e1cc85c4c4d525e2db77f7fe8a1590976ccfbd6ab2394a",
+    "oracle.py": "01c2c6b597c458f758a59f4caf92c29c5894d210cf2236f9c5d15349136809a5",
+    "replay.py": "7c3e308657802971f86e8c81ee66f61224cf44ca3931685245d952e0157a5f7f",
+    "run-control.py": "68780fa30c7ea52953e5d61907dd4e86d831254b1374644fc648c751500c8b4f",
+    "runtime-requirements.lock": "a76ca95b336b7558e8bc39a03e994b06fd71f198a349a3350b1b1081ed866891",
+    "target.json": "f7f139898a8275f80b813bfa6a77080d822c0aa08dc6b35a1b4ee6e89c2c106f"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 48,
+  "format_specific_source_lines_covered": 48,
+  "underlying_source_files": 1,
+  "underlying_source_lines_covered": 1475,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/python/pyquery/target/coverage/coverage.json",
+  "pass": true
+}
