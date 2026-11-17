@@ -55,7 +55,7 @@ python3 parsarium.py afl summary runs/pypng-afl
 
 Additional seeds enter with `--seed FILE` or `--seed-dir DIRECTORY` on `afl prepare`. `afl run --resume` continues an existing output directory. AFL++ saves interesting inputs in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`, and progress in `fuzzer_stats`.
 
-After a run has saved queue files, `report --replay-queue` measures parser source lines reached by a bounded sample. It replays each selected input once in the project's verified coverage image; it does not start AFL++. For LLVM-covered C and C++, it merges profiles from the `/work/replay` binary. For installed Python package source, it unions lines observed by Python's `trace` module. The report records queue input hashes, both image IDs, and hashes of the profile or trace export. Native Python extensions and other unsupported projects are labeled explicitly; their AFL feedback remains available without a queue line view.
+After a run has saved queue files, `report --replay-queue` measures parser source lines reached by a bounded sample. It replays each selected input once in the project's verified coverage image; it does not start AFL++. For LLVM-covered C and C++, it merges profiles from the `/work/replay` binary. For interpreted Python and PHP package source, it unions lines observed by Python `trace` or PHP Xdebug. The report records queue input hashes, both image IDs, and hashes of the profile or trace export. Native extensions and other unsupported projects are labeled explicitly; their AFL feedback remains available without a queue line view.
 
 ```sh
 python3 parsarium.py report http11 cpp boost_beast runs/beast-afl \

@@ -3,7 +3,7 @@
 RUN_DIR is a valid-control coverage directory written by `parsarium.py build`
 (projects/F/E/S/target/coverage), a `parsarium.py replay` directory, or a
 prepared AFL++ directory. `--replay-queue` measures a bounded saved queue
-sample through the verified LLVM coverage image without starting AFL++.
+sample through a supported verified coverage image without starting AFL++.
 Source text for the line view comes only from
 explicit `--source CONTAINER_DIR=ARCHIVE` mappings whose SHA-256 matches the
 project manifest.
@@ -26,7 +26,7 @@ import zipfile
 import run_case
 from run_case import MAX_CASE_BYTES, project_for
 from queue_coverage import (QueueCoverageError, export_objects, plan_for, queue_files,
-                            replay_python_queue, replay_queue)
+                            replay_interpreted_queue, replay_queue)
 
 
 LLVM_EXPORT_TYPE = "llvm.coverage.json.export"
@@ -378,10 +378,10 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
     if not replay:
         return run, None
     ecosystem = evidence["identity"]["ecosystem"]
-    if ecosystem not in {"c", "cpp", "python"} or \
+    if ecosystem not in {"c", "cpp", "python", "php"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
         run["queue_replay_unsupported"] = (
-            "Source replay currently supports LLVM-covered C/C++ and Python source-line projects; "
+            "Source replay currently supports LLVM-covered C/C++ and Python/PHP source-line projects; "
             "this project's saved AFL++ feedback remains separately documented.")
         return run, None
     if ecosystem in {"c", "cpp"}:
@@ -393,11 +393,12 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
         sample, coverage = replay_queue(run_dir, root, evidence, sample_limit, timeout)
     else:
         try:
-            sample, coverage = replay_python_queue(run_dir, root, evidence,
-                                                   sample_limit, timeout)
+            sample, coverage = replay_interpreted_queue(run_dir, root, evidence,
+                                                        sample_limit, timeout)
         except QueueCoverageError as error:
             if "no supported Python harness/interpreter" in str(error) or \
-                    "needs native source replay" in str(error):
+                    "needs native source replay" in str(error) or \
+                    "no supported PHP byte-input harness/interpreter" in str(error):
                 run["queue_replay_unsupported"] = str(error)
                 return run, None
             raise
@@ -841,8 +842,8 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
         if not archives:
             warnings.append(f"No --source archive was supplied; {language} line views list executed "
                             "line numbers without source text.")
-        if run["kind"] == "afl" and ecosystem == "python":
-            warnings.append("Python queue tracing observes interpreted package source only; "
+        if run["kind"] == "afl" and ecosystem in {"python", "php"}:
+            warnings.append(f"{ecosystem.title()} queue tracing observes interpreted package source only; "
                             "native extensions and their underlying libraries need a separate "
                             "source replay.")
         if any(entry["source"]["status"] == "rejected_line_mismatch" for entry in files):

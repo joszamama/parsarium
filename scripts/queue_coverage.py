@@ -1,7 +1,7 @@
 """Bounded, one-shot source coverage replay of saved AFL++ queue files.
 
 This module never invokes afl-fuzz. It uses the verified control image, not the
-AFL feedback image, so llvm-cov can report parser source lines.
+AFL feedback image, for LLVM, Python trace, or PHP Xdebug parser lines.
 """
 
 from __future__ import annotations
@@ -262,30 +262,39 @@ def replay_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
     return replay, coverage
 
 
-def replay_python_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
-                        timeout: int) -> tuple[dict, dict | None]:
-    """Replay saved inputs through the pinned Python harness and union parser lines.
+def replay_interpreted_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
+                             timeout: int) -> tuple[dict, dict | None]:
+    """Replay saved inputs through pinned Python/PHP harnesses and union parser lines.
 
-    Python's ``trace`` module observes package source executed in the same
-    control image used for verification. It cannot claim native extension
-    lines, uncovered lines, or a coverage percentage.
+    Python ``trace`` or PHP Xdebug observes package source in the verified
+    control image. Neither claims native extension lines, uncovered lines,
+    or a coverage percentage.
     """
     manifest = evidence["manifest"]
-    if evidence["identity"]["ecosystem"] != "python" or \
+    ecosystem = evidence["identity"]["ecosystem"]
+    if ecosystem not in {"python", "php"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
-        raise QueueCoverageError("Python source replay needs a Python source-line project")
+        raise QueueCoverageError("interpreted source replay needs a Python/PHP source-line project")
     if not 1 <= maximum <= MAX_QUEUE_SAMPLE or not 1 <= timeout <= 60:
         raise QueueCoverageError("queue sample must be 1–128 and timeout 1–60 seconds")
     interpreter = manifest.get("fuzz_smoke_entrypoint")
-    if interpreter not in ("/opt/venv/bin/python", "/usr/local/bin/python") or \
-            not (evidence["project"] / "harness.py").is_file():
-        raise QueueCoverageError("project has no supported Python harness/interpreter")
-    primary_prefix = manifest.get("coverage_subject_prefix", "")
-    if not isinstance(primary_prefix, str) or not (
-            "site-packages/" in primary_prefix or
-            primary_prefix.startswith(("/usr/local/lib/python", "/usr/lib/python"))):
-        raise QueueCoverageError("Python trace supports installed Python package source only; "
-                                 "this project needs native source replay")
+    if ecosystem == "python":
+        if interpreter not in ("/opt/venv/bin/python", "/usr/local/bin/python") or \
+                not (evidence["project"] / "harness.py").is_file():
+            raise QueueCoverageError("project has no supported Python harness/interpreter")
+        primary_prefix = manifest.get("coverage_subject_prefix", "")
+        if not isinstance(primary_prefix, str) or not (
+                "site-packages/" in primary_prefix or
+                primary_prefix.startswith(("/usr/local/lib/python", "/usr/lib/python"))):
+            raise QueueCoverageError("Python trace supports installed Python package source only; "
+                                     "this project needs native source replay")
+        script = root / "scripts/python_queue_trace.py"
+    else:
+        if interpreter not in ("/usr/bin/php", "/opt/php/bin/php") or \
+                not (evidence["project"] / "harness.php").is_file() or \
+                "function parsarium_parse(" not in (evidence["project"] / "harness.php").read_text():
+            raise QueueCoverageError("project has no supported PHP byte-input harness/interpreter")
+        script = root / "scripts/php_queue_trace.php"
     prefixes = [manifest["coverage_subject_prefix"]]
     if manifest.get("underlying_coverage_subject_prefix"):
         prefixes.append(manifest["underlying_coverage_subject_prefix"])
@@ -301,7 +310,6 @@ def replay_python_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
                              text=True, timeout=15)
     if inspect.returncode or inspect.stdout.strip() != f"{image_id} {manifest['platform']}":
         raise QueueCoverageError("verified coverage image is unavailable or has the wrong platform")
-    script = root / "scripts/python_queue_trace.py"
     script_sha = digest(script)
     common = ["docker", "run", "--rm", "--pull", "never", "--platform", manifest["platform"],
               "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt",
@@ -333,10 +341,11 @@ def replay_python_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
             container_name = f"parsarium-report-{uuid.uuid4().hex[:16]}"
             command = [*common, "--name", container_name,
                        "-v", f"{sample}:/input/case:ro",
-                       "-v", f"{script}:/input/python_queue_trace.py:ro",
+                       "-v", f"{script}:/input/{script.name}:ro",
                        "-v", f"{scratch}:/coverage",
                        "--entrypoint", interpreter, image_id,
-                       "/input/python_queue_trace.py", "/input/case",
+                       *(["-d", "xdebug.mode=coverage"] if ecosystem == "php" else []),
+                       f"/input/{script.name}", "/input/case",
                        f"/coverage/{number:03d}.json", json.dumps(prefixes)]
             try:
                 result = subprocess.run(command, stdout=subprocess.DEVNULL,
@@ -353,26 +362,27 @@ def replay_python_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
                     "trace_files": 0}
             if traced.is_file():
                 if traced.stat().st_size > MAX_PYTHON_TRACE_BYTES:
-                    raise QueueCoverageError(f"Python trace exceeds size limit: {label}")
+                    raise QueueCoverageError(f"parser line trace exceeds size limit: {label}")
                 record = json.loads(traced.read_bytes())
                 if record.get("outcome") not in ("ok",) and not str(record.get("outcome", "")).startswith("exception:"):
-                    raise QueueCoverageError(f"Python trace outcome is invalid: {label}")
+                    raise QueueCoverageError(f"parser line trace outcome is invalid: {label}")
                 item["target_outcome"] = record["outcome"]
                 files = record.get("files")
                 if not isinstance(files, list):
-                    raise QueueCoverageError(f"Python trace has no file list: {label}")
+                    raise QueueCoverageError(f"parser line trace has no file list: {label}")
                 for entry in files:
                     name, lines = entry.get("filename"), entry.get("executed_lines")
                     if not isinstance(name, str) or not any(name.startswith(p) for p in prefixes) or \
                             not isinstance(lines, list) or lines != sorted(set(lines)) or \
                             any(type(line) is not int or line < 1 or line > 10_000_000 for line in lines):
-                        raise QueueCoverageError(f"Python trace contains invalid parser lines: {label}")
+                        raise QueueCoverageError(f"parser line trace contains invalid parser lines: {label}")
                     union.setdefault(name, set()).update(lines)
                 item["trace_files"] = len(files)
                 item["trace_sha256"] = digest(traced)
             inputs.append(item)
         replay = {"status": "source_replay" if union else "no_profiles",
-                  "mechanism": "Python trace of package source in verified control image",
+                  "mechanism": ("Python trace" if ecosystem == "python" else "PHP Xdebug") +
+                  " of package source in verified control image",
                   "plan_sha256": digest(run_dir / "plan.json"),
                   "afl_image_id": plan["image_id"], "coverage_image_id": image_id,
                   "coverage_binary": interpreter, "llvm_cov_objects": [],
@@ -389,7 +399,7 @@ def replay_python_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
         exported = scratch / "coverage.json"
         exported.write_text(json.dumps(coverage, sort_keys=True) + "\n")
         if exported.stat().st_size > MAX_EXPORT_BYTES:
-            raise QueueCoverageError("aggregate Python source export exceeds size limit")
+            raise QueueCoverageError("aggregate interpreted source export exceeds size limit")
         replay["coverage_sha256"] = digest(exported)
         replay["coverage_bytes"] = exported.stat().st_size
     return replay, coverage

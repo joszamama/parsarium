@@ -484,13 +484,67 @@ class CoverageReportTest(unittest.TestCase):
             return subprocess.CompletedProcess(command, 0)
 
         with mock.patch.object(queue_coverage.subprocess, "run", side_effect=docker):
-            replay, coverage = queue_coverage.replay_python_queue(
+            replay, coverage = queue_coverage.replay_interpreted_queue(
                 fixture.run_dir, fixture.root, evidence, 2, 15)
         self.assertEqual(replay["queue_inputs_sampled"], 2)
         self.assertEqual([item["trace_files"] for item in replay["inputs"]], [1, 1])
         self.assertEqual(coverage["data"][0]["files"][0]["executed_lines"], [2, 4, 5])
         self.assertEqual(replay["trace_script_sha256"], digest(script.read_bytes()))
         self.assertRegex(replay["coverage_sha256"], r"^[0-9a-f]{64}$")
+
+    def test_bounded_php_queue_replay_unions_xdebug_package_lines(self):
+        fixture = self.fixture()
+        fixture.afl_plan()
+        fixture.manifest.update({
+            "ecosystem": "php", "fuzz_smoke_entrypoint": "/usr/bin/php",
+            "coverage_subject_prefix": "/work/vendor/example/parser/",
+        })
+        (fixture.project / "harness.php").write_text(
+            "<?php function parsarium_parse(string $bytes): array { return []; }\n")
+        script = fixture.root / "scripts/php_queue_trace.php"
+        script.parent.mkdir()
+        script.write_bytes((ROOT / "scripts/php_queue_trace.php").read_bytes())
+        source_overlay = fixture.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        overlay = fixture.root / "fuzzing/afl-native/png/php/demo/verification.json"
+        overlay.parent.mkdir(parents=True)
+        overlay.write_bytes(source_overlay.read_bytes())
+        plan_path = fixture.run_dir / "plan.json"
+        plan = json.loads(plan_path.read_text())
+        plan["project"] = "png/php/demo"
+        plan["overlay_receipt_sha256"] = digest(overlay.read_bytes())
+        fixture.write_json(plan_path, plan)
+        evidence = {
+            "identity": {"format": "png", "ecosystem": "php", "slug": "demo"},
+            "manifest": fixture.manifest, "project": fixture.project,
+            "receipt": fixture.receipt,
+            "evidence": {"receipt_sha256": digest((fixture.project / "verification.json").read_bytes())},
+            "feedback": {"coverage_kind": "source_lines"},
+        }
+
+        def docker(command, **_):
+            if command[1:3] == ["image", "inspect"]:
+                return subprocess.CompletedProcess(command, 0, f"{IMAGE} linux/arm64\n", "")
+            self.assertIn("xdebug.mode=coverage", command)
+            output_mount = next(item for item in command if item.endswith(":/coverage"))
+            output_dir = Path(output_mount.removesuffix(":/coverage"))
+            output_name = Path(command[-2]).name
+            lines = [8, 9] if output_name == "000.json" else [8, 12]
+            (output_dir / output_name).write_text(json.dumps({
+                "outcome": "ok", "files": [{
+                    "filename": "/work/vendor/example/parser/Reader.php",
+                    "executed_lines": lines,
+                }],
+            }))
+            return subprocess.CompletedProcess(command, 0)
+
+        with mock.patch.object(queue_coverage.subprocess, "run", side_effect=docker):
+            replay, coverage = queue_coverage.replay_interpreted_queue(
+                fixture.run_dir, fixture.root, evidence, 2, 15)
+        self.assertEqual(replay["queue_inputs_sampled"], 2)
+        self.assertEqual([item["trace_files"] for item in replay["inputs"]], [1, 1])
+        self.assertEqual(coverage["data"][0]["files"][0]["executed_lines"], [8, 9, 12])
+        self.assertEqual(replay["trace_script_sha256"], digest(script.read_bytes()))
+        self.assertIn("PHP Xdebug", replay["mechanism"])
 
     def test_afl_queue_source_scope_and_input_limits_are_honest(self):
         fixture = self.fixture("native_binary_edges")
