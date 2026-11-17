@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "format": "ascii_pnm",
+  "ecosystem": "go",
+  "package": "github.com/cshum/vipsgen/vips",
+  "release": "v1.3.11",
+  "catalog_parser": "data/go/ascii_pnm/parsers.json",
+  "source_lock": "projects/ascii_pnm/go/github_com_cshum_vipsgen_vips/source-lock.json",
+  "source_sha256": "579ca148c80ec89469257e0df8c78a47cbc2cfc895ef09f7fa0933fbd1749dcf",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgb0": [
+      255,
+      0,
+      0
+    ],
+    "rgb1": [
+      0,
+      255,
+      0
+    ]
+  },
+  "differential_control": "controls/ascii_pnm/black-white.pgm",
+  "differential_control_sha256": "29f6a1ca59a8ff644dc66ce3f9b77abd50d6245fedebb35cdf18b5448547051b",
+  "differential_expected_output": {
+    "width": 2,
+    "height": 1,
+    "rgb0": [
+      0
+    ],
+    "rgb1": [
+      255
+    ]
+  },
+  "api": "vips.NewPpmloadBuffer([]byte, nil); Image.Width, Image.Height and Image.Getpoint for pixels (0,0) and (1,0)",
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/usr/local/go/bin/go",
+  "toolchain_args": [
+    "version"
+  ],
+  "coverage": "Go coverpkg of the vipsgen vips binding and Clang/LLVM source line view of the pinned libvips libvips/foreign/ppmload.c loader",
+  "coverage_subject_prefix": "github.com/cshum/vipsgen/vips/",
+  "underlying_coverage_subject_prefix": "/work/vips-source/",
+  "underlying_format_specific_coverage_file_suffix": "/ppmload.c",
+  "afl_native_cgo": true,
+  "afl_entrypoint": "/work/afl-target",
+  "afl_file_input": true,
+  "coverage_limit": "Only two valid ASCII controls (P3 PPM and P2 PGM, 2x1, maxval 255); libvips 8.18.7 is built static from the pinned release tarball with every optional feature disabled except the PPM loader, cache disabled and concurrency 1. No malformed input, fuzzing campaign, binary P4-P6, PFM or PAM validation.",
+  "underlying_source_sha256": "5baaead3b0bb20ffdb9e9ff09aa9fda08620923df77b63b436654cb5e0b3bf94"
+}

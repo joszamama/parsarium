@@ -1054,6 +1054,7 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
             "xml/go/github_com_moovweb_gokogiri": "go_cgo_libxml2_native_xml_parser_edges",
             "sql/go/github_com_pganalyze_pg_query_go_v6": "go_cgo_libpg_query_native_sql_parser_edges",
             "ascii_pnm/go/github_com_gographics_gmagick": "go_cgo_graphicsmagick_native_pnm_coder_edges",
+            "ascii_pnm/go/github_com_cshum_vipsgen_vips": "go_cgo_libvips_native_ppmload_edges",
         }
         if (overlay.get("feedback_kind") != native_cgo_kinds.get(str(project))
                 or overlay.get("afl_entrypoint") != manifest.get("afl_entrypoint")

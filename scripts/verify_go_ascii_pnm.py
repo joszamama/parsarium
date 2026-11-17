@@ -18,6 +18,7 @@ NATIVE = {
     "github.com/robxyy/govips/pkg/vips": "native_robxyy",
     "github.com/perelin/govips/pkg/vips": "native_perelin",
     "github.com/gographics/gmagick": "native_gmagick",
+    "github.com/cshum/vipsgen/vips": "native_vipsgen",
 }
 
 

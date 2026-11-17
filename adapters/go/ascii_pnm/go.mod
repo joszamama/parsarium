@@ -26,6 +26,7 @@ require (
 )
 
 require (
+	github.com/cshum/vipsgen v1.3.11 // indirect
 	github.com/go-images/jpeg2000 v0.14.0 // indirect
 	github.com/go-simd/highway v0.0.14 // indirect
 	github.com/gographics/gmagick v1.0.0 // indirect
