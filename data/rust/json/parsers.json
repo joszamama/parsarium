@@ -1,0 +1,49 @@
+[
+  {
+    "name": "serde_json",
+    "version": "1.0.154",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "serde_json::from_slice::<serde_json::Value>(&[u8]); serde_json::Value::{Object, Array, String, Number, Bool, Null}; Number::as_f64(); Map::keys()",
+    "documentation": "https://docs.rs/serde_json/1.0.154/serde_json/fn.from_slice.html",
+    "source": "https://github.com/serde-rs/json/tree/v1.0.154",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped serde_json::Value tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "serde_json recursive-descent deserializer (serde-rs/json)",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 438065825,
+      "source": "data/rust/json/registry-snapshot.json"
+    }
+  }
+]

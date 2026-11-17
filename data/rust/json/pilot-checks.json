@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "cell": "json/rust",
+  "checked_at_utc": "2026-11-17T03:29:11.752898+00:00",
+  "checks": [
+    {
+      "command": "python3 -I (inline reference summary with Python 3.13 json.load)",
+      "pass": true,
+      "result": "Python stdlib json summary equals the manifest expected output on controls/json/nested-object.json and controls/json/nested-array.json; the nested-object expected output also equals the verified Go json-iterator and encoding/json pilot output"
+    },
+    {
+      "command": "python3 parsarium.py build json rust serde_json",
+      "pass": true,
+      "image_id": "sha256:63498971149f7d81142bc0f0af7b928d76b5eb07841eca5a1ff298349e4ae082",
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1.0,
+          1.0,
+          2.0,
+          2.0
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 801,
+      "de_rs_lines_covered": 251,
+      "receipt_sha256": "0cec5bb702a234afeac9a1e57bfffcaa76e00f9a762eec8e15071f1bcc4d7d89"
+    },
+    {
+      "command": "python3 parsarium.py run json rust serde_json controls/json/nested-object.json",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run json rust serde_json controls/json/nested-array.json",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py afl build json rust serde_json",
+      "pass": true,
+      "image_id": "sha256:e002782b4eb231cef60fd572bc9d8adac09e2336c655e10535930d4c4e1dfdc7",
+      "feedback_edges": 772,
+      "variant_feedback_edges": 695,
+      "edges_only_in_control": 100,
+      "edges_only_in_variant": 23,
+      "all_repeats_identical": true,
+      "source_files_with_different_line_counts": [
+        "src/de.rs",
+        "src/map.rs",
+        "src/read.rs",
+        "src/ser.rs",
+        "src/value/de.rs"
+      ],
+      "receipt_sha256": "879e337314f701b55ab0757c0583cc5fd705b298fdc6668bac10d684dfe0906e"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare json rust serde_json runs/json-serde_json-afl --seed controls/json/nested-array.json",
+      "pass": true,
+      "seeds": [
+        "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+        "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6"
+      ]
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/json-serde_json-afl --check",
+      "pass": true,
+      "result": "Ready: json/rust/serde_json (2 seeds, afl_rs_rust_sancov_edges); no campaign started"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "43 tests OK"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "817/817 one-input projects and AFL++ overlays current"
+    },
+    {
+      "command": "python3 scripts/validate_catalog.py",
+      "pass": false,
+      "result": "stops at 'unreported pilot evidence or count: rust/json' because data/pilot-cells.json still lists rust/json as pilot_not_started; the integrator regenerates it with scripts/build_matrix.py after merge"
+    },
+    {
+      "command": "python3 scripts/audit_projects.py --check",
+      "pass": false,
+      "result": "stops at 'pilot cell evidence/count mismatch: json/rust' for the same reason; the catalog guides and coverage aggregates are not regenerated on this branch"
+    }
+  ]
+}

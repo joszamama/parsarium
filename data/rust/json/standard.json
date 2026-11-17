@@ -1,0 +1,26 @@
+{
+  "ecosystem": "Rust",
+  "format": "JSON (RFC 8259)",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Rust 1.99.1 standard library",
+      "official_documentation_scope": [
+        "https://doc.rust-lang.org/1.99.1/std/",
+        "https://doc.rust-lang.org/1.99.1/std/all.html",
+        "https://doc.rust-lang.org/1.99.1/core/all.html",
+        "https://doc.rust-lang.org/1.99.1/alloc/all.html",
+        "https://doc.rust-lang.org/1.99.1/std/str/fn.from_utf8.html",
+        "https://doc.rust-lang.org/1.99.1/std/io/trait.Read.html"
+      ],
+      "checked_at_utc": "2026-11-17",
+      "all_items_page_sha256": "439c7048c817b9eadcda69879567fc04ce4948aa8050447707f1386df3459b4f",
+      "core_all_items_page_sha256": "bc5d3b112c2cb4405ebbda818c74eeecdadba75e001691067b6f581a40aee228",
+      "alloc_all_items_page_sha256": "cc230a8a32301a7cddacbaa28caf0afe49c9aa9b0512cfbdf8a8bd24a4422ec3",
+      "finding": "The documented Rust 1.99.1 standard library has no JSON parser, tokenizer, or value type. The std, core, and alloc all-items pages (rustdoc 1.99.1) contain no occurrence of 'json' (case-insensitive). std::str::from_utf8 and std::io::Read validate or return bytes without interpreting JSON. rustc's internal JSON support (the former libserialize json module) is not part of the distributed standard library. No format-aware bundled API was available to run against controls/json/nested-object.json."
+    }
+  ],
+  "inventory_state": "pending_aggregate_registry",
+  "limit": "This covers the documented Rust 1.99.1 standard library (core, alloc, std). External crates, rustc-internal crates, and native system libraries are separate. The finding is not yet merged into an aggregate standard inventory."
+}
