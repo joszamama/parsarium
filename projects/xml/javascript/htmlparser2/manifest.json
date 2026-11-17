@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "htmlparser2",
+  "release": "12.0.0",
+  "catalog_parser": "data/javascript/xml/htmlparser2-candidate.json",
+  "source_lock": "projects/xml/javascript/htmlparser2/source-lock.json",
+  "source_sha256": "bd21df686ef9b29b6786aac9aa75a9d20e1e884ad3f3089882db1d576dd4aaa0",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "cdata_sections": 1,
+    "comments": [],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "processing_instructions": [
+      "xml version=\"1.0\" encoding=\"UTF-8\""
+    ],
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "cdata_sections": 0,
+    "comments": [
+      " order receipt "
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "processing_instructions": [
+      "xml version=\"1.0\" encoding=\"UTF-8\"",
+      "audit step=\"1\""
+    ],
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "namespace_resolution": false,
+  "output_name_form": "raw qualified names (prefix:local); xmlns/xmlns:* are ordinary attributes",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/htmlparser2/",
+    "--includes",
+    "/work/node_modules/entities/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of the htmlparser2 package during a replay of the valid control through new Parser(handler, {xmlMode: true}).write(text).end(): dist/Tokenizer.js (the state machine) and dist/Parser.js (tag stack and callback dispatch) carry the parse; dist/index.js is module load only. dist/Tokenizer.js is also counted alone as format_specific_source_lines_covered. The entities 8.1.0 decode trees reached for &amp;, &lt;, &gt;, &quot; and numeric references are counted separately under underlying_coverage_subject_prefix, and entities dist/decode.js alone must be covered. Line counts include module-level lines executed at load; entities dist/encode.js, escape.js and index.js are loaded through dom-serializer and contribute load-time lines only. domhandler, domutils and dom-serializer are loaded by index.js but not called on this path and are outside both prefixes, as are the adapter callbacks and TextDecoder; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/htmlparser2/",
+  "format_specific_coverage_file_suffix": "dist/Tokenizer.js",
+  "afl_coverage_subject_prefix": "/work/node_modules/",
+  "underlying_package": "entities",
+  "underlying_release": "8.1.0",
+  "underlying_npm_integrity": "sha512-kxL7msIffSuh9aaFAMD7rxAIuTRMAHMeBtgHW2yUdWw732ZNh4MehkF2gdjvtdmikkaIP9bFDDJOPlsvm7avrA==",
+  "underlying_source_sha256": "e9a27d66db0d0a6f2d76454219d94f5729ae2a29f08ab06c92e5f6eaa37cbe68",
+  "underlying_family": "entities character-reference decoder (fb55), used by htmlparser2's Tokenizer",
+  "underlying_coverage_subject_prefix": "/work/node_modules/entities/",
+  "underlying_format_specific_coverage_file_suffix": "entities/dist/decode.js"
+}

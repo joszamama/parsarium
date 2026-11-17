@@ -1,0 +1,97 @@
+[
+  {
+    "name": "htmlparser2",
+    "version": "12.0.0",
+    "license": "MIT",
+    "npm_integrity": "sha512-Tz7u1i95/g2x2jz81+x0FBVhBhY5aRTvD3tXXdFaljuNdzDLJ8UGNRrTcj2cgQvAg3iW/h77Fz15nLW0L0CrZw==",
+    "tarball_sha256": "bd21df686ef9b29b6786aac9aa75a9d20e1e884ad3f3089882db1d576dd4aaa0",
+    "input_api": "new Parser(handler, {xmlMode: true}).write(string) then end(), after strict UTF-8 TextDecoder of local bytes; handler callbacks onopentagname, onattribute, onclosetag, ontext, oncdatastart, oncomment/oncommentend, onprocessinginstruction, onerror",
+    "documentation": "https://github.com/fb55/htmlparser2/blob/c73fec0c0586647cd1269d2598e2ba4203d0207f/README.md",
+    "source": "https://github.com/fb55/htmlparser2/tree/c73fec0c0586647cd1269d2598e2ba4203d0207f",
+    "license_evidence": "package/LICENSE in the pinned npm tarball (MIT)",
+    "scope": "One UTF-8 local document through htmlparser2's xmlMode callback events: raw qualified element and attribute names (prefix:local, no namespace URIs), attribute order and decoded values, xmlns/xmlns:* as ordinary attributes, decoded text and CDATA, comments, processing instructions including the XML declaration, CDATA count, tree depth; no DOCTYPE",
+    "namespace_resolution": false,
+    "well_formedness_checking": false,
+    "family": "htmlparser2 forgiving HTML/XML tokenizer (own Tokenizer.js state machine) with entities decode trees",
+    "family_note": "htmlparser2 has its own Tokenizer and Parser; it shares no code with sax, saxes, @xmldom/xmldom, fast-xml-parser or libxml2. In xmlMode it switches the entities decoder to the XML decode tree, keeps tag case, recognizes CDATA and self-closing tags, and disables HTML implied open/close rules. It neither resolves namespaces nor enforces XML 1.0 well-formedness, so this is an XML-tolerant tokenizer path, not an XML 1.0 + Namespaces parser.",
+    "shared_families": [],
+    "control": "controls/xml/catalog-ns.xml",
+    "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 526964241,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/htmlparser2",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json",
+      "limitation": "Package-wide npm downloads. htmlparser2 is mostly an HTML parser (default mode, and the parser under cheerio, domutils users and many HTML tooling chains); the count does not measure xmlMode use or XML parsing and must not be read as XML adoption."
+    },
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "cdata_sections": 1,
+      "comments": [],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "processing_instructions": [
+        "xml version=\"1.0\" encoding=\"UTF-8\""
+      ],
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "cdata_sections": 0,
+      "comments": [
+        " order receipt "
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "processing_instructions": [
+        "xml version=\"1.0\" encoding=\"UTF-8\"",
+        "audit step=\"1\""
+      ],
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/javascript/htmlparser2/oracle.py (Python expat without namespace processing, ordered attributes, raw XML declaration via DefaultHandlerExpand)",
+    "project": "projects/xml/javascript/htmlparser2",
+    "verification_note": "Measured as a raw-name XML event path, not as a namespace-aware XML parser. htmlparser2 returns qualified names only, so prefixes, local names, attribute order and xmlns declarations are compared as raw qualified-name strings; no namespace URI, expanded name or in-scope binding is produced by the parser or inferred by the harness. The comparison oracle is expat in non-namespace mode, which exposes the same fields. Fields htmlparser2 exposes but the oracle cannot (attribute quote style, startIndex/endIndex) are not compared."
+  }
+]
