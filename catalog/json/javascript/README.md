@@ -12,4 +12,4 @@ Pilot cell: one third-party path (stream-json 3.9.0, 56,997,988 npm downloads 20
 
 ## Standard and runtime APIs
 
-- [JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)](standard/json-parse-text-after-new-textdecoder-utf-8-fatal-true-decode-buffer/README.md) — verified API path
+- [JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)](standard/json-parse-text-after-new-textdecoder-utf-8-fatal-true-decode-buffer/README.md) — staged Docker control

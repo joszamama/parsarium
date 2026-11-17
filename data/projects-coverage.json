@@ -982,12 +982,12 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 10,
-    "containerized_verified": 10,
+    "catalog_paths": 12,
+    "containerized_verified": 12,
     "staged": 0,
     "standard_api_paths": 6,
     "standard_containerized_verified": 5,
-    "standard_staged": 0,
+    "standard_staged": 1,
     "cells": [
       {
         "format": "json",
@@ -1008,8 +1008,8 @@
       {
         "format": "json",
         "ecosystem": "cpp",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1017,9 +1017,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_selected_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: only JsonCpp 1.9.8 was built and control-verified. Popcon measures Debian installs; JsonCpp's runtime count is inflated by dependents such as CMake, and header-only libraries (nlohmann/json, RapidJSON) have only dev packages, so popcon undercounts them. GitHub stars rank nlohmann/json first (50,894 vs 8,916). Nine leads are logged in leads.json and are not selected or ranked. Framework packages (Qt, Boost, POCO) are not ranked by whole-framework installs. The ISO C++ standard library has no JSON API. Two valid controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
@@ -1040,8 +1040,8 @@
       {
         "format": "json",
         "ecosystem": "java",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1049,9 +1049,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_selected_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: only the highest-adoption general-purpose JSON parser lead (jackson-databind, 162,890 deps.dev direct dependents summed over 239 releases) was built and control-verified. Maven Central text search ranks by relevance, not adoption, so twelve leads were looked up directly on deps.dev and are logged in leads.json; they are not selected or ranked. The adapter disables CANONICALIZE_FIELD_NAMES for deterministic feedback. Java SE 25 exports no JSON parsing API, so the standard count is zero by inventory, not by omission. One valid nested object control does not establish complete RFC 8259 support."
       },
       {
         "format": "json",
@@ -1062,8 +1062,8 @@
         "pending": 0,
         "standard_api_paths": 1,
         "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 1,
+        "standard_staged": 1,
+        "standard_pending": 0,
         "phase": "pilot",
         "status": "pilot_one_selected_search_bounded",
         "complete": false,

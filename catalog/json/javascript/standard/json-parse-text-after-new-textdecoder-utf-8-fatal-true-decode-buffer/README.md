@@ -43,3 +43,5 @@
   ]
 }
 ```
+
+**Docker control:** [pinned project](../../../../../projects/json/javascript/stdlib_json_parse/README.md). V8 JSON parser function entries were observed; source lines and AFL++ feedback are unavailable.

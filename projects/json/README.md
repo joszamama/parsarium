@@ -2,8 +2,10 @@
 
 Only verified Docker targets appear below; the format remains incomplete.
 
+- [jsoncpp / C++](cpp/jsoncpp/README.md)
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
+- [jackson-databind / Java](java/jackson_databind/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)
 - [seld/jsonlint / PHP](php/seld_jsonlint/README.md)
