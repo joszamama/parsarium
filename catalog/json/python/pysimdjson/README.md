@@ -27,3 +27,10 @@
   "second_label": "π"
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json python pysimdjson
+python3 parsarium.py run json python pysimdjson controls/json/structure.json
+```

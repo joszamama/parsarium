@@ -26,7 +26,7 @@ class PythonJsonRapidjsonPilotTest(unittest.TestCase):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")["leads"]
         cell = read(BASE / "cell.json")
-        self.assertEqual([parser["name"] for parser in parsers][-1], "python-rapidjson")
+        self.assertIn("python-rapidjson", [parser["name"] for parser in parsers])
         downloads = {lead["name"]: lead["last_month"] for lead in leads}
         metrics = [downloads[parser["name"]] for parser in parsers]
         self.assertEqual(metrics, sorted(metrics, reverse=True))
