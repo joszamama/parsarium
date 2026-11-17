@@ -5,6 +5,7 @@
 ## Targets
 
 - [ghostscript / C](c/ghostscript/README.md)
+- [graphicsmagick / C](c/graphicsmagick/README.md)
 - [libvips / C](c/libvips/README.md)
 - [mupdf / C](c/mupdf/README.md)
 - [poppler-glib / C](c/poppler-glib/README.md)

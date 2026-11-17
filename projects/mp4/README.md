@@ -15,6 +15,7 @@
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gpac / C++](cpp/gpac/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
+- [libheif / C++](cpp/libheif/README.md)
 - [opencv / C++](cpp/opencv/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [github.com/Eyevinn/mp4ff/mp4 / Go](go/github_com_eyevinn_mp4ff_mp4/README.md)
