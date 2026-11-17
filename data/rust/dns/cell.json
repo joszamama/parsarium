@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "dns",
-  "status": "pilot_nine_verified_search_bounded",
+  "status": "pilot_ten_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 9,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -22,14 +22,14 @@
   "search_hits_recorded": 400,
   "unique_search_hits": 320,
   "unresolved_documentation_leads": 5,
-  "leads_recorded": 17,
+  "leads_recorded": 18,
   "leads_by_status": {
-    "resolved_verified_selected": 9,
+    "resolved_verified_selected": 10,
     "excluded": 3,
     "unresolved_control_failure": 5
   },
   "ranking_metric": "crates.io recent_downloads (90 days)",
-  "uncertainty": "Pilot cell: nine Rust paths verified (hickory-proto, simple-dns, domain, dns-parser, dns-message-parser, rustdns, rsdns, packet-dissector-dns, hns-dns-wire), ranked by crates.io recent_downloads (90 days). Remaining leads: dnssector (unresolved_control_failure), microdns (unresolved_control_failure), dns-protocol (unresolved_control_failure), dns_parse (unresolved_control_failure), dnsparse (unresolved_control_failure). Excluded after checking: trust-dns-proto, mdns-sd, rama-dns (reasons in leads.json). Metric values are crates.io recent_downloads (90 days) from the snapshot; round 1 had recorded all-time downloads under that label, corrected in round 2. trust-dns-proto 0.23.2 (hickory-proto's previous crate name) passed the full gate but is excluded as a predecessor sharing most of the decoder code; its records are archived in trust-dns-proto-demoted.json. Rust AFL++ overlays are scoped to the parser crates (afl_instrumented_crates) because the summary encoder's random hashing made whole-binary maps unstable. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: ten Rust paths verified (hickory-proto, simple-dns, domain, dns-parser, dns-message-parser, rustdns, rsdns, packet-dissector-dns, hns-dns-wire, oxidns-proto), ranked by crates.io recent_downloads (90 days). Remaining leads: dnssector (unresolved_control_failure), microdns (unresolved_control_failure), dns-protocol (unresolved_control_failure), dns_parse (unresolved_control_failure), dnsparse (unresolved_control_failure). Excluded after checking: trust-dns-proto, mdns-sd, rama-dns (reasons in leads.json). Metric values are crates.io recent_downloads (90 days) from the snapshot; round 1 had recorded all-time downloads under that label, corrected in round 2. trust-dns-proto 0.23.2 (hickory-proto's previous crate name) passed the full gate but is excluded as a predecessor sharing most of the decoder code; its records are archived in trust-dns-proto-demoted.json. Rust AFL++ overlays are scoped to the parser crates (afl_instrumented_crates) because the summary encoder's random hashing made whole-binary maps unstable. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/rust/dns/registry-snapshot.json",
   "unresolved_leads": "data/rust/dns/leads.json",
   "runtime_evidence": "data/rust/dns/standard.json",
@@ -41,5 +41,5 @@
   },
   "third_party_evidence": "data/rust/dns/parsers.json",
   "third_party_control_results": "data/rust/dns/verification.json",
-  "selection": "Nine control-verified Rust DNS path(s), ranked by crates.io recent_downloads (90 days): hickory-proto 0.26.3 (36,097,977), simple-dns 0.13.1 (4,084,902), domain 0.12.3 (2,135,993), dns-parser 0.8.0 (524,293), dns-message-parser 0.9.0 (7,679), rustdns 0.7.0 (2,786), rsdns 0.23.0 (2,486), packet-dissector-dns 0.6.3 (1,980), hns-dns-wire 0.2.2 (1,588)."
+  "selection": "Ten control-verified Rust DNS path(s), ranked by crates.io recent_downloads (90 days): hickory-proto 0.26.3 (36,097,977), simple-dns 0.13.1 (4,084,902), domain 0.12.3 (2,135,993), dns-parser 0.8.0 (524,293), dns-message-parser 0.9.0 (7,679), rustdns 0.7.0 (2,786), rsdns 0.23.0 (2,486), packet-dissector-dns 0.6.3 (1,980), hns-dns-wire 0.2.2 (1,588), oxidns-proto 0.1.8 (181)."
 }

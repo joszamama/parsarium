@@ -1,0 +1,89 @@
+{
+  "kind": "third_party",
+  "api": "oxidns_proto::Message::from_bytes(&[u8]) on local bytes; id(), message_type(), opcode(), flag getters, rcode(), the section counts and questions(), answers(), authorities(), additionals()",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T22:34:09.303998+00:00",
+  "manifest": "projects/dns/rust/oxidns_proto/manifest.json",
+  "image_id": "sha256:36571034ac3a5ae4b380c3b004950d2e1e08bcf3baa909d553c8bcb4db800544",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "ce87c8411ee4474e6a247657384e1fc8e1ca544e8767c79d88df0d837d9f65fb",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Cargo.lock": "5d4a7e7759210d4b0d86b91ddc016c6957bf062db7945ab3b560691eb81bb735",
+    "Cargo.toml": "1014ec1504b7df99b50bdd12952d5ecf3dfab68faf3e04c0038797f54e2e54d2",
+    "Dockerfile": "94a558a5e32485ddbe62f05eea58fb6567f1e7e55d17d6f688d54c7180fbc285",
+    "manifest.json": "2d7470347d1ecfec98f7ed00284ad2e020a94bb44c9e275d64aa1ffd94f080ff",
+    "run-control.sh": "919fd7c3667e03695fe3ab2b8bfcc5fcb47d8cdb1a11a476399122748a2aeb3e",
+    "source-lock.json": "ef8f4a9948bf2337a530f00a615c0b95822353a640305fc9dd454ef7d8651770",
+    "src/bin/fuzzer.rs": "20d5f79a160eaa3a4e97e959d094a838a06b9d75f8d8d791bb74409b90b830e6",
+    "src/bin/replay.rs": "a201219ecc1e3d8759987b2f3c6227bd58a31959501d6ce9ac3d12b9233ac57c",
+    "src/lib.rs": "65b88c5ad8c36d23053c1b0711a26b6a26a36829d318b62ee49c4a2f78f4aad2"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 22,
+  "parser_source_lines_covered": 526,
+  "format_specific_source_lines_covered": 144,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/rust/oxidns_proto/target/coverage/coverage.json",
+  "pass": true
+}

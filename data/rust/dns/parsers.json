@@ -933,5 +933,109 @@
     },
     "rank": 9,
     "afl_feedback": "data/rust/dns/hns-dns-wire-feedback-differential.json"
+  },
+  {
+    "name": "oxidns-proto",
+    "version": "0.1.8",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo metadata 'MIT OR Apache-2.0' and LICENSE-MIT/LICENSE-APACHE in the crate (sha256 ce87c841...), checked in the image",
+    "input_api": "oxidns_proto::Message::from_bytes(bytes: &[u8]) -> Result<Message>",
+    "documentation": "https://docs.rs/oxidns-proto/0.1.8/oxidns_proto/message/struct.Message.html#method.from_bytes",
+    "source": "https://crates.io/crates/oxidns-proto/0.1.8",
+    "source_lock": "projects/dns/rust/oxidns_proto/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "oxidns-proto wire codec (src/wire/codec.rs, name.rs, rdata/*)",
+    "family_note": "Own pure-Rust message model and wire codec split out of the OxiDNS server (Sven Shi). Its type names follow the Hickory API style (RData, DNSClass, MessageType), but only 588 of its 5,987 distinct non-comment source lines (9.8%) also occur in hickory-proto 0.26.3, so it is not a hickory fork. The header keeps AD and CD but not the reserved Z bit, so z reports AD and CD only. Names use the crate's Name::to_fqdn() (canonical lower case with the trailing dot); A/AAAA are std::net addresses.",
+    "project": "projects/dns/rust/oxidns_proto",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 181,
+      "source": "https://crates.io/api/v1/crates/oxidns-proto",
+      "captured_at_utc": "2026-11-17T22:22:32.236543+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 10,
+    "afl_feedback": "data/rust/dns/oxidns-proto-feedback-differential.json"
   }
 ]
