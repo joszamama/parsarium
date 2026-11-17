@@ -23,6 +23,13 @@
 
 MLT C and C++ package APIs use the same MLT avformat plugin; the plugin links FFmpeg 9.0.2 libavformat, sharing the existing FFmpeg parser family.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/c/mlt/README.md)
+
+```sh
+python3 parsarium.py build mp4 c mlt
+python3 parsarium.py run mp4 c mlt controls/mp4/red-av.mp4
+```
+
+**Coverage limit:** MLT C and C++ paths share the avformat plugin and FFmpeg MOV/MP4 parser family. The minimal Docker build enables H.264 and AAC decoders for the control, with null codec fields possible for other codecs. AFL++ runs one process per local MP4 file because MLT loads and closes global plugins.

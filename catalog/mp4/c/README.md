@@ -1,6 +1,6 @@
 # MP4 / C
 
-10 verified third-party API paths; 8 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/mp4/ranking.md) · [standard API inventory](../../../data/c/mp4/standard.json)
 
@@ -15,7 +15,7 @@
 - [bento4](bento4/README.md) — Docker harness ready
 - [taglib](taglib/README.md) — Docker harness ready
 - [libheif](libheif/README.md) — Docker harness ready
-- [mlt](mlt/README.md) — verified API path
+- [mlt](mlt/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 
