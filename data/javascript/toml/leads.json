@@ -63,9 +63,9 @@
       "metric": "npm downloads, last month",
       "family": "taplo (Rust, compiled to WebAssembly)",
       "api_lead": "Taplo.initialize().then(t => t.parse...)",
-      "note": "WebAssembly build of the Rust taplo parser; JS coverage would not reach parser source.",
+      "note": "WebAssembly build of the Rust taplo crate; V8 JavaScript coverage and the JavaScript AFL++ bridge would see only the WebAssembly glue, not parser source lines. The underlying taplo crate is now a selected Rust path (projects/toml/rust/taplo).",
       "source": "https://www.npmjs.com/package/@taplo/lib",
-      "status": "unresolved_not_run",
+      "status": "unresolved_runnability_blocker",
       "api_lead_checked_against_pinned_release": false
     },
     {
@@ -76,8 +76,13 @@
       "api_lead": "load(string)",
       "note": null,
       "source": "https://www.npmjs.com/package/js-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "2.0.1",
+      "license": "MIT",
+      "checked_on": "2026-11-17",
+      "control_result": "service-config.toml parses (offset date-time as a TomlDate with kind 'offset-date-time'). typed-scalars.toml fails: load(text) has only a maxDepth option and returns every TOML integer and float as a plain Number, so float `exponent = 1e3` comes back as the Number 1000, the same value as integer 1000 (typed by Number.isInteger it reads as integer \"1000\", expected float \"1000.0\"). Its TomlDate kind accessor ('offset-date-time', 'local-date-time', 'local-date') and TomlTime keep the four date-time kinds apart.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install js-toml@2.0.1"
     },
     {
       "name": "toml-j0.4",
@@ -87,8 +92,12 @@
       "api_lead": "toml.parse(string)",
       "note": "TOML 0.4.0 only.",
       "source": "https://www.npmjs.com/package/toml-j0.4",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "1.1.1",
+      "checked_on": "2026-11-17",
+      "control_result": "service-config.toml parses. typed-scalars.toml is rejected at line 6 column 8 (`hex = 0xDEAD_BEEF`): 'Expected \".\", \"E\", \"e\", Comment, Newline, Whitespace, or end of input but \"x\" found.' TOML 0.4.0 has no hexadecimal, octal or binary integers; it also returns integers and floats as plain Numbers.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-j0.4@1.1.1"
     },
     {
       "name": "fast-toml",
@@ -98,8 +107,13 @@
       "api_lead": "parse(string)",
       "note": "TOML 0.5.",
       "source": "https://www.npmjs.com/package/fast-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.5.4",
+      "license": "MIT",
+      "checked_on": "2026-11-17",
+      "control_result": "service-config.toml parses. typed-scalars.toml is rejected at line 34 (`site.\"example.com\" = true`) with 'Unexpected \"': the TOML 0.5 parser does not accept a quoted segment in a dotted key. It also returns integers and floats as plain Numbers.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install fast-toml@0.5.4"
     }
   ],
   "excluded": [

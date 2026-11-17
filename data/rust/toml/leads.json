@@ -50,10 +50,12 @@
       "metric": "crates.io recent downloads (90 days)",
       "family": "nanoserde (own TOML parser among formats)",
       "api_lead": "nanoserde::TomlParser::parse(&str)",
-      "note": null,
+      "note": "Tried nanoserde::TomlParser::parse(&str) on 2026-11-17 (host cargo 1.99.1): typed-scalars.toml is rejected with 'Toml error: Unexpected token Ident(\"0xDEAD_BEEF\") , line:7 col:1' (no hexadecimal integers). Its Toml enum also has a single Num(f64) variant, so integers and floats cannot be told apart.",
       "source": "https://crates.io/crates/nanoserde",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.2.1",
+      "checked_at_utc": "2026-11-17"
     }
   ],
   "excluded": [
