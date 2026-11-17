@@ -37,6 +37,8 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [JSONStream / JavaScript](javascript/jsonstream/README.md)
 - [bfj / JavaScript](javascript/bfj/README.md)
 - [json-bigint / JavaScript](javascript/json_bigint/README.md)
+- [json5 / JavaScript](javascript/json5/README.md)
+- [jsonc-parser / JavaScript](javascript/jsonc_parser/README.md)
 - [jsonparse / JavaScript](javascript/jsonparse/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [halaxa/json-machine / PHP](php/halaxa_json_machine/README.md)

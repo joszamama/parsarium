@@ -2,7 +2,7 @@
 
 Pinned release: `3.3.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, strict options, control results, and parser family](../../../../catalog/json/javascript/jsonc-parser/README.md)
+[API, control result, and parser family](../../../../catalog/json/javascript/jsonc-parser/README.md)
 
 ## Run from the repository root
 
@@ -14,4 +14,4 @@ python3 parsarium.py afl build json javascript jsonc_parser
 python3 parsarium.py afl prepare json javascript jsonc_parser runs/json-jsonc_parser-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of JSON files. The AFL++ command prepares a seeded run; it does not start a campaign. The bridge maps only `scanner.js` source ranges to AFL++ feedback.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

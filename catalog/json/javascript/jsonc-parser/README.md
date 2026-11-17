@@ -1,11 +1,116 @@
-# jsonc-parser 3.3.1
+# jsonc-parser — JSON / JavaScript
 
-`jsonc-parser` is a high-adoption package with its own scanner and tree parser. Its pinned [README](https://github.com/microsoft/node-jsonc-parser/blob/v3.3.1/README.md#parser) documents `parseTree(text, errors, options)`. The README in the npm tarball is byte-identical to this tag. The [adapter](../../../../projects/json/javascript/jsonc_parser/adapter.mjs) reads local bytes, decodes strict UTF-8, sets `disallowComments: true`, `allowTrailingComma: false`, and `allowEmptyContent: false`, then calls `parseTree` once. It requires zero reported errors before projecting the returned AST into an exact type-tagged tree. The adapter also rejects duplicate property names. These choices narrow a JSONC-capable, fault-tolerant API to a JSON control path; the two valid controls do not establish complete RFC 8259 conformance.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The 3.3.1 [npm release](https://registry.npmjs.org/jsonc-parser/3.3.1) is MIT licensed and pinned by npm integrity and tarball SHA-256 in the [source lock](../../../../projects/json/javascript/jsonc_parser/source-lock.json). `lib/umd/impl/scanner.js` tokenizes text and `parser.js` implements `visit` and `parseTree`, building the AST. Neither uses native `JSON.parse` on input. This is a separate parser implementation from the other selected JavaScript JSON paths.
+- **Pinned release:** `3.3.1`
+- **License:** MIT
+- **Parser family:** Microsoft jsonc-parser scanner and event/tree parser
+- **Local input API:** `parseTree(text, errors, {disallowComments:true, allowTrailingComma:false, allowEmptyContent:false}) after strict UTF-8 decoding of local Buffer; zero errors required; exact type-tagged AST projection`
+- **Documentation:** [API reference](<https://github.com/microsoft/node-jsonc-parser/blob/v3.3.1/README.md#parser>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/javascript/json/parsers.json) · [control result](../../../../data/javascript/json/verification.json)
 
-Both existing valid controls yield exact trees independently reproduced by Python's `json` parser: an object with nested objects and arrays, and an array with nested arrays and objects. Their numbers are safe JavaScript Numbers. The [Docker verification](../../../../projects/json/javascript/jsonc_parser/verification.json) covers 300 source lines in `parser.js` and 317 in `scanner.js` on the first control.
+## Observed control result
 
-The parser module executes the same V8 ranges for these two rich controls; the scanner differs. The [scoped AFL++ receipt](../../../../data/javascript/json/jsonc-parser-feedback-differential.json) therefore uses only scanner source ranges: 79 on the object control and 68 on the array control, with 11 differing ranges and 11 differing AFL++ tuples after repeated valid-control replay. The saved 30-day npm snapshot records 401,936,432 package downloads. That number measures package adoption, not JSON-specific calls. No malformed-input or campaign result is claimed.
+```json
+{
+  "type": "object",
+  "members": {
+    "enabled": {
+      "type": "boolean",
+      "value": true
+    },
+    "missing": {
+      "type": "null"
+    },
+    "name": {
+      "type": "string",
+      "value": "parsarium"
+    },
+    "nested": {
+      "type": "object",
+      "members": {
+        "empty": {
+          "type": "object",
+          "members": {}
+        },
+        "items": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "members": {
+                "id": {
+                  "type": "number",
+                  "value": 1
+                },
+                "ok": {
+                  "type": "boolean",
+                  "value": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "members": {
+                "id": {
+                  "type": "number",
+                  "value": 2
+                },
+                "text": {
+                  "type": "string",
+                  "value": "café \"quoted\""
+                }
+              }
+            }
+          ]
+        },
+        "level": {
+          "type": "number",
+          "value": 2
+        },
+        "list": {
+          "type": "array",
+          "items": []
+        }
+      }
+    },
+    "ratio": {
+      "type": "number",
+      "value": -2.5
+    },
+    "tags": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "value": "json"
+        },
+        {
+          "type": "string",
+          "value": "go"
+        },
+        {
+          "type": "string",
+          "value": "rfc8259"
+        }
+      ]
+    },
+    "version": {
+      "type": "number",
+      "value": 1
+    }
+  }
+}
+```
 
-[Run commands](../../../../projects/json/javascript/jsonc_parser/README.md)
+## Verification scope
+
+The documented parseTree API returns a hierarchical AST and reports syntax errors separately because the parser is fault tolerant. The adapter uses strict JSON options, rejects nonzero errors, then maps node types and primitive values. Both valid pinned controls yield exact type-tagged trees matching an independent Python json oracle. The controls have no comments, trailing commas, duplicate keys or unsafe numbers, so they do not establish broader acceptance/rejection behavior.
+
+## Run this target
+
+```sh
+python3 parsarium.py build json javascript jsonc_parser
+python3 parsarium.py run json javascript jsonc_parser controls/json/nested-object.json
+```
