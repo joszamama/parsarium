@@ -11,28 +11,12 @@
       "source": "https://crates.io/crates/xmlparser"
     },
     {
-      "name": "xml-rs",
-      "version": "1.0.0",
-      "recent_downloads_90d": 32180109,
-      "status": "unresolved",
-      "reason": "Pure-Rust StAX-style EventReader with namespaces over io::Read; not run on the controls in this pilot.",
-      "source": "https://crates.io/crates/xml-rs"
-    },
-    {
       "name": "xml5ever",
       "version": "0.40.0",
       "recent_downloads_90d": 14338073,
       "status": "unresolved",
       "reason": "Servo html5ever-family XML tokenizer and tree builder; the XML5 error-recovery model differs from XML 1.0 well-formedness, so eligibility and an observable namespace result need checking.",
       "source": "https://crates.io/crates/xml5ever"
-    },
-    {
-      "name": "xml",
-      "version": "1.4.0",
-      "recent_downloads_90d": 6413267,
-      "status": "unresolved_shared_family",
-      "reason": "Published by the xml-rs project under the shorter crate name; its relationship to the xml-rs 1.0.0 release must be checked before it counts as a separate path.",
-      "source": "https://crates.io/crates/xml"
     },
     {
       "name": "RustyXML",
@@ -165,6 +149,15 @@
       "recent_downloads_90d": 570973,
       "status": "excluded",
       "reason": "Tree-sitter grammar; a syntax-tree generator, not a namespace-aware XML reader."
+    },
+    {
+      "name": "xml-rs",
+      "version": "1.0.0",
+      "recent_downloads_90d": 32180109,
+      "status": "excluded_shared_family",
+      "reason": "Compatibility re-export only: published src/lib.rs is `pub use xml1::*;`, Cargo.toml declares its only dependency as package xml version 1.0.0. The actual EventReader implementation is in the selected xml family; do not double-count this shim.",
+      "source": "https://static.crates.io/crates/xml-rs/xml-rs-1.0.0.crate",
+      "source_sha256": "c3a56132a0d6ecbe77352edc10232f788fc4ceefefff4cab784a98e0e16b6b51"
     }
   ],
   "verified_leads": [
@@ -176,6 +169,14 @@
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/roxmltree/verification.json",
       "family_note": "The pinned crate contains its own src/tokenizer.rs and has no xmlparser package dependency. Historical xmlparser relationship remains noted."
+    },
+    {
+      "name": "xml",
+      "version": "1.4.0",
+      "recent_downloads_90d": 6413267,
+      "status": "selected",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/xml/verification.json"
     }
   ]
 }

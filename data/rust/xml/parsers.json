@@ -86,5 +86,49 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/roxmltree/verification.json"
+  },
+  {
+    "name": "xml",
+    "version": "1.4.0",
+    "license": "MIT",
+    "input_api": "xml::reader::EventReader::new(&[u8]); EventReader::next() -> Result<XmlEvent>; StartElement yields namespace-resolved OwnedName, attributes, and namespace map",
+    "documentation": "https://docs.rs/xml/1.4.0/xml/reader/struct.EventReader.html",
+    "source": "https://static.crates.io/crates/xml/xml-1.4.0.crate",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read as a namespace-resolved EventReader stream: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes with normalized values, decoded character data (predefined entity and character references, CDATA)",
+    "family": "xml-rs EventReader implementation in xml 1.4.0; xml-rs 1.0.0 is a re-export shim that depends on xml and is not a separate family",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 6413267,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/xml/verification.json"
   }
 ]
