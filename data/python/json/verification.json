@@ -119,6 +119,231 @@
       "coverage_caveat": "Source-built -O0 extension with yajl embedded through ijson's IJSON_EMBED_YAJL path. Official Linux wheels link the same yajl commit as a separately built -O3 shared library, so linkage and optimisation differ. Pure-Python, ctypes and cffi backends are not covered."
     },
     {
+      "package": "msgspec",
+      "version": "0.22.0",
+      "pass": true,
+      "input_api": "msgspec.json.decode(local JSON bytes) with the default type=Any",
+      "tested_type": "Any (default)",
+      "output": {
+        "value": [
+          "object",
+          [
+            [
+              "name",
+              [
+                "string",
+                "parsarium"
+              ]
+            ],
+            [
+              "version",
+              [
+                "int",
+                1
+              ]
+            ],
+            [
+              "ratio",
+              [
+                "float",
+                "-2.5"
+              ]
+            ],
+            [
+              "enabled",
+              [
+                "bool",
+                true
+              ]
+            ],
+            [
+              "missing",
+              [
+                "null"
+              ]
+            ],
+            [
+              "tags",
+              [
+                "array",
+                [
+                  [
+                    "string",
+                    "json"
+                  ],
+                  [
+                    "string",
+                    "go"
+                  ],
+                  [
+                    "string",
+                    "rfc8259"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "nested",
+              [
+                "object",
+                [
+                  [
+                    "level",
+                    [
+                      "int",
+                      2
+                    ]
+                  ],
+                  [
+                    "items",
+                    [
+                      "array",
+                      [
+                        [
+                          "object",
+                          [
+                            [
+                              "id",
+                              [
+                                "int",
+                                1
+                              ]
+                            ],
+                            [
+                              "ok",
+                              [
+                                "bool",
+                                false
+                              ]
+                            ]
+                          ]
+                        ],
+                        [
+                          "object",
+                          [
+                            [
+                              "id",
+                              [
+                                "int",
+                                2
+                              ]
+                            ],
+                            [
+                              "text",
+                              [
+                                "string",
+                                "café \"quoted\""
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "empty",
+                    [
+                      "object",
+                      []
+                    ]
+                  ],
+                  [
+                    "list",
+                    [
+                      "array",
+                      []
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "value": [
+          "array",
+          [
+            [
+              "int",
+              1
+            ],
+            [
+              "float",
+              "0.25"
+            ],
+            [
+              "string",
+              "two"
+            ],
+            [
+              "array",
+              [
+                [
+                  "bool",
+                  true
+                ],
+                [
+                  "null"
+                ],
+                [
+                  "array",
+                  [
+                    [
+                      "bool",
+                      false
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "object",
+              [
+                [
+                  "k",
+                  [
+                    "array",
+                    []
+                  ]
+                ],
+                [
+                  "n",
+                  [
+                    "object",
+                    [
+                      [
+                        "deep",
+                        [
+                          "string",
+                          "A"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "expected_output_source": "hand-written type-tagged trees in projects/json/python/msgspec/manifest.json",
+      "parser_family": "msgspec hand-written C JSON decoder in src/msgspec/_core.c (tag 0.22.0, commit 6d3443f2dae8413a1a56640290c09a6f486f30c2)",
+      "native_source_files": 2,
+      "native_region_start_lines": 894,
+      "json_decoder_section_lines": [
+        17076,
+        20140
+      ],
+      "json_decoder_region_start_lines": 197,
+      "number_parser_region_start_lines": 46,
+      "afl_feedback": "data/python/json/msgspec-valid-feedback.json",
+      "project_receipt": "projects/json/python/msgspec/verification.json",
+      "project_receipt_sha256": "4ef4799fe9f52f8a721869d57d21146613c26ef574183797b287b43ff99e34c2",
+      "coverage_caveat": "Source-built clang -O0 _core extension; the official aarch64 wheel's extension is a GCC 14.2.1 release build (no MSGSPEC_DEBUG -O0 path). _core.c also holds the MessagePack, encoder, Struct and convert code, so whole-file counts include module set-up; the JSON Decoder (lines 17076-20140) and Number Parser (12242-12691) sections are counted separately. Typed decoding (Structs, dataclasses, annotations) and msgspec.json.Decoder are not covered."
+    },
+    {
       "package": "ujson",
       "version": "6.1.0",
       "pass": true,
