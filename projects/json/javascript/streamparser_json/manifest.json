@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "@streamparser/json",
+  "release": "0.0.26",
+  "catalog_parser": "data/javascript/json/parsers.json",
+  "source_lock": "projects/json/javascript/streamparser_json/source-lock.json",
+  "source_sha256": "168adc385f5452f094e2d9f2ac721bcfcfbe583a0623833640772a6688aeef66",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/@streamparser/json/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of @streamparser/json package tokenizer and tokenparser during complete valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/@streamparser/json/",
+  "scope": "One complete RFC 8259 JSON document from local UTF-8 bytes written as one Buffer; default token parser ends on first root and tokenizer checks remaining bytes for JSON whitespace"
+}

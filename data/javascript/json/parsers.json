@@ -106,5 +106,59 @@
     },
     "project": "projects/json/javascript/bfj",
     "license_evidence": "https://registry.npmjs.org/bfj/9.1.4"
+  },
+  {
+    "name": "@streamparser/json",
+    "version": "0.0.26",
+    "license": "MIT",
+    "npm_integrity": "sha512-46597LNFI+MFdUnzX2QJWwmdTRdq0XVD+vVNJTtGVzIrnCuhG9pFo1OAzbNBqci8UJgk/X5KJZ6LcV+y7PTuDQ==",
+    "tarball_sha256": "168adc385f5452f094e2d9f2ac721bcfcfbe583a0623833640772a6688aeef66",
+    "input_api": "new JSONParser({keepStack:true}).write(local Uint8Array); onValue root; end()",
+    "documentation": "https://www.npmjs.com/package/@streamparser/json?activeTab=readme",
+    "source": "https://registry.npmjs.org/@streamparser/json/-/json-0.0.26.tgz",
+    "scope": "One complete RFC 8259 JSON document from local UTF-8 bytes written as one Buffer; default undefined separator ends on root and tokenizer checks remaining bytes for whitespace",
+    "family": "@streamparser/json TypeScript tokenizer and token parser",
+    "family_note": "src/tokenizer.ts performs UTF-8 lexical analysis and src/tokenparser.ts assembles values. Package does not delegate input to JSON.parse. JSONParser chains both. With default separator undefined, tokenparser ends after first root; tokenizer continues through the remainder of the same Buffer in ENDED state and permits only JSON whitespace. Distinct from stream-json and bfj.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 13886478,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@streamparser/json",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/streamparser_json",
+    "license_evidence": "https://registry.npmjs.org/@streamparser%2Fjson/0.0.26"
   }
 ]

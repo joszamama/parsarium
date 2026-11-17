@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T05:05:04.449895+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T05:13:04.917554+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_nested_array",
   "standard_feedback": "JSON.parse has staged native function-entry feedback, not JavaScript source ranges",
   "results": [
@@ -89,6 +89,51 @@
         "src/walk.js": 4
       },
       "differential_only_features_by_file": {}
+    },
+    {
+      "project": "json/javascript/streamparser_json",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "74920c2c32833b18fcbad874e5e7e31bfe3f1db0783dafa106101d3286e364ec",
+      "base_image_id": "sha256:40f14a69de6aa2f111a9ad50a80483297078e75dfa19dfbf793ffcb090223d4b",
+      "overlay_image_id": "sha256:2e6abd75bc26da108459537701708fa21ba62aaa6d29aa838e0e51b004c623b7",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 154,
+      "control_afl_tuples": 173,
+      "differential_parser_features": 142,
+      "differential_afl_tuples": 161,
+      "parser_feature_difference": 30,
+      "afl_tuple_difference": 30,
+      "control_only_features_by_file": {
+        "dist/mjs/tokenizer.js": 14,
+        "dist/mjs/tokenparser.js": 7
+      },
+      "differential_only_features_by_file": {
+        "dist/mjs/tokenizer.js": 4,
+        "dist/mjs/tokenparser.js": 5
+      }
     }
   ]
 }
