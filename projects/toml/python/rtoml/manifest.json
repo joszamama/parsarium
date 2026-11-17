@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "format": "toml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "rtoml",
+  "release": "0.14.0",
+  "catalog_parser": "data/python/toml/parsers.json",
+  "source_lock": "projects/toml/python/rtoml/source-lock.json",
+  "source_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
+  "sdist_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
+  "underlying_release": "toml 1.1.8+spec-1.1.0 over toml_parser 1.1.5+spec-1.1.0 and toml_datetime 1.1.2+spec-1.1.0 (crates.io releases pinned by the sdist Cargo.lock)",
+  "build_note": "Source-built from the pinned sdist with maturin --locked and Rust -C instrument-coverage -C codegen-units=1 plus release debug info, keeping the sdist's fat-LTO release profile. The official aarch64 cp311 wheel builds the same sources without coverage instrumentation.",
+  "dependencies_note": "rtoml has no Python runtime dependencies; maturin 1.16.0 is the build backend only. The parser crates come from crates.io through the sdist Cargo.lock, and cargo checks their checksums.",
+  "parser_family": "toml_parser (toml-rs, Rust): rtoml's PyO3 _rtoml module calls toml::Deserializer::parse (toml 1.1.8), which lexes and parses through toml_parser 1.1.5 and assembles DeTable/DeValue from its events; rtoml's own src/de.rs turns that into Python objects. Same parser family as the selected Rust toml and toml_edit paths (the same toml_parser 1.1.5 release); independent of tomli/tomllib and tomlkit.",
+  "base_image": "rust@sha256:b78cfbe4c0fd96b8a06b259092f1f412cb3ad3c5aed89d188bc40a1b8637f8f6",
+  "runtime_base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "expected_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "differential_control_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "differential_expected_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "api": "rtoml.loads(decoded local TOML text) -> dict; rtoml.load(pathlib.Path) and rtoml.load(local text stream) give the same typed tree",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-region coverage of the source-built _rtoml extension, scoped to the toml_parser 1.1.5 crate (lexer, event parser, scalar and string decoders); the toml 1.1.8 crate (DeTable/DeValue assembly and serde deserializer) is reported as underlying source and toml_datetime 1.1.2 as a separate line count; rtoml's own PyO3 glue (src/*.rs) is counted only as wrapper lines",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_parser-1.1.5+spec-1.1.0/src/",
+  "format_specific_coverage_file_suffix": "/parser/document.rs",
+  "underlying_coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml-1.1.8+spec-1.1.0/src/",
+  "underlying_format_specific_coverage_file_suffix": "/de/parser/document.rs",
+  "afl_coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/rtoml/_rtoml*.so",
+  "native_campaign_supported": false,
+  "scope": "TOML 1.0.0 documents from local text via rtoml.loads; the two valid controls only (service-config and typed-scalars), each equal to its hand-written typed tree and to CPython tomllib (an independent family) in the same image. AFL++ feedback covers the toml, toml_parser and toml_datetime crate sources (the registry toml prefix). Malformed input and TOML 1.1 features are untested.",
+  "afl_package_release": "4.04c-4"
+}

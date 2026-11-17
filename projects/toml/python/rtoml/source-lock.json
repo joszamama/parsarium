@@ -1,0 +1,51 @@
+{
+  "rtoml": {
+    "release": "0.14.0",
+    "registry_metadata": "https://pypi.org/pypi/rtoml/0.14.0/json",
+    "uploaded_utc": "2026-10-12T00:17:15Z",
+    "sdist": "https://files.pythonhosted.org/packages/da/fb/ef915d0c607fb92674b16e15792ed9d254c9db0b3fbbea90b7be46fe3e2b/rtoml-0.14.0.tar.gz",
+    "sdist_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
+    "wheel": "https://files.pythonhosted.org/packages/6e/a2/75635735b7689601728a9c298948e2cf84abe11edef5681f20755ca15291/rtoml-0.14.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+    "wheel_sha256": "a40508832355cc585ba326a6ad6534fcbce3ca030ef0a17e43933d97836c7ac6",
+    "wheel_note": "Matching-platform reference wheel only; it is not installed. The official wheel is built with the sdist's release profile (fat LTO, one codegen unit) and no coverage instrumentation.",
+    "license": "MIT",
+    "license_evidence": "PKG-INFO 'License: MIT' (checked in the Dockerfile) and Cargo.toml license = \"MIT\"",
+    "license_file_sha256": "707bdb34c5b967650d5f87a0a6da6da5b8b323147fdc4f3abfd329ab2903a0b9",
+    "requires_python": ">=3.10",
+    "runtime_dependencies": [],
+    "documented_api": "README.md 'load' and 'loads' sections: load(toml: str | Path | TextIO, *, none_value=None) and loads(toml: str, *, none_value=None) -> Dict[str, Any]",
+    "cargo_lock_sha256": "8bf625d2f14f2eefb305ef255051ee8cd8de07be9fd11a955af57d7a572a8962",
+    "source_file_sha256": {
+      "src/lib.rs": "7e9b0601a310befb20ca3d149138cbfacdb39a5e1513d05d415243221a9d68e8",
+      "src/de.rs": "52f28a467f533d08c54b1fbea6fead2bfc132a84655f38f6ba995001a1252bae",
+      "src/datetime.rs": "ad3e8d9f5852e79dfb9372790f78d92a052224de64803a8f50b51abcefa6bd26",
+      "python/rtoml/__init__.py": "c344f04efba074ded87226b47696f7108db26d1382a69d40fe582cc5c760503a"
+    },
+    "source_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59"
+  },
+  "toml_parser": {
+    "release": "1.1.5+spec-1.1.0",
+    "cargo_crate_sha256": "baa693a8032d7e1cada7d0041e96126df243179ff061456783ac7f12bda4744c",
+    "role": "TOML lexer and event parser (the parser under test), resolved by the sdist Cargo.lock; the same release as the selected Rust toml and toml_edit paths"
+  },
+  "toml": {
+    "release": "1.1.8+spec-1.1.0",
+    "cargo_crate_sha256": "20489e00e4d8741d6be680764cc12e270655e375a20d1011e844a9c3379e678d",
+    "features": ["preserve_order"],
+    "role": "Deserializer::parse and the DeTable/DeValue assembly from toml_parser events"
+  },
+  "toml_datetime": {
+    "release": "1.1.2+spec-1.1.0",
+    "cargo_crate_sha256": "2b86d767906c6c42421dcba507eb9d203e779497710a47782a224bb871653053",
+    "role": "date-time value parsing for the four TOML date-time kinds"
+  },
+  "pyo3": {
+    "release": "0.29.3",
+    "cargo_crate_sha256": "700d18fa267b73b9b521fd7e13580e2f446916f176cacee1ab63fcc8191f1655",
+    "role": "Python binding layer, resolved by the sdist Cargo.lock; outside parser coverage scope"
+  },
+  "build_backend": {
+    "maturin": {"release": "1.16.0", "wheel_sha256": "e285ec9eb10243d45d10417178cb2eb76e0cbb184d0aa4378b503489fa12ee78"},
+    "role": "build backend only (rtoml pyproject requires maturin>=1,<2)"
+  }
+}

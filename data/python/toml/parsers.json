@@ -506,5 +506,264 @@
    "limitation": "Package-level downloads include transitive installs and non-parsing use; they do not measure TOML parsing directly."
   },
   "project": "projects/toml/python/tomli"
+ },
+ {
+  "name": "rtoml",
+  "version": "0.14.0",
+  "license": "MIT",
+  "license_evidence": "https://pypi.org/pypi/rtoml/0.14.0/json; sdist PKG-INFO 'License: MIT' and LICENSE sha256 707bdb34c5b967650d5f87a0a6da6da5b8b323147fdc4f3abfd329ab2903a0b9",
+  "input_api": "rtoml.loads(decoded local TOML text) -> dict; rtoml.load(pathlib.Path) and rtoml.load(local text stream) give the same typed tree on both controls",
+  "documentation": "https://github.com/samuelcolvin/rtoml/blob/v0.14/README.md",
+  "source": "https://files.pythonhosted.org/packages/da/fb/ef915d0c607fb92674b16e15792ed9d254c9db0b3fbbea90b7be46fe3e2b/rtoml-0.14.0.tar.gz",
+  "source_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
+  "wheel_sha256": "a40508832355cc585ba326a6ad6534fcbce3ca030ef0a17e43933d97836c7ac6",
+  "dependencies": [
+   "toml 1.1.8+spec-1.1.0 (crates.io, preserve_order)",
+   "toml_parser 1.1.5+spec-1.1.0 (crates.io)",
+   "toml_datetime 1.1.2+spec-1.1.0 (crates.io)",
+   "pyo3 0.29.3 (crates.io)"
+  ],
+  "scope": "TOML 1.0.0 documents from local text via rtoml.loads; the two valid controls only (service-config and typed-scalars), each equal to its hand-written typed tree and to CPython tomllib (an independent family) in the same image. AFL++ feedback covers the toml, toml_parser and toml_datetime crate sources (the registry toml prefix). Malformed input and TOML 1.1 features are untested.",
+  "family": "toml_parser (toml-rs) via PyO3: toml 1.1.8 Deserializer over toml_parser 1.1.5; shared with the Rust toml and toml_edit paths",
+  "family_note": "rtoml.loads calls the PyO3 _rtoml.deserialize function, which runs toml::Deserializer::parse from the toml 1.1.8 crate: toml_parser 1.1.5 lexes the text and emits parse events, toml assembles its DeTable/DeValue from them, and rtoml's own src/de.rs visitor and src/datetime.rs turn the values into Python objects. The lexer and parser are the same toml_parser 1.1.5 release that the selected Rust toml and toml_edit paths drive, so this path shares their family and is not an independent parser; its feedback differential is measured in the toml, toml_parser and toml_datetime crate sources. It is independent of tomli (and the standard tomllib) and tomlkit. The measured build is a source build of the pinned sdist with Rust coverage instrumentation, not the official wheel.",
+  "control": "controls/toml/service-config.toml",
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "expected_output": {
+   "database": {
+    "limits": {
+     "max": {
+      "type": "integer",
+      "value": "10"
+     },
+     "min": {
+      "type": "integer",
+      "value": "-2"
+     }
+    },
+    "ports": [
+     {
+      "type": "integer",
+      "value": "8000"
+     },
+     {
+      "type": "integer",
+      "value": "8001"
+     },
+     {
+      "type": "integer",
+      "value": "8002"
+     }
+    ],
+    "ratio": {
+     "type": "float",
+     "value": "3.25"
+    }
+   },
+   "enabled": {
+    "type": "bool",
+    "value": "true"
+   },
+   "owner": {
+    "name": {
+     "type": "string",
+     "value": "Zoë"
+    },
+    "since": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00Z"
+    }
+   },
+   "products": [
+    {
+     "name": {
+      "type": "string",
+      "value": "Hammer"
+     },
+     "sku": {
+      "type": "integer",
+      "value": "738594937"
+     }
+    },
+    {
+     "color": {
+      "type": "string",
+      "value": "gray"
+     },
+     "name": {
+      "type": "string",
+      "value": "Nail"
+     },
+     "points": [
+      {
+       "x": {
+        "type": "integer",
+        "value": "1"
+       },
+       "y": {
+        "type": "integer",
+        "value": "2"
+       }
+      },
+      {
+       "x": {
+        "type": "integer",
+        "value": "3"
+       },
+       "y": {
+        "type": "integer",
+        "value": "4"
+       }
+      }
+     ]
+    }
+   ],
+   "retries": {
+    "type": "integer",
+    "value": "3"
+   },
+   "servers": {
+    "alpha": {
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.1"
+     },
+     "tags": [
+      {
+       "type": "string",
+       "value": "edge"
+      },
+      {
+       "type": "string",
+       "value": "eu"
+      }
+     ]
+    },
+    "beta": {
+     "enabled": {
+      "type": "bool",
+      "value": "false"
+     },
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.2"
+     }
+    }
+   },
+   "title": {
+    "type": "string",
+    "value": "Parsarium \"service\" control"
+   }
+  },
+  "differential_expected_output": {
+   "floats": {
+    "exponent": {
+     "type": "float",
+     "value": "1000.0"
+    },
+    "fraction": {
+     "type": "float",
+     "value": "3.25"
+    },
+    "mixed": {
+     "type": "float",
+     "value": "0.015625"
+    },
+    "negative": {
+     "type": "float",
+     "value": "-0.5"
+    }
+   },
+   "integers": {
+    "binary": {
+     "type": "integer",
+     "value": "13"
+    },
+    "decimal": {
+     "type": "integer",
+     "value": "99"
+    },
+    "hex": {
+     "type": "integer",
+     "value": "3735928559"
+    },
+    "negative": {
+     "type": "integer",
+     "value": "-17"
+    },
+    "octal": {
+     "type": "integer",
+     "value": "493"
+    },
+    "underscored": {
+     "type": "integer",
+     "value": "1000000"
+    }
+   },
+   "keys": {
+    "a": {
+     "b": {
+      "c": {
+       "type": "integer",
+       "value": "1"
+      }
+     }
+    },
+    "quoted key": {
+     "type": "string",
+     "value": "q"
+    },
+    "site": {
+     "example.com": {
+      "type": "bool",
+      "value": "true"
+     }
+    }
+   },
+   "strings": {
+    "escapes": {
+     "type": "string",
+     "value": "tab\tquote\"backslash\\ é"
+    },
+    "literal": {
+     "type": "string",
+     "value": "C:\\Users\\parsarium"
+    },
+    "multiline": {
+     "type": "string",
+     "value": "first second"
+    },
+    "raw_multiline": {
+     "type": "string",
+     "value": "line one\nline two"
+    }
+   },
+   "times": {
+    "local_date": {
+     "type": "date-local",
+     "value": "1979-05-27"
+    },
+    "local_datetime": {
+     "type": "datetime-local",
+     "value": "1979-05-27T07:32:00"
+    },
+    "local_time": {
+     "type": "time-local",
+     "value": "00:32:00.25"
+    },
+    "offset": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00.5Z"
+    }
+   }
+  },
+  "metric": {
+   "name": "PyPI Stats last_month downloads excluding known mirrors",
+   "value": 1380894,
+   "source": "https://pypistats.org/api/packages/rtoml/recent",
+   "snapshot": "data/python/toml/registry-snapshot.json",
+   "captured_at_utc": "2026-11-17T16:44:07.762095+00:00",
+   "limitation": "Package-level downloads include transitive installs and non-parsing use; they do not measure TOML parsing directly."
+  },
+  "project": "projects/toml/python/rtoml"
  }
 ]

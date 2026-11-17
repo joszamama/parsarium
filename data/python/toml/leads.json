@@ -26,28 +26,6 @@
       }
     },
     {
-      "name": "rtoml",
-      "metric_value": 1380894,
-      "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "family": "Rust toml crate via PyO3 (toml_parser family)",
-      "api_lead": "rtoml.loads(str)",
-      "note": "PyO3 extension (_rtoml cdylib) over the Rust toml crate 1.1 with preserve_order (toml_parser family, shared with the selected Rust toml and toml_edit paths).",
-      "source": "https://pypi.org/project/rtoml/",
-      "status": "unresolved_runnability_pending",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "0.14.0",
-      "release_sdist_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
-      "license": "MIT",
-      "release_wheel_sha256": "c3bccc482ab4e5a0cebff9d90b40091e89634d377fde7daed14478effc18ecc4",
-      "evidence": {
-        "checked_on_utc": "2026-11-17",
-        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), rtoml 0.14.0 cp313 manylinux aarch64 wheel; rtoml.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
-        "service-config.toml": "matches the hand-written typed tree",
-        "typed-scalars.toml": "matches the hand-written typed tree",
-        "blocker": "The parser runs as compiled Rust inside the extension, so Python line coverage and the Python AFL++ bridge see none of it. A path needs a source build of the sdist with Rust instrument-coverage and SanitizerCoverage scoped to the toml/toml_parser crates inside the CPython process; that build was not done in this round."
-      }
-    },
-    {
       "name": "pytoml",
       "metric_value": 337081,
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
@@ -150,6 +128,12 @@
       "metric_value": 263305223,
       "status": "promoted_to_verified",
       "project": "projects/toml/python/tomli"
+    },
+    {
+      "name": "rtoml",
+      "metric_value": 1380894,
+      "status": "promoted_to_verified",
+      "project": "projects/toml/python/rtoml"
     }
   ]
 }

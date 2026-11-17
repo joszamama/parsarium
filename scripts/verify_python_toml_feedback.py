@@ -1,11 +1,14 @@
 """Check a Python TOML path's typed trees and its parser-source AFL++ feedback on the two valid TOML controls.
 
-Usage: python3 scripts/verify_python_toml_feedback.py {tomlkit|tomli}
+Usage: python3 scripts/verify_python_toml_feedback.py SLUG (a key of PACKAGES)
 
 Every API mode of the package, and CPython tomllib run where the package is not
 importable, must give the hand-written typed tree of each control. The AFL++ overlay
 must then give identical, parser-scoped feedback on three runs per control, and the
-two controls must differ by at least two source lines and two AFL++ tuples.
+two controls must differ by at least two source features and two AFL++ tuples.
+Pure-Python packages use the Python line bridge; native extensions (``native``
+targets) use the LLVM region bridge over the compiled parser sources named by the
+manifest's afl_coverage_subject_prefix.
 """
 from collections import Counter
 from datetime import datetime, timezone
@@ -26,6 +29,12 @@ PACKAGES = {
     "tomli": {"modes": ("tomli-str", "tomli-stream"),
               "parser_file": "_parser.py",
               "stdlib_family": "same family (tomllib is a vendored copy of tomli); hand-written trees are the independent check"},
+    "rtoml": {"modes": ("rtoml-str", "rtoml-path", "rtoml-stream"),
+              "parser_file": "_parser-1.1.5+spec-1.1.0/src/parser/document.rs",
+              "stdlib_family": "independent (tomllib is the tomli family; rtoml is the Rust toml_parser family)",
+              "native": ("executed LLVM source regions and branch directions of the toml 1.1.8, toml_parser 1.1.5 "
+                         "and toml_datetime 1.1.2 crate sources under {prefix}, compiled into the source-built "
+                         "rtoml {release} _rtoml extension")},
 }
 
 
@@ -86,7 +95,8 @@ def probe(platform: str, image: str, prefix: str, parser_file: str,
 
 
 def per_file(prefix: str, features) -> dict:
-    return dict(sorted(Counter(value[len(prefix):].rsplit(':', 1)[0] for value in features).items()))
+    # Python line features are file:line; native region features are file:line:column[:branch].
+    return dict(sorted(Counter(value[len(prefix):].split(':', 1)[0] for value in features).items()))
 
 
 def main() -> None:
@@ -99,7 +109,7 @@ def main() -> None:
     base = json.loads((project / 'verification.json').read_text())
     overlay = json.loads((overlay_dir / 'verification.json').read_text())
     platform = manifest['platform']
-    prefix = manifest['coverage_subject_prefix']
+    prefix = manifest.get('afl_coverage_subject_prefix', manifest['coverage_subject_prefix'])
     parser_file = PACKAGES[slug]['parser_file']
     if overlay['base_image_id'] != base['image_id']:
         raise RuntimeError('AFL overlay base differs from verified project')
@@ -147,7 +157,11 @@ def main() -> None:
         'input_kind': 'two fixed valid TOML 1.0.0 controls',
         'oracle': 'hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them',
         'control_oracle': oracles['control'], 'variant_oracle': oracles['variant'],
-        'feedback_scope': f'executed Python source lines of the installed {slug} {manifest["release"]} package under {prefix}, mapped to the AFL++ bitmap by the Parsarium Python line bridge',
+        'feedback_scope': (
+            PACKAGES[slug]['native'].format(prefix=prefix, release=manifest['release'])
+            + ', mapped to the AFL++ bitmap by the Parsarium LLVM region bridge'
+            if 'native' in PACKAGES[slug] else
+            f'executed Python source lines of the installed {slug} {manifest["release"]} package under {prefix}, mapped to the AFL++ bitmap by the Parsarium Python line bridge'),
         'base_image_id': base['image_id'], 'overlay_image_id': overlay['image_id'],
         'overlay_receipt_sha256': sha256((overlay_dir / 'verification.json').read_bytes()).hexdigest(),
         'control': manifest['control'], 'control_sha256': manifest['control_sha256'],
@@ -157,8 +171,8 @@ def main() -> None:
         'runs_per_control': REPEATS,
         'control_repeat_identical': True, 'variant_repeat_identical': True,
         'control_parser_features': len(first), 'variant_parser_features': len(other),
-        'control_parser_lines_per_file': per_file(prefix, first),
-        'variant_parser_lines_per_file': per_file(prefix, other),
+        'control_parser_lines_per_file': per_file(prefix[:prefix.rfind('/') + 1], first),
+        'variant_parser_lines_per_file': per_file(prefix[:prefix.rfind('/') + 1], other),
         'format_parser_file': parser_file,
         'control_format_parser_features': sum(value.startswith(parser_prefix) for value in first),
         'variant_format_parser_features': sum(value.startswith(parser_prefix) for value in other),
