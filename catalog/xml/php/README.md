@@ -14,6 +14,7 @@ Pilot cell, six verified third-party paths. The earlier zero count wrongly exclu
 - [veewee/xml](veewee-xml/README.md) — verified Docker harness
 - [mtownsend/xml-to-array](mtownsend-xml-to-array/README.md) — verified Docker harness
 - [saloonphp/xml-wrangler](saloonphp-xml-wrangler/README.md) — verified Docker harness
+- [pear/xml_parser](pear-xml-parser/README.md) — verified API path
 
 ## Standard and runtime APIs
 

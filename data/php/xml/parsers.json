@@ -367,5 +367,107 @@
     ],
     "feedback": "data/php/xml/saloonphp-xml-wrangler-feedback-differential.json",
     "afl_overlay": "fuzzing/afl-native/xml/php/saloon_xml_wrangler/verification.json"
+  },
+  {
+    "name": "pear/xml_parser",
+    "version": "v1.3.8",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/pear/XML_Parser/blob/0134baa2df2054afcca41e9307b98a21db84365d/XML/Parser.php (BSD-2-Clause header; composer.json and composer.lock license [\"BSD-2-Clause\"] for 0134baa2df2054afcca41e9307b98a21db84365d)",
+    "documentation": "https://pear.php.net/manual/en/package.xml.xml-parser.input.php",
+    "api_documentation": "https://pear.php.net/package/XML_Parser/docs/latest/XML_Parser/XML_Parser.html",
+    "source": "https://github.com/pear/XML_Parser/tree/0134baa2df2054afcca41e9307b98a21db84365d",
+    "input_api": "new XML_Parser(), setHandlerObj(handler), setInputString(string) then parse() (documented in the PEAR manual 'Choosing input'); setInputFile(path) and setInput(resource) are cross-checked for the same summary",
+    "parser_family": "libxml2 push parser via PHP ext/xml (xml_parser_create/xml_parse through ext/xml/compat.c); shared with the standard xml_parser_create_ns/xml_parse path and the other libxml2 package paths",
+    "package_own_scope": "Object-oriented SAX driver over ext/xml: XML_Parser creates the parser (xml_parser_create, no namespace separator), sets case folding and target encoding, binds the handler object's startHandler/endHandler/cdataHandler/piHandler and other expat-style handlers (event mode) or derives xmltag_* methods (func mode), feeds the string in one final xml_parse call or a file/stream in 4096-byte fread chunks, frees the parser and wraps failures as PEAR XML_Parser_Error. Tokenizing, well-formedness, entity, character-reference and CDATA decoding are libxml2; event dispatch to PHP is ext/xml.",
+    "namespace_resolution": false,
+    "adapter": "projects/xml/php/pear_xml_parser/harness.php",
+    "source_lock": "projects/xml/php/pear_xml_parser/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "processing_instructions": [],
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "processing_instructions": [
+        "audit step=\"1\""
+      ],
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/php/pear_xml_parser/oracle.py (Python expat without namespace processing: raw qualified names, every attribute including xmlns declarations in document order, trimmed text runs between element boundaries and processing instructions, processing instructions as target data)",
+    "family": "libxml2 push parser via PHP ext/xml (xml_parser_create/xml_parse through ext/xml/compat.c); shared with the standard xml_parser_create_ns/xml_parse path and the other libxml2 package paths",
+    "project": "projects/xml/php/pear_xml_parser/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 1819294,
+      "source": "https://packagist.org/packages/pear/xml_parser",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "recheck": {
+        "source": "https://packagist.org/packages/pear/xml_parser/stats.json",
+        "captured_at_utc": "2026-11-17T15:01:25Z",
+        "total": 1821137,
+        "monthly": 29643,
+        "daily": 1270,
+        "response_sha256": "1d4ab72fa252ae57196ad858a462e74600315680250c2f05dd94d0d6578a576c"
+      },
+      "caveat": "Cumulative package downloads are a package adoption proxy, not XML parse counts. Packagist marks pear/xml_parser abandoned (no replacement suggested); v1.3.8 is from 2019-04-10, and many installs come as a dependency of other PEAR packages. It shares the libxml2 parser family, and ext/xml specifically, with the standard xml_parser_create_ns/xml_parse path."
+    },
+    "caveats": [
+      "Raw-name scope: XML_Parser has no namespace mode (xml_parser_create without a separator), so names are raw qualified names (prefix:local), no namespace URI is resolved, and xmlns/xmlns:* declarations, including <plain xmlns=\"\"> in order-default-ns.xml, arrive as ordinary attributes. The summary does not infer URIs.",
+      "XML_Parser's default $folding = true upper-cases element and attribute names; the harness sets the documented public property to false.",
+      "Character data and CDATA share cdataHandler; text runs are trimmed and empty runs dropped. Comments and the XML declaration are not reported because XML_Parser has no comment handler and the harness defines no defaultHandler.",
+      "PHP 8.5.12 reports E_DEPRECATED for XML_Parser's xml_set_object(), string handler names (xml_set_element_handler, xml_set_character_data_handler, xml_set_processing_instruction_handler) and xml_parser_free(). The parse is unchanged; the notices are recorded in the feedback receipt. A future PHP that removes xml_set_object() would break this release.",
+      "The package's own PHP lines (Xdebug) are the same on both controls, because ext/xml dispatches every event from C. Its role is driving the parse: it creates and configures the ext/xml parser, binds handlers and feeds the bytes; the format-dependent behavior is libxml2 and ext/xml.",
+      "AFL++ feedback comes from a native overlay that runs the same harness on PHP 8.5.12 and libxml2 2.15.4 with only libxml2 parser.c, parserInternals.c, SAX2.c and PHP ext/xml/xml.c and compat.c instrumented. Because the interpreted package adds no tuples, the overlay compares a bare xml_parser_create/xml_parse baseline with the same handlers; see the feedback receipt. Only valid controls were run; no malformed, vulnerability or resource inputs."
+    ],
+    "feedback": "data/php/xml/pear-xml-parser-feedback-differential.json",
+    "afl_overlay": "fuzzing/afl-native/xml/php/pear_xml_parser/verification.json"
   }
 ]

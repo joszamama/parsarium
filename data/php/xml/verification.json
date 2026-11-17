@@ -469,6 +469,92 @@
         "repeats_per_control": 5
       },
       "package_line_note": "Saloon and veewee package Xdebug lines are distinct from native libxml2 parser feedback."
+    },
+    {
+      "package": "pear/xml_parser",
+      "version": "v1.3.8",
+      "parser_family": "libxml2 push parser via PHP ext/xml (xml_parser_create/xml_parse through ext/xml/compat.c); shared with the standard xml_parser_create_ns/xml_parse path and the other libxml2 package paths",
+      "command": "python3 scripts/run_project.py xml php pear_xml_parser",
+      "receipt": "projects/xml/php/pear_xml_parser/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "processing_instructions": [],
+        "root": "c:catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 56,
+      "format_specific_source_lines_covered": 56,
+      "underlying_source_lines_covered": 2070,
+      "underlying_parser_c_lines_covered": 956,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "processing_instructions": [
+          "audit step=\"1\""
+        ],
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "projection_limit": [
+        "Raw-name scope: XML_Parser has no namespace mode (xml_parser_create without a separator), so names are raw qualified names (prefix:local), no namespace URI is resolved, and xmlns/xmlns:* declarations, including <plain xmlns=\"\"> in order-default-ns.xml, arrive as ordinary attributes. The summary does not infer URIs.",
+        "XML_Parser's default $folding = true upper-cases element and attribute names; the harness sets the documented public property to false.",
+        "Character data and CDATA share cdataHandler; text runs are trimmed and empty runs dropped. Comments and the XML declaration are not reported because XML_Parser has no comment handler and the harness defines no defaultHandler."
+      ],
+      "afl_feedback": {
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/pear_xml_parser/verification.json",
+        "overlay_receipt_sha256": "6dc90be3b0b9cfba16d7005870260a96757066025234f95b2eb629ae1580ab8c",
+        "feedback_kind": "native_libxml2_php_xml_parser_source_edges",
+        "control_afl_tuples": 836,
+        "differential_afl_tuples": 939,
+        "afl_tuple_difference": 299,
+        "repeats_per_control": 5,
+        "bare_xml_parse_baseline_tuple_difference": 300,
+        "differing_tuples_subset_of_bare_baseline": true
+      },
+      "package_line_note": "XML_Parser Xdebug lines (56 in XML/Parser.php, identical on both controls) are separate from the LLVM ext/xml and libxml2 lines and from native libxml2/ext/xml AFL++ feedback."
     }
   ],
   "standard": [

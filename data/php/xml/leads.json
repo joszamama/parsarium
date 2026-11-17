@@ -91,11 +91,11 @@
   },
   {
     "name": "pear/xml_parser",
-    "status": "unresolved",
+    "status": "selected",
     "version_seen": "v1.3.8",
     "license": "BSD-2-Clause",
     "packagist_downloads": 1819294,
-    "reason": "libxml2-family wrapper (SAX wrapper over xml_parser_create (PHP ext/xml, libxml2-based)). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
+    "reason": "Documented XML_Parser setInputString()/setInputFile()/setInput() plus setHandlerObj() and parse() drives ext/xml xml_parser_create/xml_parse (libxml2 push parser via compat.c) and delivers SAX events to a handler object. Both valid controls match a raw-name Expat oracle (no namespace mode; xmlns declarations are attributes; documented $folding set to false). Xdebug covers 56 package lines and LLVM about 2,070 libxml2 lines (parser.c 956); native parser-scoped AFL changes 299 stable tuples, all also differing under a bare xml_parse baseline, so the package drives the parse but adds no own tuples. Packagist marks it abandoned; PHP 8.5 deprecation notices recorded. Verified: projects/xml/php/pear_xml_parser.",
     "source": "https://packagist.org/packages/pear/xml_parser"
   },
   {
