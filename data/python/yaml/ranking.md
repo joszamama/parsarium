@@ -1,6 +1,6 @@
 # Python × YAML: pilot ranking
 
-Three control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
+Four control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -11,6 +11,7 @@ PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 (
 | 1 | [PyYAML](https://pyyaml.org/wiki/PyYAMLDocumentation) | 6.0.3 | 1,227,712,536 | yaml.load(local YAML bytes, Loader=yaml.SafeLoader), the pure-Python safe loader | PyYAML pure-Python loader (yaml/scanner.py, parser.py, composer.py, SafeConstructor, YAML 1.1 Resolver); not the libyaml CSafeLoader route |
 | 2 | [PyYAML CSafeLoader (libyaml)](https://pyyaml.org/wiki/PyYAMLDocumentation) | 6.0.3 | 1,227,712,536 | yaml.load(local YAML bytes, Loader=yaml.CSafeLoader) | libyaml 0.2.5 through PyYAML's _yaml C extension (CParser), with PyYAML's Python SafeConstructor and YAML 1.1 Resolver; not the pure-Python SafeLoader route |
 | 3 | [ruamel.yaml](https://yaml.dev/doc/ruamel.yaml/basicuse/) | 0.19.1 | 177,667,165 | ruamel.yaml.YAML(typ='safe', pure=True).load(local YAML bytes) | ruamel.yaml pure-Python loader (PyYAML-derived Reader/Scanner/Parser/Composer, SafeConstructor, YAML 1.2 VersionedResolver); not the ruamel.yaml.clib(z) C route |
+| 4 | [ruamel.yaml.clib](https://yaml.dev/doc/ruamel.yaml/basicuse/) | 0.2.15 | 69,289,256 | ruamel.yaml.YAML(typ='safe').load(local YAML bytes) with ruamel.yaml.clib installed (CParser) | libyaml-derived C reader/scanner/parser vendored in ruamel.yaml.clib (older libyaml snapshot) with the Cython _ruamel_yaml CParser, under ruamel.yaml's SafeConstructor and YAML 1.2 VersionedResolver; not the pure-Python ruamel.yaml route |
 
 Both controls must equal the hand-written typed trees in [check_controls.py](../../../controls/yaml/check_controls.py); see [verification.json](verification.json).
 

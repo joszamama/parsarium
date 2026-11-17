@@ -39,6 +39,19 @@
     "evidence": "projects/yaml/python/ruamel_yaml/verification.json"
   },
   {
+    "name": "ruamel.yaml.clib",
+    "status": "selected",
+    "metric_value": 69289256,
+    "metric_error": null,
+    "family": "libyaml-derived C loader for ruamel.yaml",
+    "api_hint": "YAML(typ='safe').load with ruamel.yaml.clib installed",
+    "note": "C extension package (_ruamel_yaml) with vendored libyaml-derived sources; ruamel.yaml uses it unless pure=True.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/ruamel.yaml.clib/",
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
+    "evidence": "projects/yaml/python/ruamel_yaml_clib/verification.json"
+  },
+  {
     "name": "strictyaml",
     "status": "shared_family",
     "metric_value": 29369654,

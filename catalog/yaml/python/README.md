@@ -11,6 +11,7 @@ Two verified third-party paths, in PyPI last_month order: PyYAML 6.0.3 through t
 - [PyYAML](pyyaml/README.md) — verified Docker harness
 - [PyYAML CSafeLoader (libyaml)](pyyaml-csafeloader-libyaml/README.md) — verified API path
 - [ruamel.yaml](ruamel-yaml/README.md) — verified Docker harness
+- [ruamel.yaml.clib](ruamel-yaml-clib/README.md) — verified API path
 
 ## Standard and runtime APIs
 
