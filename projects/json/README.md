@@ -35,6 +35,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder) / Python](python/stdlib_json/README.md)
 - [pydantic / Python](python/pydantic/README.md)
 - [simplejson / Python](python/simplejson/README.md)
+- [aws-smithy-json / Rust](rust/aws_smithy_json/README.md)
 - [jiter / Rust](rust/jiter/README.md)
 - [json / Rust](rust/json_crate/README.md)
 - [serde_json / Rust](rust/serde_json/README.md)
