@@ -1,0 +1,102 @@
+{
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "differential_control": "controls/sql/insert-values.sql",
+  "oracle": "controls/sql/expected.json",
+  "third_party": [
+    {
+      "package": "org.jooq:jooq",
+      "version": "3.21.9",
+      "pass": true,
+      "input_api": "DSL.using(SQLDialect.DEFAULT).parser().parse(local SQL text) -> Queries",
+      "dialect": "SQLDialect.DEFAULT",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "jOOQ hand-written recursive-descent parser (ParserImpl) and query object model",
+      "parser_source_files": 168,
+      "parser_source_lines_covered": 5802,
+      "afl_tuple_difference": 997,
+      "parser_feature_difference": 1087,
+      "project_receipt": "projects/sql/java/jooq/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/jooq/differential.json"
+    }
+  ],
+  "standard": [],
+  "checked_at_utc": "2026-11-17T17:21:09.425018+00:00"
+}

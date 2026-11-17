@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "DSL.using(SQLDialect.DEFAULT).parser().parse(local SQL text) -> Queries; the harness reads Select ($select, $from, $where, $groupBy, $orderBy) and QOM.Insert ($into, $columns, $values) and walks QOM joins, aliases, Count/Sum and Param values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T17:19:30.203852+00:00",
+  "manifest": "projects/sql/java/jooq/manifest.json",
+  "image_id": "sha256:bfa8ca2655952ff2b91491247eddab94fcd4953effb40591995635055040a8a6",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "8e58ed6849cdb8ad70023441569043307cace0ff3e8324d796157ae736495103",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "bc0053fafac0e99aed149937dce93ec5f54085ca73408e660469e06d984c2ac6",
+    "SqlHarness.java": "fc13218d2474fc19f4ac72b04087758a7937d8e1e196c1ae15a570233fc3f757",
+    "manifest.json": "84cee816a36967a2a8be0df9017a25676975da7740cd81105ecdfbad912d6d29",
+    "run-control.sh": "6003b73a03446c49d9a4e6320d5319ace563bf12c4d5ffaf89d4b84803bcc9e0",
+    "source-lock.json": "8c89a0748e822e434ed202f39a482ec7dce18cea4a74fe0eed8e33894285ec0c"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 168,
+  "parser_source_lines_covered": 5802,
+  "format_specific_source_lines_covered": 1076,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/jooq/target/coverage/coverage.json",
+  "pass": true
+}

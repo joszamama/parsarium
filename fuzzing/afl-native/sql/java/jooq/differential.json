@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T17:20:36.288022+00:00",
+  "project": "sql/java/jooq",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "ac1f8b2e43efc6c1ad76775fc00e5b2a9b6b7589935e73e97e897fd5037b33e2",
+  "overlay_receipt_sha256": "591ff9d7d622561dd9e1be1b3e220be3ad845312c934becc6e75ae63814cc7b7",
+  "base_image_id": "sha256:bfa8ca2655952ff2b91491247eddab94fcd4953effb40591995635055040a8a6",
+  "overlay_image_id": "sha256:2a0017c226d4997b62d2608ae5967500140154e9a72067d260b618d04f524e92",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 5584,
+  "second_afl_tuples": 5215,
+  "afl_tuple_difference": 997,
+  "first_parser_features": 5802,
+  "second_parser_features": 5379,
+  "parser_feature_difference": 1087,
+  "first_only_features_by_file": {
+    "org/jooq/Comparator.java": 24,
+    "org/jooq/DatePart.java": 27,
+    "org/jooq/JoinType.java": 26,
+    "org/jooq/Operator.java": 8,
+    "org/jooq/SortOrder.java": 8,
+    "org/jooq/impl/AbstractAggregateFunction.java": 13,
+    "org/jooq/impl/AbstractAttachableQueryPart.java": 1,
+    "org/jooq/impl/AbstractCondition.java": 4,
+    "org/jooq/impl/AbstractDataType.java": 3,
+    "org/jooq/impl/AbstractDataTypeX.java": 1,
+    "org/jooq/impl/AbstractField.java": 5,
+    "org/jooq/impl/AbstractJoinTable.java": 2,
+    "org/jooq/impl/AbstractLazyScope.java": 4,
+    "org/jooq/impl/AbstractParseContext.java": 1,
+    "org/jooq/impl/AbstractRow.java": 1,
+    "org/jooq/impl/AbstractTable.java": 7,
+    "org/jooq/impl/AbstractWindowFunction.java": 3,
+    "org/jooq/impl/Alias.java": 1,
+    "org/jooq/impl/And.java": 7,
+    "org/jooq/impl/CombineOperator.java": 12,
+    "org/jooq/impl/ConditionProviderImpl.java": 9,
+    "org/jooq/impl/Count.java": 3,
+    "org/jooq/impl/DSL.java": 11,
+    "org/jooq/impl/DataMap.java": 9,
+    "org/jooq/impl/DefaultConfiguration.java": 1,
+    "org/jooq/impl/Eq.java": 7,
+    "org/jooq/impl/FalseCondition.java": 6,
+    "org/jooq/impl/FieldAlias.java": 4,
+    "org/jooq/impl/FieldsImpl.java": 3,
+    "org/jooq/impl/Ge.java": 6,
+    "org/jooq/impl/Join.java": 2,
+    "org/jooq/impl/JoinTable.java": 24,
+    "org/jooq/impl/KeywordLookup.java": 7,
+    "org/jooq/impl/Limit.java": 1,
+    "org/jooq/impl/ParserImpl.java": 360,
+    "org/jooq/impl/QOM.java": 1,
+    "org/jooq/impl/QualifiedName.java": 4,
+    "org/jooq/impl/QueryPartCollectionView.java": 2,
+    "org/jooq/impl/QueryPartListView.java": 2,
+    "org/jooq/impl/SelectQueryImpl.java": 52,
+    "org/jooq/impl/SortFieldImpl.java": 8,
+    "org/jooq/impl/Sum.java": 4,
+    "org/jooq/impl/TableAlias.java": 8,
+    "org/jooq/impl/TableImpl.java": 2,
+    "org/jooq/impl/Tools.java": 48,
+    "org/jooq/impl/TrueCondition.java": 7,
+    "org/jooq/impl/UnqualifiedName.java": 1,
+    "org/jooq/impl/Val.java": 5
+  },
+  "second_only_features_by_file": {
+    "org/jooq/impl/AbstractDMLQuery.java": 14,
+    "org/jooq/impl/AbstractDataType.java": 2,
+    "org/jooq/impl/AbstractDelegatingDMLQuery.java": 2,
+    "org/jooq/impl/AbstractParam.java": 2,
+    "org/jooq/impl/AbstractQueryPartMap.java": 5,
+    "org/jooq/impl/AbstractRow.java": 1,
+    "org/jooq/impl/AbstractStoreQuery.java": 5,
+    "org/jooq/impl/AbstractTable.java": 1,
+    "org/jooq/impl/Convert.java": 52,
+    "org/jooq/impl/DSL.java": 1,
+    "org/jooq/impl/DefaultDSLContext.java": 1,
+    "org/jooq/impl/DefaultDataType.java": 5,
+    "org/jooq/impl/FieldMapForUpdate.java": 15,
+    "org/jooq/impl/FieldMapsForInsert.java": 53,
+    "org/jooq/impl/FieldsImpl.java": 3,
+    "org/jooq/impl/InsertImpl.java": 21,
+    "org/jooq/impl/InsertQueryImpl.java": 21,
+    "org/jooq/impl/LazyVal.java": 3,
+    "org/jooq/impl/ParserImpl.java": 102,
+    "org/jooq/impl/QOM.java": 1,
+    "org/jooq/impl/QueryPartListView.java": 3,
+    "org/jooq/impl/RowImpl4.java": 2,
+    "org/jooq/impl/TableFieldImpl.java": 3,
+    "org/jooq/impl/Tools.java": 14
+  }
+}

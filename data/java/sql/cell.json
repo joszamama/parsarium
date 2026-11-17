@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "sql",
-  "status": "pilot_search_recorded_none_verified",
+  "status": "pilot_one_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -21,9 +21,13 @@
   "unique_search_hits": 143,
   "search_captured_at_utc": "2026-11-17T16:40:15.310835+00:00",
   "primary_metric": "deps.dev directDependentCount summed over every Maven release",
-  "unresolved_documentation_leads": 9,
-  "uncertainty": "Bounded search only (Maven Central Solr search, three queries; deps.dev direct dependents summed over releases for targeted coordinates.). 9 SQL parser leads are unresolved and none is verified yet, so zero is not evidence of absence. Registry relevance order is not adoption order, and package metrics include uses unrelated to parsing SQL text.",
+  "unresolved_documentation_leads": 8,
+  "uncertainty": "One verified Java SQL path after a bounded Maven Central search (three queries, 143 hits) and deps.dev direct dependents summed over releases for 11 targeted leads, captured 2026-11-17. org.jooq:jooq 3.21.9 (4,574 summed direct dependents) parses both valid controls with SQLDialect.DEFAULT into its query object model, which gives the oracle summary. Its dependents mostly use jOOQ as a query builder, not its parser. jOOQ's generic QOM traversal API is not in the open-source jar, so the adapter walks typed QOM accessors and the operators' $args(). Druid, presto-parser, Calcite, JSqlParser, Trino and other leads are unverified, so this is not a top-ten ranking. java.sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/java/sql/registry-snapshot.json",
   "unresolved_leads": "data/java/sql/leads.json",
-  "runtime_evidence": "data/java/sql/standard.json"
+  "runtime_evidence": "data/java/sql/standard.json",
+  "third_party_evidence": "data/java/sql/parsers.json",
+  "third_party_control_results": [
+    "projects/sql/java/jooq/verification.json"
+  ]
 }

@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "name": "org.jooq:jooq",
+    "version": "3.21.9",
+    "license": "Apache-2.0",
+    "license_evidence": "jooq-3.21.9.pom <license>Apache License, Version 2.0</license> (open-source edition)",
+    "input_api": "DSL.using(SQLDialect.DEFAULT).parser().parse(local SQL text) -> Queries",
+    "documentation": "https://www.jooq.org/doc/3.21/manual/sql-building/sql-parser/sql-parser-api/",
+    "source": "https://repo.maven.apache.org/maven2/org/jooq/jooq/3.21.9/jooq-3.21.9-sources.jar",
+    "source_sha256": "8e58ed6849cdb8ad70023441569043307cace0ff3e8324d796157ae736495103",
+    "jar_sha256": "e6cde9651d6795c8a6d3b10043c1edb1f3c2211fa28b15e6d537f078b1584583",
+    "dependencies": [
+      "io.r2dbc:r2dbc-spi 1.0.0.RELEASE",
+      "org.reactivestreams:reactive-streams 1.0.4"
+    ],
+    "dialect": "SQLDialect.DEFAULT",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Commercial-edition dialects and dialect-specific parsing are untested.",
+    "family": "jOOQ hand-written recursive-descent parser (ParserImpl) and query object model",
+    "family_note": "Parser.parse runs org.jooq.impl.ParserImpl, which builds jOOQ's query object model. The adapter reads Select $select/$from/$where/$groupBy/$orderBy and QOM.Insert $into/$columns/$values, and walks QOM.Join, QOM.TableAlias, QOM.FieldAlias, QOM.Count/Sum and Param values, using each operator's $args() for conditions. Independent of JSqlParser (JavaCC), Calcite (JavaCC), Druid and the Presto/Trino ANTLR grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 4574,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.jooq%3Ajooq",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Dependents mostly use jOOQ's query builder and execution layer, not its SQL parser; a dependent is counted once per release it depends on."
+    },
+    "project": "projects/sql/java/jooq",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]
