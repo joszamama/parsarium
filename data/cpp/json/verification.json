@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T14:54:19.333162+00:00",
+  "checked_at_utc": "2026-11-17T15:10:34.689170+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -329,11 +329,11 @@
       "error": null
     },
     {
-      "package": "POCO JSON",
-      "version": "1.15.4",
-      "scope": "Poco::JSON::Parser::parse(std::string) over local bytes with order-preserving ParseHandler; source-built POCO ParserImpl and bundled pdjson tokenizer",
-      "command": "python3 scripts/run_project.py json cpp poco-json",
-      "receipt": "projects/json/cpp/poco-json/verification.json",
+      "package": "PicoJSON",
+      "version": "1.3.0",
+      "scope": "picojson::parse(value&, const std::string&) over local bytes with PICOJSON_USE_INT64; header-only recursive-descent parser into a std::map-backed picojson::value (object key order not preserved)",
+      "command": "python3 scripts/run_project.py json cpp picojson",
+      "receipt": "projects/json/cpp/picojson/verification.json",
       "pass": true,
       "output": {
         "arrays": 3,
@@ -367,9 +367,9 @@
         ]
       },
       "exact_nested_structure_match": true,
-      "parser_source_lines_covered": 125,
-      "format_specific_source_lines_covered": 125,
-      "underlying_source_lines_covered": 350,
+      "object_key_order_checked": false,
+      "parser_source_lines_covered": 301,
+      "format_specific_source_lines_covered": 301,
       "second_valid_control": "controls/json/nested-array.json",
       "second_valid_output": {
         "arrays": 4,
@@ -388,7 +388,9 @@
         ],
         "top_level_items": 5
       },
-      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/poco-json/differential.json",
+      "differential_pass": true,
+      "family_status": "independent",
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/picojson/differential.json",
       "error": null
     },
     {
@@ -454,11 +456,141 @@
       "family_status": "independent",
       "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/jsoncons/differential.json",
       "error": null
+    },
+    {
+      "package": "taoJSON",
+      "version": "1.0.0-beta.14",
+      "scope": "tao::json::from_string(const char*, std::size_t, source) over local bytes; taoJSON grammar on the pinned PEGTL 3.2.6 engine into a std::map-backed tao::json::value (object key order not preserved)",
+      "command": "python3 scripts/run_project.py json cpp tao-json",
+      "receipt": "projects/json/cpp/tao-json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "object_key_order_checked": false,
+      "parser_source_lines_covered": 341,
+      "format_specific_source_lines_covered": 52,
+      "underlying_source_lines_covered": 389,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "differential_pass": true,
+      "family_status": "independent",
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/tao-json/differential.json",
+      "error": null
+    },
+    {
+      "package": "POCO JSON",
+      "version": "1.15.4",
+      "scope": "Poco::JSON::Parser::parse(std::string) over local bytes with order-preserving ParseHandler; source-built POCO ParserImpl and bundled pdjson tokenizer",
+      "command": "python3 scripts/run_project.py json cpp poco-json",
+      "receipt": "projects/json/cpp/poco-json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 125,
+      "format_specific_source_lines_covered": 125,
+      "underlying_source_lines_covered": 350,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/poco-json/differential.json",
+      "error": null
     }
   ],
   "standard": [],
   "refreshed_projects": [
-    "jsoncons"
+    "picojson",
+    "tao-json"
   ],
-  "retained_prior_results_checked_at_utc": "2026-11-17T12:02:24.028573+00:00"
+  "retained_prior_results_checked_at_utc": "2026-11-17T14:54:19.333162+00:00"
 }

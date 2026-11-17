@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T14:54:19.333162+00:00",
-  "projects_total": 8,
-  "projects_passed": 8,
-  "differential_kind": "two fixed valid nested JSON controls; Glaze, POCO and jsoncons use parser-only probes with exact DOM checks",
-  "command": "python3 projects/json/cpp/jsoncons/verify-feedback.py; earlier paths retain recorded receipts",
+  "checked_at_utc": "2026-11-17T15:10:34.689170+00:00",
+  "projects_total": 10,
+  "projects_passed": 10,
+  "differential_kind": "two fixed valid nested JSON controls; Glaze, POCO, jsoncons, PicoJSON and taoJSON use parser-only probes with exact DOM checks (PicoJSON and taoJSON objects compared by key)",
+  "command": "python3 projects/json/cpp/picojson/verify-feedback.py and python3 projects/json/cpp/tao-json/verify-feedback.py; earlier paths retain recorded receipts",
   "results": [
     {
       "project": "json/cpp/jsoncpp",
@@ -156,10 +156,51 @@
       "afl_tuple_difference": 41,
       "parser_only_probe": "projects/json/cpp/jsoncons/parser-probe.cpp",
       "exact_tree_outputs_verified": true
+    },
+    {
+      "project": "json/cpp/picojson",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_picojson_header_only_edges_and_source_lines",
+      "overlay_receipt_sha256": "5ab5614b24f37414b3a17d4f554ceb0759e4bb188e68b54d4f08a786740ef821",
+      "differential_receipt_sha256": "ef512f5e27f36530baaa4d8b75e38b5986d27f16b9c67b4540b8fd0d462328d5",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 183,
+      "control_afl_tuples": 156,
+      "differential_source_lines": 177,
+      "differential_afl_tuples": 139,
+      "source_line_difference": 8,
+      "afl_tuple_difference": 37,
+      "parser_only_probe": "projects/json/cpp/picojson/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
+    },
+    {
+      "project": "json/cpp/tao-json",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_taojson_and_pegtl_header_edges_and_source_lines",
+      "overlay_receipt_sha256": "399d2dac3f3279509ce404e91fe3628d3a366d8b8d418532ab73d1722e573734",
+      "differential_receipt_sha256": "ab44f5bec17aae3d47bfab48d4e531945e26504c35fb5e539bd3e0b4e45e12ab",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 436,
+      "control_afl_tuples": 344,
+      "differential_source_lines": 406,
+      "differential_afl_tuples": 292,
+      "source_line_difference": 34,
+      "afl_tuple_difference": 166,
+      "parser_only_probe": "projects/json/cpp/tao-json/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
     }
   ],
   "refreshed_projects": [
-    "jsoncons"
+    "picojson",
+    "tao-json"
   ],
-  "retained_prior_results_checked_at_utc": "2026-11-17T12:02:24.027426+00:00"
+  "retained_prior_results_checked_at_utc": "2026-11-17T14:54:19.333162+00:00"
 }

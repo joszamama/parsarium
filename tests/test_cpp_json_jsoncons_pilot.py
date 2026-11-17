@@ -108,7 +108,7 @@ class CppJsonJsonconsPilotTest(unittest.TestCase):
                   if item["popularity"]["metric"] == popularity["metric"]
                   and isinstance(item["popularity"].get("value"), int)]
         self.assertEqual(ranked, sorted(ranked, reverse=True))
-        self.assertIn("| 6 | [jsoncons]", (BASE / "ranking.md").read_text(encoding="utf-8"))
+        self.assertIn("| 7 | [jsoncons]", (BASE / "ranking.md").read_text(encoding="utf-8"))
 
     def test_family_is_independent_and_lead_resolved(self):
         parsers = read(BASE / "parsers.json")

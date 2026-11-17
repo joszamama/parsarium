@@ -41,14 +41,17 @@
   },
   {
     "name": "PicoJSON",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "debian_source": "picojson",
     "popcon_source_inst": 16,
-    "popcon_dev_package": {},
+    "popcon_dev_package": {
+      "picojson-dev": 16
+    },
     "github_stars": null,
     "license": "BSD-2-Clause",
-    "reason": "Header-only picojson::parse over iterators; not run.",
-    "source": "https://github.com/kazuho/picojson"
+    "reason": "Pinned PicoJSON 1.3.0 picojson::parse(value&, const std::string&) with PICOJSON_USE_INT64 passes two valid exact-tree controls (array order and integer/float kinds; std::map objects lose source key order, so keys are compared as a mapping), covers 301 picojson.h lines, and gives stable parser-only AFL++ feedback (156 vs 139 tuples, 37 differing; 8 differing parser lines). Debian source-package sourcemax and picojson-dev each report 16 installs (0 recent) in the same hashed snapshot, a weak adoption signal.",
+    "source": "https://github.com/kazuho/picojson",
+    "verification": "projects/json/cpp/picojson/verification.json"
   },
   {
     "name": "jsoncons",
@@ -63,5 +66,17 @@
     "reason": "Pinned jsoncons 1.10.0 ojson::parse(const char*, size_t) passes two valid exact-tree controls (key order and integer/float kinds), covers 726 own json_parser.hpp lines, and gives stable parser-only AFL++ feedback (164 vs 155 tuples, 41 differing; 76 differing parser lines). Debian source-package sourcemax and libjsoncons-dev each report 3 installs in the same hashed snapshot, a very weak adoption signal.",
     "source": "https://github.com/danielaparker/jsoncons",
     "verification": "projects/json/cpp/jsoncons/verification.json"
+  },
+  {
+    "name": "taoJSON",
+    "status": "resolved_verified_selected",
+    "debian_source": "tao-json",
+    "popcon_source_inst": 2,
+    "popcon_dev_package": {},
+    "github_stars": null,
+    "license": "MIT",
+    "reason": "Found by re-scanning the 320 recorded Debian json source-name hits. Pinned taoJSON 1.0.0-beta.14 (upstream pre-release tag) tao::json::from_string on PEGTL 3.2.6 passes two valid exact-tree controls (array order and integer/float kinds; std::map objects compared as a mapping), covers 341 taoJSON lines (52 in grammar.hpp) and 389 PEGTL lines, and gives stable parser-only AFL++ feedback (344 vs 292 tuples, 166 differing). The tao-json source package has 2 Debian installations, both no_files, a very weak adoption signal.",
+    "source": "https://github.com/taocpp/json",
+    "verification": "projects/json/cpp/tao-json/verification.json"
   }
 ]
