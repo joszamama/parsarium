@@ -129,6 +129,36 @@
       "complete": false
     },
     {
+      "ecosystem": "c",
+      "format": "toml",
+      "status": "pilot_search_bounded_none_selected",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 0,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml (case-insensitive substring 'toml' in Debian source-package names)",
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)",
+        "toml (case-insensitive Conan Center recipe-name substring)"
+      ],
+      "search_totals": {
+        "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
+        "toml (case-insensitive Conan Center recipe-name substring)": 3
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 86,
+      "unresolved_documentation_leads": 4,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. No C TOML library appears in Debian popcon or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000, and none is selected. tomlc17 R261116 and toml-c (tomlc99 fork, commit 6a38d404) passed both valid controls with exact typed trees, parser coverage and stable AFL++ feedback; they stay unresolved_no_primary_metric leads with that evidence. tomlc99 (commit 62ce93ce) rejects the second control (\"expect hex char\" on a lowercase \\u escape); libtoml targets TOML 0.4.0 and was not run. Zero selected is not evidence that no C TOML parser is used.",
+      "primary_metric": "Debian popcon installations (none packaged)",
+      "registry_snapshot": "data/c/toml/registry-snapshot.json",
+      "unresolved_leads": "data/c/toml/leads.json",
+      "runtime_evidence": "data/c/toml/standard.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "cpp",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -235,6 +265,44 @@
       "complete": false
     },
     {
+      "ecosystem": "cpp",
+      "format": "toml",
+      "status": "pilot_three_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 3,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml (case-insensitive substring 'toml' in Debian source-package names)",
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)",
+        "toml (case-insensitive Conan Center recipe-name substring)"
+      ],
+      "search_totals": {
+        "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
+        "toml (case-insensitive Conan Center recipe-name substring)": 3
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 86,
+      "unresolved_documentation_leads": 0,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. 3 C++ TOML paths (toml++, toml11, cpptoml) print the exact typed tree for both valid controls and show scoped parser source coverage and stable, input-dependent AFL++ feedback (parser-only probes, function- and file-scoped allowlists, three identical repeats per control). The two lower ranks rest on very small counts: toml11 15 installations (0 recent, all no_files) and cpptoml 5 (0 recent). cpptoml 0.1.1 is a 2018 release that targets TOML 0.5.0 and needs <limits> included before its header on the pinned libstdc++; it passes both TOML 1.0.0 controls, which establish only that subset. No other C++ TOML parser appears in the Debian or Conan Center searches; libraries outside these surfaces are not counted. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "registry_snapshot": "data/cpp/toml/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/toml/leads.json",
+      "runtime_evidence": "data/cpp/toml/standard.json",
+      "ranking_metric": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "selection": "3 control-verified C++ TOML packages rank by Debian source-package sourcemax installations: toml++ 3.4.0 (3,536), toml11 4.4.0 (15), cpptoml 0.1.1 (5). Every lead in the bounded search was tried; 7 of ten slots stay open.",
+      "third_party_evidence": "data/cpp/toml/parsers.json",
+      "third_party_control_results": "data/cpp/toml/verification.json",
+      "afl_feedback": "data/cpp/toml/afl-feedback.json",
+      "tomlplusplus_source_lock": "projects/toml/cpp/tomlplusplus/source-lock.json",
+      "toml11_source_lock": "projects/toml/cpp/toml11/source-lock.json",
+      "cpptoml_source_lock": "projects/toml/cpp/cpptoml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "go",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -323,6 +391,40 @@
       "runtime_evidence": "data/go/yaml/standard.json",
       "registry_snapshot": "data/go/yaml/registry-snapshot.json",
       "unresolved_leads": "data/go/yaml/leads.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "go",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser",
+        "toml decoder"
+      ],
+      "search_totals": {
+        "toml": null,
+        "toml parser": null,
+        "toml decoder": null
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 300,
+      "unique_search_hits": 263,
+      "unresolved_documentation_leads": 6,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 pkg.go.dev queries, 300 recorded hits (263 unique), at most 100 per query. Two Go TOML paths pass both valid controls with the exact typed tree, parser-source coverage and stable AFL++ feedback: BurntSushi/toml v1.6.0 (38,240 Imported by; 585 own lines on service-config, 385/420 AFL++ tuples, 169 differ) and pelletier/go-toml/v2 v2.4.3 (1,986; 739 lines, 482/480 tuples, 342 differ). Each uses its own lexer/parser; they share no code. Higher-ranked pelletier/go-toml v1.9.5 (3,687) fails the typed-scalars control on a local date followed by a newline, and naoina/toml v0.1.1 (2,071) rejects the TOML 0.5 octal integer 0o755; both stay leads, so ranks cover verified paths only. 6 parser leads remain unresolved. BurntSushi/toml marks local date-times, dates and times only by the names of fixed time zones it attaches to time.Time (datetime-local, date-local, time-local), not by distinct Go types. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "pkg.go.dev Imported by package count",
+      "registry_snapshot": "data/go/toml/registry-snapshot.json",
+      "unresolved_leads": "data/go/toml/leads.json",
+      "runtime_evidence": "data/go/toml/standard.json",
+      "third_party_evidence": "data/go/toml/parsers.json",
+      "third_party_control_results": "data/go/toml/verification.json",
+      "afl_feedback": "data/go/toml/afl-feedback.json",
+      "protocol": "catalog/toml/PROTOCOL.md",
       "phase": "pilot",
       "complete": false
     },
@@ -416,6 +518,41 @@
       "third_party_evidence": "data/java/yaml/parsers.json",
       "third_party_control_results": "data/java/yaml/verification.json",
       "afl_feedback": "data/java/yaml/afl-feedback.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "java",
+      "format": "toml",
+      "status": "pilot_three_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 3,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser"
+      ],
+      "search_totals": {
+        "toml": 335,
+        "toml parser": 1
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 101,
+      "unique_search_hits": 101,
+      "unresolved_documentation_leads": 6,
+      "leads_by_status": {
+        "unresolved_control_failed": 1,
+        "unresolved_not_run": 5
+      },
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 101 recorded hits (101 unique), at most 100 per query. Three Java TOML package/API paths are control-verified on both fixed controls and runnable: jackson-dataformat-toml 2.23.0 (own JFlex lexer and parser; jackson-core/databind are shared with the Java JSON cell, and date/time types need the documented, default-off TomlReadFeature.PARSE_JAVA_TIME), tomlj 2.2.0 (ANTLR-generated lexer/parser pinned to TOML 1.0.0; the shaded ANTLR runtime is outside the coverage scope) and night-config toml 3.9.0 (own hand-written parser over the format-neutral night-config core). They are three separate parser families. toml4j 0.7.2 (TOML 0.4.0) parses the primary control but rejects the hexadecimal integer of the second control and stays a lead; 5 lower-metric leads were not run. deps.dev counts measure package adoption, not TOML-specific use. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "deps.dev directDependentCount summed over all releases",
+      "third_party_evidence": "data/java/toml/parsers.json",
+      "third_party_control_results": "data/java/toml/verification.json",
+      "afl_feedback": "data/java/toml/afl-feedback.json",
+      "registry_snapshot": "data/java/toml/registry-snapshot.json",
+      "unresolved_leads": "data/java/toml/leads.json",
+      "runtime_evidence": "data/java/toml/standard.json",
       "phase": "pilot",
       "complete": false
     },
@@ -518,6 +655,40 @@
       "complete": false
     },
     {
+      "ecosystem": "javascript",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser",
+        "toml parse"
+      ],
+      "search_totals": {
+        "toml": 5678,
+        "toml parser": 57114,
+        "toml parse": 55373
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 300,
+      "unique_search_hits": 239,
+      "unresolved_documentation_leads": 9,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 npm queries, 300 recorded hits (239 unique), at most 100 per query. Two JavaScript TOML paths pass both valid controls with the exact typed tree, package parser-source coverage and stable AFL++ feedback: smol-toml 1.9.1 (252,264,468 downloads; parse(text, {integersAsBigInt: true}); 748 package lines on service-config, 151/211 AFL++ tuples, 118 differ) and toml-eslint-parser 1.0.3 (7,684,028; typed tree assembled from its parseTOML syntax tree; 1,586 lines, 301/369 tuples, 156 differ). They share no code. smol-toml types integers only with its documented integersAsBigInt option; without it integers and floats are both Numbers. Higher-ranked confbox 0.3.2 (414,804,968) bundles a minified copy of smol-toml but calls it without options, and toml 5.0.1 (164,115,023) and @iarna/toml 2.2.5 (46,454,916) also return integers and floats as plain Numbers, so all three return float 1e3 as the Number 1000 and fail the typed-scalars control; toml 5.0.1 also returns local dates and times as plain strings. They stay leads, so ranks cover verified paths only. 9 parser leads remain unresolved. Line counts use V8 source ranges, so module top-level lines of loaded files count as covered. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "npm downloads, last month",
+      "registry_snapshot": "data/javascript/toml/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/toml/leads.json",
+      "runtime_evidence": "data/javascript/toml/standard.json",
+      "third_party_evidence": "data/javascript/toml/parsers.json",
+      "third_party_control_results": "data/javascript/toml/verification.json",
+      "afl_feedback": "data/javascript/toml/afl-feedback.json",
+      "protocol": "catalog/toml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "python",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -604,6 +775,39 @@
       "runtime_evidence": "data/python/yaml/standard.json",
       "registry_snapshot": "data/python/yaml/registry-snapshot.json",
       "unresolved_leads": "data/python/yaml/leads.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "python",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 1,
+      "search_queries": [
+        "project name contains 'toml'",
+        "targeted PyPI and PyPI Stats lookups for 11 named TOML packages"
+      ],
+      "search_totals": {
+        "project name contains 'toml'": 409
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "unresolved_documentation_leads": 6,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 1 query, 100 recorded hits (100 unique), at most 100 per query; the PyPI Simple index has no relevance order and the name filter matches unrelated names, so the leads come from targeted lookups. Two third-party paths pass both valid controls with exact hand-written typed trees, parser-scoped Python line coverage and AFL++ feedback: tomlkit 0.15.2 (591,365,129 PyPI Stats last-month downloads; 845 package lines, 408 in parser.py; controls differ by 401 AFL++ tuples) and tomli 2.5.0 (263,305,223; 284 lines, 259 in _parser.py; controls differ by 137 tuples), three identical runs per control each. tomli is the same code family as the standard tomllib API (a vendored copy), so the two are not independent; the hand-written trees are tomli's independent check. Only tomli's pure-Python wheel is measured, not its mypyc-compiled wheels. tomlkit is an independent style-preserving parser; its downloads mostly reflect Poetry and other tool installs. toml 0.10.2 (145,147,540) fails typed-scalars: it drops the fractional seconds of the local time 00:32:00.25. rtoml (Rust toml crate via PyO3) was not attempted, since it needs a source build with Rust parser coverage; pytoml, pytomlpp, toml-rs and qtoml remain unrun leads. The standard tomllib API passed both controls on a host run. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "registry_snapshot": "data/python/toml/registry-snapshot.json",
+      "unresolved_leads": "data/python/toml/leads.json",
+      "runtime_evidence": "data/python/toml/standard.json",
+      "third_party_evidence": "data/python/toml/parsers.json",
+      "third_party_control_results": [
+        "projects/toml/python/tomlkit/verification.json",
+        "projects/toml/python/tomli/verification.json"
+      ],
+      "third_party_control_summary": "data/python/toml/verification.json",
       "phase": "pilot",
       "complete": false
     },
@@ -743,6 +947,42 @@
       "complete": false
     },
     {
+      "ecosystem": "rust",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser",
+        "toml deserialize"
+      ],
+      "search_totals": {
+        "toml": 71635,
+        "toml parser": 8178,
+        "toml deserialize": 6540
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 300,
+      "unique_search_hits": 283,
+      "unresolved_documentation_leads": 7,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits (283 unique), at most 100 per query. Two paths are verified: toml 1.2.1+spec-1.1.0 and toml_edit 0.25.19+spec-1.1.0. Both lex and parse through the same toml_parser 1.1.5 crate and build their own trees from its events, so they are one parser family with two tree builders, not two independent parsers; their coverage is recorded separately for the own crate and for toml_parser. basic-toml 0.1.10 and toml-span 0.7.2 have no datetime type and reject both controls at the first offset date-time, so they stay leads. 7 leads remain, five of them not run (toml_parser has no value tree). The pinned releases implement TOML 1.1.0; two valid TOML 1.0.0 controls establish only the tested subset; malformed input, huge documents and TOML 1.1 features are untested. Recent downloads include transitive dependency pulls (Cargo itself depends on toml and toml_edit). toml_edit stores tables in IndexMaps with std RandomState hashing; without the overlay's getrandom AFL_PRELOAD shim, 1 of 5 afl-showmap runs on service-config.toml gave 1,546 instead of 1,530 tuples (checked 2026-11-17), so its overlay fixes the hash keys (afl_fixed_hashmap_keys) and then repeats are identical.",
+      "primary_metric": "crates.io recent downloads (90 days)",
+      "registry_snapshot": "data/rust/toml/registry-snapshot.json",
+      "unresolved_leads": "data/rust/toml/leads.json",
+      "runtime_evidence": "data/rust/toml/standard.json",
+      "third_party_evidence": "data/rust/toml/parsers.json",
+      "third_party_control_results": [
+        "projects/toml/rust/toml/verification.json",
+        "projects/toml/rust/toml_edit/verification.json"
+      ],
+      "protocol": "catalog/toml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "php",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -850,6 +1090,55 @@
       "selection": "symfony/yaml v8.1.11 (926,050,815 Packagist downloads), the top lead, is verified: an own pure-PHP parser (Parser.php, Inline.php, Unescaper.php). mustangostang/spyc 0.6.3 (51,101,645), the second lead, is excluded after a pinned probe failed both valid controls; dallgoot/yaml 1.0.1 (372,583), the third, is excluded after failing the primary control.",
       "third_party_evidence": "data/php/yaml/parsers.json",
       "third_party_control_results": "data/php/yaml/verification.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "php",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser"
+      ],
+      "search_totals": {
+        "toml": 14635,
+        "toml parser": 83
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 183,
+      "unique_search_hits": 162,
+      "unresolved_documentation_leads": 13,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 183 recorded hits (162 unique), at most 100 per query. Two paths are verified on both valid controls: internal/toml 1.1.3 and php-collective/toml 0.1.5. Neither array API keeps the TOML scalar kinds (internal/toml returns local date-times and local dates as DateTimeImmutable like offset date-times and local times as strings; php-collective/toml returns all three local kinds as strings), so each harness reads the kinds from the library's documented AST value nodes and requires the AST walk to place exactly the values the library's own array assembly returns. The two most downloaded leads failed the typed-scalars control: yosymfony/toml v1.0.4 (TOML 0.4.0) rejects the hexadecimal integer, and devium/toml 1.1.1 stores the local time fraction .25 as 25 milliseconds. 13 leads remain unresolved, 11 of them not yet run (low-download or old-draft packages). Packagist lifetime downloads measure historical adoption, not TOML parsing frequency. Two valid controls establish only the tested TOML 1.0.0 subset; empty tables (indistinguishable from empty arrays in PHP), malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "Packagist total downloads",
+      "registry_snapshot": "data/php/toml/registry-snapshot.json",
+      "unresolved_leads": "data/php/toml/leads.json",
+      "runtime_evidence": "data/php/toml/standard.json",
+      "selection": "Two Packagist-ranked paths passed both valid controls with exact typed trees, parser-source line coverage and stable AFL++ feedback: internal/toml 1.1.3 (325,891 downloads) and php-collective/toml 0.1.5 (28,378). Both are read through their documented AST because their array APIs drop the local date/time kinds.",
+      "third_party_evidence": "data/php/toml/verification.json",
+      "third_party_control_results": [
+        {
+          "package": "internal/toml",
+          "version": "1.1.3",
+          "pass": true,
+          "project_receipt": "projects/toml/php/internal_toml/verification.json",
+          "second_valid_control_pass": true,
+          "feedback_receipt": "data/php/toml/internal-toml-feedback-differential.json"
+        },
+        {
+          "package": "php-collective/toml",
+          "version": "0.1.5",
+          "pass": true,
+          "project_receipt": "projects/toml/php/php_collective_toml/verification.json",
+          "second_valid_control_pass": true,
+          "feedback_receipt": "data/php/toml/php-collective-toml-feedback-differential.json"
+        }
+      ],
+      "afl_feedback": "data/php/toml/afl-feedback.json",
       "phase": "pilot",
       "complete": false
     }
