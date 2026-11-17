@@ -329,5 +329,160 @@
     "api_lead_checked_against_pinned_release": false,
     "lead_adoption_order": 21,
     "reason": "Converts between PHP's dns_get_record raw format and daverandom/libdns messages; not a separate wire-format parser."
+  },
+  {
+    "name": "dapphp/torutils",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "documentation": "https://packagist.org/packages/dapphp/torutils",
+    "reason": "Tor control-protocol and DNSEL utilities; v2.0.0beta1's TorDNSEL class builds and reads its own DNS query packets inside the network lookup (no public API for caller-supplied message bytes), and its count covers the whole Tor toolkit.",
+    "primary_metric_value": 90856,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 22
+  },
+  {
+    "name": "danog/php-rtc-mdns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "LibDNS",
+    "reason": "Amp multicast DNS resolver for WebRTC; 1.1.12 requires daverandom/libdns (selected) for message decoding. No own parser.",
+    "primary_metric_value": 28073,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 23
+  },
+  {
+    "name": "ljpc/pure-php-doh-client",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "DNS-over-HTTPS client: 1.3.0 decodes responses inside the static DNS::query() call (private processHeader/getHeader and per-type decode() helpers fed from the HTTPS response), with no public API for caller-supplied message bytes.",
+    "primary_metric_value": 18711,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 24
+  },
+  {
+    "name": "chieftools/dns-resolver",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "Net_DNS2",
+    "reason": "Recursive resolver with DNSSEC validation; v1.5.0 requires mikepultz/netdns2 (the selected Net_DNS2 family) and uses it as its transport and packet layer.",
+    "primary_metric_value": 15189,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 25
+  },
+  {
+    "name": "mezon/dns-client",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "Service-name registry (getServices, resolveHost, setService); 1.0.1 has no DNS wire-format code.",
+    "primary_metric_value": 8036,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 26
+  },
+  {
+    "name": "cboxdk/dns",
+    "status": "unresolved_control_failure",
+    "primary_metric": "Packagist total downloads",
+    "checked_version": "v1.1.0",
+    "api_lead_checked_against_pinned_release": true,
+    "input_api_lead": "Cbox\\Dns\\Protocol\\Decoder::decode(string $message, RecordType $expected, string $host, ...)",
+    "reason": "Raw-socket resolver toolkit. Its Protocol\\Decoder::decode (not covered by the documentation, which describes typed lookups) requires the expected type and host and returns a DnsResponse with records and rcode: by source inspection of v1.1.0 it discards the header ID, QR, opcode, TC, RD, RA and the question entries and does not keep record classes, so the oracle summary cannot be produced from its parse.",
+    "primary_metric_value": 6740,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 27
+  },
+  {
+    "name": "zanphp/dns-client",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "No tagged release (dev-master only); the client calls swoole_async_dns_lookup, with no message parser.",
+    "primary_metric_value": 4080,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 28
+  },
+  {
+    "name": "domraider/libdns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "LibDNS",
+    "reason": "Fork of daverandom/libdns (same 'DNS protocol implementation written in pure PHP' code base) with no tagged release (1.0.x-dev only).",
+    "primary_metric_value": 2894,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 29
+  },
+  {
+    "name": "quasarstream/mdns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "react/dns",
+    "reason": "mDNS resolver; v1.0.0 requires react/dns (selected) for message handling. No own parser.",
+    "primary_metric_value": 1766,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 30
+  },
+  {
+    "name": "sharkydog/mdns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "react/dns",
+    "reason": "mDNS resolver and responder; v1.8 requires react/dns (selected). No own parser.",
+    "primary_metric_value": 58,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 31
+  },
+  {
+    "name": "hoa/dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "Hoa\\Dns is a DNS server event loop: its Resolver parses incoming queries inside the socket server and documents no message-bytes parser.",
+    "primary_metric_value": 200,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 32
+  },
+  {
+    "name": "noglitchyo/dealdoh",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "react/dns",
+    "reason": "DNS-over-HTTPS proxy (pre-release 0.4.0-beta) that requires react/dns for message handling.",
+    "primary_metric_value": 150,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 33
+  },
+  {
+    "name": "rafalmasiarek/dns-resolver",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "From-scratch resolver client; its DnsMessageDecoder::decode(data, expectedId, type) is not documented in the README (which documents the resolver contract) and returns only answers of the queried type.",
+    "primary_metric_value": 72,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 34
+  },
+  {
+    "name": "arrayaccess/dns-client",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "Resolver client: the README documents only lookup(); packet classes are used internally by the resolver.",
+    "primary_metric_value": 56,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 35
+  },
+  {
+    "name": "thruster/dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "family": "react/dns",
+    "reason": "Port of an early ReactPHP DNS component to the Thruster event loop (its Parser::parseChunk mirrors react/dns's old chunked parser); resolver API only, 38 downloads.",
+    "primary_metric_value": 38,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 36
+  },
+  {
+    "name": "ipokbr/dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "reason": "Parses dig text output lines (Aux_Func::fill_dns_array splits host/ttl/class/type/data), not DNS wire messages.",
+    "primary_metric_value": 8,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 37
   }
 ]

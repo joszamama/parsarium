@@ -28,7 +28,11 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
+| 1 | cboxdk/dns | 6,740 | `Cbox\Dns\Protocol\Decoder::decode(string $message, RecordType $expected, string $host, ...)` |  |
+| 2 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
+
+- **cboxdk/dns** (unresolved_control_failure): Raw-socket resolver toolkit. Its Protocol\Decoder::decode (not covered by the documentation, which describes typed lookups) requires the expected type and host and returns a DnsResponse with records and rcode: by source inspection of v1.1.0 it discards the header ID, QR, opcode, TC, RD, RA and the question entries and does not keep record classes, so the oracle summary cannot be produced from its parse.
+- **yswery/dns** (unresolved): Lead only: the package is a DNS server; yswery\DNS\Decoder::decodeMessage(string) is public but neither the README nor its docblock (@param/@return only) documents decoding caller-supplied message bytes. Not built.
 
 ## Checked, excluded or recorded separately
 
@@ -51,3 +55,18 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 - **hiblaphp/dns** (excluded): Async resolver for the HiblaPHP event loop (pre-release 1.0.0-beta.2); no documented message-bytes parser API.
 - **clue/mdns-react** (excluded): Multicast DNS resolver over react/dns; no own parser.
 - **danog/libdns-native** (excluded): Converts between PHP's dns_get_record raw format and daverandom/libdns messages; not a separate wire-format parser.
+- **dapphp/torutils** (excluded): Tor control-protocol and DNSEL utilities; v2.0.0beta1's TorDNSEL class builds and reads its own DNS query packets inside the network lookup (no public API for caller-supplied message bytes), and its count covers the whole Tor toolkit.
+- **danog/php-rtc-mdns** (excluded): Amp multicast DNS resolver for WebRTC; 1.1.12 requires daverandom/libdns (selected) for message decoding. No own parser.
+- **ljpc/pure-php-doh-client** (excluded): DNS-over-HTTPS client: 1.3.0 decodes responses inside the static DNS::query() call (private processHeader/getHeader and per-type decode() helpers fed from the HTTPS response), with no public API for caller-supplied message bytes.
+- **chieftools/dns-resolver** (excluded): Recursive resolver with DNSSEC validation; v1.5.0 requires mikepultz/netdns2 (the selected Net_DNS2 family) and uses it as its transport and packet layer.
+- **mezon/dns-client** (excluded): Service-name registry (getServices, resolveHost, setService); 1.0.1 has no DNS wire-format code.
+- **zanphp/dns-client** (excluded): No tagged release (dev-master only); the client calls swoole_async_dns_lookup, with no message parser.
+- **domraider/libdns** (excluded): Fork of daverandom/libdns (same 'DNS protocol implementation written in pure PHP' code base) with no tagged release (1.0.x-dev only).
+- **quasarstream/mdns** (excluded): mDNS resolver; v1.0.0 requires react/dns (selected) for message handling. No own parser.
+- **sharkydog/mdns** (excluded): mDNS resolver and responder; v1.8 requires react/dns (selected). No own parser.
+- **hoa/dns** (excluded): Hoa\Dns is a DNS server event loop: its Resolver parses incoming queries inside the socket server and documents no message-bytes parser.
+- **noglitchyo/dealdoh** (excluded): DNS-over-HTTPS proxy (pre-release 0.4.0-beta) that requires react/dns for message handling.
+- **rafalmasiarek/dns-resolver** (excluded): From-scratch resolver client; its DnsMessageDecoder::decode(data, expectedId, type) is not documented in the README (which documents the resolver contract) and returns only answers of the queried type.
+- **arrayaccess/dns-client** (excluded): Resolver client: the README documents only lookup(); packet classes are used internally by the resolver.
+- **thruster/dns** (excluded): Port of an early ReactPHP DNS component to the Thruster event loop (its Parser::parseChunk mirrors react/dns's old chunked parser); resolver API only, 38 downloads.
+- **ipokbr/dns** (excluded): Parses dig text output lines (Aux_Func::fill_dns_array splits host/ttl/class/type/data), not DNS wire messages.
