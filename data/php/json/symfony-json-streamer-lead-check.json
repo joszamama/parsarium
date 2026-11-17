@@ -1,0 +1,731 @@
+{
+ "schema_version": 1,
+ "checked_at_utc": "2026-11-17T15:36:38.293618+00:00",
+ "status": "excluded_schema_free_read_is_ext_json",
+ "package": "symfony/json-streamer",
+ "release": "v8.1.10",
+ "license": "MIT",
+ "license_evidence": "https://github.com/symfony/json-streamer/blob/907bb110997b57c97887fe78f62dcc7455f1ba39/LICENSE",
+ "source_url": "https://github.com/symfony/json-streamer/tree/907bb110997b57c97887fe78f62dcc7455f1ba39",
+ "api": "JsonStreamReader::create()->read(resource $stream, Type::mixed()) over the local control file handle",
+ "composer_reference": "907bb110997b57c97887fe78f62dcc7455f1ba39",
+ "composer_lock_sha256": "0e1a3e75045073a0ba1bb3a95c8c6985a928040ef9aa01660f1ace68b96f73a3",
+ "archive_url": "https://codeload.github.com/symfony/json-streamer/legacy.zip/907bb110997b57c97887fe78f62dcc7455f1ba39",
+ "archive_sha256": "244396603e2213da4ab101f44d04da7280324f9870c71faacc0802a432c06ae2",
+ "installed_source_matches_archive": true,
+ "image_id": "sha256:936bdaccef80ce54dd345c09216d04323cee2e34d3b239b570502656eeb8e7c1",
+ "platform": "linux/arm64",
+ "toolchain": [
+  "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+  "Composer version 2.9.5 2026-01-29 11:40:53"
+ ],
+ "probe_file_sha256": {
+  "Dockerfile": "15990b89239053021c57414df9cfff4f95b8a77dca31a68625cbc8325e757dbb",
+  "composer.json": "448eb6a2b991f719dfee53f1557b1dfdd9498611b7f398c4324cfc3197da91c2",
+  "composer.lock": "0e1a3e75045073a0ba1bb3a95c8c6985a928040ef9aa01660f1ace68b96f73a3",
+  "probe.php": "827cdd2b09bc48c3abdb7affb960be26ad14f9a2d23f9e75986df4d268dd1a6d"
+ },
+ "repeated_runs_identical": true,
+ "observed": [
+  {
+   "control": "controls/json/nested-object.json",
+   "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+   "tree": {
+    "type": "php_assoc_array",
+    "members": [
+     [
+      "name",
+      {
+       "type": "string",
+       "value": "parsarium"
+      }
+     ],
+     [
+      "version",
+      {
+       "type": "integer",
+       "value": 1
+      }
+     ],
+     [
+      "ratio",
+      {
+       "type": "float",
+       "value": -2.5
+      }
+     ],
+     [
+      "enabled",
+      {
+       "type": "boolean",
+       "value": true
+      }
+     ],
+     [
+      "missing",
+      {
+       "type": "null"
+      }
+     ],
+     [
+      "tags",
+      {
+       "type": "php_list",
+       "items": [
+        {
+         "type": "string",
+         "value": "json"
+        },
+        {
+         "type": "string",
+         "value": "go"
+        },
+        {
+         "type": "string",
+         "value": "rfc8259"
+        }
+       ]
+      }
+     ],
+     [
+      "nested",
+      {
+       "type": "php_assoc_array",
+       "members": [
+        [
+         "level",
+         {
+          "type": "integer",
+          "value": 2
+         }
+        ],
+        [
+         "items",
+         {
+          "type": "php_list",
+          "items": [
+           {
+            "type": "php_assoc_array",
+            "members": [
+             [
+              "id",
+              {
+               "type": "integer",
+               "value": 1
+              }
+             ],
+             [
+              "ok",
+              {
+               "type": "boolean",
+               "value": false
+              }
+             ]
+            ]
+           },
+           {
+            "type": "php_assoc_array",
+            "members": [
+             [
+              "id",
+              {
+               "type": "integer",
+               "value": 2
+              }
+             ],
+             [
+              "text",
+              {
+               "type": "string",
+               "value": "café \"quoted\""
+              }
+             ]
+            ]
+           }
+          ]
+         }
+        ],
+        [
+         "empty",
+         {
+          "type": "php_list",
+          "items": []
+         }
+        ],
+        [
+         "list",
+         {
+          "type": "php_list",
+          "items": []
+         }
+        ]
+       ]
+      }
+     ]
+    ]
+   },
+   "oracle_tree": {
+    "type": "object",
+    "members": [
+     [
+      "name",
+      {
+       "type": "string",
+       "value": "parsarium"
+      }
+     ],
+     [
+      "version",
+      {
+       "type": "integer",
+       "value": 1
+      }
+     ],
+     [
+      "ratio",
+      {
+       "type": "float",
+       "value": -2.5
+      }
+     ],
+     [
+      "enabled",
+      {
+       "type": "boolean",
+       "value": true
+      }
+     ],
+     [
+      "missing",
+      {
+       "type": "null"
+      }
+     ],
+     [
+      "tags",
+      {
+       "type": "php_list",
+       "items": [
+        {
+         "type": "string",
+         "value": "json"
+        },
+        {
+         "type": "string",
+         "value": "go"
+        },
+        {
+         "type": "string",
+         "value": "rfc8259"
+        }
+       ]
+      }
+     ],
+     [
+      "nested",
+      {
+       "type": "object",
+       "members": [
+        [
+         "level",
+         {
+          "type": "integer",
+          "value": 2
+         }
+        ],
+        [
+         "items",
+         {
+          "type": "php_list",
+          "items": [
+           {
+            "type": "object",
+            "members": [
+             [
+              "id",
+              {
+               "type": "integer",
+               "value": 1
+              }
+             ],
+             [
+              "ok",
+              {
+               "type": "boolean",
+               "value": false
+              }
+             ]
+            ]
+           },
+           {
+            "type": "object",
+            "members": [
+             [
+              "id",
+              {
+               "type": "integer",
+               "value": 2
+              }
+             ],
+             [
+              "text",
+              {
+               "type": "string",
+               "value": "café \"quoted\""
+              }
+             ]
+            ]
+           }
+          ]
+         }
+        ],
+        [
+         "empty",
+         {
+          "type": "object",
+          "members": []
+         }
+        ],
+        [
+         "list",
+         {
+          "type": "php_list",
+          "items": []
+         }
+        ]
+       ]
+      }
+     ]
+    ]
+   },
+   "tree_matches_oracle": false,
+   "package_lines": [
+    "DataModel/Read/DataModelNodeInterface.php:29",
+    "DataModel/Read/ScalarNode.php:25",
+    "DataModel/Read/ScalarNode.php:28",
+    "DataModel/Read/ScalarNode.php:30",
+    "DataModel/Read/ScalarNode.php:34",
+    "DataModel/Read/ScalarNode.php:39",
+    "DataModel/Read/ScalarNode.php:42",
+    "JsonStreamReader.php:110",
+    "JsonStreamReader.php:112",
+    "JsonStreamReader.php:113",
+    "JsonStreamReader.php:114",
+    "JsonStreamReader.php:116",
+    "JsonStreamReader.php:121",
+    "JsonStreamReader.php:124",
+    "JsonStreamReader.php:46",
+    "JsonStreamReader.php:61",
+    "JsonStreamReader.php:65",
+    "JsonStreamReader.php:67",
+    "JsonStreamReader.php:68",
+    "JsonStreamReader.php:69",
+    "JsonStreamReader.php:70",
+    "JsonStreamReader.php:74",
+    "JsonStreamReader.php:75",
+    "JsonStreamReader.php:76",
+    "JsonStreamReader.php:78",
+    "JsonStreamReader.php:86",
+    "JsonStreamReader.php:88",
+    "JsonStreamReader.php:89",
+    "JsonStreamReader.php:90",
+    "JsonStreamReader.php:93",
+    "JsonStreamReader.php:95",
+    "JsonStreamReader.php:97",
+    "Mapping/GenericTypePropertyMetadataLoader.php:168",
+    "Mapping/GenericTypePropertyMetadataLoader.php:35",
+    "Mapping/GenericTypePropertyMetadataLoader.php:38",
+    "Mapping/GenericTypePropertyMetadataLoader.php:39",
+    "Mapping/GenericTypePropertyMetadataLoader.php:41",
+    "Mapping/PropertyMetadataLoader.php:24",
+    "Mapping/PropertyMetadataLoader.php:27",
+    "Mapping/PropertyMetadataLoader.php:29",
+    "Mapping/PropertyMetadataLoader.php:55",
+    "Mapping/PropertyMetadataLoaderInterface.php:33",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:131",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:31",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:34",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:35",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:36",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:38",
+    "PhpGeneratorTrait.php:58",
+    "PhpGeneratorTrait.php:61",
+    "Read/Decoder.php:29",
+    "Read/Decoder.php:40",
+    "Read/Decoder.php:44",
+    "Read/Decoder.php:58",
+    "Read/Instantiator.php:51",
+    "Read/LazyInstantiator.php:60",
+    "Read/PhpGenerator.php:100",
+    "Read/PhpGenerator.php:104",
+    "Read/PhpGenerator.php:106",
+    "Read/PhpGenerator.php:107",
+    "Read/PhpGenerator.php:311",
+    "Read/PhpGenerator.php:312",
+    "Read/PhpGenerator.php:38",
+    "Read/PhpGenerator.php:402",
+    "Read/PhpGenerator.php:412",
+    "Read/PhpGenerator.php:420",
+    "Read/PhpGenerator.php:424",
+    "Read/PhpGenerator.php:428",
+    "Read/PhpGenerator.php:429",
+    "Read/PhpGenerator.php:43",
+    "Read/PhpGenerator.php:435",
+    "Read/PhpGenerator.php:45",
+    "Read/PhpGenerator.php:53",
+    "Read/PhpGenerator.php:55",
+    "Read/PhpGenerator.php:57",
+    "Read/PhpGenerator.php:58",
+    "Read/PhpGenerator.php:60",
+    "Read/PhpGenerator.php:61",
+    "Read/PhpGenerator.php:62",
+    "Read/PhpGenerator.php:63",
+    "Read/PhpGenerator.php:64",
+    "Read/PhpGenerator.php:65",
+    "Read/PhpGenerator.php:66",
+    "Read/PhpGenerator.php:67",
+    "Read/PhpGenerator.php:68",
+    "Read/PhpGenerator.php:69",
+    "Read/PhpGenerator.php:70",
+    "Read/PhpGenerator.php:71",
+    "Read/PhpGenerator.php:72",
+    "Read/PhpGenerator.php:73",
+    "Read/PhpGenerator.php:96",
+    "Read/StreamReaderGenerator.php:171",
+    "Read/StreamReaderGenerator.php:49",
+    "Read/StreamReaderGenerator.php:50",
+    "Read/StreamReaderGenerator.php:51",
+    "Read/StreamReaderGenerator.php:54",
+    "Read/StreamReaderGenerator.php:55",
+    "Read/StreamReaderGenerator.php:64",
+    "Read/StreamReaderGenerator.php:65",
+    "Read/StreamReaderGenerator.php:66",
+    "Read/StreamReaderGenerator.php:68",
+    "Read/StreamReaderGenerator.php:71",
+    "Read/StreamReaderGenerator.php:73",
+    "Read/StreamReaderGenerator.php:82",
+    "Read/StreamReaderGenerator.php:84",
+    "Read/StreamReaderGenerator.php:88",
+    "Read/StreamReaderGenerator.php:97",
+    "Read/StreamReaderGenerator.php:98",
+    "StreamReaderInterface.php:31",
+    "StreamerDumper.php:109",
+    "StreamerDumper.php:33",
+    "StreamerDumper.php:34",
+    "StreamerDumper.php:35",
+    "StreamerDumper.php:37",
+    "StreamerDumper.php:48",
+    "StreamerDumper.php:63",
+    "StreamerDumper.php:65",
+    "StreamerDumper.php:66",
+    "StreamerDumper.php:69",
+    "StreamerDumper.php:70",
+    "StreamerDumper.php:72",
+    "Transformer/DateIntervalValueObjectTransformer.php:104",
+    "Transformer/DateIntervalValueObjectTransformer.php:31",
+    "Transformer/DateTimeValueObjectTransformer.php:126",
+    "Transformer/DateTimeValueObjectTransformer.php:32",
+    "Transformer/DateTimeZoneValueObjectTransformer.php:26",
+    "Transformer/DateTimeZoneValueObjectTransformer.php:63",
+    "Transformer/ValueObjectTransformerInterface.php:53",
+    "generated:070660c7e72aa3e14a93c1039279afb6.json.stream.php:3"
+   ],
+   "generated_reader": "<?php\n\ndeclare(strict_types=1);\n\n/**\n * @return mixed\n */\nreturn static function (mixed $stream, \\Psr\\Container\\ContainerInterface $transformers, \\Symfony\\Component\\JsonStreamer\\Read\\LazyInstantiator $instantiator, array $options): mixed {\n    return \\Symfony\\Component\\JsonStreamer\\Read\\Decoder::decodeStream($stream, 0, null);\n};\n"
+  },
+  {
+   "control": "controls/json/nested-array.json",
+   "control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+   "tree": {
+    "type": "php_list",
+    "items": [
+     {
+      "type": "integer",
+      "value": 1
+     },
+     {
+      "type": "float",
+      "value": 0.25
+     },
+     {
+      "type": "string",
+      "value": "two"
+     },
+     {
+      "type": "php_list",
+      "items": [
+       {
+        "type": "boolean",
+        "value": true
+       },
+       {
+        "type": "null"
+       },
+       {
+        "type": "php_list",
+        "items": [
+         {
+          "type": "boolean",
+          "value": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "php_assoc_array",
+      "members": [
+       [
+        "k",
+        {
+         "type": "php_list",
+         "items": []
+        }
+       ],
+       [
+        "n",
+        {
+         "type": "php_assoc_array",
+         "members": [
+          [
+           "deep",
+           {
+            "type": "string",
+            "value": "A"
+           }
+          ]
+         ]
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   "oracle_tree": {
+    "type": "php_list",
+    "items": [
+     {
+      "type": "integer",
+      "value": 1
+     },
+     {
+      "type": "float",
+      "value": 0.25
+     },
+     {
+      "type": "string",
+      "value": "two"
+     },
+     {
+      "type": "php_list",
+      "items": [
+       {
+        "type": "boolean",
+        "value": true
+       },
+       {
+        "type": "null"
+       },
+       {
+        "type": "php_list",
+        "items": [
+         {
+          "type": "boolean",
+          "value": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "object",
+      "members": [
+       [
+        "k",
+        {
+         "type": "php_list",
+         "items": []
+        }
+       ],
+       [
+        "n",
+        {
+         "type": "object",
+         "members": [
+          [
+           "deep",
+           {
+            "type": "string",
+            "value": "A"
+           }
+          ]
+         ]
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   "tree_matches_oracle": false,
+   "package_lines": [
+    "DataModel/Read/DataModelNodeInterface.php:29",
+    "DataModel/Read/ScalarNode.php:25",
+    "DataModel/Read/ScalarNode.php:28",
+    "DataModel/Read/ScalarNode.php:30",
+    "DataModel/Read/ScalarNode.php:34",
+    "DataModel/Read/ScalarNode.php:39",
+    "DataModel/Read/ScalarNode.php:42",
+    "JsonStreamReader.php:110",
+    "JsonStreamReader.php:112",
+    "JsonStreamReader.php:113",
+    "JsonStreamReader.php:114",
+    "JsonStreamReader.php:116",
+    "JsonStreamReader.php:121",
+    "JsonStreamReader.php:124",
+    "JsonStreamReader.php:46",
+    "JsonStreamReader.php:61",
+    "JsonStreamReader.php:65",
+    "JsonStreamReader.php:67",
+    "JsonStreamReader.php:68",
+    "JsonStreamReader.php:69",
+    "JsonStreamReader.php:70",
+    "JsonStreamReader.php:74",
+    "JsonStreamReader.php:75",
+    "JsonStreamReader.php:76",
+    "JsonStreamReader.php:78",
+    "JsonStreamReader.php:86",
+    "JsonStreamReader.php:88",
+    "JsonStreamReader.php:89",
+    "JsonStreamReader.php:90",
+    "JsonStreamReader.php:93",
+    "JsonStreamReader.php:95",
+    "JsonStreamReader.php:97",
+    "Mapping/GenericTypePropertyMetadataLoader.php:168",
+    "Mapping/GenericTypePropertyMetadataLoader.php:35",
+    "Mapping/GenericTypePropertyMetadataLoader.php:38",
+    "Mapping/GenericTypePropertyMetadataLoader.php:39",
+    "Mapping/GenericTypePropertyMetadataLoader.php:41",
+    "Mapping/PropertyMetadataLoader.php:24",
+    "Mapping/PropertyMetadataLoader.php:27",
+    "Mapping/PropertyMetadataLoader.php:29",
+    "Mapping/PropertyMetadataLoader.php:55",
+    "Mapping/PropertyMetadataLoaderInterface.php:33",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:131",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:31",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:34",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:35",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:36",
+    "Mapping/Read/AttributePropertyMetadataLoader.php:38",
+    "PhpGeneratorTrait.php:58",
+    "PhpGeneratorTrait.php:61",
+    "Read/Decoder.php:29",
+    "Read/Decoder.php:40",
+    "Read/Decoder.php:44",
+    "Read/Decoder.php:58",
+    "Read/Instantiator.php:51",
+    "Read/LazyInstantiator.php:60",
+    "Read/PhpGenerator.php:100",
+    "Read/PhpGenerator.php:104",
+    "Read/PhpGenerator.php:106",
+    "Read/PhpGenerator.php:107",
+    "Read/PhpGenerator.php:311",
+    "Read/PhpGenerator.php:312",
+    "Read/PhpGenerator.php:38",
+    "Read/PhpGenerator.php:402",
+    "Read/PhpGenerator.php:412",
+    "Read/PhpGenerator.php:420",
+    "Read/PhpGenerator.php:424",
+    "Read/PhpGenerator.php:428",
+    "Read/PhpGenerator.php:429",
+    "Read/PhpGenerator.php:43",
+    "Read/PhpGenerator.php:435",
+    "Read/PhpGenerator.php:45",
+    "Read/PhpGenerator.php:53",
+    "Read/PhpGenerator.php:55",
+    "Read/PhpGenerator.php:57",
+    "Read/PhpGenerator.php:58",
+    "Read/PhpGenerator.php:60",
+    "Read/PhpGenerator.php:61",
+    "Read/PhpGenerator.php:62",
+    "Read/PhpGenerator.php:63",
+    "Read/PhpGenerator.php:64",
+    "Read/PhpGenerator.php:65",
+    "Read/PhpGenerator.php:66",
+    "Read/PhpGenerator.php:67",
+    "Read/PhpGenerator.php:68",
+    "Read/PhpGenerator.php:69",
+    "Read/PhpGenerator.php:70",
+    "Read/PhpGenerator.php:71",
+    "Read/PhpGenerator.php:72",
+    "Read/PhpGenerator.php:73",
+    "Read/PhpGenerator.php:96",
+    "Read/StreamReaderGenerator.php:171",
+    "Read/StreamReaderGenerator.php:49",
+    "Read/StreamReaderGenerator.php:50",
+    "Read/StreamReaderGenerator.php:51",
+    "Read/StreamReaderGenerator.php:54",
+    "Read/StreamReaderGenerator.php:55",
+    "Read/StreamReaderGenerator.php:64",
+    "Read/StreamReaderGenerator.php:65",
+    "Read/StreamReaderGenerator.php:66",
+    "Read/StreamReaderGenerator.php:68",
+    "Read/StreamReaderGenerator.php:71",
+    "Read/StreamReaderGenerator.php:73",
+    "Read/StreamReaderGenerator.php:82",
+    "Read/StreamReaderGenerator.php:84",
+    "Read/StreamReaderGenerator.php:88",
+    "Read/StreamReaderGenerator.php:97",
+    "Read/StreamReaderGenerator.php:98",
+    "StreamReaderInterface.php:31",
+    "StreamerDumper.php:109",
+    "StreamerDumper.php:33",
+    "StreamerDumper.php:34",
+    "StreamerDumper.php:35",
+    "StreamerDumper.php:37",
+    "StreamerDumper.php:48",
+    "StreamerDumper.php:63",
+    "StreamerDumper.php:65",
+    "StreamerDumper.php:66",
+    "StreamerDumper.php:69",
+    "StreamerDumper.php:70",
+    "StreamerDumper.php:72",
+    "Transformer/DateIntervalValueObjectTransformer.php:104",
+    "Transformer/DateIntervalValueObjectTransformer.php:31",
+    "Transformer/DateTimeValueObjectTransformer.php:126",
+    "Transformer/DateTimeValueObjectTransformer.php:32",
+    "Transformer/DateTimeZoneValueObjectTransformer.php:26",
+    "Transformer/DateTimeZoneValueObjectTransformer.php:63",
+    "Transformer/ValueObjectTransformerInterface.php:53",
+    "generated:070660c7e72aa3e14a93c1039279afb6.json.stream.php:3"
+   ],
+   "generated_reader": "<?php\n\ndeclare(strict_types=1);\n\n/**\n * @return mixed\n */\nreturn static function (mixed $stream, \\Psr\\Container\\ContainerInterface $transformers, \\Symfony\\Component\\JsonStreamer\\Read\\LazyInstantiator $instantiator, array $options): mixed {\n    return \\Symfony\\Component\\JsonStreamer\\Read\\Decoder::decodeStream($stream, 0, null);\n};\n"
+  }
+ ],
+ "package_lines_per_control": [
+  129,
+  129
+ ],
+ "package_line_difference": 0,
+ "package_lines_by_file_union": {
+  "DataModel/Read/DataModelNodeInterface.php": 1,
+  "DataModel/Read/ScalarNode.php": 6,
+  "JsonStreamReader.php": 25,
+  "Mapping/GenericTypePropertyMetadataLoader.php": 5,
+  "Mapping/PropertyMetadataLoader.php": 4,
+  "Mapping/PropertyMetadataLoaderInterface.php": 1,
+  "Mapping/Read/AttributePropertyMetadataLoader.php": 6,
+  "PhpGeneratorTrait.php": 2,
+  "Read/Decoder.php": 4,
+  "Read/Instantiator.php": 1,
+  "Read/LazyInstantiator.php": 1,
+  "Read/PhpGenerator.php": 35,
+  "Read/StreamReaderGenerator.php": 17,
+  "StreamReaderInterface.php": 1,
+  "StreamerDumper.php": 12,
+  "Transformer/DateIntervalValueObjectTransformer.php": 2,
+  "Transformer/DateTimeValueObjectTransformer.php": 2,
+  "Transformer/DateTimeZoneValueObjectTransformer.php": 2,
+  "Transformer/ValueObjectTransformerInterface.php": 1,
+  "generated:070660c7e72aa3e14a93c1039279afb6.json.stream.php": 1
+ },
+ "scope": "Valid controls only; no malformed input, fuzz campaign, vulnerability or resource tests."
+}

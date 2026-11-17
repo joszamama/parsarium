@@ -64,5 +64,203 @@
     "packagist_downloads": 33479596,
     "reason": "Json value object validated through json_decode; shares the verified ext/json family.",
     "source": "https://packagist.org/packages/ergebnis/json"
+  },
+  {
+    "name": "boundwize/jsonrecast",
+    "status": "unresolved",
+    "version_seen": "1.0.37",
+    "license": "MIT",
+    "packagist_downloads": 702666,
+    "reason": "Own Lexer and recursive-descent JsonParser building a formatting-preserving AST behind the documented JsonRecast::parse(string); string tokens are unescaped by json_decode one token at a time. Screening probe on both valid controls matched the Python json oracle with ordered members and int/float kinds; Xdebug package lines differ by 35. Candidate for a pinned project.",
+    "source": "https://packagist.org/packages/boundwize/jsonrecast"
+  },
+  {
+    "name": "laktak/hjson",
+    "status": "unresolved",
+    "version_seen": "v2.3.1",
+    "license": "MIT",
+    "packagist_downloads": 262430,
+    "reason": "Own recursive Hjson character parser (hjson-php, port of hjson-js) behind the documented HJSONParser::parse(text), which the README says parses JSON or Hjson; no json_decode on the default path. Screening probe on both valid controls matched the oracle exactly; Xdebug package lines differ by 13. Candidate for a pinned project.",
+    "source": "https://packagist.org/packages/laktak/hjson"
+  },
+  {
+    "name": "klkvsk/json-decode-stream",
+    "status": "unresolved",
+    "version_seen": "v1.0.3",
+    "license": "MIT",
+    "packagist_downloads": 68854,
+    "reason": "Own Tokenizer, event Parser and Collector behind documented Parser::fromString/fromFile/fromStream()->items(); string tokens are unescaped by json_decode one token at a time. Screening probe on both valid controls matched the oracle exactly; Xdebug package lines differ by 22. Candidate for a pinned project.",
+    "source": "https://packagist.org/packages/klkvsk/json-decode-stream"
+  },
+  {
+    "name": "eftec/services_json",
+    "status": "unresolved",
+    "version_seen": "2.5",
+    "license": "BSD-2-Clause",
+    "packagist_downloads": 35783,
+    "reason": "Pure-PHP port of PEAR Services_JSON; static Services_JSON::decode(string) scans and recurses in its own code with no json_decode call. Screening probe on both valid controls matched the oracle exactly; Xdebug package lines differ by 4. Candidate for a pinned project.",
+    "source": "https://packagist.org/packages/eftec/services_json"
+  },
+  {
+    "name": "bcncommerce/json-stream",
+    "status": "excluded",
+    "version_seen": "0.4.2",
+    "license": "MIT",
+    "packagist_downloads": 2529296,
+    "reason": "Pinned 0.4.2 (skolodyazhnyy/json-stream f7f83c6c, MIT) probe: the documented Reader::read() over a local stream returns PHP arrays for objects, so the empty object and empty array of the nested-object control are indistinguishable, and every number becomes a float (1 -> 1.0); neither control matches the oracle. Xdebug executes the same 143 Reader/Tokenizer lines on both controls (0 difference). Its event Parser.php is the salsify/jsonstreamingparser state machine lineage (same STATE_* constants), a family already selected. Not counted.",
+    "source": "https://packagist.org/packages/bcncommerce/json-stream",
+    "evidence": "data/php/json/bcncommerce-json-stream-lead-check.json"
+  },
+  {
+    "name": "maxakawizard/json-collection-parser",
+    "status": "excluded",
+    "version_seen": "1.10.1",
+    "license": "MIT",
+    "packagist_downloads": 966052,
+    "reason": "Requires salsify/json-streaming-parser ^8.0.2; its own code is a collection listener and stream wrapper over that parser. Shared salsify family with a stronger selected path; not counted (source reading, not run).",
+    "source": "https://packagist.org/packages/maxakawizard/json-collection-parser"
+  },
+  {
+    "name": "symfony/json-streamer",
+    "status": "excluded",
+    "version_seen": "v8.1.10 (v8.2.0-BETA2 latest seen)",
+    "license": "MIT",
+    "packagist_downloads": 946545,
+    "downloads_snapshot": "supplemental_search",
+    "reason": "Pinned v8.1.10 probe: JsonStreamReader::read() is type-directed; with the schema-free Type::mixed() the generated reader is one Decoder::decodeStream() call, i.e. json_decode with associative arrays, so empty object and empty array collapse and both controls fail the oracle. Xdebug executes the same 129 package lines (code generation and dispatch) on both controls (0 difference). Its own Splitter only cuts member boundaries for declared typed collections, whose values still go through json_decode. Not counted.",
+    "source": "https://packagist.org/packages/symfony/json-streamer",
+    "evidence": "data/php/json/symfony-json-streamer-lead-check.json"
+  },
+  {
+    "name": "clue/json-stream",
+    "status": "excluded",
+    "version_seen": "v0.1.1",
+    "license": "MIT",
+    "packagist_downloads": 249068,
+    "reason": "StreamingJsonParser buffers chunks up to a closing brace or bracket and calls json_decode on the buffer; ext/json family (source reading, not run).",
+    "source": "https://packagist.org/packages/clue/json-stream"
+  },
+  {
+    "name": "rodenastyle/stream-parser",
+    "status": "excluded",
+    "version_seen": "v2.0.3",
+    "license": "MIT",
+    "packagist_downloads": 213447,
+    "reason": "JSON support goes through maxakawizard/json-collection-parser and so salsify/json-streaming-parser; shared selected family (source reading, not run).",
+    "source": "https://packagist.org/packages/rodenastyle/stream-parser"
+  },
+  {
+    "name": "janeklb/json-char-input-reader",
+    "status": "excluded",
+    "version_seen": "v0.3.2",
+    "license": "MIT",
+    "packagist_downloads": 53219,
+    "reason": "Only finds the boundaries of complete JSON chunks and passes raw text to a caller-supplied processor (its example calls json_decode); no own value parsing (source reading, not run).",
+    "source": "https://packagist.org/packages/janeklb/json-char-input-reader"
+  },
+  {
+    "name": "im0rtality/jsonstreamingparser",
+    "status": "excluded",
+    "version_seen": "v4.0.0",
+    "license": "MIT",
+    "packagist_downloads": 37399,
+    "reason": "2014 fork of the salsify JsonStreamingParser (same JsonStreamingParser namespace and state machine); shared selected family (source reading, not run).",
+    "source": "https://packagist.org/packages/im0rtality/jsonstreamingparser"
+  },
+  {
+    "name": "cerbero/json-objects",
+    "status": "excluded",
+    "version_seen": "v1.2.0",
+    "license": "MIT",
+    "packagist_downloads": 32702,
+    "reason": "Requires salsify/json-streaming-parser ^8.2 and adds listeners that assemble objects; shared selected family (source reading, not run).",
+    "source": "https://packagist.org/packages/cerbero/json-objects"
+  },
+  {
+    "name": "viktorf/json-file-parser",
+    "status": "excluded",
+    "version_seen": "1.0.6",
+    "license": "MIT",
+    "packagist_downloads": 21358,
+    "reason": "Counts braces to cut top-level objects out of a file and hands their raw text to a listener (its example calls json_decode); the pinned source also uses curly-brace string offsets, a compile error since PHP 8.0. Not a value parser on PHP 8.5 (source reading, not run).",
+    "source": "https://packagist.org/packages/viktorf/json-file-parser"
+  },
+  {
+    "name": "joelwurtz/json-stream-polyfill",
+    "status": "unresolved",
+    "version_seen": "0.1.0",
+    "license": "MIT",
+    "packagist_downloads": 20698,
+    "reason": "Pure-PHP polyfill of the json_stream extension: its own structural scanner finds container and member spans, while its README states every scalar token and toValue() materialization is delegated to json_decode. A type-tagged tree would need Document iteration plus the debug-info kind; not probed within this bounded pass.",
+    "source": "https://packagist.org/packages/joelwurtz/json-stream-polyfill"
+  },
+  {
+    "name": "webmozart/json",
+    "status": "excluded",
+    "version_seen": "1.2.2",
+    "license": "MIT",
+    "packagist_downloads": 884156,
+    "reason": "JsonDecoder calls json_decode and uses seld/jsonlint only to describe errors; ext/json family (source reading, not run).",
+    "source": "https://packagist.org/packages/webmozart/json"
+  },
+  {
+    "name": "kherge/json",
+    "status": "excluded",
+    "version_seen": "3.0.1",
+    "license": "MIT OR Apache-2.0",
+    "packagist_downloads": 259958,
+    "reason": "JSON::decode calls json_decode and lints with seld/jsonlint on error; same release is published as herrera-io/json. ext/json family (source reading, not run).",
+    "source": "https://packagist.org/packages/kherge/json"
+  },
+  {
+    "name": "herrera-io/json",
+    "status": "excluded",
+    "version_seen": "3.0.1",
+    "license": "MIT OR Apache-2.0",
+    "packagist_downloads": 4565858,
+    "reason": "Same 3.0.1 release and source as kherge/json (json_decode plus seld/jsonlint on error); ext/json family (source reading, not run).",
+    "source": "https://packagist.org/packages/herrera-io/json"
+  },
+  {
+    "name": "karriere/json-decoder",
+    "status": "excluded",
+    "version_seen": "v5.1.0",
+    "license": "Apache-2.0",
+    "packagist_downloads": 474219,
+    "reason": "Maps the result of a single json_decode call onto PHP classes; ext/json family (source reading, not run).",
+    "source": "https://packagist.org/packages/karriere/json-decoder"
+  },
+  {
+    "name": "ghostwriter/json",
+    "status": "excluded",
+    "version_seen": "3.0.3",
+    "license": "BSD-3-Clause",
+    "packagist_downloads": 5844205,
+    "reason": "Json::decode wraps json_decode with exceptions; ext/json family (source reading, not run).",
+    "source": "https://packagist.org/packages/ghostwriter/json"
+  },
+  {
+    "name": "adrienbrault/partial-json",
+    "status": "unresolved",
+    "packagist_downloads": 3459,
+    "downloads_snapshot": "supplemental_search",
+    "reason": "Supplemental-search hit described as parsing incomplete JSON; not inspected within this bounded pass.",
+    "source": "https://packagist.org/packages/adrienbrault/partial-json"
+  },
+  {
+    "name": "tdt/json",
+    "status": "unresolved",
+    "packagist_downloads": 1987,
+    "downloads_snapshot": "supplemental_search",
+    "reason": "Supplemental-search hit described as reading a JSON stream; not inspected within this bounded pass.",
+    "source": "https://packagist.org/packages/tdt/json"
+  },
+  {
+    "name": "hiroto-k/json5-php",
+    "status": "unresolved",
+    "packagist_downloads": 433,
+    "downloads_snapshot": "supplemental_search",
+    "reason": "Supplemental-search hit described as a JSON5 parser; whether valid JSON reaches its own code was not inspected within this bounded pass.",
+    "source": "https://packagist.org/packages/hiroto-k/json5-php"
   }
 ]

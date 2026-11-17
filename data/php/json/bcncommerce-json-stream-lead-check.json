@@ -1,0 +1,741 @@
+{
+ "schema_version": 1,
+ "checked_at_utc": "2026-11-17T15:36:28.838379+00:00",
+ "status": "excluded_lossy_reader_no_feedback_differential",
+ "package": "bcncommerce/json-stream",
+ "release": "0.4.2",
+ "license": "MIT",
+ "license_evidence": "https://github.com/skolodyazhnyy/json-stream/blob/f7f83c6cbd28a0e23663c4fa158d8973395505c3/LICENSE",
+ "source_url": "https://github.com/skolodyazhnyy/json-stream/tree/f7f83c6cbd28a0e23663c4fa158d8973395505c3",
+ "api": "new Bcn\\Component\\Json\\Reader(resource $stream) then read() with no key, over the local control file handle",
+ "composer_reference": "f7f83c6cbd28a0e23663c4fa158d8973395505c3",
+ "composer_lock_sha256": "af711b3a5eeb40e140b6aa1caca607e493fef1d0658c6e134fe6a9d0c897f24d",
+ "archive_url": "https://codeload.github.com/skolodyazhnyy/json-stream/legacy.zip/f7f83c6cbd28a0e23663c4fa158d8973395505c3",
+ "archive_sha256": "854be35d9c606ad55a5ea6e8455669bf919b7022c0032ae79885b597787921fb",
+ "installed_source_matches_archive": true,
+ "image_id": "sha256:be93690c22ff3551ca82004ee5349d6c59b7bd5e65092980fd3b6786dd3a7e44",
+ "platform": "linux/arm64",
+ "toolchain": [
+  "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+  "Composer version 2.9.5 2026-01-29 11:40:53"
+ ],
+ "probe_file_sha256": {
+  "Dockerfile": "39add68f1219e457a951cc2644b4632cec0c7414a7c2db33987bdeb0b4522c96",
+  "composer.json": "b31087e4209876e20fdbc13f7f73589f08c71947ef8189ccb343678f42b5b3db",
+  "composer.lock": "af711b3a5eeb40e140b6aa1caca607e493fef1d0658c6e134fe6a9d0c897f24d",
+  "probe.php": "2c412ddc4a0469dbba3437535f09e7118ddefdf2d5f2170e5469d627efdbb0eb"
+ },
+ "repeated_runs_identical": true,
+ "observed": [
+  {
+   "control": "controls/json/nested-object.json",
+   "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+   "tree": {
+    "type": "php_assoc_array",
+    "members": [
+     [
+      "name",
+      {
+       "type": "string",
+       "value": "parsarium"
+      }
+     ],
+     [
+      "version",
+      {
+       "type": "float",
+       "value": 1.0
+      }
+     ],
+     [
+      "ratio",
+      {
+       "type": "float",
+       "value": -2.5
+      }
+     ],
+     [
+      "enabled",
+      {
+       "type": "boolean",
+       "value": true
+      }
+     ],
+     [
+      "missing",
+      {
+       "type": "null"
+      }
+     ],
+     [
+      "tags",
+      {
+       "type": "php_list",
+       "items": [
+        {
+         "type": "string",
+         "value": "json"
+        },
+        {
+         "type": "string",
+         "value": "go"
+        },
+        {
+         "type": "string",
+         "value": "rfc8259"
+        }
+       ]
+      }
+     ],
+     [
+      "nested",
+      {
+       "type": "php_assoc_array",
+       "members": [
+        [
+         "level",
+         {
+          "type": "float",
+          "value": 2.0
+         }
+        ],
+        [
+         "items",
+         {
+          "type": "php_list",
+          "items": [
+           {
+            "type": "php_assoc_array",
+            "members": [
+             [
+              "id",
+              {
+               "type": "float",
+               "value": 1.0
+              }
+             ],
+             [
+              "ok",
+              {
+               "type": "boolean",
+               "value": false
+              }
+             ]
+            ]
+           },
+           {
+            "type": "php_assoc_array",
+            "members": [
+             [
+              "id",
+              {
+               "type": "float",
+               "value": 2.0
+              }
+             ],
+             [
+              "text",
+              {
+               "type": "string",
+               "value": "café \"quoted\""
+              }
+             ]
+            ]
+           }
+          ]
+         }
+        ],
+        [
+         "empty",
+         {
+          "type": "php_list",
+          "items": []
+         }
+        ],
+        [
+         "list",
+         {
+          "type": "php_list",
+          "items": []
+         }
+        ]
+       ]
+      }
+     ]
+    ]
+   },
+   "oracle_tree": {
+    "type": "object",
+    "members": [
+     [
+      "name",
+      {
+       "type": "string",
+       "value": "parsarium"
+      }
+     ],
+     [
+      "version",
+      {
+       "type": "integer",
+       "value": 1
+      }
+     ],
+     [
+      "ratio",
+      {
+       "type": "float",
+       "value": -2.5
+      }
+     ],
+     [
+      "enabled",
+      {
+       "type": "boolean",
+       "value": true
+      }
+     ],
+     [
+      "missing",
+      {
+       "type": "null"
+      }
+     ],
+     [
+      "tags",
+      {
+       "type": "php_list",
+       "items": [
+        {
+         "type": "string",
+         "value": "json"
+        },
+        {
+         "type": "string",
+         "value": "go"
+        },
+        {
+         "type": "string",
+         "value": "rfc8259"
+        }
+       ]
+      }
+     ],
+     [
+      "nested",
+      {
+       "type": "object",
+       "members": [
+        [
+         "level",
+         {
+          "type": "integer",
+          "value": 2
+         }
+        ],
+        [
+         "items",
+         {
+          "type": "php_list",
+          "items": [
+           {
+            "type": "object",
+            "members": [
+             [
+              "id",
+              {
+               "type": "integer",
+               "value": 1
+              }
+             ],
+             [
+              "ok",
+              {
+               "type": "boolean",
+               "value": false
+              }
+             ]
+            ]
+           },
+           {
+            "type": "object",
+            "members": [
+             [
+              "id",
+              {
+               "type": "integer",
+               "value": 2
+              }
+             ],
+             [
+              "text",
+              {
+               "type": "string",
+               "value": "café \"quoted\""
+              }
+             ]
+            ]
+           }
+          ]
+         }
+        ],
+        [
+         "empty",
+         {
+          "type": "object",
+          "members": []
+         }
+        ],
+        [
+         "list",
+         {
+          "type": "php_list",
+          "items": []
+         }
+        ]
+       ]
+      }
+     ]
+    ]
+   },
+   "tree_matches_oracle": false,
+   "package_lines": [
+    "Bcn/Component/Json/Reader.php:101",
+    "Bcn/Component/Json/Reader.php:105",
+    "Bcn/Component/Json/Reader.php:106",
+    "Bcn/Component/Json/Reader.php:107",
+    "Bcn/Component/Json/Reader.php:108",
+    "Bcn/Component/Json/Reader.php:110",
+    "Bcn/Component/Json/Reader.php:111",
+    "Bcn/Component/Json/Reader.php:112",
+    "Bcn/Component/Json/Reader.php:113",
+    "Bcn/Component/Json/Reader.php:114",
+    "Bcn/Component/Json/Reader.php:115",
+    "Bcn/Component/Json/Reader.php:117",
+    "Bcn/Component/Json/Reader.php:121",
+    "Bcn/Component/Json/Reader.php:123",
+    "Bcn/Component/Json/Reader.php:124",
+    "Bcn/Component/Json/Reader.php:125",
+    "Bcn/Component/Json/Reader.php:126",
+    "Bcn/Component/Json/Reader.php:127",
+    "Bcn/Component/Json/Reader.php:128",
+    "Bcn/Component/Json/Reader.php:130",
+    "Bcn/Component/Json/Reader.php:134",
+    "Bcn/Component/Json/Reader.php:136",
+    "Bcn/Component/Json/Reader.php:147",
+    "Bcn/Component/Json/Reader.php:151",
+    "Bcn/Component/Json/Reader.php:32",
+    "Bcn/Component/Json/Reader.php:33",
+    "Bcn/Component/Json/Reader.php:34",
+    "Bcn/Component/Json/Reader.php:43",
+    "Bcn/Component/Json/Reader.php:48",
+    "Bcn/Component/Json/Reader.php:56",
+    "Bcn/Component/Json/Reader.php:59",
+    "Bcn/Component/Json/Reader.php:63",
+    "Bcn/Component/Json/Reader.php:65",
+    "Bcn/Component/Json/Reader.php:73",
+    "Bcn/Component/Json/Reader.php:74",
+    "Bcn/Component/Json/Reader.php:77",
+    "Bcn/Component/Json/Reader.php:79",
+    "Bcn/Component/Json/Reader.php:80",
+    "Bcn/Component/Json/Reader.php:81",
+    "Bcn/Component/Json/Reader.php:84",
+    "Bcn/Component/Json/Reader.php:85",
+    "Bcn/Component/Json/Reader.php:86",
+    "Bcn/Component/Json/Reader.php:87",
+    "Bcn/Component/Json/Reader.php:90",
+    "Bcn/Component/Json/Reader.php:92",
+    "Bcn/Component/Json/Reader/Tokenizer.php:101",
+    "Bcn/Component/Json/Reader/Tokenizer.php:103",
+    "Bcn/Component/Json/Reader/Tokenizer.php:105",
+    "Bcn/Component/Json/Reader/Tokenizer.php:106",
+    "Bcn/Component/Json/Reader/Tokenizer.php:108",
+    "Bcn/Component/Json/Reader/Tokenizer.php:112",
+    "Bcn/Component/Json/Reader/Tokenizer.php:121",
+    "Bcn/Component/Json/Reader/Tokenizer.php:122",
+    "Bcn/Component/Json/Reader/Tokenizer.php:123",
+    "Bcn/Component/Json/Reader/Tokenizer.php:125",
+    "Bcn/Component/Json/Reader/Tokenizer.php:126",
+    "Bcn/Component/Json/Reader/Tokenizer.php:131",
+    "Bcn/Component/Json/Reader/Tokenizer.php:134",
+    "Bcn/Component/Json/Reader/Tokenizer.php:137",
+    "Bcn/Component/Json/Reader/Tokenizer.php:138",
+    "Bcn/Component/Json/Reader/Tokenizer.php:139",
+    "Bcn/Component/Json/Reader/Tokenizer.php:148",
+    "Bcn/Component/Json/Reader/Tokenizer.php:150",
+    "Bcn/Component/Json/Reader/Tokenizer.php:151",
+    "Bcn/Component/Json/Reader/Tokenizer.php:152",
+    "Bcn/Component/Json/Reader/Tokenizer.php:157",
+    "Bcn/Component/Json/Reader/Tokenizer.php:165",
+    "Bcn/Component/Json/Reader/Tokenizer.php:167",
+    "Bcn/Component/Json/Reader/Tokenizer.php:168",
+    "Bcn/Component/Json/Reader/Tokenizer.php:169",
+    "Bcn/Component/Json/Reader/Tokenizer.php:170",
+    "Bcn/Component/Json/Reader/Tokenizer.php:172",
+    "Bcn/Component/Json/Reader/Tokenizer.php:173",
+    "Bcn/Component/Json/Reader/Tokenizer.php:174",
+    "Bcn/Component/Json/Reader/Tokenizer.php:175",
+    "Bcn/Component/Json/Reader/Tokenizer.php:187",
+    "Bcn/Component/Json/Reader/Tokenizer.php:189",
+    "Bcn/Component/Json/Reader/Tokenizer.php:193",
+    "Bcn/Component/Json/Reader/Tokenizer.php:194",
+    "Bcn/Component/Json/Reader/Tokenizer.php:195",
+    "Bcn/Component/Json/Reader/Tokenizer.php:196",
+    "Bcn/Component/Json/Reader/Tokenizer.php:198",
+    "Bcn/Component/Json/Reader/Tokenizer.php:199",
+    "Bcn/Component/Json/Reader/Tokenizer.php:200",
+    "Bcn/Component/Json/Reader/Tokenizer.php:201",
+    "Bcn/Component/Json/Reader/Tokenizer.php:202",
+    "Bcn/Component/Json/Reader/Tokenizer.php:203",
+    "Bcn/Component/Json/Reader/Tokenizer.php:204",
+    "Bcn/Component/Json/Reader/Tokenizer.php:205",
+    "Bcn/Component/Json/Reader/Tokenizer.php:207",
+    "Bcn/Component/Json/Reader/Tokenizer.php:219",
+    "Bcn/Component/Json/Reader/Tokenizer.php:220",
+    "Bcn/Component/Json/Reader/Tokenizer.php:221",
+    "Bcn/Component/Json/Reader/Tokenizer.php:223",
+    "Bcn/Component/Json/Reader/Tokenizer.php:224",
+    "Bcn/Component/Json/Reader/Tokenizer.php:225",
+    "Bcn/Component/Json/Reader/Tokenizer.php:228",
+    "Bcn/Component/Json/Reader/Tokenizer.php:229",
+    "Bcn/Component/Json/Reader/Tokenizer.php:231",
+    "Bcn/Component/Json/Reader/Tokenizer.php:232",
+    "Bcn/Component/Json/Reader/Tokenizer.php:245",
+    "Bcn/Component/Json/Reader/Tokenizer.php:247",
+    "Bcn/Component/Json/Reader/Tokenizer.php:248",
+    "Bcn/Component/Json/Reader/Tokenizer.php:249",
+    "Bcn/Component/Json/Reader/Tokenizer.php:250",
+    "Bcn/Component/Json/Reader/Tokenizer.php:251",
+    "Bcn/Component/Json/Reader/Tokenizer.php:253",
+    "Bcn/Component/Json/Reader/Tokenizer.php:255",
+    "Bcn/Component/Json/Reader/Tokenizer.php:258",
+    "Bcn/Component/Json/Reader/Tokenizer.php:259",
+    "Bcn/Component/Json/Reader/Tokenizer.php:260",
+    "Bcn/Component/Json/Reader/Tokenizer.php:261",
+    "Bcn/Component/Json/Reader/Tokenizer.php:262",
+    "Bcn/Component/Json/Reader/Tokenizer.php:263",
+    "Bcn/Component/Json/Reader/Tokenizer.php:264",
+    "Bcn/Component/Json/Reader/Tokenizer.php:267",
+    "Bcn/Component/Json/Reader/Tokenizer.php:271",
+    "Bcn/Component/Json/Reader/Tokenizer.php:279",
+    "Bcn/Component/Json/Reader/Tokenizer.php:281",
+    "Bcn/Component/Json/Reader/Tokenizer.php:289",
+    "Bcn/Component/Json/Reader/Tokenizer.php:290",
+    "Bcn/Component/Json/Reader/Tokenizer.php:293",
+    "Bcn/Component/Json/Reader/Tokenizer.php:301",
+    "Bcn/Component/Json/Reader/Tokenizer.php:305",
+    "Bcn/Component/Json/Reader/Tokenizer.php:58",
+    "Bcn/Component/Json/Reader/Tokenizer.php:62",
+    "Bcn/Component/Json/Reader/Tokenizer.php:63",
+    "Bcn/Component/Json/Reader/Tokenizer.php:64",
+    "Bcn/Component/Json/Reader/Tokenizer.php:72",
+    "Bcn/Component/Json/Reader/Tokenizer.php:74",
+    "Bcn/Component/Json/Reader/Tokenizer.php:78",
+    "Bcn/Component/Json/Reader/Tokenizer.php:82",
+    "Bcn/Component/Json/Reader/Tokenizer.php:84",
+    "Bcn/Component/Json/Reader/Tokenizer.php:85",
+    "Bcn/Component/Json/Reader/Tokenizer.php:86",
+    "Bcn/Component/Json/Reader/Tokenizer.php:88",
+    "Bcn/Component/Json/Reader/Tokenizer.php:89",
+    "Bcn/Component/Json/Reader/Tokenizer.php:90",
+    "Bcn/Component/Json/Reader/Tokenizer.php:93",
+    "Bcn/Component/Json/Reader/Tokenizer.php:96",
+    "Bcn/Component/Json/Reader/Tokenizer.php:97",
+    "Bcn/Component/Json/Reader/Tokenizer.php:98",
+    "Bcn/Component/Json/Reader/Tokenizer.php:99"
+   ],
+   "generated_reader": null
+  },
+  {
+   "control": "controls/json/nested-array.json",
+   "control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+   "tree": {
+    "type": "php_list",
+    "items": [
+     {
+      "type": "float",
+      "value": 1.0
+     },
+     {
+      "type": "float",
+      "value": 0.25
+     },
+     {
+      "type": "string",
+      "value": "two"
+     },
+     {
+      "type": "php_list",
+      "items": [
+       {
+        "type": "boolean",
+        "value": true
+       },
+       {
+        "type": "null"
+       },
+       {
+        "type": "php_list",
+        "items": [
+         {
+          "type": "boolean",
+          "value": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "php_assoc_array",
+      "members": [
+       [
+        "k",
+        {
+         "type": "php_list",
+         "items": []
+        }
+       ],
+       [
+        "n",
+        {
+         "type": "php_assoc_array",
+         "members": [
+          [
+           "deep",
+           {
+            "type": "string",
+            "value": "A"
+           }
+          ]
+         ]
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   "oracle_tree": {
+    "type": "php_list",
+    "items": [
+     {
+      "type": "integer",
+      "value": 1
+     },
+     {
+      "type": "float",
+      "value": 0.25
+     },
+     {
+      "type": "string",
+      "value": "two"
+     },
+     {
+      "type": "php_list",
+      "items": [
+       {
+        "type": "boolean",
+        "value": true
+       },
+       {
+        "type": "null"
+       },
+       {
+        "type": "php_list",
+        "items": [
+         {
+          "type": "boolean",
+          "value": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "object",
+      "members": [
+       [
+        "k",
+        {
+         "type": "php_list",
+         "items": []
+        }
+       ],
+       [
+        "n",
+        {
+         "type": "object",
+         "members": [
+          [
+           "deep",
+           {
+            "type": "string",
+            "value": "A"
+           }
+          ]
+         ]
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   "tree_matches_oracle": false,
+   "package_lines": [
+    "Bcn/Component/Json/Reader.php:101",
+    "Bcn/Component/Json/Reader.php:105",
+    "Bcn/Component/Json/Reader.php:106",
+    "Bcn/Component/Json/Reader.php:107",
+    "Bcn/Component/Json/Reader.php:108",
+    "Bcn/Component/Json/Reader.php:110",
+    "Bcn/Component/Json/Reader.php:111",
+    "Bcn/Component/Json/Reader.php:112",
+    "Bcn/Component/Json/Reader.php:113",
+    "Bcn/Component/Json/Reader.php:114",
+    "Bcn/Component/Json/Reader.php:115",
+    "Bcn/Component/Json/Reader.php:117",
+    "Bcn/Component/Json/Reader.php:121",
+    "Bcn/Component/Json/Reader.php:123",
+    "Bcn/Component/Json/Reader.php:124",
+    "Bcn/Component/Json/Reader.php:125",
+    "Bcn/Component/Json/Reader.php:126",
+    "Bcn/Component/Json/Reader.php:127",
+    "Bcn/Component/Json/Reader.php:128",
+    "Bcn/Component/Json/Reader.php:130",
+    "Bcn/Component/Json/Reader.php:134",
+    "Bcn/Component/Json/Reader.php:136",
+    "Bcn/Component/Json/Reader.php:147",
+    "Bcn/Component/Json/Reader.php:151",
+    "Bcn/Component/Json/Reader.php:32",
+    "Bcn/Component/Json/Reader.php:33",
+    "Bcn/Component/Json/Reader.php:34",
+    "Bcn/Component/Json/Reader.php:43",
+    "Bcn/Component/Json/Reader.php:48",
+    "Bcn/Component/Json/Reader.php:56",
+    "Bcn/Component/Json/Reader.php:59",
+    "Bcn/Component/Json/Reader.php:63",
+    "Bcn/Component/Json/Reader.php:65",
+    "Bcn/Component/Json/Reader.php:73",
+    "Bcn/Component/Json/Reader.php:74",
+    "Bcn/Component/Json/Reader.php:77",
+    "Bcn/Component/Json/Reader.php:79",
+    "Bcn/Component/Json/Reader.php:80",
+    "Bcn/Component/Json/Reader.php:81",
+    "Bcn/Component/Json/Reader.php:84",
+    "Bcn/Component/Json/Reader.php:85",
+    "Bcn/Component/Json/Reader.php:86",
+    "Bcn/Component/Json/Reader.php:87",
+    "Bcn/Component/Json/Reader.php:90",
+    "Bcn/Component/Json/Reader.php:92",
+    "Bcn/Component/Json/Reader/Tokenizer.php:101",
+    "Bcn/Component/Json/Reader/Tokenizer.php:103",
+    "Bcn/Component/Json/Reader/Tokenizer.php:105",
+    "Bcn/Component/Json/Reader/Tokenizer.php:106",
+    "Bcn/Component/Json/Reader/Tokenizer.php:108",
+    "Bcn/Component/Json/Reader/Tokenizer.php:112",
+    "Bcn/Component/Json/Reader/Tokenizer.php:121",
+    "Bcn/Component/Json/Reader/Tokenizer.php:122",
+    "Bcn/Component/Json/Reader/Tokenizer.php:123",
+    "Bcn/Component/Json/Reader/Tokenizer.php:125",
+    "Bcn/Component/Json/Reader/Tokenizer.php:126",
+    "Bcn/Component/Json/Reader/Tokenizer.php:131",
+    "Bcn/Component/Json/Reader/Tokenizer.php:134",
+    "Bcn/Component/Json/Reader/Tokenizer.php:137",
+    "Bcn/Component/Json/Reader/Tokenizer.php:138",
+    "Bcn/Component/Json/Reader/Tokenizer.php:139",
+    "Bcn/Component/Json/Reader/Tokenizer.php:148",
+    "Bcn/Component/Json/Reader/Tokenizer.php:150",
+    "Bcn/Component/Json/Reader/Tokenizer.php:151",
+    "Bcn/Component/Json/Reader/Tokenizer.php:152",
+    "Bcn/Component/Json/Reader/Tokenizer.php:157",
+    "Bcn/Component/Json/Reader/Tokenizer.php:165",
+    "Bcn/Component/Json/Reader/Tokenizer.php:167",
+    "Bcn/Component/Json/Reader/Tokenizer.php:168",
+    "Bcn/Component/Json/Reader/Tokenizer.php:169",
+    "Bcn/Component/Json/Reader/Tokenizer.php:170",
+    "Bcn/Component/Json/Reader/Tokenizer.php:172",
+    "Bcn/Component/Json/Reader/Tokenizer.php:173",
+    "Bcn/Component/Json/Reader/Tokenizer.php:174",
+    "Bcn/Component/Json/Reader/Tokenizer.php:175",
+    "Bcn/Component/Json/Reader/Tokenizer.php:187",
+    "Bcn/Component/Json/Reader/Tokenizer.php:189",
+    "Bcn/Component/Json/Reader/Tokenizer.php:193",
+    "Bcn/Component/Json/Reader/Tokenizer.php:194",
+    "Bcn/Component/Json/Reader/Tokenizer.php:195",
+    "Bcn/Component/Json/Reader/Tokenizer.php:196",
+    "Bcn/Component/Json/Reader/Tokenizer.php:198",
+    "Bcn/Component/Json/Reader/Tokenizer.php:199",
+    "Bcn/Component/Json/Reader/Tokenizer.php:200",
+    "Bcn/Component/Json/Reader/Tokenizer.php:201",
+    "Bcn/Component/Json/Reader/Tokenizer.php:202",
+    "Bcn/Component/Json/Reader/Tokenizer.php:203",
+    "Bcn/Component/Json/Reader/Tokenizer.php:204",
+    "Bcn/Component/Json/Reader/Tokenizer.php:205",
+    "Bcn/Component/Json/Reader/Tokenizer.php:207",
+    "Bcn/Component/Json/Reader/Tokenizer.php:219",
+    "Bcn/Component/Json/Reader/Tokenizer.php:220",
+    "Bcn/Component/Json/Reader/Tokenizer.php:221",
+    "Bcn/Component/Json/Reader/Tokenizer.php:223",
+    "Bcn/Component/Json/Reader/Tokenizer.php:224",
+    "Bcn/Component/Json/Reader/Tokenizer.php:225",
+    "Bcn/Component/Json/Reader/Tokenizer.php:228",
+    "Bcn/Component/Json/Reader/Tokenizer.php:229",
+    "Bcn/Component/Json/Reader/Tokenizer.php:231",
+    "Bcn/Component/Json/Reader/Tokenizer.php:232",
+    "Bcn/Component/Json/Reader/Tokenizer.php:245",
+    "Bcn/Component/Json/Reader/Tokenizer.php:247",
+    "Bcn/Component/Json/Reader/Tokenizer.php:248",
+    "Bcn/Component/Json/Reader/Tokenizer.php:249",
+    "Bcn/Component/Json/Reader/Tokenizer.php:250",
+    "Bcn/Component/Json/Reader/Tokenizer.php:251",
+    "Bcn/Component/Json/Reader/Tokenizer.php:253",
+    "Bcn/Component/Json/Reader/Tokenizer.php:255",
+    "Bcn/Component/Json/Reader/Tokenizer.php:258",
+    "Bcn/Component/Json/Reader/Tokenizer.php:259",
+    "Bcn/Component/Json/Reader/Tokenizer.php:260",
+    "Bcn/Component/Json/Reader/Tokenizer.php:261",
+    "Bcn/Component/Json/Reader/Tokenizer.php:262",
+    "Bcn/Component/Json/Reader/Tokenizer.php:263",
+    "Bcn/Component/Json/Reader/Tokenizer.php:264",
+    "Bcn/Component/Json/Reader/Tokenizer.php:267",
+    "Bcn/Component/Json/Reader/Tokenizer.php:271",
+    "Bcn/Component/Json/Reader/Tokenizer.php:279",
+    "Bcn/Component/Json/Reader/Tokenizer.php:281",
+    "Bcn/Component/Json/Reader/Tokenizer.php:289",
+    "Bcn/Component/Json/Reader/Tokenizer.php:290",
+    "Bcn/Component/Json/Reader/Tokenizer.php:293",
+    "Bcn/Component/Json/Reader/Tokenizer.php:301",
+    "Bcn/Component/Json/Reader/Tokenizer.php:305",
+    "Bcn/Component/Json/Reader/Tokenizer.php:58",
+    "Bcn/Component/Json/Reader/Tokenizer.php:62",
+    "Bcn/Component/Json/Reader/Tokenizer.php:63",
+    "Bcn/Component/Json/Reader/Tokenizer.php:64",
+    "Bcn/Component/Json/Reader/Tokenizer.php:72",
+    "Bcn/Component/Json/Reader/Tokenizer.php:74",
+    "Bcn/Component/Json/Reader/Tokenizer.php:78",
+    "Bcn/Component/Json/Reader/Tokenizer.php:82",
+    "Bcn/Component/Json/Reader/Tokenizer.php:84",
+    "Bcn/Component/Json/Reader/Tokenizer.php:85",
+    "Bcn/Component/Json/Reader/Tokenizer.php:86",
+    "Bcn/Component/Json/Reader/Tokenizer.php:88",
+    "Bcn/Component/Json/Reader/Tokenizer.php:89",
+    "Bcn/Component/Json/Reader/Tokenizer.php:90",
+    "Bcn/Component/Json/Reader/Tokenizer.php:93",
+    "Bcn/Component/Json/Reader/Tokenizer.php:96",
+    "Bcn/Component/Json/Reader/Tokenizer.php:97",
+    "Bcn/Component/Json/Reader/Tokenizer.php:98",
+    "Bcn/Component/Json/Reader/Tokenizer.php:99"
+   ],
+   "generated_reader": null
+  }
+ ],
+ "package_lines_per_control": [
+  143,
+  143
+ ],
+ "package_line_difference": 0,
+ "package_lines_by_file_union": {
+  "Bcn/Component/Json/Reader.php": 45,
+  "Bcn/Component/Json/Reader/Tokenizer.php": 98
+ },
+ "scope": "Valid controls only; no malformed input, fuzz campaign, vulnerability or resource tests."
+}

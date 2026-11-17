@@ -37,5 +37,27 @@ Numeric leads from the same snapshot, not verified and not selected. JWT, JSON S
 | [symfony/serializer](https://packagist.org/packages/symfony/serializer) | v8.2.0-BETA2 | 384,296,452 | excluded | JsonDecode encoder calls json_decode; shares the verified ext/json family. |
 | [beste/json](https://packagist.org/packages/beste/json) | 1.8.0 | 36,059,399 | excluded | Json::decode helper over json_decode; shares the verified ext/json family. |
 | [ergebnis/json](https://packagist.org/packages/ergebnis/json) | 1.7.0 | 33,479,596 | excluded | Json value object validated through json_decode; shares the verified ext/json family. |
+| [ghostwriter/json](https://packagist.org/packages/ghostwriter/json) | 3.0.3 | 5,844,205 | excluded | Json::decode wraps json_decode; ext/json family. |
+| [herrera-io/json](https://packagist.org/packages/herrera-io/json) | 3.0.1 | 4,565,858 | excluded | Same release as kherge/json: json_decode, with seld/jsonlint only for error messages. |
+| [bcncommerce/json-stream](https://packagist.org/packages/bcncommerce/json-stream) | 0.4.2 | 2,529,296 | excluded | Pinned probe: Reader::read() returns `{}` and `[]` alike and every number as a float, so neither control matches; Xdebug runs the same 143 lines on both controls. Its event Parser is salsify lineage ([evidence](bcncommerce-json-stream-lead-check.json)). |
+| [maxakawizard/json-collection-parser](https://packagist.org/packages/maxakawizard/json-collection-parser) | 1.10.1 | 966,052 | excluded | Listener over salsify/json-streaming-parser; shared selected family. |
+| [symfony/json-streamer](https://packagist.org/packages/symfony/json-streamer) | v8.1.10 | 946,545 † | excluded | Pinned probe: with the schema-free `Type::mixed()` the generated reader is one json_decode call with associative arrays; both controls lose `{}`/`[]` and run the same 129 package lines ([evidence](symfony-json-streamer-lead-check.json)). |
+| [webmozart/json](https://packagist.org/packages/webmozart/json) | 1.2.2 | 884,156 | excluded | json_decode, with seld/jsonlint only for error messages. |
+| [boundwize/jsonrecast](https://packagist.org/packages/boundwize/jsonrecast) | 1.0.37 | 702,666 | unresolved | Own lexer and recursive-descent AST parser; screening probe matched both controls exactly. |
+| [karriere/json-decoder](https://packagist.org/packages/karriere/json-decoder) | v5.1.0 | 474,219 | excluded | Maps one json_decode result onto classes. |
+| [laktak/hjson](https://packagist.org/packages/laktak/hjson) | v2.3.1 | 262,430 | unresolved | Own Hjson (JSON superset) character parser; screening probe matched both controls exactly. |
+| [kherge/json](https://packagist.org/packages/kherge/json) | 3.0.1 | 259,958 | excluded | json_decode, with seld/jsonlint only for error messages. |
+| [clue/json-stream](https://packagist.org/packages/clue/json-stream) | v0.1.1 | 249,068 | excluded | Buffers to a closing bracket and calls json_decode. |
+| [rodenastyle/stream-parser](https://packagist.org/packages/rodenastyle/stream-parser) | v2.0.3 | 213,447 | excluded | JSON through maxakawizard/json-collection-parser, so salsify. |
+| [klkvsk/json-decode-stream](https://packagist.org/packages/klkvsk/json-decode-stream) | v1.0.3 | 68,854 | unresolved | Own tokenizer, event parser and collector; screening probe matched both controls exactly. |
+| [janeklb/json-char-input-reader](https://packagist.org/packages/janeklb/json-char-input-reader) | v0.3.2 | 53,219 | excluded | Finds chunk boundaries only; the caller decodes the text. |
+| [im0rtality/jsonstreamingparser](https://packagist.org/packages/im0rtality/jsonstreamingparser) | v4.0.0 | 37,399 | excluded | 2014 fork of the salsify parser. |
+| [eftec/services_json](https://packagist.org/packages/eftec/services_json) | 2.5 | 35,783 | unresolved | Pure-PHP PEAR Services_JSON port; screening probe matched both controls exactly. |
+| [cerbero/json-objects](https://packagist.org/packages/cerbero/json-objects) | v1.2.0 | 32,702 | excluded | Listeners over salsify/json-streaming-parser. |
+| [viktorf/json-file-parser](https://packagist.org/packages/viktorf/json-file-parser) | 1.0.6 | 21,358 | excluded | Cuts raw object text by brace counting; curly-brace string offsets do not compile on PHP 8. |
+| [joelwurtz/json-stream-polyfill](https://packagist.org/packages/joelwurtz/json-stream-polyfill) | 0.1.0 | 20,698 | unresolved | Own structural scanner; scalars and materialization go through json_decode. Not probed. |
+| [adrienbrault/partial-json](https://packagist.org/packages/adrienbrault/partial-json) | — | 3,459 † | unresolved | Incomplete-JSON parser; not inspected. |
+| [tdt/json](https://packagist.org/packages/tdt/json) | — | 1,987 † | unresolved | JSON stream reader; not inspected. |
+| [hiroto-k/json5-php](https://packagist.org/packages/hiroto-k/json5-php) | — | 433 † | unresolved | JSON5 parser; valid-JSON route not inspected. |
 
-Queries: `json`, `json parser`, `json decoder`, `json decode`, `json streaming parser`; limit 100 each; 429 hits, 314 unique.
+Queries: `json`, `json parser`, `json decoder`, `json decode`, `json streaming parser` (03:23 UTC); limit 100 each; 429 hits, 314 unique. Supplemental queries `json stream`, `json5`, `jsonc`, `json lexer`, `json tokenizer`, `json reader`, `hjson`, `json pull parser` (15:19 UTC); limit 100 each; 547 hits, 373 unique, 238 not in the first pass; 976 hits and 552 unique overall. Packagist matches `json5`, `jsonc` and `hjson` loosely, so their first 100 hits are mostly generic JSON packages. † Download value from the supplemental snapshot; the package was not among the first-pass hits.
