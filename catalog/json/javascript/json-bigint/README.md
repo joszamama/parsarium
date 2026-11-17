@@ -1,11 +1,116 @@
-# json-bigint 1.0.0
+# json-bigint — JSON / JavaScript
 
-`json-bigint` is a high-adoption JSON parser with its own recursive descent parser in `lib/parse.js`. Its documented [`JSONbig.parse(text)`](https://github.com/sidorares/json-bigint/blob/390482a8b6b460f98c61c3b65915dbd91fc8e7b2/README.md) API takes a string. The [adapter](../../../../projects/json/javascript/json_bigint/adapter.mjs) reads a local file as bytes, decodes strict UTF-8, calls `JSONbig.parse` once, and returns a type-tagged tree of the parser's values. It does not use native `JSON.parse` on the input.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The 1.0.0 [npm release](https://registry.npmjs.org/json-bigint/1.0.0) is MIT licensed and pinned by npm integrity and tarball SHA-256 in the [source lock](../../../../projects/json/javascript/json_bigint/source-lock.json). The parser source credits Douglas Crockford's public-domain `json_parse.js`; `bignumber.js` represents long numeric tokens but does not parse JSON structure. This is a distinct source family from the other selected JavaScript JSON parsers, though it inherits the Crockford reference parser design.
+- **Pinned release:** `1.0.0`
+- **License:** MIT
+- **Parser family:** Crockford JSON.js recursive-descent parser adapted by json-bigint
+- **Local input API:** `JSONbig.parse(text) after decoding a local Buffer with strict UTF-8 TextDecoder; exact type-tagged tree of returned values`
+- **Documentation:** [API reference](<https://github.com/sidorares/json-bigint/blob/390482a8b6b460f98c61c3b65915dbd91fc8e7b2/README.md>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/javascript/json/parsers.json) · [control result](../../../../data/javascript/json/verification.json)
 
-Both existing valid controls produce their exact type-tagged trees: the nested-object control yields an object whose `name` is a string and `version` is a Number; the nested-array control yields an array with nested objects, arrays, booleans, null, strings, and Numbers. All control numbers are safe JavaScript Numbers. The parser source chooses BigNumber for finite numeric tokens whose strings exceed 15 characters by default; these two controls do not exercise or verify that branch. The scope is therefore the two recorded controls, not a large-integer result claim.
+## Observed control result
 
-The [Docker verification](../../../../projects/json/javascript/json_bigint/verification.json) covers 293 lines in `lib/parse.js` on the first control. The [scoped AFL++ receipt](../../../../data/javascript/json/json-bigint-feedback-differential.json) replays each valid control twice: 50 and 43 parser ranges, respectively, with seven differing parser ranges and seven differing AFL++ tuples. The bridge includes only `lib/parse.js`; it excludes `lib/stringify.js`, which has a `JSON.parse` call outside this parse path. The [ranking](../../../../data/javascript/json/ranking.md) uses the saved 30-day npm download snapshot, 297,771,552 downloads. No malformed-input or campaign result is claimed.
+```json
+{
+  "type": "object",
+  "members": {
+    "enabled": {
+      "type": "boolean",
+      "value": true
+    },
+    "missing": {
+      "type": "null"
+    },
+    "name": {
+      "type": "string",
+      "value": "parsarium"
+    },
+    "nested": {
+      "type": "object",
+      "members": {
+        "empty": {
+          "type": "object",
+          "members": {}
+        },
+        "items": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "members": {
+                "id": {
+                  "type": "number",
+                  "value": 1
+                },
+                "ok": {
+                  "type": "boolean",
+                  "value": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "members": {
+                "id": {
+                  "type": "number",
+                  "value": 2
+                },
+                "text": {
+                  "type": "string",
+                  "value": "café \"quoted\""
+                }
+              }
+            }
+          ]
+        },
+        "level": {
+          "type": "number",
+          "value": 2
+        },
+        "list": {
+          "type": "array",
+          "items": []
+        }
+      }
+    },
+    "ratio": {
+      "type": "number",
+      "value": -2.5
+    },
+    "tags": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "value": "json"
+        },
+        {
+          "type": "string",
+          "value": "go"
+        },
+        {
+          "type": "string",
+          "value": "rfc8259"
+        }
+      ]
+    },
+    "version": {
+      "type": "number",
+      "value": 1
+    }
+  }
+}
+```
 
-[Run commands](../../../../projects/json/javascript/json_bigint/README.md)
+## Verification scope
+
+The documented parse(text) API receives one strict UTF-8 decoded local control. The two pinned controls contain only Number-safe numeric literals and the adapter emits exact type-tagged trees. lib/parse.js itself parses JSON syntax and rejects trailing text. Its source chooses BigNumber for finite numeric tokens whose strings exceed 15 characters by default; this source branch is not exercised by the two controls, and no large-integer behavior is claimed from a control run.
+
+## Run this target
+
+```sh
+python3 parsarium.py build json javascript json_bigint
+python3 parsarium.py run json javascript json_bigint controls/json/nested-object.json
+```
