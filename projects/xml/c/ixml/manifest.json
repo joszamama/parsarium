@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "c",
+  "package": "ixml",
+  "release": "22.2.1",
+  "catalog_parser": "data/c/xml/parsers.json",
+  "source_lock": "projects/xml/c/ixml/source-lock.json",
+  "source_sha256": "11ac0f670aad96bd9c81cc84a6d4ae874a7b4b11073d5b88a03fd43efd097cc6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "oracle": "projects/xml/c/ixml/oracle.py (Python expat without namespace processing, ordered attributes)",
+  "namespace_resolution": false,
+  "output_name_form": "raw qualified names (prefix:local); xmlns/xmlns:* are ordinary attributes",
+  "api": "ixmlParseBufferEx(NUL-terminated copy of the local bytes, &doc); walk the DOM from ixmlNode_getFirstChild(doc) with ixmlNode_getNodeType, ixmlNode_getNodeName, ixmlNode_getNodeValue, ixmlNode_getAttributes/ixmlNamedNodeMap_item, ixmlNode_getFirstChild and ixmlNode_getNextSibling; ixmlDocument_free(doc)",
+  "namespace_semantics": "pupnp IXML 22.2.1 stores qualified names as written as node names and keeps xmlns/xmlns:* declarations as attributes in source order. It also fills namespaceURI, prefix and localName fields, but not conformantly on the controls: the default namespace declared on the prefixed catalog root is not given to the unprefixed item elements, plain (xmlns=\"\") keeps the order namespace while its child leaf gets none, and prefixed attributes get no URI. Expanded names are therefore not claimed; harness.c reports ixmlNode_getNodeName for elements and attributes and resolves nothing itself.",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of pupnp's IXML library built with CMake from the pinned release asset (static libixml.a only; the UPnP library is not built or linked)",
+  "coverage_subject_prefix": "/work/source/ixml/src/",
+  "format_specific_coverage_file_suffix": "/ixmlparser.c",
+  "pilot": "xml_c_registry_pilot",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish IXML's element, attribute, CDATA and text DOM for them only, as a raw-name path: qualified names, xmlns attributes, attribute order and decoded values, depth and trimmed text runs. IXML drops the order control's comment and processing instruction (both sit in whitespace-only runs). No namespace URI, expanded name or in-scope binding is reported, because IXML's own namespace fields are not conformant on these controls. ixmlParseBufferEx stops at the first NUL byte. DTDs, entities beyond the controls' references, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from oracle.py (Python pyexpat in non-namespace mode, a different family from IXML)."
+}

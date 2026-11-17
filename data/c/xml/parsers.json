@@ -171,6 +171,81 @@
     "project": "projects/xml/c/libxmlb/verification.json"
   },
   {
+    "name": "ixml",
+    "version": "22.2.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/pupnp/pupnp/blob/release-22.2.1/COPYING",
+    "input_api": "ixmlParseBufferEx(NUL-terminated copy of the local bytes, &doc); walk the DOM from ixmlNode_getFirstChild(doc) with ixmlNode_getNodeType, ixmlNode_getNodeName, ixmlNode_getNodeValue, ixmlNode_getAttributes/ixmlNamedNodeMap_item, ixmlNode_getFirstChild and ixmlNode_getNextSibling; ixmlDocument_free(doc)",
+    "documentation": "https://github.com/pupnp/pupnp/blob/release-22.2.1/ixml/inc/ixml.h",
+    "source": "https://github.com/pupnp/pupnp/releases/download/release-22.2.1/libupnp-22.2.1.tar.bz2",
+    "scope": "pupnp IXML's DOM of one in-memory document as a raw-name path: document-order qualified element and attribute names as written, xmlns attributes, attribute order and decoded values, maximum depth, and trimmed text and CDATA runs between markup; no namespace URIs or expanded names",
+    "namespace_semantics": "raw_names_only",
+    "namespace_note": "pupnp IXML 22.2.1 stores qualified names as written as node names and keeps xmlns/xmlns:* declarations as attributes in source order. It also fills namespaceURI, prefix and localName fields, but not conformantly on the controls: the default namespace declared on the prefixed catalog root is not given to the unprefixed item elements, plain (xmlns=\"\") keeps the order namespace while its child leaf gets none, and prefixed attributes get no URI. Expanded names are therefore not claimed; harness.c reports ixmlNode_getNodeName for elements and attributes and resolves nothing itself.",
+    "family": "IXML (Intel/pupnp DOM parser)",
+    "family_note": "Independent of expat, libxml2, GMarkup, Mini-XML and libnxml: ixml/src/ixmlparser.c has its own tokenizer, entity and character-reference decoder and DOM builder, and IXML links no other XML library. It is shipped inside the pupnp (libupnp) UPnP SDK, whose device and service descriptions it parses; the harness builds and links only the IXML static library. The pyexpat oracle is a different family, so the match is cross-family.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/c/ixml/oracle.py (Python expat without namespace processing, ordered attributes)",
+    "verification_note": "Measured as a raw-name XML tree path, not as a namespace-aware parser. Qualified element and attribute names, attribute order and xmlns declarations are compared as strings with expat in non-namespace mode. IXML's own namespaceURI fields are not used: on catalog-ns.xml the unprefixed item, name and note elements get no URI although xmlns=\"urn:parsarium:item\" is in scope, and on order-default-ns.xml plain keeps urn:parsarium:order despite xmlns=\"\".",
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (libixml11t64; max of libixml11t64, libixml10, libixml22 and libixml11)",
+      "value": 46966,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "metric_note": "libixml11t64 has 46,966 installations (971 regular use, 45,959 in the no-files column) in the same hashed by_inst file; libixml10 has 18,344, libixml22 3,781 and libixml11 651. The binary is format-specific (IXML only) although its source (libupnp, now pupnp) also builds libupnp; it is installed almost entirely as a dependency of UPnP/DLNA media software, so this is a package proxy, not evidence of direct XML parser use. The pinned 22.2.1 equals Debian forky/sid's pupnp source (libixml22).",
+    "project": "projects/xml/c/ixml/verification.json"
+  },
+  {
     "name": "mxml",
     "version": "4.0.6",
     "license": "Apache-2.0",

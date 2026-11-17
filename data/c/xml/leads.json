@@ -271,10 +271,24 @@
       "search": "Debian sourcemax source-name substring 'xml'",
       "reason": "Debian source-name hit (libwbxml2-0 170). WBXML (binary XML) codec; textual XML goes through expat. Different format and not a general XML parser API.",
       "source": "https://github.com/libwbxml/libwbxml"
+    },
+    {
+      "name": "ixml",
+      "status": "selected",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 46966,
+      "homebrew_install_365d": null,
+      "debian_source": "pupnp (formerly libupnp); binaries libixml11t64, libixml10, libixml22",
+      "search": "Debian by_inst binary-package-name substring 'xml' (first 100 hits)",
+      "reason": "Selected and verified: pupnp 22.2.1 ixmlParseBufferEx matched the expat non-namespace summary of both valid controls as a raw-name path (IXML's own namespaceURI fields are not conformant on the controls), with 1,428 IXML lines covered (908 in ixmlparser.c) and a stable AFL++ differential (433 vs 449 tuples, 82 differing); see data/c/xml/parsers.json. Own parser family.",
+      "source": "https://github.com/pupnp/pupnp"
     }
   ],
   "debian_search": {
     "snapshot": "data/c/xml/registry-snapshot.json#debian_source_search",
-    "note": "Leads above the three selected paths were added from the Debian source-name search ('xml', 306 hits, 5 C XML parser libraries) and targeted lookups; all other hits are classified in the snapshot."
+    "note": "Leads above the three selected paths were added from the Debian source-name search ('xml', 306 hits, 5 C XML parser libraries) and targeted lookups; all other hits are classified in the snapshot.",
+    "binary_snapshot": "data/c/xml/registry-snapshot.json#debian_binary_search",
+    "binary_note": "The Debian binary-package-name search ('xml', 1,208 hits, first 100 classified) added one C XML parser lead, pupnp's IXML (libixml11t64 46,966), now selected; its other C parser hits are the selected libxml2, libxmlb and mxml runtimes."
   }
 }

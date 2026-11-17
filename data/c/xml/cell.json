@@ -1,43 +1,46 @@
 {
   "ecosystem": "c",
   "format": "xml",
-  "status": "pilot_five_selected_search_bounded",
+  "status": "pilot_six_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 5,
+  "verified_third_party_count": 6,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "xml",
     "targeted: expat, libxml2, mxml, yxml, libroxml, ezxml, sxmlc",
     "Debian sourcemax source names containing xml",
-    "targeted Debian sources: expat, glib2.0, libgsf, qdbm, libstrophe, iksemel, libroxml"
+    "targeted Debian sources: expat, glib2.0, libgsf, qdbm, libstrophe, iksemel, libroxml",
+    "Debian by_inst binary-package names containing xml (first 100 by installations)"
   ],
   "search_limit_per_query": 100,
   "search_totals": {
     "xml": 9,
     "targeted": 2,
     "debian_source_xml": 306,
-    "debian_targeted": 5
+    "debian_targeted": 5,
+    "debian_binary_xml": 1208
   },
-  "search_hits_recorded": 329,
-  "unique_search_hits": 320,
-  "leads_recorded": 25,
+  "search_hits_recorded": 429,
+  "unique_search_hits": 420,
+  "leads_recorded": 26,
   "leads_by_status": {
-    "selected": 5,
+    "selected": 6,
     "unresolved_no_primary_metric": 5,
     "excluded": 14,
     "unresolved_control_mismatch": 1
   },
   "ranking_metric": "Debian popcon installations of the lead's runtime library binary package (max when two sonames are listed)",
-  "selection": "Ranked by Debian popcon installations of each lead's runtime library binary package in the hashed by_inst file: expat (libexpat1 297,134), libxml2 (libxml2 binary 290,724), libxmlb (libxmlb2 130,663), mxml (libmxml1 2,054), libnxml (libnxml0t64 104). expat and libxml2 are namespace-aware; libxmlb (over GLib's GMarkup) and libnxml are measured as raw-name paths; Mini-XML's namespaces are resolved by its adapter. Homebrew 365-day installs give the same order for expat, libxml2 and mxml (1,360,500, 564,778, 127).",
-  "uncertainty": "Pilot cell: five third-party paths. expat 2.10.0, libxml2 2.15.4 and Mini-XML 4.0.6 were built, matched the exact namespace-resolved summary of both valid controls under LLVM source coverage, and have native AFL++ feedback with a stable valid-control differential. libxmlb 0.3.30 (over GLib 2.88.4's GMarkup) builds a silo from both controls and matches the expat non-namespace summary as a raw-name path: names as written, xmlns declarations as attributes, no namespace URIs. Its 1,381 covered libxmlb lines and 604 GMarkup lines on the first control, and an allowlisted AFL++ map (gmarkup.c and libxmlb's xb-*.c only, checked with nm) of 639 vs 653 tuples with 32 differing, are stable. GMarkup is a documented XML subset parser; libxmlb drops comments and processing instructions. libnxml 0.18.6 matches the same raw-name summary; its own namespace pass binds unprefixed attributes to the default namespace, so its URIs are not reported, and the adapter re-joins libnxml's stored prefix and local name. 720 libnxml lines are covered (346 in nxml_parser.c) and its AFL++ map (393 vs 426 tuples, 53 differing) is stable. libnxml0t64's 104 installations are a very weak signal. The five paths are distinct parser families. expat leads libxml2 by 6,410 installs (2.2%) on the binary-package metric, a near tie. libxmlb2 is a dependency of fwupd and AppStream tooling, so its count reflects those installations. The Debian sourcemax table would invert the first two (libxml2 source 61,109) only because the libxml2 source now builds libxml2-16 and the older libxml2 binary is no longer attributed to it, so binary runtime-library counts are the primary metric; libxml2-16 (9,413) is not added because hosts may have both. mxml's value is the 3.x soname libmxml1; the pinned 4.0.6 is Debian forky/sid's mxml source. Mini-XML does not implement Namespaces in XML: it returns prefix:local names and keeps xmlns declarations as attributes, so its expanded names, declaration counts and URIs are computed by the adapter from mxml's tree, not by the package. Popcon counts installations, mostly pulled in as dependencies, not direct parser use. Search: the Conan Center recipe-name substring 'xml' (9 hits), seven targeted C names, every Debian source name containing 'xml' in the hashed sourcemax snapshot (306 hits, 5 of them C XML parser libraries: libxml2.9, libxml2, libxmlb, mxml, libnxml; all classified in the registry snapshot) and seven targeted Debian sources. GLib's GMarkup is unranked: glib2.0 builds all of GLib and Debian has no GMarkup-specific development package. iksemel (libiksemel3 4,375, source no longer in Debian) fails the second valid control: it maps character references to '?' and leaves attribute entities undecoded. libgsf, qdbm, xmlrpc-c, xmlrpc-epi, libstrophe and wbxml2 are wrappers, tokenizers or protocol libraries. Conan and Debian miss vendored single-file parsers. The namespace control oracle (controls/xml/check_controls.py) and the raw-name oracles use Python's pyexpat, the same family as expat but not the others. The expat harness pins XML_SetHashSalt so AFL++ maps are reproducible. ISO C documents no XML API. Two valid UTF-8 controls without DOCTYPE do not establish DTD, entity, encoding, XML 1.1 or rejection behaviour.",
+  "selection": "Ranked by Debian popcon installations of each lead's runtime library binary package in the hashed by_inst file: expat (libexpat1 297,134), libxml2 (libxml2 binary 290,724), libxmlb (libxmlb2 130,663), ixml (pupnp IXML, libixml11t64 46,966), mxml (libmxml1 2,054), libnxml (libnxml0t64 104). expat and libxml2 are namespace-aware; libxmlb (over GLib's GMarkup), IXML and libnxml are measured as raw-name paths; Mini-XML's namespaces are resolved by its adapter. Homebrew 365-day installs give the same order for expat, libxml2 and mxml (1,360,500, 564,778, 127).",
+  "uncertainty": "Pilot cell: six third-party paths. expat 2.10.0, libxml2 2.15.4 and Mini-XML 4.0.6 were built, matched the exact namespace-resolved summary of both valid controls under LLVM source coverage, and have native AFL++ feedback with a stable valid-control differential. libxmlb 0.3.30 (over GLib 2.88.4's GMarkup) builds a silo from both controls and matches the expat non-namespace summary as a raw-name path: names as written, xmlns declarations as attributes, no namespace URIs. Its 1,381 covered libxmlb lines and 604 GMarkup lines on the first control, and an allowlisted AFL++ map (gmarkup.c and libxmlb's xb-*.c only, checked with nm) of 639 vs 653 tuples with 32 differing, are stable. GMarkup is a documented XML subset parser; libxmlb drops comments and processing instructions. libnxml 0.18.6 matches the same raw-name summary; its own namespace pass binds unprefixed attributes to the default namespace, so its URIs are not reported, and the adapter re-joins libnxml's stored prefix and local name. 720 libnxml lines are covered (346 in nxml_parser.c) and its AFL++ map (393 vs 426 tuples, 53 differing) is stable. libnxml0t64's 104 installations are a very weak signal. pupnp IXML 22.2.1 (libixml11t64 46,966 installations, found by a Debian binary-package-name search for 'xml': 1,208 hits, first 100 classified) parses both controls with ixmlParseBufferEx and matches the expat non-namespace summary as a raw-name path; its own namespaceURI fields are not conformant on the controls (no default namespace below the prefixed catalog root, xmlns=\"\" not applied to its own element, no URIs on prefixed attributes), so no URIs are reported. It drops comments and processing instructions. 1,428 IXML lines are covered (908 in ixmlparser.c) and its AFL++ map (433 vs 449 tuples, 82 differing) is stable over five repeats. libixml is installed almost entirely as a dependency of UPnP/DLNA media software (45,959 of its installations are in the no-files column). The six paths are distinct parser families. expat leads libxml2 by 6,410 installs (2.2%) on the binary-package metric, a near tie. libxmlb2 is a dependency of fwupd and AppStream tooling, so its count reflects those installations. The Debian sourcemax table would invert the first two (libxml2 source 61,109) only because the libxml2 source now builds libxml2-16 and the older libxml2 binary is no longer attributed to it, so binary runtime-library counts are the primary metric; libxml2-16 (9,413) is not added because hosts may have both. mxml's value is the 3.x soname libmxml1; the pinned 4.0.6 is Debian forky/sid's mxml source. Mini-XML does not implement Namespaces in XML: it returns prefix:local names and keeps xmlns declarations as attributes, so its expanded names, declaration counts and URIs are computed by the adapter from mxml's tree, not by the package. Popcon counts installations, mostly pulled in as dependencies, not direct parser use. Search: the Conan Center recipe-name substring 'xml' (9 hits), seven targeted C names, every Debian source name containing 'xml' in the hashed sourcemax snapshot (306 hits, 5 of them C XML parser libraries: libxml2.9, libxml2, libxmlb, mxml, libnxml; all classified in the registry snapshot) and seven targeted Debian sources. GLib's GMarkup is unranked: glib2.0 builds all of GLib and Debian has no GMarkup-specific development package. iksemel (libiksemel3 4,375, source no longer in Debian) fails the second valid control: it maps character references to '?' and leaves attribute entities undecoded. libgsf, qdbm, xmlrpc-c, xmlrpc-epi, libstrophe and wbxml2 are wrappers, tokenizers or protocol libraries. Conan and Debian miss vendored single-file parsers. The namespace control oracle (controls/xml/check_controls.py) and the raw-name oracles use Python's pyexpat, the same family as expat but not the others. The expat harness pins XML_SetHashSalt so AFL++ maps are reproducible. ISO C documents no XML API. Two valid UTF-8 controls without DOCTYPE do not establish DTD, entity, encoding, XML 1.1 or rejection behaviour. The cell stays at six: the Debian source-name and binary-name searches find no further C XML parser runtime with a Debian count; iksemel (4,375) fails the order control; libroxml, yxml, ezxml and sxmlc have no Debian package, and GitHub stars are not an allowed metric outside PLY cells; the remaining hits are wrappers over libxml2 or expat (xmlsec, libgsf, gdome2 libgdome2-0 518, raptor), protocol libraries (XML-RPC, XMPP, WBXML), tools or other-language bindings. The dev-package fallback (at most three paths, at least 1,000) does not add a C path: no primary-unranked C XML parser has a format-specific development package with 1,000 installations.",
   "third_party_evidence": "data/c/xml/parsers.json",
   "third_party_control_results": [
     "projects/xml/c/expat/verification.json",
     "projects/xml/c/libxml2/verification.json",
     "projects/xml/c/mxml/verification.json",
     "projects/xml/c/libxmlb/verification.json",
-    "projects/xml/c/libnxml/verification.json"
+    "projects/xml/c/libnxml/verification.json",
+    "projects/xml/c/ixml/verification.json"
   ],
   "afl_feedback": "data/c/xml/afl-feedback.json",
   "runtime_evidence": "data/c/xml/standard.json",
@@ -47,5 +50,6 @@
   "protocol": "catalog/xml/PROTOCOL.md",
   "extra_source_lock": "projects/xml/c/libxml2/source-lock.json",
   "additional_source_lock": "projects/xml/c/mxml/source-lock.json",
-  "debian_search": "data/c/xml/registry-snapshot.json#debian_source_search"
+  "debian_search": "data/c/xml/registry-snapshot.json#debian_source_search",
+  "debian_binary_search": "data/c/xml/registry-snapshot.json#debian_binary_search"
 }

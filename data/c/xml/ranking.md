@@ -1,7 +1,7 @@
 # C XML parser pilot
 
-This pilot has five verified third-party paths from different parser families:
-[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6 and [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6. expat's
+This pilot has six verified third-party paths from different parser families:
+[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`ixml`](../../../projects/xml/c/ixml/README.md) (pupnp IXML) 22.2.1, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6 and [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6. expat's
 documented API (`XML_ParserCreateNS`, the element, namespace-declaration and
 character-data handlers, `XML_Parse` over a local buffer) and libxml2's
 (`xmlReaderForMemory` over a local buffer, then the `xmlTextReaderRead` pull
@@ -10,7 +10,7 @@ Mini-XML's `mxmlLoadString` builds a tree of the same controls, but Mini-XML
 does not implement XML namespaces: it returns names as written (`c:catalog`) and
 keeps `xmlns` declarations as attributes. Its adapter resolves the expanded
 names from that tree, and that summary matches too.
-Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`), **130,663** (`libxmlb2`), **2,054** (`libmxml1`) and **104** (`libnxml0t64`) Debian popcon installations in the
+Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`), **130,663** (`libxmlb2`), **46,966** (`libixml11t64`), **2,054** (`libmxml1`) and **104** (`libnxml0t64`) Debian popcon installations in the
 [saved snapshot](registry-snapshot.json). That counts installations,
 mostly pulled in as a dependency; it is an adoption proxy, not a count of
 programs that call the parser.
@@ -29,8 +29,9 @@ longer attributed to it.
 | 1 | [expat](https://libexpat.github.io/doc/api/latest/) | 2.10.0 | 297,134 | Namespace-resolved elements, attributes, declarations, depth and character data of one in-memory document | expat |
 | 2 | [libxml2](https://gnome.pages.gitlab.gnome.org/libxml2/html/xmlreader_8h.html) | 2.15.4 | 290,724 | Namespace-resolved elements, attributes, declarations, depth and character data of one in-memory document | libxml2 |
 | 3 | [libxmlb](https://github.com/hughsie/libxmlb/blob/0.3.30/src/xb-builder-source.c) | 0.3.30 | 130,663 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | GLib GMarkup |
-| 4 | [mxml](https://www.msweet.org/mxml/mxml.html) | 4.0.6 | 2,054 | Element tree, attributes, depth and character data of one in-memory document; namespaces resolved by the adapter, not by Mini-XML | Mini-XML |
-| 5 | [libnxml](https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in) | 0.18.6 | 104 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | nXML |
+| 4 | [ixml](https://github.com/pupnp/pupnp/blob/release-22.2.1/ixml/inc/ixml.h) | 22.2.1 | 46,966 | Raw-name element and attribute DOM, depth and text of one in-memory document; no namespace URIs | IXML (pupnp) |
+| 5 | [mxml](https://www.msweet.org/mxml/mxml.html) | 4.0.6 | 2,054 | Element tree, attributes, depth and character data of one in-memory document; namespaces resolved by the adapter, not by Mini-XML | Mini-XML |
+| 6 | [libnxml](https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in) | 0.18.6 | 104 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | nXML |
 
 `libmxml1` is the Mini-XML 3.x library package; the pinned 4.0.6 is the
 `mxml` source in Debian forky and sid. 1,842 of the 2,054 `libmxml1`
@@ -59,14 +60,29 @@ expat non-namespace oracle. The first control covers 720 libnxml lines (346 in `
 line starts differ between the controls, and the AFL++ maps (393 vs 426 tuples, 53 differing) repeat
 exactly. Its 104 installations are a very weak package signal.
 
+pupnp's IXML 22.2.1 ([release asset](https://github.com/pupnp/pupnp/releases/tag/release-22.2.1), SHA-256
+`11ac0f670aad96bd9c81cc84a6d4ae874a7b4b11073d5b88a03fd43efd097cc6`, BSD-3-Clause) is the DOM parser bundled
+with the portable UPnP SDK; Debian ships it as its own runtime package (`libixml11t64`, `libixml10`,
+`libixml22`), which is how the binary-name search found it. `ixmlParseBufferEx` builds a DOM whose node
+names are the qualified names as written, with `xmlns` declarations kept as attributes. IXML also fills
+namespace fields, but not conformantly on the controls (no default namespace below the prefixed catalog
+root, `xmlns=""` not applied to its own element, no URIs on prefixed attributes), so it is measured as a
+**raw-name path** against the same expat non-namespace oracle. It drops comments and processing
+instructions. Only the IXML static library is built; the first control covers 1,428 IXML lines (908 in
+`ixmlparser.c`) and the AFL++ maps (433 vs 449 tuples, 82 differing) repeat exactly over five runs.
+Almost all of its installations come from UPnP/DLNA media software that depends on it.
+
 ## Leads
 
 One Conan recipe-name query (`xml`, 9 hits), seven targeted C names, every
 Debian source name containing `xml` in the hashed sourcemax snapshot (306 hits,
 all classified in the [snapshot](registry-snapshot.json): 5 C XML parser
 libraries, 13 other C or tool packages, 21 C++ packages, 4 data packages and
-263 other-language packages) and seven targeted Debian sources. The
-[leads](leads.json) record each candidate. Apart from the five verified entries, none of them is verified.
+263 other-language packages) and seven targeted Debian sources. A second Debian query takes binary-package names containing `xml`
+in the primary-metric `by_inst` table (1,208 hits; the first 100 by installations are classified in the
+snapshot): it adds pupnp's IXML and otherwise only selected runtimes, wrappers, tools, C++ modules and
+other-language packages. The
+[leads](leads.json) record each candidate. Apart from the six verified entries, none of them is verified.
 
 Homebrew 365-day installs, a cross-check only, give the same order for expat,
 libxml2 and mxml (1,360,500; 564,778; 127). `libxml2-16` (9,413) is not added

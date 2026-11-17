@@ -33,6 +33,8 @@ SCOPES = {
                 "AFL++ instruments only GLib 2.88.4's glib/gmarkup.c and libxmlb's src/xb-*.c (projects/xml/c/libxmlb/afl-allowlist.txt); the overlay build asserts with nm that no other GLib or libxmlb archive member is instrumented, and the harness is not instrumented."),
     "libnxml": ("afl_clang_fast_libnxml_and_harness_edges",
                 "AFL++ instruments only the pinned libnxml sources and the nxml_parse_buffer harness, including its raw-name tree walk; libcurl is linked uninstrumented and never called."),
+    "ixml": ("afl_clang_fast_ixml_and_harness_edges",
+             "AFL++ instruments only pupnp's IXML sources (static libixml.a; the UPnP library is not built) and the ixmlParseBufferEx harness, including its raw-name DOM walk; no other library is compiled into /work/fuzzer."),
 }
 REPEATS = 5
 REPORT = ROOT / "data/c/xml/afl-feedback.json"

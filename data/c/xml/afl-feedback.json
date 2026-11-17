@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "checked_at_utc": "2026-11-17T15:19:17.381809+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "checked_at_utc": "2026-11-17T23:29:40.635740+00:00",
+  "projects_total": 6,
+  "projects_passed": 6,
   "pass": true,
   "results": [
     {
@@ -243,6 +243,53 @@
       "first_afl_tuples": 393,
       "second_afl_tuples": 426,
       "afl_tuple_difference": 53
+    },
+    {
+      "project": "xml/c/ixml",
+      "checked_at_utc": "2026-11-17T23:29:40.635331+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_ixml_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only pupnp's IXML sources (static libixml.a; the UPnP library is not built) and the ixmlParseBufferEx harness, including its raw-name DOM walk; no other library is compiled into /work/fuzzer.",
+      "base_project_receipt_sha256": "6f08dfb64c976cc72561610f18cd5c5f3a714dd22f99dc6ab9afc9e2485abc78",
+      "overlay_receipt_sha256": "9aa23361d7453b5724804ce6f485bb218f20caac555c90e40e394f87814e2799",
+      "base_image_id": "sha256:78ef85392fc45092d6816a278ef8df8053dabfa4c41f62d84ebb2b1cab978e45",
+      "overlay_image_id": "sha256:01e232636c7c60277972c87d6809267d1d28e7654ef2b9239aaaefe9e8142003",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 433,
+      "second_afl_tuples": 449,
+      "afl_tuple_difference": 82
     }
   ]
 }
