@@ -68,7 +68,9 @@ def home(fetch: bool = True, quiet: bool = False) -> Path:
             raise SnapshotError(f"PARSARIUM_HOME={path} does not contain {ENTRY}")
         return path
     info = snapshot_info()
-    target = cache_root() / info.get("version", __version__)
+    # Keep the returned root consistent with helper modules that resolve their
+    # own __file__. On macOS, /tmp is a symlink to /private/tmp.
+    target = (cache_root() / info.get("version", __version__)).resolve()
     if (target / ENTRY).is_file():
         return target
     if not fetch:

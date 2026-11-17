@@ -122,6 +122,21 @@ class SelectionTests(unittest.TestCase):
 
 
 class HomeTests(unittest.TestCase):
+    def test_cached_home_resolves_symlinked_cache_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            real = base / "real-cache"
+            target = real / "test"
+            target.mkdir(parents=True)
+            (target / "parsarium.py").write_text("# test snapshot\n")
+            alias = base / "cache-alias"
+            alias.symlink_to(real, target_is_directory=True)
+            info = {"version": "test"}
+            with mock.patch.dict(os.environ, {"PARSARIUM_HOME": ""}), \
+                 mock.patch.object(snapshot, "snapshot_info", return_value=info), \
+                 mock.patch.object(snapshot, "cache_root", return_value=alias):
+                self.assertEqual(snapshot.home(fetch=False), target.resolve())
+
     def test_fetch_http_404_has_nonzero_exit(self) -> None:
         info = {"version": "test", "url": "https://example.invalid/snapshot.tar.gz",
                 "sha256": "0" * 64, "bundle": None}
