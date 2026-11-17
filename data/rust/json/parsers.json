@@ -191,5 +191,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/jiter/verification.json"
+  },
+  {
+    "name": "json",
+    "version": "0.12.4",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "json::parse(&str) -> Result<json::JsonValue>; JsonValue::{Object, Array, Short, String, Number, Boolean, Null}; JsonValue::entries()/as_f64()/as_str()",
+    "documentation": "https://docs.rs/json/0.12.4/json/fn.parse.html",
+    "source": "https://static.crates.io/crates/json/json-0.12.4.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped json::JsonValue tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "json-rust 0.12.4 own parser.rs and JsonValue tree (maciejhirsz/json-rust); no serde_json parse dependency",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 2672413,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/json_crate/verification.json"
   }
 ]

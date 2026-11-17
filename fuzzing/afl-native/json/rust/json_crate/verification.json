@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/json_crate",
+  "pass": true,
+  "base_project_receipt_sha256": "3abe8409972c5fe49bf302c46fedf6c1d6fbe83cd897dda07c97387f8c729214",
+  "overlay_file_sha256": {
+    "Cargo.toml": "7d7adcd66a42699f4859ab77edae76a06f179ac37a6e54e4c7d88b9fe6f88906",
+    "Cargo.lock": "8e17cbac8f786ddc8ba62e063743666318ba534449ca3a2ee104ec4136f54efd",
+    "afl_fuzzer.rs": "1a410472b56e8d4d2263cc4d4b33ef9cb930c1b68579abfbb4d99067cca4746f",
+    "Dockerfile": "508fa3348d41572c7b29ea5fd2c363e8694b944f3e5e54f835d412a59f4feaea",
+    "build.py": "20ca464ac0817dc6ae8d3b8ccd6cd5f21400115ef2aa4b58a1972c234c4fce24"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd",
+  "image_id": "sha256:2f62961b05374f2b4e5bdb09bf64b8020d4a5ce9e4048b08e31d946f15212b6f",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 913,
+  "afl_map_size": 11864,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: json-rust 0.12.4 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:e554e31ca0eda505741d3b220d3cd3e093877faa8c0acc57c6c392c125affe19",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 774,
+  "edges_only_in_control": 171,
+  "edges_only_in_variant": 32,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/json-0.12.4/",
+    "control_lines": {
+      "src/codegen.rs": 0,
+      "src/error.rs": 0,
+      "src/lib.rs": 0,
+      "src/number.rs": 45,
+      "src/object.rs": 138,
+      "src/parser.rs": 148,
+      "src/short.rs": 16,
+      "src/util/diyfp.rs": 0,
+      "src/util/grisu2.rs": 0,
+      "src/util/print_dec.rs": 0,
+      "src/value/implements.rs": 4,
+      "src/value/mod.rs": 17
+    },
+    "variant_lines": {
+      "src/codegen.rs": 0,
+      "src/error.rs": 0,
+      "src/lib.rs": 0,
+      "src/number.rs": 38,
+      "src/object.rs": 117,
+      "src/parser.rs": 137,
+      "src/short.rs": 16,
+      "src/util/diyfp.rs": 0,
+      "src/util/grisu2.rs": 0,
+      "src/util/print_dec.rs": 0,
+      "src/value/implements.rs": 4,
+      "src/value/mod.rs": 16
+    },
+    "files_with_different_line_counts": [
+      "src/number.rs",
+      "src/object.rs",
+      "src/parser.rs",
+      "src/value/mod.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      913,
+      913,
+      913
+    ],
+    "stable_edges": 913,
+    "union_edges": 913,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      774,
+      774,
+      774
+    ],
+    "stable_edges": 774,
+    "union_edges": 774,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

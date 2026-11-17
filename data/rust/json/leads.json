@@ -93,14 +93,6 @@
       "source": "https://crates.io/crates/aws-smithy-json"
     },
     {
-      "name": "json",
-      "version": "0.12.4",
-      "recent_downloads_90d": 2672413,
-      "status": "unresolved",
-      "reason": "json-rust; json::parse(&str) into JsonValue. Not run on the controls; last stable release 0.12.4.",
-      "source": "https://crates.io/crates/json"
-    },
-    {
       "name": "hifijson",
       "version": "0.5.0",
       "recent_downloads_90d": 2630468,
@@ -221,7 +213,7 @@
       "source": "https://crates.io/crates/json-deserializer"
     }
   ],
-  "note": "Unresolved leads remain unbuilt and unrun on the controls; selected simd-json, sonic-rs and jiter leads have separate pinned projects and verification receipts.",
+  "note": "Unresolved leads remain unbuilt and unrun on the controls; selected simd-json, sonic-rs, jiter and json leads have separate pinned projects and verification receipts.",
   "verified_leads": [
     {
       "name": "simd-json",
@@ -247,6 +239,14 @@
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/jiter/verification.json",
       "family_note": "Shared Jiter parser family with Python pydantic-core 2.50.4, which pins Jiter 0.18.0; no cross-ecosystem metric comparison."
+    },
+    {
+      "name": "json",
+      "version": "0.12.4",
+      "recent_downloads_90d": 2672413,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/json_crate/verification.json"
     }
   ]
 }
