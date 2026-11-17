@@ -218,5 +218,80 @@
     },
     "metric_note": "libmxml1 is the Mini-XML 3.x soname (Debian trixie 3.3.1). The pinned 4.0.6 release is the version in Debian forky/sid (source mxml 4.0.6-3), whose libmxml4 binary has no row in the saved snapshot.",
     "project": "projects/xml/c/mxml/verification.json"
+  },
+  {
+    "name": "libnxml",
+    "version": "0.18.6",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/bakulf/libnxml/blob/0.18.6/COPYING",
+    "input_api": "nxml_new(&doc); nxml_parse_buffer(doc, copy of the local bytes, size); walk doc->data and each nxml_data_t's children/next with type, value, ns and the attributes list (name, value, ns); nxml_free(doc)",
+    "documentation": "https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in",
+    "source": "https://github.com/bakulf/libnxml/archive/refs/tags/0.18.6.tar.gz",
+    "scope": "libnxml's tree of one in-memory document as a raw-name path: document-order qualified element and attribute names as written, xmlns attributes, attribute order and decoded values, maximum depth, and trimmed text and CDATA runs between markup; no namespace URIs or expanded names",
+    "namespace_semantics": "raw_names_only",
+    "namespace_note": "libnxml 0.18.6 runs its own namespace pass after every parse (nxml_namespace.c): it records xmlns/xmlns:p declarations, removes a bound prefix from element and attribute names and points ns at the declaration. That pass also binds unprefixed attributes to the default namespace, contrary to Namespaces in XML, so expanded names are not claimed. harness.c reports qualified names by re-joining libnxml's stored prefix and local name; xmlns attributes stay in the attribute list.",
+    "family": "nXML (Andrea Marchesini's libnxml)",
+    "family_note": "Independent of expat, libxml2, GMarkup and Mini-XML: nxml_parser.c has its own reader, entity and character-reference decoder and tree builder, and links no other XML library (libcurl serves only nxml_parse_url). The pyexpat oracle is a different family, so the match is cross-family.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/c/libnxml/oracle.py (Python expat without namespace processing, ordered attributes)",
+    "verification_note": "Measured as a raw-name XML tree path, not as a namespace-aware parser. Qualified element and attribute names, attribute order and xmlns declarations are compared as strings with expat in non-namespace mode. libnxml's own namespace pass is visible only as the stored prefix/local split, which the adapter re-joins; on catalog-ns.xml that pass also binds the unprefixed version and id attributes to urn:parsarium:item, so its URIs would not match Namespaces in XML and are not reported.",
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (libnxml0t64; max of libnxml0t64 and libnxml0)",
+      "value": 104,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "metric_note": "libnxml0t64 has 104 installations (10 regular use) and the older libnxml0 soname 48 in the same by_inst file. Debian's libnxml source (0.18.5 in forky/sid) packages this upstream; the pinned 0.18.6 is the newer upstream tag. A very weak package proxy, not evidence of XML-specific use.",
+    "project": "projects/xml/c/libnxml/verification.json"
   }
 ]

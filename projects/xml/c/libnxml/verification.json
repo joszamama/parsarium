@@ -1,0 +1,59 @@
+{
+  "kind": "third_party",
+  "api": "nxml_new(&doc); nxml_parse_buffer(doc, copy of the local bytes, size); walk doc->data and each nxml_data_t's children/next with type, value, ns and the attributes list (name, value, ns); nxml_free(doc)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T15:13:57.638750+00:00",
+  "manifest": "projects/xml/c/libnxml/manifest.json",
+  "image_id": "sha256:a83f2283ee063b05986365e249927fc387fbc7ca8dd4f2db2d43298d26358a58",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "c6de3c486f37c064eeae7d94e74f8dd25328e23effd8409a26a1170c19203ab4",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "1677e89220419ab2804f5bdb1ec20b0670b8f286866f6e8cee7ac47b7f3fcd73",
+    "build.sh": "95d7f13bd5b4131d0389642fc24a1bc97f96150230a469012f1fe94444604625",
+    "harness.c": "6a96bbfd981f4f648e676ee3818da9ee7c9039e04652908d6a7c7a8c2edcbae2",
+    "harness.h": "e0ac7efe0715395953e2687c7ad5009a5beaf6285c4cea9ced98ae015e545bad",
+    "manifest.json": "bf169905b621d6f20a0f3cd4354254da976027330ee149a77ba2e2f7f59f20c7",
+    "oracle.py": "c20119ccfec943f3c8f2152a40e1c9fbf5b06d07facc856871b4dfffc8e0a575",
+    "replay.c": "41d2f45a610d6cbfdf68d6b99f1c0648ff5f0dabfba88d3e9611135e5f71f8af",
+    "run-control.sh": "3df407fff4f322c1825c18fb66c65eecb74a412fae2b3d52e097f63e6d88d6a5",
+    "source-lock.json": "904d41e21d9f5340573d73da5c929b4a10ece753b384bf53ef7ad75f2e17a3ca"
+  },
+  "output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 720,
+  "format_specific_source_lines_covered": 346,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/c/libnxml/target/coverage/coverage.json",
+  "pass": true
+}

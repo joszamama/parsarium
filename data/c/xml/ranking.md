@@ -1,7 +1,7 @@
 # C XML parser pilot
 
-This pilot has four verified third-party paths from different parser families:
-[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30 and [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6. expat's
+This pilot has five verified third-party paths from different parser families:
+[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6 and [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6. expat's
 documented API (`XML_ParserCreateNS`, the element, namespace-declaration and
 character-data handlers, `XML_Parse` over a local buffer) and libxml2's
 (`xmlReaderForMemory` over a local buffer, then the `xmlTextReaderRead` pull
@@ -10,7 +10,7 @@ Mini-XML's `mxmlLoadString` builds a tree of the same controls, but Mini-XML
 does not implement XML namespaces: it returns names as written (`c:catalog`) and
 keeps `xmlns` declarations as attributes. Its adapter resolves the expanded
 names from that tree, and that summary matches too.
-Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`), **130,663** (`libxmlb2`) and **2,054** (`libmxml1`) Debian popcon installations in the
+Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`), **130,663** (`libxmlb2`), **2,054** (`libmxml1`) and **104** (`libnxml0t64`) Debian popcon installations in the
 [saved snapshot](registry-snapshot.json). That counts installations,
 mostly pulled in as a dependency; it is an adoption proxy, not a count of
 programs that call the parser.
@@ -30,6 +30,7 @@ longer attributed to it.
 | 2 | [libxml2](https://gnome.pages.gitlab.gnome.org/libxml2/html/xmlreader_8h.html) | 2.15.4 | 290,724 | Namespace-resolved elements, attributes, declarations, depth and character data of one in-memory document | libxml2 |
 | 3 | [libxmlb](https://github.com/hughsie/libxmlb/blob/0.3.30/src/xb-builder-source.c) | 0.3.30 | 130,663 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | GLib GMarkup |
 | 4 | [mxml](https://www.msweet.org/mxml/mxml.html) | 4.0.6 | 2,054 | Element tree, attributes, depth and character data of one in-memory document; namespaces resolved by the adapter, not by Mini-XML | Mini-XML |
+| 5 | [libnxml](https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in) | 0.18.6 | 104 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | nXML |
 
 `libmxml1` is the Mini-XML 3.x library package; the pinned 4.0.6 is the
 `mxml` source in Debian forky and sid. 1,842 of the 2,054 `libmxml1`
@@ -49,6 +50,15 @@ and 8 libxmlb line starts differ. The AFL++ overlay instruments only `gmarkup.c`
 GMarkup is documented as an XML subset (no DTDs) and libxmlb drops comments and processing
 instructions. GMarkup itself is not ranked: its source `glib2.0` builds all of GLib.
 
+libnxml 0.18.6 ([tag archive](https://github.com/bakulf/libnxml/releases/tag/0.18.6), SHA-256
+`c6de3c486f37c064eeae7d94e74f8dd25328e23effd8409a26a1170c19203ab4`, LGPL-2.1-or-later) has its own reader
+and tree. `nxml_parse_buffer` always runs a namespace pass, but that pass also puts unprefixed
+attributes in the default namespace, so libnxml is also measured as a raw-name path: the adapter
+re-joins libnxml's stored prefix and local name and reports no URIs. Both valid controls match the
+expat non-namespace oracle. The first control covers 720 libnxml lines (346 in `nxml_parser.c`); 143
+line starts differ between the controls, and the AFL++ maps (393 vs 426 tuples, 53 differing) repeat
+exactly. Its 104 installations are a very weak package signal.
+
 ## Leads
 
 One Conan recipe-name query (`xml`, 9 hits), seven targeted C names, every
@@ -56,13 +66,12 @@ Debian source name containing `xml` in the hashed sourcemax snapshot (306 hits,
 all classified in the [snapshot](registry-snapshot.json): 5 C XML parser
 libraries, 13 other C or tool packages, 21 C++ packages, 4 data packages and
 263 other-language packages) and seven targeted Debian sources. The
-[leads](leads.json) record each candidate. Apart from the four verified entries, none of them is verified.
+[leads](leads.json) record each candidate. Apart from the five verified entries, none of them is verified.
 
 Homebrew 365-day installs, a cross-check only, give the same order for expat,
 libxml2 and mxml (1,360,500; 564,778; 127). `libxml2-16` (9,413) is not added
 to libxml2's value because hosts may have both packages.
 
-- libnxml (libnxml0t64 104): pending verification.
 - GLib GMarkup: unranked. Its source `glib2.0` builds all of GLib, and Debian
   has no GMarkup-specific development package for the fallback rule. It is
   libxmlb's underlying parser.

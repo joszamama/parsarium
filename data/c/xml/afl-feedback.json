@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "checked_at_utc": "2026-11-17T15:19:17.381809+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "projects_total": 5,
+  "projects_passed": 5,
   "pass": true,
   "results": [
     {
@@ -196,6 +196,53 @@
       "first_afl_tuples": 639,
       "second_afl_tuples": 653,
       "afl_tuple_difference": 32
+    },
+    {
+      "project": "xml/c/libnxml",
+      "checked_at_utc": "2026-11-17T15:19:17.381573+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_libnxml_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only the pinned libnxml sources and the nxml_parse_buffer harness, including its raw-name tree walk; libcurl is linked uninstrumented and never called.",
+      "base_project_receipt_sha256": "2dd25e497aeda205e17c89b94fafee56c3e8ef25db4c5f367612dbf6de7298c4",
+      "overlay_receipt_sha256": "0de3ad8e3b4b3f46adc0b5a117a3b42fc2a70ddb115234d2ffb12e6ada1080d4",
+      "base_image_id": "sha256:a83f2283ee063b05986365e249927fc387fbc7ca8dd4f2db2d43298d26358a58",
+      "overlay_image_id": "sha256:545850b6ce3abb349cfce3ebd3c135f19eea1f68577109b9635d750278b7143d",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 393,
+      "second_afl_tuples": 426,
+      "afl_tuple_difference": 53
     }
   ]
 }
