@@ -1,5 +1,56 @@
 [
   {
+    "name": "lxml",
+    "version": "6.1.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/project/lxml/6.1.3/",
+    "input_api": "lxml.etree.parse(BytesIO(local XML bytes), XMLParser(resolve_entities=False, no_network=True, recover=False)).getroot(); Element.tag, attrib, nsmap, text and tail",
+    "documentation": "https://lxml.de/parsing.html",
+    "source": "https://pypi.org/project/lxml/6.1.3/#files",
+    "scope": "XML 1.0 UTF-8 local byte stream without DOCTYPE: namespace-expanded element and attribute names, declarations, decoded character data, and tree depth",
+    "family": "lxml.etree binding over libxml2 2.15.4 XML parser",
+    "shared_families": [
+      "libxml2 XML parser"
+    ],
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 437507754,
+      "source": "https://pypistats.org/api/",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/xml/leads.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/python/lxml",
+    "verification_note": "The pinned image links lxml.etree to source-built libxml2 2.15.4. Its first valid namespace control covers 1,463 lines in libxml2 parser.c; the second valid control matches its exact expected tree. The AFL++ bridge maps executed parser.c lines, with five identical control runs yielding identical feedback and the second control changing 213 parser lines and 209 AFL++ tuple IDs. Lines 8700–8720 of parser.c are excluded from AFL++ feedback because an address-sensitive attribute lookup varied across identical replays; they remain in the source coverage report. The two controls do not establish DTD, external entity, non-UTF-8, or XML 1.1 behavior."
+  },
+  {
     "name": "xmltodict",
     "version": "1.0.4",
     "license": "MIT",
@@ -9,6 +60,20 @@
     "scope": "XML element hierarchy, namespace, attributes, and decoded character data",
     "family": "xmltodict over CPython pyexpat / Expat",
     "control": "controls/xml/two-items.xml",
-    "expected_output": {"root": "library", "namespace": "urn:parsarium:xml:pilot", "child_count": 2, "first_item_id": "7", "first_item_text": "A & B", "second_item_text": "π"}
+    "expected_output": {
+      "root": "library",
+      "namespace": "urn:parsarium:xml:pilot",
+      "child_count": 2,
+      "first_item_id": "7",
+      "first_item_text": "A & B",
+      "second_item_text": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 113615896,
+      "source": "https://pypistats.org/api/",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/xml/leads.json"
+    }
   }
 ]

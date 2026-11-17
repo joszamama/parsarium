@@ -1,0 +1,63 @@
+{
+  "kind": "third_party",
+  "api": "lxml.etree.parse(BytesIO(local XML bytes), XMLParser(resolve_entities=False, no_network=True, recover=False)).getroot(); Element.tag, attrib, nsmap, text and tail",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T07:00:51.555405+00:00",
+  "manifest": "projects/xml/python/lxml/manifest.json",
+  "image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: lxml",
+    "Version: 6.1.3",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "b77dc43e5e284efcdc87d5c6ec4112eb41a810ef19bb05570c3d1880858cb843  /work/libxml2/parser.c"
+  ],
+  "source_sha256": "45222d94ddd511536f3b2f7d9deae3b2339b4ce0f075f1ca25703b07cad9dd21",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "f89db58d0e5d9efe3425a3c556e3fa520ffcef308e332e08eaa34251ec134b45",
+    "fuzz.py": "99c99847c048d23e6f6c2da4a14f5851797903948af5c191e996dc75c1de0515",
+    "harness.py": "88911d07139d6ab434da16366814fc1cc300a5563b4f6a58c6999012b046906d",
+    "manifest.json": "5d5a201d18c07ad6a43de874ab74dc768363e02a7c3e275ff8ae7eb653176bbb",
+    "run-control.py": "b06df4b72a111c4d4ea107fbdef0eadba1bb5f4cbea43e23df736a200254200d",
+    "target.json": "557e60caed015acad592a72f8401f667de62155e5d38d31a1fb84cc556fb36c8"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 1463,
+  "format_specific_source_lines_covered": 1463,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/python/lxml/target/coverage/coverage.json",
+  "pass": true
+}

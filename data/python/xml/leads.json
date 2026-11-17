@@ -13,14 +13,86 @@
     "limitation": "Downloads measure package adoption, not XML-specific use. Some packages are generic HTML/XML wrappers or transitive dependencies. Leads are not a verified parser ranking."
   },
   "leads": [
-    {"name": "lxml", "last_month": 437507754, "registry": "https://pypi.org/project/lxml/", "api_evidence": "https://lxml.de/parsing.html", "api_hint": "lxml.etree.parse(local file) or fromstring(local bytes)", "status": "lead", "family_hint": "libxml2"},
-    {"name": "beautifulsoup4", "last_month": 315320831, "registry": "https://pypi.org/project/beautifulsoup4/", "api_evidence": "https://beautiful-soup-4.readthedocs.io/en/latest/", "api_hint": "BeautifulSoup(local markup, 'xml')", "status": "lead", "family_hint": "lxml/libxml2 XML backend"},
-    {"name": "defusedxml", "last_month": 270848271, "registry": "https://pypi.org/project/defusedxml/", "api_evidence": "https://pypi.org/project/defusedxml/", "api_hint": "defusedxml.ElementTree.parse(local file)", "status": "lead", "family_hint": "CPython ElementTree/Expat"},
-    {"name": "xmltodict", "last_month": 113615896, "registry": "https://pypi.org/project/xmltodict/", "api_evidence": "https://pypi.org/project/xmltodict/", "api_hint": "xmltodict.parse(local byte stream)", "status": "promoted_to_verified", "verified_evidence": "data/python/xml/verification.json", "family_hint": "CPython Expat"},
-    {"name": "xmlschema", "last_month": 7391962, "registry": "https://pypi.org/project/xmlschema/", "api_evidence": "https://xmlschema.readthedocs.io/en/latest/api.html", "api_hint": "XMLSchema.decode(local XML source, with auxiliary schema)", "status": "lead"},
-    {"name": "scrapy", "last_month": 4661201, "registry": "https://pypi.org/project/Scrapy/", "api_evidence": "https://docs.scrapy.org/en/latest/topics/selectors.html", "api_hint": "Selector(text=local XML, type='xml')", "status": "lead", "family_hint": "Parsel/lxml/libxml2"},
-    {"name": "parsel", "last_month": 3699459, "registry": "https://pypi.org/project/parsel/", "api_evidence": "https://parsel.readthedocs.io/en/latest/parsel.html", "api_hint": "Selector(body=local XML bytes, type='xml')", "status": "lead", "family_hint": "lxml/libxml2"},
-    {"name": "xsdata", "last_month": 3447577, "registry": "https://pypi.org/project/xsdata/", "api_evidence": "https://xsdata.readthedocs.io/en/v20.9/xml.html", "api_hint": "XmlParser.from_bytes(local XML, with matching dataclass)", "status": "lead"},
-    {"name": "untangle", "last_month": 310666, "registry": "https://pypi.org/project/untangle/", "api_evidence": "https://pypi.org/project/untangle/", "api_hint": "untangle.parse(local XML or file)", "status": "lead", "family_hint": "SAX/Expat"}
+    {
+      "name": "lxml",
+      "last_month": 437507754,
+      "registry": "https://pypi.org/project/lxml/",
+      "api_evidence": "https://lxml.de/parsing.html",
+      "api_hint": "lxml.etree.parse(local file) or fromstring(local bytes)",
+      "status": "promoted_to_verified",
+      "family_hint": "libxml2",
+      "verified_evidence": "data/python/xml/verification.json"
+    },
+    {
+      "name": "beautifulsoup4",
+      "last_month": 315320831,
+      "registry": "https://pypi.org/project/beautifulsoup4/",
+      "api_evidence": "https://beautiful-soup-4.readthedocs.io/en/latest/",
+      "api_hint": "BeautifulSoup(local markup, 'xml')",
+      "status": "lead",
+      "family_hint": "lxml/libxml2 XML backend"
+    },
+    {
+      "name": "defusedxml",
+      "last_month": 270848271,
+      "registry": "https://pypi.org/project/defusedxml/",
+      "api_evidence": "https://pypi.org/project/defusedxml/",
+      "api_hint": "defusedxml.ElementTree.parse(local file)",
+      "status": "lead",
+      "family_hint": "CPython ElementTree/Expat"
+    },
+    {
+      "name": "xmltodict",
+      "last_month": 113615896,
+      "registry": "https://pypi.org/project/xmltodict/",
+      "api_evidence": "https://pypi.org/project/xmltodict/",
+      "api_hint": "xmltodict.parse(local byte stream)",
+      "status": "promoted_to_verified",
+      "verified_evidence": "data/python/xml/verification.json",
+      "family_hint": "CPython Expat"
+    },
+    {
+      "name": "xmlschema",
+      "last_month": 7391962,
+      "registry": "https://pypi.org/project/xmlschema/",
+      "api_evidence": "https://xmlschema.readthedocs.io/en/latest/api.html",
+      "api_hint": "XMLSchema.decode(local XML source, with auxiliary schema)",
+      "status": "lead"
+    },
+    {
+      "name": "scrapy",
+      "last_month": 4661201,
+      "registry": "https://pypi.org/project/Scrapy/",
+      "api_evidence": "https://docs.scrapy.org/en/latest/topics/selectors.html",
+      "api_hint": "Selector(text=local XML, type='xml')",
+      "status": "lead",
+      "family_hint": "Parsel/lxml/libxml2"
+    },
+    {
+      "name": "parsel",
+      "last_month": 3699459,
+      "registry": "https://pypi.org/project/parsel/",
+      "api_evidence": "https://parsel.readthedocs.io/en/latest/parsel.html",
+      "api_hint": "Selector(body=local XML bytes, type='xml')",
+      "status": "lead",
+      "family_hint": "lxml/libxml2"
+    },
+    {
+      "name": "xsdata",
+      "last_month": 3447577,
+      "registry": "https://pypi.org/project/xsdata/",
+      "api_evidence": "https://xsdata.readthedocs.io/en/v20.9/xml.html",
+      "api_hint": "XmlParser.from_bytes(local XML, with matching dataclass)",
+      "status": "lead"
+    },
+    {
+      "name": "untangle",
+      "last_month": 310666,
+      "registry": "https://pypi.org/project/untangle/",
+      "api_evidence": "https://pypi.org/project/untangle/",
+      "api_hint": "untangle.parse(local XML or file)",
+      "status": "lead",
+      "family_hint": "SAX/Expat"
+    }
   ]
 }

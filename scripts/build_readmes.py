@@ -339,6 +339,8 @@ def main() -> None:
                          f"[control result]({link(item_dir, result_path)})", "",
                          "## Observed control result", "", "```json",
                          json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
+                if entry.get("verification_note"):
+                    lines += ["## Verification scope", "", entry["verification_note"], ""]
                 if ready:
                     project_path = project[0]
                     lines += ["## Run this target", "", "```sh",
