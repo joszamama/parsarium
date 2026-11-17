@@ -71,7 +71,9 @@ python3 parsarium.py native run runs/pypng-native --check
 python3 parsarium.py native run runs/pypng-native
 ```
 
-[Fandango and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. `fandango setup` installs Fandango 1.3.1 in the ignored local `.venv/` and records the installed dependencies. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run:
+[Fandango and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. `fandango setup` installs Fandango 1.3.1 and its dependencies from a [hash-locked requirements file](fuzzing/fandango/requirements.lock) in the ignored local `.venv/`. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run:
+
+On Linux arm64, install a C compiler before setup: the locked `accumulation-tree` release builds from source there.
 
 ```sh
 python3 parsarium.py afl build png c lodepng
@@ -90,7 +92,7 @@ python3 parsarium.py fandango generate mp4 cpp exiv2 runs/exiv2-fandango \
   --count 100 --seed 42 --replay
 ```
 
-The run directory must be new or empty, and inside this repository it must be under `runs/` or `generated/`, which Git ignores. It contains `generated/`, a copy or snapshot of the spec, and `fandango.json`. The receipt records the Fandango executable path, SHA-256, and version; the exact command and environment; the seed (`--random-seed`, also used as `PYTHONHASHSEED`); the spec hash; and each output's SHA-256 and size. `--fanbase-registry DIR` pins a local Fanbase checkout and checks the installed spec against its `index.yml`. Without it, the registry revision is not recorded; only the installed spec snapshot is. If Fandango fails, writes no files, or writes empty, oversized, or linked files, the command stops before replay or AFL++ preparation.
+The run directory must be new or empty, and inside this repository it must be under `runs/` or `generated/`, which Git ignores. It contains `generated/`, a copy or snapshot of the spec, and `fandango.json`. The receipt records the Fandango executable path, SHA-256, version, requirements-lock hash, and installed dependencies; the exact command and environment; the seed (`--random-seed`, also used as `PYTHONHASHSEED`); the spec hash; and each output's SHA-256 and size. `--fanbase-registry DIR` pins a local Fanbase checkout and checks the installed spec against its `index.yml`. Without it, the registry revision is not recorded; only the installed spec snapshot is. If Fandango fails, writes no files, or writes empty, oversized, or linked files, the command stops before replay or AFL++ preparation.
 
 The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation. Corpus replay reports show per-input outcomes. The optional AFL++ queue replay above measures aggregate source lines from saved queue inputs; without it, line views come from the pinned valid-control build.
 

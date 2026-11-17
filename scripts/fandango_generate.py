@@ -49,7 +49,8 @@ SLUG = re.compile(r"[a-z0-9][a-z0-9_-]*")
 OUTPUT_ROOTS = (ROOT / "runs", ROOT / "generated")
 DEFAULT_REGISTRY = "https://github.com/fandango-fuzzer/fanbase"
 MANAGED_VERSION = "1.3.1"
-MANAGED_VENV = ROOT / ".venv" / "fandango-1.3.1"
+MANAGED_LOCK = ROOT / "fuzzing" / "fandango" / "requirements.lock"
+MANAGED_VENV = ROOT / ".venv" / "fandango-1.3.1-locked"
 MANAGED_EXE = MANAGED_VENV / "bin" / "fandango"
 
 
@@ -99,6 +100,7 @@ def setup() -> int:
                 saved = json.loads(receipt_path.read_text())
                 if (saved.get("executable_sha256") != digest(MANAGED_EXE)
                         or saved.get("fandango_version") != version
+                        or saved.get("requirements_sha256") != digest(MANAGED_LOCK)
                         or saved.get("installed_packages") != managed_packages()):
                     raise RuntimeError("managed Fandango environment changed; remove its venv and rerun setup")
             print(f"Ready: {MANAGED_EXE} ({version})")
@@ -108,7 +110,7 @@ def setup() -> int:
     venv.EnvBuilder(with_pip=True).create(MANAGED_VENV)
     python = MANAGED_VENV / "bin" / "python"
     subprocess.run([str(python), "-m", "pip", "install", "--disable-pip-version-check",
-                    "--no-input", f"fandango-fuzzer=={MANAGED_VERSION}"], check=True)
+                    "--no-input", "--require-hashes", "-r", str(MANAGED_LOCK)], check=True)
     version = fandango_version(MANAGED_EXE)
     if MANAGED_VERSION not in version:
         raise RuntimeError(f"installed Fandango did not match {MANAGED_VERSION}: {version}")
@@ -120,6 +122,7 @@ def setup() -> int:
 def record_managed_setup(version: str) -> None:
     receipt = {"schema_version": 1, "fandango_version": version,
                "executable_sha256": digest(MANAGED_EXE), "python": sys.version,
+               "requirements_sha256": digest(MANAGED_LOCK),
                "installed_packages": managed_packages()}
     (MANAGED_VENV / "setup.json").write_text(json.dumps(receipt, indent=2) + "\n")
 
@@ -325,9 +328,11 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
         setup_record = json.loads(managed_setup.read_text())
         if (setup_record.get("executable_sha256") != digest(executable)
                 or setup_record.get("fandango_version") != version
+                or setup_record.get("requirements_sha256") != digest(MANAGED_LOCK)
                 or setup_record.get("installed_packages") != managed_packages()):
             raise RuntimeError("managed Fandango setup receipt changed; rerun setup")
         receipt["fandango"]["managed_setup_sha256"] = digest(managed_setup)
+        receipt["fandango"]["requirements_sha256"] = setup_record["requirements_sha256"]
         receipt["fandango"]["installed_packages"] = setup_record["installed_packages"]
     if "SSL_CERT_FILE" in overrides:
         receipt["ssl_cert_file_sha256"] = digest(Path(overrides["SSL_CERT_FILE"]))
