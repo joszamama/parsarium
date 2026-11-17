@@ -13,12 +13,15 @@ within-cell metric, 38 use a pinned Debian Popularity Contest installation
 count, and 10 use a captured upstream GitHub star count. The latter two are
 shown separately and never combined numerically with primary rankings.
 
-Five further paths passed a valid format control and have positive primary
+Three further paths passed a valid format control and have positive primary
 adoption metrics, but do not have a verified container control plus
 parser-derived AFL++ feedback. Their [blockers](feedback-exclusions.json) are
 recorded after the adoption ranking; their slots remain empty. The affected
-cells select 9 JavaScript ASCII PLY paths, 8 Python ASCII PLY paths, and 8
-Python SVG paths. The original valid-control evidence remains in `preten/`.
+cells select 9 JavaScript ASCII PLY paths and 8 Python ASCII PLY paths. The
+original valid-control evidence remains in `preten/`. The former Python SVG
+blockers for PyQt6 and PySide6 are resolved: both now run the pinned wheels
+against QtSvg 6.12.0 built from source with LLVM coverage, as recorded in
+[their blocker records](feedback-blockers/).
 
 The report also records 217 excluded paths whose primary metric was missing,
 zero, or whose parser family duplicated a stronger selected path. Of these,

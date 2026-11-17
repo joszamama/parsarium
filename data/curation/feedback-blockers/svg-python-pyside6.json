@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "native_feedback_unavailable",
+  "status": "resolved_source_built_qtsvg",
   "scope": "PySide6 6.12.0 QSvgRenderer loading valid local SVG controls",
   "control": "controls/svg/red-green.svg",
   "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
@@ -22,5 +22,17 @@
     "module_preload": "/opt/venv/lib/python3.14/site-packages/PySide6/Qt/lib/libQt6Svg.so.6",
     "timeout_ms": 15000,
     "result": "Program timed off; one tuple reported; the target emitted no SVG result. The map is excluded from feedback claims."
+  },
+  "resolution": {
+    "decided_at": "2026-11-18",
+    "approach": "linux/arm64 container: the pinned wheels are installed unchanged except libQt6Svg.so.6, replaced by QtSvg 6.12.0 built from its pinned source tarball with LLVM source coverage (no QEMU or Frida). The prior binary-only probes below remain as history.",
+    "project_receipt": "projects/svg/python/pyside6/verification.json",
+    "afl_receipt": "fuzzing/afl-native/svg/python/pyside6/verification.json",
+    "parser_source_lines_covered": 1045,
+    "format_specific_source_lines_covered": 542,
+    "afl_feedback_edges": 1030,
+    "parser_source_features": 1015,
+    "repeat_variant_map_check": "afl-showmap: three control maps identical (1,030 tuples); controls/svg/red-blue-path.svg maps to 1,093 tuples, 8 control-only and 71 variant-only",
+    "shared_family": "PyQt6 and PySide6 wheels ship the byte-identical QtSvg module and use the same source-built replacement; their 651 covered control regions are identical"
   }
 }
