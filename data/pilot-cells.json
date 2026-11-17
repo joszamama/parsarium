@@ -133,10 +133,10 @@
     {
       "ecosystem": "cpp",
       "format": "json",
-      "status": "pilot_seven_selected_search_bounded",
+      "status": "pilot_eight_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 7,
+      "verified_third_party_count": 8,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "json"
@@ -144,10 +144,10 @@
       "search_limit_per_query": 320,
       "search_hits_recorded": 320,
       "unique_search_hits": 320,
-      "unresolved_documentation_leads": 3,
+      "unresolved_documentation_leads": 2,
       "ranking_metric": "Debian popcon installations (sourcemax/by_inst), maximum over binary packages of the source package",
-      "selection": "Five control-verified C++ JSON packages rank by comparable Debian source-package sourcemax installations: JsonCpp 32,707, simdjson 2,688, nlohmann/json 1,799, RapidJSON 899, and Glaze 171. Boost.JSON 1.92.0 and POCO JSON 1.15.4 are verified but primary-unranked because their Debian sources cover the wider Boost and POCO suites. Their dev-package counts are separately labeled: libboost-json-dev 1,749 is JSON-specific; libpoco-dev 190 covers all POCO libraries and is not JSON-specific.",
-      "uncertainty": "Seven C++ JSON package paths pass two valid controls with scoped parser source coverage and stable AFL++ feedback. Glaze uses a generic_i64 DOM and a parser-only probe; POCO JSON reaches its ParserImpl and bundled pdjson tokenizer with a parser-only probe. Glaze has 171 comparable Debian source-package installations, but the source metric favors runtime packages and undercounts header-only libraries. Boost.JSON and POCO have no JSON-specific Debian source count and remain primary-unranked; POCO's 190 libpoco-dev installs are suite-wide, while its component runtime 125 are all classified no_files. Three documentation leads remain unresolved: Qt, PicoJSON, and jsoncons. The 320 JSON-name source hits exclude Glaze, found by a supplementary exact source-name lookup. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, other encodings, or malformed-input behavior.",
+      "selection": "Six control-verified C++ JSON packages rank by comparable Debian source-package sourcemax installations: JsonCpp 32,707, simdjson 2,688, nlohmann/json 1,799, RapidJSON 899, Glaze 171, and jsoncons 3. Boost.JSON 1.92.0 and POCO JSON 1.15.4 are verified but primary-unranked because their Debian sources cover the wider Boost and POCO suites. Their dev-package counts are separately labeled: libboost-json-dev 1,749 is JSON-specific; libpoco-dev 190 covers all POCO libraries and is not JSON-specific.",
+      "uncertainty": "Eight C++ JSON package paths pass two valid controls with scoped parser source coverage and stable AFL++ feedback. Glaze uses a generic_i64 DOM and a parser-only probe; POCO JSON reaches its ParserImpl and bundled pdjson tokenizer with a parser-only probe. jsoncons uses the insertion-ordered ojson tree and a parser-only probe whose AFL++ allowlist names the basic_json_parser methods, because a file-only allowlist dropped parser functions whose first instruction is inlined from another header. Glaze has 171 comparable Debian source-package installations, but the source metric favors runtime packages and undercounts header-only libraries. jsoncons is ranked on only 3 installations (1 recent), a very weak package proxy for a multi-format header-only library. Boost.JSON and POCO have no JSON-specific Debian source count and remain primary-unranked; POCO's 190 libpoco-dev installs are suite-wide, while its component runtime 125 are all classified no_files. Two documentation leads remain unresolved: Qt and PicoJSON. The 320 JSON-name source hits exclude Glaze, found by a supplementary exact source-name lookup. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, other encodings, or malformed-input behavior.",
       "third_party_evidence": "data/cpp/json/parsers.json",
       "third_party_control_results": "data/cpp/json/verification.json",
       "runtime_evidence": "data/cpp/json/standard.json",
@@ -160,6 +160,7 @@
       "boost_json_source_lock": "projects/json/cpp/boost-json/source-lock.json",
       "glaze_source_lock": "projects/json/cpp/glaze/source-lock.json",
       "poco_json_source_lock": "projects/json/cpp/poco-json/source-lock.json",
+      "jsoncons_source_lock": "projects/json/cpp/jsoncons/source-lock.json",
       "phase": "pilot",
       "complete": false
     },

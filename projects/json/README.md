@@ -10,6 +10,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [Glaze / C++](cpp/glaze/README.md)
 - [POCO JSON / C++](cpp/poco-json/README.md)
 - [RapidJSON / C++](cpp/rapidjson/README.md)
+- [jsoncons / C++](cpp/jsoncons/README.md)
 - [jsoncpp / C++](cpp/jsoncpp/README.md)
 - [nlohmann-json / C++](cpp/nlohmann-json/README.md)
 - [simdjson / C++](cpp/simdjson/README.md)
