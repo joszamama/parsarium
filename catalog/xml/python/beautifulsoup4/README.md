@@ -47,3 +47,10 @@
 ## Verification scope
 
 Shared parser family, not an independent XML tokenizer: Beautiful Soup's documented "xml" builder (the docs call lxml "the only currently supported XML parser") feeds the bytes to lxml.etree.XMLParser(target=builder, recover=True), and libxml2 tokenizes them; bs4 builds its own tree from lxml's callbacks. The pinned image installs bs4 4.15.0 with lxml 6.1.3 linked to source-built libxml2 2.15.4 and asserts that BeautifulSoup(..., 'xml') selects LXMLTreeBuilderForXML over lxml.etree.XMLParser. Both valid namespace controls match their expected bs4-tree summaries; the element, attribute, namespace, text, depth and root fields equal the lxml path's outputs. The first control executes 450 bs4 lines in 5 files (115 in builder/_lxml.py) and 1,570 libxml2 parser.c lines. The AFL++ bridge maps executed bs4 lines plus parser.c lines: five identical runs of each control yield identical features, and the second control changes 11 bs4 lines, 236 parser.c lines and 242 AFL++ tuple IDs. parser.c lines 8700-8720 are excluded from AFL++ feedback as in the lxml path. The controls do not establish DTD, external entity, non-UTF-8, XML 1.1, or malformed-input (recover=True) behavior. The bs4 tree drops CDATA section boundaries and the XML declaration node and lists xmlns declarations after ordinary attributes. The 315,320,831 last-month PyPI downloads are package-level and mostly HTML use; they do not measure XML parsing.
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml python beautifulsoup4
+python3 parsarium.py run xml python beautifulsoup4 controls/xml/catalog-ns.xml
+```

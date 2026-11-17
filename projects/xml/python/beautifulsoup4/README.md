@@ -16,6 +16,4 @@ python3 parsarium.py afl prepare xml python beautifulsoup4 runs/xml-beautifulsou
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Parser family:** `BeautifulSoup(bytes, "xml")` parses through lxml 6.1.3 and libxml2 2.15.4, the same pins as [lxml](../lxml/README.md). It is not an independent XML tokenizer. AFL++ feedback combines executed bs4 lines with libxml2 `parser.c` lines (8700–8720 excluded).
-
 **Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.
