@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/stdlib_simplexml",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_simplexml_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/simplexml/simplexml.c (simplexml_load_string and SimpleXMLElement) via AFL++ allowlist; libxml2 tree, XPath and dict code, ext/libxml/libxml.c and the Zend engine are uninstrumented",
+  "fuzz_target": "projects/xml/php/stdlib_simplexml/fuzz-target.php (simplexml_load_string only)",
+  "harness": "projects/xml/php/stdlib_simplexml/harness.php (simplexml_load_string, then summary.php SimpleXML traversal)",
+  "extension_source_sha256": {
+    "php-8.5.12/ext/simplexml/simplexml.c": "342123418c4a6828600ae439032948d59116edbe80752f422eec085bc546dd06",
+    "php-8.5.12/ext/simplexml/php_simplexml.h": "27c0da51229290a2acc425fc9d1b2dcf21e9a672a2b039027c560f9196cacd5c"
+  },
+  "api_signature": "SimpleXML string $data,?string $class_name,int $options,string $namespace_or_prefix,bool $is_prefix SimpleXMLElement|false",
+  "base_project_receipt_sha256": "f2710a47207dd6c19cbb584c75e4a4f63bc585f7204f64a89da0dcf1e134bec3",
+  "base_image_id": "sha256:51317d9a50faa68a7ae5d87ae50c44529014d088103d0bb49514f63ad7bfa802",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "license_file_sha256": {
+    "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+    "libxml2-2.15.4/Copyright": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+  },
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/simplexml/simplexml.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "controls/xml/check_controls.py expat namespace-mode summary",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "base_coverage_lines": {
+    "control": {
+      "parser_source_lines_covered": 663,
+      "format_specific_source_lines_covered": 359,
+      "underlying_source_lines_covered": 4849,
+      "underlying_parser_c_lines_covered": 1368,
+      "underlying_sax2_c_lines_covered": 358
+    },
+    "differential": {
+      "parser_source_lines_covered": 665,
+      "format_specific_source_lines_covered": 361,
+      "underlying_source_lines_covered": 5127,
+      "underlying_parser_c_lines_covered": 1540,
+      "underlying_sax2_c_lines_covered": 372
+    }
+  },
+  "image_id": "sha256:37459443efda15b948442729fc063f50799e03c3e9fe4c67e5d21c1809ba65ee",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1099,
+  "differential_feedback_edges": 1221,
+  "stable_shared_edges": 980,
+  "stable_control_only_edges": 119,
+  "stable_differential_only_edges": 241,
+  "afl_tuple_difference": 360,
+  "full_harness_control_edges": 1295,
+  "full_harness_differential_edges": 1421,
+  "full_harness_tuple_difference": 364,
+  "format_dependent_parse_time_tuples": 359,
+  "format_dependent_traversal_only_tuples": 5,
+  "post_parse_control_edges": 197,
+  "post_parse_differential_edges": 201,
+  "post_parse_edges_identical": false,
+  "parse_only_edges_outside_full_harness": 1,
+  "parse_only_edges_outside_full_harness_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "1bb5833af3cf6b1a4e863690a6d4f1135fa65a93b001bd5518ad7dd9a0c05b14",
+    "build.py": "07ae5afc8d002665d4ec1715ef96f3769c89641a4873ba14be5e927075af39cf"
+  }
+}
