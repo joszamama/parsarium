@@ -24,7 +24,7 @@ class JavaScriptXmlPilotTest(unittest.TestCase):
             {lead["name"] for lead in leads if lead["status"] == "unresolved"}))
         self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"} for lead in leads))
         self.assertEqual({lead["name"] for lead in leads if lead["status"] == "promoted_to_verified"},
-                         {"fast-xml-parser"})
+                         {"fast-xml-parser", "@xmldom/xmldom"})
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["unresolved_documentation_leads"],
