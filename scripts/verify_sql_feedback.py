@@ -88,7 +88,9 @@ def main() -> None:
         raise RuntimeError(f"control summaries differ from the oracle: {observed}")
 
     inspect = json.loads(run(["docker", "image", "inspect", overlay_image]))[0]["Config"]
-    target = (inspect.get("Entrypoint") or [])[:1]
+    # Native C/C++ overlays keep the base entrypoint and name their AFL++ target in the manifest.
+    target = ([manifest["afl_entrypoint"]] if "afl_entrypoint" in manifest
+              else (inspect.get("Entrypoint") or [])[:1])
     if not target:
         raise ValueError("overlay image has no entrypoint")
     mode = manifest.get("afl_input_mode", "stdin" if args.ecosystem == "rust" else "file")
