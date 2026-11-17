@@ -44,6 +44,55 @@
       "name": "crates.io recent downloads (90 days)",
       "value": 438065825,
       "source": "data/rust/json/registry-snapshot.json"
-    }
+    },
+    "project": "projects/json/rust/serde_json/verification.json"
+  },
+  {
+    "name": "simd-json",
+    "version": "0.19.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "simd_json::to_owned_value(&mut [u8]) -> Result<OwnedValue>; OwnedValue::{Object, Array, String, Static}",
+    "documentation": "https://docs.rs/simd-json/0.19.0/simd_json/fn.to_owned_value.html",
+    "source": "https://static.crates.io/crates/simd-json/simd-json-0.19.0.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped simd_json::OwnedValue tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "simd-json Rust SIMD/SWAR port of simdjson; own Deserializer stage1/stage2 and OwnedValue DOM, distinct from serde_json parser",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 6730588,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/simd_json/verification.json"
   }
 ]

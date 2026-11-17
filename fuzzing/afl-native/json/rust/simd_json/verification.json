@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/simd_json",
+  "pass": true,
+  "base_project_receipt_sha256": "a2a03906ecc18b37104833e6081196ab8bbea656d103e62c30aa723ab77f0f3e",
+  "overlay_file_sha256": {
+    "Cargo.toml": "9082cf3f524c8dfcd64bbcdb7b8660d2e0f532241560745e5e02adf1f89a8047",
+    "Cargo.lock": "f33c69c6805f025d03ea97cf8b72223b2c3b0c6a9aa8c91724758f1c4f820502",
+    "afl_fuzzer.rs": "f9e5b5d4b66de43171e81199ac0ffe19b60474ead5babfabeb05a0d1cac475a5",
+    "Dockerfile": "99b35565088a7726b3cc7ec5fcb017c70ac03e754338272756fa09318bc372b8",
+    "build.py": "c8a82965a6aafc452e0f1d883982f23357204f365d5498d2200e0ff63154a647"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "e8f2e4d523646f7da6dde3983bd18ede0babc21c258ab708b3dd93ea0259719d",
+  "image_id": "sha256:0e75f2957738ade375175f9445ac2b9e6af019cba0f7957e7f76d0180c79ffc9",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 907,
+  "afl_map_size": 12022,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: simd-json 0.19.0 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:b446ed9fb2cfa893438675adf80da54c2ad55e679b60fdb00baa405f20984ba4",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 802,
+  "edges_only_in_control": 182,
+  "edges_only_in_variant": 77,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/simd-json-0.19.0/",
+    "control_lines": {
+      "src/charutils.rs": 24,
+      "src/error.rs": 0,
+      "src/impls/neon/deser.rs": 103,
+      "src/impls/neon/stage1.rs": 120,
+      "src/lib.rs": 288,
+      "src/macros.rs": 0,
+      "src/numberparse.rs": 12,
+      "src/numberparse/correct.rs": 92,
+      "src/safer_unchecked.rs": 12,
+      "src/stage2.rs": 151,
+      "src/stringparse.rs": 19,
+      "src/value.rs": 0,
+      "src/value/borrowed.rs": 0,
+      "src/value/borrowed/cmp.rs": 0,
+      "src/value/borrowed/from.rs": 0,
+      "src/value/borrowed/serialize.rs": 0,
+      "src/value/lazy.rs": 0,
+      "src/value/lazy/array.rs": 0,
+      "src/value/lazy/cmp.rs": 0,
+      "src/value/lazy/from.rs": 0,
+      "src/value/lazy/object.rs": 0,
+      "src/value/lazy/trait_impls.rs": 0,
+      "src/value/owned.rs": 33,
+      "src/value/owned/cmp.rs": 0,
+      "src/value/owned/from.rs": 6,
+      "src/value/owned/serialize.rs": 0,
+      "src/value/tape.rs": 0,
+      "src/value/tape/array.rs": 0,
+      "src/value/tape/cmp.rs": 0,
+      "src/value/tape/object.rs": 0,
+      "src/value/tape/trait_impls.rs": 0
+    },
+    "variant_lines": {
+      "src/charutils.rs": 22,
+      "src/error.rs": 0,
+      "src/impls/neon/deser.rs": 92,
+      "src/impls/neon/stage1.rs": 120,
+      "src/lib.rs": 288,
+      "src/macros.rs": 0,
+      "src/numberparse.rs": 9,
+      "src/numberparse/correct.rs": 82,
+      "src/safer_unchecked.rs": 12,
+      "src/stage2.rs": 157,
+      "src/stringparse.rs": 19,
+      "src/value.rs": 0,
+      "src/value/borrowed.rs": 0,
+      "src/value/borrowed/cmp.rs": 0,
+      "src/value/borrowed/from.rs": 0,
+      "src/value/borrowed/serialize.rs": 0,
+      "src/value/lazy.rs": 0,
+      "src/value/lazy/array.rs": 0,
+      "src/value/lazy/cmp.rs": 0,
+      "src/value/lazy/from.rs": 0,
+      "src/value/lazy/object.rs": 0,
+      "src/value/lazy/trait_impls.rs": 0,
+      "src/value/owned.rs": 33,
+      "src/value/owned/cmp.rs": 0,
+      "src/value/owned/from.rs": 6,
+      "src/value/owned/serialize.rs": 0,
+      "src/value/tape.rs": 0,
+      "src/value/tape/array.rs": 0,
+      "src/value/tape/cmp.rs": 0,
+      "src/value/tape/object.rs": 0,
+      "src/value/tape/trait_impls.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/charutils.rs",
+      "src/impls/neon/deser.rs",
+      "src/numberparse.rs",
+      "src/numberparse/correct.rs",
+      "src/stage2.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      907,
+      907,
+      907
+    ],
+    "stable_edges": 907,
+    "union_edges": 907,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      802,
+      802,
+      802
+    ],
+    "stable_edges": 802,
+    "union_edges": 802,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

@@ -93,14 +93,6 @@
       "source": "https://crates.io/crates/aws-smithy-json"
     },
     {
-      "name": "simd-json",
-      "version": "0.19.0",
-      "recent_downloads_90d": 6730588,
-      "status": "unresolved",
-      "reason": "SIMD port of simdjson; to_borrowed_value/to_owned_value take &mut [u8] and mutate the buffer in place. Not run on the controls.",
-      "source": "https://crates.io/crates/simd-json"
-    },
-    {
       "name": "jiter",
       "version": "0.19.0",
       "recent_downloads_90d": 5274664,
@@ -245,5 +237,15 @@
       "source": "https://crates.io/crates/json-deserializer"
     }
   ],
-  "note": "Lead reasons summarize the crate description and documented entry point as a pointer for later verification; no lead has been built or run on the controls."
+  "note": "Unresolved leads remain unbuilt and unrun on the controls; the selected simd-json lead has a separate pinned project and verification receipt.",
+  "verified_leads": [
+    {
+      "name": "simd-json",
+      "version": "0.19.0",
+      "recent_downloads_90d": 6730588,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/simd_json/verification.json"
+    }
+  ]
 }
