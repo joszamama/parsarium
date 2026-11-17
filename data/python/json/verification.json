@@ -1,11 +1,37 @@
 {
-  "checked_at_utc": "2026-11-17T03:05:44.288036+00:00",
-  "platform": "linux/amd64",
+  "checked_at_utc": "2026-11-17T05:33:30.889313+00:00",
+  "platform": "mixed",
   "control": {
     "path": "controls/json/structure.json",
     "sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3"
   },
   "third_party": [
+    {
+      "package": "pydantic",
+      "version": "2.14.3",
+      "pass": true,
+      "input_api": "TypeAdapter[Any].validate_json(local UTF-8 bytes)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "parser_family": "pydantic-core 2.50.4 / Jiter 0.18.0",
+      "native_jiter_source_files": 12,
+      "native_jiter_region_start_lines": 420,
+      "native_jiter_parse_rs_lines": 95,
+      "afl_feedback": "data/python/json/pydantic-valid-feedback.json",
+      "project_receipt": "projects/json/python/pydantic/verification.json",
+      "coverage_caveat": "llvm-cov export warned that 99 whole-extension functions had mismatched profile data. Scoped Jiter region starts, including parse.rs, were nonempty and stable across both valid controls; aggregate whole-extension coverage is not claimed."
+    },
     {
       "package": "simplejson",
       "version": "4.3.0",
@@ -55,5 +81,10 @@
       "project_receipt": "projects/json/python/stdlib_json/verification.json",
       "project_receipt_sha256": "41097ec2514625c9d2718acd2849183a10aff2603c487d8811085e2f58effdf1"
     }
-  ]
+  ],
+  "platforms": {
+    "pydantic": "linux/arm64",
+    "simplejson": "linux/amd64",
+    "standard": "linux/amd64"
+  }
 }

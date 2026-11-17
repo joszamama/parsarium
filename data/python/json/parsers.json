@@ -1,5 +1,42 @@
 [
   {
+    "name": "pydantic",
+    "version": "2.14.3",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pydantic/2.14.3/json",
+    "input_api": "TypeAdapter[Any].validate_json(local UTF-8 bytes)",
+    "documentation": "https://docs.pydantic.dev/latest/api/type_adapter/#pydantic.type_adapter.TypeAdapter.validate_json",
+    "source": "https://files.pythonhosted.org/packages/b4/fc/1203d011145c98ddce3cd2f505bb54375ef8d43223053df6bfcf3c746f46/pydantic-2.14.3.tar.gz",
+    "source_sha256": "1054f237f4d4733e5a30e1e2333bd33a2004ab9ab1510bd053a9a31bb48e232d",
+    "underlying_source": "https://files.pythonhosted.org/packages/9c/0f/34f9ce4ba701dd0b815033ef94d99b56f66200e578ee6052aa3ac26f064e/pydantic_core-2.50.4.tar.gz",
+    "underlying_source_sha256": "aead3b74b68396bf0feab5d57e050b730ded7df55853c1e048a87e00aaf033c6",
+    "scope": "JSON structure and values from local UTF-8 bytes; valid nested object and nested array controls",
+    "family": "pydantic-core 2.50.4 / Jiter 0.18.0 Rust parser",
+    "family_note": "Pydantic TypeAdapter[Any].validate_json invokes pydantic-core SchemaValidator.validate_json. Pinned pydantic-core src/validators/mod.rs calls jiter::JsonValue::parse_with_config. The native extension is source-built with Rust LLVM coverage; Jiter parse.rs source regions, rather than Python wrapper lines, are required. Shares the Jiter parser family with the standalone jiter lead.",
+    "control": "controls/json/structure.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 1139429690,
+      "source": "https://pypistats.org/api/packages/pydantic/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package-level downloads include non-JSON usage and transitive installs."
+    },
+    "project": "projects/json/python/pydantic"
+  },
+  {
     "name": "simplejson",
     "version": "4.3.0",
     "license": "MIT OR AFL-2.1",
@@ -11,7 +48,10 @@
     "control": "controls/json/structure.json",
     "expected_output": {
       "root_type": "object",
-      "top_level_keys": ["items", "kind"],
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
       "item_count": 2,
       "first_id": 7,
       "first_label": "a\nb",
