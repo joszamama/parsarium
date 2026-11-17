@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "java",
+  "package": "xpp3",
+  "release": "1.1.4c",
+  "catalog_parser": "data/java/xml/parsers.json",
+  "source_lock": "projects/xml/java/xpp3/source-lock.json",
+  "source_sha256": "113c8174cda963aa8c9e46f59945838dbe1a094cc736e476d640453e07d9e9c6",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_engine_sha256": "0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/xpp3-1.1.4c.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo source lines from pinned xpp3 1.1.4c MXParser tokenizer release classes mapped to same-release sources; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/org/xmlpull/mxp1/",
+  "scope": "Namespace-aware XML 1.0 UTF-8 from local InputStream through MXParser.setInput(InputStream, null) and next() events; two valid controls without DOCTYPE"
+}

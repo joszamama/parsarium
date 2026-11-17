@@ -1,0 +1,483 @@
+[
+  {
+    "name": "serde_json",
+    "version": "1.0.154",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "serde_json::from_slice::<serde_json::Value>(&[u8]); serde_json::Value::{Object, Array, String, Number, Bool, Null}; Number::as_f64(); Map::keys()",
+    "documentation": "https://docs.rs/serde_json/1.0.154/serde_json/fn.from_slice.html",
+    "source": "https://github.com/serde-rs/json/tree/v1.0.154",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped serde_json::Value tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "serde_json recursive-descent deserializer (serde-rs/json)",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 438065825,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/serde_json/verification.json"
+  },
+  {
+    "name": "simd-json",
+    "version": "0.19.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "simd_json::to_owned_value(&mut [u8]) -> Result<OwnedValue>; OwnedValue::{Object, Array, String, Static}",
+    "documentation": "https://docs.rs/simd-json/0.19.0/simd_json/fn.to_owned_value.html",
+    "source": "https://static.crates.io/crates/simd-json/simd-json-0.19.0.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped simd_json::OwnedValue tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "simd-json Rust SIMD/SWAR port of simdjson; own Deserializer stage1/stage2 and OwnedValue DOM, distinct from serde_json parser",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 6730588,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/simd_json/verification.json"
+  },
+  {
+    "name": "sonic-rs",
+    "version": "0.5.11",
+    "license": "Apache-2.0",
+    "input_api": "sonic_rs::from_slice::<sonic_rs::Value>(&[u8]); Value::as_ref() -> ValueRef; Object::iter(); Array::iter(); JsonNumberTrait::as_f64()",
+    "documentation": "https://docs.rs/sonic-rs/0.5.11/sonic_rs/fn.from_slice.html",
+    "source": "https://static.crates.io/crates/sonic-rs/sonic-rs-0.5.11.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped sonic_rs::Value tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "sonic-rs SIMD JSON parser and own arena-backed Value DOM, with sonic-simd/sonic-number dependencies; separate implementation from serde_json and simd-json, with documented simdjson/other code references",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 3669348,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/sonic_rs/verification.json"
+  },
+  {
+    "name": "jiter",
+    "version": "0.19.0",
+    "license": "MIT",
+    "input_api": "jiter::JsonValue::parse(&[u8], allow_inf_nan=false) -> Result<JsonValue, JsonError>; JsonValue::{Object, Array, Str, Int, BigInt, Float, Bool, Null}",
+    "documentation": "https://docs.rs/jiter/0.19.0/jiter/enum.JsonValue.html#method.parse",
+    "source": "https://static.crates.io/crates/jiter/jiter-0.19.0.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped jiter::JsonValue tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "Jiter Rust JSON parser (pydantic/jiter); shared underlying parser family with Python pydantic-core 2.50.4 / Jiter 0.18.0, but this standalone Rust path pins Jiter 0.19.0",
+    "family_note": "The Rust crate and Python pydantic-core call Jiter parser code in different pinned releases. This is a cross-ecosystem shared family, not a second Rust wrapper; rank by Rust crates.io metric only.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 5274664,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/jiter/verification.json"
+  },
+  {
+    "name": "json",
+    "version": "0.12.4",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "json::parse(&str) -> Result<json::JsonValue>; JsonValue::{Object, Array, Short, String, Number, Boolean, Null}; JsonValue::entries()/as_f64()/as_str()",
+    "documentation": "https://docs.rs/json/0.12.4/json/fn.parse.html",
+    "source": "https://static.crates.io/crates/json/json-0.12.4.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped json::JsonValue tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "json-rust 0.12.4 own parser.rs and JsonValue tree (maciejhirsz/json-rust); no serde_json parse dependency",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 2672413,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/json_crate/verification.json"
+  },
+  {
+    "name": "aws-smithy-json",
+    "version": "0.65.1",
+    "license": "Apache-2.0",
+    "input_api": "aws_smithy_json::deserialize::json_token_iter(&[u8]) -> Iterator<Item=Result<Token, DeserializeError>>; Token::{StartObject, EndObject, ObjectKey, StartArray, EndArray, ValueString, ValueNumber, ValueBool, ValueNull}; EscapedStr::to_unescaped()",
+    "documentation": "https://docs.rs/crate/aws-smithy-json/0.65.1/source/src/deserialize.rs",
+    "source": "https://static.crates.io/crates/aws-smithy-json/aws-smithy-json-0.65.1.crate",
+    "scope": "One valid RFC 8259 JSON text decoded from local bytes into a complete token stream: root kind, container and scalar counts, nesting depth, sorted decoded value strings, sorted numbers, and sorted top-level object keys. Adapter requires one balanced root and decodes escaped strings; source iterator itself accepts multiple values and has documented permissive number syntax.",
+    "family": "aws-smithy-json token-stream parser (smithy-rs), used by generated AWS SDK deserializers; own src/deserialize.rs",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 59322077,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/aws_smithy_json/verification.json"
+  },
+  {
+    "name": "hifijson",
+    "version": "0.5.0",
+    "license": "MIT (SPDX declared in release Cargo.toml; no LICENSE file bundled)",
+    "input_api": "hifijson::SliceLexer::new(&[u8]); Lex::exactly_one(Lex::ws_peek, |next, lexer| value::parse_bounded(256, next, lexer)) -> Result<Value<_,_>, Error>",
+    "documentation": "https://docs.rs/hifijson/0.5.0/hifijson/struct.SliceLexer.html",
+    "source": "https://static.crates.io/crates/hifijson/hifijson-0.5.0.crate",
+    "scope": "One RFC 8259 JSON value decoded from local bytes into hifijson own Value tree, preserving source number strings and object entries; adapter reports root kind, container/scalar counts, depth, decoded value strings, numbers converted to f64 for shared control summary, and top-level object keys. Depth bounded at 256.",
+    "family": "hifijson independent byte-slice lexer and recursive value parser in src/value.rs, src/token.rs, src/num.rs and src/str.rs; serde_json used only for summary encoding",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 2630468,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/hifijson/verification.json"
+  },
+  {
+    "name": "miniserde",
+    "version": "0.1.46",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "miniserde::json::from_str::<miniserde::json::Value>(&str) -> Result<Value>; Value::{Object, Array, String, Number, Bool, Null}",
+    "documentation": "https://docs.rs/miniserde/0.1.46/miniserde/json/fn.from_str.html",
+    "source": "https://static.crates.io/crates/miniserde/miniserde-0.1.46.crate",
+    "scope": "One RFC 8259 JSON text decoded from local UTF-8 bytes into miniserde own generic Value tree with a non-recursive deserializer; adapter iteratively reports root kind, container/scalar counts, depth, decoded value strings, numbers as f64 and top-level object keys.",
+    "family": "miniserde independent non-recursive JSON deserializer in src/json/de.rs and own Value visitor; by serde_json author but no serde_json input parser dependency",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 1335406,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/miniserde/verification.json"
+  },
+  {
+    "name": "gjson",
+    "version": "0.8.1",
+    "license": "MIT",
+    "input_api": "gjson::valid(&str) -> bool; gjson::parse(&str) -> Value; Value::each(callback) and Value::{kind,str,f64,json} traverse all children",
+    "documentation": "https://docs.rs/gjson/0.8.1/gjson/fn.parse.html",
+    "source": "https://static.crates.io/crates/gjson/gjson-0.8.1.crate",
+    "scope": "One complete RFC 8259 JSON text validated through gjson::valid, then lazily parsed and fully traversed through gjson::parse and Value::each: root kind, object/array/boolean/null counts, nesting depth, decoded value strings, numbers and sorted top-level keys. The core parse/get API alone assumes valid JSON and serves path queries; the adapter runs the library own whole-root validator first and bounds traversal at 256 levels.",
+    "family": "tidwall GJSON path-query family: separate Rust gjson.rs implementation with same maintainer and path syntax as Go tidwall/gjson; Rust source owns its valid.rs validator and lib.rs lazy scanner",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 1151387,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/gjson/verification.json"
+  },
+  {
+    "name": "json-syntax",
+    "version": "0.13.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "JsonValue::parse_slice(&[u8]) -> Result<(JsonValue, JsonCodeMap), JsonParseError>",
+    "documentation": "https://docs.rs/json-syntax/0.13.1/json_syntax/parse/trait.JsonParse.html",
+    "source": "https://static.crates.io/crates/json-syntax/json-syntax-0.13.1.crate",
+    "scope": "One complete RFC 8259 JSON byte slice parsed to its own JsonValue tree and code map; exact root kind, object/array/boolean/null counts, nesting depth, decoded strings, numeric values and sorted top-level keys on two valid controls. Adapter bounds input at 1 MiB and traversal at 256 levels.",
+    "family": "json-syntax own strict parser and code map in src/parse; json-number dependency stores numeric lexical form; no serde_json input parser or optional serde_json feature",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 702428,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/json_syntax/verification.json"
+  }
+]

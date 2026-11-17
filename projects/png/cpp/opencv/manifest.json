@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "format": "png",
+  "ecosystem": "cpp",
+  "package": "opencv",
+  "release": "5.1.0",
+  "catalog_parser": "data/cpp/png/parsers.json",
+  "source_lock": "data/cpp/png/extra-source-lock.json",
+  "source_sha256": "638c1dae7e37e45afea21aa217dc667ad7cf57acc66cdf652c074f1e0e5ad6d2",
+  "underlying_package": "libpng",
+  "underlying_release": "1.6.57",
+  "underlying_source": "3rdparty/libpng in the pinned OpenCV 5.1.0 source tarball (BUILD_PNG=ON)",
+  "underlying_header_sha256": "c1a2804226f10b6019e782f04543a514ac8888ee9ca39db93ba9cbe0649bc46a",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "second": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned OpenCV imgcodecs PNG decoder and the libpng 1.6.57 sources bundled in the same tarball",
+  "coverage_subject_prefix": "/work/source/modules/imgcodecs/src/",
+  "format_specific_coverage_file_suffix": "/grfmt_png.cpp",
+  "underlying_coverage_subject_prefix": "/work/source/3rdparty/libpng/",
+  "underlying_format_specific_coverage_file_suffix": "/pngrutil.c"
+}

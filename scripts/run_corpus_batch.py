@@ -13,8 +13,8 @@ from run_case import image_for
 
 def run_batch(project: Path, manifest: dict, inputs_dir: Path, timeout: int) -> dict | None:
     ecosystem = manifest["ecosystem"]
-    if ecosystem == "php":
-        return None  # php-fuzzer exposes run-single; replay these in parallel.
+    if ecosystem == "php" or manifest.get("native_campaign_supported") is False:
+        return None  # Replay these targets one case per process.
     image, image_id = image_for(project, manifest)
     inputs = sorted(path for path in inputs_dir.iterdir() if path.is_file())
     tmpfs = "/tmp:rw,exec,nosuid,size=64m" if manifest.get("tmpfs_exec") else "/tmp:rw,nosuid,size=64m"

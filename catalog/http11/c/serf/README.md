@@ -21,6 +21,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/c/serf/README.md)
+
+```sh
+python3 parsarium.py build http11 c serf
+python3 parsarium.py run http11 c serf controls/http11/response_serf.http
+```

@@ -8,10 +8,28 @@
 
 ## Observed control result
 
-SVGSVGElement with two SVGRectElement children and parsed width, height, and fill fields
+```json
+{
+  "width": 2,
+  "height": 1,
+  "rects": 2,
+  "fills": [
+    "#ff0000",
+    "#00ff00"
+  ],
+  "typed_root": true,
+  "typed_rects": true
+}
+```
 
 [Control adapter](../../../../../adapters/javascript/svg_browser.mjs)
 
-## Runnable harness
+## Run the valid control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Browser container and control receipt](../../../../../projects/svg/javascript/stdlib_browser_domparser/README.md)
+
+```sh
+python3 projects/svg/javascript/stdlib_browser_domparser/verify-control.py
+```
+
+The browser runs this control, but its native parser source coverage and AFL++ parser feedback are unavailable. This path remains staged.

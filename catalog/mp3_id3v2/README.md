@@ -2,17 +2,17 @@
 
 Audio with an ID3v2 tag.
 
-The catalog records 165 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
+The catalog records 80 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
 
 | Ecosystem | Verified paths | Docker harnesses |
 | --- | ---: | ---: |
-| [C](c/README.md) | 20 | 18 |
-| [C++](cpp/README.md) | 21 | 19 |
-| [Go](go/README.md) | 20 | 20 |
-| [Java](java/README.md) | 20 | 20 |
-| [JavaScript](javascript/README.md) | 24 | 24 |
-| [Python](python/README.md) | 20 | 17 |
-| [Rust](rust/README.md) | 20 | 20 |
-| [PHP](php/README.md) | 20 | 20 |
+| [C](c/README.md) | 10 | 10 |
+| [C++](cpp/README.md) | 10 | 10 |
+| [Go](go/README.md) | 10 | 10 |
+| [Java](java/README.md) | 10 | 10 |
+| [JavaScript](javascript/README.md) | 10 | 10 |
+| [Python](python/README.md) | 10 | 10 |
+| [Rust](rust/README.md) | 10 | 10 |
+| [PHP](php/README.md) | 10 | 10 |
 
 [Harness instructions](../../projects/README.md)

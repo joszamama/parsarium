@@ -25,6 +25,11 @@
 
 VTK bundles vtkPLY; distinct from RPly and the other listed PLY engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/vtk/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp vtk
+python3 parsarium.py run ascii_ply cpp vtk controls/ascii_ply/triangle.ply
+```

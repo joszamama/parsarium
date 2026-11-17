@@ -1,10 +1,12 @@
-# C × HTTP/1.1: verified parser ranking
+# C × HTTP/1.1: selected parsers
 
-20 verified package paths; working goal 20, original ceiling 30. GitHub stars are project-level interest signals observed on 2026-11-12 and compared only within C. The exact source, method and capture time for each value are in `registry-snapshot.json`. Stars are not downloads or measured parser adoption. Packages without a comparable primary GitHub repository remain unranked.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits, unresolved leads, and C standard APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Stars | Scope | Underlying family |
+GitHub stargazers_count of primary upstream repository.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [mongoose](https://mongoose.ws/docs/api/http/#mg_http_parse) | 7.23 | 13,131 | HTTP/1.1 GET request method, target, query and version | Mongoose C HTTP request parser; related to CivetWeb and LibHTTP ancestry |
 | 2 | [h2o](https://github.com/h2o/h2o/blob/v2.2.6/deps/picohttpparser/README.md) | 2.2.6 | 11,568 | HTTP/1.1 GET request method, target, version and headers from local byte buffer via H2O-bundled parser | H2O 2.2.6 bundles PicoHTTPParser as its HTTP/1 parser; separate tagged H2O package distribution but same underlying parser family as h2o/picohttpparser 1.5, not an independent engine |
@@ -13,16 +15,15 @@ Search hits, unresolved leads, and C standard APIs are separate from this rankin
 | 5 | [libwebsockets](https://github.com/warmcat/libwebsockets/blob/v5.0.0/include/libwebsockets/lws-adopt.h) | 5.0.0 | 5,352 | HTTP/1.1 GET request method, path, query argument and Host header from local read buffer | libwebsockets C HTTP/1 parser in the server adoption path; independent from llhttp and LibHTP |
 | 6 | [facil-legacy](https://github.com/boazsegev/facil.io/blob/0.7.6/lib/facil/http/parsers/http1_parser.h) | 0.7.6 | 2,415 | HTTP/1.1 GET request method, path, query, version and Host header after complete local-byte parse | facil.io 0.7 HTTP/1 parser, earlier distinct distribution and API of the facil.io family later developed as C STL 0.8; these two package paths share lineage |
 | 7 | [picohttpparser](https://github.com/h2o/picohttpparser#phr_parse_request) | 1.5 | 2,114 | HTTP/1.1 GET request method, target and version after complete header parse | PicoHTTPParser C request parser, used by H2O |
-| 8 | [libonion](https://github.com/davidmoreno/onion/blob/v0.8/src/onion/request.h) | 0.8 | 2,085 | HTTP/1.1 GET request method, path, query value, version and Host header from local byte buffer | libonion C HTTP/1 request state machine in request_parser.c, independent from llhttp and PicoHTTPParser |
-| 9 | [llhttp](https://github.com/nodejs/llhttp#usage) | 9.4.3 | 1,955 | HTTP/1.1 GET request method, target and version after complete header parse | llhttp generated HTTP/1 parser, descended from Node http-parser design |
-| 10 | [libhtp](https://github.com/OISF/libhtp/blob/0.5.53/docs/QUICK_START) | 0.5.53 | 306 | HTTP/1.1 GET request method, target, version and parsed header table from local byte buffer | OISF LibHTP independent C HTTP request/response stream parser |
-| 11 | [facil-cstl](https://github.com/facil-io/cstl/blob/0.8.5/fio-stl/004%20http1%20parser.md) | 0.8.5 | 137 | HTTP/1.1 GET request method, target, version and Host header after complete local-byte parse | facil.io C STL 0.8 HTTP/1.x parser in 004 http1 parser.h; successor family to the separate facil.io 0.7 distribution and API, independent from llhttp and PicoHTTPParser |
-| 12 | [libevhtp](https://github.com/ellzey/libevhtp/blob/1.2.9/htparse/htparse.h) | 1.2.9 | 42 | HTTP/1.1 GET request method, path, query and version after complete headers | libevhtp bundled htparse C HTTP/1 request scanner; source distributed and header installed by libevhtp |
-| 13 | [HTTPParserC](https://github.com/Building42/HTTPParserC#documentation) | 9.2.0 | 31 | HTTP/1.1 GET request method, target and version after complete header parse | Building42 packaged llhttp 9.2.0 generated C source; shares the llhttp engine and is a separate versioned distribution |
-| 14 | [samsung-http-parser](https://github.com/Samsung/http-parser/blob/v2.5.0/README.md) | 2.5.0 | 26 | HTTP/1.1 GET request method, target and version after complete header parse from local bytes | Samsung tagged fork of the Node/Joyent http-parser C engine; separate 2.5.0 source distribution, shared parser family with nodejs/http-parser 2.9.4 and libhv-bundled 2.9.1, not an independent decoder |
-| 15 | [httpp](https://github.com/cebem1nt/httpp#api) | 2.0.0 | 10 | HTTP/1.1 GET request method, target and version | httpp C single-header request parser |
-| 16 | [finwo-http-parser](https://github.com/finwo/http-parser.c/blob/3d78ef3ad068696b0d3f5b9bc672771a89805a5f/README.md) | stable@3d78ef3ad068 | 2 | HTTP/1.1 GET request method, path, query, version and Host from local byte buffer | finwo/http-parser.c independent C request/header/body parser; not the Node http-parser family despite similar name |
-| 17 | [libparsehttp](https://github.com/clintwebb/libparsehttp/blob/v0.06/src/libparsehttp/parsehttp.h) | 0.06 | 2 | HTTP/1.1 GET request method, path, query, version and Host from local byte buffer | libparsehttp 0.06 standalone C HTTP request line/header scanner; separate implementation from Node http-parser and llhttp |
-| unranked | [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.pdf) | 1.0.10 | n/a | HTTP/1.1 GET request method, path, query argument and version from local socket stream | GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser |
-| unranked | [libsoup](https://libsoup.gnome.org/libsoup-3.0/func.headers_parse_request.html) | 3.8.1 | n/a | HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer | GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser |
-| unranked | [serf](https://github.com/apache/serf/blob/1.3.10/serf_bucket_types.h) | 1.3.10 | n/a | HTTP/1.1 response status, reason, Content-Type, Content-Length and body from local byte buffer | Apache Serf C HTTP/1 response bucket state machine; independent from libsoup and llhttp |
+
+## Supplemental numeric evidence
+
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
+
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [libsoup](https://libsoup.gnome.org/libsoup-3.0/func.headers_parse_request.html) | 3.8.1 | [Debian source installed count](https://sources.debian.org/src/libsoup/) | 137,466 | HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer | GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser |
+| 2 | [serf](https://github.com/apache/serf/blob/1.3.10/serf_bucket_types.h) | 1.3.10 | [Debian source installed count](https://sources.debian.org/src/serf/) | 19,931 | HTTP/1.1 response status, reason, Content-Type, Content-Length and body from local byte buffer | Apache Serf C HTTP/1 response bucket state machine; independent from libsoup and llhttp |
+| 3 | [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.pdf) | 1.0.10 | [Debian source installed count](https://sources.debian.org/src/libmicrohttpd/) | 5,678 | HTTP/1.1 GET request method, path, query argument and version from local socket stream | GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T05:30:08.846838+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
+  "differential_kind": "fixed_valid_nested_array",
+  "parser_feature_scope": "covered LLVM region entries under each pinned parser source prefix; harness excluded",
+  "afl_feedback_scope": "afl-clang-fast edges over the compiled parser sources and the harness; the AFL++ map is not split by file",
+  "standard_feedback": "none: the ISO C standard library documents no JSON API",
+  "results": [
+    {
+      "project": "json/c/jansson",
+      "pass": true,
+      "feedback_kind": "c_llvm_parser_regions_and_afl_native_edges",
+      "overlay_receipt_sha256": "d5afca5516f1431512654f7df1f3894e1071ce1d8bf3a66e9272cd0ed2ac57e7",
+      "base_image_id": "sha256:af4dbc0208b920820d36083b9cc3f2a49d8206acf13ec69b70789e5e631d20c7",
+      "overlay_image_id": "sha256:b64b22978c2c243162a5869bcc4776c49b862895045453dd1fddf7c9a010a8af",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 2,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 735,
+      "control_afl_tuples": 516,
+      "differential_parser_features": 673,
+      "differential_afl_tuples": 475,
+      "parser_feature_difference": 68,
+      "afl_tuple_difference": 67,
+      "control_only_features_by_file": {
+        "src/hashtable.c": 11,
+        "src/jansson_private.h": 3,
+        "src/load.c": 22,
+        "src/lookup3.h": 4,
+        "src/memory.c": 3,
+        "src/strbuffer.c": 14,
+        "src/utf.c": 3,
+        "src/value.c": 5
+      },
+      "differential_only_features_by_file": {
+        "src/load.c": 1,
+        "src/lookup3.h": 1,
+        "src/utf.c": 1
+      }
+    },
+    {
+      "project": "json/c/json-c",
+      "pass": true,
+      "feedback_kind": "c_llvm_parser_regions_and_afl_native_edges",
+      "overlay_receipt_sha256": "9c8311cfe56395e85ba4f566c8a4b34e0ce1879065a9110d41fd599f638c39c9",
+      "base_image_id": "sha256:a60602fe310395aee2bd3638a9775894a6658ea242ea9ddc9a6f8da58aa5f394",
+      "overlay_image_id": "sha256:bc4d3710fb9cc615386e2e790c66a5e2fd0490c65fff4d34c4fc4e62146995ab",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 2,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 891,
+      "control_afl_tuples": 786,
+      "differential_parser_features": 851,
+      "differential_afl_tuples": 756,
+      "parser_feature_difference": 44,
+      "afl_tuple_difference": 32,
+      "control_only_features_by_file": {
+        "json_object.c": 3,
+        "json_tokener.c": 25,
+        "linkhash.c": 14
+      },
+      "differential_only_features_by_file": {
+        "json_tokener.c": 2
+      }
+    },
+    {
+      "project": "json/c/cjson",
+      "pass": true,
+      "feedback_kind": "c_llvm_parser_regions_and_afl_native_edges",
+      "overlay_receipt_sha256": "0d01257dfa2f1f968f8acc6ea7b3deb8aefc8e03b280f07c138a08528a9653c5",
+      "base_image_id": "sha256:a7be583497991d629f7c616e6406d764c80287a7d9f7c6330482851d51631e47",
+      "overlay_image_id": "sha256:665e469c3c83f6fb278f06cec30719c5a7861d9f46df90cb7855a49fac1d0a15",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 2,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 588,
+      "control_afl_tuples": 273,
+      "differential_parser_features": 553,
+      "differential_afl_tuples": 256,
+      "parser_feature_difference": 39,
+      "afl_tuple_difference": 29,
+      "control_only_features_by_file": {
+        "cJSON.c": 37
+      },
+      "differential_only_features_by_file": {
+        "cJSON.c": 2
+      }
+    },
+    {
+      "project": "json/c/yyjson",
+      "pass": true,
+      "feedback_kind": "c_llvm_parser_regions_and_afl_native_edges",
+      "overlay_receipt_sha256": "9bc0be39ea15cbc7c6106dcba044e1efccad1d7d02d65646b5eb014921b71a95",
+      "base_image_id": "sha256:5639d1e342f8e38327e7c6c08885f8a5e5c3bcbd5f79f5adfab948ab4ebd7b65",
+      "overlay_image_id": "sha256:42ac7b81dd1c2793e7c81574853ec18b8a578ea3be5f4a8ed1e1d72fb8785177",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 2,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 795,
+      "control_afl_tuples": 328,
+      "differential_parser_features": 702,
+      "differential_afl_tuples": 292,
+      "parser_feature_difference": 473,
+      "afl_tuple_difference": 408,
+      "control_only_features_by_file": {
+        "src/yyjson.c": 282,
+        "src/yyjson.h": 1
+      },
+      "differential_only_features_by_file": {
+        "src/yyjson.c": 190
+      }
+    }
+  ]
+}

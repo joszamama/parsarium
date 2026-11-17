@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "project": "svg/c/gdk_pixbuf",
+  "image_id": "sha256:68fc5a936e92cfcd62d60b3831a2ee19e8ee83286ae2110576695a0853dce787",
+  "feedback_scope": "librsvg Rust core and SVG loader plugin; no GdkPixbuf or harness guards",
+  "instrumented_guard_slots": {
+    "librsvg_core": 432320,
+    "svg_loader_plugin": 53738,
+    "gdk_pixbuf": 0,
+    "harness": 0
+  },
+  "afl_map_size": 486063,
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "valid_variant": "fuzzing/afl-native/svg/c/gdk_pixbuf/valid-path.svg",
+  "valid_variant_sha256": "85ee385654f90465545b6ff1bb639fbba4e50f3c3830fa8b0b0aacc5919bba06",
+  "feedback_command": "afl-showmap -e -m none -t 30000 -o MAP -- /work/replay /input/control",
+  "control_repeat_edge_counts": [
+    5005,
+    4997,
+    4997,
+    5004,
+    5004
+  ],
+  "control_stable_edge_ids": 4997,
+  "control_union_edge_ids": 5005,
+  "control_stability_ratio": 0.998402,
+  "control_stable_edge_ids_sha256": "3b7410933260ded4279cf2a8f6a730451033ed33f514515aa2c09a1d57c8fd47",
+  "variant_repeat_edge_counts": [
+    5167,
+    5167,
+    5168
+  ],
+  "variant_stable_edge_ids": 5167,
+  "variant_union_edge_ids": 5168,
+  "variant_stable_edge_ids_sha256": "13327fc16111359c9e5aa3952a89c4bf2e2fbcbd6db4ece9b7e1c1da44120f06",
+  "stable_variant_only_edge_ids": 302,
+  "stable_control_only_edge_ids": 139,
+  "xml2_load_source_lines_covered": 177,
+  "one_pixel_valid_input": "fuzzing/afl-native/svg/c/gdk_pixbuf/valid-one.svg",
+  "one_pixel_valid_input_sha256": "e599d48750080293af05f246161779fe114a83075fe402a159f05a76bdf90dab",
+  "mutation_campaign_run": false,
+  "pass": true,
+  "one_pixel_observed_output": {
+    "width": 1,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "second": null
+  }
+}

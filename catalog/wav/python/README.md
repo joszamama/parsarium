@@ -1,6 +1,6 @@
 # WAV / Python
 
-21 verified third-party API paths; 17 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/wav/ranking.md) · [standard API inventory](../../../data/python/wav/standard.json)
 
@@ -11,22 +11,11 @@
 - [librosa](librosa/README.md) — Docker harness ready
 - [audioread](audioread/README.md) — Docker harness ready
 - [pydub](pydub/README.md) — Docker harness ready
-- [miniaudio](miniaudio/README.md) — Docker harness ready
-- [wavio](wavio/README.md) — Docker harness ready
-- [wavfile](wavfile/README.md) — Docker harness ready
-- [tinytag](tinytag/README.md) — verified API path
-- [mutagen](mutagen/README.md) — verified API path
-- [waveinfo](waveinfo/README.md) — Docker harness ready
-- [audiomath](audiomath/README.md) — Docker harness ready
-- [riffy](riffy/README.md) — verified API path
+- [tinytag](tinytag/README.md) — Docker harness ready
+- [mutagen](mutagen/README.md) — Docker harness ready
 - [pygame](pygame/README.md) — Docker harness ready
 - [av](av/README.md) — Docker harness ready
-- [audiofile](audiofile/README.md) — Docker harness ready
 - [pymediainfo](pymediainfo/README.md) — Docker harness ready
-- [hachoir](hachoir/README.md) — verified API path
-- [pytaglib](pytaglib/README.md) — Docker harness ready
-- [audiolab](audiolab/README.md) — Docker harness ready
-- [simpleaudio](simpleaudio/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

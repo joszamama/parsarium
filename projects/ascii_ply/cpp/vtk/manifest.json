@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "vtk",
+  "release": "9.7.2",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "fecef55df5caec6298ce190024060a90ce3bb515033c0f18968b9ab5c12bf796",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "face": [0, 1, 2]},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of VTK IO/PLY vtkPLYReader and its bundled vtkPLY parser from a local-file SetFileName read",
+  "coverage_subject_prefix": "/work/source/IO/PLY/",
+  "format_specific_coverage_file_suffix": "/vtkPLYReader.cxx",
+  "underlying_coverage_subject_prefix": "/work/source/IO/PLY/vtkPLY.",
+  "underlying_format_specific_coverage_file_suffix": "/vtkPLY.cxx"
+}

@@ -21,6 +21,11 @@
 
 POCO parses ZIP archive headers in its Zip library and decompresses entries with its bundled zlib; independent package API from the C-cell libraries.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/poco/README.md)
+
+```sh
+python3 parsarium.py build zip cpp poco
+python3 parsarium.py run zip cpp poco controls/zip/hello.zip
+```

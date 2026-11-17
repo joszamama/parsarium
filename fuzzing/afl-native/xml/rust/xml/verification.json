@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "project": "xml/rust/xml",
+  "pass": true,
+  "base_project_receipt_sha256": "405e15ca9b5fe426dd63535b6c75eeda22a3667d0acf1f69b886efd5ae8233f3",
+  "overlay_file_sha256": {
+    "Cargo.toml": "b16fc345951776083977875345368d6e8a0985763ce432900d02cfaee4c4a5d2",
+    "Cargo.lock": "aa1da2a350a9e0501aebd3c93a8f58b6f80c987b55b125f9724c2ac9a3f51287",
+    "afl_fuzzer.rs": "6f6ad92ba7658b72e5cc3a7c5a68b1a1e10ac302a40a4bd80aae6d22005a5530",
+    "Dockerfile": "8fab504d3563ef171ec222d19e3e84fce822f00410aa389c7f700c4748061eac",
+    "build.py": "2383298efec3c641103655ebddbb75882fdd5c36b26b0253c7227712aa2aee84"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "2f45bb2c13fec6a6cb4c0f76a7e94839e110a14ec803ec2940777a94c347bc52",
+  "image_id": "sha256:fdaab6aef0d7fd0dc148729e04d900a94cf8372c64cbb5a060e497d18f1e22a8",
+  "platform": "linux/arm64",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "feedback_edges": 1816,
+  "afl_map_size": 14650,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: xml 1.4.0 EventReader and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:79cb2eddd68f8744483d8706a2fc4e672082235ca6516980b6ce9bed62ec8d77",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 1916,
+  "edges_only_in_control": 84,
+  "edges_only_in_variant": 184,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xml-1.4.0/",
+    "control_lines": {
+      "src/attribute.rs": 0,
+      "src/common.rs": 26,
+      "src/escape.rs": 0,
+      "src/macros.rs": 0,
+      "src/name.rs": 28,
+      "src/namespace.rs": 60,
+      "src/reader.rs": 12,
+      "src/reader/config.rs": 23,
+      "src/reader/error.rs": 0,
+      "src/reader/events.rs": 0,
+      "src/reader/lexer.rs": 140,
+      "src/reader/parser.rs": 242,
+      "src/reader/parser/inside_cdata.rs": 14,
+      "src/reader/parser/inside_closing_tag_name.rs": 11,
+      "src/reader/parser/inside_comment.rs": 0,
+      "src/reader/parser/inside_declaration.rs": 56,
+      "src/reader/parser/inside_doctype.rs": 0,
+      "src/reader/parser/inside_opening_tag.rs": 56,
+      "src/reader/parser/inside_processing_instruction.rs": 16,
+      "src/reader/parser/inside_reference.rs": 22,
+      "src/reader/parser/outside_tag.rs": 53,
+      "src/util.rs": 45,
+      "src/writer.rs": 0,
+      "src/writer/config.rs": 0,
+      "src/writer/emitter.rs": 0,
+      "src/writer/events.rs": 0
+    },
+    "variant_lines": {
+      "src/attribute.rs": 0,
+      "src/common.rs": 27,
+      "src/escape.rs": 0,
+      "src/macros.rs": 0,
+      "src/name.rs": 28,
+      "src/namespace.rs": 60,
+      "src/reader.rs": 12,
+      "src/reader/config.rs": 23,
+      "src/reader/error.rs": 0,
+      "src/reader/events.rs": 0,
+      "src/reader/lexer.rs": 155,
+      "src/reader/parser.rs": 253,
+      "src/reader/parser/inside_cdata.rs": 0,
+      "src/reader/parser/inside_closing_tag_name.rs": 11,
+      "src/reader/parser/inside_comment.rs": 7,
+      "src/reader/parser/inside_declaration.rs": 56,
+      "src/reader/parser/inside_doctype.rs": 0,
+      "src/reader/parser/inside_opening_tag.rs": 57,
+      "src/reader/parser/inside_processing_instruction.rs": 35,
+      "src/reader/parser/inside_reference.rs": 33,
+      "src/reader/parser/outside_tag.rs": 57,
+      "src/util.rs": 39,
+      "src/writer.rs": 0,
+      "src/writer/config.rs": 0,
+      "src/writer/emitter.rs": 0,
+      "src/writer/events.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/common.rs",
+      "src/reader/lexer.rs",
+      "src/reader/parser.rs",
+      "src/reader/parser/inside_cdata.rs",
+      "src/reader/parser/inside_comment.rs",
+      "src/reader/parser/inside_opening_tag.rs",
+      "src/reader/parser/inside_processing_instruction.rs",
+      "src/reader/parser/inside_reference.rs",
+      "src/reader/parser/outside_tag.rs",
+      "src/util.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      1816,
+      1816,
+      1816
+    ],
+    "stable_edges": 1816,
+    "union_edges": 1816,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1916,
+      1916,
+      1916
+    ],
+    "stable_edges": 1916,
+    "union_edges": 1916,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

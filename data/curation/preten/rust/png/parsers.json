@@ -1,0 +1,311 @@
+[
+  {
+    "name": "png",
+    "version": "0.18.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Decoder::new(BufReader<Cursor<&[u8]>>).read_info().next_frame()",
+    "documentation": "https://docs.rs/png/0.18.1/png/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "image-rs PNG lineage",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "image",
+    "version": "0.25.10",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "load_from_memory(&[u8])",
+    "documentation": "https://docs.rs/image/0.25.10/image/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "image-rs PNG lineage",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "img-parts",
+    "version": "0.4.2",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "png::Png::from_bytes(Bytes)",
+    "documentation": "https://docs.rs/img-parts/0.4.2/img_parts/",
+    "scope": "PNG chunk structure and IHDR dimensions",
+    "family": "img-parts PNG chunk reader",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "chunks": 3
+    }
+  },
+  {
+    "name": "png_pong",
+    "version": "0.12.0",
+    "license": "(Apache-2.0 OR BSL-1.0 OR MIT) AND Zlib",
+    "input_api": "Decoder::new(BufRead).into_steps()",
+    "documentation": "https://docs.rs/png_pong/0.12.0/png_pong/",
+    "scope": "Decoded PNG frame dimensions",
+    "family": "png_pong decoder",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "lodepng",
+    "version": "3.12.2",
+    "license": "Zlib",
+    "input_api": "decode32_file(path)",
+    "documentation": "https://docs.rs/lodepng/3.12.2/lodepng/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "LodePNG family",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "zune-png",
+    "version": "0.5.2",
+    "license": "MIT OR Apache-2.0 OR Zlib",
+    "input_api": "PngDecoder::new(Cursor).decode_raw()",
+    "documentation": "https://docs.rs/zune-png/0.5.2/zune_png/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "zune-png family",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "load_image",
+    "version": "3.5.0",
+    "license": "BSD-3-Clause",
+    "input_api": "load_data(&[u8])",
+    "documentation": "https://docs.rs/load_image/3.5.0/load_image/",
+    "scope": "Decoded PNG dimensions via LodePNG",
+    "family": "LodePNG family",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "gufo-png",
+    "version": "0.5.0",
+    "license": "MPL-2.0 OR LGPL-2.1-or-later",
+    "input_api": "Png::new(Vec<u8>).chunks().text()",
+    "documentation": "https://docs.rs/gufo-png/0.5.0/gufo_png/",
+    "scope": "PNG tEXt Title metadata",
+    "family": "gufo-png chunk reader",
+    "control": "controls/png/red-green-title.png",
+    "expected_output": {
+      "key": "Title",
+      "value": "Parsarium"
+    }
+  },
+  {
+    "name": "minipng",
+    "version": "1.0.0",
+    "license": "0BSD",
+    "input_api": "decode_png_header(&[u8]); decode_png(&[u8], &mut [u8])",
+    "documentation": "https://docs.rs/minipng/1.0.0/minipng/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "minipng decoder",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "png-decoder",
+    "version": "0.2.0",
+    "license": "MIT OR Apache-2.0 OR Zlib",
+    "input_api": "decode(&[u8])",
+    "documentation": "https://docs.rs/png-decoder/0.2.0/png_decoder/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "png-decoder engine",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "oxideav-png",
+    "version": "0.1.14",
+    "license": "MIT",
+    "input_api": "decode(&[u8])",
+    "documentation": "https://docs.rs/oxideav-png/0.1.14/oxideav_png/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "oxideav PNG engine",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "rusty_png",
+    "version": "0.3.2",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "Decoder::new(Cursor).read_info().next_frame()",
+    "documentation": "https://docs.rs/rusty_png/0.3.2/rusty_png/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "image-rs PNG lineage",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "imagefmt",
+    "version": "4.0.0",
+    "license": "MIT",
+    "input_api": "read_from(&mut Cursor, ColFmt::RGBA)",
+    "documentation": "https://docs.rs/imagefmt/4.0.0/imagefmt/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "imagefmt PNG engine",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "zenpng",
+    "version": "0.1.4",
+    "license": "AGPL-3.0-only OR LicenseRef-Imazen-Commercial",
+    "input_api": "decode(&[u8], &PngDecodeConfig, &Unstoppable)",
+    "documentation": "https://docs.rs/zenpng/0.1.4/zenpng/",
+    "scope": "Decoded PNG dimensions",
+    "family": "zenpng engine",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "spng",
+    "version": "0.2.0-alpha.3",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "decode(Cursor, Format::Rgba8)",
+    "documentation": "https://docs.rs/spng/0.2.0-alpha.3/spng/",
+    "scope": "libspng decoded PNG dimensions and first pixel",
+    "family": "libspng native decoder",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "wml2",
+    "version": "0.0.45",
+    "license": "MIT",
+    "input_api": "draw::image_from_file(path)",
+    "documentation": "https://docs.rs/wml2/0.0.45/wml2/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "wml2 PNG decoder",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "nopng",
+    "version": "0.3.0",
+    "license": "MIT",
+    "input_api": "decode_image(&[u8])",
+    "documentation": "https://docs.rs/nopng/0.3.0/nopng/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "nopng decoder",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "pb-imgsize",
+    "version": "0.2.5",
+    "license": "MIT",
+    "input_api": "read_bytes(&[u8])",
+    "documentation": "https://docs.rs/pb-imgsize/0.2.5/pb_imgsize/",
+    "scope": "PNG IHDR dimensions",
+    "family": "pb-imgsize PNG metadata reader",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1
+    }
+  },
+  {
+    "name": "png-spark",
+    "version": "0.2.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "decode(&[u8])",
+    "documentation": "https://docs.rs/png-spark/0.2.0/png_spark/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "png-spark engine",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  },
+  {
+    "name": "makepad-zune-png",
+    "version": "0.4.10",
+    "license": "MIT OR Apache-2.0 OR Zlib",
+    "input_api": "PngDecoder::new(&[u8]).decode_raw()",
+    "documentation": "https://docs.rs/makepad-zune-png/0.4.10/makepad_zune_png/",
+    "scope": "Decoded PNG first pixel and byte count",
+    "family": "zune-png family",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "red_0_0": 255,
+      "pixel_bytes": 8
+    }
+  },
+  {
+    "name": "format-png",
+    "version": "0.3.0",
+    "license": "MIT",
+    "input_api": "decode_rgba8(&[u8])",
+    "documentation": "https://docs.rs/format-png/0.3.0/format_png/",
+    "scope": "Decoded PNG dimensions and first pixel",
+    "family": "format-png engine",
+    "control": "controls/png/red-green.png",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "red_0_0": 255
+    }
+  }
+]

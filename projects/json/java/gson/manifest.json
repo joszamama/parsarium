@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "java",
+  "package": "gson",
+  "release": "2.15.0",
+  "catalog_parser": "data/java/json/parsers.json",
+  "source_lock": "projects/json/java/gson/source-lock.json",
+  "source_sha256": "e689856e33f12904741d481825ee582fa160f751c741836601bc16666dbc7249",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/gson-2.15.0.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.google.code.gson:gson:2.15.0 (JsonReader tokenizer and ObjectTypeAdapter mapping) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/"
+}

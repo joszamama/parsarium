@@ -1,0 +1,28 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang curl libclang-rt-21-dev llvm make python3 tcl zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://github.com/sqlite/sqlite/archive/refs/tags/version-3.54.1.tar.gz \
+    --output /work/sqlite-3.54.1.tar.gz \
+    && echo '41bba7dd1793db5a7c2c24de168226d30c4cc969b3d786c353afe55e49d7e5bf  /work/sqlite-3.54.1.tar.gz' | sha256sum --check \
+    && mkdir /work/sqlite-3.54.1 \
+    && tar -xf /work/sqlite-3.54.1.tar.gz -C /work/sqlite-3.54.1 --strip-components=1 \
+    && echo 'b9c9f36e34a0e4d1808b5c3959025b035d8bdf9b952bff21c20265f7144e6c97  /work/sqlite-3.54.1/ext/misc/zipfile.c' | sha256sum --check
+COPY harness.c harness.h replay.c build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    llvm python3 zlib1g && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/sqlite-3.54.1 /work/sqlite-3.54.1
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

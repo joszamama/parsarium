@@ -1,0 +1,329 @@
+{
+  "checked_at_utc": "2026-11-11T21:42:21.429847+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "python": "Python 3.13.1",
+  "python_legacy": "Python 3.10.21",
+  "controls": {
+    "controls/http11/request.http": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+    "controls/http11/response.http": "89095a71f21f4047f3d86e05d4fdf37bdfffcbf746a3aa85bc32fd7b7ea3a2c4"
+  },
+  "control_meaning": "Valid HTTP/1.1 GET request with Host, custom field and CRLF framing; valid 200 response with Content-Length 9 and a nine-byte text body",
+  "third_party": [
+    {
+      "package": "h11",
+      "version": "0.16.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py h11 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "httptools",
+      "version": "0.9.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py httptools /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "zttp",
+      "version": "0.0.35",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py zttp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "h11r",
+      "version": "0.2.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py h11r /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "httppackets",
+      "version": "0.1.0a0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py httppackets /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "http-parse",
+      "version": "0.1.5",
+      "scope": "HTTP/1.1 request method, target and Host",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py http-parse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "http-pyparser",
+      "version": "0.5.1",
+      "scope": "HTTP/1.1 request method, target and Host",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py http-pyparser /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "httparse",
+      "version": "0.2.1",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py httparse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "pycohttpparser",
+      "version": "1.1.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py pycohttpparser /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "parse-http-header-line",
+      "version": "0.1.0",
+      "scope": "HTTP Host header field line only",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py parse-http-header-line /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "header": "host",
+        "value": "example.test"
+      },
+      "error": null
+    },
+    {
+      "package": "ParseRawHTTP",
+      "version": "1.0",
+      "scope": "HTTP/1.1 request method, target and Host",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py ParseRawHTTP /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "tp-http-request-response-parser",
+      "version": "2026.5.18",
+      "scope": "HTTP/1.1 request method and version",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py tp-http-request-response-parser /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "method": "GET",
+        "version": "HTTP/1.1"
+      },
+      "error": null
+    },
+    {
+      "package": "gunicorn-h1c",
+      "version": "0.6.14",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py gunicorn-h1c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "h1parser",
+      "version": "0.1",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py h1parser /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "h11-mypyc",
+      "version": "0.17.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py h11-mypyc /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "h11pro",
+      "version": "0.0.1",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py h11pro /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "parserheader",
+      "version": "0.38.3",
+      "scope": "HTTP header fields only",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py parserheader /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "x_parsarium": "yes"
+      },
+      "error": null
+    },
+    {
+      "package": "proxy.py",
+      "version": "2.4.10",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py proxy.py /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "http-parser",
+      "version": "0.9.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv310/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py http-parser /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "tornado",
+      "version": "6.6.1",
+      "scope": "HTTP/1.1 response status, headers and body",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py tornado /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/response.http",
+      "pass": true,
+      "output": {
+        "body": "parsarium",
+        "content_type": "text/plain",
+        "status": 200
+      },
+      "error": null
+    },
+    {
+      "package": "websockets",
+      "version": "17.3",
+      "scope": "HTTP/1.1 handshake request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py websockets /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "package": "Twisted",
+      "version": "26.10.0",
+      "scope": "HTTP/1.1 request head",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/main.py Twisted /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    }
+  ],
+  "runtime": [
+    {
+      "api": "http.client.HTTPConnection.getresponse",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/standard.py http.client.HTTPConnection.getresponse /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/response.http",
+      "pass": true,
+      "output": {
+        "body": "parsarium",
+        "content_type": "text/plain",
+        "status": 200
+      },
+      "error": null
+    },
+    {
+      "api": "http.server.BaseHTTPRequestHandler",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/standard.py http.server.BaseHTTPRequestHandler /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/request.http",
+      "pass": true,
+      "output": {
+        "host": "example.test",
+        "method": "GET",
+        "target": "/parsarium?x=1"
+      },
+      "error": null
+    },
+    {
+      "api": "http.client.parse_headers",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/http11/standard.py http.client.parse_headers /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/http11/response.http",
+      "pass": true,
+      "output": {
+        "content_length": 9,
+        "content_type": "text/plain"
+      },
+      "error": null
+    }
+  ]
+}

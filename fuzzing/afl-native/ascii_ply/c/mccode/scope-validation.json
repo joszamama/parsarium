@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "project": "ascii_ply/c/mccode",
+  "case": "fuzzing/afl-native/ascii_ply/c/mccode/valid-pointcloud.ply",
+  "case_sha256": "901b176d35342b23cecbd63ccfaaaaf543c4a18c6c0adbe9dc4efa14711f6c31",
+  "case_description": "Valid ASCII PLY with three vertices and zero faces",
+  "upstream_source": "https://github.com/mccode-dev/McCode/blob/v3.10.2/common/lib/share/interoff-lib.c#L387-L391",
+  "upstream_condition": "off_getBlocksIndex rejects polySize <= 0",
+  "replay_exit_code": 5,
+  "replay_stderr_contains": "defines 3 vertices and 0 faces",
+  "classification": "valid_format_unsupported_by_pinned_parser",
+  "pass": true
+}

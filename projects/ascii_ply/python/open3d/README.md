@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare ascii_ply python open3d runs/ascii_ply-open3d-a
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Feedback scope:** AFL++ observes edges in the pinned `libOpen3D.so.0.20` shared library. This target does not claim source-line coverage. The verification receipt records the module hash and differential valid-control check.

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T11:01:09.435751+00:00",
+  "project": "mp3/php/wapmorgan_mp3info",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "feedback_scope": "Xdebug executed lines under /work/vendor/wapmorgan/mp3info/ mapped to the AFL++ bitmap by the bridge proxy; PHP runtime and harness lines are not counted.",
+  "base_project_receipt_sha256": "7cddd1ea070945206d7b133c7fad2936d9fc816f865068e07efa01c080d48f8a",
+  "overlay_receipt_sha256": "f0490e5417a828ad8feaa94419e4b92e3b71b958738f1678bc9683c7016fc739",
+  "base_image_id": "sha256:b043c517bc74f44559f21e4996a2776a01c5ac469274fb0e603c233938f9078b",
+  "overlay_image_id": "sha256:8625a277da7b3c472be6e3f8468bdc1a90fa6527ed9d5b417f057e51732cd891",
+  "repeats_per_control": 3,
+  "repeated_controls_identical": true,
+  "first_control": "controls/mp3/tone-44k-mono.mp3",
+  "first_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "second_control": "controls/mp3/tone-22k-stereo.mp3",
+  "second_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "second_control_output": {
+    "mpeg_version": 2,
+    "layer": 2,
+    "sample_rate": 24000,
+    "channel": "mono",
+    "bitrate": 96000,
+    "is_vbr": false,
+    "audio_size": 1254,
+    "frames": 3,
+    "duration": 0.096
+  },
+  "second_case_kind": "valid_control",
+  "first_parser_features": 82,
+  "second_parser_features": 85,
+  "parser_feature_difference": 3,
+  "mp3info_class_feature_difference": 3,
+  "first_afl_tuples": 102,
+  "second_afl_tuples": 105,
+  "afl_tuple_difference": 3,
+  "differing_parser_lines": [
+    "/work/vendor/wapmorgan/mp3info/src/Mp3Info.php:366",
+    "/work/vendor/wapmorgan/mp3info/src/Mp3Info.php:367",
+    "/work/vendor/wapmorgan/mp3info/src/Mp3Info.php:382"
+  ],
+  "independent_oracle": "controls/mp3/check_controls.py walk()",
+  "oracle_comparison": [
+    {
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "observed": {
+        "mpeg_version": 1,
+        "layer": 3,
+        "sample_rate": 44100,
+        "channel": "mono",
+        "bitrate": 64000,
+        "is_vbr": false,
+        "audio_size": 2298,
+        "frames": 11,
+        "duration": 0.26122
+      },
+      "oracle": {
+        "mpeg_version": 1,
+        "layer": 3,
+        "sample_rate": 44100,
+        "channels": 1,
+        "bitrate": 64000,
+        "frames": 11,
+        "frame_bytes": 2298,
+        "samples": 12672,
+        "duration": 0.28735
+      },
+      "header_fields_match": true,
+      "frames_match": true,
+      "audio_bytes_match": true
+    },
+    {
+      "control": "controls/mp3/tone-22k-stereo.mp3",
+      "observed": {
+        "mpeg_version": 2,
+        "layer": 2,
+        "sample_rate": 24000,
+        "channel": "mono",
+        "bitrate": 96000,
+        "is_vbr": false,
+        "audio_size": 1254,
+        "frames": 3,
+        "duration": 0.096
+      },
+      "oracle": {
+        "mpeg_version": 2,
+        "layer": 3,
+        "sample_rate": 22050,
+        "channels": 2,
+        "bitrate": 32000,
+        "frames": 12,
+        "frame_bytes": 1254,
+        "samples": 6912,
+        "duration": 0.31347
+      },
+      "header_fields_match": false,
+      "frames_match": false,
+      "audio_bytes_match": true
+    }
+  ]
+}

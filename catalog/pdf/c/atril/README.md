@@ -17,8 +17,15 @@
 }
 ```
 
-Atril is an Evince-derived package with its own public libdocument C API and PDF backend. The pinned backend links Poppler GLib; it adds a package input path, not an independent PDF syntax engine. Ubuntu arm64 binaries and official tagged source are pinned; no comparable Homebrew formula requested-install count is available.
+Atril is an Evince-derived package with a documented local URI factory and its own PDF backend, but the backend calls Poppler GLib/core for PDF syntax. The verified Docker build uses the official 1.28.2 release tarball; the catalog uses the same tag archive, and pinned API/backend source members have matching SHA-256 values across both archives. The route adds a package API, not an independent parser engine. Its Debian adoption signal is supplemental and not directly comparable with Homebrew requested-install counts.
 
-## Runnable harness
+The verified Docker harness disables LeakSanitizer because Atril's URI factory retains a 16-byte GLib MIME allocation on the valid control. AddressSanitizer and UndefinedBehaviorSanitizer remain enabled. The project-local source lock pins the official release tarball and checks catalog API/backend members against the tag archive.
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+## Run this target
+
+[Docker harness and verification receipt](../../../../projects/pdf/c/atril/README.md)
+
+```sh
+python3 parsarium.py build pdf c atril
+python3 parsarium.py run pdf c atril controls/pdf/two-page.pdf
+```

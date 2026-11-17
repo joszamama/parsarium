@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "c",
+  "package": "mpg123",
+  "release": "1.33.7",
+  "catalog_parser": "data/c/mp3/parsers.json",
+  "source_lock": "projects/mp3/c/mpg123/source-lock.json",
+  "source_sha256": "31d0e35a4ca567ec9b5ebda6c3062bb4435d6d3eacd6ef0d95cadd7854dc03ee",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "expected_output": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "layer": 3,
+    "frames": 11,
+    "decoded_samples": 12672
+  },
+  "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_control_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_expected_output": {
+    "sample_rate": 22050,
+    "channels": 2,
+    "layer": 3,
+    "frames": 12,
+    "decoded_samples": 6912
+  },
+  "api": "mpg123_new; mpg123_open_feed; mpg123_feed(local bytes); mpg123_decode_frame until MPG123_NEED_MORE; mpg123_getformat; mpg123_info2",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libmpg123 built from the pinned release with --with-cpu=generic (C decoder, no assembly synth)",
+  "coverage_subject_prefix": "/work/source/src/libmpg123/",
+  "format_specific_coverage_file_suffix": "/layer3.c",
+  "pilot": "plain_mp3_registry_pilot",
+  "coverage_limit": "Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support. libmpg123 is also counted under mp3_id3v2/c for ID3v2 scope; this path is the plain-frame decoder scope."
+}

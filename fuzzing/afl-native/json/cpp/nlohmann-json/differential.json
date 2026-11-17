@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:52:12.865146+00:00",
+  "project": "json/cpp/nlohmann-json",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "00b4290504c75da7668320423c4a9df9f41a3bccb103bd3b1b14ade6961c7502",
+  "overlay_receipt_sha256": "72ef9b4c53f2148ef3bb3d5e00573839f8c632b74381b11eea587b2ffe2bdf80",
+  "base_image_id": "sha256:ae8b4602a85597141ef6696fe824c7fbd63a09e9b45a877af058e4e00b68333e",
+  "overlay_image_id": "sha256:e25dc5db52632dd052e293f0862f2b2ea6169c9a9f0635ca7982cb697cea8344",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 2,
+  "first_control": "controls/json/nested-object.json",
+  "first_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "second_control": "controls/json/nested-array.json",
+  "second_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "second_control_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "first_source_lines": 1149,
+  "second_source_lines": 1014,
+  "source_line_difference": 195,
+  "first_only_lines_by_file": {
+    "include/nlohmann/detail/input/lexer.hpp": 129,
+    "include/nlohmann/detail/input/parser.hpp": 4,
+    "include/nlohmann/detail/iterators/iter_impl.hpp": 8,
+    "include/nlohmann/detail/iterators/iteration_proxy.hpp": 8,
+    "include/nlohmann/json.hpp": 16
+  },
+  "second_only_lines_by_file": {
+    "include/nlohmann/detail/input/lexer.hpp": 30
+  },
+  "first_afl_tuples": 1047,
+  "second_afl_tuples": 1024,
+  "afl_tuple_difference": 355,
+  "second_case_kind": "valid_control"
+}

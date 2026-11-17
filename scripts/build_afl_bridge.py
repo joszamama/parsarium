@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 
 from run_case import ROOT, image_for, project_for
@@ -76,6 +77,10 @@ def build_one(relative: Path) -> dict:
     ecosystem = manifest["ecosystem"]
     if ecosystem not in {"go", "java", "javascript", "php"}:
         raise ValueError("Go, Java, JavaScript, or PHP project required")
+    if manifest.get("afl_native_cgo"):
+        custom = OVERLAYS / relative / "build.py"
+        run([sys.executable, str(custom)])
+        return json.loads((custom.parent / "verification.json").read_text())
     base_image, base_image_id = image_for(project, manifest)
     verified_base = json.loads((project / "verification.json").read_text())["image_id"]
     if base_image_id != verified_base:

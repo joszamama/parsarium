@@ -1,0 +1,377 @@
+[
+  {
+    "name": "jsonparse",
+    "version": "1.3.1",
+    "license": "MIT",
+    "npm_integrity": "sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==",
+    "tarball_sha256": "cf6c2edd3a8f77080beabb6c46b51e5853b61422341a0ef2e05a9e83a90bffce",
+    "input_api": "new Parser(); parser.onValue = root callback when this.stack is empty; parser.write(local Buffer)",
+    "documentation": [
+      "https://github.com/creationix/jsonparse/blob/1480064a3040cec3f27aa929dd1d1469150b8737/examples/twitterfeed.js",
+      "https://github.com/creationix/jsonparse/blob/1480064a3040cec3f27aa929dd1d1469150b8737/test/primitives.js"
+    ],
+    "source": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz",
+    "scope": "One complete RFC 8259 JSON value from local bytes written as one Buffer to Parser.write; the adapter requires exactly one empty-stack onValue root, no open container, and the tokenizer back in START after the Buffer",
+    "family": "jsonparse byte-level tokenizer and stack value builder",
+    "family_note": "jsonparse.js (one file, no dependencies) tokenizes Buffer bytes in its own state machine, including UTF-8 sequences split across chunks and \\u escapes with surrogate pairs, and builds values on its own stack in onToken. Numbers are converted with Number(). It does not call JSON.parse. Distinct from stream-json, bfj and @streamparser/json. JSONStream wraps this parser and is not counted separately.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 105362611,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/jsonparse",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/jsonparse",
+    "license_evidence": "https://registry.npmjs.org/jsonparse/1.3.1",
+    "verification_note": "The 1.3.1 README documents no API; it says only that this is a streaming JSON parser. The API is the one shown by the packaged example (new Parser(), onValue with an empty-stack root, write(chunk)) and tests. The tarball gitHead is 1480064a3040cec3f27aa929dd1d1469150b8737; jsonparse.js in the tarball is byte-identical to that commit. jsonparse has no end() call and accepts a stream of concatenated values, so the adapter, not the package, rejects a second root, an open container, or an unfinished token. From source reading (not run): a number token accepts any run of digits . e E + - and is checked only by Number(), so leading zeros are not rejected; an integer digit string that does not round-trip through Number is emitted as a string; a bare number root is emitted only when a following byte ends the token. Only the two valid controls were run. Both valid controls, nested-object.json and nested-array.json, produce the exact pinned summaries; the adapter returns a summary only after one complete root object or array has been delivered."
+  },
+  {
+    "name": "stream-json",
+    "version": "3.9.0",
+    "license": "BSD-3-Clause",
+    "npm_integrity": "sha512-kL2w6owYCdzCRApK9/9HI7Vgrd+0iWE5tTGc8P/AS2AdPoHcFTQwUek66sbMpfaX73lgHvDN+u1AoRC/dzB1Hw==",
+    "tarball_sha256": "faafb208a8a612681f282ea128001fb06d94c856fe252b3a4a190c9a0f438ac3",
+    "input_api": "chain([Readable.from([Buffer]), parser()]) with Assembler.connectTo(pipeline, {onDone})",
+    "documentation": "https://github.com/uhop/stream-json/wiki/Parser",
+    "documentation_assembler": "https://github.com/uhop/stream-json/wiki/Assembler",
+    "source": "https://github.com/uhop/stream-json/tree/3.9.0",
+    "scope": "One RFC 8259 JSON text from local bytes, tokenized and assembled into a JavaScript value",
+    "family": "stream-json charCodeAt/regex streaming tokenizer",
+    "family_note": "src/core/parser.js implements its own charCodeAt dispatch plus sticky-regex incremental state machine and emits SAX-like tokens; src/core/assembler.js builds values from packed tokens and converts numbers with parseFloat. It does not call JSON.parse on input text. Buffer chunks are decoded to text by its stream-chain 4.4.2 fixUtf8Stream dependency before tokenizing.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 56997988,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/stream-json",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/stream_json"
+  },
+  {
+    "name": "JSONStream",
+    "version": "1.3.5",
+    "license": "(MIT OR Apache-2.0)",
+    "npm_integrity": "sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==",
+    "tarball_sha256": "ef3be72c45c76fbb688e2cb3078a7905b413ec9c8eb2d889cd0481f38c712488",
+    "dependencies": [
+      {
+        "name": "jsonparse",
+        "version": "1.3.1",
+        "license": "MIT",
+        "role": "tokenizer and value builder (shared parser family)",
+        "npm_integrity": "sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==",
+        "tarball_sha256": "cf6c2edd3a8f77080beabb6c46b51e5853b61422341a0ef2e05a9e83a90bffce",
+        "source": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz"
+      },
+      {
+        "name": "through",
+        "version": "2.3.8",
+        "license": "MIT",
+        "role": "classic Stream wrapper; no parsing",
+        "npm_integrity": "sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==",
+        "tarball_sha256": "16b27a8c0fb13e5727356b328d72dbbc5f20bd909252f14d19da344e9354573e",
+        "source": "https://registry.npmjs.org/through/-/through-2.3.8.tgz"
+      }
+    ],
+    "input_api": "stream = JSONStream.parse([]); stream.on('data'|'error'|'end'); stream.end(local Buffer)",
+    "documentation": [
+      "https://github.com/dominictarr/JSONStream/blob/0593d4b4e6c63c6c0e2e68463538fd83bd1eb964/readme.markdown",
+      "https://github.com/dominictarr/JSONStream/blob/0593d4b4e6c63c6c0e2e68463538fd83bd1eb964/test/test2.js"
+    ],
+    "source": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.5.tgz",
+    "scope": "One emitted JSON root from local bytes passed once to JSONStream.parse([]).end(Buffer); adapter requires exactly one root, no error, and stream end, but cannot detect trailing unfinished syntax after that root",
+    "family": "jsonparse byte-level tokenizer and stack value builder (via JSONStream path filter)",
+    "shared_family_with": "jsonparse",
+    "independent_engine": false,
+    "family_note": "JSONStream 1.3.5 is a distinct npm package and API path, not an independent parser engine. Its index.js (no JSON.parse call) wraps one jsonparse 1.3.1 Parser in a through 2.3.8 stream: write() hands each Buffer to Parser.write, its onValue override filters values by path, and its onToken override queues each completed root when the path is empty. Tokenizing, UTF-8 and \\u escape handling, number conversion and value building are jsonparse's, so it shares the jsonparse parser family (verified separately as its own path).",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 56299470,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/JSONStream",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/jsonstream",
+    "license_evidence": "https://registry.npmjs.org/JSONStream/1.3.5",
+    "verification_note": "JSONStream 1.3.5 is a distinct npm package and API path, not an independent parser engine. Its index.js (no JSON.parse call) wraps one jsonparse 1.3.1 Parser in a through 2.3.8 stream: write() hands each Buffer to Parser.write, its onValue override filters values by path, and its onToken override queues each completed root when the path is empty. Tokenizing, UTF-8 and \\u escape handling, number conversion and value building are jsonparse's, so it shares the jsonparse parser family (verified separately as its own path). The README says an empty or null path emits no 'data' events; the code and the packaged test/test2.js (JSONStream.parse([]) emits the whole root once) show otherwise, and the adapter follows the test. The tarball gitHead is 0593d4b4e6c63c6c0e2e68463538fd83bd1eb964; index.js and test/test2.js are byte-identical to that commit. JSONStream has no end-of-input completeness check and accepts concatenated roots, and its parser object is private, so the adapter can only require exactly one emitted root, no 'error' and an 'end' event: an unfinished token or open container after one complete root is not detected through this API. From source reading (not run): a root that is falsy (0, false, null, \"\") is never emitted, because onToken queues stream.root only when it is truthy; jsonparse's number and big-integer behaviour applies unchanged. Only the two valid controls were run. Both valid controls, nested-object.json and nested-array.json, produce the exact pinned summaries."
+  },
+  {
+    "name": "@humanwhocodes/momoa",
+    "version": "3.3.13",
+    "license": "Apache-2.0",
+    "npm_integrity": "sha512-AbKq3EW41+HY6pNMJgAOrz68iyiTTf0Nr1JRHHfuG5zwniJ9Dw8J3U7oa1I2ptpqYwmEf1sXKOGK6lbdZ9eqmg==",
+    "tarball_sha256": "5405d836253134096dddf2a9068f5f81972da51fb26a8ac4ae9ddded3a076cd1",
+    "input_api": "parse(text, {mode: 'json'}) on local bytes decoded as strict UTF-8 text; summary walks the returned Document AST",
+    "documentation": "https://github.com/humanwhocodes/momoa/blob/625bcbec28623ccebb1da837c71389cf38014800/js/README.md#parsing",
+    "source": "https://registry.npmjs.org/@humanwhocodes/momoa/-/momoa-3.3.13.tgz",
+    "scope": "One complete JSON text from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parse(text, {mode: 'json'}); parse() rejects any token after the first value",
+    "family": "momoa tokenizer and recursive-descent AST parser",
+    "family_note": "momoa 3.3.13 ships one bundled ES module (dist/momoa.js, rollup output of js/src at tag momoa-js-v3.3.13, gitHead 625bcbec28623ccebb1da837c71389cf38014800) containing its own character-level Tokenizer class and a recursive-descent parse() that builds a Document/Object/Member/Array/Element/String/Number/Boolean/Null AST. It does not call JSON.parse or eval; numbers are converted with Number() after the tokenizer validates JSON number syntax, and strings are unescaped by its own getStringValue. Distinct from jsonparse, stream-json, bfj and @streamparser/json.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 18038222,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@humanwhocodes/momoa",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/humanwhocodes_momoa",
+    "license_evidence": "https://registry.npmjs.org/@humanwhocodes%2Fmomoa/3.3.13",
+    "adoption_recheck": {
+      "checked_on": "2026-11-17",
+      "note": "Rechecked before selection; ranking still uses the 30-day snapshot window. Weekly values are the npm last-week point (2026-11-09 to 2026-11-15) for every selected package, same source and window.",
+      "npm_downloads_30d_unchanged": 18038222,
+      "npm_last_week": {
+        "window": "2026-11-09 to 2026-11-15",
+        "source": "https://api.npmjs.org/downloads/point/last-week/<package>",
+        "values": {
+          "jsonparse": 26448453,
+          "stream-json": 15093744,
+          "JSONStream": 13793700,
+          "@humanwhocodes/momoa": 4871887,
+          "bfj": 4518652,
+          "@streamparser/json": 3780230
+        }
+      },
+      "latest_release": "3.3.13",
+      "selected_count_with_this_path": 6,
+      "ceiling": 10
+    },
+    "verification_note": "momoa's README documents parse(text) on a JSON string with mode \"json\" as the default; text input qualifies because the adapter reads it locally and momoa parses its structure. Local bytes are decoded with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), so invalid UTF-8 is rejected before the parser and a BOM is passed through to momoa. parse() throws on any token after the first value. The adapter summarizes the AST nodes directly (Object.members, Array.elements, String/Number/Boolean/Null values) and does not call evaluate() or JSON.parse. The AST keeps every member, so top_level_keys would list duplicate keys more than once; the controls have none. js/README.md at gitHead 625bcbec28623ccebb1da837c71389cf38014800 (tag momoa-js-v3.3.13) is byte-identical to the tarball README. Both valid controls, nested-object.json and nested-array.json, produce the exact pinned summaries, which an independent Python json summary of the same control bytes also reproduces (tests/test_javascript_json_momoa.py). Only the two valid controls were run."
+  },
+  {
+    "name": "bfj",
+    "version": "9.1.4",
+    "license": "MIT",
+    "npm_integrity": "sha512-r4qEuACygiLfYg6KDQRfaxEwScyIUsf8ETrvS1yJQMRLEMgzV4u9wEUFjdetEOIfjDYHjhcR/fsARFcfNz0hhw==",
+    "tarball_sha256": "7a18fc2b104cf19bf94583692f229061f67097c4e6082de00971042c6b7089d3",
+    "input_api": "bfj.parse(Readable.from([local Buffer]), {ndjson:false}) returns a Promise after consuming a complete JSON stream",
+    "documentation": "https://www.npmjs.com/package/bfj?activeTab=readme",
+    "source": "https://registry.npmjs.org/bfj/-/bfj-9.1.4.tgz",
+    "scope": "One complete RFC 8259 JSON text from local bytes passed as a Readable stream; default non-NDJSON mode validates trailing input",
+    "family": "bfj asynchronous JSON walker",
+    "family_note": "src/walk.js implements its own asynchronous token state machine; src/parse.js assembles values from walker events. Default ndjson:false checks trailing non-whitespace before emitting end, and parse rejects dataError. No JSON.parse call handles the input. Distinct from stream-json.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 18016242,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/bfj",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/bfj",
+    "license_evidence": "https://registry.npmjs.org/bfj/9.1.4"
+  },
+  {
+    "name": "@streamparser/json",
+    "version": "0.0.26",
+    "license": "MIT",
+    "npm_integrity": "sha512-46597LNFI+MFdUnzX2QJWwmdTRdq0XVD+vVNJTtGVzIrnCuhG9pFo1OAzbNBqci8UJgk/X5KJZ6LcV+y7PTuDQ==",
+    "tarball_sha256": "168adc385f5452f094e2d9f2ac721bcfcfbe583a0623833640772a6688aeef66",
+    "input_api": "new JSONParser({keepStack:true}).write(local Uint8Array); onValue root; end()",
+    "documentation": "https://www.npmjs.com/package/@streamparser/json?activeTab=readme",
+    "source": "https://registry.npmjs.org/@streamparser/json/-/json-0.0.26.tgz",
+    "scope": "One complete RFC 8259 JSON document from local UTF-8 bytes written as one Buffer; default undefined separator ends on root and tokenizer checks remaining bytes for whitespace",
+    "family": "@streamparser/json TypeScript tokenizer and token parser",
+    "family_note": "src/tokenizer.ts performs UTF-8 lexical analysis and src/tokenparser.ts assembles values. Package does not delegate input to JSON.parse. JSONParser chains both. With default separator undefined, tokenparser ends after first root; tokenizer continues through the remainder of the same Buffer in ENDED state and permits only JSON whitespace. Distinct from stream-json and bfj.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 13886478,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@streamparser/json",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/streamparser_json",
+    "license_evidence": "https://registry.npmjs.org/@streamparser%2Fjson/0.0.26"
+  }
+]

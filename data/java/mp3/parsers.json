@@ -1,0 +1,98 @@
+[
+  {
+    "name": "jcodec",
+    "group": "org.jcodec",
+    "artifact": "jcodec",
+    "version": "0.2.5",
+    "license": "BSD-2-Clause",
+    "license_evidence": "JCodec project LICENSE and release Maven POM FreeBSD license",
+    "input_api": "new MPEGAudioDemuxer(NIOUtils.readableChannel(File)).getAudioTracks().get(0).nextFrame() until null; new Mp3Decoder().getCodecMeta(ByteBuffer) and decodeFrame(ByteBuffer, ByteBuffer) per frame",
+    "documentation": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar",
+    "documentation_archive_entries": [
+      "org/jcodec/containers/mp3/MPEGAudioDemuxer.html",
+      "org/jcodec/codecs/mpa/Mp3Decoder.html"
+    ],
+    "source": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-sources.jar",
+    "scope": "Every MPEG audio frame of an untagged local stream synchronized by MPEGAudioDemuxer and decoded by the Layer III Mp3Decoder: codec, sample rate, channels, frame count, decoded samples per channel",
+    "family": "JCodec native MPEG audio demuxer",
+    "family_note": "Same JCodec package and MPEGAudioDemuxer as the jcodec entry in data/java/mp3_id3v2/parsers.json, so it is the same parser family, not an independent one. That entry read only the first frame of a tagged file; this path also runs jcodec's own pure-Java Layer III decoder (org.jcodec.codecs.mpa) over every frame of untagged streams.",
+    "adapter_label": "jcodec",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "codec": "MP3",
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "decoded_samples": 12672
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "codec": "MP3",
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "decoded_samples": 6912
+    },
+    "project": "projects/mp3/java/jcodec",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 76,
+      "max_release": "0.2.5",
+      "max_release_direct_dependent_count": 44,
+      "default_release_direct_dependent_count": 44,
+      "releases": 16,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.jcodec%3Ajcodec",
+      "captured_at_utc": "2026-11-17T03:47:08.882154+00:00",
+      "snapshot": "data/java/mp3/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "jlayer",
+    "group": "javazoom",
+    "artifact": "jlayer",
+    "version": "1.0.1",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "Pinned Decoder.java and LayerIIIDecoder.java source headers specify GNU Library General Public License version 2 or later; Maven POM says LGPL",
+    "input_api": "new Bitstream(FileInputStream(local File)); readFrame() and Decoder.decodeFrame(Header, Bitstream) for every Layer III frame; SampleBuffer.getBufferLength()",
+    "documentation": "https://javadoc.io/static/javazoom/jlayer/1.0.1/javazoom/jl/decoder/Bitstream.html",
+    "documentation_extra": "https://javadoc.io/static/javazoom/jlayer/1.0.1/javazoom/jl/decoder/Decoder.html",
+    "documentation_archive_entries": [
+      "javazoom/jl/decoder/Bitstream.html",
+      "javazoom/jl/decoder/Decoder.html",
+      "javazoom/jl/decoder/SampleBuffer.html"
+    ],
+    "source": "https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1-sources.jar",
+    "scope": "Every MPEG Layer III frame from an untagged local stream is parsed by Bitstream/Header and decoded by LayerIIIDecoder; reports sample rate, channels, frame count and decoded samples per channel",
+    "family": "Original JavaZoom JLayer bitstream and Layer III decoder",
+    "family_note": "Independent of JCodec. The soundlibs, libGDX and dev.mccue JLayer releases are forks or repackagings of this lineage, not additional independent decoder families.",
+    "adapter_label": "jlayer",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "codec": "MP3",
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "decoded_samples": 12672
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "codec": "MP3",
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "decoded_samples": 6912
+    },
+    "project": "projects/mp3/java/jlayer",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 33,
+      "max_release": "1.0.1",
+      "max_release_direct_dependent_count": 33,
+      "default_release_direct_dependent_count": 33,
+      "releases": 1,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/javazoom%3Ajlayer/versions/1.0.1:dependents",
+      "captured_at_utc": "2026-11-17T03:47:08.029009+00:00",
+      "snapshot": "data/java/mp3/registry-snapshot.json"
+    }
+  }
+]

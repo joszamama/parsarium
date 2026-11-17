@@ -1,0 +1,637 @@
+{
+  "checked_at_utc": "2026-11-14T23:20:47.239758+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "source_lock": "data/c/png/source-lock.json",
+  "extra_source_lock": "data/cpp/png/extra-source-lock.json",
+  "local_libraries": {
+    "sfml": {
+      "pkg_config_version": "3.0.2",
+      "library": "/opt/homebrew/Cellar/sfml/3.0.2/lib/libsfml-graphics.3.0.2.dylib",
+      "library_sha256": "cd85f8c400a933362a4fb134aad7a0fbe352b2762e9253a3227c17b23172480d"
+    },
+    "opencv": {
+      "bottle_sha256": "fbe6cb5e9894afacdf203d4b710d0441405c93742b01789a2e7e19b222512d3a",
+      "header_sha256": "36b21dddf7866f2a394d1d4bbedc9547bbcde14461151b320b95ae3fbe03e2c5",
+      "library_sha256": {
+        "libopencv_imgcodecs.5.1.0.dylib": "db13d27effcd50c2ffd157882e00dbbb7956e5b8160e8f29d33fb432ac0d87d8",
+        "libopencv_imgproc.5.1.0.dylib": "fb3cc5590dd66c04c0e893396de1d6a725e1314ba4d307eb2a7d3ffc15433b0f",
+        "libopencv_core.5.1.0.dylib": "b9d94545520b1e54697524c74e0da9add1aad75618ccad7eb8fe9663141c2501"
+      },
+      "linked_libpng_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73"
+    },
+    "openimageio": {
+      "bottle_sha256": "39a93aff673496178878499900c4b864e03764b56fc1c19b55b0a7250fe97bf6",
+      "header_sha256": "65e48002622540c5093bdd5bd2af3a04d1bc394d2664d2952028974f786bd223",
+      "library_sha256": {
+        "libOpenImageIO.3.2.2.dylib": "b9a1c7a9e9e2c3b22c5ea013b1504dcd9ffd83c910017de2d4299b9dadca8e02",
+        "libOpenImageIO_Util.3.2.2.dylib": "84bb77fa40c5959e6f6ff115af21ef15eaeb5c1b947fda0f811487a126daa5dc"
+      },
+      "linked_libpng_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73",
+      "fmt_header_sha256": "5e740d482da59d18744ee2065fcfef721a332f88d09872139733fe8822ba3c2a",
+      "fmt_library_sha256": "08e7dfa0b2fd39fca232d44a7f1b4c9969ef1c702cc8635fd4d1a8f0cb2ca941"
+    },
+    "wxwidgets": {
+      "bottle_sha256": "0f554fde69b6abacfc3c6ed0f39611c9419295d8f6e19933300fe7028ee9359b",
+      "header_sha256": {
+        "include/wx-3.3/wx/image.h": "f992d9c3fb64f1f2b9ad9af009f056d6bac8b0be8e1fa42349c95c8f5eba640d",
+        "include/wx-3.3/wx/imagpng.h": "13ab8798b0e19b37e9cef9aeb6afc7a3ada7765d4cbf6b9f64d634007676730a"
+      },
+      "library_sha256": {
+        "libwx_osx_cocoau_core-3.3.4.0.0.dylib": "2e03524f551ff307dc8047c8d511f5018d93862f97a34811cd5432b5020e72db",
+        "libwx_baseu-3.3.4.0.0.dylib": "7cc3639987fd1d3940e23b5207063040e8feeb86007c9eebb4f5db8134760aa5"
+      },
+      "linked_libpng_sha256": "90d0355e32b2a6bda0d9556b7f93b7c0cadc99815944ba83145c901b4787ae73"
+    }
+  },
+  "prerequisite_verifier": "scripts/verify_c_png.py",
+  "control": "controls/png/red-green.png",
+  "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
+  "third_party": [
+    {
+      "package": "libpng",
+      "version": "1.6.59",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/libpng -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/libpng-build /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/libpng.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/target/libpng-build/libpng16.a -lz -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/libpng",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/libpng /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "stb",
+      "version": "cci.20261021",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/stb /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/stb.cpp -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/stb",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/stb /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "lodepng",
+      "version": "cci.20260102",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/lodepng /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/lodepng.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/lodepng/lodepng.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/lodepng",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/lodepng /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "libspng",
+      "version": "0.7.4",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/libspng /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/libspng.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/spng.o -lz -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/libspng",
+      "prebuild_command": "cc -std=c11 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/libspng -c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/libspng/spng.c -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/spng.o",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/libspng /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "imagemagick",
+      "version": "7.1.2-35",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/imagemagick.cpp -I/opt/homebrew/Cellar/imagemagick/7.1.2-35/include/ImageMagick-7 -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_CHANNEL_MASK_DEPTH=32 -L/opt/homebrew/Cellar/imagemagick/7.1.2-35/lib -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/imagemagick",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/imagemagick /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "gdk-pixbuf",
+      "version": "2.44.8",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/gdk-pixbuf.cpp -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -L/opt/homebrew/lib -lgdk_pixbuf-2.0 -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/gdk-pixbuf",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/gdk-pixbuf /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "vips",
+      "version": "8.18.7",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/vips.cpp -I/opt/homebrew/Cellar/vips/8.18.7_1/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/fftw/3.3.11/include -I/opt/homebrew/Cellar/cfitsio/4.7.0/include -I/opt/homebrew/Cellar/libimagequant/4.4.1/include -I/opt/homebrew/Cellar/cgif/0.5.4/include -I/opt/homebrew/Cellar/libexif/0.6.26/include -I/opt/homebrew/Cellar/libultrahdr/2.0.2/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/Cellar/librsvg/2.63.4/include/librsvg-2.0 -I/opt/homebrew/include/gdk-pixbuf-2.0 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/webp/include/webp -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/cairo/1.18.6/include -I/opt/homebrew/Cellar/pango/1.58.2/include/pango-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libthai/0.1.30/include -I/opt/homebrew/Cellar/libdatrie/0.2.14/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/opt/graphite2/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -I/opt/homebrew/Cellar/libmatio/1.6.0/include -I/opt/homebrew/Cellar/hdf5/2.2.0/include -I/opt/homebrew/Cellar/openexr/3.5.3_1/include -I/opt/homebrew/Cellar/openexr/3.5.3_1/include/OpenEXR -pthread -I/opt/homebrew/Cellar/imath/3.2.3/include -I/opt/homebrew/Cellar/imath/3.2.3/include/Imath -I/opt/homebrew/Cellar/libdeflate/1.26/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/libraw/0.22.3/include/libraw -I/opt/homebrew/Cellar/libraw/0.22.3/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/Cellar/openjpeg/2.5.4_1/include/openjpeg-2.5 -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -L/opt/homebrew/Cellar/vips/8.18.7_1/lib -lvips -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/vips",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/vips /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "pngle",
+      "version": "1.1.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/pngle /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/pngle.cpp /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/pngle/pngle.c /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/pngle/miniz.c -lm -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/pngle",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/pngle /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3",
+      "version": "3.4.20",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/sdl3.cpp -I/opt/homebrew/include -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sdl3",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sdl3 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl3_image",
+      "version": "3.4.8",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/sdl3_image.cpp -I/opt/homebrew/Cellar/sdl3_image/3.4.8_1/include -I/opt/homebrew/include -I/opt/homebrew/Cellar/libavif/1.4.2/include -DAVIF_DLL -I/opt/homebrew/Cellar/dav1d/1.5.4/include -I/opt/homebrew/Cellar/aom/3.15.3/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include/libvmaf -I/opt/homebrew/opt/jpeg-xl/include -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -L/opt/homebrew/Cellar/sdl3_image/3.4.8_1/lib -lSDL3_image -L/opt/homebrew/lib -Wl,-rpath,/opt/homebrew/lib -lSDL3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sdl3_image",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sdl3_image /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl2_image",
+      "version": "2.8.12",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/sdl2_image.cpp -I/opt/homebrew/include/SDL2 -I/opt/homebrew/include -D_THREAD_SAFE -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/opt/jpeg-xl/include -I/opt/homebrew/Cellar/highway/1.4.0/include -DHWY_SHARED_DEFINE -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libtiff/include -I/opt/homebrew/opt/zstd/include -I/opt/homebrew/Cellar/xz/5.8.4/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/libavif/1.4.2/include -DAVIF_DLL -I/opt/homebrew/Cellar/dav1d/1.5.4/include -I/opt/homebrew/Cellar/aom/3.15.3/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include -I/opt/homebrew/Cellar/libvmaf/3.2.1/include/libvmaf -I/opt/homebrew/opt/webp/include -I/opt/homebrew/opt/webp/include/webp -L/opt/homebrew/Cellar/sdl2_image/2.8.12_2/lib -lSDL2_image -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sdl2_image",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sdl2_image /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "freeimage",
+      "version": "3.18.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/opt/homebrew/Cellar/freeimage/3.18.0/include /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/freeimage.cpp -L/opt/homebrew/Cellar/freeimage/3.18.0/lib -lfreeimage -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/freeimage",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/freeimage /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "cairo",
+      "version": "1.18.6",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/cairo.cpp -I/opt/homebrew/Cellar/cairo/1.18.6/include/cairo -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libxext/1.3.7/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxrender/0.9.13/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -I/opt/homebrew/Cellar/pixman/0.46.4/include/pixman-1 -L/opt/homebrew/Cellar/cairo/1.18.6/lib -lcairo -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/cairo",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/cairo /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "gd",
+      "version": "2.3.3",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/gd.cpp -I/opt/homebrew/Cellar/gd/2.3.3_6/include -L/opt/homebrew/Cellar/gd/2.3.3_6/lib -lgd -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/gd",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/gd /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "leptonica",
+      "version": "1.87.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/leptonica.cpp -I/opt/homebrew/Cellar/leptonica/1.87.0/include/leptonica -L/opt/homebrew/Cellar/leptonica/1.87.0/lib -lleptonica -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/leptonica",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/leptonica /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first_rgb": [
+          255,
+          0,
+          0
+        ],
+        "second_rgb": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "graphicsmagick",
+      "version": "1.3.49",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/graphicsmagick.cpp -I/opt/homebrew/opt/graphicsmagick/include/GraphicsMagick -lGraphicsMagickWand -L/opt/homebrew/opt/graphicsmagick/lib -lGraphicsMagick -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/graphicsmagick",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/graphicsmagick /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "raylib",
+      "version": "6.2",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/raylib.cpp -I/opt/homebrew/Cellar/raylib/6.2/include -L/opt/homebrew/Cellar/raylib/6.2/lib -lraylib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/raylib",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/raylib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "devil",
+      "version": "1.8.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/devil.cpp -I/opt/homebrew/Cellar/devil/1.8.0_6/include -L/opt/homebrew/Cellar/devil/1.8.0_6/lib -lIL -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/devil",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/devil /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "imlib2",
+      "version": "1.12.7",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/imlib2.cpp -I/opt/homebrew/Cellar/imlib2/1.12.7/include -I/opt/homebrew/Cellar/libx11/1.8.14/include -I/opt/homebrew/Cellar/xorgproto/2026.1/include -I/opt/homebrew/Cellar/libxcb/1.17.0/include -I/opt/homebrew/Cellar/libxau/1.0.12/include -I/opt/homebrew/Cellar/libxdmcp/1.1.5/include -L/opt/homebrew/Cellar/imlib2/1.12.7/lib -lImlib2 -L/opt/homebrew/Cellar/libx11/1.8.14/lib -lX11 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/imlib2",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/imlib2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "wuffs",
+      "version": "0.3.6",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 -I/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/png/cache/source/wuffs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/wuffs.cpp -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/wuffs",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/wuffs /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sfml",
+      "version": "3.0.2",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/sfml.cpp -I/opt/homebrew/Cellar/sfml/3.0.2/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -L/opt/homebrew/Cellar/sfml/3.0.2/lib -lsfml-graphics -lsfml-window -lsfml-system -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sfml",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/sfml /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "opencv",
+      "version": "5.1.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/opencv.cpp -I/opt/homebrew/opt/opencv/include/opencv5 -L/opt/homebrew/opt/opencv/lib -Wl,-rpath,/opt/homebrew/opt/opencv/lib -lopencv_imgcodecs -lopencv_core -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/opencv",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/opencv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "openimageio",
+      "version": "3.2.2.0",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/openimageio.cpp -I/opt/homebrew/Cellar/openimageio/3.2.2.0_1/include -I/opt/homebrew/Cellar/fmt/12.2.1/include -L/opt/homebrew/Cellar/openimageio/3.2.2.0_1/lib -lOpenImageIO -lOpenImageIO_Util -L/opt/homebrew/Cellar/fmt/12.2.1/lib -lfmt -Wl,-rpath,/opt/homebrew/opt/openimageio/lib -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/openimageio",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/openimageio /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          255,
+          0,
+          255
+        ]
+      },
+      "pass": true
+    },
+    {
+      "package": "wxwidgets",
+      "version": "3.3.4",
+      "control": "controls/png/red-green.png",
+      "build_command": "c++ -std=c++17 -O2 /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/wxwidgets.cpp -I/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.3 -I/opt/homebrew/include/wx-3.3 -D_FILE_OFFSET_BITS=64 -DwxDEBUG_LEVEL=0 -DWXUSINGDLL -D__WXMAC__ -D__WXOSX__ -D__WXOSX_COCOA__ -L/opt/homebrew/lib -framework IOKit -framework Carbon -framework Cocoa -framework QuartzCore -framework AudioToolbox -framework System -framework OpenGL -lwx_baseu-3.3 -lwx_osx_cocoau_core-3.3 -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/wxwidgets",
+      "prebuild_command": null,
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/cpp/png/target/wxwidgets /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/png/red-green.png",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          0,
+          0
+        ],
+        "second": [
+          0,
+          255,
+          0
+        ]
+      },
+      "pass": true
+    }
+  ],
+  "runtime": []
+}

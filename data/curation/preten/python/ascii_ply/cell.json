@@ -1,0 +1,33 @@
+{
+  "ecosystem": "python",
+  "format": "ascii_ply",
+  "status": "verified_goal_met_partial_search",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 21,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "project name contains 'ply'",
+    "project name contains 'mesh'",
+    "project name contains 'pointcloud'",
+    "project name contains 'point-cloud'",
+    "project name contains 'trimesh'",
+    "project name contains 'open3d'",
+    "project name contains 'vtk'",
+    "project name contains 'assimp'",
+    "project name contains 'pyvista'",
+    "project name contains 'geometry'",
+    "project name contains 'pcd'",
+    "project name starts with 'ply'"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 668,
+  "unique_search_hits": 666,
+  "unresolved_documentation_leads": 7,
+  "uncertainty": "Twenty-one distinct Python distribution paths returned the correct vertices and face count from one valid ASCII PLY 1.0 triangle. This exceeds the 20 working goal but remains below the original 30 ceiling. The paths are not independent decoder engines: PyVista and vedo use VTK, pyminiply and pyvista-miniply use miniply, and assimp-py and pyassimp use Assimp; families are labeled. The single control proves the three-vertex, one-face ASCII subset only, not colors, arbitrary properties, other polygon sizes, or binary PLY. Twelve bounded, alphabetically ordered PyPI name windows saved 668 hits and 666 distinct names; broad substring windows are noisy and can omit packages beyond the first 100. Project documentation supplied additional candidates. Seven plausible leads remain unresolved, including packages requiring native dependencies or specialized PLY controls. pyassimp used system Assimp 6.0.6, and openmesh required CMAKE_POLICY_VERSION_MINIMUM=3.5 for its source build; fresh environments may need these stated conditions. All verified packages received one PyPI Stats last-month metric, but download counts reflect distribution adoption and not independent parser use. Discovery is partial and other qualified packages may remain outside the saved windows.",
+  "third_party_evidence": "data/python/ascii_ply/parsers.json",
+  "third_party_control_results": "data/python/ascii_ply/verification.json",
+  "runtime_evidence": "data/python/ascii_ply/standard.json",
+  "registry_snapshot": "data/python/ascii_ply/registry-snapshot.json",
+  "unresolved_leads": "data/python/ascii_ply/leads.json"
+}

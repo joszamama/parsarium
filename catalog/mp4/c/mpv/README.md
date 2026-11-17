@@ -20,8 +20,13 @@
 }
 ```
 
-C and C++ call sites share libmpv, which links the FFmpeg package already listed directly.
+The C and C++ call sites use the same libmpv 0.42.0 wrapper and FFmpeg 9.0.2 MOV/MP4 demuxer as the direct FFmpeg rows. Verified AFL feedback is scoped to FFmpeg mov.c and its MP4 helpers plus mpv demux_lavf.c. A parsed MP4 can have only video, only audio, or no media sample; absent track codec fields remain empty.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/c/mpv/README.md)
+
+```sh
+python3 parsarium.py build mp4 c mpv
+python3 parsarium.py run mp4 c mpv controls/mp4/red-av.mp4
+```

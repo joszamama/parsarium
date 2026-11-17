@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "project": "json/javascript/stdlib_json_parse",
+  "verified_at_utc": "2026-11-17T03:52:15.279409+00:00",
+  "pass": true,
+  "coverage_kind": "native_function_entries",
+  "feedback_kind": "v8_json_parser_function_entries_to_afl_bitmap",
+  "source_lines_covered": null,
+  "afl_package": "4.21c-5",
+  "afl_map_size": 65536,
+  "feedback_tuples": 41,
+  "afl_requires_ptrace": true,
+  "fixed_valid_control_timing": {
+    "cases": 6,
+    "wall_seconds": 5.553,
+    "seconds_per_case": 0.925,
+    "approx_cases_per_second": 1.08,
+    "measurement": "Six fixed valid afl-showmap replays in one fresh Docker container; not a fuzz campaign or a sustained throughput measurement."
+  },
+  "native_feedback": {
+    "scope": "v8::internal::JsonParser<...> text symbols in pinned /usr/local/bin/node",
+    "scope_symbols": 142,
+    "baseline_functions": 0,
+    "control_functions": 21,
+    "repeat_identical": true,
+    "variant_functions": 23,
+    "variant_differs": true,
+    "control_only": [
+      "v8::internal::Handle<v8::internal::String> v8::internal::JsonParser<unsigned char>::DecodeString<v8::internal::SeqOneByteString>(v8::internal::JsonString const&, v8::internal::Handle<v8::internal::SeqOneByteString>, v8::internal::Handle<v8::internal::String>)",
+      "v8::internal::JsonParser<unsigned char>::ParseJsonNumber()",
+      "void v8::internal::JsonParser<unsigned char>::DecodeString<unsigned char>(unsigned char*, unsigned int, unsigned int)"
+    ],
+    "variant_only": [
+      "bool v8::internal::JsonParser<unsigned char>::ExpectNext<(v8::internal::JsonToken)10>(std::optional<v8::internal::MessageTemplate>)",
+      "bool v8::internal::JsonParser<unsigned char>::ExpectNext<(v8::internal::JsonToken)1>(std::optional<v8::internal::MessageTemplate>)",
+      "void v8::internal::JsonParser<unsigned char>::DecodeString<unsigned short>(unsigned short*, unsigned int, unsigned int)",
+      "void v8::internal::JsonParser<unsigned char>::ScanLiteral<5ul>(char const (&) [5ul])",
+      "void v8::internal::JsonParser<unsigned char>::ScanLiteral<6ul>(char const (&) [6ul])"
+    ],
+    "bitmap_tuples": {
+      "baseline": 13,
+      "control1": 41,
+      "control2": 41,
+      "variant": 43
+    },
+    "bitmap_sha256": {
+      "baseline": "fbd826770c4c55a508085a13195ed29e9d691cd367c4f0352cd4404c5c0c4b7b",
+      "control1": "65ef30eaefea59b527d3a0238adfb5c9d9c49a9bca0c60d2f05c3c9405524c1d",
+      "control2": "65ef30eaefea59b527d3a0238adfb5c9d9c49a9bca0c60d2f05c3c9405524c1d",
+      "variant": "1a7d47c03933832960b4bc86b3e1b9011200dd1354f81fa4fb9de9a4055b4691"
+    },
+    "limit": "Function entries hashed into AFL bitmap with bridge instrumentation; no source lines or parser basic-block/edge coverage. Each AFL case launches gdb; SYS_PTRACE and seccomp=unconfined required."
+  },
+  "source_sha256": "71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "base_project_receipt_sha256": "3f8265a40150bc3976bfd1361c2ef9bca9d2e123932382470462ee4d3e6f612d",
+  "probe_image_id": "sha256:fbe9ef1634573147c9f392cdb6970397916647b3e9f5862671ac8ba87afe19a7",
+  "probe_file_sha256": {
+    "probe.py": "2c5e0a63b13c43b24f84b0ccb59eb2373effe615d77f492edf534c213fc95102",
+    "probe.sh": "b71fb04dc69ff64d15b97f375b2f754b7519e6bf73c6f22fad3ca31d9483fc72"
+  },
+  "gdb_version": "GNU gdb (Debian 16.3-1) 16.3",
+  "image_id": "sha256:627d8d9cc7a7d2a4e5627b377d0b8fcc3b80e7179a50b7482801b9c6f1fc286c",
+  "overlay_file_sha256": {
+    "Dockerfile": "1fba4d6dc9e899794da04bc770c64a313b6b267487da9d0111e67f270cfc1ef2",
+    "afl_trace": "28abe46fa3ffe3e7e7da895b5502f0a9f82a09093364c161b12de9a73fb3de1d",
+    "build.py": "bfb40417a297be5c39f4f9a051e7a4b06e9d1c635d4e7bd61e4cd98a50bc1b15",
+    "README.md": "412c09634f33b12f3b3430626a1ca10ba124e3b6c32158c220d3325f8f13b6d9"
+  },
+  "bridge_file_sha256": {
+    "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950"
+  }
+}

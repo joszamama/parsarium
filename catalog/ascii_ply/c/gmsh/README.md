@@ -22,6 +22,11 @@
 
 Gmsh uses its own GModelIO_PLY reader. Its C API calls the C++ implementation in the same released library; this is one package path, independent of the RPly and micro_ply families.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/gmsh/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c gmsh
+python3 parsarium.py run ascii_ply c gmsh controls/ascii_ply/triangle.ply
+```

@@ -1,10 +1,12 @@
-# PHP × ZIP: verified parser ranking
+# PHP × ZIP: selected parsers
 
-20 verified third-party package paths; working goal 20, ceiling 30. The metric is Packagist package-level lifetime downloads, captured between 2026-11-12T09:14:24.797211+00:00 and 2026-11-12T09:34:57.143943+00:00. It counts all releases and all package uses, not just the ZIP reading API. It is compared only within PHP. 0 path(s) lack a metric and remain unranked; equal counts share a rank.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits and unresolved leads are separate from this ranking. PHP bundled APIs are listed in `standard.json` and do not enter the third-party ranking. Shared underlying parser families are recorded in `parsers.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Lifetime downloads | Scope | Underlying family |
+Packagist lifetime package downloads.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [alchemy/zippy](https://github.com/alchemy-fr/Zippy/blob/3546ecd8ad5a1a1efb13315a5ea8ff1c7a1d5ef8/src/Zippy.php) | 2.0.0 | 24,569,178 | entry name and decompressed entry bytes | Alchemy Zippy wrapper over PHP ZipArchive |
 | 2 | [pclzip/pclzip](https://github.com/ivanlanin/pclzip/blob/19dd1de9d3f5fc4d7d70175b4c344dee329f45fd/pclzip.lib.php) | 2.8.2 | 14,662,965 | entry name and decompressed entry bytes | PclZip PHP ZIP reader |
@@ -16,13 +18,5 @@ Search hits and unresolved leads are separate from this ranking. PHP bundled API
 | 8 | [madnest/madzipper](https://github.com/madnest/madzipper/blob/527c35105820a0b4c8cfdadd3f475b26d62d9ac2/README.md) | 1.6.0 | 2,822,664 | entry name and decompressed entry bytes | Madnest Madzipper over PHP ZipArchive |
 | 9 | [wapmorgan/unified-archive](https://github.com/wapmorgan/UnifiedArchive/blob/2097cdf0995f4a576773d66803af4245ed55636e/docs/API.md) | 1.3.1 | 1,991,032 | entry name and decompressed entry bytes | UnifiedArchive ZIP driver over PHP ZipArchive |
 | 10 | [splitbrain/php-archive](https://github.com/splitbrain/php-archive/blob/0d8801eaac5342b26ff1776089d4a124117b652c/README.md) | 1.5.1 | 1,785,396 | entry name and decompressed entry bytes | splitbrain PHP ZIP reader |
-| 11 | [vipsoft/unzip](https://github.com/vipsoft/Unzip/blob/090712dc65d0d77842f077d0a768fc7c852d4624/README.md) | 1.3 | 1,473,735 | entry name and decompressed entry bytes | VIPSoft wrapper over PHP ZipArchive |
-| 12 | [zetacomponents/archive](https://zetacomponents.org/documentation/trunk/Archive/tutorial.html) | 1.5.1 | 509,571 | entry name and decompressed entry bytes | Zeta Components custom PHP ZIP reader |
-| 13 | [comodojo/zip](https://github.com/comodojo/zip/blob/22e11bda2ab8e1057cf4d1a50a98ab22f9e38e34/src/Comodojo/Zip/Zip.php) | 3.1.1 | 479,706 | entry name and decompressed entry bytes | Comodojo wrapper over PHP ZipArchive |
-| 14 | [joomla/archive](https://github.com/joomla-framework/archive/blob/7a8d0eda637bd37bc3de744aa3e4ce516d4356b0/README.md) | 4.0.0 | 450,574 | entry name and decompressed entry bytes | Joomla ZIP adapter over PHP ZipArchive |
-| 15 | [macellan/laravel-zip](https://github.com/macellan/laravel-zip/blob/0c40d22de710acb5e4da8620663fb336741cdc5d/README.md) | 1.0.5 | 270,070 | entry name and decompressed entry bytes | Macellan fork of ZanySoft over PHP ZipArchive |
-| 16 | [chamilo/pclzip](https://github.com/chamilo/pclzip/blob/af10d07a39922b0789bf761524a22ecefc01d405/readme.txt) | v2.8.5 | 180,805 | entry name and decompressed entry bytes | Chamilo PclZip fork |
-| 17 | [mmoreram/extractor](https://github.com/mmoreram/extractor/blob/0ca76992fab2573e2fe512d0ee2a4d45e936fee4/README.md) | 1.2.1 | 137,579 | entry name and decompressed entry bytes | Mmoreram extractor over PHP ZipArchive |
-| 18 | [kiwilan/php-archive](https://github.com/kiwilan/php-archive/blob/2e202603396a620720aad676c4037eebc0443090/README.md) | 2.3.02 | 45,598 | entry name and decompressed entry bytes | Kiwilan archive wrapper over PHP ZipArchive |
-| 19 | [seblucas/tbszip](https://github.com/seblucas/tbszip/blob/2c50bf309bb4431a24e206f164fdb4a2e6b10b7f/README.md) | 2.16.1 | 22,409 | entry name and decompressed entry bytes | TbsZip custom PHP ZIP reader |
-| 20 | [smuuf/zip-reader](https://github.com/smuuf/php-zip-reader/blob/363eaa22a52be72a2dc3fc6c3bef78835da4f259/README.md) | 1.0 | 49 | entry name and decompressed entry bytes | Smuuf ZIP reader over PHP ZipArchive |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

@@ -25,6 +25,11 @@
 
 PCL has its own PLY reader implementation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/pcl/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp pcl
+python3 parsarium.py run ascii_ply cpp pcl controls/ascii_ply/triangle.ply
+```

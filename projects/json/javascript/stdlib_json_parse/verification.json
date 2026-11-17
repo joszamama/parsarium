@@ -1,0 +1,92 @@
+{
+  "kind": "standard",
+  "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
+  "runtime": "Node.js 26.10.0",
+  "verified_at_utc": "2026-11-17T03:51:11.373300+00:00",
+  "manifest": "projects/json/javascript/stdlib_json_parse/manifest.json",
+  "image_id": "sha256:5566820d79cb451e7c772fa6ea05b592947a29f910b2c138a1be8eb0ebf5e868",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "v8 14.6.202.34-node.34"
+  ],
+  "source_sha256": "71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "project_file_sha256": {
+    "Dockerfile": "2b9dd259468c6f058ca4467d004e6bfb1bd4bb03cff1b1f677c66d914e19b015",
+    "adapter.mjs": "e8e24e794840f27e21c13e9f7266c4803cf5976f9da2674fc6552d671d2c44e2",
+    "manifest.json": "3f809c4326369449e26c64650bd408b47f515106cf45a760ffae97a2630d72a1",
+    "native-feedback-probe/Dockerfile": "d0f642dd4301896f61e9ca8d50584259e7bc5de16dd0387b6318f502e3baf394",
+    "native-feedback-probe/probe.py": "2c5e0a63b13c43b24f84b0ccb59eb2373effe615d77f492edf534c213fc95102",
+    "native-feedback-probe/probe.sh": "b71fb04dc69ff64d15b97f375b2f754b7519e6bf73c6f22fad3ca31d9483fc72",
+    "native-feedback-probe/run-smoke.sh": "6b3f1adfbf7013eb451a5e5ff865eecf37b799cdb1f25b2c11c449dcbabc1bd1",
+    "run-control.js": "2b44fa1110215e33c9093a540b3c3cce15c469ade1f61995762066b07947e612",
+    "runtime-lock.json": "b68c0efafb58fbfd3ad5e0a9d9322f57ba5bc44cb3dbd9650030d818c40b13a4",
+    "second-control.json": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "parser_source_files": null,
+  "parser_source_lines_covered": null,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": null,
+  "coverage_output": "projects/json/javascript/stdlib_json_parse/target/coverage/coverage.json",
+  "pass": true,
+  "coverage_kind": "native_function_entries",
+  "native_feedback": {
+    "feedback_kind": "native_function_entries_not_source_coverage",
+    "tool": "GNU gdb (Debian 16.3-1) 16.3",
+    "scope": "v8::internal::JsonParser<...> text symbols in /usr/local/bin/node",
+    "scope_symbols": 142,
+    "baseline_functions": 0,
+    "control_functions": 21,
+    "repeat_identical": true,
+    "variant_functions": 23,
+    "variant_differs": true,
+    "control_only": [
+      "v8::internal::Handle<v8::internal::String> v8::internal::JsonParser<unsigned char>::DecodeString<v8::internal::SeqOneByteString>(v8::internal::JsonString const&, v8::internal::Handle<v8::internal::SeqOneByteString>, v8::internal::Handle<v8::internal::String>)",
+      "v8::internal::JsonParser<unsigned char>::ParseJsonNumber()",
+      "void v8::internal::JsonParser<unsigned char>::DecodeString<unsigned char>(unsigned char*, unsigned int, unsigned int)"
+    ],
+    "variant_only": [
+      "bool v8::internal::JsonParser<unsigned char>::ExpectNext<(v8::internal::JsonToken)10>(std::optional<v8::internal::MessageTemplate>)",
+      "bool v8::internal::JsonParser<unsigned char>::ExpectNext<(v8::internal::JsonToken)1>(std::optional<v8::internal::MessageTemplate>)",
+      "void v8::internal::JsonParser<unsigned char>::DecodeString<unsigned short>(unsigned short*, unsigned int, unsigned int)",
+      "void v8::internal::JsonParser<unsigned char>::ScanLiteral<5ul>(char const (&) [5ul])",
+      "void v8::internal::JsonParser<unsigned char>::ScanLiteral<6ul>(char const (&) [6ul])"
+    ]
+  },
+  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb; that probe is not AFL++ feedback. A separate AFL++ overlay hashes these function names into its bitmap and requires SYS_PTRACE and seccomp=unconfined. Neither route measures parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package."
+}

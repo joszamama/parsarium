@@ -1,0 +1,32 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang cmake curl libclang-rt-21-dev llvm make python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://github.com/warmcat/libwebsockets/archive/refs/tags/v5.0.0.tar.gz \
+    --output /work/libwebsockets-5.0.0.tar.gz \
+    && echo 'f853c6582101cfcee3a5a9e28ae92ab19d9735c5f31f0bb2e9794b5106123962  /work/libwebsockets-5.0.0.tar.gz' | sha256sum --check \
+    && mkdir /work/source \
+    && tar -xzf /work/libwebsockets-5.0.0.tar.gz -C /work/source --strip-components=1 \
+    && echo 'bd13c37f30e4aa0260241a2a3214aef8139f855d206b949fde65ec71c33a4aba  /work/source/lib/roles/http/parsers.c' | sha256sum --check \
+    && echo '0d565b8cc9c457267bfcf8c6f7d327f270cda589b33e2bfa23d04ed0ea7d1ac0  /work/source/lib/roles/http/server/server.c' | sha256sum --check \
+    && echo 'ca7ed1d7fc89119caeacc4598491a5effe30e0af51d2f27a853971824ed9f907  /work/source/lib/roles/h1/ops-h1.c' | sha256sum --check \
+    && echo '886133171b592f8b2f213bec612ef65bd26d0e489a0507492583f855b24efbda  /work/source/lib/core-net/adopt.c' | sha256sum --check
+COPY harness.h harness.c replay.c fuzz.c build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    libstdc++6 llvm python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/source /work/source
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

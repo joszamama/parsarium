@@ -1,0 +1,67 @@
+{
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c_catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "c_catalog"
+  },
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p_amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "order"
+  },
+  "package_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "trace_subject_prefixes": [
+    "/opt/venv/lib/python3.14/site-packages/untangle/",
+    "/opt/venv/lib/python3.14/site-packages/defusedxml/",
+    "/usr/lib/python3.14/xml/sax/"
+  ],
+  "trace_handler_suffix": "/untangle/__init__.py",
+  "native_subject_prefix": "/work/expat/lib/",
+  "native_parser_file_suffix": "xmlparse.c",
+  "native_module": "/opt/expat/lib/libexpat.so.1"
+}

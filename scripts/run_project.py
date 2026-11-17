@@ -36,7 +36,7 @@ def main() -> None:
     assert manifest["schema_version"] == 1
     assert (manifest["format"], manifest["ecosystem"]) == (args.format, args.ecosystem)
     coverage_kind = manifest.get("coverage_kind", "source_lines")
-    if coverage_kind not in {"source_lines", "native_binary_edges"}:
+    if coverage_kind not in {"source_lines", "native_binary_edges", "native_function_entries"}:
         raise ValueError(f"unsupported coverage kind: {coverage_kind}")
     if manifest.get("kind") == "standard":
         inventory = json.loads((ROOT / manifest["standard_inventory"]).read_text())
@@ -130,7 +130,8 @@ def main() -> None:
                   "-v", f"{control}:/input/control:ro",
                   "-v", f"{output_dir}:/coverage", image]
     print(command(docker_run), flush=True)
-    engine = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
+    native_entries = coverage_kind == "native_function_entries"
+    engine = None if native_entries else subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
                              "--network", "none", "--read-only", "--cap-drop", "ALL",
                              "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
                              "--tmpfs", tmpfs,
@@ -138,16 +139,32 @@ def main() -> None:
                              "--entrypoint", manifest.get("fuzz_smoke_entrypoint", "/work/fuzzer"),
                              image, *manifest.get("fuzz_smoke_args", ["-help=1"])],
                             cwd=ROOT, text=True, errors="replace", capture_output=True)
-    if engine.returncode or manifest.get("fuzz_smoke_expect", "Usage:") not in engine.stdout + engine.stderr:
+    if engine and (engine.returncode or manifest.get("fuzz_smoke_expect", "Usage:") not in engine.stdout + engine.stderr):
         raise RuntimeError(f"fuzz engine smoke test failed:\n{engine.stderr[-2000:]}")
     summary = json.loads((output_dir / "summary.json").read_text())
     assert summary["control_pass"] and summary["output"] == manifest["expected_output"]
-    assert summary["parser_source_lines_covered"] > 0
+    function_feedback = None
+    if native_entries:
+        # Native runtime parser (no parser source lines): require scoped, repeatable function-entry feedback.
+        assert summary["parser_source_lines_covered"] is None and summary["parser_source_files"] is None
+        smoke = subprocess.run([str(project / manifest["native_feedback_smoke"])],
+                               cwd=ROOT, text=True, errors="replace", capture_output=True)
+        if smoke.returncode:
+            raise RuntimeError(f"native function feedback failed:\n{smoke.stderr[-4000:]}")
+        function_feedback = json.loads(smoke.stdout)
+        if (function_feedback["feedback_kind"] != "native_function_entries_not_source_coverage"
+                or function_feedback["baseline_functions"] != 0
+                or function_feedback["repeat_identical"] is not True
+                or function_feedback["variant_differs"] is not True
+                or function_feedback["control_functions"] < 10):
+            raise RuntimeError(f"native function feedback is not scoped and repeatable: {function_feedback}")
+    else:
+        assert summary["parser_source_lines_covered"] > 0
     coverage = json.loads((output_dir / "coverage.json").read_text())
     source_files = [f for f in coverage["data"][0]["files"]
                     if f["filename"].startswith(manifest["coverage_subject_prefix"])]
-    assert len(source_files) == summary["parser_source_files"]
-    assert sum(f["summary"]["lines"]["covered"] for f in source_files) == summary["parser_source_lines_covered"]
+    assert len(source_files) == (summary["parser_source_files"] or 0)
+    assert sum(f["summary"]["lines"]["covered"] for f in source_files) == (summary["parser_source_lines_covered"] or 0)
     format_specific_lines = None
     if "format_specific_coverage_file_suffix" in manifest:
         specific = [f for f in source_files
@@ -208,7 +225,7 @@ def main() -> None:
         "format_specific_source_lines_covered": format_specific_lines,
         "underlying_source_files": summary.get("underlying_source_files"),
         "underlying_source_lines_covered": summary.get("underlying_source_lines_covered"),
-        "fuzz_engine_smoke_pass": True,
+        "fuzz_engine_smoke_pass": None if native_entries else True,
         "coverage_output": f"projects/{args.format}/{args.ecosystem}/{args.package_slug}/target/coverage/coverage.json",
         "pass": True,
     }
@@ -226,10 +243,19 @@ def main() -> None:
             "underlying_source_lines_covered": None,
             "coverage_output": None,
         })
+    if function_feedback is not None:
+        receipt.update({
+            "coverage_kind": "native_function_entries",
+            "native_feedback": function_feedback,
+            "native_feedback_limit": manifest["native_feedback_limit"],
+        })
     (project / "verification.json").write_text(json.dumps(receipt, indent=2) + "\n")
     if binary_feedback is not None:
         print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: "
               f"{binary_feedback['control_tuples']} native binary tuples in {binary_feedback['module']}")
+    elif function_feedback is not None:
+        print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: "
+              f"{function_feedback['control_functions']} native parser functions entered")
     else:
         print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: "
               f"{receipt['parser_source_lines_covered']} library lines covered")

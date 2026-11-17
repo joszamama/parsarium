@@ -1,31 +1,21 @@
 # PDF / C
 
-20 verified third-party API paths; 5 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/pdf/ranking.md) · [standard API inventory](../../../data/c/pdf/standard.json)
 
 ## Third-party parsers
 
-- [poppler-glib](poppler-glib/README.md) — verified API path
+- [poppler-glib](poppler-glib/README.md) — Docker harness ready
 - [qpdf](qpdf/README.md) — Docker harness ready
 - [mupdf](mupdf/README.md) — Docker harness ready
-- [ghostscript](ghostscript/README.md) — verified API path
-- [pdfio](pdfio/README.md) — Docker harness ready
-- [pdfium](pdfium/README.md) — verified API path
-- [vanillapdf](vanillapdf/README.md) — verified API path
-- [tspdf](tspdf/README.md) — Docker harness ready
-- [imagemagick](imagemagick/README.md) — verified API path
-- [graphicsmagick](graphicsmagick/README.md) — verified API path
+- [ghostscript](ghostscript/README.md) — Docker harness ready
+- [imagemagick](imagemagick/README.md) — Docker harness ready
+- [graphicsmagick](graphicsmagick/README.md) — Docker harness ready
 - [libvips](libvips/README.md) — Docker harness ready
-- [pdf_oxide](pdf-oxide/README.md) — verified API path
-- [libreofficekit](libreofficekit/README.md) — verified API path
-- [evince](evince/README.md) — verified API path
-- [unpdf](unpdf/README.md) — verified API path
-- [gnome-papers](gnome-papers/README.md) — verified API path
-- [atril](atril/README.md) — verified API path
-- [xreader](xreader/README.md) — verified API path
-- [rustpdf](rustpdf/README.md) — verified API path
-- [zathura-pdf-poppler](zathura-pdf-poppler/README.md) — verified API path
+- [evince](evince/README.md) — Docker harness ready
+- [gnome-papers](gnome-papers/README.md) — Docker harness ready
+- [atril](atril/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

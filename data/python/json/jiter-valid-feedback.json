@@ -1,0 +1,229 @@
+{
+  "checked_at_utc": "2026-11-17T12:26:49.493641+00:00",
+  "project": "json/python/jiter",
+  "pass": true,
+  "input_kind": "two fixed valid RFC 8259 JSON controls",
+  "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where jiter is not importable; exact type-tagged trees with float.hex values and object member order",
+  "expected_summaries": "hand-written from the control text in manifest.json; replay output must equal them",
+  "control_oracle": {
+    "oracle_python": "3.11.2",
+    "jiter": "0.19.0",
+    "tree_sha256": "a8a23fb23e1c58fbcb65c789babe85f284949180a576cede88f2e787ea410d92",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 15,
+    "duplicate_keys": 0,
+    "bytes_matches_oracle": true
+  },
+  "variant_oracle": {
+    "oracle_python": "3.11.2",
+    "jiter": "0.19.0",
+    "tree_sha256": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 3,
+    "duplicate_keys": 0,
+    "bytes_matches_oracle": true
+  },
+  "feedback_scope": "native Jiter 0.19.0 Rust crate source regions and branches (crates/jiter/src) in the source-built jiter extension; PyO3 module wrapper and lexical-parse-float are outside AFL feedback",
+  "base_image_id": "sha256:a08c4ee848d5142db04a36dfdd1856394d2d1f744fc8f631c34dd43cefa86f50",
+  "overlay_image_id": "sha256:0c102385cee355659492f7681bcbf44b8df04a52f8fe4ac887a9d07b4dc5d33b",
+  "overlay_receipt_sha256": "0b0cf77abf5ab0c186cda07e22119bbe8b41668dc47a19b66c7f1f67b09a5e66",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "root_type": "object",
+    "root_length": 7,
+    "top_level_keys": [
+      "name",
+      "version",
+      "ratio",
+      "enabled",
+      "missing",
+      "tags",
+      "nested"
+    ],
+    "kind_counts": {
+      "object": 5,
+      "array": 3,
+      "string": 5,
+      "int": 4,
+      "float": 1,
+      "bool": 2,
+      "null": 1
+    },
+    "object_members": 15,
+    "max_container_depth": 4,
+    "scalar_leaves": [
+      [
+        "/name",
+        "string",
+        "parsarium"
+      ],
+      [
+        "/version",
+        "int",
+        1
+      ],
+      [
+        "/ratio",
+        "float",
+        "-2.5"
+      ],
+      [
+        "/enabled",
+        "bool",
+        true
+      ],
+      [
+        "/missing",
+        "null",
+        null
+      ],
+      [
+        "/tags/0",
+        "string",
+        "json"
+      ],
+      [
+        "/tags/1",
+        "string",
+        "go"
+      ],
+      [
+        "/tags/2",
+        "string",
+        "rfc8259"
+      ],
+      [
+        "/nested/level",
+        "int",
+        2
+      ],
+      [
+        "/nested/items/0/id",
+        "int",
+        1
+      ],
+      [
+        "/nested/items/0/ok",
+        "bool",
+        false
+      ],
+      [
+        "/nested/items/1/id",
+        "int",
+        2
+      ],
+      [
+        "/nested/items/1/text",
+        "string",
+        "café \"quoted\""
+      ]
+    ],
+    "empty_containers": [
+      [
+        "/nested/empty",
+        "object"
+      ],
+      [
+        "/nested/list",
+        "array"
+      ]
+    ]
+  },
+  "variant_output": {
+    "root_type": "array",
+    "root_length": 5,
+    "kind_counts": {
+      "object": 2,
+      "array": 4,
+      "string": 2,
+      "int": 1,
+      "float": 1,
+      "bool": 2,
+      "null": 1
+    },
+    "object_members": 3,
+    "max_container_depth": 3,
+    "scalar_leaves": [
+      [
+        "/0",
+        "int",
+        1
+      ],
+      [
+        "/1",
+        "float",
+        "0.25"
+      ],
+      [
+        "/2",
+        "string",
+        "two"
+      ],
+      [
+        "/3/0",
+        "bool",
+        true
+      ],
+      [
+        "/3/1",
+        "null",
+        null
+      ],
+      [
+        "/3/2/0",
+        "bool",
+        false
+      ],
+      [
+        "/4/n/deep",
+        "string",
+        "A"
+      ]
+    ],
+    "empty_containers": [
+      [
+        "/4/k",
+        "array"
+      ]
+    ]
+  },
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 814,
+  "variant_parser_features": 804,
+  "control_parse_rs_features": 148,
+  "variant_parse_rs_features": 146,
+  "value_rs_or_jiter_rs_features": 0,
+  "parser_feature_difference": 58,
+  "parse_rs_feature_difference": 2,
+  "differing_source_files": [
+    "number_decoder.rs",
+    "parse.rs",
+    "py_string_cache.rs",
+    "python.rs",
+    "simd/aarch64.rs",
+    "simd/fallback_string.rs",
+    "simd/number.rs",
+    "string_decoder.rs"
+  ],
+  "control_afl_tuples": 824,
+  "variant_afl_tuples": 814,
+  "afl_tuple_difference": 58
+}

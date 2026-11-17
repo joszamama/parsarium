@@ -1,0 +1,632 @@
+[
+  {
+    "name": "imagemagick",
+    "version": "7.1.2-35",
+    "license": "ImageMagick",
+    "license_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-35/LICENSE",
+    "documentation": "https://imagemagick.org/magick-wand/",
+    "input_api": "MagickReadImage(MagickWand*, const char*); MagickExportImagePixels(...)",
+    "adapter": "adapters/cpp/ascii_pnm/imagemagick.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "ImageMagick PNM coder",
+    "family_note": "ImageMagick MagickWand parses ASCII P3 as a PNM image; repository stars reflect many formats.",
+    "family_evidence": "https://github.com/ImageMagick/ImageMagick/blob/7.1.2-35/coders/pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl3_image",
+    "version": "3.4.8",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl3_image.json",
+    "documentation": "https://wiki.libsdl.org/SDL3_image/IMG_Load",
+    "input_api": "IMG_Load(const char* file); SDL_ConvertSurface(...) to RGBA pixels",
+    "adapter": "adapters/cpp/ascii_pnm/sdl3_image.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "SDL_image PNM decoder lineage",
+    "family_note": "SDL3_image IMG_Load parsed the P3 control; SDL2_image is a separate major-version package from the same upstream project and shares parser lineage.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-3.4.8/src/IMG_pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "sdl2_image",
+    "version": "2.8.12",
+    "license": "Zlib",
+    "license_evidence": "https://formulae.brew.sh/api/formula/sdl2_image.json",
+    "documentation": "https://wiki.libsdl.org/SDL2_image/IMG_Load",
+    "input_api": "IMG_Load(const char* file); SDL_ConvertSurfaceFormat(...) to RGBA pixels",
+    "adapter": "adapters/cpp/ascii_pnm/sdl2_image.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "SDL_image PNM decoder lineage",
+    "family_note": "SDL2_image IMG_Load parsed the P3 control; SDL3_image is a separate major-version package from the same upstream project and shares parser lineage.",
+    "family_evidence": "https://github.com/libsdl-org/SDL_image/blob/release-2.8.12/src/IMG_pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "leptonica",
+    "version": "1.87.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://formulae.brew.sh/api/formula/leptonica.json",
+    "documentation": "https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/allheaders.h",
+    "input_api": "pixRead(const char* filename); pixGetRGBPixel(PIX*, x, y, ...)",
+    "adapter": "adapters/cpp/ascii_pnm/leptonica.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first_rgb": [
+        255,
+        0,
+        0
+      ],
+      "second_rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "Leptonica PNM reader",
+    "family_note": "Leptonica pixRead parsed P3 and returned RGB pixels.",
+    "family_evidence": "https://github.com/DanBloomberg/leptonica/blob/1.87.0/src/pnmio.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "graphicsmagick",
+    "version": "1.3.49",
+    "license": "MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/graphicsmagick.json",
+    "documentation": "https://graphicsmagick.sourceforge.io/wand/magick_wand.html",
+    "input_api": "MagickReadImage(MagickWand*, const char*); MagickGetImagePixels(...)",
+    "adapter": "adapters/cpp/ascii_pnm/graphicsmagick.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "GraphicsMagick PNM coder",
+    "family_note": "GraphicsMagick MagickWand parsed P3; primary SourceForge project lacks a comparable GitHub star metric.",
+    "family_evidence": "https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/1.3.49/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "devil",
+    "version": "1.8.0",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://formulae.brew.sh/api/formula/devil.json",
+    "documentation": "https://openil.sourceforge.net/docs/DevIL%20Reference%20Guide.pdf",
+    "input_api": "ilLoadImage(const ILstring path); ilGetInteger(IL_IMAGE_WIDTH/HEIGHT); ilGetData()",
+    "adapter": "adapters/cpp/ascii_pnm/devil.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "DevIL PNM reader",
+    "family_note": "DevIL ilLoadImage parsed P3; primary SourceForge project lacks a comparable GitHub star metric.",
+    "family_evidence": "https://sourceforge.net/projects/openil/files/DevIL/1.8.0/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "imlib2",
+    "version": "1.12.7",
+    "license": "Imlib2",
+    "license_evidence": "https://formulae.brew.sh/api/formula/imlib2.json",
+    "documentation": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+    "input_api": "imlib_load_image_immediately(const char* file); imlib_image_get_data_for_reading_only()",
+    "adapter": "adapters/cpp/ascii_pnm/imlib2.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "Imlib2 PNM loader",
+    "family_note": "Imlib2 loader parsed P3; its primary upstream is not GitHub, so a comparable primary repository star count is unavailable.",
+    "family_evidence": "https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.7/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "gdk-pixbuf",
+    "version": "2.44.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gdk-pixbuf.json",
+    "documentation": "https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html",
+    "input_api": "gdk_pixbuf_new_from_file(const char*, GError**); gdk_pixbuf_read_pixels(...)",
+    "adapter": "adapters/cpp/ascii_pnm/gdk-pixbuf.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "GdkPixbuf PNM loader",
+    "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
+    "family_evidence": "https://gitlab.gnome.org/GNOME/gdk-pixbuf/-/blob/2.44.8/gdk-pixbuf/io-pnm.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "vips",
+    "version": "8.18.7",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/vips.json",
+    "documentation": "https://www.libvips.org/API/current/VipsImage.html",
+    "input_api": "vips_image_new_from_file(const char*, ...); vips_image_write_to_memory(...)",
+    "adapter": "adapters/cpp/ascii_pnm/vips.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "libvips PPM loader",
+    "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
+    "family_evidence": "https://github.com/libvips/libvips/blob/v8.18.7/libvips/foreign/ppmload.c",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "freeimage",
+    "version": "3.18.0",
+    "license": "FreeImage",
+    "license_evidence": "https://formulae.brew.sh/api/formula/freeimage.json",
+    "documentation": "https://freeimage.sourceforge.io/fnet/html/99F7C60B.htm",
+    "input_api": "FreeImage_Load(FIF_PPM, const char*, PNM_DEFAULT); FreeImage_GetPixelColor(...)",
+    "adapter": "adapters/cpp/ascii_pnm/freeimage.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGB pixels",
+    "family": "FreeImage PPM plugin",
+    "family_note": "ASCII P3 is read through this package image input API. The package may use shared lower-level image code; no independent-engine claim is made.",
+    "family_evidence": "https://sourceforge.net/projects/freeimage/files/Source%20Distribution/3.18.0/",
+    "language_bridge": "C image API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "netpbm",
+    "version": "11.02.30",
+    "license": "Netpbm mixed open-source",
+    "license_evidence": "https://netpbm.sourceforge.net/",
+    "documentation": "https://netpbm.sourceforge.net/doc/libppm.html",
+    "input_api": "ppm_readppm(FILE*, int*, int*, pixval*); PPM_GETR/G/B(...)",
+    "adapter": "adapters/cpp/ascii_pnm/netpbm.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions, maxval, and two decoded RGB pixels",
+    "family": "Netpbm libppm parser",
+    "family_note": "Direct libnetpbm library API; PPM reader also accepts PBM/PGM with on-the-fly conversion per official manual. Only P3 is verified here.",
+    "family_evidence": "https://netpbm.sourceforge.net/doc/libppm.html",
+    "language_bridge": "C libnetpbm API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://formulae.brew.sh/api/formula/ffmpeg.json",
+    "documentation": "https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local PPM path); av_find_best_stream; av_read_frame; avcodec_send_packet and avcodec_receive_frame",
+    "adapter": "adapters/cpp/ascii_pnm/ffmpeg.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "codec": "ppm",
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 codec identification, dimensions, and two decoded RGB pixels",
+    "family": "FFmpeg native PNM decoder",
+    "family_note": "FFmpeg image2 demuxer passes PPM packets to the native PNM decoder; the C++ path uses the same FFmpeg C implementation.",
+    "family_evidence": "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavcodec/pnmdec.c",
+    "language_bridge": "FFmpeg C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://formulae.brew.sh/api/formula/gstreamer.json",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html",
+    "input_api": "gst_parse_launch(filesrc ! pnmdec ! appsink); gst_app_sink_try_pull_sample(...)",
+    "adapter": "adapters/cpp/ascii_pnm/gstreamer.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "format": "RGB",
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions, RGB caps, and two decoded pixels",
+    "family": "GStreamer gst-plugins-bad pnmdec",
+    "family_note": "PNM decoder plugin from the pinned GStreamer 1.28.9 monorepo source release; local pnm plugin dylib separately checked by SHA-256.",
+    "family_evidence": "https://gstreamer.freedesktop.org/documentation/pnm/pnmdec.html",
+    "language_bridge": "GStreamer C API compiled and invoked from a C++17 translation unit"
+  },
+  {
+    "name": "libpnmrw",
+    "version": "14Aug2014",
+    "license": "BSD-2-Clause",
+    "license_evidence": "http://acme.com/software/libpnmrw/libpnmrw_14Aug2014.tar.gz",
+    "documentation": "https://acme.com/software/libpnmrw/",
+    "input_api": "pnm_readpnm(FILE*, int*, int*, xelval*, int*); PPM_GETR/G/B(...)",
+    "adapter": "adapters/cpp/ascii_pnm/libpnmrw.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "maxval": 255,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 dimensions, maxval, and two decoded RGB pixels",
+    "family": "libpnmrw PBMPLUS-derived parser",
+    "family_note": "A compact PBMPLUS-derived reader with a local FILE* API; it shares historical lineage with Netpbm but is a separately distributed parser implementation. The date-named archive is 14Aug2014; its README labels the code version 03jul2014.",
+    "family_evidence": "https://acme.com/software/libpnmrw/",
+    "language_bridge": "C libpnmrw source compiled separately and API invoked from a C++17 translation unit",
+    "api_evidence": "libpnmrw.h in the pinned official ACME Labs archive"
+  },
+  {
+    "name": "pnmpp",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ToruNiina/pnm/blob/v1.0.1/LICENSE",
+    "documentation": "https://github.com/ToruNiina/pnm/blob/v1.0.1/README.md",
+    "input_api": "pnm::read(localPath) as pnm::image<pnm::rgb_pixel>; width(), height(), image[y][x].red/green/blue",
+    "adapter": "adapters/cpp/ascii_pnm/pnmpp.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "pnm++ native ASCII PNM reader",
+    "family_note": "The upstream v1.0.1 header requires an eight-reference compatibility patch to compile with the local C++17 compiler: line_proxy comparisons refer to rhs.ny_ instead of rhs.iy_. The patch does not touch PNM decoding code. Original and patched header SHA-256 hashes are recorded.",
+    "family_evidence": "https://github.com/ToruNiina/pnm/blob/v1.0.1/pnm.hpp",
+    "language_bridge": "Native C++17 header-only library with recorded compatibility patch"
+  },
+  {
+    "name": "qtbase",
+    "version": "6.12.0",
+    "license": "LGPL-3.0-only",
+    "license_evidence": "https://github.com/qt/qtbase/blob/v6.12.0/src/gui/image/qppmhandler.cpp",
+    "documentation": "https://doc.qt.io/qt-6/qimagereader.html",
+    "input_api": "QImageReader(localPath, \"ppm\").read(); QImage::pixelColor(x,y)",
+    "adapter": "adapters/cpp/ascii_pnm/qtbase.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "QtBase native QPPMHandler",
+    "family_note": "QtBase QImageReader delegates PPM to its built-in qppmhandler; installed QtGui and QtCore frameworks are pinned by SHA-256. QtBase covers many unrelated GUI APIs, so repository stars are a broad adoption proxy.",
+    "family_evidence": "https://github.com/qt/qtbase/blob/v6.12.0/src/gui/image/qppmhandler.cpp",
+    "language_bridge": "Native C++17 QtBase API"
+  },
+  {
+    "name": "wxwidgets",
+    "version": "3.3.4",
+    "license": "LGPL-2.0-or-later WITH WxWindows-exception-3.1",
+    "license_evidence": "https://formulae.brew.sh/api/formula/wxwidgets.json",
+    "documentation": "https://wxwidgets.org/docs/book/Cross-Platform%20GUI%20Programming%20with%20wxWidgets.pdf",
+    "input_api": "wxImage::AddHandler(new wxPNMHandler); wxImage::LoadFile(path, wxBITMAP_TYPE_PNM); GetData()",
+    "adapter": "adapters/cpp/ascii_pnm/wxwidgets.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "wxWidgets native PNM handler",
+    "family_note": "wxPNMHandler reads ASCII PNM through wxImage; pinned 3.3.4 core and base libraries are checked by SHA-256. The project handles many other formats, so repository stars are only a broad adoption proxy.",
+    "family_evidence": "https://github.com/wxWidgets/wxWidgets/blob/v3.3.4/src/common/imagpnm.cpp",
+    "language_bridge": "Native C++17 wxWidgets API"
+  },
+  {
+    "name": "boost-gil",
+    "version": "1.92.0",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/boostorg/gil/blob/boost-1.92.0/LICENSE.txt",
+    "documentation": "https://www.boost.org/latest/libs/gil/doc/html/io.html",
+    "input_api": "boost::gil::read_image(filename, rgb8_image_t&, pnm_tag()); const_view(image)(x,y) channels",
+    "adapter": "adapters/cpp/ascii_pnm/boost_gil.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels",
+    "family": "Boost.GIL native PNM reader",
+    "family_note": "The Boost.GIL I/O documentation describes P1–P6 input; the committed control proves only P3. Its tag-pinned GIL parser source is compiled with exact-release installed Boost base headers.",
+    "family_evidence": "https://github.com/boostorg/gil/blob/boost-1.92.0/include/boost/gil/extension/io/pnm/detail/read.hpp",
+    "language_bridge": "Native C++17 header-only library"
+  },
+  {
+    "name": "cimg",
+    "version": "4.0.5",
+    "license": "CeCILL-C-1.0 OR CeCILL-2.1",
+    "license_evidence": "https://github.com/GreycLab/CImg/blob/v.4.0.5/CImg.h",
+    "documentation": "https://cimg.eu/reference/structcimg__library_1_1CImg.html",
+    "input_api": "cimg_library::CImg<unsigned char>::get_load_pnm(const char* filename); width(), height(), and pixel(x,y,0,channel)",
+    "adapter": "adapters/cpp/ascii_pnm/cimg.cpp",
+    "control": "controls/ascii_pnm/red-green-inline.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "first": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "second": [
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "scope": "P3 dimensions and two decoded RGBA pixels when maxval shares the dimensions line",
+    "family": "CImg native PNM reader",
+    "family_note": "CImg 4.0.5 misreads the original valid P3 control whose maxval occupies a separate line; a second valid P3 control with dimensions and maxval on the same line is used, and the limitation is not generalized to all P3 layouts.",
+    "family_evidence": "https://github.com/GreycLab/CImg/blob/v.4.0.5/CImg.h",
+    "language_bridge": "Native C++17 header-only library",
+    "other_valid_control_result": {
+      "control": "controls/ascii_pnm/red-green.ppm",
+      "output": {
+        "width": 2,
+        "height": 1,
+        "first": [
+          255,
+          255,
+          0,
+          255
+        ],
+        "second": [
+          0,
+          0,
+          255,
+          255
+        ]
+      },
+      "matches_expected": false,
+      "meaning": "Valid P3 layout with maxval on its own line was misread by CImg 4.0.5; this control is not counted as a passing format-aware result."
+    }
+  },
+  {
+    "name": "openimageio",
+    "version": "3.2.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/AcademySoftwareFoundation/OpenImageIO/blob/v3.2.2.0/LICENSE.md",
+    "documentation": "https://openimageio.readthedocs.io/en/v3.2.2.0/imageinput.html",
+    "input_api": "OIIO::ImageInput::open(localPath); spec(); read_image(0,0,0,nchannels, span<uint8_t>)",
+    "adapter": "adapters/cpp/ascii_pnm/openimageio.cpp",
+    "control": "controls/ascii_pnm/red-green.ppm",
+    "expected_output": {
+      "width": 2,
+      "height": 1,
+      "format": "pnm",
+      "binary": 0,
+      "first": [
+        255,
+        0,
+        0
+      ],
+      "second": [
+        0,
+        255,
+        0
+      ]
+    },
+    "scope": "P3 format identification, ASCII encoding flag, dimensions, and two decoded RGB pixels",
+    "family": "OpenImageIO native PNM plugin",
+    "family_note": "ImageInput opens the local P3 file through the OpenImageIO PNM plugin; the image spec identifies ASCII encoding and decoded RGB pixels. Repository stars measure the whole multi-format library.",
+    "family_evidence": "https://github.com/AcademySoftwareFoundation/OpenImageIO/tree/v3.2.2.0/src/pnm.imageio",
+    "language_bridge": "Native C++17 OpenImageIO API"
+  }
+]

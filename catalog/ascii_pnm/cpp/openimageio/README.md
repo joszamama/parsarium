@@ -32,6 +32,11 @@
 
 ImageInput opens the local P3 file through the OpenImageIO PNM plugin; the image spec identifies ASCII encoding and decoded RGB pixels. Repository stars measure the whole multi-format library.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/openimageio/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp openimageio
+python3 parsarium.py run ascii_pnm cpp openimageio controls/ascii_pnm/red-green.ppm
+```

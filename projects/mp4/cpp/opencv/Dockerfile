@@ -1,0 +1,28 @@
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certificates clang cmake curl libclang-rt-21-dev llvm make ninja-build pkg-config python3 xz-utils zlib1g-dev \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 'https://github.com/opencv/opencv/archive/refs/tags/5.1.0.tar.gz' -o /work/source.tar.gz \
+ && echo '638c1dae7e37e45afea21aa217dc667ad7cf57acc66cdf652c074f1e0e5ad6d2  /work/source.tar.gz' | sha256sum --check \
+ && mkdir /work/source && tar -xzf /work/source.tar.gz -C /work/source --strip-components=1 \
+ && echo '69a967703c3cb16cf32f8a26d27ff4ef958735e7281e34dc08fe01fb1317e838  /work/source/modules/videoio/src/cap_ffmpeg_impl.hpp' | sha256sum --check
+# FFmpeg is the release the catalog's Homebrew OpenCV linked (ffmpeg 9.0.2_1).
+RUN curl --fail --location --retry 3 'https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz' -o /work/ffmpeg.tar.xz \
+ && echo '8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e  /work/ffmpeg.tar.xz' | sha256sum --check \
+ && mkdir /work/ffmpeg && tar -xJf /work/ffmpeg.tar.xz -C /work/ffmpeg --strip-components=1 \
+ && echo '533674687505d25db7176cf876036f600e6d8cb25079ffa6b28b4a8e8266eae1  /work/ffmpeg/libavformat/mov.c' | sha256sum --check
+COPY harness.cpp harness.h replay.cpp build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+ && { clang++ --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV OPENCV_LOG_LEVEL=SILENT
+RUN apt-get update -qq && apt-get install -y --no-install-recommends libstdc++6 llvm python3 zlib1g \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/source /work/source
+COPY --from=build /work/ffmpeg /work/ffmpeg
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

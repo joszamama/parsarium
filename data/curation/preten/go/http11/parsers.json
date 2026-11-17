@@ -1,0 +1,319 @@
+[
+  {
+    "name": "github.com/valyala/fasthttp",
+    "module": "github.com/valyala/fasthttp",
+    "version": "v1.78.0",
+    "license": "MIT",
+    "input_api": "Request.Read(*bufio.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/valyala/fasthttp@v1.78.0",
+    "scope": "request message",
+    "family": "fasthttp HTTP/1 parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    },
+    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+  },
+  {
+    "name": "github.com/evanphx/wildcat",
+    "module": "github.com/evanphx/wildcat",
+    "version": "v0.0.0-20141114174135-e7012f664567",
+    "license": "BSD-2-Clause",
+    "input_api": "HTTPParser.Parse([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/evanphx/wildcat@v0.0.0-20141114174135-e7012f664567",
+    "scope": "request head",
+    "family": "wildcat HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/sebishogun/simdhttp/http1",
+    "module": "github.com/sebishogun/simdhttp",
+    "version": "v0.0.0-20261007210108-01268e016029",
+    "license": "MIT",
+    "input_api": "Parse(*Request, []byte, Compatible)",
+    "documentation": "https://pkg.go.dev/github.com/sebishogun/simdhttp/http1@v0.0.0-20261007210108-01268e016029",
+    "scope": "request head",
+    "family": "simdhttp HTTP/1 parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/FastTLS/oohttp",
+    "module": "github.com/FastTLS/oohttp",
+    "version": "v0.0.0-20261026180050-43186effd7f4",
+    "license": "BSD-3-Clause",
+    "input_api": "ReadRequest(*bufio.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/FastTLS/oohttp@v0.0.0-20261026180050-43186effd7f4",
+    "scope": "request message",
+    "family": "Go net/http fork",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    },
+    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+  },
+  {
+    "name": "github.com/hellpuffyt/spindrift/http1",
+    "module": "github.com/hellpuffyt/spindrift",
+    "version": "v0.0.0-20261022160824-5a92c9177f42",
+    "license": "MIT",
+    "input_api": "ReadRequest(*bufio.Reader, Limits)",
+    "documentation": "https://pkg.go.dev/github.com/hellpuffyt/spindrift/http1",
+    "scope": "request message",
+    "family": "spindrift HTTP/1 parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "proto": "HTTP/1.1"
+    },
+    "documentation_note": "Pinned pseudo-version is in go.mod/go.sum but pkg.go.dev returned 404 for its versioned page; unversioned API documentation used."
+  },
+  {
+    "name": "github.com/justIliane/blazehttp/pkg/header",
+    "module": "github.com/justIliane/blazehttp",
+    "version": "v1.0.0",
+    "license": "MIT",
+    "input_api": "Parse([]byte, *ParsedRequest)",
+    "documentation": "https://pkg.go.dev/github.com/justIliane/blazehttp/pkg/header@v1.0.0",
+    "scope": "request header",
+    "family": "blazehttp header parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/cloudwego/hertz/pkg/protocol/http1/req",
+    "module": "github.com/cloudwego/hertz",
+    "version": "v0.10.6",
+    "license": "Apache-2.0",
+    "input_api": "Read(*Request, network.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/cloudwego/hertz/pkg/protocol/http1/req@v0.10.6",
+    "scope": "request message",
+    "family": "Hertz / fasthttp lineage",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    },
+    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+  },
+  {
+    "name": "github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw",
+    "module": "github.com/projectdiscovery/nuclei/v3",
+    "version": "v3.11.1",
+    "license": "MIT",
+    "input_api": "ParseRawRequest(string, bool)",
+    "documentation": "https://pkg.go.dev/github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw@v3.11.1",
+    "scope": "raw request message",
+    "family": "nuclei raw HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  },
+  {
+    "name": "github.com/gobwas/httphead",
+    "module": "github.com/gobwas/httphead",
+    "version": "v0.1.0",
+    "license": "MIT",
+    "input_api": "ParseRequestLine([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/gobwas/httphead@v0.1.0",
+    "scope": "request line only",
+    "family": "gobwas HTTP request-line parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "major": 1,
+      "minor": 1
+    }
+  },
+  {
+    "name": "github.com/lesismal/nbio/nbhttp",
+    "module": "github.com/lesismal/nbio",
+    "version": "v1.7.1",
+    "license": "MIT",
+    "input_api": "Parser.Parse([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/lesismal/nbio/nbhttp@v1.7.1",
+    "scope": "request message",
+    "family": "nbio HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/lesismal/fib/http",
+    "module": "github.com/lesismal/fib",
+    "version": "v1.5.6",
+    "license": "MIT",
+    "input_api": "Parser.Feed([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/lesismal/fib/http@v1.5.6",
+    "scope": "request message",
+    "family": "fib HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/antlabs/fio/http",
+    "module": "github.com/antlabs/fio",
+    "version": "v0.2.8",
+    "license": "Apache-2.0",
+    "input_api": "Parser.Parse([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/antlabs/fio/http@v0.2.8",
+    "scope": "request message",
+    "family": "fio native HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/meta-apex/metarpc/codec/http",
+    "module": "github.com/meta-apex/metarpc",
+    "version": "v0.0.0-20250816075809-78e603aff299",
+    "license": "Apache-2.0",
+    "input_api": "Parser.Parse([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/meta-apex/metarpc/codec/http@v0.0.0-20250816075809-78e603aff299",
+    "scope": "request message",
+    "family": "fasthttp-derived metarpc parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    },
+    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+  },
+  {
+    "name": "github.com/go-fasthttp/fasthttp",
+    "module": "github.com/go-fasthttp/fasthttp",
+    "version": "v0.0.0-20161128095036-1c39678a4dd0",
+    "license": "MIT",
+    "input_api": "Request.Read(*bufio.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/go-fasthttp/fasthttp@v0.0.0-20161128095036-1c39678a4dd0",
+    "scope": "request message",
+    "family": "fasthttp HTTP/1 parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    },
+    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+  },
+  {
+    "name": "github.com/zhaofenghao/clash/listener/http",
+    "module": "github.com/zhaofenghao/clash",
+    "version": "v1.0.14",
+    "license": "GPL-3.0",
+    "input_api": "ReadRequest(*bufio.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/zhaofenghao/clash/listener/http@v1.0.14",
+    "scope": "request message",
+    "family": "Go net/http stdlib parser exposed through Clash linkname alias",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    },
+    "family_note": "Clash v1.0.14 declares ReadRequest with //go:linkname to net/http.readRequest; the package API executes the Go runtime parser. Coverage and AFL++ feedback therefore target net/http source, and this row is not an independent parser engine."
+  },
+  {
+    "name": "github.com/lemon4ksan/mach/server/h1",
+    "module": "github.com/lemon4ksan/mach",
+    "version": "v0.2.0",
+    "license": "BSD-3-Clause",
+    "input_api": "Request.ReadRequest(*bufio.Reader, *ByteBuffer, int64)",
+    "documentation": "https://pkg.go.dev/github.com/lemon4ksan/mach/server/h1@v0.2.0",
+    "scope": "request message",
+    "family": "mach H1 parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/antlabs/httparser",
+    "module": "github.com/antlabs/httparser",
+    "version": "v0.0.11",
+    "license": "Apache-2.0",
+    "input_api": "Parser.Execute(*Setting, []byte)",
+    "documentation": "https://pkg.go.dev/github.com/antlabs/httparser@v0.0.11",
+    "scope": "request message",
+    "family": "antlabs httparser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "major": 1,
+      "minor": 1
+    }
+  },
+  {
+    "name": "github.com/hsiafan/httpdump/httpport",
+    "module": "github.com/hsiafan/httpdump",
+    "version": "v0.0.0-20231019014708-4fd809447b59",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadRequest(*bufio.Reader)",
+    "documentation": "https://pkg.go.dev/github.com/hsiafan/httpdump/httpport@v0.0.0-20231019014708-4fd809447b59",
+    "scope": "request message",
+    "family": "Go net/http port",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    },
+    "family_note": "This package shares a parser family or code lineage with another row; package paths do not imply independent engines."
+  },
+  {
+    "name": "github.com/openctemio/openctem/api/pkg/domain/evidence",
+    "module": "github.com/openctemio/openctem/api",
+    "version": "v0.0.0-20261107202920-27e7faec6f5d",
+    "license": "GPL-3.0",
+    "input_api": "ParseRawRequest(string, string)",
+    "documentation": "https://pkg.go.dev/github.com/openctemio/openctem/api/pkg/domain/evidence@v0.0.0-20261107202920-27e7faec6f5d",
+    "scope": "raw request message",
+    "family": "openctem raw HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "url": "http://example.test/parsarium?x=1",
+      "proto": "HTTP/1.1"
+    }
+  },
+  {
+    "name": "github.com/nelthaarion/breeze",
+    "module": "github.com/nelthaarion/breeze",
+    "version": "v1.6.2",
+    "license": "MIT",
+    "input_api": "ParseHTTPRequest([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/nelthaarion/breeze@v1.6.2",
+    "scope": "request message",
+    "family": "breeze HTTP parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test"
+    }
+  }
+]

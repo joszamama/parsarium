@@ -1,0 +1,34 @@
+{
+  "xom": {
+    "release": "1.4.6",
+    "source_sha256": "e5ab760efd9d53a9f3ffbbea07a67dd7a64cb5cf79425d1f4223833370b124ac",
+    "jar_sha256": "e7f0aa3ebe81ed2a777091d688a3e32aad03225c74bda6fbbafeb9725cbb3fea",
+    "pom_sha256": "b41287cbeb4070fae5cb169b2a5aa1a0843d53fb8a7cd553fa3f885f5712e21a",
+    "source_url": "https://repo.maven.apache.org/maven2/xom/xom/1.4.6/xom-1.4.6-sources.jar",
+    "jar_url": "https://repo.maven.apache.org/maven2/xom/xom/1.4.6/xom-1.4.6.jar",
+    "pom_url": "https://repo.maven.apache.org/maven2/xom/xom/1.4.6/xom-1.4.6.pom",
+    "license": "LGPL-2.1 (release POM)",
+    "dependencies": {
+      "jaxen:jaxen:2.0.6": {
+        "jar_sha256": "3e2a755b283fd492fa4be204294c7abb7cd63ac94fb366baab9c7bb9afb00b6d",
+        "jar_url": "https://repo.maven.apache.org/maven2/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar",
+        "use": "runtime namespace-context classes and recompilation"
+      },
+      "xerces:xercesImpl:2.12.2": {
+        "jar_sha256": "6fc991829af1708d15aea50c66f0beadcd2cfeb6968e0b2f55c1b0909883fe16",
+        "jar_url": "https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.2/xercesImpl-2.12.2.jar",
+        "use": "compile-time only for same-release source rebuild; absent from runtime classpath"
+      }
+    },
+    "release_class_note": "Release JAR lacks line tables; source jar top-level nu.xom classes are rebuilt with javac -g --release 8 and placed before release JAR. The published JAR stays pinned in the image.",
+    "underlying_parser": {
+      "family": "Apache Xerces2-J (OpenJDK java.xml internal fork)",
+      "runtime": "Eclipse Temurin OpenJDK 25.0.5+8 linux/arm64 java.xml",
+      "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+      "modules_sha256": "fdbf1d201a93f5438aed3e4d101788da4ca05f82320d8a11336ced86edebb1ef",
+      "source_url": "https://github.com/openjdk/jdk25u/archive/refs/tags/jdk-25.0.5+8.tar.gz",
+      "source_sha256": "e4cc23905feaec9d91033262d4f36a2932e145f80ed66638d61ab522f89ed8b1",
+      "use": "XOM Builder.findParser selects OpenJDK internal Xerces SAX reader when external Xerces is absent; it tokenizes XML. This is not an independent XOM tokenizer."
+    }
+  }
+}

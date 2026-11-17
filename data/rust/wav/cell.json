@@ -1,22 +1,30 @@
 {
   "ecosystem": "rust",
   "format": "wav",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
-    "wav", "wave file", "wav reader", "wav decoder", "riff wave", "pcm wav", "waveform audio"
+    "wav",
+    "wave file",
+    "wav reader",
+    "wav decoder",
+    "riff wave",
+    "pcm wav",
+    "waveform audio"
   ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 653,
   "unique_search_hits": 469,
   "unresolved_documentation_leads": 13,
-  "uncertainty": "Seven first-page crates.io queries saved 653 hits and 469 distinct names, with per-query windows of 100, 100, 100, 100, 53, 100, and 100. Six query totals exceed 100; their tails were not reviewed. Twenty pinned open-source crate paths passed the valid four-sample 8 kHz mono PCM WAV control. These are package paths, not independent engines: Symphonia is reached through its facade, direct format readers, and Symphonium; Creak uses Hound, and surge-hound is a Hound fork. Some paths decode PCM samples, while others interpret WAV headers, chunks, declared frames, or audio packets; each scope is labeled in parsers.json. Thirteen plausible leads remain unresolved, including higher-adoption lofty and riff. One successful PCM control does not establish support for compressed WAVE, RF64, broadcast metadata, unusual chunk order, or every PCM depth. crates.io recent downloads include all releases over approximately 90 days and are compared only within Rust. This search is partial and may miss eligible packages.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/rust/wav/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/rust/wav/parsers.json",
   "third_party_control_results": "data/rust/wav/verification.json",
   "runtime_evidence": "data/rust/wav/standard.json",
   "registry_snapshot": "data/rust/wav/registry-snapshot.json",
-  "unresolved_leads": "data/rust/wav/leads.json"
+  "unresolved_leads": "data/rust/wav/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/rust/wav"
 }

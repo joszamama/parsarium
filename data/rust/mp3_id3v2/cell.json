@@ -1,22 +1,30 @@
 {
   "ecosystem": "rust",
   "format": "mp3_id3v2",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
-    "mp3", "id3v2", "id3", "mp3 decoder", "mpeg audio", "mp3 parser", "audio metadata"
+    "mp3",
+    "id3v2",
+    "id3",
+    "mp3 decoder",
+    "mpeg audio",
+    "mp3 parser",
+    "audio metadata"
   ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 676,
   "unique_search_hits": 430,
   "unresolved_documentation_leads": 12,
-  "uncertainty": "Seven first-page crates.io searches saved 676 hits and 430 distinct names, with per-query windows of 100, 76, 100, 100, 100, 100, and 100. Six query totals exceed 100 and their tails were not reviewed. Twenty pinned open-source crate paths passed the valid ID3v2.3-tagged MPEG Layer III control. The paths parse ID3v2 frames or tags, MPEG audio headers and packets, decoded samples, or a frame-derived duration, as labeled per row. They are not independent engines: Symphonia has facade, bundle, metadata, and wrapper paths; minimp3 C code appears through several wrappers; audiotags wrappers share the id3 tag parser. The direct symphonia-bundle-mp3 adapter skips the control's ID3v2 prefix before passing MPEG audio bytes to its demuxer. The mp3-duration value includes padding and differs from the control's one-second playable audio. Twelve plausible leads remain unresolved, including potentially higher-adoption rodio. One valid control does not establish all MPEG versions, tag encodings, metadata layouts, or bitrates. crates.io recent downloads cover all releases over approximately 90 days and are compared only within Rust. Discovery remains partial.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/rust/mp3_id3v2/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/rust/mp3_id3v2/parsers.json",
   "third_party_control_results": "data/rust/mp3_id3v2/verification.json",
   "runtime_evidence": "data/rust/mp3_id3v2/standard.json",
   "registry_snapshot": "data/rust/mp3_id3v2/registry-snapshot.json",
-  "unresolved_leads": "data/rust/mp3_id3v2/leads.json"
+  "unresolved_leads": "data/rust/mp3_id3v2/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/rust/mp3_id3v2"
 }

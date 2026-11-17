@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "http11",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_below_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 9,
   "verified_standard_or_runtime_count": 2,
   "search_queries": [
     "http parser",
@@ -18,10 +18,12 @@
   "search_hits_recorded": 404,
   "unique_search_hits": 364,
   "unresolved_documentation_leads": 10,
-  "uncertainty": "Six pkg.go.dev public package-search queries saved 404 hits and 364 unique paths. Query result windows had counts 100, 68, 30, 100, 6, 100 in query order; the 100-hit windows were truncated. The HTML pages give no total result count, so none is inferred. Ten named leads remain unresolved, including two documented ReadRequest candidates that failed to link on Go 1.27.1. Many search hits parse only individual HTTP header values, user-agent strings, or route data, and are not evidence of message parsing. Several included packages are forks or wrappers of net/http or fasthttp; package count does not imply independent parser engines. The valid GET control proves only the listed request or request-head scope. pkg.go.dev direct-importer counts are package-level adoption signals rather than downloads, and zero means no visible direct importers in this snapshot.",
+  "uncertainty": "9 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/go/http11/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/go/http11/parsers.json",
   "third_party_control_results": "data/go/http11/verification.json",
   "runtime_evidence": "data/go/http11/standard.json",
   "registry_snapshot": "data/go/http11/registry-snapshot.json",
-  "unresolved_leads": "data/go/http11/leads.json"
+  "unresolved_leads": "data/go/http11/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/go/http11"
 }

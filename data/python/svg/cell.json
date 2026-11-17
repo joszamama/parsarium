@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "svg",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_below_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 8,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'svg'",
@@ -28,10 +28,12 @@
   "search_hits_recorded": 710,
   "unique_search_hits": 676,
   "unresolved_documentation_leads": 4,
-  "uncertainty": "The PyPI Simple JSON project-name index was filtered by 16 name substrings, retaining at most 100 case-insensitive alphabetical matches per term. The 710 saved hits contain 676 distinct project names. These windows are not popularity-ranked and can miss relevant packages. Project documentation also supplied leads. Four explored packages remain unresolved after a build failure, incomplete rendering, or a Python 2 syntax/namespace conflict. The 20 verified package paths include resvg/usvg bindings and two QtSvg bindings; shared underlying families are recorded and the 20 are not claimed as independent parser implementations. The controls exercise basic rectangles, one path, dimensions, and colors; they do not establish comprehensive SVG feature support. CPython 3.13.1 has no verified bundled SVG API on this host; official docs identify a conditional tkinter.PhotoImage path with Tk 9.0, while the recorded runtime has Tk 8.6 and no loadable Tk package. CairoSVG, pyvips, and Wand require installed native graphics libraries.",
+  "uncertainty": "Post-selection parser-feedback gate: 8 selected paths have a verified container control and parser-derived AFL++ feedback. 2 higher-adoption control-verified candidates remain excluded without backfilling lower-ranked leads; their positive metrics and exact blockers are in data/curation/plan.json and data/curation/feedback-exclusions.json. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/python/svg/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/python/svg/parsers.json",
   "third_party_control_results": "data/python/svg/verification.json",
   "runtime_evidence": "data/python/svg/standard.json",
   "registry_snapshot": "data/python/svg/registry-snapshot.json",
-  "unresolved_leads": "data/python/svg/leads.json"
+  "unresolved_leads": "data/python/svg/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/python/svg"
 }

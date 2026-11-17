@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "c",
+  "package": "serf",
+  "release": "1.3.10",
+  "catalog_parser": "data/c/http11/parsers.json",
+  "source_lock": "projects/http11/c/serf/source-lock.json",
+  "source_sha256": "be81ef08baa2516ecda76a77adf7def7bc3227eeb578b9a33b45f7b41dc064e6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/response_serf.http",
+  "control_sha256": "f7304bdd65b2297949409b9d324d8f2be7f8957ed3e8f6e7d147c0597662ddb1",
+  "expected_output": {
+    "version": "1.1",
+    "status": 200,
+    "reason": "OK",
+    "content_type": "text/plain",
+    "body": "OK"
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of Serf 1.3.10's HTTP/1 response bucket state machine (serf_bucket_response_create over serf_bucket_simple_create) and its header, body, and line-buffer buckets from a C11 byte-input harness compiled with clang",
+  "parser_family": "Apache Serf 1.3.10 C HTTP/1 response bucket state machine (buckets/response_buckets.c); shares its parser family with the C++ path projects/http11/cpp/serf, which drives the same pinned sources, and is not an independent engine",
+  "coverage_subject_prefix": "/work/source/buckets/",
+  "format_specific_coverage_file_suffix": "/buckets/response_buckets.c"
+}

@@ -1,0 +1,284 @@
+{
+  "checked_at_utc": "2026-11-17T07:43:54.170624+00:00",
+  "platform": "linux/arm64 Docker",
+  "php": "PHP 8.5 (Ubuntu php8.5-cli for third-party PHP paths; PHP 8.5.12 source build for json_decode)",
+  "controls": {
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
+  "third_party": [
+    {
+      "package": "seld/jsonlint",
+      "version": "1.12.2",
+      "scope": "RFC 8259 JSON text decoded into PHP stdClass/array/scalar values with default flags",
+      "command": "python3 scripts/run_project.py json php seld_jsonlint",
+      "receipt": "projects/json/php/seld_jsonlint/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 226,
+      "error": null
+    },
+    {
+      "package": "laminas/laminas-json",
+      "version": "3.8.0",
+      "scope": "JSON text decoded by Laminas own PHP Decoder when static flag forces the internal implementation",
+      "command": "python3 scripts/run_project.py json php laminas_json",
+      "receipt": "projects/json/php/laminas_json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 2,
+      "parser_source_lines_covered": 165,
+      "format_specific_source_lines_covered": 161,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_keys": []
+      },
+      "error": null
+    },
+    {
+      "package": "halaxa/json-machine",
+      "version": "1.2.6",
+      "scope": "JSON object or array roots; JSON Machine incrementally parses top-level members and PHP ext/json decodes each yielded member value",
+      "command": "python3 scripts/run_project.py json php halaxa_json_machine",
+      "receipt": "projects/json/php/halaxa_json_machine/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 11,
+      "parser_source_lines_covered": 261,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_keys": []
+      },
+      "error": null
+    },
+    {
+      "package": "salsify/json-streaming-parser",
+      "version": "v8.3.1",
+      "scope": "One JSON object or array root read from a stream by salsify's own pure-PHP character state machine; scalars converted by ParserHelper without ext/json",
+      "command": "python3 scripts/run_project.py json php salsify_json_streaming_parser",
+      "receipt": "projects/json/php/salsify_json_streaming_parser/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 236,
+      "format_specific_source_lines_covered": 223,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_keys": []
+      },
+      "error": null
+    }
+  ],
+  "standard": [
+    {
+      "api": "json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0)",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all; ext/json is always enabled)",
+      "command": "python3 scripts/run_project.py json php stdlib_json_decode",
+      "receipt": "projects/json/php/stdlib_json_decode/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 751,
+      "format_specific_source_lines_covered": 232,
+      "error": null
+    }
+  ]
+}

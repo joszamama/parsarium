@@ -1,0 +1,105 @@
+[
+  {
+    "name": "symfony/dom-crawler",
+    "version": "v8.1.10",
+    "license": "MIT",
+    "license_evidence": "https://github.com/symfony/dom-crawler/blob/aa0674b52e1bd00502756fbaba8c982b446472e6/LICENSE",
+    "documentation": "https://symfony.com/doc/current/components/dom_crawler.html",
+    "source": "https://github.com/symfony/dom-crawler/tree/aa0674b52e1bd00502756fbaba8c982b446472e6",
+    "input_api": "new Crawler() then Crawler::addXmlContent(string) (DOMDocument::loadXML with LIBXML_NONET always added); the XML-mode Crawler is traversed with children(), each(), nodeName(), attr(), text() and filterXPath() with namespace discovery and registerNamespace()",
+    "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard libxml2 APIs and with sabre/xml",
+    "package_own_scope": "Crawler XML-mode navigation and query mapping: the addXmlContent default-namespace rewrite check, children()/sibling() element traversal, attr()/text() whitespace normalizing, filterXPath() relativizing, findNamespacePrefixes() and discoverNamespace(). Tokenizing, well-formedness, entity decoding and namespace binding are libxml2.",
+    "adapter": "projects/xml/php/symfony_dom_crawler/harness.php",
+    "source_lock": "projects/xml/php/symfony_dom_crawler/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ],
+      "xpath": {
+        "//c:catalog": 1,
+        "//ns1:item": 2,
+        "//ns1:name": 1,
+        "//ns1:note": 1
+      }
+    },
+    "family": "libxml2 via PHP DOMDocument, shared with the standard path and sabre/xml",
+    "project": "projects/xml/php/symfony_dom_crawler/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 443886072,
+      "source": "https://packagist.org/packages/symfony/dom-crawler",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative package downloads are a package adoption proxy, not XML-specific uses; DomCrawler is mostly installed for HTML crawling and functional tests (symfony/browser-kit, Goutte-style scrapers), so most of these downloads are HTML uses. It shares the libxml2 parser family with the standard path and sabre/xml."
+    },
+    "caveats": [
+      "Crawler's documented default-namespace prefix ('default') resolves to the last default namespace declaration in the document; the order control's <plain xmlns=\"\"> leaves it unbound, so the harness registers default-namespace URIs as ns1, ns2, ... with registerNamespace() and keeps auto-discovery for prefixed names.",
+      "addXmlContent replaces every 'xmlns' with 'ns' when the text has no 'xmlns:' prefix declaration; both shared controls declare a prefix, so that rewrite is not exercised.",
+      "addXmlContent suppresses libxml errors and yields an empty Crawler for non-well-formed text; only valid controls were run.",
+      "AFL++ feedback comes from a native overlay that runs the same Crawler harness on PHP 8.5.12 and libxml2 2.15.4, with only libxml2 parser.c, parserInternals.c, SAX2.c and PHP ext/dom/document.c and ext/libxml/libxml.c instrumented. The two controls differ in 357 stable tuples, all of which also differ when addXmlContent runs alone; Crawler navigation adds the same 59 tuples for both controls. The Xdebug package-line report covers Crawler.php only and is kept separate."
+    ]
+  },
+  {
+    "name": "sabre/xml",
+    "version": "4.1.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/sabre-io/xml/blob/bec83cbe2f4e1e1ca4254ed8d7caa7e32cc74b05/LICENSE",
+    "documentation": "https://sabre.io/xml/reading/",
+    "source": "https://github.com/sabre-io/xml/tree/bec83cbe2f4e1e1ca4254ed8d7caa7e32cc74b05",
+    "input_api": "Sabre\\Xml\\Service::getReader() then Sabre\\Xml\\Reader::XML(string) and Reader::parse(): builds a Clark-notation {namespace}local element tree with attributes and leaf text (Service::parse also accepts a string or stream resource)",
+    "parser_family": "libxml2 via PHP XMLReader (Sabre\\Xml\\Reader extends \\XMLReader); shared with the standard XMLReader path",
+    "adapter": "projects/xml/php/sabre_xml/harness.php",
+    "source_lock": "projects/xml/php/sabre_xml/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "family": "libxml2 via PHP XMLReader, shared with the standard XMLReader API",
+    "project": "projects/xml/php/sabre_xml/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 39858833,
+      "source": "https://packagist.org/packages/sabre/xml",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative package downloads are a package adoption proxy, not XML-specific uses; this package shares the libxml2/XMLReader parser family with the standard path."
+    }
+  }
+]

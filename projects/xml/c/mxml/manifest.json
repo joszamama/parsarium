@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "c",
+  "package": "mxml",
+  "release": "4.0.6",
+  "catalog_parser": "data/c/xml/parsers.json",
+  "source_lock": "projects/xml/c/mxml/source-lock.json",
+  "source_sha256": "ec1af6f7a752f63649ad00cf7355cf36366ccf729658a1a4696270de8bd74854",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "api": "mxmlOptionsNew(); mxmlOptionsSetTypeValue(options, MXML_TYPE_OPAQUE); mxmlOptionsSetErrorCallback; mxmlLoadString(NULL, options, NUL-terminated copy of the local bytes); tree walk with mxmlGetType, mxmlGetFirstChild, mxmlGetNextSibling, mxmlGetParent, mxmlGetElement, mxmlElementGetAttrCount, mxmlElementGetAttrByIndex, mxmlGetOpaque, mxmlGetCDATA. Namespace resolution is done by the adapter, not by mxml",
+  "namespace_semantics": "Mini-XML 4.0.6 does not implement Namespaces in XML: its documentation and sources contain no namespace handling, element and attribute names are returned as written (prefix:local) and xmlns/xmlns:p are ordinary attributes. harness.c resolves expanded names from mxml's parsed tree with an in-scope binding stack (default namespace for unprefixed elements, none for unprefixed attributes, xml prefix predefined, unbound prefix rejected).",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of Mini-XML built from the pinned release (static libmxml4.a; shared library and threads disabled)",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/mxml-file.c",
+  "pilot": "xml_c_registry_pilot",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish mxml's element, attribute, comment, processing-instruction, CDATA and character-data tree for them only. Namespace expanded names, declaration counts and URIs are computed by the adapter from mxml's qnames and xmlns attributes; mxml itself does no namespace processing. mxmlLoadString reads a NUL-terminated string, so bytes after a NUL are not parsed. DTDs, entities beyond the controls' references, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from controls/xml/check_controls.py (Python pyexpat, a different family from Mini-XML); the expat and libxml2 projects give the same summaries."
+}

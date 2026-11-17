@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-11-17T09:19:47.615652+00:00",
+  "project": "json/python/ijson",
+  "pass": true,
+  "input_kind": "two fixed valid RFC 8259 JSON controls",
+  "tested_backend": "yajl2_c",
+  "feedback_scope": "native ijson 3.6.0 _yajl2 C sources and embedded yajl 2.1.1 (rtobar fork) lexer/parser source regions",
+  "base_image_id": "sha256:0531ad0283af1d7f02e4e4cbf19cc42e5a6665d7346d9d150d4a23f97282f278",
+  "overlay_image_id": "sha256:a645460dacfb7e051ce9b6b0c18243ba3e0e8a35cfd597ed862727547aee0d7a",
+  "overlay_receipt_sha256": "0d7023eec4a98693e417dae63324839f531cba84a30d7df696204453382061ee",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "variant_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 1201,
+  "variant_parser_features": 1228,
+  "control_yajl_features": 646,
+  "variant_yajl_features": 668,
+  "parser_feature_difference": 75,
+  "yajl_feature_difference": 66,
+  "control_afl_tuples": 1205,
+  "variant_afl_tuples": 1230,
+  "afl_tuple_difference": 73
+}

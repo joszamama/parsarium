@@ -1,0 +1,216 @@
+[
+  {
+    "name": "jansson",
+    "version": "2.15.1",
+    "license": "MIT",
+    "input_api": "json_loadb(const char *buffer, size_t buflen, size_t flags, json_error_t *error)",
+    "documentation": "https://jansson.readthedocs.io/en/latest/apiref.html#c.json_loadb",
+    "documentation_note": "Read the Docs serves no per-release path for 2.15.1; 'latest' rendered 'Jansson 2.15.1 documentation' on 2026-11-17. The pinned tarball's doc/apiref.rst documents json_loadb (line 1383) and json_object_seed (line 920).",
+    "source": "https://github.com/akheron/jansson/releases/tag/v2.15.1",
+    "scope": "RFC 8259 JSON text (object or array root, flags 0) decoded into a json_t tree",
+    "family": "jansson recursive-descent decoder (src/load.c)",
+    "family_note": "Own lexer and recursive-descent parser in src/load.c with UTF-8 checks in src/utf.c and number conversion via strtod in src/strconv.c. No external JSON library. The harness fixes json_object_seed(1) so object hash layout repeats.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package jansson",
+      "value": 282984,
+      "rank": 126,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/c/jansson"
+  },
+  {
+    "name": "json-c",
+    "version": "0.19",
+    "license": "MIT",
+    "input_api": "json_tokener_parse_ex(struct json_tokener *tok, const char *str, int len)",
+    "documentation": "https://json-c.github.io/json-c/json-c-0.19/doc/html/json__tokener_8h.html",
+    "documentation_note": "The pinned tarball's json_tokener.h documents json_tokener_parse_ex (line 323), the end-of-input rule that len includes the final '\\0', trailing-byte detection via json_tokener_get_parse_end, and JSON_TOKENER_STRICT (line 159); linkhash.h documents json_global_set_string_hash (line 65).",
+    "source": "https://github.com/json-c/json-c/releases/tag/json-c-0.19-20260627",
+    "scope": "RFC 8259 JSON text (object or array root, JSON_TOKENER_STRICT, trailing JSON whitespace only) decoded into a json_object tree",
+    "family": "json-c incremental state-machine tokener (json_tokener.c)",
+    "family_note": "Own resumable character-by-character state machine in json_tokener.c building json_object values with linkhash.c tables and printbuf.c buffers; numbers via json-c's own integer parsing and strtod. Shares no code with jansson's recursive-descent src/load.c. The harness selects JSON_C_STR_HASH_PERLLIKE so object hashing has no random seed.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package json-c",
+      "value": 269736,
+      "rank": 165,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/c/json-c"
+  },
+  {
+    "name": "cjson",
+    "version": "1.7.19",
+    "license": "MIT",
+    "license_evidence": "Pinned v1.7.19 LICENSE in source tarball",
+    "input_api": "cJSON_ParseWithLengthOpts(const char *value, size_t buffer_length, const char **return_parse_end, cJSON_bool require_null_terminated)",
+    "documentation": "https://github.com/DaveGamble/cJSON/blob/v1.7.19/README.md",
+    "documentation_note": "Pinned README says cJSON_ParseWithLength accepts a possibly non-NUL-terminated string; pinned cJSON.h documents the length-bounded options API. The harness passes the exact local byte length.",
+    "source": "https://github.com/DaveGamble/cJSON/releases/tag/v1.7.19",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a cJSON tree; observed control subset only",
+    "family": "cJSON recursive-descent parser (cJSON.c)",
+    "family_note": "Single C implementation parses objects, arrays, strings and numbers into cJSON linked nodes; own parser source is compiled with LLVM and AFL++ instrumentation.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package cjson",
+      "value": 150958,
+      "rank": 462,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/cjson"
+  },
+  {
+    "name": "yyjson",
+    "version": "0.13.0",
+    "license": "MIT",
+    "license_evidence": "Pinned 0.13.0 LICENSE in source tarball",
+    "input_api": "yyjson_read(const char *dat, size_t len, yyjson_read_flag flg)",
+    "documentation": "https://github.com/ibireme/yyjson/blob/0.13.0/doc/API.md",
+    "documentation_note": "Pinned doc/API.md documents local UTF-8 input, byte length, and flag 0 for RFC 8259/ECMA-404-compliant reading.",
+    "source": "https://github.com/ibireme/yyjson/releases/tag/0.13.0",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a yyjson_doc tree; observed valid control subset",
+    "family": "yyjson native reader (src/yyjson.c)",
+    "family_note": "The pinned yyjson C source implements its own reader and document representation; no jansson, json-c, or cJSON dependency.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package yyjson",
+      "value": 14868,
+      "rank": 2611,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/yyjson"
+  }
+]

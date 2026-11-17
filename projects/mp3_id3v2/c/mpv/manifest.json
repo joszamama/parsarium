@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "format": "mp3_id3v2",
+  "ecosystem": "c",
+  "package": "mpv",
+  "release": "0.42.0",
+  "api": "mpv_create; mpv_initialize; mpv_command(loadfile, local tagged MP3 path); mpv_wait_event(MPV_EVENT_FILE_LOADED); mpv_get_property(metadata/by-key/title, track-list/0/codec, duration)",
+  "catalog_parser": "data/c/mp3_id3v2/parsers.json",
+  "source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "engine_source_member": "player/loadfile.c",
+  "engine_source_member_sha256": "11a228fa8e3d7fec72be89d3a606829f071676b041fdce3c12719c056600dce6",
+  "wrapper_source_member": "demux/demux_lavf.c",
+  "wrapper_source_member_sha256": "9fbd9b274b341e272eedce7b6480e809b21d5d5aef080846d3c33d0817200f18",
+  "family": "libmpv demux_lavf wrapper over FFmpeg ID3v2 reader and MP3 demuxer",
+  "family_note": "Shares FFmpeg 9.0.2 libavformat/id3v2.c and libavformat/mp3dec.c with the direct FFmpeg row (projects/mp3_id3v2/c/ffmpeg) and shares libmpv 0.42.0 with the C++ mpv catalog row (catalog/mp3_id3v2/cpp/mpv); the catalog's Homebrew mpv linked the same libavformat.63.dylib the FFmpeg row records. mpv itself has no ID3v2 parser: avformat_open_input reads the tag before mp3dec.c parses the audio frames",
+  "underlying_package": "ffmpeg",
+  "underlying_release": "9.0.2",
+  "underlying_source": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+  "underlying_source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+  "underlying_source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "underlying_parser_source_member": "libavformat/id3v2.c",
+  "underlying_parser_source_sha256": "8ace16c6fdd16b296d5a1fbef49e4cf70cc930eb2f040f2a3c8ebe7daedd6205",
+  "underlying_parser_source_members": [
+    {"member": "libavformat/id3v2.c", "sha256": "8ace16c6fdd16b296d5a1fbef49e4cf70cc930eb2f040f2a3c8ebe7daedd6205"},
+    {"member": "libavformat/mp3dec.c", "sha256": "0f56e19ca0694798b2dcd40f6a06e412784b2557945958f4c0b2371dcc0718af"},
+    {"member": "libavformat/id3v1.c", "sha256": "e6c3d0ad5c538d4f5fe34291345db69ca0dee6a579bb842055cb0d76126a9108"},
+    {"member": "libavcodec/mpegaudio_parser.c", "sha256": "c3ebefdce56d8ace2b13af332b4c3b47dbd66f658c2e5f1285edb58d3da68e9f"},
+    {"member": "libavcodec/mpegaudiodecheader.c", "sha256": "fdac326a769d9fc3dd4bd52bf46f0628c11469f43909a5714befb50657201464"}
+  ],
+  "build_dependencies": [
+    {
+      "package": "libplacebo",
+      "release": "7.387.0",
+      "source": "https://github.com/haasn/libplacebo/archive/refs/tags/v7.387.0.tar.gz",
+      "source_sha256": "f9e62d3774a9c4cfd198ec3abaa88294aaade2e31c04d5ab02bcf4abc98b1df5",
+      "role": "required by mpv 0.42.0 (>= 7.387.0); renderer only, not called by the null video output"
+    },
+    {
+      "package": "libass",
+      "release": "Ubuntu archive",
+      "role": "required by mpv; subtitle renderer, not instrumented"
+    }
+  ],
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3_id3v2/tone-tags.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "title": "Parsarium",
+    "codec": "mp3",
+    "duration_ms": 1000
+  },
+  "valid_variant": "controls/mp3_id3v2/tone-tags-v24.mp3",
+  "valid_variant_sha256": "a5337540e40f66d89398dbc29e366034d21ec5ba5f0cd539392cddb07530616d",
+  "valid_variant_note": "Same MPEG audio frames as the control under an ID3v2.4 tag (synchsafe frame sizes, UTF-8 text), so the difference exercises FFmpeg's ID3v2 reader rather than the audio path",
+  "valid_variant_expected_output": {
+    "title": "Parsarium",
+    "codec": "mp3",
+    "duration_ms": 1000
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_file_input": true,
+  "coverage": "LLVM source coverage in the pinned mpv 0.42.0 demuxer layer (demux/demux_lavf.c) and the FFmpeg 9.0.2 libavformat sources it calls, including the ID3v2 reader (id3v2.c) and MP3 demuxer (mp3dec.c), all built from source with the same instrumentation and linked into a byte-input harness that loads a local file through libmpv",
+  "coverage_subject_prefix": "/work/source/demux/",
+  "format_specific_coverage_file_suffix": "/demux_lavf.c",
+  "underlying_coverage_subject_prefix": "/work/ffmpeg/libavformat/",
+  "underlying_format_specific_coverage_file_suffix": "/id3v2.c"
+}

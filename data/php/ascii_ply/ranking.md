@@ -1,31 +1,22 @@
-# PHP × ASCII PLY: verified parser ranking
+# PHP × ASCII PLY: selected parsers
 
-Five verified third-party package paths; working goal 20, ceiling 30. Fifteen paths remain below the goal. The within-PHP primary metric is Packagist lifetime downloads across all releases, observed on 2026-11-14. It measures package adoption, not PLY-specific use. Only one path has this metric, so the five cannot be ordered as a most-used top five.
+3 control-verified third-party paths selected from 5 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-| Rank | Package | Pinned release | Packagist lifetime downloads | Verified scope | Underlying family |
+## Primary within-cell adoption metric
+
+Packagist lifetime package downloads.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [magdev/php-assimp](https://github.com/magdev/php-assimp/tree/0.3.2) | 0.3.2 | 94 | one mesh, three vertices, one face | Assimp 6.0.6 native PLY importer through PHP CLI wrapper |
-| unranked | [collectiveaccess/providence](https://github.com/collectiveaccess/providence/tree/2.0.12) | 2.0.12 | unavailable | local PLY vertex and face rows converted to one STL facet with three vertices | Providence native PHP PlyToStl |
-| unranked | [collectiveaccess/pawtucket2](https://github.com/collectiveaccess/pawtucket2/tree/2.0.12) | 2.0.12 | unavailable | local PLY vertex and face rows converted to one STL facet with three vertices | Byte-identical CollectiveAccess PHP PlyToStl shared with Providence |
-| unranked | [ahg/3d-model](https://github.com/ArchiveHeritageGroup/heratio/tree/v1.165.35/packages/ahg-3d-model) | 1.165.35 | unavailable | PLY header declares three vertices and one face; body geometry was not parsed | Heratio pure PHP metadata extractor |
-| unranked | [HRConvert2](https://github.com/zelon88/HRConvert2/tree/v4.0.0/Resources/Pipelines/Model) | v4.0.0 | unavailable | local PLY converted to OBJ with three vertices, one face, and two completed stages | PHP Model pipeline over PyMeshLab PLY reader and Assimp exporter |
+| 1 | [magdev/php-assimp](https://github.com/magdev/php-assimp/blob/0.3.2/README.md) | 0.3.2 | 94 | One mesh with three vertices and one face reported from a valid local ASCII PLY triangle | Assimp native PLY loader through magdev/php-assimp CLI wrapper |
 
-Providence and Pawtucket2 are separately tagged CollectiveAccess application distributions. Each exposes `PlyToStl::convert` from its released `app/lib/Parsers` directory. Their 2.0.12 parser files have the same SHA-256 and passed the local triangle through the same adapter, producing format-aware STL geometry. They are two package paths in one source-level parser family. The standalone adapter supplies a no-op `Db.php` file for an unused legacy include, so it does not test either full application. Heratio's released `ahg/3d-model` Composer library uses `ModelMetadataExtractor::extract` to read PLY header element counts. This verifies a narrower parser scope than geometry loading. The Assimp wrapper is a distinct PHP package path that shares its underlying native parser with other ecosystem cells. Its later 0.6.0 release remains excluded after a failed control.
+## Supplemental numeric evidence
 
-Packagist returned no package entries for Providence, Pawtucket2, `ahg/3d-model`, or HRConvert2 at inspection. The primary download ranking therefore covers only magdev/php-assimp. GitHub repository stars were captured for all five on 2026-11-14 as a separate project-interest signal:
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
 
-| Repository | Stars | Package path represented |
-| --- | ---: | --- |
-| [zelon88/HRConvert2](https://github.com/zelon88/HRConvert2) | 1,397 | HRConvert2 |
-| [collectiveaccess/providence](https://github.com/collectiveaccess/providence) | 389 | Providence |
-| [collectiveaccess/pawtucket2](https://github.com/collectiveaccess/pawtucket2) | 108 | Pawtucket2 |
-| [ArchiveHeritageGroup/heratio](https://github.com/ArchiveHeritageGroup/heratio) | 7 | ahg/3d-model subpackage |
-| [magdev/php-assimp](https://github.com/magdev/php-assimp) | 1 | magdev/php-assimp |
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [zelon88/hrconvert2](https://github.com/zelon88/HRConvert2/blob/v4.0.0/Resources/Pipelines/Model/pipelineConfig.php) | v4.0.0 | [GitHub upstream stars](https://github.com/zelon88/HRConvert2) | 1,397 | One valid ASCII PLY triangle converted through real PyMeshLab and Assimp stages; OBJ geometry and both stage outputs observed | HRConvert2 PHP Model pipeline over PyMeshLab PLY reader and Assimp exporter |
+| 2 | [collectiveaccess/providence](https://github.com/collectiveaccess/providence/blob/2.0.12/app/lib/Parsers/PlyToStl.php) | 2.0.12 | [GitHub upstream stars](https://github.com/collectiveaccess/providence) | 389 | One valid ASCII PLY triangle; converted STL contains one parsed facet, three vertices and the second X coordinate | CollectiveAccess Providence native PHP PlyToStl |
 
-Stars measure interest in a repository, including non-PLY functionality; Heratio is a monorepo. These values do not establish PLY use or a most-used top five, and they are not mixed with Packagist downloads.
-
-HRConvert2 v4.0.0 publishes a PHP Model conversion pipeline with a documented local path input and explicit PLY capability. Its unmodified `convertModels` function passed the triangle through real PyMeshLab 2025.7 and Assimp 6.0.6 stages; the adapter checked that both stages created output and that the resulting OBJ has three vertices, one face, and the expected coordinate sum. The tagged source files, adapter, Python wheels, Assimp binary and library are pinned by hashes. Standalone host-service shims provide tool paths, logging, and command execution; the full web server and its sandbox policy were not run. This is a separately tagged PHP package path over native parser families, not an independent PHP PLY syntax parser. Its 1,397 GitHub stars at inspection suggest project interest but are not comparable with the Packagist ranking metric. Reproduce with `python3 scripts/verify_hrconvert2_php_ascii_ply.py` on macOS ARM.
-
-The bounded searches saved 1,288 hits with 1,097 unique identifiers across Packagist, GitHub repository search, GitHub code search, and Sourcegraph. A focused MeshLab PHP code query surfaced HRConvert2. Later Assimp export, meshlabserver, loadPly, PlyLoader and read_ply code windows surfaced no additional verified PHP PLY parser; their search hits and dispositions are saved. Follow-up Packagist queries for Gmsh, VTK, 3D models, point clouds and PLY parsers surfaced no additional documented PHP PLY reader. The focused `element vertex` PHP code query returned 39 files, mostly CollectiveAccess copies or PLY writers; a `PlyToStl.php` filename query found 24 files, primarily copies of the same class. An explicit PHP ASCII PLY reader, Whitehouse-256/php-ply-convertor, lacks both an open-source license and a release, so it is not counted. The higher-star srv/pointcloud_web_viewer documents CSV point clouds rather than PLY. A tagged geobim upload endpoint dispatches PLY to a Python worker; VisualMedia stages model uploads without a released PHP parser API. The tagged `resturahmania/pawtucket2` fork contains a byte-identical copy of the already-counted Pawtucket2 parser and is excluded as a duplicate package. `insta3D` has PLY-related PHP code and a tag but no open-source license for that code. API-name searches found no additional PHP reader: `PlyReader` largely matched unrelated `ReplyReader` names, `readPly` returned zero, and `parsePLY` was browser JavaScript embedded in a PHP page. Broad code queries were noisy; only their first 100 results were saved. These searches do not establish that no other PHP PLY parser exists. The PHP standard and bundled API inventory found no documented format-aware PLY parser within its stated scope. Evidence and limits are in `cell.json`, `supplementary-search.json`, `leads.json`, `source-lock.json`, `verification.json`, and `standard.json`.
-
-A 2026-11-14 follow-up saved four bounded GitHub repository queries combining PLY with 3D, mesh, model and point cloud terms, plus one code query combining PLY and meshlabserver in PHP. Their 28 hits added no new identifiers to the 1,097 previously saved. The only newly reviewed name, LumHue, concerns Hue lights and provides no PLY mesh API or open-source release. No additional parser passed the control.
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

@@ -1,0 +1,369 @@
+[
+  {
+    "name": "github.com/json-iterator/go",
+    "module": "github.com/json-iterator/go",
+    "version": "v1.1.12",
+    "license": "MIT",
+    "input_api": "jsoniter.Unmarshal([]byte, interface{})",
+    "documentation": "https://pkg.go.dev/github.com/json-iterator/go@v1.1.12#Unmarshal",
+    "source": "https://github.com/json-iterator/go/tree/v1.1.12",
+    "scope": "RFC 8259 JSON text decoded into interface{}",
+    "family": "json-iterator Iterator parser",
+    "family_note": "Own byte Iterator implementation; it does not delegate decoding to encoding/json. It imports encoding/json types only for json.Number, json.RawMessage, and Marshaler/Unmarshaler compatibility.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 18454,
+      "source": "https://pkg.go.dev/github.com/json-iterator/go?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/go/github_com_json_iterator_go"
+  },
+  {
+    "name": "github.com/tidwall/gjson",
+    "module": "github.com/tidwall/gjson",
+    "version": "v1.20.4",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "gjson.ValidBytes([]byte) then gjson.ParseBytes([]byte); Result.ForEach traverses objects and arrays",
+    "documentation": "https://pkg.go.dev/github.com/tidwall/gjson@v1.20.4#ParseBytes",
+    "source": "https://github.com/tidwall/gjson/tree/v1.20.4",
+    "scope": "RFC 8259 JSON text validated as a complete local byte slice, then traversed through GJSON Result nodes; observed control subset",
+    "family": "tidwall/gjson path-query parser",
+    "family_note": "GJSON owns its byte/character scanner in gjson.go. ParseBytes assumes well-formed JSON, so the harness first invokes its own ValidBytes; the full Result tree is then visited with ForEach. It does not call encoding/json to parse input. The package serves JSON path queries, so its adoption count is not evidence of general-purpose decoding use.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 10420,
+      "source": "https://pkg.go.dev/github.com/tidwall/gjson?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_tidwall_gjson"
+  },
+  {
+    "name": "github.com/ugorji/go/codec",
+    "module": "github.com/ugorji/go/codec",
+    "version": "v1.3.2",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "codec.NewDecoderBytes([]byte, &codec.JsonHandle{}).Decode(&value)",
+    "documentation": "https://pkg.go.dev/github.com/ugorji/go/codec@v1.3.2#NewDecoderBytes",
+    "source": "https://github.com/ugorji/go/tree/codec/v1.3.2",
+    "scope": "Local JSON byte slice decoded through codec.JsonHandle into untyped Go values; observed valid control subset",
+    "family": "ugorji/go-codec JSON decoder",
+    "family_note": "The JsonHandle selects go-codec own JSON reader; JSON-specific files under codec/json.* are instrumented and mapped to AFL feedback. The package also implements binc, CBOR, MessagePack and simple, so its Imported by metric is total package adoption and does not measure JSON-specific use.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 10142,
+      "source": "https://pkg.go.dev/github.com/ugorji/go/codec?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_ugorji_go_codec"
+  },
+  {
+    "name": "github.com/goccy/go-json",
+    "module": "github.com/goccy/go-json",
+    "version": "v0.12.0",
+    "license": "MIT",
+    "input_api": "gojson.Unmarshal([]byte, interface{})",
+    "documentation": "https://pkg.go.dev/github.com/goccy/go-json@v0.12.0#Unmarshal",
+    "source": "https://github.com/goccy/go-json/tree/v0.12.0",
+    "scope": "RFC 8259 JSON text decoded into interface{}",
+    "family": "go-json compiled decoder",
+    "family_note": "Own type-compiled decoder in internal/decoder that scans the byte slice itself; it does not call encoding/json or json-iterator to decode. It imports encoding/json, encoding/json/v2, and encoding/json/jsontext for error, json.Number, and Unmarshaler/UnmarshalJSONFrom interoperability.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 4192,
+      "source": "https://pkg.go.dev/github.com/goccy/go-json?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/go/github_com_goccy_go_json"
+  },
+  {
+    "name": "github.com/buger/jsonparser",
+    "module": "github.com/buger/jsonparser",
+    "version": "v1.6.1",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "jsonparser.Get([]byte) plus ObjectEach and ArrayEachErr over local byte slices",
+    "documentation": "https://pkg.go.dev/github.com/buger/jsonparser@v1.6.1#Get",
+    "source": "https://github.com/buger/jsonparser/tree/v1.6.1",
+    "scope": "Local JSON byte slice parsed by recursive ObjectEach/ArrayEachErr and scalar conversion; this path-query API is not claimed to validate an entire arbitrary JSON document",
+    "family": "buger/jsonparser byte scanner",
+    "family_note": "The pinned jsonparser parser.go and escape.go implement their own byte scanner and JSON value extraction. The harness recursively visits all object and array values in the two controls, but Get is a path parser and not a full-document validator. No encoding/json decoder is used.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 2171,
+      "source": "https://pkg.go.dev/github.com/buger/jsonparser?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_buger_jsonparser"
+  },
+  {
+    "name": "github.com/valyala/fastjson",
+    "module": "github.com/valyala/fastjson",
+    "version": "v1.6.10",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "fastjson.Parser.ParseBytes([]byte) over one complete local JSON byte slice",
+    "documentation": "https://pkg.go.dev/github.com/valyala/fastjson@v1.6.10#Parser.ParseBytes",
+    "source": "https://github.com/valyala/fastjson/tree/v1.6.10",
+    "scope": "Full local JSON document into fastjson.Value tree, recursively traversed to observe decoded structures and values on both controls; only the observed subset is verified",
+    "family": "valyala/fastjson own Go recursive-descent parser",
+    "family_note": "parser.go implements its own JSON tokenizer and Value tree. No encoding/json decoder is used in the parse harness; reporter uses encoding/json only for summary receipt serialization.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 895,
+      "source": "https://pkg.go.dev/github.com/valyala/fastjson?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_valyala_fastjson"
+  },
+  {
+    "name": "github.com/bytedance/sonic",
+    "module": "github.com/bytedance/sonic",
+    "version": "v1.15.5",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "sonic.Unmarshal([]byte, *any) over one complete local JSON byte slice",
+    "documentation": "https://pkg.go.dev/github.com/bytedance/sonic@v1.15.5#Unmarshal",
+    "source": "https://github.com/bytedance/sonic/tree/v1.15.5",
+    "scope": "Complete local JSON document decoded into untyped Go values, then summarized; both observed valid controls verified",
+    "family": "Sonic optimized arm64 decoder: Go optdec over native NEON parser",
+    "family_note": "On linux/arm64 with Go 1.27.1, sonic.go and decoder_native.go build tags select Sonic. internal/decoder/api/decoder_arm64.go routes decodeImpl to optdec.Decode; optdec.Parser.parse calls native.ParseWithPadding implemented by NEON assembly. The harness rejects sonic.APIKind != UseSonicJSON. Go source coverage and AFL bridge instrument optdec Go source, not NEON assembly instructions.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 2428,
+      "source": "https://pkg.go.dev/github.com/bytedance/sonic?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_bytedance_sonic"
+  }
+]

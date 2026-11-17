@@ -1,0 +1,572 @@
+[
+  {
+    "name": "jackson-dataformat-xml",
+    "group": "com.fasterxml.jackson.dataformat",
+    "artifact": "jackson-dataformat-xml",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Jackson base parent POM and project README; pinned POM and source hashes in source-lock.json",
+    "input_api": "new XmlFactory(new WstxInputFactory()).createParser(Files.newInputStream(local Path)); nextToken() to EOF",
+    "documentation": "https://github.com/FasterXML/jackson-dataformat-xml",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.23.0/jackson-dataformat-xml-2.23.0-sources.jar",
+    "scope": "Valid XML 1.0 UTF-8 without DOCTYPE projected by XmlFactory.createParser(local InputStream) into ordered Jackson tokens; namespace URIs, root name, comments and processing instructions are not represented by this API projection",
+    "family": "Jackson XML FromXmlParser/XmlTokenStream over Woodstox StAX tokenizer",
+    "family_note": "Jackson XML is a format-specific parser/adapter API, with its own XML-to-Jackson token projection but no independent XML lexical engine. Its default/explicit Woodstox StAX parser is the already selected woodstox-core family. Both layers are separately instrumented.",
+    "shared_families": [
+      "Woodstox",
+      "Jackson XML projection"
+    ],
+    "coverage_note": "Same-release Jackson XML module and Woodstox source jars mapped separately to JaCoCo release classes; module lines and underlying tokenizer lines reported separately.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 25682,
+      "max_release": "2.14.2",
+      "max_release_value": 725,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.dataformat%3Ajackson-dataformat-xml",
+      "captured_at_utc": "2026-11-17T03:37:58.408539+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Package adoption reflects Jackson XML module use, not an independent XML tokenizer; shares Woodstox family with selected woodstox-core."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "events": [
+        "START_OBJECT",
+        "FIELD_NAME:version",
+        "VALUE_STRING:1",
+        "FIELD_NAME:item",
+        "START_OBJECT",
+        "FIELD_NAME:id",
+        "VALUE_STRING:a1",
+        "FIELD_NAME:lang",
+        "VALUE_STRING:es",
+        "FIELD_NAME:",
+        "VALUE_STRING:Café & té",
+        "END_OBJECT",
+        "FIELD_NAME:item",
+        "START_OBJECT",
+        "FIELD_NAME:id",
+        "VALUE_STRING:b2",
+        "FIELD_NAME:name",
+        "VALUE_STRING:Zürich <HQ>",
+        "FIELD_NAME:note",
+        "VALUE_STRING:x < y",
+        "END_OBJECT",
+        "END_OBJECT"
+      ],
+      "token_count": 22
+    },
+    "project": "projects/xml/java/jackson_xml"
+  },
+  {
+    "name": "xercesImpl",
+    "group": "xerces",
+    "artifact": "xercesImpl",
+    "version": "2.12.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses (The Apache Software License, Version 2.0)",
+    "input_api": "new org.apache.xerces.parsers.DOMParser() with http://xml.org/sax/features/namespaces on; parse(InputSource(ByteArrayInputStream)); getDocument()",
+    "documentation": "https://xerces.apache.org/xerces2-j/javadocs/xerces2/org/apache/xerces/parsers/DOMParser.html",
+    "source": "https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.2/xercesImpl-2.12.2-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware into a W3C DOM: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes (sorted per element, DOM keeps no attribute order), decoded character data (predefined entity and character references, CDATA)",
+    "family": "Apache Xerces2-J",
+    "family_note": "The native Xerces DOMParser drives XMLDocumentScannerImpl / XMLNSDocumentScannerImpl and builds the DOM in AbstractDOMParser. The OpenJDK java.xml module carries a repackaged fork of the same Xerces2-J code (com.sun.org.apache.xerces.internal), which is what the standard javax.xml.parsers path runs, so the third-party and standard Java XML paths share the Xerces2-J parser family. They are separate code copies that have diverged (JDK security limits, XMLSecurityManager, later fixes), not one binary. dom4j and JDOM, logged as leads, build trees over a SAX parser that defaults to this same JDK Xerces fork.",
+    "shared_families": [
+      "Apache Xerces2-J"
+    ],
+    "coverage_note": "xercesImpl-2.12.2.jar classes carry no line-number tables; the pinned sources jar of the same release is recompiled with javac -g --release 8 for line coverage and laid over the unpacked release jar.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 2474,
+      "max_release": "2.12.2",
+      "max_release_value": 549,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/xerces%3AxercesImpl",
+      "captured_at_utc": "2026-11-17T03:37:55.868402+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xercesimpl"
+  },
+  {
+    "name": "woodstox-core",
+    "group": "com.fasterxml.woodstox",
+    "artifact": "woodstox-core",
+    "version": "7.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.pom",
+    "input_api": "new com.ctc.wstx.stax.WstxInputFactory().createXMLStreamReader(local InputStream), namespace-aware; iterate XMLStreamReader.next()",
+    "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/stream/XMLInputFactory.html#createXMLStreamReader(java.io.InputStream)",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware through StAX: expanded element names, maximum depth, namespace declarations and URIs, sorted non-declaration attributes, and decoded character data",
+    "family": "Woodstox independent StAX tokenizer/parser",
+    "family_note": "com.ctc.wstx.sr.BasicStreamReader and input scanners implement their own XML tokenization, independent of Xerces. The stax2-api 4.3.1 dependency contributes interfaces, not an XML parser. Old Codehaus woodstox-core-asl shares the Woodstox parser family.",
+    "shared_families": [
+      "Woodstox"
+    ],
+    "coverage_note": "Release jar includes line-number tables; JaCoCo instruments the pinned release classes and maps lines to the same-release sources jar.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 1874,
+      "max_release": "7.0.0",
+      "max_release_value": 156,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.woodstox%3Awoodstox-core",
+      "captured_at_utc": "2026-11-17T03:37:56.710432+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/woodstox_core"
+  },
+  {
+    "name": "dom4j",
+    "group": "org.dom4j",
+    "artifact": "dom4j",
+    "version": "2.2.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven release POM licenses ('BSD 3-clause New License', https://github.com/dom4j/dom4j/blob/master/LICENSE); pinned POM SHA256 in source-lock.json",
+    "input_api": "org.dom4j.io.SAXReader.createDefault().read(local InputStream) returns an org.dom4j.Document; walk Element.content()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/dom4j/dom4j/2.2.0/dom4j-2.2.0-sources.jar",
+    "documentation_note": "Pinned sources: SAXReader.java lines 152-162 (createDefault disables external DTD and entity loading), 386-393 (read(InputStream) wraps an InputSource), 462-496 (read(InputSource) parses through getXMLReader() and returns the content handler document), 895-897 (createXMLReader delegates to SAXHelper); SAXHelper.java lines 84-91 and JAXPHelper.java lines 44-48 obtain the reader from SAXParserFactory.newInstance() with namespace awareness on. Official site: https://dom4j.github.io/",
+    "source": "https://repo.maven.apache.org/maven2/org/dom4j/dom4j/2.2.0/dom4j-2.2.0-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read namespace-aware by dom4j SAXReader into a dom4j Document over the default JAXP SAX parser: expanded element names, maximum depth, declared namespaces and URIs, sorted non-namespace attributes, and decoded character data",
+    "family": "dom4j SAX tree builder over the JAXP default SAX parser (OpenJDK java.xml Xerces2-J fork)",
+    "family_note": "dom4j has no XML tokenizer of its own. SAXReader obtains an XMLReader from JAXP SAXParserFactory.newInstance(); with no factory property or provider configured, the pinned Temurin 25.0.5 runtime returns com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser, so the OpenJDK Xerces fork scans the input and dom4j's SAXContentHandler builds the tree. This path shares the Apache Xerces2-J family with xerces:xercesImpl and the standard javax.xml.parsers path; it is counted as a separate package path (wrapper API), not as an independent parser engine. The legacy dom4j:dom4j 1.x coordinate is the same project and is not counted.",
+    "shared_families": [
+      "dom4j",
+      "Apache Xerces2-J"
+    ],
+    "coverage_note": "Release jar includes line-number tables; JaCoCo instruments pinned org.dom4j release classes and maps lines to the same-release sources jar. The JDK Xerces fork is instrumented as boot classes and reported separately as underlying coverage against jdk25u jdk-25.0.5+8 sources. AFL++ feedback is scoped to org.dom4j lines only.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 1434,
+      "max_release": "2.1.1",
+      "max_release_value": 540,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.dom4j%3Adom4j",
+      "captured_at_utc": "2026-11-17T03:37:55.267371+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Summed over 11 org.dom4j:dom4j releases, so a dependent is counted once per release it depends on; deps.dev coverage is incomplete. The legacy dom4j:dom4j coordinate (1,755) is a separate lead and is not added. Rechecked 2026-11-17 by scripts/check_java_xml_dom4j.py: unchanged."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/dom4j"
+  },
+  {
+    "name": "xmlbeans",
+    "group": "org.apache.xmlbeans",
+    "artifact": "xmlbeans",
+    "version": "5.4.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM license and source headers; pinned POM hash in source-lock.json",
+    "input_api": "XmlObject.Factory.parse(Files.newInputStream(local Path)); XmlObject.newCursor() traverses XML infoset",
+    "documentation": "https://xmlbeans.apache.org/docs/5.0.0/org/apache/xmlbeans/XmlObject.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/xmlbeans/xmlbeans/5.4.1/xmlbeans-5.4.1-sources.jar",
+    "scope": "Valid UTF-8 XML 1.0 without DOCTYPE into XMLBeans cursor tree: expanded element names, attributes, namespace declarations and URIs, depth, and decoded text",
+    "family": "XMLBeans SAX-to-cursor tree over OpenJDK Xerces2-J fork",
+    "family_note": "Release 5.4.1 Locale.parseToXmlObject(InputStream) uses getSaxLoader and SAXHelper.newXMLReader, which calls JAXP SAXParserFactory.newInstance(). No Piccolo-derived tokenizer is bundled in this release; it shares the OpenJDK Xerces SAX parser family with the standard API and dom4j wrapper path. XMLBeans own tree/store lines and underlying JDK parser lines are reported separately.",
+    "shared_families": [
+      "OpenJDK Xerces2-J fork"
+    ],
+    "coverage_note": "Pinned XMLBeans release jar has line tables; JaCoCo maps its store/Locale source separately from the matching OpenJDK java.xml internal Xerces fork.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 1433,
+      "max_release": "3.1.0",
+      "max_release_value": 319,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.xmlbeans%3Axmlbeans",
+      "captured_at_utc": "2026-11-17T03:38:01.364453+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Maven coordinate adoption, not XML-specific use or an independent tokenizer count."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xmlbeans"
+  },
+  {
+    "name": "jdom2",
+    "group": "org.jdom",
+    "artifact": "jdom2",
+    "version": "2.0.6.1",
+    "license": "JDOM license",
+    "license_evidence": "Maven release POM license and release JAR META-INF/LICENSE.txt; pinned POM and JAR hashes in source-lock.json",
+    "input_api": "new SAXBuilder().build(Files.newInputStream(local Path)) into JDOM Document",
+    "documentation": "https://www.jdom.org/docs/apidocs/org/jdom2/input/SAXBuilder.html",
+    "source": "https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6.1/jdom2-2.0.6.1-sources.jar",
+    "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE into JDOM Document: expanded element/attribute names, namespace declarations, depth, and decoded text",
+    "family": "JDOM2 SAXHandler/tree over OpenJDK Xerces2-J fork",
+    "family_note": "JDOM2 SAXBuilder delegates tokenization to its default JAXP SAX reader (OpenJDK java.xml Xerces fork on pinned runtime). Its own SAXHandler and JDOMFactory build the tree. Shares underlying Xerces family with standard path and dom4j, but is a distinct package API and tree implementation.",
+    "shared_families": [
+      "Apache Xerces2-J (OpenJDK fork)"
+    ],
+    "coverage_note": "Pinned JDOM2 release source/class coverage and underlying OpenJDK java.xml Xerces source/class coverage reported separately.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 968,
+      "max_release": "2.0.6.1",
+      "max_release_value": 451,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.jdom%3Ajdom2",
+      "captured_at_utc": "2026-11-17T03:37:56.129464+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Coordinate adoption, not XML-specific use or an independent tokenizer count."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/jdom2"
+  },
+  {
+    "name": "aalto-xml",
+    "group": "com.fasterxml",
+    "artifact": "aalto-xml",
+    "version": "1.4.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "new com.fasterxml.aalto.stax.InputFactoryImpl().createXMLStreamReader(local InputStream); iterate XMLStreamReader.next()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/fasterxml/aalto-xml/1.4.0/aalto-xml-1.4.0-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/aalto-xml/1.4.0/aalto-xml-1.4.0-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware through Aalto StAX: expanded element names, maximum depth, namespace declarations and URIs, sorted non-declaration attributes, and decoded character data",
+    "family": "Aalto independent StAX tokenizer/parser",
+    "family_note": "Aalto InputFactoryImpl creates its own StreamReaderImpl; the local UTF-8 InputStream control executes Utf8Scanner and StreamScanner. stax2-api contributes interfaces only. This implementation is independent of Woodstox and Xerces.",
+    "shared_families": [
+      "Aalto XML"
+    ],
+    "coverage_note": "Release jar includes line-number tables; JaCoCo instruments pinned release classes and maps lines to same-release sources jar.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 559,
+      "max_release": "1.0.0",
+      "max_release_value": 130,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml%3Aaalto-xml",
+      "captured_at_utc": "2026-11-17T03:38:01.619135+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/aalto_xml"
+  },
+  {
+    "name": "xom",
+    "group": "xom",
+    "artifact": "xom",
+    "version": "1.4.6",
+    "license": "LGPL-2.1",
+    "license_evidence": "Pinned Maven release POM licenses (The GNU Lesser General Public License, Version 2.1)",
+    "input_api": "new nu.xom.Builder().build(Files.newInputStream(local Path)) into XOM Document",
+    "documentation": "https://xom.nu/apidocs/nu/xom/Builder.html",
+    "source": "https://repo.maven.apache.org/maven2/xom/xom/1.4.6/xom-1.4.6-sources.jar",
+    "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE into XOM Document: expanded element/attribute names, namespace declarations, depth, and decoded text",
+    "family": "XOM Builder/tree over OpenJDK Xerces2-J fork",
+    "family_note": "XOM Builder.findParser selects the OpenJDK internal Xerces SAX reader when the optional external Xerces dependency is absent. XOM constructs its own Document tree but has no independent XML tokenizer. Its parser path shares the Xerces2-J family with the standard, JDOM2, dom4j, and XMLBeans paths.",
+    "shared_families": [
+      "Apache Xerces2-J (OpenJDK fork)"
+    ],
+    "coverage_note": "Published XOM 1.4.6 release JAR lacks line tables; pinned same-release XOM sources are recompiled with javac -g --release 8 for line coverage. Underlying OpenJDK java.xml Xerces classes and sources are covered and reported separately.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 355,
+      "max_release": "1.2.5",
+      "max_release_value": 116,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/xom%3Axom",
+      "captured_at_utc": "2026-11-17T03:37:59.222235+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Coordinate adoption reflects XOM tree API use, not independent XML tokenization; shares the OpenJDK Xerces fork."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xom"
+  },
+  {
+    "name": "xpp3",
+    "group": "xpp3",
+    "artifact": "xpp3",
+    "version": "1.1.4c",
+    "license": "Indiana University Extreme! Lab Software License 1.1.1 (parser); public domain (XmlPull API); Apache-1.1 (bundled QName)",
+    "license_evidence": "Pinned release POM licenses and MXParser.java source header/license",
+    "input_api": "new org.xmlpull.mxp1.MXParser(); setFeature(FEATURE_PROCESS_NAMESPACES, true); setInput(Files.newInputStream(local Path), null); next() until END_DOCUMENT",
+    "documentation": "https://repo.maven.apache.org/maven2/xpp3/xpp3/1.1.4c/xpp3-1.1.4c-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/xpp3/xpp3/1.1.4c/xpp3-1.1.4c-sources.jar",
+    "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE from local InputStream into MXParser pull events: expanded names, namespace declarations, depth, attributes, and decoded text",
+    "family": "XPP3 MXParser independent XML pull tokenizer",
+    "family_note": "MXParser implements XmlPullParser and tokenizes the local stream itself. No SAX, DOM, StAX, JDK Xerces, or Aalto tokenizer is used.",
+    "shared_families": [
+      "XPP3 MXParser"
+    ],
+    "coverage_note": "Pinned 1.1.4c release classes retain line tables and are mapped by JaCoCo to the same-release sources jar; coverage and AFL features are restricted to org.xmlpull.mxp1 parser classes.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 285,
+      "max_release": "1.1.4c",
+      "max_release_value": 143,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/xpp3%3Axpp3",
+      "captured_at_utc": "2026-11-17T03:38:00.881925+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Exact 1.1.3.4 default-version artifact is unavailable from Maven Central; this uses the published 1.1.4c release of the same coordinate. Metric measures package adoption, not XML-specific use."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xpp3"
+  },
+  {
+    "name": "kxml2",
+    "group": "net.sf.kxml",
+    "artifact": "kxml2",
+    "version": "2.3.0",
+    "license": "BSD-style (org.kxml2 parser); public domain (bundled XmlPull API)",
+    "license_evidence": "Pinned Maven release POM licenses and KXmlParser.java source header",
+    "input_api": "new org.kxml2.io.KXmlParser(); setFeature(FEATURE_PROCESS_NAMESPACES, true); setInput(Files.newInputStream(local Path), null); next() until END_DOCUMENT",
+    "documentation": "https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar",
+    "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE from local InputStream into KXmlParser pull events: expanded names, namespace declarations, depth, attributes, and decoded text",
+    "family": "kXML2 KXmlParser independent XML pull tokenizer",
+    "family_note": "KXmlParser implements XmlPullParser and tokenizes the local stream itself. No XPP3 MXParser, SAX, DOM, StAX, JDK Xerces, or Aalto tokenizer is used.",
+    "shared_families": [
+      "kXML2 KXmlParser"
+    ],
+    "coverage_note": "Published 2.3.0 release JAR lacks line tables; pinned same-release KXmlParser.java is recompiled with javac -g --release 8 for parser-only JaCoCo source lines.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 99,
+      "max_release": "2.3.0",
+      "max_release_value": 62,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.sf.kxml%3Akxml2",
+      "captured_at_utc": "2026-11-17T03:38:00.602074+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Package adoption within Java XML, not XML-specific use; kxml2:kxml2 is a relocated coordinate and is not a second parser path."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/kxml2"
+  }
+]

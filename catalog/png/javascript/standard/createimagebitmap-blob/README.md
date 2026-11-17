@@ -27,6 +27,12 @@
 
 [Control adapter](../../../../../adapters/javascript/png_browser.mjs)
 
-## Runnable harness
+## Run the valid control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Browser container and control receipt](../../../../../projects/png/javascript/stdlib_browser_createimagebitmap_blob/README.md)
+
+```sh
+python3 projects/png/javascript/stdlib_browser_createimagebitmap_blob/verify-control.py
+```
+
+The browser runs this control, but its native parser source coverage and AFL++ parser feedback are unavailable. This path remains staged.

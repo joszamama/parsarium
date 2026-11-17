@@ -1,5 +1,6 @@
 """Run brief AFL++ campaigns for one bridge in each managed ecosystem."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -13,7 +14,7 @@ from run_case import ROOT
 
 PILOTS = (
     ("ascii_ply", "go", "polyform_ply"),
-    ("ascii_ply", "java", "jply"),
+    ("png", "java", "commons_imaging"),
     ("ascii_pnm", "javascript", "image_size"),
     ("ascii_ply", "python", "plyfile"),
     ("svg", "php", "php_svg_lib"),
@@ -21,9 +22,16 @@ PILOTS = (
 
 
 def main() -> None:
-    results = []
+    cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("--project", help="rerun one format/ecosystem/slug pilot")
+    args = cli.parse_args()
+    report_path = ROOT / "data/afl-campaign-smoke.json"
+    previous = (json.loads(report_path.read_text())["results"] if args.project else [])
+    results = {item["project"]: item for item in previous}
     for format_name, ecosystem, slug in PILOTS:
         project = f"{format_name}/{ecosystem}/{slug}"
+        if args.project and project != args.project:
+            continue
         with tempfile.TemporaryDirectory(prefix=f"parsarium-afl-{ecosystem}-") as temporary:
             run_dir = Path(temporary) / "run"
             prepare = subprocess.run(
@@ -65,13 +73,16 @@ def main() -> None:
                 "saved_hangs": len(instance["hangs"]),
                 "run_time_seconds": int(stats["run_time"]),
             }
-            results.append(record)
+            results[project] = record
             print(f"{project}: {executions} executions, {edges} edges", flush=True)
+    if args.project and args.project not in results:
+        raise ValueError(f"unknown pilot: {args.project}")
+    ordered = [results[f"{fmt}/{eco}/{slug}"] for fmt, eco, slug in PILOTS]
     report = {"schema_version": 1,
               "checked_at_utc": datetime.now(timezone.utc).isoformat(),
-              "projects_total": len(results), "projects_passed": sum(x["pass"] for x in results),
-              "results": results}
-    (ROOT / "data/afl-campaign-smoke.json").write_text(json.dumps(report, indent=2) + "\n")
+              "projects_total": len(ordered), "projects_passed": sum(x["pass"] for x in ordered),
+              "results": ordered}
+    report_path.write_text(json.dumps(report, indent=2) + "\n")
 
 
 if __name__ == "__main__":

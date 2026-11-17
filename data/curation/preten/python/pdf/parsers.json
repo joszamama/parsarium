@@ -1,0 +1,338 @@
+[
+  {
+    "name": "pypdf",
+    "version": "7.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/pypdf/7.0.1/json",
+    "input_api": "pypdf.PdfReader(local path)",
+    "documentation": "https://pypdf.readthedocs.io/en/latest/modules/PdfReader.html",
+    "scope": "page text",
+    "family": "pypdf pure Python",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pdfrw",
+    "version": "0.4",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdfrw/0.4/json",
+    "input_api": "pdfrw.PdfReader(local path)",
+    "documentation": "https://github.com/pmaupin/pdfrw",
+    "scope": "page count and document title",
+    "family": "pdfrw parser",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    }
+  },
+  {
+    "name": "pdfminer.six",
+    "version": "20260107",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdfminer.six/20260107/json",
+    "input_api": "pdfminer.high_level.extract_text(local path)",
+    "documentation": "https://pdfminersix.readthedocs.io/en/latest/tutorial/highlevel.html",
+    "scope": "page text",
+    "family": "pdfminer.six",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pdfplumber",
+    "version": "0.11.10",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdfplumber/0.11.10/json",
+    "input_api": "pdfplumber.open(local path)",
+    "documentation": "https://github.com/jsvine/pdfplumber",
+    "scope": "page text",
+    "family": "pdfplumber via pdfminer.six",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "PyMuPDF",
+    "version": "2.1",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://pypi.org/pypi/PyMuPDF/2.1/json",
+    "input_api": "pymupdf.open(local path)",
+    "documentation": "https://pymupdf.readthedocs.io/en/latest/how-to-open-a-file.html",
+    "scope": "page text",
+    "family": "MuPDF",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pypdfium2",
+    "version": "5.10.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/pypdfium2/5.10.1/json",
+    "input_api": "pypdfium2.PdfDocument(local path)",
+    "documentation": "https://pypdfium2.readthedocs.io/en/stable/python_api.html",
+    "scope": "page text",
+    "family": "PDFium",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pikepdf",
+    "version": "10.18.0",
+    "license": "MPL-2.0",
+    "license_evidence": "https://pypi.org/pypi/pikepdf/10.18.0/json",
+    "input_api": "pikepdf.open(local path)",
+    "documentation": "https://pikepdf.readthedocs.io/en/latest/tutorial.html",
+    "scope": "page count and document title",
+    "family": "QPDF",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    }
+  },
+  {
+    "name": "pdfquery",
+    "version": "0.4.3",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdfquery/0.4.3/json",
+    "input_api": "pdfquery.PDFQuery(local path).load()",
+    "documentation": "https://github.com/jcushman/pdfquery",
+    "scope": "layout tree text",
+    "family": "pdfquery via pdfminer.six",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pdf2image",
+    "version": "1.17.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdf2image/1.17.0/json",
+    "input_api": "pdf2image.convert_from_path(local path)",
+    "documentation": "https://github.com/Belval/pdf2image",
+    "scope": "rendered page dimensions",
+    "family": "Poppler pdftoppm subprocess",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "width": 1700,
+      "height": 2200
+    }
+  },
+  {
+    "name": "PyPDF4",
+    "version": "1.27.0",
+    "license": "BSD",
+    "license_evidence": "https://pypi.org/pypi/PyPDF4/1.27.0/json",
+    "input_api": "PyPDF4.PdfFileReader(local byte stream)",
+    "documentation": "https://pypi.org/project/PyPDF4/1.27.0/",
+    "scope": "page count and document title",
+    "family": "PyPDF4 fork of PyPDF2/pypdf family",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    }
+  },
+  {
+    "name": "pdf_oxide",
+    "version": "0.3.78",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/pdf_oxide/0.3.78/json",
+    "input_api": "pdf_oxide.PdfDocument(local path)",
+    "documentation": "https://pypi.org/project/pdf-oxide/0.3.78/",
+    "scope": "page text",
+    "family": "PDF Oxide Rust core",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pymupdf4llm",
+    "version": "2.1",
+    "license": "AGPL-3.0-or-later",
+    "license_evidence": "https://pymupdf.readthedocs.io/en/latest/faq/index.html",
+    "input_api": "pymupdf4llm.to_markdown(local path)",
+    "documentation": "https://pymupdf.readthedocs.io/en/latest/pymupdf4llm/api.html",
+    "scope": "page text as Markdown",
+    "family": "PyMuPDF4LLM via MuPDF",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pdf2docx",
+    "version": "0.5.13",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdf2docx/0.5.13/json",
+    "input_api": "pdf2docx.Converter(local path).parse()",
+    "documentation": "https://github.com/ArtifexSoftware/pdf2docx/blob/master/pdf2docx/converter.py",
+    "scope": "parsed page sections",
+    "family": "pdf2docx layout over MuPDF",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "parsed_sections": 1
+    }
+  },
+  {
+    "name": "pdftext",
+    "version": "0.7.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/pdftext/0.7.1/json",
+    "input_api": "pdftext.extraction.plain_text_output(local path)",
+    "documentation": "https://pypi.org/project/pdftext/0.7.1/",
+    "scope": "page text",
+    "family": "pdftext via PDFium/pypdfium2",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "markitdown",
+    "version": "0.1.9",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/markitdown/0.1.9/json",
+    "input_api": "markitdown.MarkItDown().convert(local path)",
+    "documentation": "https://pypi.org/project/markitdown/0.1.9/",
+    "scope": "page text as Markdown",
+    "family": "MarkItDown via pdfplumber/pdfminer.six",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "paper2md",
+    "version": "0.1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/paper2md/0.1.0/json",
+    "input_api": "paper2md.convert(local path)",
+    "documentation": "https://pypi.org/project/paper2md/0.1.0/",
+    "scope": "page text as Markdown",
+    "family": "paper2md via MuPDF",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pdfnaut",
+    "version": "0.13.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/pdfnaut/0.13.0/json",
+    "input_api": "pdfnaut.PdfDocument.from_filename(local path)",
+    "documentation": "https://pypi.org/project/pdfnaut/0.13.0/",
+    "scope": "page count and document title",
+    "family": "pdfnaut pure Python",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    }
+  },
+  {
+    "name": "pdftotext",
+    "version": "4.0.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pdftotext/4.0.0/json",
+    "input_api": "pdftotext.PDF(local byte stream)",
+    "documentation": "https://pypi.org/project/pdftotext/4.0.0/",
+    "scope": "page text",
+    "family": "Poppler C++ binding",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/main.py",
+    "environment_lock": "adapters/python/pdf/requirements.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  },
+  {
+    "name": "pdfx",
+    "version": "1.4.1",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/pdfx/1.4.1/json",
+    "input_api": "pdfx.PDFx(local path).get_metadata()",
+    "documentation": "https://pypi.org/project/pdfx/1.4.1/",
+    "scope": "page count and document title",
+    "family": "PDFx via pdfminer.six 20201018",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/pdfx_adapter.py",
+    "environment_lock": "adapters/python/pdf/requirements-pdfx.lock",
+    "expected_output": {
+      "pages": 1,
+      "title": "Parsarium PDF control"
+    }
+  },
+  {
+    "name": "slate3k",
+    "version": "0.5.3",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/slate3k/0.5.3/json",
+    "input_api": "slate3k.PDF(local byte stream)",
+    "documentation": "https://pypi.org/project/slate3k/0.5.3/",
+    "scope": "page text",
+    "family": "Slate3k via pdfminer3k",
+    "control": "controls/pdf/one-page.pdf",
+    "adapter": "adapters/python/pdf/slate3k_adapter.py",
+    "environment_lock": "adapters/python/pdf/requirements-slate3k.lock",
+    "expected_output": {
+      "pages": 1,
+      "text": "Parsarium"
+    }
+  }
+]

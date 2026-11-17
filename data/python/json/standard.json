@@ -1,0 +1,17 @@
+{
+  "ecosystem": "python",
+  "format": "json",
+  "status": "one_api_control_and_source_verified",
+  "verified_apis": [
+    {
+      "runtime": "CPython 3.14.4 standard library pure-Python JSON decoder",
+      "api": "json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder)",
+      "documentation": "https://docs.python.org/3.14/library/json.html",
+      "control": "controls/json/structure.json",
+      "expected": {"root_type": "object", "top_level_keys": ["items", "kind"], "item_count": 2, "first_id": 7, "first_label": "a\nb", "first_ok": true, "first_value_is_null": true, "second_label": "π"},
+      "project": "projects/json/python/stdlib_json",
+      "result": "projects/json/python/stdlib_json/verification.json",
+      "scope_note": "The harness supplies a JSONDecoder subclass selecting the pinned pure-Python scanner; it does not claim coverage or feedback in CPython's default built-in _json accelerator."
+    }
+  ]
+}

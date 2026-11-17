@@ -1,0 +1,75 @@
+{
+  "ecosystem": "Java",
+  "format": "XML 1.0 (UTF-8, namespaces)",
+  "status": "standard_api_verified",
+  "runtime": "Eclipse Temurin OpenJDK 25.0.5+8 linux/arm64 java.xml",
+  "verified_apis": [
+    {
+      "runtime": "Eclipse Temurin OpenJDK 25.0.5+8 linux/arm64 java.xml",
+      "api": "javax.xml.parsers.DocumentBuilder.parse(InputStream)",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/parsers/DocumentBuilder.html#parse(java.io.InputStream)",
+      "factory_documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/parsers/DocumentBuilderFactory.html#setNamespaceAware(boolean)",
+      "adapter": "projects/xml/java/jdk_documentbuilder/XmlAdapter.java",
+      "control": "controls/xml/catalog-ns.xml",
+      "observable_result": "namespace-resolved root {urn:parsarium:catalog}catalog, 5 elements, depth 3, 2 namespace declarations, 4 attributes including a prefixed attribute, text with decoded &amp;, &lt;/&gt; and a CDATA section",
+      "result": "projects/xml/java/jdk_documentbuilder/verification.json",
+      "family": "Apache Xerces2-J (OpenJDK java.xml internal fork)",
+      "family_note": "DocumentBuilderFactory.newInstance() with no factory property set resolves to com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl, a repackaged fork of Apache Xerces2-J inside java.xml. The selected third-party xerces:xercesImpl path is the upstream of that fork, so both Java XML paths share the Xerces2-J family.",
+      "expected": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      }
+    }
+  ],
+  "unverified_documented_apis": [
+    {
+      "api": "javax.xml.parsers.SAXParser.parse(InputStream, DefaultHandler)",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/parsers/SAXParser.html",
+      "status": "pending",
+      "reason": "Push API over the same internal Xerces scanner; not run in this pilot."
+    },
+    {
+      "api": "javax.xml.stream.XMLInputFactory.createXMLStreamReader(InputStream)",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/stream/XMLInputFactory.html",
+      "status": "pending",
+      "reason": "StAX pull API; the JDK default (com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl) reuses the internal Xerces scanner. Not run in this pilot."
+    },
+    {
+      "api": "javax.xml.transform.Transformer with StreamSource",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/transform/package-summary.html",
+      "status": "pending",
+      "reason": "XSLTC transform input is parsed by the same internal Xerces; a transformer, not a separate parser. Not run."
+    },
+    {
+      "api": "org.w3c.dom.ls.LSParser via DOMImplementationLS",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/org/w3c/dom/ls/LSParser.html",
+      "status": "pending",
+      "reason": "DOM Level 3 load API implemented by the internal Xerces DOMParserImpl; not run."
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "One valid UTF-8 XML 1.0 control without DOCTYPE (plus one differential control in the AFL++ feedback check) verifies DocumentBuilder.parse with a namespace-aware default factory on this OpenJDK 25.0.5 build. It says nothing about DTDs, external entities, schema validation, non-UTF-8 encodings, XML 1.1, or the JDK XML processing limits."
+}

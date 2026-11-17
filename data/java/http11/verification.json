@@ -60,22 +60,6 @@
       "version": "4.2.20.Final"
     },
     {
-      "package": "http1_1-parser",
-      "adapter_label": "webpieces",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter webpieces controls/http11/request.http",
-      "version": "2.1.109"
-    },
-    {
       "package": "httpcore5",
       "adapter_label": "httpcore5",
       "control": "controls/http11/request.http",
@@ -108,22 +92,6 @@
       "version": "4.4.16"
     },
     {
-      "package": "jetty-http",
-      "adapter_label": "jetty",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter jetty controls/http11/request.http",
-      "version": "12.1.15"
-    },
-    {
       "package": "jodd-http",
       "adapter_label": "jodd",
       "control": "controls/http11/request.http",
@@ -140,22 +108,6 @@
       "version": "6.3.0"
     },
     {
-      "package": "rawhttp-core",
-      "adapter_label": "rawhttp",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter rawhttp controls/http11/request.http",
-      "version": "2.6.0"
-    },
-    {
       "package": "nanohttpd",
       "adapter_label": "nanohttpd",
       "control": "controls/http11/request.http",
@@ -169,69 +121,6 @@
       "exit_code": 0,
       "command": "java -cp <locked classpath> org.parsarium.Http11Adapter nanohttpd controls/http11/request.http",
       "version": "2.3.1"
-    },
-    {
-      "package": "jwarc",
-      "adapter_label": "jwarc",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter jwarc controls/http11/request.http",
-      "version": "0.37.0"
-    },
-    {
-      "package": "webarchive-commons",
-      "adapter_label": "webarchive",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter webarchive controls/http11/request.http",
-      "version": "3.0.5"
-    },
-    {
-      "package": "jwat-common",
-      "adapter_label": "jwat",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter jwat controls/http11/request.http",
-      "version": "1.2.1"
-    },
-    {
-      "package": "sentinel-transport-simple-http",
-      "adapter_label": "sentinel",
-      "control": "controls/http11/response.http",
-      "output": {
-        "status_line": "HTTP/1.1 200 OK",
-        "status": 200,
-        "content_type": "text/plain",
-        "body": "parsarium"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter sentinel controls/http11/response.http",
-      "version": "1.8.10"
     },
     {
       "package": "httpcore-nio",
@@ -250,22 +139,6 @@
       "version": "4.4.16"
     },
     {
-      "package": "mina-http",
-      "adapter_label": "mina",
-      "control": "controls/http11/request.http",
-      "output": {
-        "method": "GET",
-        "target": "/parsarium?x=1",
-        "version": "HTTP/1.1",
-        "host": "example.test",
-        "x_parsarium": "yes"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter mina controls/http11/request.http",
-      "version": "2.2.10"
-    },
-    {
       "package": "grizzly-http",
       "adapter_label": "grizzly",
       "control": "controls/http11/request.http",
@@ -280,35 +153,6 @@
       "exit_code": 0,
       "command": "java -cp <locked classpath> org.parsarium.Http11Adapter grizzly controls/http11/request.http",
       "version": "5.0.3"
-    },
-    {
-      "package": "ssl-proxies",
-      "adapter_label": "jglobus",
-      "control": "controls/http11/response.http",
-      "output": {
-        "status": 200,
-        "message": "OK",
-        "content_type": "text/plain",
-        "content_length": 9
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter jglobus controls/http11/response.http",
-      "version": "2.1.0"
-    },
-    {
-      "package": "java-warc",
-      "adapter_label": "javawarc",
-      "control": "controls/http11/response.http",
-      "output": {
-        "status": 200,
-        "content_type": "text/plain",
-        "body": "parsarium"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <locked classpath> org.parsarium.Http11Adapter javawarc controls/http11/response.http",
-      "version": "1.2.1"
     },
     {
       "package": "commons-httpclient",

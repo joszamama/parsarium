@@ -1,0 +1,142 @@
+[
+  {
+    "name": "github.com/hajimehoshi/go-mp3",
+    "module": "github.com/hajimehoshi/go-mp3",
+    "version": "v0.3.4",
+    "license": "Apache-2.0",
+    "input_api": "NewDecoder(io.Reader) (*Decoder, error); Read([]byte); SampleRate(); Length()",
+    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4",
+    "source": "https://github.com/hajimehoshi/go-mp3/tree/v0.3.4",
+    "scope": "MPEG-1/2/2.5 Layer III frame headers, side info and main data decoded to 16-bit stereo PCM; untagged input only in this pilot",
+    "family": "hajime/go-mp3 lineage",
+    "family_note": "Same decoder already counted under mp3_id3v2 with a tagged control and root-package-only coverage. Wrappers faiface/beep/mp3, gopxl/beep/v2/mp3 and ebiten/v2/audio/mp3 share this decoder and are not counted here.",
+    "control": "controls/mp3/go-tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "length_bytes": 50688,
+      "decoded_bytes": 50688,
+      "pcm_sha256": "18a327dc0181f97f5702af2a35900734e04a0f0bee3091e77580dfe5b8397304"
+    },
+    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "length_bytes": 27648,
+      "decoded_bytes": 27648,
+      "pcm_sha256": "454a8580b026f4b35026042df3e21768beb3b9fc1f1f1037701902abab2ea0a9"
+    },
+    "evidence": "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 294,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_hajimehoshi_go_mp3"
+  },
+  {
+    "name": "github.com/tcolgate/mp3",
+    "module": "github.com/tcolgate/mp3",
+    "version": "v0.0.0-20170426193717-e79c5a46d300",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader); Decoder.Decode(*Frame,*int); Frame.Header/Size/Samples",
+    "documentation": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300",
+    "source": "https://github.com/tcolgate/mp3/tree/e79c5a46d300",
+    "scope": "MPEG Layer III frame headers and frame boundaries from an untagged byte stream; frame-level parsing only, no PCM decoding",
+    "family": "tcolgate/mp3 frame parser",
+    "family_note": "Independent Go frame parser. Also selected in tagged mp3_id3v2 cell; this plain MP3 path consumes untagged frames. Fork fgergo/mp3 shares its lineage.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "evidence": "projects/mp3/go/github_com_tcolgate_mp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 62,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_tcolgate_mp3"
+  },
+  {
+    "name": "github.com/tosone/minimp3",
+    "module": "github.com/tosone/minimp3",
+    "version": "v1.1.0",
+    "license": "MIT (Go binding); CC0-1.0 (vendored minimp3.h)",
+    "input_api": "DecodeFull([]byte) (*Decoder, []byte, error); Decoder.SampleRate and Channels",
+    "documentation": "https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0",
+    "source": "https://github.com/tosone/minimp3/tree/v1.1.0",
+    "scope": "Decode untagged MPEG Layer III bytes to PCM, returning sample rate, channels, byte count and PCM hash",
+    "family": "lieff/minimp3 C decoder via tosone Go cgo binding",
+    "family_note": "Distinct decoder family from hajime/go-mp3. This package is also selected for tagged MP3 controls; the plain path uses untagged controls with native C coverage.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "decoded_bytes": 25344,
+      "pcm_sha256": "0641e37cb18148b29cfc23ffc8c479115a4e042a0952a91570e92888aec0a33e"
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "decoded_bytes": 27648,
+      "pcm_sha256": "ac01db4bb3d3c907d3b51ecaefd6497cce1a693035114377eeedef2ef5afb653"
+    },
+    "evidence": "projects/mp3/go/github_com_tosone_minimp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 34,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_tosone_minimp3"
+  },
+  {
+    "name": "github.com/dmulholl/mp3lib",
+    "module": "github.com/dmulholl/mp3lib",
+    "version": "v1.0.0",
+    "license": "Unlicense",
+    "input_api": "NextFrame(io.Reader) *MP3Frame; MP3Frame header and frame fields",
+    "documentation": "https://pkg.go.dev/github.com/dmulholl/mp3lib@v1.0.0",
+    "source": "https://github.com/dmulholl/mp3lib/tree/v1.0.0",
+    "scope": "MPEG Layer III frame headers and frame boundaries from untagged local bytes; no PCM decoding",
+    "family": "dmulholl/mp3lib frame parser",
+    "family_note": "Independent Go MP3 frame parser; can also skip ID3 tags, but the plain MP3 controls have none. Separate from tcolgate/mp3 and hajime/go-mp3.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "evidence": "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 9,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_dmulholl_mp3lib"
+  }
+]

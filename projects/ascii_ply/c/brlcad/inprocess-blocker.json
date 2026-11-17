@@ -1,0 +1,10 @@
+{
+  "status": "unsupported",
+  "engine": "in-process libFuzzer",
+  "scope": "BRL-CAD 7.46.0 unmodified gcv PLY importer",
+  "control": "controls/ascii_ply/triangle.ply",
+  "reproduction": "/work/fuzzer -detect_leaks=0 -runs=2 /input/control (before switching to one-shot CLI)",
+  "observation": "AddressSanitizer heap-buffer-overflow in ply_read.c:104 vertex_cb on the second valid control parse",
+  "cause": "ply_read.c:94 declares static cur_vertex = -1 and does not reset it for a new parse",
+  "supported_paths": ["one-shot file replay", "Fandango file-per-process bridge", "AFL++ forkserver file-per-process"]
+}

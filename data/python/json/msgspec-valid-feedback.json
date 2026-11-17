@@ -1,0 +1,242 @@
+{
+  "checked_at_utc": "2026-11-17T12:06:05.873187+00:00",
+  "project": "json/python/msgspec",
+  "pass": true,
+  "input_kind": "two fixed valid RFC 8259 JSON controls",
+  "tested_api": "msgspec.json.decode(local JSON bytes) with the default type=Any",
+  "feedback_scope": "msgspec 0.22.0 own C extension source (src/msgspec/_core.c and headers) as LLVM regions and branches",
+  "base_image_id": "sha256:3a56e2dbb953dede20ddd34a7dd12a057306717f5c7c1e89e54d9601723fffaf",
+  "overlay_image_id": "sha256:279a3dd1ac3c0f928d122cbed307a6e93bd7be43ade2af59725fac0ade472b6a",
+  "overlay_receipt_sha256": "edd4bcc4eafcfd64c26004f7613c0c2fc525683d59811862a76ae561727938aa",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "value": [
+      "object",
+      [
+        [
+          "name",
+          [
+            "string",
+            "parsarium"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            1
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "-2.5"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "array",
+            [
+              [
+                "string",
+                "json"
+              ],
+              [
+                "string",
+                "go"
+              ],
+              [
+                "string",
+                "rfc8259"
+              ]
+            ]
+          ]
+        ],
+        [
+          "nested",
+          [
+            "object",
+            [
+              [
+                "level",
+                [
+                  "int",
+                  2
+                ]
+              ],
+              [
+                "items",
+                [
+                  "array",
+                  [
+                    [
+                      "object",
+                      [
+                        [
+                          "id",
+                          [
+                            "int",
+                            1
+                          ]
+                        ],
+                        [
+                          "ok",
+                          [
+                            "bool",
+                            false
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "object",
+                      [
+                        [
+                          "id",
+                          [
+                            "int",
+                            2
+                          ]
+                        ],
+                        [
+                          "text",
+                          [
+                            "string",
+                            "café \"quoted\""
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "empty",
+                [
+                  "object",
+                  []
+                ]
+              ],
+              [
+                "list",
+                [
+                  "array",
+                  []
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "variant_output": {
+    "value": [
+      "array",
+      [
+        [
+          "int",
+          1
+        ],
+        [
+          "float",
+          "0.25"
+        ],
+        [
+          "string",
+          "two"
+        ],
+        [
+          "array",
+          [
+            [
+              "bool",
+              true
+            ],
+            [
+              "null"
+            ],
+            [
+              "array",
+              [
+                [
+                  "bool",
+                  false
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "object",
+          [
+            [
+              "k",
+              [
+                "array",
+                []
+              ]
+            ],
+            [
+              "n",
+              [
+                "object",
+                [
+                  [
+                    "deep",
+                    [
+                      "string",
+                      "A"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 1668,
+  "variant_parser_features": 1635,
+  "parser_feature_difference": 57,
+  "json_decoder_section_lines": [
+    17076,
+    20140
+  ],
+  "control_json_decoder_features": 385,
+  "variant_json_decoder_features": 368,
+  "json_decoder_feature_difference": 35,
+  "number_parser_section_lines": [
+    12242,
+    12691
+  ],
+  "control_number_parser_features": 84,
+  "variant_number_parser_features": 77,
+  "number_parser_feature_difference": 13,
+  "control_afl_tuples": 1660,
+  "variant_afl_tuples": 1628,
+  "afl_tuple_difference": 54,
+  "control_afl_raw_tuples": 1666,
+  "variant_afl_raw_tuples": 1634,
+  "afl_raw_tuple_difference": 54,
+  "afl_tuple_note": "afl-showmap 4.04c default output (bucketed, as in the overlay receipt) and -r raw output are both recorded."
+}

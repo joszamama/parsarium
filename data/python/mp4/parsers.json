@@ -29,53 +29,6 @@
     }
   },
   {
-    "name": "pytaglib",
-    "version": "3.2.0",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "https://pypi.org/pypi/pytaglib/3.2.0/json",
-    "input_api": "taglib.File(local path)",
-    "documentation": "https://pypi.org/project/pytaglib/3.2.0/",
-    "scope": "MP4 title metadata",
-    "family": "TagLib native MP4 parser",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "title": "Parsarium"
-    }
-  },
-  {
-    "name": "pymediainfo",
-    "version": "7.0.1",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/pymediainfo/7.0.1/json",
-    "input_api": "pymediainfo.MediaInfo.parse(local path)",
-    "documentation": "https://pypi.org/project/pymediainfo/7.0.1/",
-    "scope": "video/audio track metadata",
-    "family": "MediaInfo native MP4 parser",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "width": 2,
-      "height": 2,
-      "video_format": "AVC",
-      "audio_format": "AAC"
-    }
-  },
-  {
-    "name": "hachoir",
-    "version": "3.4.0",
-    "license": "GPL-2.0-only",
-    "license_evidence": "https://pypi.org/pypi/hachoir/3.4.0/json",
-    "input_api": "hachoir.parser.createParser(local path); extractMetadata",
-    "documentation": "https://hachoir.readthedocs.io/en/latest/",
-    "scope": "video dimensions and duration",
-    "family": "Hachoir QuickTime/MP4 parser",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "width": 2,
-      "height": 2,
-      "duration_seconds": 1
-    }
-  },
-  {
     "name": "pydub",
     "version": "0.25.1",
     "license": "MIT",
@@ -123,21 +76,6 @@
       "height": 2,
       "video_codec": "h264",
       "audio_codec": "aac"
-    }
-  },
-  {
-    "name": "audiomath",
-    "version": "1.23.0",
-    "license": "GPL-3.0-or-later",
-    "license_evidence": "https://pypi.org/pypi/audiomath/1.23.0/json",
-    "input_api": "audiomath.Sound(local path)",
-    "documentation": "https://pypi.org/project/audiomath/1.23.0/",
-    "scope": "AAC audio decode",
-    "family": "audiomath via audioread/FFmpeg",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "audio_rate": 8000,
-      "audio_samples": 8000
     }
   },
   {
@@ -222,110 +160,6 @@
       "width": 2,
       "height": 2,
       "red_frame": true
-    }
-  },
-  {
-    "name": "pymp4",
-    "version": "1.4.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://pypi.org/pypi/pymp4/1.4.0/json",
-    "input_api": "pymp4.parser.Box.parse_stream(local byte stream)",
-    "documentation": "https://pypi.org/project/pymp4/1.4.0/",
-    "scope": "ftyp and moov boxes",
-    "family": "pymp4 Construct box parser",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "first_box": "ftyp",
-      "major_brand": "isom",
-      "second_box": "moov"
-    }
-  },
-  {
-    "name": "metabeam",
-    "version": "0.1.0",
-    "license": "MIT OR Apache-2.0",
-    "license_evidence": "https://pypi.org/pypi/metabeam/0.1.0/json",
-    "input_api": "metabeam.parse(local path)",
-    "documentation": "https://pypi.org/project/metabeam/0.1.0/",
-    "scope": "MP4 brands, timescale, box list",
-    "family": "metabeam Rust MP4 parser",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "major_brand": "isom",
-      "timescale": 8000,
-      "boxes": [
-        "ftyp",
-        "moov",
-        "free",
-        "mdat"
-      ]
-    }
-  },
-  {
-    "name": "ffmpegio",
-    "version": "0.12.0",
-    "license": "GPL-2.0-only",
-    "license_evidence": "https://pypi.org/pypi/ffmpegio/0.12.0/json",
-    "input_api": "ffmpegio.probe.full_details(local path)",
-    "documentation": "https://python-ffmpegio.github.io/python-ffmpegio/",
-    "scope": "video dimensions, codec, title",
-    "family": "ffmpegio via external FFprobe",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "title": "Parsarium",
-      "width": 2,
-      "height": 2,
-      "video_codec": "h264"
-    }
-  },
-  {
-    "name": "pymp4v2",
-    "version": "0.1.13",
-    "license": "MIT AND MPL-1.1",
-    "license_evidence": "https://pypi.org/pypi/pymp4v2/0.1.13/json",
-    "input_api": "pymp4v2.MP4File(local path, mode=\"r\")",
-    "documentation": "https://pypi.org/project/pymp4v2/0.1.13/",
-    "scope": "tracks, title, duration",
-    "family": "mp4v2 native binding",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "title": "Parsarium",
-      "tracks": 2,
-      "duration_seconds": 1.0
-    }
-  },
-  {
-    "name": "pycord",
-    "version": "0.1.1",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/pycord/0.1.1/json",
-    "input_api": "pycord.video_reader.VideoReader(local path).get_range(0,1)",
-    "documentation": "https://pypi.org/project/pycord/0.1.1/",
-    "scope": "decoded video frame",
-    "family": "pycord via FFmpeg and FFprobe",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "frames": 1,
-      "width": 2,
-      "height": 2,
-      "red_frame": true
-    }
-  },
-  {
-    "name": "pyvideoreader",
-    "version": "0.5.7",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/pyvideoreader/0.5.7/json",
-    "input_api": "videoreader.VideoReader(local path)",
-    "documentation": "https://pypi.org/project/pyvideoreader/0.5.7/",
-    "scope": "video dimensions and first-frame channel count",
-    "family": "pyvideoreader via OpenCV",
-    "control": "controls/mp4/red-av.mp4",
-    "expected_output": {
-      "frames": 1,
-      "width": 2,
-      "height": 2,
-      "channels": 3
     }
   }
 ]

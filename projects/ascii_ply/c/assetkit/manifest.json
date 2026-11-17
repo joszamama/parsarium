@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "c",
+  "package": "assetkit",
+  "release": "0.7.4",
+  "catalog_parser": "data/c/ascii_ply/parsers.json",
+  "source_lock": "data/c/ascii_ply/source-lock.json",
+  "source_sha256": "6a0325976d46a30e6369c9718e31122e87f071ee3af114675ac43fb8b9ed45ec",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"meshes": 1, "vertices": 3, "faces": 1, "face": [0, 1, 2]},
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of AssetKit's native ASCII PLY importer from the ak_load local file API",
+  "coverage_subject_prefix": "/work/source/src/io/ply/",
+  "format_specific_coverage_file_suffix": "/ascii.c"
+}

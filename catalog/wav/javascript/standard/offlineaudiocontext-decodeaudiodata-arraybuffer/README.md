@@ -8,10 +8,28 @@
 
 ## Observed control result
 
-See the linked saved verification record for this API.
+```json
+{
+  "sampleRate": 8000,
+  "channels": 1,
+  "sampleCount": 4,
+  "sampleSigns": [
+    0,
+    1,
+    -1,
+    0
+  ]
+}
+```
 
 [Control adapter](../../../../../adapters/javascript/wav_browser.mjs)
 
-## Runnable harness
+## Run the valid control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Browser container and control receipt](../../../../../projects/wav/javascript/stdlib_browser_decodeaudiodata/README.md)
+
+```sh
+python3 projects/wav/javascript/stdlib_browser_decodeaudiodata/verify-control.py
+```
+
+The browser runs this control, but its native parser source coverage and AFL++ parser feedback are unavailable. This path remains staged.

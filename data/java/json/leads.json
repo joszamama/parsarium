@@ -1,0 +1,130 @@
+[
+  {
+    "name": "jackson-core",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core",
+    "status": "promoted_to_verified",
+    "version_seen": "2.23.0",
+    "summed_direct_dependent_count": 80053,
+    "max_release_direct_dependent_count": 1934,
+    "default_release_direct_dependent_count": 178,
+    "reason": "Direct JsonFactory.createParser(InputStream) path built and control-verified with parser line coverage and AFL++ feedback. Shares the Jackson tokenizer family with jackson-databind; distinct package/API path, not an independent engine.",
+    "source": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "fastjson",
+    "coordinate": "com.alibaba:fastjson",
+    "status": "promoted_to_verified",
+    "version_seen": "1.2.83",
+    "summed_direct_dependent_count": 10021,
+    "max_release_direct_dependent_count": 1494,
+    "default_release_direct_dependent_count": 48,
+    "reason": "Pinned 1.2.83 has its own DefaultJSONParser and JSONLexer, passed both valid nested controls and source-derived AFL feedback. The same coordinate at 2.x is a fastjson2 compatibility facade; the summed metric spans both engine generations.",
+    "source": "https://central.sonatype.com/artifact/com.alibaba/fastjson"
+  },
+  {
+    "name": "json",
+    "coordinate": "org.json:json",
+    "status": "promoted_to_verified",
+    "version_seen": "20260814",
+    "summed_direct_dependent_count": 6923,
+    "max_release_direct_dependent_count": 564,
+    "default_release_direct_dependent_count": 176,
+    "reason": "Own JSONTokener/JSONObject/JSONArray parser; pinned Reader API with strict configuration, two valid controls, JaCoCo parser source lines, and input-dependent AFL++ feedback verified. Release POM declares Public Domain.",
+    "source": "https://central.sonatype.com/artifact/org.json/json",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "fastjson2",
+    "coordinate": "com.alibaba.fastjson2:fastjson2",
+    "status": "promoted_to_verified",
+    "version_seen": "2.0.66.android8",
+    "summed_direct_dependent_count": 2973,
+    "max_release_direct_dependent_count": 180,
+    "default_release_direct_dependent_count": 2,
+    "reason": "Own JSONReaderUTF8 parser; pinned direct JSON.parse(byte[]) path, two valid controls, JaCoCo parser source lines, and input-dependent AFL++ feedback verified. Ordinary 2.0.66 release pinned, distinct from snapshot default Android variant.",
+    "source": "https://central.sonatype.com/artifact/com.alibaba.fastjson2/fastjson2",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "json-simple",
+    "coordinate": "com.googlecode.json-simple:json-simple",
+    "status": "promoted_to_verified",
+    "version_seen": "1.1.1",
+    "summed_direct_dependent_count": 1557,
+    "max_release_direct_dependent_count": 1163,
+    "default_release_direct_dependent_count": 1163,
+    "reason": "Own JSONParser and generated JFlex Yylex lexer; pinned 1.1.1 release, local Reader API, two valid controls, JaCoCo parser-source lines, and input-dependent AFL++ feedback verified. High default-release count is age-skewed; common summed metric is used.",
+    "source": "https://central.sonatype.com/artifact/com.googlecode.json-simple/json-simple",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "json-smart",
+    "coordinate": "net.minidev:json-smart",
+    "status": "promoted_to_verified",
+    "version_seen": "2.6.1",
+    "summed_direct_dependent_count": 1542,
+    "max_release_direct_dependent_count": 220,
+    "default_release_direct_dependent_count": 12,
+    "reason": "Own JSONParser byte parser in MODE_RFC4627; pinned release, two valid controls, JaCoCo parser source lines, and input-dependent AFL++ feedback verified.",
+    "source": "https://central.sonatype.com/artifact/net.minidev/json-smart",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "moshi",
+    "coordinate": "com.squareup.moshi:moshi",
+    "status": "promoted_to_verified",
+    "version_seen": "1.15.2",
+    "summed_direct_dependent_count": 1097,
+    "max_release_direct_dependent_count": 166,
+    "default_release_direct_dependent_count": 166,
+    "reason": "Own JsonReader/JsonUtf8Reader parser over Okio BufferedSource from local File; pinned release and dependencies, two valid controls, JaCoCo parser source lines, and input-dependent AFL++ feedback verified.",
+    "source": "https://central.sonatype.com/artifact/com.squareup.moshi/moshi",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "parsson",
+    "coordinate": "org.eclipse.parsson:parsson",
+    "status": "promoted_to_verified",
+    "version_seen": "1.1.9",
+    "summed_direct_dependent_count": 495,
+    "max_release_direct_dependent_count": 122,
+    "default_release_direct_dependent_count": 71,
+    "reason": "Pinned 1.1.9 JSON-P provider creates its own JsonParserImpl/JsonTokenizer over local InputStream; both valid nested controls, own JaCoCo source lines and input-dependent AFL++ feedback passed.",
+    "source": "https://central.sonatype.com/artifact/org.eclipse.parsson/parsson",
+    "evidence": "data/java/json/parsers.json"
+  },
+  {
+    "name": "minimal-json",
+    "coordinate": "com.eclipsesource.minimal-json:minimal-json",
+    "status": "unresolved",
+    "version_seen": "0.9.5",
+    "summed_direct_dependent_count": 338,
+    "max_release_direct_dependent_count": 225,
+    "default_release_direct_dependent_count": 88,
+    "reason": "Json.parse(Reader); control not run.",
+    "source": "https://central.sonatype.com/artifact/com.eclipsesource.minimal-json/minimal-json"
+  },
+  {
+    "name": "jakarta.json",
+    "coordinate": "org.glassfish:jakarta.json",
+    "status": "unresolved",
+    "version_seen": "2.0.1",
+    "summed_direct_dependent_count": 336,
+    "max_release_direct_dependent_count": 171,
+    "default_release_direct_dependent_count": 171,
+    "reason": "GlassFish JSON-P 2.0 implementation preceding parsson; control not run.",
+    "source": "https://central.sonatype.com/artifact/org.glassfish/jakarta.json"
+  },
+  {
+    "name": "jsoniter",
+    "coordinate": "com.jsoniter:jsoniter",
+    "status": "unresolved",
+    "version_seen": "0.9.23",
+    "summed_direct_dependent_count": 79,
+    "max_release_direct_dependent_count": 55,
+    "default_release_direct_dependent_count": 55,
+    "reason": "JsonIterator.deserialize(byte[]); dynamic codegen modes; control not run.",
+    "source": "https://central.sonatype.com/artifact/com.jsoniter/jsoniter"
+  }
+]

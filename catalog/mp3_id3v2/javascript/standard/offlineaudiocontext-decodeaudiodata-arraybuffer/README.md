@@ -8,10 +8,22 @@
 
 ## Observed control result
 
-Decoded 8000 samples of 8000 Hz mono PCM from the tagged MP3
+```json
+{
+  "sampleRate": 8000,
+  "channels": 1,
+  "samples": 8000
+}
+```
 
 [Control adapter](../../../../../adapters/javascript/mp3_id3v2_browser.mjs)
 
-## Runnable harness
+## Run the valid control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Browser container and control receipt](../../../../../projects/mp3_id3v2/javascript/stdlib_browser_decodeaudiodata/README.md)
+
+```sh
+python3 projects/mp3_id3v2/javascript/stdlib_browser_decodeaudiodata/verify-control.py
+```
+
+The browser runs this control, but its native parser source coverage and AFL++ parser feedback are unavailable. This path remains staged.

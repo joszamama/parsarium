@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "c",
+  "package": "gpac",
+  "release": "26.07.0",
+  "catalog_parser": "data/c/mp4/parsers.json",
+  "source_lock": "projects/mp4/c/gpac/source-lock.json",
+  "source_sha256": "57822c1a74dcb83d76ff1f671e1b4fae2e7614e8194a5adb9f20661e0e9421dd",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "tracks": 2,
+    "video_tracks": 1,
+    "audio_tracks": 1,
+    "width": 2,
+    "height": 2,
+    "duration_ms": 1000
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in the pinned GPAC ISO media parser (src/isomedia), built as a static ISO-media-only libgpac and called through gf_isom_open on a local file from a C byte-input harness",
+  "parser_family": "GPAC native ISO media parser; the C++ call site (adapters/cpp/mp4/gpac.cpp) compiles this same C call site as C++, and MP4Box is a CLI over the same libgpac, so they are one parser family, not independent engines",
+  "coverage_subject_prefix": "/work/gpac-26.07.0/src/isomedia/",
+  "format_specific_coverage_file_suffix": "/box_code_base.c"
+}

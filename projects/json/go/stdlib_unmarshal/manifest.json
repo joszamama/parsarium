@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "json",
+  "ecosystem": "go",
+  "package": "encoding/json.Unmarshal([]byte, any)",
+  "release": "1.27.1",
+  "api": "encoding/json.Unmarshal([]byte, any)",
+  "runtime": "Go 1.27.1 linux/arm64 standard library",
+  "standard_inventory": "data/go/json/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "d82e2e8ac32bc64c967b02769fc1fc6e2e5e9d7aae384673709e6af4669bc3fe",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_engine_release": "1.27.1",
+  "fuzz_engine_sha256": "1675694ef690db0f18fbe7046a886170904bede1d9db6ec96ae27945c1705c64",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_entry": "FuzzParser",
+  "coverage": "Go coverpkg instrumentation of standard encoding/json and its default Go 1.27 encoding/json/v2, jsontext, and internal decoder packages",
+  "coverage_subject_prefix": "encoding/json/"
+}

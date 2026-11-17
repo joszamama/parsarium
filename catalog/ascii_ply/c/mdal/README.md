@@ -25,6 +25,11 @@
 
 MDAL uses its native PLY driver over a fork of libplyxx; distinct package path from the other C PLY readers. The public C ABI is called through pinned C declarations because upstream mdal.h itself is not C11-compatible.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/mdal/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c mdal
+python3 parsarium.py run ascii_ply c mdal controls/ascii_ply/triangle.ply
+```

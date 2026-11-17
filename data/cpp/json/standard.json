@@ -1,0 +1,33 @@
+{
+  "ecosystem": "C++",
+  "format": "JSON",
+  "status": "no_standard_api_found",
+  "verified_apis": [],
+  "unverified_documented_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "ISO C++ standard library (current working draft as published at eel.is/c++draft, captured 2026-11-17)",
+      "finding": "The standard library header table lists 117 headers; none is a JSON header, and the [headers] page and the draft contents page contain no occurrence of 'json'. No ISO C++ standard-library API parses JSON text.",
+      "documentation": [
+        {
+          "url": "https://eel.is/c++draft/headers",
+          "sha256": "6056f7f9ec9622ff051b8d17e1b18b7b24929c765dc24522a6d9075e3471b929",
+          "json_occurrences": 0
+        },
+        {
+          "url": "https://eel.is/c++draft/",
+          "sha256": "8156fc583ddeec0b31ef2df444ccb6e78be1b157b88a94d44b6ca3d52837296a",
+          "json_occurrences": 0
+        },
+        {
+          "url": "https://en.cppreference.com/w/cpp/headers",
+          "sha256": "50996fb96dced3efe211ef3b8d72ccebf4bd5c7f0159df2d54d8dc022b0198cb",
+          "json_occurrences": 0
+        }
+      ],
+      "captured_at_utc": "2026-11-17T03:30:00+00:00",
+      "note": "<format>, <print> and <charconv> format or convert scalars; std::from_chars parses a number, not JSON text. Vendor toolkits such as Qt (QJsonDocument), Boost.JSON and POCO JSON are third-party libraries, logged as leads in leads.json."
+    }
+  ],
+  "limit": "Negative finding from the working draft header table and cppreference header index on 2026-11-17. It does not cover compiler-vendor extensions or non-ISO platform SDKs."
+}

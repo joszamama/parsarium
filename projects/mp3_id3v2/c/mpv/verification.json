@@ -1,0 +1,38 @@
+{
+  "kind": "third_party",
+  "api": "mpv_create; mpv_initialize; mpv_command(loadfile, local tagged MP3 path); mpv_wait_event(MPV_EVENT_FILE_LOADED); mpv_get_property(metadata/by-key/title, track-list/0/codec, duration)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T02:34:50.354760+00:00",
+  "manifest": "projects/mp3_id3v2/c/mpv/manifest.json",
+  "image_id": "sha256:4e5afdd8af48794ce5a8731a58c1795718b33ab1d3e6ee917f348a7bf19bc27a",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "project_file_sha256": {
+    "Dockerfile": "5ad878ffb4893430935b35df53ddf987f8856abe2207db5e9166d6cdfc482a5f",
+    "build.sh": "95d6a7270bf29122f268c2bd88f631fb70783268819b7c7063170ba7dbfee4f8",
+    "harness.c": "c9769374179fbe7e027e375351d20f2fe12a218eb959daa3790dc6e68bebcec6",
+    "harness.h": "93e68fc6855db4e8198ee7a0fc8fa88c266517cd6f1578d81b67fd9eb4bb5dec",
+    "manifest.json": "b4abbb4eaf1600b55adbd6c978f18b65e8b637468e314550230aaac2f1e781b6",
+    "replay.c": "eb2a3ff60ebe36a6cd46e68e06aed3839efaeca1d988565158bc1cf495722e87",
+    "run-control.sh": "598434b22ed268ca74525ba9de4a667536c9a7c769501e2030e41e31adcbe7b6"
+  },
+  "output": {
+    "title": "Parsarium",
+    "codec": "mp3",
+    "duration_ms": 1000
+  },
+  "parser_source_files": 24,
+  "parser_source_lines_covered": 1558,
+  "format_specific_source_lines_covered": 389,
+  "underlying_source_files": 40,
+  "underlying_source_lines_covered": 2130,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/mp3_id3v2/c/mpv/target/coverage/coverage.json",
+  "pass": true
+}

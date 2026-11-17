@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "source_scope": "AFL_LLVM_ALLOWLIST=src:gtk_svg-unity0.c (GTK 4 native SVG parser translation unit)",
+  "engine": "afl-showmap 4.33c, one fixed valid SVG per run",
+  "command": "AFL_MAP_SIZE=6329 afl-showmap -q -m none -t 10000 -o OUTPUT -- /work/fuzzer /input/FILE",
+  "repeated_runs_per_input": 9,
+  "identical_edge_ids_across_repeats": true,
+  "control": {
+    "path": "controls/svg/red-green.svg",
+    "sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+    "observed_output": {"width": 2, "height": 1},
+    "feedback_edges": 187
+  },
+  "valid_variant": {
+    "path": "controls/svg/red-blue-path.svg",
+    "sha256": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172",
+    "observed_output": {"width": 4, "height": 2},
+    "feedback_edges": 196
+  },
+  "shared_edge_ids": 187,
+  "control_only_edge_ids": 0,
+  "variant_only_edge_ids": 9,
+  "pass": true
+}

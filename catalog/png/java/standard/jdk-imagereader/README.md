@@ -18,6 +18,9 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build png java jdk_imagereader
+python3 parsarium.py run png java jdk_imagereader controls/png/red-green.png
+```

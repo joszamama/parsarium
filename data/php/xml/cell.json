@@ -1,0 +1,34 @@
+{
+  "ecosystem": "php",
+  "format": "xml",
+  "status": "pilot_partial_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 2,
+  "verified_standard_or_runtime_count": 2,
+  "search_queries": [
+    "xml",
+    "xml parser",
+    "xml reader",
+    "xml decoder",
+    "xml streaming parser"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 331,
+  "unique_search_hits": 301,
+  "leads_recorded": 15,
+  "leads_by_status": {
+    "excluded": 1,
+    "selected": 2,
+    "unresolved": 12
+  },
+  "ranking_metric": "Packagist total downloads",
+  "selection": "symfony/dom-crawler v8.1.10 (Packagist 443,886,072) and sabre/xml 4.1.0 (Packagist 39,858,833), both package APIs over the libxml2 family: the XML-mode DomCrawler Crawler (addXmlContent over DOMDocument::loadXML, then children/attr/text traversal and filterXPath with namespace discovery) and Sabre\\Xml\\Reader, which extends XMLReader and builds its own Clark-notation element tree. Both valid controls match the expat oracle on elements, attributes, depth, root and text for both paths.",
+  "uncertainty": "Pilot cell, two verified third-party paths. The earlier zero count wrongly excluded libxml2-family wrappers; PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so sabre/xml is counted with family libxml2 (shared with the standard XMLReader path). symfony/dom-crawler was reassessed under the same wrapper rule and counted: its package-own scope is Crawler navigation and XPath/namespace mapping over a libxml2 DOMDocument, not tokenizing, and its Xdebug package lines differ by only one post-parse line between the two controls, so its AFL++ feedback comes from a native overlay (source-built PHP 8.5.12 and libxml2 2.15.4, allowlist limited to libxml2 parser.c/parserInternals.c/SAX2.c and ext/dom document.c plus ext/libxml) running the same Crawler harness, where the controls differ in 357 stable tuples, all arising while addXmlContent parses; its downloads are mostly HTML crawling uses. jms/serializer stays excluded because it maps an already parsed SimpleXML tree onto a target class model. The other libxml2-family wrappers (veewee/xml, mtownsend/xml-to-array, saloonphp/xml-wrangler, laravie/parser, orchestra/parser, pear/xml_parser and smaller ones) were not evaluated by the cutoff and remain unresolved, as do the own-code leads prewk/xml-string-streamer and watoki/dom. sabre/xml drops xmlns declarations and text in mixed-content elements by design, so its summary omits namespace declaration counts. Both coverage images use Ubuntu PHP 8.5.4 with libxml 2.15.2; both AFL++ overlays use the source-built PHP 8.5.12 and libxml2 2.15.4. The search covers the first 100 hits of five Packagist queries; controls are two small UTF-8 namespace-aware documents without DOCTYPE. Standard paths: XMLReader::XML and DOMDocument::loadXML are two PHP 8.5.12 runtime APIs over the same source-built libxml2 2.15.4, counted separately from the third-party paths and not ranked; DOMDocument::loadXML takes the control as an in-memory string, and its AFL++ overlay instruments only libxml2 parser.c/parserInternals.c/SAX2.c and ext/dom document.c. simplexml_load_string and xml_parse remain pending.",
+  "third_party_evidence": "data/php/xml/parsers.json",
+  "third_party_control_results": "data/php/xml/verification.json",
+  "runtime_evidence": "data/php/xml/standard.json",
+  "registry_snapshot": "data/php/xml/registry-snapshot.json",
+  "unresolved_leads": "data/php/xml/leads.json",
+  "protocol": "catalog/xml/PROTOCOL.md"
+}

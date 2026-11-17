@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
-  "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate is excluded.",
+  "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded without backfilling lower-ranked leads.",
   "supplemental_sources": {
     "popcon_snapshot_sha256": "497f958fdd1472676fce567fc9ecf2ac319b3291c4b57f9598998f181204b2b8",
-    "github_snapshot_sha256": "b2d9a4635bc15e9abe6083bdf911d229fb169776ab5fb942c25d5f2c1db2b137"
+    "github_snapshot_sha256": "b2d9a4635bc15e9abe6083bdf911d229fb169776ab5fb942c25d5f2c1db2b137",
+    "feedback_exclusions_sha256": "6566717eaad95b4a4ebd3ffd56ee92743ed7d6bfb0ec7f0846250313fefc31d1"
   },
   "cells": [
     {
@@ -8769,7 +8770,7 @@
       "parsers_sha256": "1889725b7d7ab0b7a8dacadac5b60699415da3c83bc106cf5c93a4b65a5ab2d3",
       "snapshot_sha256": "32eec99cc3e946a3c57e5e31204ee49acbc2c7f0aec11530de05550cebeda18a",
       "original_count": 20,
-      "selected_count": 10,
+      "selected_count": 9,
       "selected": [
         {
           "name": "three",
@@ -8812,20 +8813,12 @@
           "rank": 5
         },
         {
-          "name": "@draco-rust/ply",
-          "version": "0.3.1",
-          "family": "draco-rust PLY reader",
-          "metric": 871,
-          "selection": "primary_metric",
-          "rank": 6
-        },
-        {
           "name": "three-ply-loader",
           "version": "1.0.0",
           "family": "Three.js PLYLoader family",
           "metric": 373,
           "selection": "primary_metric",
-          "rank": 7
+          "rank": 6
         },
         {
           "name": "parse-ply",
@@ -8833,7 +8826,7 @@
           "family": "parse-ply",
           "metric": 173,
           "selection": "primary_metric",
-          "rank": 8
+          "rank": 7
         },
         {
           "name": "meshlab-ts",
@@ -8841,7 +8834,7 @@
           "family": "meshlab-ts PLY reader",
           "metric": 95,
           "selection": "primary_metric",
-          "rank": 9
+          "rank": 8
         },
         {
           "name": "threejs-ply-loader",
@@ -8849,10 +8842,23 @@
           "family": "Three.js PLYLoader family",
           "metric": 94,
           "selection": "primary_metric",
-          "rank": 10
+          "rank": 9
         }
       ],
       "excluded": [
+        {
+          "name": "@draco-rust/ply",
+          "version": "0.3.1",
+          "family": "draco-rust PLY reader",
+          "metric": 871,
+          "selection": "primary_metric",
+          "rank": 6,
+          "reason": "no_committed_container_control_or_parser_feedback",
+          "feedback_evidence": "data/curation/preten/javascript/ascii_ply/verification.json",
+          "feedback_evidence_sha256": "13abee2d3d6368e47ced83681a21265b297e5d5e54a91968141a514b0f34ae22",
+          "limitation": "Legacy valid-control result exists, but the candidate WASM Docker harness has no committed container control or parser-source AFL receipt.",
+          "prior_selected_rank": 6
+        },
         {
           "name": "@isopodlabs/binary_meshes",
           "version": "0.1.2",
@@ -10140,26 +10146,26 @@
           "rank": 7
         },
         {
-          "name": "pymupdf4llm",
-          "version": "2.1",
-          "family": "PyMuPDF4LLM via MuPDF",
-          "metric": 10299318,
-          "selection": "primary_metric",
-          "rank": 8
-        },
-        {
           "name": "pikepdf",
           "version": "10.18.0",
           "family": "QPDF",
           "metric": 9480221,
           "selection": "primary_metric",
-          "rank": 9
+          "rank": 8
         },
         {
           "name": "pdfrw",
           "version": "0.4",
           "family": "pdfrw parser",
           "metric": 3195794,
+          "selection": "primary_metric",
+          "rank": 9
+        },
+        {
+          "name": "pdf2docx",
+          "version": "0.5.13",
+          "family": "pdf2docx layout over MuPDF",
+          "metric": 1208898,
           "selection": "primary_metric",
           "rank": 10
         }
@@ -10171,15 +10177,7 @@
           "family": "paper2md via MuPDF",
           "metric": 10,
           "reason": "outside_ten_path_ceiling",
-          "rank": 20
-        },
-        {
-          "name": "pdf2docx",
-          "version": "0.5.13",
-          "family": "pdf2docx layout over MuPDF",
-          "metric": 1208898,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
+          "rank": 19
         },
         {
           "name": "pdf_oxide",
@@ -10187,7 +10185,7 @@
           "family": "PDF Oxide Rust core",
           "metric": 151469,
           "reason": "outside_ten_path_ceiling",
-          "rank": 13
+          "rank": 12
         },
         {
           "name": "pdfnaut",
@@ -10195,7 +10193,7 @@
           "family": "pdfnaut pure Python",
           "metric": 70,
           "reason": "outside_ten_path_ceiling",
-          "rank": 19
+          "rank": 18
         },
         {
           "name": "pdfquery",
@@ -10203,7 +10201,7 @@
           "family": "pdfquery via pdfminer.six",
           "metric": 36030,
           "reason": "outside_ten_path_ceiling",
-          "rank": 16
+          "rank": 15
         },
         {
           "name": "pdftext",
@@ -10211,7 +10209,7 @@
           "family": "pdftext via PDFium/pypdfium2",
           "metric": 258280,
           "reason": "outside_ten_path_ceiling",
-          "rank": 12
+          "rank": 11
         },
         {
           "name": "pdftotext",
@@ -10219,7 +10217,7 @@
           "family": "Poppler C++ binding",
           "metric": 148981,
           "reason": "outside_ten_path_ceiling",
-          "rank": 14
+          "rank": 13
         },
         {
           "name": "pdfx",
@@ -10227,7 +10225,15 @@
           "family": "PDFx via pdfminer.six 20201018",
           "metric": 2903,
           "reason": "outside_ten_path_ceiling",
-          "rank": 18
+          "rank": 17
+        },
+        {
+          "name": "pymupdf4llm",
+          "version": "2.1",
+          "family": "PyMuPDF4LLM via MuPDF",
+          "metric": 10299318,
+          "reason": "empty_compatibility_distribution",
+          "evidence_url": "https://pypi.org/project/pymupdf4llm/2.1/"
         },
         {
           "name": "PyPDF4",
@@ -10235,7 +10241,7 @@
           "family": "PyPDF4 fork of PyPDF2/pypdf family",
           "metric": 98686,
           "reason": "outside_ten_path_ceiling",
-          "rank": 15
+          "rank": 14
         },
         {
           "name": "slate3k",
@@ -10243,7 +10249,7 @@
           "family": "Slate3k via pdfminer3k",
           "metric": 17340,
           "reason": "outside_ten_path_ceiling",
-          "rank": 17
+          "rank": 16
         }
       ]
     },
@@ -10260,7 +10266,7 @@
       "parsers_sha256": "065deb79f771c617809f91b3050f21d564b94efa9a8dd24235be03685256b613",
       "snapshot_sha256": "7771364eca29db5a55c90d5296ae1531f93037fe80c822954af3d965287c364d",
       "original_count": 20,
-      "selected_count": 10,
+      "selected_count": 8,
       "selected": [
         {
           "name": "PyMuPDF",
@@ -10295,28 +10301,12 @@
           "rank": 4
         },
         {
-          "name": "PySide6",
-          "version": "6.12.0",
-          "family": "QtSvg QSvgRenderer through PySide6",
-          "metric": 2819778,
-          "selection": "primary_metric",
-          "rank": 5
-        },
-        {
-          "name": "PyQt6",
-          "version": "6.12.0",
-          "family": "QtSvg QSvgRenderer through PyQt6",
-          "metric": 1403201,
-          "selection": "primary_metric",
-          "rank": 6
-        },
-        {
           "name": "svgelements",
           "version": "1.9.6",
           "family": "svgelements Python SVG geometry parser",
           "metric": 1352662,
           "selection": "primary_metric",
-          "rank": 7
+          "rank": 5
         },
         {
           "name": "Wand",
@@ -10324,7 +10314,7 @@
           "family": "ImageMagick SVG coder through Wand",
           "metric": 1116123,
           "selection": "primary_metric",
-          "rank": 8
+          "rank": 6
         },
         {
           "name": "svgpathtools",
@@ -10332,7 +10322,7 @@
           "family": "svgpathtools SVG path and shape reader",
           "metric": 1039183,
           "selection": "primary_metric",
-          "rank": 9
+          "rank": 7
         },
         {
           "name": "pyvips",
@@ -10340,7 +10330,7 @@
           "family": "libvips SVG loader (librsvg)",
           "metric": 901458,
           "selection": "primary_metric",
-          "rank": 10
+          "rank": 8
         }
       ],
       "excluded": [
@@ -10375,6 +10365,32 @@
           "metric": 1355,
           "reason": "outside_ten_path_ceiling",
           "rank": 16
+        },
+        {
+          "name": "PyQt6",
+          "version": "6.12.0",
+          "family": "QtSvg QSvgRenderer through PyQt6",
+          "metric": 1403201,
+          "selection": "primary_metric",
+          "rank": 6,
+          "reason": "native_parser_feedback_unavailable",
+          "feedback_evidence": "data/curation/feedback-blockers/svg-python-pyqt6.json",
+          "feedback_evidence_sha256": "15f258b7af38ae23d89b3e9faa1bd19f85e228ef9d35793b15edcaaf411d6057",
+          "limitation": "Pinned Docker controls pass; QEMU and Frida valid-control probes do not yield stable native QtSvg feedback.",
+          "prior_selected_rank": 6
+        },
+        {
+          "name": "PySide6",
+          "version": "6.12.0",
+          "family": "QtSvg QSvgRenderer through PySide6",
+          "metric": 2819778,
+          "selection": "primary_metric",
+          "rank": 5,
+          "reason": "native_parser_feedback_unavailable",
+          "feedback_evidence": "data/curation/feedback-blockers/svg-python-pyside6.json",
+          "feedback_evidence_sha256": "5c1d9b7080160519784b8652d8f008ab216336d6ba8ac2e78fb9a9f7db567f68",
+          "limitation": "Pinned Docker controls pass; native QtSvg parser feedback is not verified.",
+          "prior_selected_rank": 5
         },
         {
           "name": "resvg",
@@ -10634,7 +10650,7 @@
       "parsers_sha256": "c5264c7f1d2f40fe63ab6b0e4168cf87dfc487cdb92cb33c870ea21e3d46db18",
       "snapshot_sha256": "d52e463643808adae271ab1348be2aa4b10d1c26aa40b52c8f5da0e9310dbb0f",
       "original_count": 21,
-      "selected_count": 10,
+      "selected_count": 8,
       "selected": [
         {
           "name": "trimesh",
@@ -10685,20 +10701,12 @@
           "rank": 6
         },
         {
-          "name": "pymeshlab",
-          "version": "2025.7.post1",
-          "family": "MeshLab PLY reader",
-          "metric": 533913,
-          "selection": "primary_metric",
-          "rank": 7
-        },
-        {
           "name": "numpy-stl",
           "version": "4.1.3",
           "family": "numpy-stl PLY reader",
           "metric": 528185,
           "selection": "primary_metric",
-          "rank": 8
+          "rank": 7
         },
         {
           "name": "point-cloud-utils",
@@ -10706,15 +10714,7 @@
           "family": "point-cloud-utils native PLY reader",
           "metric": 277643,
           "selection": "primary_metric",
-          "rank": 9
-        },
-        {
-          "name": "libigl",
-          "version": "2.6.3",
-          "family": "libigl PLY reader",
-          "metric": 233497,
-          "selection": "primary_metric",
-          "rank": 10
+          "rank": 8
         }
       ],
       "excluded": [
@@ -10725,6 +10725,19 @@
           "metric": 16459,
           "reason": "outside_ten_path_ceiling",
           "rank": 15
+        },
+        {
+          "name": "libigl",
+          "version": "2.6.3",
+          "family": "libigl PLY reader",
+          "metric": 233497,
+          "selection": "primary_metric",
+          "rank": 10,
+          "reason": "no_committed_container_control_or_parser_feedback",
+          "feedback_evidence": "data/curation/preten/python/ascii_ply/verification.json",
+          "feedback_evidence_sha256": "c5ee6f84bffccf3a02928993b12eae139852d3beb5de418108d552ecc5cf4568",
+          "limitation": "Legacy valid-control result exists, but the candidate Docker harness has no committed container control or stable parser-feedback receipt.",
+          "prior_selected_rank": 10
         },
         {
           "name": "openmesh",
@@ -10765,6 +10778,19 @@
           "metric": 46129,
           "reason": "outside_ten_path_ceiling",
           "rank": 12
+        },
+        {
+          "name": "pymeshlab",
+          "version": "2025.7.post1",
+          "family": "MeshLab PLY reader",
+          "metric": 533913,
+          "selection": "primary_metric",
+          "rank": 7,
+          "reason": "native_parser_feedback_unavailable",
+          "feedback_evidence": "data/curation/feedback-blockers/ascii_ply-python-pymeshlab.json",
+          "feedback_evidence_sha256": "8c8804c9121b09b0c6ed2c301daaf6b3c3fd5020306634c4b11be815a040429b",
+          "limitation": "Pinned Docker controls pass; QEMU valid-control probes time out or fail and scoped Frida yields no plugin tuples.",
+          "prior_selected_rank": 7
         },
         {
           "name": "pyminiply",
@@ -14716,6 +14742,6 @@
       ]
     }
   ],
-  "selected_total": 775,
-  "excluded_total": 861
+  "selected_total": 770,
+  "excluded_total": 866
 }

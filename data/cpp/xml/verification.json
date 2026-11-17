@@ -1,0 +1,233 @@
+{
+  "checked_at_utc": "2026-11-17T11:07:56.465100+00:00",
+  "platform": "linux/arm64 Docker",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "controls": {
+    "catalog_ns": "controls/xml/catalog-ns.xml",
+    "order_default_ns": "controls/xml/order-default-ns.xml"
+  },
+  "control_sha256": {
+    "catalog_ns": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order_default_ns": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "control_meaning": "Namespace-aware XML 1.0: prefixed root, default namespace on children, prefixed attribute, predefined entity references, CDATA section, UTF-8 text; the second control adds a comment, a processing instruction, character references and a default-namespace reset (xmlns=\"\")",
+  "third_party": [
+    {
+      "package": "xerces-c",
+      "version": "3.3.0",
+      "scope": "XercesDOMParser over MemBufInputSource with namespaces on, validation off",
+      "command": "python3 scripts/run_project.py xml cpp xerces_c",
+      "receipt": "projects/xml/cpp/xerces_c/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 9460,
+      "format_specific_source_lines_covered": 402,
+      "error": null
+    },
+    {
+      "package": "pugixml",
+      "version": "1.16",
+      "scope": "xml_document::load_buffer (parse_default, UTF-8) with adapter-side namespace resolution",
+      "command": "python3 scripts/run_project.py xml cpp pugixml",
+      "receipt": "projects/xml/cpp/pugixml/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 619,
+      "format_specific_source_lines_covered": 619,
+      "error": null
+    },
+    {
+      "package": "tinyxml2",
+      "version": "11.0.0",
+      "scope": "XML 1.0 UTF-8 input through XMLDocument::Parse(const char*, size_t) into TinyXML2 DOM; Namespaces in XML resolved by adapter, not TinyXML2; attributes sorted per element to match control oracle",
+      "command": "python3 scripts/run_project.py xml cpp tinyxml2",
+      "receipt": "projects/xml/cpp/tinyxml2/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 763,
+      "format_specific_source_lines_covered": 527,
+      "second_valid_control": "controls/xml/order-default-ns-no-pi.xml",
+      "second_valid_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "limit": "The alternate second valid control omits a processing instruction that TinyXML2 11.0.0 rejects.",
+      "error": null
+    },
+    {
+      "package": "libxml++",
+      "version": "5.6.1",
+      "scope": "DomParser::parse_memory_raw over local UTF-8 XML bytes into namespace-aware DOM, using pinned libxml2 C parser",
+      "command": "python3 scripts/run_project.py xml cpp libxmlpp",
+      "receipt": "projects/xml/cpp/libxmlpp/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 344,
+      "underlying_source_lines_covered": 3064,
+      "underlying_parser_c_source_lines_covered": 1279,
+      "second_valid_control": "controls/xml/order-default-ns.xml",
+      "second_valid_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "parser_only_afl_feedback": "fuzzing/afl-native/xml/cpp/libxmlpp/differential.json",
+      "error": null
+    }
+  ],
+  "standard": []
+}

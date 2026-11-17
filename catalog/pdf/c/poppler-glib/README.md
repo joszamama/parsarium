@@ -19,6 +19,11 @@
 
 Poppler GLib C API shares core parser with the C++ Poppler frontend in the C++ PDF cell.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/c/poppler-glib/README.md)
+
+```sh
+python3 parsarium.py build pdf c poppler-glib
+python3 parsarium.py run pdf c poppler-glib controls/pdf/one-page.pdf
+```

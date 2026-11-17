@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "python",
+  "package": "lxml",
+  "release": "6.1.3",
+  "catalog_parser": "data/python/xml/parsers.json",
+  "source_lock": "data/python/xml/source-lock.json",
+  "source_sha256": "45222d94ddd511536f3b2f7d9deae3b2339b4ce0f075f1ca25703b07cad9dd21",
+  "underlying_release": "libxml2 2.15.4",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "api": "lxml.etree.parse(BytesIO(local XML bytes), XMLParser(resolve_entities=False, no_network=True, recover=False)).getroot(); Element.tag, attrib, nsmap, text and tail",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source coverage in source-built libxml2 2.15.4 parser reached through lxml.etree, with lxml C binding linked dynamically to that library",
+  "coverage_subject_prefix": "/work/libxml2/parser.c",
+  "format_specific_coverage_file_suffix": "/parser.c",
+  "afl_llvm_module_glob": "/opt/libxml2/lib/libxml2.so.16",
+  "afl_coverage_subject_prefix": "/work/libxml2/parser.c",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "native_campaign_supported": false
+}

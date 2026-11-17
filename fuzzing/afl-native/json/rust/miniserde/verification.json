@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/miniserde",
+  "pass": true,
+  "base_project_receipt_sha256": "bc8bad988be6d6eeef7356a0c083746222ae1b21e528f53096500e28ab2ed121",
+  "overlay_file_sha256": {
+    "Cargo.toml": "27bbc2ae8f4300a5ce698715485d636db126c539fab9728ed29cec9bc3e678e5",
+    "Cargo.lock": "f7efe04de901a02d192697eddfb1d1833f7ae6a8a9173e7b1d626e9d7de1ca5c",
+    "afl_fuzzer.rs": "745e90ac863ba0a96f2a383b82be17df501e657d6828ded6adcfdbb67dfa1c26",
+    "Dockerfile": "ec62fdfd7d4c04fd93412af6d97e881d20fa8faa7ccd0e2dbcd6a85b986d16af",
+    "build.py": "e2d5d2e420534dc0b07b71bae59805509564c1e5109ecb6b4fa41b70668f9ac5"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "e8f82621301d3b99a1542736de96e5df69865b235987d6470b28c7aa670cfeb1",
+  "image_id": "sha256:e1603f8042a6d27966f9b62abe2cac3b90aefd90cea37f0b25de5200a8c337bc",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 929,
+  "afl_map_size": 9298,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: miniserde 0.1.46 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:3cb0350706e736fa42ecc117a11a6923e2c6d1ec91c9c8dc1140d70182c8dc94",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 872,
+  "edges_only_in_control": 103,
+  "edges_only_in_variant": 46,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/miniserde-0.1.46/",
+    "control_lines": {
+      "src/de/impls.rs": 0,
+      "src/de/mod.rs": 0,
+      "src/error.rs": 0,
+      "src/ignore.rs": 0,
+      "src/json/array.rs": 19,
+      "src/json/de.rs": 246,
+      "src/json/drop.rs": 18,
+      "src/json/number.rs": 0,
+      "src/json/object.rs": 23,
+      "src/json/ser.rs": 0,
+      "src/json/value.rs": 67,
+      "src/ptr.rs": 12,
+      "src/ser/impls.rs": 0
+    },
+    "variant_lines": {
+      "src/de/impls.rs": 0,
+      "src/de/mod.rs": 0,
+      "src/error.rs": 0,
+      "src/ignore.rs": 0,
+      "src/json/array.rs": 19,
+      "src/json/de.rs": 241,
+      "src/json/drop.rs": 18,
+      "src/json/number.rs": 0,
+      "src/json/object.rs": 21,
+      "src/json/ser.rs": 0,
+      "src/json/value.rs": 67,
+      "src/ptr.rs": 12,
+      "src/ser/impls.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/json/de.rs",
+      "src/json/object.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      929,
+      929,
+      929
+    ],
+    "stable_edges": 929,
+    "union_edges": 929,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      872,
+      872,
+      872
+    ],
+    "stable_edges": 872,
+    "union_edges": 872,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

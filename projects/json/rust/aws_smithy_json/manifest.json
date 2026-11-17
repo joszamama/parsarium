@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "rust",
+  "package": "aws-smithy-json",
+  "release": "0.65.1",
+  "catalog_parser": "data/rust/json/parsers.json",
+  "source_lock": "projects/json/rust/aws_smithy_json/source-lock.json",
+  "source_sha256": "b45f9fc77ffe92c92c341165a01a565bd30c39ecf5aa8c0719b41719009604f9",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "afl_variant": "controls/json/nested-array.json",
+  "afl_variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "afl_variant_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in aws-smithy-json token iterator, with libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-smithy-json-0.65.1/",
+  "format_specific_coverage_file_suffix": "/src/deserialize.rs"
+}

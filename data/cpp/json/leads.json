@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Qt QJsonDocument",
+    "status": "unresolved",
+    "debian_source": "qtbase-opensource-src / qt6-base (framework)",
+    "popcon_source_inst": null,
+    "popcon_dev_package": {},
+    "github_stars": null,
+    "license": "LGPL-3.0-only OR GPL-2.0+ OR commercial",
+    "reason": "QJsonDocument::fromJson(QByteArray); Qt Core install counts (96,909 / 67,857) cover the whole framework and are not JSON-specific. Not run.",
+    "source": "https://doc.qt.io/qt-6/qjsondocument.html"
+  },
+  {
+    "name": "POCO JSON",
+    "status": "resolved_verified_selected",
+    "debian_source": "poco (multi-library)",
+    "popcon_source_inst": null,
+    "popcon_dev_package": {
+      "libpoco-dev": 190,
+      "libpocojson100": 125
+    },
+    "github_stars": null,
+    "license": "BSL-1.0",
+    "reason": "POCO 1.15.4 Parser::parse(std::string) passes two valid exact-tree controls with source coverage in ParserImpl.cpp and bundled pdjson.c and stable parser-only AFL++ feedback. The 190 libpoco-dev installations measure the entire POCO suite; libpocojson100 has 125 runtime installations, all no_files. This path is unranked on the primary JSON source metric.",
+    "source": "https://docs.pocoproject.org/current/Poco.JSON.Parser.html",
+    "verification": "projects/json/cpp/poco-json/verification.json"
+  },
+  {
+    "name": "Glaze",
+    "status": "resolved_verified_selected",
+    "debian_source": "glaze",
+    "popcon_source_inst": 171,
+    "popcon_dev_package": {
+      "libglaze-dev": 171
+    },
+    "github_stars": 3110,
+    "license": "MIT",
+    "reason": "Pinned Glaze 9.1.0 generic_i64 JSON reader passes two valid exact-tree controls, owns covered JSON parser source lines, and gives stable parser-only AFL++ feedback. Debian source-package sourcemax and libglaze-dev each report 171 installs in the same hashed snapshot.",
+    "source": "https://github.com/stephenberry/glaze",
+    "verification": "projects/json/cpp/glaze/verification.json"
+  },
+  {
+    "name": "PicoJSON",
+    "status": "unresolved",
+    "debian_source": "picojson",
+    "popcon_source_inst": 16,
+    "popcon_dev_package": {},
+    "github_stars": null,
+    "license": "BSD-2-Clause",
+    "reason": "Header-only picojson::parse over iterators; not run.",
+    "source": "https://github.com/kazuho/picojson"
+  },
+  {
+    "name": "jsoncons",
+    "status": "unresolved",
+    "debian_source": "jsoncons",
+    "popcon_source_inst": 3,
+    "popcon_dev_package": {
+      "libjsoncons-dev": 3
+    },
+    "github_stars": 859,
+    "license": "BSL-1.0",
+    "reason": "Header-only json::parse; not run.",
+    "source": "https://github.com/danielaparker/jsoncons"
+  }
+]

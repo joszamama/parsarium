@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T08:54:14.756323+00:00",
+  "project": "json/javascript/jsonstream",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "feedback_scope": "V8 source ranges in /work/node_modules/: JSONStream, jsonparse and through; AFL++ tuples are not split by package",
+  "overlay_receipt_sha256": "0ff7753043287730a9c9789a9f528adb42c5f369c63213a8b69f3bc6dca8b4a9",
+  "base_image_id": "sha256:78315b9fcd95942884229b1d76b967158e7d1a7cf39558725392b2a282197f61",
+  "overlay_image_id": "sha256:7f64055a18dd83e603d1d75b371459333119e9837f4196e0f309e7df3ded386a",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential": "controls/json/nested-array.json",
+  "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 143,
+  "control_afl_tuples": 163,
+  "differential_parser_features": 132,
+  "differential_afl_tuples": 152,
+  "parser_feature_difference": 17,
+  "afl_tuple_difference": 17,
+  "control_features_by_package": {
+    "JSONStream": 7,
+    "jsonparse": 123,
+    "through": 13
+  },
+  "differential_features_by_package": {
+    "JSONStream": 7,
+    "jsonparse": 112,
+    "through": 13
+  },
+  "feature_difference_by_package": {
+    "JSONStream": 0,
+    "jsonparse": 17,
+    "through": 0
+  },
+  "package_only_feedback_differs": false,
+  "control_only_features_by_file": {
+    "jsonparse/jsonparse.js": 14
+  },
+  "differential_only_features_by_file": {
+    "jsonparse/jsonparse.js": 3
+  }
+}

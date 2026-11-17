@@ -1,0 +1,205 @@
+[
+  {
+    "name": "sharp",
+    "version": "0.35.5",
+    "license": "Apache-2.0",
+    "input_api": "sharp(Buffer).raw().toBuffer({resolveWithObject:true})",
+    "documentation": "https://sharp.pixelplumbing.com/api-constructor/",
+    "scope": "pixels",
+    "family": "libvips",
+    "family_note": "Native wrapper; libvips performs image loading. The PNG backend beneath libvips is not determined here."
+  },
+  {
+    "name": "image-size",
+    "version": "2.1.0",
+    "license": "MIT",
+    "input_api": "imageSize(Buffer)",
+    "documentation": "https://www.npmjs.com/package/image-size",
+    "scope": "header",
+    "family": "image-size"
+  },
+  {
+    "name": "jimp",
+    "version": "1.6.1",
+    "license": "MIT",
+    "input_api": "Jimp.read(Buffer)",
+    "documentation": "https://github.com/jimp-dev/jimp/blob/main/packages/jimp/README.md",
+    "scope": "pixels",
+    "family": "pngjs",
+    "family_note": "jimp@1.6.1 depends on @jimp/js-png@1.6.1, which depends on pngjs@^7.0.0."
+  },
+  {
+    "name": "pngjs",
+    "version": "7.0.0",
+    "license": "MIT",
+    "input_api": "PNG.sync.read(Buffer)",
+    "documentation": "https://github.com/pngjs/pngjs/blob/main/README.md",
+    "scope": "pixels",
+    "family": "pngjs"
+  },
+  {
+    "name": "png-js",
+    "version": "2.0.0",
+    "license": "MIT (upstream LICENSE; npm metadata omits license)",
+    "license_evidence": "https://github.com/foliojs/png.js/blob/master/LICENSE",
+    "input_api": "new PNG(Buffer).decode(callback)",
+    "documentation": "https://www.npmjs.com/package/png-js",
+    "scope": "pixels",
+    "family": "png.js"
+  },
+  {
+    "name": "@react-pdf/png-js",
+    "version": "3.0.0",
+    "license": "MIT",
+    "input_api": "new PNG(Buffer).decode(callback)",
+    "documentation": "https://www.npmjs.com/package/@react-pdf/png-js",
+    "scope": "pixels",
+    "family": "png.js",
+    "family_note": "Fork of the png.js decoder also published as png-js."
+  },
+  {
+    "name": "fast-png",
+    "version": "8.0.0",
+    "license": "MIT",
+    "input_api": "decode(Buffer)",
+    "documentation": "https://www.npmjs.com/package/fast-png",
+    "scope": "pixels",
+    "family": "fast-png"
+  },
+  {
+    "name": "upng-js",
+    "version": "2.1.0",
+    "license": "MIT",
+    "input_api": "UPNG.decode(ArrayBuffer); UPNG.toRGBA8(image)",
+    "documentation": "https://github.com/photopea/UPNG.js/blob/master/README.md",
+    "scope": "pixels",
+    "family": "UPNG.js"
+  },
+  {
+    "name": "@pdf-lib/upng",
+    "version": "1.0.1",
+    "license": "MIT",
+    "input_api": "UPNG.decode(ArrayBuffer); UPNG.toRGBA8(image)",
+    "documentation": "https://www.npmjs.com/package/@pdf-lib/upng",
+    "scope": "pixels",
+    "family": "UPNG.js",
+    "family_note": "Fork of the UPNG.js decoder also published as upng-js."
+  },
+  {
+    "name": "parse-png",
+    "version": "2.1.0",
+    "license": "MIT",
+    "input_api": "parsePng(Buffer)",
+    "documentation": "https://www.npmjs.com/package/parse-png",
+    "scope": "pixels",
+    "family": "pngjs",
+    "family_note": "The pinned release depends on pngjs@^3.3.0, a separate major version of the same family."
+  },
+  {
+    "name": "png-chunks-extract",
+    "version": "1.0.0",
+    "license": "MIT",
+    "input_api": "extract(Buffer)",
+    "documentation": "https://github.com/hughsk/png-chunks-extract/blob/master/README.md",
+    "scope": "chunks",
+    "family": "png-chunks-extract",
+    "family_note": "Parses PNG chunk structure only; does not decode pixels."
+  },
+  {
+    "name": "@jsquash/png",
+    "version": "3.1.1",
+    "license": "Apache-2.0",
+    "input_api": "init(local WASM bytes); decode(ArrayBuffer)",
+    "documentation": "https://www.npmjs.com/package/@jsquash/png",
+    "scope": "pixels",
+    "family": "Rust png crate via jSquash WASM"
+  },
+  {
+    "name": "canvas",
+    "version": "3.2.3",
+    "license": "MIT",
+    "input_api": "loadImage(Buffer); drawImage; getImageData",
+    "documentation": "https://github.com/Automattic/node-canvas#imagesrc",
+    "scope": "pixels",
+    "family": "Cairo/libpng",
+    "family_note": "Native Canvas binding; PNG decoding is delegated to the Cairo/libpng stack."
+  },
+  {
+    "name": "@napi-rs/canvas",
+    "version": "1.1.0",
+    "license": "MIT",
+    "input_api": "loadImage(Buffer); drawImage; getImageData",
+    "documentation": "https://github.com/Brooooooklyn/canvas/blob/main/index.d.ts",
+    "scope": "pixels",
+    "family": "Skia",
+    "family_note": "Native Node-API binding; pinned package type declarations document Buffer input."
+  },
+  {
+    "name": "skia-canvas",
+    "version": "4.0.0",
+    "license": "MIT",
+    "input_api": "loadImage(Buffer); drawImage; getImageData",
+    "documentation": "https://skia-canvas.org/api/image",
+    "scope": "pixels",
+    "family": "Skia"
+  },
+  {
+    "name": "probe-image-size",
+    "version": "7.5.0",
+    "license": "MIT",
+    "input_api": "probe.sync(Buffer)",
+    "documentation": "https://www.npmjs.com/package/probe-image-size",
+    "scope": "header",
+    "family": "probe-image-size"
+  },
+  {
+    "name": "@react-pdf/image",
+    "version": "3.1.2",
+    "license": "MIT",
+    "input_api": "resolveImage(Buffer)",
+    "documentation": "https://www.npmjs.com/package/@react-pdf/image",
+    "scope": "header",
+    "family": "png.js",
+    "family_note": "The pinned package depends on png-js@^2.0.0."
+  },
+  {
+    "name": "pureimage",
+    "version": "0.4.20",
+    "license": "MIT",
+    "input_api": "decodePNGFromStream(Readable)",
+    "documentation": "https://www.npmjs.com/package/pureimage",
+    "scope": "pixels",
+    "family": "pngjs",
+    "family_note": "The pinned package depends on pngjs@^7.0.0."
+  },
+  {
+    "name": "pngjs-nozlib",
+    "version": "1.0.0",
+    "license": "MIT",
+    "input_api": "PNG.sync.read(Buffer)",
+    "documentation": "https://www.npmjs.com/package/pngjs-nozlib",
+    "scope": "pixels",
+    "family": "pngjs",
+    "family_note": "Fork of the pngjs parser family."
+  },
+  {
+    "name": "pngjs-image",
+    "version": "0.11.7",
+    "license": "MIT",
+    "input_api": "PNGImage.loadImage(Buffer, callback)",
+    "documentation": "https://www.npmjs.com/package/pngjs-image",
+    "scope": "pixels",
+    "family": "pngjs",
+    "family_note": "The pinned package depends on pngjs@2.3.1."
+  },
+  {
+    "name": "@loaders.gl/images",
+    "version": "4.5.4",
+    "license": "MIT",
+    "input_api": "getBinaryImageMetadata(ArrayBuffer)",
+    "documentation": "https://loaders.gl/docs/modules/images/api-reference/binary-image-api",
+    "scope": "header",
+    "family": "loaders.gl binary-image-api",
+    "family_note": "Reads encoded PNG header fields; does not decode pixels through this API."
+  }
+]

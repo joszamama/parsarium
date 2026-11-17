@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T08:51:44.241588+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
+  "differential_kind": "fixed_valid_default_namespace_variant",
+  "standard_feedback": "none: Node.js core ships no XML parser API",
+  "results": [
+    {
+      "project": "xml/javascript/fast_xml_parser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "386c1dd3a1d382b0ea746c98d8a1d399254f0fdc0da9f125f93a6ff28c934d21",
+      "base_image_id": "sha256:b48c9f79ce1191b2bbabb4308096a1005b49785eb39e8c3d619f9e332fd61374",
+      "overlay_image_id": "sha256:b3face974cefab832895c996ecc1df3efe3c3543b7087e4a49bfe4478c816f8a",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 163,
+      "control_afl_tuples": 183,
+      "differential_parser_features": 174,
+      "differential_afl_tuples": 194,
+      "parser_feature_difference": 47,
+      "afl_tuple_difference": 47,
+      "control_only_features_by_file": {
+        "src/validator.js": 12,
+        "src/xmlparser/OrderedObjParser.js": 6
+      },
+      "differential_only_features_by_file": {
+        "src/validator.js": 17,
+        "src/xmlparser/OrderedObjParser.js": 12
+      }
+    },
+    {
+      "project": "xml/javascript/sax",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "9b7d062f23ad2e289e868330eaa48caed88f3ac6f620064f6e30dac3479203cc",
+      "base_image_id": "sha256:43237e393c1f30a122b2bb305c4205c44014595b268dfa9d51f541d931842ab7",
+      "overlay_image_id": "sha256:ba1d58afdb48c396f5cf1310272ed3e9090895418937472350f06ca7102c6f49",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 137,
+      "control_afl_tuples": 157,
+      "differential_parser_features": 158,
+      "differential_afl_tuples": 178,
+      "parser_feature_difference": 43,
+      "afl_tuple_difference": 43,
+      "control_only_features_by_file": {
+        "lib/sax.js": 11
+      },
+      "differential_only_features_by_file": {
+        "lib/sax.js": 32
+      }
+    },
+    {
+      "project": "xml/javascript/saxes",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "0e45f4b0c1339fda8e83acfdd5085868253518ca4067fd287fb32004cabb4cbd",
+      "base_image_id": "sha256:d3cfd9cf8c7f2d44cb41860c36c42607f5a6934af567131aa9dbae819bf1563a",
+      "overlay_image_id": "sha256:0afb579d8721e9340939e82cac7e26cd0aa3d92f6fcb2ed423c96483a2fb651f",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 126,
+      "control_afl_tuples": 146,
+      "differential_parser_features": 146,
+      "differential_afl_tuples": 166,
+      "parser_feature_difference": 32,
+      "afl_tuple_difference": 32,
+      "control_only_features_by_file": {
+        "saxes.js": 6
+      },
+      "differential_only_features_by_file": {
+        "saxes.js": 26
+      }
+    },
+    {
+      "project": "xml/javascript/xml2js",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "3b6179e91d35ea9c5102d381e68de9c2da63deda08dd6bbc809cc50786fe142b",
+      "base_image_id": "sha256:c2648b4d21896fed1e2dd48b2005fb9c1d8080147ed5b8d29364ea56e2c55695",
+      "overlay_image_id": "sha256:8a7519a8452a189a9574a1ae1b35f93f427cf8ec9af53b5106d18bc52cd45e72",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 324,
+      "control_afl_tuples": 344,
+      "differential_parser_features": 343,
+      "differential_afl_tuples": 363,
+      "parser_feature_difference": 47,
+      "afl_tuple_difference": 47,
+      "control_only_features_by_file": {
+        "/sax.js": 0,
+        "lib/parser.js": 3
+      },
+      "differential_only_features_by_file": {
+        "/sax.js": 0,
+        "lib/parser.js": 1
+      }
+    },
+    {
+      "project": "xml/javascript/xmldom_xmldom",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "784138caa6c3b652fe4e2042b61c32be0f14b25c7793c7e9a819cfebd7b0022f",
+      "base_image_id": "sha256:ff27fbe364b1464ab94e6d4895c9cef0c2b1d2e58e48ff97935fe6de57dc4f3d",
+      "overlay_image_id": "sha256:5885c1943b4ee3526a0439e9eac9a40fecd00c339062d5bdc9f96e5242892e88",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 214,
+      "control_afl_tuples": 234,
+      "differential_parser_features": 220,
+      "differential_afl_tuples": 240,
+      "parser_feature_difference": 28,
+      "afl_tuple_difference": 28,
+      "control_only_features_by_file": {
+        "lib/dom-parser.js": 5,
+        "lib/dom.js": 4,
+        "lib/sax.js": 2
+      },
+      "differential_only_features_by_file": {
+        "lib/dom-parser.js": 1,
+        "lib/dom.js": 4,
+        "lib/sax.js": 12
+      }
+    }
+  ]
+}

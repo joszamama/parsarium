@@ -1,0 +1,222 @@
+[
+  {
+    "name": "seld/jsonlint",
+    "version": "1.12.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Seldaek/jsonlint/blob/4882a0459c88772e4afa3a73ee81b7824490aa9c/LICENSE",
+    "documentation": "https://github.com/Seldaek/jsonlint/blob/4882a0459c88772e4afa3a73ee81b7824490aa9c/README.md",
+    "source": "https://github.com/Seldaek/jsonlint/tree/4882a0459c88772e4afa3a73ee81b7824490aa9c",
+    "input_api": "Seld\\JsonLint\\JsonParser::parse(string $input, int $flags = 0) over local bytes; default flags decode objects to stdClass",
+    "adapter": "projects/json/php/seld_jsonlint/harness.php",
+    "composer_lock": "projects/json/php/seld_jsonlint/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "RFC 8259 JSON text decoded into PHP stdClass/array/scalar values with default flags",
+    "family": "seld/jsonlint Lexer and LR table parser",
+    "family_note": "Own pure-PHP Lexer.php and JsonParser.php LR parse table; the pinned source contains no json_decode call. String escapes are expanded by its own preg_replace_callback interpolation. Composer depends on it, which inflates its download count; Composer itself calls json_decode first and uses JsonParser to report errors.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 252371311,
+      "source": "https://packagist.org/packages/seld/jsonlint",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/seld_jsonlint",
+    "not_verified": "Only default flags on one valid UTF-8 object control were run. ALLOW_COMMENTS, duplicate-key flags, PARSE_TO_ASSOC, VALIDATE_UTF8_ENCODING, byte-order-mark input (rejected by failOnBOM), large integers, depth limits and malformed input are unverified."
+  },
+  {
+    "name": "laminas/laminas-json",
+    "version": "3.8.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/laminas/laminas-json/blob/5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0/LICENSE.md",
+    "documentation": "https://docs.laminas.dev/laminas-json/advanced/#internal-encoderdecoder",
+    "source": "https://github.com/laminas/laminas-json/tree/5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0",
+    "input_api": "Set Laminas\\Json\\Json::$useBuiltinEncoderDecoder = true, then Json::decode(string $input) over local JSON text; forces package Decoder instead of ext/json",
+    "adapter": "projects/json/php/laminas_json/harness.php",
+    "composer_lock": "projects/json/php/laminas_json/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "JSON text decoded by Laminas own PHP Decoder when static flag forces the internal implementation",
+    "family": "Laminas Json Decoder pure-PHP parser (Zend JSON lineage)",
+    "family_note": "The default Json::decode route delegates to PHP ext/json. The documented useBuiltinEncoderDecoder flag is set true before each call so the own Decoder.php parse path runs; Xdebug source coverage requires Decoder.php. Package is abandoned as documented by its maintainers; cumulative downloads reflect historical adoption. Zendframework/zend-json shares the predecessor lineage and is not counted as an independent family.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 35102503,
+      "source": "https://packagist.org/packages/laminas/laminas-json",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/laminas_json",
+    "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Expression extensions, duplicate keys, large inputs, scalar roots and malformed input remain unverified."
+  },
+  {
+    "name": "halaxa/json-machine",
+    "version": "1.2.6",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/halaxa/json-machine/blob/8bf0b0ff6ff60ab480778eaa5ad7d505b442c2d4/LICENSE.txt",
+    "documentation": "https://github.com/halaxa/json-machine/blob/8bf0b0ff6ff60ab480778eaa5ad7d505b442c2d4/README.md",
+    "source": "https://github.com/halaxa/json-machine/tree/8bf0b0ff6ff60ab480778eaa5ad7d505b442c2d4",
+    "input_api": "JsonMachine\\Items::fromString(string $input, array $options) over local JSON text; iteration yields top-level members; ExtJsonDecoder decodes each value",
+    "adapter": "projects/json/php/halaxa_json_machine/harness.php",
+    "composer_lock": "projects/json/php/halaxa_json_machine/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "JSON object or array roots; JSON Machine incrementally parses top-level members and PHP ext/json decodes each yielded member value",
+    "family": "JSON Machine Lexer/Parser plus PHP ext/json member decoder",
+    "family_note": "The package has its own streaming Lexer and Parser, but default ExtJsonDecoder delegates each value to json_decode. This composite family shares ext/json with the runtime path; the harness invokes Items::fromString directly and iterates every top-level member.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 30443415,
+      "source": "https://packagist.org/packages/halaxa/json-machine",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/halaxa_json_machine",
+    "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Scalar roots, JSON Pointer paths, custom decoders, large streaming inputs, duplicate keys and malformed input remain unverified."
+  },
+  {
+    "name": "salsify/json-streaming-parser",
+    "version": "v8.3.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/salsify/jsonstreamingparser/blob/c0cfac990eb4e917c71b0ad0146546f0a4da0c2f/LICENSE.txt",
+    "documentation": "https://github.com/salsify/jsonstreamingparser/blob/c0cfac990eb4e917c71b0ad0146546f0a4da0c2f/README.md",
+    "source": "https://github.com/salsify/jsonstreamingparser/tree/c0cfac990eb4e917c71b0ad0146546f0a4da0c2f",
+    "input_api": "new JsonStreamingParser\\Parser(resource $stream, ListenerInterface $listener) then parse() over a php://memory stream holding local JSON text; harness listener builds stdClass/list values from startObject/startArray/key/value events",
+    "adapter": "projects/json/php/salsify_json_streaming_parser/harness.php",
+    "composer_lock": "projects/json/php/salsify_json_streaming_parser/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "One JSON object or array root read from a stream by salsify's own pure-PHP character state machine; scalars converted by ParserHelper without ext/json",
+    "family": "salsify JsonStreamingParser character state machine (SAX-style listener)",
+    "family_note": "Parser.php consumes the stream byte by byte and emits listener events; numbers use filter_var and casts, strings and \\u escapes are decoded in package code, and no json_decode call exists in the package source. The harness supplies its own tree-building listener because the bundled InMemoryListener maps objects to PHP arrays, losing the object/array distinction. Distinct from seld/jsonlint, Laminas Decoder, JSON Machine and ext/json.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 7715575,
+      "source": "https://packagist.org/packages/salsify/json-streaming-parser",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/salsify_json_streaming_parser",
+    "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Scalar roots (rejected by the parser), concatenated documents (rejected by the harness), byte-order marks, custom line endings and buffer sizes, the bundled listeners, large streaming inputs, duplicate keys and malformed input remain unverified."
+  }
+]

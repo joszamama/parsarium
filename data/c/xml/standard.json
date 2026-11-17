@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C",
+  "format": "XML",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220 working draft)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The listed standard headers provide no XML parser, tokenizer, namespace resolver or document type."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23, and string handling <string.h>, clause 7.26",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "fread and fgets return bytes and strstr/strchr search them; none recognises XML markup, entity or character references, CDATA sections or namespace declarations."
+    }
+  ],
+  "limit": "Scoped to the ISO C standard library. POSIX and platform libraries (for example macOS libxml2 or the Windows MSXML/XmlLite COM APIs) were not inventoried as standard APIs. No standard XML API was documented to run. Matches the C finding in data/c/json/standard.json."
+}

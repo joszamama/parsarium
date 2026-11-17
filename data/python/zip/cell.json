@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "zip",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 4,
   "search_queries": [
     "project name contains 'zip'",
@@ -21,10 +21,12 @@
   "search_hits_recorded": 418,
   "unique_search_hits": 407,
   "unresolved_documentation_leads": 6,
-  "uncertainty": "The PyPI Simple JSON project index was filtered by nine package-name substrings, retaining up to 100 case-insensitive alphabetical hits per term. The 418 saved hits contain 407 distinct names but are not a popularity search; relevant packages outside the windows may be missed. Six plausible leads remain unresolved, including the high-download zipfile-deflate64 whose source build failed on this macOS ARM/Python 3.13 host. The 20 verified distribution paths include many wrappers/backports over CPython zipfile; they are not 20 independent ZIP engines. The Zstandard reader was tested on a valid method-93 ZIP made by a pinned generator; other packages used the one-entry DEFLATE control. One entry is a local archive extractor backed by an external unzip utility, recorded as such. The four separate standard-library APIs share underlying ZIP code. Each control proves only its stated compression method, member, and API scope.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/python/zip/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/python/zip/parsers.json",
   "third_party_control_results": "data/python/zip/verification.json",
   "runtime_evidence": "data/python/zip/standard.json",
   "registry_snapshot": "data/python/zip/registry-snapshot.json",
-  "unresolved_leads": "data/python/zip/leads.json"
+  "unresolved_leads": "data/python/zip/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/python/zip"
 }

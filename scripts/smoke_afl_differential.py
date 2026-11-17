@@ -1,5 +1,6 @@
 """Check that parser-source differences reach AFL++ in each bridge family."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -14,8 +15,7 @@ from run_case import ROOT, project_for
 PILOTS = (
     ("ascii_ply", "go", "polyform_ply", "controls/ascii_ply/triangle.ply",
      "controls/ascii_ply/triangle-colour.ply"),
-    ("ascii_ply", "java", "jply", "controls/ascii_ply/triangle.ply",
-     "controls/ascii_ply/triangle-colour.ply"),
+    ("png", "java", "commons_imaging", "controls/png/red-green.png", None),
     ("pdf", "javascript", "pdf_lib", "controls/pdf/one-page.pdf",
      "controls/pdf/two-page.pdf"),
     ("ascii_ply", "python", "plyfile", "controls/ascii_ply/triangle.ply",
@@ -31,9 +31,16 @@ def run(command: list[str]) -> None:
 
 
 def main() -> None:
-    results = []
+    cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("--project", help="rerun one format/ecosystem/slug pilot")
+    args = cli.parse_args()
+    report_path = ROOT / "data/afl-feedback-differential.json"
+    previous = (json.loads(report_path.read_text())["results"] if args.project else [])
+    results = {item["project"]: item for item in previous}
     for format_name, ecosystem, slug, first, second in PILOTS:
         relative = Path(format_name) / ecosystem / slug
+        if args.project and str(relative) != args.project:
+            continue
         _, manifest = project_for(format_name, ecosystem, slug)
         overlay = ROOT / "fuzzing/afl-native" / relative
         receipt = json.loads((overlay / "verification.json").read_text())
@@ -42,8 +49,8 @@ def main() -> None:
             work = Path(temporary)
             cases = [ROOT / first]
             if second is None:
-                comparison = work / "truncated.svg"
-                comparison.write_bytes(b"<svg")
+                comparison = work / f"truncated.{format_name}"
+                comparison.write_bytes(b"<svg" if format_name == "svg" else b"\x89PNG")
                 cases.append(comparison)
             else:
                 cases.append(ROOT / second)
@@ -81,16 +88,19 @@ def main() -> None:
                 "first_afl_tuples": len(maps[0]),
                 "second_afl_tuples": len(maps[1]),
                 "afl_tuple_difference": map_difference,
-                "second_case_kind": "truncated_svg" if second is None else "valid_control",
+                "second_case_kind": "truncated_input" if second is None else "valid_control",
             }
-            results.append(record)
+            results[str(relative)] = record
             print(f"{relative}: {feature_difference} parser features, "
                   f"{map_difference} AFL++ tuples differ", flush=True)
+    if args.project and args.project not in results:
+        raise ValueError(f"unknown pilot: {args.project}")
+    ordered = [results[f"{fmt}/{eco}/{slug}"] for fmt, eco, slug, _, _ in PILOTS]
     report = {"schema_version": 1,
               "checked_at_utc": datetime.now(timezone.utc).isoformat(),
-              "projects_total": len(results), "projects_passed": len(results),
-              "results": results}
-    (ROOT / "data/afl-feedback-differential.json").write_text(json.dumps(report, indent=2) + "\n")
+              "projects_total": len(ordered), "projects_passed": len(ordered),
+              "results": ordered}
+    report_path.write_text(json.dumps(report, indent=2) + "\n")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "c",
+  "package": "mdal",
+  "release": "1.3.3",
+  "catalog_parser": "data/c/ascii_ply/parsers.json",
+  "source_lock": "data/c/ascii_ply/source-lock.json",
+  "source_sha256": "aeff0d532653c042c24bafe250409052fcb0bc6b2bab09f6470c858a3e079b2f",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]},
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of MDAL's PLY driver from its C ABI",
+  "sanitizer_exception": "The pinned libplyxx textio.h reads an unaligned uint64_t on the valid control. The AFL++ build disables Clang's alignment sanitizer only; AddressSanitizer and the other undefined-behavior checks remain enabled.",
+  "coverage_subject_prefix": "/work/MDAL-release-1.3.3/mdal/frmts/",
+  "format_specific_coverage_file_suffix": "/mdal_ply.cpp"
+}

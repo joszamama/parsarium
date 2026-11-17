@@ -1,28 +1,29 @@
-# C × WAV: verified parser ranking
+# C × WAV: selected parsers
 
-20 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T10:25:21.715408+00:00 and 2026-11-12T11:12:59.452468+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 2 path(s) lack a metric and remain unranked.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Repository stars | Scope | Underlying family |
+GitHub stars of primary upstream repository.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [ffmpeg](https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html) | 9.0.2 | 67,107 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | FFmpeg WAV demuxer and PCM decoder |
 | 2 | [raylib](https://github.com/raysan5/raylib/blob/6.2/src/raylib.h) | 6.2 | 35,640 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | raylib bundled dr_wav decoder |
 | 3 | [sdl2](https://wiki.libsdl.org/SDL2/SDL_LoadWAV) | 2.32.10 | 16,973 | WAV sample rate, channel and frame counts, plus four decoded PCM samples | native SDL2 WAV reader |
-| 3 | [sdl3](https://wiki.libsdl.org/SDL3/SDL_LoadWAV) | 3.4.20 | 16,973 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | SDL3 WAV loader |
+| 4 | [sdl3](https://wiki.libsdl.org/SDL3/SDL_LoadWAV) | 3.4.20 | 16,973 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | SDL3 WAV loader |
 | 5 | [miniaudio](https://github.com/mackron/miniaudio/blob/0.11.26/miniaudio.h) | 0.11.26 | 7,616 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | miniaudio bundled dr_wav decoder |
 | 6 | [aubio](https://github.com/aubio/aubio/blob/0.4.9/src/io/source.h) | 0.4.9 | 3,787 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | aubio source abstraction |
 | 7 | [allegro](https://liballeg.org/a5docs/5.2.11.3/acodec.html) | 5.2.11.3 | 2,133 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | Allegro audio codec WAV loader |
 | 8 | [dr_wav](https://github.com/mackron/dr_libs/blob/wav-0.14.6/dr_wav.h) | wav-0.14.6 | 1,891 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | dr_wav C WAV decoder |
 | 9 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 1,732 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | libsndfile WAV decoder |
-| 10 | [taglib](https://github.com/taglib/taglib/blob/v2.3.2/bindings/c/tag_c.h) | 2.3.2 | 1,470 | WAV-aware structural/audio-property parsing; does not decode PCM samples | TagLib C bindings over TagLib C++ RIFF/WAV parser |
-| 11 | [sdl2_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadWAV) | 2.8.2 | 765 | WAV sample rate, channel and frame counts, plus four decoded PCM samples at configured mixer format | SDL2_mixer through SDL2 compatibility and SDL WAV loader |
-| 11 | [sdl3_mixer](https://wiki.libsdl.org/SDL3_mixer/MIX_LoadAudio) | 3.2.4 | 765 | parsed audio sample rate, channel count and duration in frames | SDL3_mixer WAV decoder |
-| 13 | [csfml](https://github.com/SFML/CSFML/blob/3.0.0/include/CSFML/Audio/SoundBuffer.h) | 3.0.0 | 382 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | CSFML C facade over SFML audio |
-| 14 | [sdl2-compat](https://wiki.libsdl.org/SDL2/SDL_LoadWAV) | 2.32.74 | 221 | WAV sample rate, channel and frame counts, plus four decoded PCM samples | SDL2 compatibility layer over SDL3 WAV loader |
-| 15 | [sdl2_sound](https://icculus.org/SDL_sound/docs/html/SDL__sound_8h.html) | 2.0.6 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL2_sound WAVE decoder |
-| 15 | [sdl3_sound](https://wiki.icculus.org/SDL3_sound/Sound_NewSampleFromFile) | 3.2.0 | 182 | WAV decoder identified as Microsoft WAVE; parsed sample rate, channels, frames and four PCM samples | SDL3_sound WAVE decoder |
-| 17 | [libaudiofile](https://github.com/mpruett/audiofile/blob/audiofile-0.3.6/libaudiofile/audiofile.h) | 0.3.6 | 167 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | Audio File Library WAV parser |
-| 18 | [freealut](https://github.com/vancegroup/freealut/blob/freealut_1_1_0/include/AL/alut.h) | 1.1.0 | 74 | WAV format, sample rate, frame count and four decoded PCM samples | FreeALUT WAV memory loader |
-| unranked | [gstreamer](https://gstreamer.freedesktop.org/documentation/wavparse/index.html) | 1.28.9 | unknown | explicit wavparse element interprets WAV and emits caps plus four PCM sample values | GStreamer wavparse plugin |
-| unranked | [sox](https://github.com/chirlu/sox/blob/master/libsox.3) | 14.4.2 | unknown | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | SoX libsox WAV reader |
+
+## Supplemental numeric evidence
+
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
+
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [gstreamer](https://gstreamer.freedesktop.org/documentation/wavparse/index.html) | 1.28.9 | [Debian source installed count](https://sources.debian.org/src/gstreamer1.0/) | 172,612 | explicit wavparse element interprets WAV and emits caps plus four PCM sample values | GStreamer wavparse plugin |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

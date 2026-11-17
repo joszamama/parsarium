@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "cgal",
+  "release": "6.2.1",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "b6be77c60765a8456335de991eeaf6ffec55256984e4a9ecc6a97c37bbfe85bf",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of CGAL Surface_mesh PLY reader and underlying PLY parser",
+  "coverage_subject_prefix": "/work/source/include/CGAL/Surface_mesh/IO/",
+  "format_specific_coverage_file_suffix": "/PLY.h",
+  "underlying_coverage_subject_prefix": "/work/source/include/CGAL/IO/",
+  "underlying_format_specific_coverage_file_suffix": "/PLY/PLY_reader.h"
+}

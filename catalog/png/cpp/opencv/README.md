@@ -32,6 +32,11 @@
 
 The pinned OpenCV imgcodecs dylib links Homebrew libpng 1.6.59. This is a distinct, widely used C++ local-file API sharing libpng as its PNG syntax engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/png/cpp/opencv/README.md)
+
+```sh
+python3 parsarium.py build png cpp opencv
+python3 parsarium.py run png cpp opencv controls/png/red-green.png
+```

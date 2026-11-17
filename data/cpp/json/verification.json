@@ -1,0 +1,401 @@
+{
+  "checked_at_utc": "2026-11-17T12:02:24.028573+00:00",
+  "platform": "linux/arm64 Docker",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "controls": {
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
+  "third_party": [
+    {
+      "package": "jsoncpp",
+      "version": "1.9.8",
+      "scope": "RFC 8259 JSON text in CharReaderBuilder strict mode, parsed into Json::Value",
+      "command": "python3 scripts/run_project.py json cpp jsoncpp",
+      "receipt": "projects/json/cpp/jsoncpp/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 810,
+      "format_specific_source_lines_covered": 435,
+      "error": null
+    },
+    {
+      "package": "simdjson",
+      "version": "5.0.4",
+      "scope": "RFC 8259 JSON text parsed from a local pointer and byte length into a simdjson DOM element; observed valid control subset",
+      "command": "python3 scripts/run_project.py json cpp simdjson",
+      "receipt": "projects/json/cpp/simdjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 1364,
+      "format_specific_source_lines_covered": 984,
+      "error": null
+    },
+    {
+      "package": "nlohmann-json",
+      "version": "3.12.0",
+      "scope": "RFC 8259 JSON text via json::parse over the byte range (allow_exceptions=false, comments rejected), parsed into nlohmann::json",
+      "command": "python3 scripts/run_project.py json cpp nlohmann-json",
+      "receipt": "projects/json/cpp/nlohmann-json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 1147,
+      "format_specific_source_lines_covered": 134,
+      "error": null
+    },
+    {
+      "package": "RapidJSON",
+      "version": "1.1.0",
+      "scope": "RFC 8259-compatible JSON text through length-bounded DOM Parse; object/array roots on two valid controls",
+      "command": "python3 scripts/run_project.py json cpp rapidjson",
+      "receipt": "projects/json/cpp/rapidjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 691,
+      "format_specific_source_lines_covered": 347,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_keys": []
+      },
+      "error": null
+    },
+    {
+      "package": "Boost.JSON",
+      "version": "1.92.0",
+      "scope": "RFC 8259 JSON text through one-step parse(string_view, error_code&) with default strict options; object/array roots on two valid controls",
+      "command": "python3 scripts/run_project.py json cpp boost-json",
+      "receipt": "projects/json/cpp/boost-json/verification.json",
+      "pass": true,
+      "oracle": "exact: the replay's printed DOM equals Python json.loads of each control with key order and int/float kinds preserved",
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 1601,
+      "format_specific_source_lines_covered": 552,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "differential_pass": true,
+      "family": "Boost.JSON basic_parser",
+      "family_status": "independent",
+      "error": null
+    },
+    {
+      "package": "Glaze",
+      "version": "9.1.0",
+      "scope": "RFC 8259 JSON from a local std::string into ordered glz::generic_i64 DOM; both valid controls checked for exact nested structure, key order and numeric kinds",
+      "command": "python3 scripts/run_project.py json cpp glaze",
+      "receipt": "projects/json/cpp/glaze/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 1623,
+      "format_specific_source_lines_covered": 415,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/glaze/differential.json",
+      "error": null
+    },
+    {
+      "package": "POCO JSON",
+      "version": "1.15.4",
+      "scope": "Poco::JSON::Parser::parse(std::string) over local bytes with order-preserving ParseHandler; source-built POCO ParserImpl and bundled pdjson tokenizer",
+      "command": "python3 scripts/run_project.py json cpp poco-json",
+      "receipt": "projects/json/cpp/poco-json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 125,
+      "format_specific_source_lines_covered": 125,
+      "underlying_source_lines_covered": 350,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/poco-json/differential.json",
+      "error": null
+    }
+  ],
+  "standard": [],
+  "refreshed_projects": [
+    "glaze",
+    "poco-json"
+  ],
+  "retained_prior_results_checked_at_utc": "2026-11-17T11:31:43.644920+00:00"
+}

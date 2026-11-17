@@ -1,0 +1,195 @@
+{
+ "format": "xml",
+ "ecosystem": "php",
+ "status": "inventory_only_no_third_party_verified",
+ "ceiling": 10,
+ "selected_third_party": [],
+ "selected_count": 0,
+ "verified_standard_or_runtime_count": 3,
+ "search": {
+  "surface": "Packagist public search JSON API",
+  "docs": "https://packagist.org/apidoc",
+  "captured_at_utc": "2026-11-17T02:45:05.531229+00:00",
+  "limit_per_query": 100,
+  "queries": [
+   {
+    "query": "xml",
+    "url": "https://packagist.org/search.json?q=xml&per_page=100",
+    "total": 3141,
+    "hits_recorded": 100,
+    "limit": 100,
+    "error": null
+   }
+  ],
+  "snapshot": "data/expansion/registry/php.json"
+ },
+ "metric": {
+  "name": "Packagist lifetime package downloads",
+  "docs": "https://packagist.org/apidoc",
+  "window": null,
+  "limitation": null,
+  "comparability": "Compared only among leads in the same ecosystem and format cell; never across ecosystems.",
+  "snapshot": "data/expansion/metrics/php.json",
+  "lead_adoption_order_meaning": "Order among unverified leads with a positive value in this cell only. It is not a selection or a ranking of verified parsers."
+ },
+ "leads": [
+  {
+   "name": "sabre/xml",
+   "status": "lead",
+   "source": "https://packagist.org/packages/sabre/xml",
+   "family": "ext/xmlreader (libxml2)",
+   "api_lead": "Sabre\\Xml\\Service::parse",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Wraps XMLReader.",
+   "found_by": "registry_search",
+   "metric_value": 39899580,
+   "metric_url": "https://packagist.org/packages/sabre/xml.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false,
+   "lead_adoption_order": 3
+  },
+  {
+   "name": "veewee/xml",
+   "status": "lead",
+   "source": "https://packagist.org/packages/veewee/xml",
+   "family": "ext/dom (libxml2)",
+   "api_lead": "Veewee\\Xml\\Dom\\Document::fromXmlString",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Wraps DOM.",
+   "found_by": "registry_search",
+   "metric_value": 8993041,
+   "metric_url": "https://packagist.org/packages/veewee/xml.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false,
+   "lead_adoption_order": 4
+  },
+  {
+   "name": "jms/serializer",
+   "status": "lead",
+   "source": "https://packagist.org/packages/jms/serializer",
+   "family": "ext/dom/simplexml (libxml2)",
+   "api_lead": "XmlDeserializationVisitor",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Object mapper.",
+   "found_by": "registry_search",
+   "metric_value": 154014718,
+   "metric_url": "https://packagist.org/packages/jms/serializer.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false,
+   "lead_adoption_order": 2
+  },
+  {
+   "name": "laminas/laminas-xml",
+   "status": "lead",
+   "source": "https://packagist.org/packages/laminas/laminas-xml",
+   "family": "ext/dom/simplexml (libxml2)",
+   "api_lead": "Laminas\\Xml\\Security::scan",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Security wrapper.",
+   "found_by": "registry_search",
+   "metric_value": 3994309,
+   "metric_url": "https://packagist.org/packages/laminas/laminas-xml.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false,
+   "lead_adoption_order": 5
+  },
+  {
+   "name": "prewk/xml-string-streamer",
+   "status": "lead",
+   "source": "https://packagist.org/packages/prewk/xml-string-streamer",
+   "family": "custom splitter + ext/simplexml",
+   "api_lead": "XmlStringStreamer::createStringWalkerParser",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Splits nodes before libxml2 parsing.",
+   "found_by": "registry_search",
+   "metric_value": 3648085,
+   "metric_url": "https://packagist.org/packages/prewk/xml-string-streamer.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false,
+   "lead_adoption_order": 6
+  },
+  {
+   "name": "symfony/serializer",
+   "status": "lead",
+   "source": "https://packagist.org/packages/symfony/serializer",
+   "family": "ext/dom (libxml2)",
+   "api_lead": "XmlEncoder::decode",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Wraps DOM.",
+   "found_by": "registry_search",
+   "metric_value": 384765913,
+   "metric_url": "https://packagist.org/packages/symfony/serializer.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false,
+   "lead_adoption_order": 1
+  },
+  {
+   "name": "spatie/array-to-xml",
+   "status": "excluded_scope",
+   "source": "https://packagist.org/packages/spatie/array-to-xml",
+   "family": "n/a",
+   "api_lead": "n/a",
+   "api_lead_checked_against_pinned_release": false,
+   "note": "Writer only; out of parsing scope.",
+   "found_by": "registry_search",
+   "metric_value": 76741604,
+   "metric_url": "https://packagist.org/packages/spatie/array-to-xml.json",
+   "metric_error": null,
+   "latest_release_observed": null,
+   "verified": false
+  }
+ ],
+ "shared_families": {
+  "ext/dom (libxml2)": [
+   "veewee/xml",
+   "symfony/serializer"
+  ],
+  "ext/dom/simplexml (libxml2)": [
+   "jms/serializer",
+   "laminas/laminas-xml"
+  ]
+ },
+ "standard_or_runtime": {
+  "status": "runtime_api_verified",
+  "official_documentation": [
+   "https://www.php.net/manual/en/book.simplexml.php",
+   "https://www.php.net/manual/en/book.dom.php",
+   "https://www.php.net/manual/en/book.xmlreader.php",
+   "https://www.php.net/manual/en/book.xml.php"
+  ],
+  "observed": "2026-11-17",
+  "finding": "SimpleXML, DOM and XMLReader verified on this host's PHP build; all share libxml2. ext/xml (xml_parse) not run. These are default-enabled bundled extensions, not guaranteed in every build.",
+  "receipts": [
+   {
+    "api": "simplexml_load_string",
+    "kind": "positive",
+    "control": "data/expansion/controls/control.xml",
+    "passed": true,
+    "runtime": "PHP 8.5.12 (cli) (built: Oct 19 2026 17:02:46) (NTS)"
+   },
+   {
+    "api": "DOMDocument::loadXML",
+    "kind": "positive",
+    "control": "data/expansion/controls/control.xml",
+    "passed": true,
+    "runtime": "PHP 8.5.12 (cli) (built: Oct 19 2026 17:02:46) (NTS)"
+   },
+   {
+    "api": "XMLReader::XML",
+    "kind": "positive",
+    "control": "data/expansion/controls/control.xml",
+    "passed": true,
+    "runtime": "PHP 8.5.12 (cli) (built: Oct 19 2026 17:02:46) (NTS)"
+   }
+  ],
+  "receipt_file": "data/expansion/standard-receipts.json",
+  "counts_toward_ten": false
+ },
+ "uncertainty": "No third-party path is verified: no pinned release, local API control run or receipt exists for any lead. Lead API names come from project documentation and were not checked against pinned releases. Search is bounded to the recorded queries and first 100 hits; targeted leads fill gaps from documentation knowledge and are labelled."
+}

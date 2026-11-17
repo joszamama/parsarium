@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "project": "pdf/c/gnome-papers",
+  "pass": true,
+  "feedback_scope": "AFL++ source allowlist restricted to Papers PDF backend and source-built Poppler GLib/core",
+  "instrumented_parser_modules": [
+    "/work/install/lib/papers/6/backends/libpdfdocument.so",
+    "/work/install/lib/libpoppler-glib.so",
+    "/work/install/lib/libpoppler.so"
+  ],
+  "uninstrumented_document_wrapper": "/work/install/lib/libppsdocument-4.0.so",
+  "afl_map_size": 14431,
+  "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+  "valid_variant": "controls/pdf/one-page.pdf",
+  "valid_variant_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "control_repeat_edge_counts": [
+    348,
+    348,
+    348
+  ],
+  "control_stable_edge_ids": 348,
+  "control_union_edge_ids": 348,
+  "control_stability_ratio": 1.0,
+  "variant_repeat_edge_counts": [
+    348,
+    348
+  ],
+  "variant_stable_edge_ids": 348,
+  "stable_control_only_edge_ids": 1,
+  "stable_variant_only_edge_ids": 1,
+  "control_output": {
+    "pages": 2
+  },
+  "variant_output": {
+    "pages": 1
+  },
+  "mutation_campaign_run": false
+}

@@ -25,6 +25,11 @@
 
 Geogram v1.10.1 registers PLYIOHandler in mesh_io.cpp and calls bundled RPly 1.1.4. This shares the RPly underlying syntax parser family with standalone RPly and rplycpp, but Geogram exposes its distinct mesh_load API and mesh representation.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/cpp/geogram/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply cpp geogram
+python3 parsarium.py run ascii_ply cpp geogram controls/ascii_ply/triangle.ply
+```

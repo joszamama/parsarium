@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "java",
+  "package": "jcodec",
+  "release": "0.2.5",
+  "catalog_parser": "data/java/mp3/parsers.json",
+  "source_lock": "projects/mp3/java/jcodec/source-lock.json",
+  "source_sha256": "9945efa92e16b3fbe8eb8bf37f00be53fa0adb52d09ac978a0744ca2ef3697db",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "expected_output": {
+    "codec": "MP3",
+    "sample_rate": 44100,
+    "channels": 1,
+    "frames": 11,
+    "decoded_samples": 12672
+  },
+  "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_control_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_expected_output": {
+    "codec": "MP3",
+    "sample_rate": 22050,
+    "channels": 2,
+    "frames": 12,
+    "decoded_samples": 6912
+  },
+  "api": "new MPEGAudioDemuxer(NIOUtils.readableChannel(File)); getAudioTracks().get(0).nextFrame() until null; Mp3Decoder.getCodecMeta(first frame); Mp3Decoder.decodeFrame(frame, ByteBuffer) for every frame",
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jcodec-0.2.5.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.jcodec:jcodec:0.2.5 (MPEGAudioDemuxer frame sync and org.jcodec.codecs.mpa Layer III decoder) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/org/jcodec/codecs/mpa/Mp3Decoder.java",
+  "pilot": "plain_mp3_registry_pilot",
+  "coverage_limit": "Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or intensity-stereo support (Mp3Decoder throws on intensity stereo). jcodec is also counted under mp3_id3v2/java through the same MPEGAudioDemuxer; this path adds full Layer III decoding of untagged streams."
+}

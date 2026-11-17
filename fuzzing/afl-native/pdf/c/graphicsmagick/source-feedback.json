@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "engine": "afl-showmap 4.33c, one fixed valid PDF per run",
+  "command": "afl-showmap -q -m none -t 10000 -o OUTPUT -- /work/fuzzer /input/control",
+  "control": {
+    "path": "controls/pdf/one-page.pdf",
+    "sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+    "feedback_edges": 13536
+  },
+  "valid_variant": {
+    "path": "controls/pdf/two-page.pdf",
+    "sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "feedback_edges": 13577
+  },
+  "shared_edge_ids": 13532,
+  "control_only_edge_ids": 4,
+  "variant_only_edge_ids": 45,
+  "pass": true
+}

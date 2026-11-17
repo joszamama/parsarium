@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T12:06:56.752567+00:00",
+  "projects_total": 11,
+  "projects_passed": 11,
+  "differential_kind": "fixed_valid_default_namespace_order",
+  "results": [
+    {
+      "project": "xml/java/xercesimpl",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "38a92abe95cbdc57fb6ccd5f2ca1c8695dcec0d9030cbc48d280b11d3bfad6e8",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "control_parser_features": 3633,
+      "control_afl_tuples": 3523,
+      "differential_parser_features": 3776,
+      "differential_afl_tuples": 3660,
+      "parser_feature_difference": 341,
+      "afl_tuple_difference": 321
+    },
+    {
+      "project": "xml/java/woodstox_core",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "4956ec9f0483990e69626701a4177834a7b55479f26154a661b6ba6d157820e2",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 815,
+      "control_afl_tuples": 828,
+      "differential_parser_features": 921,
+      "differential_afl_tuples": 932,
+      "parser_feature_difference": 232,
+      "afl_tuple_difference": 230
+    },
+    {
+      "project": "xml/java/dom4j",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "7c61784c8f8e34f8d6dddb63f22b585d188424b5a8da4cdf9183d9befdd1dcf8",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 723,
+      "control_afl_tuples": 743,
+      "differential_parser_features": 738,
+      "differential_afl_tuples": 758,
+      "parser_feature_difference": 125,
+      "afl_tuple_difference": 125
+    },
+    {
+      "project": "xml/java/xmlbeans",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "67f8a27a2336ca60dd848e9b295221eeebac63c04249822acc01b300e5bdee44",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 1004,
+      "control_afl_tuples": 1021,
+      "differential_parser_features": 1028,
+      "differential_afl_tuples": 1046,
+      "parser_feature_difference": 90,
+      "afl_tuple_difference": 89
+    },
+    {
+      "project": "xml/java/jdom2",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "24c778110f695a3ab1e53fada9f2fd7a614beb6849849dfc2d054d30c9a869ee",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 734,
+      "control_afl_tuples": 753,
+      "differential_parser_features": 810,
+      "differential_afl_tuples": 827,
+      "parser_feature_difference": 146,
+      "afl_tuple_difference": 144
+    },
+    {
+      "project": "xml/java/aalto_xml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "3c16c7b3cfb9f4e9d88ef00d719355f43a294d44b2450da786bf0c972a941cb2",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 1427,
+      "control_afl_tuples": 1430,
+      "differential_parser_features": 1503,
+      "differential_afl_tuples": 1505,
+      "parser_feature_difference": 278,
+      "afl_tuple_difference": 277
+    },
+    {
+      "project": "xml/java/jdk_documentbuilder",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "a202f0b6e069d9d5287d411d5a322b4fbcb5e3144f13c508f1b1dd0833fc8a09",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "control_parser_features": 4071,
+      "control_afl_tuples": 3940,
+      "differential_parser_features": 4155,
+      "differential_afl_tuples": 4024,
+      "parser_feature_difference": 330,
+      "afl_tuple_difference": 314
+    },
+    {
+      "project": "xml/java/jackson_xml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "b0db0a5b6a6a27a63a5d7ccd5fc17df9d40dc199038c68b22afa0acde5fddd21",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "events": [
+          "START_OBJECT",
+          "FIELD_NAME:line",
+          "START_OBJECT",
+          "FIELD_NAME:n",
+          "VALUE_STRING:1",
+          "FIELD_NAME:currency",
+          "VALUE_STRING:EUR",
+          "FIELD_NAME:sku",
+          "VALUE_STRING:A-7",
+          "FIELD_NAME:amount",
+          "VALUE_STRING:12.50 \u20ac",
+          "END_OBJECT",
+          "FIELD_NAME:line",
+          "START_OBJECT",
+          "FIELD_NAME:n",
+          "VALUE_STRING:2",
+          "FIELD_NAME:note",
+          "VALUE_STRING:say \"hi\"",
+          "FIELD_NAME:plain",
+          "START_OBJECT",
+          "FIELD_NAME:leaf",
+          "VALUE_STRING:",
+          "END_OBJECT",
+          "END_OBJECT",
+          "END_OBJECT"
+        ],
+        "token_count": 25
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 320,
+      "control_afl_tuples": 338,
+      "differential_parser_features": 321,
+      "differential_afl_tuples": 339,
+      "parser_feature_difference": 17,
+      "afl_tuple_difference": 17
+    },
+    {
+      "project": "xml/java/xom",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "244ee8c422b92810073ca2d0e3a81dc049946e722f90c8a2fd05c2dcadc1e9f4",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 579,
+      "control_afl_tuples": 596,
+      "differential_parser_features": 585,
+      "differential_afl_tuples": 602,
+      "parser_feature_difference": 72,
+      "afl_tuple_difference": 72
+    },
+    {
+      "project": "xml/java/xpp3",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "19d08229a5782515f76428a712f21fef5b7ea036198a625ccefb3b82adb0330d",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 677,
+      "control_afl_tuples": 697,
+      "differential_parser_features": 707,
+      "differential_afl_tuples": 727,
+      "parser_feature_difference": 160,
+      "afl_tuple_difference": 160
+    },
+    {
+      "project": "xml/java/kxml2",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "7193626f3592d23bc414cfb9affdd9fabaa17ddf5d398ba83f3e96b1272ed972",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 377,
+      "control_afl_tuples": 397,
+      "differential_parser_features": 390,
+      "differential_afl_tuples": 410,
+      "parser_feature_difference": 29,
+      "afl_tuple_difference": 29
+    }
+  ],
+  "refreshed_projects": [
+    "kxml2"
+  ],
+  "retained_prior_results_checked_at_utc": "2026-11-17T03:42:42.669292+00:00"
+}

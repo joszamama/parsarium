@@ -1,0 +1,76 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "JSON",
+  "status": "standard_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "Node.js 26.10.0",
+      "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
+      "input": "Local control bytes are decoded by the adapter with a strict UTF-8 TextDecoder; JSON.parse itself accepts only a string, never bytes.",
+      "documentation": "https://tc39.es/ecma262/#sec-json.parse",
+      "decoding_documentation": "https://nodejs.org/download/release/v26.10.0/docs/api/util.html#class-utiltextdecoder",
+      "adapter": "adapters/javascript/json_node.mjs",
+      "control": "controls/json/nested-object.json",
+      "observable_result": "object root with 7 keys, 5 objects, 3 arrays, 5 strings including an escaped \\u00e9 and quotes, 5 numbers, 2 booleans, 1 null, container depth 4",
+      "result": "data/javascript/json/standard-receipt.json",
+      "project": "projects/json/javascript/stdlib_json_parse",
+      "expected": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "family": "V8 native JSON.parse (JsonParser)",
+      "family_note": "JSON.parse is an ECMAScript builtin implemented natively in V8 14.6.202.34-node.34 inside the node binary. A V8 coverage probe of the adapter listed 84 scripts and no JSON parser script, so no parser source lines or V8 basic-block edges are attributed. A staged AFL++ proxy maps the separately observed JsonParser function entries into tuples. The Docker project records the underlying native signal as gdb function-entry hits on the unstripped binary's v8::internal::JsonParser<...> symbols (21 of 142 for the nested-object control, 0 for a node -e 0 baseline, identical on repeat, 23 for the nested-array control). Wrapper packages that call JSON.parse (parse-json, json-parse-even-better-errors, secure-json-parse, @hapi/bourne, fast-json-parse, @discoveryjs/json-ext) share this family.",
+      "parser_source_lines_covered": null,
+      "afl_feedback": null,
+      "native_feedback": {
+        "kind": "native_function_entries_not_source_coverage",
+        "receipt": "projects/json/javascript/stdlib_json_parse/verification.json",
+        "scope": "v8::internal::JsonParser<...> text symbols in /usr/local/bin/node (142)",
+        "control_functions": 21
+      }
+    }
+  ],
+  "unverified_documented_apis": [
+    {
+      "api": "Response.prototype.json() / Request.prototype.json() (Fetch body mixin)",
+      "documentation": "https://fetch.spec.whatwg.org/#dom-body-json",
+      "status": "pending",
+      "reason": "Fetch spec defines it as UTF-8 decode then the JSON.parse algorithm; same V8 family, not separately run."
+    },
+    {
+      "api": "import ... with { type: 'json' } (JSON modules)",
+      "documentation": "https://nodejs.org/download/release/v26.10.0/docs/api/esm.html#json-modules",
+      "status": "pending",
+      "reason": "Module loader path over the same JSON.parse family; not a local byte API and not run."
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "One valid nested RFC 8259 object control (plus the fixed nested-array second control) verifies JSON.parse after strict UTF-8 decoding on Node.js 26.10.0, not every JSON variant, number range, reviver use, or BOM handling. No parser-source coverage or V8 basic-block edge feedback exists for this native path. A staged AFL++ bridge hashes gdb-observed function-entry sets into tuples; it misses inlined code and says nothing about lines, blocks, or edges."
+}

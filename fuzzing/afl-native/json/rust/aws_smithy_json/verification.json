@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/aws_smithy_json",
+  "pass": true,
+  "base_project_receipt_sha256": "c0e2bba38648c1e7acde224fdafe6e157355f1cda1eb7c5bb68de650919fe990",
+  "overlay_file_sha256": {
+    "Cargo.toml": "9d6c7875ee25bb7ee242fa8c5c02275830f4f0f0e8c825f4fd8e919b00acce65",
+    "Cargo.lock": "0bf14a8e8f887d6b93d8b4b11ec1dad7a0d36eccb567cc27d0dd47849f96031e",
+    "afl_fuzzer.rs": "10da9f58e1d7bd9ac4c4365634a5d8ce6bf728904ab58dbb0208aaf3a06f414d",
+    "Dockerfile": "c3bc483f7ca2168796e9db7f145567b32092e49f86a76f68d5ba69fe01cd43a8",
+    "build.py": "f3ed6dc4851f7b2dfaba1db0a13855f39258f69330e9ce8120b9b8674bd605e1"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "b45f9fc77ffe92c92c341165a01a565bd30c39ecf5aa8c0719b41719009604f9",
+  "image_id": "sha256:ebb0ca3ca205d156112e3d79b2545caefc3a131d51bc66da35c5ce352b61880e",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 664,
+  "afl_map_size": 53360,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: aws-smithy-json 0.65.1 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:eb96f9bf6cb5f333cac020914a9ae62f92d2f4d7a3ec394d21972d07cc86caee",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 627,
+  "edges_only_in_control": 59,
+  "edges_only_in_variant": 22,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-smithy-json-0.65.1/",
+    "control_lines": {
+      "src/codec.rs": 0,
+      "src/codec/deserializer.rs": 0,
+      "src/codec/serializer.rs": 0,
+      "src/deserialize.rs": 239,
+      "src/deserialize/error.rs": 0,
+      "src/deserialize/token.rs": 6,
+      "src/escape.rs": 53,
+      "src/protocol/aws_json_rpc.rs": 0,
+      "src/protocol/aws_rest_json_1.rs": 0,
+      "src/protocol/error.rs": 0,
+      "src/protocol/mod.rs": 0,
+      "src/serialize.rs": 0
+    },
+    "variant_lines": {
+      "src/codec.rs": 0,
+      "src/codec/deserializer.rs": 0,
+      "src/codec/serializer.rs": 0,
+      "src/deserialize.rs": 236,
+      "src/deserialize/error.rs": 0,
+      "src/deserialize/token.rs": 6,
+      "src/escape.rs": 46,
+      "src/protocol/aws_json_rpc.rs": 0,
+      "src/protocol/aws_rest_json_1.rs": 0,
+      "src/protocol/error.rs": 0,
+      "src/protocol/mod.rs": 0,
+      "src/serialize.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/deserialize.rs",
+      "src/escape.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      664,
+      664,
+      664
+    ],
+    "stable_edges": 664,
+    "union_edges": 664,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      627,
+      627,
+      627
+    ],
+    "stable_edges": 627,
+    "union_edges": 627,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

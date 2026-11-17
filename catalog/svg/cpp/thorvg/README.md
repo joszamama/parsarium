@@ -20,6 +20,11 @@
 
 ThorVG C binding and native C++ API are distinct ecosystem call paths over the same ThorVG SVG loader; they do not represent independent syntax engines.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/thorvg/README.md)
+
+```sh
+python3 parsarium.py build svg cpp thorvg
+python3 parsarium.py run svg cpp thorvg controls/svg/red-green.svg
+```

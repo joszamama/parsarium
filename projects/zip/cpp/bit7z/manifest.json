@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "zip",
+  "ecosystem": "cpp",
+  "package": "bit7z",
+  "release": "4.1.0",
+  "catalog_parser": "data/cpp/zip/parsers.json",
+  "source_lock": "data/cpp/zip/extra-source-lock.json",
+  "source_sha256": "82393783f81d5e4eef8d6657c9cf7fa8b66c3e0e7a58328a7c101eafbf84f308",
+  "underlying_package": "SevenZip",
+  "underlying_release": "26.04",
+  "underlying_source_url": "https://github.com/ip7z/7zip/archive/refs/tags/26.04.tar.gz",
+  "underlying_source_sha256": "48fdc6dfe879ee2db867bb07f19c4a9406bfea01d51f48785b6c7a137881e25c",
+  "build_dependencies": {
+    "CPM.cmake": {
+      "release": "0.42.3",
+      "source_url": "https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.42.3/CPM.cmake",
+      "source_sha256": "a609e875fd532b067174250f6abbc3dac22fe2d64869783fb1e80bda1625c844",
+      "role": "CMake script included unconditionally by bit7z's cmake/Dependencies.cmake; hash pinned by bit7z; no package is fetched through it"
+    }
+  },
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/zip/hello.zip",
+  "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
+  "expected_output": {
+    "entries": 1,
+    "name": "hello.txt",
+    "content": "parsarium\n"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "sanitizer_exception": "SevenZip performs unaligned integer loads on the valid ZIP control, so the fuzzer disables only UBSan's alignment check. The AFL++ overlay also disables UBSan's function-type check for AFL's compiler wrapper. bit7z and SevenZip both define COM GUID constants, so ASan's duplicate-global ODR check is disabled at load; ASan memory checks and other UBSan checks remain enabled.",
+  "coverage": "LLVM source coverage in the static bit7z 4.1.0 library reached through Bit7zLibrary(path), BitArchiveReader(Bit7zLibrary, local path, BitFormat::Zip), itemsCount, itemAt and extractTo(buffer, index) on a temporary copy of the input, and in the SevenZip 26.04 Format7zF 7z.so (ZIP handler, ZIP reader, Deflate decoder) that bit7z loads; both are built from the pinned sources in the image",
+  "parser_family": "SevenZip ZIP reader; bit7z is a distinct C++ wrapper API over the SevenZip 7z.so and is one parser family with SevenZip, not an independent ZIP decoder",
+  "coverage_subject_prefix": "/work/bit7z/",
+  "underlying_coverage_subject_prefix": "/work/sevenzip/",
+  "underlying_format_specific_coverage_file_suffix": "/CPP/7zip/Archive/Zip/ZipIn.cpp"
+}

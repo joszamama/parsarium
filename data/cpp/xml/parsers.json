@@ -1,0 +1,228 @@
+[
+  {
+    "name": "xerces-c",
+    "version": "3.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/apache/xerces-c/blob/v3.3.0/LICENSE",
+    "input_api": "xercesc::XercesDOMParser::parse(const InputSource&) with xercesc::MemBufInputSource(const XMLByte*, XMLSize_t, ...) and setDoNamespaces(true), validation off, external DTD loading off",
+    "documentation": "https://xerces.apache.org/xerces-c/apiDocs-3/classMemBufInputSource.html",
+    "documentation_parser": "https://xerces.apache.org/xerces-c/apiDocs-3/classXercesDOMParser.html",
+    "source": "https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.3.0.tar.gz",
+    "adapter": "projects/xml/cpp/xerces_c/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 with Namespaces, UTF-8 input from a memory buffer, non-validating, parsed into a DOM tree; attributes reported sorted per element because DOM NamedNodeMap order is unspecified",
+    "family": "Apache Xerces-C++ scanner (IGXMLScanner)",
+    "family_note": "Own scanner and reader stack in src/xercesc/internal (IGXMLScanner, ReaderMgr, XMLReader); no delegation to libxml2 or expat. Transcoding goes through GNU iconv for UTF-8 output only. Shares no code with the Go encoding/xml family.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 2676,
+      "dev_package_installs": {
+        "libxerces-c-dev": 2676
+      },
+      "popcon_source_inst": 47794,
+      "homebrew_install_on_request_365d": 1209,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/xerces_c"
+  },
+  {
+    "name": "pugixml",
+    "version": "1.16",
+    "license": "MIT",
+    "license_evidence": "https://github.com/zeux/pugixml/blob/v1.16/LICENSE.md",
+    "input_api": "pugi::xml_document::load_buffer(const void*, size_t, parse_default, encoding_utf8); pugixml does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes and rejects unbound prefixes and duplicate expanded attributes",
+    "documentation": "https://pugixml.org/docs/manual.html#loading.memory",
+    "documentation_parser": "https://pugixml.org/docs/manual.html#loading.options",
+    "source": "https://github.com/zeux/pugixml/releases/download/v1.16/pugixml-1.16.tar.gz",
+    "adapter": "projects/xml/cpp/pugixml/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 input from a memory buffer into pugixml's DOM (non-validating, DOCTYPE skipped, no DTD entity expansion); Namespaces in XML resolved by the adapter, not the library; attributes reported sorted per element to match the DOM adapters",
+    "family": "pugixml own recursive-descent parser (pugi::impl::xml_parser)",
+    "family_note": "Single translation unit src/pugixml.cpp with its own in-place parser; no delegation to Xerces-C++, libxml2 or expat. Distinct from the Apache Xerces-C++ scanner family of the first path. Namespace resolution is adapter code, not pugixml.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 1503,
+      "dev_package_installs": {
+        "libpugixml-dev": 1503
+      },
+      "popcon_source_inst": 25766,
+      "homebrew_install_on_request_365d": 1270,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/pugixml"
+  },
+  {
+    "name": "tinyxml2",
+    "version": "11.0.0",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/leethomason/tinyxml2/blob/11.0.0/LICENSE.txt",
+    "input_api": "tinyxml2::XMLDocument::Parse(const char* xml, size_t nBytes) over a local byte buffer; TinyXML2 does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes",
+    "documentation": "https://leethomason.github.io/tinyxml2/classtinyxml2_1_1_x_m_l_document.html",
+    "documentation_parser": "https://github.com/leethomason/tinyxml2/blob/11.0.0/tinyxml2.h",
+    "source": "https://github.com/leethomason/tinyxml2/tree/11.0.0",
+    "adapter": "projects/xml/cpp/tinyxml2/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 input through XMLDocument::Parse(const char*, size_t) into TinyXML2 DOM; Namespaces in XML resolved by adapter, not TinyXML2; attributes sorted per element to match control oracle",
+    "family": "TinyXML2 own in-memory XML parser",
+    "family_note": "tinyxml2.cpp supplies the parser and DOM with no Xerces, pugixml, libxml2 or expat dependency. TinyXML2 preserves qualified names; the adapter resolves namespace declarations and rejects unbound prefixes and duplicate expanded attributes. This is a distinct parser engine.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 487,
+      "dev_package_installs": {
+        "libtinyxml2-dev": 487
+      },
+      "popcon_source_inst": 13585,
+      "homebrew_install_on_request_365d": 1757,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/tinyxml2",
+    "not_verified": "Two valid namespace-aware controls are used; the alternate second control omits a processing instruction that TinyXML2 11.0.0 rejects. Processing instructions, DTD, XML 1.1, external entities, large inputs, and malformed input remain unverified."
+  },
+  {
+    "name": "libxml++",
+    "version": "5.6.1",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libxmlplusplus/libxmlplusplus/blob/5.6.1/COPYING",
+    "input_api": "xmlpp::DomParser::parse_memory_raw(const unsigned char*, size_type) on an in-memory local byte buffer; namespace-aware DOM via libxml2",
+    "documentation": "https://github.com/libxmlplusplus/libxmlplusplus/blob/5.6.1/libxml%2B%2B/parsers/domparser.h",
+    "documentation_parser": "https://libxmlplusplus.github.io/libxmlplusplus/reference/html/classxmlpp_1_1DomParser.html",
+    "source": "https://github.com/libxmlplusplus/libxmlplusplus/releases/download/5.6.1/libxml++-5.6.1.tar.xz",
+    "adapter": "projects/xml/cpp/libxmlpp/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 namespace-aware DOM from local byte buffer; non-validating, no DTD loading or entity substitution, network access disabled; attributes sorted per element",
+    "family": "libxml2 XML parser (shared underlying C parser)",
+    "family_note": "libxml++ is a C++ wrapper: DomParser::parse_memory_raw delegates to libxml2 xmlReadMemory and its native parser.c. This is a distinct API/package but not an independent parser engine; native libxml2 2.15.4 source is pinned and instrumented alongside libxml++ 5.6.1.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 275,
+      "dev_package_installs": {
+        "libxml++2.6-dev": 266,
+        "libxml++-5.0-dev": 7,
+        "libxml++-4.0-dev": 2
+      },
+      "abi_5_dev_package_installs": 7,
+      "popcon_source_inst": 79794,
+      "homebrew_install_on_request_365d": 461,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json",
+      "qualification": "275 is summed across three libxml++ ABI dev packages; the ABI-5 package matching the verified release family has 7 installations. Homebrew 461 refers to formula release 2.42.4, not 5.6.1."
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/libxmlpp",
+    "not_verified": "Two small valid namespace-aware UTF-8 controls do not establish complete XML 1.0, DTD/entity, other encoding or malformed-input behavior."
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "go",
+  "package": "github.com/clbanning/mxj",
+  "release": "v1.8.4",
+  "catalog_parser": "data/go/xml/parsers.json",
+  "source_lock": "projects/xml/go/github_com_clbanning_mxj/source-lock.json",
+  "source_sha256": "8947cf617bdd9efc62817c8ddb17bafe497f35abdf10a3c60f295e387f633f70",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "catalog/-c=urn:parsarium:catalog",
+      "catalog/-version=1",
+      "catalog/-xmlns=urn:parsarium:item",
+      "catalog/item[0]/-id=a1",
+      "catalog/item[0]/-lang=es",
+      "catalog/item[1]/-id=b2"
+    ],
+    "elements": [
+      "catalog",
+      "catalog/item[0]",
+      "catalog/item[1]",
+      "catalog/item[1]/name",
+      "catalog/item[1]/note"
+    ],
+    "empty_elements": [],
+    "lists": [
+      "catalog/item=2"
+    ],
+    "max_depth": 3,
+    "root": "catalog",
+    "text": [
+      "catalog/item[0]/#text=Café & té",
+      "catalog/item[1]/name=Zürich <HQ>",
+      "catalog/item[1]/note=x < y"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzXML",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzXML",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of mxj's XML-to-map conversion (NewMapXml, NewMapXmlReader, xmlToMapParser in xml.go), plus the encoding/xml Token tokenizer it calls, during valid-control replay",
+  "coverage_subject_prefix": "github.com/clbanning/mxj/",
+  "format_specific_coverage_file_suffix": "/xml.go",
+  "underlying_coverage_subject_prefix": "encoding/xml/"
+}

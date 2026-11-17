@@ -1,20 +1,28 @@
 {
   "ecosystem": "java",
   "format": "pdf",
-  "status": "verified_target_search_incomplete",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
-  "search_queries": ["pdf", "pdf parser", "pdf reader", "Java PDF", "pdfium"],
+  "search_queries": [
+    "pdf",
+    "pdf parser",
+    "pdf reader",
+    "Java PDF",
+    "pdfium"
+  ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 110,
   "unique_search_hits": 108,
   "unresolved_documentation_leads": 11,
-  "uncertainty": "Five bounded Maven Central queries saved 110 hits (108 unique): the broad pdf query returned its first 100 of 572, pdf parser returned four, and Java PDF returned six; pdf reader and pdfium timed out. The broad results contain many PDF generators, remote API clients, WebJars, non-Java artifacts, and ambiguous names. Targeted Maven release lookups, project documentation and the official PDF Clown SourceForge release yielded 20 distinct pinned package or distribution paths, each parsing the valid one-page PDF control through a local file, byte, or stream API. Nineteen Maven releases have deps.dev exact-version public direct-dependent counts; PDF Clown has no comparable Maven metric and remains unranked. Eleven plausible leads remain unresolved, including higher search hits and other PDF processing libraries. This is a verified 20-path collection, not proof of the exhaustive most-used top 20. Several paths share PDFBox, PDFium, ICEpdf, jPod, or Sun PDF Renderer ancestry; the single control verifies only page-count behavior. The locked FFM native runs require JDK 25 and macOS arm64. No Java SE 25 PDF parser API was documented; print DocFlavor and generic file I/O do not qualify.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/java/pdf/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/java/pdf/parsers.json",
   "third_party_control_results": "data/java/pdf/verification.json",
   "runtime_evidence": "data/java/pdf/standard.json",
   "registry_snapshot": "data/java/pdf/registry-snapshot.json",
-  "unresolved_leads": "data/java/pdf/leads.json"
+  "unresolved_leads": "data/java/pdf/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/java/pdf"
 }

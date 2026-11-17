@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T07:20:47.752945+00:00",
+  "project": "json/cpp/simdjson",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "2ea92429c80453ae72d82f20d621e737ebb9e5e486805f05f1c281a76ad9bb1a",
+  "overlay_receipt_sha256": "68c9eb15657f5d5c561c482c2430126f6fddf7701fbdbc751b3e74c3d2979c47",
+  "base_image_id": "sha256:ab3eb4d1c53d12810b1392fecef6d51e6b5a1a638389af79e428bf35e0c7b6ac",
+  "overlay_image_id": "sha256:c344756370b02537a4c43eee5ef0012d3407d3312be4d43ef888ced943e7f7d3",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 2,
+  "first_control": "controls/json/nested-object.json",
+  "first_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "second_control": "controls/json/nested-array.json",
+  "second_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "second_control_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "first_source_lines": 1371,
+  "second_source_lines": 1315,
+  "source_line_difference": 166,
+  "first_only_lines_by_file": {
+    "singleheader/simdjson.cpp": 73,
+    "singleheader/simdjson.h": 38
+  },
+  "second_only_lines_by_file": {
+    "singleheader/simdjson.cpp": 55
+  },
+  "first_afl_tuples": 1154,
+  "second_afl_tuples": 1060,
+  "afl_tuple_difference": 330,
+  "second_case_kind": "valid_control"
+}

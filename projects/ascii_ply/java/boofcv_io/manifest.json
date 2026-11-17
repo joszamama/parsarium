@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "boofcv-io",
+  "release": "1.6.0",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/java/boofcv_io/source-lock.json",
+  "source_sha256": "dcc4376ad41b0e8a44f9a9931ed30b87cbd193976f6536efd5df0d2d56159777",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/boofcv-io-1.6.0.jar:/work/lib/boofcv-types-1.6.0.jar:/work/lib/boofcv-geo-1.6.0.jar:/work/lib/georegression-0.30.2.jar:/work/lib/ddogleg-1.0.0.jar:/work/lib/ejml-core-0.46.1.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo coverage of BoofCV PlyReader during valid ASCII PLY replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/PlyCodec.java"
+}

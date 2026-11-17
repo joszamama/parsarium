@@ -1,0 +1,613 @@
+[
+  {
+    "name": "pydantic",
+    "version": "2.14.3",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pydantic/2.14.3/json",
+    "input_api": "TypeAdapter[Any].validate_json(local UTF-8 bytes)",
+    "documentation": "https://docs.pydantic.dev/latest/api/type_adapter/#pydantic.type_adapter.TypeAdapter.validate_json",
+    "source": "https://files.pythonhosted.org/packages/b4/fc/1203d011145c98ddce3cd2f505bb54375ef8d43223053df6bfcf3c746f46/pydantic-2.14.3.tar.gz",
+    "source_sha256": "1054f237f4d4733e5a30e1e2333bd33a2004ab9ab1510bd053a9a31bb48e232d",
+    "underlying_source": "https://files.pythonhosted.org/packages/9c/0f/34f9ce4ba701dd0b815033ef94d99b56f66200e578ee6052aa3ac26f064e/pydantic_core-2.50.4.tar.gz",
+    "underlying_source_sha256": "aead3b74b68396bf0feab5d57e050b730ded7df55853c1e048a87e00aaf033c6",
+    "scope": "JSON structure and values from local UTF-8 bytes; valid nested object and nested array controls",
+    "family": "pydantic-core 2.50.4 / Jiter 0.18.0 Rust parser",
+    "family_note": "Pydantic TypeAdapter[Any].validate_json invokes pydantic-core SchemaValidator.validate_json. Pinned pydantic-core src/validators/mod.rs calls jiter::JsonValue::parse_with_config. The native extension is source-built with Rust LLVM coverage; Jiter parse.rs source regions, rather than Python wrapper lines, are required. Shares the Jiter parser family with the separately verified standalone jiter package path.",
+    "control": "controls/json/structure.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 1139429690,
+      "source": "https://pypistats.org/api/packages/pydantic/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package-level downloads include non-JSON usage and transitive installs."
+    },
+    "project": "projects/json/python/pydantic"
+  },
+  {
+    "name": "jiter",
+    "version": "0.19.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/jiter/0.19.0/json",
+    "input_api": "jiter.from_json(local JSON bytes) with documented defaults (cache_mode='all', partial_mode=False, allow_inf_nan=True, float_mode='float')",
+    "documentation": "https://github.com/pydantic/jiter/blob/v0.19.0/crates/jiter-python/README.md",
+    "source": "https://files.pythonhosted.org/packages/67/de/8dfd06a2153d8ab6a83a8ca8f8ae3ff860ce2fe324ee6a5d05294b621c2a/jiter-0.19.0.tar.gz",
+    "source_sha256": "ba3064f8be276d7cfb83c2fb85c858be533da2c2f80f9b048c3781b45a57a195",
+    "wheel_sha256": "da606acf39d7d2f2a56bfbb48a0b36f25da1d22d801cd0c9aecfce2f791e3239",
+    "dependencies": [],
+    "scope": "JSON structure and values from local bytes; valid nested-object and nested-array controls, each equal to a hand-written tree summary and an exact type-tagged CPython json oracle tree",
+    "family": "Jiter 0.19.0 Rust parser (PythonParser over jiter::parse::Parser) / lexical-parse-float 1.0.6",
+    "family_note": "jiter.from_json is the standalone PyO3 module in crates/jiter-python; it calls PythonParse::python_parse in the Jiter crate's python.rs, which drives parse.rs, string_decoder.rs and number_decoder.rs and builds Python objects directly (value.rs JsonValue is not used). Floats go through lexical-parse-float. Same Jiter parser family as the selected pydantic path (pydantic-core 2.50.4 embeds Jiter 0.18.0 and parses through JsonValue), so this is not an independent parser family and its downloads are not added to Pydantic's. crates/jiter/src is byte-identical to the crates.io jiter 0.19.0 crate used by the Rust JSON cell's jiter path. The package README recommends using jiter directly only when not using pydantic.",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned source: duplicate object keys are inserted with PyDict_SetItem, so the last value wins unless catch_duplicate_keys=True; with the num-bigint feature, integers beyond i64 become arbitrary-precision Python ints; allow_inf_nan defaults to True, so the non-RFC NaN, Infinity and -Infinity tokens are accepted; nesting is limited to 200 levels (DEFAULT_RECURSION_LIMIT). The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (-0.25e1 and 2.5e-1) and small integers.",
+    "control": "controls/json/nested-object.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "root_length": 7,
+      "top_level_keys": [
+        "name",
+        "version",
+        "ratio",
+        "enabled",
+        "missing",
+        "tags",
+        "nested"
+      ],
+      "kind_counts": {
+        "object": 5,
+        "array": 3,
+        "string": 5,
+        "int": 4,
+        "float": 1,
+        "bool": 2,
+        "null": 1
+      },
+      "object_members": 15,
+      "max_container_depth": 4,
+      "scalar_leaves": [
+        [
+          "/name",
+          "string",
+          "parsarium"
+        ],
+        [
+          "/version",
+          "int",
+          1
+        ],
+        [
+          "/ratio",
+          "float",
+          "-2.5"
+        ],
+        [
+          "/enabled",
+          "bool",
+          true
+        ],
+        [
+          "/missing",
+          "null",
+          null
+        ],
+        [
+          "/tags/0",
+          "string",
+          "json"
+        ],
+        [
+          "/tags/1",
+          "string",
+          "go"
+        ],
+        [
+          "/tags/2",
+          "string",
+          "rfc8259"
+        ],
+        [
+          "/nested/level",
+          "int",
+          2
+        ],
+        [
+          "/nested/items/0/id",
+          "int",
+          1
+        ],
+        [
+          "/nested/items/0/ok",
+          "bool",
+          false
+        ],
+        [
+          "/nested/items/1/id",
+          "int",
+          2
+        ],
+        [
+          "/nested/items/1/text",
+          "string",
+          "café \"quoted\""
+        ]
+      ],
+      "empty_containers": [
+        [
+          "/nested/empty",
+          "object"
+        ],
+        [
+          "/nested/list",
+          "array"
+        ]
+      ]
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "root_length": 5,
+      "kind_counts": {
+        "object": 2,
+        "array": 4,
+        "string": 2,
+        "int": 1,
+        "float": 1,
+        "bool": 2,
+        "null": 1
+      },
+      "object_members": 3,
+      "max_container_depth": 3,
+      "scalar_leaves": [
+        [
+          "/0",
+          "int",
+          1
+        ],
+        [
+          "/1",
+          "float",
+          "0.25"
+        ],
+        [
+          "/2",
+          "string",
+          "two"
+        ],
+        [
+          "/3/0",
+          "bool",
+          true
+        ],
+        [
+          "/3/1",
+          "null",
+          null
+        ],
+        [
+          "/3/2/0",
+          "bool",
+          false
+        ],
+        [
+          "/4/n/deep",
+          "string",
+          "A"
+        ]
+      ],
+      "empty_containers": [
+        [
+          "/4/k",
+          "array"
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 421162504,
+      "source": "https://pypistats.org/api/packages/jiter/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include transitive installs (for example SDKs that depend on jiter for partial JSON parsing); they do not measure JSON parsing directly and are not combined with Pydantic's count."
+    },
+    "project": "projects/json/python/jiter"
+  },
+  {
+    "name": "orjson",
+    "version": "3.13.0",
+    "license": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+    "license_evidence": "https://pypi.org/pypi/orjson/3.13.0/json",
+    "input_api": "orjson.loads(local UTF-8 bytes)",
+    "documentation": "https://github.com/ijl/orjson/blob/3.13.0/README.md#deserialize",
+    "source": "https://files.pythonhosted.org/packages/f2/72/380b97dc45bd162d23afe5194721ef678d9eac7cfaa549fe2873f7f0a518/orjson-3.13.0.tar.gz",
+    "source_sha256": "d1de5eb04485110c5da4c657e49168995d55e076b1ce60f1a042e254f4186c4f",
+    "scope": "JSON structure and values from local UTF-8 bytes; valid nested object and nested array controls",
+    "family": "orjson Rust deserializer backed by vendored yyjson 0.12.0 C parser",
+    "family_note": "The pinned source compiles include/yyjson/yyjson.c and Rust src/deserialize. This pilot reports LLVM source regions from orjson Rust JSON deserializer; yyjson C syntax-parser source lines are not included in those coverage counts. Standalone yyjson C is a shared underlying parser family.",
+    "control": "controls/json/structure.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 218014317,
+      "source": "https://pypistats.org/api/packages/orjson/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package downloads include encoding use and transitive installs; they do not measure JSON parsing directly."
+    },
+    "project": "projects/json/python/orjson"
+  },
+  {
+    "name": "simplejson",
+    "version": "4.3.0",
+    "license": "MIT OR AFL-2.1",
+    "license_evidence": "https://pypi.org/pypi/simplejson/4.3.0/json",
+    "input_api": "simplejson.load(BytesIO(local UTF-8 JSON bytes), allow_nan=False)",
+    "documentation": "https://simplejson.readthedocs.io/en/latest/",
+    "scope": "object and array structure, numbers, booleans, null, and escaped strings",
+    "family": "simplejson pure-Python JSON decoder",
+    "control": "controls/json/structure.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 49365386,
+      "source": "https://pypistats.org/api/packages/simplejson/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include encoding use and transitive installs; they do not measure JSON parsing directly."
+    }
+  },
+  {
+    "name": "ijson",
+    "version": "3.6.0",
+    "license": "BSD-3-Clause AND ISC",
+    "license_evidence": "https://pypi.org/pypi/ijson/3.6.0/json",
+    "input_api": "ijson.items(BytesIO(local JSON bytes), '') on the default yajl2_c backend",
+    "documentation": "https://github.com/ICRAR/ijson/blob/v3.6.0/README.rst",
+    "source": "https://files.pythonhosted.org/packages/75/61/4066af787ed25bfca02c3edd2d7fd489b1b5ca27b54b400b187e5f2865e7/ijson-3.6.0.tar.gz",
+    "source_sha256": "ec8f9265524e724905ecf00bdd061c374baaa8d5045ef50425695fb06efb45f5",
+    "wheel_sha256": "a50ba1d5f8af50854243cbf523eff22a26f45f2b51a6c85177bbff48c99dfa2e",
+    "dependencies": [],
+    "underlying_source": "https://codeload.github.com/rtobar/yajl/tar.gz/dd88e2ea2fc3f045722f6fee362af2643b5394f5",
+    "underlying_source_sha256": "071d41d073c1485a37e90e41aa8917e541861b9243911d4d8ac68394ee938f07",
+    "scope": "JSON structure and values from a local binary stream; valid nested object and nested array controls",
+    "family": "ijson yajl2_c C extension / yajl 2.1.1 (rtobar fork) C parser",
+    "family_note": "ijson selects yajl2_c by default when its _yajl2 extension imports; the harness fails unless ijson.backend_name is yajl2_c. That extension drives yajl's lexer and parser and builds Python values in C. The build embeds the yajl fork commit pinned as ijson's v3.6.0 submodule, using ijson's IJSON_EMBED_YAJL path; official Linux wheels link the same commit as a bundled shared libyajl. Independent of the Jiter, simplejson and CPython json families in this cell. ijson's pure-Python, yajl (ctypes), yajl2 (ctypes) and yajl2_cffi backends are not tested.",
+    "control": "controls/json/structure.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "item_count": 5,
+      "nested_arrays": 1,
+      "nested_objects": 1
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 46615664,
+      "source": "https://pypistats.org/api/packages/ijson/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package-level downloads include transitive installs and every ijson backend; they do not count yajl2_c use or JSON parsing specifically."
+    },
+    "project": "projects/json/python/ijson"
+  },
+  {
+    "name": "msgspec",
+    "version": "0.22.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/msgspec/0.22.0/json",
+    "license_note": "PyPI License-Expression and sdist LICENSE are BSD-3-Clause; src/msgspec/atof.h keeps the Apache-2.0 notice of the Wuffs code its float parser is based on.",
+    "input_api": "msgspec.json.decode(local JSON bytes) with the default type=Any",
+    "documentation": "https://msgspec.dev/api.html#msgspec.json.decode",
+    "source": "https://files.pythonhosted.org/packages/d0/e6/6dcf9306ff3c5e486578f3bf29ed11dfbdbbc2a8bf0caf7e07d392887fda/msgspec-0.22.0.tar.gz",
+    "source_sha256": "0a13624a4969159fe35d8c2a3d377b2b61bbd8585e327440d5e52725affcce38",
+    "wheel_sha256": "b962000e11dd34fb210a5a2c57a8a62b2d92b381c8cb3b05c075a83e38f8d645",
+    "dependencies": [],
+    "scope": "Untyped JSON structure and values from local bytes; valid nested object and nested array controls, each compared with a hand-written type-tagged tree",
+    "family": "msgspec hand-written C JSON decoder (src/msgspec/_core.c)",
+    "family_note": "msgspec.json.decode is msgspec._core.json_decode, a hand-written recursive-descent JSON decoder in the single _core.c extension; numbers go through _core.c's own number parser and atof.h (Eisel-Lemire after Wuffs). It does not embed yajl, yyjson, Jiter or CPython's json scanner, so it is independent of the other families in this cell. Only the untyped (type=Any) path is tested; typed decoding into Structs, dataclasses or other annotations and msgspec.json.Decoder are not.",
+    "control": "controls/json/nested-object.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "value": [
+        "object",
+        [
+          [
+            "name",
+            [
+              "string",
+              "parsarium"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              1
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "-2.5"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "array",
+              [
+                [
+                  "string",
+                  "json"
+                ],
+                [
+                  "string",
+                  "go"
+                ],
+                [
+                  "string",
+                  "rfc8259"
+                ]
+              ]
+            ]
+          ],
+          [
+            "nested",
+            [
+              "object",
+              [
+                [
+                  "level",
+                  [
+                    "int",
+                    2
+                  ]
+                ],
+                [
+                  "items",
+                  [
+                    "array",
+                    [
+                      [
+                        "object",
+                        [
+                          [
+                            "id",
+                            [
+                              "int",
+                              1
+                            ]
+                          ],
+                          [
+                            "ok",
+                            [
+                              "bool",
+                              false
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        "object",
+                        [
+                          [
+                            "id",
+                            [
+                              "int",
+                              2
+                            ]
+                          ],
+                          [
+                            "text",
+                            [
+                              "string",
+                              "café \"quoted\""
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "empty",
+                  [
+                    "object",
+                    []
+                  ]
+                ],
+                [
+                  "list",
+                  [
+                    "array",
+                    []
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_expected_output": {
+      "value": [
+        "array",
+        [
+          [
+            "int",
+            1
+          ],
+          [
+            "float",
+            "0.25"
+          ],
+          [
+            "string",
+            "two"
+          ],
+          [
+            "array",
+            [
+              [
+                "bool",
+                true
+              ],
+              [
+                "null"
+              ],
+              [
+                "array",
+                [
+                  [
+                    "bool",
+                    false
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "object",
+            [
+              [
+                "k",
+                [
+                  "array",
+                  []
+                ]
+              ],
+              [
+                "n",
+                [
+                  "object",
+                  [
+                    [
+                      "deep",
+                      [
+                        "string",
+                        "A"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 39138375,
+      "source": "https://pypistats.org/api/packages/msgspec/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package-level downloads include transitive installs and MessagePack, YAML, TOML and validation uses; they do not count JSON parsing specifically."
+    },
+    "project": "projects/json/python/msgspec"
+  },
+  {
+    "name": "ujson",
+    "version": "6.1.0",
+    "license": "BSD-3-Clause AND TCL",
+    "license_evidence": "https://pypi.org/pypi/ujson/6.1.0/json",
+    "input_api": "ujson.loads(local JSON bytes); ujson.loads(decoded str) gives the same exact tree on both controls",
+    "documentation": "https://github.com/ultrajson/ultrajson/blob/6.1.0/README.md#usage",
+    "source": "https://files.pythonhosted.org/packages/e0/60/ad782f70ce03d12ec23288292a17549ca537f9d188227340ac0d082421b3/ujson-6.1.0.tar.gz",
+    "source_sha256": "aef7ea4cd9e2e9f8a35c4538a9780d58c80d76c5da66a8dad269b4cc6d930c29",
+    "wheel_sha256": "716d2c908d2f7084462d259e93bf173a87ca624bb918474b8372d67185387fd6",
+    "dependencies": [],
+    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree",
+    "family": "UltraJSON C decoder (ujson decode.c) / vendored double-conversion 3.2.0 C++ string-to-double",
+    "family_note": "ujson.loads runs ujson's own recursive-descent C decoder in decode.c, which builds Python objects directly; numbers with a fraction or exponent go through dconv_wrapper.cc to the vendored Google double-conversion 3.2.0 StringToDoubleConverter. Independent of the CPython json (_json scanner), simplejson, Jiter, orjson/yyjson and yajl families in this cell, and of V8 and Rust JSON parsers elsewhere. Other packages that vendor an UltraJSON-derived decoder (for example pandas.io.json) are separate builds and are not covered by this path.",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned decode.c source: duplicate object keys are inserted with PyDict_SetItem, so the last value wins; integers without fraction/exponent use a uint64 fast path and fall back to PyLong_FromString on overflow (arbitrary precision); fraction/exponent numbers become binary64 floats through double-conversion; decode_numeric also accepts the non-RFC tokens NaN, Infinity and -Infinity. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (1.25 and 2.5e-1) and small integers.",
+    "control": "controls/json/structure.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "item_count": 5,
+      "nested_arrays": 1,
+      "nested_objects": 1
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 29543889,
+      "source": "https://pypistats.org/api/packages/ujson/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include encoder-only use and transitive installs; they do not measure JSON parsing directly."
+    },
+    "project": "projects/json/python/ujson"
+  }
+]

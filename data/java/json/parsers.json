@@ -1,0 +1,594 @@
+[
+  {
+    "name": "jackson-databind",
+    "group": "com.fasterxml.jackson.core",
+    "artifact": "jackson-databind",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "ObjectMapper(JsonFactory with CANONICALIZE_FIELD_NAMES disabled).readValue(File, Object.class)",
+    "documentation": "https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.23.0/com/fasterxml/jackson/databind/ObjectMapper.html",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.23.0/jackson-databind-2.23.0-sources.jar",
+    "scope": "RFC 8259 JSON text mapped to untyped Map/List/String/Number/Boolean/null",
+    "family": "Jackson (jackson-core streaming parser + databind untyped mapping)",
+    "family_note": "ObjectMapper drives the jackson-core JsonParser and maps tokens through UntypedObjectDeserializer. The separately selected jackson-core path exposes that same tokenizer directly; the two selected API paths are one parser family, not independent engines.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/jackson_databind",
+    "configuration_note": "The adapter disables JsonFactory.Feature.CANONICALIZE_FIELD_NAMES (documented, default on). With it on, jackson-core's ByteQuadsCanonicalizer seeds its field-name hash from System.currentTimeMillis(), and repeated runs on the same control covered different ByteQuadsCanonicalizer lines. With it off, repeated control coverage is identical. The rest of the parse path is the default ObjectMapper configuration.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 162890,
+      "max_release": "2.18.2",
+      "max_release_direct_dependent_count": 4098,
+      "default_release_direct_dependent_count": 367,
+      "releases": 239,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.core%3Ajackson-databind",
+      "captured_at_utc": "2026-11-17T03:27:28.596128+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "jackson-core",
+    "group": "com.fasterxml.jackson.core",
+    "artifact": "jackson-core",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "JsonFactory.createParser(InputStream) over Files.newInputStream(Path), then JsonParser.nextToken()/getText()/getDoubleValue()",
+    "documentation": "https://javadoc.io/static/com.fasterxml.jackson.core/jackson-core/2.23.0/com/fasterxml/jackson/core/JsonFactory.html",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.23.0/jackson-core-2.23.0-sources.jar",
+    "scope": "RFC 8259 JSON text tokenized directly from local stream; adapter consumes all tokens and summarizes structure",
+    "family": "Jackson (jackson-core streaming parser)",
+    "family_note": "The same jackson-core tokenizer is driven by selected jackson-databind. This is a distinct package/API path, not an independent parser engine.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/jackson_core",
+    "configuration_note": "CANONICALIZE_FIELD_NAMES is disabled to avoid wall-clock-seeded ByteQuadsCanonicalizer coverage variance; the direct JsonParser token stream otherwise uses default factory behavior. Adapter requires one complete root and consumes the token stream.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 80053,
+      "max_release": "2.18.2",
+      "max_release_direct_dependent_count": 1934,
+      "default_release_direct_dependent_count": 178,
+      "releases": 198,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.core%3Ajackson-core",
+      "captured_at_utc": "2026-11-17T03:27:29.982688+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "gson",
+    "group": "com.google.code.gson",
+    "artifact": "gson",
+    "version": "2.15.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "new Gson().fromJson(Reader, Object.class) over InputStreamReader(FileInputStream, UTF_8)",
+    "documentation": "https://javadoc.io/doc/com.google.code.gson/gson/2.15.0/com.google.gson/com/google/gson/Gson.html",
+    "source": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.15.0/gson-2.15.0-sources.jar",
+    "scope": "RFC 8259 JSON text mapped to untyped LinkedTreeMap/ArrayList/String/Double/Boolean/null",
+    "family": "Gson (com.google.gson.stream.JsonReader + ObjectTypeAdapter untyped mapping)",
+    "family_note": "Gson tokenizes with its own com.google.gson.stream.JsonReader and maps tokens through ObjectTypeAdapter. It shares no code with jackson-core or jackson-databind, so it is a parser family independent of the selected Jackson path.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/gson",
+    "configuration_note": "Default Gson instance (Strictness.LEGACY_STRICT, ToNumberPolicy.DOUBLE for Object targets). fromJson(Reader, ...) also checks that the document is fully consumed.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 33240,
+      "max_release": "2.10.1",
+      "max_release_direct_dependent_count": 3828,
+      "default_release_direct_dependent_count": 343,
+      "releases": 45,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.google.code.gson%3Agson",
+      "captured_at_utc": "2026-11-17T03:27:30.412679+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "fastjson",
+    "group": "com.alibaba",
+    "artifact": "fastjson",
+    "version": "1.2.83",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "JSON.parse(Files.readAllBytes(local Path))",
+    "documentation": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
+    "scope": "Valid nested RFC 8259 JSON object/array documents from local UTF-8 bytes, parsed to JSONObject/JSONArray/String/Number/Boolean/null",
+    "family": "fastjson 1.x DefaultJSONParser and JSONLexer",
+    "family_note": "Pinned 1.2.83 has its own parser and lexer. The same Maven coordinate at 2.x is a compatibility facade over the separately selected fastjson2 engine; the primary adoption metric spans both engine generations.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/fastjson1",
+    "configuration_note": "JSON.parse(byte[]) uses default parser features including AutoCloseSource; DefaultJSONParser.close checks EOF after root.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 10021,
+      "max_release": "1.2.83",
+      "max_release_direct_dependent_count": 1494,
+      "default_release_direct_dependent_count": 48,
+      "releases": 359,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.alibaba%3Afastjson",
+      "captured_at_utc": "2026-11-17T03:27:34.457858+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json",
+      "caveat": "Coordinate total includes fastjson 2.x facade releases; not 1.x-only or JSON-specific usage."
+    }
+  },
+  {
+    "name": "json",
+    "group": "org.json",
+    "artifact": "json",
+    "version": "20260814",
+    "license": "Public Domain",
+    "license_evidence": "Pinned Maven release POM declares Public Domain; upstream release history records switch in 20220924, prior to this release. POM SHA256 in source-lock.json.",
+    "input_api": "new JSONTokener(InputStreamReader(FileInputStream, UTF_8), new JSONParserConfiguration().withStrictMode()).nextValue(); nextClean() checks end of local document",
+    "documentation": "https://repo.maven.apache.org/maven2/org/json/json/20260814/json-20260814-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/json/json/20260814/json-20260814-sources.jar",
+    "scope": "Valid RFC 8259 nested object/array controls parsed from local UTF-8 Reader into JSONObject/JSONArray; adapter converts to untyped Map/List and checks one complete root",
+    "family": "org.json JSONTokener with JSONObject/JSONArray builders",
+    "family_note": "The source jar implements its own JSONTokener and JSONObject/JSONArray parsers. No Jackson, Gson, or fastjson2 parser dependency appears in the pinned release POM.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/orgjson",
+    "configuration_note": "Uses the documented JSONParserConfiguration.withStrictMode() to require JSON quoting rules on this path; the adapter additionally checks nextClean()==0 after one root.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 6923,
+      "max_release": "20231013",
+      "max_release_direct_dependent_count": 564,
+      "default_release_direct_dependent_count": 176,
+      "releases": 34,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.json%3Ajson",
+      "captured_at_utc": "2026-11-17T03:27:30.809512+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "fastjson2",
+    "group": "com.alibaba.fastjson2",
+    "artifact": "fastjson2",
+    "version": "2.0.66",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; POM SHA256 in source-lock.json",
+    "input_api": "com.alibaba.fastjson2.JSON.parse(Files.readAllBytes(local Path))",
+    "documentation": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/2.0.66/fastjson2-2.0.66-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/2.0.66/fastjson2-2.0.66-sources.jar",
+    "scope": "RFC 8259 JSON text parsed from local UTF-8 bytes into JSONObject/JSONArray/String/Number/Boolean/null with full-document check",
+    "family": "fastjson2 (JSONReaderUTF8 parser plus object mapping)",
+    "family_note": "fastjson2 has its own JSONReaderUTF8 and object reader. The separate com.alibaba:fastjson 2.x coordinate is a compatibility facade over this fastjson2 engine and is not an independent parser family; the 1.x line had a different engine. The pinned fastjson2 POM lists com.alibaba:fastjson only in test scope.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/fastjson2",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 2973,
+      "max_release": "2.0.60",
+      "max_release_direct_dependent_count": 180,
+      "default_release_direct_dependent_count": 2,
+      "releases": 160,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.alibaba.fastjson2%3Afastjson2",
+      "captured_at_utc": "2026-11-17T03:27:32.067833+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    },
+    "metric_note": "The snapshot default version is an Android 8 variant; the ordinary 2.0.66 release is pinned for this Java SE harness."
+  },
+  {
+    "name": "json-simple",
+    "group": "com.googlecode.json-simple",
+    "artifact": "json-simple",
+    "version": "1.1.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; POM SHA256 in source-lock.json",
+    "input_api": "new org.json.simple.parser.JSONParser().parse(InputStreamReader(FileInputStream, UTF_8))",
+    "documentation": "https://javadoc.io/static/com.googlecode.json-simple/json-simple/1.1.1/org/json/simple/parser/JSONParser.html",
+    "source": "https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1-sources.jar",
+    "scope": "Valid nested JSON object/array documents from local UTF-8 Reader, mapped to JSONObject/JSONArray/String/Number/Boolean/null; parser consumes EOF after one root",
+    "family": "json-simple JSONParser with generated JFlex Yylex lexer",
+    "family_note": "The pinned jar contains its own JSONParser and generated Yylex lexer; no selected Jackson, Gson, org.json, fastjson2, or json-smart engine underlies this path. JUnit is a POM dependency but is not used by the local Reader parser in the verified container.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/json_simple",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 1557,
+      "max_release": "1.1.1",
+      "max_release_direct_dependent_count": 1163,
+      "default_release_direct_dependent_count": 1163,
+      "releases": 2,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.googlecode.json-simple%3Ajson-simple",
+      "captured_at_utc": "2026-11-17T03:27:35.796465+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    },
+    "metric_note": "This 2012 release is the current/default release; its default-release direct-dependent count is not directly comparable with newer packages default-release counts, so the common summed metric is used."
+  },
+  {
+    "name": "json-smart",
+    "group": "net.minidev",
+    "artifact": "json-smart",
+    "version": "2.6.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; POM SHA256 in source-lock.json",
+    "input_api": "new net.minidev.json.parser.JSONParser(JSONParser.MODE_RFC4627).parse(Files.readAllBytes(local Path))",
+    "documentation": "https://repo.maven.apache.org/maven2/net/minidev/json-smart/2.6.1/json-smart-2.6.1-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/net/minidev/json-smart/2.6.1/json-smart-2.6.1-sources.jar",
+    "scope": "Valid nested RFC 4627 JSON object/array documents from local UTF-8 bytes, mapped to Map/List/String/Number/Boolean/null",
+    "family": "json-smart own JSONParser byte/stream parser",
+    "family_note": "net.minidev.json.parser contains the tokenizer and object/array parse logic. accessors-smart and ASM are runtime dependencies but not JSON tokenizers. This parser family is independent of Jackson, Gson, and fastjson2.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/json_smart",
+    "configuration_note": "Uses documented MODE_RFC4627, which accepts top-level object/array JSON and trailing whitespace. Both controls are in that scope.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 1542,
+      "max_release": "2.3",
+      "max_release_direct_dependent_count": 220,
+      "default_release_direct_dependent_count": 12,
+      "releases": 36,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.minidev%3Ajson-smart",
+      "captured_at_utc": "2026-11-17T03:27:34.854916+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "moshi",
+    "group": "com.squareup.moshi",
+    "artifact": "moshi",
+    "version": "1.15.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "JsonReader.of(Okio.buffer(Okio.source(local File))).readJsonValue(); peek() verifies END_DOCUMENT",
+    "documentation": "https://repo.maven.apache.org/maven2/com/squareup/moshi/moshi/1.15.2/moshi-1.15.2-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/squareup/moshi/moshi/1.15.2/moshi-1.15.2-sources.jar",
+    "scope": "Valid nested RFC 8259 JSON object/array documents from a local Okio BufferedSource, parsed to Map/List/String/Number/Boolean/null",
+    "family": "Moshi JsonReader/JsonUtf8Reader own tokenizer; Okio I/O dependency",
+    "family_note": "Moshi JsonReader and JsonUtf8Reader implement JSON tokenization; Okio provides the BufferedSource and local file source, not a JSON parser. Kotlin runtime jars support the Java release. This family is independent of Jackson, Gson, org.json, and fastjson2.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/moshi",
+    "configuration_note": "Default JsonReader mode (lenient false); adapter requires END_DOCUMENT after readJsonValue().",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 1097,
+      "max_release": "1.15.2",
+      "max_release_direct_dependent_count": 166,
+      "default_release_direct_dependent_count": 166,
+      "releases": 24,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.squareup.moshi%3Amoshi",
+      "captured_at_utc": "2026-11-17T03:27:35.612237+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "parsson",
+    "group": "org.eclipse.parsson",
+    "artifact": "parsson",
+    "version": "1.1.9",
+    "license": "EPL-2.0",
+    "license_evidence": "Parent Maven POM license and release JAR META-INF/LICENSE.md; source headers also offer GPL-2.0 with Classpath Exception",
+    "input_api": "new JsonProviderImpl().createParser(Files.newInputStream(local Path)); next(), getValue(), hasNext() to EOF",
+    "documentation": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/parsson/1.1.9/parsson-1.1.9-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/parsson/1.1.9/parsson-1.1.9-sources.jar",
+    "scope": "Valid nested JSON object/array documents from local InputStream through JSON-P JsonParser into JsonValue",
+    "family": "Eclipse Parsson JsonParserImpl / JsonTokenizer",
+    "family_note": "Parsson implements JSON-P parsing itself. jakarta.json-api supplies interfaces and value types, not another parsing engine. No selected Java JSON package supplies its tokenizer.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/parsson",
+    "configuration_note": "Direct provider createParser(InputStream); adapter calls hasNext after getValue so source checks EOF.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 495,
+      "max_release": "1.1.7",
+      "max_release_direct_dependent_count": 122,
+      "default_release_direct_dependent_count": 71,
+      "releases": 16,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.eclipse.parsson%3Aparsson",
+      "captured_at_utc": "2026-11-17T03:27:35.120895+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json",
+      "caveat": "Package adoption includes JSON-P API use through Parsson, not necessarily direct JsonProviderImpl use."
+    }
+  }
+]

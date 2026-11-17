@@ -1,0 +1,459 @@
+{
+  "platform": "linux/arm64 Docker",
+  "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
+  "controls": {
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
+  "third_party": [
+    {
+      "package": "jackson-databind",
+      "group": "com.fasterxml.jackson.core",
+      "version": "2.23.0",
+      "scope": "RFC 8259 JSON text mapped to untyped Map/List/String/Number/Boolean/null",
+      "command": "python3 scripts/run_project.py json java jackson_databind",
+      "receipt": "projects/json/java/jackson_databind/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null,
+      "verified_at_utc": "2026-11-17T03:28:28.849918+00:00"
+    },
+    {
+      "package": "jackson-core",
+      "group": "com.fasterxml.jackson.core",
+      "version": "2.23.0",
+      "scope": "RFC 8259 JSON text tokenized directly from local stream; adapter consumes all tokens and summarizes structure",
+      "command": "python3 scripts/run_project.py json java jackson_core",
+      "receipt": "projects/json/java/jackson_core/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null,
+      "verified_at_utc": "2026-11-17T07:17:20.257010+00:00"
+    },
+    {
+      "package": "gson",
+      "group": "com.google.code.gson",
+      "version": "2.15.0",
+      "scope": "RFC 8259 JSON text mapped to untyped LinkedTreeMap/ArrayList/String/Double/Boolean/null",
+      "command": "python3 scripts/run_project.py json java gson",
+      "receipt": "projects/json/java/gson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null,
+      "verified_at_utc": "2026-11-17T03:51:55.624314+00:00"
+    },
+    {
+      "package": "json",
+      "group": "org.json",
+      "version": "20260814",
+      "scope": "Valid RFC 8259 nested object/array controls parsed from local UTF-8 Reader into JSONObject/JSONArray; adapter converts to untyped Map/List and checks one complete root",
+      "command": "python3 scripts/run_project.py json java orgjson",
+      "receipt": "projects/json/java/orgjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 252,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T07:40:22.022560+00:00",
+      "error": null
+    },
+    {
+      "package": "fastjson2",
+      "group": "com.alibaba.fastjson2",
+      "version": "2.0.66",
+      "scope": "RFC 8259 JSON text parsed from local UTF-8 bytes into JSONObject/JSONArray/String/Number/Boolean/null with full-document check",
+      "command": "python3 scripts/run_project.py json java fastjson2",
+      "receipt": "projects/json/java/fastjson2/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 560,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T07:32:30.775762+00:00",
+      "error": null
+    },
+    {
+      "package": "json-smart",
+      "group": "net.minidev",
+      "version": "2.6.1",
+      "scope": "Valid nested RFC 4627 JSON object/array documents from local UTF-8 bytes, mapped to Map/List/String/Number/Boolean/null",
+      "command": "python3 scripts/run_project.py json java json_smart",
+      "receipt": "projects/json/java/json_smart/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 261,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T07:47:24.247481+00:00",
+      "error": null
+    },
+    {
+      "package": "moshi",
+      "group": "com.squareup.moshi",
+      "version": "1.15.2",
+      "scope": "Valid nested RFC 8259 JSON object/array documents from a local Okio BufferedSource, parsed to Map/List/String/Number/Boolean/null",
+      "command": "python3 scripts/run_project.py json java moshi",
+      "receipt": "projects/json/java/moshi/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 2,
+      "parser_source_lines_covered": 306,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T08:22:01.441331+00:00",
+      "error": null
+    },
+    {
+      "package": "json-simple",
+      "group": "com.googlecode.json-simple",
+      "version": "1.1.1",
+      "scope": "Valid nested JSON object/array documents from local UTF-8 Reader, mapped to JSONObject/JSONArray/String/Number/Boolean/null; parser consumes EOF after one root",
+      "command": "python3 scripts/run_project.py json java json_simple",
+      "receipt": "projects/json/java/json_simple/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 247,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T08:34:47.632392+00:00",
+      "error": null
+    },
+    {
+      "package": "fastjson",
+      "group": "com.alibaba",
+      "version": "1.2.83",
+      "scope": "Valid nested JSON object/array documents from local UTF-8 bytes through own DefaultJSONParser/JSONLexer",
+      "command": "python3 scripts/run_project.py json java fastjson1",
+      "receipt": "projects/json/java/fastjson1/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 17,
+      "parser_source_lines_covered": 721,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T08:58:20.067457+00:00",
+      "error": null
+    },
+    {
+      "package": "parsson",
+      "group": "org.eclipse.parsson",
+      "version": "1.1.9",
+      "scope": "Valid nested JSON object/array documents from local InputStream via JsonProviderImpl.createParser, getValue, and EOF check",
+      "command": "python3 scripts/run_project.py json java parsson",
+      "receipt": "projects/json/java/parsson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 10,
+      "parser_source_lines_covered": 512,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T09:05:27.945970+00:00",
+      "error": null
+    }
+  ],
+  "standard": [],
+  "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
+  "updated_at_utc": "2026-11-17T09:06:53.959460+00:00"
+}

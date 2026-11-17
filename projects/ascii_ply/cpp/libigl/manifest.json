@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "libigl",
+  "release": "2.6.4",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "09fa1b9b44e0ecbd8fbaa17ec8d9ac0cb4efcedcb2427970f8a4e90bc96e0970",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "face": [0, 1, 2]},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libigl readPLY and bundled tinyply",
+  "coverage_subject_prefix": "/work/source/include/igl/",
+  "format_specific_coverage_file_suffix": "/tinyply.cpp"
+}

@@ -19,6 +19,11 @@
 
 Native C++ PDFParser in the PDF-Writer package; source-built from pinned v4.6.2 release with bundled Aesgm and system Zlib/FreeType. DCT, TIFF, and PNG integrations are disabled for this simple PDF control.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/pdfwriter/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp pdfwriter
+python3 parsarium.py run pdf cpp pdfwriter controls/pdf/one-page.pdf
+```

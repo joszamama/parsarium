@@ -21,6 +21,13 @@
 
  Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine.
 
-## Runnable harness
+The Docker harness accepts at most 2048 initial bytes, the documented limit of lws_adopt_socket_vhost_readbuf; larger inputs are rejected before parsing.
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+## Run this target
+
+[Docker harness and verification receipt](../../../../projects/http11/cpp/libwebsockets/README.md)
+
+```sh
+python3 parsarium.py build http11 cpp libwebsockets
+python3 parsarium.py run http11 cpp libwebsockets controls/http11/request.http
+```

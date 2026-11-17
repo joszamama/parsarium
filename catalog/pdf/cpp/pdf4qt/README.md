@@ -19,6 +19,13 @@
 
 Native PDF4QT C++ document reader built from pinned v1.6.0.0 source. Its pinned Blend2D dependency uses NO_JIT. A recorded patch enables core-only building with Qt 6.12 on macOS and replaces parallel-policy calls with sequential algorithms for Apple libc++; the adapter uses C++20.
 
-## Runnable harness
+The pinned Docker build applies the SHA-recorded project-local core-library compatibility patch before compilation. It guards an editor-only translation target, uses sequential STL calls in two core headers, and links Fontconfig. The pinned PDF reader and parser source files are unchanged.
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+## Run this target
+
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/pdf4qt/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp pdf4qt
+python3 parsarium.py run pdf cpp pdf4qt controls/pdf/one-page.pdf
+```

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "cell": "xml/rust",
+  "checked_at_utc": "2026-11-17T03:03:32.511695+00:00",
+  "checks": [
+    {
+      "command": "python3 -I controls/xml/check_controls.py",
+      "pass": true,
+      "result": "expat (Python 3.13 xml.parsers.expat) summary equals the quick-xml harness output on both controls; xmllint --noout accepts both"
+    },
+    {
+      "command": "python3 parsarium.py build xml rust quick_xml",
+      "pass": true,
+      "image_id": "sha256:34bb933df034f373452755f7a335a9a077eb2ac1a5469242c82c8ffc851abcfc",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 623,
+      "name_rs_lines_covered": 160,
+      "receipt_sha256": "6a3444345aec974ca36c819b9b7e25be7702b37bede13c36cf5c0dadd90cd5b0"
+    },
+    {
+      "command": "python3 parsarium.py run xml rust quick_xml controls/xml/catalog-ns.xml",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run xml rust quick_xml controls/xml/order-default-ns.xml",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py afl build xml rust quick_xml",
+      "pass": true,
+      "image_id": "sha256:ab3754bf3a3abd9d6a74938a63130a8a78cb09153d7370b2e8ffadaf5fd60075",
+      "feedback_edges": 1152,
+      "variant_feedback_edges": 1344,
+      "edges_only_in_control": 66,
+      "edges_only_in_variant": 258,
+      "all_repeats_identical": true,
+      "receipt_sha256": "0d11e9abdda6fabcd1083a71b53c5b505d4198e66d0af344b89fe2bc9a8f1b7f"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare xml rust quick_xml runs/xml-quick_xml-afl --seed controls/xml/order-default-ns.xml",
+      "pass": true,
+      "seeds": [
+        "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+        "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928"
+      ]
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/xml-quick_xml-afl --check",
+      "pass": true,
+      "result": "Ready: xml/rust/quick_xml (2 seeds, afl_rs_rust_sancov_edges); no campaign started"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "38 tests OK"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "existing 806 projects current; the xml cell is not yet in the aggregated smoke reports"
+    },
+    {
+      "command": "python3 scripts/audit_projects.py --check",
+      "pass": false,
+      "result": "with the xml CLI choice, stops at projects/png/python/stdlib_tkinter_photoimage until data/standard-feedback-smoke.json is refreshed for the new parsarium.py hash; it then stops at 'data/projects-coverage.json is stale' because the aggregate coverage registry and data/cells.json do not yet include the xml format"
+    }
+  ],
+  "not_run": [
+    "AFL++ campaign",
+    "malformed-input or vulnerability experiments",
+    "aggregate catalog/website regeneration (build_readmes, audit_projects --write, smoke reports)"
+  ]
+}

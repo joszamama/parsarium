@@ -27,6 +27,11 @@
 
 [Control adapter](../../../../../adapters/python/png/standard.py)
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+```sh
+python3 parsarium.py build png python stdlib_tkinter_photoimage
+python3 parsarium.py run png python stdlib_tkinter_photoimage controls/png/red-green.png
+```
+
+Tk's pinned PNG reader has measured source coverage and a decoder-scoped AFL++ overlay with stable, format-dependent feedback. [Feedback receipt](../../../../../fuzzing/afl-native/png/python/stdlib_tkinter_photoimage/verification.json)

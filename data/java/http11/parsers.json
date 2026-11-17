@@ -63,27 +63,6 @@
     }
   },
   {
-    "name": "http1_1-parser",
-    "group": "org.webpieces.http",
-    "artifact": "http1_1-parser",
-    "version": "2.1.109",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses",
-    "input_api": "HttpParserFactory.createParser(...); parser.parse(parser.prepareToParse(), DataWrapper wrapping local bytes); Memento.getParsedMessages()",
-    "documentation": "https://github.com/deanhiller/webpieces/blob/master/http/http1_1-parser/src/main/java/org/webpieces/httpparser/api/HttpParser.java",
-    "scope": "HTTP/1.1 request line and headers from local bytes",
-    "family": "WebPieces HTTP/1.1 parser",
-    "adapter_label": "webpieces",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
     "name": "httpcore5",
     "group": "org.apache.httpcomponents.core5",
     "artifact": "httpcore5",
@@ -126,27 +105,6 @@
     }
   },
   {
-    "name": "jetty-http",
-    "group": "org.eclipse.jetty",
-    "artifact": "jetty-http",
-    "version": "12.1.15",
-    "license": "EPL-2.0 OR Apache-2.0",
-    "license_evidence": "https://github.com/jetty/jetty.project/blob/jetty-12.1.15/LICENSE",
-    "input_api": "HttpTester.parseRequest(ByteBuffer.wrap(localBytes)) returns Request; backed by HttpParser.parseNext(ByteBuffer)",
-    "documentation": "https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/http/HttpTester.html",
-    "scope": "HTTP/1.1 request line and headers from local bytes",
-    "family": "Jetty HTTP/1.1 HttpParser",
-    "adapter_label": "jetty",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
     "name": "jodd-http",
     "group": "org.jodd",
     "artifact": "jodd-http",
@@ -158,27 +116,6 @@
     "scope": "HTTP/1.1 request line and headers from local stream",
     "family": "Jodd HTTP native request parser",
     "adapter_label": "jodd",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
-    "name": "rawhttp-core",
-    "group": "com.athaydes.rawhttp",
-    "artifact": "rawhttp-core",
-    "version": "2.6.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://repo.maven.apache.org/maven2/com/athaydes/rawhttp/rawhttp-core/2.6.0/rawhttp-core-2.6.0.pom",
-    "input_api": "new rawhttp.core.RawHttp().parseRequest(local InputStream); getMethod(), getUri(), getStartLine().getHttpVersion(), getHeaders()",
-    "documentation": "https://github.com/renatoathaydes/rawhttp",
-    "scope": "HTTP/1.1 request line and headers from local stream",
-    "family": "RawHTTP native HTTP/1.1 parser",
-    "adapter_label": "rawhttp",
     "control": "controls/http11/request.http",
     "expected_output": {
       "method": "GET",
@@ -210,93 +147,6 @@
     }
   },
   {
-    "name": "jwarc",
-    "group": "org.netpreserve",
-    "artifact": "jwarc",
-    "version": "0.37.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://repo.maven.apache.org/maven2/org/netpreserve/jwarc/0.37.0/jwarc-0.37.0.pom",
-    "input_api": "org.netpreserve.jwarc.HttpRequest.parse(local ReadableByteChannel); method(), target(), version(), headers().first(name)",
-    "documentation": "https://github.com/iipc/jwarc/blob/v0.37.0/src/org/netpreserve/jwarc/HttpRequest.java",
-    "scope": "HTTP/1.1 request line and headers from local channel",
-    "family": "jwarc native HTTP parser",
-    "family_note": "WARC library exposes its own direct HttpRequest.parse(ReadableByteChannel) API; no WARC container is needed for this control.",
-    "adapter_label": "jwarc",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
-    "name": "webarchive-commons",
-    "group": "org.netpreserve.commons",
-    "artifact": "webarchive-commons",
-    "version": "3.0.5",
-    "license": "Apache-2.0",
-    "license_evidence": "https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/LICENSE",
-    "input_api": "new org.archive.format.http.HttpRequestParser().parse(local InputStream); getMessage(), getHeaders()",
-    "documentation": "https://github.com/iipc/webarchive-commons/blob/webarchive-commons-3.0.5/src/main/java/org/archive/format/http/HttpRequestParser.java",
-    "scope": "HTTP/1.1 request line and headers from local stream",
-    "family": "webarchive-commons native HTTP message parser",
-    "family_note": "WARC utility library exposes a direct HttpRequestParser that composes its own request-line and header parsers. No WARC container is needed for this control.",
-    "adapter_label": "webarchive",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
-    "name": "jwat-common",
-    "group": "org.jwat",
-    "artifact": "jwat-common",
-    "version": "1.2.1",
-    "license": "Apache-2.0",
-    "license_evidence": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.2.1/jwat-1.2.1.pom",
-    "input_api": "org.jwat.common.HttpHeader.processPayload(HT_REQUEST, local ByteCountingPushBackInputStream, length, null); method, requestUri, httpVersion, getHeader(name)",
-    "documentation": "https://github.com/netarchivesuite/jwat/blob/jwat-1.2.1/jwat-common/src/main/java/org/jwat/common/HttpHeader.java",
-    "scope": "HTTP/1.1 request line and headers from local stream",
-    "family": "JWAT native HTTP header parser",
-    "family_note": "WARC toolkit jwat-common exposes HttpHeader.processPayload for both request and response messages; the adapter feeds a local stream and checks isValid(). No WARC container is needed.",
-    "adapter_label": "jwat",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
-    "name": "sentinel-transport-simple-http",
-    "group": "com.alibaba.csp",
-    "artifact": "sentinel-transport-simple-http",
-    "version": "1.8.10",
-    "license": "Apache-2.0",
-    "license_evidence": "https://github.com/alibaba/Sentinel/blob/1.8.10/LICENSE",
-    "input_api": "new SimpleHttpResponseParser().parse(local InputStream); getStatusLine(), getStatusCode(), getHeader(name), getBodyAsString()",
-    "documentation": "https://github.com/alibaba/Sentinel/blob/1.8.10/sentinel-transport/sentinel-transport-simple-http/src/main/java/com/alibaba/csp/sentinel/transport/heartbeat/client/SimpleHttpResponseParser.java",
-    "scope": "HTTP/1.1 response status line, status code, Content-Type header, and nine-byte body from local stream",
-    "family": "Sentinel native simple HTTP response parser",
-    "family_note": "Sentinel transport parses raw HTTP responses with Content-Length. Its documented parser does not support chunked responses; only the valid fixed-length control is verified. The adapter suppresses package startup log chatter while reporting parsed fields.",
-    "adapter_label": "sentinel",
-    "control": "controls/http11/response.http",
-    "expected_output": {
-      "status_line": "HTTP/1.1 200 OK",
-      "status": 200,
-      "content_type": "text/plain",
-      "body": "parsarium"
-    }
-  },
-  {
     "name": "httpcore-nio",
     "group": "org.apache.httpcomponents",
     "artifact": "httpcore-nio",
@@ -309,28 +159,6 @@
     "family": "Apache HttpComponents Core 4.x NIO request parser",
     "family_note": "Separate Maven artifact and NIO parser class from blocking httpcore 4.4.16, but same Apache HttpComponents project and shared line parser ancestry. The documented NIO API parses the message head, not an entity body.",
     "adapter_label": "httpcore4nio",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "target": "/parsarium?x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test",
-      "x_parsarium": "yes"
-    }
-  },
-  {
-    "name": "mina-http",
-    "group": "org.apache.mina",
-    "artifact": "mina-http",
-    "version": "2.2.10",
-    "license": "Apache-2.0",
-    "license_evidence": "https://repo.maven.apache.org/maven2/org/apache/mina/mina-http/2.2.10/mina-http-2.2.10.pom",
-    "input_api": "new HttpServerDecoder().decode(DummySession, IoBuffer.wrap(localBytes), ProtocolDecoderOutput); collect HttpRequest and read getMethod(), getRequestPath(), getQueryString(), getProtocolVersion(), getHeader(lowercaseName)",
-    "documentation": "https://nightlies.apache.org/mina/mina/2.2.10/apidocs/org/apache/mina/http/HttpServerDecoder.html",
-    "scope": "HTTP/1.1 request line and headers from local bytes",
-    "family": "Apache MINA native HTTP server decoder",
-    "family_note": "The 2.2.10 mina-http source writes a native HttpRequestImpl into ProtocolDecoderOutput; headers are normalized to lowercase. The Maven POM declares mina-core with bundle type, which Maven cannot resolve as a normal artifact; adapter POM excludes that broken transitive edge and explicitly pins the same mina-core JAR. slf4j-nop pins the 1.7 logger binding for deterministic quiet output.",
-    "adapter_label": "mina",
     "control": "controls/http11/request.http",
     "expected_output": {
       "method": "GET",
@@ -360,47 +188,6 @@
       "version": "HTTP/1.1",
       "host": "example.test",
       "x_parsarium": "yes"
-    }
-  },
-  {
-    "name": "ssl-proxies",
-    "group": "org.jglobus",
-    "artifact": "ssl-proxies",
-    "version": "2.1.0",
-    "license": "Apache-2.0",
-    "license_evidence": "https://repo.maven.apache.org/maven2/org/jglobus/ssl-proxies/2.1.0/ssl-proxies-2.1.0-sources.jar",
-    "input_api": "new org.globus.util.http.HTTPResponseParser(local InputStream); getStatusCode(), getMessage(), getContentType(), getContentLength()",
-    "documentation": "https://javadoc.io/static/org.jglobus/ssl-proxies/2.1.0/org/globus/util/http/HTTPResponseParser.html",
-    "scope": "HTTP/1.1 response status and headers from local stream",
-    "family": "JGlobus native HTTP response parser",
-    "family_note": "The ssl-proxies artifact includes its own HTTPParser and HTTPResponseParser classes. The response parser reads the local InputStream directly and reports status, reason and headers; the valid control verifies those fields, not response body handling. Apache-2.0 header is in the pinned source JAR.",
-    "adapter_label": "jglobus",
-    "control": "controls/http11/response.http",
-    "expected_output": {
-      "status": 200,
-      "message": "OK",
-      "content_type": "text/plain",
-      "content_length": 9
-    }
-  },
-  {
-    "name": "java-warc",
-    "group": "com.github.bottomless-archive-project",
-    "artifact": "java-warc",
-    "version": "1.2.1",
-    "license": "Apache-2.0",
-    "license_evidence": "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1.pom",
-    "input_api": "new ResponseContentBlockFactory(new HeaderParser()).newResponseContentBlock(local InputStream); getStatusCode(), getMimeType(), getPayloadAsString()",
-    "documentation": "https://repo.maven.apache.org/maven2/com/github/bottomless-archive-project/java-warc/1.2.1/java-warc-1.2.1-sources.jar",
-    "scope": "HTTP/1.1 response status, Content-Type and body from local stream",
-    "family": "java-warc response wrapper over Apache HttpComponents Core 4.x parser",
-    "family_note": "Public ResponseContentBlockFactory accepts a raw local HTTP response InputStream without a WARC container and returns a structured response block. Its POM depends on httpcore 4.4.14; the combined adapter classpath resolves httpcore 4.4.16. Counted as a separate Maven package path, not an independent parser engine.",
-    "adapter_label": "javawarc",
-    "control": "controls/http11/response.http",
-    "expected_output": {
-      "status": 200,
-      "content_type": "text/plain",
-      "body": "parsarium"
     }
   },
   {

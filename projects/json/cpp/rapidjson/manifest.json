@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "cpp",
+  "package": "RapidJSON",
+  "release": "1.1.0",
+  "pilot": true,
+  "catalog_parser": "data/cpp/json/parsers.json",
+  "source_lock": "projects/json/cpp/rapidjson/source-lock.json",
+  "source_sha256": "bf7ced29704a1e696fbccf2a2b4ea068e7774fa37f6d7dd4039d0787f8bed98e",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in RapidJSON v1.1.0 headers reached by Document::Parse(const char*, size_t)",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/rapidjson/reader.h",
+  "toolchain_note": "RapidJSON v1.1.0 uses a legacy const member assignment in an unused template; Clang 21 builds with -fdelayed-template-parsing. The fuzz target uses AddressSanitizer and AFL++ feedback; UndefinedBehaviorSanitizer is not enabled for this path."
+}

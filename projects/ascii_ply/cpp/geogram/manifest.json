@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "geogram",
+  "release": "1.10.1",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "30033340a0dfd86f9e15a8ffdd7c1e6d49b967d3f26fb96cf3dfd1a502d8eba2",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "face": [0, 1, 2]},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of Geogram PLYIOHandler and bundled RPly",
+  "coverage_subject_prefix": "/work/source/src/lib/geogram/mesh/",
+  "format_specific_coverage_file_suffix": "/mesh_io.cpp",
+  "underlying_coverage_subject_prefix": "/work/source/src/lib/geogram/third_party/rply/",
+  "underlying_format_specific_coverage_file_suffix": "/rply.c"
+}

@@ -1,21 +1,28 @@
 {
   "ecosystem": "javascript",
   "format": "png",
-  "status": "pilot_verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 21,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 1,
-  "search_queries": ["png", "png decoder", "png reader", "png image"],
+  "search_queries": [
+    "png",
+    "png decoder",
+    "png reader",
+    "png image"
+  ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 400,
   "unique_search_hits": 344,
   "unresolved_documentation_leads": 10,
-  "uncertainty": "The registry returned tens of thousands of matches per query, and only the first 100 of each were saved. The 344 unique hits were not all investigated. Ten named relevant leads remain without control verification, including packages that may outrank some verified rows. Other high-adoption parsers outside these query windows may exist. Browser runtime inventory covers one Chromium version; other browser engines and JavaScript runtimes remain open.",
+  "uncertainty": "10 of 21 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/javascript/png/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/javascript/png/parsers.json",
   "third_party_control_results": "data/javascript/png/verification.json",
   "runtime_evidence": "data/javascript/png/standard.json",
   "runtime_control_results": "data/javascript/png/browser-verification.json",
   "registry_snapshot": "data/javascript/png/registry-snapshot.json",
-  "unresolved_leads": "data/javascript/png/leads.json"
+  "unresolved_leads": "data/javascript/png/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/javascript/png"
 }

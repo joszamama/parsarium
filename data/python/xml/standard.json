@@ -1,0 +1,21 @@
+{
+  "ecosystem": "python",
+  "format": "xml",
+  "status": "one_api_control_and_source_verified",
+  "verified_apis": [
+    {
+      "runtime": "CPython 3.14.4 ElementTree with Expat 2.10.0",
+      "api": "xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot()",
+      "documentation": "https://docs.python.org/3.14/library/xml.etree.elementtree.html",
+      "control": "controls/xml/two-items.xml",
+      "expected": {"root": "library", "namespace": "urn:parsarium:xml:pilot", "child_count": 2, "first_item_id": "7", "first_item_text": "A & B", "second_item_text": "π"},
+      "project": "projects/xml/python/stdlib_elementtree",
+      "result": "projects/xml/python/stdlib_elementtree/verification.json"
+    }
+  ],
+  "other_documented_apis_pending": [
+    {"api": "xml.parsers.expat.ParserCreate", "documentation": "https://docs.python.org/3.14/library/pyexpat.html"},
+    {"api": "xml.dom.minidom.parse", "documentation": "https://docs.python.org/3.14/library/xml.dom.minidom.html"},
+    {"api": "xml.sax.parse", "documentation": "https://docs.python.org/3.14/library/xml.sax.html"}
+  ]
+}

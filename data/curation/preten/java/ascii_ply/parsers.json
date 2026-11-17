@@ -1,0 +1,475 @@
+[
+  {
+    "name": "jply",
+    "group": "org.smurn",
+    "artifact": "jply",
+    "version": "0.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned Maven POM licenses element",
+    "input_api": "new PlyReaderFile(File local path), nextElementReader(), readElement()",
+    "documentation": "https://github.com/smurn/jPLY",
+    "family": "jPLY native PLY element reader",
+    "scope": "ASCII PLY vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "meshio",
+    "group": "com.ripplargames",
+    "artifact": "meshio",
+    "version": "2.1.2",
+    "license": "MIT",
+    "license_evidence": "Upstream GitHub repository LICENSE; Maven artifact pinned at 2.1.2",
+    "input_api": "new PlyFormatAscii_1_0().read(InputStream from local path)",
+    "documentation": "https://github.com/NathanJAdams/MeshIO#using-formats-directly",
+    "family": "MeshIO native ASCII PLY mesh reader",
+    "scope": "ASCII PLY vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "mesh-ply",
+    "group": "hu.kazocsaba.geom3d",
+    "artifact": "mesh-ply",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "Pinned Maven POM license and upstream LICENSE at mesh-ply-1.1.0 tag",
+    "input_api": "PlyReader.readMesh(File local path)",
+    "documentation": "https://github.com/kazocsaba/mesh-ply/blob/mesh-ply-1.1.0/src/main/java/hu/kazocsaba/v3d/mesh/format/ply/PlyReader.java",
+    "family": "kazocsaba mesh-ply native PLY reader",
+    "scope": "ASCII PLY triangle vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "pcutil",
+    "group": "cn.jimmiez",
+    "artifact": "pcutil",
+    "version": "0.3.0",
+    "license": "MIT",
+    "license_evidence": "Pinned Maven POM license and upstream LICENSE",
+    "input_api": "new PlyReader().read(File local path, annotated PointCloud.class)",
+    "documentation": "https://github.com/zhoujianling/PointCloudUtilities#plyreader",
+    "family": "PointCloudUtilities annotated PLY reader",
+    "scope": "ASCII PLY triangle vertex and face lists, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "lwjgl-assimp",
+    "group": "org.lwjgl",
+    "artifact": "lwjgl-assimp",
+    "version": "3.4.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned Maven POM license and Assimp upstream license",
+    "input_api": "Assimp.aiImportFile(String local path, 0) with pinned macOS arm64 native artifact",
+    "documentation": "https://javadoc.lwjgl.org/org/lwjgl/assimp/Assimp.html",
+    "family": "LWJGL Java binding over native Assimp PLY importer; same Assimp parser family as C++ path",
+    "scope": "ASCII PLY triangle vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "MonkeyWrench",
+    "group": "com.github.stephengold",
+    "artifact": "MonkeyWrench",
+    "version": "1.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned Maven POM New BSD (3-clause) license and upstream LICENSE",
+    "input_api": "JMonkeyEngine AssetManager.registerLoader(LwjglAssetLoader.class, 'ply'); loadModel(LwjglAssetKey for local FileLocator path)",
+    "documentation": "https://github.com/stephengold/MonkeyWrench#how-to-add-monkeywrench-to-an-existing-project",
+    "family": "MonkeyWrench wrapper over LWJGL Assimp native PLY importer; same Assimp parser family as LWJGL and C++ paths",
+    "scope": "ASCII PLY triangle mesh vertex and triangle counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter_module": "monkeywrench",
+    "adapter": "adapters/java/ascii_ply/monkeywrench/src/main/java/org/parsarium/MonkeyWrenchPlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "javagl-ply",
+    "group": "de.javagl",
+    "artifact": "ply",
+    "version": "0.0.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/javagl/Ply/blob/ply-parent-0.0.4/LICENSE",
+    "input_api": "PlyReaders.create().read(InputStream from local path), PlySource.getElementList(), Element.getIntListProperty()",
+    "documentation": "https://github.com/javagl/Ply/tree/ply-parent-0.0.4",
+    "family": "JavaGL Ply native Java ASCII PLY reader",
+    "scope": "ASCII PLY triangle vertex and face counts, parsed face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "f3d",
+    "group": null,
+    "version": "4.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
+    "documentation": "https://github.com/f3d-app/f3d/blob/v4.0.1/java/Scene.java",
+    "input_api": "Scene.add(String local filename); Scene.getSceneInfo()",
+    "adapter": "adapters/java/ascii_ply/f3d/src/main/java/org/parsarium/F3DPlyAdapter.java",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "files": 1,
+      "actors": 1,
+      "points": 3,
+      "cells": 1
+    },
+    "scope": "ASCII triangle produced three parsed points and one cell",
+    "family": "F3D native PLY plugin over VTK vtkPLYReader",
+    "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser.",
+    "source_kind": "source_build",
+    "source_lock": "data/java/ascii_ply/source-lock.json",
+    "adapter_module": "f3d"
+  },
+  {
+    "name": "sceneview-core",
+    "group": "io.github.sceneview",
+    "artifact": "sceneview-core-android",
+    "version": "4.69.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/sceneview/sceneview/blob/v4.69.5/LICENSE",
+    "documentation": "https://github.com/sceneview/sceneview/blob/v4.69.5/sceneview-core/src/commonMain/kotlin/io/github/sceneview/core/ply/PlyLoader.kt",
+    "input_api": "Files.readAllBytes(local path) passed to PlyLoader.parse(byte[], ThreeMfUnit, limits), returning PlyModel vertex count, triangle count and indices",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "ASCII PLY triangle vertices, triangulated face and parsed indices",
+    "family": "SceneView Core pure Kotlin PLY parser",
+    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core\u2019s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
+  },
+  {
+    "name": "irurueta-geometry-io",
+    "group": "com.irurueta",
+    "artifact": "irurueta-geometry-io",
+    "version": "1.6.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/albertoirurueta/irurueta-geometry-io/blob/1.6.0/LICENSE.txt",
+    "input_api": "new LoaderPLY(File local path).load(); iterate DataChunk vertices and face indices",
+    "documentation": "https://www.irurueta.com/irurueta-geometry-io/1.6.0/format-ply.html",
+    "family": "Irurueta Geometry I/O native Java PLY reader",
+    "scope": "ASCII PLY triangle vertices, face and parsed indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/irurueta/src/main/java/org/parsarium/IruruetaPlyAdapter.java",
+    "adapter_module": "irurueta",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "source_lock": "data/java/ascii_ply/irurueta-lock.json",
+    "family_note": "Separate Java implementation; exact-release deps.dev public direct dependents are zero, which does not establish wide adoption."
+  },
+  {
+    "name": "materia-jvm",
+    "group": "codes.yousef",
+    "artifact": "materia-jvm",
+    "version": "0.4.2.2",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/codeyousef/Materia/blob/v0.4.2.2/LICENSE",
+    "input_api": "PLYLoader.load(String absolute local path) via Java coroutine runBlocking; JVM default AssetResolver reads local bytes",
+    "documentation": "https://github.com/codeyousef/Materia/blob/v0.4.2.2/src/commonMain/kotlin/io/materia/loader/PLYLoader.kt",
+    "family": "Materia Kotlin ASCII PLY loader",
+    "scope": "ASCII PLY triangle position attribute count, one face and parsed indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/materia/src/main/java/org/parsarium/MateriaPlyAdapter.java",
+    "adapter_module": "materia",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "source_lock": "data/java/ascii_ply/materia-lock.json",
+    "family_note": "Tagged JVM artifact exposes a Java-callable coroutine API over Materia\u2019s Kotlin PLY parser. Project stars are auxiliary, not exact-release dependent counts or PLY-specific use."
+  },
+  {
+    "name": "kotlin-assimp",
+    "version": "v4.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/kotlin-graphics/assimp/blob/v4.0/LICENSE.txt",
+    "input_api": "new Importer().readFile(local File.toURI(), 0) -> AiScene with AiMesh vertices/faces",
+    "documentation": "https://github.com/kotlin-graphics/assimp/tree/v4.0#code",
+    "family": "Kotlin-graphics JVM Assimp port PLY importer",
+    "family_note": "Pure JVM port of native Assimp with its own Kotlin PlyLoader and PlyParser; derived parser lineage is recorded separately from the existing LWJGL/native Assimp wrappers.",
+    "scope": "ASCII PLY triangle, three vertices, one face, parsed indices [0,1,2]",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/kotlin_assimp/KotlinAssimpPlyAdapter.java",
+    "adapter_module": "kotlin_assimp",
+    "source_kind": "official_binary_distribution",
+    "source_lock": "data/java/ascii_ply/kotlin-assimp-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "group": null
+  },
+  {
+    "name": "jassimp",
+    "group": "com.github.dabasan",
+    "artifact": "jassimp",
+    "version": "1.0.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/maeda6uiui/JAssimp/blob/v1.0.0/LICENSE",
+    "input_api": "Jassimp.importFile(String local filename); AiScene.getMeshes(); AiMesh.getNumVertices() and getNumFaces()",
+    "documentation": "https://github.com/maeda6uiui/JAssimp/blob/v1.0.0/src/main/java/com/github/dabasan/jassimp/Jassimp.java",
+    "family": "JAssimp JNI binding over native Assimp PLY importer",
+    "family_note": "Separately published Maven Java binding; JNI built from tagged source against pinned Assimp 6.0.6. Shares native Assimp PLY parser family with LWJGL Assimp, MonkeyWrench, and C/C++ Assimp call sites.",
+    "scope": "ASCII PLY triangle mesh, vertex count and face count",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jassimp/JassimpPlyAdapter.java",
+    "adapter_module": "jassimp",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1
+    }
+  },
+  {
+    "name": "vofxel",
+    "group": "com.github.iAmGio",
+    "artifact": "vofxel",
+    "version": "v0.0.2",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/iAmGio/vofxel/blob/v0.0.2/LICENSE",
+    "input_api": "new PlyParser(InputStream).parse() returns VertexList with coordinate and RGB fields",
+    "documentation": "https://github.com/iAmGio/vofxel/blob/v0.0.2/src/main/java/eu/iamgio/vofxel/PlyParser.java",
+    "family": "Vofxel native Java colored ASCII PLY vertex reader",
+    "family_note": "Separate Java vertex reader. Its released parser reads six-column coordinate/RGB rows after end_header; it does not expose faces or validate other PLY header fields. No shared underlying parser family was found.",
+    "scope": "Eight colored ASCII PLY voxel vertices; first X and red value, last Z coordinate; no faces",
+    "control": "controls/ascii_ply/voxel-rgb.ply",
+    "adapter": "adapters/java/ascii_ply/vofxel/VofxelPlyAdapter.java",
+    "adapter_module": "vofxel",
+    "expected_output": {
+      "vertices": 8,
+      "first_x": 0.0,
+      "first_red": 255,
+      "last_z": 1.0
+    },
+    "source_lock": "data/java/ascii_ply/vofxel-lock.json"
+  },
+  {
+    "name": "boofcv-io",
+    "group": "org.boofcv",
+    "artifact": "boofcv-io",
+    "version": "1.6.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned Maven POM licenses section and tagged LICENSE-2.0.txt",
+    "input_api": "PointCloudIO.load(PointCloudIO.Format.PLY, InputStream from local file, VertexMesh)",
+    "documentation": "https://boofcv.org/index.php?title=Example_Load_and_Save_Point_Clouds",
+    "family": "BoofCV native Java PLY mesh reader",
+    "family_note": "Public BoofCV mesh API dispatches to its own PlyCodec and PlyReader, with no shared syntax reader found among the other included Java paths.",
+    "scope": "ASCII triangle, three vertices, one face, parsed indices [0,1,2]",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/boofcv/src/main/java/org/parsarium/BoofcvPlyAdapter.java",
+    "adapter_module": "boofcv",
+    "source_lock": "data/java/ascii_ply/boofcv-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "jzy3d-core",
+    "group": "org.jzy3d",
+    "artifact": "jzy3d-core",
+    "version": "2.2.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned official jzy3d-all 2.2.1 parent POM licenses section (The New BSD License)",
+    "input_api": "Ply.read(InputStream from local ASCII PLY file), returning List<Coord3d>",
+    "documentation": "https://doc.jzy3d.org/javadoc/2.2.1/org/jzy3d/io/ply/Ply.html",
+    "family": "Jzy3d public PLY vertex API over jPLY",
+    "family_note": "Published Jzy3d Core library depends on its published org.smurn:jply:0.2.1; the jPLY 0.2.0 package path is already counted in this cell. This is a separate package API but not an independent PLY syntax engine.",
+    "scope": "ASCII triangle vertex positions (three vertices, second X and third Y); faces not exposed by this API",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jzy3d/src/main/java/org/parsarium/Jzy3dPlyAdapter.java",
+    "adapter_module": "jzy3d",
+    "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0,
+      "third_y": 1.0
+    }
+  },
+  {
+    "name": "imglib2-mesh",
+    "group": "net.imglib2",
+    "artifact": "imglib2-mesh",
+    "version": "1.3.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Pinned tagged LICENSE.txt and SciJava Maven POM Simplified BSD license section",
+    "input_api": "PLYMeshIO.open(String local ASCII PLY file path), returning BufferMesh",
+    "documentation": "https://github.com/imglib/imglib2-mesh/blob/imglib2-mesh-1.3.0/src/main/java/net/imglib2/mesh/io/ply/PLYMeshIO.java",
+    "family": "ImgLib2 Mesh public PLY API over jPLY",
+    "family_note": "Published SciJava mesh library delegates PLY syntax parsing to org.smurn:jply:0.2.1; the jPLY 0.2.0 package path and Jzy3d Core wrapper are separately recorded. This is another package input API, not an independent parser engine.",
+    "scope": "ASCII triangle, three vertices and one face",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/imglib2/src/main/java/org/parsarium/ImgLib2MeshPlyAdapter.java",
+    "adapter_module": "imglib2",
+    "source_lock": "data/java/ascii_ply/imglib2-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1
+    }
+  },
+  {
+    "name": "imaging-mesh",
+    "group": "science.aist.imaging",
+    "artifact": "mesh",
+    "version": "2.0.0",
+    "license": "MPL-2.0",
+    "license_evidence": "Pinned tagged imaging-2.0.0 LICENSE and MPL-2.0 source header",
+    "input_api": "new PlyReader().read(BufferedReader from local ASCII PLY file), returning Optional<JavaModel3D>",
+    "documentation": "https://github.com/FHOOEAIST/imaging/blob/imaging-2.0.0/mesh/src/main/java/science/aist/imaging/mesh/storage/ply/PlyReader.java",
+    "family": "AIST Imaging native ASCII PLY mesh reader",
+    "family_note": "Tagged Java source implements its own ASCII PLY header, vertex and face reader; no shared syntax parser with the other included Java paths was found.",
+    "scope": "ASCII triangle, three points and one polygon face",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/imaging/src/main/java/org/parsarium/ImagingPlyAdapter.java",
+    "adapter_module": "imaging",
+    "source_lock": "data/java/ascii_ply/imaging-lock.json",
+    "expected_output": {
+      "points": 3,
+      "faces": 1
+    }
+  },
+  {
+    "name": "jmist-core",
+    "group": "ca.eandb.jmist",
+    "artifact": "jmist-core",
+    "version": "0.1.3",
+    "license": "MIT",
+    "license_evidence": "Pinned v0.1.3 LICENSE, source header and Maven parent POM MIT license",
+    "input_api": "new PlyReader().read(File local path, PlyTarget); ElementListener receives parsed vertex and face properties",
+    "documentation": "https://github.com/bwkimmel/jmist/blob/v0.1.3/jmist-core/src/main/java/ca/eandb/jmist/framework/loader/ply/PlyReader.java",
+    "family": "JMIST native Java PLY event reader",
+    "family_note": "Tagged Java source implements its own PLY header and property reader with callbacks; no shared syntax parser with the other included Java paths was found.",
+    "scope": "ASCII triangle, three vertices, one face, vertex X value and face indices",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jmist/src/main/java/org/parsarium/JmistPlyAdapter.java",
+    "adapter_module": "jmist",
+    "source_lock": "data/java/ascii_ply/jmist-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1.0,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "release_note": "The full Maven transitive dependency graph references an unavailable JNLP system JAR; this reader control needs only the pinned jmist-core and eandb-util JARs."
+  },
+  {
+    "name": "bteterrarenderer-draco",
+    "group": null,
+    "artifact": "draco source module",
+    "version": "v1.03.4",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned v1.03.4 LICENSE and Apache-2.0 header in the PLY reader source",
+    "input_api": "new PlyReader().read(DecoderBuffer initialized from local InputStream); getElementByName and PlyPropertyReader inspect parsed elements and coordinates",
+    "documentation": "https://github.com/tf2mandeokyi/BTETerraRenderer/blob/v1.03.4/draco/src/test/java/com/mndk/bteterrarenderer/draco/io/PlyReaderTest.java",
+    "family": "BTETerraRenderer Java translation of Draco PLY reader",
+    "family_note": "The draco module translates Draco C++ code into Java; it contains its own PlyReader and is a source-built library module, not a separately observed Maven artifact. Its origin is the Draco parser family; no other Java cell path here uses this Java translation.",
+    "scope": "ASCII PLY triangle, three parsed vertices, one face and second vertex X coordinate",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/bte_draco/BteDracoPlyAdapter.java",
+    "adapter_module": "bte_draco",
+    "source_lock": "data/java/ascii_ply/bte-draco-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1.0
+    },
+    "release_note": "Pinned official v1.03.4 source release; isolated javac builds the draco library module and three common utilities because the root Gradle project configures unrelated game-mod builds.",
+    "source_kind": "source_build"
+  }
+]

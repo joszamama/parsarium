@@ -1,0 +1,154 @@
+{
+  "schema_version": 2,
+  "checked_at_utc": "2026-11-17T10:27:23.736529+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
+  "pass": true,
+  "results": [
+    {
+      "project": "xml/c/expat",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_libexpat_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only the pinned libexpat sources and the XML_Parse harness; no other library is compiled into /work/fuzzer.",
+      "base_project_receipt_sha256": "28260cf8293e14df42d18ca51490559fe3c7e70a5ca557275171745bfa93dfd8",
+      "overlay_receipt_sha256": "237578925bc4ba482e7c87f7130f5b50ea1724c793a56c8fceaf75d87fc60390",
+      "base_image_id": "sha256:832f5803273f0e6cbc4fc42c2cfc015e2df1c108fd2bf52cd85390c6cc88c4f8",
+      "overlay_image_id": "sha256:6067eccf437f9a7ebc4c6ee0a8d3f728b4dd6e1abd4667ef86e89fe7fd5cce26",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 722,
+      "second_afl_tuples": 809,
+      "afl_tuple_difference": 157
+    },
+    {
+      "project": "xml/c/libxml2",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_libxml2_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only the pinned libxml2 sources and the xmlTextReader harness; no other library is compiled into /work/fuzzer.",
+      "base_project_receipt_sha256": "938bde5fa8aca7c7e6ae4599667bcc82aad130720b447465139a129af70978bb",
+      "overlay_receipt_sha256": "ecc3f929798fdd367b42876244df3c89fb6b67515f0fd47e3449ab7b07f0d9e4",
+      "base_image_id": "sha256:e98bd1ca4f684576eebe9cc7747fed3723d70ec958f1be9686114912304452ac",
+      "overlay_image_id": "sha256:4f2bc4a6921ad860380181114650b45d6b1e9cce411d4c4409897029b3ab1e82",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 1253,
+      "second_afl_tuples": 1342,
+      "afl_tuple_difference": 245
+    },
+    {
+      "project": "xml/c/mxml",
+      "checked_at_utc": "2026-11-17T10:27:23.736095+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_mxml_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only the pinned Mini-XML sources and the mxmlLoadString harness, including its namespace-resolving tree walk; no other library is compiled into /work/fuzzer.",
+      "base_project_receipt_sha256": "f07af563da87c3d07db896ab86a406b0ed0439642efdfb39106706754facde9f",
+      "overlay_receipt_sha256": "aa8bde7eaa6768d90bc3895fa0115a90229b4cd402be40182f236d9a90ee9fe9",
+      "base_image_id": "sha256:1fa48324fb92b575f24a8785917d6cd1e9bdc872b12eb7529a3a95563b69472b",
+      "overlay_image_id": "sha256:ebc9e332b34db0ed0d8c4b34cb82e6dde234dbe4d84a0dd0e8ef8c4fc4e6377b",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 380,
+      "second_afl_tuples": 390,
+      "afl_tuple_difference": 50
+    }
+  ]
+}

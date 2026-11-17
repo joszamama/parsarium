@@ -2,17 +2,17 @@
 
 XML vector image.
 
-The catalog records 168 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
+The catalog records 78 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
 
 | Ecosystem | Verified paths | Docker harnesses |
 | --- | ---: | ---: |
-| [C](c/README.md) | 20 | 9 |
-| [C++](cpp/README.md) | 20 | 7 |
-| [Go](go/README.md) | 21 | 21 |
-| [Java](java/README.md) | 20 | 16 |
-| [JavaScript](javascript/README.md) | 22 | 22 |
-| [Python](python/README.md) | 20 | 15 |
-| [Rust](rust/README.md) | 25 | 25 |
-| [PHP](php/README.md) | 20 | 20 |
+| [C](c/README.md) | 10 | 10 |
+| [C++](cpp/README.md) | 10 | 10 |
+| [Go](go/README.md) | 10 | 10 |
+| [Java](java/README.md) | 10 | 10 |
+| [JavaScript](javascript/README.md) | 10 | 10 |
+| [Python](python/README.md) | 8 | 8 |
+| [Rust](rust/README.md) | 10 | 10 |
+| [PHP](php/README.md) | 10 | 10 |
 
 [Harness instructions](../../projects/README.md)

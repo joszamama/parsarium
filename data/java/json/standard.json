@@ -1,0 +1,32 @@
+{
+  "ecosystem": "Java",
+  "format": "JSON",
+  "status": "no_public_standard_api",
+  "runtime": "OpenJDK 25.0.5 (Temurin-25.0.5+8) linux/arm64, the project base image",
+  "verified_apis": [],
+  "unverified_documented_apis": [],
+  "no_api_findings": [
+    {
+      "scope": "Java SE 25 public API",
+      "finding": "No exported java.* or jdk.* package provides a JSON parser.",
+      "evidence": "In the project image, `java --describe-module` over every module in `java --list-modules` exports no package whose name contains json, and no module name contains json.",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/index.html"
+    },
+    {
+      "scope": "JDK internal classes",
+      "finding": "Classes with json in their path exist only in non-exported packages: java.base jdk.internal.vm, jdk.javadoc internal doclets toolkit util, and jdk.jfr internal tool. These are internal writers/printers, not a supported parsing API, and were not treated as standard APIs.",
+      "evidence": "jrt:/ walk of /modules in the project image"
+    },
+    {
+      "scope": "Jakarta EE / JSON-P (jakarta.json) and JSON-B",
+      "finding": "Specification APIs outside Java SE; implementations (org.eclipse.parsson:parsson, org.glassfish:jakarta.json) ship as Maven artifacts and are logged as third-party leads.",
+      "documentation": "https://jakarta.ee/specifications/jsonp/"
+    },
+    {
+      "scope": "Removed runtime script engine",
+      "finding": "Nashorn (JSON.parse via javax.script) was removed in JDK 15 and is absent from JDK 25.",
+      "documentation": "https://openjdk.org/jeps/372"
+    }
+  ],
+  "limit": "Inventory covers one OpenJDK 25.0.5 runtime image. Other vendors' JDKs or future JDK releases may add an API; that is not checked here."
+}

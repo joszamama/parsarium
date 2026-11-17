@@ -1,0 +1,192 @@
+[
+  {
+    "name": "jsdom",
+    "status": "unresolved",
+    "lead_kind": "delegates_to_saxes",
+    "version_seen": "31.0.1",
+    "license": "MIT",
+    "npm_downloads_30d": 587846374,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/jsdom",
+    "reason": "DOM/browser emulation. Its XML documents (DOMParser 'application/xml', XML content types) are parsed by saxes (imports saxes ^6.0.0); HTML goes through parse5. Shares the selected saxes family; not run.",
+    "source": "https://www.npmjs.com/package/jsdom"
+  },
+  {
+    "name": "htmlparser2",
+    "status": "unresolved",
+    "lead_kind": "html_tokenizer_not_selected",
+    "version_seen": "12.0.0",
+    "license": "MIT",
+    "npm_downloads_30d": 526964241,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/htmlparser2",
+    "reason": "Own forgiving HTML tokenizer with an xmlMode option; it does not enforce XML well-formedness or resolve namespace URIs, so it is not an XML 1.0 + Namespaces parser. Not run.",
+    "source": "https://www.npmjs.com/package/htmlparser2"
+  },
+  {
+    "name": "fast-xml-parser",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_parser",
+    "version_seen": "5.12.1",
+    "license": "MIT",
+    "npm_downloads_30d": 426764010,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/fast-xml-parser",
+    "reason": "Own string scanner (OrderedObjParser) and validator behind XMLParser.parse(Buffer, true); no namespace URI resolution, so the adapter resolves prefixes from in-scope xmlns attributes. Both valid namespace-aware controls match the expat oracle, with pinned npm integrity, V8 package-source coverage, and input-dependent AFL++ feedback verified.",
+    "source": "https://www.npmjs.com/package/fast-xml-parser",
+    "verified_evidence": "data/javascript/xml/verification.json"
+  },
+  {
+    "name": "@xmldom/xmldom",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_parser",
+    "version_seen": "0.9.12",
+    "license": "MIT",
+    "npm_downloads_30d": 326406305,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@xmldom/xmldom",
+    "reason": "Promoted to verified: own XMLReader tokenizer and DOM builder; strict UTF-8 local-text adapter matches the expat oracle on both controls.",
+    "source": "https://www.npmjs.com/package/@xmldom/xmldom",
+    "verified_evidence": "data/javascript/xml/verification.json"
+  },
+  {
+    "name": "xml2js",
+    "status": "promoted_to_verified",
+    "lead_kind": "delegates_to_sax",
+    "version_seen": "0.6.2",
+    "license": "MIT",
+    "npm_downloads_30d": 237465764,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xml2js",
+    "reason": "Object-tree builder over sax events (sax >=0.6.0 resolves to 1.6.1, the selected sax path), so it shares the sax family; its documented Parser({xmlns: true, explicitChildren: true, preserveChildrenOrder: true, charsAsChildren: true}) tree keeps sax-resolved URIs and ordered children. Both valid namespace-aware controls match the expat oracle, with pinned npm integrity, V8 xml2js and underlying sax source coverage, and input-dependent AFL++ feedback verified. Comments and processing instructions are dropped, so text split only by them merges.",
+    "source": "https://www.npmjs.com/package/xml2js",
+    "verified_evidence": "data/javascript/xml/verification.json"
+  },
+  {
+    "name": "xmlbuilder2",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "4.0.3",
+    "license": "MIT",
+    "npm_downloads_30d": 63770034,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xmlbuilder2",
+    "reason": "Builder/serializer whose create(string) parsing goes through @oozcitak/dom's XML string lexer; the parser is a secondary feature. Not run.",
+    "source": "https://www.npmjs.com/package/xmlbuilder2"
+  },
+  {
+    "name": "xml-js",
+    "status": "unresolved",
+    "lead_kind": "delegates_to_sax",
+    "version_seen": "1.6.11",
+    "license": "MIT",
+    "npm_downloads_30d": 58150955,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xml-js",
+    "reason": "Converts via sax events (optional node-expat import); shares the sax family. Not run.",
+    "source": "https://www.npmjs.com/package/xml-js"
+  },
+  {
+    "name": "xmldoc",
+    "status": "unresolved",
+    "lead_kind": "delegates_to_sax",
+    "version_seen": "3.0.0",
+    "license": "MIT",
+    "npm_downloads_30d": 21414489,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xmldoc",
+    "reason": "Lightweight DOM built on sax events; shares the sax family. Not run.",
+    "source": "https://www.npmjs.com/package/xmldoc"
+  },
+  {
+    "name": "@xml-tools/parser",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "1.0.12",
+    "license": "Apache-2.0",
+    "npm_downloads_30d": 7478313,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@xml-tools/parser",
+    "reason": "Chevrotain-generated XML CST parser for editor tooling (parse({text})); string-only and no namespace resolution in the CST. Not run.",
+    "source": "https://www.npmjs.com/package/@xml-tools/parser"
+  },
+  {
+    "name": "xmldom",
+    "status": "unresolved",
+    "lead_kind": "shares_selected_xmldom_family",
+    "version_seen": "0.6.0",
+    "license": "MIT",
+    "npm_downloads_30d": 6363098,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xmldom",
+    "reason": "Deprecated unscoped predecessor (0.6.0) of the selected @xmldom/xmldom; same XMLReader/DOMHandler family. Not run.",
+    "source": "https://www.npmjs.com/package/xmldom"
+  },
+  {
+    "name": "libxmljs2",
+    "status": "unresolved",
+    "lead_kind": "native_binding_not_selected",
+    "version_seen": "0.37.0",
+    "license": "MIT",
+    "npm_downloads_30d": 2959976,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/libxmljs2",
+    "reason": "Native binding to libxml2 via node-gyp/prebuilt binaries; parser source is C, not JavaScript. Native build not attempted.",
+    "source": "https://www.npmjs.com/package/libxmljs2"
+  },
+  {
+    "name": "txml",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "6.0.3",
+    "license": "MIT",
+    "npm_downloads_30d": 1336266,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/txml",
+    "reason": "Small own string scanner (parse(string)) without namespace resolution. Not run.",
+    "source": "https://www.npmjs.com/package/txml"
+  },
+  {
+    "name": "@rgrove/parse-xml",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "5.2.0",
+    "license": "ISC",
+    "npm_downloads_30d": 916004,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@rgrove/parse-xml",
+    "reason": "Own spec-oriented XML 1.0 parser (parseXml(string)); does not resolve namespace URIs. Not run.",
+    "source": "https://www.npmjs.com/package/@rgrove/parse-xml"
+  },
+  {
+    "name": "sax-wasm",
+    "status": "unresolved",
+    "lead_kind": "wasm_parser_not_selected",
+    "version_seen": "3.3.0",
+    "license": "MIT",
+    "npm_downloads_30d": 525058,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/sax-wasm",
+    "reason": "Rust SAX parser compiled to WebAssembly; parser source is not JavaScript. Not run.",
+    "source": "https://www.npmjs.com/package/sax-wasm"
+  },
+  {
+    "name": "xml-parser",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "1.2.1",
+    "license": "MIT",
+    "npm_downloads_30d": 458764,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xml-parser",
+    "reason": "Small regex-based parser, last released 1.2.1; no namespace resolution. Not run.",
+    "source": "https://www.npmjs.com/package/xml-parser"
+  },
+  {
+    "name": "node-expat",
+    "status": "unresolved",
+    "lead_kind": "native_binding_not_selected",
+    "version_seen": "2.4.1",
+    "license": "MIT",
+    "npm_downloads_30d": 426893,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/node-expat",
+    "reason": "Native binding to libexpat; parser source is C. Native build not attempted.",
+    "source": "https://www.npmjs.com/package/node-expat"
+  },
+  {
+    "name": "ltx",
+    "status": "unresolved",
+    "lead_kind": "delegates_to_pluggable_parser",
+    "version_seen": "3.1.2",
+    "license": "MIT",
+    "npm_downloads_30d": 197103,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/ltx",
+    "reason": "XMPP element library with pluggable backends (own ltx parser, sax, saxes, node-expat, libxmljs). Not run.",
+    "source": "https://www.npmjs.com/package/ltx"
+  }
+]

@@ -1,0 +1,307 @@
+[
+  {
+    "name": "quick-xml",
+    "version": "0.42.0",
+    "license": "MIT",
+    "input_api": "quick_xml::NsReader::from_reader(&[u8]); NsReader::read_event(); NsReader::resolver().resolve_element(..)/resolve_attribute(..); Attribute::normalized_value(XmlVersion::Implicit1_0); BytesText/BytesCData::xml10_content(); BytesRef::resolve_char_ref() with escape::resolve_predefined_entity",
+    "documentation": "https://docs.rs/quick-xml/0.42.0/quick_xml/reader/struct.NsReader.html",
+    "source": "https://github.com/tafia/quick-xml/tree/v0.42.0",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read as a namespace-resolved event stream: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes with normalized values, decoded character data (predefined entity and character references, CDATA)",
+    "family": "quick-xml pull reader (tafia/quick-xml)",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 178628779,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/quick_xml/verification.json"
+  },
+  {
+    "name": "roxmltree",
+    "version": "0.21.2",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "roxmltree::Document::parse(&str) -> Result<Document, Error>; Document::descendants(); Node::tag_name()/attributes()/namespaces()/text()",
+    "documentation": "https://docs.rs/roxmltree/0.21.2/roxmltree/struct.Document.html#method.parse",
+    "source": "https://static.crates.io/crates/roxmltree/roxmltree-0.21.2.crate",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read into a namespace-resolved DOM: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes with decoded values, decoded character data including predefined entities, character references and CDATA",
+    "family": "roxmltree 0.21.2 internal tokenizer and namespace-resolving tree builder; no xmlparser crate dependency in pinned source (historical xmlparser relationship recorded in lead)",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 42073295,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/roxmltree/verification.json"
+  },
+  {
+    "name": "xml",
+    "version": "1.4.0",
+    "license": "MIT",
+    "input_api": "xml::reader::EventReader::new(&[u8]); EventReader::next() -> Result<XmlEvent>; StartElement yields namespace-resolved OwnedName, attributes, and namespace map",
+    "documentation": "https://docs.rs/xml/1.4.0/xml/reader/struct.EventReader.html",
+    "source": "https://static.crates.io/crates/xml/xml-1.4.0.crate",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read as a namespace-resolved EventReader stream: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes with normalized values, decoded character data (predefined entity and character references, CDATA)",
+    "family": "xml-rs EventReader implementation in xml 1.4.0; xml-rs 1.0.0 is a re-export shim that depends on xml and is not a separate family",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 6413267,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/xml/verification.json"
+  },
+  {
+    "name": "xmlparser",
+    "version": "0.13.6",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "xmlparser::Tokenizer::from(&str) -> Iterator<Item=Result<Token, Error>>; Token::{ElementStart, Attribute, ElementEnd, Text, Cdata}",
+    "documentation": "https://docs.rs/xmlparser/0.13.6/xmlparser/struct.Tokenizer.html",
+    "source": "https://static.crates.io/crates/xmlparser/xmlparser-0.13.6.crate",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE tokenized from local text: adapter resolves namespace prefixes and declarations, builds element depth and expanded names, decodes predefined and numeric character references, and reports ordered attributes and text. Tokenizer itself does not resolve namespaces or validate tree structure.",
+    "family": "xmlparser 0.13.6 own low-level XML tokenizer; distinct pinned source from roxmltree 0.21.2 internal tokenizer, with documented historical relationship",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 52247004,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/xmlparser/verification.json"
+  },
+  {
+    "name": "xml5ever",
+    "version": "0.40.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "xml5ever::driver::parse_document(RcDom, XmlParseOpts) -> XmlParser<RcDom>; TendrilSink::one(&str) -> RcDom; xml5ever::tokenizer::XmlTokenizer::feed(BufferQueue) -> token events",
+    "documentation": "https://docs.rs/xml5ever/0.40.0/xml5ever/driver/fn.parse_document.html",
+    "source": "https://static.crates.io/crates/xml5ever/xml5ever-0.40.0.crate",
+    "scope": "XML5 error-recovering superset parser accepts local UTF-8 text and yields a namespace-aware DOM through its own tokenizer/tree builder with markup5ever_rcdom TreeSink; a second own tokenizer pass counts xmlns declarations omitted from DOM attributes. The two valid XML 1.0 controls yield exact expanded names, attributes, decoded text, depth and declaration counts. This does not establish strict XML 1.0 well-formedness, full namespace conformance, DTD support, or other encodings.",
+    "family": "Servo xml5ever XML5 tokenizer and tree builder; shares markup5ever primitives and design lineage with html5ever, but has own XML5 parser modules; markup5ever_rcdom is only a tree sink",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 14338073,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/xml5ever/verification.json"
+  },
+  {
+    "name": "rxml",
+    "version": "0.14.0",
+    "license": "MIT",
+    "input_api": "rxml::Parser::new() + rxml::Parse::parse_all(&mut &[u8], at_eof = true, FnMut(Event)) -> namespace-resolved events; rxml::RawParser::new() + parse_all -> raw attribute events",
+    "documentation": "https://docs.rs/rxml/0.14.0/rxml/struct.Parser.html",
+    "source": "https://static.crates.io/crates/rxml/rxml-0.14.0.crate",
+    "scope": "Restricted XML 1.0 + Namespaces push/pull parser over local UTF-8 bytes. Default options (comments rejected). Namespace-resolved StartElement/EndElement/Text events give expanded element and attribute names, depth and decoded text; a second pass through rxml's own RawParser counts xmlns declarations that the resolver omits from AttrMap. AttrMap iterates by (namespace URI, local name), which equals document order on both controls. By design rxml has no DTD, custom entities, processing instructions or non-UTF-8 encodings and rejects comments by default, so the shared order control is rejected and an alternate second control without its comment and processing instruction is used.",
+    "family": "rxml (Jonas Schäfer) own lexer, raw parser and namespace resolver, with the same-author rxml_validation crate for name and character classes; minidom 0.19 is built on rxml and is not a separate family",
+    "restricted_features": [
+      "no DTD or doctypedecl",
+      "no custom entity references (only lt, amp, gt, quot, apos)",
+      "no processing instructions",
+      "comments rejected unless CommentMode::Discard",
+      "UTF-8 only; encoding declaration must be utf-8 or absent",
+      "standalone must be yes or absent",
+      "XML 1.0 only",
+      "max_token_length 8192 bytes for names and attribute values by default"
+    ],
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "second_control": "controls/xml/order-default-ns-restricted.xml",
+    "second_control_expected_output": {
+      "root": "{urn:parsarium:order}order",
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "shared_second_control": "controls/xml/order-default-ns.xml",
+    "shared_second_control_result": "Error(RestrictedXml(\"comments\"))",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 961809,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/rxml/verification.json"
+  }
+]

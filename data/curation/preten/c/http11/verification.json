@@ -1,0 +1,284 @@
+{
+  "checked_at_utc": "2026-11-12T22:02:17.543188+00:00",
+  "environment": {
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+    "llhttp_version": "9.4.3",
+    "llhttp_library_sha256": "78cd1d7e5016246878a00dbaf76300628e5f48aa2174bf2e83fe1b31dc3e5691",
+    "libmicrohttpd_version": "1.0.10",
+    "libmicrohttpd_library_sha256": "4d483b2ef25fffb418ef7ad4a0398bc098a2c5ac7081dbe134281c9dbbe43343",
+    "libwebsockets_version": "5.0.0",
+    "libwebsockets_library_sha256": "427211b4db5fb6fefa726f0b650b50942fbb58a534ccbc4ee6fa42532c4897bd",
+    "libonion_build_dependency": "libev 4.33",
+    "libonion_compatibility": "macOS preinclude plus poller parameter type correction in temporary source",
+    "libsoup_version": "3.8.1",
+    "libsoup_library_sha256": "928145bf1abca0b8b58ff7ef844f52e259f42c2fc2bbc17b3be068aa1495f79a",
+    "serf_build_dependencies": {
+      "apr": "1.7.6",
+      "apr-util": "1.6.6",
+      "openssl@3": "3.5.9",
+      "scons": "4.11.1"
+    },
+    "serf_build_scope": "static library without SSL bucket object; response parser unmodified"
+  },
+  "controls": {
+    "controls/http11/request.http": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+    "controls/http11/response_serf.http": "f7304bdd65b2297949409b9d324d8f2be7f8957ed3e8f6e7d147c0597662ddb1"
+  },
+  "control_meaning": "Valid HTTP/1.1 GET request and 200 response controls",
+  "third_party": [
+    {
+      "package": "llhttp",
+      "version": "9.4.3",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned llhttp; llhttp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "http-parser",
+      "version": "2.9.4",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned http-parser; http-parser-adapter controls/http11/request.http"
+    },
+    {
+      "package": "picohttpparser",
+      "version": "1.5",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned picohttpparser; picohttpparser-adapter controls/http11/request.http"
+    },
+    {
+      "package": "mongoose",
+      "version": "7.23",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned mongoose; mongoose-adapter controls/http11/request.http"
+    },
+    {
+      "package": "httpp",
+      "version": "2.0.0",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned httpp; httpp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "HTTPParserC",
+      "version": "9.2.0",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned HTTPParserC; HTTPParserC-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libmicrohttpd",
+      "version": "1.0.10",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned libmicrohttpd; libmicrohttpd-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libevhtp",
+      "version": "1.2.9",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned libevhtp; libevhtp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libhtp",
+      "version": "0.5.53",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned libhtp; libhtp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libwebsockets",
+      "version": "5.0.0",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned libwebsockets; libwebsockets-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libonion",
+      "version": "0.8",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium",
+        "version": "1.1",
+        "host": "example.test",
+        "query_x": "1"
+      },
+      "pass": true,
+      "command": "build pinned libonion; libonion-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libsoup",
+      "version": "3.8.1",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned libsoup; libsoup-adapter controls/http11/request.http"
+    },
+    {
+      "package": "serf",
+      "version": "1.3.10",
+      "control": "controls/http11/response_serf.http",
+      "output": {
+        "version": "1.1",
+        "status": 200,
+        "reason": "OK",
+        "content_type": "text/plain",
+        "body": "OK"
+      },
+      "pass": true,
+      "command": "build pinned serf; serf-adapter controls/http11/response_serf.http"
+    },
+    {
+      "package": "facil-cstl",
+      "version": "0.8.5",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "HTTP/1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned facil-cstl; facil-cstl-adapter controls/http11/request.http"
+    },
+    {
+      "package": "facil-legacy",
+      "version": "0.7.6",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium",
+        "query": "x=1",
+        "version": "HTTP/1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned facil-legacy; facil-legacy-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libhv",
+      "version": "1.3.1",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned libhv; libhv-adapter controls/http11/request.http"
+    },
+    {
+      "package": "libparsehttp",
+      "version": "0.06",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium",
+        "query": "x=1",
+        "version": "HTTP/1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned libparsehttp; libparsehttp-adapter controls/http11/request.http"
+    },
+    {
+      "package": "h2o",
+      "version": "2.2.6",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned h2o; h2o-adapter controls/http11/request.http"
+    },
+    {
+      "package": "finwo-http-parser",
+      "version": "stable@3d78ef3ad068",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium",
+        "query": "x=1",
+        "version": "1.1",
+        "host": "example.test"
+      },
+      "pass": true,
+      "command": "build pinned finwo-http-parser; finwo-http-parser-adapter controls/http11/request.http"
+    },
+    {
+      "package": "samsung-http-parser",
+      "version": "2.5.0",
+      "control": "controls/http11/request.http",
+      "output": {
+        "method": "GET",
+        "path": "/parsarium?x=1",
+        "version": "1.1"
+      },
+      "pass": true,
+      "command": "build pinned samsung-http-parser; samsung-http-parser-adapter controls/http11/request.http"
+    }
+  ],
+  "runtime": []
+}

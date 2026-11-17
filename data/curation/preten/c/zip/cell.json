@@ -1,0 +1,30 @@
+{
+  "ecosystem": "c",
+  "format": "zip",
+  "status": "verified_target_search_incomplete",
+  "working_target": 20,
+  "ceiling": 30,
+  "verified_third_party_count": 20,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "zip",
+    "archive",
+    "miniz",
+    "unzip",
+    "zip language:C stars:>15",
+    "\"zip archive\" language:C stars:>5",
+    "unzip library language:C",
+    "zip archive library language:C"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 182,
+  "unique_search_hits": 151,
+  "unresolved_documentation_leads": 11,
+  "uncertainty": "Twenty distinct pinned C-callable package paths passed the valid one-entry DEFLATE ZIP control. Nineteen returned an entry name and decompressed bytes; zipc v1.3 returned decompressed bytes for a known named entry without an enumeration claim. Seven paths use exact-release, binary-hashed installed libraries only; eleven are source-built or source-integrated, with SQLite also linking an exact-release library. libtfs adds a SHA-locked macOS arm64 release bundle and pinned local OpenSSL archive; Tcl Zipfs adds an exact-release, binary-hashed Tcl library and its libtommath dependency. AOSP libzipfile is built from individually SHA-locked C files at the Android 4.4.4_r2 release commit because the Gitiles tarball bytes vary across downloads. libtfs is a C facade over a C++ ZIP backend using libzip; Tcl Zipfs and AOSP libzipfile have their own ZIP record readers. Other shared families are recorded per parser. Twenty paths are not twenty independent engines. Conan recipe-name discovery saved 23 hits; four bounded GitHub searches saved 159 more hits, for 182 hits and 151 unique names. Targeted documentation identified JUnzip, SQLite Zipfile, zipc, libtfs, Tcl Zipfs, and AOSP libzipfile outside these hits. Eleven plausible leads remain unresolved, including projects without tagged releases and Windows-only ArchiveAccess. Search names are leads only, and popularity stars are a repository-level proxy; filtering may miss packages. The 20-path working goal is met, but the cell does not establish a definitive most-used set. The control covers one ordinary DEFLATE entry. The ISO C standard library documents no ZIP parser. No malformed-input, vulnerability, or resource-use experiments were run.",
+  "third_party_evidence": "data/c/zip/parsers.json",
+  "third_party_control_results": "data/c/zip/verification.json",
+  "runtime_evidence": "data/c/zip/standard.json",
+  "registry_snapshot": "data/c/zip/registry-snapshot.json",
+  "unresolved_leads": "data/c/zip/leads.json",
+  "source_lock": "data/c/zip/source-lock.json"
+}

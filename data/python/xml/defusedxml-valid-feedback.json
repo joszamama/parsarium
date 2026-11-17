@@ -1,0 +1,98 @@
+{
+  "checked_at_utc": "2026-11-17T12:16:34.383989+00:00",
+  "project": "xml/python/defusedxml",
+  "pass": true,
+  "input_kind": "two fixed valid UTF-8 XML 1.0 namespace controls without DOCTYPE",
+  "tested_parser": "defusedxml.ElementTree.DefusedXMLParser",
+  "tested_parser_base": "xml.etree.ElementTree.XMLParser (pure-Python class)",
+  "tree_builder": "_elementtree.TreeBuilder (C accelerator, not covered)",
+  "guards_installed": [
+    "EntityDeclHandler",
+    "UnparsedEntityDeclHandler",
+    "ExternalEntityRefHandler"
+  ],
+  "expat_version": "expat_2.10.0",
+  "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image; summary without the xmlns declaration count, namespaces from expanded names",
+  "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+  "oracle_matches_lxml_path_without_declaration_count": true,
+  "oracle_name_uris_equal_declared_uris": true,
+  "defusedxml_matches_oracle": true,
+  "feedback_scope": "executed Python lines of defusedxml 0.7.1 and CPython 3.14 xml/etree during the defusedxml.ElementTree.parse call, plus Expat 2.10.0 LLVM regions and branches under /work/expat/lib; harness and post-parse summary lines are excluded",
+  "base_image_id": "sha256:3b16cc768cd52526d58681245c690f7a3d66d95374aa3999899a738a57196c54",
+  "overlay_image_id": "sha256:7ef987c2e45bf7d1560fb104d497bee12f9177ddcbfe1c24ef6db4e2e5f0606d",
+  "overlay_receipt_sha256": "d862756d9ab9289ef40f0e5a6f001e25fa0a9f9f394b1ccae4dd6aa5062f72c3",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "{urn:parsarium:order}order"
+  },
+  "repeated_control_runs": 5,
+  "control_repeat_identical": true,
+  "repeated_variant_runs": 5,
+  "variant_repeat_identical": true,
+  "control_parser_features": 3610,
+  "variant_parser_features": 3968,
+  "control_package_features": 20,
+  "variant_package_features": 20,
+  "control_elementtree_driver_features": 71,
+  "variant_elementtree_driver_features": 79,
+  "control_expat_features": 3519,
+  "variant_expat_features": 3869,
+  "parser_feature_difference": 848,
+  "package_feature_difference": 0,
+  "elementtree_driver_feature_difference": 8,
+  "expat_feature_difference": 840,
+  "control_afl_tuples": 3504,
+  "variant_afl_tuples": 3844,
+  "afl_tuple_difference": 800
+}

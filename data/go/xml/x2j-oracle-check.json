@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "package": "github.com/beego/x2j",
+  "checked_at_utc": "2026-11-17T11:56:45.481597+00:00",
+  "oracle": "python3 -I scripts/verify_go_xml_x2j_oracle.py (expat, namespace-unaware, projected onto x2j map fields)",
+  "oracle_script_sha256": "306ec98686d524a535e94805290a862b5e6781f34b0d12d50ad15679082d228d",
+  "manifest_sha256": "6a438875981dde1d853f0fbe8e42a6e834c08485baac0f86af2eac3a4608cb01",
+  "pass": true,
+  "results": [
+    {
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "reader_mismatches": {
+        "oracle_only": [],
+        "x2j_only": []
+      },
+      "bytes_mismatches": {
+        "oracle_only": [
+          "catalog/item[1]/note=x < y"
+        ],
+        "x2j_only": [
+          "catalog/item[1]/note=x< y"
+        ]
+      }
+    },
+    {
+      "control": "controls/xml/order-default-ns.xml",
+      "control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "reader_mismatches": {
+        "oracle_only": [],
+        "x2j_only": []
+      },
+      "bytes_mismatches": {
+        "oracle_only": [],
+        "x2j_only": []
+      }
+    }
+  ]
+}

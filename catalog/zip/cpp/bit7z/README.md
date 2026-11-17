@@ -21,6 +21,11 @@
 
 Distinct C++ wrapper API; ZIP parsing and decompression use an exact-release, binary-hashed SevenZip 26.04 shared library. Not an independent decoder from SevenZip.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/zip/cpp/bit7z/README.md)
+
+```sh
+python3 parsarium.py build zip cpp bit7z
+python3 parsarium.py run zip cpp bit7z controls/zip/hello.zip
+```

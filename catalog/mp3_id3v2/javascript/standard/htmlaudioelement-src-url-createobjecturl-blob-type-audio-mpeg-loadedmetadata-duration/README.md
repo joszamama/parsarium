@@ -8,10 +8,20 @@
 
 ## Observed control result
 
-Loaded local tagged MP3 and reported one-second duration
+```json
+{
+  "duration": 1
+}
+```
 
 [Control adapter](../../../../../adapters/javascript/mp3_id3v2_browser.mjs)
 
-## Runnable harness
+## Run the valid control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Browser container and control receipt](../../../../../projects/mp3_id3v2/javascript/stdlib_browser_audio_metadata/README.md)
+
+```sh
+python3 projects/mp3_id3v2/javascript/stdlib_browser_audio_metadata/verify-control.py
+```
+
+The browser runs this control, but its native parser source coverage and AFL++ parser feedback are unavailable. This path remains staged.

@@ -1,0 +1,39 @@
+{
+  "ecosystem": "go",
+  "format": "mp3",
+  "status": "pilot_four_verified_bounded_search",
+  "verified_third_party_count": 4,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "mp3",
+    "mp3 decoder",
+    "mp3 frame",
+    "mpeg audio",
+    "mp3 parser"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 313,
+  "unique_search_hits": 242,
+  "leads_recorded": 14,
+  "leads_by_status": {
+    "shared_family": 4,
+    "excluded": 4,
+    "selected": 3,
+    "unresolved": 3
+  },
+  "ranking_metric": "pkg.go.dev Imported by package count",
+  "selection": "Four MPEG Layer III parser paths verified: hajimehoshi/go-mp3 (294 Imported by) and tosone/minimp3 (34) decode PCM; tcolgate/mp3 (62) and dmulholl/mp3lib (9) parse complete frame headers and boundaries without PCM. Each uses a documented local byte or io.Reader API and matches the applicable independent valid-control oracle. tosone/minimp3 invokes its vendored native C decoder through cgo; Go wrapper lines and native decoder lines are recorded separately.",
+  "uncertainty": "Four verified Go plain-MP3 paths; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Three leads remain unresolved and four recorded wrappers or forks share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling. minimp3 PCM hashes are pinned to the Clang-built linux/arm64 image and are not compared across toolchains.",
+  "third_party_evidence": "data/go/mp3/parsers.json",
+  "runtime_evidence": "data/go/mp3/standard.json",
+  "registry_snapshot": "data/go/mp3/registry-snapshot.json",
+  "unresolved_leads": "data/go/mp3/leads.json",
+  "working_target": 10,
+  "ceiling": 10,
+  "third_party_control_results": [
+    "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
+    "projects/mp3/go/github_com_tcolgate_mp3/verification.json",
+    "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
+    "projects/mp3/go/github_com_tosone_minimp3/verification.json"
+  ]
+}

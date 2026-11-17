@@ -1,0 +1,141 @@
+# Minimal ISO BMFF / MP4: ftyp + moov with one H.264 video track holding a
+# single 2x2 IDR frame, an mdat with that frame, and optional free boxes.
+# The mdat goes either after moov or between ftyp and moov. Every box size
+# is a 32-bit big-endian field that a constraint ties to the box's own byte
+# length, and the stco chunk offset is tied to the frame's position in the
+# file; Fandango repairs these fields directly.
+#
+# The SPS/PPS (avcC) and the IDR slice are copied byte for byte from the
+# video track of controls/mp4/red-av.mp4 (FFmpeg/libx264, 2x2 red frame).
+
+import struct
+
+def u32(n):
+    return struct.pack('>I', n)
+
+# File offset of the first byte of the mdat payload.
+def sample_offset(start):
+    offset = 0
+    for child in start.children:
+        if str(child.symbol) == '<mdat>':
+            return u32(offset + 8)
+        offset += len(bytes(child))
+    return u32(0)
+
+<start> ::= <ftyp> <free>? <moov> <free>? <mdat> | <ftyp> <free>? <mdat> <moov> <free>?
+
+<size> ::= <byte>{4}
+
+# File type box
+<ftyp> ::= <size> b'ftyp' <brand> b'\x00\x00\x00\x00' <brand>{1,4}
+<brand> ::= b'isom' | b'iso2' | b'mp41' | b'mp42' | b'avc1'
+
+# Movie box
+<moov> ::= <size> b'moov' <mvhd> <trak>
+<mvhd> ::= <size> b'mvhd' b'\x00\x00\x00\x00' <time> <time> <timescale> <duration> b'\x00\x01\x00\x00' b'\x01\x00' b'\x00'{10} <matrix> b'\x00'{24} b'\x00\x00\x00\x02'
+<trak> ::= <size> b'trak' <tkhd> <mdia>
+<tkhd> ::= <size> b'tkhd' b'\x00\x00\x00\x03' <time> <time> b'\x00\x00\x00\x01' b'\x00\x00\x00\x00' <duration> b'\x00'{8} b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' <matrix> <dimension> <dimension>
+<mdia> ::= <size> b'mdia' <mdhd> <hdlr> <minf>
+<mdhd> ::= <size> b'mdhd' b'\x00\x00\x00\x00' <time> <time> <timescale> <duration> <language> b'\x00\x00'
+<hdlr> ::= <size> b'hdlr' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'vide' b'\x00'{12} <handler_name>
+<minf> ::= <size> b'minf' <vmhd> <dinf> <stbl>
+<vmhd> ::= <size> b'vmhd' b'\x00\x00\x00\x01' b'\x00'{8}
+<dinf> ::= <size> b'dinf' <dref>
+<dref> ::= <size> b'dref' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <url>
+<url> ::= <size> b'url ' b'\x00\x00\x00\x01'
+
+# Sample tables: one sample in one chunk, lasting the whole track.
+<stbl> ::= <size> b'stbl' <stsd> <stts> <stsc> <stsz> <stco>
+<stsd> ::= <size> b'stsd' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <avc1>
+<stts> ::= <size> b'stts' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' <duration>
+<stsc> ::= <size> b'stsc' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01'
+<stsz> ::= <size> b'stsz' b'\x00\x00\x00\x00' <sample_size> b'\x00\x00\x00\x01'
+<stco> ::= <size> b'stco' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <chunk_offset>
+<sample_size> ::= <byte>{4}
+<chunk_offset> ::= <byte>{4}
+
+# Visual sample entry: data reference 1, 2x2 coded size (fixed by the SPS),
+# 72 dpi, one frame per sample, depth 24.
+<avc1> ::= <size> b'avc1' b'\x00'{6} b'\x00\x01' b'\x00'{16} b'\x00\x02\x00\x02' b'\x00\x48\x00\x00\x00\x48\x00\x00' b'\x00\x00\x00\x00' b'\x00\x01' <compressor_name> b'\x00\x18\xff\xff' <avcC> <pasp>?
+<compressor_name> ::= b'\x00'{32} | b'\x09Parsarium' b'\x00'{22} | b'\x0aAVC Coding' b'\x00'{21}
+<avcC> ::= <size> b'avcC' (b'\x01\xf4\x00\x0a\xff\xe1\x00\x18\x67\xf4\x00\x0a\xae\xb4\xfc\x44\x46\x02\x20\x00\x00\x03\x00\x20'
+                         b'\x00\x00\x03\x00\x41\xe2\x44\xd4\x01\x00\x05\x68\xce\x01\xaf\x20\xfd\xf8\xf8\x00')
+# Pixel aspect ratio, square pixels
+<pasp> ::= <size> b'pasp' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01'
+
+# Media data: one access unit of 4-byte length-prefixed NAL units, an
+# optional access unit delimiter (I slices) followed by the IDR slice.
+<mdat> ::= <size> b'mdat' <sample>
+<sample> ::= <aud>? <idr>
+<aud> ::= b'\x00\x00\x00\x02\x09\x10'
+<idr> ::= (b'\x00\x00\x02\x5b\x65\x88\x84\xa0\xc6\x00\x08\x00\x02\x07\xa0\x00\x20\x42\x00\x34\x1d\x3d\x3d\x3d'
+           b'\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x00\x07\x00\x01\x03\xd0\x00\x10\x21\x00\x1a\x0e\x9e\x9e\x9e'
+           b'\x9e\x9e\x9e\x9e\x9e\x9e\x9e\x9e\xf0\x00\x02\x07\xa0\x00\x20\x42\x00\x34\x1d\x3d\x3d\x3d\x3d\x3d'
+           b'\x3d\x3d\x3d\x3d\x3d\x3d\xe0\x00\x04\x0f\x40\x00\x40\x84\x00\x68\x3a\x7a\x7a\x7a\x7a\x7a\x7a\x7a'
+           b'\x7a\x7a\x7a\x7b\xc0\x00\x08\x1e\x80\x00\x81\x08\x00\xd0\x74\xf4\xf4\xf4\xf4\xf4\xf4\xf4\xf4\xf4'
+           b'\xf4\xf7\x80\x00\x10\x3d\x00\x01\x02\x10\x01\xa0\xe9\xe9\xe9\xe9\xe9\xe9\xe9\xe9\xe9\xe9\xe9\xef'
+           b'\x00\x00\x20\x7a\x00\x02\x04\x20\x03\x41\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xde\x00\x00'
+           b'\x40\xf4\x00\x04\x08\x40\x06\x83\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xbc\x00\x00\x81\xe8'
+           b'\x00\x08\x10\x80\x0d\x07\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x78\x00\x01\x03\xd0\x00\x10'
+           b'\x21\x00\x1a\x0e\x9e\x9e\x9e\x9e\x9e\x9e\x9e\x9e\x9e\x9e\x9e\xf0\x00\x02\x07\xa0\x00\x20\x42\x00'
+           b'\x34\x1d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\xe0\x00\x04\x0f\x40\x00\x40\x84\x00\x68\x3a'
+           b'\x7a\x7a\x7a\x7a\x7a\x7a\x7a\x7a\x7a\x7a\x7b\xc0\x00\x08\x1e\x80\x00\x81\x08\x00\xd0\x74\xf4\xf4'
+           b'\xf4\xf4\xf4\xf4\xf4\xf4\xf4\xf4\xf7\x80\x00\x10\x3d\x00\x01\x02\x10\x01\xa0\xe9\xe9\xe9\xe9\xe9'
+           b'\xe9\xe9\xe9\xe9\xe9\xe9\xef\x00\x00\x20\x7a\x00\x02\x04\x20\x03\x41\xd3\xd3\xd3\xd3\xd3\xd3\xd3'
+           b'\xd3\xd3\xd3\xd3\xde\x00\x00\x40\xf4\x00\x04\x08\x40\x06\x83\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xa7\xa7'
+           b'\xa7\xa7\xbc\x00\x00\x81\xe8\x00\x08\x10\x80\x0d\x07\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f\x4f'
+           b'\x42\x00\x01\x02\xb0\x00\x10\x0f\x00\x58\x6c\x20\x00\x10\xbe\x00\x01\x0a\x20\x00\x10\x66\x00\x07'
+           b'\x80\x01\xc0\x00\x40\xac\x00\x04\x03\xc0\x16\x1b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\xe0'
+           b'\x00\x04\x0a\xc0\x00\x40\x3c\x01\x61\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xbe\x00\x00\x40'
+           b'\xac\x00\x04\x03\xc0\x16\x1b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\x2b\xe0\x00\x04\x0a\xc0\x00'
+           b'\x40\x3c\x01\x61\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb2\xb0\x00\x70\x00\x10\xbe\x00\x01\x0a'
+           b'\x20\x00\x10\x66\x00\x07\x80\xf8\x5e\x17\x85\xe1\x78\x5e\x17\x85\xe1\x78\x5e\x17\xb8\x00\x01\x0b'
+           b'\xe0\x00\x10\xa2\x00\x01\x06\x60\x00\x78\x0f\x85\xe1\x78\x5e\x17\x85\xe1\x78\x5e\x17\x85\xe1\x7b'
+           b'\x80\x00\x10\xbe\x00\x01\x0a\x20\x00\x10\x66\x00\x07\x80\xf8\x5e\x17\x85\xe1\x78\x5e\x17\x85\xe1'
+           b'\x78\x5e\x17\xb8\x00\x01\x0b\xe0\x00\x10\xa2\x00\x01\x06\x60\x00\x78\x0f\x85\xe1\x78\x5e\x17\x85'
+           b'\xe1\x78\x5e\x17\x85\xe1\x7a')
+
+<free> ::= <size> b'free' <byte>{0,16}
+
+# Field values
+<time> ::= b'\x00\x00\x00\x00' | b'\xe0' <byte>{3}
+<timescale> ::= b'\x00\x00\x02\x58' | b'\x00\x00\x03\xe8' | b'\x00\x00\x75\x30' | b'\x00\x01\x5f\x90'
+<duration> ::= b'\x00\x00' rb'[\x01-\xff]' <byte>
+<matrix> ::= b'\x00\x01\x00\x00' b'\x00'{12} b'\x00\x01\x00\x00' b'\x00'{12} b'\x40\x00\x00\x00'
+# 16.16 fixed point, integer part 1..255 (Exiv2 rejects zero dimensions)
+<dimension> ::= b'\x00' rb'[\x01-\xff]' b'\x00\x00'
+<language> ::= b'\x55\xc4' | b'\x15\xc7' | b'\x19\x4c'
+<handler_name> ::= b'\x00' | b'VideoHandler\x00' | b'Parsarium\x00'
+
+where <ftyp>.<size> == u32(len(bytes(<ftyp>)))
+where <moov>.<size> == u32(len(bytes(<moov>)))
+where <mvhd>.<size> == u32(len(bytes(<mvhd>)))
+where <trak>.<size> == u32(len(bytes(<trak>)))
+where <tkhd>.<size> == u32(len(bytes(<tkhd>)))
+where <mdia>.<size> == u32(len(bytes(<mdia>)))
+where <mdhd>.<size> == u32(len(bytes(<mdhd>)))
+where <hdlr>.<size> == u32(len(bytes(<hdlr>)))
+where <minf>.<size> == u32(len(bytes(<minf>)))
+where <vmhd>.<size> == u32(len(bytes(<vmhd>)))
+where <dinf>.<size> == u32(len(bytes(<dinf>)))
+where <dref>.<size> == u32(len(bytes(<dref>)))
+where <url>.<size> == u32(len(bytes(<url>)))
+where <stbl>.<size> == u32(len(bytes(<stbl>)))
+where <stsd>.<size> == u32(len(bytes(<stsd>)))
+where <avc1>.<size> == u32(len(bytes(<avc1>)))
+where <avcC>.<size> == u32(len(bytes(<avcC>)))
+where <pasp>.<size> == u32(len(bytes(<pasp>)))
+where <stts>.<size> == u32(len(bytes(<stts>)))
+where <stsc>.<size> == u32(len(bytes(<stsc>)))
+where <stsz>.<size> == u32(len(bytes(<stsz>)))
+where <stco>.<size> == u32(len(bytes(<stco>)))
+where <mdat>.<size> == u32(len(bytes(<mdat>)))
+where <free>.<size> == u32(len(bytes(<free>)))
+# One movie timescale for everything: track, media and sample durations agree.
+where <mdhd>.<timescale> == bytes(<mvhd>.<timescale>)
+where <mdhd>.<duration> == bytes(<mvhd>.<duration>)
+where <tkhd>.<duration> == bytes(<mvhd>.<duration>)
+where <stts>.<duration> == bytes(<mvhd>.<duration>)
+# The single sample is the whole mdat payload.
+where <stsz>.<sample_size> == u32(len(bytes(<sample>)))
+where <stco>.<chunk_offset> == sample_offset(<start>)

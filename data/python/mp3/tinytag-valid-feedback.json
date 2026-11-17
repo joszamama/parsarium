@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T09:31:17.787922+00:00",
+  "project": "mp3/python/tinytag",
+  "pass": true,
+  "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+  "feedback_scope": "Executed lines of the pinned tinytag/tinytag.py module are hashed into the AFL++ bitmap by the bridge proxy; harness and interpreter lines are excluded. Lines are also split by class: _MPEG is the frame-header reader, _ID3 must stay at zero.",
+  "independent_oracle": "controls/mp3/check_controls.py walk(): frames x samples_per_frame / sample_rate, header bitrate / 1000",
+  "base_project_receipt_sha256": "ecdf65c6a17cad1d3b0f25868d887ab4cf2f34ae09140a036691a56c4692379e",
+  "overlay_receipt_sha256": "3899faff964d990a1c4e28bb47948bfd6019f7e1443d1338fce2bca1043f3c19",
+  "base_image_id": "sha256:ee9d61246da5b23c3681ef2e557abd1894eea6c7a0c04e173220cb93c39d7ccc",
+  "overlay_image_id": "sha256:46f7afe516cb8dad4de0ca56a252e640b3f903041a10bb211941fe3ffbad2d37",
+  "mpeg_class_lines": [
+    1470,
+    1658
+  ],
+  "id3_class_lines": [
+    912,
+    1467
+  ],
+  "repeats_per_input": 2,
+  "repeated_inputs_identical": true,
+  "first_control": "controls/mp3/tone-44k-mono.mp3",
+  "first_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "first_output": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "bitrate_kbps": 64.0,
+    "duration_us": 287347
+  },
+  "second_control": "controls/mp3/tone-22k-stereo.mp3",
+  "second_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "second_output": {
+    "sample_rate": 22050,
+    "channels": 2,
+    "bitrate_kbps": 32.0,
+    "duration_us": 313469
+  },
+  "variant": "first 626 bytes (3 whole frames) of controls/mp3/tone-44k-mono.mp3",
+  "variant_sha256": "0703dc062ef0418fd8d603ceed6c9d3c3abc090f5af5c16009d238d625e85f14",
+  "variant_output": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "bitrate_kbps": 64.0,
+    "duration_us": 78367
+  },
+  "variant_case_kind": "valid_whole_frame_prefix",
+  "first_parser_source_lines": 154,
+  "first_mpeg_lines": 74,
+  "second_parser_source_lines": 154,
+  "second_mpeg_lines": 74,
+  "variant_parser_source_lines": 150,
+  "variant_mpeg_lines": 70,
+  "id3_lines_any_input": 0,
+  "shared_controls_line_difference": 0,
+  "shared_controls_afl_tuple_difference": 0,
+  "variant_line_difference": 16,
+  "variant_line_difference_in_mpeg": 16,
+  "variant_differing_lines": [
+    1546,
+    1547,
+    1548,
+    1617,
+    1620,
+    1621,
+    1622,
+    1623,
+    1624,
+    1625,
+    1626,
+    1627,
+    1628,
+    1631,
+    1632,
+    1633
+  ],
+  "first_afl_tuples": 174,
+  "second_afl_tuples": 174,
+  "variant_afl_tuples": 170,
+  "variant_afl_tuple_difference": 16
+}

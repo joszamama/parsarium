@@ -1,0 +1,66 @@
+[
+  {
+    "name": "symphonia-bundle-mp3",
+    "project": "projects/mp3/rust/symphonia_bundle_mp3",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "MpaReader::try_new(MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default()); FormatReader::next_packet(); MpaDecoder::try_new(params, ..).decode(&packet)",
+    "documentation": "https://docs.rs/symphonia-bundle-mp3/0.6.1/symphonia_bundle_mp3/",
+    "source": "https://github.com/pdeljanov/Symphonia/tree/v0.6.1/symphonia-bundle-mp3",
+    "scope": "Every MPEG Layer III frame of an untagged stream demuxed and decoded: sample rate, channels, frame count, frame bytes, decoded samples per channel",
+    "family": "Symphonia MP3 demuxer and decoder",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "decoded_frames": 12672
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 10651437,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "minimp3",
+    "version": "0.6.1",
+    "license": "MIT (minimp3 and minimp3-sys 0.6.0 Rust crates); CC0-1.0 (vendored minimp3.h)",
+    "input_api": "minimp3::Decoder::new(std::io::Cursor<&[u8]>); Decoder::next_frame() -> Frame { data: Vec<i16>, sample_rate, channels, layer, bitrate } until Error::Eof",
+    "documentation": "https://docs.rs/minimp3/0.6.1/minimp3/",
+    "source": "https://github.com/germangb/minimp3-rs/tree/9f9fcdde624c8f9bf3eee1b2688a6847a7b61716/crates/minimp3",
+    "scope": "Every MPEG Layer III frame of an untagged stream decoded to interleaved i16 PCM: sample rate, channels, layer, bitrate, frame count, samples per channel, PCM sample count and PCM hash",
+    "family": "lieff/minimp3 C decoder via minimp3-sys 0.6.0 Rust FFI binding",
+    "family_note": "Same minimp3 C decoder family as Go github.com/tosone/minimp3 v1.1.0: the vendored minimp3.h files differ by one ARMv6-M preprocessor guard that is inactive on aarch64, and both decode the shared controls to identical PCM hashes. Distinct from the Symphonia family. The crate documentation warns of multiple memory-unsoundness issues.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "layer": 3,
+      "bitrate_kbps": 64,
+      "frames": 11,
+      "samples_per_channel": 12672,
+      "pcm_samples": 12672,
+      "pcm_sha256": "0641e37cb18148b29cfc23ffc8c479115a4e042a0952a91570e92888aec0a33e"
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "layer": 3,
+      "bitrate_kbps": 32,
+      "frames": 12,
+      "samples_per_channel": 6912,
+      "pcm_samples": 13824,
+      "pcm_sha256": "ac01db4bb3d3c907d3b51ecaefd6497cce1a693035114377eeedef2ef5afb653"
+    },
+    "evidence": "projects/mp3/rust/minimp3/verification.json",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 156316,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/rust/minimp3"
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T11:40:09.870515+00:00",
+  "project": "json/cpp/glaze",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_glaze_read_source_lines",
+  "probe": "projects/json/cpp/glaze/parser-probe.cpp",
+  "probe_scope": "glz::read_json(glz::generic_i64&, std::string) only; no DOM serialization, traversal, output summarization, or adapter postprocessing",
+  "base_project_receipt_sha256": "18c878f7f1321020612a811742e3bbe42959d9fbde6534daaa562113dadde3f5",
+  "overlay_receipt_sha256": "d2e4e8b04780f4ef9ece365ac8edf4483a26830275746b567079d54fbfffdc0e",
+  "base_image_id": "sha256:7a73c14c844a67a32145d4eeefd039143b2f289f09650fbc24af43aeb3397476",
+  "overlay_image_id": "sha256:5f2fb40c8d73f2caa6a13ffc574723dcddd17db700901cd0a797eb848d2be4d9",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 8868,
+  "repeats_per_control": 2,
+  "first_control": "controls/json/nested-object.json",
+  "first_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "second_control": "controls/json/nested-array.json",
+  "second_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "exact_tree_outputs_verified": true,
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "first_reader_lines_stable": 362,
+  "second_reader_lines_stable": 337,
+  "reader_line_difference": 25,
+  "reader_line_repeat_variation": [
+    0,
+    0
+  ],
+  "first_afl_tuples": 632,
+  "second_afl_tuples": 568,
+  "afl_tuple_difference": 140,
+  "repeated_afl_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

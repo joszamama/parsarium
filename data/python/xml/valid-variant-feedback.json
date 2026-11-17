@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-11-17T02:59:53.254147+00:00",
+  "method": "afl_trace and afl-showmap on exactly two fixed valid XML controls per path",
+  "results": [
+    {
+      "project": "xml/python/xmltodict",
+      "feedback_scope": "source-built Expat parser regions",
+      "control_sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941",
+      "variant_sha256": "f03a0e48a8750841523c15cf0910780d75189bed6fad90944bfad6aa037aeded",
+      "control_parser_features": 3203,
+      "variant_parser_features": 2976,
+      "parser_feature_symmetric_difference": 227,
+      "control_afl_edge_ids": 3136,
+      "variant_afl_edge_ids": 2942,
+      "afl_edge_id_symmetric_difference": 220,
+      "pass": true
+    },
+    {
+      "project": "xml/python/stdlib_elementtree",
+      "feedback_scope": "source-built Expat parser regions",
+      "control_sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941",
+      "variant_sha256": "f03a0e48a8750841523c15cf0910780d75189bed6fad90944bfad6aa037aeded",
+      "control_parser_features": 3148,
+      "variant_parser_features": 2921,
+      "parser_feature_symmetric_difference": 227,
+      "control_afl_edge_ids": 3086,
+      "variant_afl_edge_ids": 2872,
+      "afl_edge_id_symmetric_difference": 214,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

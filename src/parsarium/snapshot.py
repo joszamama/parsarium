@@ -6,10 +6,11 @@ one snapshot by URL and SHA-256, so a version pins every target.
 
 Resolution order:
 
-1. ``PARSARIUM_HOME``: an existing checkout or unpacked snapshot. Nothing is
-   downloaded. Use this when working from a clone of the repository.
+1. ``PARSARIUM_HOME``: an existing checkout or unpacked snapshot.
 2. The cache: ``PARSARIUM_CACHE`` or the platform cache directory, holding
    one unpacked snapshot per package version.
+3. The archive bundled in a release wheel, checked against the pinned SHA-256.
+   ``PARSARIUM_SNAPSHOT_URL`` can explicitly override it for development.
 """
 
 from __future__ import annotations
@@ -40,6 +41,7 @@ def snapshot_info() -> dict:
     if os.environ.get("PARSARIUM_SNAPSHOT_URL"):
         data["url"] = os.environ["PARSARIUM_SNAPSHOT_URL"]
         data["sha256"] = os.environ.get("PARSARIUM_SNAPSHOT_SHA256") or data.get("sha256")
+        data["bundle"] = None
     return data
 
 
@@ -56,7 +58,8 @@ def cache_root() -> Path:
 def home(fetch: bool = True, quiet: bool = False) -> Path:
     """Return the directory that holds ``parsarium.py`` and the targets.
 
-    Downloads and verifies the snapshot on first use unless ``fetch`` is false.
+    Extracts and verifies the bundled snapshot on first use unless ``fetch``
+    is false. Development builds may download an explicitly configured URL.
     """
     override = os.environ.get("PARSARIUM_HOME")
     if override:
@@ -65,12 +68,14 @@ def home(fetch: bool = True, quiet: bool = False) -> Path:
             raise SnapshotError(f"PARSARIUM_HOME={path} does not contain {ENTRY}")
         return path
     info = snapshot_info()
-    target = cache_root() / info.get("version", __version__)
+    # Keep the returned root consistent with helper modules that resolve their
+    # own __file__. On macOS, /tmp is a symlink to /private/tmp.
+    target = (cache_root() / info.get("version", __version__)).resolve()
     if (target / ENTRY).is_file():
         return target
     if not fetch:
         raise SnapshotError(f"no snapshot at {target}; run `parsarium home --fetch`")
-    if not info.get("url") or not info.get("sha256"):
+    if not (info.get("bundle") or info.get("url")) or not info.get("sha256"):
         raise SnapshotError(
             "this is a development install without a released snapshot; "
             "set PARSARIUM_HOME to a clone of https://github.com/joszamama/parsarium")
@@ -99,6 +104,21 @@ def _download(url: str, destination: Path, size: int | None, quiet: bool) -> str
     return digest.hexdigest()
 
 
+def _copy_bundle(name: str, destination: Path, quiet: bool) -> str:
+    """Copy a packaged archive into the install workspace while hashing it."""
+    archive = resources.files("parsarium").joinpath(name)
+    if not archive.is_file():
+        raise SnapshotError(f"package snapshot archive is missing: {name}")
+    digest = hashlib.sha256()
+    with archive.open("rb") as source, destination.open("wb") as out:
+        for chunk in iter(lambda: source.read(1 << 20), b""):
+            out.write(chunk)
+            digest.update(chunk)
+    if not quiet:
+        print(f"parsarium: checking bundled snapshot SHA-256", file=sys.stderr)
+    return digest.hexdigest()
+
+
 def _safe_members(archive: tarfile.TarFile, prefix: str):
     for member in archive.getmembers():
         name = member.name
@@ -120,10 +140,13 @@ def _install(info: dict, target: Path, quiet: bool) -> None:
     with tempfile.TemporaryDirectory(dir=target.parent, prefix=".download-") as work:
         work = Path(work)
         tarball = work / "snapshot.tar.gz"
-        try:
-            digest = _download(info["url"], tarball, info.get("bytes"), quiet)
-        except OSError as error:
-            raise SnapshotError(f"could not download {info['url']}: {error}") from error
+        if info.get("bundle"):
+            digest = _copy_bundle(info["bundle"], tarball, quiet)
+        else:
+            try:
+                digest = _download(info["url"], tarball, info.get("bytes"), quiet)
+            except OSError as error:
+                raise SnapshotError(f"could not download {info['url']}: {error}") from error
         if digest != info["sha256"]:
             raise SnapshotError(f"snapshot checksum mismatch: expected {info['sha256']}, got {digest}")
         prefix = info.get("prefix", f"parsarium-{info.get('version', __version__)}")

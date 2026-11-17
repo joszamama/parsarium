@@ -31,9 +31,10 @@ def verify(run_dir: Path, plan: dict) -> None:
     receipt = json.loads(receipt_path.read_text())
     if sha256(receipt_path.read_bytes()).hexdigest() != plan["overlay_receipt_sha256"]:
         raise ValueError("AFL++ overlay receipt changed since preparation")
-    if receipt["base_project_receipt_sha256"] != sha256(
-        (project / "verification.json").read_bytes()
-    ).hexdigest():
+    tk_source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
+    base_receipt = project / ("control-verification.json" if tk_source_feedback else "verification.json")
+    base_hash_field = "base_control_receipt_sha256" if tk_source_feedback else "base_project_receipt_sha256"
+    if receipt.get(base_hash_field) != sha256(base_receipt.read_bytes()).hexdigest():
         raise ValueError("project receipt changed since AFL++ overlay verification")
     if manifest["source_sha256"] != plan["source_sha256"] or (
         manifest["control_sha256"] != plan["control_sha256"]

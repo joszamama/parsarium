@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "go",
+  "package": "github.com/beevik/etree",
+  "release": "v1.8.1",
+  "catalog_parser": "data/go/xml/parsers.json",
+  "source_lock": "projects/xml/go/github_com_beevik_etree/source-lock.json",
+  "source_sha256": "c0338bfc955c839a435fc49156536be7e39525455412940f12ef1e0a903ee706",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzXML",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzXML",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of etree tree building and namespace lookup, plus the encoding/xml RawToken tokenizer it calls, during valid-control replay",
+  "coverage_subject_prefix": "github.com/beevik/etree/",
+  "underlying_coverage_subject_prefix": "encoding/xml/"
+}

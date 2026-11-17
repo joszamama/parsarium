@@ -1,18 +1,5 @@
 [
   {
-    "name": "llhttp",
-    "version": "9.4.3",
-    "license": "MIT",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/nodejs/llhttp#usage",
-    "input_api": "llhttp_init(..., HTTP_REQUEST, ...); llhttp_execute(llhttp_t *, local request bytes, length); on_url and on_headers_complete callbacks",
-    "family": "llhttp generated HTTP/1 parser, descended from Node http-parser design",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
-    "adapter": "adapters/c/http11/llhttp.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
     "name": "http-parser",
     "version": "2.9.4",
     "license": "MIT",
@@ -23,7 +10,11 @@
     "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
     "adapter": "adapters/c/http11/http_parser.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1"
+    }
   },
   {
     "name": "picohttpparser",
@@ -36,7 +27,11 @@
     "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
     "adapter": "adapters/c/http11/picohttpparser.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1"
+    }
   },
   {
     "name": "mongoose",
@@ -49,33 +44,11 @@
     "scope": "HTTP/1.1 GET request method, target, query and version",
     "adapter": "adapters/c/http11/mongoose.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
-    "name": "httpp",
-    "version": "2.0.0",
-    "license": "MIT",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/cebem1nt/httpp#api",
-    "input_api": "httpp_init_req(...); httpp_parse_request(char *local request bytes, size_t len, httpp_req_t *out)",
-    "family": "httpp C single-header request parser",
-    "scope": "HTTP/1.1 GET request method, target and version",
-    "adapter": "adapters/c/http11/httpp.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
-    "name": "HTTPParserC",
-    "version": "9.2.0",
-    "license": "MIT",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/Building42/HTTPParserC#documentation",
-    "input_api": "Bundled llhttp_init(..., LLHTTP_REQUEST, ...); llhttp_execute(llhttp_t *, local request bytes, length); on_url and on_headers_complete callbacks",
-    "family": "Building42 packaged llhttp 9.2.0 generated C source; shares the llhttp engine and is a separate versioned distribution",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
-    "adapter": "adapters/c/http11/HTTPParserC.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1"
+    }
   },
   {
     "name": "libmicrohttpd",
@@ -88,33 +61,11 @@
     "scope": "HTTP/1.1 GET request method, path, query argument and version from local socket stream",
     "adapter": "adapters/c/http11/libmicrohttpd.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
-    "name": "libevhtp",
-    "version": "1.2.9",
-    "license": "BSD-3-Clause",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/ellzey/libevhtp/blob/1.2.9/htparse/htparse.h",
-    "input_api": "htparser_new; htparser_init(..., htp_type_request); htparser_run(parser, hooks, local request bytes, length); path and args callbacks plus method/version accessors",
-    "family": "libevhtp bundled htparse C HTTP/1 request scanner; source distributed and header installed by libevhtp",
-    "scope": "HTTP/1.1 GET request method, path, query and version after complete headers",
-    "adapter": "adapters/c/http11/libevhtp.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
-    "name": "libhtp",
-    "version": "0.5.53",
-    "license": "BSD-3-Clause",
-    "license_evidence": "Pinned release LICENSE and README",
-    "documentation": "https://github.com/OISF/libhtp/blob/0.5.53/docs/QUICK_START",
-    "input_api": "htp_config_create; htp_connp_create/open; htp_connp_req_data(parser, timestamp, local request bytes, length); transaction request_method, request_uri, request_protocol and headers",
-    "family": "OISF LibHTP independent C HTTP request/response stream parser",
-    "scope": "HTTP/1.1 GET request method, target, version and parsed header table from local byte buffer",
-    "adapter": "adapters/c/http11/libhtp.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1"
+    }
   },
   {
     "name": "libwebsockets",
@@ -125,22 +76,14 @@
     "input_api": "lws_create_context in no-listen server mode; lws_adopt_socket_vhost_readbuf(vhost, local socketpair fd, local HTTP request bytes, length); LWS_CALLBACK_HTTP and parsed header/query accessors",
     "family": "libwebsockets C HTTP/1 parser in the server adoption path; independent from llhttp and LibHTP",
     "scope": "HTTP/1.1 GET request method, path, query argument and Host header from local read buffer",
+    "harness_note": "The Docker harness accepts at most 2048 initial bytes, the documented limit of lws_adopt_socket_vhost_readbuf; larger inputs are rejected before parsing.",
     "adapter": "adapters/c/http11/libwebsockets.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "host": "example.test"}
-  },
-  {
-    "name": "libonion",
-    "version": "0.8",
-    "license": "Apache-2.0",
-    "license_evidence": "Pinned release LICENSE.txt and APACHE2.txt dual-license notice for src library",
-    "documentation": "https://github.com/davidmoreno/onion/blob/v0.8/src/onion/request.h",
-    "input_api": "onion_request_new(NULL); onion_request_write(request, local request bytes, length); onion_request_get_fullpath/get_query/get_header/get_flags access parsed fields",
-    "family": "libonion C HTTP/1 request state machine in request_parser.c, independent from llhttp and PicoHTTPParser",
-    "scope": "HTTP/1.1 GET request method, path, query value, version and Host header from local byte buffer",
-    "adapter": "adapters/c/http11/libonion.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium", "version": "1.1", "host": "example.test", "query_x": "1"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "host": "example.test"
+    }
   },
   {
     "name": "libsoup",
@@ -153,7 +96,12 @@
     "scope": "HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer",
     "adapter": "adapters/c/http11/libsoup.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1", "host": "example.test"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1",
+      "host": "example.test"
+    }
   },
   {
     "name": "serf",
@@ -166,20 +114,13 @@
     "scope": "HTTP/1.1 response status, reason, Content-Type, Content-Length and body from local byte buffer",
     "adapter": "adapters/c/http11/serf.c",
     "control": "controls/http11/response_serf.http",
-    "expected_output": {"version": "1.1", "status": 200, "reason": "OK", "content_type": "text/plain", "body": "OK"}
-  },
-  {
-    "name": "facil-cstl",
-    "version": "0.8.5",
-    "license": "MIT",
-    "license_evidence": "Pinned release root LICENSE",
-    "documentation": "https://github.com/facil-io/cstl/blob/0.8.5/fio-stl/004%20http1%20parser.md",
-    "input_api": "fio_http1_parse(fio_http1_parser_s *, local writable request bytes as fio_buf_info_s, callback state); method, URL, version, header and completion callbacks",
-    "family": "facil.io C STL 0.8 HTTP/1.x parser in 004 http1 parser.h; successor family to the separate facil.io 0.7 distribution and API, independent from llhttp and PicoHTTPParser",
-    "scope": "HTTP/1.1 GET request method, target, version and Host header after complete local-byte parse",
-    "adapter": "adapters/c/http11/facil_cstl.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "HTTP/1.1", "host": "example.test"}
+    "expected_output": {
+      "version": "1.1",
+      "status": 200,
+      "reason": "OK",
+      "content_type": "text/plain",
+      "body": "OK"
+    }
   },
   {
     "name": "facil-legacy",
@@ -192,7 +133,13 @@
     "scope": "HTTP/1.1 GET request method, path, query, version and Host header after complete local-byte parse",
     "adapter": "adapters/c/http11/facil_legacy.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium", "query": "x=1", "version": "HTTP/1.1", "host": "example.test"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium",
+      "query": "x=1",
+      "version": "HTTP/1.1",
+      "host": "example.test"
+    }
   },
   {
     "name": "libhv",
@@ -205,20 +152,11 @@
     "scope": "HTTP/1.1 GET request method, target and version after complete header parse from local bytes",
     "adapter": "adapters/c/http11/libhv.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
-    "name": "libparsehttp",
-    "version": "0.06",
-    "license": "GPL-2.0-or-later",
-    "license_evidence": "Pinned release README explicitly says GPL v2 or later; src/libparsehttp/LICENSE carries GPL v2 text",
-    "documentation": "https://github.com/clintwebb/libparsehttp/blob/v0.06/src/libparsehttp/parsehttp.h",
-    "input_api": "parse_init; parse_process(parsehttp_t *, local request bytes, length); registered callbacks report method, path, query, version, Host and completion",
-    "family": "libparsehttp 0.06 standalone C HTTP request line/header scanner; separate implementation from Node http-parser and llhttp",
-    "scope": "HTTP/1.1 GET request method, path, query, version and Host from local byte buffer",
-    "adapter": "adapters/c/http11/libparsehttp.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium", "query": "x=1", "version": "HTTP/1.1", "host": "example.test"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1"
+    }
   },
   {
     "name": "h2o",
@@ -231,32 +169,10 @@
     "scope": "HTTP/1.1 GET request method, target, version and headers from local byte buffer via H2O-bundled parser",
     "adapter": "adapters/c/http11/h2o_picohttpparser.c",
     "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
-  },
-  {
-    "name": "finwo-http-parser",
-    "version": "stable@3d78ef3ad068",
-    "license": "MIT",
-    "license_evidence": "Stable-tag commit source root LICENSE",
-    "documentation": "https://github.com/finwo/http-parser.c/blob/3d78ef3ad068696b0d3f5b9bc672771a89805a5f/README.md",
-    "input_api": "http_parser_request_init; http_parser_request_data(request, local struct buf of saved bytes); request ready flag, method/path/query/version fields and http_parser_header_get",
-    "family": "finwo/http-parser.c independent C request/header/body parser; not the Node http-parser family despite similar name",
-    "scope": "HTTP/1.1 GET request method, path, query, version and Host from local byte buffer",
-    "adapter": "adapters/c/http11/finwo_http_parser.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium", "query": "x=1", "version": "1.1", "host": "example.test"}
-  },
-  {
-    "name": "samsung-http-parser",
-    "version": "2.5.0",
-    "license": "MIT",
-    "license_evidence": "Pinned tagged fork LICENSE-MIT",
-    "documentation": "https://github.com/Samsung/http-parser/blob/v2.5.0/README.md",
-    "input_api": "http_parser_init(HTTP_REQUEST); http_parser_execute(parser, callbacks, local request bytes, length); on_url and on_headers_complete callbacks",
-    "family": "Samsung tagged fork of the Node/Joyent http-parser C engine; separate 2.5.0 source distribution, shared parser family with nodejs/http-parser 2.9.4 and libhv-bundled 2.9.1, not an independent decoder",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse from local bytes",
-    "adapter": "adapters/c/http11/samsung_http_parser.c",
-    "control": "controls/http11/request.http",
-    "expected_output": {"method": "GET", "path": "/parsarium?x=1", "version": "1.1"}
+    "expected_output": {
+      "method": "GET",
+      "path": "/parsarium?x=1",
+      "version": "1.1"
+    }
   }
 ]

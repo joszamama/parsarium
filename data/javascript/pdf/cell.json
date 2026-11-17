@@ -1,20 +1,27 @@
 {
   "ecosystem": "javascript",
   "format": "pdf",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 22,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
-  "search_queries": ["pdf", "pdf parser", "pdf reader", "pdf text extract"],
+  "search_queries": [
+    "pdf",
+    "pdf parser",
+    "pdf reader",
+    "pdf text extract"
+  ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 400,
   "unique_search_hits": 347,
   "unresolved_documentation_leads": 12,
-  "uncertainty": "Four npm queries each returned tens of thousands of matches; only the first 100 per query were saved, yielding 347 unique names. These hits were not all investigated. Twelve named leads remain unresolved, including high-download viewer wrappers and packages whose local parser backend or control result has not been pinned. Other qualified packages may exist outside these query windows. Several verified wrappers share PDF.js, so 22 package names do not mean 22 independent parsing engines. The one-page text control does not establish coverage of other PDF features or revisions.",
+  "uncertainty": "10 of 22 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/javascript/pdf/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/javascript/pdf/parsers.json",
   "third_party_control_results": "data/javascript/pdf/verification.json",
   "runtime_evidence": "data/javascript/pdf/standard.json",
   "registry_snapshot": "data/javascript/pdf/registry-snapshot.json",
-  "unresolved_leads": "data/javascript/pdf/leads.json"
+  "unresolved_leads": "data/javascript/pdf/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/javascript/pdf"
 }

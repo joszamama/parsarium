@@ -22,6 +22,11 @@
 
 Native C++ HTTP request reader in Poco.Net; distinct from Boost.Beast.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/cpp/poco/README.md)
+
+```sh
+python3 parsarium.py build http11 cpp poco
+python3 parsarium.py run http11 cpp poco controls/http11/request.http
+```

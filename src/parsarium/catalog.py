@@ -19,8 +19,6 @@ from pathlib import Path
 
 from .snapshot import home
 
-FORMATS = ("png", "zip", "mp4", "wav", "pdf", "svg", "http11",
-           "ascii_ply", "ascii_pnm", "mp3_id3v2")
 ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
 
 
@@ -48,6 +46,11 @@ def _runnable_check(root: Path):
     return fully_runnable
 
 
+def _formats(root: Path) -> tuple[str, ...]:
+    """Read available format names from this version's pinned catalog."""
+    return tuple(sorted({path.parent.name for path in (root / "data").glob("*/*/cell.json")}))
+
+
 @lru_cache(maxsize=4)
 def _load(root: Path) -> tuple[Target, ...]:
     fully_runnable = _runnable_check(root)
@@ -56,6 +59,9 @@ def _load(root: Path) -> tuple[Target, ...]:
         manifest = json.loads(path.read_text())
         if not fully_runnable(path, manifest):
             continue
+        release = manifest.get("release") or manifest.get("runtime")
+        if not release:
+            raise ValueError(f"runnable target has no release or runtime: {path}")
         family = manifest.get("runtime")
         input_api = manifest.get("api")
         if manifest.get("catalog_parser"):
@@ -67,7 +73,7 @@ def _load(root: Path) -> tuple[Target, ...]:
         fmt, eco, slug = path.parent.relative_to(root / "projects").parts
         found.append(Target(
             id=f"{fmt}/{eco}/{slug}", format=fmt, ecosystem=eco, slug=slug,
-            package=manifest["package"], release=manifest["release"],
+            package=manifest["package"], release=release,
             kind=manifest.get("kind", "third_party"), family=family, input_api=input_api,
             control=manifest["control"], expected_output=manifest.get("expected_output", {}),
             path=path.parent))
@@ -76,11 +82,13 @@ def _load(root: Path) -> tuple[Target, ...]:
 
 def targets(format: str | None = None, ecosystem: str | None = None) -> list[Target]:
     """Runnable targets, optionally filtered by format and language."""
-    if format and format not in FORMATS:
-        raise ValueError(f"unknown format {format!r}; choose from {', '.join(FORMATS)}")
+    root = home()
+    formats = _formats(root)
+    if format and format not in formats:
+        raise ValueError(f"unknown format {format!r}; choose from {', '.join(formats)}")
     if ecosystem and ecosystem not in ECOSYSTEMS:
         raise ValueError(f"unknown ecosystem {ecosystem!r}; choose from {', '.join(ECOSYSTEMS)}")
-    return [t for t in _load(home())
+    return [t for t in _load(root)
             if (not format or t.format == format) and (not ecosystem or t.ecosystem == ecosystem)]
 
 

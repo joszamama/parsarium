@@ -17,6 +17,7 @@ import tempfile
 from run_case import ROOT, image_for, project_for
 from run_corpus_batch import run_batch
 from binary_feedback import check_binary_feedback
+from audit_projects import lwjgl_assimp_native_feedback_verified
 
 
 MANAGED = {"go", "java", "javascript", "python", "php"}
@@ -39,7 +40,19 @@ def check_one(path: Path) -> dict:
         corpus.mkdir()
         control = ROOT / manifest["control"]
         shutil.copyfile(control, corpus / manifest["control_sha256"])
-        if binary:
+        if str(relative) == "ascii_ply/java/lwjgl_assimp":
+            overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+            record = json.loads(overlay.read_text())
+            if (record.get("pass") is not True
+                    or record.get("base_project_receipt_sha256") !=
+                        sha256((project / "verification.json").read_bytes()).hexdigest()
+                    or record.get("control_sha256") != manifest["control_sha256"]
+                    or not lwjgl_assimp_native_feedback_verified(path, manifest, record)):
+                raise RuntimeError("native Assimp PLY feedback is not current")
+            _, image_id = image_for(project, manifest)
+            feedback = {"kind": record["feedback_kind"],
+                        "value": record["parser_source_features"]}
+        elif binary:
             overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
             record = json.loads(overlay.read_text())
             if (record.get("pass") is not True
@@ -53,7 +66,8 @@ def check_one(path: Path) -> dict:
             feedback = {"kind": "underlying_shared_library_binary_edges",
                         "value": record["feedback_edges"]}
         elif (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
-                and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint"))):
+                and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")
+                     or manifest.get("native_campaign_supported") is False)):
             _, image_id = image_for(project, manifest)
             overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
             record = json.loads(overlay.read_text())
@@ -64,6 +78,18 @@ def check_one(path: Path) -> dict:
             feedback = {"kind": ("php_parser_source_lines_to_afl_bitmap"
                                  if record.get("feedback_kind") == "php_parser_source_lines_to_afl_bitmap"
                                  else "native_php_parser_afl_feedback_edges"),
+                        "value": record["feedback_edges"]}
+        elif (ecosystem == "python" and manifest.get("native_campaign_supported") is False
+              and manifest.get("afl_llvm_module_glob")):
+            _, image_id = image_for(project, manifest)
+            overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+            record = json.loads(overlay.read_text())
+            if (record.get("pass") is not True or record.get("feedback_edges", 0) <= 0
+                    or record.get("feedback_kind") != "llvm_native_parser_regions_to_afl_bitmap"
+                    or record.get("base_project_receipt_sha256") !=
+                    sha256((project / "verification.json").read_bytes()).hexdigest()):
+                raise RuntimeError("native Python parser AFL++ feedback is not current")
+            feedback = {"kind": "llvm_native_parser_afl_feedback_edges",
                         "value": record["feedback_edges"]}
         elif ecosystem == "php":
             report = scratch / "report"

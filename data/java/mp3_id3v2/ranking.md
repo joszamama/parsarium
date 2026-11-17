@@ -1,28 +1,22 @@
-# Java × MP3 with ID3v2: verified parser ranking
+# JAVA × MP3 with ID3v2: selected parsers
 
-20 verified third-party Maven package paths; working goal 20, original ceiling 30. The metric is deps.dev's version-level public direct dependent count, captured at 2026-11-12T14:47:39.676253+00:00. This is a known-public-dependents proxy for adoption of each exact release, not downloads; coverage and version age may bias it. It is compared only within Java. 0 package(s) lack a metric and remain unranked.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits, unresolved leads, and JDK APIs are separate from this ranking. See `cell.json`, `leads.json`, `standard.json`, and `verification.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Direct dependents | Scope | Underlying family |
+deps.dev version-level directDependentCount.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | org.jcodec:jcodec:0.2.5 | 44 | first MP3 audio frame codec, byte length and timescale from local tagged MP3 | JCodec native MPEG audio demuxer |
-| 2 | [mp3spi](https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar) | com.googlecode.soundlibs:mp3spi:1.9.5.4 | 38 | local tagged MP3 type, ID3v2 title, artist, album and tag version | soundlibs MP3SPI Java Sound provider over its JLayer fork |
-| 3 | [jlayer](https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1-javadoc.jar) | javazoom:jlayer:1.0.1 | 33 | local tagged MP3 frame frequency and layer, plus ID3v2 presence | JLayer native MP3 frame decoder with raw ID3v2 access |
-| 4 | [bytedeco-ffmpeg](https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar) | org.bytedeco:ffmpeg:8.1.2-1.5.14 | 9 | local tagged MP3 format, sample rate and channels | Bytedeco binding to the same FFmpeg MP3 demuxer used by JavaCV |
-| 5 | [jaudiotagger](https://www.jthink.net/jaudiotagger/examples_id3.jsp) | net.jthink:jaudiotagger:3.0.1 | 7 | local MP3 identification and ID3v2 title, artist and album | jaudiotagger native MP3 and ID3v2 reader |
-| 6 | [javacv](https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar) | org.bytedeco:javacv:1.5.14 | 4 | local tagged MP3 format, codec, sample rate and channels | JavaCV wrapper over FFmpeg MP3 demuxer |
-| 6 | [javamp3](https://github.com/delthas/JavaMP3) | fr.delthas:javamp3:1.0.1 | 4 | 44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes | JavaMP3 native MPEG audio decoder |
-| 6 | [mp3agic](https://github.com/mpatric/mp3agic/blob/master/readme.md) | com.mpatric:mp3agic:0.9.1 | 4 | local MP3 frames and ID3v2 title, artist, album and API tag version | mp3agic native MP3 frame and ID3v2 reader |
-| 9 | [jaffree](https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-sources.jar) | com.github.kokorin.jaffree:jaffree:2024.08.29 | 2 | local tagged MP3 codec, sample rate, title and artist | Jaffree wrapper over local FFprobe/FFmpeg |
-| 9 | [jave-core](https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-sources.jar) | ws.schild:jave-core:4.2.0 | 2 | local tagged MP3 format, codec, sample rate and channels | JAVE2 wrapper over bundled FFmpeg MP3 demuxer |
-| 11 | [tika-audiovideo](https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-sources.jar) | org.apache.tika:tika-parser-audiovideo-module:4.2.0 | 1 | local tagged MP3 title, artist and album metadata | Apache Tika native MP3 and ID3v2 parser |
-| 12 | [bramp-ffmpeg](https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar) | net.bramp.ffmpeg:ffmpeg:0.9.2 | 0 | local tagged MP3 format, codec, sample rate, channels and title | bramp FFprobe CLI wrapper over FFmpeg |
-| 12 | [codecmedia](https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar) | me.tamkungz.codecmedia:codecmedia:1.2.2 | 0 | local tagged MP3 codec, sample rate and channels | CodecMedia native MP3 frame parser |
-| 12 | [imagic-ffmpeg-java](https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar) | ch.imagic:ffmpeg-java:0.1.2 | 0 | local tagged MP3 format, codec, sample rate, channels and title | Imagic fork of bramp FFprobe CLI wrapper over FFmpeg |
-| 12 | [jid3lib](https://github.com/ericfarng/jid3lib) | net.sf.javamusictag:jid3lib:0.5.4 | 0 | local tagged MP3 title, artist and album | jid3lib native ID3v2 tag parser; historical ancestry shared with jaudiotagger and mp3agic |
-| 12 | [mediainfo-jna-wrapper](https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar) | com.amilesend:mediainfo-jna-wrapper:2.1.9 | 0 | local 72,941-byte tagged MP3 format, sample rate, channels and title | amilesend JNA binding to libmediainfo |
-| 12 | [taglib-java](https://repo.maven.apache.org/maven2/cz/skyba/taglib/1.0.0/taglib-1.0.0-sources.jar) | cz.skyba:taglib:1.0.0 | 0 | local tagged MP3 title, artist, album and sample rate | TagLib Java adaptation with native Java MPEG and ID3v2 implementation |
-| 12 | [tianscar-mp3spi](https://repo.maven.apache.org/maven2/com/tianscar/javasound/javasound-mp3/1.9.8/javasound-mp3-1.9.8-sources.jar) | com.tianscar.javasound:javasound-mp3:1.9.8 | 0 | local tagged MP3 type, ID3v2 title, artist, album and tag version | Tianscar fork of JavaZOOM MP3SPI over JLayer and Tritonus |
-| 12 | [v47-jaffree](https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar) | io.v47.jaffree:jaffree:2.1.0 | 0 | local tagged MP3 codec, sample rate, channels and title | v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg |
-| 12 | [vlcj-info](https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar) | uk.co.caprica:vlcj-info:2.0.3 | 0 | local tagged MP3 format, sample rate, channels and title | vlcj-info JNA binding to libmediainfo |
+| 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 44 | first MP3 audio frame codec, byte length and timescale from local tagged MP3 | JCodec native MPEG audio demuxer |
+| 2 | [mp3spi](https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar) | 1.9.5.4 | 38 | local tagged MP3 type, ID3v2 title, artist, album and tag version | soundlibs MP3SPI Java Sound provider over its JLayer fork |
+| 3 | [jlayer](https://repo.maven.apache.org/maven2/javazoom/jlayer/1.0.1/jlayer-1.0.1-javadoc.jar) | 1.0.1 | 33 | local tagged MP3 frame frequency and layer, plus ID3v2 presence | JLayer native MP3 frame decoder with raw ID3v2 access |
+| 4 | [bytedeco-ffmpeg](https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar) | 8.1.2-1.5.14 | 9 | local tagged MP3 format, sample rate and channels | Bytedeco binding to the same FFmpeg MP3 demuxer used by JavaCV |
+| 5 | [jaudiotagger](https://www.jthink.net/jaudiotagger/examples_id3.jsp) | 3.0.1 | 7 | local MP3 identification and ID3v2 title, artist and album | jaudiotagger native MP3 and ID3v2 reader |
+| 6 | [javacv](https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar) | 1.5.14 | 4 | local tagged MP3 format, codec, sample rate and channels | JavaCV wrapper over FFmpeg MP3 demuxer |
+| 7 | [javamp3](https://github.com/delthas/JavaMP3) | 1.0.1 | 4 | 44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes | JavaMP3 native MPEG audio decoder |
+| 8 | [mp3agic](https://github.com/mpatric/mp3agic/blob/master/readme.md) | 0.9.1 | 4 | local MP3 frames and ID3v2 title, artist, album and API tag version | mp3agic native MP3 frame and ID3v2 reader |
+| 9 | [jaffree](https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-sources.jar) | 2024.08.29 | 2 | local tagged MP3 codec, sample rate, title and artist | Jaffree wrapper over local FFprobe/FFmpeg |
+| 10 | [jave-core](https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-sources.jar) | 4.2.0 | 2 | local tagged MP3 format, codec, sample rate and channels | JAVE2 wrapper over bundled FFmpeg MP3 demuxer |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

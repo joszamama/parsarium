@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T11:58:26.987182+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
+  "differential_kind": "fixed_valid_22k_stereo_control",
+  "standard_feedback": "none: Node.js documents no MPEG audio parser API",
+  "results": [
+    {
+      "project": "mp3/javascript/mediabunny",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "de57d39ab79857eb7e72705f4db763653b0d1cb96278a96d2dd357026fee8325",
+      "base_image_id": "sha256:3ec14b2b6bbe3fe1b36af17ad7c2b81172a9279e1d78fd7745c268c59c5d0da8",
+      "overlay_image_id": "sha256:8d85e82c7953d0af4e55ecb187fd9e65a5af0dc9b47611c9c6d3b0559a2cc55e",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "differential": "controls/mp3/tone-22k-stereo.mp3",
+      "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "differential_output": {
+        "format": "MP3",
+        "codec": "mp3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "frame_bytes": 1254,
+        "samples_per_channel": 6912
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 335,
+      "control_afl_tuples": 352,
+      "differential_parser_features": 336,
+      "differential_afl_tuples": 353,
+      "parser_feature_difference": 3,
+      "afl_tuple_difference": 3,
+      "control_only_features_by_file": {
+        "shared/mp3-misc.js": 1
+      },
+      "differential_only_features_by_file": {
+        "shared/mp3-misc.js": 2
+      }
+    },
+    {
+      "project": "mp3/javascript/music_metadata",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "847ce3b062a1f78c160b9dbb6d60ae0347cae389b8cdac401c29851dc7d9c337",
+      "base_image_id": "sha256:6bfa43b08fc43f60ce6f3594dae3d13ad844a20ed037fbfd545f679796f68f0d",
+      "overlay_image_id": "sha256:29e7ab81d8db539954509defb5c29d525908bd95539ca8302dbdfb807484809a",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "differential": "controls/mp3/tone-22k-stereo.mp3",
+      "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "differential_output": {
+        "container": "MPEG",
+        "codec": "MPEG 2 Layer 3",
+        "mpeg_version": 2,
+        "layer": 3,
+        "codec_profile": "CBR",
+        "sample_rate": 22050,
+        "channels": 2,
+        "bitrate": 32000,
+        "number_of_samples": 6912,
+        "duration": 0.313469387755102,
+        "tag_types": [],
+        "warnings": 0
+      },
+      "control_walker": {
+        "walker_output": {
+          "sample_rate": 44100,
+          "channels": 1,
+          "frames": 11,
+          "frame_bytes": 2298,
+          "samples_per_frame": 1152,
+          "bitrate": 64000
+        },
+        "compared_fields": [
+          "bitrate",
+          "channels",
+          "duration",
+          "layer",
+          "mpeg_version",
+          "number_of_samples",
+          "sample_rate"
+        ],
+        "header_oracle": {
+          "mpeg_version": 1,
+          "layer": 3,
+          "number_of_samples": 12672,
+          "duration": 0.2873469387755102
+        }
+      },
+      "differential_walker": {
+        "walker_output": {
+          "sample_rate": 22050,
+          "channels": 2,
+          "frames": 12,
+          "frame_bytes": 1254,
+          "samples_per_frame": 576,
+          "bitrate": 32000
+        },
+        "compared_fields": [
+          "bitrate",
+          "channels",
+          "duration",
+          "layer",
+          "mpeg_version",
+          "number_of_samples",
+          "sample_rate"
+        ],
+        "header_oracle": {
+          "mpeg_version": 2,
+          "layer": 3,
+          "number_of_samples": 6912,
+          "duration": 0.313469387755102
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 54,
+      "control_afl_tuples": 74,
+      "differential_parser_features": 58,
+      "differential_afl_tuples": 78,
+      "parser_feature_difference": 4,
+      "afl_tuple_difference": 4,
+      "control_only_features_by_file": {},
+      "differential_only_features_by_file": {
+        "MpegParser.js": 4
+      },
+      "control_features_by_file": {
+        "AdtsFrameHeader.js": 3,
+        "ExtendedLameHeader.js": 1,
+        "MpegFrameHeader.js": 6,
+        "MpegLoader.js": 2,
+        "MpegParser.js": 40,
+        "ReplayGainDataFormat.js": 1,
+        "XingTag.js": 1
+      },
+      "control_only_features": [],
+      "differential_only_features": [
+        "MpegParser.js:5786-5824",
+        "MpegParser.js:5825-5856",
+        "MpegParser.js:6587-6662",
+        "MpegParser.js:6663-6718"
+      ],
+      "documented_api_agreement": {
+        "tone-44k-mono.mp3": [
+          "parseBuffer",
+          "parseFile",
+          "parseStream"
+        ],
+        "tone-22k-stereo.mp3": [
+          "parseBuffer",
+          "parseFile",
+          "parseStream"
+        ]
+      }
+    },
+    {
+      "project": "mp3/javascript/codec_parser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "9148ee798b7a7e2e473b37d9dcfd1ffaa3e3394f4fcb223c26d1720773617c97",
+      "base_image_id": "sha256:0318882f949912485b3d28eceeeb75e6886a303ae4c3829c68eb1f2be527775a",
+      "overlay_image_id": "sha256:e55ab23b61bb7170bc9014384cfe8c99f9e02b82d2fbc07cc472dc3871db62a7",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "differential": "controls/mp3/tone-22k-stereo.mp3",
+      "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "differential_output": {
+        "codec": "mpeg",
+        "layer": "Layer III",
+        "sample_rate": 22050,
+        "channels": 2,
+        "bitrate": 32000,
+        "frames": 12,
+        "frame_bytes": 1254,
+        "samples_per_frame": 576,
+        "total_samples": 6912,
+        "header_variants": 1
+      },
+      "control_walker": {
+        "walker_output": {
+          "sample_rate": 44100,
+          "channels": 1,
+          "frames": 11,
+          "frame_bytes": 2298,
+          "samples_per_frame": 1152,
+          "bitrate": 64000
+        },
+        "compared_fields": [
+          "bitrate",
+          "channels",
+          "frame_bytes",
+          "frames",
+          "sample_rate",
+          "samples_per_frame"
+        ]
+      },
+      "differential_walker": {
+        "walker_output": {
+          "sample_rate": 22050,
+          "channels": 2,
+          "frames": 12,
+          "frame_bytes": 1254,
+          "samples_per_frame": 576,
+          "bitrate": 32000
+        },
+        "compared_fields": [
+          "bitrate",
+          "channels",
+          "frame_bytes",
+          "frames",
+          "sample_rate",
+          "samples_per_frame"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 124,
+      "control_afl_tuples": 144,
+      "differential_parser_features": 125,
+      "differential_afl_tuples": 145,
+      "parser_feature_difference": 1,
+      "afl_tuple_difference": 1,
+      "control_only_features_by_file": {},
+      "differential_only_features_by_file": {
+        "src/codecs/HeaderCache.js": 1
+      }
+    }
+  ],
+  "refreshed_projects": [
+    "codec_parser",
+    "music_metadata"
+  ],
+  "retained_prior_results_checked_at_utc": "2026-11-17T03:43:23.523610+00:00"
+}

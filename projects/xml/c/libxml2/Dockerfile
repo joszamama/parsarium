@@ -1,0 +1,21 @@
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certificates clang curl libclang-rt-21-dev llvm make pkg-config python3 xz-utils \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.4.tar.xz -o /work/source.tar.xz \
+ && echo '98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821  /work/source.tar.xz' | sha256sum --check \
+ && mkdir /work/source && tar -xJf /work/source.tar.xz -C /work/source --strip-components=1
+COPY harness.c harness.h replay.c build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+ && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+RUN apt-get update -qq && apt-get install -y --no-install-recommends llvm python3 libstdc++6 \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/source /work/source
+COPY --from=build /work/install /work/install
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

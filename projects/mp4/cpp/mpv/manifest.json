@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "cpp",
+  "package": "mpv",
+  "release": "0.42.0",
+  "api": "mpv_create; mpv_initialize; mpv_command(loadfile, local MP4 path); mpv_wait_event(MPV_EVENT_FILE_LOADED); mpv_get_property_string(file-format, metadata/by-key/title, track-list/N/type and codec); mpv_get_property(track-list/count), called from a C++17 translation unit",
+  "catalog_parser": "data/cpp/mp4/parsers.json",
+  "source_lock": "data/cpp/mp4/source-lock.json",
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "wrapper_source_member": "demux/demux_lavf.c",
+  "wrapper_source_member_sha256": "9fbd9b274b341e272eedce7b6480e809b21d5d5aef080846d3c33d0817200f18",
+  "underlying_package": "ffmpeg",
+  "underlying_release": "9.0.2",
+  "underlying_source": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+  "underlying_source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+  "underlying_source_lock": "data/c/mp4/source-lock.json",
+  "underlying_parser_source_member": "libavformat/mov.c",
+  "underlying_parser_source_sha256": "533674687505d25db7176cf876036f600e6d8cb25079ffa6b28b4a8e8266eae1",
+  "build_dependencies": [
+    {
+      "package": "libplacebo",
+      "release": "7.387.0",
+      "source": "https://github.com/haasn/libplacebo/archive/refs/tags/v7.387.0.tar.gz",
+      "source_sha256": "f9e62d3774a9c4cfd198ec3abaa88294aaade2e31c04d5ab02bcf4abc98b1df5",
+      "role": "required by mpv 0.42.0 (>= 7.387.0); renderer only, not called by the null video output"
+    },
+    {
+      "package": "libass",
+      "release": "Ubuntu archive",
+      "role": "required by mpv; subtitle renderer, not instrumented"
+    }
+  ],
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "title": "Parsarium",
+    "video_codec": "h264",
+    "audio_codec": "aac"
+  },
+  "valid_variant": "valid-3s.mp4",
+  "valid_variant_source": "controls/mp4/red-av-3s.mp4",
+  "valid_variant_sha256": "a153daff81e38744da7a653d44a4f381b7f4768d6f4148a00391b440af5ef308",
+  "valid_variant_expected_output": {
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "title": "",
+    "video_codec": "h264",
+    "audio_codec": "aac"
+  },
+  "harness": "harness.cpp",
+  "language_standard": "c++17",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_file_input": true,
+  "coverage": "LLVM source coverage in the pinned mpv 0.42.0 demuxer layer (demux/demux_lavf.c) and the FFmpeg 9.0.2 libavformat sources it calls (mov.c box parser), built from source with the same instrumentation and linked into a C++17 byte-input harness that loads a local file through libmpv's loadfile command",
+  "coverage_subject_prefix": "/work/source/demux/",
+  "format_specific_coverage_file_suffix": "/demux_lavf.c",
+  "underlying_coverage_subject_prefix": "/work/ffmpeg/libavformat/",
+  "underlying_format_specific_coverage_file_suffix": "/mov.c",
+  "family": "libmpv over FFmpeg MOV/MP4 demuxer",
+  "parser_family": "FFmpeg 9.0.2 MOV/MP4 demuxer (libavformat/mov.c) behind libmpv 0.42.0 demux/demux_lavf.c. FFmpeg is configured with mov as its only demuxer, so no other FFmpeg demuxer can claim the input",
+  "shared_parser_family": "FFmpeg 9.0.2 MOV/MP4 demuxer (libavformat/mov.c) behind libmpv 0.42.0 demux/demux_lavf.c",
+  "shared_parser_family_projects": [
+    "projects/mp4/c/mpv",
+    "projects/mp4/c/ffmpeg",
+    "projects/mp4/cpp/ffmpeg"
+  ],
+  "shared_parser_family_note": "Same pinned mpv, FFmpeg and libplacebo archives, configure options and static libmpv build as projects/mp4/c/mpv; only the call site differs (C++17 with RAII ownership). The FFmpeg rows parse with the same mov.c release directly, without libmpv. This is not an independent parser."
+}

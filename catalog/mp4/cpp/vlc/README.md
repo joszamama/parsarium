@@ -22,6 +22,11 @@
 
 C and C++ call sites share libVLC and its bundled MP4 demuxer; exact plugin selection during this run was not independently traced.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/cpp/vlc/README.md)
+
+```sh
+python3 parsarium.py build mp4 cpp vlc
+python3 parsarium.py run mp4 cpp vlc controls/mp4/red-av.mp4
+```

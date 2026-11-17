@@ -73,7 +73,8 @@ def main() -> int:
     if args.list:
         print(f"{len(selected)} verified Docker targets for {args.format}")
         for path, manifest in selected:
-            print(f"{manifest['ecosystem']}/{path.parent.name}: {manifest['package']} ({manifest['release']})")
+            print(f"{manifest['ecosystem']}/{path.parent.name}: {manifest['package']} "
+                  f"({manifest.get('release', manifest.get('runtime'))})")
         return 0
     if args.results is None:
         parser.error("--results DIR is required when running targets")

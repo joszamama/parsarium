@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "ascii_pnm",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "pnm",
@@ -20,10 +20,12 @@
   "search_hits_recorded": 242,
   "unique_search_hits": 239,
   "unresolved_documentation_leads": 2,
-  "uncertainty": "Twenty pinned, open-source third-party package paths with documented local input APIs passed the valid ASCII P3 control. Six paths use libvips, thirteen use ImageMagick through PECL Imagick or CLI wrappers, and one uses FFmpeg. These are package paths across three decoder families, not twenty independent engines. Eight bounded Packagist searches saved 242 hits and 239 distinct package names; vips and imagick stopped at 100 results each, leaving uninspected tails. A separate documented FFProbe lead was verified. Two plausible documentation leads remain unresolved. Four image wrappers were excluded after failed P3 probes, including tile generators whose metadata path relies on PHP getimagesize. PHP 8.5 core and bundled GD had no documented PNM reader; three candidate APIs returned false on the control. The numerical 20-path goal is met, but the search is incomplete and does not establish a definitive most-used top twenty. The control proves only the P3 variant, not all ASCII PNM variants. Packagist lifetime downloads rank Composer package adoption within PHP only and include uses unrelated to PNM. PECL Imagick has no comparable Packagist metric and remains unranked.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/php/ascii_pnm/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/php/ascii_pnm/parsers.json",
   "third_party_control_results": "data/php/ascii_pnm/verification.json",
   "runtime_evidence": "data/php/ascii_pnm/standard.json",
   "registry_snapshot": "data/php/ascii_pnm/registry-snapshot.json",
-  "unresolved_leads": "data/php/ascii_pnm/leads.json"
+  "unresolved_leads": "data/php/ascii_pnm/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/php/ascii_pnm"
 }

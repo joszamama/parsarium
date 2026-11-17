@@ -1,0 +1,34 @@
+{
+  "ecosystem": "C++",
+  "format": "XML",
+  "status": "no_standard_api_found",
+  "verified_apis": [],
+  "unverified_documented_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "ISO C++ standard library (current working draft as published at eel.is/c++draft, captured 2026-11-17)",
+      "finding": "The working-draft header table and the draft contents page contain no occurrence of 'xml'; cppreference's header index mentions 'xml' only in three HTML <link> MIME types (opensearchdescription+xml, rsd+xml, atom+xml), not in content. No ISO C++ standard-library API parses XML.",
+      "documentation": [
+        {
+          "url": "https://eel.is/c++draft/headers",
+          "sha256": "6056f7f9ec9622ff051b8d17e1b18b7b24929c765dc24522a6d9075e3471b929",
+          "xml_occurrences": 0
+        },
+        {
+          "url": "https://eel.is/c++draft/",
+          "sha256": "8156fc583ddeec0b31ef2df444ccb6e78be1b157b88a94d44b6ca3d52837296a",
+          "xml_occurrences": 0
+        },
+        {
+          "url": "https://en.cppreference.com/w/cpp/headers",
+          "sha256": "50996fb96dced3efe211ef3b8d72ccebf4bd5c7f0159df2d54d8dc022b0198cb",
+          "xml_occurrences": 3,
+          "xml_occurrences_note": "page-head MIME types only"
+        }
+      ],
+      "captured_at_utc": "2026-11-17T03:44:59+00:00",
+      "note": "Qt (QXmlStreamReader, QDomDocument), Boost.PropertyTree's RapidXML-based reader and POCO XML are framework components, not standard library, and are not ranked."
+    }
+  ],
+  "limit": "Negative finding from the working draft and cppreference header index on 2026-11-17. It does not cover compiler-vendor extensions or non-ISO platform SDKs."
+}

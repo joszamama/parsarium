@@ -30,6 +30,13 @@
 
 The C and C++ adapters use the same tagged resvg-capi source library. This is a distinct engine from librsvg, ImageMagick MSVG, and GraphicsMagick SVG-to-MVG; the two ecosystem paths are not independent from one another.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/resvg/README.md)
+
+```sh
+python3 parsarium.py build svg c resvg
+python3 parsarium.py run svg c resvg controls/svg/red-green.svg
+```
+
+**Coverage limit:** The AFL++ target uses one-shot /work/replay @@ because the selected C API parses a local file; parser-source feedback comes from usvg Rust code.

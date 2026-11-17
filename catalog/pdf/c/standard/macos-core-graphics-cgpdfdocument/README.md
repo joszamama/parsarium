@@ -18,6 +18,12 @@
 
 [Control adapter](../../../../../adapters/c/pdf/coregraphics.c)
 
-## Runnable harness
+## Run this macOS control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Host harness and control receipt](../../../../../projects/pdf/c/stdlib_coregraphics/README.md)
+
+```sh
+python3 projects/pdf/c/stdlib_coregraphics/verify-control.py
+```
+
+Core Graphics runs on macOS. Its parser source and AFL++ feedback are unavailable, so this path remains staged.

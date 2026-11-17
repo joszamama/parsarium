@@ -10,6 +10,7 @@ import sys
 import tempfile
 
 from run_case import ROOT, project_for
+from prepare_afl_run import uses_afl_file_input
 
 
 def check(relative: Path, scratch: Path) -> dict:
@@ -31,17 +32,22 @@ def check(relative: Path, scratch: Path) -> dict:
     assert plan["control_sha256"] == manifest["control_sha256"]
     assert plan["overlay_receipt_sha256"] == sha256(receipt_path.read_bytes()).hexdigest()
     php_native = (manifest["ecosystem"] == "php" and manifest.get("fuzz_engine") == "AFL++"
-                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")
+                       or manifest.get("native_campaign_supported") is False))
     if manifest.get("coverage_kind") == "native_binary_edges":
         expected_tail = ["--", "/opt/venv/bin/python", "/work/binary-run-once.py", "@@"]
     elif php_native:
         expected_tail = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                          else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
+    elif ((manifest["ecosystem"] == "go" and manifest.get("afl_native_cgo"))
+          or (manifest["ecosystem"] == "rust" and manifest.get("afl_native_c_binding"))):
+        expected_tail = ["--", manifest["afl_entrypoint"], "@@"]
     else:
         expected_tail = (["/work/afl_proxy", "@@"] if manifest["ecosystem"] in
                                       {"go", "java", "javascript", "python", "php"} else
-                                      ["--", "/work/afl_fuzzer", "@@"] if manifest["ecosystem"] == "rust" else
-                                      ["--", manifest.get("afl_entrypoint", "/work/fuzzer")])
+                                      ["--", "/work/afl_fuzzer"] if manifest["ecosystem"] == "rust" else
+                                      ["--", manifest.get("afl_entrypoint", "/work/fuzzer"),
+                                       *(["@@"] if uses_afl_file_input(manifest) else [])])
     assert plan["command"][-len(expected_tail):] == expected_tail
     return {"project": str(relative), "status": "ready",
             "image_id": plan["image_id"], "control_sha256": plan["control_sha256"],

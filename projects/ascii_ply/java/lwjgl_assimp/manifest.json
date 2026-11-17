@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "lwjgl-assimp",
+  "release": "3.4.3",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/java/lwjgl_assimp/source-lock.json",
+  "source_sha256": "178899579e85d3f89dc702ea36cf6f02d37c2c04b8708d39a2c5ed7876437f10",
+  "underlying_package": "assimp (LWJGL-CI/assimp)",
+  "underlying_release": "34f99dd81d93f2759d57c6c4dbfc85aa40a4b3d9",
+  "underlying_source_sha256": "1b662c12b96b34eea6def63ebbffe9a565d1c9a0e3ee5a87982fb5fae3fbb683",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/lwjgl-assimp-3.4.3.jar:/work/lib/lwjgl-3.4.3.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "fuzz_engine_feedback_scope": "Jazzer instruments JVM bytecode only; the native Assimp library carries LLVM profile counters, not SanitizerCoverage, so Jazzer receives no native parser feedback",
+  "coverage": "JaCoCo coverage of the LWJGL Assimp Java wrapper plus LLVM source coverage of Assimp's PLY importer, rebuilt from the revision named by lwjgl-assimp-3.4.3-natives-linux-arm64; the unmodified native artifact must return the same control result",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "underlying_coverage_subject_prefix": "/work/source/code/AssetLib/Ply/",
+  "underlying_format_specific_coverage_file_suffix": "/PlyLoader.cpp"
+}

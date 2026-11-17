@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "c",
+  "package": "librsvg",
+  "release": "2.63.4",
+  "catalog_parser": "data/c/svg/parsers.json",
+  "source_lock": "data/c/svg/source-lock.json",
+  "source_sha256": "31f07d9350dad3f8964fd613c31309ac160fdef13dfac59df6fd082de78d6e8f",
+  "dependency_lock": "Cargo.lock inside the pinned librsvg 2.63.4 archive (cargo fetch --locked)",
+  "rust_toolchain": "1.92.0",
+  "rust_toolchain_sha256": "3e383f8b4fca710d0600d0c1de97b78281672be2cda6575ecbe1c183a12e3822",
+  "cargo_c_release": "0.10.21+cargo-0.95.0",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0
+    ],
+    "second": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in librsvg's Rust SVG engine reached through the C API, including the SVG XML loader",
+  "coverage_subject_prefix": "/work/librsvg/rsvg/src/",
+  "format_specific_coverage_file_suffix": "/xml/xml2_load.rs"
+}

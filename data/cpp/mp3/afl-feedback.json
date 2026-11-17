@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:45:19.316678+00:00",
+  "project": "mp3/cpp/taglib",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_taglib_and_harness_edges",
+  "feedback_scope": "AFL++ instruments only the pinned TagLib 2.3.2 sources and the ByteVectorStream harness; no other library is compiled into /work/fuzzer.",
+  "base_project_receipt_sha256": "9e9119a144958e483b186f4f01faba1417cf554021a2bf8d8f4e764847a671f0",
+  "overlay_receipt_sha256": "e5b6552e966d8ff9068a6820511669000977cdf0f7642bec0850343fb19b7c2f",
+  "base_image_id": "sha256:03e4d05eaac1d756df7d4fde941d390ef49b02a6184acdb420b50eab5845fb8d",
+  "overlay_image_id": "sha256:e2e382a0d65fd9a31dc079bd3a6bb5f79ed1e5c3ab094370ed20c5de61526fb8",
+  "repeats_per_control": 2,
+  "repeated_controls_identical": true,
+  "first_control": "controls/mp3/tone-44k-mono.mp3",
+  "first_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "second_control": "controls/mp3/tone-22k-stereo.mp3",
+  "second_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "second_control_output": {
+    "version": 2,
+    "layer": 3,
+    "sample_rate": 22050,
+    "channels": 2,
+    "bitrate_kbps": 32,
+    "length_ms": 314
+  },
+  "second_case_kind": "valid_control",
+  "first_afl_tuples": 880,
+  "second_afl_tuples": 866,
+  "afl_tuple_difference": 30
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "native_feedback_unavailable",
+  "scope": "PySide6 6.12.0 QSvgRenderer loading valid local SVG controls",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "variant": "controls/svg/red-blue-path.svg",
+  "variant_sha256": "1e8cf1ba205fab4a46317b28a844ba0dcc8a0a96d9991cf9f1f4ac93a9501172",
+  "pyside6_wheel_sha256": "d13ed4d0053cc20f3e4e0fdbf12790a9b7f958d7e22c0843411ecfa8c799e2a9",
+  "qt_svg_source_release": "6.12.0",
+  "qt_svg_source_sha256": "e4ab39534ec97987b1b9b60ef7f4d3253d5912a69f8c713a01753174a4029331",
+  "source_context": "The separately built C++ QtSvg project instruments QtSvg 6.12.0 source. Its coverage and AFL map do not transfer to the PySide6 wheel's bundled QtSvg binary.",
+  "native_parser_source_lines_covered": null,
+  "afl_feedback_edges": null,
+  "repeat_variant_map_check": "not established for the pinned PySide6 native module",
+  "decision": "Keep PySide6 staged as a verified Docker control until parser-scoped native feedback is demonstrated for this exact module.",
+  "qtsvg_module_sha256": "ad54290bfb1929296b1662375d1902ad9810162051f51ff00bce3b2843bdbf2c",
+  "shared_native_binary": "The pinned PySide6 and PyQt6 linux/amd64 wheels contain byte-identical QtSvg 6.12.0 modules; prior PyQt6 QEMU/Frida valid-control failures are relevant but do not constitute a PySide6 feedback result.",
+  "linux_amd64_qemu_probe": {
+    "engine": "AFL++ 5.04a afl-showmap -Q",
+    "input": "controls/svg/red-green.svg (valid, 2 by 1)",
+    "module_preload": "/opt/venv/lib/python3.14/site-packages/PySide6/Qt/lib/libQt6Svg.so.6",
+    "timeout_ms": 15000,
+    "result": "Program timed off; one tuple reported; the target emitted no SVG result. The map is excluded from feedback claims."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "ecosystem": "java",
+  "format": "xml",
+  "status": "pilot_ten_selected_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
+  "verified_standard_or_runtime_count": 1,
+  "search_queries": [
+    "xml",
+    "xml parser",
+    "dom4j",
+    "jdom",
+    "xerces",
+    "stax"
+  ],
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 346,
+  "unique_search_hits": 345,
+  "unresolved_documentation_leads": 4,
+  "excluded_non_parser_leads": 4,
+  "uncertainty": "Ten third-party XML package paths are verified and runnable, reaching this cell's ceiling without padding: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, Aalto, XOM, XPP3, and kXML2. Xerces2-J, Woodstox, Aalto, XPP3, and kXML2 are five independent tokenizer/parser families. Jackson XML projects Woodstox StAX events into Jackson tokens; dom4j, XMLBeans, JDOM2, and XOM build distinct trees over the OpenJDK Xerces SAX fork. Each wrapper has own source coverage and stable parser-derived AFL++ feedback, while underlying parser coverage is reported separately. The standard javax.xml.parsers path is counted separately and shares the Xerces2-J family. Four documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior. kXML2 control and differential results are in its project-scoped receipt and the shared XML aggregates.",
+  "third_party_evidence": "data/java/xml/parsers.json",
+  "third_party_control_results": "data/java/xml/verification.json",
+  "runtime_evidence": "data/java/xml/standard.json",
+  "registry_snapshot": "data/java/xml/registry-snapshot.json",
+  "unresolved_leads": "data/java/xml/leads.json",
+  "protocol": "catalog/xml/PROTOCOL.md"
+}

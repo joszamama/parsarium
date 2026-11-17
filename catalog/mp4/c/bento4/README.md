@@ -23,6 +23,11 @@
 
 C and C++ call sites share Bento4 AP4 core and C binding; C++ adapter compiles the C binding call site as C++.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/c/bento4/README.md)
+
+```sh
+python3 parsarium.py build mp4 c bento4
+python3 parsarium.py run mp4 c bento4 controls/mp4/red-av.mp4
+```

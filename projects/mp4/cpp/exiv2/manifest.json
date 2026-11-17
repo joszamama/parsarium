@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "cpp",
+  "package": "exiv2",
+  "release": "0.28.9",
+  "catalog_parser": "data/cpp/mp4/parsers.json",
+  "source_lock": "projects/mp4/cpp/exiv2/source-lock.json",
+  "source_sha256": "700b76b97695b2fab4ef8c79619c68ae57d09e0c130724791cafbd39e0eb4aef",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "brand": "MP4 Base Media",
+    "width": 2,
+    "height": 2
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in pinned Exiv2 native QuickTime/MP4 parser and CPP byte-input harness",
+  "coverage_subject_prefix": "/work/exiv2-0.28.9/src/",
+  "format_specific_coverage_file_suffix": "/quicktimevideo.cpp",
+  "parser_family": "Exiv2 native QuickTime/MP4 metadata parser"
+}

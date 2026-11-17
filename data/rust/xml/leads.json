@@ -1,0 +1,194 @@
+{
+  "captured_from": "data/rust/xml/registry-snapshot.json",
+  "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
+  "unresolved_leads": [
+    {
+      "name": "RustyXML",
+      "version": "0.3.0",
+      "recent_downloads_90d": 4342774,
+      "status": "unresolved_feedback_nondeterministic",
+      "reason": "The public Parser::feed_str(&str) stream API yielded exact namespace-aware structure for both valid controls, with 285 pinned parser-source lines covered. Whole-binary AFL++ feedback varied across identical runs. A parser-crate-only sanitizer-coverage build still varied on the order control (621 edges once, 613 nine times); exact reproducible parser feedback was not established, so this lead is not selected.",
+      "source": "https://static.crates.io/crates/RustyXML/RustyXML-0.3.0.crate",
+      "audit": "data/rust/xml/rustyxml-feedback-audit.md",
+      "family_note": "RustyXML parser derives from ObjFW OFXMLParser according to the pinned src/parser.rs."
+    },
+    {
+      "name": "xml-no-std",
+      "version": "0.8.26",
+      "recent_downloads_90d": 1648161,
+      "status": "unresolved_shared_family",
+      "reason": "no_std fork of xml-rs; shared-family status needs checking.",
+      "source": "https://crates.io/crates/xml-no-std"
+    },
+    {
+      "name": "minidom",
+      "version": "0.19.0",
+      "recent_downloads_90d": 984597,
+      "status": "unresolved_shared_family",
+      "reason": "DOM built on rxml; not run. Its parsing would share the selected rxml family.",
+      "source": "https://crates.io/crates/minidom"
+    },
+    {
+      "name": "instant-xml",
+      "version": "0.7.7",
+      "recent_downloads_90d": 748214,
+      "status": "unresolved",
+      "reason": "Typed serde-style mapping to Rust structs; needs a generic element/attribute view to qualify under this cell's observable result.",
+      "source": "https://crates.io/crates/instant-xml"
+    },
+    {
+      "name": "sxd-document",
+      "version": "0.3.2",
+      "recent_downloads_90d": 647390,
+      "status": "unresolved_control_mismatch",
+      "reason": "The documented sxd_document::parser::parse(&str) API was run on both valid XML controls. On catalog-ns.xml, the prefixed root's simultaneous unprefixed default xmlns declaration is not retained in the DOM: unprefixed item/name/note descendants have no namespace URI instead of urn:parsarium:item. The crate's finish_opening_tag processes a default xmlns only in the unprefixed-element branch; the prefixed-element branch does not register it. A DOM-only adapter cannot recover the lost URI, so the path is not selected. Its parser owns XML parsing code, but the shared namespace-aware control cannot be matched without reparsing the raw XML in the adapter.",
+      "source": "https://crates.io/crates/sxd-document",
+      "audit": "data/rust/xml/sxd-document-control-audit.md"
+    },
+    {
+      "name": "libxml",
+      "version": "0.3.24",
+      "recent_downloads_90d": 621059,
+      "status": "unresolved",
+      "reason": "Bindings to the libxml2 C parser; would add a native libxml2 family and needs a system library pin.",
+      "source": "https://crates.io/crates/libxml"
+    },
+    {
+      "name": "minidom-14",
+      "version": "0.17.0",
+      "recent_downloads_90d": 391747,
+      "status": "unresolved_shared_family",
+      "reason": "Older minidom line built on quick-xml; shares the selected quick-xml family.",
+      "source": "https://crates.io/crates/minidom-14"
+    },
+    {
+      "name": "uppsala",
+      "version": "0.12.1",
+      "recent_downloads_90d": 287733,
+      "status": "unresolved",
+      "reason": "Pure-Rust parser, DOM and namespace support; not run on the controls.",
+      "source": "https://crates.io/crates/uppsala"
+    },
+    {
+      "name": "hard-xml",
+      "version": "1.43.0",
+      "recent_downloads_90d": 228546,
+      "status": "unresolved_shared_family",
+      "reason": "Typed mapping built on xmlparser.",
+      "source": "https://crates.io/crates/hard-xml"
+    },
+    {
+      "name": "xot",
+      "version": "0.31.2",
+      "recent_downloads_90d": 112374,
+      "status": "unresolved_shared_family",
+      "reason": "Tree library built on xmlparser; family overlap needs checking.",
+      "source": "https://crates.io/crates/xot"
+    }
+  ],
+  "excluded_high_download_hits": [
+    {
+      "name": "windows",
+      "version": "0.62.2",
+      "recent_downloads_90d": 113676999,
+      "status": "excluded",
+      "reason": "Windows API bindings; matched the search text, not an XML parser."
+    },
+    {
+      "name": "pulldown-cmark",
+      "version": "0.13.6",
+      "recent_downloads_90d": 73457258,
+      "status": "excluded",
+      "reason": "CommonMark pull parser; matched 'pull parser'."
+    },
+    {
+      "name": "htmlparser",
+      "version": "0.2.1",
+      "recent_downloads_90d": 1308126,
+      "status": "excluded",
+      "reason": "HTML tokenizer, outside XML 1.0."
+    },
+    {
+      "name": "file-format",
+      "version": "0.29.0",
+      "recent_downloads_90d": 692761,
+      "status": "excluded",
+      "reason": "File-type signature detection, not parsing."
+    },
+    {
+      "name": "zbus_xml",
+      "version": "6.0.0",
+      "recent_downloads_90d": 8195479,
+      "status": "excluded",
+      "reason": "D-Bus introspection document mapping built on an XML library; domain-specific."
+    },
+    {
+      "name": "tree-sitter-xml",
+      "version": "0.7.0",
+      "recent_downloads_90d": 570973,
+      "status": "excluded",
+      "reason": "Tree-sitter grammar; a syntax-tree generator, not a namespace-aware XML reader."
+    },
+    {
+      "name": "xml-rs",
+      "version": "1.0.0",
+      "recent_downloads_90d": 32180109,
+      "status": "excluded_shared_family",
+      "reason": "Compatibility re-export only: published src/lib.rs is `pub use xml1::*;`, Cargo.toml declares its only dependency as package xml version 1.0.0. The actual EventReader implementation is in the selected xml family; do not double-count this shim.",
+      "source": "https://static.crates.io/crates/xml-rs/xml-rs-1.0.0.crate",
+      "source_sha256": "c3a56132a0d6ecbe77352edc10232f788fc4ceefefff4cab784a98e0e16b6b51"
+    }
+  ],
+  "verified_leads": [
+    {
+      "name": "roxmltree",
+      "version": "0.21.2",
+      "recent_downloads_90d": 42073295,
+      "status": "selected",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/roxmltree/verification.json",
+      "family_note": "The pinned crate contains its own src/tokenizer.rs and has no xmlparser package dependency. Historical xmlparser relationship remains noted."
+    },
+    {
+      "name": "xml",
+      "version": "1.4.0",
+      "recent_downloads_90d": 6413267,
+      "status": "selected",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/xml/verification.json"
+    },
+    {
+      "name": "xmlparser",
+      "version": "0.13.6",
+      "recent_downloads_90d": 52247004,
+      "status": "selected",
+      "reason": "Pull-based, zero-allocation XML 1.0 tokenizer; Tokenizer::from(&str) on the controls has not been run in this pilot. It does not resolve namespaces itself.",
+      "source": "https://crates.io/crates/xmlparser",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/xmlparser/verification.json",
+      "scope_note": "Tokenizer::from(&str) yields XML tokens. Adapter resolves namespaces, decodes references and validates nesting for two valid controls."
+    },
+    {
+      "name": "xml5ever",
+      "version": "0.40.0",
+      "recent_downloads_90d": 14338073,
+      "status": "selected",
+      "reason": "XML5 error-recovery parser with public local TendrilSink input and its own namespace-resolved tree builder; selected only for two valid XML controls after source coverage and exact stable differential AFL++ feedback. Not strict XML 1.0 validation.",
+      "source": "https://crates.io/crates/xml5ever",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/xml5ever/verification.json",
+      "source_sha256": "73290529dc9bc6c6155bf77fdd70ce0061f98ad387586aa3104cddab29206961"
+    },
+    {
+      "name": "rxml",
+      "version": "0.14.0",
+      "recent_downloads_90d": 961809,
+      "status": "selected",
+      "reason": "Restricted XML 1.0 parser with a documented local byte-slice Parse API and its own namespace resolver; selected after exact catalog and restricted-order controls, rxml source coverage, and exact stable differential AFL++ feedback. The shared order control is rejected because comments and processing instructions are outside its restricted grammar.",
+      "source": "https://crates.io/crates/rxml",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/rxml/verification.json",
+      "source_sha256": "4959705975475401c48b375deedd848d15b816c3915978fc617b31a1776fb60a"
+    }
+  ]
+}

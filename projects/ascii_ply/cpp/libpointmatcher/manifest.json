@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "cpp",
+  "package": "libpointmatcher",
+  "release": "1.4.4",
+  "catalog_parser": "data/cpp/ascii_ply/parsers.json",
+  "source_lock": "data/cpp/ascii_ply/source-lock.json",
+  "source_sha256": "87258fce8638979f4a6568895045f363ceb754ae63686f757d4d922b155b2e70",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"points": 3, "x_sum": 1, "y_sum": 1, "z_sum": 0},
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libpointmatcher native ASCII PLY reader",
+  "coverage_subject_prefix": "/work/source/pointmatcher/",
+  "format_specific_coverage_file_suffix": "/IO.cpp"
+}

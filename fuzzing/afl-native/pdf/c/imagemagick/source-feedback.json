@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "engine": "afl-showmap 4.33c and LLVM source line counts, one fixed valid PDF per run",
+  "command": "afl-showmap -q -m none -t 10000 -o OUTPUT -- /work/fuzzer /input/case",
+  "base_image_id": "sha256:04066ca155104de5501c5cd7c83c937a3a2da296c0a375dab68657a499a11d93",
+  "afl_image_id": "sha256:26a30ce572581253fd6738a5297b0e77836fcefdb9292f5f5d4088e5d2a77c47",
+  "afl_map_size": 317925,
+  "control": {
+    "path": "controls/pdf/one-page.pdf",
+    "sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+    "output": {
+      "pages": 1,
+      "width": 612,
+      "height": 792
+    },
+    "feedback_edges": 14201
+  },
+  "valid_variant": {
+    "path": "controls/pdf/two-page.pdf",
+    "sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "output": {
+      "pages": 2,
+      "width": 612,
+      "height": 792
+    },
+    "feedback_edges": 14246
+  },
+  "shared_edge_ids": 14199,
+  "control_only_edge_ids": 2,
+  "variant_only_edge_ids": 47,
+  "source_differential": {
+    "pdf_coder": {
+      "control_lines_covered": 337,
+      "variant_lines_covered": 339,
+      "lines_with_changed_hit_count": 78
+    },
+    "ghostscript_bridge": {
+      "control_lines_covered": 113,
+      "variant_lines_covered": 113,
+      "lines_with_changed_hit_count": 28
+    },
+    "pdfi_interpreter": {
+      "control_lines_covered": 5737,
+      "variant_lines_covered": 5753,
+      "lines_with_changed_hit_count": 2918
+    },
+    "rendered_page_png_decode": {
+      "control_lines_covered": 797,
+      "variant_lines_covered": 797,
+      "lines_with_changed_hit_count": 670
+    }
+  },
+  "rendered_page_png_decode_note": "PNG decode of Ghostscript output is image decoding, not PDF parsing",
+  "pass": true
+}

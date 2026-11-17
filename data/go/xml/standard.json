@@ -1,0 +1,61 @@
+{
+  "ecosystem": "Go",
+  "format": "XML 1.0 (UTF-8, namespaces)",
+  "status": "standard_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "Go 1.27.1 linux/arm64 standard library",
+      "api": "encoding/xml.Decoder.Token()",
+      "documentation": "https://pkg.go.dev/encoding/xml@go1.27.1#Decoder.Token",
+      "adapter": "projects/xml/go/stdlib_decoder/adapter.go",
+      "control": "controls/xml/catalog-ns.xml",
+      "observable_result": "namespace-resolved root {urn:parsarium:catalog}catalog, 5 elements, depth 3, 2 namespace declarations, 4 attributes including a prefixed attribute, text with decoded &amp;, &lt;/&gt; and a CDATA section",
+      "result": "projects/xml/go/stdlib_decoder/verification.json",
+      "family": "Go encoding/xml Decoder tokenizer",
+      "family_note": "xml.NewDecoder(bytes.Reader) in default strict mode; Token resolves prefixes over RawToken in xml.go. github.com/beevik/etree calls the same RawToken tokenizer, so the two Go XML paths share this family.",
+      "expected": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      }
+    }
+  ],
+  "unverified_documented_apis": [
+    {
+      "api": "encoding/xml.Unmarshal([]byte, any)",
+      "documentation": "https://pkg.go.dev/encoding/xml@go1.27.1#Unmarshal",
+      "status": "pending",
+      "reason": "Struct-mapping API in read.go over the same Decoder tokenizer; needs a typed target, not run in this pilot."
+    },
+    {
+      "api": "encoding/xml.Decoder.RawToken()",
+      "documentation": "https://pkg.go.dev/encoding/xml@go1.27.1#Decoder.RawToken",
+      "status": "pending",
+      "reason": "Prefix-preserving token API without namespace translation; exercised underneath etree, not run as its own standard path."
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "One valid UTF-8 XML 1.0 control without DOCTYPE (plus one differential control in the AFL++ feedback check) verifies Decoder.Token in default strict mode for this Go 1.27.1 build. It says nothing about DTDs, custom entities, non-UTF-8 CharsetReader paths, XML 1.1, or attribute-value whitespace normalization, which encoding/xml does not perform."
+}

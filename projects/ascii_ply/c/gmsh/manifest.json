@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "c",
+  "package": "gmsh",
+  "release": "4.15.2",
+  "catalog_parser": "data/c/ascii_ply/parsers.json",
+  "source_lock": "data/c/ascii_ply/source-lock.json",
+  "source_sha256": "be3f66f225d27ba9fa014f07e83169285da8a051b0e8ab7103d88066b39bdd3e",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "triangles": 1, "triangle_nodes": 3, "x_sum": 1.0},
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of Gmsh's native GModel PLY reader through its C API",
+  "coverage_subject_prefix": "/work/source/src/geo/",
+  "format_specific_coverage_file_suffix": "/GModelIO_PLY.cpp"
+}

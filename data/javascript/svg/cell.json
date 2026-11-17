@@ -1,20 +1,27 @@
 {
   "ecosystem": "javascript",
   "format": "svg",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 22,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 2,
-  "search_queries": ["svg", "svg parser", "svg renderer", "svg image reader"],
+  "search_queries": [
+    "svg",
+    "svg parser",
+    "svg renderer",
+    "svg image reader"
+  ],
   "search_limit_per_query": 100,
   "search_hits_recorded": 400,
   "unique_search_hits": 388,
   "unresolved_documentation_leads": 12,
-  "uncertainty": "Four npm queries each saved only the first 100 results, from much larger result sets. The 388 unique search hits were discovery material, not all investigated. Twelve named plausible leads remain unresolved, including high-download build-time loaders and SVG-to-PDF renderers whose local input control results have not been pinned. Qualified packages may exist outside these search windows. Several verified releases wrap the same resvg, canvg, or Skia parser family, so 22 package names do not mean 22 independent engines. The two-rectangle SVG control checks a narrow feature subset; browser results apply to one pinned Chromium build. A direct createImageBitmap SVG Blob attempt failed in that build and was not counted.",
+  "uncertainty": "10 of 22 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/javascript/svg/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/javascript/svg/parsers.json",
   "third_party_control_results": "data/javascript/svg/verification.json",
   "runtime_evidence": "data/javascript/svg/standard.json",
   "registry_snapshot": "data/javascript/svg/registry-snapshot.json",
-  "unresolved_leads": "data/javascript/svg/leads.json"
+  "unresolved_leads": "data/javascript/svg/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/javascript/svg"
 }

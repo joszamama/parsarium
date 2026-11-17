@@ -20,6 +20,11 @@
 
 GtkSvg is the GTK 4.22+ built-in parser under gtk/svg, separate from the librsvg-backed GdkPixbuf loader. This API reports parsed document dimensions; pixel rendering is not exercised.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/c/gtk4/README.md)
+
+```sh
+python3 parsarium.py build svg c gtk4
+python3 parsarium.py run svg c gtk4 controls/svg/red-green.svg
+```

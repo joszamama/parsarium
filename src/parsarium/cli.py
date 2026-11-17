@@ -25,13 +25,14 @@ Catalog and targets (from the snapshot):
   list, catalog, projects, show     browse verified parsers and runnable targets
   build, run, replay, run-format    build a target and run inputs through it
   afl ..., native ...               fuzz a target with AFL++ or its native engine
+  fandango ...                      generate and replay format-aware inputs
 
 Package commands:
-  home [--fetch | --path | --remove]  show, download, or delete the snapshot
+  home [--fetch | --path | --remove]  show, extract, or delete the snapshot
   run-selection MANIFEST [options]    run a selection saved from parsarium.com/bench
 
 Run `parsarium <command> --help` for details. The first command that needs
-targets downloads this version's snapshot (about 19 MB) and checks its SHA-256.
+targets checks and extracts this version's bundled snapshot.
 Running targets requires Docker.
 """
 
@@ -39,7 +40,7 @@ Running targets requires Docker.
 def _home_command(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(prog="parsarium home", description="Show or manage the snapshot.")
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("--fetch", action="store_true", help="download and verify the snapshot now")
+    group.add_argument("--fetch", action="store_true", help="extract and verify the bundled snapshot now")
     group.add_argument("--path", action="store_true", help="print only the snapshot directory")
     group.add_argument("--remove", action="store_true", help="delete this version's cached snapshot")
     args = parser.parse_args(argv)
@@ -50,9 +51,9 @@ def _home_command(argv: list[str]) -> int:
     try:
         path = home(fetch=args.fetch)
     except SnapshotError as error:
-        if args.path:
+        if args.path or args.fetch:
             raise
-        print(f"package   {__version__}\nsnapshot  {info.get('version')} (not downloaded)\n"
+        print(f"package   {__version__}\nsnapshot  {info.get('version')} (not cached)\n"
               f"cache     {cache_root()}\nnote      {error}")
         return 0
     if args.path:
@@ -76,8 +77,11 @@ def _selection_command(argv: list[str]) -> int:
     parser.add_argument("--out", type=Path, help="results directory (default: runs/<selection id>)")
     parser.add_argument("--seconds", type=int, default=3600, help="AFL++ budget per target")
     parser.add_argument("--dry-run", action="store_true", help="print the commands without running them")
+    parser.add_argument("--allow-mismatch", action="store_true",
+                        help="accept commit or target pin differences; print every difference")
     args = parser.parse_args(argv)
-    return selection.run(args.manifest, home(), args.mode, args.input, args.out, args.seconds, args.dry_run)
+    return selection.run(args.manifest, home(), args.mode, args.input, args.out,
+                         args.seconds, args.dry_run, args.allow_mismatch)
 
 
 def main(argv: list[str] | None = None) -> int:

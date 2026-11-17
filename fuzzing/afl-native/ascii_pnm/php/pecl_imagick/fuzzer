@@ -1,4 +1,0 @@
-#!/bin/sh
-set -eu
-export LD_PRELOAD=/opt/imagick-afl/libaflrt.so
-exec /usr/bin/php -d extension=/opt/imagick-afl/imagick.so /work/fuzz-target.php "$@"

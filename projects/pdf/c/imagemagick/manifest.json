@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "c",
+  "package": "imagemagick",
+  "release": "7.1.2-35",
+  "api": "MagickReadImage(wand, local PDF path); MagickGetNumberImages; MagickGetImageWidth; MagickGetImageHeight",
+  "catalog_parser": "data/c/pdf/parsers.json",
+  "source_lock": "data/c/pdf/source-lock.json",
+  "source_sha256": "40b6fefa88fe16ca5a4b3d3db5133eaebfb0157f21f98530bde8aec5dd5b0776",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1,
+    "width": 612,
+    "height": 792
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_file_input": true,
+  "coverage": "LLVM source coverage in pinned ImageMagick PDF coder and the in-process Ghostscript pdfi PDF interpreter it calls through gsapi",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/coders/pdf.c",
+  "underlying_coverage_subject_prefix": "/work/ghostscript/pdf/",
+  "underlying_format_specific_coverage_file_suffix": "/pdf/pdf_xref.c",
+  "underlying_package": "ghostscript",
+  "underlying_release": "10.08.0",
+  "underlying_source_sha256": "94943e3c4adb7115d132b3c28b913672f2e62e6a9d802f7e754e716b1634174a"
+}

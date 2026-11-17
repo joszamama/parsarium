@@ -21,6 +21,11 @@
 
 Distinct Magick package API; Ghostscript 10.08.0 performs underlying PDF interpretation in the recorded installation. The C and C++ APIs of this package share its core; its PDF syntax engine is shared with the separately counted Ghostscript path.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/imagemagick/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp imagemagick
+python3 parsarium.py run pdf cpp imagemagick controls/pdf/one-page.pdf
+```

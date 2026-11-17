@@ -1,0 +1,110 @@
+{
+  "format": "json",
+  "ecosystem": "python",
+  "status": "targeted_documentation_leads_only",
+  "observed_on_utc": "2026-11-17",
+  "search_surface": "Targeted PyPI project pages and project documentation; the bounded PyPI Simple Index name search has not yet been run",
+  "search_limit_per_query": 100,
+  "searched_candidate_count": 9,
+  "adoption_metric": {
+    "name": "PyPI Stats last_month downloads excluding known mirrors",
+    "source": "https://pypistats.org/api/",
+    "observation_window": "rolling last month at capture time",
+    "limitation": "Package downloads are an ecosystem adoption proxy, not JSON-specific use; dependent installs inflate some counts. These values do not rank unverified leads."
+  },
+  "leads": [
+    {
+      "name": "pydantic",
+      "last_month": 1139429690,
+      "registry": "https://pypi.org/project/pydantic/",
+      "api_evidence": "https://docs.pydantic.dev/latest/concepts/json/",
+      "api_hint": "TypeAdapter.validate_json(local bytes)",
+      "status": "promoted_to_verified",
+      "family_hint": "pydantic-core/Jiter",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/pydantic-valid-feedback.json"
+    },
+    {
+      "name": "jiter",
+      "last_month": 421162504,
+      "registry": "https://pypi.org/project/jiter/",
+      "api_evidence": "https://github.com/pydantic/jiter/blob/v0.19.0/crates/jiter-python/README.md",
+      "api_hint": "jiter.from_json(local bytes)",
+      "status": "promoted_to_verified",
+      "family_hint": "Jiter (same Rust parser family as pydantic-core; not independent)",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/jiter-valid-feedback.json"
+    },
+    {
+      "name": "orjson",
+      "last_month": 218014317,
+      "registry": "https://pypi.org/project/orjson/",
+      "api_evidence": "https://github.com/ijl/orjson/blob/3.13.0/README.md#deserialize",
+      "api_hint": "orjson.loads(local bytes)",
+      "status": "promoted_to_verified",
+      "family_hint": "orjson/yyjson",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/orjson-valid-feedback.json"
+    },
+    {
+      "name": "simplejson",
+      "last_month": 49365386,
+      "registry": "https://pypi.org/project/simplejson/",
+      "api_evidence": "https://simplejson.readthedocs.io/",
+      "api_hint": "simplejson.load(local binary file)",
+      "status": "promoted_to_verified",
+      "verified_evidence": "data/python/json/verification.json"
+    },
+    {
+      "name": "ijson",
+      "last_month": 46615664,
+      "registry": "https://pypi.org/project/ijson/",
+      "api_evidence": "https://pypi.org/project/ijson/",
+      "api_hint": "ijson.items(local binary stream, '')",
+      "status": "promoted_to_verified",
+      "family_hint": "default yajl2_c / yajl 2.1.1",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/ijson-valid-feedback.json"
+    },
+    {
+      "name": "msgspec",
+      "last_month": 39138375,
+      "registry": "https://pypi.org/project/msgspec/",
+      "api_evidence": "https://msgspec.dev/api.html#msgspec.json.decode",
+      "api_hint": "msgspec.json.decode(local bytes)",
+      "status": "promoted_to_verified",
+      "family_hint": "msgspec _core.c C JSON decoder",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/msgspec-valid-feedback.json"
+    },
+    {
+      "name": "ujson",
+      "last_month": 29543889,
+      "registry": "https://pypi.org/project/ujson/",
+      "api_evidence": "https://github.com/ultrajson/ultrajson/blob/6.1.0/README.md#usage",
+      "api_hint": "ujson.loads(local bytes or string)",
+      "status": "promoted_to_verified",
+      "family_hint": "UltraJSON C decoder / double-conversion",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/ujson-valid-feedback.json"
+    },
+    {
+      "name": "python-rapidjson",
+      "last_month": 4066455,
+      "registry": "https://pypi.org/project/python-rapidjson/",
+      "api_evidence": "https://python-rapidjson.readthedocs.io/en/latest/load.html",
+      "api_hint": "rapidjson.load(local file-like stream)",
+      "status": "lead",
+      "family_hint": "RapidJSON C++"
+    },
+    {
+      "name": "pysimdjson",
+      "last_month": 679340,
+      "registry": "https://pypi.org/project/pysimdjson/",
+      "api_evidence": "https://pysimdjson.tkte.ch/native.html",
+      "api_hint": "simdjson.Parser.parse(local bytes)",
+      "status": "lead",
+      "family_hint": "simdjson"
+    }
+  ]
+}

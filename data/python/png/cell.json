@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "png",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 21,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "project name contains 'png'",
@@ -19,10 +19,12 @@
   "search_hits_recorded": 379,
   "unique_search_hits": 379,
   "unresolved_documentation_leads": 8,
-  "uncertainty": "PyPI has no public relevance-ranked keyword search API in this workflow, so the Simple JSON project index was filtered by seven name substrings. The filters matched 210, 21, 19, 71, 143, 14, and 54 project names respectively; the first 100 case-insensitive alphabetical matches were saved per filter, 379 distinct names in total. Alphabetical windows can miss relevant and highly adopted packages, so project documentation supplied additional leads. Eight plausible leads remain unresolved, including a PNG decoder without a macOS wheel, a headless loader that could not import, and packages requiring separate environments. Several accepted packages delegate to Pillow, ImageIO, libvips, or other native engines; 21 package paths do not mean 21 independent decoder engines. The two valid controls prove only the labeled pixel, header, chunk, or tEXt scopes. Tkinter PhotoImage is verified separately on bundled Tk 8.6 and may be absent in other Python distributions. PyPI Stats downloads are a within-Python adoption proxy; byteparse returned HTTP 404 for this metric and remains unranked.",
+  "uncertainty": "10 of 21 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/python/png/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/python/png/parsers.json",
   "third_party_control_results": "data/python/png/verification.json",
   "runtime_evidence": "data/python/png/standard.json",
   "registry_snapshot": "data/python/png/registry-snapshot.json",
-  "unresolved_leads": "data/python/png/leads.json"
+  "unresolved_leads": "data/python/png/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/python/png"
 }

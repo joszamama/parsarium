@@ -1,0 +1,48 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang cmake curl libboost-chrono-dev libboost-date-time-dev \
+    libboost-program-options-dev libboost-system-dev libboost-thread-dev \
+    libclang-rt-21-dev libyaml-cpp-dev llvm make python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://github.com/norlab-ulaval/libpointmatcher/archive/refs/tags/1.4.4.tar.gz \
+    --output /work/libpointmatcher-1.4.4.tar.gz \
+    && echo '87258fce8638979f4a6568895045f363ceb754ae63686f757d4d922b155b2e70  /work/libpointmatcher-1.4.4.tar.gz' | sha256sum --check \
+    && mkdir /work/source \
+    && tar -xf /work/libpointmatcher-1.4.4.tar.gz -C /work/source --strip-components=1 \
+    && echo 'fd32309e62a9004f849eeef47131ec3bef840e61061b318d70e3ea962bddd0de  /work/source/pointmatcher/IO.cpp' | sha256sum --check \
+    && curl --fail --location --retry 3 \
+       https://github.com/norlab-ulaval/libnabo/archive/refs/tags/1.1.2.tar.gz \
+       --output /work/libnabo-1.1.2.tar.gz \
+    && echo '6910baea4fec3c85814944eb5d06e3b23ede54deef5ffca4504724d8684362d8  /work/libnabo-1.1.2.tar.gz' | sha256sum --check \
+    && mkdir /work/nabo \
+    && tar -xf /work/libnabo-1.1.2.tar.gz -C /work/nabo --strip-components=1 \
+    && echo '116245ee8653edd205f2b01335a187ae9d01987be5eadfcdb014dc261ca2de86  /work/nabo/nabo/nabo.h' | sha256sum --check \
+    && curl --fail --location --retry 3 \
+       https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz \
+       --output /work/eigen-3.4.0.tar.gz \
+    && echo '8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72  /work/eigen-3.4.0.tar.gz' | sha256sum --check \
+    && mkdir /work/eigen \
+    && tar -xf /work/eigen-3.4.0.tar.gz -C /work/eigen --strip-components=1 \
+    && echo 'b8ae5f77a30d48bcaf622a56f7047baa8b2fb790f5db7361aa1d57f424fa3c1e  /work/eigen/Eigen/Core' | sha256sum --check
+COPY harness.h harness.cpp replay.cpp fuzz.cpp build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang++ --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    llvm python3 libstdc++6 libboost-chrono-dev libboost-date-time-dev \
+    libboost-program-options-dev libboost-system-dev libboost-thread-dev \
+    libyaml-cpp-dev && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/install/lib /work/lib
+COPY --from=build /work/source /work/source
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENV LD_LIBRARY_PATH=/work/lib
+ENTRYPOINT ["/work/run-control.sh"]

@@ -38,25 +38,6 @@
     "family_note": "Native C++ HTTP request reader in Poco.Net; distinct from Boost.Beast."
   },
   {
-    "name": "llhttp",
-    "version": "9.4.3",
-    "license": "MIT",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/nodejs/llhttp#usage",
-    "input_api": "llhttp_init(..., HTTP_REQUEST, ...); llhttp_execute(llhttp_t *, local request bytes, length); on_url and on_headers_complete callbacks",
-    "family": "llhttp generated HTTP/1 parser, descended from Node http-parser design",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
-    "adapter": "adapters/cpp/http11/llhttp.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
     "name": "http-parser",
     "version": "2.9.4",
     "license": "MIT",
@@ -73,26 +54,7 @@
       "version": "1.1"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "picohttpparser",
-    "version": "1.5",
-    "license": "MIT",
-    "license_evidence": "Pinned release README dual-license statement (MIT or Perl License)",
-    "documentation": "https://github.com/h2o/picohttpparser#phr_parse_request",
-    "input_api": "phr_parse_request(local request bytes, length, method/path/version/header outputs)",
-    "family": "PicoHTTPParser C request parser, used by H2O",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
-    "adapter": "adapters/cpp/http11/picohttpparser.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "mongoose",
@@ -111,26 +73,7 @@
       "version": "1.1"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "httpp",
-    "version": "2.0.0",
-    "license": "MIT",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/cebem1nt/httpp#api",
-    "input_api": "httpp_init_req(...); httpp_parse_request(char *local request bytes, size_t len, httpp_req_t *out)",
-    "family": "httpp C single-header request parser",
-    "scope": "HTTP/1.1 GET request method, target and version",
-    "adapter": "adapters/cpp/http11/httpp.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "h2o",
@@ -149,26 +92,7 @@
       "version": "1.1"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "samsung-http-parser",
-    "version": "2.5.0",
-    "license": "MIT",
-    "license_evidence": "Pinned tagged fork LICENSE-MIT",
-    "documentation": "https://github.com/Samsung/http-parser/blob/v2.5.0/README.md",
-    "input_api": "http_parser_init(HTTP_REQUEST); http_parser_execute(parser, callbacks, local request bytes, length); on_url and on_headers_complete callbacks",
-    "family": "Samsung tagged fork of the Node/Joyent http-parser C engine; separate 2.5.0 source distribution, shared parser family with nodejs/http-parser 2.9.4 and libhv-bundled 2.9.1, not an independent decoder",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse from local bytes",
-    "adapter": "adapters/cpp/http11/samsung_http_parser.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "libhv",
@@ -187,66 +111,7 @@
       "version": "1.1"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "libparsehttp",
-    "version": "0.06",
-    "license": "GPL-2.0-or-later",
-    "license_evidence": "Pinned release README explicitly says GPL v2 or later; src/libparsehttp/LICENSE carries GPL v2 text",
-    "documentation": "https://github.com/clintwebb/libparsehttp/blob/v0.06/src/libparsehttp/parsehttp.h",
-    "input_api": "parse_init; parse_process(parsehttp_t *, local request bytes, length); registered callbacks report method, path, query, version, Host and completion",
-    "family": "libparsehttp 0.06 standalone C HTTP request line/header scanner; separate implementation from Node http-parser and llhttp",
-    "scope": "HTTP/1.1 GET request method, path, query, version and Host from local byte buffer",
-    "adapter": "adapters/cpp/http11/libparsehttp.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium",
-      "query": "x=1",
-      "version": "HTTP/1.1",
-      "host": "example.test"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "libevhtp",
-    "version": "1.2.9",
-    "license": "BSD-3-Clause",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/ellzey/libevhtp/blob/1.2.9/htparse/htparse.h",
-    "input_api": "htparser_new; htparser_init(..., htp_type_request); htparser_run(parser, hooks, local request bytes, length); path and args callbacks plus method/version accessors",
-    "family": "libevhtp bundled htparse C HTTP/1 request scanner; source distributed and header installed by libevhtp",
-    "scope": "HTTP/1.1 GET request method, path, query and version after complete headers",
-    "adapter": "adapters/cpp/http11/libevhtp.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "HTTPParserC",
-    "version": "9.2.0",
-    "license": "MIT",
-    "license_evidence": "Pinned release LICENSE",
-    "documentation": "https://github.com/Building42/HTTPParserC#documentation",
-    "input_api": "Bundled llhttp_init(..., LLHTTP_REQUEST, ...); llhttp_execute(llhttp_t *, local request bytes, length); on_url and on_headers_complete callbacks",
-    "family": "Building42 packaged llhttp 9.2.0 generated C source; shares the llhttp engine and is a separate versioned distribution",
-    "scope": "HTTP/1.1 GET request method, target and version after complete header parse",
-    "adapter": "adapters/cpp/http11/HTTPParserC.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "libsoup",
@@ -266,7 +131,7 @@
       "host": "example.test"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "libmicrohttpd",
@@ -285,7 +150,7 @@
       "version": "1.1"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "libwebsockets",
@@ -296,6 +161,7 @@
     "input_api": "lws_create_context in no-listen server mode; lws_adopt_socket_vhost_readbuf(vhost, local socketpair fd, local HTTP request bytes, length); LWS_CALLBACK_HTTP and parsed header/query accessors",
     "family": "libwebsockets C HTTP/1 parser in the server adoption path; independent from llhttp and LibHTP",
     "scope": "HTTP/1.1 GET request method, path, query argument and Host header from local read buffer",
+    "harness_note": "The Docker harness accepts at most 2048 initial bytes, the documented limit of lws_adopt_socket_vhost_readbuf; larger inputs are rejected before parsing.",
     "adapter": "adapters/cpp/http11/libwebsockets.cpp",
     "control": "controls/http11/request.http",
     "expected_output": {
@@ -304,68 +170,7 @@
       "host": "example.test"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "libhtp",
-    "version": "0.5.53",
-    "license": "BSD-3-Clause",
-    "license_evidence": "Pinned release LICENSE and README",
-    "documentation": "https://github.com/OISF/libhtp/blob/0.5.53/docs/QUICK_START",
-    "input_api": "htp_config_create; htp_connp_create/open; htp_connp_req_data(parser, timestamp, local request bytes, length); transaction request_method, request_uri, request_protocol and headers",
-    "family": "OISF LibHTP independent C HTTP request/response stream parser",
-    "scope": "HTTP/1.1 GET request method, target, version and parsed header table from local byte buffer",
-    "adapter": "adapters/cpp/http11/libhtp.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium?x=1",
-      "version": "1.1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "finwo-http-parser",
-    "version": "stable@3d78ef3ad068",
-    "license": "MIT",
-    "license_evidence": "Stable-tag commit source root LICENSE",
-    "documentation": "https://github.com/finwo/http-parser.c/blob/3d78ef3ad068696b0d3f5b9bc672771a89805a5f/README.md",
-    "input_api": "http_parser_request_init; http_parser_request_data(request, local struct buf of saved bytes); request ready flag, method/path/query/version fields and http_parser_header_get",
-    "family": "finwo/http-parser.c independent C request/header/body parser; not the Node http-parser family despite similar name",
-    "scope": "HTTP/1.1 GET request method, path, query, version and Host from local byte buffer",
-    "adapter": "adapters/cpp/http11/finwo_http_parser.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium",
-      "query": "x=1",
-      "version": "1.1",
-      "host": "example.test"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
-  },
-  {
-    "name": "libonion",
-    "version": "0.8",
-    "license": "Apache-2.0",
-    "license_evidence": "Pinned release LICENSE.txt and APACHE2.txt dual-license notice for src library",
-    "documentation": "https://github.com/davidmoreno/onion/blob/v0.8/src/onion/request.h",
-    "input_api": "onion_request_new(NULL); onion_request_write(request, local request bytes, length); onion_request_get_fullpath/get_query/get_header/get_flags access parsed fields",
-    "family": "libonion C HTTP/1 request state machine in request_parser.c, independent from llhttp and PicoHTTPParser",
-    "scope": "HTTP/1.1 GET request method, path, query value, version and Host header from local byte buffer",
-    "adapter": "adapters/cpp/http11/libonion.cpp",
-    "control": "controls/http11/request.http",
-    "expected_output": {
-      "method": "GET",
-      "path": "/parsarium",
-      "version": "1.1",
-      "host": "example.test",
-      "query_x": "1"
-    },
-    "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   },
   {
     "name": "serf",
@@ -386,6 +191,6 @@
       "body": "OK"
     },
     "language_bridge": "Pinned C parser API compiled and called from a C++17 translation unit; parser implementation remains C",
-    "family_note": " Same release and underlying parser as C \u00d7 HTTP/1.1; this C++ path is not an independent engine."
+    "family_note": " Same release and underlying parser as C × HTTP/1.1; this C++ path is not an independent engine."
   }
 ]

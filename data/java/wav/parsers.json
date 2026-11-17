@@ -1,205 +1,203 @@
 [
   {
-    "name": "wavfile", "group": "com.github.psambit9791", "artifact": "wavfile", "version": "1.0.0",
-    "license": "MIT", "license_evidence": "Maven POM licenses",
+    "name": "wavfile",
+    "group": "com.github.psambit9791",
+    "artifact": "wavfile",
+    "version": "1.0.0",
+    "license": "MIT",
+    "license_evidence": "Maven POM licenses",
     "input_api": "WavFile.openWavFile(File), readFrames(int[],int)",
     "documentation": "https://repo.maven.apache.org/maven2/com/github/psambit9791/wavfile/1.0.0/wavfile-1.0.0-javadoc.jar",
     "documentation_archive_entry": "com/github/psambit9791/wavfile/WavFile.html",
-    "family": "wavfile Java WAV reader", "scope": "sample rate, channels, frame count and four PCM samples",
+    "family": "wavfile Java WAV reader",
+    "scope": "sample rate, channels, frame count and four PCM samples",
     "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256, "samples": [0, 1000, -1000, 0]}
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 256,
+      "samples": [
+        0,
+        1000,
+        -1000,
+        0
+      ]
+    }
   },
   {
-    "name": "jaudiotagger", "group": "net.jthink", "artifact": "jaudiotagger", "version": "3.0.1",
-    "license": "LGPL-2.1-or-later", "license_evidence": "Maven POM licenses and project LICENSE",
+    "name": "jaudiotagger",
+    "group": "net.jthink",
+    "artifact": "jaudiotagger",
+    "version": "3.0.1",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Maven POM licenses and project LICENSE",
     "input_api": "AudioFileIO.read(File).getAudioHeader()",
     "documentation": "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1-javadoc.jar",
     "documentation_archive_entry": "org/jaudiotagger/audio/AudioFileIO.html",
-    "family": "jaudiotagger WAV reader", "scope": "WAV header sample rate, channels and bit depth",
+    "family": "jaudiotagger WAV reader",
+    "scope": "WAV header sample rate, channels and bit depth",
     "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": "1", "bits": 16}
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": "1",
+      "bits": 16
+    }
   },
   {
-    "name": "jcodec", "group": "org.jcodec", "artifact": "jcodec", "version": "0.2.5",
-    "license": "BSD-2-Clause", "license_evidence": "JCodec project LICENSE and Maven POM FreeBSD license",
+    "name": "jcodec",
+    "group": "org.jcodec",
+    "artifact": "jcodec",
+    "version": "0.2.5",
+    "license": "BSD-2-Clause",
+    "license_evidence": "JCodec project LICENSE and Maven POM FreeBSD license",
     "input_api": "new WavInput.WavFile(File).getFormat()",
     "documentation": "https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar",
     "documentation_archive_entry": "org/jcodec/codecs/wav/WavInput.WavFile.html",
-    "family": "JCodec WAV demuxer", "scope": "WAV sample rate, channels and bit depth",
+    "family": "JCodec WAV demuxer",
+    "scope": "WAV sample rate, channels and bit depth",
     "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16}
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits": 16
+    }
   },
   {
-    "name": "beads", "group": "net.beadsproject", "artifact": "beads", "version": "3.2",
-    "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses",
-    "input_api": "new WavFileReaderWriter().readAudioFile(String localPath), getSampleAudioFormat()",
-    "documentation": "https://repo.maven.apache.org/maven2/net/beadsproject/beads/3.2/beads-3.2-javadoc.jar",
-    "documentation_archive_entry": "net/beadsproject/beads/data/audiofile/WavFileReaderWriter.html",
-    "family": "Beads WAV reader", "scope": "sample rate, channels and decoded frame count",
-    "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256}
-  },
-  {
-    "name": "codecmedia", "group": "me.tamkungz.codecmedia", "artifact": "codecmedia", "version": "1.2.2",
-    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "CodecMedia.createDefault().probe(Path).streams()",
-    "documentation": "https://repo.maven.apache.org/maven2/me/tamkungz/codecmedia/codecmedia/1.2.2/codecmedia-1.2.2-javadoc.jar",
-    "documentation_archive_entry": "me/tamkungz/codecmedia/CodecMediaEngine.html",
-    "family": "CodecMedia RIFF/WAV parser", "scope": "parsed PCM codec, sample rate and channels",
-    "control": "controls/wav/256-samples.wav",
-    "expected_output": {"codec": "pcm", "sample_rate": 8000, "channels": 1}
-  },
-  {
-    "name": "jdsp", "group": "com.github.psambit9791", "artifact": "jdsp", "version": "3.1.1",
-    "license": "MIT", "license_evidence": "Maven POM licenses",
-    "input_api": "new WAV().readWAV(String localPath), getProperties()",
-    "documentation": "https://repo.maven.apache.org/maven2/com/github/psambit9791/jdsp/3.1.1/jdsp-3.1.1-javadoc.jar",
-    "documentation_archive_entry": "com.github.psambit9791.jdsp/com/github/psambit9791/jdsp/io/WAV.html",
-    "family": "JDSP WAV API over wavfile", "scope": "sample rate, channels and frame count",
-    "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1, "frames": 256}
-  },
-  {
-    "name": "tika-audiovideo", "group": "org.apache.tika", "artifact": "tika-parser-audiovideo-module", "version": "4.2.0",
-    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "name": "tika-audiovideo",
+    "group": "org.apache.tika",
+    "artifact": "tika-parser-audiovideo-module",
+    "version": "4.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven JAR META-INF/LICENSE",
     "input_api": "AudioParser.parse(TikaInputStream, ContentHandler, Metadata, ParseContext)",
     "documentation": "https://repo.maven.apache.org/maven2/org/apache/tika/tika-parser-audiovideo-module/4.2.0/tika-parser-audiovideo-module-4.2.0-javadoc.jar",
     "documentation_archive_entry": "org/apache/tika/parser/audio/AudioParser.html",
-    "family": "Apache Tika AudioParser over Java Sound SPI", "scope": "WAV sample rate and channels in parsed metadata",
+    "family": "Apache Tika AudioParser over Java Sound SPI",
+    "scope": "WAV sample rate and channels in parsed metadata",
     "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1}
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "javacv", "group": "org.bytedeco", "artifact": "javacv", "version": "1.5.14",
+    "name": "javacv",
+    "group": "org.bytedeco",
+    "artifact": "javacv",
+    "version": "1.5.14",
     "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
     "license_evidence": "Maven POM licenses; native FFmpeg notices apply separately",
     "input_api": "new FFmpegFrameGrabber(File).start(), getFormat(), getAudioCodecName(), getSampleRate(), getAudioChannels()",
     "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/javacv/1.5.14/javacv-1.5.14-javadoc.jar",
     "documentation_archive_entry": "org/bytedeco/javacv/FFmpegFrameGrabber.html",
-    "family": "JavaCV wrapper over FFmpeg demuxer", "scope": "WAV format, PCM codec, sample rate and channels",
-    "adapter_module": "bytedeco", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "wav", "codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
+    "family": "JavaCV wrapper over FFmpeg demuxer",
+    "scope": "WAV format, PCM codec, sample rate and channels",
+    "adapter_module": "bytedeco",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "format": "wav",
+      "codec": "pcm_s16le",
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "bytedeco-ffmpeg", "group": "org.bytedeco", "artifact": "ffmpeg", "version": "8.1.2-1.5.14",
+    "name": "bytedeco-ffmpeg",
+    "group": "org.bytedeco",
+    "artifact": "ffmpeg",
+    "version": "8.1.2-1.5.14",
     "license": "Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception",
     "license_evidence": "Parent javacpp-presets Maven POM licenses; native FFmpeg notices apply separately",
     "input_api": "avformat_open_input(AVFormatContext,String,...), avformat_find_stream_info(...) and AVStream.codecpar()",
     "documentation": "https://repo.maven.apache.org/maven2/org/bytedeco/ffmpeg/8.1.2-1.5.14/ffmpeg-8.1.2-1.5.14-javadoc.jar",
     "documentation_archive_entry": "org/bytedeco/ffmpeg/global/avformat.html",
-    "family": "Bytedeco binding to FFmpeg demuxer", "scope": "WAV format, sample rate and channels",
-    "adapter_module": "bytedeco", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "wav", "sample_rate": 8000, "channels": 1}
+    "family": "Bytedeco binding to FFmpeg demuxer",
+    "scope": "WAV format, sample rate and channels",
+    "adapter_module": "bytedeco",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "format": "wav",
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "jhove-modules", "group": "org.openpreservation.jhove", "artifact": "jhove-modules", "version": "1.20.1",
-    "license": "LGPL-2.1", "license_evidence": "Maven parent jhove POM licenses",
+    "name": "jhove-modules",
+    "group": "org.openpreservation.jhove",
+    "artifact": "jhove-modules",
+    "version": "1.20.1",
+    "license": "LGPL-2.1",
+    "license_evidence": "Maven parent jhove POM licenses",
     "input_api": "WaveModule.setBase(JhoveBase), parse(InputStream,RepInfo,int), getAESMetadata()",
     "documentation": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-modules/1.20.1/jhove-modules-1.20.1-javadoc.jar",
     "documentation_archive_entry": "edu/harvard/hul/ois/jhove/module/WaveModule.html",
-    "family": "JHOVE WAVE-hul module", "scope": "WAVE identification, sample rate and channels",
+    "family": "JHOVE WAVE-hul module",
+    "scope": "WAVE identification, sample rate and channels",
     "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "WAVE", "sample_rate": 8000, "channels": 1}
+    "expected_output": {
+      "format": "WAVE",
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "tarsosdsp-jvm", "group": "be.tarsos.dsp", "artifact": "jvm", "version": "2.5",
-    "repository_url": "https://mvn.0110.be/releases",
-    "license": "GPL-3.0-only", "license_evidence": "Release Maven POM licenses and project README",
-    "input_api": "AudioDispatcherFactory.fromFile(File,int,int), AudioDispatcher.getFormat() and run()",
-    "documentation": "https://mvn.0110.be/releases/be/tarsos/dsp/jvm/2.5/jvm-2.5-javadoc.jar",
-    "documentation_archive_entry": "TarsosDSP.jvm/be/tarsos/dsp/io/jvm/AudioDispatcherFactory.html",
-    "family": "TarsosDSP JVM wrapper over Java Sound", "scope": "sample rate, channels, bit depth and decoded frame count",
-    "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16, "frames": 256}
-  },
-  {
-    "name": "musicg", "group": "com.github.fracpete", "artifact": "musicg", "version": "1.4.2.2",
-    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "new Wave(String localPath).getWaveHeader(), getSampleAmplitudes()",
-    "documentation": "https://repo.maven.apache.org/maven2/com/github/fracpete/musicg/1.4.2.2/musicg-1.4.2.2-javadoc.jar",
-    "documentation_archive_entry": "com/musicg/wave/Wave.html",
-    "family": "musicg PCM WAVE reader", "scope": "WAVE format, sample rate, channels, bit depth and sample count",
-    "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "WAVE", "sample_rate": 8000, "channels": 1, "bits": 16, "samples": 256}
-  },
-  {
-    "name": "jaffree", "group": "com.github.kokorin.jaffree", "artifact": "jaffree", "version": "2024.08.29",
-    "license": "Apache-2.0", "license_evidence": "Maven POM licenses and project LICENSE",
+    "name": "jaffree",
+    "group": "com.github.kokorin.jaffree",
+    "artifact": "jaffree",
+    "version": "2024.08.29",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven POM licenses and project LICENSE",
     "input_api": "FFprobe.atPath(Path localExecutableDir).setShowStreams(true).setInput(Path localWav).execute().getStreams()",
     "documentation": "https://repo.maven.apache.org/maven2/com/github/kokorin/jaffree/jaffree/2024.08.29/jaffree-2024.08.29-javadoc.jar",
     "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
-    "family": "Jaffree wrapper over local FFprobe/FFmpeg", "scope": "PCM codec, sample rate and channels",
-    "adapter_module": "ffprobe", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
+    "family": "Jaffree wrapper over local FFprobe/FFmpeg",
+    "scope": "PCM codec, sample rate and channels",
+    "adapter_module": "ffprobe",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "codec": "pcm_s16le",
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "jave-core", "group": "ws.schild", "artifact": "jave-core", "version": "4.2.0",
-    "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses and project LICENSE",
+    "name": "jave-core",
+    "group": "ws.schild",
+    "artifact": "jave-core",
+    "version": "4.2.0",
+    "license": "GPL-3.0-only",
+    "license_evidence": "Maven POM licenses and project LICENSE",
     "input_api": "new MultimediaObject(File localWav).getInfo().getAudio()",
     "documentation": "https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-javadoc.jar",
     "documentation_archive_entry": "ws/schild/jave/MultimediaObject.html",
-    "family": "JAVE2 wrapper over bundled FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
-    "adapter_module": "jave", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "wav", "codec": "pcm_s16le ([1][0][0][0] / 0x0001)", "sample_rate": 8000, "channels": 1}
+    "family": "JAVE2 wrapper over bundled FFmpeg",
+    "scope": "WAV format, PCM codec, sample rate and channels",
+    "adapter_module": "jave",
+    "control": "controls/wav/256-samples.wav",
+    "expected_output": {
+      "format": "wav",
+      "codec": "pcm_s16le ([1][0][0][0] / 0x0001)",
+      "sample_rate": 8000,
+      "channels": 1
+    }
   },
   {
-    "name": "bramp-ffmpeg", "group": "net.bramp.ffmpeg", "artifact": "ffmpeg", "version": "0.9.2",
-    "license": "BSD-2-Clause", "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "new FFprobe(String localExecutable).probe(String localWav).getStreams()",
-    "documentation": "https://repo.maven.apache.org/maven2/net/bramp/ffmpeg/ffmpeg/0.9.2/ffmpeg-0.9.2-javadoc.jar",
-    "documentation_archive_entry": "net/bramp/ffmpeg/FFprobe.html",
-    "family": "bramp FFprobe CLI wrapper over FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
-    "adapter_module": "bramp", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "wav", "codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
-  },
-  {
-    "name": "metadata-extractor", "group": "com.drewnoakes", "artifact": "metadata-extractor", "version": "2.19.0",
-    "license": "Apache-2.0", "license_evidence": "Project LICENSE and Maven POM licenses",
+    "name": "metadata-extractor",
+    "group": "com.drewnoakes",
+    "artifact": "metadata-extractor",
+    "version": "2.19.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Project LICENSE and Maven POM licenses",
     "input_api": "WavMetadataReader.readMetadata(File), Metadata.getFirstDirectoryOfType(WavDirectory.class)",
     "documentation": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.19.0/metadata-extractor-2.19.0-javadoc.jar",
     "documentation_archive_entry": "com/drew/imaging/wav/WavMetadataReader.html",
-    "family": "metadata-extractor RIFF/WAV metadata reader", "scope": "WAV sample rate, channels and bit depth",
+    "family": "metadata-extractor RIFF/WAV metadata reader",
+    "scope": "WAV sample rate, channels and bit depth",
     "control": "controls/wav/256-samples.wav",
-    "expected_output": {"sample_rate": 8000, "channels": 1, "bits": 16}
-  },
-  {
-    "name": "imagic-ffmpeg-java", "group": "ch.imagic", "artifact": "ffmpeg-java", "version": "0.1.2",
-    "license": "BSD-2-Clause", "license_evidence": "Maven POM licenses and project LICENSE",
-    "input_api": "new FFprobe(Executor,File localExecutable).probe(File localWav).get()",
-    "documentation": "https://repo.maven.apache.org/maven2/ch/imagic/ffmpeg-java/0.1.2/ffmpeg-java-0.1.2-javadoc.jar",
-    "documentation_archive_entry": "ch/imagic/ffmpeg/FFprobe.html",
-    "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg", "scope": "WAV format, PCM codec, sample rate and channels",
-    "adapter_module": "imagic", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "wav", "codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
-  },
-  {
-    "name": "v47-jaffree", "group": "io.v47.jaffree", "artifact": "jaffree", "version": "2.1.0",
-    "license": "GPL-3.0-only", "license_evidence": "Maven POM licenses and fork project LICENSE",
-    "input_api": "FFprobe.atPath(Path localBin).setShowStreams(true).setInput(Path localWav).execute()",
-    "documentation": "https://repo.maven.apache.org/maven2/io/v47/jaffree/jaffree/2.1.0/jaffree-2.1.0-javadoc.jar",
-    "documentation_archive_entry": "com/github/kokorin/jaffree/ffprobe/FFprobe.html",
-    "family": "v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg", "scope": "PCM codec, sample rate and channels",
-    "adapter_module": "v47", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"codec": "pcm_s16le", "sample_rate": 8000, "channels": 1}
-  },
-  {
-    "name": "vlcj-info", "group": "uk.co.caprica", "artifact": "vlcj-info", "version": "2.0.3",
-    "license": "GPL-3.0-or-later", "license_evidence": "Project LICENSE and Maven POM licenses",
-    "input_api": "new MediaInfoFile(String localWav).open(), info(String MediaInfo template)",
-    "documentation": "https://repo.maven.apache.org/maven2/uk/co/caprica/vlcj-info/2.0.3/vlcj-info-2.0.3-javadoc.jar",
-    "documentation_archive_entry": "uk/co/caprica/vlcjinfo/MediaInfoFile.html",
-    "family": "vlcj-info JNA binding to libmediainfo", "scope": "WAV format, sample rate and channels",
-    "adapter_module": "vlcj_info", "control": "controls/wav/256-samples.wav",
-    "expected_output": {"format": "Wave", "sample_rate": 8000, "channels": 1}
-  },
-  {
-    "name": "mediainfo-jna-wrapper", "group": "com.amilesend", "artifact": "mediainfo-jna-wrapper", "version": "2.1.9",
-    "license": "MIT + MediaInfoLib Binary License", "license_evidence": "Maven parent POM licenses and project LICENSE",
-    "input_api": "new MediaInfo(new MediaInfoAccessor(MediaInfoLibrary.newInstance())).open(File localWav).get(StreamType.Audio,0,String)",
-    "documentation": "https://repo.maven.apache.org/maven2/com/amilesend/mediainfo-jna-wrapper/2.1.9/mediainfo-jna-wrapper-2.1.9-javadoc.jar",
-    "documentation_archive_entry": "com/amilesend/mediainfo/MediaInfo.html",
-    "family": "amilesend JNA binding to libmediainfo", "scope": "WAV format, sample rate and channels",
-    "adapter_module": "amilesend", "control": "controls/wav/32768-samples.wav",
-    "expected_output": {"format": "Wave", "sample_rate": 8000, "channels": 1}
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits": 16
+    }
   }
 ]

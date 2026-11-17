@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "ascii_ply",
-  "status": "verified_goal_met_partial_search",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_below_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 9,
   "verified_parser_family_count": 12,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
@@ -23,10 +23,12 @@
   "search_hits_recorded": 870,
   "unique_search_hits": 706,
   "unresolved_documentation_leads": 6,
-  "uncertainty": "Twenty distinct pinned npm package paths passed one valid ASCII PLY triangle control; this includes 17 packages returning triangle faces and three point-cloud paths returning vertices or converted point records. The 20 paths group into 12 underlying parser families, including seven Three.js-derived paths, two loaders.gl paths, and two voxelkloud paths. The ten bounded npm queries saved 870 hits and 706 distinct names, taking at most the first 100 results per query; broad queries have large uninspected tails. Six plausible documentation leads remain unresolved, and additional qualified packages may lie outside these windows. This cell reaches the working goal of 20 but does not establish that 30 parsers are available. Binary PLY, other property layouts, and non-triangle faces are not tested by this control. The standard/runtime finding is scoped to the cited Node.js and browser platform documentation.",
+  "uncertainty": "Post-selection parser-feedback gate: 9 selected paths have a verified container control and parser-derived AFL++ feedback. 1 higher-adoption control-verified candidates remain excluded without backfilling lower-ranked leads; their positive metrics and exact blockers are in data/curation/plan.json and data/curation/feedback-exclusions.json. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/javascript/ascii_ply/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/javascript/ascii_ply/parsers.json",
   "third_party_control_results": "data/javascript/ascii_ply/verification.json",
   "runtime_evidence": "data/javascript/ascii_ply/standard.json",
   "registry_snapshot": "data/javascript/ascii_ply/registry-snapshot.json",
-  "unresolved_leads": "data/javascript/ascii_ply/leads.json"
+  "unresolved_leads": "data/javascript/ascii_ply/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/javascript/ascii_ply"
 }

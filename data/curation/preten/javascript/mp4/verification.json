@@ -1,0 +1,443 @@
+{
+  "checked_at_utc": "2026-11-11T18:09:51.529Z",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v26.10.0",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected": {
+    "music-metadata": {
+      "title": "Parsarium",
+      "width": 2,
+      "height": 2,
+      "sampleRate": 8000
+    },
+    "mediainfo.js": {
+      "title": "Parsarium",
+      "width": 2,
+      "height": 2,
+      "sampleRate": 8000
+    },
+    "codem-isoboxer": {
+      "boxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ],
+      "brand": "isom"
+    },
+    "mp4box": {
+      "brand": "isom",
+      "width": 2,
+      "height": 2,
+      "tracks": 2
+    },
+    "isobmff-inspector": {
+      "boxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ],
+      "brand": "isom"
+    },
+    "mediabunny": {
+      "format": "MP4",
+      "duration": 1,
+      "width": 2,
+      "height": 2,
+      "audioCodec": "aac"
+    },
+    "@audio/decode-mp4": {
+      "sampleRate": 8000,
+      "channels": 1,
+      "samples": 8000
+    },
+    "jsmediatags": {
+      "type": "MP4",
+      "brand": "isom",
+      "title": "Parsarium"
+    },
+    "mp4-box-encoding": {
+      "type": "ftyp",
+      "brand": "isom",
+      "compatible": [
+        "isom",
+        "iso2",
+        "avc1",
+        "mp41"
+      ]
+    },
+    "node-video-lib": {
+      "duration": 1,
+      "tracks": 2
+    },
+    "mp4reader": {
+      "brand": "isom",
+      "handlers": [
+        "vide",
+        "soun"
+      ]
+    },
+    "mediafile-metadata": {
+      "creationDate": "2020-01-02T03:04:05.000Z"
+    },
+    "mp4-parser": {
+      "title": "Parsarium",
+      "duration": 1
+    },
+    "mp4-stream": {
+      "boxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    "fmp4.js": {
+      "boxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    "@isomp4/parser": {
+      "boxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    "mp4tree": {
+      "valid": true,
+      "boxes": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    "metaprobe": {
+      "kind": "video",
+      "format": "mp4",
+      "width": 2,
+      "height": 2,
+      "title": "Parsarium",
+      "duration": 1
+    },
+    "@dantheman827/taglib-ts": {
+      "title": "Parsarium",
+      "sampleRate": 8000,
+      "channels": 1
+    },
+    "mp4-metadata": {
+      "creationTime": "2020-01-02T03:04:05.000Z"
+    }
+  },
+  "third_party": [
+    {
+      "package": "music-metadata",
+      "version": "12.4.0",
+      "scope": "tracks+title",
+      "command": "node adapters/javascript/mp4.mjs music-metadata controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium",
+        "width": 2,
+        "height": 2,
+        "sampleRate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "mediainfo.js",
+      "version": "0.3.8",
+      "scope": "tracks+title",
+      "command": "node adapters/javascript/mp4.mjs mediainfo.js controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium",
+        "width": 2,
+        "height": 2,
+        "sampleRate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "codem-isoboxer",
+      "version": "0.3.10",
+      "scope": "boxes+brand",
+      "command": "node adapters/javascript/mp4.mjs codem-isoboxer controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ],
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "mp4box",
+      "version": "2.5.0",
+      "scope": "tracks+brand",
+      "command": "node adapters/javascript/mp4.mjs mp4box controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom",
+        "width": 2,
+        "height": 2,
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "isobmff-inspector",
+      "version": "0.5.0",
+      "scope": "boxes+brand",
+      "command": "node adapters/javascript/mp4.mjs isobmff-inspector controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ],
+        "brand": "isom"
+      },
+      "error": null
+    },
+    {
+      "package": "mediabunny",
+      "version": "1.65.2",
+      "scope": "tracks+duration",
+      "command": "node adapters/javascript/mp4.mjs mediabunny controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "format": "MP4",
+        "duration": 1,
+        "width": 2,
+        "height": 2,
+        "audioCodec": "aac"
+      },
+      "error": null
+    },
+    {
+      "package": "@audio/decode-mp4",
+      "version": "1.3.1",
+      "scope": "audio_samples",
+      "command": "node adapters/javascript/mp4.mjs @audio/decode-mp4 controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 1,
+        "samples": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "jsmediatags",
+      "version": "3.9.7",
+      "scope": "tags",
+      "command": "node adapters/javascript/mp4.mjs jsmediatags controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "type": "MP4",
+        "brand": "isom",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-box-encoding",
+      "version": "1.4.1",
+      "scope": "ftyp",
+      "command": "node adapters/javascript/mp4.mjs mp4-box-encoding controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "type": "ftyp",
+        "brand": "isom",
+        "compatible": [
+          "isom",
+          "iso2",
+          "avc1",
+          "mp41"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "node-video-lib",
+      "version": "2.5.0",
+      "scope": "duration+tracks",
+      "command": "node adapters/javascript/mp4.mjs node-video-lib controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "duration": 1,
+        "tracks": 2
+      },
+      "error": null
+    },
+    {
+      "package": "mp4reader",
+      "version": "0.1.6",
+      "scope": "brand+handlers",
+      "command": "node adapters/javascript/mp4.mjs mp4reader controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "brand": "isom",
+        "handlers": [
+          "vide",
+          "soun"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "mediafile-metadata",
+      "version": "1.3.0",
+      "scope": "creation_time",
+      "command": "node adapters/javascript/mp4.mjs mediafile-metadata controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "creationDate": "2020-01-02T03:04:05.000Z"
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-parser",
+      "version": "0.3.0",
+      "scope": "tags+duration",
+      "command": "node adapters/javascript/mp4.mjs mp4-parser controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium",
+        "duration": 1
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-stream",
+      "version": "3.1.3",
+      "scope": "box_headers",
+      "command": "node adapters/javascript/mp4.mjs mp4-stream controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "fmp4.js",
+      "version": "0.2.2",
+      "scope": "box_headers",
+      "command": "node adapters/javascript/mp4.mjs fmp4.js controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "@isomp4/parser",
+      "version": "0.3.0",
+      "scope": "box_headers",
+      "command": "node adapters/javascript/mp4.mjs @isomp4/parser controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "mp4tree",
+      "version": "0.10.4",
+      "scope": "box_tree",
+      "command": "node adapters/javascript/mp4.mjs mp4tree controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "valid": true,
+        "boxes": [
+          "ftyp",
+          "moov",
+          "free",
+          "mdat"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "metaprobe",
+      "version": "0.2.1",
+      "scope": "video_metadata",
+      "command": "node adapters/javascript/mp4.mjs metaprobe controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "kind": "video",
+        "format": "mp4",
+        "width": 2,
+        "height": 2,
+        "title": "Parsarium",
+        "duration": 1
+      },
+      "error": null
+    },
+    {
+      "package": "@dantheman827/taglib-ts",
+      "version": "0.1.5",
+      "scope": "tags+audio_properties",
+      "command": "node adapters/javascript/mp4.mjs @dantheman827/taglib-ts controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "title": "Parsarium",
+        "sampleRate": 8000,
+        "channels": 1
+      },
+      "error": null
+    },
+    {
+      "package": "mp4-metadata",
+      "version": "1.0.2",
+      "scope": "creation_time",
+      "command": "node adapters/javascript/mp4.mjs mp4-metadata controls/mp4/red-av.mp4",
+      "pass": true,
+      "output": {
+        "creationTime": "2020-01-02T03:04:05.000Z"
+      },
+      "error": null
+    }
+  ],
+  "runtime": {
+    "command": "node adapters/javascript/mp4_browser.mjs controls/mp4/red-av.mp4",
+    "pass": true,
+    "output": {
+      "browser": "153.0.8010.12",
+      "width": 2,
+      "height": 2,
+      "duration": 1
+    },
+    "error": null
+  }
+}

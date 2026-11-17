@@ -1,10 +1,10 @@
 {
   "ecosystem": "c",
   "format": "svg",
-  "status": "verified_target_search_incomplete",
-  "working_target": 20,
-  "ceiling": 30,
-  "verified_third_party_count": 20,
+  "status": "curated_ten_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "svg",
@@ -15,11 +15,13 @@
   "search_hits_recorded": 25,
   "unique_search_hits": 23,
   "unresolved_documentation_leads": 0,
-  "uncertainty": "20 pinned open-source package paths passed the valid local 2x1 SVG control, including the direct NanoSVG C API and the Linux Glycin C API. The working count is met, but bounded discovery and missing adoption metrics prevent a defensible most-used top-20 claim. Three Homebrew formula-name queries saved 25 hits and 23 unique names (100-result limit per query); fuzzy name hits are not usage-ranked and projects outside Homebrew remain incompletely searched. NanoSVG came from targeted upstream documentation and a published vcpkg version-date 2023-12-29, which pins an upstream source commit because NanoSVG has no upstream tag. Its 2,039 project-wide GitHub stars are comparable to the other primary GitHub star entries but do not measure SVG-specific use. libvips and GdkPixbuf share librsvg; libsvg-cairo shares the libsvg parser; SDL3_image embeds NanoSVG, so the direct NanoSVG path adds an API but not an independent syntax engine. Canonical non-GitHub upstreams remain unranked for lack of a comparable primary metric. The control covers two rectangles, not broad SVG compliance. No malformed-input, resource-use, or vulnerability experiments were run. MuPDF 1.28.6 has a distinct native SVG parser and rendered the two control pixels; its canonical Artifex Git repository has no comparable primary GitHub star metric. Its 11,659 Homebrew requested installs in the same 365-day window are auxiliary evidence only, not mixed with stars. SDL2_image 2.8.12 parsed and rendered the same valid SVG through its documented SDL_RWops API, reporting 2x1 dimensions and red/green pixels. This is a distinct SDL2_image release and ABI from SDL3_image, but both embed NanoSVG, so it adds a package path rather than an independent SVG syntax engine. Both share the same upstream GitHub star snapshot in the primary within-cell metric. GTK 4.24.1 GtkSvg parsed the 2x1 SVG intrinsic dimensions from local file bytes using its native gtk/svg parser. Its 20,414 Homebrew requested installs are auxiliary broad package adoption evidence; its GNOME GitLab upstream has no comparable primary GitHub star metric, so it remains unranked. GTK 3.24.52 gtk_image_new_from_file parsed the SVG through the installed GdkPixbuf/librsvg loader and reported 2x1 dimensions and red/green pixels. GTK 3 is a separate released C input API, but not a new SVG parser family. Its 25,794 Homebrew requested installs are auxiliary broad adoption evidence, not mixed with the primary GitHub-star ranking. Imlib2 1.12.7 passed through a clean source build with its optional SVG loader enabled; the Homebrew Imlib2 binary lacks this plugin. It reported 2x1 dimensions and red/green pixels, but its SVG engine delegates to librsvg. The Homebrew formula has 2,096 requested installs, an auxiliary broad package signal that does not demonstrate adoption of this SVG-enabled build and is not used in the ranking. EFL Evas 1.29.0 parsed and rendered the 2x1 SVG through its installed rsvg loader, returning both control colors. The EFL package API is separate but the loader shares librsvg. Its 878 Homebrew requested installs are auxiliary broad package evidence, not mixed with the primary GitHub-star ranking. Glycin 2.2.6 was source-built from the pinned GNOME release in a pinned Ubuntu 26.04 container with only glycin-svg enabled. Its C GFile API parsed the control, identified image/svg+xml, and returned 2x1 red/green pixels. The loader delegates SVG interpretation to librsvg; it is a distinct released C input path, not a distinct SVG engine. An initial native macOS libglycin build lacked SVG support, so the verified platform is Linux. Glycin has a canonical GNOME GitLab upstream and remains unranked in the primary GitHub-star metric. libsvg2 was inspected but not counted because its public repository lacks a tagged release and clear license evidence.",
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/c/svg/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/c/svg/parsers.json",
   "third_party_control_results": "data/c/svg/verification.json",
   "runtime_evidence": "data/c/svg/standard.json",
   "registry_snapshot": "data/c/svg/registry-snapshot.json",
   "unresolved_leads": "data/c/svg/leads.json",
-  "source_lock": "data/c/svg/source-lock.json"
+  "source_lock": "data/c/svg/source-lock.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/c/svg"
 }

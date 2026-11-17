@@ -1,6 +1,7 @@
 """Prepare and preflight one native fuzz plan for every verified project."""
 
 from datetime import datetime, timezone
+from hashlib import sha256
 import json
 from pathlib import Path
 import subprocess
@@ -17,6 +18,23 @@ def main() -> None:
         scratch = Path(temp)
         for path in manifests:
             relative = path.parent.relative_to(ROOT / "projects")
+            manifest = json.loads(path.read_text())
+            if manifest.get("native_campaign_supported") is False:
+                rejected = subprocess.run(
+                    [sys.executable, str(ROOT / "scripts/prepare_native_run.py"),
+                     *relative.parts, str(scratch.joinpath(*relative.parts))],
+                    capture_output=True, text=True,
+                )
+                if rejected.returncode == 0 or "unsupported" not in rejected.stderr:
+                    raise RuntimeError(f"native campaign was not rejected: {relative}")
+                receipt = path.parent / "verification.json"
+                records.append({"project": str(relative), "status": "unsupported",
+                                "engine": "in-process native campaign",
+                                "reason": "in-process native campaign is unsupported; use one-shot AFL++",
+                                "image_id": json.loads(receipt.read_text())["image_id"],
+                                "control_sha256": manifest["control_sha256"],
+                                "project_receipt_sha256": sha256(receipt.read_bytes()).hexdigest()})
+                continue
             run_dir = scratch.joinpath(*relative.parts)
             prepare = subprocess.run(
                 [sys.executable, str(ROOT / "scripts/prepare_native_run.py"),
@@ -43,7 +61,7 @@ def main() -> None:
               "results": records}
     (ROOT / "data/native-plan-smoke.json").write_text(json.dumps(report, indent=2) + "\n")
     print(f"{report['projects_ready']}/{report['projects_total']} native campaign plans ready")
-    if report["projects_ready"] != report["projects_total"]:
+    if any(item["status"] == "failed" for item in records):
         raise SystemExit(1)
 
 

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "cell": "mp3/cpp",
+  "checked_at_utc": "2026-11-17T03:45:54.752404+00:00",
+  "checks": [
+    {
+      "command": "python3 scripts/snapshot_cpp_mp3.py",
+      "pass": true,
+      "result": "6 Homebrew queries, 31 hits, 25 distinct formulae; taglib 4,118 installs on request (365 days)"
+    },
+    {
+      "command": "python3 controls/mp3/check_controls.py",
+      "pass": true,
+      "result": "header walk: 11 frames at 64 kbps (44.1 kHz mono, 287 ms) and 12 frames at 32 kbps (22.05 kHz stereo, 314 ms), matching the TagLib properties"
+    },
+    {
+      "command": "python3 scripts/run_project.py mp3 cpp taglib",
+      "pass": true,
+      "image_id": "sha256:03e4d05eaac1d756df7d4fde941d390ef49b02a6184acdb420b50eab5845fb8d",
+      "output": {
+        "version": 1,
+        "layer": 3,
+        "sample_rate": 44100,
+        "channels": 1,
+        "bitrate_kbps": 64,
+        "length_ms": 287
+      },
+      "parser_source_lines_covered": 612,
+      "mpegheader_cpp_lines_covered": 119,
+      "receipt_sha256": "9e9119a144958e483b186f4f01faba1417cf554021a2bf8d8f4e764847a671f0"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 cpp taglib controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 cpp taglib controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "cd scripts && python3 build_afl_native.py mp3 cpp taglib",
+      "pass": true,
+      "image_id": "sha256:e2e382a0d65fd9a31dc079bd3a6bb5f79ed1e5c3ab094370ed20c5de61526fb8",
+      "feedback_edges": 880,
+      "afl_map_size": 37354,
+      "receipt_sha256": "e5b6552e966d8ff9068a6820511669000977cdf0f7642bec0850343fb19b7c2f"
+    },
+    {
+      "command": "cd scripts && python3 verify_cpp_mp3_feedback.py",
+      "pass": true,
+      "first_afl_tuples": 880,
+      "second_afl_tuples": 866,
+      "afl_tuple_difference": 30,
+      "repeated_controls_identical": true,
+      "second_control_output": {
+        "version": 2,
+        "layer": 3,
+        "sample_rate": 22050,
+        "channels": 2,
+        "bitrate_kbps": 32,
+        "length_ms": 314
+      },
+      "receipt_sha256": "d17a620a0cb0fa3e1862900cf4607701f3ad6ca3e70f379968e72478dfe0ae62"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare mp3 cpp taglib runs/mp3-taglib-afl --seed controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "seeds": [
+        "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+        "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328"
+      ]
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/mp3-taglib-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "OK"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "825/825 AFL++ overlays and 521/521 ecosystem feedback checks current"
+    },
+    {
+      "command": "python3 scripts/validate_catalog.py",
+      "pass": true,
+      "result": "passes only after python3 scripts/build_matrix.py adds cpp/mp3 to data/pilot-cells.json; that shared file was regenerated for the check and then restored, so the integrator must regenerate it"
+    }
+  ],
+  "notes": [
+    "Unlike the C mpg123 pilot, the libFuzzer binary links TagLib built with -fsanitize=fuzzer-no-link, so both libFuzzer and the AFL++ overlay instrument TagLib sources.",
+    "TagLib reports frame-header properties and does not decode Layer III audio; source coverage reaches mpegheader.cpp, mpegproperties.cpp and xingheader.cpp, not a synthesis path."
+  ],
+  "not_run": [
+    "AFL++ campaign",
+    "malformed-input or vulnerability experiments",
+    "aggregate catalog/website regeneration (build_matrix, build_readmes, audit_projects --write, refresh_smoke_batch.py, smoke reports)",
+    "catalog/mp3/cpp README and projects/mp3/README.md index entry (generated shared files)"
+  ]
+}

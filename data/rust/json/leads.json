@@ -1,0 +1,268 @@
+{
+  "captured_from": "data/rust/json/registry-snapshot.json",
+  "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
+  "excluded_high_download_hits": [
+    {
+      "name": "schemars",
+      "version": "1.2.3",
+      "recent_downloads_90d": 253625369,
+      "status": "excluded",
+      "reason": "Generates JSON Schema from Rust types; no JSON text parser.",
+      "source": "https://crates.io/crates/schemars"
+    },
+    {
+      "name": "serde_path_to_error",
+      "version": "0.1.20",
+      "recent_downloads_90d": 126847416,
+      "status": "excluded",
+      "reason": "Wrapper that reports error paths around another serde Deserializer such as serde_json; not a parser itself.",
+      "source": "https://crates.io/crates/serde_path_to_error"
+    },
+    {
+      "name": "ureq",
+      "version": "3.5.2",
+      "recent_downloads_90d": 88627524,
+      "status": "excluded",
+      "reason": "HTTP client; matched JSON body helpers.",
+      "source": "https://crates.io/crates/ureq"
+    },
+    {
+      "name": "erased-serde",
+      "version": "0.4.11",
+      "recent_downloads_90d": 74220860,
+      "status": "excluded",
+      "reason": "Type-erased serde traits; no JSON parser.",
+      "source": "https://crates.io/crates/erased-serde"
+    },
+    {
+      "name": "assert-json-diff",
+      "version": "2.0.2",
+      "recent_downloads_90d": 51017195,
+      "status": "excluded",
+      "reason": "Compares serde_json values; no parser of its own.",
+      "source": "https://crates.io/crates/assert-json-diff"
+    },
+    {
+      "name": "json-patch",
+      "version": "5.0.0",
+      "recent_downloads_90d": 40707324,
+      "status": "excluded",
+      "reason": "RFC 6902 operations over serde_json values.",
+      "source": "https://crates.io/crates/json-patch"
+    },
+    {
+      "name": "jsonptr",
+      "version": "0.8.2",
+      "recent_downloads_90d": 39105508,
+      "status": "excluded",
+      "reason": "RFC 6901 JSON Pointer resolution over values; no text parser.",
+      "source": "https://crates.io/crates/jsonptr"
+    },
+    {
+      "name": "json5",
+      "version": "1.3.7",
+      "recent_downloads_90d": 18832986,
+      "status": "excluded",
+      "reason": "JSON5 superset format, not RFC 8259 JSON.",
+      "source": "https://crates.io/crates/json5"
+    },
+    {
+      "name": "jsonc-parser",
+      "version": "0.34.0",
+      "recent_downloads_90d": 3628833,
+      "status": "excluded",
+      "reason": "JSON with comments superset parser; superset format, outside RFC 8259 scope of this cell.",
+      "source": "https://crates.io/crates/jsonc-parser"
+    },
+    {
+      "name": "serde-saphyr",
+      "version": "2.1.1",
+      "recent_downloads_90d": 15320691,
+      "status": "excluded",
+      "reason": "YAML deserializer.",
+      "source": "https://crates.io/crates/serde-saphyr"
+    },
+    {
+      "name": "ijson",
+      "version": "0.1.7",
+      "recent_downloads_90d": 1818125,
+      "status": "excluded_no_own_parser",
+      "reason": "Pinned 0.1.7 public API supplies IValue, serde Deserialize, and conversion of already parsed values but no own local JSON text/byte/stream parser. examples/comparison.rs invokes serde_json::from_slice to decode JSON into IValue; the underlying syntax parser is selected serde_json, so this would duplicate that parser family.",
+      "source": "https://crates.io/crates/ijson",
+      "source_archive": "https://static.crates.io/crates/ijson/ijson-0.1.7.crate",
+      "source_sha256": "aa5ce332c21eba6ae0217cd287ef06042abbb2af98e33854ba4da2c607ab3b7a",
+      "source_evidence": "ijson-0.1.7/examples/comparison.rs and src/de.rs"
+    }
+  ],
+  "unresolved_leads": [
+    {
+      "name": "json-event-parser",
+      "version": "0.2.3",
+      "recent_downloads_90d": 544561,
+      "status": "unresolved",
+      "reason": "Event-based JSON reader over io::Read and slices (oxigraph). Not run on the controls.",
+      "source": "https://crates.io/crates/json-event-parser"
+    },
+    {
+      "name": "serde_json_bytes",
+      "version": "0.2.6",
+      "recent_downloads_90d": 539988,
+      "status": "unresolved_shared_family",
+      "reason": "Value type with Bytes-backed strings, parsed by serde_json; likely the same parser family.",
+      "source": "https://crates.io/crates/serde_json_bytes"
+    },
+    {
+      "name": "tinyjson",
+      "version": "2.5.1",
+      "recent_downloads_90d": 481002,
+      "status": "unresolved",
+      "reason": "Small JSON parser (str::parse::<JsonValue>()). Not run on the controls.",
+      "source": "https://crates.io/crates/tinyjson"
+    },
+    {
+      "name": "lite-json",
+      "version": "0.2.0",
+      "recent_downloads_90d": 404322,
+      "status": "unresolved",
+      "reason": "no_std JSON parser (json_parser::parse_json). Not run on the controls.",
+      "source": "https://crates.io/crates/lite-json"
+    },
+    {
+      "name": "biome_json_parser",
+      "version": "0.5.7",
+      "recent_downloads_90d": 310897,
+      "status": "unresolved",
+      "reason": "Lossless rowan-based JSON parser from the Biome toolchain; produces a concrete syntax tree. Not run on the controls.",
+      "source": "https://crates.io/crates/biome_json_parser"
+    },
+    {
+      "name": "serde_json_borrow",
+      "version": "0.9.0",
+      "recent_downloads_90d": 185156,
+      "status": "unresolved_shared_family",
+      "reason": "Borrowed DOM deserialized through serde_json; likely the same parser family.",
+      "source": "https://crates.io/crates/serde_json_borrow"
+    },
+    {
+      "name": "struson",
+      "version": "0.8.0",
+      "recent_downloads_90d": 138182,
+      "status": "unresolved",
+      "reason": "Low-level streaming JSON reader (JsonStreamReader over io::Read). Not run on the controls.",
+      "source": "https://crates.io/crates/struson"
+    },
+    {
+      "name": "json_scanner",
+      "version": "0.1.0",
+      "recent_downloads_90d": 102136,
+      "status": "unresolved",
+      "reason": "JSON parser that reports positions. Not run on the controls.",
+      "source": "https://crates.io/crates/json_scanner"
+    },
+    {
+      "name": "actson",
+      "version": "2.1.0",
+      "recent_downloads_90d": 89126,
+      "status": "unresolved",
+      "reason": "Reactive, non-blocking event JSON parser. Not run on the controls.",
+      "source": "https://crates.io/crates/actson"
+    },
+    {
+      "name": "json-deserializer",
+      "version": "0.4.4",
+      "recent_downloads_90d": 84410,
+      "status": "unresolved",
+      "reason": "Deserializer with its own JSON parser (json_deserializer::parse(&[u8])). Not run on the controls.",
+      "source": "https://crates.io/crates/json-deserializer"
+    }
+  ],
+  "note": "Unresolved leads remain unbuilt and unrun on the controls; selected simd-json, sonic-rs, jiter and json leads have separate pinned projects and verification receipts.",
+  "verified_leads": [
+    {
+      "name": "simd-json",
+      "version": "0.19.0",
+      "recent_downloads_90d": 6730588,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/simd_json/verification.json"
+    },
+    {
+      "name": "sonic-rs",
+      "version": "0.5.11",
+      "recent_downloads_90d": 3669348,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/sonic_rs/verification.json"
+    },
+    {
+      "name": "jiter",
+      "version": "0.19.0",
+      "recent_downloads_90d": 5274664,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/jiter/verification.json",
+      "family_note": "Shared Jiter parser family with Python pydantic-core 2.50.4, which pins Jiter 0.18.0; no cross-ecosystem metric comparison."
+    },
+    {
+      "name": "json",
+      "version": "0.12.4",
+      "recent_downloads_90d": 2672413,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/json_crate/verification.json"
+    },
+    {
+      "name": "aws-smithy-json",
+      "version": "0.65.1",
+      "recent_downloads_90d": 59322077,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/aws_smithy_json/verification.json",
+      "scope_note": "Public generic json_token_iter(&[u8]) documented in pinned src/deserialize.rs; TESTING.md gives local-file JSONTestSuite runner. Adapter enforces one balanced root and decodes escaped strings. Source documents permissive numeric syntax; no malformed probes run."
+    },
+    {
+      "name": "hifijson",
+      "version": "0.5.0",
+      "recent_downloads_90d": 2630468,
+      "status": "selected",
+      "reason": "High-fidelity byte-slice lexer and own value parser; selected after exact two-control runs, own-source coverage, and stable differential AFL++ feedback.",
+      "source": "https://crates.io/crates/hifijson",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/hifijson/verification.json",
+      "scope_note": "Pinned own byte-slice lexer and bounded Value parser, with exactly_one enforcing one root. Release Cargo.toml declares MIT but no LICENSE file is bundled."
+    },
+    {
+      "name": "miniserde",
+      "version": "0.1.46",
+      "recent_downloads_90d": 1335406,
+      "status": "selected",
+      "reason": "Own non-recursive JSON deserializer with generic Value path; selected after exact two-control runs, own-source coverage and stable AFL++ feedback.",
+      "source": "https://crates.io/crates/miniserde",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/miniserde/verification.json",
+      "scope_note": "Public json::from_str::<json::Value>(&str) consumes local UTF-8 text; own parser distinct from serde_json despite common author."
+    },
+    {
+      "name": "gjson",
+      "version": "0.8.1",
+      "recent_downloads_90d": 1151387,
+      "status": "selected",
+      "reason": "Own whole-root valid function and lazy JSON value scanner; selected after full traversal of both exact valid controls, own-source coverage and stable AFL++ feedback.",
+      "source": "https://crates.io/crates/gjson",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/gjson/verification.json",
+      "scope_note": "Path-query API alone assumes validity; adapter calls gjson::valid first, then gjson::parse and Value::each for all children. Shares tidwall GJSON design/maintainer family with Go gjson, separate Rust source."
+    },
+    {
+      "name": "json-syntax",
+      "version": "0.13.1",
+      "recent_downloads_90d": 702428,
+      "status": "selected",
+      "reason": "Own documented JsonValue::parse_slice byte parser, both exact valid controls, own-source coverage and stable differential AFL++ feedback.",
+      "source": "https://crates.io/crates/json-syntax",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/json_syntax/verification.json",
+      "scope_note": "Pinned own parser builds DOM and code map; optional serde_json feature disabled; serde_json in harness serializes summary only."
+    }
+  ]
+}

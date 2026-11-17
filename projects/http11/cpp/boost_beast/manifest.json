@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "cpp",
+  "package": "boost_beast",
+  "release": "1.92.0",
+  "catalog_parser": "data/cpp/http11/parsers.json",
+  "source_lock": "projects/http11/cpp/boost_beast/source-lock.json",
+  "source_sha256": "c4a3b310ddd2472416e091067166b0713be97c63f38c212c484ada022fd296ce",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium?x=1",
+    "version": "1.1",
+    "host": "example.test"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in header-only Boost.Beast HTTP parser instantiated by byte-input harness",
+  "coverage_subject_prefix": "/work/boost_1_92_0/boost/beast/http/",
+  "format_specific_coverage_file_suffix": "/impl/basic_parser.ipp"
+}

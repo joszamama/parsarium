@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T10:12:36.791612+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
+  "differential_kind": "fixed_valid_nested_array",
+  "standard_feedback": "JSON.parse has staged native function-entry feedback, not JavaScript source ranges",
+  "results": [
+    {
+      "project": "json/javascript/jsonparse",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "d40b9c0716bac0f5ed69f56a82bbf204949fa8180f505ecc02b4c235fbe64bc1",
+      "base_image_id": "sha256:1172b0608cc5127b5617336f1f426df9fd3264055a60189df342079b9cef72ec",
+      "overlay_image_id": "sha256:0c5f72d661e2d8a340529b3cfa19f03542b0bfd04d34fa8bb5bbba10f04c10bb",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 123,
+      "control_afl_tuples": 143,
+      "differential_parser_features": 112,
+      "differential_afl_tuples": 132,
+      "parser_feature_difference": 17,
+      "afl_tuple_difference": 17,
+      "control_only_features_by_file": {
+        "jsonparse.js": 14
+      },
+      "differential_only_features_by_file": {
+        "jsonparse.js": 3
+      }
+    },
+    {
+      "project": "json/javascript/stream_json",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "856f6801df73c1ab6ae0c314bedd9042cc58118f7454e70203a05b9df6ed8aa7",
+      "base_image_id": "sha256:922586205e7b49c4fd4cf230c1d7a59fa96bbbe0dd11fc0d8fa0b96635051cb2",
+      "overlay_image_id": "sha256:3905a980681f71dec3f595362a66938a102437546427276df31b33d0f36c9afd",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 107,
+      "control_afl_tuples": 127,
+      "differential_parser_features": 94,
+      "differential_afl_tuples": 114,
+      "parser_feature_difference": 15,
+      "afl_tuple_difference": 15,
+      "control_only_features_by_file": {
+        "src/core/parser.js": 14
+      },
+      "differential_only_features_by_file": {
+        "src/core/parser.js": 1
+      }
+    },
+    {
+      "project": "json/javascript/humanwhocodes_momoa",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "a013df0eb697246e289137dee135de8ed6d156d5f3c8adc581a135454224ef35",
+      "base_image_id": "sha256:2ba5ff701c64f501b77de24f234dd8ae3de619c8df30ff35f2802ae942eaaed3",
+      "overlay_image_id": "sha256:8b9789b2718363522980be28ad8184b084f9886c6bcfd3fbf1d0ac1bb823fdf0",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 126,
+      "control_afl_tuples": 146,
+      "differential_parser_features": 111,
+      "differential_afl_tuples": 131,
+      "parser_feature_difference": 17,
+      "afl_tuple_difference": 17,
+      "control_only_features_by_file": {
+        "dist/momoa.js": 16
+      },
+      "differential_only_features_by_file": {
+        "dist/momoa.js": 1
+      }
+    },
+    {
+      "project": "json/javascript/bfj",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "5322724ac7165fd08f522e5b0bdfc164d74ff6871f78fd4846893a569e015aa0",
+      "base_image_id": "sha256:9cfaeb7eeeec0f39a97c0c6cb9bc8e742319d268c9f6d5bfe8b0096ce577ebb6",
+      "overlay_image_id": "sha256:cdea4f4fe859f2a7231bf12f8cd5831719ff001639e6dd3cd71b907befc305fa",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 130,
+      "control_afl_tuples": 150,
+      "differential_parser_features": 126,
+      "differential_afl_tuples": 146,
+      "parser_feature_difference": 4,
+      "afl_tuple_difference": 4,
+      "control_only_features_by_file": {
+        "src/walk.js": 4
+      },
+      "differential_only_features_by_file": {}
+    },
+    {
+      "project": "json/javascript/streamparser_json",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "74920c2c32833b18fcbad874e5e7e31bfe3f1db0783dafa106101d3286e364ec",
+      "base_image_id": "sha256:40f14a69de6aa2f111a9ad50a80483297078e75dfa19dfbf793ffcb090223d4b",
+      "overlay_image_id": "sha256:2e6abd75bc26da108459537701708fa21ba62aaa6d29aa838e0e51b004c623b7",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 154,
+      "control_afl_tuples": 173,
+      "differential_parser_features": 142,
+      "differential_afl_tuples": 161,
+      "parser_feature_difference": 30,
+      "afl_tuple_difference": 30,
+      "control_only_features_by_file": {
+        "dist/mjs/tokenizer.js": 14,
+        "dist/mjs/tokenparser.js": 7
+      },
+      "differential_only_features_by_file": {
+        "dist/mjs/tokenizer.js": 4,
+        "dist/mjs/tokenparser.js": 5
+      }
+    }
+  ]
+}

@@ -1,10 +1,12 @@
-# C × ZIP: verified parser ranking
+# C × ZIP: selected parsers
 
-20 verified third-party package paths; working goal 20, ceiling 30. The metric is GitHub repository stars captured between 2026-11-12T07:50:21.979330+00:00 and 2026-11-12T15:07:17.386662+00:00. The captured Conan Center recipe-name surface provides no comparable per-recipe download counts. Stars are a repository-level adoption proxy, compared only within C, and do not establish a complete most-used set. 5 path(s) lack a metric and remain unranked.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-Search hits, unresolved leads, and the C standard-library inventory are separate. See `cell.json`, `registry-snapshot.json`, `leads.json`, `standard.json`, and `verification.json`.
+## Primary within-cell adoption metric
 
-| Rank | Package | Pinned release | Repository stars | Scope | Underlying family |
+GitHub stars of primary upstream repository, where package-specific and available.
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [sqlite](https://www.sqlite.org/zipfile.html) | 3.54.1 | 10,998 | entry name and decompressed entry bytes | SQLite Zipfile virtual table with zlib DEFLATE |
 | 2 | [libarchive](https://github.com/libarchive/libarchive/blob/v3.8.11/libarchive/archive.h) | 3.8.11 | 3,672 | entry name and decompressed entry bytes | libarchive ZIP reader |
@@ -15,14 +17,13 @@ Search hits, unresolved leads, and the C standard-library inventory are separate
 | 7 | [physfs](https://github.com/icculus/physfs/blob/release-3.2.0/src/physfs.h) | 3.2.0 | 844 | mounted ZIP entry name and decompressed entry bytes | PhysicsFS ZIP archiver |
 | 8 | [unarr](https://github.com/selmf/unarr/blob/v1.2.0/unarr.h.in) | 1.2.0 | 92 | entry name and decompressed entry bytes | unarr ZIP reader |
 | 9 | [zziplib](https://github.com/gdraheim/zziplib/blob/v0.13.80/zzip/zzip.h) | 0.13.80 | 70 | entry name and decompressed entry bytes | ZZIPlib ZIP reader |
-| 10 | [unziplib](https://github.com/bitbank2/unzipLIB/blob/1.0.0/src/unzip.h) | 1.0.0 | 69 | entry name and decompressed entry bytes | unzipLIB modified classic MiniZip |
-| 11 | [junzip](https://github.com/jokkebk/JUnzip/blob/v0.1.1/junzip.h) | v0.1.1 | 63 | entry name and decompressed entry bytes | JUnzip ZIP record reader with zlib DEFLATE |
-| 12 | [lowzip](https://github.com/svaarala/lowzip/blob/v1.0.1/README.md) | 1.0.1 | 46 | entry name and decompressed entry bytes | lowzip ZIP reader |
-| 13 | [libc7zip](https://github.com/itchio/libc7zip/blob/v1.10.0/include/libc7zip.h) | v1.10.0 | 18 | entry name and decompressed entry bytes | libc7zip → lib7zip → 7-Zip ZIP engine |
-| 14 | [zipc](https://www.msweet.org/zipc/zipc.html) | v1.3 | 13 | decompressed bytes for a known named ZIP entry; no entry enumeration API verified | zipc ZIP container reader with zlib DEFLATE |
-| 15 | [libtfs](https://github.com/tamatebako/libtfs/blob/v0.13.0/include/tebako/fs/c_api.h) | v0.13.0 | 8 | mounted ZIP entry name and decompressed entry bytes | libtfs C facade over libzip ZIP backend |
-| unranked | [aosp-libzipfile](https://android.googlesource.com/platform/system/core/+/refs/tags/android-4.4.4_r2/include/zipfile/zipfile.h) | android-4.4.4_r2 | unknown | entry name and decompressed entry bytes from local ZIP bytes | AOSP libzipfile ZIP reader |
-| unranked | [infozip-unzip](https://github.com/madler/unzip/blob/master/unzip.h) | 6.0 | unknown | entry name parsed by Info-ZIP listing and decompressed entry bytes from its C API | Info-ZIP UnZip 6.0 engine |
-| unranked | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | unknown | entry name and decompressed entry bytes | libgsf ZIP reader |
-| unranked | [minizip](https://github.com/madler/zlib/blob/v1.4/contrib/minizip/unzip.h) | 1.4 | unknown | entry name and decompressed entry bytes | classic MiniZip |
-| unranked | [tcl-zipfs](https://www.tcl-lang.org/man/tcl9.1/TclLib/zipfs.html) | 9.1.0 | unknown | mounted ZIP entry name and decompressed entry bytes | Tcl Zipfs ZIP reader |
+
+## Supplemental numeric evidence
+
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
+
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | [Debian source installed count](https://sources.debian.org/src/libgsf/) | 86,949 | entry name and decompressed entry bytes | libgsf ZIP reader |
+
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "ijson",
+  "release": "3.6.0",
+  "catalog_parser": "data/python/json/parsers.json",
+  "source_lock": "projects/json/python/ijson/source-lock.json",
+  "source_sha256": "ec8f9265524e724905ecf00bdd061c374baaa8d5045ef50425695fb06efb45f5",
+  "tested_backend": "yajl2_c (ijson default when the _yajl2 extension imports; asserted through ijson.backend_name)",
+  "underlying_release": "yajl 2.1.1, rtobar/yajl@dd88e2ea2fc3f045722f6fee362af2643b5394f5",
+  "underlying_source_sha256": "071d41d073c1485a37e90e41aa8917e541861b9243911d4d8ac68394ee938f07",
+  "build_note": "Source-built from the pinned sdist with IJSON_EMBED_YAJL=1, clang -O0 and LLVM source coverage. Official Linux wheels link the same yajl commit as a separately built -O3 shared library; linkage and optimisation differ from the shipped wheel.",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/json/structure.json",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "expected_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "api": "ijson.items(BytesIO(local JSON bytes), '') with exactly one root item",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-region coverage of the source-built ijson _yajl2 extension: ijson C event/builder sources plus embedded yajl lexer and parser",
+  "coverage_subject_prefix": "/work/ijson-source/",
+  "format_specific_coverage_file_suffix": "/yajl_parser.c",
+  "underlying_coverage_subject_prefix": "/work/ijson-source/yajl-patched-sources/src/",
+  "underlying_format_specific_coverage_file_suffix": "/yajl_lex.c",
+  "afl_coverage_subject_prefix": "/work/ijson-source/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/ijson/backends/_yajl2*.so",
+  "native_campaign_supported": false,
+  "scope": "JSON structure and values from a local binary stream through the default yajl2_c backend; valid nested object and nested array controls only",
+  "afl_package_release": "4.04c-4"
+}

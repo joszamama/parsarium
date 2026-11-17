@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "policy": "Post-adoption selection gate: retain only paths with a pinned Docker control, parser-derived instrumentation, and an audited AFL++ overlay. Do not backfill an excluded path with a lower-ranked lead without independent verification. The recorded adoption metrics remain positive but do not establish runnability.",
+  "paths": [
+    {
+      "ecosystem": "javascript",
+      "format": "ascii_ply",
+      "name": "@draco-rust/ply",
+      "project": "ascii_ply/javascript/draco_rust_ply",
+      "reason": "no_committed_container_control_or_parser_feedback",
+      "evidence": "data/curation/preten/javascript/ascii_ply/verification.json",
+      "limitation": "Legacy valid-control result exists, but the candidate WASM Docker harness has no committed container control or parser-source AFL receipt."
+    },
+    {
+      "ecosystem": "python",
+      "format": "ascii_ply",
+      "name": "pymeshlab",
+      "project": "ascii_ply/python/pymeshlab",
+      "reason": "native_parser_feedback_unavailable",
+      "evidence": "data/curation/feedback-blockers/ascii_ply-python-pymeshlab.json",
+      "limitation": "Pinned Docker controls pass; QEMU valid-control probes time out or fail and scoped Frida yields no plugin tuples."
+    },
+    {
+      "ecosystem": "python",
+      "format": "ascii_ply",
+      "name": "libigl",
+      "project": "ascii_ply/python/libigl",
+      "reason": "no_committed_container_control_or_parser_feedback",
+      "evidence": "data/curation/preten/python/ascii_ply/verification.json",
+      "limitation": "Legacy valid-control result exists, but the candidate Docker harness has no committed container control or stable parser-feedback receipt."
+    },
+    {
+      "ecosystem": "python",
+      "format": "svg",
+      "name": "PySide6",
+      "project": "svg/python/pyside6",
+      "reason": "native_parser_feedback_unavailable",
+      "evidence": "data/curation/feedback-blockers/svg-python-pyside6.json",
+      "limitation": "Pinned Docker controls pass; native QtSvg parser feedback is not verified."
+    },
+    {
+      "ecosystem": "python",
+      "format": "svg",
+      "name": "PyQt6",
+      "project": "svg/python/pyqt6",
+      "reason": "native_parser_feedback_unavailable",
+      "evidence": "data/curation/feedback-blockers/svg-python-pyqt6.json",
+      "limitation": "Pinned Docker controls pass; QEMU and Frida valid-control probes do not yield stable native QtSvg feedback."
+    }
+  ]
+}

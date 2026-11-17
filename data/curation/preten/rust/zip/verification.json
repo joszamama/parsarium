@@ -1,0 +1,292 @@
+{
+  "checked_at_utc": "2026-11-12T00:53:04.011300+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27) (Homebrew)",
+  "build_command": "cargo build --locked (from adapters/rust/zip)",
+  "control_sha256": {
+    "controls/zip/hello.zip": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b"
+  },
+  "control_meaning": "Valid one-entry DEFLATE ZIP: hello.txt contains parsarium followed by newline",
+  "third_party": [
+    {
+      "package": "zip",
+      "version": "9.5.1",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "eazip",
+      "version": "0.2.7",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip eazip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "rc-zip-sync",
+      "version": "4.4.2",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip rc-zip-sync controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "rawzip",
+      "version": "0.5.2",
+      "scope": "Entry name and externally DEFLATE-decoded text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip rawzip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "tinyzip",
+      "version": "0.4.0",
+      "scope": "Entry name and externally DEFLATE-decoded text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip tinyzip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "piz",
+      "version": "0.5.1",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip piz controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "zip_next",
+      "version": "1.1.1",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip_next controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "zip-lzma",
+      "version": "0.6.3",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip-lzma controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "zip-extract",
+      "version": "0.4.1",
+      "scope": "Extracted entry name and text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip-extract controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "zip-extensions",
+      "version": "0.14.1",
+      "scope": "Decompressed named ZIP entry",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip-extensions controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "oxiarc-archive",
+      "version": "0.4.2",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip oxiarc-archive controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "openpack",
+      "version": "0.2.7",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip openpack controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "s-zip",
+      "version": "0.15.0",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip s-zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "archiver-rs",
+      "version": "0.5.1",
+      "scope": "ZIP entry name and count",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip archiver-rs controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "entry_count": 1,
+        "name": "hello.txt"
+      },
+      "error": null
+    },
+    {
+      "package": "zip_structs",
+      "version": "0.2.1",
+      "scope": "ZIP local-header entry name and declared size",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip_structs controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": null,
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "async_zip",
+      "version": "0.0.19",
+      "scope": "Entry name and decompressed text via deprecated memory API",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip async_zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "astral_async_zip",
+      "version": "0.0.22",
+      "scope": "Entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip astral_async_zip controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "archive-core",
+      "version": "0.1.6",
+      "scope": "ZIP entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip archive-core controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "zip-forensic-core",
+      "version": "0.2.3",
+      "scope": "ZIP entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip zip-forensic-core controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    },
+    {
+      "package": "libarchive2",
+      "version": "0.2.1",
+      "scope": "ZIP entry name and decompressed text",
+      "control": "controls/zip/hello.zip",
+      "command": "adapters/rust/zip/target/debug/parsarium-rust-zip libarchive2 controls/zip/hello.zip",
+      "pass": true,
+      "output": {
+        "content": "parsarium\n",
+        "name": "hello.txt",
+        "size": 10
+      },
+      "error": null
+    }
+  ]
+}

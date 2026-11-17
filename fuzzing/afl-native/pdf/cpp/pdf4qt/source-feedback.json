@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "engine": "afl-showmap 4.33c, one fixed valid PDF per run",
+  "source_scope": "AFL_LLVM_ALLOWLIST: PDF4QT pdfdocumentreader.cpp and pdfparser.cpp",
+  "command": "AFL_MAP_SIZE=4243 afl-showmap -q -m none -t 10000 -o OUTPUT -- /work/fuzzer /input/FILE",
+  "fuzzer_input_api": "pdf::PDFDocumentReader::readFromBuffer(QByteArray)",
+  "repeated_fresh_container_runs_per_input": 3,
+  "identical_edge_ids_across_repeats": true,
+  "control": {
+    "path": "controls/pdf/one-page.pdf",
+    "sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+    "pages": 1,
+    "feedback_edges": 394
+  },
+  "valid_variant": {
+    "path": "controls/pdf/two-page.pdf",
+    "sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+    "pages": 2,
+    "feedback_edges": 395
+  },
+  "shared_edge_ids": 394,
+  "control_only_edge_ids": 0,
+  "variant_only_edge_ids": 1,
+  "pass": true
+}

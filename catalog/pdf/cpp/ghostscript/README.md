@@ -19,6 +19,11 @@
 
 Direct Ghostscript C API call from C++17; PDF interpreter is a distinct engine from Poppler, PoDoFo, qpdf, and MuPDF. Source archive is GhostPDL, which contains Ghostscript. Canonical upstream is Ghostscript Git; GitHub mirrors are not used for popularity.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/ghostscript/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp ghostscript
+python3 parsarium.py run pdf cpp ghostscript controls/pdf/one-page.pdf
+```

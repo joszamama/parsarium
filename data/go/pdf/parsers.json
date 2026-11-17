@@ -96,32 +96,6 @@
     }
   },
   {
-    "name": "github.com/giraffesyo/pdf",
-    "module": "github.com/giraffesyo/pdf",
-    "version": "v0.9.0",
-    "license": "Apache-2.0",
-    "input_api": "Extract(context.Context, io.ReaderAt, size).PageCount",
-    "documentation": "https://pkg.go.dev/github.com/giraffesyo/pdf@v0.9.0",
-    "scope": "page count",
-    "family": "giraffesyo PDF extractor",
-    "expected_output": {
-      "pages": 1
-    }
-  },
-  {
-    "name": "github.com/benoitkugler/pdf/reader",
-    "module": "github.com/benoitkugler/pdf",
-    "version": "v0.0.15",
-    "license": "MIT",
-    "input_api": "ParsePDFReader(io.ReadSeeker, Options{}).Catalog.Pages.Count()",
-    "documentation": "https://pkg.go.dev/github.com/benoitkugler/pdf/reader@v0.0.15",
-    "scope": "page count",
-    "family": "benoitkugler PDF model",
-    "expected_output": {
-      "pages": 1
-    }
-  },
-  {
     "name": "github.com/gen2brain/go-fitz",
     "module": "github.com/gen2brain/go-fitz",
     "version": "v1.28.2",
@@ -148,20 +122,6 @@
     }
   },
   {
-    "name": "github.com/go-pdfkit/extract",
-    "module": "github.com/go-pdfkit/extract",
-    "version": "v0.11.0",
-    "license": "BSD-3-Clause",
-    "input_api": "reader.Open([]byte); extract.Text(*reader.Document, 1)",
-    "documentation": "https://pkg.go.dev/github.com/go-pdfkit/extract@v0.11.0",
-    "scope": "page text",
-    "family": "go-pdfkit reader family",
-    "expected_output": {
-      "text": "Parsarium"
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
-  },
-  {
     "name": "github.com/unidoc/unidoc/pdf/core",
     "module": "github.com/unidoc/unidoc",
     "version": "v2.2.0+incompatible",
@@ -174,102 +134,5 @@
       "objects": 6
     },
     "license_evidence": "https://github.com/unidoc/unidoc/blob/v2.2.0/LICENSE.md"
-  },
-  {
-    "name": "seehuhn.de/go/pdf",
-    "module": "seehuhn.de/go/pdf",
-    "version": "v0.8.0",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size, nil).GetMeta().Version",
-    "documentation": "https://pkg.go.dev/seehuhn.de/go/pdf@v0.8.0",
-    "scope": "PDF version",
-    "family": "seehuhn PDF reader",
-    "expected_output": {
-      "version": "1.4"
-    }
-  },
-  {
-    "name": "github.com/dcu/pdf",
-    "module": "github.com/dcu/pdf",
-    "version": "v0.0.0-20190612170416-c8b299d05f89",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size).NumPage()",
-    "documentation": "https://pkg.go.dev/github.com/dcu/pdf@v0.0.0-20190612170416-c8b299d05f89",
-    "scope": "page count",
-    "family": "rsc PDF reader lineage",
-    "expected_output": {
-      "pages": 1
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
-  },
-  {
-    "name": "github.com/ajroetker/pdf",
-    "module": "github.com/ajroetker/pdf",
-    "version": "v0.0.1-antfly001",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size).NumPage()",
-    "documentation": "https://pkg.go.dev/github.com/ajroetker/pdf@v0.0.1-antfly001",
-    "scope": "page count",
-    "family": "rsc PDF reader lineage",
-    "expected_output": {
-      "pages": 1
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
-  },
-  {
-    "name": "github.com/oneplus1000/pdf",
-    "module": "github.com/oneplus1000/pdf",
-    "version": "v0.1.2",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size).NumPage()",
-    "documentation": "https://pkg.go.dev/github.com/oneplus1000/pdf@v0.1.2",
-    "scope": "page count",
-    "family": "rsc PDF reader lineage",
-    "expected_output": {
-      "pages": 1
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
-  },
-  {
-    "name": "gitee.com/leijacob/pdf",
-    "module": "gitee.com/leijacob/pdf",
-    "version": "v1.1.7",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size).NumPage()",
-    "documentation": "https://pkg.go.dev/gitee.com/leijacob/pdf@v1.1.7",
-    "scope": "page count",
-    "family": "rsc PDF reader lineage",
-    "expected_output": {
-      "pages": 1
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
-  },
-  {
-    "name": "github.com/registrobr/pdf",
-    "module": "github.com/registrobr/pdf",
-    "version": "v0.2.9",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size).NumPage()",
-    "documentation": "https://pkg.go.dev/github.com/registrobr/pdf@v0.2.9",
-    "scope": "page count",
-    "family": "rsc PDF reader lineage",
-    "expected_output": {
-      "pages": 1
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
-  },
-  {
-    "name": "github.com/casibase/pdf",
-    "module": "github.com/casibase/pdf",
-    "version": "v1.2.0",
-    "license": "BSD-3-Clause",
-    "input_api": "NewReader(io.ReaderAt, size).NumPage()",
-    "documentation": "https://pkg.go.dev/github.com/casibase/pdf@v1.2.0",
-    "scope": "page count",
-    "family": "rsc PDF reader lineage",
-    "expected_output": {
-      "pages": 1
-    },
-    "family_note": "Shared code lineage; package count does not imply independent parser engines."
   }
 ]

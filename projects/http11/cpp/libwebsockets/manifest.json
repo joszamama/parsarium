@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "format": "http11",
+  "ecosystem": "cpp",
+  "package": "libwebsockets",
+  "release": "5.0.0",
+  "catalog_parser": "data/cpp/http11/parsers.json",
+  "source_lock": "projects/http11/cpp/libwebsockets/source-lock.json",
+  "source_sha256": "f853c6582101cfcee3a5a9e28ae92ab19d9735c5f31f0bb2e9794b5106123962",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/http11/request.http",
+  "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
+  "expected_output": {
+    "method": "GET",
+    "path": "/parsarium?x=1",
+    "host": "example.test"
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libwebsockets' HTTP/1 request-line, header and URI-argument parser (lib/roles/http/parsers.c, server.c, h1 role) driven through lws_adopt_socket_vhost_readbuf on a no-listen server context from a C++17 byte-input harness",
+  "coverage_subject_prefix": "/work/source/lib/",
+  "format_specific_coverage_file_suffix": "/roles/http/parsers.c"
+}

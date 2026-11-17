@@ -36,7 +36,16 @@ def derived_dockerfile(project: Path) -> str:
         raise ValueError("native Dockerfile shape is not supported")
     text = source.replace("apt-get install -y --no-install-recommends",
                           f"apt-get install -y --no-install-recommends afl++={AFL_PACKAGE} python3")
-    text = text.replace(marker, REWRITE)
+    rewrite = REWRITE
+    if project.name == "geogram":
+        # Geogram's CMake platform is a source-tree key, not a compiler command.
+        # Keep that key while replacing the actual compilers with AFL wrappers.
+        rewrite = rewrite.replace(
+            "; p.write_text(s)",
+            '.replace("Linux64-nonx86-afl-clang-fast-dynamic",'
+            '"Linux64-nonx86-clang-dynamic"); p.write_text(s)',
+        )
+    text = text.replace(marker, rewrite)
     if project.name == "imagemagick":
         # The CLI utility is unnecessary for library harnesses and its link
         # pulls the AFL runtime into libtool more than once.
@@ -56,7 +65,7 @@ def derived_dockerfile(project: Path) -> str:
             "&& chmod +x /work/build.sh && /work/build.sh",
             1,
         )
-    if project.name in {"gstreamer", "sfml", "csfml", "taglib", "id3lib", "libmp3splt", "mupdf", "qpdf", "freealut", "sdl2_compat", "allegro"}:
+    if project.name in {"gstreamer", "sfml", "csfml", "taglib", "id3lib", "libmp3splt", "mupdf", "qpdf", "podofo", "poppler", "poppler-glib", "freealut", "sdl2_compat", "allegro"}:
         # Build shared parser libraries with AFL++ before linking the harness.
         # The source build remains a reusable Docker layer.
         source_rewrite = (
@@ -130,12 +139,16 @@ def build_one(format_name: str, ecosystem: str, slug: str) -> dict:
     probe_env = ["-e", "AFL_DUMP_MAP_SIZE=1"]
     if preload:
         probe_env += ["-e", f"LD_PRELOAD={preload}"]
-    map_probe = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
-                            *probe_env, "--entrypoint", entrypoint, image],
-                               cwd=ROOT, capture_output=True, text=True)
-    if not map_probe.stdout.strip().isdigit():
-        raise RuntimeError(f"AFL++ map size probe failed: {map_probe.stderr[-2000:]}")
-    map_size = int(map_probe.stdout.strip())
+    map_size = manifest.get("afl_map_size")
+    if map_size is None:
+        map_probe = subprocess.run(["docker", "run", "--rm", "--platform", manifest["platform"],
+                                *probe_env, "--entrypoint", entrypoint, image],
+                                   cwd=ROOT, capture_output=True, text=True)
+        if not map_probe.stdout.strip().isdigit():
+            raise RuntimeError(f"AFL++ map size probe failed: {map_probe.stderr[-2000:]}")
+        map_size = int(map_probe.stdout.strip())
+    elif not isinstance(map_size, int) or map_size < 65536 or map_size & (map_size - 1):
+        raise ValueError("afl_map_size must be a power of two at least 65536")
     control = ROOT / manifest["control"]
     edges = overlay / "edges.txt"
     showmap = subprocess.run([

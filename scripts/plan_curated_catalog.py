@@ -21,6 +21,12 @@ GITHUB_MIN_STARS = 100
 POPCON_SLOTS = 3
 # This distribution contains byte-identical parser files from Providence.
 SUPPLEMENTAL_EXCLUSIONS = {("php", "ascii_ply", "collectiveaccess/pawtucket2")}
+# PyPI explicitly describes this pinned release as an empty compatibility
+# distribution; the parsing code is in the already selected PyMuPDF package.
+ELIGIBILITY_EXCLUSIONS = {
+    ("python", "pdf", "pymupdf4llm"):
+        ("empty_compatibility_distribution", "https://pypi.org/project/pymupdf4llm/2.1/"),
+}
 
 
 def metric_field(ecosystem: str, metric: dict) -> str:
@@ -33,6 +39,13 @@ def metric_field(ecosystem: str, metric: dict) -> str:
 
 def plan() -> dict:
     cells = json.loads((ROOT / "data/cells.json").read_text())["cells"]
+    feedback_file = ROOT / "data/curation/feedback-exclusions.json"
+    feedback = json.loads(feedback_file.read_text())["paths"]
+    feedback_by_key = {(row["ecosystem"], row["format"], row["name"]): row
+                       for row in feedback}
+    if len(feedback_by_key) != len(feedback):
+        raise ValueError("duplicate parser-feedback exclusion")
+    feedback_seen = set()
     popcon_file = ROOT / "data/curation/popcon-snapshot.json"
     github_file = ROOT / "data/curation/github-supplemental-stars.json"
     popcon = json.loads(popcon_file.read_text())
@@ -45,9 +58,11 @@ def plan() -> dict:
     result = []
     for cell in cells:
         ecosystem, format_name = cell["ecosystem"], cell["format"]
-        source = ROOT / "data" / ecosystem / format_name
+        source = ROOT / "data/curation/preten" / ecosystem / format_name
+        if not source.exists():
+            source = ROOT / "data" / ecosystem / format_name
         parser_file = source / "parsers.json"
-        snapshot_file = source / "registry-snapshot.json"
+        snapshot_file = ROOT / "data" / ecosystem / format_name / "registry-snapshot.json"
         parsers = json.loads(parser_file.read_text())
         snapshot = json.loads(snapshot_file.read_text())
         metric = snapshot.get("download_metric", snapshot.get("popularity_metric", {}))
@@ -56,10 +71,15 @@ def plan() -> dict:
         measured = []
         zero_or_missing = []
         supplemental = []
+        ineligible = []
         for parser in parsers:
             value = values.get(parser["name"], {}).get(field)
             item = {"name": parser["name"], "version": parser["version"],
                     "family": parser["family"], "metric": value}
+            exclusion = ELIGIBILITY_EXCLUSIONS.get((ecosystem, format_name, parser["name"]))
+            if exclusion:
+                ineligible.append({**item, "reason": exclusion[0], "evidence_url": exclusion[1]})
+                continue
             supplemental_value = None
             supplemental_kind = None
             supplemental_url = None
@@ -119,6 +139,30 @@ def plan() -> dict:
         for item in zero_or_missing:
             if item["name"] not in selected_names:
                 excluded.append(item)
+        excluded.extend(ineligible)
+        # A positive adoption metric alone does not make an instrumented target.
+        # Apply this gate after the ten-path ranking, leaving the slot empty.
+        retained = []
+        for item in selected:
+            key = (ecosystem, format_name, item["name"])
+            blocker = feedback_by_key.get(key)
+            if blocker is None:
+                retained.append(item)
+                continue
+            feedback_seen.add(key)
+            evidence = ROOT / blocker["evidence"]
+            if not evidence.is_file():
+                raise ValueError(f"missing parser-feedback evidence: {evidence}")
+            excluded.append({**item, "reason": blocker["reason"],
+                             "feedback_evidence": blocker["evidence"],
+                             "feedback_evidence_sha256": sha256(evidence.read_bytes()).hexdigest(),
+                             "limitation": blocker["limitation"],
+                             "prior_selected_rank": item.get("rank", item.get("supplemental_rank"))})
+        selected = retained
+        for index, item in enumerate((x for x in selected if x["selection"] == "primary_metric"), 1):
+            item["rank"] = index
+        for index, item in enumerate((x for x in selected if x["selection"] == "supplemental_numeric_metric"), 1):
+            item["supplemental_rank"] = index
         excluded.sort(key=lambda item: item["name"].casefold())
         if len(selected) > LIMIT or len(selected) + len(excluded) != len(parsers):
             raise ValueError(f"selection mismatch: {ecosystem}/{format_name}")
@@ -131,12 +175,15 @@ def plan() -> dict:
             "original_count": len(parsers), "selected_count": len(selected),
             "selected": selected, "excluded": excluded,
         })
+    if feedback_seen != set(feedback_by_key):
+        raise ValueError(f"feedback exclusion is not an adopted selected path: {set(feedback_by_key) - feedback_seen}")
     return {
         "schema_version": 1,
-        "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate is excluded.",
+        "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded without backfilling lower-ranked leads.",
         "supplemental_sources": {
             "popcon_snapshot_sha256": sha256(popcon_file.read_bytes()).hexdigest(),
             "github_snapshot_sha256": sha256(github_file.read_bytes()).hexdigest(),
+            "feedback_exclusions_sha256": sha256(feedback_file.read_bytes()).hexdigest(),
         },
         "cells": result,
         "selected_total": sum(cell["selected_count"] for cell in result),

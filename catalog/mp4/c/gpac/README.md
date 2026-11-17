@@ -24,6 +24,11 @@
 
 C and C++ call sites share the same gpac native MP4 parser. GPAC MP4Box is a CLI alias within the gpac package, not another package row.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/c/gpac/README.md)
+
+```sh
+python3 parsarium.py build mp4 c gpac
+python3 parsarium.py run mp4 c gpac controls/mp4/red-av.mp4
+```

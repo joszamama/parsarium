@@ -1,0 +1,613 @@
+{
+  "checked_at_utc": "2026-11-17T12:10:49.119841+00:00",
+  "platform": "mixed",
+  "control": {
+    "path": "controls/json/structure.json",
+    "sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3"
+  },
+  "third_party": [
+    {
+      "package": "pydantic",
+      "version": "2.14.3",
+      "pass": true,
+      "input_api": "TypeAdapter[Any].validate_json(local UTF-8 bytes)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "parser_family": "pydantic-core 2.50.4 / Jiter 0.18.0",
+      "native_jiter_source_files": 12,
+      "native_jiter_region_start_lines": 420,
+      "native_jiter_parse_rs_lines": 95,
+      "afl_feedback": "data/python/json/pydantic-valid-feedback.json",
+      "project_receipt": "projects/json/python/pydantic/verification.json",
+      "coverage_caveat": "llvm-cov export warned that 99 whole-extension functions had mismatched profile data. Scoped Jiter region starts, including parse.rs, were nonempty and stable across both valid controls; aggregate whole-extension coverage is not claimed."
+    },
+    {
+      "package": "jiter",
+      "version": "0.19.0",
+      "pass": true,
+      "input_api": "jiter.from_json(local JSON bytes)",
+      "control": "controls/json/nested-object.json",
+      "output": {
+        "root_type": "object",
+        "root_length": 7,
+        "top_level_keys": [
+          "name",
+          "version",
+          "ratio",
+          "enabled",
+          "missing",
+          "tags",
+          "nested"
+        ],
+        "kind_counts": {
+          "object": 5,
+          "array": 3,
+          "string": 5,
+          "int": 4,
+          "float": 1,
+          "bool": 2,
+          "null": 1
+        },
+        "object_members": 15,
+        "max_container_depth": 4,
+        "scalar_leaves": [
+          [
+            "/name",
+            "string",
+            "parsarium"
+          ],
+          [
+            "/version",
+            "int",
+            1
+          ],
+          [
+            "/ratio",
+            "float",
+            "-2.5"
+          ],
+          [
+            "/enabled",
+            "bool",
+            true
+          ],
+          [
+            "/missing",
+            "null",
+            null
+          ],
+          [
+            "/tags/0",
+            "string",
+            "json"
+          ],
+          [
+            "/tags/1",
+            "string",
+            "go"
+          ],
+          [
+            "/tags/2",
+            "string",
+            "rfc8259"
+          ],
+          [
+            "/nested/level",
+            "int",
+            2
+          ],
+          [
+            "/nested/items/0/id",
+            "int",
+            1
+          ],
+          [
+            "/nested/items/0/ok",
+            "bool",
+            false
+          ],
+          [
+            "/nested/items/1/id",
+            "int",
+            2
+          ],
+          [
+            "/nested/items/1/text",
+            "string",
+            "café \"quoted\""
+          ]
+        ],
+        "empty_containers": [
+          [
+            "/nested/empty",
+            "object"
+          ],
+          [
+            "/nested/list",
+            "array"
+          ]
+        ]
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "root_type": "array",
+        "root_length": 5,
+        "kind_counts": {
+          "object": 2,
+          "array": 4,
+          "string": 2,
+          "int": 1,
+          "float": 1,
+          "bool": 2,
+          "null": 1
+        },
+        "object_members": 3,
+        "max_container_depth": 3,
+        "scalar_leaves": [
+          [
+            "/0",
+            "int",
+            1
+          ],
+          [
+            "/1",
+            "float",
+            "0.25"
+          ],
+          [
+            "/2",
+            "string",
+            "two"
+          ],
+          [
+            "/3/0",
+            "bool",
+            true
+          ],
+          [
+            "/3/1",
+            "null",
+            null
+          ],
+          [
+            "/3/2/0",
+            "bool",
+            false
+          ],
+          [
+            "/4/n/deep",
+            "string",
+            "A"
+          ]
+        ],
+        "empty_containers": [
+          [
+            "/4/k",
+            "array"
+          ]
+        ]
+      },
+      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where jiter is not importable; exact type-tagged trees with float.hex values and object member order",
+      "oracle_tree_sha256": {
+        "control": "a8a23fb23e1c58fbcb65c789babe85f284949180a576cede88f2e787ea410d92",
+        "differential_control": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e"
+      },
+      "bytes_match_oracle": true,
+      "parser_family": "Jiter 0.19.0 Rust parser / lexical-parse-float 1.0.6 (same Jiter family as pydantic-core 2.50.4 / Jiter 0.18.0)",
+      "native_source_files": 10,
+      "native_region_start_lines": 437,
+      "parse_rs_lines": 99,
+      "lexical_parse_float_source_files": 9,
+      "lexical_parse_float_region_start_lines": 218,
+      "afl_feedback": "data/python/json/jiter-valid-feedback.json",
+      "project_receipt": "projects/json/python/jiter/verification.json",
+      "project_receipt_sha256": "c0ce0474f3eea78a909887d4c763c779f09d61c0087a48a028630dc0cbc2926d",
+      "coverage_caveat": "Source-built with Rust -C instrument-coverage and the sdist's fat-LTO release profile; the official wheel is the same source without instrumentation. llvm-cov export warned that 16 whole-extension functions had mismatched profile data; scoped Jiter crate regions were nonempty and identical on repeats, and whole-extension coverage is not claimed. The PyO3 module wrapper is excluded from parser scope. The controls do not exercise duplicate keys, large or inexact numbers, NaN/Infinity tokens, partial mode or malformed input."
+    },
+    {
+      "package": "orjson",
+      "version": "3.13.0",
+      "pass": true,
+      "input_api": "orjson.loads(local UTF-8 bytes)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "parser_family": "orjson Rust deserializer backed by vendored yyjson 0.12.0 C parser",
+      "native_orjson_source_files": 5,
+      "native_orjson_source_lines": 168,
+      "coverage_caveat": "Rust JSON deserializer source regions only; vendored yyjson C syntax parser is not instrumented in this build.",
+      "afl_feedback": "data/python/json/orjson-valid-feedback.json",
+      "project_receipt": "projects/json/python/orjson/verification.json",
+      "native_orjson_yyjson_rs_lines": 114
+    },
+    {
+      "package": "simplejson",
+      "version": "4.3.0",
+      "pass": true,
+      "input_api": "simplejson.load(BytesIO(local UTF-8 bytes), allow_nan=False)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 140,
+      "decoder_lines_covered": 101,
+      "project_receipt": "projects/json/python/simplejson/verification.json"
+    },
+    {
+      "package": "ijson",
+      "version": "3.6.0",
+      "pass": true,
+      "input_api": "ijson.items(BytesIO(local JSON bytes), '') on the default yajl2_c backend",
+      "tested_backend": "yajl2_c",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "root_type": "array",
+        "item_count": 5,
+        "nested_arrays": 1,
+        "nested_objects": 1
+      },
+      "parser_family": "ijson yajl2_c C extension / yajl 2.1.1 (rtobar/yajl@dd88e2ea2fc3f045722f6fee362af2643b5394f5)",
+      "native_source_files": 21,
+      "native_region_start_lines": 577,
+      "yajl_source_files": 8,
+      "yajl_region_start_lines": 263,
+      "yajl_parser_c_lines": 92,
+      "afl_feedback": "data/python/json/ijson-valid-feedback.json",
+      "project_receipt": "projects/json/python/ijson/verification.json",
+      "project_receipt_sha256": "ca1553656e92d4d4b4e6fa8275be3918d46635cea784677dc19ac34eb9b76265",
+      "coverage_caveat": "Source-built -O0 extension with yajl embedded through ijson's IJSON_EMBED_YAJL path. Official Linux wheels link the same yajl commit as a separately built -O3 shared library, so linkage and optimisation differ. Pure-Python, ctypes and cffi backends are not covered."
+    },
+    {
+      "package": "msgspec",
+      "version": "0.22.0",
+      "pass": true,
+      "input_api": "msgspec.json.decode(local JSON bytes) with the default type=Any",
+      "tested_type": "Any (default)",
+      "output": {
+        "value": [
+          "object",
+          [
+            [
+              "name",
+              [
+                "string",
+                "parsarium"
+              ]
+            ],
+            [
+              "version",
+              [
+                "int",
+                1
+              ]
+            ],
+            [
+              "ratio",
+              [
+                "float",
+                "-2.5"
+              ]
+            ],
+            [
+              "enabled",
+              [
+                "bool",
+                true
+              ]
+            ],
+            [
+              "missing",
+              [
+                "null"
+              ]
+            ],
+            [
+              "tags",
+              [
+                "array",
+                [
+                  [
+                    "string",
+                    "json"
+                  ],
+                  [
+                    "string",
+                    "go"
+                  ],
+                  [
+                    "string",
+                    "rfc8259"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "nested",
+              [
+                "object",
+                [
+                  [
+                    "level",
+                    [
+                      "int",
+                      2
+                    ]
+                  ],
+                  [
+                    "items",
+                    [
+                      "array",
+                      [
+                        [
+                          "object",
+                          [
+                            [
+                              "id",
+                              [
+                                "int",
+                                1
+                              ]
+                            ],
+                            [
+                              "ok",
+                              [
+                                "bool",
+                                false
+                              ]
+                            ]
+                          ]
+                        ],
+                        [
+                          "object",
+                          [
+                            [
+                              "id",
+                              [
+                                "int",
+                                2
+                              ]
+                            ],
+                            [
+                              "text",
+                              [
+                                "string",
+                                "café \"quoted\""
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "empty",
+                    [
+                      "object",
+                      []
+                    ]
+                  ],
+                  [
+                    "list",
+                    [
+                      "array",
+                      []
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "value": [
+          "array",
+          [
+            [
+              "int",
+              1
+            ],
+            [
+              "float",
+              "0.25"
+            ],
+            [
+              "string",
+              "two"
+            ],
+            [
+              "array",
+              [
+                [
+                  "bool",
+                  true
+                ],
+                [
+                  "null"
+                ],
+                [
+                  "array",
+                  [
+                    [
+                      "bool",
+                      false
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "object",
+              [
+                [
+                  "k",
+                  [
+                    "array",
+                    []
+                  ]
+                ],
+                [
+                  "n",
+                  [
+                    "object",
+                    [
+                      [
+                        "deep",
+                        [
+                          "string",
+                          "A"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "expected_output_source": "hand-written type-tagged trees in projects/json/python/msgspec/manifest.json",
+      "parser_family": "msgspec hand-written C JSON decoder in src/msgspec/_core.c (tag 0.22.0, commit 6d3443f2dae8413a1a56640290c09a6f486f30c2)",
+      "native_source_files": 2,
+      "native_region_start_lines": 894,
+      "json_decoder_section_lines": [
+        17076,
+        20140
+      ],
+      "json_decoder_region_start_lines": 197,
+      "number_parser_region_start_lines": 46,
+      "afl_feedback": "data/python/json/msgspec-valid-feedback.json",
+      "project_receipt": "projects/json/python/msgspec/verification.json",
+      "project_receipt_sha256": "4ef4799fe9f52f8a721869d57d21146613c26ef574183797b287b43ff99e34c2",
+      "coverage_caveat": "Source-built clang -O0 _core extension; the official aarch64 wheel's extension is a GCC 14.2.1 release build (no MSGSPEC_DEBUG -O0 path). _core.c also holds the MessagePack, encoder, Struct and convert code, so whole-file counts include module set-up; the JSON Decoder (lines 17076-20140) and Number Parser (12242-12691) sections are counted separately. Typed decoding (Structs, dataclasses, annotations) and msgspec.json.Decoder are not covered."
+    },
+    {
+      "package": "ujson",
+      "version": "6.1.0",
+      "pass": true,
+      "input_api": "ujson.loads(local JSON bytes)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "root_type": "array",
+        "item_count": 5,
+        "nested_arrays": 1,
+        "nested_objects": 1
+      },
+      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where ujson is not importable; exact type-tagged trees with float.hex values and object member order",
+      "oracle_tree_sha256": {
+        "control": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
+        "differential_control": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e"
+      },
+      "bytes_and_str_match_oracle": true,
+      "parser_family": "UltraJSON C decoder (decode.c) / vendored double-conversion 3.2.0 C++",
+      "native_source_files": 9,
+      "native_region_start_lines": 266,
+      "decode_c_lines": 155,
+      "double_conversion_source_files": 5,
+      "double_conversion_region_start_lines": 86,
+      "afl_feedback": "data/python/json/ujson-valid-feedback.json",
+      "project_receipt": "projects/json/python/ujson/verification.json",
+      "project_receipt_sha256": "8d02522f12c3ffb3f883b941fffa384ff509d43b55cdff723b825fa3898e0ecb",
+      "coverage_caveat": "Source-built -O0 unstripped extension; the official wheel compiles the same sources and vendored double-conversion into one optimised, stripped extension. The controls do not exercise duplicate keys, large or inexact numbers, NaN/Infinity tokens or malformed input."
+    }
+  ],
+  "standard": [
+    {
+      "api": "json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder)",
+      "runtime": "CPython 3.14.4 standard library pure-Python JSON decoder",
+      "pass": true,
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "stdlib_source_lines": 166,
+      "decoder_lines": 103,
+      "scanner_lines": 39,
+      "scope_note": "Explicit pure-Python scanner; default built-in _json accelerator not measured.",
+      "project_receipt": "projects/json/python/stdlib_json/verification.json",
+      "project_receipt_sha256": "41097ec2514625c9d2718acd2849183a10aff2603c487d8811085e2f58effdf1"
+    }
+  ],
+  "platforms": {
+    "pydantic": "linux/arm64",
+    "simplejson": "linux/amd64",
+    "standard": "linux/amd64",
+    "orjson": "linux/arm64",
+    "ijson": "linux/arm64",
+    "ujson": "linux/arm64",
+    "jiter": "linux/arm64"
+  },
+  "refreshed_projects": [
+    "ujson",
+    "msgspec",
+    "jiter"
+  ],
+  "retained_prior_results_checked_at_utc": "2026-11-17T05:33:30.889313+00:00"
+}

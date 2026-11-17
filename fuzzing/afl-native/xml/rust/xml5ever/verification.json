@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "project": "xml/rust/xml5ever",
+  "pass": true,
+  "base_project_receipt_sha256": "152ae311eb8a066db2dbe04ab41f538a33e9a5ee4ba6cbcc153a8d788ef1f613",
+  "overlay_file_sha256": {
+    "Cargo.toml": "4a1f5f3c7c21c96c5d6da0bc07c80feed3bc044e2a57003b686da0f13d624f96",
+    "Cargo.lock": "bf88ce0c35c2d9e7b1d634cbe60014bd26eccf1f2032c79d1cca0e9a36446b0a",
+    "afl_fuzzer.rs": "f32a39f26227798d50a765fdf8b64df0592fcd32cafe774aabbc0e7925086d21",
+    "Dockerfile": "a174a65ef2ffa51f0fc5d151bde772a2a844e8886e54afd0553a7ddc2de8afeb",
+    "build.py": "532e6ec8e2c494d5dfb642f18b11b866a1004a27c8ad606c6efbf4e73267989c"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "73290529dc9bc6c6155bf77fdd70ce0061f98ad387586aa3104cddab29206961",
+  "image_id": "sha256:52982f0056c74cac45a7455a2a6eae91db75445558e8f52c5890960687a236b6",
+  "platform": "linux/arm64",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "feedback_edges": 2762,
+  "afl_map_size": 23224,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: xml5ever 0.40.0 tokenizer/tree builder, markup5ever_rcdom sink, serde_json summary encoder and the harness are all instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:0304e63f75733dfdda5ecdec42c689f1ec785968e467700f7afb6495d42faece",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 3043,
+  "edges_only_in_control": 61,
+  "edges_only_in_variant": 342,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xml5ever-0.40.0/",
+    "control_lines": {
+      "src/driver.rs": 18,
+      "src/serialize/mod.rs": 0,
+      "src/tokenizer/char_ref/mod.rs": 89,
+      "src/tokenizer/interface.rs": 1,
+      "src/tokenizer/mod.rs": 295,
+      "src/tokenizer/qname.rs": 45,
+      "src/tree_builder/mod.rs": 306
+    },
+    "variant_lines": {
+      "src/driver.rs": 18,
+      "src/serialize/mod.rs": 0,
+      "src/tokenizer/char_ref/mod.rs": 161,
+      "src/tokenizer/interface.rs": 1,
+      "src/tokenizer/mod.rs": 322,
+      "src/tokenizer/qname.rs": 45,
+      "src/tree_builder/mod.rs": 341
+    },
+    "files_with_different_line_counts": [
+      "src/tokenizer/char_ref/mod.rs",
+      "src/tokenizer/mod.rs",
+      "src/tree_builder/mod.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      2762,
+      2762,
+      2762
+    ],
+    "stable_edges": 2762,
+    "union_edges": 2762,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      3043,
+      3043,
+      3043
+    ],
+    "stable_edges": 3043,
+    "union_edges": 3043,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

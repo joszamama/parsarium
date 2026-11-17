@@ -1,0 +1,400 @@
+{
+  "checked_at_utc": "2026-11-17T07:03:52.797228+00:00",
+  "control": {
+    "path": "controls/xml/two-items.xml",
+    "sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941"
+  },
+  "third_party": [
+    {
+      "package": "lxml",
+      "version": "6.1.3",
+      "pass": true,
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_pass": true,
+      "native_library": "libxml2 2.15.4",
+      "native_library_linkage": "libxml2.so.16 => /opt/libxml2/lib/libxml2.so.16; lxml etree reports compiled/runtime 2.15.4",
+      "libxml2_parser_c_source_lines": 1463,
+      "project_receipt": "projects/xml/python/lxml/verification.json",
+      "project_receipt_sha256": "715d9d095fd168c5ebd27a60ad549d9a20276ed5649ca67abc854a988cbf4554",
+      "afl_feedback": "data/python/xml/lxml-valid-feedback.json",
+      "differential_libxml2_parser_c_source_lines": 1636,
+      "differential_command": "docker run --rm --platform linux/arm64 --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,exec,nosuid,size=64m -v $PWD/controls/xml/order-default-ns.xml:/input/control:ro -v COVERAGE_DIR:/coverage parsarium/xml-python-lxml:local --differential"
+    },
+    {
+      "package": "beautifulsoup4",
+      "version": "4.15.0",
+      "pass": true,
+      "input_api": "bs4.BeautifulSoup(local XML bytes, \"xml\"); Tag.namespace, Tag.name, NamespacedAttribute.namespace/name, NavigableString, Comment and XMLProcessingInstruction children of the resulting bs4 tree",
+      "tested_builder": "bs4.builder._lxml.LXMLTreeBuilderForXML",
+      "tested_lxml_parser_class": "lxml.etree.XMLParser",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "comments": [],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "processing_instructions": [],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "comments": [
+          "order receipt"
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "processing_instructions": [
+          "audit step=\"1\""
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "parser_family": "bs4 tree builder over lxml 6.1.3 XMLParser(recover=True) over libxml2 2.15.4 (shared with lxml.etree)",
+      "bs4_source_files": 5,
+      "bs4_source_lines": 450,
+      "bs4_builder_lxml_lines": 115,
+      "libxml2_parser_c_source_lines": 1570,
+      "differential_bs4_source_lines": 461,
+      "differential_libxml2_parser_c_source_lines_range": [
+        1718,
+        1727
+      ],
+      "afl_feedback": "data/python/xml/beautifulsoup4-valid-feedback.json",
+      "project_receipt": "projects/xml/python/beautifulsoup4/verification.json",
+      "project_receipt_sha256": "8da6d3cb2cb8718c491d35dd90d6621bb3a01390843f30c4d8c53c0f20e1523a",
+      "coverage_caveat": "libxml2 parser.c lines 8700-8720 (an address-sensitive attribute hash lookup) vary between identical replays: the order control's parser.c line total ranged 1,718-1,727 across repeats, differing only at lines 8705, 8714 and 8716. The AFL++ bridge excludes that range, as in projects/xml/python/lxml. lxml's Cython/C binding is not coverage-instrumented.",
+      "tree_caveat": "The bs4 tree drops CDATA section boundaries and the XML declaration node and lists xmlns declarations after ordinary attributes; element/attribute namespaces, comments, processing instructions and character-data order are kept on both controls."
+    },
+    {
+      "package": "xmltodict",
+      "version": "1.0.4",
+      "pass": true,
+      "output": {
+        "root": "library",
+        "namespace": "urn:parsarium:xml:pilot",
+        "child_count": 2,
+        "first_item_id": "7",
+        "first_item_text": "A & B",
+        "second_item_text": "π"
+      },
+      "package_source_lines": 97,
+      "expat_source_lines": 2330,
+      "expat_xmlparse_lines": 1615,
+      "project_receipt": "projects/xml/python/xmltodict/verification.json",
+      "project_receipt_sha256": "70a2dd8cf120b99d9ba8cbda4be0b9633334c28381a7eafee8831da7837bd657"
+    },
+    {
+      "package": "untangle",
+      "version": "1.3.1",
+      "pass": true,
+      "input_api": "untangle.parse(pathlib.Path(local XML file)); Element._name, _attributes, cdata and children filled by untangle.Handler from SAX startElement/characters/endElement events",
+      "tested_sax_parser": "defusedxml.expatreader.DefusedExpatParser",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c_catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "c_catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p_amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "order"
+      },
+      "differential_pass": true,
+      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image, projected to untangle qualified-name output with the documented \"-\", \".\", \":\" -> \"_\" rule",
+      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "untangle_matches_projected_oracle": true,
+      "feature_namespaces_true_root_children": 0,
+      "parser_family": "untangle SAX handler over defusedxml 0.7.1 DefusedExpatParser over CPython 3.14 xml.sax/pyexpat over Expat 2.10.0 (shared with xmltodict and xml.etree.ElementTree)",
+      "package_source_files": 3,
+      "package_source_lines": 49,
+      "untangle_lines": 35,
+      "sax_driver_source_lines": 111,
+      "expat_source_lines": 2238,
+      "expat_xmlparse_lines": 1509,
+      "differential_package_source_lines": 49,
+      "differential_sax_driver_source_lines": 112,
+      "differential_expat_source_lines": 2475,
+      "differential_expat_xmlparse_lines": 1586,
+      "afl_feedback": "data/python/xml/untangle-valid-feedback.json",
+      "project_receipt": "projects/xml/python/untangle/verification.json",
+      "project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
+      "namespace_caveat": "untangle drops namespace URIs. The adapter does not reconstruct them: element names are lossy (':' becomes '_', indistinguishable from '-', '.' or a literal '_'), so any URI in the summary would be adapter-side namespace processing, not untangle's parse result. Shared fields are therefore compared against the independent lxml/libxml2 oracle projected to untangle's documented naming rule, and the expanded names it loses are recorded in data/python/xml/untangle-valid-feedback.json.",
+      "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
+    },
+    {
+      "package": "defusedxml",
+      "version": "0.7.1",
+      "pass": true,
+      "input_api": "defusedxml.ElementTree.parse(BytesIO(local XML bytes)) with default forbid_dtd=False, forbid_entities=True, forbid_external=True; getroot(); Element.tag, attrib, text and tail",
+      "tested_parser": "defusedxml.ElementTree.DefusedXMLParser (subclass of pure-Python xml.etree.ElementTree.XMLParser; C _elementtree.TreeBuilder target)",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image; summary without the xmlns declaration count, namespaces from expanded names",
+      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "defusedxml_matches_oracle": true,
+      "parser_family": "defusedxml 0.7.1 guarded ElementTree facade over CPython 3.14 pure-Python xml.etree.ElementTree.XMLParser/pyexpat over Expat 2.10.0, with the C _elementtree TreeBuilder building the tree; shares the Expat XML parser family with projects/xml/python/xmltodict, projects/xml/python/untangle and the standard xml.etree.ElementTree path",
+      "package_source_files": 2,
+      "package_source_lines": 20,
+      "defusedxml_elementtree_lines": 13,
+      "elementtree_driver_source_lines": 71,
+      "expat_source_lines": 2560,
+      "expat_xmlparse_lines": 1808,
+      "differential_package_source_lines": 20,
+      "differential_elementtree_driver_source_lines": 79,
+      "differential_expat_source_lines": 2806,
+      "differential_expat_xmlparse_lines": 1894,
+      "afl_feedback": "data/python/xml/defusedxml-valid-feedback.json",
+      "project_receipt": "projects/xml/python/defusedxml/verification.json",
+      "project_receipt_sha256": "1785d16a7798119424f409fbc8d61fac4b454a636c99e856cb0d36c7f3d23edf",
+      "namespace_caveat": "ElementTree discards xmlns declarations, so the summary has no namespace_declarations count and its namespaces field lists the URIs in expanded names. On both controls this equals the declared non-empty URIs; the comparison with the independent lxml/libxml2 oracle drops only the declaration count.",
+      "tree_caveat": "The default TreeBuilder drops comments and processing instructions; text and tail data are kept per node (CDATA included)."
+    }
+  ],
+  "standard": [
+    {
+      "api": "xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot()",
+      "runtime": "CPython 3.14.4 ElementTree with Expat 2.10.0",
+      "pass": true,
+      "output": {
+        "root": "library",
+        "namespace": "urn:parsarium:xml:pilot",
+        "child_count": 2,
+        "first_item_id": "7",
+        "first_item_text": "A & B",
+        "second_item_text": "π"
+      },
+      "elementtree_source_lines": 16,
+      "expat_source_lines": 2280,
+      "expat_xmlparse_lines": 1565,
+      "project_receipt": "projects/xml/python/stdlib_elementtree/verification.json",
+      "project_receipt_sha256": "0f5e7871d31f2e1d83bbe1f17e1e723e6c706562c52dba6831b892c70c80fba7"
+    }
+  ],
+  "families": [
+    {
+      "family": "libxml2 2.15.4 XML parser",
+      "paths": [
+        "lxml.etree",
+        "beautifulsoup4 (\"xml\" builder via lxml.etree)"
+      ]
+    },
+    {
+      "family": "Expat XML parser",
+      "paths": [
+        "xmltodict",
+        "xml.etree.ElementTree",
+        "untangle (SAX via defusedxml DefusedExpatParser)",
+        "defusedxml (guarded pure-Python ElementTree XMLParser)"
+      ]
+    }
+  ]
+}

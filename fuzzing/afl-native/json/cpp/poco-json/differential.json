@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T12:02:54.442834+00:00",
+  "project": "json/cpp/poco-json",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_poco_pdjson_source_lines",
+  "probe": "projects/json/cpp/poco-json/parser-probe.cpp",
+  "probe_scope": "Poco::JSON::Parser::parse(std::string) only; no DOM serialization, traversal, output summarization, or adapter postprocessing",
+  "base_project_receipt_sha256": "f348c243facbdecb46c8992f0b058c3c0919c2f0d8781ec88e63f1fb4ec8f3a7",
+  "overlay_receipt_sha256": "8676908adb1e3badba26245026f89532819dcd48ab3eeb754dc5c0d0ba76bc53",
+  "base_image_id": "sha256:220c20f75cd1a19ef1a8cc6bcac658a11b4ea4cfadb95ecbe614f67cda237606",
+  "overlay_image_id": "sha256:b0bb5f5650333ddf174197769ac6242186bac03bfdca1bf1838a19eaeaf438e1",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 103364,
+  "repeats_per_control": 2,
+  "first_control": "controls/json/nested-object.json",
+  "first_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "second_control": "controls/json/nested-array.json",
+  "second_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "exact_tree_outputs_verified": true,
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "first_parser_lines_stable": 478,
+  "second_parser_lines_stable": 458,
+  "parser_line_difference": 32,
+  "pdjson_line_difference": 32,
+  "parser_line_repeat_variation": [
+    0,
+    0
+  ],
+  "first_afl_tuples": 1320,
+  "second_afl_tuples": 1321,
+  "afl_tuple_difference": 131,
+  "repeated_afl_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

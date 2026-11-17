@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "c",
+  "package": "atril",
+  "release": "1.28.2",
+  "api": "ev_init; g_file_new_for_path + g_file_get_uri; ev_document_factory_get_document(uri, error); ev_document_get_n_pages",
+  "api_note": "Atril 1.28.2 libdocument exposes only the URI factory ev_document_factory_get_document(); it has no GFile factory. The harness builds a local GFile and passes its file:// URI.",
+  "catalog_parser": "data/c/pdf/parsers.json",
+  "catalog_source_lock": "data/c/pdf/source-lock.json",
+  "catalog_source_sha256": "48c0d7ac45781a9c3384b00ed22ab6eca49c6ee6d772c3d0724be3954a0d8efc",
+  "source_lock": "projects/pdf/c/atril/source-lock.json",
+  "source_sha256": "0b1b2bdd3798d4c953c85552985d1118ee4cf7a10acb149df570d6e80feecfef",
+  "underlying_package": "poppler-glib",
+  "underlying_release": "26.11.0",
+  "underlying_source_sha256": "41c32680160addf5a8dd7a830e4869c01e9f6bee1abb91e44fabd1ba9d7828fb",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/two-page.pdf",
+  "control_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+  "expected_output": {
+    "pages": 2
+  },
+  "valid_variant": "valid-one-page.pdf",
+  "valid_variant_source": "controls/pdf/one-page.pdf",
+  "valid_variant_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "valid_variant_expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_file_input": true,
+  "coverage": "LLVM source lines in Atril PDF backend, Atril libdocument factory and source-built Poppler GLib/core; AFL++ source edges in the allowlisted backend and Poppler parser files",
+  "coverage_subject_prefix": "/work/atril-source/backend/pdf/",
+  "format_specific_coverage_file_suffix": "/ev-poppler.cc",
+  "underlying_coverage_subject_prefix": "/work/source/poppler/",
+  "underlying_format_specific_coverage_file_suffix": "/Parser.cc",
+  "parser_family": "Atril PDF backend over Poppler GLib; shared Poppler PDF core family also used by Evince and GNOME Papers",
+  "shared_parser_family": "Poppler 26.11.0 GLib frontend and PDF core (glib/, poppler/)",
+  "shared_parser_family_projects": [
+    "pdf/c/poppler-glib",
+    "pdf/c/evince",
+    "pdf/c/gnome-papers"
+  ],
+  "shared_parser_family_note": "Atril is an Evince fork. Its backend/pdf/ev-poppler.cc is its own C++ source, but every PDF syntax decision is made by the same pinned Poppler 26.11.0 archive that the Poppler GLib, Evince and GNOME Papers projects build. It adds a package input path, not an independent PDF parser."
+}

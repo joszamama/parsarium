@@ -5,28 +5,43 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from scripts.format_registry import ALL_FORMATS, ECOSYSTEMS, phase
 
 
 ROOT = Path(__file__).resolve().parent
-FORMATS = ("png", "zip", "mp4", "wav", "pdf", "svg", "http11",
-           "ascii_ply", "ascii_pnm", "mp3_id3v2")
-ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
+FORMATS = ALL_FORMATS
 
 
 def json_file(path: Path):
     return json.loads(path.read_text())
 
 
+def unresolved_count(cell: dict) -> int:
+    """Read the bounded-search lead count from active or pilot cell records."""
+    direct = cell.get("unresolved_documentation_leads")
+    if type(direct) is int:
+        return direct
+    statuses = cell.get("leads_by_status")
+    if isinstance(statuses, dict) and type(statuses.get("unresolved")) is int:
+        return statuses["unresolved"]
+    direct = cell.get("unresolved_leads")
+    return direct if type(direct) is int else 0
+
+
 def rows(format_name: str | None, ecosystem: str | None) -> list[dict]:
-    cells = json_file(ROOT / "data/cells.json")["cells"]
-    coverage = json_file(ROOT / "data/projects-coverage.json")["cells"]
+    cells = [*json_file(ROOT / "data/cells.json")["cells"],
+             *json_file(ROOT / "data/pilot-cells.json")["cells"]]
+    report = json_file(ROOT / "data/projects-coverage.json")
+    coverage = [*report["cells"], *report["pilot"]["cells"]]
     covered = {(item["format"], item["ecosystem"]): item for item in coverage}
     return [{"format": cell["format"], "ecosystem": cell["ecosystem"],
+             "phase": phase(cell["format"]), "status": cell["status"],
+             "complete": cell.get("complete", True),
              "verified_third_party": cell["verified_third_party_count"],
              "verified_standard": cell["verified_standard_or_runtime_count"],
              "runnable": (covered[(cell["format"], cell["ecosystem"])]["containerized_verified"] +
                           covered[(cell["format"], cell["ecosystem"])]["standard_containerized_verified"]),
-             "unresolved_leads": cell["unresolved_documentation_leads"]}
+             "unresolved_leads": unresolved_count(cell)}
             for cell in cells
             if (not format_name or cell["format"] == format_name)
             and (not ecosystem or cell["ecosystem"] == ecosystem)]
@@ -44,6 +59,26 @@ def print_table(headers: tuple[str, ...], values: list[tuple]) -> None:
 
 def catalog(format_name: str, ecosystem: str, as_json: bool) -> None:
     directory = ROOT / "data" / ecosystem / format_name
+    if phase(format_name) == "pilot":
+        pilot = json_file(ROOT / "data/pilot-cells.json")["cells"]
+        cell = next(item for item in pilot
+                    if item["format"] == format_name and item["ecosystem"] == ecosystem)
+        parsers = json_file(directory / "parsers.json") if (directory / "parsers.json").is_file() else []
+        if as_json:
+            print(json.dumps({"cell": cell, "parsers": parsers}, indent=2))
+        else:
+            print(f"{format_name}/{ecosystem}: {cell['status']} (pilot; incomplete). "
+                  f"{len(parsers)} verified third-party paths; "
+                  f"{cell['verified_standard_or_runtime_count']} verified standard API paths.\n"
+                  f"{cell['uncertainty']}")
+            ranking = directory / "ranking.md"
+            if ranking.is_file():
+                print("\n" + ranking.read_text(), end="")
+            elif parsers:
+                print("\nVerified paths (no completed ranking yet):")
+                for parser in parsers:
+                    print(f"- {parser['name']} {parser['version']}")
+        return
     if as_json:
         print(json.dumps({"cell": json_file(directory / "cell.json"),
                           "parsers": json_file(directory / "parsers.json")}, indent=2))
@@ -60,9 +95,10 @@ def projects(format_name: str | None, ecosystem: str | None, as_json: bool) -> N
         if ecosystem and manifest["ecosystem"] != ecosystem:
             continue
         entries.append({"format": manifest["format"],
+                        "phase": phase(manifest["format"]),
                         "ecosystem": manifest["ecosystem"],
                         "slug": path.parent.name, "package": manifest["package"],
-                        "release": manifest["release"],
+                        "release": manifest.get("release", manifest.get("runtime", "")),
                         "kind": manifest.get("kind", "third_party")})
     if as_json:
         print(json.dumps(entries, indent=2))
@@ -78,7 +114,9 @@ def show(format_name: str, ecosystem: str, slug: str, as_json: bool) -> None:
 
     project, manifest = project_for(format_name, ecosystem, slug)
     info = {"project": str(project.relative_to(ROOT)),
-            "package": manifest["package"], "release": manifest["release"],
+            "phase": phase(format_name),
+            "package": manifest["package"],
+            "release": manifest.get("release", manifest.get("runtime")),
             "kind": manifest.get("kind", "third_party"),
             "parser_api": manifest.get("api"), "control": manifest["control"],
             "fuzz_engine": manifest.get("fuzz_engine", "libFuzzer" if ecosystem in
@@ -107,6 +145,12 @@ def build_afl(format_name: str, ecosystem: str, slug: str) -> int:
     sys.path.insert(0, str(ROOT / "scripts"))
     from run_case import image_for, project_for
 
+    candidate = ROOT / "projects" / format_name / ecosystem / slug
+    if (candidate / "manifest.json").is_file():
+        candidate_manifest = json_file(candidate / "manifest.json")
+        if candidate_manifest.get("coverage_kind") == "native_source_afl_feedback":
+            return subprocess.call([sys.executable, str(ROOT / "fuzzing/afl-native" /
+                format_name / ecosystem / slug / "verify-feedback.py")], cwd=ROOT)
     project, manifest = project_for(format_name, ecosystem, slug)
     _, image_id = image_for(project, manifest)
     verification = json_file(project / "verification.json")
@@ -136,6 +180,9 @@ def seed_arguments(args: argparse.Namespace) -> list[str]:
 
 
 def main() -> int:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import fandango_generate as generator
+
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
 
@@ -189,6 +236,24 @@ def main() -> int:
     corpus.add_argument("--timeout", type=int, default=60)
     corpus.add_argument("--batch-timeout", type=int, default=3600)
 
+    report = commands.add_parser("report", help="write an offline coverage report for a completed run")
+    report.add_argument("format", choices=FORMATS)
+    report.add_argument("ecosystem", choices=ECOSYSTEMS)
+    report.add_argument("slug")
+    report.add_argument("run_dir", type=Path)
+    report.add_argument("--output", type=Path, required=True)
+    report.add_argument("--source", action="append", default=[],
+                        help="CONTAINER_DIR=ARCHIVE matching a manifest source SHA-256")
+    report.add_argument("--strip-components", type=int, default=1)
+    report.add_argument("--max-files", type=int, default=1000)
+    report.add_argument("--max-lines-per-file", type=int, default=50000)
+    report.add_argument("--max-inputs", type=int, default=10000)
+    report.add_argument("--max-report-mib", type=int, default=256)
+    report.add_argument("--replay-queue", action="store_true",
+                        help="measure source lines from a bounded sample of saved AFL++ queue files")
+    report.add_argument("--max-queue-inputs", type=int, default=32)
+    report.add_argument("--queue-timeout", type=int, default=15)
+
     format_run = commands.add_parser("run-format", help="run every verified Docker harness for a format")
     format_run.add_argument("format", choices=FORMATS)
     format_run.add_argument("--ecosystem", choices=ECOSYSTEMS)
@@ -221,6 +286,14 @@ def main() -> int:
     afl_summary = afl_commands.add_parser("summary", help="summarize AFL++ statistics and saved files")
     afl_summary.add_argument("run_dir", type=Path)
 
+    fandango = commands.add_parser("fandango", help="generate a corpus with Fandango and record provenance")
+    fandango_commands = fandango.add_subparsers(dest="action", required=True)
+    fandango_commands.add_parser("setup", help="install pinned Fandango in the ignored local .venv")
+    fandango_generate = fandango_commands.add_parser(
+        "generate", help="run fandango fuzz into a new run directory; optionally replay or prepare AFL++",
+        description=generator.__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    generator.add_arguments(fandango_generate)
+
     native = commands.add_parser("native", help="prepare and run ecosystem fuzz engines")
     native_commands = native.add_subparsers(dest="action", required=True)
     native_prepare = native_commands.add_parser("prepare", help="copy seeds and pin a native engine run")
@@ -248,8 +321,9 @@ def main() -> int:
         if args.json:
             print(json.dumps(items, indent=2))
         else:
-            print_table(("FORMAT", "ECOSYSTEM", "THIRD-PARTY", "STANDARD", "RUNNABLE", "UNRESOLVED"),
-                        [(item["format"], item["ecosystem"], item["verified_third_party"],
+            print_table(("FORMAT", "ECOSYSTEM", "PHASE", "STATUS", "THIRD-PARTY", "STANDARD", "RUNNABLE", "UNRESOLVED"),
+                        [(item["format"], item["ecosystem"], item["phase"], item["status"],
+                          item["verified_third_party"],
                           item["verified_standard"], item["runnable"],
                           item["unresolved_leads"]) for item in items])
         return 0
@@ -263,6 +337,10 @@ def main() -> int:
         show(args.format, args.ecosystem, args.slug, args.json)
         return 0
     if args.command == "build":
+        project = ROOT / "projects" / args.format / args.ecosystem / args.slug
+        if (project / "manifest.json").is_file() and json_file(project / "manifest.json").get(
+                "coverage_kind") == "native_source_afl_feedback":
+            return subprocess.call([sys.executable, str(project / "verify-control.py")], cwd=ROOT)
         return execute("run_project.py", args.format, args.ecosystem, args.slug)
     if args.command == "run":
         extra = ["--timeout", str(args.timeout)]
@@ -280,6 +358,23 @@ def main() -> int:
             extra.append("--per-case")
         return execute("replay_corpus.py", args.format, args.ecosystem, args.slug,
                        str(args.corpus), str(args.run_dir), *extra)
+    if args.command == "report":
+        extra = ["--strip-components", str(args.strip_components),
+                 "--max-files", str(args.max_files),
+                 "--max-lines-per-file", str(args.max_lines_per_file),
+                 "--max-inputs", str(args.max_inputs),
+                 "--max-report-mib", str(args.max_report_mib),
+                 "--max-queue-inputs", str(args.max_queue_inputs),
+                 "--queue-timeout", str(args.queue_timeout)]
+        if args.replay_queue:
+            extra.append("--replay-queue")
+        for source in args.source:
+            directory, separator, path = source.partition("=")
+            if not separator or not directory or not path:
+                report.error("--source requires CONTAINER_DIR=ARCHIVE")
+            extra += ["--source", f"{directory}={Path(path).resolve()}"]
+        return execute("coverage_report.py", args.format, args.ecosystem, args.slug,
+                       str(args.run_dir.resolve()), str(args.output.resolve()), *extra)
     if args.command == "run-format":
         extra = ["--workers", str(args.workers), "--timeout", str(args.timeout)]
         if args.ecosystem:
@@ -310,6 +405,10 @@ def main() -> int:
                 extra.append("--resume")
             return execute("run_prepared_afl.py", str(args.run_dir), *extra)
         return execute("summarize_afl_run.py", str(args.run_dir))
+    if args.command == "fandango":
+        if args.action == "setup":
+            return generator.setup()
+        return generator.generate(fandango_generate, args)
     if args.action == "prepare":
         return execute("prepare_native_run.py", args.format, args.ecosystem, args.slug,
                        str(args.run_dir), *seed_arguments(args),

@@ -1,0 +1,355 @@
+{
+  "checked_at_utc": "2026-11-17T03:37:33.939731+00:00",
+  "platform": "linux/arm64 Docker",
+  "node": "Node.js 26.10.0",
+  "controls": {
+    "catalog_ns": "controls/xml/catalog-ns.xml",
+    "order_default_ns": "controls/xml/order-default-ns.xml"
+  },
+  "control_sha256": {
+    "catalog_ns": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order_default_ns": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "control_meaning": "XML 1.0 UTF-8 without DOCTYPE: prefixed root and default namespace, prefixed attribute, predefined entities, CDATA; the second valid control adds a comment, a processing instruction, numeric character references, a second prefix and an xmlns=\"\" default-namespace undeclaration. Expected outputs come from controls/xml/check_controls.py (expat oracle).",
+  "third_party": [
+    {
+      "package": "saxes",
+      "version": "6.0.0",
+      "scope": "One namespace-aware XML 1.0 document from local bytes as a SAX event stream with resolved element and attribute namespace URIs",
+      "command": "python3 scripts/run_project.py xml javascript saxes",
+      "receipt": "projects/xml/javascript/saxes/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 1195,
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle": true,
+      "error": null
+    },
+    {
+      "package": "sax",
+      "version": "1.6.1",
+      "scope": "One namespace-aware XML 1.0 document from local bytes as SAX events with expanded element/attribute names",
+      "command": "python3 scripts/run_project.py xml javascript sax",
+      "receipt": "projects/xml/javascript/sax/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 969,
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle": true,
+      "error": null
+    },
+    {
+      "package": "fast-xml-parser",
+      "version": "5.12.1",
+      "scope": "One XML 1.0 document from local bytes as an order-preserving JS object tree with qualified names; namespace URIs are resolved by the adapter, not by the package",
+      "command": "python3 scripts/run_project.py xml javascript fast_xml_parser",
+      "receipt": "projects/xml/javascript/fast_xml_parser/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 11,
+      "parser_source_lines_covered": 1133,
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle": true,
+      "error": null
+    },
+    {
+      "package": "@xmldom/xmldom",
+      "version": "0.9.12",
+      "scope": "One namespace-aware XML 1.0 document from locally decoded text as a W3C DOM Level 2 Core Document with resolved element and attribute namespace URIs",
+      "command": "python3 scripts/run_project.py xml javascript xmldom_xmldom",
+      "receipt": "projects/xml/javascript/xmldom_xmldom/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 6593,
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle": true,
+      "error": null
+    },
+    {
+      "package": "xml2js",
+      "version": "0.6.2",
+      "scope": "One namespace-aware XML 1.0 document from local bytes as an xml2js object tree with sax-resolved element and attribute namespace URIs and ordered children; comments and processing instructions are dropped, so text split only by them is reported as one run",
+      "command": "python3 scripts/run_project.py xml javascript xml2js",
+      "receipt": "projects/xml/javascript/xml2js/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 6,
+      "parser_source_lines_covered": 379,
+      "underlying_parser": "sax 1.6.1",
+      "underlying_source_files": 1,
+      "underlying_source_lines_covered": 969,
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle": true,
+      "error": null
+    }
+  ],
+  "standard": []
+}

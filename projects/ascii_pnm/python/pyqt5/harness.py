@@ -10,7 +10,7 @@ def parse_data(data: bytes):
     with tempfile.NamedTemporaryFile(suffix=".ppm") as source:
         source.write(data)
         source.flush()
-        return adapter.run('PyQt5', Path(source.name))
+        return adapter.read_pnm(Path(source.name))
 
 
 def fuzz_one_input(data: bytes):

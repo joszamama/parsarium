@@ -1,0 +1,431 @@
+[
+  {
+    "name": "assimp",
+    "version": "6.0.6",
+    "license": "BSD-3-Clause AND CC-PDDC AND MIT AND BSL-1.0 AND Unlicense AND Zlib",
+    "license_evidence": "https://github.com/assimp/assimp/archive/refs/tags/v6.0.6.tar.gz",
+    "documentation": "https://github.com/assimp/assimp-docs/blob/master/source/usage/use_the_lib.rst",
+    "input_api": "aiImportFile(local filename)",
+    "adapter": "adapters/c/ascii_ply/assimp.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular face from ASCII PLY",
+    "family": "Assimp native PLY loader",
+    "family_note": "C and C++ Assimp APIs share the same native PLY loader."
+  },
+  {
+    "name": "rply",
+    "version": "1.1.4",
+    "license": "MIT",
+    "license_evidence": "https://w3.impa.br/~diego/software/rply/",
+    "documentation": "https://w3.impa.br/~diego/software/rply/",
+    "input_api": "ply_open(local filename); ply_read_header; ply_set_read_cb; ply_read",
+    "adapter": "adapters/c/ascii_ply/rply.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex callbacks and three face-index callbacks from ASCII PLY",
+    "family": "RPly 1.1.4 ANSI C parser",
+    "family_note": "C and C++ adapters link the same pinned RPly C core; the C++ adapter calls its documented extern C API."
+  },
+  {
+    "name": "assetkit",
+    "version": "0.7.4",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/recp/AssetKit/blob/v0.7.4/LICENSE",
+    "documentation": "https://github.com/recp/AssetKit/blob/v0.7.4/samples/read_meshes.c",
+    "input_api": "ak_load(&doc, local filename, AK_FILE_TYPE_AUTO); ak_meshFromGeometry; ak_meshPrimitiveIndexAccessor",
+    "adapter": "adapters/c/ascii_ply/assetkit.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular face with parsed indices from ASCII PLY",
+    "family": "AssetKit native ASCII PLY importer",
+    "family_note": "C and C++ adapters call the same AssetKit C API and native PLY importer."
+  },
+  {
+    "name": "sply",
+    "version": "1.2.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Anteru/sply/blob/1.2.0/LICENSE",
+    "documentation": "https://github.com/Anteru/sply/blob/1.2.0/Readme.md",
+    "input_api": "ply_open(local ASCII PLY filename); ply_read_header; ply_set_read_cb; ply_read",
+    "adapter": "adapters/c/ascii_ply/sply.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertex callbacks and one parsed triangle face with indices",
+    "family": "SPly fork of RPly ANSI C parser",
+    "family_note": "SPly 1.2.0 is a separately tagged MIT library package with custom-I/O and locale changes, fully compatible with RPly; shares the RPly parser lineage and C callback API."
+  },
+  {
+    "name": "msh_ply",
+    "version": "1.02",
+    "license": "MIT OR Unlicense",
+    "license_evidence": "https://github.com/mhalber/msh/blob/eb1996102858ad467f68d087644759d84df21ca6/msh_ply.h#L2672-L2725",
+    "documentation": "https://github.com/mhalber/msh/blob/eb1996102858ad467f68d087644759d84df21ca6/msh_ply.h",
+    "input_api": "msh_ply_open(local filename, \"rb\"); msh_ply_add_descriptor; msh_ply_read",
+    "adapter": "adapters/c/ascii_ply/msh_ply.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1.0,
+      "last_index": 2
+    },
+    "scope": "ASCII PLY triangle: three parsed vertex coordinates and one face with final index 2",
+    "family": "msh_ply native single-header C reader",
+    "family_note": "Standalone versioned header at a pinned upstream commit. It is a distinct reader from RPly/SPly and Assimp; its benchmark is project-authored and is not treated as a popularity metric."
+  },
+  {
+    "name": "f3d",
+    "version": "4.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
+    "documentation": "https://github.com/f3d-app/f3d/blob/v4.0.1/c/scene_c_api.h",
+    "input_api": "f3d_scene_add(scene, local filename); f3d_scene_get_scene_info",
+    "adapter": "adapters/c/ascii_ply/f3d.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "files": 1,
+      "actors": 1,
+      "points": 3,
+      "cells": 1
+    },
+    "scope": "ASCII triangle produced three parsed points and one cell",
+    "family": "F3D native PLY plugin over VTK vtkPLYReader",
+    "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser."
+  },
+  {
+    "name": "mdal",
+    "version": "1.3.3",
+    "license": "MIT",
+    "license_evidence": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/LICENSE",
+    "documentation": "https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/mdal/api/mdal.h",
+    "input_api": "MDAL_LoadMesh(local path); MDAL_M_vertexCount; MDAL_M_faceCount; MDAL_FI_next",
+    "adapter": "adapters/c/ascii_ply/mdal.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "Three parsed vertices, one face and face indices",
+    "family": "MDAL PLY driver over bundled libplyxx",
+    "family_note": "MDAL uses its native PLY driver over a fork of libplyxx; distinct package path from the other C PLY readers. The public C ABI is called through pinned C declarations because upstream mdal.h itself is not C11-compatible."
+  },
+  {
+    "name": "cybermesh",
+    "version": "0.5.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/CyberdyneCorp/CyberMeshGenerator/blob/v0.5.0/LICENSE",
+    "documentation": "https://github.com/CyberdyneCorp/CyberMeshGenerator/blob/v0.5.0/bindings/c/include/cmg_c/cmg_c.h",
+    "input_api": "cmg_read_plc(local .ply path); cmg_plc_num_points; cmg_plc_num_triangles; cmg_plc_points; cmg_plc_triangles",
+    "adapter": "adapters/c/ascii_ply/cybermesh.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "vertex_1_x": 1.0,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "ASCII PLY three parsed vertices, one triangle, coordinate and face indices",
+    "family": "CyberMeshGenerator native ASCII PLY reader through its C ABI",
+    "family_note": "The C ABI wraps the project's C++ ASCII PLY parser. This is a released package path but has no comparable Homebrew metric; GitHub stars at review time were zero and are only auxiliary project-interest evidence."
+  },
+  {
+    "name": "brlcad",
+    "version": "7.46.0",
+    "license": "LGPL-2.1-only AND MIT",
+    "license_evidence": "https://brlcad.org/download/",
+    "documentation": "https://brlcad.org/docs/html/articles/gcv.html",
+    "input_api": "gcv_context_init; find_filter(GCV_FILTER_READ, BU_MIME_MODEL_PLY, local filename); gcv_execute; rt_db_get_internal",
+    "adapter": "adapters/c/ascii_ply/brlcad.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "second_x": 1000.0,
+      "face": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices, one face, triangle indices and BRL-CAD default scaled coordinate from local ASCII PLY",
+    "family": "BRL-CAD gcv-ply plugin over bundled RPly 1.1.4",
+    "family_note": "Distinct BRL-CAD library package and import API; bundled RPly is the underlying syntax parser family already represented by standalone RPly and SPly."
+  },
+  {
+    "name": "ops_pointcloud",
+    "version": "2026.45.1",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/LICENSE.md",
+    "documentation": "https://github.com/OpenAEC-Foundation/open-pointcloud-studio/blob/v2026.45.1/docs/library.md",
+    "input_api": "ops_cloud_open(local .ply path); ops_cloud_info; ops_cloud_read(points callback)",
+    "adapter": "adapters/c/ascii_ply/ops_pointcloud.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "points": 3,
+      "second_x": 1.0,
+      "last_y": 1.0
+    },
+    "scope": "ASCII PLY point cloud subset: three parsed vertex coordinates; faces are not exposed by the point-cloud API",
+    "family": "Open Pointcloud Studio native Rust PLY reader through ops_pointcloud C ABI",
+    "family_note": "One LGPL point-cloud core with C ABI; distinct package and syntax reader from the other C PLY paths. The local C adapter uses the official released SDK binary."
+  },
+  {
+    "name": "pdal_c",
+    "version": "2.2.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/PDAL/CAPI/blob/v2.2.3/LICENSE.md",
+    "documentation": "https://github.com/PDAL/CAPI/blob/v2.2.3/README.md",
+    "input_api": "PDALCreatePipeline(JSON readers.ply with local filename); PDALExecutePipeline; PDALGetPointViews; PDALGetPointViewSize",
+    "adapter": "adapters/c/ascii_ply/pdal_c.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "points": 3,
+      "view_points": 3,
+      "triangles": 0
+    },
+    "scope": "ASCII PLY point-cloud subset: three parsed points through explicit readers.ply stage; no mesh exposed in this view",
+    "family": "PDAL native PLY reader via pdal-c C API",
+    "family_note": "pdal-c is a separately released BSD-3-Clause C API wrapper over PDAL 2.10.2. The underlying syntax parser is PDAL readers.ply; do not count it as an independent engine from PDAL."
+  },
+  {
+    "name": "blukpast",
+    "version": "1.0.6",
+    "license": "LGPL-2.1",
+    "license_evidence": "https://github.com/wypifu/blukpast/blob/v1.0.6/LICENSE",
+    "documentation": "https://github.com/wypifu/blukpast/blob/v1.0.6/loaders/include/bkp_loaders.h",
+    "input_api": "bkpLoadPly(GPU adapter, local PLY path, BkpModel output, scratch group); harness captures parsed geometry at GPU upload boundary",
+    "adapter": "adapters/c/ascii_ply/blukpast.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "indices": 3,
+      "meshes": 1,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle with three parsed positions and face indices; upstream syntax parser with GPU upload replaced by observation harness",
+    "family": "Blukpast native C PLY loader",
+    "family_note": "Distinct tagged C package with native PLY syntax parsing. The harness replaces only GPU upload and model storage calls; no full Vulkan engine is built. This row is a source-level C API replay, not a GPU integration test."
+  },
+  {
+    "name": "pcc",
+    "version": "0.1.0",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/filrg/pcc/blob/v0.1.0/LICENSE",
+    "documentation": "https://github.com/filrg/pcc/blob/v0.1.0/include/pcc/point_cloud.h",
+    "input_api_evidence": "https://github.com/filrg/pcc/blob/v0.1.0/source/point_cloud.c",
+    "input_api": "pcc_point_cloud_init; pcc_point_cloud_t.read_from_file(&cloud, local PLY path); cloud.positions and cloud.size",
+    "adapter": "adapters/c/ascii_ply/pcc.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "Three parsed point coordinates from one valid ASCII PLY triangle; face not exposed by point-cloud API",
+    "family": "PCC C facade over bundled miniply C++ PLYReader",
+    "family_note": "Distinct tagged GPL C API package. Its PLY syntax parsing delegates to bundled miniply C++ source. The unrelated codec source requires zstd.h even when USE_ZSTD=OFF, so the replay compiles only the unmodified local PLY call path. miniply also underlies separately recorded Python pyminiply and pyvista-miniply paths."
+  },
+  {
+    "name": "pcprep",
+    "version": "pcprep-v1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/LICENSE",
+    "documentation": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/include/pcprep/pointcloud.h",
+    "input_api_evidence": "https://github.com/filrg/pcprep/blob/pcprep-v1.0/source/pointcloud.c",
+    "input_api": "pointcloud_load(pointcloud_t *, local PLY filename) returns success; cloud.size and cloud.pos contain parsed points",
+    "adapter": "adapters/c/ascii_ply/pcprep.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0
+    },
+    "scope": "Three parsed point coordinates from one valid ASCII PLY triangle; no face data exposed by this API",
+    "family": "pcprep C facade over bundled miniply C++ PLYReader",
+    "family_note": "A distinct released C library package from filrg. It shares bundled miniply C++ parsing with PCC and separately recorded Python paths. The exact GitHub release tag is pcprep-v1.0, while its CMake version is 1.0.1."
+  },
+  {
+    "name": "mccode",
+    "version": "3.10.2",
+    "license": "GPL-3.0",
+    "license_evidence": "https://github.com/mccode-dev/McCode/blob/v3.10.2/COPYING",
+    "documentation": "https://github.com/mccode-dev/McCode/blob/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp",
+    "input_api_evidence": "https://github.com/mccode-dev/McCode/blob/v3.10.2/common/lib/share/interoff-lib.h",
+    "input_api": "McStas Guide_anyshape(geometry=local ASCII PLY path) component parameter; generated C calls off_init into off_struct",
+    "adapter": "adapters/c/ascii_ply/mccode.instr",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "length": 1.0,
+      "width": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; C runtime parsed three vertices and one polygon and computed 1.0 by 1.0 bounding box",
+    "family": "McCode native C OFF/PLY parser (interoff-lib)",
+    "family_note": "McStas component library compiles the tagged C interoff-lib parser into an instrument. It is a distinct engine. The 80-artifact conda environment and installed parser sources are pinned; only geometry initialization is tested, not neutron simulation."
+  },
+  {
+    "name": "rig",
+    "version": "2",
+    "license": "LGPL-2.1-or-later; bundled RPly MIT",
+    "license_evidence": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.c",
+    "documentation": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.h",
+    "input_api_evidence": "https://github.com/rib/rig/blob/2/rut/rut-mesh-ply.c",
+    "input_api": "rut_mesh_new_from_ply(RutContext*, local filename, position attributes, status, GError**) returns RutMesh with parsed vertices and triangle indices",
+    "adapter": "adapters/c/ascii_ply/rig.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "indices": 3,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; unmodified tagged parser with mesh/GPU support replaced by observation-only stand-ins",
+    "family": "Rig Rut PLY loader over bundled RPly 1.01",
+    "family_note": "Separate tagged C package path, but its PLY syntax parsing uses bundled RPly 1.01, so it is not an independent parser engine from RPly or BRL-CAD. Full Cogl/Rut graphics integration is not verified."
+  },
+  {
+    "name": "mash",
+    "version": "0.2.0",
+    "license": "LGPL-2.1-or-later; bundled RPly MIT",
+    "license_evidence": "https://github.com/clutter-project/mash/blob/0.2.0/COPYING.LIB",
+    "documentation": "https://github.com/clutter-project/mash/blob/0.2.0/mash/mash-data.h",
+    "input_api_evidence": "https://github.com/clutter-project/mash/blob/0.2.0/mash/mash-data.c",
+    "input_api": "mash_data_new(); mash_data_load(data, MASH_DATA_NONE, local .ply filename, GError**); mash_data_get_extents",
+    "adapter": "adapters/c/ascii_ply/mash.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "indices": 3,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0,
+      "min_x": 0.0,
+      "max_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; tagged C loader and bundled RPly with graphics upload observed through stand-ins",
+    "family": "Mash PLY loader over bundled RPly 1.01",
+    "family_note": "Separate released LGPL C package, sharing RPly parser lineage with Rig, BRL-CAD and the RPly package. The tagged MASH_TYPE_DATA_LOADER header has a type alias typo corrected by preinclude during this control; full Clutter rendering is not verified."
+  },
+  {
+    "name": "sk_renderer",
+    "version": "v2026.11.3",
+    "license": "MIT OR Unlicense",
+    "license_evidence": "https://github.com/StereoKit/sk_renderer/blob/v2026.11.3/example/tools/micro_ply.h",
+    "documentation": "https://github.com/StereoKit/sk_renderer/blob/v2026.11.3/README.md",
+    "input_api_evidence": "https://github.com/StereoKit/sk_renderer/blob/v2026.11.3/example/tools/micro_ply.h",
+    "input_api": "Read local PLY file into bytes; ply_read(bytes, length, ply_file_t*); ply_convert(vertex element, position properties, output)",
+    "adapter": "adapters/c/ascii_ply/sk_renderer.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "converted": 3,
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle; parsed vertex and face element counts and second X coordinate from converted vertex body",
+    "family": "micro_ply standalone C parser by Nick Klingensmith",
+    "family_note": "Released sk_renderer package publishes the same micro_ply.h bytes as the author’s unversioned maluoi/header-libs repository. This is one parser family, not two independent engines. Renderer GPU APIs are not involved in this standalone reader control."
+  },
+  {
+    "name": "stereokit",
+    "version": "v0.3.11",
+    "license": "MIT",
+    "license_evidence": "https://github.com/StereoKit/StereoKit/blob/v0.3.11/LICENSE",
+    "documentation": "https://stereokit.net/Pages/StereoKit/Model.html",
+    "input_api_evidence": "https://github.com/StereoKit/StereoKit/blob/v0.3.11/StereoKitC/stereokit.h",
+    "format_evidence": "https://github.com/StereoKit/StereoKit/blob/v0.3.11/StereoKitC/asset_types/model.cpp",
+    "input_api": "model_create_file(local .ply path, shader); model_subset_count; model_get_mesh; mesh_get_verts; mesh_get_inds",
+    "adapter": "adapters/c/ascii_ply/stereokit.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "subsets": 1,
+      "vertices": 3,
+      "indices": 3,
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "second_x": 1.0
+    },
+    "scope": "One valid ASCII PLY triangle through the full native C ABI in offscreen Mesa mode; vertices and face indices observed",
+    "family": "StereoKit model PLY loader over bundled micro_ply",
+    "family_note": "A separate released library and public C package path over the micro_ply syntax parser family also present in sk_renderer. The public header has one unguarded C++ default argument; replay uses a one-line generated C compatibility copy without changing library source."
+  },
+  {
+    "name": "gmsh",
+    "version": "4.15.2",
+    "license": "GPL-2.0-or-later with listed linking exception",
+    "license_evidence": "https://gmsh.info/src/gmsh-4.15.2-source.tgz",
+    "documentation": "https://gmsh.info/doc/texinfo/gmsh.html",
+    "input_api_evidence": "https://github.com/live-clones/gmsh/blob/gmsh_4_15_2/api/gmshc.h",
+    "format_evidence": "https://github.com/live-clones/gmsh/blob/gmsh_4_15_2/src/geo/GModelIO_PLY.cpp",
+    "input_api": "gmshInitialize; gmshOpen(local .ply path); gmshModelMeshGetNodes; gmshModelMeshGetElementsByType(2)",
+    "adapter": "adapters/c/ascii_ply/gmsh.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "triangles": 1,
+      "triangle_nodes": 3,
+      "x_sum": 1.0
+    },
+    "scope": "One valid local ASCII PLY triangle; three parsed positions, one triangle and three node references through the C API",
+    "family": "Gmsh native PLY reader",
+    "family_note": "Gmsh uses its own GModelIO_PLY reader. Its C API calls the C++ implementation in the same released library; this is one package path, independent of the RPly and micro_ply families."
+  }
+]

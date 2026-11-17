@@ -30,6 +30,11 @@
 
 This Homebrew wxWidgets build defines wxUSE_NANOSVG=1, wxUSE_NANOSVG_EXTERNAL=0 and wxUSE_LUNASVG=0. It embeds NanoSVG, sharing that syntax parser family with SDL3_image.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/wxwidgets/README.md)
+
+```sh
+python3 parsarium.py build svg cpp wxwidgets
+python3 parsarium.py run svg cpp wxwidgets controls/svg/red-green.svg
+```

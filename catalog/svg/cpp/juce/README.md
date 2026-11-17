@@ -20,6 +20,11 @@
 
 JUCE SVGParser.cpp calls bundled LunaSVG and converts its document to a JUCE Drawable tree; this shares the LunaSVG parser family with the direct LunaSVG row.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/juce/README.md)
+
+```sh
+python3 parsarium.py build svg cpp juce
+python3 parsarium.py run svg cpp juce controls/svg/red-green.svg
+```

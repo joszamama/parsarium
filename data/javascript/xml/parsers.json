@@ -1,0 +1,258 @@
+[
+  {
+    "name": "saxes",
+    "version": "6.0.0",
+    "license": "ISC",
+    "npm_integrity": "sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==",
+    "tarball_sha256": "1cdf52fbbe1ccbd175c365d2b8e63f46e590e74aff23fa6a44a6ec51522e96db",
+    "input_api": "new SaxesParser({xmlns: true}); on('opentag'|'closetag'|'text'|'cdata'|'comment'|'processinginstruction'|'error'); write(string).close() after strict UTF-8 TextDecoder of local bytes",
+    "documentation": "https://github.com/lddubeau/saxes/blob/v6.0.0/README.md",
+    "source": "https://github.com/lddubeau/saxes/tree/v6.0.0",
+    "scope": "One namespace-aware XML 1.0 document from local bytes as a SAX event stream with resolved element and attribute namespace URIs",
+    "family": "saxes hand-written XML 1.0 + Namespaces state machine (sax-js fork)",
+    "family_note": "saxes.js implements its own character-by-character state machine (sText, sOpenTag, sAttrib, sCData, sPI, sEntity, ...), entity decoding, and xmlns prefix binding with well-formedness checks; xmlchars 2.2.0 supplies only XML 1.0/1.1 and Namespaces character-class regexes. It does not wrap expat, libxml2, or a DOMParser. It originated as a fork of sax-js but its parser code was rewritten and is maintained separately, so sax is logged as a distinct lead.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 601886067,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/saxes",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/saxes"
+  },
+  {
+    "name": "sax",
+    "version": "1.6.1",
+    "license": "BlueOak-1.0.0",
+    "npm_integrity": "sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==",
+    "tarball_sha256": "6e9abf03478608b80894bb8b6421271a0e583504f785f749a700d6bb35be85bd",
+    "input_api": "sax.parser(true, {xmlns: true, strictEntities: true}).write(string).close() after strict UTF-8 TextDecoder of local bytes; documented createStream(true, {xmlns: true}) also accepts a local file stream",
+    "documentation": "https://github.com/isaacs/sax-js/blob/v1.6.1/README.md",
+    "source": "https://github.com/isaacs/sax-js/tree/v1.6.1",
+    "scope": "One namespace-aware XML 1.0 document from local bytes as SAX events with expanded element/attribute names",
+    "family": "sax-js hand-written strict XML state machine",
+    "family_note": "sax 1.6.1 parses through lib/sax.js with its own strict SAX tokenizer, entity handling, CDATA and xmlns bindings. Saxes forked sax-js but rewrote and maintains a distinct parser implementation; the two package paths share historical lineage, not parser code.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 490225823,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/sax",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/sax",
+    "license_evidence": "https://github.com/isaacs/sax-js/blob/v1.6.1/LICENSE.md"
+  },
+  {
+    "name": "fast-xml-parser",
+    "version": "5.12.1",
+    "license": "MIT",
+    "npm_integrity": "sha512-wR8dO/fx+z8C5exuem1e7BKOWvjsuzvjS/tvA/Xu3Z1zQqJGcXrPzXbcAiaMgp2KjreEROcTkmnnisrcmJ2hYQ==",
+    "tarball_sha256": "b5e1b988bf12a23838b41ab6cae3ef2993f6f8c3482ebac133ab55fa39837016",
+    "input_api": "new XMLParser({preserveOrder: true, ignoreAttributes: false, commentPropName: '#comment', trimValues: false, parseTagValue: false, htmlEntities: true}).parse(Buffer, true) on local bytes; the package decodes the Buffer with Buffer#toString and runs its own XMLValidator first. fast-xml-parser does no namespace processing, so the adapter resolves element and attribute prefixes from in-scope xmlns attributes and rejects unbound prefixes and duplicate expanded attributes",
+    "documentation": "https://github.com/NaturalIntelligence/fast-xml-parser/blob/v5.12.1/docs/v4%2C%20v5/2.XMLparseOptions.md",
+    "source": "https://github.com/NaturalIntelligence/fast-xml-parser/tree/v5.12.1",
+    "scope": "One XML 1.0 document from local bytes as an order-preserving JS object tree with qualified names; namespace URIs are resolved by the adapter, not by the package",
+    "family": "fast-xml-parser own string scanner (OrderedObjParser + XMLValidator)",
+    "family_note": "src/xmlparser/OrderedObjParser.js scans the decoded string for tags, attributes (one regex per tag), CDATA, comments, PIs and DOCTYPE, and src/validator.js is a separate well-formedness scan run by parse(data, true). Entity and numeric character reference decoding is delegated to @nodable/entities 3.1.0 (same author group); numeric references are decoded only with the documented htmlEntities option, which also admits common HTML named entities. It does not wrap expat, libxml2, sax, saxes, or a DOMParser. The package has no namespace URI resolution (only removeNSPrefix), so the expanded names in the result come from the adapter's Namespaces in XML 1.0 prefix resolution over the parser's qualified names and xmlns attributes, as in the pugixml path.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 426764010,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/fast-xml-parser",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/fast_xml_parser"
+  },
+  {
+    "name": "@xmldom/xmldom",
+    "version": "0.9.12",
+    "license": "MIT",
+    "npm_integrity": "sha512-5AXjrcMClTryPe9LgZrygpB1lj7s0S9E0+W+AHaVKAVyHanafK86iPSvG5xHVSp/jC+VH1UXu0TAEmY279xH7A==",
+    "tarball_sha256": "08245e18c248b957b4c6e07f8549ad5f55ae11b7a8abd4c1113a0fd61ddc67ee",
+    "input_api": "new DOMParser({onError}).parseFromString(text, 'application/xml') on in-memory text from a strict UTF-8 TextDecoder of local bytes; the adapter's onError throws on every warning, error or fatalError; the summary reads the returned Document's namespaceURI/localName/attributes",
+    "input_note": "parseFromString accepts only a string for XML MIME types, so the adapter decodes the local bytes; under the general protocol's local in-memory text rule the package itself parses all markup structure.",
+    "documentation": "https://github.com/xmldom/xmldom/blob/0.9.12/readme.md",
+    "source": "https://github.com/xmldom/xmldom/tree/0.9.12",
+    "scope": "One namespace-aware XML 1.0 document from locally decoded text as a W3C DOM Level 2 Core Document with resolved element and attribute namespace URIs",
+    "family": "xmldom XMLReader tokenizer + DOMHandler DOM builder (jindw/xmldom lineage)",
+    "family_note": "@xmldom/xmldom 0.9.12 has no runtime dependencies. lib/sax.js holds its own XMLReader (a hand-written indexOf/regex tag scanner with namespace prefix scoping and entity decoding via lib/entities.js and lib/grammar.js); lib/dom-parser.js feeds those events to DOMHandler, which builds lib/dom.js nodes. It does not import sax-js, saxes, expat, or libxml2; its lib/sax.js is unrelated to the sax npm package despite the file name. The deprecated unscoped xmldom 0.6.0 is the predecessor of this family. Lenient by default: without onError, warnings and recoverable errors are logged and parsing continues, so the adapter makes every report fatal.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 326406305,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@xmldom/xmldom",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/xmldom_xmldom",
+    "license_evidence": "https://github.com/xmldom/xmldom/blob/0.9.12/LICENSE"
+  },
+  {
+    "name": "xml2js",
+    "version": "0.6.2",
+    "license": "MIT",
+    "npm_integrity": "sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==",
+    "tarball_sha256": "6386154e63b28c5f4411bf2348596105d262e36600104dd9584e2b7251f56a11",
+    "input_api": "new xml2js.Parser({xmlns: true, explicitChildren: true, preserveChildrenOrder: true, charsAsChildren: true, includeWhiteChars: true, charkey: '#text'}).parseStringPromise(text) on local bytes decoded with strict UTF-8 TextDecoder; xml2js runs sax.parser(strict=true, {xmlns: true}) and the adapter reads the resulting object tree: $ns element URIs and local names, sax attribute objects under $, and document-ordered element and text children under $$",
+    "documentation": "https://github.com/Leonidas-from-XIV/node-xml2js/blob/0.6.2/README.md",
+    "source": "https://github.com/Leonidas-from-XIV/node-xml2js/tree/0.6.2",
+    "scope": "One namespace-aware XML 1.0 document from local bytes as an xml2js object tree with sax-resolved element and attribute namespace URIs and ordered children; comments and processing instructions are dropped, so text split only by them is reported as one run",
+    "family": "sax-js strict XML state machine (sax 1.6.1) under the xml2js object builder",
+    "family_note": "xml2js 0.6.2 has no tokenizer of its own: lib/parser.js creates sax.parser(strict, {trim: false, normalize: false, xmlns}) and builds objects from its opentag, closetag, text and cdata events. The package.json range sax >=0.6.0 resolves to sax 1.6.1, the same release as the selected sax path, so the two paths share one parser family and one tokenizer source; xml2js is a separate API path with its own object mapping. xml2js does not pass strictEntities, so sax uses its HTML-extended entity table rather than only the five XML predefined entities. xml2js ignores comment, processing-instruction and DOCTYPE events. xmlbuilder 11.0.1 is loaded only for xml2js.Builder and is not on the parse path.",
+    "underlying_parser": {
+      "package": "sax",
+      "version": "1.6.1",
+      "npm_integrity": "sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==",
+      "tarball_sha256": "6e9abf03478608b80894bb8b6421271a0e583504f785f749a700d6bb35be85bd",
+      "selected_path": "projects/xml/javascript/sax"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 237465764,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xml2js",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/xml2js",
+    "verification_note": "xml2js is an API path over the selected sax 1.6.1 tokenizer, not a separate parser engine; the receipt counts xml2js package lines and sax lib/sax.js lines separately, and AFL++ feedback spans both. Both valid controls, catalog-ns.xml and order-default-ns.xml, match the expat oracle exactly, including namespace URIs, attribute order and text. Scope limits: xml2js drops comment and processing-instruction events, so a text run split only by a comment or PI is reported as one segment where expat reports two (both controls place them beside whitespace only); xml2js does not pass sax strictEntities, so sax's HTML-extended entity table is accepted; DOCTYPE events are ignored. The adapter sets the documented charkey option to '#text' because the default '_' is a legal element name. No malformed-input, resource-use, or fuzz campaign was run."
+  }
+]

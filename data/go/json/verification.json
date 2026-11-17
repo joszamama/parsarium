@@ -1,0 +1,373 @@
+{
+  "checked_at_utc": "2026-11-17T11:28:44.384647+00:00",
+  "platform": "linux/arm64 Docker",
+  "go": "go1.27.1",
+  "controls": {
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
+  "third_party": [
+    {
+      "package": "github.com/json-iterator/go",
+      "module": "github.com/json-iterator/go",
+      "version": "v1.1.12",
+      "scope": "RFC 8259 JSON text decoded into interface{}",
+      "command": "python3 scripts/run_project.py json go github_com_json_iterator_go",
+      "receipt": "projects/json/go/github_com_json_iterator_go/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/tidwall/gjson",
+      "module": "github.com/tidwall/gjson",
+      "version": "v1.20.4",
+      "scope": "RFC 8259 JSON text validated as a complete local byte slice, then traversed through GJSON Result nodes; observed control subset",
+      "command": "python3 scripts/run_project.py json go github_com_tidwall_gjson",
+      "receipt": "projects/json/go/github_com_tidwall_gjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 372,
+      "error": null
+    },
+    {
+      "package": "github.com/ugorji/go/codec",
+      "module": "github.com/ugorji/go/codec",
+      "version": "v1.3.2",
+      "scope": "Local JSON byte slice decoded through codec.JsonHandle into untyped Go values; observed valid control subset",
+      "command": "python3 scripts/run_project.py json go github_com_ugorji_go_codec",
+      "receipt": "projects/json/go/github_com_ugorji_go_codec/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 616,
+      "error": null
+    },
+    {
+      "package": "github.com/goccy/go-json",
+      "module": "github.com/goccy/go-json",
+      "version": "v0.12.0",
+      "scope": "RFC 8259 JSON text decoded into interface{}",
+      "command": "python3 scripts/run_project.py json go github_com_goccy_go_json",
+      "receipt": "projects/json/go/github_com_goccy_go_json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/buger/jsonparser",
+      "module": "github.com/buger/jsonparser",
+      "version": "v1.6.1",
+      "scope": "Local JSON byte slice parsed by recursive ObjectEach/ArrayEachErr and scalar conversion; this path-query API is not claimed to validate an entire arbitrary JSON document",
+      "command": "python3 scripts/run_project.py json go github_com_buger_jsonparser",
+      "receipt": "projects/json/go/github_com_buger_jsonparser/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 219,
+      "error": null
+    },
+    {
+      "package": "github.com/valyala/fastjson",
+      "module": "github.com/valyala/fastjson",
+      "version": "v1.6.10",
+      "scope": "Complete local JSON document parsed into fastjson.Value then recursively traversed; observed valid controls only",
+      "command": "python3 scripts/run_project.py json go github_com_valyala_fastjson",
+      "receipt": "projects/json/go/github_com_valyala_fastjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 257,
+      "error": null
+    },
+    {
+      "package": "github.com/bytedance/sonic",
+      "module": "github.com/bytedance/sonic",
+      "version": "v1.15.5",
+      "scope": "Complete local JSON document decoded into untyped Go values, then summarized; both observed valid controls verified",
+      "command": "python3 scripts/run_project.py json go github_com_bytedance_sonic",
+      "receipt": "projects/json/go/github_com_bytedance_sonic/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 289,
+      "parser_source_scope": "github.com/bytedance/sonic/internal/decoder/optdec/ Go source; native NEON assembly omitted",
+      "error": null
+    }
+  ],
+  "standard": [
+    {
+      "api": "encoding/json.Unmarshal([]byte, any)",
+      "runtime": "Go 1.27.1 linux/arm64 standard library",
+      "command": "python3 scripts/run_project.py json go stdlib_unmarshal",
+      "receipt": "projects/json/go/stdlib_unmarshal/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null
+    }
+  ],
+  "nested_array_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "nested_array_check": "Each harness.test TestControl replayed with /input/control=controls/json/nested-array.json reports exactly nested_array_expected_output (as its mismatch text against the nested-object expectation) for github.com/goccy/go-json, github.com/json-iterator/go, and encoding/json."
+}

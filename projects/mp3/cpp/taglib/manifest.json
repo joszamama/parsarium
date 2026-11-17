@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "cpp",
+  "package": "taglib",
+  "release": "2.3.2",
+  "catalog_parser": "data/cpp/mp3/parsers.json",
+  "source_lock": "projects/mp3/cpp/taglib/source-lock.json",
+  "source_sha256": "3ca2d8afaa7f1cf7f6ed10e511ebc368bfacd6dcaa3dbfa690b89e502e8963dc",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "expected_output": {
+    "version": 1,
+    "layer": 3,
+    "sample_rate": 44100,
+    "channels": 1,
+    "bitrate_kbps": 64,
+    "length_ms": 287
+  },
+  "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_control_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_expected_output": {
+    "version": 2,
+    "layer": 3,
+    "sample_rate": 22050,
+    "channels": 2,
+    "bitrate_kbps": 32,
+    "length_ms": 314
+  },
+  "api": "TagLib::ByteVectorStream(local bytes); TagLib::MPEG::File(IOStream*, true, AudioProperties::Accurate); isValid; hasID3v2Tag/hasID3v1Tag/hasAPETag false; audioProperties()->version/layer/sampleRate/channels/bitrate/lengthInMilliseconds",
+  "harness": "harness.cpp",
+  "fuzz_engine": "libFuzzer (clang++ -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of TagLib built from the pinned release; MPEG frame-header scanning in taglib/mpeg/mpegheader.cpp and mpegproperties.cpp",
+  "coverage_subject_prefix": "/work/taglib-2.3.2/taglib/",
+  "format_specific_coverage_file_suffix": "/mpegheader.cpp",
+  "pilot": "plain_mp3_registry_pilot",
+  "coverage_limit": "Untagged MPEG Layer III only. TagLib parses frame headers (and Xing/VBRI when present) to report audio properties; it does not decode Layer III audio, so main data, Huffman and synthesis are not exercised. For CBR streams without a Xing/VBRI header the length is derived from stream size and the first frame's bitrate. Two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support. TagLib is also counted under mp3_id3v2/cpp for ID3v2 scope; this path is the plain-frame property scope."
+}

@@ -22,6 +22,11 @@
 
 Native C++ parser; uses Boost.Asio buffers but does not delegate to a C HTTP parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/http11/cpp/boost_beast/README.md)
+
+```sh
+python3 parsarium.py build http11 cpp boost_beast
+python3 parsarium.py run http11 cpp boost_beast controls/http11/request.http
+```

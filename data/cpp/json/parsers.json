@@ -1,0 +1,440 @@
+[
+  {
+    "name": "jsoncpp",
+    "version": "1.9.8",
+    "license": "MIT OR LicenseRef-Public-Domain",
+    "license_evidence": "https://github.com/open-source-parsers/jsoncpp/blob/1.9.8/LICENSE",
+    "input_api": "Json::CharReaderBuilder::newCharReader()->parse(const char* begin, const char* end, Json::Value*, std::string*) with CharReaderBuilder::strictMode",
+    "documentation": "https://github.com/open-source-parsers/jsoncpp/blob/1.9.8/include/json/reader.h",
+    "source": "https://github.com/open-source-parsers/jsoncpp/tree/1.9.8",
+    "adapter": "projects/json/cpp/jsoncpp/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text (strict mode: no comments, object/array root, no trailing data) parsed into a Json::Value tree",
+    "family": "JsonCpp OurReader",
+    "family_note": "Own recursive-descent reader in src/lib_json/json_reader.cpp (OurReader behind CharReaderBuilder); no delegation to another JSON parser.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 32707,
+      "binary_package": "libjsoncpp26",
+      "dev_package_installs": {
+        "libjsoncpp-dev": 2203
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/jsoncpp"
+  },
+  {
+    "name": "simdjson",
+    "version": "5.0.4",
+    "license": "Apache-2.0 OR MIT",
+    "license_evidence": "LICENSE and LICENSE-MIT in pinned v5.0.4 source archive",
+    "input_api": "simdjson::dom::parser::parse(const char *buf, size_t len) -> simdjson::dom::element",
+    "documentation": "https://github.com/simdjson/simdjson/blob/v5.0.4/doc/dom.md",
+    "source": "https://github.com/simdjson/simdjson/releases/tag/v5.0.4",
+    "adapter": "projects/json/cpp/simdjson/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text parsed from a local pointer and byte length into a simdjson DOM element; observed valid control subset",
+    "family": "simdjson ARM64 DOM parser",
+    "family_note": "Pinned v5.0.4 singleheader amalgamation contains simdjson own structural scan and DOM parser. The ARM64 Docker build runs the native ARM64 implementation; it does not delegate to JsonCpp or nlohmann/json. The pointer-and-length overload pads a temporary copy as documented.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 2688,
+      "binary_package": "libsimdjson33",
+      "dev_package_installs": {
+        "libsimdjson-dev": 36
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/simdjson"
+  },
+  {
+    "name": "nlohmann-json",
+    "version": "3.12.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nlohmann/json/blob/v3.12.0/LICENSE.MIT",
+    "input_api": "nlohmann::json::parse(IteratorType first, IteratorType last, parser_callback_t cb = nullptr, bool allow_exceptions = true, bool ignore_comments = false) called on the byte range with allow_exceptions=false and ignore_comments=false",
+    "documentation": "https://json.nlohmann.me/api/basic_json/parse/",
+    "source": "https://github.com/nlohmann/json/tree/v3.12.0",
+    "adapter": "projects/json/cpp/nlohmann-json/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text (comments rejected, object/array root, no trailing data) parsed into a nlohmann::json value",
+    "family": "nlohmann/json lexer and parser",
+    "family_note": "Header-only lexer (include/nlohmann/detail/input/lexer.hpp) and recursive-descent parser (detail/input/parser.hpp) with SAX DOM builder; no shared code with JsonCpp OurReader and no delegation to another JSON parser.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 1799,
+      "binary_package": "nlohmann-json3-dev",
+      "dev_package_installs": {
+        "nlohmann-json3-dev": 1799
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "github_stars": {
+        "value": 50894,
+        "source": "https://api.github.com/repos/nlohmann/json",
+        "captured_at_utc": "2026-11-17T03:26:07+00:00",
+        "snapshot": "data/cpp/json/registry-snapshot.json",
+        "note": "secondary signal, not the ranking metric"
+      }
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/nlohmann-json"
+  },
+  {
+    "name": "RapidJSON",
+    "version": "1.1.0",
+    "license": "MIT (parser headers)",
+    "license_evidence": "https://github.com/Tencent/rapidjson/blob/v1.1.0/license.txt",
+    "input_api": "rapidjson::Document::Parse(const char* json, size_t length) over locally supplied bytes; default strict parse flags",
+    "documentation": "https://rapidjson.org/md_doc_tutorial.html",
+    "source": "https://github.com/Tencent/rapidjson/tree/v1.1.0",
+    "adapter": "projects/json/cpp/rapidjson/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259-compatible JSON text through length-bounded DOM Parse; object/array roots on two valid controls",
+    "family": "RapidJSON header-only SAX/DOM parser",
+    "family_note": "Own header-only GenericReader and GenericDocument implementation; no JsonCpp, simdjson or nlohmann/json parser dependency. Only include/rapidjson headers are compiled; the archive also contains third-party examples/tests with separate license terms.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 899,
+      "binary_package": "rapidjson-dev",
+      "dev_package_installs": {
+        "rapidjson-dev": 899
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/rapidjson",
+    "not_verified": "Only two valid nested object/array controls; scalar roots, optional relaxed flags, large inputs and malformed input remain unverified."
+  },
+  {
+    "name": "Boost.JSON",
+    "version": "1.92.0",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/boostorg/json/blob/boost-1.92.0/LICENSE_1_0.txt",
+    "input_api": "boost::json::parse(string_view s, boost::system::error_code& ec, storage_ptr sp = {}, parse_options const& opt = {}) over locally supplied bytes; default options accept only standard JSON",
+    "documentation": "https://www.boost.org/doc/libs/1_92_0/libs/json/doc/html/ref/parse.html",
+    "source": "https://github.com/boostorg/boost/releases/tag/boost-1.92.0",
+    "adapter": "projects/json/cpp/boost-json/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text through one-step parse(string_view, error_code&) with default strict options; object/array roots on two valid controls",
+    "family": "Boost.JSON basic_parser",
+    "family_note": "Own header-only basic_parser (boost/json/basic_parser_impl.hpp) feeding value_stack into boost::json::value; independent of JsonCpp, simdjson, nlohmann/json and RapidJSON. Built header-only from the official Boost 1.92.0 archive via boost/json/src.hpp; the other Boost headers it includes are compiled but not counted as parser source.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": null,
+      "ranked": false,
+      "unranked_reason": "Boost.JSON is built from the multi-library boost1.83 source package (sourcemax 100,348), whose count covers every Boost library; no JSON-specific source-package value exists, so no primary rank is assigned.",
+      "fallback": {
+        "label": "Separately labeled fallback, not the primary metric: Debian popcon binary-package installations of libboost-json-dev (by_inst)",
+        "value": 1749,
+        "binary_package": "libboost-json-dev",
+        "source": "https://popcon.debian.org/by_inst.gz",
+        "source_sha256": "299486c46a56fc44b390058490a50b9f1250335c7cdf6f1e02b8cee0a212a802",
+        "comparable_with": "the cell's separately labeled development-package installs (libjsoncpp-dev 2,203; nlohmann-json3-dev 1,799; rapidjson-dev 899; libsimdjson-dev 36), not with sourcemax values"
+      },
+      "dev_package_installs": {
+        "libboost-json-dev": 1749,
+        "libboost-json1.83-dev": 1654
+      },
+      "runtime_package_installs": {
+        "libboost-json1.83.0": 1798
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "github_stars": {
+        "value": 482,
+        "source": "https://api.github.com/repos/boostorg/json",
+        "captured_at_utc": "2026-11-17T03:26:07+00:00",
+        "snapshot": "data/cpp/json/registry-snapshot.json",
+        "note": "secondary signal, not the ranking metric"
+      }
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/boost-json",
+    "not_verified": "Only two valid nested object/array controls; scalar roots, stream_parser, parse_options extensions, large inputs and malformed input remain unverified."
+  },
+  {
+    "name": "Glaze",
+    "version": "9.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/stephenberry/glaze/blob/v9.1.0/LICENSE",
+    "input_api": "glz::read_json(glz::generic_i64&, std::string) on a local byte-backed std::string, yielding an insertion-ordered generic JSON DOM with signed integer and double alternatives",
+    "documentation": "https://github.com/stephenberry/glaze/blob/v9.1.0/docs/generic-json.md",
+    "source": "https://github.com/stephenberry/glaze/archive/refs/tags/v9.1.0.tar.gz",
+    "adapter": "projects/json/cpp/glaze/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text from a local memory buffer into glz::generic_i64; object/array roots in the two valid controls; exact nested tree, key order and integer/float kinds checked",
+    "family": "Glaze own template-based JSON reader",
+    "family_note": "Glaze implements JSON scanning/deserialization in include/glaze/json/read.hpp and related headers, without delegating to JsonCpp, simdjson, nlohmann/json, RapidJSON, or Boost.JSON. The generic_i64 DOM is Glaze own ordered generic value type.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 171,
+      "binary_package": "libglaze-dev",
+      "dev_package_installs": {
+        "libglaze-dev": 171
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "qualification": "Header-only source; the primary sourcemax value and dev-package installation count coincide at 171."
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/glaze",
+    "not_verified": "Two valid controls do not establish complete RFC 8259 compliance, malformed-input handling, numeric limits, or all Unicode edge cases."
+  },
+  {
+    "name": "POCO JSON",
+    "version": "1.15.4",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/pocoproject/poco/blob/poco-1.15.4-release/LICENSE",
+    "input_api": "Poco::JSON::Parser::parse(const std::string&) on a local byte-backed std::string; ParseHandler(true) builds an order-preserving Poco::JSON Object or Array DOM",
+    "documentation": "https://docs.pocoproject.org/current/Poco.JSON.Parser.html",
+    "documentation_parser": "https://github.com/pocoproject/poco/blob/poco-1.15.4-release/JSON/include/Poco/JSON/Parser.h",
+    "source": "https://github.com/pocoproject/poco/releases/download/poco-1.15.4-release/poco-1.15.4.tar.gz",
+    "adapter": "projects/json/cpp/poco-json/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 4627-style JSON object/array roots from a local string; comments disabled; exact nested structure, order and number kinds checked on two valid controls",
+    "family": "Poco::JSON::ParserImpl over bundled pdjson C tokenizer",
+    "family_note": "POCO JSON ParserImpl.cpp hands the entire byte buffer to bundled pdjson.c, then builds POCO Object/Array nodes through ParseHandler. The tokenizer is skeeto/pdjson family, bundled at upstream commit 57eb2c4 in the pinned POCO archive; POCO JSON is a separate C++ API/package but not an independent tokenizer. Both layers are source-instrumented.",
+    "popularity": {
+      "metric": "Debian popcon installations of libpoco-dev (suite-wide fallback, not JSON-specific)",
+      "value": 190,
+      "primary_value": null,
+      "rank_status": "unranked",
+      "dev_package_installs": {
+        "libpoco-dev": 190
+      },
+      "json_component_runtime_installs": {
+        "libpocojson100": 125
+      },
+      "json_component_runtime_no_files": 125,
+      "qualification": "libpoco-dev installs cover all POCO libraries and cannot estimate JSON API use. The 125 libpocojson100 runtime installs are component-specific but all were classified no_files, so neither count is ranked against single-library source-package installations.",
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/poco-json",
+    "not_verified": "Two small valid controls do not establish complete RFC 8259 behavior, large integers, other encodings, or malformed-input handling."
+  }
+]

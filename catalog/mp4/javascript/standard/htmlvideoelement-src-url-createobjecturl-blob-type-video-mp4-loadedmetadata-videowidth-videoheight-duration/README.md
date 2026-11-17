@@ -8,10 +8,22 @@
 
 ## Observed control result
 
-Loaded local MP4 control reports 2×2 video dimensions and 1-second duration
+```json
+{
+  "width": 2,
+  "height": 2,
+  "duration": 1
+}
+```
 
 [Control adapter](../../../../../adapters/javascript/mp4_browser.mjs)
 
-## Runnable harness
+## Run the valid control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Browser container and control receipt](../../../../../projects/mp4/javascript/stdlib_browser_video_metadata/README.md)
+
+```sh
+python3 projects/mp4/javascript/stdlib_browser_video_metadata/verify-control.py
+```
+
+The browser runs this control, but its native parser source coverage and AFL++ parser feedback are unavailable. This path remains staged.

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "json",
+  "ecosystem": "php",
+  "package": "php-json-decode",
+  "release": "8.5.12",
+  "api": "json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0)",
+  "runtime": "PHP 8.5.12 CLI (source build, --disable-all; ext/json is always enabled)",
+  "standard_inventory": "data/php/json/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "fuzz_smoke_entrypoint": "/opt/php/bin/php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "harness": "harness.php",
+  "coverage": "Clang/LLVM source coverage in PHP 8.5.12 ext/json json.c, json_parser.tab.c and json_scanner.c during valid JSON replay",
+  "coverage_subject_prefix": "/work/source/php-8.5.12/ext/json/",
+  "format_specific_coverage_file_suffix": "/json_parser.tab.c"
+}

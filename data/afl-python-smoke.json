@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-16T18:46:18.688492+00:00",
-  "projects_total": 199,
-  "projects_verified": 199,
+  "checked_at_utc": "2026-11-17T12:26:58.709731+00:00",
+  "projects_total": 121,
+  "projects_verified": 121,
   "results": [
     {
       "schema_version": 1,
@@ -52,48 +52,38 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_ply/python/openmesh",
+      "project": "ascii_ply/python/open3d",
+      "verified_at_utc": "2026-11-16T22:30:15.236388+00:00",
       "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "495a625fb5b1de2398d4ffe784197ba9ddc9b7e0e5d999cd86f5e72187b97431",
-      "base_image_id": "sha256:3dbf0fa035b5e62c19308b7d289da96c6bb42c46caaf0612d4dc55b579427ad3",
-      "image_id": "sha256:23578cc6f6eaade0e4d36b09822311d3a590b5c65f7c09cec1dc7776f7849609",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 353,
-      "feedback_edges": 372,
+      "coverage_kind": "native_binary_edges",
+      "feedback_kind": "underlying_shared_library_binary_edges",
+      "afl_package": "AFL++ 5.04a QEMU",
       "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "278c8ac9e5dba44d60a96d637c56066c515c5daea151f41eb19d7f898c211f82",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      "feedback_edges": 37,
+      "binary_feedback": {
+        "feedback_kind": "native_binary_edges_not_source_coverage",
+        "module": "/opt/venv/lib/python3.14/site-packages/open3d/libOpen3D.so.0.20",
+        "module_sha256": "f0a24df9c2e81e2aba038f191a2bf96a21ce412902ef77018c71c6012a5c932f",
+        "symbol": "open3d::io::ReadTriangleMeshFromPLY",
+        "symbol_elf_value": "0x40132d0",
+        "symbol_size_bytes": 1751,
+        "module_full_text_range": "0x40011d1000-0x400f6af000",
+        "module_text_range": "0x40048572d0-0x40048579a7",
+        "executable_excluded_range": "0x400000-0xb22000",
+        "control_tuples": 37,
+        "control_map_sha256": "5ab3f916708080d6fa9960318b1eb2095631e4b76072f789bc18df2a5f47a004",
+        "repeat_identical": true,
+        "variant_tuples": 38,
+        "variant_differs": true,
+        "excluded_module_tuples": 1
       },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/ply_parser",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "0b5aeb14762dc6daab8ce0d9d63cfac03a87911d08cf03fec48ec4f1e9aca3bb",
-      "base_image_id": "sha256:f68df6351f06215c2b98c3ca40f057b242014282bf564b00ca84e8628c51db1b",
-      "image_id": "sha256:6106d3e66b2317e4474cdecdd71e301e1b770276b7979e01000861622f8e71c4",
-      "platform": "linux/amd64",
+      "source_lines_covered": null,
+      "base_project_receipt_sha256": "9c075445d17777112f76cc926dd6f2d9fe299eb644c7ea08860e18ddb08fc310",
+      "source_sha256": "14e0928af6f83555e58dde934af85fe61f6f9f5160f883e6e720d6205c38c68a",
       "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 161,
-      "feedback_edges": 181,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
+      "image_id": "sha256:d0c1695163c58dd8913609b2d508b11459a6253c1b79cd53327df7637c8d49e3",
       "overlay_file_sha256": {
-        "Dockerfile": "a687b4c71ad17f2841c475b5a79a14b150764e83622ffc15a74770dbddc252dd",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+        "Dockerfile": "87eeeb671e2ab3267c4926caaf8614871483504e018ed1ed2e82576790788af2"
       }
     },
     {
@@ -144,121 +134,6 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_ply/python/polyxios",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "8fbaa2ec10d6ed9a9c01bb3d68cdaa0c2661f736df84840667c4839dcea5bf26",
-      "base_image_id": "sha256:eb2986f27b657c60b7b518e282609f4604df82f365ddf0d355433e99aabfb5ba",
-      "image_id": "sha256:7d3726a7bf30cc040ae58ffe55d3a78012f07c8fe60d8367dd4703040bec1772",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 5579,
-      "feedback_edges": 5340,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "8e6c9b97b55627dbdf756d2aa6742293ca155823167e90d6827c67246e630663",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/py3d",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "5d5fff990a84966bd0c7acc2c0f88bc9483245945902926ae15292d541c2705a",
-      "base_image_id": "sha256:de6039c64f0e5c6a7829dccf203f8f17df55a45ff14a3f603bcccfd06c5b4b1a",
-      "image_id": "sha256:f3c2cca36a4a3e134362ef1acf944b9e2f0ce2c30088eb08e4cce62d74241a41",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 333,
-      "feedback_edges": 350,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "6f51fbf1d141fc422168a7f5f1e493fab2924f485a2275db6f4c0b16747d49bd",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/pyassimp",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "60f9f5b1b53a7e95ac37c4c33f9da44f721225e9df0b04bc81c1633b36b8642d",
-      "base_image_id": "sha256:b4e1f27ae139624239a7c6d5dd8c3dd1cf3778c1bfc0fb587a27422234b3d8ec",
-      "image_id": "sha256:351a307448208d57ea3e0f24bd170219ff7fdc41f4a62d19e16db0d582ec2fbb",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 668,
-      "feedback_edges": 687,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7f879b9f0591e3270d145708bbacdd6467b3306c3817d36e776b1a945cb4191a",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/pyminiply",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "c51600c977286d3084d66d3eac8d9c4281504dbb939d3b8d9c586000d550acf8",
-      "base_image_id": "sha256:9e41af8c6d4793aac767d37f0173c3951a5bcb750e7d35c9445a1c76fe33f3c3",
-      "image_id": "sha256:38de35c56451b90787556cd3eadc568e771427aa7cecde970a69cd32b4d1a318",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 705,
-      "feedback_edges": 723,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "1a99e3bc85a96ebf565e124d956fe70349d1035b55a08a587c42915bb42f049d",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/pyntcloud",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "697e6eb268bbc615d11002914677e3a19cd3cb2e9998795d9448ccfceb24f314",
-      "base_image_id": "sha256:432ddc1c028f04035efdf2cce502f39ffdd0e2e741fde36001b25e08e5b6c29b",
-      "image_id": "sha256:59242666badbc458c575d0d4a34748c4500b5dc7a9949fb849d1642c0da365c4",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 805,
-      "feedback_edges": 818,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "14a73b0c560d8cedf8f34e319f071af7004064fff85e2a8a3c2b4bca6d51ec01",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "ascii_ply/python/pyvista",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -282,52 +157,6 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_ply/python/pyvista_miniply",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "2e598fe529d3501d3186c75ff29a90c6de3e7d900f098df3210cfded48e811e0",
-      "base_image_id": "sha256:395bda60c0c182a81096c6525fb0670a3076b8d695ae64b90cdc1ec42b53d024",
-      "image_id": "sha256:05c0c56606ce359a1df38043ece38c0d2b4acbdfadaa97f0f3b6170097b4898e",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 37,
-      "feedback_edges": 57,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "d0587f5fb22ff5f0124a17398dd5bba2ef3de3e441340ba4dbaae2e1134f8124",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/shapeviz",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "76a6dd3b83c7181dd0a381973c33bbb04db62d2dfb716a308d66bc805e332093",
-      "base_image_id": "sha256:f2db028b452274a25c9806631e2b47b6b7fb3b828ae97b93ea0c5a56fe1ba5f4",
-      "image_id": "sha256:585b1d79c89c0f8c2caf9b49d5a8d64f9451422feb1f10bdc5de0bc210b4792f",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 271,
-      "feedback_edges": 291,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2942e7b2406548f2d12cef52ba81cce10c101596b88c63e117e6f9c292b722f4",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "ascii_ply/python/trimesh",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -342,29 +171,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "cb578683bafd43c7e6beae2af830efd8bf9d619b413a34b3c544709daf229983",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_ply/python/vedo",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "7a12696e0c02020e96c2e38a578d34ca7d87c629e5152810b775eef1330eb02f",
-      "base_image_id": "sha256:9f770d6b735488e5658afca916fbaacc09ee85bc3b43e696920a78d706a68ca9",
-      "image_id": "sha256:ecc01c0d075a1c5504b992fc42c96503b0023c6dc18a2d3fb2917da8237d8066",
-      "platform": "linux/amd64",
-      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
-      "parser_source_features": 3321,
-      "feedback_edges": 3284,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "af29c91230905e909723c8d56accf4e22aae11023b280087f3d3d4540f1d9963",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -443,29 +249,6 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_pnm/python/mahotas",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ffb8af829e623309dff06f293bcea0aaea3d79872c73b41646fdf2a84ee551a5",
-      "base_image_id": "sha256:c6d48cc4ce7b10193a46c03db2a824e26070006d9a0eb8fd1fd4f5e6cb5b2540",
-      "image_id": "sha256:e261a5f4189f88be6ec8f3ada4d87aafc679ff46fdb1c8abbace087da932936d",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 743,
-      "feedback_edges": 762,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "24bb0caf17c399a4f15250d997e57e117bc4bf170c4f5cba1599ceecd13d507a",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "ascii_pnm/python/matplotlib",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -489,75 +272,6 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_pnm/python/napari_netpbmfile",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "3da4ef6a2b41fe759fdb59101c1eb37ec2ed6c8bc7eda5f653267a5b91b5bd6f",
-      "base_image_id": "sha256:0f6a8093cf65fd7d7e89aa9f7fdce1f8da25967d0240b6c089dfd87616581c71",
-      "image_id": "sha256:1ea56d6727a8ea9ec8a7b1b7eb69b037348124a2c09b7dd5b1663bb3d9e51644",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 12,
-      "feedback_edges": 32,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "1ab7f2c1f2788da0c3604312ade0884655f388eb95e64a8d25532550d6874cc5",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_pnm/python/netpbm",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "a3593b62539aae94f0817c3fdb0fa10067a202ba92fd8f9d025e8b2fe5845530",
-      "base_image_id": "sha256:a6e72431117e049a00f575b9c1c0812cc1c4d32e2073faf62e81e2212c5edacf",
-      "image_id": "sha256:05d1bfa3029d1ee244a518c2497c4bf89788e849b020d22bfb3475a67199d961",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 121,
-      "feedback_edges": 141,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "dc9b02314cab8e7080ebc4913d8e1d391ee82afaea72c5120301594fdc2f1935",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_pnm/python/netpbmfile",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "dac29aee60065199a1908aa935ae91a631a81ad79693fe355799dabf07b560fa",
-      "base_image_id": "sha256:5c8c2d697d41f9b74dc229f9e79c9f55e57fb8a775be1cb496400a0b8e1a7fea",
-      "image_id": "sha256:d922dca94a8e12624c51d70c3876016bb194185a7ca4dd542a06dc9f8f91c478",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 103,
-      "feedback_edges": 123,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "346db7d6d750c8c64ca0dff8faab77a65affac36acd69975bcc1018d0b6ef808",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "ascii_pnm/python/opencv_python_headless",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -572,52 +286,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "75cbb9df90b8f7f66b43f49c3caff6b86ecd380ad2f9f3a930e89351a9a0e778",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_pnm/python/openimageio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "c1aa48522be4f8738112cb59bede8f61989c802fd4f9c5a660110326daeff5dd",
-      "base_image_id": "sha256:c9b38cbcc3bb31ac4039ff05712d75756f7e0df16a6626d426132da719086bcf",
-      "image_id": "sha256:f6b370ca30c151973966ad67314be7a709ff3217b2ea6250762c2ee28c8239fe",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 15,
-      "feedback_edges": 35,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "5b238347a0abaa2b059258e82754dc6ebf419a2a880a66e81d70587b74baf373",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_pnm/python/pgm_reader",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "83087110dfeab2a31fee3371eaeb85913e4b869ce5d3232842f63a4375ea9e43",
-      "base_image_id": "sha256:ca24e8f96f21ac83cf0b2ea930e22d39bf825eb45b16c2caa97f33d2ab2b7a50",
-      "image_id": "sha256:276917b378a3ab510ea1a60b0b7efc9008af222f0a1014dafe52df7441aa4826",
-      "platform": "linux/amd64",
-      "control_sha256": "29f6a1ca59a8ff644dc66ce3f9b77abd50d6245fedebb35cdf18b5448547051b",
-      "parser_source_features": 35,
-      "feedback_edges": 55,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "a0b28b07a2b560a8d47a958198a930238e03a19509fbd060052c9969b6cbf53b",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -682,25 +350,34 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_pnm/python/pypnm",
+      "project": "ascii_pnm/python/pyqt5",
+      "verified_at_utc": "2026-11-16T21:53:59.297481+00:00",
       "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e772da59786b3ef07c62da0b5a0982e6d7e2750bd5c1ca73b4f43daae36f4a3a",
-      "base_image_id": "sha256:61e576f90fae1c000cbeb4ffdaef216ffc2087c9fcc266544a53c8685d42ed2a",
-      "image_id": "sha256:e02e66f2a0819765e8cd65a2e2cf6b94d5db7017f0c60bcb11dc538afa1131a4",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 80,
-      "feedback_edges": 100,
+      "coverage_kind": "native_binary_edges",
+      "feedback_kind": "underlying_shared_library_binary_edges",
+      "afl_package": "AFL++ 5.04a QEMU",
       "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "c12af204dcec25a33cb375cb9a9f5e7f87693fecc3bec8f19751cd425dedbfbb",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      "feedback_edges": 842,
+      "binary_feedback": {
+        "feedback_kind": "native_binary_edges_not_source_coverage",
+        "module": "/opt/venv/lib/python3.14/site-packages/PyQt5/Qt5/lib/libQt5Gui.so.5",
+        "module_sha256": "e6ddbfcf9e25106ee9f532e86bb43879f64cceab6c17556eb00fe7349d4fe1f1",
+        "module_text_range": "0x4000a00000-0x4001198000",
+        "executable_excluded_range": "0x400000-0xb22000",
+        "control_tuples": 842,
+        "control_map_sha256": "2abe7faf4abdb851f282c5e1ca01160a9ab42fd7aa3a0721bcc22a76154516e9",
+        "repeat_identical": true,
+        "variant_tuples": 835,
+        "variant_differs": true,
+        "excluded_module_tuples": 1
       },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+      "source_lines_covered": null,
+      "base_project_receipt_sha256": "c18787d33f3501307ccf48dde832d4a78ddf01d5f2a1c97233aaccb11a579e58",
+      "source_sha256": "cd672a6738d1ae33ef7d9efa8e6cb0a1525ecf53ec86da80a9e1b6ec38c8d0f1",
+      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+      "image_id": "sha256:0c2545f5b91e1ec287c433a98209e7206f9a7c785d3c85d723c516cc5b20e8de",
+      "overlay_file_sha256": {
+        "Dockerfile": "025de000dde0e5dbbf936126c8ede7b716215b12bb153a37acd7673638e0dff7"
       }
     },
     {
@@ -769,29 +446,6 @@
     },
     {
       "schema_version": 1,
-      "project": "ascii_pnm/python/pyvips",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "869d3e837dd10211f9b10bfdfc2e167f6a80d48eee322cf630d630d44a6493ee",
-      "base_image_id": "sha256:3521e55c8d8d0b1b9939686052261b6abf9193975132afc04bffdbdfb7317463",
-      "image_id": "sha256:c3afab0364f34fdb145c7f56a37c478b89c2860d218a1afb0a307b119bda1632",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 1230,
-      "feedback_edges": 1243,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "66367e0b2eca91bd4765cc3d57bff111dd0376505ca45568cf38cb07c47dd6a2",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "ascii_pnm/python/scikit_image",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -811,29 +465,6 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "ascii_pnm/python/wand",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "fce495f82a2e2ce2ddd6e0b39c97a6fe5b62d2cebf2fc61a5f1a4dc2df64c188",
-      "base_image_id": "sha256:af68feb55403099d7f0d0490088870988a511768bfc38cbd3724ac173d940aaf",
-      "image_id": "sha256:dc29dcc2559c4ee255d66f4bcf4ccf612cc6740997dfd01bf15224a9e4097f72",
-      "platform": "linux/amd64",
-      "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
-      "parser_source_features": 3335,
-      "feedback_edges": 3290,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "68559796c08c746f547685e239abae6e3a184db88b0151fb6151a7bd54cf354c",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
       }
     },
     {
@@ -864,9 +495,9 @@
       "project": "http11/python/h11",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "4e7c37f71a929767dd4242ce6f2e7ed24a386165c1d2b897b0131939d93fa904",
-      "base_image_id": "sha256:7fd270661e1c204d328f763140ba2cee9a1b2b75f3ecadae2251f3c32cd96175",
-      "image_id": "sha256:217c037e2eabd87ea5f4553c9a3d6e9d3e16967f544cddd8f90a88baf1e2061a",
+      "base_project_receipt_sha256": "fb3c6ebf50ff193e781168a45ea45cce654eda7d4907568721c880004e8c555b",
+      "base_image_id": "sha256:aeb5482d793c07d0f2588f5072a8b7d1e6ddaa45c35ecd18c611c39979edcc32",
+      "image_id": "sha256:b634da8cce1c01e02034d5be8dd778e272214f121f243af0c4a99f7f90908247",
       "platform": "linux/amd64",
       "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
       "parser_source_features": 207,
@@ -874,76 +505,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "53bfa205436e0276d4867353e477cb46dc3d3ef9289c4a73c3383d73a32c4f9f",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/h11_mypyc",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "3fde60201aa3f9bcb4bcc999ce85241b70c6b93e880b4cb7b690b65fbd4c39cf",
-      "base_image_id": "sha256:ea750c17f5cff16a7f5e5021e6edc460e10ce21f2b60c6b43ac051ca04f87499",
-      "image_id": "sha256:c39417f904b8e1d9d41b74f01b2eebeb20c5e69d15dfbf94eaf151d63aafb37a",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 597,
-      "feedback_edges": 614,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "4215bf20ef51f3ea8e009671f5e76f8b9daf355a187d37f116cda5dd382e9bc8",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/h11pro",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "9e3f4a33acb4cbc4856d1be3f1c74003aedbbe7d09aa75d8a818ec5380d55673",
-      "base_image_id": "sha256:79aefc065fef2459c8998a667cf4430363f92c8150580b242ac60086000bfde6",
-      "image_id": "sha256:ccbd39c7914f5bb477b61902ebc9c5d28aa9aa0826589c57e36294f9838cc15a",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 593,
-      "feedback_edges": 611,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "871cf2d3fd50bcbb180acd4cf6a3d29970fc101d2de949fb877af6dde45c948d",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/h1parser",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "d7ccbe3cde998fad312100ab545f2193805629d0c8417fa0a1ea7317e04121c6",
-      "base_image_id": "sha256:f3c11e7b750753ac40450405f78f1f6c864e1115c895828f98d26ed8ee5b3cae",
-      "image_id": "sha256:ee9273ff64abcaf96ebad10d0f0373f65d341c7764402cf4387b8e06e0652166",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 65,
-      "feedback_edges": 85,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "d550309ed81bf43760b84ec6c621cf93a80c77827e431704e70fd6c586052876",
+        "Dockerfile": "91271fdf1e5e0202f5906300fbc3af5360e5d3987d9767680789b4603dde72ef",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -953,25 +515,25 @@
     },
     {
       "schema_version": 1,
-      "project": "http11/python/http_parse",
+      "project": "http11/python/http_parser",
       "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "17d3cfae73142209b2b3df7314620847a2fe401c0a2ff930b6e822fb5d60cb4a",
-      "base_image_id": "sha256:f286927aa0926f9df564af02fb1f75757b874ffb47676549cf310f9132d99ca0",
-      "image_id": "sha256:e2d35871834290b30d6df69dfbb9da83887a9a7ab290d04eab69e41363c83546",
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "347916653b7ead507dc8c80cdac44aabb50255cc56d189ab160714edec3c0df3",
+      "base_image_id": "sha256:b46321fb7a398a651cc4503423a86c2b24c448073dd7f1f20238566d5265e784",
+      "image_id": "sha256:6808482367768bcc8a03c5964b6d62051e6e79110a798d606104dc048d56723c",
       "platform": "linux/amd64",
       "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 31,
-      "feedback_edges": 51,
+      "parser_source_features": 1844,
+      "feedback_edges": 1838,
       "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
+      "afl_package": "4.04c-4",
       "overlay_file_sha256": {
-        "Dockerfile": "fa95011c49330324facf96d032715d1eddf758dda535375af33f708c8dbc9508",
+        "Dockerfile": "b1ca32d60b1c06bf945f01dd75f8abcdcf22a7eecd289a7131fc5c386e84d0ae",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
       }
     },
     {
@@ -990,29 +552,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "408948b82885c0a8a0d2e335c5d489a7c103a59a5fbba014a7acc0803fce3d4e",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/httppackets",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "c76d6172f135db3d6d3b436c4ef0ceb9ff3de3038d2a9a79bf026befea2fc6ec",
-      "base_image_id": "sha256:83164ae1a8a9ea7b3a3855ebc3633ca836b49ef6236cf38ceee4da34ad7bf061",
-      "image_id": "sha256:df29038e0462478903def824c278653972133a26ff907c67b23791978b70edb2",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 223,
-      "feedback_edges": 243,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2b354add5dda855c6f5d24d89cac40061776d91b91f74bb927498ca3f26d36dc",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -1045,75 +584,6 @@
     },
     {
       "schema_version": 1,
-      "project": "http11/python/parse_http_header_line",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "d82bff6216b4dee37fa878292d5f50ab4dc22bba258438d81088834e30a81539",
-      "base_image_id": "sha256:87bb8695c5b9a6f3ee61cf8e692fd9b383d8c31b3cc1e113659bc2a3d85b3938",
-      "image_id": "sha256:29068e570d7441ae3f511bcd7e97bdfbf37567f01f930b0591648d14dfba7c81",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 70,
-      "feedback_edges": 90,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "5001467e3bb165dcd736a2552e3bed7ef46ba0741e0249a2a1b0651113a8e704",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/parserawhttp",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "0d4953b6067d682aeaefd6bbaabc38e55f261a3475f70fe10cb10bf7c1023fdf",
-      "base_image_id": "sha256:6d878172f406fa689eb18ee974901140ab77638ecd08a265cb4bf63b21abad36",
-      "image_id": "sha256:f32f8c30bc0614a640b8615ecc28307e681c0488fbaaf08a83577e5a299b4643",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 22,
-      "feedback_edges": 42,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "28a2ea3ef7371c8ee1939b91762c993ac50a9c0e202b439f82f9a381fc7549e1",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/parserheader",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "3c40d8afb52af89c2ac33a8d88cdc890dd8e82e2d0b4705b8ac808d6f753a5a2",
-      "base_image_id": "sha256:9970d2fd22ee2f5d293203ca9f0c1fa60c32bd264917f330040fca34161155a5",
-      "image_id": "sha256:919975c3be6d094f23553b2f856783c328af579c810d139f36af08700ddbc55f",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 83,
-      "feedback_edges": 103,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "5b7164b416708f535a464d8f8a23eb233b3306b62b4da201b90e4ce6eae63db4",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "http11/python/proxy_py",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -1128,29 +598,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "998c5894a6a50128b0a70721aaf45bcf8d2bb9bd4bf2ab79d19b0c8f8a8477b7",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "http11/python/pycohttpparser",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "631c0eebcdc6d17b1b8ccf31e2ae66aaebb2624d75f2aaaf7e7d373e167d7f34",
-      "base_image_id": "sha256:225404c732c59537f7bf0f4fc084ab5684b92fff60ea8f5c8a2b8b4f229140ac",
-      "image_id": "sha256:9c2a5c239f938c3ef40ea10f311634262800e76f3afe1da10e0408dad053de83",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 66,
-      "feedback_edges": 86,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "42edf871a402aea17c761b7ee659ce278f206313503229874f40fd413163b7a5",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -1252,29 +699,6 @@
     },
     {
       "schema_version": 1,
-      "project": "http11/python/tp_http_request_response_parser",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "2236d668a4aaf9d20bd6f5447dbf795495e4260badd31b85dee351fc71702ee4",
-      "base_image_id": "sha256:52aa9baf9a7c9a8eba04ad1977b5ba943370882a502c1a1d697e029215284ea4",
-      "image_id": "sha256:f538b162d5dd231ad48f9b361c6b211839057c6ea9de887ab926d32c109fee90",
-      "platform": "linux/amd64",
-      "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
-      "parser_source_features": 68,
-      "feedback_edges": 88,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "8478b8ae9cfe64da986837ffe5592f390dc03b9b10008eb84d96f0491a158fec",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "http11/python/twisted",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -1301,9 +725,9 @@
       "project": "http11/python/websockets",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "51205779f609e8b41267fd79cd959ee651b0a9c20b9855bd4c58d69cf94b8589",
-      "base_image_id": "sha256:b9cbe7fa6815c2c67ae65184264878baa7f15499ffdce6b0f1a690d5b7ac8d03",
-      "image_id": "sha256:378899d2288130fe1f5f0021fc9a1b127f70d6edfe0808bee7121156733da44f",
+      "base_project_receipt_sha256": "54005b049549d4cffb93470ea805bfd8e50506726bb4233d31896eb3e783f5ff",
+      "base_image_id": "sha256:71bf0187e282571db5e5f69d08ba29ae81404556154df3460cb99e97cf910ed5",
+      "image_id": "sha256:d5af794e2fc95db2702a9a33e6928dd5a5b469f00e47080cb15d510dd3ad9946",
       "platform": "linux/amd64",
       "control_sha256": "0af539fa6b7007346b95c960cbf2e0f9d34e0d53ce732e25ba44aaadaf92b7fe",
       "parser_source_features": 646,
@@ -1311,12 +735,12 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "a23c7b437941a2f5e026089f1493a4d7dfce88127c827c67846b1a301a843a3b",
+        "Dockerfile": "e8a4ef711972e29a49ae7a7f128e6af52110ed297c8c705a76727612b479e21d",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -1344,20 +768,135 @@
     },
     {
       "schema_version": 1,
-      "project": "mp3_id3v2/python/audiofile",
+      "project": "json/python/ijson",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "ca1553656e92d4d4b4e6fa8275be3918d46635cea784677dc19ac34eb9b76265",
+      "base_image_id": "sha256:0531ad0283af1d7f02e4e4cbf19cc42e5a6665d7346d9d150d4a23f97282f278",
+      "image_id": "sha256:a645460dacfb7e051ce9b6b0c18243ba3e0e8a35cfd597ed862727547aee0d7a",
+      "platform": "linux/arm64",
+      "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+      "parser_source_features": 1201,
+      "feedback_edges": 1205,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "9f110b116b5b67a814ebb9c4b0f0bd2ca3f234ef37969f1e0f1fb09ab9ea8fb0",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "json/python/jiter",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "c0ce0474f3eea78a909887d4c763c779f09d61c0087a48a028630dc0cbc2926d",
+      "base_image_id": "sha256:a08c4ee848d5142db04a36dfdd1856394d2d1f744fc8f631c34dd43cefa86f50",
+      "image_id": "sha256:0c102385cee355659492f7681bcbf44b8df04a52f8fe4ac887a9d07b4dc5d33b",
+      "platform": "linux/arm64",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "parser_source_features": 814,
+      "feedback_edges": 824,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "53dbd65a7718e47635120c0411a55f9ae96c57d3278defe255ab50698b2dc151",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "json/python/msgspec",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "4ef4799fe9f52f8a721869d57d21146613c26ef574183797b287b43ff99e34c2",
+      "base_image_id": "sha256:3a56e2dbb953dede20ddd34a7dd12a057306717f5c7c1e89e54d9601723fffaf",
+      "image_id": "sha256:279a3dd1ac3c0f928d122cbed307a6e93bd7be43ade2af59725fac0ade472b6a",
+      "platform": "linux/arm64",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "parser_source_features": 1668,
+      "feedback_edges": 1660,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "1740855a787bb0e918f01c69f250cceb9f4e5ac8afc7dc6a6cc83c492f394792",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "json/python/orjson",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "c27ddcb49a5986050428fbc4ae2953fe74765c8a3153cde8d25a17aec4e5cfc6",
+      "base_image_id": "sha256:9a49c23c577f524d2943475317b78c14f095f9c02f69488c4229becf26e2f6ab",
+      "image_id": "sha256:2c10207da6af7b89211ed58f3c2a852ccf5b9e51857eb978f27103bf113a5eb2",
+      "platform": "linux/arm64",
+      "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+      "parser_source_features": 292,
+      "feedback_edges": 305,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "cdd5996573ab730702e0a9599cf1ffb42d9e681a7a7fd828eb3e82f060e366b3",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "json/python/pydantic",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "d69d50c9b794dfa6f89c3465db4b64eb2f7ed324a22b5e048108cb8cc34c8da8",
+      "base_image_id": "sha256:10bea10380b9393a477ae1652b3295f7329ba152360ae07c4470d2943d88a8f2",
+      "image_id": "sha256:600720199d2be204f7034cf1b55f644f0d89f4bd91687e7f895300a3857826c6",
+      "platform": "linux/arm64",
+      "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+      "parser_source_features": 745,
+      "feedback_edges": 756,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "15105a55cff980c9103d586377882d8294afd8a7fc7d6d5edb91918d4a511bd3",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "json/python/simplejson",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e46b79c2e0a66bd877b34c2b81f59a5865791c3afc1192b2f6e40b528fdf9aaa",
-      "base_image_id": "sha256:a6cb741226db40cd04f6d6606979ff0e780e0284313581f718f45dfc8a978a91",
-      "image_id": "sha256:45fa042bf8a2ab4892dcfcc2b8882adbc9aed7057cafe353f1d1f12b974a3865",
+      "base_project_receipt_sha256": "c46f8f5823ecc49e38378d91967901375726cdac184e84cb46bcca3a10478d8a",
+      "base_image_id": "sha256:5d632c403d1067099e858bad7fcadfc16919f9f6b176a73023e8f34c5644dba2",
+      "image_id": "sha256:624e147bf4049671f9afa4c9b0f445a2861bb82a5f0e2d0803b6269ceac5e0b8",
       "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 128,
-      "feedback_edges": 148,
+      "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+      "parser_source_features": 140,
+      "feedback_edges": 159,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "0a686a0fc5b55449d5fe9e9edca70d5efb47f63c2cef5ad59c262788052f5c62",
+        "Dockerfile": "059696ad370b61607bd97abf0d32882fe5fcf6bd146d077b26d170c62c74a70d",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -1367,20 +906,112 @@
     },
     {
       "schema_version": 1,
-      "project": "mp3_id3v2/python/audiomath",
+      "project": "json/python/stdlib_json",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "8cfc4d5ca11e54f7e1cda90cfa13a35fb9af6b64c4a95a33609d18dae97effe0",
-      "base_image_id": "sha256:11f4b37d7b86ea3f3eb58203ed28c2132b3555e270fd70377920d3086cd2e420",
-      "image_id": "sha256:edd6ec8fe7f82346ff0197f6469fa350e6249b72bc388dd40d1a3bba177fb80b",
+      "base_project_receipt_sha256": "41097ec2514625c9d2718acd2849183a10aff2603c487d8811085e2f58effdf1",
+      "base_image_id": "sha256:a334b64ef727d7bccb50b552541850eaa4db2d83252cd3d9a084aee9281e8bd0",
+      "image_id": "sha256:b1c0764278188c7eb4fda348abf78498010de14c4ca2fdf2152e41724475e5a2",
       "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 1522,
-      "feedback_edges": 1531,
+      "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+      "parser_source_features": 166,
+      "feedback_edges": 186,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "6e6e694d5a71f98b18cc92b87649accab82e07dd5bdf099eaf3f8098773196b7",
+        "Dockerfile": "e83c668fa3c4772b41949382625b072f3563f35473fca5a3e41bc735a62d2f53",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "json/python/ujson",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "8d02522f12c3ffb3f883b941fffa384ff509d43b55cdff723b825fa3898e0ecb",
+      "base_image_id": "sha256:15cdeab31c6d98d6bcb2d5646770ded9e41ccb8644b6f1b0756f36d20efbbe7b",
+      "image_id": "sha256:69975592f14610eb4a7e40e9b64fbc401231f0044481b3d2455a5db0f47c9d3a",
+      "platform": "linux/arm64",
+      "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+      "parser_source_features": 579,
+      "feedback_edges": 589,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "6e7d19d9c5c4270c354f56fac4a8e8cc24b1c2dcf7ec2ef9d90ad07f2c8d336b",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "mp3/python/hachoir",
+      "pass": true,
+      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "8b61819fb4df6bace7793e4eb1f5af24a99b58e3966b7e510cd733ed1d4a5401",
+      "base_image_id": "sha256:7fd69bbfd10221b993fbdcc037c507c857399781cfd200a3629fd159f2dca654",
+      "image_id": "sha256:9cba447d1ae705d4fb2c4564ff37ab21f5fdbbc13681b914686ede24c16b8c8c",
+      "platform": "linux/amd64",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "parser_source_features": 397,
+      "feedback_edges": 417,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "a3b2a0da672a3caebae717363e124eae9fd6df7f70bd7b06b582dd71d2080b40",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "mp3/python/mutagen",
+      "pass": true,
+      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "257bde527cbb4d7c2124e52bd160663d1437abc0df0d07d2127f5cbe876a475b",
+      "base_image_id": "sha256:9185cba587e8782c2b5b727db55a8ded824fcc29b80c43f2acda2efba62e00ec",
+      "image_id": "sha256:3ce5d2c9776778122b23038d368fe05cde25c05fada3ccae46cf10952981d72d",
+      "platform": "linux/amd64",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "parser_source_features": 248,
+      "feedback_edges": 268,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "e456399b3d7f82dd74d2cae57619e39f9a27238a435759b21d55315327445f2f",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "mp3/python/tinytag",
+      "pass": true,
+      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "ecdf65c6a17cad1d3b0f25868d887ab4cf2f34ae09140a036691a56c4692379e",
+      "base_image_id": "sha256:ee9d61246da5b23c3681ef2e557abd1894eea6c7a0c04e173220cb93c39d7ccc",
+      "image_id": "sha256:46f7afe516cb8dad4de0ca56a252e640b3f903041a10bb211941fe3ffbad2d37",
+      "platform": "linux/amd64",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "parser_source_features": 154,
+      "feedback_edges": 174,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "3f65e724896951ff851951bc90344efca43dc93b5d7c82cba4ca25af09629ae8",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -1436,52 +1067,6 @@
     },
     {
       "schema_version": 1,
-      "project": "mp3_id3v2/python/chemz",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "cc36867f49b06a96306472922290f46d8474e337e9dc5575577b95d2294fc659",
-      "base_image_id": "sha256:90be05fdc91620cb2e9415f109d66bf2b0d445d90ac8ee917bd8382df8adc140",
-      "image_id": "sha256:cd02d12fe4c217f220f60d011791b9852863fd61ab21e0da6d4c782db97c4a5b",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 471,
-      "feedback_edges": 491,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "44e0ab5b0c795566b04d3e07abb90dd80d656a1dcb898f4d60a7543e1dcdd899",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp3_id3v2/python/eyed3",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "f4405444d0da9a0002962019c852fd791bc00e43b0b8a75b04922c5bb1c9f032",
-      "base_image_id": "sha256:602c5a4f5e2c0f18e1ce56a34d0a0e176dc3140834ad399159b7e4296610ecff",
-      "image_id": "sha256:e52477996c2e5d3e9b7beb227a34999ea42bd189e50278b47fc47cb37804ea55",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 2550,
-      "feedback_edges": 2548,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2f44326b69324f8564a4ea38729e85787b0f24ae5ecc6e236b91d378ebdd7ab0",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp3_id3v2/python/ffmpeg_python",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -1505,29 +1090,6 @@
     },
     {
       "schema_version": 1,
-      "project": "mp3_id3v2/python/hachoir",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "55b850d78c84b879896a01aa43f38d29cc0b8a21abeaaa94ad905a0af0658950",
-      "base_image_id": "sha256:4fe860b7046284c49895ca1f5016fdb965cd4df270db1a389bc49b4bb83862d0",
-      "image_id": "sha256:ab3d78055492ac114b38e0a69cf42b96572f2ca5e78e90e820cf7643113213e3",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 22483,
-      "feedback_edges": 19119,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "b98e1a72912c53b507e99ae1cde29c59a6f06982cbabc74fbd5794357bb7b552",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp3_id3v2/python/librosa",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -1542,29 +1104,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "22801c3b21dcfe2c39f79903bdfaf4d065c1eb87d43b3d5c8915cc84a9980d5a",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp3_id3v2/python/miniaudio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "84ef3bb422aa0e5318fcbb06ae47e6317a6338c7cd3e815ad664468cb85b4bd8",
-      "base_image_id": "sha256:1facf0f124b59f9afbd322b100e40f0a21d66a1857fb7efc6108bd641220b1a8",
-      "image_id": "sha256:ee341998a34dc654990a9620ab16b09dfd17b207e3cbf829328c69fb77327a3b",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 395,
-      "feedback_edges": 415,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "9456243c0747d6c744522966b76b4ed5f1a94ceacd9cc045c4cff83a92e7bb52",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -1597,58 +1136,12 @@
     },
     {
       "schema_version": 1,
-      "project": "mp3_id3v2/python/mp3_tagger",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "cd5ef82928b013e627136144ea43aa6d974d8a719b9972c6f9217d4f425c5c67",
-      "base_image_id": "sha256:155eb43d777a437618c9d6e94d0c41a5893982e5ecd899fc5d83fd8a70ea07f8",
-      "image_id": "sha256:a373cbc8018619fe3a163964770160579e5be3a1e2c91ff9832941112b689e10",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 554,
-      "feedback_edges": 574,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "033bd37d726d5ac83c5d7e0e5aefe4f11a6ce172317e78522ccfb2bcc51d08d9",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp3_id3v2/python/music_tag",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e1865e1a3527e43ba0a3140ce2bd020324752e56eba12f334ccf48c64487c3d7",
-      "base_image_id": "sha256:d75a0581bd32fd13755bfacc8712ffbf447456aa6462a9a739fcb1cdaf781181",
-      "image_id": "sha256:5dd0aa9bb0e204a65eff9bfa501a426a895464fa93fc9ddebf0a2ffa4ed877b3",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 742,
-      "feedback_edges": 760,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "fa073055ca02bebad225765d0e7f4f89b888b894edb4842c08f53d33a0bd0c67",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp3_id3v2/python/mutagen",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ac2b23166a0b96dc65b890fe49f9fcbdbbd4f535601dfdffbf9f38ff917ea940",
-      "base_image_id": "sha256:83d474605cd259935c1820e3e5a8b0ccc3443a534cf7b6dddef05b9633d5e51e",
-      "image_id": "sha256:e8f87f58c1207088877bee25c9b6a6df402838154818670f68db483d38662511",
+      "base_project_receipt_sha256": "08be65181345a801e22b6a34e6fb3cdb09201b1ff8ae3fa700a512795d80fc5a",
+      "base_image_id": "sha256:2db5db87ec686952287a853738aabcb7483e7ee5302a1e91d4d4b960bed7d25f",
+      "image_id": "sha256:df8819a424e28f52e9425b3754c1b42eb28b4e183bcf30abcea9a5e8d26e917c",
       "platform": "linux/amd64",
       "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
       "parser_source_features": 455,
@@ -1656,12 +1149,12 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "979c5bc7094018d8a119ae888bb8ed691b11feeedf9e28bcac99ae15b460fe16",
+        "Dockerfile": "e8f83db605e0993f070c0f2d4f2f22240620837915d2cc4418e3512100f37b26",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -1721,52 +1214,6 @@
     },
     {
       "schema_version": 1,
-      "project": "mp3_id3v2/python/pymediainfo",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "7df4fe9b8928c1ebb712cee7139396128fe7a90f1e0be08483dfe1aa569f62b6",
-      "base_image_id": "sha256:cfbad04a8b59869edea79ddfaef1a82d7c914289205f1d6fd16d96d90ca5d200",
-      "image_id": "sha256:d3347aaa5a5b237f839cc0e715fd608703d6541a21db38b4e9b9b08211ee3aa8",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 204,
-      "feedback_edges": 224,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "644cb245b5147e6467913d21bb332f72e39a89e2db0d1e70dd108c23e7bb70a4",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp3_id3v2/python/pytaglib",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "bb2af09c7ac72fec5e7fb3c72af65f1d48bcc8611ea6d9829d40a4bab4629b16",
-      "base_image_id": "sha256:a22da421ceeb5f6a453963e9dd3aa38dcf830d837202ded1a088b85132dfb929",
-      "image_id": "sha256:e3180ed9cd21f68e43962451a4b765db66588fc436e9f31b56e0d782030aca0b",
-      "platform": "linux/amd64",
-      "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
-      "parser_source_features": 1995,
-      "feedback_edges": 1993,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "5737fb68b466c0a4be9e0691d7a046948e60bc666ff1eb576ac8517cd8fda77d",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp3_id3v2/python/soundfile",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -1793,9 +1240,9 @@
       "project": "mp3_id3v2/python/tinytag",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "12eb8ab97b7c8f1fd328d1531a59f55d5a9d68a2db991a1ab7b15c34ca7e16b4",
-      "base_image_id": "sha256:bc2e324c2097e9fc893c7dabb557c0efe69de6ddb272700cc00dff630a6168ba",
-      "image_id": "sha256:39c1fc9490491d7f3e579bc1930ac129bd8990e82b61f3481359b73800218e72",
+      "base_project_receipt_sha256": "451ef20dc13d0a6217d607a16e89f88b92ac315f8e2593ebae33c9f7992fff8e",
+      "base_image_id": "sha256:820317eb594eeb4fcc17e213a1cdfdccd3411233c9a9c3ab5143c0ccf39a0edc",
+      "image_id": "sha256:fdb5628c5e91a74abcd366b95e3b10d221d901d47be1dcd71099c720a3b022c6",
       "platform": "linux/amd64",
       "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
       "parser_source_features": 290,
@@ -1803,30 +1250,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "053272fa5b95fcfbe1d7725ea2d3f08e013f0872e9fcbc0b0aab4d6270ac1e11",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp4/python/audiomath",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "d31b06195215e4a19b6ead2b37b95df9c8f7a73eebe7abba2c39017c8fc554e2",
-      "base_image_id": "sha256:413980b15fd2cf8e5aa9adcbcdb4f3ef381d1fdc95bc4e7b65348b69a72bdb42",
-      "image_id": "sha256:9f5cfccf8ada9b1c4905349bc4f0cc1240cb95438bb00513a16c6a1e35bd991b",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 1525,
-      "feedback_edges": 1534,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "0f1dddcdc9149749cdfc99320d8e97b33b034828a7db8b3aea1d9c21aa3493a5",
+        "Dockerfile": "48d0b289755db4fbaa72a3073524120e5698590cafd3818ef04b3aa17fecd344",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -1905,52 +1329,6 @@
     },
     {
       "schema_version": 1,
-      "project": "mp4/python/ffmpegio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "2f865f3910a48986215761ab950ef0eb65c06bec7cf2b0904151d2d9118a2c2f",
-      "base_image_id": "sha256:44c3c21bf68dd3fe5475781a2fe8249d893217ab3f9805a0d44cac63ebf721fe",
-      "image_id": "sha256:10f6d0ae701870950dc80f3dc884fc7a042c205714ef55e651825b3431b7bc5c",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 1742,
-      "feedback_edges": 1741,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "c8829cbb95489c8350159aa4fcbb64cc9054327c8a9b1b1d9454ae0c7025f964",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp4/python/hachoir",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "83092e58711e6f0d81543df1a5bd94b0a05fb65df39c5960743828c44e2cbad9",
-      "base_image_id": "sha256:ce5007252dd3aed3d115bb851681450312403c802197ff041a22b8b7c19f6e77",
-      "image_id": "sha256:34acda596a6bcfaae7a07c078437c1226863e1237970c6682aaa53f04e001f97",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 23411,
-      "feedback_edges": 19655,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "96713d8752d1188144c9e25b05948e5eeac298a568a8b3c7e639cc5877a8b5c3",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp4/python/imageio",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -1997,29 +1375,6 @@
     },
     {
       "schema_version": 1,
-      "project": "mp4/python/metabeam",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "fd4ff3c31af88250c03cd90f235b6efe6f345a207393e811c10a7ece132f8f77",
-      "base_image_id": "sha256:becf0b43e593bb5d314d8140f22ba7b2d6d9a505330e81b49db6f9a3582927c4",
-      "image_id": "sha256:e60787e5832c339c5a57e27023237ba4b4883fc3095f3c1a50ef2f2a6f46a416",
-      "platform": "linux/arm64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 556,
-      "feedback_edges": 574,
-      "afl_map_size": 65536,
-      "afl_package": "4.21c-5",
-      "overlay_file_sha256": {
-        "Dockerfile": "6721385ea13c6613b3ea6f4ed01fc8a2d0286ec1590c2bdadfe34f214ab1ab79",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp4/python/moviepy",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -2046,9 +1401,9 @@
       "project": "mp4/python/mutagen",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "683c5f919fdbbec42996ff1beff6fb15318db7967f80587aa83b0a19c0018361",
-      "base_image_id": "sha256:59fe7b4565ada9732e7fe83de14754c9cc24f1b34066297098564ca10af76447",
-      "image_id": "sha256:5e09609b82430242b7a1cee575cb776da454a29d861e668ba58d500284dc9d4b",
+      "base_project_receipt_sha256": "ae3139581b0fe3377572e215fbd9552d1fcaac705e70ad235627d664c0e946c6",
+      "base_image_id": "sha256:dfab20d1d436b59c2e1ca0a7d0f75317b30a73803fb68488f5b9096bca97ccad",
+      "image_id": "sha256:9d95e79a80d25d4d087783db4c5456eecf05ed683a0a96737e9f135b2f3a46d2",
       "platform": "linux/amd64",
       "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
       "parser_source_features": 413,
@@ -2056,12 +1411,12 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "66c460456f6703e59ed3c36be7fe4e2f6d31cdabceba20e1d04511a0a16da58d",
+        "Dockerfile": "074c6cdec2e3dddea011516f32474d4d7d7fe629410988bd2a2967bda191484d",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -2080,29 +1435,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "b9baa1e1ab2808e0200319189f68803b3107109cde210963912cad7645b9bea1",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp4/python/pycord",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ff7b8cb748c4889478f12179ae387775e9c5ff9c994a0ebd1e4d3bb5d0461e64",
-      "base_image_id": "sha256:074f32b4861caeac3ae258219b779fd9e44f681e87655e49c2902194089952f2",
-      "image_id": "sha256:cea2ef53af9f9d36b90228cd336901e58143d1cf388e393f606bf8b50857d3c2",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 28,
-      "feedback_edges": 48,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "732b10afb3ac63714beeff196b22377ca98e1024890bb6b874d6ac18b7be8dae",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -2135,117 +1467,25 @@
     },
     {
       "schema_version": 1,
-      "project": "mp4/python/pymediainfo",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "68c5e58ea5a0e346457e7919d05f3613a4894cefdebc52fece346cf48b4876e6",
-      "base_image_id": "sha256:0ae2ae4c376a2400a18e9356cacacba8bc6363394c731f91cde21f86af57d2ad",
-      "image_id": "sha256:b2f30203e175dfef579ba2435ec21af84f15281ac5263ac7a93b9b2384e97208",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 205,
-      "feedback_edges": 225,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "75e0aaf4c838039efbd2e256508dee9140076f500e0ba833b8c8801a2f9a439a",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp4/python/pymp4",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "781cbb34954a4221cd19465d1e845bd8b34071cb721c845fc5f3a5ed4c9c13fe",
-      "base_image_id": "sha256:fb58f1751185051889556acd75fe90d18fec7145f0b183eadfe5c7f02563351f",
-      "image_id": "sha256:af4a9f10470c2de068aebd6db9f4c1e5e4c2547b722a1acbb46b1b79cac984ed",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 617,
-      "feedback_edges": 637,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "f2b0ff17b575d9758b7bb37a316826f173134308c6d7b139347f13694d623c69",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp4/python/pytaglib",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "886fdb69e0bf49870ee14da04e09583ac1583470e960e7280fbb7dd04a8d2ac5",
-      "base_image_id": "sha256:cfddcd68e451f807ec44494ed84b265cfb031b265e57f6c7982d5ef15e1d70d4",
-      "image_id": "sha256:8340f7fc1118838f9db96ad38279b087165c745e144af14d45b869c5a1fd9d05",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 1995,
-      "feedback_edges": 1992,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "a60e9800f44a397c891d3d01114ecb7ae16f1ab19f2c0d6358350555c7b74719",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "mp4/python/pyvideoreader",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "35ad3cdd5c316cbb6d04fc76d7a739945178a0f22065f054db7240f454e50ce9",
-      "base_image_id": "sha256:2f5d728c1e37f81d73c1a877b175db4855b919f507b0364a120d94864f8ab841",
-      "image_id": "sha256:16be24a310d83f0172d671023d172654ba3124ded9432e2dd7d50ce38c2043fa",
-      "platform": "linux/amd64",
-      "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
-      "parser_source_features": 54,
-      "feedback_edges": 74,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "a3de64d7fe4bc29645a5b804d556d763d5ff123e2094c2b2abb80c2f41703375",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "mp4/python/tinytag",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "f46a2ac5699882f56336b157d9361b762d9faf8cf572462100d408e790cfaf2c",
-      "base_image_id": "sha256:eb8f087613e509c218f6f720cd0c4b063fa3d41b09f76a0ef353f514d7ac8613",
-      "image_id": "sha256:8728559ae6c1ee5b927715b5a4874ad1211ceaefb067e6b56cb8b10da8d01097",
+      "base_project_receipt_sha256": "113596824261fc9023d08ea84e7f8cfa4753f4355ea81f72d65b69617b195c63",
+      "base_image_id": "sha256:d03d151e5dba16659eb4dab588dfc5c8dfd586beedd23c9cf91e61c0ec56bdec",
+      "image_id": "sha256:e4c286ecb850b649dfa3a6d814ee21df9e282a1ef1fddaedcaed9f324d392a65",
       "platform": "linux/amd64",
       "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
       "parser_source_features": 269,
-      "feedback_edges": 289,
+      "feedback_edges": 288,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "e0ba2e5afaf7a8bcf18a4a703e8064227a6269732e0ee63808138196182cfdd4",
+        "Dockerfile": "181e724e17a8fc3c479464bfb4eca51cf0ca19d9913977b69911cdd7dcc375fe",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -2273,39 +1513,16 @@
     },
     {
       "schema_version": 1,
-      "project": "pdf/python/paper2md",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "d98448ce927d487d9cd322fff3acc27fa55f71da16ef3f1696c4217fad8a9e04",
-      "base_image_id": "sha256:44ef5eea3851d9f47fb9dfd30c770ad2a9297121d27c0bc6c31a7ea3db7e8f9f",
-      "image_id": "sha256:4207666a463bfde73684f6e101c6c800003fb86358b97586b30e8d81b874a6eb",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 1078,
-      "feedback_edges": 1093,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "0922d648e31eb06126ac1cb2c74077e090e443baef0009bf3daf89444026ff75",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "pdf/python/pdf2docx",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "17afa2502b390a1187abf98bfe45d0177c45bc75516f09eac904b7e45ef36330",
-      "base_image_id": "sha256:a13467ec731724ec09f463fcd1c4a400e6540a7e8aa48dab1cc83340f67c1e5e",
-      "image_id": "sha256:341ac6be0eaf828e4b3ae0f0cbe48fa83cb297b9a4b69c37c92e45e521f6e5b5",
+      "base_project_receipt_sha256": "a3c67385933ec6710774ed27f82f0a67ae4b5dcb42506f200d084dd05cf2e549",
+      "base_image_id": "sha256:3c2b894a9ef5329fbb966615091a7ad8eb9c26574db3d6445f298fac39303868",
+      "image_id": "sha256:d829f12a13874167184b27b1d83e55a272ab2578e3bc0bd527b87585871dbcba",
       "platform": "linux/amd64",
       "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
       "parser_source_features": 1936,
-      "feedback_edges": 1923,
+      "feedback_edges": 1924,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
@@ -2342,29 +1559,6 @@
     },
     {
       "schema_version": 1,
-      "project": "pdf/python/pdf_oxide",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "1a9d95e90a1a8c1d0dbad335c34f15907406c6bb3dfe8061de5d480bd9798ee0",
-      "base_image_id": "sha256:7d3f2d2d6b75f602f4663019c20fe1ca224c00bb1fff651e4a486243f723a9be",
-      "image_id": "sha256:2858802a73507a422958290f45fac19424918f82ae17bb4079b3565ee5b1194f",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 165,
-      "feedback_edges": 184,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "cc665f8df792a534ba849c6831ccbcab9d085faa1bca98a208f96c64168e30eb",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "pdf/python/pdfminer_six",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -2379,29 +1573,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "298cb6a82a13d0dcf1283695b7a8a7a1f4e8267a6a0c8c0772e330b42e789022",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "pdf/python/pdfnaut",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "a55208f88389fd136e6f10b34bc742553a752981c3add9ace5d5ed0578206f6d",
-      "base_image_id": "sha256:b2a726a4447eb73c25b5c0f33a6ddfb2b3fd996851037827c9dafb5f4f5d30d2",
-      "image_id": "sha256:80560492d6223424ad459a17eaeea6c442d65c780a1421392e3abe9e89bf89ef",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 2193,
-      "feedback_edges": 2178,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7391d73da3d85aa09ab082f9ebc120afe3df1e0495b2cb258cc6b8e2d3f63984",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -2434,35 +1605,12 @@
     },
     {
       "schema_version": 1,
-      "project": "pdf/python/pdfquery",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "c3d74c3dc43a1e710b8e69dc9492733251169ce8f22324c6b3517df372f9f18b",
-      "base_image_id": "sha256:3120c3f74a3844edd30f966c316ff1e910bbe0f933364dd48f7b7b7db219cef2",
-      "image_id": "sha256:1d8fa8d86df668da0fff3b5bb7cad90fe2cc175f4a195d7c410c0dc9dbcf536b",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 271,
-      "feedback_edges": 291,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "d96a00cdba2783ba710a281b35af19b2d949aa209ac6de2e4e8eec410313aaa9",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "pdf/python/pdfrw",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "4230d68e86f24753454f5cd196bcf6374c92a4526101ebbc00ce3eb24458c3af",
-      "base_image_id": "sha256:4731b823b3a553932a9eee61dce8fab2cdd9abf7e10aea2d869dd1979b80f62d",
-      "image_id": "sha256:532c60155a6f118ee7ad8c56adb52af49f16fa81053794cfb537f12af2a59c0b",
+      "base_project_receipt_sha256": "ab2f3cc05bda4ebfe7a0afffd1128fb73a696abc18bab33b169e6b14c2c80782",
+      "base_image_id": "sha256:fa5bda7f527a712d54365bb9926949011651b296932b23cdfe4793f766222b40",
+      "image_id": "sha256:f544e3b4923dfeace3edc9a4c9ae328b6b721139f43f06a334ffe29489de90c7",
       "platform": "linux/amd64",
       "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
       "parser_source_features": 261,
@@ -2470,76 +1618,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "b694877190447b28b8454e96820b4161b2f7949b4b2e5ad1e00e506c2bcc2e5b",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "pdf/python/pdftext",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "1558602054a7c2b9f566daa8ab35abca854f7c8f299d81a97ab39b158d72bddb",
-      "base_image_id": "sha256:3829c3ca55389905e934108d92960c5d984042d7c8cefafb1900a1fe0e056653",
-      "image_id": "sha256:75fd230db6e734b2ca0fc505b2ba2ee5084f48f22eac64db2c01b13ee1bc3730",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 538,
-      "feedback_edges": 558,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2b20a72ce1afbdf5dc1235eb8d356094318aa39d3597893c5d0a6ad4b769804c",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "pdf/python/pdftotext",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "766f0b4ee7094f161acbf1bba73403707d6e50776d4f7a63beebb62c2fae4632",
-      "base_image_id": "sha256:452573e7f92ecee8287e23546db702ad5e2f0ea1f114726a1aa1f6c89e36cf25",
-      "image_id": "sha256:e1d6a2a59af4d7c6f8bcf2739323e0e7e988d85783821eccfb6295c206f4b9d0",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 88,
-      "feedback_edges": 108,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "87635db3f2538766bb46b67533cd532bca9ad5d931462a475f776f23a74a488c",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "pdf/python/pdfx",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "26eeb35828511ef67474231624285b8e3ea2f154e27b89720ff4cac276f7ef11",
-      "base_image_id": "sha256:7ad6ba4fa5b4e49f87ec45e23bcbcaa28076aeaf5f5fe55c74c915dd2d8fcbfe",
-      "image_id": "sha256:f3559f455148d14d41198fa4e8542558e6d92bad322f81d96e4195a4fbf2f44d",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 83,
-      "feedback_edges": 103,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "87aa621b9dd51a1fcf530eefbf7474a4fdd5a637e35eb2c0eb76faae775d3901",
+        "Dockerfile": "53ce819987e7de6f896b529733fdca1a0615b5be065556f9318464ea5fd87a9d",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -2598,9 +1677,9 @@
       "project": "pdf/python/pypdf",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "44f073f8427726dfedc05e709fcfc608a0517ec8b28a19f0be8412bf7b48c47d",
-      "base_image_id": "sha256:cb92faff292c763c7248e067c4557c08ca235a1a2a42b915f7f6c1822ed464fd",
-      "image_id": "sha256:fc679f0542e9a078aa30f62c48e49c7f698380f2fc4f0370131e727da91272e2",
+      "base_project_receipt_sha256": "cc851e03f13b134ea41920e80477603b73f71c7f9b0e376bd6b73be59c6b6784",
+      "base_image_id": "sha256:6e33fa1356c29b4ffa44fa770d484b9fb81b422f5bd06aa332e4967453750ebd",
+      "image_id": "sha256:a8346ae920680cc06fcfa2ced54f42672cb8e10c02a4f3ed372e071ffaf3a1eb",
       "platform": "linux/amd64",
       "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
       "parser_source_features": 1139,
@@ -2608,30 +1687,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "6bfb6752ea47e18b80b8d29733309de183b62a55db7de4ddad91d93f6f73fd19",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "pdf/python/pypdf4",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "1db5721e8d72b70601056b2649e84f8e133fbf5671fb684aaaea4debc1a3d86c",
-      "base_image_id": "sha256:d32679f308ea4af9e8aa01eac2380cef7a040206b1ac2caaaf63302791e13ac9",
-      "image_id": "sha256:75d968ecd2de0ceba9090f50af3aa2bb2bf5c498267bbc46f5d5f1d0289d3c29",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 966,
-      "feedback_edges": 980,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "6157d20d03ee7c20a06689f1b244d2edab032d422e04a8d3bc7100a732a73028",
+        "Dockerfile": "7efd6372c541dd772954dac7843bb992067ba7bff47c6d78ddaf0f40013322db",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -2655,98 +1711,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "93edb2da541b7c3aac9e1a21023704f56d2d9288eb14871c61cb83058e85e3c0",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "pdf/python/slate3k",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "b2df0729fb14a57b8b69383b9ce8f4ccbaa073cf913ffdbfba54b39a3d3840c8",
-      "base_image_id": "sha256:915e71f5d692381248ee6a5dcd6dc07a9e6fa1111cf12c2085ddbc0139d29a75",
-      "image_id": "sha256:6f6eb0437c29e0c990c293081081ca866bdfea55b1750389b23ebb0898723720",
-      "platform": "linux/amd64",
-      "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
-      "parser_source_features": 36,
-      "feedback_edges": 56,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7a14d614d29b3b6f9a3c53c93435121b1e7cc8b828300fca7d99e1de8c42b4ab",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/apng",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ffec38e71c419d983c32600b97223e7d376d08b9d5c1ab2f27433beaaf4564d4",
-      "base_image_id": "sha256:f7416d336f3bface5009e2b41793ca37bc517fd834d9f85728ac26d2dacba427",
-      "image_id": "sha256:d1b75e356950c1e6d166694c706fb0e8335263b0777459291c19aa360b2d5938",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 28,
-      "feedback_edges": 48,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "b43be7af35a7084960cde165a1438b7a172bce95291ce922c89416c7c9e9d96f",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/byteparse",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "47a6ed37517da5bf8bfc16dbe8529403550824090da50f50bba293fed8d95c92",
-      "base_image_id": "sha256:c40016102afe802f3d40586bc4caef0a58c66e2218e4eeba6cd4b5b7bed36bea",
-      "image_id": "sha256:67b00d9c9b6080d86ad9fd4c3bf30fba0d58c11cc55139feba1f1dece4d5e067",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 141,
-      "feedback_edges": 161,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "12143518f1d8e2372a5ca2c14c66888365a36eb21ec513375073f96c363b6c69",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/imagecodecs",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "53207140809cde02876b33c780a60e3425f3399286c798243e45d873a04c4065",
-      "base_image_id": "sha256:c73a1f789d8a05e68b449a560798facdbb82da31d30861a131687ff54be818ed",
-      "image_id": "sha256:dd6a1d7d2d44a2a534c1b8e2266c6516019ce755155d77397531fc6bcab43128",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 216,
-      "feedback_edges": 236,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "40d60247a6aaa03cd204960ddb68fb2ab35a444ac27ded724deeedeb1696d88d",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -2782,9 +1746,9 @@
       "project": "png/python/imagesize",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "3549c7b1eaa3153f32075eb82243691553316b7e52de7bb14a10080ec953c15c",
-      "base_image_id": "sha256:72ce365d5b0083b1ffad7a19a01bbb970aa9b49087a88f8d3c5fb215ebb4ca82",
-      "image_id": "sha256:6038203e738efc0089b27ebaf4d2ed2422b39fe3ba7eebce7b5802a7d613c6b5",
+      "base_project_receipt_sha256": "526861fe38713ed922db6b667f54fe1ee1208906537ab47d96d24a3e62c7e097",
+      "base_image_id": "sha256:0d74a7894fc4efcfdd940dac5c08b0b4c6ad5f321d1f8e95f853e1af80b1d2ff",
+      "image_id": "sha256:0ac6137e68545e50631106b5b072d1df8a7cfced4e4aca0bcc272ef460a0cd6c",
       "platform": "linux/amd64",
       "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
       "parser_source_features": 39,
@@ -2792,30 +1756,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "c01a02579b3db7825f8eb9ae1c86e78059478b768ccbce090af395b68049dca6",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/imgio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "51a769571022b2fb8518c0f00585e015186faf1e45b78c4e8233e73b404ec4f5",
-      "base_image_id": "sha256:9a257f70537c7c60fcfd5a63e8dcb9100e550de7a3d1f1c23ea06cd982288474",
-      "image_id": "sha256:d5d3bc15001a49ef8091aa58a25b0798702006b4476737602db8f5a1f3693d73",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 106,
-      "feedback_edges": 126,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "05471f841cb91887b8f13e42fd1ffaeb43c5bb32972e43d8bd259202db42897e",
+        "Dockerfile": "3f74f166609f4634c126abb323989a5104726e3708696be87e695318aed33952",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -2871,29 +1812,6 @@
     },
     {
       "schema_version": 1,
-      "project": "png/python/openimageio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "90b9559348406fd61d81d738bba8e7e42b0f89d3dd202e8e1f4abc621dc35da2",
-      "base_image_id": "sha256:7adfc99e72fd4e97e2f3b7cd6128f94bc6c0edbb653a287f2bd94d0c7a43c01f",
-      "image_id": "sha256:3ef12ea5eb27dd8576cfe146563c301ef6c5a5453495f40a2be8eed6507e8ee7",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 15,
-      "feedback_edges": 35,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7d0aca50734650530aa5eaee1698b89f60d0d1519f832c61cc6f803a6e30fac7",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "png/python/pillow",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -2913,52 +1831,6 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/pngmeta",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "04ea1fee23cdfb36708ca9e421dc2eace5a4c352016e83c0a715dd7bd044710e",
-      "base_image_id": "sha256:6be210560c3bd5af4204f94b25125fce87991d18474b249b243db38cd3713147",
-      "image_id": "sha256:90de89cd79a7c7127a7237a7fab3503f9596534ac5f078dad8f72035db746441",
-      "platform": "linux/amd64",
-      "control_sha256": "d643731d4a91c228d705b9cf54c0d6af2c9f53ae4a2d9b2fe5035d649fad1450",
-      "parser_source_features": 34,
-      "feedback_edges": 54,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "168805e5965df2115fada9d08ba0565f225f33bc599eae40a2ac5a04bb0aa9f0",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/pngtools",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "41fdba1fb53bb5f53eff10adacdfdc477792e24e495c32c1da96b008ad7539c8",
-      "base_image_id": "sha256:cdaa0b9f0d9df47c99028fdf876cf02717d55435fca991b23716976552c7b8f2",
-      "image_id": "sha256:12eacc76d72d28fbe4f9fec6489cae5771ff51ae677ac429128f2934205d2b6f",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 77,
-      "feedback_edges": 97,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "efc0dea4b40943b4242cae0635c265528f7521bd020bfa02c14a7f0f4836784e",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
       }
     },
     {
@@ -3030,9 +1902,9 @@
       "project": "png/python/pypng",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ecde26e96ca2106b949b2994b4efecf51cda82c13dfc2c7b17f714c71eac58e9",
-      "base_image_id": "sha256:6c1d3a56a555f23c0fb4eb0807f253ed3a8d188b015a8ff21a70d84353df462d",
-      "image_id": "sha256:da311d7e7073a53bdd3aa41bee6cc0f3dbf4cc571b78e8ca45fd64a2d93e8f34",
+      "base_project_receipt_sha256": "757c0f73d3822f6f1b4dbd3f955202aa04d0f1c9c6b9fd9098de185e0c7cd515",
+      "base_image_id": "sha256:c5a59c00cdd5842f01107e343b87a10edbbbfe8a30e50cd736bcd906f47cda79",
+      "image_id": "sha256:31fa152350b547d38762de133819151f2509e7e196eedfdfda62369b6296ff6d",
       "platform": "linux/amd64",
       "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
       "parser_source_features": 143,
@@ -3040,30 +1912,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "d8d25be9e35dc05f5a4563e903cb917ff2251575a7dd6e5713884c1fb00c3b3b",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/pyvips",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "7093ad42c44d87f60b73b9a44e7135d80f96f0e4089d55f07ad8d28f101573db",
-      "base_image_id": "sha256:17e18d35e8e98f1a8facba0ee4e581024c27ee9d2f28410e6fd7a159a0071a54",
-      "image_id": "sha256:41c8933fd3cd3490c55e92cd07c883ad3928f355d3d37adc875f2a31dcc329be",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 1230,
-      "feedback_edges": 1244,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "f84abdb3e7b27400cd7082a57f8c81b2279fb6939516d0d439c14870992328e4",
+        "Dockerfile": "45a75a08374ed0c82c9fb5f04ad1b852aa1b5ddb86cff27ab78ff72267071783",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -3119,75 +1968,6 @@
     },
     {
       "schema_version": 1,
-      "project": "png/python/simpleimageio",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "aba3bd501c0b1ba94defc50bcb64f83c74f3e8c5508e242a426371e0ea93e1f4",
-      "base_image_id": "sha256:fef759eddd4105abbcc1650be4387f1d22418bb9b51bae69837fa83c02cb2cb2",
-      "image_id": "sha256:cb7fe48c5e6b04ba080897434f7e4fd71ea4ecac4396e27769325586cc46540c",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 611,
-      "feedback_edges": 630,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "5de9e505c30c29bf60be6d12d6ecbccea856876a77fee29e8ea28e34e9d31945",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/wand",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "6d44656bbedce08d155ab276a24f4f60bc9143677e2a22193bc24c6a564229d4",
-      "base_image_id": "sha256:7fd7383892798e9cf04644fe88048426d840767500df58225f24542d8b161c5f",
-      "image_id": "sha256:909f45a87f8d2632ce1b7cb382b628a7e9b2207cb0fcb69ddb7c1ea3cba688c3",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 3335,
-      "feedback_edges": 3290,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "1ccec95b5f282971223c6ebb5eb764572a130477f19cf937e548d49cf52a5b56",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "png/python/willow",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "3b4dccad553d574cab4e661956c795cf77baf5377ccc0d89b064b44aee22e8a6",
-      "base_image_id": "sha256:f07c8cbbf4125ac3eb51055547ba7a1d628154e93df9d15f8a8092332420efaf",
-      "image_id": "sha256:fa33716944391dde318c57299b63364344863ea4b5a0e7b322aa3555c6047c29",
-      "platform": "linux/amd64",
-      "control_sha256": "5a852fbaaaecaf4cd14c01e150c7f881c5c5894b0a1e3c53be7e007c58374ee6",
-      "parser_source_features": 650,
-      "feedback_edges": 670,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "770206de556243192e6da44dde635a946cb019770ae87f58761b197d33c113fc",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "svg/python/cairosvg",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -3202,98 +1982,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "37d9124abce9dbce5140d3b0b87d8f33da3434e9d799a76e99cc904fa292232a",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "svg/python/mpl_simple_svg_parser",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "bd24c1cf7c3541ffbf443e787130ac6dcc3825b9a8f15a1dd7eeec4e8ca487ee",
-      "base_image_id": "sha256:a22fa320280787ae1efadf674ce76e96221e29c6c70db276bbf8a29506f5e699",
-      "image_id": "sha256:467510964ac705d388198f33edb92d09fa8c5849af9b7104e6e51944e55b4f5b",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 164,
-      "feedback_edges": 184,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "897fc6307f52a1c1cf5f4684cd5175410241d54633fc8729518e641f5c4b8392",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "svg/python/picosvg",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "1e96f082e42e97df1cbe4f261850456a98488b83ec53bf28d27a5f5a9d2ad5a9",
-      "base_image_id": "sha256:333f9babe8b1610c031eb98d7110752a3416b527ba05f7bc0c7c378a569fe81b",
-      "image_id": "sha256:c0c2c6e6850e4514ae711a0a24d78471e0d01d08e6bc04bc56592f7b02035623",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 686,
-      "feedback_edges": 706,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "f446526783edf6a984562d84689b5001d161654559e2b1e1e43bb0a3986db91e",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "svg/python/picosvgx",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "497ff5ffa20dc75447a3da183f5a7de67a92b144f9485962b9bc5fb5040eb281",
-      "base_image_id": "sha256:7e1d8f8da64440f4b4acc608269b1f3895e97a03e602ee5c91a653f3d6a0b292",
-      "image_id": "sha256:7ea1a826f977b2e87ea047e778dbd4caae3431c4a56a51257ed7ada49f925c53",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 688,
-      "feedback_edges": 705,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "d45a7deeaa602e75c6cbec71b0ef7240a57f87706594330de260f6d053a91d85",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "svg/python/pillow_lunasvg",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "d560f937cde5f1f756d338565b57b4b71d0d4162dc33e68d1f121e860041eb8b",
-      "base_image_id": "sha256:f24257b02ea0b149d333027a61eec3e49f0b4f6ae83a964e9d13610522a80146",
-      "image_id": "sha256:bec5585225beb1e37431d3b242141bc449f5b9d64f85c95206a74997cfd28820",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 49,
-      "feedback_edges": 69,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "ab1aa9d506f0789b36ebd15c79b4e3ab8ccf5b186b9e198ab4d46c3bb99905c0",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -3349,29 +2037,6 @@
     },
     {
       "schema_version": 1,
-      "project": "svg/python/resvg",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ec8480a5ad8e0e59b9485fa01ad31d7afbdb69a7e6f896709b3ae4708ba9cb7a",
-      "base_image_id": "sha256:6c9dfe02f7f34972e28e7e80e854d48df10372de318b7312f54027289085b434",
-      "image_id": "sha256:52856dbe294399c4b3b70086f35cb9f0b163e116d1d71824db833fb01ff363d3",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 4,
-      "feedback_edges": 24,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "f754e977ab88cb22d5470c44b3091239d22c85b1d543b47eba9ede7571818c1d",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "svg/python/resvg_py",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -3395,58 +2060,12 @@
     },
     {
       "schema_version": 1,
-      "project": "svg/python/resvglite",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e591a0cd764881135ca3ff076d907ce6870a00971fd25b149046b6726b860384",
-      "base_image_id": "sha256:5e0738715acd734f17fdd341f0fff14c18fda2b8ee673f50dc05cfacdee73c4e",
-      "image_id": "sha256:caaf1c6565e6b73c04ab1dfc98e6857f8f19da286ab7ee87bb65184acfd390bb",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 4,
-      "feedback_edges": 24,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "9719da4c6e01d8615a803c137e4f731f3da0f80a1d4aaf5ea4230b37c8f0f105",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "svg/python/scour",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ead9b5c36e07a60a79529574a0102b8aea025fa3ad28cc932a3b53ea4d817df2",
-      "base_image_id": "sha256:b2045a7b73a1df66e1a4ece5904b013af401a19742468016c7450b5d1a8c0cda",
-      "image_id": "sha256:e9906405fb3f03b6da1bd6c3fc71458d7db37b09721ff3c95bcf94ea069496a6",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 1198,
-      "feedback_edges": 1180,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "de54ed62fdd828deddc009383c9d3695b747a66425add85991c06f45c32dd7da",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "svg/python/svgelements",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "39c498bef7e9f820cf5b229afa5474ed03d6a9be8864c0cb9fd6f7a2274db834",
-      "base_image_id": "sha256:d09641f2eff13c283e6ad5016b5bdab20480ead5b95f110fecb6876bf55b4b87",
-      "image_id": "sha256:e71372bf5ea84b6fc3528f0d9c2d187d68d5a05567f7287bc95652e67c589766",
+      "base_project_receipt_sha256": "674458b4881b7e0f16da81219255326a2aadcf53ddba116c5ab61064e2e323cc",
+      "base_image_id": "sha256:4b67824fbfd9f5656c0aa78a0778802ab73dd40c1c60fad9eb726fcaa2d97507",
+      "image_id": "sha256:686e1fea1345f2bca81bdf725736aa2c52ef8b001ade171c72212d7654b56e91",
       "platform": "linux/amd64",
       "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
       "parser_source_features": 493,
@@ -3454,30 +2073,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "a6c280d249e939a5e40bbcf5c05bd29355d81cd46e8d32a291a70fecab4e0547",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "svg/python/svglab",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "38cc4785403747b0e080eb78d0b7bdfa9545f7a720ab0ad13c6acf40fe9fd154",
-      "base_image_id": "sha256:a54b3757c354d33bc580fa6adf01998238750abda0f06927b658da75493bd7aa",
-      "image_id": "sha256:b6f8913cef2ab5b08532051d19df9ad6c2227fec13871b45bd67fea86982ba72",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 3995,
-      "feedback_edges": 3916,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "dafe3d58435ad0c571b9c54877407a882a0476d09788b13a365f69c77a46d468",
+        "Dockerfile": "fb4dd85886143ddcb8f5101019603a0f026623dd5646c6b41fb347fc8983e996",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -3533,112 +2129,20 @@
     },
     {
       "schema_version": 1,
-      "project": "svg/python/svgutils",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "a9ac126619d36df0bdb098ccdc5140c8c080f9e8bee2ab513d7584fe3180678e",
-      "base_image_id": "sha256:96f0a82d88985822bf0a6552b2fd1f06577b25d5a435ecd594d8a2afc2ea37b0",
-      "image_id": "sha256:74b2b47b11bb4e728aadd6b1899d58e3bad94f35053a84ed4c22fdd82716b4a1",
-      "platform": "linux/amd64",
-      "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
-      "parser_source_features": 141,
-      "feedback_edges": 161,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "277d34c378d7a81176ec190087617814b1899cee7c400907b20e70880ac639db",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "svg/python/wand",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "a53461e9e1265f680da8c8f5503e80cb998571a637ec9a125e342fb1c58aaeda",
-      "base_image_id": "sha256:6c27d868b3fdeebc36610ea928fccc9a197d8f0e94541539995b324a7976716a",
-      "image_id": "sha256:1c7e90ebdd153836b688f74eefa5036d2733b3c72b127a9478c6249f548a1eae",
+      "base_project_receipt_sha256": "c49e9284158f25b069ae9ccc0413637fcfe9a881b97e4ddf26f00de9f3465a10",
+      "base_image_id": "sha256:7901745ef056634b36e71d57d95e2ed6504e921212d0d498d1453c2dd38852e9",
+      "image_id": "sha256:59ea4c061c3530a68e7caea95894032c55add049af986fd5774ae44cf9408520",
       "platform": "linux/amd64",
       "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
       "parser_source_features": 3375,
-      "feedback_edges": 3327,
+      "feedback_edges": 3325,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "9b6d6087a21df35054bfb593d60dcd4441eef3b820656e4dfc7ffaa036499ab4",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "wav/python/audiofile",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "ec8f543ba32c9c301324838a7d50f871f9c2b9c84ed074501cec42798b843463",
-      "base_image_id": "sha256:e03f75333420cf7c0f9774f7d921d2300670b613cefbcaaeb09689b72d4ad7b0",
-      "image_id": "sha256:9c7135b33c60b61db01d896bc72c990248ddd91b9feefc8dc7aba3a4f3669fac",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 128,
-      "feedback_edges": 148,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7c795895ea0b5c83a838cd7d1e5648bdbe1ff92a7e1215a47c66a52cfe108ff0",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "wav/python/audiolab",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e8f71dec942b67ab3de29d10c81456e10950de3677ba8ad957f62bc9285d779d",
-      "base_image_id": "sha256:ebe4ed527bc8eead5a0e2af3b7e38f7953244ab73129c1fb69b20101bd163e33",
-      "image_id": "sha256:a5e0493be01c9964e8891121d4528e07481726e2892ac6f4565a26a23183bd93",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 1120,
-      "feedback_edges": 1140,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "6f7c44ecc7f548b65f9c8dc687079166843c362b7be2161ca0f784f61d422bb2",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "wav/python/audiomath",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "82ad2f4a13f355d874a97d0e1995657190337eeec55c5c510eca97865919e220",
-      "base_image_id": "sha256:5492c30f18c15038ea263cfa56ccecb02fdf1905803ae59674d2094a156ae264",
-      "image_id": "sha256:fac42c5a3506274a553578dedcd57814fda3828b14352650670e7b0365783bbb",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 1160,
-      "feedback_edges": 1175,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7db631777406ea736d85572a815f507e4df47f800cd261d161a9160849517f72",
+        "Dockerfile": "3b14c3b0f305bd7fdcf10b7b2a49873dd22a4b1bc15e721f0378a1b9153376b1",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -3694,29 +2198,6 @@
     },
     {
       "schema_version": 1,
-      "project": "wav/python/hachoir",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "038a92b7190bd6f61e6d2f73fd41836e06265b4c6c05090e223c4e8cbb73efb7",
-      "base_image_id": "sha256:b0dd0a1d161f8349139d84192986a0879c735dbe9c4a5e7d66e689d147dcecf3",
-      "image_id": "sha256:90744754da3d0ada807c96ac28d2e87c6ed25ac8e4e95ee224a404c1f4b73b3f",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 22288,
-      "feedback_edges": 18984,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "b02c9cf7a507d5d3f5722b743ca8697a6dc40d4861bbd1994c2ced9cbb3633db",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "wav/python/librosa",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -3740,35 +2221,12 @@
     },
     {
       "schema_version": 1,
-      "project": "wav/python/miniaudio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "5f9bc504f954b0a2868cff768616ab506f721f6349eacf9bf88ecbed4eb46aa9",
-      "base_image_id": "sha256:5d3fc333ab6cf3a285d0056596f84af2580b049e8778fa79c66ecdfdb868480c",
-      "image_id": "sha256:e20606ce490a311c351e5bd3b88d9fa723a83223ff02081d9e7b98592dcc512c",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 391,
-      "feedback_edges": 411,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "04573cd06edc3a335b53cf3325b490777e8a334b4ff0ae98813968373ccd085c",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "wav/python/mutagen",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "4340385be579b2ff4e96df28a26187b5d019c9b6025fba9f6bac18d118d05141",
-      "base_image_id": "sha256:38479d2cf465d264e2f8d6f64119059dde63cfc0a3c3def36a31cf8425230284",
-      "image_id": "sha256:34435a6e9dc6012ce6871466c02292490f4438b009ac3a2163f7f0664c46c016",
+      "base_project_receipt_sha256": "24dac72bc0c12502e2cbde8b107d4f630037b63724ca18e1a675e7417b6a2cd6",
+      "base_image_id": "sha256:6fd1e5367f68949cbfae0dd1ea10b2bcb1afaea9105f25682a52530d7a0fafb3",
+      "image_id": "sha256:7ea0f4f27cb177472aabfe0165ac36f269e665af9006b6f288e786878c4495ba",
       "platform": "linux/amd64",
       "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
       "parser_source_features": 147,
@@ -3776,12 +2234,12 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "6e0ad041e1d5a957592cb504d3835252a8ef5f2a1352eedba103b15b4ab5e000",
+        "Dockerfile": "d75f2afc93f288a9533e15bc9c5580d6ad1ee6ced8e3f427dc383b1821bb90da",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -3864,52 +2322,6 @@
     },
     {
       "schema_version": 1,
-      "project": "wav/python/pytaglib",
-      "pass": true,
-      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
-      "base_project_receipt_sha256": "b0316872dcb4500a7fa88d3e886a1d9c3de658bf06b1a170252ec9fdb70f9fb5",
-      "base_image_id": "sha256:e913048f954deda9798134d2037105ae8c921b4d06a729801b080b833037fc0f",
-      "image_id": "sha256:13f907a374dccdbf60a9eb7fa403f29db7bfc658a5bfafa7ebc8dc1188a41945",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 2007,
-      "feedback_edges": 1999,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "eca2bbabf96293d8840517ff4ca2d2ea833e4676cbb5fa3b9e25e4dcfb9e1f02",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "wav/python/riffy",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "a60e1db8784ac9a0a38d41db4db1ca08674ef1369a7069765729cd4c60aad979",
-      "base_image_id": "sha256:50aca72ceca316ef9306ca5db590563a9c51194ddc1117e01049e0a13d54c207",
-      "image_id": "sha256:dc8f78357dfb9e85f7a0c8aad3cdadf1ba0a64e1fbb46c1568cbf56ad071f5ab",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 830,
-      "feedback_edges": 843,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "f5451e1346febeac8ae6d6591d315ef8d4c8f07980e1e876401a966bd6728e32",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "wav/python/scipy",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -3924,29 +2336,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "5e2035b46a026a9551df091a66ed284ac59e243ff24a54a7dc3903d60b0ebda3",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "wav/python/simpleaudio",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "88a6c2b0b41c994c8be7a186b147da4bd7c62c11d74e8f796c627a77220c47c6",
-      "base_image_id": "sha256:afd8122a777f87805918170d57503e21cad5ca2fff5f0f65eaf30667ceacee9b",
-      "image_id": "sha256:5b33783066c1b1fca4f85874b6d4cdd7f09ab1666eafb0fdd14bae25162fa78c",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 181,
-      "feedback_edges": 201,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "ac3ff849b00a57030791475422c1b859614fb91ad51150423b0ace294e39bc04",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -3982,9 +2371,9 @@
       "project": "wav/python/stdlib_wave",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "745efa6598ef22ff70f4a2e74322f9289f5235697aeeb1534a38d3490d5c07f1",
-      "base_image_id": "sha256:0387a887fceb144def65c8d786e3c74ec693cc59afc7adec4c18a0b710802913",
-      "image_id": "sha256:3bbbcea20a196511f10f209e0a863ab9b25f744ad76d9bdc51c81417b6dd6c08",
+      "base_project_receipt_sha256": "aefb971c63d5509537014d2bfb7760b97d5936bd4e503b0166a1443d214876b6",
+      "base_image_id": "sha256:85435994a1d54ee170fc0ada030eeece5977888f7632bf9c5680d40aed218b61",
+      "image_id": "sha256:0d475e2777429960eb43d7214608901d2e45864b363d168f3cba7cf370b5b18b",
       "platform": "linux/amd64",
       "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
       "parser_source_features": 106,
@@ -3992,12 +2381,12 @@
       "afl_map_size": 65536,
       "afl_package": "4.04c-4",
       "overlay_file_sha256": {
-        "Dockerfile": "46afb8f1c43d03853ac6e4de8c870eaedeaa4c07baec4ac112d809bc0f1c2c2c",
+        "Dockerfile": "198e0abd41ad7f301f1d28a20b80ef6914204addd200bffbef659cc1e6d6cb78",
         "afl_trace": "fb8904c8797ffddb055b7f29b96d9dab2df61d56e9310a5ceb00c966e7e5b9ec"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
       }
     },
     {
@@ -4005,9 +2394,9 @@
       "project": "wav/python/tinytag",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "23f2a8f98661b5a46d2a51d3f3b8a03f265813a98e54bfcf935f5bf0e95120db",
-      "base_image_id": "sha256:87551618a22b72541db63bdced386a4e1808b9505e46a85aceae4b7c45af9a03",
-      "image_id": "sha256:6537057bd03d66553ab8c61d9e5a95457d5b387a623e514d1cb92d3528f8cd4d",
+      "base_project_receipt_sha256": "10a7bffdf4ba894e16e56e6cec597db3aa9b362b3f58ecac88baca0cad093264",
+      "base_image_id": "sha256:bc25edd6fe0e355060676c3a4434ac35e75849b0d32463761d33149689969f96",
+      "image_id": "sha256:0f87d1abe17795a1cb5580909f4e91d85fdb8c2c36a993bda91a3f8157981f5d",
       "platform": "linux/amd64",
       "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
       "parser_source_features": 124,
@@ -4015,30 +2404,7 @@
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "0fd013e8678f3bb03ec5562b2babef44c10bc136629b396f55ca6bb86572b35d",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "c622c83734e69f75cf54c47d2ce35a7f8f48cb28830f827147a9ad0b07d39b64"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "wav/python/waveinfo",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e8eca02c1d8785451339ea9edf4ab8d2bb533e18a7273d32775120241f34e76f",
-      "base_image_id": "sha256:d98fccf9916c89dc639b9ae2e0450179fe182a1a863a6d131cc3d9e823615ab8",
-      "image_id": "sha256:136cd063aad1b5d2de51f2e91066ba022443f19c130793a30487531c4820f751",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 4,
-      "feedback_edges": 24,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "7eb916b91706644706eaae7d501825eadd7d5fb978bda01c074d7c7b6340ba5e",
+        "Dockerfile": "4d2ed514efa2a9111f4a3c2ed87a906e10155e753eeb88595ac859c28f4a8415",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -4048,94 +2414,140 @@
     },
     {
       "schema_version": 1,
-      "project": "wav/python/wavfile",
+      "project": "xml/python/beautifulsoup4",
       "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "381452bcfb1d7474884d28ab6f41fc2a7c9e6ddf1a98b48260a98b5a02eda512",
-      "base_image_id": "sha256:b1d4b6779240689c7390b750f573441c1c2bf7d8ed8a2aeda10a95af2ad59199",
-      "image_id": "sha256:8740bca7ea57daf083537a9a54c829d883dc13bd40e9584a6c327e9e8c8e3a3f",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 521,
-      "feedback_edges": 540,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "8da6d3cb2cb8718c491d35dd90d6621bb3a01390843f30c4d8c53c0f20e1523a",
+      "base_image_id": "sha256:67647a9997094cc376405ff2754c59b3cbfdbcf0fa835d6acbac4ed3a2c28e52",
+      "image_id": "sha256:0e520ee866a3185471987938ad956d0e7a617bfb1246227889d7d96b355cd6cd",
+      "platform": "linux/arm64",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "parser_source_features": 1338,
+      "feedback_edges": 1325,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "bcb3a658425fd55ec34c12b977b069e219e6103870c09a8255fe9c674b551513",
+        "Dockerfile": "04e9ced87736685cb1c7402a47e254b789e31fd9b631ae8b733f2a9b6905ea75",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405",
+        "afl_proxy.c": "c344a7d28e36878cd8d6bd25d0adcee4933b30c3fa0a9edff2d6a2c9705b3316",
+        "afl_start.c": "add54eceda445a1e3d39c4923027f04a37db1957d922c91a14da21ca2c86e2e6",
+        "afl_python_trace.py": "645e88761ee51941272268eb7d1e38ad680f6949adbb11a373c6a1e9e019e0ea"
+      },
+      "bridge_file_sha256": {}
+    },
+    {
+      "schema_version": 1,
+      "project": "xml/python/defusedxml",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "1785d16a7798119424f409fbc8d61fac4b454a636c99e856cb0d36c7f3d23edf",
+      "base_image_id": "sha256:3b16cc768cd52526d58681245c690f7a3d66d95374aa3999899a738a57196c54",
+      "image_id": "sha256:7ef987c2e45bf7d1560fb104d497bee12f9177ddcbfe1c24ef6db4e2e5f0606d",
+      "platform": "linux/arm64",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "parser_source_features": 3610,
+      "feedback_edges": 3504,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "19c67689d369e9ae0645e1b1b080126ba1266d15665c93e8d9d5bb9c9a7d8474",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405",
+        "afl_proxy.c": "c344a7d28e36878cd8d6bd25d0adcee4933b30c3fa0a9edff2d6a2c9705b3316",
+        "afl_start.c": "add54eceda445a1e3d39c4923027f04a37db1957d922c91a14da21ca2c86e2e6",
+        "afl_python_trace.py": "a88ca3729bf3766bf6a747e2fee7bf5f1659c6deb07499726cffb540734166ac"
+      },
+      "bridge_file_sha256": {}
+    },
+    {
+      "schema_version": 1,
+      "project": "xml/python/lxml",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "715d9d095fd168c5ebd27a60ad549d9a20276ed5649ca67abc854a988cbf4554",
+      "base_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "image_id": "sha256:8f8ad898d89887f8883aeeeb3718405a2090a8217859cf395f830d5c2e9441b5",
+      "platform": "linux/arm64",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "parser_source_features": 839,
+      "feedback_edges": 831,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "189b01d1a9bb306c059bd7b574262703b159e5056fd62b158d789f29299fa763",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405",
+        "afl_proxy.c": "c344a7d28e36878cd8d6bd25d0adcee4933b30c3fa0a9edff2d6a2c9705b3316",
+        "afl_start.c": "add54eceda445a1e3d39c4923027f04a37db1957d922c91a14da21ca2c86e2e6",
+        "afl_python_trace.py": "b42e9b25ef3b6358559a33c816a45700e0dfef38505ed9fc619bf447b112d939"
+      },
+      "bridge_file_sha256": {}
+    },
+    {
+      "schema_version": 1,
+      "project": "xml/python/stdlib_elementtree",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "0f5e7871d31f2e1d83bbe1f17e1e723e6c706562c52dba6831b892c70c80fba7",
+      "base_image_id": "sha256:4a7b1ecf469d5d172335770aede12c7dd62d2e825df528e679ad855f54a8db2c",
+      "image_id": "sha256:cd6520dd1a7e917e325e28388520da499d6b486958568ea9f48ac5799b99acb4",
+      "platform": "linux/amd64",
+      "control_sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941",
+      "parser_source_features": 3148,
+      "feedback_edges": 3086,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "e1128fff3763f6249f07d30e934cb85bbfafbb87b33a4db6365ca7db101569ea",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
       }
     },
     {
       "schema_version": 1,
-      "project": "wav/python/wavio",
+      "project": "xml/python/untangle",
       "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "c7a9b445250c7e4b614236be3c6e2e8d7bc59bf5f1129b2344756f0fa917ae9f",
-      "base_image_id": "sha256:78d16567384b2e7cd4bc837929129d4507a8ef5c02c4dcaa2c9844f8cb4399a1",
-      "image_id": "sha256:8cd7d509f6506989f0c69c6404375d2f7e858e9caf86c59e672ee5c508daa367",
-      "platform": "linux/amd64",
-      "control_sha256": "6154e1a5105d7b8b35a7ac228d50907c2fed58ea63577391b34957cc538966ce",
-      "parser_source_features": 48,
-      "feedback_edges": 68,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
+      "base_image_id": "sha256:bd93a3b586e88357f3e123f71d97c5e331c8a27dd8acb2781eb6a783b756ee5a",
+      "image_id": "sha256:f10f327da63d458a275a2f98824d78ba5fa46cdfc99174e1e0908c1e59bb07df",
+      "platform": "linux/arm64",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "parser_source_features": 3121,
+      "feedback_edges": 3038,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "61e0831dde8248e2703c9fa2b661878eb3a435b9a12fcd9771ebb8ee2c845c90",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+        "Dockerfile": "b07e80162d45f30317e55ecb628ce96e3daada7153d17bbc28f76455bec1ad35",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405",
+        "afl_proxy.c": "c344a7d28e36878cd8d6bd25d0adcee4933b30c3fa0a9edff2d6a2c9705b3316",
+        "afl_start.c": "add54eceda445a1e3d39c4923027f04a37db1957d922c91a14da21ca2c86e2e6",
+        "afl_python_trace.py": "ed5dda765c187225f46be9db0798a558f3ead6430733e692bee793109223aa5e"
       },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
+      "bridge_file_sha256": {}
     },
     {
       "schema_version": 1,
-      "project": "zip/python/archive_path",
+      "project": "xml/python/xmltodict",
       "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "87458e8ea54ef7beeaf01e1801eda2d156eae8c7a8e9d1fe751db1c524e60985",
-      "base_image_id": "sha256:18ab9b0086b21eacc4bd74076a2f043e65df1b56d288f4a2160b0d46a6361650",
-      "image_id": "sha256:5f9559fea982a954eca4d1605f8467f10f27453c00b504a2a9d4eefae0e41fd0",
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "70a2dd8cf120b99d9ba8cbda4be0b9633334c28381a7eafee8831da7837bd657",
+      "base_image_id": "sha256:4b0042b5e59cb675c1789181266e17ec7722b2d79ef3f985cafed343712be833",
+      "image_id": "sha256:3c665cf8a8830099d81d5d2f09d2bfbe274eacd0b57f595a5ba1e0912711c78c",
       "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 295,
-      "feedback_edges": 312,
+      "control_sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941",
+      "parser_source_features": 3203,
+      "feedback_edges": 3136,
       "afl_map_size": 65536,
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
-        "Dockerfile": "32037d4a20a3a85f7d9c66adbb9c750e1d1f3a01b65bdb9fdfc8e9dd35be4232",
+        "Dockerfile": "3439d1309190622b7d0138095f16c0563055918a4eda6d346309db1c8c941544",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "zip/python/archivey",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "96badf56ad6dff06b13310682711d0288c2d85d1ec468db2fbaf069fcc8ddcd4",
-      "base_image_id": "sha256:35d70d287afcf3725b8aac3960f1d3d72d082f89209a10110759d0010538b9a0",
-      "image_id": "sha256:c673e677bbf8dee70927d7ec6a917444a6cf5faaa47dc8161abd08f08e601c2d",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 15788,
-      "feedback_edges": 14114,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "70ba36daa9dbc9390b3c2499a85d08b08e129a49c5d6429b51d255e8027bc44f",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
       }
     },
     {
@@ -4186,29 +2598,6 @@
     },
     {
       "schema_version": 1,
-      "project": "zip/python/larzarchive",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "b660a9edb9a79a91d8fe5d3b0ce4bc97e53fb5d91f3620147e88d1da61735424",
-      "base_image_id": "sha256:f812ea314e890c5d12a68bbc99ea2ae910f0261d6b95af6017d47bfdc74a62bd",
-      "image_id": "sha256:4227398a681d2ce05c4ff8c9d0eea326dfb14330af0a2ccdbb94c8787e6a2184",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 45,
-      "feedback_edges": 65,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "f6411ec50f5214d66f61f26feeb5e4bea72016aa2f4f9e18958b0bc4e5172ab2",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "zip/python/libarchive_c",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -4223,29 +2612,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "aac607030d94e36f4659108ec5416295124c5e3f6a0a973f9b032102974f5061",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "zip/python/omni_archive",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "f296d121996432423ca03a707c6226f7013df07a4a9f879c3df7e7dba340a096",
-      "base_image_id": "sha256:eed6937169cc87fb3ce6d1ff94621626ca75ef3405bb47b7e2b7736db630d11d",
-      "image_id": "sha256:3445bb5da9d74c0643df2460ed69221f62113d5b02c9bcff3bf227ff4dbd9d5c",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 183,
-      "feedback_edges": 203,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "1f972ec3543704eb7fd742687c370d2d6933fefff1aba2c7745622a727458394",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -4278,29 +2644,6 @@
     },
     {
       "schema_version": 1,
-      "project": "zip/python/python_archive",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "e088508490171f93314e0eea0a740515ea0f6f7c018026cf51d19e9587849916",
-      "base_image_id": "sha256:c22ea7f725b67c33a95b85426f29da93f949ecf90f75be5cc853f317f4007f1d",
-      "image_id": "sha256:8780fdb291fc74c50a454ea65e387019265b8c133995c3cc2874c73e002e19fa",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 83,
-      "feedback_edges": 103,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2244037bf44da54f820a79fafe33b57521aa14bd584abeaa64c78e8a72143efd",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "zip/python/pyunpack",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -4315,29 +2658,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "21f84250c2d51da4ddcdb5a159abe006eb9cc2386ee10e12b84eb7fa475b720b",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "zip/python/pyzip",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "0a56a8f5943160d3155b63b96b5c104630bf3f53ea55fb0e0401b200f28be3de",
-      "base_image_id": "sha256:24890feac187b6b57d6e394ef71088304408e6bdb34e3deaf0d1bd76d4711a3f",
-      "image_id": "sha256:587df0edde7c00002e17124cb7bdb284bc53065f6b31d5176794ab7a8aed6624",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 66,
-      "feedback_edges": 86,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2ca96797bb08e6f58a3ab013839003b97c0e92b208bf33b5fe1573943ff5c274",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {
@@ -4485,29 +2805,6 @@
     },
     {
       "schema_version": 1,
-      "project": "zip/python/zipfile2",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "9b75a0ba253764379003264a0af91d8a2dde1d9d3b21a66b4b54390b3ecc781e",
-      "base_image_id": "sha256:61aef29a6c241dfe1c6a3b40d2214090bf9cf4b97c10a2c04cd85b5658ff5783",
-      "image_id": "sha256:974c7c63acfe5cb80c3cbb345d44abbb594b08f8b09b4f6ced5c37e269be0c55",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 86,
-      "feedback_edges": 106,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2e7d1711cc8e8428f9f99cce9bb96e43d1550322873ea9355ef1d6b738096a48",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "zip/python/zipfile36",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -4531,52 +2828,6 @@
     },
     {
       "schema_version": 1,
-      "project": "zip/python/zipfile37",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "aebf3cb8cff01bf41bfd07ffe4a8ba02633ad68fc7e71d492f5017451f25037a",
-      "base_image_id": "sha256:950ad4f226c6a4a801a4d9ad382d09c4b3aa7fe584359cc17c69f8dc298f20bc",
-      "image_id": "sha256:9b936e648ae7ee4372b31a4ba823bfde85a99668d9a1eeea48de6000cc8cda8e",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 487,
-      "feedback_edges": 506,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "2fe1177a7a3e46dc325c7f2deeeb77403f0511188a18c7dd1c56e44f749b5676",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "zip/python/zipfile38",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "88f55d2b382543f91461ac6a5bd43ea3fdeb13e62515668fda9dffd362824537",
-      "base_image_id": "sha256:418d893868c9b85d2f19296659ba1e2732f3b40df6a7845517a6bc9269a601ae",
-      "image_id": "sha256:10af4333b41565c8061537812565a8249b44048d8081afbe2e6143ec747db9af",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 526,
-      "feedback_edges": 546,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "6722bcc19b21b2549cefc1bd30adef34851d00d69eba87b55e3233f40148ddd4",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
       "project": "zip/python/zipfile_zstd",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -4591,29 +2842,6 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "e92c46fd3ab25ebc24b78f2d1a38809c1b5c0109d849cfd88e194fcb8c3a582a",
-        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
-      },
-      "bridge_file_sha256": {
-        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
-      }
-    },
-    {
-      "schema_version": 1,
-      "project": "zip/python/zipmonkey",
-      "pass": true,
-      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
-      "base_project_receipt_sha256": "356cd220301886d738596363ccbc415c6f3906ca6f82cfc33f00bec0bc35f1e6",
-      "base_image_id": "sha256:18da31e431464309a73a2b4ead4dd22fca1b722b2e7bfd1a96b4d102994e240b",
-      "image_id": "sha256:d10ddd000fcdd5e0c673546610e1e54d309b3ddd1ea804ae3f876dccf5685d95",
-      "platform": "linux/amd64",
-      "control_sha256": "c534fa083d1da92474852ca9168ba0793740c25205f828915a1d862bd78c776b",
-      "parser_source_features": 410,
-      "feedback_edges": 430,
-      "afl_map_size": 65536,
-      "afl_package": "4.33c-1.1ubuntu1",
-      "overlay_file_sha256": {
-        "Dockerfile": "c56cf352364f1f72cf539538bf571397f724d7a80b262d8d46d19c2d98ecc02e",
         "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
       },
       "bridge_file_sha256": {

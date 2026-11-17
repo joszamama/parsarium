@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "native_feedback_unavailable",
+  "scope": "valid PDF controls only; no mutation campaign",
+  "host": "macOS 27.2 (26B123), arm64",
+  "aflplusplus_source_commit": "dbaf11913c1b2702dee5b4d3dcfffd52f1defe50",
+  "aflplusplus_release": "5.03c",
+  "afl_showmap_sha256": "76f813b8dc44045ca85b68eeae295554492788e4b7214bb40844725a4b7a198f",
+  "afl_frida_trace_sha256": "86943810c9dc842fb4a73e0c6f153449fdc954264a78bd7d7b9f2171569f15f4",
+  "frida_gumjs_devkit_release": "17.9.3",
+  "frida_gumjs_devkit_sha256": "89cecdaa5dce78aa97a858ad161824f344d64f4c86cc0edb3ef417fceebda923",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "variant": "controls/pdf/two-page.pdf",
+  "variant_sha256": "f49ddd6fc8d0645022f97ed1386c0f9f84bae0946c6cceb53210c899d7fc7968",
+  "observed_outputs": [
+    {"input": "controls/pdf/one-page.pdf", "output": {"pages": 1}},
+    {"input": "controls/pdf/two-page.pdf", "output": {"pages": 2}}
+  ],
+  "instrumentation": "AFL++ Frida mode (-O) with AFL_INST_LIBS=1 and AFL_FRIDA_INST_RANGES=CoreGraphics; dynamic Process.getModuleByName('CoreGraphics') range gave the same result",
+  "module_scoped_valid_control_tuples": [1, 1],
+  "module_scoped_valid_variant_tuples": 1,
+  "all_libraries_valid_control_tuples": [1607, 1597],
+  "all_libraries_valid_variant_tuples": 1610,
+  "result": "CoreGraphics-only range produced only the one residual AFL tuple for both controls. All-library feedback was unstable on repeated identical valid input. No reliable CoreGraphics parser feedback was established; the host-only control remains staged.",
+  "parser_source_coverage": "unavailable: Core Graphics source is not public",
+  "docker": "unavailable: macOS system framework"
+}

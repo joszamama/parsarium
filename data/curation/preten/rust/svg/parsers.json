@@ -1,0 +1,404 @@
+[
+  {
+    "name": "svgtypes",
+    "version": "0.16.2",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "PathParser::from(path_data).collect()",
+    "documentation": "https://docs.rs/svgtypes/0.16.2/svgtypes/",
+    "scope": "SVG path command grammar",
+    "family": "svgtypes lineage",
+    "control": "controls/svg/red-blue-path.svg",
+    "expected_output": {
+      "first_command": "M",
+      "path_segments": 4
+    },
+    "input_variant": "svg_path_data"
+  },
+  {
+    "name": "usvg",
+    "version": "0.50.0",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "Tree::from_data(&bytes, &Options::default())",
+    "documentation": "https://docs.rs/usvg/0.50.0/usvg/",
+    "scope": "SVG document tree and dimensions",
+    "family": "usvg lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "nodes": 2
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "resvg",
+    "version": "0.50.0",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "usvg::Tree::from_data(&bytes, &Options::default()); render(&tree, transform, pixmap)",
+    "documentation": "https://docs.rs/resvg/0.50.0/resvg/",
+    "scope": "SVG raster rendering",
+    "family": "usvg lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "rgba": [
+        255,
+        0,
+        0,
+        255,
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svg",
+    "version": "0.18.0",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "open(path, &mut content) -> Parser<Event::Tag>",
+    "documentation": "https://docs.rs/svg/0.18.0/svg/",
+    "scope": "SVG element event parsing",
+    "family": "svg crate parser",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "rects": 2,
+      "paths": 0
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "usvg-parser",
+    "version": "0.38.0",
+    "license": "MPL-2.0",
+    "input_api": "TreeParsing::from_data(&bytes, &Options::default()) on usvg_tree::Tree",
+    "documentation": "https://docs.rs/usvg-parser/0.38.0/usvg_parser/",
+    "scope": "SVG document tree and dimensions",
+    "family": "usvg lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svg-hush",
+    "version": "0.9.7",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "Filter::new().filter(&mut input_bytes, &mut output_bytes)",
+    "documentation": "https://docs.rs/svg-hush/0.9.7/svg_hush/",
+    "scope": "SVG-aware stream filtering",
+    "family": "svg-hush SVG filter",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "rects_retained": 2,
+      "svg_retained": true
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svgdom",
+    "version": "0.18.0",
+    "license": "MIT/Apache-2.0",
+    "input_api": "Document::from_str(svg_text).svg_element()/descendants()",
+    "documentation": "https://docs.rs/svgdom/0.18.0/svgdom/",
+    "scope": "SVG DOM elements",
+    "family": "svgdom + svgtypes lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "rects": 2,
+      "has_svg": true
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svgrtypes",
+    "version": "0.50.2",
+    "license": "MIT/Apache-2.0",
+    "input_api": "PathParser::from(path_data).collect()",
+    "documentation": "https://docs.rs/svgrtypes/0.50.2/svgrtypes/",
+    "scope": "SVG path command grammar",
+    "family": "svgtypes lineage fork",
+    "control": "controls/svg/red-blue-path.svg",
+    "expected_output": {
+      "first_command": "M",
+      "path_segments": 4
+    },
+    "input_variant": "svg_path_data"
+  },
+  {
+    "name": "usvgr",
+    "version": "0.50.2",
+    "license": "MPL-2.0",
+    "input_api": "Tree::from_data(&bytes, &Options::default())",
+    "documentation": "https://docs.rs/usvgr/0.50.2/usvgr/",
+    "scope": "SVG document tree and dimensions",
+    "family": "usvgr fork of usvg lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "nodes": 2
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svgr",
+    "version": "0.50.2",
+    "license": "MPL-2.0",
+    "input_api": "usvgr::Tree::from_data(&bytes, &Options::default()); render(&tree, transform, pixmap, cache, pool, context)",
+    "documentation": "https://docs.rs/svgr/0.50.2/svgr/",
+    "scope": "SVG raster rendering",
+    "family": "usvgr fork of usvg lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "rgba": [
+        255,
+        0,
+        0,
+        255,
+        0,
+        255,
+        0,
+        255
+      ]
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "oxvg_path",
+    "version": "0.0.9",
+    "license": "MIT",
+    "input_api": "Path::parse_string(path_data)",
+    "documentation": "https://docs.rs/oxvg_path/0.0.9/oxvg_path/",
+    "scope": "SVG path command grammar",
+    "family": "oxvg_path + oxvg_parse",
+    "control": "controls/svg/red-blue-path.svg",
+    "expected_output": {
+      "path_commands": 4,
+      "serialized": "M2 0 4 0 4 2Z"
+    },
+    "input_variant": "svg_path_data"
+  },
+  {
+    "name": "svgparser",
+    "version": "0.8.1",
+    "license": "MIT/Apache-2.0",
+    "input_api": "svg::Tokenizer::from_str(svg_text) -> Token::ElementStart",
+    "documentation": "https://docs.rs/svgparser/0.8.1/svgparser/",
+    "scope": "SVG 1.1 element tokenization",
+    "family": "svgparser",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "rects": 2
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "nsvg",
+    "version": "0.5.1",
+    "license": "Zlib/MIT",
+    "input_api": "SvgImage::parse_file(path, Units::Pixel, 96.0)",
+    "documentation": "https://docs.rs/nsvg/0.5.1/nsvg/",
+    "scope": "SVG image dimensions via NanoSVG",
+    "family": "NanoSVG C parser",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svg_metadata",
+    "version": "0.6.0",
+    "license": "Apache-2.0/MIT",
+    "input_api": "Metadata::parse_file(path).view_box",
+    "documentation": "https://docs.rs/svg_metadata/0.6.0/svg_metadata/",
+    "scope": "SVG viewBox metadata",
+    "family": "svg_metadata + roxmltree",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "viewbox_width": 2.0,
+      "viewbox_height": 1.0
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "spreet",
+    "version": "0.14.0",
+    "license": "MIT",
+    "input_api": "load_svg(path) -> resvg::usvg::Tree",
+    "documentation": "https://docs.rs/spreet/0.14.0/spreet/",
+    "scope": "SVG document tree and dimensions",
+    "family": "usvg lineage via resvg",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "nodes": 2
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "ps-usvg",
+    "version": "0.48.1",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "Tree::from_data(&bytes, &Options::default())",
+    "documentation": "https://docs.rs/ps-usvg/0.48.1/usvg/",
+    "scope": "SVG document tree and dimensions",
+    "family": "ps-usvg fork of usvg lineage",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "nodes": 2
+    },
+    "manifest_dependency": "ps_usvg",
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svgcleaner",
+    "version": "0.9.5",
+    "license": "GPL-2.0",
+    "input_api": "cleaner::parse_data(svg_text, &ParseOptions::default())",
+    "documentation": "https://docs.rs/svgcleaner/0.9.5/svgcleaner/",
+    "scope": "SVG DOM elements before cleaning",
+    "family": "svgdom 0.10.5",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "rects": 2,
+      "has_svg": true
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "ferrigura-path",
+    "version": "0.7.0",
+    "license": "MIT AND BSD-3-Clause",
+    "input_api": "bounding_box(path_data)",
+    "documentation": "https://docs.rs/ferrigura-path/0.7.0/ferrigura_path/",
+    "scope": "SVG path geometry",
+    "family": "Blink/Skia SVG path port",
+    "control": "controls/svg/red-blue-path.svg",
+    "expected_output": {
+      "x": 2.0,
+      "y": 0.0,
+      "width": 2.0,
+      "height": 2.0
+    },
+    "input_variant": "svg_path_data"
+  },
+  {
+    "name": "vello_svg",
+    "version": "0.11.0",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "render(svg_text) -> vello::Scene",
+    "documentation": "https://docs.rs/vello_svg/0.11.0/vello_svg/",
+    "scope": "SVG render path encoding",
+    "family": "usvg lineage via vello_svg",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "paths": 2,
+      "path_segments": 8
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "anyrender_svg",
+    "version": "0.15.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "render_svg_str(&mut Scene, svg_text, Affine::IDENTITY)",
+    "documentation": "https://docs.rs/anyrender_svg/0.15.0/anyrender_svg/",
+    "scope": "SVG rendering scene commands",
+    "family": "usvg lineage via anyrender_svg",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "render_commands": 2
+    },
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "ps-anyrender-svg",
+    "version": "0.15.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "render_svg_str(&mut Scene, svg_text, Affine::IDENTITY)",
+    "documentation": "https://docs.rs/ps-anyrender-svg/0.15.0/ps_anyrender_svg/",
+    "scope": "SVG rendering scene commands",
+    "family": "ps-usvg fork via ps-anyrender-svg",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "render_commands": 2
+    },
+    "manifest_dependency": "ps_anyrender_svg",
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "librsvg",
+    "version": "2.63.4",
+    "license": "LGPL-2.1-or-later",
+    "input_api": "Loader::new().read_path(path); CairoRenderer::new(&handle).intrinsic_size_in_pixels()",
+    "documentation": "https://docs.rs/librsvg/2.63.4/rsvg/",
+    "scope": "SVG document loading and intrinsic dimensions",
+    "family": "librsvg SVG parser",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0
+    },
+    "manifest_dependency": "rsvg",
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "svg_path_ops",
+    "version": "0.12.0",
+    "license": "MIT",
+    "input_api": "pt::PathTransformer::parse(path_data).to_string()",
+    "documentation": "https://docs.rs/svg_path_ops/0.12.0/svg_path_ops/pt/struct.PathTransformer.html",
+    "scope": "SVG path command grammar and serialization",
+    "family": "svgtypes lineage via svg_path_ops",
+    "control": "controls/svg/red-blue-path.svg",
+    "expected_output": {
+      "serialized": "M 2 0 L 4 0 L 4 2 Z"
+    },
+    "input_variant": "svg_path_data"
+  },
+  {
+    "name": "oxideav-svg",
+    "version": "0.2.0",
+    "license": "MIT",
+    "input_api": "parse_from(bytes.as_slice()) -> SvgDocument",
+    "documentation": "https://docs.rs/oxideav-svg/0.2.0/oxideav_svg/fn.parse_from.html",
+    "scope": "SVG document scene graph and dimensions",
+    "family": "oxideav-svg native SVG parser",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "width": 2.0,
+      "height": 1.0,
+      "nodes": 2
+    },
+    "manifest_dependency": "oxideav_svg",
+    "input_variant": "svg_document"
+  },
+  {
+    "name": "oxvg_ast",
+    "version": "0.0.9",
+    "license": "MIT",
+    "input_api": "parse::roxmltree::parse(svg_text, callback) -> SVG AST",
+    "documentation": "https://docs.rs/oxvg_ast/0.0.9/oxvg_ast/parse/roxmltree/fn.parse.html",
+    "scope": "SVG AST element structure",
+    "family": "oxvg_ast + roxmltree",
+    "control": "controls/svg/red-green.svg",
+    "expected_output": {
+      "root": "svg",
+      "elements": 2
+    },
+    "input_variant": "svg_document"
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/stdlib_domdocument",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c and the Zend engine are uninstrumented",
+  "fuzz_target": "projects/xml/php/stdlib_domdocument/fuzz-target.php (new DOMDocument, loadXML only)",
+  "harness": "projects/xml/php/stdlib_domdocument/harness.php (loadXML, then summary.php DOM traversal)",
+  "base_project_receipt_sha256": "4a3a1457423d5b8627a5a2cfaf93c7f006ef6d20bea3a3b290990831660eaa40",
+  "base_image_id": "sha256:24980dfb6e10540668f6efa571be91fa86366881e91d5164a460a3ccf03141dd",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "license_file_sha256": {
+    "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+    "libxml2-2.15.4/Copyright": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+  },
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/dom/document.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "controls/xml/check_controls.py expat namespace-mode summary",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "base_coverage_lines": {
+    "control": {
+      "parser_source_lines_covered": 2890,
+      "format_specific_source_lines_covered": 126,
+      "underlying_source_lines_covered": 3238,
+      "underlying_parser_c_lines_covered": 1279,
+      "underlying_sax2_c_lines_covered": 358
+    },
+    "differential": {
+      "parser_source_lines_covered": 2894,
+      "format_specific_source_lines_covered": 126,
+      "underlying_source_lines_covered": 3536,
+      "underlying_parser_c_lines_covered": 1451,
+      "underlying_sax2_c_lines_covered": 372
+    }
+  },
+  "image_id": "sha256:be305b622817f6b27b3953a6d8d24b68999f68b596957a407aaf46007f4020d3",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1098,
+  "differential_feedback_edges": 1228,
+  "stable_shared_edges": 984,
+  "stable_control_only_edges": 114,
+  "stable_differential_only_edges": 244,
+  "afl_tuple_difference": 358,
+  "full_harness_control_edges": 1098,
+  "full_harness_differential_edges": 1228,
+  "full_harness_tuple_difference": 358,
+  "format_dependent_parse_time_tuples": 358,
+  "format_dependent_traversal_only_tuples": 0,
+  "post_parse_control_edges": 0,
+  "post_parse_differential_edges": 0,
+  "post_parse_edges_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "fd5f29120702b4e23e46001d4ae2b746448dff056d3dabeee560a3bca9ec480a",
+    "build.py": "fe618bd9056e2d079a1db25378b8fe9d3c5cb062c9af2094df18a9bbf3a52b6a"
+  }
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "name": "batik-anim", "group": "org.apache.xmlgraphics", "artifact": "batik-anim", "version": "1.20",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "SAXSVGDocumentFactory.createDocument(String URI, InputStream)",
+    "documentation": "https://xmlgraphics.apache.org/batik/using/dom-api.html",
+    "family": "Apache Batik SVG DOM", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "batik-anim",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "batik-transcoder", "group": "org.apache.xmlgraphics", "artifact": "batik-transcoder", "version": "1.20",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "PNGTranscoder.transcode(TranscoderInput(InputStream), TranscoderOutput(OutputStream))",
+    "documentation": "https://xmlgraphics.apache.org/batik/using/transcoder.html",
+    "family": "Apache Batik SVG renderer, using batik-codec for PNG output", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "batik-transcoder",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "jsvg", "group": "com.github.weisj", "artifact": "jsvg", "version": "2.0.0",
+    "license": "MIT", "license_evidence": "Maven POM license",
+    "input_api": "SVGLoader.load(InputStream, URI, LoaderContext).render(Component, Graphics2D, ViewBox)",
+    "documentation": "https://github.com/weisJ/jsvg",
+    "family": "JSVG", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "jsvg",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "svg-salamander", "group": "io.github.blackears", "artifact": "svg-salamander", "version": "1.1.5.5",
+    "license": "BSD-2-Clause", "license_evidence": "Maven POM license and project README",
+    "input_api": "SVGUniverse.loadSVG(InputStream, String).getDiagram(URI).render(Graphics2D)",
+    "documentation": "https://github.com/blackears/svgSalamander/blob/master/svg-core/src/main/java/com/kitfox/svg/SVGUniverse.java",
+    "family": "SVG Salamander", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "svg-salamander",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "batik-svgrasterizer", "group": "org.apache.xmlgraphics", "artifact": "batik-svgrasterizer", "version": "1.20",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "SVGConverter.setSources(String[] local paths).setDst(File); execute()",
+    "documentation": "https://xmlgraphics.apache.org/batik/javadoc/org/apache/batik/apps/rasterizer/SVGConverter.html",
+    "family": "Apache Batik SVG renderer via transcoder", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "batik-svgrasterizer",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "batik-swing", "group": "org.apache.xmlgraphics", "artifact": "batik-swing", "version": "1.20",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "JSVGCanvas.setURI(local file URI); SVGDocumentLoaderListener; getSVGDocument()",
+    "documentation": "https://xmlgraphics.apache.org/batik/using/swing.html",
+    "family": "Apache Batik SVG DOM and renderer via Swing canvas", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "batik-swing",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "itext-svg", "group": "com.itextpdf", "artifact": "svg", "version": "9.8.0",
+    "license": "AGPL-3.0-or-later", "license_evidence": "Maven parent com.itextpdf:root:9.8.0 POM licenses and project LICENSE.md",
+    "input_api": "SvgConverter.convertToXObject(InputStream, PdfDocument).getWidth()/getHeight()",
+    "documentation": "https://api.itextpdf.com/iText/java/9.8.0/com/itextpdf/svg/converter/SvgConverter.html",
+    "family": "iText SVG parser and PDF renderer", "scope": "SVG XObject dimensions",
+    "control": "controls/svg/red-green.svg", "adapter_label": "itext-svg",
+    "expected_output": {"width": 2, "height": 1}
+  },
+  {
+    "name": "imageio-batik", "group": "com.twelvemonkeys.imageio", "artifact": "imageio-batik", "version": "3.15.2",
+    "license": "BSD-3-Clause", "license_evidence": "Maven grandparent com.twelvemonkeys:twelvemonkeys:3.15.2 POM license and project LICENSE.txt",
+    "input_api": "TwelveMonkeys SVG ImageReader.setInput(ImageInputStream); read(0)",
+    "documentation": "https://github.com/haraldk/TwelveMonkeys#file-formats-supported",
+    "family": "TwelveMonkeys ImageIO wrapper over Apache Batik", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "twelvemonkeys-batik",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "jSVGIcon", "group": "io.github.bweng20", "artifact": "jSVGIcon", "version": "1.6",
+    "license": "Unlicense", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "SVGConverter.convert(InputStream); ShapePainter.paintShapeToBufferTransparent(BufferedImage, boolean)",
+    "documentation": "https://github.com/BWeng20/jSVGIcon/blob/main/src/main/java/com/bw/jtools/svg/SVGConverter.java",
+    "family": "BWeng20 jSVGIcon Java2D shape converter", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "jsvgicon",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "jairosvg", "group": "io.brunoborges", "artifact": "jairosvg", "version": "1.0.16",
+    "license": "MIT", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "JairoSVG.builder().fromFile(Path).toImage()",
+    "documentation": "https://github.com/brunoborges/jairosvg#library-api",
+    "family": "JairoSVG Java2D SVG renderer", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "jairosvg", "adapter_module": "jairo",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "imageio-native-vips", "group": "io.github.ghosthack", "artifact": "imageio-native-vips", "version": "2.0.0",
+    "license": "MIT", "license_evidence": "Maven parent io.github.ghosthack:imageio-native-parent:2.0.0 POM license",
+    "input_api": "ImageIO.getImageReaders(ImageInputStream) selects ghosthack routing reader; ImageReader.read(0) delegates to libvips",
+    "documentation": "https://github.com/ghosthack/imageio-native#optional-backends",
+    "family": "imageio-native-vips wrapper over libvips SVG decoder", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "imageio-native-vips", "adapter_module": "vips",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "echosvg-anim", "group": "io.sf.carte", "artifact": "echosvg-anim", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "SAXSVGDocumentFactory.createDocument(String URI, InputStream)",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-anim/src/main/java/io/sf/carte/echosvg/anim/dom/SAXSVGDocumentFactory.java",
+    "family": "EchoSVG SVG DOM (Apache Batik fork)", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-anim", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "echosvg-transcoder-svg", "group": "io.sf.carte", "artifact": "echosvg-transcoder-svg", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "PNGTranscoder.transcode(TranscoderInput(InputStream), TranscoderOutput(OutputStream))",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-transcoder-svg/src/main/java/io/sf/carte/echosvg/transcoder/image/PNGTranscoder.java",
+    "family": "EchoSVG SVG renderer (Apache Batik fork)", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-transcoder-svg", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "echosvg-swing", "group": "io.sf.carte", "artifact": "echosvg-swing", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "JSVGCanvas.setURI(local file URI); SVGDocumentLoaderListener; getSVGDocument()",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-swing/src/main/java/io/sf/carte/echosvg/swing/JSVGCanvas.java",
+    "family": "EchoSVG SVG DOM and renderer via Swing (Apache Batik fork)", "scope": "SVG DOM dimensions and rectangle elements",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-swing", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "echosvg-svgrasterizer", "group": "io.sf.carte", "artifact": "echosvg-svgrasterizer", "version": "2.5",
+    "license": "Apache-2.0", "license_evidence": "CSS4J Maven POM license",
+    "input_api": "SVGConverter.setSources(String[] local paths).setDst(File); execute()",
+    "documentation": "https://github.com/css4j/echosvg/blob/master/echosvg-svgrasterizer/src/main/java/io/sf/carte/echosvg/apps/rasterizer/SVGConverter.java",
+    "family": "EchoSVG SVG renderer via rasterizer (Apache Batik fork)", "scope": "Rendered SVG pixels",
+    "control": "controls/svg/red-green.svg", "adapter_label": "echosvg-svgrasterizer", "adapter_module": "echosvg",
+    "expected_output": {"width": 2, "height": 1, "pixels": "ffff0000,ff00ff00"}
+  },
+  {
+    "name": "fop-core", "group": "org.apache.xmlgraphics", "artifact": "fop-core", "version": "2.12",
+    "license": "Apache-2.0", "license_evidence": "Maven JAR META-INF/LICENSE",
+    "input_api": "PDFTranscoder.transcode(TranscoderInput(InputStream), TranscoderOutput(OutputStream))",
+    "documentation": "https://xmlgraphics.apache.org/fop/dev/svg.html",
+    "family": "Apache FOP SVG-to-PDF transcoder using Apache Batik", "scope": "PDF page dimensions and SVG-derived red/green drawing operations",
+    "control": "controls/svg/red-green.svg", "adapter_label": "fop-core",
+    "expected_output": {"width": 2, "height": 1, "red": true, "green": true}
+  },
+  {
+    "name": "radiance-svg-transcoder", "group": "org.pushing-pixels", "artifact": "radiance-svg-transcoder", "version": "7.5.0",
+    "license": "BSD-3-Clause", "license_evidence": "Maven POM license and source header",
+    "input_api": "SvgStreamTranscoder(InputStream, String, LanguageRenderer).setPrintWriter(PrintWriter).transcode(InputStream template)",
+    "documentation": "https://github.com/kirill-grouchnikov/radiance/tree/master/tools/svg-transcoder",
+    "family": "Radiance SVG-to-Java2D transcoder using Apache Batik", "scope": "Generated Java2D drawing code with SVG dimensions and colors",
+    "control": "controls/svg/red-green.svg", "adapter_label": "radiance-svg-transcoder",
+    "expected_output": {"dimensions": true, "red": true, "green": true}
+  },
+  {
+    "name": "gsvg", "group": "se.alipsa.groovy", "artifact": "gsvg", "version": "1.2.0",
+    "license": "MIT", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "SvgReader.parse(File).findAll(Rect.class)",
+    "documentation": "https://github.com/Alipsa/gsvg#readparse-an-existing-svg-file-and-change-it",
+    "family": "gsvg typed SVG model (Groovy library callable from Java)", "scope": "Typed SVG dimensions, rectangle elements, and fill attributes",
+    "control": "controls/svg/red-green.svg", "adapter_label": "gsvg",
+    "expected_output": {"width": 2, "height": 1, "rects": 2, "fills": "#ff0000,#00ff00"}
+  },
+  {
+    "name": "aurora-tools-svg-transcoder-desktop", "group": "org.pushing-pixels", "artifact": "aurora-tools-svg-transcoder-desktop", "version": "1.3.0",
+    "license": "Apache-2.0", "license_evidence": "Maven POM license and source header",
+    "input_api": "SvgTranscoder(local file URI, String).setListener(...).transcode(InputStream template)",
+    "documentation": "https://github.com/kirill-grouchnikov/aurora/blob/icicle/tools/svg-transcoder/src/desktopMain/kotlin/org/pushingpixels/aurora/tools/svgtranscoder/SvgTranscoder.kt",
+    "family": "Aurora SVG-to-Compose transcoder using Apache Batik", "scope": "SVG DOM dimensions and rectangle elements after rendering tree construction",
+    "control": "controls/svg/red-green.svg", "adapter_label": "aurora-svg-transcoder",
+    "expected_output": {"width": 2, "height": 1, "rects": 2}
+  },
+  {
+    "name": "transcoder-core", "group": "io.github.furutuki", "artifact": "transcoder-core", "version": "0.1.1",
+    "license": "Apache-2.0", "license_evidence": "Maven POM license and project LICENSE",
+    "input_api": "SvgTranscoder(local file URL, String).setExternalPrintWriter(PrintWriter).transcode()",
+    "documentation": "https://github.com/furutuki/AndroidSvgTranscoder#project-structure",
+    "family": "AndroidSvgTranscoder SVG-to-Java source using Apache Batik", "scope": "Generated Java drawing code with SVG dimensions and colors",
+    "control": "controls/svg/red-green.svg", "adapter_label": "furutuki-transcoder",
+    "expected_output": {"dimensions": true, "red": true, "green": true}
+  }
+]

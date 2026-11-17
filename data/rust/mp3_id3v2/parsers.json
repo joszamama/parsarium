@@ -58,20 +58,6 @@
     }
   },
   {
-    "name": "mp3-metadata",
-    "version": "0.4.0",
-    "license": "MIT",
-    "input_api": "read_from_file(path)",
-    "documentation": "https://docs.rs/mp3-metadata/0.4.0/mp3_metadata/",
-    "scope": "MPEG frame count and sample rate",
-    "family": "mp3-metadata parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "frames": 17,
-      "sample_rate": 8000
-    }
-  },
-  {
     "name": "symphonia",
     "version": "0.6.1",
     "license": "MPL-2.0",
@@ -84,35 +70,6 @@
       "sample_rate": 8000,
       "channels": 1,
       "packet_bytes": 288
-    }
-  },
-  {
-    "name": "audiotags",
-    "version": "0.5.0",
-    "license": "MIT",
-    "input_api": "Tag::new().read_from_path(path)",
-    "documentation": "https://docs.rs/audiotags/0.5.0/audiotags/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "audiotags via id3",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "puremp3",
-    "version": "0.1.0",
-    "license": "MIT OR CC0-1.0",
-    "input_api": "read_mp3(File).next()",
-    "documentation": "https://docs.rs/puremp3/0.1.0/puremp3/",
-    "scope": "Decoded MP3 sample and frame header",
-    "family": "puremp3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1
     }
   },
   {
@@ -130,36 +87,6 @@
     }
   },
   {
-    "name": "audio-file",
-    "version": "0.5.1",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "read::<f32>(path, ReadConfig::default())",
-    "documentation": "https://docs.rs/audio-file/0.5.1/audio_file/",
-    "scope": "Decoded MP3 audio samples",
-    "family": "audio-file via Symphonia",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "samples": 8000
-    }
-  },
-  {
-    "name": "minimp3_fixed",
-    "version": "0.5.4",
-    "license": "MIT",
-    "input_api": "Decoder::new(File).next_frame()",
-    "documentation": "https://docs.rs/minimp3_fixed/0.5.4/minimp3_fixed/",
-    "scope": "Decoded first MPEG Layer III frame",
-    "family": "minimp3 C decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "decoded_samples": 576
-    }
-  },
-  {
     "name": "nanomp3",
     "version": "0.2.0",
     "license": "MIT OR Apache-2.0",
@@ -172,35 +99,6 @@
       "layer": 3,
       "sample_rate": 8000,
       "samples": 8000
-    }
-  },
-  {
-    "name": "creak",
-    "version": "0.3.0",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "Decoder::open(path).info()/into_samples()",
-    "documentation": "https://docs.rs/creak/0.3.0/creak/",
-    "scope": "MP3 audio header and first decoded sample",
-    "family": "minimp3 C decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "first_sample": 0.0
-    }
-  },
-  {
-    "name": "moosicbox_audiotags",
-    "version": "0.1.0",
-    "license": "MIT",
-    "input_api": "Tag::new().read_from_path(path)",
-    "documentation": "https://docs.rs/moosicbox_audiotags/0.1.0/moosicbox_audiotags/",
-    "scope": "ID3v2 title and artist",
-    "family": "moosicbox_audiotags via id3",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control"
     }
   },
   {
@@ -238,21 +136,6 @@
     }
   },
   {
-    "name": "rmp3",
-    "version": "0.3.1",
-    "license": "CC0-1.0",
-    "input_api": "Decoder::new(&[u8]).next()",
-    "documentation": "https://docs.rs/rmp3/0.3.1/rmp3/",
-    "scope": "Decoded first MPEG Layer III frame",
-    "family": "minimp3 C decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "samples_per_channel": 576
-    }
-  },
-  {
     "name": "rusty_mp3",
     "version": "1.0.5",
     "license": "Apache-2.0",
@@ -265,36 +148,6 @@
       "sample_rate": 8000,
       "channels": 1,
       "decoded_samples": 576
-    }
-  },
-  {
-    "name": "oxideav-id3",
-    "version": "0.0.7",
-    "license": "MIT",
-    "input_api": "parse_tag(&[u8])",
-    "documentation": "https://docs.rs/oxideav-id3/0.0.7/oxideav_id3/",
-    "scope": "ID3v2 version, frame count, consumed bytes",
-    "family": "oxideav ID3 reader",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "version": "V2_3",
-      "frame_count": 4,
-      "tag_bytes": 101
-    }
-  },
-  {
-    "name": "id3-core",
-    "version": "0.3.1",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "Tag::parse(&[u8]).text_field()",
-    "documentation": "https://docs.rs/id3-core/0.3.1/id3_core/",
-    "scope": "ID3v2 version, title, artist",
-    "family": "id3-core tag parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "version": 3,
-      "title": "Parsarium",
-      "artist": "Control"
     }
   }
 ]

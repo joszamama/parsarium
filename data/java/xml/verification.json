@@ -1,0 +1,469 @@
+{
+  "checked_at_utc": "2026-11-17T12:07:05.546302+00:00",
+  "platform": "linux/arm64 Docker",
+  "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
+  "controls": {
+    "catalog_ns": "controls/xml/catalog-ns.xml",
+    "order_default_ns": "controls/xml/order-default-ns.xml"
+  },
+  "control_sha256": {
+    "catalog_ns": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order_default_ns": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "control_meaning": "catalog-ns.xml: prefixed root namespace and default child namespace, a prefixed attribute, &amp;/&lt;/&gt; references and a CDATA section. order-default-ns.xml: comment, processing instruction, single-quoted attribute, hex and decimal character references, &quot; in an attribute, and a default namespace undeclared with xmlns=\"\". Both are UTF-8 XML 1.0 without DOCTYPE; expected outputs come from python3 -I controls/xml/check_controls.py (expat).",
+  "oracle": "python3 -I controls/xml/check_controls.py",
+  "attribute_order": "The Java adapters sort each element's attributes by Clark name. For both valid controls this coincides with document order, so outputs equal the expat oracle.",
+  "third_party": [
+    {
+      "package": "xercesImpl",
+      "group": "xerces",
+      "version": "2.12.2",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware into a W3C DOM: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes (sorted per element, DOM keeps no attribute order), decoded character data (predefined entity and character references, CDATA)",
+      "command": "python3 scripts/run_project.py xml java xercesimpl",
+      "receipt": "projects/xml/java/xercesimpl/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 3633,
+      "error": null
+    },
+    {
+      "package": "woodstox-core",
+      "group": "com.fasterxml.woodstox",
+      "version": "7.3.0",
+      "scope": "Namespace-aware XML 1.0 UTF-8 via WstxInputFactory.createXMLStreamReader(local InputStream), without DOCTYPE",
+      "command": "python3 scripts/run_project.py xml java woodstox_core",
+      "receipt": "projects/xml/java/woodstox_core/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 815,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "dom4j",
+      "group": "org.dom4j",
+      "version": "2.2.0",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE read namespace-aware by dom4j SAXReader into a dom4j Document over the default JAXP SAX parser: expanded element names, maximum depth, declared namespaces and URIs, sorted non-namespace attributes, and decoded character data",
+      "command": "python3 scripts/run_project.py xml java dom4j",
+      "receipt": "projects/xml/java/dom4j/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 30,
+      "parser_source_lines_covered": 723,
+      "underlying_source_files": 62,
+      "underlying_source_lines_covered": 3601,
+      "underlying_parser": "OpenJDK 25.0.5 java.xml Xerces fork (com.sun.org.apache.xerces.internal), reached through JAXP SAXParserFactory.newInstance()",
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "aalto-xml",
+      "group": "com.fasterxml",
+      "version": "1.4.0",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware through Aalto StAX: expanded element names, maximum depth, namespace declarations and URIs, sorted non-declaration attributes, and decoded character data",
+      "command": "python3 scripts/run_project.py xml java aalto_xml",
+      "receipt": "projects/xml/java/aalto_xml/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 30,
+      "parser_source_lines_covered": 1427,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "jackson-dataformat-xml",
+      "group": "com.fasterxml.jackson.dataformat",
+      "version": "2.23.0",
+      "scope": "Valid XML 1.0 UTF-8 from local InputStream projected into ordered Jackson tokens by XmlFactory/FromXmlParser over Woodstox; namespace URIs and root name omitted",
+      "command": "python3 scripts/run_project.py xml java jackson_xml",
+      "receipt": "projects/xml/java/jackson_xml/verification.json",
+      "pass": true,
+      "output": {
+        "events": [
+          "START_OBJECT",
+          "FIELD_NAME:version",
+          "VALUE_STRING:1",
+          "FIELD_NAME:item",
+          "START_OBJECT",
+          "FIELD_NAME:id",
+          "VALUE_STRING:a1",
+          "FIELD_NAME:lang",
+          "VALUE_STRING:es",
+          "FIELD_NAME:",
+          "VALUE_STRING:Café & té",
+          "END_OBJECT",
+          "FIELD_NAME:item",
+          "START_OBJECT",
+          "FIELD_NAME:id",
+          "VALUE_STRING:b2",
+          "FIELD_NAME:name",
+          "VALUE_STRING:Zürich <HQ>",
+          "FIELD_NAME:note",
+          "VALUE_STRING:x < y",
+          "END_OBJECT",
+          "END_OBJECT"
+        ],
+        "token_count": 22
+      },
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 320,
+      "underlying_source_files": 8,
+      "underlying_source_lines_covered": 832,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "xmlbeans",
+      "group": "org.apache.xmlbeans",
+      "version": "5.4.1",
+      "scope": "Valid UTF-8 XML 1.0 without DOCTYPE from local InputStream into XMLBeans cursor tree over JDK Xerces SAX parser",
+      "command": "python3 scripts/run_project.py xml java xmlbeans",
+      "receipt": "projects/xml/java/xmlbeans/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 12,
+      "parser_source_lines_covered": 1004,
+      "underlying_source_files": 60,
+      "underlying_source_lines_covered": 3733,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "jdom2",
+      "group": "org.jdom",
+      "version": "2.0.6.1",
+      "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE from local InputStream into JDOM2 Document via SAXBuilder over JDK Xerces SAX",
+      "command": "python3 scripts/run_project.py xml java jdom2",
+      "receipt": "projects/xml/java/jdom2/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 21,
+      "parser_source_lines_covered": 734,
+      "underlying_source_files": 58,
+      "underlying_source_lines_covered": 3549,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "xom",
+      "group": "xom",
+      "version": "1.4.6",
+      "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE from local InputStream via XOM Builder to Document; underlying tokenizer is the OpenJDK java.xml Xerces SAX parser selected by XOM",
+      "command": "python3 scripts/run_project.py xml java xom",
+      "receipt": "projects/xml/java/xom/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 14,
+      "parser_source_lines_covered": 579,
+      "underlying_source_files": 56,
+      "underlying_source_lines_covered": 3488,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "xpp3",
+      "group": "xpp3",
+      "version": "1.1.4c",
+      "scope": "Namespace-aware XML 1.0 UTF-8 from local InputStream through MXParser.setInput(InputStream, null) and next() events; two valid controls without DOCTYPE",
+      "command": "python3 scripts/run_project.py xml java xpp3",
+      "receipt": "projects/xml/java/xpp3/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 677,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    },
+    {
+      "package": "kxml2",
+      "group": "net.sf.kxml",
+      "version": "2.3.0",
+      "scope": "Namespace-aware XML 1.0 UTF-8 from local InputStream through KXmlParser.setInput(InputStream, null) and next() events; two valid controls without DOCTYPE",
+      "command": "python3 scripts/run_project.py xml java kxml2",
+      "receipt": "projects/xml/java/kxml2/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 377,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
+    }
+  ],
+  "standard": [
+    {
+      "api": "javax.xml.parsers.DocumentBuilder.parse(InputStream)",
+      "runtime": "Eclipse Temurin OpenJDK 25.0.5+8 linux/arm64 java.xml",
+      "command": "python3 scripts/run_project.py xml java jdk_documentbuilder",
+      "receipt": "projects/xml/java/jdk_documentbuilder/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 4071,
+      "error": null
+    }
+  ],
+  "refreshed_projects": [
+    "kxml2"
+  ],
+  "retained_prior_results_checked_at_utc": "2026-11-17T11:51:46.493433+00:00"
+}
