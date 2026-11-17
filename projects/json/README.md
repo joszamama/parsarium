@@ -42,6 +42,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [pydantic / Python](python/pydantic/README.md)
 - [simplejson / Python](python/simplejson/README.md)
 - [aws-smithy-json / Rust](rust/aws_smithy_json/README.md)
+- [gjson / Rust](rust/gjson/README.md)
 - [hifijson / Rust](rust/hifijson/README.md)
 - [jiter / Rust](rust/jiter/README.md)
 - [json / Rust](rust/json_crate/README.md)

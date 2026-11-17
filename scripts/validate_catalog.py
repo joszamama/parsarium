@@ -73,10 +73,6 @@ def validate_pilot_cells() -> None:
                             not all(item.get("pass") is True for item in records)):
                 raise ValueError(f"pilot control results differ from parser list: {eco}/{fmt}")
             results = {item["package"]: item for item in records}
-            leads_file = base / "leads.json"
-            lead_data = read(f"data/{eco}/{fmt}/leads.json") if leads_file.is_file() else []
-            leads = lead_data.get("leads", []) if isinstance(lead_data, dict) else lead_data
-            lead_by_name = {item.get("name"): item for item in leads}
             for parser in parsers:
                 name = parser["name"]
                 control = parser.get("control")
@@ -109,7 +105,7 @@ def validate_pilot_cells() -> None:
                             observed.get("output") != parser.get("expected_output")):
                         raise ValueError(f"pilot parser receipt differs: {eco}/{fmt}/{name}")
                 signals = [parser.get("metric"), parser.get("popularity"),
-                           parser.get("adoption_exception"), lead_by_name.get(name)]
+                           parser.get("adoption_exception")]
                 numeric = any(isinstance(value, int) and not isinstance(value, bool) and value > 0
                               for signal in signals if isinstance(signal, dict)
                               for value in signal.values())
