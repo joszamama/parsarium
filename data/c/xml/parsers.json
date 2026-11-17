@@ -90,5 +90,54 @@
       "source": "data/c/xml/registry-snapshot.json"
     },
     "project": "projects/xml/c/libxml2/verification.json"
+  },
+  {
+    "name": "mxml",
+    "version": "4.0.6",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/michaelrsweet/mxml/blob/v4.0.6/LICENSE",
+    "input_api": "mxmlOptionsNew(); mxmlOptionsSetTypeValue(options, MXML_TYPE_OPAQUE); mxmlOptionsSetErrorCallback; mxmlLoadString(NULL, options, NUL-terminated copy of the local bytes); tree walk with mxmlGetType, mxmlGetFirstChild, mxmlGetNextSibling, mxmlGetParent, mxmlGetElement, mxmlElementGetAttrCount, mxmlElementGetAttrByIndex, mxmlGetOpaque, mxmlGetCDATA. Namespace resolution is done by the adapter, not by mxml",
+    "documentation": "https://www.msweet.org/mxml/mxml.html",
+    "source": "https://github.com/michaelrsweet/mxml/releases/download/v4.0.6/mxml-4.0.6.tar.gz",
+    "scope": "Mini-XML's tree of one in-memory document (document-order element and attribute names as written, xmlns attributes, maximum depth, opaque and CDATA text between markup), with namespace expanded names, declaration counts and URIs resolved by the adapter from that tree",
+    "namespace_semantics": "not_implemented_by_package",
+    "namespace_note": "Mini-XML 4.0.6 does not implement Namespaces in XML: its documentation and sources contain no namespace handling, element and attribute names are returned as written (prefix:local) and xmlns/xmlns:p are ordinary attributes. harness.c resolves expanded names from mxml's parsed tree with an in-scope binding stack (default namespace for unprefixed elements, none for unprefixed attributes, xml prefix predefined, unbound prefix rejected). On catalog-ns.xml mxml itself reports elements c:catalog, item, item, name, note and attributes xmlns:c, xmlns, version, id, c:lang, id.",
+    "family": "Mini-XML (Michael R Sweet's mxml)",
+    "family_note": "Independent of expat and libxml2: mxml-file.c has its own character reader and tree builder and links no other XML library. The pyexpat oracle that produced the expected outputs is the expat family, so this match is cross-family.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (libmxml1)",
+      "value": 2054,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "metric_note": "libmxml1 is the Mini-XML 3.x soname (Debian trixie 3.3.1). The pinned 4.0.6 release is the version in Debian forky/sid (source mxml 4.0.6-3), whose libmxml4 binary has no row in the saved snapshot.",
+    "project": "projects/xml/c/mxml/verification.json"
   }
 ]

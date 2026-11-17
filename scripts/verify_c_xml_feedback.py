@@ -4,6 +4,10 @@ For each verified path, the base project image replays the differential control
 against its pinned expected output. The AFL++ overlay then maps each valid
 control REPEATS times with afl-showmap; tuples must repeat exactly per control
 and differ between them.
+
+Pass path slugs to check only those; earlier results for the other paths are
+kept from the report unchanged, so they still carry their own receipt and image
+hashes. Each newly checked result records its own checked_at_utc.
 """
 
 from datetime import datetime, timezone
@@ -12,6 +16,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 
 from run_case import ROOT, project_for
@@ -22,6 +27,8 @@ SCOPES = {
               "AFL++ instruments only the pinned libexpat sources and the XML_Parse harness; no other library is compiled into /work/fuzzer."),
     "libxml2": ("afl_clang_fast_libxml2_and_harness_edges",
                 "AFL++ instruments only the pinned libxml2 sources and the xmlTextReader harness; no other library is compiled into /work/fuzzer."),
+    "mxml": ("afl_clang_fast_mxml_and_harness_edges",
+             "AFL++ instruments only the pinned Mini-XML sources and the mxmlLoadString harness, including its namespace-resolving tree walk; no other library is compiled into /work/fuzzer."),
 }
 REPEATS = 5
 REPORT = ROOT / "data/c/xml/afl-feedback.json"
@@ -90,6 +97,7 @@ def check(slug: str) -> dict:
     kind, scope = SCOPES[slug]
     return {
         "project": str(relative),
+        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "pass": True,
         "feedback_kind": kind,
         "feedback_scope": scope,
@@ -112,7 +120,13 @@ def check(slug: str) -> dict:
 
 
 def main() -> None:
-    results = [check(slug) for slug in SCOPES]
+    slugs = sys.argv[1:] or list(SCOPES)
+    unknown = set(slugs) - set(SCOPES)
+    if unknown:
+        raise SystemExit(f"unknown C XML paths: {sorted(unknown)}")
+    previous = {item["project"]: item for item in json.loads(REPORT.read_text())["results"]} if REPORT.exists() else {}
+    fresh = {slug: check(slug) for slug in slugs}
+    results = [fresh[slug] if slug in fresh else previous[f"xml/c/{slug}"] for slug in SCOPES]
     REPORT.write_text(json.dumps({
         "schema_version": 2,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),

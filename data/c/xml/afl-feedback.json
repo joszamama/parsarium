@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "checked_at_utc": "2026-11-17T03:54:26.824103+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T10:16:48.508427+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "pass": true,
   "results": [
     {
@@ -100,6 +100,55 @@
       "first_afl_tuples": 1253,
       "second_afl_tuples": 1342,
       "afl_tuple_difference": 245
+    },
+    {
+      "project": "xml/c/mxml",
+      "checked_at_utc": "2026-11-17T10:16:48.507937+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_mxml_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only the pinned Mini-XML sources and the mxmlLoadString harness, including its namespace-resolving tree walk; no other library is compiled into /work/fuzzer.",
+      "base_project_receipt_sha256": "f07af563da87c3d07db896ab86a406b0ed0439642efdfb39106706754facde9f",
+      "overlay_receipt_sha256": "aa8bde7eaa6768d90bc3895fa0115a90229b4cd402be40182f236d9a90ee9fe9",
+      "base_image_id": "sha256:1fa48324fb92b575f24a8785917d6cd1e9bdc872b12eb7529a3a95563b69472b",
+      "overlay_image_id": "sha256:ebc9e332b34db0ed0d8c4b34cb82e6dde234dbe4d84a0dd0e8ef8c4fc4e6377b",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 380,
+      "second_afl_tuples": 390,
+      "afl_tuple_difference": 50
     }
   ]
 }

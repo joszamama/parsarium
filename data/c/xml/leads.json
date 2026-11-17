@@ -24,12 +24,12 @@
     },
     {
       "name": "mxml",
-      "status": "unresolved",
+      "status": "selected",
       "language": "C",
       "conan_recipe": false,
       "popcon_installed": 2054,
       "homebrew_install_365d": 127,
-      "reason": "Mini-XML: own tree parser (mxmlLoadString). libmxml1 has 2,054 Debian installs, most in no-files; no Conan recipe. Namespace handling is not documented as Namespaces-in-XML resolution; not built.",
+      "reason": "Selected and verified: Mini-XML 4.0.6 mxmlLoadString (opaque text values) matched both controls under LLVM source coverage with a stable AFL++ differential; see data/c/xml/parsers.json. Third on the primary metric (libmxml1 2,054, the 3.x soname; most in no-files). Own parser family. Mini-XML does not implement namespace semantics: the adapter resolves xmlns from mxml's parsed tree.",
       "source": "https://github.com/michaelrsweet/mxml"
     },
     {

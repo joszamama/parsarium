@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "cell": "xml/c",
-  "checked_at_utc": "2026-11-17T03:55:12.776000+00:00",
+  "checked_at_utc": "2026-11-17T10:19:06.906893+00:00",
   "checks": [
     {
       "command": "python3 controls/xml/check_controls.py",
@@ -65,11 +65,61 @@
       "receipt_sha256": "ecc3f929798fdd367b42876244df3c89fb6b67515f0fd47e3449ab7b07f0d9e4"
     },
     {
+      "command": "python3 scripts/run_project.py xml c mxml",
+      "pass": true,
+      "image_id": "sha256:1fa48324fb92b575f24a8785917d6cd1e9bdc872b12eb7529a3a95563b69472b",
+      "parser_source_lines_covered": 622,
+      "mxml_file_c_lines_covered": 353,
+      "receipt_sha256": "f07af563da87c3d07db896ab86a406b0ed0439642efdfb39106706754facde9f"
+    },
+    {
+      "command": "python3 parsarium.py run xml c mxml controls/xml/catalog-ns.xml",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run xml c mxml controls/xml/order-default-ns.xml",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "docker run --entrypoint /work/replay parsarium/xml-c-mxml:local on catalog-ns.xml and order-default-ns.xml",
+      "pass": true,
+      "result": "both summaries equal the pyexpat oracle output of controls/xml/check_controls.py byte for byte"
+    },
+    {
+      "command": "scratch mxmlLoadFile + mxmlWalkNext dump of catalog-ns.xml in the build stage (not committed)",
+      "pass": true,
+      "result": "top node is the <?xml?> directive; mxml reports elements c:catalog, item, item, name, note and attributes xmlns:c, xmlns, version, id, c:lang, id as written, so Mini-XML does no namespace resolution"
+    },
+    {
+      "command": "cd scripts && python3 build_afl_native.py xml c mxml",
+      "pass": true,
+      "image_id": "sha256:ebc9e332b34db0ed0d8c4b34cb82e6dde234dbe4d84a0dd0e8ef8c4fc4e6377b",
+      "feedback_edges": 380,
+      "afl_map_size": 1454,
+      "receipt_sha256": "aa8bde7eaa6768d90bc3895fa0115a90229b4cd402be40182f236d9a90ee9fe9"
+    },
+    {
       "command": "cd scripts && python3 verify_c_xml_feedback.py",
       "pass": true,
       "repeats_per_control": 5,
       "result": "expat 722 vs 809 tuples, 157 edge ids differ; libxml2 1253 vs 1342 tuples, 245 edge ids differ; repeated maps identical for every control",
       "receipt_sha256": "67c67fa07227f0f5d7196830ee3e6093f4b7b5dc80f22c74e7cc9a90ece2583c"
+    },
+    {
+      "command": "cd scripts && python3 verify_c_xml_feedback.py mxml",
+      "pass": true,
+      "repeats_per_control": 5,
+      "result": "mxml 380 vs 390 tuples, 50 edge ids differ; repeated maps identical for every control; expat and libxml2 results carried over unchanged",
+      "receipt_sha256": "c4797f8a1f8012fe9a8e46e44ac08de4104907b00ee3342b2081291e0ce3748b"
+    },
+    {
+      "command": "llvm-cov export of /work/replay for each control in parsarium/xml-c-mxml:local",
+      "pass": true,
+      "result": "segment-start lines unique to one control: mxml-file.c 55 (catalog) and 51 (order), mxml-node.c 13 and 13, mxml-options.c 6 and 10, mxml-get.c 6 and 0; harness.c 1 and 0. The AFL++ differential comes mainly from the parser, not the adapter."
     },
     {
       "command": "python3 parsarium.py afl prepare xml c expat runs/xml-expat-afl --seed controls/xml/order-default-ns.xml",
@@ -95,14 +145,24 @@
       "result": "Ready: xml/c/libxml2 (2 seeds, source_instrumented_edges); no campaign started"
     },
     {
+      "command": "python3 parsarium.py afl prepare xml c mxml runs/xml-mxml-afl --seed controls/xml/order-default-ns.xml",
+      "pass": true,
+      "result": "Prepared 2 seeds"
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/xml-mxml-afl --check",
+      "pass": true,
+      "result": "Ready: xml/c/mxml (2 seeds, source_instrumented_edges); no campaign started"
+    },
+    {
       "command": "python3 -m unittest discover -s tests",
       "pass": true,
-      "result": "tests OK"
+      "result": "Ran 98 tests, OK"
     },
     {
       "command": "cd scripts && python3 audit_fuzzing.py",
       "pass": true,
-      "result": "825/825 AFL++ overlays and 521/521 ecosystem feedback checks current"
+      "result": "899/899 AFL++ overlays and 569/569 ecosystem feedback checks current"
     },
     {
       "command": "python3 scripts/validate_catalog.py",
@@ -114,7 +174,10 @@
     "The first AFL++ verification failed: order-default-ns.xml gave different maps on repeat because expat draws a random hash salt per parser. The harness now calls the documented XML_SetHashSalt with a fixed non-zero value; all receipts were regenerated after that change.",
     "The libFuzzer binary instruments only the harness; libexpat is compiled with LLVM coverage flags. Parser-level fuzz feedback comes from the AFL++ overlay, where build.sh's clang calls, including configure CC, become afl-clang-fast.",
     "libxml2 2.15.4 is the second verified path: a committed xmlReaderForMemory/xmlTextReaderRead project, receipt and AFL++ overlay. It needed no determinism change; its control maps repeated identically. The expat and libxml2 receipts were not regenerated by each other's work; the expat manifest's coverage_limit still mentions the earlier scratch libxml2 run because that file is hash-pinned by the expat receipt.",
-    "verify_c_xml_feedback.py now checks both paths and writes data/c/xml/afl-feedback.json as schema_version 2 with a results list, like data/go/xml."
+    "verify_c_xml_feedback.py now checks both paths and writes data/c/xml/afl-feedback.json as schema_version 2 with a results list, like data/go/xml.",
+    "Mini-XML 4.0.6 is the third verified path (libmxml1 2,054). Mini-XML does not implement Namespaces in XML, so harness.c resolves expanded names, declarations and URIs from mxml's tree with an in-scope binding stack. The match therefore verifies mxml's element, attribute and text parsing together with the adapter's namespace resolution, not namespace processing in mxml.",
+    "mxmlLoadString is called with top NULL, as documented; mxml then makes the <?xml?> declaration the parent of the rest of the document, so the harness walks children of every node and counts depth only for elements. Mini-XML's configure appends OPTIM='-g -Os' after the project CFLAGS, so libmxml4.a is built at -Os in both the coverage and AFL++ images.",
+    "The expat and libxml2 base and overlay images from their receipts were not in this machine's Docker cache. verify_c_xml_feedback.py now accepts path slugs; it was run for mxml only, and the expat and libxml2 results in afl-feedback.json are carried over unchanged from their earlier run. Their receipts were not rebuilt."
   ],
   "not_run": [
     "AFL++ campaign",
