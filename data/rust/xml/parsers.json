@@ -174,5 +174,49 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/xmlparser/verification.json"
+  },
+  {
+    "name": "xml5ever",
+    "version": "0.40.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "xml5ever::driver::parse_document(RcDom, XmlParseOpts) -> XmlParser<RcDom>; TendrilSink::one(&str) -> RcDom; xml5ever::tokenizer::XmlTokenizer::feed(BufferQueue) -> token events",
+    "documentation": "https://docs.rs/xml5ever/0.40.0/xml5ever/driver/fn.parse_document.html",
+    "source": "https://static.crates.io/crates/xml5ever/xml5ever-0.40.0.crate",
+    "scope": "XML5 error-recovering superset parser accepts local UTF-8 text and yields a namespace-aware DOM through its own tokenizer/tree builder with markup5ever_rcdom TreeSink; a second own tokenizer pass counts xmlns declarations omitted from DOM attributes. The two valid XML 1.0 controls yield exact expanded names, attributes, decoded text, depth and declaration counts. This does not establish strict XML 1.0 well-formedness, full namespace conformance, DTD support, or other encodings.",
+    "family": "Servo xml5ever XML5 tokenizer and tree builder; shares markup5ever primitives and design lineage with html5ever, but has own XML5 parser modules; markup5ever_rcdom is only a tree sink",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 14338073,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/xml5ever/verification.json"
   }
 ]

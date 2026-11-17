@@ -1,6 +1,6 @@
 # RUST × XML: selected parsers
 
-4 control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. XML parser leads that have not yet been run are listed in [leads.json](leads.json).
+5 control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. XML parser leads that have not yet been run are listed in [leads.json](leads.json).
 
 ## Primary within-cell adoption metric
 
@@ -11,9 +11,10 @@ crates.io recent downloads (90 days), from the search API in [registry-snapshot.
 | 1 | [quick-xml](https://docs.rs/quick-xml/0.42.0/quick_xml/) | 0.42.0 | 178,628,779 | Namespace-resolved event stream: element and attribute expanded names, namespace declarations, decoded text and CDATA | quick-xml pull reader |
 | 2 | [xmlparser](https://docs.rs/xmlparser/0.13.6/xmlparser/struct.Tokenizer.html) | 0.13.6 | 52,247,004 | `Tokenizer::from` over local UTF-8 text; adapter resolves namespace names, references and depth | xmlparser low-level tokenizer |
 | 3 | [roxmltree](https://docs.rs/roxmltree/0.21.2/roxmltree/struct.Document.html#method.parse) | 0.21.2 | 42,073,295 | Namespace-resolved DOM: expanded names, attributes, namespace declarations, decoded text | roxmltree internal tokenizer and tree builder |
-| 4 | [xml](https://docs.rs/xml/1.4.0/xml/reader/struct.EventReader.html) | 1.4.0 | 6,413,267 | `EventReader` over local bytes: namespace-expanded elements and attributes, declarations, decoded text | xml-rs EventReader implementation |
+| 4 | [xml5ever](https://docs.rs/xml5ever/0.40.0/xml5ever/) | 0.40.0 | 14,338,073 | XML5 recovery parser builds namespace-resolved DOM from local UTF-8 input; own tokenizer pass counts declarations | Servo xml5ever tokenizer and tree builder |
+| 5 | [xml](https://docs.rs/xml/1.4.0/xml/reader/struct.EventReader.html) | 1.4.0 | 6,413,267 | `EventReader` over local bytes: namespace-expanded elements and attributes, declarations, decoded text | xml-rs EventReader implementation |
 
-Unverified XML parser leads, by the same metric: xml5ever 14,338,073, RustyXML 4,342,774 (feedback gate unresolved), xml-no-std 1,648,161 (shared family), minidom 984,597 (shared family), rxml 961,809, instant-xml 748,214, sxd-document 647,390, libxml 621,059, minidom-14 391,747 (shared family), uppsala 287,733, hard-xml 228,546 (shared family), xot 112,374 (shared family). Recent downloads include transitive dependency pulls. windows (113,676,999) and pulldown-cmark (73,457,258) rank above several leads in the search results but are not XML parsers.
+Unverified XML parser leads, by the same metric: RustyXML 4,342,774 (feedback gate unresolved), xml-no-std 1,648,161 (shared family), minidom 984,597 (shared family), rxml 961,809, instant-xml 748,214, sxd-document 647,390, libxml 621,059, minidom-14 391,747 (shared family), uppsala 287,733, hard-xml 228,546 (shared family), xot 112,374 (shared family). Recent downloads include transitive dependency pulls. windows (113,676,999) and pulldown-cmark (73,457,258) rank above several leads in the search results but are not XML parsers.
 
 ## Standard library
 
@@ -24,3 +25,5 @@ Ranks compare only verified paths. The xmlparser tokenizer does not resolve name
 The `xml-rs` 1.0.0 package is excluded as a duplicate: its release contains a re-export of the `xml` crate, which owns the EventReader parser. Its 32,180,109 recent downloads are recorded in [leads.json](leads.json) but do not become an independent parser rank.
 
 RustyXML 0.3.0 passed the two valid-control parse and source-coverage checks but remains unselected because repeated AFL++ maps varied even with parser-crate-only instrumentation; see [feedback audit](rustyxml-feedback-audit.md).
+
+xml5ever 0.40.0 uses an XML5 recovery grammar. The two valid XML 1.0 controls give exact namespace-aware structure, but this path is not a strict XML 1.0 well-formedness validator. Its pinned README says namespace support is partial and DTD parsing is outside its scope. The separate markup5ever_rcdom dependency is only the tree sink; xml5ever owns the tokenizer and tree builder.

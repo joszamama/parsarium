@@ -3,14 +3,6 @@
   "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
   "unresolved_leads": [
     {
-      "name": "xml5ever",
-      "version": "0.40.0",
-      "recent_downloads_90d": 14338073,
-      "status": "unresolved",
-      "reason": "Servo html5ever-family XML tokenizer and tree builder; the XML5 error-recovery model differs from XML 1.0 well-formedness, so eligibility and an observable namespace result need checking.",
-      "source": "https://crates.io/crates/xml5ever"
-    },
-    {
       "name": "RustyXML",
       "version": "0.3.0",
       "recent_downloads_90d": 4342774,
@@ -182,6 +174,17 @@
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/xmlparser/verification.json",
       "scope_note": "Tokenizer::from(&str) yields XML tokens. Adapter resolves namespaces, decodes references and validates nesting for two valid controls."
+    },
+    {
+      "name": "xml5ever",
+      "version": "0.40.0",
+      "recent_downloads_90d": 14338073,
+      "status": "selected",
+      "reason": "XML5 error-recovery parser with public local TendrilSink input and its own namespace-resolved tree builder; selected only for two valid XML controls after source coverage and exact stable differential AFL++ feedback. Not strict XML 1.0 validation.",
+      "source": "https://crates.io/crates/xml5ever",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/xml5ever/verification.json",
+      "source_sha256": "73290529dc9bc6c6155bf77fdd70ce0061f98ad387586aa3104cddab29206961"
     }
   ]
 }
