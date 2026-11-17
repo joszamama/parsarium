@@ -768,5 +768,120 @@
       "shared_distinct_lines": 7,
       "share": 0.006
     }
+  },
+  {
+    "name": "@noelminamino/dns-packet",
+    "version": "7.1.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 7409d7a4...), checked in the image",
+    "input_api": "decode(buf: Uint8Array | Buffer) -> packet object",
+    "documentation": "https://github.com/NoelMinamino/dns-packet/blob/main/README.md",
+    "documentation_note": "The npm tarball's README.md (7.1.1) documents dnsPacket.decode(buf); the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/@noelminamino/dns-packet/v/7.1.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-packet family (fork of @dnsquery/dns-packet)",
+    "family_note": "Shared family with dns-packet and @dnsquery/dns-packet: its README calls it a fork of @dnsquery/dns-packet that decodes all IANA RR types and adds zone-file presentation output (presentation.js), with a 6.x-to-7.x migration guide. 818 of its 2,109 distinct non-test source lines (38.8%) occur in @dnsquery/dns-packet 6.1.1 (38.7% after normalising whitespace, semicolons, declarations and quotes), and 38 (1.8%; 15.7% normalised) in dns-packet 5.6.1. It is counted as a separate package API with the family stated, as @dnsquery/dns-packet was: it is neither byte-identical to nor a predecessor of a selected path. The share is above the 29.8% recorded for @dnsquery/dns-packet, and the decoding path for the controls' record types is largely inherited. A/AAAA text comes from @leichtgewicht/ip-codec.",
+    "project": "projects/dns/javascript/noelminamino_dns_packet",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 754,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@noelminamino%2Fdns-packet",
+      "captured_at_utc": "2026-11-17T19:47:25.850596+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 8,
+    "afl_feedback": "data/javascript/dns/noelminamino-dns-packet-feedback-differential.json",
+    "source_overlap_with_dnsquery_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection",
+      "distinct_lines": 2109,
+      "dnsquery_distinct_lines": 1224,
+      "shared_distinct_lines": 818,
+      "share": 0.388,
+      "normalized_share": 0.387,
+      "dns_packet_shared_distinct_lines": 38,
+      "dns_packet_share": 0.018,
+      "dns_packet_normalized_share": 0.157
+    }
   }
 ]

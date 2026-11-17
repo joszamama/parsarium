@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T20:51:47.854641+00:00",
+  "checked_at_utc": "2026-11-17T20:52:08.583354+00:00",
   "controls": {
     "response": "controls/dns/response.bin",
     "query_differential": "controls/dns/query.bin"
@@ -562,6 +562,85 @@
         "runs_per_control": 3
       },
       "feedback_receipt": "data/javascript/dns/gibme-dns-feedback-differential.json"
+    },
+    {
+      "package": "@noelminamino/dns-packet",
+      "version": "7.1.1",
+      "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+      "command": "python3 scripts/run_project.py dns javascript noelminamino_dns_packet",
+      "feedback_command": "python3 scripts/verify_dns_feedback.py dns/javascript/noelminamino_dns_packet",
+      "receipt": "projects/dns/javascript/noelminamino_dns_packet/verification.json",
+      "control": "controls/dns/response.bin",
+      "pass": true,
+      "output": {
+        "id": 43981,
+        "qr": 1,
+        "opcode": 0,
+        "aa": 0,
+        "tc": 0,
+        "rd": 1,
+        "ra": 1,
+        "z": 0,
+        "rcode": 0,
+        "qdcount": 1,
+        "ancount": 4,
+        "nscount": 0,
+        "arcount": 0,
+        "questions": [
+          {
+            "name": "www.example.test.",
+            "type": 1,
+            "class": 1
+          }
+        ],
+        "answers": [
+          {
+            "name": "www.example.test.",
+            "type": 5,
+            "class": 1,
+            "ttl": 3600,
+            "rdata": "example.test."
+          },
+          {
+            "name": "example.test.",
+            "type": 1,
+            "class": 1,
+            "ttl": 300,
+            "rdata": "192.0.2.10"
+          },
+          {
+            "name": "example.test.",
+            "type": 28,
+            "class": 1,
+            "ttl": 600,
+            "rdata": "2001:db8::10"
+          },
+          {
+            "name": "example.test.",
+            "type": 15,
+            "class": 1,
+            "ttl": 7200,
+            "rdata": "10 mail.example.test."
+          }
+        ],
+        "authority": [],
+        "additional": []
+      },
+      "differential_control": "controls/dns/query.bin",
+      "differential_output_matches": true,
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 1181,
+      "format_specific_source_lines_covered": 743,
+      "afl_feedback": {
+        "control_parser_features": 68,
+        "variant_parser_features": 49,
+        "parser_feature_difference": 19,
+        "control_afl_tuples": 88,
+        "variant_afl_tuples": 69,
+        "afl_tuple_difference": 19,
+        "runs_per_control": 3
+      },
+      "feedback_receipt": "data/javascript/dns/noelminamino-dns-packet-feedback-differential.json"
     }
   ]
 }

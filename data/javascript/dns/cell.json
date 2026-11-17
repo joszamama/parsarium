@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "dns",
-  "status": "pilot_seven_verified_search_bounded",
+  "status": "pilot_eight_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 7,
+  "verified_third_party_count": 8,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -21,12 +21,12 @@
   },
   "search_hits_recorded": 400,
   "unique_search_hits": 271,
-  "unresolved_documentation_leads": 14,
+  "unresolved_documentation_leads": 13,
   "leads_recorded": 22,
   "leads_by_status": {
-    "resolved_verified_selected": 7,
+    "resolved_verified_selected": 8,
     "excluded": 1,
-    "unresolved": 14
+    "unresolved": 13
   },
   "ranking_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
   "uncertainty": "Pilot cell: two JavaScript paths verified, dns-packet and its fork @dnsquery/dns-packet (shared family, kept as a rewrite: 4.3% of its distinct non-test source lines are shared, 29.8% after normalisation), ranked by npm 30-day downloads. dns2, @leichtgewicht/dns-packet (another fork), native-dns-packet and dns-js remain leads; multicast-dns is excluded as an mDNS network API over dns-packet. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
@@ -41,5 +41,5 @@
   },
   "third_party_evidence": "data/javascript/dns/parsers.json",
   "third_party_control_results": "data/javascript/dns/verification.json",
-  "selection": "Seven control-verified JavaScript DNS path(s), ranked by npm downloads, 2026-10-17:2026-11-15 (30 days): dns-packet 5.6.1 (81,519,355), @dnsquery/dns-packet 6.1.1 (785,358), dns2 3.1.1 (304,498), native-dns-packet 0.1.1 (72,104), hbo-dnsd 0.9.8 (34,937), dns-js 0.3.1 (13,675), @gibme/dns 22.0.0 (1,965)."
+  "selection": "Eight control-verified JavaScript DNS path(s), ranked by npm downloads, 2026-10-17:2026-11-15 (30 days): dns-packet 5.6.1 (81,519,355), @dnsquery/dns-packet 6.1.1 (785,358), dns2 3.1.1 (304,498), native-dns-packet 0.1.1 (72,104), hbo-dnsd 0.9.8 (34,937), dns-js 0.3.1 (13,675), @gibme/dns 22.0.0 (1,965), @noelminamino/dns-packet 7.1.1 (754)."
 }
