@@ -1,0 +1,90 @@
+{
+  "kind": "third_party",
+  "api": "Utopia\\DNS\\Message::decode(string $packet): Utopia\\DNS\\Message",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:34:50.618917+00:00",
+  "manifest": "projects/dns/php/utopia_php_dns/manifest.json",
+  "image_id": "sha256:601e9485d3a48a29ce36b0a3eefef0b823a2d129e70a59b865a7032297592a9b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "946fcc63862df4f04c3aa3eb9c25ef4a9bac84968611a0c179dd007166f8f536",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "0d4792247f48d2acf21cdbb3c1bd4b827ec888ff72df9f027d41c5c8830cf6fd",
+    "composer.json": "93414c38f039932c4b9152744560f4444ae48160c16b30789906a323571436c3",
+    "composer.lock": "5fd311acdf421dab3f55804471700b5dc9b8a80b88318f09a922d859e13980b8",
+    "fuzz-target.php": "c26ddb6d3d110cdb321f0a1fec77a94a14eff86c2cc6ae351beec472e007bc8b",
+    "harness.php": "fda687570d810f094a200fc9a0cd1a3d42e83c8831dc6cecc3801c390180a72f",
+    "manifest.json": "564d7ee6af151ad28bf35501d5d520740105726e52caaef401cb715cb1ddb878",
+    "replay.php": "604f97c7fbff44f5e19be0bd953e0ffdf32e6b4e426b5a6c2d2b2619e328c632",
+    "run-control.php": "7dd443fd51184c926a6c81674d6b4d0fd1fb145ce5be30da2081571ff9c9d948",
+    "source-lock.json": "24296e63a1f283f19f395c6b50ac0e905114d4c620f92455b759c780e039f1bd",
+    "target.json": "b737b2d5165dbd2123a0fe858e177c9c3029eb5b6106f80f5beb359f83c332fe"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 5,
+  "parser_source_lines_covered": 181,
+  "format_specific_source_lines_covered": 31,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/php/utopia_php_dns/target/coverage/coverage.json",
+  "pass": true
+}

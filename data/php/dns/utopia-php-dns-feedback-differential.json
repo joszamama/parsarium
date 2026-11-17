@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-11-17T20:36:25.422996+00:00",
+  "project": "dns/php/utopia_php_dns",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "/work/vendor/utopia-php/dns/",
+  "base_image_id": "sha256:601e9485d3a48a29ce36b0a3eefef0b823a2d129e70a59b865a7032297592a9b",
+  "overlay_image_id": "sha256:52f546fd0322ad8227b1c0e7c1a23934b93d664400457eacae01ef37a1ca6e8e",
+  "overlay_receipt_sha256": "cf1ce70d7e34075fd14713f2bb3f5692cb3df4cacd76a182856aafd26af62664",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 181,
+  "variant_parser_features": 113,
+  "parser_feature_difference": 68,
+  "control_afl_tuples": 201,
+  "variant_afl_tuples": 133,
+  "afl_tuple_difference": 68,
+  "control_features_by_file": {
+    "/work/vendor/utopia-php/dns/src/Message.php": 31,
+    "/work/vendor/utopia-php/dns/src/Message/Domain.php": 35,
+    "/work/vendor/utopia-php/dns/src/Message/Header.php": 42,
+    "/work/vendor/utopia-php/dns/src/Message/Question.php": 17,
+    "/work/vendor/utopia-php/dns/src/Message/Record.php": 56
+  },
+  "variant_features_by_file": {
+    "/work/vendor/utopia-php/dns/src/Message.php": 30,
+    "/work/vendor/utopia-php/dns/src/Message/Domain.php": 24,
+    "/work/vendor/utopia-php/dns/src/Message/Header.php": 42,
+    "/work/vendor/utopia-php/dns/src/Message/Question.php": 17
+  },
+  "mutation_campaign_run": false
+}

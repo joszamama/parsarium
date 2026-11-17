@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "dns",
-  "status": "pilot_three_verified_search_bounded",
+  "status": "pilot_four_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -19,15 +19,15 @@
   },
   "search_hits_recorded": 116,
   "unique_search_hits": 111,
-  "unresolved_documentation_leads": 3,
+  "unresolved_documentation_leads": 2,
   "leads_recorded": 25,
   "leads_by_status": {
-    "resolved_verified_selected": 3,
+    "resolved_verified_selected": 4,
     "excluded": 19,
-    "unresolved": 3
+    "unresolved": 2
   },
   "ranking_metric": "Packagist total downloads",
-  "uncertainty": "Pilot cell: three PHP paths verified, react/dns, daverandom/libdns and pear/net_dns2, ranked by Packagist total downloads. daverandom/libdns's php-fuzzer blocker (the interceptor rewrite breaks one class constant) is resolved by loading that single class file unmodified in the fuzz entry only; amphp/dns, spatie/dns and remotelyliving/php-dns are excluded as resolvers or wrappers. Round-2 checks: purplepixie/phpdns parses only inside its socket client; mikepultz/netdns2 is the same repository as pear/net_dns2 (identical v2.0.7 commit) and is not counted twice; the other new Packagist hits are resolvers, format adapters over LibDNS, Net_DNS2 1.x forks or unreleased packages. utopia-php/dns, jdwx/dns-query and yswery/dns remain leads. react/dns and daverandom/libdns drop the Z, AD and CD bits (z reported as 0). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: four PHP paths verified, react/dns, daverandom/libdns, pear/net_dns2 and utopia-php/dns, ranked by Packagist total downloads. daverandom/libdns's php-fuzzer blocker (the interceptor rewrite breaks one class constant) is resolved by loading that single class file unmodified in the fuzz entry only; amphp/dns, spatie/dns and remotelyliving/php-dns are excluded as resolvers or wrappers. Round-2 checks: purplepixie/phpdns parses only inside its socket client; mikepultz/netdns2 is the same repository as pear/net_dns2 (identical v2.0.7 commit) and is not counted twice; the other new Packagist hits are resolvers, format adapters over LibDNS, Net_DNS2 1.x forks or unreleased packages. jdwx/dns-query and yswery/dns remain leads. react/dns, daverandom/libdns and utopia-php/dns drop the Z, AD and CD bits (z reported as 0). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/php/dns/registry-snapshot.json",
   "unresolved_leads": "data/php/dns/leads.json",
   "runtime_evidence": "data/php/dns/standard.json",
@@ -39,5 +39,5 @@
   },
   "third_party_evidence": "data/php/dns/parsers.json",
   "third_party_control_results": "data/php/dns/verification.json",
-  "selection": "Three control-verified PHP DNS path(s), ranked by Packagist total downloads: react/dns v1.14.0 (179,404,103), daverandom/libdns v2.1.0 (66,619,313), pear/net_dns2 v2.0.7 (3,392,919)."
+  "selection": "Four control-verified PHP DNS path(s), ranked by Packagist total downloads: react/dns v1.14.0 (179,404,103), daverandom/libdns v2.1.0 (66,619,313), pear/net_dns2 v2.0.7 (3,392,919), utopia-php/dns 3.1.0 (196,676)."
 }
