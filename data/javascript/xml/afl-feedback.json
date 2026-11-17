@@ -1,11 +1,67 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T05:06:16.688049+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T07:46:56.677150+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_default_namespace_variant",
   "standard_feedback": "none: Node.js core ships no XML parser API",
   "results": [
+    {
+      "project": "xml/javascript/fast_xml_parser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "386c1dd3a1d382b0ea746c98d8a1d399254f0fdc0da9f125f93a6ff28c934d21",
+      "base_image_id": "sha256:b48c9f79ce1191b2bbabb4308096a1005b49785eb39e8c3d619f9e332fd61374",
+      "overlay_image_id": "sha256:b3face974cefab832895c996ecc1df3efe3c3543b7087e4a49bfe4478c816f8a",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 163,
+      "control_afl_tuples": 183,
+      "differential_parser_features": 174,
+      "differential_afl_tuples": 194,
+      "parser_feature_difference": 47,
+      "afl_tuple_difference": 47,
+      "control_only_features_by_file": {
+        "src/validator.js": 12,
+        "src/xmlparser/OrderedObjParser.js": 6
+      },
+      "differential_only_features_by_file": {
+        "src/validator.js": 17,
+        "src/xmlparser/OrderedObjParser.js": 12
+      }
+    },
     {
       "project": "xml/javascript/sax",
       "pass": true,

@@ -97,5 +97,54 @@
     },
     "project": "projects/xml/javascript/sax",
     "license_evidence": "https://github.com/isaacs/sax-js/blob/v1.6.1/LICENSE.md"
+  },
+  {
+    "name": "fast-xml-parser",
+    "version": "5.12.1",
+    "license": "MIT",
+    "npm_integrity": "sha512-wR8dO/fx+z8C5exuem1e7BKOWvjsuzvjS/tvA/Xu3Z1zQqJGcXrPzXbcAiaMgp2KjreEROcTkmnnisrcmJ2hYQ==",
+    "tarball_sha256": "b5e1b988bf12a23838b41ab6cae3ef2993f6f8c3482ebac133ab55fa39837016",
+    "input_api": "new XMLParser({preserveOrder: true, ignoreAttributes: false, commentPropName: '#comment', trimValues: false, parseTagValue: false, htmlEntities: true}).parse(Buffer, true) on local bytes; the package decodes the Buffer with Buffer#toString and runs its own XMLValidator first. fast-xml-parser does no namespace processing, so the adapter resolves element and attribute prefixes from in-scope xmlns attributes and rejects unbound prefixes and duplicate expanded attributes",
+    "documentation": "https://github.com/NaturalIntelligence/fast-xml-parser/blob/v5.12.1/docs/v4%2C%20v5/2.XMLparseOptions.md",
+    "source": "https://github.com/NaturalIntelligence/fast-xml-parser/tree/v5.12.1",
+    "scope": "One XML 1.0 document from local bytes as an order-preserving JS object tree with qualified names; namespace URIs are resolved by the adapter, not by the package",
+    "family": "fast-xml-parser own string scanner (OrderedObjParser + XMLValidator)",
+    "family_note": "src/xmlparser/OrderedObjParser.js scans the decoded string for tags, attributes (one regex per tag), CDATA, comments, PIs and DOCTYPE, and src/validator.js is a separate well-formedness scan run by parse(data, true). Entity and numeric character reference decoding is delegated to @nodable/entities 3.1.0 (same author group); numeric references are decoded only with the documented htmlEntities option, which also admits common HTML named entities. It does not wrap expat, libxml2, sax, saxes, or a DOMParser. The package has no namespace URI resolution (only removeNSPrefix), so the expanded names in the result come from the adapter's Namespaces in XML 1.0 prefix resolution over the parser's qualified names and xmlns attributes, as in the pugixml path.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 426764010,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/fast-xml-parser",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/fast_xml_parser"
   }
 ]

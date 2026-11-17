@@ -23,14 +23,15 @@
   },
   {
     "name": "fast-xml-parser",
-    "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_parser",
     "version_seen": "5.12.1",
     "license": "MIT",
     "npm_downloads_30d": 426764010,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/fast-xml-parser",
-    "reason": "Own string-scanning XMLParser.parse(string|Buffer) producing JS objects. It has no namespace URI resolution (only removeNSPrefix), so it cannot report the expanded names the controls require. Not run.",
-    "source": "https://www.npmjs.com/package/fast-xml-parser"
+    "reason": "Own string scanner (OrderedObjParser) and validator behind XMLParser.parse(Buffer, true); no namespace URI resolution, so the adapter resolves prefixes from in-scope xmlns attributes. Both valid namespace-aware controls match the expat oracle, with pinned npm integrity, V8 package-source coverage, and input-dependent AFL++ feedback verified.",
+    "source": "https://www.npmjs.com/package/fast-xml-parser",
+    "verified_evidence": "data/javascript/xml/verification.json"
   },
   {
     "name": "@xmldom/xmldom",

@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "xml",
-  "status": "pilot_two_selected_search_bounded",
+  "status": "pilot_three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "xml parser",
@@ -17,8 +17,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 600,
   "unique_search_hits": 382,
-  "unresolved_documentation_leads": 17,
-  "uncertainty": "Pilot cell: saxes 6.0.0 and sax 1.6.1 are control-verified, source-covered and have input-dependent AFL++ feedback. Their comparable 30-day npm downloads are 601,886,067 and 490,225,823; neither package path is claimed to represent a separate use of every transitive consumer. Both accept namespace-aware XML SAX input, and saxes is a rewritten fork of sax-js, so historical lineage is recorded. Other high-download leads remain unverified: jsdom and xml2js delegate to these families, while fast-xml-parser lacks namespace URI resolution for this control. Search was bounded to the recorded queries and snapshot; these two controls do not establish complete XML 1.0 compliance.",
+  "unresolved_documentation_leads": 16,
+  "uncertainty": "Pilot cell: saxes 6.0.0, sax 1.6.1 and fast-xml-parser 5.12.1 are control-verified, source-covered and have input-dependent AFL++ feedback. Their comparable 30-day npm downloads are 601,886,067, 490,225,823 and 426,764,010; no package path is claimed to represent a separate use of every transitive consumer. saxes and sax accept namespace-aware XML SAX input, and saxes is a rewritten fork of sax-js, so historical lineage is recorded. fast-xml-parser has its own string scanner and validator but no namespace URI resolution; its expanded names come from the adapter's prefix resolution over the parser's qualified names and xmlns attributes, and numeric character references decode only with its htmlEntities option. Other high-download leads remain unverified: jsdom and xml2js delegate to the saxes and sax families. Search was bounded to the recorded queries and snapshot; these two controls do not establish complete XML 1.0 compliance.",
   "third_party_evidence": "data/javascript/xml/parsers.json",
   "third_party_control_results": "data/javascript/xml/verification.json",
   "runtime_evidence": "data/javascript/xml/standard.json",
