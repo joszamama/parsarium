@@ -21,15 +21,16 @@
   },
   "search_hits_recorded": 400,
   "unique_search_hits": 320,
-  "unresolved_documentation_leads": 4,
-  "leads_recorded": 13,
+  "unresolved_documentation_leads": 6,
+  "leads_recorded": 16,
   "leads_by_status": {
     "resolved_verified_selected": 7,
-    "excluded": 2,
-    "unresolved": 4
+    "excluded": 3,
+    "unresolved_control_failure": 5,
+    "unresolved": 1
   },
   "ranking_metric": "crates.io recent_downloads (90 days)",
-  "uncertainty": "Pilot cell: seven Rust paths verified (hickory-proto, simple-dns, domain, dns-parser, dns-message-parser, rustdns, rsdns), ranked by crates.io recent_downloads (90 days). Remaining leads: dns-protocol (unresolved), packet-dissector-dns (unresolved), dns_parse (unresolved), dnsparse (unresolved). Excluded after checking: trust-dns-proto, mdns-sd (reasons in leads.json). Metric values are crates.io recent_downloads (90 days) from the snapshot; round 1 had recorded all-time downloads under that label, corrected in round 2. trust-dns-proto 0.23.2 (hickory-proto's previous crate name) passed the full gate but is excluded as a predecessor sharing most of the decoder code; its records are archived in trust-dns-proto-demoted.json. Rust AFL++ overlays are scoped to the parser crates (afl_instrumented_crates) because the summary encoder's random hashing made whole-binary maps unstable. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: seven Rust paths verified (hickory-proto, simple-dns, domain, dns-parser, dns-message-parser, rustdns, rsdns), ranked by crates.io recent_downloads (90 days). Remaining leads: dnssector (unresolved_control_failure), microdns (unresolved_control_failure), dns-protocol (unresolved_control_failure), packet-dissector-dns (unresolved), dns_parse (unresolved_control_failure), dnsparse (unresolved_control_failure). Excluded after checking: trust-dns-proto, mdns-sd, rama-dns (reasons in leads.json). Metric values are crates.io recent_downloads (90 days) from the snapshot; round 1 had recorded all-time downloads under that label, corrected in round 2. trust-dns-proto 0.23.2 (hickory-proto's previous crate name) passed the full gate but is excluded as a predecessor sharing most of the decoder code; its records are archived in trust-dns-proto-demoted.json. Rust AFL++ overlays are scoped to the parser crates (afl_instrumented_crates) because the summary encoder's random hashing made whole-binary maps unstable. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/rust/dns/registry-snapshot.json",
   "unresolved_leads": "data/rust/dns/leads.json",
   "runtime_evidence": "data/rust/dns/standard.json",

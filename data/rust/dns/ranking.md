@@ -34,12 +34,22 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 
 | Order | Lead | Metric | Status | Input API lead | Family |
 | ---: | --- | ---: | --- | --- | --- |
-| 1 | dns-protocol | 2,785 | unresolved |  | dns-protocol |
-| 2 | packet-dissector-dns | 1,980 | unresolved |  |  |
-| 3 | dns_parse | 1,056 | unresolved |  |  |
-| 4 | dnsparse | 11 | unresolved |  | dnsparse |
+| 1 | dnssector | 15,065 | unresolved_control_failure | `DNSSector::new(Vec<u8>)?.parse() -> ParsedPacket; RR iterators` | dnssector |
+| 2 | microdns | 6,404 | unresolved_control_failure | `parse_dns_header / skip_question / parse_answer` | microdns |
+| 3 | dns-protocol | 2,785 | unresolved_control_failure | `Message::read(&[u8], &mut [Question], &mut [ResourceRecord], ...)` | dns-protocol |
+| 4 | packet-dissector-dns | 1,980 | unresolved | `DnsDissector.dissect(&[u8], &mut DissectBuffer, 0) and the field tree` | packet-dissector DNS dissector |
+| 5 | dns_parse | 1,056 | unresolved_control_failure | `dns_parse::parse(Bytes) -> Vec<idns::Answer>` | dns_parse (idns Answer) |
+| 6 | dnsparse | 11 | unresolved_control_failure | `Message::parse(&mut [u8]) -> questions(), answers()` | dnsparse |
+
+- **dnssector**: DNSSector::parse validates the whole message (including compressed names inside CNAME/MX RDATA) and the RR iterators return owner name, type, class, TTL and A/AAAA addresses, but other RDATA only as raw bytes (RawRRData::Data). The crate has no public API returning the CNAME target, MX preference or MX exchange as values (Compress::copy_uncompressed_name yields wire-format labels only), so the control's CNAME and MX answers would have to be decoded by the harness.
+- **microdns**: Minimal resolver library: its public helpers parse the header and answer records, but the question section is only skipped (skip_question) and its name, type and class are not returned, and authority/additional handling is left to callers. The control's question cannot be reported from the library.
+- **dns-protocol**: Message::read decodes the header, questions and record headers, but ResourceRecord::data() returns RDATA as raw bytes and the crate exports no decoder for (compressed) names inside RDATA, so the control's CNAME and MX targets would have to be decoded by the harness.
+- **packet-dissector-dns**: Not attempted in round 2. The crate is a sub-crate of packet-dissector (its README says it is used through the main crate's dns feature) and reports a generic DissectBuffer field tree whose name fields are formatted through FormatFn callbacks (write_dns_name); a harness would need to walk that tree. Metric 1,980 is below every selected crate.
+- **dns_parse**: parse(Bytes) returns only the answer records (it skips the question section and returns no header, question, authority or additional data), so most of the control summary cannot come from the library.
+- **dnsparse**: Message exposes the header, questions and answers, but Answer::rdata() is raw bytes with no decoder for names inside RDATA, and there is no accessor for the authority or additional sections.
 
 ## Checked, excluded or recorded separately
 
 - **trust-dns-proto** (excluded): Predecessor of the already selected hickory-proto: trust-dns-proto 0.23.2 is the last release of the same project before the rename to hickory-proto (0.24). It passed both DNS controls and the full gate, but the decoder code is largely the same: 72% of trust-dns-proto's distinct non-test lines in serialize/binary (BinDecoder), 83% in rr/domain (name decoding) and 53% in op (Message/Header) are identical in hickory-proto 0.26.3 (44% over the whole crate, which also carries resolver/runtime code). Shared family with a stronger selected path; not counted. Evidence: data/rust/dns/trust-dns-proto-demoted.json.
 - **mdns-sd** (excluded): mDNS service-discovery daemon; its message parser is not a documented public bytes API.
+- **rama-dns** (excluded): DNS support for the rama framework built on hickory-resolver (Cargo dependency); it exposes resolver services, not its own parser for caller-supplied message bytes.

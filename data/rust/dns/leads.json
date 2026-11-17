@@ -90,7 +90,7 @@
     "input_api_lead": "dns_message_parser::Dns::decode(Bytes)",
     "family": "dns-message-parser",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 6,
+    "lead_adoption_order": 7,
     "verification": "projects/dns/rust/dns_message_parser/verification.json",
     "reason": "Pinned 0.9.0 passes both DNS controls; see parsers.json and data/rust/dns/dns-message-parser-feedback-differential.json."
   },
@@ -104,31 +104,37 @@
     "input_api_lead": "rustdns::Message::from_slice(&[u8])",
     "family": "rustdns",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 7,
+    "lead_adoption_order": 9,
     "verification": "projects/dns/rust/rustdns/verification.json",
     "reason": "Pinned 0.7.0 passes both DNS controls; see parsers.json and data/rust/dns/rustdns-feedback-differential.json."
   },
   {
     "name": "dns-protocol",
-    "status": "unresolved",
+    "status": "unresolved_control_failure",
     "primary_metric": "crates.io recent_downloads (90 days)",
     "primary_metric_value": 2785,
     "found_by": "registry search hit",
     "documentation": "https://docs.rs/dns-protocol",
     "family": "dns-protocol",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 8
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 10,
+    "version_seen": "0.1.2",
+    "input_api_lead": "Message::read(&[u8], &mut [Question], &mut [ResourceRecord], ...)",
+    "reason": "Message::read decodes the header, questions and record headers, but ResourceRecord::data() returns RDATA as raw bytes and the crate exports no decoder for (compressed) names inside RDATA, so the control's CNAME and MX targets would have to be decoded by the harness."
   },
   {
     "name": "dnsparse",
-    "status": "unresolved",
+    "status": "unresolved_control_failure",
     "primary_metric": "crates.io recent_downloads (90 days)",
     "primary_metric_value": 11,
     "found_by": "targeted documentation lead",
     "documentation": "https://docs.rs/dnsparse",
     "family": "dnsparse",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 11
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 14,
+    "version_seen": "0.3.0",
+    "input_api_lead": "Message::parse(&mut [u8]) -> questions(), answers()",
+    "reason": "Message exposes the header, questions and answers, but Answer::rdata() is raw bytes with no decoder for names inside RDATA, and there is no accessor for the authority or additional sections."
   },
   {
     "name": "packet-dissector-dns",
@@ -137,18 +143,26 @@
     "primary_metric_value": 1980,
     "found_by": "registry search hit",
     "documentation": "https://docs.rs/packet-dissector-dns",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 9
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 12,
+    "version_seen": "0.6.3",
+    "family": "packet-dissector DNS dissector",
+    "input_api_lead": "DnsDissector.dissect(&[u8], &mut DissectBuffer, 0) and the field tree",
+    "reason": "Not attempted in round 2. The crate is a sub-crate of packet-dissector (its README says it is used through the main crate's dns feature) and reports a generic DissectBuffer field tree whose name fields are formatted through FormatFn callbacks (write_dns_name); a harness would need to walk that tree. Metric 1,980 is below every selected crate."
   },
   {
     "name": "dns_parse",
-    "status": "unresolved",
+    "status": "unresolved_control_failure",
     "primary_metric": "crates.io recent_downloads (90 days)",
     "primary_metric_value": 1056,
     "found_by": "registry search hit",
     "documentation": "https://docs.rs/dns_parse",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 10
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 13,
+    "version_seen": "0.1.6",
+    "family": "dns_parse (idns Answer)",
+    "input_api_lead": "dns_parse::parse(Bytes) -> Vec<idns::Answer>",
+    "reason": "parse(Bytes) returns only the answer records (it skips the question section and returns no header, question, authority or additional data), so most of the control summary cannot come from the library."
   },
   {
     "name": "rsdns",
@@ -161,6 +175,48 @@
     "family": "rsdns",
     "api_lead_checked_against_pinned_release": true,
     "verification": "projects/dns/rust/rsdns/verification.json",
-    "reason": "Pinned 0.23.0 passes both DNS controls; see parsers.json and data/rust/dns/rsdns-feedback-differential.json."
+    "reason": "Pinned 0.23.0 passes both DNS controls; see parsers.json and data/rust/dns/rsdns-feedback-differential.json.",
+    "lead_adoption_order": 11
+  },
+  {
+    "name": "rama-dns",
+    "status": "excluded",
+    "primary_metric": "crates.io recent_downloads (90 days)",
+    "primary_metric_value": 2625265,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://docs.rs/rama-dns/0.4.0",
+    "input_api_lead": "",
+    "family": "Hickory DNS (resolver)",
+    "version_seen": "0.4.0",
+    "reason": "DNS support for the rama framework built on hickory-resolver (Cargo dependency); it exposes resolver services, not its own parser for caller-supplied message bytes.",
+    "api_lead_checked_against_pinned_release": true
+  },
+  {
+    "name": "dnssector",
+    "status": "unresolved_control_failure",
+    "primary_metric": "crates.io recent_downloads (90 days)",
+    "primary_metric_value": 15065,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://docs.rs/dnssector/0.2.15",
+    "input_api_lead": "DNSSector::new(Vec<u8>)?.parse() -> ParsedPacket; RR iterators",
+    "family": "dnssector",
+    "version_seen": "0.2.15",
+    "reason": "DNSSector::parse validates the whole message (including compressed names inside CNAME/MX RDATA) and the RR iterators return owner name, type, class, TTL and A/AAAA addresses, but other RDATA only as raw bytes (RawRRData::Data). The crate has no public API returning the CNAME target, MX preference or MX exchange as values (Compress::copy_uncompressed_name yields wire-format labels only), so the control's CNAME and MX answers would have to be decoded by the harness.",
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 6
+  },
+  {
+    "name": "microdns",
+    "status": "unresolved_control_failure",
+    "primary_metric": "crates.io recent_downloads (90 days)",
+    "primary_metric_value": 6404,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://docs.rs/microdns/0.1.0",
+    "input_api_lead": "parse_dns_header / skip_question / parse_answer",
+    "family": "microdns",
+    "version_seen": "0.1.0",
+    "reason": "Minimal resolver library: its public helpers parse the header and answer records, but the question section is only skipped (skip_question) and its name, type and class are not returned, and authority/additional handling is left to callers. The control's question cannot be reported from the library.",
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 8
   }
 ]
