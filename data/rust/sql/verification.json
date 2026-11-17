@@ -95,8 +95,100 @@
       "parser_feature_difference": null,
       "project_receipt": "projects/sql/rust/sqlparser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/rust/sqlparser/differential.json"
+    },
+    {
+      "package": "sqlite3-parser",
+      "version": "0.17.0",
+      "pass": true,
+      "input_api": "lexer::sql::Parser::new(&Bump, local bytes) and FallibleIterator::next -> Option<Cmd>",
+      "dialect": "SQLite",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 420,
+      "afl_tuple_difference": 817,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/sqlite3_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/sqlite3_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T19:01:15.490258+00:00"
+  "checked_at_utc": "2026-11-17T19:55:11.705407+00:00"
 }

@@ -106,5 +106,117 @@
         }
       ]
     }
+  },
+  {
+    "name": "sqlite3-parser",
+    "version": "0.17.0",
+    "license": "Apache-2.0/MIT",
+    "license_evidence": "Cargo.toml license = Apache-2.0/MIT in the pinned crate; the shipped LICENSE file (SHA-256 88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd) is a public-domain dedication",
+    "input_api": "lexer::sql::Parser::new(&Bump, local bytes) and FallibleIterator::next -> Option<Cmd>",
+    "documentation": "https://docs.rs/sqlite3-parser/0.17.0/sqlite3_parser/lexer/sql/struct.Parser.html",
+    "source": "https://static.crates.io/crates/sqlite3-parser/sqlite3-parser-0.17.0.crate",
+    "source_sha256": "fbb44bfd84bfd1bde5ee215dd0b27d10c3c601a1b7cf03a91c7d6f607f2a10f7",
+    "dependencies": [
+      "bitflags",
+      "bumpalo (AST arena)",
+      "fallible-iterator",
+      "indexmap",
+      "log",
+      "memchr",
+      "cc (build: bundled rlemon generator)"
+    ],
+    "dialect": "SQLite",
+    "scope": "One SQL statement from local bytes with the SQLite grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. String literals are kept as quoted tokens in the AST and unquoted by the adapter. Other SQLite syntax is untested.",
+    "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+    "family_note": "The build script compiles the bundled rlemon and generates parse.rs (Lemon LALR tables and the parse.y reduce actions written in Rust) into OUT_DIR; src/lexer/sql/mod.rs drives the hand-written tokenizer and the generated parser and yields Cmd values. The adapter reads Stmt::Select (columns, FromClause and its JoinedSelectTable list, where_clause, group_by, order_by) and Stmt::Insert (table name, column list, VALUES rows) and walks Expr for function names and Literal values. Same grammar as the SQLite C engine, which the oracle uses only through sqlite3_prepare; that engine exposes no syntax tree. libsql-sqlite3-parser, turso_sqlite3_parser, limbo_sqlite3_parser and oxisqlite-sqlite3-parser are forks of this crate.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 1003820,
+      "source": "https://crates.io/api/v1/crates/sqlite3-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Counts include downloads pulled in by dependent crates; the libsql and turso forks are counted separately."
+    },
+    "project": "projects/sql/rust/sqlite3_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

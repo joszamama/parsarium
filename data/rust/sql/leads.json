@@ -57,13 +57,14 @@
     },
     {
       "name": "sqlite3-parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 1003820,
       "metric_error": null,
       "latest_release_observed": "0.17.0",
-      "family": "SQLite grammar (Lemon, Rust port)",
-      "documented_api_lead": "Parser::next",
-      "reason": "Lemon-generated SQLite grammar ported to Rust; Parser yields ast::Cmd/Stmt. Not run in this round; ranks below pg_query."
+      "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "documented_api_lead": "lexer::sql::Parser (FallibleIterator::next)",
+      "reason": "Parser::new(&Bump, bytes) yields Cmd/Stmt AST values from the generated Lemon parser; both valid controls equal the oracle (string literals unquoted by the adapter). Verified with Rust source coverage of the crate and its generated parse.rs and whole-binary cargo-afl feedback.",
+      "selected_release": "0.17.0"
     },
     {
       "name": "polyglot-sql",
