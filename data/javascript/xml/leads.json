@@ -61,13 +61,14 @@
   {
     "name": "xmlbuilder2",
     "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "lead_kind": "xml_import_fails_namespace_control",
     "version_seen": "4.0.3",
     "license": "MIT",
     "npm_downloads_30d": 63770034,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xmlbuilder2",
-    "reason": "Builder/serializer whose create(string) parsing goes through @oozcitak/dom's XML string lexer; the parser is a secondary feature. Not run.",
-    "source": "https://www.npmjs.com/package/xmlbuilder2"
+    "reason": "Documented create(xmlString) genuinely parses XML through xmlbuilder2 XMLReader and @oozcitak/dom XMLStringLexer, but the pinned 4.0.3/2.0.2 native DOM fails the primary namespace-aware control: c:catalog is assigned the default urn:parsarium:item URI instead of urn:parsarium:catalog, and c:lang on the first item has null URI instead of urn:parsarium:catalog. The second valid control parses, but the first fails the XML cell requirement for parser-observed expanded names. A separate adapter can reconstruct names from retained QNames/xmlns declarations, but that would mask the native result, so the path is not selected or ranked. No malformed inputs or fuzz campaign were run.",
+    "source": "https://github.com/oozcitak/xmlbuilder2/blob/5ca638bffd0c61a4de7045140e03e63aa8924cb5/README.md",
+    "negative_evidence": "data/javascript/xml/xmlbuilder2-negative.json"
   },
   {
     "name": "xml-js",
