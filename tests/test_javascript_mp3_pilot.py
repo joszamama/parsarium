@@ -25,7 +25,7 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
         leads = read(BASE / "leads.json")
         cell = read(BASE / "cell.json")
         downloads = read(BASE / "registry-snapshot.json")["downloads"]
-        self.assertEqual([parser["name"] for parser in parsers], ["mediabunny", "codec-parser"])
+        self.assertEqual([parser["name"] for parser in parsers], ["mediabunny", "music-metadata", "codec-parser"])
         values = [parser["metric"]["value"] for parser in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
         for parser in parsers:
@@ -75,13 +75,44 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
             self.assertEqual(output["total_samples"], walked["frames"] * walked["samples_per_frame"])
             self.assertEqual(output["header_variants"], 1)
 
+    def test_music_metadata_outputs_match_header_oracle(self):
+        manifest = read(ROOT / "projects/mp3/javascript/music_metadata/manifest.json")
+        for control, output in ((manifest["control"], manifest["expected_output"]),
+                                (manifest["differential_control"], manifest["differential_expected_output"])):
+            data = (ROOT / control).read_bytes()
+            walked = WALKER.walk(data)
+            samples = walked["frames"] * walked["samples_per_frame"]
+            version = {3: 1, 2: 2, 0: 2.5}[(data[1] >> 3) & 3]
+            layer = 4 - ((data[1] >> 1) & 3)
+            self.assertEqual(output["codec"], f"MPEG {version} Layer {layer}")
+            self.assertEqual((output["mpeg_version"], output["layer"]), (version, layer))
+            for key in ("sample_rate", "channels", "bitrate"):
+                self.assertEqual(output[key], walked[key], key)
+            self.assertEqual(output["number_of_samples"], samples)
+            self.assertEqual(output["duration"], samples / walked["sample_rate"])
+            # Untagged controls: the result must come from MPEG frames, not tag metadata.
+            self.assertEqual((output["tag_types"], output["warnings"]), ([], 0))
+
+    def test_music_metadata_pins_runtime_dependencies(self):
+        project = ROOT / "projects/mp3/javascript/music_metadata"
+        lock = read(project / "source-lock.json")["music-metadata"]
+        packages = read(project / "package-lock.json")["packages"]
+        self.assertEqual(packages["node_modules/music-metadata"]["integrity"], lock["npm_integrity"])
+        self.assertEqual(set(packages["node_modules/music-metadata"]["dependencies"]) - set(lock["runtime_dependencies"]), set())
+        for name, pinned in lock["runtime_dependencies"].items():
+            entry = packages[f"node_modules/{name}"]
+            self.assertEqual((entry["version"], entry["integrity"], entry["license"]),
+                             (pinned["version"], pinned["npm_integrity"], pinned["license"]), name)
+            self.assertEqual(set(entry.get("dependencies", {})) - set(lock["runtime_dependencies"]), set(), name)
+
     def test_feedback_is_stable_and_differential(self):
         # The cell aggregate is refreshed by the integrator. The new path's
         # scoped receipt is testable before that aggregate is regenerated.
         report = read(BASE / "afl-feedback.json")
-        scoped = read(BASE / "codec_parser-feedback-differential.json")
-        results = {item["project"]: item for item in [*report["results"], scoped]}
-        self.assertEqual(set(results), {"mp3/javascript/mediabunny", "mp3/javascript/codec_parser"})
+        scoped = [read(BASE / f"{slug}-feedback-differential.json") for slug in ("codec_parser", "music_metadata")]
+        results = {item["project"]: item for item in [*report["results"], *scoped]}
+        self.assertEqual(set(results), {"mp3/javascript/mediabunny", "mp3/javascript/music_metadata",
+                                        "mp3/javascript/codec_parser"})
         for result in results.values():
             slug = result["project"].rsplit("/", 1)[-1]
             manifest = read(ROOT / f"projects/mp3/javascript/{slug}/manifest.json")
@@ -92,7 +123,15 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
             self.assertGreater(result["parser_feature_difference"], 0)
             self.assertGreater(result["afl_tuple_difference"], 0)
             self.assertEqual(result["differential_output"], manifest["differential_expected_output"])
-        self.assertIn("frame_bytes", scoped["control_walker"]["compared_fields"])
+        self.assertIn("frame_bytes", scoped[0]["control_walker"]["compared_fields"])
+        music = results["mp3/javascript/music_metadata"]
+        self.assertGreaterEqual(music["repeats_per_control"], 3)
+        self.assertEqual(music["control_only_features"], [])
+        self.assertTrue(all(item.startswith("MpegParser.js:") for item in music["differential_only_features"]))
+        for walker in (music["control_walker"], music["differential_walker"]):
+            self.assertTrue({"mpeg_version", "layer", "number_of_samples", "duration"} <= set(walker["compared_fields"]))
+        for apis in music["documented_api_agreement"].values():
+            self.assertEqual(apis, ["parseBuffer", "parseFile", "parseStream"])
 
     def test_no_standard_api_is_declared_not_omitted(self):
         standard = read(BASE / "standard.json")

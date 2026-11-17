@@ -15,25 +15,44 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("mediabunny", "codec_parser")
+PROJECTS = ("mediabunny", "music_metadata", "codec_parser")
+REPEATS = 3
 REPORT = ROOT / "data/javascript/mp3/afl-feedback.json"
 _walker = importlib.util.spec_from_file_location("check_controls", ROOT / "controls/mp3/check_controls.py")
 WALKER = importlib.util.module_from_spec(_walker)
 _walker.loader.exec_module(WALKER)
 
 
+def header_fields(data: bytes) -> dict:
+    """MPEG version and layer from the first header's bits, as numbers."""
+    return {"mpeg_version": {3: 1, 2: 2, 0: 2.5}[(data[1] >> 3) & 3], "layer": 4 - ((data[1] >> 1) & 3)}
+
+
 def walker_agreement(path: Path, output: dict) -> dict:
-    """Compare every field the parser reports with the header walker; full input must be framed."""
+    """Compare every field the parser reports with the header walker; the full input must be
+    framed, either as frame bytes or as a frame-counted sample total."""
     data = path.read_bytes()
     walked = WALKER.walk(data)
     shared = sorted(key for key in walked if key in output)
-    if "frame_bytes" not in shared or output["frame_bytes"] != len(data):
-        raise RuntimeError(f"{path.name}: parser did not frame the full input")
+    walked_samples = walked["frames"] * walked["samples_per_frame"]
+    if "frame_bytes" in shared:
+        if output["frame_bytes"] != len(data):
+            raise RuntimeError(f"{path.name}: parser did not frame the full input")
+    elif output.get("number_of_samples") != walked_samples:
+        raise RuntimeError(f"{path.name}: parser did not count every frame")
     if any(output[key] != walked[key] for key in shared):
         raise RuntimeError(f"{path.name}: parser output differs from frame-header walker: {output}")
-    if "total_samples" in output and output["total_samples"] != walked["frames"] * walked["samples_per_frame"]:
+    if "total_samples" in output and output["total_samples"] != walked_samples:
         raise RuntimeError(f"{path.name}: total samples differ from walker frames")
-    return {"walker_output": walked, "compared_fields": shared}
+    result = {"walker_output": walked, "compared_fields": shared}
+    if "number_of_samples" in output:
+        # Paths that report numeric version/layer and a duration are also checked against header bits.
+        oracle = {**header_fields(data), "number_of_samples": walked_samples,
+                  "duration": walked_samples / walked["sample_rate"]}
+        if any(output[key] != value for key, value in oracle.items()):
+            raise RuntimeError(f"{path.name}: parser output differs from header oracle: {output}")
+        result.update(header_oracle=oracle, compared_fields=sorted([*shared, *oracle]))
+    return result
 
 
 def run(command: list[str]) -> str:
@@ -86,19 +105,29 @@ def check(slug: str) -> dict:
             raise RuntimeError(f"first control output differs: {control_output}")
         if replayed != manifest["differential_expected_output"]:
             raise RuntimeError(f"second control output differs: {replayed}")
-        first = probe(manifest, receipt["image_id"], control, work, "first")
-        repeat = probe(manifest, receipt["image_id"], control, work, "repeat")
-        other = probe(manifest, receipt["image_id"], differential, work, "other")
-        other_repeat = probe(manifest, receipt["image_id"], differential, work, "other-repeat")
-    if first != repeat or other != other_repeat:
+        api_agreement = None
+        if (ROOT / "projects" / relative / "api-check.js").is_file():
+            api_agreement = {}
+            for case, expected in ((control, control_output), (differential, replayed)):
+                checked = json.loads(run([*sandbox(manifest, case, work), "--entrypoint", "node",
+                                          base["image_id"], "/work/api-check.js", "/input/case"]))
+                if checked["output"] != expected:
+                    raise RuntimeError(f"{relative}: documented APIs differ on {case.name}")
+                api_agreement[case.name] = checked["apis"]
+        controls = [probe(manifest, receipt["image_id"], control, work, f"control-{index}")
+                    for index in range(REPEATS)]
+        others = [probe(manifest, receipt["image_id"], differential, work, f"differential-{index}")
+                  for index in range(REPEATS)]
+    if any(item != controls[0] for item in controls) or any(item != others[0] for item in others):
         raise RuntimeError(f"{relative}: repeated probe changed parser features or AFL++ map")
+    first, other = controls[0], others[0]
     if len(first[0]) != receipt["parser_source_features"] or len(first[1]) != receipt["feedback_edges"]:
         raise RuntimeError(f"{relative}: control probe differs from overlay receipt")
     feature_difference = len(first[0] ^ other[0])
     tuple_difference = len(first[1] ^ other[1])
     if not feature_difference or not tuple_difference:
         raise RuntimeError(f"{relative}: second control did not change parser feedback")
-    prefix = manifest["coverage_subject_prefix"]
+    prefix = manifest.get("afl_coverage_subject_prefix", manifest["coverage_subject_prefix"])
     by_file = lambda items: dict(sorted({name: sum(1 for item in items if item.startswith(prefix + name + ":"))
                                          for name in {item[len(prefix):].rsplit(":", 1)[0] for item in items}}.items()))
     result = {"project": str(relative), "pass": True,
@@ -111,12 +140,18 @@ def check(slug: str) -> dict:
               "differential_output": replayed,
               "control_walker": walker_agreement(control, control_output),
               "differential_walker": walker_agreement(differential, replayed),
+              "repeats_per_control": REPEATS,
               "repeated_control_identical": True, "repeated_differential_identical": True,
               "control_parser_features": len(first[0]), "control_afl_tuples": len(first[1]),
               "differential_parser_features": len(other[0]), "differential_afl_tuples": len(other[1]),
               "parser_feature_difference": feature_difference, "afl_tuple_difference": tuple_difference,
               "control_only_features_by_file": by_file(first[0] - other[0]),
-              "differential_only_features_by_file": by_file(other[0] - first[0])}
+              "differential_only_features_by_file": by_file(other[0] - first[0]),
+              "control_features_by_file": by_file(first[0]),
+              "control_only_features": sorted(item[len(prefix):] for item in first[0] - other[0]),
+              "differential_only_features": sorted(item[len(prefix):] for item in other[0] - first[0])}
+    if api_agreement is not None:
+        result["documented_api_agreement"] = api_agreement
     print(f"{relative}: stable repeats; {feature_difference} parser features, "
           f"{tuple_difference} AFL++ tuples differ", flush=True)
     return result
