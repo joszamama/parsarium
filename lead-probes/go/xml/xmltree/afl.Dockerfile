@@ -1,0 +1,13 @@
+# Same parser-line AFL++ bridge that scripts/build_afl_bridge.py generates for Go projects,
+# built from the lead probe image instead of a project image. Build context: repository root.
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+RUN apt-get update -qq && apt-get install -y --no-install-recommends afl++=4.33c-1.1ubuntu1 clang python3 \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=parsarium-lead/xml-go-xmltree:local /work/harness.test /work/harness.test
+COPY fuzzing/afl-bridge/afl_proxy.c /work/afl_proxy.c
+COPY fuzzing/afl-bridge/go_trace.py /work/afl_go_trace.py
+COPY lead-probes/go/xml/xmltree/afl_trace /work/afl_trace
+ENV PARSARIUM_SUBJECT_PREFIX=aqwari.net/xml/xmltree/
+ENV PARSARIUM_FUZZ_ENTRY=FuzzXML
+RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
+ENTRYPOINT ["/work/afl_proxy"]

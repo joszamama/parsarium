@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T14:37:02.848353+00:00",
+  "status": "negative_lead_no_package_feedback_differential",
+  "package": "aqwari.net/xml/xmltree",
+  "module": "aqwari.net/xml",
+  "release": "v0.0.0-20210331023308-d9421b293817",
+  "release_commit": "d9421b293817",
+  "release_commit_time_utc": "2021-03-31T02:33:08Z",
+  "source_url": "https://github.com/droyo/go-xml/tree/d9421b293817",
+  "license": "MIT (LICENSE, Copyright (c) 2015 David Arroyo)",
+  "source_lock": "lead-probes/go/xml/xmltree/source-lock.json",
+  "module_zip_sha256": "3aeea5b001f81a6e3cdc857daab12d165cf63b39235bf5f09a5d822ab5816f63",
+  "module_sum": "h1:+3Rh5EaTzNLnzWx3/uy/mAaH/dGI7svJ6e0oOIDcPuE=",
+  "dependencies": {
+    "golang.org/x/net": {
+      "release": "v0.0.0-20200813134508-3edf25e44fcc",
+      "zip_sha256": "6f8a42de5eac02318efa7ffbe53bef9be7aea7434f3f2214867545d2934c2c06",
+      "go_module_sum": "h1:zK/HqS5bZxDptfPJNq8v7vJfXtkU7r9TLIoSr1bXaP4="
+    },
+    "golang.org/x/text": {
+      "release": "v0.3.0",
+      "zip_sha256": "ea3068395503d3c7ef8ce16a286f75c8c93882c25a66c2aa6c8e2ad4da7a9ae0",
+      "go_module_sum": "h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg="
+    }
+  },
+  "image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "go_toolchain": "go version go1.27.1 linux/arm64",
+  "probe_image_id": "sha256:f1bfb692cc673c4e60dc366910de4cae3caa7501d1c7606a817445419c1a5979",
+  "afl_image_id": "sha256:bfbadaca6ff1d779d550a4a0d84a01606a828770e1416979c87a96a36a9bb4f9",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "underlying_source": "encoding/xml/xml.go",
+  "underlying_source_sha256": "41a7f2c7c910a57f70ce460cbe057a31703e11dbb169b499e50a3339a5f33bdb",
+  "popularity": {
+    "metric": "pkg.go.dev Imported by package count",
+    "value": 43,
+    "importing_modules": 20,
+    "source": "https://pkg.go.dev/aqwari.net/xml/xmltree?tab=importedby",
+    "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+    "registry_snapshot": "data/go/xml/registry-snapshot.json",
+    "recheck_utc": "2026-11-17T14:30:36Z",
+    "recheck_page_sha256": "b40739508ed941d915ae5eccd3a45af984bdb3cb324b53db6073aac49abcbc78",
+    "caveat": "Package importers, not installations; no tagged release. Of the 70 package paths the importer page lists (including internal and invalid ones), 58 are xsd, xsdgen, wsdl, cmd/xsdparse or gentests packages inside copies of the droyo/go-xml repository itself; 12 are in other projects."
+  },
+  "api_finding": {
+    "local_bytes_parse_api": "xmltree.Parse([]byte) (*Element, error); no io.Reader or file entry point",
+    "api_reference": "https://pkg.go.dev/aqwari.net/xml@v0.0.0-20210331023308-d9421b293817/xmltree#Parse",
+    "tokenizer": "none of its own; Parse runs encoding/xml.NewDecoder(bytes.NewReader(doc)).Token() and builds Element values from StartElement/EndElement tokens",
+    "own_code": "xmltree.go tree walk (Element.parse), namespace scope stack (Scope.pushNS), Scope.Prefix/Resolve, raw Content slicing by Decoder.InputOffset, recursion limit 3000",
+    "text": "No decoded character data. Element.Content is the raw source bytes between start and end tag: references stay undecoded and CDATA keeps its markup.",
+    "namespace_declarations": "Removed from StartElement.Attr into an unexported Scope; Prefix and Resolve use it, but the public API cannot list or count declarations."
+  },
+  "parser_family": "Go encoding/xml.Decoder (same pinned encoding/xml source as stdlib_decoder, etree, xmlquery, mxj, x2j and goxpp); xmltree adds tree building and namespace scope only. Not an independent engine.",
+  "oracle": "python3 -I lead-probes/go/xml/xmltree/oracle.py (expat namespace mode with prefixes; raw leaf bytes sliced at expat byte offsets)",
+  "controls": {
+    "controls/xml/catalog-ns.xml": {
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "observed": {
+        "attribute_qnames": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "element_qnames": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "leaf_content": [
+          "{urn:parsarium:item}item=Café &amp; té",
+          "{urn:parsarium:item}name=Zürich &lt;HQ&gt;",
+          "{urn:parsarium:item}note=<![CDATA[x < y]]>"
+        ],
+        "max_depth": 3,
+        "name_namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "matches_expat_oracle": true,
+      "xmltree_cover_blocks": 42,
+      "encoding_xml_cover_blocks": 179,
+      "xmltree_source_lines": 54,
+      "encoding_xml_source_lines": 293
+    },
+    "controls/xml/order-default-ns.xml": {
+      "control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "observed": {
+        "attribute_qnames": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "element_qnames": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "leaf_content": [
+          "{urn:parsarium:order}sku=A&#x2D;7",
+          "{urn:parsarium:price}amount=12&#46;50 &#x20AC;",
+          "leaf="
+        ],
+        "max_depth": 4,
+        "name_namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "matches_expat_oracle": true,
+      "xmltree_cover_blocks": 42,
+      "encoding_xml_cover_blocks": 195,
+      "xmltree_source_lines": 54,
+      "encoding_xml_source_lines": 327
+    }
+  },
+  "fixed_differential_feedback": {
+    "xmltree": {
+      "replay_cover_block_difference": 0,
+      "afl_parser_feature_difference": 0,
+      "afl_tuple_difference": 0,
+      "control_afl_features": 42,
+      "control_afl_tuples": 62,
+      "differential_afl_features": 42,
+      "differential_afl_tuples": 62,
+      "changed_blocks": []
+    },
+    "encoding_xml": {
+      "replay_cover_block_difference": 30,
+      "afl_parser_feature_difference": 30,
+      "afl_tuple_difference": 30,
+      "control_afl_features": 179,
+      "control_afl_tuples": 198,
+      "differential_afl_features": 195,
+      "differential_afl_tuples": 214
+    }
+  },
+  "supplementary_input_dependence": {
+    "controls/xml/one-item.xml": {
+      "sha256": "f03a0e48a8750841523c15cf0910780d75189bed6fad90944bfad6aa037aeded",
+      "xmltree_afl_features": 38,
+      "xmltree_feature_difference_vs_control": 4,
+      "xmltree_tuple_difference_vs_control": 4,
+      "changed_features": [
+        "aqwari.net/xml/xmltree/xmltree.go:156.11,156.30",
+        "aqwari.net/xml/xmltree/xmltree.go:157.5,158.1",
+        "aqwari.net/xml/xmltree/xmltree.go:169.4,170.1",
+        "aqwari.net/xml/xmltree/xmltree.go:31.2,32.1"
+      ]
+    },
+    "controls/xml/two-items.xml": {
+      "sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941",
+      "xmltree_afl_features": 38,
+      "xmltree_feature_difference_vs_control": 4,
+      "xmltree_tuple_difference_vs_control": 4,
+      "changed_features": [
+        "aqwari.net/xml/xmltree/xmltree.go:156.11,156.30",
+        "aqwari.net/xml/xmltree/xmltree.go:157.5,158.1",
+        "aqwari.net/xml/xmltree/xmltree.go:169.4,170.1",
+        "aqwari.net/xml/xmltree/xmltree.go:31.2,32.1"
+      ]
+    }
+  },
+  "decision": "Not counted as a runnable parser path. xmltree.Parse([]byte) parses both valid controls and its exposed tree matches an independent expat oracle exactly, including expanded names, prefixes rebuilt by Scope.Prefix, xmlns=\"\" undeclaration and raw leaf content. Its own xmltree.go source is covered and its AFL++ feedback repeats exactly. On the cell's fixed differential pair (catalog-ns.xml vs order-default-ns.xml) the xmltree-scoped cover blocks and AFL++ map are identical; every difference is in encoding/xml, which Parsarium already counts as stdlib_decoder. This fails the same gate that excluded mellium.im/xmlstream. Other valid inputs without prefixed declarations (one-item.xml, two-items.xml) do change four xmltree.go blocks, so the feedback is input-dependent; an integrator could revisit the lead if the cell gate changes, but the fixed pair is not replaced here.",
+  "probe_file_sha256": {
+    "Dockerfile": "bcbc91b2ddcf8f15d89d6fe00bd926b9c94a144be89de760ecbd0ea66c3f7ee6",
+    "afl.Dockerfile": "e6d8cb66eea9686d97b1e41f0377fb14bec183eed73c4b71f14f744006b455f7",
+    "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31",
+    "check.py": "85e7af857cb5b134ab4ef70ea9cc4ab7581dfe065b154432422a83a0b589a1bd",
+    "go.mod": "f7aafe9e1ee200077ed0cbfbb1066448a215d6c467c7c4bc5a31677f83a486d5",
+    "go.sum": "3b5cd4089817ed17ca2b5a6385818a4757d2ebbfccee64546ee767fca74b22da",
+    "harness.go": "51f6bbb714da6f47bfa10786fbafe5a67634defc6a711edcef350a9b71664969",
+    "harness_test.go": "5f90da888025a9a79e39a6d381289a5495dc33350e237cd8253b641716f2cb23",
+    "oracle.py": "24f8182966d26331479a4de9583d6ab84cf599266f1fd851b738cc200c1f7b0b",
+    "source-lock.json": "6477eb5cdbf81d2c278c4d55a48785cb242051dd9596831d3687dee3af02f27a"
+  }
+}
