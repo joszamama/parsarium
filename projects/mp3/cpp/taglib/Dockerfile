@@ -1,0 +1,23 @@
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+ ca-certificates clang cmake curl libclang-rt-21-dev llvm make python3 \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 https://taglib.org/releases/taglib-2.3.2.tar.gz -o /work/source.tar.gz \
+ && echo '3ca2d8afaa7f1cf7f6ed10e511ebc368bfacd6dcaa3dbfa690b89e502e8963dc  /work/source.tar.gz' | sha256sum --check \
+ && tar -xzf /work/source.tar.gz -C /work
+COPY harness.cpp harness.h replay.cpp build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+ && { clang++ --version | head -1; llvm-cov --version | head -1; cmake --version | head -1; } > /work/toolchain.txt
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+ libstdc++6 llvm python3 && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/taglib-2.3.2/taglib /work/taglib-2.3.2/taglib
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]
