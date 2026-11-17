@@ -21,15 +21,15 @@
   },
   "search_hits_recorded": 284,
   "unique_search_hits": 276,
-  "unresolved_documentation_leads": 1,
-  "leads_recorded": 10,
+  "unresolved_documentation_leads": 2,
+  "leads_recorded": 17,
   "leads_by_status": {
     "resolved_verified_selected": 8,
-    "excluded": 1,
-    "unresolved": 1
+    "excluded": 7,
+    "unresolved_control_failure": 2
   },
   "ranking_metric": "pkg.go.dev Imported by package count",
-  "uncertainty": "Pilot cell: eight Go paths verified (github.com/miekg/dns, github.com/google/gopacket/layers, golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, github.com/benburkert/dns, github.com/phuslu/fastdns, github.com/cznic/dns/msg, tangled.sh/seiso.moe/magna), ranked by pkg.go.dev Imported by package count. Remaining leads: github.com/gopacket/gopacket/layers (unresolved). Excluded after checking: github.com/coredns/coredns/plugin/pkg/dnsutil (reasons in leads.json). gopacket's count covers its whole multi-protocol layers package. The standard library exports no DNS message parser (its net resolver vendors x/net dnsmessage without exporting it). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: eight Go paths verified (github.com/miekg/dns, github.com/google/gopacket/layers, golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, github.com/benburkert/dns, github.com/phuslu/fastdns, github.com/cznic/dns/msg, tangled.sh/seiso.moe/magna), ranked by pkg.go.dev Imported by package count. Remaining leads: www.bamsoftware.com/git/dnstt.git/dns (unresolved_control_failure), github.com/cybergarage/go-mdns/mdns/dns (unresolved_control_failure). Excluded after checking: github.com/coredns/coredns/plugin/pkg/dnsutil, github.com/gopacket/gopacket/layers, github.com/zmap/dns, github.com/mr-torgue/dns, github.com/pion/mdns, github.com/ncruces/go-dns, github.com/eycorsican/go-tun2socks/common/dns (reasons in leads.json). gopacket's count covers its whole multi-protocol layers package. The standard library exports no DNS message parser (its net resolver vendors x/net dnsmessage without exporting it). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/go/dns/registry-snapshot.json",
   "unresolved_leads": "data/go/dns/leads.json",
   "runtime_evidence": "data/go/dns/standard.json",

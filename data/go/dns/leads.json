@@ -54,7 +54,7 @@
   },
   {
     "name": "github.com/gopacket/gopacket/layers",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "pkg.go.dev Imported by package count",
     "primary_metric_value": 171,
     "found_by": "targeted documentation lead",
@@ -62,8 +62,10 @@
     "input_api_lead": "(*layers.DNS).DecodeFromBytes",
     "family": "gopacket DNS layer (community fork)",
     "note": "Fork of google/gopacket; shared family.",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 4
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 4,
+    "version_seen": "v1.7.7",
+    "reason": "Continuation fork of the already selected github.com/google/gopacket/layers: 560 of the 635 distinct non-comment source lines of google/gopacket v1.1.19 layers/dns.go (88.2%) are unchanged in gopacket/gopacket v1.7.7 layers/dns.go, which adds record types around the same decoder. Same decoder family as a stronger selected path (the trust-dns-proto/hickory-proto rule); not counted."
   },
   {
     "name": "codeberg.org/miekg/dns",
@@ -132,5 +134,96 @@
     "api_lead_checked_against_pinned_release": true,
     "verification": "projects/dns/go/tangled_sh_seiso_moe_magna/verification.json",
     "reason": "Pinned v0.0.2 passes both DNS controls; see parsers.json and data/go/dns/tangled-sh-seiso-moe-magna-feedback-differential.json."
+  },
+  {
+    "name": "github.com/zmap/dns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 26,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/github.com/zmap/dns",
+    "input_api_lead": "(*dns.Msg).Unpack([]byte)",
+    "family": "miekg/dns v1 (fork)",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.1.70",
+    "reason": "Fork of the selected github.com/miekg/dns v1: 8,154 of the 8,161 distinct non-test source lines of miekg/dns v1.1.73's module (99.9%) also occur in zmap/dns v1.1.70. Near-identical fork of a stronger selected path (fgergo/mp3 rule); not counted."
+  },
+  {
+    "name": "github.com/mr-torgue/dns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 71,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/github.com/mr-torgue/dns",
+    "input_api_lead": "(*dns.Msg).Unpack([]byte)",
+    "family": "miekg/dns v1 (fork)",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.1.6",
+    "reason": "Fork of the selected github.com/miekg/dns v1: 8,033 of the 8,161 distinct non-test source lines of miekg/dns v1.1.73 (98.4%) also occur in mr-torgue/dns v1.1.6. Near-identical fork; not counted."
+  },
+  {
+    "name": "www.bamsoftware.com/git/dnstt.git/dns",
+    "status": "unresolved_control_failure",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 17,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/www.bamsoftware.com/git/dnstt.git/dns#MessageFromWireFormat",
+    "input_api_lead": "dns.MessageFromWireFormat([]byte)",
+    "family": "dnstt dns package",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.20260501.0",
+    "reason": "MessageFromWireFormat decodes the header, questions and record owner names, but every record keeps its RDATA as raw bytes (RR.Data) and the package exports no decoder for names inside RDATA (only DecodeRDataTXT). The control's compressed CNAME and MX targets could only be produced by the harness parsing RDATA itself, so the observed result would not come from the library."
+  },
+  {
+    "name": "github.com/cybergarage/go-mdns/mdns/dns",
+    "status": "unresolved_control_failure",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 1,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/github.com/cybergarage/go-mdns/mdns/dns#NewMessageWithBytes",
+    "input_api_lead": "dns.NewMessageWithBytes([]byte)",
+    "family": "go-mdns dns package",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.0.0",
+    "reason": "The mDNS message parser has typed records only for PTR, SRV, TXT, A, AAAA and NSEC (mdns/dns/record_impl.go); CNAME and MX RDATA are left as untyped bytes, so the control's CNAME and MX answers cannot be reported from the library's parse."
+  },
+  {
+    "name": "github.com/pion/mdns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 26,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/github.com/pion/mdns",
+    "input_api_lead": "",
+    "family": "x/net dnsmessage",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.12",
+    "reason": "mDNS connection package; message parsing is golang.org/x/net/dns/dnsmessage (already selected). No own parser."
+  },
+  {
+    "name": "github.com/ncruces/go-dns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 23,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/github.com/ncruces/go-dns",
+    "input_api_lead": "",
+    "family": "x/net dnsmessage",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.3.4",
+    "reason": "DNS-over-HTTPS/TLS resolver wrappers for net.Resolver; messages are handled with golang.org/x/net/dns/dnsmessage. Network API, no own message parser."
+  },
+  {
+    "name": "github.com/eycorsican/go-tun2socks/common/dns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 89,
+    "found_by": "registry search hit (round 2)",
+    "documentation": "https://pkg.go.dev/github.com/eycorsican/go-tun2socks/common/dns",
+    "input_api_lead": "",
+    "family": "",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.16.11",
+    "reason": "The package holds only a port constant (common/dns/dns.go) plus a blocker subpackage; no DNS message parser."
   }
 ]

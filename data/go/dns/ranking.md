@@ -37,8 +37,18 @@ pkg.go.dev Imported by package count, from [registry-snapshot.json](registry-sna
 
 | Order | Lead | Metric | Status | Input API lead | Family |
 | ---: | --- | ---: | --- | --- | --- |
-| 1 | github.com/gopacket/gopacket/layers | 171 | unresolved | `(*layers.DNS).DecodeFromBytes` | gopacket DNS layer (community fork) |
+| 1 | www.bamsoftware.com/git/dnstt.git/dns | 17 | unresolved_control_failure | `dns.MessageFromWireFormat([]byte)` | dnstt dns package |
+| 2 | github.com/cybergarage/go-mdns/mdns/dns | 1 | unresolved_control_failure | `dns.NewMessageWithBytes([]byte)` | go-mdns dns package |
+
+- **www.bamsoftware.com/git/dnstt.git/dns**: MessageFromWireFormat decodes the header, questions and record owner names, but every record keeps its RDATA as raw bytes (RR.Data) and the package exports no decoder for names inside RDATA (only DecodeRDataTXT). The control's compressed CNAME and MX targets could only be produced by the harness parsing RDATA itself, so the observed result would not come from the library.
+- **github.com/cybergarage/go-mdns/mdns/dns**: The mDNS message parser has typed records only for PTR, SRV, TXT, A, AAAA and NSEC (mdns/dns/record_impl.go); CNAME and MX RDATA are left as untyped bytes, so the control's CNAME and MX answers cannot be reported from the library's parse.
 
 ## Checked, excluded or recorded separately
 
 - **github.com/coredns/coredns/plugin/pkg/dnsutil** (excluded): Helper package over miekg/dns; no own message parser.
+- **github.com/gopacket/gopacket/layers** (excluded): Continuation fork of the already selected github.com/google/gopacket/layers: 560 of the 635 distinct non-comment source lines of google/gopacket v1.1.19 layers/dns.go (88.2%) are unchanged in gopacket/gopacket v1.7.7 layers/dns.go, which adds record types around the same decoder. Same decoder family as a stronger selected path (the trust-dns-proto/hickory-proto rule); not counted.
+- **github.com/zmap/dns** (excluded): Fork of the selected github.com/miekg/dns v1: 8,154 of the 8,161 distinct non-test source lines of miekg/dns v1.1.73's module (99.9%) also occur in zmap/dns v1.1.70. Near-identical fork of a stronger selected path (fgergo/mp3 rule); not counted.
+- **github.com/mr-torgue/dns** (excluded): Fork of the selected github.com/miekg/dns v1: 8,033 of the 8,161 distinct non-test source lines of miekg/dns v1.1.73 (98.4%) also occur in mr-torgue/dns v1.1.6. Near-identical fork; not counted.
+- **github.com/pion/mdns** (excluded): mDNS connection package; message parsing is golang.org/x/net/dns/dnsmessage (already selected). No own parser.
+- **github.com/ncruces/go-dns** (excluded): DNS-over-HTTPS/TLS resolver wrappers for net.Resolver; messages are handled with golang.org/x/net/dns/dnsmessage. Network API, no own message parser.
+- **github.com/eycorsican/go-tun2socks/common/dns** (excluded): The package holds only a port constant (common/dns/dns.go) plus a blocker subpackage; no DNS message parser.
