@@ -11,19 +11,16 @@
       "api_lead": "parseTOML(string)",
       "note": "Multi-format config parser; its TOML entry point is a bundled copy of smol-toml. Counts only as a wrapper path with that family.",
       "source": "https://www.npmjs.com/package/confbox",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "smol-toml",
-      "metric_value": 252264468,
-      "metric": "npm downloads, last month",
-      "family": "smol-toml (own parser)",
-      "api_lead": "parse(string) -> TomlTable with TomlDate values",
-      "note": null,
-      "source": "https://www.npmjs.com/package/smol-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.3.2",
+      "source_sha256": "79012fbb9607720366a5c25aeb5817c77e54caf92145e45c1ec5875fb00913ee",
+      "npm_integrity": "sha512-ZUAKhKlkCOrIGKc8cj7zek9s9z1mveHif/25nUshI2BzCRzF7KH7KHa+Lnh2ubq+e1tIlaFuP763mzW4qVoehg==",
+      "license": "MIT",
+      "checked_on": "2026-11-17",
+      "family_evidence": "confbox 0.3.2 dist/toml.mjs exports parseTOML(text) = stripBOM, then the parse function of dist/_chunks/libs/smol-toml.mjs (14,649 bytes, minified by rolldown, exported as parse/stringify); dist/THIRD-PARTY-LICENSES.md.gz names smol-toml (BSD-3-Clause, squirrelchat/smol-toml) and package.json lists smol-toml ^1.9.1 as a devDependency. The bundle is minified, so a textual diff is impossible; its string literals match smol-toml 1.9.1 dist/ (95 shared; the remaining differences are renamed template-literal variables, escape spelling and the removed ./*.js import paths) and it contains the 1.9.0 option names integersAsBigInt, useLegacyDate, unsafeKeyBehaviour and maxDepth. Its TOML values (TomlDate with isDate/isTime/isLocal) behave like smol-toml's.",
+      "control_result": "service-config.toml matches the expected typed tree. typed-scalars.toml fails: parseTOML takes no options and calls the bundled parse without integersAsBigInt, so every TOML integer and float is a plain Number and float `exponent = 1e3` comes back as the Number 1000, the same value as integer 1000. Typing Numbers by Number.isInteger gives floats.exponent = {\"type\": \"integer\", \"value\": \"1000\"}, expected {\"type\": \"float\", \"value\": \"1000.0\"}. Every other typed-scalars value matches. The documented API cannot tell float 1000.0 from integer 1000.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install confbox@0.3.2"
     },
     {
       "name": "toml",
@@ -33,8 +30,15 @@
       "api_lead": "toml.parse(string)",
       "note": "Registry description claims TOML 1.1.0 compliance for 5.0.1; earlier releases were TOML 0.4.",
       "source": "https://www.npmjs.com/package/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "5.0.1",
+      "source_sha256": "e9dd3f26a6f7c5fcfcf3fb13cca67f641da5c7fc144471c7ceec5accedbda323",
+      "npm_integrity": "sha512-EqYNA/YvUNndrA2B3O2ojzLQoTQrBxeZ9UIjQwk8t10oe6n7dwclBwd9IdZQTOKwe6vWX+AXtl6IntXRbepdxQ==",
+      "license": "MIT",
+      "checked_on": "2026-11-17",
+      "control_result": "service-config.toml matches the expected typed tree. typed-scalars.toml fails: toml.parse returns local date-time, local date and local time values as plain JavaScript strings ('1979-05-27T07:32:00', '1979-05-27', '00:32:00.25'), indistinguishable from TOML strings, so times.local_datetime/local_date/local_time come out as {\"type\": \"string\"} instead of datetime-local/date-local/time-local; integers and floats are plain Numbers, so float `exponent = 1e3` is indistinguishable from integer 1000 (observed integer \"1000\", expected float \"1000.0\"). The offset date-time is a Date and matches.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml@5.0.1"
     },
     {
       "name": "@iarna/toml",
@@ -44,19 +48,14 @@
       "api_lead": "TOML.parse(string) / TOML.parse.async",
       "note": "TOML 0.5.0; dates are Date objects with isDate/isTime flags.",
       "source": "https://www.npmjs.com/package/@iarna/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "toml-eslint-parser",
-      "metric_value": 7684028,
-      "metric": "npm downloads, last month",
-      "family": "toml-eslint-parser (own parser; ESLint AST)",
-      "api_lead": "parseTOML(string) -> AST; getStaticTOMLValue(ast)",
-      "note": null,
-      "source": "https://www.npmjs.com/package/toml-eslint-parser",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "2.2.5",
+      "source_sha256": "c91b57257218e7b3f1c928faa05ce9926f30cb0898f42cecf7fae6a2149e4b20",
+      "license": "ISC",
+      "checked_on": "2026-11-17",
+      "control_result": "service-config.toml matches the expected typed tree. typed-scalars.toml fails only on floats.exponent: TOML.parse returns integers (within 2^53) and floats as plain Numbers, so float `exponent = 1e3` is the Number 1000 and cannot be told from integer 1000 (observed integer \"1000\", expected float \"1000.0\"). Its date objects carry the kinds (FloatingDateTime with isFloating, Date with isDate, Time with isTime) and match.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @iarna/toml@2.2.5"
     },
     {
       "name": "@ltd/j-toml",
@@ -227,6 +226,20 @@
       "metric_value": 114319,
       "status": "excluded",
       "reason": "WebAssembly build of Rust toml_edit (toml_parser family)."
+    }
+  ],
+  "promoted": [
+    {
+      "name": "smol-toml",
+      "version": "1.9.1",
+      "project": "projects/toml/javascript/smol_toml",
+      "status": "promoted_to_verified"
+    },
+    {
+      "name": "toml-eslint-parser",
+      "version": "1.0.3",
+      "project": "projects/toml/javascript/toml_eslint_parser",
+      "status": "promoted_to_verified"
     }
   ]
 }
