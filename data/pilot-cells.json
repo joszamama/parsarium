@@ -299,8 +299,8 @@
     {
       "ecosystem": "go",
       "format": "mp3",
-      "status": "pilot_one_verified_bounded_search",
-      "verified_third_party_count": 1,
+      "status": "pilot_two_verified_bounded_search",
+      "verified_third_party_count": 2,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "mp3",
@@ -314,20 +314,24 @@
       "unique_search_hits": 242,
       "leads_recorded": 14,
       "leads_by_status": {
-        "unresolved": 7,
         "shared_family": 3,
-        "excluded": 4
+        "excluded": 4,
+        "selected": 1,
+        "unresolved": 6
       },
       "ranking_metric": "pkg.go.dev Imported by package count",
-      "selection": "Highest Imported-by count among recorded hits whose own source parses MPEG audio frames; faiface/beep/mp3 (444) ranks above it but wraps it.",
-      "uncertainty": "One verified path; no padding. Search is bounded by five pkg.go.dev queries at 100 hits each. Leads in leads.json are not verified parsers. Two valid controls do not establish complete Layer III support or independence from the mp3_id3v2 go-mp3 entry.",
+      "selection": "Two own-code MPEG Layer III parser paths verified: hajimehoshi/go-mp3 (294 Imported by) decodes PCM, while tcolgate/mp3 (62) parses complete frame headers and side information without PCM. Both expose documented io.Reader APIs and match two independent valid-control oracles.",
+      "uncertainty": "Two verified Go plain-MP3 paths; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Six leads remain unresolved and three recorded wrappers share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 family is also represented in the tagged MP3 cell, as is tcolgate/mp3; these are separate plain-frame format paths, not new families across cells. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling.",
       "third_party_evidence": "data/go/mp3/parsers.json",
       "runtime_evidence": "data/go/mp3/standard.json",
       "registry_snapshot": "data/go/mp3/registry-snapshot.json",
       "unresolved_leads": "data/go/mp3/leads.json",
       "working_target": 10,
       "ceiling": 10,
-      "third_party_control_results": "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
+      "third_party_control_results": [
+        "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
+        "projects/mp3/go/github_com_tcolgate_mp3/verification.json"
+      ],
       "phase": "pilot",
       "complete": false
     },
