@@ -112,6 +112,7 @@ def main() -> None:
         "base_image_id": base_id, "image_id": image_id,
         "platform": manifest["platform"], "control_sha256": manifest["control_sha256"],
         "source_sha256": manifest["source_sha256"],
+        "parser_source_features": 3,
         "feedback_edges": len(ids[0]), "afl_map_size": 65536,
         "afl_package": version,
         "afl_entrypoint": manifest["afl_entrypoint"], "afl_file_input": True,
