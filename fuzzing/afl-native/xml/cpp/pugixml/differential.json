@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:53:57.979194+00:00",
+  "project": "xml/cpp/pugixml",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "dd87e8a6ad300eabd1aeaddd8785ab4eae5158fc9ec0c92fa4949ea2734cf10f",
+  "overlay_receipt_sha256": "9465251efe8b4e60c3a5a630cf9b4d67149a93d6826ca1ff4de78b2075cb7c13",
+  "base_image_id": "sha256:bb309cd5852d7a6dfea1beca04855dec5d7eee263496a37dc2d34f04d37f9551",
+  "overlay_image_id": "sha256:cb2ca2d9adb8e0d9be783d3fce2a9093e1a471af45809679b2bd8fbbb221268b",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 2,
+  "first_control": "controls/xml/catalog-ns.xml",
+  "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "second_control": "controls/xml/order-default-ns.xml",
+  "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "second_control_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "first_source_lines": 641,
+  "second_source_lines": 670,
+  "source_line_difference": 159,
+  "first_only_lines_by_file": {
+    "src/pugixml.cpp": 65
+  },
+  "second_only_lines_by_file": {
+    "src/pugixml.cpp": 94
+  },
+  "first_afl_tuples": 880,
+  "second_afl_tuples": 906,
+  "afl_tuple_difference": 136,
+  "second_case_kind": "valid_control"
+}

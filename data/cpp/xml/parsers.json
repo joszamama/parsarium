@@ -53,5 +53,60 @@
       ]
     },
     "project": "projects/xml/cpp/xerces_c"
+  },
+  {
+    "name": "pugixml",
+    "version": "1.16",
+    "license": "MIT",
+    "license_evidence": "https://github.com/zeux/pugixml/blob/v1.16/LICENSE.md",
+    "input_api": "pugi::xml_document::load_buffer(const void*, size_t, parse_default, encoding_utf8); pugixml does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes and rejects unbound prefixes and duplicate expanded attributes",
+    "documentation": "https://pugixml.org/docs/manual.html#loading.memory",
+    "documentation_parser": "https://pugixml.org/docs/manual.html#loading.options",
+    "source": "https://github.com/zeux/pugixml/releases/download/v1.16/pugixml-1.16.tar.gz",
+    "adapter": "projects/xml/cpp/pugixml/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 input from a memory buffer into pugixml's DOM (non-validating, DOCTYPE skipped, no DTD entity expansion); Namespaces in XML resolved by the adapter, not the library; attributes reported sorted per element to match the DOM adapters",
+    "family": "pugixml own recursive-descent parser (pugi::impl::xml_parser)",
+    "family_note": "Single translation unit src/pugixml.cpp with its own in-place parser; no delegation to Xerces-C++, libxml2 or expat. Distinct from the Apache Xerces-C++ scanner family of the first path. Namespace resolution is adapter code, not pugixml.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 1503,
+      "dev_package_installs": {
+        "libpugixml-dev": 1503
+      },
+      "popcon_source_inst": 25766,
+      "homebrew_install_on_request_365d": 1270,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/pugixml"
   }
 ]

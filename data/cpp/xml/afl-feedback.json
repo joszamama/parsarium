@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:49:06.713445+00:00",
-  "projects_total": 1,
-  "projects_passed": 1,
+  "checked_at_utc": "2026-11-17T03:53:57.979194+00:00",
+  "projects_total": 2,
+  "projects_passed": 2,
   "differential_kind": "fixed_valid_default_namespace_reset_comment_pi",
-  "command": "python3 scripts/build_afl_native.py xml cpp xerces_c && python3 scripts/verify_cpp_json_feedback.py --format xml --slug xerces_c",
+  "command": "for slug in xerces_c pugixml; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -23,6 +23,24 @@
       "differential_afl_tuples": 10947,
       "source_line_difference": 476,
       "afl_tuple_difference": 514
+    },
+    {
+      "project": "xml/cpp/pugixml",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "9465251efe8b4e60c3a5a630cf9b4d67149a93d6826ca1ff4de78b2075cb7c13",
+      "differential_receipt_sha256": "8ab86f594640a483f93b5158b42f5456eb53e678252ad8f7b8b920120f94415b",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 641,
+      "control_afl_tuples": 880,
+      "differential_source_lines": 670,
+      "differential_afl_tuples": 906,
+      "source_line_difference": 159,
+      "afl_tuple_difference": 136
     }
   ]
 }
