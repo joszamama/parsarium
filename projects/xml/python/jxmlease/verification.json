@@ -1,0 +1,65 @@
+{
+  "kind": "third_party",
+  "api": "jxmlease.parse(bytes of a local XML file) with default settings; returned XMLDictNode / XMLListNode / XMLCDATANode tree read through tag, get_xml_attrs() and get_cdata()",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:05:40.675321+00:00",
+  "manifest": "projects/xml/python/jxmlease/manifest.json",
+  "image_id": "sha256:9d697c0c0945fb4ac1629f97ea318dc20bc4d13e6543df9500de02f25790516e",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: jxmlease",
+    "Version: 1.0.3",
+    "expat_2.10.0",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "9443794afe78dfab5cccf27e803b30359a55dbf9eaadbd54297522b72356833c  /work/expat/lib/xmlparse.c",
+    "df8a9a04b3cd56b6f5faa2496d41168155318cddafe560d251f6987b0e086927  jxmlease/_parsehandler.py",
+    "f3ff6cb8ab10c103bd71102c3827807b45b515a9d191f6eba4f1fabc4a857e94  jxmlease/xmlparser.py"
+  ],
+  "source_sha256": "6bbfaee0ecf7e287667c9b33fa70c2650265dcbf01518a2531a46b921c17cdaf",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "a76d8ad3ecdd3f7ba61527ca1134f9abdbd8b95fc2f41524df6c709d43edbf28",
+    "fuzz.py": "99c99847c048d23e6f6c2da4a14f5851797903948af5c191e996dc75c1de0515",
+    "harness.py": "9194952e299959916f134be040c1745ec48a7c80ddbc5536b6b28c9654be1b37",
+    "manifest.json": "557fb56c5044a04a1c7117eb08088f98336b595eb513c75f4de9e6b7efee4cd8",
+    "replay.py": "32f4550b807bbec4bd761a0ebf97dba143cd6045f9cc77383b7ad5a1ecb0cfc8",
+    "run-control.py": "1722aa3493389545915cd0d1967cef0e57526b226f3fa0bdbb14179dad97f02c",
+    "runtime-requirements.lock": "590801dd7f86c0be2949fea14d98725d639bffe1e734bf521d626bd8a3c57a5d",
+    "target.json": "4b9054edaab65b456baf8976cec72273b9a1db7f46946f6232278419f9f01a41"
+  },
+  "output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ],
+    "root": "c:catalog"
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 239,
+  "format_specific_source_lines_covered": 59,
+  "underlying_source_files": 19,
+  "underlying_source_lines_covered": 2197,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/python/jxmlease/target/coverage/coverage.json",
+  "pass": true
+}

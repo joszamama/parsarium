@@ -23,7 +23,7 @@ class PythonXmlBeautifulSoup4PilotTest(unittest.TestCase):
         leads = read(BASE / "leads.json")["leads"]
         cell = read(BASE / "cell.json")
         self.assertEqual([parser["name"] for parser in parsers],
-                         ["lxml", "beautifulsoup4", "defusedxml", "xmltodict", "xmlschema", "parsel", "pyquery", "untangle"])
+                         ["lxml", "beautifulsoup4", "defusedxml", "xmltodict", "xmlschema", "parsel", "pyquery", "untangle", "jxmlease"])
         downloads = {lead["name"]: lead["last_month"] for lead in leads}
         metrics = [downloads[parser["name"]] for parser in parsers]
         self.assertEqual(metrics, sorted(metrics, reverse=True))

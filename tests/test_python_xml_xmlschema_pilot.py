@@ -32,7 +32,7 @@ class PythonXmlXmlschemaPilotTest(unittest.TestCase):
         self.assertIn("not an independent XML engine", parser["verification_note"])
         expat_family = next(item for item in read(BASE / "verification.json")["families"]
                             if item["family"] == "Expat XML parser")
-        self.assertIn("xmlschema", expat_family["paths"][-1])
+        self.assertTrue(any(path.startswith("xmlschema") for path in expat_family["paths"]))
 
     def test_release_lock_matches_manifest_and_dockerfile(self):
         manifest = read(PROJECT / "manifest.json")

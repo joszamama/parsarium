@@ -626,6 +626,82 @@
       "project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
       "namespace_caveat": "untangle drops namespace URIs. The adapter does not reconstruct them: element names are lossy (':' becomes '_', indistinguishable from '-', '.' or a literal '_'), so any URI in the summary would be adapter-side namespace processing, not untangle's parse result. Shared fields are therefore compared against the independent lxml/libxml2 oracle projected to untangle's documented naming rule, and the expanded names it loses are recorded in data/python/xml/untangle-valid-feedback.json.",
       "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
+    },
+    {
+      "package": "jxmlease",
+      "version": "1.0.3",
+      "pass": true,
+      "input_api": "jxmlease.parse(bytes of a local XML file) with default settings; returned XMLDictNode / XMLListNode / XMLCDATANode tree read through tag, get_xml_attrs() and get_cdata()",
+      "tested_parser": "jxmlease.xmlparser.Parser over xml.parsers.expat.ParserCreate (process_namespaces=False)",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "c:catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "order"
+      },
+      "differential_pass": true,
+      "view": "raw names as written (prefix:local); xmlns declarations kept as attributes; no namespace URI resolved",
+      "oracle": "projects/xml/c/libnxml/oracle.py (expat, namespace processing off; exact) and an lxml/libxml2 raw-name projection in scripts/verify_python_xml_jxmlease_feedback.py",
+      "jxmlease_matches_oracles": true,
+      "parser_family": "jxmlease node builder over CPython 3.14 pyexpat / Expat 2.10.0 (shared with xmltodict, untangle, defusedxml, xmlschema and ElementTree)",
+      "jxmlease_source_files": 6,
+      "jxmlease_source_lines": 239,
+      "expat_source_lines": 2197,
+      "afl_feedback": "data/python/xml/jxmlease-valid-feedback.json",
+      "afl_tuple_difference": 757,
+      "jxmlease_feature_difference": 0,
+      "expat_feature_difference": 794,
+      "project_receipt": "projects/xml/python/jxmlease/verification.json",
+      "feedback_caveat": "jxmlease's own lines do not differ between the two valid controls (0 features); all 794 differing features and 757 differing AFL++ tuples are Expat regions. The path is a node builder whose input-dependent feedback is the shared Expat parser's, labeled as such.",
+      "project_receipt_sha256": "8bf54535476859490a9210ef00a3747f8b4e62baf25efe2784a14d1573aa5927"
     }
   ],
   "standard": [
@@ -665,7 +741,8 @@
         "xml.etree.ElementTree",
         "untangle (SAX via defusedxml DefusedExpatParser)",
         "defusedxml (guarded pure-Python ElementTree XMLParser)",
-        "xmlschema (XMLResource over ElementTree.iterparse)"
+        "xmlschema (XMLResource over ElementTree.iterparse)",
+        "jxmlease (own pyexpat parser, namespace processing off; raw names)"
       ]
     }
   ]

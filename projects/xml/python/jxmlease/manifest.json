@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "jxmlease",
+  "release": "1.0.3",
+  "catalog_parser": "data/python/xml/parsers.json",
+  "source_lock": "projects/xml/python/jxmlease/runtime-requirements.lock",
+  "source_sha256": "6bbfaee0ecf7e287667c9b33fa70c2650265dcbf01518a2531a46b921c17cdaf",
+  "sdist_sha256": "612c1575d8a87026dea096bb75acec7302dd69040fa23d9116e71e30d5e0839e",
+  "parser_family": "jxmlease _DictSAXHandler node builder over CPython 3.14 pyexpat over Expat 2.10.0, namespace processing off (raw names); shares the Expat XML parser family with projects/xml/python/xmltodict, untangle, defusedxml, xmlschema and the standard xml.etree.ElementTree path",
+  "underlying_release": "Expat 2.10.0",
+  "underlying_source_sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+  "build_note": "jxmlease is installed from the pinned py2.py3-none-any wheel (jxmlease/ checked byte-identical to the sdist); it has no runtime dependencies. Ubuntu's CPython 3.14 pyexpat loads Expat 2.10.0 built from source with clang LLVM source coverage (same Expat pin as projects/xml/python/xmltodict and untangle) through LD_LIBRARY_PATH; pyexpat.EXPAT_VERSION is asserted.",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "c:catalog"
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "order"
+  },
+  "api": "jxmlease.parse(bytes of a local XML file) with default settings; returned XMLDictNode / XMLListNode / XMLCDATANode tree read through tag, get_xml_attrs() and get_cdata()",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the jxmlease.parse call (jxmlease xmlparser.py, _parsehandler.py and node classes) and LLVM source coverage of source-built Expat 2.10.0 reached through pyexpat",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "format_specific_coverage_file_suffix": "/jxmlease/_parsehandler.py",
+  "underlying_coverage_subject_prefix": "/work/expat/lib/",
+  "underlying_format_specific_coverage_file_suffix": "xmlparse.c",
+  "afl_llvm_module_glob": "/opt/expat/lib/libexpat.so.1",
+  "afl_coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "native_campaign_supported": false,
+  "scope": "Valid UTF-8 XML 1.0 local files without DOCTYPE through jxmlease.parse with default settings: raw qualified element and attribute names as written (prefix:local; namespace processing is off by default), xmlns/xmlns:* declarations kept as ordinary attributes in source order, per-element stripped character data (CDATA and decoded references included), and tree depth. Same-name siblings are grouped into XMLListNode lists, so document order across differently named siblings is not kept (both controls keep it); comments and processing instructions are not delivered to the node tree, and mixed content is concatenated per element.",
+  "parser_options_caveat": "jxmlease's default Parser settings (process_namespaces=False, no namespace remapping or stripping) were used. No DTD, entity, malformed-input or generator (streaming) mode was tested.",
+  "afl_package_release": "4.33c-1.1ubuntu1",
+  "license_sha256": "f45b614f8b1e759011de9310edc60c27bcc382a857bfae8fdf57c840e901e6ab",
+  "tested_parser": "jxmlease.xmlparser.Parser creating xml.parsers.expat.ParserCreate(encoding, None) itself (process_namespaces=False default; asserted in the image)",
+  "raw_name_caveat": "Raw-name view, following the C raw-name precedent (projects/xml/c/libnxml/oracle.py): names are reported as written and namespace URIs are never resolved. The summary is compared with an expat non-namespace oracle and, in the feedback check, with an independent lxml/libxml2 parse projected to raw names; no expanded {uri}local name is claimed."
+}
