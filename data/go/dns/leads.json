@@ -172,7 +172,8 @@
     "family": "dnstt dns package",
     "api_lead_checked_against_pinned_release": true,
     "version_seen": "v1.20260501.0",
-    "reason": "MessageFromWireFormat decodes the header, questions and record owner names, but every record keeps its RDATA as raw bytes (RR.Data) and the package exports no decoder for names inside RDATA (only DecodeRDataTXT). The control's compressed CNAME and MX targets could only be produced by the harness parsing RDATA itself, so the observed result would not come from the library."
+    "reason": "MessageFromWireFormat decodes the header, questions and record owner names, but every record keeps its RDATA as raw bytes (RR.Data) and the package exports no decoder for names inside RDATA (only DecodeRDataTXT). The control's compressed CNAME and MX targets could only be produced by the harness parsing RDATA itself, so the observed result would not come from the library.",
+    "lead_adoption_order": 16
   },
   {
     "name": "github.com/cybergarage/go-mdns/mdns/dns",
@@ -185,7 +186,8 @@
     "family": "go-mdns dns package",
     "api_lead_checked_against_pinned_release": true,
     "version_seen": "v1.0.0",
-    "reason": "The mDNS message parser has typed records only for PTR, SRV, TXT, A, AAAA and NSEC (mdns/dns/record_impl.go); CNAME and MX RDATA are left as untyped bytes, so the control's CNAME and MX answers cannot be reported from the library's parse."
+    "reason": "The mDNS message parser has typed records only for PTR, SRV, TXT, A, AAAA and NSEC (mdns/dns/record_impl.go); CNAME and MX RDATA are left as untyped bytes, so the control's CNAME and MX answers cannot be reported from the library's parse.",
+    "lead_adoption_order": 26
   },
   {
     "name": "github.com/pion/mdns",
@@ -225,5 +227,161 @@
     "api_lead_checked_against_pinned_release": true,
     "version_seen": "v1.16.11",
     "reason": "The package holds only a port constant (common/dns/dns.go) plus a blocker subpackage; no DNS message parser."
+  },
+  {
+    "name": "github.com/hashicorp/mdns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 254,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/hashicorp/mdns",
+    "input_api_lead": "",
+    "family": "miekg/dns v1",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.0.7",
+    "reason": "mDNS client/server built on github.com/miekg/dns (already selected), which packs and unpacks every message; no own message parser."
+  },
+  {
+    "name": "github.com/micro/mdns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 89,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/micro/mdns",
+    "input_api_lead": "",
+    "family": "miekg/dns v1",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.3.0",
+    "reason": "mDNS client/server built on github.com/miekg/dns (already selected), which packs and unpacks every message; no own message parser."
+  },
+  {
+    "name": "github.com/whyrusleeping/mdns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 28,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/whyrusleeping/mdns",
+    "input_api_lead": "",
+    "family": "miekg/dns v1",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.0-20190826153040-b9b60ed33aa9",
+    "reason": "mDNS client/server built on github.com/miekg/dns (already selected), which packs and unpacks every message; no own message parser."
+  },
+  {
+    "name": "github.com/pion/mdns/v2",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 16,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/pion/mdns/v2",
+    "input_api_lead": "",
+    "family": "x/net dnsmessage",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v2.2.2",
+    "reason": "mDNS connection package (v2 of the excluded pion/mdns); message parsing is golang.org/x/net/dns/dnsmessage (already selected). No own parser."
+  },
+  {
+    "name": "github.com/cznic/dns/rr",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 7,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/cznic/dns/rr",
+    "input_api_lead": "",
+    "family": "cznic/dns",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.0-20181122101858-8a2913d6a50b",
+    "reason": "Resource-record types and decoders of the already selected github.com/cznic/dns/msg path (same module and decoder); not a separate parser path."
+  },
+  {
+    "name": "github.com/asciimoth/gonnect/dns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 7,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/asciimoth/gonnect/dns",
+    "input_api_lead": "",
+    "family": "x/net dnsmessage",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.58.0",
+    "reason": "DNS routing/transport adapters; wire handling uses golang.org/x/net/dns/dnsmessage (dns/wire.go) and miekg/dns (meshnames), both already selected. No own parser."
+  },
+  {
+    "name": "github.com/bassosimone/dnscodec",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 4,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/bassosimone/dnscodec",
+    "input_api_lead": "",
+    "family": "miekg/dns v1",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.0-20261113074346-aae2f8a5889b",
+    "reason": "Query/response helpers over github.com/miekg/dns (query.go, response.go); no own message parser."
+  },
+  {
+    "name": "github.com/bassosimone/minest",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 3,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/bassosimone/minest",
+    "input_api_lead": "",
+    "family": "miekg/dns v1",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.0-20261113075827-f6d6c4c8c4be",
+    "reason": "Minimal DNS-over-UDP resolver over github.com/miekg/dns; network API, no own parser."
+  },
+  {
+    "name": "github.com/dmachard/go-netutils",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 3,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/dmachard/go-netutils",
+    "input_api_lead": "",
+    "family": "gopacket",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.9.4",
+    "reason": "Packet capture, defragmentation and TCP reassembly helpers over gopacket/layers (already selected); no DNS message parser of its own."
+  },
+  {
+    "name": "github.com/xtls/xray-core/transport/internet/finalmask/xdns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 1,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/xtls/xray-core/transport/internet/finalmask/xdns",
+    "input_api_lead": "",
+    "family": "dnstt dns",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v1.260327.0",
+    "reason": "DNS-tunnel transport whose dns.go is a copy of dnstt's dns package (228 of its 229 distinct non-comment lines, 99.6%, also occur in dnstt v1.20260501.0 dns/dns.go: MessageFromWireFormat, Name, RR with raw Data); it shares the recorded dnstt control failure (CNAME/MX RDATA left as raw bytes) and is not a separate family."
+  },
+  {
+    "name": "github.com/Packet-Clearing-House/DNSAuth/libs/dnsdist",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 1,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/Packet-Clearing-House/DNSAuth/libs/dnsdist",
+    "input_api_lead": "",
+    "family": "",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.0-20181203174505-71c774cf7377",
+    "reason": "Generated protobuf types for dnsdist's remote-logging DNSMessage; not a DNS wire-format parser."
+  },
+  {
+    "name": "github.com/presotto/go-mdns-sd/go_dns",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 0,
+    "found_by": "registry search hit (round 3)",
+    "documentation": "https://pkg.go.dev/github.com/presotto/go-mdns-sd/go_dns",
+    "input_api_lead": "(*go_dns.Msg).Unpack([]byte) bool",
+    "family": "Go net/dnsmsg.go (pre-dnsmessage)",
+    "api_lead_checked_against_pinned_release": true,
+    "version_seen": "v0.0.0-20151103061658-343772046ec1",
+    "reason": "Copy of Go's pre-2017 net/dnsmsg.go (Msg.Unpack with RR_A/RR_CNAME/RR_MX structs; the Go authors' BSD licence), a family not otherwise selected, but the go_dns package itself has 0 known importers on pkg.go.dev (the 11 recorded for the parent mdns package count the mDNS API, which documents no bytes parser), so it has no positive primary metric. Msg.Unpack also has no doc comment. github.com/vanadium/go-mdns-sd/go_dns is the same code (non-test files identical) and pkg.go.dev reports no importer count for it."
   }
 ]
