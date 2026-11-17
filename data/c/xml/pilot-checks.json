@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "cell": "xml/c",
+  "checked_at_utc": "2026-11-17T03:49:56.357896+00:00",
+  "checks": [
+    {
+      "command": "python3 controls/xml/check_controls.py",
+      "pass": true,
+      "result": "pyexpat oracle summaries for catalog-ns.xml and order-default-ns.xml equal the manifest expected_output and differential_expected_output"
+    },
+    {
+      "command": "python3 scripts/run_project.py xml c expat",
+      "pass": true,
+      "image_id": "sha256:832f5803273f0e6cbc4fc42c2cfc015e2df1c108fd2bf52cd85390c6cc88c4f8",
+      "parser_source_lines_covered": 2302,
+      "xmlparse_c_lines_covered": 1566,
+      "receipt_sha256": "28260cf8293e14df42d18ca51490559fe3c7e70a5ca557275171745bfa93dfd8"
+    },
+    {
+      "command": "python3 parsarium.py run xml c expat controls/xml/catalog-ns.xml",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run xml c expat controls/xml/order-default-ns.xml",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "cd scripts && python3 build_afl_native.py xml c expat",
+      "pass": true,
+      "image_id": "sha256:6067eccf437f9a7ebc4c6ee0a8d3f728b4dd6e1abd4667ef86e89fe7fd5cce26",
+      "feedback_edges": 722,
+      "afl_map_size": 7979,
+      "receipt_sha256": "237578925bc4ba482e7c87f7130f5b50ea1724c793a56c8fceaf75d87fc60390"
+    },
+    {
+      "command": "cd scripts && python3 verify_c_xml_feedback.py",
+      "pass": true,
+      "repeats_per_control": 5,
+      "first_afl_tuples": 722,
+      "second_afl_tuples": 809,
+      "afl_tuple_difference": 157,
+      "repeated_controls_identical": true,
+      "receipt_sha256": "62615525af130e05bc6ff7538de4f749f77c51c7638e02783d610e106fcd5ae5"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare xml c expat runs/xml-expat-afl --seed controls/xml/order-default-ns.xml",
+      "pass": true,
+      "seeds": [
+        "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+        "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928"
+      ]
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/xml-expat-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "52 tests OK"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "825/825 AFL++ overlays and 521/521 ecosystem feedback checks current"
+    },
+    {
+      "command": "python3 scripts/validate_catalog.py",
+      "pass": true,
+      "result": "passes only after python3 scripts/build_matrix.py adds c/xml to data/pilot-cells.json; that shared file was regenerated for the check and then restored, so the integrator must regenerate it"
+    }
+  ],
+  "notes": [
+    "The first AFL++ verification failed: order-default-ns.xml gave different maps on repeat because expat draws a random hash salt per parser. The harness now calls the documented XML_SetHashSalt with a fixed non-zero value; all receipts were regenerated after that change.",
+    "The libFuzzer binary instruments only the harness; libexpat is compiled with LLVM coverage flags. Parser-level fuzz feedback comes from the AFL++ overlay, where build.sh's clang calls, including configure CC, become afl-clang-fast.",
+    "libxml2 2.15.4 was built once in a scratch directory with an xmlReaderForMemory harness and printed both control summaries exactly; it was not committed and is recorded only as a lead."
+  ],
+  "not_run": [
+    "AFL++ campaign",
+    "malformed-input or vulnerability experiments",
+    "aggregate catalog/website regeneration (build_matrix, build_readmes, audit_projects --write, refresh_smoke_batch.py, smoke reports)"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:48:52.465708+00:00",
+  "project": "xml/c/expat",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_libexpat_and_harness_edges",
+  "feedback_scope": "AFL++ instruments only the pinned libexpat sources and the XML_Parse harness; no other library is compiled into /work/fuzzer.",
+  "base_project_receipt_sha256": "28260cf8293e14df42d18ca51490559fe3c7e70a5ca557275171745bfa93dfd8",
+  "overlay_receipt_sha256": "237578925bc4ba482e7c87f7130f5b50ea1724c793a56c8fceaf75d87fc60390",
+  "base_image_id": "sha256:832f5803273f0e6cbc4fc42c2cfc015e2df1c108fd2bf52cd85390c6cc88c4f8",
+  "overlay_image_id": "sha256:6067eccf437f9a7ebc4c6ee0a8d3f728b4dd6e1abd4667ef86e89fe7fd5cce26",
+  "repeats_per_control": 5,
+  "repeated_controls_identical": true,
+  "first_control": "controls/xml/catalog-ns.xml",
+  "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "second_control": "controls/xml/order-default-ns.xml",
+  "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "second_control_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "second_case_kind": "valid_control",
+  "first_afl_tuples": 722,
+  "second_afl_tuples": 809,
+  "afl_tuple_difference": 157
+}

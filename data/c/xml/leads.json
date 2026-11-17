@@ -1,0 +1,156 @@
+{
+  "captured_from": "data/c/xml/registry-snapshot.json",
+  "metric": "Debian popcon installations of the lead's runtime library binary package (max when two sonames are listed)",
+  "leads": [
+    {
+      "name": "expat",
+      "status": "selected",
+      "language": "C",
+      "conan_recipe": true,
+      "popcon_installed": 297134,
+      "homebrew_install_365d": 1360500,
+      "reason": "Selected and verified: XML_ParserCreateNS/XML_Parse matched both controls under LLVM source coverage with a stable AFL++ differential; see data/c/xml/parsers.json.",
+      "source": "https://github.com/libexpat/libexpat"
+    },
+    {
+      "name": "libxml2",
+      "status": "unresolved",
+      "language": "C",
+      "conan_recipe": true,
+      "popcon_installed": 290724,
+      "homebrew_install_365d": 564778,
+      "reason": "Second on the primary metric (libxml2 binary 290,724 vs libexpat1 297,134, a 2.2% gap; libxml2-16 adds 9,413 on hosts that may also have libxml2) and on the Homebrew cross-check (564,778 vs 1,360,500). Independent parser family. A scratch xmlReaderForMemory/xmlTextReaderRead build of 2.15.4 (sha256 98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821) printed both control summaries exactly, but it has no committed project, receipt or AFL++ overlay, so it is not a verified entry.",
+      "source": "https://gitlab.gnome.org/GNOME/libxml2"
+    },
+    {
+      "name": "mxml",
+      "status": "unresolved",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 2054,
+      "homebrew_install_365d": 127,
+      "reason": "Mini-XML: own tree parser (mxmlLoadString). libmxml1 has 2,054 Debian installs, most in no-files; no Conan recipe. Namespace handling is not documented as Namespaces-in-XML resolution; not built.",
+      "source": "https://github.com/michaelrsweet/mxml"
+    },
+    {
+      "name": "libroxml",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "No libroxml0 binary or libroxml source row in either captured popcon table; no Conan recipe or Homebrew formula. Not built.",
+      "source": "https://github.com/blunderer/libroxml"
+    },
+    {
+      "name": "yxml",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "Small byte-at-a-time tokenizer without namespace resolution; not packaged in Debian or Conan. Not built.",
+      "source": "https://dev.yorhel.nl/yxml"
+    },
+    {
+      "name": "ezxml",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "Unmaintained single-file parser; not packaged in Debian or Conan. Not built.",
+      "source": "https://ezxml.sourceforge.net/"
+    },
+    {
+      "name": "sxmlc",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "Single-file parser; not packaged in Debian or Conan. Not built.",
+      "source": "https://sourceforge.net/projects/sxmlc/"
+    },
+    {
+      "name": "xmlsec",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "XML Signature/Encryption library; parses through libxml2 (shared libxml2 family), not an XML parser of its own.",
+      "source": "https://www.aleksey.com/xmlsec/"
+    },
+    {
+      "name": "libxmlpp",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ wrapper over libxml2; not C and same libxml2 family.",
+      "source": "https://libxmlplusplus.github.io/libxmlplusplus/"
+    },
+    {
+      "name": "irrxml",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ parser; belongs to the C++ cell, not C.",
+      "source": "https://conan.io/center/recipes/irrxml"
+    },
+    {
+      "name": "libstudxml",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ streaming parser (bundles a modified expat); belongs to the C++ cell, not C.",
+      "source": "https://conan.io/center/recipes/libstudxml"
+    },
+    {
+      "name": "pugixml",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ parser; belongs to the C++ cell, not C.",
+      "source": "https://conan.io/center/recipes/pugixml"
+    },
+    {
+      "name": "rapidxml",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ header-only parser; belongs to the C++ cell, not C.",
+      "source": "https://conan.io/center/recipes/rapidxml"
+    },
+    {
+      "name": "tinyxml",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ parser; belongs to the C++ cell, not C.",
+      "source": "https://conan.io/center/recipes/tinyxml"
+    },
+    {
+      "name": "tinyxml2",
+      "status": "excluded",
+      "language": "C++",
+      "conan_recipe": true,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "reason": "C++ parser; belongs to the C++ cell, not C.",
+      "source": "https://conan.io/center/recipes/tinyxml2"
+    }
+  ]
+}

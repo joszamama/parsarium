@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "c",
+  "package": "expat",
+  "release": "2.10.0",
+  "catalog_parser": "data/c/xml/parsers.json",
+  "source_lock": "projects/xml/c/expat/source-lock.json",
+  "source_sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "api": "XML_ParserCreateNS(\"UTF-8\", ' '); XML_SetHashSalt(fixed); XML_SetElementHandler; XML_SetStartNamespaceDeclHandler; XML_SetCharacterDataHandler; XML_SetCommentHandler; XML_SetProcessingInstructionHandler; XML_Parse(local bytes, isFinal=XML_TRUE)",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libexpat built from the pinned release (static, xmlwf/examples/tests disabled)",
+  "coverage_subject_prefix": "/work/source/lib/",
+  "format_specific_coverage_file_suffix": "/xmlparse.c",
+  "pilot": "xml_c_registry_pilot",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish namespace-resolved element, attribute, declaration and character-data events only; DTDs, external entities, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from controls/xml/check_controls.py, which uses Python's bundled pyexpat (same expat family); the go encoding/xml and etree paths and a scratch libxml2 xmlTextReader build produced the same summaries."
+}
