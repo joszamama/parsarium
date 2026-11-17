@@ -985,8 +985,8 @@
       "dns"
     ],
     "cells_total": 48,
-    "catalog_paths": 297,
-    "containerized_verified": 297,
+    "catalog_paths": 299,
+    "containerized_verified": 299,
     "staged": 0,
     "standard_api_paths": 13,
     "standard_containerized_verified": 11,
@@ -1123,22 +1123,6 @@
       {
         "format": "json",
         "ecosystem": "c",
-        "catalog_paths": 8,
-        "containerized_verified": 8,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_eight_selected_search_bounded",
-        "complete": false,
-        "uncertainty": "Eight C JSON third-party paths pass two valid controls with format-aware tree results, parser source coverage and stable AFL++ feedback. The original Conan recipe search missed Debian-packaged C parsers; a bounded Debian source-name search for 'json' (320 hits) plus exact lookups for jansson, jq, frozen, jsmn and parson in the same hashed popcon snapshot found the Debian-packaged C parser leads. libfastjson is a json-c fork and shares the json-c tokener family; jq's count is the jq source package (mostly the command-line program), and its jv C API is documented on the project wiki without a stability commitment; jq numbers have one kind, so integer/float in its tree comes from the preserved decimal literal. frozen fails the nested-object control (\\u00e9 decoded to one Latin-1 byte), jsmn is tokenizer-only, and liblaxjson (1 installation) and parson (no Debian source) remain unselected. Debian installations mostly reflect dependencies and miss vendored copies. These paths do not establish a definitive top ten or full RFC 8259 compliance. ISO C documents no JSON API."
-      },
-      {
-        "format": "json",
-        "ecosystem": "cpp",
         "catalog_paths": 9,
         "containerized_verified": 9,
         "staged": 0,
@@ -1150,7 +1134,23 @@
         "phase": "pilot",
         "status": "pilot_nine_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Nine C++ JSON package paths pass two valid controls with scoped parser source coverage and stable AFL++ feedback. Glaze uses a generic_i64 DOM and a parser-only probe; jsoncons uses the insertion-ordered ojson tree and a parser-only probe whose AFL++ allowlist names the basic_json_parser methods, because a file-only allowlist dropped parser functions whose first instruction is inlined from another header; PicoJSON and taoJSON use the same function-scoped allowlist approach. PicoJSON and taoJSON store objects in std::map, so their trees lose source key order: their controls check array order and integer/float kinds exactly but compare object members by key. taoJSON runs its own grammar on the separately pinned PEGTL 3.2.6 engine, and its 1.0.0-beta.14 tag is an upstream pre-release; no final 1.0.0 exists. The lowest ranks rest on weak signals: PicoJSON 16 installations (0 recent), jsoncons 3 (1 recent), and taoJSON 2 (both no_files). Glaze has 171 comparable Debian source-package installations, but the source metric favors runtime packages and undercounts header-only libraries. Boost.JSON has no JSON-specific Debian source count and is kept by its 1,749 JSON-specific dev installs. POCO JSON passed the technical gate but was demoted for lack of a qualifying metric (data/cpp/json/poco-json-demoted.json). One documentation lead remains unresolved: Qt. The 320 JSON-name source hits exclude Glaze, found by a supplementary exact source-name lookup. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, other encodings, or malformed-input behavior."
+        "uncertainty": "Nine C JSON third-party paths pass two valid controls with format-aware tree results, parser source coverage and stable AFL++ feedback. The original Conan recipe search missed Debian-packaged C parsers; a bounded Debian source-name search for 'json' (320 hits) plus exact lookups for jansson, jq, frozen, jsmn and parson in the same hashed popcon snapshot found the Debian-packaged C parser leads. A later exact-lookup pass found yajl (152,183), which the json-name search missed because its source name lacks 'json'; yajl is checked through its documented yajl_parse callback API, and its parser-only AFL++ probe uses CLASSIC instrumentation because the default PCGUARD build crashed on the valid controls on arm64. libfastjson is a json-c fork and shares the json-c tokener family; jq's count is the jq source package (mostly the command-line program), and its jv C API is documented on the project wiki without a stability commitment; jq numbers have one kind, so integer/float in its tree comes from the preserved decimal literal. frozen fails the nested-object control (\\u00e9 decoded to one Latin-1 byte), jsmn is tokenizer-only, liblaxjson (1 installation) fails the nested-object control (it requires an explicit exponent sign) and reports every number as a double, and parson (no Debian source) has no primary value. Debian installations mostly reflect dependencies and miss vendored copies. The tenth slot stays open: the json-name search (320 hits) and twenty-five exact source-name lookups in the same snapshot leave no other positive-count C JSON value library, parson's only signal is GitHub stars (allowed only in PLY cells), and no C JSON source qualifies for the format-specific dev-package fallback. These paths do not establish a definitive top ten or full RFC 8259 compliance. ISO C documents no JSON API."
+      },
+      {
+        "format": "json",
+        "ecosystem": "cpp",
+        "catalog_paths": 10,
+        "containerized_verified": 10,
+        "staged": 0,
+        "pending": 0,
+        "standard_api_paths": 0,
+        "standard_containerized_verified": 0,
+        "standard_staged": 0,
+        "standard_pending": 0,
+        "phase": "pilot",
+        "status": "pilot_ten_selected_search_bounded",
+        "complete": false,
+        "uncertainty": "Ten C++ JSON package paths pass two valid controls with scoped parser source coverage and stable AFL++ feedback. Glaze uses a generic_i64 DOM and a parser-only probe; jsoncons uses the insertion-ordered ojson tree and a parser-only probe whose AFL++ allowlist names the basic_json_parser methods, because a file-only allowlist dropped parser functions whose first instruction is inlined from another header; PicoJSON and taoJSON use the same function-scoped allowlist approach. PicoJSON and taoJSON store objects in std::map, so their trees lose source key order: their controls check array order and integer/float kinds exactly but compare object members by key. taoJSON runs its own grammar on the separately pinned PEGTL 3.2.6 engine, and its 1.0.0-beta.14 tag is an upstream pre-release; no final 1.0.0 exists. cpprestsdk (Microsoft C++ REST SDK 2.10.19, upstream in maintenance mode) is parsed with the documented keep_object_element_order(true) switch, so its controls check key order; only its three JSON translation units and the asyncrt_utils.cpp UTF helpers are built, through a stdafx.h shim, and its 813 Debian installations count the whole multi-purpose HTTP/URI/websocket/JSON SDK, not JSON-specific use. The lowest ranks rest on weak signals: PicoJSON 16 installations (0 recent), jsoncons 3 (1 recent), and taoJSON 2 (both no_files). Glaze has 171 comparable Debian source-package installations, but the source metric favors runtime packages and undercounts header-only libraries. Boost.JSON has no JSON-specific Debian source count and is kept by its 1,749 JSON-specific dev installs. POCO JSON passed the technical gate but was demoted for lack of a qualifying metric (data/cpp/json/poco-json-demoted.json). Qt QJsonDocument is excluded for lack of a qualifying metric: its Debian sources are framework-wide and Qt has no JSON-specific development package for the 1,000 fallback (data/cpp/json/qt6-jsondocument-unresolved.json); no documentation lead remains unresolved. The 320 JSON-name source hits exclude Glaze and cpprest, found by supplementary exact source-name lookups in the same snapshot. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, other encodings, or malformed-input behavior."
       },
       {
         "format": "json",

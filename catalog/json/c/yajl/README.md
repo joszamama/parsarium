@@ -45,3 +45,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json c yajl
+python3 parsarium.py run json c yajl controls/json/nested-object.json
+```
