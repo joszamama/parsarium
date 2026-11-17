@@ -32,4 +32,4 @@ Homebrew install-on-request (365 days) orders the four libraries differently: ti
 
 The bounded search compared only these five named, format-specific C++ XML libraries. Other C++ XML packages may exist and their adoption remains unmeasured here. The two small valid controls do not establish complete XML 1.0, DTD/entity, encoding, or malformed-input behavior. No standard-library XML API was found in the official inventory.
 
-Qt XML, Boost.PropertyTree and POCO XML are parts of larger frameworks and are not ranked by whole-framework installs.
+Qt XML, Boost.PropertyTree and POCO XML are parts of larger frameworks and are not ranked by whole-framework installs. Qt Core `QXmlStreamReader` and POCO XML `SAXParser` both passed local control and feedback checks but are not selected: Qt has only the framework-wide `qt6-base-dev` count (4,942), and POCO's XML-specific runtime package has 887 installations, below the 1,000 format-specific fallback ([leads](leads.json)). POCO XML also shares the Expat family.

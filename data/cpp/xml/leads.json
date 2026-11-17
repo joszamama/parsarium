@@ -28,5 +28,29 @@
     "reason": "Verified RapidXML 1.13 xml_document<>::parse<0>(char*) on both shared valid controls with the exact Expat-oracle structure, 413 rapidxml.hpp lines covered and a stable 15-tuple parser-only AFL++ difference (38 vs 45 tuples). Rank 5 of five by Debian dev installations; 17 installations with zero recent use is a weak signal, kept because the protocol orders positive primary-metric paths without a minimum.",
     "source": "https://rapidxml.sourceforge.net/",
     "verification": "projects/xml/cpp/rapidxml/verification.json"
+  },
+  {
+    "name": "Qt 6 Core QXmlStreamReader",
+    "status": "unresolved_no_primary_metric",
+    "version_seen": "6.10.2",
+    "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+    "popcon_dev_package": {
+      "qt6-base-dev": 4942
+    },
+    "family": "Qt Core QXmlStreamReader own streaming XML parser (qxmlstream.cpp)",
+    "reason": "Technically verified locally (candidate commit 0c027c53): QXmlStreamReader(const QByteArray&) on both valid controls, Qt Core parser-source coverage and stable input-dependent AFL++ feedback. Not selected: the parser lives in Qt Core, so the only Debian development count (qt6-base-dev 4,942) covers the whole Qt base framework and is format-ambiguous; there is no XML-specific development package for this API (libqt6xml6 is a separate module). PROTOCOL.md's fallback needs a format-specific development-package count of at least 1,000.",
+    "source": "https://doc.qt.io/qt-6/qxmlstreamreader.html"
+  },
+  {
+    "name": "POCO XML SAXParser",
+    "status": "unresolved_no_primary_metric",
+    "version_seen": "1.15.4",
+    "license": "BSL-1.0 (bundled Expat MIT)",
+    "popcon_dev_package": {
+      "libpoco-dev": 190
+    },
+    "family": "POCO XML ParserEngine over bundled Expat 2.8.5 (Expat family)",
+    "reason": "Technically verified locally (candidate commit 084a2e40): SAXParser::parseMemoryNP on both valid controls with stable parser feedback, but the tokenizer is bundled Expat. Not selected: libpoco-dev (190) covers the whole POCO suite; the XML-specific runtime libpocoxml100 has 887 installations (875 with no recent file use) and libpocoxml112 215, all below the PROTOCOL.md format-specific fallback of 1,000.",
+    "source": "https://docs.pocoproject.org/current/Poco.XML.SAXParser.html"
   }
 ]
