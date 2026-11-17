@@ -6,14 +6,25 @@ Parsarium is a format-first catalog and target set for parser experiments. Its a
 
 The active catalog selects **770 fully runnable third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 71 of 80 reach ten, and the other nine report the smaller supported count. Every selected path has a positive numeric adoption signal, though 48 use a separately labeled secondary source. Five adopted, control-verified candidates lack verified parser feedback and are [excluded with their blockers recorded](data/curation/feedback-exclusions.json), without filling their slots with lower-ranked leads. The [curation record](data/curation/README.md) explains metrics and remaining uncertainty. Standard/runtime APIs and the incomplete pilot formats have [separate coverage counts](data/projects-coverage.json).
 
-## Install
+## Start from source
+
+The published PyPI `2026.11.16` wheel expects a release snapshot asset that is
+currently unavailable. Use a checkout until the self-contained wheel is
+published:
 
 ```sh
-pip install parsarium
-parsarium list --format png
+git clone https://github.com/joszamama/parsarium.git
+cd parsarium
+python3 parsarium.py list --format png
 ```
 
-The package installs the `parsarium` command and a small Python API (`from parsarium import catalog`). Its wheel bundles a versioned snapshot of harnesses, controls, and catalog data. On first use it checks the snapshot's SHA-256 and extracts it to your cache directory without a network request. Each package version pins one snapshot, so the version identifies an exact set of targets. `parsarium run-selection MANIFEST` runs a selection saved from the [bench](https://parsarium.com/bench/). Set `PARSARIUM_HOME` to a clone of this repository to use the clone instead.
+The next package release will install the `parsarium` command and a small Python
+API (`from parsarium import catalog`). Its wheel will bundle a versioned snapshot
+of harnesses, controls, and catalog data. On first use it will check the
+snapshot's SHA-256 and extract it to your cache directory without a network
+request. Each package version will pin one snapshot. `parsarium run-selection
+MANIFEST` runs a selection saved from the [bench](https://parsarium.com/bench/).
+Set `PARSARIUM_HOME` to a clone of this repository to use the clone instead.
 
 ## Start here
 
