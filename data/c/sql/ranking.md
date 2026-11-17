@@ -22,6 +22,6 @@ Receipts: [libgda](../../../projects/sql/c/libgda/verification.json) and its [AF
 | sqlcipher | 3,786 | excluded | SQLite (fork) |
 | libgda5 | 2,105 | selected | libgda Lemon-generated SQL parser |
 | libpg-query | 41 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| duckdb | 40 | excluded | DuckDB (libpg_query-derived grammar) |
+| duckdb | 40 | excluded | DuckDB PEG parser (own grammar since 2.0.0; 1.x used a libpg_query-derived grammar) |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

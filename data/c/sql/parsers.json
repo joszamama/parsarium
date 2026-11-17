@@ -117,7 +117,7 @@
     "dialect": "PostgreSQL 18 grammar",
     "scope": "One SQL statement from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary read from the library's JSON parse tree. PL/pgSQL, deparse, fingerprint and protobuf outputs are untested.",
     "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
-    "family_note": "pg_query_parse runs the extracted PostgreSQL raw parser (bison gram.c, flex scan.c, parser.c) and serializes the raw parse tree as JSON (pg_query_outfuncs_json.c). The adapter reads SelectStmt, InsertStmt, RangeVar, JoinExpr, FuncCall and A_Const nodes from that tree. Shared family: Go pg_query_go, Rust pg_query, Python pglast and the libpg-query/@pgsql WASM npm packages bind this library; DuckDB's parser is a libpg_query-derived fork.",
+    "family_note": "pg_query_parse runs the extracted PostgreSQL raw parser (bison gram.c, flex scan.c, parser.c) and serializes the raw parse tree as JSON (pg_query_outfuncs_json.c). The adapter reads SelectStmt, InsertStmt, RangeVar, JoinExpr, FuncCall and A_Const nodes from that tree. Shared family: Go pg_query_go, Rust pg_query, Python pglast and the libpg-query/@pgsql WASM npm packages bind this library; DuckDB 1.x used a libpg_query-derived fork; DuckDB 2.0.0 (C++ cell) has its own PEG grammar.",
     "popularity": {
       "metric": "Debian popcon sourcemax installations, source package libpg-query",
       "value": 41,
