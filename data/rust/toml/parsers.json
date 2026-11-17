@@ -47,7 +47,7 @@
       "owner": {
         "name": {
           "type": "string",
-          "value": "Zo\u00eb"
+          "value": "Zoë"
         },
         "since": {
           "type": "datetime",
@@ -204,7 +204,7 @@
       "strings": {
         "escapes": {
           "type": "string",
-          "value": "tab\tquote\"backslash\\ \u00e9"
+          "value": "tab\tquote\"backslash\\ é"
         },
         "literal": {
           "type": "string",
@@ -294,7 +294,7 @@
       "owner": {
         "name": {
           "type": "string",
-          "value": "Zo\u00eb"
+          "value": "Zoë"
         },
         "since": {
           "type": "datetime",
@@ -451,7 +451,7 @@
       "strings": {
         "escapes": {
           "type": "string",
-          "value": "tab\tquote\"backslash\\ \u00e9"
+          "value": "tab\tquote\"backslash\\ é"
         },
         "literal": {
           "type": "string",
@@ -492,5 +492,252 @@
       "captured_at_utc": "2026-11-17T16:36:50.418362+00:00"
     },
     "project": "projects/toml/rust/toml_edit/verification.json"
+  },
+  {
+    "name": "boml",
+    "version": "2.0.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "boml::parse(&str) -> Result<boml::Toml, Error>; Toml derefs to TomlTable of TomlValue::{String, Integer (i64), Float (f64), Boolean, OffsetDateTime, DateTime, Date, Time, Array, Table}",
+    "documentation": "https://docs.rs/boml/2.0.1/boml/fn.parse.html",
+    "source": "https://static.crates.io/crates/boml/boml-2.0.1.crate",
+    "scope": "TomlTable tree over locally decoded UTF-8 text from boml::parse; the dependency-free crate scans and parses the text itself and returns typed TomlValue variants, including separate offset date-time, local date-time, local date and local time types. The harness walks the tables and arrays; offset date-times are converted to the UTC instant arithmetically from boml's date, time and offset fields. Both valid controls match the hand-written typed trees exactly. Only the TOML 1.0.0 subset in the two controls is tested.",
+    "family": "boml (brightshard, codeberg.org): own dependency-free scanner and parser; independent of toml_parser, toml, toml_edit and taplo (no dependency on them).",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "second_control": "controls/toml/typed-scalars.toml",
+    "second_control_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 136881,
+      "source": "data/rust/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:36:50.418362+00:00"
+    },
+    "project": "projects/toml/rust/boml/verification.json"
   }
 ]

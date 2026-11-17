@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/boml",
+  "pass": true,
+  "base_project_receipt_sha256": "91294e5eacc2b088988544fd3b5782550797396db74a89238490c2f52d975a2d",
+  "overlay_file_sha256": {
+    "Cargo.toml": "2923d64dd860e0acc45f0b633bc8685f68502902b249416d91025b95b58dd539",
+    "Cargo.lock": "f3d5c5eecad9dbd2b5b90ce2a308514e8ea99a3b0738195b442db191ab0a3aaa",
+    "afl_fuzzer.rs": "a995664344955af514040eeb99100b909d1ea26cce3e676cfcf4b4f18f7b1a35",
+    "Dockerfile": "4a00af5984f3662ae9de15ae443d1d69a87cce20ed7bec3bda67f786027b545d",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "d180b09b374f9474f6ee26596bf1fbd5029d20036a4a866cccf01ff476f585e8"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "94e18ce0171e3e8a2d294da0d6bfad9814eb3516d24864b32dc3902c786e0fb5",
+  "image_id": "sha256:153f2338921069e90e9680939258ae880dfc4f5d6cac1bc40d91fbeffae02463",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 596,
+  "afl_map_size": 2949,
+  "feedback_kind": "afl_rs_boml_only_sancov_edges",
+  "feedback_scope": "Only boml crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and std are uninstrumented; std HashMap RandomState keys for boml's TomlTable maps are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "boml"
+    ],
+    "rlib_guard_bytes": {
+      "boml": 11776
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_toml_boml_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 2944
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "boml stores tables in std HashMaps hashed with RandomState; constant getrandom bytes fix the keys; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:8ffdfaa4520b555bbc566396c2ccfceb9a95075e7e53d6ef7ff196ffe18fdbf8",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 693,
+  "edges_only_in_control": 178,
+  "edges_only_in_variant": 275,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/boml-2.0.1/",
+    "control_lines": {
+      "src/lib.rs": 6,
+      "src/parser.rs": 70,
+      "src/parser/key.rs": 38,
+      "src/parser/num.rs": 63,
+      "src/parser/string.rs": 46,
+      "src/parser/time.rs": 66,
+      "src/parser/value.rs": 51,
+      "src/table.rs": 12,
+      "src/text.rs": 87,
+      "src/types.rs": 7
+    },
+    "variant_lines": {
+      "src/lib.rs": 6,
+      "src/parser.rs": 50,
+      "src/parser/key.rs": 37,
+      "src/parser/num.rs": 134,
+      "src/parser/string.rs": 128,
+      "src/parser/time.rs": 96,
+      "src/parser/value.rs": 9,
+      "src/table.rs": 12,
+      "src/text.rs": 94,
+      "src/types.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/parser.rs",
+      "src/parser/key.rs",
+      "src/parser/num.rs",
+      "src/parser/string.rs",
+      "src/parser/time.rs",
+      "src/parser/value.rs",
+      "src/text.rs",
+      "src/types.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      596,
+      596,
+      596,
+      596,
+      596,
+      596,
+      596,
+      596,
+      596,
+      596
+    ],
+    "stable_edges": 596,
+    "union_edges": 596,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      693,
+      693,
+      693,
+      693,
+      693,
+      693,
+      693,
+      693,
+      693,
+      693
+    ],
+    "stable_edges": 693,
+    "union_edges": 693,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
