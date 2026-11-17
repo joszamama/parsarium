@@ -1,0 +1,72 @@
+{
+  "kind": "third_party",
+  "api": "new MySQL().parse(local UTF-8 text, errorListener) from dt-sql-parser -> ProgramContext ANTLR4 parse tree",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:00:48.464617+00:00",
+  "manifest": "projects/sql/javascript/dt_sql_parser/manifest.json",
+  "image_id": "sha256:b07ec8ffee3772c424caf7f4da57c2c8963093524325a097adac9af9afea1a9b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-dt-sql-parser-target@4.6.1 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- dt-sql-parser@4.6.1",
+    "  +-- antlr4-c3@3.3.7",
+    "  `-- antlr4ng@2.0.11"
+  ],
+  "source_sha256": "0f989e624714580c4281d5bb4a4b45eaa31274546f24041c7278aff32e19299e",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "c90bb0f9b5b3b7d92a75cdda86512ce1e08326240aa8978e42dcb4b201e4a1f5",
+    "adapter.js": "6da61f5c3220a1557e0b22f0a443018408625abdd3c9e499dfed1848befc05e2",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "3a6946ee58921d47ea138a6003a0bc0b108ea32d9af3cec5365a5758fc65a090",
+    "manifest.json": "90cad99fe51c425857c87a03b1f4ac426e1bac6d05aa9bd76b26243594221fb7",
+    "package-lock.json": "f5aa18b8adedbe98dc42674369352e9f9d086366df6156aed854cf5d13c2f97a",
+    "package.json": "f2c05c9a96e91681ee6a0468c9702934bcbc0a3c1ca488e21b802c3b54ea1926",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "58c488919bb88269cb989b8f8362951f975153a01c76ab803864f643f41c6d8f",
+    "source-lock.json": "58ac89917aeb0734b53ca748b57e992e8ecd44dbadbfc4363f6320624158ee93"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 89,
+  "parser_source_lines_covered": 51949,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/dt_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

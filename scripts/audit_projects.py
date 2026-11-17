@@ -510,6 +510,34 @@ def fltk_native_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     )
 
 
+def rust_pg_query_native_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Require the vendored libpg_query parser objects to contribute AFL++ feedback."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "sql/rust/pg_query":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    rust_edges = overlay.get("rust_only_feedback_edges", 0)
+    native_edges = overlay.get("native_feedback_edges", 0)
+    return (
+        overlay.get("feedback_kind") == "rust_and_native_libpg_query_parser_edges"
+        and overlay.get("parser_source_sha256") == manifest["source_sha256"]
+        and overlay.get("afl_rust_release") == "0.18.2"
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and sorted(overlay.get("native_instrumented_objects", []))
+            == ["src_backend_parser_gram.o", "src_backend_parser_parser.o",
+                "src_backend_parser_scan.o"]
+        and native_edges > 0 and rust_edges > 0
+        and native_edges + rust_edges == overlay.get("feedback_edges")
+        and overlay.get("afl_map_size", 0) > overlay.get("rust_only_afl_map_size", 0)
+        and set(file_hashes) == {"Cargo.toml", "Cargo.lock", "afl_fuzzer.rs", "Dockerfile",
+                                 "build.py", "c-allowlist.txt"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def vlc_cpp_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
     """Bind C++ VLC feedback to its MP4-only instrumented plugin."""
     project = path.parent.relative_to(ROOT / "projects")
@@ -1003,6 +1031,8 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
         return False
     if not fltk_native_feedback_verified(path, manifest, overlay):
         return False
+    if not rust_pg_query_native_feedback_verified(path, manifest, overlay):
+        return False
     if not vlc_cpp_mp4_feedback_verified(path, manifest, overlay):
         return False
     if not mpv_tagged_mp3_feedback_verified(path, manifest, overlay):
@@ -1022,6 +1052,7 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
         native_cgo_kinds = {
             "mp3/go/github_com_tosone_minimp3": "go_cgo_minimp3_native_c_parser_edges",
             "xml/go/github_com_moovweb_gokogiri": "go_cgo_libxml2_native_xml_parser_edges",
+            "sql/go/github_com_pganalyze_pg_query_go_v6": "go_cgo_libpg_query_native_sql_parser_edges",
         }
         if (overlay.get("feedback_kind") != native_cgo_kinds.get(str(project))
                 or overlay.get("afl_entrypoint") != manifest.get("afl_entrypoint")

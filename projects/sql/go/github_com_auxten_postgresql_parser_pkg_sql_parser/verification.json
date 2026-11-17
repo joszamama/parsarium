@@ -1,0 +1,65 @@
+{
+  "kind": "third_party",
+  "api": "parser.Parse(local SQL text) -> parser.Statements (AST tree.Statement: *tree.Select, *tree.Insert); the harness reads Select/Insert fields and visits expressions with tree.SimpleVisit",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:39:49.230268+00:00",
+  "manifest": "projects/sql/go/github_com_auxten_postgresql_parser_pkg_sql_parser/manifest.json",
+  "image_id": "sha256:c921167ce2add38d0eabe4964e7b4e8c8def09489659ba5656b720c9cafce62c",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go1.27.1"
+  ],
+  "source_sha256": "87ce5aa7debce0932a7758a2bbd8c1d2cd4efe5669f37db13ccfc84533a2e1ef",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "1ea76e8db12e0a1f0e2cc530c5729b9e2fe98b635a782398368ac268933b0ee0",
+    "go.mod": "e95e28cfda1129f09bdd5763d08aadfd1d956cbbc091541d1244a9204d548e1c",
+    "go.sum": "8d1dae4f19f3a79af30206fda934c0a22da3b277bf60b5c0e38a38cee3f442c4",
+    "harness.go": "df74d6a5194b23cd3e7c9e6cb2f307137459fe9b5ad5a5ec657566be1cd123ac",
+    "harness_test.go": "21ce77da5328322deba73c3efbea3a03772e530ea8f5b64b0fb3a68554f893a6",
+    "manifest.json": "a6526b0d3098cf9a59e27b462a5572fdb421415429e4061fd64b72ad355048dd",
+    "replay/main.go": "9dcd3b3e8944f0e08e9589f412e4d0f3f3783aaad79144805815bc214286e8ea",
+    "reporter/main.go": "67b910c6a24e5fb5a7fd27553f2b7a1a2c25c4ceabf68da0b62c9be8be613fe7",
+    "source-lock.json": "fb6c79252d354b3bdec2fb75a9efa9e6bf2ff258eda2844b1fb815202d8be7c8"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 507,
+  "format_specific_source_lines_covered": 32,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/go/github_com_auxten_postgresql_parser_pkg_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

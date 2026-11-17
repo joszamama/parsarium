@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "(new sad_spirit\\pg_builder\\StatementFactory())->createFromString(local SQL text) -> Statement AST (Select, Insert, ...)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:03:03.228702+00:00",
+  "manifest": "projects/sql/php/sad_spirit_pg_builder/manifest.json",
+  "image_id": "sha256:399739365486aba5cc387b98316dcdc467d438a407a1b80b2591b2a70355aa8b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "758ca5302ecc232e3f74bfd411ca8d784b620dc7ca5dc2899e22592d36202c09",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "2dddb3dbcd1e231be19a79fbddea39349a9561ca61bda58839affef54ba2e61d",
+    "composer.json": "3930d3755b836a4aa2a73a9617f6cfc0b9be373ba41361246aadfcb99420a39b",
+    "composer.lock": "dcd8c8cc3c295070fbe53697f6d614d113628a36c90eab66421686eb7b422d1f",
+    "fuzz-target.php": "d70824f3331fc946bfa829465d9433fccf666a632b0185a8d8712c9d57cc4d6d",
+    "harness.php": "6a7b47a0eeffc9d0e444e01e38fe419979754e845c46b1924c0c0d610e9c6cf8",
+    "manifest.json": "3c29e20450182b91c1437a7b18c269241dd6e1f2c0e30e7442e29a84d2a01af0",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "cebc5b9759d1f921d5b592dd6864c82817785019db8cf08b57e75e5e0d85b0e3",
+    "source-lock.json": "ae32a901b565785684cf9f4f372484e38b0becf2e92ce963672c99a2b44b7852",
+    "target.json": "f0f3c7631ba37a73fc223ccf4902b8e4b62e1cee094d0405e8ae610264fc0691"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 72,
+  "parser_source_lines_covered": 1081,
+  "format_specific_source_lines_covered": 375,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/sad_spirit_pg_builder/target/coverage/coverage.json",
+  "pass": true
+}

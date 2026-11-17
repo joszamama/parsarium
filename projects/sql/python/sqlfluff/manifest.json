@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "sqlfluff",
+  "release": "4.5.0",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/sqlfluff/runtime-requirements.lock",
+  "source_sha256": "471a9abcad8061e36b69f711a6d89393241e30f9d1e0869f79965c0ae2c889c7",
+  "sdist_sha256": "0b0d5b2cca03e7d138b8d899249fed5fa54083e407bbd161449c0b30f901b7b8",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel and pinned dependency wheels by hash (pip --require-hashes on Debian bookworm Python 3.11, then pip check); the image checks that the wheel sqlfluff/ package is byte-identical to src/sqlfluff in the pinned sdist, that core/parser/lexer.py, dialects/dialect_ansi.py and the MIT LICENSE.md match recorded SHA-256 values, and that the optional sqlfluffrs Rust extra is absent, so the pure-Python lexer and grammar matcher run.",
+  "dependencies_note": "Runtime dependencies pinned by hash: chardet 7.7.0, click 8.5.1, colorama 0.4.6, diff_cover 11.0.3 (with Pygments 2.21.0 and pluggy 1.7.0), Jinja2 3.1.6, MarkupSafe 3.0.4, pathspec 1.1.1, platformdirs 4.14.7, PyYAML 6.0.3, regex 2026.11.15, tblib 3.2.2 and tqdm 4.70.1. Parsing runs sqlfluff's own lexer and grammar; Jinja2 is reached only through sqlfluff's default templater, which passes this plain SQL through unchanged. The fuzz bridge is Atheris 3.0.0, built in the image from its pinned sdist (sha256 1f0929c7...) against Debian clang-14 libFuzzer, because linux/arm64 has no Atheris wheel; the image is Debian bookworm with Python 3.11 so the parser-line AFL++ bridge runs natively within afl-showmap's 30 s per-run limit (the amd64 trace took 67 s).",
+  "parser_family": "sqlfluff pure-Python lexer (core/parser/lexer.py) and dialect grammar matcher (core/parser/grammar, match_algorithms.py) over the ansi dialect segment definitions (dialects/dialect_ansi.py); independent of sqlparse, sqlglot, libpg_query and sqlparser-rs",
+  "dialect": "ansi (sqlfluff.parse(sql, dialect=\"ansi\"))",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "sqlfluff.parse(local SQL text decoded from UTF-8 bytes, dialect=\"ansi\") -> parse-tree record (nested {segment_type: value} mappings); the harness walks statement, select_statement, select_clause_element, join_clause, where_clause, groupby_clause, orderby_clause, function_name_identifier, table_reference, insert_statement, values_clause, quoted_literal and numeric_literal segments",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the sqlfluff package source during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.11/site-packages/sqlfluff/",
+  "format_specific_coverage_file_suffix": "/sqlfluff/core/parser/lexer.py",
+  "scope": "One SQL statement from local text via sqlfluff.parse with the ansi dialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Linting rules, fixing, other dialects, templaters beyond the default pass-through and the optional sqlfluffrs extra are untested.",
+  "fuzz_engine_release": "3.0.0",
+  "fuzz_engine_sha256": "1f0929c7bc3040f3fe4102e557718734190cf2d7718bbb8e3ce6d3eb56ef5bb3",
+  "afl_package_release": "4.04c-4"
+}

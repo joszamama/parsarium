@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "sqllens",
+  "release": "1.11.0",
+  "catalog_parser": "data/javascript/sql/parsers.json",
+  "source_lock": "projects/sql/javascript/sqllens/source-lock.json",
+  "source_sha256": "90828cac2b2f2ed5151a4eab0790dc514276bcc7cbee91856632b3dac0782f78",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/local/bin/node",
+    "/work/replay.js",
+    "/input/case"
+  ],
+  "dialect": "PostgreSQL (dialect 'postgres')",
+  "parser_family": "sqllens ANTLR4 grammars (generated dist/generated/<dialect>/*Parser.js on the antlr4ng runtime); its PostgreSQL grammar is a fork of the antlr/grammars-v4 PostgreSQL grammar. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, sqlite-parser and libpg_query; dt-sql-parser is a separate ANTLR4 package whose selected MySQL grammar is a different grammar",
+  "api": "parse(local UTF-8 text, 'postgres') from sqllens -> {ast, errors, cst}; the summary is read from the documented cst (full ANTLR4 parse tree)",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/sqllens/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 block coverage mapped to source lines of sqllens/dist/**/*.js (the generated ANTLR4 PostgreSQL parser and lexer and the package's parse and lowering code) during valid-control replay; the antlr4ng runtime is a separate package and is not counted; Jazzer.js instrumentation for the fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/sqllens/dist/",
+  "afl_coverage_subject_prefix": "/work/node_modules/sqllens/dist/",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8 and passed to sqllens parse with the postgres dialect; a nonzero syntax-error count rejects the input. The summary is read from the returned CST, because the lowered IR marks INSERT as unsupported. Valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other dialects, analysis, lineage and templating are untested."
+}

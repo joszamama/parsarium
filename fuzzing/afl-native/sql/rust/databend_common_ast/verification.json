@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "project": "sql/rust/databend_common_ast",
+  "pass": true,
+  "base_project_receipt_sha256": "350f70c95a3ab082d70cd7da44524feb940b81932e0b8d70e9d8ef1b3a5a6b00",
+  "overlay_file_sha256": {
+    "Cargo.toml": "8945af07c689b3661a914e3f7e6379527c7c87f1dd5b7bf14f8361ee72cd4eeb",
+    "Cargo.lock": "2f8a1312b7347c8a492894ea449c0ead064c364214278cf9747c001f1b518374",
+    "afl_fuzzer.rs": "7966889e542fb437b3480280eb48d23c8ef3da00d71a223656ec1d8da0601786",
+    "Dockerfile": "25542d5f5b9bb25dfc27cb31e06dd8d7e605916e4ea21ded983516866ce99d7d",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "cb8f5789ec063095c16b4be31b30756f9e94c36c752caa3af030d96638dc63fe",
+  "image_id": "sha256:9856f50676d01fb92fd60ca901d27c8e4ee9e4442bd3827311622857a1085a54",
+  "platform": "linux/arm64",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "feedback_edges": 4824,
+  "afl_map_size": 205563,
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "databend-common-ast pulls std HashMap with RandomState into the parse path; the first whole-binary overlay differed between afl-showmap repeats on the select control. Constant getrandom bytes fix the keys; the parser source is unchanged."
+  }
+}

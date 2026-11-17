@@ -1,0 +1,70 @@
+{
+  "kind": "third_party",
+  "api": "SqlParser.parseMany(local UTF-8 text) from rawsql-ts -> typed query models (SimpleSelectQuery, InsertQuery)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:48:54.745398+00:00",
+  "manifest": "projects/sql/javascript/rawsql_ts/manifest.json",
+  "image_id": "sha256:004c5aa55a4b2c8a6c7b822426c75182d9dfe03650c49bc285b4f2d1e5ceedbe",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-rawsql-ts-target@0.30.1 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- rawsql-ts@0.30.1"
+  ],
+  "source_sha256": "58b26135ec392a37c532b30decb316e85e1a681389803ac704d12199eece4107",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "d9755ed5b43a1b77bb2062e657baff6ab88373053097dd820951b1d5fcce6e0b",
+    "adapter.js": "2f7bb0fc847f0a618101fa9351dc093d8d5b1b63814914e71ec7c8c2a60df1c2",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "31afe366406a5c2f7b1645afa39b7616a1ed92b939ebc9e435e36b7be4092ce8",
+    "manifest.json": "70fcc62ad19ecdb95b363e906f1599edd35881429f97a8d8755dfa862d8f227b",
+    "package-lock.json": "e15a467d05253532678b7d818a14b237fb7658694a4bb3eaf3ab355a04ed682f",
+    "package.json": "73fc528d05ee965ea4b62d6f42bd2b8308483fb05ad7d6aed4ded29210f7ec35",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "4c09b584ffa361acda6a57330909f91a8765e1512c24ba4084ae9e0c5543885f",
+    "source-lock.json": "391f8e0fc78ad546346e41dd1331215b9da3ff2e871906d8c78695d13adfc374"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 200,
+  "parser_source_lines_covered": 11242,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/rawsql_ts/target/coverage/coverage.json",
+  "pass": true
+}

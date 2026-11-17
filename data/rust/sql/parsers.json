@@ -106,5 +106,874 @@
         }
       ]
     }
+  },
+  {
+    "name": "pg_query",
+    "version": "18.1.0",
+    "license": "MIT",
+    "license_evidence": "Cargo.toml license = MIT in the pinned crate (checked in the image); the crate ships no license file. The vendored libpg_query is BSD-3-Clause upstream with PostgreSQL License code",
+    "input_api": "pg_query::parse(local UTF-8 text, ParserOptions::DEFAULT) -> ParseResult",
+    "documentation": "https://docs.rs/pg_query/18.1.0/pg_query/fn.parse.html",
+    "source": "https://static.crates.io/crates/pg_query/pg_query-18.1.0.crate",
+    "source_sha256": "457bfe74085c505ecaf5468416450969e2e52a66d26bc1a4b2f6944a2daee73f",
+    "dependencies": [
+      "libpg_query C (vendored, built by build.rs with cc)",
+      "prost 0.13.5 (protobuf decode)",
+      "itertools",
+      "serde",
+      "serde_json",
+      "thiserror",
+      "bindgen 0.66.1 (build only)"
+    ],
+    "dialect": "PostgreSQL",
+    "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other parser modes are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "pg_query::parse passes the text to the vendored libpg_query (pg_query_parse_protobuf_opts: the PostgreSQL scanner and bison grammar) and decodes the protobuf parse tree with prost. The adapter reads SelectStmt and InsertStmt fields and walks RangeVar, FuncCall, JoinExpr and A_Const nodes. Shared family with the C libpg_query path (same 18.1.0 grammar; the C control reaches the same 493 gram.c lines), Go pg_query_go, Python pglast and JavaScript libpg-query; metrics are not combined.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 2607956,
+      "source": "https://crates.io/api/v1/crates/pg_query",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Counts include pulls by dependent crates (for example Postgres tooling built on pg_query)."
+    },
+    "project": "projects/sql/rust/pg_query",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "sqlite3-parser",
+    "version": "0.17.0",
+    "license": "Apache-2.0/MIT",
+    "license_evidence": "Cargo.toml license = Apache-2.0/MIT in the pinned crate; the shipped LICENSE file (SHA-256 88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd) is a public-domain dedication",
+    "input_api": "lexer::sql::Parser::new(&Bump, local bytes) and FallibleIterator::next -> Option<Cmd>",
+    "documentation": "https://docs.rs/sqlite3-parser/0.17.0/sqlite3_parser/lexer/sql/struct.Parser.html",
+    "source": "https://static.crates.io/crates/sqlite3-parser/sqlite3-parser-0.17.0.crate",
+    "source_sha256": "fbb44bfd84bfd1bde5ee215dd0b27d10c3c601a1b7cf03a91c7d6f607f2a10f7",
+    "dependencies": [
+      "bitflags",
+      "bumpalo (AST arena)",
+      "fallible-iterator",
+      "indexmap",
+      "log",
+      "memchr",
+      "cc (build: bundled rlemon generator)"
+    ],
+    "dialect": "SQLite",
+    "scope": "One SQL statement from local bytes with the SQLite grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. String literals are kept as quoted tokens in the AST and unquoted by the adapter. Other SQLite syntax is untested.",
+    "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+    "family_note": "The build script compiles the bundled rlemon and generates parse.rs (Lemon LALR tables and the parse.y reduce actions written in Rust) into OUT_DIR; src/lexer/sql/mod.rs drives the hand-written tokenizer and the generated parser and yields Cmd values. The adapter reads Stmt::Select (columns, FromClause and its JoinedSelectTable list, where_clause, group_by, order_by) and Stmt::Insert (table name, column list, VALUES rows) and walks Expr for function names and Literal values. Same grammar as the SQLite C engine, which the oracle uses only through sqlite3_prepare; that engine exposes no syntax tree. libsql-sqlite3-parser, turso_sqlite3_parser, limbo_sqlite3_parser and oxisqlite-sqlite3-parser are forks of this crate.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 1003820,
+      "source": "https://crates.io/api/v1/crates/sqlite3-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Counts include downloads pulled in by dependent crates; the libsql and turso forks are counted separately."
+    },
+    "project": "projects/sql/rust/sqlite3_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "polyglot-sql",
+    "version": "0.14.1",
+    "license": "MIT",
+    "license_evidence": "Cargo.toml license = MIT in the pinned crate (checked in the image); the crate ships no license file",
+    "input_api": "polyglot_sql::parse(local UTF-8 text, DialectType::Generic) -> Vec<Expression>",
+    "documentation": "https://docs.rs/polyglot-sql/0.14.1/polyglot_sql/fn.parse.html",
+    "source": "https://static.crates.io/crates/polyglot-sql/polyglot-sql-0.14.1.crate",
+    "source_sha256": "8ea83ace7b8d9fc85b6a1d0bd129250cd29461dd61991791c44a4ea124f29904",
+    "dependencies": [
+      "polyglot-sql-ast-derive 0.14.1 (traversal macros)",
+      "serde",
+      "stacker",
+      "thiserror",
+      "unicode-segmentation"
+    ],
+    "dialect": "Generic",
+    "scope": "One SQL statement from local UTF-8 text with DialectType::Generic and default features off (ast-tools only); valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other dialects, SQL generation and transpilation are untested.",
+    "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
+    "family_note": "parse() runs the crate's own tokenizer (src/tokens.rs) and parser (src/parser.rs) into a typed Expression AST modelled on Python sqlglot; it does not depend on or copy sqlparser-rs. The adapter reads Select and Insert fields and walks the tree with ExpressionWalk::dfs; COUNT(*) and SUM are typed Count/Sum nodes whose names come from the node kind. The polyglot WASM, Python and FFI bindings wrap the same crate.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 113477,
+      "source": "https://crates.io/api/v1/crates/polyglot-sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Counts include pulls by the project's own bindings and dependent crates."
+    },
+    "project": "projects/sql/rust/polyglot_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "databend-common-ast",
+    "version": "0.2.5",
+    "license": "Apache-2.0",
+    "license_evidence": "Cargo.toml license = Apache-2.0 in the pinned crate (checked in the image) and Apache-2.0 headers in every source file; the crate ships no license file",
+    "input_api": "parser::tokenize_sql(local UTF-8 text) and parser::parse_sql(&tokens, Dialect::PostgreSQL) -> (Statement, Option<String>)",
+    "documentation": "https://docs.rs/databend-common-ast/0.2.5/databend_common_ast/parser/fn.parse_sql.html",
+    "source": "https://static.crates.io/crates/databend-common-ast/databend-common-ast-0.2.5.crate",
+    "source_sha256": "cb8f5789ec063095c16b4be31b30756f9e94c36c752caa3af030d96638dc63fe",
+    "dependencies": [
+      "logos (tokenizer)",
+      "nom 8, nom-rule, pratt (parser combinators)",
+      "derive-visitor",
+      "ethnum (i256 decimals)",
+      "serde, strum and formatting helpers"
+    ],
+    "dialect": "PostgreSQL (crate default)",
+    "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Databend-specific syntax and other dialects are untested.",
+    "family": "Databend SQL parser (logos tokenizer, nom/pratt combinators)",
+    "family_note": "tokenize_sql runs a logos lexer (src/parser/token.rs); parse_sql runs nom-rule combinators and a pratt expression parser (src/parser/statement.rs, query.rs, expr.rs) into Databend's own AST. It does not use sqlparser-rs. The adapter reads Query/SelectStmt and InsertStmt fields and drives the crate's derive-visitor Drive walk; COUNT(*) is the CountAll node. The crates.io package is a published snapshot of the src/query/ast module of the Databend repository.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 6616,
+      "source": "https://crates.io/api/v1/crates/databend-common-ast",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Databend itself depends on the in-repository module, so its use is not counted here."
+    },
+    "project": "projects/sql/rust/databend_common_ast",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "qusql-parse",
+    "version": "0.12.0",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE.TXT in the pinned crate (SHA-256 a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2, Apache License 2.0); Cargo.toml license = Apache-2.0",
+    "input_api": "parse_statements(local UTF-8 text, &mut Issues, &ParseOptions::new()) -> Vec<Statement>",
+    "documentation": "https://docs.rs/qusql-parse/0.12.0/qusql_parse/fn.parse_statements.html",
+    "source": "https://static.crates.io/crates/qusql-parse/qusql-parse-0.12.0.crate",
+    "source_sha256": "fc00cde9df2d85976aa74f404cdff578f290d03daa0a7817588e2a908d7cd4b3",
+    "dependencies": [],
+    "dialect": "MariaDB (default)",
+    "scope": "One SQL statement from local UTF-8 text with the default MariaDB dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Any error-level Issue fails the adapter, since the parser recovers from errors. Other dialects are untested.",
+    "family": "qusql-parse hand-written lexer and recursive-descent parser",
+    "family_note": "parse_statements runs the crate's own lexer (src/lexer.rs) and parser (src/parser.rs, src/select.rs, src/insert_replace.rs) into typed statement and expression structs. The adapter reads Select and InsertReplace fields and walks the tree with the crate's Visitor (TableReference::Table/Join, Function and AggregateFunction calls, Integer/Float/String literals; numbers as span text). sql-parse, the predecessor crate by the same author, says it moved into qusql-parse and is excluded as a predecessor name.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 3272,
+      "source": "https://crates.io/api/v1/crates/qusql-parse",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count; the predecessor sql-parse crate (746) is counted separately and not selected."
+    },
+    "project": "projects/sql/rust/qusql_parse",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "spg-sql",
+    "version": "9.1.0",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo.toml license = MIT OR Apache-2.0 in the pinned crate (checked in the image); the crate ships no license file",
+    "input_api": "parser::parse_statement(local UTF-8 text) -> Statement",
+    "documentation": "https://docs.rs/spg-sql/9.1.0/spg_sql/parser/fn.parse_statement.html",
+    "source": "https://static.crates.io/crates/spg-sql/spg-sql-9.1.0.crate",
+    "source_sha256": "28ffd7d07a8f5e36eaac21bc860606dd58a4767fd1036b860d0e02fc7cd18553",
+    "dependencies": [],
+    "dialect": "PostgreSQL",
+    "scope": "One SQL statement from local UTF-8 text with the crate's PostgreSQL-dialect grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other syntax is untested.",
+    "family": "spg-sql hand-written PostgreSQL-dialect lexer and recursive-descent parser",
+    "family_note": "parse_statement runs the crate's own lexer (src/lexer.rs) and parser (src/parser.rs) into its AST (src/ast.rs); it has no dependencies and does not use libpg_query or sqlparser-rs. It is the SQL front-end of the SPG database, published as a separate no_std crate. The adapter reads Select and Insert fields and walks Expr; COUNT(*) appears as a FunctionCall named count_star.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 2268,
+      "source": "https://crates.io/api/v1/crates/spg-sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count; most downloads likely come from the SPG database crates."
+    },
+    "project": "projects/sql/rust/spg_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "sqlglot-rust",
+    "version": "0.11.2",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned crate (SHA-256 199fb97bde68e469d5023a6e8c7db6a99536634e35284d106a935382ee4d309d, MIT License); Cargo.toml license = MIT",
+    "input_api": "parser::parse_statements(local UTF-8 text, Dialect::Ansi) -> Vec<Statement>",
+    "documentation": "https://docs.rs/sqlglot-rust/0.11.2/sqlglot_rust/parser/fn.parse_statements.html",
+    "source": "https://static.crates.io/crates/sqlglot-rust/sqlglot-rust-0.11.2.crate",
+    "source_sha256": "fdf0379e134ebf8d14ba5c88a41e71aa866e353d70fa1aa0c7178d14dbcc95e8",
+    "dependencies": [
+      "log",
+      "serde",
+      "serde_json",
+      "thiserror"
+    ],
+    "dialect": "ANSI",
+    "scope": "One SQL statement from local UTF-8 text with Dialect::Ansi; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other dialects are untested.",
+    "family": "sqlglot-rust tokenizer and recursive-descent parser (sqlglot-inspired)",
+    "family_note": "parse_statements runs the crate's own tokenizer (src/tokens) and parser (src/parser) into a typed AST (src/ast/types.rs) modelled on Python sqlglot. It shares no code with polyglot-sql, which is a separate sqlglot-style Rust project, nor with sqlparser-rs. The adapter reads Select and Insert fields and walks expressions with Expr::walk; COUNT(*) and SUM are TypedFunction Count/Sum nodes.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 1707,
+      "source": "https://crates.io/api/v1/crates/sqlglot-rust",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count."
+    },
+    "project": "projects/sql/rust/sqlglot_rust",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "nom-sql",
+    "version": "0.0.11",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned crate (SHA-256 8ac042195bf72b46a1e09f8a96bdb3e4a3ead3a3cb8d818771e3459f6d265c39, MIT License); Cargo.toml license = MIT",
+    "input_api": "parse_query_bytes(local bytes) -> SqlQuery",
+    "documentation": "https://docs.rs/nom-sql/0.0.11/nom_sql/fn.parse_query_bytes.html",
+    "source": "https://static.crates.io/crates/nom-sql/nom-sql-0.0.11.crate",
+    "source_sha256": "c5266bcf166285da22fdc385d696725e7a9e7791b10af9baaeabc69428079730",
+    "dependencies": [
+      "nom 5.1.3",
+      "serde",
+      "serde_derive"
+    ],
+    "dialect": "MySQL subset",
+    "scope": "One SQL statement from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The last release is from 2020; other syntax is untested.",
+    "family": "nom-sql nom combinator parser (MySQL subset)",
+    "family_note": "parse_query_bytes runs nom 5 combinators (src/parser.rs, select.rs, insert.rs, condition.rs, common.rs) into the crate's own AST. It is unrelated to sqlparser-rs. The adapter reads SelectStatement and InsertStatement fields and walks ConditionExpression trees; COUNT(*) is FunctionExpression::CountStar and decimals are Real {integral, fractional}. The last release, 0.0.11, is from 2020.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 1551,
+      "source": "https://crates.io/api/v1/crates/nom-sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count for an unmaintained 2020 release."
+    },
+    "project": "projects/sql/rust/nom_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

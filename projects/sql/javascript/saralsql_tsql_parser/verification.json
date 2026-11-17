@@ -1,0 +1,70 @@
+{
+  "kind": "third_party",
+  "api": "analyze(local UTF-8 text) from @saralsql/tsql-parser -> {ast: Program, issues, ...}",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:50:11.827837+00:00",
+  "manifest": "projects/sql/javascript/saralsql_tsql_parser/manifest.json",
+  "image_id": "sha256:c42246b35222ce2ac5aa5c078712092dd28e2e89e9ec711d04cd3f9188c9d878",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-saralsql-tsql-parser-target@0.4.7 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- @saralsql/tsql-parser@0.4.7"
+  ],
+  "source_sha256": "939262514c4f61ad2e4476954706c43465aa5fd372acc493f2560aa5087b4f31",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "2d98de9cfffb25946a368d799774803148f6bd8100153d487fddda312e0a748d",
+    "adapter.js": "29770d39e21e7a06c9aceefea9dbd3aa3fae543bfc40f561659ac936f5772849",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "4e663a769fc551ab3667617435f74772e419b8295decae1c1ed1b592b6c25294",
+    "manifest.json": "cdd035bdf137b4c6cedc1cee634535b866b0df87701372a35167a7bd71d0d63b",
+    "package-lock.json": "579da9c37dfa20abe8a0d74c2ec04ffbc6bdb544e6e7cd35490ef372c6915b32",
+    "package.json": "b38716c7d0d1c841eba58bc70229ec557258193333496e8155145331bcff9189",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "c9b8dee5afe1ad5a109dd53821a1d7afedf1aa7ac7f3a441eb35977afa51cfcd",
+    "source-lock.json": "ed513940a7ba6d67f83c87b075f5c84bfc799257db02964992027eb9060402fb"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 15,
+  "parser_source_lines_covered": 1650,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/saralsql_tsql_parser/target/coverage/coverage.json",
+  "pass": true
+}

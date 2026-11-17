@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "project": "sql/rust/polyglot_sql",
+  "pass": true,
+  "base_project_receipt_sha256": "9af58755597f9fe0f535ae001a7ecc598a17950d2c7d1cf1873c6646b20083e8",
+  "overlay_file_sha256": {
+    "Cargo.toml": "b303629febaa97a4a752f78fa6df2fadfe1c0f6af660048c75aca4dafc2d4215",
+    "Cargo.lock": "68ccc54f7aa47c7c8b94eb2201d2857de5afe250b3eea5b9086a0c75b43bb621",
+    "afl_fuzzer.rs": "fb3e726d071a62d9d7298d12d4259386ef7914844dcf851db6fb80c89acf6391",
+    "Dockerfile": "00a57aabefeb20b70630ac93a16bac9887a849419933f2be7351545e61ad9d39",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "8ea83ace7b8d9fc85b6a1d0bd129250cd29461dd61991791c44a4ea124f29904",
+  "image_id": "sha256:25e405ebf8863e014f5b259b79d27be9066ce671999ee0b78dbf7d72aa6defff",
+  "platform": "linux/arm64",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "feedback_edges": 5244,
+  "afl_map_size": 1612903,
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "polyglot-sql uses std HashMap with RandomState; the first whole-binary overlay differed between afl-showmap repeats on the select control. Constant getrandom bytes fix the keys; the parser source is unchanged."
+  }
+}

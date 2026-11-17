@@ -187,8 +187,744 @@
       "parser_feature_difference": 1614,
       "project_receipt": "projects/sql/java/druid/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/java/druid/differential.json"
+    },
+    {
+      "package": "com.facebook.presto:presto-parser",
+      "version": "0.300",
+      "pass": true,
+      "input_api": "SqlParser.createStatement(statement text from StatementSplitter over local SQL text, ParsingOptions with DecimalLiteralTreatment.AS_DECIMAL) -> Statement",
+      "dialect": "Presto SQL (the only grammar; ParsingOptions DecimalLiteralTreatment.AS_DECIMAL so 19.5 is a DecimalLiteral)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Presto/Trino ANTLR4 SqlBase grammar (Presto branch)",
+      "parser_source_files": 47,
+      "parser_source_lines_covered": 1715,
+      "afl_tuple_difference": 1166,
+      "parser_feature_difference": 1191,
+      "project_receipt": "projects/sql/java/presto_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/presto_parser/differential.json"
+    },
+    {
+      "package": "org.apache.calcite:calcite-core",
+      "version": "1.42.0",
+      "pass": true,
+      "input_api": "SqlParser.create(local SQL text, SqlParser.config()).parseStmtList() -> SqlNodeList",
+      "dialect": "SqlParser.config() default (Calcite default lexical policy and SqlConformanceEnum.DEFAULT)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Apache Calcite JavaCC grammar (SqlParserImpl)",
+      "parser_source_files": 190,
+      "parser_source_lines_covered": 5986,
+      "afl_tuple_difference": 1108,
+      "parser_feature_difference": 1201,
+      "project_receipt": "projects/sql/java/calcite/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/calcite/differential.json"
+    },
+    {
+      "package": "org.apache.hive:hive-exec",
+      "version": "4.2.1",
+      "pass": true,
+      "input_api": "new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode",
+      "dialect": "HiveQL (ParseDriver.parse without a Configuration: default lexer, standard quoted-identifier handling)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Apache Hive ANTLR3 HiveQL grammar (HiveParser)",
+      "parser_source_files": 19,
+      "parser_source_lines_covered": 5257,
+      "afl_tuple_difference": 1730,
+      "parser_feature_difference": 1917,
+      "project_receipt": "projects/sql/java/hive_exec/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/hive_exec/differential.json"
+    },
+    {
+      "package": "com.github.jsqlparser:jsqlparser",
+      "version": "5.4",
+      "pass": true,
+      "input_api": "CCJSqlParserUtil.parseStatements(local SQL text) -> Statements",
+      "dialect": "JSqlParser default parser features (no dialect switch; CCJSqlParserUtil.parseStatements without a parser consumer)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "JSqlParser JavaCC grammar (CCJSqlParser)",
+      "parser_source_files": 39,
+      "parser_source_lines_covered": 4386,
+      "afl_tuple_difference": 1811,
+      "parser_feature_difference": 1915,
+      "project_receipt": "projects/sql/java/jsqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/jsqlparser/differential.json"
+    },
+    {
+      "package": "org.apache.spark:spark-catalyst_2.12",
+      "version": "3.5.9",
+      "pass": true,
+      "input_api": "CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan",
+      "dialect": "Spark SQL (CatalystSqlParser with default SQLConf; ANSI mode off)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Spark SQL ANTLR4 SqlBase grammar (AstBuilder to unresolved LogicalPlan)",
+      "parser_source_files": 42,
+      "parser_source_lines_covered": 2114,
+      "afl_tuple_difference": 1311,
+      "parser_feature_difference": 1361,
+      "project_receipt": "projects/sql/java/spark_catalyst/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/spark_catalyst/differential.json"
+    },
+    {
+      "package": "io.trino:trino-parser",
+      "version": "484",
+      "pass": true,
+      "input_api": "new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement",
+      "dialect": "Trino SQL (the only grammar; no parsing options)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Presto/Trino ANTLR4 SqlBase grammar (Trino branch)",
+      "parser_source_files": 43,
+      "parser_source_lines_covered": 1879,
+      "afl_tuple_difference": 1325,
+      "parser_feature_difference": 1365,
+      "project_receipt": "projects/sql/java/trino_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/trino_parser/differential.json"
+    },
+    {
+      "package": "org.apache.flink:flink-sql-parser",
+      "version": "2.3.0",
+      "pass": true,
+      "input_api": "SqlParser.create(local SQL text, config with FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA).parseStmtList() -> SqlNodeList",
+      "dialect": "Flink SQL (FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA as in Flink's planner)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Apache Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl)",
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 3170,
+      "afl_tuple_difference": 1724,
+      "parser_feature_difference": 1815,
+      "project_receipt": "projects/sql/java/flink_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/flink_sql_parser/differential.json"
+    },
+    {
+      "package": "org.apache.shardingsphere:shardingsphere-sql-parser-engine",
+      "version": "5.3.2",
+      "pass": true,
+      "input_api": "SQLParserEngine(\"MySQL\", CacheOption).parse(local SQL text, false) -> ParseASTNode; SQLVisitorEngine(\"MySQL\", \"STATEMENT\", false, Properties).visit(tree) -> SQLStatement",
+      "dialect": "MySQL (SQLParserEngine and SQLVisitorEngine with databaseType \"MySQL\", visitor type STATEMENT)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Apache ShardingSphere ANTLR4 dialect grammars (MySQL module)",
+      "parser_source_files": 37,
+      "parser_source_lines_covered": 1542,
+      "afl_tuple_difference": 975,
+      "parser_feature_difference": 997,
+      "project_receipt": "projects/sql/java/shardingsphere_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/shardingsphere_sql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T18:53:39.230663+00:00"
+  "checked_at_utc": "2026-11-17T20:44:36.439068+00:00"
 }

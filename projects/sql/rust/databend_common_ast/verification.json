@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "databend_common_ast::parser::tokenize_sql(local UTF-8 text) and parse_sql(&tokens, Dialect::PostgreSQL) -> (Statement, Option<String>); the harness reads Statement::Query (SelectStmt select_list, selection, group_by; Query order_by) and Statement::Insert (table, columns, InsertSource::Values rows) and drives the crate's derive-visitor walk over Expr and TableReference for tables, joins, calls and literals",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T21:02:20.081704+00:00",
+  "manifest": "projects/sql/rust/databend_common_ast/manifest.json",
+  "image_id": "sha256:54490ddf23e2686f985cd9ae7cc8f7b46da5782fa06b96e086b546c10d0c858d",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "cb8f5789ec063095c16b4be31b30756f9e94c36c752caa3af030d96638dc63fe",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "bbe2d29cfaace652577562bdddb2c5367ab697240b8192f8b435b07238f99c9b",
+    "Cargo.toml": "6420e73a3125bca5f68ea5107733394d3d5d2b2ff43cc6b2e3a8ab73278fa406",
+    "Dockerfile": "62fbcd5070218076248d90ef3429f83c3eabe26b31484a336aa3cf3175417ef0",
+    "manifest.json": "1d3a186e9228cb1864851a72f4452057340ed480107d7710f3c0b2a6ec6078a9",
+    "run-control.sh": "6de3138d86bc5cb8eb7eaaf5ff330ac6dd943228a11c56903fbcc7a337489682",
+    "source-lock.json": "5ef0a13e9413816873fb28e83f602e0e1908979e14d4b2f967fd163a1ecef1f8",
+    "src/bin/fuzzer.rs": "05eaf2be86bb1c05e2b63bbb3c6d5483ee0496a4ee591fbed8ff6b4c41ab9799",
+    "src/bin/replay.rs": "ea342e2239809dfbd4c1257e66bc28a6e23d489368a25205b82d74eb77d3afc3",
+    "src/lib.rs": "621d9dcdfa4dd80664e9230562a3f725f0f546435d77a8e28ff5047833f2ed1f"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 75,
+  "parser_source_lines_covered": 1943,
+  "format_specific_source_lines_covered": 407,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/databend_common_ast/target/coverage/coverage.json",
+  "pass": true
+}

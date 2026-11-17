@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "CCJSqlParserUtil.parseStatements(local SQL text) -> Statements; the harness reads PlainSelect (select items, joins, where, group by, order by) and Insert (columns, Values expressions) and collects tables, Function names and String/Long/Double values with a TablesNamesFinder subclass",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:05:19.495561+00:00",
+  "manifest": "projects/sql/java/jsqlparser/manifest.json",
+  "image_id": "sha256:0201b2a6f08fbddc9c9cc28b7e68f005951c47bea487a1fdb85d9848c815807a",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "6f4aba881d7c8c85dc940bc84fd74a5598a50529bb0f01c601feccef61e09a4e",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "050122429bde7701563a3f5b755ea622e9046b2ac6a0c781bba9c0c13a5349e7",
+    "SqlHarness.java": "cf7fc13f050c32ba1bac458cbffb70ba1d802e1336925c00e62d43c07c046788",
+    "manifest.json": "315ca07888a79d3ce86d8fb46ddc5d52503c8df1b15f4af5ebf1992437aabaa7",
+    "run-control.sh": "fbecd3377e448ca4504d168fbbcb4d97d775d87ebad51f4bc0edd86371c19838",
+    "source-lock.json": "02972631bfe7d346d0a37dc66b7b180b204827632e5498311870a0ae9631599f"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 39,
+  "parser_source_lines_covered": 4386,
+  "format_specific_source_lines_covered": 2907,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/jsqlparser/target/coverage/coverage.json",
+  "pass": true
+}

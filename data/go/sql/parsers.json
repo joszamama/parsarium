@@ -103,5 +103,950 @@
         }
       ]
     }
+  },
+  {
+    "name": "github.com/xwb1989/sqlparser",
+    "version": "v0.0.0-20180606152119-120387863bf2",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE.md in the pinned module zip (SHA-256 43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1, Apache License 2.0)",
+    "input_api": "sqlparser.SplitStatementToPieces and sqlparser.Parse(local SQL text) -> Statement",
+    "documentation": "https://pkg.go.dev/github.com/xwb1989/sqlparser@v0.0.0-20180606152119-120387863bf2#Parse",
+    "source": "https://proxy.golang.org/github.com/xwb1989/sqlparser/@v/v0.0.0-20180606152119-120387863bf2.zip",
+    "source_sha256": "9ebb970f2006a76b86f8cfb4fe58e3618d6a37055dd1f70a4f1415d428dba728",
+    "go_module_sum": "h1:zzrxE1FKn5ryBNl9eKOeqQ58Y/Qpo3Q9QNxKHX5uzzQ=",
+    "dependencies": [],
+    "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+    "scope": "Local SQL text split and parsed by xwb1989/sqlparser; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other MySQL syntax is untested.",
+    "family": "vitess MySQL grammar (2018 extracted fork, goyacc sql.y) and tokenizer",
+    "family_note": "sqlparser.Parse runs the package's own tokenizer (token.go) and the goyacc parser generated from sql.y into sql.go. The package is a 2018 extraction of vitess's go/vt/sqlparser with vitess dependencies vendored under dependency/. Overlap with the selected vitess.io/vitess v0.24.5 sqlparser was measured on non-test .go/.y files: 12 file names in common, none byte-identical, and 4,596 of 19,192 lines (23.9%) in matching blocks of same-named files, so it is a separate package path in the shared vitess family, not a byte-identical copy. The adapter splits with SplitStatementToPieces, reads *Select (SelectExprs, From join tree, Where, GroupBy, OrderBy) and *Insert (Table, Columns, Values) and walks the tree with sqlparser.Walk for AliasedTableExpr base tables, FuncExpr names and SQLVal values. The module has no tagged releases; the pin is the proxy pseudo-version of the last commit, 120387863bf2.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 305,
+      "source": "https://pkg.go.dev/github.com/xwb1989/sqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_xwb1989_sqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/pingcap/tidb/pkg/parser",
+    "version": "v0.0.0-20261117145351-1e84b3595a3e",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4, Apache License 2.0)",
+    "input_api": "parser.New().Parse(local SQL text, \"\", \"\") -> []ast.StmtNode",
+    "documentation": "https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser@v0.0.0-20261117145351-1e84b3595a3e#Parser.Parse",
+    "source": "https://proxy.golang.org/github.com/pingcap/tidb/pkg/parser/@v/v0.0.0-20261117145351-1e84b3595a3e.zip",
+    "source_sha256": "0c1a8be16c91cd96292df2c50158a8c817c59bffdcb4a13b6b57e2e6f8b591e3",
+    "go_module_sum": "h1:dpAI/eXfZo0rI/Ey1xZ0suScx5FaGPfTZxnbExl8Z7U=",
+    "dependencies": [],
+    "dialect": "MySQL (TiDB parser, default charset and collation)",
+    "scope": "Local SQL text parsed by the TiDB parser with default charset and collation; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. COUNT(*) is represented by the parser as COUNT with a synthetic ValueExpr(1) without a source position; the harness does not report it as a literal. Other TiDB/MySQL syntax is untested.",
+    "family": "TiDB MySQL grammar (goyacc parser.y) and lexer",
+    "family_note": "Parser.Parse runs TiDB's own lexer (lexer.go) and the goyacc parser generated from parser.y into parser.go (no line directives, so coverage is reported on parser.go). The documented quick start imports the test_driver package, which supplies the ValueExpr implementation for literals. The adapter reads *ast.SelectStmt (Fields, From join tree, Where, GroupBy, OrderBy) and *ast.InsertStmt (Columns, Lists) and walks the tree with an ast.Visitor for TableName, AggregateFuncExpr/FuncCallExpr names and ValueExpr values; the synthetic ValueExpr(1) that parser.y builds for COUNT(*) has no source position and is not reported. github.com/pingcap/parser (archived) and github.com/pingcap/tidb/parser are earlier module paths of this parser and are excluded as predecessors. The module has no tagged releases; the pin is the proxy pseudo-version of commit 1e84b3595a3e recorded in the snapshot.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 176,
+      "source": "https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path only; the older github.com/pingcap/parser (385) and github.com/pingcap/tidb/parser (1,190) paths are counted separately and not added."
+    },
+    "project": "projects/sql/go/github_com_pingcap_tidb_pkg_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/blastrain/vitess-sqlparser/sqlparser",
+    "version": "v0.0.0-20201030050434-a139afbb1aba",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30, Apache License 2.0)",
+    "input_api": "sqlparser.Parse(local SQL text) -> Statement",
+    "documentation": "https://pkg.go.dev/github.com/blastrain/vitess-sqlparser@v0.0.0-20201030050434-a139afbb1aba/sqlparser#Parse",
+    "source": "https://proxy.golang.org/github.com/blastrain/vitess-sqlparser/@v/v0.0.0-20201030050434-a139afbb1aba.zip",
+    "source_sha256": "7511319ea56fb67d02f532e797200075a85660de4b5944de65c7eeb9c574f801",
+    "go_module_sum": "h1:hBK2BWzm0OzYZrZy9yzvZZw59C5Do4/miZ8FhEwd5P8=",
+    "dependencies": [],
+    "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+    "scope": "The whole local SQL text parsed by blastrain sqlparser.Parse as one statement; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. DDL (TiDB fallback) and other MySQL syntax are untested.",
+    "family": "vitess MySQL grammar (fork, goyacc sql.y) and tokenizer; TiDB fallback for DDL only",
+    "family_note": "sqlparser.Parse runs the package's own tokenizer (token.go) and the goyacc parser generated from sql.y into sql.go; only DDL, SHOW and other-admin results are re-parsed with the bundled TiDB parser (tidbparser), which the SELECT and INSERT controls do not reach. Overlap of its sqlparser/ non-test .go/.y files: with xwb1989/sqlparser 7 same-named files, none byte-identical, 6,642 of 9,084 lines (73.1%) in matching blocks; with vitess v0.24.5 sqlparser 7 same-named files, none byte-identical, 2,459 lines (27.1%). It is a separate vitess-family package path, not a byte-identical copy. Parse takes the whole text and returns one Statement (no splitter; the grammar accepts the trailing semicolon). The adapter reads *Select (SelectExprs, From join tree, Where, GroupBy, OrderBy) and *Insert (Table, Columns, Values) and walks the tree with sqlparser.Walk for AliasedTableExpr base tables, FuncExpr names and SQLVal values. The module has no tagged releases; the pin is the proxy pseudo-version of commit a139afbb1aba.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 88,
+      "source": "https://pkg.go.dev/github.com/blastrain/vitess-sqlparser/sqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_blastrain_vitess_sqlparser_sqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/pganalyze/pg_query_go/v6",
+    "version": "v6.2.5",
+    "license": "BSD-3-Clause AND PostgreSQL",
+    "license_evidence": "LICENSE (SHA-256 7752b24a3cb4bee5270c2ee8a3a7609fd57ce9dccb2e8b5757fdeca04bb03960, BSD 3-Clause) and LICENSE.POSTGRESQL (SHA-256 28e429702de70abfa1b7e4cb5d9e486bd9469f1eab5b392f704b65de09334d8d, PostgreSQL License for the bundled PostgreSQL parser sources) in the pinned module zip",
+    "input_api": "pg_query.Parse(local SQL text) -> *pg_query.ParseResult",
+    "documentation": "https://pkg.go.dev/github.com/pganalyze/pg_query_go/v6@v6.2.5#Parse",
+    "source": "https://proxy.golang.org/github.com/pganalyze/pg_query_go/v6/@v/v6.2.5.zip",
+    "source_sha256": "3177b3123f142e58febadab2ccbb6b0df1536fff41ffaccb4112c1422e4dc92a",
+    "go_module_sum": "h1:i7dvkA5167th3rXtk0jv9+r5DeJd4GqeGOVKuMTda8s=",
+    "dependencies": [],
+    "dialect": "PostgreSQL (libpg_query 17-6.2.5)",
+    "scope": "Local SQL text parsed by pg_query_go Parse (libpg_query, PostgreSQL 17 grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other PostgreSQL syntax, deparse, fingerprint and normalize APIs are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), cgo binding",
+    "family_note": "pg_query.Parse passes the text through cgo to the bundled libpg_query (17-6.2.5, PostgreSQL 17 grammar: src_backend_parser_gram.c from bison, src_backend_parser_scan.c from flex, src_backend_parser_parser.c) and unmarshals the protobuf parse tree into Go structs. The selected C path libpg_query 18.1.0 and the Rust and Python bindings are separate package paths in the same family; their metrics are not combined. The Go binding has no parser of its own, so parser source coverage is reported for the native C files (underlying coverage: 2,342 lines in 26 files, 520 in src_backend_parser_gram.c and 379 in src_backend_parser_scan.c) besides the Go binding lines (1,220, of which 1,206 are in the generated pg_query.pb.go protobuf types used to unmarshal the tree), and AFL++ feedback comes only from the allowlisted native grammar, scanner and parser.c files. The adapter walks the protobuf tree with protoreflect for RangeVar relnames, JoinExpr nodes, FuncCall names and A_Const integer, float and string values, and reads SelectStmt (TargetList, WhereClause, GroupClause, SortClause) and InsertStmt (Cols, ValuesLists) fields.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 54,
+      "source": "https://pkg.go.dev/github.com/pganalyze/pg_query_go/v6",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_pganalyze_pg_query_go_v6",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/auxten/postgresql-parser/pkg/sql/parser",
+    "version": "v1.0.1",
+    "license": "BUSL-1.1 with Change License Apache-2.0 (Change Date 2023-04-01), with BSD-style vitess portions",
+    "license_evidence": "LICENSE notice in the pinned module zip (SHA-256 8a2fba9d26592ff3538f44c96d1b894ef44649058b4d04f3fda49518a9c4ae11) says files are under the Business Source License 1.1 unless noted; parser file headers add BSD-style vitess and PostgreSQL portions. The module omits licenses/BSL.txt; the CockroachDB v20.1.11 licenses/BSL.txt (Licensed Work CockroachDB 20.1, which the README names as the source) sets Change Date 2023-04-01 and Change License Apache License 2.0, so the pinned code is under Apache-2.0 from that date.",
+    "input_api": "parser.Parse(local SQL text) -> parser.Statements",
+    "documentation": "https://pkg.go.dev/github.com/auxten/postgresql-parser@v1.0.1/pkg/sql/parser#Parse",
+    "source": "https://proxy.golang.org/github.com/auxten/postgresql-parser/@v/v1.0.1.zip",
+    "source_sha256": "87ce5aa7debce0932a7758a2bbd8c1d2cd4efe5669f37db13ccfc84533a2e1ef",
+    "go_module_sum": "h1:x+qiEHAe2cH55Kly64dWh4tGvUKEQwMmJgma7a1kbj4=",
+    "dependencies": [],
+    "dialect": "PostgreSQL (CockroachDB 20.1 grammar, no dialect option)",
+    "scope": "Local SQL text parsed by auxten/postgresql-parser parser.Parse; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other CockroachDB/PostgreSQL syntax is untested.",
+    "family": "CockroachDB PostgreSQL-compatible grammar (v20.1 extraction, goyacc sql.y) and scanner",
+    "family_note": "parser.Parse runs the package's own scanner (scan.go, lexer.go) and the goyacc parser generated from sql.y into sql.go, returning Statements whose AST values are sem/tree nodes. The module is a third-party extraction of CockroachDB v20.1.11 pkg/sql/parser and its dependencies with generated files checked in (README). The official, much newer extraction github.com/cockroachdb/cockroachdb-parser is a separate package path in the same family. The adapter reads *tree.Select (SelectClause Exprs, From join tree, Where, GroupBy; Select OrderBy) and *tree.Insert (Table, Columns, ValuesClause rows) and visits expressions with tree.SimpleVisit for FuncExpr names, NumVal source text (OrigString) and StrVal values.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 22,
+      "source": "https://pkg.go.dev/github.com/auxten/postgresql-parser/pkg/sql/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_auxten_postgresql_parser_pkg_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/rqlite/sql",
+    "version": "v0.0.0-20261016220845-5c0832fea6e1",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 30364cd71656839f9bddeebc791e4eba6ef87b31fe7eb25371baee380f2b62ea, MIT License)",
+    "input_api": "sql.NewParser(reader).ParseStatements() -> []sql.Statement",
+    "documentation": "https://pkg.go.dev/github.com/rqlite/sql@v0.0.0-20261016220845-5c0832fea6e1#Parser.ParseStatements",
+    "source": "https://proxy.golang.org/github.com/rqlite/sql/@v/v0.0.0-20261016220845-5c0832fea6e1.zip",
+    "source_sha256": "826738822b97cb48a38f4ea98f5996cdd9b12c573bdcd2639ec7fbe51d5dffec",
+    "go_module_sum": "h1:1mbwfLtm7LcV2n8F0n96ockOcVkuT2G0Jx/TpjzVChw=",
+    "dependencies": [],
+    "dialect": "SQLite (no dialect option)",
+    "scope": "Local SQL text parsed by rqlite/sql ParseStatements; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other SQLite syntax is untested.",
+    "family": "rqlite/sql hand-written recursive-descent parser and scanner",
+    "family_note": "sql.NewParser(reader).ParseStatements runs the package's own scanner (scanner.go) and hand-written recursive-descent parser (parser.go) and returns AST statements (ast.go). It is not generated from SQLite's Lemon grammar and shares no code with the engine. The adapter walks each statement with the package's sql.Walk visitor for QualifiedTableName base tables, JoinClause nodes with a JOIN keyword, Call names, NumberLit and StringLit values, and reads SelectStatement (Columns, WhereExpr, GroupByExprs, OrderingTerms) and InsertStatement (Table, Columns, ValueLists) fields. The module has no tagged releases; the pin is the proxy pseudo-version of commit 5c0832fea6e1 recorded in the snapshot.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 20,
+      "source": "https://pkg.go.dev/github.com/rqlite/sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_rqlite_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/AfterShip/clickhouse-sql-parser/parser",
+    "version": "v0.5.7",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 392a27266877db3e3808ef8bfb6628f1bbb7ee8bef6545e307250a898efd99d8, MIT License)",
+    "input_api": "parser.NewParser(local SQL text).ParseStmts() -> []parser.Expr",
+    "documentation": "https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser@v0.5.7/parser#Parser.ParseStmts",
+    "source": "https://proxy.golang.org/github.com/!after!ship/clickhouse-sql-parser/@v/v0.5.7.zip",
+    "source_sha256": "7005b778a6185dc978504403d93d78644df8a31288e130cde04caae012048dd0",
+    "go_module_sum": "h1:g457MREZZ/gZ1RjqaFSNAVRaH05WZ1DAJpqOYg3eqRs=",
+    "dependencies": [],
+    "dialect": "ClickHouse (no dialect option)",
+    "scope": "Local SQL text parsed by clickhouse-sql-parser ParseStmts; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other ClickHouse syntax is untested.",
+    "family": "clickhouse-sql-parser hand-written recursive-descent parser and lexer",
+    "family_note": "NewParser(text).ParseStmts runs the package's own lexer (lexer.go) and hand-written recursive-descent parser (parser_*.go) and returns AST statements; the project credits memefish (a Spanner SQL parser) as inspiration but shares no code with another selected path. The adapter walks each statement with the package's parser.Walk for TableIdentifier base tables, JoinExpr nodes whose modifiers include JOIN, FunctionExpr names, NumberLiteral and StringLiteral text, and reads SelectQuery (SelectItems, Where, GroupBy list, OrderBy items) and InsertStmt (ColumnNames, Values) fields. The tested subset is valid ClickHouse SQL; other ClickHouse syntax is untested.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 13,
+      "source": "https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_aftership_clickhouse_sql_parser_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser",
+    "version": "v0.25.2",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30, Apache License 2.0); the README states the extracted package is Apache licensed. Copied file headers still name the CockroachDB Software License 'included in the /LICENSE file', and that file in this module is the Apache License 2.0; parse.go also carries BSD-style vitess portions.",
+    "input_api": "parser.Parse(local SQL text) -> statements.Statements",
+    "documentation": "https://pkg.go.dev/github.com/cockroachdb/cockroachdb-parser@v0.25.2/pkg/sql/parser#Parse",
+    "source": "https://proxy.golang.org/github.com/cockroachdb/cockroachdb-parser/@v/v0.25.2.zip",
+    "source_sha256": "e576898c2c400b4f543a6c4a8ebdb474bc5b042b917887b1a6e64e567073ae1f",
+    "go_module_sum": "h1:upbvXIfWpwjjXTxAXpGLqSsHmQN3ih+IG0TgOFKobgs=",
+    "dependencies": [],
+    "dialect": "PostgreSQL (CockroachDB 25.2 grammar, no dialect option)",
+    "scope": "Local SQL text parsed by cockroachdb-parser parser.Parse; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other CockroachDB/PostgreSQL syntax is untested.",
+    "family": "CockroachDB PostgreSQL-compatible grammar (official v25.2 extraction, goyacc sql.y) and scanner",
+    "family_note": "parser.Parse runs the pkg/sql/scanner lexer and the goyacc parser generated from sql.y into sql.go and returns statements whose AST values are sem/tree nodes. The module is Cockroach Labs' snapshot of the CockroachDB parser and its dependencies (version file 259c8a573eb2), published because github.com/cockroachdb/cockroach/pkg/sql/parser cannot be imported as a library (generated files are not in the module). github.com/auxten/postgresql-parser is a separate third-party extraction of CockroachDB v20.1 in the same family: none of 7 same-named parser package files is byte-identical and 36.6% of its 48,995 parser package lines are in matching blocks. The adapter reads *tree.Select (SelectClause Exprs, From join tree, Where, GroupBy; Select OrderBy) and *tree.Insert (Table, Columns, ValuesClause rows) and visits expressions with tree.SimpleVisit for FuncExpr names, NumVal source text (OrigString) and StrVal values.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 13,
+      "source": "https://pkg.go.dev/github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_cockroachdb_cockroachdb_parser_pkg_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "github.com/akito0107/xsqlparser",
+    "version": "v1.0.0",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 e3c54bff28da2bcc5214064c0d4da3cb976f9c4ebdae9da9ae6976cfd01c34e9, Apache License 2.0)",
+    "input_api": "xsqlparser.NewParser(reader, &dialect.GenericSQLDialect{}).ParseSQL() -> []sqlast.Stmt",
+    "documentation": "https://pkg.go.dev/github.com/akito0107/xsqlparser@v1.0.0#Parser.ParseSQL",
+    "source": "https://proxy.golang.org/github.com/akito0107/xsqlparser/@v/v1.0.0.zip",
+    "source_sha256": "e7e6f22ab8304c399adefdfcb5a6b80c7677c10f69c0159b25903c73e8109f3c",
+    "go_module_sum": "h1:s9uwP+92Hvj06r9MfukAPdxaUIscS61/x27MyFOHUFg=",
+    "dependencies": [],
+    "dialect": "Generic (dialect.GenericSQLDialect)",
+    "scope": "Local SQL text parsed by xsqlparser ParseSQL with GenericSQLDialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Numbers are reported from the parsed int64/float64 values formatted back with strconv, which equals the control text. Other syntax and dialects are untested.",
+    "family": "xsqlparser recursive-descent parser and tokenizer (Go port of early sqlparser-rs)",
+    "family_note": "NewParser(reader, dialect).ParseSQL runs the package's own sqltoken tokenizer and the recursive-descent parser in parser.go and returns sqlast statements. The README describes it as a Go port of andygrove/sqlparser-rs; it is Go source and shares no code with the selected Rust sqlparser crate, so the relation is a design lineage, not a shared implementation. The adapter walks each statement with sqlast.Inspect for Table base tables, QualifiedJoin/NaturalJoin/CrossJoin nodes, Function names, LongValue/DoubleValue numbers (formatted back with strconv, equal to the control text) and SingleQuotedString values, and reads QueryStmt/SQLSelect (Projection, WhereClause, GroupByClause, OrderBy) and InsertStmt (TableName, Columns, ConstructorSource rows) fields.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 7,
+      "source": "https://pkg.go.dev/github.com/akito0107/xsqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_akito0107_xsqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

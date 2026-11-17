@@ -95,8 +95,746 @@
       "parser_feature_difference": null,
       "project_receipt": "projects/sql/rust/sqlparser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/rust/sqlparser/differential.json"
+    },
+    {
+      "package": "pg_query",
+      "version": "18.1.0",
+      "pass": true,
+      "input_api": "pg_query::parse(local UTF-8 text, ParserOptions::DEFAULT) -> ParseResult",
+      "dialect": "PostgreSQL",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "parser_source_files": 11,
+      "parser_source_lines_covered": 171,
+      "underlying_source_files": 226,
+      "underlying_source_lines_covered": 3640,
+      "afl_tuple_difference": 1708,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/pg_query/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/pg_query/differential.json"
+    },
+    {
+      "package": "sqlite3-parser",
+      "version": "0.17.0",
+      "pass": true,
+      "input_api": "lexer::sql::Parser::new(&Bump, local bytes) and FallibleIterator::next -> Option<Cmd>",
+      "dialect": "SQLite",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 420,
+      "afl_tuple_difference": 817,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/sqlite3_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/sqlite3_parser/differential.json"
+    },
+    {
+      "package": "polyglot-sql",
+      "version": "0.14.1",
+      "pass": true,
+      "input_api": "polyglot_sql::parse(local UTF-8 text, DialectType::Generic) -> Vec<Expression>",
+      "dialect": "Generic",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
+      "parser_source_files": 19,
+      "parser_source_lines_covered": 3142,
+      "afl_tuple_difference": 2963,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/polyglot_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/polyglot_sql/differential.json"
+    },
+    {
+      "package": "databend-common-ast",
+      "version": "0.2.5",
+      "pass": true,
+      "input_api": "parser::tokenize_sql(local UTF-8 text) and parser::parse_sql(&tokens, Dialect::PostgreSQL) -> (Statement, Option<String>)",
+      "dialect": "PostgreSQL (crate default)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Databend SQL parser (logos tokenizer, nom/pratt combinators)",
+      "parser_source_files": 75,
+      "parser_source_lines_covered": 1943,
+      "afl_tuple_difference": 3895,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/databend_common_ast/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/databend_common_ast/differential.json"
+    },
+    {
+      "package": "qusql-parse",
+      "version": "0.12.0",
+      "pass": true,
+      "input_api": "parse_statements(local UTF-8 text, &mut Issues, &ParseOptions::new()) -> Vec<Statement>",
+      "dialect": "MariaDB (default)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "qusql-parse hand-written lexer and recursive-descent parser",
+      "parser_source_files": 44,
+      "parser_source_lines_covered": 749,
+      "afl_tuple_difference": 1218,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/qusql_parse/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/qusql_parse/differential.json"
+    },
+    {
+      "package": "spg-sql",
+      "version": "9.1.0",
+      "pass": true,
+      "input_api": "parser::parse_statement(local UTF-8 text) -> Statement",
+      "dialect": "PostgreSQL",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "spg-sql hand-written PostgreSQL-dialect lexer and recursive-descent parser",
+      "parser_source_files": 7,
+      "parser_source_lines_covered": 1159,
+      "afl_tuple_difference": 1833,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/spg_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/spg_sql/differential.json"
+    },
+    {
+      "package": "sqlglot-rust",
+      "version": "0.11.2",
+      "pass": true,
+      "input_api": "parser::parse_statements(local UTF-8 text, Dialect::Ansi) -> Vec<Statement>",
+      "dialect": "ANSI",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlglot-rust tokenizer and recursive-descent parser (sqlglot-inspired)",
+      "parser_source_files": 29,
+      "parser_source_lines_covered": 1189,
+      "afl_tuple_difference": 1548,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/sqlglot_rust/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/sqlglot_rust/differential.json"
+    },
+    {
+      "package": "nom-sql",
+      "version": "0.0.11",
+      "pass": true,
+      "input_api": "parse_query_bytes(local bytes) -> SqlQuery",
+      "dialect": "MySQL subset",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "nom-sql nom combinator parser (MySQL subset)",
+      "parser_source_files": 19,
+      "parser_source_lines_covered": 835,
+      "afl_tuple_difference": 2090,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/nom_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/nom_sql/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T19:01:15.490258+00:00"
+  "checked_at_utc": "2026-11-17T21:17:53.494569+00:00"
 }

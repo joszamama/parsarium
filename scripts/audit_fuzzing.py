@@ -12,6 +12,7 @@ from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             mlt_mp4_feedback_verified,
                             mpv_mp4_feedback_verified,
                             mpv_tagged_mp3_feedback_verified,
+                            rust_pg_query_native_feedback_verified,
                             node_json_native_afl_verified,
                             openshot_mp4_feedback_verified,
                             papers_pdf_feedback_verified,
@@ -196,6 +197,9 @@ def main() -> None:
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         if str(relative) == "ascii_pnm/rust/fltk":
             assert fltk_native_feedback_verified(path, manifest, receipt)
+            assert (overlay / "build.py").is_file()
+        elif str(relative) == "sql/rust/pg_query":
+            assert rust_pg_query_native_feedback_verified(path, manifest, receipt)
             assert (overlay / "build.py").is_file()
         else:
             expected = {"Cargo.toml": overlay_manifest(project),

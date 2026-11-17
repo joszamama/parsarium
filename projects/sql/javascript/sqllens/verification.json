@@ -1,0 +1,71 @@
+{
+  "kind": "third_party",
+  "api": "parse(local UTF-8 text, 'postgres') from sqllens -> {ast, errors, cst}; the summary is read from the documented cst (full ANTLR4 parse tree)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:47:36.253312+00:00",
+  "manifest": "projects/sql/javascript/sqllens/manifest.json",
+  "image_id": "sha256:83147db41a0af7a602cdaf458bc6ad82dd2ad6af728d1df1da584082deb54a40",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-sqllens-target@1.11.0 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- sqllens@1.11.0",
+    "  `-- antlr4ng@3.0.16"
+  ],
+  "source_sha256": "90828cac2b2f2ed5151a4eab0790dc514276bcc7cbee91856632b3dac0782f78",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "b858d1a7c72fb33832551335096348b28a2aa4051f48955ee15b6ad10c8bbafd",
+    "adapter.js": "a21e4629f930639d6cde7c71c4cc79b4317df530a593492347571a71927eb617",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "141b761532f1f6cae46b40dfb6eaec6470a10421404a0bd58ecbb41b377d50b6",
+    "manifest.json": "d0137307e939966902d028f7111e771f864c09e9f145bfb114311a94723af944",
+    "package-lock.json": "665f067ee793474af7f5c559c26d8b15f75d4d65f20f3ed00c91e3a2d2ce00c1",
+    "package.json": "e1bf1fca9f1929c8e59ab3aae16cd46cc8be42851d7cd93559ffc6a6b943acdc",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "d2c8359b51623ba8776101bc9ba62d912d85e78bec81160d02ae27eac042b220",
+    "source-lock.json": "f5c6cfa4b05ed67067437d694d73f33166cb8698f6286af8397826fd8cbc9f62"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 164,
+  "parser_source_lines_covered": 169847,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/sqllens/target/coverage/coverage.json",
+  "pass": true
+}

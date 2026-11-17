@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T21:54:47.636594+00:00",
+  "project": "sql/php/soundintheory_php_sql_parser",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "4d0df72be848ea6fefd4bb81f8c70cc640e9a077f56a3d3f2f981e40806f3e1e",
+  "overlay_receipt_sha256": "666e790aa8e00074862aa851bc3eda7ff733c0fb75fcf3345d0a34c17c5fc31e",
+  "base_image_id": "sha256:e5ded7eecf4d9eb9f6e3dc5968fd87ab0089a60576d93060ebd5d4f55195e384",
+  "overlay_image_id": "sha256:23ca259ad7d2cff6ebfd7cad1de35feeb5f394062acd0d824ee9c3f698df65b2",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 674,
+  "second_afl_tuples": 489,
+  "afl_tuple_difference": 281,
+  "first_parser_features": 654,
+  "second_parser_features": 469,
+  "parser_feature_difference": 281,
+  "first_only_features_by_file": {
+    "src/PHPSQL/Expression/Token.php": 4,
+    "src/PHPSQL/Parser.php": 225,
+    "src/PHPSQL/Parser/Lexer.php": 1,
+    "src/PHPSQL/Parser/Utils.php": 3
+  },
+  "second_only_features_by_file": {
+    "src/PHPSQL/Parser.php": 47,
+    "src/PHPSQL/Parser/Utils.php": 1
+  }
+}

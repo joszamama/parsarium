@@ -33,7 +33,7 @@
       "latest_release_observed": "18.2.4",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse / parseSync",
-      "reason": "parse(sql) returns the PostgreSQL parse tree from a WASM build of libpg_query. Not selected in this round: the parser runs as libpg_query compiled to WebAssembly, and Node V8 coverage does not report C source lines inside the module, so the parser-source coverage gate cannot be met with the JavaScript harness pattern."
+      "reason": "parse(sql) returns the PostgreSQL parse tree from a WASM build of libpg_query 18. Rechecked in round 2: the package runs libpg_query compiled to WebAssembly (wasm/index.cjs loads the module), and Node V8 coverage reports only JavaScript ranges, never the C source lines inside the module; the npm build ships no DWARF or source map that would map module offsets back to the pinned C files. A C-coverage route would need a separately instrumented libpg_query build, which would no longer be the published package bytes. The parser-source coverage gate cannot be met, so it stays a coverage blocker; the C library itself is selected in the C cell."
     },
     {
       "name": "pgsql-ast-parser",
@@ -47,94 +47,241 @@
       "selected_release": "12.0.2"
     },
     {
+      "name": "@zeit/cosmosdb-query",
+      "status": "excluded",
+      "metric_value": 2234610,
+      "metric_error": null,
+      "latest_release_observed": "0.7.2",
+      "family": "cosmosdb-query PEG.js grammar (Cosmos DB SQL)",
+      "documented_api_lead": "query(sql).exec(items)",
+      "reason": "A SQL parser and executor for Cosmos DB (0.7.2, MIT, 2021). Its documented API compiles a query and executes it over in-memory items; the Cosmos DB SQL grammar (lib/parser.js) has no INSERT statement and its JOIN is an intra-document iteration, so the INSERT control cannot be parsed and no syntax-tree API is documented. Engine/dialect mismatch; not a candidate.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "pgsql-parser",
+      "status": "unresolved_coverage_blocker",
+      "metric_value": 1853514,
+      "metric_error": null,
+      "latest_release_observed": "18.3.5",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "parse",
+      "reason": "pgsql-parser 18.3.5 (MIT) parses through its dependency libpg-query 18.2.4 (WASM) and adds a deparser; same family and coverage blocker as libpg-query (V8 coverage does not report the C lines inside the WebAssembly module).",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
       "name": "pg-query-emscripten",
-      "status": "unresolved",
+      "status": "unresolved_coverage_blocker",
       "metric_value": 1749295,
       "metric_error": null,
       "latest_release_observed": "5.1.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse",
-      "reason": "Emscripten build of libpg_query."
+      "reason": "pg-query-emscripten 5.1.0 (MIT) wraps an Emscripten build of libpg_query. Round 2 inspected the tarball (sha256 d598a66f...): pg_query.js is wasm2js output (it defines a JavaScript WebAssembly polyfill and runs the translated module as about 2.5 MB of generated JavaScript), and pg_query_wasm.js embeds the module as a base64 data URI. V8 coverage would report lines of translated machine code, not the libpg_query C sources, and no source map is shipped; same family and blocker as libpg-query."
+    },
+    {
+      "name": "plpgsql-parser",
+      "status": "unresolved_coverage_blocker",
+      "metric_value": 1647873,
+      "metric_error": null,
+      "latest_release_observed": "18.6.6",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "parse",
+      "reason": "plpgsql-parser 18.6.6 (MIT) parses SQL and PL/pgSQL through libpg-query 18.2.4 (WASM); same family and coverage blocker as libpg-query.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@derekstride/tree-sitter-sql",
+      "status": "unresolved_native_coverage_blocker",
+      "metric_value": 1186889,
+      "metric_error": null,
+      "latest_release_observed": "0.3.13",
+      "family": "tree-sitter SQL grammar (generated C parser)",
+      "documented_api_lead": "tree-sitter Parser.setLanguage + parse",
+      "reason": "tree-sitter-sql 0.3.13 (MIT) is a tree-sitter grammar whose generated parser is C (src/parser.c) loaded as a node-addon-api binding (node-gyp-build) by the separate tree-sitter runtime package. The concrete syntax tree could give the summary, but the parser runs as native code: V8 coverage cannot see it, and parser-source coverage plus AFL++ feedback would need the addon rebuilt with LLVM coverage and AFL++ instrumentation inside Node. Not attempted in round 2; it stays an unrun lead with that blocker.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@dbml/core",
+      "status": "excluded",
+      "metric_value": 841383,
+      "metric_error": null,
+      "latest_release_observed": "12.1.0",
+      "family": "DBML parser with SQL DDL importers",
+      "documented_api_lead": "importer.import(sql, format)",
+      "reason": "@dbml/core 12.1.0 parses DBML and imports SQL DDL (CREATE TABLE) into a schema model; it does not parse SELECT or INSERT statements into a syntax tree. Schema-only, excluded per the SQL protocol.",
+      "metric_snapshot": "round_2_metric"
     },
     {
       "name": "@guanmingchiu/sqlparser-ts",
-      "status": "unresolved",
+      "status": "unresolved_coverage_blocker",
       "metric_value": 598900,
       "metric_error": null,
       "latest_release_observed": "0.63.0",
       "family": "sqlparser-rs (WASM)",
       "documented_api_lead": "parse",
-      "reason": "WASM build of sqlparser-rs."
+      "reason": "WASM build of sqlparser-rs (0.63.0, Apache-2.0; dist/index.cjs loads a .wasm module). V8 coverage does not report the Rust source lines inside the module, so the parser-source coverage gate cannot be met with the JavaScript harness pattern; the Rust crate itself is selected in the Rust cell."
     },
     {
       "name": "sql-parser-cst",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 536703,
       "metric_error": null,
       "latest_release_observed": "0.44.1",
       "family": "sql-parser-cst Peggy grammar",
       "documented_api_lead": "parse",
-      "reason": "parse(sql, {dialect}) returns a concrete syntax tree."
+      "reason": "parse(sql, {dialect}) returns a concrete syntax tree.",
+      "selected_release": "0.44.1"
     },
     {
       "name": "dt-sql-parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 364059,
       "metric_error": null,
       "latest_release_observed": "4.6.1",
       "family": "dt-sql-parser ANTLR grammars",
       "documented_api_lead": "parse",
-      "reason": "ANTLR4-based parsers per dialect, returning ANTLR parse trees."
+      "reason": "ANTLR4-based parsers per dialect, returning ANTLR parse trees.",
+      "selected_release": "4.6.1"
     },
     {
       "name": "js-sql-parser",
-      "status": "unresolved",
+      "status": "excluded_control_fails",
       "metric_value": 157858,
       "metric_error": null,
       "latest_release_observed": "1.6.0",
       "family": "js-sql-parser jison grammar",
       "documented_api_lead": "parse",
-      "reason": "MySQL subset parser (jison)."
+      "reason": "js-sql-parser 1.6.0 (ISC; jison MySQL grammar, documented as 'select grammar'). parse() returns an AST for the SELECT control, but the INSERT control fails at the first token after INSERT: \"Parse error on line 1 ... Expecting '(', 'SELECT', got 'IDENTIFIER'\". The grammar covers SELECT only."
+    },
+    {
+      "name": "@clickhouse/parser",
+      "status": "excluded_control_fails",
+      "metric_value": 118532,
+      "metric_error": null,
+      "latest_release_observed": "0.3.0",
+      "family": "ClickHouse SQL parser (TypeScript port)",
+      "documented_api_lead": "parse",
+      "reason": "@clickhouse/parser 0.3.0 (Apache-2.0). parse() returns a ClickHouse AST for the SELECT control, but for the INSERT control it returns only {type: 'InsertQuery', table, columns, format: 'Values'}: as in ClickHouse, the VALUES data is left to the input-format reader and is not parsed, so the row count and literals cannot be read. Fails the INSERT summary.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@materializeinc/sql-parser",
+      "status": "excluded",
+      "metric_value": 112478,
+      "metric_error": null,
+      "latest_release_observed": "26.50.1",
+      "family": "Materialize SQL parser (Rust, WASM)",
+      "documented_api_lead": "parse",
+      "reason": "@materializeinc/sql-parser 26.50.1 is a WebAssembly build of Materialize's Rust SQL parser (mz_sql_parser_wasm_bg.wasm). Its LICENSE is the Materialize Business Source License 1.1, not an open-source license, and V8 coverage would not report the Rust source lines inside the module. Excluded.",
+      "metric_snapshot": "round_2_metric"
     },
     {
       "name": "sqlite-parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 85900,
       "metric_error": null,
       "latest_release_observed": "1.0.1",
       "family": "sqlite-parser PEG.js grammar",
       "documented_api_lead": "sqliteParser",
-      "reason": "SQLite-dialect parser returning an AST."
+      "reason": "sqliteParser(sql) returns a SQLite AST (statement list with select/insert variants) from its PEG.js grammar; minified without a source map.",
+      "selected_release": "1.0.1"
+    },
+    {
+      "name": "@appland/sql-parser",
+      "status": "selected",
+      "metric_value": 80224,
+      "metric_error": null,
+      "latest_release_observed": "1.5.1",
+      "family": "sqlite-parser PEG.js grammar (AppLand fork)",
+      "documented_api_lead": "sqliteParser",
+      "reason": "AppLand-maintained fork of sqlite-parser (1.5.1, 2022) with a modified PEG.js grammar and the same AST shape. Not byte-identical: the minified generated parser is 127,259 bytes against 109,981, and about 51% of sqlite-parser 1.0.1's statement fragments occur unchanged in it (43% of the fork's); the wrapper files differ only in the version banner.",
+      "metric_snapshot": "round_2_metric",
+      "selected_release": "1.5.1"
     },
     {
       "name": "@pgsql/parser",
-      "status": "unresolved",
+      "status": "unresolved_coverage_blocker",
       "metric_value": 78227,
       "metric_error": null,
       "latest_release_observed": "1.6.4",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse",
-      "reason": "WASM libpg_query build (pgsql package family)."
+      "reason": "WASM build of libpg_query (1.6.4, MIT; ./wasm/index.cjs). Same coverage blocker as libpg-query: V8 coverage does not report C source lines inside the WebAssembly module."
+    },
+    {
+      "name": "sql-parser-mistic",
+      "status": "excluded_control_fails",
+      "metric_value": 68233,
+      "metric_error": null,
+      "latest_release_observed": "1.2.3",
+      "family": "sql-parser jison grammar (fork)",
+      "documented_api_lead": "parse",
+      "reason": "sql-parser-mistic 1.2.3 (MIT, 2019) is a fork of sql-parser. Both controls fail in the lexer at the statement terminator: \"NOTHING CONSUMED: Stopped at - ';'\".",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "postgresql-eslint-parser",
+      "status": "unresolved_coverage_blocker",
+      "metric_value": 50933,
+      "metric_error": null,
+      "latest_release_observed": "0.6.2",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "parseForESLint",
+      "reason": "postgresql-eslint-parser 0.6.2 (MIT) is an ESLint parser that parses through @libpg-query/parser (WASM build of libpg_query); same family and coverage blocker as libpg-query.",
+      "metric_snapshot": "round_2_metric"
     },
     {
       "name": "pg-query-parser",
-      "status": "unresolved",
+      "status": "unresolved_native_coverage_blocker",
       "metric_value": 31519,
       "metric_error": null,
       "latest_release_observed": "0.3.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse",
-      "reason": "Older libpg_query emscripten package."
+      "reason": "pg-query-parser 0.3.0 (BSD-3-Clause, 2021) parses through its dependency pg-query-native, a node-gyp addon over an old libpg_query (PostgreSQL 10). The parser runs as native C inside the addon; V8 coverage cannot see it, and a coverage or AFL++ build would have to rebuild the addon with instrumentation. Not attempted in round 2; libpg_query is selected in the C cell."
+    },
+    {
+      "name": "@griffithswaite/ts-plsql-parser",
+      "status": "excluded_control_fails",
+      "metric_value": 22144,
+      "metric_error": null,
+      "latest_release_observed": "1.1.1",
+      "family": "PL/SQL ANTLR4 grammar (antlr/grammars-v4 PlSql)",
+      "documented_api_lead": "getParserFromInput(input).sql_script()",
+      "reason": "@griffithswaite/ts-plsql-parser 1.1.1 (BSD-3-Clause), the grammars-v4 Oracle PL/SQL grammar on the antlr4 runtime. Both controls report a syntax error: the SELECT control at 'AS' in the table alias ('line 2:15 mismatched input 'AS' expecting {<EOF>, '/', ';'}'; Oracle has no AS before a table alias) and the INSERT control at the second VALUES row ('line 2:28 mismatched input ','').",
+      "metric_snapshot": "round_2_metric"
     },
     {
       "name": "sql-parser",
-      "status": "unresolved",
+      "status": "excluded_control_fails",
       "metric_value": 16843,
       "metric_error": null,
       "latest_release_observed": "0.5.0",
       "family": "sql-parser jison grammar",
       "documented_api_lead": "parse",
-      "reason": "Old SQL parser (2012 lineage)."
+      "reason": "sql-parser 0.5.0 (2015, CoffeeScript lexer and jison grammar). Both controls fail in the lexer at the statement terminator: \"NOTHING CONSUMED: Stopped at - ';'\". The controls are fixed and end with ';', so the path cannot be verified."
+    },
+    {
+      "name": "@openobserve/node-sql-parser",
+      "status": "excluded_shared_family_snapshot",
+      "metric_value": 15004,
+      "metric_error": null,
+      "latest_release_observed": "0.1.5",
+      "family": "node-sql-parser PEG.js grammars (republished snapshot)",
+      "documented_api_lead": "Parser.astify",
+      "reason": "@openobserve/node-sql-parser 0.1.5 (Apache-2.0) is a republish of an older node-sql-parser: its package.json repository and homepage point to taozhi8833998/node-sql-parser and its README is node-sql-parser's. Comparing the grammar sources embedded in the shipped source maps, 88.2% of its postgresql.pegjs lines (38,021 of 43,123) are identical to node-sql-parser 5.4.0's (81.3% of the selected path's 46,756). Its only addition is an undocumented datafusionsql build. Both controls parse, but as a republished snapshot of the selected node-sql-parser lineage it is not counted as a separate path.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@joe-re/sql-parser",
+      "status": "excluded_control_fails",
+      "metric_value": 12591,
+      "metric_error": null,
+      "latest_release_observed": "1.7.1",
+      "family": "node-sql-parser PEG.js grammar (early fork, Peggy)",
+      "documented_api_lead": "parse",
+      "reason": "@joe-re/sql-parser 1.7.1 (GPLv2), an early node-sql-parser fork used by sql-language-server. The SELECT control parses; the INSERT control fails at the second row ('Expected \"--\", \"/*\", \";\", [ \\t\\n\\r], or end of input but \",\" found').",
+      "metric_snapshot": "round_2_metric"
     },
     {
       "name": "sql-ddl-to-json-schema",
@@ -147,14 +294,150 @@
       "reason": "DDL-only converter; cannot parse SELECT."
     },
     {
+      "name": "node-sqlparser",
+      "status": "excluded_control_fails",
+      "metric_value": 11959,
+      "metric_error": null,
+      "latest_release_observed": "1.0.4",
+      "family": "node-sqlparser PEG.js grammar",
+      "documented_api_lead": "parse",
+      "reason": "node-sqlparser 1.0.4 (GPL-2.0, 2018). Both controls fail at the statement terminator ('... or end of input but \";\" found').",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "sql-surveyor",
+      "status": "excluded",
+      "metric_value": 10436,
+      "metric_error": null,
+      "latest_release_observed": "1.4.1",
+      "family": "antlr4ts-sql grammars (wrapper)",
+      "documented_api_lead": "SQLSurveyor.survey",
+      "reason": "sql-surveyor 1.4.1 (MIT) returns an analysis summary (output columns, referenced columns and tables, tokens), not a syntax tree; its grammar lives in the separate antlr4ts-sql package. The survey has no join, grouping, ordering, row or literal structure (for example SUM(o.total) is reported with table name 'SUM(o'), so the summary cannot be read from it.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "sqllens",
+      "status": "selected",
+      "metric_value": 6624,
+      "metric_error": null,
+      "latest_release_observed": "1.11.0",
+      "family": "sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4)",
+      "documented_api_lead": "parse",
+      "reason": "parse(sql, dialect) returns {ast, errors, cst}; the lowered IR marks INSERT as unsupported, so the summary is read from the documented CST (full ANTLR4 parse tree).",
+      "metric_snapshot": "round_2_metric",
+      "selected_release": "1.11.0"
+    },
+    {
+      "name": "oracle-sql-parser",
+      "status": "excluded",
+      "metric_value": 4486,
+      "metric_error": null,
+      "latest_release_observed": "0.1.0",
+      "family": "oracle-sql-parser PEG.js grammar",
+      "documented_api_lead": "new Parser().parse",
+      "reason": "oracle-sql-parser 0.1.0 (MIT) parses Oracle DDL only: both controls fail at the first keyword ('Expected \"alter\", \"create\", \"drop\" ... but \"S\" found'). Schema-only, excluded per the SQL protocol.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "rawsql-ts",
+      "status": "selected",
+      "metric_value": 1802,
+      "metric_error": null,
+      "latest_release_observed": "0.30.1",
+      "family": "rawsql-ts hand-written tokenizer and recursive-descent parser",
+      "documented_api_lead": "SqlParser.parseMany",
+      "reason": "SqlParser.parse / parseMany return typed query models (SimpleSelectQuery, InsertQuery with a ValuesQuery).",
+      "metric_snapshot": "round_2_metric",
+      "selected_release": "0.30.1"
+    },
+    {
+      "name": "@sgress454/node-sql-parser",
+      "status": "excluded_byte_identical_grammar",
+      "metric_value": 1575,
+      "metric_error": null,
+      "latest_release_observed": "5.4.0-fork.2",
+      "family": "node-sql-parser PEG.js grammars (fork)",
+      "documented_api_lead": "Parser.astify",
+      "reason": "@sgress454/node-sql-parser 5.4.0-fork.2 is a fork of node-sql-parser 5.4.0 'with bug-fixes for sqlite'. The postgresql.pegjs grammar embedded in its source map is byte-identical to the selected node-sql-parser 5.4.0 path (46,756 of 46,756 lines); the rebuilt bundles differ only by the fork's other grammar changes. Excluded as a duplicate of the selected path.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@questdb/sql-parser",
+      "status": "selected",
+      "metric_value": 1470,
+      "metric_error": null,
+      "latest_release_observed": "0.1.22",
+      "family": "@questdb/sql-parser Chevrotain grammar",
+      "documented_api_lead": "parseToAst",
+      "reason": "parseToAst(sql) returns {ast, errors}: typed select/insert statements from the package's Chevrotain parser for QuestDB SQL.",
+      "metric_snapshot": "round_2_metric",
+      "selected_release": "0.1.22"
+    },
+    {
+      "name": "@tableland/sqlparser",
+      "status": "unresolved_coverage_blocker",
+      "metric_value": 1197,
+      "metric_error": null,
+      "latest_release_observed": "1.4.1",
+      "family": "Tableland Go SQL parser (WASM)",
+      "documented_api_lead": "normalize",
+      "reason": "@tableland/sqlparser 1.4.1 ships a Go parser compiled to WebAssembly (main.wasm loaded through Go's wasm_exec glue in esm/out.js) and has no license field in package.json. V8 coverage does not report the Go source lines inside the module; not a candidate in this round.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@deepnote/sql-parser",
+      "status": "excluded_control_fails",
+      "metric_value": 911,
+      "metric_error": null,
+      "latest_release_observed": "3.0.0",
+      "family": "node-sql-parser PEG.js grammar (early fork, via @joe-re/sql-parser)",
+      "documented_api_lead": "parse",
+      "reason": "@deepnote/sql-parser 3.0.0 (GPLv2) is a fork of @joe-re/sql-parser. The SELECT control parses; the INSERT control fails at the second row ('Expected \"--\", \"/*\", \";\", [ \\t\\n\\r], or end of input but \",\" found').",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "@saralsql/tsql-parser",
+      "status": "selected",
+      "metric_value": 731,
+      "metric_error": null,
+      "latest_release_observed": "0.4.7",
+      "family": "@saralsql/tsql-parser hand-written T-SQL parser",
+      "documented_api_lead": "analyze",
+      "reason": "analyze(sql) returns {ast, issues, ...}; the Program AST has SelectStatement and InsertStatement nodes from the package's own T-SQL lexer and parser.",
+      "metric_snapshot": "round_2_metric",
+      "selected_release": "0.4.7"
+    },
+    {
       "name": "@florajs/sql-parser",
-      "status": "unresolved",
+      "status": "excluded_control_fails",
       "metric_value": 640,
       "metric_error": null,
       "latest_release_observed": "4.0.0",
       "family": "node-sql-parser PEG.js (fork)",
       "documented_api_lead": "Parser.parse",
-      "reason": "Fork of an older node-sql-parser."
+      "reason": "@florajs/sql-parser 4.0.0 (GPL-2.0), a fork of an early node-sql-parser PEG.js grammar for SELECT. The SELECT control fails at the first qualified column ('Expected \"--\", \"/*\", \"UNION\", [ \\t\\n\\r], or end of input but \".\" found') and the INSERT control fails at the column list ('Expected [A-Za-z0-9_:] but \")\" found')."
+    },
+    {
+      "name": "sqljs",
+      "status": "excluded",
+      "metric_value": 637,
+      "metric_error": null,
+      "latest_release_observed": "0.0.0-6",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "sqljs 0.0.0-6 (2015) is a pre-release with no license field; its README says the npm package is not the supported install path and directs users to build from git. No pinnable licensed release; not a candidate.",
+      "metric_snapshot": "round_2_metric"
+    },
+    {
+      "name": "sql-ast",
+      "status": "excluded",
+      "metric_value": 340,
+      "metric_error": null,
+      "latest_release_observed": "0.3.0",
+      "family": "sql-ast MySQL DDL parser",
+      "documented_api_lead": "parse",
+      "reason": "sql-ast 0.3.0 (MIT) parses MySQL schema statements; the SELECT control fails with 'Unknown statement SELECT'. Schema-only, excluded per the SQL protocol.",
+      "metric_snapshot": "round_2_metric"
     }
   ]
 }

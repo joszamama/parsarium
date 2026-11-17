@@ -5,6 +5,46 @@
   "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
   "leads": [
     {
+      "name": "libreoffice",
+      "status": "excluded",
+      "metric_value": 128949,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "LibreOffice SQL parser (connectivity OSQLParser, bison)",
+      "documented_api_lead": null,
+      "reason": "Office suite. Its SQL parser (connectivity/source/parse, OSQLParser) is internal to LibreOffice Base and is not part of the LibreOffice SDK or any Debian development package, so there is no documented library API to call on local SQL text."
+    },
+    {
+      "name": "gdal",
+      "status": "excluded",
+      "metric_value": 39199,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "GDAL OGR SQL (swq) parser",
+      "documented_api_lead": "swq_select::preparse",
+      "reason": "GDAL's OGR SQL dialect parser (swq_select in ogr_swq.h) backs GDALDataset::ExecuteSQL over vector datasets. The documented OGR SQL dialect supports SELECT and a few DDL statements but not INSERT, so the second valid control cannot be parsed, and swq_select is not a documented public parsing API. The popcon count covers the whole geospatial library."
+    },
+    {
+      "name": "antlr4-cpp-runtime",
+      "status": "excluded",
+      "metric_value": 6770,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "ANTLR 4 C++ runtime only; it ships no SQL grammar or generated SQL parser."
+    },
+    {
+      "name": "sqlitebrowser",
+      "status": "excluded",
+      "metric_value": 5167,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "DB Browser for SQLite internal SQLite schema parser",
+      "documented_api_lead": null,
+      "reason": "Desktop application (DB Browser for SQLite). Its SQL parsing is internal to the application and is not shipped as a library or development package."
+    },
+    {
       "name": "soci",
       "status": "excluded",
       "metric_value": 518,
@@ -13,6 +53,16 @@
       "family": null,
       "documented_api_lead": null,
       "reason": "Database access wrapper; sends SQL to a backend and has no SQL parser."
+    },
+    {
+      "name": "kdb",
+      "status": "excluded",
+      "metric_value": 237,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "KDb SQL parser (bison)",
+      "documented_api_lead": "KDbParser::parse",
+      "reason": "KDb (Kexi database library). KDbParser parses KDb SQL into a KDbQuerySchema, but it requires a KDbConnection to resolve tables and its grammar covers SELECT only, so it cannot parse the INSERT control without a database connection."
     },
     {
       "name": "mysql++",
@@ -35,6 +85,16 @@
       "reason": "SQLite C++ wrapper; uses sqlite3_prepare and has no syntax tree."
     },
     {
+      "name": "sqlitestudio",
+      "status": "excluded",
+      "metric_value": 42,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLiteStudio SQLite parser (Lemon)",
+      "documented_api_lead": null,
+      "reason": "Desktop application. Its SQLite parser lives in the application's coreSQLiteStudio library, which Debian does not ship as a development package with a documented API."
+    },
+    {
       "name": "libpg-query",
       "status": "excluded",
       "metric_value": 41,
@@ -46,13 +106,13 @@
     },
     {
       "name": "duckdb",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 40,
       "metric_error": null,
-      "latest_release_observed": null,
-      "family": "DuckDB transformer over a libpg_query-derived PostgreSQL grammar",
+      "latest_release_observed": "2.0.0",
+      "family": "DuckDB PEG parser (own grammar and transformer)",
       "documented_api_lead": "duckdb::Parser::ParseQuery",
-      "reason": "DuckDB engine. duckdb::Parser::ParseQuery in the public parser header returns SQLStatement objects (SelectNode, TableRef, ParsedExpression trees). DuckDB uses a libpg_query-derived PostgreSQL grammar plus its own transformer, so it shares the PostgreSQL grammar family. Not yet run: a source build of the engine with coverage is large."
+      "reason": "DuckDB engine (Debian source duckdb). duckdb::Parser::GetBuiltinParser().ParseQuery parses both valid controls without a database or client context into SQLStatement trees that give the oracle summary (COUNT(*) is stored as count_star and reported as count). v2.0.0 replaced the libpg_query-derived bison grammar of DuckDB 1.x with its own PEG grammar, so it is no longer in the PostgreSQL grammar family."
     },
     {
       "name": "libodb",
@@ -82,7 +142,7 @@
       "latest_release_observed": null,
       "family": "Hyrise sql-parser (Bison/Flex)",
       "documented_api_lead": "hsql::SQLParser::parse",
-      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package and no Homebrew formula, so it has no value for this cell's primary popcon metric and cannot be ranked under PROTOCOL.md (no C/C++ fallback signal)."
+      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package in the pinned popcon snapshot (rechecked 2026-11-17 for hsql, hyrise and sql-parser source names), so it has no value for this cell's primary popcon metric and no Debian dev-package fallback; GitHub stars are not allowed outside PLY cells."
     }
   ]
 }

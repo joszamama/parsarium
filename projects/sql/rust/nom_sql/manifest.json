@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "rust",
+  "pilot": true,
+  "package": "nom-sql",
+  "release": "0.0.11",
+  "catalog_parser": "data/rust/sql/parsers.json",
+  "source_lock": "projects/sql/rust/nom_sql/source-lock.json",
+  "source_sha256": "c5266bcf166285da22fdc385d696725e7a9e7791b10af9baaeabc69428079730",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "MySQL subset (the only grammar nom-sql implements; no dialect option)",
+  "parser_family": "nom-sql nom 5 combinator parser (MySQL subset)",
+  "api": "nom_sql::parse_query_bytes(local bytes) -> SqlQuery; the harness reads SqlQuery::Select (tables, fields, join, where_clause, group_by, order) and SqlQuery::Insert (table, fields, data rows) and walks ConditionExpression trees and Column function expressions for function names and Literal values",
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in the nom-sql crate (combinator parsers and AST), with libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-sql-0.0.11/",
+  "format_specific_coverage_file_suffix": "/src/select.rs",
+  "scope": "One SQL statement from local bytes; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. FixedPoint literals keep integral and fractional digits as integers; the adapter joins them with a point, which equals the source text 19.5 here but would not preserve leading fractional zeros. COUNT(*) is the CountStar function node. Other syntax is untested."
+}

@@ -17,24 +17,24 @@
     },
     {
       "name": "github.com/cockroachdb/cockroach/pkg/sql/parser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 1972,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "CockroachDB PostgreSQL-compatible grammar",
       "documented_api_lead": "parser.Parse",
-      "reason": "CockroachDB parser inside the full database module (not published for library use; pulls the whole CockroachDB tree). The extracted cockroachdb-parser module is the library form. Importer count from the search snippet; not run.",
+      "reason": "Not importable as a library path. The newest version the Go proxy resolves for github.com/cockroachdb/cockroach is v20.1.17+incompatible (h1:K1cIUwI9...); its pkg/sql/parser ships sql.y but not the generated sql.go and help_messages.go (listed in the package .gitignore), so the package does not compile from the module, and later CockroachDB releases are not published as importable module versions. Cockroach Labs publishes the parser as github.com/cockroachdb/cockroachdb-parser for library use (selected under its own importer count, 13); the auxten extraction is also selected. This snippet count (1,972) is not transferred to either path. Checked 2026-11-17.",
       "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
     },
     {
       "name": "github.com/pingcap/tidb/parser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 1190,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Older in-repo path of the TiDB parser (now github.com/pingcap/tidb/pkg/parser). Importer count from the search snippet; not run in this round.",
+      "reason": "Predecessor path of the selected github.com/pingcap/tidb/pkg/parser: the TiDB parser moved from parser/ to pkg/parser, and the last module version at the old path is v0.0.0-20231013125129-93a834a6bf8d. Excluded as a renamed predecessor (trust-dns-proto/zend-json precedent); its snippet count (1,190) is not added to the selected path. Checked 2026-11-17.",
       "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
     },
     {
@@ -50,113 +50,122 @@
     },
     {
       "name": "github.com/pingcap/parser",
-      "status": "unresolved_blocked",
+      "status": "excluded",
       "metric_value": 385,
       "metric_error": null,
       "latest_release_observed": "v3.1.2+incompatible",
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Archived standalone TiDB parser module; parser.New().Parse returns []ast.StmtNode. Superseded by github.com/pingcap/tidb/pkg/parser. Checked 2026-11-17: the newest tagged module v3.1.2+incompatible has no test_driver package, so literal values need the parser_driver from the full TiDB module; a standalone harness was not built. Remains a lead."
+      "reason": "Archived standalone module of the same TiDB parser, superseded by github.com/pingcap/tidb/parser and then github.com/pingcap/tidb/pkg/parser (selected). Excluded as a predecessor (rename precedent). Earlier check: the newest tagged module v3.1.2+incompatible has no test_driver package, so literals need the parser_driver from the full TiDB module. Checked 2026-11-17."
     },
     {
       "name": "github.com/xwb1989/sqlparser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 305,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-1203878",
       "family": "vitess MySQL grammar (extracted fork)",
       "documented_api_lead": "sqlparser.Parse",
-      "reason": "Extracted copy of an older vitess sqlparser; sqlparser.Parse returns Statement. Not run in this round; next Go lead by metric after pingcap/parser."
+      "reason": "2018 extraction of vitess go/vt/sqlparser (untagged; pinned to pseudo-version 120387863bf2). Not byte-identical to the selected vitess v0.24.5 sqlparser: 0 of 12 same-named non-test source files identical, 23.9% of its 19,192 lines in matching blocks. SplitStatementToPieces and Parse give the oracle summary on both controls; selected as a separate path in the vitess family.",
+      "selected_release": "v0.0.0-20180606152119-120387863bf2"
     },
     {
       "name": "github.com/pingcap/tidb/pkg/parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 176,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-1e84b35",
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Current TiDB parser module; parser.New().ParseOneStmt / Parse return ast.StmtNode. Same family as pingcap/parser."
+      "reason": "Current TiDB parser module (no tagged releases; pinned to the snapshot's proxy pseudo-version of commit 1e84b3595a3e). parser.New().Parse with the documented test_driver package returns ast.StmtNode values that give the oracle summary on both controls; Go coverpkg covers the parser package and the AFL++ bridge differs between the controls.",
+      "selected_release": "v0.0.0-20261117145351-1e84b3595a3e"
     },
     {
       "name": "github.com/blastrain/vitess-sqlparser/sqlparser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 88,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-a139afb",
       "family": "vitess MySQL grammar (fork)",
       "documented_api_lead": "sqlparser.Parse",
-      "reason": "vitess sqlparser fork with a TiDB-parser fallback; shared vitess family."
+      "reason": "Fork of an older vitess sqlparser with a bundled TiDB parser used only for DDL/SHOW/admin statements (untagged; pinned to pseudo-version a139afbb1aba). Not byte-identical: 0 of 7 same-named sqlparser files identical to xwb1989/sqlparser (73.1% of 9,084 lines matched) or vitess v0.24.5 (27.1%). sqlparser.Parse gives the oracle summary on both controls; selected as a vitess-family path.",
+      "selected_release": "v0.0.0-20201030050434-a139afbb1aba"
     },
     {
       "name": "github.com/pganalyze/pg_query_go/v6",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 54,
       "metric_error": null,
       "latest_release_observed": "v6.2.5",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query.Parse",
-      "reason": "cgo binding to libpg_query; pg_query.Parse returns the PostgreSQL protobuf parse tree."
+      "reason": "cgo binding to the bundled libpg_query 17-6.2.5 C sources (PostgreSQL grammar family). pg_query.Parse gives the oracle summary on both controls; Go binding lines plus native libpg_query C lines are covered (Clang profile), and AFL++ feedback comes from the allowlisted native gram.c, scan.c and parser.c objects; selected.",
+      "selected_release": "v6.2.5"
     },
     {
       "name": "github.com/auxten/postgresql-parser/pkg/sql/parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 22,
       "metric_error": null,
       "latest_release_observed": "v1.0.1",
       "family": "CockroachDB PostgreSQL-compatible grammar",
       "documented_api_lead": "parser.Parse",
-      "reason": "Extracted CockroachDB parser; parser.Parse returns tree.Statement values."
+      "reason": "Third-party extraction of CockroachDB v20.1.11 pkg/sql/parser with generated files checked in. BSL 1.1 code whose CockroachDB 20.1 Change Date (2023-04-01) has passed, so it is Apache-2.0 licensed; parser.Parse gives the oracle summary on both controls; selected as a CockroachDB-family path.",
+      "selected_release": "v1.0.1"
     },
     {
       "name": "github.com/rqlite/sql",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 20,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-5c0832f",
       "family": "rqlite/sql hand-written parser",
       "documented_api_lead": "Parser.ParseStatement",
-      "reason": "SQLite-dialect parser; sql.NewParser(reader).ParseStatement."
+      "reason": "SQLite-dialect hand-written parser (untagged; pinned to pseudo-version 5c0832fea6e1). NewParser(reader).ParseStatements gives the oracle summary on both controls; selected.",
+      "selected_release": "v0.0.0-20261016220845-5c0832fea6e1"
     },
     {
       "name": "github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 13,
       "metric_error": null,
       "latest_release_observed": "v0.25.2",
       "family": "CockroachDB PostgreSQL-compatible grammar",
       "documented_api_lead": "parser.Parse",
-      "reason": "Official extraction of the CockroachDB SQL parser; parser.Parse returns statements."
+      "reason": "Official Apache-2.0 extraction of the CockroachDB parser (v0.25.2, CockroachDB v25.2). parser.Parse gives the oracle summary on both controls; selected as a CockroachDB-family path separate from the v20.1 auxten extraction (none of 7 same-named parser files identical, 36.6% of auxten's lines matched).",
+      "selected_release": "v0.25.2"
     },
     {
       "name": "github.com/AfterShip/clickhouse-sql-parser/parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 13,
       "metric_error": null,
       "latest_release_observed": "v0.5.7",
       "family": "clickhouse-sql-parser hand-written",
       "documented_api_lead": "Parser.ParseStmts",
-      "reason": "ClickHouse dialect parser; the PROTOCOL subset is generic, but dialect fit is untested."
+      "reason": "ClickHouse-dialect hand-written parser. NewParser(text).ParseStmts parses both valid controls (dialect-neutral subset) into SelectQuery/InsertStmt ASTs that give the oracle summary; selected.",
+      "selected_release": "v0.5.7"
     },
     {
       "name": "github.com/akito0107/xsqlparser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 7,
       "metric_error": null,
       "latest_release_observed": "v1.0.0",
       "family": "sqlparser-rs port",
       "documented_api_lead": "Parser.ParseSQL",
-      "reason": "Port of sqlparser-rs to Go."
+      "reason": "Go port of the early sqlparser-rs design (Go source, no shared code with the Rust crate). NewParser(reader, GenericSQLDialect).ParseSQL gives the oracle summary on both controls; selected.",
+      "selected_release": "v1.0.0"
     },
     {
       "name": "github.com/krasun/gosqlparser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 1,
       "metric_error": null,
       "latest_release_observed": "v1.0.5",
       "family": "gosqlparser",
       "documented_api_lead": "gosqlparser.Parse",
-      "reason": "Small subset parser; SELECT JOIN support unverified."
+      "reason": "Small subset parser. gosqlparser.Parse v1.0.5 rejects both valid controls with 'unexpected rune' (checked 2026-11-17); its documented grammar covers single-table SELECT/INSERT/UPDATE with == comparisons and double-quoted strings, without joins, functions, GROUP BY or ORDER BY."
     }
   ]
 }

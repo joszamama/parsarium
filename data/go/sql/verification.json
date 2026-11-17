@@ -95,8 +95,837 @@
       "parser_feature_difference": 395,
       "project_receipt": "projects/sql/go/vitess_io_vitess_go_vt_sqlparser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/go/vitess_io_vitess_go_vt_sqlparser/differential.json"
+    },
+    {
+      "package": "github.com/xwb1989/sqlparser",
+      "version": "v0.0.0-20180606152119-120387863bf2",
+      "pass": true,
+      "input_api": "sqlparser.SplitStatementToPieces and sqlparser.Parse(local SQL text) -> Statement",
+      "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "vitess MySQL grammar (2018 extracted fork, goyacc sql.y) and tokenizer",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 463,
+      "afl_tuple_difference": 182,
+      "parser_feature_difference": 182,
+      "project_receipt": "projects/sql/go/github_com_xwb1989_sqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_xwb1989_sqlparser/differential.json"
+    },
+    {
+      "package": "github.com/pingcap/tidb/pkg/parser",
+      "version": "v0.0.0-20261117145351-1e84b3595a3e",
+      "pass": true,
+      "input_api": "parser.New().Parse(local SQL text, \"\", \"\") -> []ast.StmtNode",
+      "dialect": "MySQL (TiDB parser, default charset and collation)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "group_by": 1,
+            "joins": 1,
+            "kind": "select",
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "order_by": 1,
+            "select_items": 3,
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "where": true
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "TiDB MySQL grammar (goyacc parser.y) and lexer",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 531,
+      "afl_tuple_difference": 164,
+      "parser_feature_difference": 168,
+      "project_receipt": "projects/sql/go/github_com_pingcap_tidb_pkg_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_pingcap_tidb_pkg_parser/differential.json"
+    },
+    {
+      "package": "github.com/blastrain/vitess-sqlparser/sqlparser",
+      "version": "v0.0.0-20201030050434-a139afbb1aba",
+      "pass": true,
+      "input_api": "sqlparser.Parse(local SQL text) -> Statement",
+      "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "vitess MySQL grammar (fork, goyacc sql.y) and tokenizer; TiDB fallback for DDL only",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 409,
+      "afl_tuple_difference": 175,
+      "parser_feature_difference": 175,
+      "project_receipt": "projects/sql/go/github_com_blastrain_vitess_sqlparser_sqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_blastrain_vitess_sqlparser_sqlparser/differential.json"
+    },
+    {
+      "package": "github.com/pganalyze/pg_query_go/v6",
+      "version": "v6.2.5",
+      "pass": true,
+      "input_api": "pg_query.Parse(local SQL text) -> *pg_query.ParseResult",
+      "dialect": "PostgreSQL (libpg_query 17-6.2.5)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), cgo binding",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 1220,
+      "afl_tuple_difference": 174,
+      "project_receipt": "projects/sql/go/github_com_pganalyze_pg_query_go_v6/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_pganalyze_pg_query_go_v6/differential.json",
+      "underlying_source_files": 26,
+      "underlying_source_lines_covered": 2342
+    },
+    {
+      "package": "github.com/auxten/postgresql-parser/pkg/sql/parser",
+      "version": "v1.0.1",
+      "pass": true,
+      "input_api": "parser.Parse(local SQL text) -> parser.Statements",
+      "dialect": "PostgreSQL (CockroachDB 20.1 grammar, no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "CockroachDB PostgreSQL-compatible grammar (v20.1 extraction, goyacc sql.y) and scanner",
+      "parser_source_files": 6,
+      "parser_source_lines_covered": 507,
+      "afl_tuple_difference": 154,
+      "parser_feature_difference": 155,
+      "project_receipt": "projects/sql/go/github_com_auxten_postgresql_parser_pkg_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_auxten_postgresql_parser_pkg_sql_parser/differential.json"
+    },
+    {
+      "package": "github.com/rqlite/sql",
+      "version": "v0.0.0-20261016220845-5c0832fea6e1",
+      "pass": true,
+      "input_api": "sql.NewParser(reader).ParseStatements() -> []sql.Statement",
+      "dialect": "SQLite (no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "rqlite/sql hand-written recursive-descent parser and scanner",
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 409,
+      "afl_tuple_difference": 279,
+      "parser_feature_difference": 279,
+      "project_receipt": "projects/sql/go/github_com_rqlite_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_rqlite_sql/differential.json"
+    },
+    {
+      "package": "github.com/AfterShip/clickhouse-sql-parser/parser",
+      "version": "v0.5.7",
+      "pass": true,
+      "input_api": "parser.NewParser(local SQL text).ParseStmts() -> []parser.Expr",
+      "dialect": "ClickHouse (no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "clickhouse-sql-parser hand-written recursive-descent parser and lexer",
+      "parser_source_files": 10,
+      "parser_source_lines_covered": 765,
+      "afl_tuple_difference": 382,
+      "parser_feature_difference": 384,
+      "project_receipt": "projects/sql/go/github_com_aftership_clickhouse_sql_parser_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_aftership_clickhouse_sql_parser_parser/differential.json"
+    },
+    {
+      "package": "github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser",
+      "version": "v0.25.2",
+      "pass": true,
+      "input_api": "parser.Parse(local SQL text) -> statements.Statements",
+      "dialect": "PostgreSQL (CockroachDB 25.2 grammar, no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "CockroachDB PostgreSQL-compatible grammar (official v25.2 extraction, goyacc sql.y) and scanner",
+      "parser_source_files": 6,
+      "parser_source_lines_covered": 565,
+      "afl_tuple_difference": 172,
+      "parser_feature_difference": 173,
+      "project_receipt": "projects/sql/go/github_com_cockroachdb_cockroachdb_parser_pkg_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_cockroachdb_cockroachdb_parser_pkg_sql_parser/differential.json"
+    },
+    {
+      "package": "github.com/akito0107/xsqlparser",
+      "version": "v1.0.0",
+      "pass": true,
+      "input_api": "xsqlparser.NewParser(reader, &dialect.GenericSQLDialect{}).ParseSQL() -> []sqlast.Stmt",
+      "dialect": "Generic (dialect.GenericSQLDialect)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "xsqlparser recursive-descent parser and tokenizer (Go port of early sqlparser-rs)",
+      "parser_source_files": 2,
+      "parser_source_lines_covered": 539,
+      "afl_tuple_difference": 167,
+      "parser_feature_difference": 167,
+      "project_receipt": "projects/sql/go/github_com_akito0107_xsqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_akito0107_xsqlparser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T17:12:15.499276+00:00"
+  "checked_at_utc": "2026-11-17T20:43:55.541578+00:00"
 }

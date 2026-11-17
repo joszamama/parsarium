@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "sad_spirit/pg_builder",
+  "release": "v3.3.1",
+  "catalog_parser": "data/php/sql/parsers.json",
+  "source_lock": "projects/sql/php/sad_spirit_pg_builder/source-lock.json",
+  "source_sha256": "758ca5302ecc232e3f74bfd411ca8d784b620dc7ca5dc2899e22592d36202c09",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in sad_spirit/pg_builder PHP source (Lexer, recursive-descent Parser, AST node classes and BlankWalker); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/sad_spirit/pg_builder/",
+  "format_specific_coverage_file_suffix": "/src/sad_spirit/pg_builder/Parser.php",
+  "scope": "SQL text from local bytes; the harness cuts the input at ';' special-character tokens reported by pg_builder's own Lexer, because the documented StatementFactory::createFromString parses exactly one statement without a terminator, and parses each piece. It walks the returned Statement with a subclass of the library's BlankWalker (RelationReference, InsertTarget, JoinExpression, FunctionCall, NumericConstant, StringConstant) and reads Select list/where/group/order and Insert cols/values rows.",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "dialect": "PostgreSQL (pg_builder parses PostgreSQL syntax only; default Lexer options, standard_conforming_strings on)",
+  "parser_family": "pg_builder hand-written PostgreSQL lexer and recursive-descent parser producing a typed AST (sad_spirit); independent of libpg_query",
+  "api": "(new sad_spirit\\pg_builder\\StatementFactory())->createFromString(local SQL text) -> Statement AST (Select, Insert, ...)"
+}

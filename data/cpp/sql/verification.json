@@ -1,0 +1,102 @@
+{
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "differential_control": "controls/sql/insert-values.sql",
+  "oracle": "controls/sql/expected.json",
+  "third_party": [
+    {
+      "package": "duckdb",
+      "version": "2.0.0",
+      "pass": true,
+      "input_api": "duckdb::Parser::GetBuiltinParser(); Parser::ParseQuery(local SQL text) -> Parser::statements (SQLStatement trees)",
+      "dialect": "DuckDB built-in grammar (Parser::GetBuiltinParser; no client context)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "DuckDB PEG parser (own grammar and transformer)",
+      "parser_source_files": 35,
+      "parser_source_lines_covered": 4726,
+      "afl_tuple_difference": 1410,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/cpp/duckdb/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/cpp/duckdb/differential.json"
+    }
+  ],
+  "standard": [],
+  "checked_at_utc": "2026-11-17T20:50:39.814584+00:00"
+}

@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "sql-parser-cst",
+  "release": "0.44.1",
+  "catalog_parser": "data/javascript/sql/parsers.json",
+  "source_lock": "projects/sql/javascript/sql_parser_cst/source-lock.json",
+  "source_sha256": "1dc65d972c20779a9beb6aafbc72bad16575bca83b8e09acf33aa12e7549b2af",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/local/bin/node",
+    "/work/replay.js",
+    "/input/case"
+  ],
+  "dialect": "SQLite (dialect: 'sqlite', the dialect the package documents as fully supported)",
+  "parser_family": "sql-parser-cst Peggy grammar (generated lib/parser.js) and its CST node builders; independent of node-sql-parser, pgsql-ast-parser and libpg_query",
+  "api": "parse(local UTF-8 text, {dialect: 'sqlite'}) from sql-parser-cst -> Program concrete syntax tree",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/sql-parser-cst/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 block coverage mapped to source lines of sql-parser-cst/lib/*.js (the generated Peggy parser and CST helpers) during valid-control replay; Jazzer.js instrumentation for the fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/sql-parser-cst/lib/",
+  "afl_coverage_subject_prefix": "/work/node_modules/sql-parser-cst/lib/",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8 and passed to sql-parser-cst parse with the sqlite dialect; the trailing empty statement after ';' is not counted. Valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other dialects (experimental in this release) are untested."
+}

@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "(new PHPSQL\\Parser())->parse(local SQL text) -> nested array parse tree keyed by clause (SELECT, FROM, WHERE, GROUP, ORDER, INSERT, VALUES)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T21:54:28.402878+00:00",
+  "manifest": "projects/sql/php/soundintheory_php_sql_parser/manifest.json",
+  "image_id": "sha256:e5ded7eecf4d9eb9f6e3dc5968fd87ab0089a60576d93060ebd5d4f55195e384",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "75d3ea13ba4238d034b49eeff7b995bde4a6539e63054b95da2d31b69937cbb6",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "859441e452c2ef4fedf8d426cc7fe5bfec33ea201a475aff94b8a59fa53113a5",
+    "composer.json": "21a982c260c408d8cac7e76972bdfe3a908ab8e996643a1022c974bb2b1ff449",
+    "composer.lock": "b5a587bf90c35c5b9bedad26531983b0956c87ba61e7dbfb2313edb52b226d8a",
+    "fuzz-target.php": "22489fb9f686d0c2e93eb74d2d562488694495740a3bcfbd7970c7f427343f76",
+    "harness.php": "9d151126c9dee64a8f924ed609fc8b88a7c9fe5e50eb814d2970bffa539a8b79",
+    "manifest.json": "9766f00db7b0878ef360482a8e18f797fb686a31accd62e83eac52b525fa3e90",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "4029687e38c60885794979ce1c868164cc77570acf831cacf50ea68f68bc47b0",
+    "source-lock.json": "731e45496c5843abd49145767466b9f23e8a0a7113de41cbf908e8d586b4e3c5",
+    "target.json": "c2d6c283af3faf073f30c7a5f763e501fbaedeb850a0c9ed54a4afdde1c73ba6"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 7,
+  "parser_source_lines_covered": 659,
+  "format_specific_source_lines_covered": 470,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/soundintheory_php_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

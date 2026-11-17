@@ -1,0 +1,71 @@
+{
+  "kind": "third_party",
+  "api": "mo_sql_parsing.parse(local SQL text decoded from UTF-8 bytes) -> JSON parse tree (select/from/where/groupby/orderby or insert/values mappings); the harness walks those keys, {operator_or_function: arguments} expressions (operators identified by mo_sql_parsing.keywords.precedence), {\"literal\": text} strings and numeric values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T21:57:44.169631+00:00",
+  "manifest": "projects/sql/python/mo_sql_parsing/manifest.json",
+  "image_id": "sha256:4e852cf17c50cff0523331862d29a211f77bc88b596c6327f3c40d1ea89caae0",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.11.2",
+    "Name: mo-sql-parsing",
+    "Version: 11.699.26234",
+    "Name: mo-parsing",
+    "Version: 9.3.26234",
+    "Name: atheris",
+    "Version: 3.0.0",
+    "a14ac329eaf36191b434b9bd049daa3cdf27db7e8aa8675ddd1720045c3160de  mo_sql_parsing/sql_parser.py",
+    "59a48417e768d6e7b81984bfca0c4b89e69f62edc9843eab601fffb5bdea56e7  mo_parsing/core.py"
+  ],
+  "source_sha256": "b6870253593670074e91a2656b5558983befb22f77cee15fd4b26ec4ad031220",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "4d9f88eae55cced93e3613fa30951bc3b6379e9f968a4772c8920fa75af5ab8a",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "da6afc9202f2a5118d6993e8e503b7cab89e70086e44c74bca1cc3753327dbe4",
+    "manifest.json": "f383c5235299e0b2246d2381eeedd1720cbfe1c0920cb3cf4e3b38331a7a6ed9",
+    "replay.py": "89e812105efc44e79e4f1260847eb11e4bb45570bb0857fd1f1eee08ae262067",
+    "run-control.py": "b071868641ddd967dfff80ddb94cd0d2dec63cf3fc1c289ef352f28fd8accefc",
+    "runtime-requirements.lock": "2b0f7731da20f77147530ad5981fc2e42eb71ca11da6ba37e62c95310fb86e4b"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 17,
+  "parser_source_lines_covered": 2745,
+  "format_specific_source_lines_covered": 851,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/python/mo_sql_parsing/target/coverage/coverage.json",
+  "pass": true
+}

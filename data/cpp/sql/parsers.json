@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "name": "duckdb",
+    "version": "2.0.0",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned v2.0.0 release-tag archive (MIT permission notice, Copyright 2018-2026 Stichting DuckDB Foundation)",
+    "input_api": "duckdb::Parser::GetBuiltinParser(); Parser::ParseQuery(local SQL text) -> Parser::statements (SQLStatement trees)",
+    "documentation": "https://github.com/duckdb/duckdb/blob/v2.0.0/src/include/duckdb/parser/parser.hpp",
+    "source": "https://codeload.github.com/duckdb/duckdb/tar.gz/refs/tags/v2.0.0",
+    "source_sha256": "7e89053255046bfb26afbd7f524a2fb84df7dbef496aa911ea35e4a1182fdc00",
+    "dependencies": [],
+    "dialect": "DuckDB built-in grammar (Parser::GetBuiltinParser; no client context)",
+    "scope": "SQL statements from local bytes parsed by duckdb::Parser with the built-in grammar and no database or client context; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary read from the SQLStatement trees. Binding, planning, execution and extension parser hooks are untested.",
+    "family": "DuckDB PEG parser (own grammar and transformer)",
+    "family_note": "Parser::ParseQuery runs DuckDB's tokenizer and packrat PEG matcher over the built-in .gram grammar and its transformer, which builds SelectStatement/SelectNode, InsertStatement/InsertQueryNode, TableRef and ParsedExpression trees. The adapter walks select_list, the BaseTableRef/JoinRef FROM tree, where_clause, groups, ORDER modifiers, VALUES lists, FunctionExpression names and ConstantExpression literals. The transformer stores COUNT(*) as the zero-argument function count_star; the adapter reports it as count. DuckDB 1.x used a libpg_query-derived bison grammar (PostgreSQL grammar family); v2.0.0 no longer contains it, so this path is not counted in the PostgreSQL family. The popcon count is for the Debian duckdb source package, whose packaged release line is not recorded in the snapshot; the pinned release is the current upstream tag. The parser header is installed and commented but DuckDB documents its C++ API as internal, so this is a public-header API rather than a stability-guaranteed one.",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package duckdb",
+      "value": 40,
+      "rank": 20921,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/cpp/sql/registry-snapshot.json",
+      "limitation": "Very small count; packaged installs of the whole engine (mostly the CLI), not use of its SQL parser or of the Python/R/Node bindings."
+    },
+    "project": "projects/sql/cpp/duckdb",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

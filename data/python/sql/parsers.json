@@ -208,5 +208,443 @@
         }
       ]
     }
+  },
+  {
+    "name": "sqlfluff",
+    "version": "4.5.0",
+    "license": "MIT",
+    "license_evidence": "LICENSE.md in the pinned sdist (SHA-256 22dce2dc3663d299ccc2606289647982d757e6157393081e59736a9db335c77f)",
+    "input_api": "sqlfluff.parse(local SQL text, dialect=\"ansi\") -> parse-tree record",
+    "documentation": "https://docs.sqlfluff.com/en/4.5.0/reference/api.html#sqlfluff.parse",
+    "source": "https://files.pythonhosted.org/packages/e6/37/6fa8831fad5ffda6e5d3c2629b4c9ed1a4e480b4d8c9f127f132463d6d75/sqlfluff-4.5.0.tar.gz",
+    "source_sha256": "0b0d5b2cca03e7d138b8d899249fed5fa54083e407bbd161449c0b30f901b7b8",
+    "wheel_sha256": "471a9abcad8061e36b69f711a6d89393241e30f9d1e0869f79965c0ae2c889c7",
+    "dependencies": [
+      "chardet 7.7.0",
+      "click 8.5.1",
+      "colorama 0.4.6",
+      "diff_cover 11.0.3",
+      "Jinja2 3.1.6",
+      "MarkupSafe 3.0.4",
+      "pathspec 1.1.1",
+      "platformdirs 4.14.7",
+      "pluggy 1.7.0",
+      "Pygments 2.21.0",
+      "PyYAML 6.0.3",
+      "regex 2026.11.15",
+      "tblib 3.2.2",
+      "tqdm 4.70.1"
+    ],
+    "dialect": "ansi",
+    "scope": "One SQL statement from local text with the ansi dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Linting, fixing, other dialects and the optional sqlfluffrs extra are untested.",
+    "family": "sqlfluff lexer and dialect grammar matcher",
+    "family_note": "sqlfluff is a linter, but sqlfluff.parse is a documented parse API: it lexes with core/parser/lexer.py and matches the ansi dialect's segment grammar (dialects/dialect_ansi.py, core/parser/grammar) into a full parse tree, returned as nested {segment_type: value} records. It fails with APIParsingError on unparsable input. The adapter walks select_statement, select_clause_element, join_clause, where_clause, groupby_clause, orderby_clause, function_name_identifier, table_reference, insert_statement, values_clause, quoted_literal and numeric_literal segments. Independent of sqlparse, sqlglot, libpg_query and sqlparser-rs; sqlfluffrs (an optional Rust lexer) is an accelerator of this family and is not installed.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 11606805,
+      "source": "https://pypistats.org/api/packages/sqlfluff/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads mostly reflect linting in CI and editors, not direct parse-tree use."
+    },
+    "project": "projects/sql/python/sqlfluff",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "pglast",
+    "version": "8.8",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "pyproject.toml license = \"GPL-3.0-or-later\" and source headers in the pinned sdist (no separate license file is shipped); the vendored libpg_query LICENSE is BSD-3-Clause (SHA-256 f9352c20940619a380a5e9f23cebe34d8f797cfbd747fc236a7a3e5fc8ef9b41)",
+    "input_api": "pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes",
+    "documentation": "https://pglast.readthedocs.io/en/v8/parser.html#pglast.parser.parse_sql",
+    "source": "https://files.pythonhosted.org/packages/62/b2/fa8b837b58f352e5941ea7a8160121d32bad978a55538232d7890b8aaad5/pglast-8.8.tar.gz",
+    "source_sha256": "ff9998ec6bac4f30f84db6b6edb28a0fb03b1eda5c8ad211ab8362f5a08b833b",
+    "dependencies": [],
+    "dialect": "PostgreSQL 18 (libpg_query raw parser)",
+    "scope": "One SQL statement from local text with the PostgreSQL 18 grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Source-built with LLVM coverage instead of the optimised wheel; the prettifier and the JSON/protobuf variants are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "pglast vendors libpg_query 18.1.0 (the same release as the C libpg_query path) and links it statically. parse_sql calls pg_query_raw_parse and converts the C node tree into pglast.ast objects in its own Cython layer (pglast/parser.c from parser.pyx and ast.pyx); it does not go through libpg_query's JSON or protobuf output. The adapter reads SelectStmt (targetList, fromClause, whereClause, groupClause, sortClause), InsertStmt (relation, cols, selectStmt.valuesLists), RangeVar, JoinExpr, FuncCall and A_Const nodes. Its vendored libpg_query/src tree equals the 18.1.0 release tag used by the C path except pg_query_json_plpgsql.c, the C++ protobuf output file and the PostgreSQL COPYRIGHT file, so the grammar, scanner and raw_parser sources are byte-identical; pglast's own differential is its Cython conversion layer (pglast/parser.c: 735 select-only and 161 insert-only AFL++ features). A distinct package API over the shared libpg_query family; pg_query 0.29 is its predecessor PyPI name and is not a separate path.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 10961367,
+      "source": "https://pypistats.org/api/packages/pglast/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads; the predecessor pg_query name (2,220) is counted separately and not combined."
+    },
+    "project": "projects/sql/python/pglast",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "sqloxide",
+    "version": "0.61.1",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 4887ed0505457d387e7f7effda202be2374379f4fecf491e54ca67f59a77640b); the compiled-in sqlparser 0.61.0 crate is Apache-2.0",
+    "input_api": "sqloxide.parse_sql(local SQL text, dialect=\"generic\") -> list of statement ASTs (Python dicts)",
+    "documentation": "https://pypi.org/project/sqloxide/0.61.1/",
+    "source": "https://files.pythonhosted.org/packages/78/b4/20b2d9c217f66ea23c12052db2c47f88e968940706758e5ab15765eb78e8/sqloxide-0.61.1.tar.gz",
+    "source_sha256": "2ff1d48e6b59f2870e5e37d391eed82c126db001c30cd92383ea048cc69a5576",
+    "dependencies": [],
+    "dialect": "generic (sqlparser GenericDialect)",
+    "scope": "One SQL statement from local text with the generic dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Source-built with Rust coverage instead of the optimised wheel; restore_ast, the visitors and other dialects are untested.",
+    "family": "sqlparser-rs",
+    "family_note": "sqloxide is a pyo3 binding: parse_sql maps the dialect name with sqlparser's dialect_from_str, calls sqlparser 0.61.0 Parser::parse_sql and converts the AST to Python objects with pythonize. The tokenizer and parser that produce the tree are sqlparser-rs, shared with the Rust sqlparser path (0.64.0); this is a distinct Python package API over that family, and its parser feedback is sqlparser-rs code. The adapter reads Query/Select (projection, from with joins, selection, group_by), order_by, Function, Table, Value and Insert/Values nodes.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 511801,
+      "source": "https://pypistats.org/api/packages/sqloxide/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads of the binding; sqlparser crate downloads are counted in the Rust cell and not combined."
+    },
+    "project": "projects/sql/python/sqloxide",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "mo-sql-parsing",
+    "version": "11.699.26234",
+    "license": "MPL-2.0",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 60222c28c1a7f6a92c7df98e5c5f4459e624e6e285e0b9b94467af5f6ab3343d, Mozilla Public License 2.0); the mo-parsing engine wheel carries an MIT LICENSE",
+    "input_api": "mo_sql_parsing.parse(local SQL text) -> JSON parse tree",
+    "documentation": "https://github.com/klahnakoski/mo-sql-parsing/blob/master/README.md#parsing-sql",
+    "source": "https://files.pythonhosted.org/packages/fd/ad/d4caf4b253ffe74021cbbe5488ceb3e66863f3581b5bc509e90537d5fd1c/mo_sql_parsing-11.699.26234.tar.gz",
+    "source_sha256": "34cae547af8c07ea33b07cc351aaacab44d8c54350351aca23ea23d9c86037f2",
+    "wheel_sha256": "b6870253593670074e91a2656b5558983befb22f77cee15fd4b26ec4ad031220",
+    "dependencies": [
+      "mo-parsing 9.3.26234",
+      "mo-dots 10.688.26234",
+      "mo-future 7.687.26234",
+      "mo-imports 7.687.26234"
+    ],
+    "dialect": "common parser (mo_sql_parsing.parse)",
+    "scope": "One SQL statement from local text with the generic parse entry point; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The MySQL, SQL Server and BigQuery entry points are untested.",
+    "family": "mo-sql-parsing grammar on the mo-parsing engine",
+    "family_note": "mo_sql_parsing.parse runs the SQL grammar defined in mo_sql_parsing/sql_parser.py on the mo-parsing combinator engine (pyparsing-derived, same author) and returns a JSON-like tree. The adapter reads select/from/where/groupby/orderby or insert/values keys; functions are expression keys that are not in the library's operator precedence table, string literals are {\"literal\": text} nodes in expressions and plain strings in INSERT value rows, numbers are Python ints and floats whose text equals the source for these controls. moz-sql-parser is the superseded name of this package and is not a separate path. Independent of sqlparse, sqlglot, sqlfluff, libpg_query and sqlparser-rs.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 103062,
+      "source": "https://pypistats.org/api/packages/mo-sql-parsing/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads; the superseded moz-sql-parser name (106,687) is counted separately and not combined."
+    },
+    "project": "projects/sql/python/mo_sql_parsing",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

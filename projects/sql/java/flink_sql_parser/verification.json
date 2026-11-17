@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "SqlParser.create(local SQL text, SqlParser.config().withParserFactory(FlinkSqlParserImpl.FACTORY).withConformance(FlinkSqlConformance.DEFAULT).withLex(Lex.JAVA)).parseStmtList() -> SqlNodeList; the harness reads SqlOrderBy/SqlSelect and Flink's RichSqlInsert (a SqlInsert) and collects SqlFunction calls and literals with an SqlBasicVisitor",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:39:59.985372+00:00",
+  "manifest": "projects/sql/java/flink_sql_parser/manifest.json",
+  "image_id": "sha256:0cd43a025f0073639f8a8930e7e60196721752d4c24ec34b2eaa6df8e390bcde",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "ff7faebcc21e3bb5200a0559f32eb62f7491cc46c11dd34743cb15194122441b",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "a30f9b6a4362b5cafab63b70ae4441a923b8e396b87c5f551520e0d0f4e21f9a",
+    "SqlHarness.java": "f7acd6c5fd3cf7564f3a5477917224f752bbbea27b014da977bd4b8b49091ac8",
+    "manifest.json": "f278b214f34160ead5846034fb9250892a40cec91f302533fb06d1cc4b44b362",
+    "run-control.sh": "7505c63989c809c7c4967be3d8104e6e32c7ebd1948df27b2e1ef12d195d8a9b",
+    "source-lock.json": "827ccdc2fb986d8cd995eeecebeb57abb3885173d60bbb3fc46069b7fb8474cf"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 5,
+  "parser_source_lines_covered": 3170,
+  "format_specific_source_lines_covered": 2605,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/flink_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

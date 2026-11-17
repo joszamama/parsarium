@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:10:29.437236+00:00",
+  "project": "sql/java/trino_parser",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "1492bab46d8c92fb47421023f50444c4179590351c6a762d42186239b3e3443e",
+  "overlay_receipt_sha256": "999a7b858917d4de81aa9bc9c7675c507eb02865102330fa1edb63006c50e9e2",
+  "base_image_id": "sha256:c254491ba22ac9f556d6cf990bc298656c01a3dda2a7cf4e731f6e0a62404647",
+  "overlay_image_id": "sha256:1e65ff8b9e029345fefb77070b23620aa9b24158c36d5d8baa4decb8b967d206",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 1860,
+  "second_afl_tuples": 917,
+  "afl_tuple_difference": 1325,
+  "first_parser_features": 1879,
+  "second_parser_features": 908,
+  "parser_feature_difference": 1365,
+  "first_only_features_by_file": {
+    "io/trino/grammar/sql/SqlBaseBaseListener.java": 45,
+    "io/trino/grammar/sql/SqlBaseBaseVisitor.java": 3,
+    "io/trino/grammar/sql/SqlBaseParser.java": 708,
+    "io/trino/sql/parser/AstBuilder.java": 148,
+    "io/trino/sql/parser/SqlParser.java": 10,
+    "io/trino/sql/tree/AliasedRelation.java": 11,
+    "io/trino/sql/tree/AstVisitor.java": 3,
+    "io/trino/sql/tree/CallArgument.java": 6,
+    "io/trino/sql/tree/ComparisonPredicate.java": 16,
+    "io/trino/sql/tree/DefaultTraversalVisitor.java": 62,
+    "io/trino/sql/tree/DereferenceExpression.java": 10,
+    "io/trino/sql/tree/FunctionCall.java": 17,
+    "io/trino/sql/tree/GroupBy.java": 6,
+    "io/trino/sql/tree/GroupingElement.java": 2,
+    "io/trino/sql/tree/Identifier.java": 1,
+    "io/trino/sql/tree/Join.java": 18,
+    "io/trino/sql/tree/JoinCriteria.java": 1,
+    "io/trino/sql/tree/JoinOn.java": 4,
+    "io/trino/sql/tree/LogicalExpression.java": 9,
+    "io/trino/sql/tree/OrderBy.java": 7,
+    "io/trino/sql/tree/Predicate.java": 2,
+    "io/trino/sql/tree/Predicated.java": 7,
+    "io/trino/sql/tree/Query.java": 1,
+    "io/trino/sql/tree/QuerySpecification.java": 35,
+    "io/trino/sql/tree/Select.java": 6,
+    "io/trino/sql/tree/SelectItem.java": 2,
+    "io/trino/sql/tree/SimpleGroupBy.java": 7,
+    "io/trino/sql/tree/SingleColumn.java": 6,
+    "io/trino/sql/tree/SortItem.java": 11,
+    "io/trino/sql/tree/Table.java": 4
+  },
+  "second_only_features_by_file": {
+    "io/trino/grammar/sql/SqlBaseBaseListener.java": 6,
+    "io/trino/grammar/sql/SqlBaseParser.java": 119,
+    "io/trino/sql/parser/AstBuilder.java": 18,
+    "io/trino/sql/tree/DecimalLiteral.java": 5,
+    "io/trino/sql/tree/DefaultTraversalVisitor.java": 13,
+    "io/trino/sql/tree/Insert.java": 9,
+    "io/trino/sql/tree/Literal.java": 2,
+    "io/trino/sql/tree/Node.java": 1,
+    "io/trino/sql/tree/Row.java": 12,
+    "io/trino/sql/tree/Statement.java": 2,
+    "io/trino/sql/tree/Table.java": 2,
+    "io/trino/sql/tree/Values.java": 8
+  }
+}

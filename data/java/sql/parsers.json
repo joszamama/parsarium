@@ -211,5 +211,922 @@
         }
       ]
     }
+  },
+  {
+    "name": "com.facebook.presto:presto-parser",
+    "version": "0.300",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (presto-root-0.300.pom: Apache License 2.0)",
+    "input_api": "SqlParser.createStatement(statement text from StatementSplitter over local SQL text, ParsingOptions with DecimalLiteralTreatment.AS_DECIMAL) -> Statement",
+    "documentation": "https://javadoc.io/doc/com.facebook.presto/presto-parser/0.300/com/facebook/presto/sql/parser/SqlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/com/facebook/presto/presto-parser/0.300/presto-parser-0.300-sources.jar",
+    "source_sha256": "28c00bcb132ce292e0680b72bbccd101679dd31560c02967d60f6d58b7eda35d",
+    "jar_sha256": "bb4864fa096c702713d1ceedf7ce6930fa86c017854ea91ca0ca2c4350742329",
+    "dependencies": [
+      "com.facebook.airlift.drift:drift-api 0.231",
+      "com.facebook.airlift:log 0.231",
+      "com.facebook.airlift:units 0.231",
+      "com.facebook.presto:presto-common 0.300",
+      "com.facebook.presto:presto-spi 0.300",
+      "com.fasterxml.jackson.core:jackson-annotations 2.18.9",
+      "com.google.code.findbugs:jsr305 3.0.2",
+      "com.google.errorprone:error_prone_annotations 2.18.0",
+      "com.google.guava:failureaccess 1.0.1",
+      "com.google.guava:guava 32.1.0-jre",
+      "com.google.guava:listenablefuture 9999.0-empty-to-avoid-conflict-with-guava",
+      "com.google.j2objc:j2objc-annotations 2.8",
+      "io.airlift:slice 0.38",
+      "jakarta.inject:jakarta.inject-api 2.0.1",
+      "org.antlr:antlr4-runtime 4.13.2",
+      "org.checkerframework:checker-qual 3.33.0",
+      "org.openjdk.jol:jol-core 0.2"
+    ],
+    "dialect": "Presto SQL (the only grammar; ParsingOptions DecimalLiteralTreatment.AS_DECIMAL so 19.5 is a DecimalLiteral)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, split by StatementSplitter; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other ParsingOptions and Presto-only syntax are untested.",
+    "family": "Presto/Trino ANTLR4 SqlBase grammar (Presto branch)",
+    "family_note": "SqlParser.createStatement runs the ANTLR4-generated SqlBaseLexer and SqlBaseParser from Presto's SqlBase.g4 and converts the parse tree with the hand-written AstBuilder into com.facebook.presto.sql.tree nodes. The adapter splits with the public StatementSplitter (which strips the terminating semicolon), reads Query/QuerySpecification and Insert/Values fields and collects Table, FunctionCall, StringLiteral, LongLiteral and DecimalLiteral nodes with a DefaultTraversalVisitor. io.trino:trino-parser and io.prestosql:presto-parser descend from the same SqlBase grammar and AstBuilder (shared family, distinct package APIs and diverged sources). Independent of jOOQ, Druid, Calcite and JSqlParser. Overlap measured on the pinned sources: 71 of presto-parser's 101 SqlBase grammar rules share names with trino-grammar's 147, and an in-order line match finds 57% of Presto's AstBuilder lines (38% of Trino's) in Trino's AstBuilder; the two are related but not byte-identical forks.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1453,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.facebook.presto%3Apresto-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 307 releases, so long-lived dependents count once per release; the newest release alone has far fewer direct dependents."
+    },
+    "project": "projects/sql/java/presto_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "org.apache.calcite:calcite-core",
+    "version": "1.42.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (calcite-core-1.42.0.pom: The Apache License, Version 2.0)",
+    "input_api": "SqlParser.create(local SQL text, SqlParser.config()).parseStmtList() -> SqlNodeList",
+    "documentation": "https://calcite.apache.org/javadocAggregate/org/apache/calcite/sql/parser/SqlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/calcite/calcite-core/1.42.0/calcite-core-1.42.0-sources.jar",
+    "source_sha256": "0af0fc287b26288c8354c3aa184c4216ef5ac01b9fb96883eb9afb51d3dae5bb",
+    "jar_sha256": "2ed5489201baab842001c95f939a0829849cf3cdaed9cdbf4b9078633c35792b",
+    "dependencies": [
+      "com.google.guava:failureaccess 1.0.3",
+      "com.google.guava:guava 33.4.8-jre",
+      "org.apache.calcite.avatica:avatica-core 1.28.0",
+      "org.apache.calcite:calcite-linq4j 1.42.0",
+      "org.apiguardian:apiguardian-api 1.1.2",
+      "org.checkerframework:checker-qual 3.10.0",
+      "org.slf4j:slf4j-api 1.7.25"
+    ],
+    "dialect": "SqlParser.config() default (Calcite default lexical policy and SqlConformanceEnum.DEFAULT)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other lexical policies, conformance levels and the Babel and server parsers are untested.",
+    "family": "Apache Calcite JavaCC grammar (SqlParserImpl)",
+    "family_note": "SqlParser.parseStmtList runs the JavaCC-generated SqlParserImpl (from Calcite's Parser.jj template) and returns SqlNode trees: SqlOrderBy wrapping SqlSelect for the query and SqlInsert with a VALUES call for the insert. The adapter reads those fields, walks SqlJoin and AS calls in the FROM clause for base tables, and collects SqlFunction calls and SqlCharStringLiteral/SqlNumericLiteral values with an SqlBasicVisitor. Unquoted identifiers are upper-cased by the default lexical policy; the adapter lower-cases them. Independent of jOOQ, Druid, JSqlParser and the Presto/Trino ANTLR grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1250,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.calcite%3Acalcite-core",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 45 releases; most calcite-core dependents use its planner, adapters or JDBC driver, not only the SQL parser."
+    },
+    "project": "projects/sql/java/calcite",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "org.apache.hive:hive-exec",
+    "version": "4.2.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (hive-4.2.1.pom inherits org.apache:apache:23, Apache License, Version 2.0; META-INF/LICENSE in the jar)",
+    "input_api": "new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode",
+    "documentation": "https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r4.2.1/api/org/apache/hadoop/hive/ql/parse/ParseDriver.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/hive/hive-parser/4.2.1/hive-parser-4.2.1-sources.jar",
+    "source_sha256": "d2708ee7e5848e867da03824829281ec7aa342eda1175ecc4ba3168d03f3c1b4",
+    "jar_sha256": "38c114a22a8f93588c3f9829a5451edc45a6e439bd50d73ee0c63185fcca3838",
+    "dependencies": [
+      "org.slf4j:slf4j-api 1.7.36",
+      "com.fasterxml.woodstox:woodstox-core 5.4.0",
+      "commons-collections:commons-collections 3.2.2",
+      "org.apache.hadoop:hadoop-common 3.4.1",
+      "org.apache.hadoop.thirdparty:hadoop-shaded-guava 1.3.0",
+      "org.codehaus.woodstox:stax2-api 4.2.1",
+      "org.antlr:antlr-complete 3.5.2"
+    ],
+    "dialect": "HiveQL (ParseDriver.parse without a Configuration: default lexer, standard quoted-identifier handling)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, with one terminating semicolon removed by the adapter; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement parse contract; INSERT rows are the struct calls of Hive's inline(array(...)) VALUES rewrite. Configuration-dependent lexing and HiveQL-only syntax are untested.",
+    "family": "Apache Hive ANTLR3 HiveQL grammar (HiveParser)",
+    "family_note": "ParseDriver.parse lexes with HiveLexer and parses with the ANTLR 3.5.2-generated HiveParser (which imports the FromClause, SelectClause, Identifiers and other sub-grammars) and returns an ASTNode tree of TOK_* imaginary tokens. The parser classes ship inside the hive-exec uber jar (from the hive-parser module); the hive-parser sources jar has the grammars but not the generated Java, so the image regenerates it with ANTLR 3.5.2 and checks every generated class's line table against the class in hive-exec. Parsing needs hadoop-common's Configuration class and --add-opens java.base/java.net (HiveConf static initialisation); five more jars are pinned for that. Independent of jOOQ, Druid, Calcite, JSqlParser and the Presto/Trino and Spark grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1146,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.hive%3Ahive-exec",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over hive-exec releases; hive-exec is Hive's whole execution engine, so most dependents use more than the parser. The standalone hive-parser module has 0 direct dependents."
+    },
+    "project": "projects/sql/java/hive_exec",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "com.github.jsqlparser:jsqlparser",
+    "version": "5.4",
+    "license": "LGPL-2.1-only OR Apache-2.0",
+    "license_evidence": "LGPL-2.1 or Apache-2.0 (jsqlparser-5.4.pom lists GNU Library or Lesser General Public License (LGPL) V2.1 and The Apache Software License, Version 2.0)",
+    "input_api": "CCJSqlParserUtil.parseStatements(local SQL text) -> Statements",
+    "documentation": "https://jsqlparser.github.io/JSqlParser/usage.html",
+    "source": "https://repo.maven.apache.org/maven2/com/github/jsqlparser/jsqlparser/5.4/jsqlparser-5.4-sources.jar",
+    "source_sha256": "6f4aba881d7c8c85dc940bc84fd74a5598a50529bb0f01c601feccef61e09a4e",
+    "jar_sha256": "6e10f0b014d6a474808eeaafd639ec9092117af2d4dc083764d0b4bf6897add7",
+    "dependencies": [],
+    "dialect": "JSqlParser default parser features (no dialect switch; CCJSqlParserUtil.parseStatements without a parser consumer)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Non-default parser features and vendor syntax are untested.",
+    "family": "JSqlParser JavaCC grammar (CCJSqlParser)",
+    "family_note": "CCJSqlParserUtil.parseStatements runs the JavaCC-generated CCJSqlParser (first without, then if needed with complex parsing, on a single-thread executor) and returns net.sf.jsqlparser Statement objects: PlainSelect for the query and Insert with a Values select for the insert. The adapter reads those fields and subclasses the library's TablesNamesFinder to collect base tables, Function names and StringValue/LongValue/DoubleValue values. net.sf.jsqlparser:jsqlparser 0.7.0 is the ancient coordinate of the same project (excluded). Independent of jOOQ, Druid, Calcite and the Presto/Trino ANTLR grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 950,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.github.jsqlparser%3Ajsqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 37 releases of the com.github.jsqlparser coordinate; the older net.sf.jsqlparser coordinate (8) is not added."
+    },
+    "project": "projects/sql/java/jsqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "org.apache.spark:spark-catalyst_2.12",
+    "version": "3.5.9",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (spark-parent_2.12-3.5.9.pom: Apache-2.0)",
+    "input_api": "CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan",
+    "documentation": "https://javadoc.io/doc/org.apache.spark/spark-catalyst_2.12/3.5.9/org/apache/spark/sql/catalyst/parser/CatalystSqlParser$.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/spark/spark-catalyst_2.12/3.5.9/spark-catalyst_2.12-3.5.9-sources.jar",
+    "source_sha256": "960ca5e1ac07625063855be2e552202d1e84d069f288e51d5ad08bb0fa685a7d",
+    "jar_sha256": "58715b96ee0dd847848d8096ea8da8409ee888689dbe71ec1fd07237f0d4d4d1",
+    "dependencies": [
+      "com.esotericsoftware:kryo-shaded 4.0.2",
+      "commons-codec:commons-codec 1.16.1",
+      "org.antlr:antlr4-runtime 4.9.3",
+      "org.apache.commons:commons-lang3 3.12.0",
+      "org.apache.hadoop:hadoop-client-api 3.3.4",
+      "org.apache.logging.log4j:log4j-api 2.20.0",
+      "org.apache.logging.log4j:log4j-core 2.20.0",
+      "org.apache.spark:spark-common-utils_2.12 3.5.9",
+      "org.apache.spark:spark-core_2.12 3.5.9",
+      "org.apache.spark:spark-network-common_2.12 3.5.9",
+      "org.apache.spark:spark-sql-api_2.12 3.5.9",
+      "org.apache.spark:spark-unsafe_2.12 3.5.9",
+      "org.json4s:json4s-ast_2.12 3.7.0-M11",
+      "org.scala-lang:scala-library 2.12.18",
+      "org.scala-lang:scala-reflect 2.12.18",
+      "org.slf4j:slf4j-api 1.7.36"
+    ],
+    "dialect": "Spark SQL (CatalystSqlParser with default SQLConf; ANSI mode off)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement parsePlan contract; the parser's synthesized count(1) literal for COUNT(*) is excluded by its origin span. Analysis, ANSI mode and Spark-only syntax are untested.",
+    "family": "Spark SQL ANTLR4 SqlBase grammar (AstBuilder to unresolved LogicalPlan)",
+    "family_note": "CatalystSqlParser.parsePlan runs the ANTLR4-generated SqlBaseLexer and SqlBaseParser shipped in spark-sql-api and converts the parse tree with spark-catalyst's Scala AstBuilder into an unresolved Catalyst LogicalPlan: Sort over Aggregate over Filter over Join of SubqueryAlias/UnresolvedRelation for the query, and InsertIntoStatement over UnresolvedInlineTable for the insert. No analysis or catalog lookup happens, so the plan is the parser's syntax tree. The catalyst package is documented in Spark's published API docs but marked internal (no compatibility guarantee). Spark's SqlBase.g4 was originally derived from Presto's grammar but has long diverged; its AstBuilder and node model are Spark's own. The metric belongs to the Scala 2.12 coordinate (529); the Scala 2.13 coordinate of the same sources (278) is not added.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 529,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.spark%3Aspark-catalyst_2.12",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over Scala 2.12 releases; most spark-catalyst dependents use Spark SQL's analyzer and optimizer, not only the parser. The Scala 2.13 coordinate is counted separately (278) and not combined."
+    },
+    "project": "projects/sql/java/spark_catalyst",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "io.trino:trino-parser",
+    "version": "484",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (trino-root-484.pom <license><name>Apache-2.0)",
+    "input_api": "new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement",
+    "documentation": "https://javadoc.io/doc/io.trino/trino-parser/484/io/trino/sql/parser/SqlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/io/trino/trino-parser/484/trino-parser-484-sources.jar",
+    "source_sha256": "fb48151704697abceefd803651ae54a4da713d905420ebc4500151081e06eb36",
+    "jar_sha256": "aa221f5100092f54cfee2c6db59a5b67b83b003e4da88b587cafb120b4829de8",
+    "dependencies": [
+      "com.google.errorprone:error_prone_annotations 2.50.0",
+      "com.google.guava:failureaccess 1.0.3",
+      "com.google.guava:guava 33.7.2-jre",
+      "com.google.j2objc:j2objc-annotations 3.1",
+      "io.trino:trino-grammar 484",
+      "jakarta.annotation:jakarta.annotation-api 3.0.0",
+      "org.antlr:antlr4-runtime 4.13.2",
+      "org.jspecify:jspecify 1.0.1"
+    ],
+    "dialect": "Trino SQL (the only grammar; no parsing options)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, with one terminating semicolon removed by the adapter; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement API contract. Trino-only syntax is untested.",
+    "family": "Presto/Trino ANTLR4 SqlBase grammar (Trino branch)",
+    "family_note": "SqlParser.createStatement runs the ANTLR4-generated SqlBaseLexer and SqlBaseParser shipped in io.trino:trino-grammar and converts the parse tree with trino-parser's AstBuilder into io.trino.sql.tree nodes. Trino forked from Presto in 2019 (PrestoSQL, renamed Trino in 2020); its SqlBase.g4 and AstBuilder descend from the same sources as com.facebook.presto:presto-parser but have diverged (separate grammar module, different node APIs such as LongLiteral.getValue returning source text). The adapter strips one terminating semicolon because the grammar's singleStatement rule takes no terminator and trino-parser has no public splitter (the CLI's StatementSplitter is in trino-cli). Independent of jOOQ, Druid, Calcite and JSqlParser. Overlap measured on the pinned sources: 71 of presto-parser's 101 SqlBase grammar rules share names with trino-grammar's 147, and an in-order line match finds 57% of Presto's AstBuilder lines (38% of Trino's) in Trino's AstBuilder; the two are related but not byte-identical forks.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 525,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.trino%3Atrino-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 132 releases; the newest releases have few direct dependents."
+    },
+    "project": "projects/sql/java/trino_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "org.apache.flink:flink-sql-parser",
+    "version": "2.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (flink-parent-2.3.0.pom: The Apache Software License, Version 2.0)",
+    "input_api": "SqlParser.create(local SQL text, config with FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA).parseStmtList() -> SqlNodeList",
+    "documentation": "https://nightlies.apache.org/flink/flink-docs-release-2.3/api/java/org/apache/flink/sql/parser/impl/FlinkSqlParserImpl.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-parser/2.3.0/flink-sql-parser-2.3.0-sources.jar",
+    "source_sha256": "ff7faebcc21e3bb5200a0559f32eb62f7491cc46c11dd34743cb15194122441b",
+    "jar_sha256": "2210424a83fff71a3653179b8447914cec6a118919cf9b61d3ed2e994b05b5ae",
+    "dependencies": [
+      "org.slf4j:slf4j-api 1.7.36",
+      "com.google.guava:failureaccess 1.0.1",
+      "com.google.guava:guava 32.1.3-jre",
+      "org.apache.calcite.avatica:avatica-core 1.23.0",
+      "org.apache.calcite:calcite-core 1.36.0",
+      "org.apache.calcite:calcite-linq4j 1.36.0",
+      "org.apiguardian:apiguardian-api 1.1.2",
+      "org.checkerframework:checker-qual 3.37.0"
+    ],
+    "dialect": "Flink SQL (FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA as in Flink's planner)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other conformance levels and Flink-only DDL are untested.",
+    "family": "Apache Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl)",
+    "family_note": "flink-sql-parser generates its own parser class, FlinkSqlParserImpl, from Calcite 1.36's Parser.jj template with Flink's grammar extensions (the javacc/Parser.jj in its sources jar) and returns Calcite SqlNode trees plus Flink subclasses such as RichSqlInsert. Calcite's SqlParser front end, SqlNode model and linq4j/avatica come from calcite-core 1.36.0, so the path shares the Calcite family with org.apache.calcite:calcite-core; the differential is in Flink's generated parser (a separate 1.5 MB class), and the coverage subject is limited to org.apache.flink.sql.parser classes. The adapter is the Calcite adapter with Flink's parser factory, conformance and lexical policy.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 188,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.flink%3Aflink-sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over flink-sql-parser releases; most dependents are Flink's own table modules and connectors."
+    },
+    "project": "projects/sql/java/flink_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "org.apache.shardingsphere:shardingsphere-sql-parser-engine",
+    "version": "5.3.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (shardingsphere-5.3.2.pom: Apache License 2.0)",
+    "input_api": "SQLParserEngine(\"MySQL\", CacheOption).parse(local SQL text, false) -> ParseASTNode; SQLVisitorEngine(\"MySQL\", \"STATEMENT\", false, Properties).visit(tree) -> SQLStatement",
+    "documentation": "https://shardingsphere.apache.org/document/5.3.2/en/reference/sharding/parse/",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/shardingsphere/shardingsphere-sql-parser-engine/5.3.2/shardingsphere-sql-parser-engine-5.3.2-sources.jar",
+    "source_sha256": "de028b6adb93f311137cdb4382c23eaefc8526c0947bcc0f508c42bf535a1966",
+    "jar_sha256": "0c317cfeb1a3af69d6b1be58cdc9178e668881439811d24b5cd4a3a45d3cbf61",
+    "dependencies": [
+      "com.github.ben-manes.caffeine:caffeine 2.9.3",
+      "com.google.guava:guava 30.0-jre",
+      "org.antlr:antlr4-runtime 4.10.1",
+      "org.apache.shardingsphere:shardingsphere-infra-util 5.3.2",
+      "org.apache.shardingsphere:shardingsphere-sql-parser-mysql 5.3.2",
+      "org.apache.shardingsphere:shardingsphere-sql-parser-spi 5.3.2",
+      "org.apache.shardingsphere:shardingsphere-sql-parser-statement 5.3.2"
+    ],
+    "dialect": "MySQL (SQLParserEngine and SQLVisitorEngine with databaseType \"MySQL\", visitor type STATEMENT)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, MySQL dialect module; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement API. Other dialect modules are untested.",
+    "family": "Apache ShardingSphere ANTLR4 dialect grammars (MySQL module)",
+    "family_note": "SQLParserEngine looks up the MySQL dialect through ShardingSphere's SPI and runs the ANTLR4-generated MySQLLexer and MySQLStatementParser (from the shardingsphere-sql-parser-mysql module); SQLVisitorEngine then converts the parse tree with the MySQL statement visitor into MySQLSelectStatement or MySQLInsertStatement segment models. The 5.3.2 coordinates are the ones the 5.3.2 parser documentation names. From 5.4 the modules were renamed (shardingsphere-parser-sql-engine, now a pom aggregator; -engine-core 15 and -engine-mysql 9 direct dependents); those successor coordinates are the same project and are not added separately. Independent of the other Java SQL families.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 135,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.shardingsphere%3Ashardingsphere-sql-parser-engine",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over the 15 releases of the pre-5.4 coordinate; the renamed successor coordinates (-parser-sql-engine 64 as a pom aggregator, -engine-core 15, -engine-mysql 9) are not added."
+    },
+    "project": "projects/sql/java/shardingsphere_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

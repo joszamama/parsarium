@@ -213,5 +213,844 @@
         }
       ]
     }
+  },
+  {
+    "name": "sql-parser-cst",
+    "version": "0.44.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "package.json license GPL-2.0-or-later and the GNU GPL version 2 LICENSE text in the pinned npm tarball",
+    "input_api": "parse(local UTF-8 text, {dialect: 'sqlite'}) -> Program",
+    "documentation": "https://www.npmjs.com/package/sql-parser-cst/v/0.44.1",
+    "source": "https://registry.npmjs.org/sql-parser-cst/-/sql-parser-cst-0.44.1.tgz",
+    "source_sha256": "1dc65d972c20779a9beb6aafbc72bad16575bca83b8e09acf33aa12e7549b2af",
+    "dependencies": [],
+    "dialect": "SQLite (dialect: 'sqlite')",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed with the sqlite dialect; the trailing empty statement after ';' is not counted. Valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sql-parser-cst Peggy grammar",
+    "family_note": "parse runs the package's own Peggy-generated parser (lib/parser.js, about 179,000 lines) and returns a concrete syntax tree that keeps keywords, aliases and parentheses (select_stmt clauses, join_expr, alias, func_call, number_literal, string_literal; insert_clause and values_clause). The adapter reads those clauses and walks func_call and literal nodes. It has no runtime dependencies and is independent of node-sql-parser (PEG.js), pgsql-ast-parser (nearley) and libpg_query. MySQL, MariaDB, BigQuery and PostgreSQL are documented as experimental and untested here.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 536703,
+      "source": "https://api.npmjs.org/downloads/point/last-month/sql-parser-cst",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include transitive installs (for example through prettier-plugin-sql-cst)."
+    },
+    "project": "projects/sql/javascript/sql_parser_cst",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "dt-sql-parser",
+    "version": "4.6.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "new MySQL().parse(local UTF-8 text, errorListener) -> ProgramContext",
+    "documentation": "https://www.npmjs.com/package/dt-sql-parser/v/4.6.1",
+    "source": "https://registry.npmjs.org/dt-sql-parser/-/dt-sql-parser-4.6.1.tgz",
+    "source_sha256": "0f989e624714580c4281d5bb4a4b45eaa31274546f24041c7278aff32e19299e",
+    "dependencies": [
+      "antlr4ng",
+      "antlr4-c3"
+    ],
+    "dialect": "MySQL (MySQL class)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed by the MySQL class with an error listener; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. A resolve hook completes the package's extensionless ES module imports without changing package files.",
+    "family": "dt-sql-parser ANTLR4 grammars",
+    "family_note": "MySQL.parse runs the package's ANTLR4-generated MySqlLexer and MySqlParser (dist/lib/mysql, about 90,000 lines, on the antlr4ng runtime) and returns the concrete ANTLR parse tree. The adapter reads rule contexts by the grammar's rule names (querySpecification, selectElement, tableName, joinPart, groupByItem, orderByExpression, aggregateWindowedFunction, decimalLiteral, stringLiteral, insertStatement, expressionsWithDefaults). The published dist uses extensionless ES module imports meant for bundlers, so the harness registers a resolve hook that retries those relative specifiers with '.js' or '/index.js'. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst and libpg_query; the other dialect classes (Flink, Spark, Hive, PostgreSQL, Trino, Impala, generic) are untested.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 364059,
+      "source": "https://api.npmjs.org/downloads/point/last-month/dt-sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include transitive installs (for example through monaco-sql-languages)."
+    },
+    "project": "projects/sql/javascript/dt_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "sqlite-parser",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "sqliteParser(local UTF-8 text) -> statement list",
+    "documentation": "https://www.npmjs.com/package/sqlite-parser/v/1.0.1",
+    "source": "https://registry.npmjs.org/sqlite-parser/-/sqlite-parser-1.0.1.tgz",
+    "source_sha256": "9b0b26c552f5193b1544ff2c92b0520a5ef02f19042baa63a7cff1c005828e65",
+    "dependencies": [],
+    "dialect": "SQLite",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and passed to the synchronous sqliteParser call; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sqlite-parser PEG.js grammar",
+    "family_note": "sqliteParser runs the package's PEG.js-generated SQLite grammar (lib/parser.js, shipped minified without a source map) with its own tracer and returns an AST (statement variant select/insert, result, from map with join entries, where, group, order, function and literal nodes). The adapter reads those fields. Released 2017 (last release). @appland/sql-parser is a separately maintained fork with a modified grammar (same AST shape). Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 85900,
+      "source": "https://api.npmjs.org/downloads/point/last-month/sqlite-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include transitive installs."
+    },
+    "project": "projects/sql/javascript/sqlite_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "@appland/sql-parser",
+    "version": "1.5.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "sqliteParser(local UTF-8 text) -> statement list",
+    "documentation": "https://www.npmjs.com/package/@appland/sql-parser/v/1.5.1",
+    "source": "https://registry.npmjs.org/@appland/sql-parser/-/sql-parser-1.5.1.tgz",
+    "source_sha256": "60c988ae6f1e7adb27c71bfd21bf2a4868b82a9d437663eeef55152e3f2c4ff0",
+    "dependencies": [],
+    "dialect": "SQLite",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and passed to the synchronous sqliteParser call; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sqlite-parser PEG.js grammar (AppLand fork)",
+    "family_note": "AppLand's fork of sqlite-parser (repository applandinc/sqlite-parser, release 1.5.1 from 2022) ships its own PEG.js-generated parser, minified without a source map, and keeps sqlite-parser's API and AST shape; the adapter is the sqlite-parser adapter with the package name changed. Overlap with the selected sqlite-parser 1.0.1: the generated parser is 127,259 bytes against 109,981, about 51% of sqlite-parser's statement fragments occur unchanged in it (43% of the fork's), and the index, tracer and streaming wrappers differ only in the version banner. It is a separately maintained fork with grammar changes, not a byte-identical copy or a rename. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 80224,
+      "source": "https://api.npmjs.org/downloads/point/last-month/@appland/sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; downloads include transitive installs (for example through AppMap tooling)."
+    },
+    "project": "projects/sql/javascript/appland_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "sqllens",
+    "version": "1.11.0",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball; THIRD-PARTY-NOTICES.md records the forked grammars' own licenses (PostgreSQL grammar: BSD-3-Clause, antlr/grammars-v4)",
+    "input_api": "parse(local UTF-8 text, 'postgres') -> {ast, errors, cst}",
+    "documentation": "https://www.npmjs.com/package/sqllens/v/1.11.0",
+    "source": "https://registry.npmjs.org/sqllens/-/sqllens-1.11.0.tgz",
+    "source_sha256": "90828cac2b2f2ed5151a4eab0790dc514276bcc7cbee91856632b3dac0782f78",
+    "dependencies": [
+      "antlr4ng"
+    ],
+    "dialect": "PostgreSQL (dialect 'postgres')",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed with the postgres dialect; any syntax error rejects the input; the summary is read from the returned CST. Valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4)",
+    "family_note": "parse runs the package's ANTLR4-generated PostgresLexer and PostgresParser (dist/generated/postgres, on the antlr4ng runtime) and returns the token stream, a syntax-error count, the concrete parse tree (cst, documented as the escape hatch) and a lowered dialect-neutral IR. The IR marks INSERT as unsupported ('non-query'), so the adapter reads both controls from the CST by rule-context class (Simple_select_pramary, Target_list, Relation_expr, Joined_table, Where_clause, Group_by_item, Sortby, Func_name, Iconst, Fconst, Anysconst, Insertstmt, Insert_column_item, Values_clause, Expr_list). Its grammars are forks of upstream ANTLR grammars (PostgreSQL from antlr/grammars-v4); dt-sql-parser is a separate ANTLR4 package with its own grammar sources, and its selected path uses MySQL. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, sqlite-parser and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 6624,
+      "source": "https://api.npmjs.org/downloads/point/last-month/sqllens",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; downloads include transitive installs."
+    },
+    "project": "projects/sql/javascript/sqllens",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "rawsql-ts",
+    "version": "0.30.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "SqlParser.parseMany(local UTF-8 text) -> SimpleSelectQuery | InsertQuery []",
+    "documentation": "https://www.npmjs.com/package/rawsql-ts/v/0.30.1",
+    "source": "https://registry.npmjs.org/rawsql-ts/-/rawsql-ts-0.30.1.tgz",
+    "source_sha256": "58b26135ec392a37c532b30decb316e85e1a681389803ac704d12199eece4107",
+    "dependencies": [],
+    "dialect": "Library default (no dialect switch; PostgreSQL-oriented)",
+    "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to SqlParser.parseMany; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "rawsql-ts hand-written tokenizer and recursive-descent parser",
+    "family_note": "SqlParser.parseMany splits the text with the package's own SqlTokenizer and dispatches each statement to its recursive-descent parsers, which build typed models (SimpleSelectQuery with SelectClause, FromClause and JoinClause, WhereClause, GroupByClause, OrderByClause, FunctionCall and LiteralValue; InsertQuery with InsertClause and a ValuesQuery of TupleExpression rows). The adapter reads those models; numeric LiteralValue values are JavaScript numbers converted with String(), which equals the source text for both controls. No runtime dependencies; independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser, sqlite-parser, sqllens and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 1802,
+      "source": "https://api.npmjs.org/downloads/point/last-month/rawsql-ts",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; a small download count."
+    },
+    "project": "projects/sql/javascript/rawsql_ts",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "@questdb/sql-parser",
+    "version": "0.1.22",
+    "license": "Apache-2.0",
+    "license_evidence": "package.json license Apache-2.0 and the Apache License 2.0 LICENSE file in the pinned npm tarball",
+    "input_api": "parseToAst(local UTF-8 text) -> {ast: Statement[], errors}",
+    "documentation": "https://www.npmjs.com/package/@questdb/sql-parser/v/0.1.22",
+    "source": "https://registry.npmjs.org/@questdb/sql-parser/-/sql-parser-0.1.22.tgz",
+    "source_sha256": "6d2626fc7ceedbc87a8a1d222a6d46aa9f2581b077309959daf8bb3e45e07aaf",
+    "dependencies": [
+      "chevrotain"
+    ],
+    "dialect": "QuestDB SQL",
+    "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to parseToAst; any reported error rejects the input; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "@questdb/sql-parser Chevrotain grammar",
+    "family_note": "parseToAst runs the package's own Chevrotain lexer and parser rules and its CST-to-AST visitor (bundled in dist/index.cjs, about 17,000 lines; chevrotain 11.1.1 is the parsing runtime) and returns typed statements (select with columns, from tableRef and joins, where, groupBy, orderBy, function and literal nodes; insert with table, columns and value rows). Number literals keep their raw source text. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser, sqlite-parser, sqllens, rawsql-ts and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 1470,
+      "source": "https://api.npmjs.org/downloads/point/last-month/@questdb/sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; a small download count."
+    },
+    "project": "projects/sql/javascript/questdb_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "@saralsql/tsql-parser",
+    "version": "0.4.7",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "analyze(local UTF-8 text) -> {ast: Program, issues}",
+    "documentation": "https://www.npmjs.com/package/@saralsql/tsql-parser/v/0.4.7",
+    "source": "https://registry.npmjs.org/@saralsql/tsql-parser/-/tsql-parser-0.4.7.tgz",
+    "source_sha256": "939262514c4f61ad2e4476954706c43465aa5fd372acc493f2560aa5087b4f31",
+    "dependencies": [],
+    "dialect": "T-SQL (SQL Server)",
+    "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to analyze; any recoverable parser issue rejects the input; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "@saralsql/tsql-parser hand-written T-SQL parser",
+    "family_note": "analyze runs the package's own T-SQL lexer and recursive-descent parser (dist/src/parser) and then scope, lineage and diagnostic passes; the adapter reads only the Program AST (SelectStatement columns, from TableReference with joins, where, groupBy, orderBy, FunctionCall and Literal nodes; InsertStatement table, columns and value rows) and counts coverage only in the parser directory. Numeric Literal values are JavaScript numbers converted with String(), which equals the source text for both controls. No runtime dependencies; independent of the other selected paths.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 731,
+      "source": "https://api.npmjs.org/downloads/point/last-month/@saralsql/tsql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; a small download count."
+    },
+    "project": "projects/sql/javascript/saralsql_tsql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
