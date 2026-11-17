@@ -371,8 +371,100 @@
       "parser_feature_difference": null,
       "project_receipt": "projects/sql/rust/spg_sql/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/rust/spg_sql/differential.json"
+    },
+    {
+      "package": "nom-sql",
+      "version": "0.0.11",
+      "pass": true,
+      "input_api": "parse_query_bytes(local bytes) -> SqlQuery",
+      "dialect": "MySQL subset",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "nom-sql nom combinator parser (MySQL subset)",
+      "parser_source_files": 19,
+      "parser_source_lines_covered": 835,
+      "afl_tuple_difference": 2090,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/nom_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/nom_sql/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T21:02:37.417253+00:00"
+  "checked_at_utc": "2026-11-17T21:02:37.733289+00:00"
 }
