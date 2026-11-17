@@ -1,0 +1,56 @@
+{
+  "project": "xml/javascript/xmldoc",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "namespace_resolution": false,
+  "compared_fields": [
+    "attributes",
+    "cdata_sections",
+    "comments",
+    "doctype",
+    "elements",
+    "max_depth",
+    "root",
+    "text"
+  ],
+  "oracle": "projects/xml/javascript/xmldoc/oracle.py (expat, non-namespace mode, root-element scope)",
+  "overlay_receipt_sha256": "c97a7d12dc9aeeafc40a05f166fd4a4643d157e61f28bfb0ab7b91b8cf014969",
+  "base_image_id": "sha256:1f25e77965a002c140c25bf83dea8881a13ee7915fc4cb952455813869c0d61d",
+  "overlay_image_id": "sha256:2f20fe7ec8e7ab8be5367f0e259de142a30c455be7833024e2f7bddf3be7d228",
+  "release_tarball_sha256": "5546bf0c619adf2b7583797849d905b5e0e92ef3cfcf2b5f04bc0ca49d570e2a",
+  "underlying_tarball_sha256": "6e9abf03478608b80894bb8b6421271a0e583504f785f749a700d6bb35be85bd",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "control_output_matches_oracle": true,
+  "differential": "controls/xml/order-default-ns.xml",
+  "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_output_matches_oracle": true,
+  "control_lines_covered_by_file": {
+    "sax/lib/sax.js": 870,
+    "xmldoc/dist/index.js": 290
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 144,
+  "control_afl_tuples": 164,
+  "control_features_by_package": {
+    "sax": 109,
+    "xmldoc": 35
+  },
+  "differential_parser_features": 163,
+  "differential_afl_tuples": 183,
+  "parser_feature_difference": 43,
+  "afl_tuple_difference": 43,
+  "control_only_features_by_file": {
+    "sax/lib/sax.js": 8,
+    "xmldoc/dist/index.js": 4
+  },
+  "differential_only_features_by_file": {
+    "sax/lib/sax.js": 29,
+    "xmldoc/dist/index.js": 2
+  },
+  "differential_features_by_package": {
+    "sax": 37,
+    "xmldoc": 6
+  }
+}
