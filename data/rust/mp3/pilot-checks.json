@@ -213,6 +213,65 @@
       "command": "python3 parsarium.py afl prepare mp3 rust mp3_duration runs/mp3-mp3_duration-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-mp3_duration-afl --check",
       "pass": true,
       "result": "Ready: 2 seeds; no campaign started (AFL_MAP_SIZE=834)"
+    },
+    {
+      "lead": "rusty_mp3",
+      "command": "python3 parsarium.py build mp3 rust rusty_mp3",
+      "pass": true,
+      "image_id": "sha256:cfa0f91a53dd35b41d4356ecfe7a0e67008de36389bae7589b0df7a40532f951",
+      "output": {
+        "channels": 1,
+        "frames": 11,
+        "pcm_f32_sha256": "950a4b2c13148eef937e478e683959d5450f71436c95e81423456a85b63dfb8a",
+        "pcm_samples": 12672,
+        "sample_rate": 44100,
+        "samples_per_channel": 12672
+      },
+      "parser_source_lines_covered": 1121,
+      "receipt_sha256": "f3c05cc95d5e8a589fae78ac6490699311a593425c5ff3a1a186a81d8446af90"
+    },
+    {
+      "lead": "rusty_mp3",
+      "command": "python3 parsarium.py run mp3 rust rusty_mp3 controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "lead": "rusty_mp3",
+      "command": "python3 parsarium.py run mp3 rust rusty_mp3 controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "lead": "rusty_mp3",
+      "command": "python3 parsarium.py afl build mp3 rust rusty_mp3",
+      "pass": true,
+      "image_id": "sha256:5a67c441db2d047c6aa96ccebdfb72cff0cd47d94f525dcd7e5477a6b2248af2",
+      "instrumented_crates": [
+        "rusty_mp3"
+      ],
+      "binary_guards": 11901,
+      "feedback_edges": 1082,
+      "variant_feedback_edges": 1033,
+      "edges_only_in_control": 219,
+      "edges_only_in_variant": 170,
+      "all_repeats_identical": true,
+      "header_walk_oracle_match": true,
+      "receipt_sha256": "99de2a34646cdb7ee608f1ed44334a24432087fdd9adb72a6b06dcfff69580f7"
+    },
+    {
+      "lead": "rusty_mp3",
+      "command": "python3 parsarium.py afl prepare mp3 rust rusty_mp3 runs/mp3-rusty_mp3-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-rusty_mp3-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started (AFL_MAP_SIZE=11906)"
+    },
+    {
+      "lead": "rusty_mp3",
+      "command": "local cargo probe: rusty_mp3 1.0.6 Mp3Decoder f32 vs nanomp3 0.2.0 decode_all::<f32> on both controls (macOS arm64)",
+      "pass": true,
+      "result": "same sample counts; 11236/12672 and 12108/13824 samples differ, max absolute difference 7.45e-8 and 5.96e-8: numerically equivalent, separate implementations"
     }
   ],
   "not_run": [
@@ -221,5 +280,6 @@
     "aggregate catalog/website regeneration (build_readmes, audit_projects --write, smoke reports)"
   ],
   "symphonia_checked_at_utc": "2026-11-17T12:54:52.237279+00:00",
-  "mp3_duration_checked_at_utc": "2026-11-17T15:06:51.084569+00:00"
+  "mp3_duration_checked_at_utc": "2026-11-17T15:06:51.084569+00:00",
+  "rusty_mp3_checked_at_utc": "2026-11-17T15:07:30.738147+00:00"
 }

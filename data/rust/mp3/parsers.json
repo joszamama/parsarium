@@ -130,5 +130,44 @@
       "value": 149042,
       "source": "data/rust/mp3/registry-snapshot.json"
     }
+  },
+  {
+    "name": "rusty_mp3",
+    "project": "projects/mp3/rust/rusty_mp3",
+    "version": "1.0.6",
+    "license": "Apache-2.0",
+    "license_evidence": "Cargo.toml license = \"Apache-2.0\" and LICENSE in rusty_mp3-1.0.6.crate (sha256 6bc564f58a4eed8f95a43dbbb69b739a7c517230b8f852d45bfcc9c8566a67a8, Cargo.lock checksum)",
+    "source_sha256": "6bc564f58a4eed8f95a43dbbb69b739a7c517230b8f852d45bfcc9c8566a67a8",
+    "input_api": "rusty_mp3::Mp3Decoder::new(); Mp3Decoder::push(&bytes); Mp3Decoder::flush(); Mp3Decoder::next_frame() -> DecodedAudio { sample_rate, channels, samples: Vec<f32> } until Error::Eof",
+    "documentation": "https://docs.rs/rusty_mp3/1.0.6/rusty_mp3/struct.Mp3Decoder.html",
+    "source": "https://github.com/Remade-With-Rust/remade_ffmpeg_rs/tree/37968ee5b1223f98c5b3ff12fa134029e72d869a/crates/rusty_mp3",
+    "scope": "Every MPEG Layer III frame of an untagged stream frame-synced, parsed (header, side information, main data) and decoded to interleaved f32 PCM: sample rate, channels, frame count, samples per channel, PCM sample count and f32 PCM hash. Default features; the crate's encoder is not exercised",
+    "family": "rusty_mp3 pure-Rust Layer III decoder (remade_ffmpeg_rs)",
+    "family_note": "In-house decoder with no dependencies: the crate documentation says it was written because Symphonia is MPL-2.0 and puremp3 is incomplete, and its source cites minimp3 and FFmpeg only as bit-exactness references. Its f32 PCM differs from the nanomp3 minimp3 port's f32 PCM in 11,236 of 12,672 and 12,108 of 13,824 samples (max absolute difference 7.5e-8 and 6.0e-8): numerically equivalent output, not the same implementation. Independent of the Symphonia and minimp3 families. The rff-codec-mp3 search hit is an adapter over this crate.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "samples_per_channel": 12672,
+      "pcm_samples": 12672,
+      "pcm_f32_sha256": "950a4b2c13148eef937e478e683959d5450f71436c95e81423456a85b63dfb8a"
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "samples_per_channel": 6912,
+      "pcm_samples": 13824,
+      "pcm_f32_sha256": "0bf6b1cc0fc7a5de01a9ce6336667448d9837b98de16c2ff5a151e32e6075f5f"
+    },
+    "evidence": "projects/mp3/rust/rusty_mp3/verification.json",
+    "verification_note": "Both untagged valid controls give 11 frames at 44,100 Hz mono and 12 frames at 22,050 Hz stereo, 12,672 and 6,912 samples per channel, equal to the independent header walk (11 x 1152 and 12 x 576) and to the Symphonia receipts. Mp3Decoder drops a frame whose decode fails without reporting it, so the frame count is checked against the walk rather than trusted. Docker LLVM coverage: 1121 own crate lines on the first control (decoder, header, side information, Huffman, IMDCT, synthesis; encoder files 0). AFL++ SanitizerCoverage is scoped to the rusty_mp3 crate: 1082 vs 1033 tuples, 219 and 170 unique, byte-identical maps over 5 separate processes per control. Two short CBR controls do not establish VBR, Xing/Info, free-format or MPEG-2.5 support; no malformed, resource-use or campaign tests were run.",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 81660,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    }
   }
 ]

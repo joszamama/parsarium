@@ -12,6 +12,7 @@ Three verified package paths cover two independent parser families on two valid 
 - [symphonia-bundle-mp3](symphonia-bundle-mp3/README.md) — verified Docker harness
 - [minimp3](minimp3/README.md) — verified Docker harness
 - [mp3-duration](mp3-duration/README.md) — verified API path
+- [rusty_mp3](rusty-mp3/README.md) — verified API path
 
 ## Standard and runtime APIs
 

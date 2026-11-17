@@ -33,9 +33,10 @@
       "name": "rusty_mp3",
       "version": "1.0.6",
       "recent_downloads_90d": 81660,
-      "status": "unresolved",
-      "reason": "Pure-Rust Layer III decoder; release moved from the 1.0.5 used in mp3_id3v2 to 1.0.6 and neither has been run on the untagged control.",
-      "source": "https://crates.io/crates/rusty_mp3"
+      "status": "selected",
+      "reason": "Pinned Mp3Decoder push/flush/next_frame over the untagged bytes. Both CBR controls match the header walk and the Symphonia receipts in frames, sample rate, channels and samples; in-house pure-Rust decoder family, f32 PCM numerically close to but not identical with the minimp3 family. Scoped AFL++ maps byte-identical over 5 processes, 219/170 unique tuples. Recorded in parsers.json and projects/mp3/rust/rusty_mp3.",
+      "source": "https://crates.io/crates/rusty_mp3",
+      "license": "Apache-2.0"
     },
     {
       "name": "nanomp3",
