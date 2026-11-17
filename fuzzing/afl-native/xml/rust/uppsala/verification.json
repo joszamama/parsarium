@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "project": "xml/rust/uppsala",
+  "pass": true,
+  "base_project_receipt_sha256": "ec084aa0f55d0510f46436947ee9dadd7fa4483ff5af79eafc06c86a31c1dc59",
+  "overlay_file_sha256": {
+    "Cargo.toml": "178596b2bc446f59511e82caedf718c46246076ae8ce26742b9accab1298010f",
+    "Cargo.lock": "4033567569b703e46fb12187407828cfbcc0598081d3b4f07216950338045c5b",
+    "afl_fuzzer.rs": "c4ac8a004df700b536e29133bf95afd7ad879ec7e611bd6e99658d3cec719805",
+    "Dockerfile": "e20751898a5c0fe369acdb17a6cd9f521111979e1ed914fea0caf36af020749f",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "build.py": "2e83355152aa6035371e997c2ee3fd46f3d64f0fedde23e780817e6baaa67b1a"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "95eaea4bf5a4837be1861b8c45913dd6fd33f9ae9d9fcc60716399f7ebfd2122",
+  "image_id": "sha256:03d7d551aeadd2700b60495268f53c8d2dcfb91a18106a34f1c8a652380d71d8",
+  "platform": "linux/arm64",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "feedback_edges": 1114,
+  "afl_map_size": 59672,
+  "feedback_kind": "afl_rs_uppsala_only_sancov_edges",
+  "feedback_scope": "Only uppsala crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "uppsala"
+    ],
+    "rlib_guard_bytes": {
+      "uppsala": 238668
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_xml_uppsala_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 59667
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:7ea08239c7c39de847cf151e94fa2e9d5c3387fc72133e5effb4a9007a0bfde9",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 1285,
+  "edges_only_in_control": 94,
+  "edges_only_in_variant": 265,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/uppsala-0.12.1/",
+    "control_lines": {
+      "src/dom.rs": 167,
+      "src/error.rs": 0,
+      "src/exslt.rs": 0,
+      "src/fasthash.rs": 0,
+      "src/lib.rs": 25,
+      "src/namespace.rs": 57,
+      "src/parser.rs": 234,
+      "src/pull.rs": 365,
+      "src/simd.rs": 51,
+      "src/writer.rs": 10,
+      "src/xpath.rs": 0,
+      "src/xsd/builder.rs": 0,
+      "src/xsd/builtins.rs": 0,
+      "src/xsd/composition.rs": 0,
+      "src/xsd/datetime.rs": 0,
+      "src/xsd/decimal.rs": 0,
+      "src/xsd/facet_resolution.rs": 0,
+      "src/xsd/identity.rs": 0,
+      "src/xsd/parser.rs": 0,
+      "src/xsd/types.rs": 0,
+      "src/xsd/validation.rs": 0,
+      "src/xsd/wildcard.rs": 0,
+      "src/xsd_regex.rs": 0,
+      "src/xslt.rs": 0
+    },
+    "variant_lines": {
+      "src/dom.rs": 174,
+      "src/error.rs": 0,
+      "src/exslt.rs": 0,
+      "src/fasthash.rs": 0,
+      "src/lib.rs": 25,
+      "src/namespace.rs": 57,
+      "src/parser.rs": 304,
+      "src/pull.rs": 381,
+      "src/simd.rs": 57,
+      "src/writer.rs": 10,
+      "src/xpath.rs": 0,
+      "src/xsd/builder.rs": 0,
+      "src/xsd/builtins.rs": 0,
+      "src/xsd/composition.rs": 0,
+      "src/xsd/datetime.rs": 0,
+      "src/xsd/decimal.rs": 0,
+      "src/xsd/facet_resolution.rs": 0,
+      "src/xsd/identity.rs": 0,
+      "src/xsd/parser.rs": 0,
+      "src/xsd/types.rs": 0,
+      "src/xsd/validation.rs": 0,
+      "src/xsd/wildcard.rs": 0,
+      "src/xsd_regex.rs": 0,
+      "src/xslt.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/dom.rs",
+      "src/parser.rs",
+      "src/pull.rs",
+      "src/simd.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      1114,
+      1114,
+      1114
+    ],
+    "stable_edges": 1114,
+    "union_edges": 1114,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1285,
+      1285,
+      1285
+    ],
+    "stable_edges": 1285,
+    "union_edges": 1285,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

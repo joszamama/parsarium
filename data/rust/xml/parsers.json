@@ -303,5 +303,50 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/rxml/verification.json"
+  },
+  {
+    "name": "uppsala",
+    "version": "0.12.1",
+    "license": "BSD-2-Clause",
+    "input_api": "uppsala::parse_bytes(&[u8]) -> XmlResult<Document>; DOM NodeKind::Element/Text/CData and QName.namespace_uri/local_name, element.attributes and namespace_declarations",
+    "documentation": "https://docs.rs/uppsala/0.12.1/uppsala/fn.parse_bytes.html",
+    "source": "https://static.crates.io/crates/uppsala/uppsala-0.12.1.crate",
+    "scope": "XML 1.0 document from local bytes parsed to a namespace-aware DOM: expanded element/attribute names, namespace declarations, decoded text and attribute values on both valid controls",
+    "family": "uppsala pure-Rust XML scanner, recursive-descent parser, namespace resolver, and DOM; no external parser dependency",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 287733,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/uppsala/verification.json",
+    "candidate_for_selection": true
   }
 ]
