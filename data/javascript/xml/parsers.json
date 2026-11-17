@@ -1,0 +1,51 @@
+[
+  {
+    "name": "saxes",
+    "version": "6.0.0",
+    "license": "ISC",
+    "npm_integrity": "sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==",
+    "tarball_sha256": "1cdf52fbbe1ccbd175c365d2b8e63f46e590e74aff23fa6a44a6ec51522e96db",
+    "input_api": "new SaxesParser({xmlns: true}); on('opentag'|'closetag'|'text'|'cdata'|'comment'|'processinginstruction'|'error'); write(string).close() after strict UTF-8 TextDecoder of local bytes",
+    "documentation": "https://github.com/lddubeau/saxes/blob/v6.0.0/README.md",
+    "source": "https://github.com/lddubeau/saxes/tree/v6.0.0",
+    "scope": "One namespace-aware XML 1.0 document from local bytes as a SAX event stream with resolved element and attribute namespace URIs",
+    "family": "saxes hand-written XML 1.0 + Namespaces state machine (sax-js fork)",
+    "family_note": "saxes.js implements its own character-by-character state machine (sText, sOpenTag, sAttrib, sCData, sPI, sEntity, ...), entity decoding, and xmlns prefix binding with well-formedness checks; xmlchars 2.2.0 supplies only XML 1.0/1.1 and Namespaces character-class regexes. It does not wrap expat, libxml2, or a DOMParser. It originated as a fork of sax-js but its parser code was rewritten and is maintained separately, so sax is logged as a distinct lead.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 601886067,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/saxes",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/saxes"
+  }
+]

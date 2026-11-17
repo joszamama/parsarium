@@ -1,0 +1,29 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "XML 1.0 (UTF-8, namespaces)",
+  "status": "no_standard_xml_parser_api",
+  "runtime": "Node.js 26.10.0",
+  "verified_apis": [],
+  "inventory_source": "https://nodejs.org/download/release/v26.10.0/docs/api/all.json",
+  "inventory_source_sha256": "5fa51f3f199a7b0e21981b0aa54eabb4d3499a92dc9e6ab61397eb02d9e5fb0f",
+  "inventory_method": "Searched the complete official Node.js v26.10.0 API documentation (all.json) for DOMParser, XMLSerializer, XMLHttpRequest, and the word XML; the only XML mention is the node:test junit reporter, which writes XML test reports and does not parse XML. In the pinned node image (same base_image digest as the project), typeof DOMParser, XMLSerializer and XMLHttpRequest are 'undefined' and require('module').builtinModules contains no XML, SAX or DOM module.",
+  "runtime_probe": {
+    "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+    "platform": "linux/arm64",
+    "node": "v26.10.0",
+    "typeof_DOMParser": "undefined",
+    "typeof_XMLSerializer": "undefined",
+    "typeof_XMLHttpRequest": "undefined",
+    "xml_like_builtin_modules": []
+  },
+  "non_parser_mentions": [
+    {
+      "api": "node:test reporter 'junit'",
+      "documentation": "https://nodejs.org/download/release/v26.10.0/docs/api/test.html#test-reporters",
+      "reason": "Emits jUnit XML test results; writer only."
+    }
+  ],
+  "note": "Browser DOMParser is a WHATWG/W3C web API, not part of Node.js core; in Node it is provided only by packages such as jsdom (delegates XML to saxes) and @xmldom/xmldom, which are logged as third-party leads. No standard project, parser source lines or AFL++ feedback exist for this cell.",
+  "parser_source_lines_covered": null,
+  "afl_feedback": null
+}

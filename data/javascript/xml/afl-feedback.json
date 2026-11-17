@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:38:01.053948+00:00",
+  "projects_total": 1,
+  "projects_passed": 1,
+  "differential_kind": "fixed_valid_default_namespace_variant",
+  "standard_feedback": "none: Node.js core ships no XML parser API",
+  "results": [
+    {
+      "project": "xml/javascript/saxes",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "0e45f4b0c1339fda8e83acfdd5085868253518ca4067fd287fb32004cabb4cbd",
+      "base_image_id": "sha256:d3cfd9cf8c7f2d44cb41860c36c42607f5a6934af567131aa9dbae819bf1563a",
+      "overlay_image_id": "sha256:0afb579d8721e9340939e82cac7e26cd0aa3d92f6fcb2ed423c96483a2fb651f",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 126,
+      "control_afl_tuples": 146,
+      "differential_parser_features": 146,
+      "differential_afl_tuples": 166,
+      "parser_feature_difference": 32,
+      "afl_tuple_difference": 32,
+      "control_only_features_by_file": {
+        "saxes.js": 6
+      },
+      "differential_only_features_by_file": {
+        "saxes.js": 26
+      }
+    }
+  ]
+}
