@@ -46,6 +46,13 @@ def plan() -> dict:
     if len(feedback_by_key) != len(feedback):
         raise ValueError("duplicate parser-feedback exclusion")
     feedback_seen = set()
+    backfill_file = ROOT / "data/curation/feedback-backfills.json"
+    backfills = json.loads(backfill_file.read_text())["paths"]
+    backfill_by_key = {(row["ecosystem"], row["format"], row["name"]): row
+                       for row in backfills}
+    if len(backfill_by_key) != len(backfills):
+        raise ValueError("duplicate parser-feedback backfill")
+    backfill_seen = set()
     popcon_file = ROOT / "data/curation/popcon-snapshot.json"
     github_file = ROOT / "data/curation/github-supplemental-stars.json"
     popcon = json.loads(popcon_file.read_text())
@@ -158,6 +165,47 @@ def plan() -> dict:
                              "feedback_evidence_sha256": sha256(evidence.read_bytes()).hexdigest(),
                              "limitation": blocker["limitation"],
                              "prior_selected_rank": item.get("rank", item.get("supplemental_rank"))})
+        # A vacated slot is refilled only in primary-rank order, and only by a
+        # path whose own container control and AFL++ feedback receipt passed.
+        # An unresolved next-ranked path stops the refill; a next-ranked path
+        # with a recorded feedback blocker stays excluded and the walk continues.
+        if len(retained) < len(selected):
+            ceiling = sorted((item for item in excluded
+                              if item["reason"] == "outside_ten_path_ceiling"),
+                             key=lambda item: item["rank"])
+            for item in ceiling:
+                if len(retained) >= LIMIT:
+                    break
+                key = (ecosystem, format_name, item["name"])
+                blocker = feedback_by_key.get(key)
+                if blocker is not None:
+                    feedback_seen.add(key)
+                    evidence = ROOT / blocker["evidence"]
+                    if not evidence.is_file():
+                        raise ValueError(f"missing parser-feedback evidence: {evidence}")
+                    item.update(reason=blocker["reason"], feedback_evidence=blocker["evidence"],
+                                feedback_evidence_sha256=sha256(evidence.read_bytes()).hexdigest(),
+                                limitation=blocker["limitation"],
+                                prior_primary_rank=item.pop("rank"))
+                    continue
+                backfill = backfill_by_key.get(key)
+                if backfill is None:
+                    break
+                backfill_seen.add(key)
+                evidence = ROOT / backfill["evidence"]
+                if not evidence.is_file() or not json.loads(evidence.read_text()).get("pass"):
+                    raise ValueError(f"missing or failing backfill evidence: {evidence}")
+                excluded.remove(item)
+                retained.append({**{k: v for k, v in item.items() if k not in ("reason", "rank")},
+                                 "selection": "primary_metric",
+                                 "backfilled_after_feedback_exclusion": True,
+                                 "prior_primary_rank": item["rank"],
+                                 "feedback_evidence": backfill["evidence"],
+                                 "feedback_evidence_sha256": sha256(evidence.read_bytes()).hexdigest()})
+            retained.sort(key=lambda item: (item["selection"] != "primary_metric",
+                                            -(item["metric"] or 0) if item["selection"] == "primary_metric"
+                                            else -item["supplemental_metric"],
+                                            item["name"].casefold()))
         selected = retained
         for index, item in enumerate((x for x in selected if x["selection"] == "primary_metric"), 1):
             item["rank"] = index
@@ -175,15 +223,18 @@ def plan() -> dict:
             "original_count": len(parsers), "selected_count": len(selected),
             "selected": selected, "excluded": excluded,
         })
+    if backfill_seen != set(backfill_by_key):
+        raise ValueError(f"backfill is not a next-ranked path: {set(backfill_by_key) - backfill_seen}")
     if feedback_seen != set(feedback_by_key):
         raise ValueError(f"feedback exclusion is not an adopted selected path: {set(feedback_by_key) - feedback_seen}")
     return {
         "schema_version": 1,
-        "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded without backfilling lower-ranked leads.",
+        "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded; a vacated slot is refilled only in primary-rank order by the next-ranked path with its own verified container control and parser-derived AFL++ feedback.",
         "supplemental_sources": {
             "popcon_snapshot_sha256": sha256(popcon_file.read_bytes()).hexdigest(),
             "github_snapshot_sha256": sha256(github_file.read_bytes()).hexdigest(),
             "feedback_exclusions_sha256": sha256(feedback_file.read_bytes()).hexdigest(),
+            "feedback_backfills_sha256": sha256(backfill_file.read_bytes()).hexdigest(),
         },
         "cells": result,
         "selected_total": sum(cell["selected_count"] for cell in result),

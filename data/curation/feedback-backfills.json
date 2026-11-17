@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "policy": "A slot vacated by a parser-feedback exclusion is refilled only in primary-rank order, and only by the next-ranked control-verified path whose own pinned Docker control and parser-derived AFL++ overlay receipt passed. An unresolved next-ranked path stops the refill; a next-ranked path with a recorded feedback blocker stays excluded and the walk continues.",
+  "paths": [
+    {
+      "ecosystem": "javascript",
+      "format": "ascii_ply",
+      "name": "plyparser",
+      "project": "ascii_ply/javascript/plyparser",
+      "evidence": "fuzzing/afl-native/ascii_ply/javascript/plyparser/verification.json",
+      "note": "Next-ranked npm path after the @draco-rust/ply feedback blocker. Pinned Docker control passes with 165 parser-source lines; the AFL++ bridge maps 47 parser features to 67 tuples, repeats identically on triangle.ply and gives a different 56-tuple map on triangle-colour.ply."
+    }
+  ]
+}
