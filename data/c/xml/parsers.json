@@ -9,7 +9,7 @@
     "source": "https://github.com/libexpat/libexpat/releases/download/R_2_10_0/expat-2.10.0.tar.xz",
     "scope": "Namespace-resolved XML 1.0 events from one in-memory document: document-order element and attribute expanded names, namespace declarations and URIs, maximum depth, and trimmed character-data runs between markup",
     "family": "expat (James Clark's expat, maintained as libexpat)",
-    "family_note": "Independent of libxml2. Python's xml.parsers.expat / pyexpat, which produced the controls' expected outputs, bundles the same expat engine, so that oracle is same-family; the Go encoding/xml paths and a scratch libxml2 build gave the same summaries independently.",
+    "family_note": "Independent of libxml2. Python's xml.parsers.expat / pyexpat, which produced the controls' expected outputs, bundles the same expat engine, so that oracle is same-family; the Go encoding/xml paths and the verified libxml2 path give the same summaries independently.",
     "control": "controls/xml/catalog-ns.xml",
     "expected_output": {
       "attributes": [
@@ -42,6 +42,53 @@
       "name": "Debian popcon installations of runtime library binary package (libexpat1)",
       "value": 297134,
       "source": "data/c/xml/registry-snapshot.json"
-    }
+    },
+    "project": "projects/xml/c/expat/verification.json"
+  },
+  {
+    "name": "libxml2",
+    "version": "2.15.4",
+    "license": "MIT",
+    "license_evidence": "https://gitlab.gnome.org/GNOME/libxml2/-/blob/v2.15.4/Copyright",
+    "input_api": "xmlReaderForMemory(local bytes, size, NULL, \"UTF-8\", XML_PARSE_NONET | XML_PARSE_NO_XXE); xmlTextReaderRead loop; xmlTextReaderNodeType, xmlTextReaderConstNamespaceUri, xmlTextReaderConstLocalName, xmlTextReaderMoveToNextAttribute, xmlTextReaderConstValue, xmlTextReaderDepth",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/libxml2/html/xmlreader_8h.html",
+    "source": "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.4.tar.xz",
+    "scope": "Namespace-resolved XML 1.0 events from one in-memory document: document-order element and attribute expanded names, namespace declarations and URIs, maximum depth, and trimmed character-data runs between markup",
+    "family": "libxml2 (GNOME libxml2, Daniel Veillard's parser)",
+    "family_note": "Independent of expat: libxml2 has its own tokenizer and SAX2 parser in parser.c, and xmlTextReader is its pull interface. The pyexpat oracle that produced the expected outputs is a different (expat) family, so this match is cross-family.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (libxml2; libxml2-16 9,413)",
+      "value": 290724,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/c/libxml2/verification.json"
   }
 ]

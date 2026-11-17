@@ -1,8 +1,9 @@
-"""Check the C XML AFL++ overlay: repeated control maps match and a second valid control differs.
+"""Check the C XML AFL++ overlays: repeated control maps match and a second valid control differs.
 
-The base project image replays the differential control against its pinned
-expected output. The AFL++ overlay then maps each valid control twice with
-afl-showmap; tuples must repeat exactly per control and differ between them.
+For each verified path, the base project image replays the differential control
+against its pinned expected output. The AFL++ overlay then maps each valid
+control REPEATS times with afl-showmap; tuples must repeat exactly per control
+and differ between them.
 """
 
 from datetime import datetime, timezone
@@ -16,7 +17,12 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUG = "expat"
+SCOPES = {
+    "expat": ("afl_clang_fast_libexpat_and_harness_edges",
+              "AFL++ instruments only the pinned libexpat sources and the XML_Parse harness; no other library is compiled into /work/fuzzer."),
+    "libxml2": ("afl_clang_fast_libxml2_and_harness_edges",
+                "AFL++ instruments only the pinned libxml2 sources and the xmlTextReader harness; no other library is compiled into /work/fuzzer."),
+}
 REPEATS = 5
 REPORT = ROOT / "data/c/xml/afl-feedback.json"
 
@@ -44,9 +50,9 @@ def showmap(manifest: dict, receipt: dict, case: Path, work: Path, name: str) ->
     return set((work / f"{name}.map").read_text().splitlines()) - {""}
 
 
-def main() -> None:
-    project, manifest = project_for("xml", "c", SLUG)
-    relative = Path("xml/c") / SLUG
+def check(slug: str) -> dict:
+    project, manifest = project_for("xml", "c", slug)
+    relative = Path("xml/c") / slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     base = json.loads((project / "verification.json").read_text())
@@ -65,7 +71,7 @@ def main() -> None:
         raise RuntimeError(f"differential control output mismatch: {observed}")
 
     maps: list[set[str]] = []
-    with tempfile.TemporaryDirectory(prefix="parsarium-xml-c-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"parsarium-xml-c-{slug}-") as temporary:
         work = Path(temporary)
         for index, control in enumerate(controls):
             runs = [showmap(manifest, receipt, control, work, f"c{index}r{repeat}")
@@ -81,13 +87,12 @@ def main() -> None:
         raise RuntimeError("differential control did not change AFL++ feedback")
     print(f"{relative}: stable repeats; {len(maps[0])} vs {len(maps[1])} tuples, "
           f"{tuple_difference} edge ids differ", flush=True)
-    REPORT.write_text(json.dumps({
-        "schema_version": 1,
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+    kind, scope = SCOPES[slug]
+    return {
         "project": str(relative),
         "pass": True,
-        "feedback_kind": "afl_clang_fast_libexpat_and_harness_edges",
-        "feedback_scope": "AFL++ instruments only the pinned libexpat sources and the XML_Parse harness; no other library is compiled into /work/fuzzer.",
+        "feedback_kind": kind,
+        "feedback_scope": scope,
         "base_project_receipt_sha256": sha256((project / "verification.json").read_bytes()).hexdigest(),
         "overlay_receipt_sha256": sha256((overlay / "verification.json").read_bytes()).hexdigest(),
         "base_image_id": base["image_id"],
@@ -103,7 +108,19 @@ def main() -> None:
         "first_afl_tuples": len(maps[0]),
         "second_afl_tuples": len(maps[1]),
         "afl_tuple_difference": tuple_difference,
-    }, indent=2) + "\n")
+    }
+
+
+def main() -> None:
+    results = [check(slug) for slug in SCOPES]
+    REPORT.write_text(json.dumps({
+        "schema_version": 2,
+        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "projects_total": len(results),
+        "projects_passed": sum(item["pass"] for item in results),
+        "pass": all(item["pass"] for item in results),
+        "results": results,
+    }, indent=2, ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":
