@@ -6,6 +6,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [jansson / C](c/jansson/README.md)
 - [json-c / C](c/json-c/README.md)
 - [yyjson / C](c/yyjson/README.md)
+- [Boost.JSON / C++](cpp/boost-json/README.md)
 - [RapidJSON / C++](cpp/rapidjson/README.md)
 - [jsoncpp / C++](cpp/jsoncpp/README.md)
 - [nlohmann-json / C++](cpp/nlohmann-json/README.md)

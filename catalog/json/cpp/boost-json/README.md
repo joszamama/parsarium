@@ -9,7 +9,6 @@
 - **Documentation:** [API reference](<https://www.boost.org/doc/libs/1_92_0/libs/json/doc/html/ref/parse.html>)
 - **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
 - **Catalog evidence:** [parser record](../../../../data/cpp/json/parsers.json) · [control result](../../../../data/cpp/json/verification.json)
-- **Adoption:** no primary rank; the Debian source `boost1.83` covers all of Boost. Separately labeled fallback: 1,749 `libboost-json-dev` installations.
 
 ## Observed control result
 

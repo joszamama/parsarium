@@ -1,6 +1,6 @@
 # Boost.JSON — JSON / C++
 
-Pinned release: Boost `1.92.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
+Pinned release: `1.92.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
 [API, control result, and parser family](../../../../catalog/json/cpp/boost-json/README.md)
 

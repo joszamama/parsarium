@@ -109,6 +109,13 @@ def validate_pilot_cells() -> None:
                 numeric = any(isinstance(value, int) and not isinstance(value, bool) and value > 0
                               for signal in signals if isinstance(signal, dict)
                               for value in signal.values())
+                popularity = parser.get("popularity") or {}
+                fallback = popularity.get("fallback") if isinstance(popularity, dict) else None
+                if not numeric and eco in {"c", "cpp"} and isinstance(fallback, dict):
+                    value = fallback.get("value")
+                    numeric = (isinstance(value, int) and not isinstance(value, bool) and value >= 1000
+                               and isinstance(fallback.get("binary_package"), str)
+                               and isinstance(fallback.get("source_sha256"), str))
                 if not numeric:
                     raise ValueError(f"pilot parser lacks a numeric adoption signal: {eco}/{fmt}/{name}")
             for api in standard["verified_apis"]:
