@@ -14,9 +14,11 @@
       "name": "RustyXML",
       "version": "0.3.0",
       "recent_downloads_90d": 4342774,
-      "status": "unresolved",
-      "reason": "SAX-like streaming parser plus element tree; not run on the controls.",
-      "source": "https://crates.io/crates/RustyXML"
+      "status": "unresolved_feedback_nondeterministic",
+      "reason": "The public Parser::feed_str(&str) stream API yielded exact namespace-aware structure for both valid controls, with 285 pinned parser-source lines covered. Whole-binary AFL++ feedback varied across identical runs. A parser-crate-only sanitizer-coverage build still varied on the order control (621 edges once, 613 nine times); exact reproducible parser feedback was not established, so this lead is not selected.",
+      "source": "https://static.crates.io/crates/RustyXML/RustyXML-0.3.0.crate",
+      "audit": "data/rust/xml/rustyxml-feedback-audit.md",
+      "family_note": "RustyXML parser derives from ObjFW OFXMLParser according to the pinned src/parser.rs."
     },
     {
       "name": "xml-no-std",
