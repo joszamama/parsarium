@@ -25,12 +25,19 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | pypacker | 3,765 |  | pypacker |
+| 1 | async-dns | 6,920 | `async_dns.core.DNSMessage.parse(data)` | async_dns (async_dns/core/record.py DNSMessage/Record) |
+| 2 | dns-messages | 46 | `dns_messages.DnsMessage.from_bytes(raw_bytes)` | dns-messages |
 
 ## Checked, excluded or recorded separately
 
 - **pycares** (excluded): pycares 5.2.1's public API is a c-ares Channel (query, search, getaddrinfo, gethostbyaddr) that sends queries; its parse_dnsrec(dnsrec) takes a c-ares record handed to a query callback, not caller-supplied bytes. No documented parser for local message bytes. Its parser family is c-ares, verified separately in the C cell.
 - **aiodns** (excluded): asyncio resolver over pycares; network API only.
 - **scapy** (excluded): Excluded under this pilot's no-socket rule: importing scapy.layers.dns in a --network none container (python:3.13-slim, socket.socket constructor instrumented) created 11 AF_NETLINK sockets while scapy.arch enumerated routes and interfaces, before any parse. The DNS parse itself opened none.
+- **pypacker** (excluded): Fails the response control: CNAME and MX rdata are not decoded by the library, so the oracle summary cannot be produced from its parse.
 - **dnserver** (excluded): DNS server built on dnslib; no own parser.
 - **dnslib-ng** (excluded): Not found on PyPI Stats (404).
+- **zeroconf** (excluded): Fails the response control: the MX answer is not decoded and is dropped from the answer list, so the four-record answer section cannot be reproduced from the library's parse. It is an mDNS service-discovery stack; the parser is the multicast DNS subset.
+- **pyshark** (excluded): Wraps the external tshark process (a capture-file dissector); no in-process parser for caller-supplied DNS message bytes. Excluded as an external-process wrapper.
+- **impacket** (excluded): Fails the response control: AAAA rdata is not decoded and the MX exchange is wrong (offset bug), so the oracle summary cannot be produced from the library's parse.
+- **dns-lexicon** (excluded): Manipulates records through DNS hosting providers' HTTP APIs; no DNS wire-message parser.
+- **pydns** (excluded): Python 2 PyDNS distribution, the predecessor of the selected py3dns (py3dns is its Python 3 port with the same DNS.Lib unpackers); not counted under the predecessor rule.
