@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T16:51:05.944662+00:00",
+  "projects_total": 1,
+  "projects_passed": 1,
+  "differential_kind": "fixed_valid_block_sequence_yaml",
+  "results": [
+    {
+      "project": "yaml/go/gopkg_in_yaml_v2",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "c265198bd5a62cadd7cf144ca7aeb1c31caadbd4257279119676b35317fd5e13",
+      "control": "controls/yaml/catalog.yaml",
+      "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+      "differential": "controls/yaml/order.yaml",
+      "differential_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+      "oracle": "controls/yaml/check_controls.py EXPECTED typed trees (hand-written, Psych cross-checked)",
+      "control_tree_pass": true,
+      "differential_tree_pass": true,
+      "runs_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 729,
+      "control_afl_tuples": 743,
+      "differential_parser_features": 721,
+      "differential_afl_tuples": 737,
+      "parser_feature_difference": 84,
+      "afl_tuple_difference": 82,
+      "control_features_by_file": {
+        "apic.go": 16,
+        "decode.go": 117,
+        "parserc.go": 139,
+        "readerc.go": 66,
+        "resolve.go": 39,
+        "scannerc.go": 324,
+        "yaml.go": 8,
+        "yamlprivateh.go": 20
+      },
+      "difference_features_by_file": {
+        "apic.go": 1,
+        "decode.go": 5,
+        "parserc.go": 20,
+        "readerc.go": 7,
+        "scannerc.go": 46,
+        "yamlprivateh.go": 5
+      }
+    }
+  ]
+}

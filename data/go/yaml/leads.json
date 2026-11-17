@@ -1,7 +1,7 @@
 [
   {
     "name": "gopkg.in/yaml.v2",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 60161,
     "metric_error": null,
     "family": "go-yaml v2",
@@ -9,7 +9,10 @@
     "note": "YAML 1.1 resolver.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pkg.go.dev/gopkg.in/yaml.v2",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected: pinned v2.4.0 module zip; yaml.Unmarshal([]byte, out) over one complete local YAML byte slice gives the oracle typed tree on both controls; 1251 package lines covered; three identical AFL++ runs per control, controls differ by 84 parser blocks and 82 tuples.",
+    "version_seen": "v2.4.0",
+    "license": "Apache-2.0 AND MIT",
+    "evidence": "projects/yaml/go/gopkg_in_yaml_v2/verification.json"
   },
   {
     "name": "gopkg.in/yaml.v3",
@@ -21,7 +24,7 @@
     "note": null,
     "found_by": "registry_search",
     "source": "https://pkg.go.dev/gopkg.in/yaml.v3",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Unverified lead below the selected paths in this round; no pinned control run or harness yet."
   },
   {
     "name": "github.com/ghodss/yaml",
@@ -57,7 +60,7 @@
     "note": null,
     "found_by": "registry_search",
     "source": "https://pkg.go.dev/github.com/goccy/go-yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Unverified lead below the selected paths in this round; no pinned control run or harness yet."
   },
   {
     "name": "go.yaml.in/yaml/v3",
