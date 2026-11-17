@@ -632,5 +632,111 @@
         }
       ]
     }
+  },
+  {
+    "name": "sqllens",
+    "version": "1.11.0",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball; THIRD-PARTY-NOTICES.md records the forked grammars' own licenses (PostgreSQL grammar: BSD-3-Clause, antlr/grammars-v4)",
+    "input_api": "parse(local UTF-8 text, 'postgres') -> {ast, errors, cst}",
+    "documentation": "https://www.npmjs.com/package/sqllens/v/1.11.0",
+    "source": "https://registry.npmjs.org/sqllens/-/sqllens-1.11.0.tgz",
+    "source_sha256": "90828cac2b2f2ed5151a4eab0790dc514276bcc7cbee91856632b3dac0782f78",
+    "dependencies": [
+      "antlr4ng"
+    ],
+    "dialect": "PostgreSQL (dialect 'postgres')",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed with the postgres dialect; any syntax error rejects the input; the summary is read from the returned CST. Valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4)",
+    "family_note": "parse runs the package's ANTLR4-generated PostgresLexer and PostgresParser (dist/generated/postgres, on the antlr4ng runtime) and returns the token stream, a syntax-error count, the concrete parse tree (cst, documented as the escape hatch) and a lowered dialect-neutral IR. The IR marks INSERT as unsupported ('non-query'), so the adapter reads both controls from the CST by rule-context class (Simple_select_pramary, Target_list, Relation_expr, Joined_table, Where_clause, Group_by_item, Sortby, Func_name, Iconst, Fconst, Anysconst, Insertstmt, Insert_column_item, Values_clause, Expr_list). Its grammars are forks of upstream ANTLR grammars (PostgreSQL from antlr/grammars-v4); dt-sql-parser is a separate ANTLR4 package with its own grammar sources, and its selected path uses MySQL. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, sqlite-parser and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 6624,
+      "source": "https://api.npmjs.org/downloads/point/last-month/sqllens",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; downloads include transitive installs."
+    },
+    "project": "projects/sql/javascript/sqllens",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

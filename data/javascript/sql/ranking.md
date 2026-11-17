@@ -1,6 +1,6 @@
 # JavaScript × SQL: pilot ranking
 
-Six third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Seven third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -14,8 +14,9 @@ npm downloads, last month, captured 2026-11-17 ([snapshot](registry-snapshot.jso
 | 4 | [dt-sql-parser](https://www.npmjs.com/package/dt-sql-parser/v/4.6.1) | 4.6.1 | 364,059 | `new MySQL().parse(local UTF-8 text, errorListener) -> ProgramContext`; dialect: MySQL (MySQL class) | dt-sql-parser ANTLR4 grammars |
 | 5 | [sqlite-parser](https://www.npmjs.com/package/sqlite-parser/v/1.0.1) | 1.0.1 | 85,900 | `sqliteParser(local UTF-8 text) -> statement list`; dialect: SQLite | sqlite-parser PEG.js grammar |
 | 6 | [@appland/sql-parser](https://www.npmjs.com/package/@appland/sql-parser/v/1.5.1) | 1.5.1 | 80,224 | `sqliteParser(local UTF-8 text) -> statement list`; dialect: SQLite | sqlite-parser PEG.js grammar (AppLand fork) |
+| 7 | [sqllens](https://www.npmjs.com/package/sqllens/v/1.11.0) | 1.11.0 | 6,624 | `parse(local UTF-8 text, 'postgres') -> {ast, errors, cst}`; dialect: PostgreSQL (dialect 'postgres') | sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4) |
 
-Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/node_sql_parser/differential.json), [pgsql-ast-parser](../../../projects/sql/javascript/pgsql_ast_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/pgsql_ast_parser/differential.json), [sql-parser-cst](../../../projects/sql/javascript/sql_parser_cst/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/sql_parser_cst/differential.json), [dt-sql-parser](../../../projects/sql/javascript/dt_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/dt_sql_parser/differential.json), [sqlite-parser](../../../projects/sql/javascript/sqlite_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/sqlite_parser/differential.json), [@appland/sql-parser](../../../projects/sql/javascript/appland_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/appland_sql_parser/differential.json).
+Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/node_sql_parser/differential.json), [pgsql-ast-parser](../../../projects/sql/javascript/pgsql_ast_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/pgsql_ast_parser/differential.json), [sql-parser-cst](../../../projects/sql/javascript/sql_parser_cst/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/sql_parser_cst/differential.json), [dt-sql-parser](../../../projects/sql/javascript/dt_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/dt_sql_parser/differential.json), [sqlite-parser](../../../projects/sql/javascript/sqlite_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/sqlite_parser/differential.json), [@appland/sql-parser](../../../projects/sql/javascript/appland_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/appland_sql_parser/differential.json), [sqllens](../../../projects/sql/javascript/sqllens/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/sqllens/differential.json).
 
 ## Leads by the same metric
 
@@ -36,6 +37,7 @@ Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/ver
 | pg-query-parser | 31,519 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | sql-parser | 16,843 | unresolved | sql-parser jison grammar |
 | sql-ddl-to-json-schema | 12,081 | excluded | — |
+| sqllens | 6,624 | selected | sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4) |
 | @florajs/sql-parser | 640 | unresolved | node-sql-parser PEG.js (fork) |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

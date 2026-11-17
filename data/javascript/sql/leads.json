@@ -162,6 +162,18 @@
       "reason": "DDL-only converter; cannot parse SELECT."
     },
     {
+      "name": "sqllens",
+      "status": "selected",
+      "metric_value": 6624,
+      "metric_error": null,
+      "latest_release_observed": "1.11.0",
+      "family": "sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4)",
+      "documented_api_lead": "parse",
+      "reason": "parse(sql, dialect) returns {ast, errors, cst}; the lowered IR marks INSERT as unsupported, so the summary is read from the documented CST (full ANTLR4 parse tree).",
+      "metric_snapshot": "round_2_metric",
+      "selected_release": "1.11.0"
+    },
+    {
       "name": "@florajs/sql-parser",
       "status": "unresolved",
       "metric_value": 640,
