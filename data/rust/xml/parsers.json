@@ -1,0 +1,45 @@
+[
+  {
+    "name": "quick-xml",
+    "version": "0.42.0",
+    "license": "MIT",
+    "input_api": "quick_xml::NsReader::from_reader(&[u8]); NsReader::read_event(); NsReader::resolver().resolve_element(..)/resolve_attribute(..); Attribute::normalized_value(XmlVersion::Implicit1_0); BytesText/BytesCData::xml10_content(); BytesRef::resolve_char_ref() with escape::resolve_predefined_entity",
+    "documentation": "https://docs.rs/quick-xml/0.42.0/quick_xml/reader/struct.NsReader.html",
+    "source": "https://github.com/tafia/quick-xml/tree/v0.42.0",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read as a namespace-resolved event stream: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes with normalized values, decoded character data (predefined entity and character references, CDATA)",
+    "family": "quick-xml pull reader (tafia/quick-xml)",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 178628779,
+      "source": "data/rust/xml/registry-snapshot.json"
+    }
+  }
+]

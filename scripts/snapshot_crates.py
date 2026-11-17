@@ -20,6 +20,7 @@ QUERIES = {
     "http11": ["http1", "http parser", "http request parser", "http response parser", "http codec", "httparse", "http headers"],
     "ascii_ply": ["ply", "ply parser", "ply reader", "ply point cloud", "ply mesh", "polygon file format", "stanford ply"],
     "ascii_pnm": ["pnm", "ppm", "pgm", "pbm", "netpbm", "portable pixmap", "pnm image parser"],
+    "xml": ["xml", "xml parser", "xml reader", "xml pull parser", "xml sax", "xml dom", "xml namespace"],
 }
 
 
@@ -32,7 +33,7 @@ def fetch(url: str) -> dict:
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|mp3_id3v2|mp3")
+        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|mp3_id3v2|mp3|xml")
     search = []
     for query in QUERIES[cell]:
         url = "https://crates.io/api/v1/crates?" + urlencode({"q": query, "per_page": 100, "page": 1})

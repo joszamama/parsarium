@@ -1,0 +1,178 @@
+{
+  "captured_from": "data/rust/xml/registry-snapshot.json",
+  "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
+  "unresolved_leads": [
+    {
+      "name": "xmlparser",
+      "version": "0.13.6",
+      "recent_downloads_90d": 52247004,
+      "status": "unresolved",
+      "reason": "Pull-based, zero-allocation XML 1.0 tokenizer; Tokenizer::from(&str) on the controls has not been run in this pilot. It does not resolve namespaces itself.",
+      "source": "https://crates.io/crates/xmlparser"
+    },
+    {
+      "name": "roxmltree",
+      "version": "0.21.2",
+      "recent_downloads_90d": 42073295,
+      "status": "unresolved_shared_family",
+      "reason": "Read-only tree with namespace resolution; Document::parse(&str) has not been run. Earlier releases are built on xmlparser, so the family overlap must be checked before counting it as a separate parser.",
+      "source": "https://crates.io/crates/roxmltree"
+    },
+    {
+      "name": "xml-rs",
+      "version": "1.0.0",
+      "recent_downloads_90d": 32180109,
+      "status": "unresolved",
+      "reason": "Pure-Rust StAX-style EventReader with namespaces over io::Read; not run on the controls in this pilot.",
+      "source": "https://crates.io/crates/xml-rs"
+    },
+    {
+      "name": "xml5ever",
+      "version": "0.40.0",
+      "recent_downloads_90d": 14338073,
+      "status": "unresolved",
+      "reason": "Servo html5ever-family XML tokenizer and tree builder; the XML5 error-recovery model differs from XML 1.0 well-formedness, so eligibility and an observable namespace result need checking.",
+      "source": "https://crates.io/crates/xml5ever"
+    },
+    {
+      "name": "xml",
+      "version": "1.4.0",
+      "recent_downloads_90d": 6413267,
+      "status": "unresolved_shared_family",
+      "reason": "Published by the xml-rs project under the shorter crate name; its relationship to the xml-rs 1.0.0 release must be checked before it counts as a separate path.",
+      "source": "https://crates.io/crates/xml"
+    },
+    {
+      "name": "RustyXML",
+      "version": "0.3.0",
+      "recent_downloads_90d": 4342774,
+      "status": "unresolved",
+      "reason": "SAX-like streaming parser plus element tree; not run on the controls.",
+      "source": "https://crates.io/crates/RustyXML"
+    },
+    {
+      "name": "xml-no-std",
+      "version": "0.8.26",
+      "recent_downloads_90d": 1648161,
+      "status": "unresolved_shared_family",
+      "reason": "no_std fork of xml-rs; shared-family status needs checking.",
+      "source": "https://crates.io/crates/xml-no-std"
+    },
+    {
+      "name": "minidom",
+      "version": "0.19.0",
+      "recent_downloads_90d": 984597,
+      "status": "unresolved_shared_family",
+      "reason": "DOM built on rxml; not run, and family overlap with rxml must be recorded.",
+      "source": "https://crates.io/crates/minidom"
+    },
+    {
+      "name": "rxml",
+      "version": "0.14.0",
+      "recent_downloads_90d": 961809,
+      "status": "unresolved",
+      "reason": "Restricted XML 1.0 parser that omits DTD features by design; the controls have no DOCTYPE, but it has not been run.",
+      "source": "https://crates.io/crates/rxml"
+    },
+    {
+      "name": "instant-xml",
+      "version": "0.7.7",
+      "recent_downloads_90d": 748214,
+      "status": "unresolved",
+      "reason": "Typed serde-style mapping to Rust structs; needs a generic element/attribute view to qualify under this cell's observable result.",
+      "source": "https://crates.io/crates/instant-xml"
+    },
+    {
+      "name": "sxd-document",
+      "version": "0.3.2",
+      "recent_downloads_90d": 647390,
+      "status": "unresolved",
+      "reason": "DOM parser (sxd_document::parser::parse); not run on the controls.",
+      "source": "https://crates.io/crates/sxd-document"
+    },
+    {
+      "name": "libxml",
+      "version": "0.3.24",
+      "recent_downloads_90d": 621059,
+      "status": "unresolved",
+      "reason": "Bindings to the libxml2 C parser; would add a native libxml2 family and needs a system library pin.",
+      "source": "https://crates.io/crates/libxml"
+    },
+    {
+      "name": "minidom-14",
+      "version": "0.17.0",
+      "recent_downloads_90d": 391747,
+      "status": "unresolved_shared_family",
+      "reason": "Older minidom line built on quick-xml; shares the selected quick-xml family.",
+      "source": "https://crates.io/crates/minidom-14"
+    },
+    {
+      "name": "uppsala",
+      "version": "0.12.1",
+      "recent_downloads_90d": 287733,
+      "status": "unresolved",
+      "reason": "Pure-Rust parser, DOM and namespace support; not run on the controls.",
+      "source": "https://crates.io/crates/uppsala"
+    },
+    {
+      "name": "hard-xml",
+      "version": "1.43.0",
+      "recent_downloads_90d": 228546,
+      "status": "unresolved_shared_family",
+      "reason": "Typed mapping built on xmlparser.",
+      "source": "https://crates.io/crates/hard-xml"
+    },
+    {
+      "name": "xot",
+      "version": "0.31.2",
+      "recent_downloads_90d": 112374,
+      "status": "unresolved_shared_family",
+      "reason": "Tree library built on xmlparser; family overlap needs checking.",
+      "source": "https://crates.io/crates/xot"
+    }
+  ],
+  "excluded_high_download_hits": [
+    {
+      "name": "windows",
+      "version": "0.62.2",
+      "recent_downloads_90d": 113676999,
+      "status": "excluded",
+      "reason": "Windows API bindings; matched the search text, not an XML parser."
+    },
+    {
+      "name": "pulldown-cmark",
+      "version": "0.13.6",
+      "recent_downloads_90d": 73457258,
+      "status": "excluded",
+      "reason": "CommonMark pull parser; matched 'pull parser'."
+    },
+    {
+      "name": "htmlparser",
+      "version": "0.2.1",
+      "recent_downloads_90d": 1308126,
+      "status": "excluded",
+      "reason": "HTML tokenizer, outside XML 1.0."
+    },
+    {
+      "name": "file-format",
+      "version": "0.29.0",
+      "recent_downloads_90d": 692761,
+      "status": "excluded",
+      "reason": "File-type signature detection, not parsing."
+    },
+    {
+      "name": "zbus_xml",
+      "version": "6.0.0",
+      "recent_downloads_90d": 8195479,
+      "status": "excluded",
+      "reason": "D-Bus introspection document mapping built on an XML library; domain-specific."
+    },
+    {
+      "name": "tree-sitter-xml",
+      "version": "0.7.0",
+      "recent_downloads_90d": 570973,
+      "status": "excluded",
+      "reason": "Tree-sitter grammar; a syntax-tree generator, not a namespace-aware XML reader."
+    }
+  ]
+}
