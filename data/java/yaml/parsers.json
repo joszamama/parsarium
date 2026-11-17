@@ -1335,6 +1335,451 @@
   }
  },
  {
+  "name": "kjson-yaml",
+  "group": "io.kjson",
+  "artifact": "kjson-yaml",
+  "version": "3.15",
+  "license": "MIT",
+  "license_evidence": "Maven release POM <licenses> names The MIT License (MIT); the image checks the pinned POM SHA-256 (source-lock.json) and that license name",
+  "input_api": "YAML.parse(InputStream, UTF-8).rootNode over Files.newInputStream(Path)",
+  "documentation": "https://github.com/pwall567/kjson-yaml/blob/3.15/README.md",
+  "source": "https://repo.maven.apache.org/maven2/io/kjson/kjson-yaml/3.15/kjson-yaml-3.15-sources.jar",
+  "source_sha256": "32cf4cb8945acb0ce0986bb4993df41e6fbd351ecdbacab66a2cd11cb43c05d2",
+  "jar_sha256": "ad626d11e60a22f06207f3df3f5746f25a49b77841eeed3fe7faa96822d14bc7",
+  "scope": "One YAML document from a local UTF-8 stream parsed by kjson-yaml into an immutable kjson-core JSONValue tree (JSONObject/JSONArray/JSONString/JSONInt/JSONLong/JSONDecimal/JSONBoolean/null); aliases resolve to the anchored node; the adapter prints the typed tree in source order",
+  "family": "kjson-yaml (own Kotlin YAML parser by Peter Wall, YAML 1.2 core-schema typing into kjson-core values)",
+  "family_note": "Independent of SnakeYAML and Engine: its own line-oriented Kotlin parser (io.kjson.yaml.parser.Parser) builds kjson-core values. The README says it is derived from the same author's earlier net.pwall.yaml:yaml-simple (lead, excluded as the predecessor; it also fails the alias part of the control).",
+  "configuration_note": "Default YAML object; the core-schema scalar typing is the library's own (plain 10115 would be an int, the quoted control value stays a string).",
+  "control": "controls/yaml/catalog.yaml",
+  "expected_output": {
+   "tree": [
+    "map",
+    [
+     [
+      "kind",
+      [
+       "str",
+       "catalog"
+      ]
+     ],
+     [
+      "version",
+      [
+       "int",
+       "2"
+      ]
+     ],
+     [
+      "ratio",
+      [
+       "float",
+       "0.25"
+      ]
+     ],
+     [
+      "offset",
+      [
+       "int",
+       "-17"
+      ]
+     ],
+     [
+      "enabled",
+      [
+       "bool",
+       true
+      ]
+     ],
+     [
+      "retired",
+      [
+       "bool",
+       false
+      ]
+     ],
+     [
+      "missing",
+      [
+       "null"
+      ]
+     ],
+     [
+      "title",
+      [
+       "str",
+       "Café \"quoted\"\tend"
+      ]
+     ],
+     [
+      "single",
+      [
+       "str",
+       "it's here"
+      ]
+     ],
+     [
+      "tags",
+      [
+       "seq",
+       [
+        [
+         "str",
+         "alpha"
+        ],
+        [
+         "str",
+         "beta"
+        ],
+        [
+         "str",
+         "gamma delta"
+        ]
+       ]
+      ]
+     ],
+     [
+      "point",
+      [
+       "map",
+       [
+        [
+         "lat",
+         [
+          "int",
+          "1"
+         ]
+        ],
+        [
+         "lon",
+         [
+          "float",
+          "-2.5"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "items",
+      [
+       "seq",
+       [
+        [
+         "map",
+         [
+          [
+           "id",
+           [
+            "int",
+            "7"
+           ]
+          ],
+          [
+           "name",
+           [
+            "str",
+            "first item"
+           ]
+          ],
+          [
+           "note",
+           [
+            "str",
+            "line one\nline two\n"
+           ]
+          ]
+         ]
+        ],
+        [
+         "map",
+         [
+          [
+           "id",
+           [
+            "int",
+            "8"
+           ]
+          ],
+          [
+           "name",
+           [
+            "str",
+            "Zürich"
+           ]
+          ],
+          [
+           "note",
+           [
+            "str",
+            "folded text\n"
+           ]
+          ]
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "defaults",
+      [
+       "map",
+       [
+        [
+         "retries",
+         [
+          "int",
+          "3"
+         ]
+        ],
+        [
+         "label",
+         [
+          "str",
+          "base"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "service",
+      [
+       "map",
+       [
+        [
+         "settings",
+         [
+          "map",
+          [
+           [
+            "retries",
+            [
+             "int",
+             "3"
+            ]
+           ],
+           [
+            "label",
+            [
+             "str",
+             "base"
+            ]
+           ]
+          ]
+         ]
+        ],
+        [
+         "label",
+         [
+          "str",
+          "edge"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  "differential_control": "controls/yaml/order.yaml",
+  "differential_expected_output": {
+   "tree": [
+    "seq",
+    [
+     [
+      "map",
+      [
+       [
+        "order",
+        [
+         "str",
+         "A-7"
+        ]
+       ],
+       [
+        "lines",
+        [
+         "seq",
+         [
+          [
+           "map",
+           [
+            [
+             "sku",
+             [
+              "str",
+              "Xé-1"
+             ]
+            ],
+            [
+             "qty",
+             [
+              "int",
+              "2"
+             ]
+            ],
+            [
+             "price",
+             [
+              "float",
+              "12.5"
+             ]
+            ]
+           ]
+          ],
+          [
+           "map",
+           [
+            [
+             "sku",
+             [
+              "str",
+              "B '2'"
+             ]
+            ],
+            [
+             "qty",
+             [
+              "int",
+              "1"
+             ]
+            ],
+            [
+             "price",
+             [
+              "float",
+              "0.75"
+             ]
+            ]
+           ]
+          ]
+         ]
+        ]
+       ],
+       [
+        "flags",
+        [
+         "seq",
+         []
+        ]
+       ],
+       [
+        "meta",
+        [
+         "map",
+         []
+        ]
+       ]
+      ]
+     ],
+     [
+      "map",
+      [
+       [
+        "city",
+        [
+         "str",
+         "Berlin"
+        ]
+       ],
+       [
+        "zip",
+        [
+         "str",
+         "10115"
+        ]
+       ]
+      ]
+     ],
+     [
+      "map",
+      [
+       [
+        "city",
+        [
+         "str",
+         "Berlin"
+        ]
+       ],
+       [
+        "zip",
+        [
+         "str",
+         "10115"
+        ]
+       ]
+      ]
+     ],
+     [
+      "seq",
+      [
+       [
+        "int",
+        "1"
+       ],
+       [
+        "seq",
+        [
+         [
+          "int",
+          "2"
+         ],
+         [
+          "int",
+          "3"
+         ]
+        ]
+       ],
+       [
+        "map",
+        [
+         [
+          "k",
+          [
+           "str",
+           "v"
+          ]
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "str",
+      "plain multi word"
+     ],
+     [
+      "str",
+      "line\nbreak"
+     ],
+     [
+      "str",
+      "kept\n  indented"
+     ],
+     [
+      "null"
+     ],
+     [
+      "bool",
+      false
+     ]
+    ]
+   ]
+  },
+  "project": "projects/yaml/java/kjson_yaml",
+  "popularity": {
+   "metric": "deps.dev directDependentCount summed over all releases",
+   "value": 29,
+   "max_release": "3.11",
+   "max_release_direct_dependent_count": 3,
+   "default_release_direct_dependent_count": 1,
+   "releases": 39,
+   "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.kjson%3Akjson-yaml",
+   "captured_at_utc": "2026-11-17T19:50:21.518704+00:00",
+   "snapshot": "data/java/yaml/registry-snapshot.json"
+  }
+ },
+ {
   "name": "snakeyaml-engine-kmp",
   "group": "it.krzeminski",
   "artifact": "snakeyaml-engine-kmp-jvm",
