@@ -55,5 +55,69 @@
       ]
     },
     "project": "projects/json/cpp/jsoncpp"
+  },
+  {
+    "name": "nlohmann-json",
+    "version": "3.12.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/nlohmann/json/blob/v3.12.0/LICENSE.MIT",
+    "input_api": "nlohmann::json::parse(IteratorType first, IteratorType last, parser_callback_t cb = nullptr, bool allow_exceptions = true, bool ignore_comments = false) called on the byte range with allow_exceptions=false and ignore_comments=false",
+    "documentation": "https://json.nlohmann.me/api/basic_json/parse/",
+    "source": "https://github.com/nlohmann/json/tree/v3.12.0",
+    "adapter": "projects/json/cpp/nlohmann-json/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text (comments rejected, object/array root, no trailing data) parsed into a nlohmann::json value",
+    "family": "nlohmann/json lexer and parser",
+    "family_note": "Header-only lexer (include/nlohmann/detail/input/lexer.hpp) and recursive-descent parser (detail/input/parser.hpp) with SAX DOM builder; no shared code with JsonCpp OurReader and no delegation to another JSON parser.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 1799,
+      "binary_package": "nlohmann-json3-dev",
+      "dev_package_installs": {
+        "nlohmann-json3-dev": 1799
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "github_stars": {
+        "value": 50894,
+        "source": "https://api.github.com/repos/nlohmann/json",
+        "captured_at_utc": "2026-11-17T03:26:07+00:00",
+        "snapshot": "data/cpp/json/registry-snapshot.json",
+        "note": "secondary signal, not the ranking metric"
+      }
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/nlohmann-json"
   }
 ]

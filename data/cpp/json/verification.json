@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:27:45.134313+00:00",
+  "checked_at_utc": "2026-11-17T03:51:50.103980+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -55,6 +55,48 @@
       },
       "parser_source_lines_covered": 810,
       "format_specific_source_lines_covered": 435,
+      "error": null
+    },
+    {
+      "package": "nlohmann-json",
+      "version": "3.12.0",
+      "scope": "RFC 8259 JSON text via json::parse over the byte range (allow_exceptions=false, comments rejected), parsed into nlohmann::json",
+      "command": "python3 scripts/run_project.py json cpp nlohmann-json",
+      "receipt": "projects/json/cpp/nlohmann-json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 1147,
+      "format_specific_source_lines_covered": 134,
       "error": null
     }
   ],
