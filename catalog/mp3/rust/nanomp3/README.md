@@ -31,3 +31,10 @@
 ## Verification scope
 
 Both untagged valid controls give 11 frames/2,298 bytes at 44,100 Hz mono 64 kbps and 12 frames/1,254 bytes at 22,050 Hz stereo 32 kbps, 12,672 and 6,912 samples per channel, equal to the independent header walk and the minimp3 and Symphonia receipts. No LAME/Xing tag is present, so decode_all trims no delay or padding. Docker LLVM coverage: 164 own nanomp3 lines and 985 underlying nanomp3-core lines on the first control. AFL++ SanitizerCoverage is scoped to nanomp3, nanomp3-core and the harness crate, where the generic i16 loader and frame decoder are monomorphized: 955 vs 990 tuples, 97 and 132 unique, byte-identical maps over 5 separate processes per control. Two short CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support; no malformed, resource-use or campaign tests were run.
+
+## Run this target
+
+```sh
+python3 parsarium.py build mp3 rust nanomp3
+python3 parsarium.py run mp3 rust nanomp3 controls/mp3/tone-44k-mono.mp3
+```

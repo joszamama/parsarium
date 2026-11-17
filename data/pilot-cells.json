@@ -773,10 +773,10 @@
     {
       "ecosystem": "rust",
       "format": "mp3",
-      "status": "pilot_three_paths_search_bounded",
+      "status": "pilot_six_paths_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 3,
+      "verified_third_party_count": 6,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "mp3",
@@ -797,8 +797,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 591,
       "unique_search_hits": 350,
-      "unresolved_documentation_leads": 9,
-      "uncertainty": "Three verified package paths cover two independent parser families on two valid untagged CBR controls: Symphonia's Rust MP3 demuxer/decoder, reached directly through symphonia-bundle-mp3 and through the symphonia facade's probe and codec registry, and minimp3's C decoder through the Rust minimp3 binding. The symphonia facade is a separate package API over the same Symphonia family, not a new engine. Nine leads remain unresolved, so the verified ranks are not a claim about all MP3 parsers. Search covers the first 100 hits of six crates.io queries (591 hits, 350 unique) captured 2026-11-17; the 'mp3' query alone reports 1119 matches. Recent downloads include transitive dependency pulls and are an adoption proxy, not evidence of direct MP3 parsing use. The two controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support.",
+      "unresolved_documentation_leads": 5,
+      "uncertainty": "Six verified package paths cover four parser families on two valid untagged CBR controls: Symphonia's Rust MP3 demuxer/decoder, reached directly through symphonia-bundle-mp3 and through the symphonia facade's probe and codec registry; minimp3's C decoder through the Rust minimp3 binding and as the pure-Rust nanomp3 port; the mp3-duration frame-header scanner, which reports only a summed duration; rusty_mp3's in-house pure-Rust Layer III decoder. The symphonia facade is a separate package API over the same Symphonia family, not a new engine; nanomp3 is a separate package API over the minimp3 family (its minimp3-compatible PCM is byte-identical to scalar minimp3.h), and nanomp3-core, the decoder it re-exports, is counted only through nanomp3. Five leads remain unresolved, so the verified ranks are not a claim about all MP3 parsers. Search covers the first 100 hits of six crates.io queries (591 hits, 350 unique) captured 2026-11-17; the 'mp3' query alone reports 1119 matches. Recent downloads include transitive dependency pulls and are an adoption proxy, not evidence of direct MP3 parsing use. The two controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support.",
       "third_party_evidence": "data/rust/mp3/parsers.json",
       "third_party_control_results": "projects/mp3/rust/symphonia_bundle_mp3/verification.json",
       "runtime_evidence": "data/rust/mp3/standard.json",

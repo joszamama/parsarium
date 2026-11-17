@@ -21,3 +21,10 @@
 ## Verification scope
 
 Both untagged valid controls return 287,346,928 ns and 313,469,376 ns, equal to the independent header walk in controls/mp3/check_controls.py: 11 MPEG-1 frames x floor(1152e9/44100) ns and 12 MPEG-2 frames x floor(576e9/22050) ns. The API exposes no frame count, so the frame count is checked only through that product. Docker LLVM coverage: 122 own crate lines on the first control. AFL++ SanitizerCoverage is scoped to mp3_duration and the harness crate, where the generic from_read::<Cursor<&[u8]>> is monomorphized: 77 vs 77 tuples, 1 unique to each control, byte-identical maps over 5 separate processes per control. Covered line sets differ by two src/lib.rs lines each way (MPEG-1 vs MPEG-2 version arm, mono vs joint-stereo mode arm). The feedback differential is real but small, because the per-frame work is table-driven. Two short CBR controls do not establish VBR, Xing/Info, free-format or other layer support; no malformed, resource-use or campaign tests were run.
+
+## Run this target
+
+```sh
+python3 parsarium.py build mp3 rust mp3_duration
+python3 parsarium.py run mp3 rust mp3_duration controls/mp3/tone-44k-mono.mp3
+```

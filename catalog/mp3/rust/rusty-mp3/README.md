@@ -26,3 +26,10 @@
 ## Verification scope
 
 Both untagged valid controls give 11 frames at 44,100 Hz mono and 12 frames at 22,050 Hz stereo, 12,672 and 6,912 samples per channel, equal to the independent header walk (11 x 1152 and 12 x 576) and to the Symphonia receipts. Mp3Decoder drops a frame whose decode fails without reporting it, so the frame count is checked against the walk rather than trusted. Docker LLVM coverage: 1121 own crate lines on the first control (decoder, header, side information, Huffman, IMDCT, synthesis; encoder files 0). AFL++ SanitizerCoverage is scoped to the rusty_mp3 crate: 1082 vs 1033 tuples, 219 and 170 unique, byte-identical maps over 5 separate processes per control. Two short CBR controls do not establish VBR, Xing/Info, free-format or MPEG-2.5 support; no malformed, resource-use or campaign tests were run.
+
+## Run this target
+
+```sh
+python3 parsarium.py build mp3 rust rusty_mp3
+python3 parsarium.py run mp3 rust rusty_mp3 controls/mp3/tone-44k-mono.mp3
+```
