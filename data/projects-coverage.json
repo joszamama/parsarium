@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 47,
-    "containerized_verified": 47,
+    "catalog_paths": 48,
+    "containerized_verified": 48,
     "staged": 0,
     "standard_api_paths": 8,
     "standard_containerized_verified": 7,
@@ -1072,8 +1072,8 @@
       {
         "format": "json",
         "ecosystem": "php",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1081,9 +1081,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: PHP JSON parsing is dominated by the bundled ext/json json_decode; most popular Packagist JSON packages wrap it. Only seld/jsonlint, the highest-download package with its own pure-PHP parser, was built and control-verified. Its downloads are inflated by Composer, which depends on it but calls json_decode first and uses JsonParser for error reports. Seven own-parser or partial-own-parser leads are logged in leads.json and are not verified or ranked; four json_decode wrappers are excluded. Non-parser hits such as JWT, JSON Schema, JSONPath, JMESPath, serializers and JSON-RPC were not treated as leads. One valid nested object control does not establish complete RFC 8259 support."
+        "uncertainty": "Two PHP JSON third-party paths passed valid nested object controls and source-line coverage. JSON Machine also passed a valid nested array control and stable source-line AFL feedback, but it shares the PHP ext/json value decoder with the runtime path. Six own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall package adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",

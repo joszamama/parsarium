@@ -45,3 +45,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json php halaxa_json_machine
+python3 parsarium.py run json php halaxa_json_machine controls/json/nested-object.json
+```

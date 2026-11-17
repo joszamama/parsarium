@@ -1,14 +1,15 @@
 # JSON / PHP — pilot
 
-**Status:** pilot_one_selected_search_bounded; incomplete. 1 verified third-party paths, 1 verified standard APIs, 1 verified Docker harnesses.
+**Status:** pilot_two_selected_search_bounded; incomplete. 2 verified third-party paths, 1 verified standard APIs, 2 verified Docker harnesses.
 
-Pilot cell: PHP JSON parsing is dominated by the bundled ext/json json_decode; most popular Packagist JSON packages wrap it. Only seld/jsonlint, the highest-download package with its own pure-PHP parser, was built and control-verified. Its downloads are inflated by Composer, which depends on it but calls json_decode first and uses JsonParser for error reports. Seven own-parser or partial-own-parser leads are logged in leads.json and are not verified or ranked; four json_decode wrappers are excluded. Non-parser hits such as JWT, JSON Schema, JSONPath, JMESPath, serializers and JSON-RPC were not treated as leads. One valid nested object control does not establish complete RFC 8259 support.
+Two PHP JSON third-party paths passed valid nested object controls and source-line coverage. JSON Machine also passed a valid nested array control and stable source-line AFL feedback, but it shares the PHP ext/json value decoder with the runtime path. Six own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall package adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support.
 
 [Ranking and search limits](../../../data/php/json/ranking.md) · [Standard API inventory](../../../data/php/json/standard.json)
 
 ## Third-party parsers
 
 - [seld/jsonlint](seld-jsonlint/README.md) — verified Docker harness
+- [halaxa/json-machine](halaxa-json-machine/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 

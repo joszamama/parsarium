@@ -761,10 +761,10 @@
     {
       "ecosystem": "php",
       "format": "json",
-      "status": "pilot_one_selected_search_bounded",
+      "status": "pilot_two_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 1,
+      "verified_third_party_count": 2,
       "verified_standard_or_runtime_count": 1,
       "search_queries": [
         "json",
@@ -776,14 +776,14 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 429,
       "unique_search_hits": 314,
-      "leads_recorded": 11,
+      "leads_recorded": 10,
       "leads_by_status": {
-        "unresolved": 7,
+        "unresolved": 6,
         "excluded": 4
       },
       "ranking_metric": "Packagist total downloads",
-      "selection": "Highest Packagist download count among recorded hits whose own source parses JSON text: seld/jsonlint (252,371,311). Higher-download JSON helpers (nette/utils, symfony/serializer) wrap json_decode.",
-      "uncertainty": "Pilot cell: PHP JSON parsing is dominated by the bundled ext/json json_decode; most popular Packagist JSON packages wrap it. Only seld/jsonlint, the highest-download package with its own pure-PHP parser, was built and control-verified. Its downloads are inflated by Composer, which depends on it but calls json_decode first and uses JsonParser for error reports. Seven own-parser or partial-own-parser leads are logged in leads.json and are not verified or ranked; four json_decode wrappers are excluded. Non-parser hits such as JWT, JSON Schema, JSONPath, JMESPath, serializers and JSON-RPC were not treated as leads. One valid nested object control does not establish complete RFC 8259 support.",
+      "selection": "Two Packagist-ranked paths have passed valid controls: seld/jsonlint (252,371,311 downloads) and halaxa/json-machine (30,443,415). The second uses its own streaming Parser with PHP ext/json for each yielded member value.",
+      "uncertainty": "Two PHP JSON third-party paths passed valid nested object controls and source-line coverage. JSON Machine also passed a valid nested array control and stable source-line AFL feedback, but it shares the PHP ext/json value decoder with the runtime path. Six own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall package adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support.",
       "third_party_evidence": "data/php/json/parsers.json",
       "third_party_control_results": "data/php/json/verification.json",
       "runtime_evidence": "data/php/json/standard.json",
