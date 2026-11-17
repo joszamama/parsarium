@@ -16,17 +16,17 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | daverandom/libdns | 66,619,313 | `(new LibDNS\Decoder\DecoderFactory)->create()->decode($data)` | LibDNS |
-| 2 | pear/net_dns2 | 3,392,919 | `new Net_DNS2_Packet_Response($data, strlen($data))` | Net_DNS2 |
-| 3 | purplepixie/phpdns | 1,540,214 |  | PHPDNS |
-| 4 | mikepultz/netdns2 | 632,286 | `NetDNS2\Packet\Response` | Net_DNS2 |
-| 5 | jdwx/dns-query | 6,451 |  |  |
-| 6 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
-| 7 | appserver-io/dnsserver | 2,280 |  |  |
+| 1 | pear/net_dns2 | 3,392,919 | `new Net_DNS2_Packet_Response($data, strlen($data))` | Net_DNS2 |
+| 2 | purplepixie/phpdns | 1,540,214 |  | PHPDNS |
+| 3 | mikepultz/netdns2 | 632,286 | `NetDNS2\Packet\Response` | Net_DNS2 |
+| 4 | jdwx/dns-query | 6,451 |  |  |
+| 5 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
+| 6 | appserver-io/dnsserver | 2,280 |  |  |
 
 ## Checked, excluded or recorded separately
 
 - **amphp/dns** (excluded): Async resolver; message decoding is delegated to daverandom/libdns. No own documented message-bytes parser.
+- **daverandom/libdns** (unresolved_runnability_blocker): Fails the fuzz-engine gate: under nikic/php-fuzzer v0.0.11 run-single, the include-interceptor rewrite of src/Records/Types/DomainName.php line 25 (const FLAG_NO_COMPRESSION = \PHP_INT_SIZE === 4 ? -2147483648 : 0x80000000;) ends in 'PHP Fatal error: Constant expression contains invalid operations', so the project and its AFL++ bridge are not committed. The slot is left open.
 - **spatie/dns** (excluded): Runs the external dig command; excluded (external process, network).
 - **remotelyliving/php-dns** (excluded): Resolver wrapper; network API only.
 - **badcow/dns** (excluded): Zone-file text library; not a wire-message parser.

@@ -25,7 +25,7 @@
   },
   {
     "name": "daverandom/libdns",
-    "status": "unresolved",
+    "status": "unresolved_runnability_blocker",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 66619313,
     "found_by": "registry search hit",
@@ -33,7 +33,12 @@
     "input_api_lead": "(new LibDNS\\Decoder\\DecoderFactory)->create()->decode($data)",
     "family": "LibDNS",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 2
+    "lead_adoption_order": 2,
+    "checked_version": "v2.1.0",
+    "checked_reference": "b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a",
+    "checked_source_sha256": "224409d0d4bd301ab8c1c31093094f0abbfb8c12b058d2975dee382a4cdc2ea6",
+    "control_result": "Both controls match the oracle summaries through (new DecoderFactory)->create(null, false)->decode($data) under plain PHP (Z, AD and CD are not kept, reported as 0).",
+    "reason": "Fails the fuzz-engine gate: under nikic/php-fuzzer v0.0.11 run-single, the include-interceptor rewrite of src/Records/Types/DomainName.php line 25 (const FLAG_NO_COMPRESSION = \\PHP_INT_SIZE === 4 ? -2147483648 : 0x80000000;) ends in 'PHP Fatal error: Constant expression contains invalid operations', so the project and its AFL++ bridge are not committed. The slot is left open."
   },
   {
     "name": "spatie/dns",
