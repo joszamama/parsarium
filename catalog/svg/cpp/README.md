@@ -1,12 +1,12 @@
 # SVG / C++
 
-10 verified third-party API paths; 8 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/svg/ranking.md) · [standard API inventory](../../../data/cpp/svg/standard.json)
 
 ## Third-party parsers
 
-- [librsvg](librsvg/README.md) — verified API path
+- [librsvg](librsvg/README.md) — Docker harness ready
 - [libvips](libvips/README.md) — Docker harness ready
 - [imagemagick](imagemagick/README.md) — Docker harness ready
 - [resvg](resvg/README.md) — verified API path

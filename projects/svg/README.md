@@ -15,6 +15,7 @@
 - [gdk-pixbuf / C++](cpp/gdk_pixbuf/README.md)
 - [imagemagick / C++](cpp/imagemagick/README.md)
 - [juce / C++](cpp/juce/README.md)
+- [librsvg / C++](cpp/librsvg/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [lunasvg / C++](cpp/lunasvg/README.md)
 - [qtsvg / C++](cpp/qtsvg/README.md)
