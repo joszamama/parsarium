@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 142,
-    "containerized_verified": 142,
+    "catalog_paths": 143,
+    "containerized_verified": 143,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 11,
@@ -1264,8 +1264,8 @@
       {
         "format": "xml",
         "ecosystem": "cpp",
-        "catalog_paths": 4,
-        "containerized_verified": 4,
+        "catalog_paths": 5,
+        "containerized_verified": 5,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1273,9 +1273,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_four_selected_search_bounded",
+        "status": "pilot_five_selected_search_bounded",
         "complete": false,
-        "uncertainty": "All four C++ XML paths pass the namespace-aware catalog control with source coverage and AFL++ feedback. Xerces-C++, pugixml and libxml++ pass the shared second valid control; TinyXML2 uses a no-processing-instruction variant because it rejects that instruction. libxml++ parser-only feedback and native libxml2 parser.c lines are repeatable and input-dependent. The bounded search covered four named format-specific libraries, so other C++ XML packages remain unmeasured. Homebrew install-on-request orders the first three differently and its libxml++ formula is an older ABI. The libxml++ 275 Debian dev installs sum three ABIs, while its matching ABI-5 package has seven. Two small valid UTF-8 controls cannot establish complete XML 1.0, DTD/entity, encoding or malformed-input behavior."
+        "uncertainty": "All five C++ XML paths pass the namespace-aware catalog control with source coverage and AFL++ feedback. Xerces-C++, pugixml, libxml++ and RapidXML pass the shared second valid control; TinyXML2 uses a no-processing-instruction variant because it rejects that instruction, while RapidXML's default flags skip it. libxml++ parser-only feedback and native libxml2 parser.c lines are repeatable and input-dependent. The bounded search covered five named format-specific libraries, so other C++ XML packages remain unmeasured. Homebrew install-on-request orders the first three differently and its libxml++ formula is an older ABI; RapidXML has no Homebrew formula. The libxml++ 275 Debian dev installs sum three ABIs, while its matching ABI-5 package has seven. RapidXML's 17 librapidxml-dev installations, none with recent use, are a weak adoption signal and exclude vendored or Boost-embedded copies. Two small valid UTF-8 controls cannot establish complete XML 1.0, DTD/entity, encoding or malformed-input behavior."
       },
       {
         "format": "xml",
