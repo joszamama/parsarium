@@ -47,6 +47,56 @@
     }
   },
   {
+    "name": "mp3spi",
+    "group": "com.googlecode.soundlibs",
+    "artifact": "mp3spi",
+    "version": "1.9.5.4",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "Pinned MpegAudioFileReader.java and DecodedMpegAudioInputStream.java source headers specify GNU Library General Public License version 2 or later; Maven Central metadata says LGPL 2.1.",
+    "input_api": "new MpegAudioFileReader().getAudioInputStream(BufferedInputStream(ByteArrayInputStream(local bytes))); new MpegFormatConversionProvider().getAudioInputStream(PCM_SIGNED, encoded); read all decoded PCM samples",
+    "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/spi/AudioFileReader.html",
+    "documentation_extra": "https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar",
+    "documentation_archive_entries": [
+      "javazoom/spi/mpeg/sampled/file/MpegAudioFileReader.java",
+      "javazoom/spi/mpeg/sampled/convert/MpegFormatConversionProvider.java",
+      "javazoom/spi/mpeg/sampled/convert/DecodedMpegAudioInputStream.java"
+    ],
+    "source": "https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar",
+    "scope": "MP3SPI directly reads an untagged local MPEG Layer III stream and converts every frame to PCM through its provider and soundlibs JLayer; reports sample rate, channels, frame count and decoded samples per channel",
+    "family": "JavaZoom JLayer via MP3SPI Java Sound provider and soundlibs JLayer fork",
+    "family_note": "MP3SPI has its own MpegAudioFileReader and DecodedMpegAudioInputStream parser path, but decoding delegates to soundlibs JLayer 1.0.1.4, the same JLayer decoder lineage as javazoom:jlayer. This is a distinct public API/package path, not an independent decoder engine. Its Java Sound SPI services are third party, not part of Java SE.",
+    "adapter_label": "mp3spi",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "codec": "MP3",
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "decoded_samples": 12672
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "codec": "MP3",
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "decoded_samples": 6912
+    },
+    "project": "projects/mp3/java/mp3spi",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 55,
+      "max_release": "1.9.5.4",
+      "max_release_direct_dependent_count": 38,
+      "default_release_direct_dependent_count": 38,
+      "releases": 3,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.googlecode.soundlibs%3Amp3spi",
+      "captured_at_utc": "2026-11-17T03:47:08.481605+00:00",
+      "snapshot": "data/java/mp3/registry-snapshot.json"
+    },
+    "underlying_family": "JavaZoom JLayer Layer III decoder"
+  },
+  {
     "name": "jlayer",
     "group": "javazoom",
     "artifact": "jlayer",
@@ -93,6 +143,7 @@
       "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/javazoom%3Ajlayer/versions/1.0.1:dependents",
       "captured_at_utc": "2026-11-17T03:47:08.029009+00:00",
       "snapshot": "data/java/mp3/registry-snapshot.json"
-    }
+    },
+    "underlying_family": "JavaZoom JLayer Layer III decoder"
   }
 ]

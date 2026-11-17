@@ -1,35 +1,35 @@
-# JAVA × MP3: selected parsers (pilot)
+# JAVA × MP3: selected parsers
 
-2 control-verified third-party paths selected. The ceiling is ten; this pilot builds only candidates whose own Java code parses and decodes untagged MPEG Layer III frames, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+3 control-verified third-party paths selected. The ceiling is ten; selection requires source-visible Java parsing and decoding of untagged MPEG Layer III streams and is not padded. A path is a package/API route, not necessarily an independent decoder engine.
 
-The selected [jcodec](../../../projects/mp3/java/jcodec/README.md) 0.2.5 path synchronizes every frame with `MPEGAudioDemuxer` and decodes each one with its pure-Java `Mp3Decoder`. It is the same JCodec family already counted in the active Java MP3-with-ID3v2 cell. [JLayer](../../../projects/mp3/java/jlayer/README.md) 1.0.1 uses its own `Bitstream`, `Header` and `LayerIIIDecoder` and is independent of JCodec; the soundlibs and libGDX JLayer releases share JLayer lineage.
+[JCodec](../../../projects/mp3/java/jcodec/README.md) 0.2.5 synchronizes and decodes each frame with its own Java code. [MP3SPI](../../../projects/mp3/java/mp3spi/README.md) 1.9.5.4 uses its `MpegAudioFileReader` and `DecodedMpegAudioInputStream` Java Sound path, then the soundlibs JLayer fork for frame decoding. [JLayer](../../../projects/mp3/java/jlayer/README.md) 1.0.1 uses `Bitstream`, `Header`, and `LayerIIIDecoder` directly. MP3SPI and JLayer are distinct package/API paths within the same decoder lineage; JCodec is an independent decoder family.
 
 ## Primary within-cell adoption metric
 
-deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). The single-release maximum is recorded as a cross-check. The count covers the whole jcodec library, not MP3 use alone.
+deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). The single-release maximum is recorded as a cross-check. The count covers whole-package dependency use, not MP3 calls alone.
 
 | Rank | Package | Release | Metric | Max single release | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | ---: | --- | --- |
 | 1 | [org.jcodec:jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 76 | 44 (0.2.5) | Every frame of an untagged stream: codec, sample rate, channels, frames, decoded samples | JCodec native MPEG audio demuxer |
-| 2 | [javazoom:jlayer](https://javadoc.io/static/javazoom/jlayer/1.0.1/javazoom/jl/decoder/Bitstream.html) | 1.0.1 | 33 | 33 (1.0.1) | Full Layer III frame and PCM sample decode from local InputStream | Original JavaZoom JLayer decoder |
+| 2 | [com.googlecode.soundlibs:mp3spi](https://central.sonatype.com/artifact/com.googlecode.soundlibs/mp3spi/1.9.5.4) | 1.9.5.4 | 55 | 38 (1.9.5.4) | Direct Java Sound reader and converter over every untagged Layer III frame, with PCM decode through soundlibs JLayer | JavaZoom JLayer via MP3SPI and soundlibs fork |
+| 3 | [javazoom:jlayer](https://javadoc.io/static/javazoom/jlayer/1.0.1/javazoom/jl/decoder/Bitstream.html) | 1.0.1 | 33 | 33 (1.0.1) | Full Layer III frame and PCM sample decode from local InputStream | Original JavaZoom JLayer decoder |
 
-Controls: `controls/mp3/tone-44k-mono.mp3` gives MP3, 44,100 Hz, 1 channel, 11 frames, 12,672 samples; the AFL++ differential `controls/mp3/tone-22k-stereo.mp3` gives 22,050 Hz, 2 channels, 12 frames, 6,912 samples. Both match the independent header walker and libmpg123 pilot. JaCoCo covers 1,142 JCodec and 1,724 JLayer source lines on the primary control, including 656 in JLayer's `LayerIIIDecoder.java`. Three identical JLayer control probes produce the same AFL++ map; the stereo control changes 239 parser-derived tuple IDs ([JLayer differential receipt](jlayer-feedback-differential.json)).
+Controls: `controls/mp3/tone-44k-mono.mp3` gives MP3, 44,100 Hz, 1 channel, 11 frames, 12,672 samples; the AFL++ differential `controls/mp3/tone-22k-stereo.mp3` gives 22,050 Hz, 2 channels, 12 frames, 6,912 samples. Both match the independent header walker and libmpg123 pilot. JaCoCo covers 1,142 JCodec and 1,724 JLayer source lines on the primary control. MP3SPI covers 220 of its own source lines, including 80 in `DecodedMpegAudioInputStream.java`, and separately 1,739 soundlibs JLayer lines including `LayerIIIDecoder.java`. The two valid streams produce distinct parser-derived AFL++ feedback in all three paths. For MP3SPI, the 220 wrapper lines are identical across controls while the soundlibs JLayer core differs by 242 source-line features and 240 AFL++ tuple IDs ([MP3SPI differential receipt](mp3spi-feedback-differential.json), [JLayer differential receipt](jlayer-feedback-differential.json)).
 
 javacv (315) and org.bytedeco:ffmpeg (215) have higher counts but are JNI wrappers: MP3 parsing runs in native FFmpeg, with no Java parser source to cover. They are excluded here, not ranked.
 
 ## Standard API (none)
 
-OpenJDK 25.0.5 Java Sound has readers for WAV, AU and AIFF only; `AudioSystem.getAudioFileFormat` and `getAudioInputStream` throw `UnsupportedAudioFileException` on the primary control. Details in [standard.json](standard.json).
+OpenJDK 25.0.5 Java Sound without third-party providers has readers for WAV, AU and AIFF only; `AudioSystem.getAudioFileFormat` and `getAudioInputStream` throw `UnsupportedAudioFileException` on the primary control. Details in [standard.json](standard.json).
 
 ## Lead log
 
-Looked up on deps.dev; none is a verified entry.
+Looked up on deps.dev; selected entries are removed from this lead log.
 
 | Lead | Version seen | Summed direct dependents | Max single release | Status | Note |
 | --- | --- | ---: | ---: | --- | --- |
 | [org.bytedeco:javacv](https://central.sonatype.com/artifact/org.bytedeco/javacv) | 1.5.14 | 315 | 69 | excluded_native_wrapper | FFmpegFrameGrabber is a JNI wrapper; MP3 frame parsing and decoding run in native FFmpeg (libavformat/libavcodec), so there are no Java parser source lines for JaCoCo. The C/FFmpeg family belongs to a native cell. Recorded as FFmpeg family in data/java/mp3_id3v2/parsers.json. |
 | [org.bytedeco:ffmpeg](https://central.sonatype.com/artifact/org.bytedeco/ffmpeg) | 8.1.2-1.5.14 | 215 | 76 | excluded_native_wrapper | JavaCPP binding to the same native FFmpeg demuxer and decoder as javacv; no Java parser source. Not run. |
-| [com.googlecode.soundlibs:mp3spi](https://central.sonatype.com/artifact/com.googlecode.soundlibs/mp3spi) | 1.9.5.4 | 55 | 38 | unresolved | Java Sound SPI (MpegAudioFileReader) over the soundlibs JLayer fork, a pure-Java Layer III decoder; next-highest Java parser lead (55). Control not run in this pilot. Same JLayer lineage as javazoom:jlayer. |
 | [ws.schild:jave-core](https://central.sonatype.com/artifact/ws.schild/jave-core) | 4.2.0 | 52 | 9 | excluded_native_wrapper | Runs a bundled ffmpeg executable and parses its text output; parser is native FFmpeg. Not run. |
 | [com.badlogicgames.jlayer:jlayer](https://central.sonatype.com/artifact/com.badlogicgames.jlayer/jlayer) | 1.0.2-gdx | 30 | 26 | unresolved_shared_family | libGDX repackaging of JLayer; same decoder family as javazoom:jlayer. Not run. |
 | [com.googlecode.soundlibs:jlayer](https://central.sonatype.com/artifact/com.googlecode.soundlibs/jlayer) | 1.0.1.4 | 28 | 14 | unresolved_shared_family | Maintained fork of javazoom JLayer; same decoder family as javazoom:jlayer. Not run. |

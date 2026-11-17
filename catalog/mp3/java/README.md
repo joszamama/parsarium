@@ -1,16 +1,17 @@
-# MP3 / Java — pilot
+# MP3 / Java
 
-**Status:** pilot_two_selected_search_bounded; incomplete. 2 verified third-party paths, 0 verified standard APIs, 2 verified Docker harnesses.
+**Status:** Three verified third-party paths and no Java SE MP3 API. The search is bounded at ten selected paths; this cell has not reached that ceiling.
 
-Pilot cell: two pure-Java MPEG Layer III paths verified; no padding. Maven Central Solr phrase queries returned no hits, so named leads were inspected via deps.dev and Maven documentation. deps.dev coverage is incomplete and counts all dependency use of each package, not MP3-specific calls. The higher-count mp3spi Java Sound SPI wrapper over soundlibs JLayer remains unverified. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory.
+JCodec, MP3SPI, and JLayer parse and decode both untagged MPEG Layer III controls in pinned Docker images. MP3SPI uses its own Java Sound reader and converter, then soundlibs JLayer for frame decoding. It shares JLayer's decoder lineage, so the three paths represent two decoder families. deps.dev direct-dependent counts are comparable within Maven but count use of the whole package, not MP3-specific calls. The controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, or ID3 behavior.
 
 [Ranking and search limits](../../../data/java/mp3/ranking.md) · [Standard API inventory](../../../data/java/mp3/standard.json)
 
 ## Third-party parsers
 
 - [jcodec](jcodec/README.md) — verified Docker harness
+- [mp3spi](mp3spi/README.md) — verified Docker harness
 - [jlayer](jlayer/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 
-None verified in this pilot cell yet.
+No MP3 reader is included in the tested Java SE 25 runtime. MP3SPI is a third-party Java Sound service.

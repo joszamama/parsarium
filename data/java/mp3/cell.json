@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "mp3",
-  "status": "pilot_two_selected_search_bounded",
+  "status": "three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "mp3",
@@ -23,19 +23,18 @@
   },
   "search_hits_recorded": 112,
   "unique_search_hits": 112,
-  "unresolved_documentation_leads": 10,
+  "unresolved_documentation_leads": 9,
   "leads_by_status": {
-    "selected": 1,
     "excluded_native_wrapper": 4,
-    "unresolved": 5,
     "unresolved_shared_family": 4,
+    "unresolved": 4,
     "excluded": 1,
     "unresolved_no_primary_metric": 1
   },
   "ranking_metric": "deps.dev directDependentCount summed over all releases",
-  "selection": "jcodec 0.2.5 (76 summed deps.dev direct dependents) and JLayer 1.0.1 (33) are two pure-Java Layer III parser/decoder paths with exact two-control results, own source line coverage and stable parser-derived AFL++ feedback. Higher-count javacv and ffmpeg artifacts wrap native FFmpeg; mp3spi (55) remains an unresolved JLayer-family wrapper.",
-  "family_note": "JCodec is the same package family as its active MP3-with-ID3v2 path. JLayer is an independent pure-Java decoder family; its soundlibs, libGDX and dev.mccue forks share that lineage.",
-  "uncertainty": "Pilot cell: two pure-Java MPEG Layer III paths verified; no padding. Maven Central Solr phrase queries returned no hits, so named leads were inspected via deps.dev and Maven documentation. deps.dev coverage is incomplete and counts all dependency use of each package, not MP3-specific calls. The higher-count mp3spi Java Sound SPI wrapper over soundlibs JLayer remains unverified. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory.",
+  "selection": "JCodec 0.2.5 (76), MP3SPI 1.9.5.4 (55) and JLayer 1.0.1 (33) have comparable summed deps.dev direct dependents, exact two-control Layer III PCM results, own Java source-line coverage and stable parser-derived AFL++ feedback. MP3SPI also covers its soundlibs JLayer decoder separately and shares the original JLayer decoder lineage.",
+  "family_note": "JCodec is independent of JLayer. MP3SPI has its own Java Sound reader/conversion path but delegates decoding to soundlibs JLayer, a fork of the selected javazoom:jlayer lineage; these are distinct package/API paths, not three independent decoder families.",
+  "uncertainty": "Three pure-Java Layer III paths verified; no padding. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory.",
   "third_party_evidence": "data/java/mp3/parsers.json",
   "third_party_control_results": "data/java/mp3/verification.json",
   "afl_feedback": "data/java/mp3/afl-feedback.json",
@@ -43,5 +42,5 @@
   "registry_snapshot": "data/java/mp3/registry-snapshot.json",
   "unresolved_leads": "data/java/mp3/leads.json",
   "protocol": "catalog/mp3/PROTOCOL.md",
-  "leads_recorded": 15
+  "leads_recorded": 14
 }
