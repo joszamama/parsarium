@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T19:12:10.993865+00:00",
+  "checked_at_utc": "2026-11-17T19:54:09.989858+00:00",
   "controls": {
     "response": "controls/dns/response.bin",
     "query_differential": "controls/dns/query.bin"
@@ -167,6 +167,85 @@
         "runs_per_control": 3
       },
       "feedback_receipt": "data/go/dns/github-com-google-gopacket-layers-feedback-differential.json"
+    },
+    {
+      "package": "golang.org/x/net/dns/dnsmessage",
+      "version": "v0.63.0",
+      "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+      "command": "python3 scripts/run_project.py dns go golang_org_x_net_dns_dnsmessage",
+      "feedback_command": "python3 scripts/verify_dns_feedback.py dns/go/golang_org_x_net_dns_dnsmessage",
+      "receipt": "projects/dns/go/golang_org_x_net_dns_dnsmessage/verification.json",
+      "control": "controls/dns/response.bin",
+      "pass": true,
+      "output": {
+        "aa": 0,
+        "additional": [],
+        "ancount": 4,
+        "answers": [
+          {
+            "class": 1,
+            "name": "www.example.test.",
+            "rdata": "example.test.",
+            "ttl": 3600,
+            "type": 5
+          },
+          {
+            "class": 1,
+            "name": "example.test.",
+            "rdata": "192.0.2.10",
+            "ttl": 300,
+            "type": 1
+          },
+          {
+            "class": 1,
+            "name": "example.test.",
+            "rdata": "2001:db8::10",
+            "ttl": 600,
+            "type": 28
+          },
+          {
+            "class": 1,
+            "name": "example.test.",
+            "rdata": "10 mail.example.test.",
+            "ttl": 7200,
+            "type": 15
+          }
+        ],
+        "arcount": 0,
+        "authority": [],
+        "id": 43981,
+        "nscount": 0,
+        "opcode": 0,
+        "qdcount": 1,
+        "qr": 1,
+        "questions": [
+          {
+            "class": 1,
+            "name": "www.example.test.",
+            "type": 1
+          }
+        ],
+        "ra": 1,
+        "rcode": 0,
+        "rd": 1,
+        "tc": 0,
+        "z": 0
+      },
+      "differential_control": "controls/dns/query.bin",
+      "differential_output_matches": true,
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 203,
+      "format_specific_source_lines_covered": 203,
+      "afl_feedback": {
+        "control_parser_features": 115,
+        "variant_parser_features": 78,
+        "parser_feature_difference": 37,
+        "control_afl_tuples": 135,
+        "variant_afl_tuples": 98,
+        "afl_tuple_difference": 37,
+        "runs_per_control": 3
+      },
+      "feedback_receipt": "data/go/dns/golang-org-x-net-dns-dnsmessage-feedback-differential.json"
     }
   ]
 }

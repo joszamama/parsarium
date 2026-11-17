@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-11-17T19:53:04.532598+00:00",
+  "project": "dns/go/golang_org_x_net_dns_dnsmessage",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "golang.org/x/net/dns/dnsmessage/",
+  "base_image_id": "sha256:42a8d6993f2b32b725eab13763f0948a7b8fe7cc6d9565a3176ca1aa908e1392",
+  "overlay_image_id": "sha256:a174063a3e78a3ae95e75a2f1ae9b70ee98226e9c4dbdb58c884e988fa14c3b4",
+  "overlay_receipt_sha256": "2331356a90a74c1708af2c6b12999f8f13fe2cf1db06ae90a8a34aefd9f044d3",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 115,
+  "variant_parser_features": 78,
+  "parser_feature_difference": 37,
+  "control_afl_tuples": 135,
+  "variant_afl_tuples": 98,
+  "afl_tuple_difference": 37,
+  "control_features_by_file": {
+    "golang.org/x/net/dns/dnsmessage/message.go": 115
+  },
+  "variant_features_by_file": {
+    "golang.org/x/net/dns/dnsmessage/message.go": 78
+  },
+  "mutation_campaign_run": false
+}
