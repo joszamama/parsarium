@@ -28,10 +28,12 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 
 | Order | Lead | Metric | Input API lead | Family | Status |
 | ---: | --- | ---: | --- | --- | --- |
-| 1 | dnsjit | 4 | `Lua core.object.dns (parse) inside the dnsjit engine` | DNS-OARC dnsjit core.object.dns | unresolved |
-| 2 | mdns | missing | `` | mjansson/mdns (header-only mDNS) | unresolved_no_primary_metric |
-| 3 | pro-mdnsd | missing | `` | mdnsd (Jeremie Miller) fork | unresolved_no_primary_metric |
+| 1 | mdnsd | 28 | `int message_parse(struct message *m, unsigned char *packet) (libmdnsd/1035.h)` | mdnsd (Jeremie Miller's 1035.c, troglobit fork) | unresolved_control_failure |
+| 2 | dnsjit | 4 | `Lua core.object.dns (parse) inside the dnsjit engine` | DNS-OARC dnsjit core.object.dns | unresolved |
+| 3 | mdns | missing | `` | mjansson/mdns (header-only mDNS) | unresolved_no_primary_metric |
+| 4 | pro-mdnsd | missing | `` | mdnsd (Jeremie Miller) fork | unresolved_no_primary_metric |
 
+- **mdnsd**: Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library.
 - **dnsjit**: Not attempted this round. dnsjit is a LuaJIT engine program: Debian builds dnsjit and an Architecture: all dnsjit-dev that installs only usr/include and man3 pages, so there is no linkable C library; the documented parser is the Lua core.object.dns module, which a harness would have to drive through the dnsjit executable and a Lua script.
 - **mdns**: Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells.
 - **pro-mdnsd**: Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells.
@@ -49,3 +51,17 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 - **libjdns** (excluded): Resolver/mDNS session library. src/jdns/CMakeLists.txt installs only jdns.h and jdns_export.h as public headers; the packet decoder (jdns_packet.h) is private, so no documented API parses caller-supplied message bytes.
 - **djbdns** (excluded): Server and client programs; Debian builds no library or development package, and the dns_packet_* routines are internal to the programs.
 - **mdnsresponder** (excluded): No Debian source package (no primary metric); its public dns_sd.h API registers, browses and resolves services over the daemon and documents no parser for caller-supplied message bytes.
+- **avahi** (excluded): mDNS/DNS-SD daemon and libraries; libavahi-core-dev installs core, lookup, publish, rr and log headers but not the packet decoder (avahi-core/dns.h is internal), so there is no documented API for caller-supplied message bytes.
+- **systemd** (excluded): systemd-resolved's DNS packet code is internal to the daemon; libsystemd-dev installs no DNS message parser API.
+- **nss-mdns** (excluded): NSS module that resolves .local names through the Avahi daemon; no DNS message parser API.
+- **dnsmasq** (excluded): DNS forwarder and DHCP server program; Debian builds no library or development package.
+- **libpcap** (excluded): Packet-capture library; it reads frames and does not decode DNS messages.
+- **libnet** (excluded): Packet construction library (libnet_build_dnsv4 builds headers); it does not parse DNS messages.
+- **wireshark** (excluded): libwireshark (libwireshark-dev) dissects captured frames through its epan dissector framework; the DNS dissector is a registered dissector (packet-dns.c), not a documented library API for caller-supplied DNS message bytes.
+- **sofia-sip** (excluded): SIP stack; its sresolv/sres resolver sends queries and returns record structures (sres_record.h), decoding replies inside the resolver; no API for caller-supplied message bytes.
+- **ndpi** (excluded): Deep-packet-inspection flow classifier over IP packets; it extracts DNS metadata (query name, response addresses) for classification and exposes no message decoder.
+- **knot-resolver** (excluded): Resolver daemon and libkres; DNS messages are parsed with libknot, whose packet parser is already selected as the knot path.
+- **lwip** (excluded): Embedded TCP/IP stack; lwip/dns.h is a resolver (dns_gethostbyname) and lwip/apps/mdns.h a responder, both parsing replies internally; no API for caller-supplied message bytes.
+- **libowfat** (excluded): Its dns.h carries djbdns's routines (excluded djbdns family): dns_packet_copy/getname/skipname primitives and per-type answer extractors such as dns_ip4_packet and dns_mx_packet; no decoder of the header, questions and record sections.
+- **libtrace3** (excluded): Trace-processing library; libpacketdump's protocol decoders print packets read from capture traces and need link-layer frames, with no documented API that returns a decoded DNS message.
+- **ruli** (excluded): SRV resolver library (asynchronous queries); no API for caller-supplied message bytes.

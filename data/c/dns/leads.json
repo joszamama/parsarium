@@ -221,5 +221,147 @@
     "documentation": "https://github.com/Pro/mdnsd",
     "family": "mdnsd (Jeremie Miller) fork",
     "reason": "Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells."
+  },
+  {
+    "name": "mdnsd",
+    "status": "unresolved_control_failure",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "family": "mdnsd (Jeremie Miller's 1035.c, troglobit fork)",
+    "checked_version": "v1.2",
+    "documentation": "https://packages.debian.org/sid/libmdnsd-dev",
+    "input_api_lead": "int message_parse(struct message *m, unsigned char *packet) (libmdnsd/1035.h)",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library.",
+    "primary_metric_value": 28,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 6
+  },
+  {
+    "name": "avahi",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "mDNS/DNS-SD daemon and libraries; libavahi-core-dev installs core, lookup, publish, rr and log headers but not the packet decoder (avahi-core/dns.h is internal), so there is no documented API for caller-supplied message bytes.",
+    "primary_metric_value": 221882,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 7
+  },
+  {
+    "name": "systemd",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "systemd-resolved's DNS packet code is internal to the daemon; libsystemd-dev installs no DNS message parser API.",
+    "primary_metric_value": 297072,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 8
+  },
+  {
+    "name": "nss-mdns",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "NSS module that resolves .local names through the Avahi daemon; no DNS message parser API.",
+    "primary_metric_value": 150803,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 9
+  },
+  {
+    "name": "dnsmasq",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "DNS forwarder and DHCP server program; Debian builds no library or development package.",
+    "primary_metric_value": 149868,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 10
+  },
+  {
+    "name": "libpcap",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "Packet-capture library; it reads frames and does not decode DNS messages.",
+    "primary_metric_value": 126795,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 11
+  },
+  {
+    "name": "libnet",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "Packet construction library (libnet_build_dnsv4 builds headers); it does not parse DNS messages.",
+    "primary_metric_value": 38354,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 12
+  },
+  {
+    "name": "wireshark",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "libwireshark (libwireshark-dev) dissects captured frames through its epan dissector framework; the DNS dissector is a registered dissector (packet-dns.c), not a documented library API for caller-supplied DNS message bytes.",
+    "primary_metric_value": 16012,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 13
+  },
+  {
+    "name": "sofia-sip",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "SIP stack; its sresolv/sres resolver sends queries and returns record structures (sres_record.h), decoding replies inside the resolver; no API for caller-supplied message bytes.",
+    "primary_metric_value": 572,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 14
+  },
+  {
+    "name": "ndpi",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "Deep-packet-inspection flow classifier over IP packets; it extracts DNS metadata (query name, response addresses) for classification and exposes no message decoder.",
+    "primary_metric_value": 85,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 15
+  },
+  {
+    "name": "knot-resolver",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "family": "libknot",
+    "reason": "Resolver daemon and libkres; DNS messages are parsed with libknot, whose packet parser is already selected as the knot path.",
+    "primary_metric_value": 55,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 16
+  },
+  {
+    "name": "lwip",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "Embedded TCP/IP stack; lwip/dns.h is a resolver (dns_gethostbyname) and lwip/apps/mdns.h a responder, both parsing replies internally; no API for caller-supplied message bytes.",
+    "primary_metric_value": 31,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 17
+  },
+  {
+    "name": "libowfat",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "family": "djbdns",
+    "reason": "Its dns.h carries djbdns's routines (excluded djbdns family): dns_packet_copy/getname/skipname primitives and per-type answer extractors such as dns_ip4_packet and dns_mx_packet; no decoder of the header, questions and record sections.",
+    "primary_metric_value": 28,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 18
+  },
+  {
+    "name": "libtrace3",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "Trace-processing library; libpacketdump's protocol decoders print packets read from capture traces and need link-layer frames, with no documented API that returns a decoded DNS message.",
+    "primary_metric_value": 15,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 19
+  },
+  {
+    "name": "ruli",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "reason": "SRV resolver library (asynchronous queries); no API for caller-supplied message bytes.",
+    "primary_metric_value": 7,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 20
   }
 ]
