@@ -49,13 +49,14 @@
   {
     "name": "json-simple",
     "coordinate": "com.googlecode.json-simple:json-simple",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "1.1.1",
     "summed_direct_dependent_count": 1557,
     "max_release_direct_dependent_count": 1163,
     "default_release_direct_dependent_count": 1163,
-    "reason": "JSONParser.parse(Reader) with a JFlex lexer; single 2012 release. Highest default-release count only because of version-age bias. Control not run.",
-    "source": "https://central.sonatype.com/artifact/com.googlecode.json-simple/json-simple"
+    "reason": "Own JSONParser and generated JFlex Yylex lexer; pinned 1.1.1 release, local Reader API, two valid controls, JaCoCo parser-source lines, and input-dependent AFL++ feedback verified. High default-release count is age-skewed; common summed metric is used.",
+    "source": "https://central.sonatype.com/artifact/com.googlecode.json-simple/json-simple",
+    "evidence": "data/java/json/parsers.json"
   },
   {
     "name": "json-smart",

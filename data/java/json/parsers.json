@@ -295,6 +295,65 @@
     "metric_note": "The snapshot default version is an Android 8 variant; the ordinary 2.0.66 release is pinned for this Java SE harness."
   },
   {
+    "name": "json-simple",
+    "group": "com.googlecode.json-simple",
+    "artifact": "json-simple",
+    "version": "1.1.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; POM SHA256 in source-lock.json",
+    "input_api": "new org.json.simple.parser.JSONParser().parse(InputStreamReader(FileInputStream, UTF_8))",
+    "documentation": "https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1-sources.jar",
+    "scope": "Valid nested JSON object/array documents from local UTF-8 Reader, mapped to JSONObject/JSONArray/String/Number/Boolean/null; parser consumes EOF after one root",
+    "family": "json-simple JSONParser with generated JFlex Yylex lexer",
+    "family_note": "The pinned jar contains its own JSONParser and generated Yylex lexer; no selected Jackson, Gson, org.json, fastjson2, or json-smart engine underlies this path. JUnit is a POM dependency but is not used by the local Reader parser in the verified container.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/json_simple",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 1557,
+      "max_release": "1.1.1",
+      "max_release_direct_dependent_count": 1163,
+      "default_release_direct_dependent_count": 1163,
+      "releases": 2,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.googlecode.json-simple%3Ajson-simple",
+      "captured_at_utc": "2026-11-17T03:27:35.796465+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    },
+    "metric_note": "This 2012 release is the current/default release; its default-release direct-dependent count is not directly comparable with newer packages default-release counts, so the common summed metric is used."
+  },
+  {
     "name": "json-smart",
     "group": "net.minidev",
     "artifact": "json-smart",

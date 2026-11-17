@@ -316,9 +316,54 @@
       "afl_feedback": "data/java/json/afl-feedback.json",
       "verified_at_utc": "2026-11-17T08:22:01.441331+00:00",
       "error": null
+    },
+    {
+      "package": "json-simple",
+      "group": "com.googlecode.json-simple",
+      "version": "1.1.1",
+      "scope": "Valid nested JSON object/array documents from local UTF-8 Reader, mapped to JSONObject/JSONArray/String/Number/Boolean/null; parser consumes EOF after one root",
+      "command": "python3 scripts/run_project.py json java json_simple",
+      "receipt": "projects/json/java/json_simple/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 247,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T08:34:47.632392+00:00",
+      "error": null
     }
   ],
   "standard": [],
   "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
-  "updated_at_utc": "2026-11-17T08:23:51.825013+00:00"
+  "updated_at_utc": "2026-11-17T08:37:01.769643+00:00"
 }
