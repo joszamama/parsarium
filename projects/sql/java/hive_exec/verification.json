@@ -1,0 +1,63 @@
+{
+  "kind": "third_party",
+  "api": "new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode; the harness walks the tree by token type (TOK_TABNAME, TOK_SELEXPR, TOK_JOIN family, TOK_WHERE, TOK_GROUPBY, TOK_ORDERBY, TOK_FUNCTION/TOK_FUNCTIONSTAR, TOK_INSERT_INTO, TOK_TABCOLNAME, Number and StringLiteral tokens)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:34:01.670884+00:00",
+  "manifest": "projects/sql/java/hive_exec/manifest.json",
+  "image_id": "sha256:b7bb3c30512af0e73ac0056dcd2f1f85c0714cd20d6dd58e0e1fa599989abd2d",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "d2708ee7e5848e867da03824829281ec7aa342eda1175ecc4ba3168d03f3c1b4",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "25cea4093aafa858e56a46e1031ac05339da23042a9d9d0e8917fd2657a423b9",
+    "SqlHarness.java": "093472418a3b485914581c95774b73811a5f7a70c8fe996351ab3936fbf52f98",
+    "manifest.json": "f52c504df275dbe5191802efba036e8a43daebbb830c8d02c20411ea2b4d0a6e",
+    "prepare-coverage.sh": "24b72f961ff29fe353cddb5dab1353b8f7c75b57c5437f9a2d9d864220a544f6",
+    "run-control.sh": "565252d6da04f31ce97aebc71414d9fc6651b6e1f226f6a8cba233f455aa5925",
+    "source-lock.json": "2eee7c0bc6c706fb814b78eed4d9bf62bc82e41a0d61e82e8fb8aff02925cd5d"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 19,
+  "parser_source_lines_covered": 5257,
+  "format_specific_source_lines_covered": 71,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/hive_exec/target/coverage/coverage.json",
+  "pass": true
+}

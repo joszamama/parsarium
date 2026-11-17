@@ -449,6 +449,119 @@
     }
   },
   {
+    "name": "org.apache.hive:hive-exec",
+    "version": "4.2.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (hive-4.2.1.pom inherits org.apache:apache:23, Apache License, Version 2.0; META-INF/LICENSE in the jar)",
+    "input_api": "new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode",
+    "documentation": "https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r4.2.1/api/org/apache/hadoop/hive/ql/parse/ParseDriver.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/hive/hive-parser/4.2.1/hive-parser-4.2.1-sources.jar",
+    "source_sha256": "d2708ee7e5848e867da03824829281ec7aa342eda1175ecc4ba3168d03f3c1b4",
+    "jar_sha256": "38c114a22a8f93588c3f9829a5451edc45a6e439bd50d73ee0c63185fcca3838",
+    "dependencies": [
+      "org.slf4j:slf4j-api 1.7.36",
+      "com.fasterxml.woodstox:woodstox-core 5.4.0",
+      "commons-collections:commons-collections 3.2.2",
+      "org.apache.hadoop:hadoop-common 3.4.1",
+      "org.apache.hadoop.thirdparty:hadoop-shaded-guava 1.3.0",
+      "org.codehaus.woodstox:stax2-api 4.2.1",
+      "org.antlr:antlr-complete 3.5.2"
+    ],
+    "dialect": "HiveQL (ParseDriver.parse without a Configuration: default lexer, standard quoted-identifier handling)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, with one terminating semicolon removed by the adapter; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement parse contract; INSERT rows are the struct calls of Hive's inline(array(...)) VALUES rewrite. Configuration-dependent lexing and HiveQL-only syntax are untested.",
+    "family": "Apache Hive ANTLR3 HiveQL grammar (HiveParser)",
+    "family_note": "ParseDriver.parse lexes with HiveLexer and parses with the ANTLR 3.5.2-generated HiveParser (which imports the FromClause, SelectClause, Identifiers and other sub-grammars) and returns an ASTNode tree of TOK_* imaginary tokens. The parser classes ship inside the hive-exec uber jar (from the hive-parser module); the hive-parser sources jar has the grammars but not the generated Java, so the image regenerates it with ANTLR 3.5.2 and checks every generated class's line table against the class in hive-exec. Parsing needs hadoop-common's Configuration class and --add-opens java.base/java.net (HiveConf static initialisation); five more jars are pinned for that. Independent of jOOQ, Druid, Calcite, JSqlParser and the Presto/Trino and Spark grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1146,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.hive%3Ahive-exec",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over hive-exec releases; hive-exec is Hive's whole execution engine, so most dependents use more than the parser. The standalone hive-parser module has 0 direct dependents."
+    },
+    "project": "projects/sql/java/hive_exec",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "com.github.jsqlparser:jsqlparser",
     "version": "5.4",
     "license": "LGPL-2.1-only OR Apache-2.0",

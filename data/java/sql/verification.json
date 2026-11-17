@@ -373,6 +373,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/java/calcite/differential.json"
     },
     {
+      "package": "org.apache.hive:hive-exec",
+      "version": "4.2.1",
+      "pass": true,
+      "input_api": "new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode",
+      "dialect": "HiveQL (ParseDriver.parse without a Configuration: default lexer, standard quoted-identifier handling)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Apache Hive ANTLR3 HiveQL grammar (HiveParser)",
+      "parser_source_files": 19,
+      "parser_source_lines_covered": 5257,
+      "afl_tuple_difference": 1730,
+      "parser_feature_difference": 1917,
+      "project_receipt": "projects/sql/java/hive_exec/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/hive_exec/differential.json"
+    },
+    {
       "package": "com.github.jsqlparser:jsqlparser",
       "version": "5.4",
       "pass": true,
@@ -558,5 +650,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:11:52.955416+00:00"
+  "checked_at_utc": "2026-11-17T20:38:31.548578+00:00"
 }

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "org.apache.hive:hive-exec",
+  "release": "4.2.1",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/hive_exec/source-lock.json",
+  "source_sha256": "d2708ee7e5848e867da03824829281ec7aa342eda1175ecc4ba3168d03f3c1b4",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "HiveQL (ParseDriver.parse without a Configuration: default lexer, standard quoted-identifier handling)",
+  "parser_family": "Apache Hive ANTLR3 HiveQL grammar (HiveLexer/HiveParser and its imported FromClause, SelectClause and Identifiers parsers) building ANTLR ASTNode trees; independent of jOOQ, Druid, Calcite, JSqlParser and the Presto/Trino and Spark ANTLR4 grammars",
+  "api": "new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode; the harness walks the tree by token type (TOK_TABNAME, TOK_SELEXPR, TOK_JOIN family, TOK_WHERE, TOK_GROUPBY, TOK_ORDERBY, TOK_FUNCTION/TOK_FUNCTIONSTAR, TOK_INSERT_INTO, TOK_TABCOLNAME, Number and StringLiteral tokens)",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/hive-exec-4.2.1.jar:/work/lib/slf4j-api-1.7.36.jar:/work/lib/woodstox-core-5.4.0.jar:/work/lib/commons-collections-3.2.2.jar:/work/lib/hadoop-common-3.4.1.jar:/work/lib/hadoop-shaded-guava-1.3.0.jar:/work/lib/stax2-api-4.2.1.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.apache.hive:hive-exec:4.2.1 org.apache.hadoop.hive.ql.parse classes that belong to the hive-parser module (hand-written ParseDriver, ASTNode and lexer helpers plus the ANTLR 3.5.2 HiveLexer and HiveParser regenerated from the pinned grammar sources, with line tables checked against the shipped classes) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/org/apache/hadoop/hive/ql/parse/HiveParser.java",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8; the adapter removes one terminating semicolon and trailing whitespace, as the Hive CLI and Beeline do, and calls ParseDriver.parse without a Configuration. Valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. parse takes one statement, so statement_count is 1 by API contract. Hive's grammar rewrites VALUES rows into inline(array(struct(...))) calls; rows are the struct calls. Configuration-dependent lexing and HiveQL-only syntax are untested."
+}

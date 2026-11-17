@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "sql",
-  "status": "pilot_six_selected_search_bounded",
+  "status": "pilot_seven_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 6,
+  "verified_third_party_count": 7,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -22,7 +22,7 @@
   "search_captured_at_utc": "2026-11-17T16:40:15.310835+00:00",
   "primary_metric": "deps.dev directDependentCount summed over every Maven release",
   "unresolved_documentation_leads": 3,
-  "uncertainty": "Six verified Java SQL paths after a bounded Maven Central search (three queries, 143 hits) and deps.dev direct dependents summed over releases for 11 targeted leads, captured 2026-11-17. org.jooq:jooq 3.21.9 (4,574), com.alibaba:druid 1.2.28 (1,945), com.facebook.presto:presto-parser 0.300 (1,453), org.apache.calcite:calcite-core 1.42.0 (1,250), com.github.jsqlparser:jsqlparser 5.4 (950) and io.trino:trino-parser 484 (525) parse both valid controls into their own ASTs, which give the oracle summary. The metrics mostly count other uses for jOOQ (query builder), Druid (JDBC connection pool) and Calcite (planner and adapters), which ship in the same jars, and every value is summed over releases. presto-parser and trino-parser share the Presto/Trino SqlBase grammar ancestry (distinct packages and diverged sources). presto-parser needs DecimalLiteralTreatment.AS_DECIMAL and StatementSplitter; trino-parser has no public splitter, so its adapter removes the terminating semicolon and statement_count is 1 by the single-statement API. The Calcite path pins only the eight jars its parser path loads. Other leads are unverified, so this is not a top-ten ranking. java.sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset.",
+  "uncertainty": "Seven verified Java SQL paths after a bounded Maven Central search (three queries, 143 hits) and deps.dev direct dependents summed over releases for 11 targeted leads, captured 2026-11-17, extended in round 2 with 14 more coordinates by the same function (Hive, Flink, Spark, ShardingSphere renames, ZetaSQL, Calcite Babel and others). org.jooq:jooq 3.21.9 (4,574), com.alibaba:druid 1.2.28 (1,945), com.facebook.presto:presto-parser 0.300 (1,453), org.apache.calcite:calcite-core 1.42.0 (1,250), org.apache.hive:hive-exec 4.2.1 (1,146), com.github.jsqlparser:jsqlparser 5.4 (950) and io.trino:trino-parser 484 (525) parse both valid controls into their own trees, which give the oracle summary. The metrics mostly count other uses for jOOQ (query builder), Druid (JDBC connection pool), Calcite (planner and adapters) and hive-exec (Hive's execution engine), and every value is summed over releases. presto-parser and trino-parser share the Presto/Trino SqlBase grammar ancestry (distinct packages and diverged sources). trino-parser and hive-exec have no public statement splitter, so their adapters remove the terminating semicolon and statement_count is 1 by the single-statement API. Hive's coverage sources are regenerated with ANTLR 3.5.2 from the pinned grammars and checked against the shipped line tables. The Calcite and Hive paths pin only the jars their parser paths load. Other leads are unverified, so this is not a top-ten ranking. java.sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/java/sql/registry-snapshot.json",
   "unresolved_leads": "data/java/sql/leads.json",
   "runtime_evidence": "data/java/sql/standard.json",
@@ -32,6 +32,7 @@
     "projects/sql/java/druid/verification.json",
     "projects/sql/java/presto_parser/verification.json",
     "projects/sql/java/calcite/verification.json",
+    "projects/sql/java/hive_exec/verification.json",
     "projects/sql/java/jsqlparser/verification.json",
     "projects/sql/java/trino_parser/verification.json"
   ]
