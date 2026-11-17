@@ -33,6 +33,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [jsdom / JavaScript](javascript/jsdom/README.md)
 - [sax / JavaScript](javascript/sax/README.md)
 - [saxes / JavaScript](javascript/saxes/README.md)
+- [xml-js / JavaScript](javascript/xml_js/README.md)
 - [xml2js / JavaScript](javascript/xml2js/README.md)
 - [DOMDocument::loadXML(string $source, int $options = 0) / PHP](php/stdlib_domdocument/README.md)
 - [XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read() / PHP](php/stdlib_xmlreader/README.md)

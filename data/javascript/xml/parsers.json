@@ -311,5 +311,62 @@
     },
     "project": "projects/xml/javascript/xml2js",
     "verification_note": "xml2js is an API path over the selected sax 1.6.1 tokenizer, not a separate parser engine; the receipt counts xml2js package lines and sax lib/sax.js lines separately, and AFL++ feedback spans both. Both valid controls, catalog-ns.xml and order-default-ns.xml, match the expat oracle exactly, including namespace URIs, attribute order and text. Scope limits: xml2js drops comment and processing-instruction events, so a text run split only by a comment or PI is reported as one segment where expat reports two (both controls place them beside whitespace only); xml2js does not pass sax strictEntities, so sax's HTML-extended entity table is accepted; DOCTYPE events are ignored. The adapter sets the documented charkey option to '#text' because the default '_' is a legal element name. No malformed-input, resource-use, or fuzz campaign was run."
+  },
+  {
+    "name": "xml-js",
+    "version": "1.6.11",
+    "license": "MIT",
+    "npm_integrity": "sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==",
+    "tarball_sha256": "7fa22b957f335efef3ead84aaa8285e2f3b08dbfeee18f9f41021a1a0c584369",
+    "input_api": "xmljs.xml2js(text, {compact:false, captureSpacesBetweenElements:true, alwaysChildren:true}) on strictly UTF-8 decoded local bytes; ordered tree builder over strict sax.parser(true) events",
+    "documentation": "https://github.com/nashwaan/xml-js/blob/f0376f265c4f299100fb4766828ebf066a0edeec/README.md",
+    "source": "https://github.com/nashwaan/xml-js/tree/f0376f265c4f299100fb4766828ebf066a0edeec",
+    "scope": "One namespace-aware XML 1.0 document from local bytes as an ordered xml-js tree; adapter expands qualified names using xmlns attributes",
+    "family": "sax-js strict XML state machine (sax 1.6.1) under xml-js tree builder",
+    "family_note": "xml-js 1.6.11 hardcodes pureJsParser=true and drives sax.parser(true, {}) for tokenization. It builds an ordered tree from SAX events and retains comments and processing instructions. Namespace expansion is performed by the adapter from preserved xmlns attributes. Shares the pinned sax 1.6.1 tokenizer with selected sax and xml2js paths.",
+    "underlying_parser": {
+      "package": "sax",
+      "version": "1.6.1",
+      "npm_integrity": "sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==",
+      "tarball_sha256": "6e9abf03478608b80894bb8b6421271a0e583504f785f749a700d6bb35be85bd",
+      "selected_path": "projects/xml/javascript/sax"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 58150955,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xml-js",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/xml_js",
+    "verification_note": "Docker valid-control replay matches the Expat oracle on both namespace-aware controls. V8 coverage counts 163 xml-js lib/xml2js.js tree-builder lines and 888 underlying sax lib/sax.js tokenizer lines separately. AFL++ feedback is scoped to the sax file only and is stable on repeated valid-control replays with an input-dependent 40-feature/40-tuple difference. xml-js delegates tokenization to the same sax 1.6.1 code selected independently as sax and by xml2js; it adds ordered tree construction, not an independent tokenizer. Namespace URI expansion is done by the adapter from preserved xmlns attributes. The hardcoded pureJsParser=true path does not use the optional node-expat import. Two valid controls do not prove complete XML conformance; no malformed, resource-use or campaign tests were run."
   }
 ]

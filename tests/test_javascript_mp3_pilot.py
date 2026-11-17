@@ -20,18 +20,22 @@ def read(path: Path) -> object:
 
 
 class JavaScriptMp3PilotTest(unittest.TestCase):
-    def test_selected_parsers_are_ranked_and_kept_out_of_leads(self):
+    def test_selected_parsers_are_ranked_and_leads_preserve_discovery(self):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
         cell = read(BASE / "cell.json")
         downloads = read(BASE / "registry-snapshot.json")["downloads"]
-        self.assertEqual([parser["name"] for parser in parsers], ["mediabunny", "music-metadata", "codec-parser"])
+        self.assertEqual([parser["name"] for parser in parsers],
+                         ["mediabunny", "music-metadata", "codec-parser", "mp3-duration", "mp3-parser"])
         values = [parser["metric"]["value"] for parser in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
         for parser in parsers:
             self.assertEqual(downloads[parser["name"]]["downloads"], parser["metric"]["value"])
             self.assertEqual(downloads[parser["name"]]["latest_version"], parser["version"])
-        self.assertFalse({parser["name"] for parser in parsers} & {lead["name"] for lead in leads})
+        self.assertEqual({parser["name"] for parser in parsers} & {lead["name"] for lead in leads},
+                         {"mp3-duration", "mp3-parser"})
+        self.assertTrue(all(lead["status"] == "promoted_to_verified" for lead in leads
+                            if lead["name"] in {"mp3-duration", "mp3-parser"}))
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["leads_recorded"], len(leads))
         self.assertEqual(cell["leads_by_status"], dict(Counter(lead["status"] for lead in leads)))
@@ -57,7 +61,7 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
             self.assertEqual(lock["license"], parser["license"])
             self.assertTrue(receipt["pass"])
             self.assertEqual(receipt["output"], parser["expected_output"])
-            self.assertGreater(receipt["format_specific_source_lines_covered"], 0)
+            self.assertGreater(receipt["parser_source_lines_covered"], 0)
             for key in ("control", "differential_control"):
                 self.assertEqual(sha256((ROOT / manifest[key]).read_bytes()).hexdigest(),
                                  manifest[f"{key}_sha256"])
@@ -74,6 +78,28 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
             self.assertEqual(output["frame_bytes"], len(data))
             self.assertEqual(output["total_samples"], walked["frames"] * walked["samples_per_frame"])
             self.assertEqual(output["header_variants"], 1)
+
+    def test_mp3_parser_walks_both_valid_controls_with_documented_data_view_api(self):
+        project = ROOT / "projects/mp3/javascript/mp3_parser"
+        manifest = read(project / "manifest.json")
+        adapter = (project / "adapter.mjs").read_text(encoding="utf-8")
+        self.assertIn("mp3Parser.readFrame(view, offset, false)", adapter)
+        self.assertIn("new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)", adapter)
+        self.assertEqual(manifest["coverage_subject_prefix"],
+                         "/work/node_modules/mp3-parser/lib/lib.js")
+        for control, output in ((manifest["control"], manifest["expected_output"]),
+                                (manifest["differential_control"], manifest["differential_expected_output"])):
+            data = (ROOT / control).read_bytes()
+            walked = WALKER.walk(data)
+            self.assertEqual({key: output[key] for key in walked}, walked)
+            self.assertEqual(output["total_samples"], walked["frames"] * walked["samples_per_frame"])
+            self.assertEqual(output["mpeg_version_bits"], format((data[1] >> 3) & 3, "02b"))
+            self.assertEqual(output["layer"], "Layer III")
+            self.assertEqual(output["header_variants"], 1)
+        npm_lock = read(project / "package-lock.json")["packages"]["node_modules/mp3-parser"]
+        source_lock = read(project / "source-lock.json")["mp3-parser"]
+        self.assertEqual(npm_lock["integrity"], source_lock["npm_integrity"])
+        self.assertNotIn("dependencies", npm_lock)
 
     def test_music_metadata_outputs_match_header_oracle(self):
         manifest = read(ROOT / "projects/mp3/javascript/music_metadata/manifest.json")
@@ -109,10 +135,12 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
         # The cell aggregate is refreshed by the integrator. The new path's
         # scoped receipt is testable before that aggregate is regenerated.
         report = read(BASE / "afl-feedback.json")
-        scoped = [read(BASE / f"{slug}-feedback-differential.json") for slug in ("codec_parser", "music_metadata")]
+        scoped = [read(BASE / f"{slug}-feedback-differential.json")
+                  for slug in ("codec_parser", "music_metadata", "mp3_parser")]
         results = {item["project"]: item for item in [*report["results"], *scoped]}
         self.assertEqual(set(results), {"mp3/javascript/mediabunny", "mp3/javascript/music_metadata",
-                                        "mp3/javascript/codec_parser"})
+                                        "mp3/javascript/codec_parser", "mp3/javascript/mp3_parser",
+                                        "mp3/javascript/mp3_duration"})
         for result in results.values():
             slug = result["project"].rsplit("/", 1)[-1]
             manifest = read(ROOT / f"projects/mp3/javascript/{slug}/manifest.json")
@@ -132,6 +160,10 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
             self.assertTrue({"mpeg_version", "layer", "number_of_samples", "duration"} <= set(walker["compared_fields"]))
         for apis in music["documented_api_agreement"].values():
             self.assertEqual(apis, ["parseBuffer", "parseFile", "parseStream"])
+        frame = results["mp3/javascript/mp3_parser"]
+        self.assertEqual(frame["control_only_features_by_file"], {"lib/lib.js": 2})
+        self.assertEqual(frame["differential_only_features_by_file"], {"lib/lib.js": 0})
+        self.assertEqual(frame["repeats_per_control"], 3)
 
     def test_no_standard_api_is_declared_not_omitted(self):
         standard = read(BASE / "standard.json")

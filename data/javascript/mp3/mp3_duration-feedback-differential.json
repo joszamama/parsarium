@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T13:58:14.339315+00:00",
+  "projects_total": 1,
+  "projects_passed": 1,
+  "differential_kind": "fixed_valid_mpeg2_stereo_control",
+  "standard_feedback": "none: Node.js core ships no MP3 parser API",
+  "results": [
+    {
+      "project": "mp3/javascript/mp3_duration",
+      "pass": true,
+      "feedback_kind": "javascript_parser_function_range_capped_hit_counts_to_afl_bitmap",
+      "overlay_receipt_sha256": "dd873e1deda854f216930ab4e5307c052e30e5ae37cd60fb1aa22a6d93358c4b",
+      "base_image_id": "sha256:cc61a1ebc655e357206bb4f6e160ec5dbd13c4ce853775e90e3b11496d5bf341",
+      "overlay_image_id": "sha256:38fc56fa219527918edb5fb8ebd0f0b9b342d56269fc61b97c9e91a2c53cdb5c",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "differential": "controls/mp3/tone-22k-stereo.mp3",
+      "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "differential_output": {
+        "duration_ms": 313
+      },
+      "repeats_per_control": 3,
+      "control_output": {
+        "duration_ms": 287
+      },
+      "control_oracle_duration_ms": 287,
+      "differential_oracle_duration_ms": 313,
+      "no_parse_parser_features": 0,
+      "feedback_interpretation": "parser-function source-range hit counts capped at 255; 11 versus 12 frame calls, which can track input length as well as parsing, not new branch or line coverage",
+      "control_parser_calls": {
+        "parseFrameHeader": [
+          11
+        ],
+        "frameSize": [
+          11
+        ]
+      },
+      "differential_parser_calls": {
+        "parseFrameHeader": [
+          12
+        ],
+        "frameSize": [
+          12
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 2,
+      "control_afl_tuples": 22,
+      "differential_parser_features": 2,
+      "differential_afl_tuples": 22,
+      "parser_feature_difference": 4,
+      "afl_tuple_difference": 4,
+      "control_only_features_by_file": {
+        "index.js": 2
+      },
+      "differential_only_features_by_file": {
+        "index.js": 2
+      },
+      "control_only_features": [
+        "/work/node_modules/mp3-duration/index.js:frameSize:2462-2730:hits=11",
+        "/work/node_modules/mp3-duration/index.js:parseFrameHeader:2732-3677:hits=11"
+      ],
+      "differential_only_features": [
+        "/work/node_modules/mp3-duration/index.js:frameSize:2462-2730:hits=12",
+        "/work/node_modules/mp3-duration/index.js:parseFrameHeader:2732-3677:hits=12"
+      ]
+    }
+  ]
+}

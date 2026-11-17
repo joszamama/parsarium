@@ -31,16 +31,20 @@ def dockerfile(base_image: str, platform: str, relative: Path, prefix: str,
                ecosystem: str, parse_function: str | None,
                fuzz_entry: str | None, java_environment: dict[str, str],
                afl_package: str, java_trace_name: str = "java_trace.py",
-               runtime_packages: tuple[str, ...] = ()) -> str:
+               runtime_packages: tuple[str, ...] = (),
+               javascript_trace_name: str = "javascript_trace.js",
+               javascript_count_functions: tuple[str, ...] = ()) -> str:
     overlay = f"fuzzing/afl-native/{relative.as_posix()}"
     trace_files = ({"go": ["go_trace.py"],
                     "java": ["JavaCase.java", java_trace_name],
-                    "javascript": ["javascript_child.js", "javascript_trace.js"],
+                    "javascript": ["javascript_child.js", javascript_trace_name],
                     "php": ["php_trace.php"]}[ecosystem])
     copies = "".join(f"COPY fuzzing/afl-bridge/{name} /work/{name if name == 'JavaCase.java' else 'afl_' + name}\n"
                      for name in trace_files)
     env_function = f"ENV PARSARIUM_PARSE_FUNCTION={parse_function}\n" if parse_function else ""
     env_entry = f"ENV PARSARIUM_FUZZ_ENTRY={fuzz_entry}\n" if fuzz_entry else ""
+    env_js = (f"ENV PARSARIUM_JS_COUNT_FUNCTIONS={','.join(javascript_count_functions)}\n"
+              if javascript_count_functions else "")
     env_java = "".join(f"ENV {name}={value}\n" for name, value in java_environment.items())
     go_assimp = ecosystem == "go" and "assimp" in relative.parts[2]
     image_base = DEBIAN_BOOKWORM if go_assimp else (UBUNTU_BASE if ecosystem == "go" else base_image)
@@ -60,7 +64,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends afl++={afl_
 {go_binary}COPY fuzzing/afl-bridge/afl_proxy.c /work/afl_proxy.c
 {copies}COPY {overlay}/afl_trace /work/afl_trace
 ENV PARSARIUM_SUBJECT_PREFIX={prefix}
-{env_function}{env_entry}{env_java}{java_compile}RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
+{env_function}{env_entry}{env_js}{env_java}{java_compile}RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
 ENTRYPOINT ["/work/afl_proxy"]
 '''
 
@@ -90,6 +94,8 @@ def build_one(relative: Path) -> dict:
     parse_function = None
     java_environment = {}
     java_trace_name = "java_trace.py"
+    javascript_trace_name = "javascript_trace.js"
+    javascript_count_functions = ()
     if ecosystem == "go":
         trace_command = 'python3 /work/afl_go_trace.py'
         bridge_names = ("afl_proxy.c", "go_trace.py")
@@ -124,8 +130,17 @@ def build_one(relative: Path) -> dict:
         trace_command = f'python3 /work/afl_{java_trace_name}'
         bridge_names = ("afl_proxy.c", "JavaCase.java", java_trace_name)
     elif ecosystem == "javascript":
-        trace_command = 'node /work/afl_javascript_trace.js'
-        bridge_names = ("afl_proxy.c", "javascript_child.js", "javascript_trace.js")
+        if manifest.get("afl_js_count_ranges"):
+            names = manifest.get("afl_js_count_functions")
+            if not isinstance(names, list) or not names or any(
+                not isinstance(name, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", name)
+                for name in names
+            ):
+                raise ValueError("invalid JavaScript count-function allowlist")
+            javascript_count_functions = tuple(names)
+            javascript_trace_name = "javascript_count_trace.js"
+        trace_command = f'node /work/afl_{javascript_trace_name}'
+        bridge_names = ("afl_proxy.c", "javascript_child.js", javascript_trace_name)
     else:
         functions = set(re.findall(r"parsarium_parse(?:_[a-z0-9_]+)?",
                                    (project / "fuzz-target.php").read_text()))
@@ -148,7 +163,8 @@ def build_one(relative: Path) -> dict:
         dockerfile(base_image, manifest["platform"], relative,
                    manifest.get("afl_coverage_subject_prefix", manifest["coverage_subject_prefix"]),
                    ecosystem, parse_function, manifest.get("fuzz_entry"), java_environment,
-                   afl_package, java_trace_name, runtime_packages)
+                   afl_package, java_trace_name, runtime_packages,
+                   javascript_trace_name, javascript_count_functions)
     )
     image = f"parsarium-afl/{relative.parts[0]}-{ecosystem}-{relative.parts[2]}:local"
     print(f"Building {image}", flush=True)
@@ -188,7 +204,9 @@ def build_one(relative: Path) -> dict:
             raise RuntimeError("AFL++ did not report parser feedback")
     receipt = {
         "schema_version": 1, "project": str(relative), "pass": True,
-        "feedback_kind": f"{ecosystem}_parser_source_{'ranges' if ecosystem == 'javascript' else 'blocks' if ecosystem == 'go' else 'lines'}_to_afl_bitmap",
+        "feedback_kind": ("javascript_parser_function_range_capped_hit_counts_to_afl_bitmap"
+                          if ecosystem == "javascript" and javascript_count_functions else
+                          f"{ecosystem}_parser_source_{'ranges' if ecosystem == 'javascript' else 'blocks' if ecosystem == 'go' else 'lines'}_to_afl_bitmap"),
         "base_project_receipt_sha256": sha256((project / "verification.json").read_bytes()).hexdigest(),
         "base_image_id": base_image_id, "image_id": image_id, "platform": manifest["platform"],
         "control_sha256": manifest["control_sha256"],

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T14:03:50.211425+00:00",
+  "project": "mp3/javascript/mp3_parser",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "overlay_receipt_sha256": "127e9a9c16dc9b6fb9b92e6759a1a9a856a3dcf894b4bfcbca0e87fb1b035127",
+  "base_image_id": "sha256:bdc5bb8acdf69af8ae5d1b58cf9f1a5e864c3104288837eb9eb6d0b918e3e298",
+  "overlay_image_id": "sha256:48791583698381b5b31530172969a6921fb9aa43a483ca4fceba01043ae2b010",
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "differential": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_output": {
+    "codec": "mp3",
+    "mpeg_version_bits": "10",
+    "layer": "Layer III",
+    "sample_rate": 22050,
+    "channels": 2,
+    "bitrate": 32000,
+    "frames": 12,
+    "frame_bytes": 1254,
+    "samples_per_frame": 576,
+    "total_samples": 6912,
+    "header_variants": 1
+  },
+  "control_walker": {
+    "walker_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "compared_fields": [
+      "bitrate",
+      "channels",
+      "frame_bytes",
+      "frames",
+      "sample_rate",
+      "samples_per_frame"
+    ]
+  },
+  "differential_walker": {
+    "walker_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "compared_fields": [
+      "bitrate",
+      "channels",
+      "frame_bytes",
+      "frames",
+      "sample_rate",
+      "samples_per_frame"
+    ]
+  },
+  "repeats_per_control": 3,
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 32,
+  "control_afl_tuples": 52,
+  "differential_parser_features": 30,
+  "differential_afl_tuples": 50,
+  "parser_feature_difference": 2,
+  "afl_tuple_difference": 2,
+  "control_only_features_by_file": {
+    "lib/lib.js": 2
+  },
+  "differential_only_features_by_file": {
+    "lib/lib.js": 0
+  },
+  "control_features_by_file": {
+    "lib/lib.js": 32
+  },
+  "control_only_features": [
+    ":1678-1683",
+    ":1684-1689"
+  ],
+  "differential_only_features": []
+}
