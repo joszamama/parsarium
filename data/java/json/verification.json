@@ -138,6 +138,51 @@
       "verified_at_utc": "2026-11-17T03:51:55.624314+00:00"
     },
     {
+      "package": "json",
+      "group": "org.json",
+      "version": "20260814",
+      "scope": "Valid RFC 8259 nested object/array controls parsed from local UTF-8 Reader into JSONObject/JSONArray; adapter converts to untyped Map/List and checks one complete root",
+      "command": "python3 scripts/run_project.py json java orgjson",
+      "receipt": "projects/json/java/orgjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 252,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T07:40:22.022560+00:00",
+      "error": null
+    },
+    {
       "package": "fastjson2",
       "group": "com.alibaba.fastjson2",
       "version": "2.0.66",
@@ -185,5 +230,5 @@
   ],
   "standard": [],
   "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
-  "updated_at_utc": "2026-11-17T07:34:22.373934+00:00"
+  "updated_at_utc": "2026-11-17T07:42:03.041967+00:00"
 }

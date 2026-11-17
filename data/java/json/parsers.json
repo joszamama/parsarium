@@ -177,6 +177,65 @@
     }
   },
   {
+    "name": "json",
+    "group": "org.json",
+    "artifact": "json",
+    "version": "20260814",
+    "license": "Public Domain",
+    "license_evidence": "Pinned Maven release POM declares Public Domain; upstream release history records switch in 20220924, prior to this release. POM SHA256 in source-lock.json.",
+    "input_api": "new JSONTokener(InputStreamReader(FileInputStream, UTF_8), new JSONParserConfiguration().withStrictMode()).nextValue(); nextClean() checks end of local document",
+    "documentation": "https://repo.maven.apache.org/maven2/org/json/json/20260814/json-20260814-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/json/json/20260814/json-20260814-sources.jar",
+    "scope": "Valid RFC 8259 nested object/array controls parsed from local UTF-8 Reader into JSONObject/JSONArray; adapter converts to untyped Map/List and checks one complete root",
+    "family": "org.json JSONTokener with JSONObject/JSONArray builders",
+    "family_note": "The source jar implements its own JSONTokener and JSONObject/JSONArray parsers. No Jackson, Gson, or fastjson2 parser dependency appears in the pinned release POM.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/orgjson",
+    "configuration_note": "Uses the documented JSONParserConfiguration.withStrictMode() to require JSON quoting rules on this path; the adapter additionally checks nextClean()==0 after one root.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 6923,
+      "max_release": "20231013",
+      "max_release_direct_dependent_count": 564,
+      "default_release_direct_dependent_count": 176,
+      "releases": 34,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.json%3Ajson",
+      "captured_at_utc": "2026-11-17T03:27:30.809512+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
     "name": "fastjson2",
     "group": "com.alibaba.fastjson2",
     "artifact": "fastjson2",

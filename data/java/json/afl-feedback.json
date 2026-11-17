@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T07:37:07.001693+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "checked_at_utc": "2026-11-17T07:46:47.753891+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
   "differential_kind": "fixed_valid_nested_array",
   "results": [
     {
@@ -109,6 +109,41 @@
       "parser_feature_difference": 12,
       "afl_tuple_difference": 12,
       "checked_at_utc": "2026-11-17T03:52:44.475342+00:00"
+    },
+    {
+      "project": "json/java/orgjson",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "e1edcfc5a9b234608aef1a2733f2f365f46737469ae3735bfb84a20e1e15ffc5",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "control_parser_features": 252,
+      "control_afl_tuples": 272,
+      "differential_parser_features": 246,
+      "differential_afl_tuples": 266,
+      "parser_feature_difference": 10,
+      "afl_tuple_difference": 10,
+      "checked_at_utc": "2026-11-17T07:46:47.753891+00:00"
     },
     {
       "project": "json/java/fastjson2",
