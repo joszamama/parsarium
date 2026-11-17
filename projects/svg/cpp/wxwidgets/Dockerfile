@@ -1,0 +1,42 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    bzip2 ca-certificates clang cmake curl libclang-rt-21-dev libgtk-3-dev \
+    llvm ninja-build python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2 \
+    --output /work/wxWidgets-3.3.4.tar.bz2 \
+    && echo '815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98  /work/wxWidgets-3.3.4.tar.bz2' | sha256sum --check \
+    && mkdir /work/source \
+    && tar -xjf /work/wxWidgets-3.3.4.tar.bz2 -C /work/source --strip-components=1 \
+    && printf '%s  %s\n' \
+        030e98b94b59644a8e7374b6f00e98d854b9d95e4b4399f02288acce4d7ea9d6 /work/source/src/common/bmpbndl.cpp \
+        c92ac56d3e634e04c52472b01553ad0dd10f4f1b9dea4bf588d76d474bcf06f2 /work/source/src/generic/bmpsvg.cpp \
+        4b142e0c43203224616dd633c71c922f2064610e7177ff151eb71025546e407b /work/source/3rdparty/nanosvg/src/nanosvg.h \
+        79a9c5f4db19debf9f3a648a1589e96d92854f245a5cb4f3d823f263785234d8 /work/source/3rdparty/nanosvg/src/nanosvgrast.h \
+        | sha256sum --check
+RUN printf 'src:bmpsvg.cpp\nsrc:nanosvg.h\nsrc:nanosvgrast.h\n' > /work/afl-allowlist.txt
+ENV AFL_LLVM_INSTRUMENT=CLASSIC AFL_LLVM_ALLOWLIST=/work/afl-allowlist.txt
+COPY harness.h harness.cpp replay.cpp fuzz.cpp build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang++ --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    libgtk-3-0t64 libpcre2-32-0 libstdc++6 libxtst6 llvm python3 xvfb \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay-bin /work/fuzzer-bin /work/
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY --from=build /work/source/src/generic/bmpsvg.cpp /work/source/src/generic/bmpsvg.cpp
+COPY --from=build /work/source/3rdparty/nanosvg/src/ /work/source/3rdparty/nanosvg/src/
+COPY with-display.sh replay.sh fuzzer.sh map-size.sh run-control.sh map-control.svg /work/
+RUN echo 'ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2  /work/map-control.svg' | sha256sum --check \
+    && chmod +x /work/with-display.sh /work/replay.sh /work/fuzzer.sh /work/map-size.sh /work/run-control.sh \
+    && ln -s /work/replay.sh /work/replay \
+    && ln -s /work/fuzzer.sh /work/fuzzer
+ENV LLVM_PROFILE_FILE=/dev/null
+ENTRYPOINT ["/work/run-control.sh"]
