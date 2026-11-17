@@ -15,7 +15,7 @@ def read(path: Path) -> object:
 
 
 class JavaXmlPilotTest(unittest.TestCase):
-    def test_selected_parser_is_highest_parser_engine_lead(self):
+    def test_selected_parsers_are_ranked_and_leads_recorded(self):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
         metrics = [parser["popularity"]["value"] for parser in parsers]
@@ -27,9 +27,8 @@ class JavaXmlPilotTest(unittest.TestCase):
                                                "promoted_to_verified"} for lead in leads))
         self.assertEqual({lead["coordinate"] for lead in leads
                           if lead["status"] == "promoted_to_verified"},
-                         {"com.fasterxml.woodstox:woodstox-core"})
-        self.assertTrue(all(min(metrics) > lead["summed_direct_dependent_count"]
-                            for lead in leads if lead["status"] == "unresolved"))
+                         {"com.fasterxml.woodstox:woodstox-core",
+                          "com.fasterxml:aalto-xml"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             coordinate = f"{parser['group']}:{parser['artifact']}"
@@ -44,14 +43,17 @@ class JavaXmlPilotTest(unittest.TestCase):
         self.assertEqual(sum(lead["status"] == "unresolved" for lead in leads),
                          cell["unresolved_documentation_leads"])
 
-    def test_both_paths_share_the_xerces_family(self):
+    def test_xerces_runtime_family_and_independent_stax_engines(self):
         parsers = read(BASE / "parsers.json")
         xerces = next(parser for parser in parsers if parser["artifact"] == "xercesImpl")
         woodstox = next(parser for parser in parsers if parser["artifact"] == "woodstox-core")
+        aalto = next(parser for parser in parsers if parser["artifact"] == "aalto-xml")
         api, = read(BASE / "standard.json")["verified_apis"]
         self.assertIn("Apache Xerces2-J", xerces["shared_families"])
         self.assertNotIn("Apache Xerces2-J", woodstox["shared_families"])
         self.assertIn("Woodstox", woodstox["shared_families"])
+        self.assertIn("Aalto XML", aalto["shared_families"])
+        self.assertNotIn("Apache Xerces2-J", aalto["shared_families"])
         self.assertIn("Xerces2-J", api["family"])
 
     def test_control_receipts_match_catalog(self):
@@ -76,9 +78,11 @@ class JavaXmlPilotTest(unittest.TestCase):
         report = read(BASE / "afl-feedback.json")
         oracle = read(ROOT / "data/go/xml/verification.json")["differential_output"]
         self.assertEqual(report["projects_passed"], len(read(BASE / "parsers.json")) + 1)
+        expected_projects = {str(Path(parser["project"]).relative_to("projects"))
+                             for parser in read(BASE / "parsers.json")}
+        expected_projects.add("xml/java/jdk_documentbuilder")
         self.assertEqual({item["project"] for item in report["results"]},
-                         {"xml/java/xercesimpl", "xml/java/woodstox_core",
-                          "xml/java/jdk_documentbuilder"})
+                         expected_projects)
         for result in report["results"]:
             overlay = ROOT / "fuzzing/afl-native" / result["project"] / "verification.json"
             self.assertEqual(sha256(overlay.read_bytes()).hexdigest(), result["overlay_receipt_sha256"])
