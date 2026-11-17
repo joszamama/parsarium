@@ -37,8 +37,11 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | manticoresoftware/php-sql-parser | 63,809 | excluded | PHP-SQL-Parser (greenlion fork) |
 | marcocesarato/sqlparser | 50,961 | excluded | — |
 | flow-php/postgresql | 45,374 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| rexshijaku/sql-to-laravel-builder | 38,871 | excluded | greenlion PHP-SQL-Parser consumer |
+| nextras/multi-query-parser | 33,797 | excluded | — |
 | intersvyaz/yii2-sqlparser | 30,004 | excluded | — |
 | jasny/dbquery-mysql | 27,582 | excluded | — |
+| calebdw/pg-schema-parser | 20,088 | excluded | pg_builder hand-written PostgreSQL parser |
 | flow-php/pg-query-ext | 18,762 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | tsukasa/php-sql-parser | 14,933 | excluded | PHP-SQL-Parser (greenlion fork) |
 | udan11/sql-parser | 9,823 | excluded | phpMyAdmin hand-written lexer and parser |
@@ -47,10 +50,14 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | crodas/sql-parser | 2,490 | selected | crodas SQLParser Lemon-generated parser |
 | michabbb/php-sql-parser | 2,299 | excluded | PHP-SQL-Parser (greenlion fork) |
 | fmizzell/sql-parser | 1,367 | excluded | DKAN state-machine validator |
+| maghead/sqlite-parser | 937 | excluded | — |
 | aitradeinc/php-sql-parser | 399 | excluded | PHP-SQL-Parser (greenlion fork) |
 | offsite-solutions/eisodos-sqlparser | 181 | excluded | — |
+| rstoetter/csmartsqlstatement-php | 56 | excluded | — |
 | codexsoft/sql-parser | 46 | excluded | — |
 | subapp/sql | 19 | unresolved_blocked | subapp/sql lexer and parser |
+| lbreme/lexepa-sql | 7 | excluded | — |
+| ozh/sqltableextractor | 5 | excluded | — |
 | xp-forge/sql-parser | 4 | excluded | xp-forge Pratt parser |
 | cadfael/mysql-antlr4-parser | 2 | excluded | ANTLR MySQL grammar |
 | inilim/sqlite-parser | 1 | unresolved | inilim/sqlite-parser phplrt grammar (typed SQLite AST) |

@@ -158,6 +158,26 @@
       "selected_release": "0.48.0"
     },
     {
+      "name": "rexshijaku/sql-to-laravel-builder",
+      "status": "excluded",
+      "metric_value": 38871,
+      "metric_error": null,
+      "latest_release_observed": "1.0.6",
+      "family": "greenlion PHP-SQL-Parser consumer",
+      "documented_api_lead": null,
+      "reason": "Converter that emits Laravel query-builder PHP code: 1.0.6 requires greenlion/php-sql-parser ^4.4 and turns its clause-array tree into builder method calls (text output, no own SQL parser). Not a separate parser path. Round-3 search hit (2026-11-18)."
+    },
+    {
+      "name": "nextras/multi-query-parser",
+      "status": "excluded",
+      "metric_value": 33797,
+      "metric_error": null,
+      "latest_release_observed": "v2.1.0",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Splits an SQL file into statement strings (multi-query file loader for migrations); no syntax tree. Round-3 search hit (2026-11-18)."
+    },
+    {
       "name": "intersvyaz/yii2-sqlparser",
       "status": "excluded",
       "metric_value": 30004,
@@ -176,6 +196,16 @@
       "family": null,
       "documented_api_lead": null,
       "reason": "Abandoned on Packagist in favour of jasny/persist-sql-query; query builder with the same clause splitter design."
+    },
+    {
+      "name": "calebdw/pg-schema-parser",
+      "status": "excluded",
+      "metric_value": 20088,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.0",
+      "family": "pg_builder hand-written PostgreSQL parser",
+      "documented_api_lead": null,
+      "reason": "Parses the schema of plain-text pg_dump output (DDL) on top of sad_spirit/pg_builder ^3.3; schema-only scope, and its SQL parsing is the already selected pg_builder. Round-3 search hit (2026-11-18)."
     },
     {
       "name": "flow-php/pg-query-ext",
@@ -259,6 +289,16 @@
       "reason": "Same package description and repository (github.com/GetDKAN/sql-parser) as getdkan/sql-parser; validator for DKAN query strings, no statement tree."
     },
     {
+      "name": "maghead/sqlite-parser",
+      "status": "excluded",
+      "metric_value": 937,
+      "metric_error": null,
+      "latest_release_observed": "4.0.4",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "SQLite table schema parser (CREATE TABLE column and constraint definitions); schema-only, cannot parse the SELECT or INSERT controls (scope mismatch, like iamcal/sql-parser). Round-3 search hit (2026-11-18)."
+    },
+    {
       "name": "aitradeinc/php-sql-parser",
       "status": "excluded",
       "metric_value": 399,
@@ -279,6 +319,16 @@
       "reason": "Eisodos framework template renderer for <%SQL%...%SQL%> blocks (returns rendered text); not an SQL syntax parser."
     },
     {
+      "name": "rstoetter/csmartsqlstatement-php",
+      "status": "excluded",
+      "metric_value": 56,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.9",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Manages SELECT statements as clause strings (GetWhereClause, GetOrderByClause, AddTable, SetLimits); returns and rewrites text clauses, no tree with joins, functions or literals. Round-3 search hit (2026-11-18)."
+    },
+    {
       "name": "codexsoft/sql-parser",
       "status": "excluded",
       "metric_value": 46,
@@ -296,7 +346,27 @@
       "latest_release_observed": "1.2.2",
       "family": "subapp/sql lexer and parser",
       "documented_api_lead": "Sql::getInstance()->getProcessor()->parse",
-      "reason": "README documents an AST parser, but 1.2.2 requires symfony/yaml 4.2.0-BETA2, which Composer 2.11 refuses to install because of five Packagist security advisories (PKSA-nktx-f1n1-b4yd and others). The advisory block was not overridden, so the controls were not run."
+      "reason": "README documents an AST parser, but 1.2.2 requires symfony/yaml 4.2.0-BETA2, which Composer 2.11 refuses to install because of five Packagist security advisories (PKSA-nktx-f1n1-b4yd and others). The advisory block was not overridden, so the controls were not run. Re-checked 2026-11-18: 1.2.2 is still the latest release with the same symfony/yaml constraint; the advisory block was not overridden."
+    },
+    {
+      "name": "lbreme/lexepa-sql",
+      "status": "excluded",
+      "metric_value": 7,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.2",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Lexer/parser for a single SQL INSERT statement only (package description); cannot parse the SELECT control. Round-3 search hit (2026-11-18)."
+    },
+    {
+      "name": "ozh/sqltableextractor",
+      "status": "excluded",
+      "metric_value": 5,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.1",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Extracts table names from SQL queries; no statement tree, joins, functions or literals. Round-3 search hit (2026-11-18)."
     },
     {
       "name": "xp-forge/sql-parser",
@@ -326,7 +396,7 @@
       "latest_release_observed": "0.1.20261110",
       "family": "inilim/sqlite-parser phplrt grammar (typed SQLite AST)",
       "documented_api_lead": "Inilim\\SqliteParser\\Parser\\Parser::parse",
-      "reason": "Spot check: Parser::parse returns a Script whose SelectStatement carries columns, from, joins, where, groupBy and orderBy for the primary control. Not promoted this round: the only release (2026-11-10, 1 lifetime download) has neither LICENSE nor README in its archive (composer.json declares MIT; the README exists only on main after the tag)."
+      "reason": "Spot check: Parser::parse returns a Script whose SelectStatement carries columns, from, joins, where, groupBy and orderBy for the primary control. Not promoted this round: the only release (2026-11-10, 1 lifetime download) has neither LICENSE nor README in its archive (composer.json declares MIT; the README exists only on main after the tag). Re-checked 2026-11-18: 0.1.20261110 (commit 807a841c) is still the only release; its codeload archive (SHA-256 6de5b61be341eee4f6baa60aa0c46f6574889a940898d49c6c238cbd55c4f30b) holds only composer.json and src/, and the repository main branch has no LICENSE file (README.md, composer.json, grammar, src, tests, ...), so the MIT declaration has no licence text; Packagist total still 1. Left unresolved, not promoted."
     },
     {
       "name": "k-kinzal/sql-parser",
