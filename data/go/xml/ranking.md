@@ -32,7 +32,7 @@ Numeric leads from the same snapshot, not verified and not selected. Renderers, 
 
 | Lead | Version seen | Imported by | Status |
 | --- | --- | ---: | --- |
-| [github.com/basgys/goxml2json](https://pkg.go.dev/github.com/basgys/goxml2json) | v1.1.0 | 182 | XML-to-JSON converter over an io.Reader; not run. |
+| [github.com/basgys/goxml2json](https://pkg.go.dev/github.com/basgys/goxml2json@v1.1.0#Convert) | v1.1.0 | 182 | [Both valid controls parsed](goxml2json-lead-check.json), but conversion drops namespace URIs from element and attribute names, so the shared namespace-aware result fails. Unselected; Docker coverage and AFL feedback were not run. |
 | [github.com/clbanning/mxj/v2](https://pkg.go.dev/github.com/clbanning/mxj/v2) | v2.7.0 | 178 | v2 module of clbanning/mxj; its XML path is expected to follow the verified v1.8.4 map conversion over encoding/xml, but the v2 source was not compared or run. Its 178 importers are not added to the v1 metric. |
 | [github.com/vmware/govmomi/vim25/xml](https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml) | v0.56.2 | 163 | Synopsis is identical to encoding/xml, which suggests a vendored fork in the encoding/xml family. Not checked or run. |
 | [github.com/moovweb/gokogiri/xml](https://pkg.go.dev/github.com/moovweb/gokogiri/xml) | v0.0.0-...-a1a8281 | 108 | cgo binding to libxml2; pseudo-version only, native build not attempted. |
