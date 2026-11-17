@@ -1,12 +1,54 @@
 # fastjson2 — JSON / Java
 
-**Verified package/API path in an incomplete format cell.**
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-- **Pinned release:** `com.alibaba.fastjson2:fastjson2:2.0.66` (Apache-2.0)
-- **Parser family:** fastjson2's own JSONReader implementation
-- **Local input API:** `JSON.parse(byte[])` on bytes read from a local file
-- **Documentation:** [pinned release source](https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/2.0.66/fastjson2-2.0.66-sources.jar), `JSON.java` around line 251
-- **Valid controls:** [nested object](../../../../controls/json/nested-object.json) and [nested array](../../../../controls/json/nested-array.json)
-- **Evidence:** [parser record](../../../../data/java/json/parsers.json), [control results](../../../../data/java/json/verification.json), [project and commands](../../../../projects/json/java/fastjson2/README.md)
+- **Pinned release:** `2.0.66`
+- **License:** Apache-2.0
+- **Parser family:** fastjson2 (JSONReaderUTF8 parser plus object mapping)
+- **Local input API:** `com.alibaba.fastjson2.JSON.parse(Files.readAllBytes(local Path))`
+- **Documentation:** [API reference](<https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/2.0.66/fastjson2-2.0.66-sources.jar>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/java/json/parsers.json) · [control result](../../../../data/java/json/verification.json)
 
-The controls produced the expected nested structures. JaCoCo covered 560 pinned `JSONReader` source lines; repeated parser feedback was stable and differed on the second valid structure. The 2.x `com.alibaba:fastjson` coordinate is a compatibility facade in the same parser family and remains unverified as a separate API path.
+## Observed control result
+
+```json
+{
+  "arrays": 3,
+  "booleans": 2,
+  "max_depth": 4,
+  "nulls": 1,
+  "numbers": [
+    -2.5,
+    1,
+    1,
+    2,
+    2
+  ],
+  "objects": 5,
+  "root": "object",
+  "strings": [
+    "café \"quoted\"",
+    "go",
+    "json",
+    "parsarium",
+    "rfc8259"
+  ],
+  "top_level_keys": [
+    "enabled",
+    "missing",
+    "name",
+    "nested",
+    "ratio",
+    "tags",
+    "version"
+  ]
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json java fastjson2
+python3 parsarium.py run json java fastjson2 controls/json/nested-object.json
+```

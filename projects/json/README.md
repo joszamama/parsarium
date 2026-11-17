@@ -15,6 +15,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
 - [github.com/tidwall/gjson / Go](go/github_com_tidwall_gjson/README.md)
 - [github.com/ugorji/go/codec / Go](go/github_com_ugorji_go_codec/README.md)
+- [fastjson2 / Java](java/fastjson2/README.md)
 - [gson / Java](java/gson/README.md)
 - [jackson-core / Java](java/jackson_core/README.md)
 - [jackson-databind / Java](java/jackson_databind/README.md)

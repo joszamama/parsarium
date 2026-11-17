@@ -2,7 +2,7 @@
 
 **Status:** pilot_four_selected_search_bounded; incomplete. 4 verified third-party paths, 0 verified standard APIs, 4 verified Docker harnesses.
 
-Four selected JSON package/API paths have pinned valid-control containers and parser-derived AFL++ feedback. jackson-databind and jackson-core share the Jackson tokenizer; Gson and fastjson2 have independent engines. Nine numeric leads remain unresolved in the bounded search of 322 unique hits. The deps.dev metric measures package adoption, not JSON-specific use. Valid nested controls do not establish complete RFC 8259 support.
+Pilot cell: four high-adoption JSON package/API paths are control verified and runnable. jackson-databind and jackson-core share one tokenizer family; Gson and fastjson2 have independent parser engines. The com.alibaba:fastjson 2.x compatibility facade remains a lead in the fastjson2 family, not a separate verified engine. Nine numeric leads remain unresolved. The Maven Central search is bounded to 100 hits per query (322 unique hits); deps.dev summed direct dependents measure package adoption, not JSON-specific use. Valid nested-object and nested-array controls do not establish complete RFC 8259 support.
 
 [Ranking and search limits](../../../data/java/json/ranking.md) · [Standard API inventory](../../../data/java/json/standard.json)
 
@@ -15,4 +15,4 @@ Four selected JSON package/API paths have pinned valid-control containers and pa
 
 ## Standard and runtime APIs
 
-None documented in Java SE 25.
+None verified in this pilot cell yet.
