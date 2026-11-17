@@ -1,0 +1,87 @@
+{
+  "kind": "third_party",
+  "api": "fastdns.ParseMessage(dst, local DNS message bytes, true) and (*fastdns.Message).Records/DecodeName",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:06:27.098053+00:00",
+  "manifest": "projects/dns/go/github_com_phuslu_fastdns/manifest.json",
+  "image_id": "sha256:aeb0edca0335a7d2d5f9592bd34eba3cc419b5af9c1ae71d71f83a1942f221d2",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go1.27.1"
+  ],
+  "source_sha256": "ea316eb3583417e9864e423d0ed5d1ace8d615a13450c5ea4dc814ab84455209",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "fd5b3ea6ddfab7858b96493065a1f168ee04258d0485f7d6e938863829a1bceb",
+    "go.mod": "47b471262a530bdc9ff712c1fc6bbeb351655e2ceea539542dce7978be37c597",
+    "go.sum": "0b4a19242995d3b5acc4eb84c105190ee46dd4576fe42a6d69cd13b678cc69bd",
+    "harness.go": "f75cebb982904cf2661eaf87e8f787b8ffc24083b18a02c2924d13e86b534374",
+    "harness_test.go": "41da0ba99c951ea4c3961e524e8d04e9d3330d126bca035e91844edc70541315",
+    "manifest.json": "7af15aa93eb1497346a070ed3b26987e6d8452281f82b70acc88b9ff45d120a1",
+    "reporter/main.go": "5686310a495ef9eeca61ed22dac86eb8c57644687cf6e023fcf66eb540a2bf65",
+    "source-lock.json": "d4ec4c1ef267769cfcd898b85b249a16149d3ab67e1012bd37ab03363ed34b81"
+  },
+  "output": {
+    "aa": 0,
+    "additional": [],
+    "ancount": 4,
+    "answers": [
+      {
+        "class": 1,
+        "name": "www.example.test.",
+        "rdata": "example.test.",
+        "ttl": 3600,
+        "type": 5
+      },
+      {
+        "class": 1,
+        "name": "example.test.",
+        "rdata": "192.0.2.10",
+        "ttl": 300,
+        "type": 1
+      },
+      {
+        "class": 1,
+        "name": "example.test.",
+        "rdata": "2001:db8::10",
+        "ttl": 600,
+        "type": 28
+      },
+      {
+        "class": 1,
+        "name": "example.test.",
+        "rdata": "10 mail.example.test.",
+        "ttl": 7200,
+        "type": 15
+      }
+    ],
+    "arcount": 0,
+    "authority": [],
+    "id": 43981,
+    "nscount": 0,
+    "opcode": 0,
+    "qdcount": 1,
+    "qr": 1,
+    "questions": [
+      {
+        "class": 1,
+        "name": "www.example.test.",
+        "type": 1
+      }
+    ],
+    "ra": 1,
+    "rcode": 0,
+    "rd": 1,
+    "tc": 0,
+    "z": 0
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 100,
+  "format_specific_source_lines_covered": 84,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/go/github_com_phuslu_fastdns/target/coverage/coverage.json",
+  "pass": true
+}

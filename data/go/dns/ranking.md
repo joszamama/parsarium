@@ -1,6 +1,6 @@
 # Go × DNS: selected parsers (pilot)
 
-Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Six verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -13,6 +13,7 @@ pkg.go.dev Imported by package count, from [registry-snapshot.json](registry-sna
 | 3 | [golang.org/x/net/dns/dnsmessage](https://pkg.go.dev/golang.org/x/net@v0.63.0/dns/dnsmessage#Message.Unpack) | v0.63.0 | 1,202 | Go x/net dnsmessage (dns/dnsmessage/message.go) |
 | 4 | [codeberg.org/miekg/dns](https://pkg.go.dev/codeberg.org/miekg/dns@v0.6.133#Msg.Unpack) | v0.6.133 | 39 | miekg/dns v2 rewrite (msg.go, zmsg.go, internal/unpack, pkg/dnsnet, rdata) |
 | 5 | [github.com/benburkert/dns](https://pkg.go.dev/github.com/benburkert/dns@v0.0.0-20190225204957-d356cf78cdfc#Message.Unpack) | v0.0.0-20190225204957-d356cf78cdfc | 20 | benburkert/dns (message.go, compression.go) |
+| 6 | [github.com/phuslu/fastdns](https://pkg.go.dev/github.com/phuslu/fastdns@v0.17.2#ParseMessage) | v0.17.2 | 9 | phuslu fastdns (message.go: ParseMessage, MessageRecords, DecodeName) |
 
 **github.com/miekg/dns v1.1.73** (BSD-3-Clause) parses local bytes with `(*dns.Msg).Unpack(msg []byte) error`. Both controls match the oracle summary. The response control covers 207 library lines in 10 files. AFL++ feedback repeats 3 times per control; response and query give 131/73 parser features and 150/92 AFL++ tuples, differing by 60 features and 60 tuples ([receipt](github-com-miekg-dns-feedback-differential.json)). Own pure-Go decoder; CoreDNS and many Go DNS tools build on it. codeberg.org/miekg/dns is a later v2 rewrite by the same author.
 
@@ -24,12 +25,13 @@ pkg.go.dev Imported by package count, from [registry-snapshot.json](registry-sna
 
 **github.com/benburkert/dns v0.0.0-20190225204957-d356cf78cdfc** (MIT) parses local bytes with `(*dns.Message).Unpack(b []byte) ([]byte, error)`. Both controls match the oracle summary. The response control covers 115 library lines in 2 files. AFL++ feedback repeats 3 times per control; response and query give 77/36 parser features and 97/56 AFL++ tuples, differing by 41 features and 41 tuples ([receipt](github-com-benburkert-dns-feedback-differential.json)). Own pure-Go decoder with its own name decompressor; no code from miekg/dns or x/net. The module has no tagged release, so the pinned version is the pseudo-version of the last commit (2019-02-25). It drops the Z, AD and CD bits, so z is reported as 0. TTLs are stored as time.Duration and printed in whole seconds.
 
+**github.com/phuslu/fastdns v0.17.2** (MIT) parses local bytes with `fastdns.ParseMessage(dst *Message, payload []byte, copying bool) error; (*Message).Records() and (*Message).DecodeName(dst, name []byte)`. Both controls match the oracle summary. The response control covers 100 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 63/37 parser features and 83/57 AFL++ tuples, differing by 26 features and 26 tuples ([receipt](github-com-phuslu-fastdns-feedback-differential.json)). Own zero-allocation decoder written for a DNS server; no code from miekg/dns or x/net. ParseMessage decodes the header and the single question (it rejects QDCOUNT other than 1) and keeps the 3-bit Z field; Records iterates owner name, type, class, TTL and raw RDATA over all record sections in wire order, and DecodeName follows compression pointers. Harness-side formatting: the harness splits records into sections by the parsed header counts, prints A/AAAA RDATA bytes with net/netip, and reads the 16-bit MX preference from the RDATA slice before decoding the exchange name with DecodeName.
+
 ## Remaining leads
 
 | Order | Lead | Metric | Status | Input API lead | Family |
 | ---: | --- | ---: | --- | --- | --- |
 | 1 | github.com/gopacket/gopacket/layers | 171 | unresolved | `(*layers.DNS).DecodeFromBytes` | gopacket DNS layer (community fork) |
-| 2 | github.com/phuslu/fastdns | 9 | unresolved | `fastdns.ParseMessage(dst, payload, copying)` | phuslu fastdns |
 
 ## Checked, excluded or recorded separately
 

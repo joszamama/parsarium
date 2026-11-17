@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "dns",
-  "status": "pilot_five_verified_search_bounded",
+  "status": "pilot_six_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 5,
+  "verified_third_party_count": 6,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -21,15 +21,15 @@
   },
   "search_hits_recorded": 284,
   "unique_search_hits": 276,
-  "unresolved_documentation_leads": 2,
+  "unresolved_documentation_leads": 1,
   "leads_recorded": 8,
   "leads_by_status": {
-    "resolved_verified_selected": 5,
+    "resolved_verified_selected": 6,
     "excluded": 1,
-    "unresolved": 2
+    "unresolved": 1
   },
   "ranking_metric": "pkg.go.dev Imported by package count",
-  "uncertainty": "Pilot cell: five Go paths verified (github.com/miekg/dns, github.com/google/gopacket/layers, golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, github.com/benburkert/dns), ranked by pkg.go.dev Imported by package count. Remaining leads: github.com/gopacket/gopacket/layers (unresolved), github.com/phuslu/fastdns (unresolved). Excluded after checking: github.com/coredns/coredns/plugin/pkg/dnsutil (reasons in leads.json). gopacket's count covers its whole multi-protocol layers package. The standard library exports no DNS message parser (its net resolver vendors x/net dnsmessage without exporting it). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: six Go paths verified (github.com/miekg/dns, github.com/google/gopacket/layers, golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, github.com/benburkert/dns, github.com/phuslu/fastdns), ranked by pkg.go.dev Imported by package count. Remaining leads: github.com/gopacket/gopacket/layers (unresolved). Excluded after checking: github.com/coredns/coredns/plugin/pkg/dnsutil (reasons in leads.json). gopacket's count covers its whole multi-protocol layers package. The standard library exports no DNS message parser (its net resolver vendors x/net dnsmessage without exporting it). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/go/dns/registry-snapshot.json",
   "unresolved_leads": "data/go/dns/leads.json",
   "runtime_evidence": "data/go/dns/standard.json",
@@ -41,5 +41,5 @@
   },
   "third_party_evidence": "data/go/dns/parsers.json",
   "third_party_control_results": "data/go/dns/verification.json",
-  "selection": "Five control-verified Go DNS path(s), ranked by pkg.go.dev Imported by package count: github.com/miekg/dns v1.1.73 (16,234), github.com/google/gopacket/layers v1.1.19 (5,428), golang.org/x/net/dns/dnsmessage v0.63.0 (1,202), codeberg.org/miekg/dns v0.6.133 (39), github.com/benburkert/dns v0.0.0-20190225204957-d356cf78cdfc (20)."
+  "selection": "Six control-verified Go DNS path(s), ranked by pkg.go.dev Imported by package count: github.com/miekg/dns v1.1.73 (16,234), github.com/google/gopacket/layers v1.1.19 (5,428), golang.org/x/net/dns/dnsmessage v0.63.0 (1,202), codeberg.org/miekg/dns v0.6.133 (39), github.com/benburkert/dns v0.0.0-20190225204957-d356cf78cdfc (20), github.com/phuslu/fastdns v0.17.2 (9)."
 }
