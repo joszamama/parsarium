@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T06:59:11.506674+00:00",
+  "checked_at_utc": "2026-11-17T07:10:40.358792+00:00",
   "platform": "linux/arm64 Docker",
   "go": "go1.27.1",
   "controls": {
@@ -178,6 +178,49 @@
           "version"
         ]
       },
+      "error": null
+    },
+    {
+      "package": "github.com/buger/jsonparser",
+      "module": "github.com/buger/jsonparser",
+      "version": "v1.6.1",
+      "scope": "Local JSON byte slice parsed by recursive ObjectEach/ArrayEachErr and scalar conversion; this path-query API is not claimed to validate an entire arbitrary JSON document",
+      "command": "python3 scripts/run_project.py json go github_com_buger_jsonparser",
+      "receipt": "projects/json/go/github_com_buger_jsonparser/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 219,
       "error": null
     }
   ],

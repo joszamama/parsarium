@@ -206,5 +206,58 @@
       ]
     },
     "project": "projects/json/go/github_com_goccy_go_json"
+  },
+  {
+    "name": "github.com/buger/jsonparser",
+    "module": "github.com/buger/jsonparser",
+    "version": "v1.6.1",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "jsonparser.Get([]byte) plus ObjectEach and ArrayEachErr over local byte slices",
+    "documentation": "https://pkg.go.dev/github.com/buger/jsonparser@v1.6.1#Get",
+    "source": "https://github.com/buger/jsonparser/tree/v1.6.1",
+    "scope": "Local JSON byte slice parsed by recursive ObjectEach/ArrayEachErr and scalar conversion; this path-query API is not claimed to validate an entire arbitrary JSON document",
+    "family": "buger/jsonparser byte scanner",
+    "family_note": "The pinned jsonparser parser.go and escape.go implement their own byte scanner and JSON value extraction. The harness recursively visits all object and array values in the two controls, but Get is a path parser and not a full-document validator. No encoding/json decoder is used.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 2171,
+      "source": "https://pkg.go.dev/github.com/buger/jsonparser?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_buger_jsonparser"
   }
 ]
