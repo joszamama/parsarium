@@ -677,8 +677,10 @@ def index_page(report: dict) -> str:
         parts.append(table("Files (line-view counts from llvm-cov segments)",
                            ("File", "Group", "Covered", "Uncovered", "Mapped", "%", "Source text"),
                            rows, numeric=(2, 3, 4, 5)))
-    elif coverage["status"] in {"go_executed_lines", "python_executed_lines"}:
-        language = "Go" if coverage["status"] == "go_executed_lines" else "Python"
+    elif coverage["status"] in {f"{language}_executed_lines" for language in
+                               ("go", "python", "javascript", "java", "php")}:
+        language = {"go": "Go", "python": "Python", "javascript": "JavaScript",
+                    "java": "Java", "php": "PHP"}[coverage["status"].removesuffix("_executed_lines")]
         rows = [(escape(group["name"]), f"<code>{escape(group['prefix'])}</code>",
                  group["files"], group["executed_lines"]) for group in coverage["groups"]]
         parts.append(table(f"Observed {language} parser source by group",
@@ -761,7 +763,8 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
                                       f"control tuples in {binary.get('module')}. No parser "
                                       "source-line coverage exists for this project; binding "
                                       "lines are not parser lines."}
-    elif ecosystem in {"go", "python"} and coverage.get("type") != LLVM_EXPORT_TYPE and all(
+    elif ecosystem in {"go", "python", "javascript", "java", "php"} and \
+            coverage.get("type") != LLVM_EXPORT_TYPE and all(
             "executed_lines" in item for item in coverage["data"][0]["files"]):
         files, excluded = source_files(coverage, manifest, archives, limits, executed_only=True)
         groups = []
@@ -770,8 +773,13 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
             groups.append({"name": name, "prefix": prefix, "files": len(members),
                            "executed_lines": sum(entry["segment_lines"]["covered"]
                                                  for entry in members)})
-        language = "Go" if ecosystem == "go" else "Python"
-        mechanism = "Go coverprofile" if ecosystem == "go" else "Python trace"
+        language, mechanism = {
+            "go": ("Go", "Go coverprofile"),
+            "python": ("Python", "Python trace"),
+            "javascript": ("JavaScript", "V8 coverage"),
+            "java": ("Java", "JaCoCo coverage"),
+            "php": ("PHP", "Xdebug coverage"),
+        }[ecosystem]
         coverage_info = {"status": f"{ecosystem}_executed_lines",
                          "statement": f"{mechanism} source lines executed by the verified valid "
                                       "control. The export does not record unexecuted mapped "

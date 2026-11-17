@@ -495,35 +495,44 @@ class CoverageReportTest(unittest.TestCase):
         with self.assertRaisesRegex(coverage_report.ReportError, "sorted unique"):
             coverage_report.source_files(coverage, manifest, [], LIMITS, executed_only=True)
 
-    def test_python_trace_lines_render_with_pinned_source(self):
-        fixture = self.fixture()
-        python_project = fixture.root / "projects/png/python/demo"
-        python_project.parent.mkdir(parents=True)
-        fixture.project.rename(python_project)
-        fixture.project = python_project
-        fixture.manifest["ecosystem"] = "python"
-        fixture.write_json(fixture.project / "manifest.json", fixture.manifest)
-        fixture.receipt["project_file_sha256"]["manifest.json"] = digest(
-            (fixture.project / "manifest.json").read_bytes())
-        fixture.receipt["parser_source_files"] = 1
-        fixture.receipt["parser_source_lines_covered"] = 2
-        fixture.write_receipt()
-        fixture.write_json(fixture.run_dir / "summary.json", {
-            "control_pass": True, "output": {"width": 2},
-            "parser_source_files": 1, "parser_source_lines_covered": 2,
-        })
-        fixture.write_json(fixture.run_dir / "coverage.json", {"data": [{"files": [{
-            "filename": "/work/source/src/sample.c", "executed_lines": [2, 4],
-            "summary": {"lines": {"covered": 2}},
-        }]}]})
-        output = self.base / "python-report"
-        report = coverage_report.build_report(
-            fixture.root, "png", "python", "demo", fixture.run_dir, output,
-            [("/work/source", fixture.archive)], 1, dict(LIMITS))
-        self.assertEqual(report["coverage"]["status"], "python_executed_lines")
-        self.assertEqual(report["coverage"]["files"][0]["source"]["status"], "pinned_archive")
-        self.assertEqual(report["coverage"]["files"][0]["lines"], [[2, True], [4, True]])
-        self.assertIn("Observed Python parser source", (output / "index.html").read_text())
+    def test_executed_lines_render_for_each_exporting_ecosystem(self):
+        names = {"python": "Python", "javascript": "JavaScript", "java": "Java",
+                 "php": "PHP"}
+        for ecosystem, name in names.items():
+            with self.subTest(ecosystem=ecosystem):
+                base = self.base / ecosystem
+                base.mkdir()
+                fixture = Fixture(base)
+                run_case.ROOT, run_case.PROJECTS = fixture.root, fixture.root / "projects"
+                project = fixture.root / "projects/png" / ecosystem / "demo"
+                project.parent.mkdir(parents=True)
+                fixture.project.rename(project)
+                fixture.project = project
+                fixture.manifest["ecosystem"] = ecosystem
+                fixture.write_json(project / "manifest.json", fixture.manifest)
+                fixture.receipt["project_file_sha256"]["manifest.json"] = digest(
+                    (project / "manifest.json").read_bytes())
+                fixture.receipt["parser_source_files"] = 1
+                fixture.receipt["parser_source_lines_covered"] = 2
+                fixture.write_receipt()
+                fixture.write_json(fixture.run_dir / "summary.json", {
+                    "control_pass": True, "output": {"width": 2},
+                    "parser_source_files": 1, "parser_source_lines_covered": 2,
+                })
+                fixture.write_json(fixture.run_dir / "coverage.json", {"data": [{"files": [{
+                    "filename": "/work/source/src/sample.c", "executed_lines": [2, 4],
+                    "summary": {"lines": {"covered": 2}},
+                }]}]})
+                output = base / "report"
+                report = coverage_report.build_report(
+                    fixture.root, "png", ecosystem, "demo", fixture.run_dir, output,
+                    [("/work/source", fixture.archive)], 1, dict(LIMITS))
+                self.assertEqual(report["coverage"]["status"], f"{ecosystem}_executed_lines")
+                self.assertEqual(report["coverage"]["files"][0]["source"]["status"],
+                                 "pinned_archive")
+                self.assertEqual(report["coverage"]["files"][0]["lines"],
+                                 [[2, True], [4, True]])
+                self.assertIn(f"Observed {name} parser source", (output / "index.html").read_text())
 
     def test_report_size_limit_truncates_line_views(self):
         fixture = self.fixture()
