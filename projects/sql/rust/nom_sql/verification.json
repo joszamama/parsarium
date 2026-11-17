@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "nom_sql::parse_query_bytes(local bytes) -> SqlQuery; the harness reads SqlQuery::Select (tables, fields, join, where_clause, group_by, order) and SqlQuery::Insert (table, fields, data rows) and walks ConditionExpression trees and Column function expressions for function names and Literal values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:58:09.889831+00:00",
+  "manifest": "projects/sql/rust/nom_sql/manifest.json",
+  "image_id": "sha256:b179664b6a48a29da71e7c89331c86ae53eb292607813094ccee0dfa95ea5b19",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "c5266bcf166285da22fdc385d696725e7a9e7791b10af9baaeabc69428079730",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "901f1afaa5a648f9628be0ff04cdc62c7f60865a9160397db0003da2f14cfc25",
+    "Cargo.toml": "03e82c14849def1c00a0e57b620361e776a707cb9b77df7a609d1b80d7cb6fe6",
+    "Dockerfile": "20b949c53be0425c8ef33009f06ab5033a780652c1c53b0b969bef16e97d07f6",
+    "manifest.json": "70229d099675d46a35579891796a19b42b5aa2b083e900507de037f2865baa0a",
+    "run-control.sh": "c52b7e683cb3f8f58d98ac85be6bf39a0a669ca3745ce70116483c1fd8ee904b",
+    "source-lock.json": "96364b0477619aecc8aa19b3aba95b58a668f34e38b616ec79ef2d00a995a67d",
+    "src/bin/fuzzer.rs": "9aec4b94f3f5dad2be6d02a504b45cee29ace85549edab961421e4faab86626b",
+    "src/bin/replay.rs": "ff68d4543dd4eaed879ce7386b0eea5dd3ce4d9dca31693a820ba29151915dcc",
+    "src/lib.rs": "1e4579845c0a7756f0fb4f96153bcb1635516798ab2c45445ac679974792e730"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 19,
+  "parser_source_lines_covered": 835,
+  "format_specific_source_lines_covered": 126,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/nom_sql/target/coverage/coverage.json",
+  "pass": true
+}

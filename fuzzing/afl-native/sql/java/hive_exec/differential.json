@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:37:31.684858+00:00",
+  "project": "sql/java/hive_exec",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "45f2cd4fd0ba8e86cd555a05fdaacd2d7f90fa42c706e150c95b336806d706f4",
+  "overlay_receipt_sha256": "4182038e6f77823e698a5dab9e9017411aea402a0d48e7568d73039979c030c4",
+  "base_image_id": "sha256:b7bb3c30512af0e73ac0056dcd2f1f85c0714cd20d6dd58e0e1fa599989abd2d",
+  "overlay_image_id": "sha256:1afed5ce0b0cb7eca74f848fd7431d581dcde6ca311e44dcd9b1590eaeb19196",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 5059,
+  "second_afl_tuples": 3917,
+  "afl_tuple_difference": 1730,
+  "first_parser_features": 5257,
+  "second_parser_features": 4008,
+  "parser_feature_difference": 1917,
+  "first_only_features_by_file": {
+    "org/apache/hadoop/hive/ql/parse/HiveLexer_HiveLexerParent.java": 123,
+    "org/apache/hadoop/hive/ql/parse/HiveParser.java": 2,
+    "org/apache/hadoop/hive/ql/parse/HiveParser_FromClauseParser.java": 488,
+    "org/apache/hadoop/hive/ql/parse/HiveParser_IdentifiersParser.java": 670,
+    "org/apache/hadoop/hive/ql/parse/HiveParser_SelectClauseParser.java": 299,
+    "org/apache/hadoop/hive/ql/parse/ParseDriver.java": 1
+  },
+  "second_only_features_by_file": {
+    "org/apache/hadoop/hive/ql/parse/ASTNode.java": 3,
+    "org/apache/hadoop/hive/ql/parse/HiveLexer_HiveLexerParent.java": 40,
+    "org/apache/hadoop/hive/ql/parse/HiveParser.java": 6,
+    "org/apache/hadoop/hive/ql/parse/HiveParser_FromClauseParser.java": 171,
+    "org/apache/hadoop/hive/ql/parse/HiveParser_IdentifiersParser.java": 114
+  }
+}

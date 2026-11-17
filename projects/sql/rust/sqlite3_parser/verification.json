@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "sqlite3_parser::lexer::sql::Parser::new(&Bump, local bytes) and FallibleIterator::next -> Option<Cmd>; the harness reads Stmt::Select (Select, OneSelect::Select, FromClause, JoinedSelectTable) and Stmt::Insert (QualifiedName, DistinctNames, InsertBody, OneSelect::Values) and walks Expr for FunctionCall/FunctionCallStar names and Literal values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T19:53:01.442643+00:00",
+  "manifest": "projects/sql/rust/sqlite3_parser/manifest.json",
+  "image_id": "sha256:1c1b70ebf4f724fe44c7758143d081920ff4fe7ed82faaea2859422ba7d669e3",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "fbb44bfd84bfd1bde5ee215dd0b27d10c3c601a1b7cf03a91c7d6f607f2a10f7",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "7ae3230ea31a2caaa4596844e850b5985b2c6b981583f8050347af8568fa8671",
+    "Cargo.toml": "27de4707ec7629bad730722e0626c9b471c80d640ea131a19a5b170fb9f24b93",
+    "Dockerfile": "1727c890ec3045dacbdb29c4e06e6d8733cdf43966357116c236916fc63cb5b1",
+    "manifest.json": "e8d47aa87aeae5141f6acb2ad6c8d7e85501991af1f3ebfc32c9177dda42e404",
+    "run-control.sh": "ab016f2d0643f19b35734e72db546c4ddab68267fb5a9a3b23fe4088acd1b043",
+    "source-lock.json": "d370b78fea36a46c05ce254a44aa03414894b2342ed4663defbc5dd064843f54",
+    "src/bin/fuzzer.rs": "79791a27cb796ffb45de7354361246ade4320e36a2908a68d769062ef290062e",
+    "src/bin/replay.rs": "0170aaf5d1b2a67bec34ef38337cb8b9a6ff14668c492e1c5fd9af5a40938c87",
+    "src/lib.rs": "345afd38401f82d45d07b8532a6851d2ed906309818b8efef10363bcfee06d82"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 8,
+  "parser_source_lines_covered": 420,
+  "format_specific_source_lines_covered": 132,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/sqlite3_parser/target/coverage/coverage.json",
+  "pass": true
+}

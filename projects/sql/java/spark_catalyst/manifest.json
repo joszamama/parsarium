@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "org.apache.spark:spark-catalyst_2.12",
+  "release": "3.5.9",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/spark_catalyst/source-lock.json",
+  "source_sha256": "960ca5e1ac07625063855be2e552202d1e84d069f288e51d5ad08bb0fa685a7d",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "Spark SQL (CatalystSqlParser with default SQLConf; ANSI mode off)",
+  "parser_family": "Spark SQL ANTLR4 SqlBaseParser grammar (spark-sql-api) with the Scala AstBuilder in spark-catalyst building an unresolved Catalyst LogicalPlan; grammar originally derived from Presto's SqlBase.g4 but long diverged, independent of jOOQ, Druid, Calcite and JSqlParser",
+  "api": "CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan (unresolved); the harness walks the plan (UnresolvedRelation, Join, Filter, Aggregate/Project, Sort; InsertIntoStatement over UnresolvedInlineTable) and its expressions (UnresolvedFunction, Literal with its parser origin span)",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/kryo-shaded-4.0.2.jar:/work/lib/commons-codec-1.16.1.jar:/work/lib/antlr4-runtime-4.9.3.jar:/work/lib/commons-lang3-3.12.0.jar:/work/lib/hadoop-client-api-3.3.4.jar:/work/lib/log4j-api-2.20.0.jar:/work/lib/log4j-core-2.20.0.jar:/work/lib/spark-catalyst_2.12-3.5.9.jar:/work/lib/spark-common-utils_2.12-3.5.9.jar:/work/lib/spark-core_2.12-3.5.9.jar:/work/lib/spark-network-common_2.12-3.5.9.jar:/work/lib/spark-sql-api_2.12-3.5.9.jar:/work/lib/spark-unsafe_2.12-3.5.9.jar:/work/lib/json4s-ast_2.12-3.7.0-M11.jar:/work/lib/scala-library-2.12.18.jar:/work/lib/scala-reflect-2.12.18.jar:/work/lib/slf4j-api-1.7.36.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.apache.spark:spark-catalyst_2.12:3.5.9 and spark-sql-api_2.12:3.5.9 org.apache.spark.sql.catalyst classes (ANTLR SqlBaseParser, Scala AstBuilder, plan and expression nodes) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/org/apache/spark/sql/catalyst/parser/AstBuilder.scala",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed by CatalystSqlParser.parsePlan with the default SQLConf; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. parsePlan parses one statement (the grammar accepts the trailing semicolon), so statement_count is 1 by API contract. The parser rewrites COUNT(*) to count(1); that synthesized Literal is excluded by its origin span. Analysis, ANSI mode and Spark-only syntax are untested."
+}

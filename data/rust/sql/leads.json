@@ -47,33 +47,56 @@
     },
     {
       "name": "pg_query",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 2607956,
       "metric_error": null,
       "latest_release_observed": "18.1.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query::parse",
-      "reason": "Rust FFI binding to libpg_query; pg_query::parse returns a ParseResult protobuf tree. Not run in this round: the crate compiles libpg_query C through build.rs; parser-source coverage and AFL++ feedback for the native C grammar need the dual-profile FFI setup used by the Rust minimp3 path. Next Rust lead by metric."
+      "reason": "pg_query::parse returns the libpg_query protobuf parse tree; both valid controls equal the oracle. Verified with a clang 23.1.3 build of the vendored libpg_query sharing one LLVM profile with the Rust binding, and AFL++ feedback from the Rust crates plus the gram.c, scan.c and parser.c objects (nm-checked).",
+      "selected_release": "18.1.0"
+    },
+    {
+      "name": "sqllogictest",
+      "status": "excluded",
+      "metric_value": 1118279,
+      "metric_error": null,
+      "latest_release_observed": "0.29.1",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Parser and runner for the sqllogictest script format; it does not parse SQL statements into a syntax tree."
     },
     {
       "name": "sqlite3-parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 1003820,
       "metric_error": null,
       "latest_release_observed": "0.17.0",
-      "family": "SQLite grammar (Lemon, Rust port)",
-      "documented_api_lead": "Parser::next",
-      "reason": "Lemon-generated SQLite grammar ported to Rust; Parser yields ast::Cmd/Stmt. Not run in this round; ranks below pg_query."
+      "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "documented_api_lead": "lexer::sql::Parser (FallibleIterator::next)",
+      "reason": "Parser::new(&Bump, bytes) yields Cmd/Stmt AST values from the generated Lemon parser; both valid controls equal the oracle (string literals unquoted by the adapter). Verified with Rust source coverage of the crate and its generated parse.rs and whole-binary cargo-afl feedback.",
+      "selected_release": "0.17.0"
+    },
+    {
+      "name": "libsql-sqlite3-parser",
+      "status": "excluded",
+      "metric_value": 566930,
+      "metric_error": null,
+      "latest_release_observed": "0.13.0",
+      "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "documented_api_lead": "lexer::sql::Parser",
+      "reason": "Near-identical fork of an older sqlite3-parser release: 98.1% of its 13,501 source lines match sqlite3-parser 0.12.0 (difflib over 14 common .rs/.y files, 4 byte-identical), against 68.0% for the selected 0.17.0. Not a separate parser; the family is represented by sqlite3-parser."
     },
     {
       "name": "polyglot-sql",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 113477,
       "metric_error": null,
       "latest_release_observed": "0.14.1",
-      "family": "polyglot-sql",
+      "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
       "documented_api_lead": "parse",
-      "reason": "SQL transpiler with its own parser."
+      "reason": "parse(sql, DialectType::Generic) returns a typed Expression AST from the crate's own tokenizer and parser (no sqlparser-rs dependency or copied code); both valid controls equal the oracle.",
+      "selected_release": "0.14.1"
     },
     {
       "name": "gluesql-core",
@@ -86,6 +109,36 @@
       "reason": "Database engine; parses through sqlparser-rs."
     },
     {
+      "name": "fsqlite-parser",
+      "status": "excluded",
+      "metric_value": 70368,
+      "metric_error": null,
+      "latest_release_observed": "0.5.0",
+      "family": "fsqlite hand-written parser",
+      "documented_api_lead": null,
+      "reason": "Cargo.toml license-file = LICENSE, an MIT text with a rider that withholds all rights from named parties and restricts use in evaluation harnesses; not an open-source license, so the path is ineligible. Not run."
+    },
+    {
+      "name": "sqlparser-dsql",
+      "status": "excluded",
+      "metric_value": 42811,
+      "metric_error": null,
+      "latest_release_observed": "0.62.12",
+      "family": "sqlparser-rs recursive-descent parser",
+      "documented_api_lead": "Parser::parse_sql",
+      "reason": "Fork of sqlparser 0.62.0 with Aurora DSQL extensions: 99.7% of sqlparser 0.62.0 source lines are retained and they make up 97.3% of the fork (44 common files, 26 byte-identical). Same parser as the selected sqlparser path."
+    },
+    {
+      "name": "spacetimedb-sql-parser",
+      "status": "excluded",
+      "metric_value": 26247,
+      "metric_error": null,
+      "latest_release_observed": "2.15.0",
+      "family": "sqlparser-rs (wrapper)",
+      "documented_api_lead": null,
+      "reason": "Business Source License 1.1 (not open source until its change date) and it parses through sqlparser-rs."
+    },
+    {
       "name": "sql_query_builder",
       "status": "excluded",
       "metric_value": 15937,
@@ -96,24 +149,149 @@
       "reason": "Query builder; emits SQL."
     },
     {
-      "name": "nom-sql",
+      "name": "databend-common-ast",
+      "status": "selected",
+      "metric_value": 6616,
+      "metric_error": null,
+      "latest_release_observed": "0.2.5",
+      "family": "Databend SQL parser (logos tokenizer, nom/pratt combinators)",
+      "documented_api_lead": "parser::parse_sql",
+      "reason": "In the recorded 'sql parser' snapshot. tokenize_sql + parse_sql(Dialect::PostgreSQL) return Databend's own AST; both valid controls equal the oracle.",
+      "selected_release": "0.2.5"
+    },
+    {
+      "name": "sqlparser-lance",
+      "status": "excluded",
+      "metric_value": 6479,
+      "metric_error": null,
+      "latest_release_observed": "0.32.0",
+      "family": "sqlparser-rs recursive-descent parser",
+      "documented_api_lead": null,
+      "reason": "Its crates.io description calls it a fork of sqlparser-rs (0.32.0, 2023, repository field points at sqlparser-rs). Old fork of the selected sqlparser; overlap not measured."
+    },
+    {
+      "name": "qusql-parse",
+      "status": "selected",
+      "metric_value": 3272,
+      "metric_error": null,
+      "latest_release_observed": "0.12.0",
+      "family": "qusql-parse hand-written lexer and recursive-descent parser",
+      "documented_api_lead": "parse_statements",
+      "reason": "Found in the recorded 'sql parser' search snapshot (3,272 recent downloads). parse_statements(sql, &mut Issues, &ParseOptions) returns typed statements; both valid controls equal the oracle with the default MariaDB dialect. Successor of sql-parse by the same author.",
+      "selected_release": "0.12.0"
+    },
+    {
+      "name": "typedpg_pg_query",
       "status": "unresolved",
+      "metric_value": 2424,
+      "metric_error": null,
+      "latest_release_observed": "0.7.3",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "typedpg_pg_query::parse",
+      "reason": "Separate Rust binding over its own vendored libpg_query (MIT AND BSD-3-Clause AND PostgreSQL); shares only the generated protobuf module with pg_query (difflib: 33% of pg_query src lines). Not run in this round: it needs the same clang-23 dual-profile FFI build as pg_query. Next lead by metric."
+    },
+    {
+      "name": "spg-sql",
+      "status": "selected",
+      "metric_value": 2268,
+      "metric_error": null,
+      "latest_release_observed": "9.1.0",
+      "family": "spg-sql hand-written PostgreSQL-dialect lexer and recursive-descent parser",
+      "documented_api_lead": "parser::parse_statement",
+      "reason": "In the recorded 'sql parser' snapshot. parse_statement returns the SPG front-end AST; both valid controls equal the oracle.",
+      "selected_release": "9.1.0"
+    },
+    {
+      "name": "oxisqlite-sqlite3-parser",
+      "status": "unresolved",
+      "metric_value": 2184,
+      "metric_error": null,
+      "latest_release_observed": "0.4.1",
+      "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "documented_api_lead": null,
+      "reason": "Another fork of the lemon-rs sqlite3-parser code (same description); overlap not measured in this round."
+    },
+    {
+      "name": "proof-of-sql-parser",
+      "status": "excluded",
+      "metric_value": 1897,
+      "metric_error": null,
+      "latest_release_observed": "0.120.2",
+      "family": "Proof of SQL LALRPOP grammar over sqlparser-rs types",
+      "documented_api_lead": null,
+      "reason": "Cryptographic Open Software License 1.0 (not an OSI open-source license) and a restricted SQL subset for the Proof of SQL engine."
+    },
+    {
+      "name": "sqlglot-rust",
+      "status": "selected",
+      "metric_value": 1707,
+      "metric_error": null,
+      "latest_release_observed": "0.11.2",
+      "family": "sqlglot-rust tokenizer and recursive-descent parser (sqlglot-inspired)",
+      "documented_api_lead": "parser::parse_statements",
+      "reason": "In the recorded 'sql parser' snapshot. parse_statements(sql, Dialect::Ansi) returns a typed AST; both valid controls equal the oracle.",
+      "selected_release": "0.11.2"
+    },
+    {
+      "name": "turso_sqlite3_parser",
+      "status": "unresolved",
+      "metric_value": 1707,
+      "metric_error": null,
+      "latest_release_observed": "0.1.5",
+      "family": "SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)",
+      "documented_api_lead": null,
+      "reason": "Fork of the lemon-rs sqlite3-parser code (same description and repository); overlap not measured in this round."
+    },
+    {
+      "name": "nom-sql",
+      "status": "selected",
       "metric_value": 1551,
       "metric_error": null,
       "latest_release_observed": "0.0.11",
-      "family": "nom-sql",
-      "documented_api_lead": "parse_query",
-      "reason": "nom-based MySQL subset parser (old)."
+      "family": "nom-sql nom combinator parser (MySQL subset)",
+      "documented_api_lead": "parse_query_bytes",
+      "reason": "parse_query_bytes returns a SqlQuery AST; both valid controls equal the oracle (decimal rebuilt from Real {integral, fractional}).",
+      "selected_release": "0.0.11"
+    },
+    {
+      "name": "sql-ast",
+      "status": "excluded",
+      "metric_value": 1472,
+      "metric_error": null,
+      "latest_release_observed": "0.8.0",
+      "family": "sqlparser-rs recursive-descent parser",
+      "documented_api_lead": null,
+      "reason": "README says it is forked from sqlparser-rs; 96.1% of sqlparser 0.5.0 source lines reappear (90.4% of sql-ast 0.8.0, 13 common files). Near-identical fork of an old release of the selected sqlparser."
+    },
+    {
+      "name": "banshee_parser",
+      "status": "unresolved",
+      "metric_value": 1234,
+      "metric_error": null,
+      "latest_release_observed": "0.2.8",
+      "family": "banshee recovering PostgreSQL CST parser",
+      "documented_api_lead": null,
+      "reason": "Lossless CST parser; below the ten-path ceiling once nine paths are verified and not evaluated in this round."
+    },
+    {
+      "name": "pgmold-sqlparser",
+      "status": "excluded",
+      "metric_value": 1015,
+      "metric_error": null,
+      "latest_release_observed": "0.64.0",
+      "family": "sqlparser-rs recursive-descent parser",
+      "documented_api_lead": null,
+      "reason": "Its description calls it a fork of sqlparser with extra PostgreSQL features; same parser family and release line as the selected sqlparser 0.64.0. Overlap not measured."
     },
     {
       "name": "sql-parse",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 746,
       "metric_error": null,
       "latest_release_observed": "0.28.0",
-      "family": "sql-parse",
+      "family": "qusql-parse hand-written lexer and recursive-descent parser (predecessor)",
       "documented_api_lead": "parse_statements",
-      "reason": "MySQL/MariaDB/PostgreSQL parser with its own AST."
+      "reason": "Predecessor name of qusql-parse: its repository README says the project moved to the qusql-parse folder of antialize/qusql, and 50.5% of sql-parse 0.28.0 source lines reappear in qusql-parse 0.12.0 (difflib over the 21 common file paths). Excluded as a predecessor name, as trust-dns-proto was for hickory-proto."
     }
   ]
 }

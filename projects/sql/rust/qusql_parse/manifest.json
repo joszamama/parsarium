@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "rust",
+  "pilot": true,
+  "package": "qusql-parse",
+  "release": "0.12.0",
+  "catalog_parser": "data/rust/sql/parsers.json",
+  "source_lock": "projects/sql/rust/qusql_parse/source-lock.json",
+  "source_sha256": "fc00cde9df2d85976aa74f404cdff578f290d03daa0a7817588e2a908d7cd4b3",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "SQLDialect::MariaDB (ParseOptions::new() default)",
+  "parser_family": "qusql-parse hand-written lexer and recursive-descent parser (successor of the sql-parse crate by the same author)",
+  "api": "qusql_parse::parse_statements(local UTF-8 text, &mut Issues, &ParseOptions::new()) -> Vec<Statement>; the harness rejects any error-level Issue, reads Statement::Select (select_exprs, where_, group_by, order_by) and Statement::InsertReplace (table, columns, values) and walks the tree with the crate's Visitor for TableReference::Table/Join, Function/AggregateFunction calls and literal expressions",
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in the qusql-parse crate (lexer, parser and AST), with libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/qusql-parse-0.12.0/",
+  "format_specific_coverage_file_suffix": "/src/select.rs",
+  "scope": "One SQL statement from local UTF-8 text with the default MariaDB dialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Numbers are reported as the source text of their spans. The parser recovers from errors; the adapter treats any error-level issue as a failure. Other dialects are untested."
+}

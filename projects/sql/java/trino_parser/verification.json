@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement; the harness reads Query/QuerySpecification (select items, from join tree, where, group by, order by) and Insert (target, columns, Values rows) and collects Table, FunctionCall and literal nodes with a DefaultTraversalVisitor",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:04:38.116266+00:00",
+  "manifest": "projects/sql/java/trino_parser/manifest.json",
+  "image_id": "sha256:c254491ba22ac9f556d6cf990bc298656c01a3dda2a7cf4e731f6e0a62404647",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "fb48151704697abceefd803651ae54a4da713d905420ebc4500151081e06eb36",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "126980b4fe45966e8b6c9ceb96d0cfd6682379352a8f03611bf758efc16b9aa1",
+    "SqlHarness.java": "60a94d7ec0da216707a6d8a649408618d419b409e28ec0bf948652b0a799c9b3",
+    "manifest.json": "de658a770cc94448afd6ade35ce1470b3829f45402573f658b001a5848f1f6cd",
+    "run-control.sh": "9cccc453f842253645b8d05ce10a337d24aec5e119ff677a7282631c145de244",
+    "source-lock.json": "1e808ddcbcfb863cc63198dd2afb36041393019570c52a503e93988e422ce03d"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 43,
+  "parser_source_lines_covered": 1879,
+  "format_specific_source_lines_covered": 208,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/trino_parser/target/coverage/coverage.json",
+  "pass": true
+}

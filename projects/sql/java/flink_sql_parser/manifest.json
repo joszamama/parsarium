@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "org.apache.flink:flink-sql-parser",
+  "release": "2.3.0",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/flink_sql_parser/source-lock.json",
+  "source_sha256": "ff7faebcc21e3bb5200a0559f32eb62f7491cc46c11dd34743cb15194122441b",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/flink-sql-parser-2.3.0.jar:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "Flink SQL (FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA as in Flink's planner)",
+  "parser_family": "Apache Calcite JavaCC grammar template extended by Flink (Parser.jj generated with Flink's parserImpls into org.apache.flink.sql.parser.impl.FlinkSqlParserImpl) building Calcite SqlNode trees and Flink extensions; shares the Calcite family with org.apache.calcite:calcite-core but is a separately generated parser class",
+  "api": "SqlParser.create(local SQL text, SqlParser.config().withParserFactory(FlinkSqlParserImpl.FACTORY).withConformance(FlinkSqlConformance.DEFAULT).withLex(Lex.JAVA)).parseStmtList() -> SqlNodeList; the harness reads SqlOrderBy/SqlSelect and Flink's RichSqlInsert (a SqlInsert) and collects SqlFunction calls and literals with an SqlBasicVisitor",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/flink-sql-parser-2.3.0.jar:/work/lib/slf4j-api-1.7.36.jar:/work/lib/failureaccess-1.0.1.jar:/work/lib/guava-32.1.3-jre.jar:/work/lib/avatica-core-1.23.0.jar:/work/lib/calcite-core-1.36.0.jar:/work/lib/calcite-linq4j-1.36.0.jar:/work/lib/apiguardian-api-1.1.2.jar:/work/lib/checker-qual-3.37.0.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.apache.flink:flink-sql-parser:2.3.0 org.apache.flink.sql.parser classes (JavaCC FlinkSqlParserImpl and token manager, Flink SqlNode extensions) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/org/apache/flink/sql/parser/impl/FlinkSqlParserImpl.java",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed through Calcite's SqlParser with Flink's FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT and Lex.JAVA; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other conformance levels and Flink-only DDL are untested."
+}

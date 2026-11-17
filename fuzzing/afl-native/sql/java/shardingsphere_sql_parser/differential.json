@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:33:23.571373+00:00",
+  "project": "sql/java/shardingsphere_sql_parser",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "8823c0722485a4d5fd0d25be1b9ec8f05eec494fa1f51aeca770fb91c3f47bd9",
+  "overlay_receipt_sha256": "3caa67ad8fd56332dbd42c69a89ca81fc8aab1ccf710308445a8dc9b981013da",
+  "base_image_id": "sha256:7c1bc3c2f1a3c14611be5b2b9eaf6d3b60bcf1e9a09b98df45551bd90687c206",
+  "overlay_image_id": "sha256:497df1735202a311d29f9d3f015ea44d9a30651378860de2b753bdc0f4011ec7",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 1537,
+  "second_afl_tuples": 1008,
+  "afl_tuple_difference": 975,
+  "first_parser_features": 1542,
+  "second_parser_features": 999,
+  "parser_feature_difference": 997,
+  "first_only_features_by_file": {
+    "org/apache/shardingsphere/sql/parser/autogen/MySQLStatementBaseVisitor.java": 1,
+    "org/apache/shardingsphere/sql/parser/autogen/MySQLStatementParser.java": 597,
+    "org/apache/shardingsphere/sql/parser/mysql/visitor/statement/impl/MySQLStatementSQLVisitor.java": 140,
+    "org/apache/shardingsphere/sql/parser/sql/common/enums/AggregationType.java": 3,
+    "org/apache/shardingsphere/sql/parser/sql/common/enums/JoinType.java": 2,
+    "org/apache/shardingsphere/sql/parser/sql/common/enums/OrderDirection.java": 3,
+    "org/apache/shardingsphere/sql/parser/sql/common/segment/dml/item/AggregationProjectionSegment.java": 7,
+    "org/apache/shardingsphere/sql/parser/sql/common/segment/dml/item/ColumnProjectionSegment.java": 3,
+    "org/apache/shardingsphere/sql/parser/sql/common/segment/dml/order/item/ColumnOrderByItemSegment.java": 3,
+    "org/apache/shardingsphere/sql/parser/sql/common/segment/dml/order/item/TextOrderByItemSegment.java": 2,
+    "org/apache/shardingsphere/sql/parser/sql/common/segment/generic/table/JoinTableSegment.java": 2,
+    "org/apache/shardingsphere/sql/parser/sql/common/segment/generic/table/SimpleTableSegment.java": 2,
+    "org/apache/shardingsphere/sql/parser/sql/common/statement/dml/SelectStatement.java": 4,
+    "org/apache/shardingsphere/sql/parser/sql/dialect/statement/mysql/dml/MySQLSelectStatement.java": 1
+  },
+  "second_only_features_by_file": {
+    "org/apache/shardingsphere/sql/parser/autogen/MySQLStatementBaseVisitor.java": 1,
+    "org/apache/shardingsphere/sql/parser/autogen/MySQLStatementParser.java": 187,
+    "org/apache/shardingsphere/sql/parser/mysql/visitor/statement/impl/MySQLStatementSQLVisitor.java": 33,
+    "org/apache/shardingsphere/sql/parser/sql/common/statement/dml/InsertStatement.java": 3,
+    "org/apache/shardingsphere/sql/parser/sql/common/value/literal/impl/NumberLiteralValue.java": 2,
+    "org/apache/shardingsphere/sql/parser/sql/dialect/statement/mysql/dml/MySQLInsertStatement.java": 1
+  }
+}

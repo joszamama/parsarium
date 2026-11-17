@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "new SQLParserEngine(\"MySQL\", new CacheOption(128, 1024L)).parse(local SQL text, false) -> ParseASTNode, then new SQLVisitorEngine(\"MySQL\", \"STATEMENT\", false, new Properties()).visit(tree) -> SQLStatement; the harness reads SelectStatement (projections, join table segments, where, group by, order by) and InsertStatement (table, insert columns, values segments) and walks aggregation, function and literal expression segments",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:30:12.091822+00:00",
+  "manifest": "projects/sql/java/shardingsphere_sql_parser/manifest.json",
+  "image_id": "sha256:7c1bc3c2f1a3c14611be5b2b9eaf6d3b60bcf1e9a09b98df45551bd90687c206",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "de028b6adb93f311137cdb4382c23eaefc8526c0947bcc0f508c42bf535a1966",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "9c217d8f9b56f9c2bb1240117381736c7687672fc070a9a71cd073022c561cf7",
+    "SqlHarness.java": "08af3a3cad73faf10b5796b44d05e210536d6cd96e09d65b053080408fb738e5",
+    "manifest.json": "5c118ff251ec85e639449f7cc7fa2ba5d30ae6c04b976ab76fde2b98c7f84a89",
+    "run-control.sh": "e7640273b1ad2f1018fdcfbf72a82493d0a58419c4050777e6807a694837035e",
+    "source-lock.json": "028faf5b33528abf5731e1d391b523b0547a657aab01a96de492cee0965da4e7"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 37,
+  "parser_source_lines_covered": 1542,
+  "format_specific_source_lines_covered": 892,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/shardingsphere_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

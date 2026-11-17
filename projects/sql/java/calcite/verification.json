@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "SqlParser.create(local SQL text, SqlParser.config()).parseStmtList() -> SqlNodeList; the harness reads SqlOrderBy/SqlSelect (select list, from join tree, where, group, order list) and SqlInsert (target table, target columns, VALUES row operands) and collects SqlFunction calls and literals with an SqlBasicVisitor",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T19:57:13.113992+00:00",
+  "manifest": "projects/sql/java/calcite/manifest.json",
+  "image_id": "sha256:0552a6efd5036cd4bd996df271025ee8f77938ae2ad492bf05d58102824feaca",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "0af0fc287b26288c8354c3aa184c4216ef5ac01b9fb96883eb9afb51d3dae5bb",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "567e66998e9a0dff110f3e93aaf00b6b5f0c526d7ea1fcff1a41c8b792b84082",
+    "SqlHarness.java": "27c41b295572893cdcf33e801af66ad579ff6976fc092dd27e3925c3dd5d4e45",
+    "manifest.json": "b823affdf087ba2cd63bb89bd06ea59e3ef2030270d78cdcbd6f2ad42d008a87",
+    "run-control.sh": "d35c352bbb1a7f61336e4bb3ca2d893cb5c87c99131ca1669e33605a2ca298cf",
+    "source-lock.json": "6f501a727d099eafa77d62995406e8a64692c68ad1d9c415bd4bf8e3da9ca474"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 190,
+  "parser_source_lines_covered": 5986,
+  "format_specific_source_lines_covered": 2471,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/calcite/target/coverage/coverage.json",
+  "pass": true
+}

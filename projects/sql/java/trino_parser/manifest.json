@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "io.trino:trino-parser",
+  "release": "484",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/trino_parser/source-lock.json",
+  "source_sha256": "fb48151704697abceefd803651ae54a4da713d905420ebc4500151081e06eb36",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "Trino SQL (the only grammar; no parsing options)",
+  "parser_family": "Presto/Trino ANTLR4 SqlBase grammar, Trino branch (trino-grammar generated SqlBaseLexer/SqlBaseParser plus trino-parser AstBuilder) building the Trino AST (io.trino.sql.tree); shares ancestry with com.facebook.presto:presto-parser, independent of jOOQ, Druid, Calcite and JSqlParser",
+  "api": "new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement; the harness reads Query/QuerySpecification (select items, from join tree, where, group by, order by) and Insert (target, columns, Values rows) and collects Table, FunctionCall and literal nodes with a DefaultTraversalVisitor",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/error_prone_annotations-2.50.0.jar:/work/lib/failureaccess-1.0.3.jar:/work/lib/guava-33.7.2-jre.jar:/work/lib/j2objc-annotations-3.1.jar:/work/lib/trino-grammar-484.jar:/work/lib/trino-parser-484.jar:/work/lib/jakarta.annotation-api-3.0.0.jar:/work/lib/antlr4-runtime-4.13.2.jar:/work/lib/jspecify-1.0.1.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of io.trino:trino-parser:484 io.trino.sql classes and the io.trino:trino-grammar:484 ANTLR SqlBase lexer and parser during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/io/trino/sql/parser/AstBuilder.java",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8; the adapter removes one terminating semicolon and trailing whitespace, as the Trino CLI does before submitting, and calls the documented SqlParser.createStatement. Valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. createStatement parses exactly one statement, so statement_count is 1 by API contract. Trino-only syntax is untested."
+}

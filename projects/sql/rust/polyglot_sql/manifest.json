@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "rust",
+  "pilot": true,
+  "package": "polyglot-sql",
+  "release": "0.14.1",
+  "catalog_parser": "data/rust/sql/parsers.json",
+  "source_lock": "projects/sql/rust/polyglot_sql/source-lock.json",
+  "source_sha256": "8ea83ace7b8d9fc85b6a1d0bd129250cd29461dd61991791c44a4ea124f29904",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "DialectType::Generic (crate built with default features off and only ast-tools enabled)",
+  "parser_family": "polyglot-sql hand-written tokenizer and recursive-descent parser (sqlglot-style typed Expression AST); not derived from sqlparser-rs",
+  "api": "polyglot_sql::parse(local UTF-8 text, DialectType::Generic) -> Vec<Expression>; the harness reads Expression::Select (expressions, joins, where_clause, group_by, order_by) and Expression::Insert (table, columns, values) and walks the tree with the crate's ExpressionWalk::dfs for Table, Function/AggregateFunction and typed aggregate nodes and Literal values",
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in the polyglot-sql crate (tokenizer, parser and expression types), with libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/polyglot-sql-0.14.1/",
+  "format_specific_coverage_file_suffix": "/src/parser.rs",
+  "scope": "One SQL statement from local UTF-8 text with the Generic dialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. COUNT and SUM are typed aggregate nodes whose names come from the node kind. Other dialects, generation and transpilation are untested.",
+  "afl_fixed_hashmap_keys": true
+}
