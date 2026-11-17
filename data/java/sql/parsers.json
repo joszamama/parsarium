@@ -667,6 +667,128 @@
     }
   },
   {
+    "name": "org.apache.spark:spark-catalyst_2.12",
+    "version": "3.5.9",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (spark-parent_2.12-3.5.9.pom: Apache-2.0)",
+    "input_api": "CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan",
+    "documentation": "https://javadoc.io/doc/org.apache.spark/spark-catalyst_2.12/3.5.9/org/apache/spark/sql/catalyst/parser/CatalystSqlParser$.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/spark/spark-catalyst_2.12/3.5.9/spark-catalyst_2.12-3.5.9-sources.jar",
+    "source_sha256": "960ca5e1ac07625063855be2e552202d1e84d069f288e51d5ad08bb0fa685a7d",
+    "jar_sha256": "58715b96ee0dd847848d8096ea8da8409ee888689dbe71ec1fd07237f0d4d4d1",
+    "dependencies": [
+      "com.esotericsoftware:kryo-shaded 4.0.2",
+      "commons-codec:commons-codec 1.16.1",
+      "org.antlr:antlr4-runtime 4.9.3",
+      "org.apache.commons:commons-lang3 3.12.0",
+      "org.apache.hadoop:hadoop-client-api 3.3.4",
+      "org.apache.logging.log4j:log4j-api 2.20.0",
+      "org.apache.logging.log4j:log4j-core 2.20.0",
+      "org.apache.spark:spark-common-utils_2.12 3.5.9",
+      "org.apache.spark:spark-core_2.12 3.5.9",
+      "org.apache.spark:spark-network-common_2.12 3.5.9",
+      "org.apache.spark:spark-sql-api_2.12 3.5.9",
+      "org.apache.spark:spark-unsafe_2.12 3.5.9",
+      "org.json4s:json4s-ast_2.12 3.7.0-M11",
+      "org.scala-lang:scala-library 2.12.18",
+      "org.scala-lang:scala-reflect 2.12.18",
+      "org.slf4j:slf4j-api 1.7.36"
+    ],
+    "dialect": "Spark SQL (CatalystSqlParser with default SQLConf; ANSI mode off)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement parsePlan contract; the parser's synthesized count(1) literal for COUNT(*) is excluded by its origin span. Analysis, ANSI mode and Spark-only syntax are untested.",
+    "family": "Spark SQL ANTLR4 SqlBase grammar (AstBuilder to unresolved LogicalPlan)",
+    "family_note": "CatalystSqlParser.parsePlan runs the ANTLR4-generated SqlBaseLexer and SqlBaseParser shipped in spark-sql-api and converts the parse tree with spark-catalyst's Scala AstBuilder into an unresolved Catalyst LogicalPlan: Sort over Aggregate over Filter over Join of SubqueryAlias/UnresolvedRelation for the query, and InsertIntoStatement over UnresolvedInlineTable for the insert. No analysis or catalog lookup happens, so the plan is the parser's syntax tree. The catalyst package is documented in Spark's published API docs but marked internal (no compatibility guarantee). Spark's SqlBase.g4 was originally derived from Presto's grammar but has long diverged; its AstBuilder and node model are Spark's own. The metric belongs to the Scala 2.12 coordinate (529); the Scala 2.13 coordinate of the same sources (278) is not added.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 529,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.spark%3Aspark-catalyst_2.12",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over Scala 2.12 releases; most spark-catalyst dependents use Spark SQL's analyzer and optimizer, not only the parser. The Scala 2.13 coordinate is counted separately (278) and not combined."
+    },
+    "project": "projects/sql/java/spark_catalyst",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "io.trino:trino-parser",
     "version": "484",
     "license": "Apache-2.0",

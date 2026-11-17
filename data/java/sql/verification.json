@@ -557,6 +557,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/java/jsqlparser/differential.json"
     },
     {
+      "package": "org.apache.spark:spark-catalyst_2.12",
+      "version": "3.5.9",
+      "pass": true,
+      "input_api": "CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan",
+      "dialect": "Spark SQL (CatalystSqlParser with default SQLConf; ANSI mode off)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Spark SQL ANTLR4 SqlBase grammar (AstBuilder to unresolved LogicalPlan)",
+      "parser_source_files": 42,
+      "parser_source_lines_covered": 2114,
+      "afl_tuple_difference": 1311,
+      "parser_feature_difference": 1361,
+      "project_receipt": "projects/sql/java/spark_catalyst/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/spark_catalyst/differential.json"
+    },
+    {
       "package": "io.trino:trino-parser",
       "version": "484",
       "pass": true,
@@ -650,5 +742,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:38:31.548578+00:00"
+  "checked_at_utc": "2026-11-17T20:40:32.440388+00:00"
 }

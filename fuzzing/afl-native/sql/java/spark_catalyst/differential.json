@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:39:58.056781+00:00",
+  "project": "sql/java/spark_catalyst",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "dcfefaf341fdb25820af3b8fd2eb84e79d97aa3ff8cb82957049d35c753d8c7e",
+  "overlay_receipt_sha256": "fe0cc2a30ffe8ac0f607d7a1af790d6286e3128798f3aa19cd69a167e8500ffd",
+  "base_image_id": "sha256:a3facb9a33d9c4e18a5bbaa7c256ed2bad1def83c68f0d0d48266c2dcc8f8c28",
+  "overlay_image_id": "sha256:31266c0885c3172d95c75f9fbe34681d7d9d73a3e58ff924c58603e0f979cfa8",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 2104,
+  "second_afl_tuples": 1533,
+  "afl_tuple_difference": 1311,
+  "first_parser_features": 2114,
+  "second_parser_features": 1535,
+  "parser_feature_difference": 1361,
+  "first_only_features_by_file": {
+    "org/apache/spark/sql/catalyst/analysis/unresolved.scala": 16,
+    "org/apache/spark/sql/catalyst/expressions/AliasHelper.scala": 1,
+    "org/apache/spark/sql/catalyst/expressions/ExpectsInputTypes.scala": 1,
+    "org/apache/spark/sql/catalyst/expressions/Expression.scala": 5,
+    "org/apache/spark/sql/catalyst/expressions/SortOrder.scala": 12,
+    "org/apache/spark/sql/catalyst/expressions/namedExpressions.scala": 14,
+    "org/apache/spark/sql/catalyst/expressions/predicates.scala": 10,
+    "org/apache/spark/sql/catalyst/identifiers.scala": 5,
+    "org/apache/spark/sql/catalyst/parser/AstBuilder.scala": 169,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseParser.java": 637,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseParserBaseListener.java": 45,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseParserBaseVisitor.java": 3,
+    "org/apache/spark/sql/catalyst/plans/AliasAwareOutputExpression.scala": 3,
+    "org/apache/spark/sql/catalyst/plans/QueryPlan.scala": 1,
+    "org/apache/spark/sql/catalyst/plans/joinTypes.scala": 3,
+    "org/apache/spark/sql/catalyst/plans/logical/LogicalPlan.scala": 2,
+    "org/apache/spark/sql/catalyst/plans/logical/basicLogicalOperators.scala": 35,
+    "org/apache/spark/sql/catalyst/plans/logical/hints.scala": 4,
+    "org/apache/spark/sql/catalyst/trees/TreeNode.scala": 3,
+    "org/apache/spark/sql/catalyst/util/AttributeNameParser.scala": 1
+  },
+  "second_only_features_by_file": {
+    "org/apache/spark/sql/catalyst/analysis/unresolved.scala": 7,
+    "org/apache/spark/sql/catalyst/expressions/ExpressionInfo.java": 35,
+    "org/apache/spark/sql/catalyst/expressions/complexTypeCreator.scala": 28,
+    "org/apache/spark/sql/catalyst/expressions/literals.scala": 8,
+    "org/apache/spark/sql/catalyst/parser/AstBuilder.scala": 52,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseLexer.java": 8,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseParser.java": 218,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseParserBaseListener.java": 12,
+    "org/apache/spark/sql/catalyst/parser/SqlBaseParserBaseVisitor.java": 1,
+    "org/apache/spark/sql/catalyst/plans/logical/statements.scala": 15,
+    "org/apache/spark/sql/catalyst/types/PhysicalDataType.scala": 7
+  }
+}

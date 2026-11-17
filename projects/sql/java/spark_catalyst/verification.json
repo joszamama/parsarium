@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan (unresolved); the harness walks the plan (UnresolvedRelation, Join, Filter, Aggregate/Project, Sort; InsertIntoStatement over UnresolvedInlineTable) and its expressions (UnresolvedFunction, Literal with its parser origin span)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:36:52.175059+00:00",
+  "manifest": "projects/sql/java/spark_catalyst/manifest.json",
+  "image_id": "sha256:a3facb9a33d9c4e18a5bbaa7c256ed2bad1def83c68f0d0d48266c2dcc8f8c28",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "960ca5e1ac07625063855be2e552202d1e84d069f288e51d5ad08bb0fa685a7d",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "7beb1c813b2f1ee2d846c438cb1c5373ae9e468f663e9c63ffd92539f78285f6",
+    "SqlHarness.java": "f70a02823c8bea47bf50d8261e57ab68e1c242e595085d38669170ca5d0b301b",
+    "manifest.json": "2e8a3ac3ab8f206a77f9c27111f3dd5ab6826bc42fbf550e2705c420c2eba31c",
+    "run-control.sh": "2ac5141b86afce3b97b7a144c3c4babbfc68dda55f0610ed01208d8955186b79",
+    "source-lock.json": "87194ef3522a56ea07183af7aaa72762db3ec13cb8561814c0f9fad197c431e5"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 42,
+  "parser_source_lines_covered": 2114,
+  "format_specific_source_lines_covered": 206,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/spark_catalyst/target/coverage/coverage.json",
+  "pass": true
+}
