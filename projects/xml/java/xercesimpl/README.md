@@ -2,7 +2,7 @@
 
 Pinned release: `2.12.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[Parser record and lead log](../../../../data/java/xml/ranking.md)
+[API, control result, and parser family](../../../../catalog/xml/java/xercesimpl/README.md)
 
 ## Run from the repository root
 
