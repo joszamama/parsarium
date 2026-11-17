@@ -81,6 +81,16 @@ class GoYamlPilotTest(unittest.TestCase):
         self.assertIn("case yaml.MapSlice:", harness)
         self.assertNotIn("gopkg.in/yaml", harness)
 
+    def test_v4_harness_uses_v4_load_api(self):
+        if not any(row["name"] == "go.yaml.in/yaml/v4" for row in self.parsers):
+            self.skipTest("go.yaml.in/yaml/v4 not selected")
+        harness = (ROOT / "projects/yaml/go/go_yaml_in_yaml_v4/harness.go").read_text()
+        self.assertIn('"go.yaml.in/yaml/v4"', harness)
+        self.assertIn("yaml.Load(data, &document)", harness)
+        self.assertNotIn("yaml.Unmarshal(", harness)
+        manifest = read(ROOT / "projects/yaml/go/go_yaml_in_yaml_v4/manifest.json")
+        self.assertEqual(manifest["coverage_subject_prefix"], "go.yaml.in/yaml/v4/")
+
 
 if __name__ == "__main__":
     unittest.main()

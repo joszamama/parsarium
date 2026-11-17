@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T19:55:09.606466+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T20:04:09.530092+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_block_sequence_yaml",
   "results": [
     {
@@ -123,6 +123,53 @@
         "parser.go": 5,
         "scanner.go": 36,
         "token.go": 25
+      }
+    },
+    {
+      "project": "yaml/go/go_yaml_in_yaml_v4",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "a6123024f00e464d87f6ddfc72cc4762512758a1b44892e04af4e14a01c8b245",
+      "control": "controls/yaml/catalog.yaml",
+      "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+      "differential": "controls/yaml/order.yaml",
+      "differential_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+      "oracle": "controls/yaml/check_controls.py EXPECTED typed trees (hand-written, Psych cross-checked)",
+      "control_tree_pass": true,
+      "differential_tree_pass": true,
+      "runs_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 944,
+      "control_afl_tuples": 959,
+      "differential_parser_features": 955,
+      "differential_afl_tuples": 969,
+      "parser_feature_difference": 87,
+      "afl_tuple_difference": 86,
+      "control_features_by_file": {
+        "alias_data_path.go": 2,
+        "composer.go": 70,
+        "constructor.go": 39,
+        "errors.go": 1,
+        "loader.go": 22,
+        "node.go": 18,
+        "options.go": 8,
+        "parser.go": 176,
+        "plugin_alias_data.go": 10,
+        "plugin_merge_key.go": 1,
+        "plugin_parser.go": 1,
+        "reader.go": 66,
+        "registry.go": 13,
+        "resolver.go": 57,
+        "scanner.go": 451,
+        "serializer.go": 1,
+        "structmeta.go": 3,
+        "yaml.go": 5
+      },
+      "difference_features_by_file": {
+        "composer.go": 1,
+        "parser.go": 31,
+        "scanner.go": 55
       }
     }
   ]

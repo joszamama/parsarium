@@ -45,6 +45,21 @@
     "evidence": "projects/yaml/go/github_com_goccy_go_yaml/verification.json"
   },
   {
+    "name": "go.yaml.in/yaml/v4",
+    "status": "selected",
+    "metric_value": 376,
+    "metric_error": null,
+    "family": "go-yaml v4",
+    "api_hint": "yaml.Load([]byte, *yaml.Node)",
+    "note": "v4 major version of the go-yaml project (stable v4.0.0); own code base beside the selected v2 and v3.",
+    "found_by": "registry_search",
+    "source": "https://pkg.go.dev/go.yaml.in/yaml/v4",
+    "reason": "Selected: pinned v4.0.0 module zip; yaml.Load([]byte, *yaml.Node) with the default v4 options over one complete local YAML byte slice gives the oracle typed tree on both controls; 1620 package lines covered; three identical AFL++ runs per control, controls differ by 87 parser blocks and 86 tuples.",
+    "version_seen": "v4.0.0",
+    "license": "Apache-2.0 AND MIT",
+    "evidence": "projects/yaml/go/go_yaml_in_yaml_v4/verification.json"
+  },
+  {
     "name": "github.com/ghodss/yaml",
     "status": "shared_family",
     "metric_value": 19254,
