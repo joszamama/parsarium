@@ -91,11 +91,11 @@
   },
   {
     "name": "github.com/korandiz/mpa",
-    "status": "unresolved",
+    "status": "excluded",
     "imported_by_packages": 9,
     "version_seen": "v1.0.0",
     "license": "GPL-3.0",
-    "reason": "GPL-3.0 MPEG-1 Audio decoder (separate implementation); control adapter remains unchecked.",
+    "reason": "Independent MPEG-1 decoder: DecodeFrame reads all 11 MPEG-1 control frames with correct rate, channels, and sample count. The pinned decoder rejects MPEG-2 headers (id == 0); it decodes zero frames of the fixed MPEG-2 control and ends with unexpected EOF. It therefore cannot pass this cell's two-control gate. Reproducible probe and hashes: probes/korandiz_mpa/README.md.",
     "source": "https://pkg.go.dev/github.com/korandiz/mpa"
   },
   {

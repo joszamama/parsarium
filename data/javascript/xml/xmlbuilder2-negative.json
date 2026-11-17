@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "candidate": "xmlbuilder2",
+  "candidate_release": "4.0.3",
+  "candidate_license": "MIT",
+  "candidate_npm_integrity": "sha512-bx8Q1STctnNaaDymWnkfQLKofs0mGNN7rLLapJlGuV3VlvegD7Ls4ggMjE3aUSWItCCzU0PEv45lI87iSigiCA==",
+  "candidate_tarball_sha256": "ec05eccfe8c35a04ff19eddf30eeb3f96fc66f5dbe0f094e7c26a52fb69c2bdf",
+  "underlying_parser": "@oozcitak/dom",
+  "underlying_release": "2.0.2",
+  "underlying_npm_integrity": "sha512-GjpKhkSYC3Mj4+lfwEyI1dqnsKTgwGy48ytZEhm4A/xnH/8z9M3ZVXKr/YGQi3uCLs1AEBS+x5T2JPiueEDW8w==",
+  "underlying_tarball_sha256": "48b0ed28e0084845545f4036402d9bd33a3319f568bf632bda8401f8a9458fa2",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "tested_image_id": "sha256:ba913475607a0415f136a04765fb7f28f81c639c7c4f9181d7bfa5bde4fc2d58",
+  "api": "create(xmlString).node on local UTF-8 text",
+  "api_documentation": "https://github.com/oozcitak/xmlbuilder2/blob/5ca638bffd0c61a4de7045140e03e63aa8924cb5/README.md",
+  "parser_source": "xmlbuilder2/lib/readers/XMLReader.js consumes @oozcitak/dom/lib/parser/XMLStringLexer.js tokens",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "native_probe": "const fs=require(\"node:fs\");const xml=require(\"xmlbuilder2\");const doc=xml.create(fs.readFileSync(\"CONTROL\",\"utf8\")).node;const root=doc.documentElement;const item=root.firstElementChild;console.log(JSON.stringify({root:{name:root.nodeName,namespace_uri:root.namespaceURI},item_attributes:[...item.attributes].map(a=>({name:a.name,namespace_uri:a.namespaceURI,value:a.value}))}));",
+  "native_observed": {
+    "root": {
+      "name": "c:catalog",
+      "namespace_uri": "urn:parsarium:item"
+    },
+    "first_item_attributes": [
+      {
+        "name": "id",
+        "namespace_uri": null,
+        "value": "a1"
+      },
+      {
+        "name": "c:lang",
+        "namespace_uri": null,
+        "value": "es"
+      }
+    ]
+  },
+  "expat_oracle": {
+    "root": "{urn:parsarium:catalog}catalog",
+    "first_item_prefixed_attribute": "{urn:parsarium:catalog}lang=es"
+  },
+  "decision": "excluded_from_selected_xml_1_0_namespaces_cell",
+  "reason": "The documented XML import path is a real parser, but its native namespace URI results fail the pinned primary control. Reconstructing from QNames and xmlns attributes would conceal that failure."
+}

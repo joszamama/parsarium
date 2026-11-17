@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T13:35:29.322125+00:00",
+  "status": "negative_lead_token_stream_utility_over_encoding_xml",
+  "package": "mellium.im/xmlstream",
+  "release": "v0.15.4",
+  "release_published_utc": "2023-01-11T12:29:46Z",
+  "release_commit": "815d0dd1c3cd6f7e01356174837c34e1bfb9a9c1",
+  "source_url": "https://codeberg.org/mellium/xmlstream/src/tag/v0.15.4",
+  "license": "BSD-2-Clause (LICENSE); some code copied from Go under LICENSE-GO",
+  "license_file_sha256": "2705eb412fa8499998dbaf56658fed3982bd7bd89872e58b25b3fc239eca08e1",
+  "module_zip_sha256": "8be6fef9570756ea72eb003e660c3a3370aac9b708f662f22024e67047632a80",
+  "module_sum": "h1:gLKxcWl4rLMUpKgtzrTBvr4OexPeO/edYus+uK3F6ZI=",
+  "go_mod_sum": "h1:yXaCW2++fmVO4L9piKVkyLDqnCmictVYF7FDQW8prb4=",
+  "dependency": "mellium.im/reader v0.1.0",
+  "image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "go_toolchain": "go version go1.27.1 linux/arm64",
+  "underlying_source": "encoding/xml/xml.go",
+  "underlying_source_sha256": "41a7f2c7c910a57f70ce460cbe057a31703e11dbb169b499e50a3339a5f33bdb",
+  "package_non_test_go_lines": 1341,
+  "popularity": {
+    "metric": "pkg.go.dev Imported by package count",
+    "value": 86,
+    "importing_modules": 32,
+    "source": "https://pkg.go.dev/mellium.im/xmlstream?tab=importedby",
+    "captured_at_utc": "2026-11-17T13:31:41Z",
+    "registry_snapshot": "data/go/xml/registry-snapshot.json",
+    "caveat": "Package importers, not installations. The importer listing is dominated by mellium.im/xmpp and mellium.im/legacy packages from the same project and by forks of mellium.im/xmpp."
+  },
+  "api_finding": {
+    "local_bytes_parse_api": null,
+    "io_reader_api": "InnerReader(io.Reader) io.Reader: decodes only the outer start/end element with encoding/xml RawToken and returns the inner XML bytes without parsing them",
+    "token_apis": "ReadAll, NewIter, Inner, InnerElement, Skip, Copy, Pipe, MultiReader, TeeReader and the Transformer functions all accept an xml.TokenReader the caller constructs, in package examples and tests with xml.NewDecoder(io.Reader)",
+    "tokenizer": "none; no xmlstream source file reads XML bytes into tokens. InnerReader calls encoding/xml.Decoder.RawToken; everything else consumes Token() from a caller-supplied reader",
+    "api_reference": "https://pkg.go.dev/mellium.im/xmlstream@v0.15.4"
+  },
+  "parser_family": "Go encoding/xml.Decoder (same pinned encoding/xml source as stdlib_decoder, goxpp, x2j, mxj, etree and xmlquery); xmlstream adds token-stream composition only",
+  "modes": {
+    "readall": {
+      "repeated_runs_identical": true,
+      "controls": {
+        "catalog-ns.xml": {
+          "observed": {
+            "attributes": [
+              "version=1",
+              "id=a1",
+              "{urn:parsarium:catalog}lang=es",
+              "id=b2"
+            ],
+            "elements": [
+              "{urn:parsarium:catalog}catalog",
+              "{urn:parsarium:item}item",
+              "{urn:parsarium:item}item",
+              "{urn:parsarium:item}name",
+              "{urn:parsarium:item}note"
+            ],
+            "max_depth": 3,
+            "namespace_declarations": 2,
+            "namespaces": [
+              "urn:parsarium:catalog",
+              "urn:parsarium:item"
+            ],
+            "root": "{urn:parsarium:catalog}catalog",
+            "text": [
+              "Café & té",
+              "Zürich <HQ>",
+              "x < y"
+            ]
+          },
+          "xmlstream_cover_blocks": 7,
+          "encoding_xml_cover_blocks": 191,
+          "xmlstream_source_lines": 9,
+          "encoding_xml_source_lines": 306,
+          "matches_shared_namespace_oracle": true
+        },
+        "order-default-ns.xml": {
+          "observed": {
+            "attributes": [
+              "n=1",
+              "{urn:parsarium:price}currency=EUR",
+              "n=2",
+              "note=say \"hi\""
+            ],
+            "elements": [
+              "{urn:parsarium:order}order",
+              "{urn:parsarium:order}line",
+              "{urn:parsarium:order}sku",
+              "{urn:parsarium:price}amount",
+              "{urn:parsarium:order}line",
+              "plain",
+              "leaf"
+            ],
+            "max_depth": 4,
+            "namespace_declarations": 3,
+            "namespaces": [
+              "urn:parsarium:order",
+              "urn:parsarium:price"
+            ],
+            "root": "{urn:parsarium:order}order",
+            "text": [
+              "A-7",
+              "12.50 €"
+            ]
+          },
+          "xmlstream_cover_blocks": 7,
+          "encoding_xml_cover_blocks": 209,
+          "xmlstream_source_lines": 9,
+          "encoding_xml_source_lines": 342,
+          "matches_shared_namespace_oracle": true
+        }
+      },
+      "xmlstream_block_difference": 0,
+      "changed_xmlstream_blocks": [],
+      "encoding_xml_block_difference": 32
+    },
+    "iter": {
+      "repeated_runs_identical": true,
+      "controls": {
+        "catalog-ns.xml": {
+          "observed": {
+            "attributes": [
+              "version=1",
+              "id=a1",
+              "{urn:parsarium:catalog}lang=es",
+              "id=b2"
+            ],
+            "elements": [
+              "{urn:parsarium:catalog}catalog",
+              "{urn:parsarium:item}item",
+              "{urn:parsarium:item}item",
+              "{urn:parsarium:item}name",
+              "{urn:parsarium:item}note"
+            ],
+            "max_depth": 3,
+            "namespace_declarations": 2,
+            "namespaces": [
+              "urn:parsarium:catalog",
+              "urn:parsarium:item"
+            ],
+            "root": "{urn:parsarium:catalog}catalog",
+            "text": [
+              "Café & té",
+              "Zürich <HQ>",
+              "x < y"
+            ]
+          },
+          "xmlstream_cover_blocks": 41,
+          "encoding_xml_cover_blocks": 177,
+          "xmlstream_source_lines": 66,
+          "encoding_xml_source_lines": 288,
+          "matches_shared_namespace_oracle": true
+        },
+        "order-default-ns.xml": {
+          "observed": {
+            "attributes": [
+              "n=1",
+              "{urn:parsarium:price}currency=EUR",
+              "n=2",
+              "note=say \"hi\""
+            ],
+            "elements": [
+              "{urn:parsarium:order}order",
+              "{urn:parsarium:order}line",
+              "{urn:parsarium:order}sku",
+              "{urn:parsarium:price}amount",
+              "{urn:parsarium:order}line",
+              "plain",
+              "leaf"
+            ],
+            "max_depth": 4,
+            "namespace_declarations": 3,
+            "namespaces": [
+              "urn:parsarium:order",
+              "urn:parsarium:price"
+            ],
+            "root": "{urn:parsarium:order}order",
+            "text": [
+              "A-7",
+              "12.50 €"
+            ]
+          },
+          "xmlstream_cover_blocks": 41,
+          "encoding_xml_cover_blocks": 193,
+          "xmlstream_source_lines": 66,
+          "encoding_xml_source_lines": 322,
+          "matches_shared_namespace_oracle": true
+        }
+      },
+      "xmlstream_block_difference": 0,
+      "changed_xmlstream_blocks": [],
+      "encoding_xml_block_difference": 30
+    },
+    "innerreader": {
+      "repeated_runs_identical": true,
+      "controls": {
+        "catalog-ns.xml": {
+          "observed": {
+            "control": {
+              "error": "expected end element, found something else",
+              "inner_bytes": "\n  <item id=\"a1\" c:lang=\"es\">Café &amp; té</item>\n  <item id=\"b2\"><name>Zürich &lt;HQ&gt;</name><note><![CDATA[x < y]]></note></item>\n<"
+            },
+            "root_offset": 39,
+            "trailing_whitespace_trimmed": {
+              "inner_bytes": "\n  <item id=\"a1\" c:lang=\"es\">Café &amp; té</item>\n  <item id=\"b2\"><name>Zürich &lt;HQ&gt;</name><note><![CDATA[x < y]]></note></item>\n"
+            }
+          },
+          "xmlstream_cover_blocks": 21,
+          "encoding_xml_cover_blocks": 124,
+          "xmlstream_source_lines": 28,
+          "encoding_xml_source_lines": 198
+        },
+        "order-default-ns.xml": {
+          "observed": {
+            "control": {
+              "error": "expected end element, found something else",
+              "inner_bytes": "\n  <?audit step=\"1\"?>\n  <line n='1' p:currency=\"EUR\"><sku>A&#x2D;7</sku><p:amount>12&#46;50 &#x20AC;</p:amount></line>\n  <line n=\"2\" note=\"say &quot;hi&quot;\"><plain xmlns=\"\"><leaf/></plain></line>\n<"
+            },
+            "root_offset": 62,
+            "trailing_whitespace_trimmed": {
+              "inner_bytes": "\n  <?audit step=\"1\"?>\n  <line n='1' p:currency=\"EUR\"><sku>A&#x2D;7</sku><p:amount>12&#46;50 &#x20AC;</p:amount></line>\n  <line n=\"2\" note=\"say &quot;hi&quot;\"><plain xmlns=\"\"><leaf/></plain></line>\n"
+            }
+          },
+          "xmlstream_cover_blocks": 20,
+          "encoding_xml_cover_blocks": 135,
+          "xmlstream_source_lines": 27,
+          "encoding_xml_source_lines": 214
+        }
+      },
+      "xmlstream_block_difference": 1,
+      "changed_xmlstream_blocks": [
+        "mellium.im/xmlstream/reader.go:105.4,106.1"
+      ],
+      "encoding_xml_block_difference": 11
+    }
+  },
+  "inner_reader_on_valid_controls": "InnerReader returns an error on both unmodified controls because it sizes the body from bufio-buffered bytes and the controls end with a newline after the root end tag; with trailing whitespace trimmed it returns the inner bytes undecoded, with prefixes, entity references and CDATA as written",
+  "decision": "Not counted as a parser path. xmlstream has no documented local byte or io.Reader API that returns parsed XML structure and no tokenizer of its own. The namespace-aware result on both controls comes from the caller-built encoding/xml.Decoder that Parsarium already counts as stdlib_decoder. Counting xmlstream.ReadAll(xml.NewDecoder(r)) or NewIter would count encoding/xml again under a token utility's name.",
+  "docker_source_coverage": "measured in the pinned Go image with go build -cover over mellium.im/xmlstream and encoding/xml; no Parsarium project image was built",
+  "parser_specific_feedback": {
+    "oracle_paths": [
+      "readall",
+      "iter"
+    ],
+    "xmlstream_block_difference": {
+      "readall": 0,
+      "iter": 0
+    },
+    "encoding_xml_block_difference": {
+      "readall": 32,
+      "iter": 30
+    },
+    "finding": "On both paths that reproduce the namespace-aware result, the two valid controls execute the same xmlstream cover blocks; every block difference is in encoding/xml. An xmlstream-scoped AFL++ bridge would have no stable differential between the controls."
+  },
+  "afl_feedback": "not_built_no_xmlstream_differential",
+  "probe_file_sha256": {
+    "check.py": "ab0a54086f1f10220701956f6051d1933064db2f2ec4112336315eabc450c0ea",
+    "go.mod": "297ada8fd53702b8f6cbd25d09eb1cf277129bef7932b60b3c9cc757a663266e",
+    "go.sum": "fa89047c8d51fbfaabea344a12ed642d4666c3138c57a85e3845fef6c926c683",
+    "main.go": "5384df37c2f6da5aa36404c1e0773e3cf8d2bce764df314b5f1ec8707c285369"
+  },
+  "adapter": "lead-probes/go/xml/xmlstream/main.go"
+}

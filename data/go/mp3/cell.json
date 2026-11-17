@@ -17,13 +17,13 @@
   "leads_recorded": 14,
   "leads_by_status": {
     "shared_family": 4,
-    "excluded": 4,
+    "excluded": 5,
     "selected": 3,
-    "unresolved": 3
+    "unresolved": 2
   },
   "ranking_metric": "pkg.go.dev Imported by package count",
   "selection": "Four MPEG Layer III parser paths verified: hajimehoshi/go-mp3 (294 Imported by) and tosone/minimp3 (34) decode PCM; tcolgate/mp3 (62) and dmulholl/mp3lib (9) parse complete frame headers and boundaries without PCM. Each uses a documented local byte or io.Reader API and matches the applicable independent valid-control oracle. tosone/minimp3 invokes its vendored native C decoder through cgo; Go wrapper lines and native decoder lines are recorded separately.",
-  "uncertainty": "Four verified Go plain-MP3 paths; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Three leads remain unresolved and four recorded wrappers or forks share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling. minimp3 PCM hashes are pinned to the Clang-built linux/arm64 image and are not compared across toolchains.",
+  "uncertainty": "Four verified Go plain-MP3 paths; korandiz/mpa v1.0.0 is excluded by a pinned valid MPEG-2 control that yields zero frames and unexpected EOF, matching its MPEG-1-only header check; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Two leads remain unresolved and four recorded wrappers or forks share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling. minimp3 PCM hashes are pinned to the Clang-built linux/arm64 image and are not compared across toolchains.",
   "third_party_evidence": "data/go/mp3/parsers.json",
   "runtime_evidence": "data/go/mp3/standard.json",
   "registry_snapshot": "data/go/mp3/registry-snapshot.json",

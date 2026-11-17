@@ -50,11 +50,11 @@
   },
   {
     "name": "mellium.im/xmlstream",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v0.15.4",
     "license": "BSD-2-Clause",
     "imported_by": 86,
-    "reason": "Streaming token transformer API; whether it is a parser or a token-stream utility was not settled. Not run.",
+    "reason": "Pinned v0.15.4 source and two-valid-control Docker probe show xmlstream consumes a caller-supplied xml.TokenReader; InnerReader.RawToken delegates to Go encoding/xml. Only nine package lines execute, while 306 underlying encoding/xml lines parse. There is no own local bytes-to-XML-token API. Evidence: data/go/xml/xmlstream-lead-check.json.",
     "source": "https://pkg.go.dev/mellium.im/xmlstream"
   },
   {

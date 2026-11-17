@@ -34,7 +34,7 @@ Numeric leads from the same snapshot, not verified and not selected.
 
 | Lead | Version seen | Downloads (30 days) | Kind | Reason |
 | --- | --- | ---: | --- | --- |
-| [mpg123-decoder](https://www.npmjs.com/package/mpg123-decoder) | 1.0.3 | 2,505,430 | decoder not selected | mpg123 compiled to WASM with documented MPEGDecoder.decode(Uint8Array). Same libmpg123 engine as the verified C plain MP3 pilot and the mp3_id3v2/javascript @audio/decode paths. |
+| [mpg123-decoder](https://www.npmjs.com/package/mpg123-decoder) | 1.0.3 | 2,505,430 | decoder not selected | Pinned MPEGDecoder.decode(Uint8Array) decodes both valid controls to correct sample rates and sample counts through libmpg123 WASM. The shipped WASM has no name, DWARF or source-map sections, and V8 exposes only JS wrapper coverage; parser-source feedback is blocked, so the path remains unselected. Same libmpg123 family as C and tagged JS paths. |
 | [audio-decode](https://www.npmjs.com/package/audio-decode) | 3.12.0 | 1,467,199 | wrapper | Unscoped alias of @audio/decode; MP3 path delegates to @audio/decode-mp3 and mpg123-decoder WASM (libmpg123 family). |
 | [@audio/decode-mp3](https://www.npmjs.com/package/@audio/decode-mp3) | 1.3.1 | 703,988 | wrapper | Delegates MP3 decoding to mpg123-decoder WASM (libmpg123 family); verified in mp3_id3v2/javascript for the tagged control. |
 | [@audio/decode](https://www.npmjs.com/package/@audio/decode) | 4.3.0 | 621,561 | wrapper | Facade over @audio/decode-mp3 and mpg123-decoder WASM (libmpg123 family); verified in mp3_id3v2/javascript. |
