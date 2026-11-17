@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T07:43:54.170624+00:00",
+  "checked_at_utc": "2026-11-17T13:41:00.470073+00:00",
   "platform": "linux/arm64 Docker",
   "php": "PHP 8.5 (Ubuntu php8.5-cli for third-party PHP paths; PHP 8.5.12 source build for json_decode)",
   "controls": {
@@ -233,6 +233,164 @@
           "two"
         ],
         "top_level_keys": []
+      },
+      "error": null
+    },
+    {
+      "package": "pcrov/jsonreader",
+      "version": "1.0.4",
+      "scope": "Own pull lexer/state machine over local JSON bytes; exact type-tagged object and array controls",
+      "command": "python3 scripts/run_project.py json php pcrov_jsonreader",
+      "receipt": "projects/json/php/pcrov_jsonreader/verification.json",
+      "pass": true,
+      "output": {
+        "type": "object",
+        "members": {
+          "enabled": {
+            "type": "boolean",
+            "value": true
+          },
+          "missing": {
+            "type": "null"
+          },
+          "name": {
+            "type": "string",
+            "value": "parsarium"
+          },
+          "nested": {
+            "type": "object",
+            "members": {
+              "empty": {
+                "type": "object",
+                "members": {}
+              },
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "members": {
+                      "id": {
+                        "type": "number",
+                        "value": 1
+                      },
+                      "ok": {
+                        "type": "boolean",
+                        "value": false
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "members": {
+                      "id": {
+                        "type": "number",
+                        "value": 2
+                      },
+                      "text": {
+                        "type": "string",
+                        "value": "café \"quoted\""
+                      }
+                    }
+                  }
+                ]
+              },
+              "level": {
+                "type": "number",
+                "value": 2
+              },
+              "list": {
+                "type": "array",
+                "items": []
+              }
+            }
+          },
+          "ratio": {
+            "type": "number",
+            "value": -2.5
+          },
+          "tags": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string",
+                "value": "json"
+              },
+              {
+                "type": "string",
+                "value": "go"
+              },
+              {
+                "type": "string",
+                "value": "rfc8259"
+              }
+            ]
+          },
+          "version": {
+            "type": "number",
+            "value": 1
+          }
+        }
+      },
+      "parser_source_files": 7,
+      "parser_source_lines_covered": 257,
+      "format_specific_source_lines_covered": 132,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "type": "array",
+        "items": [
+          {
+            "type": "number",
+            "value": 1
+          },
+          {
+            "type": "number",
+            "value": 0.25
+          },
+          {
+            "type": "string",
+            "value": "two"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "members": {
+              "k": {
+                "type": "array",
+                "items": []
+              },
+              "n": {
+                "type": "object",
+                "members": {
+                  "deep": {
+                    "type": "string",
+                    "value": "A"
+                  }
+                }
+              }
+            }
+          }
+        ]
       },
       "error": null
     }
