@@ -43,18 +43,21 @@ npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](re
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | @leichtgewicht/dns-packet | 121,612 | `decode(buf)` | dns-packet fork |
-| 2 | dns-query | 114,588 |  | dns-packet family (@leichtgewicht/dns-packet) |
-| 3 | native-dns | 68,783 |  | native-dns-packet |
-| 4 | dohdec | 14,724 |  | dns-packet |
-| 5 | bns | 8,888 | `wire.Message.decode(data) (not in the README)` | bns (chjj) |
-| 6 | mdns-js-packet | 4,819 | `DNSPacket.parse(buffer)` | dns-js family |
-| 7 | @luminati-io/native-dns-packet | 1,196 |  | native-dns-packet |
-| 8 | dnsd | 340 | `dnsd.parse(buffer)` | dnsd (Iris Couch) |
-| 9 | native-node-dns-packet | 338 |  | native-dns-packet |
-| 10 | dnspacket-ts | 98 |  |  |
-| 11 | @serverless-dns/dns-parser | 19 |  |  |
+| 1 | bns | 8,888 | `wire.Message.decode(data) (source only)` | bns (chjj) own wire.js decoder |
+| 2 | dnspacket-ts | 98 | `decode(bytes)` | dnspacket-ts own TypeScript decoder |
+
+- **bns** (unresolved): Not promoted: bns 0.16.0's README documents servers, resolvers and a node-style dns API, but no API that parses caller-supplied message bytes. wire.Message.decode(data) exists in lib/wire.js (bufio Struct) and is used internally (lib/cache.js), but it is undocumented, so the documented-input-API rule is not met. Own decoder, independent of dns-packet.
+- **dnspacket-ts** (unresolved): Not checked: the cell reached the ten-path ceiling with higher-ranked paths (98 downloads, below dns-message's 127). Own TypeScript decoder: 2 of its 456 distinct non-test source lines occur in dns-packet 5.6.1.
 
 ## Checked, excluded or recorded separately
 
 - **multicast-dns** (excluded): mDNS network API over dns-packet; no own parser.
+- **@leichtgewicht/dns-packet** (excluded): Predecessor of the selected @dnsquery/dns-packet (same author and code line; 6.0.3, published 2022-06-01, before @dnsquery 6.1.1): 1,169 of its 1,174 distinct non-test source lines (99.6%) occur in @dnsquery/dns-packet 6.1.1, so it is not a separate parser path (trust-dns-proto and zend-json precedent).
+- **mdns-js-packet** (excluded): Earlier name of the selected dns-js (the dns-js README says the project moved from node-mdns-js-packet); 511 of its 521 distinct non-test source lines (98.1%) occur in dns-js 0.3.1.
+- **@serverless-dns/dns-parser** (excluded): Near-identical fork of the selected dns-packet: 936 of its 995 distinct non-test source lines (94.1%) occur in dns-packet 5.6.1 (1.0.1).
+- **dnsd** (excluded): Near-identical pair with the selected hbo-dnsd: hbo-dnsd 0.9.8 shares 857 of its 876 distinct non-test source lines (97.8%) with dnsd 0.9.6. One path per near-identical pair is counted, and hbo-dnsd has the higher download count (34,937 vs 340).
+- **dns-query** (excluded): DNS-over-HTTPS/UDP query client; 0.11.2 depends on @leichtgewicht/dns-packet for message encoding and decoding and has no parser of its own.
+- **native-dns** (excluded): Resolver and server over the selected native-dns-packet (0.7.0 depends on native-dns-packet ~0.1.1; lib/packet.js only wraps it); no own message parser.
+- **dohdec** (excluded): DoH/DoT/UDP/TCP client; 9.0.2 decodes messages with its dns-packet ^5.6.1 dependency and has no parser of its own.
+- **@luminati-io/native-dns-packet** (excluded): Near-identical fork of the selected native-dns-packet: 601 of its 606 distinct non-test source lines (99.2%) occur in native-dns-packet 0.1.1.
+- **native-node-dns-packet** (excluded): Near-identical fork of the selected native-dns-packet: 606 of its 610 distinct non-test source lines (99.3%) occur in native-dns-packet 0.1.1.

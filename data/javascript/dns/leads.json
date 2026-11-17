@@ -53,16 +53,17 @@
   },
   {
     "name": "@leichtgewicht/dns-packet",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 121612,
     "found_by": "registry search hit",
-    "documentation": "https://www.npmjs.com/package/@leichtgewicht/dns-packet",
+    "documentation": "https://github.com/martinheidegger/dns-packet#readme",
     "input_api_lead": "decode(buf)",
-    "family": "dns-packet fork",
+    "family": "dns-packet family (predecessor of @dnsquery/dns-packet)",
     "note": "Fork of dns-packet; shared family.",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 4
+    "lead_adoption_order": 4,
+    "reason": "Predecessor of the selected @dnsquery/dns-packet (same author and code line; 6.0.3, published 2022-06-01, before @dnsquery 6.1.1): 1,169 of its 1,174 distinct non-test source lines (99.6%) occur in @dnsquery/dns-packet 6.1.1, so it is not a separate parser path (trust-dns-proto and zend-json precedent)."
   },
   {
     "name": "native-dns-packet",
@@ -94,16 +95,17 @@
   },
   {
     "name": "mdns-js-packet",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 4819,
     "found_by": "registry search hit",
-    "documentation": "https://www.npmjs.com/package/mdns-js-packet",
+    "documentation": "https://github.com/mdns-js/node-dns-js",
     "input_api_lead": "DNSPacket.parse(buffer)",
     "family": "dns-js family",
     "note": "Older name of dns-js; shared family.",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 7
+    "lead_adoption_order": 7,
+    "reason": "Earlier name of the selected dns-js (the dns-js README says the project moved from node-mdns-js-packet); 511 of its 521 distinct non-test source lines (98.1%) occur in dns-js 0.3.1."
   },
   {
     "name": "dns-message",
@@ -119,13 +121,15 @@
   },
   {
     "name": "@serverless-dns/dns-parser",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 19,
     "found_by": "registry search hit",
-    "documentation": "https://www.npmjs.com/package/@serverless-dns/dns-parser",
+    "documentation": "https://github.com/serverless-dns/dns-parser",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 10
+    "lead_adoption_order": 10,
+    "family": "dns-packet family",
+    "reason": "Near-identical fork of the selected dns-packet: 936 of its 995 distinct non-test source lines (94.1%) occur in dns-packet 5.6.1 (1.0.1)."
   },
   {
     "name": "dnspacket-ts",
@@ -133,9 +137,12 @@
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 98,
     "found_by": "registry search hit",
-    "documentation": "https://www.npmjs.com/package/dnspacket-ts",
+    "documentation": "https://github.com/haikelfazzani/dns-packet#readme",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 9
+    "lead_adoption_order": 9,
+    "input_api_lead": "decode(bytes)",
+    "family": "dnspacket-ts own TypeScript decoder",
+    "reason": "Not checked: the cell reached the ten-path ceiling with higher-ranked paths (98 downloads, below dns-message's 127). Own TypeScript decoder: 2 of its 456 distinct non-test source lines occur in dns-packet 5.6.1."
   },
   {
     "name": "hbo-dnsd",
@@ -196,62 +203,69 @@
     "primary_metric_value": 8888,
     "found_by": "round-2 lookup of a registry search hit",
     "documentation": "https://github.com/chjj/bns#readme",
-    "input_api_lead": "wire.Message.decode(data) (not in the README)",
-    "family": "bns (chjj)"
+    "input_api_lead": "wire.Message.decode(data) (source only)",
+    "family": "bns (chjj) own wire.js decoder",
+    "reason": "Not promoted: bns 0.16.0's README documents servers, resolvers and a node-style dns API, but no API that parses caller-supplied message bytes. wire.Message.decode(data) exists in lib/wire.js (bufio Struct) and is used internally (lib/cache.js), but it is undocumented, so the documented-input-API rule is not met. Own decoder, independent of dns-packet."
   },
   {
     "name": "dnsd",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 340,
     "found_by": "round-2 lookup (original of the hbo-dnsd fork)",
     "documentation": "https://github.com/jhs/dnsd#readme",
     "input_api_lead": "dnsd.parse(buffer)",
-    "family": "dnsd (Iris Couch)"
+    "family": "dnsd (Iris Couch)",
+    "reason": "Near-identical pair with the selected hbo-dnsd: hbo-dnsd 0.9.8 shares 857 of its 876 distinct non-test source lines (97.8%) with dnsd 0.9.6. One path per near-identical pair is counted, and hbo-dnsd has the higher download count (34,937 vs 340)."
   },
   {
     "name": "dns-query",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 114588,
     "found_by": "round-2 lookup of a registry search hit",
     "documentation": "https://github.com/martinheidegger/dns-query#readme",
-    "family": "dns-packet family (@leichtgewicht/dns-packet)"
+    "family": "dns-packet family (@leichtgewicht/dns-packet)",
+    "reason": "DNS-over-HTTPS/UDP query client; 0.11.2 depends on @leichtgewicht/dns-packet for message encoding and decoding and has no parser of its own."
   },
   {
     "name": "native-dns",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 68783,
     "found_by": "round-2 lookup of a registry search hit",
     "documentation": "https://github.com/tjfontaine/node-dns#readme",
-    "family": "native-dns-packet"
+    "family": "native-dns-packet",
+    "reason": "Resolver and server over the selected native-dns-packet (0.7.0 depends on native-dns-packet ~0.1.1; lib/packet.js only wraps it); no own message parser."
   },
   {
     "name": "dohdec",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 14724,
     "found_by": "round-2 lookup of a registry search hit",
     "documentation": "https://github.com/hildjj/dohdec#readme",
-    "family": "dns-packet"
+    "family": "dns-packet",
+    "reason": "DoH/DoT/UDP/TCP client; 9.0.2 decodes messages with its dns-packet ^5.6.1 dependency and has no parser of its own."
   },
   {
     "name": "@luminati-io/native-dns-packet",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 1196,
     "found_by": "round-2 lookup of a registry search hit",
     "documentation": "https://www.npmjs.com/package/@luminati-io/native-dns-packet",
-    "family": "native-dns-packet"
+    "family": "native-dns-packet",
+    "reason": "Near-identical fork of the selected native-dns-packet: 601 of its 606 distinct non-test source lines (99.2%) occur in native-dns-packet 0.1.1."
   },
   {
     "name": "native-node-dns-packet",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
     "primary_metric_value": 338,
     "found_by": "round-2 lookup of a registry search hit",
     "documentation": "https://github.com/FrancisTurner/native-node-dns-packet",
-    "family": "native-dns-packet"
+    "family": "native-dns-packet",
+    "reason": "Near-identical fork of the selected native-dns-packet: 606 of its 610 distinct non-test source lines (99.3%) occur in native-dns-packet 0.1.1."
   }
 ]
