@@ -551,6 +551,55 @@ def mlt_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool
     )
 
 
+def papers_pdf_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind Papers feedback to its PDF backend and shared Poppler parser."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "pdf/c/gnome-papers":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    validation_path = overlay_dir / "feedback-validation.json"
+    if not validation_path.is_file():
+        return False
+    validation = json.loads(validation_path.read_text())
+    variant = ROOT / validation.get("valid_variant", "")
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    modules = validation.get("instrumented_parser_modules", [])
+    return (
+        manifest.get("underlying_package") == "poppler-glib"
+        and manifest.get("native_campaign_supported") is False
+        and overlay.get("feedback_kind") == "papers_poppler_pdf_source_scoped_afl_edges"
+        and overlay.get("feedback_scope") == validation.get("feedback_scope")
+        and "Papers PDF backend" in overlay.get("feedback_scope", "")
+        and "Poppler GLib/core" in overlay.get("feedback_scope", "")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("underlying_source_sha256") == manifest["underlying_source_sha256"]
+        and overlay.get("afl_entrypoint") == "/work/replay"
+        and overlay.get("afl_file_input") is True
+        and validation.get("pass") is True
+        and validation.get("mutation_campaign_run") is False
+        and validation.get("afl_map_size") == overlay.get("afl_map_size")
+        and validation.get("control_sha256") == manifest["control_sha256"]
+        and validation.get("control_output") == manifest["expected_output"]
+        and validation.get("control_repeat_edge_counts")
+            == [overlay.get("feedback_edges")] * 3
+        and validation.get("control_stable_edge_ids") == overlay.get("feedback_edges")
+        and validation.get("control_stability_ratio") == 1.0
+        and validation.get("stable_variant_only_edge_ids", 0) > 0
+        and validation.get("stable_control_only_edge_ids", 0) > 0
+        and len(modules) == 3
+        and any(module.endswith("/libpdfdocument.so") for module in modules)
+        and any(module.endswith("/libpoppler-glib.so") for module in modules)
+        and any(module.endswith("/libpoppler.so") for module in modules)
+        and validation.get("uninstrumented_document_wrapper", "").endswith("/libppsdocument-4.0.so")
+        and variant.is_file()
+        and validation.get("valid_variant_sha256") == sha256(variant.read_bytes()).hexdigest()
+        and set(file_hashes) == {"Dockerfile", "build.py", "feedback-validation.json"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
     if manifest.get("coverage_kind") == "native_source_afl_feedback":

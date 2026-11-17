@@ -19,6 +19,13 @@
 
 Distinct documented C document-library input API, sharing the Poppler GLib PDF engine with poppler-glib, Evince, and libvips. The public umbrella header requires a macro claiming author contact; the adapter mirrors signatures from hash-pinned headers rather than defining that macro. The API is explicitly unstable.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/c/gnome-papers/README.md)
+
+```sh
+python3 parsarium.py build pdf c gnome-papers
+python3 parsarium.py run pdf c gnome-papers controls/pdf/two-page.pdf
+```
+
+**Coverage limit:** The byte-input fuzz bridge accepts at most 1 MiB per case before writing a temporary PDF. The documented local-file API is not subject to this bridge limit. AFL uses one-shot replay because Papers has process-global backend state.

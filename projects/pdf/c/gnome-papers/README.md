@@ -1,18 +1,21 @@
-# GNOME Papers (PDF / C)
+# gnome-papers — PDF / C
 
-This harness calls Papers 51.1 `pps_document_factory_get_document` and `pps_document_load` with a local PDF URI, then reports `pps_document_get_n_pages`. The Papers PDF backend uses Poppler GLib 26.11.0 and the same Poppler PDF core as Evince and poppler-glib. They are distinct public API paths over one parser family.
+Pinned release: `51.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
+
+[API, control result, and parser family](../../../../catalog/pdf/c/gnome-papers/README.md)
+
+## Run from the repository root
 
 ```sh
+python3 parsarium.py build pdf c gnome-papers
 python3 parsarium.py run pdf c gnome-papers controls/pdf/two-page.pdf
+python3 parsarium.py replay pdf c gnome-papers CORPUS_DIR runs/pdf-gnome-papers-replay
 python3 parsarium.py afl build pdf c gnome-papers
-python3 parsarium.py afl prepare pdf c gnome-papers /tmp/papers-afl
-python3 parsarium.py afl run /tmp/papers-afl --check
+python3 parsarium.py afl prepare pdf c gnome-papers runs/pdf-gnome-papers-afl
 ```
 
-The control result is `{"pages":2}`. `controls/pdf/one-page.pdf` is a second valid case with `{"pages":1}`. Docker builds the pinned Papers and Poppler sources with LLVM line coverage; the AFL++ overlay instruments the Papers PDF backend and Poppler parser sources. AFL's target is a one-shot file replay (`/work/replay @@`). The harness copies supplied bytes to a local temporary PDF because the documented Papers API accepts a URI.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-The valid control covers 145 Papers PDF backend lines and 1,272 Poppler core lines. AFL++ records 348 PDF parser edges, with identical maps across three control repeats and stable differences for the valid one-page case. `--check` inspects the prepared command without starting a campaign.
+**Coverage limit:** The byte-input fuzz bridge accepts at most 1 MiB per case before writing a temporary PDF. The documented local-file API is not subject to this bridge limit. AFL uses one-shot replay because Papers has process-global backend state.
 
-The byte-input fuzz bridge accepts up to 1 MiB per case before writing a temporary PDF. The local-file API has no size cap in this harness. AFL uses one-shot replay because Papers keeps process-global backend state.
-
-`verification.json` and the AFL overlay receipt record exact source and image hashes, observed output, coverage, and input-sensitive feedback. The source lock pins Papers 51.1 and Poppler 26.11.0. This project does not run a fuzz campaign.
+**Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.

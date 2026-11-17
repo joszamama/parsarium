@@ -6,6 +6,7 @@
 
 - [evince / C](c/evince/README.md)
 - [ghostscript / C](c/ghostscript/README.md)
+- [gnome-papers / C](c/gnome-papers/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
 - [libvips / C](c/libvips/README.md)
