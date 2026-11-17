@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T12:02:24.028573+00:00",
+  "checked_at_utc": "2026-11-17T14:54:19.333162+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -390,12 +390,75 @@
       },
       "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/poco-json/differential.json",
       "error": null
+    },
+    {
+      "package": "jsoncons",
+      "version": "1.10.0",
+      "scope": "jsoncons::ojson::parse(const char*, size_t) over local bytes; header-only basic_json_parser state machine with insertion-ordered ojson tree",
+      "command": "python3 scripts/run_project.py json cpp jsoncons",
+      "receipt": "projects/json/cpp/jsoncons/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 2416,
+      "format_specific_source_lines_covered": 726,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "differential_pass": true,
+      "family_status": "independent",
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/jsoncons/differential.json",
+      "error": null
     }
   ],
   "standard": [],
   "refreshed_projects": [
-    "glaze",
-    "poco-json"
+    "jsoncons"
   ],
-  "retained_prior_results_checked_at_utc": "2026-11-17T11:31:43.644920+00:00"
+  "retained_prior_results_checked_at_utc": "2026-11-17T12:02:24.028573+00:00"
 }

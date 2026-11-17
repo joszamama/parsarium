@@ -373,6 +373,65 @@
     "not_verified": "Two valid controls do not establish complete RFC 8259 compliance, malformed-input handling, numeric limits, or all Unicode edge cases."
   },
   {
+    "name": "jsoncons",
+    "version": "1.10.0",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/danielaparker/jsoncons/blob/v1.10.0/LICENSE",
+    "input_api": "jsoncons::ojson::parse(const char*, std::size_t) on local bytes, yielding an insertion-ordered basic_json tree with integer and double kinds",
+    "documentation": "https://github.com/danielaparker/jsoncons/blob/v1.10.0/doc/ref/corelib/json/parse.md",
+    "source": "https://github.com/danielaparker/jsoncons/archive/refs/tags/v1.10.0.tar.gz",
+    "adapter": "projects/json/cpp/jsoncons/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text from a local length-bounded buffer (up to 1 MiB) into jsoncons::ojson; object/array roots in the two valid controls; exact nested tree, key order and integer/float kinds checked",
+    "family": "jsoncons own basic_json_parser",
+    "family_note": "jsoncons implements its JSON state-machine parser in include/jsoncons/json_parser.hpp (basic_json_parser) and builds the tree through its own json_decoder, without delegating to JsonCpp, simdjson, nlohmann/json, RapidJSON, Boost.JSON, Glaze or POCO/pdjson. ojson (ordered_policy) and json (sorted_policy) share this parser; only the object container differs.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 3,
+      "binary_package": "libjsoncons-dev",
+      "dev_package_installs": {
+        "libjsoncons-dev": 3
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "qualification": "Very weak adoption signal: 3 installations (1 recent) for the header-only jsoncons source package, whose only binary is libjsoncons-dev. It is a package proxy, not JSON-specific use; jsoncons also covers CBOR, BSON, MessagePack, UBJSON, CSV and other formats. GitHub stars (859 in the saved lead) are a separate metric and are not combined."
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/jsoncons",
+    "not_verified": "Two valid controls do not establish complete RFC 8259 compliance, malformed-input handling, numeric limits, or all Unicode edge cases."
+  },
+  {
     "name": "POCO JSON",
     "version": "1.15.4",
     "license": "BSL-1.0",

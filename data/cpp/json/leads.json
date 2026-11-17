@@ -52,7 +52,7 @@
   },
   {
     "name": "jsoncons",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "debian_source": "jsoncons",
     "popcon_source_inst": 3,
     "popcon_dev_package": {
@@ -60,7 +60,8 @@
     },
     "github_stars": 859,
     "license": "BSL-1.0",
-    "reason": "Header-only json::parse; not run.",
-    "source": "https://github.com/danielaparker/jsoncons"
+    "reason": "Pinned jsoncons 1.10.0 ojson::parse(const char*, size_t) passes two valid exact-tree controls (key order and integer/float kinds), covers 726 own json_parser.hpp lines, and gives stable parser-only AFL++ feedback (164 vs 155 tuples, 41 differing; 76 differing parser lines). Debian source-package sourcemax and libjsoncons-dev each report 3 installs in the same hashed snapshot, a very weak adoption signal.",
+    "source": "https://github.com/danielaparker/jsoncons",
+    "verification": "projects/json/cpp/jsoncons/verification.json"
   }
 ]

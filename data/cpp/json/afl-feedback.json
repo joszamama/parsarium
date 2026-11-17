@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T12:02:24.027426+00:00",
-  "projects_total": 7,
-  "projects_passed": 7,
-  "differential_kind": "two fixed valid nested JSON controls; Glaze and POCO use parser-only probes with exact DOM checks",
-  "command": "python3 projects/json/cpp/glaze/verify-parser-feedback.py and python3 projects/json/cpp/poco-json/verify-parser-feedback.py; earlier paths retain recorded receipts",
+  "checked_at_utc": "2026-11-17T14:54:19.333162+00:00",
+  "projects_total": 8,
+  "projects_passed": 8,
+  "differential_kind": "two fixed valid nested JSON controls; Glaze, POCO and jsoncons use parser-only probes with exact DOM checks",
+  "command": "python3 projects/json/cpp/jsoncons/verify-feedback.py; earlier paths retain recorded receipts",
   "results": [
     {
       "project": "json/cpp/jsoncpp",
@@ -136,11 +136,30 @@
       "afl_tuple_difference": 131,
       "parser_only_probe": "projects/json/cpp/poco-json/parser-probe.cpp",
       "exact_tree_outputs_verified": true
+    },
+    {
+      "project": "json/cpp/jsoncons",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_jsoncons_parser_header_only_edges_and_source_lines",
+      "overlay_receipt_sha256": "4ac01221c1cc2841441c72855ae3782839add2563360a51836a6ecae12d7ad8b",
+      "differential_receipt_sha256": "4dac961fb59ec3afdbb67f6582d79200579c18ad227c8c66c139631994c54c57",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 450,
+      "control_afl_tuples": 164,
+      "differential_source_lines": 422,
+      "differential_afl_tuples": 155,
+      "source_line_difference": 76,
+      "afl_tuple_difference": 41,
+      "parser_only_probe": "projects/json/cpp/jsoncons/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
     }
   ],
   "refreshed_projects": [
-    "glaze",
-    "poco-json"
+    "jsoncons"
   ],
-  "retained_prior_results_checked_at_utc": "2026-11-17T11:31:43.644920+00:00"
+  "retained_prior_results_checked_at_utc": "2026-11-17T12:02:24.027426+00:00"
 }

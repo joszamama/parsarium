@@ -13,55 +13,59 @@
   "control": "controls/json/nested-object.json",
   "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
   "expected_output": {
-    "name": "parsarium",
-    "version": 1,
-    "ratio": -2.5,
-    "enabled": true,
-    "missing": null,
-    "tags": [
-      "json",
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
       "go",
+      "json",
+      "parsarium",
       "rfc8259"
     ],
-    "nested": {
-      "level": 2,
-      "items": [
-        {
-          "id": 1,
-          "ok": false
-        },
-        {
-          "id": 2,
-          "text": "café \"quoted\""
-        }
-      ],
-      "empty": {},
-      "list": []
-    }
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
   },
   "differential_control": "controls/json/nested-array.json",
   "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
-  "differential_expected_output": [
-    1,
-    0.25,
-    "two",
-    [
-      true,
-      null,
-      [
-        false
-      ]
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
     ],
-    {
-      "k": [],
-      "n": {
-        "deep": "A"
-      }
-    }
-  ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
   "harness": "harness.cpp",
   "fuzz_entry": "LLVMFuzzerTestOneInput",
-  "coverage": "LLVM source coverage in jsoncons 1.10.0 own json_parser.hpp reached by json::parse(const char*, size_t)",
+  "oracle": "The replay prints the parsed jsoncons::ojson tree; run-control requires exact JSON tree equality with the control, preserving object order and integer versus float kinds, then checks the format-aware summary.",
+  "coverage": "LLVM source coverage in jsoncons 1.10.0 own json_parser.hpp reached by ojson::parse(const char*, size_t)",
   "coverage_subject_prefix": "/work/source/",
   "format_specific_coverage_file_suffix": "/jsoncons/json_parser.hpp",
   "afl_entrypoint": "/work/parser-probe"

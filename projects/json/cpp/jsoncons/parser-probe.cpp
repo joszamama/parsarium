@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     if (!file) return 2;
     const std::string input(std::istreambuf_iterator<char>{file}, {});
     if (input.empty() || input.size() > (1u << 20)) return 2;
-    try { (void)jsoncons::json::parse(input.data(), input.size()); }
+    try { (void)jsoncons::ojson::parse(input.data(), input.size()); }
     catch (const std::exception&) { return 1; }
     return 0;
 }

@@ -1,6 +1,6 @@
 # C++ × JSON: selected parsers (pilot)
 
-Seven control-verified third-party paths are selected: five ranked by the primary metric, plus Boost.JSON and POCO JSON, whose multi-library source packages lack a JSON-specific primary value. Ten is a ceiling, and three documentation leads remain unverified.
+Eight control-verified third-party paths are selected: six ranked by the primary metric, plus Boost.JSON and POCO JSON, whose multi-library source packages lack a JSON-specific primary value. Ten is a ceiling, and two documentation leads remain unverified.
 
 ## Adoption metric
 
@@ -13,6 +13,7 @@ The ranking uses Debian popcon `sourcemax/by_inst` installations: the maximum ov
 | 3 | [nlohmann/json](https://github.com/nlohmann/json/tree/v3.12.0) | 3.12.0 | 1,799 | 1,799 | nlohmann/json lexer and parser |
 | 4 | [RapidJSON](https://github.com/Tencent/rapidjson/tree/v1.1.0) | 1.1.0 | 899 | 899 | RapidJSON header-only SAX/DOM parser |
 | 5 | [Glaze](https://github.com/stephenberry/glaze/tree/v9.1.0) | 9.1.0 | 171 | 171 | Glaze own template-based JSON reader |
+| 6 | [jsoncons](https://github.com/danielaparker/jsoncons/tree/v1.10.0) | 1.10.0 | 3 | 3 | jsoncons own basic_json_parser |
 | — | [Boost.JSON](https://github.com/boostorg/boost/releases/tag/boost-1.92.0) | 1.92.0 | unranked (Boost-wide) | 1,749 | Boost.JSON basic_parser |
 | — | [POCO JSON](https://github.com/pocoproject/poco/releases/tag/poco-1.15.4-release) | 1.15.4 | unranked (POCO-wide) | 190 (POCO suite) | POCO ParserImpl over bundled pdjson |
 
@@ -28,6 +29,8 @@ Boost.JSON 1.92.0 comes from the official [Boost release archive](https://github
 
 Glaze 9.1.0 is pinned from its [official release tag](https://github.com/stephenberry/glaze/releases/tag/v9.1.0) by SHA-256 `55f8a675397c505f9bee6c160e1c26b0085868f185d04d7a7727531fdbff4bd4` (MIT). Its documented `glz::read_json(glz::generic_i64&, std::string)` reads local bytes into an insertion-ordered generic DOM with signed integers and doubles. The replay of each valid control matches the original nested structure, key order, and integer/float kinds. The base control covers 1,623 Glaze source lines, including 415 in `json/read.hpp`. The parser-only AFL++ probe calls `read_json` without serialization or DOM traversal; its feedback repeats exactly and differs by 25 reader lines and 140 AFL tuples between controls ([receipt](../../../fuzzing/afl-native/json/cpp/glaze/differential.json)). The primary 171-installation source count comes from a supplementary exact `glaze` source-name lookup in the *same hashed Debian snapshot* as the other rows. Glaze was not one of the 320 source names containing `json`; its `libglaze-dev` binary count is also 171.
 
+jsoncons 1.10.0 is pinned from its [release tag archive](https://github.com/danielaparker/jsoncons/releases/tag/v1.10.0) by SHA-256 `c829350a2eece662beb378143e2ab1c1cbb07d703687bf168626665a8a7d8bc1` (BSL-1.0). The harness calls the [documented](https://github.com/danielaparker/jsoncons/blob/v1.10.0/doc/ref/corelib/json/parse.md) `jsoncons::ojson::parse(const char*, size_t)` on local bytes. [`ojson`](https://github.com/danielaparker/jsoncons/blob/v1.10.0/doc/ref/corelib/ojson.md) keeps object insertion order; the default `json` type sorts keys, so it would not match the control's key order. For each valid control, the printed tree equals Python's `json.loads` result, including key order and integer/float kinds. The base control covers 726 lines in jsoncons' own `json_parser.hpp` (2,416 jsoncons lines in all). The parser-only AFL++ probe calls `ojson::parse` without serialization; its allowlist names the `basic_json_parser` methods, because a file-only allowlist skipped parser functions whose first instruction is inlined from another header and left a 60-site map. Three runs per control repeat exactly. The controls differ by 76 parser lines and 41 of 164/155 AFL tuples ([receipt](../../../fuzzing/afl-native/json/cpp/jsoncons/differential.json)). Its rank rests on 3 Debian installations (1 recent) of the `jsoncons` source package, whose only binary is `libjsoncons-dev`. That is a very weak package proxy, not evidence of JSON-specific use; jsoncons also reads CBOR, BSON, MessagePack, CSV and other formats. GitHub stars (859 in the saved lead) are a different metric and are not combined.
+
 POCO JSON 1.15.4 comes from the official [POCO release archive](https://github.com/pocoproject/poco/releases/tag/poco-1.15.4-release), pinned by SHA-256 `525591a43d4b5e9472663f8fa5fb9b7bfbd7ec8a0abe130ef7411531a0ea55c5` (BSL-1.0). Its documented `Poco::JSON::Parser::parse(std::string)` accepts local bytes and creates an Object or Array DOM. `ParseHandler(true)` preserves key order. The two valid controls round-trip to exact nested trees with number kinds intact. The first covers 125 `ParserImpl.cpp` lines and 350 lines in bundled `pdjson.c`; POCO delegates tokenization to pdjson. A parser-only AFL++ probe has repeatable maps, with 131 differing tuples and 32 differing `pdjson.c` lines between the valid controls ([receipt](../../../fuzzing/afl-native/json/cpp/poco-json/differential.json)). POCO is unranked in the primary source metric: its Debian source `poco` (940 installations) covers many libraries, and `libpoco-dev` (190) also covers the suite. The component-specific runtime `libpocojson100` has 125 installations, all classified `no_files`. None of those numbers estimates JSON API use or compares to the dedicated-source ranking.
 
 [Parser records](parsers.json) · [control results](verification.json) · [standard API inventory](standard.json). The ISO C++ library has no JSON parser API.
@@ -38,6 +41,5 @@ POCO JSON 1.15.4 comes from the official [POCO release archive](https://github.c
 | --- | ---: | ---: | --- |
 | [Qt QJsonDocument](https://doc.qt.io/qt-6/qjsondocument.html) | unavailable (Qt-wide) | unavailable | Framework-wide count is not JSON-specific; not control-tested |
 | [PicoJSON](https://github.com/kazuho/picojson) | 16 | unavailable | Not control-tested |
-| [jsoncons](https://github.com/danielaparker/jsoncons) | 3 | 3 | Not control-tested |
 
 Search: Debian source names containing `json`, limit 320, 320 hits and 320 unique; details and exclusions are preserved in the snapshot. These valid controls establish the observed subset only, not complete RFC 8259 support.

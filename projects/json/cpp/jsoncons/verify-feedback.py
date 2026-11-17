@@ -31,20 +31,36 @@ def lines(path):
 
 
 def typed_tree(text):
+    # Order-preserving, kind-aware view: 1 and 1.0 or reordered keys do not match.
     def canon(value):
-        if isinstance(value, tuple):
-            if value[0] == 'object':
-                return ('object', tuple(sorted((key, canon(child)) for key, child in value[1])))
-            return value
-        if isinstance(value, list): return ('array', tuple(canon(child) for child in value))
-        if value is None: return ('null',)
-        if isinstance(value, bool): return ('boolean', value)
-        return ('string', value)
-    parsed = json.loads(text,
-                        object_pairs_hook=lambda pairs: ('object', tuple(pairs)),
-                        parse_int=lambda raw: ('integer', int(raw)),
-                        parse_float=lambda raw: ('float', float(raw)))
-    return canon(parsed)
+        if isinstance(value, tuple): return ('object', [(key, canon(child)) for key, child in value[1]])
+        if isinstance(value, list): return ('array', [canon(child) for child in value])
+        return (type(value).__name__, value)
+    return canon(json.loads(text, object_pairs_hook=lambda pairs: ('object', pairs)))
+
+
+def summarize_tree(value):
+    result = {'arrays': 0, 'booleans': 0, 'max_depth': 0,
+              'nulls': 0, 'numbers': [], 'objects': 0, 'strings': []}
+    def walk(node, depth):
+        if isinstance(node, dict):
+            result['objects'] += 1
+            result['max_depth'] = max(result['max_depth'], depth)
+            for child in node.values(): walk(child, depth + 1)
+        elif isinstance(node, list):
+            result['arrays'] += 1
+            result['max_depth'] = max(result['max_depth'], depth)
+            for child in node: walk(child, depth + 1)
+        elif node is None: result['nulls'] += 1
+        elif isinstance(node, bool): result['booleans'] += 1
+        elif isinstance(node, (int, float)): result['numbers'].append(node)
+        elif isinstance(node, str): result['strings'].append(node)
+    walk(value, 1)
+    result['numbers'].sort(); result['strings'].sort()
+    result['root'] = 'object' if isinstance(value, dict) else 'array'
+    if isinstance(value, dict): result['top_level_keys'] = sorted(value)
+    else: result['top_level_items'] = len(value)
+    return result
 
 
 def main():
@@ -72,10 +88,11 @@ def main():
                            '-v', f'{case}:/input/case:ro', '-v', f'{output}:/coverage']
                 observed_text = run([*sandbox, '--entrypoint', '/work/replay',
                                      BASE['image_id'], '/input/case'])
-                observed = json.loads(observed_text)
-                if (observed != expected_output or
-                        typed_tree(observed_text) != typed_tree(case.read_text())):
-                    raise RuntimeError(f'exact typed JSON tree mismatch: {name}: {observed}')
+                if typed_tree(observed_text) != typed_tree(case.read_text()):
+                    raise RuntimeError(f'exact ordered typed JSON tree mismatch: {name}')
+                observed = summarize_tree(json.loads(observed_text))
+                if observed != expected_output:
+                    raise RuntimeError(f'format-aware summary differs from manifest: {name}: {observed}')
                 if repeat == 0:
                     outputs.append(observed)
                 script = ('set -eu; LLVM_PROFILE_FILE=/tmp/case.profraw '
@@ -107,15 +124,18 @@ def main():
         'project': 'json/cpp/jsoncons', 'pass': True,
         'feedback_kind': 'afl_clang_fast_jsoncons_parser_header_only_edges_and_source_lines',
         'probe': 'projects/json/cpp/jsoncons/parser-probe.cpp',
-        'probe_scope': 'json::parse(const char*, size_t) only; no tree traversal, serialization, or result formatting',
+        'probe_scope': 'ojson::parse(const char*, size_t) only; no tree traversal, serialization, or result formatting',
+        'dom_oracle': 'python_json_loads_order_and_number_kind_preserving',
+        'exact_tree_outputs_verified': True,
         'base_project_receipt_sha256': sha256((PROJECT / 'verification.json').read_bytes()).hexdigest(),
         'overlay_receipt_sha256': sha256((OVERLAY / 'verification.json').read_bytes()).hexdigest(),
         'base_image_id': BASE['image_id'], 'overlay_image_id': AFL['image_id'],
         'afl_package': AFL['afl_package'], 'afl_map_size': AFL['afl_map_size'],
         'allowlist': 'projects/json/cpp/jsoncons/afl-allowlist.txt',
+        'allowlist_entries': [line for line in (PROJECT / 'afl-allowlist.txt').read_text().splitlines() if line],
         'repeats_per_control': 3,
         'first_control': controls[0][0], 'second_control': controls[1][0],
-        'first_observed_output': outputs[0], 'second_observed_output': outputs[1],
+        'first_tree_output': outputs[0], 'second_tree_output': outputs[1],
         'first_parser_lines': len(results[0][0]), 'second_parser_lines': len(results[1][0]),
         'parser_line_difference': line_diff,
         'first_afl_tuples': len(results[0][1]), 'second_afl_tuples': len(results[1][1]),
