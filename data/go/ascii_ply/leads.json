@@ -1,15 +1,19 @@
 [
   {
     "name": "github.com/DeKugelschieber/go-game",
-    "status": "unresolved",
-    "reason": "PlyLoader.Load parses a local file but creates OpenGL buffers, so a headless control run without a graphics context has not been demonstrated.",
-    "source": "https://pkg.go.dev/github.com/DeKugelschieber/go-game"
+    "status": "excluded_self_import_only_metric",
+    "reason": "Headless control now established: in a linux/arm64 golang container with Xvfb and Mesa llvmpipe, PlyLoader{VboUsage: gl.STATIC_DRAW}.Load on controls/ascii_ply/triangle.ply uploaded vertex floats [0,0,0,1,0,0,0,1,0] and indices [0,1,2] (read back with glGetBufferSubData); a coloured two-face square gave indices [0,1,2,0,2,3]. It is still not counted: the pkg.go.dev imported-by count of 5 for the root package consists only of the repository's own demo packages (demo/input, demo/keyframe, demo/model, demo/sprite, demo/text) under the lowercase module-path variant github.com/dekugelschieber/go-game, so there is no external adoption signal. Go PLY slots use the primary imported-by metric only; no GitHub-star fallback applies when the primary value is recorded (8 stars in any case).",
+    "source": "https://pkg.go.dev/github.com/DeKugelschieber/go-game",
+    "release": "v0.0.0-20160818221527-e88c16372587 (tag 0.2_beta, commit e88c16372587)",
+    "importers_checked_at_utc": "2026-11-18T00:45:00+00:00",
+    "importers_source": "https://pkg.go.dev/github.com/DeKugelschieber/go-game?tab=importedby"
   },
   {
     "name": "github.com/hultan/ply-viewer/internal/ply",
-    "status": "unresolved",
-    "reason": "The ASCII PLY loader is in a Go internal package and cannot be imported by this external adapter; no documented public API has been verified.",
-    "source": "https://pkg.go.dev/github.com/hultan/ply-viewer/internal/ply"
+    "status": "excluded_internal_package",
+    "reason": "The ASCII PLY loader is in a Go internal package, which external modules cannot import; the repository has no tag or release (0 stars, 0 tags on 2026-11-18). No documented public API exists, so the lead is closed rather than unresolved.",
+    "source": "https://pkg.go.dev/github.com/hultan/ply-viewer/internal/ply",
+    "rechecked_at_utc": "2026-11-18T00:45:00+00:00"
   },
   {
     "name": "github.com/df07/go-progressive-raytracer/pkg/loaders",
@@ -112,5 +116,35 @@
     "status": "excluded",
     "reason": "Decode(io.Reader) is in an internal package inaccessible to external Go modules; no public importable API is available.",
     "source": "https://pkg.go.dev/github.com/btmura/ponzi2/internal/ply"
+  },
+  {
+    "name": "go.viam.com/rdk/spatialmath",
+    "status": "verified",
+    "reason": "Found by the 2026-11-18 'pointcloud' and 'spatialmath' pkg.go.dev searches (44 external importers). NewMeshFromPLYFile(path) parses through goply and returns millimetre triangles; promoted as a shared goply-family path.",
+    "checked_at_utc": "2026-11-18T00:45:00+00:00"
+  },
+  {
+    "name": "github.com/mfbonfigli/gotiler/v3/plugins/ply",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "pkg.go.dev search snippet records 0 importers (AGPL-3.0, v3.2.0); a point-cloud/Gaussian-splat PLY reader, but no positive primary metric.",
+    "checked_at_utc": "2026-11-18T00:45:00+00:00"
+  },
+  {
+    "name": "nimbleterminal.dev/nt3d/mesh/sog",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "pkg.go.dev search snippet records 0 importers; it reads PlayCanvas SOG splat bundles, and the related nt3d/mesh PLY path is already excluded with zero adoption.",
+    "checked_at_utc": "2026-11-18T00:45:00+00:00"
+  },
+  {
+    "name": "go.viam.com/rdk/pointcloud",
+    "status": "excluded_no_ply_input_api",
+    "reason": "27 importers, but NewFromFile/ReadPCD accept PCD point clouds; the package has no PLY reader (its PLY handling is in rdk/spatialmath, counted separately).",
+    "checked_at_utc": "2026-11-18T00:45:00+00:00"
+  },
+  {
+    "name": "github.com/gographics/graphile",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "pkg.go.dev 'ply file'/'ply loader' hit with 0 importers and no synopsis; no positive primary metric.",
+    "checked_at_utc": "2026-11-18T00:45:00+00:00"
   }
 ]
