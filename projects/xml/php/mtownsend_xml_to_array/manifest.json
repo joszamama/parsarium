@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "php",
+  "package": "mtownsend/xml-to-array",
+  "release": "2.0.1",
+  "catalog_parser": "data/php/xml/mtownsend-xml-to-array-parser.json",
+  "source_lock": "projects/xml/php/mtownsend_xml_to_array/source-lock.json",
+  "source_sha256": "57a261f641eee98d20e27600e4846ebbcb05150277a67aa167f07ab3b3ce7e2c",
+  "underlying_release": "libxml2 2.15.4 and PHP 8.5.12 ext/dom DOMDocument::loadXML (AFL++ overlay, source build); Ubuntu PHP 8.5.4 with libxml 2.15.2 via php8.5-xml (Xdebug coverage image)",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "native_campaign_supported": false,
+  "coverage_limit": "Xdebug line coverage sees only mtownsend/xml-to-array PHP lines (XmlToArray::convert, its DOM-to-array walk and the global helper file) and is reported separately. AFL++ feedback comes from the native overlay: libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c, instrumented through an allowlist while the same convert harness runs; libxml2 tree/XPath code, other ext/dom classes, ext/libxml and the interpreted XmlToArray code add no AFL++ tuples, so the XmlToArray lines that differ between the controls are visible only in the Xdebug report. The parser family (libxml2 via DOMDocument::loadXML) is shared with the standard DOMDocument path, symfony/dom-crawler and symfony/serializer. The pinned base image does not bundle php-fuzzer; replay is per case.",
+  "fuzz_smoke_entrypoint": "php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness.php",
+  "coverage": "Xdebug executed line coverage in mtownsend/xml-to-array 2.0.1 PHP source during valid XML conversion; AFL++ feedback comes from the allowlisted libxml2 XML parser and PHP ext/dom loading sources in the native overlay",
+  "coverage_subject_prefix": "/work/vendor/mtownsend/xml-to-array/",
+  "format_specific_coverage_file_suffix": "/src/XmlToArray.php"
+}
