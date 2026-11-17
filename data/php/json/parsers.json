@@ -163,5 +163,60 @@
     },
     "project": "projects/json/php/halaxa_json_machine",
     "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Scalar roots, JSON Pointer paths, custom decoders, large streaming inputs, duplicate keys and malformed input remain unverified."
+  },
+  {
+    "name": "salsify/json-streaming-parser",
+    "version": "v8.3.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/salsify/jsonstreamingparser/blob/c0cfac990eb4e917c71b0ad0146546f0a4da0c2f/LICENSE.txt",
+    "documentation": "https://github.com/salsify/jsonstreamingparser/blob/c0cfac990eb4e917c71b0ad0146546f0a4da0c2f/README.md",
+    "source": "https://github.com/salsify/jsonstreamingparser/tree/c0cfac990eb4e917c71b0ad0146546f0a4da0c2f",
+    "input_api": "new JsonStreamingParser\\Parser(resource $stream, ListenerInterface $listener) then parse() over a php://memory stream holding local JSON text; harness listener builds stdClass/list values from startObject/startArray/key/value events",
+    "adapter": "projects/json/php/salsify_json_streaming_parser/harness.php",
+    "composer_lock": "projects/json/php/salsify_json_streaming_parser/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "One JSON object or array root read from a stream by salsify's own pure-PHP character state machine; scalars converted by ParserHelper without ext/json",
+    "family": "salsify JsonStreamingParser character state machine (SAX-style listener)",
+    "family_note": "Parser.php consumes the stream byte by byte and emits listener events; numbers use filter_var and casts, strings and \\u escapes are decoded in package code, and no json_decode call exists in the package source. The harness supplies its own tree-building listener because the bundled InMemoryListener maps objects to PHP arrays, losing the object/array distinction. Distinct from seld/jsonlint, Laminas Decoder, JSON Machine and ext/json.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 7715575,
+      "source": "https://packagist.org/packages/salsify/json-streaming-parser",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/salsify_json_streaming_parser",
+    "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Scalar roots (rejected by the parser), concatenated documents (rejected by the harness), byte-order marks, custom line endings and buffer sizes, the bundled listeners, large streaming inputs, duplicate keys and malformed input remain unverified."
   }
 ]

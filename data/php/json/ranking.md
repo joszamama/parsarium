@@ -1,6 +1,6 @@
 # PHP × JSON: selected parsers (pilot)
 
-3 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+4 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 PHP code mostly parses JSON with the bundled `json_decode` (ext/json). The most downloaded Packagist JSON helpers wrap it, so they are excluded from the third-party ranking rather than counted as separate parsers.
 
@@ -13,8 +13,9 @@ Packagist total downloads, from the bounded search captured 2026-11-17 ([snapsho
 | 1 | [seld/jsonlint](https://packagist.org/packages/seld/jsonlint) | 1.12.2 | 252,371,311 | JSON text into stdClass/array/scalars | seld/jsonlint Lexer and LR table parser |
 | 2 | [laminas/laminas-json](https://packagist.org/packages/laminas/laminas-json) | 3.8.0 | 35,102,503 | JSON text decoded with explicitly enabled own PHP Decoder | Laminas JSON Decoder (Zend lineage) |
 | 3 | [halaxa/json-machine](https://packagist.org/packages/halaxa/json-machine) | 1.2.6 | 30,443,415 | Top-level object/array members; values decoded by ext/json | JSON Machine Lexer/Parser plus PHP ext/json |
+| 4 | [salsify/json-streaming-parser](https://packagist.org/packages/salsify/json-streaming-parser) | v8.3.1 | 7,715,575 | One object/array root read from a stream; listener events built into values | salsify JsonStreamingParser state machine |
 
-Composer depends on seld/jsonlint, which inflates the download count. Composer calls `json_decode` first and uses `JsonParser` to report errors. Laminas is abandoned; its default API route calls ext/json, so this adapter explicitly enables its own PHP Decoder. JSON Machine has an independent streaming parser for member boundaries, but the selected decoder delegates each member value to PHP ext/json.
+Composer depends on seld/jsonlint, which inflates the download count. Composer calls `json_decode` first and uses `JsonParser` to report errors. Laminas is abandoned; its default API route calls ext/json, so this adapter explicitly enables its own PHP Decoder. JSON Machine has an independent streaming parser for member boundaries, but the selected decoder delegates each member value to PHP ext/json. salsify decodes strings, escapes and numbers in its own code; the adapter supplies a listener that builds objects and lists, and rejects input that does not end exactly one document.
 
 ## Standard API (unranked)
 
@@ -30,7 +31,6 @@ Numeric leads from the same snapshot, not verified and not selected. JWT, JSON S
 | --- | --- | ---: | --- | --- |
 | [colinodell/json5](https://packagist.org/packages/colinodell/json5) | v3.0.0 | 32,796,867 | unresolved | JSON5 superset decoder Json5Decoder::decode(string). Project documentation describes trying json_decode first for performance, so valid RFC 8259 input may route to ext/json; own-parser path not run. |
 | [zendframework/zend-json](https://packagist.org/packages/zendframework/zend-json) | 3.1.2 | 24,719,945 | unresolved | Abandoned predecessor of laminas/laminas-json; same decoder lineage. Not run. |
-| [salsify/json-streaming-parser](https://packagist.org/packages/salsify/json-streaming-parser) | v8.3.1 | 7,715,575 | unresolved | Own pure-PHP streaming Parser over a stream resource with a listener API; control not run in this pilot. |
 | [pcrov/jsonreader](https://packagist.org/packages/pcrov/jsonreader) | 1.0.4 | 1,520,757 | unresolved | Pull reader JsonReader::json/open with its own lexer; control not run in this pilot. |
 | [cerbero/json-parser](https://packagist.org/packages/cerbero/json-parser) | 1.1.1 | 823,332 | unresolved | Lazy JsonParser over strings, streams and files with its own tokenizer; value decoding path and control not run. |
 | [nette/utils](https://packagist.org/packages/nette/utils) | v4.1.6 | 514,679,287 | excluded | Nette\Utils\Json::decode is a json_decode wrapper; shares the verified ext/json family. |

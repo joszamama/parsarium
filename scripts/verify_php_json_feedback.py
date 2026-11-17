@@ -11,7 +11,8 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("seld_jsonlint", "laminas_json", "halaxa_json_machine", "stdlib_json_decode")
+PROJECTS = ("seld_jsonlint", "laminas_json", "halaxa_json_machine", "salsify_json_streaming_parser",
+            "stdlib_json_decode")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 REPORT = ROOT / "data/php/json/afl-feedback.json"
