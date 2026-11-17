@@ -20,7 +20,7 @@ Receipts: [vitess.io/vitess/go/vt/sqlparser](../../../projects/sql/go/vitess_io_
 | github.com/cockroachdb/cockroach/pkg/sql/parser | 1,972 | unresolved | CockroachDB PostgreSQL-compatible grammar |
 | github.com/pingcap/tidb/parser | 1,190 | unresolved | TiDB MySQL grammar (goyacc) |
 | vitess.io/vitess/go/vt/sqlparser | 391 | selected | vitess MySQL grammar (goyacc) |
-| github.com/pingcap/parser | 385 | unresolved | TiDB MySQL grammar (goyacc) |
+| github.com/pingcap/parser | 385 | unresolved_blocked | TiDB MySQL grammar (goyacc) |
 | github.com/xwb1989/sqlparser | 305 | unresolved | vitess MySQL grammar (extracted fork) |
 | github.com/pingcap/tidb/pkg/parser | 176 | unresolved | TiDB MySQL grammar (goyacc) |
 | github.com/blastrain/vitess-sqlparser/sqlparser | 88 | unresolved | vitess MySQL grammar (fork) |

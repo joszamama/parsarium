@@ -50,13 +50,13 @@
     },
     {
       "name": "github.com/pingcap/parser",
-      "status": "unresolved",
+      "status": "unresolved_blocked",
       "metric_value": 385,
       "metric_error": null,
       "latest_release_observed": "v3.1.2+incompatible",
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Archived standalone TiDB parser module; parser.New().Parse returns []ast.StmtNode. Superseded by github.com/pingcap/tidb/pkg/parser."
+      "reason": "Archived standalone TiDB parser module; parser.New().Parse returns []ast.StmtNode. Superseded by github.com/pingcap/tidb/pkg/parser. Checked 2026-11-17: the newest tagged module v3.1.2+incompatible has no test_driver package, so literal values need the parser_driver from the full TiDB module; a standalone harness was not built. Remains a lead."
     },
     {
       "name": "github.com/xwb1989/sqlparser",
@@ -66,7 +66,7 @@
       "latest_release_observed": "v0.0.0-...-1203878",
       "family": "vitess MySQL grammar (extracted fork)",
       "documented_api_lead": "sqlparser.Parse",
-      "reason": "Extracted copy of an older vitess sqlparser; sqlparser.Parse returns Statement."
+      "reason": "Extracted copy of an older vitess sqlparser; sqlparser.Parse returns Statement. Not run in this round; next Go lead by metric after pingcap/parser."
     },
     {
       "name": "github.com/pingcap/tidb/pkg/parser",

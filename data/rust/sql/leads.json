@@ -53,7 +53,7 @@
       "latest_release_observed": "18.1.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query::parse",
-      "reason": "Rust FFI binding to libpg_query; pg_query::parse returns a ParseResult protobuf tree."
+      "reason": "Rust FFI binding to libpg_query; pg_query::parse returns a ParseResult protobuf tree. Not run in this round: the crate compiles libpg_query C through build.rs; parser-source coverage and AFL++ feedback for the native C grammar need the dual-profile FFI setup used by the Rust minimp3 path. Next Rust lead by metric."
     },
     {
       "name": "sqlite3-parser",
@@ -63,7 +63,7 @@
       "latest_release_observed": "0.17.0",
       "family": "SQLite grammar (Lemon, Rust port)",
       "documented_api_lead": "Parser::next",
-      "reason": "Lemon-generated SQLite grammar ported to Rust; Parser yields ast::Cmd/Stmt."
+      "reason": "Lemon-generated SQLite grammar ported to Rust; Parser yields ast::Cmd/Stmt. Not run in this round; ranks below pg_query."
     },
     {
       "name": "polyglot-sql",
