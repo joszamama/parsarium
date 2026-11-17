@@ -313,5 +313,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "github.com/AfterShip/clickhouse-sql-parser/parser",
+    "version": "v0.5.7",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 392a27266877db3e3808ef8bfb6628f1bbb7ee8bef6545e307250a898efd99d8, MIT License)",
+    "input_api": "parser.NewParser(local SQL text).ParseStmts() -> []parser.Expr",
+    "documentation": "https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser@v0.5.7/parser#Parser.ParseStmts",
+    "source": "https://proxy.golang.org/github.com/!after!ship/clickhouse-sql-parser/@v/v0.5.7.zip",
+    "source_sha256": "7005b778a6185dc978504403d93d78644df8a31288e130cde04caae012048dd0",
+    "go_module_sum": "h1:g457MREZZ/gZ1RjqaFSNAVRaH05WZ1DAJpqOYg3eqRs=",
+    "dependencies": [],
+    "dialect": "ClickHouse (no dialect option)",
+    "scope": "Local SQL text parsed by clickhouse-sql-parser ParseStmts; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other ClickHouse syntax is untested.",
+    "family": "clickhouse-sql-parser hand-written recursive-descent parser and lexer",
+    "family_note": "NewParser(text).ParseStmts runs the package's own lexer (lexer.go) and hand-written recursive-descent parser (parser_*.go) and returns AST statements; the project credits memefish (a Spanner SQL parser) as inspiration but shares no code with another selected path. The adapter walks each statement with the package's parser.Walk for TableIdentifier base tables, JoinExpr nodes whose modifiers include JOIN, FunctionExpr names, NumberLiteral and StringLiteral text, and reads SelectQuery (SelectItems, Where, GroupBy list, OrderBy items) and InsertStmt (ColumnNames, Values) fields. The tested subset is valid ClickHouse SQL; other ClickHouse syntax is untested.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 13,
+      "source": "https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_aftership_clickhouse_sql_parser_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
