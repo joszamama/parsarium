@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [evince / C](c/evince/README.md)
 - [ghostscript / C](c/ghostscript/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
 - [imagemagick / C](c/imagemagick/README.md)

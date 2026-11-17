@@ -1,6 +1,6 @@
 # PDF / C
 
-10 verified third-party API paths; 7 have verified Docker harnesses.
+10 verified third-party API paths; 8 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/c/pdf/ranking.md) · [standard API inventory](../../../data/c/pdf/standard.json)
 
@@ -13,7 +13,7 @@
 - [imagemagick](imagemagick/README.md) — Docker harness ready
 - [graphicsmagick](graphicsmagick/README.md) — Docker harness ready
 - [libvips](libvips/README.md) — Docker harness ready
-- [evince](evince/README.md) — verified API path
+- [evince](evince/README.md) — Docker harness ready
 - [gnome-papers](gnome-papers/README.md) — verified API path
 - [atril](atril/README.md) — verified API path
 

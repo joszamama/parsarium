@@ -131,7 +131,7 @@
     },
     "scope": "PDF page count through Evince libdocument C API",
     "family": "Evince PDF backend over Poppler GLib",
-    "family_note": "Evince's public C libdocument factory loads the local PDF; the installed libpdfdocument backend directly links the Poppler GLib library already counted in this cell. This is a package path, not an independent PDF syntax engine."
+    "family_note": "The verified Docker control uses Evince's GFile factory on a local PDF. The byte-input AFL harness uses Evince's documented file-descriptor factory. The two loader methods converge at Evince's PDF backend and Poppler GLib/core; this is a package path sharing Poppler's PDF syntax parser, not an independent engine."
   },
   {
     "name": "gnome-papers",

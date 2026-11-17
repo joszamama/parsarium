@@ -17,8 +17,13 @@
 }
 ```
 
-Evince's public C libdocument factory loads the local PDF; the installed libpdfdocument backend directly links the Poppler GLib library already counted in this cell. This is a package path, not an independent PDF syntax engine.
+The verified Docker control uses Evince's GFile factory on a local PDF. The byte-input AFL harness uses Evince's documented file-descriptor factory. The two loader methods converge at Evince's PDF backend and Poppler GLib/core; this is a package path sharing Poppler's PDF syntax parser, not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/c/evince/README.md)
+
+```sh
+python3 parsarium.py build pdf c evince
+python3 parsarium.py run pdf c evince controls/pdf/two-page.pdf
+```
