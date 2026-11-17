@@ -23,6 +23,79 @@
     }
   },
   {
+    "name": "f3d",
+    "group": null,
+    "version": "4.0.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/f3d-app/f3d/blob/v4.0.1/LICENSE.md",
+    "documentation": "https://github.com/f3d-app/f3d/blob/v4.0.1/java/Scene.java",
+    "input_api": "Scene.add(String local filename); Scene.getSceneInfo()",
+    "adapter": "adapters/java/ascii_ply/f3d/src/main/java/org/parsarium/F3DPlyAdapter.java",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "files": 1,
+      "actors": 1,
+      "points": 3,
+      "cells": 1
+    },
+    "scope": "ASCII triangle produced three parsed points and one cell",
+    "family": "F3D native PLY plugin over VTK vtkPLYReader",
+    "family_note": "C, C++, and Java F3D 4.0.1 bindings share the F3D native plugin and VTK 9.7.2 vtkPLYReader syntax parser.",
+    "source_kind": "source_build",
+    "source_lock": "data/java/ascii_ply/source-lock.json",
+    "adapter_module": "f3d"
+  },
+  {
+    "name": "sceneview-core",
+    "group": "io.github.sceneview",
+    "artifact": "sceneview-core-android",
+    "version": "4.69.5",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/sceneview/sceneview/blob/v4.69.5/LICENSE",
+    "documentation": "https://github.com/sceneview/sceneview/blob/v4.69.5/sceneview-core/src/commonMain/kotlin/io/github/sceneview/core/ply/PlyLoader.kt",
+    "input_api": "Files.readAllBytes(local path) passed to PlyLoader.parse(byte[], ThreeMfUnit, limits), returning PlyModel vertex count, triangle count and indices",
+    "adapter": "adapters/java/ascii_ply/src/main/java/org/parsarium/PlyAdapter.java",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "ASCII PLY triangle vertices, triangulated face and parsed indices",
+    "family": "SceneView Core pure Kotlin PLY parser",
+    "family_note": "The released JVM artifact exposes a callable Java bytecode API over SceneView Core’s pure Kotlin PLY reader. Project-wide interest does not measure PLY use."
+  },
+  {
+    "name": "kotlin-assimp",
+    "version": "v4.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/kotlin-graphics/assimp/blob/v4.0/LICENSE.txt",
+    "input_api": "new Importer().readFile(local File.toURI(), 0) -> AiScene with AiMesh vertices/faces",
+    "documentation": "https://github.com/kotlin-graphics/assimp/tree/v4.0#code",
+    "family": "Kotlin-graphics JVM Assimp port PLY importer",
+    "family_note": "Pure JVM port of native Assimp with its own Kotlin PlyLoader and PlyParser; derived parser lineage is recorded separately from the existing LWJGL/native Assimp wrappers.",
+    "scope": "ASCII PLY triangle, three vertices, one face, parsed indices [0,1,2]",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/kotlin_assimp/KotlinAssimpPlyAdapter.java",
+    "adapter_module": "kotlin_assimp",
+    "source_kind": "official_binary_distribution",
+    "source_lock": "data/java/ascii_ply/kotlin-assimp-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "group": null
+  },
+  {
     "name": "boofcv-io",
     "group": "org.boofcv",
     "artifact": "boofcv-io",
@@ -46,6 +119,28 @@
         1,
         2
       ]
+    }
+  },
+  {
+    "name": "jzy3d-core",
+    "group": "org.jzy3d",
+    "artifact": "jzy3d-core",
+    "version": "2.2.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Pinned official jzy3d-all 2.2.1 parent POM licenses section (The New BSD License)",
+    "input_api": "Ply.read(InputStream from local ASCII PLY file), returning List<Coord3d>",
+    "documentation": "https://doc.jzy3d.org/javadoc/2.2.1/org/jzy3d/io/ply/Ply.html",
+    "family": "Jzy3d public PLY vertex API over jPLY",
+    "family_note": "Published Jzy3d Core library depends on its published org.smurn:jply:0.2.1; the jPLY 0.2.0 package path is already counted in this cell. This is a separate package API but not an independent PLY syntax engine.",
+    "scope": "ASCII triangle vertex positions (three vertices, second X and third Y); faces not exposed by this API",
+    "control": "controls/ascii_ply/triangle.ply",
+    "adapter": "adapters/java/ascii_ply/jzy3d/src/main/java/org/parsarium/Jzy3dPlyAdapter.java",
+    "adapter_module": "jzy3d",
+    "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
+    "expected_output": {
+      "vertices": 3,
+      "second_x": 1.0,
+      "third_y": 1.0
     }
   }
 ]

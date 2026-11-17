@@ -35,6 +35,59 @@
       "command": "python3 scripts/verify_java_ascii_ply.py"
     },
     {
+      "package": "sceneview-core",
+      "version": "4.69.5",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply.py",
+      "checked_at_utc": "2026-11-13T16:47:14.326750+00:00",
+      "artifact_sha256": "7fe48b137e92e0fdb1c49875c8109542e0532188f1674586b38418a2a1fca4b7",
+      "underlying_family": "SceneView Core pure Kotlin PLY parser"
+    },
+    {
+      "package": "f3d",
+      "version": "4.0.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "build_command": "javac --release 21 -cp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/java/f3d.jar -d /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/classes /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/java/ascii_ply/f3d/src/main/java/org/parsarium/F3DPlyAdapter.java",
+      "command": "java -Djava.library.path=/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/lib -cp /var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/classes:/var/folders/0z/2thdxjn91z99pnplfw0z40q40000gn/T/parsarium-f3d-4.0.1/build-llvm/java/f3d.jar org.parsarium.F3DPlyAdapter /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/ascii_ply/triangle.ply",
+      "output": {
+        "files": 1,
+        "actors": 1,
+        "points": 3,
+        "cells": 1
+      },
+      "pass": true,
+      "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
+      "underlying_family": "F3D native plugin over VTK vtkPLYReader"
+    },
+    {
+      "package": "kotlin-assimp",
+      "version": "v4.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_kotlin_assimp.py",
+      "artifact_sha256": "ad7aef390521eaf3741614749ced1ef0803ed9e803161d14838eaeb8a9372a56",
+      "source_sha256": "1edb9ad3b65adb721b91b02acf9014717e83c93de1dbc4b2278d4006ed043fad"
+    },
+    {
       "package": "boofcv-io",
       "version": "1.6.0",
       "control": "controls/ascii_ply/triangle.ply",
@@ -52,6 +105,21 @@
       "checked_at_utc": "2026-11-13T20:23:12Z",
       "source_lock": "data/java/ascii_ply/boofcv-lock.json",
       "underlying_family": "BoofCV native Java PLY mesh reader"
+    },
+    {
+      "package": "jzy3d-core",
+      "version": "2.2.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "second_x": 1.0,
+        "third_y": 1.0
+      },
+      "pass": true,
+      "command": "python3 scripts/verify_java_ascii_ply_jzy3d.py",
+      "checked_at_utc": "2026-11-13T20:28:02Z",
+      "source_lock": "data/java/ascii_ply/jzy3d-lock.json",
+      "underlying_family": "Jzy3d public PLY vertex API over jPLY 0.2.1"
     }
   ],
   "runtime": [],

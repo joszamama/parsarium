@@ -94,5 +94,38 @@
       "faces": 1
     },
     "family_note": "Go wrapper or fork over Assimp; package count does not imply independent parser engines."
+  },
+  {
+    "name": "go.viam.com/rdk/spatialmath",
+    "module": "go.viam.com/rdk",
+    "version": "v1.17.0",
+    "license": "AGPL-3.0",
+    "license_evidence": "https://github.com/viamrobotics/rdk/blob/v1.17.0/LICENSE",
+    "input_api": "spatialmath.NewMeshFromPLYFile(path); (*Mesh).Triangles()",
+    "documentation": "https://pkg.go.dev/go.viam.com/rdk@v1.17.0/spatialmath#NewMeshFromPLYFile",
+    "scope": "ASCII PLY triangle faces converted to millimetre-scaled triangles",
+    "family": "Viam RDK spatialmath mesh loader over goply (shared goply parser family)",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "triangles": 1,
+      "first_triangle_mm": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1000,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0
+        ]
+      ]
+    },
+    "adapter_manifest_dir": "projects/ascii_ply/go/go_viam_com_rdk_spatialmath"
   }
 ]

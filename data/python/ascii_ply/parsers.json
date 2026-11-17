@@ -75,6 +75,31 @@
     }
   },
   {
+    "name": "pyntcloud",
+    "version": "0.3.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pyntcloud/0.3.1/json",
+    "input_api": "PyntCloud.from_file(path)",
+    "documentation": "https://pypi.org/project/pyntcloud/",
+    "scope": "ASCII PLY triangle vertices and face count",
+    "family": "pyntcloud PLY reader",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertex_count": 3,
+      "face_count": 1,
+      "first_vertex": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "last_vertex": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  {
     "name": "pyvista",
     "version": "0.49.2",
     "license": "MIT",
@@ -198,5 +223,31 @@
         0.0
       ]
     }
+  },
+  {
+    "name": "pyassimp",
+    "version": "5.2.5",
+    "license": "ISC",
+    "license_evidence": "https://github.com/assimp/assimp/blob/master/port/PyAssimp/LICENSE",
+    "input_api": "pyassimp.load(path)",
+    "documentation": "https://pypi.org/project/pyassimp/",
+    "scope": "ASCII PLY triangle vertices and face count",
+    "family": "Assimp PLY importer",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertex_count": 3,
+      "face_count": 1,
+      "first_vertex": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "last_vertex": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "underlying_release": "Homebrew Assimp 6.0.6 shared library"
   }
 ]

@@ -1,6 +1,6 @@
 # PYTHON × ASCII PLY: selected parsers
 
-8 control-verified third-party paths selected from 21 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
+10 control-verified third-party paths selected from 21 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -16,5 +16,7 @@ PyPI Stats last_month downloads excluding known mirrors.
 | 6 | [meshio](https://github.com/nschloe/meshio) | 5.3.5 | 715,923 | ASCII PLY triangle vertices and face count | meshio PLY reader |
 | 7 | [numpy-stl](https://pypi.org/project/numpy-stl/) | 4.1.3 | 528,185 | ASCII PLY triangle vertices and face count | numpy-stl PLY reader |
 | 8 | [point-cloud-utils](https://pypi.org/project/point-cloud-utils/) | 0.34.0 | 277,643 | ASCII PLY triangle vertices and face count | point-cloud-utils native PLY reader |
+| 9 | [pyntcloud](https://pypi.org/project/pyntcloud/) | 0.3.1 | 46,262 | ASCII PLY triangle vertices and face count | pyntcloud PLY reader |
+| 10 | [pyassimp](https://pypi.org/project/pyassimp/) | 5.2.5 | 46,129 | ASCII PLY triangle vertices and face count | Assimp PLY importer |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.
