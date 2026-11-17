@@ -122,6 +122,19 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(self.receipt(run)["spec"]["name"], "png")
         self.assertEqual(json.loads(self.log.read_text())["argv"][1:3], ["-F", "png"])
 
+    def test_pilot_defaults_match_verified_fanbase_specs(self):
+        for format_name, slug in (("json", "simplejson"), ("xml", "xmltodict")):
+            with self.subTest(format=format_name):
+                run = self.tmp / f"default-{format_name}"
+                code, output = self.run_cli(format_name, "python", slug, str(run),
+                                            "--count", "1")
+                self.assertEqual(code, 0, output)
+                self.assertEqual(self.receipt(run)["spec"]["name"], format_name)
+                self.assertEqual(json.loads(self.log.read_text())["argv"][1:3],
+                                 ["-F", format_name])
+        self.assertIn("mp3", fandango_generate.FORMATS)
+        self.assertNotIn("mp3", fandango_generate.FANBASE_FORMATS)
+
     def test_standard_feedback_path_uses_control_receipt(self):
         run = self.tmp / "tkinter-png"
         code, output = self.run_cli("png", "python", "stdlib_tkinter_photoimage",

@@ -24,22 +24,24 @@ import time
 import venv
 
 from run_case import MAX_CASE_BYTES, ROOT, project_for
+from format_registry import ALL_FORMATS, ECOSYSTEMS
 
 
-FORMATS = ("png", "zip", "mp4", "wav", "pdf", "svg", "http11",
-           "ascii_ply", "ascii_pnm", "mp3_id3v2")
-ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
+FORMATS = ALL_FORMATS
 # Parsarium format -> Fanbase format directory. Formats missing here have no
-# Fanbase spec as of index.yml schema 2 and need --spec.
+# Fanbase spec as of index.yml schema 2 and need --spec. Plain mp3 is omitted:
+# the Fanbase mp3 grammar generates ID3-tagged files, while the plain-MP3
+# pilot's controls and some adapters deliberately require untagged frames.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
-                   "mp3_id3v2": "mp3"}
+                   "mp3_id3v2": "mp3", "json": "json", "xml": "xml"}
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
                "ascii_pnm": "ascii_pnm_p3.fan"}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",
-              "ascii_pnm": ".pnm", "mp3_id3v2": ".mp3"}
+              "ascii_pnm": ".pnm", "mp3_id3v2": ".mp3", "json": ".json",
+              "xml": ".xml", "mp3": ".mp3"}
 MINIMUM_VERSION = (1, 3)
 SPEC_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
 SLUG = re.compile(r"[a-z0-9][a-z0-9_-]*")
