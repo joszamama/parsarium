@@ -146,6 +146,44 @@
     "project": "projects/mp3/go/github_com_tcolgate_mp3"
   },
   {
+    "name": "github.com/gopxl/beep/v2/mp3",
+    "module": "github.com/gopxl/beep/v2",
+    "version": "v2.1.1",
+    "license": "MIT",
+    "input_api": "Decode(io.ReadCloser) (beep.StreamSeekCloser, beep.Format, error); StreamSeekCloser.Stream, Len, Err",
+    "documentation": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1",
+    "source": "https://github.com/gopxl/beep/tree/v2.1.1/mp3",
+    "scope": "Beep v2 StreamSeekCloser over go-mp3 v0.3.4: MPEG-1/2 Layer III frames decoded to 16-bit stereo PCM and converted to float64 sample pairs; untagged input only in this pilot",
+    "family": "hajime/go-mp3 lineage via Beep",
+    "family_note": "Shared family, stated: gopxl/beep is the maintained fork of faiface/beep; its mp3/decode.go differs from faiface/beep v1.1.0 only in the beep import path and wraps github.com/hajimehoshi/go-mp3 v0.3.4. Counted as its own package API with its own Imported by metric; it adds no independent MP3 decoder.",
+    "underlying_parser": {
+      "name": "github.com/hajimehoshi/go-mp3",
+      "version": "v0.3.4",
+      "source_sha256": "c14676f9e3fdafe7bbb107e1dd65953a558cbef2346e4955d993f7bf2998e311"
+    },
+    "control": "controls/mp3/go-tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "length_samples": 12672,
+      "streamed_samples": 12672,
+      "samples_sha256": "4c295234e0e6f8c8d269edeaf196553d1a921fbff3fbeb6ef9c273ee278ee8db"
+    },
+    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "length_samples": 6912,
+      "streamed_samples": 6912,
+      "samples_sha256": "6fae8bdc529198edf97afcb95d7bab1581f8b8c2b822e45ab9040d78833a06f2"
+    },
+    "evidence": "projects/mp3/go/github_com_gopxl_beep_v2_mp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 44,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_gopxl_beep_v2_mp3"
+  },
+  {
     "name": "github.com/tosone/minimp3",
     "module": "github.com/tosone/minimp3",
     "version": "v1.1.0",
