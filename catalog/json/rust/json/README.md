@@ -1,18 +1,16 @@
-# json (json-rust) — JSON / Rust
+# json — JSON / Rust
 
-**Verified path in a bounded pilot cell.** This release was run on two small valid RFC 8259 JSON controls; the cell search remains open.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-- **Pinned release:** `json` `0.12.4`; [source crate](https://static.crates.io/crates/json/json-0.12.4.crate), SHA-256 `078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd`.
-- **License:** MIT OR Apache-2.0; both release license files are hashed in [source-lock.json](../../../../projects/json/rust/json_crate/source-lock.json).
-- **Parser family:** json-rust's own `src/parser.rs` and `JsonValue` tree. The harness uses `serde_json` only to encode the observed summary, not to parse the input.
-- **Local input API:** [`json::parse(&str)`](https://docs.rs/json/0.12.4/json/fn.parse.html), supplied with UTF-8 text decoded from local bytes.
-- **Adoption proxy:** 2,672,413 crates.io recent downloads (90 days) in the [snapshot](../../../../data/rust/json/registry-snapshot.json), ranked only against verified Rust JSON paths.
-- **Valid controls:** [`nested-object.json`](../../../../controls/json/nested-object.json) and [`nested-array.json`](../../../../controls/json/nested-array.json).
-- **Evidence:** [catalog record](../../../../data/rust/json/parsers.json), [base receipt](../../../../projects/json/rust/json_crate/verification.json), [AFL++ overlay](../../../../fuzzing/afl-native/json/rust/json_crate/verification.json).
+- **Pinned release:** `0.12.4`
+- **License:** MIT OR Apache-2.0
+- **Parser family:** json-rust 0.12.4 own parser.rs and JsonValue tree (maciejhirsz/json-rust); no serde_json parse dependency
+- **Local input API:** `json::parse(&str) -> Result<json::JsonValue>; JsonValue::{Object, Array, Short, String, Number, Boolean, Null}; JsonValue::entries()/as_f64()/as_str()`
+- **Documentation:** [API reference](<https://docs.rs/json/0.12.4/json/fn.parse.html>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/rust/json/parsers.json) · [control result](../../../../projects/json/rust/json_crate/verification.json)
 
-## Observed structure
-
-The adapter reports root type, object and array counts, boolean and null counts, nesting depth, decoded strings and numbers, and top-level keys. The first control produced:
+## Observed control result
 
 ```json
 {
@@ -48,15 +46,9 @@ The adapter reports root type, object and array counts, boolean and null counts,
 }
 ```
 
-The second control has an array root and a different structure; its exact expected output is pinned in the [manifest](../../../../projects/json/rust/json_crate/manifest.json).
-
 ## Run this target
 
 ```sh
 python3 parsarium.py build json rust json_crate
 python3 parsarium.py run json rust json_crate controls/json/nested-object.json
-python3 parsarium.py afl build json rust json_crate
-python3 parsarium.py afl prepare json rust json_crate runs/json-json_crate-afl
 ```
-
-`afl prepare` seeds a run without starting a mutation campaign. The verification gate checks only the two valid controls, repeated AFL++ feedback, and json-rust parser source coverage.
