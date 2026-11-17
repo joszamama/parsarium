@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T22:42:25.794852+00:00",
+  "project": "json/c/yajl",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+  "probe": "projects/json/c/yajl/parser-probe.c",
+  "probe_scope": "parse the local bytes and free the result; no tree traversal, printing, or result formatting",
+  "dom_oracle": "python_json_loads_order_and_number_kind_preserving",
+  "exact_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "01520d69d4b88f00bc576510836a0c5853c208c238f50354d1b44a1e3e73eda2",
+  "overlay_receipt_sha256": "f4eee1ca5f7519501d78fbaf1735070ec4b13cc01b231fac4c72d1baa364d89d",
+  "base_image_id": "sha256:190aa60bc9b4db6f89a338742b465b5c479bf70b9dede190d595f32c34be4360",
+  "overlay_image_id": "sha256:f82be45239d54b15a786b1c806531b68fa7241801b8f4b01c02033afd749615d",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "allowlist": "projects/json/c/yajl/afl-allowlist.txt",
+  "allowlist_entries": [
+    "src:yajl-src/src/yajl.c",
+    "src:yajl-src/src/yajl_alloc.c",
+    "src:yajl-src/src/yajl_buf.c",
+    "src:yajl-src/src/yajl_encode.c",
+    "src:yajl-src/src/yajl_lex.c",
+    "src:yajl-src/src/yajl_parser.c"
+  ],
+  "afl_instrumented_objects": [
+    "yajl.o",
+    "yajl_alloc.o",
+    "yajl_buf.o",
+    "yajl_encode.o",
+    "yajl_lex.o",
+    "yajl_parser.o"
+  ],
+  "source_line_scope": "covered lines under /work/yajl-src/ in the parser-only probe",
+  "repeats_per_control": 3,
+  "first_control": "controls/json/nested-object.json",
+  "second_control": "controls/json/nested-array.json",
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "root": "object",
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "strings": [
+      "A",
+      "two"
+    ],
+    "root": "array",
+    "top_level_items": 5
+  },
+  "first_parser_lines": 491,
+  "second_parser_lines": 471,
+  "parser_line_difference": 24,
+  "first_only_lines_by_file": {
+    "src/yajl_encode.c": 4,
+    "src/yajl_lex.c": 9,
+    "src/yajl_parser.c": 9
+  },
+  "second_only_lines_by_file": {
+    "src/yajl_lex.c": 2
+  },
+  "first_afl_tuples": 329,
+  "second_afl_tuples": 307,
+  "afl_tuple_difference": 34,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

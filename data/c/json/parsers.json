@@ -160,6 +160,60 @@
     "project": "projects/json/c/json-glib"
   },
   {
+    "name": "yajl",
+    "version": "2.1.0",
+    "license": "ISC",
+    "license_evidence": "Pinned 2.1.0 COPYING (ISC permission notice) in the source archive",
+    "input_api": "yajl_alloc(const yajl_callbacks *, yajl_alloc_funcs *, void *ctx); yajl_parse(yajl_handle, const unsigned char *jsonText, size_t jsonTextLength); yajl_complete_parse(yajl_handle)",
+    "documentation": "https://github.com/lloyd/yajl/blob/2.1.0/src/api/yajl_parse.h",
+    "documentation_note": "The pinned public header yajl_parse.h documents the event-driven parse API: yajl_alloc with a yajl_callbacks table, yajl_parse on a byte buffer with an explicit length, and yajl_complete_parse to finish the text. The parser itself classifies number tokens and calls yajl_integer (long long) or yajl_double; with yajl_number left NULL it converts them. Defaults reject comments, trailing garbage and multiple values. Debian source yajl ships 2.1.0, the last upstream release (2014).",
+    "source": "https://github.com/lloyd/yajl/releases/tag/2.1.0",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer through yajl_parse callbacks with the default configuration; observed valid control subset",
+    "family": "yajl own lexer and event parser (yajl_lex.c, yajl_parser.c)",
+    "family_note": "yajl ('Yet Another JSON Library') has its own lexer (yajl_lex.c), push parser state machine (yajl_parser.c) and string decoder (yajl_encode.c); no external JSON library. The harness's callbacks only print the events in arrival order; the yajl_tree convenience layer (yajl_tree.c, which enables comments) is not used.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package yajl",
+      "value": 152183,
+      "rank": 457,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/yajl"
+  },
+  {
     "name": "cjson",
     "version": "1.7.19",
     "license": "MIT",

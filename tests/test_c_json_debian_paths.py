@@ -15,6 +15,7 @@ PATHS = {
     "jq": ("jq", 141218),
     "libfastjson": ("libfastjson", 91226),
     "json-parser": ("libjsonparser", 844),
+    "yajl": ("yajl", 152183),
 }
 
 

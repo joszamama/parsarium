@@ -11,6 +11,7 @@ Eight C JSON third-party paths pass two valid controls with format-aware tree re
 - [jansson](jansson/README.md) — verified Docker harness
 - [json-c](json-c/README.md) — verified Docker harness
 - [json-glib](json-glib/README.md) — verified Docker harness
+- [yajl](yajl/README.md) — verified Docker harness
 - [cjson](cjson/README.md) — verified Docker harness
 - [jq](jq/README.md) — verified Docker harness
 - [libfastjson](libfastjson/README.md) — verified Docker harness

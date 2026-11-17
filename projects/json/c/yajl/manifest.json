@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "c",
+  "pilot": true,
+  "package": "yajl",
+  "release": "2.1.0",
+  "catalog_parser": "data/c/json/parsers.json",
+  "source_lock": "projects/json/c/yajl/source-lock.json",
+  "source_sha256": "3fb73364a5a30efe615046d07e6db9d09fd2b41c763c5f7d3bfb121cd5c5ac5a",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay prints the yajl_parse callback events as a JSON tree (yajl's lexer classifies integer and double tokens); run-control requires exact JSON tree equality with the control, preserving object order and integer versus float kinds, then checks the format-aware summary.",
+  "coverage": "LLVM source coverage of pinned yajl 2.1.0 lexer, parser and helper sources reached by yajl_parse(handle, bytes, length) and yajl_complete_parse(handle)",
+  "coverage_subject_prefix": "/work/yajl-src/",
+  "format_specific_coverage_file_suffix": "/yajl-src/src/yajl_parser.c",
+  "afl_entrypoint": "/work/parser-probe",
+  "afl_map_size": 65536
+}

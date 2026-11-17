@@ -3360,6 +3360,126 @@
         }
       ]
     },
-    "excluded_note": "picojson (16) is C++ and belongs to the C++ cell. jq's source package builds the jq program and libjq1; its count is a package proxy, not libjq API use."
+    "excluded_note": "picojson (16) is C++ and belongs to the C++ cell. jq's source package builds the jq program and libjq1; its count is a package proxy, not libjq API use.",
+    "tenth_slot_exact_source_lookups": {
+      "searched_at_utc": "2026-11-17T22:30:00+00:00",
+      "method": "exact source-name lookup in the same hashed sourcemax snapshot for C libraries with a JSON parser whose Debian source name lacks 'json'; names chosen from known C JSON libraries and multi-purpose libraries with JSON modules; not counted as search hits",
+      "snapshot_sha256": "9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8",
+      "rows": [
+        {
+          "name": "yajl",
+          "rank": 457,
+          "inst": 152183,
+          "vote": 14067,
+          "old": 3304,
+          "recent": 405,
+          "no_files": 134407,
+          "status": "selected: yajl 2.1.0 (Yet Another JSON Library), own lexer and event parser; single-library JSON source"
+        },
+        {
+          "name": "mongo-c-driver",
+          "rank": 4736,
+          "inst": 2458,
+          "vote": 539,
+          "old": 75,
+          "recent": 38,
+          "no_files": 1844,
+          "status": "excluded: multi-library source (libmongoc and libbson); libbson parses JSON into BSON through a bundled jsonsl reader, so the count is format-ambiguous, and libbson-dev is far below the 1,000 format-specific fallback"
+        },
+        {
+          "name": "ucl",
+          "rank": 11405,
+          "inst": 253,
+          "vote": 26,
+          "old": 196,
+          "recent": 18,
+          "no_files": 13,
+          "status": "excluded: Debian source ucl is the UCL data-compression library (libucl1), not the vstakhov libucl configuration parser; an identical short name does not establish source identity"
+        },
+        {
+          "name": "libwebsockets",
+          "rank": 4010,
+          "inst": 4080,
+          "vote": 1643,
+          "old": 509,
+          "recent": 88,
+          "no_files": 1958,
+          "status": "excluded: multi-purpose networking library; its LEJP JSON stream parser is one module, so the count is not JSON-specific and there is no JSON-specific dev package"
+        },
+        {
+          "name": "systemd",
+          "rank": 58,
+          "inst": 297072,
+          "vote": 278294,
+          "old": 29156,
+          "recent": 16028,
+          "no_files": 19259,
+          "status": "excluded: sd-json is one API inside libsystemd; the count is system-wide, not JSON-specific"
+        },
+        {
+          "name": "ell",
+          "rank": 5783,
+          "inst": 1550,
+          "vote": 1020,
+          "old": 419,
+          "recent": 85,
+          "no_files": 26,
+          "status": "excluded: Embedded Linux Library, multi-purpose; JSON support is internal"
+        },
+        {
+          "name": "libfyaml",
+          "rank": 3270,
+          "inst": 7482,
+          "vote": 6140,
+          "old": 287,
+          "recent": 855,
+          "no_files": 200,
+          "status": "excluded: YAML 1.2 parser; JSON input is a YAML subset there, not a JSON library"
+        },
+        {
+          "name": "cjose",
+          "rank": 7780,
+          "inst": 723,
+          "vote": 649,
+          "old": 27,
+          "recent": 34,
+          "no_files": 13,
+          "status": "excluded: JOSE library that parses JSON through jansson (selected family)"
+        },
+        {
+          "name": "jshon",
+          "rank": 14052,
+          "inst": 142,
+          "vote": 16,
+          "old": 123,
+          "recent": 2,
+          "no_files": 1,
+          "status": "excluded: command-line tool over jansson"
+        },
+        {
+          "name": "jsonrpc-glib",
+          "rank": 7893,
+          "inst": 688,
+          "vote": 102,
+          "old": 438,
+          "recent": 29,
+          "no_files": 119,
+          "status": "excluded: JSON-RPC over JSON-GLib (selected family)"
+        }
+      ],
+      "absent_names": [
+        "wjelement",
+        "jsonsl",
+        "nxjson",
+        "mjson",
+        "ccan",
+        "libucl",
+        "tiny-json",
+        "microjson",
+        "sajson",
+        "json11"
+      ],
+      "note": "yajl was missed by the json-name search because its source name lacks json; it is the only positive-count C JSON value library found by these lookups."
+    }
   }
 }
