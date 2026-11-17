@@ -88,7 +88,11 @@ p { margin: 0 0 1em; }
 .nav a { text-decoration: none; color: var(--ink-2); padding: 4px 0; border-bottom: 2px solid transparent; }
 .nav a:hover { color: var(--ink); }
 .nav a[aria-current] { color: var(--ink); border-bottom-color: var(--red); }
-.nav .lang { border: 1px solid var(--rule); padding: 3px 7px; font-size: 12px; }
+.nav .lang { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+.nav .lang a { padding: 0; color: var(--muted); }
+.nav .lang a:hover { color: var(--ink); }
+.nav .lang [aria-current] { color: var(--ink); font-weight: 600; }
+.nav .lang i { font-style: normal; color: var(--muted); }
 .nav .gh::after { content: " ↗"; color: var(--muted); }
 .menu { display: none; font: 500 14px var(--mono); background: none; border: 1px solid var(--rule); color: var(--ink); padding: 6px 10px; cursor: pointer; }
 
@@ -189,7 +193,8 @@ pre .p, .cmd .p { color: #6fd39b; user-select: none; }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
 .count-pair { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
 .count-pair div { padding: 18px 0; border-bottom: 1px solid var(--rule); }
-.count-pair div + div { padding-left: 22px; border-left: 1px solid var(--rule); }
+.count-pair div:nth-child(odd) { padding-right: 22px; }
+.count-pair div:nth-child(even) { padding-left: 22px; border-left: 1px solid var(--rule); }
 .count-pair b { display: block; font: 500 48px/1 var(--serif); letter-spacing: -0.02em; margin-bottom: 8px; }
 .count-pair span { font: 13px/1.4 var(--mono); color: var(--muted); }
 
@@ -380,6 +385,8 @@ figure.fig figcaption { font: 12px/1.5 var(--mono); color: var(--muted); margin-
   .nav { display: none; position: absolute; top: 60px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; }
   .nav.open { display: flex; }
   .nav a { padding: 10px 0; width: 100%; }
+  .nav .lang { padding: 10px 0; }
+  .nav .lang a { width: auto; padding: 0; }
   .fmt-row { grid-template-columns: 1fr auto; }
   .fmt-hex { grid-column: 1 / -1; order: 3; font-size: 12px; }
   .hexdump { font-size: 11px; padding: 10px; }

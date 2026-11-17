@@ -574,7 +574,7 @@ STRINGS = {
                     "IDAT": "IDAT · compressed pixels", "IEND": "IEND · end of image"},
         "verified": "verified", "runnable": "runnable",
         "footer_cite": "Cite Parsarium",
-        "footer_line": "An open testbed of real parsers, by Pepe Zamudio at CISPA.",
+        "footer_line": "An open testbed of real parsers, by José Antonio Zamudio Amaya at CISPA.",
         "built": "Built from commit", "chapter": "Chapter", "prev": "Previous", "next": "Next",
         "contents": "Contents", "redirect": "This page moved to",
         "day_label": "harness receipts",
@@ -589,7 +589,7 @@ STRINGS = {
                     "IDAT": "IDAT · píxeles comprimidos", "IEND": "IEND · fin de la imagen"},
         "verified": "verificados", "runnable": "ejecutables",
         "footer_cite": "Citar Parsarium",
-        "footer_line": "Un banco de pruebas abierto con parsers reales, por Pepe Zamudio en CISPA.",
+        "footer_line": "Un banco de pruebas abierto con parsers reales, por José Antonio Zamudio Amaya en CISPA.",
         "built": "Construido desde el commit", "chapter": "Capítulo", "prev": "Anterior", "next": "Siguiente",
         "contents": "Índice", "redirect": "Esta página se ha movido a",
         "day_label": "registros de harness",
@@ -764,11 +764,21 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
             for key, label in NAV[lang])
         other = "es" if lang == "en" else "en"
         other_url = f"{asset_root}es/{route}" if lang == "en" else f"{asset_root}{route}"
+        # Both languages are always shown; the current one is plain text and
+        # the other is the link, so the control reads as a choice, not a state.
+        options = []
+        for code in ("en", "es"):
+            if code == lang:
+                options.append(f'<span aria-current="true" lang="{code}">{code.upper()}</span>')
+            else:
+                options.append(f'<a href="{other_url}" hreflang="{code}" lang="{code}" '
+                               f'aria-label="{s["switch"]}">{code.upper()}</a>')
+        lang_switch = f'<span class="lang">{"<i aria-hidden=\"true\">/</i>".join(options)}</span>'
         return f'''<a class="skip" href="#main">{s["skip"]}</a>
 <header class="masthead"><div class="wrap mh">
   <a class="brand" href="{root or './'}" aria-label="{s["home"]}"><span class="px" aria-hidden="true"><i></i><i></i></span>parsarium</a>
   <nav class="nav" id="nav" aria-label="{s["nav"]}">{links}
-    <a class="lang" href="{other_url}" hreflang="{other}" lang="{other}" aria-label="{s["switch"]}">{other.upper()}</a>
+    {lang_switch}
     <a class="gh" href="{REPO_URL}" rel="noopener">GitHub</a></nav>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">{s["menu"]}</button>
 </div></header>'''
