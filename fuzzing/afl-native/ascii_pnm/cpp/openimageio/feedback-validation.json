@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "project": "ascii_pnm/cpp/openimageio",
+  "instrumented_native_library": "/work/install/lib/libOpenImageIO.so",
+  "native_instrumentation_symbol": "__afl_area_ptr",
+  "control": "controls/ascii_pnm/red-green.ppm",
+  "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+  "variant": "fuzzing/afl-native/ascii_pnm/cpp/openimageio/valid-gray.pgm",
+  "variant_sha256": "3e0b41ff3041f2df4fde55ada83fc96547571da0124969603cb106e9002fbf5a",
+  "feedback_command": "afl-showmap -m none -t 10000 -o MAP -- /work/fuzzer /input/control",
+  "afl_map_size": 155887,
+  "control_edges": 1507,
+  "control_map_sha256": "f1e5e9bb9846a591c50dd6031a1a30c3dccfef3997e5c72f5c38a8306338ee75",
+  "repeat_map_identical": true,
+  "valid_variant_edges": 1500,
+  "valid_variant_map_sha256": "871ee7220b8832bed1aa72fda1db30e27e6d3e5bf630156f6cd74470003a5096",
+  "symmetric_edge_difference": 101,
+  "mutation_campaign_run": false,
+  "pass": true
+}
