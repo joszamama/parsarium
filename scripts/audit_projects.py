@@ -548,7 +548,7 @@ def vlc_cpp_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
 def vlc_cpp_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
     """Bind C++ VLC ID3v2 edges to its native and TagLib parser modules."""
     project = path.parent.relative_to(ROOT / "projects")
-    if str(project) != "mp3_id3v2/cpp/vlc":
+    if str(project) != "mp3/cpp/vlc":
         return True
     overlay_dir = ROOT / "fuzzing/afl-native" / project
     variant = path.parent / manifest.get("valid_variant", "")
@@ -557,7 +557,7 @@ def vlc_cpp_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     variant_stability = overlay.get("variant_stability", {})
     build_script = (path.parent / "build.sh").read_text()
     return (
-        overlay.get("feedback_kind") == "vlc_mp3_id3v2_parser_pcguard_edges"
+        overlay.get("feedback_kind") == "vlc_mp3_parser_pcguard_edges"
         and "TagLib 1.13.1" in overlay.get("feedback_scope", "")
         and "VLC 3.0.24 meta_engine" in overlay.get("feedback_scope", "")
         and "harness uninstrumented" in overlay.get("feedback_scope", "")
@@ -594,7 +594,7 @@ def vlc_cpp_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
 def mpv_tagged_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
     """Bind mpv AFL feedback to FFmpeg's ID3v2 and MP3 source modules."""
     project = path.parent.relative_to(ROOT / "projects")
-    if str(project) not in {"mp3_id3v2/c/mpv", "mp3_id3v2/cpp/mpv"}:
+    if str(project) not in {"mp3/c/mpv", "mp3/cpp/mpv"}:
         return True
     overlay_dir = ROOT / "fuzzing/afl-native" / project
     variant = ROOT / manifest.get("valid_variant", "")

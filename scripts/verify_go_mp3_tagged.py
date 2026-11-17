@@ -8,16 +8,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CELL = ROOT / "data" / "go" / "mp3_id3v2"
-MODULE = ROOT / "adapters" / "go" / "mp3_id3v2"
-CONTROL = ROOT / "controls" / "mp3_id3v2" / "tone-tags-44k.mp3"
+CELL = ROOT / "data" / "go" / "mp3"
+MODULE = ROOT / "adapters" / "go" / "mp3"
+CONTROL = ROOT / "controls" / "mp3" / "id3v2-tagged-tone-44k.mp3"
 
 
 def main() -> None:
     parsers = json.loads((CELL / "parsers.json").read_text())
     results = []
     for parser in parsers:
-        command = ["go", "run", ".", parser["name"], "../../../controls/mp3_id3v2/tone-tags-44k.mp3"]
+        command = ["go", "run", ".", parser["name"], "../../../controls/mp3/id3v2-tagged-tone-44k.mp3"]
         output = None
         error = None
         try:
@@ -36,7 +36,7 @@ def main() -> None:
     version = subprocess.run(["go", "version"], cwd=MODULE, text=True, capture_output=True, check=True).stdout.strip()
     report = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "go": version,
-              "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+              "control": "controls/mp3/id3v2-tagged-tone-44k.mp3",
               "control_sha256": hashlib.sha256(CONTROL.read_bytes()).hexdigest(),
               "control_meaning": "ID3v2.3 title Parsarium, artist Control, album Pilot; one second of 440 Hz mono MPEG-1 Layer III at 44100 Hz",
               "control_selection": "The earlier 8000 Hz MPEG-2.5 control is retained for JavaScript; this tagged 44100 Hz MPEG-1 control exercises decoders that do not support MPEG-2.5.",

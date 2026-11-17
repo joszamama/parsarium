@@ -28,24 +28,24 @@ from format_registry import ECOSYSTEMS, PROJECT_FORMATS
 from mp3_plain import BUNDLED_DECODED_SHA256, SOURCE_CONTROLS, validate_frames
 
 
-# Target format directories. The single MP3 catalog format keeps two target
-# directories: mp3_id3v2/ targets were verified on the ID3v2-tagged control and
-# use Fanbase's mp3 grammar; mp3/ targets were verified on untagged Layer III
-# frames and use the local plain grammar.
 FORMATS = PROJECT_FORMATS
 # Target format -> Fanbase format directory. Formats missing here have no
-# Fanbase spec as of index.yml schema 2 and need --spec. Untagged mp3 targets are
-# omitted: Fanbase's mp3 grammar emits ID3 tags plus Layer I/II frames, so
-# removing the tags does not yield a contiguous Layer III stream.
+# Fanbase spec as of index.yml schema 2 and need --spec. MP3 is resolved per
+# target (tagged_mp3_target): targets verified on the ID3v2-tagged control use
+# Fanbase's mp3 grammar; targets verified on untagged Layer III frames use the
+# local plain grammar, because Fanbase's mp3 grammar emits ID3 tags plus
+# Layer I/II frames and removing the tags does not yield a contiguous Layer III
+# stream.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
-                   "mp3_id3v2": "mp3", "json": "json", "xml": "xml"}
+                   "json": "json", "xml": "xml"}
+TAGGED_MP3_CONTROL_PREFIX = "controls/mp3/id3v2-tagged-"
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
                "ascii_pnm": "ascii_pnm_p3.fan"}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",
-              "ascii_pnm": ".pnm", "mp3_id3v2": ".mp3", "json": ".json",
+              "ascii_pnm": ".pnm", "json": ".json",
               "xml": ".xml", "mp3": ".mp3"}
 MINIMUM_VERSION = (1, 3)
 SPEC_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
@@ -188,6 +188,19 @@ def build_command(executable: Path, args: argparse.Namespace, generated: Path,
     return command
 
 
+def tagged_mp3_target(ecosystem: str, slug: str) -> bool:
+    """True for an MP3 target verified on the ID3v2-tagged control."""
+    manifest = ROOT / "projects" / "mp3" / ecosystem / slug / "manifest.json"
+    return (manifest.is_file() and
+            json.loads(manifest.read_text())["control"].startswith(TAGGED_MP3_CONTROL_PREFIX))
+
+
+def fanbase_format(args: argparse.Namespace) -> str | None:
+    if args.format == "mp3" and not args.fanbase:
+        return "mp3" if tagged_mp3_target(args.ecosystem, args.slug) else None
+    return FANBASE_FORMATS.get(args.format)
+
+
 def validate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> Path | None:
     if not SLUG.fullmatch(args.slug):
         cli.error("slug must be a project directory name such as lodepng")
@@ -197,15 +210,16 @@ def validate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> Path | N
         cli.error("--seed must be non-negative")
     if args.timeout < 1:
         cli.error("--timeout must be positive")
+    expected_fanbase = fanbase_format(args)
     if args.fanbase is None and args.spec is None:
-        if args.format in FANBASE_FORMATS:
-            args.fanbase = FANBASE_FORMATS[args.format]
+        if expected_fanbase is not None:
+            args.fanbase = expected_fanbase
         elif args.format in LOCAL_SPECS:
             args.spec = ROOT / "fuzzing/fandango/specs" / LOCAL_SPECS[args.format]
         else:
             cli.error(f"no bundled {args.format} spec; pass --spec FILE.fan")
     if args.fanbase:
-        expected = FANBASE_FORMATS.get(args.format)
+        expected = expected_fanbase
         if expected is None:
             cli.error(f"Fanbase has no {args.format} spec; pass --spec FILE.fan")
         if not SPEC_NAME.fullmatch(args.fanbase) or not (
@@ -385,7 +399,7 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
     receipt["over_limit_outputs"] = sum(1 for item in outputs if item["bytes"] > MAX_CASE_BYTES)
     receipt["symlinks_skipped"] = [str(path.relative_to(generated)) for path in links]
     receipt["input_limit_bytes"] = MAX_CASE_BYTES
-    if args.format == "mp3":
+    if args.format == "mp3" and not args.fanbase:
         receipt["plain_mp3_route"] = {
             "source": "local_spec", "postprocess": "none",
             "validation": "contiguous complete MPEG-1/2 Layer III frame headers",
@@ -396,7 +410,7 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
         }
 
     problems = []
-    if args.format == "mp3":
+    if args.format == "mp3" and not args.fanbase:
         for path, record in zip(files, outputs):
             if record["bytes"] > MAX_CASE_BYTES:
                 continue

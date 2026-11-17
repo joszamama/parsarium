@@ -9,9 +9,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CELL = ROOT / "data" / "python" / "mp3_id3v2"
-PYTHON = ROOT / "adapters" / "python" / "mp3_id3v2" / ".venv" / "bin" / "python"
-ADAPTER = ROOT / "adapters" / "python" / "mp3_id3v2" / "main.py"
+CELL = ROOT / "data" / "python" / "mp3"
+PYTHON = ROOT / "adapters" / "python" / "mp3" / ".venv" / "bin" / "python"
+ADAPTER = ROOT / "adapters" / "python" / "mp3" / "main.py"
 
 
 def check(command, expected):
@@ -36,7 +36,7 @@ def main():
         rows.append({"package": parser["name"], "version": parser["version"],
                      "scope": parser["scope"], "command": " ".join(command),
                      "pass": passed, "output": output, "error": error})
-    control = "controls/mp3_id3v2/tone-tags.mp3"
+    control = "controls/mp3/id3v2-tagged-tone.mp3"
     ffprobe = subprocess.run(["ffprobe", "-version"], capture_output=True,
                              text=True, check=True).stdout.splitlines()[0]
     libsndfile = subprocess.run([str(PYTHON), "-c",

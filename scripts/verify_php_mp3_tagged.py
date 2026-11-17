@@ -9,8 +9,8 @@ import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data/php/mp3_id3v2"
-CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
+DATA = ROOT / "data/php/mp3"
+CONTROL = ROOT / "controls/mp3/id3v2-tagged-tone.mp3"
 
 
 def execute(command: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
@@ -67,7 +67,7 @@ def main() -> None:
                      "output": output, "pass": True})
         print(f"{name}@{parser['version']}: passed")
 
-    probe_command = ["php", str(ROOT / "adapters/php/mp3_id3v2/runtime_probe.php"), str(CONTROL)]
+    probe_command = ["php", str(ROOT / "adapters/php/mp3/runtime_probe.php"), str(CONTROL)]
     probe = json.loads(execute(probe_command).stdout.strip())
     assert probe == {"id3_extension_loaded": False, "id3_get_tag_exists": False,
                      "fileinfo_mime": "audio/mpeg"}
@@ -77,7 +77,7 @@ def main() -> None:
               "composer_version": execute(["composer", "--version"]).stdout.strip(),
               "mediainfo_cli_version": execute(["mediainfo", "--Version"]).stdout.strip(),
               "ffprobe_cli_version": execute(["ffprobe", "-version"]).stdout.splitlines()[0],
-              "control": "controls/mp3_id3v2/tone-tags.mp3",
+              "control": "controls/mp3/id3v2-tagged-tone.mp3",
               "control_sha256": sha256(CONTROL.read_bytes()).hexdigest(),
               "controls": [{"path": name, "sha256": sha256((ROOT / name).read_bytes()).hexdigest()}
                            for name in sorted({parser["control"] for parser in parsers})],
@@ -87,7 +87,7 @@ def main() -> None:
               "runtime_probe": {"command": " ".join(probe_command),
                                 "output": probe, "pass": True}}
     if platform.system() == "Darwin" and platform.machine() == "arm64":
-        native = ROOT / "adapters/php/mp3_id3v2/soundfile/vendor/phpmlkit/soundfile/lib/darwin-arm64/libsndfile.1.2.2.dylib"
+        native = ROOT / "adapters/php/mp3/soundfile/vendor/phpmlkit/soundfile/lib/darwin-arm64/libsndfile.1.2.2.dylib"
         assert native.is_file()
         report["soundfile_native_library"] = {"path": str(native.relative_to(ROOT)),
                                                "sha256": sha256(native.read_bytes()).hexdigest()}

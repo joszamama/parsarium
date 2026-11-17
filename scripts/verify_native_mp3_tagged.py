@@ -14,7 +14,7 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
+CONTROL = ROOT / "controls/mp3/id3v2-tagged-tone.mp3"
 CONTROL_SHA256 = "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad"
 
 
@@ -29,13 +29,13 @@ def run(command: list[str], timeout: int = 180, env: dict[str, str] | None = Non
 def verify(ecosystem: str) -> None:
     assert ecosystem in ("c", "cpp")
     assert sha256(CONTROL.read_bytes()).hexdigest() == CONTROL_SHA256
-    data = ROOT / "data" / ecosystem / "mp3_id3v2"
+    data = ROOT / "data" / ecosystem / "mp3"
     parsers = json.loads((data / "parsers.json").read_text())
     lock = json.loads((data / "source-lock.json").read_text())
     assert len(parsers) == json.loads((data / "cell.json").read_text())["verified_third_party_count"]
     cache = Path(tempfile.gettempdir()) / f"parsarium-{ecosystem}-mp3-id3v2"
     cache.mkdir(parents=True, exist_ok=True)
-    target = ROOT / "adapters" / ecosystem / "mp3_id3v2/target"
+    target = ROOT / "adapters" / ecosystem / "mp3/target"
     target.mkdir(parents=True, exist_ok=True)
     rows = []
     libraries = {}
@@ -111,7 +111,7 @@ def verify(ecosystem: str) -> None:
         print(f"{name}@{parser['version']}: {ecosystem} MP3 with ID3v2 passed", flush=True)
     result = {"checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "platform": platform.platform(), "compiler": run(["c++" if ecosystem == "cpp" else "cc", "--version"]).splitlines()[0],
-              "source_lock": f"data/{ecosystem}/mp3_id3v2/source-lock.json", "local_libraries": libraries,
-              "control": "controls/mp3_id3v2/tone-tags.mp3", "control_sha256": CONTROL_SHA256,
+              "source_lock": f"data/{ecosystem}/mp3/source-lock.json", "local_libraries": libraries,
+              "control": "controls/mp3/id3v2-tagged-tone.mp3", "control_sha256": CONTROL_SHA256,
               "third_party": rows, "runtime": []}
     (data / "verification.json").write_text(json.dumps(result, indent=2) + "\n")

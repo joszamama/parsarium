@@ -26,7 +26,7 @@ CASES = (
     ("http11", "cpp", "poco"),
     ("ascii_ply", "c", "assetkit"),
     ("ascii_pnm", "cpp", "openimageio"),
-    ("mp3_id3v2", "c", "mpv"),
+    ("mp3", "c", "mpv"),
     ("json", "python", "simplejson"),
     ("xml", "python", "xmltodict"),
     ("mp3", "go", "github_com_dmulholl_mp3lib"),
@@ -54,7 +54,7 @@ def main() -> int:
     output.mkdir(parents=True, exist_ok=True)
     rows = []
     for fmt, ecosystem, slug in CASES:
-        path = output / fmt
+        path = output / f"{fmt}-{ecosystem}"
         command = [sys.executable, str(ROOT / "parsarium.py"), "fandango", "generate",
                    fmt, ecosystem, slug, str(path), "--count", "1", "--seed", "7",
                    "--timeout", "120", "--replay", "--prepare-afl"]

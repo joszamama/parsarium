@@ -193,7 +193,7 @@ $config->setMaxLen(1 << 20);
         "png": "libvips42t64 php8.5-imagick imagemagick",
         "ascii_pnm": "libvips42t64 php8.5-imagick imagemagick",
         "svg": "libvips42t64 php8.5-imagick imagemagick librsvg2-bin",
-        "mp3_id3v2": "ffmpeg mediainfo",
+        "mp3": "ffmpeg mediainfo",
         "wav": "ffmpeg mediainfo",
         "mp4": "ffmpeg mediainfo",
         "pdf": "poppler-utils php8.5-imagick php8.5-curl imagemagick",

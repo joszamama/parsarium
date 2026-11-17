@@ -12,7 +12,9 @@ QUERIES = {
     "png": ["png", "png decoder", "png reader", "png image", "png metadata", "libpng", "png chunk"],
     "zip": ["zip", "zip archive", "zip reader", "zip extract", "unzip", "libzip", "pkzip"],
     "wav": ["wav", "wave file", "wav reader", "wav decoder", "riff wave", "pcm wav", "waveform audio"],
-    "mp3_id3v2": ["mp3", "id3v2", "id3", "mp3 decoder", "mpeg audio", "mp3 parser", "audio metadata"],
+    # The former MP3-with-ID3v2 cell searched "mp3", "id3v2", "id3", "mp3 decoder",
+    # "mpeg audio", "mp3 parser" and "audio metadata"; that capture is kept in
+    # data/rust/mp3/registry-snapshot.json.
     "mp3": ["mp3", "mp3 decoder", "mp3 parser", "mpeg audio", "mpeg layer 3", "mp3 frame"],
     "mp4": ["mp4", "mp4 parser", "isobmff", "mp4 reader", "mpeg4 container", "quicktime mov", "mp4 metadata"],
     "pdf": ["pdf", "pdf parser", "pdf reader", "pdf extract", "pdf render", "pdf document", "pdf text"],
@@ -33,7 +35,7 @@ def fetch(url: str) -> dict:
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|mp3_id3v2|mp3|xml")
+        raise SystemExit("usage: python3 scripts/snapshot_crates.py png|zip|mp4|wav|pdf|svg|http11|ascii_ply|ascii_pnm|mp3|xml")
     search = []
     for query in QUERIES[cell]:
         url = "https://crates.io/api/v1/crates?" + urlencode({"q": query, "per_page": 100, "page": 1})

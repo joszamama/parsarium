@@ -1,7 +1,7 @@
 """Save bounded Maven leads, pinned MP3 releases, and Java adoption signals.
 
 Search hits are only leads. Local MP3/ID3v2 parsing is decided by the control
-adapter and verify_java_mp3_id3v2.py.
+adapter and verify_java_mp3_tagged.py.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEST = ROOT / "data/java/mp3_id3v2/registry-snapshot.json"
+DEST = ROOT / "data/java/mp3/registry-snapshot.json"
 COORDS = {
     "jaudiotagger": ("net.jthink", "jaudiotagger", "3.0.1"),
     "mp3agic": ("com.mpatric", "mp3agic", "0.9.1"),

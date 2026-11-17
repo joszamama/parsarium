@@ -14,7 +14,7 @@ import subprocess
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-FORMATS = {"ascii_ply", "ascii_pnm", "http11", "svg", "mp3_id3v2", "mp4", "pdf", "wav", "png", "zip"}
+FORMATS = {"ascii_ply", "ascii_pnm", "http11", "svg", "mp3", "mp4", "pdf", "wav", "png", "zip"}
 MAIN_ADAPTERS = {"ascii_ply", "ascii_pnm", "http11", "svg"}
 OUTPUT_ADAPTERS = {"png", "zip"}
 

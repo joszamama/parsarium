@@ -112,13 +112,13 @@ def main() -> None:
             "svg/c/gdk_pixbuf", "svg/c/librsvg", "svg/cpp/gdk_pixbuf",
             "svg/cpp/librsvg", "svg/c/resvg", "svg/cpp/resvg"}
         custom_vlc_mp4 = str(relative) == "mp4/cpp/vlc"
-        custom_vlc_mp3 = str(relative) == "mp3_id3v2/cpp/vlc"
+        custom_vlc_mp3 = str(relative) == "mp3/cpp/vlc"
         custom_stereokit_ply = str(relative) == "ascii_ply/c/stereokit"
         custom_mlt_mp4 = str(relative) == "mp4/c/mlt"
         custom_openshot_mp4 = str(relative) == "mp4/cpp/libopenshot"
         custom_papers_pdf = str(relative) == "pdf/c/gnome-papers"
         custom_rust_pdf = str(relative) == "pdf/cpp/pdf_oxide"
-        custom_mpv_mp3 = str(relative) in {"mp3_id3v2/c/mpv", "mp3_id3v2/cpp/mpv"}
+        custom_mpv_mp3 = str(relative) in {"mp3/c/mpv", "mp3/cpp/mpv"}
         custom_mpv_mp4 = str(relative) in {"mp4/c/mpv", "mp4/cpp/mpv"}
         if (manifest["package"] not in {"gstreamer", "netpbm", "sail"}
                 and not custom_rust_svg and not custom_vlc_mp4 and not custom_vlc_mp3

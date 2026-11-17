@@ -3,8 +3,8 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 
 const root = new URL('../', import.meta.url);
-const parsers = JSON.parse(await readFile(new URL('data/javascript/mp3_id3v2/parsers.json', root)));
-const control = 'controls/mp3_id3v2/tone-tags.mp3';
+const parsers = JSON.parse(await readFile(new URL('data/javascript/mp3/parsers.json', root)));
+const control = 'controls/mp3/id3v2-tagged-tone.mp3';
 const bytes = await readFile(new URL(control, root));
 const tagResult = { title: 'Parsarium', artist: 'Control', album: 'Pilot' };
 const expected = Object.fromEntries(parsers.map(({ name }) => [name, tagResult]));
@@ -21,7 +21,7 @@ Object.assign(expected, {
   'mp3-parser': { ...tagResult, version: 3 }
 });
 const third_party = parsers.map(({ name, version, scope }) => {
-  const command = ['adapters/javascript/mp3_id3v2.mjs', name, control];
+  const command = ['adapters/javascript/mp3.mjs', name, control];
   const run = spawnSync(process.execPath, command, { cwd: root.pathname, encoding: 'utf8', timeout: 15000 });
   let output = null, pass = false, error = null;
   try {
@@ -33,7 +33,7 @@ const third_party = parsers.map(({ name, version, scope }) => {
   } catch (cause) { error = String(cause); }
   return { package: name, version, scope, command: `node ${command.join(' ')}`, pass, output, error };
 });
-const browserCommand = ['adapters/javascript/mp3_id3v2_browser.mjs', control];
+const browserCommand = ['adapters/javascript/mp3_browser.mjs', control];
 const browserRun = spawnSync(process.execPath, browserCommand, { cwd: root.pathname, encoding: 'utf8', timeout: 15000 });
 const runtime = { command: `node ${browserCommand.join(' ')}`, pass: false, output: null, error: null };
 try {
@@ -47,6 +47,6 @@ const report = {
   checked_at_utc: new Date().toISOString(), platform: process.platform, architecture: process.arch, node: process.version,
   control, control_sha256: createHash('sha256').update(bytes).digest('hex'), expected, third_party, runtime
 };
-await writeFile(new URL('data/javascript/mp3_id3v2/verification.json', root), `${JSON.stringify(report, null, 2)}\n`);
+await writeFile(new URL('data/javascript/mp3/verification.json', root), `${JSON.stringify(report, null, 2)}\n`);
 console.log(`${third_party.filter((item) => item.pass).length}/${third_party.length} MP3/ID3v2 packages passed; browser runtime ${runtime.pass ? 'passed' : 'failed'}`);
 if (third_party.some((item) => !item.pass) || !runtime.pass) process.exitCode = 1;

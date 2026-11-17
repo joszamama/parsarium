@@ -8,8 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CELL = ROOT / "data" / "rust" / "mp3_id3v2"
-ADAPTER = ROOT / "adapters" / "rust" / "mp3_id3v2"
+CELL = ROOT / "data" / "rust" / "mp3"
+ADAPTER = ROOT / "adapters" / "rust" / "mp3"
 BINARY = ADAPTER / "target" / "debug" / "parsarium-rust-mp3-id3v2"
 
 
@@ -37,7 +37,7 @@ def main() -> None:
         results.append({
             "package": parser["name"], "version": parser["version"],
             "scope": parser["scope"], "control": control,
-            "command": f"adapters/rust/mp3_id3v2/target/debug/parsarium-rust-mp3-id3v2 {parser['name']} {control}",
+            "command": f"adapters/rust/mp3/target/debug/parsarium-rust-mp3-id3v2 {parser['name']} {control}",
             "pass": passed, "output": output, "error": error,
         })
     report = {
@@ -45,7 +45,7 @@ def main() -> None:
         "platform": platform.platform(),
         "rustc": subprocess.check_output(["rustc", "--version"], text=True).strip(),
         "cargo": subprocess.check_output(["cargo", "--version"], text=True).strip(),
-        "build_command": "cargo build --locked (from adapters/rust/mp3_id3v2)",
+        "build_command": "cargo build --locked (from adapters/rust/mp3)",
         "control_sha256": controls,
         "control_meaning": "Valid ID3v2.3 tagged mono MPEG Layer III audio with title Parsarium, artist Control, album Pilot, and 8 kHz sample rate",
         "third_party": results,

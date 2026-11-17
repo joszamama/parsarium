@@ -10,7 +10,7 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data/python/mp3/registry-snapshot.json"
 QUERIES = ("mp3", "mpeg", "mpg123", "minimp3", "layer3")
-# Packages that the mp3_id3v2 Python cell already reached through its own
+# Packages that the former MP3-with-ID3v2 Python cell already reached through its own
 # documented local-file APIs, plus pure-Python leads named in project docs.
 CANDIDATES = ("mutagen", "tinytag", "av", "soundfile", "pydub", "audioread",
               "librosa", "pygame", "miniaudio", "eyed3", "pymediainfo",
@@ -64,7 +64,7 @@ def main() -> None:
         "search_api_docs": "https://docs.pypi.org/api/index-api/",
         "search_index_serial": index.get("meta", {}).get("_last-serial"),
         "search": search,
-        "candidate_basis": "Packages with documented local MP3 APIs already reached in data/python/mp3_id3v2, plus decoder names from the queries; looked up individually",
+        "candidate_basis": "Packages with documented local MP3 APIs already reached in data/python/mp3, plus decoder names from the queries; looked up individually",
         "metric": "PyPI Stats last_month downloads excluding known mirrors",
         "metric_docs": "https://pypistats.org/api/",
         "packages": packages,

@@ -58,7 +58,7 @@ Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii
 
 ### MP3 targets
 
-MP3 is one format. Each ecosystem keeps the ten most-adopted paths from the former MP3-with-ID3v2 and plain-MP3 cells ([merge record](data/curation/mp3-merge.json)). A path is verified either on the ID3v2-tagged control or on the untagged MPEG frame controls; its parser record says which. Targets verified on the tagged control keep their project directory and target name `mp3_id3v2`, because their pinned manifests and receipts record those paths, for example `python3 parsarium.py run mp3_id3v2 java jaudiotagger controls/mp3_id3v2/tone-tags.mp3`. `parsarium.py projects --format mp3` lists the untagged-control targets and `--format mp3_id3v2` the tagged ones; the website, catalog guides and the `parsarium` package list both under MP3.
+MP3 is one format. Each ecosystem keeps the ten most-adopted paths from the former MP3-with-ID3v2 and plain-MP3 cells ([merge record](data/curation/mp3-merge.json)). A path is verified either on the ID3v2-tagged control (`controls/mp3/id3v2-tagged-tone.mp3`) or on the untagged MPEG frame controls; its parser record says which (`control_kind`). Every MP3 target lives under `projects/mp3/` and uses the format name `mp3`, for example `python3 parsarium.py run mp3 java jaudiotagger controls/mp3/id3v2-tagged-tone.mp3`; `parsarium.py projects --format mp3` lists all of them.
 
 ## Fuzzing
 
@@ -102,7 +102,7 @@ python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
 python3 parsarium.py afl run runs/lodepng-fandango/afl --check
 ```
 
-Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets under `mp3_id3v2` (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, and MP3 targets under `mp3` (untagged Layer III frames). `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten active formats and the JSON and XML pilots have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
+Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets verified on the ID3v2-tagged control (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, and MP3 targets verified on untagged Layer III frames. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten active formats and the JSON and XML pilots have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
 
 MP3 targets verified on untagged frames use a [local Layer III seed grammar](fuzzing/fandango/plain-mp3-decision.md). Fanbase's `-F mp3` grammar emits tags and Layer I/II frames, so it cannot be converted to those targets by stripping tags.
 

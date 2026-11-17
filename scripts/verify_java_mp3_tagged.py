@@ -1,6 +1,6 @@
 """Build pinned Java MP3/ID3v2 readers and test a valid local control.
 
-Run from the repo root: python3 scripts/verify_java_mp3_id3v2.py
+Run from the repo root: python3 scripts/verify_java_mp3_tagged.py
 Requires JDK 21, JDK 25+ for taglib, Maven 3.9+, FFprobe, and macOS arm64
 libmediainfo/libzen. External binary checksums are in the dated snapshot.
 This verifies only the recorded valid controls.
@@ -17,13 +17,13 @@ import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ADAPTER = ROOT / "adapters/java/mp3_id3v2"
-DATA = ROOT / "data/java/mp3_id3v2"
-CONTROL = ROOT / "controls/mp3_id3v2/tone-tags.mp3"
+ADAPTER = ROOT / "adapters/java/mp3"
+DATA = ROOT / "data/java/mp3"
+CONTROL = ROOT / "controls/mp3/id3v2-tagged-tone.mp3"
 CONTROL_SHA256 = "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad"
-CONTROL_44K = ROOT / "controls/mp3_id3v2/tone-tags-44k.mp3"
+CONTROL_44K = ROOT / "controls/mp3/id3v2-tagged-tone-44k.mp3"
 CONTROL_44K_SHA256 = "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307"
-CONTROL_LONG = ROOT / "controls/mp3_id3v2/tone-tags-long.mp3"
+CONTROL_LONG = ROOT / "controls/mp3/id3v2-tagged-tone-long.mp3"
 CONTROL_LONG_SHA256 = "2b085bb9e5bef6bb4254233a9d6bf0652ced4589373600cff3b8ddab07909dac"
 
 
@@ -103,9 +103,9 @@ def main() -> None:
                       "v47": "org.parsarium.V47Mp3Adapter",
                       "vlcj_info": "org.parsarium.VlcjInfoMp3Adapter",
                       "amilesend": "org.parsarium.AmilesendMp3Adapter"}[module]
-        assert parser["control"] in ("controls/mp3_id3v2/tone-tags.mp3",
-                                     "controls/mp3_id3v2/tone-tags-44k.mp3",
-                                     "controls/mp3_id3v2/tone-tags-long.mp3")
+        assert parser["control"] in ("controls/mp3/id3v2-tagged-tone.mp3",
+                                     "controls/mp3/id3v2-tagged-tone-44k.mp3",
+                                     "controls/mp3/id3v2-tagged-tone-long.mp3")
         parser_control = ROOT / parser["control"]
         arguments = [label] if module in ("main", "bytedeco") else []
         java_binary = java25 if parser["name"] == "taglib-java" else "java"
@@ -149,14 +149,14 @@ def main() -> None:
                         "maven_compiler_release": 21,
                         "locked_classpath_jars": jar_counts},
         "control_sha256": CONTROL_SHA256,
-        "additional_control_sha256": {"controls/mp3_id3v2/tone-tags-44k.mp3": CONTROL_44K_SHA256},
-        "long_control_sha256": {"controls/mp3_id3v2/tone-tags-long.mp3": CONTROL_LONG_SHA256},
+        "additional_control_sha256": {"controls/mp3/id3v2-tagged-tone-44k.mp3": CONTROL_44K_SHA256},
+        "long_control_sha256": {"controls/mp3/id3v2-tagged-tone-long.mp3": CONTROL_LONG_SHA256},
         "control_meaning": "Valid mono 8 kHz, 44.1 kHz, and 18-second 8 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
         "third_party": results,
         "runtime": [],
         "runtime_probe": {"api": "AudioSystem.getAudioFileFormat(File)",
-                          "control": "controls/mp3_id3v2/tone-tags.mp3",
-                          "command": "java -cp <JDK-only runtime classes> org.parsarium.JdkMp3Probe controls/mp3_id3v2/tone-tags.mp3",
+                          "control": "controls/mp3/id3v2-tagged-tone.mp3",
+                          "command": "java -cp <JDK-only runtime classes> org.parsarium.JdkMp3Probe controls/mp3/id3v2-tagged-tone.mp3",
                           "output": runtime_output, "pass": runtime_pass},
     }
     (DATA / "verification.json").write_text(json.dumps(report, indent=2) + "\n")

@@ -19,7 +19,7 @@ from run_case import ROOT
 
 
 IMAGE = "parsarium-candidate/mpg123-decoder:local"
-PROJECT = ROOT / "projects/mp3_id3v2/javascript/audio_decode_mp3"
+PROJECT = ROOT / "projects/mp3/javascript/audio_decode_mp3"
 REPORT = ROOT / "data/javascript/mp3/mpg123_decoder-feedback-blocked.json"
 PACKAGE_SHA256 = "5207b35109ec884e7d47ab89b670bc86438399f681e1a6c26716003b3949cc5c"
 PACKAGE_INTEGRITY = "sha512-+fjxnWigodWJm3+4pndi+KUg9TBojgn31DPk85zEsim7C6s0X5Ztc/hQYdytXkwuGXH+aB0/aEkG40Emukv6oQ=="
@@ -147,7 +147,7 @@ def main() -> None:
             "mpg123_submodule_commit": "08247b317163175e62035893af3ff9e71a5dfefd",
             "source_tarball_sha256": PACKAGE_SHA256,
             "npm_integrity": PACKAGE_INTEGRITY,
-            "dependency_fixture": "projects/mp3_id3v2/javascript/audio_decode_mp3",
+            "dependency_fixture": "projects/mp3/javascript/audio_decode_mp3",
             "dependency_lock_sha256": sha256((PROJECT / "package-lock.json").read_bytes()).hexdigest(),
             "image_id": image,
             "documented_api": "new MPEGDecoder({enableGapless:false}); await ready; decode(Uint8Array(local bytes))",

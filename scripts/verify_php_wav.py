@@ -84,7 +84,7 @@ def main() -> None:
               "third_party": rows, "runtime": [],
               "runtime_probe": {"command": " ".join(probe_command), "output": probe, "pass": True}}
     if platform.system() == "Darwin" and platform.machine() == "arm64":
-        native = ROOT / "adapters/php/mp3_id3v2/soundfile/vendor/phpmlkit/soundfile/lib/darwin-arm64/libsndfile.1.2.2.dylib"
+        native = ROOT / "adapters/php/mp3/soundfile/vendor/phpmlkit/soundfile/lib/darwin-arm64/libsndfile.1.2.2.dylib"
         assert native.is_file()
         report["soundfile_native_library"] = {"path": str(native.relative_to(ROOT)),
                                                "sha256": sha256(native.read_bytes()).hexdigest()}
