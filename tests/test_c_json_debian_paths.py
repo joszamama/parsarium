@@ -12,6 +12,7 @@ BASE = ROOT / "data/c/json"
 # Promoted Debian-search paths: slug -> (Debian source package, popcon sourcemax installations).
 PATHS = {
     "json-glib": ("json-glib", 163249),
+    "jq": ("jq", 141218),
 }
 
 
@@ -132,6 +133,7 @@ class CJsonDebianPathsTest(unittest.TestCase):
     def test_families_are_stated(self):
         parsers = {item["name"]: item for item in read(BASE / "parsers.json")}
         self.assertIn("JsonScanner", parsers["json-glib"]["family"])
+        self.assertIn("wiki", parsers["jq"]["documentation_note"])
         families = [item["family"] for item in parsers.values()]
         self.assertEqual(len(families), len(set(families)))
 

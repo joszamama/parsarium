@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T15:24:00.408195+00:00",
+  "project": "json/c/jq",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+  "probe": "projects/json/c/jq/parser-probe.c",
+  "probe_scope": "parse the local bytes and free the result; no tree traversal, printing, or result formatting",
+  "dom_oracle": "python_json_loads_order_and_number_kind_preserving",
+  "exact_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "a6d8a4090b16c42cf240f049edb1431844f45d3cb88513bd4266c324699718ea",
+  "overlay_receipt_sha256": "cd9af4f08fdd0a090453b3e51a4419006943fdd6518546377f8ec779debd69bf",
+  "base_image_id": "sha256:0c2aceea11243d923824ab520d614d3d7f6a7c345f621d3f492f90e8308b6dfb",
+  "overlay_image_id": "sha256:84e182f9ec4a6f7706eb72c2965a8ead7035d631d2278fd60430394bc3ea8c93",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 2414,
+  "allowlist": "projects/json/c/jq/afl-allowlist.txt",
+  "allowlist_entries": [
+    "src:src/jv_parse.c",
+    "src:src/jv.c",
+    "src:src/jv_unicode.c",
+    "src:src/jv_alloc.c",
+    "src:src/jv_dtoa.c"
+  ],
+  "afl_instrumented_objects": [
+    "jv.o",
+    "jv_alloc.o",
+    "jv_dtoa.o",
+    "jv_parse.o",
+    "jv_unicode.o"
+  ],
+  "source_line_scope": "covered lines under /work/jq-src/src/ in the parser-only probe",
+  "repeats_per_control": 3,
+  "first_control": "controls/json/nested-object.json",
+  "second_control": "controls/json/nested-array.json",
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "root": "object",
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "strings": [
+      "A",
+      "two"
+    ],
+    "root": "array",
+    "top_level_items": 5
+  },
+  "first_parser_lines": 615,
+  "second_parser_lines": 571,
+  "parser_line_difference": 44,
+  "first_only_lines_by_file": {
+    "jv.c": 13,
+    "jv.h": 1,
+    "jv_parse.c": 13,
+    "jv_unicode.c": 16,
+    "jv_utf8_tables.h": 1
+  },
+  "second_only_lines_by_file": {},
+  "first_afl_tuples": 219,
+  "second_afl_tuples": 203,
+  "afl_tuple_difference": 26,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

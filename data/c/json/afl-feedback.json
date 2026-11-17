@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T05:30:08.846838+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
-  "differential_kind": "fixed_valid_nested_array; JSON-GLib uses parser-only probes with parser-scoped AFL++ allowlists and three repeats per control",
+  "projects_total": 6,
+  "projects_passed": 6,
+  "differential_kind": "fixed_valid_nested_array; JSON-GLib and jq use parser-only probes with parser-scoped AFL++ allowlists and three repeats per control",
   "parser_feature_scope": "covered LLVM region entries under each pinned parser source prefix; harness excluded",
   "afl_feedback_scope": "jansson, json-c, cJSON and yyjson: afl-clang-fast edges over the compiled parser sources and the harness (map not split by file). Debian-search paths: parser-only probe with an AFL_LLVM_ALLOWLIST naming the parser and value-tree sources; the instrumented object set is checked with nm during the build.",
   "standard_feedback": "none: the ISO C standard library documents no JSON API",
@@ -201,6 +201,53 @@
       "differential_only_features_by_file": {
         "cJSON.c": 2
       }
+    },
+    {
+      "project": "json/c/jq",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+      "overlay_receipt_sha256": "cd9af4f08fdd0a090453b3e51a4419006943fdd6518546377f8ec779debd69bf",
+      "differential_receipt_sha256": "678ff1d282bea3571a912ea9a40e377038b4f1ba7eda25a49f6e14b7f89aaffb",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "strings": [
+          "A",
+          "two"
+        ],
+        "root": "array",
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "afl_instrumented_objects": [
+        "jv.o",
+        "jv_alloc.o",
+        "jv_dtoa.o",
+        "jv_parse.o",
+        "jv_unicode.o"
+      ],
+      "control_source_lines": 615,
+      "control_afl_tuples": 219,
+      "differential_source_lines": 571,
+      "differential_afl_tuples": 203,
+      "source_line_difference": 44,
+      "afl_tuple_difference": 26,
+      "parser_only_probe": "projects/json/c/jq/parser-probe.c",
+      "exact_tree_outputs_verified": true
     },
     {
       "project": "json/c/yyjson",

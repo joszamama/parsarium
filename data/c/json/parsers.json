@@ -214,6 +214,61 @@
     "project": "projects/json/c/cjson"
   },
   {
+    "name": "jq",
+    "version": "1.8.2",
+    "license": "MIT",
+    "license_evidence": "Pinned jq-1.8.2 COPYING (MIT for jq; bundled decNumber under the ICU license is listed there)",
+    "input_api": "jv_parse_sized(const char *string, int length) from libjq (jv.h)",
+    "documentation": "https://github.com/jqlang/jq/wiki/C-API:-jv",
+    "documentation_note": "jq's project wiki page 'C API: jv' lists jv_parse_sized as parsing one JSON value from n bytes of a buffer, and states the jv/jq APIs are public 'mostly' with no stability commitment. The pinned release installs src/jv.h (jv_parse_sized at line 246) through libjq; NEWS.md describes libjq as a C API to jq's JSON representation. The jq manual documents only the command-line program, so this documentation is a project wiki page rather than a release-pinned reference.",
+    "source": "https://github.com/jqlang/jq/releases/tag/jq-1.8.2",
+    "scope": "One RFC 8259 JSON value parsed from a bounded local byte buffer into a jv value; observed valid control subset",
+    "family": "libjq jv parser (src/jv_parse.c)",
+    "family_note": "jq's own incremental JSON reader in src/jv_parse.c builds jv values (src/jv.c) with UTF-8 handling in src/jv_unicode.c and number conversion through src/jv_dtoa.c and the bundled decNumber literal store. jq has a single number kind; integer versus float in the printed tree comes from jq's preserved decimal literal. Built without oniguruma; the jq language compiler is linked from libjq but not reached.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package jq",
+      "value": 141218,
+      "rank": 527,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json",
+      "qualification": "The jq source package builds the jq program and libjq1; sourcemax is the maximum over those binaries, so it mostly reflects command-line jq installations rather than libjq C API use."
+    },
+    "project": "projects/json/c/jq"
+  },
+  {
     "name": "yyjson",
     "version": "0.13.0",
     "license": "MIT",
