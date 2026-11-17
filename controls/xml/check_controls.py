@@ -1,6 +1,6 @@
-"""Check the two XML controls with expat, independently of the Rust harness.
+"""Check XML controls with expat, independently of the parser harnesses.
 
-Both files are hand-written XML 1.0 in UTF-8, without a DOCTYPE. This script
+The files are hand-written XML 1.0 in UTF-8, without a DOCTYPE. This script
 parses them with the Python standard library's expat binding in namespace mode
 and builds the same summary the quick-xml harness reports: the root and
 document-order element expanded names, the maximum depth, namespace
@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent
 CONTROLS = {
     "catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
     "order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+    "order-default-ns-no-pi.xml": "b8b364b48cb3b03a82611917fd6344edfbd80789eb29203cdf6814d96f354d9b",
 }
 
 

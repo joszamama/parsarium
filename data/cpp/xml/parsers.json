@@ -108,5 +108,61 @@
       ]
     },
     "project": "projects/xml/cpp/pugixml"
+  },
+  {
+    "name": "tinyxml2",
+    "version": "11.0.0",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/leethomason/tinyxml2/blob/11.0.0/LICENSE.txt",
+    "input_api": "tinyxml2::XMLDocument::Parse(const char* xml, size_t nBytes) over a local byte buffer; TinyXML2 does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes",
+    "documentation": "https://leethomason.github.io/tinyxml2/classtinyxml2_1_1_x_m_l_document.html",
+    "documentation_parser": "https://github.com/leethomason/tinyxml2/blob/11.0.0/tinyxml2.h",
+    "source": "https://github.com/leethomason/tinyxml2/tree/11.0.0",
+    "adapter": "projects/xml/cpp/tinyxml2/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 input through XMLDocument::Parse(const char*, size_t) into TinyXML2 DOM; Namespaces in XML resolved by adapter, not TinyXML2; attributes sorted per element to match control oracle",
+    "family": "TinyXML2 own in-memory XML parser",
+    "family_note": "tinyxml2.cpp supplies the parser and DOM with no Xerces, pugixml, libxml2 or expat dependency. TinyXML2 preserves qualified names; the adapter resolves namespace declarations and rejects unbound prefixes and duplicate expanded attributes. This is a distinct parser engine.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 487,
+      "dev_package_installs": {
+        "libtinyxml2-dev": 487
+      },
+      "popcon_source_inst": 13585,
+      "homebrew_install_on_request_365d": 1757,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/tinyxml2",
+    "not_verified": "Two valid namespace-aware controls are used; the alternate second control omits a processing instruction that TinyXML2 11.0.0 rejects. Processing instructions, DTD, XML 1.1, external entities, large inputs, and malformed input remain unverified."
   }
 ]

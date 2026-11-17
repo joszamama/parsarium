@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:53:57.979194+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
-  "differential_kind": "fixed_valid_default_namespace_reset_comment_pi",
-  "command": "for slug in xerces_c pugixml; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done",
+  "checked_at_utc": "2026-11-17T08:16:33.916649+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
+  "differential_kind": "valid_namespace_controls; tinyxml2 uses the alternate no-processing-instruction second control",
+  "command": "for slug in xerces_c pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -41,6 +41,25 @@
       "differential_afl_tuples": 906,
       "source_line_difference": 159,
       "afl_tuple_difference": 136
+    },
+    {
+      "project": "xml/cpp/tinyxml2",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "1c28d4599660d8e115ff3bb7c737bf5ca209203c21da1eaa3e3ddf9332d9e53f",
+      "differential_receipt_sha256": "6a1c304bba78dfa9a426e424cf7f1fcb2d50c7ac6dcd2a62d800273f38080a69",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns-no-pi.xml",
+      "differential_sha256": "b8b364b48cb3b03a82611917fd6344edfbd80789eb29203cdf6814d96f354d9b",
+      "repeated_control_identical": true,
+      "control_source_lines": 764,
+      "control_afl_tuples": 1110,
+      "differential_source_lines": 858,
+      "differential_afl_tuples": 1169,
+      "source_line_difference": 120,
+      "afl_tuple_difference": 139,
+      "limit": "TinyXML2 rejects the processing instruction in the shared second control; this alternate valid control differs only by removing it."
     }
   ]
 }

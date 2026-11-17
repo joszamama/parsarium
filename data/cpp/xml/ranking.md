@@ -1,6 +1,6 @@
 # C++ × XML: selected parsers (pilot)
 
-2 control-verified third-party paths selected. The ceiling is ten; this pilot builds the two highest-adoption C++ XML parsers and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+3 control-verified third-party paths selected. The ceiling is ten; this pilot builds the three highest-adoption C++ XML parsers and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -10,8 +10,9 @@ Debian popcon installations of each library's `-dev` package(s) (`by_inst`), cap
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [Xerces-C++](https://xerces.apache.org/xerces-c/) | 3.3.0 | 2,676 (`libxerces-c-dev`) | XML 1.0 + Namespaces from a memory buffer into a DOM, non-validating | Apache Xerces-C++ scanner (IGXMLScanner) |
 | 2 | [pugixml](https://pugixml.org/) | 1.16 | 1,503 (`libpugixml-dev`) | XML 1.0 from a memory buffer into a DOM; namespaces resolved by the adapter, not the library | pugixml's own single-file parser |
+| 3 | [TinyXML2](https://github.com/leethomason/tinyxml2) | 11.0.0 | 487 (`libtinyxml2-dev`) | XML from a length-bounded memory buffer into a DOM; namespaces resolved by the adapter | TinyXML2 own in-memory parser |
 
-Both paths give the same output on both controls. pugixml does no namespace processing, so its namespace-resolved names come from adapter code over pugixml's qualified names; it is a separate parser family from Xerces-C++ and shares no code with it.
+All three paths give the same structure on the catalog control. Xerces-C++ and pugixml also pass the shared order control; TinyXML2 rejects its processing instruction, so the TinyXML2 path uses a second valid order control with only that instruction removed. Both pugixml and TinyXML2 preserve qualified names; adapter code resolves namespaces. Their parser engines are distinct from each other and from Xerces-C++.
 
 ## Standard API (unranked)
 
@@ -23,11 +24,10 @@ Homebrew install-on-request (365 days) orders the four libraries differently: ti
 
 ## Lead log
 
-Numeric leads, not verified and not selected.
+Numeric lead, not verified and not selected.
 
 | Lead | Dev package installs | Homebrew on request (365d) | Status |
 | --- | ---: | ---: | --- |
-| [tinyxml2](https://github.com/leethomason/tinyxml2) | 487 | 1,757 | no namespace processing; not run |
 | [libxml++](https://github.com/libxmlplusplus/libxmlplusplus) | 275 | 461 | wraps the libxml2 C parser (libxml2 family); not run |
 
 Qt XML, Boost.PropertyTree and POCO XML are parts of larger frameworks and are not ranked by whole-framework installs.

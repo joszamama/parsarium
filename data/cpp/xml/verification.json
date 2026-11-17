@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:53:38.519935+00:00",
+  "checked_at_utc": "2026-11-17T08:16:33.915965+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -89,6 +89,74 @@
       },
       "parser_source_lines_covered": 619,
       "format_specific_source_lines_covered": 619,
+      "error": null
+    },
+    {
+      "package": "tinyxml2",
+      "version": "11.0.0",
+      "scope": "XML 1.0 UTF-8 input through XMLDocument::Parse(const char*, size_t) into TinyXML2 DOM; Namespaces in XML resolved by adapter, not TinyXML2; attributes sorted per element to match control oracle",
+      "command": "python3 scripts/run_project.py xml cpp tinyxml2",
+      "receipt": "projects/xml/cpp/tinyxml2/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 763,
+      "format_specific_source_lines_covered": 527,
+      "second_valid_control": "controls/xml/order-default-ns-no-pi.xml",
+      "second_valid_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "limit": "The alternate second valid control omits a processing instruction that TinyXML2 11.0.0 rejects.",
       "error": null
     }
   ],

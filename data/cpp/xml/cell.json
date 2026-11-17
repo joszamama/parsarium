@@ -1,10 +1,10 @@
 {
   "ecosystem": "cpp",
   "format": "xml",
-  "status": "pilot_two_selected_search_bounded",
+  "status": "pilot_three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "tinyxml2",
@@ -15,10 +15,10 @@
   "search_method": "Bounded format-specific comparison of four named C++ XML parser libraries; exact Debian binary-package and Homebrew formula lookups, all hits recorded in registry-snapshot.json",
   "search_hits_recorded": 4,
   "unique_search_hits": 4,
-  "unresolved_documentation_leads": 2,
+  "unresolved_documentation_leads": 1,
   "ranking_metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
-  "selection": "Xerces-C++ and pugixml rank first and second on Debian dev-package installs: libxerces-c-dev 2,676, libpugixml-dev 1,503, then libtinyxml2-dev 487 and libxml++ dev packages 275 (266 + 7 + 2). Both are built and control-verified; they are distinct parser families (Apache Xerces-C++ scanner vs pugixml's own single-file parser).",
-  "uncertainty": "Pilot cell: Xerces-C++ 3.3.0 and pugixml 1.16 were built and control-verified. Homebrew install-on-request (365d) orders the four differently: tinyxml2 1,757, pugixml 1,270, Xerces-C++ 1,209, libxml++ 461, so the order depends on the metric; Debian dev installs remain the one primary metric. Source-level popcon is not used because libxml++2.6's 79,794 count is a runtime pulled in by dependents (79,361 with no recent file access). tinyxml2 and libxml++ stay unresolved leads in leads.json. libxml++ parses through the libxml2 C library. Whole frameworks (Qt, Boost, POCO) were not ranked. The ISO C++ standard library has no XML API. pugixml does no namespace processing: its namespace-resolved output comes from adapter code over pugixml's qualified names, so namespace well-formedness is checked by the adapter, not the library. pugixml also skips DOCTYPE without expanding DTD entities. Two small UTF-8 controls without DOCTYPE do not establish DTD, entity declaration, validation, non-UTF-8 encoding or XML 1.1 behaviour; attributes are reported sorted per element because DOM NamedNodeMap order is unspecified.",
+  "selection": "Xerces-C++, pugixml, and TinyXML2 are verified and ranked by Debian -dev package installs: 2,676, 1,503, and 487. They are distinct parser engines. TinyXML2 leads the secondary Homebrew install-on-request metric (1,757), so the order is metric-dependent.",
+  "uncertainty": "Three C++ XML paths are verified on a namespace-aware valid control, with source coverage and AFL feedback. TinyXML2 also passed a second valid control that omits a processing instruction; TinyXML2 11.0.0 rejects the same processing instruction in the shared order control. Both TinyXML2 and pugixml preserve qualified names but leave namespace resolution to the adapters, which is explicitly separated from library parsing. libxml++ remains unresolved and shares the libxml2 C parser family. The bounded search compared four named format-specific libraries using Debian -dev installs; Homebrew install-on-request gives a different order. Whole frameworks are not ranked by framework-wide installs. Two small valid UTF-8 controls cannot establish complete XML 1.0, DTD/entity, encoding or malformed-input behavior.",
   "third_party_evidence": "data/cpp/xml/parsers.json",
   "third_party_control_results": "data/cpp/xml/verification.json",
   "runtime_evidence": "data/cpp/xml/standard.json",
@@ -26,5 +26,6 @@
   "unresolved_leads": "data/cpp/xml/leads.json",
   "source_lock": "projects/xml/cpp/xerces_c/source-lock.json",
   "extra_source_lock": "projects/xml/cpp/pugixml/source-lock.json",
-  "afl_feedback": "data/cpp/xml/afl-feedback.json"
+  "afl_feedback": "data/cpp/xml/afl-feedback.json",
+  "tinyxml2_source_lock": "projects/xml/cpp/tinyxml2/source-lock.json"
 }
