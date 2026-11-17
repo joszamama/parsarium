@@ -1,0 +1,33 @@
+{
+  "ecosystem": "Java",
+  "format": "MP3 (untagged MPEG audio Layer III)",
+  "status": "no_public_standard_api",
+  "runtime": "OpenJDK 25.0.5 (Temurin-25.0.5+8) linux/arm64, the project base image",
+  "verified_apis": [],
+  "unverified_documented_apis": [],
+  "no_api_findings": [
+    {
+      "scope": "Java Sound (java.desktop javax.sound.sampled)",
+      "api": "AudioSystem.getAudioFileFormat(File), AudioSystem.getAudioInputStream(File)",
+      "finding": "The only Java SE audio file API is provider based. In the project image the installed AudioFileReader providers are AiffFileReader, AuFileReader, SoftMidiAudioFileReader, WaveFileReader, WaveFloatFileReader and WaveExtensibleFileReader; both calls threw UnsupportedAudioFileException (\"File of unsupported format\") on controls/mp3/tone-44k-mono.mp3. AudioSystem.getAudioFileTypes() lists wav, au and aif only.",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioSystem.html"
+    },
+    {
+      "scope": "AudioFileFormat.Type standard fields",
+      "finding": "The documented standard file types are WAVE, AU, AIFF, AIFF-C and SND; none is MPEG audio.",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/sampled/AudioFileFormat.Type.html"
+    },
+    {
+      "scope": "Java SE 25 exported packages",
+      "finding": "Across every module from `java --list-modules`, `java --describe-module` exports no package whose name contains mp3, mpeg or media; the only audio exports are javax.sound, javax.sound.midi(.spi) and javax.sound.sampled(.spi).",
+      "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/index.html"
+    },
+    {
+      "scope": "JavaFX Media",
+      "finding": "javafx.scene.media plays MP3 but is not part of Java SE or the Temurin JDK since JDK 11; it ships as separate OpenJFX artifacts and has no frame-level parse API. Not counted.",
+      "documentation": "https://openjfx.io/javadoc/25/javafx.media/javafx/scene/media/package-summary.html"
+    }
+  ],
+  "probe": "In-image Java Sound probe listing AudioSystem.getAudioFileTypes(), ServiceLoader AudioFileReader providers, and calling getAudioFileFormat/getAudioInputStream on the primary control (run 2026-11-17, not committed as a project).",
+  "limit": "Inventory covers one OpenJDK 25.0.5 runtime image. A Java Sound SPI on the classpath (for example com.googlecode.soundlibs:mp3spi) adds MP3 support, but it is third party and logged as a lead. Matches the negative finding in data/java/mp3_id3v2/standard.json."
+}
