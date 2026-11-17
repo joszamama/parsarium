@@ -57,7 +57,8 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
         target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                        else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
     elif ecosystem == "rust":
-        target_args = ["/work/afl_fuzzer", "@@"]
+        # afl::fuzz! reads AFL shared memory, with stdin as its fallback.
+        target_args = ["/work/afl_fuzzer"]
     elif ecosystem in {"go", "java", "javascript", "python", "php"}:
         target_args = ["/work/afl_proxy", "@@"]
     else:

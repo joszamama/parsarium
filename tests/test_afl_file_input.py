@@ -52,6 +52,16 @@ class AFLFileInputTest(unittest.TestCase):
         manifest = {"ecosystem": "python", "platform": "linux/arm64"}
         self.assertEqual(self.command(manifest)[0][-3:], ["--", "/work/afl_proxy", "@@"])
 
+    def test_rust_afl_targets_consume_shared_memory_or_stdin(self):
+        paths = sorted((ROOT / "projects").glob("*/rust/*/manifest.json"))
+        self.assertTrue(paths)
+        for path in paths:
+            manifest = json.loads(path.read_text())
+            with self.subTest(project=str(path.parent.relative_to(ROOT / "projects"))):
+                command, resume = self.command(manifest)
+                self.assertEqual(command[-2:], ["--", "/work/afl_fuzzer"])
+                self.assertEqual(resume[-2:], ["--", "/work/afl_fuzzer"])
+
 
 if __name__ == "__main__":
     unittest.main()

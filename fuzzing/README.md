@@ -44,6 +44,8 @@ python3 parsarium.py afl summary runs/jply-afl
 
 C and C++ plans pass `@@` to the verified one-file harness. AFL++ replaces it with each input path; the harness receives the same file argument used by the valid-control check. A manifest can explicitly opt out when its target reads standard input.
 
+Rust targets use `afl::fuzz!`, which reads AFL shared memory and falls back to standard input. Their prepared command runs `/work/afl_fuzzer` without a file argument.
+
 Historical short bridge checks for Go, Java, JavaScript, Python, and PHP have [receipts](../data/afl-campaign-smoke.json). [Differential checks](../data/afl-feedback-differential.json) show input-dependent parser features in those ecosystems. [Recorded plan preflights](../data/afl-plan-smoke.json) cover verified projects at the time each check ran; rerunning a preflight requires its pinned image locally. These checks establish runnable launchers and feedback, not parser safety.
 
 ## Ecosystem fuzz engines

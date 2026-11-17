@@ -41,7 +41,7 @@ def check(relative: Path, scratch: Path) -> dict:
     else:
         expected_tail = (["/work/afl_proxy", "@@"] if manifest["ecosystem"] in
                                       {"go", "java", "javascript", "python", "php"} else
-                                      ["--", "/work/afl_fuzzer", "@@"] if manifest["ecosystem"] == "rust" else
+                                      ["--", "/work/afl_fuzzer"] if manifest["ecosystem"] == "rust" else
                                       ["--", manifest.get("afl_entrypoint", "/work/fuzzer"),
                                        *(["@@"] if uses_afl_file_input(manifest) else [])])
     assert plan["command"][-len(expected_tail):] == expected_tail
