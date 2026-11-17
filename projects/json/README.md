@@ -18,6 +18,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/bytedance/sonic / Go](go/github_com_bytedance_sonic/README.md)
 - [github.com/goccy/go-json / Go](go/github_com_goccy_go_json/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
+- [github.com/segmentio/encoding/json / Go](go/segmentio_encoding/README.md)
 - [github.com/tidwall/gjson / Go](go/github_com_tidwall_gjson/README.md)
 - [github.com/ugorji/go/codec / Go](go/github_com_ugorji_go_codec/README.md)
 - [github.com/valyala/fastjson / Go](go/github_com_valyala_fastjson/README.md)
