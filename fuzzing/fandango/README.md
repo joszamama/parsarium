@@ -1,5 +1,8 @@
 # Fandango specs
 
+The [13-format default-route smoke](default-smoke-13.md) shows one fixed valid
+generation, replay, and AFL++ preparation for each active format and pilot.
+
 [Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for six formats. MP4 and PDF use constraints to keep box sizes and offsets correct; the three text grammars keep headers and data consistent through their productions. The plain-MP3 pilot spec reuses whole decoded frames from pinned controls.
 
 ```sh
