@@ -140,3 +140,10 @@
   }
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build toml python rtoml
+python3 parsarium.py run toml python rtoml controls/toml/service-config.toml
+```
