@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "json/javascript/stdlib_json_parse",
-  "verified_at_utc": "2026-11-17T03:52:15.279409+00:00",
+  "verified_at_utc": "2026-11-17T12:08:33.498595+00:00",
   "pass": true,
   "coverage_kind": "native_function_entries",
   "feedback_kind": "v8_json_parser_function_entries_to_afl_bitmap",
@@ -12,9 +12,9 @@
   "afl_requires_ptrace": true,
   "fixed_valid_control_timing": {
     "cases": 6,
-    "wall_seconds": 5.553,
-    "seconds_per_case": 0.925,
-    "approx_cases_per_second": 1.08,
+    "wall_seconds": 4.671,
+    "seconds_per_case": 0.779,
+    "approx_cases_per_second": 1.28,
     "measurement": "Six fixed valid afl-showmap replays in one fresh Docker container; not a fuzz campaign or a sustained throughput measurement."
   },
   "native_feedback": {
@@ -44,23 +44,23 @@
       "variant": 43
     },
     "bitmap_sha256": {
-      "baseline": "fbd826770c4c55a508085a13195ed29e9d691cd367c4f0352cd4404c5c0c4b7b",
-      "control1": "65ef30eaefea59b527d3a0238adfb5c9d9c49a9bca0c60d2f05c3c9405524c1d",
-      "control2": "65ef30eaefea59b527d3a0238adfb5c9d9c49a9bca0c60d2f05c3c9405524c1d",
-      "variant": "1a7d47c03933832960b4bc86b3e1b9011200dd1354f81fa4fb9de9a4055b4691"
+      "baseline": "6a42d82cb1541e7720d8dd70346488af7a97b3baebf4438f74eac1fef27e272c",
+      "control1": "04d2201bb7be0e3322fb6d7253cbbc478bd2522eaeda4d19a09113a58bb1e940",
+      "control2": "04d2201bb7be0e3322fb6d7253cbbc478bd2522eaeda4d19a09113a58bb1e940",
+      "variant": "758ffbd64f981683a12fa8a4c06ad818c501004f497df4a737ab99a61d36e535"
     },
     "limit": "Function entries hashed into AFL bitmap with bridge instrumentation; no source lines or parser basic-block/edge coverage. Each AFL case launches gdb; SYS_PTRACE and seccomp=unconfined required."
   },
   "source_sha256": "71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03",
   "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
-  "base_project_receipt_sha256": "3f8265a40150bc3976bfd1361c2ef9bca9d2e123932382470462ee4d3e6f612d",
-  "probe_image_id": "sha256:fbe9ef1634573147c9f392cdb6970397916647b3e9f5862671ac8ba87afe19a7",
+  "base_project_receipt_sha256": "badd52155c1796e5a61a1da74fddac6bce799e719a2b6cdc94225de2cc754367",
+  "probe_image_id": "sha256:04076274d8e75d010435182c44d76879b1eb8f82788b166fd8ef6f5198d1efa1",
   "probe_file_sha256": {
     "probe.py": "2c5e0a63b13c43b24f84b0ccb59eb2373effe615d77f492edf534c213fc95102",
     "probe.sh": "b71fb04dc69ff64d15b97f375b2f754b7519e6bf73c6f22fad3ca31d9483fc72"
   },
   "gdb_version": "GNU gdb (Debian 16.3-1) 16.3",
-  "image_id": "sha256:627d8d9cc7a7d2a4e5627b377d0b8fcc3b80e7179a50b7482801b9c6f1fc286c",
+  "image_id": "sha256:7ce6bbb1edc9462541c426d91e110dd0f2a253f5183c6c7b3a08a287e2340086",
   "overlay_file_sha256": {
     "Dockerfile": "1fba4d6dc9e899794da04bc770c64a313b6b267487da9d0111e67f270cfc1ef2",
     "afl_trace": "28abe46fa3ffe3e7e7da895b5502f0a9f82a09093364c161b12de9a73fb3de1d",

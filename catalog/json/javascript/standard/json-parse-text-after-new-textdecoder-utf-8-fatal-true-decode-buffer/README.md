@@ -44,4 +44,4 @@
 }
 ```
 
-**Docker control:** [pinned project](../../../../../projects/json/javascript/stdlib_json_parse/README.md). V8 JSON parser function entries were observed; source lines and AFL++ feedback are unavailable.
+**Docker control:** [pinned project](../../../../../projects/json/javascript/stdlib_json_parse/README.md). V8 JSON parser source lines were measured on Node.js built from the same official source, with only the parser object instrumented. The pinned binary gives gdb function entries. AFL++ feedback is a function-entry proxy, not parser edges.

@@ -49,6 +49,35 @@ def browser_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
+def v8_json_source_feedback_ok(manifest: dict, feedback: dict | None) -> bool:
+    """Source-built V8 JSON parser lines: one instrumented object, stable repeats, input-dependent sets."""
+    expected = manifest.get("source_feedback") or {}
+    feedback = feedback or {}
+    runs = feedback.get("runs") or {}
+    objects = feedback.get("instrumented_objects") or []
+    controls = {"/controls/nested-object.json": manifest["control_sha256"],
+                "/controls/nested-array.json": manifest["differential_control_sha256"]}
+    return (
+        feedback.get("feedback_kind") == "llvm_source_lines"
+        and feedback.get("image_id", "").startswith("sha256:")
+        and len(objects) == 1 and objects[0].endswith("/deps/v8/src/json/json-parser.o")
+        and feedback.get("source_sha256") == expected.get("source_sha256")
+        and feedback.get("node_sha256") == expected.get("instrumented_node_sha256")
+        and feedback.get("adapter_sha256") == manifest["adapter_sha256"]
+        and feedback.get("control_sha256") == controls
+        and f"v8 {manifest['v8']}" in (feedback.get("toolchain") or [])
+        and (runs.get("baseline") or {}).get("lines_covered") == 0
+        and (runs.get("decode-only") or {}).get("lines_covered") == 0
+        and all((runs.get(name) or {}).get("output_matches_expected") is True
+                and 0 < runs[name].get("lines_covered", 0) <= feedback.get("scope_lines", 0)
+                for name in ("object-1", "object-2", "array-1", "array-2"))
+        and all(feedback.get(key) is True for key in (
+            "object_repeat_identical_lines", "object_repeat_identical_counts",
+            "array_repeat_identical_lines", "array_repeat_identical_counts", "object_array_lines_differ"))
+        and bool(feedback.get("object_only_lines") or feedback.get("array_only_lines"))
+    )
+
+
 def native_function_control_verified(path: Path, manifest: dict) -> bool:
     """Keep a pinned V8 function-entry control separate from AFL feedback."""
     if (manifest.get("coverage_kind") != "native_function_entries"
@@ -98,6 +127,9 @@ def native_function_control_verified(path: Path, manifest: dict) -> bool:
         and feedback.get("variant_functions", 0) > 0
         and bool(feedback.get("control_only") or feedback.get("variant_only"))
         and "not AFL++ feedback" in manifest["native_feedback_limit"]
+        and ("source_feedback_smoke" not in manifest or (
+            v8_json_source_feedback_ok(manifest, receipt.get("source_feedback"))
+            and receipt.get("source_feedback_limit") == manifest["source_feedback_limit"]))
     )
 
 
