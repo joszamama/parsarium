@@ -12,9 +12,8 @@ python3 parsarium.py run json python ijson controls/json/structure.json
 python3 parsarium.py replay json python ijson CORPUS_DIR runs/json-ijson-replay
 python3 parsarium.py afl build json python ijson
 python3 parsarium.py afl prepare json python ijson runs/json-ijson-afl
-python3 scripts/verify_python_json_ijson_feedback.py
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-The harness uses the default `yajl2_c` backend and fails on any other. The image builds the sdist with yajl embedded, so it is not the official Linux wheel's linkage.
+**Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.
