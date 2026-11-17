@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:06:21.282030+00:00",
+  "project": "sql/php/sad_spirit_pg_builder",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "aa84a853d11f6123173b2295ac0bc84f636002fc72d1042082abf41d803f76a7",
+  "overlay_receipt_sha256": "dcd92cc55e8ab24c146339379cef6c95899d86d3776a2ede3bde433c9dc40827",
+  "base_image_id": "sha256:399739365486aba5cc387b98316dcdc467d438a407a1b80b2591b2a70355aa8b",
+  "overlay_image_id": "sha256:ef152754b123a83da5f3df28da66a44d8e687edfb7997a3645572827e60551c7",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 1092,
+  "second_afl_tuples": 704,
+  "afl_tuple_difference": 708,
+  "first_parser_features": 1078,
+  "second_parser_features": 687,
+  "parser_feature_difference": 713,
+  "first_only_features_by_file": {
+    "src/sad_spirit/pg_builder/BlankWalker.php": 60,
+    "src/sad_spirit/pg_builder/Keyword.php": 1,
+    "src/sad_spirit/pg_builder/Lexer.php": 18,
+    "src/sad_spirit/pg_builder/Parser.php": 251,
+    "src/sad_spirit/pg_builder/Select.php": 24,
+    "src/sad_spirit/pg_builder/SelectCommon.php": 1,
+    "src/sad_spirit/pg_builder/TokenStream.php": 11,
+    "src/sad_spirit/pg_builder/enums/CreateFromKeywords.php": 2,
+    "src/sad_spirit/pg_builder/enums/CreateKeywords.php": 2,
+    "src/sad_spirit/pg_builder/enums/JoinType.php": 2,
+    "src/sad_spirit/pg_builder/enums/LogicalOperator.php": 2,
+    "src/sad_spirit/pg_builder/enums/OrderByDirection.php": 2,
+    "src/sad_spirit/pg_builder/enums/SQLValueFunctionName.php": 2,
+    "src/sad_spirit/pg_builder/enums/ScalarExpressionPrecedence.php": 2,
+    "src/sad_spirit/pg_builder/nodes/ColumnReference.php": 21,
+    "src/sad_spirit/pg_builder/nodes/FunctionCall.php": 13,
+    "src/sad_spirit/pg_builder/nodes/GenericNode.php": 8,
+    "src/sad_spirit/pg_builder/nodes/Identifier.php": 2,
+    "src/sad_spirit/pg_builder/nodes/OrderByElement.php": 10,
+    "src/sad_spirit/pg_builder/nodes/Star.php": 1,
+    "src/sad_spirit/pg_builder/nodes/TargetElement.php": 6,
+    "src/sad_spirit/pg_builder/nodes/WhereOrHavingClause.php": 10,
+    "src/sad_spirit/pg_builder/nodes/WindowDefinition.php": 1,
+    "src/sad_spirit/pg_builder/nodes/expressions/FunctionExpression.php": 8,
+    "src/sad_spirit/pg_builder/nodes/expressions/LogicalExpression.php": 6,
+    "src/sad_spirit/pg_builder/nodes/expressions/OperatorExpression.php": 14,
+    "src/sad_spirit/pg_builder/nodes/group/GroupByClause.php": 11,
+    "src/sad_spirit/pg_builder/nodes/group/GroupByElement.php": 2,
+    "src/sad_spirit/pg_builder/nodes/lists/ExpressionList.php": 3,
+    "src/sad_spirit/pg_builder/nodes/lists/FromList.php": 3,
+    "src/sad_spirit/pg_builder/nodes/lists/FunctionArgumentList.php": 7,
+    "src/sad_spirit/pg_builder/nodes/lists/GenericNodeList.php": 6,
+    "src/sad_spirit/pg_builder/nodes/lists/GroupByList.php": 3,
+    "src/sad_spirit/pg_builder/nodes/lists/OrderByList.php": 1,
+    "src/sad_spirit/pg_builder/nodes/lists/TargetList.php": 1,
+    "src/sad_spirit/pg_builder/nodes/lists/WindowList.php": 2,
+    "src/sad_spirit/pg_builder/nodes/range/FromElement.php": 9,
+    "src/sad_spirit/pg_builder/nodes/range/JoinExpression.php": 16,
+    "src/sad_spirit/pg_builder/nodes/range/RelationReference.php": 8
+  },
+  "second_only_features_by_file": {
+    "src/sad_spirit/pg_builder/BlankWalker.php": 23,
+    "src/sad_spirit/pg_builder/Insert.php": 13,
+    "src/sad_spirit/pg_builder/Parser.php": 66,
+    "src/sad_spirit/pg_builder/Statement.php": 9,
+    "src/sad_spirit/pg_builder/Values.php": 7,
+    "src/sad_spirit/pg_builder/nodes/ReturningClause.php": 13,
+    "src/sad_spirit/pg_builder/nodes/SetTargetElement.php": 8,
+    "src/sad_spirit/pg_builder/nodes/SetToDefault.php": 2,
+    "src/sad_spirit/pg_builder/nodes/expressions/RowExpression.php": 4,
+    "src/sad_spirit/pg_builder/nodes/lists/RowList.php": 5,
+    "src/sad_spirit/pg_builder/nodes/lists/SetTargetList.php": 3,
+    "src/sad_spirit/pg_builder/nodes/range/InsertTarget.php": 8
+  }
+}
