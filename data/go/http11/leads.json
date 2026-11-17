@@ -1,57 +1,75 @@
 [
   {
     "name": "github.com/gospider007/http1",
-    "status": "unresolved",
-    "reason": "Search result shows an HTTP/1 parser and three visible importers, but Go module resolution for @latest returned no matching versions; a compatible pin and adapter remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/gospider007/http1"
+    "status": "excluded",
+    "reason": "No pinnable open-source release: on 2026-11-17 proxy.golang.org returned 404 for @latest and the pkg.go.dev page (3 importers) shows no detected license, so neither a pinned module zip nor license evidence exists.",
+    "source": "https://pkg.go.dev/github.com/gospider007/http1",
+    "metric_value": 3,
+    "checked_at_utc": "2026-11-17T22:22:31Z"
   },
   {
     "name": "github.com/seawise-io/seawise-client/tunnelwire/httpwire",
-    "status": "unresolved",
-    "reason": "A versioned package page documents ReadRequest but the package is absent from the module latest release; a compatible release and control run remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/seawise-io/seawise-client/tunnelwire/httpwire"
+    "status": "excluded",
+    "reason": "pkg.go.dev Imported by 0 on 2026-11-17 and the package is absent from the module's latest release; zero-importer paths are never selected under the primary metric.",
+    "source": "https://pkg.go.dev/github.com/seawise-io/seawise-client/tunnelwire/httpwire",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:22:39Z"
   },
   {
     "name": "github.com/qpoint-io/qtap/pkg/stream/protocols/http1",
-    "status": "unresolved",
-    "reason": "Documented HTTP/1 parser package has session and stream setup; public local-byte adapter and control result remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/qpoint-io/qtap/pkg/stream/protocols/http1"
+    "status": "excluded",
+    "reason": "pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected under the primary metric, so the session/stream adapter was not built.",
+    "source": "https://pkg.go.dev/github.com/qpoint-io/qtap/pkg/stream/protocols/http1",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:22:34Z"
   },
   {
     "name": "github.com/gitsrc/Http-Parser/Parser",
     "status": "unresolved",
-    "reason": "Registry search hit suggests a request parser; documented local input API, pin, and control result remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/gitsrc/Http-Parser/Parser"
+    "reason": "Pinned v0.0.0-20180628052602-9aef882d7765 (MIT, 1 importer on 2026-11-17) exposes GetNewParser().GetHttpStructFromRaw(string), a strings.Split request-line and header splitter without doc comments; not run after the cell reached ten. At 1 importer it would tie with the two lowest selected paths, and the plan breaks that tie by package name.",
+    "source": "https://pkg.go.dev/github.com/gitsrc/Http-Parser/Parser",
+    "metric_value": 1,
+    "checked_at_utc": "2026-11-17T22:22:33Z"
   },
   {
     "name": "github.com/intelligentfish/gogo/http_parser",
-    "status": "unresolved",
-    "reason": "Registry search hit suggests an HTTP parser; documented local input API, pin, and control result remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/intelligentfish/gogo/http_parser"
+    "status": "excluded",
+    "reason": "pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected under the primary metric.",
+    "source": "https://pkg.go.dev/github.com/intelligentfish/gogo/http_parser",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:22:35Z"
   },
   {
     "name": "github.com/vproxy-tools/vpctl/pkg/http_parser",
-    "status": "unresolved",
-    "reason": "Registry search hit suggests an HTTP parser; documented local input API, pin, and control result remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/vproxy-tools/vpctl/pkg/http_parser"
+    "status": "excluded",
+    "reason": "pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected under the primary metric.",
+    "source": "https://pkg.go.dev/github.com/vproxy-tools/vpctl/pkg/http_parser",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:22:37Z"
   },
   {
     "name": "github.com/SentinelXofficial/sxsc/pkg/wire",
-    "status": "unresolved",
-    "reason": "Project documentation suggests raw HTTP message handling; documented public local parser API and control result remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/SentinelXofficial/sxsc/pkg/wire"
+    "status": "excluded",
+    "reason": "pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected under the primary metric.",
+    "source": "https://pkg.go.dev/github.com/SentinelXofficial/sxsc/pkg/wire",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:22:38Z"
   },
   {
     "name": "github.com/badu/http",
-    "status": "unresolved",
-    "reason": "ReadRequest is documented and pinned, but the adapter failed to link on Go 1.27.1 with invalid reference to bytes.Equal; not counted.",
-    "source": "https://pkg.go.dev/github.com/badu/http"
+    "status": "excluded",
+    "reason": "Adapter failed to link on Go 1.27.1 (invalid reference to bytes.Equal), and pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/badu/http",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/ncpmeplmls0614/requests",
-    "status": "unresolved",
-    "reason": "ReadRequest is documented, but the adapter failed to link on Go 1.27.1 with invalid reference to mime/multipart.escapeQuotes; not counted.",
-    "source": "https://pkg.go.dev/github.com/ncpmeplmls0614/requests"
+    "status": "excluded",
+    "reason": "Adapter failed to link on Go 1.27.1 (invalid reference to mime/multipart.escapeQuotes), and pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/ncpmeplmls0614/requests",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/projectdiscovery/rawhttp",
@@ -76,5 +94,49 @@
     "status": "excluded",
     "reason": "Parses Cache-Control directives rather than an HTTP/1.1 request or response message.",
     "source": "https://pkg.go.dev/github.com/pquerna/cachecontrol"
+  },
+  {
+    "name": "github.com/cloudwego/hertz/pkg/protocol/http1/resp",
+    "status": "unresolved",
+    "reason": "Search hit (query http1) with 13 importers on 2026-11-17; documents resp.Read(*protocol.Response, network.Reader) for the response control. It is the response-side companion package of the selected Hertz req path in the same pinned hertz v0.10.6 module (shared Hertz / fasthttp lineage) and was not run after the cell reached ten with an independent family. If verified it would rank above the 5-importer and lower paths and push one 1-importer path out of the ten.",
+    "source": "https://pkg.go.dev/github.com/cloudwego/hertz/pkg/protocol/http1/resp",
+    "metric_value": 13,
+    "checked_at_utc": "2026-11-17T22:22:28Z"
+  },
+  {
+    "name": "github.com/manuporto/distributedHTTPServer/pkg/httpparser",
+    "status": "unresolved",
+    "reason": "Search hit (query httpparser) with 4 importers on 2026-11-17, GPL-3.0, pseudo-version v0.0.0-20181018022249-a79c06169e19. Exports regular-expression field extractors GetMethod, GetURI, GetContentLength and GetHeader over a request string rather than one message decode; whether this is a format-aware parser path was not settled and no control was run after the cell reached ten.",
+    "source": "https://pkg.go.dev/github.com/manuporto/distributedHTTPServer/pkg/httpparser",
+    "metric_value": 4,
+    "checked_at_utc": "2026-11-17T22:20:58Z"
+  },
+  {
+    "name": "github.com/kamil-koziol/restree/pkg/httpparser",
+    "status": "excluded",
+    "reason": "Parses REST-client .http request files (Parse, ParseHeadersFile), an editor file format, not HTTP/1.1 wire messages.",
+    "source": "https://pkg.go.dev/github.com/kamil-koziol/restree/pkg/httpparser",
+    "metric_value": 1
+  },
+  {
+    "name": "github.com/gookit/greq/ext/httpfile",
+    "status": "excluded",
+    "reason": "Parses REST-client .http request files, an editor file format, not HTTP/1.1 wire messages.",
+    "source": "https://pkg.go.dev/github.com/gookit/greq/ext/httpfile",
+    "metric_value": 1
+  },
+  {
+    "name": "github.com/anthony-dong/go-sdk/commons/codec/http_codec",
+    "status": "excluded",
+    "reason": "Exports chunked-body and Content-Encoding body helpers (ReadChunked, DecodeHttpBody) over an existing net/http Header, not a request or response message parser.",
+    "source": "https://pkg.go.dev/github.com/anthony-dong/go-sdk/commons/codec/http_codec",
+    "metric_value": 1
+  },
+  {
+    "name": "github.com/google/martian/v3",
+    "status": "excluded",
+    "reason": "HTTP/1.1 proxy with request and response modifiers built on net/http; no documented local raw-message parsing API of its own.",
+    "source": "https://pkg.go.dev/github.com/google/martian/v3",
+    "metric_value": 56
   }
 ]
