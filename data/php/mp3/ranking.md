@@ -41,8 +41,11 @@ sync scan skips the real frame at byte 209 and stops on a false sync at byte
 Seven Packagist queries returned 100 hits and 79 distinct packages. The
 [leads](leads.json) record each one. None of these is a verified entry.
 
-- falahati/php-mp3 (80,144) and its copy holine/mp3: native PHP MPEG audio
-  reader; unresolved.
+- falahati/php-mp3 (80,144), a separate regin/PHP-MP3 family, failed the
+  controls ([audit](falahati-php-mp3-control-audit.md)). The v0.9.5-alpha2 tag
+  does not return on PHP 8.5. The dev-master snapshot matches the MPEG-1
+  control but reads the MPEG-2 control as 3 frames at 11,025 Hz instead of
+  12 frames at 22,050 Hz. Its copy holine/mp3 was not run.
 - debach/zend-mp3 (45,227) and fobilow/mp3file (5,468): unresolved.
 - wapmorgan/media-file (248,980) wraps Mp3Info for MP3; same family, not run.
 - buggedcom/phpvideotoolkit, nicoverbruggen/mediaprobe and phpmlkit/soundfile

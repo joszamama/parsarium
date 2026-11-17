@@ -60,10 +60,14 @@
     },
     {
       "name": "falahati/php-mp3",
-      "status": "unresolved",
+      "status": "excluded_control_failed",
       "packagist_downloads": 80144,
       "description": "PHP-MP3 is a simple library for reading and manipulating MPEG audio (MP3)",
-      "reason": "Native PHP MPEG audio reader/manipulator (frame headers, duration). Independent of getID3 per its description; not run in this pilot.",
+      "release": "v0.9.5-alpha2 (newest tag, pre-release; commit 33ffe2cb6263345aa17f296719e7261e5f351525) and dev-master commit snapshot 135aa3010cb4d3412ba442abaf2a7225bb751cf0 (not a release)",
+      "license": "LGPL-3.0",
+      "family": "regin / thegallagher PHP-MP3 native frame-header reader; no getID3 or Mp3Info code",
+      "reason": "On PHP 8.5.12 the tag never returns on either control (timeout 15 s, exit 124): since PHP 8.0, substr() past the end returns \"\", so getStart() does not stop. The dev-master snapshot matches the MPEG-1 control (11 frames, 44100 Hz, 64 kbit/s) but on the MPEG-2 control MpegAudio::fromFile()->getFrameCounts()/getFrameHeader(0) report 3 frames, 11025 Hz, 418-byte frames, first frame at byte 104. The oracle reads 12 frames, 22050 Hz, first frame at byte 0. The float key Version_25 = 2.5 is truncated to 2 and replaces the MPEG-2 sample-rate row, and the frame length uses the MPEG-1 144 coefficient. Only version, layer, bitrate and channel mode are correct on both controls. No public API gives a correct sample rate, frame count, frame bytes or duration on both.",
+      "audit": "data/php/mp3/falahati-php-mp3-control-audit.md",
       "source": "https://packagist.org/packages/falahati/php-mp3"
     },
     {
@@ -487,7 +491,7 @@
       "status": "unresolved_shared_family",
       "packagist_downloads": 9,
       "description": "PHP-MP3 is a simple library for reading and manipulating MPEG audio (MP3)",
-      "reason": "Same description as falahati/php-mp3 (PHP-MP3); appears to be a copy of that code base. Not run.",
+      "reason": "Same description as falahati/php-mp3 (PHP-MP3); appears to be a copy of that code base, which failed the MPEG-2 control (see data/php/mp3/falahati-php-mp3-control-audit.md). Not run.",
       "source": "https://packagist.org/packages/holine/mp3"
     },
     {
@@ -574,7 +578,7 @@
       "name": "micompress/micompress",
       "status": "excluded",
       "packagist_downloads": 2,
-      "description": "Compress images, PDFs, video, audio, documents & archives from PHP \u2014 powered by micompress.com",
+      "description": "Compress images, PDFs, video, audio, documents & archives from PHP — powered by micompress.com",
       "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
       "source": "https://packagist.org/packages/micompress/micompress"
     },

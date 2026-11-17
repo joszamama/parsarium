@@ -30,16 +30,17 @@
   "leads_recorded": 79,
   "leads_by_status": {
     "selected": 2,
-    "unresolved": 5,
+    "unresolved": 4,
     "shared_family": 19,
     "unresolved_shared_family": 2,
     "unresolved_external_native": 3,
-    "excluded": 48
+    "excluded": 48,
+    "excluded_control_failed": 1
   },
   "ranking_metric": "Packagist total downloads",
   "selection": "james-heinrich/getid3 (15,766,894 Packagist downloads) and wapmorgan/mp3info (1,512,916) are the two highest-download hits whose native PHP code reads MPEG Layer III frame headers from untagged input. getID3's module.audio.mp3.php matches both controls. Mp3Info 0.1.1 matches the MPEG-1 control's version, layer, sample rate, channel mode, bitrate, audio bytes and 11-frame count against the header-walk oracle, but misreads the MPEG-2 control; its scope is MPEG-1 Layer III CBR.",
   "shared_family": "getID3 is the same code base already counted in the active mp3_id3v2/php cell (james-heinrich/getid3 v1.9.28 and its wrappers). This pilot covers a different module (module.audio.mp3.php frame headers, 273 lines covered on the control) of the same family, not an independent parser. Mp3Info is a separate family: one class (src/Mp3Info.php) with its own tables and no getID3 code; its ID3v2 reader is counted in mp3_id3v2/php and wapmorgan/media-file wraps it.",
-  "uncertainty": "Two verified paths; no padding. Search is seven Packagist search.json queries capped at 50 hits each, captured 2026-11-17; package descriptions alone decided most exclusions. Packagist total downloads count Composer installs of the whole package (and wrappers pull getID3 or Mp3Info transitively), not use of the MPEG frame parser. getID3 reads the first frame header, checks sync on following frames, and derives CBR duration from audio-data bytes and the header bitrate. Mp3Info reads two headers, estimates frames from audio bytes and the computed frame length, and reports duration one frame short ((frames - 1) x 1152 / sample rate). On the MPEG-2 control it uses the MPEG-1 frame-length coefficient, misses the third frame and reads a false sync at byte 236, reporting Layer II 24 kHz mono 96 kbit/s; MPEG-2 is not covered for Mp3Info. Neither path decodes audio. PHP-MP3 (falahati/php-mp3), the Zend media reader and fobilow/mp3file are unresolved independent candidates. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
+  "uncertainty": "Two verified paths; no padding. Search is seven Packagist search.json queries capped at 50 hits each, captured 2026-11-17; package descriptions alone decided most exclusions. Packagist total downloads count Composer installs of the whole package (and wrappers pull getID3 or Mp3Info transitively), not use of the MPEG frame parser. getID3 reads the first frame header, checks sync on following frames, and derives CBR duration from audio-data bytes and the header bitrate. Mp3Info reads two headers, estimates frames from audio bytes and the computed frame length, and reports duration one frame short ((frames - 1) x 1152 / sample rate). On the MPEG-2 control it uses the MPEG-1 frame-length coefficient, misses the third frame and reads a false sync at byte 236, reporting Layer II 24 kHz mono 96 kbit/s; MPEG-2 is not covered for Mp3Info. Neither path decodes audio. PHP-MP3 (falahati/php-mp3) failed the controls: the v0.9.5-alpha2 tag does not return on PHP 8.5, and the dev-master snapshot reads the MPEG-2 control as 3 frames at 11,025 Hz (data/php/mp3/falahati-php-mp3-control-audit.md). The Zend media reader and fobilow/mp3file are unresolved independent candidates. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
   "third_party_evidence": "data/php/mp3/parsers.json",
   "third_party_control_results": "projects/mp3/php/getid3/verification.json",
   "afl_feedback": "data/php/mp3/afl-feedback.json",
