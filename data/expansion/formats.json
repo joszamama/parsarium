@@ -44,6 +44,23 @@
     "silent-plain-44k.mp3",
     "tone-plain-16k.mp3"
    ]
+  },
+  "sql": {
+   "name": "SQL statement text",
+   "definition": "One SQL statement in a dialect-neutral ANSI-style subset (SELECT with JOIN, WHERE, GROUP BY, ORDER BY, aliases and literals; multi-row INSERT), parsed from local text into a statement object or syntax tree without execution.",
+   "specifications": [
+    "https://www.iso.org/standard/76583.html",
+    "https://www.postgresql.org/docs/18/sql-select.html",
+    "https://sqlite.org/lang_select.html"
+   ],
+   "in_scope": "Library parsers with a documented local text API returning a statement object or syntax tree (AST, CST or a non-validating grouped parse tree, flagged).",
+   "out_of_scope": "Formatters, highlighters, splitters, query builders, ORMs, database engines and drivers (sqlite3_prepare compiles to bytecode with no public tree), schema-only DDL parsers, remote services.",
+   "ambiguity": "Dialects differ; the controls stay in a subset that PostgreSQL, MySQL and SQLite grammars accept. libpg_query bindings across ecosystems share the PostgreSQL grammar; vitess forks and sqlparser-rs ports share their families.",
+   "controls": [
+    "../../controls/sql/select-join.sql",
+    "../../controls/sql/insert-values.sql"
+   ],
+   "pilot_records": "data/<ecosystem>/sql/ (registry-snapshot.json from scripts/snapshot_sql_registry.py, leads.json, cell.json); protocol in catalog/sql/PROTOCOL.md"
   }
  },
  "control_expected": {

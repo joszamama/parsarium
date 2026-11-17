@@ -43,12 +43,12 @@ FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
                    "mp3_id3v2": "mp3", "json": "json", "xml": "xml"}
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
-               "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan"}
+               "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan", "sql": "sql.fan"}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",
               "ascii_pnm": ".pnm", "mp3_id3v2": ".mp3", "json": ".json",
-              "xml": ".xml", "mp3": ".mp3", "yaml": ".yaml", "toml": ".toml"}
+              "xml": ".xml", "mp3": ".mp3", "yaml": ".yaml", "toml": ".toml", "sql": ".sql"}
 MINIMUM_VERSION = (1, 3)
 SPEC_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
 SLUG = re.compile(r"[a-z0-9][a-z0-9_-]*")

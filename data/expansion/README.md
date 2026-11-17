@@ -194,3 +194,19 @@ value per named lead, using the metric of each ecosystem's JSON and XML pilot
 cells (Debian popcon `sourcemax` for C and C++). It writes
 `data/<ecosystem>/yaml/registry-snapshot.json`; the cell rules are in
 [catalog/yaml/PROTOCOL.md](../../catalog/yaml/PROTOCOL.md).
+
+## SQL (added later)
+
+SQL was added as a later pilot format after this inventory. Its definition is
+the `sql` entry in [formats.json](formats.json), and its scope, controls and
+oracle are in [catalog/sql/PROTOCOL.md](../../catalog/sql/PROTOCOL.md). Its
+bounded searches are not under `registry/`. They go straight to the pilot cells
+as `data/<ecosystem>/sql/registry-snapshot.json`, together with each ecosystem's
+primary metric for the targeted leads:
+
+```sh
+python3 scripts/snapshot_sql_registry.py
+python3 controls/sql/check_controls.py
+```
+
+The JSON and XML snapshots and their checker above are unchanged.
