@@ -50,7 +50,7 @@ def _home_command(argv: list[str]) -> int:
     try:
         path = home(fetch=args.fetch)
     except SnapshotError as error:
-        if args.path:
+        if args.path or args.fetch:
             raise
         print(f"package   {__version__}\nsnapshot  {info.get('version')} (not downloaded)\n"
               f"cache     {cache_root()}\nnote      {error}")
@@ -76,8 +76,11 @@ def _selection_command(argv: list[str]) -> int:
     parser.add_argument("--out", type=Path, help="results directory (default: runs/<selection id>)")
     parser.add_argument("--seconds", type=int, default=3600, help="AFL++ budget per target")
     parser.add_argument("--dry-run", action="store_true", help="print the commands without running them")
+    parser.add_argument("--allow-mismatch", action="store_true",
+                        help="accept commit or target pin differences; print every difference")
     args = parser.parse_args(argv)
-    return selection.run(args.manifest, home(), args.mode, args.input, args.out, args.seconds, args.dry_run)
+    return selection.run(args.manifest, home(), args.mode, args.input, args.out,
+                         args.seconds, args.dry_run, args.allow_mismatch)
 
 
 def main(argv: list[str] | None = None) -> int:
