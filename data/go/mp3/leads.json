@@ -73,20 +73,20 @@
   },
   {
     "name": "github.com/200sc/klangsynthese/mp3",
-    "status": "unresolved",
+    "status": "shared_family",
     "imported_by_packages": 11,
     "version_seen": "v0.2.1",
     "license": "Apache-2.0",
-    "reason": "Documented Load(io.ReadCloser); its adapter panicked on the tagged mp3_id3v2 control and was not retried on the untagged controls.",
+    "reason": "Load(io.ReadCloser) delegates MP3 decoding to github.com/hajimehoshi/go-mp3, which is already selected; tagged-control panic was not retried on plain controls.",
     "source": "https://pkg.go.dev/github.com/200sc/klangsynthese/mp3"
   },
   {
     "name": "github.com/dmulholl/mp3lib",
-    "status": "unresolved",
+    "status": "selected",
     "imported_by_packages": 9,
     "version_seen": "v1.0.0",
     "license": "Unlicense",
-    "reason": "Documented NextFrame reads MPEG frames from a stream; control adapter remains unchecked.",
+    "reason": "Pinned v1.0.0 stream frame parser: both untagged valid controls match the independent MPEG header walker; Docker source coverage and stable AFL++ differential are in the project receipt.",
     "source": "https://pkg.go.dev/github.com/dmulholl/mp3lib"
   },
   {

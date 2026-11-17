@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "go",
+  "package": "github.com/dmulholl/mp3lib",
+  "release": "v1.0.0",
+  "catalog_parser": "data/go/mp3/parsers.json",
+  "source_lock": "projects/mp3/go/github_com_dmulholl_mp3lib/source-lock.json",
+  "source_sha256": "c29d82de91787cc30c6bc9c6a5d5b14e203f8765563de23aa2c242f54c3ea1d9",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "expected_output": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "frames": 11,
+    "frame_bytes": 2298,
+    "samples_per_frame": 1152,
+    "bitrate": 64000
+  },
+  "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_control_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_expected_output": {
+    "sample_rate": 22050,
+    "channels": 2,
+    "frames": 12,
+    "frame_bytes": 1254,
+    "samples_per_frame": 576,
+    "bitrate": 32000
+  },
+  "api": "NextFrame(io.Reader) *MP3Frame; MP3Frame fields",
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/dmulholl/mp3lib MP3 frame scanning and header parsing",
+  "coverage_subject_prefix": "github.com/dmulholl/mp3lib/",
+  "format_specific_coverage_file_suffix": "/mp3lib.go",
+  "pilot": "plain_mp3_registry_pilot",
+  "coverage_limit": "Frame parser only; does not decode PCM. Two untagged CBR controls do not establish VBR or complete MPEG audio support."
+}

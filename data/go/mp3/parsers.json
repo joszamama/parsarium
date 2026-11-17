@@ -68,5 +68,42 @@
       "source": "data/go/mp3/registry-snapshot.json"
     },
     "project": "projects/mp3/go/github_com_tcolgate_mp3"
+  },
+  {
+    "name": "github.com/dmulholl/mp3lib",
+    "module": "github.com/dmulholl/mp3lib",
+    "version": "v1.0.0",
+    "license": "Unlicense",
+    "input_api": "NextFrame(io.Reader) *MP3Frame; MP3Frame header and frame fields",
+    "documentation": "https://pkg.go.dev/github.com/dmulholl/mp3lib@v1.0.0",
+    "source": "https://github.com/dmulholl/mp3lib/tree/v1.0.0",
+    "scope": "MPEG Layer III frame headers and frame boundaries from untagged local bytes; no PCM decoding",
+    "family": "dmulholl/mp3lib frame parser",
+    "family_note": "Independent Go MP3 frame parser; can also skip ID3 tags, but the plain MP3 controls have none. Separate from tcolgate/mp3 and hajime/go-mp3.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "evidence": "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 9,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_dmulholl_mp3lib"
   }
 ]
