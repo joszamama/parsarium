@@ -6,12 +6,13 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_buger_jsonparser", "github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "stdlib_unmarshal")
+PROJECTS = ("github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "stdlib_unmarshal")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 REPORT = ROOT / "data/go/json/afl-feedback.json"
@@ -48,7 +49,7 @@ def check(slug: str) -> dict:
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     image = receipt["image_id"]
-    if slug in {"github_com_buger_jsonparser", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson"}:
+    if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson"}:
         base_image = f"parsarium/json-go-{slug}:local"
         run(["docker", "run", "--rm", "--platform", manifest["platform"],
              "--network", "none", "--read-only", "--cap-drop", "ALL",
@@ -89,11 +90,17 @@ def check(slug: str) -> dict:
             "parser_feature_difference": feature_difference,
             "afl_tuple_difference": tuple_difference,
             **({"differential_control_pass": True}
-               if slug in {"github_com_buger_jsonparser", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson"} else {})}
+               if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson"} else {})}
 
 
 def main() -> None:
-    results = [check(slug) for slug in PROJECTS]
+    slugs = sys.argv[1:] or list(PROJECTS)
+    if not set(slugs) <= set(PROJECTS):
+        raise SystemExit(f"unknown Go JSON project: {sorted(set(slugs) - set(PROJECTS))}")
+    fresh = {f"json/go/{slug}": check(slug) for slug in slugs}
+    kept = json.loads(REPORT.read_text())["results"] if REPORT.is_file() else []
+    rows = {item["project"]: item for item in kept} | fresh
+    results = [rows[f"json/go/{slug}"] for slug in PROJECTS if f"json/go/{slug}" in rows]
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),

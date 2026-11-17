@@ -1,23 +1,54 @@
 # github.com/bytedance/sonic — JSON / Go
 
-**Pilot / incomplete format cell.** This path is verified on two valid controls; the format-wide search remains bounded and incomplete.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.15.5`
 - **License:** Apache-2.0
-- **Parser family:** Sonic optimized arm64 decoder, Go `optdec` over native NEON parser
-- **Local input API:** `sonic.Unmarshal([]byte, *any)`
-- **API reference:** [Go Packages](https://pkg.go.dev/github.com/bytedance/sonic@v1.15.5#Unmarshal)
-- **Valid controls:** [nested object](../../../../controls/json/nested-object.json) and [nested array](../../../../controls/json/nested-array.json)
-- **Evidence:** [parser record](../../../../data/go/json/parsers.json), [control result](../../../../data/go/json/verification.json), [AFL++ feedback](../../../../fuzzing/afl-native/json/go/github_com_bytedance_sonic/differential.json)
+- **Parser family:** Sonic optimized arm64 decoder: Go optdec over native NEON parser
+- **Local input API:** `sonic.Unmarshal([]byte, *any) over one complete local JSON byte slice`
+- **Documentation:** [API reference](<https://pkg.go.dev/github.com/bytedance/sonic@v1.15.5#Unmarshal>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/go/json/parsers.json) · [control result](../../../../data/go/json/verification.json)
 
-The harness checks `sonic.APIKind == sonic.UseSonicJSON` before parsing, so the pinned build cannot silently use the `encoding/json` fallback. Go source instrumentation covers 289 lines in Sonic `internal/decoder/optdec` on the object control. Repeated parser-only AFL++ traces are identical for the same control and differ by 35 parser features and 35 AFL++ tuples for the valid nested array. NEON assembly instructions are outside Go source coverage.
+## Observed control result
 
-The saved pkg.go.dev snapshot reports 2,428 importing packages for Sonic. This is a package adoption count, not evidence that every importer calls JSON decoding.
+```json
+{
+  "arrays": 3,
+  "booleans": 2,
+  "max_depth": 4,
+  "nulls": 1,
+  "numbers": [
+    -2.5,
+    1,
+    1,
+    2,
+    2
+  ],
+  "objects": 5,
+  "root": "object",
+  "strings": [
+    "café \"quoted\"",
+    "go",
+    "json",
+    "parsarium",
+    "rfc8259"
+  ],
+  "top_level_keys": [
+    "enabled",
+    "missing",
+    "name",
+    "nested",
+    "ratio",
+    "tags",
+    "version"
+  ]
+}
+```
 
-## Run
+## Run this target
 
 ```sh
 python3 parsarium.py build json go github_com_bytedance_sonic
 python3 parsarium.py run json go github_com_bytedance_sonic controls/json/nested-object.json
-python3 parsarium.py run json go github_com_bytedance_sonic controls/json/nested-array.json
 ```

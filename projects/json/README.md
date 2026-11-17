@@ -15,6 +15,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [simdjson / C++](cpp/simdjson/README.md)
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)
 - [github.com/buger/jsonparser / Go](go/github_com_buger_jsonparser/README.md)
+- [github.com/bytedance/sonic / Go](go/github_com_bytedance_sonic/README.md)
 - [github.com/goccy/go-json / Go](go/github_com_goccy_go_json/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
 - [github.com/tidwall/gjson / Go](go/github_com_tidwall_gjson/README.md)
