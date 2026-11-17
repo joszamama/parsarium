@@ -26,6 +26,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [xml2js / JavaScript](javascript/xml2js/README.md)
 - [XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read() / PHP](php/stdlib_xmlreader/README.md)
 - [sabre/xml / PHP](php/sabre_xml/README.md)
+- [symfony/dom-crawler / PHP](php/symfony_dom_crawler/README.md)
 - [beautifulsoup4 / Python](python/beautifulsoup4/README.md)
 - [lxml / Python](python/lxml/README.md)
 - [xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot() / Python](python/stdlib_elementtree/README.md)
