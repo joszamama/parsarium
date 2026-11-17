@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:19:19.818158+00:00",
+  "checked_at_utc": "2026-11-17T05:16:37.509430+00:00",
   "platform": "linux/arm64 Docker",
   "go": "go1.27.1",
   "controls": {
@@ -40,7 +40,7 @@
       "12.50 €"
     ]
   },
-  "differential_check": "Both Go harnesses printed exactly the expat summary for order-default-ns.xml in a throwaway go test run inside the pinned golang image; python3 parsarium.py run xml go <slug> controls/xml/order-default-ns.xml returned status ok for both projects. The CLI run checks exit status, not output equality.",
+  "differential_check": "The shared valid order-default-ns.xml was checked with exact expected output by the xmlquery harness locally; the Docker differential control and AFL++ feedback receipts are recorded in the project and overlay.",
   "third_party": [
     {
       "package": "github.com/beevik/etree",
@@ -80,6 +80,76 @@
       "parser_source_lines_covered": 130,
       "encoding_xml_lines_covered": 231,
       "error": null
+    },
+    {
+      "package": "github.com/antchfx/xmlquery",
+      "module": "github.com/antchfx/xmlquery",
+      "version": "v1.5.2",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE read into an xmlquery DOM",
+      "command": "python3 parsarium.py build xml go github_com_antchfx_xmlquery",
+      "receipt": "projects/xml/go/github_com_antchfx_xmlquery/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 164,
+      "encoding_xml_lines_covered": 294,
+      "error": null,
+      "differential_pass": true,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_command": "docker run --rm --platform linux/arm64 --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m -v $PWD/controls/xml/order-default-ns.xml:/input/differential:ro --entrypoint /work/harness.test parsarium/xml-go-github_com_antchfx_xmlquery:local -test.run=^TestDifferential$ -test.v"
     }
   ],
   "standard": [
@@ -126,9 +196,10 @@
       "family": "Go encoding/xml Decoder tokenizer",
       "paths": [
         "github.com/beevik/etree (via Decoder.RawToken)",
+        "github.com/antchfx/xmlquery (via Decoder.Token)",
         "encoding/xml.Decoder.Token()"
       ],
-      "note": "etree's receipt counts its encoding/xml lines as underlying coverage; its AFL++ bridge maps only etree package blocks."
+      "note": "etree and xmlquery receipts count encoding/xml lines as underlying coverage; their AFL++ bridges map only package-specific source blocks."
     }
   ]
 }

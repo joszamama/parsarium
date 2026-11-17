@@ -49,5 +49,56 @@
       ]
     },
     "project": "projects/xml/go/github_com_beevik_etree"
+  },
+  {
+    "name": "github.com/antchfx/xmlquery",
+    "module": "github.com/antchfx/xmlquery",
+    "version": "v1.5.2",
+    "license": "MIT",
+    "input_api": "xmlquery.Parse(io.Reader); Node.FirstChild/NextSibling DOM walk; Node.NamespaceURI and Attr.NamespaceURI",
+    "documentation": "https://pkg.go.dev/github.com/antchfx/xmlquery@v1.5.2#Parse",
+    "source": "https://github.com/antchfx/xmlquery/tree/v1.5.2",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed from local io.Reader into a DOM: expanded names, maximum depth, namespace declarations and URIs, attributes, decoded text and CDATA",
+    "family": "xmlquery DOM over Go encoding/xml Decoder tokenizer",
+    "family_note": "xmlquery parse.go creates its own Node tree but obtains names, attributes and character data from encoding/xml.Decoder.Token. It shares the Go encoding/xml tokenizer family with etree and the unranked standard path; its DOM construction is separate.",
+    "shared_families": [
+      "Go encoding/xml Decoder tokenizer"
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 627,
+      "source": "https://pkg.go.dev/github.com/antchfx/xmlquery?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/go/github_com_antchfx_xmlquery"
   }
 ]

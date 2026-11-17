@@ -1,6 +1,6 @@
 # GO × XML: selected parsers (pilot)
 
-1 control-verified third-party path selected. The ceiling is ten; this pilot builds only the highest-adoption XML parser lead and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+2 control-verified third-party paths selected. The ceiling is ten; this pilot builds only the two highest-adoption XML parser leads and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -9,6 +9,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/beevik/etree](https://pkg.go.dev/github.com/beevik/etree@v1.8.1) | v1.8.1 | 2,098 | XML 1.0 UTF-8 document into an element tree with namespace lookup | etree element tree over Go encoding/xml Decoder tokenizer |
+| 2 | [github.com/antchfx/xmlquery](https://pkg.go.dev/github.com/antchfx/xmlquery@v1.5.2) | v1.5.2 | 627 | XML 1.0 UTF-8 document into an XPath-ready DOM with expanded names | xmlquery DOM over Go encoding/xml Decoder tokenizer |
 
 ## Standard API (unranked)
 
@@ -16,7 +17,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | --- | --- | --- |
 | [encoding/xml.Decoder.Token()](https://pkg.go.dev/encoding/xml@go1.27.1#Decoder.Token) | Go 1.27.1 | Go encoding/xml Decoder tokenizer |
 
-etree reads through `encoding/xml.Decoder.RawToken`, so both rows share the Go encoding/xml tokenizer. Only etree's tree building and namespace lookup are separate code. `encoding/xml` itself shows 79,507 importers but stays outside the third-party ranking.
+etree reads through `encoding/xml.Decoder.RawToken`; xmlquery reads through `encoding/xml.Decoder.Token`. All three paths share the Go encoding/xml tokenizer. etree and xmlquery each build their own trees. `encoding/xml` itself shows 79,507 importers but stays outside the third-party ranking.
 
 ## Lead log
 
@@ -24,7 +25,6 @@ Numeric leads from the same snapshot, not verified and not selected. Renderers, 
 
 | Lead | Version seen | Imported by | Status |
 | --- | --- | ---: | --- |
-| [github.com/antchfx/xmlquery](https://pkg.go.dev/github.com/antchfx/xmlquery) | v1.5.2 | 627 | XPath query DOM documented as xmlquery.Parse(io.Reader); its tokenizer and namespace handling were not checked and no control was run. |
 | [github.com/clbanning/mxj](https://pkg.go.dev/github.com/clbanning/mxj) | v1.8.4 | 553 | Converts XML to map[string]interface{} via NewMapXml([]byte); not run. A v2 module path is logged separately. |
 | [github.com/beego/x2j](https://pkg.go.dev/github.com/beego/x2j) | v0.0.0-...-a0352aa | 436 | Unmarshals arbitrary XML to map values; pseudo-version only, not run. |
 | [github.com/basgys/goxml2json](https://pkg.go.dev/github.com/basgys/goxml2json) | v1.1.0 | 182 | XML-to-JSON converter over an io.Reader; not run. |

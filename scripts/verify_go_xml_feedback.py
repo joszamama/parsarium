@@ -1,5 +1,6 @@
 """Check Go XML AFL++ bridges: repeated control probes match and a second valid input differs."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -11,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_beevik_etree", "stdlib_decoder")
+PROJECTS = ("github_com_beevik_etree", "github_com_antchfx_xmlquery", "stdlib_decoder")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 REPORT = ROOT / "data/go/xml/afl-feedback.json"
@@ -81,7 +82,19 @@ def check(slug: str) -> dict:
 
 
 def main() -> None:
-    results = [check(slug) for slug in PROJECTS]
+    cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("projects", nargs="*", choices=PROJECTS,
+                     help="verify only these projects and retain existing other receipts")
+    args = cli.parse_args()
+    selected = args.projects or PROJECTS
+    checked = {item["project"]: item for item in (check(slug) for slug in selected)}
+    if args.projects and REPORT.exists():
+        existing = json.loads(REPORT.read_text())
+        for item in existing.get("results", []):
+            if item["project"] not in checked:
+                checked[item["project"]] = item
+    results = [checked[f"xml/go/{slug}"] for slug in PROJECTS
+               if f"xml/go/{slug}" in checked]
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
