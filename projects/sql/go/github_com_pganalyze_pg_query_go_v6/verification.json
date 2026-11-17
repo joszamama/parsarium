@@ -1,0 +1,68 @@
+{
+  "kind": "third_party",
+  "api": "pg_query.Parse(local SQL text) -> *pg_query.ParseResult (protobuf parse tree: RawStmt with SelectStmt or InsertStmt nodes); the harness walks the tree with protoreflect",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:40:27.885574+00:00",
+  "manifest": "projects/sql/go/github_com_pganalyze_pg_query_go_v6/manifest.json",
+  "image_id": "sha256:efc1818501da173791e81257c5fedb74708ed9ffcaa582d6bd3e0c80545d94aa",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go version go1.27.1 linux/arm64"
+  ],
+  "source_sha256": "3177b3123f142e58febadab2ccbb6b0df1536fff41ffaccb4112c1422e4dc92a",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "65955fbc1f6d80971f586f82c99b185dd5fc054d47f1dfc12216df3d27be2b47",
+    "afl-allowlist.txt": "d48f2892ab772eee485be3824f3d139eca0d4cf35839b8d8739885dbeec843e1",
+    "go.mod": "8e04f853c557840160138c3d0a392002aa0be0db14bafb610768bd96b3a46989",
+    "go.sum": "a8635280c8fae499381906a6c28111fee46ed9303c20f5eb6be8bf4f40ce926b",
+    "harness.go": "a3fe26e7869c17cb5e41f805abd6929b9155f3d5ddc7f37582e1810420cd0266",
+    "harness_test.go": "de049caa466366df1b31d52d11ccd6e8d714fd3bb0be3b0031e701d470b028e2",
+    "manifest.json": "1bcccd52210789f85f16e53201f88e0cfd7598590224068c3771b14502985b5f",
+    "native_profile.go": "2a371160f24a4c9385ce7a80f807bf00f4d7bb0a12bd295d4d9358985bd12a99",
+    "native_profile_afl.go": "29c860b60ed88e52e142a763a557bd1040bcecc8aa588b43a4d983dee276895c",
+    "replay/main.go": "08fb7f0b0946f493bdd73e0970b07a0305c90b8ac36e40d9d75b2f0752451aa9",
+    "report.py": "4225bd9db8b02e591db9352778b6eda7019069f0120bb62538e53aac84f8b8de",
+    "source-lock.json": "6ca1af0a386878ba0fe875735aa0e6127214e4f9f7ae0c080d8b53367287d15b"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 1220,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": 26,
+  "underlying_source_lines_covered": 2342,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/go/github_com_pganalyze_pg_query_go_v6/target/coverage/coverage.json",
+  "pass": true
+}

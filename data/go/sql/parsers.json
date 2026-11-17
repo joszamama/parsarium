@@ -420,6 +420,111 @@
     }
   },
   {
+    "name": "github.com/pganalyze/pg_query_go/v6",
+    "version": "v6.2.5",
+    "license": "BSD-3-Clause AND PostgreSQL",
+    "license_evidence": "LICENSE (SHA-256 7752b24a3cb4bee5270c2ee8a3a7609fd57ce9dccb2e8b5757fdeca04bb03960, BSD 3-Clause) and LICENSE.POSTGRESQL (SHA-256 28e429702de70abfa1b7e4cb5d9e486bd9469f1eab5b392f704b65de09334d8d, PostgreSQL License for the bundled PostgreSQL parser sources) in the pinned module zip",
+    "input_api": "pg_query.Parse(local SQL text) -> *pg_query.ParseResult",
+    "documentation": "https://pkg.go.dev/github.com/pganalyze/pg_query_go/v6@v6.2.5#Parse",
+    "source": "https://proxy.golang.org/github.com/pganalyze/pg_query_go/v6/@v/v6.2.5.zip",
+    "source_sha256": "3177b3123f142e58febadab2ccbb6b0df1536fff41ffaccb4112c1422e4dc92a",
+    "go_module_sum": "h1:i7dvkA5167th3rXtk0jv9+r5DeJd4GqeGOVKuMTda8s=",
+    "dependencies": [],
+    "dialect": "PostgreSQL (libpg_query 17-6.2.5)",
+    "scope": "Local SQL text parsed by pg_query_go Parse (libpg_query, PostgreSQL 17 grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other PostgreSQL syntax, deparse, fingerprint and normalize APIs are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), cgo binding",
+    "family_note": "pg_query.Parse passes the text through cgo to the bundled libpg_query (17-6.2.5, PostgreSQL 17 grammar: src_backend_parser_gram.c from bison, src_backend_parser_scan.c from flex, src_backend_parser_parser.c) and unmarshals the protobuf parse tree into Go structs. The selected C path libpg_query 18.1.0 and the Rust and Python bindings are separate package paths in the same family; their metrics are not combined. The Go binding has no parser of its own, so parser source coverage is reported for the native C files (underlying coverage: 2,342 lines in 26 files, 520 in src_backend_parser_gram.c and 379 in src_backend_parser_scan.c) besides the Go binding lines (1,220, of which 1,206 are in the generated pg_query.pb.go protobuf types used to unmarshal the tree), and AFL++ feedback comes only from the allowlisted native grammar, scanner and parser.c files. The adapter walks the protobuf tree with protoreflect for RangeVar relnames, JoinExpr nodes, FuncCall names and A_Const integer, float and string values, and reads SelectStmt (TargetList, WhereClause, GroupClause, SortClause) and InsertStmt (Cols, ValuesLists) fields.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 54,
+      "source": "https://pkg.go.dev/github.com/pganalyze/pg_query_go/v6",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_pganalyze_pg_query_go_v6",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "github.com/auxten/postgresql-parser/pkg/sql/parser",
     "version": "v1.0.1",
     "license": "BUSL-1.1 with Change License Apache-2.0 (Change Date 2023-04-01), with BSD-style vitess portions",

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "pass": true,
+  "project": "sql/go/github_com_pganalyze_pg_query_go_v6",
+  "feedback_scope": "AFL++ CLASSIC allowlist of the bundled libpg_query src_backend_parser_gram.c, src_backend_parser_scan.c and src_backend_parser_parser.c; Go runtime, binding, protobuf output and Go tree walk excluded",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "repeats_per_control": 5,
+  "first_native_tuples": 216,
+  "second_native_tuples": 130,
+  "native_tuple_difference": 174,
+  "repeat_maps_identical": true,
+  "mutation_campaign_run": false,
+  "allowlist_sha256": "d48f2892ab772eee485be3824f3d139eca0d4cf35839b8d8739885dbeec843e1"
+}

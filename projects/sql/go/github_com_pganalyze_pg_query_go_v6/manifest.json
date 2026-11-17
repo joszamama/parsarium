@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "go",
+  "pilot": true,
+  "package": "github.com/pganalyze/pg_query_go/v6",
+  "release": "v6.2.5",
+  "catalog_parser": "data/go/sql/parsers.json",
+  "source_lock": "projects/sql/go/github_com_pganalyze_pg_query_go_v6/source-lock.json",
+  "source_sha256": "3177b3123f142e58febadab2ccbb6b0df1536fff41ffaccb4112c1422e4dc92a",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay-bin",
+    "/input/case"
+  ],
+  "dialect": "PostgreSQL (libpg_query 17-6.2.5 extraction of the PostgreSQL 17 server grammar)",
+  "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser); cgo binding that compiles the bundled libpg_query C sources",
+  "api": "pg_query.Parse(local SQL text) -> *pg_query.ParseResult (protobuf parse tree: RawStmt with SelectStmt or InsertStmt nodes); the harness walks the tree with protoreflect",
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzSQL",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzSQL",
+  "toolchain_entrypoint": "/usr/local/go/bin/go",
+  "toolchain_args": [
+    "version"
+  ],
+  "coverage": "Go coverpkg of the pg_query_go binding packages and Clang/LLVM source lines of the bundled libpg_query C sources (bison/flex #line directives removed from gram.c and scan.c) during valid-control replay",
+  "coverage_subject_prefix": "github.com/pganalyze/pg_query_go/v6/",
+  "scope": "Local SQL text parsed by pg_query_go Parse (libpg_query, PostgreSQL 17 grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other PostgreSQL syntax, deparse, fingerprint and normalize APIs are untested.",
+  "underlying_coverage_subject_prefix": "/work/thirdparty/parser/",
+  "underlying_format_specific_coverage_file_suffix": "/src_backend_parser_gram.c",
+  "afl_native_cgo": true,
+  "afl_entrypoint": "/work/afl-target",
+  "afl_file_input": true
+}
