@@ -16,8 +16,10 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 
 | Order | Lead | Metric | Input API lead | Family | Status |
 | ---: | --- | ---: | --- | --- | --- |
-| 1 | pcapplusplus | missing | `pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)` | PcapPlusPlus DnsLayer | unresolved_no_primary_metric |
+| 1 | isc-kea | 516 | `isc::dns::Message(Message::PARSE).fromWire(isc::util::InputBuffer&) (kea/dns/message.h)` | Kea libdns++ (BIND 10 lineage) | unresolved_control_failure |
+| 2 | pcapplusplus | missing | `pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)` | PcapPlusPlus DnsLayer | unresolved_no_primary_metric |
 
+- **isc-kea**: Debian's kea-dev installs libkea-dns++ with kea/dns/message.h (Message::fromWire parses a wire message), but by source inspection of upstream 3.0.4 (kea-3.0.4.tar.xz, sha256 62d32494...) src/lib/dns/rrparamregistry.cc registers RDATA factories only for TSIG, A, NS, SOA, PTR, TXT, AAAA, OPT, RRSIG, DHCID and TKEY; CNAME and MX are type names only, so their RDATA stays generic (raw) and the names inside them are not decoded by the library.
 - **pcapplusplus**: No primary metric: PcapPlusPlus has no Debian source package (absent from the pinned popcon sourcemax table; sources.debian.org search for 'pcapplusplus' returned no exact or partial match on 2026-11-17), so the Debian dev-package fallback is also unavailable. GitHub stars are not allowed outside PLY cells. pcpp::DnsLayer decodes DNS from a caller-supplied buffer, but the path is not built until an allowed adoption metric exists.
 
 ## Checked, excluded or recorded separately

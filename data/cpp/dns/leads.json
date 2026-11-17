@@ -139,5 +139,19 @@
     "documentation": "https://docs.seastar.io/master/namespaceseastar_1_1net.html",
     "family": "Seastar net::dns over c-ares",
     "reason": "No Debian source package in the pinned table (no primary metric); its seastar::net::dns resolver delegates message decoding to c-ares and documents no parser for caller-supplied message bytes."
+  },
+  {
+    "name": "isc-kea",
+    "status": "unresolved_control_failure",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "family": "Kea libdns++ (BIND 10 lineage)",
+    "checked_version": "3.0.4",
+    "documentation": "https://packages.debian.org/sid/kea-dev",
+    "input_api_lead": "isc::dns::Message(Message::PARSE).fromWire(isc::util::InputBuffer&) (kea/dns/message.h)",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Debian's kea-dev installs libkea-dns++ with kea/dns/message.h (Message::fromWire parses a wire message), but by source inspection of upstream 3.0.4 (kea-3.0.4.tar.xz, sha256 62d32494...) src/lib/dns/rrparamregistry.cc registers RDATA factories only for TSIG, A, NS, SOA, PTR, TXT, AAAA, OPT, RRSIG, DHCID and TKEY; CNAME and MX are type names only, so their RDATA stays generic (raw) and the names inside them are not decoded by the library.",
+    "primary_metric_value": 516,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 2
   }
 ]
