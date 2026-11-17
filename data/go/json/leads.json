@@ -1,12 +1,13 @@
 [
   {
     "name": "github.com/mailru/easyjson/jlexer",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "v0.9.2",
     "license": "MIT",
     "imported_by": 3424,
-    "reason": "Lexer for generated easyjson code; a generic local-bytes decode into an untyped value remains unchecked.",
-    "source": "https://pkg.go.dev/github.com/mailru/easyjson/jlexer"
+    "reason": "Pinned v0.9.2 documented Lexer.Interface decodes the complete local JSON byte slice into untyped values with jlexer's own FetchToken scanner (no generated code; Consumed rejects trailing data); both valid controls, own-source coverage and repeatable AFL differential are verified. The Imported by count mostly reflects easyjson-generated code that imports jlexer.",
+    "source": "https://pkg.go.dev/github.com/mailru/easyjson/jlexer",
+    "verified_evidence": "projects/json/go/github_com_mailru_easyjson_jlexer/verification.json"
   },
   {
     "name": "github.com/bytedance/sonic",
@@ -20,12 +21,23 @@
   },
   {
     "name": "k8s.io/apimachinery/pkg/util/json",
-    "status": "unresolved",
+    "status": "unresolved_shared_family",
     "version_seen": "v0.37.2",
     "license": "Apache-2.0",
     "imported_by": 2062,
-    "reason": "Wrapper over sigs.k8s.io/json, an encoding/json fork; would share the Go encoding/json lineage. Not run.",
-    "source": "https://pkg.go.dev/k8s.io/apimachinery/pkg/util/json"
+    "reason": "Not run. In v0.37.2, pkg/util/json Unmarshal calls sigs.k8s.io/json UnmarshalCaseSensitivePreserveInts (go.mod pins sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730), whose internal/golang/encoding/json is a patched copy of the Go encoding/json v1 decoder (scanner.go keeps the Go Authors header). It shares the encoding/json lineage of the separately inventoried standard API, so an independent parser was preferred.",
+    "source": "https://pkg.go.dev/k8s.io/apimachinery/pkg/util/json",
+    "checked_at_utc": "2026-11-17T15:10:00+00:00"
+  },
+  {
+    "name": "github.com/crossplane/upjet/v2/pkg/resource/json",
+    "status": "shared_family",
+    "version_seen": "v2.5.1",
+    "license": "Apache-2.0",
+    "imported_by": 1702,
+    "reason": "Not run. pkg/resource/json in v2.5.1 defines TFParser/JSParser as jsoniter.Config values over github.com/json-iterator/go, the already selected json-iterator parser; no own JSON parsing.",
+    "source": "https://pkg.go.dev/github.com/crossplane/upjet/v2/pkg/resource/json",
+    "checked_at_utc": "2026-11-17T15:10:00+00:00"
   },
   {
     "name": "github.com/valyala/fastjson",
@@ -36,6 +48,46 @@
     "reason": "Pinned v1.6.10 Parser.ParseBytes parses the complete local JSON byte slice into its own Value tree; both valid controls, own-source coverage and repeatable AFL differential are verified.",
     "source": "https://pkg.go.dev/github.com/valyala/fastjson",
     "verified_evidence": "projects/json/go/github_com_valyala_fastjson/verification.json"
+  },
+  {
+    "name": "github.com/Jeffail/gabs/v2",
+    "status": "shared_family",
+    "version_seen": "v2.7.0",
+    "license": "MIT",
+    "imported_by": 517,
+    "reason": "Not run. gabs.go in v2.7.0 parses with encoding/json (json.Unmarshal in ParseJSON, json.NewDecoder in ParseJSONDecoder/ParseJSONBuffer); it is a container wrapper with no own JSON parser.",
+    "source": "https://pkg.go.dev/github.com/Jeffail/gabs/v2",
+    "checked_at_utc": "2026-11-17T15:10:00+00:00"
+  },
+  {
+    "name": "github.com/go-json-experiment/json",
+    "status": "unresolved_shared_family",
+    "version_seen": "v1.27.2",
+    "license": "BSD-3-Clause",
+    "imported_by": 516,
+    "reason": "Not run. The pinned v1.27.2 module is the experimental upstream of Go's encoding/json/v2 and jsontext: jsontext/decode.go has 1,220 lines in both it and Go 1.27.1 src/encoding/json/jsontext/decode.go with 8 differing diff lines, and arshal_any.go differs by 14 diff lines of 289. Go 1.27.1 encoding/json delegates to that v2 code, so this path would share the parser of the separately inventoried standard API.",
+    "source": "https://pkg.go.dev/github.com/go-json-experiment/json",
+    "checked_at_utc": "2026-11-17T15:10:00+00:00"
+  },
+  {
+    "name": "github.com/elastic/go-structform/json",
+    "status": "unresolved",
+    "version_seen": "v0.0.12",
+    "license": "Apache-2.0",
+    "imported_by": 372,
+    "reason": "Own hand-written state-machine parser (json/parse.go: Parse([]byte, structform.Visitor)) that reports values to a caller Visitor. Not run; below go-faster/jx (451).",
+    "source": "https://pkg.go.dev/github.com/elastic/go-structform/json",
+    "checked_at_utc": "2026-11-17T15:10:00+00:00"
+  },
+  {
+    "name": "github.com/francoispqt/gojay",
+    "status": "unresolved",
+    "version_seen": "v1.2.13",
+    "license": "MIT",
+    "imported_by": 357,
+    "reason": "Own decoder, but only through caller-implemented UnmarshalerJSONObject/UnmarshalerJSONArray types for a known schema. Its untyped Decoder.Interface/DecodeInterface path (decode_interface.go) finds the value bounds and then calls encoding/json.Unmarshal, so a generic untyped harness would test encoding/json. Not run.",
+    "source": "https://pkg.go.dev/github.com/francoispqt/gojay",
+    "checked_at_utc": "2026-11-17T15:10:00+00:00"
   },
   {
     "name": "github.com/segmentio/encoding/json",

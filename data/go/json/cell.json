@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "json",
-  "status": "pilot_eight_selected_search_bounded",
+  "status": "pilot_nine_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 8,
+  "verified_third_party_count": 9,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "json",
@@ -17,7 +17,7 @@
   "search_hits_recorded": 500,
   "unique_search_hits": 474,
   "unresolved_documentation_leads": 2,
-  "uncertainty": "Eight Go JSON package paths pass two valid structure-aware controls with parser-source coverage and stable AFL++ feedback: json-iterator/go (18,454 Imported by), tidwall/gjson (10,420), ugorji/go/codec (10,142), goccy/go-json (4,192), bytedance/sonic (2,428), buger/jsonparser (2,171), valyala/fastjson (895), and segmentio/encoding/json (348). Sonic uses its own Go optdec plus native NEON parser on pinned linux/arm64 Go 1.27.1; Go line coverage and AFL feedback omit NEON assembly instructions. segmentio/encoding/json uses its own parse.go tokenizer and decoder; it imports encoding/json only for shared types. GJSON and buger/jsonparser are path-query parsers; only GJSON has a full-document validator in its harness. go-codec is multi-format and its Imported by count is not JSON-specific. Two other numeric leads remain unverified, so ranks are among verified paths only. Search was bounded to five pkg.go.dev queries of 100 hits each. The standard encoding/json path remains separate and unranked. Valid controls do not establish complete RFC 8259 support.",
+  "uncertainty": "Nine Go JSON package paths pass two valid structure-aware controls with parser-source coverage and stable AFL++ feedback: json-iterator/go (18,454 Imported by), tidwall/gjson (10,420), ugorji/go/codec (10,142), goccy/go-json (4,192), mailru/easyjson/jlexer (3,424), bytedance/sonic (2,428), buger/jsonparser (2,171), valyala/fastjson (895), and segmentio/encoding/json (348). Sonic uses its own Go optdec plus native NEON parser on pinned linux/arm64 Go 1.27.1; Go line coverage and AFL feedback omit NEON assembly instructions. segmentio/encoding/json uses its own parse.go tokenizer and decoder; it imports encoding/json only for shared types. easyjson jlexer is used through its documented generic Lexer.Interface rather than generated code; its Imported by count mostly reflects generated code. GJSON and buger/jsonparser are path-query parsers; only GJSON has a full-document validator in its harness. go-codec is multi-format and its Imported by count is not JSON-specific. The k8s util/json and go-json-experiment leads share the standard encoding/json lineage and remain unselected; go-structform/json and gojay remain unresolved leads, so ranks are among verified paths only. Search was bounded to five pkg.go.dev queries of 100 hits each. The standard encoding/json path remains separate and unranked. Valid controls do not establish complete RFC 8259 support.",
   "third_party_evidence": "data/go/json/parsers.json",
   "third_party_control_results": "data/go/json/verification.json",
   "runtime_evidence": "data/go/json/standard.json",
