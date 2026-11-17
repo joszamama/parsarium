@@ -284,6 +284,11 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
         "command": command, "environment": overrides, "cwd": str(run_dir),
         "seed": args.seed, "requested_count": args.count,
     }
+    managed_setup = MANAGED_VENV / "setup.json"
+    if executable == MANAGED_EXE.resolve() and managed_setup.is_file():
+        receipt["fandango"]["managed_setup_sha256"] = digest(managed_setup)
+        receipt["fandango"]["installed_packages"] = json.loads(
+            managed_setup.read_text())["installed_packages"]
     if "SSL_CERT_FILE" in overrides:
         receipt["ssl_cert_file_sha256"] = digest(Path(overrides["SSL_CERT_FILE"]))
     started = time.monotonic()
