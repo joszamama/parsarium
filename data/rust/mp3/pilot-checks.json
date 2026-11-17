@@ -164,6 +164,55 @@
       "command": "python3 -m unittest discover -s tests",
       "pass": true,
       "result": "173 tests OK (adds tests/test_rust_mp3_symphonia_pilot.py: wrapper flag stripping, generated overlay files, scope and exact-repeat receipt, smoke rows)"
+    },
+    {
+      "lead": "mp3-duration",
+      "command": "python3 parsarium.py build mp3 rust mp3_duration",
+      "pass": true,
+      "image_id": "sha256:f7b020a79cd8dd074fd82bf8ae02115aaea465394f59ec4d30e9ec13e88a69d4",
+      "output": {
+        "duration_ns": 287346928
+      },
+      "parser_source_lines_covered": 122,
+      "receipt_sha256": "7310e2f3208e2d53a5b52bf5603f12ec9742e9642df381c9f1552c61353861ac"
+    },
+    {
+      "lead": "mp3-duration",
+      "command": "python3 parsarium.py run mp3 rust mp3_duration controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "lead": "mp3-duration",
+      "command": "python3 parsarium.py run mp3 rust mp3_duration controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "lead": "mp3-duration",
+      "command": "python3 parsarium.py afl build mp3 rust mp3_duration",
+      "pass": true,
+      "image_id": "sha256:1a3c477dd748ba6a0d9d0a08af2c418cdf876fa5abdfbf6d942e077ea819ac25",
+      "instrumented_crates": [
+        "mp3_duration",
+        "parsarium_mp3_mp3_duration_harness"
+      ],
+      "binary_guards": 829,
+      "feedback_edges": 77,
+      "variant_feedback_edges": 77,
+      "edges_only_in_control": 1,
+      "edges_only_in_variant": 1,
+      "all_repeats_identical": true,
+      "header_walk_oracle_match": true,
+      "receipt_sha256": "2631baf3baba144d56ba6c969e1cbdf1f387a4682228ba74b7447399fc2aaf4b"
+    },
+    {
+      "lead": "mp3-duration",
+      "command": "python3 parsarium.py afl prepare mp3 rust mp3_duration runs/mp3-mp3_duration-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-mp3_duration-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started (AFL_MAP_SIZE=834)"
     }
   ],
   "not_run": [
@@ -171,5 +220,6 @@
     "malformed-input or vulnerability experiments",
     "aggregate catalog/website regeneration (build_readmes, audit_projects --write, smoke reports)"
   ],
-  "symphonia_checked_at_utc": "2026-11-17T12:54:52.237279+00:00"
+  "symphonia_checked_at_utc": "2026-11-17T12:54:52.237279+00:00",
+  "mp3_duration_checked_at_utc": "2026-11-17T15:06:51.084569+00:00"
 }

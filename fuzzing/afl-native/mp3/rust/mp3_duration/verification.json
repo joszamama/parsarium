@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "project": "mp3/rust/mp3_duration",
+  "pass": true,
+  "base_project_receipt_sha256": "7310e2f3208e2d53a5b52bf5603f12ec9742e9642df381c9f1552c61353861ac",
+  "overlay_file_sha256": {
+    "Cargo.toml": "30fbd625c7ce1f772942774c7f0391dd0c5bbdbb753486b9996ff752e35352ed",
+    "Cargo.lock": "e0ccd0387469fe379eb827359270c15c16b80b4d291a65dccb0334a1439b1672",
+    "afl_fuzzer.rs": "3e9b19d32469bc7cd19c4ccd6a65c3502e712619ced3ba0ccea56fd5b4fbcc3a",
+    "Dockerfile": "bb1f0e932104b451f409270cf367631e9062cb2a6d07560fe08ba9945f2afa3e",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "build.py": "ba98c720ede25761086a3d89e84dfa9d844b4447e0197fadcdc424c1b1e1ff26"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "348bdc7300502f0801e5b57c448815713cd843b744ef9bda252a2698fdf90a0f",
+  "image_id": "sha256:1a3c477dd748ba6a0d9d0a08af2c418cdf876fa5abdfbf6d942e077ea819ac25",
+  "platform": "linux/arm64",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "feedback_edges": 77,
+  "afl_map_size": 834,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "SanitizerCoverage only in the mp3-duration 0.1.10 crate and the harness crate that monomorphizes its generic from_read over Cursor<&[u8]>; serde_json, thiserror, afl and the afl_fuzzer entry point are built without coverage",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "mp3_duration",
+      "parsarium_mp3_mp3_duration_harness"
+    ],
+    "rlib_guard_bytes": {
+      "mp3_duration": 1528,
+      "parsarium_mp3_mp3_duration_harness": 1788
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "thiserror",
+      "xdg"
+    ],
+    "binary_guards": 829
+  },
+  "rustc_wrapper_log": [
+    "instrumented mp3_duration",
+    "instrumented parsarium_mp3_mp3_duration_harness",
+    "uninstrumented afl",
+    "uninstrumented afl_fuzzer",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented home",
+    "uninstrumented itoa",
+    "uninstrumented libc",
+    "uninstrumented memchr",
+    "uninstrumented proc_macro2",
+    "uninstrumented quote",
+    "uninstrumented rustc_version",
+    "uninstrumented ryu",
+    "uninstrumented semver",
+    "uninstrumented serde_core",
+    "uninstrumented serde_json",
+    "uninstrumented syn",
+    "uninstrumented thiserror",
+    "uninstrumented thiserror_impl",
+    "uninstrumented unicode_ident",
+    "uninstrumented xdg"
+  ],
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:f7b020a79cd8dd074fd82bf8ae02115aaea465394f59ec4d30e9ec13e88a69d4",
+  "variant_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "control_output": {
+    "duration_ns": 287346928
+  },
+  "variant_output": {
+    "duration_ns": 313469376
+  },
+  "header_walk_oracle": {
+    "script": "controls/mp3/check_controls.py",
+    "control": {
+      "duration_ns": 287346928
+    },
+    "variant": {
+      "duration_ns": 313469376
+    }
+  },
+  "repeats": 5,
+  "repeat_rule": "each repeat is a separate docker run of afl-showmap; map files (tuple:bucket) must be byte-identical",
+  "variant_feedback_edges": 77,
+  "control_map_sha256": "928422ca721b3c22acdac1d2ab546ece6f47eadcaf3d04e0b5f6efa9abb3e9a5",
+  "variant_map_sha256": "2f806059a85541f847d0060ee2f55a56f0cfba560876dd1e2a433c1d4003ff41",
+  "edges_only_in_control": 1,
+  "edges_only_in_variant": 1,
+  "own_source_differential": {
+    "prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mp3-duration-0.1.10/",
+    "control_lines": {
+      "src/context.rs": 36,
+      "src/error.rs": 4,
+      "src/lib.rs": 82
+    },
+    "variant_lines": {
+      "src/context.rs": 36,
+      "src/error.rs": 4,
+      "src/lib.rs": 82
+    },
+    "files_with_different_line_counts": [],
+    "line_set_rule": "lcov DA lines with a nonzero count under the prefix",
+    "lines_only_in_control": {
+      "src/lib.rs": [
+        115,
+        135
+      ]
+    },
+    "lines_only_in_variant": {
+      "src/lib.rs": [
+        114,
+        133
+      ]
+    }
+  },
+  "mutation_campaign_run": false,
+  "control_stability": {
+    "repeat_map_sha256": [
+      "928422ca721b3c22acdac1d2ab546ece6f47eadcaf3d04e0b5f6efa9abb3e9a5",
+      "928422ca721b3c22acdac1d2ab546ece6f47eadcaf3d04e0b5f6efa9abb3e9a5",
+      "928422ca721b3c22acdac1d2ab546ece6f47eadcaf3d04e0b5f6efa9abb3e9a5",
+      "928422ca721b3c22acdac1d2ab546ece6f47eadcaf3d04e0b5f6efa9abb3e9a5",
+      "928422ca721b3c22acdac1d2ab546ece6f47eadcaf3d04e0b5f6efa9abb3e9a5"
+    ],
+    "repeat_tuple_counts": [
+      77,
+      77,
+      77,
+      77,
+      77
+    ],
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_map_sha256": [
+      "2f806059a85541f847d0060ee2f55a56f0cfba560876dd1e2a433c1d4003ff41",
+      "2f806059a85541f847d0060ee2f55a56f0cfba560876dd1e2a433c1d4003ff41",
+      "2f806059a85541f847d0060ee2f55a56f0cfba560876dd1e2a433c1d4003ff41",
+      "2f806059a85541f847d0060ee2f55a56f0cfba560876dd1e2a433c1d4003ff41",
+      "2f806059a85541f847d0060ee2f55a56f0cfba560876dd1e2a433c1d4003ff41"
+    ],
+    "repeat_tuple_counts": [
+      77,
+      77,
+      77,
+      77,
+      77
+    ],
+    "all_repeats_identical": true
+  }
+}

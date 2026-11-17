@@ -101,5 +101,34 @@
       "source": "data/rust/mp3/registry-snapshot.json"
     },
     "project": "projects/mp3/rust/minimp3"
+  },
+  {
+    "name": "mp3-duration",
+    "project": "projects/mp3/rust/mp3_duration",
+    "version": "0.1.10",
+    "license": "MIT",
+    "license_evidence": "Cargo.toml license = \"MIT\" and LICENSE in mp3-duration-0.1.10.crate (sha256 348bdc7300502f0801e5b57c448815713cd843b744ef9bda252a2698fdf90a0f, Cargo.lock checksum)",
+    "source_sha256": "348bdc7300502f0801e5b57c448815713cd843b744ef9bda252a2698fdf90a0f",
+    "input_api": "mp3_duration::from_read(&mut std::io::Cursor<&[u8]>) -> Result<std::time::Duration, MP3DurationError>",
+    "documentation": "https://docs.rs/mp3-duration/0.1.10/mp3_duration/fn.from_read.html",
+    "source": "https://github.com/agersant/mp3-duration/tree/04d8af89b87626750314028fe6e4953bf9ab9ac7",
+    "scope": "Frame-derived playback duration of an untagged MPEG Layer III stream: from_read reads every frame header (version, layer, bitrate, sample rate, padding, channel mode), checks the side-information offset for a Xing/Info frame count, and sums per-frame durations to EOF. No frame count, audio decode or tag metadata is exposed",
+    "family": "mp3-duration Rust MPEG frame-header scanner",
+    "family_note": "Own src/lib.rs header walker with its own bitrate, sample-rate, samples-per-frame and side-information tables; its only dependency is thiserror. No decoder, so independent of the Symphonia and minimp3 families. Not the npm mp3-duration package (separate JavaScript code by another author).",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "duration_ns": 287346928
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "duration_ns": 313469376
+    },
+    "evidence": "projects/mp3/rust/mp3_duration/verification.json",
+    "verification_note": "Both untagged valid controls return 287,346,928 ns and 313,469,376 ns, equal to the independent header walk in controls/mp3/check_controls.py: 11 MPEG-1 frames x floor(1152e9/44100) ns and 12 MPEG-2 frames x floor(576e9/22050) ns. The API exposes no frame count, so the frame count is checked only through that product. Docker LLVM coverage: 122 own crate lines on the first control. AFL++ SanitizerCoverage is scoped to mp3_duration and the harness crate, where the generic from_read::<Cursor<&[u8]>> is monomorphized: 77 vs 77 tuples, 1 unique to each control, byte-identical maps over 5 separate processes per control. Covered line sets differ by two src/lib.rs lines each way (MPEG-1 vs MPEG-2 version arm, mono vs joint-stereo mode arm). The feedback differential is real but small, because the per-frame work is table-driven. Two short CBR controls do not establish VBR, Xing/Info, free-format or other layer support; no malformed, resource-use or campaign tests were run.",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 149042,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    }
   }
 ]

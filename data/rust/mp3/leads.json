@@ -24,9 +24,10 @@
       "name": "mp3-duration",
       "version": "0.1.10",
       "recent_downloads_90d": 149042,
-      "status": "unresolved",
-      "reason": "Frame-header scanner returning duration from a Read; the untagged-control duration has not been run in this pilot.",
-      "source": "https://crates.io/crates/mp3-duration"
+      "status": "selected",
+      "reason": "Pinned from_read(&mut Cursor<&[u8]>) frame-header scanner. Both untagged CBR controls give 287,346,928 and 313,469,376 ns, equal to the independent header walk (frames x per-frame ns); the API exposes no frame count. Own header-walker family; 122 own source lines; scoped AFL++ maps byte-identical over 5 processes, 1 tuple unique to each control. Recorded in parsers.json and projects/mp3/rust/mp3_duration.",
+      "source": "https://crates.io/crates/mp3-duration",
+      "license": "MIT"
     },
     {
       "name": "rusty_mp3",
