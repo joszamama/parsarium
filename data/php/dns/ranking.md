@@ -1,6 +1,6 @@
 # PHP × DNS: selected parsers (pilot)
 
-One verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Two verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -9,19 +9,21 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 | Rank | Package | Release | Metric | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [react/dns](https://github.com/reactphp/dns/blob/v1.14.0/src/Protocol/Parser.php#L16-L35) | v1.14.0 | 179,404,103 | ReactPHP DNS protocol Parser (src/Protocol/Parser.php) |
+| 2 | [pear/net_dns2](https://github.com/mikepultz/netdns2/blob/v2.0.7/src/NetDNS2/Packet/Response.php) | v2.0.7 | 3,392,919 | Net_DNS2 / NetDNS2 (Packet, Header, Question and per-type RR rrSet decoders) |
 
 **react/dns v1.14.0** (MIT) parses local bytes with `React\Dns\Protocol\Parser::parseMessage(string $data): Message`. Both controls match the oracle summary. The response control covers 108 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 108/49 parser features and 128/69 AFL++ tuples, differing by 59 features and 59 tuples ([receipt](react-dns-feedback-differential.json)). Own pure-PHP decoder (unpack, readDomain with pointer following, inet_ntop for addresses). It drops the Z, AD and CD bits, so z is reported as 0.
+
+**pear/net_dns2 v2.0.7** (MIT) parses local bytes with `NetDNS2\Packet\Response::__construct(string $_data, int $_size)`. Both controls match the oracle summary. The response control covers 192 library lines in 19 files. AFL++ feedback repeats 3 times per control; response and query give 192/92 parser features and 212/112 AFL++ tuples, differing by 100 features and 100 tuples ([receipt](pear-net-dns2-feedback-differential.json)). Own pure-PHP decoder. pear/net_dns2 2.x is the namespaced NetDNS2 code from the mikepultz/netdns2 repository, so mikepultz/netdns2 on Packagist shares this family. Keeps Z, AD and CD.
 
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | pear/net_dns2 | 3,392,919 | `new Net_DNS2_Packet_Response($data, strlen($data))` | Net_DNS2 |
-| 2 | purplepixie/phpdns | 1,540,214 |  | PHPDNS |
-| 3 | mikepultz/netdns2 | 632,286 | `NetDNS2\Packet\Response` | Net_DNS2 |
-| 4 | jdwx/dns-query | 6,451 |  |  |
-| 5 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
-| 6 | appserver-io/dnsserver | 2,280 |  |  |
+| 1 | purplepixie/phpdns | 1,540,214 |  | PHPDNS |
+| 2 | mikepultz/netdns2 | 632,286 | `NetDNS2\Packet\Response` | Net_DNS2 |
+| 3 | jdwx/dns-query | 6,451 |  |  |
+| 4 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
+| 5 | appserver-io/dnsserver | 2,280 |  |  |
 
 ## Checked, excluded or recorded separately
 

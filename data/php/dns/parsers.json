@@ -103,5 +103,110 @@
     },
     "rank": 1,
     "afl_feedback": "data/php/dns/react-dns-feedback-differential.json"
+  },
+  {
+    "name": "pear/net_dns2",
+    "version": "v2.0.7",
+    "license": "MIT",
+    "license_evidence": "composer.json \"license\": \"MIT\" and LICENSE in the tagged source archive (sha256 e326438d...), checked in the image",
+    "composer_lock": "projects/dns/php/pear_net_dns2/composer.lock",
+    "input_api": "NetDNS2\\Packet\\Response::__construct(string $_data, int $_size)",
+    "documentation": "https://github.com/mikepultz/netdns2/blob/v2.0.7/src/NetDNS2/Packet/Response.php",
+    "documentation_note": "Project docs (netdns2.com) describe the resolver; Packet\\Response's public constructor 'builds a new \\NetDNS2\\Packet\\Response object' from a binary packet in the tagged source, and RR::__get documents field access.",
+    "source": "https://github.com/mikepultz/netdns2/releases/tag/v2.0.7",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "Net_DNS2 / NetDNS2 (Packet, Header, Question and per-type RR rrSet decoders)",
+    "family_note": "Own pure-PHP decoder. pear/net_dns2 2.x is the namespaced NetDNS2 code from the mikepultz/netdns2 repository, so mikepultz/netdns2 on Packagist shares this family. Keeps Z, AD and CD.",
+    "project": "projects/dns/php/pear_net_dns2",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "Packagist total downloads",
+      "value": 3392919,
+      "source": "https://packagist.org/packages/pear/net_dns2.json",
+      "captured_at_utc": "2026-11-17T16:37:38.395659+00:00",
+      "snapshot": "data/php/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/php/dns/pear-net-dns2-feedback-differential.json"
   }
 ]
