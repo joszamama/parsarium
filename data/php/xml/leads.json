@@ -1,11 +1,11 @@
 [
   {
     "name": "symfony/dom-crawler",
-    "status": "excluded",
-    "version_seen": "v8.2.0-BETA1",
+    "status": "selected",
+    "version_seen": "v8.1.10",
     "license": "MIT",
     "packagist_downloads": 443886072,
-    "reason": "Crawler::addXmlContent(string) hands the bytes to DOMDocument::loadXML and then only navigates/filters the already parsed DOM; no format-specific parse result of its own.",
+    "reason": "Package API (reassessed): Crawler::addXmlContent(string) loads the text with DOMDocument::loadXML (LIBXML_NONET forced) and the XML-mode Crawler exposes children()/nodeName()/attr()/text() traversal and filterXPath() with its own namespace discovery. Parser family libxml2 via DOMDocument, shared with the standard path and sabre/xml; package-own scope is navigation and XPath/namespace mapping, not tokenizing. v8.1.10 is the newest stable release (v8.2.0-BETA1 not used). Both shared controls match the expat oracle; AFL++ package-line feedback differs by one line. Downloads are mostly HTML crawling uses. Verified: projects/xml/php/symfony_dom_crawler.",
     "source": "https://packagist.org/packages/symfony/dom-crawler"
   },
   {

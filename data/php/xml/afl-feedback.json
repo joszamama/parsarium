@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:51:57.175411+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T09:50:24.282272+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -40,6 +40,30 @@
       "control_only_edges": 130,
       "differential_only_edges": 321,
       "afl_tuple_difference": 451
+    },
+    {
+      "project": "xml/php/symfony_dom_crawler",
+      "pass": true,
+      "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "c872107dff1e135cb8bf9d2c6e58d5204bd7646b4bf082803e417353d23fbb41",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "control_afl_tuples": 135,
+      "differential_afl_tuples": 136,
+      "stable_shared_edges": 135,
+      "control_only_edges": 0,
+      "differential_only_edges": 1,
+      "afl_tuple_difference": 1,
+      "control_parser_features": 115,
+      "differential_parser_features": 116,
+      "control_only_parser_features": [],
+      "differential_only_parser_features": [
+        "Crawler.php:1156"
+      ]
     }
   ]
 }

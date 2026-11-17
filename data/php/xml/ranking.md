@@ -1,6 +1,6 @@
 # PHP × XML: selected parsers (pilot)
 
-1 control-verified third-party path selected. The ceiling is ten. PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so libxml2-family wrappers are not excluded for that reason alone. Lower-ranked wrappers were not evaluated by the cutoff and stay unresolved.
+2 control-verified third-party paths selected. The ceiling is ten. PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so libxml2-family wrappers are not excluded for that reason alone. Lower-ranked wrappers were not evaluated by the cutoff and stay unresolved.
 
 ## Primary within-cell adoption metric
 
@@ -8,7 +8,8 @@ Packagist total downloads, from the bounded search captured 2026-11-17 ([snapsho
 
 | Rank | Package | Version | Downloads | Parser family |
 | ---: | --- | --- | ---: | --- |
-| 1 | [sabre/xml](https://packagist.org/packages/sabre/xml) | 4.1.0 | 39,858,833 | libxml2 via XMLReader (shared with the standard path) |
+| 1 | [symfony/dom-crawler](https://packagist.org/packages/symfony/dom-crawler) | v8.1.10 | 443,886,072 | libxml2 via DOMDocument (shared with the standard path and sabre/xml); downloads are mostly HTML uses |
+| 2 | [sabre/xml](https://packagist.org/packages/sabre/xml) | 4.1.0 | 39,858,833 | libxml2 via XMLReader (shared with the standard path) |
 
 ## Standard API (unranked)
 
@@ -24,7 +25,7 @@ Numeric leads from the same snapshot. Unresolved rows were not evaluated by the 
 
 | Lead | Version seen | Downloads | Status |
 | --- | --- | ---: | --- |
-| [symfony/dom-crawler](https://packagist.org/packages/symfony/dom-crawler) | v8.2.0-BETA1 | 443,886,072 | excluded: Crawler::addXmlContent(string) hands the bytes to DOMDocument::loadXML and then only navigates/filters the already parsed DOM; no format-specific parse result of its own. |
+| [symfony/dom-crawler](https://packagist.org/packages/symfony/dom-crawler) | v8.1.10 | 443,886,072 | selected: Package API (reassessed): Crawler::addXmlContent(string) loads the text with DOMDocument::loadXML (LIBXML_NONET forced) and the XML-mode Crawler exposes children()/nodeName()/attr()/text() traversal and filterXPath() with its own namespace discovery. Parser family libxml2 via DOMDocument, shared with the standard path and sabre/xml; package-own scope is navigation and XPath/namespace mapping, not tokenizing. v8.1.10 is the newest stable release (v8.2.0-BETA1 not used). Both shared controls match the expat oracle; AFL++ package-line feedback differs by one line. Downloads are mostly HTML crawling uses. Verified: projects/xml/php/symfony_dom_crawler. |
 | [jms/serializer](https://packagist.org/packages/jms/serializer) | 3.32.9 | 153,868,960 | excluded: deserialize($xml, $type, 'xml') loads SimpleXMLElement and then maps the already parsed tree onto typed objects through class metadata; it needs a target class model rather than producing a generic XML parse result. |
 | [sabre/xml](https://packagist.org/packages/sabre/xml) | 4.1.0 | 39,858,833 | selected: Package API: Sabre\Xml\Reader::XML(string) + parse() (Service::parse also takes a string or stream) builds its own Clark-notation element tree with attributes and leaf text. Parser family libxml2 via XMLReader, shared with the standard path. Verified: projects/xml/php/sabre_xml. |
 | [veewee/xml](https://packagist.org/packages/veewee/xml) | 4.14.0 | 8,963,799 | unresolved: libxml2-family wrapper (Functional wrappers over Dom\XMLDocument, DOMDocument::loadXML and XMLReader::fromString). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff. |

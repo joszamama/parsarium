@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "php",
+  "package": "symfony/dom-crawler",
+  "release": "v8.1.10",
+  "catalog_parser": "data/php/xml/parsers.json",
+  "source_lock": "projects/xml/php/symfony_dom_crawler/source-lock.json",
+  "source_sha256": "7c538ae1812c8f479866e3b74431aa23c6ee75e3402334ceb875180e3a82e55b",
+  "underlying_release": "libxml2 2.15.2 via Ubuntu PHP 8.5.4 ext/dom DOMDocument::loadXML (php8.5-xml)",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "native_campaign_supported": false,
+  "coverage_limit": "Xdebug and the AFL++ bridge see only symfony/dom-crawler PHP lines (Crawler navigation, XPath relativizing and namespace discovery); XML tokenizing happens in libxml2 through DOMDocument::loadXML and is not instrumented here. On the two shared controls the package line sets differ by one line (Crawler::findNamespacePrefixes no-prefix return).",
+  "fuzz_smoke_entrypoint": "php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "xpath": {
+      "//c:catalog": 1,
+      "//ns1:item": 2,
+      "//ns1:name": 1,
+      "//ns1:note": 1
+    }
+  },
+  "harness": "harness.php",
+  "coverage": "Xdebug executed line coverage in symfony/dom-crawler v8.1.10 PHP source during valid namespace-aware XML replay; AFL++ feedback maps those package source lines into the bitmap through the PHP bridge",
+  "coverage_subject_prefix": "/work/vendor/symfony/dom-crawler/"
+}
