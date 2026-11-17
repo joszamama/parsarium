@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "python",
+  "package": "PyQt6",
+  "release": "6.12.0",
+  "catalog_parser": "data/python/svg/parsers.json",
+  "source_lock": "adapters/python/svg/requirements.lock",
+  "source_sha256": "2799f2e75594af313222a2dc2da9f965fe88be29ee4293d7937e7763630f5610",
+  "underlying_release": "QtSvg 6.12.0",
+  "underlying_source_sha256": "e4ab39534ec97987b1b9b60ef7f4d3253d5912a69f8c713a01753174a4029331",
+  "qtbase_release": "6.12.0",
+  "qtbase_source_sha256": "a951bd163c7b80fc6b8c88d7668fb56abf91c152373e13c10666763238131307",
+  "build_note": "The pinned PyQt6 6.12.0 and PyQt6-Qt6 6.12.0 linux/aarch64 wheels are installed unchanged except for one file: the wheel's prebuilt libQt6Svg.so.6 is replaced by the same QtSvg 6.12.0 release built from its pinned source tarball with clang LLVM source coverage (against a plain qtbase 6.12.0 build used only for headers and CMake packages). PyQt6's QtSvg binding and the wheel's QtCore/QtGui libraries load it by soname. QT_HASH_SEED=0 fixes Qt's per-process hash seed.",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "size": [
+      2,
+      1
+    ],
+    "red": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "green": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "api": "PyQt6.QtSvg.QSvgRenderer(QByteArray(local SVG bytes)); isValid(), defaultSize(), render(QPainter) into a QImage and pixelColor()",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source coverage in source-built QtSvg 6.12.0 (src/svg) reached through PyQt6's QSvgRenderer binding",
+  "coverage_subject_prefix": "/work/source/src/svg/",
+  "format_specific_coverage_file_suffix": "/qsvghandler.cpp",
+  "afl_coverage_subject_prefix": "/work/source/src/svg/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.14/site-packages/PyQt6/Qt6/lib/libQt6Svg.so.6",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "native_campaign_supported": false,
+  "dependencies": [
+    {
+      "package": "pyqt6-qt6",
+      "release": "6.12.0",
+      "sha256": "2460119ac5f725cfddc331bd56eca22fbb61b29a549d417b7bcc304c7fc9459b"
+    },
+    {
+      "package": "pyqt6-sip",
+      "release": "13.13.1",
+      "sha256": "4a751c542ffb7afcc945eb824fc3fa3c3dae002c91fe5c1da86a5a567c6271b9"
+    }
+  ]
+}

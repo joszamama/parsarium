@@ -4,7 +4,7 @@
   "status": "curated_below_ten_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 8,
+  "verified_third_party_count": 9,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'svg'",
@@ -28,7 +28,7 @@
   "search_hits_recorded": 710,
   "unique_search_hits": 676,
   "unresolved_documentation_leads": 4,
-  "uncertainty": "Post-selection parser-feedback gate: 8 selected paths have a verified container control and parser-derived AFL++ feedback. 2 higher-adoption control-verified candidates remain excluded without backfilling lower-ranked leads; their positive metrics and exact blockers are in data/curation/plan.json and data/curation/feedback-exclusions.json. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/python/svg/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
+  "uncertainty": "Post-selection parser-feedback gate: 9 selected paths have a verified container control and parser-derived AFL++ feedback. 1 higher-adoption control-verified candidate remains excluded without backfilling lower-ranked leads; its positive metric and exact blocker are in data/curation/plan.json and data/curation/feedback-exclusions.json. PyQt6 and PySide6 reach the same QtSvg 6.12.0 parser family: each pinned wheel stack runs unchanged except libQt6Svg.so.6, replaced by QtSvg 6.12.0 built from source with LLVM coverage, so their coverage and AFL++ features come from one shared native parser and differ only in the binding. Unresolved leads (pynanosvg, puresvg, pysvg, pysvg-py3) are far below the tenth-ranked metric and could not enter the ten-path selection. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/python/svg/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/python/svg/parsers.json",
   "third_party_control_results": "data/python/svg/verification.json",
   "runtime_evidence": "data/python/svg/standard.json",
