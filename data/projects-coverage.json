@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 137,
-    "containerized_verified": 137,
+    "catalog_paths": 138,
+    "containerized_verified": 138,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 11,
@@ -1312,8 +1312,8 @@
       {
         "format": "xml",
         "ecosystem": "javascript",
-        "catalog_paths": 9,
-        "containerized_verified": 9,
+        "catalog_paths": 10,
+        "containerized_verified": 10,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1321,9 +1321,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_nine_selected_search_bounded",
+        "status": "pilot_ten_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell with nine verified third-party paths: saxes 6.0.0, jsdom 31.0.1, sax 1.6.1, fast-xml-parser 5.12.1, @xmldom/xmldom 0.9.12, xml2js 0.6.2, xml-js 1.6.11, htmlparser2 12.0.0 xmlMode, and xmldoc 3.0.0 are control-verified, source-covered, and have input-dependent AFL++ feedback. Comparable 30-day npm downloads rank the nine package paths; counts include transitive adoption. The nine paths cover five independent parser families: jsdom shares saxes and xml2js shares sax. saxes and sax share historical fork lineage but have distinct parser code. fast-xml-parser has its own scanner and validator but no namespace URI resolution, so the adapter resolves expanded names over its qualified names and xmlns attributes. @xmldom/xmldom has its own XMLReader tokenizer and DOM builder, accepts locally decoded text, and the adapter treats every warning or error as fatal. jsdom builds its XML DOM over the same pinned saxes 6.0.0 tokenizer as the selected saxes path; it copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules, and its AFL++ feedback includes input-independent window setup alongside saxes and DOM construction. xml2js, xml-js and xmldoc build distinct trees over the same pinned sax 1.6.1 tokenizer as the selected sax path; it drops comments and processing instructions, which can merge adjacent text segments. Wrapper package and underlying tokenizer source coverage are recorded separately. xmlbuilder2 4.0.3 is excluded from this namespace-aware selection: its native DOM misassigns the c:catalog and c:lang namespace URIs on the valid catalog control; the adapter does not repair them. htmlparser2 xmlMode has its own forgiving tokenizer but no XML well-formedness or namespace-URI enforcement; it is selected only as a raw-name XML event path, and its 526,964,241 downloads mostly measure HTML use. xmldoc builds a raw-name tree over sax; it omits prolog comments and PIs. Both are compared only to a non-namespace Expat oracle projected to preserved fields, without adapter-side namespace repair. The search is bounded to recorded queries and snapshot; two valid controls do not establish complete XML 1.0 compliance."
+        "uncertainty": "Pilot cell with ten verified third-party paths: saxes 6.0.0, jsdom 31.0.1, sax 1.6.1, fast-xml-parser 5.12.1, @xmldom/xmldom 0.9.12, xml2js 0.6.2, xml-js 1.6.11, htmlparser2 12.0.0 xmlMode, xmldoc 3.0.0, and @xml-tools/parser 1.0.12 are control-verified, source-covered, and have input-dependent AFL++ feedback. Comparable 30-day npm downloads rank the ten package paths; counts include transitive adoption. The ten paths cover six independent parser families: jsdom shares saxes and xml2js shares sax. saxes and sax share historical fork lineage but have distinct parser code. fast-xml-parser has its own scanner and validator but no namespace URI resolution, so the adapter resolves expanded names over its qualified names and xmlns attributes. @xmldom/xmldom has its own XMLReader tokenizer and DOM builder, accepts locally decoded text, and the adapter treats every warning or error as fatal. jsdom builds its XML DOM over the same pinned saxes 6.0.0 tokenizer as the selected saxes path; it copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules, and its AFL++ feedback includes input-independent window setup alongside saxes and DOM construction. xml2js, xml-js and xmldoc build distinct trees over the same pinned sax 1.6.1 tokenizer as the selected sax path; it drops comments and processing instructions, which can merge adjacent text segments. Wrapper package and underlying tokenizer source coverage are recorded separately. xmlbuilder2 4.0.3 is excluded from this namespace-aware selection: its native DOM misassigns the c:catalog and c:lang namespace URIs on the valid catalog control; the adapter does not repair them. htmlparser2 xmlMode has its own forgiving tokenizer but no XML well-formedness or namespace-URI enforcement; it is selected only as a raw-name XML event path, and its 526,964,241 downloads mostly measure HTML use. xmldoc builds a raw-name tree over sax; it omits prolog comments and PIs. Both are compared only to a non-namespace Expat oracle projected to preserved fields, without adapter-side namespace repair. @xml-tools/parser returns a raw-QName Chevrotain CST without namespace URI expansion or decoded entity text; the Expat raw-name hierarchy matches both controls, and parser ALT callback hit-count feedback changes on 11 ranges while ordinary covered-line sets do not. The search is bounded to recorded queries and snapshot; two valid controls do not establish complete XML 1.0 compliance."
       },
       {
         "format": "xml",

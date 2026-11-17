@@ -1,9 +1,87 @@
-# @xml-tools/parser — JavaScript XML CST
+# @xml-tools/parser — XML / JavaScript
 
-- **Release:** `@xml-tools/parser` 1.0.12, Apache-2.0; [pinned npm tarball](https://registry.npmjs.org/@xml-tools/parser/-/parser-1.0.12.tgz) and [source lock](../../../../projects/xml/javascript/xml_tools_parser/source-lock.json)
-- **Adoption:** 7,478,313 npm downloads in the saved 30-day JavaScript XML window; this measures package downloads, including transitive use
-- **Local API:** [`parse(text)`](https://unpkg.com/@xml-tools/parser@1.0.12/README.md) after strict UTF-8 decoding of local bytes
-- **Parser family:** XML grammar and lexer from this package over the Chevrotain 7.1.1 CST engine. It is distinct from the selected sax-js, saxes, and xmldom XML grammars.
-- **Runnable target:** [Docker harness, both control outputs, coverage, and AFL++ feedback](../../../../projects/xml/javascript/xml_tools_parser/README.md)
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The observed result is a nested XML concrete syntax tree with raw element QNames, ordered attribute QNames and raw quoted values. `c:catalog`, `p:amount`, and the `xmlns` attributes remain token images; `&quot;` is not decoded. Both valid controls have no lexer or parser errors, and their raw name hierarchy matches independent Expat parsing without namespace expansion. This is a **raw XML grammar path**, not a claim of resolved namespace URIs or decoded text. The package's own README describes fault-tolerant error recovery, so partial CST behavior outside these valid controls remains untested.
+- **Pinned release:** `1.0.12`
+- **License:** Apache-2.0
+- **Parser family:** @xml-tools/parser XML lexer and grammar over Chevrotain 7.1.1 CST engine
+- **Local input API:** `parse(text) on strictly UTF-8 decoded local bytes; returns Chevrotain XML CST, token vector, lexErrors and parseErrors`
+- **Documentation:** [API reference](<https://unpkg.com/@xml-tools/parser@1.0.12/README.md>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/javascript/xml/parsers.json) · [control result](../../../../data/javascript/xml/verification.json)
+
+## Observed control result
+
+```json
+{
+  "tree": {
+    "qname": "c:catalog",
+    "attributes": [
+      {
+        "qname": "xmlns:c",
+        "raw_value": "\"urn:parsarium:catalog\""
+      },
+      {
+        "qname": "xmlns",
+        "raw_value": "\"urn:parsarium:item\""
+      },
+      {
+        "qname": "version",
+        "raw_value": "\"1\""
+      }
+    ],
+    "children": [
+      {
+        "qname": "item",
+        "attributes": [
+          {
+            "qname": "id",
+            "raw_value": "\"a1\""
+          },
+          {
+            "qname": "c:lang",
+            "raw_value": "\"es\""
+          }
+        ],
+        "children": []
+      },
+      {
+        "qname": "item",
+        "attributes": [
+          {
+            "qname": "id",
+            "raw_value": "\"b2\""
+          }
+        ],
+        "children": [
+          {
+            "qname": "name",
+            "attributes": [],
+            "children": []
+          },
+          {
+            "qname": "note",
+            "attributes": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "max_depth": 3,
+  "token_count": 70,
+  "lex_errors": 0,
+  "parse_errors": 0
+}
+```
+
+## Verification scope
+
+Docker control and fixed second valid control return exact hierarchical raw-QName CST projections with zero lex/parse errors; Expat without namespace expansion independently confirms name hierarchy. V8 coverage reports 351 package grammar/lexer lines and 5,225 Chevrotain engine lines separately. AFL++ hit-count guidance is confined to package parser.js ALT callbacks; three repeats per control are stable, with 22 feature and 22 tuple differences across 11 changed parser hit counts. Read/decode-only baselines match across both controls and show 17 constructor self-analysis features. No expanded namespace URI, decoded entity text, new branch/line, malformed-input, or campaign claim. Selected as a limited raw-QName XML CST parser; output and feedback are confined to the documented projection.
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml javascript xml_tools_parser
+python3 parsarium.py run xml javascript xml_tools_parser controls/xml/catalog-ns.xml
+```
