@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 96,
-    "containerized_verified": 96,
+    "catalog_paths": 97,
+    "containerized_verified": 97,
     "staged": 0,
     "standard_api_paths": 8,
     "standard_containerized_verified": 7,
@@ -1184,8 +1184,8 @@
       {
         "format": "mp3",
         "ecosystem": "javascript",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1193,9 +1193,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "One verified path; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Its download count covers the whole media toolkit (muxing, conversion, many containers), not MP3 demuxing alone. The path demuxes frames and reads headers but does not decode Layer III audio (that would need WebCodecs). mediabunny is not among the mp3_id3v2/javascript paths; music-metadata and the mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support. No standard Node.js MP3 API exists."
+        "uncertainty": "Two verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. music-metadata ranks above codec-parser and was not built here, so the two selected paths are not the top two by downloads. Neither path decodes Layer III audio. music-metadata and the mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call."
       },
       {
         "format": "mp3",

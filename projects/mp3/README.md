@@ -11,6 +11,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/tosone/minimp3 / Go](go/github_com_tosone_minimp3/README.md)
 - [jcodec / Java](java/jcodec/README.md)
 - [jlayer / Java](java/jlayer/README.md)
+- [codec-parser / JavaScript](javascript/codec_parser/README.md)
 - [mediabunny / JavaScript](javascript/mediabunny/README.md)
 - [james-heinrich/getid3 / PHP](php/getid3/README.md)
 - [wapmorgan/mp3info / PHP](php/wapmorgan_mp3info/README.md)
