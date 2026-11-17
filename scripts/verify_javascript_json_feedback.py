@@ -115,7 +115,7 @@ def main() -> None:
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_nested_array",
-        "standard_feedback": "JSON.parse has staged native function-entry feedback, not JavaScript source ranges",
+        "standard_feedback": "JSON.parse has AFL++ feedback from a source-built node with only V8 json-parser.cc instrumented, not JavaScript source ranges",
         "results": results}, indent=2, ensure_ascii=False) + "\n")
 
 

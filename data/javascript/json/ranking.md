@@ -25,7 +25,7 @@ jsonparse's README documents no API. Its `new Parser()`, `onValue` and `write(ch
 | --- | --- | --- |
 | [JSON.parse(text)](https://tc39.es/ecma262/#sec-json.parse) after strict UTF-8 [TextDecoder](https://nodejs.org/download/release/v26.10.0/docs/api/util.html#class-utiltextdecoder) | Node.js 26.10.0 | V8 native JSON.parse |
 
-`JSON.parse` takes a string, so the adapter decodes bytes first. V8 implements it natively. A staged AFL++ bridge maps observed `JsonParser` function entries into tuples; it does not provide parser source lines or V8 basic-block edges ([bridge receipt](../../../fuzzing/afl-native/json/javascript/stdlib_json_parse/verification.json)).
+`JSON.parse` takes a string, so the adapter decodes bytes first. V8 implements it natively. Its AFL++ target is a Node.js 26.10.0 build from the official source where only V8's `json-parser.cc` is instrumented; it runs the same adapter on one file. Map entries are parser coverage points, not lines, and come from a source build rather than the pinned official binary ([AFL++ receipt](../../../fuzzing/afl-native/json/javascript/stdlib_json_parse/verification.json)).
 
 ## Lead log
 

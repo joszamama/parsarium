@@ -133,8 +133,8 @@ def native_function_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
-def node_json_function_afl_verified(path: Path, manifest: dict) -> bool:
-    """Bind the staged Node JSON AFL bitmap to its pinned function-entry probe."""
+def node_json_native_afl_verified(path: Path, manifest: dict) -> bool:
+    """Bind the Node JSON.parse AFL++ target to a source-built node whose only coverage is V8's JSON parser."""
     project = path.parent.relative_to(ROOT / "projects")
     if str(project) != "json/javascript/stdlib_json_parse":
         return True
@@ -142,52 +142,75 @@ def node_json_function_afl_verified(path: Path, manifest: dict) -> bool:
         return False
     overlay_dir = ROOT / "fuzzing/afl-native" / project
     receipt_path = overlay_dir / "verification.json"
-    if not receipt_path.is_file():
+    smoke_path = overlay_dir / "plan-smoke.json"
+    if not receipt_path.is_file() or not smoke_path.is_file():
         return False
     receipt = json.loads(receipt_path.read_text())
-    files = ("Dockerfile", "afl_trace", "build.py", "README.md")
+    smoke = json.loads(smoke_path.read_text())
+    expected = manifest.get("afl_feedback") or {}
+    files = ("Dockerfile", "afl-cc.sh", "build.py", "README.md")
     file_hashes = {name: sha256((overlay_dir / name).read_bytes()).hexdigest()
                    for name in files if (overlay_dir / name).is_file()}
-    probe_files = ("probe.py", "probe.sh")
-    probe_hashes = {name: sha256((path.parent / "native-feedback-probe" / name).read_bytes()).hexdigest()
-                    for name in probe_files
-                    if (path.parent / "native-feedback-probe" / name).is_file()}
-    bridge = ROOT / "fuzzing/afl-bridge/afl_proxy.c"
-    feedback = receipt.get("native_feedback") or {}
-    counts = feedback.get("bitmap_tuples") or {}
-    maps = feedback.get("bitmap_sha256") or {}
-    base = json.loads((path.parent / "verification.json").read_text())
+    cli_files = ("parsarium.py", "scripts/prepare_afl_run.py", "scripts/run_prepared_afl.py")
+    instrumentation = receipt.get("instrumentation") or {}
+    maps = receipt.get("maps") or {}
+    tuples = maps.get("tuples") or {}
+    hashes = maps.get("sha256") or {}
+    raw = maps.get("raw_sha256") or {}
+    objects = instrumentation.get("instrumented_objects") or []
+    target = [*manifest.get("afl_target", []), "@@"]
+    repeats = ("object-1", "object-2", "object-3", "array-1", "array-2", "array-3")
     return (
         receipt.get("pass") is True
         and receipt.get("project") == str(project)
-        and receipt.get("coverage_kind") == "native_function_entries"
-        and receipt.get("feedback_kind") == "v8_json_parser_function_entries_to_afl_bitmap"
+        and receipt.get("coverage_kind") == "native_parser_afl_edges"
+        and receipt.get("feedback_kind") == expected.get("kind") == "v8_json_parser_sancov_edges"
         and receipt.get("source_lines_covered") is None
-        and receipt.get("afl_requires_ptrace") is True
+        and receipt.get("afl_requires_ptrace") is False
+        and receipt.get("afl_package") == expected.get("afl_package")
+        and receipt.get("afl_target") == target == ["/opt/node/bin/node", "/work/adapter.mjs", "@@"]
         and receipt.get("source_sha256") == manifest["source_sha256"]
         and receipt.get("control_sha256") == manifest["control_sha256"]
+        and receipt.get("differential_control_sha256") == manifest["differential_control_sha256"]
+        and receipt.get("adapter_sha256") == manifest["adapter_sha256"]
+        and receipt.get("limit") == manifest["afl_feedback_limit"]
+        and "not source lines" in manifest["afl_feedback_limit"]
         and receipt.get("base_project_receipt_sha256")
             == sha256((path.parent / "verification.json").read_bytes()).hexdigest()
-        and receipt.get("probe_image_id", "").startswith("sha256:")
-        and receipt.get("probe_file_sha256") == probe_hashes
-        and len(probe_hashes) == len(probe_files)
         and receipt.get("overlay_file_sha256") == file_hashes
         and len(file_hashes) == len(files)
-        and bridge.is_file()
-        and receipt.get("bridge_file_sha256") == {"afl_proxy.c": sha256(bridge.read_bytes()).hexdigest()}
         and receipt.get("image_id", "").startswith("sha256:")
-        and receipt.get("afl_map_size", 0) > 0
-        and receipt.get("feedback_tuples", 0) == counts.get("control1", 0) > counts.get("baseline", 0)
-        and counts.get("control1") == counts.get("control2")
-        and counts.get("variant", 0) > counts.get("baseline", 0)
-        and maps.get("control1") == maps.get("control2")
-        and maps.get("control1") != maps.get("variant")
-        and feedback.get("scope_symbols") == base["native_feedback"]["scope_symbols"]
-        and feedback.get("baseline_functions") == 0
-        and feedback.get("control_functions") == base["native_feedback"]["control_functions"]
-        and feedback.get("variant_functions") == base["native_feedback"]["variant_functions"]
-        and feedback.get("repeat_identical") is True
-        and feedback.get("variant_differs") is True
+        and receipt.get("outputs") == {"nested-object.json": manifest["expected_output"],
+                                       "nested-array.json": manifest["differential_expected_output"]}
+        and len(objects) == 1 and objects[0].endswith("/deps/v8/src/json/json-parser.o")
+        and instrumentation.get("afl_runtime_symbols") == [
+            "__afl_area_ptr", "__sanitizer_cov_trace_pc_guard", "__sanitizer_cov_trace_pc_guard_init"]
+        and 0 < instrumentation.get("node_guard_bytes", 0) <= instrumentation.get("object_guard_bytes", 0)
+        and instrumentation.get("node_sha256") == expected.get("instrumented_node_sha256")
+        and instrumentation.get("source_sha256") == (manifest.get("source_feedback") or {}).get("source_sha256")
+        and f"v8 {manifest['v8']}" in (instrumentation.get("toolchain") or [])
+        and tuples.get("baseline") == 0 and tuples.get("decode-only") == 0
+        and receipt.get("feedback_edges") == tuples.get("object-1", 0) > 0
+        and receipt.get("variant_feedback_edges") == tuples.get("array-1", 0) > 0
+        and all(name in hashes and name in raw for name in repeats)
+        and hashes["object-1"] == hashes["object-2"] == hashes["object-3"]
+        and hashes["array-1"] == hashes["array-2"] == hashes["array-3"]
+        and raw["object-1"] == raw["object-2"] == raw["object-3"]
+        and raw["array-1"] == raw["array-2"] == raw["array-3"]
+        and hashes["object-1"] != hashes["array-1"]
+        and maps.get("object_only_tuples", 0) + maps.get("array_only_tuples", 0) > 0
+        and maps.get("max_tuple_index", float("inf")) <= instrumentation.get("node_guards", 0) + 8
+        and receipt.get("afl_map_size", 0) > instrumentation.get("node_guards", float("inf"))
+        and smoke.get("project") == str(project)
+        and smoke.get("status") == "ready"
+        and smoke.get("campaign_started") is False
+        and smoke.get("afl_target") == target
+        and smoke.get("image_id") == receipt["image_id"]
+        and smoke.get("feedback_kind") == receipt["feedback_kind"]
+        and smoke.get("overlay_receipt_sha256") == sha256(receipt_path.read_bytes()).hexdigest()
+        and smoke.get("check_output", "").startswith(f"Ready: {project} ")
+        and smoke.get("cli_file_sha256") == {
+            name: sha256((ROOT / name).read_bytes()).hexdigest() for name in cli_files}
     )
 
 
@@ -957,7 +980,8 @@ def papers_pdf_feedback_verified(path: Path, manifest: dict, overlay: dict) -> b
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
     if manifest.get("coverage_kind") == "native_function_entries":
-        return False
+        # Runnable only with an AFL++ target whose sole coverage is the native parser object.
+        return "afl_feedback" in manifest and node_json_native_afl_verified(path, manifest)
     if manifest.get("coverage_kind") == "native_source_afl_feedback":
         return standard_feedback_smoke_verified(path, manifest)
     if not receipt_verified(path, manifest):
@@ -1223,8 +1247,8 @@ def main() -> None:
             elif manifest.get("coverage_kind") == "native_function_entries":
                 if not native_function_control_verified(path, manifest):
                     raise ValueError(f"native function control receipt mismatch: {path}")
-                if not node_json_function_afl_verified(path, manifest):
-                    raise ValueError(f"native function AFL bridge receipt mismatch: {path}")
+                if not node_json_native_afl_verified(path, manifest):
+                    raise ValueError(f"V8 JSON parser AFL++ receipt mismatch: {path}")
                 pinned_fields = ("base_image", "source_sha256")
             else:
                 pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")

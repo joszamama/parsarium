@@ -1,9 +1,0 @@
-#!/bin/sh
-# Emit only native v8::internal::JsonParser function-entry names as AFL features.
-set -eu
-if [ "$1" = --baseline ]; then
-    : > "$2"
-    exit 0
-fi
-sh /work/probe.sh "$1" | sed -n 's/^HIT /v8-json:/p' > "$2"
-test -s "$2"

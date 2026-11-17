@@ -1,9 +1,11 @@
 """The Node.js JSON.parse source-coverage route instruments only V8's JSON parser and keeps its receipt honest."""
 
+from hashlib import sha256
 import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -11,6 +13,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "projects/json/javascript/stdlib_json_parse"
 SOURCE = PROJECT / "source-coverage"
+OVERLAY = ROOT / "fuzzing/afl-native/json/javascript/stdlib_json_parse"
 
 
 def read(path: Path) -> object:
@@ -18,15 +21,15 @@ def read(path: Path) -> object:
 
 
 class NodeJsonSourceCoverageTest(unittest.TestCase):
-    def wrapper_args(self, name: str, *args: str) -> list[str]:
-        """Run instrument-cc.sh as `name` with a fake clang that prints its arguments."""
+    def wrapper_args(self, name: str, *args: str, wrapper: Path = SOURCE / "instrument-cc.sh") -> list[str]:
+        """Run a compiler wrapper as `name` with a fake clang that prints its arguments."""
         with tempfile.TemporaryDirectory() as work:
             for real in ("clang-20", "clang++-20"):
                 fake = Path(work) / real
                 fake.write_text('#!/bin/sh\nprintf "%s\\n" "$0" "$@"\n')
                 fake.chmod(0o755)
             link = Path(work) / name
-            link.symlink_to(SOURCE / "instrument-cc.sh")
+            link.symlink_to(wrapper)
             output = subprocess.run([str(link), *args], check=True, capture_output=True, text=True,
                                     env={**os.environ, "PATH": f"{work}:/usr/bin:/bin"}).stdout
         return output.splitlines()
@@ -103,6 +106,93 @@ class NodeJsonSourceCoverageTest(unittest.TestCase):
         self.assertEqual(entry["source_feedback"]["object_lines_covered"], receipt["runs"]["object-1"]["lines_covered"])
         self.assertEqual(entry["source_feedback"]["array_lines_covered"], receipt["runs"]["array-1"]["lines_covered"])
         self.assertIn("source-built", entry["source_feedback"]["runtime"])
+
+
+class NodeJsonParserAflTest(unittest.TestCase):
+    def afl_args(self, name: str, *args: str) -> list[str]:
+        return NodeJsonSourceCoverageTest.wrapper_args(None, name, *args, wrapper=OVERLAY / "afl-cc.sh")
+
+    def test_afl_wrapper_instruments_only_the_v8_json_parser(self):
+        parser = self.afl_args("c++", "-O3", "-c", "../deps/v8/src/json/json-parser.cc", "-o", "json-parser.o")
+        self.assertTrue(parser[0].endswith("/clang++-20"))
+        self.assertEqual(parser[-1], "-fsanitize-coverage=trace-pc-guard")
+        for other in ("../deps/v8/src/json/json-stringifier.cc", "../src/json_parser.cc",
+                      "../deps/simdjson/simdjson.cpp"):
+            args = self.afl_args("c++", "-c", other, "-o", "x.o")
+            self.assertFalse(any(arg.startswith("-fsanitize") for arg in args), other)
+            self.assertNotIn("/usr/lib/afl/afl-compiler-rt.o", args)
+        link = self.afl_args("c++", "-o", "node", "node_main.o", "libv8_base.a")
+        self.assertEqual(link[-1], "/usr/lib/afl/afl-compiler-rt.o")
+        self.assertFalse(any(arg.startswith("-fsanitize") for arg in link))
+        self.assertNotIn("/usr/lib/afl/afl-compiler-rt.o", self.afl_args("c++", "-shared", "-o", "x.so", "x.o"))
+        self.assertNotIn("/usr/lib/afl/afl-compiler-rt.o", self.afl_args("cc", "--version"))
+
+    def test_afl_dockerfile_reuses_the_source_pin_and_gates_one_object(self):
+        dockerfile = (OVERLAY / "Dockerfile").read_text()
+        manifest = read(PROJECT / "manifest.json")
+        feedback = manifest["source_feedback"]
+        for pin in ("https://nodejs.org/dist/v26.10.0/node-v26.10.0.tar.xz", feedback["node_source_tarball_sha256"],
+                    "clang-20=1:20.1.8-2ubuntu8", feedback["base_image"], manifest["adapter_sha256"],
+                    "--v8-enable-temporal-support --without-npm",
+                    "afl++=" + manifest["afl_feedback"]["afl_package"],
+                    '[ "$(wc -l < /work/instrumented-objects.txt)" = 1 ]',
+                    "grep -q '/json-parser\\.o$' /work/instrumented-objects.txt",
+                    '[ "$(wc -l < /work/afl-runtime-symbols.txt)" = 3 ]'):
+            self.assertIn(pin, dockerfile)
+        self.assertNotIn("gdb", dockerfile)
+        source = (SOURCE / "Dockerfile").read_text()
+        self.assertEqual(source.split("WORKDIR /work\n")[0].split("AS build")[1],
+                         dockerfile.split("WORKDIR /work\n")[0].split("AS build")[1])
+
+    def test_afl_receipt_records_parser_only_stable_differential_maps(self):
+        manifest = read(PROJECT / "manifest.json")
+        receipt = read(OVERLAY / "verification.json")
+        smoke = read(OVERLAY / "plan-smoke.json")
+        self.assertTrue(receipt["pass"])
+        self.assertEqual(receipt["feedback_kind"], "v8_json_parser_sancov_edges")
+        self.assertIs(receipt["afl_requires_ptrace"], False)
+        self.assertIsNone(receipt["source_lines_covered"])
+        self.assertEqual(receipt["afl_target"], [*manifest["afl_target"], "@@"])
+        self.assertEqual(manifest["afl_target"], ["/opt/node/bin/node", "/work/adapter.mjs"])
+        self.assertEqual(receipt["adapter_sha256"], manifest["adapter_sha256"])
+        instrumentation = receipt["instrumentation"]
+        self.assertEqual(len(instrumentation["instrumented_objects"]), 1)
+        self.assertTrue(instrumentation["instrumented_objects"][0].endswith("/deps/v8/src/json/json-parser.o"))
+        self.assertEqual(instrumentation["node_sha256"], manifest["afl_feedback"]["instrumented_node_sha256"])
+        self.assertNotEqual(instrumentation["node_sha256"], manifest["source_sha256"])
+        self.assertNotEqual(instrumentation["node_sha256"], manifest["source_feedback"]["instrumented_node_sha256"])
+        maps = receipt["maps"]
+        self.assertEqual(maps["tuples"]["baseline"], 0)
+        self.assertEqual(maps["tuples"]["decode-only"], 0)
+        for control in ("object", "array"):
+            self.assertGreater(maps["tuples"][f"{control}-1"], 0)
+            self.assertEqual(len({maps["sha256"][f"{control}-{index}"] for index in (1, 2, 3)}), 1)
+            self.assertEqual(len({maps["raw_sha256"][f"{control}-{index}"] for index in (1, 2, 3)}), 1)
+        self.assertNotEqual(maps["sha256"]["object-1"], maps["sha256"]["array-1"])
+        self.assertGreater(maps["object_only_tuples"] + maps["array_only_tuples"], 0)
+        self.assertLessEqual(maps["max_tuple_index"], instrumentation["node_guards"] + 8)
+        self.assertIn("not source lines", receipt["limit"])
+        self.assertEqual(smoke["status"], "ready")
+        self.assertIs(smoke["campaign_started"], False)
+        self.assertEqual(smoke["afl_target"], receipt["afl_target"])
+        self.assertEqual(smoke["overlay_receipt_sha256"],
+                         sha256((OVERLAY / "verification.json").read_bytes()).hexdigest())
+
+    def test_audit_gate_and_inventory_agree(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from audit_projects import fully_runnable, node_json_native_afl_verified
+        path = PROJECT / "manifest.json"
+        manifest = read(path)
+        self.assertTrue(node_json_native_afl_verified(path, manifest))
+        self.assertTrue(fully_runnable(path, manifest))
+        broken = {**manifest, "afl_feedback": {**manifest["afl_feedback"], "instrumented_node_sha256": "0" * 64}}
+        self.assertFalse(node_json_native_afl_verified(path, broken))
+        entry, = read(ROOT / "data/javascript/json/standard.json")["verified_apis"]
+        receipt = read(OVERLAY / "verification.json")
+        self.assertEqual(entry["afl_feedback"]["kind"], "v8_json_parser_sancov_edges")
+        self.assertEqual(entry["afl_feedback"]["object_tuples"], receipt["maps"]["tuples"]["object-1"])
+        self.assertEqual(entry["afl_feedback"]["array_tuples"], receipt["maps"]["tuples"]["array-1"])
+        self.assertIsNone(entry["parser_source_lines_covered"])
 
 
 if __name__ == "__main__":

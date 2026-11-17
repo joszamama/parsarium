@@ -12,6 +12,7 @@ from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             mlt_mp4_feedback_verified,
                             mpv_mp4_feedback_verified,
                             mpv_tagged_mp3_feedback_verified,
+                            node_json_native_afl_verified,
                             openshot_mp4_feedback_verified,
                             papers_pdf_feedback_verified,
                             pdf_oxide_cpp_feedback_verified,
@@ -26,8 +27,11 @@ from run_case import ROOT, project_for
 def main() -> None:
     # A source-covered control may be staged before its parser-feedback overlay
     # exists. Fuzzing receipts cover only paths with the complete run chain.
+    # Native V8 JSON.parse has no parser source lines on its pinned binary; its
+    # AFL++ target and plan preflight are audited separately below.
     manifests = [path for path in sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
                  if ((path.parent / "verification.json").is_file()
+                     and json.loads(path.read_text()).get("coverage_kind") != "native_function_entries"
                      and fully_runnable(path, json.loads(path.read_text())))]
     case_report = json.loads((ROOT / "data/fuzz-case-smoke.json").read_text())
     case_records = {item["project"]: item for item in case_report["results"]}
@@ -371,8 +375,10 @@ def main() -> None:
         assert item["overlay_receipt_sha256"] == sha256(receipt.read_bytes()).hexdigest()
     tk_path = ROOT / "projects/png/python/stdlib_tkinter_photoimage/manifest.json"
     assert standard_feedback_smoke_verified(tk_path, json.loads(tk_path.read_text()))
+    node_path = ROOT / "projects/json/javascript/stdlib_json_parse/manifest.json"
+    assert node_json_native_afl_verified(node_path, json.loads(node_path.read_text()))
     print(f"{len(manifests)}/{len(manifests)} generic one-input projects plus "
-          "1 separately audited Tkinter PNG standard path; "
+          "separately audited Tkinter PNG and Node JSON.parse standard paths; "
           f"{native_plans['projects_ready']} in-process native plans ready, "
           f"{batch_report['batch_passing']} batch replay projects, and "
           f"{len(native) + len(rust) + len(managed)}/{len(manifests)} AFL++ overlays plus "

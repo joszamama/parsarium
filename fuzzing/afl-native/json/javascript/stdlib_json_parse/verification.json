@@ -1,73 +1,177 @@
 {
   "schema_version": 1,
   "project": "json/javascript/stdlib_json_parse",
-  "verified_at_utc": "2026-11-17T12:08:33.498595+00:00",
+  "verified_at_utc": "2026-11-17T12:58:54.223385+00:00",
   "pass": true,
-  "coverage_kind": "native_function_entries",
-  "feedback_kind": "v8_json_parser_function_entries_to_afl_bitmap",
+  "coverage_kind": "native_parser_afl_edges",
+  "feedback_kind": "v8_json_parser_sancov_edges",
   "source_lines_covered": null,
-  "afl_package": "4.21c-5",
+  "afl_package": "4.33c-1.1ubuntu1",
   "afl_map_size": 65536,
-  "feedback_tuples": 41,
-  "afl_requires_ptrace": true,
+  "afl_requires_ptrace": false,
+  "afl_target": [
+    "/opt/node/bin/node",
+    "/work/adapter.mjs",
+    "@@"
+  ],
+  "feedback_edges": 216,
+  "variant_feedback_edges": 206,
+  "instrumentation": {
+    "runtime": "Node.js 26.10.0 source-built from the official tarball (V8 14.6.202.34-node.34) with Clang 20.1.8; only deps/v8/src/json/json-parser.cc compiled with -fsanitize-coverage=trace-pc-guard; node linked with the AFL++ compiler runtime",
+    "compiler_flag": "-fsanitize-coverage=trace-pc-guard (json-parser.cc only)",
+    "afl_runtime": "/usr/lib/afl/afl-compiler-rt.o linked into executables",
+    "afl_runtime_sha256": "da21bd5abc5d5e3d5fc693b0548a81f39e39c480ded8bd2fe82643c483ffca2e",
+    "instrumented_objects": [
+      "out/Release/obj.target/v8_base_without_compiler/deps/v8/src/json/json-parser.o"
+    ],
+    "afl_runtime_symbols": [
+      "__afl_area_ptr",
+      "__sanitizer_cov_trace_pc_guard",
+      "__sanitizer_cov_trace_pc_guard_init"
+    ],
+    "object_guard_bytes": 20040,
+    "node_guard_bytes": 19464,
+    "node_guards": 4866,
+    "node_sha256": "0e8d211bfadcd7a9b03d189e5b095d44fe256b42c805eba6d38dcf46fa06f00d",
+    "source_sha256": {
+      "json-parser.cc": "94147cc5b053cb77a15e0d9112d3727b523ecf7d6a4a2d75867541b9d7663192",
+      "json-parser.h": "cf8c5ec7a830a3be92cf0bff706f6b95d5bb731ebe2e18fd0d1ba7adacb8352d"
+    },
+    "toolchain": [
+      "v26.10.0",
+      "v8 14.6.202.34-node.34",
+      "Ubuntu clang version 20.1.8 (2ubuntu8)",
+      "rustc 1.93.1 (01f6ddf75 2026-02-11) (built from a source tarball)",
+      "cargo 1.93.1 (083ac5135 2025-12-15) (built from a source tarball)",
+      "afl++ 4.33c-1.1ubuntu1",
+      "cargo 1.93.1ubuntu1",
+      "clang-20 1:20.1.8-2ubuntu8",
+      "libclang-rt-20-dev 1:20.1.8-2ubuntu8",
+      "llvm-20 1:20.1.8-2ubuntu8",
+      "rustc 1.93.1ubuntu1"
+    ]
+  },
+  "maps": {
+    "tuples": {
+      "baseline": 0,
+      "decode-only": 0,
+      "object-1": 216,
+      "object-2": 216,
+      "object-3": 216,
+      "array-1": 206,
+      "array-2": 206,
+      "array-3": 206
+    },
+    "sha256": {
+      "baseline": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decode-only": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "object-1": "3f0d9c9b8923fb4146392733e5e7d9602426866dee8f4809c7eec601f4d4976c",
+      "object-2": "3f0d9c9b8923fb4146392733e5e7d9602426866dee8f4809c7eec601f4d4976c",
+      "object-3": "3f0d9c9b8923fb4146392733e5e7d9602426866dee8f4809c7eec601f4d4976c",
+      "array-1": "60b7dfc97cc965628202350dd547f874eb36f9a564083a0d4f891977dcaa6a92",
+      "array-2": "60b7dfc97cc965628202350dd547f874eb36f9a564083a0d4f891977dcaa6a92",
+      "array-3": "60b7dfc97cc965628202350dd547f874eb36f9a564083a0d4f891977dcaa6a92"
+    },
+    "raw_hit_sum": {
+      "baseline": 0,
+      "decode-only": 0,
+      "object-1": 862,
+      "object-2": 862,
+      "object-3": 862,
+      "array-1": 381,
+      "array-2": 381,
+      "array-3": 381
+    },
+    "raw_sha256": {
+      "baseline": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decode-only": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "object-1": "98f3284f526f40bfbd1dfc19c0efd9e76f430b2548c74dbcf353a5eac6f423a0",
+      "object-2": "98f3284f526f40bfbd1dfc19c0efd9e76f430b2548c74dbcf353a5eac6f423a0",
+      "object-3": "98f3284f526f40bfbd1dfc19c0efd9e76f430b2548c74dbcf353a5eac6f423a0",
+      "array-1": "3349496b9fa7a705eec8381542eac45c78d1ee5a4fab13b99d53fdbcd7997911",
+      "array-2": "3349496b9fa7a705eec8381542eac45c78d1ee5a4fab13b99d53fdbcd7997911",
+      "array-3": "3349496b9fa7a705eec8381542eac45c78d1ee5a4fab13b99d53fdbcd7997911"
+    },
+    "object_only_tuples": 67,
+    "array_only_tuples": 57,
+    "shared_tuples": 149,
+    "max_tuple_index": 4539,
+    "baseline_empty": true,
+    "decode_only_empty": true,
+    "object_repeat_identical_maps": true,
+    "array_repeat_identical_maps": true,
+    "object_repeat_identical_raw_counts": true,
+    "array_repeat_identical_raw_counts": true,
+    "object_array_maps_differ": true,
+    "indices_within_parser_guards": true
+  },
+  "outputs": {
+    "nested-object.json": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "caf\u00e9 \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "nested-array.json": {
+      "arrays": 4,
+      "booleans": 2,
+      "max_depth": 3,
+      "nulls": 1,
+      "numbers": [
+        0.25,
+        1
+      ],
+      "objects": 2,
+      "root": "array",
+      "strings": [
+        "A",
+        "two"
+      ],
+      "top_level_items": 5
+    }
+  },
   "fixed_valid_control_timing": {
     "cases": 6,
-    "wall_seconds": 4.671,
-    "seconds_per_case": 0.779,
-    "approx_cases_per_second": 1.28,
+    "wall_seconds": 0.294,
+    "seconds_per_case": 0.049,
     "measurement": "Six fixed valid afl-showmap replays in one fresh Docker container; not a fuzz campaign or a sustained throughput measurement."
   },
-  "native_feedback": {
-    "scope": "v8::internal::JsonParser<...> text symbols in pinned /usr/local/bin/node",
-    "scope_symbols": 142,
-    "baseline_functions": 0,
-    "control_functions": 21,
-    "repeat_identical": true,
-    "variant_functions": 23,
-    "variant_differs": true,
-    "control_only": [
-      "v8::internal::Handle<v8::internal::String> v8::internal::JsonParser<unsigned char>::DecodeString<v8::internal::SeqOneByteString>(v8::internal::JsonString const&, v8::internal::Handle<v8::internal::SeqOneByteString>, v8::internal::Handle<v8::internal::String>)",
-      "v8::internal::JsonParser<unsigned char>::ParseJsonNumber()",
-      "void v8::internal::JsonParser<unsigned char>::DecodeString<unsigned char>(unsigned char*, unsigned int, unsigned int)"
-    ],
-    "variant_only": [
-      "bool v8::internal::JsonParser<unsigned char>::ExpectNext<(v8::internal::JsonToken)10>(std::optional<v8::internal::MessageTemplate>)",
-      "bool v8::internal::JsonParser<unsigned char>::ExpectNext<(v8::internal::JsonToken)1>(std::optional<v8::internal::MessageTemplate>)",
-      "void v8::internal::JsonParser<unsigned char>::DecodeString<unsigned short>(unsigned short*, unsigned int, unsigned int)",
-      "void v8::internal::JsonParser<unsigned char>::ScanLiteral<5ul>(char const (&) [5ul])",
-      "void v8::internal::JsonParser<unsigned char>::ScanLiteral<6ul>(char const (&) [6ul])"
-    ],
-    "bitmap_tuples": {
-      "baseline": 13,
-      "control1": 41,
-      "control2": 41,
-      "variant": 43
-    },
-    "bitmap_sha256": {
-      "baseline": "6a42d82cb1541e7720d8dd70346488af7a97b3baebf4438f74eac1fef27e272c",
-      "control1": "04d2201bb7be0e3322fb6d7253cbbc478bd2522eaeda4d19a09113a58bb1e940",
-      "control2": "04d2201bb7be0e3322fb6d7253cbbc478bd2522eaeda4d19a09113a58bb1e940",
-      "variant": "758ffbd64f981683a12fa8a4c06ad818c501004f497df4a737ab99a61d36e535"
-    },
-    "limit": "Function entries hashed into AFL bitmap with bridge instrumentation; no source lines or parser basic-block/edge coverage. Each AFL case launches gdb; SYS_PTRACE and seccomp=unconfined required."
-  },
+  "limit": "AFL++ map entries come from SanitizerCoverage trace-pc-guard points in the one json-parser.o object of a Node.js 26.10.0 binary built from the official source tarball, not the pinned official binary (whose hash differs because of the build and the instrumentation). Map entries are guard indices with bucketed hit counts; they are not source lines and not comparable to the LLVM line counts. Code inlined from other V8 files into json-parser.o is counted; JSON.parse builtin glue, string internalization outside that object, and the adapter's TextDecoder step are not. Each case starts a fresh node process through the AFL++ fork server (no persistent mode).",
   "source_sha256": "71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03",
   "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
-  "base_project_receipt_sha256": "badd52155c1796e5a61a1da74fddac6bce799e719a2b6cdc94225de2cc754367",
-  "probe_image_id": "sha256:04076274d8e75d010435182c44d76879b1eb8f82788b166fd8ef6f5198d1efa1",
-  "probe_file_sha256": {
-    "probe.py": "2c5e0a63b13c43b24f84b0ccb59eb2373effe615d77f492edf534c213fc95102",
-    "probe.sh": "b71fb04dc69ff64d15b97f375b2f754b7519e6bf73c6f22fad3ca31d9483fc72"
-  },
-  "gdb_version": "GNU gdb (Debian 16.3-1) 16.3",
-  "image_id": "sha256:7ce6bbb1edc9462541c426d91e110dd0f2a253f5183c6c7b3a08a287e2340086",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "adapter_sha256": "e8e24e794840f27e21c13e9f7266c4803cf5976f9da2674fc6552d671d2c44e2",
+  "base_project_receipt_sha256": "b29e189d247090ce2560c081fd4393cc3a51468dd6b2c5d35454d0ec88c71b8f",
+  "image_id": "sha256:ce8a61c2c4e8de2fcef5863d85604f3f5f6e53210ff4bc5017984677b5730156",
   "overlay_file_sha256": {
-    "Dockerfile": "1fba4d6dc9e899794da04bc770c64a313b6b267487da9d0111e67f270cfc1ef2",
-    "afl_trace": "28abe46fa3ffe3e7e7da895b5502f0a9f82a09093364c161b12de9a73fb3de1d",
-    "build.py": "bfb40417a297be5c39f4f9a051e7a4b06e9d1c635d4e7bd61e4cd98a50bc1b15",
-    "README.md": "412c09634f33b12f3b3430626a1ca10ba124e3b6c32158c220d3325f8f13b6d9"
-  },
-  "bridge_file_sha256": {
-    "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950"
+    "Dockerfile": "4c54d43ee8b7cfc86ca7b57ec817b364d1180682464bebf9910055ea266b496c",
+    "afl-cc.sh": "1f4d05473e45c616615e6a77ba322c9d80c7f15553cf2988bd0e9cb24e56f0b2",
+    "build.py": "4700b5ed72440dbc2c14b1ad1997222e919f4498793a487d9e29d41b0862b37e",
+    "README.md": "4177d89406a93a76cb945db4d34e0fcfe3349f7639cba86a437aa5bae229c0cb"
   }
 }

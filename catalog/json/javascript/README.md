@@ -17,4 +17,4 @@ Pilot cell: six high-download package/API paths have valid nested-object and nes
 
 ## Standard and runtime APIs
 
-- [JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)](standard/json-parse-text-after-new-textdecoder-utf-8-fatal-true-decode-buffer/README.md) — staged Docker control
+- [JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)](standard/json-parse-text-after-new-textdecoder-utf-8-fatal-true-decode-buffer/README.md) — verified Docker harness

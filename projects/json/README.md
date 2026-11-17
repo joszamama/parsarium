@@ -33,6 +33,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [parsson / Java](java/parsson/README.md)
 - [@humanwhocodes/momoa / JavaScript](javascript/humanwhocodes_momoa/README.md)
 - [@streamparser/json / JavaScript](javascript/streamparser_json/README.md)
+- [JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer) / JavaScript](javascript/stdlib_json_parse/README.md)
 - [JSONStream / JavaScript](javascript/jsonstream/README.md)
 - [bfj / JavaScript](javascript/bfj/README.md)
 - [jsonparse / JavaScript](javascript/jsonparse/README.md)

@@ -52,17 +52,16 @@ class AFLFileInputTest(unittest.TestCase):
         manifest = {"ecosystem": "python", "platform": "linux/arm64"}
         self.assertEqual(self.command(manifest)[0][-3:], ["--", "/work/afl_proxy", "@@"])
 
-    def test_ptrace_bridge_requires_explicit_verified_receipt_flag(self):
-        manifest = {"ecosystem": "javascript", "platform": "linux/arm64"}
-        receipt = {"afl_map_size": 65536, "image_id": "sha256:" + "1" * 64,
-                   "afl_requires_ptrace": True}
-        command, resume = commands_for(manifest, receipt, Path("/seeds"),
-                                       Path("/results"), 1000, "parsarium-test")
+    def test_parser_instrumented_runtime_target_runs_adapter_on_file(self):
+        manifest = {"ecosystem": "javascript", "platform": "linux/arm64",
+                    "afl_target": ["/opt/node/bin/node", "/work/adapter.mjs"]}
+        command, resume = self.command(manifest)
         for plan in (command, resume):
-            self.assertIn("SYS_PTRACE", plan)
-            self.assertIn("seccomp=unconfined", plan)
-            self.assertEqual(plan[-3:], ["--", "/work/afl_proxy", "@@"])
-        self.assertNotIn("SYS_PTRACE", self.command(manifest)[0])
+            self.assertEqual(plan[-4:], ["--", "/opt/node/bin/node", "/work/adapter.mjs", "@@"])
+            self.assertNotIn("SYS_PTRACE", plan)
+            self.assertNotIn("seccomp=unconfined", plan)
+        self.assertEqual(self.command({"ecosystem": "javascript", "platform": "linux/arm64"})[0][-3:],
+                         ["--", "/work/afl_proxy", "@@"])
 
     def test_rust_afl_targets_consume_shared_memory_or_stdin(self):
         paths = sorted((ROOT / "projects").glob("*/rust/*/manifest.json"))

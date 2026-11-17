@@ -2,7 +2,7 @@
   "kind": "standard",
   "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
   "runtime": "Node.js 26.10.0",
-  "verified_at_utc": "2026-11-17T12:08:21.364233+00:00",
+  "verified_at_utc": "2026-11-17T12:58:48.660338+00:00",
   "manifest": "projects/json/javascript/stdlib_json_parse/manifest.json",
   "image_id": "sha256:06585bd61834d284a3d1b119b4842aa8aaf1d7c99d14c06f224416b267ed7cac",
   "docker_server_version": "29.9.3",
@@ -16,7 +16,7 @@
   "project_file_sha256": {
     "Dockerfile": "2b9dd259468c6f058ca4467d004e6bfb1bd4bb03cff1b1f677c66d914e19b015",
     "adapter.mjs": "e8e24e794840f27e21c13e9f7266c4803cf5976f9da2674fc6552d671d2c44e2",
-    "manifest.json": "cc371b7da98563f63a86ab9f3b92c038b011fb57556ae9d8fb571c2aaecfb44b",
+    "manifest.json": "459f15d360ab2334a56479582d3bf5f0db0b07068a3aa3ecfa2d347cf4bec64a",
     "native-feedback-probe/Dockerfile": "d0f642dd4301896f61e9ca8d50584259e7bc5de16dd0387b6318f502e3baf394",
     "native-feedback-probe/probe.py": "2c5e0a63b13c43b24f84b0ccb59eb2373effe615d77f492edf534c213fc95102",
     "native-feedback-probe/probe.sh": "b71fb04dc69ff64d15b97f375b2f754b7519e6bf73c6f22fad3ca31d9483fc72",
@@ -92,7 +92,7 @@
       "void v8::internal::JsonParser<unsigned char>::ScanLiteral<6ul>(char const (&) [6ul])"
     ]
   },
-  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb; that probe is not AFL++ feedback. A separate AFL++ overlay hashes these function names into its bitmap and requires SYS_PTRACE and seccomp=unconfined. Neither route measures parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package.",
+  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb on the pinned official binary; that probe is not AFL++ feedback and the AFL++ target does not use it. It measures no parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package.",
   "source_feedback": {
     "image_id": "sha256:a455164a5ddaa7c5e20e611a38ff353e0165b71361231cc9358f54bf22126df5",
     "feedback_kind": "llvm_source_lines",
@@ -136,7 +136,7 @@
         "functions_executed": 0,
         "line_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "line_counts_sha256": "88efbef35bf5d317b73328b87a86a3833a67e0d6ab029070c3f005dd35d57431",
-        "seconds": 0.016,
+        "seconds": 0.032,
         "output_matches_expected": null
       },
       "decode-only": {
@@ -148,7 +148,7 @@
         "functions_executed": 0,
         "line_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "line_counts_sha256": "88efbef35bf5d317b73328b87a86a3833a67e0d6ab029070c3f005dd35d57431",
-        "seconds": 0.017,
+        "seconds": 0.019,
         "output_matches_expected": null
       },
       "object-1": {
@@ -160,7 +160,7 @@
         "functions_executed": 102,
         "line_set_sha256": "55c0a79bcb4dc15fc5635d6b3efcdc5aa82ca8f954fa9d10891026683824d212",
         "line_counts_sha256": "39972c878063ccd55451431684fbe2a16b91f5edbb8e607b587a1b18e582fd70",
-        "seconds": 0.019,
+        "seconds": 0.036,
         "output_matches_expected": true
       },
       "object-2": {
@@ -172,7 +172,7 @@
         "functions_executed": 102,
         "line_set_sha256": "55c0a79bcb4dc15fc5635d6b3efcdc5aa82ca8f954fa9d10891026683824d212",
         "line_counts_sha256": "39972c878063ccd55451431684fbe2a16b91f5edbb8e607b587a1b18e582fd70",
-        "seconds": 0.018,
+        "seconds": 0.031,
         "output_matches_expected": true
       },
       "array-1": {
@@ -184,7 +184,7 @@
         "functions_executed": 94,
         "line_set_sha256": "9029da4a56b15159be224cfceab6e87b296441abcc22531edf177f31a81350e1",
         "line_counts_sha256": "0114edb1e9699963fde7b42d2abcd2ee91e0876cc53d58ecb224fc55d1889915",
-        "seconds": 0.018,
+        "seconds": 0.027,
         "output_matches_expected": true
       },
       "array-2": {
@@ -196,7 +196,7 @@
         "functions_executed": 94,
         "line_set_sha256": "9029da4a56b15159be224cfceab6e87b296441abcc22531edf177f31a81350e1",
         "line_counts_sha256": "0114edb1e9699963fde7b42d2abcd2ee91e0876cc53d58ecb224fc55d1889915",
-        "seconds": 0.018,
+        "seconds": 0.021,
         "output_matches_expected": true
       }
     },
@@ -395,5 +395,5 @@
       "json-parser.cc:2408"
     ]
   },
-  "source_feedback_limit": "Clang source-based line coverage of V8's JSON parser, measured on a Node.js 26.10.0 binary built from the official source tarball, not on the pinned official binary (whose hash differs because of the build and the instrumentation). Only deps/v8/src/json/json-parser.cc is instrumented; lines are reported for json-parser.cc and json-parser.h code compiled into that object. JSON.parse builtin glue, string internalization outside the parser, and the adapter's TextDecoder step are not counted. These are replay line counts, not AFL++ edges: the AFL++ overlay still uses the gdb function-entry bridge."
+  "source_feedback_limit": "Clang source-based line coverage of V8's JSON parser, measured on a Node.js 26.10.0 binary built from the official source tarball, not on the pinned official binary (whose hash differs because of the build and the instrumentation). Only deps/v8/src/json/json-parser.cc is instrumented; lines are reported for json-parser.cc and json-parser.h code compiled into that object. JSON.parse builtin glue, string internalization outside the parser, and the adapter's TextDecoder step are not counted. These are replay line counts, not AFL++ map entries; AFL++ feedback comes from a separate source build (afl_feedback)."
 }
