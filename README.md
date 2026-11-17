@@ -15,11 +15,13 @@ published:
 ```sh
 git clone https://github.com/joszamama/parsarium.git
 cd parsarium
-python3 parsarium.py list --format png
+python3 -m pip install -e .
+export PARSARIUM_HOME="$PWD"
+parsarium list --format png
 ```
 
-The next package release will install the `parsarium` command and a small Python
-API (`from parsarium import catalog`). Its wheel will bundle a versioned snapshot
+This source install provides the `parsarium` command and a small Python API
+(`from parsarium import catalog`). The next wheel will bundle a versioned snapshot
 of harnesses, controls, and catalog data. On first use it will check the
 snapshot's SHA-256 and extract it to your cache directory without a network
 request. Each package version will pin one snapshot. `parsarium run-selection

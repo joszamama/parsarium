@@ -21,8 +21,11 @@
     <p class="off">0x0020<b>setup</b></p>
     <div class="sec-head">
       <h2>Before the exercises.</h2>
-      <p>Install the <code>parsarium</code> command with pip. You need Python 3.11 or newer; running harnesses also needs Docker with Linux amd64 and arm64 support. The first command downloads the catalog and harness files for your version, about 19 MB, and checks them.</p>
-      <pre data-copy><span class="p">$ </span>pip install parsarium
+      <p>Install the command from a source checkout while the self-contained PyPI release is pending. You need Python 3.11 or newer; running harnesses also needs Docker with Linux amd64 and arm64 support.</p>
+      <pre data-copy><span class="p">$ </span>git clone https://github.com/joszamama/parsarium.git
+<span class="p">$ </span>cd parsarium
+<span class="p">$ </span>python3 -m pip install -e .
+<span class="p">$ </span>export PARSARIUM_HOME="$PWD"
 <span class="p">$ </span>parsarium list</pre>
       <p>Some exercises read files from the catalog, such as controls and receipts. They live in the folder <code>parsarium home --path</code> prints. Export it once per terminal, and the exercises refer to it as <code>$PARSARIUM</code>:</p>
       <pre data-copy><span class="p">$ </span>export PARSARIUM="$(parsarium home --path)"

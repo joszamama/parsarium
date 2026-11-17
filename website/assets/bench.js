@@ -160,7 +160,7 @@
       "#!/usr/bin/env bash",
       `# Parsarium ${id}: ${picked.length} targets, ${fmts.length} formats`,
       `# ${pageUrl()}`,
-      `# Built from parsarium commit ${catalog.commit}. Needs the parsarium command: pip install parsarium`,
+      `# Built from parsarium commit ${catalog.commit}. Install from source: see https://parsarium.com/manual/`,
       "set -uo pipefail",
       `OUT="\${OUT:-runs/${id}}"`,
     ];
