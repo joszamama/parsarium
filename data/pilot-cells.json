@@ -426,18 +426,19 @@
       },
       "search_hits_recorded": 112,
       "unique_search_hits": 112,
-      "unresolved_documentation_leads": 7,
+      "unresolved_documentation_leads": 6,
       "leads_by_status": {
         "excluded_native_wrapper": 4,
         "unresolved_shared_family": 4,
-        "unresolved": 2,
+        "unresolved": 1,
         "excluded": 1,
-        "unresolved_no_primary_metric": 1
+        "unresolved_no_primary_metric": 1,
+        "excluded_valid_control_crash": 1
       },
       "ranking_metric": "deps.dev directDependentCount summed over all releases",
       "selection": "JCodec (76), MP3SPI (55), JLayer (33), jaudiotagger (8) and mp3agic (6) have comparable summed deps.dev direct-dependent metrics and exact outputs on two valid untagged Layer III controls. The first three decode PCM; jaudiotagger verifies first-frame header fields, and mp3agic verifies header fields from its local-file scan. Each has own Java parser source-line coverage and stable parser-derived AFL++ feedback.",
       "family_note": "JCodec and JLayer are independent decoders; MP3SPI delegates to a JLayer fork. jaudiotagger and mp3agic have their own MPEG header code, each already present as the same package in the tagged-MP3 cell; jid3lib shares historical ancestry with them.",
-      "uncertainty": "Five pure-Java Layer III paths verified; no padding. jaudiotagger is first-header-only and mp3agic reports only accurate header fields. Both higher-level APIs misidentify the valid 22.05 kHz control start at byte 104 and estimate 5 rather than 12 frames; mp3agic reports 261 ms versus oracle about 313 ms. These paths make no whole-file frame-count or duration claim. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory.",
+      "uncertainty": "Five pure-Java Layer III paths verified; no padding. jaudiotagger is first-header-only and mp3agic reports only accurate header fields. Both higher-level APIs misidentify the valid 22.05 kHz control start at byte 104 and estimate 5 rather than 12 frames; mp3agic reports 261 ms versus oracle about 313 ms. These paths make no whole-file frame-count or duration claim. JavaMP3 1.0.1 decodes the mono control exactly but crashes on valid 22.05 kHz stereo input, so is excluded with a reproducible probe. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory.",
       "third_party_evidence": "data/java/mp3/parsers.json",
       "third_party_control_results": "data/java/mp3/verification.json",
       "afl_feedback": "data/java/mp3/afl-feedback.json",
