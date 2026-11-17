@@ -42,17 +42,19 @@
       "name": "nanomp3",
       "version": "0.2.0",
       "recent_downloads_90d": 51847,
-      "status": "unresolved",
-      "reason": "Pure-Rust decoder; its byte-slice decode loop on the untagged control has not been run in this pilot.",
-      "source": "https://crates.io/crates/nanomp3"
+      "status": "selected",
+      "reason": "Pinned frames() walk plus decode_all::<i16> (default and minimp3_compat). Both CBR controls match the header walk; compat PCM byte-identical to scalar minimp3.h, so shared minimp3 family with the selected minimp3 binding, counted as a separate package API with its own metric. Scoped AFL++ maps byte-identical over 5 processes, 97/132 unique tuples. Recorded in parsers.json and projects/mp3/rust/nanomp3.",
+      "source": "https://crates.io/crates/nanomp3",
+      "license": "MIT OR Apache-2.0"
     },
     {
       "name": "nanomp3-core",
       "version": "0.2.0",
       "recent_downloads_90d": 43688,
-      "status": "unresolved_shared_family",
-      "reason": "Decoder core under nanomp3; a direct adapter independent of nanomp3 has not been run.",
-      "source": "https://crates.io/crates/nanomp3-core"
+      "status": "excluded_shared_family",
+      "reason": "Frame decoder that nanomp3 0.2.0 depends on with an exact pin and re-exports unchanged (pub use nanomp3_core::{Channels, DecodeError, Decoder, FrameInfo, Sample, MAX_SAMPLES_PER_FRAME}). Same code, same minimp3-port family and same repository commit as the selected nanomp3 path, whose receipt records 985 nanomp3-core lines as underlying coverage; counted once through the higher-adoption nanomp3 package (51,847 vs 43,688).",
+      "source": "https://crates.io/crates/nanomp3-core",
+      "license": "MIT OR Apache-2.0"
     },
     {
       "name": "minimp3_fixed",

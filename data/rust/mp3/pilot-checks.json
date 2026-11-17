@@ -272,6 +272,73 @@
       "command": "local cargo probe: rusty_mp3 1.0.6 Mp3Decoder f32 vs nanomp3 0.2.0 decode_all::<f32> on both controls (macOS arm64)",
       "pass": true,
       "result": "same sample counts; 11236/12672 and 12108/13824 samples differ, max absolute difference 7.45e-8 and 5.96e-8: numerically equivalent, separate implementations"
+    },
+    {
+      "lead": "nanomp3",
+      "command": "python3 parsarium.py build mp3 rust nanomp3",
+      "pass": true,
+      "image_id": "sha256:8071fecdff94fe9924207f49b9f922b506eabd58a905a3ccf43fe92c4b8c5c5c",
+      "output": {
+        "bitrate_kbps": 64,
+        "channels": 1,
+        "frame_bytes": 2298,
+        "frame_samples_per_channel": 12672,
+        "frames": 11,
+        "layer": 3,
+        "minimp3_compat_pcm_sha256": "d8bde33ad59477f815f1194dd04517bf8b5949807f5bf01fb19a9ab4e3a99364",
+        "pcm_samples": 12672,
+        "pcm_sha256": "1106d468c6a515a4c554991af6ab95e9c811e8e34005478ee81dd1e3a8063edb",
+        "sample_rate": 44100,
+        "samples_per_channel": 12672
+      },
+      "parser_source_lines_covered": 164,
+      "underlying_source_lines_covered": 985,
+      "receipt_sha256": "6002dc263f9e0e6458ec6679f0db96575b8fdf90aa5c0fcca8de8225787dd6d2"
+    },
+    {
+      "lead": "nanomp3",
+      "command": "python3 parsarium.py run mp3 rust nanomp3 controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "lead": "nanomp3",
+      "command": "python3 parsarium.py run mp3 rust nanomp3 controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "lead": "nanomp3",
+      "command": "python3 parsarium.py afl build mp3 rust nanomp3",
+      "pass": true,
+      "image_id": "sha256:ebcf62c2fdc46a9813b578d6c274cf656140ae66811e42806e0803ceae77ab28",
+      "instrumented_crates": [
+        "nanomp3",
+        "nanomp3_core",
+        "parsarium_mp3_nanomp3_harness"
+      ],
+      "binary_guards": 2982,
+      "feedback_edges": 955,
+      "variant_feedback_edges": 990,
+      "edges_only_in_control": 97,
+      "edges_only_in_variant": 132,
+      "all_repeats_identical": true,
+      "header_walk_oracle_match": true,
+      "receipt_sha256": "b5cd7aca0c9b73a35357cb8c5548f54bf878b622704cb4e301d0e3b06d7c1d08"
+    },
+    {
+      "lead": "nanomp3",
+      "command": "python3 parsarium.py afl prepare mp3 rust nanomp3 runs/mp3-nanomp3-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-nanomp3-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started (AFL_MAP_SIZE=2987)"
+    },
+    {
+      "lead": "nanomp3",
+      "command": "clang -O2 -ffp-contract=off -DMINIMP3_NO_SIMD (and without -DMINIMP3_NO_SIMD) on the minimp3-sys 0.6.0 vendored minimp3.h, mp3dec_decode_frame over each control, sha256 of the concatenated i16 PCM (Homebrew clang 23.1.4, macOS arm64; local family check, not a Docker receipt)",
+      "pass": true,
+      "result": "scalar build: d8bde33ad59477f815f1194dd04517bf8b5949807f5bf01fb19a9ab4e3a99364 and 37eb8d8e5c57e9d3ae1b6a446183e336912fa66920ac2db94aa2b2f499df30e3, byte-identical to nanomp3 minimp3_compat_pcm_sha256; NEON SIMD build with default FP contraction reproduces the selected minimp3 receipt hashes 0641e37c... and ac01db4b...; scalar vs SIMD differ in 129/12672 and 68/13824 samples by at most 1 LSB"
     }
   ],
   "not_run": [
@@ -281,5 +348,6 @@
   ],
   "symphonia_checked_at_utc": "2026-11-17T12:54:52.237279+00:00",
   "mp3_duration_checked_at_utc": "2026-11-17T15:06:51.084569+00:00",
-  "rusty_mp3_checked_at_utc": "2026-11-17T15:07:30.738147+00:00"
+  "rusty_mp3_checked_at_utc": "2026-11-17T15:07:30.738147+00:00",
+  "nanomp3_checked_at_utc": "2026-11-17T15:08:10.653197+00:00"
 }

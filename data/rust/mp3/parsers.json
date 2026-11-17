@@ -71,7 +71,7 @@
     "source": "https://github.com/germangb/minimp3-rs/tree/9f9fcdde624c8f9bf3eee1b2688a6847a7b61716/crates/minimp3",
     "scope": "Every MPEG Layer III frame of an untagged stream decoded to interleaved i16 PCM: sample rate, channels, layer, bitrate, frame count, samples per channel, PCM sample count and PCM hash",
     "family": "lieff/minimp3 C decoder via minimp3-sys 0.6.0 Rust FFI binding",
-    "family_note": "Same minimp3 C decoder family as Go github.com/tosone/minimp3 v1.1.0: the vendored minimp3.h files differ by one ARMv6-M preprocessor guard that is inactive on aarch64, and both decode the shared controls to identical PCM hashes. Distinct from the Symphonia family. The crate documentation warns of multiple memory-unsoundness issues.",
+    "family_note": "Same minimp3 C decoder family as Go github.com/tosone/minimp3 v1.1.0: the vendored minimp3.h files differ by one ARMv6-M preprocessor guard that is inactive on aarch64, and both decode the shared controls to identical PCM hashes. Distinct from the Symphonia family. The crate documentation warns of multiple memory-unsoundness issues. The separately selected pure-Rust nanomp3 0.2.0 path is a port of the same decoder (minimp3-compatible PCM byte-identical to scalar minimp3.h); this receipt's PCM comes from the default NEON SIMD build, which differs from the scalar build by at most 1 LSB.",
     "control": "controls/mp3/tone-44k-mono.mp3",
     "expected_output": {
       "sample_rate": 44100,
@@ -167,6 +167,58 @@
     "metric": {
       "name": "crates.io recent downloads (90 days)",
       "value": 81660,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "nanomp3",
+    "project": "projects/mp3/rust/nanomp3",
+    "version": "0.2.0",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo.toml license = \"MIT OR Apache-2.0\" with LICENSE-MIT and LICENSE-APACHE in nanomp3-0.2.0.crate (sha256 acd9a8d0592a17ee5211aae2f976e6dc2f6846135d1f49665b3f19a7afd23435) and nanomp3-core-0.2.0.crate (sha256 63fa2238e662d3d3c1a71168b3278f23422cf9bf76f6943ee6b1c2581d74eb5c), Cargo.lock checksums",
+    "source_sha256": "acd9a8d0592a17ee5211aae2f976e6dc2f6846135d1f49665b3f19a7afd23435",
+    "underlying_package": "nanomp3-core",
+    "underlying_version": "0.2.0",
+    "underlying_source_sha256": "63fa2238e662d3d3c1a71168b3278f23422cf9bf76f6943ee6b1c2581d74eb5c",
+    "input_api": "nanomp3::frames(&bytes) -> Frame { data, channels, sample_rate, layer, bitrate_kbps, samples }; nanomp3::decode_all::<i16>(&bytes) and nanomp3::decode_all_with::<i16>(&bytes, Options::default().minimp3_compat(true)) -> Decoded { samples, channels, sample_rate, layer, .. }",
+    "documentation": "https://docs.rs/nanomp3/0.2.0/nanomp3/fn.decode_all.html",
+    "source": "https://github.com/robbie01/nanomp3/tree/bdf614a85c04bc81e80101ced397dae193da0d6c/nanomp3",
+    "scope": "Every MPEG Layer III frame of an untagged byte slice walked by nanomp3::frames (sample rate, channels, layer, bitrate, frame bytes, samples per frame), then the whole slice decoded to interleaved i16 PCM by decode_all, once with defaults and once with Options::minimp3_compat: frame count, samples per channel, PCM sample count and both PCM hashes",
+    "family": "minimp3 decoder family via the nanomp3-core 0.2.0 pure-Rust port",
+    "family_note": "Safe pure-Rust port of lieff/minimp3 and minimp3_ex (no C code; nanomp3-core describes itself as a bit-exact, safe Rust port of minimp3). Same minimp3 family as the selected minimp3 Rust binding, not an independent engine; a separate package API (frame iterator, tag stripping, whole-buffer loader, sample-accurate reader) with its own adoption metric. With Options::minimp3_compat the i16 PCM is byte-identical on both controls to the minimp3.h vendored in minimp3-sys 0.6.0 built scalar (clang -O2 -ffp-contract=off -DMINIMP3_NO_SIMD): sha256 d8bde33a... and 37eb8d8e.... The selected minimp3 receipt (default NEON SIMD build) differs in 129 of 12,672 and 68 of 13,824 samples by at most 1 LSB; that SIMD build is not bit-exact with minimp3's own scalar build either. Default i16 output differs from compat in 135 and 72 samples, the documented rounding fix. nanomp3-core 0.2.0 is the frame decoder that nanomp3 re-exports unchanged; it is counted once, through this higher-adoption path, and its lines are recorded as underlying coverage.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "layer": 3,
+      "bitrate_kbps": 64,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "frame_samples_per_channel": 12672,
+      "samples_per_channel": 12672,
+      "pcm_samples": 12672,
+      "pcm_sha256": "1106d468c6a515a4c554991af6ab95e9c811e8e34005478ee81dd1e3a8063edb",
+      "minimp3_compat_pcm_sha256": "d8bde33ad59477f815f1194dd04517bf8b5949807f5bf01fb19a9ab4e3a99364"
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "layer": 3,
+      "bitrate_kbps": 32,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "frame_samples_per_channel": 6912,
+      "samples_per_channel": 6912,
+      "pcm_samples": 13824,
+      "pcm_sha256": "41230a6c407d4fe238ca0bf645f88b3bb9bab440d139dc3b7de3d16160d29f79",
+      "minimp3_compat_pcm_sha256": "37eb8d8e5c57e9d3ae1b6a446183e336912fa66920ac2db94aa2b2f499df30e3"
+    },
+    "evidence": "projects/mp3/rust/nanomp3/verification.json",
+    "verification_note": "Both untagged valid controls give 11 frames/2,298 bytes at 44,100 Hz mono 64 kbps and 12 frames/1,254 bytes at 22,050 Hz stereo 32 kbps, 12,672 and 6,912 samples per channel, equal to the independent header walk and the minimp3 and Symphonia receipts. No LAME/Xing tag is present, so decode_all trims no delay or padding. Docker LLVM coverage: 164 own nanomp3 lines and 985 underlying nanomp3-core lines on the first control. AFL++ SanitizerCoverage is scoped to nanomp3, nanomp3-core and the harness crate, where the generic i16 loader and frame decoder are monomorphized: 955 vs 990 tuples, 97 and 132 unique, byte-identical maps over 5 separate processes per control. Two short CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support; no malformed, resource-use or campaign tests were run.",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 51847,
       "source": "data/rust/mp3/registry-snapshot.json"
     }
   }

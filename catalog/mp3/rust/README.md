@@ -13,6 +13,7 @@ Three verified package paths cover two independent parser families on two valid 
 - [minimp3](minimp3/README.md) — verified Docker harness
 - [mp3-duration](mp3-duration/README.md) — verified API path
 - [rusty_mp3](rusty-mp3/README.md) — verified API path
+- [nanomp3](nanomp3/README.md) — verified API path
 
 ## Standard and runtime APIs
 
