@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T22:50:07.465008+00:00",
+  "probe": "lead-probes/go/xml/wrapper-gates",
+  "image_id": "sha256:122044b9e02662f3c0fd13fdbf975293e5f76d8d3bf8223928f58ee0fccf4f44",
+  "platform": "linux/arm64",
+  "go_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "control_sha256": {
+    "controls/xml/catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "controls/xml/order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "probe_file_sha256": {
+    "Dockerfile": "54cb9cb6d245ac719676ff57c5d6582e3b76235f3f70424732386e676f47042b",
+    "check.py": "079f629f55f1162c0298ed49e2cf0b2876d3a69fb1362ec4b039cdd7ab4d85d1",
+    "go.mod": "de8a5dd05a775bb9207259074665d0a6a90c450434993bdd9ffc7bf792f8a439",
+    "go.sum": "c436ed72708e0ee313facfafd58faaa7f2a2066642a01601b23870b663304f9a",
+    "probe_test.go": "47e5be580fce70db4080dc9914a5e30e0ed726ba15c9617d5228ac8ba017e3f4"
+  },
+  "gate": "Own-package Go cover blocks (the unit mapped by the Go AFL++ bridges) must differ between the two fixed valid controls; encoding/xml blocks are not counted as the lead's own feedback.",
+  "results": {
+    "goxml2json-decode": {
+      "test": "TestGoxml2jsonDecode",
+      "package_prefix": "github.com/basgys/goxml2json/",
+      "observed": {
+        "controls/xml/catalog-ns.xml": {
+          "children": {
+            "catalog": [
+              {
+                "children": {
+                  "-c": [
+                    {
+                      "children": {},
+                      "data": "urn:parsarium:catalog"
+                    }
+                  ],
+                  "-version": [
+                    {
+                      "children": {},
+                      "data": "1"
+                    }
+                  ],
+                  "-xmlns": [
+                    {
+                      "children": {},
+                      "data": "urn:parsarium:item"
+                    }
+                  ],
+                  "item": [
+                    {
+                      "children": {
+                        "-id": [
+                          {
+                            "children": {},
+                            "data": "a1"
+                          }
+                        ],
+                        "-lang": [
+                          {
+                            "children": {},
+                            "data": "es"
+                          }
+                        ]
+                      },
+                      "data": "Café & té"
+                    },
+                    {
+                      "children": {
+                        "-id": [
+                          {
+                            "children": {},
+                            "data": "b2"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "children": {},
+                            "data": "Zürich <HQ>"
+                          }
+                        ],
+                        "note": [
+                          {
+                            "children": {},
+                            "data": "x < y"
+                          }
+                        ]
+                      },
+                      "data": ""
+                    }
+                  ]
+                },
+                "data": ""
+              }
+            ]
+          },
+          "data": ""
+        },
+        "controls/xml/order-default-ns.xml": {
+          "children": {
+            "order": [
+              {
+                "children": {
+                  "-p": [
+                    {
+                      "children": {},
+                      "data": "urn:parsarium:price"
+                    }
+                  ],
+                  "-xmlns": [
+                    {
+                      "children": {},
+                      "data": "urn:parsarium:order"
+                    }
+                  ],
+                  "line": [
+                    {
+                      "children": {
+                        "-currency": [
+                          {
+                            "children": {},
+                            "data": "EUR"
+                          }
+                        ],
+                        "-n": [
+                          {
+                            "children": {},
+                            "data": "1"
+                          }
+                        ],
+                        "amount": [
+                          {
+                            "children": {},
+                            "data": "12.50 €"
+                          }
+                        ],
+                        "sku": [
+                          {
+                            "children": {},
+                            "data": "A-7"
+                          }
+                        ]
+                      },
+                      "data": ""
+                    },
+                    {
+                      "children": {
+                        "-n": [
+                          {
+                            "children": {},
+                            "data": "2"
+                          }
+                        ],
+                        "-note": [
+                          {
+                            "children": {},
+                            "data": "say \"hi\""
+                          }
+                        ],
+                        "plain": [
+                          {
+                            "children": {
+                              "-xmlns": [
+                                {
+                                  "children": {},
+                                  "data": ""
+                                }
+                              ],
+                              "leaf": [
+                                {
+                                  "children": {},
+                                  "data": ""
+                                }
+                              ]
+                            },
+                            "data": ""
+                          }
+                        ]
+                      },
+                      "data": ""
+                    }
+                  ]
+                },
+                "data": ""
+              }
+            ]
+          },
+          "data": ""
+        }
+      },
+      "covered_blocks": {
+        "controls/xml/catalog-ns.xml": 33,
+        "controls/xml/order-default-ns.xml": 33
+      },
+      "repeat_identical": true,
+      "own_block_difference": 0,
+      "changed_blocks": []
+    },
+    "goxml2json-convert": {
+      "test": "TestGoxml2jsonConvert",
+      "package_prefix": "github.com/basgys/goxml2json/",
+      "observed": {
+        "controls/xml/catalog-ns.xml": {
+          "catalog": {
+            "-c": "urn:parsarium:catalog",
+            "-version": "1",
+            "-xmlns": "urn:parsarium:item",
+            "item": [
+              {
+                "#content": "Café & té",
+                "-id": "a1",
+                "-lang": "es"
+              },
+              {
+                "-id": "b2",
+                "name": "Zürich <HQ>",
+                "note": "x < y"
+              }
+            ]
+          }
+        },
+        "controls/xml/order-default-ns.xml": {
+          "order": {
+            "-p": "urn:parsarium:price",
+            "-xmlns": "urn:parsarium:order",
+            "line": [
+              {
+                "-currency": "EUR",
+                "-n": "1",
+                "amount": "12.50 €",
+                "sku": "A-7"
+              },
+              {
+                "-n": "2",
+                "-note": "say \"hi\"",
+                "plain": {
+                  "-xmlns": "",
+                  "leaf": ""
+                }
+              }
+            ]
+          }
+        }
+      },
+      "covered_blocks": {
+        "controls/xml/catalog-ns.xml": 83,
+        "controls/xml/order-default-ns.xml": 82
+      },
+      "repeat_identical": true,
+      "own_block_difference": 3,
+      "changed_blocks": [
+        "github.com/basgys/goxml2json/encoder.go:139.5,140.21",
+        "github.com/basgys/goxml2json/encoder.go:155.5,157.30",
+        "github.com/basgys/goxml2json/encoder.go:70.4,76.1"
+      ]
+    },
+    "simplexml-dom": {
+      "test": "TestSimplexmlDom",
+      "package_prefix": "github.com/VictorLowther/simplexml/dom/",
+      "observed": {
+        "controls/xml/catalog-ns.xml": {
+          "attributes": [
+            "{xmlns}c=urn:parsarium:catalog",
+            "{}xmlns=urn:parsarium:item",
+            "{}version=1"
+          ],
+          "children": [
+            {
+              "attributes": [
+                "{}id=a1",
+                "{urn:parsarium:catalog}lang=es"
+              ],
+              "children": [],
+              "content": "Café & té",
+              "name": "{urn:parsarium:item}item"
+            },
+            {
+              "attributes": [
+                "{}id=b2"
+              ],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [],
+                  "content": "Zürich <HQ>",
+                  "name": "{urn:parsarium:item}name"
+                },
+                {
+                  "attributes": [],
+                  "children": [],
+                  "content": "x < y",
+                  "name": "{urn:parsarium:item}note"
+                }
+              ],
+              "content": "",
+              "name": "{urn:parsarium:item}item"
+            }
+          ],
+          "content": "",
+          "name": "{urn:parsarium:catalog}catalog"
+        },
+        "controls/xml/order-default-ns.xml": {
+          "attributes": [
+            "{}xmlns=urn:parsarium:order",
+            "{xmlns}p=urn:parsarium:price"
+          ],
+          "children": [
+            {
+              "attributes": [
+                "{}n=1",
+                "{urn:parsarium:price}currency=EUR"
+              ],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [],
+                  "content": "A-7",
+                  "name": "{urn:parsarium:order}sku"
+                },
+                {
+                  "attributes": [],
+                  "children": [],
+                  "content": "12.50 €",
+                  "name": "{urn:parsarium:price}amount"
+                }
+              ],
+              "content": "",
+              "name": "{urn:parsarium:order}line"
+            },
+            {
+              "attributes": [
+                "{}n=2",
+                "{}note=say \"hi\""
+              ],
+              "children": [
+                {
+                  "attributes": [
+                    "{}xmlns="
+                  ],
+                  "children": [
+                    {
+                      "attributes": [],
+                      "children": [],
+                      "content": "",
+                      "name": "{}leaf"
+                    }
+                  ],
+                  "content": "",
+                  "name": "{}plain"
+                }
+              ],
+              "content": "",
+              "name": "{urn:parsarium:order}line"
+            }
+          ],
+          "content": "",
+          "name": "{urn:parsarium:order}order"
+        }
+      },
+      "covered_blocks": {
+        "controls/xml/catalog-ns.xml": 36,
+        "controls/xml/order-default-ns.xml": 36
+      },
+      "repeat_identical": true,
+      "own_block_difference": 0,
+      "changed_blocks": []
+    },
+    "go-xmldom": {
+      "test": "TestGoXmldom",
+      "package_prefix": "github.com/subchen/go-xmldom/",
+      "observed": {
+        "controls/xml/catalog-ns.xml": {
+          "attributes": [
+            "c=urn:parsarium:catalog",
+            "xmlns=urn:parsarium:item",
+            "version=1"
+          ],
+          "children": [
+            {
+              "attributes": [
+                "id=a1",
+                "lang=es"
+              ],
+              "children": [],
+              "name": "item",
+              "text": "Café & té"
+            },
+            {
+              "attributes": [
+                "id=b2"
+              ],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [],
+                  "name": "name",
+                  "text": "Zürich <HQ>"
+                },
+                {
+                  "attributes": [],
+                  "children": [],
+                  "name": "note",
+                  "text": "x < y"
+                }
+              ],
+              "name": "item",
+              "text": ""
+            }
+          ],
+          "name": "catalog",
+          "text": ""
+        },
+        "controls/xml/order-default-ns.xml": {
+          "attributes": [
+            "xmlns=urn:parsarium:order",
+            "p=urn:parsarium:price"
+          ],
+          "children": [
+            {
+              "attributes": [
+                "n=1",
+                "currency=EUR"
+              ],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [],
+                  "name": "sku",
+                  "text": "A-7"
+                },
+                {
+                  "attributes": [],
+                  "children": [],
+                  "name": "amount",
+                  "text": "12.50 €"
+                }
+              ],
+              "name": "line",
+              "text": ""
+            },
+            {
+              "attributes": [
+                "n=2",
+                "note=say \"hi\""
+              ],
+              "children": [
+                {
+                  "attributes": [
+                    "xmlns="
+                  ],
+                  "children": [
+                    {
+                      "attributes": [],
+                      "children": [],
+                      "name": "leaf",
+                      "text": ""
+                    }
+                  ],
+                  "name": "plain",
+                  "text": ""
+                }
+              ],
+              "name": "line",
+              "text": ""
+            }
+          ],
+          "name": "order",
+          "text": ""
+        }
+      },
+      "covered_blocks": {
+        "controls/xml/catalog-ns.xml": 19,
+        "controls/xml/order-default-ns.xml": 19
+      },
+      "repeat_identical": true,
+      "own_block_difference": 0,
+      "changed_blocks": []
+    },
+    "xml2map": {
+      "test": "TestXml2map",
+      "package_prefix": "github.com/sbabiv/xml2map/",
+      "observed": {
+        "controls/xml/catalog-ns.xml": {
+          "catalog": {
+            "@version": "1",
+            "@xmlns": "urn:parsarium:item",
+            "@xmlns:c": "urn:parsarium:catalog"
+          },
+          "urn:parsarium:catalog:catalog": {
+            "urn:parsarium:item:item": [
+              {
+                "#text": "Café & té"
+              },
+              {
+                "urn:parsarium:item:name": "Zürich <HQ>",
+                "urn:parsarium:item:note": "x < y"
+              }
+            ]
+          }
+        },
+        "controls/xml/order-default-ns.xml": {
+          "order": {
+            "@xmlns": "urn:parsarium:order",
+            "@xmlns:p": "urn:parsarium:price"
+          },
+          "urn:parsarium:order:order": {
+            "urn:parsarium:order:line": [
+              {
+                "urn:parsarium:order:sku": "A-7",
+                "urn:parsarium:price:amount": "12.50 €"
+              },
+              {
+                "plain": {
+                  "@xmlns": "",
+                  "leaf": ""
+                }
+              }
+            ]
+          }
+        }
+      },
+      "covered_blocks": {
+        "controls/xml/catalog-ns.xml": 41,
+        "controls/xml/order-default-ns.xml": 40
+      },
+      "repeat_identical": true,
+      "own_block_difference": 1,
+      "changed_blocks": [
+        "github.com/sbabiv/xml2map/decoder.go:106.7,108.1"
+      ]
+    },
+    "quickxml": {
+      "test": "TestQuickxml",
+      "package_prefix": "github.com/dgrr/quickxml/",
+      "observed": {
+        "controls/xml/catalog-ns.xml": [
+          "start c:catalog xmlns:c=urn:parsarium:catalog xmlns=urn:parsarium:item version=1",
+          "start item id=a1 c:lang=es",
+          "text Café &amp; té",
+          "end item",
+          "start item id=b2",
+          "start name",
+          "text Zürich &lt;HQ&gt;",
+          "end name",
+          "start note",
+          "end note",
+          "end item",
+          "end c:catalog"
+        ],
+        "controls/xml/order-default-ns.xml": [
+          "start order xmlns=urn:parsarium:order xmlns:p=urn:parsarium:price",
+          "start line n=EUR",
+          "start sku",
+          "text A&#x2D;7",
+          "end sku",
+          "start p:amount",
+          "text 12&#46;50 &#x20AC;",
+          "end p:amount",
+          "end line",
+          "start line n=2 note=say &quot;hi&quot;",
+          "start plain xmlns=",
+          "start leaf",
+          "end plain",
+          "end line",
+          "end order"
+        ]
+      },
+      "covered_blocks": {
+        "controls/xml/catalog-ns.xml": 88,
+        "controls/xml/order-default-ns.xml": 89
+      },
+      "repeat_identical": true,
+      "own_block_difference": 1,
+      "changed_blocks": [
+        "github.com/dgrr/quickxml/start.go:207.4,207.19"
+      ]
+    }
+  }
+}

@@ -1,22 +1,40 @@
 [
   {
+    "name": "github.com/antchfx/xpath",
+    "status": "excluded",
+    "version_seen": "v1.3.9",
+    "imported_by": 223,
+    "reason": "XPath engine over a caller-supplied NodeNavigator; it does not read XML bytes (xmlquery supplies the tree). Not a parser path.",
+    "source": "https://pkg.go.dev/github.com/antchfx/xpath"
+  },
+  {
+    "name": "github.com/mattermost/xml-roundtrip-validator",
+    "status": "excluded",
+    "version_seen": "v0.1.0",
+    "imported_by": 220,
+    "reason": "Validate/ValidateAll tokenize with encoding/xml only to report round-trip errors; the API returns errors, not a parsed structure. Validator, not a parser path.",
+    "source": "https://pkg.go.dev/github.com/mattermost/xml-roundtrip-validator"
+  },
+  {
     "name": "github.com/basgys/goxml2json",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v1.1.0",
-    "license": "MIT",
     "imported_by": 182,
-    "reason": "Pinned v1.1.0 Convert(io.Reader) parses both valid XML controls through encoding/xml, but decoder.go uses Name.Local for element and attribute labels. The JSON output loses expanded namespace names: c:catalog -> catalog, c:lang -> -lang, p:amount -> amount, p:currency -> -currency. It fails the shared namespace-aware result; no raw-XML reconstruction, Docker selection, or AFL feedback was added.",
+    "reason": "Pinned v1.1.0 parses both valid controls through encoding/xml, but (1) decoder.go keeps only Name.Local for elements and attributes, so the result is neither namespace-expanded nor a raw-name view (c:catalog -> catalog, c:lang -> -lang; prefixes and URIs are both lost; the mxj/x2j map paths were accepted with the same loss, so this alone is not the deciding reason), and (2) its own XML-parsing code gives no input-dependent feedback on the fixed valid pair: NewDecoder().Decode covers the same 33 own blocks on both controls. Convert's only 3 differing own blocks are in encoder.go (JSON escaping and '#content' serialization of the already-parsed tree), not in parsing. Same own-source gate as aqwari.net/xml/xmltree. Evidence: data/go/xml/wrapper-gates-check.json and data/go/xml/goxml2json-lead-check.json.",
     "source": "https://pkg.go.dev/github.com/basgys/goxml2json",
+    "license": "MIT",
+    "evidence": "data/go/xml/wrapper-gates-check.json",
     "probe_evidence": "data/go/xml/goxml2json-lead-check.json"
   },
   {
     "name": "github.com/clbanning/mxj/v2",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v2.7.0",
-    "license": "MIT",
     "imported_by": 178,
-    "reason": "v2 module of clbanning/mxj; its XML path is expected to follow the verified v1.8.4 map conversion over encoding/xml, but the v2 source was not compared or run. Its 178 importers are not added to the v1 metric.",
-    "source": "https://pkg.go.dev/github.com/clbanning/mxj/v2"
+    "reason": "v2 successor module of the selected github.com/clbanning/mxj (same repository and author). Its non-test package source overlaps the selected v1.8.4 by 4,430/5,115 lines (86.6%), 11 of 22 files byte-identical; the XML parser file xml.go matches 1,062 of 1,440 lines. Successor path of a selected package, not counted; its 178 importers are not added to the v1 metric.",
+    "source": "https://pkg.go.dev/github.com/clbanning/mxj/v2",
+    "license": "MIT",
+    "evidence": "data/go/xml/lead-overlap-check.json"
   },
   {
     "name": "github.com/vmware/govmomi/vim25/xml",
@@ -39,6 +57,14 @@
     "verified_evidence": "projects/xml/go/github_com_mmcdole_goxpp/verification.json"
   },
   {
+    "name": "github.com/tdewolff/minify/v2/xml",
+    "status": "excluded",
+    "version_seen": "v2.25.0",
+    "imported_by": 117,
+    "reason": "XML minifier built on the tdewolff/parse/v2/xml lexer; it writes minified XML and reports no parsed structure. Not a parser path.",
+    "source": "https://pkg.go.dev/github.com/tdewolff/minify/v2/xml"
+  },
+  {
     "name": "github.com/moovweb/gokogiri/xml",
     "status": "promoted_to_verified",
     "version_seen": "v0.0.0-...-a1a8281",
@@ -58,22 +84,41 @@
     "source": "https://pkg.go.dev/mellium.im/xmlstream"
   },
   {
+    "name": "github.com/go-xmlfmt/xmlfmt",
+    "status": "excluded",
+    "version_seen": "v1.1.3",
+    "imported_by": 82,
+    "reason": "Regex-based XML pretty-printer (FormatXML); string formatting, not a parser that reports structure. Not a parser path.",
+    "source": "https://pkg.go.dev/github.com/go-xmlfmt/xmlfmt"
+  },
+  {
     "name": "github.com/jbowtie/gokogiri/xml",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v0.0.0-...-de0f9d4",
-    "license": "MIT",
     "imported_by": 71,
-    "reason": "cgo binding to libxml2 (gokogiri fork); pseudo-version only, not run.",
-    "source": "https://pkg.go.dev/github.com/jbowtie/gokogiri/xml"
+    "reason": "Fork of the selected moovweb/gokogiri: its xml package overlaps the selected one by 1,813/1,892 lines (95.8%), 6 of 10 files byte-identical, over the same native libxml2. Not counted.",
+    "source": "https://pkg.go.dev/github.com/jbowtie/gokogiri/xml",
+    "license": "MIT",
+    "evidence": "data/go/xml/lead-overlap-check.json"
+  },
+  {
+    "name": "github.com/zhuxiujia/GoMybatis/lib/github.com/beevik/etree",
+    "status": "excluded",
+    "version_seen": "v6.5.12+incompatible",
+    "imported_by": 63,
+    "reason": "Vendored copy of beevik/etree inside the GoMybatis module: overlaps beevik/etree v1.0.1 by 1,752/1,789 lines (97.9%), 2 of 3 files byte-identical (and the selected v1.8.1 by 69.3%, since etree changed since v1.0.1). An older vendored release of a selected path; not counted.",
+    "source": "https://pkg.go.dev/github.com/zhuxiujia/GoMybatis/lib/github.com/beevik/etree",
+    "evidence": "data/go/xml/lead-overlap-check.json"
   },
   {
     "name": "github.com/clbanning/x2j",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v0.0.0-...-8252494",
-    "license": "BSD-3-Clause",
     "imported_by": 47,
-    "reason": "Upstream of the verified github.com/beego/x2j fork, 27 commits ahead of the forked commit a0352aa; its later source was not compared or run. Its 47 importers are not added to the beego/x2j metric.",
-    "source": "https://pkg.go.dev/github.com/clbanning/x2j"
+    "reason": "Upstream of the selected github.com/beego/x2j fork, 27 commits ahead. Package source overlaps beego/x2j by 1,183/1,632 lines (72.5%), 3 of 8 files byte-identical; the parsing file x2j.go matches 626 of 643 lines, and the upstream-only files are value-lookup helpers. Same parser path as the selected fork; not counted.",
+    "source": "https://pkg.go.dev/github.com/clbanning/x2j",
+    "license": "BSD-3-Clause",
+    "evidence": "data/go/xml/lead-overlap-check.json"
   },
   {
     "name": "aqwari.net/xml/xmltree",
@@ -86,32 +131,62 @@
     "evidence": "data/go/xml/xmltree-lead-check.json"
   },
   {
+    "name": "github.com/antchfx/xquery/xml",
+    "status": "excluded",
+    "version_seen": "v0.0.0-...-ad5b8c7",
+    "imported_by": 40,
+    "reason": "Deprecated predecessor of the selected antchfx/xmlquery (same author; the repository points users to xmlquery). Its query.go matches 195 of 230 lines of xmlquery; overall 296/491 lines (60.3%), 0 of 2 files byte-identical. Predecessor path; not counted.",
+    "source": "https://pkg.go.dev/github.com/antchfx/xquery/xml",
+    "evidence": "data/go/xml/lead-overlap-check.json"
+  },
+  {
     "name": "github.com/nbio/xml",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v0.0.0-...-9f64bb3",
-    "license": "BSD-3-Clause",
     "imported_by": 35,
-    "reason": "Synopsis is identical to encoding/xml, which suggests a fork in the encoding/xml family. Not checked or run.",
-    "source": "https://pkg.go.dev/github.com/nbio/xml"
+    "reason": "Separately compiled fork of Go encoding/xml, like the selected govmomi/vim25/xml, and not byte-identical to either; but its source overlaps the selected govmomi fork by 4,060/4,502 lines (90.2%), 0 of 4 files byte-identical (xml.go 2,017 of 2,082 lines) and encoding/xml by 4,067/4,502 lines (90.3%), 0 of 4 files byte-identical. Above the ~70% overlap rule against an already selected fork; not counted.",
+    "source": "https://pkg.go.dev/github.com/nbio/xml",
+    "license": "BSD-3-Clause",
+    "evidence": "data/go/xml/lead-overlap-check.json"
   },
   {
     "name": "github.com/lestrrat-go/libxml2",
     "status": "promoted_to_verified",
-    "version_seen": "v0.0.0-20260709020957-3f0f7bd60b63",
-    "license": "MIT",
+    "version_seen": "v0.0.0-...-3f0f7bd",
     "imported_by": 30,
     "reason": "Pinned 3f0f7bd60b63 pseudo-version libxml2.Parse([]byte) cgo route matches both namespace-aware controls over pinned libxml2 2.15.4 with a one-line cgo compatibility patch; 197 Go binding lines and 1789 libxml2 lines covered. Native parser-only AFL++ maps repeat 5x per control and differ by 368 tuples; DOM traversal adds none. Shares the libxml2 family with gokogiri.",
     "source": "https://pkg.go.dev/github.com/lestrrat-go/libxml2",
-    "verified_evidence": "fuzzing/afl-native/xml/go/github_com_lestrrat_go_libxml2/feedback-validation.json"
+    "license": "MIT",
+    "evidence": "fuzzing/afl-native/xml/go/github_com_lestrrat_go_libxml2/feedback-validation.json"
   },
   {
     "name": "github.com/tdewolff/parse/v2/xml",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v2.25.0",
-    "license": "MIT",
     "imported_by": 28,
-    "reason": "XML 1.0 lexer (tokenizer, not a tree or namespace resolver); not run.",
-    "source": "https://pkg.go.dev/github.com/tdewolff/parse/v2/xml"
+    "reason": "XML 1.0 lexer only: Lexer.Next returns raw token bytes; text and attribute values keep entity and character references undecoded (util.go only escapes for output), and there is no namespace resolution or tree. Fails the decoded-text requirement of the shared result without adapter-side parsing; tokenizer-only, as with the C jsmn precedent. Not run.",
+    "source": "https://pkg.go.dev/github.com/tdewolff/parse/v2/xml",
+    "license": "MIT"
+  },
+  {
+    "name": "github.com/VictorLowther/simplexml/dom",
+    "status": "excluded",
+    "version_seen": "v0.0.0-...-0bff936",
+    "imported_by": 22,
+    "reason": "dom.Parse builds a namespace-aware element tree from encoding/xml Decoder.Token and returns correct expanded names on the controls, but its own package covers the same 36 blocks on both fixed valid controls (no comment/PI handling); all differences are in encoding/xml. Excluded by the xmltree own-source feedback gate.",
+    "source": "https://pkg.go.dev/github.com/VictorLowther/simplexml/dom",
+    "evidence": "data/go/xml/wrapper-gates-check.json",
+    "license": "Apache-2.0"
+  },
+  {
+    "name": "github.com/subchen/go-xmldom",
+    "status": "excluded",
+    "version_seen": "v1.1.2",
+    "imported_by": 21,
+    "reason": "Parse builds a DOM from encoding/xml tokens with Name.Local only (namespace prefixes and URIs dropped, xmlns:c becomes attribute c). Its own package covers the same 19 blocks on both fixed valid controls (the XML declaration already exercises its ProcInst branch); excluded by the own-source feedback gate.",
+    "source": "https://pkg.go.dev/github.com/subchen/go-xmldom",
+    "license": "Apache-2.0",
+    "evidence": "data/go/xml/wrapper-gates-check.json"
   },
   {
     "name": "github.com/go-forks/go-pkg-xmlx",
@@ -124,6 +199,42 @@
     "verified_evidence": "fuzzing/afl-native/xml/go/github_com_go_forks_go_pkg_xmlx/differential.json"
   },
   {
+    "name": "github.com/gogf/gf/v2/encoding/gxml",
+    "status": "excluded",
+    "version_seen": "v2.10.4",
+    "imported_by": 17,
+    "reason": "gxml.Decode converts the charset and then calls github.com/clbanning/mxj/v2 NewMapXml; its own code is a pre-pass and error wrapping over the excluded mxj v2 module (86.6% overlap with the selected mxj). No parser of its own; not counted.",
+    "source": "https://pkg.go.dev/github.com/gogf/gf/v2/encoding/gxml",
+    "license": "MIT"
+  },
+  {
+    "name": "github.com/mattn/go-pkg-xmlx",
+    "status": "excluded",
+    "version_seen": "v0.0.0-...-db53493",
+    "imported_by": 15,
+    "reason": "Byte-identical fork of the selected go-forks/go-pkg-xmlx: 1,728/1,728 lines (100.0%), 3 of 3 files byte-identical. Not counted.",
+    "source": "https://pkg.go.dev/github.com/mattn/go-pkg-xmlx",
+    "evidence": "data/go/xml/lead-overlap-check.json"
+  },
+  {
+    "name": "github.com/samuel-jimenez/xml",
+    "status": "excluded",
+    "version_seen": "v0.2.4",
+    "imported_by": 14,
+    "reason": "encoding/xml fork overlapping the selected govmomi fork by 4,020/4,717 lines (85.2%), 0 of 4 files byte-identical and encoding/xml by 4,014/4,717 lines (85.1%), 0 of 4 files byte-identical. Above the overlap rule; not counted.",
+    "source": "https://pkg.go.dev/github.com/samuel-jimenez/xml",
+    "evidence": "data/go/xml/lead-overlap-check.json"
+  },
+  {
+    "name": "github.com/minio/xxml",
+    "status": "excluded",
+    "version_seen": "v0.0.3",
+    "imported_by": 14,
+    "reason": "encoding/xml fork overlapping the selected govmomi fork by 4,053/4,290 lines (94.5%), 0 of 4 files byte-identical and encoding/xml by 4,066/4,290 lines (94.8%), 0 of 4 files byte-identical. Above the overlap rule; not counted.",
+    "source": "https://pkg.go.dev/github.com/minio/xxml",
+    "evidence": "data/go/xml/lead-overlap-check.json"
+  },
+  {
     "name": "github.com/lestrrat-go/helium",
     "status": "promoted_to_verified",
     "version_seen": "v0.11.0",
@@ -134,6 +245,43 @@
     "verified_evidence": "fuzzing/afl-native/xml/go/github_com_lestrrat_go_helium/differential.json"
   },
   {
+    "name": "github.com/printesoi/xml-go",
+    "status": "excluded",
+    "version_seen": "v1.0.1",
+    "imported_by": 12,
+    "reason": "encoding/xml fork (adds namespacebinding.go) overlapping the selected govmomi fork by 4,098/4,482 lines (91.4%), 0 of 5 files byte-identical and encoding/xml by 4,112/4,482 lines (91.7%), 0 of 5 files byte-identical. Above the overlap rule; not counted.",
+    "source": "https://pkg.go.dev/github.com/printesoi/xml-go",
+    "evidence": "data/go/xml/lead-overlap-check.json"
+  },
+  {
+    "name": "github.com/sbabiv/xml2map",
+    "status": "excluded",
+    "version_seen": "v1.2.1",
+    "imported_by": 12,
+    "reason": "Decoder.Decode over encoding/xml fails the catalog control: setAttrs stores attributes under the local element name while the element value is keyed by '<path.Base(namespace)>:<local>', so every attribute of a namespaced element is missing from the map (id=a1, c:lang=es, id=b2 and p:currency=EUR are absent; the root map is split into two keys). Evidence: data/go/xml/wrapper-gates-check.json.",
+    "source": "https://pkg.go.dev/github.com/sbabiv/xml2map",
+    "license": "MIT",
+    "evidence": "data/go/xml/wrapper-gates-check.json"
+  },
+  {
+    "name": "github.com/dgrr/quickxml",
+    "status": "excluded",
+    "version_seen": "v0.0.0-...-4977de5",
+    "imported_by": 12,
+    "reason": "Own byte-level reader, but it fails the catalog control: text is returned raw (\"Café &amp; té\", \"Zürich &lt;HQ&gt;\") and Reader.next skips every '<!' construct, so the CDATA text 'x < y' is lost. Evidence: data/go/xml/wrapper-gates-check.json.",
+    "source": "https://pkg.go.dev/github.com/dgrr/quickxml",
+    "license": "MIT",
+    "evidence": "data/go/xml/wrapper-gates-check.json"
+  },
+  {
+    "name": "github.com/tamerh/xml-stream-parser",
+    "status": "unresolved",
+    "version_seen": "v1.5.0",
+    "imported_by": 11,
+    "reason": "Streaming element parser with its own reader; 11 importers is below the tenth selected path (helium, 12). Not evaluated after the ten-path ceiling was reached.",
+    "source": "https://pkg.go.dev/github.com/tamerh/xml-stream-parser"
+  },
+  {
     "name": "github.com/lestrrat/go-libxml2",
     "status": "excluded",
     "version_seen": "v0.0.0-...-bb78334",
@@ -141,5 +289,37 @@
     "imported_by": 9,
     "reason": "Pre-rename module path of the same repository as the selected github.com/lestrrat-go/libxml2 (the GitHub organisation moved from lestrrat to lestrrat-go); a predecessor path of a selected package, not a separate parser. Its 9 importers are not added.",
     "source": "https://pkg.go.dev/github.com/lestrrat/go-libxml2"
+  },
+  {
+    "name": "github.com/orisano/gosax",
+    "status": "unresolved",
+    "version_seen": "v1.1.4",
+    "imported_by": 7,
+    "reason": "SAX parser; 7 importers, below the ten-path cut (12). Not evaluated after the ceiling was reached.",
+    "source": "https://pkg.go.dev/github.com/orisano/gosax"
+  },
+  {
+    "name": "github.com/speedata/goxml",
+    "status": "unresolved",
+    "version_seen": "v1.0.12",
+    "imported_by": 6,
+    "reason": "XML tree package; 6 importers, below the ten-path cut (12). Not evaluated after the ceiling was reached.",
+    "source": "https://pkg.go.dev/github.com/speedata/goxml"
+  },
+  {
+    "name": "github.com/santhosh-tekuri/dom",
+    "status": "unresolved",
+    "version_seen": "v1.0.0",
+    "imported_by": 5,
+    "reason": "DOM package; 5 importers, below the ten-path cut (12). Not evaluated after the ceiling was reached.",
+    "source": "https://pkg.go.dev/github.com/santhosh-tekuri/dom"
+  },
+  {
+    "name": "modernc.org/libexpat",
+    "status": "unresolved",
+    "version_seen": "v0.10.30",
+    "imported_by": 1,
+    "reason": "ccgo transpilation of Expat to Go; 1 importer, below the ten-path cut (12). Not evaluated after the ceiling was reached.",
+    "source": "https://pkg.go.dev/modernc.org/libexpat"
   }
 ]

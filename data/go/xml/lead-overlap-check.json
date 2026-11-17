@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T22:48:38.774906+00:00",
+  "script": "scripts/check_go_xml_lead_overlap.py",
+  "script_sha256": "192a9d568e72960aa6805199721a3ffaf9d903f87a5235505ab6dacfa5b8fcf0",
+  "method": "difflib matching blocks over right-stripped lines of same-named non-test .go files; overlap = matched candidate lines / candidate lines",
+  "rule": "A lead whose parsing package overlaps a selected path's package by about 70% or more, or is a predecessor/successor path or byte-identical fork of it, is excluded as the same parser path; the standard-library comparison is reported for encoding/xml forks only, since encoding/xml is an unranked runtime API.",
+  "archive_sha256": {
+    "antchfx/xmlquery@v1.5.2": "cdb7830a6e1e3f52c3d3a084b55b4bdf84f73b8073c582bca8f5f00d15a5f94c",
+    "antchfx/xquery@v0.0.0-20180515051857-ad5b8c7a47b0": "9ddc9d830f2d6c7a22604035f0c621228ffa4ed6ff1f1d34655ee477c203c899",
+    "beego/x2j@v0.0.0-20131220205130-a0352aadc542": "f9a32026b2107f3cc3610ac6b75c4c64818646a316c35e648c8811d4276a9993",
+    "beevik/etree@v1.0.1": "96056015b3a70b4352ad10936df06e593e9d50c62bcdc5a35745ef44cf298846",
+    "beevik/etree@v1.8.1": "c0338bfc955c839a435fc49156536be7e39525455412940f12ef1e0a903ee706",
+    "clbanning/mxj/v2@v2.7.0": "4451f64589cac692c9caa68be16551d6391949379a5bceae5455070198dd0918",
+    "clbanning/mxj@v1.8.4": "8947cf617bdd9efc62817c8ddb17bafe497f35abdf10a3c60f295e387f633f70",
+    "clbanning/x2j@v0.0.0-20191024224557-825249438eec": "747daafe80e4ac504626c01a1d28b1a64b785586975a47b50d62853a444b72a0",
+    "go-forks/go-pkg-xmlx@v0.0.0-20151201012946-76f54ee73233": "8c48f5f6f488c7f79c8f22caedde724bcc77bcc97a9e2d8be5e39f956346fece",
+    "jbowtie/gokogiri@v0.0.0-20250107075044-de0f9d4877a5": "45180292b808afd8ee8521cd025497870e0efe50c786102b2763fdd8532eedd3",
+    "mattn/go-pkg-xmlx@v0.0.0-20180208005205-db53493302d1": "25c32a09dd2ef7217670d5fc9659de7adc004d4c4741d36b2c72730311fc24b4",
+    "minio/xxml@v0.0.3": "eec7f98185f849ac85b798a4a7b2b1cbd5aea8ea360f563b47e715ee7fbb5c6d",
+    "moovweb/gokogiri@v0.0.0-20180713195410-a1a828153468": "d2c93190df9ceca2a8769288997a917f0b08b6b03151e851972aba5d40250a3b",
+    "nbio/xml@v0.0.0-20260302224236-9f64bb3b5a9e": "d988bcc03e13b8e4a589dfb39e7d3d656c6eaf2be6de25342dffed732ac2be2a",
+    "printesoi/xml-go@v1.0.1": "c60525ccd0acea8e57201079a2d71d7d90d3b3a942bce88357748bf124d4ac61",
+    "samuel-jimenez/xml@v0.2.4": "4dffaaca69b433a3b0b6d82215f07ece7d3e62d77b24b1c10a0e38ef1fa45fbf",
+    "vmware/govmomi@v0.56.2": "195de21afbe5a372c5afedcc59fef87cec96d07e9564cecf50e037fa31d079d4",
+    "zhuxiujia/GoMybatis@v6.5.12+incompatible": "35da19f50a26d26c0d8a39140b9e95d6ce832e24a7c4b9f39febac1f9f584812"
+  },
+  "encoding_xml_sha256": "41a7f2c7c910a57f70ce460cbe057a31703e11dbb169b499e50a3339a5f33bdb",
+  "results": [
+    {
+      "lead": "github.com/clbanning/mxj/v2",
+      "lead_archive": "clbanning/mxj/v2@v2.7.0",
+      "lead_package_dir": ".",
+      "reference": "github.com/clbanning/mxj (selected)",
+      "reference_archive": "clbanning/mxj@v1.8.4",
+      "reference_package_dir": ".",
+      "candidate_files": 22,
+      "reference_files": 21,
+      "byte_identical_files": 11,
+      "candidate_lines": 5115,
+      "matching_lines": 4430,
+      "overlap": 0.8661,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "anyxml.go",
+          "lines": 201,
+          "matching_lines": 168,
+          "byte_identical": false
+        },
+        {
+          "file": "doc.go",
+          "lines": 143,
+          "matching_lines": 132,
+          "byte_identical": false
+        },
+        {
+          "file": "escapechars.go",
+          "lines": 93,
+          "matching_lines": 52,
+          "byte_identical": false
+        },
+        {
+          "file": "exists.go",
+          "lines": 9,
+          "matching_lines": 4,
+          "byte_identical": false
+        },
+        {
+          "file": "files.go",
+          "lines": 287,
+          "matching_lines": 287,
+          "byte_identical": true
+        },
+        {
+          "file": "gob.go",
+          "lines": 35,
+          "matching_lines": 35,
+          "byte_identical": true
+        },
+        {
+          "file": "json.go",
+          "lines": 323,
+          "matching_lines": 323,
+          "byte_identical": true
+        },
+        {
+          "file": "keyvalues.go",
+          "lines": 668,
+          "matching_lines": 655,
+          "byte_identical": false
+        },
+        {
+          "file": "leafnode.go",
+          "lines": 112,
+          "matching_lines": 111,
+          "byte_identical": false
+        },
+        {
+          "file": "misc.go",
+          "lines": 86,
+          "matching_lines": 86,
+          "byte_identical": true
+        },
+        {
+          "file": "mxj.go",
+          "lines": 128,
+          "matching_lines": 128,
+          "byte_identical": true
+        },
+        {
+          "file": "newmap.go",
+          "lines": 184,
+          "matching_lines": 184,
+          "byte_identical": true
+        },
+        {
+          "file": "remove.go",
+          "lines": 37,
+          "matching_lines": 37,
+          "byte_identical": true
+        },
+        {
+          "file": "rename.go",
+          "lines": 61,
+          "matching_lines": 51,
+          "byte_identical": false
+        },
+        {
+          "file": "set.go",
+          "lines": 26,
+          "matching_lines": 26,
+          "byte_identical": true
+        },
+        {
+          "file": "setfieldsep.go",
+          "lines": 20,
+          "matching_lines": 20,
+          "byte_identical": true
+        },
+        {
+          "file": "strict.go",
+          "lines": 30,
+          "matching_lines": 30,
+          "byte_identical": true
+        },
+        {
+          "file": "struct.go",
+          "lines": 54,
+          "matching_lines": 54,
+          "byte_identical": true
+        },
+        {
+          "file": "updatevalues.go",
+          "lines": 258,
+          "matching_lines": 253,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 1440,
+          "matching_lines": 1062,
+          "byte_identical": false
+        },
+        {
+          "file": "xmlseq.go",
+          "lines": 902,
+          "matching_lines": 732,
+          "byte_identical": false
+        },
+        {
+          "file": "xmlseq2.go",
+          "lines": 18,
+          "matching_lines": 0,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/jbowtie/gokogiri/xml",
+      "lead_archive": "jbowtie/gokogiri@v0.0.0-20250107075044-de0f9d4877a5",
+      "lead_package_dir": "xml",
+      "reference": "github.com/moovweb/gokogiri/xml (selected)",
+      "reference_archive": "moovweb/gokogiri@v0.0.0-20180713195410-a1a828153468",
+      "reference_package_dir": "xml",
+      "candidate_files": 10,
+      "reference_files": 10,
+      "byte_identical_files": 6,
+      "candidate_lines": 1892,
+      "matching_lines": 1813,
+      "overlap": 0.9582,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "attribute.go",
+          "lines": 37,
+          "matching_lines": 36,
+          "byte_identical": false
+        },
+        {
+          "file": "cdata.go",
+          "lines": 12,
+          "matching_lines": 12,
+          "byte_identical": true
+        },
+        {
+          "file": "comment.go",
+          "lines": 5,
+          "matching_lines": 5,
+          "byte_identical": true
+        },
+        {
+          "file": "document.go",
+          "lines": 455,
+          "matching_lines": 448,
+          "byte_identical": false
+        },
+        {
+          "file": "element.go",
+          "lines": 5,
+          "matching_lines": 5,
+          "byte_identical": true
+        },
+        {
+          "file": "fragment.go",
+          "lines": 115,
+          "matching_lines": 114,
+          "byte_identical": false
+        },
+        {
+          "file": "node.go",
+          "lines": 1186,
+          "matching_lines": 1116,
+          "byte_identical": false
+        },
+        {
+          "file": "nodeset.go",
+          "lines": 48,
+          "matching_lines": 48,
+          "byte_identical": true
+        },
+        {
+          "file": "pi.go",
+          "lines": 5,
+          "matching_lines": 5,
+          "byte_identical": true
+        },
+        {
+          "file": "text.go",
+          "lines": 24,
+          "matching_lines": 24,
+          "byte_identical": true
+        }
+      ]
+    },
+    {
+      "lead": "github.com/clbanning/x2j",
+      "lead_archive": "clbanning/x2j@v0.0.0-20191024224557-825249438eec",
+      "lead_package_dir": ".",
+      "reference": "github.com/beego/x2j (selected)",
+      "reference_archive": "beego/x2j@v0.0.0-20131220205130-a0352aadc542",
+      "reference_package_dir": ".",
+      "candidate_files": 8,
+      "reference_files": 5,
+      "byte_identical_files": 3,
+      "candidate_lines": 1632,
+      "matching_lines": 1183,
+      "overlap": 0.7249,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "reader2j.go",
+          "lines": 135,
+          "matching_lines": 104,
+          "byte_identical": false
+        },
+        {
+          "file": "x2j.go",
+          "lines": 643,
+          "matching_lines": 626,
+          "byte_identical": false
+        },
+        {
+          "file": "x2j_bulk.go",
+          "lines": 127,
+          "matching_lines": 127,
+          "byte_identical": true
+        },
+        {
+          "file": "x2j_findPath.go",
+          "lines": 143,
+          "matching_lines": 0,
+          "byte_identical": false
+        },
+        {
+          "file": "x2j_valuesAt.go",
+          "lines": 88,
+          "matching_lines": 0,
+          "byte_identical": false
+        },
+        {
+          "file": "x2j_valuesFrom.go",
+          "lines": 125,
+          "matching_lines": 125,
+          "byte_identical": true
+        },
+        {
+          "file": "x2m_bulk.go",
+          "lines": 201,
+          "matching_lines": 201,
+          "byte_identical": true
+        },
+        {
+          "file": "xml.go",
+          "lines": 170,
+          "matching_lines": 0,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/vmware/govmomi/vim25/xml (selected)",
+      "lead_archive": "vmware/govmomi@v0.56.2",
+      "lead_package_dir": "vim25/xml",
+      "reference": "encoding/xml (Go 1.27.1 runtime)",
+      "reference_archive": "go1.27.1 GOROOT/src",
+      "reference_package_dir": "encoding/xml",
+      "candidate_files": 5,
+      "reference_files": 4,
+      "byte_identical_files": 0,
+      "candidate_lines": 4562,
+      "matching_lines": 4135,
+      "overlap": 0.9064,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "extras.go",
+          "lines": 124,
+          "matching_lines": 0,
+          "byte_identical": false
+        },
+        {
+          "file": "marshal.go",
+          "lines": 1144,
+          "matching_lines": 1054,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 828,
+          "matching_lines": 699,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 386,
+          "matching_lines": 309,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2080,
+          "matching_lines": 2073,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/nbio/xml",
+      "lead_archive": "nbio/xml@v0.0.0-20260302224236-9f64bb3b5a9e",
+      "lead_package_dir": ".",
+      "reference": "github.com/vmware/govmomi/vim25/xml (selected)",
+      "reference_archive": "vmware/govmomi@v0.56.2",
+      "reference_package_dir": "vim25/xml",
+      "candidate_files": 4,
+      "reference_files": 5,
+      "byte_identical_files": 0,
+      "candidate_lines": 4502,
+      "matching_lines": 4060,
+      "overlap": 0.9018,
+      "only_in_reference": [
+        "extras.go"
+      ],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1254,
+          "matching_lines": 1011,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 795,
+          "matching_lines": 736,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 371,
+          "matching_lines": 296,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2082,
+          "matching_lines": 2017,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/nbio/xml",
+      "lead_archive": "nbio/xml@v0.0.0-20260302224236-9f64bb3b5a9e",
+      "lead_package_dir": ".",
+      "reference": "encoding/xml (Go 1.27.1 runtime)",
+      "reference_archive": "go1.27.1 GOROOT/src",
+      "reference_package_dir": "encoding/xml",
+      "candidate_files": 4,
+      "reference_files": 4,
+      "byte_identical_files": 0,
+      "candidate_lines": 4502,
+      "matching_lines": 4067,
+      "overlap": 0.9034,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1254,
+          "matching_lines": 976,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 795,
+          "matching_lines": 725,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 371,
+          "matching_lines": 350,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2082,
+          "matching_lines": 2016,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/samuel-jimenez/xml",
+      "lead_archive": "samuel-jimenez/xml@v0.2.4",
+      "lead_package_dir": ".",
+      "reference": "github.com/vmware/govmomi/vim25/xml (selected)",
+      "reference_archive": "vmware/govmomi@v0.56.2",
+      "reference_package_dir": "vim25/xml",
+      "candidate_files": 4,
+      "reference_files": 5,
+      "byte_identical_files": 0,
+      "candidate_lines": 4717,
+      "matching_lines": 4020,
+      "overlap": 0.8522,
+      "only_in_reference": [
+        "extras.go"
+      ],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1325,
+          "matching_lines": 991,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 930,
+          "matching_lines": 716,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 375,
+          "matching_lines": 296,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2087,
+          "matching_lines": 2017,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/samuel-jimenez/xml",
+      "lead_archive": "samuel-jimenez/xml@v0.2.4",
+      "lead_package_dir": ".",
+      "reference": "encoding/xml (Go 1.27.1 runtime)",
+      "reference_archive": "go1.27.1 GOROOT/src",
+      "reference_package_dir": "encoding/xml",
+      "candidate_files": 4,
+      "reference_files": 4,
+      "byte_identical_files": 0,
+      "candidate_lines": 4717,
+      "matching_lines": 4014,
+      "overlap": 0.851,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1325,
+          "matching_lines": 953,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 930,
+          "matching_lines": 695,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 375,
+          "matching_lines": 350,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2087,
+          "matching_lines": 2016,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/minio/xxml",
+      "lead_archive": "minio/xxml@v0.0.3",
+      "lead_package_dir": ".",
+      "reference": "github.com/vmware/govmomi/vim25/xml (selected)",
+      "reference_archive": "vmware/govmomi@v0.56.2",
+      "reference_package_dir": "vim25/xml",
+      "candidate_files": 4,
+      "reference_files": 5,
+      "byte_identical_files": 0,
+      "candidate_lines": 4290,
+      "matching_lines": 4053,
+      "overlap": 0.9448,
+      "only_in_reference": [
+        "extras.go"
+      ],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1062,
+          "matching_lines": 1002,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 771,
+          "matching_lines": 721,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 374,
+          "matching_lines": 308,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2083,
+          "matching_lines": 2022,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/minio/xxml",
+      "lead_archive": "minio/xxml@v0.0.3",
+      "lead_package_dir": ".",
+      "reference": "encoding/xml (Go 1.27.1 runtime)",
+      "reference_archive": "go1.27.1 GOROOT/src",
+      "reference_package_dir": "encoding/xml",
+      "candidate_files": 4,
+      "reference_files": 4,
+      "byte_identical_files": 0,
+      "candidate_lines": 4290,
+      "matching_lines": 4066,
+      "overlap": 0.9478,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1062,
+          "matching_lines": 968,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 771,
+          "matching_lines": 712,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 374,
+          "matching_lines": 365,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2083,
+          "matching_lines": 2021,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/printesoi/xml-go",
+      "lead_archive": "printesoi/xml-go@v1.0.1",
+      "lead_package_dir": ".",
+      "reference": "github.com/vmware/govmomi/vim25/xml (selected)",
+      "reference_archive": "vmware/govmomi@v0.56.2",
+      "reference_package_dir": "vim25/xml",
+      "candidate_files": 5,
+      "reference_files": 5,
+      "byte_identical_files": 0,
+      "candidate_lines": 4482,
+      "matching_lines": 4098,
+      "overlap": 0.9143,
+      "only_in_reference": [
+        "extras.go"
+      ],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1181,
+          "matching_lines": 1023,
+          "byte_identical": false
+        },
+        {
+          "file": "namespacebinding.go",
+          "lines": 80,
+          "matching_lines": 0,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 777,
+          "matching_lines": 734,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 374,
+          "matching_lines": 308,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2070,
+          "matching_lines": 2033,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/printesoi/xml-go",
+      "lead_archive": "printesoi/xml-go@v1.0.1",
+      "lead_package_dir": ".",
+      "reference": "encoding/xml (Go 1.27.1 runtime)",
+      "reference_archive": "go1.27.1 GOROOT/src",
+      "reference_package_dir": "encoding/xml",
+      "candidate_files": 5,
+      "reference_files": 4,
+      "byte_identical_files": 0,
+      "candidate_lines": 4482,
+      "matching_lines": 4112,
+      "overlap": 0.9174,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "marshal.go",
+          "lines": 1181,
+          "matching_lines": 991,
+          "byte_identical": false
+        },
+        {
+          "file": "namespacebinding.go",
+          "lines": 80,
+          "matching_lines": 0,
+          "byte_identical": false
+        },
+        {
+          "file": "read.go",
+          "lines": 777,
+          "matching_lines": 723,
+          "byte_identical": false
+        },
+        {
+          "file": "typeinfo.go",
+          "lines": 374,
+          "matching_lines": 366,
+          "byte_identical": false
+        },
+        {
+          "file": "xml.go",
+          "lines": 2070,
+          "matching_lines": 2032,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/antchfx/xquery/xml",
+      "lead_archive": "antchfx/xquery@v0.0.0-20180515051857-ad5b8c7a47b0",
+      "lead_package_dir": "xml",
+      "reference": "github.com/antchfx/xmlquery (selected)",
+      "reference_archive": "antchfx/xmlquery@v1.5.2",
+      "reference_package_dir": ".",
+      "candidate_files": 2,
+      "reference_files": 6,
+      "byte_identical_files": 0,
+      "candidate_lines": 491,
+      "matching_lines": 296,
+      "overlap": 0.6029,
+      "only_in_reference": [
+        "cache.go",
+        "cached_reader.go",
+        "options.go",
+        "parse.go"
+      ],
+      "files": [
+        {
+          "file": "node.go",
+          "lines": 261,
+          "matching_lines": 101,
+          "byte_identical": false
+        },
+        {
+          "file": "query.go",
+          "lines": 230,
+          "matching_lines": 195,
+          "byte_identical": false
+        }
+      ]
+    },
+    {
+      "lead": "github.com/mattn/go-pkg-xmlx",
+      "lead_archive": "mattn/go-pkg-xmlx@v0.0.0-20180208005205-db53493302d1",
+      "lead_package_dir": ".",
+      "reference": "github.com/go-forks/go-pkg-xmlx (selected)",
+      "reference_archive": "go-forks/go-pkg-xmlx@v0.0.0-20151201012946-76f54ee73233",
+      "reference_package_dir": ".",
+      "candidate_files": 3,
+      "reference_files": 3,
+      "byte_identical_files": 3,
+      "candidate_lines": 1728,
+      "matching_lines": 1728,
+      "overlap": 1.0,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "document.go",
+          "lines": 260,
+          "matching_lines": 260,
+          "byte_identical": true
+        },
+        {
+          "file": "entitymap.go",
+          "lines": 849,
+          "matching_lines": 849,
+          "byte_identical": true
+        },
+        {
+          "file": "node.go",
+          "lines": 619,
+          "matching_lines": 619,
+          "byte_identical": true
+        }
+      ]
+    },
+    {
+      "lead": "github.com/zhuxiujia/GoMybatis/lib/github.com/beevik/etree",
+      "lead_archive": "zhuxiujia/GoMybatis@v6.5.12+incompatible",
+      "lead_package_dir": "lib/github.com/beevik/etree",
+      "reference": "github.com/beevik/etree v1.0.1 (older release of the selected path)",
+      "reference_archive": "beevik/etree@v1.0.1",
+      "reference_package_dir": ".",
+      "candidate_files": 3,
+      "reference_files": 3,
+      "byte_identical_files": 2,
+      "candidate_lines": 1789,
+      "matching_lines": 1752,
+      "overlap": 0.9793,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "etree.go",
+          "lines": 1068,
+          "matching_lines": 1031,
+          "byte_identical": false
+        },
+        {
+          "file": "helpers.go",
+          "lines": 188,
+          "matching_lines": 188,
+          "byte_identical": true
+        },
+        {
+          "file": "path.go",
+          "lines": 533,
+          "matching_lines": 533,
+          "byte_identical": true
+        }
+      ]
+    },
+    {
+      "lead": "github.com/zhuxiujia/GoMybatis/lib/github.com/beevik/etree",
+      "lead_archive": "zhuxiujia/GoMybatis@v6.5.12+incompatible",
+      "lead_package_dir": "lib/github.com/beevik/etree",
+      "reference": "github.com/beevik/etree v1.8.1 (selected release)",
+      "reference_archive": "beevik/etree@v1.8.1",
+      "reference_package_dir": ".",
+      "candidate_files": 3,
+      "reference_files": 3,
+      "byte_identical_files": 0,
+      "candidate_lines": 1789,
+      "matching_lines": 1239,
+      "overlap": 0.6926,
+      "only_in_reference": [],
+      "files": [
+        {
+          "file": "etree.go",
+          "lines": 1068,
+          "matching_lines": 679,
+          "byte_identical": false
+        },
+        {
+          "file": "helpers.go",
+          "lines": 188,
+          "matching_lines": 138,
+          "byte_identical": false
+        },
+        {
+          "file": "path.go",
+          "lines": 533,
+          "matching_lines": 422,
+          "byte_identical": false
+        }
+      ]
+    }
+  ]
+}
