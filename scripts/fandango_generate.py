@@ -6,7 +6,7 @@ Example:
 
 The output directory holds generated/ (Fandango's -d target), fandango.json
 (the receipt), and optionally replay/ and afl/. AFL++ is prepared, never
-started. Fandango itself is not installed or pinned by Parsarium.
+started. `parsarium.py fandango setup` installs a pinned managed version.
 """
 
 import argparse
@@ -83,6 +83,15 @@ def setup() -> int:
     if MANAGED_EXE.is_file():
         version = fandango_version(MANAGED_EXE)
         if f"{MANAGED_VERSION}" in version:
+            receipt_path = MANAGED_VENV / "setup.json"
+            if not receipt_path.is_file():
+                record_managed_setup(version)
+            else:
+                saved = json.loads(receipt_path.read_text())
+                if (saved.get("executable_sha256") != digest(MANAGED_EXE)
+                        or saved.get("fandango_version") != version
+                        or saved.get("installed_packages") != managed_packages()):
+                    raise RuntimeError("managed Fandango environment changed; remove its venv and rerun setup")
             print(f"Ready: {MANAGED_EXE} ({version})")
             return 0
         raise RuntimeError(f"unexpected Fandango in {MANAGED_VENV}: {version}")
@@ -94,14 +103,23 @@ def setup() -> int:
     version = fandango_version(MANAGED_EXE)
     if MANAGED_VERSION not in version:
         raise RuntimeError(f"installed Fandango did not match {MANAGED_VERSION}: {version}")
-    freeze = subprocess.run([str(python), "-m", "pip", "freeze"], check=True,
-                            capture_output=True, text=True).stdout
-    receipt = {"schema_version": 1, "fandango_version": version,
-               "executable_sha256": digest(MANAGED_EXE), "python": sys.version,
-               "installed_packages": freeze.splitlines()}
-    (MANAGED_VENV / "setup.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    record_managed_setup(version)
     print(f"Ready: {MANAGED_EXE} ({version})")
     return 0
+
+
+def record_managed_setup(version: str) -> None:
+    receipt = {"schema_version": 1, "fandango_version": version,
+               "executable_sha256": digest(MANAGED_EXE), "python": sys.version,
+               "installed_packages": managed_packages()}
+    (MANAGED_VENV / "setup.json").write_text(json.dumps(receipt, indent=2) + "\n")
+
+
+def managed_packages() -> list[str]:
+    python = MANAGED_VENV / "bin" / "python"
+    freeze = subprocess.run([str(python), "-m", "pip", "freeze"], check=True,
+                            capture_output=True, text=True).stdout
+    return freeze.splitlines()
 
 
 def fandango_version(executable: Path) -> str:
@@ -272,13 +290,16 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
     if spec:
         shutil.copy2(spec, run_dir / ("spec-" + spec.name))
     command = build_command(executable, args, generated, spec)
+    project_receipt = project / ("control-verification.json" if
+        manifest.get("coverage_kind") == "native_source_afl_feedback" else "verification.json")
     receipt = {
         "schema_version": 1,
         "started_at_utc": datetime.now(timezone.utc).isoformat(),
         "project": str(project.relative_to(ROOT / "projects")),
-        "package": manifest["package"], "release": manifest["release"],
+        "package": manifest["package"],
+        "release": manifest.get("release", manifest.get("runtime")),
         "source_sha256": manifest["source_sha256"],
-        "project_receipt_sha256": digest(project / "verification.json"),
+        "project_receipt_sha256": digest(project_receipt),
         "fandango": {"executable": str(executable), "executable_sha256": digest(executable),
                      "version": version},
         "command": command, "environment": overrides, "cwd": str(run_dir),
@@ -286,9 +307,13 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
     }
     managed_setup = MANAGED_VENV / "setup.json"
     if executable == MANAGED_EXE.resolve() and managed_setup.is_file():
+        setup_record = json.loads(managed_setup.read_text())
+        if (setup_record.get("executable_sha256") != digest(executable)
+                or setup_record.get("fandango_version") != version
+                or setup_record.get("installed_packages") != managed_packages()):
+            raise RuntimeError("managed Fandango setup receipt changed; rerun setup")
         receipt["fandango"]["managed_setup_sha256"] = digest(managed_setup)
-        receipt["fandango"]["installed_packages"] = json.loads(
-            managed_setup.read_text())["installed_packages"]
+        receipt["fandango"]["installed_packages"] = setup_record["installed_packages"]
     if "SSL_CERT_FILE" in overrides:
         receipt["ssl_cert_file_sha256"] = digest(Path(overrides["SSL_CERT_FILE"]))
     started = time.monotonic()

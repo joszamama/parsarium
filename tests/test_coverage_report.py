@@ -113,6 +113,16 @@ class CoverageReportTest(unittest.TestCase):
         run_case.ROOT, run_case.PROJECTS = fixture.root, fixture.root / "projects"
         return fixture
 
+    def test_tk_standard_feedback_uses_control_and_decoder_receipts(self):
+        run_case.ROOT, run_case.PROJECTS = ROOT, ROOT / "projects"
+        evidence = coverage_report.project_evidence(
+            ROOT, "png", "python", "stdlib_tkinter_photoimage")
+        self.assertTrue(evidence["evidence"]["receipt"].endswith("control-verification.json"))
+        self.assertTrue(evidence["feedback"]["afl_overlay"]["matches_project_receipt"])
+        self.assertGreater(evidence["feedback"]["afl_overlay"]["feedback_edges"], 0)
+        self.assertEqual(coverage_report.coverage_groups(evidence["manifest"])[0][1],
+                         "/work/tk/generic/tkImgPNG.c")
+
     def test_segments_map_to_llvm_line_counts(self):
         coverage = json.loads((FIXTURES / "coverage.json").read_text())
         segments = coverage["data"][0]["files"][0]["segments"]

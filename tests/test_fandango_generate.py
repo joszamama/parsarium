@@ -122,6 +122,17 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(self.receipt(run)["spec"]["name"], "png")
         self.assertEqual(json.loads(self.log.read_text())["argv"][1:3], ["-F", "png"])
 
+    def test_standard_feedback_path_uses_control_receipt(self):
+        run = self.tmp / "tkinter-png"
+        code, output = self.run_cli("png", "python", "stdlib_tkinter_photoimage",
+                                    str(run), "--count", "1")
+        self.assertEqual(code, 0, output)
+        receipt = self.receipt(run)
+        self.assertEqual(receipt["release"], "CPython 3.13.1 with bundled Tk 8.6")
+        self.assertEqual(receipt["project_receipt_sha256"], sha256(
+            (ROOT / "projects/png/python/stdlib_tkinter_photoimage/control-verification.json")
+            .read_bytes()).hexdigest())
+
     def test_no_bundled_mp4_spec_explains_required_option(self):
         code, output = self.run_cli("mp4", "cpp", "exiv2", str(self.tmp / "no-spec"))
         self.assertEqual(code, 2)

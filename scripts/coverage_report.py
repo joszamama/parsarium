@@ -166,8 +166,12 @@ def output_directory(path: Path, run_dir: Path, root: Path) -> Path:
 
 def project_evidence(root: Path, format_name: str, ecosystem: str, slug: str) -> dict:
     project, manifest = project_for(format_name, ecosystem, slug)
-    receipt_bytes = (project / "verification.json").read_bytes()
+    source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
+    receipt_path = project / ("control-verification.json" if source_feedback else "verification.json")
+    receipt_bytes = receipt_path.read_bytes()
     receipt = json.loads(receipt_bytes)
+    if source_feedback:
+        receipt["parser_source_files"] = 1
     receipt_sha = sha256(receipt_bytes).hexdigest()
     if receipt.get("control_sha256") != manifest["control_sha256"] or \
             receipt.get("source_sha256") != manifest["source_sha256"]:
@@ -182,18 +186,23 @@ def project_evidence(root: Path, format_name: str, ecosystem: str, slug: str) ->
     overlay_path = root / "fuzzing/afl-native" / format_name / ecosystem / slug / "verification.json"
     if overlay_path.is_file():
         data = read_json(overlay_path, MAX_RECEIPT_BYTES)
-        current = data.get("base_project_receipt_sha256") == receipt_sha and data.get("pass") is True
+        base_field = "base_control_receipt_sha256" if source_feedback else "base_project_receipt_sha256"
+        current = data.get(base_field) == receipt_sha and data.get("pass") is True
         overlay = {"receipt": str(overlay_path.relative_to(root)),
                    "receipt_sha256": file_sha256(overlay_path),
                    "matches_project_receipt": current}
         if current:
             overlay.update({key: data.get(key) for key in (
                 "feedback_kind", "feedback_edges", "afl_package", "afl_map_size", "image_id")})
+            if source_feedback:
+                overlay["feedback_kind"] = "tk_png_decoder_source_edges"
+                overlay["feedback_edges"] = data["control_edges"]
     return {"project": project, "manifest": manifest, "receipt": receipt,
             "identity": {
                 "format": format_name, "ecosystem": ecosystem, "slug": slug,
                 "kind": manifest.get("kind", "third_party"),
-                "package": manifest["package"], "release": manifest["release"],
+                "package": manifest["package"],
+                "release": manifest.get("release", manifest.get("runtime")),
                 "api": manifest.get("api"), "runtime": manifest.get("runtime"),
                 "underlying_package": manifest.get("underlying_package"),
                 "underlying_release": manifest.get("underlying_release"),
@@ -201,11 +210,11 @@ def project_evidence(root: Path, format_name: str, ecosystem: str, slug: str) ->
             "evidence": {
                 "project": str(project.relative_to(root)),
                 "manifest_sha256": file_sha256(project / "manifest.json"),
-                "receipt": str((project / "verification.json").relative_to(root)),
+                "receipt": str(receipt_path.relative_to(root)),
                 "receipt_sha256": receipt_sha,
                 "verified_at_utc": receipt.get("verified_at_utc"),
                 "image_id": receipt.get("image_id"),
-                "platform": receipt.get("platform"),
+                "platform": receipt.get("platform", manifest.get("platform")),
                 "toolchain": receipt.get("toolchain"),
                 "source_sha256": manifest["source_sha256"],
                 "underlying_source_sha256": manifest.get("underlying_source_sha256"),
@@ -225,6 +234,10 @@ def project_evidence(root: Path, format_name: str, ecosystem: str, slug: str) ->
 
 
 def coverage_groups(manifest: dict) -> list[tuple[str, str, str, str]]:
+    if manifest.get("coverage_kind") == "native_source_afl_feedback":
+        decoder = (manifest["coverage_subject_prefix"].rstrip("/") +
+                   manifest["format_specific_coverage_file_suffix"])
+        return [("parser", decoder, "parser_source_files", "parser_source_lines_covered")]
     groups = [("parser", manifest["coverage_subject_prefix"],
                "parser_source_files", "parser_source_lines_covered")]
     if "underlying_coverage_subject_prefix" in manifest:
