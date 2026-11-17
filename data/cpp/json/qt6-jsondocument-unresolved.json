@@ -1,0 +1,33 @@
+{
+  "name": "Qt 6 Core QJsonDocument",
+  "status": "unresolved; not selected or ranked",
+  "release": "6.10.2",
+  "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only (source SPDX)",
+  "documented_input_api": "QJsonDocument::fromJson(const QByteArray&, QJsonParseError*)",
+  "official_api_documentation": "https://doc.qt.io/qt-6/qjsondocument.html",
+  "official_source_archive": "https://download.qt.io/official_releases/qt/6.10/6.10.2/submodules/qtbase-everywhere-src-6.10.2.tar.xz",
+  "source_archive_sha256": "aeb78d29291a2b5fd53cb55950f8f5065b4978c25fb1d77f627d695ab9adf21e",
+  "parser_source": "src/corelib/serialization/qjsonparser.cpp",
+  "parser_source_sha256": "ec53d7de07b19a8738d16e01c1acdde3395d14a8a14fbb3afd57ff8fa059415e",
+  "popularity": {
+    "metric": "Debian popcon qt6-base-dev installations (whole-framework proxy)",
+    "value": 4942,
+    "source": "https://popcon.debian.org/by_inst.gz",
+    "snapshot_sha256": "299486c46a56fc44b390058490a50b9f1250335c7cdf6f1e02b8cee0a212a802",
+    "captured_at_utc": "2026-11-17T03:42:31+00:00",
+    "caveat": "Counts Qt development-package installations, not QJsonDocument or JSON use; cannot be ranked directly against JSON-specific package counts."
+  },
+  "planned_valid_controls": [
+    "controls/json/nested-object.json",
+    "controls/json/nested-array.json"
+  ],
+  "gate_result": {
+    "public_local_bytes_api_documented": true,
+    "both_controls_exact_type_tagged_output_verified": false,
+    "parser_source_coverage_verified": false,
+    "parser_only_afl_feedback_verified": false,
+    "selected": false
+  },
+  "blocker": "Compiling qjsonparser.cpp beside QtCore does not make QJsonDocument::fromJson use the local instrumented parser. Compiling local qjsondocument.cpp plus qjsonparser.cpp against the pinned distribution QtCore fails because private parser dependencies are not exported. Adding the matching qcborvalue.cpp and qstringconverter.cpp sources still leaves unresolved qt_to_latin1_unchecked, qt_cbor_stream_set_error, qt_cbor_append_string_chunk, and QLatin1::convertToUnicode symbols from further QtCore implementation files. No linked parser-only target or feedback receipt was obtained. A dedicated pinned source build of QtCore is required before selecting this path.",
+  "scope": "Only build/link attempts; no malformed-input tests or fuzzing campaign."
+}
