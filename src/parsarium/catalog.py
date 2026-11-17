@@ -19,8 +19,6 @@ from pathlib import Path
 
 from .snapshot import home
 
-FORMATS = ("png", "zip", "mp4", "wav", "pdf", "svg", "http11",
-           "ascii_ply", "ascii_pnm", "mp3_id3v2")
 ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
 
 
@@ -46,6 +44,11 @@ def _runnable_check(root: Path):
         sys.path.insert(0, scripts)
     from audit_projects import fully_runnable  # type: ignore[import-not-found]
     return fully_runnable
+
+
+def _formats(root: Path) -> tuple[str, ...]:
+    """Read available format names from this version's pinned catalog."""
+    return tuple(sorted({path.parent.name for path in (root / "data").glob("*/*/cell.json")}))
 
 
 @lru_cache(maxsize=4)
@@ -76,11 +79,13 @@ def _load(root: Path) -> tuple[Target, ...]:
 
 def targets(format: str | None = None, ecosystem: str | None = None) -> list[Target]:
     """Runnable targets, optionally filtered by format and language."""
-    if format and format not in FORMATS:
-        raise ValueError(f"unknown format {format!r}; choose from {', '.join(FORMATS)}")
+    root = home()
+    formats = _formats(root)
+    if format and format not in formats:
+        raise ValueError(f"unknown format {format!r}; choose from {', '.join(formats)}")
     if ecosystem and ecosystem not in ECOSYSTEMS:
         raise ValueError(f"unknown ecosystem {ecosystem!r}; choose from {', '.join(ECOSYSTEMS)}")
-    return [t for t in _load(home())
+    return [t for t in _load(root)
             if (not format or t.format == format) and (not ecosystem or t.ecosystem == ecosystem)]
 
 
