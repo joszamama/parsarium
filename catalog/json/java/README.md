@@ -1,8 +1,8 @@
 # JSON / Java — pilot
 
-**Status:** pilot_seven_selected_search_bounded; incomplete. 7 verified third-party paths, 0 verified standard APIs, 7 verified Docker harnesses.
+**Status:** pilot_eight_selected_search_bounded; incomplete. 8 verified third-party paths, 0 verified standard APIs, 8 verified Docker harnesses.
 
-Pilot cell: seven JSON package/API paths are control verified and runnable. jackson-databind and jackson-core share one tokenizer family; Gson, org.json, fastjson2, json-smart, and Moshi use independent parser engines. json-smart is verified on its RFC 4627 object/array mode, not scalar roots. Moshi reads local bytes through Okio and its own JsonUtf8Reader. The com.alibaba:fastjson 2.x compatibility facade remains an unverified path in the fastjson2 family, and its summed metric also includes older 1.x releases. Six numeric leads remain unresolved, including higher-metric json-simple. The Maven Central search is bounded to 100 hits per query (322 unique hits); deps.dev summed direct dependents measure package adoption, not JSON-specific use. Two valid nested controls do not establish complete format coverage.
+Pilot cell: eight JSON package/API paths are control-verified and runnable. jackson-databind and jackson-core share one tokenizer family; Gson, org.json, fastjson2, json-simple, json-smart, and Moshi use independent parser engines. json-simple 1.1.1 is an older 2012 release with its own generated JFlex lexer; its high default-release count is age-skewed, so ranking uses the common deps.dev summed metric. json-smart is verified on its RFC 4627 object/array mode, not scalar roots. Moshi reads local bytes through Okio and its own JsonUtf8Reader. The com.alibaba:fastjson 2.x compatibility facade remains an unverified path in the fastjson2 family, and its summed metric also includes older 1.x releases. Four numeric leads remain unresolved. Maven Central search is bounded to 100 hits per query (322 unique hits); deps.dev summed direct dependents measure package adoption, not JSON-specific use. Two valid nested controls do not establish complete format coverage.
 
 [Ranking and search limits](../../../data/java/json/ranking.md) · [Standard API inventory](../../../data/java/json/standard.json)
 
@@ -13,6 +13,7 @@ Pilot cell: seven JSON package/API paths are control verified and runnable. jack
 - [gson](gson/README.md) — verified Docker harness
 - [json](json/README.md) — verified Docker harness
 - [fastjson2](fastjson2/README.md) — verified Docker harness
+- [json-simple](json-simple/README.md) — verified Docker harness
 - [json-smart](json-smart/README.md) — verified Docker harness
 - [moshi](moshi/README.md) — verified Docker harness
 

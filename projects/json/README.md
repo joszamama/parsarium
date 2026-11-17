@@ -21,6 +21,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [jackson-core / Java](java/jackson_core/README.md)
 - [jackson-databind / Java](java/jackson_databind/README.md)
 - [json / Java](java/orgjson/README.md)
+- [json-simple / Java](java/json_simple/README.md)
 - [json-smart / Java](java/json_smart/README.md)
 - [moshi / Java](java/moshi/README.md)
 - [@streamparser/json / JavaScript](javascript/streamparser_json/README.md)

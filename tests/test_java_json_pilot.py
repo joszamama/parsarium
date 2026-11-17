@@ -21,19 +21,20 @@ class JavaJsonPilotTest(unittest.TestCase):
         metrics = [parser["popularity"]["value"] for parser in parsers]
         self.assertEqual([parser["name"] for parser in parsers],
                          ["jackson-databind", "jackson-core", "gson", "json",
-                          "fastjson2", "json-smart", "moshi"])
+                          "fastjson2", "json-simple", "json-smart", "moshi"])
         self.assertEqual(metrics, sorted(metrics, reverse=True))
         self.assertTrue(all(parser["family"].startswith("Jackson") for parser in parsers[:2]))
         self.assertTrue(parsers[2]["family"].startswith("Gson"))
         self.assertTrue(parsers[3]["family"].startswith("org.json"))
         self.assertTrue(parsers[4]["family"].startswith("fastjson2"))
-        self.assertTrue(parsers[5]["family"].startswith("json-smart"))
-        self.assertTrue(parsers[6]["family"].startswith("Moshi"))
+        self.assertTrue(parsers[5]["family"].startswith("json-simple"))
+        self.assertTrue(parsers[6]["family"].startswith("json-smart"))
+        self.assertTrue(parsers[7]["family"].startswith("Moshi"))
         self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"}
                             for lead in leads))
         self.assertEqual({lead["name"] for lead in leads
                           if lead["status"] == "promoted_to_verified"},
-                         {"jackson-core", "json", "fastjson2", "json-smart", "moshi"})
+                         {"jackson-core", "json", "fastjson2", "json-simple", "json-smart", "moshi"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             self.assertNotIn(parser["name"],
@@ -44,7 +45,7 @@ class JavaJsonPilotTest(unittest.TestCase):
         # Higher-adoption unresolved leads remain visible; rank is among verified paths.
         above = {lead["name"] for lead in leads if lead["status"] == "unresolved"
                  and lead["summed_direct_dependent_count"] > metrics[-1]}
-        self.assertEqual(above, {"fastjson", "json-simple"})
+        self.assertEqual(above, {"fastjson"})
         cell = read(BASE / "cell.json")
         self.assertEqual(sum(lead["status"] == "unresolved" for lead in leads),
                          cell["unresolved_documentation_leads"])
