@@ -1,0 +1,97 @@
+{
+  "checked_at_utc": "2026-11-17T09:52:29.074821+00:00",
+  "project": "xml/python/beautifulsoup4",
+  "pass": true,
+  "input_kind": "two fixed valid UTF-8 XML 1.0 namespace controls without DOCTYPE",
+  "tested_builder": "bs4.builder._lxml.LXMLTreeBuilderForXML",
+  "tested_lxml_parser_class": "lxml.etree.XMLParser",
+  "feedback_scope": "executed Python lines of the installed bs4 4.15.0 package plus libxml2 2.15.4 parser.c source lines (LLVM regions) reached through lxml 6.1.3; harness, lxml Cython binding and other libxml2 files are excluded",
+  "excluded_parser_c_line_range": [
+    8700,
+    8720
+  ],
+  "base_image_id": "sha256:67647a9997094cc376405ff2754c59b3cbfdbcf0fa835d6acbac4ed3a2c28e52",
+  "overlay_image_id": "sha256:0e520ee866a3185471987938ad956d0e7a617bfb1246227889d7d96b355cd6cd",
+  "overlay_receipt_sha256": "a764c61410332abe2dd870b3c28961ebbe70ac9c02dbcf9ae71a87456afe1e8b",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "comments": [],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "processing_instructions": [],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "comments": [
+      "order receipt"
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "processing_instructions": [
+      "audit step=\"1\""
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "{urn:parsarium:order}order"
+  },
+  "repeated_control_runs": 5,
+  "control_repeat_identical": true,
+  "repeated_variant_runs": 5,
+  "variant_repeat_identical": true,
+  "control_parser_features": 1338,
+  "variant_parser_features": 1445,
+  "control_bs4_features": 455,
+  "variant_bs4_features": 466,
+  "control_libxml2_features": 883,
+  "variant_libxml2_features": 979,
+  "parser_feature_difference": 247,
+  "bs4_feature_difference": 11,
+  "libxml2_feature_difference": 236,
+  "control_afl_tuples": 1325,
+  "variant_afl_tuples": 1429,
+  "afl_tuple_difference": 242
+}

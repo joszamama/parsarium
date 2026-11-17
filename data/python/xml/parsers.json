@@ -51,6 +51,130 @@
     "verification_note": "The pinned image links lxml.etree to source-built libxml2 2.15.4. Its first valid namespace control covers 1,463 lines in libxml2 parser.c; the second valid control matches its exact expected tree. The AFL++ bridge maps executed parser.c lines, with five identical control runs yielding identical feedback and the second control changing 213 parser lines and 209 AFL++ tuple IDs. Lines 8700–8720 of parser.c are excluded from AFL++ feedback because an address-sensitive attribute lookup varied across identical replays; they remain in the source coverage report. The two controls do not establish DTD, external entity, non-UTF-8, or XML 1.1 behavior."
   },
   {
+    "name": "beautifulsoup4",
+    "version": "4.15.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/beautifulsoup4/4.15.0/json (License: MIT License; LICENSE in wheel and sdist, SHA-256 55b4d8d4b1e5bc86d10efac91b74c87bcb77526b0f5b9edaf8b9cd2adc7397b2)",
+    "input_api": "bs4.BeautifulSoup(local XML bytes, \"xml\"); Tag.namespace, Tag.name, NamespacedAttribute.namespace/name, NavigableString, Comment and XMLProcessingInstruction children of the resulting bs4 tree",
+    "documentation": "https://www.crummy.com/software/BeautifulSoup/bs4/doc/#parsing-xml",
+    "documentation_evidence": "The official parser table lists \"lxml's XML parser\" as BeautifulSoup(markup, \"xml\") / \"lxml-xml\" and calls it \"the only currently supported XML parser\"; the installing-a-parser section says \"right now, the only supported XML parser is lxml\".",
+    "source": "https://files.pythonhosted.org/packages/88/c6/92fcd42f1ba33e1184263f25bfabf3d27c383410470f169e4b8163bf9c17/beautifulsoup4-4.15.0-py3-none-any.whl",
+    "source_sha256": "d6f88de62e1d4e38ecb1077eb9724cd0eff29d2a08ca16a401e9b9e93f117cf9",
+    "sdist": "https://files.pythonhosted.org/packages/43/65/318323f98dbee45d42dff61d8f047181bc6f2268a9068cfad035a46be5af/beautifulsoup4-4.15.0.tar.gz",
+    "sdist_sha256": "288e3ca7d54b06f2ac191970bc275c1939cb46d450b255bf6718b04aa37ab4f7",
+    "dependencies": [
+      {
+        "package": "soupsieve",
+        "release": "4.1.1",
+        "sha256": "8ff3422dab0b720fb667ee79864d80531a0e57994a13eb701697719ffcb751f6",
+        "license": "MIT"
+      },
+      {
+        "package": "typing-extensions",
+        "release": "4.16.0",
+        "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+        "license": "PSF-2.0"
+      },
+      {
+        "package": "lxml",
+        "release": "6.1.3",
+        "sha256": "45222d94ddd511536f3b2f7d9deae3b2339b4ce0f075f1ca25703b07cad9dd21",
+        "license": "BSD-3-Clause",
+        "role": "optional extra 'lxml', required by the \"xml\" builder; built from sdist"
+      },
+      {
+        "package": "libxml2",
+        "release": "2.15.4",
+        "sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+        "license": "MIT",
+        "role": "lxml's C XML parser, built from source"
+      }
+    ],
+    "scope": "Valid UTF-8 XML 1.0 local byte streams without DOCTYPE through BeautifulSoup(bytes, 'xml'): namespace-expanded element and attribute names, namespace declarations, decoded character data in document order, comments, processing instructions and tree depth from the bs4 tree. bs4 does not keep CDATA section boundaries (CDATA becomes a NavigableString), does not keep the XML declaration as a node, and stores namespace declarations as xmlns attributes after ordinary attributes rather than in source order.",
+    "family": "Beautiful Soup bs4 tree builder over lxml.etree XMLParser over libxml2 2.15.4 XML parser",
+    "shared_families": [
+      "libxml2 XML parser",
+      "lxml.etree binding"
+    ],
+    "family_note": "Not an independent XML tokenizer. BeautifulSoup(bytes, 'xml') selects bs4.builder.LXMLTreeBuilderForXML, which passes the bytes in 512-byte chunks to lxml.etree.XMLParser(target=builder, recover=True); libxml2 tokenizes and checks the document, and bs4 builds its own Tag/NavigableString tree from lxml's target callbacks. It shares the lxml/libxml2 parser family with projects/xml/python/lxml (same lxml 6.1.3 and libxml2 2.15.4 pins), differing in recover=True, the push-feed path and bs4's tree construction.",
+    "parser_options_caveat": "bs4 creates lxml.etree.XMLParser(target=builder, recover=True, huge_tree=False, encoding=<EncodingDetector guess>); recover=True makes this path lenient where projects/xml/python/lxml uses recover=False. No malformed-input behavior was tested.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 315320831,
+      "source": "https://pypistats.org/api/",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/xml/leads.json",
+      "limitation": "Package-level downloads. Beautiful Soup is mostly used for HTML (html.parser, lxml HTML, html5lib builders); the figure does not measure XML parsing or use of the 'xml' builder."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "comments": [],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "processing_instructions": [],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ],
+      "root": "{urn:parsarium:catalog}catalog"
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "comments": [
+        "order receipt"
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "processing_instructions": [
+        "audit step=\"1\""
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ],
+      "root": "{urn:parsarium:order}order"
+    },
+    "project": "projects/xml/python/beautifulsoup4",
+    "verification_note": "Shared parser family, not an independent XML tokenizer: Beautiful Soup's documented \"xml\" builder (the docs call lxml \"the only currently supported XML parser\") feeds the bytes to lxml.etree.XMLParser(target=builder, recover=True), and libxml2 tokenizes them; bs4 builds its own tree from lxml's callbacks. The pinned image installs bs4 4.15.0 with lxml 6.1.3 linked to source-built libxml2 2.15.4 and asserts that BeautifulSoup(..., 'xml') selects LXMLTreeBuilderForXML over lxml.etree.XMLParser. Both valid namespace controls match their expected bs4-tree summaries; the element, attribute, namespace, text, depth and root fields equal the lxml path's outputs. The first control executes 450 bs4 lines in 5 files (115 in builder/_lxml.py) and 1,570 libxml2 parser.c lines. The AFL++ bridge maps executed bs4 lines plus parser.c lines: five identical runs of each control yield identical features, and the second control changes 11 bs4 lines, 236 parser.c lines and 242 AFL++ tuple IDs. parser.c lines 8700-8720 are excluded from AFL++ feedback as in the lxml path. The controls do not establish DTD, external entity, non-UTF-8, XML 1.1, or malformed-input (recover=True) behavior. The bs4 tree drops CDATA section boundaries and the XML declaration node and lists xmlns declarations after ordinary attributes. The 315,320,831 last-month PyPI downloads are package-level and mostly HTML use; they do not measure XML parsing."
+  },
+  {
     "name": "xmltodict",
     "version": "1.0.4",
     "license": "MIT",
