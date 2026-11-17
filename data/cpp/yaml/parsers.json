@@ -1,1 +1,450 @@
-[]
+[
+  {
+    "name": "yaml-cpp",
+    "version": "0.9.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/jbeder/yaml-cpp/blob/yaml-cpp-0.9.0/LICENSE",
+    "input_api": "YAML::Load(const std::string&) into a YAML::Node tree; Node::Type(), Node::Tag(), Node::Scalar(), map/sequence iteration and Node::as<bool|long long|double>",
+    "documentation": "https://github.com/jbeder/yaml-cpp/blob/yaml-cpp-0.9.0/include/yaml-cpp/node/parse.h",
+    "documentation_evidence": "parse.h documents YAML::Load(const std::string&) as 'Loads the input string as a single YAML document'; docs/Tutorial.md at the same tag shows YAML::Load, Node::Type() and node iteration.",
+    "source": "https://github.com/jbeder/yaml-cpp/tree/yaml-cpp-0.9.0",
+    "source_sha256": "25cb043240f828a8c51beb830569634bc7ac603978e0f69d6b63558dadefd49a",
+    "adapter": "projects/yaml/cpp/yaml-cpp/harness.cpp",
+    "control": "controls/yaml/catalog.yaml",
+    "scope": "One YAML document from local bytes passed to YAML::Load(std::string): block and flow collections, quoted and block scalars, anchors and aliases, as a typed tree in source order. Plain scalars are typed by the adapter with YAML 1.2 core-schema patterns and converted by yaml-cpp's Node::as<T>; yaml-cpp itself resolves plain nulls and keeps '?' (plain) versus '!' (non-plain) tags.",
+    "family": "yaml-cpp own scanner and SingleDocParser",
+    "family_note": "Own scanner (src/scanner.cpp, scantoken.cpp, scanscalar.cpp) and SingleDocParser building a node graph through NodeBuilder; no delegation to libyaml or another YAML parser.",
+    "typing_note": "yaml-cpp has no YAML 1.2 core-schema resolver: its convert<bool> also accepts YAML 1.1 words (y, yes, on). The adapter applies the 1.2 core patterns only to '?' scalars, so quoted strings stay strings. The controls contain no scalar whose type differs between the schemas.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 9629,
+      "debian_source": "yaml-cpp",
+      "binary_package": "libyaml-cpp0.8",
+      "dev_package_installs": {
+        "libyaml-cpp-dev": 956
+      },
+      "binary_counts_source": "https://popcon.debian.org/by_inst.gz (Last-Modified Tue, 17 Nov 2026 14:09:44 GMT, SHA-256 5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0); one day newer than the sourcemax snapshot",
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "source_sha256": "9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8",
+      "captured_at_utc": "2026-11-17",
+      "snapshot": "data/cpp/yaml/registry-snapshot.json",
+      "limitation": "Package installations, often transitive; not YAML-specific use and blind to vendored copies."
+    },
+    "project": "projects/yaml/cpp/yaml-cpp",
+    "expected_output": {
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_control": "controls/yaml/order.yaml",
+    "differential_expected_output": {
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    }
+  }
+]
