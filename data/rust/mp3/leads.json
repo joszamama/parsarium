@@ -6,9 +6,10 @@
       "name": "symphonia",
       "version": "0.6.1",
       "recent_downloads_90d": 11469426,
-      "status": "unresolved_shared_family",
-      "reason": "Facade crate re-exporting the same Symphonia MP3 demuxer and decoder pinned here; a separate facade adapter would add a package path, not a parser family, and has not been run on the untagged control.",
-      "source": "https://crates.io/crates/symphonia"
+      "status": "selected",
+      "reason": "Pinned facade path with default features plus the non-default mp3 feature: symphonia::default::get_probe().probe() over a byte MediaSourceStream with no extension hint, then get_codecs().make_audio_decoder(). Both untagged CBR controls give the same frames, frame bytes, sample rate, channels and decoded samples as the direct symphonia-bundle-mp3 path and the header walk. Shared Symphonia parser family, not an independent engine: facade-owned lines (symphonia src/lib.rs) and symphonia-bundle-mp3 lines are recorded separately.",
+      "source": "https://crates.io/crates/symphonia",
+      "license": "MPL-2.0"
     },
     {
       "name": "minimp3",

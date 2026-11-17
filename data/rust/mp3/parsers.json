@@ -1,5 +1,44 @@
 [
   {
+    "name": "symphonia",
+    "project": "projects/mp3/rust/symphonia",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "symphonia::default::get_probe().probe(&Hint::new(), MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default(), MetadataOptions::default()); FormatReader::next_packet(); symphonia::default::get_codecs().make_audio_decoder(params, ..).decode(&packet)",
+    "cargo_features": "symphonia default features plus \"mp3\" (mp3 is not a default feature)",
+    "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
+    "source": "https://github.com/pdeljanov/Symphonia/tree/v0.6.1/symphonia",
+    "scope": "Untagged byte stream probed without an extension hint; every packet of the probed MPEG audio track demuxed and decoded: probed format, codec, sample rate, channels, frame count, frame bytes, decoded samples per channel",
+    "family": "Symphonia MP3 demuxer and decoder",
+    "family_note": "Public facade over the selected symphonia-bundle-mp3 0.6.1 demuxer and decoder: a separate package API, not an independent parser family. The facade's own code is the codec registry, probe registration and re-exports; MPEG frame parsing and decoding lines belong to symphonia-bundle-mp3 and are recorded separately as underlying coverage.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "format": "mp3",
+      "codec": "mp3",
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "decoded_frames": 12672
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "format": "mp3",
+      "codec": "mp3",
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "decoded_frames": 6912
+    },
+    "evidence": "projects/mp3/rust/symphonia/verification.json",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 11469426,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    }
+  },
+  {
     "name": "symphonia-bundle-mp3",
     "project": "projects/mp3/rust/symphonia_bundle_mp3",
     "version": "0.6.1",

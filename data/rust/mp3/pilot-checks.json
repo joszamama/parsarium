@@ -71,11 +71,83 @@
       "command": "python3 scripts/audit_projects.py --check",
       "pass": false,
       "result": "stops at projects/png/python/stdlib_tkinter_photoimage (native source AFL receipt mismatch), outside this cell; data/cells.json and data/projects-coverage.json do not yet include mp3"
+    },
+    {
+      "command": "python3 parsarium.py build mp3 rust symphonia",
+      "pass": true,
+      "image_id": "sha256:91fea643be81439fb2b18670cf7ed9a0506e659fa2b47b64844a5ce6e261b000",
+      "output": {
+        "channels": 1,
+        "codec": "mp3",
+        "decoded_frames": 12672,
+        "format": "mp3",
+        "frame_bytes": 2298,
+        "frames": 11,
+        "sample_rate": 44100
+      },
+      "facade_own_source_lines_covered": 23,
+      "underlying_symphonia_bundle_mp3_lines_covered": 1528,
+      "receipt_sha256": "56af650c5b7f3dde9559f405615b47efa07a9379d1710d0c66093152fd6bc9ba"
+    },
+    {
+      "command": "5x replay of each control in parsarium/mp3-rust-symphonia:local",
+      "pass": true,
+      "result": "identical output and coverage every repeat: tone-44k-mono 11 frames/2298 bytes/12672 samples, own 23 + underlying 1528 lines; tone-22k-stereo 12 frames/1254 bytes/6912 samples, own 23 + underlying 1580 lines; matches the direct symphonia_bundle_mp3 receipt and the header walk (11x1152, 12x576)"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 rust symphonia controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 rust symphonia controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 fuzzing/afl-native/mp3/rust/symphonia/build.py",
+      "pass": true,
+      "image_id": "sha256:3104024d6bdf1940854fc0bef699eed58e7b8c95462b0661902b4e311dfdd682",
+      "feedback_edges": 1881,
+      "variant_feedback_edges": 1925,
+      "edges_only_in_control": 116,
+      "edges_only_in_variant": 160,
+      "all_repeats_identical": false,
+      "result": "stable intersections over 5 repeats; up to 6 edges per control vary between repeats (see unstable_edge_note in the overlay receipt); the 116/160 stable control-only edges equal the direct symphonia_bundle_mp3 overlay",
+      "receipt_sha256": "ba75bb3cdd22aabfcd2a48b370ed37d3b59c15a874be7b77d0d5d152c5f39f0d"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare mp3 rust symphonia runs/mp3-symphonia-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-symphonia-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started"
+    },
+    {
+      "command": "cd scripts && python3 refresh_smoke_batch.py mp3/rust/symphonia",
+      "pass": true,
+      "result": "added only mp3/rust/symphonia rows to the five smoke reports"
+    },
+    {
+      "command": "python3 scripts/audit_projects.py --check (after --write)",
+      "pass": true,
+      "result": "80/80 cells runnable; 770/770 active parser paths verified; 24 pilot cells incomplete"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "927/927 generic one-input projects; 927/927 AFL++ overlays current"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "169 tests OK"
     }
   ],
   "not_run": [
     "AFL++ campaign",
     "malformed-input or vulnerability experiments",
     "aggregate catalog/website regeneration (build_readmes, audit_projects --write, smoke reports)"
-  ]
+  ],
+  "symphonia_checked_at_utc": "2026-11-17T12:35:28.203157+00:00"
 }

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "project": "mp3/rust/symphonia",
+  "pass": true,
+  "base_project_receipt_sha256": "56af650c5b7f3dde9559f405615b47efa07a9379d1710d0c66093152fd6bc9ba",
+  "overlay_file_sha256": {
+    "Cargo.toml": "04a5126995c8b95601e6d4b879bd7811ba7414dd52c833ff0a4d4684b2498671",
+    "Cargo.lock": "76a9576ee122aeb050c1643318062dbac088fa8384fd743f4441c7c054c6ba2e",
+    "afl_fuzzer.rs": "258bf03e8016f4f17fc29333ff0e370e8443a29c6fe7933bddf5b87a76444e80",
+    "Dockerfile": "93ce8b383519eb589414a74e77232b466345ab5710e403cff13cbd6e84864b69",
+    "build.py": "891c27609eed62518b0dc28f48cf771f103f47976e3116fad7054b35880df1f5"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "a7edef6a96b696d4e0cab5ee9ebb7ca155ed95f30a6b45bbb8b97d2727f02424",
+  "image_id": "sha256:3104024d6bdf1940854fc0bef699eed58e7b8c95462b0661902b4e311dfdd682",
+  "platform": "linux/arm64",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "feedback_edges": 1881,
+  "afl_map_size": 89259,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: the symphonia 0.6.1 facade, symphonia-bundle-mp3 0.6.1, symphonia-core 0.6.1, the other default-feature symphonia crates, serde_json and the harness are all instrumented; edges are not attributed to the facade alone",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:91fea643be81439fb2b18670cf7ed9a0506e659fa2b47b64844a5ce6e261b000",
+  "variant_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "control_output": {
+    "channels": 1,
+    "codec": "mp3",
+    "decoded_frames": 12672,
+    "format": "mp3",
+    "frame_bytes": 2298,
+    "frames": 11,
+    "sample_rate": 44100
+  },
+  "variant_output": {
+    "channels": 2,
+    "codec": "mp3",
+    "decoded_frames": 6912,
+    "format": "mp3",
+    "frame_bytes": 1254,
+    "frames": 12,
+    "sample_rate": 22050
+  },
+  "repeats": 5,
+  "variant_feedback_edges": 1925,
+  "edges_only_in_control": 116,
+  "edges_only_in_variant": 160,
+  "own_source_differential": {
+    "prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/symphonia-0.6.1/",
+    "control_lines": {
+      "src/lib.rs": 23
+    },
+    "variant_lines": {
+      "src/lib.rs": 23
+    },
+    "files_with_different_line_counts": []
+  },
+  "underlying_source_differential": {
+    "prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/symphonia-bundle-mp3-0.6.1/",
+    "control_lines": {
+      "src/common.rs": 42,
+      "src/decoder.rs": 58,
+      "src/demuxer.rs": 211,
+      "src/header.rs": 68,
+      "src/layer3/bitstream.rs": 115,
+      "src/layer3/codebooks.rs": 5,
+      "src/layer3/hybrid_synthesis.rs": 316,
+      "src/layer3/mod.rs": 134,
+      "src/layer3/requantize.rs": 150,
+      "src/layer3/stereo.rs": 0,
+      "src/synthesis.rs": 429
+    },
+    "variant_lines": {
+      "src/common.rs": 46,
+      "src/decoder.rs": 58,
+      "src/demuxer.rs": 211,
+      "src/header.rs": 72,
+      "src/layer3/bitstream.rs": 116,
+      "src/layer3/codebooks.rs": 5,
+      "src/layer3/hybrid_synthesis.rs": 316,
+      "src/layer3/mod.rs": 138,
+      "src/layer3/requantize.rs": 155,
+      "src/layer3/stereo.rs": 34,
+      "src/synthesis.rs": 429
+    },
+    "files_with_different_line_counts": [
+      "src/common.rs",
+      "src/header.rs",
+      "src/layer3/bitstream.rs",
+      "src/layer3/mod.rs",
+      "src/layer3/requantize.rs",
+      "src/layer3/stereo.rs"
+    ]
+  },
+  "underlying_package": "symphonia-bundle-mp3",
+  "underlying_source_sha256": "98ea5ffc8716bff677dfb3b01b420c7b758de901a72b8c330bf2040ab74b4add",
+  "stable_edge_rule": "intersection of all repeats per control",
+  "unstable_edge_note": "Repeats are not byte-identical: a few edges appear in some runs only. The direct symphonia_bundle_mp3 overlay, which bypasses the facade registry, has identical repeats; the facade path adds symphonia::default::get_codecs(), whose symphonia-core CodecRegistry uses std HashMap with per-process random SipHash keys. That is the probable source; the varying edges were not symbolized. Edge counts and differentials use only edges present in every repeat.",
+  "mutation_campaign_run": false,
+  "control_stability": {
+    "repeat_edge_counts": [
+      1881,
+      1885,
+      1883,
+      1887,
+      1881
+    ],
+    "stable_edges": 1881,
+    "union_edges": 1887,
+    "stable_ratio": 0.99682,
+    "all_repeats_identical": false
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1929,
+      1929,
+      1931,
+      1929,
+      1925
+    ],
+    "stable_edges": 1925,
+    "union_edges": 1931,
+    "stable_ratio": 0.996893,
+    "all_repeats_identical": false
+  }
+}

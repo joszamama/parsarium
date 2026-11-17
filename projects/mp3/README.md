@@ -23,4 +23,5 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [mutagen / Python](python/mutagen/README.md)
 - [tinytag / Python](python/tinytag/README.md)
 - [minimp3 / Rust](rust/minimp3/README.md)
+- [symphonia / Rust](rust/symphonia/README.md)
 - [symphonia-bundle-mp3 / Rust](rust/symphonia_bundle_mp3/README.md)
