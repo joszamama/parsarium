@@ -64,8 +64,12 @@ def check(slug: str) -> dict:
         first = probe(manifest, image, ROOT / CONTROL, work, "first")
         repeat = probe(manifest, image, ROOT / CONTROL, work, "repeat")
         other = probe(manifest, image, ROOT / DIFFERENTIAL, work, "other")
+        repeat_other = (probe(manifest, image, ROOT / DIFFERENTIAL, work, "repeat-other")
+                        if slug == "github_com_bytedance_sonic" else None)
     if first != repeat:
         raise RuntimeError(f"{relative}: repeated control probe changed parser features or AFL++ map")
+    if repeat_other is not None and other != repeat_other:
+        raise RuntimeError(f"{relative}: repeated differential probe changed parser features or AFL++ map")
     if len(first[0]) != receipt["parser_source_features"] or len(first[1]) != receipt["feedback_edges"]:
         raise RuntimeError(f"{relative}: control probe differs from overlay receipt")
     feature_difference = len(first[0] ^ other[0])
@@ -90,7 +94,10 @@ def check(slug: str) -> dict:
             "parser_feature_difference": feature_difference,
             "afl_tuple_difference": tuple_difference,
             **({"differential_control_pass": True}
-               if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson"} else {})}
+               if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson"} else {}),
+            **({"repeated_differential_identical": True,
+                "feedback_scope": "Sonic internal/decoder/optdec Go blocks; native NEON assembly instructions are not instrumented by Go coverpkg"}
+               if slug == "github_com_bytedance_sonic" else {})}
 
 
 def main() -> None:
