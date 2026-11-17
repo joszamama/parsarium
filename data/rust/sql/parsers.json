@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "name": "sqlparser",
+    "version": "0.64.0",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE.TXT in the pinned crate (SHA-256 a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2); Cargo.toml license = Apache-2.0",
+    "input_api": "Parser::parse_sql(&GenericDialect, local UTF-8 text) -> Vec<Statement>",
+    "documentation": "https://docs.rs/sqlparser/0.64.0/sqlparser/parser/struct.Parser.html#method.parse_sql",
+    "source": "https://static.crates.io/crates/sqlparser/sqlparser-0.64.0.crate",
+    "source_sha256": "92e0d273b4f8ddd14a35ed36862acbc9cc96cec578e36ee1881a9d42e0e0f2c8",
+    "dependencies": [
+      "log",
+      "recursive (stack growth)",
+      "sqlparser_derive 0.7.0 (visitor derive macros, enabled by the visitor feature)"
+    ],
+    "dialect": "GenericDialect",
+    "scope": "One SQL statement from local UTF-8 text with GenericDialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other dialects are untested.",
+    "family": "sqlparser-rs tokenizer and recursive-descent parser",
+    "family_note": "Parser::parse_sql tokenizes (src/tokenizer.rs) and parses (src/parser/mod.rs) into the src/ast types. The adapter reads Statement::Query (Select projection, from/joins, selection, group_by, order_by) and Statement::Insert (table, columns, VALUES rows) and walks relations and expressions through the crate's visitor API. Shared family: datafusion-sql, gluesql, polyglot-sql forks and the sqlparser-rs WASM npm packages build on it; the Python sqloxide binding also wraps it.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 18971518,
+      "source": "https://crates.io/api/v1/crates/sqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Includes transitive downloads through DataFusion and other query engines."
+    },
+    "project": "projects/sql/rust/sqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

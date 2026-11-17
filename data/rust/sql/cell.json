@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "sql",
-  "status": "pilot_search_recorded_none_verified",
+  "status": "pilot_one_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -21,9 +21,13 @@
   "unique_search_hits": 250,
   "search_captured_at_utc": "2026-11-17T16:38:13.091871+00:00",
   "primary_metric": "crates.io recent_downloads (trailing 90 days)",
-  "unresolved_documentation_leads": 6,
-  "uncertainty": "Bounded search only (crates.io search API, three queries, first 100 hits each; recent_downloads (90 days).). 6 SQL parser leads are unresolved and none is verified yet, so zero is not evidence of absence. Registry relevance order is not adoption order, and package metrics include uses unrelated to parsing SQL text.",
+  "unresolved_documentation_leads": 5,
+  "uncertainty": "One verified Rust SQL path after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics for 11 targeted leads, captured 2026-11-17. sqlparser 0.64.0 (18,971,518 90-day downloads) parses both valid controls with GenericDialect into ASTs that give the oracle summary. Its downloads include transitive pulls through DataFusion and other engines. pg_query (libpg_query FFI), sqlite3-parser and other leads are unverified, so this is not a top-ten ranking. sqlparser_derive, datafusion-sql and gluesql-core are sqlparser-rs family helpers or consumers, not separate parsers. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/rust/sql/registry-snapshot.json",
   "unresolved_leads": "data/rust/sql/leads.json",
-  "runtime_evidence": "data/rust/sql/standard.json"
+  "runtime_evidence": "data/rust/sql/standard.json",
+  "third_party_evidence": "data/rust/sql/parsers.json",
+  "third_party_control_results": [
+    "projects/sql/rust/sqlparser/verification.json"
+  ]
 }

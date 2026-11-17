@@ -1,0 +1,102 @@
+{
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "differential_control": "controls/sql/insert-values.sql",
+  "oracle": "controls/sql/expected.json",
+  "third_party": [
+    {
+      "package": "sqlparser",
+      "version": "0.64.0",
+      "pass": true,
+      "input_api": "Parser::parse_sql(&GenericDialect, local UTF-8 text) -> Vec<Statement>",
+      "dialect": "GenericDialect",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlparser-rs tokenizer and recursive-descent parser",
+      "parser_source_files": 42,
+      "parser_source_lines_covered": 2017,
+      "afl_tuple_difference": 2310,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/sqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/sqlparser/differential.json"
+    }
+  ],
+  "standard": [],
+  "checked_at_utc": "2026-11-17T17:05:05.151464+00:00"
+}
