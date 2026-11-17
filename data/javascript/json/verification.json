@@ -1,0 +1,99 @@
+{
+  "checked_at_utc": "2026-11-17T03:19:55.701113+00:00",
+  "platform": "linux/arm64 Docker",
+  "node": "Node.js 26.10.0",
+  "controls": {
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array; the second valid control is a nested array root",
+  "third_party": [
+    {
+      "package": "stream-json",
+      "version": "3.9.0",
+      "scope": "One RFC 8259 JSON text from local bytes, tokenized and assembled into a JavaScript value",
+      "command": "python3 scripts/run_project.py json javascript stream_json",
+      "receipt": "projects/json/javascript/stream_json/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 7,
+      "parser_source_lines_covered": 467,
+      "error": null
+    }
+  ],
+  "standard": [
+    {
+      "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
+      "runtime": "Node.js 26.10.0",
+      "command": "python3 scripts/verify_javascript_json_standard.py",
+      "receipt": "data/javascript/json/standard-receipt.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null
+    }
+  ]
+}

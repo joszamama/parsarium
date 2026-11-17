@@ -1,0 +1,56 @@
+[
+  {
+    "name": "stream-json",
+    "version": "3.9.0",
+    "license": "BSD-3-Clause",
+    "npm_integrity": "sha512-kL2w6owYCdzCRApK9/9HI7Vgrd+0iWE5tTGc8P/AS2AdPoHcFTQwUek66sbMpfaX73lgHvDN+u1AoRC/dzB1Hw==",
+    "tarball_sha256": "faafb208a8a612681f282ea128001fb06d94c856fe252b3a4a190c9a0f438ac3",
+    "input_api": "chain([Readable.from([Buffer]), parser()]) with Assembler.connectTo(pipeline, {onDone})",
+    "documentation": "https://github.com/uhop/stream-json/wiki/Parser",
+    "documentation_assembler": "https://github.com/uhop/stream-json/wiki/Assembler",
+    "source": "https://github.com/uhop/stream-json/tree/3.9.0",
+    "scope": "One RFC 8259 JSON text from local bytes, tokenized and assembled into a JavaScript value",
+    "family": "stream-json charCodeAt/regex streaming tokenizer",
+    "family_note": "src/core/parser.js implements its own charCodeAt dispatch plus sticky-regex incremental state machine and emits SAX-like tokens; src/core/assembler.js builds values from packed tokens and converts numbers with parseFloat. It does not call JSON.parse on input text. Buffer chunks are decoded to text by its stream-chain 4.4.2 fixUtf8Stream dependency before tokenizing.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 56997988,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/stream-json",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/stream_json"
+  }
+]

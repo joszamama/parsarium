@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:20:29.083688+00:00",
+  "kind": "standard",
+  "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
+  "runtime": "Node.js 26.10.0",
+  "v8": "14.6.202.34-node.34",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "adapter": "adapters/javascript/json_node.mjs",
+  "adapter_sha256": "e8e24e794840f27e21c13e9f7266c4803cf5976f9da2674fc6552d671d2c44e2",
+  "pass": true,
+  "output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "controls": [
+    {
+      "control": "controls/json/nested-object.json",
+      "sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "repeated_output_identical": true
+    },
+    {
+      "control": "controls/json/nested-array.json",
+      "sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_output_identical": true
+    }
+  ],
+  "parser_source_lines_covered": null,
+  "afl_feedback": null,
+  "coverage_note": "JSON.parse is a V8 builtin implemented in C++ inside the node binary; V8 JavaScript coverage reports no script for it, so no parser source lines or AFL++ parser feedback are attributed."
+}
