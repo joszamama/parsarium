@@ -332,6 +332,116 @@
     }
   },
   {
+    "name": "polyglot-sql",
+    "version": "0.14.1",
+    "license": "MIT",
+    "license_evidence": "Cargo.toml license = MIT in the pinned crate (checked in the image); the crate ships no license file",
+    "input_api": "polyglot_sql::parse(local UTF-8 text, DialectType::Generic) -> Vec<Expression>",
+    "documentation": "https://docs.rs/polyglot-sql/0.14.1/polyglot_sql/fn.parse.html",
+    "source": "https://static.crates.io/crates/polyglot-sql/polyglot-sql-0.14.1.crate",
+    "source_sha256": "8ea83ace7b8d9fc85b6a1d0bd129250cd29461dd61991791c44a4ea124f29904",
+    "dependencies": [
+      "polyglot-sql-ast-derive 0.14.1 (traversal macros)",
+      "serde",
+      "stacker",
+      "thiserror",
+      "unicode-segmentation"
+    ],
+    "dialect": "Generic",
+    "scope": "One SQL statement from local UTF-8 text with DialectType::Generic and default features off (ast-tools only); valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other dialects, SQL generation and transpilation are untested.",
+    "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
+    "family_note": "parse() runs the crate's own tokenizer (src/tokens.rs) and parser (src/parser.rs) into a typed Expression AST modelled on Python sqlglot; it does not depend on or copy sqlparser-rs. The adapter reads Select and Insert fields and walks the tree with ExpressionWalk::dfs; COUNT(*) and SUM are typed Count/Sum nodes whose names come from the node kind. The polyglot WASM, Python and FFI bindings wrap the same crate.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 113477,
+      "source": "https://crates.io/api/v1/crates/polyglot-sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Counts include pulls by the project's own bindings and dependent crates."
+    },
+    "project": "projects/sql/rust/polyglot_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "databend-common-ast",
     "version": "0.2.5",
     "license": "Apache-2.0",

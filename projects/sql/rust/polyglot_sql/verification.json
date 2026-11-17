@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "polyglot_sql::parse(local UTF-8 text, DialectType::Generic) -> Vec<Expression>; the harness reads Expression::Select (expressions, joins, where_clause, group_by, order_by) and Expression::Insert (table, columns, values) and walks the tree with the crate's ExpressionWalk::dfs for Table, Function/AggregateFunction and typed aggregate nodes and Literal values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T21:11:11.121479+00:00",
+  "manifest": "projects/sql/rust/polyglot_sql/manifest.json",
+  "image_id": "sha256:d926cd67b5bc0eaa3aa3f625e3efd98e851eb3c5a173c22fcea3ad73f885d1fa",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "8ea83ace7b8d9fc85b6a1d0bd129250cd29461dd61991791c44a4ea124f29904",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "a81df75d41b7a889e83731659bcedc2684e16dc2bf02626ff6252bc5d516a10c",
+    "Cargo.toml": "b766c423a5a4d61029435aedaa20ad828184e708980ba66f35d588e2d5125474",
+    "Dockerfile": "42ace2556aaf0c5c76b20c3cff6ed0ca43dec8fea11e135a4062d981cb8f6400",
+    "manifest.json": "bbd4a2fc1b11fc45308deca5b07832560fa9f60c03b97807b7b5e82b541089c4",
+    "run-control.sh": "ce2ec182cd2b69d31bf21686f97d987dbdb960c401460e50d99a6e7cb66ae096",
+    "source-lock.json": "f0e0b9dad8444b0524e3fd7af6c91ec5c5b859849724fc2d4f1d1deba911a9ee",
+    "src/bin/fuzzer.rs": "8fe55ecd50d0d5a565dec209d4f83a80378d4fef17ea3b30483fe145b9c0c392",
+    "src/bin/replay.rs": "4303f1b87367493e52521ffbf9e254a11bee57d236529d988b7330bb3aba80aa",
+    "src/lib.rs": "ae87091494eb0f1104cd8f07b3dfaaa1bee9b64f9c5cedab7ff4439a17106d95"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 19,
+  "parser_source_lines_covered": 3142,
+  "format_specific_source_lines_covered": 2038,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/polyglot_sql/target/coverage/coverage.json",
+  "pass": true
+}
