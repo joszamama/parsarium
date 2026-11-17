@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "php",
+  "package": "mhor/php-mediainfo",
+  "release": "5.8.0",
+  "catalog_parser": "data/php/mp3/parsers.json",
+  "source_lock": "projects/mp3/php/mhor_php_mediainfo/source-lock.json",
+  "source_sha256": "bd32fc7aa398421f049551e799fe31cd56a50b34953699b847295268b3f963ef",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/id3v2-tagged-tone-long.mp3",
+  "control_sha256": "2b085bb9e5bef6bb4254233a9d6bf0652ced4589373600cff3b8ddab07909dac",
+  "expected_output": {
+    "title": "Parsarium",
+    "artist": "Control",
+    "album": "Pilot"
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in mhor/php-mediainfo PHP source; php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/mhor/php-mediainfo/"
+}

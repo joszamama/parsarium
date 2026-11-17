@@ -7,15 +7,15 @@ if ($package === null || $path === null) {
 }
 
 $vendor = match ($package) {
-    'james-heinrich/getid3', 'owen-oj/laravel-getid3' => '/mp3_id3v2/vendor/autoload.php',
-    'mhor/php-mediainfo' => '/mp3_id3v2/mediainfo/vendor/autoload.php',
-    'buggedcom/phpvideotoolkit' => '/mp3_id3v2/phptoolkit/vendor/autoload.php',
+    'james-heinrich/getid3', 'owen-oj/laravel-getid3' => '/mp3/vendor/autoload.php',
+    'mhor/php-mediainfo' => '/mp3/mediainfo/vendor/autoload.php',
+    'buggedcom/phpvideotoolkit' => '/mp3/phptoolkit/vendor/autoload.php',
     'php-ffmpeg/php-ffmpeg' => '/wav/php_ffmpeg/vendor/autoload.php',
-    'sempia/getid3' => '/mp3_id3v2/sempia/vendor/autoload.php',
-    'wikimedia/getid3' => '/mp3_id3v2/wikimedia/vendor/autoload.php',
-    'indiehd/audio-manipulator' => '/mp3_id3v2/indiehd/vendor/autoload.php',
-    'audiostreamify/hvap' => '/mp3_id3v2/hvap/vendor/autoload.php',
-    'nicoverbruggen/mediaprobe' => '/mp3_id3v2/mediaprobe/vendor/autoload.php',
+    'sempia/getid3' => '/mp3/sempia/vendor/autoload.php',
+    'wikimedia/getid3' => '/mp3/wikimedia/vendor/autoload.php',
+    'indiehd/audio-manipulator' => '/mp3/indiehd/vendor/autoload.php',
+    'audiostreamify/hvap' => '/mp3/hvap/vendor/autoload.php',
+    'nicoverbruggen/mediaprobe' => '/mp3/mediaprobe/vendor/autoload.php',
     'soluble/mediatools' => '/wav/soluble/vendor/autoload.php',
     'rasuvaeff/media-converter' => '/wav/rasuvaeff/vendor/autoload.php',
     'protonemedia/php-ffmpeg' => '/wav/protonemedia/vendor/autoload.php',
@@ -25,7 +25,7 @@ $vendor = match ($package) {
     'aminyazdanpanah/php-ffmpeg-video-streaming' => '/mp4/aminyaz/vendor/autoload.php',
     'fmonts/ffmpeg-bundle' => '/mp4/fmonts/vendor/autoload.php',
     'minuteoflaravel/laravel-audio-video-validator' => '/mp4/minute/vendor/autoload.php',
-    'kiwilan/php-audio' => '/mp3_id3v2/kiwilan/vendor/autoload.php',
+    'kiwilan/php-audio' => '/mp3/kiwilan/vendor/autoload.php',
     default => throw new InvalidArgumentException('unknown MP4 package: ' . $package),
 };
 require dirname(__DIR__) . $vendor;

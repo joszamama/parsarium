@@ -9,7 +9,7 @@
     "source": "https://github.com/Vanilagy/mediabunny",
     "scope": "Every MPEG Layer III frame of an untagged stream from local bytes, demuxed by mediabunny's own frame-header reader: format, codec, sample rate, channels, frame count, frame bytes, samples per channel (from duration); no audio decode",
     "family": "mediabunny TypeScript MP3 demuxer",
-    "family_note": "Own frame-header reader (dist/modules/src/mp3/mp3-reader.js, mp3-demuxer.js). Not one of the ten mp3_id3v2/javascript paths; that cell's music-metadata path is a separate MPEG frame parser and its @audio/decode paths use mpg123 WASM. mediabunny also has an ID3 reader (id3.js) that the untagged controls do not exercise.",
+    "family_note": "Own frame-header reader (dist/modules/src/mp3/mp3-reader.js, mp3-demuxer.js). Not one of the ten JavaScript paths selected in the former MP3-with-ID3v2 cell; that cell's music-metadata path is a separate MPEG frame parser and its @audio/decode paths use mpg123 WASM. mediabunny also has an ID3 reader (id3.js) that the untagged controls do not exercise.",
     "control": "controls/mp3/tone-44k-mono.mp3",
     "expected_output": {
       "format": "MP3",
@@ -39,9 +39,9 @@
     "scope": "tags+audio_header",
     "family": "music-metadata",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/music_metadata",
+    "project": "projects/mp3/javascript/music_metadata",
     "verified_result": "ID3v2-tagged control: tags+audio_header",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -59,7 +59,7 @@
     "source": "https://github.com/eshaz/codec-parser",
     "scope": "Every MPEG Layer III frame of an untagged stream from a local Uint8Array, split by codec-parser's own frame-header parser: codec, layer, sample rate, channels, header-table bitrate, frame count, frame bytes, samples per frame, total samples, distinct header variants; no audio decode",
     "family": "codec-parser JavaScript MPEG frame parser",
-    "family_note": "Own frame-header parser (src/codecs/mpeg/MPEGHeader.js) and fixed-length frame sync that requires the next header at the computed frame length (src/codecs/Parser.js). The 2.5.0 tarball has no runtime dependencies and shares no code with mediabunny (separate author, repository and frame-sync design). Not one of the ten mp3_id3v2/javascript paths. Its ID3v2 probe skips tags without parsing them and is not exercised by the untagged controls. The same package also parses AAC, FLAC and Ogg; those parsers are not loaded for audio/mpeg frames beyond module import.",
+    "family_note": "Own frame-header parser (src/codecs/mpeg/MPEGHeader.js) and fixed-length frame sync that requires the next header at the computed frame length (src/codecs/Parser.js). The 2.5.0 tarball has no runtime dependencies and shares no code with mediabunny (separate author, repository and frame-sync design). Not one of the ten JavaScript paths selected in the former MP3-with-ID3v2 cell. Its ID3v2 probe skips tags without parsing them and is not exercised by the untagged controls. The same package also parses AAC, FLAC and Ogg; those parsers are not loaded for audio/mpeg frames beyond module import.",
     "dependencies": [],
     "control": "controls/mp3/tone-44k-mono.mp3",
     "expected_output": {
@@ -96,9 +96,9 @@
     "family": "mpg123 WASM",
     "family_note": "Uses mpg123-decoder WASM. On this mono control the codec API yielded two PCM channels; only sample rate and sample count establish acceptance of the tagged MP3.",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/audio_decode_mp3",
+    "project": "projects/mp3/javascript/audio_decode_mp3",
     "verified_result": "ID3v2-tagged control: decoded_audio",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "sampleRate": 8000,
       "channels": 2,
@@ -114,9 +114,9 @@
     "scope": "tags",
     "family": "MediaInfoLib WASM",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/mediainfo_js",
+    "project": "projects/mp3/javascript/mediainfo_js",
     "verified_result": "ID3v2-tagged control: tags",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -133,9 +133,9 @@
     "family": "mpg123 WASM",
     "family_note": "Facade delegates MP3 decoding to @audio/decode-mp3 and mpg123-decoder WASM.",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/audio_decode",
+    "project": "projects/mp3/javascript/audio_decode",
     "verified_result": "ID3v2-tagged control: decoded_audio",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "sampleRate": 8000,
       "channels": 1,
@@ -152,9 +152,9 @@
     "family": "FFprobe wrapper",
     "family_note": "Invokes pinned @ffprobe-installer/ffprobe; duration includes encoder padding.",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/get_audio_duration",
+    "project": "projects/mp3/javascript/get_audio_duration",
     "verified_result": "ID3v2-tagged control: duration",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "duration_ms": 1152
     }
@@ -168,9 +168,9 @@
     "scope": "tags",
     "family": "node-id3",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/node_id3",
+    "project": "projects/mp3/javascript/node_id3",
     "verified_result": "ID3v2-tagged control: tags",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -186,9 +186,9 @@
     "scope": "tags+version",
     "family": "id3js",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/id3js",
+    "project": "projects/mp3/javascript/id3js",
     "verified_result": "ID3v2-tagged control: tags+version",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -209,9 +209,9 @@
     "family": "mp3-duration",
     "family_note": "Frame duration includes MP3 padding and differs from nominal one-second source duration.",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/javascript/mp3_duration",
+    "project": "projects/mp3/javascript/mp3_duration",
     "verified_result": "ID3v2-tagged control: duration",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "verified_output": {
       "duration_ms": 1224
     }

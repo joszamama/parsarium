@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "javascript",
+  "package": "mediainfo.js",
+  "release": "0.3.8",
+  "catalog_parser": "data/javascript/mp3/parsers.json",
+  "source_lock": "projects/mp3/javascript/mediainfo_js/source-lock.json",
+  "source_sha256": "b2865a47ae01a232d8ae192af58d96a58602dcf995b55cb9013672a45e537ddd",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/id3v2-tagged-tone.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "title": "Parsarium",
+    "artist": "Control",
+    "album": "Pilot"
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/mediainfo.js/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/mediainfo.js/"
+}

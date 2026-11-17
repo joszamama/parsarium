@@ -12,14 +12,14 @@
     "family": "JCodec native MPEG audio demuxer",
     "scope": "first MP3 audio frame codec, byte length and timescale from local tagged MP3",
     "adapter_label": "jcodec",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "codec": "MP3",
       "frame_bytes": 288,
       "timescale": 8000
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/jcodec",
+    "project": "projects/mp3/java/jcodec",
     "verified_result": "ID3v2-tagged control: first MP3 audio frame codec, byte length and timescale from local tagged MP3"
   },
   {
@@ -36,7 +36,7 @@
     "scope": "local tagged MP3 type, ID3v2 title, artist, album and tag version",
     "adapter_module": "mp3spi",
     "adapter_label": "mp3spi",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "type": "MP3",
       "title": "Parsarium",
@@ -45,7 +45,7 @@
       "tag_version": "3"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/mp3spi",
+    "project": "projects/mp3/java/mp3spi",
     "verified_result": "ID3v2-tagged control: local tagged MP3 type, ID3v2 title, artist, album and tag version"
   },
   {
@@ -61,14 +61,14 @@
     "family": "JLayer native MP3 frame decoder with raw ID3v2 access",
     "scope": "local tagged MP3 frame frequency and layer, plus ID3v2 presence",
     "adapter_label": "jlayer",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "frequency": 8000,
       "layer": 3,
       "id3v2_present": true
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/jlayer",
+    "project": "projects/mp3/java/jlayer",
     "verified_result": "ID3v2-tagged control: local tagged MP3 frame frequency and layer, plus ID3v2 presence"
   },
   {
@@ -85,14 +85,14 @@
     "scope": "local tagged MP3 format, sample rate and channels",
     "adapter_module": "bytedeco",
     "adapter_label": "ffmpeg",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "format": "mp3",
       "frequency": 8000,
       "channels": 1
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/bytedeco_ffmpeg",
+    "project": "projects/mp3/java/bytedeco_ffmpeg",
     "verified_result": "ID3v2-tagged control: local tagged MP3 format, sample rate and channels"
   },
   {
@@ -108,14 +108,14 @@
     "family_note": "jid3lib's project README identifies jaudiotagger as a fork in the same historical lineage.",
     "scope": "local MP3 identification and ID3v2 title, artist and album",
     "adapter_label": "jaudiotagger",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
       "album": "Pilot"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/jaudiotagger",
+    "project": "projects/mp3/java/jaudiotagger",
     "verified_result": "ID3v2-tagged control: local MP3 identification and ID3v2 title, artist and album"
   },
   {
@@ -132,7 +132,7 @@
     "scope": "local tagged MP3 format, codec, sample rate and channels",
     "adapter_module": "bytedeco",
     "adapter_label": "javacv",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "format": "mp3",
       "codec": "mp3float",
@@ -140,7 +140,7 @@
       "channels": 1
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/javacv",
+    "project": "projects/mp3/java/javacv",
     "verified_result": "ID3v2-tagged control: local tagged MP3 format, codec, sample rate and channels"
   },
   {
@@ -155,14 +155,14 @@
     "family": "JavaMP3 native MPEG audio decoder",
     "scope": "44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes",
     "adapter_label": "javamp3",
-    "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone-44k.mp3",
     "expected_output": {
       "frequency": 44100,
       "stereo": false,
       "sample_bytes": 32
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/javamp3",
+    "project": "projects/mp3/java/javamp3",
     "verified_result": "ID3v2-tagged control: 44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes"
   },
   {
@@ -178,7 +178,7 @@
     "family_note": "jid3lib's project README identifies mp3agic as a fork in the same historical lineage.",
     "scope": "local MP3 frames and ID3v2 title, artist, album and API tag version",
     "adapter_label": "mp3agic",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -186,7 +186,7 @@
       "tag_version": "3.0"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/mp3agic",
+    "project": "projects/mp3/java/mp3agic",
     "verified_result": "ID3v2-tagged control: local MP3 frames and ID3v2 title, artist, album and API tag version"
   },
   {
@@ -202,7 +202,7 @@
     "family": "Jaffree wrapper over local FFprobe/FFmpeg",
     "scope": "local tagged MP3 codec, sample rate, title and artist",
     "adapter_label": "jaffree",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "codec": "mp3",
       "frequency": 8000,
@@ -210,7 +210,7 @@
       "artist": "Control"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/jaffree",
+    "project": "projects/mp3/java/jaffree",
     "verified_result": "ID3v2-tagged control: local tagged MP3 codec, sample rate, title and artist"
   },
   {
@@ -226,7 +226,7 @@
     "family": "JAVE2 wrapper over bundled FFmpeg MP3 demuxer",
     "scope": "local tagged MP3 format, codec, sample rate and channels",
     "adapter_label": "jave",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "format": "mp3",
       "codec": "mp3 (mp3float)",
@@ -234,7 +234,7 @@
       "channels": 1
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/java/jave_core",
+    "project": "projects/mp3/java/jave_core",
     "verified_result": "ID3v2-tagged control: local tagged MP3 format, codec, sample rate and channels"
   }
 ]

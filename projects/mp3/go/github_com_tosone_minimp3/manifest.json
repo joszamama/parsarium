@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "go",
+  "package": "github.com/tosone/minimp3",
+  "release": "v1.1.0",
+  "catalog_parser": "data/go/mp3/parsers.json",
+  "source_lock": "projects/mp3/go/github_com_tosone_minimp3/source-lock.json",
+  "source_sha256": "1b22cd1e7df4e1ea0ef7c4a41c899430dbf42f13e2cfe2c771d27b56809c87e8",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/id3v2-tagged-tone-44k.mp3",
+  "control_sha256": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307",
+  "expected_output": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "decoded_bytes": 94464
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/tosone/minimp3 during valid-control replay",
+  "coverage_subject_prefix": "github.com/tosone/minimp3/"
+}

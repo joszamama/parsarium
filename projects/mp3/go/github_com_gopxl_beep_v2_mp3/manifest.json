@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "go",
+  "package": "github.com/gopxl/beep/v2/mp3",
+  "release": "v2.1.1",
+  "catalog_parser": "data/go/mp3/parsers.json",
+  "source_lock": "projects/mp3/go/github_com_gopxl_beep_v2_mp3/source-lock.json",
+  "source_sha256": "5e34c28b784154ae54b4eff29dab034586ec602baac18efd5d6e8efff445b4ef",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/id3v2-tagged-tone-44k.mp3",
+  "control_sha256": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307",
+  "expected_output": {
+    "sample_rate": 44100,
+    "samples": 16
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/gopxl/beep/v2/mp3 during valid-control replay",
+  "coverage_subject_prefix": "github.com/gopxl/beep/v2/mp3/"
+}

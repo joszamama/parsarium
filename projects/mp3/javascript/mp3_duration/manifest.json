@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "javascript",
+  "package": "mp3-duration",
+  "release": "1.1.0",
+  "catalog_parser": "data/javascript/mp3/parsers.json",
+  "source_lock": "projects/mp3/javascript/mp3_duration/source-lock.json",
+  "source_sha256": "9e7e9860c16e3ed7693d64a4b7a9ce0f5b7ef9c43e3fc0af7f543142add4629e",
+  "base_image": "node@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/id3v2-tagged-tone.mp3",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "expected_output": {
+    "duration_ms": 1224
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/mp3-duration/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of package files during valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/mp3-duration/"
+}
