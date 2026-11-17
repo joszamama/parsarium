@@ -190,6 +190,52 @@
       "complete": false
     },
     {
+      "ecosystem": "c",
+      "format": "dns",
+      "status": "pilot_two_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "debian-source:dns",
+        "conan:dns",
+        "targeted c DNS message sources"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "debian-source:dns": 128,
+        "conan:dns": 5,
+        "targeted c DNS message sources": 12
+      },
+      "search_hits_recorded": 117,
+      "unique_search_hits": 111,
+      "unresolved_documentation_leads": 3,
+      "leads_recorded": 12,
+      "leads_by_status": {
+        "resolved_verified_selected": 2,
+        "unresolved": 3,
+        "excluded": 5,
+        "standard_runtime": 2
+      },
+      "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+      "uncertainty": "Pilot cell: two C paths verified, c-ares and ldns, ranked by Debian popcon sourcemax installations. bind9, unbound and libevent are excluded because they document no public parser for caller-supplied message bytes; knot, udns and getdns remain leads (getdns shares the ldns-derived gldns code). glibc and musl libresolv ns_initparse are recorded as standard/runtime leads and were not run. c-ares and ldns drop the reserved Z bit (z carries AD and CD). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/c/dns/registry-snapshot.json",
+      "unresolved_leads": "data/c/dns/leads.json",
+      "runtime_evidence": "data/c/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/c/dns/parsers.json",
+      "third_party_control_results": "data/c/dns/verification.json",
+      "selection": "Two control-verified C DNS path(s), ranked by Debian popcon sourcemax installations (max over binary packages built from the source package): c-ares 1.34.9 (43,027), ldns 1.8.4 (1,240).",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "cpp",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -361,6 +407,51 @@
       "complete": false
     },
     {
+      "ecosystem": "cpp",
+      "format": "dns",
+      "status": "pilot_one_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 1,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "debian-source:dns",
+        "conan:dns",
+        "targeted cpp DNS message sources"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "debian-source:dns": 128,
+        "conan:dns": 5,
+        "targeted cpp DNS message sources": 9
+      },
+      "search_hits_recorded": 114,
+      "unique_search_hits": 109,
+      "unresolved_documentation_leads": 1,
+      "leads_recorded": 9,
+      "leads_by_status": {
+        "resolved_verified_selected": 1,
+        "unresolved": 1,
+        "excluded": 7
+      },
+      "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+      "uncertainty": "Pilot cell: one C++ path verified, libtins (Debian popcon 52, the only C++ DNS message library with a Debian source package). PcapPlusPlus has no Debian source, so it has no primary metric and stays an unranked lead. Poco, Qt QDnsLookup, Boost.Asio and the PowerDNS applications are excluded (resolvers or applications, no message-bytes API). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/cpp/dns/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/dns/leads.json",
+      "runtime_evidence": "data/cpp/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/cpp/dns/parsers.json",
+      "third_party_control_results": "data/cpp/dns/verification.json",
+      "selection": "One control-verified C++ DNS path(s), ranked by Debian popcon sourcemax installations (max over binary packages built from the source package): libtins 4.6 (52).",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "go",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -518,6 +609,53 @@
       "third_party_control_results": [
         "projects/sql/go/vitess_io_vitess_go_vt_sqlparser/verification.json"
       ],
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "go",
+      "format": "dns",
+      "status": "pilot_two_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "dns",
+        "dns message",
+        "dns parser",
+        "dns packet"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "dns": null,
+        "dns message": null,
+        "dns parser": null,
+        "dns packet": null
+      },
+      "search_hits_recorded": 284,
+      "unique_search_hits": 276,
+      "unresolved_documentation_leads": 4,
+      "leads_recorded": 7,
+      "leads_by_status": {
+        "resolved_verified_selected": 2,
+        "unresolved": 4,
+        "excluded": 1
+      },
+      "ranking_metric": "pkg.go.dev Imported by package count",
+      "uncertainty": "Pilot cell: two Go paths verified, miekg/dns and gopacket's layers.DNS, ranked by pkg.go.dev known importing packages. gopacket's count covers its whole multi-protocol layers package. golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, the gopacket community fork and phuslu/fastdns remain leads. The standard library exports no DNS message parser. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/go/dns/registry-snapshot.json",
+      "unresolved_leads": "data/go/dns/leads.json",
+      "runtime_evidence": "data/go/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/go/dns/parsers.json",
+      "third_party_control_results": "data/go/dns/verification.json",
+      "selection": "Two control-verified Go DNS path(s), ranked by pkg.go.dev Imported by package count: github.com/miekg/dns v1.1.73 (16,234), github.com/google/gopacket/layers v1.1.19 (5,428).",
       "phase": "pilot",
       "complete": false
     },
@@ -682,6 +820,51 @@
         "projects/sql/java/jooq/verification.json",
         "projects/sql/java/druid/verification.json"
       ],
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "java",
+      "format": "dns",
+      "status": "pilot_two_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "dns",
+        "dns codec",
+        "dns message"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "dns": 179,
+        "dns codec": 4,
+        "dns message": 0
+      },
+      "search_hits_recorded": 104,
+      "unique_search_hits": 101,
+      "unresolved_documentation_leads": 2,
+      "leads_recorded": 7,
+      "leads_by_status": {
+        "resolved_verified_selected": 2,
+        "unresolved": 2,
+        "excluded": 3
+      },
+      "ranking_metric": "deps.dev directDependentCount summed over all releases",
+      "uncertainty": "Pilot cell: two Java paths verified, netty-codec-dns and dnsjava, ranked by deps.dev direct dependents summed over releases (a weak signal). Netty leaves A/AAAA as raw records (the harness formats the decoded bytes) and its DnsQuery has no AA/TC/RA/RCODE. pcap4j and MiniDNS remain leads; vert.x is excluded as a network client over Netty's codec. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/java/dns/registry-snapshot.json",
+      "unresolved_leads": "data/java/dns/leads.json",
+      "runtime_evidence": "data/java/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/java/dns/parsers.json",
+      "third_party_control_results": "data/java/dns/verification.json",
+      "selection": "Two control-verified Java DNS path(s), ranked by deps.dev directDependentCount summed over all releases: netty-codec-dns 4.2.21.Final (1,038), dnsjava 3.7.1 (888).",
       "phase": "pilot",
       "complete": false
     },
@@ -854,6 +1037,53 @@
       "complete": false
     },
     {
+      "ecosystem": "javascript",
+      "format": "dns",
+      "status": "pilot_two_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "dns",
+        "dns packet",
+        "dns parser",
+        "dns message"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "dns": 8041,
+        "dns packet": 10656,
+        "dns parser": 59822,
+        "dns message": 132425
+      },
+      "search_hits_recorded": 400,
+      "unique_search_hits": 271,
+      "unresolved_documentation_leads": 8,
+      "leads_recorded": 11,
+      "leads_by_status": {
+        "resolved_verified_selected": 2,
+        "excluded": 1,
+        "unresolved": 8
+      },
+      "ranking_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "uncertainty": "Pilot cell: two JavaScript paths verified, dns-packet and its fork @dnsquery/dns-packet (shared family, kept as a rewrite: 4.3% of its distinct non-test source lines are shared, 29.8% after normalisation), ranked by npm 30-day downloads. dns2, @leichtgewicht/dns-packet (another fork), native-dns-packet and dns-js remain leads; multicast-dns is excluded as an mDNS network API over dns-packet. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/javascript/dns/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/dns/leads.json",
+      "runtime_evidence": "data/javascript/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/javascript/dns/parsers.json",
+      "third_party_control_results": "data/javascript/dns/verification.json",
+      "selection": "Two control-verified JavaScript DNS path(s), ranked by npm downloads, 2026-10-17:2026-11-15 (30 days): dns-packet 5.6.1 (81,519,355), @dnsquery/dns-packet 6.1.1 (785,358).",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "python",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -1013,6 +1243,47 @@
         "projects/sql/python/sqlparse/verification.json",
         "projects/sql/python/sqlglot/verification.json"
       ],
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "python",
+      "format": "dns",
+      "status": "pilot_two_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "project name contains 'dns'"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "project name contains 'dns'": 1074
+      },
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "unresolved_documentation_leads": 3,
+      "leads_recorded": 10,
+      "leads_by_status": {
+        "resolved_verified_selected": 2,
+        "excluded": 5,
+        "unresolved": 3
+      },
+      "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "uncertainty": "Pilot cell: two Python paths verified, dnspython and dpkt, ranked by PyPI Stats last-month downloads. pycares is excluded (c-ares channel API, no bytes parser) and scapy is excluded under this pilot's no-socket rule (its import opens AF_NETLINK sockets). dnslib, py3dns and pypacker remain leads. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/python/dns/registry-snapshot.json",
+      "unresolved_leads": "data/python/dns/leads.json",
+      "runtime_evidence": "data/python/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/python/dns/parsers.json",
+      "third_party_control_results": "data/python/dns/verification.json",
+      "selection": "Two control-verified Python DNS path(s), ranked by PyPI Stats last_month downloads excluding known mirrors: dnspython 2.9.2 (286,812,791), dpkt 1.9.8 (1,492,890).",
       "phase": "pilot",
       "complete": false
     },
@@ -1223,6 +1494,53 @@
       "complete": false
     },
     {
+      "ecosystem": "rust",
+      "format": "dns",
+      "status": "pilot_one_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 1,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "dns",
+        "dns parser",
+        "dns packet",
+        "dns message"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "dns": 4473,
+        "dns parser": 663,
+        "dns packet": 615,
+        "dns message": 1637
+      },
+      "search_hits_recorded": 400,
+      "unique_search_hits": 320,
+      "unresolved_documentation_leads": 9,
+      "leads_recorded": 12,
+      "leads_by_status": {
+        "resolved_verified_selected": 1,
+        "excluded": 2,
+        "unresolved": 9
+      },
+      "ranking_metric": "crates.io recent_downloads (90 days)",
+      "uncertainty": "Pilot cell: one Rust path verified, hickory-proto, ranked by crates.io 90-day downloads. trust-dns-proto 0.23.2 (the project's previous crate name) passed the full gate but is excluded as a predecessor sharing most of the decoder code (72-83% of distinct non-test lines in its binary decoder and name modules); its records are archived in trust-dns-proto-demoted.json. domain, simple-dns and dns-parser remain leads and would add independent families. hickory-proto drops the reserved Z bit (z carries AD and CD); its AFL++ overlay is scoped to the parser crate because the summary encoder's random hashing made whole-binary maps unstable. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/rust/dns/registry-snapshot.json",
+      "unresolved_leads": "data/rust/dns/leads.json",
+      "runtime_evidence": "data/rust/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/rust/dns/parsers.json",
+      "third_party_control_results": "data/rust/dns/verification.json",
+      "selection": "One control-verified Rust DNS path(s), ranked by crates.io recent_downloads (90 days): hickory-proto 0.26.3 (107,121,455).",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "php",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -1415,6 +1733,52 @@
         "projects/sql/php/phpmyadmin_sql_parser/verification.json",
         "projects/sql/php/greenlion_php_sql_parser/verification.json"
       ],
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "php",
+      "format": "dns",
+      "status": "pilot_two_verified_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "dns",
+        "dns parser",
+        "dns message"
+      ],
+      "search_limit_per_query": 100,
+      "search_totals": {
+        "dns": 526,
+        "dns parser": 14,
+        "dns message": 2
+      },
+      "search_hits_recorded": 116,
+      "unique_search_hits": 111,
+      "unresolved_documentation_leads": 5,
+      "leads_recorded": 12,
+      "leads_by_status": {
+        "resolved_verified_selected": 2,
+        "excluded": 4,
+        "unresolved_runnability_blocker": 1,
+        "unresolved": 5
+      },
+      "ranking_metric": "Packagist total downloads",
+      "uncertainty": "Pilot cell: two PHP paths verified, react/dns and pear/net_dns2, ranked by Packagist total downloads. daverandom/libdns parses both controls but fails the php-fuzzer gate (its rewrite breaks a constant expression), so its slot is left open; amphp/dns, spatie/dns and remotelyliving/php-dns are excluded as resolvers or wrappers. react/dns drops the Z, AD and CD bits (z reported as 0). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+      "registry_snapshot": "data/php/dns/registry-snapshot.json",
+      "unresolved_leads": "data/php/dns/leads.json",
+      "runtime_evidence": "data/php/dns/standard.json",
+      "controls": {
+        "primary": "controls/dns/response.bin",
+        "differential": "controls/dns/query.bin",
+        "oracle": "controls/dns/check_controls.py",
+        "expected": "controls/dns/expected.json"
+      },
+      "third_party_evidence": "data/php/dns/parsers.json",
+      "third_party_control_results": "data/php/dns/verification.json",
+      "selection": "Two control-verified PHP DNS path(s), ranked by Packagist total downloads: react/dns v1.14.0 (179,404,103), pear/net_dns2 v2.0.7 (3,392,919).",
       "phase": "pilot",
       "complete": false
     }
