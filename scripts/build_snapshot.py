@@ -7,6 +7,9 @@ from ``git archive`` with fixed metadata, so the same commit and version give
 the same bytes and the same SHA-256.
 
     python3 scripts/build_snapshot.py --version 2026.11.16 --out dist-snapshot --write-package
+
+``--write-package`` also places the verified snapshot inside the Python
+package. The wheel can then work without access to this repository's releases.
 """
 
 from __future__ import annotations
@@ -84,9 +87,12 @@ def main() -> None:
         "bytes": len(payload),
         "commit": commit,
         "prefix": prefix,
+        "bundle": "_snapshot.tar.gz" if args.write_package else None,
     }
     if args.write_package:
-        (ROOT / "src/parsarium/_snapshot.json").write_text(json.dumps(record, indent=2) + "\n")
+        package = ROOT / "src/parsarium"
+        (package / "_snapshot.tar.gz").write_bytes(payload)
+        (package / "_snapshot.json").write_text(json.dumps(record, indent=2) + "\n")
     print(json.dumps(record, indent=2))
 
 

@@ -10,7 +10,7 @@ Website, atlas, and manual: [parsarium.com](https://parsarium.com)
 pip install parsarium
 ```
 
-Requires Python 3.11+ and Docker for running targets. The first command that needs targets downloads this version's snapshot (about 19 MB) into your cache directory and checks its SHA-256. Each package version pins one snapshot, so a version identifies an exact set of targets.
+Requires Python 3.11+ and Docker for running targets. Release wheels include this version's snapshot (about 19 MB). The first command that needs targets checks its SHA-256 and extracts it into your cache directory. Each package version pins one snapshot, so a version identifies an exact set of targets.
 
 ## Use
 
@@ -31,7 +31,7 @@ parsarium run-selection sel-90378f4e58.json --mode control
 parsarium run-selection sel-90378f4e58.json --mode afl --seconds 600
 ```
 
-`parsarium home` shows where the snapshot lives. Set `PARSARIUM_HOME` to a clone of the repository to use it instead of the download.
+`parsarium home` shows where the snapshot lives. Set `PARSARIUM_HOME` to a clone of the repository to use it instead of the bundled snapshot.
 
 ## Python
 

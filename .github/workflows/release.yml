@@ -1,7 +1,7 @@
 name: Release package
 
 # Push a tag such as v2026.11.16 whose version matches src/parsarium/__init__.py.
-# The job builds the snapshot from that commit, attaches it to a GitHub release,
+# The job builds the snapshot from that commit, embeds it in the wheel,
 # records its SHA-256 in the package, and publishes to PyPI with trusted publishing.
 
 on:
@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -33,27 +33,25 @@ jobs:
         run: |
           python3 -m pip install --upgrade build
           python3 -m build
-      - name: Smoke test the wheel against the new snapshot
+      - name: Smoke test the installed wheel without repository access
         run: |
           python3 -m venv /tmp/venv
           /tmp/venv/bin/pip install dist/*.whl
-          export PARSARIUM_CACHE=/tmp/cache PARSARIUM_SNAPSHOT_URL="$PWD/$(ls dist-snapshot/*.tar.gz)"
+          export PARSARIUM_CACHE=/tmp/cache
+          unset PARSARIUM_HOME PARSARIUM_SNAPSHOT_URL PARSARIUM_SNAPSHOT_SHA256
           # Run outside the checkout, where ./parsarium.py would shadow the installed package.
           mkdir -p /tmp/smoke && cd /tmp/smoke
           /tmp/venv/bin/parsarium home --fetch
           /tmp/venv/bin/parsarium list --format png
           /tmp/venv/bin/python -c "from parsarium import catalog; print(len(catalog.targets()), 'runnable targets')"
-      - name: Create GitHub release with the snapshot
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create "$GITHUB_REF_NAME" dist-snapshot/*.tar.gz \
-            --title "Parsarium $VERSION" \
-            --notes "Snapshot for \`pip install parsarium==$VERSION\`. SHA-256 is recorded in the package."
       - uses: actions/upload-artifact@v5
         with:
           name: dist
           path: dist/
+      - uses: actions/upload-artifact@v5
+        with:
+          name: snapshot
+          path: dist-snapshot/*.tar.gz
 
   publish:
     needs: build

@@ -13,7 +13,7 @@ pip install parsarium
 parsarium list --format png
 ```
 
-The package installs the `parsarium` command and a small Python API (`from parsarium import catalog`). On first use it downloads the snapshot of harnesses, controls, and catalog data for its version (about 19 MB), checks its SHA-256, and keeps it in your cache directory. Each package version pins one snapshot, so the version identifies an exact set of targets. `parsarium run-selection MANIFEST` runs a selection saved from the [bench](https://parsarium.com/bench/). Set `PARSARIUM_HOME` to a clone of this repository to use the clone instead of a download.
+The package installs the `parsarium` command and a small Python API (`from parsarium import catalog`). Its wheel bundles a versioned snapshot of harnesses, controls, and catalog data. On first use it checks the snapshot's SHA-256 and extracts it to your cache directory without a network request. Each package version pins one snapshot, so the version identifies an exact set of targets. `parsarium run-selection MANIFEST` runs a selection saved from the [bench](https://parsarium.com/bench/). Set `PARSARIUM_HOME` to a clone of this repository to use the clone instead.
 
 ## Start here
 
@@ -116,7 +116,7 @@ Parsarium is licensed under the [Apache License 2.0](LICENSE). Each parser keeps
 
 ## Releasing the package
 
-`.github/workflows/release.yml` publishes on a version tag. It builds the snapshot from the tagged commit with `scripts/build_snapshot.py` (byte-reproducible), attaches it to a GitHub release, records its URL and SHA-256 in the wheel, smoke-tests the wheel, and uploads to PyPI with trusted publishing.
+`.github/workflows/release.yml` publishes on a version tag. It builds the snapshot from the tagged commit with `scripts/build_snapshot.py` (byte-reproducible), embeds the snapshot and its SHA-256 in the wheel, smoke-tests the installed wheel outside the checkout, and uploads it to PyPI with trusted publishing.
 
 1. Once: on PyPI, add a trusted publisher for project `parsarium`, owner `joszamama`, repository `parsarium`, workflow `release.yml`, environment `pypi`. On GitHub, create the `pypi` environment under Settings → Environments.
 2. Set `__version__` in `src/parsarium/__init__.py` (calendar versions, such as `2026.11.16`), commit, and push.
