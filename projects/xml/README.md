@@ -29,6 +29,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [xpp3 / Java](java/xpp3/README.md)
 - [@xmldom/xmldom / JavaScript](javascript/xmldom_xmldom/README.md)
 - [fast-xml-parser / JavaScript](javascript/fast_xml_parser/README.md)
+- [jsdom / JavaScript](javascript/jsdom/README.md)
 - [sax / JavaScript](javascript/sax/README.md)
 - [saxes / JavaScript](javascript/saxes/README.md)
 - [xml2js / JavaScript](javascript/xml2js/README.md)

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T08:51:44.241588+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "checked_at_utc": "2026-11-17T12:29:34.156906+00:00",
+  "projects_total": 6,
+  "projects_passed": 6,
   "differential_kind": "fixed_valid_default_namespace_variant",
   "standard_feedback": "none: Node.js core ships no XML parser API",
   "results": [
@@ -60,6 +60,75 @@
       "differential_only_features_by_file": {
         "src/validator.js": 17,
         "src/xmlparser/OrderedObjParser.js": 12
+      }
+    },
+    {
+      "project": "xml/javascript/jsdom",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "3b84c41bfd9bc562fc7c7271acff8afe8ed40823b6c9468d1138be4f7e6c0b84",
+      "base_image_id": "sha256:f6f0054dd2836d9f60dec670b755be1796fae7e79bcfbe2e39312a8d3f6af4f1",
+      "overlay_image_id": "sha256:10cf83ef4bf8dbce5926ad6a6c1f3d18bb9bf5f73ee1acad7e36a68f3d78e600",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 2336,
+      "control_afl_tuples": 2310,
+      "differential_parser_features": 2353,
+      "differential_afl_tuples": 2326,
+      "parser_feature_difference": 69,
+      "afl_tuple_difference": 68,
+      "control_only_features_by_file": {
+        "jsdom/lib/generated/idl/CDATASection.js": 5,
+        "jsdom/lib/jsdom/browser/parser/xml.js": 2,
+        "jsdom/lib/jsdom/living/attributes.js": 2,
+        "jsdom/lib/jsdom/living/helpers/by-id-cache.js": 1,
+        "jsdom/lib/jsdom/living/nodes/CDATASection-impl.js": 1,
+        "jsdom/lib/jsdom/living/nodes/Document-impl.js": 1,
+        "jsdom/lib/jsdom/living/nodes/Element-impl.js": 3,
+        "jsdom/lib/jsdom/living/nodes/Node-impl.js": 1,
+        "jsdom/lib/jsdom/living/window-properties.js": 4,
+        "saxes/saxes.js": 6
+      },
+      "differential_only_features_by_file": {
+        "jsdom/lib/generated/idl/Comment.js": 5,
+        "jsdom/lib/generated/idl/ProcessingInstruction.js": 5,
+        "jsdom/lib/jsdom/browser/parser/xml.js": 4,
+        "jsdom/lib/jsdom/living/nodes/Comment-impl.js": 1,
+        "jsdom/lib/jsdom/living/nodes/ProcessingInstruction-impl.js": 1,
+        "saxes/saxes.js": 26,
+        "xmlchars/xml/1.0/ed5.js": 1
       }
     },
     {
