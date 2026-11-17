@@ -112,6 +112,86 @@
     "project": "projects/json/javascript/stream_json"
   },
   {
+    "name": "JSONStream",
+    "version": "1.3.5",
+    "license": "(MIT OR Apache-2.0)",
+    "npm_integrity": "sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==",
+    "tarball_sha256": "ef3be72c45c76fbb688e2cb3078a7905b413ec9c8eb2d889cd0481f38c712488",
+    "dependencies": [
+      {
+        "name": "jsonparse",
+        "version": "1.3.1",
+        "license": "MIT",
+        "role": "tokenizer and value builder (shared parser family)",
+        "npm_integrity": "sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==",
+        "tarball_sha256": "cf6c2edd3a8f77080beabb6c46b51e5853b61422341a0ef2e05a9e83a90bffce",
+        "source": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz"
+      },
+      {
+        "name": "through",
+        "version": "2.3.8",
+        "license": "MIT",
+        "role": "classic Stream wrapper; no parsing",
+        "npm_integrity": "sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==",
+        "tarball_sha256": "16b27a8c0fb13e5727356b328d72dbbc5f20bd909252f14d19da344e9354573e",
+        "source": "https://registry.npmjs.org/through/-/through-2.3.8.tgz"
+      }
+    ],
+    "input_api": "stream = JSONStream.parse([]); stream.on('data'|'error'|'end'); stream.end(local Buffer)",
+    "documentation": [
+      "https://github.com/dominictarr/JSONStream/blob/0593d4b4e6c63c6c0e2e68463538fd83bd1eb964/readme.markdown",
+      "https://github.com/dominictarr/JSONStream/blob/0593d4b4e6c63c6c0e2e68463538fd83bd1eb964/test/test2.js"
+    ],
+    "source": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.5.tgz",
+    "scope": "One emitted JSON root from local bytes passed once to JSONStream.parse([]).end(Buffer); adapter requires exactly one root, no error, and stream end, but cannot detect trailing unfinished syntax after that root",
+    "family": "jsonparse byte-level tokenizer and stack value builder (via JSONStream path filter)",
+    "shared_family_with": "jsonparse",
+    "independent_engine": false,
+    "family_note": "JSONStream 1.3.5 is a distinct npm package and API path, not an independent parser engine. Its index.js (no JSON.parse call) wraps one jsonparse 1.3.1 Parser in a through 2.3.8 stream: write() hands each Buffer to Parser.write, its onValue override filters values by path, and its onToken override queues each completed root when the path is empty. Tokenizing, UTF-8 and \\u escape handling, number conversion and value building are jsonparse's, so it shares the jsonparse parser family (verified separately as its own path).",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 56299470,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/JSONStream",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/jsonstream",
+    "license_evidence": "https://registry.npmjs.org/JSONStream/1.3.5",
+    "verification_note": "JSONStream 1.3.5 is a distinct npm package and API path, not an independent parser engine. Its index.js (no JSON.parse call) wraps one jsonparse 1.3.1 Parser in a through 2.3.8 stream: write() hands each Buffer to Parser.write, its onValue override filters values by path, and its onToken override queues each completed root when the path is empty. Tokenizing, UTF-8 and \\u escape handling, number conversion and value building are jsonparse's, so it shares the jsonparse parser family (verified separately as its own path). The README says an empty or null path emits no 'data' events; the code and the packaged test/test2.js (JSONStream.parse([]) emits the whole root once) show otherwise, and the adapter follows the test. The tarball gitHead is 0593d4b4e6c63c6c0e2e68463538fd83bd1eb964; index.js and test/test2.js are byte-identical to that commit. JSONStream has no end-of-input completeness check and accepts concatenated roots, and its parser object is private, so the adapter can only require exactly one emitted root, no 'error' and an 'end' event: an unfinished token or open container after one complete root is not detected through this API. From source reading (not run): a root that is falsy (0, false, null, \"\") is never emitted, because onToken queues stream.root only when it is truthy; jsonparse's number and big-integer behaviour applies unchanged. Only the two valid controls were run. Both valid controls, nested-object.json and nested-array.json, produce the exact pinned summaries."
+  },
+  {
     "name": "bfj",
     "version": "9.1.4",
     "license": "MIT",

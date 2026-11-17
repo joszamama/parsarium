@@ -112,14 +112,15 @@
   },
   {
     "name": "JSONStream",
-    "status": "unresolved",
-    "lead_kind": "not_a_value_parser_path",
+    "status": "promoted_to_verified",
+    "lead_kind": "wrapper_over_shared_parser",
     "version_seen": "1.3.5",
     "license": "(MIT OR Apache-2.0)",
     "npm_downloads_30d": 56299470,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/JSONStream",
-    "reason": "Stream filter wrapper over jsonparse; shares the verified jsonparse parser family.",
-    "source": "https://www.npmjs.com/package/JSONStream"
+    "reason": "Distinct package API path, not an independent engine: JSONStream.parse([]) wraps one jsonparse 1.3.1 Parser in a through 2.3.8 stream and emits each completed root. Shares the jsonparse parser family. The README says an empty path emits nothing; the packaged test/test2.js and the code emit the root. Both valid controls match exactly, with pinned npm integrity for all three packages, V8 coverage counted separately for JSONStream and jsonparse, and stable AFL++ feedback whose second-control differences are all in jsonparse.js. Its stream API does not expose an end-of-input completeness check; own package source is covered but valid-control differential feedback arises only in the underlying jsonparse tokenizer.",
+    "source": "https://www.npmjs.com/package/JSONStream",
+    "verified_evidence": "data/javascript/json/verification.json"
   },
   {
     "name": "partial-json",
