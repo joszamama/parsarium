@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "go",
+  "package": "go.viam.com/rdk/spatialmath",
+  "release": "v1.17.0",
+  "catalog_parser": "data/go/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/go/go_viam_com_rdk_spatialmath/source-lock.json",
+  "source_sha256": "0051f38111c07adcf9c5780c4091b4d3ed21c92077049f7bbfc932bc99a7fade",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "triangles": 1,
+    "first_triangle_mm": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1000,
+        0,
+        0
+      ],
+      [
+        0,
+        1000,
+        0
+      ]
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of go.viam.com/rdk/spatialmath and the underlying github.com/chenzhekl/goply parser during valid-control replay",
+  "coverage_subject_prefix": "go.viam.com/rdk/spatialmath/",
+  "format_specific_coverage_file_suffix": "/spatialmath/mesh.go",
+  "underlying_coverage_subject_prefix": "github.com/chenzhekl/goply/",
+  "afl_coverage_subject_prefix": "github.com/chenzhekl/goply/"
+}
