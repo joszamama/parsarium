@@ -1,6 +1,6 @@
 # Java × DNS: selected parsers (pilot)
 
-Four verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -12,6 +12,7 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 | 2 | [dnsjava](https://javadoc.io/doc/dnsjava/dnsjava/3.7.1/org/xbill/DNS/Message.html#%3Cinit%3E(byte%5B%5D)) | 3.7.1 | 888 | dnsjava (org.xbill.DNS Message, Header, DNSInput, Name and per-type rrFromWire) |
 | 3 | [pcap4j-core](https://javadoc.io/doc/org.pcap4j/pcap4j-core/1.8.2/org/pcap4j/packet/DnsPacket.html) | 1.8.2 | 210 | Pcap4J DNS packet classes (DnsPacket, DnsDomainName, DnsResourceRecord, DnsRData*) |
 | 4 | [minidns-core](https://javadoc.io/doc/org.minidns/minidns-core/1.1.3/org/minidns/dnsmessage/DnsMessage.html) | 1.1.3 | 32 | MiniDNS (org.minidns DnsMessage, Question, Record, DnsName) |
+| 5 | [dns4s-core_2.13](https://mkroli.github.io/dns4s/api/com/github/mkroli/dns4s/Message$.html) | 0.21.0 | 22 | dns4s (Scala: Message, MessageBuffer, HeaderSection, QuestionSection, ResourceRecord and section.resource decoders) |
 
 **netty-codec-dns 4.2.21.Final** (Apache-2.0) parses local bytes with `new DatagramDnsResponseDecoder() / new DatagramDnsQueryDecoder() in an EmbeddedChannel, fed new DatagramPacket(ByteBuf, recipient, sender)`. Both controls match the oracle summary. The response control covers 414 library lines in 15 files. AFL++ feedback repeats 3 times per control; response and query give 414/277 parser features and 433/295 AFL++ tuples, differing by 251 features and 250 tuples ([receipt](netty-codec-dns-feedback-differential.json)). Own Java decoder; Vert.x's DNS client and Netty's DnsNameResolver use it. Netty leaves A/AAAA (and MX/CNAME after decompression) as raw records, so the harness formats addresses from the decoded bytes and reads names with the public DefaultDnsRecordDecoder.decodeName. DnsQuery carries no AA/TC/RA/RCODE; they are reported as 0 for the query control.
 
@@ -21,17 +22,17 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 
 **minidns-core 1.1.3** (Apache-2.0) parses local bytes with `org.minidns.dnsmessage.DnsMessage(byte[] data) throws IOException`. Both controls match the oracle summary. The response control covers 458 library lines in 20 files. AFL++ feedback repeats 3 times per control; response and query give 458/377 parser features and 478/397 AFL++ tuples, differing by 81 features and 81 tuples ([receipt](minidns-core-feedback-differential.json)). Own Java decoder of the MiniDNS project (formerly de.measite.minidns, an old coordinate of the same code that is not counted); the minidns-core artifact holds the message model and parser, while the resolver and client live in other artifacts that the harness does not load. MiniDNS decodes AD and CD but not the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). Names are DnsName.ace (lower-cased ACE text); A text is MiniDNS's own toString; AAAA text is formatted by the harness from the decoded 16 bytes (RFC 5952), because MiniDNS prints uncompressed groups.
 
+**dns4s-core_2.13 0.21.0** (Apache-2.0) parses local bytes with `com.github.mkroli.dns4s.Message.apply(bytes: MessageBuffer): Message, with MessageBuffer.apply(buf: java.nio.ByteBuffer) (Scala companion objects, called from Java as Message$.MODULE$ and MessageBuffer$.MODULE$)`. Both controls match the oracle summary. The response control covers 170 library lines in 9 files. AFL++ feedback repeats 3 times per control; response and query give 170/84 parser features and 190/104 AFL++ tuples, differing by 86 features and 86 tuples ([receipt](dns4s-core-feedback-differential.json)). Own Scala decoder of the dns4s project (Michael Krolikowski), counted in the Java cell as a JVM library, as Scala and Kotlin libraries such as circe-yaml and ktoml are in other Java cells; it uses no other DNS library. The Scala 2.13 build is pinned and ranked by its own coordinate (dns4s-core_3 and older Scala builds of the same code are not counted separately). The harness calls the core decoder only; the Akka, FS2 and Netty integrations live in other artifacts and are not loaded, and the Guava dependency is used only by the DSL package, which is not loaded. dns4s's HeaderSection decodes neither the reserved Z bit nor AD/CD, so z is reported as 0 (both controls have all three bits clear). A/AAAA are java.net.Inet4Address/Inet6Address built from the decoded bytes (InetAddress.getByAddress, no lookup): A text is getHostAddress(), AAAA text is formatted by the harness from getAddress() (RFC 5952). The case-class fields `type` and `class` are read through productElement.
+
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
 | 1 | org.apache.directory.server:apacheds-protocol-dns | 75 | `new DnsMessageDecoder().decode(IoBuffer)` | ApacheDS DNS protocol (DnsMessageDecoder) |
-| 2 | com.github.mkroli:dns4s-core_2.13 | 22 | `Message codec (scodec) on a ByteVector` | dns4s (Scala) |
-| 3 | cc.otavia:otavia-codec-dns_3 | 7 |  | otavia (Scala) |
-| 4 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
+| 2 | cc.otavia:otavia-codec-dns_3 | 7 |  | otavia (Scala) |
+| 3 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
 
 - **org.apache.directory.server:apacheds-protocol-dns** (unresolved): Fails the response control by source inspection of the pinned 2.0.0.AM27 sources jar (not run): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (I18n ERR_600) for any other type, so the CNAME answer of controls/dns/response.bin cannot be decoded. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API).
-- **com.github.mkroli:dns4s-core_2.13** (unresolved): Not tried: a Scala library (one artifact per Scala binary version; dns4s-core_3 has 8 direct dependents); no Scala artifact has been ranked in a Java cell yet, so whether it belongs to this cell needs a decision.
 - **cc.otavia:otavia-codec-dns_3** (unresolved): Not tried: a Scala 3 network-framework codec (7 direct dependents summed); same Scala-in-Java-cell question as dns4s.
 - **com.github.greysoft.naf:greynaf-dns** (unresolved): Not tried: zero deps.dev direct dependents, so it has no positive primary metric and is not added.
 

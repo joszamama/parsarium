@@ -418,5 +418,109 @@
     },
     "rank": 4,
     "afl_feedback": "data/java/dns/minidns-core-feedback-differential.json"
+  },
+  {
+    "name": "dns4s-core_2.13",
+    "version": "0.21.0",
+    "license": "Apache-2.0",
+    "license_evidence": "POM com.github.mkroli:dns4s-core_2.13:0.21.0 (sha256 f53be2e2...) declares Apache-2.0, checked in the image; scala-library 2.13.5 is Apache-2.0; the jar carries no license file",
+    "input_api": "com.github.mkroli.dns4s.Message.apply(bytes: MessageBuffer): Message, with MessageBuffer.apply(buf: java.nio.ByteBuffer) (Scala companion objects, called from Java as Message$.MODULE$ and MessageBuffer$.MODULE$)",
+    "documentation": "https://mkroli.github.io/dns4s/api/com/github/mkroli/dns4s/Message$.html",
+    "documentation_note": "The project documentation (https://mkroli.github.io/dns4s/core.html) states that the core artifact 'contains the functionality used for en-/decoding of DNS messages'; the published Scaladoc lists Message.apply(bytes: MessageBuffer): Message and MessageBuffer.apply(buf: ByteBuffer). The Scaladoc gives signatures without prose.",
+    "source": "https://central.sonatype.com/artifact/com.github.mkroli/dns4s-core_2.13/0.21.0",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns4s (Scala: Message, MessageBuffer, HeaderSection, QuestionSection, ResourceRecord and section.resource decoders)",
+    "family_note": "Own Scala decoder of the dns4s project (Michael Krolikowski), counted in the Java cell as a JVM library, as Scala and Kotlin libraries such as circe-yaml and ktoml are in other Java cells; it uses no other DNS library. The Scala 2.13 build is pinned and ranked by its own coordinate (dns4s-core_3 and older Scala builds of the same code are not counted separately). The harness calls the core decoder only; the Akka, FS2 and Netty integrations live in other artifacts and are not loaded, and the Guava dependency is used only by the DSL package, which is not loaded. dns4s's HeaderSection decodes neither the reserved Z bit nor AD/CD, so z is reported as 0 (both controls have all three bits clear). A/AAAA are java.net.Inet4Address/Inet6Address built from the decoded bytes (InetAddress.getByAddress, no lookup): A text is getHostAddress(), AAAA text is formatted by the harness from getAddress() (RFC 5952). The case-class fields `type` and `class` are read through productElement.",
+    "project": "projects/dns/java/dns4s_core",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 22,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.github.mkroli%3Adns4s-core_2.13",
+      "captured_at_utc": "2026-11-17T19:47:42.770461+00:00",
+      "snapshot": "data/java/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 5,
+    "afl_feedback": "data/java/dns/dns4s-core-feedback-differential.json"
   }
 ]

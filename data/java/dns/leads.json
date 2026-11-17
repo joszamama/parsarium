@@ -168,14 +168,17 @@
   },
   {
     "name": "com.github.mkroli:dns4s-core_2.13",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "primary_metric": "deps.dev directDependentCount summed over all releases",
     "primary_metric_value": 22,
     "found_by": "round-2 lookup of a registry search hit",
-    "documentation": "https://central.sonatype.com/artifact/com.github.mkroli/dns4s-core_2.13",
-    "input_api_lead": "Message codec (scodec) on a ByteVector",
-    "family": "dns4s (Scala)",
-    "reason": "Not tried: a Scala library (one artifact per Scala binary version; dns4s-core_3 has 8 direct dependents); no Scala artifact has been ranked in a Java cell yet, so whether it belongs to this cell needs a decision."
+    "documentation": "https://mkroli.github.io/dns4s/api/com/github/mkroli/dns4s/Message$.html",
+    "input_api_lead": "com.github.mkroli.dns4s.Message.apply(MessageBuffer)",
+    "family": "dns4s (Scala core decoder)",
+    "reason": "Pinned 0.21.0 passes both DNS controls; see parsers.json and data/java/dns/dns4s-core-feedback-differential.json.",
+    "api_lead_checked_against_pinned_release": true,
+    "checked_version": "0.21.0",
+    "verification": "projects/dns/java/dns4s_core/verification.json"
   },
   {
     "name": "cc.otavia:otavia-codec-dns_3",

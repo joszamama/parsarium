@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "dns",
-  "status": "pilot_four_verified_search_bounded",
+  "status": "pilot_five_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 4,
+  "verified_third_party_count": 5,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -19,15 +19,15 @@
   },
   "search_hits_recorded": 104,
   "unique_search_hits": 101,
-  "unresolved_documentation_leads": 4,
+  "unresolved_documentation_leads": 3,
   "leads_recorded": 18,
   "leads_by_status": {
-    "resolved_verified_selected": 4,
+    "resolved_verified_selected": 5,
     "excluded": 10,
-    "unresolved": 4
+    "unresolved": 3
   },
   "ranking_metric": "deps.dev directDependentCount summed over all releases",
-  "uncertainty": "Pilot cell: four Java paths verified, netty-codec-dns, dnsjava, pcap4j-core and minidns-core, ranked by deps.dev direct dependents summed over releases (a weak signal; Pcap4J's count covers its whole multi-protocol artifact). Netty leaves A/AAAA as raw records (the harness formats the decoded bytes) and its DnsQuery has no AA/TC/RA/RCODE. Pcap4J's names come from DnsDomainName.decompress, whose leading '.' for pointer-only names the harness drops, and its coverage and AFL++ feedback are scoped to its DNS classes. MiniDNS decodes AD and CD but not the reserved Z bit. Round 2 added targeted deps.dev lookups for the plausible Maven search hits: ApacheDS's DNS decoder fails the response control by source inspection (no CNAME decoder), the Netty backport and Netty 5 alpha are the selected Netty family, ph-dns and spotify dns wrap dnsjava, happy-dns keeps its parser package-private, ninio-dns and the Direct Project DNS are network applications, and the Scala codecs dns4s and otavia stay unresolved pending a decision on Scala artifacts in a Java cell. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: five JVM paths verified, netty-codec-dns, dnsjava, pcap4j-core, minidns-core and the Scala library dns4s-core_2.13, ranked by deps.dev direct dependents summed over releases (a weak signal; Pcap4J's count covers its whole multi-protocol artifact). Scala libraries count in this Java cell when they document a JVM API, as Scala and Kotlin libraries such as circe-yaml and ktoml do in other Java cells; dns4s is ranked by its Scala 2.13 coordinate only. Netty leaves A/AAAA as raw records (the harness formats the decoded bytes) and its DnsQuery has no AA/TC/RA/RCODE. Pcap4J's names come from DnsDomainName.decompress, whose leading '.' for pointer-only names the harness drops, and its coverage and AFL++ feedback are scoped to its DNS classes. MiniDNS decodes AD and CD but not the reserved Z bit; dns4s decodes none of Z, AD and CD. Round 2 added targeted deps.dev lookups for the plausible Maven search hits: the Netty backport and Netty 5 alpha are the selected Netty family, ph-dns and spotify dns wrap dnsjava, happy-dns keeps its parser package-private, and ninio-dns and the Direct Project DNS are network applications. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/java/dns/registry-snapshot.json",
   "unresolved_leads": "data/java/dns/leads.json",
   "runtime_evidence": "data/java/dns/standard.json",
@@ -39,5 +39,5 @@
   },
   "third_party_evidence": "data/java/dns/parsers.json",
   "third_party_control_results": "data/java/dns/verification.json",
-  "selection": "Four control-verified Java DNS path(s), ranked by deps.dev directDependentCount summed over all releases: netty-codec-dns 4.2.21.Final (1,038), dnsjava 3.7.1 (888), pcap4j-core 1.8.2 (210), minidns-core 1.1.3 (32)."
+  "selection": "Five control-verified Java DNS path(s), ranked by deps.dev directDependentCount summed over all releases: netty-codec-dns 4.2.21.Final (1,038), dnsjava 3.7.1 (888), pcap4j-core 1.8.2 (210), minidns-core 1.1.3 (32), dns4s-core_2.13 0.21.0 (22)."
 }

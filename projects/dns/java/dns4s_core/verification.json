@@ -1,0 +1,85 @@
+{
+  "kind": "third_party",
+  "api": "com.github.mkroli.dns4s.Message.apply(MessageBuffer.apply(ByteBuffer.wrap(bytes))) on local bytes (Scala companion objects called from Java); HeaderSection fields, QuestionSection list and ResourceRecord sections with typed resources (AResource/AAAAResource InetAddress, CNameResource.cname, MXResource preference/exchange)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:19:28.516151+00:00",
+  "manifest": "projects/dns/java/dns4s_core/manifest.json",
+  "image_id": "sha256:47dc5b87c73f90b76a525fcc5815e259c6d0bb9de484866f8b3f399aa891ce57",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "204b37a5d485af632ac45c4758913aecee4b0d08f30efefee1011a682a7c22a6",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dns4sHarness.java": "653fd2d20a2754c0ddd6965a5684aeb1c9bd23c2c5222248ecca130f35ddaede",
+    "Dockerfile": "6816c99d9be4be17de0860a68a69499cec7df0c1531199c9e747b7335d9128d1",
+    "manifest.json": "94b658f3b7e2aebffcc0e5ebe2324f35edf6c5651ba73d4f8fcd5b75b17da633",
+    "run-control.sh": "911263354e484899366ea821790da01744d05351e89b639ebe63af66cf7fd574",
+    "source-lock.json": "1b4ae0a4ffd1c364f9ff85030a7997cdc61e43f920c3777e54f0736224abfccb"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 170,
+  "format_specific_source_lines_covered": 34,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/java/dns4s_core/target/coverage/coverage.json",
+  "pass": true
+}
