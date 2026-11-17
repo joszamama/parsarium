@@ -1,5 +1,63 @@
 [
   {
+    "name": "jsonparse",
+    "version": "1.3.1",
+    "license": "MIT",
+    "npm_integrity": "sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==",
+    "tarball_sha256": "cf6c2edd3a8f77080beabb6c46b51e5853b61422341a0ef2e05a9e83a90bffce",
+    "input_api": "new Parser(); parser.onValue = root callback when this.stack is empty; parser.write(local Buffer)",
+    "documentation": [
+      "https://github.com/creationix/jsonparse/blob/1480064a3040cec3f27aa929dd1d1469150b8737/examples/twitterfeed.js",
+      "https://github.com/creationix/jsonparse/blob/1480064a3040cec3f27aa929dd1d1469150b8737/test/primitives.js"
+    ],
+    "source": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz",
+    "scope": "One complete RFC 8259 JSON value from local bytes written as one Buffer to Parser.write; the adapter requires exactly one empty-stack onValue root, no open container, and the tokenizer back in START after the Buffer",
+    "family": "jsonparse byte-level tokenizer and stack value builder",
+    "family_note": "jsonparse.js (one file, no dependencies) tokenizes Buffer bytes in its own state machine, including UTF-8 sequences split across chunks and \\u escapes with surrogate pairs, and builds values on its own stack in onToken. Numbers are converted with Number(). It does not call JSON.parse. Distinct from stream-json, bfj and @streamparser/json. JSONStream wraps this parser and is not counted separately.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 105362611,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/jsonparse",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/jsonparse",
+    "license_evidence": "https://registry.npmjs.org/jsonparse/1.3.1",
+    "verification_note": "The 1.3.1 README documents no API; it says only that this is a streaming JSON parser. The API is the one shown by the packaged example (new Parser(), onValue with an empty-stack root, write(chunk)) and tests. The tarball gitHead is 1480064a3040cec3f27aa929dd1d1469150b8737; jsonparse.js in the tarball is byte-identical to that commit. jsonparse has no end() call and accepts a stream of concatenated values, so the adapter, not the package, rejects a second root, an open container, or an unfinished token. From source reading (not run): a number token accepts any run of digits . e E + - and is checked only by Number(), so leading zeros are not rejected; an integer digit string that does not round-trip through Number is emitted as a string; a bare number root is emitted only when a following byte ends the token. Only the two valid controls were run. Both valid controls, nested-object.json and nested-array.json, produce the exact pinned summaries; the adapter returns a summary only after one complete root object or array has been delivered."
+  },
+  {
     "name": "stream-json",
     "version": "3.9.0",
     "license": "BSD-3-Clause",

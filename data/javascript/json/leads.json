@@ -78,14 +78,15 @@
   },
   {
     "name": "jsonparse",
-    "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_parser",
     "version_seen": "1.3.1",
     "license": "MIT",
     "npm_downloads_30d": 105362611,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/jsonparse",
-    "reason": "Own byte-level streaming parser with Parser.write(Buffer) in 1.3.1 source, and higher downloads than stream-json. Not selected because its README documents no API (it only says it is a streaming JSON parser); usage appears only in bundled examples. Strongest unresolved lead.",
-    "source": "https://www.npmjs.com/package/jsonparse"
+    "reason": "Own byte-level tokenizer and stack value builder behind Parser.write(Buffer). The README documents no API; the call pattern comes from the packaged example and tests. The adapter requires exactly one empty-stack root, no open container and a finished token. Both valid controls match exactly, with pinned npm integrity, V8 package-source coverage, and input-dependent AFL++ feedback verified.",
+    "source": "https://www.npmjs.com/package/jsonparse",
+    "verified_evidence": "data/javascript/json/verification.json"
   },
   {
     "name": "comment-json",
@@ -117,7 +118,7 @@
     "license": "(MIT OR Apache-2.0)",
     "npm_downloads_30d": 56299470,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/JSONStream",
-    "reason": "Stream filter wrapper over jsonparse; would share the jsonparse parser family.",
+    "reason": "Stream filter wrapper over jsonparse; shares the verified jsonparse parser family.",
     "source": "https://www.npmjs.com/package/JSONStream"
   },
   {

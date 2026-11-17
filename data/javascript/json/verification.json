@@ -13,6 +13,65 @@
   "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array; the second valid control is a nested array root",
   "third_party": [
     {
+      "package": "jsonparse",
+      "version": "1.3.1",
+      "scope": "One complete JSON value from local bytes via Parser.write(Buffer); jsonparse has no end() and accepts concatenated values, so the adapter requires exactly one empty-stack onValue root, no open container and the tokenizer in START after the Buffer",
+      "command": "python3 scripts/run_project.py json javascript jsonparse",
+      "receipt": "projects/json/javascript/jsonparse/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 293,
+      "error": null
+    },
+    {
       "package": "stream-json",
       "version": "3.9.0",
       "scope": "One RFC 8259 JSON text from local bytes, tokenized and assembled into a JavaScript value",

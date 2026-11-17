@@ -1,11 +1,54 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T05:13:04.917554+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T08:28:02.425909+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_nested_array",
   "standard_feedback": "JSON.parse has staged native function-entry feedback, not JavaScript source ranges",
   "results": [
+    {
+      "project": "json/javascript/jsonparse",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "d40b9c0716bac0f5ed69f56a82bbf204949fa8180f505ecc02b4c235fbe64bc1",
+      "base_image_id": "sha256:1172b0608cc5127b5617336f1f426df9fd3264055a60189df342079b9cef72ec",
+      "overlay_image_id": "sha256:0c5f72d661e2d8a340529b3cfa19f03542b0bfd04d34fa8bb5bbba10f04c10bb",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 123,
+      "control_afl_tuples": 143,
+      "differential_parser_features": 112,
+      "differential_afl_tuples": 132,
+      "parser_feature_difference": 17,
+      "afl_tuple_difference": 17,
+      "control_only_features_by_file": {
+        "jsonparse.js": 14
+      },
+      "differential_only_features_by_file": {
+        "jsonparse.js": 3
+      }
+    },
     {
       "project": "json/javascript/stream_json",
       "pass": true,

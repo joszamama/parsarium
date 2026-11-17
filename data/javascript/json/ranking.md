@@ -1,6 +1,6 @@
 # JAVASCRIPT × JSON: selected parsers (pilot)
 
-3 control-verified third-party paths selected. The ceiling is ten; this pilot verifies three high-download leads with their own JSON parsers and documented local byte or stream APIs, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+4 control-verified third-party paths selected. The ceiling is ten; this pilot verifies four high-download leads with their own JSON parsers and local byte or stream APIs, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -8,9 +8,12 @@ npm downloads over 2026-10-17 to 2026-11-15 (30 days), observed 2026-11-17T03:16
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [stream-json](https://github.com/uhop/stream-json/wiki/Parser) | 3.9.0 | 56,997,988 | One RFC 8259 JSON text from local bytes via parser() and Assembler | stream-json charCodeAt/regex streaming tokenizer |
-| 2 | [bfj](https://www.npmjs.com/package/bfj?activeTab=readme) | 9.1.4 | 18,016,242 | One complete JSON text from a local `Readable` via `parse(stream, {ndjson:false})` | bfj asynchronous JSON walker |
-| 3 | [@streamparser/json](https://www.npmjs.com/package/@streamparser/json?activeTab=readme) | 0.0.26 | 13,886,478 | One complete JSON document from local UTF-8 bytes via `JSONParser.write`; tokenizer checks trailing bytes for whitespace | @streamparser/json TypeScript tokenizer and token parser |
+| 1 | [jsonparse](https://github.com/creationix/jsonparse/blob/1480064a3040cec3f27aa929dd1d1469150b8737/examples/twitterfeed.js) | 1.3.1 | 105,362,611 | One JSON value from local bytes via `Parser.write(Buffer)`; adapter requires exactly one complete root | jsonparse byte-level tokenizer and stack value builder |
+| 2 | [stream-json](https://github.com/uhop/stream-json/wiki/Parser) | 3.9.0 | 56,997,988 | One RFC 8259 JSON text from local bytes via parser() and Assembler | stream-json charCodeAt/regex streaming tokenizer |
+| 3 | [bfj](https://www.npmjs.com/package/bfj?activeTab=readme) | 9.1.4 | 18,016,242 | One complete JSON text from a local `Readable` via `parse(stream, {ndjson:false})` | bfj asynchronous JSON walker |
+| 4 | [@streamparser/json](https://www.npmjs.com/package/@streamparser/json?activeTab=readme) | 0.0.26 | 13,886,478 | One complete JSON document from local UTF-8 bytes via `JSONParser.write`; tokenizer checks trailing bytes for whitespace | @streamparser/json TypeScript tokenizer and token parser |
+
+jsonparse's README documents no API. Its `new Parser()`, `onValue` and `write(chunk)` call pattern comes from the packaged example and tests at the tarball's gitHead. The parser has no `end()` call and accepts a stream of concatenated values, so the adapter writes the whole local Buffer once and then requires exactly one `onValue` with an empty stack, no open container, and the tokenizer back in its START state. From source reading (not run on such inputs), numbers are any run of digits, `.`, `e`, `E`, `+` and `-` checked only by `Number()`, so leading zeros are not rejected, and integer digit strings that do not round-trip through `Number` are emitted as strings. JSONStream wraps jsonparse and is not counted separately.
 
 ## Standard API (unranked)
 
@@ -22,7 +25,7 @@ npm downloads over 2026-10-17 to 2026-11-15 (30 days), observed 2026-11-17T03:16
 
 ## Lead log
 
-Numeric leads from the same snapshot, not verified and not selected. Schema, pointer, stringify, comment-stripping, and loader hits were not treated as parser leads.
+Numeric leads from the same snapshot. jsonparse was promoted to the verified ranking above; the remaining entries are not verified and not selected. Schema, pointer, stringify, comment-stripping, and loader hits were not treated as parser leads.
 
 | Lead | Version seen | Downloads (30 days) | Kind | Status |
 | --- | --- | ---: | --- | --- |
@@ -33,10 +36,10 @@ Numeric leads from the same snapshot, not verified and not selected. Schema, poi
 | [json-bigint](https://www.npmjs.com/package/json-bigint) | 1.0.0 | 297,771,552 | own parser not selected | Own recursive-descent parse (JSON.parse appears only in stringify.js). Documented parse(text) takes a string; no Buffer/stream API. Not run. |
 | [secure-json-parse](https://www.npmjs.com/package/secure-json-parse) | 4.1.1 | 222,970,191 | delegates to json parse | index.js calls JSON.parse and then scans for prototype keys; shares the V8 JSON.parse family. |
 | [@discoveryjs/json-ext](https://www.npmjs.com/package/@discoveryjs/json-ext) | 1.1.0 | 111,091,175 | delegates to json parse | parseChunked accepts streams/iterables but src/parse-chunked.js decodes each value fragment with JSON.parse; shares the V8 JSON.parse family. |
-| [jsonparse](https://www.npmjs.com/package/jsonparse) | 1.3.1 | 105,362,611 | own parser not selected | Own byte-level streaming parser with Parser.write(Buffer) in 1.3.1 source, and higher downloads than stream-json. Not selected because its README documents no API (it only says it is a streaming JSON parser); usage appears only in bundled examples. Strongest unresolved lead. |
+| [jsonparse](https://www.npmjs.com/package/jsonparse) | 1.3.1 | 105,362,611 | own parser | Promoted to verified: own byte-level tokenizer behind Parser.write(Buffer); README documents no API, so the call pattern comes from the packaged example and tests. Both valid controls match exactly. |
 | [comment-json](https://www.npmjs.com/package/comment-json) | 5.0.0 | 92,360,031 | own parser not selected | Uses an esprima tokenizer and calls JSON.parse on individual token values (src/parse.js); JSON-with-comments grammar and string API. Not run. |
 | [jju](https://www.npmjs.com/package/jju) | 1.4.0 | 67,730,650 | own parser not selected | Own recursive JSON5 parser (JSON.parse appears only in a comment); string API, JSON5 grammar. Not run. |
-| [JSONStream](https://www.npmjs.com/package/JSONStream) | 1.3.5 | 56,299,470 | not a value parser path | Stream filter wrapper over jsonparse; would share the jsonparse parser family. |
+| [JSONStream](https://www.npmjs.com/package/JSONStream) | 1.3.5 | 56,299,470 | not a value parser path | Stream filter wrapper over jsonparse; shares the verified jsonparse parser family. |
 | [partial-json](https://www.npmjs.com/package/partial-json) | 0.1.7 | 55,052,021 | not a value parser path | Parser for incomplete JSON (e.g. truncated LLM output); dist calls JSON.parse; string API. Not run. |
 | [@hapi/bourne](https://www.npmjs.com/package/@hapi/bourne) | 4.0.1 | 25,603,025 | delegates to json parse | src/index.js calls JSON.parse and then scans for prototype keys; shares the V8 JSON.parse family. |
 | [fast-json-parse](https://www.npmjs.com/package/fast-json-parse) | 1.0.3 | 24,460,907 | delegates to json parse | parse.js wraps JSON.parse in try/catch; shares the V8 JSON.parse family. |
@@ -48,4 +51,4 @@ Numeric leads from the same snapshot, not verified and not selected. Schema, poi
 | [oboe](https://www.npmjs.com/package/oboe) | 2.1.7 | 2,129,406 | not a value parser path | Streaming JSON loader built on clarinet; would share that family. Not run. |
 | [json-to-ast](https://www.npmjs.com/package/json-to-ast) | 2.1.0 | 2,079,219 | own parser not selected | Own AST parser; string API. Not run. |
 
-Queries: `json parser`, `json parse`, `streaming json parser`, `json tokenizer`, `json`; limit 100 each; 500 hits, 454 unique. `jsonparse`'s documented-API gap is the main selection judgement; see [leads.json](leads.json).
+Queries: `json parser`, `json parse`, `streaming json parser`, `json tokenizer`, `json`; limit 100 each; 500 hits, 454 unique. `jsonparse`'s missing README API is the main selection judgement: it is counted on the strength of its packaged example and tests; see [leads.json](leads.json).

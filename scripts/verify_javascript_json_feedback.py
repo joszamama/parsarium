@@ -13,7 +13,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUGS = ("stream_json", "bfj", "streamparser_json")
+SLUGS = ("jsonparse", "stream_json", "bfj", "streamparser_json")
 REPORT = ROOT / "data/javascript/json/afl-feedback.json"
 
 
