@@ -82,11 +82,11 @@
   },
   {
     "name": "orchestra/parser",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v10.0.0",
     "license": "MIT",
     "packagist_downloads": 1844336,
-    "reason": "libxml2-family wrapper (Laravel bridge that requires laravie/parser). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
+    "reason": "Source read at pinned v10.0.0 (7dfe57ee9cbf07853e09f620689e35e9f883b6ba, MIT; codeload archive sha256 8f529ce4649f3a995934b4aff8bfdc68aa2635553d6015b99f510b2c8f0a0cea): Xml\\Reader and Xml\\Document only extend laravie/parser's Reader and Document, adding a Laravel service provider, a facade, container-resolved schema filters and via(SimpleXMLElement), which takes an already parsed tree. Its extract/load/local/remote inputs are laravie's simplexml_load_string/simplexml_load_file calls. No parsing route of its own; excluded with laravie/parser as a schema-mapping layer, no build needed.",
     "source": "https://packagist.org/packages/orchestra/parser"
   },
   {
@@ -100,11 +100,11 @@
   },
   {
     "name": "jtrumbull/xml-parser",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v1.0.2",
     "license": "MIT",
     "packagist_downloads": 62346,
-    "reason": "libxml2-family wrapper (Source calls xml_parser_create (ext/xml, libxml2 family)). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
+    "reason": "Pinned v1.0.2 (MIT) probe: documented XMLParser::decode() is new SimpleXMLElement($xml) plus json_decode(json_encode(...)), mostly an array-to-XML encoder package; the source has no xml_parser_create call (the earlier note was wrong). On both valid controls decode() output is identical to the bare SimpleXML JSON round trip and loses the root name, CDATA text, attributes of text-only elements and the prefixed p:amount child. No parsing route of its own; not counted. Evidence: data/php/xml/jtrumbull-xml-parser-lead-check.json.",
     "source": "https://packagist.org/packages/jtrumbull/xml-parser"
   },
   {

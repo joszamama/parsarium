@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T15:14:24.134904+00:00",
+  "status": "negative_lead_simplexml_json_round_trip",
+  "package": "jtrumbull/xml-parser",
+  "release": "v1.0.2",
+  "license": "MIT",
+  "license_evidence": "https://github.com/jtrumbull/xml-parser/blob/94212d1bfc304ba9ac0a50b14e0a0cf67c877e86/LICENSE.md",
+  "source_url": "https://github.com/jtrumbull/xml-parser/blob/94212d1bfc304ba9ac0a50b14e0a0cf67c877e86/lib/XMLParser/XMLParser.php",
+  "documentation": "https://github.com/jtrumbull/xml-parser/blob/94212d1bfc304ba9ac0a50b14e0a0cf67c877e86/README.md",
+  "api": "XMLParser\\XMLParser::decode(mixed $string): new SimpleXMLElement($xml) unless already one, then json_decode(json_encode($xml), false); encode() builds XML from arrays (the README's main use)",
+  "composer_reference": "94212d1bfc304ba9ac0a50b14e0a0cf67c877e86",
+  "archive_url": "https://codeload.github.com/jtrumbull/xml-parser/legacy.zip/94212d1bfc304ba9ac0a50b14e0a0cf67c877e86",
+  "archive_sha256": "19b2ab9a913f4e814bff5ad0de01158e6a49cc896619bc3324dd5b72e9b85d77",
+  "installed_source_matches_archive": true,
+  "lead_record_correction": "The earlier lead note said the source calls xml_parser_create; v1.0.2 (and the whole package source) has no xml_parser_create call. decode() uses SimpleXML.",
+  "popularity": {
+    "metric": "Packagist total downloads",
+    "value": 62346,
+    "source": "https://packagist.org/packages/jtrumbull/xml-parser",
+    "snapshot": "data/php/xml/registry-snapshot.json"
+  },
+  "image_id": "sha256:a994acd80b0eabc36c0475c4fc5e7a7a3988945a68b3075576b78c1ad38d5cf3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "libxml 2.15.2",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "control_sha256": {
+    "catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "observed": {
+    "catalog-ns.xml": {
+      "sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "decode": {
+        "@attributes": {
+          "version": "1"
+        },
+        "item": [
+          "Café & té",
+          {
+            "@attributes": {
+              "id": "b2"
+            },
+            "name": "Zürich <HQ>",
+            "note": {}
+          }
+        ]
+      },
+      "identical_to_bare_simplexml_json": true,
+      "package_lines": {
+        "lib/XMLParser/XMLParser.php": [
+          137,
+          139,
+          141
+        ]
+      }
+    },
+    "order-default-ns.xml": {
+      "sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "decode": {
+        "audit": {},
+        "line": [
+          {
+            "@attributes": {
+              "n": "1"
+            },
+            "sku": "A-7"
+          },
+          {
+            "@attributes": {
+              "n": "2",
+              "note": "say \"hi\""
+            },
+            "plain": {
+              "leaf": {}
+            }
+          }
+        ]
+      },
+      "identical_to_bare_simplexml_json": true,
+      "package_lines": {
+        "lib/XMLParser/XMLParser.php": [
+          137,
+          139,
+          141
+        ]
+      }
+    }
+  },
+  "decode_identical_to_bare_simplexml_json_on_both_controls": true,
+  "observed_losses": {
+    "catalog-ns.xml": {
+      "root_name_reported": false,
+      "cdata_note_text": {},
+      "first_item_attributes_kept": false
+    },
+    "order-default-ns.xml": {
+      "prefixed_child_p_amount_kept": false,
+      "processing_instruction_reported_as_element": true
+    }
+  },
+  "afl_feedback": "not_run: decode() adds no parsing route; every parsed value comes from PHP core SimpleXMLElement and json_encode, as the identical bare round trip shows",
+  "probe_file_sha256": {
+    "Dockerfile": "fcd65834edb589491b4b8777948e738bc9c4fc5df295475e154917be5e8ae173",
+    "composer.json": "95715f88be4e2465d12131b6e12cb3eb4a31b910cfca69d40afbf2d0094a6bc8",
+    "composer.lock": "2bf206c987c8f3ce29ea2d211d3c0bc5b815388713c086f8a19b9101b7735781",
+    "probe.php": "afcc39bbfb65bf0f80a2223aca668ad0ad0fb8ccff58170fd547e67d770c9a3f",
+    "check.py": "65ef5cf46181b952a58d8be484d2e106faaa66f1c7f1098986b84ea08bf90d94"
+  }
+}
