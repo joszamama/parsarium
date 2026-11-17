@@ -176,13 +176,14 @@
   {
     "name": "kxml2",
     "coordinate": "net.sf.kxml:kxml2",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "2.3.0",
     "summed_direct_dependent_count": 99,
     "max_release_direct_dependent_count": 62,
     "default_release_direct_dependent_count": 62,
-    "reason": "XmlPullParser implementation (KXmlParser) with its own tokenizer, used on Android. Control not run.",
-    "source": "https://central.sonatype.com/artifact/net.sf.kxml/kxml2"
+    "reason": "KXmlParser.setInput(InputStream, null)/next() independently tokenized both valid namespace-aware XML controls; pinned same-release KXmlParser.java source lines and stable input-dependent AFL++ feedback verified.",
+    "source": "https://central.sonatype.com/artifact/net.sf.kxml/kxml2",
+    "verified_evidence": "projects/xml/java/kxml2/verification.json"
   },
   {
     "name": "vtd-xml",

@@ -1,8 +1,8 @@
 # XML / Java — pilot
 
-**Status:** pilot_nine_selected_search_bounded; incomplete. 9 verified third-party paths, 1 verified standard APIs, 9 verified Docker harnesses.
+**Status:** pilot_ten_selected_search_bounded; incomplete. 10 verified third-party paths, 1 verified standard API, 10 verified Docker harnesses.
 
-Nine third-party XML package paths are verified and runnable: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, Aalto, XOM, and XPP3. Xerces2-J, Woodstox, Aalto, and XPP3 are independent tokenizer/parser engines. Jackson XML projects Woodstox StAX into Jackson tokens; dom4j, XMLBeans, JDOM2, and XOM build distinct trees over the OpenJDK Xerces SAX fork. Each wrapper has its own source coverage and stable parser-derived AFL++ feedback, while underlying tokenizer coverage is reported separately. The standard javax.xml.parsers path shares the Xerces2-J family. Five documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior. XOM and XPP3 control and differential results are in their project-scoped receipts and shared XML aggregates.
+Ten third-party XML package paths are verified and runnable, reaching this cell's ceiling without padding: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, Aalto, XOM, XPP3, and kXML2. Xerces2-J, Woodstox, Aalto, XPP3, and kXML2 are five independent tokenizer/parser families. Jackson XML projects Woodstox StAX events into Jackson tokens; dom4j, XMLBeans, JDOM2, and XOM build distinct trees over the OpenJDK Xerces SAX fork. Each wrapper has own source coverage and stable parser-derived AFL++ feedback, while underlying parser coverage is reported separately. The standard javax.xml.parsers path is counted separately and shares the Xerces2-J family. Four documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior. kXML2 control and differential results are in project-scoped receipts pending shared XML aggregate refresh.
 
 [Ranking and search limits](../../../data/java/xml/ranking.md) · [Standard API inventory](../../../data/java/xml/standard.json)
 
@@ -17,6 +17,7 @@ Nine third-party XML package paths are verified and runnable: Jackson XML, Xerce
 - [aalto-xml](aalto-xml/README.md) — verified Docker harness
 - [xom](xom/README.md) — verified Docker harness
 - [xpp3](xpp3/README.md) — verified Docker harness
+- [kxml2](kxml2/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 

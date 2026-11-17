@@ -511,5 +511,62 @@
       ]
     },
     "project": "projects/xml/java/xpp3"
+  },
+  {
+    "name": "kxml2",
+    "group": "net.sf.kxml",
+    "artifact": "kxml2",
+    "version": "2.3.0",
+    "license": "BSD-style (org.kxml2 parser); public domain (bundled XmlPull API)",
+    "license_evidence": "Pinned Maven release POM licenses and KXmlParser.java source header",
+    "input_api": "new org.kxml2.io.KXmlParser(); setFeature(FEATURE_PROCESS_NAMESPACES, true); setInput(Files.newInputStream(local Path), null); next() until END_DOCUMENT",
+    "documentation": "https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar",
+    "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE from local InputStream into KXmlParser pull events: expanded names, namespace declarations, depth, attributes, and decoded text",
+    "family": "kXML2 KXmlParser independent XML pull tokenizer",
+    "family_note": "KXmlParser implements XmlPullParser and tokenizes the local stream itself. No XPP3 MXParser, SAX, DOM, StAX, JDK Xerces, or Aalto tokenizer is used.",
+    "shared_families": [
+      "kXML2 KXmlParser"
+    ],
+    "coverage_note": "Published 2.3.0 release JAR lacks line tables; pinned same-release KXmlParser.java is recompiled with javac -g --release 8 for parser-only JaCoCo source lines.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 99,
+      "max_release": "2.3.0",
+      "max_release_value": 62,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.sf.kxml%3Akxml2",
+      "captured_at_utc": "2026-11-17T03:38:00.602074+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Package adoption within Java XML, not XML-specific use; kxml2:kxml2 is a relocated coordinate and is not a second parser path."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/kxml2"
   }
 ]

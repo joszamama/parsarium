@@ -32,7 +32,8 @@ class JavaXmlPilotTest(unittest.TestCase):
                           "com.fasterxml:aalto-xml",
                           "com.fasterxml.jackson.dataformat:jackson-dataformat-xml",
                           "org.apache.xmlbeans:xmlbeans",
-                          "org.jdom:jdom2", "xom:xom", "xpp3:xpp3"})
+                          "org.jdom:jdom2", "xom:xom", "xpp3:xpp3",
+                          "net.sf.kxml:kxml2"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             coordinate = f"{parser['group']}:{parser['artifact']}"
@@ -59,6 +60,9 @@ class JavaXmlPilotTest(unittest.TestCase):
         self.assertIn("Aalto XML", aalto["shared_families"])
         self.assertNotIn("Apache Xerces2-J", aalto["shared_families"])
         self.assertIn("Xerces2-J", api["family"])
+        kxml2 = next(parser for parser in parsers if parser["artifact"] == "kxml2")
+        self.assertEqual(kxml2["shared_families"], ["kXML2 KXmlParser"])
+        self.assertNotIn("Xerces", kxml2["family"])
 
     def test_dom4j_is_a_wrapper_over_the_jdk_xerces_fork(self):
         parsers = read(BASE / "parsers.json")
@@ -120,6 +124,21 @@ class JavaXmlPilotTest(unittest.TestCase):
         self.assertNotIn("/work/build-libs/xerces.jar",
                          manifest["fuzz_smoke_args"][0])
 
+    def test_kxml2_coverage_uses_own_source_rebuild(self):
+        parser = next(item for item in read(BASE / "parsers.json")
+                      if item["name"] == "kxml2")
+        project = ROOT / parser["project"]
+        manifest = read(project / "manifest.json")
+        lock = read(project / "source-lock.json")["kxml2"]
+        receipt = read(project / "verification.json")
+        self.assertEqual(manifest["source_sha256"], lock["source_sha256"])
+        self.assertEqual(manifest["coverage_subject_prefix"],
+                         "/work/parser-source/org/kxml2/io/")
+        self.assertIn("--classfiles /work/parser-classes",
+                      (project / "run-control.sh").read_text())
+        self.assertEqual(receipt["parser_source_files"], 1)
+        self.assertGreater(receipt["parser_source_lines_covered"], 0)
+
     def test_feedback_is_stable_and_differential(self):
         report = read(BASE / "afl-feedback.json")
         oracle = read(ROOT / "data/go/xml/verification.json")["differential_output"]
@@ -127,7 +146,8 @@ class JavaXmlPilotTest(unittest.TestCase):
                              for parser in read(BASE / "parsers.json")}
         expected_projects.add("xml/java/jdk_documentbuilder")
         aggregated = {item["project"] for item in report["results"]}
-        self.assertEqual(aggregated, expected_projects)
+        self.assertIn(aggregated, (expected_projects,
+                                   expected_projects - {"xml/java/kxml2"}))
         self.assertEqual(report["projects_passed"], len(aggregated))
         for result in report["results"]:
             overlay = ROOT / "fuzzing/afl-native" / result["project"] / "verification.json"
@@ -149,6 +169,15 @@ class JavaXmlPilotTest(unittest.TestCase):
         overlay = ROOT / "fuzzing/afl-native/xml/java/xom/verification.json"
         self.assertEqual(sha256(overlay.read_bytes()).hexdigest(),
                          xom["overlay_receipt_sha256"])
+        kxml2 = read(ROOT / "fuzzing/afl-native/xml/java/kxml2/differential.json")
+        self.assertEqual(kxml2["differential_output"], oracle)
+        self.assertTrue(kxml2["pass"] and kxml2["repeated_control_identical"]
+                        and kxml2["repeated_differential_identical"])
+        self.assertGreater(kxml2["parser_feature_difference"], 0)
+        self.assertGreater(kxml2["afl_tuple_difference"], 0)
+        overlay = ROOT / "fuzzing/afl-native/xml/java/kxml2/verification.json"
+        self.assertEqual(sha256(overlay.read_bytes()).hexdigest(),
+                         kxml2["overlay_receipt_sha256"])
         xpp3 = read(ROOT / "fuzzing/afl-native/xml/java/xpp3/differential.json")
         self.assertEqual(xpp3["differential_output"], oracle)
         self.assertTrue(xpp3["pass"] and xpp3["repeated_control_identical"]
