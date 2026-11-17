@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "defusedxml",
+  "release": "0.7.1",
+  "catalog_parser": "data/python/xml/parsers.json",
+  "source_lock": "projects/xml/python/defusedxml/runtime-requirements.lock",
+  "source_sha256": "a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61",
+  "sdist_sha256": "1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69",
+  "tested_parser": "defusedxml.ElementTree.DefusedXMLParser (created by defusedxml.ElementTree.parse with the default xml.etree.ElementTree.TreeBuilder target); subclass of CPython's pure-Python xml.etree.ElementTree.XMLParser, asserted in the image and in the feedback check",
+  "parser_family": "defusedxml 0.7.1 guarded ElementTree facade over CPython 3.14 pure-Python xml.etree.ElementTree.XMLParser/pyexpat over Expat 2.10.0, with the C _elementtree TreeBuilder building the tree; shares the Expat XML parser family with projects/xml/python/xmltodict, projects/xml/python/untangle and the standard xml.etree.ElementTree path",
+  "underlying_release": "Expat 2.10.0",
+  "underlying_source_sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+  "build_note": "defusedxml is installed by hash from the pinned py2.py3-none-any wheel; defusedxml/ and LICENSE are checked byte-identical to the sdist. Ubuntu's CPython 3.14 pyexpat loads Expat 2.10.0 built from source with clang LLVM source coverage (same Expat pin as projects/xml/python/xmltodict and untangle) through LD_LIBRARY_PATH; pyexpat.EXPAT_VERSION is asserted. CPython's ElementTree.py, pyexpat and the _elementtree TreeBuilder are Ubuntu's distribution build, not source-built; only ElementTree.py lines are traced, the C TreeBuilder is not covered.",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "{urn:parsarium:order}order"
+  },
+  "api": "defusedxml.ElementTree.parse(BytesIO(local XML bytes)) with default forbid_dtd=False, forbid_entities=True, forbid_external=True; getroot(); Element.tag, attrib, text and tail",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the defusedxml.ElementTree.parse call (defusedxml/ElementTree.py and common.py, plus CPython's xml/etree/ElementTree.py XMLParser driver reported separately) and LLVM source coverage of source-built Expat 2.10.0 reached through pyexpat",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "format_specific_coverage_file_suffix": "/defusedxml/ElementTree.py",
+  "underlying_coverage_subject_prefix": "/work/expat/lib/",
+  "underlying_format_specific_coverage_file_suffix": "xmlparse.c",
+  "afl_llvm_module_glob": "/opt/expat/lib/libexpat.so.1",
+  "afl_coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "native_campaign_supported": false,
+  "scope": "Valid UTF-8 XML 1.0 local byte streams without DOCTYPE through defusedxml.ElementTree.parse: namespace-expanded element tags ({uri}local) in document order, namespace-expanded attribute names and values in source order, stripped text and tail data (CDATA included), tree depth, the root tag, and the namespace URIs carried by expanded element and attribute names. ElementTree resolves namespaces but keeps no xmlns declarations or prefixes, and its default TreeBuilder drops comments and processing instructions.",
+  "namespace_caveat": "ElementTree discards xmlns declarations, so the summary has no namespace_declarations count and its namespaces field lists the URIs in expanded names. On both controls this equals the declared non-empty URIs; the comparison with the independent lxml/libxml2 oracle drops only the declaration count.",
+  "parser_options_caveat": "defusedxml.ElementTree.parse defaults are forbid_dtd=False, forbid_entities=True, forbid_external=True: the guards replace pyexpat's EntityDeclHandler, UnparsedEntityDeclHandler and ExternalEntityRefHandler but are never called on these DOCTYPE-free controls. No DTD, entity, security or malformed-input behavior was tested.",
+  "family_caveat": "Not an independent XML engine. defusedxml's own code on valid input is DefusedXMLParser.__init__ (guard installation) and the parse() factory; Expat does tokenization and well-formedness checking, and CPython's ElementTree.py XMLParser maps pyexpat callbacks to the TreeBuilder.",
+  "afl_package_release": "4.33c-1.1ubuntu1"
+}

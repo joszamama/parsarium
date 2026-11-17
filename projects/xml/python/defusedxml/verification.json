@@ -1,0 +1,68 @@
+{
+  "kind": "third_party",
+  "api": "defusedxml.ElementTree.parse(BytesIO(local XML bytes)) with default forbid_dtd=False, forbid_entities=True, forbid_external=True; getroot(); Element.tag, attrib, text and tail",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T11:57:19.426301+00:00",
+  "manifest": "projects/xml/python/defusedxml/manifest.json",
+  "image_id": "sha256:3b16cc768cd52526d58681245c690f7a3d66d95374aa3999899a738a57196c54",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: defusedxml",
+    "Version: 0.7.1",
+    "expat_2.10.0",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "9443794afe78dfab5cccf27e803b30359a55dbf9eaadbd54297522b72356833c  /work/expat/lib/xmlparse.c",
+    "18b4aaa42cf9f285c63c6cb37ff1f296c3d2f7f75c1953f948de1d2bbcafc8fc  defusedxml/ElementTree.py",
+    "ddddba8cd5b87cd5f38235a1bd47ecf3701f8b3e44571143ba941bba09123197  defusedxml/common.py",
+    "c0219b8554532be939142b7ac4247158433b936e880a420f48be34145b43e5b0  /usr/lib/python3.14/xml/etree/ElementTree.py"
+  ],
+  "source_sha256": "a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "cda6828daa0bc32b50de584ae96c60893a6150fbc9a1e9d0b51309b44251bd7c",
+    "fuzz.py": "99c99847c048d23e6f6c2da4a14f5851797903948af5c191e996dc75c1de0515",
+    "harness.py": "447b9b0dbec3d5a5b0edf5c1aaaa065825d316dac6b4c130531ec848a501d97b",
+    "manifest.json": "64297bedb995d1eaafc8eddc7fab6689656a6d51e24d597169d6499b399482ab",
+    "replay.py": "8adef6d3d4dcba9d934a13cff0577339179afb4f263e954fed54c4b6a9d0e2f7",
+    "run-control.py": "ffde07a44be77e9486ff9b4d7fec5751e13e5a44a7a1cb371ecd47d99e143cd4",
+    "runtime-requirements.lock": "af1adbfbc2d22b051cd98aefba9adbd323703c733ff0e2c5756db68000aea49d",
+    "target.json": "f2d7cfb9ff81219748037e2eb09dab71cdccd8508a50812c0d38418bf1e3a7d0"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "parser_source_files": 2,
+  "parser_source_lines_covered": 20,
+  "format_specific_source_lines_covered": 13,
+  "underlying_source_files": 19,
+  "underlying_source_lines_covered": 2560,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/python/defusedxml/target/coverage/coverage.json",
+  "pass": true
+}

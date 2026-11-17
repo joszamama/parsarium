@@ -175,6 +175,102 @@
     "verification_note": "Shared parser family, not an independent XML tokenizer: Beautiful Soup's documented \"xml\" builder (the docs call lxml \"the only currently supported XML parser\") feeds the bytes to lxml.etree.XMLParser(target=builder, recover=True), and libxml2 tokenizes them; bs4 builds its own tree from lxml's callbacks. The pinned image installs bs4 4.15.0 with lxml 6.1.3 linked to source-built libxml2 2.15.4 and asserts that BeautifulSoup(..., 'xml') selects LXMLTreeBuilderForXML over lxml.etree.XMLParser. Both valid namespace controls match their expected bs4-tree summaries; the element, attribute, namespace, text, depth and root fields equal the lxml path's outputs. The first control executes 450 bs4 lines in 5 files (115 in builder/_lxml.py) and 1,570 libxml2 parser.c lines. The AFL++ bridge maps executed bs4 lines plus parser.c lines: five identical runs of each control yield identical features, and the second control changes 11 bs4 lines, 236 parser.c lines and 242 AFL++ tuple IDs. parser.c lines 8700-8720 are excluded from AFL++ feedback as in the lxml path. The controls do not establish DTD, external entity, non-UTF-8, XML 1.1, or malformed-input (recover=True) behavior. The bs4 tree drops CDATA section boundaries and the XML declaration node and lists xmlns declarations after ordinary attributes. The 315,320,831 last-month PyPI downloads are package-level and mostly HTML use; they do not measure XML parsing."
   },
   {
+    "name": "defusedxml",
+    "version": "0.7.1",
+    "license": "PSF-2.0",
+    "license_evidence": "https://pypi.org/pypi/defusedxml/0.7.1/json (License: PSFL; classifier 'License :: OSI Approved :: Python Software Foundation License'); the wheel's defusedxml-0.7.1.dist-info/LICENSE and the sdist LICENSE are byte-identical (sha256 b80ce9da8c42a1f91079627fbbe2bf27210ae108a0ffe5f077d5b08e076c24c8, PSF License Agreement for Python 2.7). Source modules say 'Licensed to PSF under a Contributor Agreement.'",
+    "input_api": "defusedxml.ElementTree.parse(BytesIO(local XML bytes)) with default forbid_dtd=False, forbid_entities=True, forbid_external=True; getroot(); Element.tag, attrib, text and tail",
+    "documentation": "https://github.com/tiran/defusedxml/blob/v0.7.1/README.md",
+    "documentation_evidence": "The 0.7.1 README (shipped in the sdist) shows 'from defusedxml.ElementTree import parse; et = parse(xmlfile)' as the drop-in replacement for xml.etree.ElementTree.parse and lists parse(), iterparse(), fromstring() and XMLParser for defusedxml.ElementTree, with the forbid_dtd/forbid_entities/forbid_external keyword arguments and their defaults.",
+    "source": "https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl",
+    "source_sha256": "a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61",
+    "sdist": "https://files.pythonhosted.org/packages/0f/d5/c66da9b79e5bdb124974bfe172b4daf3c984ebd9c2a06e2b8a4dc7331c72/defusedxml-0.7.1.tar.gz",
+    "sdist_sha256": "1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69",
+    "dependencies": [
+      {
+        "package": "expat",
+        "release": "2.10.0",
+        "sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+        "license": "MIT",
+        "role": "C XML parser loaded by CPython pyexpat, built from source"
+      }
+    ],
+    "scope": "Valid UTF-8 XML 1.0 local byte streams without DOCTYPE through defusedxml.ElementTree.parse: namespace-expanded element tags ({uri}local) in document order, namespace-expanded attribute names and values in source order, stripped text and tail data (CDATA included), tree depth, the root tag, and the namespace URIs carried by expanded element and attribute names. ElementTree resolves namespaces but keeps no xmlns declarations or prefixes, and its default TreeBuilder drops comments and processing instructions.",
+    "family": "defusedxml guarded ElementTree facade over CPython xml.etree.ElementTree XMLParser/pyexpat over Expat 2.10.0",
+    "shared_families": [
+      "Expat XML parser",
+      "CPython xml.etree.ElementTree (standard API path)"
+    ],
+    "family_note": "Not an independent XML engine. defusedxml.ElementTree.parse() creates DefusedXMLParser, a subclass of CPython's pure-Python xml.etree.ElementTree.XMLParser (defusedxml re-imports ElementTree.py with the _elementtree accelerator blocked), whose only additions are DTD/entity/external-reference guard handlers installed on pyexpat; the stdlib ElementTree.parse feeds it, Expat tokenizes and checks well-formedness, ElementTree.py's XMLParser callbacks expand names, and the C _elementtree TreeBuilder builds the tree. It shares the Expat family with xmltodict, untangle (which uses defusedxml's SAX module) and the standard xml.etree.ElementTree path (same Expat 2.10.0 pin).",
+    "namespace_caveat": "ElementTree discards xmlns declarations, so the summary has no namespace_declarations count and its namespaces field lists the URIs in expanded names. On both controls this equals the declared non-empty URIs; the comparison with the independent lxml/libxml2 oracle drops only the declaration count.",
+    "parser_options_caveat": "defusedxml.ElementTree.parse defaults are forbid_dtd=False, forbid_entities=True, forbid_external=True: the guards replace pyexpat's EntityDeclHandler, UnparsedEntityDeclHandler and ExternalEntityRefHandler but are never called on these DOCTYPE-free controls. No DTD, entity, security or malformed-input behavior was tested.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 270848271,
+      "source": "https://pypistats.org/api/",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/xml/leads.json",
+      "limitation": "Package-level downloads, largely transitive (for example through untangle and other packages that depend on defusedxml); they do not measure XML parsing volume or ElementTree-facade use."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ],
+      "root": "{urn:parsarium:catalog}catalog"
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ],
+      "root": "{urn:parsarium:order}order"
+    },
+    "project": "projects/xml/python/defusedxml",
+    "verification_note": "Shared Expat family, not an independent XML engine: defusedxml.ElementTree.parse() builds DefusedXMLParser, a subclass of CPython's pure-Python xml.etree.ElementTree.XMLParser (defusedxml re-imports ElementTree.py with the _elementtree accelerator blocked), whose own additions are guard handlers installed on pyexpat for entity declarations, unparsed entity declarations and external entity references; stdlib ElementTree.parse feeds the stream, Expat 2.10.0 tokenizes and checks well-formedness, ElementTree.py's XMLParser callbacks expand namespace names, and the C _elementtree TreeBuilder builds the tree. The pinned image asserts the pure-Python base class, the C TreeBuilder target, the installed guards and pyexpat.EXPAT_VERSION. ElementTree resolves namespaces ({uri}local tags and attribute names) but keeps no xmlns declarations or prefixes, so the summary omits the lxml path's namespace_declarations count and lists the URIs carried by expanded names. Both shared valid namespace controls match an independent namespace-aware lxml 6.1.3/libxml2 2.15.4 oracle, run in the verified lxml image, on every remaining field; the oracle's summary equals the lxml path's without the declaration count, and its expanded-name URIs equal its declared non-empty URIs on both controls. The first control executes 20 defusedxml lines (13 in defusedxml/ElementTree.py, 7 in common.py), 71 CPython xml/etree/ElementTree.py driver lines and 2,560 Expat lines (1,808 in xmlparse.c); the second executes 20, 79 and 2,806 (1,894). The AFL++ bridge maps the parse call's defusedxml/ElementTree.py lines plus Expat regions and branches: five identical runs of each control yield identical features, and the second control changes 840 Expat features, 8 ElementTree.py lines and 800 AFL++ tuple IDs. defusedxml's own 20 lines (guard installation and the parse factory) are identical on both controls; they are kept as features because the guard callbacks would run only on DTD entity or external-reference input, which was not tested. Input dependence on these controls comes from Expat and the ElementTree driver. PYTHONHASHSEED=1 is fixed because pyexpat passes CPython's hash secret to XML_SetHashSalt and a zero seed makes Expat draw a random salt. CPython's ElementTree.py, pyexpat and _elementtree are Ubuntu's distribution build; only Expat is source-built, and the C TreeBuilder is not covered. The controls do not establish DTD, entity, security, non-UTF-8, XML 1.1 or malformed-input behavior; comments and processing instructions are dropped by the default TreeBuilder. The 270,848,271 last-month PyPI downloads are package-level, largely transitive, and do not measure XML parsing."
+  },
+  {
     "name": "xmltodict",
     "version": "1.0.4",
     "license": "MIT",

@@ -273,6 +273,90 @@
       "project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
       "namespace_caveat": "untangle drops namespace URIs. The adapter does not reconstruct them: element names are lossy (':' becomes '_', indistinguishable from '-', '.' or a literal '_'), so any URI in the summary would be adapter-side namespace processing, not untangle's parse result. Shared fields are therefore compared against the independent lxml/libxml2 oracle projected to untangle's documented naming rule, and the expanded names it loses are recorded in data/python/xml/untangle-valid-feedback.json.",
       "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
+    },
+    {
+      "package": "defusedxml",
+      "version": "0.7.1",
+      "pass": true,
+      "input_api": "defusedxml.ElementTree.parse(BytesIO(local XML bytes)) with default forbid_dtd=False, forbid_entities=True, forbid_external=True; getroot(); Element.tag, attrib, text and tail",
+      "tested_parser": "defusedxml.ElementTree.DefusedXMLParser (subclass of pure-Python xml.etree.ElementTree.XMLParser; C _elementtree.TreeBuilder target)",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image; summary without the xmlns declaration count, namespaces from expanded names",
+      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "defusedxml_matches_oracle": true,
+      "parser_family": "defusedxml 0.7.1 guarded ElementTree facade over CPython 3.14 pure-Python xml.etree.ElementTree.XMLParser/pyexpat over Expat 2.10.0, with the C _elementtree TreeBuilder building the tree; shares the Expat XML parser family with projects/xml/python/xmltodict, projects/xml/python/untangle and the standard xml.etree.ElementTree path",
+      "package_source_files": 2,
+      "package_source_lines": 20,
+      "defusedxml_elementtree_lines": 13,
+      "elementtree_driver_source_lines": 71,
+      "expat_source_lines": 2560,
+      "expat_xmlparse_lines": 1808,
+      "differential_package_source_lines": 20,
+      "differential_elementtree_driver_source_lines": 79,
+      "differential_expat_source_lines": 2806,
+      "differential_expat_xmlparse_lines": 1894,
+      "afl_feedback": "data/python/xml/defusedxml-valid-feedback.json",
+      "project_receipt": "projects/xml/python/defusedxml/verification.json",
+      "project_receipt_sha256": "1785d16a7798119424f409fbc8d61fac4b454a636c99e856cb0d36c7f3d23edf",
+      "namespace_caveat": "ElementTree discards xmlns declarations, so the summary has no namespace_declarations count and its namespaces field lists the URIs in expanded names. On both controls this equals the declared non-empty URIs; the comparison with the independent lxml/libxml2 oracle drops only the declaration count.",
+      "tree_caveat": "The default TreeBuilder drops comments and processing instructions; text and tail data are kept per node (CDATA included)."
     }
   ],
   "standard": [
@@ -308,7 +392,8 @@
       "paths": [
         "xmltodict",
         "xml.etree.ElementTree",
-        "untangle (SAX via defusedxml DefusedExpatParser)"
+        "untangle (SAX via defusedxml DefusedExpatParser)",
+        "defusedxml (guarded pure-Python ElementTree XMLParser)"
       ]
     }
   ]
