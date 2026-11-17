@@ -383,5 +383,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/miniserde/verification.json"
+  },
+  {
+    "name": "gjson",
+    "version": "0.8.1",
+    "license": "MIT",
+    "input_api": "gjson::valid(&str) -> bool; gjson::parse(&str) -> Value; Value::each(callback) and Value::{kind,str,f64,json} traverse all children",
+    "documentation": "https://docs.rs/gjson/0.8.1/gjson/fn.parse.html",
+    "source": "https://static.crates.io/crates/gjson/gjson-0.8.1.crate",
+    "scope": "One complete RFC 8259 JSON text validated through gjson::valid, then lazily parsed and fully traversed through gjson::parse and Value::each: root kind, object/array/boolean/null counts, nesting depth, decoded value strings, numbers and sorted top-level keys. The core parse/get API alone assumes valid JSON and serves path queries; the adapter runs the library own whole-root validator first and bounds traversal at 256 levels.",
+    "family": "tidwall GJSON path-query family: separate Rust gjson.rs implementation with same maintainer and path syntax as Go tidwall/gjson; Rust source owns its valid.rs validator and lib.rs lazy scanner",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 1151387,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/gjson/verification.json"
   }
 ]

@@ -1,6 +1,6 @@
 # RUST × JSON: selected parsers
 
-8 control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. JSON parser leads that have not yet been run are listed in [leads.json](leads.json).
+9 control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. JSON parser leads that have not yet been run are listed in [leads.json](leads.json).
 
 ## Primary within-cell adoption metric
 
@@ -16,8 +16,9 @@ crates.io recent downloads (90 days), from the search API in [registry-snapshot.
 | 6 | [json](https://docs.rs/json/0.12.4/json/fn.parse.html) | 0.12.4 | 2,672,413 | `parse` from local UTF-8 text into its own `JsonValue` tree; same structural summary | json-rust parser |
 | 7 | [hifijson](https://docs.rs/hifijson/0.5.0/hifijson/struct.SliceLexer.html) | 0.5.0 | 2,630,468 | `SliceLexer` + bounded `value::parse_bounded` into its own Value tree from local bytes | hifijson lexer and value parser |
 | 8 | [miniserde](https://docs.rs/miniserde/0.1.46/miniserde/json/fn.from_str.html) | 0.1.46 | 1,335,406 | `from_str::<Value>` from local UTF-8 text into its own generic tree; iterative structural summary | miniserde non-recursive deserializer |
+| 9 | [gjson](https://docs.rs/gjson/0.8.1/gjson/fn.parse.html) | 0.8.1 | 1,151,387 | `valid` checks complete local JSON text; `parse` and `Value::each` lazily traverse every child | tidwall GJSON path-query family, Rust implementation |
 
-Unverified JSON parser leads, by the same metric: ijson 1,818,125 (shared family), gjson 1,151,387, json-syntax 702,428, json-event-parser 544,561, serde_json_bytes 539,988 (shared family), tinyjson 481,002, lite-json 404,322, biome_json_parser 310,897, serde_json_borrow 185,156 (shared family), struson 138,182, json_scanner 102,136, actson 89,126, json-deserializer 84,410. Recent downloads include transitive dependency pulls. schemars (253,625,369), serde_path_to_error (126,847,416), and other higher-download hits are not JSON text parsers; json5 (18,832,986) and jsonc-parser (3,628,833) parse superset formats. Exclusions are listed in [leads.json](leads.json).
+Unverified JSON parser leads, by the same metric: ijson 1,818,125 (shared family), json-syntax 702,428, json-event-parser 544,561, serde_json_bytes 539,988 (shared family), tinyjson 481,002, lite-json 404,322, biome_json_parser 310,897, serde_json_borrow 185,156 (shared family), struson 138,182, json_scanner 102,136, actson 89,126, json-deserializer 84,410. The higher-download ijson lead remains unverified and may share a parser family, so ranks are among selected paths only. Recent downloads include transitive dependency pulls. schemars (253,625,369), serde_path_to_error (126,847,416), and other higher-download hits are not JSON text parsers; json5 (18,832,986) and jsonc-parser (3,628,833) parse superset formats. Exclusions are listed in [leads.json](leads.json).
 
 ## Standard library
 
@@ -34,3 +35,5 @@ The selected `json` crate has its own `src/parser.rs` and `JsonValue` tree. Its 
 hifijson 0.5.0 preserves number spelling in its own value representation. The harness converts numbers to f64 only for the shared control summary. The pinned release declares MIT in Cargo.toml but does not bundle a LICENSE file; this packaging exception is recorded in its source lock.
 
 miniserde has a non-recursive JSON deserializer in its own pinned source. The project shares an author with serde_json but does not use serde_json to parse input; its harness uses serde_json only to encode the observed summary.
+
+gjson is a path-query parser. Its `parse` and `get` APIs assume valid text, so the harness calls the same crate's `valid` for the complete document before traversing all values. Its design and maintainer lineage is shared with Go tidwall/gjson, but the Rust crate has its own scanner and validator source.

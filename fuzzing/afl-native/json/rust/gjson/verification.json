@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/gjson",
+  "pass": true,
+  "base_project_receipt_sha256": "51278c12bf2b555a16b43c71329b4698de1601f1469544ee0377174f046755c7",
+  "overlay_file_sha256": {
+    "Cargo.toml": "b608dac695d9198a7c4218a340f9c57c788e7277e1cbacc927a0167e924fe557",
+    "Cargo.lock": "5e99c6b0b9a5800fbf368e69ff4655618c032af64096bd1ec20c2a8934b969e1",
+    "afl_fuzzer.rs": "9faf5070a86a45cfc8a0bd175c6f95ea9cbc5ec7b515a7550e371a735ec299fe",
+    "Dockerfile": "25bbb8c644f1dc3988e76eeb0a92c2fca7ea7d13f011476f13b2b5dd7bd0783e",
+    "build.py": "cb42d8f2d39291e74bbdc136ff3531c41eed0b7fcb1e42fe959fa9ea5a015e49"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "43503cc176394dd30a6525f5f36e838339b8b5619be33ed9a7783841580a97b6",
+  "image_id": "sha256:4ce42b370be0e3c89d42c6973dd3891ca4d22e71bc8ed5c169028e787af0055f",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 847,
+  "afl_map_size": 12549,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: gjson 0.8.1 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:9032a1ffcaa6880b1bb2ed64ad87228cf3ee712725ac7abfb5032a16d69a23e3",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 781,
+  "edges_only_in_control": 91,
+  "edges_only_in_variant": 25,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gjson-0.8.1/",
+    "control_lines": {
+      "src/lib.rs": 241,
+      "src/modifiers.rs": 0,
+      "src/multipath.rs": 0,
+      "src/path.rs": 32,
+      "src/pretty.rs": 0,
+      "src/util.rs": 42,
+      "src/valid.rs": 206
+    },
+    "variant_lines": {
+      "src/lib.rs": 239,
+      "src/modifiers.rs": 0,
+      "src/multipath.rs": 0,
+      "src/path.rs": 32,
+      "src/pretty.rs": 0,
+      "src/util.rs": 37,
+      "src/valid.rs": 194
+    },
+    "files_with_different_line_counts": [
+      "src/lib.rs",
+      "src/util.rs",
+      "src/valid.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      847,
+      847,
+      847
+    ],
+    "stable_edges": 847,
+    "union_edges": 847,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      781,
+      781,
+      781
+    ],
+    "stable_edges": 781,
+    "union_edges": 781,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

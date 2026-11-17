@@ -93,14 +93,6 @@
       "source": "https://crates.io/crates/ijson"
     },
     {
-      "name": "gjson",
-      "version": "0.8.1",
-      "recent_downloads_90d": 1151387,
-      "status": "unresolved",
-      "reason": "Path-query getter over JSON text (gjson::get); validates and walks text lazily rather than building a tree. Not run on the controls.",
-      "source": "https://crates.io/crates/gjson"
-    },
-    {
       "name": "json-syntax",
       "version": "0.13.1",
       "recent_downloads_90d": 702428,
@@ -254,6 +246,17 @@
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/miniserde/verification.json",
       "scope_note": "Public json::from_str::<json::Value>(&str) consumes local UTF-8 text; own parser distinct from serde_json despite common author."
+    },
+    {
+      "name": "gjson",
+      "version": "0.8.1",
+      "recent_downloads_90d": 1151387,
+      "status": "selected",
+      "reason": "Own whole-root valid function and lazy JSON value scanner; selected after full traversal of both exact valid controls, own-source coverage and stable AFL++ feedback.",
+      "source": "https://crates.io/crates/gjson",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/gjson/verification.json",
+      "scope_note": "Path-query API alone assumes validity; adapter calls gjson::valid first, then gjson::parse and Value::each for all children. Shares tidwall GJSON design/maintainer family with Go gjson, separate Rust source."
     }
   ]
 }
