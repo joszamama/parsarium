@@ -117,6 +117,48 @@
       "project_receipt": "projects/json/python/ijson/verification.json",
       "project_receipt_sha256": "ca1553656e92d4d4b4e6fa8275be3918d46635cea784677dc19ac34eb9b76265",
       "coverage_caveat": "Source-built -O0 extension with yajl embedded through ijson's IJSON_EMBED_YAJL path. Official Linux wheels link the same yajl commit as a separately built -O3 shared library, so linkage and optimisation differ. Pure-Python, ctypes and cffi backends are not covered."
+    },
+    {
+      "package": "ujson",
+      "version": "6.1.0",
+      "pass": true,
+      "input_api": "ujson.loads(local JSON bytes)",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "root_type": "array",
+        "item_count": 5,
+        "nested_arrays": 1,
+        "nested_objects": 1
+      },
+      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where ujson is not importable; exact type-tagged trees with float.hex values and object member order",
+      "oracle_tree_sha256": {
+        "control": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
+        "differential_control": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e"
+      },
+      "bytes_and_str_match_oracle": true,
+      "parser_family": "UltraJSON C decoder (decode.c) / vendored double-conversion 3.2.0 C++",
+      "native_source_files": 9,
+      "native_region_start_lines": 266,
+      "decode_c_lines": 155,
+      "double_conversion_source_files": 5,
+      "double_conversion_region_start_lines": 86,
+      "afl_feedback": "data/python/json/ujson-valid-feedback.json",
+      "project_receipt": "projects/json/python/ujson/verification.json",
+      "project_receipt_sha256": "8d02522f12c3ffb3f883b941fffa384ff509d43b55cdff723b825fa3898e0ecb",
+      "coverage_caveat": "Source-built -O0 unstripped extension; the official wheel compiles the same sources and vendored double-conversion into one optimised, stripped extension. The controls do not exercise duplicate keys, large or inexact numbers, NaN/Infinity tokens or malformed input."
     }
   ],
   "standard": [
@@ -150,6 +192,7 @@
     "simplejson": "linux/amd64",
     "standard": "linux/amd64",
     "orjson": "linux/arm64",
-    "ijson": "linux/arm64"
+    "ijson": "linux/arm64",
+    "ujson": "linux/arm64"
   }
 }

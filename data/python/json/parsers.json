@@ -148,5 +148,51 @@
       "limitation": "Package-level downloads include transitive installs and every ijson backend; they do not count yajl2_c use or JSON parsing specifically."
     },
     "project": "projects/json/python/ijson"
+  },
+  {
+    "name": "ujson",
+    "version": "6.1.0",
+    "license": "BSD-3-Clause AND TCL",
+    "license_evidence": "https://pypi.org/pypi/ujson/6.1.0/json",
+    "input_api": "ujson.loads(local JSON bytes); ujson.loads(decoded str) gives the same exact tree on both controls",
+    "documentation": "https://github.com/ultrajson/ultrajson/blob/6.1.0/README.md#usage",
+    "source": "https://files.pythonhosted.org/packages/e0/60/ad782f70ce03d12ec23288292a17549ca537f9d188227340ac0d082421b3/ujson-6.1.0.tar.gz",
+    "source_sha256": "aef7ea4cd9e2e9f8a35c4538a9780d58c80d76c5da66a8dad269b4cc6d930c29",
+    "wheel_sha256": "716d2c908d2f7084462d259e93bf173a87ca624bb918474b8372d67185387fd6",
+    "dependencies": [],
+    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree",
+    "family": "UltraJSON C decoder (ujson decode.c) / vendored double-conversion 3.2.0 C++ string-to-double",
+    "family_note": "ujson.loads runs ujson's own recursive-descent C decoder in decode.c, which builds Python objects directly; numbers with a fraction or exponent go through dconv_wrapper.cc to the vendored Google double-conversion 3.2.0 StringToDoubleConverter. Independent of the CPython json (_json scanner), simplejson, Jiter, orjson/yyjson and yajl families in this cell, and of V8 and Rust JSON parsers elsewhere. Other packages that vendor an UltraJSON-derived decoder (for example pandas.io.json) are separate builds and are not covered by this path.",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned decode.c source: duplicate object keys are inserted with PyDict_SetItem, so the last value wins; integers without fraction/exponent use a uint64 fast path and fall back to PyLong_FromString on overflow (arbitrary precision); fraction/exponent numbers become binary64 floats through double-conversion; decode_numeric also accepts the non-RFC tokens NaN, Infinity and -Infinity. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (1.25 and 2.5e-1) and small integers.",
+    "control": "controls/json/structure.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "item_count": 5,
+      "nested_arrays": 1,
+      "nested_objects": 1
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 29543889,
+      "source": "https://pypistats.org/api/packages/ujson/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include encoder-only use and transitive installs; they do not measure JSON parsing directly."
+    },
+    "project": "projects/json/python/ujson"
   }
 ]

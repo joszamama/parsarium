@@ -1,0 +1,82 @@
+{
+  "checked_at_utc": "2026-11-17T11:14:42.045717+00:00",
+  "project": "json/python/ujson",
+  "pass": true,
+  "input_kind": "two fixed valid RFC 8259 JSON controls",
+  "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where ujson is not importable; exact type-tagged trees with float.hex values and object member order",
+  "control_oracle": {
+    "oracle_python": "3.11.2",
+    "ujson": "6.1.0",
+    "tree_sha256": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 10,
+    "duplicate_keys": 0,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true
+  },
+  "variant_oracle": {
+    "oracle_python": "3.11.2",
+    "ujson": "6.1.0",
+    "tree_sha256": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 3,
+    "duplicate_keys": 0,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true
+  },
+  "feedback_scope": "native ujson 6.1.0 extension source regions and branches: decode.c, ujson.c, dconv_wrapper.cc and vendored double-conversion 3.2.0",
+  "base_image_id": "sha256:15cdeab31c6d98d6bcb2d5646770ded9e41ccb8644b6f1b0756f36d20efbbe7b",
+  "overlay_image_id": "sha256:69975592f14610eb4a7e40e9b64fbc401231f0044481b3d2455a5db0f47c9d3a",
+  "overlay_receipt_sha256": "b7bfaf49fe0b8b97157c1fff955a13f8c845d3edbb3737bc11e0837bd3cb07dc",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "variant_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 579,
+  "variant_parser_features": 614,
+  "control_decode_c_features": 342,
+  "variant_decode_c_features": 342,
+  "control_double_conversion_features": 206,
+  "variant_double_conversion_features": 241,
+  "parser_feature_difference": 67,
+  "decode_c_feature_difference": 26,
+  "double_conversion_feature_difference": 41,
+  "control_afl_tuples": 589,
+  "variant_afl_tuples": 623,
+  "afl_tuple_difference": 68
+}
