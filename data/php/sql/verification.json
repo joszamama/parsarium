@@ -373,6 +373,103 @@
       "afl_feedback": "fuzzing/afl-native/sql/php/sad_spirit_pg_builder/differential.json"
     },
     {
+      "package": "flow-php/postgresql",
+      "version": "0.48.0",
+      "pass": true,
+      "input_api": "Flow\\PostgreSql\\DSL\\sql_parse(string $sql): ParsedQuery (Parser::parse: pg_query_parse_protobuf, then ParseResult::mergeFromString); ParsedQuery::traverse(NodeVisitor ...) and raw(): ParseResult",
+      "dialect": "PostgreSQL 18 grammar (libpg_query 18.0.0 through pg-query-ext; no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "PostgreSQL grammar via libpg_query 18.0.0 and the pg-query-ext extension (shared with flow-php/pg-query-ext and C libpg_query), plus the package protobuf AST layer",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all plus ctype) loading pg_query.so 0.48.0; Composer vendor with google/protobuf v5.36.2 (pure PHP)",
+      "parser_source_files": 22,
+      "parser_source_lines_covered": 383,
+      "underlying_source_files": 27,
+      "underlying_source_lines_covered": 2196,
+      "underlying_gram_c_lines_covered": 493,
+      "afl_tuple_difference": 131,
+      "parser_feature_difference": 163,
+      "project_receipt": "projects/sql/php/flow_php_postgresql/verification.json",
+      "afl_overlay_receipt": "fuzzing/afl-native/sql/php/flow_php_postgresql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/flow_php_postgresql/differential.json"
+    },
+    {
       "package": "flow-php/pg-query-ext",
       "version": "0.48.0",
       "pass": true,
@@ -563,5 +660,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T22:41:43.652040+00:00"
+  "checked_at_utc": "2026-11-17T23:28:31.200567+00:00"
 }

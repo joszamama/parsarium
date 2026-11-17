@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "flow-php/postgresql",
+  "release": "0.48.0",
+  "catalog_parser": "data/php/sql/parsers.json",
+  "source_lock": "projects/sql/php/flow_php_postgresql/source-lock.json",
+  "source_sha256": "31f8f0d3f67c2c1c8907ce5591fbfd6f5738fa6161c22018251d25a886cd99b2",
+  "underlying_release": "flow-php/pg-query-ext 0.48.0 (pg_query.so) with libpg_query 18.0.0 linked statically, source-built for both the coverage image and the AFL++ overlay",
+  "underlying_source_sha256": "6ad7783f272acfd116455c66a03298a0cac9a9168281df547969219112f0260f",
+  "extension_archive_sha256": "6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "xdebug_source_sha256": "f073de91bea046106abf4d6071c963ea71e58571df6ce58948ceca89d121cb2d",
+  "license_file_sha256": {
+    "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+    "libpg_query-18.0.0/LICENSE": "f9352c20940619a380a5e9f23cebe34d8f797cfbd747fc236a7a3e5fc8ef9b41"
+  },
+  "package_license_file_sha256": {
+    "/work/vendor/flow-php/postgresql/LICENSE": "e40cd978cf6dff6edceb34e2d2a9fa1f353778229081a0c2838f4d42438d1cc3"
+  },
+  "extension_source_sha256": {
+    "pg-query-ext-0.48.0/ext/pg_query.c": "7807aeb690abcba4e74faeac547f7d490485f7a1df2cf52bf7c89def65d5b9d8",
+    "pg-query-ext-0.48.0/ext/php_pg_query.h": "63aaaf3a025c8c4e4b195ff09dd586edc2bd3a3af469cd5fc8013978a737b0cb",
+    "pg-query-ext-0.48.0/ext/pg_query_arginfo.h": "7853d5d86c2895f456cb282c70d77db55a7f9d1f2a2162275972295fa6e0f0d5",
+    "pg-query-ext-0.48.0/ext/config.m4": "9f945856f840cebabfcc3cbd3c328cd3aea30a11ad7baf4a5d343858e4651ae3"
+  },
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "native_campaign_supported": false,
+  "coverage_limit": "One run records two line-coverage sources for the documented sql_parse() call and the summary walk: Xdebug 3.5.3 executed lines in flow-php/postgresql PHP source (Parser, ParsedQuery, the AST Traverser and the protoc-generated Protobuf\\AST classes; the Xdebug pseudo-line past the end of each first-loaded class file is removed; google/protobuf runtime lines are recorded separately and not counted) and Clang/LLVM source coverage of pg-query-ext ext/pg_query.c and libpg_query 18.0.0 in pg_query.so. Package PHP lines include the Traverser walk that the harness drives with its own NodeVisitor. AFL++ feedback comes from the native overlay: ext/pg_query.c (pg_query_parse_protobuf) plus libpg_query src_backend_parser_gram.c, src_backend_parser_scan.c and src_backend_parser_parser.c, instrumented through an allowlist while the parse-only fuzz target also runs the PHP protobuf decode; the interpreted package and google/protobuf code add no AFL++ tuples. Their parse-time package lines are recorded per control by the overlay's Xdebug trace as parser source features. Replay is per case.",
+  "fuzz_smoke_entrypoint": "/opt/php/bin/php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "harness": "harness.php",
+  "summary_command": [
+    "/opt/php/bin/php",
+    "/work/harness.php",
+    "/input/case"
+  ],
+  "afl_entrypoint": "/work/fuzz-target.php",
+  "afl_input_mode": "file",
+  "afl_coverage_subject_prefix": "/work/vendor/flow-php/postgresql/",
+  "coverage": "Xdebug executed line coverage in flow-php/postgresql 0.48.0 PHP source plus Clang/LLVM source coverage of pg-query-ext 0.48.0 ext/pg_query.c and source-built libpg_query 18.0.0 during sql_parse() and the Traverser summary on a valid control; AFL++ feedback comes from the allowlisted ext/pg_query.c and libpg_query gram.c/scan.c/parser.c in the native overlay, with the package's parse-time PHP lines traced as features",
+  "coverage_subject_prefix": "/work/vendor/flow-php/postgresql/",
+  "format_specific_coverage_file_suffix": "/src/Flow/PostgreSql/Parser.php",
+  "underlying_coverage_subject_prefix": "/work/source/",
+  "underlying_format_specific_coverage_file_suffix": "/src/postgres/src_backend_parser_gram.c",
+  "afl_overlay": "fuzzing/afl-native/sql/php/flow_php_postgresql",
+  "dialect": "PostgreSQL 18 grammar (libpg_query 18.0.0 through pg-query-ext; no dialect option)",
+  "parser_family": "PostgreSQL grammar: libpg_query 18.0.0 through the pg-query-ext extension (shared with the flow-php/pg-query-ext and C libpg_query paths); the package adds a protobuf AST layer (protoc-generated classes decoded with google/protobuf) and a descriptor-driven Traverser",
+  "api": "Flow\\PostgreSql\\DSL\\sql_parse(string $sql): ParsedQuery (Parser::parse: pg_query_parse_protobuf, then ParseResult::mergeFromString); ParsedQuery::traverse(NodeVisitor ...) and raw(): ParseResult",
+  "scope": "SQL text from local bytes passed to the documented sql_parse(), which returns a ParsedQuery over the package's Protobuf\\AST\\ParseResult. The harness runs the package Traverser with its own NodeVisitor registered for SelectStmt, InsertStmt, RangeVar, JoinExpr, FuncCall and A_Const, and reads targetList, whereClause, groupClause, sortClause, relation, cols and valuesLists through the generated getters. One statement per control.",
+  "observable_limits": "The package requires the pg_query extension (here the pinned pg-query-ext build) and decodes with the pure-PHP google/protobuf runtime (no protobuf C extension). PHP is built with --disable-all plus ctype, which google/protobuf needs; the client, query builder, migrations, schema, deparse, fingerprint and extractor DSL functions are not exercised, nor is malformed input.",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  }
+}

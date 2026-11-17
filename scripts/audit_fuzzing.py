@@ -451,7 +451,7 @@ def main() -> None:
             verification = json.loads((project / "verification.json").read_text())
             assert verification["format_specific_source_lines_covered"] > 0
             assert verification["underlying_source_lines_covered"] > 0
-        elif str(relative) == "sql/php/flow_php_pg_query_ext":
+        elif str(relative) in {"sql/php/flow_php_pg_query_ext", "sql/php/flow_php_postgresql"}:
             assert manifest.get("native_campaign_supported") is False
             assert receipt["feedback_kind"] == "native_libpg_query_php_pg_query_parser_source_edges"
             assert receipt["instrumented_objects"] == [
@@ -471,6 +471,9 @@ def main() -> None:
             differential = json.loads((overlay / "differential.json").read_text())
             assert differential["pass"] and differential["afl_tuple_difference"] > 0
             assert differential["overlay_receipt_sha256"] == sha256((overlay / "verification.json").read_bytes()).hexdigest()
+            if str(relative) == "sql/php/flow_php_postgresql":
+                # The package's own PHP layer (protobuf AST classes) is traced as source-line features.
+                assert differential["parser_feature_difference"] > 0
             verification = json.loads((project / "verification.json").read_text())
             assert verification["format_specific_source_lines_covered"] > 0
             assert verification["underlying_source_lines_covered"] > 0

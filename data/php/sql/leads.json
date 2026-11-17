@@ -148,13 +148,14 @@
     },
     {
       "name": "flow-php/postgresql",
-      "status": "unresolved_runnability_blocker",
+      "status": "selected",
       "metric_value": 45374,
       "metric_error": null,
-      "latest_release_observed": "0.47.0",
+      "latest_release_observed": "0.48.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
-      "documented_api_lead": "Flow\\PostgreSql parser (pg_query_parse_protobuf)",
-      "reason": "PostgreSQL client library whose SQL parsing calls the flow-php/pg-query-ext native extension (libpg_query) and maps its protobuf tree to PHP objects (requires google/protobuf). Same native blocker as flow-php/pg-query-ext; not built this round."
+      "documented_api_lead": "Flow\\PostgreSql\\DSL\\sql_parse / Parser::parse",
+      "reason": "sql_parse()/Parser::parse() calls the pg_query extension's pg_query_parse_protobuf() and decodes the bytes with google/protobuf into the package's protoc-generated AST classes; ParsedQuery::traverse() walks that typed tree with NodeVisitor hooks. A wrapper over the selected pg-query-ext (libpg_query family), counted under the wrapper rule because its own PHP layer differs between the controls: Xdebug package lines 383 on the select control, 163 parse-time package lines differ; the native libpg_query AFL++ tuples are those of the extension's protobuf entry. Verified with both controls.",
+      "selected_release": "0.48.0"
     },
     {
       "name": "intersvyaz/yii2-sqlparser",

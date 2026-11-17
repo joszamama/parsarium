@@ -1,0 +1,73 @@
+{
+  "kind": "third_party",
+  "api": "Flow\\PostgreSql\\DSL\\sql_parse(string $sql): ParsedQuery (Parser::parse: pg_query_parse_protobuf, then ParseResult::mergeFromString); ParsedQuery::traverse(NodeVisitor ...) and raw(): ParseResult",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:21:39.923865+00:00",
+  "manifest": "projects/sql/php/flow_php_postgresql/manifest.json",
+  "image_id": "sha256:a3f8dad76b80dd233692a9dcdf63ad74225786cc8890cbbc64d63ed2d3deefc2",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.12 (cli) (built: Nov 17 2026 22:49:13) (NTS)",
+    "pg_query 0.48.0",
+    "libpg_query version => 18.0.0",
+    "Xdebug 3.5.3",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "31f8f0d3f67c2c1c8907ce5591fbfd6f5738fa6161c22018251d25a886cd99b2",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "2935c15bc5b06b2f17c5143c97054c61f7f84098e97bf76dfd48b69d3154faec",
+    "composer.json": "1ad32f2be865307d6dc1e91089eae7bb830a918b454fc2ecee3c69da5149e142",
+    "composer.lock": "1b133b5659a76f2c3aec223bb1f8195eef37e41bb377264e1613413e43320d1b",
+    "fuzz-target.php": "16c42f16b3d26b11e3e4611256bc3294a69f82fafdc4d4feb692f5307541cc85",
+    "harness.php": "9590eb7941872810ee655adee935d37294827120031d50891ee718983f46fc4c",
+    "manifest.json": "7691fa0500be66ecc484e5d8379938a6a497a6a3e8baa180e473ff8a9a696adf",
+    "run-control.php": "63fdeb75d779177406e6e4fc4023249b84544130293c6cb5b6aebcfefa10b90a",
+    "run-control.py": "53de563fe3781a43fa94007de4fefd10fb285837c68bbb25843fd32cfcb3968a",
+    "run-control.sh": "0f31adcaae4645f5172b06400636a86dd002a8079dd93b4a21e4aa17abe8e3dc",
+    "source-lock.json": "239df42b92d6def9c980d2d7dba8de3894ed87b03b16b0c72d0992a19c23b8cd",
+    "summary.php": "89990cc071db86e7862886633edfdd8eccf272a6ef71353bf4ca801cd70e27ac",
+    "target.json": "338f11b0100a33dbc39c2e0b98367b32201d05409bbb2db130853f0cad7dfbcc"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 22,
+  "parser_source_lines_covered": 383,
+  "format_specific_source_lines_covered": 6,
+  "underlying_source_files": 27,
+  "underlying_source_lines_covered": 2196,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/flow_php_postgresql/target/coverage/coverage.json",
+  "pass": true
+}

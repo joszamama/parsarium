@@ -422,6 +422,132 @@
     }
   },
   {
+    "name": "flow-php/postgresql",
+    "version": "0.48.0",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned codeload archive (SHA-256 31f8f0d3f67c2c1c8907ce5591fbfd6f5738fa6161c22018251d25a886cd99b2, commit f28a5e598000b42a7c6c465ab4b7a1b9b8ed5984; LICENSE SHA-256 e40cd978cf6dff6edceb34e2d2a9fa1f353778229081a0c2838f4d42438d1cc3, MIT); Packagist license MIT",
+    "input_api": "Flow\\PostgreSql\\DSL\\sql_parse(local SQL text) -> ParsedQuery over the Protobuf\\AST\\ParseResult tree",
+    "documentation": "https://flow-php.com/documentation/components/libs/postgresql/",
+    "source": "https://codeload.github.com/flow-php/postgresql/legacy.zip/f28a5e598000b42a7c6c465ab4b7a1b9b8ed5984",
+    "source_sha256": "31f8f0d3f67c2c1c8907ce5591fbfd6f5738fa6161c22018251d25a886cd99b2",
+    "composer_reference": "f28a5e598000b42a7c6c465ab4b7a1b9b8ed5984",
+    "dependencies": [
+      {
+        "package": "google/protobuf",
+        "release": "v5.36.2",
+        "license": "BSD-3-Clause",
+        "source_sha256": "1a7e76eba86eec39cd9d6b2dbfcb4c5d11f6a724b65f6792b8e7fe8a748aa378",
+        "role": "pure-PHP protobuf runtime that decodes the extension's bytes into the package classes"
+      },
+      {
+        "package": "flow-php/pg-query-ext",
+        "release": "0.48.0",
+        "license": "MIT",
+        "source_sha256": "6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f",
+        "role": "required native extension (pg_query_parse_protobuf), same pinned build as the selected pg-query-ext path"
+      },
+      {
+        "package": "libpg_query",
+        "release": "18.0.0",
+        "source_sha256": "6ad7783f272acfd116455c66a03298a0cac9a9168281df547969219112f0260f",
+        "role": "PostgreSQL raw parser linked into the extension"
+      }
+    ],
+    "dialect": "PostgreSQL 18 grammar (libpg_query 18.0.0 through pg-query-ext; no dialect option)",
+    "scope": "SQL text from local bytes passed to sql_parse() in a source-built PHP 8.5.12 (--disable-all plus ctype) with the pinned pg-query-ext build and Composer-installed package, google/protobuf v5.36.2 (pure PHP), flow-php/types, flow-php/telemetry, psr/clock and symfony/polyfill-mbstring, each diffed against its hashed archive; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary read with the package Traverser and a NodeVisitor. 0.48.0 is the latest release.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "Parser::parse() calls the pg_query extension's pg_query_parse_protobuf(), so the SQL grammar is libpg_query 18.0.0, shared with the selected flow-php/pg-query-ext and C libpg_query paths; metrics are not combined. The package's own layer is the protoc-generated Protobuf\\AST message classes (354 generated files) decoded with google/protobuf into a typed tree, ParsedQuery, and a descriptor-driven Traverser with NodeVisitor/NodeModifier hooks. Its native libpg_query AFL++ tuples are those of the extension's protobuf entry (the same parse as pg_query_parse apart from 7 tuples of the PHP_FUNCTION wrapper); its package PHP lines differ between the controls (Xdebug).",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 45374,
+      "source": "https://packagist.org/packages/flow-php/postgresql.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads, including installs for the client, query builder and migrations features that do not use the parser."
+    },
+    "project": "projects/sql/php/flow_php_postgresql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "flow-php/pg-query-ext",
     "version": "0.48.0",
     "license": "MIT",

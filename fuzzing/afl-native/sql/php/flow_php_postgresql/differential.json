@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T23:28:24.044415+00:00",
+  "project": "sql/php/flow_php_postgresql",
+  "pass": true,
+  "feedback_kind": "native_libpg_query_php_pg_query_parser_source_edges",
+  "base_project_receipt_sha256": "11136d1a51c73b370b33f462e3a7b676d14fadcddeff5294b2721139b58d1f65",
+  "overlay_receipt_sha256": "26e50bd9248fad9ae0e0d4ea7a9203931f9cff8665a22037190956cda6e856e1",
+  "base_image_id": "sha256:a3f8dad76b80dd233692a9dcdf63ad74225786cc8890cbbc64d63ed2d3deefc2",
+  "overlay_image_id": "sha256:10efd90e3b7bd077198d39cb606924512b0b70cf4daddb0a7a6129abe9c23aef",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 240,
+  "second_afl_tuples": 169,
+  "afl_tuple_difference": 131,
+  "first_parser_features": 255,
+  "second_parser_features": 160,
+  "parser_feature_difference": 163,
+  "first_only_features_by_file": {
+    "src/Flow/PostgreSql/Protobuf/AST/A_Expr.php": 17,
+    "src/Flow/PostgreSql/Protobuf/AST/Alias.php": 9,
+    "src/Flow/PostgreSql/Protobuf/AST/BoolExpr.php": 13,
+    "src/Flow/PostgreSql/Protobuf/AST/ColumnRef.php": 10,
+    "src/Flow/PostgreSql/Protobuf/AST/FuncCall.php": 22,
+    "src/Flow/PostgreSql/Protobuf/AST/JoinExpr.php": 15,
+    "src/Flow/PostgreSql/Protobuf/AST/Node.php": 16,
+    "src/Flow/PostgreSql/Protobuf/AST/RangeVar.php": 2,
+    "src/Flow/PostgreSql/Protobuf/AST/ResTarget.php": 2,
+    "src/Flow/PostgreSql/Protobuf/AST/SelectStmt.php": 6,
+    "src/Flow/PostgreSql/Protobuf/AST/SortBy.php": 17
+  },
+  "second_only_features_by_file": {
+    "src/Flow/PostgreSql/Protobuf/AST/A_Const.php": 2,
+    "src/Flow/PostgreSql/Protobuf/AST/InsertStmt.php": 14,
+    "src/Flow/PostgreSql/Protobuf/AST/Node.php": 4,
+    "src/Flow/PostgreSql/Protobuf/AST/PBFloat.php": 6,
+    "src/Flow/PostgreSql/Protobuf/AST/PBList.php": 7,
+    "src/Flow/PostgreSql/Protobuf/AST/SelectStmt.php": 1
+  }
+}
