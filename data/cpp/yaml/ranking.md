@@ -15,8 +15,13 @@ Both controls ([catalog.yaml](../../../controls/yaml/catalog.yaml), [order.yaml]
 
 ## Unselected leads
 
-| Lead | Status | Metric | Parser family |
+| Lead | Status | Metric | Reason |
 | --- | --- | ---: | --- |
-| fkyaml | unresolved | n/a | fkYAML |
+| fkYAML 0.5.0 | unresolved: no primary metric | n/a | Header-only and not packaged in Debian, so it has no popcon value or development-package fallback; GitHub stars are allowed only in PLY cells. Both controls give the exact typed trees with fkYAML's own scalar typing on the capture host (no Docker harness or AFL++ overlay built). |
+| OpenCV 5.1.0 `cv::FileStorage` | excluded: controls fail | n/a | Its own YAML-subset reader rejects `catalog.yaml` (`Multi-line text literals are not supported`) and `order.yaml` (`Incorrect indentation`) and has no alias support; the 46,494 `opencv` installations cover the whole multi-library source, with no YAML-specific package. |
+
+## Round-2 search
+
+All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`). The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C++ YAML sources without `yaml` in their names (`opencv`, `fkyaml`, `libfkyaml`, `mini-yaml`, `yaml-cpp0.3`) found no further C++ YAML parser with a YAML-specific Debian count.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

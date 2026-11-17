@@ -27,14 +27,46 @@
   },
   {
     "name": "fkyaml",
-    "status": "unresolved",
+    "status": "unresolved_no_primary_metric",
     "metric_value": null,
-    "metric_error": "no Debian source package of this name in the snapshot",
-    "family": "fkYAML",
-    "api_hint": "fkyaml::node::deserialize",
-    "note": "Not packaged in Debian; no primary popcon value.",
+    "metric_error": "no Debian source package for fkYAML in the pinned sourcemax snapshot (exact names fkyaml, libfkyaml and substring 'fkyaml' checked); no Debian development package for the fallback",
+    "family": "fkYAML (own header-only lexer, parser and basic_node tree)",
+    "api_hint": "fkyaml::basic_node<std::vector, fkyaml::ordered_map>::deserialize(std::string); is_mapping/is_sequence/is_null/is_boolean/is_integer/is_float_number/is_string with as_map/as_seq/as_bool/as_int/as_float/as_str",
+    "note": "Header-only, not packaged in Debian. PROTOCOL.md allows GitHub stars only in PLY cells (C JSON Parson, C MP3 minimp3/dr_mp3, C TOML tomlc17 precedents).",
     "found_by": "targeted_documentation_lead",
     "source": "https://github.com/fktn-k/fkYAML",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Unresolved, no primary metric: fkYAML v0.5.0 parses both controls to the exact typed trees with its own scalar typing (host check), but it has no Debian source or development package, so there is no popcon value or Debian fallback, and GitHub stars are not allowed outside PLY cells.",
+    "pinned_release": "v0.5.0",
+    "pinned_source": "https://github.com/fktn-k/fkYAML/releases/download/v0.5.0/fkYAML_single_header.zip",
+    "pinned_source_sha256": "beb472e6bcf3b5a972e499af1c1c3faec63d984b609d9ef05b51d2368b79e4f0",
+    "license": "MIT",
+    "documentation": "https://fktn-k.github.io/fkYAML/api/basic_node/deserialize/",
+    "control_check": {
+      "environment": "capture host only (macOS arm64, Apple clang, libc++, -std=c++17); no Docker harness, coverage or AFL++ overlay was built because the path has no primary metric",
+      "catalog.yaml": "exact expected typed tree (tree_sha256 031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b)",
+      "order.yaml": "exact expected typed tree (tree_sha256 2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46)",
+      "typing": "fkYAML resolves plain scalars itself (is_integer/is_float_number/is_boolean/is_null); the harness only prints them. Source key order needs the documented fkyaml::ordered_map mapping type (the default basic_node uses std::map).",
+      "build_note": "The v0.5.0 single header uses std::streamsize without including <ios>; under libc++ the harness includes <ios> first."
+    }
+  },
+  {
+    "name": "opencv",
+    "status": "excluded_control_failed",
+    "metric_value": null,
+    "metric_error": "Debian source opencv has 46,494 sourcemax installations, but it is a multi-library computer-vision source; cv::FileStorage's YAML reader lives in libopencv-core (XML, YAML and JSON persistence), so the count is not YAML-specific and there is no YAML-specific binary development package for the fallback",
+    "family": "OpenCV persistence (own YAML subset parser, modules/core/src/persistence_yml.cpp)",
+    "api_hint": "cv::FileStorage(std::string data, cv::FileStorage::READ | cv::FileStorage::MEMORY | cv::FileStorage::FORMAT_YAML); FileNode traversal",
+    "note": "Found by the round-2 targeted Debian lookup for C++ YAML readers whose source names lack 'yaml'.",
+    "found_by": "targeted_debian_lookup",
+    "source": "https://tracker.debian.org/pkg/opencv",
+    "documentation": "https://github.com/opencv/opencv/blob/5.1.0/modules/core/include/opencv2/core/persistence.hpp",
+    "evidence": {
+      "release_checked": "OpenCV 5.1.0 (Homebrew bottle on the capture host, macOS arm64; the same release pinned by the C++ PNG and MP4 cells)",
+      "source_file": "https://github.com/opencv/opencv/blob/5.1.0/modules/core/src/persistence_yml.cpp (sha256 3140396a8bf286e920c890559a18a9de1774db34278b0475d14cfc1054a46427)",
+      "catalog.yaml": "cv::Exception -212 at persistence_yml.cpp:717: 'Multi-line text literals are not supported' (the parser rejects '|' and '>' block scalars)",
+      "order.yaml": "cv::Exception -212 at persistence_yml.cpp:794: 'Incorrect indentation'",
+      "aliases": "persistence_yml.cpp has no anchor or alias handling"
+    },
+    "reason": "Excluded: OpenCV 5.1.0's cv::FileStorage YAML reader rejects both valid controls (block scalars in catalog.yaml, the block-sequence layout of order.yaml) and does not support anchors or aliases; its Debian count is for the whole multi-library opencv source and has no YAML-specific fallback (Qt QXmlStreamReader precedent)."
   }
 ]

@@ -852,6 +852,11 @@
    "debian_source": "fkyaml",
    "value": null,
    "error": "no Debian source package of this name in the snapshot"
+  },
+  "opencv": {
+   "debian_source": "opencv",
+   "value": null,
+   "error": "multi-library source (46,494 sourcemax installations); not YAML-specific and no YAML-specific development package"
   }
  },
  "leads": [
@@ -867,7 +872,7 @@
    "name": "rapidyaml",
    "family": "rapidyaml (ryml)",
    "api_hint": "ryml::parse_in_arena(csubstr)",
-   "note": "Not packaged in Debian; no primary popcon value.",
+   "note": "Debian source rapidyaml (binaries libryml0.16, libryml-dev); 56 sourcemax installations.",
    "found_by": "registry_search",
    "metric_value": 56
   },
@@ -875,9 +880,913 @@
    "name": "fkyaml",
    "family": "fkYAML",
    "api_hint": "fkyaml::node::deserialize",
-   "note": "Not packaged in Debian; no primary popcon value.",
+   "note": "Not packaged in Debian; passes both controls on the host but has no primary metric (round 2).",
    "found_by": "targeted_documentation_lead",
    "metric_value": null
+  },
+  {
+   "name": "opencv",
+   "family": "OpenCV persistence",
+   "api_hint": "cv::FileStorage",
+   "note": "Multi-library source; YAML reader fails both controls (round 2).",
+   "found_by": "targeted_debian_lookup",
+   "metric_value": null
   }
- ]
+ ],
+ "round2_debian_search": {
+  "searched_at": "2026-11-17",
+  "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+  "snapshot_file": "data/curation/popcon-sourcemax-by_inst.gz",
+  "snapshot_sha256": "9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8",
+  "note": "Round 2 extends the round-1 'yaml' search: every one of its 90 hits is classified, four further name substrings are searched, and C/C++ YAML libraries whose source names would not contain 'yaml' are looked up exactly. An identical short package name does not establish Debian source identity; selected and lead rows are tied to upstream by their tracker pages.",
+  "yaml_hit_classification": {
+   "query": "yaml",
+   "total": 90,
+   "classification_counts": {
+    "c_syntax_tree_grammar": 1,
+    "c_yaml_parser_library": 3,
+    "cpp_yaml_parser_library": 2,
+    "other_language": 69,
+    "other_language_binding": 9,
+    "tool_or_editor_mode": 6
+   },
+   "hits": [
+    {
+     "position": 1,
+     "name": "libyaml",
+     "rank": 223,
+     "installed": 204120,
+     "classification": "c_yaml_parser_library",
+     "reason": "C YAML parser library; selected in C"
+    },
+    {
+     "position": 2,
+     "name": "pyyaml",
+     "rank": 754,
+     "installed": 108671,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 3,
+     "name": "libyaml-libyaml-perl",
+     "rank": 1387,
+     "installed": 39182,
+     "classification": "other_language_binding",
+     "reason": "Perl binding that bundles a libyaml copy (libyaml family)"
+    },
+    {
+     "position": 4,
+     "name": "node-js-yaml",
+     "rank": 2319,
+     "installed": 19898,
+     "classification": "other_language",
+     "reason": "JavaScript package; not a C or C++ library"
+    },
+    {
+     "position": 5,
+     "name": "node-yaml",
+     "rank": 2398,
+     "installed": 19316,
+     "classification": "other_language",
+     "reason": "JavaScript package; not a C or C++ library"
+    },
+    {
+     "position": 6,
+     "name": "libyaml-tiny-perl",
+     "rank": 2539,
+     "installed": 16095,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 7,
+     "name": "ruamel.yaml",
+     "rank": 2798,
+     "installed": 12217,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 8,
+     "name": "ruamel.yaml.clib",
+     "rank": 2802,
+     "installed": 12178,
+     "classification": "other_language_binding",
+     "reason": "Python C extension that bundles a libyaml copy (libyaml family); not a separate C library API"
+    },
+    {
+     "position": 9,
+     "name": "libyaml-perl",
+     "rank": 2944,
+     "installed": 10552,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 10,
+     "name": "yaml-cpp",
+     "rank": 3029,
+     "installed": 9629,
+     "classification": "cpp_yaml_parser_library",
+     "reason": "C++ YAML parser library; selected in C++"
+    },
+    {
+     "position": 11,
+     "name": "libfyaml",
+     "rank": 3270,
+     "installed": 7482,
+     "classification": "c_yaml_parser_library",
+     "reason": "C YAML parser library; selected in C"
+    },
+    {
+     "position": 12,
+     "name": "pyyaml-env-tag",
+     "rank": 3684,
+     "installed": 5284,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 13,
+     "name": "snakeyaml",
+     "rank": 4171,
+     "installed": 3541,
+     "classification": "other_language",
+     "reason": "Java library; not a C or C++ library"
+    },
+    {
+     "position": 14,
+     "name": "libyaml-syck-perl",
+     "rank": 4274,
+     "installed": 3235,
+     "classification": "other_language_binding",
+     "reason": "Perl binding that bundles the Syck C YAML 1.0 parser; no separate Debian source ships Syck as a C library"
+    },
+    {
+     "position": 15,
+     "name": "yamllint",
+     "rank": 5031,
+     "installed": 2026,
+     "classification": "tool_or_editor_mode",
+     "reason": "Python linter"
+    },
+    {
+     "position": 16,
+     "name": "r-cran-yaml",
+     "rank": 5276,
+     "installed": 1777,
+     "classification": "other_language_binding",
+     "reason": "R package that bundles a libyaml copy (libyaml family)"
+    },
+    {
+     "position": 17,
+     "name": "php-yaml",
+     "rank": 5607,
+     "installed": 1610,
+     "classification": "other_language_binding",
+     "reason": "PHP PECL extension over libyaml"
+    },
+    {
+     "position": 18,
+     "name": "libyaml-pp-perl",
+     "rank": 5830,
+     "installed": 1536,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 19,
+     "name": "node-clean-yaml-object",
+     "rank": 7161,
+     "installed": 943,
+     "classification": "other_language",
+     "reason": "JavaScript package; not a C or C++ library"
+    },
+    {
+     "position": 20,
+     "name": "python-strictyaml",
+     "rank": 7228,
+     "installed": 922,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 21,
+     "name": "yaml-mode",
+     "rank": 7458,
+     "installed": 835,
+     "classification": "tool_or_editor_mode",
+     "reason": "Emacs editor mode"
+    },
+    {
+     "position": 22,
+     "name": "libconfig-model-backend-yaml-perl",
+     "rank": 7668,
+     "installed": 756,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 23,
+     "name": "python-pretty-yaml",
+     "rank": 9443,
+     "installed": 432,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 24,
+     "name": "golang-gopkg-yaml.v3",
+     "rank": 11071,
+     "installed": 275,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 25,
+     "name": "erlang-p1-yaml",
+     "rank": 11549,
+     "installed": 243,
+     "classification": "other_language_binding",
+     "reason": "Erlang binding over libyaml"
+    },
+    {
+     "position": 26,
+     "name": "python-pyaml-env",
+     "rank": 11760,
+     "installed": 230,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 27,
+     "name": "golang-yaml.v2",
+     "rank": 12843,
+     "installed": 179,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 28,
+     "name": "libtest-yaml-valid-perl",
+     "rank": 13053,
+     "installed": 173,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 29,
+     "name": "libconfig-yaml-perl",
+     "rank": 13658,
+     "installed": 152,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 30,
+     "name": "python-yamlordereddictloader",
+     "rank": 13887,
+     "installed": 146,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 31,
+     "name": "hiera-eyaml",
+     "rank": 14048,
+     "installed": 142,
+     "classification": "tool_or_editor_mode",
+     "reason": "Ruby encryption tool for Hiera YAML"
+    },
+    {
+     "position": 32,
+     "name": "libcpan-meta-yaml-perl",
+     "rank": 14759,
+     "installed": 130,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 33,
+     "name": "libyaml-shell-perl",
+     "rank": 14979,
+     "installed": 127,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 34,
+     "name": "lua-yaml",
+     "rank": 15150,
+     "installed": 124,
+     "classification": "other_language_binding",
+     "reason": "Lua binding over libyaml"
+    },
+    {
+     "position": 35,
+     "name": "libcgi-session-serialize-yaml-perl",
+     "rank": 15818,
+     "installed": 110,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 36,
+     "name": "haskell-yaml",
+     "rank": 16180,
+     "installed": 103,
+     "classification": "other_language",
+     "reason": "Haskell package; not a C or C++ library"
+    },
+    {
+     "position": 37,
+     "name": "haskell-libyaml",
+     "rank": 16280,
+     "installed": 101,
+     "classification": "other_language_binding",
+     "reason": "Haskell binding that bundles a libyaml copy"
+    },
+    {
+     "position": 38,
+     "name": "yaml-el",
+     "rank": 16791,
+     "installed": 92,
+     "classification": "tool_or_editor_mode",
+     "reason": "Emacs editor mode"
+    },
+    {
+     "position": 39,
+     "name": "python-ruyaml",
+     "rank": 16885,
+     "installed": 90,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 40,
+     "name": "jackson-dataformat-yaml",
+     "rank": 16913,
+     "installed": 89,
+     "classification": "other_language",
+     "reason": "Java library; not a C or C++ library"
+    },
+    {
+     "position": 41,
+     "name": "rapidyaml",
+     "rank": 19359,
+     "installed": 56,
+     "classification": "cpp_yaml_parser_library",
+     "reason": "C++ YAML parser library; selected in C++"
+    },
+    {
+     "position": 42,
+     "name": "snakeyaml-engine",
+     "rank": 20265,
+     "installed": 47,
+     "classification": "other_language",
+     "reason": "Java library; not a C or C++ library"
+    },
+    {
+     "position": 43,
+     "name": "golang-k8s-sigs-yaml",
+     "rank": 20517,
+     "installed": 44,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 44,
+     "name": "haskell-hsyaml",
+     "rank": 20940,
+     "installed": 40,
+     "classification": "other_language",
+     "reason": "Haskell package; not a C or C++ library"
+    },
+    {
+     "position": 45,
+     "name": "rust-yaml-rust2",
+     "rank": 21380,
+     "installed": 37,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 46,
+     "name": "rust-serde-yaml",
+     "rank": 22983,
+     "installed": 27,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 47,
+     "name": "python-saneyaml",
+     "rank": 23377,
+     "installed": 25,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 48,
+     "name": "clj-yaml-clojure",
+     "rank": 23458,
+     "installed": 24,
+     "classification": "other_language",
+     "reason": "Clojure library; not a C or C++ library"
+    },
+    {
+     "position": 49,
+     "name": "rust-unsafe-libyaml",
+     "rank": 23636,
+     "installed": 24,
+     "classification": "other_language_binding",
+     "reason": "Rust c2rust translation of libyaml"
+    },
+    {
+     "position": 50,
+     "name": "golang-github-goccy-go-yaml",
+     "rank": 23721,
+     "installed": 23,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 51,
+     "name": "libyaml-appconfig-perl",
+     "rank": 24211,
+     "installed": 21,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 52,
+     "name": "golang-github-ghodss-yaml",
+     "rank": 24673,
+     "installed": 19,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 53,
+     "name": "golang-github-invopop-yaml",
+     "rank": 24677,
+     "installed": 19,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 54,
+     "name": "libcyaml",
+     "rank": 24995,
+     "installed": 18,
+     "classification": "c_yaml_parser_library",
+     "reason": "C schema-driven loader over libyaml; excluded in C (no generic document API, see leads.json)"
+    },
+    {
+     "position": 55,
+     "name": "libtemplate-plugin-yaml-perl",
+     "rank": 25700,
+     "installed": 16,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 56,
+     "name": "python-yamlfix",
+     "rank": 27377,
+     "installed": 12,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 57,
+     "name": "libdata-yaml-perl",
+     "rank": 28390,
+     "installed": 10,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 58,
+     "name": "tree-sitter-yaml",
+     "rank": 29383,
+     "installed": 9,
+     "classification": "c_syntax_tree_grammar",
+     "reason": "C tree-sitter grammar (generated parser plus scanner.c) producing a concrete syntax tree; excluded in C (no scalar decoding, block-scalar folding or alias resolution, see leads.json)"
+    },
+    {
+     "position": 59,
+     "name": "golang-github-oasdiff-yaml",
+     "rank": 29550,
+     "installed": 8,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 60,
+     "name": "golang-github-oasdiff-yaml3",
+     "rank": 29551,
+     "installed": 8,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 61,
+     "name": "libtest-cpan-meta-yaml-perl",
+     "rank": 29747,
+     "installed": 8,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 62,
+     "name": "python-xstatic-js-yaml",
+     "rank": 29964,
+     "installed": 8,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 63,
+     "name": "python-xstatic-json2yaml",
+     "rank": 29965,
+     "installed": 8,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 64,
+     "name": "libtest-yaml-perl",
+     "rank": 30590,
+     "installed": 7,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 65,
+     "name": "node-yamlish",
+     "rank": 30689,
+     "installed": 7,
+     "classification": "other_language",
+     "reason": "JavaScript package; not a C or C++ library"
+    },
+    {
+     "position": 66,
+     "name": "libmoosex-yaml-perl",
+     "rank": 32628,
+     "installed": 5,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 67,
+     "name": "kubernetes-split-yaml",
+     "rank": 33890,
+     "installed": 4,
+     "classification": "tool_or_editor_mode",
+     "reason": "Go command-line splitter"
+    },
+    {
+     "position": 68,
+     "name": "libcode-tidyall-plugin-yaml-perl",
+     "rank": 33942,
+     "installed": 4,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 69,
+     "name": "libcode-tidyall-plugin-yamlfrontmatter-perl",
+     "rank": 33943,
+     "installed": 4,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 70,
+     "name": "libdata-phrasebook-loader-yaml-perl",
+     "rank": 33956,
+     "installed": 4,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 71,
+     "name": "python-djangorestframework-yaml",
+     "rank": 34355,
+     "installed": 4,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 72,
+     "name": "rust-yaml",
+     "rank": 34972,
+     "installed": 4,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 73,
+     "name": "haskell-hsyaml-aeson",
+     "rank": 35607,
+     "installed": 3,
+     "classification": "other_language",
+     "reason": "Haskell package; not a C or C++ library"
+    },
+    {
+     "position": 74,
+     "name": "ruby-ya2yaml",
+     "rank": 36425,
+     "installed": 3,
+     "classification": "tool_or_editor_mode",
+     "reason": "Ruby emitter"
+    },
+    {
+     "position": 75,
+     "name": "rust-yaml-edit",
+     "rank": 37248,
+     "installed": 3,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 76,
+     "name": "golang-github-smallfish-simpleyaml",
+     "rank": 38022,
+     "installed": 2,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 77,
+     "name": "golang-github-zclconf-go-cty-yaml",
+     "rank": 38129,
+     "installed": 2,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 78,
+     "name": "golang-go.yaml-yaml-v4",
+     "rank": 38134,
+     "installed": 2,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 79,
+     "name": "python-annotatedyaml",
+     "rank": 38780,
+     "installed": 2,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 80,
+     "name": "rust-marked-yaml",
+     "rank": 39265,
+     "installed": 2,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 81,
+     "name": "rust-yaml-serde",
+     "rank": 39366,
+     "installed": 2,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 82,
+     "name": "golang-github-caspr-io-yamlpath",
+     "rank": 39829,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 83,
+     "name": "golang-github-pb33f-go-yaml",
+     "rank": 40062,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 84,
+     "name": "golang-k8s-sigs-kustomize-kyaml",
+     "rank": 40204,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Go package; not a C or C++ library"
+    },
+    {
+     "position": 85,
+     "name": "libcgi-formbuilder-source-yaml-perl",
+     "rank": 40341,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Perl package; not a C or C++ library"
+    },
+    {
+     "position": 86,
+     "name": "node-codemirror-lang-yaml",
+     "rank": 40564,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "JavaScript package; not a C or C++ library"
+    },
+    {
+     "position": 87,
+     "name": "node-lezer-yaml",
+     "rank": 40613,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "JavaScript package; not a C or C++ library"
+    },
+    {
+     "position": 88,
+     "name": "python-yaml-edit",
+     "rank": 41140,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Python package; not a C or C++ library"
+    },
+    {
+     "position": 89,
+     "name": "rust-yamlpatch",
+     "rank": 42177,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    },
+    {
+     "position": 90,
+     "name": "rust-yamlpath",
+     "rank": 42178,
+     "installed": 1,
+     "classification": "other_language",
+     "reason": "Rust crate; not a C or C++ library"
+    }
+   ]
+  },
+  "extra_substring_queries": [
+   {
+    "query": "yml",
+    "method": "case-insensitive substring in Debian source-package names of the same pinned table; ordered by installations",
+    "total": 9,
+    "limit": 100,
+    "hits": [
+     {
+      "name": "symlinks",
+      "rank": 7632,
+      "installed": 771
+     },
+     {
+      "name": "phyml",
+      "rank": 11167,
+      "installed": 268
+     },
+     {
+      "name": "libperlio-via-symlink-perl",
+      "rank": 25347,
+      "installed": 17
+     },
+     {
+      "name": "polyml",
+      "rank": 26868,
+      "installed": 13
+     },
+     {
+      "name": "pyml",
+      "rank": 29179,
+      "installed": 9
+     },
+     {
+      "name": "libmodule-install-trustmetayml-perl",
+      "rank": 35837,
+      "installed": 3
+     },
+     {
+      "name": "node-supports-preserve-symlinks-flag",
+      "rank": 38612,
+      "installed": 2
+     },
+     {
+      "name": "mllex-polyml",
+      "rank": 40518,
+      "installed": 1
+     },
+     {
+      "name": "rust-symlink",
+      "rank": 42043,
+      "installed": 1
+     }
+    ],
+    "finding": "substring 'yml'; every hit is a name that only contains the letters (symlinks, phyml, polyml, pyml) or a Perl module; no YAML parser library"
+   },
+   {
+    "query": "syck",
+    "method": "case-insensitive substring in Debian source-package names of the same pinned table; ordered by installations",
+    "total": 1,
+    "limit": 100,
+    "hits": [
+     {
+      "name": "libyaml-syck-perl",
+      "rank": 4274,
+      "installed": 3235
+     }
+    ],
+    "finding": "substring 'syck' for the Syck C YAML 1.0 parser; only the Perl binding that bundles it"
+   },
+   {
+    "query": "ryml",
+    "method": "case-insensitive substring in Debian source-package names of the same pinned table; ordered by installations",
+    "total": 0,
+    "limit": 100,
+    "hits": [],
+    "finding": "substring 'ryml' for rapidyaml's library name; no hit (rapidyaml is found by 'yaml')"
+   },
+   {
+    "query": "fkyaml",
+    "method": "case-insensitive substring in Debian source-package names of the same pinned table; ordered by installations",
+    "total": 0,
+    "limit": 100,
+    "hits": [],
+    "finding": "substring 'fkyaml' for the fkYAML header-only C++ library; no hit"
+   }
+  ],
+  "targeted_exact_lookups": [
+   {
+    "name": "opencv",
+    "note": "OpenCV source package; libopencv-core's cv::FileStorage reads a YAML subset with its own parser (modules/core/src/persistence_yml.cpp). Multi-library source: the count is not YAML-specific and no YAML-specific binary package exists for the format-specific development-package fallback",
+    "sourcemax": {
+     "rank": 1223,
+     "installed": 46494,
+     "regular_use_votes": 11674,
+     "old": 17082,
+     "recent": 4906,
+     "no_files": 21586
+    }
+   },
+   {
+    "name": "libcyaml",
+    "note": "C schema-driven YAML loader over libyaml (also found by 'yaml')",
+    "sourcemax": {
+     "rank": 24995,
+     "installed": 18,
+     "regular_use_votes": 3,
+     "old": 14,
+     "recent": 0,
+     "no_files": 1
+    }
+   },
+   {
+    "name": "tree-sitter-yaml",
+    "note": "C tree-sitter YAML grammar (also found by 'yaml')",
+    "sourcemax": {
+     "rank": 29383,
+     "installed": 9,
+     "regular_use_votes": 0,
+     "old": 8,
+     "recent": 1,
+     "no_files": 0
+    }
+   },
+   {
+    "name": "fkyaml",
+    "note": "fkYAML header-only C++ library: not packaged",
+    "sourcemax": null
+   },
+   {
+    "name": "libfkyaml",
+    "note": "fkYAML under a lib- prefix: not packaged",
+    "sourcemax": null
+   },
+   {
+    "name": "mini-yaml",
+    "note": "mini-yaml C++ library: not packaged",
+    "sourcemax": null
+   },
+   {
+    "name": "syck",
+    "note": "Syck C YAML 1.0 parser as its own source: not packaged",
+    "sourcemax": null
+   },
+   {
+    "name": "libsyck",
+    "note": "Syck under a lib- prefix: not packaged",
+    "sourcemax": null
+   },
+   {
+    "name": "yaml-cpp0.3",
+    "note": "old yaml-cpp 0.3 API source: not packaged in this snapshot",
+    "sourcemax": null
+   }
+  ],
+  "c_cpp_candidates_found": "C: libyaml, libfyaml (selected), libcyaml and tree-sitter-yaml (excluded). C++: yaml-cpp, rapidyaml (selected), opencv cv::FileStorage (excluded). fkYAML has no Debian source."
+ }
 }
