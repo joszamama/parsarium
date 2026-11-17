@@ -1,5 +1,6 @@
-"""Check the Java XML AFL++ bridges: repeated control probes match and a second valid input differs."""
+"""Check Java XML AFL++ bridges on repeated, fixed valid controls."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -11,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("xercesimpl", "jdk_documentbuilder")
+PROJECTS = ("xercesimpl", "woodstox_core", "jdk_documentbuilder")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 # Structure of controls/xml/order-default-ns.xml, read off the file by hand:
@@ -66,7 +67,10 @@ def check(slug: str) -> dict:
         work = Path(temporary)
         first = probe(manifest, image, ROOT / CONTROL, work, "first")
         repeat = probe(manifest, image, ROOT / CONTROL, work, "repeat")
+        again = probe(manifest, image, ROOT / CONTROL, work, "again")
         other = probe(manifest, image, ROOT / DIFFERENTIAL, work, "other")
+        other_repeat = probe(manifest, image, ROOT / DIFFERENTIAL, work, "other-repeat")
+        other_again = probe(manifest, image, ROOT / DIFFERENTIAL, work, "other-again")
         parsed = subprocess.run(
             ["docker", "run", "--rm", "--platform", manifest["platform"], "--network", "none",
              "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
@@ -77,8 +81,11 @@ def check(slug: str) -> dict:
         differential_output = json.loads(parsed.stdout.strip().splitlines()[-1])
     if differential_output != DIFFERENTIAL_EXPECTED:
         raise RuntimeError(f"{relative}: differential output changed: {differential_output}")
-    if first != repeat:
-        raise RuntimeError(f"{relative}: repeated control probe changed parser features or AFL++ map")
+    if first != repeat or first != again or other != other_repeat or other != other_again:
+        differences = [(len(left[0] ^ right[0]), len(left[1] ^ right[1]))
+                       for left, right in ((first, repeat), (first, again),
+                                           (other, other_repeat), (other, other_again))]
+        raise RuntimeError(f"{relative}: repeated valid probe changed parser features or AFL++ map: {differences}")
     if len(first[0]) != receipt["parser_source_features"] or len(first[1]) != receipt["feedback_edges"]:
         raise RuntimeError(f"{relative}: control probe differs from overlay receipt")
     feature_difference = len(first[0] ^ other[0])
@@ -97,6 +104,7 @@ def check(slug: str) -> dict:
             "differential_sha256": sha256((ROOT / DIFFERENTIAL).read_bytes()).hexdigest(),
             "differential_output": differential_output,
             "repeated_control_identical": True,
+            "repeated_differential_identical": True,
             "control_parser_features": len(first[0]),
             "control_afl_tuples": len(first[1]),
             "differential_parser_features": len(other[0]),
@@ -106,13 +114,31 @@ def check(slug: str) -> dict:
 
 
 def main() -> None:
-    results = [check(slug) for slug in PROJECTS]
-    REPORT.write_text(json.dumps({
+    cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("--project", choices=PROJECTS,
+                     help="refresh one project and retain other pinned results")
+    args = cli.parse_args()
+    results_by_slug = {}
+    prior_checked_at = None
+    if args.project and REPORT.is_file():
+        prior = json.loads(REPORT.read_text())
+        prior_checked_at = prior.get("retained_prior_results_checked_at_utc",
+                                    prior.get("checked_at_utc"))
+        for item in prior.get("results", []):
+            results_by_slug[Path(item["project"]).name] = item
+    for slug in (args.project,) if args.project else PROJECTS:
+        results_by_slug[slug] = check(slug)
+    results = [results_by_slug[slug] for slug in PROJECTS]
+    report = {
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_default_namespace_order",
-        "results": results}, indent=2) + "\n")
+        "results": results}
+    if args.project:
+        report["refreshed_projects"] = [args.project]
+        report["retained_prior_results_checked_at_utc"] = prior_checked_at
+    REPORT.write_text(json.dumps(report, indent=2) + "\n")
 
 
 if __name__ == "__main__":

@@ -54,5 +54,61 @@
       ]
     },
     "project": "projects/xml/java/xercesimpl"
+  },
+  {
+    "name": "woodstox-core",
+    "group": "com.fasterxml.woodstox",
+    "artifact": "woodstox-core",
+    "version": "7.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.pom",
+    "input_api": "new com.ctc.wstx.stax.WstxInputFactory().createXMLStreamReader(local InputStream), namespace-aware; iterate XMLStreamReader.next()",
+    "documentation": "https://docs.oracle.com/en/java/javase/25/docs/api/java.xml/javax/xml/stream/XMLInputFactory.html#createXMLStreamReader(java.io.InputStream)",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware through StAX: expanded element names, maximum depth, namespace declarations and URIs, sorted non-declaration attributes, and decoded character data",
+    "family": "Woodstox independent StAX tokenizer/parser",
+    "family_note": "com.ctc.wstx.sr.BasicStreamReader and input scanners implement their own XML tokenization, independent of Xerces. The stax2-api 4.3.1 dependency contributes interfaces, not an XML parser. Old Codehaus woodstox-core-asl shares the Woodstox parser family.",
+    "shared_families": [
+      "Woodstox"
+    ],
+    "coverage_note": "Release jar includes line-number tables; JaCoCo instruments the pinned release classes and maps lines to the same-release sources jar.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 1874,
+      "max_release": "7.0.0",
+      "max_release_value": 156,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.woodstox%3Awoodstox-core",
+      "captured_at_utc": "2026-11-17T03:37:56.710432+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/woodstox_core"
   }
 ]
