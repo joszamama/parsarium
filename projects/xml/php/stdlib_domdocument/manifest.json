@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "xml",
+  "ecosystem": "php",
+  "package": "php-dom",
+  "release": "8.5.12",
+  "api": "DOMDocument::loadXML(string $source, int $options = 0)",
+  "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-dom) with source-built libxml2 2.15.4",
+  "standard_inventory": "data/php/xml/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "license": "PHP-3.01",
+  "underlying_release": "libxml2 2.15.4",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "underlying_license": "MIT",
+  "license_file_sha256": {
+    "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+    "libxml2-2.15.4/Copyright": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+  },
+  "family": "libxml2 (via PHP ext/libxml)",
+  "input": "In-memory string: the harness reads the control bytes and passes them to loadXML; DOMDocument::load() (file or URL input) is not exercised or counted.",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "fuzz_smoke_entrypoint": "/opt/php/bin/php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "harness": "harness.php",
+  "coverage": "Clang/LLVM source coverage in PHP 8.5.12 ext/dom and ext/libxml plus source-built libxml2 2.15.4 during valid namespace-aware XML replay; ext/dom lines include the harness's DOM traversal (node, element, attribute and namelist classes), document.c holds loadXML",
+  "coverage_subject_prefix": "/work/source/php-8.5.12/ext/",
+  "format_specific_coverage_file_suffix": "/dom/document.c",
+  "underlying_coverage_subject_prefix": "/work/source/libxml2-2.15.4/",
+  "underlying_format_specific_coverage_file_suffix": "/libxml2-2.15.4/parser.c",
+  "afl_overlay": "fuzzing/afl-native/xml/php/stdlib_domdocument"
+}

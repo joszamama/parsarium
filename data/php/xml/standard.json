@@ -40,15 +40,79 @@
           "x < y"
         ]
       }
+    },
+    {
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-dom) with source-built libxml2 2.15.4",
+      "api": "DOMDocument::loadXML(string $source, int $options = 0)",
+      "documentation": "https://www.php.net/manual/en/domdocument.loadxml.php",
+      "adapter": "projects/xml/php/stdlib_domdocument/harness.php",
+      "input": "in-memory string (control bytes passed to loadXML with LIBXML_NONET); DOMDocument::load() file/URL input is not counted",
+      "control": "controls/xml/catalog-ns.xml",
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "observable_result": "loadXML builds a libxml2 tree; walking it gives a prefixed root {urn:parsarium:catalog}catalog with a default-namespace child scope, 5 elements in Clark notation, 2 namespace declarations (DOMElement::getAttributeNames, libxml2 nsDef), a prefixed attribute {urn:parsarium:catalog}lang, entity-decoded text and a CDATA section, depth 3; the second control gives 7 elements, 3 declarations including the xmlns=\"\" undeclaration, char-reference-decoded text and depth 4",
+      "result": "projects/xml/php/stdlib_domdocument/verification.json",
+      "afl_feedback": "fuzzing/afl-native/xml/php/stdlib_domdocument/verification.json",
+      "license": "PHP-3.01 (PHP 8.5.12 ext/dom, ext/libxml); MIT (libxml2 2.15.4)",
+      "family": "libxml2 (via PHP ext/libxml)",
+      "family_note": "Same parser family as the XMLReader::XML entry: ext/dom hands the string to libxml2 (xmlCreateMemoryParserCtxt / xmlParseDocument with the SAX2 tree builder). It is a second standard API over the same engine, not an independent parser.",
+      "expected": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "differential_expected": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      }
     }
   ],
   "unverified_documented_apis": [
-    {
-      "api": "DOMDocument::loadXML(string $source, int $options = 0)",
-      "documentation": "https://www.php.net/manual/en/domdocument.loadxml.php",
-      "status": "pending",
-      "reason": "Same libxml2 parser family; ext/dom not built or run in this pilot."
-    },
     {
       "api": "simplexml_load_string(string $data, ...)",
       "documentation": "https://www.php.net/manual/en/function.simplexml-load-string.php",
@@ -63,5 +127,6 @@
     }
   ],
   "no_api_findings": [],
-  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1 or validation behaviour."
+  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML and DOMDocument::loadXML for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1, validation or DOMDocument::load() file-input behaviour.",
+  "runtime_note": "Each verified API has its own PHP 8.5.12 source build: XMLReader with --enable-xmlreader, DOMDocument with --enable-dom; both link the same source-built libxml2 2.15.4."
 }

@@ -3,10 +3,12 @@
   "platform": "linux/arm64 Docker",
   "php": "PHP 8.5.12 source build with source-built libxml2 2.15.4",
   "controls": {
-    "catalog_ns": "controls/xml/catalog-ns.xml"
+    "catalog_ns": "controls/xml/catalog-ns.xml",
+    "order_default_ns": "controls/xml/order-default-ns.xml"
   },
   "control_sha256": {
-    "catalog_ns": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928"
+    "catalog_ns": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order_default_ns": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
   },
   "control_meaning": "Prefixed root, default namespace, unprefixed and prefixed attributes, &amp; &lt; &gt;, a CDATA section and non-ASCII text",
   "third_party": [
@@ -205,6 +207,117 @@
       "format_specific_source_lines_covered": 230,
       "underlying_source_files": 61,
       "underlying_source_lines_covered": 4195,
+      "error": null
+    },
+    {
+      "api": "DOMDocument::loadXML(string $source, int $options = 0)",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-dom) with source-built libxml2 2.15.4",
+      "command": "python3 scripts/run_project.py xml php stdlib_domdocument",
+      "receipt": "projects/xml/php/stdlib_domdocument/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 51,
+      "parser_source_lines_covered": 2890,
+      "format_specific_source_lines_covered": 126,
+      "format_specific_source_file": "ext/dom/document.c",
+      "underlying_source_files": 61,
+      "underlying_source_lines_covered": 3236,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle_fields": [
+        "attributes",
+        "elements",
+        "max_depth",
+        "namespace_declarations",
+        "namespaces",
+        "root",
+        "text"
+      ],
+      "base_coverage_lines": {
+        "control": {
+          "parser_source_lines_covered": 2890,
+          "format_specific_source_lines_covered": 126,
+          "underlying_source_lines_covered": 3238,
+          "underlying_parser_c_lines_covered": 1279,
+          "underlying_sax2_c_lines_covered": 358
+        },
+        "differential": {
+          "parser_source_lines_covered": 2894,
+          "format_specific_source_lines_covered": 126,
+          "underlying_source_lines_covered": 3536,
+          "underlying_parser_c_lines_covered": 1451,
+          "underlying_sax2_c_lines_covered": 372
+        }
+      },
+      "afl_feedback": {
+        "command": "python3 fuzzing/afl-native/xml/php/stdlib_domdocument/build.py",
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/stdlib_domdocument/verification.json",
+        "overlay_receipt_sha256": "2b85890fa215118dec3e42f6e63c65171b3e46cbdea6366515ca7053e7414985",
+        "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+        "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c and the Zend engine are uninstrumented",
+        "fuzz_target": "projects/xml/php/stdlib_domdocument/fuzz-target.php (new DOMDocument, loadXML only)",
+        "control_afl_tuples": 1098,
+        "differential_afl_tuples": 1228,
+        "afl_tuple_difference": 358,
+        "full_harness_tuple_difference": 358,
+        "format_dependent_traversal_only_tuples": 0,
+        "repeats_per_control": 5,
+        "oracle": "Instrumented-runtime and LLVM-coverage outputs on both controls equal the expat oracle (controls/xml/check_controls.py) in the overlay build"
+      },
       "error": null
     }
   ]
