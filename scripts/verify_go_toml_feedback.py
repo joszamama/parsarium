@@ -13,7 +13,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_burntsushi_toml", "github_com_pelletier_go_toml_v2")
+PROJECTS = ("github_com_burntsushi_toml", "github_com_pelletier_go_toml_v2", "github_com_go_rotini_toml")
 CONTROL = "controls/toml/service-config.toml"
 DIFFERENTIAL = "controls/toml/typed-scalars.toml"
 REPEATS = 3

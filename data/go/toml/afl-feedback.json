@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T16:57:24.880085+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T20:10:22.316750+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_typed_scalars",
   "results": [
     {
@@ -88,6 +88,49 @@
         "unmarshaler.go": 47,
         "unstable/bridge.go": 7,
         "unstable/parser.go": 282
+      }
+    },
+    {
+      "project": "toml/go/github_com_go_rotini_toml",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "feedback_scope": "Go cover blocks under github.com/go-rotini/toml/ only (harness and Go runtime excluded)",
+      "overlay_receipt_sha256": "4583cea3b35a75c1c80050949cfcefec0d0635009f4c9683dfd9208cbec0f885",
+      "base_project_receipt_sha256": "e2c8356eda2e024bfb0f9c7beb65f87d7f8b9c4b338c2732ba41bed901bb7346",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_control_pass": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 445,
+      "control_afl_tuples": 463,
+      "differential_parser_features": 486,
+      "differential_afl_tuples": 505,
+      "parser_feature_difference": 243,
+      "afl_tuple_difference": 240,
+      "afl_tuples_only_control": 99,
+      "afl_tuples_only_differential": 141,
+      "control_parser_source_lines": 720,
+      "differential_parser_source_lines": 790,
+      "control_parser_lines_per_file": {
+        "decode.go": 174,
+        "options.go": 3,
+        "parser.go": 224,
+        "scanner.go": 307,
+        "span.go": 3,
+        "unmarshal.go": 9
+      },
+      "differential_parser_lines_per_file": {
+        "decode.go": 133,
+        "options.go": 3,
+        "parser.go": 156,
+        "scanner.go": 446,
+        "span.go": 3,
+        "types.go": 40,
+        "unmarshal.go": 9
       }
     }
   ]
