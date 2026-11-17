@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T14:30:03.740694+00:00",
+  "status": "blocked_no_parser_feedback_differential",
+  "package": "cerbero/json-parser",
+  "release": "1.1.1",
+  "license": "MIT",
+  "license_evidence": "https://github.com/cerbero90/json-parser/blob/02af3cd5396b50b05d287b6e6964bc5c42d40e8a/LICENSE.md",
+  "source_url": "https://github.com/cerbero90/json-parser/tree/02af3cd5396b50b05d287b6e6964bc5c42d40e8a",
+  "documentation": "https://github.com/cerbero90/json-parser/blob/02af3cd5396b50b05d287b6e6964bc5c42d40e8a/README.md",
+  "release_published_utc": "2025-01-17T18:41:04+00:00",
+  "api": "Cerbero\\JsonParser\\JsonParser::parse(string|filename|resource)->lazy() iterated with foreach; nested values are Cerbero\\JsonParser\\Tokens\\Parser instances iterated the same way (README: Sources, Lazy pointers)",
+  "compound_kind_source": "public Tokens\\Parser::lazyLoad()->current() before iteration yields the package Lexer's own CompoundBegin token ('{' or '['); not described in the README. Member key types (string keys, 0..n-1 indexes) cross-check every non-empty compound.",
+  "composer_reference": "02af3cd5396b50b05d287b6e6964bc5c42d40e8a",
+  "composer_lock_sha256": "31502307e3ec47c641a426e8f04658dd5a25e77ee99f127c54a37bb0f701dad3",
+  "archive_url": "https://codeload.github.com/cerbero90/json-parser/legacy.zip/02af3cd5396b50b05d287b6e6964bc5c42d40e8a",
+  "archive_sha256": "4c720bc106777d26e85c4fd32d53dda82cab22baf9c2526b4e1d0f068ad6df65",
+  "installed_source_matches_archive": true,
+  "popularity": {
+    "metric": "Packagist total downloads",
+    "value": 823332,
+    "source": "https://packagist.org/packages/cerbero/json-parser",
+    "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+    "snapshot": "data/php/json/registry-snapshot.json",
+    "recheck": {
+      "value": 828834,
+      "captured_at_utc": "2026-11-17T14:19:42Z",
+      "source": "https://packagist.org/packages/cerbero/json-parser.json"
+    }
+  },
+  "image_id": "sha256:0580bb4ebb764cb4b2bff7071b9ed892926eca5180ad7db1c2397c54a32de507",
+  "afl_image_id": "sha256:a48efa4b33540fa022263c0c7af9d42c996b4ad02f587014b21571906b096556",
+  "platform": "linux/arm64",
+  "php": "8.5.4",
+  "xdebug": "3.5.0",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "probe_file_sha256": {
+    "Dockerfile": "830eed843a04d5b6dba2b3954f2ea5fbfdd273b16215a83fbe1b4b2ae2054520",
+    "Dockerfile.afl": "e3cae063d6908a9db5e61c6ec1ccf92e9335da05f501a7d2a258c3915158fda4",
+    "afl_trace": "cc3dc001b6ca76e67bb1a3a8144c7a689556d6491eb34ea53758d9f421a7ebd8",
+    "composer.json": "d8715b11d57717543993f8d58d3ce1018b89c65dddb7186205bddb6459818f90",
+    "composer.lock": "31502307e3ec47c641a426e8f04658dd5a25e77ee99f127c54a37bb0f701dad3",
+    "harness.php": "a1df1f68a16d683c37badfb611ad09534fd3c50943fec239677a07b28edd0091",
+    "probe.php": "25b26d8445af30bf214af06735e661f4ae0849cdc778e54a207e343a6edce1f0",
+    "call-trace.php": "b2bafc998736fc5b101ab4d1eb233196205ecad9fa6848642d752bbd342fd13a"
+  },
+  "bridge_file_sha256": {
+    "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+    "php_trace.php": "23e82e01ddc08e6b188c5de7910c33363de2ab0a94688e638b21eca346bf5a03"
+  },
+  "control_sha256": {
+    "nested-object.json": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested-array.json": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "observed": [
+    {
+      "control": "nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "tree": {
+        "type": "object",
+        "members": [
+          [
+            "name",
+            {
+              "type": "string",
+              "value": "parsarium"
+            }
+          ],
+          [
+            "version",
+            {
+              "type": "integer",
+              "value": "1"
+            }
+          ],
+          [
+            "ratio",
+            {
+              "type": "float",
+              "value": -2.5
+            }
+          ],
+          [
+            "enabled",
+            {
+              "type": "boolean",
+              "value": true
+            }
+          ],
+          [
+            "missing",
+            {
+              "type": "null"
+            }
+          ],
+          [
+            "tags",
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string",
+                  "value": "json"
+                },
+                {
+                  "type": "string",
+                  "value": "go"
+                },
+                {
+                  "type": "string",
+                  "value": "rfc8259"
+                }
+              ]
+            }
+          ],
+          [
+            "nested",
+            {
+              "type": "object",
+              "members": [
+                [
+                  "level",
+                  {
+                    "type": "integer",
+                    "value": "2"
+                  }
+                ],
+                [
+                  "items",
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "members": [
+                          [
+                            "id",
+                            {
+                              "type": "integer",
+                              "value": "1"
+                            }
+                          ],
+                          [
+                            "ok",
+                            {
+                              "type": "boolean",
+                              "value": false
+                            }
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "members": [
+                          [
+                            "id",
+                            {
+                              "type": "integer",
+                              "value": "2"
+                            }
+                          ],
+                          [
+                            "text",
+                            {
+                              "type": "string",
+                              "value": "café \"quoted\""
+                            }
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                [
+                  "empty",
+                  {
+                    "type": "object",
+                    "members": []
+                  }
+                ],
+                [
+                  "list",
+                  {
+                    "type": "array",
+                    "items": []
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      },
+      "decoder": {
+        "lazy_inputs": 28,
+        "lazy_compound_inputs": 0,
+        "lazy_tree_identical": true,
+        "eager_inputs": 14,
+        "eager_compound_inputs": 2,
+        "eager_longest_input_bytes": 101
+      },
+      "package_lines_by_file": {
+        "helpers.php": 1,
+        "src/Concerns/DetectsEndpoints.php": 4,
+        "src/Concerns/GuzzleAware.php": 1,
+        "src/Decoders/AbstractDecoder.php": 4,
+        "src/Decoders/ConfigurableDecoder.php": 8,
+        "src/Decoders/DecodedValue.php": 9,
+        "src/Decoders/Decoder.php": 1,
+        "src/Decoders/JsonDecoder.php": 5,
+        "src/JsonParser.php": 13,
+        "src/Pointers/Pointer.php": 19,
+        "src/Pointers/Pointers.php": 13,
+        "src/Sources/AnySource.php": 10,
+        "src/Sources/CustomSource.php": 2,
+        "src/Sources/Endpoint.php": 3,
+        "src/Sources/Filename.php": 2,
+        "src/Sources/IterableSource.php": 2,
+        "src/Sources/Json.php": 8,
+        "src/Sources/Source.php": 9,
+        "src/Tokens/Colon.php": 3,
+        "src/Tokens/Comma.php": 5,
+        "src/Tokens/CompoundBegin.php": 11,
+        "src/Tokens/CompoundEnd.php": 5,
+        "src/Tokens/Constant.php": 4,
+        "src/Tokens/Lexer.php": 24,
+        "src/Tokens/Parser.php": 33,
+        "src/Tokens/ScalarString.php": 8,
+        "src/Tokens/Token.php": 8,
+        "src/Tokens/Tokenizer.php": 10,
+        "src/Tokens/Tokens.php": 1,
+        "src/ValueObjects/Config.php": 10,
+        "src/ValueObjects/Progress.php": 1,
+        "src/ValueObjects/State.php": 19,
+        "src/ValueObjects/Tree.php": 38
+      },
+      "package_lines_covered": 294
+    },
+    {
+      "control": "nested-array.json",
+      "control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "tree": {
+        "type": "array",
+        "items": [
+          {
+            "type": "integer",
+            "value": "1"
+          },
+          {
+            "type": "float",
+            "value": 0.25
+          },
+          {
+            "type": "string",
+            "value": "two"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "members": [
+              [
+                "k",
+                {
+                  "type": "array",
+                  "items": []
+                }
+              ],
+              [
+                "n",
+                {
+                  "type": "object",
+                  "members": [
+                    [
+                      "deep",
+                      {
+                        "type": "string",
+                        "value": "A"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "decoder": {
+        "lazy_inputs": 10,
+        "lazy_compound_inputs": 0,
+        "lazy_tree_identical": true,
+        "eager_inputs": 5,
+        "eager_compound_inputs": 2,
+        "eager_longest_input_bytes": 30
+      },
+      "package_lines_by_file": {
+        "helpers.php": 1,
+        "src/Concerns/DetectsEndpoints.php": 4,
+        "src/Concerns/GuzzleAware.php": 1,
+        "src/Decoders/AbstractDecoder.php": 4,
+        "src/Decoders/ConfigurableDecoder.php": 8,
+        "src/Decoders/DecodedValue.php": 9,
+        "src/Decoders/Decoder.php": 1,
+        "src/Decoders/JsonDecoder.php": 5,
+        "src/JsonParser.php": 13,
+        "src/Pointers/Pointer.php": 19,
+        "src/Pointers/Pointers.php": 13,
+        "src/Sources/AnySource.php": 10,
+        "src/Sources/CustomSource.php": 2,
+        "src/Sources/Endpoint.php": 3,
+        "src/Sources/Filename.php": 2,
+        "src/Sources/IterableSource.php": 2,
+        "src/Sources/Json.php": 8,
+        "src/Sources/Source.php": 9,
+        "src/Tokens/Colon.php": 3,
+        "src/Tokens/Comma.php": 5,
+        "src/Tokens/CompoundBegin.php": 11,
+        "src/Tokens/CompoundEnd.php": 5,
+        "src/Tokens/Constant.php": 4,
+        "src/Tokens/Lexer.php": 24,
+        "src/Tokens/Parser.php": 33,
+        "src/Tokens/ScalarString.php": 8,
+        "src/Tokens/Token.php": 8,
+        "src/Tokens/Tokenizer.php": 10,
+        "src/Tokens/Tokens.php": 1,
+        "src/ValueObjects/Config.php": 10,
+        "src/ValueObjects/Progress.php": 1,
+        "src/ValueObjects/State.php": 19,
+        "src/ValueObjects/Tree.php": 38
+      },
+      "package_lines_covered": 294
+    }
+  ],
+  "oracle": "Python json.loads with ordered, duplicate-checked members, independently type-tagged",
+  "type_tagged_trees_match_oracle": true,
+  "file_and_stream_sources_match": true,
+  "repeats_per_control": 2,
+  "parser_family": "cerbero/json-parser own byte Lexer and token-state Parser (Tokens/, ValueObjects/State.php, Tree.php) for structure in lazy() mode; each key and scalar token is decoded by its default JsonDecoder, i.e. ext/json json_decode on one token (shared scalar decoding with json/php/stdlib_json_decode). The eager default (no lazy pointers) hands whole top-level member values to json_decode, so nested values then belong to the ext/json family.",
+  "docker_source_coverage": {
+    "first_control": "nested-object.json",
+    "first_lines_covered": 294,
+    "second_control": "nested-array.json",
+    "second_lines_covered": 294,
+    "line_set_difference": 0,
+    "note": "Xdebug line sets under /work/vendor/cerbero/json-parser/ on the string source; they include class-file load lines."
+  },
+  "afl_feedback": {
+    "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+    "afl_package": "4.33c-1.1ubuntu1",
+    "afl_map_size": 65536,
+    "subject_prefix": "/work/vendor/cerbero/json-parser/",
+    "repeats_per_case": 2,
+    "repeats_identical": true,
+    "first_parser_features": 293,
+    "second_parser_features": 293,
+    "parser_feature_difference": 0,
+    "first_afl_tuples": 312,
+    "second_afl_tuples": 312,
+    "afl_tuple_difference": 0,
+    "no_parse_baseline_features": {
+      "nested-object.json": 0,
+      "nested-array.json": 0
+    },
+    "no_parse_baseline_tuples": {
+      "nested-object.json": 15,
+      "nested-array.json": 15
+    },
+    "first_parser_only_tuples": 298,
+    "second_parser_only_tuples": 298,
+    "feature_note": "Bridge features are a subset of the probe lines: php_trace.php starts coverage after harness.php and the Composer autoloader are loaded.",
+    "baseline_note": "PARSARIUM_PARSE_FUNCTION=parsarium_no_parse runs the same input checks without calling the package; its tuples are the instrumented proxy's own edges.",
+    "mutation_campaign_run": false
+  },
+  "call_trace_observation": {
+    "kind": "Xdebug function trace, calls made from package source lines (call-site line > callee), AFL++ hit-count classes",
+    "adapter": "lead-probes/php/json/cerbero_json_parser/call-trace.php",
+    "repeats_per_control": 2,
+    "repeats_identical": true,
+    "first_call_sites": 147,
+    "second_call_sites": 147,
+    "call_site_id_difference": 0,
+    "bucketed_call_site_difference": 126,
+    "first_total_calls": 2580,
+    "second_total_calls": 1323,
+    "no_parse_call_sites": {
+      "nested-object.json": 0,
+      "nested-array.json": 0
+    },
+    "note": "Same call-site set on both controls; only hit counts (input volume) differ. Not wired to an AFL++ map and not a repository feedback kind."
+  },
+  "blocker": "The repository's PHP parser-line AFL++ bridge executes the same package line set on both valid controls, so the AFL++ maps have identical tuple ids beyond the no-parse baseline. Xdebug 3.5 returns no branch or path data in this image, and Xdebug line coverage has no hit counts. A call-count bridge would separate the controls only by hit-count class, which is not a repository feedback kind.",
+  "adapter": "lead-probes/php/json/cerbero_json_parser/harness.php"
+}
