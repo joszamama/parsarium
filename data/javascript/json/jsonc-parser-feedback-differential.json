@@ -1,0 +1,84 @@
+{
+  "project": "json/javascript/jsonc_parser",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "overlay_receipt_sha256": "8c6e60355fafaa7d088901c720fb07b5c6206dda6ae13ccca875a410811d2eb8",
+  "base_image_id": "sha256:3da97005261e119e5e7ecccfd2fd4da925504d46d39921adc2b1f83b9834e951",
+  "overlay_image_id": "sha256:1fc21d9bee1d2f90773824de5cc87aa08d62700afd339f30e042822cc2e0f221",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "differential": "controls/json/nested-array.json",
+  "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_output": {
+    "type": "array",
+    "items": [
+      {
+        "type": "number",
+        "value": 1
+      },
+      {
+        "type": "number",
+        "value": 0.25
+      },
+      {
+        "type": "string",
+        "value": "two"
+      },
+      {
+        "type": "array",
+        "items": [
+          {
+            "type": "boolean",
+            "value": true
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "members": {
+          "k": {
+            "type": "array",
+            "items": []
+          },
+          "n": {
+            "type": "object",
+            "members": {
+              "deep": {
+                "type": "string",
+                "value": "A"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 79,
+  "control_afl_tuples": 99,
+  "differential_parser_features": 68,
+  "differential_afl_tuples": 88,
+  "parser_feature_difference": 11,
+  "afl_tuple_difference": 11,
+  "control_only_features_by_file": {
+    "lib/umd/impl/scanner.js": 11
+  },
+  "differential_only_features_by_file": {
+    "lib/umd/impl/scanner.js": 0
+  },
+  "parser_source_path": "/work/node_modules/jsonc-parser/lib/umd/impl/scanner.js",
+  "release_tarball_sha256": "4a0315b8671e7463bae7af7c142cdf19e9aa7ba39eb36dc2df383b8648e3cbc9"
+}

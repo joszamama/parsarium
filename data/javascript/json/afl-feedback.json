@@ -1,11 +1,54 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T12:59:47.855288+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "checked_at_utc": "2026-11-17T13:25:55.983295+00:00",
+  "projects_total": 6,
+  "projects_passed": 6,
   "differential_kind": "fixed_valid_nested_array",
   "standard_feedback": "JSON.parse has AFL++ feedback from a source-built node with only V8 json-parser.cc instrumented, not JavaScript source ranges",
   "results": [
+    {
+      "project": "json/javascript/json5",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "6559c25f0d13b74cbb28715b2056b83da0bd285f27b4c96b37cd6f7a5594bcdf",
+      "base_image_id": "sha256:704fc952e8a1bad26ef8b7de163f06f93dfcee5a57f9841d9786e14d2de1a403",
+      "overlay_image_id": "sha256:4fd0295931cd2a7967a751a843f5629514377357af97ba4345520a38cb26f7cf",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 128,
+      "control_afl_tuples": 148,
+      "differential_parser_features": 118,
+      "differential_afl_tuples": 138,
+      "parser_feature_difference": 18,
+      "afl_tuple_difference": 18,
+      "control_only_features_by_file": {
+        "lib/parse.js": 14
+      },
+      "differential_only_features_by_file": {
+        "lib/parse.js": 4
+      }
+    },
     {
       "project": "json/javascript/jsonparse",
       "pass": true,
