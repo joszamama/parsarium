@@ -776,5 +776,264 @@
       "snapshot": "data/java/toml/registry-snapshot.json",
       "captured_at_utc": "2026-11-17T16:37:50.730636+00:00"
     }
+  },
+  {
+    "name": "jtoml",
+    "group": "io.github.wasabithumb",
+    "artifact": "jtoml",
+    "coordinate": "io.github.wasabithumb:jtoml",
+    "version": "1.8.3",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses (jtoml, jtoml-api and jtoml-internals 1.8.3)",
+    "input_api": "JToml.jToml().read(Path) -> TomlDocument (TomlTable); TomlPrimitive typed accessors; parse errors throw TomlParseException",
+    "documentation": "https://javadoc.io/doc/io.github.wasabithumb/jtoml-api/1.8.3/io/github/wasabithumb/jtoml/JToml.html",
+    "source": "https://repo.maven.apache.org/maven2/io/github/wasabithumb/jtoml/1.8.3/jtoml-1.8.3-sources.jar",
+    "scope": "TOML 1.0.0 text from a local file into a TomlDocument of TomlTable/TomlArray/TomlPrimitive values with Long, Double, Boolean, String and java.time values",
+    "family": "jtoml (WasabiThumb; own hand-written reader and expression parser in jtoml-internals, value model in jtoml-api)",
+    "family_note": "jtoml 1.8.3 is split into three release artifacts: jtoml (the JToml entry point), jtoml-api (TomlTable/TomlArray/TomlPrimitive, keys, options, exceptions) and jtoml-internals (io.github.wasabithumb.jtoml.io reader and source/target streams, io.github.wasabithumb.jtoml.expression key/value/table expression parser). Runtime dependencies are only these three jars; org.jetbrains:annotations and org.jspecify:jspecify are compile-time annotations and are not installed. It does not use ANTLR, Jackson or another TOML library and shares no code with tomlj, Jackson TOML or NightConfig.",
+    "configuration_note": "Default JTomlOptions. Keys are read with TomlTable.keys(false) (direct single-segment keys) and get(TomlKey); every scalar kind comes from TomlPrimitive's typed is*/as* accessors, so integer 1000 and float 1e3 and the four date-time kinds stay distinct.",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/java/jtoml",
+    "metric": {
+      "name": "deps.dev directDependentCount summed over all releases",
+      "value": 53,
+      "releases": 33,
+      "max_release": "1.4.0",
+      "max_release_direct_dependent_count": 3,
+      "default_release": "1.8.3",
+      "default_release_direct_dependent_count": 2,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.github.wasabithumb%3Ajtoml",
+      "snapshot": "data/java/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:52.615799+00:00"
+    }
   }
 ]

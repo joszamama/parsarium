@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T16:59:52.349678+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T20:46:01.841703+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_typed_scalars",
   "mutation_campaign_run": false,
   "results": [
@@ -508,6 +508,258 @@
         "com/electronwill/nightconfig/toml/ValueParser.java": 88
       },
       "checked_at_utc": "2026-11-17T16:59:52.349678+00:00"
+    },
+    {
+      "project": "toml/java/jtoml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "feedback_scope": "JaCoCo bytecode coverage of the io.github.wasabithumb.jtoml packages of jtoml 1.8.3 (the jtoml entry point, jtoml-internals reader, expression parser and value builders in io.github.wasabithumb.jtoml.io/expression, and the jtoml-api value, key and table types) during valid-control replay, mapped to the three release sources jars; Jazzer fuzz entry",
+      "base_project_receipt_sha256": "1dffe0ffa2fab37000b632ef1b673f5feee140fa5b07a1469351d521ca67cdc8",
+      "overlay_receipt_sha256": "7467e5a222eab111e7870ec34885aab4a5ec523f0d19022e1706e11e9614e6ec",
+      "image_id": "sha256:8e957aaab1799291231c9d9d56cd0cb82411a4fdb3fd6d727b7e2dfe864afdc2",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_lines": 1085,
+      "control_afl_tuples": 1094,
+      "differential_parser_lines": 1172,
+      "differential_afl_tuples": 1179,
+      "parser_lines_only_in_control": 134,
+      "parser_lines_only_in_differential": 221,
+      "afl_tuples_only_in_control": 132,
+      "afl_tuples_only_in_differential": 217,
+      "parser_line_difference": 355,
+      "afl_tuple_difference": 349,
+      "control_parser_lines_per_file": {
+        "io/github/wasabithumb/jtoml/JToml.java": 3,
+        "io/github/wasabithumb/jtoml/JTomlImpl.java": 18,
+        "io/github/wasabithumb/jtoml/JTomlProvider.java": 19,
+        "io/github/wasabithumb/jtoml/comment/Comment.java": 1,
+        "io/github/wasabithumb/jtoml/comment/CommentImpl.java": 11,
+        "io/github/wasabithumb/jtoml/comment/CommentPosition.java": 4,
+        "io/github/wasabithumb/jtoml/comment/Comments.java": 5,
+        "io/github/wasabithumb/jtoml/comment/CommentsImpl.java": 21,
+        "io/github/wasabithumb/jtoml/document/TomlDocumentImpl.java": 10,
+        "io/github/wasabithumb/jtoml/document/TomlIssues.java": 1,
+        "io/github/wasabithumb/jtoml/document/TomlIssuesImpl.java": 4,
+        "io/github/wasabithumb/jtoml/except/TomlValueException.java": 2,
+        "io/github/wasabithumb/jtoml/expression/AbstractExpression.java": 5,
+        "io/github/wasabithumb/jtoml/expression/EmptyExpression.java": 2,
+        "io/github/wasabithumb/jtoml/expression/Expression.java": 7,
+        "io/github/wasabithumb/jtoml/expression/KeyValueExpression.java": 7,
+        "io/github/wasabithumb/jtoml/expression/TableExpression.java": 7,
+        "io/github/wasabithumb/jtoml/io/ExpressionReader.java": 298,
+        "io/github/wasabithumb/jtoml/io/TableReader.java": 80,
+        "io/github/wasabithumb/jtoml/io/source/BufferedCharSource.java": 54,
+        "io/github/wasabithumb/jtoml/io/source/CharSource.java": 9,
+        "io/github/wasabithumb/jtoml/io/source/StreamCharSource.java": 30,
+        "io/github/wasabithumb/jtoml/key/AbstractTomlKey.java": 3,
+        "io/github/wasabithumb/jtoml/key/ArrayTomlKey.java": 43,
+        "io/github/wasabithumb/jtoml/key/TomlKey.java": 7,
+        "io/github/wasabithumb/jtoml/key/convention/StandardKeyConvention.java": 9,
+        "io/github/wasabithumb/jtoml/option/AbstractJTomlOption.java": 9,
+        "io/github/wasabithumb/jtoml/option/BooleanJTomlOption.java": 3,
+        "io/github/wasabithumb/jtoml/option/JTomlOption.java": 36,
+        "io/github/wasabithumb/jtoml/option/JTomlOptions.java": 9,
+        "io/github/wasabithumb/jtoml/option/ObjectJTomlOption.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/ArrayStrategy.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/IndentationPolicy.java": 11,
+        "io/github/wasabithumb/jtoml/option/prop/LineSeparator.java": 9,
+        "io/github/wasabithumb/jtoml/option/prop/OrderMarkPolicy.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/PaddingPolicy.java": 11,
+        "io/github/wasabithumb/jtoml/option/prop/SortMethod.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/SpacingPolicy.java": 9,
+        "io/github/wasabithumb/jtoml/option/prop/SpecVersion.java": 9,
+        "io/github/wasabithumb/jtoml/serial/TomlSerializerFactory.java": 1,
+        "io/github/wasabithumb/jtoml/serial/plain/PlainTextTomlSerializerFactory.java": 1,
+        "io/github/wasabithumb/jtoml/value/TomlValue.java": 6,
+        "io/github/wasabithumb/jtoml/value/TomlValueFlags.java": 9,
+        "io/github/wasabithumb/jtoml/value/UnsafePrimitives.java": 14,
+        "io/github/wasabithumb/jtoml/value/array/TomlArray.java": 1,
+        "io/github/wasabithumb/jtoml/value/array/TomlArrayImpl.java": 18,
+        "io/github/wasabithumb/jtoml/value/primitive/AbstractTemporalTomlPrimitive.java": 3,
+        "io/github/wasabithumb/jtoml/value/primitive/AbstractTomlPrimitive.java": 13,
+        "io/github/wasabithumb/jtoml/value/primitive/BooleanTomlPrimitive.java": 8,
+        "io/github/wasabithumb/jtoml/value/primitive/FloatTomlPrimitive.java": 32,
+        "io/github/wasabithumb/jtoml/value/primitive/IntegerTomlPrimitive.java": 8,
+        "io/github/wasabithumb/jtoml/value/primitive/OffsetDateTimeTomlPrimitive.java": 9,
+        "io/github/wasabithumb/jtoml/value/primitive/StringTomlPrimitive.java": 8,
+        "io/github/wasabithumb/jtoml/value/primitive/TomlPrimitive.java": 11,
+        "io/github/wasabithumb/jtoml/value/primitive/TomlPrimitiveType.java": 9,
+        "io/github/wasabithumb/jtoml/value/table/TomlTable.java": 1,
+        "io/github/wasabithumb/jtoml/value/table/TomlTableBranch.java": 79,
+        "io/github/wasabithumb/jtoml/value/table/TomlTableImpl.java": 63,
+        "io/github/wasabithumb/jtoml/value/table/TomlTableLeaf.java": 9
+      },
+      "differential_parser_lines_per_file": {
+        "io/github/wasabithumb/jtoml/JToml.java": 3,
+        "io/github/wasabithumb/jtoml/JTomlImpl.java": 18,
+        "io/github/wasabithumb/jtoml/JTomlProvider.java": 19,
+        "io/github/wasabithumb/jtoml/comment/Comment.java": 1,
+        "io/github/wasabithumb/jtoml/comment/CommentImpl.java": 11,
+        "io/github/wasabithumb/jtoml/comment/CommentPosition.java": 4,
+        "io/github/wasabithumb/jtoml/comment/Comments.java": 5,
+        "io/github/wasabithumb/jtoml/comment/CommentsImpl.java": 21,
+        "io/github/wasabithumb/jtoml/document/TomlDocumentImpl.java": 10,
+        "io/github/wasabithumb/jtoml/document/TomlIssues.java": 1,
+        "io/github/wasabithumb/jtoml/document/TomlIssuesImpl.java": 4,
+        "io/github/wasabithumb/jtoml/except/TomlValueException.java": 2,
+        "io/github/wasabithumb/jtoml/expression/AbstractExpression.java": 5,
+        "io/github/wasabithumb/jtoml/expression/EmptyExpression.java": 2,
+        "io/github/wasabithumb/jtoml/expression/Expression.java": 7,
+        "io/github/wasabithumb/jtoml/expression/KeyValueExpression.java": 7,
+        "io/github/wasabithumb/jtoml/expression/TableExpression.java": 7,
+        "io/github/wasabithumb/jtoml/io/ExpressionReader.java": 368,
+        "io/github/wasabithumb/jtoml/io/TableReader.java": 71,
+        "io/github/wasabithumb/jtoml/io/source/BufferedCharSource.java": 54,
+        "io/github/wasabithumb/jtoml/io/source/CharSource.java": 9,
+        "io/github/wasabithumb/jtoml/io/source/StreamCharSource.java": 20,
+        "io/github/wasabithumb/jtoml/key/AbstractTomlKey.java": 7,
+        "io/github/wasabithumb/jtoml/key/ArrayTomlKey.java": 59,
+        "io/github/wasabithumb/jtoml/key/TomlKey.java": 6,
+        "io/github/wasabithumb/jtoml/key/convention/StandardKeyConvention.java": 9,
+        "io/github/wasabithumb/jtoml/option/AbstractJTomlOption.java": 9,
+        "io/github/wasabithumb/jtoml/option/BooleanJTomlOption.java": 3,
+        "io/github/wasabithumb/jtoml/option/JTomlOption.java": 36,
+        "io/github/wasabithumb/jtoml/option/JTomlOptions.java": 9,
+        "io/github/wasabithumb/jtoml/option/ObjectJTomlOption.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/ArrayStrategy.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/IndentationPolicy.java": 11,
+        "io/github/wasabithumb/jtoml/option/prop/LineSeparator.java": 11,
+        "io/github/wasabithumb/jtoml/option/prop/OrderMarkPolicy.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/PaddingPolicy.java": 11,
+        "io/github/wasabithumb/jtoml/option/prop/SortMethod.java": 4,
+        "io/github/wasabithumb/jtoml/option/prop/SpacingPolicy.java": 9,
+        "io/github/wasabithumb/jtoml/option/prop/SpecVersion.java": 7,
+        "io/github/wasabithumb/jtoml/serial/TomlSerializerFactory.java": 1,
+        "io/github/wasabithumb/jtoml/serial/plain/PlainTextTomlSerializerFactory.java": 1,
+        "io/github/wasabithumb/jtoml/value/TomlValue.java": 5,
+        "io/github/wasabithumb/jtoml/value/TomlValueFlags.java": 6,
+        "io/github/wasabithumb/jtoml/value/UnsafePrimitives.java": 14,
+        "io/github/wasabithumb/jtoml/value/primitive/AbstractTemporalTomlPrimitive.java": 3,
+        "io/github/wasabithumb/jtoml/value/primitive/AbstractTomlPrimitive.java": 10,
+        "io/github/wasabithumb/jtoml/value/primitive/BooleanTomlPrimitive.java": 8,
+        "io/github/wasabithumb/jtoml/value/primitive/FloatTomlPrimitive.java": 34,
+        "io/github/wasabithumb/jtoml/value/primitive/IntegerTomlPrimitive.java": 8,
+        "io/github/wasabithumb/jtoml/value/primitive/LocalDateTimeTomlPrimitive.java": 10,
+        "io/github/wasabithumb/jtoml/value/primitive/LocalDateTomlPrimitive.java": 10,
+        "io/github/wasabithumb/jtoml/value/primitive/LocalTimeTomlPrimitive.java": 9,
+        "io/github/wasabithumb/jtoml/value/primitive/OffsetDateTimeTomlPrimitive.java": 9,
+        "io/github/wasabithumb/jtoml/value/primitive/StringTomlPrimitive.java": 8,
+        "io/github/wasabithumb/jtoml/value/primitive/TomlPrimitive.java": 23,
+        "io/github/wasabithumb/jtoml/value/primitive/TomlPrimitiveType.java": 9,
+        "io/github/wasabithumb/jtoml/value/table/TomlTable.java": 1,
+        "io/github/wasabithumb/jtoml/value/table/TomlTableBranch.java": 79,
+        "io/github/wasabithumb/jtoml/value/table/TomlTableImpl.java": 63,
+        "io/github/wasabithumb/jtoml/value/table/TomlTableLeaf.java": 9
+      },
+      "checked_at_utc": "2026-11-17T20:46:01.841703+00:00"
     }
   ]
 }
