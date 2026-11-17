@@ -27,9 +27,10 @@ class JavaYamlPilotTest(unittest.TestCase):
         self.assertGreaterEqual(len(self.parsers), 1)
         self.assertEqual(self.cell["verified_third_party_count"], len(self.parsers))
         self.assertEqual(self.cell["verified_standard_or_runtime_count"], 0)
-        selected = {lead["name"].split(":")[1] for lead in read(DATA / "leads.json")
-                    if lead["status"] == "selected"}
-        self.assertEqual(selected, {parser["name"] for parser in self.parsers})
+        selected = {lead["name"] for lead in read(DATA / "leads.json") if lead["status"] == "selected"}
+        self.assertEqual(selected, {f"{parser['group']}:{parser['artifact']}" for parser in self.parsers})
+        values = [parser["popularity"]["value"] for parser in self.parsers]
+        self.assertEqual(values, sorted(values, reverse=True))
 
     def test_trees_match_hand_written_oracle(self):
         for parser in self.parsers:
@@ -50,8 +51,9 @@ class JavaYamlPilotTest(unittest.TestCase):
                 self.assertEqual(lock["release"], parser["version"])
                 for digest in (lock["jar_sha256"], lock["source_sha256"], lock["pom_sha256"]):
                     self.assertIn(digest, dockerfile)
-                self.assertEqual(parser["license"], "Apache-2.0")
-                self.assertTrue(parser["documentation"].startswith("https://javadoc.io/static/"))
+                self.assertEqual(lock["license"], parser["license"])
+                self.assertIn(parser["license"], {"Apache-2.0", "MIT"})
+                self.assertTrue(parser["documentation"].startswith(("https://javadoc.io/static/", "https://github.com/")))
                 self.assertIsInstance(parser["popularity"]["value"], int)
                 self.assertEqual(manifest["control_sha256"],
                                  sha256((ROOT / "controls/yaml/catalog.yaml").read_bytes()).hexdigest())
@@ -70,6 +72,22 @@ class JavaYamlPilotTest(unittest.TestCase):
                 self.assertEqual(overlay["base_project_receipt_sha256"],
                                  sha256((ROOT / parser["project"] / "verification.json").read_bytes()).hexdigest())
                 self.assertEqual(row["control_parser_features"], overlay["parser_source_features"])
+
+    def test_wrapper_paths_report_underlying_parser_feedback(self):
+        for parser in self.parsers:
+            manifest = read(ROOT / parser["project"] / "manifest.json")
+            if "underlying_coverage_subject_prefix" not in manifest:
+                continue
+            project = parser["project"].removeprefix("projects/")
+            with self.subTest(project=project):
+                self.assertIn("wrapper", parser["family"].lower() + parser["family_note"].lower())
+                receipt = read(ROOT / parser["project"] / "verification.json")
+                self.assertGreater(receipt["underlying_source_lines_covered"], 0)
+                self.assertTrue(manifest["afl_underlying_jar"] and manifest["afl_underlying_sources"])
+                row = self.feedback[project]
+                self.assertGreater(row["core_feature_difference"], 0)
+                self.assertEqual(row["wrapper_control_features"] + row["core_control_features"],
+                                 row["control_parser_features"])
 
     def test_jackson_alias_failure_stays_a_lead(self):
         lead, = [lead for lead in read(DATA / "leads.json")

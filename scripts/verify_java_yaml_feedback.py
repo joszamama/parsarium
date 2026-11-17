@@ -23,8 +23,13 @@ sys.path.insert(0, str(ROOT / "controls/yaml"))
 import check_controls  # noqa: E402
 
 
-PROJECTS = ("snakeyaml", "snakeyaml_engine")
-SOURCE_PREFIX = {"snakeyaml": "org/yaml/snakeyaml/", "snakeyaml_engine": "org/snakeyaml/engine/"}
+PROJECTS = ("snakeyaml", "snakeyaml_engine", "circe_yaml")
+SOURCE_PREFIX = {"snakeyaml": ("org/yaml/snakeyaml/",), "snakeyaml_engine": ("org/snakeyaml/engine/",),
+                 # wrapper path: java_dual_trace.py labels circe-yaml lines wrapper/ and SnakeYAML lines core/
+                 "circe_yaml": ("wrapper/io/circe/yaml/", "core/org/yaml/snakeyaml/"),
+                 "kjson_yaml": ("io/kjson/yaml/",),
+                 "snakeyaml_engine_kmp": ("it/krzeminski/snakeyaml/engine/kmp/",)}
+WRAPPERS = {"circe_yaml"}
 CONTROL = "controls/yaml/catalog.yaml"
 DIFFERENTIAL = "controls/yaml/order.yaml"
 REPEATS = 3
@@ -47,7 +52,7 @@ def sandbox(manifest: dict, case: Path, work: Path) -> list[str]:
             "-v", f"{case}:/input/case:ro", "-v", f"{work}:/coverage"]
 
 
-def probe(manifest: dict, image: str, case: Path, work: Path, name: str, prefix: str) -> tuple[set, set]:
+def probe(manifest: dict, image: str, case: Path, work: Path, name: str, prefix: tuple[str, ...]) -> tuple[set, set]:
     common = sandbox(manifest, case, work)
     run([*common, "--entrypoint", "/bin/sh", image,
          "/work/afl_trace", "/input/case", f"/coverage/{name}.features"])
@@ -106,6 +111,16 @@ def check(slug: str) -> dict:
     if not feature_difference or not tuple_difference:
         raise RuntimeError(f"{relative}: the valid controls give the same parser feedback")
     changed = per_file(first[0] ^ other[0])
+    layers = {}
+    if slug in WRAPPERS:
+        # A wrapper may show no differential in its own lines; the underlying parser must.
+        for layer in ("wrapper", "core"):
+            mine = {item for item in first[0] if item.startswith(layer + "/")}
+            theirs = {item for item in other[0] if item.startswith(layer + "/")}
+            layers[f"{layer}_control_features"] = len(mine)
+            layers[f"{layer}_feature_difference"] = len(mine ^ theirs)
+        if not layers["core_feature_difference"]:
+            raise RuntimeError(f"{relative}: the underlying parser shows no differential")
     print(f"{relative}: {REPEATS} identical repeats per control; {feature_difference} parser lines, "
           f"{tuple_difference} AFL++ tuples differ", flush=True)
     return {"project": str(relative), "pass": True,
@@ -121,6 +136,7 @@ def check(slug: str) -> dict:
             "differential_parser_features": len(other[0]), "differential_afl_tuples": len(other[1]),
             "parser_feature_difference": feature_difference,
             "afl_tuple_difference": tuple_difference,
+            **layers,
             "control_lines_by_file": dict(sorted(per_file(first[0]).items())),
             "differing_lines_by_file": dict(sorted(changed.items()))}
 
