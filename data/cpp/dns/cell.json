@@ -1,10 +1,10 @@
 {
   "ecosystem": "cpp",
   "format": "dns",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_one_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "debian-source:dns",
@@ -19,10 +19,11 @@
   },
   "search_hits_recorded": 114,
   "unique_search_hits": 109,
-  "unresolved_documentation_leads": 2,
+  "unresolved_documentation_leads": 1,
   "leads_recorded": 9,
   "leads_by_status": {
-    "unresolved": 2,
+    "resolved_verified_selected": 1,
+    "unresolved": 1,
     "excluded": 7
   },
   "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
@@ -35,5 +36,8 @@
     "differential": "controls/dns/query.bin",
     "oracle": "controls/dns/check_controls.py",
     "expected": "controls/dns/expected.json"
-  }
+  },
+  "third_party_evidence": "data/cpp/dns/parsers.json",
+  "third_party_control_results": "data/cpp/dns/verification.json",
+  "selection": "One control-verified C++ DNS path(s), ranked by Debian popcon sourcemax installations (max over binary packages built from the source package): libtins 4.6 (52)."
 }
