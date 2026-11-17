@@ -207,6 +207,110 @@
     "afl_feedback": "data/python/dns/twisted-feedback-differential.json"
   },
   {
+    "name": "mitmproxy",
+    "version": "12.3.1",
+    "license": "MIT",
+    "license_evidence": "Wheel METADATA classifier 'License :: OSI Approved :: MIT License' and dist-info/LICENSE (MIT text, sha256 cc4ab04e...), checked in the image",
+    "input_api": "mitmproxy.dns.DNSMessage.unpack(buffer: bytes, timestamp: float | None = None) -> DNSMessage",
+    "documentation": "https://docs.mitmproxy.org/stable/api/mitmproxy/dns.html#DNSMessage.unpack",
+    "documentation_note": "mitmproxy's API reference documents DNSMessage.unpack: 'Converts the entire given buffer into a DNS message.'",
+    "source": "https://pypi.org/project/mitmproxy/12.3.1/",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "mitmproxy DNS (mitmproxy/dns.py DNSMessage.unpack_from over mitmproxy/net/dns/domain_names.py)",
+    "family_note": "Own pure-Python decoder in mitmproxy's DNS flow model; it uses no other DNS library. It keeps the 3-bit field after RA as `reserved`. unpack decompresses names inside CNAME/MX RDATA; the harness reads A/AAAA through the record's ipv4_address/ipv6_address properties, CNAME through domain_name, and the MX preference and exchange from the decompressed RDATA with the library's domain_names.unpack_from. Importing mitmproxy.dns pulls in mitmproxy's flow and connection model (the full runtime requirement set is installed from pinned wheels), but no proxy, server or event loop is started and no socket is opened. Its PyPI count covers the whole interception proxy, not only DNS use.",
+    "project": "projects/dns/python/mitmproxy",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 4113220,
+      "source": "https://pypistats.org/api/packages/mitmproxy/recent",
+      "captured_at_utc": "2026-11-17T22:56:58.987716+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 3,
+    "afl_feedback": "data/python/dns/mitmproxy-feedback-differential.json"
+  },
+  {
     "name": "dpkt",
     "version": "1.9.8",
     "license": "BSD-3-Clause",
@@ -306,7 +410,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 3,
+    "rank": 4,
     "afl_feedback": "data/python/dns/dpkt-feedback-differential.json"
   },
   {
@@ -409,7 +513,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 4,
+    "rank": 5,
     "afl_feedback": "data/python/dns/dnslib-feedback-differential.json"
   },
   {
@@ -512,7 +616,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 5,
+    "rank": 6,
     "afl_feedback": "data/python/dns/py3dns-feedback-differential.json"
   },
   {
@@ -615,7 +719,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 6,
+    "rank": 7,
     "afl_feedback": "data/python/dns/dns-messages-feedback-differential.json"
   }
 ]

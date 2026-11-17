@@ -1,0 +1,94 @@
+{
+  "kind": "third_party",
+  "api": "mitmproxy.dns.DNSMessage.unpack(local DNS message bytes)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:19:27.547984+00:00",
+  "manifest": "projects/dns/python/mitmproxy/manifest.json",
+  "image_id": "sha256:35177378dbb9b09f64cc9f4e04d06dba26e543988e9514d14c28517eaa41eae8",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: mitmproxy",
+    "Version: 12.3.1",
+    "Name: mitmproxy_rs",
+    "Version: 0.12.16",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "88f137c0e5b838e4e18fefc9bdb30b46e0956b6889e050c7646c5c488ead8904  mitmproxy/dns.py",
+    "5dd691893c86d41771599b25de9e7ddb84bd9871f1925832775ce73e54d2f87a  mitmproxy/net/dns/domain_names.py"
+  ],
+  "source_sha256": "87afb808ac8d55383dbe6aa30eadeb0fedaeffd26210e7e23c25c9cd43bdb36a",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "ad883c0f3678faa927e9707d9e67ba4875e30026ad6fd5859d06220fb09826f4",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "bf9aa61a298cc14de881d8971ef6b0976088c4d41b1d3d2def014fc59fd2c2e7",
+    "manifest.json": "87947e6ef7efa478e37889c919710ff547e49745319e3e218acec5f049d38d59",
+    "replay.py": "8469c6ca26ca57239ed03648026e14ecfa66a80aefd8448a1ebc83adfb7b5938",
+    "run-control.py": "077861bc818ce797263ab96904a05ab722cea93c79f0295453ac8b4f11a88f69",
+    "runtime-requirements.lock": "cf1890de76c129333bee153b7b438d639917d670f61ada62df8fac7e85fb87ad"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 2,
+  "parser_source_lines_covered": 160,
+  "format_specific_source_lines_covered": 61,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/python/mitmproxy/target/coverage/coverage.json",
+  "pass": true
+}

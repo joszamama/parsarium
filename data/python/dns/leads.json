@@ -243,5 +243,19 @@
     "primary_metric_value": 15068322,
     "verification": "projects/dns/python/twisted/verification.json",
     "reason": "Pinned 26.10.0 passes both DNS controls; see parsers.json and data/python/dns/twisted-feedback-differential.json."
+  },
+  {
+    "name": "mitmproxy",
+    "found_by": "round-3 documentation lead (mitmproxy API reference for mitmproxy.dns; the package name does not contain 'dns', so the PyPI name search cannot list it); metric in registry-snapshot.json round2_targeted",
+    "documentation": "https://docs.mitmproxy.org/stable/api/mitmproxy/dns.html#DNSMessage.unpack",
+    "input_api_lead": "mitmproxy.dns.DNSMessage.unpack(buffer)",
+    "family": "mitmproxy DNS (mitmproxy/dns.py, mitmproxy/net/dns)",
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 16,
+    "status": "resolved_verified_selected",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 4113220,
+    "verification": "projects/dns/python/mitmproxy/verification.json",
+    "reason": "Pinned 12.3.1 passes both DNS controls; see parsers.json and data/python/dns/mitmproxy-feedback-differential.json."
   }
 ]

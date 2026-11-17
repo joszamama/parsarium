@@ -1,0 +1,36 @@
+{
+  "checked_at_utc": "2026-11-17T23:23:49.427296+00:00",
+  "project": "dns/python/mitmproxy",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "/opt/venv/lib/python3.14/site-packages/mitmproxy/",
+  "base_image_id": "sha256:35177378dbb9b09f64cc9f4e04d06dba26e543988e9514d14c28517eaa41eae8",
+  "overlay_image_id": "sha256:88a1505df777cba7fe76d4ee0b139b2fcd098624077ee7181df15c284ec5a802",
+  "overlay_receipt_sha256": "d678af35c417bfffaa3b89c85204c16c95d5dd0cdd4d7471a0213088ccf88076",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 160,
+  "variant_parser_features": 69,
+  "parser_feature_difference": 91,
+  "control_afl_tuples": 180,
+  "variant_afl_tuples": 89,
+  "afl_tuple_difference": 91,
+  "control_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/mitmproxy/dns.py": 61,
+    "/opt/venv/lib/python3.14/site-packages/mitmproxy/net/dns/domain_names.py": 99
+  },
+  "variant_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/mitmproxy/dns.py": 45,
+    "/opt/venv/lib/python3.14/site-packages/mitmproxy/net/dns/domain_names.py": 24
+  },
+  "mutation_campaign_run": false
+}
