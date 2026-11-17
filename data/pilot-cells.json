@@ -647,10 +647,10 @@
     {
       "ecosystem": "rust",
       "format": "json",
-      "status": "pilot_nine_paths_verified_search_bounded",
+      "status": "pilot_ten_paths_verified_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 9,
+      "verified_third_party_count": 10,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "json",
@@ -671,8 +671,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 600,
       "unique_search_hits": 476,
-      "unresolved_documentation_leads": 12,
-      "uncertainty": "Nine verified Rust JSON parser paths selected within the first 100 hits of six crates.io queries (600 hits, 476 unique), captured 2026-11-17. Twelve documented leads remain unverified, including higher-download ijson (1,818,125) with unresolved shared-family status, so this is a bounded pilot rather than a complete top-ten ranking. Downloads are 90-day adoption proxies that include transitive pulls. gjson is a path-query parser: its parse/get calls assume valid input, so the adapter first calls its own whole-root valid function and then traverses every child through Value::each. The Rust and Go tidwall GJSON packages share design/maintainer lineage but have separate source implementations. Two small valid controls establish only their observed RFC 8259 structure; duplicate keys, huge numbers, deep nesting and non-UTF-8 are untested.",
+      "unresolved_documentation_leads": 10,
+      "uncertainty": "Ten verified Rust JSON parser paths selected within the first 100 hits of six crates.io queries (600 hits, 476 unique), captured 2026-11-17. Ten documented leads remain unverified, so this is a bounded pilot rather than a complete top-ten ranking. ijson 0.1.7 was excluded after source inspection: it has an IValue type deserialized through serde_json::from_slice and no own local JSON parser API. Downloads are 90-day adoption proxies that include transitive pulls. Two small valid controls establish only observed RFC 8259 structure; duplicate keys, huge numbers, deep nesting and non-UTF-8 are untested.",
       "third_party_evidence": "data/rust/json/parsers.json",
       "third_party_control_results": [
         "projects/json/rust/serde_json/verification.json",
@@ -683,7 +683,8 @@
         "projects/json/rust/json_crate/verification.json",
         "projects/json/rust/hifijson/verification.json",
         "projects/json/rust/miniserde/verification.json",
-        "projects/json/rust/gjson/verification.json"
+        "projects/json/rust/gjson/verification.json",
+        "projects/json/rust/json_syntax/verification.json"
       ],
       "runtime_evidence": "data/rust/json/standard.json",
       "registry_snapshot": "data/rust/json/registry-snapshot.json",

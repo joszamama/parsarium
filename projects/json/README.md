@@ -46,6 +46,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [hifijson / Rust](rust/hifijson/README.md)
 - [jiter / Rust](rust/jiter/README.md)
 - [json / Rust](rust/json_crate/README.md)
+- [json-syntax / Rust](rust/json_syntax/README.md)
 - [miniserde / Rust](rust/miniserde/README.md)
 - [serde_json / Rust](rust/serde_json/README.md)
 - [simd-json / Rust](rust/simd_json/README.md)
