@@ -1,4 +1,4 @@
-"""The Python XML xmlschema candidate keeps its catalog entry, lock, oracle check, receipts, and feedback consistent."""
+"""The selected Python XML xmlschema path keeps its pins, oracle, receipts and feedback consistent."""
 
 from hashlib import sha256
 import json
@@ -12,7 +12,9 @@ PROJECT = ROOT / "projects/xml/python/xmlschema"
 OVERLAY = ROOT / "fuzzing/afl-native/xml/python/xmlschema"
 LXML = ROOT / "projects/xml/python/lxml"
 XMLTODICT = ROOT / "projects/xml/python/xmltodict"
-CANDIDATE = BASE / "xmlschema-candidate.json"
+
+def parser_entry() -> dict:
+    return next(item for item in read(BASE / "parsers.json") if item["name"] == "xmlschema")
 
 
 def read(path: Path) -> object:
@@ -20,29 +22,23 @@ def read(path: Path) -> object:
 
 
 class PythonXmlXmlschemaPilotTest(unittest.TestCase):
-    def test_candidate_entry_matches_lead_and_family(self):
-        candidate = read(CANDIDATE)
-        parser = candidate["parsers_json_entry"]
-        lead = candidate["leads_json_entry"]
-        old, = [lead for lead in read(BASE / "leads.json")["leads"] if lead["name"] == "xmlschema"]
-        self.assertIn(old["status"], ("lead", "promoted_to_verified"))
-        self.assertEqual(candidate["replaced_lead"]["last_month"], old["last_month"])
+    def test_selected_entry_matches_lead_and_family(self):
+        parser = parser_entry()
+        lead, = [item for item in read(BASE / "leads.json")["leads"] if item["name"] == "xmlschema"]
         self.assertEqual(lead["status"], "promoted_to_verified")
         self.assertEqual(parser["popularity"]["value"], lead["last_month"], 7391962)
         self.assertEqual(parser["popularity"]["observed_on_utc"], "2026-11-17")
         self.assertIn("Expat XML parser", parser["shared_families"])
         self.assertIn("not an independent XML engine", parser["verification_note"])
-        self.assertTrue(candidate["expat_family_path"].startswith("xmlschema"))
-        # Once integrated, the shared cell files must carry the same entry.
-        integrated = [item for item in read(BASE / "parsers.json") if item["name"] == "xmlschema"]
-        if integrated:
-            self.assertEqual(integrated, [parser])
+        expat_family = next(item for item in read(BASE / "verification.json")["families"]
+                            if item["family"] == "Expat XML parser")
+        self.assertIn("xmlschema", expat_family["paths"][-1])
 
     def test_release_lock_matches_manifest_and_dockerfile(self):
         manifest = read(PROJECT / "manifest.json")
-        candidate = read(CANDIDATE)
-        lock = candidate["source_lock_entries"]["xmlschema"]
-        elementpath = candidate["source_lock_entries"]["elementpath_for_xmlschema"]
+        locks = read(BASE / "source-lock.json")
+        lock = locks["xmlschema"]
+        elementpath = locks["elementpath_for_xmlschema"]
         requirements = (PROJECT / "runtime-requirements.lock").read_text()
         dockerfile = (PROJECT / "Dockerfile").read_text()
         self.assertEqual(lock["sha256"], manifest["source_sha256"])
@@ -64,11 +60,10 @@ class PythonXmlXmlschemaPilotTest(unittest.TestCase):
         # BytesIO keeps short inputs from being read as URLs or file paths.
         self.assertIn("XMLResource(BytesIO(data))", (PROJECT / "harness.py").read_text())
 
-    def test_project_receipt_matches_candidate(self):
+    def test_project_receipt_matches_selected_record(self):
         manifest = read(PROJECT / "manifest.json")
         receipt = read(PROJECT / "verification.json")
-        candidate = read(CANDIDATE)
-        parser = candidate["parsers_json_entry"]
+        parser = parser_entry()
         self.assertEqual(manifest["catalog_parser"], "data/python/xml/parsers.json")
         self.assertEqual((parser["name"], parser["version"]), (manifest["package"], manifest["release"]))
         self.assertTrue(receipt["pass"])
@@ -83,7 +78,8 @@ class PythonXmlXmlschemaPilotTest(unittest.TestCase):
             self.assertEqual(sha256((ROOT / control).read_bytes()).hexdigest(), digest)
         for name, digest in receipt["project_file_sha256"].items():
             self.assertEqual(sha256((PROJECT / name).read_bytes()).hexdigest(), digest, name)
-        record = candidate["verification_json_record"]
+        record = next(item for item in read(BASE / "verification.json")["third_party"]
+                      if item["package"] == "xmlschema")
         self.assertEqual(record["project_receipt_sha256"],
                          sha256((PROJECT / "verification.json").read_bytes()).hexdigest())
         self.assertEqual(record["output"], receipt["output"])

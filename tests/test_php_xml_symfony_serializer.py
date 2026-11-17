@@ -26,7 +26,8 @@ def read(path: Path) -> object:
 class PhpXmlSymfonySerializerTest(unittest.TestCase):
     def setUp(self):
         self.manifest = read(PROJECT / "manifest.json")
-        self.parser, = read(ROOT / self.manifest["catalog_parser"])
+        self.parser, = [item for item in read(ROOT / self.manifest["catalog_parser"])
+                        if item["name"] == PACKAGE]
 
     def test_both_controls_match_the_qualified_name_oracle(self):
         target = read(PROJECT / "target.json")["expected_by_control_sha256"]

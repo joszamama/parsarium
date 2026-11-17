@@ -1,8 +1,8 @@
 # symfony/serializer — XML / PHP
 
-Pinned release: `v8.1.11`. [Manifest](manifest.json) · [verification receipt](verification.json) · [AFL++ overlay receipt](../../../../fuzzing/afl-native/xml/php/symfony_serializer/verification.json)
+Pinned release: `v8.1.11`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../data/php/xml/symfony-serializer-parser.json)
+[API, control result, and parser family](../../../../catalog/xml/php/symfony-serializer/README.md)
 
 ## Run from the repository root
 

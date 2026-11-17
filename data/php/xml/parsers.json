@@ -58,6 +58,61 @@
     ]
   },
   {
+    "name": "symfony/serializer",
+    "version": "v8.1.11",
+    "license": "MIT",
+    "license_evidence": "https://github.com/symfony/serializer/blob/05624c94507c3acf065b6486bb626f0d741af459/LICENSE",
+    "documentation": "https://symfony.com/doc/current/serializer/encoders.html#the-xmlencoder",
+    "source": "https://github.com/symfony/serializer/tree/05624c94507c3acf065b6486bb626f0d741af459",
+    "input_api": "new XmlEncoder() then XmlEncoder::decode(string $data, 'xml') (DecoderInterface; Serializer::decode delegates to it). With the default context it calls DOMDocument::loadXML with LIBXML_NONET | LIBXML_NOBLANKS, rejects any libxml error or a DOCTYPE, skips comments and processing instructions, and returns the root element's content as a PHP array",
+    "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard DOMDocument path, sabre/xml (XMLReader) and symfony/dom-crawler",
+    "package_own_scope": "XmlEncoder's DOM-to-array mapping: root selection and DOCTYPE rejection, '@'-keyed attributes with numeric type casting, '#' text next to attributes, grouping same-named siblings into lists, the item/@key convention, and the root's in-scope namespace declarations from a DOMXPath namespace::* query. Tokenizing, well-formedness, entity and CDATA decoding and namespace binding are libxml2.",
+    "adapter": "projects/xml/php/symfony_serializer/harness.php",
+    "source_lock": "projects/xml/php/symfony_serializer/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root_namespaces": {
+        "": "urn:parsarium:item",
+        "c": "urn:parsarium:catalog"
+      },
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "family": "libxml2 via PHP DOMDocument, shared with the standard path, sabre/xml and symfony/dom-crawler",
+    "project": "projects/xml/php/symfony_serializer/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 384296452,
+      "source": "https://packagist.org/packages/symfony/serializer",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative downloads of the whole Serializer component, rank 3 in the snapshot's 'xml' query. They are a package adoption proxy, not XML-decoding uses: most installs come with Symfony and API Platform applications for object normalization and JSON, and XmlEncoder is one of several encoders in the package. It shares the libxml2 parser family with the standard path, sabre/xml and symfony/dom-crawler."
+    },
+    "caveats": [
+      "decode() returns the root element's content, not its name, so the summary has no root field; root descendants, attributes and text are compared.",
+      "Element and attribute names are qualified (prefix:local). Namespace URIs are reported only as the root's in-scope declarations ('@xmlns', '@xmlns:p'); declarations on descendants are not reported, so the order control's <plain xmlns=\"\"> undeclaration is invisible and resolving plain through the root bindings would give the wrong namespace. The oracle therefore parses without namespace processing and keeps only the root declarations.",
+      "Same-named siblings are grouped into one list keyed by name, so document order is recoverable only when they are adjacent (true for both controls). Comments and processing instructions are skipped by default. Numeric attribute values are type-cast (version=\"1\" decodes as int 1); the summary prints them with json_encode.",
+      "decode() uses LIBXML_NOBLANKS, rejects any libxml error or DOCTYPE with NotEncodableValueException, and was run only on the valid controls.",
+      "Xdebug covers 69 XmlEncoder.php lines on catalog-ns.xml and 70 on order-default-ns.xml; 5 differ (attributes plus text: 245, 247; top-level comment skip, empty element, PI skip: 136, 300, 311). AFL++ feedback comes from a native overlay that runs the same XmlEncoder harness on PHP 8.5.12 and libxml2 2.15.4 with only libxml2 parser.c, parserInternals.c, SAX2.c and PHP ext/dom/document.c instrumented; XmlEncoder's own lines do not reach the AFL++ map."
+    ]
+  },
+  {
     "name": "sabre/xml",
     "version": "4.1.0",
     "license": "BSD-3-Clause",
