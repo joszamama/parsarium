@@ -127,6 +127,27 @@ class JavaYamlPilotTest(unittest.TestCase):
         self.assertEqual(decisions["com.charleskorn.kaml:kaml-jvm"], "fails_control")
         self.assertEqual(decisions["org.wso2.orbit.org.yaml:snakeyaml"], "excluded")
 
+    def test_round_three_closes_every_recorded_lead(self):
+        leads = read(DATA / "leads.json")
+        snapshot = read(DATA / "registry-snapshot.json")
+        decisions = {lead["name"]: lead for lead in leads}
+        # The cell stays below ten only because no positive-metric lead is left undecided.
+        self.assertFalse([name for name, lead in decisions.items() if lead["status"] == "unresolved"])
+        self.assertLess(self.cell["verified_third_party_count"], 10)
+        for name in ("io.circe:circe-yaml-v12_2.13", "dev.dejvokep:boosted-yaml", "net.jcazevedo:moultingyaml_2.12",
+                     "io.maryk:maryk-yaml-jvm", "org.apache.commons:commons-configuration2"):
+            self.assertEqual(decisions[name]["status"], "fails_control", name)
+        for name in ("org.springframework:spring-beans", "dev.zio:zio-json-yaml_2.12", "dev.zio:zio-json-yaml_3",
+                     "org.treblereel.gwt.yaml:eo-yaml", "org.noear:solon.config.yaml"):
+            self.assertEqual(decisions[name]["status"], "excluded", name)
+        self.assertIn("70%", decisions["io.circe:circe-yaml-v12_2.13"]["reason"])
+        round3 = snapshot["round_3_targeted_leads"]
+        for name in round3["leads_added"]:
+            self.assertIn(name, decisions)
+        for name, metric in round3["zero_metric_hits_not_leads"].items():
+            self.assertEqual(metric["value"], 0, name)
+            self.assertNotIn(name, decisions)
+
 
 if __name__ == "__main__":
     unittest.main()
