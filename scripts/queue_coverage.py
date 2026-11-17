@@ -24,6 +24,7 @@ MAX_QUEUE_SAMPLE = 128
 MAX_PROFILE_BYTES = 256 << 20
 MAX_PROFILE_FILES = 1024
 MAX_EXPORT_BYTES = 128 << 20
+MAX_PYTHON_TRACE_BYTES = 16 << 20
 
 
 class QueueCoverageError(ValueError):
@@ -256,6 +257,139 @@ def replay_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
         if not any(item.get("filename", "").startswith(prefix) for item in files):
             raise QueueCoverageError("aggregate has no instrumented parser source files")
         replay["profdata_sha256"] = digest(merged)
+        replay["coverage_sha256"] = digest(exported)
+        replay["coverage_bytes"] = exported.stat().st_size
+    return replay, coverage
+
+
+def replay_python_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
+                        timeout: int) -> tuple[dict, dict | None]:
+    """Replay saved inputs through the pinned Python harness and union parser lines.
+
+    Python's ``trace`` module observes package source executed in the same
+    control image used for verification. It cannot claim native extension
+    lines, uncovered lines, or a coverage percentage.
+    """
+    manifest = evidence["manifest"]
+    if evidence["identity"]["ecosystem"] != "python" or \
+            evidence["feedback"]["coverage_kind"] != "source_lines":
+        raise QueueCoverageError("Python source replay needs a Python source-line project")
+    if not 1 <= maximum <= MAX_QUEUE_SAMPLE or not 1 <= timeout <= 60:
+        raise QueueCoverageError("queue sample must be 1–128 and timeout 1–60 seconds")
+    interpreter = manifest.get("fuzz_smoke_entrypoint")
+    if interpreter not in ("/opt/venv/bin/python", "/usr/local/bin/python") or \
+            not (evidence["project"] / "harness.py").is_file():
+        raise QueueCoverageError("project has no supported Python harness/interpreter")
+    primary_prefix = manifest.get("coverage_subject_prefix", "")
+    if not isinstance(primary_prefix, str) or not (
+            "site-packages/" in primary_prefix or
+            primary_prefix.startswith(("/usr/local/lib/python", "/usr/lib/python"))):
+        raise QueueCoverageError("Python trace supports installed Python package source only; "
+                                 "this project needs native source replay")
+    prefixes = [manifest["coverage_subject_prefix"]]
+    if manifest.get("underlying_coverage_subject_prefix"):
+        prefixes.append(manifest["underlying_coverage_subject_prefix"])
+    if any(not isinstance(prefix, str) or not prefix.startswith("/") for prefix in prefixes):
+        raise QueueCoverageError("Python parser source prefixes must be absolute")
+    plan, _ = plan_for(run_dir, root, evidence)
+    total, selected = queue_files(run_dir, maximum)
+    if not selected:
+        raise QueueCoverageError("no saved AFL++ queue inputs exist yet")
+    image_id = evidence["receipt"].get("image_id")
+    inspect = subprocess.run(["docker", "image", "inspect", image_id, "--format",
+                              "{{.Id}} {{.Os}}/{{.Architecture}}"], capture_output=True,
+                             text=True, timeout=15)
+    if inspect.returncode or inspect.stdout.strip() != f"{image_id} {manifest['platform']}":
+        raise QueueCoverageError("verified coverage image is unavailable or has the wrong platform")
+    script = root / "scripts/python_queue_trace.py"
+    script_sha = digest(script)
+    common = ["docker", "run", "--rm", "--pull", "never", "--platform", manifest["platform"],
+              "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt",
+              "no-new-privileges", "--memory", "2g", "--pids-limit", "128",
+              "--ulimit", "core=0", "--ulimit", "fsize=67108864:67108864",
+              "--user", f"{os.getuid()}:{os.getgid()}",
+              "--tmpfs", "/tmp:rw,exec,nosuid,size=64m" if manifest.get("tmpfs_exec") else
+              "/tmp:rw,nosuid,size=64m", "--workdir", "/tmp", "-e", "HOME=/tmp",
+              "-e", "XDG_CACHE_HOME=/tmp"]
+    inputs = []
+    union: dict[str, set[int]] = {}
+    with tempfile.TemporaryDirectory(prefix="parsarium-python-queue-") as temp:
+        scratch = Path(temp)
+        for number, (label, original) in enumerate(selected):
+            try:
+                descriptor = os.open(original, os.O_RDONLY | os.O_NOFOLLOW)
+            except OSError as error:
+                raise QueueCoverageError(f"queue input cannot be opened without links: {label}") from error
+            with os.fdopen(descriptor, "rb") as source:
+                metadata = os.fstat(source.fileno())
+                if not stat.S_ISREG(metadata.st_mode) or metadata.st_size > MAX_CASE_BYTES:
+                    raise QueueCoverageError(f"queue input is invalid or too large: {label}")
+                data = source.read(MAX_CASE_BYTES + 1)
+            if len(data) != metadata.st_size:
+                raise QueueCoverageError(f"queue input changed while reading: {label}")
+            sample = scratch / f"{number:03d}.input"
+            sample.write_bytes(data)
+            traced = scratch / f"{number:03d}.json"
+            container_name = f"parsarium-report-{uuid.uuid4().hex[:16]}"
+            command = [*common, "--name", container_name,
+                       "-v", f"{sample}:/input/case:ro",
+                       "-v", f"{script}:/input/python_queue_trace.py:ro",
+                       "-v", f"{scratch}:/coverage",
+                       "--entrypoint", interpreter, image_id,
+                       "/input/python_queue_trace.py", "/input/case",
+                       f"/coverage/{number:03d}.json", json.dumps(prefixes)]
+            try:
+                result = subprocess.run(command, stdout=subprocess.DEVNULL,
+                                        stderr=subprocess.DEVNULL, timeout=timeout)
+                status, exit_code = ("ok" if result.returncode == 0 else "exit"), result.returncode
+            except subprocess.TimeoutExpired:
+                subprocess.run(["docker", "rm", "-f", container_name],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
+                status, exit_code = "timeout", None
+            if exit_code in (125, 126, 127):
+                raise QueueCoverageError(f"Docker could not replay queue input {label} (exit {exit_code})")
+            item = {"queue_path": label, "sha256": sha256(data).hexdigest(),
+                    "bytes": len(data), "status": status, "exit_code": exit_code,
+                    "trace_files": 0}
+            if traced.is_file():
+                if traced.stat().st_size > MAX_PYTHON_TRACE_BYTES:
+                    raise QueueCoverageError(f"Python trace exceeds size limit: {label}")
+                record = json.loads(traced.read_bytes())
+                if record.get("outcome") not in ("ok",) and not str(record.get("outcome", "")).startswith("exception:"):
+                    raise QueueCoverageError(f"Python trace outcome is invalid: {label}")
+                item["target_outcome"] = record["outcome"]
+                files = record.get("files")
+                if not isinstance(files, list):
+                    raise QueueCoverageError(f"Python trace has no file list: {label}")
+                for entry in files:
+                    name, lines = entry.get("filename"), entry.get("executed_lines")
+                    if not isinstance(name, str) or not any(name.startswith(p) for p in prefixes) or \
+                            not isinstance(lines, list) or lines != sorted(set(lines)) or \
+                            any(type(line) is not int or line < 1 or line > 10_000_000 for line in lines):
+                        raise QueueCoverageError(f"Python trace contains invalid parser lines: {label}")
+                    union.setdefault(name, set()).update(lines)
+                item["trace_files"] = len(files)
+                item["trace_sha256"] = digest(traced)
+            inputs.append(item)
+        replay = {"status": "source_replay" if union else "no_profiles",
+                  "mechanism": "Python trace of package source in verified control image",
+                  "plan_sha256": digest(run_dir / "plan.json"),
+                  "afl_image_id": plan["image_id"], "coverage_image_id": image_id,
+                  "coverage_binary": interpreter, "llvm_cov_objects": [],
+                  "trace_script_sha256": script_sha,
+                  "queue_inputs_available": total, "queue_inputs_sampled": len(inputs),
+                  "selection": "lexicographically first AFL id files across instances",
+                  "timeout_seconds_per_input": timeout, "inputs": inputs}
+        if not union:
+            return replay, None
+        coverage = {"data": [{"files": [
+            {"filename": name, "executed_lines": sorted(lines),
+             "summary": {"lines": {"covered": len(lines)}}}
+            for name, lines in sorted(union.items())]}]}
+        exported = scratch / "coverage.json"
+        exported.write_text(json.dumps(coverage, sort_keys=True) + "\n")
+        if exported.stat().st_size > MAX_EXPORT_BYTES:
+            raise QueueCoverageError("aggregate Python source export exceeds size limit")
         replay["coverage_sha256"] = digest(exported)
         replay["coverage_bytes"] = exported.stat().st_size
     return replay, coverage

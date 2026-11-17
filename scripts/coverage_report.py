@@ -25,7 +25,8 @@ import zipfile
 
 import run_case
 from run_case import MAX_CASE_BYTES, project_for
-from queue_coverage import QueueCoverageError, export_objects, plan_for, queue_files, replay_queue
+from queue_coverage import (QueueCoverageError, export_objects, plan_for, queue_files,
+                            replay_python_queue, replay_queue)
 
 
 LLVM_EXPORT_TYPE = "llvm.coverage.json.export"
@@ -376,18 +377,30 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
         run["campaign_status"] = receipt.get("status")
     if not replay:
         return run, None
-    if evidence["identity"]["ecosystem"] not in {"c", "cpp"} or \
+    ecosystem = evidence["identity"]["ecosystem"]
+    if ecosystem not in {"c", "cpp", "python"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
         run["queue_replay_unsupported"] = (
-            "Source replay currently supports LLVM-covered C/C++ projects; "
+            "Source replay currently supports LLVM-covered C/C++ and Python source-line projects; "
             "this project's saved AFL++ feedback remains separately documented.")
         return run, None
-    try:
-        export_objects(evidence["project"])
-    except (QueueCoverageError, OSError) as error:
-        run["queue_replay_unsupported"] = str(error)
-        return run, None
-    sample, coverage = replay_queue(run_dir, root, evidence, sample_limit, timeout)
+    if ecosystem in {"c", "cpp"}:
+        try:
+            export_objects(evidence["project"])
+        except (QueueCoverageError, OSError) as error:
+            run["queue_replay_unsupported"] = str(error)
+            return run, None
+        sample, coverage = replay_queue(run_dir, root, evidence, sample_limit, timeout)
+    else:
+        try:
+            sample, coverage = replay_python_queue(run_dir, root, evidence,
+                                                   sample_limit, timeout)
+        except QueueCoverageError as error:
+            if "no supported Python harness/interpreter" in str(error) or \
+                    "needs native source replay" in str(error):
+                run["queue_replay_unsupported"] = str(error)
+                return run, None
+            raise
     run["queue_sample"] = sample
     run["inputs"] = sample["inputs"]
     if coverage is not None:
@@ -660,9 +673,9 @@ def index_page(report: dict) -> str:
             rows = [(escape(item["queue_path"], 1000), f"<code>{escape(item['sha256'])}</code>",
                      item["bytes"], escape(item["status"]),
                      item["exit_code"] if item["exit_code"] is not None else "",
-                     item["profile_files"]) for item in run["inputs"]]
+                     item.get("profile_files", item.get("trace_files", 0))) for item in run["inputs"]]
             run_table += table("Saved queue inputs replayed once (bytes are not embedded)",
-                               ("Queue file", "SHA-256", "Bytes", "Status", "Exit", "Profiles"),
+                               ("Queue file", "SHA-256", "Bytes", "Status", "Exit", "Profiles/traces"),
                                rows, numeric=(2, 4, 5))
     else:
         rows = [(f"<code>{escape(item['sha256'])}</code>", escape(item["label"]),
@@ -775,12 +788,12 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
         if run.get("queue_replay_unsupported"):
             statement = run["queue_replay_unsupported"]
         elif sample:
-            statement = ("No LLVM profiles were produced by the bounded queue replay; "
+            statement = ("No parser source traces were produced by the bounded queue replay; "
                          "no source coverage is claimed.")
         else:
             statement = ("AFL++ saves edge feedback and queue files, not source-line coverage. "
-                         "Use --replay-queue to replay up to 32 saved queue inputs in the "
-                         "verified coverage image.")
+                         "Use --replay-queue to replay up to 32 saved queue inputs in a "
+                         "supported verified coverage image.")
         coverage_info = {"status": "unsupported" if run.get("queue_replay_unsupported") else
                          "not_recorded", "statement": statement}
     elif kind == "native_binary_edges":
@@ -819,14 +832,19 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
             "php": ("PHP", "Xdebug coverage"),
         }[ecosystem]
         coverage_info = {"status": f"{ecosystem}_executed_lines",
-                         "statement": f"{mechanism} source lines executed by the verified valid "
-                                      "control. The export does not record unexecuted mapped "
+                         "statement": f"{mechanism} source lines executed by the "
+                                      f"{'bounded saved AFL++ queue sample' if run['kind'] == 'afl' else 'verified valid control'}. "
+                                      "The export does not record unexecuted mapped "
                                       "lines or per-line execution counts; no coverage "
                                       "percentage is inferred.",
                          "excluded_files": excluded, "groups": groups, "files": files}
         if not archives:
             warnings.append(f"No --source archive was supplied; {language} line views list executed "
                             "line numbers without source text.")
+        if run["kind"] == "afl" and ecosystem == "python":
+            warnings.append("Python queue tracing observes interpreted package source only; "
+                            "native extensions and their underlying libraries need a separate "
+                            "source replay.")
         if any(entry["source"]["status"] == "rejected_line_mismatch" for entry in files):
             warnings.append(f"Some {language} source files were rejected because executed lines exceed "
                             "the pinned archive length.")

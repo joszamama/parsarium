@@ -440,6 +440,58 @@ class CoverageReportTest(unittest.TestCase):
         self.assertIn("bounded AFL++ queue sample", report["coverage"]["statement"])
         self.assertTrue((self.base / "report/files/00001.html").is_file())
 
+    def test_bounded_python_queue_replay_unions_package_source_lines(self):
+        fixture = self.fixture()
+        fixture.afl_plan()
+        fixture.manifest.update({
+            "ecosystem": "python", "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+            "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/demo/",
+        })
+        (fixture.project / "harness.py").write_text("def fuzz_one_input(data): pass\n")
+        script = fixture.root / "scripts/python_queue_trace.py"
+        script.parent.mkdir()
+        script.write_bytes((ROOT / "scripts/python_queue_trace.py").read_bytes())
+        original_overlay = fixture.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        python_overlay = fixture.root / "fuzzing/afl-native/png/python/demo/verification.json"
+        python_overlay.parent.mkdir(parents=True)
+        python_overlay.write_bytes(original_overlay.read_bytes())
+        plan_path = fixture.run_dir / "plan.json"
+        plan = json.loads(plan_path.read_text())
+        plan["project"] = "png/python/demo"
+        plan["overlay_receipt_sha256"] = digest(python_overlay.read_bytes())
+        fixture.write_json(plan_path, plan)
+        evidence = {
+            "identity": {"format": "png", "ecosystem": "python", "slug": "demo"},
+            "manifest": fixture.manifest, "project": fixture.project,
+            "receipt": fixture.receipt,
+            "evidence": {"receipt_sha256": digest((fixture.project / "verification.json").read_bytes())},
+            "feedback": {"coverage_kind": "source_lines"},
+        }
+
+        def docker(command, **_):
+            if command[1:3] == ["image", "inspect"]:
+                return subprocess.CompletedProcess(command, 0, f"{IMAGE} linux/arm64\n", "")
+            output_mount = next(item for item in command if item.endswith(":/coverage"))
+            output_dir = Path(output_mount.removesuffix(":/coverage"))
+            output_name = Path(command[-2]).name
+            lines = [2, 4] if output_name == "000.json" else [2, 5]
+            (output_dir / output_name).write_text(json.dumps({
+                "outcome": "ok", "files": [{
+                    "filename": "/opt/venv/lib/python3.14/site-packages/demo/parser.py",
+                    "executed_lines": lines,
+                }],
+            }))
+            return subprocess.CompletedProcess(command, 0)
+
+        with mock.patch.object(queue_coverage.subprocess, "run", side_effect=docker):
+            replay, coverage = queue_coverage.replay_python_queue(
+                fixture.run_dir, fixture.root, evidence, 2, 15)
+        self.assertEqual(replay["queue_inputs_sampled"], 2)
+        self.assertEqual([item["trace_files"] for item in replay["inputs"]], [1, 1])
+        self.assertEqual(coverage["data"][0]["files"][0]["executed_lines"], [2, 4, 5])
+        self.assertEqual(replay["trace_script_sha256"], digest(script.read_bytes()))
+        self.assertRegex(replay["coverage_sha256"], r"^[0-9a-f]{64}$")
+
     def test_afl_queue_source_scope_and_input_limits_are_honest(self):
         fixture = self.fixture("native_binary_edges")
         queue = fixture.afl_plan()
