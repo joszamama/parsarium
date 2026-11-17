@@ -373,6 +373,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/go/github_com_blastrain_vitess_sqlparser_sqlparser/differential.json"
     },
     {
+      "package": "github.com/rqlite/sql",
+      "version": "v0.0.0-20261016220845-5c0832fea6e1",
+      "pass": true,
+      "input_api": "sql.NewParser(reader).ParseStatements() -> []sql.Statement",
+      "dialect": "SQLite (no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "rqlite/sql hand-written recursive-descent parser and scanner",
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 409,
+      "afl_tuple_difference": 279,
+      "parser_feature_difference": 279,
+      "project_receipt": "projects/sql/go/github_com_rqlite_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_rqlite_sql/differential.json"
+    },
+    {
       "package": "github.com/AfterShip/clickhouse-sql-parser/parser",
       "version": "v0.5.7",
       "pass": true,
@@ -558,5 +650,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:36:44.619085+00:00"
+  "checked_at_utc": "2026-11-17T20:36:46.065048+00:00"
 }

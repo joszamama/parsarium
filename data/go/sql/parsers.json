@@ -420,6 +420,111 @@
     }
   },
   {
+    "name": "github.com/rqlite/sql",
+    "version": "v0.0.0-20261016220845-5c0832fea6e1",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 30364cd71656839f9bddeebc791e4eba6ef87b31fe7eb25371baee380f2b62ea, MIT License)",
+    "input_api": "sql.NewParser(reader).ParseStatements() -> []sql.Statement",
+    "documentation": "https://pkg.go.dev/github.com/rqlite/sql@v0.0.0-20261016220845-5c0832fea6e1#Parser.ParseStatements",
+    "source": "https://proxy.golang.org/github.com/rqlite/sql/@v/v0.0.0-20261016220845-5c0832fea6e1.zip",
+    "source_sha256": "826738822b97cb48a38f4ea98f5996cdd9b12c573bdcd2639ec7fbe51d5dffec",
+    "go_module_sum": "h1:1mbwfLtm7LcV2n8F0n96ockOcVkuT2G0Jx/TpjzVChw=",
+    "dependencies": [],
+    "dialect": "SQLite (no dialect option)",
+    "scope": "Local SQL text parsed by rqlite/sql ParseStatements; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other SQLite syntax is untested.",
+    "family": "rqlite/sql hand-written recursive-descent parser and scanner",
+    "family_note": "sql.NewParser(reader).ParseStatements runs the package's own scanner (scanner.go) and hand-written recursive-descent parser (parser.go) and returns AST statements (ast.go). It is not generated from SQLite's Lemon grammar and shares no code with the engine. The adapter walks each statement with the package's sql.Walk visitor for QualifiedTableName base tables, JoinClause nodes with a JOIN keyword, Call names, NumberLit and StringLit values, and reads SelectStatement (Columns, WhereExpr, GroupByExprs, OrderingTerms) and InsertStatement (Table, Columns, ValueLists) fields. The module has no tagged releases; the pin is the proxy pseudo-version of commit 5c0832fea6e1 recorded in the snapshot.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 20,
+      "source": "https://pkg.go.dev/github.com/rqlite/sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_rqlite_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "github.com/AfterShip/clickhouse-sql-parser/parser",
     "version": "v0.5.7",
     "license": "MIT",
