@@ -106,5 +106,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "com.alibaba:druid",
+    "version": "1.2.28",
+    "license": "Apache-2.0",
+    "license_evidence": "druid-1.2.28.pom <license><name>Apache 2</name>",
+    "input_api": "SQLUtils.parseStatements(local SQL text, DbType.mysql) -> List<SQLStatement>",
+    "documentation": "https://github.com/alibaba/druid/wiki/SQL-Parser",
+    "source": "https://repo.maven.apache.org/maven2/com/alibaba/druid/1.2.28/druid-1.2.28-sources.jar",
+    "source_sha256": "42ba7b7fc7e1913fbcac5dcea5a94093765e251b135630b06c7d9a606ad514da",
+    "jar_sha256": "c4cec3792390a2bbe6020d59be52160fd38d15de0f00dc52702eb91128c695a5",
+    "dependencies": [],
+    "dialect": "DbType.mysql",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other DbType grammars are untested.",
+    "family": "Druid hand-written SQL lexer and recursive-descent parsers",
+    "family_note": "SQLUtils.parseStatements creates the MySQL statement parser (MySqlStatementParser, MySqlSelectParser, MySqlExprParser over the shared SQLStatementParser, SQLSelectParser, SQLExprParser and Lexer) and returns Druid SQL AST nodes. The adapter reads SQLSelectQueryBlock and SQLInsertStatement fields and collects tables, aggregate/method names and char/integer/number literals with an SQLASTVisitorAdapter. Independent of jOOQ, JSqlParser, Calcite and the Presto/Trino ANTLR grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1945,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.alibaba%3Adruid",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Most dependents use Druid's JDBC connection pool, which ships in the same artifact as the SQL parser."
+    },
+    "project": "projects/sql/java/druid",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

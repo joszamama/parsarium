@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "com.alibaba:druid",
+  "release": "1.2.28",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/druid/source-lock.json",
+  "source_sha256": "42ba7b7fc7e1913fbcac5dcea5a94093765e251b135630b06c7d9a606ad514da",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "DbType.mysql",
+  "parser_family": "Druid hand-written SQL lexer and recursive-descent parsers (com.alibaba.druid.sql.parser plus per-dialect subclasses) building Druid SQL AST nodes; independent of jOOQ, JSqlParser, Calcite and Presto/Trino",
+  "api": "SQLUtils.parseStatements(local SQL text, DbType.mysql) -> List<SQLStatement>; the harness reads SQLSelectQueryBlock (selectList, from join tree, where, groupBy, orderBy) and SQLInsertStatement (columns, valuesList) and collects tables, functions and literals with an SQLASTVisitorAdapter",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/druid-1.2.28.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.alibaba:druid:1.2.28 com.alibaba.druid.sql classes (lexer, parsers, AST, visitors) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/com/alibaba/druid/sql/parser/SQLExprParser.java",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed by the documented SQLUtils.parseStatements with DbType.mysql; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other DbType grammars are untested."
+}

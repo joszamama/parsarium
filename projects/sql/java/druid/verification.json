@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "SQLUtils.parseStatements(local SQL text, DbType.mysql) -> List<SQLStatement>; the harness reads SQLSelectQueryBlock (selectList, from join tree, where, groupBy, orderBy) and SQLInsertStatement (columns, valuesList) and collects tables, functions and literals with an SQLASTVisitorAdapter",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T18:52:00.670323+00:00",
+  "manifest": "projects/sql/java/druid/manifest.json",
+  "image_id": "sha256:f89b4417006c6edc08d4349ca79155a72d7118b8ecce3d0568cea09ad1b7eb22",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "42ba7b7fc7e1913fbcac5dcea5a94093765e251b135630b06c7d9a606ad514da",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "b4cd283b96995cb674ac538b0e53105abb710b394050ab1ef8f551548aa4ece4",
+    "SqlHarness.java": "864af181330b6f2b7e1282727966e16ca1ec37151d49f74dbdb762b38fd8bf4b",
+    "manifest.json": "a207ae2c6a1c6d1022278381ce1c6adc44eb34bd780a985bbf44106077290ee2",
+    "run-control.sh": "712c266f491846a1d8cd4ab5a2c8d08527e7b0801cc6a606122a3121685453d6",
+    "source-lock.json": "81cdeefbe939245f4578503a735e122084a1a45d829a412c1bbe373369d85f68"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 50,
+  "parser_source_lines_covered": 2644,
+  "format_specific_source_lines_covered": 383,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/java/druid/target/coverage/coverage.json",
+  "pass": true
+}

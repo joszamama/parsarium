@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T18:53:04.691513+00:00",
+  "project": "sql/java/druid",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "158e723babb523f79e3c45f39b2565da09ccd6180a216737fc99a406c98b07cf",
+  "overlay_receipt_sha256": "8ca18e30303343e6dc37953aa74a94feb5283d24ab8e4976f063bf764c80a2bd",
+  "base_image_id": "sha256:f89b4417006c6edc08d4349ca79155a72d7118b8ecce3d0568cea09ad1b7eb22",
+  "overlay_image_id": "sha256:8bb2b52b4c700b7926753037726bd6c9eb742a03ef105065b1851018b6963330",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 2589,
+  "second_afl_tuples": 1591,
+  "afl_tuple_difference": 1550,
+  "first_parser_features": 2644,
+  "second_parser_features": 1588,
+  "parser_feature_difference": 1614,
+  "first_only_features_by_file": {
+    "com/alibaba/druid/sql/ast/SQLObjectImpl.java": 2,
+    "com/alibaba/druid/sql/ast/SQLOrderBy.java": 10,
+    "com/alibaba/druid/sql/ast/SQLStatementImpl.java": 5,
+    "com/alibaba/druid/sql/ast/expr/SQLAggregateExpr.java": 19,
+    "com/alibaba/druid/sql/ast/expr/SQLAliasedExpr.java": 10,
+    "com/alibaba/druid/sql/ast/expr/SQLAllColumnExpr.java": 6,
+    "com/alibaba/druid/sql/ast/expr/SQLBinaryOpExpr.java": 19,
+    "com/alibaba/druid/sql/ast/expr/SQLBinaryOperator.java": 75,
+    "com/alibaba/druid/sql/ast/expr/SQLCharExpr.java": 3,
+    "com/alibaba/druid/sql/ast/expr/SQLIdentifierExpr.java": 3,
+    "com/alibaba/druid/sql/ast/expr/SQLIntegerExpr.java": 3,
+    "com/alibaba/druid/sql/ast/expr/SQLMethodInvokeExpr.java": 6,
+    "com/alibaba/druid/sql/ast/expr/SQLPropertyExpr.java": 16,
+    "com/alibaba/druid/sql/ast/statement/SQLExprTableSource.java": 6,
+    "com/alibaba/druid/sql/ast/statement/SQLJoinTableSource.java": 56,
+    "com/alibaba/druid/sql/ast/statement/SQLSelect.java": 22,
+    "com/alibaba/druid/sql/ast/statement/SQLSelectGroupByClause.java": 19,
+    "com/alibaba/druid/sql/ast/statement/SQLSelectItem.java": 12,
+    "com/alibaba/druid/sql/ast/statement/SQLSelectOrderByItem.java": 12,
+    "com/alibaba/druid/sql/ast/statement/SQLSelectQueryBase.java": 1,
+    "com/alibaba/druid/sql/ast/statement/SQLSelectQueryBlock.java": 51,
+    "com/alibaba/druid/sql/ast/statement/SQLSelectStatement.java": 15,
+    "com/alibaba/druid/sql/ast/statement/SQLTableSourceImpl.java": 3,
+    "com/alibaba/druid/sql/dialect/mysql/ast/statement/MySqlSelectQueryBlock.java": 6,
+    "com/alibaba/druid/sql/dialect/mysql/parser/MySqlExprParser.java": 85,
+    "com/alibaba/druid/sql/dialect/mysql/parser/MySqlLexer.java": 5,
+    "com/alibaba/druid/sql/dialect/mysql/parser/MySqlSelectParser.java": 94,
+    "com/alibaba/druid/sql/dialect/mysql/parser/MySqlStatementParser.java": 5,
+    "com/alibaba/druid/sql/parser/CharTypes.java": 2,
+    "com/alibaba/druid/sql/parser/DialectFeature.java": 4,
+    "com/alibaba/druid/sql/parser/Lexer.java": 100,
+    "com/alibaba/druid/sql/parser/SQLExprParser.java": 368,
+    "com/alibaba/druid/sql/parser/SQLParser.java": 28,
+    "com/alibaba/druid/sql/parser/SQLSelectParser.java": 227,
+    "com/alibaba/druid/sql/parser/SQLStatementParser.java": 11,
+    "com/alibaba/druid/sql/parser/SymbolTable.java": 2,
+    "com/alibaba/druid/sql/visitor/SQLASTVisitor.java": 24
+  },
+  "second_only_features_by_file": {
+    "com/alibaba/druid/sql/ast/SQLObjectImpl.java": 1,
+    "com/alibaba/druid/sql/ast/SQLStatementImpl.java": 2,
+    "com/alibaba/druid/sql/ast/expr/SQLCharExpr.java": 4,
+    "com/alibaba/druid/sql/ast/expr/SQLIntegerExpr.java": 4,
+    "com/alibaba/druid/sql/ast/expr/SQLNumberExpr.java": 21,
+    "com/alibaba/druid/sql/ast/statement/SQLInsertInto.java": 12,
+    "com/alibaba/druid/sql/ast/statement/SQLInsertStatement.java": 26,
+    "com/alibaba/druid/sql/dialect/mysql/ast/statement/MySqlInsertStatement.java": 7,
+    "com/alibaba/druid/sql/dialect/mysql/parser/MySqlExprParser.java": 6,
+    "com/alibaba/druid/sql/dialect/mysql/parser/MySqlStatementParser.java": 64,
+    "com/alibaba/druid/sql/parser/Lexer.java": 39,
+    "com/alibaba/druid/sql/parser/SQLExprParser.java": 19,
+    "com/alibaba/druid/sql/parser/SQLStatementParser.java": 69,
+    "com/alibaba/druid/sql/visitor/SQLASTVisitor.java": 5
+  }
+}
