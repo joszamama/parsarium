@@ -25,15 +25,20 @@ Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) an
 | sqlglot | 91,735,974 | selected | sqlglot tokenizer and recursive-descent parser |
 | sqlfluff | 11,606,805 | selected | sqlfluff lexer and dialect grammar matcher |
 | pglast | 10,961,367 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| sql-metadata | 4,518,030 | excluded | sqlparse (wrapper) |
+| sql-metadata | 4,518,030 | excluded | sqlglot (wrapper) |
 | sqlglotrs | 4,371,917 | excluded | sqlglot |
+| sqllineage | 1,022,544 | excluded | sqlparse and sqlfluff (wrapper) |
 | sql-formatter | 665,038 | excluded | — |
 | sqloxide | 511,801 | selected | sqlparser-rs |
 | moz-sql-parser | 106,687 | excluded | mo-sql-parsing |
+| sqlvalidator | 104,072 | unresolved_blocked | sqlvalidator hand-written lexer and parser |
 | mo-sql-parsing | 103,062 | selected | mo-sql-parsing grammar on the mo-parsing engine |
-| simple-ddl-parser | 79,894 | excluded | — |
-| psqlparse | 8,870 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| sqltree | 4,432 | unresolved | sqltree |
-| pg-query | 2,220 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| simple-ddl-parser | 79,894 | excluded | simple-ddl-parser PLY grammar |
+| pg-query-python | 16,148 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| psqlparse | 8,870 | unresolved_blocked | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| sqltree | 4,432 | unresolved_blocked | sqltree hand-written tokenizer and parser |
+| psqlparse2 | 3,025 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| pg-query | 2,220 | excluded | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| sqlparser | 2,053 | unresolved | — |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

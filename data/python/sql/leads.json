@@ -54,9 +54,9 @@
       "metric_value": 4518030,
       "metric_error": null,
       "latest_release_observed": "3.0.1",
-      "family": "sqlparse (wrapper)",
-      "documented_api_lead": null,
-      "reason": "Wrapper over sqlparse that extracts tables/columns; same sqlparse family, no own parser."
+      "family": "sqlglot (wrapper)",
+      "documented_api_lead": "sql_metadata.Parser",
+      "reason": "Re-checked in round 2: sql-metadata 3.0.1 depends on sqlglot>=30.12,<31 (not sqlparse, as recorded in round 1) and Parser(sql) exposes metadata only: query_type, tables, columns, columns_dict, columns_aliases, tables_aliases, values and values_dict. On controls/sql/select-join.sql it reports tables ['customers', 'orders'] and columns_dict select ['customers.region', 'orders.total', '*'], but no join count, no function names and no SELECT literals, so the protocol summary cannot be read from its documented API; reading its private sqlglot tree would be the selected sqlglot path. Excluded as a metadata wrapper over the sqlglot family, not padded under the Parsel precedent."
     },
     {
       "name": "sqlglotrs",
@@ -67,6 +67,16 @@
       "family": "sqlglot",
       "documented_api_lead": null,
       "reason": "Optional Rust tokenizer for sqlglot; not a separate parser API."
+    },
+    {
+      "name": "sqllineage",
+      "status": "excluded",
+      "metric_value": 1022544,
+      "metric_error": null,
+      "latest_release_observed": "1.5.9",
+      "family": "sqlparse and sqlfluff (wrapper)",
+      "documented_api_lead": "LineageRunner",
+      "reason": "Round-2 extension lead (PyPI Stats last_month 1,022,544, captured 2026-11-17). SQL lineage analyser that depends on sqlparse and sqlfluff (both selected) and reports source/target tables and column lineage, not a statement tree with the protocol summary. Excluded as a wrapper."
     },
     {
       "name": "sql-formatter",
@@ -100,6 +110,16 @@
       "reason": "Superseded name of mo-sql-parsing."
     },
     {
+      "name": "sqlvalidator",
+      "status": "unresolved_blocked",
+      "metric_value": 104072,
+      "metric_error": null,
+      "latest_release_observed": "0.0.20",
+      "family": "sqlvalidator hand-written lexer and parser",
+      "documented_api_lead": "sqlvalidator.parse",
+      "reason": "Round-2 extension lead (PyPI Stats last_month 104,072, captured 2026-11-17). sqlvalidator.parse(text).sql_query builds a SelectStatement tree for controls/sql/select-join.sql, but its SQLStatementParser raises ParsingError on controls/sql/insert-values.sql (it parses SELECT statements only), so the fixed second control fails."
+    },
+    {
       "name": "mo-sql-parsing",
       "status": "selected",
       "metric_value": 103062,
@@ -116,39 +136,69 @@
       "metric_value": 79894,
       "metric_error": null,
       "latest_release_observed": "1.13.0",
-      "family": null,
-      "documented_api_lead": null,
-      "reason": "DDL-only parser; cannot parse SELECT."
+      "family": "simple-ddl-parser PLY grammar",
+      "documented_api_lead": "DDLParser(...).run()",
+      "reason": "DDL-only parser, confirmed in round 2: simple-ddl-parser 1.13.0 DDLParser(text, silent=True).run() returns [] for both controls/sql/select-join.sql and controls/sql/insert-values.sql (no statement is recognised), so it cannot give the SELECT or INSERT summary."
+    },
+    {
+      "name": "pg-query-python",
+      "status": "unresolved",
+      "metric_value": 16148,
+      "metric_error": null,
+      "latest_release_observed": "0.1.3",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "pg_query.parse",
+      "reason": "Round-2 extension lead (PyPI Stats last_month 16,148, captured 2026-11-17). ctypes binding (BSD-3-Clause, 2026-03-25 sdist and cp311-cp313 wheels, no cp314 wheel) that loads a bundled libpg_query shared library and decodes its protobuf parse output with the protobuf runtime. Same libpg_query family as pglast; a coverage build would rebuild that library from the sdist with LLVM coverage plus line tracing of the Python decoder. Not run in this round."
     },
     {
       "name": "psqlparse",
-      "status": "unresolved",
+      "status": "unresolved_blocked",
       "metric_value": 8870,
       "metric_error": null,
       "latest_release_observed": "0.2.5",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "psqlparse.parse",
-      "reason": "Old libpg_query binding."
+      "reason": "psqlparse 0.2.5 (2016 sdist, SHA-256 b8beb4b389e6e3738bae19a48d4c2798124f464ab40c94b907bb2a3fda4c1d33) does not vendor its parser: build_libpg_query.sh downloads the moving libpg_query 9.5-latest branch archive at build time, so the parser source cannot be pinned by the package. A build attempt on Ubuntu (Python 3.14, gcc, bison, flex, unzip) downloaded that archive (SHA-256 ef18100add8d09e0450eefd4488a4c0c6174975a72058e9ac654ac66ecf467ee on 2026-11-17) and then failed compiling PostgreSQL 9.5's c.h: \"'bool' cannot be defined via 'typedef'\" (C23 default), so the extension was not built. No pinned, buildable path."
     },
     {
       "name": "sqltree",
-      "status": "unresolved",
+      "status": "unresolved_blocked",
       "metric_value": 4432,
       "metric_error": null,
       "latest_release_observed": "0.3.0",
-      "family": "sqltree",
-      "documented_api_lead": "sqltree.parse",
-      "reason": "Small SQL parser/formatter."
+      "family": "sqltree hand-written tokenizer and parser",
+      "documented_api_lead": "sqltree.api.sqltree",
+      "reason": "sqltree 0.3.0 (2022; no license field in its PyPI metadata) rejects both controls as given: sqltree.api.sqltree(text) raises TokenizeError('unexpected character ;') on the statement terminator that both controls end with, and the package has no documented statement splitter. With the terminator removed by hand it builds Select and Insert nodes, but the harness may not rewrite the control. Stays a lead with that evidence."
+    },
+    {
+      "name": "psqlparse2",
+      "status": "unresolved",
+      "metric_value": 3025,
+      "metric_error": null,
+      "latest_release_observed": "0.0.17",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "psqlparse2.parse",
+      "reason": "Round-2 extension lead (PyPI Stats last_month 3,025, captured 2026-11-17). libpg_query wrapper with protobuf output (2024-11-22 sdist and wheels); same family as pglast. Not run in this round."
     },
     {
       "name": "pg-query",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 2220,
       "metric_error": null,
       "latest_release_observed": "0.29",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
-      "documented_api_lead": "parse_sql",
-      "reason": "Old libpg_query binding (pg_query package)."
+      "documented_api_lead": null,
+      "reason": "pg_query 0.29 (2018, Lele Gaifax) is the predecessor PyPI name of pglast; its own description says the package was renamed to pglast and superseded. Excluded as a predecessor rename (trust-dns-proto precedent); pglast is the selected path and the two metrics are not combined."
+    },
+    {
+      "name": "sqlparser",
+      "status": "unresolved",
+      "metric_value": 2053,
+      "metric_error": null,
+      "latest_release_observed": "0.0.9",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-2 extension hit from the recorded 'sqlpars' query (PyPI Stats last_month 2,053, captured 2026-11-17). 2018 py3-none-any wheel whose summary says it parses and executes SQL queries, with no license field; no documented syntax-tree API was found. Not run."
     }
   ]
 }
