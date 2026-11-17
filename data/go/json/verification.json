@@ -1,12 +1,14 @@
 {
-  "checked_at_utc": "2026-11-17T02:52:53.159267+00:00",
+  "checked_at_utc": "2026-11-17T03:52:11.267341+00:00",
   "platform": "linux/arm64 Docker",
   "go": "go1.27.1",
   "controls": {
-    "nested_object": "controls/json/nested-object.json"
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
   },
   "control_sha256": {
-    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6"
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
   },
   "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
   "third_party": [
@@ -17,6 +19,47 @@
       "scope": "RFC 8259 JSON text decoded into interface{}",
       "command": "python3 scripts/run_project.py json go github_com_json_iterator_go",
       "receipt": "projects/json/go/github_com_json_iterator_go/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/goccy/go-json",
+      "module": "github.com/goccy/go-json",
+      "version": "v0.12.0",
+      "scope": "RFC 8259 JSON text decoded into interface{}",
+      "command": "python3 scripts/run_project.py json go github_com_goccy_go_json",
+      "receipt": "projects/json/go/github_com_goccy_go_json/verification.json",
       "pass": true,
       "output": {
         "arrays": 3,
@@ -92,5 +135,23 @@
       },
       "error": null
     }
-  ]
+  ],
+  "nested_array_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "nested_array_check": "Each harness.test TestControl replayed with /input/control=controls/json/nested-array.json reports exactly nested_array_expected_output (as its mismatch text against the nested-object expectation) for github.com/goccy/go-json, github.com/json-iterator/go, and encoding/json."
 }

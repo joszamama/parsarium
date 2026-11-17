@@ -49,5 +49,56 @@
       ]
     },
     "project": "projects/json/go/github_com_json_iterator_go"
+  },
+  {
+    "name": "github.com/goccy/go-json",
+    "module": "github.com/goccy/go-json",
+    "version": "v0.12.0",
+    "license": "MIT",
+    "input_api": "gojson.Unmarshal([]byte, interface{})",
+    "documentation": "https://pkg.go.dev/github.com/goccy/go-json@v0.12.0#Unmarshal",
+    "source": "https://github.com/goccy/go-json/tree/v0.12.0",
+    "scope": "RFC 8259 JSON text decoded into interface{}",
+    "family": "go-json compiled decoder",
+    "family_note": "Own type-compiled decoder in internal/decoder that scans the byte slice itself; it does not call encoding/json or json-iterator to decode. It imports encoding/json, encoding/json/v2, and encoding/json/jsontext for error, json.Number, and Unmarshaler/UnmarshalJSONFrom interoperability.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 4192,
+      "source": "https://pkg.go.dev/github.com/goccy/go-json?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/go/github_com_goccy_go_json"
   }
 ]

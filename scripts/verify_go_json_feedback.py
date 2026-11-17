@@ -11,7 +11,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_json_iterator_go", "stdlib_unmarshal")
+PROJECTS = ("github_com_goccy_go_json", "github_com_json_iterator_go", "stdlib_unmarshal")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 REPORT = ROOT / "data/go/json/afl-feedback.json"

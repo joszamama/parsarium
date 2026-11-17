@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "json",
-  "status": "pilot_one_selected_search_bounded",
+  "status": "pilot_two_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 1,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "json",
@@ -16,8 +16,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 500,
   "unique_search_hits": 474,
-  "unresolved_documentation_leads": 8,
-  "uncertainty": "Pilot cell: only the highest Imported-by general-purpose JSON parser lead (github.com/json-iterator/go, 18,454) was built and control-verified. Eight further numeric leads are logged in leads.json and are not selected or ranked. Non-parser hits such as loggers, JWT, JSON-RPC, and protobuf JSON mappers were not treated as leads. One valid nested object control does not establish complete RFC 8259 support.",
+  "unresolved_documentation_leads": 7,
+  "uncertainty": "Pilot cell: two general-purpose JSON decoders were built and control-verified: github.com/json-iterator/go (18,454 Imported by) and github.com/goccy/go-json (4,192). gjson (10,420) was passed over as a non-validating path-query API and ugorji/go/codec (10,142) as a multi-format codec whose Imported by count is not JSON-specific. Seven further numeric leads are logged in leads.json and are not selected or ranked. Non-parser hits such as loggers, JWT, JSON-RPC, and protobuf JSON mappers were not treated as leads. Valid nested-object and nested-array controls do not establish complete RFC 8259 support.",
   "third_party_evidence": "data/go/json/parsers.json",
   "third_party_control_results": "data/go/json/verification.json",
   "runtime_evidence": "data/go/json/standard.json",
