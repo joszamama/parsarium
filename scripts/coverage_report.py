@@ -1,8 +1,10 @@
 """Write an offline HTML and JSON report for one verified project run.
 
-RUN_DIR is either a valid-control coverage directory written by
-`parsarium.py build` (projects/F/E/S/target/coverage) or a `parsarium.py
-replay` run directory. Source text for the line view comes only from
+RUN_DIR is a valid-control coverage directory written by `parsarium.py build`
+(projects/F/E/S/target/coverage), a `parsarium.py replay` directory, or a
+prepared AFL++ directory. `--replay-queue` measures a bounded saved queue
+sample through the verified LLVM coverage image without starting AFL++.
+Source text for the line view comes only from
 explicit `--source CONTAINER_DIR=ARCHIVE` mappings whose SHA-256 matches the
 project manifest.
 
@@ -22,6 +24,7 @@ import zipfile
 
 import run_case
 from run_case import MAX_CASE_BYTES, project_for
+from queue_coverage import QueueCoverageError, export_objects, plan_for, queue_files, replay_queue
 
 
 LLVM_EXPORT_TYPE = "llvm.coverage.json.export"
@@ -339,6 +342,42 @@ def replay_run(run_dir: Path, evidence: dict, max_inputs: int) -> dict:
             "counts": counts, "inputs": inputs}
 
 
+def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
+            sample_limit: int, timeout: int) -> tuple[dict, dict | None]:
+    plan, _ = plan_for(run_dir, root, evidence)
+    total, _ = queue_files(run_dir, sample_limit)
+    run = {"kind": "afl", "summary_sha256": file_sha256(run_dir / "plan.json"),
+           "afl_image_id": plan["image_id"], "queue_inputs_available": total,
+           "queue_sample": None, "inputs": []}
+    campaign = run_dir / "campaign.json"
+    if campaign.is_file():
+        receipt = read_json(campaign, MAX_RECEIPT_BYTES)
+        if not isinstance(receipt, dict) or receipt.get("plan_sha256") != run["summary_sha256"] or \
+                receipt.get("image_id") != plan["image_id"]:
+            raise ReportError("AFL++ campaign receipt differs from the prepared plan")
+        run["campaign_receipt_sha256"] = file_sha256(campaign)
+        run["campaign_status"] = receipt.get("status")
+    if not replay:
+        return run, None
+    if evidence["identity"]["ecosystem"] not in {"c", "cpp"} or \
+            evidence["feedback"]["coverage_kind"] != "source_lines":
+        run["queue_replay_unsupported"] = (
+            "Source replay currently supports LLVM-covered C/C++ projects; "
+            "this project's saved AFL++ feedback remains separately documented.")
+        return run, None
+    try:
+        export_objects(evidence["project"])
+    except (QueueCoverageError, OSError) as error:
+        run["queue_replay_unsupported"] = str(error)
+        return run, None
+    sample, coverage = replay_queue(run_dir, root, evidence, sample_limit, timeout)
+    run["queue_sample"] = sample
+    run["inputs"] = sample["inputs"]
+    if coverage is not None:
+        run["coverage_sha256"] = sample["coverage_sha256"]
+    return run, coverage
+
+
 def source_files(coverage: dict, manifest: dict, archives: list[SourceArchive],
                  limits: dict) -> tuple[list[dict], int]:
     groups = coverage_groups(manifest)
@@ -521,6 +560,7 @@ def index_page(report: dict) -> str:
                         + definition_rows("Evidence", {**evidence,
                             "run_directory": run["directory"],
                             "run_kind": run["kind"],
+                            "afl_plan_sha256" if run["kind"] == "afl" else
                             "run_summary_sha256": run["summary_sha256"],
                             "coverage_json_sha256": run.get("coverage_sha256")})
                         + "</details>")
@@ -552,6 +592,29 @@ def index_page(report: dict) -> str:
         run_table += table("Inputs and outcomes (input bytes are not embedded)",
                            ("SHA-256", "Bytes", "Status", "Exit", "Seconds", "Original paths"),
                            rows, numeric=(1, 3, 4))
+    elif run["kind"] == "afl":
+        sample = run.get("queue_sample")
+        run_table = definition_rows("Prepared AFL++ run", {
+            "afl_image_id": run["afl_image_id"],
+            "campaign_status": run.get("campaign_status"),
+            "queue_inputs_available": run["queue_inputs_available"],
+            "queue_inputs_sampled": sample["queue_inputs_sampled"] if sample else 0,
+            "coverage_image_id": sample["coverage_image_id"] if sample else None,
+            "coverage_binary": sample["coverage_binary"] if sample else None,
+            "llvm_cov_objects": sample["llvm_cov_objects"] if sample else None,
+            "profdata_sha256": sample.get("profdata_sha256") if sample else None,
+            "coverage_json_sha256": sample.get("coverage_sha256") if sample else None,
+            "selection": sample["selection"] if sample else None,
+            "timeout_seconds_per_input": sample["timeout_seconds_per_input"] if sample else None,
+        })
+        if sample:
+            rows = [(escape(item["queue_path"], 1000), f"<code>{escape(item['sha256'])}</code>",
+                     item["bytes"], escape(item["status"]),
+                     item["exit_code"] if item["exit_code"] is not None else "",
+                     item["profile_files"]) for item in run["inputs"]]
+            run_table += table("Saved queue inputs replayed once (bytes are not embedded)",
+                               ("Queue file", "SHA-256", "Bytes", "Status", "Exit", "Profiles"),
+                               rows, numeric=(2, 4, 5))
     else:
         rows = [(f"<code>{escape(item['sha256'])}</code>", escape(item["label"]),
                  escape(item["status"]), f"<code>{escape(item['observed_output'], 4000)}</code>")
@@ -603,15 +666,20 @@ def index_page(report: dict) -> str:
 
 def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_dir: Path,
                  output: Path, sources: list[tuple[str, Path]], strip: int,
-                 limits: dict) -> dict:
+                 limits: dict, queue_replay: bool = False, queue_limit: int = 32,
+                 queue_timeout: int = 15) -> dict:
     run_dir = run_dir.resolve(strict=True)
     output = output_directory(output, run_dir, root)
     evidence = project_evidence(root, format_name, ecosystem, slug)
     manifest = evidence["manifest"]
     archives = [SourceArchive(directory, path, strip, manifest) for directory, path in sources]
-    if (run_dir / "executions").is_dir():
+    if (run_dir / "plan.json").is_file():
+        run, coverage = afl_run(run_dir, root, evidence, queue_replay, queue_limit, queue_timeout)
+    elif (run_dir / "executions").is_dir():
         run, coverage = replay_run(run_dir, evidence, limits["max_inputs"]), None
     else:
+        if queue_replay:
+            raise ReportError("--replay-queue requires a prepared AFL++ run directory")
         run, coverage = control_run(run_dir, evidence)
     run["directory"] = str(run_dir)
     warnings = []
@@ -628,6 +696,19 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
                          "statement": "Replay runs record outcomes only, not coverage. The "
                                       "project's valid-control directory reports its verified "
                                       "source coverage or native feedback."}
+    elif run["kind"] == "afl" and coverage is None:
+        sample = run.get("queue_sample")
+        if run.get("queue_replay_unsupported"):
+            statement = run["queue_replay_unsupported"]
+        elif sample:
+            statement = ("No LLVM profiles were produced by the bounded queue replay; "
+                         "no source coverage is claimed.")
+        else:
+            statement = ("AFL++ saves edge feedback and queue files, not source-line coverage. "
+                         "Use --replay-queue to replay up to 32 saved queue inputs in the "
+                         "verified coverage image.")
+        coverage_info = {"status": "unsupported" if run.get("queue_replay_unsupported") else
+                         "not_recorded", "statement": statement}
     elif kind == "native_binary_edges":
         binary = evidence["feedback"]["binary_feedback"] or {}
         coverage_info = {"status": "binary_edges_only",
@@ -658,9 +739,10 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
                            "llvm_summary_covered": sum(e["llvm_summary_lines"]["covered"] for e in members),
                            "segment_mapped": sum(e["segment_lines"]["mapped"] for e in members),
                            "segment_covered": sum(e["segment_lines"]["covered"] for e in members)})
+        provenance = "the bounded AFL++ queue sample" if run["kind"] == "afl" else "the valid control"
         coverage_info = {"status": "llvm_source_lines",
                          "llvm_cov_export_version": coverage.get("version"),
-                         "statement": f"LLVM source coverage for the valid control. {excluded} "
+                         "statement": f"LLVM source coverage for {provenance}. {excluded} "
                                       "instrumented files outside the parser prefixes (adapter, "
                                       "harness, system headers) are excluded.",
                          "excluded_files": excluded, "groups": groups, "files": files}
@@ -746,17 +828,25 @@ def main() -> None:
     cli.add_argument("--max-lines-per-file", type=int, default=50000)
     cli.add_argument("--max-inputs", type=int, default=10000)
     cli.add_argument("--max-report-mib", type=int, default=256)
+    cli.add_argument("--replay-queue", action="store_true",
+                     help="replay a bounded saved AFL++ queue sample through the verified coverage image")
+    cli.add_argument("--max-queue-inputs", type=int, default=32)
+    cli.add_argument("--queue-timeout", type=int, default=15,
+                     help="seconds per saved queue input (maximum 60)")
     args = cli.parse_args()
     if min(args.max_files, args.max_lines_per_file, args.max_inputs, args.max_report_mib) < 1 \
-            or args.strip_components < 0:
+            or args.strip_components < 0 or not 1 <= args.max_queue_inputs <= 128 \
+            or not 1 <= args.queue_timeout <= 60:
         cli.error("limits must be positive")
     limits = {"max_files": args.max_files, "max_lines": args.max_lines_per_file,
               "max_inputs": args.max_inputs, "max_report_bytes": args.max_report_mib << 20}
     try:
         report = build_report(run_case.ROOT, args.format, args.ecosystem, args.package_slug,
                               args.run_dir, args.output, args.source, args.strip_components,
-                              limits)
-    except (ReportError, OSError, KeyError, tarfile.TarError, zipfile.BadZipFile) as error:
+                              limits, args.replay_queue, args.max_queue_inputs,
+                              args.queue_timeout)
+    except (ReportError, QueueCoverageError, OSError, KeyError, json.JSONDecodeError, tarfile.TarError,
+            zipfile.BadZipFile, subprocess.SubprocessError) as error:
         raise SystemExit(f"coverage report: {error}") from error
     print(f"{report['coverage']['status']}: {args.output.resolve() / 'index.html'}")
 

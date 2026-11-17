@@ -11,6 +11,8 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest import mock
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +20,7 @@ FIXTURES = ROOT / "tests/fixtures/coverage_report"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import coverage_report  # noqa: E402
+import queue_coverage  # noqa: E402
 import run_case  # noqa: E402
 
 
@@ -91,11 +94,37 @@ class Fixture:
     def write_receipt(self) -> None:
         self.write_json(self.project / "verification.json", self.receipt)
 
-    def report(self, output: Path, sources=None) -> dict:
+    def report(self, output: Path, sources=None, **options) -> dict:
         if sources is None:
             sources = [("/work/source", self.archive)]
         return coverage_report.build_report(self.root, "png", "c", "demo", self.run_dir,
-                                            output, sources, 1, dict(LIMITS))
+                                            output, sources, 1, dict(LIMITS), **options)
+
+    def afl_plan(self) -> Path:
+        self.run_dir = self.root.parent / "afl-run"
+        queue = self.run_dir / "afl-out/default/queue"
+        queue.mkdir(parents=True)
+        (queue / "id:000000,orig:seed").write_bytes(b"\x89PNG control")
+        (queue / "id:000001,orig:valid").write_bytes(b"\x89PNG variant")
+        (self.project / "run-control.sh").write_text(
+            "llvm-cov export /work/replay -instr-profile=/coverage/control.profdata "
+            "> /coverage/coverage.json\n")
+        self.receipt["project_file_sha256"]["run-control.sh"] = digest(
+            (self.project / "run-control.sh").read_bytes())
+        self.write_receipt()
+        overlay = self.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        overlay.parent.mkdir(parents=True)
+        self.write_json(overlay, {"pass": True, "image_id": "sha256:" + "2" * 64,
+                                  "base_project_receipt_sha256": digest(
+                                      (self.project / "verification.json").read_bytes())})
+        self.write_json(self.run_dir / "plan.json", {
+            "schema_version": 1, "project": "png/c/demo",
+            "source_sha256": self.manifest["source_sha256"],
+            "control_sha256": self.manifest["control_sha256"],
+            "overlay_receipt_sha256": digest(overlay.read_bytes()),
+            "image_id": "sha256:" + "2" * 64, "platform": "linux/arm64",
+        })
+        return queue
 
 
 class CoverageReportTest(unittest.TestCase):
@@ -336,6 +365,107 @@ class CoverageReportTest(unittest.TestCase):
         self.assertEqual(report["coverage"]["status"], "not_recorded")
         self.assertFalse((output / "files").exists())
         self.assertIn("Replay runs record outcomes only", (output / "index.html").read_text())
+
+    def test_prepared_afl_report_is_static_without_replay(self):
+        fixture = self.fixture()
+        queue = fixture.afl_plan()
+        (queue / "id:000002,linked").symlink_to(queue / "id:000000,orig:seed")
+        total, picked = queue_coverage.queue_files(fixture.run_dir, 1)
+        self.assertEqual((total, len(picked)), (2, 1))
+        with mock.patch.object(queue_coverage.subprocess, "run") as docker:
+            report = fixture.report(self.base / "report")
+            docker.assert_not_called()
+        self.assertEqual(report["run"]["kind"], "afl")
+        self.assertEqual(report["run"]["queue_inputs_available"], 2)
+        self.assertEqual(report["coverage"]["status"], "not_recorded")
+
+    def test_changed_afl_overlay_receipt_is_rejected(self):
+        fixture = self.fixture()
+        fixture.afl_plan()
+        overlay = fixture.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        receipt = json.loads(overlay.read_text())
+        receipt["image_id"] = "sha256:" + "3" * 64
+        fixture.write_json(overlay, receipt)
+        with mock.patch.object(queue_coverage.subprocess, "run") as docker:
+            with self.assertRaisesRegex(queue_coverage.QueueCoverageError,
+                                        "changed since preparation"):
+                fixture.report(self.base / "report", queue_replay=True)
+            docker.assert_not_called()
+
+    def test_queue_export_objects_accepts_only_literal_full_line_maps(self):
+        fixture = self.fixture()
+        script = fixture.project / "run-control.sh"
+        script.write_text("llvm-cov export /work/replay -object /work/lib/libparser.so "
+                          "-instr-profile=/coverage/control.profdata > /coverage/coverage.json\n")
+        self.assertEqual(queue_coverage.export_objects(fixture.project),
+                         ["/work/lib/libparser.so"])
+        script.write_text("llvm-cov export /work/replay -object $(readlink -f /work/lib/libparser.so) "
+                          "-instr-profile=/coverage/control.profdata > /coverage/coverage.json\n")
+        with self.assertRaisesRegex(queue_coverage.QueueCoverageError, "outside this pilot"):
+            queue_coverage.export_objects(fixture.project)
+        script.write_text("llvm-cov export /work/replay --summary-only "
+                          "-instr-profile=/coverage/control.profdata > /coverage/coverage.json\n")
+        with self.assertRaisesRegex(queue_coverage.QueueCoverageError, "full /work/replay"):
+            queue_coverage.export_objects(fixture.project)
+
+    def test_bounded_afl_queue_replay_aggregates_llvm_parser_lines(self):
+        fixture = self.fixture()
+        fixture.afl_plan()
+        original = (FIXTURES / "coverage.json").read_bytes()
+
+        def docker(command, **_):
+            if command[1:3] == ["image", "inspect"]:
+                return subprocess.CompletedProcess(command, 0, f"{IMAGE} linux/arm64\n", "")
+            if "/work/replay" in command:
+                profile_mount = next(item for item in command if item.endswith(":/profiles"))
+                profile_dir = Path(profile_mount.removesuffix(":/profiles"))
+                profile = next(item for item in command if item.startswith("LLVM_PROFILE_FILE="))
+                prefix = profile.partition("/profiles/")[2].split("-%m")[0]
+                (profile_dir / f"{prefix}-fixture.profraw").write_bytes(b"profile")
+                return subprocess.CompletedProcess(command, 0)
+            output_mount = next(item for item in command if item.endswith(":/coverage"))
+            output = Path(output_mount.removesuffix(":/coverage"))
+            (output / "aggregate.profdata").write_bytes(b"merged")
+            (output / "coverage.json").write_bytes(original)
+            return subprocess.CompletedProcess(command, 0)
+
+        with mock.patch.object(queue_coverage.subprocess, "run", side_effect=docker):
+            report = fixture.report(self.base / "report", queue_replay=True, queue_limit=2)
+        self.assertEqual(report["coverage"]["status"], "llvm_source_lines")
+        self.assertEqual(report["coverage"]["groups"][0]["llvm_summary_covered"], 6)
+        sample = report["run"]["queue_sample"]
+        self.assertEqual(sample["queue_inputs_sampled"], 2)
+        self.assertEqual([item["profile_files"] for item in sample["inputs"]], [1, 1])
+        self.assertEqual(sample["coverage_image_id"], IMAGE)
+        self.assertEqual(sample["profdata_sha256"], digest(b"merged"))
+        self.assertIn("bounded AFL++ queue sample", report["coverage"]["statement"])
+        self.assertTrue((self.base / "report/files/00001.html").is_file())
+
+    def test_afl_queue_source_scope_and_input_limits_are_honest(self):
+        fixture = self.fixture("native_binary_edges")
+        queue = fixture.afl_plan()
+        report = fixture.report(self.base / "unsupported", queue_replay=True)
+        self.assertEqual(report["coverage"]["status"], "unsupported")
+        self.assertFalse((self.base / "unsupported/files").exists())
+        fixture.manifest["coverage_kind"] = "source_lines"
+        fixture.write_json(fixture.project / "manifest.json", fixture.manifest)
+        fixture.receipt["project_file_sha256"]["manifest.json"] = digest(
+            (fixture.project / "manifest.json").read_bytes())
+        fixture.write_receipt()
+        overlay = fixture.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        overlay_data = json.loads(overlay.read_text())
+        overlay_data["base_project_receipt_sha256"] = digest(
+            (fixture.project / "verification.json").read_bytes())
+        fixture.write_json(overlay, overlay_data)
+        plan = fixture.run_dir / "plan.json"
+        plan_data = json.loads(plan.read_text())
+        plan_data["overlay_receipt_sha256"] = digest(overlay.read_bytes())
+        fixture.write_json(plan, plan_data)
+        (queue / "id:000002,orig:oversize").write_bytes(b"x" * (run_case.MAX_CASE_BYTES + 1))
+        with mock.patch.object(queue_coverage.subprocess, "run", return_value=
+                               subprocess.CompletedProcess([], 0, f"{IMAGE} linux/arm64\n", "")):
+            with self.assertRaisesRegex(queue_coverage.QueueCoverageError, "exceeds"):
+                fixture.report(self.base / "oversize", queue_replay=True, queue_limit=3)
 
     def test_output_directory_is_bounded(self):
         fixture = self.fixture()

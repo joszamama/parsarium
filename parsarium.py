@@ -212,6 +212,10 @@ def main() -> int:
     report.add_argument("--max-lines-per-file", type=int, default=50000)
     report.add_argument("--max-inputs", type=int, default=10000)
     report.add_argument("--max-report-mib", type=int, default=256)
+    report.add_argument("--replay-queue", action="store_true",
+                        help="measure source lines from a bounded sample of saved AFL++ queue files")
+    report.add_argument("--max-queue-inputs", type=int, default=32)
+    report.add_argument("--queue-timeout", type=int, default=15)
 
     format_run = commands.add_parser("run-format", help="run every verified Docker harness for a format")
     format_run.add_argument("format", choices=FORMATS)
@@ -314,7 +318,11 @@ def main() -> int:
                  "--max-files", str(args.max_files),
                  "--max-lines-per-file", str(args.max_lines_per_file),
                  "--max-inputs", str(args.max_inputs),
-                 "--max-report-mib", str(args.max_report_mib)]
+                 "--max-report-mib", str(args.max_report_mib),
+                 "--max-queue-inputs", str(args.max_queue_inputs),
+                 "--queue-timeout", str(args.queue_timeout)]
+        if args.replay_queue:
+            extra.append("--replay-queue")
         for source in args.source:
             directory, separator, path = source.partition("=")
             if not separator or not directory or not path:

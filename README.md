@@ -46,6 +46,13 @@ python3 parsarium.py afl summary runs/pypng-afl
 
 Additional seeds enter with `--seed FILE` or `--seed-dir DIRECTORY` on `afl prepare`. `afl run --resume` continues an existing output directory. AFL++ saves interesting inputs in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`, and progress in `fuzzer_stats`.
 
+After a run has saved queue files, `report --replay-queue` measures parser source lines reached by a bounded sample. It replays each selected input once in the project's verified LLVM coverage image and merges the profiles; it does not start AFL++. The report records queue input hashes, both image IDs, and hashes of the merged profile and coverage export. The pilot supports LLVM-covered C and C++ projects whose verified control script exports a full `/work/replay` line map. Other projects are labeled unsupported for this measurement.
+
+```sh
+python3 parsarium.py report http11 cpp boost_beast runs/beast-afl \
+  --output reports/beast-afl --replay-queue --max-queue-inputs 32
+```
+
 Each project also has a plan for its ecosystem fuzz engine:
 
 ```sh
@@ -74,7 +81,7 @@ python3 parsarium.py fandango generate mp4 cpp exiv2 runs/exiv2-fandango \
 
 The run directory must be new or empty, and inside this repository it must be under `runs/` or `generated/`, which Git ignores. It contains `generated/`, a copy or snapshot of the spec, and `fandango.json`. The receipt records the Fandango executable path, SHA-256, and version; the exact command and environment; the seed (`--random-seed`, also used as `PYTHONHASHSEED`); the spec hash; and each output's SHA-256 and size. `--fanbase-registry DIR` pins a local Fanbase checkout and checks the installed spec against its `index.yml`. Without it, the registry revision is not recorded; only the installed spec snapshot is. If Fandango fails, writes no files, or writes empty, oversized, or linked files, the command stops before replay or AFL++ preparation.
 
-The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation. Replay reports show per-input outcomes; source-line views come from a separate pinned valid-control build, not from the generated corpus.
+The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation. Corpus replay reports show per-input outcomes. The optional AFL++ queue replay above measures aggregate source lines from saved queue inputs; without it, line views come from the pinned valid-control build.
 
 ## Evidence and layout
 
