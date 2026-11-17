@@ -88,14 +88,20 @@
       "xpath_note": "xpath counts come from Crawler::filterXPath(); prefixed names use Crawler namespace discovery, default-namespace URIs are registered as ns1, ns2, ... because Crawler's 'default' prefix binds to the last default declaration (xmlns=\"\" in the order control).",
       "afl_feedback": {
         "report": "data/php/xml/afl-feedback.json",
-        "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
-        "control_parser_features": 115,
-        "differential_parser_features": 116,
-        "differential_only_parser_features": [
-          "Crawler.php:1156"
-        ],
-        "afl_tuple_difference": 1
-      }
+        "overlay_receipt": "fuzzing/afl-native/xml/php/symfony_dom_crawler/verification.json",
+        "overlay_receipt_sha256": "917345a32f89d7ea1081bd73c170f512585a0b379b75edc201af9e62a6f7adb1",
+        "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+        "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) and ext/libxml/libxml.c via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, the Zend engine and the interpreted Crawler PHP code are uninstrumented",
+        "runtime": "PHP 8.5.12 with libxml2 2.15.4, both source-built in the AFL++ overlay",
+        "control_afl_tuples": 1251,
+        "differential_afl_tuples": 1376,
+        "afl_tuple_difference": 357,
+        "format_dependent_parse_time_tuples": 357,
+        "format_dependent_post_parse_tuples": 0,
+        "repeats_per_control": 5,
+        "oracle": "Instrumented-runtime outputs on both controls equal an expat oracle (controls/xml/check_controls.py) plus expanded-name xpath counts computed in the overlay build"
+      },
+      "xdebug_package_lines_note": "Xdebug package line coverage (115 Crawler.php lines on the main control) is reported separately from AFL++ feedback; it differs between the two controls by one post-parse line (Crawler::findNamespacePrefixes)."
     },
     {
       "package": "sabre/xml",

@@ -16,6 +16,6 @@ python3 parsarium.py afl prepare xml php symfony_dom_crawler runs/xml-symfony_do
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Coverage limit:** Xdebug and the AFL++ bridge see only symfony/dom-crawler PHP lines (Crawler navigation, XPath relativizing and namespace discovery); XML tokenizing happens in libxml2 through DOMDocument::loadXML and is not instrumented here. On the two shared controls the package line sets differ by one line (Crawler::findNamespacePrefixes no-prefix return).
+**Coverage limit:** Xdebug line coverage sees only symfony/dom-crawler PHP lines (Crawler navigation, XPath relativizing and namespace discovery) and is reported separately. AFL++ feedback comes from the native overlay: libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c and ext/libxml/libxml.c, instrumented through an allowlist while the same Crawler harness runs; libxml2 tree/XPath code, other ext/dom classes and the interpreted Crawler code add no AFL++ tuples. The pinned base image does not bundle php-fuzzer; replay is per case.
 
 **Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.

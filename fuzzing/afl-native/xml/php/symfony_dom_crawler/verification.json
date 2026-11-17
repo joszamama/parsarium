@@ -2,22 +2,51 @@
   "schema_version": 1,
   "project": "xml/php/symfony_dom_crawler",
   "pass": true,
-  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
-  "base_project_receipt_sha256": "411486fcb6b55f5a2035d4912c20f58c87b8e6dfc72a6eeb087e27b0cd3a49e4",
-  "base_image_id": "sha256:0333dda22ef0fd030df14a7ba426ebd0f0efddb2f7572ce1fc35e033c9317e98",
-  "image_id": "sha256:5c085f4eba3421419dc67b9a2d91e3db85a4d22b13a7eecb3b7d9a7c010c3dd2",
-  "platform": "linux/arm64",
-  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
-  "parser_source_features": 115,
-  "feedback_edges": 135,
-  "afl_map_size": 65536,
-  "afl_package": "4.33c-1.1ubuntu1",
-  "overlay_file_sha256": {
-    "Dockerfile": "d2ee4d89e474ab8f69f06e2991ea22c3d6fd11dc3e701773a70261e201e07d38",
-    "afl_trace": "cc3dc001b6ca76e67bb1a3a8144c7a689556d6491eb34ea53758d9f421a7ebd8"
+  "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) and ext/libxml/libxml.c via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, the Zend engine and the interpreted Crawler PHP code are uninstrumented",
+  "harness": "projects/xml/php/symfony_dom_crawler/fuzz-target.php -> harness.php parsarium_parse (new Crawler(), addXmlContent, summary traversal and filterXPath)",
+  "base_project_receipt_sha256": "5a6e65e3a3d9d4db8c757f973b311dc2687a1fafcba01076254dabb8f20a2f84",
+  "source_sha256": "7c538ae1812c8f479866e3b74431aa23c6ee75e3402334ceb875180e3a82e55b",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
   },
-  "bridge_file_sha256": {
-    "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
-    "php_trace.php": "23e82e01ddc08e6b188c5de7910c33363de2ab0a94688e638b21eca346bf5a03"
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/dom/document.o",
+    "php-8.5.12/ext/libxml/libxml.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "controls/xml/check_controls.py expat summary plus expanded-name xpath counts",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "image_id": "sha256:2ed10583c41be4209723787f5db316f991ef7a8db99e7249b0073ab47e6ea8ba",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1251,
+  "differential_feedback_edges": 1376,
+  "stable_shared_edges": 1135,
+  "stable_control_only_edges": 116,
+  "stable_differential_only_edges": 241,
+  "afl_tuple_difference": 357,
+  "parse_only_control_edges": 1193,
+  "parse_only_differential_edges": 1318,
+  "parse_only_tuple_difference": 357,
+  "format_dependent_parse_time_tuples": 357,
+  "format_dependent_post_parse_tuples": 0,
+  "post_parse_control_edges": 59,
+  "post_parse_differential_edges": 59,
+  "post_parse_edges_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "e05a87cb179f3cba32110737b2d296201a38ac3741e25a27584e54ff4c378530",
+    "build.py": "cce6d8d839305619a354cd75c86ed1282bd5dbea2b2f3d058244c49525ef1a3e"
   }
 }

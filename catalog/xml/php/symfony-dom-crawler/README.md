@@ -50,11 +50,13 @@
 - Crawler's documented default-namespace prefix ('default') resolves to the last default namespace declaration in the document; the order control's <plain xmlns=""> leaves it unbound, so the harness registers default-namespace URIs as ns1, ns2, ... with registerNamespace() and keeps auto-discovery for prefixed names.
 - addXmlContent replaces every 'xmlns' with 'ns' when the text has no 'xmlns:' prefix declaration; both shared controls declare a prefix, so that rewrite is not exercised.
 - addXmlContent suppresses libxml errors and yields an empty Crawler for non-well-formed text; only valid controls were run.
-- Coverage and AFL++ feedback come from symfony/dom-crawler PHP lines only. On the two controls they differ by one package line (`Crawler::findNamespacePrefixes` returning no prefixes for the order control's unqualified elements); libxml2 tokenizing is not instrumented in this path.
+- Xdebug coverage sees symfony/dom-crawler PHP lines only; on the two controls they differ by one package line (`Crawler::findNamespacePrefixes` returning no prefixes for the order control's unqualified elements).
+- AFL++ feedback comes from a [native overlay](../../../../fuzzing/afl-native/xml/php/symfony_dom_crawler/verification.json) that runs the same Crawler harness on source-built PHP 8.5.12 and libxml2 2.15.4. Only libxml2 `parser.c`, `parserInternals.c`, `SAX2.c` and PHP `ext/dom/document.c` and `ext/libxml/libxml.c` are instrumented. The controls differ in 357 stable tuples (5 identical repeats each), and all of them also differ when `addXmlContent` runs alone; Crawler navigation adds the same 59 tuples for both controls.
 
 ## Run this target
 
 ```sh
 python3 parsarium.py build xml php symfony_dom_crawler
 python3 parsarium.py run xml php symfony_dom_crawler controls/xml/catalog-ns.xml
+python3 parsarium.py afl build xml php symfony_dom_crawler
 ```
