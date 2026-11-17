@@ -1,0 +1,21 @@
+[
+  {
+    "name": "mutagen",
+    "version": "1.48.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://pypi.org/pypi/mutagen/1.48.1/json",
+    "input_api": "mutagen.mp3.MP3(io.BytesIO(local bytes)).info -> MPEGInfo",
+    "documentation": "https://mutagen.readthedocs.io/en/latest/api/mp3.html",
+    "source": "https://files.pythonhosted.org/packages/47/d8/a29e4e3991765e7ce4ed1f7e4074fe1ba9da03e0048639734de60f9cadb9/mutagen-1.48.1-py3-none-any.whl",
+    "scope": "Untagged MPEG Layer III frame headers: version, layer, sample rate, channels, bitrate; duration from Xing/Info/VBRI if present, otherwise stream bytes divided by the header bitrate. No audio decoding.",
+    "family": "Mutagen MP3/ID3 parser",
+    "family_note": "Same package, release and mutagen/mp3 module as the mp3_id3v2/python mutagen entry. That entry checks ID3v2 frames; this one requires no tags and checks MPEGInfo from the frame headers. It is a separate parsed scope, not an independent parser family.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {"version": 1, "layer": 3, "sample_rate": 44100, "channels": 1, "bitrate": 64000, "length_us": 287250},
+    "metric": {
+      "name": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 10748990,
+      "source": "data/python/mp3/registry-snapshot.json"
+    }
+  }
+]

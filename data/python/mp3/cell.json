@@ -1,0 +1,44 @@
+{
+  "ecosystem": "python",
+  "format": "mp3",
+  "status": "pilot_one_verified_bounded_search",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 1,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "project name contains 'mp3'",
+    "project name contains 'mpeg'",
+    "project name contains 'mpg123'",
+    "project name contains 'minimp3'",
+    "project name contains 'layer3'"
+  ],
+  "search_totals": {
+    "mp3": 123,
+    "mpeg": 201,
+    "mpg123": 2,
+    "minimp3": 1,
+    "layer3": 1
+  },
+  "candidates_with_metric": 13,
+  "leads_recorded": 19,
+  "leads_by_status": {
+    "selected": 1,
+    "shared_family": 1,
+    "unresolved": 4,
+    "unresolved_native_wrapper": 6,
+    "unresolved_shared_family": 1,
+    "excluded": 6
+  },
+  "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
+  "selection": "mutagen (10,748,990) is the most-downloaded candidate whose own Python source parses MPEG Layer III frame headers from a documented byte or file-object API. av, soundfile, pydub and librosa rank higher but hand frame parsing to native FFmpeg or libsndfile/libmpg123, or to an external ffmpeg process.",
+  "shared_family": "Same Mutagen package, release 1.48.1 and mutagen/mp3 module as the mp3_id3v2/python mutagen entry. This cell checks MPEGInfo on untagged streams; it is not an independent parser family.",
+  "uncertainty": "One verified path; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. tinytag, eyed3, hachoir and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support.",
+  "third_party_evidence": "data/python/mp3/parsers.json",
+  "third_party_control_results": "projects/mp3/python/mutagen/verification.json",
+  "afl_feedback": "data/python/mp3/afl-feedback.json",
+  "runtime_evidence": "data/python/mp3/standard.json",
+  "registry_snapshot": "data/python/mp3/registry-snapshot.json",
+  "unresolved_leads": "data/python/mp3/leads.json",
+  "protocol": "catalog/mp3/PROTOCOL.md"
+}

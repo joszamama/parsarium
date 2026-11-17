@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "cell": "mp3/python",
+  "checked_at_utc": "2026-11-17T03:45:00.226792+00:00",
+  "checks": [
+    {
+      "command": "python3 controls/mp3/check_controls.py",
+      "pass": true,
+      "result": "header walk: 11 frames (44.1 kHz mono, 64 kbps) and 12 frames (22.05 kHz stereo, 32 kbps), matching Mutagen's sample rate, channels and bitrate"
+    },
+    {
+      "command": "cd scripts && SSL_CERT_FILE=/etc/ssl/cert.pem python3 snapshot_pypi_mp3.py",
+      "pass": true,
+      "result": "5 name queries over PyPI Simple serial 43764887; PyPI Stats last_month for 13 of 15 named candidates (minimp3 and mp3 are not PyPI projects)"
+    },
+    {
+      "command": "python3 scripts/run_project.py mp3 python mutagen",
+      "pass": true,
+      "image_id": "sha256:9185cba587e8782c2b5b727db55a8ded824fcc29b80c43f2acda2efba62e00ec",
+      "output": {
+        "version": 1,
+        "layer": 3,
+        "sample_rate": 44100,
+        "channels": 1,
+        "bitrate": 64000,
+        "length_us": 287250
+      },
+      "parser_source_lines_covered": 248,
+      "mp3_init_py_lines_covered": 110,
+      "receipt_sha256": "257bde527cbb4d7c2124e52bd160663d1437abc0df0d07d2127f5cbe876a475b"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 python mutagen controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 python mutagen controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "cd scripts && python3 build_afl_python.py mp3 python mutagen",
+      "pass": true,
+      "image_id": "sha256:3ce5d2c9776778122b23038d368fe05cde25c05fada3ccae46cf10952981d72d",
+      "parser_source_features": 248,
+      "feedback_edges": 268,
+      "receipt_sha256": "b9898acdf0d972ae9703bd76cb06ebf130386e3f2be0e5949dc7f7267c29b41c"
+    },
+    {
+      "command": "cd scripts && python3 verify_python_mp3_feedback.py",
+      "pass": true,
+      "first_parser_source_lines": 248,
+      "second_parser_source_lines": 248,
+      "parser_source_line_difference": 8,
+      "first_afl_tuples": 268,
+      "second_afl_tuples": 268,
+      "afl_tuple_difference": 8,
+      "repeated_controls_identical": true,
+      "receipt_sha256": "c0c72f3d366a076b27fd77b1613088361309619c39e0e23d45c5b4b413ec85cf"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare mp3 python mutagen runs/mp3-mutagen-afl --seed controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "seeds": [
+        "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+        "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328"
+      ]
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/mp3-mutagen-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "52 tests OK"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "823/823 AFL++ overlays and 521/521 ecosystem feedback checks current"
+    },
+    {
+      "command": "python3 scripts/validate_catalog.py",
+      "pass": true,
+      "result": "passes only after python3 scripts/build_matrix.py regenerates data/pilot-cells.json (which also picks up c/json and python/mp3); that shared file was regenerated for the check and then restored, so the integrator must regenerate it"
+    }
+  ],
+  "notes": [
+    "Both controls execute 248 Mutagen lines; 8 line features differ between them. The fuzz.py Atheris entry and the AFL++ bridge both call harness.fuzz_one_input."
+  ],
+  "not_run": [
+    "AFL++ or Atheris campaign",
+    "malformed-input or vulnerability experiments",
+    "tinytag, eyed3, hachoir, pymp3 and native-wrapper leads",
+    "aggregate catalog/website regeneration (build_matrix, build_readmes, audit_projects --write, refresh_smoke_batch.py, smoke reports)"
+  ]
+}
